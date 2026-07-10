@@ -1068,18 +1068,27 @@ function LinhaEstrada({
 
   const handleDragEnd = (
     id: string,
-    _e: MouseEvent | TouchEvent | PointerEvent,
+    e: MouseEvent | TouchEvent | PointerEvent,
     info: { point: { x: number; y: number } },
   ) => {
     if (concluido || colocados.includes(id)) return;
-    const { x, y } = info.point;
-    const alvoIdx = slotRefs.current.findIndex((el) => {
-      if (!el) return false;
+    const { x, y } = getPointerXY(e, info);
+    let melhorIdx = -1;
+    let melhorDist = Infinity;
+    slotRefs.current.forEach((el, idx) => {
+      if (!el) return;
       const r = el.getBoundingClientRect();
-      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+      const dentro =
+        x >= r.left - 24 && x <= r.right + 24 &&
+        y >= r.top - 24 && y <= r.bottom + 24;
+      if (!dentro) return;
+      const cx = (r.left + r.right) / 2;
+      const cy = (r.top + r.bottom) / 2;
+      const d = Math.hypot(x - cx, y - cy);
+      if (d < melhorDist) { melhorDist = d; melhorIdx = idx; }
     });
-    if (alvoIdx === -1) return;
-    if (alvoIdx === passo && id === proxIdEsperado) {
+    if (melhorIdx === -1) return;
+    if (melhorIdx === passo && id === proxIdEsperado) {
       setColocados((prev) => [...prev, id]);
       setPasso((n) => n + 1);
       setErro(null);
@@ -1486,14 +1495,18 @@ function ConstrutorMarcos({
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  const tentarSoltar = (pecaId: string, info: { point: { x: number; y: number } }) => {
+  const tentarSoltar = (
+    pecaId: string,
+    e: MouseEvent | TouchEvent | PointerEvent,
+    info: { point: { x: number; y: number } },
+  ) => {
     if (travada || !slotRef.current) return false;
     const r = slotRef.current.getBoundingClientRect();
+    const { x, y } = getPointerXY(e, info);
+    const margem = 24;
     const dentro =
-      info.point.x >= r.left &&
-      info.point.x <= r.right &&
-      info.point.y >= r.top &&
-      info.point.y <= r.bottom;
+      x >= r.left - margem && x <= r.right + margem &&
+      y >= r.top - margem && y <= r.bottom + margem;
     if (!dentro) return false;
 
     setPecaSolta(pecaId);
@@ -1611,7 +1624,7 @@ function ConstrutorMarcos({
               dragSnapToOrigin
               dragMomentum={false}
               whileDrag={{ scale: 1.05, zIndex: 50 }}
-              onDragEnd={(_, info) => tentarSoltar(p.id, info)}
+              onDragEnd={(e, info) => tentarSoltar(p.id, e, info)}
               disabled={travada}
               className={`text-left px-4 py-3 rounded-xl border text-sm transition-colors touch-none ${
                 usada
@@ -2386,3 +2399,21 @@ function MapaBrasilInterativo({
   );
 }
 
+
+// Extrai coordenadas do ponteiro em espaço da viewport (compatível com getBoundingClientRect).
+// framer-motion pode entregar info.point em coords de página em alguns cenários;
+// o evento nativo (clientX/Y ou changedTouches) é sempre viewport.
+function getPointerXY(
+  e: MouseEvent | TouchEvent | PointerEvent,
+  info: { point: { x: number; y: number } },
+): { x: number; y: number } {
+  const anyE = e as any;
+  if (typeof anyE?.clientX === "number" && typeof anyE?.clientY === "number") {
+    return { x: anyE.clientX, y: anyE.clientY };
+  }
+  const t = anyE?.changedTouches?.[0] ?? anyE?.touches?.[0];
+  if (t && typeof t.clientX === "number") {
+    return { x: t.clientX, y: t.clientY };
+  }
+  return { x: info.point.x, y: info.point.y };
+}
