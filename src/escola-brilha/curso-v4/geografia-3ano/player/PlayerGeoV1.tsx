@@ -94,7 +94,7 @@ export function PlayerGeoV1({
           </button>
           <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all"
+              className={`h-full transition-all ${teen ? "bg-cyan-400" : "bg-gradient-to-r from-emerald-400 to-amber-300"}`}
               style={{ width: `${percent}%` }}
             />
           </div>
@@ -247,7 +247,6 @@ function MesaCartografo({
           {!tocouTeen && (
             <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] grid place-items-center">
               <div className="text-center text-slate-100">
-                <div className="text-4xl mb-2">👆</div>
                 <div className="text-sm font-mono uppercase tracking-widest text-cyan-300">
                   Toque para começar
                 </div>
@@ -261,19 +260,12 @@ function MesaCartografo({
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-start gap-3"
+              className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4"
             >
-              <img
-                src={aurora.img}
-                alt={aurora.nome}
-                className="w-14 h-14 rounded-full bg-white/5 p-1 shrink-0"
-              />
-              <div className="bg-slate-900/70 border border-cyan-500/25 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug text-slate-100">
-                <div className="text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-1">
-                  {aurora.nome}
-                </div>
-                {cena.aurora}
+              <div className="text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-2">
+                Contexto da missão
               </div>
+              <p className="text-sm leading-relaxed text-slate-100">{stripDecorativeEmoji(cena.aurora)}</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -281,7 +273,7 @@ function MesaCartografo({
               transition={{ delay: 0.4 }}
               className="bg-slate-900/60 border border-slate-700/60 rounded-xl px-4 py-2.5 text-[13px] text-slate-300 text-center"
             >
-              {cena.falaFinal}
+              {stripDecorativeEmoji(cena.falaFinal)}
             </motion.div>
           </>
         )}
