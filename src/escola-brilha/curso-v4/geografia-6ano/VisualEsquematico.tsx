@@ -239,8 +239,8 @@ function PalcoTranslacao() {
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         className="absolute inset-x-6 inset-y-8"
       >
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 h-6 w-6 border-2 border-cyan-200 shadow-lg shadow-cyan-500/50" />
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+          <TerraReal size={36} spin={12} />
         </div>
       </motion.div>
 
