@@ -64,7 +64,7 @@ function TrilhaFund2() {
   const { activeChild } = useAppState();
   const unidades = useMemo(() => loadUnidades(serie, disc), [serie, disc]);
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
-  const [modoLivre, setModoLivre] = useState(true);
+  const [modoLivre] = useState(true); // Fund2 é dashboard acadêmico: todas as unidades sempre navegáveis
   const [showDiploma, setShowDiploma] = useState(false);
   const rotaPlayer = playerRoute(serie, disc);
 
