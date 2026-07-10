@@ -194,6 +194,9 @@ function AtlasFinal() {
   const destravado = modoLivre || (totalAulas > 0 && concluidas.size >= totalAulas);
   const nome = activeChild?.nome ?? "Explorador(a)";
 
+  // Fund 2 (6º–9º ano): só diploma, sem livro mágico e sem álbum de recordações.
+  const serieFund2 = /-([6789])ano(?:\b|-|_|$)/i.test(cursoSlug);
+
   const pagina = paginas[pagIdx];
 
   const abrirDiploma = () => {
