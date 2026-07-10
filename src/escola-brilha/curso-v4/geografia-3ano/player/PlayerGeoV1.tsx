@@ -4,6 +4,7 @@ import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
+import { MinijogoVisual } from "./MinijogoVisuais";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
@@ -1579,6 +1580,11 @@ function ConstrutorMarcos({
       <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/50">
         <span>Rodada {rodadaIdx + 1} / {total}</span>
         <span className="tabular-nums">✓ {acertos}</span>
+      </div>
+
+      {/* Visual interativo do conceito da rodada */}
+      <div className="rounded-2xl border border-white/15 bg-gradient-to-b from-[#0a1230] to-[#050a1c] p-3">
+        <MinijogoVisual conceito={rodada.pecaCertaId} />
       </div>
 
       {/* Contexto (texto puro) */}
