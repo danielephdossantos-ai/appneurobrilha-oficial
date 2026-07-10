@@ -4,6 +4,14 @@
  * Zero mascotes. Consumido pelo PlayerGeoV2 (Dashboard Científico).
  */
 
+export type EtapaTeorica = { titulo: string; texto: string };
+export type RoteiroVisual = {
+  foco: string;
+  descricao: string;
+  legenda: string;
+  tipo?: "terra-orbita" | "generico";
+};
+
 export type UnidadeFund2 = {
   unidade: number;
   slug: string;
@@ -15,6 +23,12 @@ export type UnidadeFund2 = {
     texto_teorico: string;
     exemplo_visual: string;
     imagem_analise: string;
+    /** Passos numerados que substituem/enriquecem o texto teórico. */
+    etapas_teoricas?: EtapaTeorica[];
+    /** Componente visual central dinâmico. */
+    roteiro_visual_interativo?: RoteiroVisual;
+    /** Analogia acolhedora (💡 Curiosidade Prática). */
+    exemplo_pratico_visual?: string;
   };
   desafio_critico: {
     pergunta: string;
@@ -23,6 +37,7 @@ export type UnidadeFund2 = {
   };
   recompensas: { xp: number; moedas: number; titulo: string };
 };
+
 
 export const UNIDADES_6ANO: UnidadeFund2[] = [
   {
