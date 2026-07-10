@@ -33,6 +33,8 @@ import {
 
 import type { UnidadeFund2, EtapaTeorica } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
+import { QuizRelampago } from "./QuizRelampago";
+import { MiniJogoCategorizar } from "./MiniJogoCategorizar";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 
