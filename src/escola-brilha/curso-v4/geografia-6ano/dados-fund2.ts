@@ -11,6 +11,8 @@ export type EtapaTeorica = {
   visual?: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
   /** Exemplo real do dia-a-dia que materializa o conceito. */
   exemplo_real?: string;
+  /** Casos reais extras (idealmente 2) para dar profundidade à etapa. */
+  exemplos_extras?: string[];
 };
 
 export type RoteiroVisual = {
@@ -20,6 +22,17 @@ export type RoteiroVisual = {
   tipo?: "terra-orbita" | "globo-coordenadas" | "generico";
 };
 
+export type QuizItem = {
+  pergunta: string;
+  opcoes: Array<{ texto: string; correta: boolean; explicacao: string }>;
+};
+
+export type MiniJogoCategorizar = {
+  tipo: "categorizar";
+  instrucao: string;
+  categorias: Array<{ id: string; titulo: string; cor: "cyan" | "amber" | "emerald" | "violet" }>;
+  cartoes: Array<{ texto: string; categoriaId: string }>;
+};
 
 export type UnidadeFund2 = {
   unidade: number;
@@ -32,13 +45,14 @@ export type UnidadeFund2 = {
     texto_teorico: string;
     exemplo_visual: string;
     imagem_analise: string;
-    /** Passos numerados que substituem/enriquecem o texto teórico. */
     etapas_teoricas?: EtapaTeorica[];
-    /** Componente visual central dinâmico. */
     roteiro_visual_interativo?: RoteiroVisual;
-    /** Analogia acolhedora (💡 Curiosidade Prática). */
     exemplo_pratico_visual?: string;
   };
+  /** Quiz rápido — 3 perguntas com feedback explicativo por alternativa. */
+  quiz_relampago?: QuizItem[];
+  /** Mini-jogo conceitual da unidade. */
+  mini_jogo?: MiniJogoCategorizar;
   desafio_critico: {
     pergunta: string;
     opcoes: Array<{ texto: string; correta: boolean }>;
@@ -60,6 +74,7 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
       conceito_chave: "Rotação, Translação e a Inclinação da Terra",
       texto_teorico:
         "Para entender a Geografia, imagine a Terra como um pião que gira meio 'deitado'. São três movimentos que, juntos, criam o dia, a noite e as estações do ano.",
+
       etapas_teoricas: [
         {
           titulo: "Movimento de Rotação — o giro do pião",
@@ -68,6 +83,10 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "rotacao",
           exemplo_real:
             "Quando é meio-dia em Brasília (Brasil), em Tóquio (Japão) é meia-noite — Tóquio está no lado escuro da Terra. Por isso pessoas do outro lado do mundo trocam dia por noite: quando aqui amanhece, lá está anoitecendo.",
+          exemplos_extras: [
+            "Os furacões do Hemisfério Norte giram no sentido anti-horário e os do Hemisfério Sul no sentido horário. Isso não é coincidência: é o Efeito de Coriolis (consequência da rotação) desviando o ar em direções opostas nos dois hemisférios.",
+            "Astronautas na Estação Espacial Internacional veem 16 nasceres do Sol por dia. Como a estação orbita rapidamente enquanto a Terra também gira, eles atravessam o ciclo dia/noite a cada 90 minutos — mostrando que 'dia' e 'noite' dependem inteiramente da rotação.",
+          ],
         },
         {
           titulo: "Movimento de Translação — a grande viagem",
@@ -76,6 +95,10 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "translacao",
           exemplo_real:
             "Aquelas 6 horas extras se acumulam: a cada 4 anos elas somam 24 horas = 1 dia inteiro. Por isso existe o ano bissexto (2020, 2024, 2028…), em que fevereiro ganha o dia 29 pra encaixar a viagem certinha.",
+          exemplos_extras: [
+            "A órbita da Terra não é um círculo perfeito, é uma elipse. Em janeiro estamos no ponto mais próximo do Sol (periélio, ~147 milhões de km); em julho, no mais distante (afélio, ~152 milhões de km). Ou seja: no verão do Brasil estamos MAIS PERTO do Sol — as estações não dependem da distância, e sim da inclinação.",
+            "A Terra viaja pelo espaço a cerca de 107 mil km/h — mais rápido que qualquer foguete já construído. Você não sente porque tudo à sua volta (ar, prédios, atmosfera) se move junto, como num carro em velocidade constante numa estrada perfeita.",
+          ],
         },
         {
           titulo: "Inclinação do Eixo — o segredo das estações",
@@ -84,6 +107,10 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "inclinacao",
           exemplo_real:
             "Quando é Natal (dezembro) no Brasil, é verão — praia, calor, dias longos. No mesmo Natal em Nova York é inverno — neve, frio, dias curtos. A festa é a mesma, mas a estação é oposta por causa da inclinação da Terra.",
+          exemplos_extras: [
+            "Em cidades como Tromsø, na Noruega (dentro do Círculo Polar Ártico), o Sol NÃO SE PÕE por semanas seguidas em junho (Sol da Meia-Noite) e NÃO NASCE por semanas em dezembro (Noite Polar). O motivo é justamente a inclinação: em certas épocas, os polos ficam totalmente virados para ou contra o Sol.",
+            "No Equador (latitude 0°), o dia dura praticamente 12 horas e a noite 12 horas o ano inteiro, sem estações marcadas — só 'seca' e 'chuvosa'. Isso acontece porque a inclinação afeta pouco quem está bem no meio do planeta; ela pesa muito mais nos hemisférios extremos.",
+          ],
         },
       ],
 
@@ -101,6 +128,110 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "Solstícios e Equinócios: a inclinação constante do eixo distribui a luz solar de forma diferente em cada época do ano.",
       imagem_analise: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200",
     },
+
+    quiz_relampago: [
+      {
+        pergunta: "Se a Terra parasse de girar sobre si mesma, o que aconteceria primeiro?",
+        opcoes: [
+          {
+            texto: "Um lado do planeta ficaria em Dia permanente e o outro em Noite permanente.",
+            correta: true,
+            explicacao:
+              "Correto. É a rotação que produz o ciclo dia/noite. Sem ela, o hemisfério voltado para o Sol ferveria e o oposto congelaria — a vida como conhecemos só é possível porque giramos a cada 24h.",
+          },
+          {
+            texto: "As estações do ano deixariam de existir.",
+            correta: false,
+            explicacao:
+              "Quase — mas você misturou dois movimentos. As estações dependem da INCLINAÇÃO + TRANSLAÇÃO, não da rotação. A rotação controla apenas o ciclo dia/noite.",
+          },
+          {
+            texto: "O ano deixaria de ter 365 dias.",
+            correta: false,
+            explicacao:
+              "Não. A duração do ano vem da TRANSLAÇÃO (volta ao redor do Sol), que é um movimento independente da rotação. A Terra continuaria orbitando o Sol em 365 dias mesmo parada em si.",
+          },
+        ],
+      },
+      {
+        pergunta: "Por que o Natal no Brasil é no verão e nos Estados Unidos é no inverno, se é o mesmo dia?",
+        opcoes: [
+          {
+            texto: "Porque a inclinação da Terra faz cada hemisfério receber mais ou menos luz solar direta em cada época do ano.",
+            correta: true,
+            explicacao:
+              "Perfeito. Em dezembro o eixo faz o Hemisfério Sul (Brasil) apontar mais para o Sol — verão pra nós. Ao mesmo tempo, o Hemisfério Norte (EUA) fica virado para longe — inverno lá.",
+          },
+          {
+            texto: "Porque o Brasil está mais perto do Sol que os Estados Unidos.",
+            correta: false,
+            explicacao:
+              "Não. Brasil e EUA estão praticamente à mesma distância do Sol. A distância entre países é insignificante comparada aos 150 milhões de km que nos separam do Sol.",
+          },
+          {
+            texto: "Porque a Terra gira em torno de si mesma no sentido oposto no verão.",
+            correta: false,
+            explicacao:
+              "A Terra sempre gira no mesmo sentido (Oeste → Leste). O que muda com as estações é o hemisfério que recebe raios solares mais diretos, por causa da inclinação do eixo.",
+          },
+        ],
+      },
+      {
+        pergunta: "Um ano bissexto (com 29 de fevereiro) acontece porque…",
+        opcoes: [
+          {
+            texto: "A viagem da Terra ao redor do Sol dura 365 dias E 6 horas — a cada 4 anos essas horas viram 1 dia extra.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. O calendário 'arredonda' para 365 dias, mas sobram 6 horas por ano. Em 4 anos = 24 h = 1 dia. Se não tivéssemos o bissexto, o calendário sairia do lugar em relação às estações.",
+          },
+          {
+            texto: "A Terra gira mais devagar de 4 em 4 anos.",
+            correta: false,
+            explicacao:
+              "Não. A velocidade de rotação e translação é praticamente constante. O bissexto é só um ajuste do calendário humano à realidade astronômica: 365,25 dias por volta.",
+          },
+          {
+            texto: "A Lua empurra a Terra e faz o ano ficar mais longo a cada 4 anos.",
+            correta: false,
+            explicacao:
+              "A Lua realmente influencia a Terra (marés, por exemplo), mas não é ela que gera o bissexto. O motivo é puramente matemático: a translação leva 365,25 dias, e precisamos compensar as frações.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Cada frase abaixo é uma consequência de UM dos três movimentos da Terra. Toque em cada cartão e escolha a categoria correta.",
+      categorias: [
+        { id: "rotacao", titulo: "Rotação", cor: "cyan" },
+        { id: "translacao", titulo: "Translação", cor: "amber" },
+        { id: "inclinacao", titulo: "Inclinação do Eixo", cor: "emerald" },
+      ],
+      cartoes: [
+        { texto: "Depois de 24 horas volta a amanhecer no mesmo lugar.", categoriaId: "rotacao" },
+        { texto: "A cada 4 anos precisamos de um ano bissexto.", categoriaId: "translacao" },
+        {
+          texto: "No Círculo Polar o Sol pode não se pôr por semanas em junho.",
+          categoriaId: "inclinacao",
+        },
+        {
+          texto: "Furacões giram em sentidos opostos nos dois hemisférios (Efeito de Coriolis).",
+          categoriaId: "rotacao",
+        },
+        {
+          texto: "Quando é Natal no Brasil é verão, e nos EUA é inverno.",
+          categoriaId: "inclinacao",
+        },
+        {
+          texto: "A Terra viaja a 107 mil km/h ao longo de uma órbita elíptica.",
+          categoriaId: "translacao",
+        },
+      ],
+    },
+
 
     desafio_critico: {
       pergunta:

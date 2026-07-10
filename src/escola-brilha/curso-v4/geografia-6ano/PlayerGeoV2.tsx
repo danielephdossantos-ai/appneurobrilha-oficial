@@ -33,6 +33,8 @@ import {
 
 import type { UnidadeFund2, EtapaTeorica } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
+import { QuizRelampago } from "./QuizRelampago";
+import { MiniJogoCategorizar } from "./MiniJogoCategorizar";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 
@@ -207,35 +209,53 @@ export function PlayerGeoV2({
     },
     {
       n: 8,
-      rotulo: "Síntese",
+      rotulo: "Síntese + Quiz Relâmpago",
       Icon: FileText,
       titulo: "Consolidação do estudo",
       corpo: (
-        <ul className="space-y-2 text-slate-200 text-[15px]">
-          <li className="flex gap-2">
-            <span className="text-cyan-400 mt-1">▸</span>
-            <span>
-              A unidade articula <em className="text-cyan-300 not-italic">{unidade.conteudo_pedagogico.conceito_chave}</em> às
-              dinâmicas do espaço geográfico.
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="text-cyan-400 mt-1">▸</span>
-            <span>Os processos analisados operam em escala global mas manifestam-se localmente.</span>
-          </li>
-          <li className="flex gap-2">
-            <span className="text-cyan-400 mt-1">▸</span>
-            <span>O raciocínio geográfico exige integrar causa, escala e ação humana.</span>
-          </li>
-        </ul>
+        <div className="space-y-4">
+          <ul className="space-y-2 text-slate-200 text-[15px]">
+            <li className="flex gap-2">
+              <span className="text-cyan-400 mt-1">▸</span>
+              <span>
+                A unidade articula <em className="text-cyan-300 not-italic">{unidade.conteudo_pedagogico.conceito_chave}</em> às
+                dinâmicas do espaço geográfico.
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-cyan-400 mt-1">▸</span>
+              <span>Os processos analisados operam em escala global mas manifestam-se localmente.</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-cyan-400 mt-1">▸</span>
+              <span>O raciocínio geográfico exige integrar causa, escala e ação humana.</span>
+            </li>
+          </ul>
+          {unidade.quiz_relampago && unidade.quiz_relampago.length > 0 && (
+            <QuizRelampago perguntas={unidade.quiz_relampago} audioLigado={audioLigado} />
+          )}
+        </div>
       ),
     },
     {
       n: 9,
-      rotulo: "Preparação · ENEM",
+      rotulo: unidade.mini_jogo ? "Prática · Mini-jogo" : "Preparação · ENEM",
       Icon: Target,
-      titulo: "Antes do desafio",
-      corpo: (
+      titulo: unidade.mini_jogo ? "Fixe o conceito jogando" : "Antes do desafio",
+      corpo: unidade.mini_jogo ? (
+        <div className="space-y-4">
+          <MiniJogoCategorizar jogo={unidade.mini_jogo} audioLigado={audioLigado} />
+          <div className="rounded-lg border-l-2 border-amber-400 bg-amber-500/5 px-4 py-3">
+            <div className="text-[11px] uppercase tracking-widest text-amber-400 mb-1">
+              Estratégia para o desafio ENEM
+            </div>
+            <p className="text-slate-200 text-sm leading-relaxed">
+              Leia o enunciado duas vezes. Identifique o conceito-chave envolvido, elimine as alternativas
+              factualmente incorretas e escolha a que melhor explica o fenômeno pela cadeia causal.
+            </p>
+          </div>
+        </div>
+      ) : (
         <div className="rounded-lg border-l-2 border-amber-400 bg-amber-500/5 px-4 py-3">
           <div className="text-[11px] uppercase tracking-widest text-amber-400 mb-1">Estratégia</div>
           <p className="text-slate-200 text-sm leading-relaxed">
@@ -581,6 +601,24 @@ function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
                   <div className="text-emerald-300 font-serif text-[13px]">Exemplo Real</div>
                 </div>
                 <p className="text-emerald-50/90 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
+              </div>
+            )}
+            {etapa.exemplos_extras && etapa.exemplos_extras.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-[10px] uppercase tracking-widest text-slate-500 pl-1">
+                  Mais casos reais
+                </div>
+                {etapa.exemplos_extras.map((ex, i) => (
+                  <div
+                    key={i}
+                    className="rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 flex gap-2.5"
+                  >
+                    <span className="text-emerald-400 font-mono text-xs mt-0.5">
+                      {String(i + 2).padStart(2, "0")}
+                    </span>
+                    <p className="text-slate-300 text-[12.5px] leading-relaxed flex-1">{ex}</p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
