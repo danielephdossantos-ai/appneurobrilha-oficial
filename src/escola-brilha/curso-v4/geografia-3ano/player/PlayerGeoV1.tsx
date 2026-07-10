@@ -1582,6 +1582,11 @@ function ConstrutorMarcos({
         <span className="tabular-nums">✓ {acertos}</span>
       </div>
 
+      {/* Visual interativo do conceito da rodada */}
+      <div className="rounded-2xl border border-white/15 bg-gradient-to-b from-[#0a1230] to-[#050a1c] p-3">
+        <MinijogoVisual conceito={rodada.pecaCertaId} />
+      </div>
+
       {/* Contexto (texto puro) */}
       <div className="border border-white/15 rounded-xl p-4 text-sm text-white/90 leading-relaxed">
         {rodada.contexto}
