@@ -128,8 +128,10 @@ export function PlayerGeoV1({
         <div className="h-24" />
       </main>
     </div>
+    </TeenContext.Provider>
   );
 }
+
 
 function CenaRenderer({
   cena,
