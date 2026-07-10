@@ -1,247 +1,420 @@
 import type { AulaGeoV1 } from "../../types";
-import sintese from "@/assets/geografia-6ano/sintese-geografica.jpg";
+import planeta from "@/assets/geografia-6ano/planeta-conexoes.jpg";
+import desmate from "@/assets/geografia-6ano/desmatamento.jpg";
+import energia from "@/assets/geografia-6ano/energia-renovavel.jpg";
+import aquecimento from "@/assets/geografia-6ano/aquecimento-global.jpg";
+import sustenta from "@/assets/geografia-6ano/sustentabilidade.jpg";
+import amaz from "@/assets/geografia-6ano/bioma-amazonia.jpg";
+import cinturaoFogo from "@/assets/geografia-6ano/cinturao-fogo.jpg";
 
+/**
+ * Geografia · 6º Ano (PILOTO v2) · Unidade 7 · Aula 01
+ * "Síntese: O Planeta Integrado" — BNCC EF06GE01, EF06GE03, EF06GE12, EF06GE13
+ * Padrão U1/U2.
+ */
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-sintese-planeta",
   titulo: "Síntese: O Planeta Integrado",
   iconeTrilha: "🌐",
   bncc: ["EF06GE01", "EF06GE03", "EF06GE12", "EF06GE13"],
-  duracaoMin: 25,
+  duracaoMin: 30,
   estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
     estilo: "teen",
-    instrucao: "Tudo conectado: movimentos, rochas, clima, vida.",
-    mapaUrl: sintese,
-    imagemDestaqueUrl: sintese,
+    instrucao: "Toque na imagem para começar.",
+    mapaUrl: planeta,
+    imagemDestaqueUrl: planeta,
     aurora:
-      "Explorador, chegamos ao FIM da jornada. Você viu: a Terra gira, viaja e é inclinada. A crosta é dividida em placas. O relevo se formou em milhões de anos. O clima depende da latitude. E os biomas nascem dessa combinação toda. Tudo é UM SISTEMA.",
+      "Você viu tudo: a Terra GIRA (dia e noite), VIAJA em volta do Sol (ano), está INCLINADA (estações). A crosta é dividida em PLACAS que se movem. O RELEVO se formou em milhões de anos de erosão. O CLIMA depende da latitude e da altitude. Os BIOMAS nascem dessa combinação — clima + solo + relevo = vegetação e vida. Nada acontece isoladamente. Um vulcão no Chile pode escurecer o céu do Brasil. Desmatar a Amazônia altera chuva em SP. TUDO ESTÁ CONECTADO.",
     falaFinal: "Hora de juntar as peças. Um planeta, mil conexões.",
   },
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora: "Por que a AMAZÔNIA tem tanta chuva o ano todo?",
-    pergunta: "O que explica isso?",
+    aurora:
+      "Chuta antes: se a Amazônia inteira fosse desmatada, o que aconteceria com a chuva no Sudeste do Brasil?",
+    pergunta: "O efeito seria:",
     opcoes: [
-      { id: "sist", titulo: "SISTEMA: Equador + massas úmidas + relevo", subtitulo: "tudo conectado", emoji: "🌐", cor: "from-emerald-400 to-teal-600" },
-      { id: "sorte", titulo: "SORTE geográfica", subtitulo: "puro acaso", emoji: "🎲", cor: "from-slate-400 to-gray-600" },
+      { id: "diminui", titulo: "Chuva DIMINUIRIA muito", subtitulo: "os rios voadores acabariam", emoji: "🌧️", cor: "from-emerald-800 to-slate-950" },
+      { id: "iguais", titulo: "Não mudaria nada", subtitulo: "Sudeste tem chuva própria", emoji: "☀️", cor: "from-amber-800 to-slate-950" },
     ],
-    respostaCerta: "sist",
+    respostaCerta: "diminui",
     feedbackAcerto:
-      "Exato! Amazônia está no Equador (sol direto) + recebe massa úmida do Atlântico + tem floresta que EVAPORA água = chuva constante. Ciclo integrado.",
-    feedbackErro: "Nada em Geografia é sorte. Amazônia = latitude + massa de ar + floresta trabalhando junto.",
-    falaFinal: "Geografia é sistema. Nada isolado.",
+      "Exato! A Amazônia gera os RIOS VOADORES — massas de vapor d'água que viajam pela atmosfera e alimentam a chuva do Centro-Oeste e Sudeste. Sem Amazônia, chove muito menos em SP, Brasília e MG. Um bioma sustenta metade do país.",
+    feedbackErro:
+      "Muda MUITO. A Amazônia gera os RIOS VOADORES — vapor d'água que viaja pela atmosfera e vira chuva no Centro-Oeste e Sudeste. Sem Amazônia = seca gigante no resto do Brasil.",
+    falaFinal: "Regra final: tudo conectado. A natureza é UM sistema, não pedaços separados.",
   },
 
   cena03_vocabulario: {
     tipo: "cadernosCampo",
-    aurora: "4 grandes ideias que amarram tudo que você aprendeu.",
+    aurora: "4 palavras da sustentabilidade. Cada card traz explicação, exemplo real e curiosidade.",
     instrucao: "",
     cadernos: [
-      { id: "movim", capa: "1. Movimentos da Terra", emoji: "🌍", cor: "from-sky-500 to-indigo-700",
-        conteudo: "ROTAÇÃO + TRANSLAÇÃO + INCLINAÇÃO criam dia/noite, estações e climas. Nossa vida inteira depende disso.",
-        exemplo: "Ex.: sem inclinação, não haveria estações." },
-      { id: "crosta", capa: "2. Crosta em movimento", emoji: "🌋", cor: "from-red-500 to-rose-700",
-        conteudo: "PLACAS TECTÔNICAS moldam continentes, criam montanhas, vulcões e terremotos.",
-        exemplo: "Ex.: Andes existem porque placa de Nazca bate na Sul-Americana." },
-      { id: "atmos", capa: "3. Atmosfera dinâmica", emoji: "🌦️", cor: "from-emerald-500 to-teal-700",
-        conteudo: "MASSAS DE AR + LATITUDE + CICLO DA ÁGUA definem o clima de cada canto do planeta.",
-        exemplo: "Ex.: no Equador chove muito porque o sol evapora muita água." },
-      { id: "vida", capa: "4. Vida se adapta", emoji: "🌳", cor: "from-amber-500 to-orange-700",
-        conteudo: "BIOMAS surgem onde clima e relevo se encontram. Cada bioma é um sistema vivo único.",
-        exemplo: "Ex.: Caatinga só existe porque o sertão é semiárido." },
+      {
+        id: "sist",
+        capa: "1. Sistema Terra",
+        emoji: "🌐",
+        cor: "from-sky-800 to-slate-950",
+        conteudo:
+          "SISTEMA TERRA é a ideia de que atmosfera, oceanos, crosta, biomas e vida estão TODOS interligados. Mudar uma parte afeta todas as outras. Cientistas estudam a Terra como um único organismo.",
+        exemplo:
+          "Curiosidade: quando o vulcão Pinatubo explodiu nas Filipinas em 1991, jogou tanta cinza na atmosfera que a temperatura MÉDIA GLOBAL caiu 0,5°C por 2 anos. Um vulcão afetou o clima do planeta inteiro.",
+        fotoUrl: planeta,
+      },
+      {
+        id: "aq",
+        capa: "2. Aquecimento global",
+        emoji: "🌡️",
+        cor: "from-red-800 to-slate-950",
+        conteudo:
+          "AQUECIMENTO GLOBAL é o aumento da temperatura MÉDIA do planeta por causa do excesso de gases de EFEITO ESTUFA (CO₂, metano) liberados pela queima de combustíveis fósseis e desmatamento.",
+        exemplo:
+          "Curiosidade: desde 1880, a temperatura média da Terra subiu 1,1°C. Parece pouco, mas já é suficiente pra derreter geleiras, elevar o nível do mar 20 cm e aumentar furacões.",
+        fotoUrl: aquecimento,
+      },
+      {
+        id: "sust",
+        capa: "3. Sustentabilidade",
+        emoji: "♻️",
+        cor: "from-emerald-800 to-slate-950",
+        conteudo:
+          "SUSTENTABILIDADE é usar os recursos naturais SEM ESGOTAR pra próximas gerações. Envolve reduzir consumo, reciclar, usar energia limpa e proteger ecossistemas.",
+        exemplo:
+          "Curiosidade: o Brasil é o 5º maior produtor de ENERGIA SOLAR do mundo. Sol de sobra + tecnologia acessível = a matriz elétrica brasileira já é 88% renovável (média mundial: 30%).",
+        fotoUrl: sustenta,
+      },
+      {
+        id: "des",
+        capa: "4. Desmatamento",
+        emoji: "🪓",
+        cor: "from-amber-800 to-orange-950",
+        conteudo:
+          "DESMATAMENTO é a maior ameaça aos biomas brasileiros. Cada árvore derrubada libera CO₂ armazenado, reduz biodiversidade e quebra ciclos hidrológicos que abastecem cidades distantes.",
+        exemplo:
+          "Curiosidade: em 2004, o desmatamento da Amazônia bateu 27.000 km² por ano — quase o tamanho de Alagoas. Em 2023, com fiscalização forte, caiu pra 9.000 km². Ainda é muito, mas prova que dá pra mudar.",
+        fotoUrl: desmate,
+      },
     ],
-    falaFinal: "4 grandes ideias, 1 planeta integrado.",
+    falaFinal: "Sistema Terra, aquecimento, sustentabilidade, desmate. 4 palavras que definem o século XXI.",
   },
 
   cena04_leituraGuiada: {
     tipo: "narrarMapa",
-    aurora: "Aponte cada conexão entre os sistemas do planeta.",
-    instrucao: "Toque em cada balão",
-    mapaUrl: sintese,
+    aurora:
+      "Cada card mostra uma CONEXÃO entre partes da natureza e como o ser humano interfere. Toque em cada um pra entender o encadeamento.",
+    instrucao: "Toque nos 4 cards pra ouvir cada conexão",
+    mapaUrl: planeta,
     pontos: [
-      { id: "movim", x: 25, y: 25, emoji: "🌍", cor: "from-sky-500 to-indigo-700",
-        titulo: "MOVIMENTOS → CLIMA",
-        texto: "Inclinação do eixo faz o Sol bater mais forte no Equador. Latitude puxa temperatura. Movimentos definem clima." },
-      { id: "placa", x: 75, y: 30, emoji: "🌋", cor: "from-red-500 to-rose-700",
-        titulo: "TECTÔNICA → RELEVO",
-        texto: "Placas colidem e formam montanhas (Andes, Himalaia). Placas se afastam e criam vulcões. Relevo nasce do movimento." },
-      { id: "relevo", x: 30, y: 70, emoji: "⛰️", cor: "from-amber-500 to-orange-700",
-        titulo: "RELEVO → CLIMA",
-        texto: "Serras bloqueiam massas de ar. Um lado chove, outro seca (sombra pluviométrica). Relevo molda clima local." },
-      { id: "biomas", x: 70, y: 75, emoji: "🌳", cor: "from-emerald-500 to-green-700",
-        titulo: "CLIMA + RELEVO → BIOMAS",
-        texto: "Onde tem chuva forte + solo bom = floresta. Onde tem seca + calor = savana ou deserto. Bioma é fruto dessa combinação." },
+      {
+        id: "clima-vida",
+        x: 25,
+        y: 30,
+        emoji: "🌡️",
+        cor: "from-red-800 to-slate-950",
+        titulo: "CLIMA muda a VIDA",
+        texto:
+          "Quando a temperatura sobe 2°C, o Cerrado perde 30% de suas espécies. Peixes mudam de rio, plantas florescem em época errada, animais migram cedo demais. O clima é a chave da vida.",
+        fotoUrl: aquecimento,
+      },
+      {
+        id: "amaz-chuva",
+        x: 55,
+        y: 55,
+        emoji: "🌧️",
+        cor: "from-sky-800 to-slate-950",
+        titulo: "AMAZÔNIA fabrica CHUVA",
+        texto:
+          "Cada árvore da Amazônia lança 1.000 litros de vapor d'água na atmosfera por ano. Formam os RIOS VOADORES que viajam até o Sudeste. Sem floresta = sem chuva no resto do Brasil.",
+        fotoUrl: amaz,
+      },
+      {
+        id: "vulcao-clima",
+        x: 70,
+        y: 40,
+        emoji: "🌋",
+        cor: "from-amber-800 to-orange-950",
+        titulo: "VULCÃO altera o clima",
+        texto:
+          "Uma erupção grande joga toneladas de cinza na estratosfera. A cinza BLOQUEIA parte da luz solar e ESFRIA o planeta por meses. Krakatoa (1883) fez pôr do sol vermelho em Londres durante 3 anos.",
+        fotoUrl: cinturaoFogo,
+      },
+      {
+        id: "energia",
+        x: 45,
+        y: 80,
+        emoji: "♻️",
+        cor: "from-emerald-800 to-slate-950",
+        titulo: "ENERGIA LIMPA quebra o ciclo",
+        texto:
+          "Painéis solares e turbinas eólicas geram eletricidade SEM emitir CO₂. Se o mundo trocar carvão e petróleo por sol e vento, o aquecimento global desacelera. Brasil já tem 88% de matriz limpa.",
+        fotoUrl: energia,
+      },
     ],
-    falaFinal: "4 conexões formam o sistema Terra. Nada isolado.",
+    falaFinal:
+      "4 conexões, 1 sistema só. Cada ação humana ecoa em outro canto do planeta.",
   },
 
   cena05_compreensao: {
     tipo: "quizRadar",
-    aurora: "3 perguntas de síntese.",
+    aurora: "4 perguntas de síntese planetária.",
     instrucao: "Toque no card certo",
     perguntas: [
-      { id: "q1", pergunta: "O que causa as ESTAÇÕES do ano?",
+      {
+        id: "q1",
+        pergunta: "Se a Amazônia sumir, o que acontece com a chuva no Sudeste?",
+        fotoUrl: amaz,
         cards: [
-          { id: "i", emoji: "📐", titulo: "Inclinação do eixo", cor: "from-emerald-500 to-teal-700" },
-          { id: "d", emoji: "📏", titulo: "Distância ao Sol", cor: "from-amber-500 to-orange-700" },
-          { id: "l", emoji: "🌙", titulo: "Fases da Lua", cor: "from-slate-500 to-gray-700" },
-        ], correta: "i",
-        feedbackAcerto: "Isso! INCLINAÇÃO.", feedbackErro: "INCLINAÇÃO do eixo." },
-      { id: "q2", pergunta: "Onde acontece a MAIORIA dos terremotos?",
+          { id: "dim", emoji: "🌵", titulo: "Diminui muito", cor: "from-emerald-800 to-slate-950" },
+          { id: "aum", emoji: "🌧️", titulo: "Aumenta muito", cor: "from-sky-800 to-slate-950" },
+          { id: "ig", emoji: "☀️", titulo: "Continua igual", cor: "from-amber-800 to-slate-950" },
+        ],
+        correta: "dim",
+        feedbackAcerto: "Isso! Os rios voadores da Amazônia alimentam a chuva do Sudeste. Sem floresta = seca.",
+        feedbackErro: "Diminui MUITO. Amazônia gera os rios voadores que abastecem Centro-Oeste e Sudeste com chuva.",
+      },
+      {
+        id: "q2",
+        pergunta: "Principal causa do AQUECIMENTO GLOBAL:",
+        fotoUrl: aquecimento,
         cards: [
-          { id: "b", emoji: "🌋", titulo: "Bordas de placas", cor: "from-red-500 to-rose-700" },
-          { id: "m", emoji: "🌳", titulo: "Meio dos continentes", cor: "from-emerald-500 to-teal-700" },
-          { id: "o", emoji: "🌊", titulo: "Nos oceanos calmos", cor: "from-sky-500 to-blue-700" },
-        ], correta: "b",
-        feedbackAcerto: "Isso! BORDAS de placa.", feedbackErro: "Sempre nas BORDAS de placa." },
-      { id: "q3", pergunta: "Bioma EXCLUSIVAMENTE brasileiro:",
+          { id: "gas", emoji: "🏭", titulo: "Excesso de gases de efeito estufa", cor: "from-emerald-800 to-slate-950" },
+          { id: "sol", emoji: "☀️", titulo: "Sol está mais forte", cor: "from-amber-800 to-slate-950" },
+          { id: "vul", emoji: "🌋", titulo: "Vulcões em erupção", cor: "from-red-800 to-slate-950" },
+        ],
+        correta: "gas",
+        feedbackAcerto: "Isso! CO₂ e metano liberados por queima de combustíveis fósseis e desmatamento.",
+        feedbackErro: "Sol não mudou. Vulcões até ESFRIAM. Causa = GASES de efeito estufa emitidos pela humanidade.",
+      },
+      {
+        id: "q3",
+        pergunta: "Ação SUSTENTÁVEL pra reduzir o aquecimento global:",
+        fotoUrl: energia,
         cards: [
-          { id: "c", emoji: "🌵", titulo: "Caatinga", cor: "from-amber-500 to-orange-700" },
-          { id: "a", emoji: "🌳", titulo: "Amazônia", cor: "from-emerald-500 to-teal-700" },
-          { id: "p", emoji: "🐎", titulo: "Pampa", cor: "from-lime-500 to-green-700" },
-        ], correta: "c",
-        feedbackAcerto: "Isso! CAATINGA.", feedbackErro: "CAATINGA só existe no Brasil." },
+          { id: "reno", emoji: "♻️", titulo: "Usar energia renovável", cor: "from-emerald-800 to-slate-950" },
+          { id: "carv", emoji: "🏭", titulo: "Queimar mais carvão", cor: "from-red-800 to-slate-950" },
+          { id: "des", emoji: "🪓", titulo: "Desmatar mais florestas", cor: "from-amber-800 to-slate-950" },
+        ],
+        correta: "reno",
+        feedbackAcerto: "Perfeito! Solar e eólica não emitem CO₂. Brasil já tem 88% de matriz renovável.",
+        feedbackErro: "Carvão e desmate PIORAM. A solução é energia RENOVÁVEL (solar, eólica, hidrelétrica).",
+      },
+      {
+        id: "q4",
+        pergunta: "Um vulcão gigante em erupção causa no CLIMA global:",
+        fotoUrl: cinturaoFogo,
+        cards: [
+          { id: "esf", emoji: "❄️", titulo: "Esfria o planeta por meses", cor: "from-emerald-800 to-slate-950" },
+          { id: "aqu", emoji: "🔥", titulo: "Aquece rapidamente", cor: "from-red-800 to-slate-950" },
+          { id: "nad", emoji: "🌫️", titulo: "Nenhum efeito climático", cor: "from-sky-800 to-slate-950" },
+        ],
+        correta: "esf",
+        feedbackAcerto: "Isso! Cinza vulcânica bloqueia luz solar e resfria o planeta por meses ou anos.",
+        feedbackErro: "Vulcão ESFRIA. A cinza jogada na estratosfera bloqueia parte da luz solar por meses.",
+      },
     ],
-    falaFinal: "Revisão perfeita.",
+    falaFinal: "4 acertos = você entende o planeta como um sistema.",
   },
 
   cena06_personagensLugar: {
     tipo: "mapaBrasilInterativo",
     aurora:
-      "Missão FINAL: acenda os 5 estados MAIS BIODIVERSOS do Brasil — onde a floresta amazônica é mais preservada.",
-    instrucao: "Marque os 5 estados com mais Amazônia preservada",
+      "Os RIOS VOADORES da Amazônia levam umidade pra vários estados do Sudeste e Centro-Oeste. Marque os principais estados que dependem dessa água pra chuva.",
+    instrucao: "Acenda os 4 estados dependentes dos rios voadores",
     missao: {
       tipo: "selecionar",
-      siglas: ["AM", "PA", "AC", "RR", "AP"],
-      pergunta: "Onde está o coração da Amazônia?",
+      siglas: ["SP", "MG", "GO", "MT"],
+      pergunta: "Quais estados recebem chuva dos rios voadores?",
     },
     falaFinal:
-      "AM, PA, AC, RR, AP — coração verde do país. Protegê-los é proteger o clima do planeta.",
+      "SP, MG, GO, MT. Metade das grandes cidades do país depende dessa água invisível vinda da Amazônia. Proteger floresta = proteger água.",
   },
 
   cena07_sequencia: {
     tipo: "linhaEstrada",
-    aurora: "Organize a CADEIA DE INFLUÊNCIAS que forma um bioma.",
+    aurora: "Como uma árvore derrubada na Amazônia vira menos chuva em SP? Organize as etapas dessa conexão.",
     instrucao: "Toque na ordem",
-    pergunta: "Como um bioma surge?",
+    pergunta: "Como o desmatamento seca o Sudeste?",
     paradas: [
-      { id: "sol", emoji: "☀️", rotulo: "1. Sol e latitude",
-        descricao: "Latitude define quanta luz chega." },
-      { id: "clima", emoji: "🌦️", rotulo: "2. Clima se estabelece",
-        descricao: "Massas de ar definem temperatura e umidade." },
-      { id: "relevo", emoji: "⛰️", rotulo: "3. Relevo modifica",
-        descricao: "Montanhas e planaltos mudam o clima local." },
-      { id: "solo", emoji: "🌱", rotulo: "4. Solo se forma",
-        descricao: "Rocha + clima + tempo = tipo de solo." },
-      { id: "vegetacao", emoji: "🌳", rotulo: "5. Vegetação cresce",
-        descricao: "Plantas adaptadas aparecem." },
-      { id: "bioma", emoji: "🌍", rotulo: "6. Bioma completo",
-        descricao: "Fauna, flora e ecossistemas se estabelecem." },
+      { id: "des", emoji: "🪓", rotulo: "1. Árvore derrubada",
+        descricao: "Cada árvore lançava 1.000 L de vapor por ano na atmosfera.", fotoUrl: desmate },
+      { id: "vap", emoji: "💨", rotulo: "2. Menos vapor no ar",
+        descricao: "Sem floresta, o ar sobre a Amazônia fica mais seco." },
+      { id: "rio", emoji: "🌊", rotulo: "3. Rios voadores fracos",
+        descricao: "As massas de vapor que iam pro Sudeste ficam pequenas." },
+      { id: "chu", emoji: "🌧️", rotulo: "4. Menos chuva no Sudeste",
+        descricao: "SP, MG e Centro-Oeste recebem menos umidade da Amazônia." },
+      { id: "sec", emoji: "🌵", rotulo: "5. Seca urbana",
+        descricao: "Reservatórios como o Cantareira baixam. Racionamento de água.", fotoUrl: aquecimento },
     ],
-    ordemCerta: ["sol", "clima", "relevo", "solo", "vegetacao", "bioma"],
-    feedbackAcerto: "Perfeita! Cadeia completa da natureza.",
-    feedbackErro: "Sol → clima → relevo → solo → vegetação → bioma.",
-    falaFinal: "6 passos, 1 bioma. Sempre nessa ordem.",
+    ordemCerta: ["des", "vap", "rio", "chu", "sec"],
+    feedbackAcerto: "Perfeito! Desmate na Amazônia = torneira seca em SP. Tudo conectado.",
+    feedbackErro: "Comece pelo desmate. Depois: menos vapor, rios voadores fracos, menos chuva, seca urbana.",
+    falaFinal: "Um corte de motosserra a 3.000 km daqui vira racionamento na sua cidade.",
   },
 
   cena08_voceLe: {
     tipo: "voceLeSozinho",
-    aurora: "Sua última leitura.",
+    aurora: "Leia com calma. Os TERMOS-CHAVE ficam destacados — toque em qualquer um pra ver a definição rápida.",
     tituloLivro: "📘 Manual do Explorador Planetário",
-    subtitulo: "Capítulo Final — Síntese",
+    subtitulo: "Capítulo 7 — Síntese Planetária",
     paragrafos: [
-      { id: "p1", texto: "A Terra é um SISTEMA integrado onde movimentos, crosta, atmosfera e vida se INFLUENCIAM mutuamente.",
-        chaves: ["sistema", "integrado", "influenciam"] },
-      { id: "p2", texto: "Sem a INCLINAÇÃO do eixo não teríamos ESTAÇÕES. Sem placas em movimento não teríamos MONTANHAS.",
-        chaves: ["inclinação", "estações", "montanhas"] },
-      { id: "p3", texto: "O CLIMA depende da latitude, das massas de ar e do RELEVO. Ele define onde cada bioma pode existir.",
-        chaves: ["clima", "latitude", "relevo", "bioma"] },
-      { id: "p4", texto: "PROTEGER o planeta é entender que TUDO está conectado — mudança em um sistema afeta todos os outros.",
-        chaves: ["proteger", "conectado", "sistema"] },
+      {
+        id: "p1",
+        texto:
+          "A Terra funciona como um SISTEMA integrado. Movimentos do planeta, placas tectônicas, RELEVO, CLIMA e biomas se conectam. Mudar uma parte afeta todas as outras.",
+        chaves: ["SISTEMA", "RELEVO", "CLIMA"],
+        definicoes: {
+          "SISTEMA":
+            "Conjunto de partes interligadas que funcionam juntas. A Terra tem 5 sistemas: atmosfera, hidrosfera, litosfera, criosfera e biosfera.",
+          "RELEVO":
+            "Formas da superfície terrestre. Influencia diretamente o clima e onde as pessoas conseguem viver.",
+          "CLIMA":
+            "Padrão médio do tempo. Depende da latitude, altitude, distância do mar e vegetação.",
+        },
+        fotoUrl: planeta,
+      },
+      {
+        id: "p2",
+        texto:
+          "O AQUECIMENTO GLOBAL é causado principalmente por GASES DE EFEITO ESTUFA (CO₂, metano) liberados pela queima de COMBUSTÍVEIS FÓSSEIS e pelo desmatamento.",
+        chaves: ["AQUECIMENTO GLOBAL", "GASES DE EFEITO ESTUFA", "COMBUSTÍVEIS FÓSSEIS"],
+        definicoes: {
+          "AQUECIMENTO GLOBAL":
+            "Aumento da temperatura média do planeta. Já subiu 1,1°C desde 1880 por ação humana.",
+          "GASES DE EFEITO ESTUFA":
+            "CO₂, metano, óxido nitroso. Prendem calor na atmosfera como um cobertor sobre a Terra.",
+          "COMBUSTÍVEIS FÓSSEIS":
+            "Petróleo, carvão e gás natural. Formados por matéria orgânica soterrada há milhões de anos. Queimar libera CO₂.",
+        },
+        fotoUrl: aquecimento,
+      },
+      {
+        id: "p3",
+        texto:
+          "A SUSTENTABILIDADE propõe usar recursos naturais SEM ESGOTAR pra próximas gerações. Envolve ENERGIA RENOVÁVEL, reciclagem, redução do consumo e proteção dos biomas.",
+        chaves: ["SUSTENTABILIDADE", "ENERGIA RENOVÁVEL"],
+        definicoes: {
+          "SUSTENTABILIDADE":
+            "Modelo de vida que atende necessidades atuais sem comprometer o futuro. Conceito criado pela ONU em 1987.",
+          "ENERGIA RENOVÁVEL":
+            "Energia que se renova naturalmente: solar, eólica, hidrelétrica, biomassa. Brasil tem 88% da matriz elétrica renovável.",
+        },
+        fotoUrl: energia,
+      },
+      {
+        id: "p4",
+        texto:
+          "PROTEGER OS BIOMAS brasileiros é urgente. A Amazônia perdeu 20% da área original; a Mata Atlântica, 88%. A DESTRUIÇÃO afeta clima, água, alimento e saúde de todos os brasileiros.",
+        chaves: ["PROTEGER OS BIOMAS", "DESTRUIÇÃO"],
+        definicoes: {
+          "PROTEGER OS BIOMAS":
+            "Ações de conservação: unidades de conservação, fiscalização, reflorestamento, mercado do carbono.",
+          "DESTRUIÇÃO":
+            "Perda irreversível de biodiversidade, alterações climáticas locais, comprometimento de nascentes de rios.",
+        },
+        fotoUrl: desmate,
+      },
     ],
-    falaFinal: "Leu tudo? Missão final chegando.",
+    falaFinal: "Leu, marcou, entendeu? Bora pro quiz final da JORNADA.",
   },
 
   cena09_minijogo: (() => {
     const cards = [
-      { id: "rot", emoji: "", titulo: "Rotação da Terra", cor: "from-slate-800 to-slate-900" },
-      { id: "trans", emoji: "", titulo: "Translação", cor: "from-slate-800 to-slate-900" },
-      { id: "incl", emoji: "", titulo: "Inclinação do eixo", cor: "from-slate-800 to-slate-900" },
-      { id: "placa", emoji: "", titulo: "Placas tectônicas", cor: "from-slate-800 to-slate-900" },
-      { id: "massa", emoji: "", titulo: "Massa de ar", cor: "from-slate-800 to-slate-900" },
-      { id: "bioma", emoji: "", titulo: "Bioma adaptado", cor: "from-slate-800 to-slate-900" },
+      { id: "sist", emoji: "", titulo: "Sistema Terra", cor: "from-slate-800 to-slate-900" },
+      { id: "aq", emoji: "", titulo: "Aquecimento global", cor: "from-slate-800 to-slate-900" },
+      { id: "sust", emoji: "", titulo: "Sustentabilidade", cor: "from-slate-800 to-slate-900" },
+      { id: "reno", emoji: "", titulo: "Energia renovável", cor: "from-slate-800 to-slate-900" },
+      { id: "des", emoji: "", titulo: "Desmatamento", cor: "from-slate-800 to-slate-900" },
+      { id: "rios", emoji: "", titulo: "Rios voadores", cor: "from-slate-800 to-slate-900" },
     ];
     return {
       tipo: "quizRadar" as const,
-      aurora: "Quiz final: pra cada cenário, escolha o fator geográfico que explica.",
-      instrucao: "Escolha a explicação correta",
+      aurora: "Quiz rápido: pra cada descrição, escolha o conceito correto.",
+      instrucao: "Escolha o conceito correto",
       perguntas: [
-        { id: "r1", pergunta: "No sertão, os cactos armazenam água nos caules pra sobreviver ao clima seco. Que fator geográfico explica essa vegetação?", cards, correta: "bioma",
-          feedbackAcerto: "Isso. Vegetação adaptada ao ambiente = BIOMA (Caatinga).", feedbackErro: "É BIOMA. Cada bioma tem plantas adaptadas ao seu clima." },
-        { id: "r2", pergunta: "Enquanto Tóquio amanhece, São Paulo dorme. Que fator explica a diferença de horários entre os países?", cards, correta: "rot",
-          feedbackAcerto: "Isso. Diferença de horários vem da ROTAÇÃO da Terra.", feedbackErro: "É ROTAÇÃO. A Terra gira em 24h, criando fusos horários." },
-        { id: "r3", pergunta: "No oeste da América do Sul existem os Andes (6.000 m) e vulcões ativos no Chile. Que fator explica esse relevo?", cards, correta: "placa",
-          feedbackAcerto: "Isso. Cordilheiras e vulcões nascem do choque de PLACAS TECTÔNICAS.", feedbackErro: "É PLACAS TECTÔNICAS. Placa Sul-Americana e Nazca em colisão." },
-        { id: "r4", pergunta: "A Amazônia recebe chuva o ano todo porque uma massa de ar úmida entra pelo Norte do país. Que fator climático é esse?", cards, correta: "massa",
-          feedbackAcerto: "Isso. A chuva depende do movimento das MASSAS DE AR.", feedbackErro: "É MASSA DE AR. Ela transporta umidade pra dentro do continente." },
-        { id: "r5", pergunta: "Em dezembro é verão no Brasil e inverno na Europa. Que fator explica estações opostas entre hemisférios?", cards, correta: "incl",
-          feedbackAcerto: "Isso. Estações opostas vêm da INCLINAÇÃO do eixo da Terra.", feedbackErro: "É INCLINAÇÃO. O eixo inclinado faz cada hemisfério receber luz direta em épocas diferentes." },
-        { id: "r6", pergunta: "A cada 4 anos, fevereiro tem 29 dias (ano bissexto). Que fator explica isso?", cards, correta: "trans",
-          feedbackAcerto: "Isso. TRANSLAÇÃO dura 365 dias e 6 horas — as 6h viram 1 dia extra a cada 4 anos.", feedbackErro: "É TRANSLAÇÃO. A volta em torno do Sol dura 365,25 dias." },
+        { id: "r1", pergunta: "Ideia de que atmosfera, oceanos, crosta, vida e clima estão TODOS interligados como um só organismo. Que conceito é esse?", cards, correta: "sist",
+          feedbackAcerto: "Isso. Tudo interligado = SISTEMA TERRA.", feedbackErro: "É SISTEMA TERRA. Cientistas veem o planeta como um único organismo interconectado." },
+        { id: "r2", pergunta: "Aumento da temperatura média do planeta causado por gases como CO₂ e metano. Que fenômeno é esse?", cards, correta: "aq",
+          feedbackAcerto: "Isso. Aumento da temperatura global = AQUECIMENTO GLOBAL.", feedbackErro: "É AQUECIMENTO GLOBAL. Já subiu 1,1°C desde 1880." },
+        { id: "r3", pergunta: "Modelo de uso dos recursos naturais que não compromete as futuras gerações. Qual conceito?", cards, correta: "sust",
+          feedbackAcerto: "Isso. Cuidar do agora sem prejudicar o depois = SUSTENTABILIDADE.", feedbackErro: "É SUSTENTABILIDADE. Conceito criado pela ONU em 1987." },
+        { id: "r4", pergunta: "Fonte de energia que se renova naturalmente e não emite CO₂ — como solar, eólica e hidrelétrica.", cards, correta: "reno",
+          feedbackAcerto: "Isso. Renovável e limpa = ENERGIA RENOVÁVEL.", feedbackErro: "É ENERGIA RENOVÁVEL. Brasil já tem 88% da matriz elétrica assim." },
+        { id: "r5", pergunta: "Destruição de vegetação nativa por corte ou queimada. Principal ameaça aos biomas brasileiros. Qual é?", cards, correta: "des",
+          feedbackAcerto: "Isso. Destruição da vegetação = DESMATAMENTO.", feedbackErro: "É DESMATAMENTO. Mata Atlântica já perdeu 88% assim." },
+        { id: "r6", pergunta: "Massas de vapor d'água que saem da Amazônia e alimentam a chuva do Centro-Oeste e Sudeste. Como se chamam?", cards, correta: "rios",
+          feedbackAcerto: "Isso. Vapor amazônico no ar = RIOS VOADORES.", feedbackErro: "São os RIOS VOADORES. Sem eles, SP e Brasília secam." },
       ],
-      falaFinal: "6 perguntas, 6 fatores geográficos identificados. Geógrafo mestre.",
+      falaFinal: "6 perguntas, 6 conceitos-chave. Explorador Planetário formado.",
     };
   })(),
 
-
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza SÍNTESE: Astronomia + Terra Física + Vida.",
+    aurora: "Pizza dos GRANDES TEMAS da Geografia do 6º Ano. Sua jornada inteira em uma imagem.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "fisica", rotulo: "Terra física (astronomia + placas + clima)", emoji: "🌍", percentual: 70, cor: "#6366f1",
-        descricao: "Movimentos da Terra, tectônica, relevo e atmosfera — o palco físico do planeta.",
-        exemplos: ["🔄 Rotação", "🌋 Placas", "🌦️ Clima"] },
-      { id: "vida", rotulo: "Vida (biomas)", emoji: "🌳", percentual: 30, cor: "#059669",
-        descricao: "Onde o físico encontra o biológico — 6 biomas brasileiros nascem dessa combinação.",
-        exemplos: ["🌳 Amazônia", "🌵 Caatinga", "💧 Pantanal"] },
+      { id: "terra", rotulo: "1. Terra no espaço", emoji: "🌍", percentual: 14, cor: "#0369a1",
+        descricao: "Rotação, translação, inclinação, estações do ano.",
+        exemplos: ["🌏 Rotação", "🔄 Translação", "☀️ Estações"] },
+      { id: "cart", rotulo: "2. Cartografia", emoji: "🧭", percentual: 14, cor: "#7c3aed",
+        descricao: "Latitude, longitude, escalas, projeções cartográficas.",
+        exemplos: ["📍 Coordenadas", "📏 Escala", "🗺️ Legenda"] },
+      { id: "tect", rotulo: "3. Tectônica", emoji: "🌋", percentual: 14, cor: "#dc2626",
+        descricao: "Placas, vulcões, terremotos, tsunamis, cordilheiras.",
+        exemplos: ["🧩 Placas", "🌋 Vulcões", "🏔️ Cordilheiras"] },
+      { id: "rel", rotulo: "4. Relevo", emoji: "⛰️", percentual: 14, cor: "#a16207",
+        descricao: "Planaltos, planícies, depressões, chapadas do Brasil.",
+        exemplos: ["🏞️ Planalto", "🌾 Planície", "⛰️ Chapada"] },
+      { id: "cli", rotulo: "5. Clima", emoji: "🌦️", percentual: 14, cor: "#0284c7",
+        descricao: "Tempo × clima, massas de ar, 6 climas brasileiros.",
+        exemplos: ["🌡️ Temperatura", "💨 Massas de ar", "🌧️ Chuvas"] },
+      { id: "bio", rotulo: "6. Biomas", emoji: "🌳", percentual: 14, cor: "#059669",
+        descricao: "6 biomas brasileiros: Amazônia, Cerrado, Caatinga, Mata Atlântica, Pampa, Pantanal.",
+        exemplos: ["🌳 Amazônia", "🌾 Cerrado", "🌵 Caatinga"] },
+      { id: "sint", rotulo: "7. Síntese", emoji: "🌐", percentual: 16, cor: "#4b5563",
+        descricao: "Tudo conectado. Aquecimento global. Sustentabilidade. Nosso futuro.",
+        exemplos: ["♻️ Sustentável", "🌡️ Aquecimento", "🌐 Sistema"] },
     ],
-    falaFinal: "3 camadas, 1 planeta. Tudo estudado, tudo conectado.",
+    falaFinal: "7 unidades, 1 planeta compreendido. Você agora enxerga a Terra como cientista.",
   },
 
   cena11_avaliacao: {
     tipo: "seloAtlas",
-    aurora: "3 finais pra ganhar a insígnia MESTRE PLANETÁRIO.",
+    aurora: "3 perguntas FINAIS pra ganhar a insígnia Explorador Planetário.",
     instrucao: "Responda as 3",
     perguntas: [
-      { id: "av1", pergunta: "A Terra é considerada um SISTEMA porque:",
+      { id: "av1", pergunta: "Se a Amazônia sumir, o que acontece no Sudeste?",
         opcoes: [
-          { id: "a", texto: "Cada camada funciona independente", correta: false },
-          { id: "b", texto: "Movimentos, crosta, clima e vida se influenciam", correta: true },
-          { id: "c", texto: "Tudo depende só do Sol", correta: false },
+          { id: "a", texto: "Não muda nada — está longe", correta: false },
+          { id: "b", texto: "Diminui a chuva por causa dos rios voadores", correta: true },
+          { id: "c", texto: "Aumenta a chuva", correta: false },
         ],
-        feedbackAcerto: "Isso! Todas as partes se influenciam.", feedbackErro: "SISTEMA = tudo se conecta e se influencia." },
-      { id: "av2", pergunta: "A ORDEM correta que forma um bioma é:",
+        feedbackAcerto: "Isso! Rios voadores levam água da Amazônia pro Sudeste. Sem floresta = sem chuva.",
+        feedbackErro: "Amazônia gera os RIOS VOADORES. Sem floresta, o vapor não viaja pro Sudeste — a chuva diminui." },
+      { id: "av2", pergunta: "Principal causa do aquecimento global:",
         opcoes: [
-          { id: "a", texto: "Bioma → clima → solo → vegetação", correta: false },
-          { id: "b", texto: "Latitude → clima → relevo → solo → vegetação → bioma", correta: true },
-          { id: "c", texto: "Vegetação → solo → clima → bioma", correta: false },
+          { id: "a", texto: "Vulcões em erupção", correta: false },
+          { id: "b", texto: "Gases de efeito estufa emitidos pelo homem", correta: true },
+          { id: "c", texto: "Sol está mais forte", correta: false },
         ],
-        feedbackAcerto: "Isso! Do sol pra planta.", feedbackErro: "Começa em latitude, termina em bioma." },
-      { id: "av3", pergunta: "Proteger o meio ambiente exige entender que:",
+        feedbackAcerto: "Isso! CO₂ e metano da atividade humana são a causa principal.",
+        feedbackErro: "Vulcões até esfriam. Sol não mudou. Causa = GASES emitidos pela humanidade (CO₂, metano)." },
+      { id: "av3", pergunta: "Solução SUSTENTÁVEL contra o aquecimento global:",
         opcoes: [
-          { id: "a", texto: "Cada bioma é isolado", correta: false },
-          { id: "b", texto: "Tudo está conectado — mudança afeta o sistema todo", correta: true },
-          { id: "c", texto: "Só a Amazônia importa", correta: false },
+          { id: "a", texto: "Queimar mais carvão", correta: false },
+          { id: "b", texto: "Trocar por energia renovável", correta: true },
+          { id: "c", texto: "Desmatar mais florestas", correta: false },
         ],
-        feedbackAcerto: "Isso! Uma mudança afeta tudo.", feedbackErro: "TUDO conectado. Mudar 1 afeta o sistema TODO." },
+        feedbackAcerto: "Isso! Solar, eólica, hidrelétrica: energia sem CO₂.",
+        feedbackErro: "Carvão e desmate PIORAM. A solução é ENERGIA RENOVÁVEL (solar, eólica)." },
     ],
-    selo: { nome: "Mestre Planetário", subtitulo: "Insígnia Máxima do Explorador", emoji: "🌐", cor: "from-indigo-500 to-purple-700" },
-    falaFinal: "Insígnia máxima conquistada! Você venceu o 6º ano. Rumo ao 7º!",
+    selo: { nome: "Explorador Planetário", subtitulo: "Insígnia FINAL do 6º Ano", emoji: "🌐", cor: "from-slate-700 to-slate-950" },
+    falaFinal: "INSÍGNIA FINAL CONQUISTADA. Você completou a jornada pelo planeta Terra. Parabéns, explorador!",
   },
 
-  recompensa: { xp: 500, moedas: 400, medalha: "Mestre Planetário" },
+  recompensa: { xp: 500, moedas: 400, medalha: "Explorador Planetário" },
 };
