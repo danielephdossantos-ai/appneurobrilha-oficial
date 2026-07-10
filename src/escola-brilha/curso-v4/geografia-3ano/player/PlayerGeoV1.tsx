@@ -2876,6 +2876,7 @@ function PizzaMunicipio({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [tocadas, setTocadas] = useState<Set<string>>(new Set());
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -2919,6 +2920,133 @@ function PizzaMunicipio({
 
   // gradiente cônico: f1 do 0° até anguloF1, f2 do anguloF1 até 360°
   const conic = `conic-gradient(${f1.cor} 0deg ${anguloF1}deg, ${f2.cor} ${anguloF1}deg 360deg)`;
+
+  if (teen) {
+    const radius = 72;
+    const circumference = 2 * Math.PI * radius;
+    let offsetAcc = 0;
+    const coresTeen = ["#22d3ee", "#64748b"];
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Revisão com gráfico
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5">
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-4 text-center">
+            Gráfico de setores — toque na legenda
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-5">
+            <svg viewBox="0 0 200 200" className="w-60 h-60 shrink-0" role="img" aria-label="Gráfico de setores">
+              <circle cx="100" cy="100" r={radius} fill="none" stroke="#0f172a" strokeWidth="42" />
+              {fatias.map((f, index) => {
+                const slice = (f.percentual / 100) * circumference;
+                const gap = 2;
+                const dash = Math.max(0, slice - gap);
+                const currentOffset = offsetAcc;
+                offsetAcc += slice;
+                const active = ativa === f.id;
+                return (
+                  <circle
+                    key={f.id}
+                    cx="100"
+                    cy="100"
+                    r={radius}
+                    fill="none"
+                    stroke={coresTeen[index % coresTeen.length]}
+                    strokeWidth={active ? 46 : 40}
+                    strokeDasharray={`${dash} ${circumference - dash}`}
+                    strokeDashoffset={-currentOffset}
+                    transform="rotate(-90 100 100)"
+                    strokeLinecap="butt"
+                    className="cursor-pointer transition-all"
+                    opacity={tocadas.has(f.id) || active ? 1 : 0.72}
+                    onClick={() => tocar(f.id)}
+                  />
+                );
+              })}
+              <circle cx="100" cy="100" r="44" fill="#020617" stroke="#334155" strokeWidth="1" />
+              <text x="100" y="94" textAnchor="middle" fill="#94a3b8" fontSize="9" fontWeight="700" letterSpacing="1">
+                TOTAL
+              </text>
+              <text x="100" y="112" textAnchor="middle" fill="#e2e8f0" fontSize="18" fontWeight="800">
+                100%
+              </text>
+            </svg>
+
+            <div className="flex-1 w-full space-y-2">
+              {fatias.map((f, index) => (
+                <button
+                  key={f.id}
+                  onClick={() => tocar(f.id)}
+                  className={`w-full text-left rounded-lg border p-3 transition ${
+                    ativa === f.id
+                      ? "bg-cyan-500/10 border-cyan-400"
+                      : "bg-slate-900 border-slate-700 hover:border-slate-500"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-sm" style={{ background: coresTeen[index % coresTeen.length] }} />
+                    <span className="font-semibold text-sm text-slate-100 flex-1">{stripDecorativeEmoji(f.rotulo)}</span>
+                    <span className="font-mono text-cyan-300 text-sm">{f.percentual}%</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {fatiaAtiva && (
+          <motion.div
+            key={fatiaAtiva.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-lg border border-slate-700 bg-slate-900/75 p-4 space-y-3"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="font-semibold text-cyan-200">{stripDecorativeEmoji(fatiaAtiva.rotulo)}</div>
+              <button
+                onClick={() => falar(fatiaAtiva.descricao)}
+                className="text-xs bg-slate-800 border border-slate-700 px-2 py-1 rounded-md hover:bg-slate-700 text-slate-200"
+              >
+                Ouvir
+              </button>
+            </div>
+            <div className="text-sm text-slate-200 leading-relaxed">{stripDecorativeEmoji(fatiaAtiva.descricao)}</div>
+            <ul className="grid grid-cols-1 gap-1.5">
+              {fatiaAtiva.exemplos.map((ex, i) => (
+                <li key={i} className="text-xs bg-slate-950 rounded-md px-2 py-1.5 border border-slate-800 text-slate-400">
+                  • {stripDecorativeEmoji(ex)}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+
+        {todasTocadas && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-3 text-sm text-emerald-100 leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!todasTocadas}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            todasTocadas
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {todasTocadas ? "Continuar →" : "Analise os dois setores"}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
