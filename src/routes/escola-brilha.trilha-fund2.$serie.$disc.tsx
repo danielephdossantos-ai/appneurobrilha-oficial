@@ -34,6 +34,7 @@ const DISC_LABEL: Record<string, string> = {
 /** Rotas de player por (serie, disc). */
 function playerRoute(serie: string, disc: string): string | null {
   if (serie === "6ano" && disc === "geografia") return "/escola-brilha/geo-6ano/$unidade";
+  if (serie === "7ano" && disc === "geografia") return "/escola-brilha/geo-7ano/$unidade";
   return null;
 }
 
@@ -47,8 +48,17 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       concluidaKey: `fund2:6ano:geografia:${u.slug}`,
     }));
   }
+  if (serie === "7ano" && disc === "geografia") {
+    return UNIDADES_7ANO.map((u) => ({
+      slug: u.slug,
+      titulo: u.titulo,
+      habilidade: u.habilidade,
+      concluidaKey: `fund2:7ano:geografia:${u.slug}`,
+    }));
+  }
   return [];
 }
+
 
 export const Route = createFileRoute("/escola-brilha/trilha-fund2/$serie/$disc")({
   head: ({ params }) => ({
