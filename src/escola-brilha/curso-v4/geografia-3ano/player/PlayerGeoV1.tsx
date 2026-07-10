@@ -817,21 +817,6 @@ function NarrarMapa({
 
   const teen = useTeen();
   if (teen) {
-    // Órbita esquemática — Sol no centro, 4 posições da Terra clicáveis.
-    // Índices na ordem definida em cena.pontos: 0=Jun, 1=Set, 2=Dez, 3=Mar.
-    const SUN = { x: 200, y: 150 };
-    const positions = [
-      { x: 370, y: 150 }, // Jun (direita)
-      { x: 200, y: 260 }, // Set (baixo)
-      { x: 30, y: 150 },  // Dez (esquerda)
-      { x: 200, y: 40 },  // Mar (topo)
-    ];
-    const R = 18; // raio da Terra
-    // Inclinação axial fixa no espaço (~23.5°), norte "pra cima e direita"
-    const tiltRad = (23.5 * Math.PI) / 180;
-    const ax = Math.sin(tiltRad) * R * 1.35;
-    const ay = Math.cos(tiltRad) * R * 1.35;
-
     return (
       <div className="space-y-5">
         <div className="rounded-2xl border-l-2 border-cyan-400/70 bg-slate-900/70 px-4 py-3">
@@ -845,118 +830,46 @@ function NarrarMapa({
           {cena.instrucao}
         </div>
 
-        {/* Diagrama orbital SVG */}
-        <div className="rounded-xl bg-slate-950 border border-slate-800 p-2">
-          <svg viewBox="0 0 400 300" className="w-full h-auto select-none">
-            {/* Órbita */}
-            <ellipse
-              cx={SUN.x}
-              cy={SUN.y}
-              rx={170}
-              ry={110}
-              fill="none"
-              stroke="rgba(148,163,184,0.35)"
-              strokeWidth={0.8}
-              strokeDasharray="3 3"
-            />
-            {/* Sol */}
-            <defs>
-              <radialGradient id="sol-teen" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#fef3c7" />
-                <stop offset="60%" stopColor="#f59e0b" />
-                <stop offset="100%" stopColor="#b45309" />
-              </radialGradient>
-            </defs>
-            <circle cx={SUN.x} cy={SUN.y} r={22} fill="url(#sol-teen)" />
-            <circle cx={SUN.x} cy={SUN.y} r={30} fill="none" stroke="rgba(251,191,36,0.25)" strokeWidth={1} />
-            <text x={SUN.x} y={SUN.y + 46} textAnchor="middle" fontSize={9} fontFamily="monospace" fill="#fbbf24">
-              SOL
-            </text>
-
-            {/* 4 Terras clicáveis */}
-            {positions.map((pos, i) => {
-              const p = cena.pontos[i];
-              if (!p) return null;
-              const isAtivo = ativo === p.id;
-              const visto = !!visitados[p.id];
-              // Direção da Terra pro Sol (para iluminar a metade certa)
-              const dx = SUN.x - pos.x;
-              const dy = SUN.y - pos.y;
-              const len = Math.hypot(dx, dy) || 1;
-              const ux = dx / len;
-              const uy = dy / len;
-              const gradId = `terra-${i}`;
-              return (
-                <g
-                  key={p.id}
-                  onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
-                  className="cursor-pointer"
-                >
-                  <defs>
-                    <linearGradient
-                      id={gradId}
-                      x1={pos.x - ux * R}
-                      y1={pos.y - uy * R}
-                      x2={pos.x + ux * R}
-                      y2={pos.y + uy * R}
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop offset="0%" stopColor="#0b1220" />
-                      <stop offset="50%" stopColor="#1e40af" />
-                      <stop offset="100%" stopColor="#7dd3fc" />
-                    </linearGradient>
-                  </defs>
-                  {/* halo quando ativo */}
-                  {isAtivo && (
-                    <circle cx={pos.x} cy={pos.y} r={R + 6} fill="none" stroke="#22d3ee" strokeWidth={1.2} opacity={0.9} />
-                  )}
-                  {/* Terra */}
-                  <circle
-                    cx={pos.x}
-                    cy={pos.y}
-                    r={R}
-                    fill={`url(#${gradId})`}
-                    stroke={isAtivo ? "#22d3ee" : visto ? "#64748b" : "rgba(148,163,184,0.6)"}
-                    strokeWidth={isAtivo ? 1.2 : 0.6}
+        {/* Grid 2x2 de infográficos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {cena.pontos.map((p) => {
+            const isAtivo = ativo === p.id;
+            const visto = !!visitados[p.id];
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+                className={`group relative text-left rounded-xl overflow-hidden border transition-all ${
+                  isAtivo
+                    ? "border-cyan-400 shadow-[0_0_0_2px_rgba(34,211,238,0.35)] scale-[1.01]"
+                    : visto
+                      ? "border-slate-600 hover:border-cyan-500/60"
+                      : "border-slate-700 hover:border-cyan-500/60"
+                } bg-slate-950`}
+              >
+                {p.fotoUrl ? (
+                  <img
+                    src={p.fotoUrl}
+                    alt={p.titulo}
+                    loading="lazy"
+                    className="w-full aspect-[16/9] object-cover"
                   />
-                  {/* Eixo inclinado (23.5°) — constante no espaço */}
-                  <line
-                    x1={pos.x - ax}
-                    y1={pos.y + ay}
-                    x2={pos.x + ax}
-                    y2={pos.y - ay}
-                    stroke="#f87171"
-                    strokeWidth={1}
-                    strokeLinecap="round"
-                  />
-                  <text
-                    x={pos.x + ax + 2}
-                    y={pos.y - ay - 2}
-                    fontSize={7}
-                    fontFamily="monospace"
-                    fill="#f87171"
-                  >
-                    N
-                  </text>
-                  {/* Rótulo do mês */}
-                  <text
-                    x={pos.x}
-                    y={pos.y + R + 14}
-                    textAnchor="middle"
-                    fontSize={9}
-                    fontFamily="monospace"
-                    fill={isAtivo ? "#22d3ee" : "#94a3b8"}
-                    fontWeight={isAtivo ? 700 : 400}
-                  >
-                    {["JUN", "SET", "DEZ", "MAR"][i]}
-                  </text>
-                  {visto && !isAtivo && (
-                    <circle cx={pos.x + R - 2} cy={pos.y - R + 2} r={3} fill="#22d3ee" />
-                  )}
-                </g>
-              );
-            })}
-          </svg>
+                ) : (
+                  <div className="w-full aspect-[16/9] bg-slate-900 flex items-center justify-center text-slate-600 font-mono text-xs">
+                    infográfico indisponível
+                  </div>
+                )}
+                <div className="absolute top-2 left-2 flex items-center gap-1.5">
+                  <span className={`text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                    isAtivo ? "bg-cyan-400 text-slate-950" : "bg-slate-950/80 text-cyan-300 border border-cyan-500/40"
+                  }`}>
+                    {isAtivo ? "▶ tocando" : visto ? "✓ ouvido" : "🔊 tocar"}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Painel de texto da posição ativa */}
@@ -970,30 +883,22 @@ function NarrarMapa({
             <div className="text-[10px] uppercase tracking-[0.2em] font-mono text-cyan-300/70 mb-1">
               POSIÇÃO SELECIONADA
             </div>
-            <div className="text-sm font-bold text-slate-100 mb-1">
+            <div className="text-sm font-bold text-slate-100 mb-2">
               {pontoAtivo.titulo}
             </div>
-            {pontoAtivo.fotoUrl && (
-              <img
-                src={pontoAtivo.fotoUrl}
-                alt=""
-                loading="lazy"
-                className="w-full aspect-[16/9] object-cover rounded-md border border-slate-700 my-2"
-              />
-            )}
-            <p className="text-sm text-slate-300 leading-snug">
+            <p className="text-sm text-slate-300 leading-relaxed">
               {pontoAtivo.texto}
             </p>
             <button
               onClick={() => falar(`${pontoAtivo.titulo}. ${pontoAtivo.texto}`)}
-              className="mt-2 text-[10px] uppercase tracking-[0.2em] font-mono text-cyan-300 hover:text-cyan-200"
+              className="mt-3 text-[10px] uppercase tracking-[0.2em] font-mono text-cyan-300 hover:text-cyan-200"
             >
               🔊 ouvir de novo
             </button>
           </motion.div>
         ) : (
           <div className="rounded-lg bg-slate-900/40 border border-dashed border-slate-700 px-4 py-3 text-[11px] font-mono text-slate-500 text-center">
-            toque em uma Terra na órbita
+            toque em um infográfico pra ouvir
           </div>
         )}
 
