@@ -94,11 +94,6 @@ export function MiniJogoCategorizar({
         }
         return s;
       });
-        for (let cand = 0; cand < total; cand++) {
-          if (respostas[cand] === undefined && cand !== s) return cand;
-        }
-        return s;
-      });
     }, 900);
   }
 
