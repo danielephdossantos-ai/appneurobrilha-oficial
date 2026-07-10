@@ -2,6 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useAppState } from "@/core/store";
 import { UNIDADES_6ANO } from "@/escola-brilha/curso-v4/geografia-6ano/dados-fund2";
+import { UNIDADES_7ANO } from "@/escola-brilha/curso-v4/geografia-7ano/dados-fund2";
+
 import { CertificadoFund2 } from "@/escola-brilha/curso-v4/geografia-6ano/CertificadoFund2";
 
 /**
