@@ -6,6 +6,10 @@ import rotacaoReal from "@/assets/geografia-6ano/rotacao-real.jpg";
 import translacaoOrbita from "@/assets/geografia-6ano/translacao-orbita.jpg";
 import eixoInclinado from "@/assets/geografia-6ano/eixo-inclinado.jpg";
 import quatroEstacoes from "@/assets/geografia-6ano/quatro-estacoes.jpg";
+import estacaoVerao from "@/assets/geografia-6ano/estacao-verao.jpg";
+import estacaoOutono from "@/assets/geografia-6ano/estacao-outono.jpg";
+import estacaoInverno from "@/assets/geografia-6ano/estacao-inverno.jpg";
+import estacaoPrimavera from "@/assets/geografia-6ano/estacao-primavera.jpg";
 
 /**
  * Geografia · 6º Ano (PILOTO v2 — formato 5º Ano) · Unidade 1 · Aula 01
@@ -250,24 +254,28 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏖️",
         rotulo: "1. Verão (dez–mar)",
         descricao: "Polo Sul inclinado pro Sol. Dias longos, muito calor, chuvas de verão no sudeste (monções). Solstício em 21/12.",
+        fotoUrl: estacaoVerao,
       },
       {
         id: "outono",
         emoji: "🍂",
         rotulo: "2. Outono (mar–jun)",
         descricao: "Equinócio de março (dia = noite). Folhas caducas caem, temperatura cai gradualmente, ar mais seco no centro do Brasil.",
+        fotoUrl: estacaoOutono,
       },
       {
         id: "inverno",
         emoji: "❄️",
         rotulo: "3. Inverno (jun–set)",
         descricao: "Polo Sul inclinado pra LONGE do Sol. Dias curtos, frio, seca no centro-oeste, geadas no sul, neve rara na serra catarinense.",
+        fotoUrl: estacaoInverno,
       },
       {
         id: "primavera",
         emoji: "🌸",
         rotulo: "4. Primavera (set–dez)",
         descricao: "Equinócio de setembro. Ipês florescem, temperatura sobe, chuvas voltam. É o 'renascimento' do ciclo anual.",
+        fotoUrl: estacaoPrimavera,
       },
     ],
     ordemCerta: ["verao", "outono", "inverno", "primavera"],
@@ -287,24 +295,28 @@ export const aula01: AulaGeoV1 = {
         texto:
           "A ROTAÇÃO é o giro da Terra em torno do próprio eixo. Dura cerca de 24 horas e causa o ciclo do DIA e da NOITE. No Equador, a superfície gira a 1.670 km/h.",
         chaves: ["rotação", "24 horas", "dia", "noite", "1.670"],
+        fotoUrl: rotacaoDiaNoite,
       },
       {
         id: "p2",
         texto:
           "A TRANSLAÇÃO é a volta da Terra ao redor do SOL. Dura 365 dias e 6 horas — origem do ano BISSEXTO. A Terra percorre 940 milhões de km a 107.000 km/h.",
         chaves: ["translação", "365", "sol", "bissexto", "107.000"],
+        fotoUrl: translacaoOrbita,
       },
       {
         id: "p3",
         texto:
           "O EIXO da Terra está INCLINADO em 23,5°. Essa inclinação é FIXA e é a verdadeira causa das ESTAÇÕES do ano. A distância ao Sol muda muito pouco (só 3%).",
         chaves: ["eixo", "23,5", "inclinado", "estações", "3%"],
+        fotoUrl: eixoInclinado,
       },
       {
         id: "p4",
         texto:
           "As estações são INVERTIDAS entre os hemisférios: quando é verão no SUL, é inverno no NORTE. Nos EQUINÓCIOS (março e setembro), dia e noite duram IGUAL no planeta inteiro.",
         chaves: ["invertidas", "verão", "inverno", "hemisférios", "equinócios"],
+        fotoUrl: quatroEstacoes,
       },
     ],
     falaFinal: "Leu tudo? Boa. Agora um minijogo cronometrado.",
@@ -329,6 +341,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "rotacao",
         feedbackAcerto: "Isso! ROTAÇÃO gira a Terra em 24h — por isso existem fusos horários diferentes.",
         feedbackErro: "Diferença de horas entre países = ROTAÇÃO da Terra em 24h.",
+        fotoUrl: rotacaoReal,
       },
       {
         id: "r2",
@@ -338,6 +351,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Perfeito! Eixo INCLINADO faz o hemisfério sul receber luz direta em dezembro.",
         feedbackErro: "Verão no Natal = INCLINAÇÃO. O hemisfério sul está virado pro Sol.",
+        fotoUrl: estacaoVerao,
       },
       {
         id: "r3",
@@ -347,6 +361,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "translacao",
         feedbackAcerto: "Isso! TRANSLAÇÃO dura 365d + 6h. As 6h acumulam em 1 dia extra a cada 4 anos.",
         feedbackErro: "Ano bissexto = TRANSLAÇÃO. A volta ao Sol dura 365,25 dias.",
+        fotoUrl: translacaoOrbita,
       },
       {
         id: "r4",
@@ -356,6 +371,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Correto! Estações OPOSTAS entre hemisférios = INCLINAÇÃO do eixo.",
         feedbackErro: "Estações opostas nos dois hemisférios = INCLINAÇÃO do eixo a 23,5°.",
+        fotoUrl: eixoInclinado,
       },
       {
         id: "r5",
@@ -365,6 +381,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "rotacao",
         feedbackAcerto: "Isso! A Terra gira de OESTE pra LESTE — por isso o Sol parece cruzar o céu.",
         feedbackErro: "Sol nascendo no leste = ROTAÇÃO da Terra (oeste → leste).",
+        fotoUrl: rotacaoDiaNoite,
       },
       {
         id: "r6",
@@ -374,6 +391,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Isso! O polo Norte fica tão inclinado pro Sol que a região do Círculo Polar fica sempre iluminada.",
         feedbackErro: "Sol que não se põe nos polos = INCLINAÇÃO extrema do eixo em relação ao Sol.",
+        fotoUrl: eixoInclinado,
       },
     ],
     falaFinal: "6 rodadas, 6 movimentos identificados. Astrônomo de carteirinha.",

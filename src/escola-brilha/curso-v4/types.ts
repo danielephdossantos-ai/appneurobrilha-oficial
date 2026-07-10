@@ -734,6 +734,7 @@ export type CenaGeoV1 =
         emoji: string;
         rotulo: string;              // ex.: "Fazenda"
         descricao: string;           // texto lido quando acertada
+        fotoUrl?: string;            // opcional: foto real exibida na parada
       }>;
       /** Ordem correta como lista dos ids. */
       ordemCerta: string[];
@@ -751,6 +752,7 @@ export type CenaGeoV1 =
         texto: string;                   // parágrafo curto, letras grandes
         /** Palavras-chave desse parágrafo que a criança precisa marcar ao ler. */
         chaves: string[];
+        fotoUrl?: string;                // opcional: imagem de apoio ao parágrafo
       }>;
       falaFinal: string;                 // fecha depois de "Li tudo"
     }
@@ -772,6 +774,7 @@ export type CenaGeoV1 =
         pecaCertaId: string;
         feedbackAcerto: string;
         feedbackErro: string;
+        fotoUrl?: string;               // opcional: imagem da rodada
       }>;
       falaFinal: string;
     }

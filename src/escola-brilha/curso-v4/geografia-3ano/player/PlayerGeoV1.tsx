@@ -1869,14 +1869,24 @@ function LinhaEstrada({
                   }`}>
                     {preenchido ? "✓" : String(i + 1).padStart(2, "0")}
                   </div>
-                  <div className={`flex-1 rounded-lg border p-3 ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
+                  <div className={`flex-1 rounded-lg border overflow-hidden ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
                     {preenchido ? (
                       <>
-                        <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
-                        <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                        {p.fotoUrl && (
+                          <img
+                            src={p.fotoUrl}
+                            alt={p.rotulo}
+                            loading="lazy"
+                            className="w-full aspect-[16/9] object-cover border-b border-cyan-500/20"
+                          />
+                        )}
+                        <div className="p-3">
+                          <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
+                          <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                        </div>
                       </>
                     ) : (
-                      <div className="text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
+                      <div className="p-3 text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
                     )}
                   </div>
                 </div>
@@ -2198,6 +2208,18 @@ function VoceLeSozinho({
             </div>
             <div className="text-[10px] text-slate-500 font-mono shrink-0">{paginaAtual + 1}/{total}</div>
           </div>
+
+          {paragrafo.fotoUrl && (
+            <motion.img
+              key={`${paragrafo.id}-foto`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              src={paragrafo.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700 mb-4"
+            />
+          )}
 
           <motion.div
             key={paragrafo.id}
@@ -2651,6 +2673,14 @@ function ConstrutorMarcos({
 
         <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5 space-y-3">
           <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">Caso real</div>
+          {rodada.fotoUrl && (
+            <img
+              src={rodada.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700"
+            />
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
             <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
               <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação A</div>
