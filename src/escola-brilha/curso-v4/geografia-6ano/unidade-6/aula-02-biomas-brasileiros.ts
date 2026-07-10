@@ -140,16 +140,13 @@ export const aula02: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Área dos biomas brasileiros:",
+    aurora: "Os dois maiores biomas do Brasil:",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "am", rotulo: "Amazônia (49%)", emoji: "🌳", percentual: 49, cor: "#059669", descricao: "Quase metade do território brasileiro.", exemplos: ["🌳 Floresta úmida", "🐆 Onça-pintada", "🍇 Açaí"] },
-      { id: "ce", rotulo: "Cerrado (24%)", emoji: "🌾", percentual: 24, cor: "#d97706", descricao: "Savana. Berço das águas.", exemplos: ["🐺 Lobo-guará", "🌳 Ipê", "🍈 Pequi"] },
-      { id: "ma", rotulo: "Mata Atlântica (13%)", emoji: "🌿", percentual: 13, cor: "#0d9488", descricao: "Litoral. Muito devastada.", exemplos: ["🐒 Mico-leão", "🌳 Jequitibá"] },
-      { id: "ca", rotulo: "Caatinga (10%)", emoji: "🌵", percentual: 10, cor: "#eab308", descricao: "Único 100% brasileiro.", exemplos: ["🌵 Mandacaru", "🐦 Asa-branca"] },
-      { id: "outros", rotulo: "Pampa + Pantanal (4%)", emoji: "🐊", percentual: 4, cor: "#0891b2", descricao: "Sul e Centro-Oeste.", exemplos: ["🐴 Cavalo crioulo", "🐊 Jacaré-do-pantanal"] }
+      { id: "am", rotulo: "Amazônia (49%)", emoji: "🌳", percentual: 49, cor: "#059669", descricao: "Quase metade do território brasileiro. Maior floresta tropical do planeta.", exemplos: ["🐆 Onça-pintada", "🌳 Vitória-régia", "🍇 Açaí"] },
+      { id: "outros", rotulo: "Outros 5 biomas (51%)", emoji: "🗺️", percentual: 51, cor: "#d97706", descricao: "Cerrado (24%), Mata Atlântica (13%), Caatinga (10%), Pampa e Pantanal (4%).", exemplos: ["🌾 Cerrado", "🌵 Caatinga", "🐊 Pantanal"] }
     ],
-    falaFinal: "Brasil = maior biodiversidade do mundo. 6 biomas!",
+    falaFinal: "Amazônia sozinha = quase metade do Brasil. 6 biomas!",
   },
 
   cena11_avaliacao: {

@@ -136,15 +136,13 @@ export const aula02: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Elementos de um mapa completo:",
+    aurora: "Uso do mapa: entender é mais importante que enfeitar.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "titulo", rotulo: "Título (10%)", emoji: "📌", percentual: 10, cor: "#dc2626", descricao: "Diz do que o mapa trata.", exemplos: ["Mapa do Brasil", "Mapa Político", "Mapa Climático"] },
-      { id: "escala", rotulo: "Escala (25%)", emoji: "📏", percentual: 25, cor: "#0ea5e9", descricao: "Proporção entre papel e realidade.", exemplos: ["1:1.000", "1:100.000", "1:10.000.000"] },
-      { id: "legenda", rotulo: "Legenda (40%)", emoji: "🔑", percentual: 40, cor: "#f59e0b", descricao: "Explica cores e símbolos. É o mais importante.", exemplos: ["🟦 Rio", "🟩 Floresta", "✈️ Aeroporto"] },
-      { id: "rosa", rotulo: "Rosa dos Ventos (25%)", emoji: "🧭", percentual: 25, cor: "#10b981", descricao: "Orienta o Norte e as direções.", exemplos: ["N", "S", "L", "O"] }
+      { id: "info", rotulo: "Informação útil (80%)", emoji: "🔑", percentual: 80, cor: "#0ea5e9", descricao: "Legenda + escala + rosa dos ventos = o que faz o mapa FUNCIONAR de verdade.", exemplos: ["🔑 Legenda", "📏 Escala", "🧭 Rosa"] },
+      { id: "visual", rotulo: "Visual (20%)", emoji: "🎨", percentual: 20, cor: "#f59e0b", descricao: "Cores e desenho ajudam, mas sem legenda e escala o mapa não serve.", exemplos: ["🎨 Cores", "🖼️ Layout"] }
     ],
-    falaFinal: "4 elementos = mapa completo e profissional.",
+    falaFinal: "80% do mapa é informação. Sem legenda e escala, não serve.",
   },
 
   cena11_avaliacao: {
