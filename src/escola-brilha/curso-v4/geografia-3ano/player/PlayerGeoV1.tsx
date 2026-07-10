@@ -73,8 +73,11 @@ export function PlayerGeoV1({
     else if (i >= total) onConcluir();
   };
 
+  const teen = aula.estilo === "teen";
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55] text-white">
+    <TeenContext.Provider value={teen}>
+    <div className={`min-h-screen text-white ${teen ? "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" : "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"}`}>
+
       <header className="sticky top-0 z-20 backdrop-blur bg-black/40 border-b border-white/10">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <button
