@@ -38,7 +38,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "4 conceitos que todo meteorologista usa.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "tempo", capa: "1. Tempo", emoji: "🌤️", cor: "from-sky-500 to-blue-700",
         conteudo: "TEMPO é o estado da atmosfera AGORA, num lugar específico. Muda de hora em hora.",

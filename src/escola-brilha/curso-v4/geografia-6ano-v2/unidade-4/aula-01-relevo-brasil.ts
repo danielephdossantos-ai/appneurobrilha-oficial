@@ -38,7 +38,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "4 formas do relevo brasileiro.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "montanha", capa: "1. Montanha", emoji: "🏔️", cor: "from-slate-500 to-gray-700",
         conteudo: "MONTANHA é elevação superior a 300 m com pico definido. No Brasil, as mais altas ficam no Norte (Pico da Neblina, 2.995 m).",
