@@ -309,8 +309,8 @@ function VotoExplorador({
         </div>
       </div>
 
-      {/* Cards de voto — empilhados no mobile, lado a lado no desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* Opções em lista de texto — visual sóbrio, sem cor/ícone */}
+      <div className="flex flex-col gap-2">
         {cena.opcoes.map((op) => {
           const escolhido = voto === op.id;
           const certoRevelado = revelado && op.id === cena.respostaCerta;
@@ -320,36 +320,36 @@ function VotoExplorador({
               key={op.id}
               onClick={() => votar(op.id)}
               disabled={revelado}
-              whileTap={{ scale: revelado ? 1 : 0.97 }}
-              className={`relative rounded-3xl p-5 text-left overflow-hidden border-2 transition-all bg-gradient-to-br ${op.cor} ${
-                escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
-              } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
-                erradoRevelado ? "opacity-60" : ""
+              whileTap={{ scale: revelado ? 1 : 0.99 }}
+              className={`w-full text-left rounded-xl px-4 py-3 border transition-all bg-white/5 hover:bg-white/10 ${
+                escolhido ? "border-white/70" : "border-white/15"
+              } ${certoRevelado ? "border-emerald-400 bg-emerald-500/10" : ""} ${
+                erradoRevelado ? "border-rose-400 bg-rose-500/10 opacity-80" : ""
               }`}
             >
-              <div className="text-5xl mb-2">{op.emoji}</div>
-              <div className="text-white font-black text-lg leading-tight">
-                {op.titulo}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-white font-semibold text-base leading-snug">
+                    {op.titulo}
+                  </div>
+                  {op.subtitulo && (
+                    <div className="text-white/60 text-sm mt-1 leading-snug">
+                      {op.subtitulo}
+                    </div>
+                  )}
+                </div>
+                {certoRevelado && (
+                  <span className="text-emerald-300 text-lg font-bold shrink-0">✓</span>
+                )}
+                {erradoRevelado && (
+                  <span className="text-rose-300 text-lg font-bold shrink-0">✕</span>
+                )}
               </div>
-              {op.subtitulo && (
-                <div className="text-white/85 text-xs mt-1 font-medium">
-                  {op.subtitulo}
-                </div>
-              )}
-              {certoRevelado && (
-                <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
-                  ✓
-                </div>
-              )}
-              {erradoRevelado && (
-                <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
-                  ✕
-                </div>
-              )}
             </motion.button>
           );
         })}
       </div>
+
 
       {revelado && (
         <motion.div
