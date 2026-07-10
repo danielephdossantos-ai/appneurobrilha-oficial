@@ -2673,6 +2673,14 @@ function ConstrutorMarcos({
 
         <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5 space-y-3">
           <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">Caso real</div>
+          {rodada.fotoUrl && (
+            <img
+              src={rodada.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700"
+            />
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
             <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
               <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação A</div>
