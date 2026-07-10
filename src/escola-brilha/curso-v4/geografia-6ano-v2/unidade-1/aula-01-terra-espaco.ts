@@ -10,6 +10,10 @@ import estacaoVerao from "@/assets/geografia-6ano/estacao-verao.jpg";
 import estacaoOutono from "@/assets/geografia-6ano/estacao-outono.jpg";
 import estacaoInverno from "@/assets/geografia-6ano/estacao-inverno.jpg";
 import estacaoPrimavera from "@/assets/geografia-6ano/estacao-primavera.jpg";
+import orbitaJun from "@/assets/geografia-6ano/orbita-jun-solsticio.jpg";
+import orbitaSet from "@/assets/geografia-6ano/orbita-set-equinocio.jpg";
+import orbitaDez from "@/assets/geografia-6ano/orbita-dez-solsticio.jpg";
+import orbitaMar from "@/assets/geografia-6ano/orbita-mar-equinocio.jpg";
 
 /**
  * Geografia · 6º Ano (PILOTO v2 — formato 5º Ano) · Unidade 1 · Aula 01
