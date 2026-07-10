@@ -327,17 +327,19 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
-                        if (serie === "6º Ano" && disc === "geografia") {
+                        if ((serie === "6º Ano" || serie === "7º Ano") && disc === "geografia") {
+                          const serieSlugFund2 = serie === "6º Ano" ? "6ano" : "7ano";
+                          const serieLabelFund2 = serie === "6º Ano" ? "6º Ano" : "7º Ano";
                           return (
                             <Link
                               key={disc}
                               to="/escola-brilha/trilha-fund2/$serie/$disc"
-                              params={{ serie: "6ano", disc: "geografia" }}
+                              params={{ serie: serieSlugFund2, disc: "geografia" }}
                               className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                               style={{ background: "linear-gradient(135deg, #0f172a, #0891b2)" }}
                             >
                               <div className="text-[10px] uppercase tracking-widest opacity-80">
-                                Geografia · 6º Ano · Fund. 2
+                                Geografia · {serieLabelFund2} · Fund. 2
                               </div>
                               <div className="text-lg leading-tight mt-0.5">
                                 🛰️ Trilha Acadêmica — Dashboard Científico
@@ -348,6 +350,7 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
+
 
                         const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
 
