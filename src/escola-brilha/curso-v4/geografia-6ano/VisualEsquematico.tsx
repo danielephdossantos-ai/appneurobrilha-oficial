@@ -67,20 +67,30 @@ function TerraReal({
 
 export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
   if (roteiro.tipo === "terra-orbita") return <TerraOrbita legenda={roteiro.legenda} />;
+  if (roteiro.tipo === "globo-coordenadas") return <GloboCoordenadas legenda={roteiro.legenda} />;
   return <Generico roteiro={roteiro} />;
 }
 
 /** Mini animação embutida em cada etapa do passo a passo. */
-export function MiniPalco({ tipo }: { tipo: "rotacao" | "translacao" | "inclinacao" | "piao" }) {
+export function MiniPalco({
+  tipo,
+}: {
+  tipo: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
+}) {
+  const alto = tipo === "piao" || tipo === "projecoes";
   return (
-    <div className={`relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden ${tipo === "piao" ? "h-[260px]" : "h-[180px]"}`}>
+    <div className={`relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden ${alto ? "h-[260px]" : "h-[180px]"}`}>
       {tipo === "rotacao" && <PalcoRotacao />}
       {tipo === "translacao" && <PalcoTranslacao />}
       {tipo === "inclinacao" && <PalcoInclinacao />}
       {tipo === "piao" && <PalcoPiao />}
+      {tipo === "latitude" && <PalcoLatitude />}
+      {tipo === "longitude" && <PalcoLongitude />}
+      {tipo === "projecoes" && <PalcoProjecoes />}
     </div>
   );
 }
+
 
 /** --- Palco 0: Pião (metáfora — Terra como pião inclinado que gira) --- */
 function PalcoPiao() {
@@ -405,3 +415,196 @@ function Generico({ roteiro }: { roteiro: RoteiroVisual }) {
     </div>
   );
 }
+
+/* ============================================================
+   ESQUEMA: GLOBO COM COORDENADAS (Latitude · Longitude · Projeções)
+   ============================================================ */
+
+type AbaGlobo = "latitude" | "longitude" | "projecoes";
+
+function GloboCoordenadas({ legenda }: { legenda: string }) {
+  const [aba, setAba] = useState<AbaGlobo>("latitude");
+  const abas: Array<{ id: AbaGlobo; rotulo: string; Icon: typeof Compass }> = [
+    { id: "latitude", rotulo: "Latitude", Icon: Compass },
+    { id: "longitude", rotulo: "Longitude", Icon: Orbit },
+    { id: "projecoes", rotulo: "Projeções", Icon: Sparkles },
+  ];
+  return (
+    <div className="space-y-3">
+      <div className="flex gap-1 rounded-lg border border-slate-700 bg-slate-950/60 p-1">
+        {abas.map((a) => {
+          const ativa = aba === a.id;
+          return (
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => setAba(a.id)}
+              className={[
+                "flex-1 flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-xs font-medium transition",
+                ativa ? "bg-cyan-500 text-slate-950" : "text-slate-400 hover:text-cyan-300 hover:bg-slate-900",
+              ].join(" ")}
+            >
+              <a.Icon className="h-3.5 w-3.5" />
+              <span>{a.rotulo}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="relative rounded-xl border border-cyan-500/30 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-6 overflow-hidden min-h-[280px]">
+        <AnimatePresence mode="wait">
+          {aba === "latitude" && <PalcoLatitude key="lat" grande />}
+          {aba === "longitude" && <PalcoLongitude key="lon" grande />}
+          {aba === "projecoes" && <PalcoProjecoes key="proj" grande />}
+        </AnimatePresence>
+      </div>
+      <div className="rounded-lg border-l-2 border-cyan-400 bg-cyan-500/5 px-3 py-2">
+        <div className="text-[10px] uppercase tracking-widest text-cyan-400 mb-0.5">Legenda</div>
+        <p className="text-slate-300 text-xs leading-relaxed italic">{legenda}</p>
+      </div>
+    </div>
+  );
+}
+
+/* --- Palco Latitude: paralelos horizontais + destaque Equador --- */
+function PalcoLatitude({ grande = false }: { grande?: boolean }) {
+  const size = grande ? 200 : 130;
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative h-full flex items-center justify-center gap-4"
+    >
+      <div className="relative" style={{ width: size, height: size }}>
+        <TerraReal size={size} spin={0} />
+        {/* Paralelos horizontais */}
+        <svg viewBox="-50 -50 100 100" className="absolute inset-0 pointer-events-none">
+          {[-60, -30, 0, 30, 60].map((lat) => {
+            const y = (lat / 90) * 45;
+            const r = Math.sqrt(Math.max(0, 48 * 48 - y * y));
+            const eq = lat === 0;
+            return (
+              <ellipse
+                key={lat}
+                cx={0}
+                cy={y}
+                rx={r}
+                ry={r * 0.15}
+                fill="none"
+                stroke={eq ? "#fbbf24" : "#67e8f9"}
+                strokeWidth={eq ? 1.2 : 0.5}
+                strokeDasharray={eq ? "0" : "1.5 1.5"}
+                opacity={eq ? 0.95 : 0.7}
+              />
+            );
+          })}
+        </svg>
+        <div className="absolute top-1/2 -right-2 -translate-y-1/2 text-[9px] font-mono text-amber-300 bg-slate-950/70 rounded px-1">0° Equador</div>
+      </div>
+      {grande && (
+        <div className="text-xs text-slate-300 max-w-[220px] leading-relaxed space-y-1">
+          <p><span className="text-amber-300 font-medium">Latitude</span> mede a distância angular ao Equador (0°) — vai de 0° a 90° N ou S.</p>
+          <p className="text-slate-400">Ex: São Paulo ≈ 23°S · Londres ≈ 51°N.</p>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+/* --- Palco Longitude: meridianos verticais + Greenwich --- */
+function PalcoLongitude({ grande = false }: { grande?: boolean }) {
+  const size = grande ? 200 : 130;
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative h-full flex items-center justify-center gap-4"
+    >
+      <motion.div
+        className="relative"
+        style={{ width: size, height: size }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <TerraReal size={size} spin={0} />
+        <svg viewBox="-50 -50 100 100" className="absolute inset-0 pointer-events-none">
+          {[-60, -30, 0, 30, 60].map((lon) => {
+            const rx = 48 * Math.abs(Math.cos((lon * Math.PI) / 180));
+            const gw = lon === 0;
+            return (
+              <ellipse
+                key={lon}
+                cx={0}
+                cy={0}
+                rx={rx}
+                ry={48}
+                fill="none"
+                stroke={gw ? "#fbbf24" : "#67e8f9"}
+                strokeWidth={gw ? 1.2 : 0.5}
+                strokeDasharray={gw ? "0" : "1.5 1.5"}
+                opacity={gw ? 0.95 : 0.7}
+              />
+            );
+          })}
+        </svg>
+      </motion.div>
+      {grande && (
+        <div className="text-xs text-slate-300 max-w-[220px] leading-relaxed space-y-1">
+          <p><span className="text-amber-300 font-medium">Longitude</span> mede a distância angular ao Meridiano de Greenwich (0°) — vai de 0° a 180° L ou O.</p>
+          <p className="text-slate-400">Ex: Brasília ≈ 47°O · Tóquio ≈ 139°L.</p>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+/* --- Palco Projeções: Mercator × Peters lado a lado --- */
+function PalcoProjecoes({ grande = false }: { grande?: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={`grid ${grande ? "grid-cols-2 gap-4" : "grid-cols-2 gap-2"} h-full`}
+    >
+      {/* Mercator — quadrado, distorce polos */}
+      <div className="flex flex-col items-center justify-center gap-2">
+        <svg viewBox="0 0 100 100" className="w-full max-w-[180px] rounded border border-cyan-500/40 bg-slate-950">
+          <rect x="10" y="10" width="80" height="80" fill="#0c4a6e" opacity="0.35" />
+          {/* continentes esquemáticos alargados no topo */}
+          <path d="M20 20 L45 15 L55 25 L40 35 Z" fill="#22d3ee" opacity="0.8" />
+          <path d="M60 18 L85 22 L80 40 L62 32 Z" fill="#22d3ee" opacity="0.8" />
+          <path d="M25 50 L45 48 L50 68 L28 70 Z" fill="#22d3ee" opacity="0.9" />
+          <path d="M55 55 L78 58 L72 78 L58 75 Z" fill="#22d3ee" opacity="0.9" />
+          {/* grade */}
+          {[25, 50, 75].map((y) => (
+            <line key={y} x1="10" y1={y} x2="90" y2={y} stroke="#67e8f9" strokeWidth="0.3" opacity="0.4" />
+          ))}
+        </svg>
+        <div className="text-center">
+          <div className="text-cyan-200 font-serif text-sm">Mercator</div>
+          <div className="text-slate-400 text-[10px]">Preserva formas · distorce áreas</div>
+        </div>
+      </div>
+      {/* Peters — retangular achatado, áreas proporcionais */}
+      <div className="flex flex-col items-center justify-center gap-2">
+        <svg viewBox="0 0 100 100" className="w-full max-w-[180px] rounded border border-amber-500/40 bg-slate-950">
+          <rect x="5" y="25" width="90" height="50" fill="#78350f" opacity="0.35" />
+          <path d="M15 32 L40 30 L48 42 L20 44 Z" fill="#fbbf24" opacity="0.85" />
+          <path d="M55 30 L88 34 L85 50 L58 46 Z" fill="#fbbf24" opacity="0.85" />
+          <path d="M22 52 L48 50 L52 70 L26 72 Z" fill="#fbbf24" opacity="0.95" />
+          <path d="M56 55 L82 58 L78 72 L60 70 Z" fill="#fbbf24" opacity="0.95" />
+          {[40, 55, 65].map((y) => (
+            <line key={y} x1="5" y1={y} x2="95" y2={y} stroke="#fbbf24" strokeWidth="0.3" opacity="0.4" />
+          ))}
+        </svg>
+        <div className="text-center">
+          <div className="text-amber-200 font-serif text-sm">Peters</div>
+          <div className="text-slate-400 text-[10px]">Preserva áreas · achata formas</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+

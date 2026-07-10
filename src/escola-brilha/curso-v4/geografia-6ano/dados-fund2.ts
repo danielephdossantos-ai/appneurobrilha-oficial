@@ -8,7 +8,7 @@ export type EtapaTeorica = {
   titulo: string;
   texto: string;
   /** Chave da mini animação embutida no card do passo. */
-  visual?: "rotacao" | "translacao" | "inclinacao" | "piao";
+  visual?: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
   /** Exemplo real do dia-a-dia que materializa o conceito. */
   exemplo_real?: string;
 };
@@ -17,8 +17,9 @@ export type RoteiroVisual = {
   foco: string;
   descricao: string;
   legenda: string;
-  tipo?: "terra-orbita" | "generico";
+  tipo?: "terra-orbita" | "globo-coordenadas" | "generico";
 };
+
 
 export type UnidadeFund2 = {
   unidade: number;
@@ -125,38 +126,75 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
   {
     unidade: 2,
     slug: "unidade-2-cartografia-avancada",
-    titulo: "Cartografia Avançada e Sistemas de Coordenadas",
+    titulo: "Cartografia e Coordenadas Geográficas",
     habilidade: "EF06GE01 / EF06GE02",
     introducao_academica:
-      "A cartografia evoluiu de uma técnica de desenho para uma ciência de precisão matemática e geoprocessamento. Esta unidade aborda a rede geométrica de linhas imaginárias que permite a localização unívoca de qualquer ponto na superfície do geoide terrestre.",
+      "Como o GPS do celular sabe exatamente onde você está no planeta? Como um piloto de avião cruza um oceano inteiro sem se perder? A resposta está em uma rede invisível de linhas matemáticas que envolve a Terra. Vamos decifrar, passo a passo, como a Cartografia transforma um planeta redondo em um endereço preciso.",
     conteudo_pedagogico: {
-      conceito_chave: "Coordenadas Geográficas e Projeções Cartográficas",
+      conceito_chave: "Paralelos, Meridianos e Projeções Cartográficas",
       texto_teorico:
-        "O sistema de coordenadas baseia-se na intersecção de Paralelos (linhas horizontais que medem a Latitude de 0° a 90° Norte ou Sul, tendo como referência a Linha do Equador) e Meridianos (linhas verticais que medem a Longitude de 0° a 180° Leste ou Oeste, a partir do Meridiano de Greenwich). Toda representação plana de uma superfície esférica gera distorções, resolvidas por meio de Projeções Cartográficas (Cilíndricas, Cônicas ou Azimutais), que priorizam ora as formas (conformes), ora as áreas (equivalentes).",
+        "Imagine que a Terra é uma laranja e alguém desenhou nela uma malha de linhas: umas horizontais (paralelos) e outras verticais (meridianos). Cruzando essas duas famílias de linhas, qualquer ponto do planeta ganha um endereço único — a coordenada geográfica.",
+      etapas_teoricas: [
+        {
+          titulo: "Paralelos & Latitude — o endereço Norte-Sul",
+          texto:
+            "Os Paralelos são círculos horizontais que envolvem a Terra. O maior deles é a Linha do Equador (0°), que divide o planeta em Hemisfério Norte e Hemisfério Sul. A distância angular de um ponto até o Equador chama-se Latitude e vai de 0° a 90° — para o Norte (N) ou para o Sul (S).",
+          visual: "latitude",
+          exemplo_real:
+            "Manaus (AM) fica na latitude ~3° S: pertinho do Equador, por isso é quente e úmido o ano inteiro. Já Porto Alegre (RS) está a ~30° S: mais longe do Equador, tem inverno frio de verdade. A latitude explica boa parte do clima de uma cidade.",
+        },
+        {
+          titulo: "Meridianos & Longitude — o endereço Leste-Oeste",
+          texto:
+            "Os Meridianos são semicírculos verticais que vão de polo a polo. O Meridiano de Greenwich (0°), na Inglaterra, é o marco zero mundial. A distância angular até Greenwich chama-se Longitude e vai de 0° a 180° — para o Leste (L) ou para o Oeste (O). É a longitude que define os fusos horários.",
+          visual: "longitude",
+          exemplo_real:
+            "Brasília está em ~47° O e Tóquio em ~139° L — separadas por quase 180° de longitude. Por isso, quando é meio-dia aqui, já é a madrugada seguinte no Japão: cada 15° de longitude ≈ 1 hora de fuso.",
+        },
+        {
+          titulo: "Projeções Cartográficas — planificando o planeta",
+          texto:
+            "A Terra é redonda, mas os mapas são planos. Toda vez que 'esticamos' a esfera para caber em uma folha, alguma coisa se deforma: ou as formas dos continentes, ou o tamanho real das áreas. Cada projeção resolve isso de um jeito diferente e revela uma visão política do mundo.",
+          visual: "projecoes",
+          exemplo_real:
+            "Na Projeção de Mercator (a mais famosa), a Groenlândia parece maior que a África — mas a África real é 14× maior! Já a Projeção de Peters mostra os continentes com áreas proporcionais corretas, valorizando países tropicais. Não existe mapa 'neutro' — todo mapa é uma escolha.",
+        },
+      ],
+      roteiro_visual_interativo: {
+        foco: "Simulador do globo com coordenadas",
+        descricao:
+          "Explore em três abas a rede que localiza tudo no planeta: os paralelos horizontais da Latitude, os meridianos verticais da Longitude e a comparação lado a lado entre as projeções de Mercator e Peters.",
+        legenda:
+          "Observe: a Linha do Equador (dourada) é o zero da latitude, e o Meridiano de Greenwich (dourado) é o zero da longitude. Juntos, eles dão a origem do sistema de coordenadas terrestre.",
+        tipo: "globo-coordenadas",
+      },
+      exemplo_pratico_visual:
+        "Abra o Google Maps e clique com o botão direito em qualquer ponto: aparecem dois números, tipo '-23.5505, -46.6333'. O primeiro é a Latitude (23,5° Sul → Hemisfério Sul), o segundo é a Longitude (46,6° Oeste → a oeste de Greenwich). Esse é o endereço matemático da Praça da Sé, em São Paulo. Todo GPS do mundo entende essa linguagem — não importa o idioma, o país ou o fuso.",
       exemplo_visual:
-        "Comparação entre a Projeção de Mercator (Eurocêntrica, preserva as formas mas distorce as áreas, expandindo as regiões polares) e a Projeção de Peters (Terceiro-Mundista, preserva a proporção das áreas mas deforma os contornos).",
+        "Comparação entre a Projeção de Mercator (preserva as formas mas distorce as áreas, expandindo as regiões polares) e a Projeção de Peters (preserva a proporção das áreas mas achata os contornos).",
       imagem_analise: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200",
     },
     desafio_critico: {
       pergunta:
-        "Ao programar um sistema de navegação por satélite (GPS), qual propriedade geométrica das Coordenadas Geográficas garante que o cálculo de rota funcione de forma idêntica em qualquer país do mundo?",
+        "Um avião decola de Tóquio (Japão, ~35°N / 139°L) rumo a Buenos Aires (Argentina, ~34°S / 58°O). Durante o voo, o piloto muda de hemisfério tanto na Latitude quanto na Longitude. Qual afirmação explica corretamente essa mudança dupla?",
       opcoes: [
         {
           texto:
-            "O fato de as coordenadas se basearem em uma rede angular matemática de paralelos e meridianos, fixa e independente de fronteiras políticas.",
+            "O avião atravessa a Linha do Equador (mudando de Hemisfério Norte para Sul na Latitude) e cruza um meridiano oposto ao de Greenwich (mudando de Hemisfério Leste para Oeste na Longitude).",
           correta: true,
         },
         {
           texto:
-            "A utilização exclusiva da projeção cilíndrica de Peters que elimina todas as distorções do planeta.",
+            "A mudança acontece porque a Projeção de Mercator distorce as coordenadas quando o avião voa em grande altitude, invertendo automaticamente os hemisférios.",
           correta: false,
         },
       ],
       explicacao_professor:
-        "A rede de latitudes e longitudes é um sistema de coordenadas esféricas abstrato e universal. Qualquer ponto possui um endereço único determinado por graus, minutos e segundos angulares.",
+        "Perfeito! Latitude e Longitude são sistemas independentes. Tóquio está a Norte do Equador e a Leste de Greenwich; Buenos Aires está a Sul do Equador e a Oeste de Greenwich. Para ir de uma à outra, o avião cruza os dois marcos zero — Equador (latitude 0°) e o anti-meridiano na linha internacional de data (longitude ±180°). Projeção cartográfica é apenas a forma de desenhar o mapa; não interfere na posição real do avião.",
     },
-    recompensas: { xp: 500, moedas: 300, titulo: "Analista de Sistemas Cartográficos" },
+    recompensas: { xp: 500, moedas: 300, titulo: "Cartógrafo das Coordenadas Universais" },
   },
+
   {
     unidade: 3,
     slug: "unidade-3-tectonica-de-placas",
