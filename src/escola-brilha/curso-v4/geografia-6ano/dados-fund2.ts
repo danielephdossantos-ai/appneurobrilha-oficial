@@ -273,6 +273,10 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "latitude",
           exemplo_real:
             "Manaus (AM) fica na latitude ~3° S: pertinho do Equador, por isso é quente e úmido o ano inteiro. Já Porto Alegre (RS) está a ~30° S: mais longe do Equador, tem inverno frio de verdade. A latitude explica boa parte do clima de uma cidade.",
+          exemplos_extras: [
+            "Cingapura fica em ~1° N (praticamente sobre o Equador). Resultado: temperatura média de 27°C o ano inteiro, sem inverno. Já Moscou está em ~55° N — inverno com −15°C. A diferença brutal não é de país rico ou pobre: é de latitude.",
+            "Os Trópicos de Câncer (23,5° N) e de Capricórnio (23,5° S) marcam os limites onde o Sol chega a bater a pino ao meio-dia em algum momento do ano. Fora desse cinturão, o Sol nunca fica exatamente sobre a sua cabeça — a latitude decide isso.",
+          ],
         },
         {
           titulo: "Meridianos & Longitude — o endereço Leste-Oeste",
@@ -281,6 +285,10 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "longitude",
           exemplo_real:
             "Brasília está em ~47° O e Tóquio em ~139° L — separadas por quase 180° de longitude. Por isso, quando é meio-dia aqui, já é a madrugada seguinte no Japão: cada 15° de longitude ≈ 1 hora de fuso.",
+          exemplos_extras: [
+            "A Linha Internacional de Data fica em ~180° de longitude, no meio do Pacífico. Quem cruza ela de avião indo para o Leste 'volta no tempo' 24 horas; indo para o Oeste, 'pula' um dia. Não é ficção: é geografia pura resolvendo o encontro do Leste com o Oeste.",
+            "O Brasil tem 4 fusos horários (do Acre a Fernando de Noronha) justamente por causa da sua enorme extensão em longitude — quase 40° de leste a oeste. Já a China, mesmo sendo gigante em latitude, usa um único fuso oficial por decisão política, não geográfica.",
+          ],
         },
         {
           titulo: "Projeções Cartográficas — planificando o planeta",
@@ -289,8 +297,13 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           visual: "projecoes",
           exemplo_real:
             "Na Projeção de Mercator (a mais famosa), a Groenlândia parece maior que a África — mas a África real é 14× maior! Já a Projeção de Peters mostra os continentes com áreas proporcionais corretas, valorizando países tropicais. Não existe mapa 'neutro' — todo mapa é uma escolha.",
+          exemplos_extras: [
+            "Mercator foi criada em 1569 para navegação: preserva ângulos, então um navio podia traçar uma rota reta e seguir a bússola sem erro. Mas ao esticar as áreas polares, deu ao Hemisfério Norte uma imagem visualmente 'maior' — o que muitos historiadores associam à visão colonial europeia do mundo.",
+            "A Google usa uma variante da Mercator no Google Maps por um motivo técnico: ela mantém formas locais fiéis, o que é ideal para navegar rua a rua. Mas se você abrir o mapa-múndi bem 'zoom-out', vai ver a Antártida do tamanho de todos os continentes juntos — pura distorção de projeção.",
+          ],
         },
       ],
+
       roteiro_visual_interativo: {
         foco: "Simulador do globo com coordenadas",
         descricao:
