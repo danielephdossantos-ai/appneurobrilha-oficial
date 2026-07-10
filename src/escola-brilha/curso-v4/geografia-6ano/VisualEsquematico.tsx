@@ -209,42 +209,143 @@ function PalcoTranslacao() {
   );
 }
 
-/* --- Palco 3: Inclinação (Verão × Inverno) --- */
+/* --- Palco 3: SIMULADOR de Estações (Sol + Terra com botões) --- */
 function PalcoInclinacao() {
+  const [cenario, setCenario] = useState<"verao-sul" | "inverno-sul">("verao-sul");
+  const veraoSul = cenario === "verao-sul";
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="grid grid-cols-2 gap-3"
+      className="space-y-3"
     >
-      {/* Verão HS */}
-      <div className="rounded-lg bg-gradient-to-br from-rose-500/15 to-amber-500/10 border border-rose-400/30 p-4 flex flex-col items-center">
-        <Flame className="h-10 w-10 text-rose-300" strokeWidth={1.5} />
-        <div className="mt-2 text-rose-200 font-serif">Verão (HS)</div>
-        <div className="text-rose-100/70 text-[11px] text-center mt-1">
-          Raios do Sol batem mais direto no Hemisfério Sul
+      {/* Palco espacial */}
+      <div className="relative h-[240px] rounded-lg border border-cyan-500/30 bg-[radial-gradient(ellipse_at_center,rgba(30,58,138,0.35),rgba(2,6,23,0.95))] overflow-hidden">
+        {/* estrelas */}
+        {Array.from({ length: 30 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-0.5 w-0.5 rounded-full bg-white/70"
+            style={{
+              top: `${(i * 37) % 100}%`,
+              left: `${(i * 53) % 100}%`,
+              opacity: 0.3 + ((i * 7) % 7) / 10,
+            }}
+          />
+        ))}
+
+        {/* Sol */}
+        <div className="absolute left-6 top-1/2 -translate-y-1/2">
+          <div className="absolute inset-0 rounded-full bg-amber-400/40 blur-2xl scale-[2.2]" />
+          <Sun className="relative h-14 w-14 text-amber-300" strokeWidth={1.5} />
         </div>
-        <div className="mt-2 font-mono text-[10px] text-rose-300">DEZ · JAN · FEV</div>
+
+        {/* Raios de luz direcionais */}
+        <motion.div
+          key={cenario + "-rays"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute left-20 top-1/2 -translate-y-1/2 flex flex-col gap-1"
+        >
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-0.5 w-40 rounded-full bg-gradient-to-r from-amber-300/80 to-transparent"
+              style={{ transform: `rotate(${veraoSul ? 8 : -8}deg)`, transformOrigin: "left center" }}
+            />
+          ))}
+        </motion.div>
+
+        {/* Terra com eixo inclinado */}
+        <div className="absolute right-12 top-1/2 -translate-y-1/2">
+          <motion.div
+            key={cenario + "-earth"}
+            initial={{ scale: 0.9, opacity: 0.6 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 180, damping: 14 }}
+            className="relative h-24 w-24"
+          >
+            {/* Eixo inclinado 23° */}
+            <div className="absolute left-1/2 -top-4 h-32 w-[3px] -translate-x-1/2 rotate-[23deg] rounded-full bg-red-400 origin-center shadow-[0_0_8px_rgba(248,113,113,0.7)]" />
+            {/* Rótulos N/S */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">N</div>
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">S</div>
+
+            {/* Corpo Terra com sombreamento condicional */}
+            <div
+              className="relative h-24 w-24 rounded-full overflow-hidden border-2 border-cyan-200/50 shadow-lg shadow-cyan-500/30"
+              style={{
+                background: veraoSul
+                  ? "radial-gradient(circle at 30% 75%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)"
+                  : "radial-gradient(circle at 30% 25%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)",
+              }}
+            >
+              {/* Marcação hemisfério iluminado */}
+              <div
+                className={[
+                  "absolute left-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
+                  veraoSul ? "bottom-2 bg-rose-500/80 text-white" : "bottom-2 bg-slate-950/70 text-sky-200",
+                ].join(" ")}
+              >
+                HS {veraoSul ? "☀" : "❄"}
+              </div>
+              <div
+                className={[
+                  "absolute right-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
+                  veraoSul ? "top-2 bg-slate-950/70 text-sky-200" : "top-2 bg-rose-500/80 text-white",
+                ].join(" ")}
+              >
+                HN {veraoSul ? "❄" : "☀"}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Marcador de época */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 rounded border border-cyan-500/40 bg-slate-950/80 backdrop-blur px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-cyan-300">
+          {veraoSul ? "DEZ · JAN · FEV" : "JUN · JUL · AGO"}
+        </div>
       </div>
-      {/* Inverno HS */}
-      <div className="rounded-lg bg-gradient-to-br from-sky-500/15 to-indigo-500/10 border border-sky-400/30 p-4 flex flex-col items-center">
-        <Snowflake className="h-10 w-10 text-sky-200" strokeWidth={1.5} />
-        <div className="mt-2 text-sky-100 font-serif">Inverno (HS)</div>
-        <div className="text-sky-100/70 text-[11px] text-center mt-1">
-          Raios chegam inclinados, aquecem menos
-        </div>
-        <div className="mt-2 font-mono text-[10px] text-sky-300">JUN · JUL · AGO</div>
+
+      {/* Botões interativos */}
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => setCenario("verao-sul")}
+          className={[
+            "rounded-lg border px-3 py-2.5 text-xs font-medium transition flex items-center justify-center gap-1.5",
+            veraoSul
+              ? "border-rose-400 bg-rose-500/20 text-rose-100 shadow-inner shadow-rose-500/30"
+              : "border-slate-700 bg-slate-900/50 text-slate-300 hover:border-rose-400/60 hover:text-rose-200",
+          ].join(" ")}
+        >
+          <Flame className="h-3.5 w-3.5" />
+          Verão no Sul
+        </button>
+        <button
+          type="button"
+          onClick={() => setCenario("inverno-sul")}
+          className={[
+            "rounded-lg border px-3 py-2.5 text-xs font-medium transition flex items-center justify-center gap-1.5",
+            !veraoSul
+              ? "border-sky-400 bg-sky-500/20 text-sky-100 shadow-inner shadow-sky-500/30"
+              : "border-slate-700 bg-slate-900/50 text-slate-300 hover:border-sky-400/60 hover:text-sky-200",
+          ].join(" ")}
+        >
+          <Snowflake className="h-3.5 w-3.5" />
+          Inverno no Sul
+        </button>
       </div>
-      {/* Eixo inclinado */}
-      <div className="col-span-2 rounded-lg bg-slate-950/60 border border-slate-700 px-3 py-2 flex items-center gap-3">
-        <div className="relative h-10 w-10 flex-shrink-0">
-          <div className="absolute inset-0 rounded-full bg-blue-500/80" />
-          <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-400 origin-center -translate-x-1/2 rotate-[23deg]" />
-        </div>
-        <div className="text-slate-300 text-xs">
-          O eixo inclinado <span className="text-red-300 font-mono">23°27'</span> muda qual hemisfério recebe mais luz em cada época do ano.
-        </div>
+
+      {/* Explicação dinâmica */}
+      <div className="rounded-lg border-l-2 border-cyan-400 bg-cyan-500/5 px-3 py-2">
+        <p className="text-slate-300 text-xs leading-relaxed">
+          {veraoSul
+            ? "O eixo inclina o Hemisfério Sul em direção ao Sol: raios batem mais direto, aquecem mais → Verão no HS / Inverno no HN."
+            : "O eixo inclina o Hemisfério Norte em direção ao Sol: o HS fica afastado, raios chegam oblíquos → Inverno no HS / Verão no HN."}
+        </p>
       </div>
     </motion.div>
   );
