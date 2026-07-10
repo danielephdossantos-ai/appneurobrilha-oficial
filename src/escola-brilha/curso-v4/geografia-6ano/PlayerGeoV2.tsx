@@ -8,14 +8,16 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   BookOpen,
+  Check,
   Compass,
   FileText,
   Focus,
+  Globe2,
   Headphones,
   Lightbulb,
   ListOrdered,
@@ -26,9 +28,10 @@ import {
   Trophy,
   Volume2,
   VolumeX,
+  X,
 } from "lucide-react";
 
-import type { UnidadeFund2 } from "./dados-fund2";
+import type { UnidadeFund2, EtapaTeorica } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
