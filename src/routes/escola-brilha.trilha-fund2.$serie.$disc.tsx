@@ -64,14 +64,14 @@ function TrilhaFund2() {
   const { activeChild } = useAppState();
   const unidades = useMemo(() => loadUnidades(serie, disc), [serie, disc]);
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
-  const [modoLivre, setModoLivre] = useState(true);
+  const [modoLivre] = useState(true); // Fund2 é dashboard acadêmico: todas as unidades sempre navegáveis
   const [showDiploma, setShowDiploma] = useState(false);
   const rotaPlayer = playerRoute(serie, disc);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    setModoLivre(!params.has("aluno"));
+    void params;
     // hydrate progresso local
     const set = new Set<string>();
     for (const u of unidades) {
