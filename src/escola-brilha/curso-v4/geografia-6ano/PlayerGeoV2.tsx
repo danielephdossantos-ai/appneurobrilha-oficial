@@ -99,22 +99,89 @@ export function PlayerGeoV2({
     },
     {
       n: 3,
-      rotulo: "Fundamentação teórica · 1/2",
-      Icon: BookOpen,
-      titulo: "Base conceitual",
-      corpo: <p className="text-slate-200/90 leading-relaxed text-[15px]">{teoricoA}</p>,
-      narracao: teoricoA,
+      rotulo: "Passo a passo",
+      Icon: ListOrdered,
+      titulo: "Entenda por etapas",
+      corpo: unidade.conteudo_pedagogico.etapas_teoricas?.length ? (
+        <div className="space-y-3">
+          <p className="text-slate-300 text-[14px] leading-relaxed">
+            {unidade.conteudo_pedagogico.texto_teorico}
+          </p>
+          <ol className="space-y-3">
+            {unidade.conteudo_pedagogico.etapas_teoricas.map((etapa, i) => (
+              <li
+                key={i}
+                className="flex gap-3 rounded-lg border border-slate-700 bg-slate-900/50 p-4"
+              >
+                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold text-sm flex items-center justify-center">
+                  {i + 1}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-cyan-300 font-serif text-[15px] leading-snug mb-1">
+                    {etapa.titulo}
+                  </div>
+                  <p className="text-slate-200 text-sm leading-relaxed">{etapa.texto}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ) : (
+        <p className="text-slate-200/90 leading-relaxed text-[15px]">
+          {unidade.conteudo_pedagogico.texto_teorico}
+        </p>
+      ),
+      narracao: unidade.conteudo_pedagogico.etapas_teoricas?.length
+        ? [
+            unidade.conteudo_pedagogico.texto_teorico,
+            ...unidade.conteudo_pedagogico.etapas_teoricas.map(
+              (e, i) => `Passo ${i + 1}: ${e.titulo}. ${e.texto}`,
+            ),
+          ].join(" ")
+        : unidade.conteudo_pedagogico.texto_teorico,
     },
     {
       n: 4,
-      rotulo: "Fundamentação teórica · 2/2",
-      Icon: ScrollText,
-      titulo: "Aprofundamento",
-      corpo: <p className="text-slate-200/90 leading-relaxed text-[15px]">{teoricoB}</p>,
-      narracao: teoricoB,
+      rotulo: "Visual interativo",
+      Icon: Sparkles,
+      titulo: unidade.conteudo_pedagogico.roteiro_visual_interativo?.foco ?? "Esquema visual",
+      corpo: unidade.conteudo_pedagogico.roteiro_visual_interativo ? (
+        <VisualEsquematico roteiro={unidade.conteudo_pedagogico.roteiro_visual_interativo} />
+      ) : (
+        <p className="text-slate-400 text-sm italic">Recurso visual não disponível para esta unidade.</p>
+      ),
+      narracao: unidade.conteudo_pedagogico.roteiro_visual_interativo
+        ? `${unidade.conteudo_pedagogico.roteiro_visual_interativo.descricao} ${unidade.conteudo_pedagogico.roteiro_visual_interativo.legenda}`
+        : undefined,
     },
     {
       n: 5,
+      rotulo: "Curiosidade prática",
+      Icon: Lightbulb,
+      titulo: "Materializando o conceito",
+      corpo: unidade.conteudo_pedagogico.exemplo_pratico_visual ? (
+        <div className="rounded-xl border border-amber-400/40 bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-slate-950">
+              <Lightbulb className="h-4 w-4" strokeWidth={2.5} />
+            </div>
+            <div className="text-amber-300 font-serif text-[15px]">💡 Curiosidade Prática</div>
+          </div>
+          <p className="text-amber-50/90 text-[15px] leading-relaxed">
+            {unidade.conteudo_pedagogico.exemplo_pratico_visual}
+          </p>
+        </div>
+      ) : (
+        <p className="text-slate-200 text-sm leading-relaxed">
+          {unidade.conteudo_pedagogico.exemplo_visual}
+        </p>
+      ),
+      narracao:
+        unidade.conteudo_pedagogico.exemplo_pratico_visual ??
+        unidade.conteudo_pedagogico.exemplo_visual,
+    },
+    {
+      n: 6,
       rotulo: "Prancha de análise",
       Icon: Map,
       titulo: "Registro visual",
@@ -138,28 +205,7 @@ export function PlayerGeoV2({
       ),
       narracao: unidade.conteudo_pedagogico.exemplo_visual,
     },
-    {
-      n: 6,
-      rotulo: "Estudo de caso",
-      Icon: LineChart,
-      titulo: "Aplicação empírica",
-      corpo: (
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-            <div className="text-[11px] uppercase tracking-widest text-slate-500 mb-2">Fenômeno observado</div>
-            <p className="text-slate-200 text-sm leading-relaxed">
-              {unidade.conteudo_pedagogico.exemplo_visual}
-            </p>
-          </div>
-          <div className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-            <div className="text-[11px] uppercase tracking-widest text-slate-500 mb-2">Referencial teórico</div>
-            <p className="text-slate-200 text-sm leading-relaxed">
-              {unidade.conteudo_pedagogico.conceito_chave}
-            </p>
-          </div>
-        </div>
-      ),
-    },
+
     {
       n: 7,
       rotulo: "Habilidade BNCC",
