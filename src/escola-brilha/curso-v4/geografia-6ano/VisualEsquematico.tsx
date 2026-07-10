@@ -184,25 +184,24 @@ function PalcoRotacao() {
       exit={{ opacity: 0 }}
       className="grid grid-cols-2 gap-3 h-full"
     >
-      {/* Dia */}
-      <div className="relative rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-400/30 p-4 flex flex-col items-center justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          <Sun className="h-12 w-12 text-amber-300" strokeWidth={1.5} />
-        </motion.div>
-        <div className="mt-3 text-amber-200 font-serif text-lg">DIA</div>
-        <div className="text-amber-100/70 text-[11px] text-center mt-1">Lado da Terra virado para o Sol</div>
-      </div>
-      {/* Noite */}
-      <div className="relative rounded-lg bg-gradient-to-br from-indigo-900/60 to-slate-900 border border-indigo-400/30 p-4 flex flex-col items-center justify-center">
+      {/* Dia — Terra real iluminada pelo Sol */}
+      <div className="relative rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-400/30 p-3 flex flex-col items-center justify-center gap-1">
         <div className="relative">
-          <Moon className="h-12 w-12 text-indigo-200" strokeWidth={1.5} />
-          <Sparkles className="absolute -top-1 -right-2 h-3 w-3 text-indigo-300 animate-pulse" />
+          <Sun className="absolute -left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-amber-300" strokeWidth={1.5} />
+          <TerraReal size={72} spin={10} shadow="oeste" />
         </div>
-        <div className="mt-3 text-indigo-100 font-serif text-lg">NOITE</div>
-        <div className="text-indigo-200/70 text-[11px] text-center mt-1">Lado oposto, no escuro</div>
+        <div className="mt-1 text-amber-200 font-serif text-base">DIA</div>
+        <div className="text-amber-100/70 text-[10px] text-center leading-tight">Lado virado para o Sol</div>
+      </div>
+      {/* Noite — Terra real no escuro */}
+      <div className="relative rounded-lg bg-gradient-to-br from-indigo-900/60 to-slate-900 border border-indigo-400/30 p-3 flex flex-col items-center justify-center gap-1">
+        <div className="relative">
+          <TerraReal size={72} spin={10} shadow="leste" />
+          <Moon className="absolute -right-6 top-1/2 -translate-y-1/2 h-5 w-5 text-indigo-200" strokeWidth={1.5} />
+          <Sparkles className="absolute -top-1 -right-8 h-3 w-3 text-indigo-300 animate-pulse" />
+        </div>
+        <div className="mt-1 text-indigo-100 font-serif text-base">NOITE</div>
+        <div className="text-indigo-200/70 text-[10px] text-center leading-tight">Lado oposto, no escuro</div>
       </div>
       <div className="col-span-2 text-center text-slate-400 text-xs">
         A Terra gira <span className="text-cyan-300 font-medium">24 horas</span> em torno do próprio eixo.
