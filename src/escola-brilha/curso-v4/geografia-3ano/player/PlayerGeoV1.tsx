@@ -2081,6 +2081,7 @@ function VoceLeSozinho({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [paginaAtual, setPaginaAtual] = useState(0);
   const [marcadas, setMarcadas] = useState<Record<string, Set<string>>>({});
   const [concluido, setConcluido] = useState(false);
@@ -2101,6 +2102,51 @@ function VoceLeSozinho({
     });
   };
 
+  const renderTextoTeen = () => {
+    let restante = paragrafo.texto;
+    const partes: Array<{ tipo: "texto" | "chave"; conteudo: string }> = [];
+    const chavesOrdenadas = [...paragrafo.chaves].sort((a, b) => b.length - a.length);
+    let seguranca = 0;
+    while (restante.length > 0 && seguranca < 200) {
+      seguranca++;
+      let posEncontrada = -1;
+      let chaveEncontrada = "";
+      for (const chave of chavesOrdenadas) {
+        const idx = restante.toLowerCase().indexOf(chave.toLowerCase());
+        if (idx !== -1 && (posEncontrada === -1 || idx < posEncontrada)) {
+          posEncontrada = idx;
+          chaveEncontrada = chave;
+        }
+      }
+      if (posEncontrada === -1) {
+        partes.push({ tipo: "texto", conteudo: restante });
+        break;
+      }
+      if (posEncontrada > 0) partes.push({ tipo: "texto", conteudo: restante.slice(0, posEncontrada) });
+      partes.push({ tipo: "chave", conteudo: restante.slice(posEncontrada, posEncontrada + chaveEncontrada.length) });
+      restante = restante.slice(posEncontrada + chaveEncontrada.length);
+    }
+    return partes.map((p, i) => {
+      if (p.tipo === "texto") return <span key={i}>{p.conteudo}</span>;
+      const chaveNorm = paragrafo.chaves.find((c) => c.toLowerCase() === p.conteudo.toLowerCase())!;
+      const ativa = marcadasDaPagina.has(chaveNorm);
+      return (
+        <button
+          key={i}
+          type="button"
+          onClick={() => marcarChave(chaveNorm)}
+          className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded font-semibold transition ${
+            ativa
+              ? "bg-cyan-500 text-slate-950"
+              : "bg-cyan-500/10 text-cyan-200 border border-cyan-500/25 hover:bg-cyan-500/20"
+          }`}
+        >
+          {p.conteudo}{ativa ? " ✓" : ""}
+        </button>
+      );
+    });
+  };
+
   const avancar = () => {
     if (paginaAtual + 1 < total) {
       setPaginaAtual(paginaAtual + 1);
@@ -2108,6 +2154,100 @@ function VoceLeSozinho({
       setConcluido(true);
     }
   };
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Leitura independente
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl p-5 bg-slate-950/80 border border-slate-700 shadow-2xl">
+          <div className="flex items-start justify-between gap-3 mb-4">
+            <div>
+              <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">
+                {stripDecorativeEmoji(cena.tituloLivro)}
+              </div>
+              {cena.subtitulo && <div className="text-slate-300 font-semibold text-sm mt-1">{stripDecorativeEmoji(cena.subtitulo)}</div>}
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono shrink-0">{paginaAtual + 1}/{total}</div>
+          </div>
+
+          <motion.div
+            key={paragrafo.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-slate-100 text-lg sm:text-xl leading-relaxed font-medium"
+          >
+            {renderTextoTeen()}
+          </motion.div>
+
+          <div className="mt-5 flex items-center gap-2 flex-wrap">
+            {paragrafo.chaves.map((c) => {
+              const ok = marcadasDaPagina.has(c);
+              return (
+                <span
+                  key={c}
+                  className={`text-[10px] font-mono uppercase tracking-wide px-2 py-1 rounded border ${
+                    ok
+                      ? "bg-cyan-500/15 text-cyan-200 border-cyan-500/40"
+                      : "bg-slate-900 text-slate-500 border-slate-700"
+                  }`}
+                >
+                  {ok ? "✓ " : "• "}{c}
+                </span>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 flex items-center justify-between gap-2">
+            <button
+              onClick={() => setPaginaAtual(Math.max(0, paginaAtual - 1))}
+              disabled={paginaAtual === 0}
+              className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs font-semibold disabled:opacity-30"
+            >
+              ← anterior
+            </button>
+            <div className="text-[10px] text-slate-500 font-mono text-center">
+              {todasMarcadasNaPagina ? "página validada" : "marque os termos-chave"}
+            </div>
+            <button
+              onClick={avancar}
+              disabled={!todasMarcadasNaPagina || concluido}
+              className={`px-3 py-2 rounded-lg text-xs font-semibold transition ${
+                todasMarcadasNaPagina && !concluido
+                  ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                  : "bg-slate-900 text-slate-600 border border-slate-700 cursor-not-allowed"
+              }`}
+            >
+              {paginaAtual + 1 === total ? "finalizar ✓" : "próxima →"}
+            </button>
+          </div>
+        </div>
+
+        {concluido && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            concluido
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar →" : "Conclua a leitura"}
+        </button>
+      </div>
+    );
+  }
 
   // renderiza o texto do parágrafo com as palavras-chave viradas em botões
   const renderTexto = () => {
