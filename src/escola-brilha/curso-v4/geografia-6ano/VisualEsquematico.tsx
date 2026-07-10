@@ -1,0 +1,210 @@
+/**
+ * Componente visual central dinâmico para o PlayerGeoV2.
+ * Renderiza esquemas didáticos em abas conforme o `tipo` do roteiro visual.
+ * Fallback: card ilustrativo genérico com ícone + descrição.
+ */
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sun, Moon, Orbit, Compass, Sparkles, Snowflake, Flame } from "lucide-react";
+import type { RoteiroVisual } from "./dados-fund2";
+
+export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
+  if (roteiro.tipo === "terra-orbita") return <TerraOrbita legenda={roteiro.legenda} />;
+  return <Generico roteiro={roteiro} />;
+}
+
+/* ============================================================
+   ESQUEMA: TERRA EM ÓRBITA (Rotação · Translação · Inclinação)
+   ============================================================ */
+
+type AbaTerra = "rotacao" | "translacao" | "inclinacao";
+
+function TerraOrbita({ legenda }: { legenda: string }) {
+  const [aba, setAba] = useState<AbaTerra>("rotacao");
+
+  const abas: Array<{ id: AbaTerra; rotulo: string; Icon: typeof Sun }> = [
+    { id: "rotacao", rotulo: "Rotação", Icon: Orbit },
+    { id: "translacao", rotulo: "Translação", Icon: Sun },
+    { id: "inclinacao", rotulo: "Inclinação", Icon: Compass },
+  ];
+
+  return (
+    <div className="space-y-3">
+      {/* Abas */}
+      <div className="flex gap-1 rounded-lg border border-slate-700 bg-slate-950/60 p-1">
+        {abas.map((a) => {
+          const ativa = aba === a.id;
+          return (
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => setAba(a.id)}
+              className={[
+                "flex-1 flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-xs font-medium transition",
+                ativa
+                  ? "bg-cyan-500 text-slate-950"
+                  : "text-slate-400 hover:text-cyan-300 hover:bg-slate-900",
+              ].join(" ")}
+            >
+              <a.Icon className="h-3.5 w-3.5" />
+              <span>{a.rotulo}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Palco visual */}
+      <div className="relative rounded-xl border border-cyan-500/30 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-6 overflow-hidden min-h-[280px]">
+        <AnimatePresence mode="wait">
+          {aba === "rotacao" && <PalcoRotacao key="rot" />}
+          {aba === "translacao" && <PalcoTranslacao key="tra" />}
+          {aba === "inclinacao" && <PalcoInclinacao key="inc" />}
+        </AnimatePresence>
+      </div>
+
+      {/* Legenda didática */}
+      <div className="rounded-lg border-l-2 border-cyan-400 bg-cyan-500/5 px-3 py-2">
+        <div className="text-[10px] uppercase tracking-widest text-cyan-400 mb-0.5">Legenda</div>
+        <p className="text-slate-300 text-xs leading-relaxed italic">{legenda}</p>
+      </div>
+    </div>
+  );
+}
+
+/* --- Palco 1: Rotação (Dia × Noite) --- */
+function PalcoRotacao() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="grid grid-cols-2 gap-3 h-full"
+    >
+      {/* Dia */}
+      <div className="relative rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-400/30 p-4 flex flex-col items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <Sun className="h-12 w-12 text-amber-300" strokeWidth={1.5} />
+        </motion.div>
+        <div className="mt-3 text-amber-200 font-serif text-lg">DIA</div>
+        <div className="text-amber-100/70 text-[11px] text-center mt-1">Lado da Terra virado para o Sol</div>
+      </div>
+      {/* Noite */}
+      <div className="relative rounded-lg bg-gradient-to-br from-indigo-900/60 to-slate-900 border border-indigo-400/30 p-4 flex flex-col items-center justify-center">
+        <div className="relative">
+          <Moon className="h-12 w-12 text-indigo-200" strokeWidth={1.5} />
+          <Sparkles className="absolute -top-1 -right-2 h-3 w-3 text-indigo-300 animate-pulse" />
+        </div>
+        <div className="mt-3 text-indigo-100 font-serif text-lg">NOITE</div>
+        <div className="text-indigo-200/70 text-[11px] text-center mt-1">Lado oposto, no escuro</div>
+      </div>
+      <div className="col-span-2 text-center text-slate-400 text-xs">
+        A Terra gira <span className="text-cyan-300 font-medium">24 horas</span> em torno do próprio eixo.
+      </div>
+    </motion.div>
+  );
+}
+
+/* --- Palco 2: Translação (Terra ao redor do Sol) --- */
+function PalcoTranslacao() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative h-[240px] flex items-center justify-center"
+    >
+      {/* Órbita elíptica */}
+      <div className="absolute inset-x-6 inset-y-8 rounded-[50%] border-2 border-dashed border-cyan-500/40" />
+
+      {/* Sol no centro */}
+      <motion.div
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 3, repeat: Infinity }}
+        className="relative z-10"
+      >
+        <div className="absolute inset-0 rounded-full bg-amber-400/40 blur-2xl scale-150" />
+        <Sun className="h-16 w-16 text-amber-300 relative" strokeWidth={1.5} />
+      </motion.div>
+
+      {/* Terra orbitando */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-x-6 inset-y-8"
+      >
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 h-6 w-6 border-2 border-cyan-200 shadow-lg shadow-cyan-500/50" />
+        </div>
+      </motion.div>
+
+      <div className="absolute bottom-0 inset-x-0 text-center text-slate-400 text-xs">
+        Uma volta completa = <span className="text-cyan-300 font-medium">365 dias e 6h</span> = 1 ano
+      </div>
+    </motion.div>
+  );
+}
+
+/* --- Palco 3: Inclinação (Verão × Inverno) --- */
+function PalcoInclinacao() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="grid grid-cols-2 gap-3"
+    >
+      {/* Verão HS */}
+      <div className="rounded-lg bg-gradient-to-br from-rose-500/15 to-amber-500/10 border border-rose-400/30 p-4 flex flex-col items-center">
+        <Flame className="h-10 w-10 text-rose-300" strokeWidth={1.5} />
+        <div className="mt-2 text-rose-200 font-serif">Verão (HS)</div>
+        <div className="text-rose-100/70 text-[11px] text-center mt-1">
+          Raios do Sol batem mais direto no Hemisfério Sul
+        </div>
+        <div className="mt-2 font-mono text-[10px] text-rose-300">DEZ · JAN · FEV</div>
+      </div>
+      {/* Inverno HS */}
+      <div className="rounded-lg bg-gradient-to-br from-sky-500/15 to-indigo-500/10 border border-sky-400/30 p-4 flex flex-col items-center">
+        <Snowflake className="h-10 w-10 text-sky-200" strokeWidth={1.5} />
+        <div className="mt-2 text-sky-100 font-serif">Inverno (HS)</div>
+        <div className="text-sky-100/70 text-[11px] text-center mt-1">
+          Raios chegam inclinados, aquecem menos
+        </div>
+        <div className="mt-2 font-mono text-[10px] text-sky-300">JUN · JUL · AGO</div>
+      </div>
+      {/* Eixo inclinado */}
+      <div className="col-span-2 rounded-lg bg-slate-950/60 border border-slate-700 px-3 py-2 flex items-center gap-3">
+        <div className="relative h-10 w-10 flex-shrink-0">
+          <div className="absolute inset-0 rounded-full bg-blue-500/80" />
+          <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-400 origin-center -translate-x-1/2 rotate-[23deg]" />
+        </div>
+        <div className="text-slate-300 text-xs">
+          O eixo inclinado <span className="text-red-300 font-mono">23°27'</span> muda qual hemisfério recebe mais luz em cada época do ano.
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ============================================================
+   FALLBACK GENÉRICO
+   ============================================================ */
+
+function Generico({ roteiro }: { roteiro: RoteiroVisual }) {
+  return (
+    <div className="rounded-xl border border-cyan-500/30 bg-gradient-to-br from-slate-950 to-slate-900 p-5 space-y-3">
+      <div className="flex items-center gap-2">
+        <Sparkles className="h-4 w-4 text-cyan-300" />
+        <div className="text-[11px] uppercase tracking-widest text-cyan-400">{roteiro.foco}</div>
+      </div>
+      <p className="text-slate-200 text-sm leading-relaxed">{roteiro.descricao}</p>
+      <div className="rounded-lg border-l-2 border-cyan-400 bg-cyan-500/5 px-3 py-2">
+        <div className="text-[10px] uppercase tracking-widest text-cyan-400 mb-0.5">Legenda</div>
+        <p className="text-slate-300 text-xs leading-relaxed italic">{roteiro.legenda}</p>
+      </div>
+    </div>
+  );
+}
