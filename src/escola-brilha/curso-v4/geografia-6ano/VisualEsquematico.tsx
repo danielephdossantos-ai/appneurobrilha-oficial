@@ -14,6 +14,18 @@ export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
   return <Generico roteiro={roteiro} />;
 }
 
+/** Mini animação embutida em cada etapa do passo a passo. */
+export function MiniPalco({ tipo }: { tipo: "rotacao" | "translacao" | "inclinacao" }) {
+  return (
+    <div className="relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden h-[180px]">
+      {tipo === "rotacao" && <PalcoRotacao />}
+      {tipo === "translacao" && <PalcoTranslacao />}
+      {tipo === "inclinacao" && <PalcoInclinacao />}
+    </div>
+  );
+}
+
+
 /* ============================================================
    ESQUEMA: TERRA EM ÓRBITA (Rotação · Translação · Inclinação)
    ============================================================ */

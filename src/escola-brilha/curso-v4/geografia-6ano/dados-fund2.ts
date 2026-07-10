@@ -4,7 +4,15 @@
  * Zero mascotes. Consumido pelo PlayerGeoV2 (Dashboard Científico).
  */
 
-export type EtapaTeorica = { titulo: string; texto: string };
+export type EtapaTeorica = {
+  titulo: string;
+  texto: string;
+  /** Chave da mini animação embutida no card do passo. */
+  visual?: "rotacao" | "translacao" | "inclinacao";
+  /** Exemplo real do dia-a-dia que materializa o conceito. */
+  exemplo_real?: string;
+};
+
 export type RoteiroVisual = {
   foco: string;
   descricao: string;
@@ -56,18 +64,28 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
           titulo: "Movimento de Rotação — o giro do pião",
           texto:
             "A Terra gira em torno de si mesma como um pião. Esse giro demora cerca de 24 horas: enquanto um lado está de frente para o Sol (Dia), o outro está no escuro (Noite). Esse movimento também cria uma força invisível chamada Efeito de Coriolis, que desvia correntes de ar e ventos.",
+          visual: "rotacao",
+          exemplo_real:
+            "Quando é meio-dia em Brasília (Brasil), em Tóquio (Japão) é meia-noite — Tóquio está no lado escuro da Terra. Por isso pessoas do outro lado do mundo trocam dia por noite: quando aqui amanhece, lá está anoitecendo.",
         },
         {
           titulo: "Movimento de Translação — a grande viagem",
           texto:
             "Ao mesmo tempo em que gira sobre si, a Terra viaja ao redor do Sol. Essa viagem demora 365 dias e 6 horas — é o que chamamos de um ano.",
+          visual: "translacao",
+          exemplo_real:
+            "Aquelas 6 horas extras se acumulam: a cada 4 anos elas somam 24 horas = 1 dia inteiro. Por isso existe o ano bissexto (2020, 2024, 2028…), em que fevereiro ganha o dia 29 pra encaixar a viagem certinha.",
         },
         {
           titulo: "Inclinação do Eixo — o segredo das estações",
           texto:
             "O planeta não gira 'em pé': o eixo é inclinado em 23°27'. Por causa disso, enquanto a Terra viaja ao redor do Sol, um hemisfério recebe mais luz e calor diretamente do que o outro — e é isso que dá origem às quatro estações do ano.",
+          visual: "inclinacao",
+          exemplo_real:
+            "Quando é Natal (dezembro) no Brasil, é verão — praia, calor, dias longos. No mesmo Natal em Nova York é inverno — neve, frio, dias curtos. A festa é a mesma, mas a estação é oposta por causa da inclinação da Terra.",
         },
       ],
+
       roteiro_visual_interativo: {
         foco: "Simulador da Terra em órbita",
         descricao:
