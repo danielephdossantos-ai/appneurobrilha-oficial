@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useAppState } from "@/core/store";
 import { UNIDADES_6ANO } from "@/escola-brilha/curso-v4/geografia-6ano/dados-fund2";
 import { UNIDADES_7ANO } from "@/escola-brilha/curso-v4/geografia-7ano/dados-fund2";
+import { UNIDADES_8ANO } from "@/escola-brilha/curso-v4/geografia-8ano/dados-fund2";
+
 
 import { CertificadoFund2 } from "@/escola-brilha/curso-v4/geografia-6ano/CertificadoFund2";
 
@@ -35,8 +37,10 @@ const DISC_LABEL: Record<string, string> = {
 function playerRoute(serie: string, disc: string): string | null {
   if (serie === "6ano" && disc === "geografia") return "/escola-brilha/geo-6ano/$unidade";
   if (serie === "7ano" && disc === "geografia") return "/escola-brilha/geo-7ano/$unidade";
+  if (serie === "8ano" && disc === "geografia") return "/escola-brilha/geo-8ano/$unidade";
   return null;
 }
+
 
 /** Dataset de unidades para cada (serie, disc). */
 function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
@@ -56,6 +60,15 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       concluidaKey: `fund2:7ano:geografia:${u.slug}`,
     }));
   }
+  if (serie === "8ano" && disc === "geografia") {
+    return UNIDADES_8ANO.map((u) => ({
+      slug: u.slug,
+      titulo: u.titulo,
+      habilidade: u.habilidade,
+      concluidaKey: `fund2:8ano:geografia:${u.slug}`,
+    }));
+  }
+
   return [];
 }
 
