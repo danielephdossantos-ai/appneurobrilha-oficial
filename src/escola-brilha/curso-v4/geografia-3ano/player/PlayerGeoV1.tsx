@@ -758,6 +758,74 @@ function NarrarMapa({
     };
   }, []);
 
+  const teen = useTeen();
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-2xl border-l-2 border-cyan-400/70 bg-slate-900/70 px-4 py-3">
+          <div className="text-cyan-300/80 text-[10px] uppercase tracking-[0.2em] font-mono mb-1">
+            {aurora.nome}
+          </div>
+          <div className="text-sm text-slate-100 leading-snug">{cena.aurora}</div>
+        </div>
+
+        <div className="text-[11px] uppercase tracking-[0.2em] font-mono text-cyan-300/70">
+          {cena.instrucao}
+        </div>
+
+        <div className="space-y-2">
+          {cena.pontos.map((p) => {
+            const visto = !!visitados[p.id];
+            const isAtivo = ativo === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+                className={`w-full text-left rounded-lg bg-slate-900/60 px-4 py-3 border-l-2 transition ${
+                  isAtivo
+                    ? "border-cyan-300"
+                    : visto
+                    ? "border-slate-500"
+                    : "border-slate-700 hover:border-slate-500"
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-[0.2em] font-mono text-cyan-300/70 mb-1">
+                  {visto ? "LIDO" : "TOCAR PARA OUVIR"}
+                </div>
+                <div className="text-sm font-bold text-slate-100 mb-1">
+                  {p.titulo}
+                </div>
+                {isAtivo && (
+                  <p className="text-sm text-slate-300 leading-snug mt-2">
+                    {p.texto}
+                  </p>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="text-[11px] font-mono text-slate-400">
+          {visitadosCount} / {total}
+        </div>
+
+        <button
+          onClick={onProxima}
+          disabled={!todosVistos}
+          className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-[0.15em] font-mono transition ${
+            todosVistos
+              ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+              : "bg-slate-800 text-slate-600 cursor-not-allowed"
+          }`}
+        >
+          {todosVistos ? "Continuar" : "Ouça todas as posições"}
+        </button>
+      </div>
+    );
+  }
+
+
+
   return (
     <div className="space-y-5">
       <div className="flex items-start gap-3">
