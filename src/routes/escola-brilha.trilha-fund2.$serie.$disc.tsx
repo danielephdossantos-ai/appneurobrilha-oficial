@@ -70,6 +70,14 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       concluidaKey: `fund2:8ano:geografia:${u.slug}`,
     }));
   }
+  if (serie === "9ano" && disc === "geografia") {
+    return UNIDADES_9ANO.map((u) => ({
+      slug: u.slug,
+      titulo: u.titulo,
+      habilidade: u.habilidade,
+      concluidaKey: `fund2:9ano:geografia:${u.slug}`,
+    }));
+  }
 
   return [];
 }
