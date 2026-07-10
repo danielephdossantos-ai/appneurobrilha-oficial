@@ -7,7 +7,7 @@ export const unidade1: UnidadeGeoV1 = {
   titulo: "A Terra no Espaço",
   subtitulo: "Rotação, Translação e Inclinação",
   descricao:
-    "Piloto do 6º Ano no formato visual do 5º Ano. Brilha e Aurora investigam os três movimentos da Terra e por que existem dia, noite e estações do ano.",
+    "Brilha e Aurora investigam os três movimentos da Terra e por que existem dia, noite e estações do ano.",
   corTema: "#0ea5e9",
   aulas: [aula01],
 };
