@@ -1316,6 +1316,19 @@ function QuizRadar({
               </div>
             </motion.div>
 
+            {p.fotoUrl && (
+              <motion.img
+                key={`${p.id}-foto`}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                src={p.fotoUrl}
+                alt=""
+                loading="lazy"
+                className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700 shadow-lg"
+              />
+            )}
+
+
             <div className="grid grid-cols-1 gap-2">
               {p.cards.map((c, cardIndex) => {
                 const escolhido = escolha === c.id;
