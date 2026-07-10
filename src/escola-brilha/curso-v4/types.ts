@@ -752,6 +752,7 @@ export type CenaGeoV1 =
         texto: string;                   // parágrafo curto, letras grandes
         /** Palavras-chave desse parágrafo que a criança precisa marcar ao ler. */
         chaves: string[];
+        fotoUrl?: string;                // opcional: imagem de apoio ao parágrafo
       }>;
       falaFinal: string;                 // fecha depois de "Li tudo"
     }
