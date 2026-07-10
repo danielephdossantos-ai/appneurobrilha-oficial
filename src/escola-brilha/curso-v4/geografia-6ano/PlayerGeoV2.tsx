@@ -603,6 +603,24 @@ function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
                 <p className="text-emerald-50/90 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
               </div>
             )}
+            {etapa.exemplos_extras && etapa.exemplos_extras.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-[10px] uppercase tracking-widest text-slate-500 pl-1">
+                  Mais casos reais
+                </div>
+                {etapa.exemplos_extras.map((ex, i) => (
+                  <div
+                    key={i}
+                    className="rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 flex gap-2.5"
+                  >
+                    <span className="text-emerald-400 font-mono text-xs mt-0.5">
+                      {String(i + 2).padStart(2, "0")}
+                    </span>
+                    <p className="text-slate-300 text-[12.5px] leading-relaxed flex-1">{ex}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           {/* Coluna visual */}
           <div className="flex items-stretch">
