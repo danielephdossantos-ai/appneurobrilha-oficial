@@ -4,6 +4,7 @@ import { useAppState } from "@/core/store";
 import { UNIDADES_6ANO } from "@/escola-brilha/curso-v4/geografia-6ano/dados-fund2";
 import { UNIDADES_7ANO } from "@/escola-brilha/curso-v4/geografia-7ano/dados-fund2";
 import { UNIDADES_8ANO } from "@/escola-brilha/curso-v4/geografia-8ano/dados-fund2";
+import { UNIDADES_9ANO } from "@/escola-brilha/curso-v4/geografia-9ano/dados-fund2";
 
 
 import { CertificadoFund2 } from "@/escola-brilha/curso-v4/geografia-6ano/CertificadoFund2";
@@ -38,6 +39,7 @@ function playerRoute(serie: string, disc: string): string | null {
   if (serie === "6ano" && disc === "geografia") return "/escola-brilha/geo-6ano/$unidade";
   if (serie === "7ano" && disc === "geografia") return "/escola-brilha/geo-7ano/$unidade";
   if (serie === "8ano" && disc === "geografia") return "/escola-brilha/geo-8ano/$unidade";
+  if (serie === "9ano" && disc === "geografia") return "/escola-brilha/geo-9ano/$unidade";
   return null;
 }
 
