@@ -2665,6 +2665,30 @@ const REGIAO_ROTULO: Record<EstadoBr["regiao"], string> = {
   sul: "Sul",
 };
 
+// Centroide aproximado do path (média do bbox das coordenadas do "d")
+const centroidCache = new Map<string, { x: number; y: number; w: number }>();
+function centroidDoPath(d: string): { x: number; y: number; w: number } {
+  const cached = centroidCache.get(d);
+  if (cached) return cached;
+  const nums = d.match(/-?\d+(?:\.\d+)?/g);
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  if (nums) {
+    for (let i = 0; i + 1 < nums.length; i += 2) {
+      const x = parseFloat(nums[i]);
+      const y = parseFloat(nums[i + 1]);
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+  const result = { x: (minX + maxX) / 2, y: (minY + maxY) / 2, w: maxX - minX };
+  centroidCache.set(d, result);
+  return result;
+}
+
+
+
 function MapaBrasilInterativo({
   cena,
   onProxima,
