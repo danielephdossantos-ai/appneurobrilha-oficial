@@ -1869,14 +1869,24 @@ function LinhaEstrada({
                   }`}>
                     {preenchido ? "✓" : String(i + 1).padStart(2, "0")}
                   </div>
-                  <div className={`flex-1 rounded-lg border p-3 ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
+                  <div className={`flex-1 rounded-lg border overflow-hidden ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
                     {preenchido ? (
                       <>
-                        <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
-                        <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                        {p.fotoUrl && (
+                          <img
+                            src={p.fotoUrl}
+                            alt={p.rotulo}
+                            loading="lazy"
+                            className="w-full aspect-[16/9] object-cover border-b border-cyan-500/20"
+                          />
+                        )}
+                        <div className="p-3">
+                          <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
+                          <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                        </div>
                       </>
                     ) : (
-                      <div className="text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
+                      <div className="p-3 text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
                     )}
                   </div>
                 </div>
