@@ -1495,14 +1495,18 @@ function ConstrutorMarcos({
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  const tentarSoltar = (pecaId: string, info: { point: { x: number; y: number } }) => {
+  const tentarSoltar = (
+    pecaId: string,
+    e: MouseEvent | TouchEvent | PointerEvent,
+    info: { point: { x: number; y: number } },
+  ) => {
     if (travada || !slotRef.current) return false;
     const r = slotRef.current.getBoundingClientRect();
+    const { x, y } = getPointerXY(e, info);
+    const margem = 24;
     const dentro =
-      info.point.x >= r.left &&
-      info.point.x <= r.right &&
-      info.point.y >= r.top &&
-      info.point.y <= r.bottom;
+      x >= r.left - margem && x <= r.right + margem &&
+      y >= r.top - margem && y <= r.bottom + margem;
     if (!dentro) return false;
 
     setPecaSolta(pecaId);
