@@ -122,8 +122,8 @@ export const aula01: AulaGeoV1 = {
 
   cena04_leituraGuiada: {
     tipo: "narrarMapa",
-    aurora: "Este é o infográfico da órbita real da Terra. Toque em cada balão pra ouvir o que acontece em cada posição do ano.",
-    instrucao: "Toque em cada balão pra ouvir",
+    aurora: "Cada infográfico mostra uma posição real da Terra na órbita. Toque em um pra ouvir o que acontece naquela data.",
+    instrucao: "Toque em cada infográfico pra ouvir",
     mapaUrl: translacaoOrbita,
     pontos: [
       {
@@ -135,7 +135,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "21 de Junho — Solstício de Verão (Norte)",
         texto:
           "Polo Norte inclinado 23,5° PRO Sol. Verão no hemisfério norte: EUA, Europa, Japão vivem os dias mais LONGOS do ano (em Estocolmo, o Sol fica no céu por mais de 18 horas). Aqui no Brasil? INVERNO — dias curtos, noites longas, temperaturas mais baixas no Sul.",
-        fotoUrl: rotacaoDiaNoite,
+        fotoUrl: orbitaJun,
       },
       {
         id: "equinocio-set",
@@ -146,6 +146,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "22–23 de Setembro — Equinócio",
         texto:
           "Nenhum hemisfério inclinado pro Sol. Dia e noite duram IGUAL (12h + 12h) no planeta INTEIRO — inclusive no Equador. Começa a primavera no hemisfério SUL, outono no NORTE. Curiosidade: 'equinócio' vem do latim 'aequi-nox' = noite igual.",
+        fotoUrl: orbitaSet,
       },
       {
         id: "solsticio-dez",
@@ -156,7 +157,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "21–22 de Dezembro — Solstício de Verão (Sul)",
         texto:
           "Polo SUL inclinado pro Sol. VERÃO no Brasil, Austrália, África do Sul, Argentina. Natal na praia. Dia mais longo do ano no hemisfério sul. Detalhe curioso: nesta data a Terra está no PERIÉLIO (mais perto do Sol, 147 milhões de km) — o oposto do que a intuição diz sobre 'perto = mais quente'.",
-        fotoUrl: quatroEstacoes,
+        fotoUrl: orbitaDez,
       },
       {
         id: "equinocio-mar",
@@ -167,6 +168,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "20–21 de Março — Equinócio",
         texto:
           "De novo dia = noite no planeta inteiro. Começa o outono no sul, primavera no norte. A Terra completou 3/4 da volta desde junho. É por causa desses equinócios que existem apenas 2 dias no ano em que o Sol nasce EXATAMENTE no leste em todo lugar do mundo.",
+        fotoUrl: orbitaMar,
       },
     ],
     falaFinal: "4 posições na órbita = 4 estações. O responsável é a INCLINAÇÃO, não a distância.",
