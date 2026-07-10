@@ -1,6 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
 import commod from "@/assets/geografia-7ano/commodities-agricolas.jpg";
-import navio from "@/assets/geografia-7ano/navio-container-export.jpg";
+import navio from "@/assets/geografia-7ano/porto-container-brasil.jpg";
 import brics from "@/assets/geografia-7ano/brics-cupula.jpg";
 import comercio from "@/assets/geografia-7ano/comercio-global-brasil.jpg";
 
