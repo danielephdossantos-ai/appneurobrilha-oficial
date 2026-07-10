@@ -703,12 +703,10 @@ function QuizRadar({
         </div>
       </div>
 
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        📡 {cena.instrucao}
-      </div>
+      <div className="text-white/70 text-sm text-center">{cena.instrucao}</div>
 
-      <div className="flex items-center justify-between text-xs text-white/70 px-1">
-        <span className="uppercase tracking-widest text-emerald-300/80 font-bold">
+      <div className="flex items-center justify-between text-xs text-white/60 px-1">
+        <span className="uppercase tracking-widest font-bold">
           Pergunta {idx + 1} / {total}
         </span>
         <span>✓ {acertos}</span>
@@ -716,24 +714,23 @@ function QuizRadar({
 
       {!finalizado && p && (
         <>
-          {/* PERGUNTA em destaque (escrita + botão pra ouvir de novo) */}
+          {/* Pergunta — sóbria, só texto */}
           <motion.div
             key={p.id}
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 shadow-xl"
+            className="border-b border-white/15 pb-4"
           >
             <div className="flex items-start gap-3">
-              <div className="text-3xl shrink-0">❓</div>
-              <div className="flex-1 text-white font-black text-lg sm:text-xl leading-snug">
+              <div className="flex-1 text-white font-semibold text-lg leading-snug">
                 {p.pergunta}
               </div>
               <button
                 onClick={() => falar(p.pergunta)}
-                className="shrink-0 bg-white/15 hover:bg-white/25 border border-white/25 rounded-full px-3 py-1.5 text-xs font-bold flex items-center gap-1"
+                className="shrink-0 text-white/60 hover:text-white text-xs underline underline-offset-2"
                 aria-label="Ouvir a pergunta"
               >
-                🔊 ouvir
+                ouvir
               </button>
             </div>
           </motion.div>
@@ -741,100 +738,47 @@ function QuizRadar({
           {p.fotoUrl && (
             <motion.img
               key={`${p.id}-foto`}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               src={p.fotoUrl}
               alt=""
               loading="lazy"
-              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-emerald-400/30 shadow-xl"
+              className="w-full aspect-[16/9] object-cover rounded-xl"
             />
           )}
 
-          {/* Radar */}
-          <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
-            {/* anéis */}
-            {[0.33, 0.66, 1].map((r, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full border border-emerald-400/25"
-                style={{
-                  left: `${50 - 50 * r}%`,
-                  top: `${50 - 50 * r}%`,
-                  width: `${100 * r}%`,
-                  height: `${100 * r}%`,
-                }}
-              />
-            ))}
-            {/* cruz */}
-            <div className="absolute inset-0">
-              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-400/20" />
-              <div className="absolute top-1/2 left-0 right-0 h-px bg-emerald-400/20" />
-            </div>
-            {/* ponteiro */}
-            <motion.div
-              className="absolute left-1/2 top-1/2 origin-top-left"
-              style={{
-                width: "50%",
-                height: 2,
-                background:
-                  "linear-gradient(90deg, rgba(52,211,153,1) 0%, rgba(52,211,153,0) 100%)",
-                transformOrigin: "0% 50%",
-              }}
-              animate={{
-                rotate:
-                  anguloAtual !== null
-                    ? revelado
-                      ? anguloAtual - 90
-                      : [0, 360, 720, anguloAtual - 90]
-                    : [0, 360],
-              }}
-              transition={{
-                duration: anguloAtual !== null && !revelado ? 0.9 : 2.5,
-                ease: anguloAtual !== null && !revelado ? "easeOut" : "linear",
-                repeat: anguloAtual === null ? Infinity : 0,
-              }}
-            />
-            {/* centro */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
-          </div>
-
-
-          {/* Cards de resposta */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Opções — lista vertical, texto puro */}
+          <ul className="divide-y divide-white/10 border border-white/10 rounded-2xl overflow-hidden">
             {p.cards.map((c) => {
               const escolhido = escolha === c.id;
               const certoRevelado = revelado && c.id === p.correta;
               const erradoRevelado = revelado && escolhido && c.id !== p.correta;
               return (
-                <motion.button
-                  key={c.id}
-                  onClick={() => escolher(c.id)}
-                  disabled={revelado}
-                  whileTap={{ scale: revelado ? 1 : 0.96 }}
-                  className={`relative rounded-2xl p-4 border-2 bg-gradient-to-br ${c.cor} ${
-                    escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
-                  } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
-                    erradoRevelado ? "opacity-60" : ""
-                  }`}
-                >
-                  <div className="text-4xl mb-1">{c.emoji}</div>
-                  <div className="text-white font-black text-base leading-tight">
-                    {c.titulo}
-                  </div>
-                  {certoRevelado && (
-                    <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
-                      ✓
-                    </div>
-                  )}
-                  {erradoRevelado && (
-                    <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
-                      ✕
-                    </div>
-                  )}
-                </motion.button>
+                <li key={c.id}>
+                  <button
+                    onClick={() => escolher(c.id)}
+                    disabled={revelado}
+                    className={`w-full text-left px-4 py-4 transition flex items-center gap-3 ${
+                      revelado ? "cursor-default" : "hover:bg-white/5"
+                    } ${escolhido && !revelado ? "bg-white/10" : ""} ${
+                      certoRevelado ? "bg-emerald-500/10" : ""
+                    } ${erradoRevelado ? "opacity-60" : ""}`}
+                  >
+                    <span className="flex-1 text-white text-[15px] leading-snug">
+                      {c.titulo}
+                    </span>
+                    {certoRevelado && (
+                      <span className="text-emerald-300 text-sm shrink-0">✓</span>
+                    )}
+                    {erradoRevelado && (
+                      <span className="text-rose-300 text-sm shrink-0">✕</span>
+                    )}
+                  </button>
+                </li>
               );
             })}
-          </div>
+          </ul>
+
 
           {revelado && (
             <motion.div
@@ -879,7 +823,8 @@ function QuizRadar({
               ? idx + 1 < total
                 ? "Próxima pergunta →"
                 : "Ver resultado"
-              : "📡 Escolha um card pra ativar o radar"}
+              : "Escolha uma resposta"}
+
           </button>
         </>
       )}
