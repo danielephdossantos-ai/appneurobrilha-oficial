@@ -3231,6 +3231,7 @@ function SeloAtlas({
   ultima?: boolean;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const falar = (texto: string) => {
     try {
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -3278,6 +3279,40 @@ function SeloAtlas({
         setConquistado(true);
       }
     }, 2200);
+  }
+
+  if (teen && conquistado) {
+    return (
+      <div className="space-y-5 text-center py-4">
+        <div className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-mono">
+          Avaliação concluída
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mx-auto w-full max-w-sm rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6"
+        >
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-3">Insígnia</div>
+          <h2 className="text-2xl font-black text-white">{stripDecorativeEmoji(cena.selo.nome)}</h2>
+          <p className="text-sm text-slate-400 mt-1">{stripDecorativeEmoji(cena.selo.subtitulo)}</p>
+          <div className="mt-4 inline-flex items-center rounded-md border border-cyan-500/30 bg-cyan-500/10 px-3 py-2 text-cyan-200 font-mono text-sm">
+            Acertos {acertos}/{total}
+          </div>
+        </motion.div>
+
+        <div className="bg-slate-900/70 border border-slate-700 rounded-lg p-4 text-sm text-slate-200 leading-relaxed text-left">
+          {stripDecorativeEmoji(cena.falaFinal)}
+        </div>
+
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          {ultima ? "Concluir aula e guardar no Atlas" : "Continuar →"}
+        </button>
+      </div>
+    );
   }
 
   if (conquistado) {
@@ -3328,6 +3363,86 @@ function SeloAtlas({
         >
           {ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
         </button>
+      </div>
+    );
+  }
+
+  if (teen) {
+    return (
+      <div className="space-y-4">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Avaliação final
+          </div>
+          <p className="text-sm text-slate-300 leading-relaxed">{stripDecorativeEmoji(cena.instrucao)}</p>
+        </div>
+
+        <div className="flex gap-1.5">
+          {cena.perguntas.map((_, i) => (
+            <div
+              key={i}
+              className={`h-2 flex-1 rounded-full transition ${
+                i < idx ? "bg-cyan-400" : i === idx ? "bg-cyan-300/60" : "bg-slate-800"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="bg-slate-950/80 border border-slate-700 rounded-xl p-5 space-y-4">
+          <div className="text-xs text-cyan-300/80 font-mono uppercase tracking-widest">
+            Pergunta {idx + 1}/{total}
+          </div>
+          <button
+            onClick={() => falar(atual.pergunta)}
+            className="w-full text-left text-lg font-semibold leading-snug hover:text-cyan-200 transition text-white"
+          >
+            {stripDecorativeEmoji(atual.pergunta)}
+          </button>
+
+          <div className="grid gap-2">
+            {atual.opcoes.map((o, optionIndex) => {
+              const escolhida = respostas[atual.id] === o.id;
+              const revelada = !!respostas[atual.id];
+              const estaCerta = !!o.correta;
+              return (
+                <button
+                  key={o.id}
+                  onClick={() => escolher(o.id)}
+                  disabled={revelada}
+                  className={`w-full text-left px-4 py-3 rounded-lg border font-semibold text-sm transition flex items-center gap-3 ${
+                    revelada
+                      ? estaCerta
+                        ? "bg-emerald-950/35 border-emerald-400 text-emerald-100"
+                        : escolhida
+                        ? "bg-rose-950/35 border-rose-400 text-rose-100"
+                        : "bg-slate-900/50 border-slate-800 text-slate-500"
+                      : "bg-slate-900 border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 text-slate-100"
+                  }`}
+                >
+                  <span className="w-7 h-7 rounded-md bg-slate-950 border border-slate-700 grid place-items-center text-[11px] font-mono text-cyan-300 shrink-0">
+                    {String.fromCharCode(65 + optionIndex)}
+                  </span>
+                  <span className="flex-1">{stripDecorativeEmoji(o.texto)}</span>
+                  {revelada && estaCerta ? <span className="text-emerald-300">✓</span> : revelada && escolhida ? <span className="text-rose-300">✕</span> : null}
+                </button>
+              );
+            })}
+          </div>
+
+          {feedback && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`rounded-lg p-3 text-sm border-l-2 leading-relaxed ${
+                feedback.ok
+                  ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                  : "bg-rose-950/35 border-rose-500 text-rose-100"
+              }`}
+            >
+              {stripDecorativeEmoji(feedback.texto)}
+            </motion.div>
+          )}
+        </div>
       </div>
     );
   }
