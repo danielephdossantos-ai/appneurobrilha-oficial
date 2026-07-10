@@ -20,13 +20,15 @@ export const aula01: AulaGeoV1 = {
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
-    instrucao: "Olhe a Terra vista do espaço. Um lado no sol, outro no escuro.",
+    estilo: "teen",
+    instrucao: "Toque na imagem para começar.",
     mapaUrl: terraEspaco,
     imagemDestaqueUrl: terraEspaco,
     aurora:
       "Ei, explorador. Essa foto é REAL — Terra vista da Estação Espacial. Metade iluminada, metade no escuro. Isso não é coincidência: é a Terra girando enquanto viaja pelo espaço a 107 mil km/h. Três movimentos criam TUDO: dia, noite, verão, inverno.",
     falaFinal: "Rotação, Translação, Inclinação. Três palavras que explicam sua vida inteira.",
   },
+
 
   cena02_previsao: {
     tipo: "votoExplorador",
