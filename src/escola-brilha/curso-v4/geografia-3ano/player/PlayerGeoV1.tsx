@@ -2399,3 +2399,21 @@ function MapaBrasilInterativo({
   );
 }
 
+
+// Extrai coordenadas do ponteiro em espaço da viewport (compatível com getBoundingClientRect).
+// framer-motion pode entregar info.point em coords de página em alguns cenários;
+// o evento nativo (clientX/Y ou changedTouches) é sempre viewport.
+function getPointerXY(
+  e: MouseEvent | TouchEvent | PointerEvent,
+  info: { point: { x: number; y: number } },
+): { x: number; y: number } {
+  const anyE = e as any;
+  if (typeof anyE?.clientX === "number" && typeof anyE?.clientY === "number") {
+    return { x: anyE.clientX, y: anyE.clientY };
+  }
+  const t = anyE?.changedTouches?.[0] ?? anyE?.touches?.[0];
+  if (t && typeof t.clientX === "number") {
+    return { x: t.clientX, y: t.clientY };
+  }
+  return { x: info.point.x, y: info.point.y };
+}
