@@ -1787,6 +1787,7 @@ function LinhaEstrada({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const total = cena.ordemCerta.length;
   const [passo, setPasso] = useState(0);       // próxima posição a preencher
   const [colocados, setColocados] = useState<string[]>([]); // ids em ordem
@@ -1807,6 +1808,112 @@ function LinhaEstrada({
       setTimeout(() => setErro(null), 700);
     }
   };
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Sequência lógica
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5">
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Problema</div>
+          <div className="text-white font-semibold text-lg leading-snug">{stripDecorativeEmoji(cena.pergunta)}</div>
+        </div>
+
+        <div className="relative bg-slate-900/65 border border-slate-700 rounded-xl p-4">
+          <div className="absolute left-9 top-6 bottom-6 w-px bg-slate-700" />
+          <div
+            className="absolute left-9 top-6 w-px bg-cyan-400 transition-all duration-500"
+            style={{ height: `calc(${(passo / total) * 100}% - ${passo === total ? 12 : 0}px)`, maxHeight: "calc(100% - 12px)" }}
+          />
+          <div className="space-y-3 relative">
+            {cena.ordemCerta.map((id, i) => {
+              const preenchido = i < passo;
+              const ativo = i === passo;
+              const p = paradaPorId(id);
+              return (
+                <div key={i} className="flex items-start gap-3 min-h-[56px]">
+                  <div className={`w-10 h-10 rounded-md grid place-items-center text-xs font-mono shrink-0 border transition-all ${
+                    preenchido
+                      ? "bg-cyan-500/15 border-cyan-400 text-cyan-200"
+                      : ativo
+                      ? "bg-slate-950 border-cyan-500 text-cyan-300"
+                      : "bg-slate-950/60 border-slate-700 text-slate-500"
+                  }`}>
+                    {preenchido ? "✓" : String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className={`flex-1 rounded-lg border p-3 ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
+                    {preenchido ? (
+                      <>
+                        <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
+                        <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                      </>
+                    ) : (
+                      <div className="text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {cena.paradas.map((p) => {
+            const usado = colocados.includes(p.id);
+            const errando = erro === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => tentar(p.id)}
+                disabled={usado || concluido}
+                className={`rounded-lg p-3 border text-left transition-all ${
+                  usado
+                    ? "bg-cyan-500/10 border-cyan-500/30 text-slate-500"
+                    : errando
+                    ? "bg-rose-950/40 border-rose-500 text-rose-100"
+                    : "bg-slate-900/70 border-slate-700 text-slate-100 hover:border-slate-500"
+                }`}
+              >
+                <div className="text-[11px] uppercase tracking-widest text-cyan-300/70 font-mono mb-1">Item</div>
+                <div className="font-semibold text-xs leading-tight">{stripDecorativeEmoji(p.rotulo)}</div>
+              </button>
+            );
+          })}
+        </div>
+
+        {erro && (
+          <div className="bg-rose-950/35 border-l-2 border-rose-500 rounded-lg p-3 text-sm text-rose-100">
+            {stripDecorativeEmoji(cena.feedbackErro)}
+          </div>
+        )}
+
+        {concluido && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+            <div className="font-mono uppercase tracking-widest text-[10px] mb-2">Sequência validada</div>
+            <div>{stripDecorativeEmoji(cena.feedbackAcerto)}</div>
+            <div className="text-slate-300 mt-2">{stripDecorativeEmoji(cena.falaFinal)}</div>
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            concluido
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
