@@ -2846,10 +2846,30 @@ function MapaBrasilInterativo({
                       : undefined,
                   }}
                 />
+                {(() => {
+                  const c = centroidDoPath(uf.d);
+                  // Estados muito pequenos (DF, SE, AL, RJ, ES, PB, RN, PE) usam fonte menor
+                  const fs = c.w < 2.5 ? 0.55 : c.w < 4 ? 0.75 : 1.05;
+                  return (
+                    <text
+                      x={c.x}
+                      y={c.y}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize={fs}
+                      fontWeight={800}
+                      fill="#ffffff"
+                      stroke="rgba(0,0,0,0.65)"
+                      strokeWidth={fs * 0.12}
+                      paintOrder="stroke"
+                      style={{ pointerEvents: "none", letterSpacing: "0.02em" }}
+                    >
+                      {uf.sigla}
+                    </text>
+                  );
+                })()}
               </g>
-            );
-          })}
-        </svg>
+
 
         {/* Contador flutuante */}
         <div className="absolute top-2 right-2 bg-black/70 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur">
