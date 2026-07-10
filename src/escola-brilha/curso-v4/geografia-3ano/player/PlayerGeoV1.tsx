@@ -1187,6 +1187,7 @@ function QuizRadar({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [idx, setIdx] = useState(0);
   const [escolha, setEscolha] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
@@ -1252,6 +1253,130 @@ function QuizRadar({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx, finalizado]);
+
+  if (teen) {
+    if (finalizado) {
+      return (
+        <div className="space-y-5">
+          <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 text-center">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono mb-3">
+              Checagem concluída
+            </div>
+            <div className="text-4xl font-black text-white">{acertos}/{total}</div>
+            <p className="text-sm text-slate-300 mt-3 leading-relaxed">{stripDecorativeEmoji(cena.falaFinal)}</p>
+          </div>
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Checagem de compreensão
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="flex items-center justify-between text-xs text-slate-400 px-1 font-mono uppercase tracking-widest">
+          <span>Questão {idx + 1}/{total}</span>
+          <span>Acertos {acertos}</span>
+        </div>
+
+        {p && (
+          <>
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-xl bg-slate-950/80 border border-slate-700 p-5"
+            >
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs shrink-0">
+                  Q{idx + 1}
+                </div>
+                <div className="flex-1 text-white font-semibold text-base sm:text-lg leading-snug">
+                  {stripDecorativeEmoji(p.pergunta)}
+                </div>
+                <button
+                  onClick={() => falar(p.pergunta)}
+                  className="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-md px-3 py-1.5 text-xs font-semibold text-cyan-200"
+                  aria-label="Ouvir a pergunta"
+                >
+                  Ouvir
+                </button>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 gap-2">
+              {p.cards.map((c, cardIndex) => {
+                const escolhido = escolha === c.id;
+                const certoRevelado = revelado && c.id === p.correta;
+                const erradoRevelado = revelado && escolhido && c.id !== p.correta;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => escolher(c.id)}
+                    disabled={revelado}
+                    className={`relative rounded-lg px-4 py-3 border text-left transition bg-slate-900/70 flex items-center gap-3 ${
+                      certoRevelado
+                        ? "border-emerald-400 bg-emerald-950/35"
+                        : erradoRevelado
+                        ? "border-rose-400 bg-rose-950/30 opacity-80"
+                        : escolhido
+                        ? "border-cyan-400 ring-2 ring-cyan-400/30"
+                        : "border-slate-700 hover:border-slate-500"
+                    }`}
+                  >
+                    <span className="w-7 h-7 rounded-md bg-slate-950 border border-slate-700 grid place-items-center text-[11px] font-mono text-cyan-300 shrink-0">
+                      {String.fromCharCode(65 + cardIndex)}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-100 leading-snug">
+                      {stripDecorativeEmoji(c.titulo)}
+                    </span>
+                    {certoRevelado && <span className="ml-auto text-emerald-300 font-bold">✓</span>}
+                    {erradoRevelado && <span className="ml-auto text-rose-300 font-bold">✕</span>}
+                  </button>
+                );
+              })}
+            </div>
+
+            {revelado && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`rounded-lg p-4 border-l-2 text-sm leading-relaxed ${
+                  acertou
+                    ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                    : "bg-rose-950/35 border-rose-500 text-rose-100"
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-widest font-mono mb-2">
+                  {acertou ? "Resposta validada" : "Correção comentada"}
+                </div>
+                {acertou ? p.feedbackAcerto : p.feedbackErro}
+              </motion.div>
+            )}
+
+            {revelado && (
+              <button
+                onClick={proxima}
+                className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              >
+                {idx + 1 === total ? "Ver resultado →" : "Próxima questão →"}
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
