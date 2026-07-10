@@ -1751,10 +1751,7 @@ function PizzaMunicipio({
     const x2 = CX + R * Math.cos(rad(fim));
     const y2 = CY + R * Math.sin(rad(fim));
 
-    const path =
-      fatias.length === 1
-        ? `M ${CX - R} ${CY} a ${R} ${R} 0 1 0 ${R * 2} 0 a ${R} ${R} 0 1 0 ${-R * 2} 0`
-        : `M ${CX} ${CY} L ${x1} ${y1} A ${R} ${R} 0 ${grande} 1 ${x2} ${y2} Z`;
+    const path = `M ${CX} ${CY} L ${x1} ${y1} A ${R} ${R} 0 ${grande} 1 ${x2} ${y2} Z`;
 
     // rótulo posicionado no meio da fatia
     const rr = R * 0.62;
