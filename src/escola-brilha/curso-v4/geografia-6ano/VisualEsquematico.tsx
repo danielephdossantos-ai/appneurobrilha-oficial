@@ -315,28 +315,22 @@ function PalcoInclinacao() {
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">N</div>
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">S</div>
 
-            {/* Corpo Terra com sombreamento condicional */}
-            <div
-              className="relative h-24 w-24 rounded-full overflow-hidden border-2 border-cyan-200/50 shadow-lg shadow-cyan-500/30"
-              style={{
-                background: veraoSul
-                  ? "radial-gradient(circle at 30% 75%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)"
-                  : "radial-gradient(circle at 30% 25%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)",
-              }}
-            >
+            {/* Corpo Terra real com sombreamento condicional do hemisfério */}
+            <div className="relative h-24 w-24">
+              <TerraReal size={96} shadow={veraoSul ? "norte" : "sul"} />
               {/* Marcação hemisfério iluminado */}
               <div
                 className={[
-                  "absolute left-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
-                  veraoSul ? "bottom-2 bg-rose-500/80 text-white" : "bottom-2 bg-slate-950/70 text-sky-200",
+                  "absolute left-1 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm z-10",
+                  veraoSul ? "bottom-1 bg-rose-500/90 text-white" : "bottom-1 bg-slate-950/80 text-sky-200",
                 ].join(" ")}
               >
                 HS {veraoSul ? "☀" : "❄"}
               </div>
               <div
                 className={[
-                  "absolute right-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
-                  veraoSul ? "top-2 bg-slate-950/70 text-sky-200" : "top-2 bg-rose-500/80 text-white",
+                  "absolute right-1 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm z-10",
+                  veraoSul ? "top-1 bg-slate-950/80 text-sky-200" : "top-1 bg-rose-500/90 text-white",
                 ].join(" ")}
               >
                 HN {veraoSul ? "❄" : "☀"}
