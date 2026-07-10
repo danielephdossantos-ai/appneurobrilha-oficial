@@ -341,6 +341,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "rotacao",
         feedbackAcerto: "Isso! ROTAÇÃO gira a Terra em 24h — por isso existem fusos horários diferentes.",
         feedbackErro: "Diferença de horas entre países = ROTAÇÃO da Terra em 24h.",
+        fotoUrl: rotacaoReal,
       },
       {
         id: "r2",
@@ -350,6 +351,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Perfeito! Eixo INCLINADO faz o hemisfério sul receber luz direta em dezembro.",
         feedbackErro: "Verão no Natal = INCLINAÇÃO. O hemisfério sul está virado pro Sol.",
+        fotoUrl: estacaoVerao,
       },
       {
         id: "r3",
@@ -359,6 +361,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "translacao",
         feedbackAcerto: "Isso! TRANSLAÇÃO dura 365d + 6h. As 6h acumulam em 1 dia extra a cada 4 anos.",
         feedbackErro: "Ano bissexto = TRANSLAÇÃO. A volta ao Sol dura 365,25 dias.",
+        fotoUrl: translacaoOrbita,
       },
       {
         id: "r4",
@@ -368,6 +371,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Correto! Estações OPOSTAS entre hemisférios = INCLINAÇÃO do eixo.",
         feedbackErro: "Estações opostas nos dois hemisférios = INCLINAÇÃO do eixo a 23,5°.",
+        fotoUrl: eixoInclinado,
       },
       {
         id: "r5",
@@ -377,6 +381,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "rotacao",
         feedbackAcerto: "Isso! A Terra gira de OESTE pra LESTE — por isso o Sol parece cruzar o céu.",
         feedbackErro: "Sol nascendo no leste = ROTAÇÃO da Terra (oeste → leste).",
+        fotoUrl: rotacaoDiaNoite,
       },
       {
         id: "r6",
@@ -386,6 +391,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "inclinacao",
         feedbackAcerto: "Isso! O polo Norte fica tão inclinado pro Sol que a região do Círculo Polar fica sempre iluminada.",
         feedbackErro: "Sol que não se põe nos polos = INCLINAÇÃO extrema do eixo em relação ao Sol.",
+        fotoUrl: eixoInclinado,
       },
     ],
     falaFinal: "6 rodadas, 6 movimentos identificados. Astrônomo de carteirinha.",
