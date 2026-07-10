@@ -11,6 +11,8 @@ export type EtapaTeorica = {
   visual?: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
   /** Exemplo real do dia-a-dia que materializa o conceito. */
   exemplo_real?: string;
+  /** Casos reais extras (idealmente 2) para dar profundidade à etapa. */
+  exemplos_extras?: string[];
 };
 
 export type RoteiroVisual = {
@@ -20,6 +22,17 @@ export type RoteiroVisual = {
   tipo?: "terra-orbita" | "globo-coordenadas" | "generico";
 };
 
+export type QuizItem = {
+  pergunta: string;
+  opcoes: Array<{ texto: string; correta: boolean; explicacao: string }>;
+};
+
+export type MiniJogoCategorizar = {
+  tipo: "categorizar";
+  instrucao: string;
+  categorias: Array<{ id: string; titulo: string; cor: "cyan" | "amber" | "emerald" | "violet" }>;
+  cartoes: Array<{ texto: string; categoriaId: string }>;
+};
 
 export type UnidadeFund2 = {
   unidade: number;
@@ -32,13 +45,14 @@ export type UnidadeFund2 = {
     texto_teorico: string;
     exemplo_visual: string;
     imagem_analise: string;
-    /** Passos numerados que substituem/enriquecem o texto teórico. */
     etapas_teoricas?: EtapaTeorica[];
-    /** Componente visual central dinâmico. */
     roteiro_visual_interativo?: RoteiroVisual;
-    /** Analogia acolhedora (💡 Curiosidade Prática). */
     exemplo_pratico_visual?: string;
   };
+  /** Quiz rápido — 3 perguntas com feedback explicativo por alternativa. */
+  quiz_relampago?: QuizItem[];
+  /** Mini-jogo conceitual da unidade. */
+  mini_jogo?: MiniJogoCategorizar;
   desafio_critico: {
     pergunta: string;
     opcoes: Array<{ texto: string; correta: boolean }>;
