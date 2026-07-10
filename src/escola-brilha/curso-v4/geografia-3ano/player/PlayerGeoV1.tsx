@@ -439,6 +439,7 @@ function VotoExplorador({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [voto, setVoto] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
   const acertou = voto === cena.respostaCerta;
@@ -451,32 +452,42 @@ function VotoExplorador({
 
   return (
     <div className="space-y-5">
-      {/* Aurora fala */}
-      <div className="flex items-start gap-3">
-        <img
-          src={aurora.img}
-          alt={aurora.nome}
-          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
-        />
-        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-emerald-300 text-xs font-bold mb-1">
-            {aurora.nome}
+      {/* Enunciado — cartão principal */}
+      {teen ? (
+        <div className="rounded-xl border border-cyan-500/30 bg-slate-900/70 backdrop-blur px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Hipótese · escolha antes de saber
           </div>
-          {cena.aurora}
+          <div className="text-white text-base sm:text-lg font-semibold leading-snug mb-3">
+            {cena.pergunta}
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed border-l-2 border-cyan-500/40 pl-3">
+            {cena.aurora}
+          </p>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="flex items-start gap-3">
+            <img
+              src={aurora.img}
+              alt={aurora.nome}
+              className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+            />
+            <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+              <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+              {cena.aurora}
+            </div>
+          </div>
+          <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl px-4 py-4 text-center shadow-lg">
+            <div className="text-[11px] uppercase tracking-widest text-amber-800/80 font-bold mb-1">
+              🗳️ Voto do Explorador
+            </div>
+            <div className="text-base sm:text-lg font-black leading-tight">{cena.pergunta}</div>
+          </div>
+        </>
+      )}
 
-      {/* Pergunta grande */}
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl px-4 py-4 text-center shadow-lg">
-        <div className="text-[11px] uppercase tracking-widest text-amber-800/80 font-bold mb-1">
-          🗳️ Voto do Explorador
-        </div>
-        <div className="text-base sm:text-lg font-black leading-tight">
-          {cena.pergunta}
-        </div>
-      </div>
-
-      {/* Cards de voto — empilhados no mobile, lado a lado no desktop */}
+      {/* Cards de voto */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {cena.opcoes.map((op) => {
           const escolhido = voto === op.id;
@@ -488,28 +499,48 @@ function VotoExplorador({
               onClick={() => votar(op.id)}
               disabled={revelado}
               whileTap={{ scale: revelado ? 1 : 0.97 }}
-              className={`relative rounded-3xl p-5 text-left overflow-hidden border-2 transition-all bg-gradient-to-br ${op.cor} ${
-                escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
-              } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
-                erradoRevelado ? "opacity-60" : ""
-              }`}
+              className={
+                teen
+                  ? `relative rounded-lg p-4 text-left overflow-hidden border transition-all bg-slate-900/60 backdrop-blur ${
+                      escolhido ? "border-cyan-400 ring-2 ring-cyan-400/40" : "border-slate-700 hover:border-slate-500"
+                    } ${certoRevelado ? "ring-2 ring-emerald-400 border-emerald-400" : ""} ${
+                      erradoRevelado ? "opacity-50" : ""
+                    }`
+                  : `relative rounded-3xl p-5 text-left overflow-hidden border-2 transition-all bg-gradient-to-br ${op.cor} ${
+                      escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
+                    } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
+                      erradoRevelado ? "opacity-60" : ""
+                    }`
+              }
             >
-              <div className="text-5xl mb-2">{op.emoji}</div>
-              <div className="text-white font-black text-lg leading-tight">
-                {op.titulo}
-              </div>
-              {op.subtitulo && (
-                <div className="text-white/85 text-xs mt-1 font-medium">
-                  {op.subtitulo}
-                </div>
+              {teen ? (
+                <>
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-[10px] font-mono text-cyan-400/70 uppercase tracking-wider">
+                      Opção {String.fromCharCode(65 + cena.opcoes.indexOf(op))}
+                    </span>
+                  </div>
+                  <div className="text-white font-semibold text-[15px] leading-snug">{op.titulo}</div>
+                  {op.subtitulo && (
+                    <div className="text-slate-400 text-xs mt-1 leading-snug">{op.subtitulo}</div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="text-5xl mb-2">{op.emoji}</div>
+                  <div className="text-white font-black text-lg leading-tight">{op.titulo}</div>
+                  {op.subtitulo && (
+                    <div className="text-white/85 text-xs mt-1 font-medium">{op.subtitulo}</div>
+                  )}
+                </>
               )}
               {certoRevelado && (
-                <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                <div className={`absolute top-2 right-2 rounded-full w-7 h-7 grid place-items-center text-sm font-bold ${teen ? "bg-emerald-500 text-slate-950" : "bg-emerald-400 text-[#0d1f55] w-8 h-8 text-lg font-black shadow"}`}>
                   ✓
                 </div>
               )}
               {erradoRevelado && (
-                <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                <div className={`absolute top-2 right-2 rounded-full w-7 h-7 grid place-items-center text-sm font-bold ${teen ? "bg-rose-500 text-white" : "bg-rose-400 text-white w-8 h-8 text-lg font-black shadow"}`}>
                   ✕
                 </div>
               )}
@@ -522,40 +553,71 @@ function VotoExplorador({
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl p-4 flex items-start gap-3 border ${
-            acertou
-              ? "bg-emerald-500/15 border-emerald-400/40"
-              : "bg-rose-500/15 border-rose-400/40"
-          }`}
+          className={
+            teen
+              ? `rounded-lg p-4 border-l-2 space-y-2 ${
+                  acertou
+                    ? "bg-emerald-950/40 border-emerald-500"
+                    : "bg-rose-950/40 border-rose-500"
+                }`
+              : `rounded-2xl p-4 flex items-start gap-3 border ${
+                  acertou ? "bg-emerald-500/15 border-emerald-400/40" : "bg-rose-500/15 border-rose-400/40"
+                }`
+          }
         >
-          <img src={aurora.img} alt="" className="w-12 h-12 shrink-0 rounded-full bg-white/10 p-1" />
-          <div className="text-sm leading-snug space-y-2">
-            <div className={`text-xs font-bold ${acertou ? "text-emerald-300" : "text-rose-300"}`}>
-              {acertou ? "🎉 Boa, explorador!" : "Quase!"}
-            </div>
-            <div>{acertou ? cena.feedbackAcerto : cena.feedbackErro}</div>
-            <div className="text-white/90 border-t border-white/10 pt-2">
-              <span className="text-emerald-300 text-xs font-bold">Aurora: </span>
-              {cena.falaFinal}
-            </div>
-          </div>
+          {teen ? (
+            <>
+              <div className={`text-[10px] font-mono uppercase tracking-widest ${acertou ? "text-emerald-400" : "text-rose-400"}`}>
+                {acertou ? "Hipótese confirmada" : "Hipótese incorreta"}
+              </div>
+              <div className="text-sm text-slate-200 leading-relaxed">
+                {acertou ? cena.feedbackAcerto : cena.feedbackErro}
+              </div>
+              <div className="text-sm text-slate-300 border-t border-slate-700 pt-2 leading-relaxed">
+                {cena.falaFinal}
+              </div>
+            </>
+          ) : (
+            <>
+              <img src={aurora.img} alt="" className="w-12 h-12 shrink-0 rounded-full bg-white/10 p-1" />
+              <div className="text-sm leading-snug space-y-2">
+                <div className={`text-xs font-bold ${acertou ? "text-emerald-300" : "text-rose-300"}`}>
+                  {acertou ? "🎉 Boa, explorador!" : "Quase!"}
+                </div>
+                <div>{acertou ? cena.feedbackAcerto : cena.feedbackErro}</div>
+                <div className="text-white/90 border-t border-white/10 pt-2">
+                  <span className="text-emerald-300 text-xs font-bold">Aurora: </span>
+                  {cena.falaFinal}
+                </div>
+              </div>
+            </>
+          )}
         </motion.div>
       )}
 
       <button
         onClick={onProxima}
         disabled={!revelado}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          revelado
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
+        className={
+          teen
+            ? `w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+                revelado
+                  ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                  : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+              }`
+            : `w-full py-4 rounded-2xl font-black text-lg transition ${
+                revelado
+                  ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+                  : "bg-white/10 text-white/40 cursor-not-allowed"
+              }`
+        }
       >
-        {revelado ? "Continuar" : "🗳️ Escolha uma opção pra continuar"}
+        {revelado ? (teen ? "Continuar →" : "Continuar") : teen ? "Escolha uma opção" : "🗳️ Escolha uma opção pra continuar"}
       </button>
     </div>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 3 — Cadernos de Campo (4 flip cards de vocabulário)
