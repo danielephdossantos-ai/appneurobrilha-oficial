@@ -8,14 +8,16 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   BookOpen,
+  Check,
   Compass,
   FileText,
   Focus,
+  Globe2,
   Headphones,
   Lightbulb,
   ListOrdered,
@@ -26,9 +28,10 @@ import {
   Trophy,
   Volume2,
   VolumeX,
+  X,
 } from "lucide-react";
 
-import type { UnidadeFund2 } from "./dados-fund2";
+import type { UnidadeFund2, EtapaTeorica } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
@@ -99,40 +102,10 @@ export function PlayerGeoV2({
       titulo: "Entenda por etapas",
       corpo: unidade.conteudo_pedagogico.etapas_teoricas?.length ? (
         <div className="space-y-3">
-          <MiniPalco tipo="piao" />
           <p className="text-slate-300 text-[14px] leading-relaxed">
             {unidade.conteudo_pedagogico.texto_teorico}
           </p>
-          <ol className="space-y-3">
-            {unidade.conteudo_pedagogico.etapas_teoricas.map((etapa, i) => (
-              <li
-                key={i}
-                className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 space-y-3"
-              >
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold text-sm flex items-center justify-center">
-                    {i + 1}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-cyan-300 font-serif text-[15px] leading-snug mb-1">
-                      {etapa.titulo}
-                    </div>
-                    <p className="text-slate-200 text-sm leading-relaxed">{etapa.texto}</p>
-                  </div>
-                </div>
-                {etapa.visual && <MiniPalco tipo={etapa.visual} />}
-                {etapa.exemplo_real && (
-                  <div className="rounded-lg border-l-2 border-emerald-400 bg-emerald-500/5 px-3 py-2">
-                    <div className="text-[10px] uppercase tracking-widest text-emerald-400 mb-1 flex items-center gap-1.5">
-                      <span>🌍</span> Exemplo real
-                    </div>
-                    <p className="text-slate-200 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
-                  </div>
-                )}
-              </li>
-            ))}
-
-          </ol>
+          <PassoAPassoTabs etapas={unidade.conteudo_pedagogico.etapas_teoricas} />
         </div>
       ) : (
         <p className="text-slate-200/90 leading-relaxed text-[15px]">
@@ -280,15 +253,19 @@ export function PlayerGeoV2({
       corpo: (
         <div className="space-y-4">
           <p className="text-slate-100 text-[15px] leading-relaxed">{unidade.desafio_critico.pergunta}</p>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {unidade.desafio_critico.opcoes.map((op, i) => {
               const selected = respostaIdx === i;
               const revealCorrect = mostrarFeedback && op.correta;
               const revealWrong = mostrarFeedback && selected && !op.correta;
               return (
-                <button
+                <motion.button
                   key={i}
                   type="button"
+                  whileHover={mostrarFeedback ? undefined : { scale: 1.015 }}
+                  whileTap={mostrarFeedback ? undefined : { scale: 0.985 }}
+                  animate={revealCorrect ? { scale: [1, 1.04, 1] } : {}}
+                  transition={{ duration: 0.5, times: [0, 0.5, 1] }}
                   onClick={() => {
                     if (mostrarFeedback) return;
                     setRespostaIdx(i);
@@ -302,22 +279,41 @@ export function PlayerGeoV2({
                       );
                     }
                   }}
+                  disabled={mostrarFeedback}
                   className={[
-                    "w-full text-left rounded-lg border px-4 py-3 text-sm leading-relaxed transition",
+                    "w-full text-left rounded-xl border-2 border-b-4 px-5 py-4 text-[15px] leading-relaxed transition-colors flex items-start gap-4",
+                    "disabled:cursor-default",
                     revealCorrect
-                      ? "border-emerald-400 bg-emerald-500/10 text-emerald-100"
+                      ? "border-emerald-400 border-b-emerald-600 bg-emerald-500/15 text-emerald-50 shadow-lg shadow-emerald-500/20"
                       : revealWrong
-                        ? "border-red-400 bg-red-500/10 text-red-100"
+                        ? "border-red-400 border-b-red-600 bg-red-500/15 text-red-50"
                         : selected
-                          ? "border-cyan-400 bg-cyan-500/5 text-slate-100"
-                          : "border-slate-700 bg-slate-900/40 text-slate-200 hover:border-cyan-500/60 hover:bg-slate-900/70",
+                          ? "border-cyan-400 border-b-cyan-600 bg-cyan-500/10 text-slate-50"
+                          : "border-slate-700 border-b-slate-800 bg-slate-900/60 text-slate-200 hover:border-cyan-500/70 hover:bg-slate-900",
                   ].join(" ")}
                 >
-                  <span className="mr-2 font-mono text-xs text-slate-500">
-                    {String.fromCharCode(65 + i)})
+                  <span
+                    className={[
+                      "flex-shrink-0 h-9 w-9 rounded-full border-2 flex items-center justify-center font-mono font-bold text-sm transition",
+                      revealCorrect
+                        ? "border-emerald-400 bg-emerald-500 text-white"
+                        : revealWrong
+                          ? "border-red-400 bg-red-500 text-white"
+                          : selected
+                            ? "border-cyan-400 bg-cyan-500/30 text-cyan-100"
+                            : "border-slate-600 bg-slate-950 text-slate-400",
+                    ].join(" ")}
+                  >
+                    {revealCorrect ? (
+                      <Check className="h-4 w-4" strokeWidth={3} />
+                    ) : revealWrong ? (
+                      <X className="h-4 w-4" strokeWidth={3} />
+                    ) : (
+                      String.fromCharCode(65 + i)
+                    )}
                   </span>
-                  {op.texto}
-                </button>
+                  <span className="flex-1 pt-1">{op.texto}</span>
+                </motion.button>
               );
             })}
           </div>
@@ -517,6 +513,91 @@ export function PlayerGeoV2({
           </motion.section>
         ))}
       </main>
+    </div>
+  );
+}
+
+/* ============================================================
+   PASSO A PASSO em ABAS — cada passo com texto + visual animado
+   ============================================================ */
+function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
+  const [ativa, setAtiva] = useState(0);
+  const etapa = etapas[ativa];
+
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-950/60 overflow-hidden">
+      {/* Abas */}
+      <div className="flex border-b border-slate-800 bg-slate-900/60">
+        {etapas.map((e, i) => {
+          const isActive = i === ativa;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setAtiva(i)}
+              className={[
+                "flex-1 min-w-0 px-3 py-3 text-left transition border-b-2 flex items-start gap-2",
+                isActive
+                  ? "border-cyan-400 bg-slate-950 text-cyan-100"
+                  : "border-transparent text-slate-400 hover:text-cyan-200 hover:bg-slate-900",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "flex-shrink-0 h-6 w-6 rounded-full font-mono font-bold text-xs flex items-center justify-center",
+                  isActive ? "bg-cyan-500 text-slate-950" : "bg-slate-800 text-slate-400",
+                ].join(" ")}
+              >
+                {i + 1}
+              </span>
+              <span className="min-w-0 text-[12px] leading-tight font-medium truncate">
+                {e.titulo.replace(/^Movimento de |^Inclinação /, "").split(" — ")[0]}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Painel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={ativa}
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -12 }}
+          transition={{ duration: 0.25 }}
+          className="grid md:grid-cols-2 gap-4 p-4"
+        >
+          {/* Coluna texto */}
+          <div className="space-y-3">
+            <div className="text-cyan-300 font-serif text-[17px] leading-snug">{etapa.titulo}</div>
+            <p className="text-slate-200 text-[14px] leading-relaxed">{etapa.texto}</p>
+            {etapa.exemplo_real && (
+              <div className="rounded-xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent p-4">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400 text-slate-950">
+                    <Globe2 className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </div>
+                  <div className="text-emerald-300 font-serif text-[13px]">Exemplo Real</div>
+                </div>
+                <p className="text-emerald-50/90 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
+              </div>
+            )}
+          </div>
+          {/* Coluna visual */}
+          <div className="flex items-stretch">
+            {etapa.visual ? (
+              <div className="w-full">
+                <MiniPalco tipo={etapa.visual} />
+              </div>
+            ) : (
+              <div className="w-full rounded-lg border border-dashed border-slate-700 bg-slate-900/40 flex items-center justify-center min-h-[180px] text-slate-500 text-xs italic">
+                Sem visual associado a este passo
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
