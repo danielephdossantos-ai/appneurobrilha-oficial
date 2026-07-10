@@ -17,6 +17,8 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🌍",
   bncc: ["EF06GE01"],
   duracaoMin: 25,
+  estilo: "teen",
+
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
