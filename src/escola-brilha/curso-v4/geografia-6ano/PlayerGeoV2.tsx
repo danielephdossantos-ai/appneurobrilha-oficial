@@ -102,19 +102,31 @@ export function PlayerGeoV2({
             {unidade.conteudo_pedagogico.etapas_teoricas.map((etapa, i) => (
               <li
                 key={i}
-                className="flex gap-3 rounded-lg border border-slate-700 bg-slate-900/50 p-4"
+                className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 space-y-3"
               >
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold text-sm flex items-center justify-center">
-                  {i + 1}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-cyan-300 font-serif text-[15px] leading-snug mb-1">
-                    {etapa.titulo}
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold text-sm flex items-center justify-center">
+                    {i + 1}
                   </div>
-                  <p className="text-slate-200 text-sm leading-relaxed">{etapa.texto}</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-cyan-300 font-serif text-[15px] leading-snug mb-1">
+                      {etapa.titulo}
+                    </div>
+                    <p className="text-slate-200 text-sm leading-relaxed">{etapa.texto}</p>
+                  </div>
                 </div>
+                {etapa.visual && <MiniPalco tipo={etapa.visual} />}
+                {etapa.exemplo_real && (
+                  <div className="rounded-lg border-l-2 border-emerald-400 bg-emerald-500/5 px-3 py-2">
+                    <div className="text-[10px] uppercase tracking-widest text-emerald-400 mb-1 flex items-center gap-1.5">
+                      <span>🌍</span> Exemplo real
+                    </div>
+                    <p className="text-slate-200 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
+                  </div>
+                )}
               </li>
             ))}
+
           </ol>
         </div>
       ) : (
