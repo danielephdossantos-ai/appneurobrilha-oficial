@@ -188,6 +188,7 @@ function MesaCartografo({
     { x: 50, y: 50 },
   ]);
   const [descoberto, setDescoberto] = useState(false);
+  const [tocouTeen, setTocouTeen] = useState(false);
 
   const R = 80; // raio de revelação em px
 
@@ -209,8 +210,84 @@ function MesaCartografo({
     });
   };
 
+  // ── Modo TEEN (6º ano+): imagem limpa, sem lupa/moldura, Aurora só após tap
+  if (cena.estilo === "teen") {
+    return (
+      <div className="space-y-5">
+        <button
+          type="button"
+          onClick={() => {
+            setTocouTeen(true);
+            setDescoberto(true);
+          }}
+          className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-cyan-500/20 shadow-[0_0_60px_-20px_rgba(34,211,238,0.5)] focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        >
+          <img
+            src={imagemCena}
+            alt="Imagem da missão"
+            className="absolute inset-0 w-full h-full object-cover"
+            draggable={false}
+          />
+          {!tocouTeen && (
+            <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] grid place-items-center">
+              <div className="text-center text-slate-100">
+                <div className="text-4xl mb-2">👆</div>
+                <div className="text-sm font-mono uppercase tracking-widest text-cyan-300">
+                  Toque para começar
+                </div>
+              </div>
+            </div>
+          )}
+        </button>
+
+        {tocouTeen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-start gap-3"
+            >
+              <img
+                src={aurora.img}
+                alt={aurora.nome}
+                className="w-14 h-14 rounded-full bg-white/5 p-1 shrink-0"
+              />
+              <div className="bg-slate-900/70 border border-cyan-500/25 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug text-slate-100">
+                <div className="text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-1">
+                  {aurora.nome}
+                </div>
+                {cena.aurora}
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="bg-slate-900/60 border border-slate-700/60 rounded-xl px-4 py-2.5 text-[13px] text-slate-300 text-center"
+            >
+              {cena.falaFinal}
+            </motion.div>
+          </>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!tocouTeen}
+          className={`w-full py-4 rounded-2xl font-black text-base transition font-mono uppercase tracking-widest ${
+            tocouTeen
+              ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+              : "bg-slate-800/50 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {tocouTeen ? "Continuar ▸" : "Toque a imagem primeiro"}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-5">
+
       {/* Aurora fala */}
       <div className="flex items-start gap-3">
         <img
