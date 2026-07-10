@@ -37,8 +37,10 @@ const DISC_LABEL: Record<string, string> = {
 function playerRoute(serie: string, disc: string): string | null {
   if (serie === "6ano" && disc === "geografia") return "/escola-brilha/geo-6ano/$unidade";
   if (serie === "7ano" && disc === "geografia") return "/escola-brilha/geo-7ano/$unidade";
+  if (serie === "8ano" && disc === "geografia") return "/escola-brilha/geo-8ano/$unidade";
   return null;
 }
+
 
 /** Dataset de unidades para cada (serie, disc). */
 function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
