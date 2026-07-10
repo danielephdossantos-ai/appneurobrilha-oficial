@@ -734,6 +734,7 @@ export type CenaGeoV1 =
         emoji: string;
         rotulo: string;              // ex.: "Fazenda"
         descricao: string;           // texto lido quando acertada
+        fotoUrl?: string;            // opcional: foto real exibida na parada
       }>;
       /** Ordem correta como lista dos ids. */
       ordemCerta: string[];
