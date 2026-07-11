@@ -260,7 +260,9 @@ function EscolaBrilhaCatalogo() {
             {SERIES_ORDEM.map((serie) => {
               const discsArvore = Object.keys(arvore[serie]);
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
-              const discsExtra = serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano" ? ["geografia"] : [];
+              const discsExtra: string[] = [];
+              if (serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") discsExtra.push("geografia");
+              if (serie === "2º Ano") discsExtra.push("historia");
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
 
               const total = contarSerie(serie);
