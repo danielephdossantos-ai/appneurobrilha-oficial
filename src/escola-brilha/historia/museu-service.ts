@@ -60,7 +60,7 @@ export async function salvarItemMuseu(item: ItemMuseu): Promise<void> {
         imagem_url: item.imagem_url,
         xp: item.xp,
         moedas: item.moedas,
-        meta: item.meta ?? {},
+        meta: (item.meta ?? {}) as never,
       },
       { onConflict: "user_id,curso,unidade,aula,tipo_item" },
     );
