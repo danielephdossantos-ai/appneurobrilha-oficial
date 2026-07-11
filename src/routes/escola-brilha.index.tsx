@@ -422,6 +422,24 @@ function EscolaBrilhaCatalogo() {
                                   </div>
                                 </Link>
                               )}
+                              {serie === "2º Ano" && (
+                                <Link
+                                  to="/escola-brilha/historia/$curso"
+                                  params={{ curso: "historia-2ano" }}
+                                  className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #92400e, #f59e0b)" }}
+                                >
+                                  <div className="text-[10px] uppercase tracking-widest opacity-90">
+                                    🔍 SPEB 1.0 · História · 2º Ano
+                                  </div>
+                                  <div className="text-lg leading-tight mt-0.5">
+                                    ⚙️ Pequeno Historiador — Relógio do Tempo
+                                  </div>
+                                  <div className="text-[11px] font-bold opacity-90 mt-1">
+                                    7 unidades · Lupa + Museu Digital →
+                                  </div>
+                                </Link>
+                              )}
                             </div>
                           );
                         }
