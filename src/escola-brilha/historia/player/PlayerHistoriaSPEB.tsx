@@ -48,7 +48,6 @@ const ORDEM: Array<{ chave: Bloco; rotulo: string }> = [
 ];
 
 export function PlayerHistoriaSPEB({ aula }: { aula: AulaHistoria }) {
-  const t = aula.trilha;
   const total = ORDEM.length;
   const sectionRefs = useRef<Array<HTMLElement | null>>([]);
   const [ativo, setAtivo] = useState(0);
