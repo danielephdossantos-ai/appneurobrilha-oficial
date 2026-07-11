@@ -122,7 +122,7 @@ function AulaGeoV1Page() {
     <>
       <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />
       <AnimatePresence>
-        {proximaPendente && <MissaoDesbloqueada teen={curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2"} />}
+        {proximaPendente && <MissaoDesbloqueada teen={curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2" || curso === "geografia-9ano-v2"} />}
       </AnimatePresence>
       <audio ref={audioRef} preload="auto" />
     </>
