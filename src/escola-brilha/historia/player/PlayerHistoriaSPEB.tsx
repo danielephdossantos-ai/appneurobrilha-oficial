@@ -129,8 +129,6 @@ export function PlayerHistoriaSPEB({ aula }: { aula: AulaHistoria }) {
         ))}
         <div className="h-24" />
       </main>
-      {/* eslint-disable-next-line */}
-      {void t}
     </div>
   );
 }
