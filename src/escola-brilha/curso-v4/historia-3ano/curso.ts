@@ -1,5 +1,6 @@
 import type { CursoGeoV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Curso: História 3º Ano — "O Grande Livro das Cidades"
@@ -19,7 +20,7 @@ const curso: CursoGeoV1 = {
   corPrimaria: "#0f766e",
   corSecundaria: "#7c2d12",
   tipoAula: "geo-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
