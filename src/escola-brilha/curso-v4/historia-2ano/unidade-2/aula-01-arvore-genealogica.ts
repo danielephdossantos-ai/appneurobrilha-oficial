@@ -1,5 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import imgArvore from "@/assets/historia-2ano/arvore-genealogica-brilha.png";
+import imgArvore from "@/assets/historia-2ano/arvore-genealogica-diagrama.png";
+import imgGeracoes from "@/assets/historia-2ano/geracoes-familia.png";
 import imgCaixa from "@/assets/historia-2ano/caixa-fotos-antigas.png";
 import imgCertidao from "@/assets/historia-2ano/certidao-antiga.png";
 import imgSapatinhos from "@/assets/historia-2ano/sapatinhos-bronze.png";
@@ -81,7 +82,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Geração",
         emoji: "👨‍👩‍👧",
         cor: "from-amber-500 to-orange-700",
-        fotoUrl: imgArvore,
+        fotoUrl: imgGeracoes,
         conteudo:
           "Geração é cada 'andar' da família. Seus avós são uma geração, seus pais outra, e você a terceira. Cada geração tem uma idade parecida.",
         exemplo: "Vovó, mamãe, você = 3 gerações diferentes.",
