@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { chatCompletionFallback, type ChatMsg } from "./ai-chat-fallback";
 
 const MessageSchema = z.object({
   role: z.enum(["system", "user", "assistant"]),
@@ -59,77 +60,27 @@ ${childLine}
 ${persona}${ctx}`;
 }
 
-type GroqMsg = { role: "system" | "user" | "assistant"; content: string };
-
 export const askProfessorBrilho = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return {
-        ok: false as const,
-        error:
-          "GROQ_API_KEY ausente. Adicione a chave nas Secrets do projeto.",
-        reply: null as string | null,
-      };
-    }
-
-    const messages: GroqMsg[] = [
+    const messages: ChatMsg[] = [
       { role: "system", content: buildSystemPrompt(data) },
       ...data.messages,
     ];
-
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages,
-            temperature: 0.6,
-            max_tokens: 600,
-            top_p: 0.9,
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq] HTTP", res.status, errText.slice(0, 400));
-        return {
-          ok: false as const,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          reply: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const reply = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!reply) {
-        return { ok: false as const, error: "Resposta vazia", reply: null };
-      }
-      return { ok: true as const, reply, error: null };
-    } catch (e) {
-      console.error("[groq] fetch", e);
-      return {
-        ok: false as const,
-        error: "Falha de rede ao chamar Groq",
-        reply: null,
-      };
+    const r = await chatCompletionFallback({
+      messages,
+      max_tokens: 600,
+      temperature: 0.6,
+      label: `professor:${data.modulo}`,
+    });
+    if (!r.ok) {
+      return { ok: false as const, error: r.motivo, reply: null as string | null };
     }
+    return { ok: true as const, reply: r.text, error: null };
   });
 
 // ============================================================
 // EXPLICAR ERRO — Professor Brilho dentro das atividades.
-// Só roda quando a criança erra. Gera explicação curta,
-// fofa e pedagógica, sem entregar a resposta de bandeja.
 // ============================================================
 
 const ExplicarErroSchema = z.object({
@@ -139,12 +90,7 @@ const ExplicarErroSchema = z.object({
   bnccCode: z.string().max(20).optional(),
   idade: z.number().int().min(5).max(16).optional(),
   modulo: z
-    .enum([
-      "reforco-brilha",
-      "jornada-365",
-      "missao-prova",
-      "missao-trabalho",
-    ])
+    .enum(["reforco-brilha", "jornada-365", "missao-prova", "missao-trabalho"])
     .optional(),
 });
 
@@ -163,73 +109,28 @@ REGRAS RÍGIDAS:
 export const explicarErroAtividade = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => ExplicarErroSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", reply: null };
-    }
-
     const userPrompt = `A questão era: ${data.pergunta}
 A resposta certa era: ${data.gabarito}
 O aluno marcou: ${data.respostaErrada}${data.bnccCode ? `\nHabilidade BNCC: ${data.bnccCode}` : ""}${data.idade ? `\nIdade do aluno: ${data.idade} anos` : ""}
 
 Explique de forma fofa e pedagógica por que a resposta dele está incorreta e dê uma dica de estudo. Lembre: não entregue o gabarito de bandeja, guie o raciocínio.`;
 
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-              { role: "system", content: EXPLICAR_ERRO_SYSTEM },
-              { role: "user", content: userPrompt },
-            ],
-            temperature: 0.6,
-            max_tokens: 240,
-            top_p: 0.9,
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:erro] HTTP", res.status, errText.slice(0, 300));
-        return {
-          ok: false as const,
-          error: `Groq ${res.status}`,
-          reply: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const reply = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!reply) {
-        return { ok: false as const, error: "Resposta vazia", reply: null };
-      }
-      return { ok: true as const, reply, error: null };
-    } catch (e) {
-      console.error("[groq:erro]", e);
-      return {
-        ok: false as const,
-        error: "Falha de rede ao chamar Groq",
-        reply: null,
-      };
-    }
+    const r = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: EXPLICAR_ERRO_SYSTEM },
+        { role: "user", content: userPrompt },
+      ],
+      max_tokens: 240,
+      temperature: 0.6,
+      label: "explicar-erro",
+    });
+    if (!r.ok) return { ok: false as const, error: r.motivo, reply: null as string | null };
+    return { ok: true as const, reply: r.text, error: null };
   });
 
 
 // ============================================================
 // QUIZ MISSÃO PROVA — gera mini-simulado (3 questões objetivas)
-// sobre o tópico que a criança acabou de estudar. Usado pelo
-// componente MissaoProvaQuiz; o feedback de erro fica a cargo
-// do ProfessorBrilhaErroExplainer.
 // ============================================================
 
 const QuizInputSchema = z.object({
@@ -284,76 +185,45 @@ function tryExtractJson(raw: string): unknown {
 export const gerarQuizMissaoProva = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => QuizInputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", quiz: null };
-    }
-
     const userPrompt = `Tópico: ${data.topico}
 Matéria: ${data.materia}${data.idade ? `\nIdade do aluno: ${data.idade} anos` : ""}${data.bnccCode ? `\nHabilidade BNCC: ${data.bnccCode}` : ""}
 
 Gere 3 questões objetivas de revisão (4 alternativas, 1 correta).`;
 
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-              { role: "system", content: QUIZ_SYSTEM },
-              { role: "user", content: userPrompt },
-            ],
-            temperature: 0.4,
-            max_tokens: 900,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
+    const r = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: QUIZ_SYSTEM },
+        { role: "user", content: userPrompt },
+      ],
+      max_tokens: 900,
+      temperature: 0.4,
+      json: true,
+      label: "quiz-missao-prova",
+    });
+    if (!r.ok) return { ok: false as const, error: r.motivo, quiz: null };
 
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:quiz] HTTP", res.status, errText.slice(0, 300));
-        return { ok: false as const, error: `Groq ${res.status}`, quiz: null };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const raw = json.choices?.[0]?.message?.content ?? "";
-      const parsed = tryExtractJson(raw);
-      const safe = QuizSchema.safeParse(parsed);
-      if (!safe.success) {
-        console.error("[groq:quiz] JSON inválido", safe.error.message);
-        return { ok: false as const, error: "JSON inválido", quiz: null };
-      }
-      return { ok: true as const, quiz: safe.data, error: null };
-    } catch (e) {
-      console.error("[groq:quiz]", e);
-      return { ok: false as const, error: "Falha de rede", quiz: null };
+    const parsed = tryExtractJson(r.text);
+    const safe = QuizSchema.safeParse(parsed);
+    if (!safe.success) {
+      console.error("[quiz-missao-prova] JSON inválido", safe.error.message);
+      return { ok: false as const, error: "JSON inválido", quiz: null };
     }
+    return { ok: true as const, quiz: safe.data, error: null };
   });
 
 // ============================================================
-// PLANO DE ESTUDOS MISSÃO PROVA — gera sessões diárias até a
-// data da prova. Aceita opcionalmente uma FOTO do material
-// escolar (caderno, livro, lista) para personalizar o plano.
+// PLANO DE ESTUDOS MISSÃO PROVA — multimodal (aceita foto)
 // ============================================================
 
 const PlanoEstudosInputSchema = z.object({
   materia: z.string().trim().min(2).max(80),
-  dataProva: z.string().trim().min(8).max(12), // YYYY-MM-DD
+  dataProva: z.string().trim().min(8).max(12),
   diasAteProva: z.number().int().min(1).max(60),
   conteudos: z.array(z.string().min(1).max(160)).max(20).optional(),
   observacoes: z.string().max(800).optional(),
   idade: z.number().int().min(5).max(16).optional(),
   serie: z.string().max(20).optional(),
-  fotoBase64: z.string().max(8_000_000).optional(), // data URL ou base64 puro
+  fotoBase64: z.string().max(8_000_000).optional(),
 });
 
 const SessaoSchema = z.object({
@@ -383,11 +253,6 @@ REGRAS:
 export const gerarPlanoEstudosMissaoProva = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => PlanoEstudosInputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", plano: null };
-    }
-
     const hasImage = !!data.fotoBase64;
     const imageUrl = hasImage
       ? data.fotoBase64!.startsWith("data:")
@@ -411,68 +276,31 @@ Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
         ]
       : textPrompt;
 
-    const model = hasImage
-      ? "meta-llama/llama-4-scout-17b-16e-instruct"
-      : "llama-3.3-70b-versatile";
+    const r = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: PLANO_SYSTEM },
+        { role: "user", content: userContent },
+      ],
+      max_tokens: 1800,
+      temperature: 0.4,
+      json: true,
+      // Gemini 3 Flash já é multimodal; no Groq usa scout p/ visão.
+      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile",
+      label: "plano-estudos",
+    });
+    if (!r.ok) return { ok: false as const, error: r.motivo, plano: null };
 
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model,
-            messages: [
-              { role: "system", content: PLANO_SYSTEM },
-              { role: "user", content: userContent },
-            ],
-            temperature: 0.4,
-            max_tokens: 1800,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:plano] HTTP", res.status, errText.slice(0, 400));
-        return {
-          ok: false as const,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          plano: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const raw = json.choices?.[0]?.message?.content ?? "";
-      const parsed = tryExtractJson(raw);
-      const safe = PlanoSchema.safeParse(parsed);
-      if (!safe.success) {
-        console.error("[groq:plano] JSON inválido", safe.error.message);
-        return { ok: false as const, error: "JSON inválido da IA", plano: null };
-      }
-      return { ok: true as const, plano: safe.data, error: null };
-    } catch (e) {
-      console.error("[groq:plano]", e);
-      return {
-        ok: false as const,
-        error: e instanceof Error ? e.message : "Falha de rede",
-        plano: null,
-      };
+    const parsed = tryExtractJson(r.text);
+    const safe = PlanoSchema.safeParse(parsed);
+    if (!safe.success) {
+      console.error("[plano-estudos] JSON inválido", safe.error.message);
+      return { ok: false as const, error: "JSON inválido da IA", plano: null };
     }
+    return { ok: true as const, plano: safe.data, error: null };
   });
 
 // ============================================================
-// MISSÃO TAREFA — analisa tarefa de casa (texto ou foto) e
-// devolve 3 DICAS PROGRESSIVAS + pergunta socrática.
-// NUNCA entrega a resposta pronta. Lê perfil neurodivergente
-// da criança direto do banco (children) e injeta hiperfoco.
+// MISSÃO TAREFA — analisa tarefa de casa (texto ou foto)
 // ============================================================
 
 const TarefaInputSchema = z.object({
@@ -550,11 +378,6 @@ function montarContextoCrianca(row: Record<string, unknown> | null): string {
 export const analisarTarefaCasa = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => TarefaInputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", resultado: null };
-    }
-
     const c = data.crianca;
     const ctxCrianca = montarContextoCrianca(
       c
@@ -591,68 +414,31 @@ Gere o JSON com as 3 dicas progressivas (NUNCA a resposta) usando o hiperfoco da
         ]
       : textPrompt;
 
-    const model = hasImage
-      ? "meta-llama/llama-4-scout-17b-16e-instruct"
-      : "llama-3.3-70b-versatile";
+    const r = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: TAREFA_SYSTEM },
+        { role: "user", content: userContent },
+      ],
+      max_tokens: 1100,
+      temperature: 0.5,
+      json: true,
+      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile",
+      label: "missao-tarefa",
+    });
+    if (!r.ok) return { ok: false as const, error: r.motivo, resultado: null };
 
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model,
-            messages: [
-              { role: "system", content: TAREFA_SYSTEM },
-              { role: "user", content: userContent },
-            ],
-            temperature: 0.5,
-            max_tokens: 1100,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:tarefa] HTTP", res.status, errText.slice(0, 400));
-        return {
-          ok: false as const,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          resultado: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const raw = json.choices?.[0]?.message?.content ?? "";
-      const parsed = tryExtractJson(raw);
-      const safe = TarefaDicasSchema.safeParse(parsed);
-      if (!safe.success) {
-        console.error("[groq:tarefa] JSON inválido", safe.error.message);
-        return { ok: false as const, error: "JSON inválido da IA", resultado: null };
-      }
-      return { ok: true as const, resultado: safe.data, error: null };
-    } catch (e) {
-      console.error("[groq:tarefa]", e);
-      return {
-        ok: false as const,
-        error: e instanceof Error ? e.message : "Falha de rede",
-        resultado: null,
-      };
+    const parsed = tryExtractJson(r.text);
+    const safe = TarefaDicasSchema.safeParse(parsed);
+    if (!safe.success) {
+      console.error("[missao-tarefa] JSON inválido", safe.error.message);
+      return { ok: false as const, error: "JSON inválido da IA", resultado: null };
     }
+    return { ok: true as const, resultado: safe.data, error: null };
   });
 
 
 // ============================================================
 // ANÁLISE DO TRABALHO ESCOLAR — Missão Trabalho
-// Avalia se o trabalho da criança segue o que o professor pediu
-// e devolve pontos fortes, o que melhorar e dicas práticas.
 // ============================================================
 
 const AnaliseTrabalhoInput = z.object({
@@ -668,11 +454,6 @@ const AnaliseTrabalhoInput = z.object({
 export const analisarTrabalho = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AnaliseTrabalhoInput.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", analise: null };
-    }
-
     const sys = `Você é o Professor Brilho, tutor pedagógico para crianças brasileiras neurodivergentes.
 Analise o trabalho escolar de uma criança comparando com o que o professor pediu.
 Devolva em português do Brasil, tom acolhedor, frases curtas, EXATAMENTE neste formato Markdown:
@@ -708,30 +489,15 @@ Nunca reescreva o trabalho inteiro pela criança. Aponte e ensine.`;
       .filter(Boolean)
       .join("\n");
 
-    try {
-      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: [
-            { role: "system", content: sys },
-            { role: "user", content: user },
-          ],
-          temperature: 0.4,
-          max_tokens: 900,
-        }),
-      });
-      if (!res.ok) {
-        const t = await res.text();
-        return { ok: false as const, error: `Groq ${res.status}: ${t.slice(0, 160)}`, analise: null };
-      }
-      const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
-      const analise = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!analise) return { ok: false as const, error: "Resposta vazia", analise: null };
-      return { ok: true as const, analise, error: null };
-    } catch (e) {
-      console.error("[groq:analisarTrabalho]", e);
-      return { ok: false as const, error: "Falha de rede", analise: null };
-    }
+    const r = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: sys },
+        { role: "user", content: user },
+      ],
+      max_tokens: 900,
+      temperature: 0.4,
+      label: "analisar-trabalho",
+    });
+    if (!r.ok) return { ok: false as const, error: r.motivo, analise: null };
+    return { ok: true as const, analise: r.text, error: null };
   });

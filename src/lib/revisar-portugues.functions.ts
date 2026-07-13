@@ -27,15 +27,6 @@ export type RevisaoResultado =
 export const revisarPortugues = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<RevisaoResultado> => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return {
-        ok: false,
-        motivo: "erro",
-        mensagem: "Revisor não configurado (GROQ_API_KEY ausente).",
-      };
-    }
-
     // Nada pra revisar
     const algoPraRevisar =
       (data.titulo && data.titulo.trim().length > 0) ||
@@ -64,26 +55,20 @@ Responda SEMPRE em JSON válido com este formato exato:
       blocos: data.blocos.map((b) => ({ id: b.id, texto: b.texto })),
     });
 
-    try {
-      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: [
-            { role: "system", content: system },
-            { role: "user", content: userPayload },
-          ],
-          response_format: { type: "json_object" },
-          max_tokens: 2000,
-          temperature: 0.1,
-        }),
-      });
+    const { chatCompletionFallback } = await import("./ai-chat-fallback");
+    const result = await chatCompletionFallback({
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: userPayload },
+      ],
+      max_tokens: 2000,
+      temperature: 0.1,
+      json: true,
+      label: "revisar-portugues",
+    });
 
-      if (res.status === 429) {
+    if (!result.ok) {
+      if (result.motivo === "limite") {
         return {
           ok: false,
           motivo: "limite",
@@ -91,7 +76,7 @@ Responda SEMPRE em JSON válido com este formato exato:
             "Muitas revisões agora 💛 Espere alguns minutos. Seu trabalho está salvo — pode continuar editando.",
         };
       }
-      if (res.status === 402) {
+      if (result.motivo === "creditos") {
         return {
           ok: false,
           motivo: "creditos",
@@ -99,60 +84,46 @@ Responda SEMPRE em JSON válido com este formato exato:
             "Sem créditos por hoje 🌙 Mas seu trabalho está SALVO. Pode continuar escrevendo à vontade — quando os créditos voltarem, eu revejo tudo e ajudo a deixar perfeito.",
         };
       }
-      if (!res.ok) {
-        return {
-          ok: false,
-          motivo: "erro",
-          mensagem: "Não consegui revisar agora. Tenta de novo em instantes.",
-        };
-      }
-
-      const json = (await res.json()) as any;
-      const raw = json?.choices?.[0]?.message?.content as string | undefined;
-      if (!raw) {
-        return { ok: false, motivo: "erro", mensagem: "Resposta vazia do revisor." };
-      }
-
-      let parsed: any;
-      try {
-        parsed = JSON.parse(raw);
-      } catch {
-        return { ok: false, motivo: "erro", mensagem: "Resposta inválida do revisor." };
-      }
-
-      const blocosOut = Array.isArray(parsed?.blocos) ? parsed.blocos : [];
-      const mapaBlocos = new Map<string, { textoCorrigido: string; problemas: string[] }>();
-      for (const b of blocosOut) {
-        if (typeof b?.id === "string") {
-          mapaBlocos.set(b.id, {
-            textoCorrigido: typeof b.texto_corrigido === "string" ? b.texto_corrigido : "",
-            problemas: Array.isArray(b.problemas)
-              ? b.problemas.filter((p: any) => typeof p === "string").slice(0, 8)
-              : [],
-          });
-        }
-      }
-
-      return {
-        ok: true,
-        tituloCorrigido:
-          typeof parsed?.titulo_corrigido === "string" ? parsed.titulo_corrigido : data.titulo,
-        blocos: data.blocos.map((b) => {
-          const r = mapaBlocos.get(b.id);
-          return {
-            id: b.id,
-            textoCorrigido: r?.textoCorrigido ?? b.texto,
-            problemas: r?.problemas ?? [],
-          };
-        }),
-        resumo: typeof parsed?.resumo === "string" ? parsed.resumo : "Revisão concluída.",
-      };
-    } catch (e: any) {
-      console.error("[revisar-portugues] erro:", e);
       return {
         ok: false,
         motivo: "erro",
-        mensagem: "Tive um probleminha pra revisar. Tenta de novo!",
+        mensagem: "Não consegui revisar agora. Tenta de novo em instantes.",
       };
     }
+
+    let parsed: any;
+    try {
+      parsed = JSON.parse(result.text);
+    } catch {
+      return { ok: false, motivo: "erro", mensagem: "Resposta inválida do revisor." };
+    }
+
+    const blocosOut = Array.isArray(parsed?.blocos) ? parsed.blocos : [];
+    const mapaBlocos = new Map<string, { textoCorrigido: string; problemas: string[] }>();
+    for (const b of blocosOut) {
+      if (typeof b?.id === "string") {
+        mapaBlocos.set(b.id, {
+          textoCorrigido: typeof b.texto_corrigido === "string" ? b.texto_corrigido : "",
+          problemas: Array.isArray(b.problemas)
+            ? b.problemas.filter((p: any) => typeof p === "string").slice(0, 8)
+            : [],
+        });
+      }
+    }
+
+    return {
+      ok: true,
+      tituloCorrigido:
+        typeof parsed?.titulo_corrigido === "string" ? parsed.titulo_corrigido : data.titulo,
+      blocos: data.blocos.map((b) => {
+        const r = mapaBlocos.get(b.id);
+        return {
+          id: b.id,
+          textoCorrigido: r?.textoCorrigido ?? b.texto,
+          problemas: r?.problemas ?? [],
+        };
+      }),
+      resumo: typeof parsed?.resumo === "string" ? parsed.resumo : "Revisão concluída.",
+    };
   });
+

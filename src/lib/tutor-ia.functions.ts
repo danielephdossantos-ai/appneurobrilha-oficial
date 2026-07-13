@@ -105,15 +105,6 @@ Tema da prova: ${args.tema}`;
 export const conversarTutorIA = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<TutorResult> => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return {
-        ok: false,
-        motivo: "erro",
-        mensagem: "Tutor Brilha não está configurado. Avise um adulto.",
-      };
-    }
-
     const system =
       data.modo === "trabalho"
         ? systemPromptTrabalho(data)
@@ -122,29 +113,22 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
           : systemPromptPlanoDiario(data);
 
     const messages = [
-      { role: "system", content: system },
+      { role: "system" as const, content: system },
       ...(data.historico || []),
-      { role: "user", content: data.mensagem },
+      { role: "user" as const, content: data.mensagem },
     ];
 
-    try {
-      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages,
-          response_format: { type: "json_object" },
-          max_tokens: 600,
-          temperature: 0.7,
-        }),
-      });
+    const { chatCompletionFallback } = await import("./ai-chat-fallback");
+    const result = await chatCompletionFallback({
+      messages,
+      max_tokens: 600,
+      temperature: 0.7,
+      json: true,
+      label: `tutor-ia:${data.modo}`,
+    });
 
-
-      if (res.status === 429) {
+    if (!result.ok) {
+      if (result.motivo === "limite") {
         return {
           ok: false,
           motivo: "limite",
@@ -152,7 +136,7 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
             "Ufa! Já conversamos bastante agora 💛 Espere alguns minutos e voltamos juntos. Que tal explorar outras categorias enquanto isso?",
         };
       }
-      if (res.status === 402) {
+      if (result.motivo === "creditos") {
         return {
           ok: false,
           motivo: "creditos",
@@ -160,44 +144,24 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
             "Por hoje meus créditos acabaram 🌙 Mas calma — seu trabalho está SALVO automaticamente. Pode continuar escrevendo do seu jeito que, quando os créditos voltarem, eu revejo tudo, aponto erros de português e ajudo você a terminar com perfeição. 💛",
         };
       }
-
-      if (!res.ok) {
-        return {
-          ok: false,
-          motivo: "erro",
-          mensagem:
-            "O Tutor Brilha cochilou um pouquinho 😴 Tenta de novo em instantes!",
-        };
-      }
-
-      const json = (await res.json()) as any;
-      const raw = json?.choices?.[0]?.message?.content as string | undefined;
-      if (!raw) {
-        return {
-          ok: false,
-          motivo: "erro",
-          mensagem: "Não consegui pensar agora. Tenta outra vez!",
-        };
-      }
-
-      let resposta = raw;
-      let encerrarHoje = false;
-      try {
-        const parsed = JSON.parse(raw);
-        if (typeof parsed?.resposta === "string") resposta = parsed.resposta;
-        if (typeof parsed?.encerrar_hoje === "boolean")
-          encerrarHoje = parsed.encerrar_hoje;
-      } catch {
-        // se vier texto puro, usa direto
-      }
-
-      return { ok: true, resposta, encerrarHoje };
-    } catch (e: any) {
-      console.error("[tutor-ia] erro:", e);
       return {
         ok: false,
         motivo: "erro",
-        mensagem: "Tive um probleminha pra pensar agora. Tenta de novo!",
+        mensagem: "O Tutor Brilha cochilou um pouquinho 😴 Tenta de novo em instantes!",
       };
     }
+
+    const raw = result.text;
+    let resposta = raw;
+    let encerrarHoje = false;
+    try {
+      const parsed = JSON.parse(raw);
+      if (typeof parsed?.resposta === "string") resposta = parsed.resposta;
+      if (typeof parsed?.encerrar_hoje === "boolean") encerrarHoje = parsed.encerrar_hoje;
+    } catch {
+      // se vier texto puro, usa direto
+    }
+
+    return { ok: true, resposta, encerrarHoje };
   });
+
