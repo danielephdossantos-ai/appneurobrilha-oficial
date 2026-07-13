@@ -1,6 +1,6 @@
 // Helper compartilhado: chat completion com FALLBACK
-// Primário: Lovable AI Gateway (Gemini 3 Flash)
-// Reserva: Groq (llama-3.3-70b-versatile por padrão)
+// Primário: Groq (llama-3.3-70b-versatile) — mais confiável no dia a dia
+// Reserva: Lovable AI Gateway (Gemini 3 Flash) — só quando Groq falha
 // Quando o primário estoura limite (429), créditos (402) ou dá erro,
 // cai automaticamente pro reserva. Só é chamado do servidor.
 
