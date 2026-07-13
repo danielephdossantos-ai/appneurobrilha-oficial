@@ -380,44 +380,24 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias pra rever cada tipo de fonte",
     fatias: [
       {
-        id: "escritas",
-        rotulo: "Fontes Escritas",
-        emoji: "✉️",
-        percentual: 40,
+        id: "escritas-visuais",
+        rotulo: "Escritas + Visuais",
+        emoji: "✉️📸",
+        percentual: 65,
         cor: "#b45309",
         descricao:
-          "Cerca de 40% das fontes. Cartas, diários, jornais, livros antigos — tudo que alguém escreveu.",
-        exemplos: ["Carta com selo", "Diário da vovó", "Jornal antigo"],
+          "Cerca de 65% do trabalho vem daqui: cartas, diários, jornais, livros antigos, fotografias, pinturas e desenhos. Tudo que ficou registrado em papel ou imagem.",
+        exemplos: ["Carta com selo", "Diário da vovó", "Foto antiga", "Pintura na parede"],
       },
       {
-        id: "visuais",
-        rotulo: "Fontes Visuais",
-        emoji: "📸",
-        percentual: 25,
-        cor: "#4f46e5",
-        descricao:
-          "Cerca de 25%. Fotografias, pinturas, desenhos — imagens que mostram como era.",
-        exemplos: ["Foto antiga", "Pintura na parede", "Desenho de escola"],
-      },
-      {
-        id: "orais",
-        rotulo: "Fontes Orais",
-        emoji: "🎙️",
-        percentual: 20,
+        id: "orais-materiais",
+        rotulo: "Orais + Materiais",
+        emoji: "🎙️🧸",
+        percentual: 35,
         cor: "#16a34a",
         descricao:
-          "Cerca de 20%. Entrevistas com pessoas mais velhas, causos, músicas contadas de boca em boca.",
-        exemplos: ["Entrevista com vovô", "Causo de família", "Música tradicional"],
-      },
-      {
-        id: "materiais",
-        rotulo: "Fontes Materiais",
-        emoji: "🧸",
-        percentual: 15,
-        cor: "#dc2626",
-        descricao:
-          "Cerca de 15%. Objetos, ferramentas, brinquedos, prédios antigos — coisas que sobreviveram do passado.",
-        exemplos: ["Relógio de bolso", "Brinquedo de lata", "Casa antiga"],
+          "Os outros 35%: entrevistas com os mais velhos, causos, músicas passadas de boca em boca, além de objetos, brinquedos, ferramentas e prédios antigos que sobreviveram.",
+        exemplos: ["Entrevista com vovô", "Causo de família", "Brinquedo de lata", "Casa antiga"],
       },
     ],
     falaFinal:
