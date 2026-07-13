@@ -263,40 +263,100 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
-  // MINIJOGO — Caça às pistas científicas
+  // MINIJOGO — Mesa do Investigador (EXPERIMENTO ATIVO)
+  // A criança VIVE o método científico: escolhe objeto → usa sentidos →
+  // faz uma pergunta científica → registra 3 características verdadeiras.
   momento_minijogo: {
-    titulo: "🔎 Caça às Pistas Científicas",
+    titulo: "🔬 Mesa do Investigador",
     instrucao:
-      "O laboratório está bagunçado! Marque SÓ os objetos que ajudam um cientista a INVESTIGAR.",
+      "Aurora colocou 3 amostras na mesa do laboratório. Escolha UMA e faça uma investigação de verdade: observe, pergunte e registre.",
     jogo: {
-      tipo: "selecionarItens",
-      titulo: "Caça às Pistas Científicas",
+      tipo: "mesaInvestigador",
+      titulo: "Mesa do Investigador",
       bloco: {
-        instrucao:
-          "Toque em cada objeto que serve pra um cientista trabalhar. No fim, aperte CONFIRMAR.",
-        pergunta: "Quais desses objetos são FERRAMENTAS de cientista?",
-        opcoes: [
-          { id: "lupa", texto: "Lupa", imagemUrl: lupa, correto: true },
+        intro:
+          "Escolha um objeto na mesa. Depois use os SENTIDOS e a LUPA pra descobrir características. No fim, registra tudo no caderno.",
+        aurora:
+          "Bem-vindo à mesa! Escolhe UMA amostra pra começar a investigação. Todo cientista começa observando com curiosidade.",
+        objetos: [
           {
-            id: "microscopio",
-            texto: "Microscópio",
-            imagemUrl: microscopio,
-            correto: true,
+            id: "folha",
+            nome: "Folha",
+            imagemUrl: folha,
+            descobertas: {
+              ver: "É verde, tem formato de coração e beiradas onduladas.",
+              tocar: "É macia por cima e um pouquinho áspera por baixo.",
+              cheirar: "Tem cheiro fresco, parecido com mato molhado.",
+              lupa: "Aparecem NERVURAS — riscos finos que parecem caminhos.",
+            },
+            perguntaCerta: "Por que as folhas têm nervuras por dentro?",
+            perguntasFalsas: [
+              "A folha sabe cantar?",
+              "Quantos anos tem a professora Aurora?",
+            ],
+            caracteristicasCertas: [
+              "É verde",
+              "Tem nervuras",
+              "É macia",
+              "Cheiro fresco",
+            ],
+            caracteristicasFalsas: ["É metálica", "Faz barulho alto"],
+            conclusao:
+              "🎉 Você descobriu que a folha tem NERVURAS — os caminhos por onde ela se alimenta. Isso é investigar!",
           },
           {
-            id: "caderno",
-            texto: "Caderno de anotações",
-            imagemUrl: caderno,
-            correto: true,
+            id: "pedra",
+            nome: "Pedra",
+            imagemUrl: pedra,
+            descobertas: {
+              ver: "É cinza com pintinhas escuras, formato arredondado.",
+              tocar: "É DURA, pesada e fria ao toque.",
+              cheirar: "Tem um cheiro de terra, bem fraquinho.",
+              lupa: "Aparecem cristais brilhantes minúsculos na superfície.",
+            },
+            perguntaCerta: "De que a pedra é feita por dentro?",
+            perguntasFalsas: [
+              "A pedra gosta de sorvete?",
+              "A pedra fala português ou inglês?",
+            ],
+            caracteristicasCertas: [
+              "É dura",
+              "É pesada",
+              "Tem cristais",
+              "É fria",
+            ],
+            caracteristicasFalsas: ["É fofinha", "Voa sozinha"],
+            conclusao:
+              "🎉 Você viu que a pedra tem CRISTAIS por dentro! Só a lupa mostrou esse segredo.",
           },
-          { id: "bola", texto: "Bola de futebol", imagemUrl: bola, correto: false },
-          { id: "banana", texto: "Banana", imagemUrl: banana, correto: false },
-          { id: "livro", texto: "Livro de ciências", imagemUrl: livro, correto: true },
+          {
+            id: "pena",
+            nome: "Pena",
+            imagemUrl: pena,
+            descobertas: {
+              ver: "É branca e comprida, com um risco no meio.",
+              tocar: "É levíssima! Quase não sente o peso.",
+              cheirar: "Quase não tem cheiro nenhum.",
+              lupa: "É cheia de fiozinhos que se encaixam como um zíper.",
+            },
+            perguntaCerta: "Por que a pena é tão leve e ajuda os pássaros a voar?",
+            perguntasFalsas: [
+              "A pena sabe desenhar sozinha?",
+              "Qual é a comida favorita da pena?",
+            ],
+            caracteristicasCertas: [
+              "É leve",
+              "É branca",
+              "Tem fiozinhos",
+              "Tem um risco no meio",
+            ],
+            caracteristicasFalsas: ["É pesada como pedra", "É de ferro"],
+            conclusao:
+              "🎉 Você entendeu por que os pássaros voam! A pena é LEVE e tem fiozinhos que seguram o ar.",
+          },
         ],
-        feedbackAcerto:
-          "🎉 Perfeito! LUPA, MICROSCÓPIO, CADERNO e LIVRO — todos ajudam o cientista a investigar e registrar.",
-        feedbackErro:
-          "Lembre: bola e banana são pra brincar e comer, não pra investigar. Cientista usa LUPA, MICROSCÓPIO, CADERNO e LIVRO.",
+        feedbackFinal:
+          "Você acabou de fazer uma INVESTIGAÇÃO CIENTÍFICA de verdade: observou, perguntou e registrou. É assim que a ciência começa!",
       },
     },
   },
