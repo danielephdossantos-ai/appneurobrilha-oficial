@@ -34,7 +34,6 @@ function TrilhaCurso() {
   const curso = getCursoAny(slug);
   const aulas = listAulasFlat(slug);
   const ehPortugues = curso?.tipoAula === "portugues";
-  const ehCiencias = curso?.tipoAula === "ciencias";
   const ehGeoV1 = curso?.tipoAula === "geo-v1";
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   // Admin/testador: TODAS as aulas ficam destravadas por padrão.
@@ -126,11 +125,6 @@ function TrilhaCurso() {
                         if (ehGeoV1) {
                           navigate({
                             to: "/escola-brilha/aula-geo-v1/$curso/$aula",
-                            params: { curso: slug, aula: a.slug },
-                          });
-                        } else if (ehCiencias) {
-                          navigate({
-                            to: "/escola-brilha/aula-ciencias-v4/$curso/$aula",
                             params: { curso: slug, aula: a.slug },
                           });
                         } else if (ehPortugues) {

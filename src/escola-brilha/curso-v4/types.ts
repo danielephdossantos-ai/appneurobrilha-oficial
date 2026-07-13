@@ -533,12 +533,7 @@ export type MinijogoPT =
   | { tipo: "montarPalavra"; titulo: string; bloco: MontarPalavraData }
   | { tipo: "ordenarSequencia"; titulo: string; bloco: OrdenarSequenciaData }
   | { tipo: "laboratorioClima"; titulo: string; bloco: LaboratorioClimaData }
-  | { tipo: "arquitetoLugar"; titulo: string; bloco: ArquitetoLugarData }
-  | {
-      tipo: "mesaInvestigador";
-      titulo: string;
-      bloco: import("./player-ciencias/blocos/MesaInvestigador").MesaInvestigadorData;
-    };
+  | { tipo: "arquitetoLugar"; titulo: string; bloco: ArquitetoLugarData };
 
 /** Bloco opcional de minijogo pedagógico dentro da aula. */
 export type MomentoMinijogo = {
@@ -634,7 +629,7 @@ export type CursoPortugues = {
   mascoteImagemUrl?: string;
   corPrimaria: string;
   corSecundaria: string;
-  tipoAula: "portugues" | "ciencias";
+  tipoAula: "portugues";
   unidades: UnidadePortugues[];
 };
 
