@@ -1,5 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
 import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
+import imgMunicipioAereo from "@/assets/geografia-3ano/municipio-aereo.jpg";
+import imgZonaUrbana from "@/assets/geografia-3ano/zona-urbana-cidade.jpg";
+import imgZonaRural from "@/assets/geografia-3ano/zona-rural-campo.jpg";
+import imgFronteira from "@/assets/geografia-3ano/fronteira-placa.jpg";
+import imgRio from "@/assets/geografia-3ano/rio-municipio.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 01
