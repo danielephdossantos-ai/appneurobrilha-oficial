@@ -2566,7 +2566,7 @@ function ConstrutorMarcos({
 
   // relógio regressivo
   useEffect(() => {
-    if (travada || fim) return;
+    if (travada || fim || !iniciado) return;
     if (tempo <= 0) {
       setTravada(true);
       setFeedback("tempo");
@@ -2575,11 +2575,11 @@ function ConstrutorMarcos({
     }
     const t = setTimeout(() => setTempo((n) => n - 1), 1000);
     return () => clearTimeout(t);
-  }, [tempo, travada, fim]);
+  }, [tempo, travada, fim, iniciado]);
 
   // fala a pista ao entrar na rodada
   useEffect(() => {
-    if (fim) return;
+    if (fim || !iniciado) return;
     try {
       window.speechSynthesis?.cancel();
       const u = new SpeechSynthesisUtterance(rodada.contexto);
