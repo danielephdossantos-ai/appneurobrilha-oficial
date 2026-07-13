@@ -211,6 +211,23 @@ function EscolaBrilhaCatalogo() {
 
         <Link
           to="/escola-brilha/curso/$slug"
+          params={{ slug: "ciencias-1ano" }}
+          className="mb-3 block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+          style={{ background: "linear-gradient(135deg, #a855f7, #1a0b2e)" }}
+        >
+          <div className="text-[10px] uppercase tracking-widest opacity-90">
+            🔬 Ciências · 1º Ano · Novo padrão
+          </div>
+          <div className="text-lg leading-tight mt-0.5">
+            Missão Cientistas Iniciantes
+          </div>
+          <div className="text-[11px] font-bold opacity-90 mt-1">
+            6 cristais · 6 unidades · 11 cenas cada →
+          </div>
+        </Link>
+
+        <Link
+          to="/escola-brilha/curso/$slug"
           params={{ slug: "ciencias-2ano" }}
           className="mb-4 block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
           style={{ background: "linear-gradient(135deg, #a855f7, #1a0b2e)" }}
@@ -222,7 +239,7 @@ function EscolaBrilhaCatalogo() {
             Missão Cientistas da Natureza
           </div>
           <div className="text-[11px] font-bold opacity-90 mt-1">
-            Aula 01 com folha, laboratório e vídeo do gelo →
+            7 cristais da natureza →
           </div>
         </Link>
 
