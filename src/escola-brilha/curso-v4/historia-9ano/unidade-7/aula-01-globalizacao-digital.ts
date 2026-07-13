@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgDig,
     camadas: [
-      { id: "int", rotulo: "Integração global", emoji: "🌍", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Comércio mundial (OMC), redes sociais, streaming, migrações, saúde global. Coisas viajam mais que pessoas — e pessoas viajam muito." },
-      { id: "cri", rotulo: "Crises compartilhadas", emoji: "🌡️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Aquecimento global, pandemias, guerras (Ucrânia, Oriente Médio), fake news, desigualdade. Problemas de um país viram problema de todos." },
+      { id: "int", rotulo: "Integração global", emoji: "🌍", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Comércio mundial (OMC), redes sociais, streaming, migrações, saúde global. Coisas viajam mais que pessoas — e pessoas viajam muito.", exemplos: [] },
+      { id: "cri", rotulo: "Crises compartilhadas", emoji: "🌡️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Aquecimento global, pandemias, guerras (Ucrânia, Oriente Médio), fake news, desigualdade. Problemas de um país viram problema de todos.", exemplos: [] },
     ],
     falaFinal: "Integração e crises andam juntas. Solução do século XXI = cooperação global.",
   },
@@ -144,8 +144,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fotoUrl: imgDig,
     fatias: [
-      { id: "ri", rotulo: "1% mais ricos (~45%)", emoji: "💰", percentual: 45, cor: "#b45309", descricao: "O 1% mais rico da humanidade concentra cerca de 45% da riqueza global. Um dado central do debate sobre desigualdade." },
-      { id: "re", rotulo: "99% restantes (~55%)", emoji: "🌍", percentual: 55, cor: "#0f766e", descricao: "Os 99% restantes dividem a outra metade. A metade mais pobre tem menos de 2% da riqueza mundial." },
+      { id: "ri", rotulo: "1% mais ricos (~45%)", emoji: "💰", percentual: 45, cor: "#b45309", descricao: "O 1% mais rico da humanidade concentra cerca de 45% da riqueza global. Um dado central do debate sobre desigualdade.", exemplos: [] },
+      { id: "re", rotulo: "99% restantes (~55%)", emoji: "🌍", percentual: 55, cor: "#0f766e", descricao: "Os 99% restantes dividem a outra metade. A metade mais pobre tem menos de 2% da riqueza mundial.", exemplos: [] },
     ],
     falaFinal: "1% × 99%. Um dos grandes debates do século XXI.",
   },

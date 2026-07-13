@@ -83,8 +83,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgGuerra,
     camadas: [
-      { id: "al", rotulo: "Aliados (vencedores)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "EUA + Reino Unido + URSS + França Livre + Brasil + China. Venceram e organizaram o pós-guerra." },
-      { id: "ei", rotulo: "Eixo (derrotados)", emoji: "🇩🇪", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Alemanha nazista + Itália fascista + Japão imperial. Derrotados; Alemanha e Japão foram ocupados e reconstruídos." },
+      { id: "al", rotulo: "Aliados (vencedores)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "EUA + Reino Unido + URSS + França Livre + Brasil + China. Venceram e organizaram o pós-guerra.", exemplos: [] },
+      { id: "ei", rotulo: "Eixo (derrotados)", emoji: "🇩🇪", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Alemanha nazista + Itália fascista + Japão imperial. Derrotados; Alemanha e Japão foram ocupados e reconstruídos.", exemplos: [] },
     ],
     falaFinal: "Aliados vencem. Nasce a ONU (1945) e a Declaração Universal dos Direitos Humanos (1948).",
   },
@@ -147,8 +147,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fotoUrl: imgHolo,
     fatias: [
-      { id: "jud", rotulo: "Judeus (~55%)", emoji: "✡️", percentual: 55, cor: "#475569", descricao: "Cerca de 6 milhões de judeus assassinados em campos de extermínio, guetos e execuções em massa." },
-      { id: "out", rotulo: "Outras vítimas (~45%)", emoji: "🕯️", percentual: 45, cor: "#0f172a", descricao: "Ciganos, homossexuais, deficientes, testemunhas de Jeová, poloneses, prisioneiros soviéticos e opositores políticos — cerca de 5 milhões." },
+      { id: "jud", rotulo: "Judeus (~55%)", emoji: "✡️", percentual: 55, cor: "#475569", descricao: "Cerca de 6 milhões de judeus assassinados em campos de extermínio, guetos e execuções em massa.", exemplos: [] },
+      { id: "out", rotulo: "Outras vítimas (~45%)", emoji: "🕯️", percentual: 45, cor: "#0f172a", descricao: "Ciganos, homossexuais, deficientes, testemunhas de Jeová, poloneses, prisioneiros soviéticos e opositores políticos — cerca de 5 milhões.", exemplos: [] },
     ],
     falaFinal: "11 milhões de pessoas assassinadas por serem quem eram. Nunca esquecer.",
   },

@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgDir,
     camadas: [
-      { id: "reg", rotulo: "Regime militar", emoji: "🎖️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "5 presidentes-generais: Castelo Branco → Costa e Silva → Médici → Geisel → Figueiredo. Censura, tortura, atos institucionais e 'milagre econômico'." },
-      { id: "op", rotulo: "Resistência", emoji: "✊", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estudantes (UNE), MDB, Igreja Católica, artistas, jornalistas, familiares de desaparecidos, guerrilha. Diretas Já mobiliza milhões em 1984." },
+      { id: "reg", rotulo: "Regime militar", emoji: "🎖️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "5 presidentes-generais: Castelo Branco → Costa e Silva → Médici → Geisel → Figueiredo. Censura, tortura, atos institucionais e 'milagre econômico'.", exemplos: [] },
+      { id: "op", rotulo: "Resistência", emoji: "✊", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estudantes (UNE), MDB, Igreja Católica, artistas, jornalistas, familiares de desaparecidos, guerrilha. Diretas Já mobiliza milhões em 1984.", exemplos: [] },
     ],
     falaFinal: "Regime × Resistência. A resistência venceu em 1985.",
   },
@@ -144,8 +144,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fotoUrl: imgRes,
     fatias: [
-      { id: "mo", rotulo: "Mortos oficiais (~50%)", emoji: "🕯️", percentual: 50, cor: "#334155", descricao: "Cerca de 217 mortes de opositores confirmadas pela Comissão Nacional da Verdade — muitas por tortura ou execução em prisões." },
-      { id: "de", rotulo: "Desaparecidos (~50%)", emoji: "🔎", percentual: 50, cor: "#0f766e", descricao: "Cerca de 217 desaparecidos políticos cujos corpos nunca foram encontrados. Famílias ainda hoje buscam informações." },
+      { id: "mo", rotulo: "Mortos oficiais (~50%)", emoji: "🕯️", percentual: 50, cor: "#334155", descricao: "Cerca de 217 mortes de opositores confirmadas pela Comissão Nacional da Verdade — muitas por tortura ou execução em prisões.", exemplos: [] },
+      { id: "de", rotulo: "Desaparecidos (~50%)", emoji: "🔎", percentual: 50, cor: "#0f766e", descricao: "Cerca de 217 desaparecidos políticos cujos corpos nunca foram encontrados. Famílias ainda hoje buscam informações.", exemplos: [] },
     ],
     falaFinal: "434 vidas destruídas. E milhares torturados. Nunca esquecer.",
   },

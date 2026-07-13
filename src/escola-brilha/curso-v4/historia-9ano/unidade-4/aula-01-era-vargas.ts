@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgVargas,
     camadas: [
-      { id: "mod", rotulo: "Vargas modernizador", emoji: "🏭", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Voto feminino, CLT, salário mínimo, CSN, Vale, industrialização. 'Pai dos pobres.'" },
-      { id: "aut", rotulo: "Vargas autoritário", emoji: "⛓️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estado Novo (1937), fecha Congresso, censura (DIP), perseguição a comunistas e opositores. 'Mãe dos ricos.'" },
+      { id: "mod", rotulo: "Vargas modernizador", emoji: "🏭", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Voto feminino, CLT, salário mínimo, CSN, Vale, industrialização. 'Pai dos pobres.'", exemplos: [] },
+      { id: "aut", rotulo: "Vargas autoritário", emoji: "⛓️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estado Novo (1937), fecha Congresso, censura (DIP), perseguição a comunistas e opositores. 'Mãe dos ricos.'", exemplos: [] },
     ],
     falaFinal: "Vargas é os dois. Estudar história é aguentar essa contradição.",
   },
@@ -143,8 +143,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fotoUrl: imgTrab,
     fatias: [
-      { id: "agr", rotulo: "Agrícola (~70%)", emoji: "🌾", percentual: 70, cor: "#b45309", descricao: "Em 1920 o Brasil era majoritariamente rural, com economia baseada em café, açúcar, cacau. Poucas fábricas." },
-      { id: "ind", rotulo: "Indústria/Serviços (~30%)", emoji: "🏭", percentual: 30, cor: "#0f766e", descricao: "Em 1945, depois da Era Vargas, a indústria (têxtil, siderurgia, alimentos) já respondia por parte importante da economia." },
+      { id: "agr", rotulo: "Agrícola (~70%)", emoji: "🌾", percentual: 70, cor: "#b45309", descricao: "Em 1920 o Brasil era majoritariamente rural, com economia baseada em café, açúcar, cacau. Poucas fábricas.", exemplos: [] },
+      { id: "ind", rotulo: "Indústria/Serviços (~30%)", emoji: "🏭", percentual: 30, cor: "#0f766e", descricao: "Em 1945, depois da Era Vargas, a indústria (têxtil, siderurgia, alimentos) já respondia por parte importante da economia.", exemplos: [] },
     ],
     falaFinal: "Vargas empurrou o Brasil da fazenda para a fábrica.",
   },

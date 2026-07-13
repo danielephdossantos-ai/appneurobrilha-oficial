@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgMuro,
     camadas: [
-      { id: "oc", rotulo: "Bloco Ocidental (EUA)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Capitalismo, democracia liberal, OTAN (1949). Aliados: Europa Ocidental, Japão, Coreia do Sul, América Latina." },
-      { id: "or", rotulo: "Bloco Oriental (URSS)", emoji: "☭", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Socialismo, partido único, Pacto de Varsóvia (1955). Aliados: Europa Oriental, China (até 1960), Cuba, Vietnã do Norte." },
+      { id: "oc", rotulo: "Bloco Ocidental (EUA)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Capitalismo, democracia liberal, OTAN (1949). Aliados: Europa Ocidental, Japão, Coreia do Sul, América Latina.", exemplos: [] },
+      { id: "or", rotulo: "Bloco Oriental (URSS)", emoji: "☭", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Socialismo, partido único, Pacto de Varsóvia (1955). Aliados: Europa Oriental, China (até 1960), Cuba, Vietnã do Norte.", exemplos: [] },
     ],
     falaFinal: "Dois mundos. Dois modelos. Muros, aeroportos, esportes e músicas em campos opostos.",
   },
@@ -144,8 +144,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fotoUrl: imgMuro,
     fatias: [
-      { id: "us", rotulo: "EUA (~40%)", emoji: "🇺🇸", percentual: 40, cor: "#0f766e", descricao: "Cerca de 23 mil ogivas nucleares no pico. Suficiente para destruir o planeta várias vezes." },
-      { id: "ur", rotulo: "URSS (~60%)", emoji: "☭", percentual: 60, cor: "#b45309", descricao: "Cerca de 40 mil ogivas nucleares no pico. Doutrina MAD: se um atacar, ambos morrem." },
+      { id: "us", rotulo: "EUA (~40%)", emoji: "🇺🇸", percentual: 40, cor: "#0f766e", descricao: "Cerca de 23 mil ogivas nucleares no pico. Suficiente para destruir o planeta várias vezes.", exemplos: [] },
+      { id: "ur", rotulo: "URSS (~60%)", emoji: "☭", percentual: 60, cor: "#b45309", descricao: "Cerca de 40 mil ogivas nucleares no pico. Doutrina MAD: se um atacar, ambos morrem.", exemplos: [] },
     ],
     falaFinal: "Mais de 60 mil ogivas em duas mãos. Milagre que o mundo não explodiu.",
   },
