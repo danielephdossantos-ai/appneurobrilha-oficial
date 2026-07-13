@@ -290,27 +290,68 @@ export const aula01: AulaGeoV1 = {
         id: "p1",
         texto:
           "História é o estudo das pessoas ao longo do tempo. Não é só de reis e rainhas — é da sua avó, do vizinho, das crianças que brincavam antes de você. Cada vida deixa marcas no passado.",
-        chaves: ["História", "pessoas", "tempo"],
+        chaves: ["História", "pessoas", "tempo", "passado"],
+        definicoes: {
+          "História":
+            "É o estudo das PESSOAS ao longo do TEMPO. Historiador procura descobrir o que elas faziam, comiam, brincavam e sentiam.",
+          "pessoas":
+            "Todo mundo! Reis e rainhas, sim, mas também sua avó, o padeiro, o vizinho, a criança que morava aqui antes.",
+          "tempo":
+            "Todos os momentos que já se passaram — ontem, semana passada, cem anos atrás. O tempo é onde a história acontece.",
+          "passado":
+            "Tudo o que já aconteceu. Cada vida deixa MARCAS: fotos, objetos, histórias contadas. Essas marcas são as pistas do historiador.",
+        },
       },
       {
         id: "p2",
         texto:
           "Pra estudar o passado, o historiador procura fontes. Uma fonte pode ser uma foto, uma carta, um objeto antigo, uma música ou até uma entrevista com alguém mais velho. Toda fonte guarda pistas.",
         chaves: ["fontes", "foto", "carta", "entrevista"],
+        definicoes: {
+          "fontes":
+            "Qualquer PISTA que o passado deixou pra gente estudar: foto, carta, objeto, música, prédio antigo, história contada por alguém mais velho.",
+          "foto":
+            "Fonte VISUAL. Congela um momento do passado — mostra rostos, roupas, lugares, festas.",
+          "carta":
+            "Fonte ESCRITA. Alguém sentou pra contar novidades pra outra pessoa. Data e selo mostram onde e quando foi enviada.",
+          "entrevista":
+            "Fonte ORAL. É quando a gente pergunta e grava alguém mais velho contando o que viveu. A memória vira som.",
+        },
       },
       {
         id: "p3",
         texto:
           "Dentro de cada fonte, o historiador procura evidências. A roupa numa foto, a letra numa carta, o material de um brinquedo — cada detalhe conta um pedacinho de como as pessoas viviam.",
-        chaves: ["evidências", "roupa", "detalhe"],
+        chaves: ["evidências", "roupa", "material", "detalhe"],
+        definicoes: {
+          "evidências":
+            "É a PROVA que o historiador acha DENTRO de uma fonte. Um detalhe pequeno que confirma como as pessoas viviam.",
+          "roupa":
+            "A moda muda com o tempo. Numa foto antiga, a roupa mostra a época: chapéu, vestido longo, sapato de couro.",
+          "material":
+            "É de que a coisa é feita — lata, madeira, plástico. Brinquedo de lata é evidência de que veio de antes da era do plástico.",
+          "detalhe":
+            "É a pistinha pequena que passa despercebida. Historiador é caçador de detalhes: relógio na parede, letra da placa, corte de cabelo.",
+        },
       },
       {
         id: "p4",
         texto:
           "Depois de observar e comparar várias fontes, o historiador conta essa história pra gente. Assim a memória das pessoas não se perde — vira conhecimento pra quem vem depois.",
-        chaves: ["observar", "comparar", "memória"],
+        chaves: ["observar", "comparar", "memória", "conhecimento"],
+        definicoes: {
+          "observar":
+            "OLHAR com muita atenção. É o primeiro passo do historiador: ver cada detalhe da fonte antes de tirar qualquer conclusão.",
+          "comparar":
+            "COLOCAR LADO A LADO duas ou mais fontes pra ver o que combina e o que não combina. Assim ele confirma se a história bate.",
+          "memória":
+            "É a lembrança das pessoas — do que viveram, sentiram, criaram. Sem historiador, muita memória se perderia com o tempo.",
+          "conhecimento":
+            "É o que a gente APRENDE. Quando o historiador conta o passado, essa memória vira conhecimento pra quem vem depois.",
+        },
       },
     ],
+
     falaFinal:
       "Leitura de historiador profissional! Você já consegue explicar sozinho: História é pessoas + tempo + fontes + evidências.",
   },

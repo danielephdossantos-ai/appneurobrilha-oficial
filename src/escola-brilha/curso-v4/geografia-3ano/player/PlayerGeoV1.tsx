@@ -2328,6 +2328,7 @@ function VoceLeSozinho({
       });
       restante = restante.slice(posEncontrada + chaveEncontrada.length);
     }
+    const definicoes = paragrafo.definicoes ?? {};
     return partes.map((p, i) => {
       if (p.tipo === "texto") {
         return <span key={i}>{p.conteudo}</span>;
@@ -2335,24 +2336,35 @@ function VoceLeSozinho({
       const chaveNorm = paragrafo.chaves.find(
         (c) => c.toLowerCase() === p.conteudo.toLowerCase(),
       )!;
-      const ativa = marcadasDaPagina.has(chaveNorm);
+      const marcada = marcadasDaPagina.has(chaveNorm);
+      const temDef = !!definicoes[chaveNorm];
+      const abertaKey = `${paragrafo.id}::${chaveNorm}`;
+      const aberta = chaveAberta === abertaKey;
       return (
         <button
           key={i}
           type="button"
-          onClick={() => marcarChave(chaveNorm)}
+          onClick={() => {
+            if (temDef) {
+              setChaveAberta((prev) => (prev === abertaKey ? null : abertaKey));
+            }
+            if (!marcada) marcarChave(chaveNorm);
+          }}
           className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded-md font-black transition ${
-            ativa
-              ? "bg-emerald-400 text-[#3a2410] shadow"
-              : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
+            aberta
+              ? "bg-amber-500 text-white shadow-lg ring-2 ring-amber-300"
+              : marcada
+                ? "bg-emerald-400 text-[#3a2410] shadow"
+                : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
           }`}
         >
           {p.conteudo}
-          {ativa ? " ✓" : ""}
+          {marcada && !aberta ? " ✓" : ""}
         </button>
       );
     });
   };
+
 
   return (
     <div className="space-y-5">
@@ -2410,6 +2422,43 @@ function VoceLeSozinho({
         >
           {renderTexto()}
         </motion.div>
+
+        {(() => {
+          const definicoes = paragrafo.definicoes ?? {};
+          const chaveSelecionada = chaveAberta?.startsWith(`${paragrafo.id}::`)
+            ? chaveAberta.slice(paragrafo.id.length + 2)
+            : null;
+          const defAtiva = chaveSelecionada ? definicoes[chaveSelecionada] : null;
+          if (!defAtiva || !chaveSelecionada) return null;
+          return (
+            <motion.div
+              key={chaveSelecionada}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 rounded-2xl bg-white/90 border-2 border-amber-500 p-4 shadow-lg"
+            >
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <div className="text-[10px] uppercase tracking-widest text-amber-700 font-black">
+                  📖 O que é “{chaveSelecionada}”?
+                </div>
+                <button
+                  onClick={() => setChaveAberta(null)}
+                  className="text-[#6b4a1c] text-xs font-bold hover:text-[#3a2410]"
+                  aria-label="Fechar explicação"
+                >
+                  ✕
+                </button>
+              </div>
+              <div
+                className="text-[#2a1a08] text-sm sm:text-base leading-snug font-medium"
+                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+              >
+                {defAtiva}
+              </div>
+            </motion.div>
+          );
+        })()}
+
 
         {/* Marcador de progresso das chaves */}
         <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
