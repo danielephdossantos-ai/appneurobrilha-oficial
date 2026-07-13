@@ -3125,8 +3125,18 @@ function ConstrutorMarcos({
         {rodada.contexto}
       </div>
 
+      {/* Começar rodada — só arma o timer depois que a criança lê e toca */}
+      {!iniciado && !travada && (
+        <button
+          onClick={() => setIniciado(true)}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-amber-300 to-emerald-400 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition animate-pulse"
+        >
+          ▶ Leu a pista? Toque pra começar o cronômetro
+        </button>
+      )}
+
       {/* Peças (banco embaixo) */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+      <div className={`grid grid-cols-4 gap-2 sm:gap-3 ${!iniciado ? "opacity-40 pointer-events-none" : ""}`}>
         {cena.pecas.map((p) => {
           const certa = p.id === rodada.pecaCertaId;
           const foiTocada = pecaTocada === p.id;
@@ -3134,7 +3144,7 @@ function ConstrutorMarcos({
             <button
               key={p.id}
               onClick={() => escolher(p.id)}
-              disabled={travada}
+              disabled={travada || !iniciado}
               className={`aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-bold text-[11px] sm:text-xs transition ${
                 travada
                   ? foiTocada && certa
@@ -3153,6 +3163,7 @@ function ConstrutorMarcos({
           );
         })}
       </div>
+
 
       {/* Feedback */}
       {feedback && (
