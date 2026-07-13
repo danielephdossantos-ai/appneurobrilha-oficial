@@ -197,7 +197,7 @@ function MesaCartografo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
-  const imagemCena = cena.imagemDestaqueUrl ?? cena.mapaUrl;
+  const imagemCena = cena.mapaUrl;
   const areaRef = useRef<HTMLDivElement | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [revelado, setRevelado] = useState<Array<{ x: number; y: number }>>([
