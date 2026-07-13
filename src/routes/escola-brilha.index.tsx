@@ -265,7 +265,7 @@ function EscolaBrilhaCatalogo() {
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
               const discsExtra: string[] = [];
               if (serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") discsExtra.push("geografia");
-              if (serie === "2º Ano") discsExtra.push("ciencias");
+              
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
 
               const total = contarSerie(serie);
@@ -431,27 +431,6 @@ function EscolaBrilhaCatalogo() {
                           );
                         }
 
-                        if (serie === "2º Ano" && disc === "ciencias") {
-                          return (
-                            <Link
-                              key={disc}
-                              to="/escola-brilha/ciencias-2ano/$aula"
-                              params={{ aula: "aula-01-metodo-cientista" }}
-                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                              style={{ background: "linear-gradient(135deg, #4c1d95, #8b5cf6)" }}
-                            >
-                              <div className="text-[10px] uppercase tracking-widest opacity-90">
-                                🔬 PILOTO · Ciências · 2º Ano
-                              </div>
-                              <div className="text-lg leading-tight mt-0.5">
-                                🧪 Missão Cientistas da Natureza
-                              </div>
-                              <div className="text-[11px] font-bold opacity-90 mt-1">
-                                Aula 01 · O Método do Cientista · Laboratório roxo →
-                              </div>
-                            </Link>
-                          );
-                        }
 
                         const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
 
