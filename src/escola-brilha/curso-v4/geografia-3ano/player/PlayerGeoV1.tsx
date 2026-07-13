@@ -2716,7 +2716,13 @@ function ConstrutorMarcos({
     }
     return (
       <div className="space-y-5">
-        <FalaPersonagem personagem={aurora} texto={cena.aurora} />
+        <div className="flex items-start gap-3">
+          <img src={aurora.img} alt={aurora.nome} className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0" />
+          <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+            {cena.aurora}
+          </div>
+        </div>
         <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-400/40 rounded-3xl p-6 text-center space-y-3">
           <div className="text-5xl">🎮</div>
           <div className="text-white font-bold text-lg">
