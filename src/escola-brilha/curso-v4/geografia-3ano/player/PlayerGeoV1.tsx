@@ -1797,8 +1797,16 @@ function MapaCamadas({
               }}
               transition={{ duration: 0.4 }}
             >
+              {on && c.fotoUrl && (
+                <img
+                  src={c.fotoUrl}
+                  alt={c.rotulo}
+                  className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                  draggable={false}
+                />
+              )}
               {on && (
-                <div className="absolute -top-2 left-2 bg-black/70 text-white text-[11px] font-bold px-2 py-0.5 rounded-full backdrop-blur">
+                <div className="absolute -top-2 left-2 bg-black/70 text-white text-[11px] font-bold px-2 py-0.5 rounded-full backdrop-blur z-10">
                   {c.emoji} {c.rotulo}
                 </div>
               )}
