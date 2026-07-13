@@ -1,5 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
 import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
+import imgMunicipioAereo from "@/assets/geografia-3ano/municipio-aereo.jpg";
+import imgZonaUrbana from "@/assets/geografia-3ano/zona-urbana-cidade.jpg";
+import imgZonaRural from "@/assets/geografia-3ano/zona-rural-campo.jpg";
+import imgFronteira from "@/assets/geografia-3ano/fronteira-placa.jpg";
+import imgRio from "@/assets/geografia-3ano/rio-municipio.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 01
@@ -69,6 +74,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Município",
         emoji: "🗺️",
         cor: "from-emerald-500 to-teal-700",
+        fotoUrl: imgMunicipioAereo,
         conteudo:
           "É o pedaço do país que tem UMA prefeitura, UM prefeito, e junta cidade + campo.",
         exemplo: "A gente mora no município de _______ (fala o seu!).",
@@ -78,6 +84,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Zona Urbana",
         emoji: "🏙️",
         cor: "from-sky-500 to-indigo-700",
+        fotoUrl: imgZonaUrbana,
         conteudo:
           "É a parte do município com muitas casas juntas, ruas, prédios, praças e lojas. É a CIDADE.",
         exemplo: "Padaria, escola no meio dos prédios, semáforo — zona urbana.",
@@ -87,6 +94,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Zona Rural",
         emoji: "🌾",
         cor: "from-lime-500 to-emerald-700",
+        fotoUrl: imgZonaRural,
         conteudo:
           "É a parte do município com plantações, animais, matas e rios. É o CAMPO.",
         exemplo: "Sítio, fazenda, roça de milho — zona rural.",
@@ -96,6 +104,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Fronteira",
         emoji: "🚧",
         cor: "from-amber-500 to-rose-600",
+        fotoUrl: imgFronteira,
         conteudo:
           "É a linha imaginária que separa UM município do outro. Do outro lado, começa outra prefeitura.",
         exemplo: "A placa 'Bem-vindo a...' avisa que você cruzou uma fronteira.",
@@ -117,6 +126,7 @@ export const aula01: AulaGeoV1 = {
         y: 55,
         emoji: "🏙️",
         cor: "from-sky-400 to-indigo-500",
+        fotoUrl: imgZonaUrbana,
         titulo: "Zona Urbana",
         texto:
           "Esse pedaço é a CIDADE. Tem muitas casas juntinhas, ruas de asfalto, prédios, praça, escola e mercado. É onde a maioria das pessoas do município mora.",
@@ -127,6 +137,7 @@ export const aula01: AulaGeoV1 = {
         y: 35,
         emoji: "🌾",
         cor: "from-lime-400 to-emerald-600",
+        fotoUrl: imgZonaRural,
         titulo: "Zona Rural",
         texto:
           "Esse pedaço é o CAMPO. Tem plantação, sítio, fazenda, animais e muito verde. É de onde vem grande parte da comida que a gente come na cidade.",
@@ -137,6 +148,7 @@ export const aula01: AulaGeoV1 = {
         y: 65,
         emoji: "🌊",
         cor: "from-cyan-400 to-blue-600",
+        fotoUrl: imgRio,
         titulo: "Rio do Município",
         texto:
           "O rio atravessa o município INTEIRO. Ele passa pelo campo e chega perto da cidade. Serve pra beber, pra plantar e pra dar vida pros bichos.",
@@ -147,6 +159,7 @@ export const aula01: AulaGeoV1 = {
         y: 20,
         emoji: "🚧",
         cor: "from-amber-400 to-rose-600",
+        fotoUrl: imgFronteira,
         titulo: "Fronteira",
         texto:
           "Aqui é a FRONTEIRA. Depois dessa linha, começa OUTRO município, com outra prefeitura. Tudo que está antes dela ainda é o nosso município.",
