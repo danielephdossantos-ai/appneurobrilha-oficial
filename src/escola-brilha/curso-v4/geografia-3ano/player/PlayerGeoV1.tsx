@@ -2559,6 +2559,7 @@ function ConstrutorMarcos({
   const [combo, setCombo] = useState(0);
   const [comboMax, setComboMax] = useState(0);
   const [fim, setFim] = useState(false);
+  const [iniciado, setIniciado] = useState(false);
 
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
