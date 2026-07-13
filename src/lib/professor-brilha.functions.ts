@@ -98,9 +98,8 @@ async function buscarBnccInfo(codigos: string[] | undefined): Promise<string> {
 
 
 export const professorBrilhaChat = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
-  .handler(async ({ data, context }): Promise<ProfResult> => {
+  .handler(async ({ data }): Promise<ProfResult> => {
     // Precisamos de PELO MENOS uma chave (Groq primária, Lovable reserva)
     if (!process.env.GROQ_API_KEY && !process.env.LOVABLE_API_KEY) {
       return {
@@ -112,18 +111,21 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
 
 
     const supabase = getServerClient();
-    const { userId } = context;
+    const userId: string | null = null;
     const { contexto, mensagem } = data;
 
 
-    // 1) Buscar / criar conversa desta aula
-    const { data: existente } = await supabase
-      .from("professor_brilha_conversas")
-      .select("id, mensagens")
-      .eq("user_id", userId)
-      .eq("curso_slug", contexto.cursoSlug)
-      .eq("aula_slug", contexto.aulaSlug)
-      .maybeSingle();
+
+    // 1) Buscar / criar conversa desta aula (somente se autenticado)
+    const { data: existente } = userId
+      ? await supabase
+          .from("professor_brilha_conversas")
+          .select("id, mensagens")
+          .eq("user_id", userId)
+          .eq("curso_slug", contexto.cursoSlug)
+          .eq("aula_slug", contexto.aulaSlug)
+          .maybeSingle()
+      : { data: null as any };
 
     const historico: Array<{ role: "user" | "assistant"; content: string }> = Array.isArray(
       existente?.mensagens,
@@ -188,51 +190,37 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
       { role: "assistant" as const, content: resposta, ts: new Date().toISOString() },
     ].slice(-100); // teto de 100 mensagens
 
-    try {
-      if (existente?.id) {
-        await supabase
-          .from("professor_brilha_conversas")
-          .update({ mensagens: novasMensagens })
-          .eq("id", existente.id);
-      } else {
-        await supabase.from("professor_brilha_conversas").insert({
-          user_id: userId,
-          curso_slug: contexto.cursoSlug,
-          aula_slug: contexto.aulaSlug,
-          disciplina: contexto.disciplina ?? null,
-          serie: contexto.serie ?? null,
-          mensagens: novasMensagens,
-        });
+    if (userId) {
+      try {
+        if (existente?.id) {
+          await supabase
+            .from("professor_brilha_conversas")
+            .update({ mensagens: novasMensagens })
+            .eq("id", existente.id);
+        } else {
+          await supabase.from("professor_brilha_conversas").insert({
+            user_id: userId,
+            curso_slug: contexto.cursoSlug,
+            aula_slug: contexto.aulaSlug,
+            disciplina: contexto.disciplina ?? null,
+            serie: contexto.serie ?? null,
+            mensagens: novasMensagens,
+          });
+        }
+      } catch (e) {
+        console.error("[professor-brilha] persist falhou:", e);
       }
-    } catch (e) {
-      console.error("[professor-brilha] persist falhou:", e);
-      // não falha a resposta pro usuário
     }
 
     return { ok: true, resposta };
   });
 
 export const carregarConversaProfessorBrilha = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
     z
       .object({ cursoSlug: z.string().min(1).max(120), aulaSlug: z.string().min(1).max(120) })
       .parse(input),
   )
-  .handler(async ({ data, context }) => {
-    const supabase = getServerClient();
-    const { data: row } = await supabase
-      .from("professor_brilha_conversas")
-      .select("mensagens")
-      .eq("user_id", context.userId)
-      .eq("curso_slug", data.cursoSlug)
-      .eq("aula_slug", data.aulaSlug)
-      .maybeSingle();
-
-    const mensagens = Array.isArray(row?.mensagens)
-      ? (row!.mensagens as any[]).filter(
-          (m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
-        )
-      : [];
-    return { mensagens };
+  .handler(async () => {
+    return { mensagens: [] as Array<{ role: "user" | "assistant"; content: string }> };
   });
