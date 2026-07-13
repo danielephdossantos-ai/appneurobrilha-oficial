@@ -14,6 +14,7 @@ Aula EF01MA02 é gabarito TRAVADO.
 **Toda unidade nova**: trocar as ideias das atividades (não reciclar mecânica da unidade anterior) e revisar 1 a 1 se cada `imagemUrl` bate com o texto da opção/pista. Formato de tela NUNCA muda. Ver [Nova unidade — atividades e imagens](mem://preferences/nova-unidade-atividades-e-imagens).
 **Esqueleto de 11 blocos é FIXO** (Motivação → Previsão → Vocabulário → Leitura guiada → Compreensão → Personagens & lugar → Sequência → Você lê → Minijogo → Revisão → Avaliação). O que MUDA a cada unidade é o formato/mecânica DENTRO de cada bloco, como livro didático. Antes de escrever unidade nova, listar qual formato novo cada bloco vai usar. Ver [Esqueleto fixo, formato varia](mem://preferences/esqueleto-fixo-formato-varia).
 História 2º Ano: cada tema/palavra central precisa aparecer com imagem concreta + explicação direta na tela, não só texto ou palavra clicável.
+**PT-BR obrigatório em imagens**: mapas, infográficos e qualquer texto embutido em imagem gerada devem estar 100% em português brasileiro — nunca inglês. Ver [Português somente](mem://constraints/portugues-somente).
 
 ## Memories
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
