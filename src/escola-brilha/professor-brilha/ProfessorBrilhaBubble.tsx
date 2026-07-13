@@ -5,6 +5,7 @@ import {
   professorBrilhaChat,
   carregarConversaProfessorBrilha,
 } from "@/lib/professor-brilha.functions";
+import { transcreverAudio } from "@/lib/stt.functions";
 import professoraImg from "@/assets/pip-girl-professora.png";
 
 export interface ProfessorBrilhaContexto {
@@ -36,9 +37,16 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
   const [input, setInput] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [carregouHistorico, setCarregouHistorico] = useState(false);
+  const [gravando, setGravando] = useState(false);
+  const [transcrevendo, setTranscrevendo] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
   const enviar = useServerFn(professorBrilhaChat);
   const carregar = useServerFn(carregarConversaProfessorBrilha);
+  const transcrever = useServerFn(transcreverAudio);
+
 
   // Carregar histórico ao abrir pela primeira vez
   useEffect(() => {
