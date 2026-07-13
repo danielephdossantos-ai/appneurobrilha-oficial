@@ -89,8 +89,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: rotinaImg,
     camadas: [
-      { id: "dia", rotulo: "Ritmo do dia", emoji: "🌞", cor: "from-yellow-400 to-orange-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Manhã → tarde → noite → sono. Se repete TODO DIA." },
-      { id: "ano", rotulo: "Ritmo do ano", emoji: "🍂", cor: "from-orange-400 to-red-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Primavera → verão → outono → inverno. Se repete TODO ANO." },
+      { id: "dia", rotulo: "Ritmo do dia", emoji: "🌞", cor: "from-yellow-400 to-orange-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Manhã → tarde → noite → sono. Se repete TODO DIA.", fotoUrl: manhaImg },
+      { id: "ano", rotulo: "Ritmo do ano", emoji: "🍂", cor: "from-orange-400 to-red-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Primavera → verão → outono → inverno. Se repete TODO ANO.", fotoUrl: estacoesImg },
     ],
     falaFinal: "Ciclos curtos e longos convivem!",
   },

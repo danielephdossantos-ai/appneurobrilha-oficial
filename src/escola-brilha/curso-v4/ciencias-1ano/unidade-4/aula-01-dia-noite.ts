@@ -91,8 +91,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: diaImg,
     camadas: [
-      { id: "dia", rotulo: "Dia", emoji: "☀️", cor: "from-yellow-400 to-orange-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Céu azul com sol. Tudo iluminado, gente acordada." },
-      { id: "noite", rotulo: "Noite", emoji: "🌙", cor: "from-indigo-500 to-purple-800", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Céu escuro com lua e estrelas. Hora de dormir." },
+      { id: "dia", rotulo: "Dia", emoji: "☀️", cor: "from-yellow-400 to-orange-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Céu azul com sol. Tudo iluminado, gente acordada.", fotoUrl: diaImg },
+      { id: "noite", rotulo: "Noite", emoji: "🌙", cor: "from-indigo-500 to-purple-800", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Céu escuro com lua e estrelas. Hora de dormir.", fotoUrl: noiteImg },
     ],
     falaFinal: "Céu muda a cor conforme o tempo!",
   },

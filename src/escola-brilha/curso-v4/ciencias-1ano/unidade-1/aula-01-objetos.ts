@@ -91,8 +91,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: metalImg,
     camadas: [
-      { id: "duro", rotulo: "Duros", emoji: "🔩", cor: "from-slate-400 to-slate-700", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Madeira, vidro, metal, plástico — não amassam fácil." },
-      { id: "mole", rotulo: "Moles", emoji: "🧵", cor: "from-pink-400 to-rose-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Tecido — dobra e é gostoso de vestir." },
+      { id: "duro", rotulo: "Duros", emoji: "🔩", cor: "from-slate-400 to-slate-700", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Madeira, vidro, metal, plástico — não amassam fácil.", fotoUrl: metalImg },
+      { id: "mole", rotulo: "Moles", emoji: "🧵", cor: "from-pink-400 to-rose-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Tecido — dobra e é gostoso de vestir.", fotoUrl: tecidoImg },
     ],
     falaFinal: "Duro pra sustentar, mole pra abraçar!",
   },

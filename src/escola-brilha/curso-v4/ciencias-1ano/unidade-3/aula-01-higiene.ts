@@ -91,8 +91,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: maosImg,
     camadas: [
-      { id: "dentro", rotulo: "Por dentro", emoji: "🦷", cor: "from-purple-400 to-fuchsia-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Escovar os dentes cuida da BOCA por dentro." },
-      { id: "fora", rotulo: "Por fora", emoji: "🧼", cor: "from-cyan-400 to-sky-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Banho, mãos, cabelo e unhas cuidam do corpo por FORA." },
+      { id: "dentro", rotulo: "Por dentro", emoji: "🦷", cor: "from-purple-400 to-fuchsia-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Escovar os dentes cuida da BOCA por dentro.", fotoUrl: dentesImg },
+      { id: "fora", rotulo: "Por fora", emoji: "🧼", cor: "from-cyan-400 to-sky-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Banho, mãos, cabelo e unhas cuidam do corpo por FORA.", fotoUrl: banhoImg },
     ],
     falaFinal: "Dentro + fora = tudo limpo!",
   },
