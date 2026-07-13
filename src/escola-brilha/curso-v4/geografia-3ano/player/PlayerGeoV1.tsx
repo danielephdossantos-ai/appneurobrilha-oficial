@@ -2328,6 +2328,7 @@ function VoceLeSozinho({
       });
       restante = restante.slice(posEncontrada + chaveEncontrada.length);
     }
+    const definicoes = paragrafo.definicoes ?? {};
     return partes.map((p, i) => {
       if (p.tipo === "texto") {
         return <span key={i}>{p.conteudo}</span>;
@@ -2335,24 +2336,35 @@ function VoceLeSozinho({
       const chaveNorm = paragrafo.chaves.find(
         (c) => c.toLowerCase() === p.conteudo.toLowerCase(),
       )!;
-      const ativa = marcadasDaPagina.has(chaveNorm);
+      const marcada = marcadasDaPagina.has(chaveNorm);
+      const temDef = !!definicoes[chaveNorm];
+      const abertaKey = `${paragrafo.id}::${chaveNorm}`;
+      const aberta = chaveAberta === abertaKey;
       return (
         <button
           key={i}
           type="button"
-          onClick={() => marcarChave(chaveNorm)}
+          onClick={() => {
+            if (temDef) {
+              setChaveAberta((prev) => (prev === abertaKey ? null : abertaKey));
+            }
+            if (!marcada) marcarChave(chaveNorm);
+          }}
           className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded-md font-black transition ${
-            ativa
-              ? "bg-emerald-400 text-[#3a2410] shadow"
-              : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
+            aberta
+              ? "bg-amber-500 text-white shadow-lg ring-2 ring-amber-300"
+              : marcada
+                ? "bg-emerald-400 text-[#3a2410] shadow"
+                : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
           }`}
         >
           {p.conteudo}
-          {ativa ? " ✓" : ""}
+          {marcada && !aberta ? " ✓" : ""}
         </button>
       );
     });
   };
+
 
   return (
     <div className="space-y-5">
