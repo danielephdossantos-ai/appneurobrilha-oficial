@@ -1798,10 +1798,19 @@ function MapaCamadas({
               }`}
             >
               <div className="flex items-center gap-3">
-                <div className="text-4xl">{c.emoji}</div>
+                {c.fotoUrl ? (
+                  <img
+                    src={c.fotoUrl}
+                    alt={c.rotulo}
+                    className="w-14 h-14 rounded-xl object-cover border-2 border-white/70 shadow-md flex-shrink-0"
+                    draggable={false}
+                  />
+                ) : (
+                  <div className="text-4xl">{c.emoji}</div>
+                )}
                 <div className="flex-1">
                   <div className="text-white font-black text-lg leading-tight">
-                    {c.rotulo}
+                    {c.emoji} {c.rotulo}
                   </div>
                   <div className="text-white/85 text-xs mt-0.5">
                     {on ? "✅ acesa no mapa" : "toque pra acender"}
