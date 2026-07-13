@@ -13,6 +13,7 @@ Aula EF01MA02 é gabarito TRAVADO.
 **Geografia 2º Ano**: aplica Regra de Ouro de UI (nenhum texto estático >2 linhas; explicação ativada por clique + áudio + feedback animado; listas viram grids/sliders/drag/carrossel/modal). Evolução pedagógica: Comparar → Explicar → Relacionar → Interpretar → Resolver.
 **Toda unidade nova**: trocar as ideias das atividades (não reciclar mecânica da unidade anterior) e revisar 1 a 1 se cada `imagemUrl` bate com o texto da opção/pista. Formato de tela NUNCA muda. Ver [Nova unidade — atividades e imagens](mem://preferences/nova-unidade-atividades-e-imagens).
 **Esqueleto de 11 blocos é FIXO** (Motivação → Previsão → Vocabulário → Leitura guiada → Compreensão → Personagens & lugar → Sequência → Você lê → Minijogo → Revisão → Avaliação). O que MUDA a cada unidade é o formato/mecânica DENTRO de cada bloco, como livro didático. Antes de escrever unidade nova, listar qual formato novo cada bloco vai usar. Ver [Esqueleto fixo, formato varia](mem://preferences/esqueleto-fixo-formato-varia).
+**SPEB 1.0 — Cláusula 14 (fluxo oficial de cursos novos)**: todo curso novo segue 3 fases obrigatórias com aprovação — (1) Arquitetura do Curso, (2) Mapa Mestre (35 aulas planejadas), (3) Produção U1→U7. Proibido produzir aulas isoladas. 16 momentos por aula. Ver [SPEB Cláusula 14](mem://preferences/speb-clausula-14-fluxo-producao).
 
 ## Memories
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
