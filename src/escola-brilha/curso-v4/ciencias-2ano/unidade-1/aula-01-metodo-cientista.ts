@@ -494,4 +494,10 @@ export const aula01: AulaGeoV1 = {
     falaFinal:
       "Você recuperou o Cristal da Observação! O Microscópio Virtual está desbloqueado pras próximas missões.",
   },
+
+  recompensa: {
+    xp: 100,
+    moedas: 20,
+    medalha: "Pequeno Cientista",
+  },
 };
