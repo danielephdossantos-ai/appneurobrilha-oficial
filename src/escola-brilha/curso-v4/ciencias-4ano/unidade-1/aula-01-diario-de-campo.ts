@@ -5,6 +5,9 @@ import lupaImg from "@/assets/ciencias-4ano/u1-a1/lupa-campo.jpg";
 import graficoImg from "@/assets/ciencias-4ano/u1-a1/grafico-plantas.jpg";
 import mesaImg from "@/assets/ciencias-4ano/u1-a1/mesa-pesquisa.jpg";
 import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
+import termometroImg from "@/assets/ciencias-4ano/u1-a1/termometro-real.jpg";
+import reguaImg from "@/assets/ciencias-4ano/u1-a1/regua-real.jpg";
+import tubosImg from "@/assets/ciencias-4ano/u1-a1/tubos-real.jpg";
 
 /**
  * Ciências · 4º Ano · Unidade 1 · Aula 01
@@ -158,6 +161,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-red-500 to-rose-700",
         titulo: "Termômetro",
         texto: "Mede temperatura em graus Celsius (°C). Fator ambiental que influencia seres vivos.",
+        fotoUrl: termometroImg,
       },
       {
         id: "regua",
@@ -166,6 +170,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         titulo: "Régua",
         texto: "Mede comprimento em centímetros (cm). Padroniza os dados de crescimento.",
+        fotoUrl: reguaImg,
       },
       {
         id: "lupa",
@@ -183,6 +188,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-cyan-500 to-sky-700",
         titulo: "Tubos de amostra",
         texto: "Coletam e preservam material biológico do campo pra análise no laboratório.",
+        fotoUrl: tubosImg,
       },
     ],
     falaFinal:
