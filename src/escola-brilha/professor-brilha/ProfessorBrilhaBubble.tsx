@@ -5,6 +5,7 @@ import {
   professorBrilhaChat,
   carregarConversaProfessorBrilha,
 } from "@/lib/professor-brilha.functions";
+import professoraImg from "@/assets/pip-girl-professora.png";
 
 export interface ProfessorBrilhaContexto {
   cursoSlug: string;
@@ -111,7 +112,11 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
           aria-label="Professor Brilha — tirar dúvida"
         >
           <div className="relative">
-            <div className="text-3xl">{teen ? "🎓" : "👨‍🏫"}</div>
+            <img
+              src={professoraImg}
+              alt="Professora Brilha"
+              className="w-14 h-14 object-contain drop-shadow"
+            />
             <motion.div
               className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-red-500 border-2 border-white"
               animate={{ scale: [1, 1.3, 1] }}
@@ -152,11 +157,15 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                 }`}
               >
                 <div
-                  className={`w-11 h-11 rounded-full grid place-items-center text-2xl ${
+                  className={`w-11 h-11 rounded-full grid place-items-center overflow-hidden ${
                     teen ? "bg-cyan-500/15 border border-cyan-500/40" : "bg-white/40"
                   }`}
                 >
-                  {teen ? "🎓" : "👨‍🏫"}
+                  <img
+                    src={professoraImg}
+                    alt="Professora Brilha"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
@@ -164,7 +173,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                       teen ? "text-cyan-100" : "text-[#3d2500]"
                     }`}
                   >
-                    Professor Brilha
+                    Professora Brilha
                   </div>
                   <div
                     className={`text-[11px] leading-tight truncate ${
@@ -202,9 +211,13 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                         : "bg-white border border-amber-200 text-[#5b3a00]"
                     }`}
                   >
-                    <div className="text-3xl mb-2">💛</div>
+                    <img
+                      src={professoraImg}
+                      alt="Professora Brilha"
+                      className="w-16 h-16 object-contain mx-auto mb-2"
+                    />
                     <div className="font-bold text-sm mb-1">
-                      Oi! Sou o Professor Brilha.
+                      Oi! Sou sua Professora Brilha.
                     </div>
                     <div className="text-xs leading-relaxed">
                       Ficou com dúvida na aula? Me pergunta! Eu tô aqui pra te ajudar
