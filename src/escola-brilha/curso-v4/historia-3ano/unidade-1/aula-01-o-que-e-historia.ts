@@ -181,6 +181,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Qual dessas coisas é uma FONTE HISTÓRICA?",
+        fotoUrl: fotoAntigaFamilia,
         cards: [
           { id: "foto", emoji: "📸", titulo: "Foto antiga da família", cor: "from-sky-400 to-indigo-600" },
           { id: "sonho", emoji: "💭", titulo: "Um sonho que você teve", cor: "from-fuchsia-400 to-purple-600" },
@@ -188,13 +189,14 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "foto",
         feedbackAcerto:
-          "Isso! Foto antiga é fonte: guarda pistas reais do passado.",
+          "Isso! Essa foto sépia da família é uma FONTE: guarda pistas reais do passado — os rostos, as roupas, o cenário.",
         feedbackErro:
-          "Quase! Sonho e chuva de amanhã não deixam prova. Fonte é o que o PASSADO deixou — como a foto antiga.",
+          "Olha a foto de novo. Sonho e chuva de amanhã não deixam prova. Fonte é o que o PASSADO deixou — como essa foto antiga.",
       },
       {
         id: "q2",
         pergunta: "O historiador estuda principalmente…",
+        fotoUrl: quizPessoasTempo,
         cards: [
           { id: "dinos", emoji: "🦖", titulo: "Dinossauros", cor: "from-lime-400 to-emerald-600" },
           { id: "pessoas", emoji: "👨‍👩‍👧", titulo: "Pessoas no tempo", cor: "from-amber-400 to-orange-600" },
@@ -202,13 +204,14 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "pessoas",
         feedbackAcerto:
-          "Boa! O historiador estuda PESSOAS ao longo do tempo — o que faziam, sentiam, criavam.",
+          "Boa! Repara na imagem: pessoas de épocas diferentes lado a lado. O historiador estuda PESSOAS ao longo do tempo.",
         feedbackErro:
-          "Não é aí. Dinossauro é da paleontologia, planeta é da astronomia. História é de PESSOAS.",
+          "Olha a imagem: são PESSOAS de épocas diferentes. Dinossauro é da paleontologia, planeta é da astronomia. História é de PESSOAS.",
       },
       {
         id: "q3",
         pergunta: "A EVIDÊNCIA dentro de uma foto antiga pode ser…",
+        fotoUrl: quizRoupaEpoca,
         cards: [
           { id: "roupa", emoji: "👗", titulo: "A roupa da época", cor: "from-rose-400 to-pink-600" },
           { id: "wifi", emoji: "📶", titulo: "O sinal do Wi-Fi", cor: "from-cyan-400 to-blue-600" },
@@ -216,9 +219,9 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "roupa",
         feedbackAcerto:
-          "Exato! A roupa é evidência: mostra a moda e o costume daquela época.",
+          "Exato! Repara no chapéu, no colar de pérolas e no vestido de renda: a ROUPA é evidência da moda daquela época.",
         feedbackErro:
-          "Ainda não. Wi-Fi e app não existiam antigamente — não podem ser evidência dentro de foto antiga.",
+          "Olha a foto: chapéu, colar de pérolas, vestido de renda. Wi-Fi e app não existiam antigamente. A evidência é a ROUPA.",
       },
     ],
     falaFinal:
