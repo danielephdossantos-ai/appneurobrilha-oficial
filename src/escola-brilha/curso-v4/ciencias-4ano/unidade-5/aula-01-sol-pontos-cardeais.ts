@@ -106,8 +106,6 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Toca em cada ponto do horizonte pra entender a orientação.",
     instrucao: "Toque em cada ponto",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: rosaImg,
     pontos: [
       {

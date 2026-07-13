@@ -106,8 +106,6 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Toca em cada etapa do ciclo pra ver a viagem da água.",
     instrucao: "Toque em cada etapa",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: cicloImg,
     pontos: [
       {
