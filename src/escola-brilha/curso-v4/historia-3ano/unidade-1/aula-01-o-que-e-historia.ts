@@ -8,6 +8,12 @@ import conceitoFonte from "@/assets/historia-3ano/conceito-fonte.jpg";
 import conceitoPassado from "@/assets/historia-3ano/conceito-passado.jpg";
 import quizPessoasTempo from "@/assets/historia-3ano/quiz-pessoas-tempo.jpg";
 import quizRoupaEpoca from "@/assets/historia-3ano/quiz-roupa-epoca.jpg";
+import miniSonho from "@/assets/historia-3ano/mini-sonho.jpg";
+import miniChuva from "@/assets/historia-3ano/mini-chuva.jpg";
+import miniDino from "@/assets/historia-3ano/mini-dino.jpg";
+import miniPlaneta from "@/assets/historia-3ano/mini-planeta.jpg";
+import miniWifi from "@/assets/historia-3ano/mini-wifi.jpg";
+import miniApp from "@/assets/historia-3ano/mini-app.jpg";
 
 /**
  * História · 3º Ano · Unidade 1 · Aula 01
