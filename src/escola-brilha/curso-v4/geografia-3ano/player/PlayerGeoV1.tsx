@@ -485,6 +485,21 @@ function VotoExplorador({
         </>
       )}
 
+      {cena.fotoUrl && (
+        <motion.img
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          src={cena.fotoUrl}
+          alt="Imagem de apoio para a pergunta"
+          loading="lazy"
+          className={
+            teen
+              ? "w-full aspect-[16/9] object-cover rounded-lg border border-slate-700 shadow-lg"
+              : "w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/20 shadow-xl"
+          }
+        />
+      )}
+
       {/* Cards de voto */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {cena.opcoes.map((op) => {
@@ -522,6 +537,14 @@ function VotoExplorador({
                   {op.subtitulo && (
                     <div className="text-slate-400 text-xs mt-1 leading-snug">{op.subtitulo}</div>
                   )}
+                  {op.fotoUrl && (
+                    <img
+                      src={op.fotoUrl}
+                      alt=""
+                      loading="lazy"
+                      className="mt-3 w-full aspect-[16/9] object-cover rounded-md border border-slate-700"
+                    />
+                  )}
                 </>
               ) : (
                 <>
@@ -529,6 +552,14 @@ function VotoExplorador({
                   <div className="text-white font-black text-lg leading-tight">{op.titulo}</div>
                   {op.subtitulo && (
                     <div className="text-white/85 text-xs mt-1 font-medium">{op.subtitulo}</div>
+                  )}
+                  {op.fotoUrl && (
+                    <img
+                      src={op.fotoUrl}
+                      alt=""
+                      loading="lazy"
+                      className="mt-3 w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/25"
+                    />
                   )}
                 </>
               )}
