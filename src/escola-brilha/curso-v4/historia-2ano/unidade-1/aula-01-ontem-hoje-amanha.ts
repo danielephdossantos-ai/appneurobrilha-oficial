@@ -1,28 +1,24 @@
 import type { AulaGeoV1 } from "../../types";
+import imgPassado from "@/assets/historia-2ano/passado-fotografo.png";
+import imgPresente from "@/assets/historia-2ano/presente-lupa.png";
+import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
 
 /**
  * História · 2º Ano · Unidade 1 · Aula 01
  * "Ontem, Hoje e Amanhã" — EF02HI06 + EF02HI07
  *
- * Piloto usando o motor PlayerGeoV1 (mesmo esqueleto 11 cenas travado da
- * Geografia 3º–9º). Narrativa temática: Máquina do Tempo do Brilha,
- * recuperando a 1ª Engrenagem de Bronze do Relógio do Tempo.
- *
- * Recursos visuais: fotos Unsplash em preto-e-branco (passado) e coloridas
- * (presente) — sustentam a comparação sensorial "antes × agora" que a
- * aula pede. Skin custom da cabine é próxima etapa.
+ * Skin "Máquina do Tempo do Brilha" via imagens temáticas kawaii:
+ *  - PASSADO: fotógrafo antigo com câmera de fole (sépia)
+ *  - PRESENTE: lupa dourada (investigar o AGORA)
+ *  - FUTURO:  xícara fumegante + calendário (amanhã)
+ * Motor visual permanece o PlayerGeoV1 (padrão travado do app).
  */
 
-const IMG_PASSADO =
-  "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=80";
-const IMG_PRESENTE =
-  "https://images.unsplash.com/photo-1519689680058-324335c77ebd?w=900&q=80";
-const IMG_RELOGIO =
-  "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=900&q=80";
-const IMG_CALENDARIO =
-  "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=900&q=80";
-const IMG_ALBUM =
-  "https://images.unsplash.com/photo-1544413164-5f1b295eb435?w=900&q=80";
+const IMG_PASSADO = imgPassado;
+const IMG_PRESENTE = imgPresente;
+const IMG_RELOGIO = imgPresente;
+const IMG_CALENDARIO = imgFuturo;
+const IMG_ALBUM = imgPassado;
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ontem-hoje-amanha",
