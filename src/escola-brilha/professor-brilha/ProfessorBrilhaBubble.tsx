@@ -157,11 +157,15 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                 }`}
               >
                 <div
-                  className={`w-11 h-11 rounded-full grid place-items-center text-2xl ${
+                  className={`w-11 h-11 rounded-full grid place-items-center overflow-hidden ${
                     teen ? "bg-cyan-500/15 border border-cyan-500/40" : "bg-white/40"
                   }`}
                 >
-                  {teen ? "🎓" : "👨‍🏫"}
+                  <img
+                    src={professoraImg}
+                    alt="Professora Brilha"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
@@ -169,7 +173,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                       teen ? "text-cyan-100" : "text-[#3d2500]"
                     }`}
                   >
-                    Professor Brilha
+                    Professora Brilha
                   </div>
                   <div
                     className={`text-[11px] leading-tight truncate ${
