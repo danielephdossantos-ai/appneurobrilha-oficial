@@ -5179,6 +5179,42 @@ export type Database = {
           },
         ]
       }
+      professor_brilha_conversas: {
+        Row: {
+          aula_slug: string
+          created_at: string
+          curso_slug: string
+          disciplina: string | null
+          id: string
+          mensagens: Json
+          serie: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          aula_slug: string
+          created_at?: string
+          curso_slug: string
+          disciplina?: string | null
+          id?: string
+          mensagens?: Json
+          serie?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          aula_slug?: string
+          created_at?: string
+          curso_slug?: string
+          disciplina?: string | null
+          id?: string
+          mensagens?: Json
+          serie?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
