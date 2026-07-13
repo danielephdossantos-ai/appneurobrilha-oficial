@@ -644,12 +644,14 @@ export type CenaGeoV1 =
       tipo: "votoExplorador";
       aurora: string;                // fala inicial da Aurora
       pergunta: string;               // pergunta grande no topo
+      fotoUrl?: string;               // opcional: imagem de contexto antes das opções
       opcoes: Array<{
         id: string;
         titulo: string;               // ex.: "Só cidade"
         subtitulo?: string;           // ex.: "prédios, ruas, praças"
         emoji: string;                // ícone grande no card
         cor: string;                  // gradient tailwind, ex.: "from-sky-400 to-indigo-500"
+        fotoUrl?: string;             // opcional: imagem visual da opção
       }>;
       respostaCerta: string;          // id da opção correta
       feedbackAcerto: string;
@@ -784,6 +786,7 @@ export type CenaGeoV1 =
       tipo: "pizzaMunicipio";
       aurora: string;
       instrucao: string;
+      fotoUrl?: string;               // opcional: imagem de revisão antes das fatias
       /** Duas fatias somando 100. */
       fatias: [
         {
@@ -794,6 +797,7 @@ export type CenaGeoV1 =
           cor: string;            // hex ou tailwind stop
           descricao: string;      // frase falada ao tocar
           exemplos: string[];     // 2-3 exemplos curtos
+          fotoUrl?: string;       // opcional: imagem visual da fatia
         },
         {
           id: string;
@@ -803,6 +807,7 @@ export type CenaGeoV1 =
           cor: string;
           descricao: string;
           exemplos: string[];
+          fotoUrl?: string;
         },
       ];
       falaFinal: string;
@@ -811,10 +816,12 @@ export type CenaGeoV1 =
       tipo: "seloAtlas";
       aurora: string;
       instrucao: string;
+      fotoUrl?: string;                 // opcional: imagem de contexto da avaliação
       /** 3 perguntas curtas de fechamento. */
       perguntas: Array<{
         id: string;
         pergunta: string;
+        fotoUrl?: string;               // opcional: imagem visual da pergunta
         opcoes: Array<{ id: string; texto: string; correta?: boolean }>;
         feedbackAcerto: string;
         feedbackErro: string;
@@ -824,6 +831,7 @@ export type CenaGeoV1 =
         subtitulo: string;    // "Insígnia oficial do Atlas Municipal"
         emoji: string;        // "🏅"
         cor: string;          // tailwind stop, ex "from-amber-300 to-orange-500"
+        fotoUrl?: string;     // opcional: imagem da conquista
       };
       falaFinal: string;
     }
