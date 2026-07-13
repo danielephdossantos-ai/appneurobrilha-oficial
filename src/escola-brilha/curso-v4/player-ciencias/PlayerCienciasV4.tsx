@@ -272,6 +272,7 @@ export function PlayerCienciasV4({ aula, cursoSlug, voltarPara, onConcluir }: Pr
                   {jogo.tipo === "ordenarSequencia" && <OrdenarSequencia data={jogo.bloco} />}
                   {jogo.tipo === "laboratorioClima" && <LaboratorioClima data={jogo.bloco} />}
                   {jogo.tipo === "arquitetoLugar" && <ArquitetoLugar data={jogo.bloco} />}
+                  {jogo.tipo === "mesaInvestigador" && <MesaInvestigador data={jogo.bloco} />}
                 </Secao>
               );
             })()}
