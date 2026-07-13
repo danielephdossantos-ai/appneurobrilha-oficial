@@ -124,10 +124,13 @@ export const aula01: AulaGeoV1 = {
   cena04_leituraGuiada: {
     tipo: "narrarMapa",
     aurora:
-      "Este é o Laboratório Escola Brilha. Toca em cada instrumento pra saber pra que serve.",
-    instrucao: "Toque em cada ponto pra ouvir a Aurora",
+      "Este é o Laboratório Escola Brilha. Toca em cada instrumento pra descobrir uma curiosidade.",
+    instrucao: "Toque em cada instrumento pra ver a curiosidade",
+    layout: "personagem",
+    personagemImg: brilhaImg,
     mapaUrl: bancadaImg,
     pontos: [
+
       {
         id: "microscopio",
         x: 20, y: 55,
