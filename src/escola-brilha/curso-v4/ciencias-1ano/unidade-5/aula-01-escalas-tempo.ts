@@ -91,8 +91,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: relogioImg,
     camadas: [
-      { id: "curto", rotulo: "Curto", emoji: "🕐", cor: "from-cyan-400 to-sky-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Hora e dia — passam rápido." },
-      { id: "longo", rotulo: "Longo", emoji: "🎂", cor: "from-pink-400 to-rose-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Mês e ano — demoram a passar." },
+      { id: "curto", rotulo: "Curto", emoji: "🕐", cor: "from-cyan-400 to-sky-600", rect: { x: 5, y: 5, w: 90, h: 45 }, descricao: "Hora e dia — passam rápido.", fotoUrl: relogioImg },
+      { id: "longo", rotulo: "Longo", emoji: "🎂", cor: "from-pink-400 to-rose-600", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Mês e ano — demoram a passar.", fotoUrl: aniversarioImg },
     ],
     falaFinal: "Uns rápidos, outros demorados!",
   },
