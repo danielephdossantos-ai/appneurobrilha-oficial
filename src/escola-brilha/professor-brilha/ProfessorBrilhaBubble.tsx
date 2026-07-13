@@ -406,8 +406,14 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                         handleEnviar();
                       }
                     }}
-                    disabled={carregando}
-                    placeholder="Escreve sua dúvida aqui..."
+                    disabled={carregando || transcrevendo || gravando}
+                    placeholder={
+                      gravando
+                        ? "🎙️ Escutando..."
+                        : transcrevendo
+                          ? "Convertendo sua voz em texto..."
+                          : "Escreve ou toca no microfone..."
+                    }
                     maxLength={1500}
                     className={`flex-1 rounded-full px-4 py-2.5 text-sm outline-none transition ${
                       teen
@@ -416,8 +422,23 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                     }`}
                   />
                   <button
+                    onClick={gravando ? pararGravacao : iniciarGravacao}
+                    disabled={carregando || transcrevendo}
+                    className={`w-11 h-11 rounded-full grid place-items-center transition text-lg disabled:opacity-40 disabled:cursor-not-allowed ${
+                      gravando
+                        ? "bg-red-500 text-white animate-pulse"
+                        : teen
+                          ? "bg-slate-800 hover:bg-slate-700 text-cyan-200 border border-slate-700"
+                          : "bg-amber-100 hover:bg-amber-200 text-[#3d2500] border border-amber-300"
+                    }`}
+                    aria-label={gravando ? "Parar gravação" : "Falar pergunta"}
+                    title={gravando ? "Toca pra parar" : "Toca pra falar"}
+                  >
+                    {gravando ? "⏹" : "🎙️"}
+                  </button>
+                  <button
                     onClick={handleEnviar}
-                    disabled={carregando || !input.trim()}
+                    disabled={carregando || transcrevendo || gravando || !input.trim()}
                     className={`w-11 h-11 rounded-full grid place-items-center transition text-lg font-bold disabled:opacity-40 disabled:cursor-not-allowed ${
                       teen
                         ? "bg-cyan-500 hover:bg-cyan-400 text-white"
@@ -427,6 +448,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                   >
                     ➤
                   </button>
+
                 </div>
               </div>
             </motion.div>
