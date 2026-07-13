@@ -144,16 +144,16 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza das conquistas: cada movimento social ampliou a cidadania de um grupo excluído.",
+    aurora: "Pizza das lutas atuais: dois grandes grupos de conquistas por inclusão.",
     instrucao: "Toque em cada fatia",
     fotoUrl: imgInfo,
     fatias: [
-      { id: "ind", rotulo: "Indígenas", emoji: "🪶", percentual: 33, cor: "#0f766e", descricao: "Demarcação de terras, proteção da cultura, educação bilíngue.", exemplos: ["🗺️ Terras", "📖 Língua"] },
-      { id: "neg", rotulo: "Negros", emoji: "✊🏾", percentual: 33, cor: "#b45309", descricao: "Lei de Cotas, combate ao racismo, igualdade de oportunidades.", exemplos: ["🎓 Cotas", "⚖️ Justiça"] },
-      { id: "aces", rotulo: "PCD", emoji: "♿", percentual: 34, cor: "#1e40af", descricao: "Rampas, LIBRAS, Braille, Estatuto da Pessoa com Deficiência.", exemplos: ["♿ Rampas", "🤟 LIBRAS"] },
+      { id: "identidade", rotulo: "Direitos Identitários (~50%)", emoji: "🪶", percentual: 50, cor: "#0f766e", descricao: "Movimento INDÍGENA (demarcação de terras, língua) + Movimento NEGRO (Lei de Cotas, combate ao racismo). Lutam pelo respeito à identidade e origem.", exemplos: ["🗺️ Demarcação", "🎓 Cotas"] },
+      { id: "acess", rotulo: "Direitos de Acessibilidade (~50%)", emoji: "♿", percentual: 50, cor: "#1e40af", descricao: "Movimento de ACESSIBILIDADE: rampas, elevadores, LIBRAS, Braille. Estatuto da Pessoa com Deficiência (2015).", exemplos: ["♿ Rampas", "🤟 LIBRAS"] },
     ],
-    falaFinal: "Três frentes que constroem um Brasil mais JUSTO.",
+    falaFinal: "Duas frentes que constroem um Brasil mais JUSTO.",
   },
+
 
   cena11_avaliacao: {
     tipo: "seloAtlas",

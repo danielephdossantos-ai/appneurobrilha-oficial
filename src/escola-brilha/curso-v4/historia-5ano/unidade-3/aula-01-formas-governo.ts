@@ -144,16 +144,16 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza dos Três Poderes: cada poder ocupa 1/3 e é INDEPENDENTE dos outros.",
+    aurora: "Pizza dos Três Poderes: dividida entre EXECUÇÃO (fazer) e CONTROLE (criar/julgar as leis).",
     instrucao: "Toque em cada fatia",
     fotoUrl: imgInfo,
     fatias: [
-      { id: "exec", rotulo: "Executivo", emoji: "🏛️", percentual: 33, cor: "#0f766e", descricao: "EXECUTA as leis. Presidente, Governadores, Prefeitos. Comanda ministérios, obras, escolas públicas.", exemplos: ["🎖️ Presidente", "🏙️ Prefeito"] },
-      { id: "leg", rotulo: "Legislativo", emoji: "📜", percentual: 33, cor: "#b45309", descricao: "CRIA as leis. Senadores, Deputados, Vereadores. Debate e vota o que a sociedade deve seguir.", exemplos: ["👔 Senador", "📝 Vereador"] },
-      { id: "jud", rotulo: "Judiciário", emoji: "⚖️", percentual: 34, cor: "#1e40af", descricao: "JULGA se as leis são cumpridas. Juízes, Ministros do STF. Resolve conflitos.", exemplos: ["🧑‍⚖️ Juiz", "⚖️ STF"] },
+      { id: "exec", rotulo: "Executivo (~33%)", emoji: "🏛️", percentual: 33, cor: "#0f766e", descricao: "EXECUTA as leis. Presidente, Governadores, Prefeitos. Comanda ministérios, obras, escolas públicas.", exemplos: ["🎖️ Presidente", "🏙️ Prefeito"] },
+      { id: "controle", rotulo: "Legislativo + Judiciário (~67%)", emoji: "⚖️", percentual: 67, cor: "#b45309", descricao: "CRIA e JULGA as leis. Legislativo (Senadores, Deputados, Vereadores) escreve as leis. Judiciário (Juízes, STF) fiscaliza se são cumpridas.", exemplos: ["📜 Congresso", "⚖️ STF"] },
     ],
-    falaFinal: "Três pilares que sustentam a República. Se um cai, o país desequilibra.",
+    falaFinal: "Três pilares em equilíbrio. Se um cai, o país desequilibra.",
   },
+
 
   cena11_avaliacao: {
     tipo: "seloAtlas",
