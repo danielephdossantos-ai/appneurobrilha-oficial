@@ -110,8 +110,10 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
       };
     }
 
-    const { supabase, userId } = context;
+    const supabase = getServerClient();
+    const { userId } = context;
     const { contexto, mensagem } = data;
+
 
     // 1) Buscar / criar conversa desta aula
     const { data: existente } = await supabase
