@@ -159,15 +159,18 @@ function EscolaBrilhaCatalogo() {
     Object.values(arvore[s]).reduce((acc, arr) => acc + arr.length, 0);
 
   // Mapa: Série -> disc slug -> Curso v4 correspondente
+  // Slugs terminados em "-v2" são pilotos e NÃO devem substituir a versão original no mapa.
   const cursoPorSerieDisc = useMemo(() => {
     const map: Record<string, Record<string, ReturnType<typeof listCursos>[number]>> = {};
     for (const c of listCursos()) {
+      if (c.slug.endsWith("-v2")) continue;
       const s = c.ano;
       const d = slugDisc(c.disciplina);
       (map[s] ||= {})[d] = c;
     }
     return map;
   }, []);
+
 
 
   return (
