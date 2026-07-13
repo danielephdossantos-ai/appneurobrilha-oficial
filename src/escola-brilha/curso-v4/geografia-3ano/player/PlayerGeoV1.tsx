@@ -2811,7 +2811,7 @@ function ConstrutorMarcos({
   }, [rodadaIdx, fim]);
 
   const escolher = (pecaId: string) => {
-    if (travada) return;
+    if (travada || !iniciado) return;
     setPecaTocada(pecaId);
     setTravada(true);
     if (pecaId === rodada.pecaCertaId) {
@@ -2832,6 +2832,7 @@ function ConstrutorMarcos({
     if (rodadaIdx + 1 < total) {
       setRodadaIdx(rodadaIdx + 1);
       setTempo(cena.duracaoSegundos);
+      setIniciado(false);
       setTravada(false);
       setFeedback(null);
       setPecaTocada(null);
@@ -2839,6 +2840,7 @@ function ConstrutorMarcos({
       setFim(true);
     }
   };
+
 
   if (teen && fim) {
     return (
