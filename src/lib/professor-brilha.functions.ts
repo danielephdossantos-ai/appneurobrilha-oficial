@@ -190,25 +190,26 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
       { role: "assistant" as const, content: resposta, ts: new Date().toISOString() },
     ].slice(-100); // teto de 100 mensagens
 
-    try {
-      if (existente?.id) {
-        await supabase
-          .from("professor_brilha_conversas")
-          .update({ mensagens: novasMensagens })
-          .eq("id", existente.id);
-      } else {
-        await supabase.from("professor_brilha_conversas").insert({
-          user_id: userId,
-          curso_slug: contexto.cursoSlug,
-          aula_slug: contexto.aulaSlug,
-          disciplina: contexto.disciplina ?? null,
-          serie: contexto.serie ?? null,
-          mensagens: novasMensagens,
-        });
+    if (userId) {
+      try {
+        if (existente?.id) {
+          await supabase
+            .from("professor_brilha_conversas")
+            .update({ mensagens: novasMensagens })
+            .eq("id", existente.id);
+        } else {
+          await supabase.from("professor_brilha_conversas").insert({
+            user_id: userId,
+            curso_slug: contexto.cursoSlug,
+            aula_slug: contexto.aulaSlug,
+            disciplina: contexto.disciplina ?? null,
+            serie: contexto.serie ?? null,
+            mensagens: novasMensagens,
+          });
+        }
+      } catch (e) {
+        console.error("[professor-brilha] persist falhou:", e);
       }
-    } catch (e) {
-      console.error("[professor-brilha] persist falhou:", e);
-      // não falha a resposta pro usuário
     }
 
     return { ok: true, resposta };
