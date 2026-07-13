@@ -69,6 +69,9 @@ export function ProfessorBrilho({ modulo, contexto, crianca }: Props) {
             content: `Ops, não consegui responder agora. (${res.error ?? "erro"})`,
           },
         ]);
+        const motivo = (res.error === "creditos" || res.error === "limite") ? res.error : "erro";
+        const { notificarErroIA } = await import("@/lib/notify-ai-error");
+        notificarErroIA(motivo, "Professor");
       }
     } finally {
       setBusy(false);

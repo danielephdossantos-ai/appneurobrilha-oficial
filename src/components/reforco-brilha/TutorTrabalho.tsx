@@ -121,6 +121,8 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
       if (!res.ok) {
         setMsgs((m) => [...m, { role: "assistant", content: res.mensagem }]);
         if (res.motivo === "creditos") setEncerrado(true);
+        const { notificarErroIA } = await import("@/lib/notify-ai-error");
+        notificarErroIA(res.motivo, "Reforço Brilha");
         return;
       }
 

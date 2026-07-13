@@ -355,6 +355,8 @@ function EditorTrabalho({
       if (!res.ok) {
         setAvisoCreditos(res.mensagem);
         toast.error(res.mensagem);
+        const { notificarErroIA } = await import("@/lib/notify-ai-error");
+        notificarErroIA(res.motivo, "Revisor");
         return;
       }
       let mudou = 0;
