@@ -432,46 +432,35 @@ export const aula01: AulaGeoV1 = {
   cena10_revisao: {
     tipo: "pizzaMunicipio",
     aurora:
-      "Vamos fechar a aula com três fatias — uma pra cada matriz. Toque em cada fatia pra revisar as heranças.",
-    instrucao: "Toque nas fatias pra ouvir sobre cada matriz",
+      "Vamos fechar a aula com duas fatias grandes: as raízes ANTIGAS do Brasil (indígena + africana) e as culturas dos IMIGRANTES que chegaram depois. Toque em cada uma pra revisar.",
+    instrucao: "Toque nas fatias pra ouvir sobre cada bloco de heranças",
     fotoUrl: imgInfografico,
     fatias: [
       {
-        id: "indigena",
-        rotulo: "Indígena",
-        emoji: "🪶",
-        percentual: 33,
+        id: "raizes",
+        rotulo: "Raízes originais",
+        emoji: "🪶🥁",
+        percentual: 60,
         cor: "#16a34a",
         descricao:
-          "Primeiros habitantes. Deixaram mandioca, milho, tapioca, redes, nomes Tupi de lugares, medicina tradicional e respeito pela natureza.",
-        exemplos: ["Mandioca / Tapioca", "Rede de dormir", "Nomes Tupi (Ipanema, Guarapari)", "Ervas medicinais"],
+          "Indígenas (primeiros habitantes) + africanos (trazidos escravizados) formam a base ancestral do Brasil. Deixaram alimentação (mandioca, feijoada), música (samba, berimbau), dança (capoeira), vocabulário (Tupi + africano) e religiões.",
+        exemplos: ["Mandioca, tapioca (indígena)", "Capoeira, samba (africana)", "Nomes Tupi de cidades", "Feijoada e acarajé"],
         fotoUrl: imgIndigena,
       },
       {
-        id: "africana",
-        rotulo: "Africana",
-        emoji: "🥁",
-        percentual: 34,
-        cor: "#c2410c",
-        descricao:
-          "Trazidos escravizados. Resistiram e enriqueceram a cultura com capoeira, samba, feijoada, acarajé, berimbau e vocabulário próprio.",
-        exemplos: ["Capoeira e samba", "Feijoada e acarajé", "Berimbau", "Palavras (moleque, cafuné, quilombo)"],
-        fotoUrl: imgCapoeira,
-      },
-      {
-        id: "imigrante",
-        rotulo: "Imigrante",
+        id: "imigrantes",
+        rotulo: "Imigrantes (1870-1950)",
         emoji: "⛵",
-        percentual: 33,
+        percentual: 40,
         cor: "#1e40af",
         descricao:
-          "Vieram voluntariamente entre 1870-1950. Trouxeram pizza, macarrão, sushi, esfiha, sanfona, arquitetura própria e novas indústrias.",
+          "Italianos, japoneses, alemães, árabes vieram voluntariamente após o fim da escravidão. Trouxeram pizza, macarrão, sushi, esfiha, sanfona, arquitetura enxaimel e novas técnicas industriais.",
         exemplos: ["Pizza e macarrão (italianos)", "Sushi e hashi (japoneses)", "Esfiha e quibe (árabes)", "Enxaimel (alemães)"],
         fotoUrl: imgImigrantes,
       },
     ],
     falaFinal:
-      "Três fatias, um só povo. É essa MISTURA que faz o Brasil ser único no mundo.",
+      "Duas grandes fatias, um só povo. As raízes ancestrais + a chegada dos imigrantes formam o Brasil que você conhece hoje.",
   },
 
   cena11_avaliacao: {
