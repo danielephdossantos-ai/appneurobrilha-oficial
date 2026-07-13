@@ -121,7 +121,7 @@ function AulaGeoV1Page() {
   }
 
   const teen = curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2" || curso === "geografia-9ano-v2";
-  const modoScrollLivre = curso === "ciencias-2ano";
+  const modoScrollLivre = curso === "ciencias-2ano" || curso === "ciencias-1ano";
 
   return (
     <>
