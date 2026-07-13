@@ -121,10 +121,17 @@ function AulaGeoV1Page() {
   }
 
   const teen = curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2" || curso === "geografia-9ano-v2";
+  const modoScrollLivre = curso === "ciencias-2ano";
 
   return (
     <>
-      <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />
+      <PlayerGeoV1
+        key={aula}
+        aula={dados.aula}
+        onSair={sair}
+        onConcluir={concluir}
+        modoScrollLivre={modoScrollLivre}
+      />
       <ProfessorBrilhaBubble
         teen={teen}
         contexto={{

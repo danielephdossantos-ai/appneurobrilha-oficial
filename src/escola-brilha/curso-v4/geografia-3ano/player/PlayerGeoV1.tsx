@@ -9,6 +9,9 @@ import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
 const TeenContext = createContext(false);
 export const useTeen = () => useContext(TeenContext);
 
+const ScrollLivreContext = createContext(false);
+const useScrollLivre = () => useContext(ScrollLivreContext);
+
 const stripDecorativeEmoji = (value = "") =>
   value
     .replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}]/gu, "")
@@ -29,10 +32,12 @@ export function PlayerGeoV1({
   aula,
   onSair,
   onConcluir,
+  modoScrollLivre = false,
 }: {
   aula: AulaGeoV1;
   onSair: () => void;
   onConcluir: () => void;
+  modoScrollLivre?: boolean;
 }) {
   const cenas: Array<{ chave: string; rotulo: string; cena: CenaGeoV1 }> = [
     { chave: "1", rotulo: "🎬 Motivação", cena: aula.cena01_motivacao },
@@ -82,6 +87,7 @@ export function PlayerGeoV1({
   const teen = aula.estilo === "teen";
   return (
     <TeenContext.Provider value={teen}>
+    <ScrollLivreContext.Provider value={modoScrollLivre}>
     <div className={`min-h-screen text-white ${teen ? "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" : "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"}`}>
 
       <header className="sticky top-0 z-20 backdrop-blur bg-black/40 border-b border-white/10">
@@ -134,6 +140,7 @@ export function PlayerGeoV1({
         <div className="h-24" />
       </main>
     </div>
+    </ScrollLivreContext.Provider>
     </TeenContext.Provider>
   );
 }
@@ -205,6 +212,7 @@ function MesaCartografo({
   ]);
   const [descoberto, setDescoberto] = useState(false);
   const [tocouTeen, setTocouTeen] = useState(false);
+  const scrollLivre = useScrollLivre();
 
   const R = 80; // raio de revelação em px
 
@@ -411,17 +419,19 @@ function MesaCartografo({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!descoberto}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          descoberto
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!descoberto}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            descoberto
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
+        </button>
+      )}
     </div>
   );
 }
@@ -438,6 +448,7 @@ function VotoExplorador({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [voto, setVoto] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
   const acertou = voto === cena.respostaCerta;
@@ -624,25 +635,27 @@ function VotoExplorador({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!revelado}
-        className={
-          teen
-            ? `w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-                revelado
-                  ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-                  : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-              }`
-            : `w-full py-4 rounded-2xl font-black text-lg transition ${
-                revelado
-                  ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-                  : "bg-white/10 text-white/40 cursor-not-allowed"
-              }`
-        }
-      >
-        {revelado ? (teen ? "Continuar →" : "Continuar") : teen ? "Escolha uma opção" : "🗳️ Escolha uma opção pra continuar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!revelado}
+          className={
+            teen
+              ? `w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+                  revelado
+                    ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                    : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+                }`
+              : `w-full py-4 rounded-2xl font-black text-lg transition ${
+                  revelado
+                    ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+                    : "bg-white/10 text-white/40 cursor-not-allowed"
+                }`
+          }
+        >
+          {revelado ? (teen ? "Continuar →" : "Continuar") : teen ? "Escolha uma opção" : "🗳️ Escolha uma opção pra continuar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -660,6 +673,7 @@ function CadernosCampo({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
 
   if (teen) {
     return (
@@ -709,12 +723,14 @@ function CadernosCampo({
           {stripDecorativeEmoji(cena.falaFinal)}
         </div>
 
-        <button
-          onClick={onProxima}
-          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-        >
-          Continuar →
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        )}
       </div>
     );
   }
@@ -787,12 +803,14 @@ function CadernosCampo({
         </div>
       </motion.div>
 
-      <button
-        onClick={onProxima}
-        className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-      >
-        Continuar
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+        >
+          Continuar
+        </button>
+      )}
     </div>
   );
 }
@@ -815,6 +833,7 @@ function NarrarMapa({
   const visitadosCount = Object.values(visitados).filter(Boolean).length;
   const todosVistos = visitadosCount === total;
   const pontoAtivo = cena.pontos.find((p) => p.id === ativo) ?? null;
+  const scrollLivre = useScrollLivre();
 
   const falar = (texto: string) => {
     try {
@@ -937,17 +956,19 @@ function NarrarMapa({
           {visitadosCount} / {total}
         </div>
 
-        <button
-          onClick={onProxima}
-          disabled={!todosVistos}
-          className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-[0.15em] font-mono transition ${
-            todosVistos
-              ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-              : "bg-slate-800 text-slate-600 cursor-not-allowed"
-          }`}
-        >
-          {todosVistos ? "Continuar" : "Ouça todas as posições"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!todosVistos}
+            className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-[0.15em] font-mono transition ${
+              todosVistos
+                ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+                : "bg-slate-800 text-slate-600 cursor-not-allowed"
+            }`}
+          >
+            {todosVistos ? "Continuar" : "Ouça todas as posições"}
+          </button>
+        )}
       </div>
     );
   }
@@ -1107,17 +1128,19 @@ function NarrarMapa({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todosVistos}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todosVistos
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {todosVistos ? "Continuar" : "🗺️ Toque em todos os balões"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todosVistos}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todosVistos
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {todosVistos ? "Continuar" : "🗺️ Toque em todos os balões"}
+        </button>
+      )}
     </div>
   );
 }
@@ -1134,6 +1157,7 @@ function QuizRadar({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [idx, setIdx] = useState(0);
   const [escolha, setEscolha] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
@@ -1211,12 +1235,14 @@ function QuizRadar({
             <div className="text-4xl font-black text-white">{acertos}/{total}</div>
             <p className="text-sm text-slate-300 mt-3 leading-relaxed">{stripDecorativeEmoji(cena.falaFinal)}</p>
           </div>
-          <button
-            onClick={onProxima}
-            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-          >
-            Continuar →
-          </button>
+          {!scrollLivre && (
+            <button
+              onClick={onProxima}
+              className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+            >
+              Continuar →
+            </button>
+          )}
         </div>
       );
     }
@@ -1552,12 +1578,14 @@ function QuizRadar({
               {cena.falaFinal}
             </div>
           </div>
-          <button
-            onClick={onProxima}
-            className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-          >
-            Continuar
-          </button>
+          {!scrollLivre && (
+            <button
+              onClick={onProxima}
+              className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+            >
+              Continuar
+            </button>
+          )}
         </>
       )}
     </div>
@@ -1575,6 +1603,7 @@ function MapaCamadas({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const scrollLivre = useScrollLivre();
   const [ligadas, setLigadas] = useState<Record<string, boolean>>({});
   const totalLigadas = Object.values(ligadas).filter(Boolean).length;
   const todasLigadas = totalLigadas === cena.camadas.length;
@@ -1720,17 +1749,19 @@ function MapaCamadas({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todasLigadas}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todasLigadas
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {todasLigadas ? "Continuar" : "🔦 Acenda todas as camadas do mapa"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todasLigadas}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todasLigadas
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {todasLigadas ? "Continuar" : "🔦 Acenda todas as camadas do mapa"}
+        </button>
+      )}
     </div>
   );
 }
@@ -1747,6 +1778,7 @@ function LinhaEstrada({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const total = cena.ordemCerta.length;
   const [passo, setPasso] = useState(0);       // próxima posição a preencher
   const [colocados, setColocados] = useState<string[]>([]); // ids em ordem
@@ -1869,17 +1901,19 @@ function LinhaEstrada({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!concluido}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            concluido
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!concluido}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              concluido
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
+          </button>
+        )}
       </div>
     );
   }
@@ -2024,17 +2058,19 @@ function LinhaEstrada({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!concluido}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          concluido
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {concluido ? "Continuar" : `🛣️ Monte o caminho (${passo}/${total})`}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            concluido
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar" : `🛣️ Monte o caminho (${passo}/${total})`}
+        </button>
+      )}
     </div>
   );
 }
@@ -2051,6 +2087,7 @@ function VoceLeSozinho({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [paginaAtual, setPaginaAtual] = useState(0);
   const [marcadas, setMarcadas] = useState<Record<string, Set<string>>>({});
   const [concluido, setConcluido] = useState(false);
@@ -2306,17 +2343,19 @@ function VoceLeSozinho({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!concluido}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            concluido
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {concluido ? "Continuar →" : "Termine a leitura (todas as páginas)"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!concluido}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              concluido
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {concluido ? "Continuar →" : "Termine a leitura (todas as páginas)"}
+          </button>
+        )}
       </div>
     );
   }
@@ -2559,17 +2598,19 @@ function VoceLeSozinho({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!concluido}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          concluido
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {concluido ? "Continuar" : "📖 Leia todas as páginas pra continuar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            concluido
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar" : "📖 Leia todas as páginas pra continuar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -2586,6 +2627,7 @@ function ConstrutorMarcos({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
@@ -2679,12 +2721,14 @@ function ConstrutorMarcos({
             {stripDecorativeEmoji(cena.falaFinal)}
           </div>
         </div>
-        <button
-          onClick={onProxima}
-          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-        >
-          Continuar →
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        )}
       </div>
     );
   }
@@ -2711,12 +2755,14 @@ function ConstrutorMarcos({
             {cena.falaFinal}
           </div>
         </motion.div>
-        <button
-          onClick={onProxima}
-          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-        >
-          Continuar
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+          >
+            Continuar
+          </button>
+        )}
       </div>
     );
   }
@@ -3018,6 +3064,7 @@ function PizzaMunicipio({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [tocadas, setTocadas] = useState<Set<string>>(new Set());
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -3191,17 +3238,19 @@ function PizzaMunicipio({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!todasTocadas}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            todasTocadas
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {todasTocadas ? "Continuar →" : "Analise os dois setores"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!todasTocadas}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              todasTocadas
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {todasTocadas ? "Continuar →" : "Analise os dois setores"}
+          </button>
+        )}
       </div>
     );
   }
@@ -3385,17 +3434,19 @@ function PizzaMunicipio({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todasTocadas}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todasTocadas
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed border border-white/10"
-        }`}
-      >
-        {todasTocadas ? "Continuar" : "Toque nas 2 fatias pra liberar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todasTocadas}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todasTocadas
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed border border-white/10"
+          }`}
+        >
+          {todasTocadas ? "Continuar" : "Toque nas 2 fatias pra liberar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -3415,6 +3466,7 @@ function SeloAtlas({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const falar = (texto: string) => {
     try {
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -3544,7 +3596,7 @@ function SeloAtlas({
           onClick={onProxima}
           className={`w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r ${cena.selo.cor} text-[#0d1f55] shadow-xl hover:scale-[1.01] transition`}
         >
-          {ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
+          {scrollLivre ? "✅ Concluir aula" : ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
         </button>
       </div>
     );
