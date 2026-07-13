@@ -432,46 +432,35 @@ export const aula01: AulaGeoV1 = {
   cena10_revisao: {
     tipo: "pizzaMunicipio",
     aurora:
-      "Vamos fechar a aula (e o CURSO INTEIRO!) com três fatias — uma pra cada nível de governo. Toque em cada fatia pra revisar tudo que você aprendeu.",
-    instrucao: "Toque nas fatias pra ouvir sobre cada nível",
+      "Vamos fechar a aula (e o CURSO INTEIRO!) com duas fatias: o poder LOCAL (município) e o poder maior (estado + país). Toque em cada uma pra revisar.",
+    instrucao: "Toque nas fatias pra ouvir sobre cada esfera de poder",
     fotoUrl: imgInfografico,
     fatias: [
       {
-        id: "municipio",
-        rotulo: "Município",
+        id: "local",
+        rotulo: "Poder Local (Município)",
         emoji: "🏘️",
-        percentual: 33,
+        percentual: 40,
         cor: "#0d9488",
         descricao:
-          "Menor unidade. Chefe: Prefeito. Sede: Prefeitura. Cuida do dia a dia da cidade: escolas, lixo, iluminação, parques, transporte urbano.",
+          "Menor unidade. Chefe: Prefeito. Sede: Prefeitura. Cuida do dia a dia da cidade: escolas municipais, coleta de lixo, iluminação, parques, transporte urbano. É o poder mais próximo do morador.",
         exemplos: ["Escola municipal", "Coleta de lixo", "Iluminação de rua", "Parque público"],
         fotoUrl: imgPrefeitura,
       },
       {
-        id: "estado",
-        rotulo: "Estado",
-        emoji: "🏛️",
-        percentual: 34,
+        id: "amplo",
+        rotulo: "Estado + País",
+        emoji: "🏛️🇧🇷",
+        percentual: 60,
         cor: "#4338ca",
         descricao:
-          "Unidade média. Chefe: Governador. Sede: Capital estadual. Cuida de serviços regionais: rodovias, hospitais especializados, polícia militar.",
-        exemplos: ["Rodovia entre cidades", "Hospital regional", "Polícia Militar", "Escola estadual"],
+          "Poder regional (Estado, governador, capital estadual) + poder nacional (País, Presidente, Brasília). Cuidam do que ultrapassa a cidade: rodovias, hospitais regionais, polícia militar, forças armadas, leis federais, moeda.",
+        exemplos: ["Rodovias estaduais", "Polícia Militar", "Leis federais", "Exército e moeda (Real)"],
         fotoUrl: imgPalacio,
-      },
-      {
-        id: "pais",
-        rotulo: "País",
-        emoji: "🇧🇷",
-        percentual: 33,
-        cor: "#15803d",
-        descricao:
-          "Maior unidade. Chefe: Presidente. Sede: Brasília. Cuida do país inteiro: leis federais, forças armadas, moeda, relações internacionais.",
-        exemplos: ["Leis federais", "Exército e Marinha", "Moeda (Real)", "Passaporte"],
-        fotoUrl: imgCongresso,
       },
     ],
     falaFinal:
-      "Três fatias encaixadas: bairro dentro de município, município dentro de estado, estado dentro do país. É o BRASIL FEDERATIVO.",
+      "Duas fatias encaixadas: o município cuida do local; estado e país cuidam do que ultrapassa fronteiras. É o BRASIL FEDERATIVO.",
   },
 
   cena11_avaliacao: {
