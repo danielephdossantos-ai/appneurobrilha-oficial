@@ -2500,60 +2500,6 @@ export type Database = {
         }
         Relationships: []
       }
-      historia_museu_digital: {
-        Row: {
-          aula: number
-          conquistado_em: string
-          created_at: string
-          curso: string
-          id: string
-          imagem_url: string | null
-          meta: Json
-          moedas: number
-          nome_item: string
-          nome_sala: string | null
-          tipo_item: string
-          unidade: number
-          updated_at: string
-          user_id: string
-          xp: number
-        }
-        Insert: {
-          aula: number
-          conquistado_em?: string
-          created_at?: string
-          curso: string
-          id?: string
-          imagem_url?: string | null
-          meta?: Json
-          moedas?: number
-          nome_item: string
-          nome_sala?: string | null
-          tipo_item: string
-          unidade: number
-          updated_at?: string
-          user_id: string
-          xp?: number
-        }
-        Update: {
-          aula?: number
-          conquistado_em?: string
-          created_at?: string
-          curso?: string
-          id?: string
-          imagem_url?: string | null
-          meta?: Json
-          moedas?: number
-          nome_item?: string
-          nome_sala?: string | null
-          tipo_item?: string
-          unidade?: number
-          updated_at?: string
-          user_id?: string
-          xp?: number
-        }
-        Relationships: []
-      }
       homework_tasks: {
         Row: {
           child_id: string

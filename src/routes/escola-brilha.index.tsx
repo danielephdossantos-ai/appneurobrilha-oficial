@@ -260,9 +260,7 @@ function EscolaBrilhaCatalogo() {
             {SERIES_ORDEM.map((serie) => {
               const discsArvore = Object.keys(arvore[serie]);
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
-              const discsExtra: string[] = [];
-              if (serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") discsExtra.push("geografia");
-              if (serie === "2º Ano") discsExtra.push("historia");
+              const discsExtra = serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano" ? ["geografia"] : [];
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
 
               const total = contarSerie(serie);
@@ -428,29 +426,6 @@ function EscolaBrilhaCatalogo() {
                           );
                         }
 
-
-                        // SPEB 1.0 · História · 2º Ano — Pequeno Historiador
-                        if (serie === "2º Ano" && (disc === "historia" || disc === "história")) {
-                          return (
-                            <Link
-                              key={disc}
-                              to="/escola-brilha/historia/$curso"
-                              params={{ curso: "historia-2ano" }}
-                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                              style={{ background: "linear-gradient(135deg, #92400e, #f59e0b)" }}
-                            >
-                              <div className="text-[10px] uppercase tracking-widest opacity-90">
-                                🔍 SPEB 1.0 · História · 2º Ano
-                              </div>
-                              <div className="text-lg leading-tight mt-0.5">
-                                ⚙️ Pequeno Historiador — Relógio do Tempo
-                              </div>
-                              <div className="text-[11px] font-bold opacity-90 mt-1">
-                                7 unidades · Lupa + Museu Digital →
-                              </div>
-                            </Link>
-                          );
-                        }
 
                         const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
 
