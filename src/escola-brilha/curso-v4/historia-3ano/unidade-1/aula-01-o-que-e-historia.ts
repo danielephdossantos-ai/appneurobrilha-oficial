@@ -1,5 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
 import mesaHistoriador from "@/assets/historia-3ano/mesa-historiador-caixas.jpg";
+import fotoAntigaFamilia from "@/assets/historia-3ano/foto-antiga-familia.jpg";
+import cartaAntiga from "@/assets/historia-3ano/carta-antiga.jpg";
+import relogioBolso from "@/assets/historia-3ano/relogio-bolso.jpg";
+import brinquedoLata from "@/assets/historia-3ano/brinquedo-lata.jpg";
+import conceitoFonte from "@/assets/historia-3ano/conceito-fonte.jpg";
+import conceitoPassado from "@/assets/historia-3ano/conceito-passado.jpg";
+import quizPessoasTempo from "@/assets/historia-3ano/quiz-pessoas-tempo.jpg";
+import quizRoupaEpoca from "@/assets/historia-3ano/quiz-roupa-epoca.jpg";
 
 /**
  * História · 3º Ano · Unidade 1 · Aula 01
