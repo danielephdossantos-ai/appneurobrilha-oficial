@@ -390,4 +390,10 @@ export const aula01: AulaPortuguesV4 = {
     registro:
       "Uma foto do seu registro científico (o desenho ou as anotações do objeto).",
   },
+
+  recompensa: {
+    xp: 100,
+    moedas: 50,
+    medalha: "Jovem Cientista",
+  },
 };
