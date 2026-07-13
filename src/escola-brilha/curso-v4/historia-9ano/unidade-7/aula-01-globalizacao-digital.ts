@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgDig,
     camadas: [
-      { id: "int", rotulo: "Integração global", emoji: "🌍", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Comércio mundial (OMC), redes sociais, streaming, migrações, saúde global. Coisas viajam mais que pessoas — e pessoas viajam muito.", exemplos: [] },
-      { id: "cri", rotulo: "Crises compartilhadas", emoji: "🌡️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Aquecimento global, pandemias, guerras (Ucrânia, Oriente Médio), fake news, desigualdade. Problemas de um país viram problema de todos.", exemplos: [] },
+      { id: "int", rotulo: "Integração global", emoji: "🌍", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Comércio mundial (OMC), redes sociais, streaming, migrações, saúde global. Coisas viajam mais que pessoas — e pessoas viajam muito." },
+      { id: "cri", rotulo: "Crises compartilhadas", emoji: "🌡️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Aquecimento global, pandemias, guerras (Ucrânia, Oriente Médio), fake news, desigualdade. Problemas de um país viram problema de todos." },
     ],
     falaFinal: "Integração e crises andam juntas. Solução do século XXI = cooperação global.",
   },

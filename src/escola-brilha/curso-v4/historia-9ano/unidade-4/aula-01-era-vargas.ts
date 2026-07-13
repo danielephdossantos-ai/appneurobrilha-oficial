@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgVargas,
     camadas: [
-      { id: "mod", rotulo: "Vargas modernizador", emoji: "🏭", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Voto feminino, CLT, salário mínimo, CSN, Vale, industrialização. 'Pai dos pobres.'", exemplos: [] },
-      { id: "aut", rotulo: "Vargas autoritário", emoji: "⛓️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estado Novo (1937), fecha Congresso, censura (DIP), perseguição a comunistas e opositores. 'Mãe dos ricos.'", exemplos: [] },
+      { id: "mod", rotulo: "Vargas modernizador", emoji: "🏭", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Voto feminino, CLT, salário mínimo, CSN, Vale, industrialização. 'Pai dos pobres.'" },
+      { id: "aut", rotulo: "Vargas autoritário", emoji: "⛓️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estado Novo (1937), fecha Congresso, censura (DIP), perseguição a comunistas e opositores. 'Mãe dos ricos.'" },
     ],
     falaFinal: "Vargas é os dois. Estudar história é aguentar essa contradição.",
   },

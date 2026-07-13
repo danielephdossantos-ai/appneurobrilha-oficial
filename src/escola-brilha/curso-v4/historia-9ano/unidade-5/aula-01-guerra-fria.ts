@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgMuro,
     camadas: [
-      { id: "oc", rotulo: "Bloco Ocidental (EUA)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Capitalismo, democracia liberal, OTAN (1949). Aliados: Europa Ocidental, Japão, Coreia do Sul, América Latina.", exemplos: [] },
-      { id: "or", rotulo: "Bloco Oriental (URSS)", emoji: "☭", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Socialismo, partido único, Pacto de Varsóvia (1955). Aliados: Europa Oriental, China (até 1960), Cuba, Vietnã do Norte.", exemplos: [] },
+      { id: "oc", rotulo: "Bloco Ocidental (EUA)", emoji: "🇺🇸", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "Capitalismo, democracia liberal, OTAN (1949). Aliados: Europa Ocidental, Japão, Coreia do Sul, América Latina." },
+      { id: "or", rotulo: "Bloco Oriental (URSS)", emoji: "☭", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Socialismo, partido único, Pacto de Varsóvia (1955). Aliados: Europa Oriental, China (até 1960), Cuba, Vietnã do Norte." },
     ],
     falaFinal: "Dois mundos. Dois modelos. Muros, aeroportos, esportes e músicas em campos opostos.",
   },

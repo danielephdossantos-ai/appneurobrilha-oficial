@@ -80,8 +80,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos filtros",
     mapaUrl: imgDir,
     camadas: [
-      { id: "reg", rotulo: "Regime militar", emoji: "🎖️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "5 presidentes-generais: Castelo Branco → Costa e Silva → Médici → Geisel → Figueiredo. Censura, tortura, atos institucionais e 'milagre econômico'.", exemplos: [] },
-      { id: "op", rotulo: "Resistência", emoji: "✊", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estudantes (UNE), MDB, Igreja Católica, artistas, jornalistas, familiares de desaparecidos, guerrilha. Diretas Já mobiliza milhões em 1984.", exemplos: [] },
+      { id: "reg", rotulo: "Regime militar", emoji: "🎖️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "5 presidentes-generais: Castelo Branco → Costa e Silva → Médici → Geisel → Figueiredo. Censura, tortura, atos institucionais e 'milagre econômico'." },
+      { id: "op", rotulo: "Resistência", emoji: "✊", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Estudantes (UNE), MDB, Igreja Católica, artistas, jornalistas, familiares de desaparecidos, guerrilha. Diretas Já mobiliza milhões em 1984." },
     ],
     falaFinal: "Regime × Resistência. A resistência venceu em 1985.",
   },
