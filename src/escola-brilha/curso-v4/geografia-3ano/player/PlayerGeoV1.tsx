@@ -9,6 +9,9 @@ import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
 const TeenContext = createContext(false);
 export const useTeen = () => useContext(TeenContext);
 
+const ScrollLivreContext = createContext(false);
+const useScrollLivre = () => useContext(ScrollLivreContext);
+
 const stripDecorativeEmoji = (value = "") =>
   value
     .replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}]/gu, "")
@@ -29,10 +32,12 @@ export function PlayerGeoV1({
   aula,
   onSair,
   onConcluir,
+  modoScrollLivre = false,
 }: {
   aula: AulaGeoV1;
   onSair: () => void;
   onConcluir: () => void;
+  modoScrollLivre?: boolean;
 }) {
   const cenas: Array<{ chave: string; rotulo: string; cena: CenaGeoV1 }> = [
     { chave: "1", rotulo: "🎬 Motivação", cena: aula.cena01_motivacao },
@@ -82,6 +87,7 @@ export function PlayerGeoV1({
   const teen = aula.estilo === "teen";
   return (
     <TeenContext.Provider value={teen}>
+    <ScrollLivreContext.Provider value={modoScrollLivre}>
     <div className={`min-h-screen text-white ${teen ? "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" : "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"}`}>
 
       <header className="sticky top-0 z-20 backdrop-blur bg-black/40 border-b border-white/10">
@@ -134,6 +140,7 @@ export function PlayerGeoV1({
         <div className="h-24" />
       </main>
     </div>
+    </ScrollLivreContext.Provider>
     </TeenContext.Provider>
   );
 }
@@ -205,6 +212,7 @@ function MesaCartografo({
   ]);
   const [descoberto, setDescoberto] = useState(false);
   const [tocouTeen, setTocouTeen] = useState(false);
+  const scrollLivre = useScrollLivre();
 
   const R = 80; // raio de revelação em px
 
@@ -411,17 +419,19 @@ function MesaCartografo({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!descoberto}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          descoberto
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!descoberto}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            descoberto
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
+        </button>
+      )}
     </div>
   );
 }
@@ -438,6 +448,7 @@ function VotoExplorador({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [voto, setVoto] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
   const acertou = voto === cena.respostaCerta;
@@ -624,25 +635,27 @@ function VotoExplorador({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!revelado}
-        className={
-          teen
-            ? `w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-                revelado
-                  ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-                  : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-              }`
-            : `w-full py-4 rounded-2xl font-black text-lg transition ${
-                revelado
-                  ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-                  : "bg-white/10 text-white/40 cursor-not-allowed"
-              }`
-        }
-      >
-        {revelado ? (teen ? "Continuar →" : "Continuar") : teen ? "Escolha uma opção" : "🗳️ Escolha uma opção pra continuar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!revelado}
+          className={
+            teen
+              ? `w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+                  revelado
+                    ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                    : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+                }`
+              : `w-full py-4 rounded-2xl font-black text-lg transition ${
+                  revelado
+                    ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+                    : "bg-white/10 text-white/40 cursor-not-allowed"
+                }`
+          }
+        >
+          {revelado ? (teen ? "Continuar →" : "Continuar") : teen ? "Escolha uma opção" : "🗳️ Escolha uma opção pra continuar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -660,6 +673,7 @@ function CadernosCampo({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
 
   if (teen) {
     return (
@@ -709,12 +723,14 @@ function CadernosCampo({
           {stripDecorativeEmoji(cena.falaFinal)}
         </div>
 
-        <button
-          onClick={onProxima}
-          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-        >
-          Continuar →
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        )}
       </div>
     );
   }
@@ -787,12 +803,14 @@ function CadernosCampo({
         </div>
       </motion.div>
 
-      <button
-        onClick={onProxima}
-        className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-      >
-        Continuar
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+        >
+          Continuar
+        </button>
+      )}
     </div>
   );
 }
