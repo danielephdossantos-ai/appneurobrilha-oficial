@@ -1,5 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
 import mesaHistoriador from "@/assets/historia-3ano/mesa-historiador-caixas.jpg";
+import fotoAntigaFamilia from "@/assets/historia-3ano/foto-antiga-familia.jpg";
+import cartaAntiga from "@/assets/historia-3ano/carta-antiga.jpg";
+import relogioBolso from "@/assets/historia-3ano/relogio-bolso.jpg";
+import brinquedoLata from "@/assets/historia-3ano/brinquedo-lata.jpg";
+import conceitoFonte from "@/assets/historia-3ano/conceito-fonte.jpg";
+import conceitoPassado from "@/assets/historia-3ano/conceito-passado.jpg";
+import quizPessoasTempo from "@/assets/historia-3ano/quiz-pessoas-tempo.jpg";
+import quizRoupaEpoca from "@/assets/historia-3ano/quiz-roupa-epoca.jpg";
 
 /**
  * História · 3º Ano · Unidade 1 · Aula 01
@@ -71,6 +79,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É o estudo das PESSOAS ao longo do TEMPO — o que elas faziam, comiam, brincavam, sentiam.",
         exemplo: "A história da sua família também é História.",
+        fotoUrl: fotoAntigaFamilia,
       },
       {
         id: "fonte",
@@ -80,6 +89,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É qualquer PISTA que o passado deixou pra gente: foto, carta, objeto, música, prédio antigo, entrevista com um mais velho.",
         exemplo: "Uma foto do casamento da vovó é uma fonte histórica.",
+        fotoUrl: conceitoFonte,
       },
       {
         id: "passado",
@@ -89,6 +99,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É tudo o que já aconteceu — de ontem, de anos atrás, de séculos atrás. É onde a História acontece.",
         exemplo: "Ontem já é passado. A infância do vovô também.",
+        fotoUrl: conceitoPassado,
       },
       {
         id: "evidencia",
@@ -98,6 +109,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a PROVA que o historiador acha DENTRO de uma fonte. É o detalhe que confirma como as pessoas viviam.",
         exemplo: "Na foto, a roupa da vovó é evidência da moda daquela época.",
+        fotoUrl: quizRoupaEpoca,
       },
     ],
     falaFinal:
@@ -120,6 +132,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Fotografia Antiga",
         texto:
           "Uma FONTE visual. Mostra como as pessoas se vestiam, como cortavam o cabelo, quem estava na família. Evidência: a roupa e o penteado nos contam a época.",
+        fotoUrl: fotoAntigaFamilia,
       },
       {
         id: "carta",
@@ -130,6 +143,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Carta com Selo",
         texto:
           "Uma FONTE escrita. Alguém sentou pra contar novidades pra outra pessoa. Evidência: a letra, o selo e a data mostram onde e quando foi enviada.",
+        fotoUrl: cartaAntiga,
       },
       {
         id: "relogio",
@@ -140,6 +154,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Relógio de Bolso",
         texto:
           "Uma FONTE material. É um objeto que a pessoa carregava. Evidência: relógio de bolso mostra que naquela época não existia celular pra ver a hora.",
+        fotoUrl: relogioBolso,
       },
       {
         id: "brinquedo",
@@ -150,6 +165,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Brinquedo de Lata",
         texto:
           "Também FONTE material. Mostra do que as crianças brincavam antes. Evidência: era feito de metal — hoje a maior parte dos brinquedos é de plástico.",
+        fotoUrl: brinquedoLata,
       },
     ],
     falaFinal:
@@ -165,6 +181,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Qual dessas coisas é uma FONTE HISTÓRICA?",
+        fotoUrl: fotoAntigaFamilia,
         cards: [
           { id: "foto", emoji: "📸", titulo: "Foto antiga da família", cor: "from-sky-400 to-indigo-600" },
           { id: "sonho", emoji: "💭", titulo: "Um sonho que você teve", cor: "from-fuchsia-400 to-purple-600" },
@@ -172,13 +189,14 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "foto",
         feedbackAcerto:
-          "Isso! Foto antiga é fonte: guarda pistas reais do passado.",
+          "Isso! Essa foto sépia da família é uma FONTE: guarda pistas reais do passado — os rostos, as roupas, o cenário.",
         feedbackErro:
-          "Quase! Sonho e chuva de amanhã não deixam prova. Fonte é o que o PASSADO deixou — como a foto antiga.",
+          "Olha a foto de novo. Sonho e chuva de amanhã não deixam prova. Fonte é o que o PASSADO deixou — como essa foto antiga.",
       },
       {
         id: "q2",
         pergunta: "O historiador estuda principalmente…",
+        fotoUrl: quizPessoasTempo,
         cards: [
           { id: "dinos", emoji: "🦖", titulo: "Dinossauros", cor: "from-lime-400 to-emerald-600" },
           { id: "pessoas", emoji: "👨‍👩‍👧", titulo: "Pessoas no tempo", cor: "from-amber-400 to-orange-600" },
@@ -186,13 +204,14 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "pessoas",
         feedbackAcerto:
-          "Boa! O historiador estuda PESSOAS ao longo do tempo — o que faziam, sentiam, criavam.",
+          "Boa! Repara na imagem: pessoas de épocas diferentes lado a lado. O historiador estuda PESSOAS ao longo do tempo.",
         feedbackErro:
-          "Não é aí. Dinossauro é da paleontologia, planeta é da astronomia. História é de PESSOAS.",
+          "Olha a imagem: são PESSOAS de épocas diferentes. Dinossauro é da paleontologia, planeta é da astronomia. História é de PESSOAS.",
       },
       {
         id: "q3",
         pergunta: "A EVIDÊNCIA dentro de uma foto antiga pode ser…",
+        fotoUrl: quizRoupaEpoca,
         cards: [
           { id: "roupa", emoji: "👗", titulo: "A roupa da época", cor: "from-rose-400 to-pink-600" },
           { id: "wifi", emoji: "📶", titulo: "O sinal do Wi-Fi", cor: "from-cyan-400 to-blue-600" },
@@ -200,9 +219,9 @@ export const aula01: AulaGeoV1 = {
         ],
         correta: "roupa",
         feedbackAcerto:
-          "Exato! A roupa é evidência: mostra a moda e o costume daquela época.",
+          "Exato! Repara no chapéu, no colar de pérolas e no vestido de renda: a ROUPA é evidência da moda daquela época.",
         feedbackErro:
-          "Ainda não. Wi-Fi e app não existiam antigamente — não podem ser evidência dentro de foto antiga.",
+          "Olha a foto: chapéu, colar de pérolas, vestido de renda. Wi-Fi e app não existiam antigamente. A evidência é a ROUPA.",
       },
     ],
     falaFinal:
