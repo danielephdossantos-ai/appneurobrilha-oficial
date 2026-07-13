@@ -730,6 +730,8 @@ export type CenaGeoV1 =
         /** Retângulo da camada em % (0-100) sobre o mapa. */
         rect: { x: number; y: number; w: number; h: number };
         descricao: string;           // texto revelado quando ligada
+        /** Foto opcional que aparece dentro do rect quando a camada está ligada. */
+        fotoUrl?: string;
       }>;
       falaFinal: string;             // aparece quando as duas estiverem ligadas
     }
