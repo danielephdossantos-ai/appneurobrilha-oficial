@@ -2,11 +2,13 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlayerGeoV1 } from "@/escola-brilha/curso-v4/geografia-3ano/player/PlayerGeoV1";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 import {
   getAulaGeoV1FromCurso,
   getCursoGeoV1,
   getProximaAulaGeoV1,
 } from "@/escola-brilha/curso-v4/registry";
+
 
 export const Route = createFileRoute("/escola-brilha/aula-geo-v1/$curso/$aula")({
   head: ({ params }) => ({
