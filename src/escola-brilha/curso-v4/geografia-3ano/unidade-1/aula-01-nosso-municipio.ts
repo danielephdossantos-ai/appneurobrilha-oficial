@@ -74,6 +74,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Município",
         emoji: "🗺️",
         cor: "from-emerald-500 to-teal-700",
+        fotoUrl: imgMunicipioAereo,
         conteudo:
           "É o pedaço do país que tem UMA prefeitura, UM prefeito, e junta cidade + campo.",
         exemplo: "A gente mora no município de _______ (fala o seu!).",
@@ -83,6 +84,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Zona Urbana",
         emoji: "🏙️",
         cor: "from-sky-500 to-indigo-700",
+        fotoUrl: imgZonaUrbana,
         conteudo:
           "É a parte do município com muitas casas juntas, ruas, prédios, praças e lojas. É a CIDADE.",
         exemplo: "Padaria, escola no meio dos prédios, semáforo — zona urbana.",
@@ -92,6 +94,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Zona Rural",
         emoji: "🌾",
         cor: "from-lime-500 to-emerald-700",
+        fotoUrl: imgZonaRural,
         conteudo:
           "É a parte do município com plantações, animais, matas e rios. É o CAMPO.",
         exemplo: "Sítio, fazenda, roça de milho — zona rural.",
@@ -101,6 +104,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Fronteira",
         emoji: "🚧",
         cor: "from-amber-500 to-rose-600",
+        fotoUrl: imgFronteira,
         conteudo:
           "É a linha imaginária que separa UM município do outro. Do outro lado, começa outra prefeitura.",
         exemplo: "A placa 'Bem-vindo a...' avisa que você cruzou uma fronteira.",
