@@ -2689,6 +2689,54 @@ function ConstrutorMarcos({
   const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
   const tempoUrgente = tempo <= 5;
 
+  // Tela de "Podemos começar?" antes da primeira rodada
+  if (!iniciado) {
+    if (teen) {
+      return (
+        <div className="space-y-5">
+          <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 space-y-4">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono">
+              Simulador cronometrado — briefing
+            </div>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              {stripDecorativeEmoji(cena.aurora)}
+            </p>
+            <div className="text-xs text-slate-400 font-mono">
+              {total} rodadas · {cena.duracaoSegundos}s por rodada
+            </div>
+          </div>
+          <button
+            onClick={() => setIniciado(true)}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Podemos começar? →
+          </button>
+        </div>
+      );
+    }
+    return (
+      <div className="space-y-5">
+        <FalaPersonagem personagem={aurora} texto={cena.aurora} />
+        <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-400/40 rounded-3xl p-6 text-center space-y-3">
+          <div className="text-5xl">🎮</div>
+          <div className="text-white font-bold text-lg">
+            Quando você tocar em começar, o relógio vai contar {cena.duracaoSegundos}s por rodada.
+          </div>
+          <div className="text-sm text-white/70">
+            {total} rodadas · leia a pista com calma antes de escolher
+          </div>
+        </div>
+        <button
+          onClick={() => setIniciado(true)}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-amber-400 to-orange-400 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+        >
+          ▶ Podemos começar?
+        </button>
+      </div>
+    );
+  }
+
+
   if (teen) {
     return (
       <div className="space-y-4">
