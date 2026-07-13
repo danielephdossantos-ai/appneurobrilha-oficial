@@ -5,6 +5,7 @@ import {
   professorBrilhaChat,
   carregarConversaProfessorBrilha,
 } from "@/lib/professor-brilha.functions";
+import { transcreverAudio } from "@/lib/stt.functions";
 import professoraImg from "@/assets/pip-girl-professora.png";
 
 export interface ProfessorBrilhaContexto {
@@ -36,9 +37,16 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
   const [input, setInput] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [carregouHistorico, setCarregouHistorico] = useState(false);
+  const [gravando, setGravando] = useState(false);
+  const [transcrevendo, setTranscrevendo] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
   const enviar = useServerFn(professorBrilhaChat);
   const carregar = useServerFn(carregarConversaProfessorBrilha);
+  const transcrever = useServerFn(transcreverAudio);
+
 
   // Carregar histórico ao abrir pela primeira vez
   useEffect(() => {
@@ -94,6 +102,104 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
       setCarregando(false);
     }
   };
+
+  // Escolhe o melhor mimeType suportado pelo navegador
+  const escolherMime = (): string => {
+    const cands = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/mpeg"];
+    const MR: any = (typeof window !== "undefined" ? (window as any).MediaRecorder : null);
+    if (!MR || !MR.isTypeSupported) return "audio/webm";
+    for (const c of cands) if (MR.isTypeSupported(c)) return c;
+    return "audio/webm";
+  };
+
+  const pararMicrofone = () => {
+    try {
+      recorderRef.current?.state === "recording" && recorderRef.current?.stop();
+    } catch {}
+    try {
+      streamRef.current?.getTracks().forEach((t) => t.stop());
+    } catch {}
+    recorderRef.current = null;
+    streamRef.current = null;
+  };
+
+  const iniciarGravacao = async () => {
+    if (gravando || carregando || transcrevendo) return;
+    setErro(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+      const mimeType = escolherMime();
+      const rec = new MediaRecorder(stream, { mimeType });
+      chunksRef.current = [];
+      rec.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
+      };
+      rec.onstop = async () => {
+        const blob = new Blob(chunksRef.current, { type: mimeType });
+        chunksRef.current = [];
+        pararMicrofone();
+        if (blob.size < 2048) {
+          setErro("Gravação muito curta. Segura o botão e fala pertinho!");
+          return;
+        }
+        setTranscrevendo(true);
+        try {
+          const buf = await blob.arrayBuffer();
+          // Converte pra base64 sem estourar o stack
+          let bin = "";
+          const bytes = new Uint8Array(buf);
+          const chunkSize = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunkSize) {
+            bin += String.fromCharCode.apply(
+              null,
+              Array.from(bytes.subarray(i, i + chunkSize)),
+            );
+          }
+          const b64 = btoa(bin);
+          const res = await transcrever({
+            data: { audioBase64: b64, mimeType, language: "pt" },
+          });
+          if (res.ok) {
+            setInput((prev) => (prev ? prev + " " + res.texto : res.texto));
+          } else {
+            setErro(res.mensagem);
+            const { notificarErroIA } = await import("@/lib/notify-ai-error");
+            notificarErroIA(res.motivo, "Transcrição");
+          }
+        } catch (e) {
+          console.error(e);
+          setErro("Não consegui transcrever. Tenta de novo!");
+        } finally {
+          setTranscrevendo(false);
+        }
+      };
+      recorderRef.current = rec;
+      rec.start();
+      setGravando(true);
+    } catch (e) {
+      console.error(e);
+      setErro("Preciso do microfone pra escutar você. Libere o acesso!");
+      pararMicrofone();
+    }
+  };
+
+  const pararGravacao = () => {
+    if (!gravando) return;
+    setGravando(false);
+    try {
+      recorderRef.current?.state === "recording" && recorderRef.current?.stop();
+    } catch {
+      pararMicrofone();
+    }
+  };
+
+  // Cleanup ao desmontar
+  useEffect(() => {
+    return () => pararMicrofone();
+  }, []);
+
+
 
   const botaoCor = teen
     ? "bg-cyan-500 hover:bg-cyan-400 shadow-[0_0_24px_-6px_rgba(103,232,249,0.9)] border border-cyan-300/40"
@@ -300,8 +406,14 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                         handleEnviar();
                       }
                     }}
-                    disabled={carregando}
-                    placeholder="Escreve sua dúvida aqui..."
+                    disabled={carregando || transcrevendo || gravando}
+                    placeholder={
+                      gravando
+                        ? "🎙️ Escutando..."
+                        : transcrevendo
+                          ? "Convertendo sua voz em texto..."
+                          : "Escreve ou toca no microfone..."
+                    }
                     maxLength={1500}
                     className={`flex-1 rounded-full px-4 py-2.5 text-sm outline-none transition ${
                       teen
@@ -310,8 +422,23 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                     }`}
                   />
                   <button
+                    onClick={gravando ? pararGravacao : iniciarGravacao}
+                    disabled={carregando || transcrevendo}
+                    className={`w-11 h-11 rounded-full grid place-items-center transition text-lg disabled:opacity-40 disabled:cursor-not-allowed ${
+                      gravando
+                        ? "bg-red-500 text-white animate-pulse"
+                        : teen
+                          ? "bg-slate-800 hover:bg-slate-700 text-cyan-200 border border-slate-700"
+                          : "bg-amber-100 hover:bg-amber-200 text-[#3d2500] border border-amber-300"
+                    }`}
+                    aria-label={gravando ? "Parar gravação" : "Falar pergunta"}
+                    title={gravando ? "Toca pra parar" : "Toca pra falar"}
+                  >
+                    {gravando ? "⏹" : "🎙️"}
+                  </button>
+                  <button
                     onClick={handleEnviar}
-                    disabled={carregando || !input.trim()}
+                    disabled={carregando || transcrevendo || gravando || !input.trim()}
                     className={`w-11 h-11 rounded-full grid place-items-center transition text-lg font-bold disabled:opacity-40 disabled:cursor-not-allowed ${
                       teen
                         ? "bg-cyan-500 hover:bg-cyan-400 text-white"
@@ -321,6 +448,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                   >
                     ➤
                   </button>
+
                 </div>
               </div>
             </motion.div>
