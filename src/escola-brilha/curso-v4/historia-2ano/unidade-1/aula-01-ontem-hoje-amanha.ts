@@ -3,6 +3,15 @@ import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
 import imgFotografo from "@/assets/historia-2ano/passado-fotografo.png";
 import imgPresenteLupa from "@/assets/historia-2ano/presente-lupa.png";
 import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
+import imgPresenteBrilha from "@/assets/historia-2ano/presente-brilha-agora.png";
+import imgFuturoAniversario from "@/assets/historia-2ano/futuro-aniversario-brilha.png";
+import imgPassadoEscola from "@/assets/historia-2ano/passado-escola-antiga-brilha.png";
+import imgFuturoAmanha from "@/assets/historia-2ano/futuro-amanha-brilha.png";
+import imgPassadoNascimento from "@/assets/historia-2ano/passado-nascimento-brilha.png";
+import imgFuturoPlano from "@/assets/historia-2ano/futuro-plano-amanha-brilha.png";
+import imgPresenteAgora from "@/assets/historia-2ano/presente-agora-brilha.png";
+import imgPassadoPrimeiraEscola from "@/assets/historia-2ano/passado-primeira-escola-brilha.png";
+import imgPassadoDiario from "@/assets/historia-2ano/passado-diario-antigo-brilha.png";
 
 /**
  * História · 2º Ano · Unidade 1 · Aula 01
@@ -23,6 +32,15 @@ const IMG_PRESENTE = imgPresenteLupa;
 const IMG_RELOGIO = imgPresenteLupa;
 const IMG_CALENDARIO = imgFuturo;
 const IMG_ALBUM = imgFotoAntiga;
+const IMG_PRESENTE_BRILHA = imgPresenteBrilha;
+const IMG_FUTURO_ANIVERSARIO = imgFuturoAniversario;
+const IMG_PASSADO_ESCOLA = imgPassadoEscola;
+const IMG_FUTURO_AMANHA = imgFuturoAmanha;
+const IMG_PASSADO_NASCIMENTO = imgPassadoNascimento;
+const IMG_FUTURO_PLANO = imgFuturoPlano;
+const IMG_PRESENTE_AGORA = imgPresenteAgora;
+const IMG_PASSADO_PRIMEIRA_ESCOLA = imgPassadoPrimeiraEscola;
+const IMG_PASSADO_DIARIO = imgPassadoDiario;
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ontem-hoje-amanha",
@@ -48,6 +66,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Antes de eu explicar, quero seu palpite de investigador. Qual pista prova MESMO que o tempo passou entre uma foto e outra?",
     pergunta: "Qual é a pista principal do tempo passar?",
+    fotoUrl: IMG_FOTO_ANTIGA,
     opcoes: [
       {
         id: "roupas-cores",
@@ -55,6 +74,7 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "preto-e-branco → colorido, roupa antiga → moderna",
         emoji: "🎨",
         cor: "from-amber-400 to-orange-600",
+        fotoUrl: IMG_FOTO_ANTIGA,
       },
       {
         id: "sol-igual",
@@ -62,6 +82,7 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "o céu está do mesmo jeito",
         emoji: "☀️",
         cor: "from-sky-400 to-blue-500",
+        fotoUrl: IMG_PRESENTE_BRILHA,
       },
     ],
     respostaCerta: "roupas-cores",
@@ -127,7 +148,7 @@ export const aula01: AulaGeoV1 = {
         y: 60,
         emoji: "👶",
         cor: "from-amber-400 to-orange-600",
-        fotoUrl: IMG_PASSADO,
+        fotoUrl: IMG_PASSADO_NASCIMENTO,
         titulo: "Passado: Nasci",
         texto:
           "Aqui foi o dia em que o Brilha nasceu. Foto em preto e branco, roupinha de bebê antigo. Isso é PASSADO — já aconteceu e não volta.",
@@ -138,7 +159,7 @@ export const aula01: AulaGeoV1 = {
         y: 45,
         emoji: "⏰",
         cor: "from-emerald-400 to-teal-600",
-        fotoUrl: IMG_RELOGIO,
+        fotoUrl: IMG_PRESENTE_AGORA,
         titulo: "Presente: Agora",
         texto:
           "Este é o Brilha AGORA, jogando com você. Este balão é o PRESENTE — o que está acontecendo neste exato momento.",
@@ -149,7 +170,7 @@ export const aula01: AulaGeoV1 = {
         y: 60,
         emoji: "🎂",
         cor: "from-sky-400 to-indigo-600",
-        fotoUrl: IMG_CALENDARIO,
+        fotoUrl: IMG_FUTURO_ANIVERSARIO,
         titulo: "Futuro: Amanhã",
         texto:
           "E aqui é o próximo aniversário do Brilha, que ainda vai chegar. Isso é FUTURO — ainda não aconteceu, mas está no caminho.",
@@ -168,6 +189,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "O dia em que você nasceu está em qual tempo?",
+        fotoUrl: IMG_PASSADO_NASCIMENTO,
         cards: [
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
@@ -182,6 +204,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "Você jogando este jogo AGORA está em qual tempo?",
+        fotoUrl: IMG_PRESENTE_AGORA,
         cards: [
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
@@ -195,6 +218,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "Seu próximo aniversário que ainda vai chegar é qual tempo?",
+        fotoUrl: IMG_FUTURO_ANIVERSARIO,
         cards: [
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
@@ -252,24 +276,28 @@ export const aula01: AulaGeoV1 = {
         id: "nasci",
         emoji: "👶",
         rotulo: "Nasci",
+        fotoUrl: IMG_PASSADO_NASCIMENTO,
         descricao: "O dia em que o Brilha veio ao mundo. É o começo da linha — PASSADO bem antigo.",
       },
       {
         id: "escola",
         emoji: "🎒",
         rotulo: "Entrei na escola",
+        fotoUrl: IMG_PASSADO_PRIMEIRA_ESCOLA,
         descricao: "Alguns anos depois, o Brilha começou a estudar. Ainda é PASSADO, mas mais recente.",
       },
       {
         id: "hoje",
         emoji: "⏰",
         rotulo: "Hoje jogando",
+        fotoUrl: IMG_PRESENTE_AGORA,
         descricao: "Agora, este exato momento em que você lê. É o PRESENTE.",
       },
       {
         id: "aniv",
         emoji: "🎂",
         rotulo: "Próximo aniversário",
+        fotoUrl: IMG_FUTURO_ANIVERSARIO,
         descricao: "O que ainda vai chegar. É o FUTURO — está no caminho.",
       },
     ],
@@ -294,24 +322,28 @@ export const aula01: AulaGeoV1 = {
         texto:
           "O tempo é como um trem que nunca para. Ele já passou por milhões de dias e ainda vai passar por milhões de amanhãs. A gente organiza o tempo em três partes: passado, presente e futuro.",
         chaves: ["tempo", "passado", "presente", "futuro"],
+        fotoUrl: IMG_ALBUM,
       },
       {
         id: "p2",
         texto:
           "O passado é ontem. É a memória: o dia em que nasci, a foto antiga, a escola do ano passado. Tudo que já aconteceu vira passado no minuto seguinte.",
         chaves: ["passado", "memória", "ontem"],
+        fotoUrl: IMG_PASSADO_DIARIO,
       },
       {
         id: "p3",
         texto:
           "O presente é hoje. É o agora — este exato momento em que você lê estas palavras. O presente é o único tempo em que a gente pode fazer coisas de verdade.",
         chaves: ["presente", "hoje", "agora"],
+        fotoUrl: IMG_PRESENTE_AGORA,
       },
       {
         id: "p4",
         texto:
           "O futuro é amanhã. São os planos, os sonhos, o que ainda vai chegar. A gente não vê o futuro, mas prepara ele com as escolhas de hoje.",
         chaves: ["futuro", "amanhã", "planos"],
+        fotoUrl: IMG_FUTURO_PLANO,
       },
     ],
     falaFinal:
@@ -337,6 +369,7 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Um caderninho escrito à mão no ano de 1950 e uma foto em preto e branco do vovô quando era bebê. Esses objetos são de qual tempo?",
         pecaCertaId: "passado",
+        fotoUrl: IMG_PASSADO_DIARIO,
         feedbackAcerto:
           "Combo! Objetos MUITO antigos são pistas do PASSADO — memórias guardadas.",
         feedbackErro:
@@ -349,6 +382,7 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Você lendo esta tela e o relógio da parede marcando este exato segundo. Esses acontecimentos são de qual tempo?",
         pecaCertaId: "presente",
+        fotoUrl: IMG_PRESENTE_AGORA,
         feedbackAcerto: "Isso! O agora é sempre PRESENTE — o único tempo que está acontecendo.",
         feedbackErro: "Pensa: isso está acontecendo AGORA, neste segundo. É PRESENTE.",
       },
@@ -359,6 +393,7 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Um plano escrito 'amanhã vou ao parque' e o próximo aniversário que ainda vai chegar. Esses acontecimentos são de qual tempo?",
         pecaCertaId: "futuro",
+        fotoUrl: IMG_FUTURO_PLANO,
         feedbackAcerto: "Combo perfeito! O que ainda vai chegar é FUTURO.",
         feedbackErro: "Ainda não aconteceu, né? Então é FUTURO.",
       },
@@ -369,6 +404,7 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Uma foto sépia mostrando a cidade sem carros, só com bonde e cavalos. Esse cenário é de qual tempo?",
         pecaCertaId: "passado",
+        fotoUrl: IMG_PASSADO_ESCOLA,
         feedbackAcerto: "Isso! Sépia + bonde + cavalo = pistas fortes do PASSADO.",
         feedbackErro: "Repara: bonde e cavalo em vez de carro. É PASSADO bem antigo.",
       },
@@ -382,6 +418,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Vamos olhar a Linha do Tempo do Brilha como uma pizza dividida ao meio. De um lado, tudo que JÁ foi. Do outro, tudo que AINDA vem. E no meio, você — vivendo o presente.",
     instrucao: "🍕 Toque nas fatias pra ouvir sobre cada metade do tempo",
+    fotoUrl: IMG_ALBUM,
     fatias: [
       {
         id: "passado",
@@ -392,6 +429,7 @@ export const aula01: AulaGeoV1 = {
         descricao:
           "Metade da linha é PASSADO: tudo que já aconteceu e virou memória. Não volta, mas fica guardado em fotos, cadernos e histórias.",
         exemplos: ["O dia em que nasci", "A foto antiga do vovô", "A aula de ontem"],
+        fotoUrl: IMG_PASSADO_DIARIO,
       },
       {
         id: "futuro",
@@ -402,6 +440,7 @@ export const aula01: AulaGeoV1 = {
         descricao:
           "A outra metade é FUTURO: tudo que ainda vai acontecer. Ninguém vê, mas a gente prepara com os planos e sonhos de hoje.",
         exemplos: ["Meu próximo aniversário", "O passeio de amanhã", "Meus sonhos"],
+        fotoUrl: IMG_FUTURO_PLANO,
       },
     ],
     falaFinal:
@@ -413,11 +452,13 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Última missão pra recuperar a Engrenagem de Bronze do Relógio do Tempo! Responde as 3 perguntas e o selo é seu.",
     instrucao: "Responda 3 perguntas rápidas pra ganhar o selo",
+    fotoUrl: IMG_FOTO_ANTIGA,
     perguntas: [
       {
         id: "q1",
         pergunta:
           "Um Pequeno Historiador encontra um diário escrito no ano de 1950. Esse objeto conta uma história de qual tempo?",
+        fotoUrl: IMG_PASSADO_DIARIO,
         opcoes: [
           { id: "a", texto: "Passado (Ontem)", correta: true },
           { id: "b", texto: "Futuro (Amanhã)" },
@@ -430,6 +471,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "Você está lendo esta pergunta agora. Isso é qual tempo?",
+        fotoUrl: IMG_PRESENTE_AGORA,
         opcoes: [
           { id: "a", texto: "Passado" },
           { id: "b", texto: "Presente", correta: true },
@@ -441,6 +483,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "Amanhã você vai visitar seus avós. Esse acontecimento é qual tempo?",
+        fotoUrl: IMG_FUTURO_AMANHA,
         opcoes: [
           { id: "a", texto: "Passado" },
           { id: "b", texto: "Futuro", correta: true },
@@ -454,6 +497,7 @@ export const aula01: AulaGeoV1 = {
       subtitulo: "1 de 7 engrenagens do Relógio do Tempo recuperada",
       emoji: "⚙️",
       cor: "from-amber-400 to-orange-600",
+      fotoUrl: IMG_FOTO_ANTIGA,
     },
     falaFinal:
       "Primeira engrenagem no lugar! O Relógio do Tempo já voltou a andar um pouquinho. Faltam 6 pra recuperar — vamos em frente, Pequeno Historiador!",
