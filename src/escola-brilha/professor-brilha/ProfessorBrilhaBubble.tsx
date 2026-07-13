@@ -5,6 +5,7 @@ import {
   professorBrilhaChat,
   carregarConversaProfessorBrilha,
 } from "@/lib/professor-brilha.functions";
+import professoraImg from "@/assets/pip-girl-professora.png";
 
 export interface ProfessorBrilhaContexto {
   cursoSlug: string;
