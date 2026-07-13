@@ -17,7 +17,7 @@ import type {
   CenaCarimboCientista,
   CenaMissaoCampo,
 } from "../tipos";
-import { MissaoFamiliaFoto } from "@/escola-brilha/player/blocos/MissaoFamiliaFoto";
+import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 
 // ================================================================
 // PALETA "LABORATÓRIO ROXO" — travada em toda a UI de Ciências
