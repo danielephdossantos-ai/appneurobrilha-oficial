@@ -780,14 +780,23 @@ function CadernosCampo({
                 {c.capa}
               </div>
             </div>
-            {c.fotoUrl && (
+            {c.videoUrl ? (
+              <video
+                src={c.videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full aspect-[3/2] object-cover rounded-lg mt-2 border-2 border-amber-900/20"
+              />
+            ) : c.fotoUrl ? (
               <img
                 src={c.fotoUrl}
                 alt={c.capa}
                 loading="lazy"
                 className="w-full aspect-[3/2] object-cover rounded-lg mt-2 border-2 border-amber-900/20"
               />
-            )}
+            ) : null}
             <p className="text-sm font-semibold mt-2 leading-snug">
               {c.conteudo}
             </p>
