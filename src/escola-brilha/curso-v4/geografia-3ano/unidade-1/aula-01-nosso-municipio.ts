@@ -126,6 +126,7 @@ export const aula01: AulaGeoV1 = {
         y: 55,
         emoji: "🏙️",
         cor: "from-sky-400 to-indigo-500",
+        fotoUrl: imgZonaUrbana,
         titulo: "Zona Urbana",
         texto:
           "Esse pedaço é a CIDADE. Tem muitas casas juntinhas, ruas de asfalto, prédios, praça, escola e mercado. É onde a maioria das pessoas do município mora.",
@@ -136,6 +137,7 @@ export const aula01: AulaGeoV1 = {
         y: 35,
         emoji: "🌾",
         cor: "from-lime-400 to-emerald-600",
+        fotoUrl: imgZonaRural,
         titulo: "Zona Rural",
         texto:
           "Esse pedaço é o CAMPO. Tem plantação, sítio, fazenda, animais e muito verde. É de onde vem grande parte da comida que a gente come na cidade.",
@@ -146,6 +148,7 @@ export const aula01: AulaGeoV1 = {
         y: 65,
         emoji: "🌊",
         cor: "from-cyan-400 to-blue-600",
+        fotoUrl: imgRio,
         titulo: "Rio do Município",
         texto:
           "O rio atravessa o município INTEIRO. Ele passa pelo campo e chega perto da cidade. Serve pra beber, pra plantar e pra dar vida pros bichos.",
@@ -156,6 +159,7 @@ export const aula01: AulaGeoV1 = {
         y: 20,
         emoji: "🚧",
         cor: "from-amber-400 to-rose-600",
+        fotoUrl: imgFronteira,
         titulo: "Fronteira",
         texto:
           "Aqui é a FRONTEIRA. Depois dessa linha, começa OUTRO município, com outra prefeitura. Tudo que está antes dela ainda é o nosso município.",
