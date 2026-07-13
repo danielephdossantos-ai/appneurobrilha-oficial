@@ -1330,8 +1330,8 @@ function CenaMissaoView({
 
       {/* Câmera de registro (reusa componente existente) */}
       <MissaoFamiliaFoto
-        codigoAula="ciencias-2ano-u1-a1"
-        instrucao="Uma foto da sua observação de cientista"
+        cursoSlug="ciencias-2ano"
+        aulaSlug="u1-a1-metodo-cientista"
       />
 
       <div className="text-sm text-white/80 italic text-center">✨ {cena.falaFinal}</div>
