@@ -120,16 +120,31 @@ function AulaGeoV1Page() {
     return <CelebracaoFinalCurso curso={curso} titulo={cursoInfo?.titulo ?? "Curso"} onSair={sair} />;
   }
 
+  const teen = curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2" || curso === "geografia-9ano-v2";
+
   return (
     <>
       <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />
+      <ProfessorBrilhaBubble
+        teen={teen}
+        contexto={{
+          cursoSlug: curso,
+          aulaSlug: aula,
+          cursoTitulo: dados.curso.titulo,
+          aulaTitulo: dados.aula.titulo,
+          serie: dados.curso.ano,
+          disciplina: dados.curso.disciplina,
+          bncc: dados.aula.bncc,
+        }}
+      />
       <AnimatePresence>
-        {proximaPendente && <MissaoDesbloqueada teen={curso === "geografia-6ano-v2" || curso === "geografia-7ano-v2" || curso === "geografia-8ano-v2" || curso === "geografia-9ano-v2"} />}
+        {proximaPendente && <MissaoDesbloqueada teen={teen} />}
       </AnimatePresence>
       <audio ref={audioRef} preload="auto" />
     </>
   );
 }
+
 
 function MissaoDesbloqueada({ teen = false }: { teen?: boolean }) {
   if (teen) {
