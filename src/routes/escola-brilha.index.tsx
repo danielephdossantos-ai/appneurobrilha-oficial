@@ -434,27 +434,48 @@ function EscolaBrilhaCatalogo() {
 
                         if (cursoV4) {
                           const totalAulas = cursoV4.unidades.reduce((s, u) => s + u.aulas.length, 0);
+                          const mostraPiloto2ano = serie === "2º Ano" && disc === "geografia";
                           return (
-                            <Link
-                              key={disc}
-                              to="/escola-brilha/curso/$slug"
-                              params={{ slug: cursoV4.slug }}
-                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                              style={{
-                                background: `linear-gradient(135deg, ${cursoV4.corPrimaria}, ${cursoV4.corSecundaria})`,
-                              }}
-                            >
-                              <div className="text-[10px] uppercase tracking-widest opacity-80">
-                                {cursoV4.disciplina} · {cursoV4.ano}
-                              </div>
-                              <div className="text-lg leading-tight mt-0.5">{cursoV4.titulo}</div>
-                              <div className="text-[11px] font-bold opacity-90 mt-1">
-                                {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
-                                {totalAulas === 1 ? "" : "eis"} →
-                              </div>
-                            </Link>
+                            <div key={disc} className="space-y-2">
+                              <Link
+                                to="/escola-brilha/curso/$slug"
+                                params={{ slug: cursoV4.slug }}
+                                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                style={{
+                                  background: `linear-gradient(135deg, ${cursoV4.corPrimaria}, ${cursoV4.corSecundaria})`,
+                                }}
+                              >
+                                <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                  {cursoV4.disciplina} · {cursoV4.ano}
+                                </div>
+                                <div className="text-lg leading-tight mt-0.5">{cursoV4.titulo}</div>
+                                <div className="text-[11px] font-bold opacity-90 mt-1">
+                                  {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
+                                  {totalAulas === 1 ? "" : "eis"} →
+                                </div>
+                              </Link>
+                              {mostraPiloto2ano && (
+                                <Link
+                                  to="/escola-brilha/curso/$slug"
+                                  params={{ slug: "geografia-2ano-v2" }}
+                                  className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #22c55e, #0d1f55)" }}
+                                >
+                                  <div className="text-[10px] uppercase tracking-widest opacity-90">
+                                    🧪 PILOTO · Geografia · 2º Ano
+                                  </div>
+                                  <div className="text-lg leading-tight mt-0.5">
+                                    📍 Pequeno Cartógrafo (formato 3º–5º)
+                                  </div>
+                                  <div className="text-[11px] font-bold opacity-90 mt-1">
+                                    Unidade 1 · 4 aulas · 11 cenas visuais →
+                                  </div>
+                                </Link>
+                              )}
+                            </div>
                           );
                         }
+
                         return (
                           <div key={disc} className="rounded-xl bg-white border border-[#0d1f55]/10 overflow-hidden">
                             <button
