@@ -145,108 +145,39 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
       { role: "user" as const, content: mensagem },
     ];
 
-    // 3) Chamar IA — tenta Lovable AI primeiro; se estourar limite/crédito/erro, cai pro Groq
-    const groqKey = process.env.GROQ_API_KEY;
-    let resposta = "";
-    let fonte: "lovable" | "groq" | null = null;
-
-    async function tryLovable(): Promise<
-      { ok: true; text: string } | { ok: false; motivo: "limite" | "creditos" | "erro" }
-    > {
-      try {
-        const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-          body: JSON.stringify({
-            model: "google/gemini-3-flash-preview",
-            messages,
-            max_tokens: 500,
-            temperature: 0.7,
-          }),
-        });
-        if (res.status === 429) return { ok: false, motivo: "limite" };
-        if (res.status === 402) return { ok: false, motivo: "creditos" };
-        if (!res.ok) {
-          console.error("[professor-brilha][lovable] http", res.status, await res.text());
-          return { ok: false, motivo: "erro" };
-        }
-        const json: any = await res.json();
-        const text = String(json?.choices?.[0]?.message?.content ?? "").trim();
-        if (!text) return { ok: false, motivo: "erro" };
-        return { ok: true, text };
-      } catch (e) {
-        console.error("[professor-brilha][lovable] erro:", e);
-        return { ok: false, motivo: "erro" };
-      }
-    }
-
-    async function tryGroq(): Promise<
-      { ok: true; text: string } | { ok: false; motivo: "limite" | "creditos" | "erro" }
-    > {
-      if (!groqKey) return { ok: false, motivo: "erro" };
-      try {
-        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${groqKey}` },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages,
-            max_tokens: 500,
-            temperature: 0.7,
-          }),
-        });
-        if (res.status === 429) return { ok: false, motivo: "limite" };
-        if (!res.ok) {
-          console.error("[professor-brilha][groq] http", res.status, await res.text());
-          return { ok: false, motivo: "erro" };
-        }
-        const json: any = await res.json();
-        const text = String(json?.choices?.[0]?.message?.content ?? "").trim();
-        if (!text) return { ok: false, motivo: "erro" };
-        return { ok: true, text };
-      } catch (e) {
-        console.error("[professor-brilha][groq] erro:", e);
-        return { ok: false, motivo: "erro" };
-      }
-    }
-
-    // Primária: Lovable AI. Fallback: Groq (quando limite/crédito/erro).
-    const primaria = await tryLovable();
-    if (primaria.ok) {
-      resposta = primaria.text;
-      fonte = "lovable";
-    } else {
-      console.warn("[professor-brilha] Lovable falhou (", primaria.motivo, ") — tentando Groq");
-      const secundaria = await tryGroq();
-      if (secundaria.ok) {
-        resposta = secundaria.text;
-        fonte = "groq";
-      } else {
-        // Ambas falharam → devolve o motivo mais informativo (prioriza limite/crédito da primária)
-        if (primaria.motivo === "creditos") {
-          return {
-            ok: false,
-            motivo: "creditos",
-            mensagem:
-              "Meus créditos acabaram por hoje 🌙 Avise um adulto pra recarregar. Enquanto isso, continua explorando a aula!",
-          };
-        }
-        if (primaria.motivo === "limite" || secundaria.motivo === "limite") {
-          return {
-            ok: false,
-            motivo: "limite",
-            mensagem:
-              "Ufa, tô pensando demais agora 😅 Espera uns minutinhos e me pergunta de novo!",
-          };
-        }
+    // 3) Chamar IA — Lovable AI (primária) → Groq (reserva) via helper
+    const { chatCompletionFallback } = await import("./ai-chat-fallback");
+    const result = await chatCompletionFallback({
+      messages,
+      max_tokens: 500,
+      temperature: 0.7,
+      label: "professor-brilha",
+    });
+    if (!result.ok) {
+      if (result.motivo === "creditos") {
         return {
           ok: false,
-          motivo: "erro",
-          mensagem: "Cochilei um pouquinho 😴 Tenta de novo em instantes!",
+          motivo: "creditos",
+          mensagem:
+            "Meus créditos acabaram por hoje 🌙 Avise um adulto pra recarregar. Enquanto isso, continua explorando a aula!",
         };
       }
+      if (result.motivo === "limite") {
+        return {
+          ok: false,
+          motivo: "limite",
+          mensagem: "Ufa, tô pensando demais agora 😅 Espera uns minutinhos e me pergunta de novo!",
+        };
+      }
+      return {
+        ok: false,
+        motivo: "erro",
+        mensagem: "Cochilei um pouquinho 😴 Tenta de novo em instantes!",
+      };
     }
-    console.log("[professor-brilha] respondido via", fonte);
+    const resposta = result.text;
+    console.log("[professor-brilha] respondido via", result.fonte);
+
 
 
     // 4) Salvar conversa (upsert)
