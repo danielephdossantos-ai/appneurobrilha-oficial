@@ -2432,6 +2432,18 @@ function VoceLeSozinho({
           </div>
         </div>
 
+        {paragrafo.fotoUrl && (
+          <motion.img
+            key={`${paragrafo.id}-foto`}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            src={paragrafo.fotoUrl}
+            alt="Imagem de apoio da leitura"
+            loading="lazy"
+            className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-[#d6a15f] mb-4 shadow-lg"
+          />
+        )}
+
         <motion.div
           key={paragrafo.id}
           initial={{ opacity: 0, y: 8 }}
@@ -2820,6 +2832,15 @@ function ConstrutorMarcos({
         ⏱️ {tempo}s
       </div>
 
+      {rodada.fotoUrl && (
+        <img
+          src={rodada.fotoUrl}
+          alt="Imagem de apoio da rodada"
+          loading="lazy"
+          className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/20 shadow-xl"
+        />
+      )}
+
       {/* Cenário: 2 municípios + slot vazio no meio (fronteira apagada) */}
       <div className="relative h-52 sm:h-60 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
         <div
@@ -3014,6 +3035,15 @@ function PizzaMunicipio({
           <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
         </div>
 
+        {cena.fotoUrl && (
+          <img
+            src={cena.fotoUrl}
+            alt="Imagem de apoio da revisão"
+            loading="lazy"
+            className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700 shadow-lg"
+          />
+        )}
+
         <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5">
           <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-4 text-center">
             Gráfico de setores — toque na legenda
@@ -3094,6 +3124,14 @@ function PizzaMunicipio({
                 Ouvir
               </button>
             </div>
+            {fatiaAtiva.fotoUrl && (
+              <img
+                src={fatiaAtiva.fotoUrl}
+                alt=""
+                loading="lazy"
+                className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700"
+              />
+            )}
             <div className="text-sm text-slate-200 leading-relaxed">{stripDecorativeEmoji(fatiaAtiva.descricao)}</div>
             <ul className="grid grid-cols-1 gap-1.5">
               {fatiaAtiva.exemplos.map((ex, i) => (
@@ -3147,6 +3185,15 @@ function PizzaMunicipio({
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
         {cena.instrucao}
       </div>
+
+      {cena.fotoUrl && (
+        <img
+          src={cena.fotoUrl}
+          alt="Imagem de apoio da revisão"
+          loading="lazy"
+          className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/20 shadow-xl"
+        />
+      )}
 
       {/* Pizza SVG-like via conic-gradient */}
       <div className="flex justify-center">
@@ -3245,6 +3292,14 @@ function PizzaMunicipio({
               🔊 ouvir
             </button>
           </div>
+          {fatiaAtiva.fotoUrl && (
+            <img
+              src={fatiaAtiva.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/20"
+            />
+          )}
           <div className="text-sm text-white/90 leading-snug">
             {fatiaAtiva.descricao}
           </div>
@@ -3485,6 +3540,15 @@ function SeloAtlas({
             {stripDecorativeEmoji(atual.pergunta)}
           </button>
 
+          {(atual.fotoUrl || cena.fotoUrl) && (
+            <img
+              src={atual.fotoUrl ?? cena.fotoUrl}
+              alt="Imagem de apoio da pergunta"
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700"
+            />
+          )}
+
           <div className="grid gap-2">
             {atual.opcoes.map((o, optionIndex) => {
               const escolhida = respostas[atual.id] === o.id;
@@ -3571,6 +3635,15 @@ function SeloAtlas({
         >
           🔊 {atual.pergunta}
         </button>
+
+        {(atual.fotoUrl || cena.fotoUrl) && (
+          <img
+            src={atual.fotoUrl ?? cena.fotoUrl}
+            alt="Imagem de apoio da pergunta"
+            loading="lazy"
+            className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/20 shadow-xl"
+          />
+        )}
 
         <div className="grid gap-2">
           {atual.opcoes.map((o) => {
