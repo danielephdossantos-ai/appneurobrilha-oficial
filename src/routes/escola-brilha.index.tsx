@@ -465,7 +465,7 @@ function EscolaBrilhaCatalogo() {
                                     🧪 PILOTO · Geografia · 2º Ano
                                   </div>
                                   <div className="text-lg leading-tight mt-0.5">
-                                    📍 Pequeno Cartógrafo (formato 3º–5º)
+                                    📍 Pequeno Cartógrafo
                                   </div>
                                   <div className="text-[11px] font-bold opacity-90 mt-1">
                                     Unidade 1 · 4 aulas · 11 cenas visuais →
