@@ -132,6 +132,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Fotografia Antiga",
         texto:
           "Uma FONTE visual. Mostra como as pessoas se vestiam, como cortavam o cabelo, quem estava na família. Evidência: a roupa e o penteado nos contam a época.",
+        fotoUrl: fotoAntigaFamilia,
       },
       {
         id: "carta",
@@ -142,6 +143,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Carta com Selo",
         texto:
           "Uma FONTE escrita. Alguém sentou pra contar novidades pra outra pessoa. Evidência: a letra, o selo e a data mostram onde e quando foi enviada.",
+        fotoUrl: cartaAntiga,
       },
       {
         id: "relogio",
@@ -152,6 +154,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Relógio de Bolso",
         texto:
           "Uma FONTE material. É um objeto que a pessoa carregava. Evidência: relógio de bolso mostra que naquela época não existia celular pra ver a hora.",
+        fotoUrl: relogioBolso,
       },
       {
         id: "brinquedo",
@@ -162,6 +165,7 @@ export const aula01: AulaGeoV1 = {
         titulo: "Brinquedo de Lata",
         texto:
           "Também FONTE material. Mostra do que as crianças brincavam antes. Evidência: era feito de metal — hoje a maior parte dos brinquedos é de plástico.",
+        fotoUrl: brinquedoLata,
       },
     ],
     falaFinal:
