@@ -98,9 +98,8 @@ async function buscarBnccInfo(codigos: string[] | undefined): Promise<string> {
 
 
 export const professorBrilhaChat = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
-  .handler(async ({ data, context }): Promise<ProfResult> => {
+  .handler(async ({ data }): Promise<ProfResult> => {
     // Precisamos de PELO MENOS uma chave (Groq primária, Lovable reserva)
     if (!process.env.GROQ_API_KEY && !process.env.LOVABLE_API_KEY) {
       return {
@@ -112,8 +111,9 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
 
 
     const supabase = getServerClient();
-    const { userId } = context;
+    const userId: string | null = null;
     const { contexto, mensagem } = data;
+
 
 
     // 1) Buscar / criar conversa desta aula
