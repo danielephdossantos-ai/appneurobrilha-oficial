@@ -103,6 +103,104 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
     }
   };
 
+  // Escolhe o melhor mimeType suportado pelo navegador
+  const escolherMime = (): string => {
+    const cands = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/mpeg"];
+    const MR: any = (typeof window !== "undefined" ? (window as any).MediaRecorder : null);
+    if (!MR || !MR.isTypeSupported) return "audio/webm";
+    for (const c of cands) if (MR.isTypeSupported(c)) return c;
+    return "audio/webm";
+  };
+
+  const pararMicrofone = () => {
+    try {
+      recorderRef.current?.state === "recording" && recorderRef.current?.stop();
+    } catch {}
+    try {
+      streamRef.current?.getTracks().forEach((t) => t.stop());
+    } catch {}
+    recorderRef.current = null;
+    streamRef.current = null;
+  };
+
+  const iniciarGravacao = async () => {
+    if (gravando || carregando || transcrevendo) return;
+    setErro(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+      const mimeType = escolherMime();
+      const rec = new MediaRecorder(stream, { mimeType });
+      chunksRef.current = [];
+      rec.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
+      };
+      rec.onstop = async () => {
+        const blob = new Blob(chunksRef.current, { type: mimeType });
+        chunksRef.current = [];
+        pararMicrofone();
+        if (blob.size < 2048) {
+          setErro("Gravação muito curta. Segura o botão e fala pertinho!");
+          return;
+        }
+        setTranscrevendo(true);
+        try {
+          const buf = await blob.arrayBuffer();
+          // Converte pra base64 sem estourar o stack
+          let bin = "";
+          const bytes = new Uint8Array(buf);
+          const chunkSize = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunkSize) {
+            bin += String.fromCharCode.apply(
+              null,
+              Array.from(bytes.subarray(i, i + chunkSize)),
+            );
+          }
+          const b64 = btoa(bin);
+          const res = await transcrever({
+            data: { audioBase64: b64, mimeType, language: "pt" },
+          });
+          if (res.ok) {
+            setInput((prev) => (prev ? prev + " " + res.texto : res.texto));
+          } else {
+            setErro(res.mensagem);
+            const { notificarErroIA } = await import("@/lib/notify-ai-error");
+            notificarErroIA(res.motivo, "Transcrição");
+          }
+        } catch (e) {
+          console.error(e);
+          setErro("Não consegui transcrever. Tenta de novo!");
+        } finally {
+          setTranscrevendo(false);
+        }
+      };
+      recorderRef.current = rec;
+      rec.start();
+      setGravando(true);
+    } catch (e) {
+      console.error(e);
+      setErro("Preciso do microfone pra escutar você. Libere o acesso!");
+      pararMicrofone();
+    }
+  };
+
+  const pararGravacao = () => {
+    if (!gravando) return;
+    setGravando(false);
+    try {
+      recorderRef.current?.state === "recording" && recorderRef.current?.stop();
+    } catch {
+      pararMicrofone();
+    }
+  };
+
+  // Cleanup ao desmontar
+  useEffect(() => {
+    return () => pararMicrofone();
+  }, []);
+
+
+
   const botaoCor = teen
     ? "bg-cyan-500 hover:bg-cyan-400 shadow-[0_0_24px_-6px_rgba(103,232,249,0.9)] border border-cyan-300/40"
     : "bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 shadow-lg hover:scale-105";
