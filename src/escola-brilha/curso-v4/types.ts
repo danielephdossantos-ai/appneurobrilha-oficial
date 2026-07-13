@@ -679,6 +679,11 @@ export type CenaGeoV1 =
       aurora: string;
       instrucao: string;
       mapaUrl: string;
+      /** Layout alternativo: só personagem + botões de toque, sem mapa/thumbnails.
+       *  Ao tocar num ponto, a foto do ponto aparece no painel de curiosidade. */
+      layout?: "personagem";
+      /** Imagem do personagem central (usada quando layout === "personagem"). */
+      personagemImg?: string;
       pontos: Array<{
         id: string;
         x: number;      // 0-100 (% no mapa)
@@ -691,6 +696,7 @@ export type CenaGeoV1 =
       }>;
       falaFinal: string;
     }
+
   | {
       tipo: "quizRadar";
       aurora: string;

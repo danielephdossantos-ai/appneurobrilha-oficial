@@ -992,9 +992,123 @@ function NarrarMapa({
   }
 
 
+  // Layout "personagem": só o personagem central + botões de toque.
+  // Ao tocar, aparece um painel de curiosidade com a imagem do ponto.
+  if (cena.layout === "personagem") {
+    return (
+      <div className="space-y-5">
+        <div className="flex items-start gap-3">
+          <img
+            src={aurora.img}
+            alt={aurora.nome}
+            className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+          />
+          <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">
+              {aurora.nome}
+            </div>
+            {cena.aurora}
+          </div>
+        </div>
 
+        <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+          👉 {cena.instrucao}
+        </div>
+
+        {/* Personagem central */}
+        <div className="relative rounded-3xl bg-gradient-to-b from-purple-500/20 to-fuchsia-700/20 border-2 border-white/15 p-6 flex justify-center">
+          <img
+            src={cena.personagemImg || cena.mapaUrl}
+            alt="Personagem"
+            className="w-40 h-40 sm:w-52 sm:h-52 object-contain drop-shadow-2xl select-none"
+            draggable={false}
+          />
+        </div>
+
+        {/* Botões de toque em grade */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {cena.pontos.map((p) => {
+            const visto = !!visitados[p.id];
+            const isAtivo = ativo === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+                className={`relative rounded-2xl p-3 border-2 shadow-lg transition bg-gradient-to-br ${p.cor} ${
+                  isAtivo ? "border-emerald-300 scale-[1.03]" : "border-white/20"
+                }`}
+              >
+                <div className="text-3xl mb-1">{p.emoji}</div>
+                <div className="text-white text-xs font-black leading-tight">
+                  {p.titulo}
+                </div>
+                {visto && (
+                  <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-[#0d1f55] text-[11px] font-black grid place-items-center border-2 border-[#0f172a]">
+                    ✓
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Painel de curiosidade — imagem aparece só quando toca */}
+        {pontoAtivo ? (
+          <motion.div
+            key={pontoAtivo.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white text-[#0d1f55] rounded-2xl p-4 shadow-xl border-2 border-emerald-300"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">{pontoAtivo.emoji}</span>
+              <div className="font-black text-lg">{pontoAtivo.titulo}</div>
+              <button
+                onClick={() => falar(`${pontoAtivo.titulo}. ${pontoAtivo.texto}`)}
+                className="ml-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold rounded-full px-3 py-1"
+              >
+                🔊 ouvir
+              </button>
+            </div>
+            {pontoAtivo.fotoUrl && (
+              <img
+                src={pontoAtivo.fotoUrl}
+                alt={pontoAtivo.titulo}
+                loading="lazy"
+                className="w-full aspect-[3/2] object-cover rounded-xl mb-2 border-2 border-emerald-200"
+              />
+            )}
+            <p className="text-sm leading-snug">{pontoAtivo.texto}</p>
+          </motion.div>
+        ) : (
+          <div className="text-center text-sm text-white/60 italic">
+            Toque num botão pra descobrir a curiosidade 👆
+          </div>
+        )}
+
+        <div className="text-center text-xs text-white/60">
+          {visitadosCount} / {total} descobertos
+        </div>
+
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!todosVistos}
+            className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+              todosVistos
+                ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+                : "bg-white/10 text-white/40 cursor-not-allowed"
+            }`}
+          >
+            {todosVistos ? "Continuar" : "👉 Toque em todos os botões"}
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
+
     <div className="space-y-5">
       <div className="flex items-start gap-3">
         <img
