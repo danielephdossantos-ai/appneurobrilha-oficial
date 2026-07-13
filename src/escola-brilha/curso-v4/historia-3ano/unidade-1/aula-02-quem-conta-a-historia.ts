@@ -439,30 +439,20 @@ export const aula02: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias pra rever",
     fatias: [
       {
-        id: "vozes-vivas",
-        rotulo: "Vozes VIVAS",
-        emoji: "👵🎙️",
-        percentual: 40,
+        id: "vozes-diretas",
+        rotulo: "Vozes DIRETAS",
+        emoji: "👵🎙️📸",
+        percentual: 60,
         cor: "#b45309",
         descricao:
-          "Testemunhas e narradores orais — pessoas que viveram ou ouviram e contam de boca. Muito importantes pra história da família.",
-        exemplos: ["Vovó no casamento dela", "Tio contando o causo", "Vizinho mais velho"],
-      },
-      {
-        id: "fontes-mudas",
-        rotulo: "Fontes MUDAS",
-        emoji: "📸✉️🧸",
-        percentual: 35,
-        cor: "#16a34a",
-        descricao:
-          "Fotos, cartas, objetos e prédios. Não falam, mas mostram pistas de como as pessoas viviam.",
-        exemplos: ["Foto sépia", "Carta com selo", "Brinquedo de lata", "Casarão antigo"],
+          "Testemunhas, narradores orais e fontes mudas — tudo que vem DIRETO da época: pessoas que viveram, causos que passam de boca, fotos, cartas e objetos.",
+        exemplos: ["Vovó no casamento", "Causo do tio", "Foto sépia", "Carta com selo"],
       },
       {
         id: "historiadores",
         rotulo: "HISTORIADORES",
         emoji: "🔎📚",
-        percentual: 25,
+        percentual: 40,
         cor: "#4f46e5",
         descricao:
           "Investigadores que juntam TUDO — vozes vivas + fontes mudas — e organizam pra virar livro, aula e museu.",
