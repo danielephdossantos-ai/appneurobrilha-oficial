@@ -1603,6 +1603,7 @@ function MapaCamadas({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const scrollLivre = useScrollLivre();
   const [ligadas, setLigadas] = useState<Record<string, boolean>>({});
   const totalLigadas = Object.values(ligadas).filter(Boolean).length;
   const todasLigadas = totalLigadas === cena.camadas.length;
@@ -1748,17 +1749,19 @@ function MapaCamadas({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todasLigadas}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todasLigadas
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {todasLigadas ? "Continuar" : "🔦 Acenda todas as camadas do mapa"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todasLigadas}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todasLigadas
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {todasLigadas ? "Continuar" : "🔦 Acenda todas as camadas do mapa"}
+        </button>
+      )}
     </div>
   );
 }
@@ -1775,6 +1778,7 @@ function LinhaEstrada({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const total = cena.ordemCerta.length;
   const [passo, setPasso] = useState(0);       // próxima posição a preencher
   const [colocados, setColocados] = useState<string[]>([]); // ids em ordem
@@ -1897,17 +1901,19 @@ function LinhaEstrada({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!concluido}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            concluido
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!concluido}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              concluido
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
+          </button>
+        )}
       </div>
     );
   }
@@ -2052,17 +2058,19 @@ function LinhaEstrada({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!concluido}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          concluido
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {concluido ? "Continuar" : `🛣️ Monte o caminho (${passo}/${total})`}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            concluido
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar" : `🛣️ Monte o caminho (${passo}/${total})`}
+        </button>
+      )}
     </div>
   );
 }
