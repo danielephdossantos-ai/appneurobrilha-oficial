@@ -99,7 +99,6 @@ async function transcribeLovable(
 }
 
 export const transcreverAudio = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<Result> => {
     if (!process.env.GROQ_API_KEY && !process.env.LOVABLE_API_KEY) {
