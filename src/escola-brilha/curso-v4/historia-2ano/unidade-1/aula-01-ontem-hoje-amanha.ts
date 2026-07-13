@@ -1,6 +1,5 @@
 import type { AulaGeoV1 } from "../../types";
 import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-import imgFotografo from "@/assets/historia-2ano/passado-fotografo.png";
 import imgPresenteLupa from "@/assets/historia-2ano/presente-lupa.png";
 import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
 import imgPresenteBrilha from "@/assets/historia-2ano/presente-brilha-agora.png";
@@ -27,7 +26,6 @@ import imgPassadoDiario from "@/assets/historia-2ano/passado-diario-antigo-brilh
 
 const IMG_FOTO_ANTIGA = imgFotoAntiga;
 const IMG_PASSADO = imgFotoAntiga;     // "foto antiga" — texto pede foto, não personagem
-const IMG_FOTOGRAFO = imgFotografo;    // reserva pra cenas que falarem de "quem tirou a foto"
 const IMG_PRESENTE = imgPresenteLupa;
 const IMG_RELOGIO = imgPresenteLupa;
 const IMG_CALENDARIO = imgFuturo;
