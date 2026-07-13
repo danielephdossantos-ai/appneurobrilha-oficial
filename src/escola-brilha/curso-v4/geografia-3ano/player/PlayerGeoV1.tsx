@@ -1605,7 +1605,7 @@ function MapaCamadas({
         <img
           src={cena.mapaUrl}
           alt="Mapa do município"
-          className="w-full aspect-[4/3] object-cover select-none"
+          className="w-full h-auto object-contain select-none"
           draggable={false}
         />
         {/* véu escuro global — some quando TUDO está ligado */}
