@@ -2,6 +2,9 @@ import type { AulaGeoV1 } from "../../types";
 import imgCrise from "@/assets/historia-9ano/u2-crise-1929.jpg";
 import imgTot from "@/assets/historia-9ano/u2-crise-social.jpg";
 
+import imgFila from "@/assets/historia-9ano/u2-fila-desempregados.jpg";
+import imgComicio from "@/assets/historia-9ano/u2-comicio-fascista.jpg";
+import imgBolsa from "@/assets/historia-9ano/u2-quebra-bolsa.jpg";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-crise-totalitarismo",
   titulo: "Crise de 1929 e a Ascensão dos Totalitarismos",
@@ -26,7 +29,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Depois do craque de 1929, quem apareceu prometendo 'ORDEM' e 'trabalho para todos'?",
     pergunta: "O que caracteriza um regime TOTALITÁRIO?",
-    fotoUrl: imgTot,
+    fotoUrl: imgFila,
     opcoes: [
       {
         id: "aut",
@@ -61,7 +64,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Crise de 1929",
         emoji: "📉",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgCrise,
+        fotoUrl: imgComicio,
         conteudo:
           "CRISE DE 1929 (ou Grande Depressão) começou com a quebra da Bolsa de Nova York em outubro. Ações valiam quase nada, bancos faliram, fábricas fecharam. Nos EUA o desemprego chegou a 25% — uma em cada quatro pessoas SEM emprego.",
         exemplo:
@@ -72,7 +75,7 @@ export const aula01: AulaGeoV1 = {
         capa: "New Deal",
         emoji: "🏗️",
         cor: "from-cyan-700 to-slate-900",
-        fotoUrl: imgCrise,
+        fotoUrl: imgBolsa,
         conteudo:
           "NEW DEAL foi o pacote do presidente Roosevelt (EUA, 1933) para sair da crise: o Estado passa a INVESTIR em obras públicas (estradas, barragens), criar empregos, regular bancos e garantir direitos trabalhistas.",
         exemplo:
@@ -83,7 +86,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Fascismo",
         emoji: "⛓️",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgTot,
+        fotoUrl: imgCrise,
         conteudo:
           "FASCISMO é regime totalitário de EXTREMA DIREITA. Líder único, culto ao chefe, nacionalismo agressivo, uso da violência contra opositores, glorificação da guerra. Nasceu na Itália com Mussolini em 1922.",
         exemplo:
@@ -108,11 +111,11 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Três características-chave de todo regime totalitário.",
     instrucao: "Toque nos pontos",
-    mapaUrl: imgTot,
+    mapaUrl: imgFila,
     pontos: [
-      { id: "p1", x: 25, y: 30, emoji: "👑", cor: "from-amber-700 to-slate-900", fotoUrl: imgTot, titulo: "CULTO AO LÍDER", texto: "O chefe é apresentado como salvador da nação. Retratos em toda escola, hinos, saudações obrigatórias. Criticar o líder = crime." },
-      { id: "p2", x: 55, y: 55, emoji: "📵", cor: "from-slate-700 to-slate-900", fotoUrl: imgTot, titulo: "CENSURA E PROPAGANDA", texto: "Imprensa, rádio, cinema e livros são controlados pelo Estado. Só se pode ouvir uma versão dos fatos — a do regime." },
-      { id: "p3", x: 80, y: 35, emoji: "🚔", cor: "from-cyan-700 to-slate-900", fotoUrl: imgTot, titulo: "POLÍCIA POLÍTICA", texto: "Órgãos como Gestapo (Alemanha) ou OVRA (Itália) prendiam, torturavam e matavam opositores. Vizinhos denunciavam vizinhos." },
+      { id: "p1", x: 25, y: 30, emoji: "👑", cor: "from-amber-700 to-slate-900", fotoUrl: imgComicio, titulo: "CULTO AO LÍDER", texto: "O chefe é apresentado como salvador da nação. Retratos em toda escola, hinos, saudações obrigatórias. Criticar o líder = crime." },
+      { id: "p2", x: 55, y: 55, emoji: "📵", cor: "from-slate-700 to-slate-900", fotoUrl: imgBolsa, titulo: "CENSURA E PROPAGANDA", texto: "Imprensa, rádio, cinema e livros são controlados pelo Estado. Só se pode ouvir uma versão dos fatos — a do regime." },
+      { id: "p3", x: 80, y: 35, emoji: "🚔", cor: "from-cyan-700 to-slate-900", fotoUrl: imgCrise, titulo: "POLÍCIA POLÍTICA", texto: "Órgãos como Gestapo (Alemanha) ou OVRA (Itália) prendiam, torturavam e matavam opositores. Vizinhos denunciavam vizinhos." },
     ],
     falaFinal: "Culto + Censura + Polícia política. Receita de todo totalitarismo, ontem e hoje.",
   },
@@ -122,9 +125,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Em que ano quebrou a Bolsa de Nova York?", fotoUrl: imgCrise, cards: [{ id: "1929", emoji: "📉", titulo: "1929", cor: "from-teal-600 to-slate-900" }, { id: "1917", emoji: "☭", titulo: "1917", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "1929", feedbackAcerto: "Correto. Outubro de 1929.", feedbackErro: "É 1929. 1917 = Rev. Russa, 1945 = fim da 2ª Guerra." },
-      { id: "q2", pergunta: "Quem liderou o NEW DEAL nos EUA?", fotoUrl: imgCrise, cards: [{ id: "r", emoji: "🏗️", titulo: "Roosevelt", cor: "from-teal-600 to-slate-900" }, { id: "h", emoji: "⛓️", titulo: "Hitler", cor: "from-amber-600 to-slate-900" }, { id: "m", emoji: "🎖️", titulo: "Mussolini", cor: "from-slate-600 to-slate-900" }], correta: "r", feedbackAcerto: "Correto. Roosevelt, presidente dos EUA a partir de 1933.", feedbackErro: "É Roosevelt. Hitler = Alemanha, Mussolini = Itália." },
-      { id: "q3", pergunta: "O NAZISMO nasceu em qual país?", fotoUrl: imgTot, cards: [{ id: "al", emoji: "🇩🇪", titulo: "Alemanha", cor: "from-teal-600 to-slate-900" }, { id: "it", emoji: "🇮🇹", titulo: "Itália", cor: "from-amber-600 to-slate-900" }, { id: "es", emoji: "🇪🇸", titulo: "Espanha", cor: "from-slate-600 to-slate-900" }], correta: "al", feedbackAcerto: "Correto. Alemanha, com Hitler (1933).", feedbackErro: "É Alemanha. Itália = Fascismo (Mussolini); Espanha = Franquismo (Franco)." },
+      { id: "q1", pergunta: "Em que ano quebrou a Bolsa de Nova York?", fotoUrl: imgTot, cards: [{ id: "1929", emoji: "📉", titulo: "1929", cor: "from-teal-600 to-slate-900" }, { id: "1917", emoji: "☭", titulo: "1917", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "1929", feedbackAcerto: "Correto. Outubro de 1929.", feedbackErro: "É 1929. 1917 = Rev. Russa, 1945 = fim da 2ª Guerra." },
+      { id: "q2", pergunta: "Quem liderou o NEW DEAL nos EUA?", fotoUrl: imgFila, cards: [{ id: "r", emoji: "🏗️", titulo: "Roosevelt", cor: "from-teal-600 to-slate-900" }, { id: "h", emoji: "⛓️", titulo: "Hitler", cor: "from-amber-600 to-slate-900" }, { id: "m", emoji: "🎖️", titulo: "Mussolini", cor: "from-slate-600 to-slate-900" }], correta: "r", feedbackAcerto: "Correto. Roosevelt, presidente dos EUA a partir de 1933.", feedbackErro: "É Roosevelt. Hitler = Alemanha, Mussolini = Itália." },
+      { id: "q3", pergunta: "O NAZISMO nasceu em qual país?", fotoUrl: imgComicio, cards: [{ id: "al", emoji: "🇩🇪", titulo: "Alemanha", cor: "from-teal-600 to-slate-900" }, { id: "it", emoji: "🇮🇹", titulo: "Itália", cor: "from-amber-600 to-slate-900" }, { id: "es", emoji: "🇪🇸", titulo: "Espanha", cor: "from-slate-600 to-slate-900" }], correta: "al", feedbackAcerto: "Correto. Alemanha, com Hitler (1933).", feedbackErro: "É Alemanha. Itália = Fascismo (Mussolini); Espanha = Franquismo (Franco)." },
     ],
     falaFinal: "Você já mapeia crise → totalitarismos.",
   },
@@ -133,7 +136,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "mapaCamadas",
     aurora: "Duas respostas à crise: democrática e autoritária.",
     instrucao: "Toque nos filtros",
-    mapaUrl: imgCrise,
+    mapaUrl: imgBolsa,
     camadas: [
       { id: "dem", rotulo: "Resposta democrática (EUA)", emoji: "🗳️", cor: "from-cyan-700 to-slate-900", rect: { x: 5, y: 10, w: 90, h: 40 }, descricao: "New Deal: Estado investe, cria empregos e regula bancos. Democracia preservada." },
       { id: "aut", rotulo: "Resposta autoritária (Europa)", emoji: "⛓️", cor: "from-amber-700 to-slate-900", rect: { x: 5, y: 55, w: 90, h: 40 }, descricao: "Fascismo (Itália), Nazismo (Alemanha), Franquismo (Espanha). Fim da democracia, perseguição a opositores." },
@@ -148,9 +151,9 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Marcos 1929–1939",
     paradas: [
       { id: "cr", emoji: "📉", rotulo: "1. Crise (1929)", fotoUrl: imgCrise, descricao: "Quebra da Bolsa de Nova York." },
-      { id: "nd", emoji: "🏗️", rotulo: "2. New Deal (1933)", fotoUrl: imgCrise, descricao: "Roosevelt assume nos EUA." },
-      { id: "hit", emoji: "⛓️", rotulo: "3. Hitler no poder (1933)", fotoUrl: imgTot, descricao: "Nazismo assume a Alemanha." },
-      { id: "pol", emoji: "⚔️", rotulo: "4. Invasão da Polônia (1939)", fotoUrl: imgTot, descricao: "Início da 2ª Guerra Mundial." },
+      { id: "nd", emoji: "🏗️", rotulo: "2. New Deal (1933)", fotoUrl: imgTot, descricao: "Roosevelt assume nos EUA." },
+      { id: "hit", emoji: "⛓️", rotulo: "3. Hitler no poder (1933)", fotoUrl: imgFila, descricao: "Nazismo assume a Alemanha." },
+      { id: "pol", emoji: "⚔️", rotulo: "4. Invasão da Polônia (1939)", fotoUrl: imgComicio, descricao: "Início da 2ª Guerra Mundial." },
     ],
     ordemCerta: ["cr", "nd", "hit", "pol"],
     feedbackAcerto: "Perfeito. Crise → New Deal e Nazismo (mesma década) → guerra em 1939.",
@@ -164,10 +167,10 @@ export const aula01: AulaGeoV1 = {
     tituloLivro: "🌐 A Teia do Tempo Presente",
     subtitulo: "Página 2 — Crise e Totalitarismos",
     paragrafos: [
-      { id: "p1", texto: "Em outubro de 1929 a Bolsa de Nova York desabou. Milhões perderam tudo em dias. Bancos faliram, fábricas fecharam, o desemprego nos EUA chegou a 25%. A crise saltou para Europa e América Latina — foi a GRANDE DEPRESSÃO.", chaves: ["Grande Depressão"], definicoes: { "Grande Depressão": "Crise econômica mundial iniciada em 1929 com a quebra da Bolsa de Nova York, que durou até o começo dos anos 1940." }, fotoUrl: imgCrise },
+      { id: "p1", texto: "Em outubro de 1929 a Bolsa de Nova York desabou. Milhões perderam tudo em dias. Bancos faliram, fábricas fecharam, o desemprego nos EUA chegou a 25%. A crise saltou para Europa e América Latina — foi a GRANDE DEPRESSÃO.", chaves: ["Grande Depressão"], definicoes: { "Grande Depressão": "Crise econômica mundial iniciada em 1929 com a quebra da Bolsa de Nova York, que durou até o começo dos anos 1940." }, fotoUrl: imgBolsa },
       { id: "p2", texto: "Nos EUA, o presidente Roosevelt lançou em 1933 o NEW DEAL: o Estado passou a investir em obras públicas, garantir salário mínimo e regular bancos. É a base do que se chama ESTADO DE BEM-ESTAR SOCIAL — Estado que atua para reduzir a miséria.", chaves: ["New Deal"], definicoes: { "New Deal": "Programa de Roosevelt (1933) para tirar os EUA da crise por meio de investimento estatal, obras públicas e regulação financeira." }, fotoUrl: imgCrise },
       { id: "p3", texto: "Na Europa, o caminho foi outro. Regimes TOTALITÁRIOS aproveitaram a miséria e o rancor de Versalhes: FASCISMO na Itália (Mussolini, 1922), NAZISMO na Alemanha (Hitler, 1933), FRANQUISMO na Espanha (Franco, 1939). Todos: partido único, culto ao líder, censura, polícia política.", chaves: ["Totalitarismos"], definicoes: { Totalitarismos: "Regimes que controlam todos os aspectos da vida social — partido único, líder cultuado, censura e polícia política." }, fotoUrl: imgTot },
-      { id: "p4", texto: "O nazismo somou racismo institucional. Em 1935, as LEIS DE NUREMBERG tiraram a cidadania dos judeus alemães, proibiram casamentos com não-judeus e prepararam o terreno legal para o Holocausto. A crise de 1929 é uma das raízes diretas da 2ª Guerra Mundial.", chaves: ["Leis de Nuremberg"], definicoes: { "Leis de Nuremberg": "Leis alemãs de 1935 que tiraram direitos civis dos judeus e institucionalizaram o racismo do regime nazista." }, fotoUrl: imgTot },
+      { id: "p4", texto: "O nazismo somou racismo institucional. Em 1935, as LEIS DE NUREMBERG tiraram a cidadania dos judeus alemães, proibiram casamentos com não-judeus e prepararam o terreno legal para o Holocausto. A crise de 1929 é uma das raízes diretas da 2ª Guerra Mundial.", chaves: ["Leis de Nuremberg"], definicoes: { "Leis de Nuremberg": "Leis alemãs de 1935 que tiraram direitos civis dos judeus e institucionalizaram o racismo do regime nazista." }, fotoUrl: imgFila },
     ],
     falaFinal: "Leitura concluída. Você já explica por que crise econômica pode virar guerra.",
   },
@@ -197,7 +200,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "pizzaMunicipio",
     aurora: "Desemprego nos EUA — antes e no pico da crise.",
     instrucao: "Toque em cada fatia",
-    fotoUrl: imgCrise,
+    fotoUrl: imgComicio,
     fatias: [
       { id: "trab", rotulo: "Empregados (~75%)", emoji: "💼", percentual: 75, cor: "#0f766e", descricao: "Trabalhadores que mantiveram o emprego em 1933 — muitos com salário reduzido pela crise.", exemplos: ["🏭 Fábricas", "🌾 Fazendas", "🏪 Comércio"] },
       { id: "des", rotulo: "Desempregados (~25%)", emoji: "📉", percentual: 25, cor: "#b45309", descricao: "Um em cada QUATRO trabalhadores dos EUA estava desempregado no pico da Grande Depressão (1933).", exemplos: ["🚶 Filas de fome", "🏚️ Sem-teto", "🏦 Bancos fechados"] },
@@ -209,7 +212,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "seloAtlas",
     aurora: "Três perguntas finais.",
     instrucao: "Responda as 3 perguntas",
-    fotoUrl: imgCrise,
+    fotoUrl: imgBolsa,
     perguntas: [
       { id: "av1", pergunta: "A Crise de 1929 começou com:", opcoes: [{ id: "a", texto: "A invasão da Polônia.", correta: false }, { id: "b", texto: "A quebra da Bolsa de Nova York.", correta: true }, { id: "c", texto: "A queda do Muro de Berlim.", correta: false }], feedbackAcerto: "Correto. Nova York, outubro de 1929.", feedbackErro: "É a quebra da Bolsa de NY (1929)." },
       { id: "av2", pergunta: "O NEW DEAL foi:", opcoes: [{ id: "a", texto: "Um programa de investimento estatal para tirar os EUA da crise.", correta: true }, { id: "b", texto: "Uma aliança militar contra o nazismo.", correta: false }, { id: "c", texto: "Um partido único da Alemanha.", correta: false }], feedbackAcerto: "Correto. Roosevelt, 1933.", feedbackErro: "É o programa de Roosevelt (1933) contra a crise." },

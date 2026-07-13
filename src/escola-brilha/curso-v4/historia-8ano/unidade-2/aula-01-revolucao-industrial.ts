@@ -2,6 +2,9 @@ import type { AulaGeoV1 } from "../../types";
 import imgFab from "@/assets/historia-8ano/u2-fabrica-manchester.jpg";
 import imgTear from "@/assets/historia-8ano/u2-tear-mecanico.jpg";
 
+import imgLoco from "@/assets/historia-8ano/u2-locomotiva-vapor.jpg";
+import imgCriancas from "@/assets/historia-8ano/u2-criancas-fabrica.jpg";
+import imgCidade from "@/assets/historia-8ano/u2-cidade-industrial.jpg";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-revolucao-industrial",
   titulo: "A Revolução Industrial e o Mundo do Trabalho",
@@ -27,7 +30,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "As máquinas produziam MUITO mais, MUITO mais barato. O que aconteceu com a maioria dos artesãos e camponeses?",
     pergunta: "Qual foi o principal impacto social da industrialização?",
-    fotoUrl: imgTear,
+    fotoUrl: imgLoco,
     opcoes: [
       {
         id: "prol",
@@ -62,7 +65,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Revolução Industrial",
         emoji: "⚙️",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgFab,
+        fotoUrl: imgCriancas,
         conteudo:
           "REVOLUÇÃO INDUSTRIAL foi a transformação econômica iniciada na Inglaterra no final do século XVIII. Substituiu a produção ARTESANAL por MAQUINÁRIA movida a VAPOR (depois carvão, depois eletricidade). Mudou o mundo.",
         exemplo:
@@ -73,7 +76,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Burguesia Industrial",
         emoji: "💼",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgFab,
+        fotoUrl: imgCidade,
         conteudo:
           "BURGUESIA INDUSTRIAL é a classe dona das FÁBRICAS, das MÁQUINAS e do CAPITAL. Enriqueceu vendendo produtos em massa. Passou a comandar economicamente o mundo — e a exigir poder político.",
         exemplo:
@@ -84,7 +87,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Proletariado",
         emoji: "🛠️",
         cor: "from-cyan-700 to-slate-900",
-        fotoUrl: imgTear,
+        fotoUrl: imgFab,
         conteudo:
           "PROLETARIADO é a classe dos OPERÁRIOS: pessoas que só têm a própria FORÇA DE TRABALHO pra vender. Recebiam salário baixo, moravam em cortiços e trabalhavam em condições insalubres — inclusive crianças de 6 anos.",
         exemplo:
@@ -95,7 +98,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Capitalismo",
         emoji: "💰",
         cor: "from-slate-700 to-slate-900",
-        fotoUrl: imgFab,
+        fotoUrl: imgTear,
         conteudo:
           "CAPITALISMO é o sistema econômico baseado em PROPRIEDADE PRIVADA dos meios de produção (fábricas, máquinas), TRABALHO ASSALARIADO e busca de LUCRO. Consolidou-se com a Revolução Industrial.",
         exemplo:
@@ -110,7 +113,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Infográfico da fábrica: quem faz o quê no novo mundo do trabalho.",
     instrucao: "Toque nos pontos",
-    mapaUrl: imgTear,
+    mapaUrl: imgLoco,
     pontos: [
       {
         id: "vap",
@@ -118,7 +121,7 @@ export const aula01: AulaGeoV1 = {
         y: 25,
         emoji: "🔥",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgFab,
+        fotoUrl: imgCriancas,
         titulo: "MÁQUINA A VAPOR",
         texto:
           "Aperfeiçoada por James Watt (1769). Queima carvão pra aquecer água; o vapor move pistões que giram engrenagens. Substitui a força humana e animal.",
@@ -129,7 +132,7 @@ export const aula01: AulaGeoV1 = {
         y: 55,
         emoji: "🧵",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgTear,
+        fotoUrl: imgCidade,
         titulo: "TEAR MECÂNICO",
         texto:
           "Produz tecido 40 vezes mais rápido que a mão humana. Substituiu artesãos, gerou desemprego e provocou revoltas (movimento ludita: destruição de máquinas).",
@@ -140,7 +143,7 @@ export const aula01: AulaGeoV1 = {
         y: 75,
         emoji: "👶",
         cor: "from-cyan-700 to-slate-900",
-        fotoUrl: imgTear,
+        fotoUrl: imgFab,
         titulo: "TRABALHO INFANTIL",
         texto:
           "Crianças de 6 anos trabalhavam 12-14h/dia. Ganhavam menos que adultos e cabiam em espaços onde adultos não caíam. Só em 1833 a Inglaterra proibiu menores de 9 anos em fábricas.",
@@ -151,7 +154,7 @@ export const aula01: AulaGeoV1 = {
         y: 15,
         emoji: "💼",
         cor: "from-slate-700 to-slate-900",
-        fotoUrl: imgFab,
+        fotoUrl: imgTear,
         titulo: "DONO DA FÁBRICA",
         texto:
           "Burguesia industrial. Investia capital, controlava produção, contratava operários. Enriquecia com o LUCRO gerado pela diferença entre salários baixos e preço de venda.",
@@ -168,7 +171,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Qual país foi PIONEIRO da Revolução Industrial?",
-        fotoUrl: imgFab,
+        fotoUrl: imgLoco,
         cards: [
           { id: "i", emoji: "🇬🇧", titulo: "Inglaterra", cor: "from-teal-600 to-slate-900" },
           { id: "f", emoji: "🇫🇷", titulo: "França", cor: "from-amber-600 to-slate-900" },
@@ -181,7 +184,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "Quem AJUSTOU a máquina a vapor em 1769, dando início à revolução?",
-        fotoUrl: imgTear,
+        fotoUrl: imgCriancas,
         cards: [
           { id: "w", emoji: "🔥", titulo: "James Watt", cor: "from-teal-600 to-slate-900" },
           { id: "e", emoji: "💡", titulo: "Edison", cor: "from-amber-600 to-slate-900" },
@@ -194,7 +197,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "A classe operária urbana que só tem a força de trabalho a vender é chamada de:",
-        fotoUrl: imgTear,
+        fotoUrl: imgCidade,
         cards: [
           { id: "p", emoji: "🛠️", titulo: "Proletariado", cor: "from-teal-600 to-slate-900" },
           { id: "b", emoji: "💼", titulo: "Burguesia", cor: "from-amber-600 to-slate-900" },
@@ -242,10 +245,10 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nas etapas na ordem certa",
     pergunta: "Passos da industrialização",
     paradas: [
-      { id: "cer", emoji: "🌾", rotulo: "1. Cercamentos (séc. XVIII)", fotoUrl: imgFab, descricao: "Camponeses expulsos → mão de obra livre para as cidades." },
-      { id: "wat", emoji: "🔥", rotulo: "2. Máquina a vapor (1769)", fotoUrl: imgTear, descricao: "Watt aperfeiçoa; energia mecânica em larga escala." },
-      { id: "fab", emoji: "🏭", rotulo: "3. Fábricas (1780+)", fotoUrl: imgFab, descricao: "Manchester, Liverpool, Birmingham crescem em anos." },
-      { id: "lud", emoji: "🔨", rotulo: "4. Ludismo e sindicatos (1810+)", fotoUrl: imgTear, descricao: "Operários se organizam contra as condições brutais." },
+      { id: "cer", emoji: "🌾", rotulo: "1. Cercamentos (séc. XVIII)", fotoUrl: imgTear, descricao: "Camponeses expulsos → mão de obra livre para as cidades." },
+      { id: "wat", emoji: "🔥", rotulo: "2. Máquina a vapor (1769)", fotoUrl: imgLoco, descricao: "Watt aperfeiçoa; energia mecânica em larga escala." },
+      { id: "fab", emoji: "🏭", rotulo: "3. Fábricas (1780+)", fotoUrl: imgCriancas, descricao: "Manchester, Liverpool, Birmingham crescem em anos." },
+      { id: "lud", emoji: "🔨", rotulo: "4. Ludismo e sindicatos (1810+)", fotoUrl: imgCidade, descricao: "Operários se organizam contra as condições brutais." },
     ],
     ordemCerta: ["cer", "wat", "fab", "lud"],
     feedbackAcerto:
@@ -291,7 +294,7 @@ export const aula01: AulaGeoV1 = {
           "Capitalismo":
             "Sistema baseado em propriedade privada dos meios de produção, trabalho assalariado e busca de lucro.",
         },
-        fotoUrl: imgFab,
+        fotoUrl: imgLoco,
       },
       {
         id: "p4",
@@ -302,7 +305,7 @@ export const aula01: AulaGeoV1 = {
           "Ludismo":
             "Movimento operário (1810+) que destruía máquinas em protesto contra o desemprego e as condições de trabalho.",
         },
-        fotoUrl: imgTear,
+        fotoUrl: imgCriancas,
       },
     ],
     falaFinal:
@@ -334,7 +337,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "pizzaMunicipio",
     aurora: "Pizza da sociedade industrial: quem tinha capital e quem tinha só o trabalho.",
     instrucao: "Toque em cada fatia",
-    fotoUrl: imgFab,
+    fotoUrl: imgCidade,
     fatias: [
       { id: "bur", rotulo: "Burguesia (~10%)", emoji: "💼", percentual: 10, cor: "#b45309", descricao: "Donos das fábricas, bancos e ferrovias. Detentores do capital.", exemplos: ["🏭 Industriais", "🏦 Banqueiros", "🚂 Ferroviários"] },
       { id: "pro", rotulo: "Proletariado (~90%)", emoji: "🛠️", percentual: 90, cor: "#0f766e", descricao: "Operários urbanos, artesãos empobrecidos, camponeses migrados. Vendiam a força de trabalho por salário.", exemplos: ["🧵 Tecelões", "⛏️ Mineiros", "👶 Menores"] },
@@ -352,7 +355,7 @@ export const aula01: AulaGeoV1 = {
       { id: "av2", pergunta: "As duas classes principais criadas pela Revolução Industrial foram:", opcoes: [ { id: "a", texto: "Nobreza e clero.", correta: false }, { id: "b", texto: "Patrícios e plebeus.", correta: false }, { id: "c", texto: "Burguesia industrial e proletariado.", correta: true } ], feedbackAcerto: "Correto. BURGUESIA (dona) x PROLETARIADO (operário).", feedbackErro: "É BURGUESIA INDUSTRIAL e PROLETARIADO." },
       { id: "av3", pergunta: "O sistema econômico consolidado pela Revolução Industrial é:", opcoes: [ { id: "a", texto: "Feudalismo.", correta: false }, { id: "b", texto: "Capitalismo.", correta: true }, { id: "c", texto: "Escravismo antigo.", correta: false } ], feedbackAcerto: "Correto. CAPITALISMO INDUSTRIAL.", feedbackErro: "É o CAPITALISMO — propriedade privada, trabalho assalariado, lucro." },
     ],
-    selo: { nome: "A Engrenagem do Trabalho", subtitulo: "Engrenagem 2 das Liberdades", emoji: "⚙️", cor: "from-teal-500 to-slate-900", fotoUrl: imgFab },
+    selo: { nome: "A Engrenagem do Trabalho", subtitulo: "Engrenagem 2 das Liberdades", emoji: "⚙️", cor: "from-teal-500 to-slate-900", fotoUrl: imgTear },
     falaFinal: "Engrenagem 2 destravada. A máquina virou o eixo do mundo moderno.",
   },
 

@@ -2,6 +2,9 @@ import type { AulaGeoV1 } from "../../types";
 import imgEnc from "@/assets/historia-8ano/u1-enciclopedia.jpg";
 import imgCafe from "@/assets/historia-8ano/u1-cafe-filosofos.jpg";
 
+import imgVoltaire from "@/assets/historia-8ano/u1-voltaire.jpg";
+import imgContrato from "@/assets/historia-8ano/u1-contrato-social.jpg";
+import imgTres from "@/assets/historia-8ano/u1-tres-poderes.jpg";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-iluminismo",
   titulo: "O Iluminismo e o Poder das Ideias",
@@ -27,7 +30,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Se o REI mandava por 'direito divino' e a IGREJA controlava o pensamento, o que os iluministas propuseram no lugar?",
     pergunta: "Qual era a ideia central dos iluministas?",
-    fotoUrl: imgCafe,
+    fotoUrl: imgVoltaire,
     opcoes: [
       {
         id: "raz",
@@ -63,7 +66,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Iluminismo",
         emoji: "💡",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgEnc,
+        fotoUrl: imgContrato,
         conteudo:
           "ILUMINISMO foi o movimento intelectual do século XVIII que defendia a RAZÃO, a CIÊNCIA, a LIBERDADE individual e a IGUALDADE perante a lei. Combatia o absolutismo real e o poder político da Igreja.",
         exemplo:
@@ -74,7 +77,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Contrato Social",
         emoji: "📜",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgCafe,
+        fotoUrl: imgTres,
         conteudo:
           "CONTRATO SOCIAL, ideia de Rousseau, dizia que o poder político nasce de um ACORDO entre os cidadãos, não de Deus. Se o governante quebra o contrato, o povo pode DEPOR o governante.",
         exemplo:
@@ -112,7 +115,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Infográfico dos três grandes iluministas e uma ideia central de cada um. Toque nos pontos.",
     instrucao: "Toque nos pontos",
-    mapaUrl: imgCafe,
+    mapaUrl: imgVoltaire,
     pontos: [
       {
         id: "vol",
@@ -120,7 +123,7 @@ export const aula01: AulaGeoV1 = {
         y: 35,
         emoji: "✒️",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgEnc,
+        fotoUrl: imgContrato,
         titulo: "VOLTAIRE (1694-1778)",
         texto:
           "Francês. Defendeu a LIBERDADE DE EXPRESSÃO e a TOLERÂNCIA RELIGIOSA. Atacou fanatismos e a censura. Chegou a ser preso e exilado.",
@@ -131,7 +134,7 @@ export const aula01: AulaGeoV1 = {
         y: 55,
         emoji: "📜",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgCafe,
+        fotoUrl: imgTres,
         titulo: "ROUSSEAU (1712-1778)",
         texto:
           "Suíço. Autor de 'Do Contrato Social'. Defendeu a SOBERANIA POPULAR: o povo é a única fonte legítima de poder. Inspirou as revoluções.",
@@ -159,7 +162,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Quem propôs a TRIPARTIÇÃO DOS PODERES (Executivo, Legislativo, Judiciário)?",
-        fotoUrl: imgEnc,
+        fotoUrl: imgCafe,
         cards: [
           { id: "m", emoji: "⚖️", titulo: "Montesquieu", cor: "from-teal-600 to-slate-900" },
           { id: "v", emoji: "✒️", titulo: "Voltaire", cor: "from-amber-600 to-slate-900" },
@@ -172,7 +175,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "A obra 'Do Contrato Social' é de qual autor?",
-        fotoUrl: imgCafe,
+        fotoUrl: imgVoltaire,
         cards: [
           { id: "r", emoji: "📜", titulo: "Rousseau", cor: "from-teal-600 to-slate-900" },
           { id: "d", emoji: "📚", titulo: "Diderot", cor: "from-amber-600 to-slate-900" },
@@ -185,7 +188,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "Qual foi o LEMA da Revolução Francesa, herdado direto do Iluminismo?",
-        fotoUrl: imgCafe,
+        fotoUrl: imgContrato,
         cards: [
           { id: "l", emoji: "🇫🇷", titulo: "Liberdade, Igualdade, Fraternidade", cor: "from-teal-600 to-slate-900" },
           { id: "o", emoji: "👑", titulo: "Deus, Rei e Pátria", cor: "from-amber-600 to-slate-900" },
@@ -204,7 +207,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Dois filtros sobre o Antigo Regime. Um destaca quem tinha PRIVILÉGIOS; outro, quem pagava a conta.",
     instrucao: "Toque nos filtros",
-    mapaUrl: imgCafe,
+    mapaUrl: imgTres,
     camadas: [
       {
         id: "priv",
@@ -245,21 +248,21 @@ export const aula01: AulaGeoV1 = {
         id: "mon",
         emoji: "⚖️",
         rotulo: "2. Montesquieu (1748)",
-        fotoUrl: imgEnc,
+        fotoUrl: imgCafe,
         descricao: "'O Espírito das Leis' — tripartição dos poderes.",
       },
       {
         id: "enc",
         emoji: "📚",
         rotulo: "3. Enciclopédia (1751)",
-        fotoUrl: imgEnc,
+        fotoUrl: imgVoltaire,
         descricao: "Diderot organiza a obra que reúne o saber da época.",
       },
       {
         id: "rou",
         emoji: "📜",
         rotulo: "4. Rousseau (1762)",
-        fotoUrl: imgCafe,
+        fotoUrl: imgContrato,
         descricao: "'Do Contrato Social' — soberania popular.",
       },
     ],
@@ -285,7 +288,7 @@ export const aula01: AulaGeoV1 = {
           Iluminismo:
             "Movimento intelectual do século XVIII que defendia a razão, a ciência, a liberdade individual e a igualdade perante a lei.",
         },
-        fotoUrl: imgEnc,
+        fotoUrl: imgTres,
       },
       {
         id: "p2",
@@ -318,7 +321,7 @@ export const aula01: AulaGeoV1 = {
           "Tolerância":
             "Liberdade de pensar, expressar e professar ideias e crenças diferentes sem ser perseguido.",
         },
-        fotoUrl: imgCafe,
+        fotoUrl: imgVoltaire,
       },
     ],
     falaFinal:
@@ -398,7 +401,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "pizzaMunicipio",
     aurora: "Pizza do Antigo Regime francês. Quem tinha PRIVILÉGIOS e quem PAGAVA a conta.",
     instrucao: "Toque em cada fatia",
-    fotoUrl: imgCafe,
+    fotoUrl: imgContrato,
     fatias: [
       {
         id: "priv",
@@ -428,7 +431,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "seloAtlas",
     aurora: "Três perguntas finais pra desbloquear a Chama da Razão.",
     instrucao: "Responda as 3 perguntas",
-    fotoUrl: imgEnc,
+    fotoUrl: imgTres,
     perguntas: [
       {
         id: "av1",

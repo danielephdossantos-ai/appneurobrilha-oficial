@@ -2,6 +2,9 @@ import type { AulaGeoV1 } from "../../types";
 import imgTrin from "@/assets/historia-9ano/u1-trincheiras.jpg";
 import imgRev from "@/assets/historia-9ano/u1-revolucao-russa.jpg";
 
+import imgTrincDet from "@/assets/historia-9ano/u1-trincheiras-detalhe.jpg";
+import imgLenin from "@/assets/historia-9ano/u1-lenin-discurso.jpg";
+import imgTanque from "@/assets/historia-9ano/u1-tanque-primeira-guerra.jpg";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-primeira-guerra-russa",
   titulo: "Trincheiras e Revolução (1914–1917)",
@@ -26,7 +29,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "A Europa de 1914 era um barril de pólvora. O que estourou o pavio?",
     pergunta: "O que deu início direto à Primeira Guerra Mundial?",
-    fotoUrl: imgTrin,
+    fotoUrl: imgTrincDet,
     opcoes: [
       {
         id: "atent",
@@ -61,7 +64,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Guerra de Trincheiras",
         emoji: "⚔️",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgTrin,
+        fotoUrl: imgLenin,
         conteudo:
           "GUERRA DE TRINCHEIRAS foi o modo de lutar da 1ª Guerra na Frente Ocidental: soldados enfiados em valas cavadas no chão por meses, sob bombardeios, gás venenoso e frio. Avanços mediam poucos metros e custavam milhares de mortos.",
         exemplo:
@@ -72,7 +75,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Sistema de Alianças",
         emoji: "🕸️",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgTrin,
+        fotoUrl: imgTanque,
         conteudo:
           "ALIANÇAS eram tratados que obrigavam países a entrar em guerra se um aliado fosse atacado. Em 1914, Europa estava dividida em TRÍPLICE ENTENTE (França, Reino Unido, Rússia) e TRÍPLICE ALIANÇA (Alemanha, Áustria-Hungria, Itália).",
         exemplo:
@@ -83,7 +86,7 @@ export const aula01: AulaGeoV1 = {
         capa: "Bolcheviques",
         emoji: "☭",
         cor: "from-red-800 to-slate-900",
-        fotoUrl: imgRev,
+        fotoUrl: imgTrin,
         conteudo:
           "BOLCHEVIQUES eram o partido comunista liderado por LÊNIN. Defendiam derrubar o czar, tirar a Rússia da guerra e dar as fábricas aos operários e a terra aos camponeses. Tomaram o poder em outubro de 1917.",
         exemplo:
@@ -109,7 +112,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Infográfico das causas da Primeira Guerra. Toque nos pontos.",
     instrucao: "Toque nos pontos",
-    mapaUrl: imgTrin,
+    mapaUrl: imgTrincDet,
     pontos: [
       {
         id: "imp",
@@ -117,7 +120,7 @@ export const aula01: AulaGeoV1 = {
         y: 30,
         emoji: "🌍",
         cor: "from-teal-700 to-slate-900",
-        fotoUrl: imgTrin,
+        fotoUrl: imgLenin,
         titulo: "IMPERIALISMO",
         texto:
           "As potências europeias disputavam colônias na África e Ásia. Sobrou pouco — e Alemanha (unificada só em 1871) chegou atrasada. Tensão constante por mercados e matérias-primas.",
@@ -128,7 +131,7 @@ export const aula01: AulaGeoV1 = {
         y: 55,
         emoji: "🚩",
         cor: "from-amber-700 to-slate-900",
-        fotoUrl: imgTrin,
+        fotoUrl: imgTanque,
         titulo: "NACIONALISMO",
         texto:
           "Cada país se achava superior aos outros. Franceses queriam a Alsácia-Lorena de volta; sérvios queriam unir os eslavos; alemães queriam 'um lugar ao sol'.",
@@ -170,7 +173,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "Qual foi o LEMA dos bolcheviques em 1917?",
-        fotoUrl: imgRev,
+        fotoUrl: imgTrincDet,
         cards: [
           { id: "p", emoji: "🍞", titulo: "Paz, Pão e Terra", cor: "from-teal-600 to-slate-900" },
           { id: "d", emoji: "👑", titulo: "Deus e Rei", cor: "from-amber-600 to-slate-900" },
@@ -183,7 +186,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "Em que ano terminou a Primeira Guerra Mundial?",
-        fotoUrl: imgTrin,
+        fotoUrl: imgLenin,
         cards: [
           { id: "1918", emoji: "🕊️", titulo: "1918", cor: "from-teal-600 to-slate-900" },
           { id: "1917", emoji: "☭", titulo: "1917", cor: "from-amber-600 to-slate-900" },
@@ -201,7 +204,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "mapaCamadas",
     aurora: "Dois lados da Primeira Guerra.",
     instrucao: "Toque nos filtros",
-    mapaUrl: imgTrin,
+    mapaUrl: imgTanque,
     camadas: [
       {
         id: "ent",
@@ -232,9 +235,9 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Marcos da 1ª Guerra e da Revolução Russa",
     paradas: [
       { id: "sar", emoji: "💥", rotulo: "1. Sarajevo (1914)", fotoUrl: imgTrin, descricao: "Assassinato do arquiduque austríaco." },
-      { id: "trin", emoji: "⚔️", rotulo: "2. Trincheiras (1915–16)", fotoUrl: imgTrin, descricao: "Verdun, Somme — mortandade sem avanços." },
-      { id: "rev", emoji: "☭", rotulo: "3. Revolução Russa (1917)", fotoUrl: imgRev, descricao: "Bolcheviques tomam o poder; Rússia sai da guerra." },
-      { id: "arm", emoji: "🕊️", rotulo: "4. Armistício (1918)", fotoUrl: imgTrin, descricao: "Alemanha se rende; fim da guerra em 11/11/1918." },
+      { id: "trin", emoji: "⚔️", rotulo: "2. Trincheiras (1915–16)", fotoUrl: imgRev, descricao: "Verdun, Somme — mortandade sem avanços." },
+      { id: "rev", emoji: "☭", rotulo: "3. Revolução Russa (1917)", fotoUrl: imgTrincDet, descricao: "Bolcheviques tomam o poder; Rússia sai da guerra." },
+      { id: "arm", emoji: "🕊️", rotulo: "4. Armistício (1918)", fotoUrl: imgLenin, descricao: "Alemanha se rende; fim da guerra em 11/11/1918." },
     ],
     ordemCerta: ["sar", "trin", "rev", "arm"],
     feedbackAcerto: "Perfeito. 1914 → 1918. Quatro anos que mudaram o planeta.",
@@ -259,7 +262,7 @@ export const aula01: AulaGeoV1 = {
           "Trincheiras":
             "Valas cavadas no chão onde soldados viviam por meses, marca da Frente Ocidental.",
         },
-        fotoUrl: imgTrin,
+        fotoUrl: imgTanque,
       },
       {
         id: "p2",
@@ -291,7 +294,7 @@ export const aula01: AulaGeoV1 = {
           Versalhes:
             "Tratado de paz (1919) que culpou a Alemanha pela guerra e impôs reparações que geraram enorme ressentimento.",
         },
-        fotoUrl: imgTrin,
+        fotoUrl: imgTrincDet,
       },
     ],
     falaFinal: "Leitura concluída. Você já conecta 1ª Guerra → Revolução Russa → sementes da 2ª Guerra.",
@@ -322,7 +325,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "pizzaMunicipio",
     aurora: "Mortos militares da 1ª Guerra — proporção aproximada por bloco.",
     instrucao: "Toque em cada fatia",
-    fotoUrl: imgTrin,
+    fotoUrl: imgLenin,
     fatias: [
       {
         id: "ent",
@@ -350,7 +353,7 @@ export const aula01: AulaGeoV1 = {
     tipo: "seloAtlas",
     aurora: "Três perguntas finais pra desbloquear o Nó 1 da Teia.",
     instrucao: "Responda as 3 perguntas",
-    fotoUrl: imgTrin,
+    fotoUrl: imgTanque,
     perguntas: [
       {
         id: "av1",
