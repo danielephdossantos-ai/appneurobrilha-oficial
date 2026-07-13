@@ -629,7 +629,7 @@ export type CursoPortugues = {
   mascoteImagemUrl?: string;
   corPrimaria: string;
   corSecundaria: string;
-  tipoAula: "portugues";
+  tipoAula: "portugues" | "ciencias";
   unidades: UnidadePortugues[];
 };
 
