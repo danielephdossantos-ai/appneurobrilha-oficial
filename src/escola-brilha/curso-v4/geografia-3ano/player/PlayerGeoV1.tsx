@@ -1392,14 +1392,22 @@ function QuizRadar({
                   onClick={() => escolher(c.id)}
                   disabled={revelado}
                   whileTap={{ scale: revelado ? 1 : 0.96 }}
-                  className={`relative rounded-2xl p-4 border-2 bg-gradient-to-br ${c.cor} ${
+                  className={`relative rounded-2xl p-3 border-2 bg-gradient-to-br ${c.cor} overflow-hidden ${
                     escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
                   } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
                     erradoRevelado ? "opacity-60" : ""
                   }`}
                 >
-                  <div className="text-4xl mb-1">{c.emoji}</div>
-                  <div className="text-white font-black text-base leading-tight">
+                  {(c as { fotoUrl?: string }).fotoUrl && (
+                    <img
+                      src={(c as { fotoUrl?: string }).fotoUrl}
+                      alt=""
+                      loading="lazy"
+                      className="w-full aspect-square object-cover rounded-xl mb-2 bg-white/90 border-2 border-white/40 shadow-md"
+                    />
+                  )}
+                  <div className="text-2xl leading-none mb-1">{c.emoji}</div>
+                  <div className="text-white font-black text-sm leading-tight">
                     {c.titulo}
                   </div>
                   {certoRevelado && (
