@@ -1,6 +1,6 @@
 // Helper compartilhado: chat completion com FALLBACK
-// Primário: Lovable AI Gateway (Gemini 3 Flash)
-// Reserva: Groq (llama-3.3-70b-versatile por padrão)
+// Primário: Groq (llama-3.3-70b-versatile) — mais confiável no dia a dia
+// Reserva: Lovable AI Gateway (Gemini 3 Flash) — só quando Groq falha
 // Quando o primário estoura limite (429), créditos (402) ou dá erro,
 // cai automaticamente pro reserva. Só é chamado do servidor.
 
@@ -96,17 +96,17 @@ async function callGroq(opts: ChatCallOptions): Promise<
 }
 
 /**
- * Chama chat completion tentando Lovable AI primeiro; se falhar por
- * limite/créditos/erro, cai pro Groq automaticamente.
+ * Chama chat completion tentando Groq primeiro; se falhar por
+ * limite/créditos/erro, cai pro Lovable AI Gateway automaticamente.
  */
 export async function chatCompletionFallback(opts: ChatCallOptions): Promise<ChatCallResult> {
-  const primaria = await callLovable(opts);
-  if (primaria.ok) return { ok: true, text: primaria.text, fonte: "lovable" };
+  const primaria = await callGroq(opts);
+  if (primaria.ok) return { ok: true, text: primaria.text, fonte: "groq" };
   console.warn(
-    `[ai-fallback]${opts.label ? " " + opts.label : ""} Lovable falhou (${primaria.motivo}) — tentando Groq`,
+    `[ai-fallback]${opts.label ? " " + opts.label : ""} Groq falhou (${primaria.motivo}) — tentando Lovable`,
   );
-  const secundaria = await callGroq(opts);
-  if (secundaria.ok) return { ok: true, text: secundaria.text, fonte: "groq" };
+  const secundaria = await callLovable(opts);
+  if (secundaria.ok) return { ok: true, text: secundaria.text, fonte: "lovable" };
   // Ambas falharam — devolve o motivo mais informativo (créditos > limite > erro)
   if (primaria.motivo === "creditos" || secundaria.motivo === "creditos") {
     return { ok: false, motivo: "creditos" };
