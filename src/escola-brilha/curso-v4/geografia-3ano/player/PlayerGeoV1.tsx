@@ -2959,7 +2959,16 @@ function ConstrutorMarcos({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        {!iniciado && !travada && (
+          <button
+            onClick={() => setIniciado(true)}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-amber-400 hover:bg-amber-300 border-amber-300 text-slate-950"
+          >
+            ▶ Iniciar cronômetro
+          </button>
+        )}
+
+        <div className={`grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 ${!iniciado ? "opacity-40 pointer-events-none" : ""}`}>
           {cena.pecas.map((p) => {
             const certa = p.id === rodada.pecaCertaId;
             const foiTocada = pecaTocada === p.id;
@@ -2967,7 +2976,7 @@ function ConstrutorMarcos({
               <button
                 key={p.id}
                 onClick={() => escolher(p.id)}
-                disabled={travada}
+                disabled={travada || !iniciado}
                 className={`min-h-20 rounded-lg border px-3 py-3 text-left transition ${
                   travada
                     ? foiTocada && certa
@@ -2986,6 +2995,7 @@ function ConstrutorMarcos({
             );
           })}
         </div>
+
 
         {feedback && (
           <motion.div
