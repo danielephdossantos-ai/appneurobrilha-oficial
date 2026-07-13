@@ -53,7 +53,7 @@ export const transcreverAudio = createServerFn({ method: "POST" })
       }
       const ext = extFromMime(data.mimeType);
       const fd = new FormData();
-      const blob = new Blob([bytes], { type: data.mimeType });
+      const blob = new Blob([bytes.buffer as ArrayBuffer], { type: data.mimeType });
       fd.append("file", blob, `pergunta.${ext}`);
       fd.append("model", "openai/gpt-4o-mini-transcribe");
       if (data.language) fd.append("language", data.language);
