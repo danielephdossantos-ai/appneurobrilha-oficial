@@ -691,14 +691,23 @@ function CadernosCampo({
               key={c.id}
               className="rounded-lg overflow-hidden bg-slate-900/75 border border-slate-700 shadow-lg flex flex-col"
             >
-              {c.fotoUrl && (
+              {c.videoUrl ? (
+                <video
+                  src={c.videoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full aspect-[16/10] object-cover border-b border-slate-700"
+                />
+              ) : c.fotoUrl ? (
                 <img
                   src={c.fotoUrl}
                   alt={c.capa}
                   loading="lazy"
                   className="w-full aspect-[16/10] object-cover border-b border-slate-700"
                 />
-              )}
+              ) : null}
               <div className="p-4">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-9 h-9 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs">
@@ -771,14 +780,23 @@ function CadernosCampo({
                 {c.capa}
               </div>
             </div>
-            {c.fotoUrl && (
+            {c.videoUrl ? (
+              <video
+                src={c.videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full aspect-[3/2] object-cover rounded-lg mt-2 border-2 border-amber-900/20"
+              />
+            ) : c.fotoUrl ? (
               <img
                 src={c.fotoUrl}
                 alt={c.capa}
                 loading="lazy"
                 className="w-full aspect-[3/2] object-cover rounded-lg mt-2 border-2 border-amber-900/20"
               />
-            )}
+            ) : null}
             <p className="text-sm font-semibold mt-2 leading-snug">
               {c.conteudo}
             </p>

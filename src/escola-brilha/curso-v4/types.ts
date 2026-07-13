@@ -670,6 +670,7 @@ export type CenaGeoV1 =
         conteudo: string;     // texto revelado ao abrir
         exemplo?: string;     // frase de exemplo do cotidiano
         fotoUrl?: string;     // opcional: foto real exibida quando o caderno abre
+        videoUrl?: string;    // opcional: vídeo curto (mp4) — tem prioridade sobre fotoUrl
       }>;
       falaFinal: string;
     }

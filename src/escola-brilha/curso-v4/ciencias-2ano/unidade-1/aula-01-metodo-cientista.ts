@@ -5,6 +5,8 @@ import microscopioImg from "@/assets/ciencias-2ano/u1-a1/microscopio-magico.jpg"
 import bequerImg from "@/assets/ciencias-2ano/u1-a1/bequer-experimento.jpg";
 import placasImg from "@/assets/ciencias-2ano/u1-a1/placas-petri.jpg";
 import tubosImg from "@/assets/ciencias-2ano/u1-a1/tubos-ensaio.jpg";
+import folhaNervurasImg from "@/assets/ciencias-2ano/u1-a1/folha-nervuras.jpg";
+import geloVideoAsset from "@/assets/ciencias-2ano/u1-a1/gelo-derretendo.mp4.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 1 · Aula 01
@@ -85,7 +87,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-purple-500 to-fuchsia-700",
         conteudo: "Olhar com muita atenção pra descobrir detalhes.",
         exemplo: "Ex.: olhar uma folha com atenção e ver as linhas finas.",
-        fotoUrl: microscopioImg,
+        fotoUrl: folhaNervurasImg,
       },
       {
         id: "hipotese",
@@ -94,7 +96,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-cyan-400 to-sky-700",
         conteudo: "Um palpite: o que você acha que vai acontecer?",
         exemplo: "Ex.: 'Acho que o gelo derrete rápido no sol'.",
-        fotoUrl: tubosImg,
+        videoUrl: geloVideoAsset.url,
       },
       {
         id: "experimento",
