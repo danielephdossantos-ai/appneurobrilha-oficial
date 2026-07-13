@@ -5,6 +5,8 @@ import microscopioImg from "@/assets/ciencias-2ano/u1-a1/microscopio-magico.jpg"
 import bequerImg from "@/assets/ciencias-2ano/u1-a1/bequer-experimento.jpg";
 import placasImg from "@/assets/ciencias-2ano/u1-a1/placas-petri.jpg";
 import tubosImg from "@/assets/ciencias-2ano/u1-a1/tubos-ensaio.jpg";
+import folhaNervurasImg from "@/assets/ciencias-2ano/u1-a1/folha-nervuras.jpg";
+import geloVideoAsset from "@/assets/ciencias-2ano/u1-a1/gelo-derretendo.mp4.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 1 · Aula 01
