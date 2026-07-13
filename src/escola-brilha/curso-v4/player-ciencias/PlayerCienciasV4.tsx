@@ -14,6 +14,7 @@ import { EnsinoVisual } from "../player-portugues/blocos/EnsinoVisual";
 import { LaboratorioClima } from "../player-portugues/blocos/LaboratorioClima";
 import { ArquitetoLugar } from "../player-portugues/blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "../player-portugues/blocos/MissaoFamiliaFoto";
+import { MesaInvestigador } from "./blocos/MesaInvestigador";
 
 /**
  * PlayerCienciasV4 — mesmo esqueleto de 11 momentos, identidade visual
