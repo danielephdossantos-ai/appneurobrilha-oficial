@@ -2762,6 +2762,7 @@ function ConstrutorMarcos({
   const scrollLivre = useScrollLivre();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
+  const [iniciado, setIniciado] = useState(false);
   const [travada, setTravada] = useState(false);
   const [feedback, setFeedback] = useState<"acerto" | "erro" | "tempo" | null>(null);
   const [pecaTocada, setPecaTocada] = useState<string | null>(null);
@@ -2773,9 +2774,9 @@ function ConstrutorMarcos({
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  // relógio regressivo
+  // relógio regressivo — só corre depois que a criança toca em "Começar"
   useEffect(() => {
-    if (travada || fim) return;
+    if (!iniciado || travada || fim) return;
     if (tempo <= 0) {
       setTravada(true);
       setFeedback("tempo");
@@ -2784,7 +2785,8 @@ function ConstrutorMarcos({
     }
     const t = setTimeout(() => setTempo((n) => n - 1), 1000);
     return () => clearTimeout(t);
-  }, [tempo, travada, fim]);
+  }, [tempo, travada, fim, iniciado]);
+
 
   // fala a pista ao entrar na rodada
   useEffect(() => {
@@ -2809,7 +2811,7 @@ function ConstrutorMarcos({
   }, [rodadaIdx, fim]);
 
   const escolher = (pecaId: string) => {
-    if (travada) return;
+    if (travada || !iniciado) return;
     setPecaTocada(pecaId);
     setTravada(true);
     if (pecaId === rodada.pecaCertaId) {
@@ -2830,6 +2832,7 @@ function ConstrutorMarcos({
     if (rodadaIdx + 1 < total) {
       setRodadaIdx(rodadaIdx + 1);
       setTempo(cena.duracaoSegundos);
+      setIniciado(false);
       setTravada(false);
       setFeedback(null);
       setPecaTocada(null);
@@ -2837,6 +2840,7 @@ function ConstrutorMarcos({
       setFim(true);
     }
   };
+
 
   if (teen && fim) {
     return (
@@ -2955,7 +2959,16 @@ function ConstrutorMarcos({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        {!iniciado && !travada && (
+          <button
+            onClick={() => setIniciado(true)}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-amber-400 hover:bg-amber-300 border-amber-300 text-slate-950"
+          >
+            ▶ Iniciar cronômetro
+          </button>
+        )}
+
+        <div className={`grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 ${!iniciado ? "opacity-40 pointer-events-none" : ""}`}>
           {cena.pecas.map((p) => {
             const certa = p.id === rodada.pecaCertaId;
             const foiTocada = pecaTocada === p.id;
@@ -2963,7 +2976,7 @@ function ConstrutorMarcos({
               <button
                 key={p.id}
                 onClick={() => escolher(p.id)}
-                disabled={travada}
+                disabled={travada || !iniciado}
                 className={`min-h-20 rounded-lg border px-3 py-3 text-left transition ${
                   travada
                     ? foiTocada && certa
@@ -2982,6 +2995,7 @@ function ConstrutorMarcos({
             );
           })}
         </div>
+
 
         {feedback && (
           <motion.div
@@ -3121,8 +3135,18 @@ function ConstrutorMarcos({
         {rodada.contexto}
       </div>
 
+      {/* Começar rodada — só arma o timer depois que a criança lê e toca */}
+      {!iniciado && !travada && (
+        <button
+          onClick={() => setIniciado(true)}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-amber-300 to-emerald-400 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition animate-pulse"
+        >
+          ▶ Leu a pista? Toque pra começar o cronômetro
+        </button>
+      )}
+
       {/* Peças (banco embaixo) */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+      <div className={`grid grid-cols-4 gap-2 sm:gap-3 ${!iniciado ? "opacity-40 pointer-events-none" : ""}`}>
         {cena.pecas.map((p) => {
           const certa = p.id === rodada.pecaCertaId;
           const foiTocada = pecaTocada === p.id;
@@ -3130,7 +3154,7 @@ function ConstrutorMarcos({
             <button
               key={p.id}
               onClick={() => escolher(p.id)}
-              disabled={travada}
+              disabled={travada || !iniciado}
               className={`aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-bold text-[11px] sm:text-xs transition ${
                 travada
                   ? foiTocada && certa
@@ -3149,6 +3173,7 @@ function ConstrutorMarcos({
           );
         })}
       </div>
+
 
       {/* Feedback */}
       {feedback && (
