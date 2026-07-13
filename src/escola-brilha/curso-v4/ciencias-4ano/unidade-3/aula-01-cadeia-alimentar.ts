@@ -106,8 +106,6 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Toca em cada morador da floresta pra ver o papel dele no ecossistema.",
     instrucao: "Toque em cada morador",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: florestaImg,
     pontos: [
       {

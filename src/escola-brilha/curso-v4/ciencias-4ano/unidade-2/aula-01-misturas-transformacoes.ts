@@ -108,8 +108,6 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Bancada da equipe. Toca em cada experimento pra ver o que ele demonstra.",
     instrucao: "Toque em cada experimento",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: bancadaImg,
     pontos: [
       {

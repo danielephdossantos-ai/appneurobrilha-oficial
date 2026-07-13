@@ -141,8 +141,6 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Esta é a mesa de campo da equipe. Toca em cada instrumento pra saber a função científica dele.",
     instrucao: "Toque em cada instrumento",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: mesaImg,
     pontos: [
       {

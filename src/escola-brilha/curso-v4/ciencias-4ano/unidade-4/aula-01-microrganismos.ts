@@ -107,8 +107,6 @@ export const aula01: AulaGeoV1 = {
     tipo: "narrarMapa",
     aurora: "Toca em cada morador do mundo microscópico pra ver o que ele faz.",
     instrucao: "Toque em cada microrganismo",
-    layout: "personagem",
-    personagemImg: brilhaImg,
     mapaUrl: microscopioImg,
     pontos: [
       {
