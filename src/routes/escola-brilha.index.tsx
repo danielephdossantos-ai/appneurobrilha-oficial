@@ -307,7 +307,8 @@ function EscolaBrilhaCatalogo() {
                         const usaTrilhaDuo = serie === "Educação Infantil" || serie === "1º Ano";
                         const serieSlug =
                           serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
-                        if (usaTrilhaDuo) {
+                        const cursoV4Aqui = cursoPorSerieDisc[serie]?.[disc];
+                        if (usaTrilhaDuo && !cursoV4Aqui) {
                           const masc = mascoteDaDisciplina(disc);
                           const serieLabel = serie === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
                           return (
