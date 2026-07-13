@@ -3064,6 +3064,7 @@ function PizzaMunicipio({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [tocadas, setTocadas] = useState<Set<string>>(new Set());
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -3237,17 +3238,19 @@ function PizzaMunicipio({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!todasTocadas}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            todasTocadas
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {todasTocadas ? "Continuar →" : "Analise os dois setores"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!todasTocadas}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              todasTocadas
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {todasTocadas ? "Continuar →" : "Analise os dois setores"}
+          </button>
+        )}
       </div>
     );
   }
@@ -3431,17 +3434,19 @@ function PizzaMunicipio({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todasTocadas}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todasTocadas
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed border border-white/10"
-        }`}
-      >
-        {todasTocadas ? "Continuar" : "Toque nas 2 fatias pra liberar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todasTocadas}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todasTocadas
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed border border-white/10"
+          }`}
+        >
+          {todasTocadas ? "Continuar" : "Toque nas 2 fatias pra liberar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -3461,6 +3466,7 @@ function SeloAtlas({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const falar = (texto: string) => {
     try {
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -3590,7 +3596,7 @@ function SeloAtlas({
           onClick={onProxima}
           className={`w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r ${cena.selo.cor} text-[#0d1f55] shadow-xl hover:scale-[1.01] transition`}
         >
-          {ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
+          {scrollLivre ? "✅ Concluir aula" : ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
         </button>
       </div>
     );
