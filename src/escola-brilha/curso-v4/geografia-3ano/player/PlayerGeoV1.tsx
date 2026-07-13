@@ -2762,6 +2762,7 @@ function ConstrutorMarcos({
   const scrollLivre = useScrollLivre();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
+  const [iniciado, setIniciado] = useState(false);
   const [travada, setTravada] = useState(false);
   const [feedback, setFeedback] = useState<"acerto" | "erro" | "tempo" | null>(null);
   const [pecaTocada, setPecaTocada] = useState<string | null>(null);
@@ -2773,9 +2774,9 @@ function ConstrutorMarcos({
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  // relógio regressivo
+  // relógio regressivo — só corre depois que a criança toca em "Começar"
   useEffect(() => {
-    if (travada || fim) return;
+    if (!iniciado || travada || fim) return;
     if (tempo <= 0) {
       setTravada(true);
       setFeedback("tempo");
@@ -2784,7 +2785,8 @@ function ConstrutorMarcos({
     }
     const t = setTimeout(() => setTempo((n) => n - 1), 1000);
     return () => clearTimeout(t);
-  }, [tempo, travada, fim]);
+  }, [tempo, travada, fim, iniciado]);
+
 
   // fala a pista ao entrar na rodada
   useEffect(() => {
