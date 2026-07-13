@@ -101,14 +101,15 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data, context }): Promise<ProfResult> => {
-    const apiKey = process.env.LOVABLE_API_KEY;
-    if (!apiKey) {
+    // Precisamos de PELO MENOS uma chave (Groq primária, Lovable reserva)
+    if (!process.env.GROQ_API_KEY && !process.env.LOVABLE_API_KEY) {
       return {
         ok: false,
         motivo: "erro",
         mensagem: "Professor Brilha ainda não tá configurado. Avise um adulto.",
       };
     }
+
 
     const supabase = getServerClient();
     const { userId } = context;
