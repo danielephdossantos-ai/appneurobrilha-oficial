@@ -91,8 +91,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: corpoImg,
     camadas: [
-      { id: "cima", rotulo: "De cima", emoji: "🙂", cor: "from-pink-400 to-rose-600", rect: { x: 20, y: 5, w: 60, h: 45 }, descricao: "Cabeça, braços e tronco — pra pensar, abraçar e respirar." },
-      { id: "baixo", rotulo: "De baixo", emoji: "🦵", cor: "from-emerald-500 to-green-700", rect: { x: 25, y: 55, w: 50, h: 40 }, descricao: "Pernas e pés — pra andar, correr e pular." },
+      { id: "cima", rotulo: "De cima", emoji: "🙂", cor: "from-pink-400 to-rose-600", rect: { x: 20, y: 5, w: 60, h: 45 }, descricao: "Cabeça, braços e tronco — pra pensar, abraçar e respirar.", fotoUrl: cabecaImg },
+      { id: "baixo", rotulo: "De baixo", emoji: "🦵", cor: "from-emerald-500 to-green-700", rect: { x: 25, y: 55, w: 50, h: 40 }, descricao: "Pernas e pés — pra andar, correr e pular.", fotoUrl: pernasImg },
     ],
     falaFinal: "Corpo dividido em partes que cooperam!",
   },
