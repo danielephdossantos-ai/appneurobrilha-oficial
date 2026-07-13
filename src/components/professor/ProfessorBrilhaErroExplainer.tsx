@@ -34,10 +34,15 @@ export function ProfessorBrilhaErroExplainer(props: Props) {
     setReply(null);
     setError(null);
     explicarFn({ data: props })
-      .then((r) => {
+      .then(async (r) => {
         if (cancelled) return;
         if (r.ok) setReply(r.reply);
-        else setError(r.error ?? "Não consegui pensar agora.");
+        else {
+          setError(r.error ?? "Não consegui pensar agora.");
+          const motivo = (r.error === "creditos" || r.error === "limite") ? r.error : "erro";
+          const { notificarErroIA } = await import("@/lib/notify-ai-error");
+          notificarErroIA(motivo, "Professor");
+        }
       })
       .catch(() => !cancelled && setError("Falha ao chamar o Professor."))
       .finally(() => !cancelled && setLoading(false));

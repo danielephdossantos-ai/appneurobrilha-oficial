@@ -144,6 +144,9 @@ export function MissaoTarefa({ childId }: Props) {
       });
 
       if (!res.ok || !res.resultado) {
+        const motivo = (res.error === "creditos" || res.error === "limite") ? res.error : "erro";
+        const { notificarErroIA } = await import("@/lib/notify-ai-error");
+        notificarErroIA(motivo as any, "Missão Tarefa");
         throw new Error(res.error || "A IA não conseguiu analisar essa tarefa");
       }
 

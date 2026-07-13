@@ -40,13 +40,16 @@ export function MissaoProvaQuiz({
     setQuestoes([]);
     setEscolhas([]);
     gerarFn({ data: { topico, materia, idade, bnccCode } })
-      .then((r) => {
+      .then(async (r) => {
         if (cancel) return;
         if (r.ok && r.quiz) {
           setQuestoes(r.quiz.questoes);
           setEscolhas(new Array(r.quiz.questoes.length).fill(null));
         } else {
           setErro(r.error ?? "Não consegui montar o quiz agora.");
+          const motivo = (r.error === "creditos" || r.error === "limite") ? r.error : "erro";
+          const { notificarErroIA } = await import("@/lib/notify-ai-error");
+          notificarErroIA(motivo, "Missão Prova");
         }
       })
       .catch(() => !cancel && setErro("Falha ao chamar o Professor."))
