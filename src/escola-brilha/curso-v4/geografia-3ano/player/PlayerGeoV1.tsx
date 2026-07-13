@@ -2087,6 +2087,7 @@ function VoceLeSozinho({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [paginaAtual, setPaginaAtual] = useState(0);
   const [marcadas, setMarcadas] = useState<Record<string, Set<string>>>({});
   const [concluido, setConcluido] = useState(false);
@@ -2342,17 +2343,19 @@ function VoceLeSozinho({
           </div>
         )}
 
-        <button
-          onClick={onProxima}
-          disabled={!concluido}
-          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
-            concluido
-              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {concluido ? "Continuar →" : "Termine a leitura (todas as páginas)"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!concluido}
+            className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+              concluido
+                ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+                : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {concluido ? "Continuar →" : "Termine a leitura (todas as páginas)"}
+          </button>
+        )}
       </div>
     );
   }
@@ -2595,17 +2598,19 @@ function VoceLeSozinho({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!concluido}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          concluido
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {concluido ? "Continuar" : "📖 Leia todas as páginas pra continuar"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            concluido
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar" : "📖 Leia todas as páginas pra continuar"}
+        </button>
+      )}
     </div>
   );
 }
@@ -2622,6 +2627,7 @@ function ConstrutorMarcos({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
@@ -2715,12 +2721,14 @@ function ConstrutorMarcos({
             {stripDecorativeEmoji(cena.falaFinal)}
           </div>
         </div>
-        <button
-          onClick={onProxima}
-          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-        >
-          Continuar →
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        )}
       </div>
     );
   }
@@ -2747,12 +2755,14 @@ function ConstrutorMarcos({
             {cena.falaFinal}
           </div>
         </motion.div>
-        <button
-          onClick={onProxima}
-          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-        >
-          Continuar
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+          >
+            Continuar
+          </button>
+        )}
       </div>
     );
   }
