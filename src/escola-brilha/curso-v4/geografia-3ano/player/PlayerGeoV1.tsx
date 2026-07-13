@@ -833,6 +833,7 @@ function NarrarMapa({
   const visitadosCount = Object.values(visitados).filter(Boolean).length;
   const todosVistos = visitadosCount === total;
   const pontoAtivo = cena.pontos.find((p) => p.id === ativo) ?? null;
+  const scrollLivre = useScrollLivre();
 
   const falar = (texto: string) => {
     try {
@@ -955,17 +956,19 @@ function NarrarMapa({
           {visitadosCount} / {total}
         </div>
 
-        <button
-          onClick={onProxima}
-          disabled={!todosVistos}
-          className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-[0.15em] font-mono transition ${
-            todosVistos
-              ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-              : "bg-slate-800 text-slate-600 cursor-not-allowed"
-          }`}
-        >
-          {todosVistos ? "Continuar" : "Ouça todas as posições"}
-        </button>
+        {!scrollLivre && (
+          <button
+            onClick={onProxima}
+            disabled={!todosVistos}
+            className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-[0.15em] font-mono transition ${
+              todosVistos
+                ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+                : "bg-slate-800 text-slate-600 cursor-not-allowed"
+            }`}
+          >
+            {todosVistos ? "Continuar" : "Ouça todas as posições"}
+          </button>
+        )}
       </div>
     );
   }
@@ -1125,17 +1128,19 @@ function NarrarMapa({
         </motion.div>
       )}
 
-      <button
-        onClick={onProxima}
-        disabled={!todosVistos}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          todosVistos
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white/10 text-white/40 cursor-not-allowed"
-        }`}
-      >
-        {todosVistos ? "Continuar" : "🗺️ Toque em todos os balões"}
-      </button>
+      {!scrollLivre && (
+        <button
+          onClick={onProxima}
+          disabled={!todosVistos}
+          className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+            todosVistos
+              ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
+          }`}
+        >
+          {todosVistos ? "Continuar" : "🗺️ Toque em todos os balões"}
+        </button>
+      )}
     </div>
   );
 }
@@ -1152,6 +1157,7 @@ function QuizRadar({
 }) {
   const aurora = PERSONAGENS.aurora;
   const teen = useTeen();
+  const scrollLivre = useScrollLivre();
   const [idx, setIdx] = useState(0);
   const [escolha, setEscolha] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
@@ -1229,12 +1235,14 @@ function QuizRadar({
             <div className="text-4xl font-black text-white">{acertos}/{total}</div>
             <p className="text-sm text-slate-300 mt-3 leading-relaxed">{stripDecorativeEmoji(cena.falaFinal)}</p>
           </div>
-          <button
-            onClick={onProxima}
-            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-          >
-            Continuar →
-          </button>
+          {!scrollLivre && (
+            <button
+              onClick={onProxima}
+              className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+            >
+              Continuar →
+            </button>
+          )}
         </div>
       );
     }
@@ -1570,12 +1578,14 @@ function QuizRadar({
               {cena.falaFinal}
             </div>
           </div>
-          <button
-            onClick={onProxima}
-            className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-          >
-            Continuar
-          </button>
+          {!scrollLivre && (
+            <button
+              onClick={onProxima}
+              className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+            >
+              Continuar
+            </button>
+          )}
         </>
       )}
     </div>
