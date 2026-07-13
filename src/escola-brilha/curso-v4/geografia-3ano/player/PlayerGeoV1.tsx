@@ -2597,7 +2597,7 @@ function ConstrutorMarcos({
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rodadaIdx, fim]);
+  }, [rodadaIdx, fim, iniciado]);
 
   const escolher = (pecaId: string) => {
     if (travada) return;
