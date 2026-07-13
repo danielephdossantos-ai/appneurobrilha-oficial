@@ -96,17 +96,17 @@ async function callGroq(opts: ChatCallOptions): Promise<
 }
 
 /**
- * Chama chat completion tentando Lovable AI primeiro; se falhar por
- * limite/créditos/erro, cai pro Groq automaticamente.
+ * Chama chat completion tentando Groq primeiro; se falhar por
+ * limite/créditos/erro, cai pro Lovable AI Gateway automaticamente.
  */
 export async function chatCompletionFallback(opts: ChatCallOptions): Promise<ChatCallResult> {
-  const primaria = await callLovable(opts);
-  if (primaria.ok) return { ok: true, text: primaria.text, fonte: "lovable" };
+  const primaria = await callGroq(opts);
+  if (primaria.ok) return { ok: true, text: primaria.text, fonte: "groq" };
   console.warn(
-    `[ai-fallback]${opts.label ? " " + opts.label : ""} Lovable falhou (${primaria.motivo}) — tentando Groq`,
+    `[ai-fallback]${opts.label ? " " + opts.label : ""} Groq falhou (${primaria.motivo}) — tentando Lovable`,
   );
-  const secundaria = await callGroq(opts);
-  if (secundaria.ok) return { ok: true, text: secundaria.text, fonte: "groq" };
+  const secundaria = await callLovable(opts);
+  if (secundaria.ok) return { ok: true, text: secundaria.text, fonte: "lovable" };
   // Ambas falharam — devolve o motivo mais informativo (créditos > limite > erro)
   if (primaria.motivo === "creditos" || secundaria.motivo === "creditos") {
     return { ok: false, motivo: "creditos" };
