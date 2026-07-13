@@ -17,7 +17,7 @@ function isMatematica(c: CursoAny): c is Curso {
   return (c.tipoAula ?? "matematica") === "matematica";
 }
 function isPortugues(c: CursoAny): c is CursoPortugues {
-  return c.tipoAula === "portugues";
+  return c.tipoAula === "portugues" || c.tipoAula === "ciencias";
 }
 function isGeoV1(c: CursoAny): c is CursoGeoV1 {
   return c.tipoAula === "geo-v1";
