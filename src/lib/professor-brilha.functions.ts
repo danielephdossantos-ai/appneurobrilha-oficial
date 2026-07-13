@@ -244,13 +244,15 @@ export const carregarConversaProfessorBrilha = createServerFn({ method: "POST" }
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    const { data: row } = await context.supabase
+    const supabase = getServerClient();
+    const { data: row } = await supabase
       .from("professor_brilha_conversas")
       .select("mensagens")
       .eq("user_id", context.userId)
       .eq("curso_slug", data.cursoSlug)
       .eq("aula_slug", data.aulaSlug)
       .maybeSingle();
+
     const mensagens = Array.isArray(row?.mensagens)
       ? (row!.mensagens as any[]).filter(
           (m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
