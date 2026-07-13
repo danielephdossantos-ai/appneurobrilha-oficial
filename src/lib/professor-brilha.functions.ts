@@ -116,14 +116,16 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
 
 
 
-    // 1) Buscar / criar conversa desta aula
-    const { data: existente } = await supabase
-      .from("professor_brilha_conversas")
-      .select("id, mensagens")
-      .eq("user_id", userId)
-      .eq("curso_slug", contexto.cursoSlug)
-      .eq("aula_slug", contexto.aulaSlug)
-      .maybeSingle();
+    // 1) Buscar / criar conversa desta aula (somente se autenticado)
+    const { data: existente } = userId
+      ? await supabase
+          .from("professor_brilha_conversas")
+          .select("id, mensagens")
+          .eq("user_id", userId)
+          .eq("curso_slug", contexto.cursoSlug)
+          .eq("aula_slug", contexto.aulaSlug)
+          .maybeSingle()
+      : { data: null as any };
 
     const historico: Array<{ role: "user" | "assistant"; content: string }> = Array.isArray(
       existente?.mensagens,
