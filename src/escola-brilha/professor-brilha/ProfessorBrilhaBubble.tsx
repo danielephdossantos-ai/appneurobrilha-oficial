@@ -112,7 +112,11 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
           aria-label="Professor Brilha — tirar dúvida"
         >
           <div className="relative">
-            <div className="text-3xl">{teen ? "🎓" : "👨‍🏫"}</div>
+            <img
+              src={professoraImg}
+              alt="Professora Brilha"
+              className="w-14 h-14 object-contain drop-shadow"
+            />
             <motion.div
               className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-red-500 border-2 border-white"
               animate={{ scale: [1, 1.3, 1] }}
