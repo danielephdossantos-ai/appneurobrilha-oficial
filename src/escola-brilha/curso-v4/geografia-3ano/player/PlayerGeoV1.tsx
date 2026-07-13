@@ -2423,6 +2423,43 @@ function VoceLeSozinho({
           {renderTexto()}
         </motion.div>
 
+        {(() => {
+          const definicoes = paragrafo.definicoes ?? {};
+          const chaveSelecionada = chaveAberta?.startsWith(`${paragrafo.id}::`)
+            ? chaveAberta.slice(paragrafo.id.length + 2)
+            : null;
+          const defAtiva = chaveSelecionada ? definicoes[chaveSelecionada] : null;
+          if (!defAtiva || !chaveSelecionada) return null;
+          return (
+            <motion.div
+              key={chaveSelecionada}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 rounded-2xl bg-white/90 border-2 border-amber-500 p-4 shadow-lg"
+            >
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <div className="text-[10px] uppercase tracking-widest text-amber-700 font-black">
+                  📖 O que é “{chaveSelecionada}”?
+                </div>
+                <button
+                  onClick={() => setChaveAberta(null)}
+                  className="text-[#6b4a1c] text-xs font-bold hover:text-[#3a2410]"
+                  aria-label="Fechar explicação"
+                >
+                  ✕
+                </button>
+              </div>
+              <div
+                className="text-[#2a1a08] text-sm sm:text-base leading-snug font-medium"
+                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+              >
+                {defAtiva}
+              </div>
+            </motion.div>
+          );
+        })()}
+
+
         {/* Marcador de progresso das chaves */}
         <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
           {paragrafo.chaves.map((c) => {
