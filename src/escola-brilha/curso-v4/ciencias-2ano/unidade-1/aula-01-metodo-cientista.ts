@@ -87,7 +87,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-purple-500 to-fuchsia-700",
         conteudo: "Olhar com muita atenção pra descobrir detalhes.",
         exemplo: "Ex.: olhar uma folha com atenção e ver as linhas finas.",
-        fotoUrl: microscopioImg,
+        fotoUrl: folhaNervurasImg,
       },
       {
         id: "hipotese",
@@ -96,7 +96,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-cyan-400 to-sky-700",
         conteudo: "Um palpite: o que você acha que vai acontecer?",
         exemplo: "Ex.: 'Acho que o gelo derrete rápido no sol'.",
-        fotoUrl: tubosImg,
+        videoUrl: geloVideoAsset.url,
       },
       {
         id: "experimento",
