@@ -81,10 +81,14 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
         setMensagens([...novasLocais, { role: "assistant", content: res.resposta }]);
       } else {
         setErro(res.mensagem);
+        const { notificarErroIA } = await import("@/lib/notify-ai-error");
+        notificarErroIA(res.motivo, "Professor Brilha");
       }
     } catch (e) {
       console.error(e);
       setErro("Não consegui te responder agora. Tenta de novo!");
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA("erro", "Professor Brilha");
     } finally {
       setCarregando(false);
     }
