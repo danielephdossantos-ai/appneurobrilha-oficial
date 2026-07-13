@@ -1,6 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import imgPassado from "@/assets/historia-2ano/passado-fotografo.png";
-import imgPresente from "@/assets/historia-2ano/presente-lupa.png";
+import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
+import imgFotografo from "@/assets/historia-2ano/passado-fotografo.png";
+import imgPresenteLupa from "@/assets/historia-2ano/presente-lupa.png";
 import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
 
 /**
@@ -8,17 +9,20 @@ import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
  * "Ontem, Hoje e Amanhã" — EF02HI06 + EF02HI07
  *
  * Skin "Máquina do Tempo do Brilha" via imagens temáticas kawaii:
- *  - PASSADO: fotógrafo antigo com câmera de fole (sépia)
- *  - PRESENTE: lupa dourada (investigar o AGORA)
- *  - FUTURO:  xícara fumegante + calendário (amanhã)
+ *  - FOTO ANTIGA: retrato sépia dos anos 40 (usada na lupa / cadernos)
+ *  - FOTÓGRAFO:   figura do passado com câmera de fole
+ *  - LUPA:        presente / investigar o AGORA
+ *  - XÍCARA+CAL.: futuro / amanhã
  * Motor visual permanece o PlayerGeoV1 (padrão travado do app).
  */
 
-const IMG_PASSADO = imgPassado;
-const IMG_PRESENTE = imgPresente;
-const IMG_RELOGIO = imgPresente;
+const IMG_FOTO_ANTIGA = imgFotoAntiga;
+const IMG_PASSADO = imgFotoAntiga;     // "foto antiga" — texto pede foto, não personagem
+const IMG_FOTOGRAFO = imgFotografo;    // reserva pra cenas que falarem de "quem tirou a foto"
+const IMG_PRESENTE = imgPresenteLupa;
+const IMG_RELOGIO = imgPresenteLupa;
 const IMG_CALENDARIO = imgFuturo;
-const IMG_ALBUM = imgPassado;
+const IMG_ALBUM = imgFotoAntiga;
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ontem-hoje-amanha",
