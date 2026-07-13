@@ -187,11 +187,10 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Qual dessas coisas é uma FONTE HISTÓRICA?",
-        fotoUrl: fotoAntigaFamilia,
         cards: [
-          { id: "foto", emoji: "📸", titulo: "Foto antiga da família", cor: "from-sky-400 to-indigo-600" },
-          { id: "sonho", emoji: "💭", titulo: "Um sonho que você teve", cor: "from-fuchsia-400 to-purple-600" },
-          { id: "chuva", emoji: "🌧️", titulo: "A chuva de amanhã", cor: "from-cyan-400 to-blue-600" },
+          { id: "foto", emoji: "📸", titulo: "Foto antiga da família", cor: "from-sky-400 to-indigo-600", fotoUrl: fotoAntigaFamilia },
+          { id: "sonho", emoji: "💭", titulo: "Um sonho que você teve", cor: "from-fuchsia-400 to-purple-600", fotoUrl: miniSonho },
+          { id: "chuva", emoji: "🌧️", titulo: "A chuva de amanhã", cor: "from-cyan-400 to-blue-600", fotoUrl: miniChuva },
         ],
         correta: "foto",
         feedbackAcerto:
@@ -202,11 +201,10 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "O historiador estuda principalmente…",
-        fotoUrl: quizPessoasTempo,
         cards: [
-          { id: "dinos", emoji: "🦖", titulo: "Dinossauros", cor: "from-lime-400 to-emerald-600" },
-          { id: "pessoas", emoji: "👨‍👩‍👧", titulo: "Pessoas no tempo", cor: "from-amber-400 to-orange-600" },
-          { id: "planetas", emoji: "🪐", titulo: "Planetas", cor: "from-indigo-400 to-violet-700" },
+          { id: "dinos", emoji: "🦖", titulo: "Dinossauros", cor: "from-lime-400 to-emerald-600", fotoUrl: miniDino },
+          { id: "pessoas", emoji: "👨‍👩‍👧", titulo: "Pessoas no tempo", cor: "from-amber-400 to-orange-600", fotoUrl: quizPessoasTempo },
+          { id: "planetas", emoji: "🪐", titulo: "Planetas", cor: "from-indigo-400 to-violet-700", fotoUrl: miniPlaneta },
         ],
         correta: "pessoas",
         feedbackAcerto:
@@ -217,11 +215,10 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "A EVIDÊNCIA dentro de uma foto antiga pode ser…",
-        fotoUrl: quizRoupaEpoca,
         cards: [
-          { id: "roupa", emoji: "👗", titulo: "A roupa da época", cor: "from-rose-400 to-pink-600" },
-          { id: "wifi", emoji: "📶", titulo: "O sinal do Wi-Fi", cor: "from-cyan-400 to-blue-600" },
-          { id: "app", emoji: "📱", titulo: "O app do celular", cor: "from-slate-400 to-slate-700" },
+          { id: "roupa", emoji: "👗", titulo: "A roupa da época", cor: "from-rose-400 to-pink-600", fotoUrl: quizRoupaEpoca },
+          { id: "wifi", emoji: "📶", titulo: "O sinal do Wi-Fi", cor: "from-cyan-400 to-blue-600", fotoUrl: miniWifi },
+          { id: "app", emoji: "📱", titulo: "O app do celular", cor: "from-slate-400 to-slate-700", fotoUrl: miniApp },
         ],
         correta: "roupa",
         feedbackAcerto:
