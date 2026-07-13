@@ -79,6 +79,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É o estudo das PESSOAS ao longo do TEMPO — o que elas faziam, comiam, brincavam, sentiam.",
         exemplo: "A história da sua família também é História.",
+        fotoUrl: fotoAntigaFamilia,
       },
       {
         id: "fonte",
@@ -88,6 +89,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É qualquer PISTA que o passado deixou pra gente: foto, carta, objeto, música, prédio antigo, entrevista com um mais velho.",
         exemplo: "Uma foto do casamento da vovó é uma fonte histórica.",
+        fotoUrl: conceitoFonte,
       },
       {
         id: "passado",
@@ -97,6 +99,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É tudo o que já aconteceu — de ontem, de anos atrás, de séculos atrás. É onde a História acontece.",
         exemplo: "Ontem já é passado. A infância do vovô também.",
+        fotoUrl: conceitoPassado,
       },
       {
         id: "evidencia",
@@ -106,6 +109,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a PROVA que o historiador acha DENTRO de uma fonte. É o detalhe que confirma como as pessoas viviam.",
         exemplo: "Na foto, a roupa da vovó é evidência da moda daquela época.",
+        fotoUrl: quizRoupaEpoca,
       },
     ],
     falaFinal:
