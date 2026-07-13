@@ -2058,6 +2058,9 @@ function VoceLeSozinho({
   const total = cena.paragrafos.length;
   const paragrafo = cena.paragrafos[paginaAtual];
   const marcadasDaPagina = marcadas[paragrafo.id] ?? new Set<string>();
+  const definicoesPagina = paragrafo.definicoes ?? {};
+  const temaPrincipal = paragrafo.chaves.find((c) => definicoesPagina[c]);
+  const definicaoTemaPrincipal = temaPrincipal ? definicoesPagina[temaPrincipal] : null;
   const todasMarcadasNaPagina = paragrafo.chaves.every((c) =>
     marcadasDaPagina.has(c),
   );
@@ -2444,6 +2447,25 @@ function VoceLeSozinho({
           />
         )}
 
+        {definicaoTemaPrincipal && (
+          <motion.div
+            key={`${paragrafo.id}-tema`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 rounded-2xl bg-white/75 border-2 border-[#d6a15f] p-4 shadow-inner"
+          >
+            <div className="text-[10px] uppercase tracking-widest text-[#6b4a1c]/70 font-black mb-1">
+              Tema da página
+            </div>
+            <div className="text-[#3a2410] text-xl font-black capitalize leading-tight">
+              {temaPrincipal}
+            </div>
+            <p className="mt-2 text-[#3a2410] text-base leading-relaxed font-semibold">
+              {definicaoTemaPrincipal}
+            </p>
+          </motion.div>
+        )}
+
         <motion.div
           key={paragrafo.id}
           initial={{ opacity: 0, y: 8 }}
@@ -2458,21 +2480,41 @@ function VoceLeSozinho({
         <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
           {paragrafo.chaves.map((c) => {
             const ok = marcadasDaPagina.has(c);
+            const definicao = definicoesPagina[c];
             return (
-              <span
+              <button
                 key={c}
+                type="button"
+                onClick={() => marcarChave(c)}
                 className={`text-[10px] font-bold px-2 py-1 rounded-full border ${
                   ok
                     ? "bg-emerald-500 text-white border-emerald-600"
-                    : "bg-white/50 text-[#6b4a1c] border-[#6b4a1c]/30"
+                    : "bg-white/50 text-[#6b4a1c] border-[#6b4a1c]/30 hover:bg-white/80"
                 }`}
+                title={definicao}
               >
                 {ok ? "✓ " : "○ "}
                 {c}
-              </span>
+              </button>
             );
           })}
         </div>
+
+        {paragrafo.chaves.some((c) => marcadasDaPagina.has(c) && definicoesPagina[c]) && (
+          <div className="mt-3 grid gap-2">
+            {paragrafo.chaves
+              .filter((c) => marcadasDaPagina.has(c) && definicoesPagina[c])
+              .map((c) => (
+                <div
+                  key={`${paragrafo.id}-${c}-def`}
+                  className="rounded-xl bg-emerald-50 border border-emerald-300 px-3 py-2 text-[#3a2410]"
+                >
+                  <div className="text-xs font-black uppercase">{c}</div>
+                  <div className="text-sm font-semibold leading-snug">{definicoesPagina[c]}</div>
+                </div>
+              ))}
+          </div>
+        )}
 
         <div className="mt-4 flex items-center justify-between gap-2">
           <button

@@ -11,6 +11,7 @@ import imgFuturoPlano from "@/assets/historia-2ano/futuro-plano-amanha-brilha.pn
 import imgPresenteAgora from "@/assets/historia-2ano/presente-agora-brilha.png";
 import imgPassadoPrimeiraEscola from "@/assets/historia-2ano/passado-primeira-escola-brilha.png";
 import imgPassadoDiario from "@/assets/historia-2ano/passado-diario-antigo-brilha.png";
+import imgTempoLinha from "@/assets/historia-2ano/tempo-passado-presente-futuro-brilha.png";
 
 /**
  * História · 2º Ano · Unidade 1 · Aula 01
@@ -39,6 +40,7 @@ const IMG_FUTURO_PLANO = imgFuturoPlano;
 const IMG_PRESENTE_AGORA = imgPresenteAgora;
 const IMG_PASSADO_PRIMEIRA_ESCOLA = imgPassadoPrimeiraEscola;
 const IMG_PASSADO_DIARIO = imgPassadoDiario;
+const IMG_TEMPO_LINHA = imgTempoLinha;
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ontem-hoje-amanha",
@@ -318,15 +320,33 @@ export const aula01: AulaGeoV1 = {
       {
         id: "p1",
         texto:
-          "O tempo é como um trem que nunca para. Ele já passou por milhões de dias e ainda vai passar por milhões de amanhãs. A gente organiza o tempo em três partes: passado, presente e futuro.",
+          "Tempo é a passagem dos acontecimentos. Ele mostra o que já aconteceu, o que está acontecendo agora e o que ainda vai acontecer. Por isso dizemos que o tempo não para: cada segundo vira passado e abre caminho para o futuro.",
         chaves: ["tempo", "passado", "presente", "futuro"],
-        fotoUrl: IMG_ALBUM,
+        definicoes: {
+          tempo:
+            "Tempo é a passagem dos acontecimentos. Ele ajuda o historiador a organizar a vida em antes, agora e depois.",
+          passado:
+            "Passado é tudo que já aconteceu: uma foto antiga, o nascimento, uma aula de ontem.",
+          presente:
+            "Presente é o agora: este momento em que você está lendo e aprendendo.",
+          futuro:
+            "Futuro é o que ainda vai acontecer: planos, sonhos e o amanhã.",
+        },
+        fotoUrl: IMG_TEMPO_LINHA,
       },
       {
         id: "p2",
         texto:
           "O passado é ontem. É a memória: o dia em que nasci, a foto antiga, a escola do ano passado. Tudo que já aconteceu vira passado no minuto seguinte.",
         chaves: ["passado", "memória", "ontem"],
+        definicoes: {
+          passado:
+            "Passado é o tempo das coisas que já aconteceram e podem ser lembradas por fotos, objetos, histórias e documentos.",
+          memória:
+            "Memória é aquilo que guardamos na lembrança ou em registros, como fotos e diários.",
+          ontem:
+            "Ontem é um exemplo simples de passado: já aconteceu.",
+        },
         fotoUrl: IMG_PASSADO_DIARIO,
       },
       {
@@ -334,6 +354,14 @@ export const aula01: AulaGeoV1 = {
         texto:
           "O presente é hoje. É o agora — este exato momento em que você lê estas palavras. O presente é o único tempo em que a gente pode fazer coisas de verdade.",
         chaves: ["presente", "hoje", "agora"],
+        definicoes: {
+          presente:
+            "Presente é o tempo do agora, aquilo que está acontecendo neste momento.",
+          hoje:
+            "Hoje é o dia que estamos vivendo: faz parte do presente.",
+          agora:
+            "Agora é este instante. Quando ele passa, vira passado.",
+        },
         fotoUrl: IMG_PRESENTE_AGORA,
       },
       {
@@ -341,6 +369,14 @@ export const aula01: AulaGeoV1 = {
         texto:
           "O futuro é amanhã. São os planos, os sonhos, o que ainda vai chegar. A gente não vê o futuro, mas prepara ele com as escolhas de hoje.",
         chaves: ["futuro", "amanhã", "planos"],
+        definicoes: {
+          futuro:
+            "Futuro é o tempo das coisas que ainda vão acontecer.",
+          amanhã:
+            "Amanhã é um exemplo de futuro: ainda vai chegar.",
+          planos:
+            "Planos são ideias do que queremos fazer depois, preparando o futuro.",
+        },
         fotoUrl: IMG_FUTURO_PLANO,
       },
     ],
