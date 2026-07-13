@@ -211,9 +211,13 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                         : "bg-white border border-amber-200 text-[#5b3a00]"
                     }`}
                   >
-                    <div className="text-3xl mb-2">💛</div>
+                    <img
+                      src={professoraImg}
+                      alt="Professora Brilha"
+                      className="w-16 h-16 object-contain mx-auto mb-2"
+                    />
                     <div className="font-bold text-sm mb-1">
-                      Oi! Sou o Professor Brilha.
+                      Oi! Sou sua Professora Brilha.
                     </div>
                     <div className="text-xs leading-relaxed">
                       Ficou com dúvida na aula? Me pergunta! Eu tô aqui pra te ajudar
