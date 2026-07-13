@@ -216,26 +216,11 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
   });
 
 export const carregarConversaProfessorBrilha = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
     z
       .object({ cursoSlug: z.string().min(1).max(120), aulaSlug: z.string().min(1).max(120) })
       .parse(input),
   )
-  .handler(async ({ data, context }) => {
-    const supabase = getServerClient();
-    const { data: row } = await supabase
-      .from("professor_brilha_conversas")
-      .select("mensagens")
-      .eq("user_id", context.userId)
-      .eq("curso_slug", data.cursoSlug)
-      .eq("aula_slug", data.aulaSlug)
-      .maybeSingle();
-
-    const mensagens = Array.isArray(row?.mensagens)
-      ? (row!.mensagens as any[]).filter(
-          (m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
-        )
-      : [];
-    return { mensagens };
+  .handler(async () => {
+    return { mensagens: [] as Array<{ role: "user" | "assistant"; content: string }> };
   });
