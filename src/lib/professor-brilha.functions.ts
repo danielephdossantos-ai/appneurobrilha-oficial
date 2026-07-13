@@ -77,8 +77,8 @@ Responda em texto simples (sem JSON, sem markdown pesado). Fale como um professo
 async function buscarBnccInfo(codigos: string[] | undefined): Promise<string> {
   if (!codigos || codigos.length === 0) return "";
   try {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data } = await supabaseAdmin
+    const supabase = getServerClient();
+    const { data } = await supabase
       .from("bncc_habilidades")
       .select("codigo_bncc, titulo, descricao, objeto_conhecimento, unidade_tematica")
       .in("codigo_bncc", codigos)
@@ -87,7 +87,7 @@ async function buscarBnccInfo(codigos: string[] | undefined): Promise<string> {
     return data
       .map(
         (h: any) =>
-          `• ${h.codigo_bncc} — ${h.titulo ?? ""}\n  ${h.descricao ?? h.objetivo ?? ""}${h.objeto_conhecimento ? `\n  Objeto: ${h.objeto_conhecimento}` : ""}`,
+          `• ${h.codigo_bncc} — ${h.titulo ?? ""}\n  ${h.descricao ?? ""}${h.objeto_conhecimento ? `\n  Objeto: ${h.objeto_conhecimento}` : ""}`,
       )
       .join("\n");
   } catch (e) {
@@ -95,6 +95,7 @@ async function buscarBnccInfo(codigos: string[] | undefined): Promise<string> {
     return "";
   }
 }
+
 
 export const professorBrilhaChat = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
