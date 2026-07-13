@@ -944,8 +944,36 @@ function NarrarMapa({
         🗺️ {cena.instrucao}
       </div>
 
-
-
+      {/* Tira de fotos reais das comunidades — sempre visível */}
+      {cena.pontos.some((p) => p.fotoUrl) && (
+        <div className="grid grid-cols-3 gap-2">
+          {cena.pontos.map((p) => (
+            <button
+              key={`thumb-${p.id}`}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className={`relative rounded-xl overflow-hidden border-2 shadow-lg transition ${
+                ativo === p.id ? "border-emerald-300 scale-[1.02]" : "border-white/20"
+              }`}
+            >
+              {p.fotoUrl ? (
+                <img
+                  src={p.fotoUrl}
+                  alt={p.titulo}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover"
+                />
+              ) : (
+                <div className={`w-full aspect-square grid place-items-center text-3xl bg-gradient-to-br ${p.cor}`}>
+                  {p.emoji}
+                </div>
+              )}
+              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] font-bold py-1 text-center">
+                {p.emoji} {p.titulo}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Mapa com balões flutuantes */}
       <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
@@ -2300,7 +2328,6 @@ function VoceLeSozinho({
       });
       restante = restante.slice(posEncontrada + chaveEncontrada.length);
     }
-    const definicoes = paragrafo.definicoes ?? {};
     return partes.map((p, i) => {
       if (p.tipo === "texto") {
         return <span key={i}>{p.conteudo}</span>;
@@ -2308,35 +2335,24 @@ function VoceLeSozinho({
       const chaveNorm = paragrafo.chaves.find(
         (c) => c.toLowerCase() === p.conteudo.toLowerCase(),
       )!;
-      const marcada = marcadasDaPagina.has(chaveNorm);
-      const temDef = !!definicoes[chaveNorm];
-      const abertaKey = `${paragrafo.id}::${chaveNorm}`;
-      const aberta = chaveAberta === abertaKey;
+      const ativa = marcadasDaPagina.has(chaveNorm);
       return (
         <button
           key={i}
           type="button"
-          onClick={() => {
-            if (temDef) {
-              setChaveAberta((prev) => (prev === abertaKey ? null : abertaKey));
-            }
-            if (!marcada) marcarChave(chaveNorm);
-          }}
+          onClick={() => marcarChave(chaveNorm)}
           className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded-md font-black transition ${
-            aberta
-              ? "bg-amber-500 text-white shadow-lg ring-2 ring-amber-300"
-              : marcada
-                ? "bg-emerald-400 text-[#3a2410] shadow"
-                : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
+            ativa
+              ? "bg-emerald-400 text-[#3a2410] shadow"
+              : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
           }`}
         >
           {p.conteudo}
-          {marcada && !aberta ? " ✓" : ""}
+          {ativa ? " ✓" : ""}
         </button>
       );
     });
   };
-
 
   return (
     <div className="space-y-5">
@@ -2394,43 +2410,6 @@ function VoceLeSozinho({
         >
           {renderTexto()}
         </motion.div>
-
-        {(() => {
-          const definicoes = paragrafo.definicoes ?? {};
-          const chaveSelecionada = chaveAberta?.startsWith(`${paragrafo.id}::`)
-            ? chaveAberta.slice(paragrafo.id.length + 2)
-            : null;
-          const defAtiva = chaveSelecionada ? definicoes[chaveSelecionada] : null;
-          if (!defAtiva || !chaveSelecionada) return null;
-          return (
-            <motion.div
-              key={chaveSelecionada}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-4 rounded-2xl bg-white/90 border-2 border-amber-500 p-4 shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-2 mb-1">
-                <div className="text-[10px] uppercase tracking-widest text-amber-700 font-black">
-                  📖 O que é “{chaveSelecionada}”?
-                </div>
-                <button
-                  onClick={() => setChaveAberta(null)}
-                  className="text-[#6b4a1c] text-xs font-bold hover:text-[#3a2410]"
-                  aria-label="Fechar explicação"
-                >
-                  ✕
-                </button>
-              </div>
-              <div
-                className="text-[#2a1a08] text-sm sm:text-base leading-snug font-medium"
-                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-              >
-                {defAtiva}
-              </div>
-            </motion.div>
-          );
-        })()}
-
 
         {/* Marcador de progresso das chaves */}
         <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
@@ -2531,14 +2510,13 @@ function ConstrutorMarcos({
   const [combo, setCombo] = useState(0);
   const [comboMax, setComboMax] = useState(0);
   const [fim, setFim] = useState(false);
-  const [iniciado, setIniciado] = useState(false);
 
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
   // relógio regressivo
   useEffect(() => {
-    if (travada || fim || !iniciado) return;
+    if (travada || fim) return;
     if (tempo <= 0) {
       setTravada(true);
       setFeedback("tempo");
@@ -2547,11 +2525,11 @@ function ConstrutorMarcos({
     }
     const t = setTimeout(() => setTempo((n) => n - 1), 1000);
     return () => clearTimeout(t);
-  }, [tempo, travada, fim, iniciado]);
+  }, [tempo, travada, fim]);
 
   // fala a pista ao entrar na rodada
   useEffect(() => {
-    if (fim || !iniciado) return;
+    if (fim) return;
     try {
       window.speechSynthesis?.cancel();
       const u = new SpeechSynthesisUtterance(rodada.contexto);
@@ -2569,7 +2547,7 @@ function ConstrutorMarcos({
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rodadaIdx, fim, iniciado]);
+  }, [rodadaIdx, fim]);
 
   const escolher = (pecaId: string) => {
     if (travada) return;
@@ -2660,60 +2638,6 @@ function ConstrutorMarcos({
 
   const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
   const tempoUrgente = tempo <= 5;
-
-  // Tela de "Podemos começar?" antes da primeira rodada
-  if (!iniciado) {
-    if (teen) {
-      return (
-        <div className="space-y-5">
-          <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 space-y-4">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono">
-              Simulador cronometrado — briefing
-            </div>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              {stripDecorativeEmoji(cena.aurora)}
-            </p>
-            <div className="text-xs text-slate-400 font-mono">
-              {total} rodadas · {cena.duracaoSegundos}s por rodada
-            </div>
-          </div>
-          <button
-            onClick={() => setIniciado(true)}
-            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
-          >
-            Podemos começar? →
-          </button>
-        </div>
-      );
-    }
-    return (
-      <div className="space-y-5">
-        <div className="flex items-start gap-3">
-          <img src={aurora.img} alt={aurora.nome} className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0" />
-          <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-            <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
-            {cena.aurora}
-          </div>
-        </div>
-        <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-400/40 rounded-3xl p-6 text-center space-y-3">
-          <div className="text-5xl">🎮</div>
-          <div className="text-white font-bold text-lg">
-            Quando você tocar em começar, o relógio vai contar {cena.duracaoSegundos}s por rodada.
-          </div>
-          <div className="text-sm text-white/70">
-            {total} rodadas · leia a pista com calma antes de escolher
-          </div>
-        </div>
-        <button
-          onClick={() => setIniciado(true)}
-          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-amber-400 to-orange-400 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
-        >
-          ▶ Podemos começar?
-        </button>
-      </div>
-    );
-  }
-
 
   if (teen) {
     return (
