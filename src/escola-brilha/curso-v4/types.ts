@@ -701,9 +701,7 @@ export type CenaGeoV1 =
           emoji: string;
           titulo: string;
           cor: string;
-          fotoUrl?: string; // opcional: mini foto de associação exibida no card
         }>;
-
         correta: string;
         feedbackAcerto: string;
         feedbackErro: string;

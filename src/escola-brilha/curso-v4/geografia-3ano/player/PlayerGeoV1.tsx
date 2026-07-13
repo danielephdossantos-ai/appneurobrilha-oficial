@@ -1327,9 +1327,17 @@ function QuizRadar({
             </div>
           </motion.div>
 
-          {/* Foto de contexto da pergunta foi removida — cada card de resposta
-              exibe a mini imagem correspondente pra criança fazer a associação. */}
-
+          {p.fotoUrl && (
+            <motion.img
+              key={`${p.id}-foto`}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              src={p.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-emerald-400/30 shadow-xl"
+            />
+          )}
 
           {/* Radar */}
           <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
@@ -1392,22 +1400,14 @@ function QuizRadar({
                   onClick={() => escolher(c.id)}
                   disabled={revelado}
                   whileTap={{ scale: revelado ? 1 : 0.96 }}
-                  className={`relative rounded-2xl p-3 border-2 bg-gradient-to-br ${c.cor} overflow-hidden ${
+                  className={`relative rounded-2xl p-4 border-2 bg-gradient-to-br ${c.cor} ${
                     escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
                   } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
                     erradoRevelado ? "opacity-60" : ""
                   }`}
                 >
-                  {(c as { fotoUrl?: string }).fotoUrl && (
-                    <img
-                      src={(c as { fotoUrl?: string }).fotoUrl}
-                      alt=""
-                      loading="lazy"
-                      className="w-full aspect-square object-cover rounded-xl mb-2 bg-white/90 border-2 border-white/40 shadow-md"
-                    />
-                  )}
-                  <div className="text-2xl leading-none mb-1">{c.emoji}</div>
-                  <div className="text-white font-black text-sm leading-tight">
+                  <div className="text-4xl mb-1">{c.emoji}</div>
+                  <div className="text-white font-black text-base leading-tight">
                     {c.titulo}
                   </div>
                   {certoRevelado && (
