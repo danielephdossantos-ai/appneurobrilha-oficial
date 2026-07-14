@@ -556,14 +556,6 @@ function VotoExplorador({
                   {op.subtitulo && (
                     <div className="text-white/85 text-xs mt-1 font-medium">{op.subtitulo}</div>
                   )}
-                  {op.fotoUrl && (
-                    <img
-                      src={op.fotoUrl}
-                      alt=""
-                      loading="lazy"
-                      className="mt-3 w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/25"
-                    />
-                  )}
                 </>
               )}
               {certoRevelado && (
