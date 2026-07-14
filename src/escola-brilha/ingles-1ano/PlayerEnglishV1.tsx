@@ -229,6 +229,7 @@ function PlayPt({ text }: { text: string }) {
 /* ============================ 1. Story ============================ */
 
 function Story() {
+  const { STORY } = useLesson();
   const [i, setI] = useState(0);
   const panel = STORY[i];
   useEffect(() => {
