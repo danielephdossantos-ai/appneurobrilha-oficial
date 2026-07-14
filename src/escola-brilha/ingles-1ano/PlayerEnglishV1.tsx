@@ -11,6 +11,59 @@ type Props = { onSair: () => void; onConcluir: () => void; lesson?: LessonData }
 const LessonCtx = createContext<LessonData>(defaultLesson);
 const useLesson = () => useContext(LessonCtx);
 
+// Dicionário mínimo pra palavras comuns que aparecem em opções curtas
+// (Writing, Grammar) e não estão isoladas no VOCAB.
+const MINI_DICT: Record<string, string> = {
+  i: "eu", you: "você", he: "ele", she: "ela", we: "nós", they: "eles",
+  my: "meu/minha", your: "seu/sua", the: "o/a", a: "um/uma", an: "um/uma",
+  am: "sou/estou", is: "é/está", are: "são/estão", be: "ser/estar",
+  and: "e", or: "ou", but: "mas", not: "não", yes: "sim", no: "não",
+  wake: "acordar", "wake up": "acordar", brush: "escovar", eat: "comer",
+  drink: "beber", go: "ir", come: "vir", play: "brincar", read: "ler",
+  write: "escrever", sleep: "dormir", run: "correr", walk: "andar",
+  see: "ver", look: "olhar", hear: "ouvir", listen: "escutar",
+  like: "gostar", love: "amar", want: "querer", need: "precisar",
+  have: "ter", has: "tem", make: "fazer", do: "fazer", does: "faz",
+  can: "poder", cannot: "não pode", let: "deixar", say: "dizer",
+  early: "cedo", late: "tarde", now: "agora", today: "hoje",
+  breakfast: "café da manhã", lunch: "almoço", dinner: "jantar",
+  school: "escola", home: "casa", bed: "cama", teeth: "dentes",
+  hello: "olá", hi: "oi", bye: "tchau", "good morning": "bom dia",
+  "good night": "boa noite", please: "por favor", thanks: "obrigado",
+  friend: "amigo", family: "família", mom: "mamãe", dad: "papai",
+  red: "vermelho", blue: "azul", yellow: "amarelo", green: "verde",
+  orange: "laranja", purple: "roxo", black: "preto", white: "branco",
+  pink: "rosa", brown: "marrom",
+};
+
+function useTranslator() {
+  const { VOCAB, DIALOG, STORY, READING } = useLesson();
+  return useMemo(() => {
+    const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9' ]/g, "").replace(/\s+/g, " ").trim();
+    return (en: string): string => {
+      if (!en) return "";
+      const t = norm(en);
+      if (!t) return "";
+      if (MINI_DICT[t]) return MINI_DICT[t];
+      const inVocab = VOCAB.find((v) => norm(v.en) === t);
+      if (inVocab) return inVocab.pt;
+      const partialVocab = VOCAB.find((v) => {
+        const ne = norm(v.en);
+        return ne.includes(t) || t.includes(ne);
+      });
+      if (partialVocab) return partialVocab.pt;
+      const inDialog = DIALOG.find((d) => norm(d.en) === t);
+      if (inDialog) return inDialog.pt;
+      const inStory = STORY.find((s) => norm(s.en) === t);
+      if (inStory) return inStory.pt;
+      for (const part of READING.parts) {
+        if (norm(part.en) === t) return part.pt;
+      }
+      return "";
+    };
+  }, [VOCAB, DIALOG, STORY, READING]);
+}
+
 /**
  * PlayerEnglishV1 — engine dedicada de Inglês.
  * Renderiza os 11 momentos obrigatórios em scroll contínuo, consumindo
