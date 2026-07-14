@@ -36,7 +36,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Problema: qual dessas perguntas é uma BOA PERGUNTA CIENTÍFICA para investigar em campo?",
     pergunta: "Formule sua escolha:",
-    fotoUrl: congressoImg,
+    fotoUrl: campoImg,
     opcoes: [
       { id: "opiniao", titulo: "'Qual a melhor cor?'", subtitulo: "opinião, não fato", emoji: "🎨", cor: "from-slate-500 to-slate-700", fotoUrl: congressoImg },
       { id: "boa", titulo: "'A ilha de calor no bairro X é maior que no parque?'", subtitulo: "mensurável, comparável", emoji: "🌡️", cor: "from-emerald-500 to-teal-700", fotoUrl: congressoImg },
