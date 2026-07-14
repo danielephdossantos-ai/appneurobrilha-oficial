@@ -2,6 +2,10 @@ import type { AulaGeoV1 } from "../../types";
 import congressoImg from "@/assets/ciencias-7ano/u7-a1/painel-congresso.jpg";
 import palcoImg from "@/assets/ciencias-7ano/u7-a1/palco-apresentacao.jpg";
 import posterImg from "@/assets/ciencias-7ano/u7-a1/poster-cientifico.jpg";
+import campoImg from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg";
+import graficosImg from "@/assets/ciencias-8ano/u7/graficos-dados.jpg";
+import feiraImg from "@/assets/ciencias-8ano/u7/apresentacao-feira.jpg";
+import equipeImg from "@/assets/ciencias-8ano/u7/equipe-laboratorio.jpg";
 
 /**
  * Ciências · 8º Ano · U7 · A01 — "Projeto Científico Integrador"
