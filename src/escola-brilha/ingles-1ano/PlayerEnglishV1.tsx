@@ -54,7 +54,7 @@ export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: 
 
 function MainSections({ onConcluir }: { onConcluir: () => void }) {
   const lesson = useLesson();
-  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK } = lesson;
+  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK, PACK, COMMANDS, CULTURE } = lesson;
 
   // Monta lista de seções na ordem certa, pulando as opcionais ausentes.
   const sections: { label: string; title: string; node: React.ReactNode }[] = [
@@ -68,11 +68,14 @@ function MainSections({ onConcluir }: { onConcluir: () => void }) {
     { label: "Real Life", title: "In real life", node: <RealLife /> },
   ];
   if (SONG) sections.push({ label: "Song", title: SONG.title, node: <Song /> });
-  if (HUNTER) sections.push({ label: "Mini Game", title: "Color / Object Hunter", node: <Hunter /> });
+  if (HUNTER) sections.push({ label: "Mini Game", title: "Classroom Explorer", node: <Hunter /> });
+  if (COMMANDS) sections.push({ label: "Mini Game", title: "Follow the Teacher", node: <Commands /> });
+  if (PACK) sections.push({ label: "Mini Game", title: "Pack My Backpack", node: <Pack /> });
   if (PAINT) sections.push({ label: "Mini Game", title: "Paint the Picture", node: <Paint /> });
   if (MEMORY) sections.push({ label: "Mini Game", title: "Memory Game", node: <Memory /> });
   sections.push({ label: "Mini Game", title: "Match the word!", node: <MiniGameMatch /> });
   sections.push({ label: "Quiz", title: "Quick check", node: <Quiz /> });
+  if (CULTURE) sections.push({ label: "Cultura", title: CULTURE.title, node: <Culture /> });
   if (BOOK) sections.push({ label: "Livrinho", title: BOOK.title, node: <Book /> });
   if (VIRTUAL_ROOM) sections.push({ label: "Missão", title: "Explore the room!", node: <VirtualRoom /> });
   sections.push({
@@ -1226,7 +1229,11 @@ function Hunter() {
                   : "bg-white border-slate-200 hover:border-sky-300"
               }`}
             >
-              <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
+              {o.img ? (
+                <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-sm font-bold text-slate-700 text-center px-1">{o.label}</div>
+              )}
             </button>
           );
         })}
@@ -1552,6 +1559,214 @@ function Book() {
         >
           Próxima →
         </button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ 🎒 Pack My Backpack ============================ */
+
+function Pack() {
+  const { PACK } = useLesson();
+  const [packed, setPacked] = useState<Record<string, boolean>>({});
+  const [wrongFlash, setWrongFlash] = useState<string | null>(null);
+  if (!PACK) return null;
+
+  const needed = PACK.items.filter((it) => it.belongs);
+  const packedCount = needed.filter((it) => packed[it.id]).length;
+  const done = packedCount === needed.length;
+
+  const onTap = (id: string, belongs: boolean, en: string) => {
+    if (belongs) {
+      setPacked((p) => ({ ...p, [id]: true }));
+      speakEnglish(en);
+    } else {
+      speakEnglish("Oops! That doesn't belong in the backpack.");
+      setWrongFlash(id);
+      setTimeout(() => setWrongFlash(null), 800);
+    }
+  };
+
+  return (
+    <div>
+      {PACK.intro && <div className="text-sm text-slate-600 mb-3">{PACK.intro}</div>}
+      <div className="rounded-2xl bg-gradient-to-br from-rose-50 to-amber-50 p-4">
+        <div className="relative mx-auto w-56 h-56">
+          <img src={PACK.backpackImg} alt="backpack" className="w-full h-full object-contain" />
+          <div className="absolute inset-x-6 bottom-4 top-16 grid grid-cols-3 gap-1 place-content-start">
+            {needed.filter((it) => packed[it.id]).map((it) => (
+              <div key={it.id} className="text-2xl grid place-items-center">
+                {it.img ? (
+                  <img src={it.img} alt={it.en} className="w-8 h-8 object-contain" />
+                ) : (
+                  <span>{it.emoji}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="text-center text-xs font-bold text-slate-500 mt-2">
+          {packedCount} / {needed.length} packed
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-2 mt-4">
+        {PACK.items.map((it) => {
+          const isPacked = packed[it.id];
+          const flash = wrongFlash === it.id;
+          return (
+            <button
+              key={it.id}
+              disabled={isPacked}
+              onClick={() => onTap(it.id, it.belongs, it.en)}
+              className={`aspect-square rounded-xl border-2 p-2 grid place-items-center transition ${
+                isPacked
+                  ? "bg-emerald-100 border-emerald-400 opacity-40"
+                  : flash
+                  ? "bg-rose-500 border-rose-500 animate-pulse"
+                  : "bg-white border-slate-200 hover:border-sky-300"
+              }`}
+            >
+              <div className="text-center">
+                <div className="text-3xl">
+                  {it.img ? (
+                    <img src={it.img} alt={it.en} className="w-10 h-10 object-contain mx-auto" />
+                  ) : (
+                    it.emoji
+                  )}
+                </div>
+                <div className="text-[10px] font-bold mt-1">{it.en}</div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {done && (
+        <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-emerald-700 font-black text-center">
+          ⭐ Great! My backpack is ready for school!
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================ 🧑‍🏫 Follow the Teacher (Commands / TPR) ============================ */
+
+function Commands() {
+  const { COMMANDS } = useLesson();
+  const [i, setI] = useState(0);
+  const [picks, setPicks] = useState<Record<number, string | null>>({});
+  if (!COMMANDS) return null;
+  const round = COMMANDS.rounds[i];
+  const pick = picks[i] ?? null;
+  const chosen = round.actions.find((a) => a.id === pick);
+  const correct = chosen?.isTarget === true;
+
+  useEffect(() => {
+    const t = setTimeout(() => speakEnglish(round.promptEn), 250);
+    return () => clearTimeout(t);
+  }, [i, round.promptEn]);
+
+  return (
+    <div>
+      {COMMANDS.intro && <div className="text-sm text-slate-600 mb-3">{COMMANDS.intro}</div>}
+      <div className="rounded-xl bg-gradient-to-br from-violet-50 to-sky-50 p-4">
+        <div className="flex items-center gap-2">
+          <PlayEn text={round.promptEn} size="sm" />
+          <div>
+            <div className="text-lg font-black text-slate-800">{round.promptEn}</div>
+            <div className="text-xs italic text-slate-500">{round.promptPt}</div>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2 mt-3">
+        {round.actions.map((a) => {
+          const isPicked = pick === a.id;
+          return (
+            <button
+              key={a.id}
+              disabled={pick !== null && correct}
+              onClick={() => {
+                setPicks((p) => ({ ...p, [i]: a.id }));
+                speakEnglish(a.isTarget ? "Great!" : a.en);
+              }}
+              className={`aspect-square rounded-xl border-2 p-2 grid place-items-center transition ${
+                isPicked
+                  ? a.isTarget
+                    ? "bg-emerald-500 border-emerald-500 text-white"
+                    : "bg-rose-500 border-rose-500 animate-pulse text-white"
+                  : "bg-white border-slate-200 hover:border-violet-300 text-slate-800"
+              }`}
+            >
+              <div className="text-center">
+                <div className="text-4xl">{a.emoji}</div>
+                <div className="text-[11px] font-bold mt-1">{a.en}</div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      {pick && !correct && (
+        <div className="mt-3 rounded-lg bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">
+          Escute de novo: <b>{round.promptEn}</b> — {round.promptPt}
+        </div>
+      )}
+      {pick && correct && (
+        <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-emerald-700 font-black">
+          ⭐ You followed the teacher!
+        </div>
+      )}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setI((v) => Math.max(0, v - 1))}
+          disabled={i === 0}
+          className="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold disabled:opacity-40"
+        >
+          ← Voltar
+        </button>
+        <div className="text-xs text-slate-500 font-bold">
+          {i + 1} / {COMMANDS.rounds.length}
+        </div>
+        <button
+          onClick={() => setI((v) => Math.min(COMMANDS.rounds.length - 1, v + 1))}
+          disabled={i === COMMANDS.rounds.length - 1 || !correct}
+          className="px-3 py-2 rounded-lg bg-violet-500 text-white text-sm font-bold disabled:opacity-40"
+        >
+          Próxima →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ 🌍 Culture Card ============================ */
+
+function Culture() {
+  const { CULTURE } = useLesson();
+  if (!CULTURE) return null;
+  return (
+    <div className="rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-5">
+      <div className="flex items-center gap-3 mb-3">
+        {CULTURE.img ? (
+          <img src={CULTURE.img} alt="" className="w-16 h-16 object-contain rounded-lg" />
+        ) : (
+          <div className="text-4xl">{CULTURE.emoji || "🌍"}</div>
+        )}
+        <div className="text-lg font-black text-amber-900">{CULTURE.title}</div>
+      </div>
+      <div className="space-y-3">
+        {CULTURE.paragraphs.map((p, i) => (
+          <div key={i} className="text-sm text-slate-700 leading-relaxed">
+            {p.en && (
+              <div className="flex items-start gap-2 mb-1">
+                <PlayEn text={p.en} size="sm" />
+                <div className="font-bold text-slate-800">{p.en}</div>
+              </div>
+            )}
+            <div className={p.en ? "italic text-slate-600" : ""}>{p.pt}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

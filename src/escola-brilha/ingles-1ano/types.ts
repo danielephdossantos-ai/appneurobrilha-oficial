@@ -108,6 +108,32 @@ export interface BookData {
   pages: { en: string; pt: string; img: string; badge?: string }[];
 }
 
+/** 🎒 Pack My Backpack: arrastar itens certos pra dentro da mochila. */
+export interface PackData {
+  intro?: string;
+  backpackImg: string;
+  items: { id: string; en: string; pt: string; img?: string; emoji?: string; belongs: boolean }[];
+}
+
+/** 🧑‍🏫 Follow the Teacher (TPR): ouvir comando e tocar na ação correta. */
+export interface CommandRound {
+  promptEn: string; // "Stand up."
+  promptPt: string;
+  actions: { id: string; en: string; pt: string; emoji: string; isTarget?: boolean }[];
+}
+export interface CommandsData {
+  intro?: string;
+  rounds: CommandRound[];
+}
+
+/** 🌍 Curiosidade cultural: cartão com imagem/emoji + explicação. */
+export interface CultureData {
+  title: string;
+  emoji?: string;
+  img?: string;
+  paragraphs: { en?: string; pt: string }[];
+}
+
 export interface LessonMeta {
   unitLabel: string;
   headerKicker: string;
@@ -148,4 +174,7 @@ export interface LessonData {
   MEMORY?: MemoryData;
   VIRTUAL_ROOM?: VirtualRoomData;
   BOOK?: BookData;
+  PACK?: PackData;
+  COMMANDS?: CommandsData;
+  CULTURE?: CultureData;
 }
