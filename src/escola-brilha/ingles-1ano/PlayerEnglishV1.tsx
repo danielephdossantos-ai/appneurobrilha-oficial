@@ -428,7 +428,7 @@ function StepBtn({
 type SR = any;
 
 function SpeakingMic() {
-  const { meta } = useLesson();
+  const { meta, VOCAB, DIALOG, STORY } = useLesson();
   const targets = meta.speakingTargets;
   const [i, setI] = useState(0);
   const [listening, setListening] = useState(false);
@@ -436,6 +436,18 @@ function SpeakingMic() {
   const [result, setResult] = useState<"idle" | "ok" | "again">("idle");
   const recRef = useRef<SR>(null);
   const target = targets[i];
+  const translateTarget = (en: string): string => {
+    const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
+    const t = norm(en);
+    const fromVocab = VOCAB.find((v) => norm(v.en) === t || norm(v.en).includes(t) || t.includes(norm(v.en)));
+    if (fromVocab) return fromVocab.pt;
+    const fromDialog = DIALOG.find((d) => norm(d.en) === t);
+    if (fromDialog) return fromDialog.pt;
+    const fromStory = STORY.find((s) => norm(s.en) === t);
+    if (fromStory) return fromStory.pt;
+    return "";
+  };
+  const targetPt = translateTarget(target);
 
   const supported =
     typeof window !== "undefined" &&
@@ -489,6 +501,9 @@ function SpeakingMic() {
       </div>
       <div className="rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 p-5 text-center">
         <div className="text-3xl font-black text-slate-800">{target}</div>
+        {targetPt && (
+          <div className="mt-1 text-sm text-slate-600 italic">🇧🇷 {targetPt}</div>
+        )}
         <div className="mt-3 flex justify-center gap-2">
           <PlayEn text={target} />
           {supported ? (
