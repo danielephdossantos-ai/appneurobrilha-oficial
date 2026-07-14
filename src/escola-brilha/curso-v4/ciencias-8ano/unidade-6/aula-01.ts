@@ -1,12 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import placasImg from "@/assets/ciencias-8ano/u6/placas-tectonicas.jpg";
-import camadasImg from "@/assets/ciencias-7ano/u6-a1/camadas-terra.jpg";
-import sistemaSolarImg from "@/assets/ciencias-7ano/u6-a1/sistema-solar.jpg";
-import galaxiasImg from "@/assets/ciencias-7ano/u6-a1/galaxias.jpg";
-import vulcaoImg from "@/assets/ciencias-8ano/u6/vulcao-erupcao.jpg";
-import atmosferaImg from "@/assets/ciencias-8ano/u6/atmosfera-camadas.jpg";
-import viaLacteaImg from "@/assets/ciencias-8ano/u6/via-lactea.jpg";
-import climaImg from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg";
+import { url as placasImg } from "@/assets/ciencias-8ano/u6/placas-tectonicas.jpg.asset.json";
+import { url as camadasImg } from "@/assets/ciencias-7ano/u6-a1/camadas-terra.jpg.asset.json";
+import { url as sistemaSolarImg } from "@/assets/ciencias-7ano/u6-a1/sistema-solar.jpg.asset.json";
+import { url as galaxiasImg } from "@/assets/ciencias-7ano/u6-a1/galaxias.jpg.asset.json";
+import { url as vulcaoImg } from "@/assets/ciencias-8ano/u6/vulcao-erupcao.jpg.asset.json";
+import { url as atmosferaImg } from "@/assets/ciencias-8ano/u6/atmosfera-camadas.jpg.asset.json";
+import { url as viaLacteaImg } from "@/assets/ciencias-8ano/u6/via-lactea.jpg.asset.json";
+import { url as climaImg } from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U6 · A01 — "Observatório Planetário"

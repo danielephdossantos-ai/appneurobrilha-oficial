@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import oficinaImg from "@/assets/ciencias-2ano/u2-a1/oficina-materiais.jpg";
-import quatroImg from "@/assets/ciencias-2ano/u2-a1/quatro-materiais.jpg";
-import mapaCamu2_naturaisImg from "@/assets/ciencias-2ano/mapa-camadas/u2-naturais.jpg";
-import mapaCamu2_industriaisImg from "@/assets/ciencias-2ano/mapa-camadas/u2-industriais.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as oficinaImg } from "@/assets/ciencias-2ano/u2-a1/oficina-materiais.jpg.asset.json";
+import { url as quatroImg } from "@/assets/ciencias-2ano/u2-a1/quatro-materiais.jpg.asset.json";
+import { url as mapaCamu2_naturaisImg } from "@/assets/ciencias-2ano/mapa-camadas/u2-naturais.jpg.asset.json";
+import { url as mapaCamu2_industriaisImg } from "@/assets/ciencias-2ano/mapa-camadas/u2-industriais.jpg.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 2 · Aula 01

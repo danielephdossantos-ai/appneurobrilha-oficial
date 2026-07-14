@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import laboratorioImg from "@/assets/ciencias-7ano/u5-a1/laboratorio-quimica.jpg";
-import moleculasImg from "@/assets/ciencias-7ano/u5-a1/moleculas-atomos.jpg";
-import transformacoesImg from "@/assets/ciencias-7ano/u5-a1/transformacoes-materia.jpg";
+import { url as laboratorioImg } from "@/assets/ciencias-7ano/u5-a1/laboratorio-quimica.jpg.asset.json";
+import { url as moleculasImg } from "@/assets/ciencias-7ano/u5-a1/moleculas-atomos.jpg.asset.json";
+import { url as transformacoesImg } from "@/assets/ciencias-7ano/u5-a1/transformacoes-materia.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 5 · Aula 01

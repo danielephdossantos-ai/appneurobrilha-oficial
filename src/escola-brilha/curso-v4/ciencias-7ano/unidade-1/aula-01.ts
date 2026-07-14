@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import microscopioImg from "@/assets/ciencias-7ano/u1-a1/microscopio-otico.jpg";
-import celulaAnimalImg from "@/assets/ciencias-7ano/u1-a1/celula-animal.jpg";
-import celulaVegetalImg from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg";
-import tecidosImg from "@/assets/ciencias-7ano/u1-a1/tecidos-humanos.jpg";
-import niveisImg from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg";
+import { url as microscopioImg } from "@/assets/ciencias-7ano/u1-a1/microscopio-otico.jpg.asset.json";
+import { url as celulaAnimalImg } from "@/assets/ciencias-7ano/u1-a1/celula-animal.jpg.asset.json";
+import { url as celulaVegetalImg } from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg.asset.json";
+import { url as tecidosImg } from "@/assets/ciencias-7ano/u1-a1/tecidos-humanos.jpg.asset.json";
+import { url as niveisImg } from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg.asset.json";
 import mitoseVideo from "@/assets/ciencias-7ano/u1-a1/mitose-celular.mp4.asset.json";
 import cloroplastosVideo from "@/assets/ciencias-7ano/u1-a1/cloroplastos-movimento.mp4.asset.json";
 

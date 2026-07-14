@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import manhaImg from "@/assets/ciencias-1ano/u6-a1/rotina-manha.jpg";
-import escolaImg from "@/assets/ciencias-1ano/u6-a1/escola-dia.jpg";
-import fimSemanaImg from "@/assets/ciencias-1ano/u6-a1/fim-de-semana.jpg";
-import estacoesImg from "@/assets/ciencias-1ano/u6-a1/estacoes-ano.jpg";
-import rotinaImg from "@/assets/ciencias-1ano/u6-a1/rotina-dia.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as manhaImg } from "@/assets/ciencias-1ano/u6-a1/rotina-manha.jpg.asset.json";
+import { url as escolaImg } from "@/assets/ciencias-1ano/u6-a1/escola-dia.jpg.asset.json";
+import { url as fimSemanaImg } from "@/assets/ciencias-1ano/u6-a1/fim-de-semana.jpg.asset.json";
+import { url as estacoesImg } from "@/assets/ciencias-1ano/u6-a1/estacoes-ano.jpg.asset.json";
+import { url as rotinaImg } from "@/assets/ciencias-1ano/u6-a1/rotina-dia.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U6 · A01 — Ritmos do Tempo (EF01CI05/EF01CI06)

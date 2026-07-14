@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import florestaImg from "@/assets/ciencias-7ano/u4-a1/ecossistema-floresta.jpg";
-import cadeiaImg from "@/assets/ciencias-7ano/u4-a1/cadeia-alimentar.jpg";
-import cicloImg from "@/assets/ciencias-7ano/u4-a1/ciclo-agua.jpg";
+import { url as florestaImg } from "@/assets/ciencias-7ano/u4-a1/ecossistema-floresta.jpg.asset.json";
+import { url as cadeiaImg } from "@/assets/ciencias-7ano/u4-a1/cadeia-alimentar.jpg.asset.json";
+import { url as cicloImg } from "@/assets/ciencias-7ano/u4-a1/ciclo-agua.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 4 · Aula 01

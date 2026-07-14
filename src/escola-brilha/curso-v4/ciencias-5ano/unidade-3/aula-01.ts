@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import corpo from "@/assets/ciencias-5ano/u3-a1/corpo-humano.jpg";
-import coracao from "@/assets/ciencias-5ano/u3-a1/coracao.jpg";
-import pulmoes from "@/assets/ciencias-5ano/u3-a1/pulmoes.jpg";
-import digestivo from "@/assets/ciencias-5ano/u3-a1/digestivo.jpg";
-import alimentacao from "@/assets/ciencias-5ano/u3-a1/alimentacao.jpg";
+import { url as corpo } from "@/assets/ciencias-5ano/u3-a1/corpo-humano.jpg.asset.json";
+import { url as coracao } from "@/assets/ciencias-5ano/u3-a1/coracao.jpg.asset.json";
+import { url as pulmoes } from "@/assets/ciencias-5ano/u3-a1/pulmoes.jpg.asset.json";
+import { url as digestivo } from "@/assets/ciencias-5ano/u3-a1/digestivo.jpg.asset.json";
+import { url as alimentacao } from "@/assets/ciencias-5ano/u3-a1/alimentacao.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-corpo-humano",

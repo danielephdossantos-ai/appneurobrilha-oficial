@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import cidade from "@/assets/ciencias-5ano/u5-a1/cidade.jpg";
-import solar from "@/assets/ciencias-5ano/u5-a1/solar.jpg";
-import hidro from "@/assets/ciencias-5ano/u5-a1/hidreletrica.jpg";
-import eolica from "@/assets/ciencias-5ano/u5-a1/eolica.jpg";
-import lampada from "@/assets/ciencias-5ano/u5-a1/lampada.jpg";
+import { url as cidade } from "@/assets/ciencias-5ano/u5-a1/cidade.jpg.asset.json";
+import { url as solar } from "@/assets/ciencias-5ano/u5-a1/solar.jpg.asset.json";
+import { url as hidro } from "@/assets/ciencias-5ano/u5-a1/hidreletrica.jpg.asset.json";
+import { url as eolica } from "@/assets/ciencias-5ano/u5-a1/eolica.jpg.asset.json";
+import { url as lampada } from "@/assets/ciencias-5ano/u5-a1/lampada.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-energia-tecnologia",

@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import cozinhaImg from "@/assets/ciencias-2ano/u3-a1/cozinha-segura.jpg";
-import kitImg from "@/assets/ciencias-2ano/u3-a1/kit-socorros.jpg";
-import mapaCam_u3_perigosImg from "@/assets/ciencias-2ano/mapa-camadas/u3-perigos.jpg";
-import mapaCam_u3_protecaoImg from "@/assets/ciencias-2ano/mapa-camadas/u3-protecao.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as cozinhaImg } from "@/assets/ciencias-2ano/u3-a1/cozinha-segura.jpg.asset.json";
+import { url as kitImg } from "@/assets/ciencias-2ano/u3-a1/kit-socorros.jpg.asset.json";
+import { url as mapaCam_u3_perigosImg } from "@/assets/ciencias-2ano/mapa-camadas/u3-perigos.jpg.asset.json";
+import { url as mapaCam_u3_protecaoImg } from "@/assets/ciencias-2ano/mapa-camadas/u3-protecao.jpg.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 3 · Aula 01

@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import terraImg from "@/assets/ciencias-6ano/u6-a1/terra-espaco.jpg";
-import solarImg from "@/assets/ciencias-6ano/u6-a1/sistema-solar.jpg";
-import camadasImg from "@/assets/ciencias-6ano/u6-a1/camadas-terra.jpg";
-import vulcaoImg from "@/assets/ciencias-6ano/u6-a1/vulcao.jpg";
+import { url as terraImg } from "@/assets/ciencias-6ano/u6-a1/terra-espaco.jpg.asset.json";
+import { url as solarImg } from "@/assets/ciencias-6ano/u6-a1/sistema-solar.jpg.asset.json";
+import { url as camadasImg } from "@/assets/ciencias-6ano/u6-a1/camadas-terra.jpg.asset.json";
+import { url as vulcaoImg } from "@/assets/ciencias-6ano/u6-a1/vulcao.jpg.asset.json";
 import vulcaoVideo from "@/assets/ciencias-6ano/u6-a1/vulcao-erupcao.mp4.asset.json";
 
 /**

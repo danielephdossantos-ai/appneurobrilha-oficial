@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import bancadaImg from "@/assets/ciencias-6ano/u2-a1/bancada-biologia.jpg";
-import celulaImg from "@/assets/ciencias-6ano/u2-a1/celula-vegetal.jpg";
-import niveisImg from "@/assets/ciencias-6ano/u2-a1/niveis-organizacao.jpg";
-import sistemasImg from "@/assets/ciencias-6ano/u2-a1/sistemas-corpo.jpg";
+import { url as bancadaImg } from "@/assets/ciencias-6ano/u2-a1/bancada-biologia.jpg.asset.json";
+import { url as celulaImg } from "@/assets/ciencias-6ano/u2-a1/celula-vegetal.jpg.asset.json";
+import { url as niveisImg } from "@/assets/ciencias-6ano/u2-a1/niveis-organizacao.jpg.asset.json";
+import { url as sistemasImg } from "@/assets/ciencias-6ano/u2-a1/sistemas-corpo.jpg.asset.json";
 import celulaVideo from "@/assets/ciencias-6ano/u2-a1/celula-vida.mp4.asset.json";
 
 /**

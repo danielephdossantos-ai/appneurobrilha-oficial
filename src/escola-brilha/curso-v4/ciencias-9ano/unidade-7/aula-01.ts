@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import pesquisaImg from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg";
-import graficosImg from "@/assets/ciencias-8ano/u7/graficos-dados.jpg";
-import feiraImg from "@/assets/ciencias-8ano/u7/apresentacao-feira.jpg";
-import equipeImg from "@/assets/ciencias-8ano/u7/equipe-laboratorio.jpg";
+import { url as pesquisaImg } from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg.asset.json";
+import { url as graficosImg } from "@/assets/ciencias-8ano/u7/graficos-dados.jpg.asset.json";
+import { url as feiraImg } from "@/assets/ciencias-8ano/u7/apresentacao-feira.jpg.asset.json";
+import { url as equipeImg } from "@/assets/ciencias-8ano/u7/equipe-laboratorio.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U7 · A01 — "TCC Júnior · Feira de Ciências Virtual"

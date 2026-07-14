@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import lab from "@/assets/ciencias-5ano/u4-a1/laboratorio.jpg";
-import aguaOleo from "@/assets/ciencias-5ano/u4-a1/agua-oleo.jpg";
-import filtro from "@/assets/ciencias-5ano/u4-a1/filtracao.jpg";
-import vapor from "@/assets/ciencias-5ano/u4-a1/evaporacao.jpg";
-import gelo from "@/assets/ciencias-5ano/u4-a1/gelo-agua.jpg";
+import { url as lab } from "@/assets/ciencias-5ano/u4-a1/laboratorio.jpg.asset.json";
+import { url as aguaOleo } from "@/assets/ciencias-5ano/u4-a1/agua-oleo.jpg.asset.json";
+import { url as filtro } from "@/assets/ciencias-5ano/u4-a1/filtracao.jpg.asset.json";
+import { url as vapor } from "@/assets/ciencias-5ano/u4-a1/evaporacao.jpg.asset.json";
+import { url as gelo } from "@/assets/ciencias-5ano/u4-a1/gelo-agua.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-materia-transformacao",

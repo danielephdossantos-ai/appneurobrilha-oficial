@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import orbitaImg from "@/assets/ciencias-4ano/u6-a1/terra-orbita.jpg";
-import veraoImg from "@/assets/ciencias-4ano/u6-a1/verao.jpg";
-import outonoImg from "@/assets/ciencias-4ano/u6-a1/outono.jpg";
-import invernoImg from "@/assets/ciencias-4ano/u6-a1/inverno.jpg";
-import primaveraImg from "@/assets/ciencias-4ano/u6-a1/primavera.jpg";
-import calendarioImg from "@/assets/ciencias-4ano/u6-a1/calendario.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as orbitaImg } from "@/assets/ciencias-4ano/u6-a1/terra-orbita.jpg.asset.json";
+import { url as veraoImg } from "@/assets/ciencias-4ano/u6-a1/verao.jpg.asset.json";
+import { url as outonoImg } from "@/assets/ciencias-4ano/u6-a1/outono.jpg.asset.json";
+import { url as invernoImg } from "@/assets/ciencias-4ano/u6-a1/inverno.jpg.asset.json";
+import { url as primaveraImg } from "@/assets/ciencias-4ano/u6-a1/primavera.jpg.asset.json";
+import { url as calendarioImg } from "@/assets/ciencias-4ano/u6-a1/calendario.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 6 · Aula 01

@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import microorgImg from "@/assets/ciencias-7ano/u2-a1/microorganismos.jpg";
-import arvoreImg from "@/assets/ciencias-7ano/u2-a1/arvore-filogenetica.jpg";
-import especiesImg from "@/assets/ciencias-7ano/u2-a1/especies-comparadas.jpg";
+import { url as microorgImg } from "@/assets/ciencias-7ano/u2-a1/microorganismos.jpg.asset.json";
+import { url as arvoreImg } from "@/assets/ciencias-7ano/u2-a1/arvore-filogenetica.jpg.asset.json";
+import { url as especiesImg } from "@/assets/ciencias-7ano/u2-a1/especies-comparadas.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 2 · Aula 01

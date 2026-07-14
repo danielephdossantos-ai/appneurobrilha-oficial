@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import bancadaImg from "@/assets/ciencias-6ano/u4-a1/bancada-quimica.jpg";
-import estadosImg from "@/assets/ciencias-6ano/u4-a1/estados-materia.jpg";
-import ferrugemImg from "@/assets/ciencias-6ano/u4-a1/ferrugem.jpg";
-import moleculasImg from "@/assets/ciencias-6ano/u4-a1/moleculas-agua.jpg";
+import { url as bancadaImg } from "@/assets/ciencias-6ano/u4-a1/bancada-quimica.jpg.asset.json";
+import { url as estadosImg } from "@/assets/ciencias-6ano/u4-a1/estados-materia.jpg.asset.json";
+import { url as ferrugemImg } from "@/assets/ciencias-6ano/u4-a1/ferrugem.jpg.asset.json";
+import { url as moleculasImg } from "@/assets/ciencias-6ano/u4-a1/moleculas-agua.jpg.asset.json";
 import geloVideo from "@/assets/ciencias-6ano/u4-a1/gelo-derretendo.mp4.asset.json";
 
 /**

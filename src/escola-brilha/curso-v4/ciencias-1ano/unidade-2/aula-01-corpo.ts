@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import corpoImg from "@/assets/ciencias-1ano/u2-a1/corpo-inteiro.jpg";
-import cabecaImg from "@/assets/ciencias-1ano/u2-a1/cabeca-rosto.jpg";
-import maosImg from "@/assets/ciencias-1ano/u2-a1/maos-dedos.jpg";
-import pernasImg from "@/assets/ciencias-1ano/u2-a1/pernas-pes.jpg";
-import bracosImg from "@/assets/ciencias-1ano/u2-a1/bracos.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as corpoImg } from "@/assets/ciencias-1ano/u2-a1/corpo-inteiro.jpg.asset.json";
+import { url as cabecaImg } from "@/assets/ciencias-1ano/u2-a1/cabeca-rosto.jpg.asset.json";
+import { url as maosImg } from "@/assets/ciencias-1ano/u2-a1/maos-dedos.jpg.asset.json";
+import { url as pernasImg } from "@/assets/ciencias-1ano/u2-a1/pernas-pes.jpg.asset.json";
+import { url as bracosImg } from "@/assets/ciencias-1ano/u2-a1/bracos.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U2 · A01 — Meu Corpo (EF01CI02)

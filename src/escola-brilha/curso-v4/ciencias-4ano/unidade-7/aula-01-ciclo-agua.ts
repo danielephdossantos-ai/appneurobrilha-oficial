@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import cicloImg from "@/assets/ciencias-4ano/u7-a1/ciclo-agua.jpg";
-import evapImg from "@/assets/ciencias-4ano/u7-a1/evaporacao.jpg";
-import nuvensImg from "@/assets/ciencias-4ano/u7-a1/nuvens.jpg";
-import chuvaImg from "@/assets/ciencias-4ano/u7-a1/chuva.jpg";
-import rioImg from "@/assets/ciencias-4ano/u7-a1/rio.jpg";
-import economiaImg from "@/assets/ciencias-4ano/u7-a1/economia-agua.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as cicloImg } from "@/assets/ciencias-4ano/u7-a1/ciclo-agua.jpg.asset.json";
+import { url as evapImg } from "@/assets/ciencias-4ano/u7-a1/evaporacao.jpg.asset.json";
+import { url as nuvensImg } from "@/assets/ciencias-4ano/u7-a1/nuvens.jpg.asset.json";
+import { url as chuvaImg } from "@/assets/ciencias-4ano/u7-a1/chuva.jpg.asset.json";
+import { url as rioImg } from "@/assets/ciencias-4ano/u7-a1/rio.jpg.asset.json";
+import { url as economiaImg } from "@/assets/ciencias-4ano/u7-a1/economia-agua.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 7 · Aula 01

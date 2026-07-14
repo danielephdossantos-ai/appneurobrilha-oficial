@@ -1,14 +1,14 @@
 import type { AulaGeoV1 } from "../../types";
-import microscopioImg from "@/assets/ciencias-7ano/u1-a1/microscopio-otico.jpg";
-import celulaAnimalImg from "@/assets/ciencias-7ano/u1-a1/celula-animal.jpg";
-import celulaVegetalImg from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg";
-import niveisImg from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg";
+import { url as microscopioImg } from "@/assets/ciencias-7ano/u1-a1/microscopio-otico.jpg.asset.json";
+import { url as celulaAnimalImg } from "@/assets/ciencias-7ano/u1-a1/celula-animal.jpg.asset.json";
+import { url as celulaVegetalImg } from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg.asset.json";
+import { url as niveisImg } from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg.asset.json";
 import mitoseVideo from "@/assets/ciencias-7ano/u1-a1/mitose-celular.mp4.asset.json";
-import dnaImg from "@/assets/ciencias-8ano/u1/dna-helice.jpg";
-import mitocondriaImg from "@/assets/ciencias-8ano/u1/mitocondria.jpg";
-import organelasImg from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg";
-import cromossomosImg from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg";
-import teoriaCelularImg from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg";
+import { url as dnaImg } from "@/assets/ciencias-8ano/u1/dna-helice.jpg.asset.json";
+import { url as mitocondriaImg } from "@/assets/ciencias-8ano/u1/mitocondria.jpg.asset.json";
+import { url as organelasImg } from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg.asset.json";
+import { url as cromossomosImg } from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg.asset.json";
+import { url as teoriaCelularImg } from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U1 · A01 — "Laboratório de Biologia Celular"

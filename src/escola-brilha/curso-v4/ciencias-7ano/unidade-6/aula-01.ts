@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import solarImg from "@/assets/ciencias-7ano/u6-a1/sistema-solar.jpg";
-import terraImg from "@/assets/ciencias-7ano/u6-a1/camadas-terra.jpg";
-import galaxiaImg from "@/assets/ciencias-7ano/u6-a1/galaxias.jpg";
+import { url as solarImg } from "@/assets/ciencias-7ano/u6-a1/sistema-solar.jpg.asset.json";
+import { url as terraImg } from "@/assets/ciencias-7ano/u6-a1/camadas-terra.jpg.asset.json";
+import { url as galaxiaImg } from "@/assets/ciencias-7ano/u6-a1/galaxias.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 6 · Aula 01

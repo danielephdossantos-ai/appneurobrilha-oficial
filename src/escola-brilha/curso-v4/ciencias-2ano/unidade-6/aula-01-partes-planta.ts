@@ -1,14 +1,14 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import arvoreImg from "@/assets/ciencias-2ano/u6-a1/arvore-partes.jpg";
-import girassolImg from "@/assets/ciencias-2ano/u6-a1/girassol-partes.jpg";
-import raizImg from "@/assets/ciencias-2ano/u6-a1/raiz-solo.jpg";
-import cauleImg from "@/assets/ciencias-2ano/u6-a1/caule-tronco.jpg";
-import folhasImg from "@/assets/ciencias-2ano/u6-a1/folhas-sol.jpg";
-import florImg from "@/assets/ciencias-2ano/u6-a1/flor-abelha.jpg";
-import frutoImg from "@/assets/ciencias-2ano/u6-a1/fruto-sementes.jpg";
-import mapaCam_u6_raizImg from "@/assets/ciencias-2ano/mapa-camadas/u6-raiz.jpg";
-import mapaCam_u6_cimaImg from "@/assets/ciencias-2ano/mapa-camadas/u6-cima.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as arvoreImg } from "@/assets/ciencias-2ano/u6-a1/arvore-partes.jpg.asset.json";
+import { url as girassolImg } from "@/assets/ciencias-2ano/u6-a1/girassol-partes.jpg.asset.json";
+import { url as raizImg } from "@/assets/ciencias-2ano/u6-a1/raiz-solo.jpg.asset.json";
+import { url as cauleImg } from "@/assets/ciencias-2ano/u6-a1/caule-tronco.jpg.asset.json";
+import { url as folhasImg } from "@/assets/ciencias-2ano/u6-a1/folhas-sol.jpg.asset.json";
+import { url as florImg } from "@/assets/ciencias-2ano/u6-a1/flor-abelha.jpg.asset.json";
+import { url as frutoImg } from "@/assets/ciencias-2ano/u6-a1/fruto-sementes.jpg.asset.json";
+import { url as mapaCam_u6_raizImg } from "@/assets/ciencias-2ano/mapa-camadas/u6-raiz.jpg.asset.json";
+import { url as mapaCam_u6_cimaImg } from "@/assets/ciencias-2ano/mapa-camadas/u6-cima.jpg.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 6 · Aula 01

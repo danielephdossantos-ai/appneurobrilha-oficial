@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import bancadaImg from "@/assets/ciencias-6ano/u1-a1/bancada-pesquisa.jpg";
-import microscopioImg from "@/assets/ciencias-6ano/u1-a1/microscopio.jpg";
-import experimentoImg from "@/assets/ciencias-6ano/u1-a1/experimento-plantas.jpg";
-import cadernoImg from "@/assets/ciencias-6ano/u1-a1/caderno-dados.jpg";
-import graficoImg from "@/assets/ciencias-6ano/u1-a1/grafico-crescimento.jpg";
-import bacteriasFrame from "@/assets/ciencias-6ano/u1-a1/bacterias-frame.jpg";
-import reacaoFrame from "@/assets/ciencias-6ano/u1-a1/reacao-frame.jpg";
+import { url as bancadaImg } from "@/assets/ciencias-6ano/u1-a1/bancada-pesquisa.jpg.asset.json";
+import { url as microscopioImg } from "@/assets/ciencias-6ano/u1-a1/microscopio.jpg.asset.json";
+import { url as experimentoImg } from "@/assets/ciencias-6ano/u1-a1/experimento-plantas.jpg.asset.json";
+import { url as cadernoImg } from "@/assets/ciencias-6ano/u1-a1/caderno-dados.jpg.asset.json";
+import { url as graficoImg } from "@/assets/ciencias-6ano/u1-a1/grafico-crescimento.jpg.asset.json";
+import { url as bacteriasFrame } from "@/assets/ciencias-6ano/u1-a1/bacterias-frame.jpg.asset.json";
+import { url as reacaoFrame } from "@/assets/ciencias-6ano/u1-a1/reacao-frame.jpg.asset.json";
 import bacteriasVideo from "@/assets/ciencias-6ano/u1-a1/bacterias-vivas.mp4.asset.json";
 import reacaoVideo from "@/assets/ciencias-6ano/u1-a1/reacao-quimica.mp4.asset.json";
 import plantasVideo from "@/assets/ciencias-6ano/u1-a1/plantas-crescendo.mp4.asset.json";

@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import dnaImg from "@/assets/ciencias-8ano/u1/dna-helice.jpg";
-import cromossomosImg from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg";
-import teoriaImg from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg";
-import organelasImg from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg";
-import mitocondriaImg from "@/assets/ciencias-8ano/u1/mitocondria.jpg";
-import pesquisaImg from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg";
+import { url as dnaImg } from "@/assets/ciencias-8ano/u1/dna-helice.jpg.asset.json";
+import { url as cromossomosImg } from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg.asset.json";
+import { url as teoriaImg } from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg.asset.json";
+import { url as organelasImg } from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg.asset.json";
+import { url as mitocondriaImg } from "@/assets/ciencias-8ano/u1/mitocondria.jpg.asset.json";
+import { url as pesquisaImg } from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U1 · A01 — "Instituto de Genética"
