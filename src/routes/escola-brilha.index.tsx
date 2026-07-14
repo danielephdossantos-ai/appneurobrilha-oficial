@@ -294,7 +294,7 @@ function EscolaBrilhaCatalogo() {
 
                   {aberta && (
                     <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
-                      {(serie === "1º Ano" || serie === "2º Ano" || serie === "3º Ano" || serie === "4º Ano" || serie === "5º Ano") && (
+                      {(serie === "1º Ano" || serie === "2º Ano" || serie === "3º Ano" || serie === "4º Ano" || serie === "5º Ano" || serie === "6º Ano") && (
                         <Link
                           to="/escola-brilha/trilha-ingles/$serie"
                           params={{
@@ -307,7 +307,9 @@ function EscolaBrilhaCatalogo() {
                                     ? "3ano"
                                     : serie === "4º Ano"
                                       ? "4ano"
-                                      : "5ano",
+                                      : serie === "5º Ano"
+                                        ? "5ano"
+                                        : "6ano",
                           }}
                           className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                           style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}
@@ -324,13 +326,16 @@ function EscolaBrilhaCatalogo() {
                                   ? "My English Adventure"
                                   : serie === "4º Ano"
                                     ? "My English Portfolio"
-                                    : "My English Portfolio — Level 2"}
+                                    : serie === "5º Ano"
+                                      ? "My English Portfolio — Level 2"
+                                      : "English Academy — Level 1"}
                           </div>
                           <div className="text-[11px] font-bold opacity-90 mt-1">
                             Trilha estilo Duolingo — abrir mapa de aulas →
                           </div>
                         </Link>
                       )}
+
                       {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
                           Nenhuma missão {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
