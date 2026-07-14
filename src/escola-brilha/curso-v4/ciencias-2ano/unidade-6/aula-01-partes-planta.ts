@@ -7,6 +7,8 @@ import cauleImg from "@/assets/ciencias-2ano/u6-a1/caule-tronco.jpg";
 import folhasImg from "@/assets/ciencias-2ano/u6-a1/folhas-sol.jpg";
 import florImg from "@/assets/ciencias-2ano/u6-a1/flor-abelha.jpg";
 import frutoImg from "@/assets/ciencias-2ano/u6-a1/fruto-sementes.jpg";
+import mapaCam_u6_raizImg from "@/assets/ciencias-2ano/mapa-camadas/u6-raiz.jpg";
+import mapaCam_u6_cimaImg from "@/assets/ciencias-2ano/mapa-camadas/u6-cima.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 6 · Aula 01
@@ -95,8 +97,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: arvoreImg,
     camadas: [
-      { id: "baixo", rotulo: "Debaixo da terra", emoji: "🌱", cor: "from-amber-700 to-yellow-900", rect: { x: 20, y: 85, w: 60, h: 10 }, descricao: "A RAIZ é a parte escondida. Segura e alimenta a planta." },
-      { id: "cima", rotulo: "Acima da terra", emoji: "🌳", cor: "from-emerald-500 to-green-700", rect: { x: 15, y: 5, w: 70, h: 75 }, descricao: "Caule, folhas, flor e fruto — tudo que a gente vê e usa." },
+      { id: "baixo", rotulo: "Debaixo da terra", emoji: "🌱", cor: "from-amber-700 to-yellow-900", rect: { x: 20, y: 85, w: 60, h: 10 }, descricao: "A RAIZ é a parte escondida. Segura e alimenta a planta.", fotoUrl: mapaCam_u6_raizImg },
+      { id: "cima", rotulo: "Acima da terra", emoji: "🌳", cor: "from-emerald-500 to-green-700", rect: { x: 15, y: 5, w: 70, h: 75 }, descricao: "Caule, folhas, flor e fruto — tudo que a gente vê e usa.", fotoUrl: mapaCam_u6_cimaImg },
     ],
     falaFinal: "A raiz é escondida mas é fundamental. Sem raiz, a árvore cai!",
   },

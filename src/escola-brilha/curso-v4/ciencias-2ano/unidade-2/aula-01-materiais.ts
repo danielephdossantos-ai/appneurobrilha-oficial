@@ -2,6 +2,8 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import oficinaImg from "@/assets/ciencias-2ano/u2-a1/oficina-materiais.jpg";
 import quatroImg from "@/assets/ciencias-2ano/u2-a1/quatro-materiais.jpg";
+import mapaCamu2_naturaisImg from "@/assets/ciencias-2ano/mapa-camadas/u2-naturais.jpg";
+import mapaCamu2_industriaisImg from "@/assets/ciencias-2ano/mapa-camadas/u2-industriais.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 2 · Aula 01
@@ -174,6 +176,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         rect: { x: 5, y: 40, w: 45, h: 50 },
         descricao: "Madeira e vidro vêm de coisas da natureza: árvores e areia derretida.",
+        fotoUrl: mapaCamu2_naturaisImg,
       },
       {
         id: "feitos",
@@ -182,6 +185,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-purple-500 to-fuchsia-700",
         rect: { x: 50, y: 40, w: 45, h: 50 },
         descricao: "Plástico e metal são fabricados em indústrias, transformando o que vem da natureza.",
+        fotoUrl: mapaCamu2_industriaisImg,
       },
     ],
     falaFinal:

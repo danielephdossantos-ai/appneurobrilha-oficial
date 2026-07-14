@@ -2,6 +2,8 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import panoramaImg from "@/assets/ciencias-2ano/u7-a1/panorama-sol-sombra.jpg";
 import superficiesImg from "@/assets/ciencias-2ano/u7-a1/superficies-sol.jpg";
+import mapaCam_u7_luzImg from "@/assets/ciencias-2ano/mapa-camadas/u7-luz.jpg";
+import mapaCam_u7_calorImg from "@/assets/ciencias-2ano/mapa-camadas/u7-calor.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 7 · Aula 01
@@ -88,8 +90,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: panoramaImg,
     camadas: [
-      { id: "luz", rotulo: "Luz", emoji: "💡", cor: "from-yellow-400 to-amber-600", rect: { x: 5, y: 5, w: 90, h: 55 }, descricao: "Toda parte iluminada pelo sol é onde a LUZ chega. Sem luz, escuro." },
-      { id: "calor", rotulo: "Calor", emoji: "🔥", cor: "from-red-500 to-orange-700", rect: { x: 5, y: 60, w: 90, h: 35 }, descricao: "O chão AQUECE onde o sol bate direto. Superfícies escuras esquentam mais." },
+      { id: "luz", rotulo: "Luz", emoji: "💡", cor: "from-yellow-400 to-amber-600", rect: { x: 5, y: 5, w: 90, h: 55 }, descricao: "Toda parte iluminada pelo sol é onde a LUZ chega. Sem luz, escuro.", fotoUrl: mapaCam_u7_luzImg },
+      { id: "calor", rotulo: "Calor", emoji: "🔥", cor: "from-red-500 to-orange-700", rect: { x: 5, y: 60, w: 90, h: 35 }, descricao: "O chão AQUECE onde o sol bate direto. Superfícies escuras esquentam mais.", fotoUrl: mapaCam_u7_calorImg },
     ],
     falaFinal: "Luz ilumina + calor esquenta. Ambos vêm do mesmo sol!",
   },

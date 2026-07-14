@@ -2,6 +2,8 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import cozinhaImg from "@/assets/ciencias-2ano/u3-a1/cozinha-segura.jpg";
 import kitImg from "@/assets/ciencias-2ano/u3-a1/kit-socorros.jpg";
+import mapaCam_u3_perigosImg from "@/assets/ciencias-2ano/mapa-camadas/u3-perigos.jpg";
+import mapaCam_u3_protecaoImg from "@/assets/ciencias-2ano/mapa-camadas/u3-protecao.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 3 · Aula 01
@@ -122,8 +124,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: cozinhaImg,
     camadas: [
-      { id: "perigos", rotulo: "Zonas de cuidado", emoji: "⚠️", cor: "from-red-500 to-orange-700", rect: { x: 5, y: 20, w: 60, h: 60 }, descricao: "Fogão, faca e tomada precisam de atenção redobrada." },
-      { id: "protecao", rotulo: "Proteção", emoji: "🛡️", cor: "from-emerald-500 to-green-700", rect: { x: 65, y: 20, w: 30, h: 70 }, descricao: "Armário fechado, protetor de tomada e kit de socorros ajudam a evitar acidentes." },
+      { id: "perigos", rotulo: "Zonas de cuidado", emoji: "⚠️", cor: "from-red-500 to-orange-700", rect: { x: 5, y: 20, w: 60, h: 60 }, descricao: "Fogão, faca e tomada precisam de atenção redobrada.", fotoUrl: mapaCam_u3_perigosImg },
+      { id: "protecao", rotulo: "Proteção", emoji: "🛡️", cor: "from-emerald-500 to-green-700", rect: { x: 65, y: 20, w: 30, h: 70 }, descricao: "Armário fechado, protetor de tomada e kit de socorros ajudam a evitar acidentes.", fotoUrl: mapaCam_u3_protecaoImg },
     ],
     falaFinal: "Toda casa tem cuidados + proteções. Juntos, evitam acidentes!",
   },

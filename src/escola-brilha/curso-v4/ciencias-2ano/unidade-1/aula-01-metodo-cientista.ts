@@ -7,6 +7,8 @@ import placasImg from "@/assets/ciencias-2ano/u1-a1/placas-petri.jpg";
 import tubosImg from "@/assets/ciencias-2ano/u1-a1/tubos-ensaio.jpg";
 import folhaNervurasImg from "@/assets/ciencias-2ano/u1-a1/folha-nervuras.jpg";
 import geloVideoAsset from "@/assets/ciencias-2ano/u1-a1/gelo-derretendo.mp4.asset.json";
+import mapaCamu1_instrumentosImg from "@/assets/ciencias-2ano/mapa-camadas/u1-instrumentos.jpg";
+import mapaCamu1_cristaisImg from "@/assets/ciencias-2ano/mapa-camadas/u1-cristais.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 1 · Aula 01
@@ -245,6 +247,7 @@ export const aula01: AulaGeoV1 = {
         rect: { x: 5, y: 45, w: 90, h: 45 },
         descricao:
           "Aqui moram as ferramentas: microscópio, tubos, béquer e placas. Servem pra INVESTIGAR.",
+        fotoUrl: mapaCamu1_instrumentosImg,
       },
       {
         id: "cristais",
@@ -254,6 +257,7 @@ export const aula01: AulaGeoV1 = {
         rect: { x: 20, y: 5, w: 60, h: 35 },
         descricao:
           "Aqui moram os 7 cristais de energia. Cada um destrava uma área da Ciência.",
+        fotoUrl: mapaCamu1_cristaisImg,
       },
     ],
     falaFinal:
