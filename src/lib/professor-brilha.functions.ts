@@ -32,6 +32,7 @@ const ContextoSchema = z.object({
 const InputSchema = z.object({
   contexto: ContextoSchema,
   mensagem: z.string().min(1).max(1500),
+  historico: z.array(MessageSchema).max(40).optional(),
 });
 
 type ProfResult =
