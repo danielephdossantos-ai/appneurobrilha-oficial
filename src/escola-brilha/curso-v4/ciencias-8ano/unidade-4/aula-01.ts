@@ -3,6 +3,10 @@ import laboratorioImg from "@/assets/ciencias-7ano/u5-a1/laboratorio-quimica.jpg
 import moleculasImg from "@/assets/ciencias-7ano/u5-a1/moleculas-atomos.jpg";
 import transformacoesImg from "@/assets/ciencias-7ano/u5-a1/transformacoes-materia.jpg";
 import tabelaImg from "@/assets/ciencias-8ano/u4/tabela-periodica.jpg";
+import reacaoImg from "@/assets/ciencias-8ano/u4/reacao-bicarbonato-vinagre.jpg";
+import atomoImg from "@/assets/ciencias-8ano/u4/atomo-modelo.jpg";
+import moleculaAguaImg from "@/assets/ciencias-8ano/u4/molecula-agua.jpg";
+import ferrugemImg from "@/assets/ciencias-8ano/u4/ferrugem-oxidacao.jpg";
 
 /**
  * Ciências · 8º Ano · U4 · A01 — "Laboratório de Química"
