@@ -143,14 +143,14 @@ function Section({
   return (
     <section id={id} className="scroll-mt-20">
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-black text-sm">
+        <div className="w-9 h-9 rounded-full bg-amber-400 text-[#1a0d3d] grid place-items-center font-black text-sm shadow-lg">
           {step}
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
+          <div className="text-[10px] uppercase tracking-widest text-amber-300 font-bold">
             {label}
           </div>
-          <div className="text-xl font-black text-slate-800">{title}</div>
+          <div className="text-xl font-black text-white">{title}</div>
         </div>
       </div>
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">{children}</div>
