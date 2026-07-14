@@ -177,7 +177,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "prev", rotulo: "Prevenção", emoji: "🛡️", percentual: 45, cor: "#10b981", descricao: "Vacinas, saneamento, alimentação, atividade física.", exemplos: ["Vacina", "Higiene", "Alimentação"], fotoUrl: hormonalImg },
       { id: "trat", rotulo: "Tratamento", emoji: "💊", percentual: 30, cor: "#dc2626", descricao: "Medicamentos, cirurgias, terapias — quando a doença chega.", exemplos: ["Antibiótico", "Cirurgia", "Fisioterapia"], fotoUrl: puberdadeImg },
-      { id: "pesq", rotulo: "Pesquisa", emoji: "🧪", percentual: 25, cor: "#8b5cf6", descricao: "Biotecnologia, novos remédios, novas vacinas.", exemplos: ["mRNA", "Terapia gênica", "Nanomedicina"], fotoUrl: dnaImg },
     ],
     falaFinal: "Prevenir, tratar e pesquisar. Fim do Instituto 2.",
   },

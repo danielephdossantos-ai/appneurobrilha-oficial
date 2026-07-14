@@ -182,7 +182,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "her", rotulo: "Herança", emoji: "👨‍👩‍👧", percentual: 34, cor: "#8b5cf6", descricao: "DNA passa de pais para filhos via gametas (Mendel).", exemplos: ["Alelos", "Cromossomos", "Genes"], fotoUrl: dnaImg },
       { id: "var", rotulo: "Variação", emoji: "🎲", percentual: 33, cor: "#f59e0b", descricao: "Mutações e combinações criam diferenças entre indivíduos.", exemplos: ["Mutação", "Meiose", "Recombinação"], fotoUrl: cromossomosImg },
-      { id: "sel", rotulo: "Seleção", emoji: "🌱", percentual: 33, cor: "#10b981", descricao: "O ambiente escolhe quem se reproduz mais (Darwin).", exemplos: ["Predadores", "Clima", "Alimento"], fotoUrl: pesquisaImg },
     ],
     falaFinal: "Herança + variação + seleção = evolução. Fim do Instituto 1.",
   },

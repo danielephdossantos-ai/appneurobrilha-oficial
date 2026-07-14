@@ -176,7 +176,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "est", rotulo: "Estrutura", emoji: "⚛️", percentual: 35, cor: "#8b5cf6", descricao: "Átomo, elemento, tabela periódica.", exemplos: ["Próton", "Elétron", "Nêutron"], fotoUrl: atomoImg },
       { id: "lig", rotulo: "Ligações", emoji: "🔗", percentual: 30, cor: "#0891b2", descricao: "Iônica, covalente, metálica. Ligações formam moléculas.", exemplos: ["H₂O", "NaCl", "CO₂"], fotoUrl: aguaImg },
-      { id: "rea", rotulo: "Reações", emoji: "⚗️", percentual: 35, cor: "#f59e0b", descricao: "Rearranjo de átomos formando novas substâncias.", exemplos: ["Combustão", "Neutralização", "Oxidação"], fotoUrl: reacaoImg },
     ],
     falaFinal: "Estrutura + ligações + reações. Fim do Instituto 3.",
   },

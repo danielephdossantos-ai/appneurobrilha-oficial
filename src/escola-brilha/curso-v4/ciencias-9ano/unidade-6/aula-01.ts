@@ -177,7 +177,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "amb", rotulo: "Ambiental", emoji: "🌱", percentual: 34, cor: "#10b981", descricao: "Proteção da natureza, biodiversidade, clima.", exemplos: ["Reflorestar", "Renováveis", "Reciclar"], fotoUrl: turbinasImg },
       { id: "soc", rotulo: "Social", emoji: "🤝", percentual: 33, cor: "#0891b2", descricao: "Justiça, saúde, educação e igualdade.", exemplos: ["Direitos", "Saúde", "Educação"], fotoUrl: hidreletricaImg },
-      { id: "eco", rotulo: "Econômico", emoji: "💰", percentual: 33, cor: "#f59e0b", descricao: "Empregos verdes, economia circular.", exemplos: ["Reciclagem", "Turismo eco", "Bioindústria"], fotoUrl: painelImg },
     ],
     falaFinal: "Ambiental + social + econômico. Fim do Instituto 6.",
   },

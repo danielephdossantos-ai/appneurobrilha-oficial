@@ -179,7 +179,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "rig", rotulo: "Rigor", emoji: "🎯", percentual: 40, cor: "#dc2626", descricao: "Método correto, controle, dados honestos, reproduzível.", exemplos: ["Controle", "Amostra", "Repetição"], fotoUrl: equipeImg },
       { id: "cla", rotulo: "Clareza", emoji: "📝", percentual: 30, cor: "#0891b2", descricao: "Relatório organizado, gráficos legendados, linguagem simples.", exemplos: ["Introdução", "Resultados", "Gráficos"], fotoUrl: graficosImg },
-      { id: "rel", rotulo: "Relevância", emoji: "🌍", percentual: 30, cor: "#10b981", descricao: "Aplicação real, ligação com o cotidiano ou com a ciência atual.", exemplos: ["Cotidiano", "Saúde", "Ambiente"], fotoUrl: feiraImg },
     ],
     falaFinal: "Rigor + clareza + relevância = TCC Júnior de qualidade.",
   },

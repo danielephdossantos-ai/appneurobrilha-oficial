@@ -177,7 +177,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "mec", rotulo: "Mecânica", emoji: "⚙️", percentual: 35, cor: "#f59e0b", descricao: "Forças, movimento, Leis de Newton, máquinas simples.", exemplos: ["Peso", "Atrito", "Aceleração"], fotoUrl: forcasImg },
       { id: "ene", rotulo: "Energia", emoji: "⚡", percentual: 35, cor: "#dc2626", descricao: "Cinética, potencial, elétrica, térmica. Sempre se conserva.", exemplos: ["Cinética", "Potencial", "Trabalho"], fotoUrl: circuitoImg },
-      { id: "ond", rotulo: "Ondas", emoji: "🌊", percentual: 30, cor: "#0891b2", descricao: "Som (mecânica) e luz (eletromagnética).", exemplos: ["Som", "Luz", "Rádio"], fotoUrl: ledImg },
     ],
     falaFinal: "Mecânica + energia + ondas. Fim do Instituto 4.",
   },

@@ -177,7 +177,6 @@ export const aula01: AulaGeoV1 = {
     fatias: [
       { id: "obs", rotulo: "Observar", emoji: "🔭", percentual: 35, cor: "#1e40af", descricao: "Telescópios (Hubble, James Webb), radiotelescópios.", exemplos: ["Hubble", "James Webb", "ALMA"], fotoUrl: viaLacteaImg },
       { id: "exp", rotulo: "Explorar", emoji: "🚀", percentual: 30, cor: "#f59e0b", descricao: "Sondas, rovers em Marte, ISS.", exemplos: ["Curiosity", "Perseverance", "ISS"], fotoUrl: atmosferaImg },
-      { id: "pro", rotulo: "Proteger", emoji: "🌍", percentual: 35, cor: "#10b981", descricao: "Monitorar clima, queimadas, ozônio, asteroides.", exemplos: ["INPE", "NASA GISS", "ESA"], fotoUrl: mudancaImg },
     ],
     falaFinal: "Observar, explorar, proteger. Fim do Instituto 5.",
   },
