@@ -132,6 +132,7 @@ export interface CultureData {
   emoji?: string;
   img?: string;
   paragraphs: { en?: string; pt: string }[];
+}
 
 export interface LessonMeta {
   unitLabel: string;
@@ -173,4 +174,7 @@ export interface LessonData {
   MEMORY?: MemoryData;
   VIRTUAL_ROOM?: VirtualRoomData;
   BOOK?: BookData;
+  PACK?: PackData;
+  COMMANDS?: CommandsData;
+  CULTURE?: CultureData;
 }
