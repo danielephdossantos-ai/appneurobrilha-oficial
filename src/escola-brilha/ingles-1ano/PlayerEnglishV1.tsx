@@ -287,6 +287,7 @@ function Story() {
 
 /** Card de palavra que passa pelas etapas SPEB: Ver → Ouvir → Repetir → Ler. */
 function Vocabulary() {
+  const { VOCAB } = useLesson();
   const [openId, setOpenId] = useState<string | null>(null);
   return (
     <div>
@@ -318,7 +319,7 @@ function Vocabulary() {
   );
 }
 
-function WordSPEB({ word, onClose }: { word: (typeof VOCAB)[number]; onClose: () => void }) {
+function WordSPEB({ word, onClose }: { word: Vocab; onClose: () => void }) {
   const [step, setStep] = useState(0);
   const steps = ["👀 Ver", "👂 Ouvir", "🗣️ Repetir", "📖 Ler", "✅ Ok!"];
   return (
@@ -424,7 +425,8 @@ function StepBtn({
 type SR = any;
 
 function SpeakingMic() {
-  const targets = ["Hello", "Good morning", "My name is Lily"];
+  const { meta } = useLesson();
+  const targets = meta.speakingTargets;
   const [i, setI] = useState(0);
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string>("");
@@ -554,6 +556,7 @@ function SpeakingMic() {
 /* ============================ 4. Listening ============================ */
 
 function ListeningDialog() {
+  const { DIALOG, meta } = useLesson();
   const [playedAll, setPlayedAll] = useState(false);
   const [answer, setAnswer] = useState<string | null>(null);
 
@@ -637,6 +640,7 @@ function ListeningDialog() {
 /* ============================ 5. Reading ============================ */
 
 function Reading() {
+  const { READING, meta } = useLesson();
   return (
     <div>
       <img
@@ -699,6 +703,7 @@ function highlightWords(text: string, words: string[]) {
 /* ============================ 6. Writing ============================ */
 
 function Writing() {
+  const { WRITING } = useLesson();
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<string | null>(null);
   const q = WRITING[i];
@@ -781,6 +786,7 @@ function Writing() {
 /* ============================ 7. Grammar (Why?) ============================ */
 
 function GrammarWhy() {
+  const { GRAMMAR, meta } = useLesson();
   return (
     <div>
       <PlayPt
@@ -827,6 +833,7 @@ function GrammarWhy() {
 /* ============================ 8. Real Life ============================ */
 
 function RealLife() {
+  const { REAL_LIFE } = useLesson();
   const [reveal, setReveal] = useState<Record<number, boolean>>({});
   return (
     <div className="space-y-3">
@@ -858,6 +865,7 @@ function RealLife() {
 /* ============================ 9. Mini Game ============================ */
 
 function MiniGameMatch() {
+  const { VOCAB } = useLesson();
   const pool = VOCAB.slice(0, 4);
   // pairs[enId] = { pt, correct } — só ficam travadas as corretas
   const [pairs, setPairs] = useState<Record<string, { pt: string; correct: boolean }>>({});
@@ -975,6 +983,7 @@ function MiniGameMatch() {
 /* ============================ 10. Quiz ============================ */
 
 function Quiz() {
+  const { QUIZ } = useLesson();
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(QUIZ.map(() => null));
   const q = QUIZ[i];
@@ -1055,6 +1064,7 @@ function Quiz() {
 /* ============================ 11. Projeto Final ============================ */
 
 function FinalProject({ onFinish }: { onFinish: () => void }) {
+  const { meta } = useLesson();
   const [name, setName] = useState("");
   const [done, setDone] = useState(false);
   const phrase = name.trim() ? `Hello! My name is ${name.trim()}. Nice to meet you!` : "";
