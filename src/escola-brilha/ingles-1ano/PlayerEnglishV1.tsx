@@ -11,6 +11,59 @@ type Props = { onSair: () => void; onConcluir: () => void; lesson?: LessonData }
 const LessonCtx = createContext<LessonData>(defaultLesson);
 const useLesson = () => useContext(LessonCtx);
 
+// Dicionário mínimo pra palavras comuns que aparecem em opções curtas
+// (Writing, Grammar) e não estão isoladas no VOCAB.
+const MINI_DICT: Record<string, string> = {
+  i: "eu", you: "você", he: "ele", she: "ela", we: "nós", they: "eles",
+  my: "meu/minha", your: "seu/sua", the: "o/a", a: "um/uma", an: "um/uma",
+  am: "sou/estou", is: "é/está", are: "são/estão", be: "ser/estar",
+  and: "e", or: "ou", but: "mas", not: "não", yes: "sim", no: "não",
+  wake: "acordar", "wake up": "acordar", brush: "escovar", eat: "comer",
+  drink: "beber", go: "ir", come: "vir", play: "brincar", read: "ler",
+  write: "escrever", sleep: "dormir", run: "correr", walk: "andar",
+  see: "ver", look: "olhar", hear: "ouvir", listen: "escutar",
+  like: "gostar", love: "amar", want: "querer", need: "precisar",
+  have: "ter", has: "tem", make: "fazer", do: "fazer", does: "faz",
+  can: "poder", cannot: "não pode", let: "deixar", say: "dizer",
+  early: "cedo", late: "tarde", now: "agora", today: "hoje",
+  breakfast: "café da manhã", lunch: "almoço", dinner: "jantar",
+  school: "escola", home: "casa", bed: "cama", teeth: "dentes",
+  hello: "olá", hi: "oi", bye: "tchau", "good morning": "bom dia",
+  "good night": "boa noite", please: "por favor", thanks: "obrigado",
+  friend: "amigo", family: "família", mom: "mamãe", dad: "papai",
+  red: "vermelho", blue: "azul", yellow: "amarelo", green: "verde",
+  orange: "laranja", purple: "roxo", black: "preto", white: "branco",
+  pink: "rosa", brown: "marrom",
+};
+
+function useTranslator() {
+  const { VOCAB, DIALOG, STORY, READING } = useLesson();
+  return useMemo(() => {
+    const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9' ]/g, "").replace(/\s+/g, " ").trim();
+    return (en: string): string => {
+      if (!en) return "";
+      const t = norm(en);
+      if (!t) return "";
+      if (MINI_DICT[t]) return MINI_DICT[t];
+      const inVocab = VOCAB.find((v) => norm(v.en) === t);
+      if (inVocab) return inVocab.pt;
+      const partialVocab = VOCAB.find((v) => {
+        const ne = norm(v.en);
+        return ne.includes(t) || t.includes(ne);
+      });
+      if (partialVocab) return partialVocab.pt;
+      const inDialog = DIALOG.find((d) => norm(d.en) === t);
+      if (inDialog) return inDialog.pt;
+      const inStory = STORY.find((s) => norm(s.en) === t);
+      if (inStory) return inStory.pt;
+      for (const part of READING.parts) {
+        if (norm(part.en) === t) return part.pt;
+      }
+      return "";
+    };
+  }, [VOCAB, DIALOG, STORY, READING]);
+}
+
 /**
  * PlayerEnglishV1 — engine dedicada de Inglês.
  * Renderiza os 11 momentos obrigatórios em scroll contínuo, consumindo
@@ -722,10 +775,14 @@ function highlightWords(text: string, words: string[]) {
 
 function Writing() {
   const { WRITING } = useLesson();
+  const translate = useTranslator();
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<string | null>(null);
+  const [tapped, setTapped] = useState<string | null>(null);
   const q = WRITING[i];
   const correct = pick === q.answer;
+  const fullSentence = q.prompt.replace("___", pick ?? q.answer);
+  const promptPt = translate(fullSentence);
   return (
     <div>
       <div className="rounded-xl bg-slate-50 p-4 text-center">
@@ -745,28 +802,57 @@ function Writing() {
             </span>
           ))}
         </div>
+        {promptPt && pick && (
+          <div className="text-sm text-slate-600 italic mt-2">🇧🇷 {promptPt}</div>
+        )}
         <div className="text-xs text-slate-500 mt-2 italic">Dica: {q.hint}</div>
       </div>
-      <div className="grid grid-cols-3 gap-2 mt-3">
-        {q.options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => {
-              setPick(opt);
-              if (opt === q.answer) speakEnglish(q.prompt.replace("___", opt));
-            }}
-            className={`py-2 rounded-lg font-bold border-2 transition ${
-              pick === opt
-                ? opt === q.answer
-                  ? "bg-emerald-500 text-white border-emerald-500"
-                  : "bg-rose-500 text-white border-rose-500"
-                : "bg-white text-slate-700 border-slate-200 hover:border-sky-300"
-            }`}
-          >
-            {opt}
-          </button>
-        ))}
+      <div className="text-[11px] text-slate-500 text-center mt-3 mb-1">
+        👆 Toque em uma palavra pra ver o significado
       </div>
+      <div className="grid grid-cols-3 gap-2">
+        {q.options.map((opt) => {
+          const optPt = translate(opt);
+          const isTapped = tapped === opt;
+          return (
+            <button
+              key={opt}
+              onClick={() => {
+                if (pick === null && !isTapped && optPt) {
+                  // primeiro toque: mostra tradução + fala
+                  setTapped(opt);
+                  speakEnglish(opt);
+                  return;
+                }
+                setTapped(null);
+                setPick(opt);
+                if (opt === q.answer) speakEnglish(q.prompt.replace("___", opt));
+              }}
+              className={`py-2 px-1 rounded-lg font-bold border-2 transition flex flex-col items-center ${
+                pick === opt
+                  ? opt === q.answer
+                    ? "bg-emerald-500 text-white border-emerald-500"
+                    : "bg-rose-500 text-white border-rose-500"
+                  : isTapped
+                    ? "bg-amber-50 text-slate-800 border-amber-400"
+                    : "bg-white text-slate-700 border-slate-200 hover:border-sky-300"
+              }`}
+            >
+              <span>{opt}</span>
+              {(isTapped || pick) && optPt && (
+                <span className={`text-[10px] italic mt-0.5 ${pick === opt ? "text-white/90" : "text-slate-500"}`}>
+                  = {optPt}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {tapped && !pick && (
+        <div className="mt-2 text-[11px] text-center text-amber-700">
+          Toque de novo pra escolher <b>{tapped}</b> como resposta.
+        </div>
+      )}
       {pick && (
         <div className={`mt-3 text-sm font-bold ${correct ? "text-emerald-600" : "text-rose-600"}`}>
           {correct ? "✔ Great job!" : `✘ Não é essa. A resposta é "${q.answer}".`}
