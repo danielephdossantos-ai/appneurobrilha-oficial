@@ -76,7 +76,7 @@ export const aula01: AulaGeoV1 = {
       { id: "cortex", x: 45, y: 30, emoji: "🧠", cor: "from-indigo-500 to-purple-700", titulo: "Córtex cerebral", texto: "Camada externa. Responsável por pensamento consciente, linguagem, decisão e memória.", fotoUrl: cerebroImg },
       { id: "cerebelo", x: 78, y: 68, emoji: "🎯", cor: "from-emerald-500 to-teal-700", titulo: "Cerebelo", texto: "Coordena movimentos finos, equilíbrio e postura. Ativa quando você anda de bicicleta.", fotoUrl: cerebroImg },
       { id: "tronco", x: 55, y: 80, emoji: "❤️", cor: "from-red-500 to-rose-700", titulo: "Tronco encefálico", texto: "Controla funções vitais automáticas: respiração, batimentos, digestão.", fotoUrl: cerebroImg },
-      { id: "hipofise", x: 40, y: 55, emoji: "🎛️", cor: "from-amber-500 to-orange-700", titulo: "Hipófise", texto: "Glândula-mestre. Controla outras glândulas (tireoide, suprarrenais, gônadas).", fotoUrl: hormonalImg },
+      { id: "hipofise", x: 40, y: 55, emoji: "🎛️", cor: "from-amber-500 to-orange-700", titulo: "Hipófise", texto: "Glândula-mestre. Controla outras glândulas (tireoide, suprarrenais, gônadas).", fotoUrl: glandulasImg },
     ],
     falaFinal:
       "Cada região tem função específica — e trabalham em rede.",
