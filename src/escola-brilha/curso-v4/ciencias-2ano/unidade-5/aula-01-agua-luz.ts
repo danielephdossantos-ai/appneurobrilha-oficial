@@ -4,6 +4,8 @@ import estufaImg from "@/assets/ciencias-2ano/u5-a1/estufa-plantas.jpg";
 import brotoImg from "@/assets/ciencias-2ano/u5-a1/broto-crescendo.jpg";
 import mapaCamu5_entraImg from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg";
 import mapaCamu5_produzImg from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg";
+import mapaCam_u5_entraImg from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg";
+import mapaCam_u5_produzImg from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 5 · Aula 01
@@ -90,8 +92,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: estufaImg,
     camadas: [
-      { id: "entra", rotulo: "Entra", emoji: "⬇️", cor: "from-cyan-500 to-sky-700", rect: { x: 5, y: 20, w: 40, h: 70 }, descricao: "ÁGUA pela raiz, LUZ pelas folhas, AR também pelas folhas." },
-      { id: "faz", rotulo: "Planta faz", emoji: "🌱", cor: "from-emerald-500 to-green-700", rect: { x: 50, y: 20, w: 45, h: 70 }, descricao: "Fabrica ALIMENTO (com sol + água) e solta oxigênio pra gente respirar." },
+      { id: "entra", rotulo: "Entra", emoji: "⬇️", cor: "from-cyan-500 to-sky-700", rect: { x: 5, y: 20, w: 40, h: 70 }, descricao: "ÁGUA pela raiz, LUZ pelas folhas, AR também pelas folhas.", fotoUrl: mapaCam_u5_entraImg },
+      { id: "faz", rotulo: "Planta faz", emoji: "🌱", cor: "from-emerald-500 to-green-700", rect: { x: 50, y: 20, w: 45, h: 70 }, descricao: "Fabrica ALIMENTO (com sol + água) e solta oxigênio pra gente respirar.", fotoUrl: mapaCam_u5_produzImg },
     ],
     falaFinal: "Entra sol e água. Sai comida da planta + oxigênio pra gente. Que troca perfeita!",
   },

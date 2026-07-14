@@ -4,6 +4,8 @@ import jardimImg from "@/assets/ciencias-2ano/u4-a1/jardim-quintal.jpg";
 import borboletaImg from "@/assets/ciencias-2ano/u4-a1/borboleta-joaninha.jpg";
 import mapaCamu4_plantasImg from "@/assets/ciencias-2ano/mapa-camadas/u4-plantas.jpg";
 import mapaCamu4_animaisImg from "@/assets/ciencias-2ano/mapa-camadas/u4-animais.jpg";
+import mapaCam_u4_plantasImg from "@/assets/ciencias-2ano/mapa-camadas/u4-plantas.jpg";
+import mapaCam_u4_animaisImg from "@/assets/ciencias-2ano/mapa-camadas/u4-animais.jpg";
 
 /**
  * Ciências · 2º Ano · Unidade 4 · Aula 01
@@ -90,8 +92,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: jardimImg,
     camadas: [
-      { id: "plantas", rotulo: "Plantas", emoji: "🌿", cor: "from-emerald-500 to-green-700", rect: { x: 5, y: 30, w: 55, h: 65 }, descricao: "Árvore, flor, mato e trepadeira. Plantas ficam paradas e fazem o próprio alimento com o sol." },
-      { id: "animais", rotulo: "Animais", emoji: "🦋", cor: "from-orange-500 to-pink-700", rect: { x: 60, y: 20, w: 35, h: 70 }, descricao: "Borboleta, joaninha e passarinho. Animais se movem e procuram alimento." },
+      { id: "plantas", rotulo: "Plantas", emoji: "🌿", cor: "from-emerald-500 to-green-700", rect: { x: 5, y: 30, w: 55, h: 65 }, descricao: "Árvore, flor, mato e trepadeira. Plantas ficam paradas e fazem o próprio alimento com o sol.", fotoUrl: mapaCam_u4_plantasImg },
+      { id: "animais", rotulo: "Animais", emoji: "🦋", cor: "from-orange-500 to-pink-700", rect: { x: 60, y: 20, w: 35, h: 70 }, descricao: "Borboleta, joaninha e passarinho. Animais se movem e procuram alimento.", fotoUrl: mapaCam_u4_animaisImg },
     ],
     falaFinal: "Plantas + animais = um jardim vivo!",
   },
