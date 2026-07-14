@@ -8,6 +8,7 @@ import bacteriasFrame from "@/assets/ciencias-6ano/u1-a1/bacterias-frame.jpg";
 import reacaoFrame from "@/assets/ciencias-6ano/u1-a1/reacao-frame.jpg";
 import bacteriasVideo from "@/assets/ciencias-6ano/u1-a1/bacterias-vivas.mp4.asset.json";
 import reacaoVideo from "@/assets/ciencias-6ano/u1-a1/reacao-quimica.mp4.asset.json";
+import plantasVideo from "@/assets/ciencias-6ano/u1-a1/plantas-crescendo.mp4.asset.json";
 
 /**
  * Ciências · 6º Ano · Unidade 1 · Aula 01
