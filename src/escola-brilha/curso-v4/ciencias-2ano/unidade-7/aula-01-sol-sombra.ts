@@ -2,8 +2,6 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import panoramaImg from "@/assets/ciencias-2ano/u7-a1/panorama-sol-sombra.jpg";
 import superficiesImg from "@/assets/ciencias-2ano/u7-a1/superficies-sol.jpg";
-import mapaCamu7_luzImg from "@/assets/ciencias-2ano/mapa-camadas/u7-luz.jpg";
-import mapaCamu7_calorImg from "@/assets/ciencias-2ano/mapa-camadas/u7-calor.jpg";
 import mapaCam_u7_luzImg from "@/assets/ciencias-2ano/mapa-camadas/u7-luz.jpg";
 import mapaCam_u7_calorImg from "@/assets/ciencias-2ano/mapa-camadas/u7-calor.jpg";
 

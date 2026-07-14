@@ -7,8 +7,6 @@ import cauleImg from "@/assets/ciencias-2ano/u6-a1/caule-tronco.jpg";
 import folhasImg from "@/assets/ciencias-2ano/u6-a1/folhas-sol.jpg";
 import florImg from "@/assets/ciencias-2ano/u6-a1/flor-abelha.jpg";
 import frutoImg from "@/assets/ciencias-2ano/u6-a1/fruto-sementes.jpg";
-import mapaCamu6_raizImg from "@/assets/ciencias-2ano/mapa-camadas/u6-raiz.jpg";
-import mapaCamu6_cimaImg from "@/assets/ciencias-2ano/mapa-camadas/u6-cima.jpg";
 import mapaCam_u6_raizImg from "@/assets/ciencias-2ano/mapa-camadas/u6-raiz.jpg";
 import mapaCam_u6_cimaImg from "@/assets/ciencias-2ano/mapa-camadas/u6-cima.jpg";
 

@@ -2,8 +2,6 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import estufaImg from "@/assets/ciencias-2ano/u5-a1/estufa-plantas.jpg";
 import brotoImg from "@/assets/ciencias-2ano/u5-a1/broto-crescendo.jpg";
-import mapaCamu5_entraImg from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg";
-import mapaCamu5_produzImg from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg";
 import mapaCam_u5_entraImg from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg";
 import mapaCam_u5_produzImg from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg";
 

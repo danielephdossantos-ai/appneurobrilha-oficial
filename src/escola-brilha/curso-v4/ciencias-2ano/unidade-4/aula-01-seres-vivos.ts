@@ -2,8 +2,6 @@ import type { AulaGeoV1 } from "../../types";
 import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
 import jardimImg from "@/assets/ciencias-2ano/u4-a1/jardim-quintal.jpg";
 import borboletaImg from "@/assets/ciencias-2ano/u4-a1/borboleta-joaninha.jpg";
-import mapaCamu4_plantasImg from "@/assets/ciencias-2ano/mapa-camadas/u4-plantas.jpg";
-import mapaCamu4_animaisImg from "@/assets/ciencias-2ano/mapa-camadas/u4-animais.jpg";
 import mapaCam_u4_plantasImg from "@/assets/ciencias-2ano/mapa-camadas/u4-plantas.jpg";
 import mapaCam_u4_animaisImg from "@/assets/ciencias-2ano/mapa-camadas/u4-animais.jpg";
 
