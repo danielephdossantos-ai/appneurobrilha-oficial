@@ -842,42 +842,59 @@ function RealLife() {
 
 function MiniGameMatch() {
   const pool = VOCAB.slice(0, 4);
-  const [pairs, setPairs] = useState<Record<string, string>>({});
+  // pairs[enId] = { pt, correct } — só ficam travadas as corretas
+  const [pairs, setPairs] = useState<Record<string, { pt: string; correct: boolean }>>({});
   const [selEn, setSelEn] = useState<string | null>(null);
+  const [wrong, setWrong] = useState<{ en: string; pt: string } | null>(null);
   const shuffledPt = useMemo(() => shuffle(pool.map((p) => p.id)), []);
 
-  const done = Object.keys(pairs).length === pool.length;
+  const done = Object.values(pairs).filter((p) => p.correct).length === pool.length;
+
+  const onPickEn = (enId: string) => {
+    if (pairs[enId]?.correct) return;
+    setSelEn(enId);
+    const w = pool.find((p) => p.id === enId);
+    if (w) speakEnglish(w.en);
+  };
 
   const onPickPt = (ptId: string) => {
     if (!selEn) return;
-    setPairs((p) => ({ ...p, [selEn]: ptId }));
-    setSelEn(null);
-    if (selEn === ptId) speakEnglish("Perfect!");
+    const isCorrect = selEn === ptId;
+    if (isCorrect) {
+      setPairs((p) => ({ ...p, [selEn]: { pt: ptId, correct: true } }));
+      setSelEn(null);
+      setWrong(null);
+      speakEnglish("Perfect!");
+    } else {
+      setWrong({ en: selEn, pt: ptId });
+      setSelEn(null);
+      setTimeout(() => setWrong(null), 900);
+    }
   };
 
   return (
     <div>
       <div className="text-sm text-slate-600 mb-3">
-        Toque numa palavra em <b>inglês</b>, depois na tradução em <b>português</b>.
+        Toque numa palavra em <b>inglês</b> (ouça o som), depois na tradução em <b>português</b>. Errou? Tente de novo!
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           {pool.map((w) => {
-            const answered = pairs[w.id];
-            const correct = answered === w.id;
+            const solved = pairs[w.id]?.correct;
+            const isWrong = wrong?.en === w.id;
             return (
               <button
                 key={w.id}
-                disabled={!!answered}
-                onClick={() => setSelEn(w.id)}
+                disabled={solved}
+                onClick={() => onPickEn(w.id)}
                 className={`w-full py-3 rounded-lg font-bold border-2 transition ${
-                  answered
-                    ? correct
-                      ? "bg-emerald-500 text-white border-emerald-500"
-                      : "bg-rose-500 text-white border-rose-500"
-                    : selEn === w.id
-                      ? "bg-sky-500 text-white border-sky-500"
-                      : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
+                  solved
+                    ? "bg-emerald-500 text-white border-emerald-500"
+                    : isWrong
+                      ? "bg-rose-500 text-white border-rose-500 animate-pulse"
+                      : selEn === w.id
+                        ? "bg-sky-500 text-white border-sky-500"
+                        : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
                 }`}
               >
                 {w.en}
@@ -888,19 +905,19 @@ function MiniGameMatch() {
         <div className="space-y-2">
           {shuffledPt.map((id) => {
             const v = pool.find((p) => p.id === id)!;
-            const usedFor = Object.entries(pairs).find(([, iid]) => iid === id)?.[0];
-            const correct = usedFor === id;
+            const solved = pairs[id]?.correct; // resolvido quando o par en=pt certo foi feito
+            const isWrong = wrong?.pt === id;
             return (
               <button
                 key={id}
-                disabled={!!usedFor}
+                disabled={solved}
                 onClick={() => onPickPt(id)}
                 className={`w-full py-3 rounded-lg font-bold border-2 transition ${
-                  usedFor
-                    ? correct
-                      ? "bg-emerald-500 text-white border-emerald-500"
-                      : "bg-rose-500 text-white border-rose-500"
-                    : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
+                  solved
+                    ? "bg-emerald-500 text-white border-emerald-500"
+                    : isWrong
+                      ? "bg-rose-500 text-white border-rose-500 animate-pulse"
+                      : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
                 }`}
               >
                 {v.pt}
@@ -909,6 +926,11 @@ function MiniGameMatch() {
           })}
         </div>
       </div>
+      {wrong && (
+        <div className="mt-3 text-center text-sm font-bold text-rose-600">
+          Ops! Tente de novo 💪
+        </div>
+      )}
       {done && (
         <div className="mt-4 rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center text-emerald-700 font-black">
           <Sparkles className="inline mr-1" size={18} /> Você conectou tudo!
@@ -917,6 +939,7 @@ function MiniGameMatch() {
     </div>
   );
 }
+
 
 
 /* ============================ 10. Quiz ============================ */
