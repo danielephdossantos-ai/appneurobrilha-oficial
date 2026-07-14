@@ -5,6 +5,10 @@ import celulaVegetalImg from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg";
 import niveisImg from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg";
 import mitoseVideo from "@/assets/ciencias-7ano/u1-a1/mitose-celular.mp4.asset.json";
 import dnaImg from "@/assets/ciencias-8ano/u1/dna-helice.jpg";
+import mitocondriaImg from "@/assets/ciencias-8ano/u1/mitocondria.jpg";
+import organelasImg from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg";
+import cromossomosImg from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg";
+import teoriaCelularImg from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg";
 
 /**
  * Ciências · 8º Ano · U1 · A01 — "Laboratório de Biologia Celular"
