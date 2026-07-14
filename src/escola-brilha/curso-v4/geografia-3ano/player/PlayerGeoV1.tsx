@@ -548,14 +548,6 @@ function VotoExplorador({
                   {op.subtitulo && (
                     <div className="text-slate-400 text-xs mt-1 leading-snug">{op.subtitulo}</div>
                   )}
-                  {op.fotoUrl && (
-                    <img
-                      src={op.fotoUrl}
-                      alt=""
-                      loading="lazy"
-                      className="mt-3 w-full aspect-[16/9] object-cover rounded-md border border-slate-700"
-                    />
-                  )}
                 </>
               ) : (
                 <>
@@ -563,14 +555,6 @@ function VotoExplorador({
                   <div className="text-white font-black text-lg leading-tight">{op.titulo}</div>
                   {op.subtitulo && (
                     <div className="text-white/85 text-xs mt-1 font-medium">{op.subtitulo}</div>
-                  )}
-                  {op.fotoUrl && (
-                    <img
-                      src={op.fotoUrl}
-                      alt=""
-                      loading="lazy"
-                      className="mt-3 w-full aspect-[16/9] object-cover rounded-2xl border-2 border-white/25"
-                    />
                   )}
                 </>
               )}
