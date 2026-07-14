@@ -87,7 +87,7 @@ export const aula01: AulaGeoV1 = {
     aurora: "3 perguntas de compreensão.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Qual sistema RESPONDE MAIS RÁPIDO a um estímulo?", fotoUrl: cerebroImg,
+      { id: "q1", pergunta: "Qual sistema RESPONDE MAIS RÁPIDO a um estímulo?", fotoUrl: neuroniosImg,
         cards: [
           { id: "a", emoji: "⚡", titulo: "Sistema nervoso (milissegundos)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💧", titulo: "Sistema endócrino (minutos)", cor: "from-red-500 to-rose-700" },
@@ -95,7 +95,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Sim. Impulso nervoso viaja a até 120 m/s. Hormônio precisa circular pelo sangue.",
         feedbackErro: "Nervoso = ELÉTRICO (rápido). Endócrino = QUÍMICO pelo sangue (lento)." },
-      { id: "q2", pergunta: "Qual hormônio controla o AÇÚCAR no sangue?", fotoUrl: hormonalImg,
+      { id: "q2", pergunta: "Qual hormônio controla o AÇÚCAR no sangue?", fotoUrl: glandulasImg,
         cards: [
           { id: "a", emoji: "💉", titulo: "Insulina (pâncreas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎯", titulo: "Adrenalina", cor: "from-red-500 to-rose-700" },
@@ -103,7 +103,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Sim. Insulina baixa o açúcar; glucagon (também do pâncreas) sobe.",
         feedbackErro: "Adrenalina = luta/fuga. Melatonina = sono. Açúcar = INSULINA." },
-      { id: "q3", pergunta: "O que ATIVA a puberdade?", fotoUrl: hormonalImg,
+      { id: "q3", pergunta: "O que ATIVA a puberdade?", fotoUrl: adolescentesImg,
         cards: [
           { id: "a", emoji: "🎛️", titulo: "Hormônios da hipófise agindo em testículos/ovários", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍎", titulo: "Alimentação sozinha", cor: "from-red-500 to-rose-700" },
