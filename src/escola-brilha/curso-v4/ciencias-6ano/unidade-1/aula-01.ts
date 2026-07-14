@@ -19,6 +19,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-caderno-do-pesquisador",
   titulo: "Caderno do Pesquisador",
   iconeTrilha: "🔬",
+  recompensa: { xp: 120, moedas: 45, medalha: "Pesquisador Júnior" },
   bncc: ["EF06CI01"],
   duracaoMin: 35,
 
