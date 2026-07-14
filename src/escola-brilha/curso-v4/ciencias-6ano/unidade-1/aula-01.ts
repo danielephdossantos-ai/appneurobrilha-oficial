@@ -81,8 +81,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-indigo-500 to-purple-700",
         conteudo:
           "Resposta provisória e TESTÁVEL para a pergunta de pesquisa. Precisa poder ser refutada por um experimento.",
-        exemplo: "Ex.: 'Plantas expostas à luz crescem mais que plantas no escuro.'",
-        fotoUrl: cadernoImg,
+        exemplo: "Ex.: 'Plantas expostas à luz crescem mais que plantas no escuro.' — veja o crescimento acontecendo em tempo real.",
+        videoUrl: plantasVideo.url,
       },
       {
         id: "experimento",
