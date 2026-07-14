@@ -158,34 +158,49 @@ function Section({
   );
 }
 
-/** Botão de áudio em inglês (falante nativo). */
+/** Botão de áudio em inglês (falante nativo) + botão "devagar". */
 function PlayEn({ text, size = "md" }: { text: string; size?: "sm" | "md" }) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState<"normal" | "slow" | null>(null);
   const cls =
-    size === "sm"
-      ? "w-9 h-9 text-sm"
-      : "w-11 h-11 text-base";
+    size === "sm" ? "w-9 h-9 text-sm" : "w-11 h-11 text-base";
+  const play = async (mode: "normal" | "slow") => {
+    if (playing) {
+      stopSpeakingEn();
+      setPlaying(null);
+      return;
+    }
+    setPlaying(mode);
+    await speakEnglish(text, {
+      rate: mode === "slow" ? 0.55 : 0.9,
+      onEnd: () => setPlaying(null),
+    });
+  };
   return (
-    <button
-      onClick={async () => {
-        if (playing) {
-          stopSpeakingEn();
-          setPlaying(false);
-          return;
-        }
-        setPlaying(true);
-        await speakEnglish(text, { onEnd: () => setPlaying(false) });
-      }}
-      className={`${cls} rounded-full grid place-items-center shrink-0 transition ${
-        playing ? "bg-rose-500 text-white" : "bg-sky-500 text-white hover:bg-sky-600"
-      }`}
-      aria-label={playing ? "Parar" : "Ouvir em inglês"}
-      title="Ouvir em inglês"
-    >
-      <Volume2 size={size === "sm" ? 16 : 20} />
-    </button>
+    <div className="flex items-center gap-1.5 shrink-0">
+      <button
+        onClick={() => play("normal")}
+        className={`${cls} rounded-full grid place-items-center transition ${
+          playing === "normal" ? "bg-rose-500 text-white" : "bg-sky-500 text-white hover:bg-sky-600"
+        }`}
+        aria-label={playing === "normal" ? "Parar" : "Ouvir em inglês"}
+        title="Ouvir em inglês (normal)"
+      >
+        <Volume2 size={size === "sm" ? 16 : 20} />
+      </button>
+      <button
+        onClick={() => play("slow")}
+        className={`${cls} rounded-full grid place-items-center transition text-lg ${
+          playing === "slow" ? "bg-rose-500 text-white" : "bg-amber-400 text-white hover:bg-amber-500"
+        }`}
+        aria-label={playing === "slow" ? "Parar" : "Ouvir devagar"}
+        title="Ouvir devagar 🐢"
+      >
+        🐢
+      </button>
+    </div>
   );
 }
+
 
 /** Botão de narração em português (Aurora explica). */
 function PlayPt({ text }: { text: string }) {
@@ -868,8 +883,9 @@ function MiniGameMatch() {
     } else {
       setWrong({ en: selEn, pt: ptId });
       setSelEn(null);
-      setTimeout(() => setWrong(null), 900);
+      setTimeout(() => setWrong(null), 3500);
     }
+
   };
 
   return (
@@ -926,11 +942,23 @@ function MiniGameMatch() {
           })}
         </div>
       </div>
-      {wrong && (
-        <div className="mt-3 text-center text-sm font-bold text-rose-600">
-          Ops! Tente de novo 💪
-        </div>
-      )}
+      {wrong && (() => {
+        const wEn = pool.find((p) => p.id === wrong.en)!;
+        const wPt = pool.find((p) => p.id === wrong.pt)!;
+        return (
+          <div className="mt-3 rounded-xl bg-rose-50 border-2 border-rose-200 p-3 text-sm text-rose-800">
+            <div className="font-black mb-1">Ops! Ainda não é essa 💪</div>
+            <div>
+              <b>{wEn.en}</b> em português é <b>“{wEn.pt}”</b>.
+            </div>
+            <div className="text-rose-700/80 mt-0.5">
+              <b>“{wPt.pt}”</b> é a tradução de <b>{wPt.en}</b>.
+            </div>
+            <div className="mt-1 text-xs text-rose-600">Toque de novo em <b>{wEn.en}</b> e escolha a resposta certa.</div>
+          </div>
+        );
+      })()}
+
       {done && (
         <div className="mt-4 rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center text-emerald-700 font-black">
           <Sparkles className="inline mr-1" size={18} /> Você conectou tudo!
