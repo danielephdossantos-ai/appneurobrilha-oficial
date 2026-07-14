@@ -844,21 +844,21 @@ function MiniGameMatch() {
   const pool = VOCAB.slice(0, 4);
   const [pairs, setPairs] = useState<Record<string, string>>({});
   const [selEn, setSelEn] = useState<string | null>(null);
-  const shuffledImages = useMemo(() => shuffle(pool.map((p) => p.id)), []);
+  const shuffledPt = useMemo(() => shuffle(pool.map((p) => p.id)), []);
 
   const done = Object.keys(pairs).length === pool.length;
 
-  const onPickImg = (imgId: string) => {
+  const onPickPt = (ptId: string) => {
     if (!selEn) return;
-    setPairs((p) => ({ ...p, [selEn]: imgId }));
+    setPairs((p) => ({ ...p, [selEn]: ptId }));
     setSelEn(null);
-    if (selEn === imgId) speakEnglish("Perfect!");
+    if (selEn === ptId) speakEnglish("Perfect!");
   };
 
   return (
     <div>
       <div className="text-sm text-slate-600 mb-3">
-        Toque numa <b>palavra</b>, depois na <b>imagem</b> certa.
+        Toque numa palavra em <b>inglês</b>, depois na tradução em <b>português</b>.
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
@@ -870,7 +870,7 @@ function MiniGameMatch() {
                 key={w.id}
                 disabled={!!answered}
                 onClick={() => setSelEn(w.id)}
-                className={`w-full py-2 rounded-lg font-bold border-2 transition ${
+                className={`w-full py-3 rounded-lg font-bold border-2 transition ${
                   answered
                     ? correct
                       ? "bg-emerald-500 text-white border-emerald-500"
@@ -886,23 +886,24 @@ function MiniGameMatch() {
           })}
         </div>
         <div className="space-y-2">
-          {shuffledImages.map((id) => {
+          {shuffledPt.map((id) => {
             const v = pool.find((p) => p.id === id)!;
             const usedFor = Object.entries(pairs).find(([, iid]) => iid === id)?.[0];
+            const correct = usedFor === id;
             return (
               <button
                 key={id}
                 disabled={!!usedFor}
-                onClick={() => onPickImg(id)}
-                className={`w-full rounded-lg border-2 transition ${
+                onClick={() => onPickPt(id)}
+                className={`w-full py-3 rounded-lg font-bold border-2 transition ${
                   usedFor
-                    ? usedFor === id
-                      ? "border-emerald-500 bg-emerald-50"
-                      : "border-rose-500 bg-rose-50"
-                    : "border-slate-200 hover:border-sky-300 bg-white"
+                    ? correct
+                      ? "bg-emerald-500 text-white border-emerald-500"
+                      : "bg-rose-500 text-white border-rose-500"
+                    : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
                 }`}
               >
-                <img src={v.img} alt="" className="w-full h-16 object-contain" />
+                {v.pt}
               </button>
             );
           })}
@@ -916,6 +917,7 @@ function MiniGameMatch() {
     </div>
   );
 }
+
 
 /* ============================ 10. Quiz ============================ */
 
