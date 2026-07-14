@@ -1058,6 +1058,3 @@ function shuffle<T>(arr: T[]): T[] {
   }
   return a;
 }
-
-// Ensure React import for useMemo below
-import { useMemo } from "react";
