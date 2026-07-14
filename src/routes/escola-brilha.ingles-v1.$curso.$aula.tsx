@@ -1,10 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { PlayerEnglishV1 } from "@/escola-brilha/ingles-1ano/PlayerEnglishV1";
-import { getLesson } from "@/escola-brilha/ingles-1ano/lessons";
+import { getLessonByCursoAula } from "@/escola-brilha/ingles-lessons-index";
+const getLesson = (aula: string, curso?: string) =>
+  getLessonByCursoAula(curso ?? "ingles-1ano", aula);
 
 export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
   head: ({ params }) => {
-    const lesson = getLesson(params.aula);
+    const lesson = getLesson(params.aula, params.curso);
     const title = lesson?.meta.unitLabel ?? `English · ${params.aula}`;
     return {
       meta: [
@@ -22,8 +24,8 @@ export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
 
 function IngV1Page() {
   const navigate = useNavigate();
-  const { aula } = Route.useParams();
-  const lesson = getLesson(aula);
+  const { aula, curso } = Route.useParams();
+  const lesson = getLesson(aula, curso);
   const sair = () => navigate({ to: "/" });
   const concluir = () => navigate({ to: "/" });
   if (!lesson) {
