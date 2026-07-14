@@ -1,29 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Volume2, Mic, MicOff, Check, X, Sparkles, PartyPopper } from "lucide-react";
 import { speakEnglish, stopSpeakingEn, warmupEnVoices } from "@/lib/native-tts-en";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
-import {
-  VOCAB,
-  STORY,
-  DIALOG,
-  READING,
-  WRITING,
-  QUIZ,
-  REAL_LIFE,
-  GRAMMAR,
-} from "./u1-a01-hello/data";
+import type { LessonData, Vocab } from "./types";
+import defaultLesson from "./u1-a01-hello/data";
 
-type Props = { onSair: () => void; onConcluir: () => void };
+type Props = { onSair: () => void; onConcluir: () => void; lesson?: LessonData };
+
+const LessonCtx = createContext<LessonData>(defaultLesson);
+const useLesson = () => useContext(LessonCtx);
 
 /**
- * PlayerEnglishV1 — engine dedicada de Inglês (piloto).
- * Renderiza os 11 momentos obrigatórios do curso de idiomas em scroll
- * contínuo. Cada seção tem TTS (falante nativo), narração em pt-BR
- * opcional, e componentes específicos (SpeakingMic, WordCardSPEB,
- * ListeningDialog, GrammarWhy, RealLifeScenarios, MiniGameMatch).
+ * PlayerEnglishV1 — engine dedicada de Inglês.
+ * Renderiza os 11 momentos obrigatórios em scroll contínuo, consumindo
+ * `LessonData` via contexto (permite múltiplas aulas usando o mesmo player).
  */
-export function PlayerEnglishV1({ onSair, onConcluir }: Props) {
+export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: Props) {
   useEffect(() => {
     warmupEnVoices();
     return () => {
@@ -33,63 +26,71 @@ export function PlayerEnglishV1({ onSair, onConcluir }: Props) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-[#0d1f55]/80 border-b border-white/10">
-        <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
-          <button
-            onClick={onSair}
-            className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
-          >
-            <ArrowLeft size={18} /> Sair
-          </button>
-          <div className="text-center">
-            <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
-              My First English Adventure
+    <LessonCtx.Provider value={lesson}>
+      <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white">
+        <header className="sticky top-0 z-40 backdrop-blur bg-[#0d1f55]/80 border-b border-white/10">
+          <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
+            <button
+              onClick={onSair}
+              className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
+            >
+              <ArrowLeft size={18} /> Sair
+            </button>
+            <div className="text-center">
+              <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
+                {lesson.meta.headerKicker}
+              </div>
+              <div className="text-sm font-black text-white">{lesson.meta.unitLabel}</div>
             </div>
-            <div className="text-sm font-black text-white">Unit 1 · Lesson 1 — Hello!</div>
+            <div className="w-14" />
           </div>
-          <div className="w-14" />
-        </div>
-      </header>
+        </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
-        <SectionCover onStart={() => scrollToId("s1")} />
-        <Section id="s1" step={1} label="História inicial" title="Meet Lily!">
-          <Story />
-        </Section>
-        <Section id="s2" step={2} label="Vocabulário novo" title="New words">
-          <Vocabulary />
-        </Section>
-        <Section id="s3" step={3} label="Speaking" title="Now you speak!">
-          <SpeakingMic />
-        </Section>
-        <Section id="s4" step={4} label="Listening" title="Listen carefully">
-          <ListeningDialog />
-        </Section>
-        <Section id="s5" step={5} label="Reading" title={READING.title}>
-          <Reading />
-        </Section>
-        <Section id="s6" step={6} label="Writing" title="Complete the sentence">
-          <Writing />
-        </Section>
-        <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
-          <GrammarWhy />
-        </Section>
-        <Section id="s8" step={8} label="Real Life" title="In real life">
-          <RealLife />
-        </Section>
-        <Section id="s9" step={9} label="Mini Game" title="Match the word!">
-          <MiniGameMatch />
-        </Section>
-        <Section id="s10" step={10} label="Quiz" title="Quick check">
-          <Quiz />
-        </Section>
-        <Section id="s11" step={11} label="Projeto" title="Introduce yourself!">
-          <FinalProject onFinish={onConcluir} />
-        </Section>
-      </main>
-    </div>
+        <MainSections onConcluir={onConcluir} />
+      </div>
+    </LessonCtx.Provider>
+  );
+}
+
+function MainSections({ onConcluir }: { onConcluir: () => void }) {
+  const { meta, READING, GRAMMAR } = useLesson();
+  return (
+    <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
+      <SectionCover onStart={() => scrollToId("s1")} />
+      <Section id="s1" step={1} label="História inicial" title={meta.storyTitle}>
+        <Story />
+      </Section>
+      <Section id="s2" step={2} label="Vocabulário novo" title={meta.vocabularyTitle}>
+        <Vocabulary />
+      </Section>
+      <Section id="s3" step={3} label="Speaking" title="Now you speak!">
+        <SpeakingMic />
+      </Section>
+      <Section id="s4" step={4} label="Listening" title="Listen carefully">
+        <ListeningDialog />
+      </Section>
+      <Section id="s5" step={5} label="Reading" title={READING.title}>
+        <Reading />
+      </Section>
+      <Section id="s6" step={6} label="Writing" title="Complete the sentence">
+        <Writing />
+      </Section>
+      <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
+        <GrammarWhy />
+      </Section>
+      <Section id="s8" step={8} label="Real Life" title="In real life">
+        <RealLife />
+      </Section>
+      <Section id="s9" step={9} label="Mini Game" title="Match the word!">
+        <MiniGameMatch />
+      </Section>
+      <Section id="s10" step={10} label="Quiz" title="Quick check">
+        <Quiz />
+      </Section>
+      <Section id="s11" step={11} label="Projeto" title={meta.finalProjectSectionTitle}>
+        <FinalProject onFinish={onConcluir} />
+      </Section>
+    </main>
   );
 }
 
