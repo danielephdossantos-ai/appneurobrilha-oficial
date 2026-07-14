@@ -129,7 +129,7 @@ function TrilhaIngles() {
                     onClick={() =>
                       navigate({
                         to: "/escola-brilha/ingles-v1/$curso/$aula",
-                        params: { curso: "ingles-1ano", aula: l.slug },
+                        params: { curso: `ingles-${serie}`, aula: l.slug },
                       })
                     }
                     className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
