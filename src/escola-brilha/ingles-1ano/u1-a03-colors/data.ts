@@ -190,6 +190,177 @@ const lesson: LessonData = {
       },
     ],
   },
+
+  // 🎵 Música
+  SONG: {
+    title: "The Rainbow Song",
+    hookPt: "Ouça e cante junto! Cada verso mostra uma cor.",
+    verses: [
+      { en: "Red, red, look around!", pt: "Vermelho, vermelho, olhe em volta!", emoji: "🍎" },
+      { en: "Red is everywhere in town!", pt: "Vermelho está em toda a cidade!", emoji: "🚒" },
+      { en: "Blue, blue, in the sky!", pt: "Azul, azul, no céu!", emoji: "☁️" },
+      { en: "Wave your hands way up high!", pt: "Balance as mãos bem alto!", emoji: "🙌" },
+      { en: "Yellow sun, so bright and warm!", pt: "Sol amarelo, brilhante e quente!", emoji: "☀️" },
+      { en: "Green like grass on my farm!", pt: "Verde como a grama da fazenda!", emoji: "🌳" },
+      { en: "Orange, purple, black and white!", pt: "Laranja, roxo, preto e branco!", emoji: "🌈" },
+      { en: "Colors make the world so bright!", pt: "Cores deixam o mundo brilhante!", emoji: "✨" },
+    ],
+  },
+
+  // 🎮 Color Hunter
+  HUNTER: {
+    intro: 'A voz vai pedir uma cor. Toque no objeto que combina!',
+    rounds: [
+      {
+        promptEn: "Find something BLUE.",
+        promptPt: "Encontre algo AZUL.",
+        targetLabel: "BLUE",
+        objects: [
+          { id: "sky", label: "sky", img: BLUE, isTarget: true },
+          { id: "apple", label: "apple", img: RED },
+          { id: "sun", label: "sun", img: YELLOW },
+        ],
+      },
+      {
+        promptEn: "Find something RED.",
+        promptPt: "Encontre algo VERMELHO.",
+        targetLabel: "RED",
+        objects: [
+          { id: "tree", label: "tree", img: GREEN },
+          { id: "apple", label: "apple", img: RED, isTarget: true },
+          { id: "cat", label: "cat", img: BLACK },
+        ],
+      },
+      {
+        promptEn: "Find something YELLOW.",
+        promptPt: "Encontre algo AMARELO.",
+        targetLabel: "YELLOW",
+        objects: [
+          { id: "flower", label: "flower", img: PURPLE },
+          { id: "cloud", label: "cloud", img: WHITE },
+          { id: "sun", label: "sun", img: YELLOW, isTarget: true },
+        ],
+      },
+      {
+        promptEn: "Find something GREEN.",
+        promptPt: "Encontre algo VERDE.",
+        targetLabel: "GREEN",
+        objects: [
+          { id: "tree", label: "tree", img: GREEN, isTarget: true },
+          { id: "fish", label: "fish", img: ORANGE },
+          { id: "sky", label: "sky", img: BLUE },
+        ],
+      },
+      {
+        promptEn: "Find something BLACK.",
+        promptPt: "Encontre algo PRETO.",
+        targetLabel: "BLACK",
+        objects: [
+          { id: "cloud", label: "cloud", img: WHITE },
+          { id: "cat", label: "cat", img: BLACK, isTarget: true },
+          { id: "banana", label: "banana", img: BANANA },
+        ],
+      },
+    ],
+  },
+
+  // 🎨 Paint the Picture
+  PAINT: {
+    intro: "A voz vai dizer qual cor usar. Toque na cor certa pra pintar o desenho!",
+    rounds: [
+      {
+        promptEn: "Paint the sun YELLOW.",
+        promptPt: "Pinte o sol de AMARELO.",
+        outlineEmoji: "☀️",
+        correctHex: "#fde047",
+        options: [
+          { name: "Yellow", en: "Yellow", hex: "#fde047" },
+          { name: "Blue", en: "Blue", hex: "#2563eb" },
+          { name: "Red", en: "Red", hex: "#dc2626" },
+          { name: "Green", en: "Green", hex: "#16a34a" },
+        ],
+      },
+      {
+        promptEn: "Paint the apple RED.",
+        promptPt: "Pinte a maçã de VERMELHO.",
+        outlineEmoji: "🍎",
+        correctHex: "#dc2626",
+        options: [
+          { name: "Purple", en: "Purple", hex: "#7c3aed" },
+          { name: "Red", en: "Red", hex: "#dc2626" },
+          { name: "Orange", en: "Orange", hex: "#f97316" },
+          { name: "Black", en: "Black", hex: "#111827" },
+        ],
+      },
+      {
+        promptEn: "Paint the tree GREEN.",
+        promptPt: "Pinte a árvore de VERDE.",
+        outlineEmoji: "🌳",
+        correctHex: "#16a34a",
+        options: [
+          { name: "Green", en: "Green", hex: "#16a34a" },
+          { name: "Yellow", en: "Yellow", hex: "#fde047" },
+          { name: "Blue", en: "Blue", hex: "#2563eb" },
+          { name: "Purple", en: "Purple", hex: "#7c3aed" },
+        ],
+      },
+      {
+        promptEn: "Paint the cloud WHITE.",
+        promptPt: "Pinte a nuvem de BRANCA.",
+        outlineEmoji: "☁️",
+        correctHex: "#ffffff",
+        options: [
+          { name: "Black", en: "Black", hex: "#111827" },
+          { name: "White", en: "White", hex: "#ffffff" },
+          { name: "Orange", en: "Orange", hex: "#f97316" },
+          { name: "Red", en: "Red", hex: "#dc2626" },
+        ],
+      },
+    ],
+  },
+
+  // 🧠 Memory Game — 4 pares (8 cartas)
+  MEMORY: {
+    intro: "Vire as cartas de duas em duas. Encontre a palavra e o objeto da mesma cor.",
+    pairs: [
+      { id: "red", en: "Red", pt: "Vermelho", img: RED },
+      { id: "blue", en: "Blue", pt: "Azul", img: BLUE },
+      { id: "yellow", en: "Yellow", pt: "Amarelo", img: YELLOW },
+      { id: "green", en: "Green", pt: "Verde", img: GREEN },
+    ],
+  },
+
+  // 🏠 Quarto virtual — 8 cores escondidas
+  VIRTUAL_ROOM: {
+    intro: "Explore o quarto colorido da Lily. Toque em cada coisa quando encontrar!",
+    img: roomImg,
+    items: [
+      { en: "Red apple", pt: "maçã vermelha", emoji: "🍎" },
+      { en: "Blue ball", pt: "bola azul", emoji: "🔵" },
+      { en: "Yellow duck", pt: "patinho amarelo", emoji: "🦆" },
+      { en: "Green frog", pt: "sapo verde", emoji: "🐸" },
+      { en: "Orange fish", pt: "peixe laranja", emoji: "🐠" },
+      { en: "Purple flower", pt: "flor roxa", emoji: "🌸" },
+      { en: "Black cat", pt: "gato preto", emoji: "🐈\u200d⬛" },
+      { en: "White cloud", pt: "nuvem branca", emoji: "☁️" },
+    ],
+  },
+
+  // 📖 My Color Book — livrinho página por página
+  BOOK: {
+    title: "My Color Book",
+    intro: "Este é o SEU livrinho de cores! Passe página por página.",
+    pages: [
+      { en: "Red apple 🍎", pt: "Maçã vermelha", img: RED, badge: "Page 1" },
+      { en: "Blue sky ☁️", pt: "Céu azul", img: BLUE, badge: "Page 2" },
+      { en: "Yellow sun ☀️", pt: "Sol amarelo", img: YELLOW, badge: "Page 3" },
+      { en: "Green tree 🌳", pt: "Árvore verde", img: GREEN, badge: "Page 4" },
+      { en: "Orange fish 🐠", pt: "Peixe laranja", img: ORANGE, badge: "Page 5" },
+      { en: "Purple flower 🌸", pt: "Flor roxa", img: PURPLE, badge: "Page 6" },
+      { en: "Black cat 🐈\u200d⬛", pt: "Gato preto", img: BLACK, badge: "Page 7" },
+      { en: "White cloud ☁️", pt: "Nuvem branca", img: WHITE, badge: "Page 8" },
+    ],
+  },
 };
 
 export default lesson;

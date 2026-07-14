@@ -53,43 +53,42 @@ export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: 
 }
 
 function MainSections({ onConcluir }: { onConcluir: () => void }) {
-  const { meta, READING, GRAMMAR } = useLesson();
+  const lesson = useLesson();
+  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK } = lesson;
+
+  // Monta lista de seções na ordem certa, pulando as opcionais ausentes.
+  const sections: { label: string; title: string; node: React.ReactNode }[] = [
+    { label: "História inicial", title: meta.storyTitle, node: <Story /> },
+    { label: "Vocabulário novo", title: meta.vocabularyTitle, node: <Vocabulary /> },
+    { label: "Speaking", title: "Now you speak!", node: <SpeakingMic /> },
+    { label: "Listening", title: "Listen carefully", node: <ListeningDialog /> },
+    { label: "Reading", title: READING.title, node: <Reading /> },
+    { label: "Writing", title: "Complete the sentence", node: <Writing /> },
+    { label: "Grammar", title: GRAMMAR.focus, node: <GrammarWhy /> },
+    { label: "Real Life", title: "In real life", node: <RealLife /> },
+  ];
+  if (SONG) sections.push({ label: "Song", title: SONG.title, node: <Song /> });
+  if (HUNTER) sections.push({ label: "Mini Game", title: "Color / Object Hunter", node: <Hunter /> });
+  if (PAINT) sections.push({ label: "Mini Game", title: "Paint the Picture", node: <Paint /> });
+  if (MEMORY) sections.push({ label: "Mini Game", title: "Memory Game", node: <Memory /> });
+  sections.push({ label: "Mini Game", title: "Match the word!", node: <MiniGameMatch /> });
+  sections.push({ label: "Quiz", title: "Quick check", node: <Quiz /> });
+  if (BOOK) sections.push({ label: "Livrinho", title: BOOK.title, node: <Book /> });
+  if (VIRTUAL_ROOM) sections.push({ label: "Missão", title: "Explore the room!", node: <VirtualRoom /> });
+  sections.push({
+    label: "Projeto",
+    title: meta.finalProjectSectionTitle,
+    node: <FinalProject onFinish={onConcluir} />,
+  });
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
       <SectionCover onStart={() => scrollToId("s1")} />
-      <Section id="s1" step={1} label="História inicial" title={meta.storyTitle}>
-        <Story />
-      </Section>
-      <Section id="s2" step={2} label="Vocabulário novo" title={meta.vocabularyTitle}>
-        <Vocabulary />
-      </Section>
-      <Section id="s3" step={3} label="Speaking" title="Now you speak!">
-        <SpeakingMic />
-      </Section>
-      <Section id="s4" step={4} label="Listening" title="Listen carefully">
-        <ListeningDialog />
-      </Section>
-      <Section id="s5" step={5} label="Reading" title={READING.title}>
-        <Reading />
-      </Section>
-      <Section id="s6" step={6} label="Writing" title="Complete the sentence">
-        <Writing />
-      </Section>
-      <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
-        <GrammarWhy />
-      </Section>
-      <Section id="s8" step={8} label="Real Life" title="In real life">
-        <RealLife />
-      </Section>
-      <Section id="s9" step={9} label="Mini Game" title="Match the word!">
-        <MiniGameMatch />
-      </Section>
-      <Section id="s10" step={10} label="Quiz" title="Quick check">
-        <Quiz />
-      </Section>
-      <Section id="s11" step={11} label="Projeto" title={meta.finalProjectSectionTitle}>
-        <FinalProject onFinish={onConcluir} />
-      </Section>
+      {sections.map((s, i) => (
+        <Section key={i} id={`s${i + 1}`} step={i + 1} label={s.label} title={s.title}>
+          {s.node}
+        </Section>
+      ))}
     </main>
   );
 }
@@ -1124,3 +1123,437 @@ function shuffle<T>(arr: T[]): T[] {
   }
   return a;
 }
+
+/* ============================ 🎵 Song ============================ */
+
+function Song() {
+  const { SONG } = useLesson();
+  const [playing, setPlaying] = useState(false);
+  const [current, setCurrent] = useState<number | null>(null);
+  if (!SONG) return null;
+
+  const playAll = async () => {
+    setPlaying(true);
+    for (let i = 0; i < SONG.verses.length; i++) {
+      setCurrent(i);
+      // eslint-disable-next-line no-await-in-loop
+      await speakEnglish(SONG.verses[i].en, { queue: false });
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((r) => setTimeout(r, 200));
+    }
+    setCurrent(null);
+    setPlaying(false);
+  };
+
+  return (
+    <div>
+      {SONG.hookPt && <div className="text-sm text-slate-600 mb-3">{SONG.hookPt}</div>}
+      <button
+        onClick={playing ? () => { stopSpeakingEn(); setPlaying(false); setCurrent(null); } : playAll}
+        className={`w-full py-3 rounded-xl font-black text-white flex items-center justify-center gap-2 transition ${
+          playing ? "bg-rose-500" : "bg-gradient-to-r from-pink-500 to-purple-500"
+        }`}
+      >
+        <Volume2 size={18} /> {playing ? "Pausar música" : "▶ Play song"}
+      </button>
+      <div className="mt-4 space-y-2">
+        {SONG.verses.map((v, i) => (
+          <div
+            key={i}
+            className={`flex items-center gap-3 rounded-xl p-3 transition ${
+              current === i ? "bg-amber-100 border-2 border-amber-400 scale-[1.02]" : "bg-slate-50"
+            }`}
+          >
+            <div className="text-3xl">{v.emoji ?? "🎵"}</div>
+            <div className="flex-1">
+              <div className="font-black text-slate-800">{v.en}</div>
+              <div className="text-xs italic text-slate-500">{v.pt}</div>
+            </div>
+            <PlayEn text={v.en} size="sm" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================ 🎮 Hunter (Color/Object) ============================ */
+
+function Hunter() {
+  const { HUNTER } = useLesson();
+  const [i, setI] = useState(0);
+  const [picks, setPicks] = useState<Record<number, string | null>>({});
+  if (!HUNTER) return null;
+  const round = HUNTER.rounds[i];
+  const pick = picks[i] ?? null;
+  const chosen = round.objects.find((o) => o.id === pick);
+  const correct = chosen?.isTarget === true;
+
+  useEffect(() => {
+    const t = setTimeout(() => speakEnglish(round.promptEn), 250);
+    return () => clearTimeout(t);
+  }, [i, round.promptEn]);
+
+  return (
+    <div>
+      {HUNTER.intro && <div className="text-sm text-slate-600 mb-3">{HUNTER.intro}</div>}
+      <div className="rounded-xl bg-gradient-to-br from-emerald-50 to-sky-50 p-4">
+        <div className="flex items-center gap-2">
+          <PlayEn text={round.promptEn} size="sm" />
+          <div>
+            <div className="text-lg font-black text-slate-800">{round.promptEn}</div>
+            <div className="text-xs italic text-slate-500">{round.promptPt}</div>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2 mt-3">
+        {round.objects.map((o) => {
+          const isPicked = pick === o.id;
+          const showResult = isPicked;
+          return (
+            <button
+              key={o.id}
+              disabled={pick !== null && correct}
+              onClick={() => {
+                setPicks((p) => ({ ...p, [i]: o.id }));
+                if (o.isTarget) speakEnglish("Great job!");
+              }}
+              className={`aspect-square rounded-xl border-2 p-2 grid place-items-center transition ${
+                showResult
+                  ? o.isTarget
+                    ? "bg-emerald-500 border-emerald-500"
+                    : "bg-rose-500 border-rose-500 animate-pulse"
+                  : "bg-white border-slate-200 hover:border-sky-300"
+              }`}
+            >
+              <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
+            </button>
+          );
+        })}
+      </div>
+      {pick && !correct && (
+        <div className="mt-3 rounded-lg bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">
+          Ops! Escute de novo: <b>{round.promptEn}</b>. Tenta outro.
+        </div>
+      )}
+      {pick && correct && (
+        <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-emerald-700 font-black">
+          ⭐ Perfect! You found it!
+        </div>
+      )}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setI((v) => Math.max(0, v - 1))}
+          disabled={i === 0}
+          className="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold disabled:opacity-40"
+        >
+          ← Voltar
+        </button>
+        <div className="text-xs text-slate-500 font-bold">
+          {i + 1} / {HUNTER.rounds.length}
+        </div>
+        <button
+          onClick={() => setI((v) => Math.min(HUNTER.rounds.length - 1, v + 1))}
+          disabled={i === HUNTER.rounds.length - 1 || !correct}
+          className="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-bold disabled:opacity-40"
+        >
+          Próxima →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ 🎨 Paint the Picture ============================ */
+
+function Paint() {
+  const { PAINT } = useLesson();
+  const [i, setI] = useState(0);
+  const [picked, setPicked] = useState<Record<number, string | null>>({});
+  if (!PAINT) return null;
+  const round = PAINT.rounds[i];
+  const pick = picked[i] ?? null;
+  const filled = pick === round.correctHex;
+
+  useEffect(() => {
+    const t = setTimeout(() => speakEnglish(round.promptEn), 250);
+    return () => clearTimeout(t);
+  }, [i, round.promptEn]);
+
+  return (
+    <div>
+      {PAINT.intro && <div className="text-sm text-slate-600 mb-3">{PAINT.intro}</div>}
+      <div className="rounded-xl bg-slate-50 p-4 flex items-center gap-3">
+        <PlayEn text={round.promptEn} size="sm" />
+        <div>
+          <div className="text-lg font-black text-slate-800">{round.promptEn}</div>
+          <div className="text-xs italic text-slate-500">{round.promptPt}</div>
+        </div>
+      </div>
+      <div className="mt-4 aspect-video rounded-2xl grid place-items-center overflow-hidden transition-colors"
+        style={{ background: pick ?? "#f1f5f9" }}
+      >
+        <div className="text-9xl drop-shadow-lg" style={{ filter: filled ? "none" : "grayscale(1) opacity(0.5)" }}>
+          {round.outlineEmoji}
+        </div>
+      </div>
+      <div className="grid grid-cols-4 gap-2 mt-4">
+        {round.options.map((c) => (
+          <button
+            key={c.hex}
+            onClick={() => {
+              setPicked((p) => ({ ...p, [i]: c.hex }));
+              speakEnglish(c.en);
+            }}
+            className={`aspect-square rounded-xl border-4 transition ${
+              pick === c.hex ? (filled ? "border-emerald-500 scale-110" : "border-rose-500") : "border-white shadow"
+            }`}
+            style={{ background: c.hex }}
+            aria-label={c.name}
+          />
+        ))}
+      </div>
+      {pick && !filled && (
+        <div className="mt-3 text-sm text-rose-700 font-bold">
+          ✘ Essa não é. Escute: {round.promptEn}
+        </div>
+      )}
+      {filled && (
+        <div className="mt-3 text-emerald-700 font-black">⭐ Perfect painting!</div>
+      )}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setI((v) => Math.max(0, v - 1))}
+          disabled={i === 0}
+          className="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold disabled:opacity-40"
+        >
+          ← Voltar
+        </button>
+        <div className="text-xs text-slate-500 font-bold">
+          {i + 1} / {PAINT.rounds.length}
+        </div>
+        <button
+          onClick={() => setI((v) => Math.min(PAINT.rounds.length - 1, v + 1))}
+          disabled={i === PAINT.rounds.length - 1 || !filled}
+          className="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-bold disabled:opacity-40"
+        >
+          Próxima →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ 🧠 Memory ============================ */
+
+function Memory() {
+  const { MEMORY } = useLesson();
+  // 2 cartas por par: uma "en" e uma "img"
+  type Card = { key: string; pairId: string; kind: "en" | "img"; en: string; pt: string; img: string };
+  const initialCards: Card[] = useMemo(() => {
+    if (!MEMORY) return [];
+    const cards: Card[] = [];
+    for (const p of MEMORY.pairs) {
+      cards.push({ key: `${p.id}-en`, pairId: p.id, kind: "en", en: p.en, pt: p.pt, img: p.img });
+      cards.push({ key: `${p.id}-img`, pairId: p.id, kind: "img", en: p.en, pt: p.pt, img: p.img });
+    }
+    return shuffle(cards);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [MEMORY?.pairs.length]);
+
+  const [flipped, setFlipped] = useState<string[]>([]);
+  const [matched, setMatched] = useState<Set<string>>(new Set());
+  const [locked, setLocked] = useState(false);
+
+  if (!MEMORY) return null;
+
+  const flip = (key: string) => {
+    if (locked) return;
+    if (flipped.includes(key)) return;
+    if (matched.has(key)) return;
+    const nextFlipped = [...flipped, key];
+    setFlipped(nextFlipped);
+    if (nextFlipped.length === 2) {
+      const [a, b] = nextFlipped.map((k) => initialCards.find((c) => c.key === k)!);
+      if (a.pairId === b.pairId && a.kind !== b.kind) {
+        setMatched((m) => new Set([...m, a.key, b.key]));
+        setFlipped([]);
+        speakEnglish(a.en);
+      } else {
+        setLocked(true);
+        setTimeout(() => {
+          setFlipped([]);
+          setLocked(false);
+        }, 900);
+      }
+    } else if (nextFlipped.length === 1) {
+      const c = initialCards.find((x) => x.key === key)!;
+      if (c.kind === "en") speakEnglish(c.en);
+    }
+  };
+
+  const done = matched.size === initialCards.length && initialCards.length > 0;
+
+  return (
+    <div>
+      {MEMORY.intro && <div className="text-sm text-slate-600 mb-3">{MEMORY.intro}</div>}
+      <div className="grid grid-cols-4 gap-2">
+        {initialCards.map((c) => {
+          const isShown = flipped.includes(c.key) || matched.has(c.key);
+          const isMatched = matched.has(c.key);
+          return (
+            <button
+              key={c.key}
+              onClick={() => flip(c.key)}
+              className={`aspect-square rounded-xl border-2 grid place-items-center text-center transition ${
+                isMatched
+                  ? "bg-emerald-100 border-emerald-400"
+                  : isShown
+                    ? "bg-white border-sky-400"
+                    : "bg-gradient-to-br from-sky-500 to-indigo-500 border-transparent text-white"
+              }`}
+            >
+              {isShown ? (
+                c.kind === "en" ? (
+                  <div className="font-black text-slate-800 text-sm px-1">{c.en}</div>
+                ) : (
+                  <img src={c.img} alt="" className="w-full h-full object-contain p-1" />
+                )
+              ) : (
+                <div className="text-2xl">?</div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {done && (
+        <div className="mt-3 rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center text-emerald-700 font-black">
+          🧠 All pairs matched!
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================ 🏠 Virtual Room ============================ */
+
+function VirtualRoom() {
+  const { VIRTUAL_ROOM } = useLesson();
+  const [found, setFound] = useState<Set<number>>(new Set());
+  if (!VIRTUAL_ROOM) return null;
+  const total = VIRTUAL_ROOM.items.length;
+
+  return (
+    <div>
+      {VIRTUAL_ROOM.intro && <div className="text-sm text-slate-600 mb-3">{VIRTUAL_ROOM.intro}</div>}
+      <img
+        src={VIRTUAL_ROOM.img}
+        alt=""
+        className="w-full max-h-64 object-contain rounded-xl bg-slate-50"
+      />
+      <div className="mt-4 text-xs font-bold text-slate-500">
+        Missão: encontre {total} coisas no quarto. Toque em cada uma quando descobrir!
+      </div>
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        {VIRTUAL_ROOM.items.map((it, i) => {
+          const isFound = found.has(i);
+          return (
+            <button
+              key={i}
+              onClick={() => {
+                setFound((s) => new Set([...s, i]));
+                speakEnglish(it.en);
+              }}
+              className={`flex items-center gap-2 rounded-xl border-2 p-3 text-left transition ${
+                isFound
+                  ? "bg-emerald-50 border-emerald-400"
+                  : "bg-white border-slate-200 hover:border-sky-300"
+              }`}
+            >
+              <div className="text-2xl">{it.emoji}</div>
+              <div className="flex-1">
+                <div className={`font-black text-sm ${isFound ? "text-emerald-700" : "text-slate-800"}`}>
+                  {it.en}
+                </div>
+                <div className="text-[11px] italic text-slate-500">{it.pt}</div>
+              </div>
+              {isFound && <Check className="text-emerald-600" size={18} />}
+            </button>
+          );
+        })}
+      </div>
+      <div className="mt-3 text-center text-sm font-black text-slate-700">
+        {found.size} / {total} encontrados
+      </div>
+      {found.size === total && (
+        <div className="mt-3 rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center text-emerald-700 font-black">
+          🏆 Missão cumprida!
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================ 📖 My Book (páginas) ============================ */
+
+function Book() {
+  const { BOOK } = useLesson();
+  const [i, setI] = useState(0);
+  if (!BOOK) return null;
+  const page = BOOK.pages[i];
+
+  useEffect(() => {
+    const t = setTimeout(() => speakEnglish(page.en), 250);
+    return () => clearTimeout(t);
+  }, [i, page.en]);
+
+  return (
+    <div>
+      {BOOK.intro && <div className="text-sm text-slate-600 mb-3">{BOOK.intro}</div>}
+      <div className="rounded-2xl border-4 border-amber-300 bg-gradient-to-b from-amber-50 to-white overflow-hidden shadow-lg">
+        <div className="aspect-video grid place-items-center bg-white">
+          <motion.img
+            key={i}
+            src={page.img}
+            alt=""
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="max-h-52 object-contain"
+          />
+        </div>
+        <div className="p-4 text-center">
+          {page.badge && (
+            <div className="inline-block text-[10px] font-black uppercase tracking-widest bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full mb-1">
+              {page.badge}
+            </div>
+          )}
+          <div className="flex items-center justify-center gap-2">
+            <PlayEn text={page.en} size="sm" />
+            <div className="text-2xl font-black text-slate-800">{page.en}</div>
+          </div>
+          <div className="text-xs italic text-slate-500 mt-1">{page.pt}</div>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setI((v) => Math.max(0, v - 1))}
+          disabled={i === 0}
+          className="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold disabled:opacity-40"
+        >
+          ← Página anterior
+        </button>
+        <div className="text-xs text-slate-500 font-bold">
+          Página {i + 1} / {BOOK.pages.length}
+        </div>
+        <button
+          onClick={() => setI((v) => Math.min(BOOK.pages.length - 1, v + 1))}
+          disabled={i === BOOK.pages.length - 1}
+          className="px-3 py-2 rounded-lg bg-amber-400 text-slate-900 text-sm font-bold disabled:opacity-40"
+        >
+          Próxima →
+        </button>
+      </div>
+    </div>
+  );
+}
+

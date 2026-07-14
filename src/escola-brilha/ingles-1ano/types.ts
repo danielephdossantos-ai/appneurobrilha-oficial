@@ -54,13 +54,67 @@ export interface GrammarData {
   errors: { wrong: string; right: string; why: string }[];
 }
 
+// ============ Novos módulos opcionais (SPEB 1.0) ============
+
+/** 🎵 Música: linhas cantáveis com gesto/emoji. */
+export interface SongData {
+  title: string;
+  hookPt?: string; // explicação curta em pt
+  verses: { en: string; pt: string; emoji?: string }[];
+}
+
+/** 🎮 Color Hunter (ou "find the X"): rodadas com objetos, uma resposta certa. */
+export interface HunterRound {
+  promptEn: string; // "Find something BLUE"
+  promptPt: string; // "Encontre algo AZUL"
+  targetLabel: string; // texto que aparece pra criança
+  objects: { id: string; label: string; img: string; isTarget?: boolean }[];
+}
+export interface HunterData {
+  intro?: string;
+  rounds: HunterRound[];
+}
+
+/** 🎨 Paint the Picture: escolher a cor certa pra pintar o objeto. */
+export interface PaintRound {
+  promptEn: string; // "Paint the sun yellow."
+  promptPt: string;
+  outlineEmoji: string; // 🌞 ☁️ 🍎
+  correctHex: string; // cor certa
+  options: { name: string; hex: string; en: string }[]; // 3-4 cores
+}
+export interface PaintData {
+  intro?: string;
+  rounds: PaintRound[];
+}
+
+/** 🧠 Memory Game: pares palavra en ↔ imagem. */
+export interface MemoryData {
+  intro?: string;
+  pairs: { id: string; en: string; pt: string; img: string }[]; // 4 pares recomendados
+}
+
+/** 🏠 Quarto virtual: uma cena com hotspots pra caçar. */
+export interface VirtualRoomData {
+  intro?: string;
+  img: string; // cena
+  items: { en: string; pt: string; emoji: string }[]; // itens a encontrar
+}
+
+/** 📖 My Color Book / passaporte: livrinho digital, 1 página por vez. */
+export interface BookData {
+  title: string;
+  intro?: string;
+  pages: { en: string; pt: string; img: string; badge?: string }[];
+}
+
 export interface LessonMeta {
-  unitLabel: string; // ex: "Unit 2 · Lesson 1 — Hello, my friend!"
-  headerKicker: string; // "My First English Adventure"
-  coverKicker: string; // "Lesson 2"
+  unitLabel: string;
+  headerKicker: string;
+  coverKicker: string;
   coverTitle: string;
   coverSubtitle: string;
-  storyTitle: string; // título da seção 1
+  storyTitle: string;
   vocabularyTitle: string;
   speakingTargets: string[];
   listeningIntro: string;
@@ -86,4 +140,12 @@ export interface LessonData {
   QUIZ: QuizQ[];
   REAL_LIFE: RealLifeItem[];
   GRAMMAR: GrammarData;
+
+  // Opcionais — renderizam automaticamente quando presentes
+  SONG?: SongData;
+  HUNTER?: HunterData;
+  PAINT?: PaintData;
+  MEMORY?: MemoryData;
+  VIRTUAL_ROOM?: VirtualRoomData;
+  BOOK?: BookData;
 }
