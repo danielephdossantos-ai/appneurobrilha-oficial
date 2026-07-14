@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
-import { LESSONS } from "@/escola-brilha/ingles-1ano/lessons";
+import { getLessonsBySerie } from "@/escola-brilha/ingles-lessons-index";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import type { MascotePersonagem } from "@/escola-brilha/mascotes-personagens";
 

@@ -6,7 +6,7 @@ const getLesson = (aula: string, curso?: string) =>
 
 export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
   head: ({ params }) => {
-    const lesson = getLesson(params.aula);
+    const lesson = getLesson(params.aula, params.curso);
     const title = lesson?.meta.unitLabel ?? `English · ${params.aula}`;
     return {
       meta: [
@@ -24,8 +24,8 @@ export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
 
 function IngV1Page() {
   const navigate = useNavigate();
-  const { aula } = Route.useParams();
-  const lesson = getLesson(aula);
+  const { aula, curso } = Route.useParams();
+  const lesson = getLesson(aula, curso);
   const sair = () => navigate({ to: "/" });
   const concluir = () => navigate({ to: "/" });
   if (!lesson) {
