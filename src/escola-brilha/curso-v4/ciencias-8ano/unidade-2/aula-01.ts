@@ -123,8 +123,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: cerebroImg,
     camadas: [
-      { id: "nervoso", rotulo: "Sistema Nervoso", emoji: "⚡", cor: "from-indigo-500 to-purple-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Cérebro, medula e nervos. Impulso elétrico. Resposta em milissegundos. Ex.: puxar a mão do fogo.", fotoUrl: cerebroImg },
-      { id: "endocrino", rotulo: "Sistema Endócrino", emoji: "💧", cor: "from-pink-500 to-rose-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Glândulas (hipófise, tireoide, pâncreas, suprarrenais, gônadas). Hormônio no sangue. Resposta em minutos a horas. Ex.: puberdade.", fotoUrl: hormonalImg },
+      { id: "nervoso", rotulo: "Sistema Nervoso", emoji: "⚡", cor: "from-indigo-500 to-purple-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Cérebro, medula e nervos. Impulso elétrico. Resposta em milissegundos. Ex.: puxar a mão do fogo.", fotoUrl: arcoReflexoImg },
+      { id: "endocrino", rotulo: "Sistema Endócrino", emoji: "💧", cor: "from-pink-500 to-rose-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Glândulas (hipófise, tireoide, pâncreas, suprarrenais, gônadas). Hormônio no sangue. Resposta em minutos a horas. Ex.: puberdade.", fotoUrl: glandulasImg },
     ],
     falaFinal:
       "Os dois se COMPLEMENTAM. Nervoso decide agora; endócrino ajusta o longo prazo.",
