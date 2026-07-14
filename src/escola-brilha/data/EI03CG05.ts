@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import peImg from "@/assets/neuro-treino/sentidos/pe.png";
-import peEquilibrioImg from "@/assets/neuro-treino/sentidos/pe-equilibrio.png";
-import bracosAbracoImg from "@/assets/neuro-treino/sentidos/bracos-abraco.png";
-import olhoImg from "@/assets/neuro-treino/sentidos/olho.png";
-import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as peImg } from "@/assets/neuro-treino/sentidos/pe.png.asset.json";
+import { url as peEquilibrioImg } from "@/assets/neuro-treino/sentidos/pe-equilibrio.png.asset.json";
+import { url as bracosAbracoImg } from "@/assets/neuro-treino/sentidos/bracos-abraco.png.asset.json";
+import { url as olhoImg } from "@/assets/neuro-treino/sentidos/olho.png.asset.json";
+import { url as maoImg } from "@/assets/neuro-treino/sentidos/mao.png.asset.json";
 
 /**
  * EI03CG05 — Aula 5: Equilíbrio do corpo

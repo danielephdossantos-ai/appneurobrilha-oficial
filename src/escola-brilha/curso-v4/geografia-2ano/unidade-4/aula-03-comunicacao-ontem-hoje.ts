@@ -1,15 +1,15 @@
 import type { AulaPortuguesV4 } from "../../types";
-import telefoneAntigo from "@/assets/neuro-treino/objetos/telefone-antigo.png";
-import celular from "@/assets/neuro-treino/objetos/celular.png";
-import radioAntigo from "@/assets/neuro-treino/objetos/radio-antigo.png";
-import tvModerna from "@/assets/neuro-treino/objetos/tv-moderna.png";
-import cameraAntiga from "@/assets/neuro-treino/objetos/camera-antiga.png";
-import tablet from "@/assets/neuro-treino/objetos/tablet.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import album from "@/assets/neuro-treino/objetos/album.png";
+import { url as telefoneAntigo } from "@/assets/neuro-treino/objetos/telefone-antigo.png.asset.json";
+import { url as celular } from "@/assets/neuro-treino/objetos/celular.png.asset.json";
+import { url as radioAntigo } from "@/assets/neuro-treino/objetos/radio-antigo.png.asset.json";
+import { url as tvModerna } from "@/assets/neuro-treino/objetos/tv-moderna.png.asset.json";
+import { url as cameraAntiga } from "@/assets/neuro-treino/objetos/camera-antiga.png.asset.json";
+import { url as tablet } from "@/assets/neuro-treino/objetos/tablet.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as album } from "@/assets/neuro-treino/objetos/album.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 4 · Aula 03

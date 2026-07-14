@@ -1,20 +1,20 @@
 import type { Aula } from "../types";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import pracaImg from "@/assets/neuro-treino/objetos/praca.png";
-import mercadoImg from "@/assets/neuro-treino/objetos/mercado.png";
-import postoImg from "@/assets/neuro-treino/objetos/posto-saude.png";
-import onibusImg from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import mapaImg from "@/assets/neuro-treino/objetos/mapa.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import bussolaImg from "@/assets/neuro-treino/objetos/bussola.png";
-import padariaImg from "@/assets/neuro-treino/objetos/padaria.png";
-import setaCima from "@/assets/neuro-treino/objetos/seta-cima.png";
-import setaBaixo from "@/assets/neuro-treino/objetos/seta-baixo.png";
-import setaEsq from "@/assets/neuro-treino/objetos/seta-esquerda.png";
-import setaDir from "@/assets/neuro-treino/objetos/seta-direita.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as pracaImg } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as mercadoImg } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as postoImg } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as onibusImg } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as bussolaImg } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
+import { url as padariaImg } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as setaCima } from "@/assets/neuro-treino/objetos/seta-cima.png.asset.json";
+import { url as setaBaixo } from "@/assets/neuro-treino/objetos/seta-baixo.png.asset.json";
+import { url as setaEsq } from "@/assets/neuro-treino/objetos/seta-esquerda.png.asset.json";
+import { url as setaDir } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
 
 /**
  * EF01GE02 — Geografia · 1º Ano

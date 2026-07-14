@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
-import lua from "@/assets/neuro-treino/objetos/lua.png";
-import noite from "@/assets/neuro-treino/objetos/noite.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import nuvem from "@/assets/neuro-treino/objetos/nuvem.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as noite } from "@/assets/neuro-treino/objetos/noite.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 
 /**
  * Aula 3 — O Coelho e a Lua

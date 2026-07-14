@@ -1,17 +1,17 @@
 import type { Aula } from "../types";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
-import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
-import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
-import bocaImg from "@/assets/neuro-treino/sentidos/boca-sorriso.png";
-import silencioImg from "@/assets/neuro-treino/sentidos/dedo-silencio.png";
-import joiaImg from "@/assets/neuro-treino/sentidos/mao-joia.png";
-import abracoImg from "@/assets/neuro-treino/sentidos/bracos-abraco.png";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as tristeImg } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
+import { url as bravoImg } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
+import { url as confusoImg } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as maoImg } from "@/assets/neuro-treino/sentidos/mao.png.asset.json";
+import { url as palmasImg } from "@/assets/neuro-treino/sentidos/palmas.png.asset.json";
+import { url as bocaImg } from "@/assets/neuro-treino/sentidos/boca-sorriso.png.asset.json";
+import { url as silencioImg } from "@/assets/neuro-treino/sentidos/dedo-silencio.png.asset.json";
+import { url as joiaImg } from "@/assets/neuro-treino/sentidos/mao-joia.png.asset.json";
+import { url as abracoImg } from "@/assets/neuro-treino/sentidos/bracos-abraco.png.asset.json";
 
 /**
  * EI03CG02 — Aula 2: Gestos falam

@@ -1,17 +1,17 @@
 import type { Aula } from "../types";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import chuvaImg from "@/assets/neuro-treino/objetos/chuva.png";
-import cachorroImg from "@/assets/neuro-treino/objetos/cachorro.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import carroImg from "@/assets/neuro-treino/objetos/carro.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
-import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
-import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
-import cerejeiraImg from "@/assets/neuro-treino/objetos/cerejeira.png";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as chuvaImg } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as sementeImg } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as girassolImg } from "@/assets/neuro-treino/objetos/girassol.png.asset.json";
+import { url as cerejeiraImg } from "@/assets/neuro-treino/objetos/cerejeira.png.asset.json";
 
 
 /**

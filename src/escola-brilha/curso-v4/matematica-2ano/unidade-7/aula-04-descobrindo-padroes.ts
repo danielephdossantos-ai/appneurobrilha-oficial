@@ -1,10 +1,10 @@
 import type { AulaV4 } from "../../types";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import circulo from "@/assets/neuro-treino/objetos/circulo.png";
-import triangulo from "@/assets/neuro-treino/objetos/triangulo.png";
-import quadrado from "@/assets/neuro-treino/objetos/quadrado.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as circulo } from "@/assets/neuro-treino/objetos/circulo.png.asset.json";
+import { url as triangulo } from "@/assets/neuro-treino/objetos/triangulo.png.asset.json";
+import { url as quadrado } from "@/assets/neuro-treino/objetos/quadrado.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 7 · Aula 4 — "Descobrindo Padrões"

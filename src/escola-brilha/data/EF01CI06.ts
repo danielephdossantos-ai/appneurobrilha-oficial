@@ -1,19 +1,19 @@
 import type { Aula } from "../types";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import luaImg from "@/assets/neuro-treino/objetos/lua.png";
-import diaImg from "@/assets/neuro-treino/objetos/dia.png";
-import noiteImg from "@/assets/neuro-treino/objetos/noite.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import meninoAcordandoImg from "@/assets/neuro-treino/objetos/menino-acordando.png";
-import banhoImg from "@/assets/neuro-treino/objetos/banho.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import escovarDentesImg from "@/assets/neuro-treino/objetos/escovar-dentes.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import galoImg from "@/assets/neuro-treino/objetos/galo.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as diaImg } from "@/assets/neuro-treino/objetos/dia.png.asset.json";
+import { url as noiteImg } from "@/assets/neuro-treino/objetos/noite.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as meninoAcordandoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as banhoImg } from "@/assets/neuro-treino/objetos/banho.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as escovarDentesImg } from "@/assets/neuro-treino/objetos/escovar-dentes.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as galoImg } from "@/assets/neuro-treino/objetos/galo.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 
 /**
  * EF01CI06 — Ciências · 1º Ano

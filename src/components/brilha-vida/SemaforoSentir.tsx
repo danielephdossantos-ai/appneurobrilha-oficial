@@ -2,9 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
 
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
-import imgTranquilo from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
+import { url as imgConfuso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
+import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
 
 /**
  * Semáforo do Sentir

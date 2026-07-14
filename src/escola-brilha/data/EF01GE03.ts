@@ -1,22 +1,22 @@
 import type { Aula } from "../types";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import pracaImg from "@/assets/neuro-treino/objetos/praca.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import lixeiraImg from "@/assets/neuro-treino/objetos/lixeira.png";
-import lixeiraReciclagemImg from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
-import plantaImg from "@/assets/neuro-treino/objetos/planta-pequena.png";
-import regadorImg from "@/assets/neuro-treino/objetos/regador.png";
-import papelImg from "@/assets/neuro-treino/objetos/papel.png";
-import garrafaImg from "@/assets/neuro-treino/objetos/garrafa.png";
-import caixaImg from "@/assets/neuro-treino/objetos/caixa.png";
-import livrosImg from "@/assets/neuro-treino/objetos/livros.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import cadeiraImg from "@/assets/neuro-treino/objetos/cadeira.png";
-import jardimImg from "@/assets/neuro-treino/objetos/jardim.png";
-import mapaImg from "@/assets/neuro-treino/objetos/mapa.png";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as pracaImg } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as lixeiraImg } from "@/assets/neuro-treino/objetos/lixeira.png.asset.json";
+import { url as lixeiraReciclagemImg } from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png.asset.json";
+import { url as plantaImg } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as regadorImg } from "@/assets/neuro-treino/objetos/regador.png.asset.json";
+import { url as papelImg } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as garrafaImg } from "@/assets/neuro-treino/objetos/garrafa.png.asset.json";
+import { url as caixaImg } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
+import { url as livrosImg } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as cadeiraImg } from "@/assets/neuro-treino/objetos/cadeira.png.asset.json";
+import { url as jardimImg } from "@/assets/neuro-treino/objetos/jardim.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
 
 /**
  * EF01GE03 — Geografia · 1º Ano

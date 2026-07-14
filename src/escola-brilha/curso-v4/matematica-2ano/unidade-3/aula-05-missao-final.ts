@@ -1,10 +1,10 @@
 import type { AulaV4 } from "../../types";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 3 · Aula 5 — "Missão Final do Reino das Subtrações"

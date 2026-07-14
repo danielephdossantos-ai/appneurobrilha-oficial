@@ -1,13 +1,13 @@
 import type { Aula } from "../types";
-import tamborImg from "@/assets/neuro-treino/objetos/tambor.png";
-import chocalhoImg from "@/assets/neuro-treino/objetos/chocalho.png";
-import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
-import sinoImg from "@/assets/neuro-treino/objetos/sol.png"; // fallback visual
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
+import { url as chocalhoImg } from "@/assets/neuro-treino/objetos/chocalho.png.asset.json";
+import { url as palmasImg } from "@/assets/neuro-treino/sentidos/palmas.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as leaoImg } from "@/assets/neuro-treino/objetos/leao.png.asset.json";
+import { url as sinoImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json"; // fallback visual
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as tranquiloImg } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
 
 /**
  * EI03TS03 — Traços, Sons, Cores e Formas

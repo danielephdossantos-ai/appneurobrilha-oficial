@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import menino from "@/assets/neuro-treino/objetos/menino.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import gato from "@/assets/neuro-treino/objetos/gato.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 
 /**
  * Unidade 4 · Aula 3 — Conhecendo Melhor os Personagens

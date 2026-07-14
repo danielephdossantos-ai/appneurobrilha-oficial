@@ -1,17 +1,17 @@
 import type { AulaPortuguesV4 } from "../../types";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import vaca from "@/assets/neuro-treino/objetos/vaca.png";
-import mercado from "@/assets/neuro-treino/objetos/mercado.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import regador from "@/assets/neuro-treino/objetos/regador.png";
-import celular from "@/assets/neuro-treino/objetos/celular.png";
-import tablet from "@/assets/neuro-treino/objetos/tablet.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import padaria from "@/assets/neuro-treino/objetos/padaria.png";
-import moeda from "@/assets/neuro-treino/objetos/moeda.png";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as vaca } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
+import { url as mercado } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as regador } from "@/assets/neuro-treino/objetos/regador.png.asset.json";
+import { url as celular } from "@/assets/neuro-treino/objetos/celular.png.asset.json";
+import { url as tablet } from "@/assets/neuro-treino/objetos/tablet.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as padaria } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as moeda } from "@/assets/neuro-treino/objetos/moeda.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 3 · Aula 04

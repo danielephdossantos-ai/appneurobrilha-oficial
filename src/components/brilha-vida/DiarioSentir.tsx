@@ -2,11 +2,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, BookHeart } from "lucide-react";
 
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTranquilo from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
+import { url as imgConfuso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
+import { url as imgTriste } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
+import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
 
 const EMOJIS = [
   { id: "feliz", img: imgFeliz, nome: "Feliz", cor: "#ec4899" },

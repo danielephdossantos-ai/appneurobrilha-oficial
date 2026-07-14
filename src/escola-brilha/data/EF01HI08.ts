@@ -1,21 +1,21 @@
 import type { Aula } from "../types";
-import festaImg from "@/assets/neuro-treino/objetos/festa.png";
-import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
-import bandeirolaImg from "@/assets/neuro-treino/objetos/bandeirola.png";
-import bandeiraBrasilImg from "@/assets/neuro-treino/objetos/bandeira-brasil.png";
-import calendarioImg from "@/assets/neuro-treino/objetos/calendario.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import familiaImg from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import familiaGrandeImg from "@/assets/neuro-treino/objetos/familia-grande.png";
-import criancasImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import professoraImg from "@/assets/neuro-treino/objetos/professora.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import patioImg from "@/assets/neuro-treino/objetos/patio-escola.png";
-import salaImg from "@/assets/neuro-treino/objetos/sala-aula.png";
-import maeImg from "@/assets/neuro-treino/objetos/mae.png";
+import { url as festaImg } from "@/assets/neuro-treino/objetos/festa.png.asset.json";
+import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
+import { url as bandeirolaImg } from "@/assets/neuro-treino/objetos/bandeirola.png.asset.json";
+import { url as bandeiraBrasilImg } from "@/assets/neuro-treino/objetos/bandeira-brasil.png.asset.json";
+import { url as calendarioImg } from "@/assets/neuro-treino/objetos/calendario.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as familiaGrandeImg } from "@/assets/neuro-treino/objetos/familia-grande.png.asset.json";
+import { url as criancasImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as professoraImg } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as patioImg } from "@/assets/neuro-treino/objetos/patio-escola.png.asset.json";
+import { url as salaImg } from "@/assets/neuro-treino/objetos/sala-aula.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
 
 /**
  * EF01HI08 — História · 1º Ano

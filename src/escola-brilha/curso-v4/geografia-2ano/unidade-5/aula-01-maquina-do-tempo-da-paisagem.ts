@@ -1,21 +1,21 @@
 import type { AulaPortuguesV4 } from "../../types";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import predio from "@/assets/neuro-treino/objetos/predio.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import rio from "@/assets/neuro-treino/objetos/lago.png";
-import vento from "@/assets/neuro-treino/objetos/vento.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import bussola from "@/assets/neuro-treino/objetos/bussola.png";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
-import ponte from "@/assets/neuro-treino/objetos/ponte.png";
-import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as predio } from "@/assets/neuro-treino/objetos/predio.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as rio } from "@/assets/neuro-treino/objetos/lago.png.asset.json";
+import { url as vento } from "@/assets/neuro-treino/objetos/vento.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as bussola } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
+import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json";
+import { url as apartamento } from "@/assets/neuro-treino/objetos/apartamento.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 
-import praca from "@/assets/neuro-treino/objetos/praca.png";
-import oca from "@/assets/neuro-treino/objetos/oca.png";
-import casaAntiga from "@/assets/neuro-treino/objetos/casa-antiga.png";
+import { url as praca } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as oca } from "@/assets/neuro-treino/objetos/oca.png.asset.json";
+import { url as casaAntiga } from "@/assets/neuro-treino/objetos/casa-antiga.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 5 · Aula 01

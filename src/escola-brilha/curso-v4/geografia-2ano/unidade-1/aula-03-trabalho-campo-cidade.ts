@@ -1,19 +1,19 @@
 import type { AulaPortuguesV4 } from "../../types";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import vaca from "@/assets/neuro-treino/objetos/vaca.png";
-import semente from "@/assets/neuro-treino/objetos/semente.png";
-import regador from "@/assets/neuro-treino/objetos/regador.png";
-import padaria from "@/assets/neuro-treino/objetos/padaria.png";
-import mercado from "@/assets/neuro-treino/objetos/mercado.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import professora from "@/assets/neuro-treino/objetos/professora.png";
-import cozinheira from "@/assets/neuro-treino/objetos/cozinheira.png";
-import trem from "@/assets/neuro-treino/objetos/trem.png";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as vaca } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
+import { url as semente } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as regador } from "@/assets/neuro-treino/objetos/regador.png.asset.json";
+import { url as padaria } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as mercado } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
+import { url as cozinheira } from "@/assets/neuro-treino/objetos/cozinheira.png.asset.json";
+import { url as trem } from "@/assets/neuro-treino/objetos/trem.png.asset.json";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 1 · Aula 03

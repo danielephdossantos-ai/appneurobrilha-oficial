@@ -1,19 +1,19 @@
 import type { AulaPortuguesV4 } from "../../types";
-import rio from "@/assets/neuro-treino/objetos/lago.png";
-import praia from "@/assets/neuro-treino/objetos/praia.png";
-import lixeira from "@/assets/neuro-treino/objetos/lixeira.png";
-import lixeiraReciclagem from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
-import funcionarioLimpeza from "@/assets/neuro-treino/objetos/funcionario-limpeza.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import planta from "@/assets/neuro-treino/objetos/planta-pequena.png";
-import jardim from "@/assets/neuro-treino/objetos/jardim.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import predio from "@/assets/neuro-treino/objetos/predio.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import garrafa from "@/assets/neuro-treino/objetos/garrafa.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import peixe from "@/assets/neuro-treino/objetos/peixe.png";
+import { url as rio } from "@/assets/neuro-treino/objetos/lago.png.asset.json";
+import { url as praia } from "@/assets/neuro-treino/objetos/praia.png.asset.json";
+import { url as lixeira } from "@/assets/neuro-treino/objetos/lixeira.png.asset.json";
+import { url as lixeiraReciclagem } from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png.asset.json";
+import { url as funcionarioLimpeza } from "@/assets/neuro-treino/objetos/funcionario-limpeza.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as planta } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as jardim } from "@/assets/neuro-treino/objetos/jardim.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as predio } from "@/assets/neuro-treino/objetos/predio.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as garrafa } from "@/assets/neuro-treino/objetos/garrafa.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 5 · Aula 03

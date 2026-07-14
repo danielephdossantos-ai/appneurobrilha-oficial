@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import nuvem from "@/assets/neuro-treino/objetos/nuvem.png";
-import casaco from "@/assets/neuro-treino/objetos/casaco.png";
-import mochila from "@/assets/neuro-treino/objetos/mochila.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
-import menino from "@/assets/neuro-treino/objetos/menino.png";
-import binoculo from "@/assets/neuro-treino/objetos/binoculo.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as casaco } from "@/assets/neuro-treino/objetos/casaco.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as binoculo } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
 
 /**
  * Unidade 4 · Aula 1 — Procurando Pistas no Texto

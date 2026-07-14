@@ -1,14 +1,14 @@
 import type { AulaV4 } from "../../types";
-import cubo from "@/assets/neuro-treino/objetos/cubo.png";
-import esfera from "@/assets/neuro-treino/objetos/esfera.png";
-import cilindro from "@/assets/neuro-treino/objetos/cilindro.png";
-import bloco from "@/assets/neuro-treino/objetos/bloco.png";
-import dado from "@/assets/neuro-treino/objetos/dado.png";
-import lata from "@/assets/neuro-treino/objetos/lata.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import caixa from "@/assets/neuro-treino/objetos/caixa.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as cubo } from "@/assets/neuro-treino/objetos/cubo.png.asset.json";
+import { url as esfera } from "@/assets/neuro-treino/objetos/esfera.png.asset.json";
+import { url as cilindro } from "@/assets/neuro-treino/objetos/cilindro.png.asset.json";
+import { url as bloco } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as dado } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
+import { url as lata } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 6 · Aula 2 — "Explorando os Sólidos"

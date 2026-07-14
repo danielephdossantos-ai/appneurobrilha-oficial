@@ -1,19 +1,19 @@
 import type { AulaV4 } from "../../types";
-import quadrado from "@/assets/neuro-treino/objetos/quadrado.png";
-import triangulo from "@/assets/neuro-treino/objetos/triangulo.png";
-import circulo from "@/assets/neuro-treino/objetos/circulo.png";
-import cubo from "@/assets/neuro-treino/objetos/cubo.png";
-import esfera from "@/assets/neuro-treino/objetos/esfera.png";
-import cilindro from "@/assets/neuro-treino/objetos/cilindro.png";
-import bloco from "@/assets/neuro-treino/objetos/bloco.png";
-import relogio from "@/assets/neuro-treino/objetos/relogio.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import lata from "@/assets/neuro-treino/objetos/lata.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import parque from "@/assets/neuro-treino/objetos/parque.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as quadrado } from "@/assets/neuro-treino/objetos/quadrado.png.asset.json";
+import { url as triangulo } from "@/assets/neuro-treino/objetos/triangulo.png.asset.json";
+import { url as circulo } from "@/assets/neuro-treino/objetos/circulo.png.asset.json";
+import { url as cubo } from "@/assets/neuro-treino/objetos/cubo.png.asset.json";
+import { url as esfera } from "@/assets/neuro-treino/objetos/esfera.png.asset.json";
+import { url as cilindro } from "@/assets/neuro-treino/objetos/cilindro.png.asset.json";
+import { url as bloco } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as lata } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 6 · Aula 5 — "Missão Final dos Exploradores"

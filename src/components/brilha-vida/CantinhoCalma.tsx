@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
 
-import imgTranquilo from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
+import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 
 /**
  * Cantinho da Calma

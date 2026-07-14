@@ -1,10 +1,10 @@
 import type { Aula } from "../types";
-import moedaImg from "@/assets/neuro-treino/objetos/moeda.png";
-import bauImg from "@/assets/neuro-treino/objetos/bau.png";
-import blocoImg from "@/assets/neuro-treino/objetos/bloco.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
+import { url as moedaImg } from "@/assets/neuro-treino/objetos/moeda.png.asset.json";
+import { url as bauImg } from "@/assets/neuro-treino/objetos/bau.png.asset.json";
+import { url as blocoImg } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as castanhaImg } from "@/assets/neuro-treino/objetos/castanha.png.asset.json";
 
 /**
  * EF01MA07 — Aula 007 · Biblioteca Pedagógica Escola Brilha

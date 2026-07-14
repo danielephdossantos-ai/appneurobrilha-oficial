@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import criancasGrupoImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import meninoAcordandoImg from "@/assets/neuro-treino/objetos/menino-acordando.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as criancasGrupoImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as meninoAcordandoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
 
 /**
  * EF01CI04 — Ciências · 1º Ano

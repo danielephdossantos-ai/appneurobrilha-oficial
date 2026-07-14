@@ -8,8 +8,8 @@
  *  - Esquilo Brilha é fixo — é o mascote oficial do app (assinatura dos diplomas).
  *  - Cada diploma novo exibe UM mascote colecionável extra.
  */
-import esquiloBrilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import pipaAstronauta from "@/assets/pip-girl-astronauta.png";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
 
 export type MascotePersonagem = {
   id: string;

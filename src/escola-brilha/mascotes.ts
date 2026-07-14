@@ -5,7 +5,7 @@
  * Toda aula/atividade que precise do mascote DEVE importar daqui.
  * Não criar novas versões locais do Brilha em pastas de aulas.
  */
-import brilhaOficial from "@/assets/escola-brilha/mascotes/brilha.png";
+import { url as brilhaOficial } from "@/assets/escola-brilha/mascotes/brilha.png.asset.json";
 
 export const MASCOTES = {
   brilha: brilhaOficial,

@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import festa from "@/assets/neuro-treino/objetos/festa.png";
-import bolo from "@/assets/neuro-treino/objetos/bolo.png";
-import calendario from "@/assets/neuro-treino/objetos/calendario.png";
-import relogio from "@/assets/neuro-treino/objetos/relogio.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import balao from "@/assets/neuro-treino/objetos/balao.png";
-import criancas from "@/assets/neuro-treino/objetos/criancas-grupo.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as festa } from "@/assets/neuro-treino/objetos/festa.png.asset.json";
+import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as calendario } from "@/assets/neuro-treino/objetos/calendario.png.asset.json";
+import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as criancas } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
 
 /**
  * Unidade 2 · Aula 2 — Convites para a Festa dos Livros

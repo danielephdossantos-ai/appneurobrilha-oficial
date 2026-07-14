@@ -1,25 +1,25 @@
 import type { Aula } from "../types";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import familiaImg from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import familiaGrandeImg from "@/assets/neuro-treino/objetos/familia-grande.png";
-import maeImg from "@/assets/neuro-treino/objetos/mae.png";
-import paiImg from "@/assets/neuro-treino/objetos/pai.png";
-import tiaImg from "@/assets/neuro-treino/objetos/tia.png";
-import avoHomemImg from "@/assets/neuro-treino/objetos/avo-homem.png";
-import avoMulherImg from "@/assets/neuro-treino/objetos/avo-mulher.png";
-import professoraImg from "@/assets/neuro-treino/objetos/professora.png";
-import bibliotecarioImg from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import cozinheiraImg from "@/assets/neuro-treino/objetos/cozinheira.png";
-import faxineiroImg from "@/assets/neuro-treino/objetos/funcionario-limpeza.png";
-import cozinheiroFamiliaImg from "@/assets/neuro-treino/objetos/cozinheiro-familia.png";
-import salaImg from "@/assets/neuro-treino/objetos/sala-aula.png";
-import bibliotecaImg from "@/assets/neuro-treino/objetos/biblioteca.png";
-import refeitorioImg from "@/assets/neuro-treino/objetos/refeitorio.png";
-import patioImg from "@/assets/neuro-treino/objetos/patio-escola.png";
-import criancasImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as familiaGrandeImg } from "@/assets/neuro-treino/objetos/familia-grande.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as paiImg } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
+import { url as tiaImg } from "@/assets/neuro-treino/objetos/tia.png.asset.json";
+import { url as avoHomemImg } from "@/assets/neuro-treino/objetos/avo-homem.png.asset.json";
+import { url as avoMulherImg } from "@/assets/neuro-treino/objetos/avo-mulher.png.asset.json";
+import { url as professoraImg } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
+import { url as bibliotecarioImg } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as cozinheiraImg } from "@/assets/neuro-treino/objetos/cozinheira.png.asset.json";
+import { url as faxineiroImg } from "@/assets/neuro-treino/objetos/funcionario-limpeza.png.asset.json";
+import { url as cozinheiroFamiliaImg } from "@/assets/neuro-treino/objetos/cozinheiro-familia.png.asset.json";
+import { url as salaImg } from "@/assets/neuro-treino/objetos/sala-aula.png.asset.json";
+import { url as bibliotecaImg } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as refeitorioImg } from "@/assets/neuro-treino/objetos/refeitorio.png.asset.json";
+import { url as patioImg } from "@/assets/neuro-treino/objetos/patio-escola.png.asset.json";
+import { url as criancasImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * EF01HI06 — História · 1º Ano

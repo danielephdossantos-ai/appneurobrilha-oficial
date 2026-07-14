@@ -24,26 +24,26 @@ import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
 import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
 import { motion, AnimatePresence } from "framer-motion";
 
-import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
-import catAmizadeImg from "@/assets/brilha-vida/categoria-amizade.png";
-import catAutocontroleImg from "@/assets/brilha-vida/categoria-autocontrole.png";
-import catRotinaImg from "@/assets/brilha-vida/categoria-rotina.png";
-import atvTermometroImg from "@/assets/brilha-vida/termometro-emocoes.png";
-import atvComoEstouImg from "@/assets/brilha-vida/como-estou.png";
-import atvEmojiMagicoImg from "@/assets/brilha-vida/emoji-magico.png";
-import atvHistoriasImg from "@/assets/brilha-vida/historias-sociais.png";
-import atvDividindoImg from "@/assets/brilha-vida/dividindo-brinquedo.png";
-import atvCuidandoImg from "@/assets/brilha-vida/cuidando-amigo.png";
-import atvRespirarImg from "@/assets/brilha-vida/pausa-respirar.png";
-import atvCantinhoImg from "@/assets/brilha-vida/cantinho-calma.png";
-import atvSemaforoImg from "@/assets/brilha-vida/semaforo-sentir.png";
-import atvMinhaVezImg from "@/assets/brilha-vida/minha-vez.png";
-import atvRegrasImg from "@/assets/brilha-vida/regras-casa.png";
-import atvConflitosImg from "@/assets/brilha-vida/resolucao-conflitos.png";
-import atvDiarioImg from "@/assets/brilha-vida/diario-sentir.png";
-import atvElogioImg from "@/assets/brilha-vida/elogio-magico.png";
-import atvBolhaImg from "@/assets/brilha-vida/bolha-bemestar.png";
-import atvRodaImg from "@/assets/brilha-vida/roda-do-dia.png";
+import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
+import { url as catAmizadeImg } from "@/assets/brilha-vida/categoria-amizade.png.asset.json";
+import { url as catAutocontroleImg } from "@/assets/brilha-vida/categoria-autocontrole.png.asset.json";
+import { url as catRotinaImg } from "@/assets/brilha-vida/categoria-rotina.png.asset.json";
+import { url as atvTermometroImg } from "@/assets/brilha-vida/termometro-emocoes.png.asset.json";
+import { url as atvComoEstouImg } from "@/assets/brilha-vida/como-estou.png.asset.json";
+import { url as atvEmojiMagicoImg } from "@/assets/brilha-vida/emoji-magico.png.asset.json";
+import { url as atvHistoriasImg } from "@/assets/brilha-vida/historias-sociais.png.asset.json";
+import { url as atvDividindoImg } from "@/assets/brilha-vida/dividindo-brinquedo.png.asset.json";
+import { url as atvCuidandoImg } from "@/assets/brilha-vida/cuidando-amigo.png.asset.json";
+import { url as atvRespirarImg } from "@/assets/brilha-vida/pausa-respirar.png.asset.json";
+import { url as atvCantinhoImg } from "@/assets/brilha-vida/cantinho-calma.png.asset.json";
+import { url as atvSemaforoImg } from "@/assets/brilha-vida/semaforo-sentir.png.asset.json";
+import { url as atvMinhaVezImg } from "@/assets/brilha-vida/minha-vez.png.asset.json";
+import { url as atvRegrasImg } from "@/assets/brilha-vida/regras-casa.png.asset.json";
+import { url as atvConflitosImg } from "@/assets/brilha-vida/resolucao-conflitos.png.asset.json";
+import { url as atvDiarioImg } from "@/assets/brilha-vida/diario-sentir.png.asset.json";
+import { url as atvElogioImg } from "@/assets/brilha-vida/elogio-magico.png.asset.json";
+import { url as atvBolhaImg } from "@/assets/brilha-vida/bolha-bemestar.png.asset.json";
+import { url as atvRodaImg } from "@/assets/brilha-vida/roda-do-dia.png.asset.json";
 
 const ATIVIDADE_IMG: Record<string, string> = {
   "Termômetro das Emoções": atvTermometroImg,

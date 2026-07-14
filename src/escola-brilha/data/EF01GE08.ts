@@ -1,25 +1,25 @@
 import type { Aula } from "../types";
-import mapaImg from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercursoImg from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import pracaImg from "@/assets/neuro-treino/objetos/praca.png";
-import parqueImg from "@/assets/neuro-treino/objetos/parque.png";
-import padariaImg from "@/assets/neuro-treino/objetos/padaria.png";
-import mercadoImg from "@/assets/neuro-treino/objetos/mercado.png";
-import postoSaudeImg from "@/assets/neuro-treino/objetos/posto-saude.png";
-import pontoOnibusImg from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import setaCimaImg from "@/assets/neuro-treino/objetos/seta-cima.png";
-import setaBaixoImg from "@/assets/neuro-treino/objetos/seta-baixo.png";
-import setaDireitaImg from "@/assets/neuro-treino/objetos/seta-direita.png";
-import setaEsquerdaImg from "@/assets/neuro-treino/objetos/seta-esquerda.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import bussolaImg from "@/assets/neuro-treino/objetos/bussola.png";
-import lapisImg from "@/assets/neuro-treino/objetos/lapis.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercursoImg } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as pracaImg } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as parqueImg } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as padariaImg } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as mercadoImg } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as postoSaudeImg } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as pontoOnibusImg } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as setaCimaImg } from "@/assets/neuro-treino/objetos/seta-cima.png.asset.json";
+import { url as setaBaixoImg } from "@/assets/neuro-treino/objetos/seta-baixo.png.asset.json";
+import { url as setaDireitaImg } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
+import { url as setaEsquerdaImg } from "@/assets/neuro-treino/objetos/seta-esquerda.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as bussolaImg } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
+import { url as lapisImg } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * EF01GE08 — Geografia · 1º Ano

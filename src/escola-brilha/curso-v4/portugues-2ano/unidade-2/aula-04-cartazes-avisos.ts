@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import lavarMaos from "@/assets/neuro-treino/objetos/lavar-maos.png";
-import criancas from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import patio from "@/assets/neuro-treino/objetos/patio-escola.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as lavarMaos } from "@/assets/neuro-treino/objetos/lavar-maos.png.asset.json";
+import { url as criancas } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as patio } from "@/assets/neuro-treino/objetos/patio-escola.png.asset.json";
 
 /**
  * Unidade 2 · Aula 4 — Cartazes e Avisos

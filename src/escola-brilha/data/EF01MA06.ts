@@ -1,11 +1,11 @@
 import type { Aula } from "../types";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import cenouraImg from "@/assets/neuro-treino/vegetais/cenoura.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import pintinhoImg from "@/assets/neuro-treino/objetos/pintinho.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as cenouraImg } from "@/assets/neuro-treino/vegetais/cenoura.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as pintinhoImg } from "@/assets/neuro-treino/objetos/pintinho.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
  * EF01MA06 — Aula 006 · Biblioteca Pedagógica Escola Brilha

@@ -1,22 +1,22 @@
 import type { Aula } from "../types";
-import brilhaImg from "@/assets/escola-brilha/mascotes/brilha.png";
-import lupiImg from "@/assets/escola-brilha/ei-mundo1/lupi.png";
-import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
-import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
-import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
-import corujaImg from "@/assets/escola-brilha/ei-mundo1/coruja.png";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
-import peImg from "@/assets/neuro-treino/sentidos/pe.png";
-import cabecaImg from "@/assets/neuro-treino/sentidos/cabeca.png";
-import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
-import olhoImg from "@/assets/neuro-treino/sentidos/olho.png";
+import { url as brilhaImg } from "@/assets/escola-brilha/mascotes/brilha.png.asset.json";
+import { url as lupiImg } from "@/assets/escola-brilha/ei-mundo1/lupi.png.asset.json";
+import { url as fifiImg } from "@/assets/escola-brilha/ei-mundo1/fifi.png.asset.json";
+import { url as teoImg } from "@/assets/escola-brilha/ei-mundo1/teo.png.asset.json";
+import { url as piuImg } from "@/assets/escola-brilha/ei-mundo1/piu.png.asset.json";
+import { url as corujaImg } from "@/assets/escola-brilha/ei-mundo1/coruja.png.asset.json";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as maoImg } from "@/assets/neuro-treino/sentidos/mao.png.asset.json";
+import { url as peImg } from "@/assets/neuro-treino/sentidos/pe.png.asset.json";
+import { url as cabecaImg } from "@/assets/neuro-treino/sentidos/cabeca.png.asset.json";
+import { url as palmasImg } from "@/assets/neuro-treino/sentidos/palmas.png.asset.json";
+import { url as olhoImg } from "@/assets/neuro-treino/sentidos/olho.png.asset.json";
 
 /**
  * EI03CG01 — Mundo 2 · Corpo, Gestos e Movimentos

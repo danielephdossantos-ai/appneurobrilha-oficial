@@ -1,9 +1,9 @@
 import type { AulaV4 } from "../../types";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import peixe from "@/assets/neuro-treino/objetos/peixe.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 3 · Aula 2 — "Descobrindo o símbolo −"

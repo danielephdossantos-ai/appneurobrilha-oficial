@@ -1,8 +1,8 @@
 import type { Aula } from "../types";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 
 /**
  * EF01LP04 — Aula 004 · Biblioteca Pedagógica Escola Brilha

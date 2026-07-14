@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
-import peImg from "@/assets/neuro-treino/sentidos/pe.png";
-import pernasCorrendoImg from "@/assets/neuro-treino/sentidos/pernas-correndo.png";
-import pesPulandoImg from "@/assets/neuro-treino/sentidos/pes-pulando.png";
-import cabecaImg from "@/assets/neuro-treino/sentidos/cabeca.png";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as maoImg } from "@/assets/neuro-treino/sentidos/mao.png.asset.json";
+import { url as peImg } from "@/assets/neuro-treino/sentidos/pe.png.asset.json";
+import { url as pernasCorrendoImg } from "@/assets/neuro-treino/sentidos/pernas-correndo.png.asset.json";
+import { url as pesPulandoImg } from "@/assets/neuro-treino/sentidos/pes-pulando.png.asset.json";
+import { url as cabecaImg } from "@/assets/neuro-treino/sentidos/cabeca.png.asset.json";
 
 /**
  * EI03CG04 — Aula 4: Pulando, correndo, subindo

@@ -1,24 +1,24 @@
 import type { Aula } from "../types";
-import quadroImg from "@/assets/neuro-treino/objetos/quadro.png";
-import artistaImg from "@/assets/neuro-treino/objetos/artista.png";
-import criancasGrupoImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import museuImg from "@/assets/neuro-treino/objetos/museu.png";
-import felizImg from "@/assets/neuro-treino/emocoes/feliz.png";
-import tristeImg from "@/assets/neuro-treino/emocoes/triste.png";
-import surpresoImg from "@/assets/neuro-treino/emocoes/surpreso.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import paletaImg from "@/assets/neuro-treino/objetos/paleta.png";
-import desenhoImg from "@/assets/neuro-treino/objetos/desenho.png";
-import colagemImg from "@/assets/neuro-treino/objetos/colagem.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import arcoIrisImg from "@/assets/neuro-treino/objetos/arco-iris.png";
-import esculturaImg from "@/assets/neuro-treino/objetos/escultura.png";
-import quadroAlegreImg from "@/assets/neuro-treino/objetos/quadro-alegre.png";
-import quadroTristeImg from "@/assets/neuro-treino/objetos/quadro-triste.png";
-import quadroSurpresoImg from "@/assets/neuro-treino/objetos/quadro-surpreso.png";
+import { url as quadroImg } from "@/assets/neuro-treino/objetos/quadro.png.asset.json";
+import { url as artistaImg } from "@/assets/neuro-treino/objetos/artista.png.asset.json";
+import { url as criancasGrupoImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as museuImg } from "@/assets/neuro-treino/objetos/museu.png.asset.json";
+import { url as felizImg } from "@/assets/neuro-treino/emocoes/feliz.png.asset.json";
+import { url as tristeImg } from "@/assets/neuro-treino/emocoes/triste.png.asset.json";
+import { url as surpresoImg } from "@/assets/neuro-treino/emocoes/surpreso.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as paletaImg } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as desenhoImg } from "@/assets/neuro-treino/objetos/desenho.png.asset.json";
+import { url as colagemImg } from "@/assets/neuro-treino/objetos/colagem.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as arcoIrisImg } from "@/assets/neuro-treino/objetos/arco-iris.png.asset.json";
+import { url as esculturaImg } from "@/assets/neuro-treino/objetos/escultura.png.asset.json";
+import { url as quadroAlegreImg } from "@/assets/neuro-treino/objetos/quadro-alegre.png.asset.json";
+import { url as quadroTristeImg } from "@/assets/neuro-treino/objetos/quadro-triste.png.asset.json";
+import { url as quadroSurpresoImg } from "@/assets/neuro-treino/objetos/quadro-surpreso.png.asset.json";
 
 /**
  * EF15AR06 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)

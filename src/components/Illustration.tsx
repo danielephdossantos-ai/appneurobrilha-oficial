@@ -1,30 +1,30 @@
 import React from "react";
 
 /* ── Generated PNG assets ─────────────────────────────── */
-import appleImg from "@/assets/illustrations/apple.png";
-import dogImg from "@/assets/illustrations/dog.png";
-import starImg from "@/assets/illustrations/star.png";
-import fishImg from "@/assets/illustrations/fish.png";
-import lollipopImg from "@/assets/illustrations/lollipop.png";
-import bananaImg from "@/assets/illustrations/banana.png";
-import tropicalFishImg from "@/assets/illustrations/tropical-fish.png";
-import balloonImg from "@/assets/illustrations/balloon.png";
-import pineappleImg from "@/assets/illustrations/pineapple.png";
-import elephantImg from "@/assets/illustrations/elephant.png";
-import beeImg from "@/assets/illustrations/bee.png";
-import schoolImg from "@/assets/illustrations/school.png";
-import churchImg from "@/assets/illustrations/church.png";
-import eggImg from "@/assets/illustrations/egg.png";
-import bearImg from "@/assets/illustrations/bear.png";
-import macawImg from "@/assets/illustrations/macaw.png";
-import ringImg from "@/assets/illustrations/ring.png";
-import ladderImg from "@/assets/illustrations/ladder.png";
-import islandImg from "@/assets/illustrations/island.png";
-import iglooImg from "@/assets/illustrations/igloo.png";
-import eyeImg from "@/assets/illustrations/eye.png";
-import boneImg from "@/assets/illustrations/bone.png";
-import vultureImg from "@/assets/illustrations/vulture.png";
-import unicornImg from "@/assets/illustrations/unicorn.png";
+import { url as appleImg } from "@/assets/illustrations/apple.png.asset.json";
+import { url as dogImg } from "@/assets/illustrations/dog.png.asset.json";
+import { url as starImg } from "@/assets/illustrations/star.png.asset.json";
+import { url as fishImg } from "@/assets/illustrations/fish.png.asset.json";
+import { url as lollipopImg } from "@/assets/illustrations/lollipop.png.asset.json";
+import { url as bananaImg } from "@/assets/illustrations/banana.png.asset.json";
+import { url as tropicalFishImg } from "@/assets/illustrations/tropical-fish.png.asset.json";
+import { url as balloonImg } from "@/assets/illustrations/balloon.png.asset.json";
+import { url as pineappleImg } from "@/assets/illustrations/pineapple.png.asset.json";
+import { url as elephantImg } from "@/assets/illustrations/elephant.png.asset.json";
+import { url as beeImg } from "@/assets/illustrations/bee.png.asset.json";
+import { url as schoolImg } from "@/assets/illustrations/school.png.asset.json";
+import { url as churchImg } from "@/assets/illustrations/church.png.asset.json";
+import { url as eggImg } from "@/assets/illustrations/egg.png.asset.json";
+import { url as bearImg } from "@/assets/illustrations/bear.png.asset.json";
+import { url as macawImg } from "@/assets/illustrations/macaw.png.asset.json";
+import { url as ringImg } from "@/assets/illustrations/ring.png.asset.json";
+import { url as ladderImg } from "@/assets/illustrations/ladder.png.asset.json";
+import { url as islandImg } from "@/assets/illustrations/island.png.asset.json";
+import { url as iglooImg } from "@/assets/illustrations/igloo.png.asset.json";
+import { url as eyeImg } from "@/assets/illustrations/eye.png.asset.json";
+import { url as boneImg } from "@/assets/illustrations/bone.png.asset.json";
+import { url as vultureImg } from "@/assets/illustrations/vulture.png.asset.json";
+import { url as unicornImg } from "@/assets/illustrations/unicorn.png.asset.json";
 
 /* ── SVG-based premium flat illustrations ─────────────── */
 

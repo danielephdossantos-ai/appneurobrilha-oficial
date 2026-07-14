@@ -1,7 +1,7 @@
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as imgTriste } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
+import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
+import { url as imgConfuso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
 
 // ============ HISTÓRIAS SOCIAIS (30) ============
 export type HistoriaOpcao = { texto: string; certo: boolean; feedback: string };

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Orbit, Compass, Sparkles, Snowflake, Flame } from "lucide-react";
 import type { RoteiroVisual } from "./dados-fund2";
-import planetaTerra from "@/assets/geo-fund2/planeta-terra.png";
+import { url as planetaTerra } from "@/assets/geo-fund2/planeta-terra.png.asset.json";
 
 /** Terra realista reutilizável (foto NASA-style com borda atmosférica). */
 function TerraReal({

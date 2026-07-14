@@ -10,16 +10,16 @@
  *
  * O código BNCC continua interno; a UI infantil vê apenas o nome do mascote.
  */
-import pipEspaco from "@/assets/pip-espaco.png";
-import pipaProfessora from "@/assets/pip-girl-professora.png";
-import pipaDoutora from "@/assets/pip-girl-doutora.png";
-import pipTeenPrincipe from "@/assets/pip-teen-principe.png";
-import pipVeiculos from "@/assets/pip-veiculos.png";
-import pipaArte from "@/assets/pip-girl-arte.png";
-import pipTeenBola from "@/assets/pip-teen-bola.png";
-import pipTeenCyber from "@/assets/pip-teen-cyber.png";
-import pipaFada from "@/assets/pip-girl-fada.png";
-import pipMascot from "@/assets/pip-mascot.png";
+import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
+import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
+import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
+import { url as pipTeenPrincipe } from "@/assets/pip-teen-principe.png.asset.json";
+import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
+import { url as pipaArte } from "@/assets/pip-girl-arte.png.asset.json";
+import { url as pipTeenBola } from "@/assets/pip-teen-bola.png.asset.json";
+import { url as pipTeenCyber } from "@/assets/pip-teen-cyber.png.asset.json";
+import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
+import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
 import { disciplinaDoCodigo } from "./missoes-tema";
 
 export type MascoteDisciplina = {

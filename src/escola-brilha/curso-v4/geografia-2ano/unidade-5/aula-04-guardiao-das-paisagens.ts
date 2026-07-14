@@ -1,20 +1,20 @@
 import type { AulaPortuguesV4 } from "../../types";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import predio from "@/assets/neuro-treino/objetos/predio.png";
-import rio from "@/assets/neuro-treino/objetos/lago.png";
-import ponte from "@/assets/neuro-treino/objetos/ponte.png";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
-import lixeiraReciclagem from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
-import funcionarioLimpeza from "@/assets/neuro-treino/objetos/funcionario-limpeza.png";
-import planta from "@/assets/neuro-treino/objetos/planta-pequena.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import vento from "@/assets/neuro-treino/objetos/vento.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as predio } from "@/assets/neuro-treino/objetos/predio.png.asset.json";
+import { url as rio } from "@/assets/neuro-treino/objetos/lago.png.asset.json";
+import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
+import { url as lixeiraReciclagem } from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png.asset.json";
+import { url as funcionarioLimpeza } from "@/assets/neuro-treino/objetos/funcionario-limpeza.png.asset.json";
+import { url as planta } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as vento } from "@/assets/neuro-treino/objetos/vento.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 5 · Aula 04

@@ -1,8 +1,8 @@
 import type { AulaV4 } from "../../types";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import caixa from "@/assets/neuro-treino/objetos/caixa.png";
-import robo from "@/assets/neuro-treino/objetos/robo.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
+import { url as robo } from "@/assets/neuro-treino/objetos/robo.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 4 · Aula 3 — "Completando a Dezena"

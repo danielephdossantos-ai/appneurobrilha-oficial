@@ -1,14 +1,14 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
-import mochila from "@/assets/neuro-treino/objetos/mochila.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import parque from "@/assets/neuro-treino/objetos/parque.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
 
 /**
  * Unidade 5 · Aula 1 — Antes de Escrever, Vamos Pensar

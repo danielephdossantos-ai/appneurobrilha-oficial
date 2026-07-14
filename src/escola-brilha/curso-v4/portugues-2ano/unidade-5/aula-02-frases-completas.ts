@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import parque from "@/assets/neuro-treino/objetos/parque.png";
-import gato from "@/assets/neuro-treino/objetos/gato.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
 
 /**
  * Unidade 5 · Aula 2 — Construindo Frases Completas

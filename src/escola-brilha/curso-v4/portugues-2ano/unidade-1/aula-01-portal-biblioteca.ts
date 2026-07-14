@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 
 /**
  * Aula 1 — O Portal da Biblioteca

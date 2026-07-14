@@ -1,15 +1,15 @@
 import type { Aula } from "../types";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import luaImg from "@/assets/neuro-treino/objetos/lua.png";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import chuvaImg from "@/assets/neuro-treino/objetos/chuva.png";
-import fogoImg from "@/assets/neuro-treino/objetos/fogo.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import ursoImg from "@/assets/neuro-treino/objetos/ursinho.png";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as chuvaImg } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as fogoImg } from "@/assets/neuro-treino/objetos/fogo.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as ursoImg } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
 
 /**
  * EF01LP15 — Aula 015 · Biblioteca Pedagógica Escola Brilha

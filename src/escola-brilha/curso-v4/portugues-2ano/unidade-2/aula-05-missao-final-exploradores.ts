@@ -1,16 +1,16 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import festa from "@/assets/neuro-treino/objetos/festa.png";
-import calendario from "@/assets/neuro-treino/objetos/calendario.png";
-import bolo from "@/assets/neuro-treino/objetos/bolo.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import lavarMaos from "@/assets/neuro-treino/objetos/lavar-maos.png";
-import mochila from "@/assets/neuro-treino/objetos/mochila.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as festa } from "@/assets/neuro-treino/objetos/festa.png.asset.json";
+import { url as calendario } from "@/assets/neuro-treino/objetos/calendario.png.asset.json";
+import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as lavarMaos } from "@/assets/neuro-treino/objetos/lavar-maos.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * Unidade 2 · Aula 5 — Missão Final dos Exploradores

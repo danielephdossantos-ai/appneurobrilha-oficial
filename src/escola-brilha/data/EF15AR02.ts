@@ -1,21 +1,21 @@
 import type { Aula } from "../types";
-import pontoImg from "@/assets/neuro-treino/objetos/ponto.png";
-import linhaImg from "@/assets/neuro-treino/objetos/linha.png";
-import circuloImg from "@/assets/neuro-treino/objetos/circulo.png";
-import quadradoImg from "@/assets/neuro-treino/objetos/quadrado.png";
-import trianguloImg from "@/assets/neuro-treino/objetos/triangulo.png";
-import arcoIrisImg from "@/assets/neuro-treino/objetos/arco-iris.png";
-import paletaImg from "@/assets/neuro-treino/objetos/paleta.png";
-import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
-import tintaImg from "@/assets/neuro-treino/objetos/tinta.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import blocoImg from "@/assets/neuro-treino/objetos/bloco.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import carroImg from "@/assets/neuro-treino/objetos/carro.png";
+import { url as pontoImg } from "@/assets/neuro-treino/objetos/ponto.png.asset.json";
+import { url as linhaImg } from "@/assets/neuro-treino/objetos/linha.png.asset.json";
+import { url as circuloImg } from "@/assets/neuro-treino/objetos/circulo.png.asset.json";
+import { url as quadradoImg } from "@/assets/neuro-treino/objetos/quadrado.png.asset.json";
+import { url as trianguloImg } from "@/assets/neuro-treino/objetos/triangulo.png.asset.json";
+import { url as arcoIrisImg } from "@/assets/neuro-treino/objetos/arco-iris.png.asset.json";
+import { url as paletaImg } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as tintaImg } from "@/assets/neuro-treino/objetos/tinta.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as blocoImg } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
 
 /**
  * EF15AR02 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)

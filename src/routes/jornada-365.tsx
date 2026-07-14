@@ -14,23 +14,23 @@ import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
 // Mundos (backgrounds)
-import worldDino from "@/assets/neuro-treino/worlds/dinossauros.jpg";
-import worldMinecraft from "@/assets/neuro-treino/worlds/minecraft.jpg";
-import worldCarros from "@/assets/neuro-treino/worlds/carros.jpg";
-import worldFazenda from "@/assets/neuro-treino/worlds/fazendinha.jpg";
-import worldEspaco from "@/assets/neuro-treino/worlds/espaco.jpg";
-import worldAnimais from "@/assets/neuro-treino/worlds/animais.jpg";
-import worldHerois from "@/assets/neuro-treino/worlds/herois.jpg";
-import worldArte from "@/assets/neuro-treino/worlds/arte.jpg";
-import worldMusica from "@/assets/neuro-treino/worlds/musica.jpg";
-import worldPrincesas from "@/assets/neuro-treino/worlds/princesas.jpg";
-import worldTrens from "@/assets/neuro-treino/worlds/trens.jpg";
-import worldRobos from "@/assets/neuro-treino/worlds/robos.jpg";
-import worldVeiculos from "@/assets/neuro-treino/worlds/veiculos.jpg";
-import worldOceano from "@/assets/neuro-treino/worlds/oceano.jpg";
-import worldFloresta from "@/assets/neuro-treino/worlds/floresta.jpg";
-import worldCastelo from "@/assets/neuro-treino/worlds/castelo.jpg";
-import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
+import { url as worldDino } from "@/assets/neuro-treino/worlds/dinossauros.jpg.asset.json";
+import { url as worldMinecraft } from "@/assets/neuro-treino/worlds/minecraft.jpg.asset.json";
+import { url as worldCarros } from "@/assets/neuro-treino/worlds/carros.jpg.asset.json";
+import { url as worldFazenda } from "@/assets/neuro-treino/worlds/fazendinha.jpg.asset.json";
+import { url as worldEspaco } from "@/assets/neuro-treino/worlds/espaco.jpg.asset.json";
+import { url as worldAnimais } from "@/assets/neuro-treino/worlds/animais.jpg.asset.json";
+import { url as worldHerois } from "@/assets/neuro-treino/worlds/herois.jpg.asset.json";
+import { url as worldArte } from "@/assets/neuro-treino/worlds/arte.jpg.asset.json";
+import { url as worldMusica } from "@/assets/neuro-treino/worlds/musica.jpg.asset.json";
+import { url as worldPrincesas } from "@/assets/neuro-treino/worlds/princesas.jpg.asset.json";
+import { url as worldTrens } from "@/assets/neuro-treino/worlds/trens.jpg.asset.json";
+import { url as worldRobos } from "@/assets/neuro-treino/worlds/robos.jpg.asset.json";
+import { url as worldVeiculos } from "@/assets/neuro-treino/worlds/veiculos.jpg.asset.json";
+import { url as worldOceano } from "@/assets/neuro-treino/worlds/oceano.jpg.asset.json";
+import { url as worldFloresta } from "@/assets/neuro-treino/worlds/floresta.jpg.asset.json";
+import { url as worldCastelo } from "@/assets/neuro-treino/worlds/castelo.jpg.asset.json";
+import { url as worldDefault } from "@/assets/neuro-treino/worlds/default.jpg.asset.json";
 
 export const Route = createFileRoute("/jornada-365")({
   component: Jornada,

@@ -1,8 +1,8 @@
 import type { AulaV4 } from "../../types";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 5 · Aula 2 — "Problemas de Subtração"

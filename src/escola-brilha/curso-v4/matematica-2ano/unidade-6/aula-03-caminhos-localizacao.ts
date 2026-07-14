@@ -1,11 +1,11 @@
 import type { AulaV4 } from "../../types";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import casa from "@/assets/neuro-treino/objetos/casa.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import parque from "@/assets/neuro-treino/objetos/parque.png";
-import mercado from "@/assets/neuro-treino/objetos/mercado.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as mercado } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 6 · Aula 3 — "Caminhos e Localização"

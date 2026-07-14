@@ -1,17 +1,17 @@
 import type { Aula } from "../types";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import luaImg from "@/assets/neuro-treino/objetos/lua.png";
-import calendarioImg from "@/assets/neuro-treino/objetos/calendario.png";
-import relogioImg from "@/assets/neuro-treino/objetos/relogio.png";
-import diaImg from "@/assets/neuro-treino/objetos/dia.png";
-import noiteImg from "@/assets/neuro-treino/objetos/noite.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import meninoAcordandoImg from "@/assets/neuro-treino/objetos/menino-acordando.png";
-import banhoImg from "@/assets/neuro-treino/objetos/banho.png";
-import escovarDentesImg from "@/assets/neuro-treino/objetos/escovar-dentes.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as calendarioImg } from "@/assets/neuro-treino/objetos/calendario.png.asset.json";
+import { url as relogioImg } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
+import { url as diaImg } from "@/assets/neuro-treino/objetos/dia.png.asset.json";
+import { url as noiteImg } from "@/assets/neuro-treino/objetos/noite.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as meninoAcordandoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as banhoImg } from "@/assets/neuro-treino/objetos/banho.png.asset.json";
+import { url as escovarDentesImg } from "@/assets/neuro-treino/objetos/escovar-dentes.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 
 /**
  * EF01CI05 — Ciências · 1º Ano

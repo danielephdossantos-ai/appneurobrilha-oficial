@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import pracaImg from "@/assets/neuro-treino/objetos/praca.png";
-import mercadoImg from "@/assets/neuro-treino/objetos/mercado.png";
-import postoImg from "@/assets/neuro-treino/objetos/posto-saude.png";
-import onibusImg from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import mapaImg from "@/assets/neuro-treino/objetos/mapa.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import familiaImg from "@/assets/neuro-treino/objetos/familia-tradicional.png";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as pracaImg } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as mercadoImg } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as postoImg } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as onibusImg } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
 
 /**
  * EF01GE01 — Geografia · 1º Ano

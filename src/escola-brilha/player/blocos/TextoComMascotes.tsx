@@ -1,10 +1,10 @@
-import brilhaImg from "@/assets/escola-brilha/mascotes/brilha.png";
-import corujaImg from "@/assets/escola-brilha/ei-mundo1/coruja.png";
-import lupiImg from "@/assets/escola-brilha/ei-mundo1/lupi.png";
-import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
-import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
-import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
-import esquiloImg from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as brilhaImg } from "@/assets/escola-brilha/mascotes/brilha.png.asset.json";
+import { url as corujaImg } from "@/assets/escola-brilha/ei-mundo1/coruja.png.asset.json";
+import { url as lupiImg } from "@/assets/escola-brilha/ei-mundo1/lupi.png.asset.json";
+import { url as fifiImg } from "@/assets/escola-brilha/ei-mundo1/fifi.png.asset.json";
+import { url as teoImg } from "@/assets/escola-brilha/ei-mundo1/teo.png.asset.json";
+import { url as piuImg } from "@/assets/escola-brilha/ei-mundo1/piu.png.asset.json";
+import { url as esquiloImg } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Detecta menções aos mascotes oficiais em qualquer texto de aula e

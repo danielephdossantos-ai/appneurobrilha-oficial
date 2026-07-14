@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import pipEgg from "@/assets/pip-egg.png";
-import pipHatching from "@/assets/pip-hatching.png";
-import pipBaby from "@/assets/pip-baby.png";
-import pipaEgg from "@/assets/pipa-egg.png";
-import pipaHatching from "@/assets/pipa-hatching.png";
-import pipaBaby from "@/assets/pipa-baby.png";
+import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
+import { url as pipHatching } from "@/assets/pip-hatching.png.asset.json";
+import { url as pipBaby } from "@/assets/pip-baby.png.asset.json";
+import { url as pipaEgg } from "@/assets/pipa-egg.png.asset.json";
+import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
+import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
 import { KidButton } from "@/components/ui/KidButton";
 import { supabase } from "@/database/supabase/client";
 

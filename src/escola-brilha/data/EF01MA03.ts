@@ -1,18 +1,18 @@
 import type { Aula } from "../types";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import ninhoImg from "@/assets/neuro-treino/objetos/ninho.png";
-import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
-import cenouraImg from "@/assets/neuro-treino/vegetais/cenoura.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import joaninhaImg from "@/assets/neuro-treino/objetos/joaninha.png";
-import minhocaImg from "@/assets/neuro-treino/objetos/minhoca.png";
-import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
-import borboletaImg from "@/assets/neuro-treino/objetos/borboleta.png";
-import morangoImg from "@/assets/neuro-treino/frutas/morango.png";
-import cachorroImg from "@/assets/neuro-treino/objetos/cachorro.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
+import { url as coelhoImg } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as cenouraImg } from "@/assets/neuro-treino/vegetais/cenoura.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as joaninhaImg } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
+import { url as minhocaImg } from "@/assets/neuro-treino/objetos/minhoca.png.asset.json";
+import { url as tartarugaImg } from "@/assets/hiperfocos/animais/tartaruga.png.asset.json";
+import { url as borboletaImg } from "@/assets/neuro-treino/objetos/borboleta.png.asset.json";
+import { url as morangoImg } from "@/assets/neuro-treino/frutas/morango.png.asset.json";
+import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 
 /**
  * EF01MA03 — Aula 003 · Biblioteca Pedagógica Escola Brilha

@@ -22,46 +22,46 @@ import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
 // Ícones por categoria (v2 - ilustrações premium 2D)
-import icSonsIniciais from "@/assets/neuro-treino/icons/v2/sons-iniciais.png";
-import icMotorzinho from "@/assets/neuro-treino/icons/v2/motorzinho-dos-sons.png";
-import icRimas from "@/assets/neuro-treino/icons/v2/rimas.png";
-import icPedacinhos from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png";
-import icOndeEsta from "@/assets/neuro-treino/icons/v2/onde-esta.png";
-import icSeqPadrao from "@/assets/neuro-treino/icons/v2/sequencia-e-padrao.png";
-import icCadePar from "@/assets/neuro-treino/icons/v2/cade-o-par.png";
+import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
+import { url as icMotorzinho } from "@/assets/neuro-treino/icons/v2/motorzinho-dos-sons.png.asset.json";
+import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
+import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
+import { url as icOndeEsta } from "@/assets/neuro-treino/icons/v2/onde-esta.png.asset.json";
+import { url as icSeqPadrao } from "@/assets/neuro-treino/icons/v2/sequencia-e-padrao.png.asset.json";
+import { url as icCadePar } from "@/assets/neuro-treino/icons/v2/cade-o-par.png.asset.json";
 
 
 
-import icMosaico from "@/assets/neuro-treino/icons/v2/mosaico-de-formas.png";
-import icSeqCores from "@/assets/neuro-treino/icons/v2/sequencia-de-cores.png";
+import { url as icMosaico } from "@/assets/neuro-treino/icons/v2/mosaico-de-formas.png.asset.json";
+import { url as icSeqCores } from "@/assets/neuro-treino/icons/v2/sequencia-de-cores.png.asset.json";
 
 
-import icOnomatopeias from "@/assets/neuro-treino/icons/v2/onomatopeias-animadas.png";
-import icRitmoSopro from "@/assets/neuro-treino/icons/v2/ritmo-e-sopro.png";
-import icSonsCorpo from "@/assets/neuro-treino/icons/v2/paromatopeias-corpo.png";
-import icTracado from "@/assets/neuro-treino/icons/v2/tracado-letras.png";
+import { url as icOnomatopeias } from "@/assets/neuro-treino/icons/v2/onomatopeias-animadas.png.asset.json";
+import { url as icRitmoSopro } from "@/assets/neuro-treino/icons/v2/ritmo-e-sopro.png.asset.json";
+import { url as icSonsCorpo } from "@/assets/neuro-treino/icons/v2/paromatopeias-corpo.png.asset.json";
+import { url as icTracado } from "@/assets/neuro-treino/icons/v2/tracado-letras.png.asset.json";
 
 
-import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
-import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
-import icConscienciaFono from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png";
-import icDiscriminacaoAuditiva from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.png";
-import icArticulacaoSons from "@/assets/neuro-treino/icons/v2/articulacao-sons.png";
-import icVocabularioSemantico from "@/assets/neuro-treino/icons/v2/vocabulario-semantico.png";
-import icNomeacaoRapida from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.png";
-import icToqueSequencia from "@/assets/neuro-treino/icons/v2/toque-sequencia.png";
-import icRitmoBatidas from "@/assets/neuro-treino/icons/v2/ritmo-batidas.png";
-import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.png";
-import icAlvoMovel from "@/assets/neuro-treino/icons/v2/alvo-movel.png";
-import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.png";
-import icMemoriaVisual from "@/assets/neuro-treino/icons/v2/memoria-visual.png";
-import icReacaoRapida from "@/assets/neuro-treino/icons/v2/reacao-rapida.png";
-import icSeguirInstrucao from "@/assets/neuro-treino/icons/v2/seguir-instrucao.png";
-import icLetraSom from "@/assets/neuro-treino/icons/v2/letra-som.png";
-import icPalavraImagem from "@/assets/neuro-treino/icons/v2/palavra-imagem.png";
-import icFormandoPalavras from "@/assets/neuro-treino/icons/v2/formando-palavras.png";
-import icLeituraPalavras from "@/assets/neuro-treino/icons/v2/leitura-palavras.png";
-import icCompletarLetra from "@/assets/neuro-treino/icons/v2/completar-letra.png";
+import { url as icTriagem } from "@/assets/neuro-treino/icons/v2/triagem-categorias.png.asset.json";
+import { url as icExpressao } from "@/assets/neuro-treino/icons/v2/expressao-emocao.png.asset.json";
+import { url as icConscienciaFono } from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png.asset.json";
+import { url as icDiscriminacaoAuditiva } from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.png.asset.json";
+import { url as icArticulacaoSons } from "@/assets/neuro-treino/icons/v2/articulacao-sons.png.asset.json";
+import { url as icVocabularioSemantico } from "@/assets/neuro-treino/icons/v2/vocabulario-semantico.png.asset.json";
+import { url as icNomeacaoRapida } from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.png.asset.json";
+import { url as icToqueSequencia } from "@/assets/neuro-treino/icons/v2/toque-sequencia.png.asset.json";
+import { url as icRitmoBatidas } from "@/assets/neuro-treino/icons/v2/ritmo-batidas.png.asset.json";
+import { url as icCopiarFigura } from "@/assets/neuro-treino/icons/v2/copiar-figura.png.asset.json";
+import { url as icAlvoMovel } from "@/assets/neuro-treino/icons/v2/alvo-movel.png.asset.json";
+import { url as icAcharDiferente } from "@/assets/neuro-treino/icons/v2/achar-diferente.png.asset.json";
+import { url as icMemoriaVisual } from "@/assets/neuro-treino/icons/v2/memoria-visual.png.asset.json";
+import { url as icReacaoRapida } from "@/assets/neuro-treino/icons/v2/reacao-rapida.png.asset.json";
+import { url as icSeguirInstrucao } from "@/assets/neuro-treino/icons/v2/seguir-instrucao.png.asset.json";
+import { url as icLetraSom } from "@/assets/neuro-treino/icons/v2/letra-som.png.asset.json";
+import { url as icPalavraImagem } from "@/assets/neuro-treino/icons/v2/palavra-imagem.png.asset.json";
+import { url as icFormandoPalavras } from "@/assets/neuro-treino/icons/v2/formando-palavras.png.asset.json";
+import { url as icLeituraPalavras } from "@/assets/neuro-treino/icons/v2/leitura-palavras.png.asset.json";
+import { url as icCompletarLetra } from "@/assets/neuro-treino/icons/v2/completar-letra.png.asset.json";
 
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,

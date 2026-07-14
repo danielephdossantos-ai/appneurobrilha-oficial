@@ -1,24 +1,24 @@
 import type { Aula } from "../types";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import chuvaImg from "@/assets/neuro-treino/objetos/chuva.png";
-import nuvemImg from "@/assets/neuro-treino/objetos/nuvem.png";
-import ventoImg from "@/assets/neuro-treino/objetos/vento.png";
-import arcoIrisImg from "@/assets/neuro-treino/objetos/arco-iris.png";
-import diaImg from "@/assets/neuro-treino/objetos/dia.png";
-import noiteImg from "@/assets/neuro-treino/objetos/noite.png";
-import luaImg from "@/assets/neuro-treino/objetos/lua.png";
-import sombrinhaImg from "@/assets/neuro-treino/objetos/sombrinha.png";
-import casacoImg from "@/assets/neuro-treino/objetos/casaco.png";
-import camisetaImg from "@/assets/neuro-treino/objetos/camiseta.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import regadorImg from "@/assets/neuro-treino/objetos/regador.png";
-import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import pipaImg from "@/assets/neuro-treino/objetos/pipa.png";
-import lagoImg from "@/assets/neuro-treino/objetos/lago.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import bolaPraiaImg from "@/assets/neuro-treino/objetos/bola-praia.png";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as chuvaImg } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as nuvemImg } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as ventoImg } from "@/assets/neuro-treino/objetos/vento.png.asset.json";
+import { url as arcoIrisImg } from "@/assets/neuro-treino/objetos/arco-iris.png.asset.json";
+import { url as diaImg } from "@/assets/neuro-treino/objetos/dia.png.asset.json";
+import { url as noiteImg } from "@/assets/neuro-treino/objetos/noite.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as sombrinhaImg } from "@/assets/neuro-treino/objetos/sombrinha.png.asset.json";
+import { url as casacoImg } from "@/assets/neuro-treino/objetos/casaco.png.asset.json";
+import { url as camisetaImg } from "@/assets/neuro-treino/objetos/camiseta.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as regadorImg } from "@/assets/neuro-treino/objetos/regador.png.asset.json";
+import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as pipaImg } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as lagoImg } from "@/assets/neuro-treino/objetos/lago.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bolaPraiaImg } from "@/assets/neuro-treino/objetos/bola-praia.png.asset.json";
 
 /**
  * EF01GE10 — Geografia · 1º Ano

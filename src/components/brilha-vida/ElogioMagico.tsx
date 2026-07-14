@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Sparkles, RotateCcw } from "lucide-react";
 import { CENAS_ELOGIO as CENAS } from "@/data/brilha-vida/cenarios";
 
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 
 export function ElogioMagico({ onClose }: { onClose: () => void }) {
   const cenas = useMemo(() => [...CENAS].sort(() => Math.random() - 0.5), []);

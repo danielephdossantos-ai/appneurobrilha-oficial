@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import cachorroImg from "@/assets/neuro-treino/objetos/cachorro.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import peixeImg from "@/assets/neuro-treino/objetos/peixe.png";
-import carroImg from "@/assets/neuro-treino/objetos/carro.png";
-import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 
 /**
  * EF01LP02 — Aula 002 · Biblioteca Pedagógica Escola Brilha

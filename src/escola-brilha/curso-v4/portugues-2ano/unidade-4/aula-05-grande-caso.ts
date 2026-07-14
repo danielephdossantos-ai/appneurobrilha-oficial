@@ -1,15 +1,15 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import binoculo from "@/assets/neuro-treino/objetos/binoculo.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import bussola from "@/assets/neuro-treino/objetos/bussola.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as binoculo } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as bussola } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
 
 /**
  * Unidade 4 · Aula 5 — O Grande Caso da Biblioteca

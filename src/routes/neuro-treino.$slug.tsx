@@ -39,12 +39,12 @@ import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from 
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
-import soproCarro from "@/assets/neuro-treino/sopro/carro.png";
-import soproVela from "@/assets/neuro-treino/sopro/vela.png";
-import soproBalao from "@/assets/neuro-treino/sopro/balao.png";
-import soproMoinho from "@/assets/neuro-treino/sopro/moinho.png";
-import soproBarco from "@/assets/neuro-treino/sopro/barco.png";
-import soproBolha from "@/assets/neuro-treino/sopro/bolha.png";
+import { url as soproCarro } from "@/assets/neuro-treino/sopro/carro.png.asset.json";
+import { url as soproVela } from "@/assets/neuro-treino/sopro/vela.png.asset.json";
+import { url as soproBalao } from "@/assets/neuro-treino/sopro/balao.png.asset.json";
+import { url as soproMoinho } from "@/assets/neuro-treino/sopro/moinho.png.asset.json";
+import { url as soproBarco } from "@/assets/neuro-treino/sopro/barco.png.asset.json";
+import { url as soproBolha } from "@/assets/neuro-treino/sopro/bolha.png.asset.json";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
   component: NeuroAtividade,
