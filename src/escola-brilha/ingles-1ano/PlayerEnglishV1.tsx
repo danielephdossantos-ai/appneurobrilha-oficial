@@ -883,8 +883,9 @@ function MiniGameMatch() {
     } else {
       setWrong({ en: selEn, pt: ptId });
       setSelEn(null);
-      setTimeout(() => setWrong(null), 900);
+      setTimeout(() => setWrong(null), 3500);
     }
+
   };
 
   return (
