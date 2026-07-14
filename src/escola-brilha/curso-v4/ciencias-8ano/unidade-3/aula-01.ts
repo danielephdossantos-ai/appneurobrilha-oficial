@@ -1,6 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
 import forcasImg from "@/assets/ciencias-8ano/u3/forcas-diagrama.jpg";
 import maquinasImg from "@/assets/ciencias-8ano/u3/maquinas-simples.jpg";
+import rampaImg from "@/assets/ciencias-8ano/u3/rampa-plano-inclinado.jpg";
+import alavancaImg from "@/assets/ciencias-8ano/u3/alavanca-fulcro.jpg";
+import roldanaImg from "@/assets/ciencias-8ano/u3/roldana-polia.jpg";
+import pressaoImg from "@/assets/ciencias-8ano/u3/pressao-faca-agulha.jpg";
 
 /**
  * Ciências · 8º Ano · U3 · A01 — "Laboratório de Física"
@@ -19,7 +23,7 @@ export const aula01: AulaGeoV1 = {
     estilo: "teen",
     instrucao: "Bancada de física com plano inclinado. Toque para iniciar.",
     mapaUrl: forcasImg,
-    imagemDestaqueUrl: maquinasImg,
+    imagemDestaqueUrl: rampaImg,
     aurora:
       "Setor 3: Laboratório de Física. Missão: entender por que uma criança consegue levantar um adulto usando uma gangorra — a mágica das MÁQUINAS SIMPLES.",
     falaFinal:
@@ -31,9 +35,9 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Problema: você precisa subir uma caixa pesada num caminhão. Puxar por uma RAMPA ou LEVANTAR direto — qual exige MENOS força?",
     pergunta: "Formule sua HIPÓTESE:",
-    fotoUrl: forcasImg,
+    fotoUrl: rampaImg,
     opcoes: [
-      { id: "rampa", titulo: "Rampa exige menos força", subtitulo: "mas percorre mais distância", emoji: "📐", cor: "from-emerald-500 to-teal-700", fotoUrl: forcasImg },
+      { id: "rampa", titulo: "Rampa exige menos força", subtitulo: "mas percorre mais distância", emoji: "📐", cor: "from-emerald-500 to-teal-700", fotoUrl: rampaImg },
       { id: "levantar", titulo: "Levantar direto é melhor", subtitulo: "menos distância = menos esforço", emoji: "💪", cor: "from-red-500 to-rose-700", fotoUrl: forcasImg },
       { id: "igual", titulo: "Dá exatamente igual", subtitulo: "a caixa é a mesma", emoji: "🟰", cor: "from-slate-500 to-slate-700", fotoUrl: forcasImg },
     ],
@@ -52,10 +56,10 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Vocabulário da física do cotidiano",
     cadernos: [
       { id: "forca", capa: "FORÇA", emoji: "💪", cor: "from-red-500 to-rose-700", conteudo: "Interação capaz de mudar o movimento ou deformar um corpo. Medida em NEWTONS (N). F = m · a.", exemplo: "Ex.: empurrar uma porta, gravidade puxando você.", fotoUrl: forcasImg },
-      { id: "trabalho", capa: "TRABALHO", emoji: "⚙️", cor: "from-amber-500 to-orange-700", conteudo: "Energia transferida quando uma força DESLOCA um corpo. T = F · d. Medido em JOULES (J).", exemplo: "Ex.: erguer uma mochila de 10 N por 1 m = 10 J.", fotoUrl: maquinasImg },
+      { id: "trabalho", capa: "TRABALHO", emoji: "⚙️", cor: "from-amber-500 to-orange-700", conteudo: "Energia transferida quando uma força DESLOCA um corpo. T = F · d. Medido em JOULES (J).", exemplo: "Ex.: erguer uma mochila de 10 N por 1 m = 10 J.", fotoUrl: rampaImg },
       { id: "maquina", capa: "MÁQUINA SIMPLES", emoji: "🔧", cor: "from-sky-500 to-cyan-700", conteudo: "Dispositivo que MULTIPLICA força OU muda direção do esforço. Seis tipos: alavanca, roldana, plano inclinado, cunha, parafuso, roda-eixo.", exemplo: "Ex.: gangorra (alavanca), tesoura, rampa.", fotoUrl: maquinasImg },
-      { id: "pressao", capa: "PRESSÃO", emoji: "📏", cor: "from-indigo-500 to-purple-700", conteudo: "Força aplicada por unidade de ÁREA. P = F / A. Medida em Pascal (Pa). Área menor = pressão maior.", exemplo: "Ex.: faca afiada corta; faca cega não.", fotoUrl: forcasImg },
-      { id: "energia", capa: "ENERGIA", emoji: "⚡", cor: "from-emerald-500 to-teal-700", conteudo: "Capacidade de realizar trabalho. Conserva-se: só muda de forma (potencial → cinética → térmica…).", exemplo: "Ex.: água em cachoeira → turbina → eletricidade.", fotoUrl: maquinasImg },
+      { id: "pressao", capa: "PRESSÃO", emoji: "📏", cor: "from-indigo-500 to-purple-700", conteudo: "Força aplicada por unidade de ÁREA. P = F / A. Medida em Pascal (Pa). Área menor = pressão maior.", exemplo: "Ex.: faca afiada corta; faca cega não.", fotoUrl: pressaoImg },
+      { id: "energia", capa: "ENERGIA", emoji: "⚡", cor: "from-emerald-500 to-teal-700", conteudo: "Capacidade de realizar trabalho. Conserva-se: só muda de forma (potencial → cinética → térmica…).", exemplo: "Ex.: água em cachoeira → turbina → eletricidade.", fotoUrl: roldanaImg },
     ],
     falaFinal:
       "Força, trabalho, máquina simples, pressão, energia. Vocabulário da mecânica.",
@@ -67,9 +71,9 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nas máquinas",
     mapaUrl: maquinasImg,
     pontos: [
-      { id: "alavanca", x: 20, y: 40, emoji: "⚖️", cor: "from-amber-500 to-orange-700", titulo: "Alavanca", texto: "Barra que gira em um ponto de apoio. Multiplica força quando o braço da força é MAIOR que o braço da resistência.", fotoUrl: maquinasImg },
-      { id: "roldana", x: 15, y: 78, emoji: "🎡", cor: "from-sky-500 to-cyan-700", titulo: "Roldana (polia)", texto: "Roda com sulco onde passa uma corda. Muda a direção da força. Sistemas de várias polias multiplicam força.", fotoUrl: maquinasImg },
-      { id: "plano", x: 60, y: 50, emoji: "📐", cor: "from-emerald-500 to-teal-700", titulo: "Plano inclinado", texto: "Rampa. Reduz a força necessária para elevar um corpo — em troca de distância maior.", fotoUrl: forcasImg },
+      { id: "alavanca", x: 20, y: 40, emoji: "⚖️", cor: "from-amber-500 to-orange-700", titulo: "Alavanca", texto: "Barra que gira em um ponto de apoio. Multiplica força quando o braço da força é MAIOR que o braço da resistência.", fotoUrl: alavancaImg },
+      { id: "roldana", x: 15, y: 78, emoji: "🎡", cor: "from-sky-500 to-cyan-700", titulo: "Roldana (polia)", texto: "Roda com sulco onde passa uma corda. Muda a direção da força. Sistemas de várias polias multiplicam força.", fotoUrl: roldanaImg },
+      { id: "plano", x: 60, y: 50, emoji: "📐", cor: "from-emerald-500 to-teal-700", titulo: "Plano inclinado", texto: "Rampa. Reduz a força necessária para elevar um corpo — em troca de distância maior.", fotoUrl: rampaImg },
       { id: "parafuso", x: 80, y: 80, emoji: "🔩", cor: "from-red-500 to-rose-700", titulo: "Parafuso", texto: "Plano inclinado enrolado em cilindro. Transforma rotação em avanço linear com muita força.", fotoUrl: maquinasImg },
     ],
     falaFinal:
@@ -89,7 +93,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Sim. Newton = kg·m/s². Joule é energia; segundo é tempo.",
         feedbackErro: "Joule = energia. Segundo = tempo. Força = NEWTON." },
-      { id: "q2", pergunta: "Como uma FACA AFIADA corta melhor que uma cega?", fotoUrl: forcasImg,
+      { id: "q2", pergunta: "Como uma FACA AFIADA corta melhor que uma cega?", fotoUrl: pressaoImg,
         cards: [
           { id: "a", emoji: "📏", titulo: "Área menor → pressão maior", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💪", titulo: "É mais pesada", cor: "from-red-500 to-rose-700" },
@@ -97,7 +101,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Correto. Mesma força, área bem menor → pressão muito maior.",
         feedbackErro: "P = F/A. Área menor → pressão maior. Por isso agulha e faca cortam." },
-      { id: "q3", pergunta: "Uma GANGORRA é uma máquina simples do tipo...", fotoUrl: maquinasImg,
+      { id: "q3", pergunta: "Uma GANGORRA é uma máquina simples do tipo...", fotoUrl: alavancaImg,
         cards: [
           { id: "a", emoji: "⚖️", titulo: "Alavanca", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎡", titulo: "Roldana", cor: "from-red-500 to-rose-700" },
@@ -117,8 +121,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos interruptores",
     mapaUrl: maquinasImg,
     camadas: [
-      { id: "alav", rotulo: "Família da Alavanca", emoji: "⚖️", cor: "from-amber-500 to-orange-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Alavanca, roldana e roda-eixo. Trabalham com ROTAÇÃO em torno de um ponto ou eixo.", fotoUrl: maquinasImg },
-      { id: "plano", rotulo: "Família do Plano Inclinado", emoji: "📐", cor: "from-emerald-500 to-teal-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Plano inclinado, cunha e parafuso. Trabalham espalhando o esforço por uma DISTÂNCIA MAIOR.", fotoUrl: forcasImg },
+      { id: "alav", rotulo: "Família da Alavanca", emoji: "⚖️", cor: "from-amber-500 to-orange-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Alavanca, roldana e roda-eixo. Trabalham com ROTAÇÃO em torno de um ponto ou eixo.", fotoUrl: alavancaImg },
+      { id: "plano", rotulo: "Família do Plano Inclinado", emoji: "📐", cor: "from-emerald-500 to-teal-700", rect: { x: 2, y: 2, w: 96, h: 96 }, descricao: "Plano inclinado, cunha e parafuso. Trabalham espalhando o esforço por uma DISTÂNCIA MAIOR.", fotoUrl: rampaImg },
     ],
     falaFinal:
       "Duas famílias, seis máquinas. Toda tecnologia complexa combina essas peças básicas.",
@@ -131,10 +135,10 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Passo a passo:",
     paradas: [
       { id: "identificar", emoji: "🔍", rotulo: "1. Identificar a força", descricao: "Ex.: peso da caixa = 50 N.", fotoUrl: forcasImg },
-      { id: "distancia", emoji: "📏", rotulo: "2. Medir o deslocamento", descricao: "Ex.: 2 m para cima.", fotoUrl: forcasImg },
-      { id: "formula", emoji: "🧮", rotulo: "3. Aplicar T = F · d", descricao: "Multiplique força por distância.", fotoUrl: maquinasImg },
-      { id: "calcular", emoji: "🎯", rotulo: "4. Calcular", descricao: "50 · 2 = 100.", fotoUrl: maquinasImg },
-      { id: "unidade", emoji: "🏷️", rotulo: "5. Colocar unidade", descricao: "Resultado: 100 J (joules).", fotoUrl: maquinasImg },
+      { id: "distancia", emoji: "📏", rotulo: "2. Medir o deslocamento", descricao: "Ex.: 2 m para cima.", fotoUrl: rampaImg },
+      { id: "formula", emoji: "🧮", rotulo: "3. Aplicar T = F · d", descricao: "Multiplique força por distância.", fotoUrl: forcasImg },
+      { id: "calcular", emoji: "🎯", rotulo: "4. Calcular", descricao: "50 · 2 = 100.", fotoUrl: forcasImg },
+      { id: "unidade", emoji: "🏷️", rotulo: "5. Colocar unidade", descricao: "Resultado: 100 J (joules).", fotoUrl: forcasImg },
     ],
     ordemCerta: ["identificar", "distancia", "formula", "calcular", "unidade"],
     feedbackAcerto:
@@ -152,7 +156,7 @@ export const aula01: AulaGeoV1 = {
     subtitulo: "Por que rampa exige menos força que erguer direto",
     paragrafos: [
       { id: "p1", texto: "OBJETIVO: comparar a FORÇA necessária para elevar uma caixa de 100 N a 1 m de altura de duas maneiras: (A) puxando direto para cima; (B) empurrando por uma rampa de 2 m de comprimento.", chaves: ["força"], definicoes: { força: "Interação que muda o movimento; medida em Newtons." }, fotoUrl: forcasImg },
-      { id: "p2", texto: "RESULTADO: em (A) precisamos aplicar 100 N na vertical. Em (B), na rampa, a força necessária cai para cerca de 50 N — MAS a caixa precisa percorrer 2 m em vez de 1 m. Trabalho total: 100 J nos dois casos.", chaves: ["trabalho"], definicoes: { trabalho: "T = F · d, em joules." }, fotoUrl: maquinasImg },
+      { id: "p2", texto: "RESULTADO: em (A) precisamos aplicar 100 N na vertical. Em (B), na rampa, a força necessária cai para cerca de 50 N — MAS a caixa precisa percorrer 2 m em vez de 1 m. Trabalho total: 100 J nos dois casos.", chaves: ["trabalho"], definicoes: { trabalho: "T = F · d, em joules." }, fotoUrl: rampaImg },
       { id: "p3", texto: "CONCLUSÃO: a máquina simples NÃO cria energia. Ela troca menos força por mais distância. Esse é o PRINCÍPIO GERAL de toda mecânica: energia se conserva. Rampas, alavancas e polias ajudam humanos a mover cargas grandes com músculos limitados.", chaves: ["princípio geral"], definicoes: { "princípio geral": "Conservação de energia — regra universal da física." }, fotoUrl: maquinasImg },
     ],
     falaFinal:
@@ -170,10 +174,10 @@ export const aula01: AulaGeoV1 = {
       { id: "roldana", emoji: "🎡", rotulo: "Roldana" },
     ],
     rodadas: [
-      { id: "r1", municipioA: { nome: "Rampa de skate", emoji: "🛹", cor: "from-emerald-500 to-teal-700" }, municipioB: { nome: "Sobe até altura", emoji: "⬆️", cor: "from-sky-500 to-cyan-700" }, contexto: "Superfície inclinada.", pecaCertaId: "plano", fotoUrl: forcasImg, feedbackAcerto: "Correto. Plano inclinado clássico.", feedbackErro: "Rampa = plano inclinado." },
-      { id: "r2", municipioA: { nome: "Gangorra", emoji: "⚖️", cor: "from-amber-500 to-orange-700" }, municipioB: { nome: "Ponto de apoio central", emoji: "🔺", cor: "from-red-500 to-rose-700" }, contexto: "Barra rígida girando em ponto de apoio.", pecaCertaId: "alavanca", fotoUrl: maquinasImg, feedbackAcerto: "Sim. Barra + apoio = alavanca.", feedbackErro: "Barra que gira em ponto de apoio = ALAVANCA." },
-      { id: "r3", municipioA: { nome: "Guindaste levantando peso", emoji: "🏗️", cor: "from-sky-500 to-cyan-700" }, municipioB: { nome: "Roda com cabo", emoji: "🎡", cor: "from-indigo-500 to-purple-700" }, contexto: "Cabo passa por roda no alto.", pecaCertaId: "roldana", fotoUrl: maquinasImg, feedbackAcerto: "Correto. Roldana muda direção da força.", feedbackErro: "Roda com sulco onde passa cabo = ROLDANA." },
-      { id: "r4", municipioA: { nome: "Tesoura", emoji: "✂️", cor: "from-red-500 to-rose-700" }, municipioB: { nome: "Duas lâminas + parafuso central", emoji: "⚖️", cor: "from-amber-500 to-orange-700" }, contexto: "Duas alavancas unidas.", pecaCertaId: "alavanca", fotoUrl: maquinasImg, feedbackAcerto: "Correto. Tesoura = dupla alavanca.", feedbackErro: "Tesoura = 2 ALAVANCAS unidas pelo parafuso." },
+      { id: "r1", municipioA: { nome: "Rampa de skate", emoji: "🛹", cor: "from-emerald-500 to-teal-700" }, municipioB: { nome: "Sobe até altura", emoji: "⬆️", cor: "from-sky-500 to-cyan-700" }, contexto: "Superfície inclinada.", pecaCertaId: "plano", fotoUrl: rampaImg, feedbackAcerto: "Correto. Plano inclinado clássico.", feedbackErro: "Rampa = plano inclinado." },
+      { id: "r2", municipioA: { nome: "Gangorra", emoji: "⚖️", cor: "from-amber-500 to-orange-700" }, municipioB: { nome: "Ponto de apoio central", emoji: "🔺", cor: "from-red-500 to-rose-700" }, contexto: "Barra rígida girando em ponto de apoio.", pecaCertaId: "alavanca", fotoUrl: alavancaImg, feedbackAcerto: "Sim. Barra + apoio = alavanca.", feedbackErro: "Barra que gira em ponto de apoio = ALAVANCA." },
+      { id: "r3", municipioA: { nome: "Guindaste levantando peso", emoji: "🏗️", cor: "from-sky-500 to-cyan-700" }, municipioB: { nome: "Roda com cabo", emoji: "🎡", cor: "from-indigo-500 to-purple-700" }, contexto: "Cabo passa por roda no alto.", pecaCertaId: "roldana", fotoUrl: roldanaImg, feedbackAcerto: "Correto. Roldana muda direção da força.", feedbackErro: "Roda com sulco onde passa cabo = ROLDANA." },
+      { id: "r4", municipioA: { nome: "Tesoura", emoji: "✂️", cor: "from-red-500 to-rose-700" }, municipioB: { nome: "Duas lâminas + parafuso central", emoji: "⚖️", cor: "from-amber-500 to-orange-700" }, contexto: "Duas alavancas unidas.", pecaCertaId: "alavanca", fotoUrl: alavancaImg, feedbackAcerto: "Correto. Tesoura = dupla alavanca.", feedbackErro: "Tesoura = 2 ALAVANCAS unidas pelo parafuso." },
     ],
     falaFinal:
       "Você já lê a física escondida em objetos do dia a dia.",
@@ -186,8 +190,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: maquinasImg,
     fatias: [
-      { id: "forca", rotulo: "Força & Pressão", emoji: "💪", percentual: 50, cor: "#ef4444", descricao: "Como o esforço se aplica: F = m·a, P = F/A. Máquinas simples multiplicam ou redirecionam força.", exemplos: ["Alavanca", "Faca (pressão)", "Peso"], fotoUrl: forcasImg },
-      { id: "energia", rotulo: "Trabalho & Energia", emoji: "⚡", percentual: 50, cor: "#f59e0b", descricao: "Como a energia se transfere: T = F·d. Energia se conserva — só muda de forma.", exemplos: ["Elevar uma caixa", "Cachoeira → hidrelétrica"], fotoUrl: maquinasImg },
+      { id: "forca", rotulo: "Força & Pressão", emoji: "💪", percentual: 50, cor: "#ef4444", descricao: "Como o esforço se aplica: F = m·a, P = F/A. Máquinas simples multiplicam ou redirecionam força.", exemplos: ["Alavanca", "Faca (pressão)", "Peso"], fotoUrl: pressaoImg },
+      { id: "energia", rotulo: "Trabalho & Energia", emoji: "⚡", percentual: 50, cor: "#f59e0b", descricao: "Como a energia se transfere: T = F·d. Energia se conserva — só muda de forma.", exemplos: ["Elevar uma caixa", "Cachoeira → hidrelétrica"], fotoUrl: rampaImg },
     ],
     falaFinal:
       "Força e energia são as duas metades da mecânica. Fim do Setor 3.",
@@ -200,21 +204,21 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: maquinasImg,
     perguntas: [
-      { id: "q1", pergunta: "Qual a fórmula do TRABALHO em física?", fotoUrl: forcasImg,
+      { id: "q1", pergunta: "Qual a fórmula do TRABALHO em física?", fotoUrl: rampaImg,
         opcoes: [
           { id: "a", texto: "T = F · d (força vezes deslocamento)", correta: true },
           { id: "b", texto: "T = m · v (massa vezes velocidade)" },
         ],
         feedbackAcerto: "Sim. Trabalho em joules = força (N) × distância (m).",
         feedbackErro: "m · v é quantidade de movimento. TRABALHO = F · d." },
-      { id: "q2", pergunta: "Por que uma AGULHA fura a pele com pouca força?", fotoUrl: forcasImg,
+      { id: "q2", pergunta: "Por que uma AGULHA fura a pele com pouca força?", fotoUrl: pressaoImg,
         opcoes: [
           { id: "a", texto: "Porque a área da ponta é minúscula → pressão gigante", correta: true },
           { id: "b", texto: "Porque a agulha é magnética" },
         ],
         feedbackAcerto: "Correto. P = F/A. Área quase zero → pressão altíssima.",
         feedbackErro: "Não é magnetismo. É PRESSÃO — área minúscula concentra a força." },
-      { id: "q3", pergunta: "Máquinas simples CRIAM energia?", fotoUrl: maquinasImg,
+      { id: "q3", pergunta: "Máquinas simples CRIAM energia?", fotoUrl: alavancaImg,
         opcoes: [
           { id: "a", texto: "Não. Elas apenas trocam menos força por mais distância", correta: true },
           { id: "b", texto: "Sim, fabricam energia do nada" },
