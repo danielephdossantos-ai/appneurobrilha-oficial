@@ -501,6 +501,9 @@ function SpeakingMic() {
       </div>
       <div className="rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 p-5 text-center">
         <div className="text-3xl font-black text-slate-800">{target}</div>
+        {targetPt && (
+          <div className="mt-1 text-sm text-slate-600 italic">🇧🇷 {targetPt}</div>
+        )}
         <div className="mt-3 flex justify-center gap-2">
           <PlayEn text={target} />
           {supported ? (
