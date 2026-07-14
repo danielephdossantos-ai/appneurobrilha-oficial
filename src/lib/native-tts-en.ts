@@ -35,6 +35,8 @@ export interface SpeakEnOpts {
 
 let enRunId = 0;
 const enResolvers = new Set<() => void>();
+let lastEnText = "";
+let lastEnAt = 0;
 
 export function stopSpeakingEn() {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -42,6 +44,8 @@ export function stopSpeakingEn() {
   window.speechSynthesis.cancel();
   enResolvers.forEach((r) => r());
   enResolvers.clear();
+  lastEnText = "";
+  lastEnAt = 0;
 }
 
 /** Fala texto em inglês. Por padrão cancela fala anterior. */
