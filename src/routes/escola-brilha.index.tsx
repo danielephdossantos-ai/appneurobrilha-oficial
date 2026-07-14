@@ -294,6 +294,24 @@ function EscolaBrilhaCatalogo() {
 
                   {aberta && (
                     <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
+                      {serie === "1º Ano" && (
+                        <Link
+                          to="/escola-brilha/ingles-v1/$curso/$aula"
+                          params={{ curso: "ingles-1ano", aula: "u1-a01-hello" }}
+                          className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                          style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}
+                        >
+                          <div className="text-[10px] uppercase tracking-widest opacity-90">
+                            🧪 PILOTO · Inglês · 1º Ano
+                          </div>
+                          <div className="text-lg leading-tight mt-0.5">
+                            🇺🇸 My First English Adventure
+                          </div>
+                          <div className="text-[11px] font-bold opacity-90 mt-1">
+                            Unit 1 · Lesson 1 — Hello! · 11 cenas com áudio e microfone →
+                          </div>
+                        </Link>
+                      )}
                       {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
                           Nenhuma missão {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
