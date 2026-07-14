@@ -691,7 +691,9 @@ function CadernosCampo({
               key={c.id}
               className="rounded-lg overflow-hidden bg-slate-900/75 border border-slate-700 shadow-lg flex flex-col"
             >
-              {c.videoUrl ? (
+              {c.partes?.length ? (
+                <VisualPorPartes partes={c.partes} teen />
+              ) : c.videoUrl ? (
                 <video
                   src={c.videoUrl}
                   autoPlay
@@ -780,7 +782,9 @@ function CadernosCampo({
                 {c.capa}
               </div>
             </div>
-            {c.videoUrl ? (
+            {c.partes?.length ? (
+              <VisualPorPartes partes={c.partes} />
+            ) : c.videoUrl ? (
               <video
                 src={c.videoUrl}
                 autoPlay
@@ -829,6 +833,67 @@ function CadernosCampo({
           Continuar
         </button>
       )}
+    </div>
+  );
+}
+
+function VisualPorPartes({
+  partes,
+  teen = false,
+}: {
+  partes: Array<{ titulo: string; texto: string }>;
+  teen?: boolean;
+}) {
+  return (
+    <div
+      className={
+        teen
+          ? "border-b border-slate-700 bg-slate-950/65 p-3"
+          : "rounded-lg mt-2 border-2 border-amber-900/20 bg-amber-50/80 p-3"
+      }
+    >
+      <div className="grid grid-cols-1 gap-2">
+        {partes.map((parte, index) => (
+          <div
+            key={`${parte.titulo}-${index}`}
+            className={
+              teen
+                ? "grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3 rounded-md border border-cyan-500/20 bg-slate-900/80 p-3"
+                : "grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3 rounded-lg border border-amber-900/20 bg-white/70 p-3"
+            }
+          >
+            <div
+              className={
+                teen
+                  ? "grid h-9 w-9 shrink-0 place-items-center rounded-md bg-cyan-500/15 text-sm font-bold text-cyan-200"
+                  : "grid h-9 w-9 shrink-0 place-items-center rounded-md bg-amber-200 text-sm font-black text-amber-950"
+              }
+            >
+              {index + 1}
+            </div>
+            <div className="min-w-0">
+              <div
+                className={
+                  teen
+                    ? "text-xs font-bold uppercase tracking-wider text-cyan-200"
+                    : "text-xs font-black uppercase tracking-wide text-amber-900"
+                }
+              >
+                {parte.titulo}
+              </div>
+              <p
+                className={
+                  teen
+                    ? "mt-1 text-sm leading-snug text-slate-200"
+                    : "mt-1 text-sm leading-snug text-[#2a1a08]"
+                }
+              >
+                {parte.texto}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

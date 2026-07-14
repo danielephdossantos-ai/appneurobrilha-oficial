@@ -671,6 +671,10 @@ export type CenaGeoV1 =
         exemplo?: string;     // frase de exemplo do cotidiano
         fotoUrl?: string;     // opcional: foto real exibida quando o caderno abre
         videoUrl?: string;    // opcional: vídeo curto (mp4) — tem prioridade sobre fotoUrl
+        partes?: Array<{
+          titulo: string;
+          texto: string;
+        }>;
       }>;
       falaFinal: string;
     }
