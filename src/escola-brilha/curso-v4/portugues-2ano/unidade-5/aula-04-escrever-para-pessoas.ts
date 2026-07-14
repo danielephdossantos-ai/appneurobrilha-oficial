@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import presente from "@/assets/neuro-treino/objetos/presente.png";
-import balao from "@/assets/neuro-treino/objetos/balao.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as presente } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
+import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * Unidade 5 · Aula 4 — Escrevendo para Diferentes Pessoas

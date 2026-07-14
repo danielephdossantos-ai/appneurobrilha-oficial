@@ -1,18 +1,18 @@
 import type { Aula } from "../types";
 
-import brilhaImg from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import ursoImg from "@/assets/neuro-treino/objetos/ursinho.png";
-import raposaImg from "@/assets/neuro-treino/objetos/raposa.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import bauImg from "@/assets/neuro-treino/objetos/bau.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import diamanteImg from "@/assets/neuro-treino/objetos/diamante.png";
+import { url as brilhaImg } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as coelhoImg } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as ursoImg } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
+import { url as raposaImg } from "@/assets/neuro-treino/objetos/raposa.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bauImg } from "@/assets/neuro-treino/objetos/bau.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as castanhaImg } from "@/assets/neuro-treino/objetos/castanha.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as diamanteImg } from "@/assets/neuro-treino/objetos/diamante.png.asset.json";
 
 /**
  * EF01MA12 — Aula 012 · Biblioteca Pedagógica Escola Brilha

@@ -1,16 +1,16 @@
 import type { Aula } from "../types";
-import mascaraIndigenaImg from "@/assets/neuro-treino/objetos/mascara-indigena.png";
-import mascaraAfricanaImg from "@/assets/neuro-treino/objetos/mascara-africana.png";
-import bonecaPanoImg from "@/assets/neuro-treino/objetos/boneca-pano.png";
-import vasoCeramicaImg from "@/assets/neuro-treino/objetos/vaso-ceramica.png";
-import tecidoColoridoImg from "@/assets/neuro-treino/objetos/tecido-colorido.png";
-import quadroImg from "@/assets/neuro-treino/objetos/quadro.png";
-import esculturaImg from "@/assets/neuro-treino/objetos/escultura.png";
-import artistaImg from "@/assets/neuro-treino/objetos/artista.png";
-import museuImg from "@/assets/neuro-treino/objetos/museu.png";
-import paletaImg from "@/assets/neuro-treino/objetos/paleta.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import { url as mascaraIndigenaImg } from "@/assets/neuro-treino/objetos/mascara-indigena.png.asset.json";
+import { url as mascaraAfricanaImg } from "@/assets/neuro-treino/objetos/mascara-africana.png.asset.json";
+import { url as bonecaPanoImg } from "@/assets/neuro-treino/objetos/boneca-pano.png.asset.json";
+import { url as vasoCeramicaImg } from "@/assets/neuro-treino/objetos/vaso-ceramica.png.asset.json";
+import { url as tecidoColoridoImg } from "@/assets/neuro-treino/objetos/tecido-colorido.png.asset.json";
+import { url as quadroImg } from "@/assets/neuro-treino/objetos/quadro.png.asset.json";
+import { url as esculturaImg } from "@/assets/neuro-treino/objetos/escultura.png.asset.json";
+import { url as artistaImg } from "@/assets/neuro-treino/objetos/artista.png.asset.json";
+import { url as museuImg } from "@/assets/neuro-treino/objetos/museu.png.asset.json";
+import { url as paletaImg } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
  * EF15AR03 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)

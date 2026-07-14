@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import mae from "@/assets/neuro-treino/objetos/mae.png";
-import pai from "@/assets/neuro-treino/objetos/pai.png";
-import professora from "@/assets/neuro-treino/objetos/professora.png";
-import criancas from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as mae } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as pai } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
+import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
+import { url as criancas } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 
 /**
  * Unidade 2 · Aula 1 — O Bilhete Misterioso

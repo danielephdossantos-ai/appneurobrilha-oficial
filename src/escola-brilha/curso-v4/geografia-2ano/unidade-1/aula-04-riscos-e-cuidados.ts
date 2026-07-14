@@ -1,23 +1,23 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bairro from "@/assets/neuro-treino/objetos/bairro.png";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
-import praca from "@/assets/neuro-treino/objetos/praca.png";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import pontoOnibus from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import lixeira from "@/assets/neuro-treino/objetos/lixeira.png";
-import lixeiraReciclagem from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
-import fogo from "@/assets/neuro-treino/objetos/fogo.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import sabonete from "@/assets/neuro-treino/objetos/sabonete.png";
-import lavarMaos from "@/assets/neuro-treino/objetos/lavar-maos.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
+import { url as bairro } from "@/assets/neuro-treino/objetos/bairro.png.asset.json";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
+import { url as praca } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as pontoOnibus } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as lixeira } from "@/assets/neuro-treino/objetos/lixeira.png.asset.json";
+import { url as lixeiraReciclagem } from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png.asset.json";
+import { url as fogo } from "@/assets/neuro-treino/objetos/fogo.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as sabonete } from "@/assets/neuro-treino/objetos/sabonete.png.asset.json";
+import { url as lavarMaos } from "@/assets/neuro-treino/objetos/lavar-maos.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 1 · Aula 04

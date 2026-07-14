@@ -1,18 +1,18 @@
 import type { AulaPortuguesV4 } from "../../types";
-import casa from "@/assets/neuro-treino/objetos/casa.png";
-import casaAntiga from "@/assets/neuro-treino/objetos/casa-antiga.png";
-import casaModerna from "@/assets/neuro-treino/objetos/casa-moderna.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
-import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
-import materialMadeiraFolhas from "@/assets/neuro-treino/objetos/material-madeira-folhas.png";
-import materialConcretoVidro from "@/assets/neuro-treino/objetos/material-concreto-vidro.png";
-import materialFerroPlastico from "@/assets/neuro-treino/objetos/material-ferro-plastico.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import coruja from "@/assets/neuro-treino/objetos/coruja.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as casaAntiga } from "@/assets/neuro-treino/objetos/casa-antiga.png.asset.json";
+import { url as casaModerna } from "@/assets/neuro-treino/objetos/casa-moderna.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as ocaPalha } from "@/assets/neuro-treino/objetos/oca-palha.png.asset.json";
+import { url as apartamento } from "@/assets/neuro-treino/objetos/apartamento.png.asset.json";
+import { url as materialMadeiraFolhas } from "@/assets/neuro-treino/objetos/material-madeira-folhas.png.asset.json";
+import { url as materialConcretoVidro } from "@/assets/neuro-treino/objetos/material-concreto-vidro.png.asset.json";
+import { url as materialFerroPlastico } from "@/assets/neuro-treino/objetos/material-ferro-plastico.png.asset.json";
+import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 1 · Aula 01

@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import raposa from "@/assets/neuro-treino/objetos/raposa.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import ponte from "@/assets/neuro-treino/objetos/ponte.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import bau from "@/assets/neuro-treino/objetos/bau.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as raposa } from "@/assets/neuro-treino/objetos/raposa.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as bau } from "@/assets/neuro-treino/objetos/bau.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
 
 /**
  * Aula 4 — O Mapa da Raposa

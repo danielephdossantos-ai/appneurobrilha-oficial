@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check, Heart } from "lucide-react";
 import { ITENS_BRINQUEDO as ITENS } from "@/data/brilha-vida/cenarios";
 
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as imgTriste } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
 
 /**
  * Dividindo o Brinquedo — 30 brinquedos para variar a cena.

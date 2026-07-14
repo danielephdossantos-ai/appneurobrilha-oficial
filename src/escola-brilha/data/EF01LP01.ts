@@ -1,13 +1,13 @@
 import type { Aula } from "../types";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import setaImg from "@/assets/neuro-treino/objetos/seta-direita.png";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import cachorroImg from "@/assets/neuro-treino/objetos/cachorro.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import meninoAcordandoImg from "@/assets/neuro-treino/objetos/menino-acordando.png";
-import escovarImg from "@/assets/neuro-treino/objetos/escovar-dentes.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as setaImg } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as meninoAcordandoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as escovarImg } from "@/assets/neuro-treino/objetos/escovar-dentes.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
 
 /**
  * EF01LP01 — Aula 001 · Biblioteca Pedagógica Escola Brilha

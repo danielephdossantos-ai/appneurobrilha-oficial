@@ -1,20 +1,20 @@
 import type { Aula } from "../types";
-import bebeImg from "@/assets/neuro-treino/objetos/bebe.png";
-import bebeEngatinhandoImg from "@/assets/neuro-treino/objetos/bebe-engatinhando.png";
-import criancaAndandoImg from "@/assets/neuro-treino/objetos/crianca-andando.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import idosoImg from "@/assets/neuro-treino/objetos/idoso.png";
-import mamadeiraImg from "@/assets/neuro-treino/objetos/mamadeira.png";
-import chocalhoImg from "@/assets/neuro-treino/objetos/chocalho.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import bonecaPanoImg from "@/assets/neuro-treino/objetos/boneca-pano.png";
-import mochilaImg from "@/assets/neuro-treino/objetos/mochila.png";
-import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import albumImg from "@/assets/neuro-treino/objetos/album.png";
-import criancasGrupoImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import { url as bebeImg } from "@/assets/neuro-treino/objetos/bebe.png.asset.json";
+import { url as bebeEngatinhandoImg } from "@/assets/neuro-treino/objetos/bebe-engatinhando.png.asset.json";
+import { url as criancaAndandoImg } from "@/assets/neuro-treino/objetos/crianca-andando.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as idosoImg } from "@/assets/neuro-treino/objetos/idoso.png.asset.json";
+import { url as mamadeiraImg } from "@/assets/neuro-treino/objetos/mamadeira.png.asset.json";
+import { url as chocalhoImg } from "@/assets/neuro-treino/objetos/chocalho.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as bonecaPanoImg } from "@/assets/neuro-treino/objetos/boneca-pano.png.asset.json";
+import { url as mochilaImg } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as albumImg } from "@/assets/neuro-treino/objetos/album.png.asset.json";
+import { url as criancasGrupoImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
 
 /**
  * EF01HI01 — História · 1º Ano

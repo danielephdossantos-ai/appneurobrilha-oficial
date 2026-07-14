@@ -1,25 +1,25 @@
 import type { Aula } from "../types";
-import mapaImg from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercursoImg from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import salaAulaImg from "@/assets/neuro-treino/objetos/sala-aula.png";
-import cadeiraImg from "@/assets/neuro-treino/objetos/cadeira.png";
-import mochilaImg from "@/assets/neuro-treino/objetos/mochila.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
-import bauImg from "@/assets/neuro-treino/objetos/bau.png";
-import caixaImg from "@/assets/neuro-treino/objetos/caixa.png";
-import setaCimaImg from "@/assets/neuro-treino/objetos/seta-cima.png";
-import setaBaixoImg from "@/assets/neuro-treino/objetos/seta-baixo.png";
-import setaDireitaImg from "@/assets/neuro-treino/objetos/seta-direita.png";
-import setaEsquerdaImg from "@/assets/neuro-treino/objetos/seta-esquerda.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import bussolaImg from "@/assets/neuro-treino/objetos/bussola.png";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercursoImg } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as salaAulaImg } from "@/assets/neuro-treino/objetos/sala-aula.png.asset.json";
+import { url as cadeiraImg } from "@/assets/neuro-treino/objetos/cadeira.png.asset.json";
+import { url as mochilaImg } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as ursinhoImg } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
+import { url as bauImg } from "@/assets/neuro-treino/objetos/bau.png.asset.json";
+import { url as caixaImg } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
+import { url as setaCimaImg } from "@/assets/neuro-treino/objetos/seta-cima.png.asset.json";
+import { url as setaBaixoImg } from "@/assets/neuro-treino/objetos/seta-baixo.png.asset.json";
+import { url as setaDireitaImg } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
+import { url as setaEsquerdaImg } from "@/assets/neuro-treino/objetos/seta-esquerda.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as bussolaImg } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
 
 /**
  * EF01GE09 — Geografia · 1º Ano

@@ -1,21 +1,21 @@
 import type { AulaPortuguesV4 } from "../../types";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import mercado from "@/assets/neuro-treino/objetos/mercado.png";
-import padaria from "@/assets/neuro-treino/objetos/padaria.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import praca from "@/assets/neuro-treino/objetos/praca.png";
-import pontoOnibus from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import lixeiraReciclagem from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
-import funcionarioLimpeza from "@/assets/neuro-treino/objetos/funcionario-limpeza.png";
-import cozinheira from "@/assets/neuro-treino/objetos/cozinheira.png";
-import professora from "@/assets/neuro-treino/objetos/professora.png";
-import bibliotecario from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import bairro from "@/assets/neuro-treino/objetos/bairro.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import pao from "@/assets/neuro-treino/objetos/padaria.png";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as mercado } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as padaria } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as praca } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as pontoOnibus } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as lixeiraReciclagem } from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png.asset.json";
+import { url as funcionarioLimpeza } from "@/assets/neuro-treino/objetos/funcionario-limpeza.png.asset.json";
+import { url as cozinheira } from "@/assets/neuro-treino/objetos/cozinheira.png.asset.json";
+import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
+import { url as bibliotecario } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as bairro } from "@/assets/neuro-treino/objetos/bairro.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as pao } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 2 · Aula 02

@@ -1,16 +1,16 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import pincel from "@/assets/neuro-treino/objetos/pincel.png";
-import paleta from "@/assets/neuro-treino/objetos/paleta.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import desenho from "@/assets/neuro-treino/objetos/desenho.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as pincel } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as paleta } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as desenho } from "@/assets/neuro-treino/objetos/desenho.png.asset.json";
 
 /**
  * Unidade 5 · Aula 5 — Publicando Meu Primeiro Livro

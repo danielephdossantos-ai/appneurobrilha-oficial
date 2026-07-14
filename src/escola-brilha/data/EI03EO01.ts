@@ -1,17 +1,17 @@
 import type { Aula } from "../types";
-import brilhaImg from "@/assets/escola-brilha/mascotes/brilha.png";
-import corujaImg from "@/assets/escola-brilha/ei-mundo1/coruja.png";
-import lupiImg from "@/assets/escola-brilha/ei-mundo1/lupi.png";
-import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
-import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
-import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import { url as brilhaImg } from "@/assets/escola-brilha/mascotes/brilha.png.asset.json";
+import { url as corujaImg } from "@/assets/escola-brilha/ei-mundo1/coruja.png.asset.json";
+import { url as lupiImg } from "@/assets/escola-brilha/ei-mundo1/lupi.png.asset.json";
+import { url as fifiImg } from "@/assets/escola-brilha/ei-mundo1/fifi.png.asset.json";
+import { url as teoImg } from "@/assets/escola-brilha/ei-mundo1/teo.png.asset.json";
+import { url as piuImg } from "@/assets/escola-brilha/ei-mundo1/piu.png.asset.json";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as tristeImg } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
+import { url as tranquiloImg } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
 
 /**
  * EI03EO01 — Mundo 1 · Amigos da Floresta Encantada · Missão 1

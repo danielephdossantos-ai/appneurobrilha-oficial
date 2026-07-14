@@ -1,20 +1,20 @@
 import type { Aula } from "../types";
 
-import brilhaImg from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import cuboImg from "@/assets/neuro-treino/objetos/cubo.png";
-import esferaImg from "@/assets/neuro-treino/objetos/esfera.png";
-import cilindroImg from "@/assets/neuro-treino/objetos/cilindro.png";
-import coneImg from "@/assets/neuro-treino/objetos/cone.png";
-import dadoImg from "@/assets/neuro-treino/objetos/dado.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import lataImg from "@/assets/neuro-treino/objetos/lata.png";
-import casquinhaImg from "@/assets/neuro-treino/objetos/casquinha.png";
-import velaImg from "@/assets/neuro-treino/objetos/vela.png";
-import livroImg from "@/assets/neuro-treino/objetos/livro.png";
-import blocoImg from "@/assets/neuro-treino/objetos/bloco.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import { url as brilhaImg } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as cuboImg } from "@/assets/neuro-treino/objetos/cubo.png.asset.json";
+import { url as esferaImg } from "@/assets/neuro-treino/objetos/esfera.png.asset.json";
+import { url as cilindroImg } from "@/assets/neuro-treino/objetos/cilindro.png.asset.json";
+import { url as coneImg } from "@/assets/neuro-treino/objetos/cone.png.asset.json";
+import { url as dadoImg } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as lataImg } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
+import { url as casquinhaImg } from "@/assets/neuro-treino/objetos/casquinha.png.asset.json";
+import { url as velaImg } from "@/assets/neuro-treino/objetos/vela.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as blocoImg } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
 
 /**
  * EF01MA13 — Aula 013 · Biblioteca Pedagógica Escola Brilha

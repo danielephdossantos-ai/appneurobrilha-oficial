@@ -1,15 +1,15 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
-import girassol from "@/assets/neuro-treino/objetos/girassol.png";
-import lua from "@/assets/neuro-treino/objetos/lua.png";
-import raposa from "@/assets/neuro-treino/objetos/raposa.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as biblioteca } from "@/assets/neuro-treino/objetos/biblioteca.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as girassol } from "@/assets/neuro-treino/objetos/girassol.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as raposa } from "@/assets/neuro-treino/objetos/raposa.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
 
 /**
  * Aula 5 — A Última Página (encerramento da Unidade 1)

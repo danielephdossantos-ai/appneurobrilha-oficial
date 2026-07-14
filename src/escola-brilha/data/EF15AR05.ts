@@ -1,18 +1,18 @@
 import type { Aula } from "../types";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import criancasGrupoImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import pracaImg from "@/assets/neuro-treino/objetos/praca.png";
-import muralImg from "@/assets/neuro-treino/objetos/mural.png";
-import museuImg from "@/assets/neuro-treino/objetos/museu.png";
-import artistaImg from "@/assets/neuro-treino/objetos/artista.png";
-import quadroImg from "@/assets/neuro-treino/objetos/quadro.png";
-import desenhoImg from "@/assets/neuro-treino/objetos/desenho.png";
-import colagemImg from "@/assets/neuro-treino/objetos/colagem.png";
-import paletaImg from "@/assets/neuro-treino/objetos/paleta.png";
-import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as criancasGrupoImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as pracaImg } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as muralImg } from "@/assets/neuro-treino/objetos/mural.png.asset.json";
+import { url as museuImg } from "@/assets/neuro-treino/objetos/museu.png.asset.json";
+import { url as artistaImg } from "@/assets/neuro-treino/objetos/artista.png.asset.json";
+import { url as quadroImg } from "@/assets/neuro-treino/objetos/quadro.png.asset.json";
+import { url as desenhoImg } from "@/assets/neuro-treino/objetos/desenho.png.asset.json";
+import { url as colagemImg } from "@/assets/neuro-treino/objetos/colagem.png.asset.json";
+import { url as paletaImg } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
  * EF15AR05 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)

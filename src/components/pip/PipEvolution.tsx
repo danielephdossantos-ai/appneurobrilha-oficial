@@ -8,16 +8,16 @@ import { useMascotStage, setMascotStage } from "@/lib/mascot-stage";
 
 
 // Pip (menino)
-import pipEgg from "@/assets/pip-egg.png";
-import pipHatching from "@/assets/pip-hatching.png";
-import pipBaby from "@/assets/pip-baby.png";
-import pipMascot from "@/assets/pip-mascot.png";
+import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
+import { url as pipHatching } from "@/assets/pip-hatching.png.asset.json";
+import { url as pipBaby } from "@/assets/pip-baby.png.asset.json";
+import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
 
 // Pipa (menina)
-import pipaEgg from "@/assets/pipa-egg.png";
-import pipaHatching from "@/assets/pipa-hatching.png";
-import pipaBaby from "@/assets/pipa-baby.png";
-import pipaMascot from "@/assets/pip-girl-mascot.png";
+import { url as pipaEgg } from "@/assets/pipa-egg.png.asset.json";
+import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
+import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
+import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 
 type StageKey = "ovo" | "nascendo" | "bebe" | "crianca";
 

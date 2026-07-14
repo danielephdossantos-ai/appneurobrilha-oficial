@@ -1,11 +1,11 @@
 import type { AulaV4 } from "../../types";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import gato from "@/assets/neuro-treino/objetos/gato.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 7 · Aula 2 — "Descobrindo os Gráficos"

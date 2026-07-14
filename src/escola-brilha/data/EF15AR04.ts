@@ -1,16 +1,16 @@
 import type { Aula } from "../types";
-import desenhoImg from "@/assets/neuro-treino/objetos/desenho.png";
-import colagemImg from "@/assets/neuro-treino/objetos/colagem.png";
-import esculturaImg from "@/assets/neuro-treino/objetos/escultura.png";
-import modelagemImg from "@/assets/neuro-treino/objetos/modelagem.png";
-import quadrinhosImg from "@/assets/neuro-treino/objetos/quadrinhos.png";
-import dobraduraImg from "@/assets/neuro-treino/objetos/dobradura.png";
-import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
-import tintaImg from "@/assets/neuro-treino/objetos/tinta.png";
-import paletaImg from "@/assets/neuro-treino/objetos/paleta.png";
-import quadroImg from "@/assets/neuro-treino/objetos/quadro.png";
-import artistaImg from "@/assets/neuro-treino/objetos/artista.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
+import { url as desenhoImg } from "@/assets/neuro-treino/objetos/desenho.png.asset.json";
+import { url as colagemImg } from "@/assets/neuro-treino/objetos/colagem.png.asset.json";
+import { url as esculturaImg } from "@/assets/neuro-treino/objetos/escultura.png.asset.json";
+import { url as modelagemImg } from "@/assets/neuro-treino/objetos/modelagem.png.asset.json";
+import { url as quadrinhosImg } from "@/assets/neuro-treino/objetos/quadrinhos.png.asset.json";
+import { url as dobraduraImg } from "@/assets/neuro-treino/objetos/dobradura.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as tintaImg } from "@/assets/neuro-treino/objetos/tinta.png.asset.json";
+import { url as paletaImg } from "@/assets/neuro-treino/objetos/paleta.png.asset.json";
+import { url as quadroImg } from "@/assets/neuro-treino/objetos/quadro.png.asset.json";
+import { url as artistaImg } from "@/assets/neuro-treino/objetos/artista.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 
 /**
  * EF15AR04 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)

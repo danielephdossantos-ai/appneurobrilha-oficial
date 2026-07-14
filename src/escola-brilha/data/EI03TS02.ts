@@ -1,13 +1,13 @@
 import type { Aula } from "../types";
-import tintaImg from "@/assets/neuro-treino/objetos/tinta.png";
-import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
+import { url as tintaImg } from "@/assets/neuro-treino/objetos/tinta.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 
 /**
  * EI03TS02 — Traços, Sons, Cores e Formas

@@ -1,22 +1,22 @@
 import type { AulaPortuguesV4 } from "../../types";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import praca from "@/assets/neuro-treino/objetos/praca.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import pontoOnibus from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import bicicletaModerna from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import fogo from "@/assets/neuro-treino/objetos/fogo.png";
-import lavarMaos from "@/assets/neuro-treino/objetos/lavar-maos.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import setaEsquerda from "@/assets/neuro-treino/objetos/seta-esquerda.png";
-import setaDireita from "@/assets/neuro-treino/objetos/seta-direita.png";
-import familiaTradicional from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import sabonete from "@/assets/neuro-treino/objetos/sabonete.png";
-import lixeira from "@/assets/neuro-treino/objetos/lixeira.png";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as praca } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as pontoOnibus } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as bicicletaModerna } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as fogo } from "@/assets/neuro-treino/objetos/fogo.png.asset.json";
+import { url as lavarMaos } from "@/assets/neuro-treino/objetos/lavar-maos.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as setaEsquerda } from "@/assets/neuro-treino/objetos/seta-esquerda.png.asset.json";
+import { url as setaDireita } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
+import { url as familiaTradicional } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as sabonete } from "@/assets/neuro-treino/objetos/sabonete.png.asset.json";
+import { url as lixeira } from "@/assets/neuro-treino/objetos/lixeira.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 2 · Aula 04

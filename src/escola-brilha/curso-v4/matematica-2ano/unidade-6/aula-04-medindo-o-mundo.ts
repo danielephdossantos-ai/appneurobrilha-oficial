@@ -1,12 +1,12 @@
 import type { AulaV4 } from "../../types";
-import relogio from "@/assets/neuro-treino/objetos/relogio.png";
-import garrafa from "@/assets/neuro-treino/objetos/garrafa.png";
-import suco from "@/assets/neuro-treino/objetos/suco.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import bolaPraia from "@/assets/neuro-treino/objetos/bola-praia.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
+import { url as garrafa } from "@/assets/neuro-treino/objetos/garrafa.png.asset.json";
+import { url as suco } from "@/assets/neuro-treino/objetos/suco.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as bolaPraia } from "@/assets/neuro-treino/objetos/bola-praia.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 6 · Aula 4 — "Medindo o Mundo"

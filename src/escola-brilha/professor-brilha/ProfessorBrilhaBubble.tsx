@@ -6,7 +6,7 @@ import {
   carregarConversaProfessorBrilha,
 } from "@/lib/professor-brilha.functions";
 import { transcreverAudio } from "@/lib/stt.functions";
-import professoraImg from "@/assets/pip-girl-professora.png";
+import { url as professoraImg } from "@/assets/pip-girl-professora.png.asset.json";
 
 export interface ProfessorBrilhaContexto {
   cursoSlug: string;

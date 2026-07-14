@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Users, Check } from "lucide-react";
 
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTranquilo from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
 
 /**
  * Minha vez, sua vez

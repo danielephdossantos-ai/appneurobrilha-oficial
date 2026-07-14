@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import leao from "@/assets/neuro-treino/objetos/leao.png";
-import tigre from "@/assets/neuro-treino/objetos/tigre.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as leao } from "@/assets/neuro-treino/objetos/leao.png.asset.json";
+import { url as tigre } from "@/assets/neuro-treino/objetos/tigre.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
  * Unidade 4 · Aula 2 — Descobrindo a Ideia Principal

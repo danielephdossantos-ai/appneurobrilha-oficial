@@ -1,14 +1,14 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import nuvem from "@/assets/neuro-treino/objetos/nuvem.png";
-import mochila from "@/assets/neuro-treino/objetos/mochila.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
-import binoculo from "@/assets/neuro-treino/objetos/binoculo.png";
-import bolo from "@/assets/neuro-treino/objetos/bolo.png";
-import festa from "@/assets/neuro-treino/objetos/festa.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as binoculo } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
+import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as festa } from "@/assets/neuro-treino/objetos/festa.png.asset.json";
 
 /**
  * Unidade 4 · Aula 4 — O Mistério das Entrelinhas

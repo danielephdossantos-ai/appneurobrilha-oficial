@@ -1,17 +1,17 @@
 import type { Aula } from "../types";
-import cenouraImg from "@/assets/neuro-treino/vegetais/cenoura.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import joaninhaImg from "@/assets/neuro-treino/objetos/joaninha.png";
-import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
-import macacoImg from "@/assets/hiperfocos/animais/macaco.png";
-import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
-import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
-import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
-import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import ninhoImg from "@/assets/neuro-treino/objetos/ninho.png";
-import doceImg from "@/assets/neuro-treino/objetos/doce.png";
+import { url as cenouraImg } from "@/assets/neuro-treino/vegetais/cenoura.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as joaninhaImg } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
+import { url as coelhoImg } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
+import { url as macacoImg } from "@/assets/hiperfocos/animais/macaco.png.asset.json";
+import { url as tartarugaImg } from "@/assets/hiperfocos/animais/tartaruga.png.asset.json";
+import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as sementeImg } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as castanhaImg } from "@/assets/neuro-treino/objetos/castanha.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
+import { url as doceImg } from "@/assets/neuro-treino/objetos/doce.png.asset.json";
 
 /**
  * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha

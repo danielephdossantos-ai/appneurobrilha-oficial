@@ -1,24 +1,24 @@
 import type { Aula } from "../types";
-import maeImg from "@/assets/neuro-treino/objetos/mae.png";
-import paiImg from "@/assets/neuro-treino/objetos/pai.png";
-import avoMulherImg from "@/assets/neuro-treino/objetos/avo-mulher.png";
-import avoHomemImg from "@/assets/neuro-treino/objetos/avo-homem.png";
-import tiaImg from "@/assets/neuro-treino/objetos/tia.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import familiaTradicionalImg from "@/assets/neuro-treino/objetos/familia-tradicional.png";
-import familiaMaeFilhoImg from "@/assets/neuro-treino/objetos/familia-mae-filho.png";
-import familiaPaiFilhoImg from "@/assets/neuro-treino/objetos/familia-pai-filho.png";
-import familiaAvosNetaImg from "@/assets/neuro-treino/objetos/familia-avos-neta.png";
-import abracoImg from "@/assets/neuro-treino/objetos/abraco.png";
-import ajudarImg from "@/assets/neuro-treino/objetos/ajudar.png";
-import compartilharImg from "@/assets/neuro-treino/objetos/compartilhar.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
-import criancasGrupoImg from "@/assets/neuro-treino/objetos/criancas-grupo.png";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as paiImg } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
+import { url as avoMulherImg } from "@/assets/neuro-treino/objetos/avo-mulher.png.asset.json";
+import { url as avoHomemImg } from "@/assets/neuro-treino/objetos/avo-homem.png.asset.json";
+import { url as tiaImg } from "@/assets/neuro-treino/objetos/tia.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as familiaTradicionalImg } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";
+import { url as familiaMaeFilhoImg } from "@/assets/neuro-treino/objetos/familia-mae-filho.png.asset.json";
+import { url as familiaPaiFilhoImg } from "@/assets/neuro-treino/objetos/familia-pai-filho.png.asset.json";
+import { url as familiaAvosNetaImg } from "@/assets/neuro-treino/objetos/familia-avos-neta.png.asset.json";
+import { url as abracoImg } from "@/assets/neuro-treino/objetos/abraco.png.asset.json";
+import { url as ajudarImg } from "@/assets/neuro-treino/objetos/ajudar.png.asset.json";
+import { url as compartilharImg } from "@/assets/neuro-treino/objetos/compartilhar.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as criancasGrupoImg } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
 
 /**
  * EF01HI02 — História · 1º Ano

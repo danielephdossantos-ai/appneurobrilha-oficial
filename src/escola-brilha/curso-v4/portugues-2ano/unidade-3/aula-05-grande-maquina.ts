@@ -1,16 +1,16 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import casa from "@/assets/neuro-treino/objetos/casa.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import livros from "@/assets/neuro-treino/objetos/livros.png";
-import gato from "@/assets/neuro-treino/objetos/gato.png";
-import abelha from "@/assets/neuro-treino/objetos/abelha.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as livros } from "@/assets/neuro-treino/objetos/livros.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as abelha } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 
 /**
  * Unidade 3 · Aula 5 — A Grande Máquina das Palavras

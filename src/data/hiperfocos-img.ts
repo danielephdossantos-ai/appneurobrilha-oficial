@@ -1,89 +1,89 @@
 // Registro de imagens premium para elementos de hiperfoco.
-import steve from "@/assets/hiperfocos/minecraft/steve.png";
-import alex from "@/assets/hiperfocos/minecraft/alex.png";
-import creeper from "@/assets/hiperfocos/minecraft/creeper.png";
-import aldeao from "@/assets/hiperfocos/minecraft/aldeao.png";
-import lhama from "@/assets/hiperfocos/minecraft/lhama.png";
-import mcGalinha from "@/assets/hiperfocos/minecraft/galinha.png";
+import { url as steve } from "@/assets/hiperfocos/minecraft/steve.png.asset.json";
+import { url as alex } from "@/assets/hiperfocos/minecraft/alex.png.asset.json";
+import { url as creeper } from "@/assets/hiperfocos/minecraft/creeper.png.asset.json";
+import { url as aldeao } from "@/assets/hiperfocos/minecraft/aldeao.png.asset.json";
+import { url as lhama } from "@/assets/hiperfocos/minecraft/lhama.png.asset.json";
+import { url as mcGalinha } from "@/assets/hiperfocos/minecraft/galinha.png.asset.json";
 
-import trex from "@/assets/hiperfocos/dinossauros/trex.png";
-import triceratops from "@/assets/hiperfocos/dinossauros/triceratops.png";
-import velociraptor from "@/assets/hiperfocos/dinossauros/velociraptor.png";
-import estegossauro from "@/assets/hiperfocos/dinossauros/estegossauro.png";
-import braquiossauro from "@/assets/hiperfocos/dinossauros/braquiossauro.png";
+import { url as trex } from "@/assets/hiperfocos/dinossauros/trex.png.asset.json";
+import { url as triceratops } from "@/assets/hiperfocos/dinossauros/triceratops.png.asset.json";
+import { url as velociraptor } from "@/assets/hiperfocos/dinossauros/velociraptor.png.asset.json";
+import { url as estegossauro } from "@/assets/hiperfocos/dinossauros/estegossauro.png.asset.json";
+import { url as braquiossauro } from "@/assets/hiperfocos/dinossauros/braquiossauro.png.asset.json";
 
-import heroi from "@/assets/hiperfocos/herois/heroi.png";
-import heroina from "@/assets/hiperfocos/herois/heroina.png";
-import roboHeroi from "@/assets/hiperfocos/herois/robo.png";
-import capita from "@/assets/hiperfocos/herois/capita.png";
-import justiceiro from "@/assets/hiperfocos/herois/justiceiro.png";
+import { url as heroi } from "@/assets/hiperfocos/herois/heroi.png.asset.json";
+import { url as heroina } from "@/assets/hiperfocos/herois/heroina.png.asset.json";
+import { url as roboHeroi } from "@/assets/hiperfocos/herois/robo.png.asset.json";
+import { url as capita } from "@/assets/hiperfocos/herois/capita.png.asset.json";
+import { url as justiceiro } from "@/assets/hiperfocos/herois/justiceiro.png.asset.json";
 
-import leao from "@/assets/hiperfocos/animais/leao.png";
-import elefante from "@/assets/hiperfocos/animais/elefante.png";
-import coruja from "@/assets/hiperfocos/animais/coruja.png";
-import macaco from "@/assets/hiperfocos/animais/macaco.png";
-import tartaruga from "@/assets/hiperfocos/animais/tartaruga.png";
+import { url as leao } from "@/assets/hiperfocos/animais/leao.png.asset.json";
+import { url as elefante } from "@/assets/hiperfocos/animais/elefante.png.asset.json";
+import { url as coruja } from "@/assets/hiperfocos/animais/coruja.png.asset.json";
+import { url as macaco } from "@/assets/hiperfocos/animais/macaco.png.asset.json";
+import { url as tartaruga } from "@/assets/hiperfocos/animais/tartaruga.png.asset.json";
 
-import carroCorrida from "@/assets/hiperfocos/carros/carro-corrida.png";
-import caminhao from "@/assets/hiperfocos/carros/caminhao.png";
-import trator from "@/assets/hiperfocos/carros/trator.png";
-import moto from "@/assets/hiperfocos/carros/moto.png";
-import onibus from "@/assets/hiperfocos/carros/onibus.png";
+import { url as carroCorrida } from "@/assets/hiperfocos/carros/carro-corrida.png.asset.json";
+import { url as caminhao } from "@/assets/hiperfocos/carros/caminhao.png.asset.json";
+import { url as trator } from "@/assets/hiperfocos/carros/trator.png.asset.json";
+import { url as moto } from "@/assets/hiperfocos/carros/moto.png.asset.json";
+import { url as onibus } from "@/assets/hiperfocos/carros/onibus.png.asset.json";
 
-import foguete from "@/assets/hiperfocos/espaco/foguete.png";
-import astronauta from "@/assets/hiperfocos/espaco/astronauta.png";
-import planeta from "@/assets/hiperfocos/espaco/planeta.png";
-import estrela from "@/assets/hiperfocos/espaco/estrela.png";
-import luaImg from "@/assets/hiperfocos/espaco/lua.png";
-import cometa from "@/assets/hiperfocos/espaco/cometa.png";
+import { url as foguete } from "@/assets/hiperfocos/espaco/foguete.png.asset.json";
+import { url as astronauta } from "@/assets/hiperfocos/espaco/astronauta.png.asset.json";
+import { url as planeta } from "@/assets/hiperfocos/espaco/planeta.png.asset.json";
+import { url as estrela } from "@/assets/hiperfocos/espaco/estrela.png.asset.json";
+import { url as luaImg } from "@/assets/hiperfocos/espaco/lua.png.asset.json";
+import { url as cometa } from "@/assets/hiperfocos/espaco/cometa.png.asset.json";
 
-import princesa from "@/assets/hiperfocos/princesas/princesa.png";
-import castelo from "@/assets/hiperfocos/princesas/castelo.png";
-import coroa from "@/assets/hiperfocos/princesas/coroa.png";
-import unicornio from "@/assets/hiperfocos/princesas/unicornio.png";
-import fada from "@/assets/hiperfocos/princesas/fada.png";
+import { url as princesa } from "@/assets/hiperfocos/princesas/princesa.png.asset.json";
+import { url as castelo } from "@/assets/hiperfocos/princesas/castelo.png.asset.json";
+import { url as coroa } from "@/assets/hiperfocos/princesas/coroa.png.asset.json";
+import { url as unicornio } from "@/assets/hiperfocos/princesas/unicornio.png.asset.json";
+import { url as fada } from "@/assets/hiperfocos/princesas/fada.png.asset.json";
 
-import galinha from "@/assets/hiperfocos/fazendinha/galinha.png";
-import vaquinha from "@/assets/hiperfocos/fazendinha/vaquinha.png";
-import porquinho from "@/assets/hiperfocos/fazendinha/porquinho.png";
-import cavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
-import ovelha from "@/assets/hiperfocos/fazendinha/ovelha.png";
+import { url as galinha } from "@/assets/hiperfocos/fazendinha/galinha.png.asset.json";
+import { url as vaquinha } from "@/assets/hiperfocos/fazendinha/vaquinha.png.asset.json";
+import { url as porquinho } from "@/assets/hiperfocos/fazendinha/porquinho.png.asset.json";
+import { url as cavalo } from "@/assets/hiperfocos/fazendinha/cavalo.png.asset.json";
+import { url as ovelha } from "@/assets/hiperfocos/fazendinha/ovelha.png.asset.json";
 
-import bailarina from "@/assets/hiperfocos/bailarinas/bailarina.png";
-import sapatilha from "@/assets/hiperfocos/bailarinas/sapatilha.png";
-import tutu from "@/assets/hiperfocos/bailarinas/tutu.png";
-import caixinhaMusica from "@/assets/hiperfocos/bailarinas/caixinha-musica.png";
-import cisne from "@/assets/hiperfocos/bailarinas/cisne.png";
+import { url as bailarina } from "@/assets/hiperfocos/bailarinas/bailarina.png.asset.json";
+import { url as sapatilha } from "@/assets/hiperfocos/bailarinas/sapatilha.png.asset.json";
+import { url as tutu } from "@/assets/hiperfocos/bailarinas/tutu.png.asset.json";
+import { url as caixinhaMusica } from "@/assets/hiperfocos/bailarinas/caixinha-musica.png.asset.json";
+import { url as cisne } from "@/assets/hiperfocos/bailarinas/cisne.png.asset.json";
 
-import sereia from "@/assets/hiperfocos/sereias/sereia.png";
-import concha from "@/assets/hiperfocos/sereias/concha.png";
-import cavaloMarinho from "@/assets/hiperfocos/sereias/cavalo-marinho.png";
-import peixinho from "@/assets/hiperfocos/sereias/peixinho.png";
-import perola from "@/assets/hiperfocos/sereias/perola.png";
+import { url as sereia } from "@/assets/hiperfocos/sereias/sereia.png.asset.json";
+import { url as concha } from "@/assets/hiperfocos/sereias/concha.png.asset.json";
+import { url as cavaloMarinho } from "@/assets/hiperfocos/sereias/cavalo-marinho.png.asset.json";
+import { url as peixinho } from "@/assets/hiperfocos/sereias/peixinho.png.asset.json";
+import { url as perola } from "@/assets/hiperfocos/sereias/perola.png.asset.json";
 
-import robo from "@/assets/hiperfocos/robos/robo.png";
-import engrenagem from "@/assets/hiperfocos/robos/engrenagem.png";
-import fogueteRobo from "@/assets/hiperfocos/robos/foguete-robo.png";
-import drone from "@/assets/hiperfocos/robos/drone.png";
-import astronautaBot from "@/assets/hiperfocos/robos/astronauta-bot.png";
+import { url as robo } from "@/assets/hiperfocos/robos/robo.png.asset.json";
+import { url as engrenagem } from "@/assets/hiperfocos/robos/engrenagem.png.asset.json";
+import { url as fogueteRobo } from "@/assets/hiperfocos/robos/foguete-robo.png.asset.json";
+import { url as drone } from "@/assets/hiperfocos/robos/drone.png.asset.json";
+import { url as astronautaBot } from "@/assets/hiperfocos/robos/astronauta-bot.png.asset.json";
 
-import violao from "@/assets/hiperfocos/musica/violao.png";
-import microfone from "@/assets/hiperfocos/musica/microfone.png";
-import bateria from "@/assets/hiperfocos/musica/bateria.png";
-import piano from "@/assets/hiperfocos/musica/piano.png";
-import notaMusical from "@/assets/hiperfocos/musica/nota-musical.png";
+import { url as violao } from "@/assets/hiperfocos/musica/violao.png.asset.json";
+import { url as microfone } from "@/assets/hiperfocos/musica/microfone.png.asset.json";
+import { url as bateria } from "@/assets/hiperfocos/musica/bateria.png.asset.json";
+import { url as piano } from "@/assets/hiperfocos/musica/piano.png.asset.json";
+import { url as notaMusical } from "@/assets/hiperfocos/musica/nota-musical.png.asset.json";
 
-import pincel from "@/assets/hiperfocos/arte/pincel.png";
-import tinta from "@/assets/hiperfocos/arte/tinta.png";
-import cavalete from "@/assets/hiperfocos/arte/cavalete.png";
-import lapisCor from "@/assets/hiperfocos/arte/lapis-cor.png";
-import paleta from "@/assets/hiperfocos/arte/paleta.png";
+import { url as pincel } from "@/assets/hiperfocos/arte/pincel.png.asset.json";
+import { url as tinta } from "@/assets/hiperfocos/arte/tinta.png.asset.json";
+import { url as cavalete } from "@/assets/hiperfocos/arte/cavalete.png.asset.json";
+import { url as lapisCor } from "@/assets/hiperfocos/arte/lapis-cor.png.asset.json";
+import { url as paleta } from "@/assets/hiperfocos/arte/paleta.png.asset.json";
 
-import locomotiva from "@/assets/hiperfocos/trens/locomotiva.png";
-import vagao from "@/assets/hiperfocos/trens/vagao.png";
-import trilho from "@/assets/hiperfocos/trens/trilho.png";
-import estacao from "@/assets/hiperfocos/trens/estacao.png";
-import maquinista from "@/assets/hiperfocos/trens/maquinista.png";
+import { url as locomotiva } from "@/assets/hiperfocos/trens/locomotiva.png.asset.json";
+import { url as vagao } from "@/assets/hiperfocos/trens/vagao.png.asset.json";
+import { url as trilho } from "@/assets/hiperfocos/trens/trilho.png.asset.json";
+import { url as estacao } from "@/assets/hiperfocos/trens/estacao.png.asset.json";
+import { url as maquinista } from "@/assets/hiperfocos/trens/maquinista.png.asset.json";
 
 /** Normaliza chave: maiúsculas + sem acentos + espaços/hífens unificados. */
 function norm(s: string): string {

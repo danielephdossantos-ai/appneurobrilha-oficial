@@ -2,11 +2,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
 
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgSurpreso from "@/assets/brilha-vida/emocoes/confuso.png";
-import imgSono from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
+import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
+import { url as imgTriste } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
+import { url as imgSurpreso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
+import { url as imgSono } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
+import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 
 /**
  * Termômetro das Emoções

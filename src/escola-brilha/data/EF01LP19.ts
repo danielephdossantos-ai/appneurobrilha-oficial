@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
-import ratoImg from "@/assets/neuro-treino/objetos/rato.png";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import galinhaImg from "@/assets/neuro-treino/objetos/galinha.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import tamborImg from "@/assets/neuro-treino/objetos/tambor.png";
-import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as galinhaImg } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
+import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 
 /**
  * EF01LP19 — Aula 019

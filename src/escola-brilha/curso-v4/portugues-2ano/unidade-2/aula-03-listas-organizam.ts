@@ -1,17 +1,17 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import papel from "@/assets/neuro-treino/objetos/papel.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import mochila from "@/assets/neuro-treino/objetos/mochila.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import bolo from "@/assets/neuro-treino/objetos/bolo.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import balao from "@/assets/neuro-treino/objetos/balao.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import boneca from "@/assets/neuro-treino/objetos/boneca-pano.png";
-import bicicleta from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as boneca } from "@/assets/neuro-treino/objetos/boneca-pano.png.asset.json";
+import { url as bicicleta } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
 
 /**
  * Unidade 2 · Aula 3 — Listas que Organizam

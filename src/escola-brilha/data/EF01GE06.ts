@@ -1,26 +1,26 @@
 import type { Aula } from "../types";
-import casaAntigaImg from "@/assets/neuro-treino/objetos/casa-antiga.png";
-import casaModernaImg from "@/assets/neuro-treino/objetos/casa-moderna.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import predioImg from "@/assets/neuro-treino/objetos/predio.png";
-import ocaImg from "@/assets/neuro-treino/objetos/oca.png";
-import tijoloImg from "@/assets/neuro-treino/objetos/tijolo.png";
-import madeiraImg from "@/assets/neuro-treino/objetos/madeira.png";
-import pedraImg from "@/assets/neuro-treino/objetos/pedra.png";
-import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
-import bonecaImg from "@/assets/neuro-treino/objetos/boneca-pano.png";
-import ioioImg from "@/assets/neuro-treino/objetos/ioio.png";
-import videogameImg from "@/assets/neuro-treino/objetos/videogame.png";
-import tvImg from "@/assets/neuro-treino/objetos/tv-moderna.png";
-import radioImg from "@/assets/neuro-treino/objetos/radio-antigo.png";
-import telefoneAntigoImg from "@/assets/neuro-treino/objetos/telefone-antigo.png";
-import celularImg from "@/assets/neuro-treino/objetos/celular.png";
-import bicicletaAntigaImg from "@/assets/neuro-treino/objetos/bicicleta-antiga.png";
-import bicicletaModernaImg from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import cadeiraImg from "@/assets/neuro-treino/objetos/cadeira.png";
-import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
-import familiaImg from "@/assets/neuro-treino/objetos/familia-grande.png";
-import tecidoImg from "@/assets/neuro-treino/objetos/tecido-colorido.png";
+import { url as casaAntigaImg } from "@/assets/neuro-treino/objetos/casa-antiga.png.asset.json";
+import { url as casaModernaImg } from "@/assets/neuro-treino/objetos/casa-moderna.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as predioImg } from "@/assets/neuro-treino/objetos/predio.png.asset.json";
+import { url as ocaImg } from "@/assets/neuro-treino/objetos/oca.png.asset.json";
+import { url as tijoloImg } from "@/assets/neuro-treino/objetos/tijolo.png.asset.json";
+import { url as madeiraImg } from "@/assets/neuro-treino/objetos/madeira.png.asset.json";
+import { url as pedraImg } from "@/assets/neuro-treino/objetos/pedra.png.asset.json";
+import { url as ursinhoImg } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
+import { url as bonecaImg } from "@/assets/neuro-treino/objetos/boneca-pano.png.asset.json";
+import { url as ioioImg } from "@/assets/neuro-treino/objetos/ioio.png.asset.json";
+import { url as videogameImg } from "@/assets/neuro-treino/objetos/videogame.png.asset.json";
+import { url as tvImg } from "@/assets/neuro-treino/objetos/tv-moderna.png.asset.json";
+import { url as radioImg } from "@/assets/neuro-treino/objetos/radio-antigo.png.asset.json";
+import { url as telefoneAntigoImg } from "@/assets/neuro-treino/objetos/telefone-antigo.png.asset.json";
+import { url as celularImg } from "@/assets/neuro-treino/objetos/celular.png.asset.json";
+import { url as bicicletaAntigaImg } from "@/assets/neuro-treino/objetos/bicicleta-antiga.png.asset.json";
+import { url as bicicletaModernaImg } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as cadeiraImg } from "@/assets/neuro-treino/objetos/cadeira.png.asset.json";
+import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-grande.png.asset.json";
+import { url as tecidoImg } from "@/assets/neuro-treino/objetos/tecido-colorido.png.asset.json";
 
 /**
  * EF01GE06 — Geografia · 1º Ano

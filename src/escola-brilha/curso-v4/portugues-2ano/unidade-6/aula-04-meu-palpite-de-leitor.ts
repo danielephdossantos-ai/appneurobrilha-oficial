@@ -1,13 +1,13 @@
 import type { AulaPortuguesV4 } from "../../types";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import bibliotecario from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import coracao from "@/assets/neuro-treino/objetos/coracao.png";
-import balao from "@/assets/neuro-treino/objetos/balao.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import menino from "@/assets/neuro-treino/objetos/menino.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as bibliotecario } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 
 /**
  * Unidade 6 · Aula 4 — Meu Palpite de Leitor

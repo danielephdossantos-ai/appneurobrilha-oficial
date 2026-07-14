@@ -1,14 +1,14 @@
 import type { Aula } from "../types";
-import tamborImg from "@/assets/neuro-treino/objetos/tambor.png";
-import chocalhoImg from "@/assets/neuro-treino/objetos/chocalho.png";
-import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
-import cachorroImg from "@/assets/neuro-treino/objetos/cachorro.png";
-import gatoImg from "@/assets/neuro-treino/objetos/gato.png";
-import galoImg from "@/assets/neuro-treino/objetos/galo.png";
-import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
-import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
+import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
+import { url as chocalhoImg } from "@/assets/neuro-treino/objetos/chocalho.png.asset.json";
+import { url as palmasImg } from "@/assets/neuro-treino/sentidos/palmas.png.asset.json";
+import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as galoImg } from "@/assets/neuro-treino/objetos/galo.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 
 /**
  * EI03TS01 — Traços, Sons, Cores e Formas

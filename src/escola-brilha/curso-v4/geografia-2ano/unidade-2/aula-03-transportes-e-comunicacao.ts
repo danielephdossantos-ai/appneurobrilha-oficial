@@ -1,23 +1,23 @@
 import type { AulaPortuguesV4 } from "../../types";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import bicicletaModerna from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import bicicletaAntiga from "@/assets/neuro-treino/objetos/bicicleta-antiga.png";
-import pontoOnibus from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import trem from "@/assets/neuro-treino/objetos/trem.png";
-import navio from "@/assets/neuro-treino/objetos/navio.png";
-import telefoneAntigo from "@/assets/neuro-treino/objetos/telefone-antigo.png";
-import celular from "@/assets/neuro-treino/objetos/celular.png";
-import radioAntigo from "@/assets/neuro-treino/objetos/radio-antigo.png";
-import tvModerna from "@/assets/neuro-treino/objetos/tv-moderna.png";
-import cameraAntiga from "@/assets/neuro-treino/objetos/camera-antiga.png";
-import tablet from "@/assets/neuro-treino/objetos/tablet.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import ponte from "@/assets/neuro-treino/objetos/ponte.png";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as bicicletaModerna } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as bicicletaAntiga } from "@/assets/neuro-treino/objetos/bicicleta-antiga.png.asset.json";
+import { url as pontoOnibus } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as trem } from "@/assets/neuro-treino/objetos/trem.png.asset.json";
+import { url as navio } from "@/assets/neuro-treino/objetos/navio.png.asset.json";
+import { url as telefoneAntigo } from "@/assets/neuro-treino/objetos/telefone-antigo.png.asset.json";
+import { url as celular } from "@/assets/neuro-treino/objetos/celular.png.asset.json";
+import { url as radioAntigo } from "@/assets/neuro-treino/objetos/radio-antigo.png.asset.json";
+import { url as tvModerna } from "@/assets/neuro-treino/objetos/tv-moderna.png.asset.json";
+import { url as cameraAntiga } from "@/assets/neuro-treino/objetos/camera-antiga.png.asset.json";
+import { url as tablet } from "@/assets/neuro-treino/objetos/tablet.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 2 · Aula 03

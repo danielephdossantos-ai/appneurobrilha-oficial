@@ -1,24 +1,24 @@
 import type { Aula } from "../types";
-import bebeImg from "@/assets/neuro-treino/objetos/bebe.png";
-import meninoImg from "@/assets/neuro-treino/objetos/menino.png";
-import meninaImg from "@/assets/neuro-treino/objetos/menina.png";
-import casaAntigaImg from "@/assets/neuro-treino/objetos/casa-antiga.png";
-import casaModernaImg from "@/assets/neuro-treino/objetos/casa-moderna.png";
-import telefoneAntigoImg from "@/assets/neuro-treino/objetos/telefone-antigo.png";
-import celularImg from "@/assets/neuro-treino/objetos/celular.png";
-import bicicletaAntigaImg from "@/assets/neuro-treino/objetos/bicicleta-antiga.png";
-import bicicletaModernaImg from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import plantaPequenaImg from "@/assets/neuro-treino/objetos/planta-pequena.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
-import radioAntigoImg from "@/assets/neuro-treino/objetos/radio-antigo.png";
-import tvModernaImg from "@/assets/neuro-treino/objetos/tv-moderna.png";
-import cameraAntigaImg from "@/assets/neuro-treino/objetos/camera-antiga.png";
-import relogioMagicoImg from "@/assets/neuro-treino/objetos/relogio-magico.png";
-import museuImg from "@/assets/neuro-treino/objetos/museu.png";
-import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
-import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
-import albumImg from "@/assets/neuro-treino/objetos/album.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import { url as bebeImg } from "@/assets/neuro-treino/objetos/bebe.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as casaAntigaImg } from "@/assets/neuro-treino/objetos/casa-antiga.png.asset.json";
+import { url as casaModernaImg } from "@/assets/neuro-treino/objetos/casa-moderna.png.asset.json";
+import { url as telefoneAntigoImg } from "@/assets/neuro-treino/objetos/telefone-antigo.png.asset.json";
+import { url as celularImg } from "@/assets/neuro-treino/objetos/celular.png.asset.json";
+import { url as bicicletaAntigaImg } from "@/assets/neuro-treino/objetos/bicicleta-antiga.png.asset.json";
+import { url as bicicletaModernaImg } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as plantaPequenaImg } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as radioAntigoImg } from "@/assets/neuro-treino/objetos/radio-antigo.png.asset.json";
+import { url as tvModernaImg } from "@/assets/neuro-treino/objetos/tv-moderna.png.asset.json";
+import { url as cameraAntigaImg } from "@/assets/neuro-treino/objetos/camera-antiga.png.asset.json";
+import { url as relogioMagicoImg } from "@/assets/neuro-treino/objetos/relogio-magico.png.asset.json";
+import { url as museuImg } from "@/assets/neuro-treino/objetos/museu.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as albumImg } from "@/assets/neuro-treino/objetos/album.png.asset.json";
+import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
 
 /**
  * EF01HI03 — História · 1º Ano

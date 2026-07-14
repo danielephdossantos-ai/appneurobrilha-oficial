@@ -1,12 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
-import lua from "@/assets/neuro-treino/objetos/lua.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import casa from "@/assets/neuro-treino/objetos/casa.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 
 /**
  * Unidade 3 · Aula 3 — Palavras que se Parecem

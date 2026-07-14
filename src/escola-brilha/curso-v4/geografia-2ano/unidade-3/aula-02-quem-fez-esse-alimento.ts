@@ -1,16 +1,16 @@
 import type { AulaPortuguesV4 } from "../../types";
-import vaca from "@/assets/neuro-treino/objetos/vaca.png";
-import campo from "@/assets/neuro-treino/objetos/campo.png";
-import mercado from "@/assets/neuro-treino/objetos/mercado.png";
-import padaria from "@/assets/neuro-treino/objetos/padaria.png";
-import galinha from "@/assets/neuro-treino/objetos/galinha.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
-import semente from "@/assets/neuro-treino/objetos/semente.png";
-import geladeira from "@/assets/neuro-treino/objetos/geladeira.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
+import { url as vaca } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as mercado } from "@/assets/neuro-treino/objetos/mercado.png.asset.json";
+import { url as padaria } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
+import { url as galinha } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as semente } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as geladeira } from "@/assets/neuro-treino/objetos/geladeira.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 3 · Aula 02

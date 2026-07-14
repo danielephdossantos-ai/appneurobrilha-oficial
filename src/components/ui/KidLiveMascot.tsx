@@ -2,30 +2,30 @@ import React from "react";
 
 import { cn } from "@/utils/utils";
 import { useMascot } from "@/contexts/MascotContext";
-import pipaMascot from "@/assets/pip-girl-mascot.png";
+import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 import { useAppState } from "@/core/store";
 import { useMascotStage } from "@/lib/mascot-stage";
 
-import pipMascot from "@/assets/pip-mascot.png";
-import pipEgg from "@/assets/pip-egg.png";
-import pipHatching from "@/assets/pip-hatching.png";
-import pipBaby from "@/assets/pip-baby.png";
-import pipaEgg from "@/assets/pipa-egg.png";
-import pipaHatching from "@/assets/pipa-hatching.png";
-import pipaBaby from "@/assets/pipa-baby.png";
-import pipDinossauros from "@/assets/pip-dinossauros.png";
-import pipEspaco from "@/assets/pip-espaco.png";
-import pipArte from "@/assets/pip-arte.png";
-import pipAnimais from "@/assets/pip-animais.png";
-import pipMusica from "@/assets/pip-musica.png";
-import pipFazendinha from "@/assets/pip-fazendinha.png";
-import pipSuperHerois from "@/assets/pip-super-herois.png";
-import pipPrincesas from "@/assets/pip-princesas.png";
-import pipMinecraft from "@/assets/pip-minecraft.png";
-import pipCarros from "@/assets/pip-carros.png";
-import pipTrens from "@/assets/pip-trens.png";
-import pipRobos from "@/assets/pip-robos.png";
-import pipVeiculos from "@/assets/pip-veiculos.png";
+import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
+import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
+import { url as pipHatching } from "@/assets/pip-hatching.png.asset.json";
+import { url as pipBaby } from "@/assets/pip-baby.png.asset.json";
+import { url as pipaEgg } from "@/assets/pipa-egg.png.asset.json";
+import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
+import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
+import { url as pipDinossauros } from "@/assets/pip-dinossauros.png.asset.json";
+import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
+import { url as pipArte } from "@/assets/pip-arte.png.asset.json";
+import { url as pipAnimais } from "@/assets/pip-animais.png.asset.json";
+import { url as pipMusica } from "@/assets/pip-musica.png.asset.json";
+import { url as pipFazendinha } from "@/assets/pip-fazendinha.png.asset.json";
+import { url as pipSuperHerois } from "@/assets/pip-super-herois.png.asset.json";
+import { url as pipPrincesas } from "@/assets/pip-princesas.png.asset.json";
+import { url as pipMinecraft } from "@/assets/pip-minecraft.png.asset.json";
+import { url as pipCarros } from "@/assets/pip-carros.png.asset.json";
+import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
+import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
+import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
 
 
 export const PIP_SKINS: Record<string, string> = {

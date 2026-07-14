@@ -1,9 +1,9 @@
 import type { AulaV4 } from "../../types";
-import bloco from "@/assets/neuro-treino/objetos/bloco.png";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import maca from "@/assets/neuro-treino/objetos/maca.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as bloco } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 4 · Aula 5 — "Missão Final da Oficina"

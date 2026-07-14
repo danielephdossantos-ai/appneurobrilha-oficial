@@ -1,9 +1,9 @@
 // ============================================================
 // Mundo Dinossauro — cena estática (sem movimentos)
 // ============================================================
-import worldDinossauros from "@/assets/neuro-treino/worlds/dinossauros.jpg";
-import dinossauroImg from "@/assets/neuro-treino/objetos/dinossauro.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import { url as worldDinossauros } from "@/assets/neuro-treino/worlds/dinossauros.jpg.asset.json";
+import { url as dinossauroImg } from "@/assets/neuro-treino/objetos/dinossauro.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 
 export function DinoWorld() {
   return (

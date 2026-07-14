@@ -1,13 +1,13 @@
 import type { Aula } from "../types";
-import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import solImg from "@/assets/neuro-treino/objetos/sol.png";
-import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
-import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
-import peImg from "@/assets/neuro-treino/sentidos/pe.png";
-import pesPulandoImg from "@/assets/neuro-treino/sentidos/pes-pulando.png";
-import cabecaImg from "@/assets/neuro-treino/sentidos/cabeca.png";
+import { url as felizImg } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as maoImg } from "@/assets/neuro-treino/sentidos/mao.png.asset.json";
+import { url as palmasImg } from "@/assets/neuro-treino/sentidos/palmas.png.asset.json";
+import { url as peImg } from "@/assets/neuro-treino/sentidos/pe.png.asset.json";
+import { url as pesPulandoImg } from "@/assets/neuro-treino/sentidos/pes-pulando.png.asset.json";
+import { url as cabecaImg } from "@/assets/neuro-treino/sentidos/cabeca.png.asset.json";
 
 /**
  * EI03CG03 — Aula 3: Dançando com o corpo

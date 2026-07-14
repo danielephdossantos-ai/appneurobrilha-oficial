@@ -1,14 +1,14 @@
 import type { AulaPortuguesV4 } from "../../types";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
-import bibliotecario from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
-import guardaChuva from "@/assets/neuro-treino/objetos/nuvem.png";
-import menino from "@/assets/neuro-treino/objetos/menino.png";
-import menina from "@/assets/neuro-treino/objetos/menina.png";
-import cachorro from "@/assets/neuro-treino/objetos/cachorro.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import setaDir from "@/assets/neuro-treino/objetos/seta-direita.png";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as bibliotecario } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as guardaChuva } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as setaDir } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
 
 /**
  * Unidade 6 · Aula 3 — Ligando os Pontos (Causa e Efeito)

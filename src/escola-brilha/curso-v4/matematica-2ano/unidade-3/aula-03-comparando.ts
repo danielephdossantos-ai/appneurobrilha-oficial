@@ -1,9 +1,9 @@
 import type { AulaV4 } from "../../types";
-import estrela from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import lapis from "@/assets/neuro-treino/objetos/lapis.png";
-import bola from "@/assets/neuro-treino/objetos/bola.png";
-import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Unidade 3 · Aula 3 — "Comparando Quantidades"

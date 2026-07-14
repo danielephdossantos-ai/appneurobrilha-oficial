@@ -1,15 +1,15 @@
 import type { AulaPortuguesV4 } from "../../types";
-import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
-import semente from "@/assets/neuro-treino/objetos/semente.png";
-import plantaPequena from "@/assets/neuro-treino/objetos/planta-pequena.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
-import girassol from "@/assets/neuro-treino/objetos/girassol.png";
-import sol from "@/assets/neuro-treino/objetos/sol.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
-import jardim from "@/assets/neuro-treino/objetos/jardim.png";
-import vaso from "@/assets/neuro-treino/objetos/vaso-ceramica.png";
-import livro from "@/assets/neuro-treino/objetos/livro.png";
-import passaro from "@/assets/neuro-treino/objetos/passaro.png";
+import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecario.png.asset.json";
+import { url as semente } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as plantaPequena } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as girassol } from "@/assets/neuro-treino/objetos/girassol.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as jardim } from "@/assets/neuro-treino/objetos/jardim.png.asset.json";
+import { url as vaso } from "@/assets/neuro-treino/objetos/vaso-ceramica.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 
 /**
  * Aula 2 — A Semente Curiosa

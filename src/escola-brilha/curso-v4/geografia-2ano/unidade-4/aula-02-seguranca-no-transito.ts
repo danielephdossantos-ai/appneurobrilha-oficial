@@ -1,15 +1,15 @@
 import type { AulaPortuguesV4 } from "../../types";
-import rua from "@/assets/neuro-treino/objetos/rua.png";
-import criancaAndando from "@/assets/neuro-treino/objetos/crianca-andando.png";
-import bicicletaModerna from "@/assets/neuro-treino/objetos/bicicleta-moderna.png";
-import carro from "@/assets/neuro-treino/objetos/carro.png";
-import pontoOnibus from "@/assets/neuro-treino/objetos/ponto-onibus.png";
-import escola from "@/assets/neuro-treino/objetos/escola.png";
-import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
-import cidade from "@/assets/neuro-treino/objetos/cidade.png";
-import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
-import semaforo from "@/assets/neuro-treino/objetos/relogio.png"; // fallback: sem asset dedicado
-import mao from "@/assets/neuro-treino/objetos/abraco.png";
+import { url as rua } from "@/assets/neuro-treino/objetos/rua.png.asset.json";
+import { url as criancaAndando } from "@/assets/neuro-treino/objetos/crianca-andando.png.asset.json";
+import { url as bicicletaModerna } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as pontoOnibus } from "@/assets/neuro-treino/objetos/ponto-onibus.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as postoSaude } from "@/assets/neuro-treino/objetos/posto-saude.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
+import { url as semaforo } from "@/assets/neuro-treino/objetos/relogio.png.asset.json"; // fallback: sem asset dedicado
+import { url as mao } from "@/assets/neuro-treino/objetos/abraco.png.asset.json";
 
 /**
  * Geografia · 2º Ano · Unidade 4 · Aula 02
