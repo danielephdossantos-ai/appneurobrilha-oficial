@@ -263,17 +263,47 @@ export const aula01: AulaGeoV1 = {
     falaFinal: "Você já identifica na hora as partes da célula. É vocabulário de biólogo.",
   },
 
-  cena10_professorBrilha: {
-    tipo: "professorBrilhaChat",
-    aurora: "Fale com o Professor Brilha sobre qualquer dúvida sobre células.",
-    saudacao: "E aí, pesquisador. Dúvida sobre célula, DNA, ou como o microscópio funciona? Pergunta.",
-    sugestoes: ["Por que animais não têm parede celular?", "O que é DNA?", "Como o microscópio amplia?"],
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "A célula tem duas grandes zonas: ENVOLTÓRIO (controla trocas) e MAQUINÁRIO (produz e comanda).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: celulaImg,
+    fatias: [
+      { id: "envoltorio", rotulo: "Envoltório", emoji: "🛡️", percentual: 30, cor: "#10b981", descricao: "Membrana + parede (quando há). Delimita a célula e controla entrada e saída de substâncias.", exemplos: ["Membrana plasmática", "Parede celular", "Proteínas de transporte"], fotoUrl: celulaImg },
+      { id: "maquinario", rotulo: "Maquinário", emoji: "⚙️", percentual: 70, cor: "#0ea5e9", descricao: "Núcleo, organelas e citoplasma. Onde acontece toda a atividade metabólica e o comando genético.", exemplos: ["Núcleo com DNA", "Mitocôndrias", "Ribossomos"], fotoUrl: niveisImg },
+    ],
+    falaFinal: "Envoltório sem maquinário = saco vazio. Maquinário sem envoltório = confusão. Célula precisa das duas.",
   },
 
-  cena11_proxima: {
-    tipo: "proximaHabilidade",
-    aurora: "Missão 2 concluída. Próximo laboratório: níveis de organização e ecossistemas.",
-    proximaMissao: "Corpo em Sistemas & Ecossistemas",
-    proximaHabilidade: "EF06CI06",
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "Última missão do Programa 2. 3 perguntas e sua Certificação de Biólogo Júnior é liberada.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: celulaImg,
+    perguntas: [
+      { id: "q1", pergunta: "O que a Teoria Celular afirma sobre a origem das células?", fotoUrl: celulaImg,
+        opcoes: [
+          { id: "a", texto: "Toda célula vem de outra célula pré-existente", correta: true },
+          { id: "b", texto: "Células surgem espontaneamente do nada" },
+        ],
+        feedbackAcerto: "Correto. É o segundo pilar da Teoria Celular — descartou a geração espontânea.",
+        feedbackErro: "Geração espontânea foi REFUTADA no séc. XIX. Toda célula vem de outra célula." },
+      { id: "q2", pergunta: "Qual é a estrutura EXCLUSIVA de células vegetais (não existe em animais)?", fotoUrl: celulaImg,
+        opcoes: [
+          { id: "a", texto: "Parede celular de celulose", correta: true },
+          { id: "b", texto: "Membrana plasmática" },
+        ],
+        feedbackAcerto: "Sim. Parede rígida de celulose é marca da célula vegetal.",
+        feedbackErro: "Membrana existe em TODAS as células. Só PAREDE é exclusiva de plantas." },
+      { id: "q3", pergunta: "Como células individuais se organizam em níveis superiores?", fotoUrl: niveisImg,
+        opcoes: [
+          { id: "a", texto: "Célula → tecido → órgão → sistema → organismo", correta: true },
+          { id: "b", texto: "Organismo → sistema → célula direto" },
+        ],
+        feedbackAcerto: "Exato. Cada nível é feito do anterior — hierarquia biológica.",
+        feedbackErro: "Ordem correta é do MENOR ao MAIOR: célula → tecido → órgão → sistema → organismo." },
+    ],
+    selo: { nome: "Certificação de Biólogo Júnior", subtitulo: "Academia Científica · Programa 2 concluído", emoji: "🧫", cor: "from-emerald-500 to-teal-700" },
+    falaFinal: "Programa 2 concluído. Você domina biologia celular básica.",
   },
 };
