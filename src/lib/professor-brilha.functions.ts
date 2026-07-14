@@ -113,7 +113,7 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
 
     const supabase = getServerClient();
     const userId: string | null = null;
-    const { contexto, mensagem } = data;
+    const { contexto, mensagem, historico: historicoCliente } = data;
 
 
 
@@ -128,13 +128,16 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
           .maybeSingle()
       : { data: null as any };
 
-    const historico: Array<{ role: "user" | "assistant"; content: string }> = Array.isArray(
+    const historicoBanco: Array<{ role: "user" | "assistant"; content: string }> = Array.isArray(
       existente?.mensagens,
     )
-      ? (existente!.mensagens as any[]).filter(
-          (m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
-        )
+      ? (existente!.mensagens as any[])
+          .filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
+          .map((m) => ({ role: m.role, content: m.content }))
       : [];
+    // Prioriza histórico da UI (fonte da verdade quando não autenticado)
+    const historico =
+      historicoCliente && historicoCliente.length ? historicoCliente : historicoBanco;
 
     // Limitar histórico às últimas 20 trocas
     const historicoCurto = historico.slice(-20);
