@@ -1,29 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Volume2, Mic, MicOff, Check, X, Sparkles, PartyPopper } from "lucide-react";
 import { speakEnglish, stopSpeakingEn, warmupEnVoices } from "@/lib/native-tts-en";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
-import {
-  VOCAB,
-  STORY,
-  DIALOG,
-  READING,
-  WRITING,
-  QUIZ,
-  REAL_LIFE,
-  GRAMMAR,
-} from "./u1-a01-hello/data";
+import type { LessonData, Vocab } from "./types";
+import defaultLesson from "./u1-a01-hello/data";
 
-type Props = { onSair: () => void; onConcluir: () => void };
+type Props = { onSair: () => void; onConcluir: () => void; lesson?: LessonData };
+
+const LessonCtx = createContext<LessonData>(defaultLesson);
+const useLesson = () => useContext(LessonCtx);
 
 /**
- * PlayerEnglishV1 — engine dedicada de Inglês (piloto).
- * Renderiza os 11 momentos obrigatórios do curso de idiomas em scroll
- * contínuo. Cada seção tem TTS (falante nativo), narração em pt-BR
- * opcional, e componentes específicos (SpeakingMic, WordCardSPEB,
- * ListeningDialog, GrammarWhy, RealLifeScenarios, MiniGameMatch).
+ * PlayerEnglishV1 — engine dedicada de Inglês.
+ * Renderiza os 11 momentos obrigatórios em scroll contínuo, consumindo
+ * `LessonData` via contexto (permite múltiplas aulas usando o mesmo player).
  */
-export function PlayerEnglishV1({ onSair, onConcluir }: Props) {
+export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: Props) {
   useEffect(() => {
     warmupEnVoices();
     return () => {
@@ -33,63 +26,71 @@ export function PlayerEnglishV1({ onSair, onConcluir }: Props) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-[#0d1f55]/80 border-b border-white/10">
-        <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
-          <button
-            onClick={onSair}
-            className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
-          >
-            <ArrowLeft size={18} /> Sair
-          </button>
-          <div className="text-center">
-            <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
-              My First English Adventure
+    <LessonCtx.Provider value={lesson}>
+      <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white">
+        <header className="sticky top-0 z-40 backdrop-blur bg-[#0d1f55]/80 border-b border-white/10">
+          <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
+            <button
+              onClick={onSair}
+              className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
+            >
+              <ArrowLeft size={18} /> Sair
+            </button>
+            <div className="text-center">
+              <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
+                {lesson.meta.headerKicker}
+              </div>
+              <div className="text-sm font-black text-white">{lesson.meta.unitLabel}</div>
             </div>
-            <div className="text-sm font-black text-white">Unit 1 · Lesson 1 — Hello!</div>
+            <div className="w-14" />
           </div>
-          <div className="w-14" />
-        </div>
-      </header>
+        </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
-        <SectionCover onStart={() => scrollToId("s1")} />
-        <Section id="s1" step={1} label="História inicial" title="Meet Lily!">
-          <Story />
-        </Section>
-        <Section id="s2" step={2} label="Vocabulário novo" title="New words">
-          <Vocabulary />
-        </Section>
-        <Section id="s3" step={3} label="Speaking" title="Now you speak!">
-          <SpeakingMic />
-        </Section>
-        <Section id="s4" step={4} label="Listening" title="Listen carefully">
-          <ListeningDialog />
-        </Section>
-        <Section id="s5" step={5} label="Reading" title={READING.title}>
-          <Reading />
-        </Section>
-        <Section id="s6" step={6} label="Writing" title="Complete the sentence">
-          <Writing />
-        </Section>
-        <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
-          <GrammarWhy />
-        </Section>
-        <Section id="s8" step={8} label="Real Life" title="In real life">
-          <RealLife />
-        </Section>
-        <Section id="s9" step={9} label="Mini Game" title="Match the word!">
-          <MiniGameMatch />
-        </Section>
-        <Section id="s10" step={10} label="Quiz" title="Quick check">
-          <Quiz />
-        </Section>
-        <Section id="s11" step={11} label="Projeto" title="Introduce yourself!">
-          <FinalProject onFinish={onConcluir} />
-        </Section>
-      </main>
-    </div>
+        <MainSections onConcluir={onConcluir} />
+      </div>
+    </LessonCtx.Provider>
+  );
+}
+
+function MainSections({ onConcluir }: { onConcluir: () => void }) {
+  const { meta, READING, GRAMMAR } = useLesson();
+  return (
+    <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
+      <SectionCover onStart={() => scrollToId("s1")} />
+      <Section id="s1" step={1} label="História inicial" title={meta.storyTitle}>
+        <Story />
+      </Section>
+      <Section id="s2" step={2} label="Vocabulário novo" title={meta.vocabularyTitle}>
+        <Vocabulary />
+      </Section>
+      <Section id="s3" step={3} label="Speaking" title="Now you speak!">
+        <SpeakingMic />
+      </Section>
+      <Section id="s4" step={4} label="Listening" title="Listen carefully">
+        <ListeningDialog />
+      </Section>
+      <Section id="s5" step={5} label="Reading" title={READING.title}>
+        <Reading />
+      </Section>
+      <Section id="s6" step={6} label="Writing" title="Complete the sentence">
+        <Writing />
+      </Section>
+      <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
+        <GrammarWhy />
+      </Section>
+      <Section id="s8" step={8} label="Real Life" title="In real life">
+        <RealLife />
+      </Section>
+      <Section id="s9" step={9} label="Mini Game" title="Match the word!">
+        <MiniGameMatch />
+      </Section>
+      <Section id="s10" step={10} label="Quiz" title="Quick check">
+        <Quiz />
+      </Section>
+      <Section id="s11" step={11} label="Projeto" title={meta.finalProjectSectionTitle}>
+        <FinalProject onFinish={onConcluir} />
+      </Section>
+    </main>
   );
 }
 
@@ -102,6 +103,7 @@ function scrollToId(id: string) {
 /* ============================= UI base ============================= */
 
 function SectionCover({ onStart }: { onStart: () => void }) {
+  const { meta } = useLesson();
   return (
     <div className="text-center py-10">
       <motion.div
@@ -109,10 +111,10 @@ function SectionCover({ onStart }: { onStart: () => void }) {
         animate={{ scale: 1, opacity: 1 }}
         className="inline-block bg-gradient-to-br from-sky-400 to-indigo-500 text-white rounded-3xl px-8 py-6 shadow-xl"
       >
-        <div className="text-xs uppercase tracking-widest opacity-80">Lesson 1</div>
-        <div className="text-3xl font-black mt-1">Hello, friend!</div>
+        <div className="text-xs uppercase tracking-widest opacity-80">{meta.coverKicker}</div>
+        <div className="text-3xl font-black mt-1">{meta.coverTitle}</div>
         <div className="text-sm opacity-90 mt-2 max-w-xs mx-auto">
-          Hoje você vai aprender a cumprimentar e dizer seu nome em inglês.
+          {meta.coverSubtitle}
         </div>
       </motion.div>
       <div className="mt-6">
@@ -228,6 +230,7 @@ function PlayPt({ text }: { text: string }) {
 /* ============================ 1. Story ============================ */
 
 function Story() {
+  const { STORY } = useLesson();
   const [i, setI] = useState(0);
   const panel = STORY[i];
   useEffect(() => {
@@ -285,6 +288,7 @@ function Story() {
 
 /** Card de palavra que passa pelas etapas SPEB: Ver → Ouvir → Repetir → Ler. */
 function Vocabulary() {
+  const { VOCAB } = useLesson();
   const [openId, setOpenId] = useState<string | null>(null);
   return (
     <div>
@@ -316,7 +320,7 @@ function Vocabulary() {
   );
 }
 
-function WordSPEB({ word, onClose }: { word: (typeof VOCAB)[number]; onClose: () => void }) {
+function WordSPEB({ word, onClose }: { word: Vocab; onClose: () => void }) {
   const [step, setStep] = useState(0);
   const steps = ["👀 Ver", "👂 Ouvir", "🗣️ Repetir", "📖 Ler", "✅ Ok!"];
   return (
@@ -422,7 +426,8 @@ function StepBtn({
 type SR = any;
 
 function SpeakingMic() {
-  const targets = ["Hello", "Good morning", "My name is Lily"];
+  const { meta } = useLesson();
+  const targets = meta.speakingTargets;
   const [i, setI] = useState(0);
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string>("");
@@ -552,6 +557,7 @@ function SpeakingMic() {
 /* ============================ 4. Listening ============================ */
 
 function ListeningDialog() {
+  const { DIALOG, meta } = useLesson();
   const [playedAll, setPlayedAll] = useState(false);
   const [answer, setAnswer] = useState<string | null>(null);
 
@@ -599,16 +605,16 @@ function ListeningDialog() {
       {playedAll && (
         <div className="mt-5 bg-amber-50 border border-amber-200 rounded-xl p-4">
           <div className="text-sm font-bold text-slate-700 mb-2">
-            Pergunta de compreensão: qual é o nome da menina?
+            {meta.listeningQuestion}
           </div>
           <div className="grid grid-cols-3 gap-2">
-            {["Ana", "Lily", "Mia"].map((opt) => (
+            {meta.listeningOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => setAnswer(opt)}
                 className={`py-2 rounded-lg font-bold border-2 transition ${
                   answer === opt
-                    ? opt === "Lily"
+                    ? opt === meta.listeningCorrect
                       ? "bg-emerald-500 text-white border-emerald-500"
                       : "bg-rose-500 text-white border-rose-500"
                     : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
@@ -618,12 +624,12 @@ function ListeningDialog() {
               </button>
             ))}
           </div>
-          {answer === "Lily" && (
+          {answer === meta.listeningCorrect && (
             <div className="mt-2 text-emerald-600 font-bold text-sm">✔ Correct!</div>
           )}
-          {answer && answer !== "Lily" && (
+          {answer && answer !== meta.listeningCorrect && (
             <div className="mt-2 text-rose-600 font-bold text-sm">
-              ✘ Ouve outra vez: ela diz "My name is Lily".
+              ✘ {meta.listeningWrongHint}
             </div>
           )}
         </div>
@@ -635,6 +641,7 @@ function ListeningDialog() {
 /* ============================ 5. Reading ============================ */
 
 function Reading() {
+  const { READING, meta } = useLesson();
   return (
     <div>
       <img
@@ -659,7 +666,7 @@ function Reading() {
         ))}
       </div>
       <div className="mt-4">
-        <PlayPt text={`Vamos ler juntos. A Lily é uma menina. Ela vai para a escola. Ela diz "Hello". A professora responde "Good morning".`} />
+        <PlayPt text={meta.readingNarration} />
       </div>
     </div>
   );
@@ -697,6 +704,7 @@ function highlightWords(text: string, words: string[]) {
 /* ============================ 6. Writing ============================ */
 
 function Writing() {
+  const { WRITING } = useLesson();
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<string | null>(null);
   const q = WRITING[i];
@@ -779,10 +787,11 @@ function Writing() {
 /* ============================ 7. Grammar (Why?) ============================ */
 
 function GrammarWhy() {
+  const { GRAMMAR, meta } = useLesson();
   return (
     <div>
       <PlayPt
-        text={`Por que dizemos "My name is"? Em inglês, MY quer dizer MEU. NAME é NOME. IS é a palavrinha que junta as duas ideias. Sempre juntas: MY NAME IS mais o seu nome.`}
+        text={meta.grammarNarration}
       />
       <div className="mt-3 rounded-xl bg-indigo-50 border border-indigo-200 p-4">
         <div className="text-xs uppercase tracking-wider text-indigo-600 font-black">Por quê?</div>
@@ -825,6 +834,7 @@ function GrammarWhy() {
 /* ============================ 8. Real Life ============================ */
 
 function RealLife() {
+  const { REAL_LIFE } = useLesson();
   const [reveal, setReveal] = useState<Record<number, boolean>>({});
   return (
     <div className="space-y-3">
@@ -856,6 +866,7 @@ function RealLife() {
 /* ============================ 9. Mini Game ============================ */
 
 function MiniGameMatch() {
+  const { VOCAB } = useLesson();
   const pool = VOCAB.slice(0, 4);
   // pairs[enId] = { pt, correct } — só ficam travadas as corretas
   const [pairs, setPairs] = useState<Record<string, { pt: string; correct: boolean }>>({});
@@ -973,6 +984,7 @@ function MiniGameMatch() {
 /* ============================ 10. Quiz ============================ */
 
 function Quiz() {
+  const { QUIZ } = useLesson();
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(QUIZ.map(() => null));
   const q = QUIZ[i];
@@ -1053,14 +1065,15 @@ function Quiz() {
 /* ============================ 11. Projeto Final ============================ */
 
 function FinalProject({ onFinish }: { onFinish: () => void }) {
+  const { meta } = useLesson();
   const [name, setName] = useState("");
   const [done, setDone] = useState(false);
-  const phrase = name.trim() ? `Hello! My name is ${name.trim()}. Nice to meet you!` : "";
+  const phrase = name.trim() ? meta.finalProjectPhrase(name.trim()) : "";
 
   return (
     <div>
       <div className="text-sm text-slate-600 mb-3">
-        Se apresenta em inglês! Escreve seu nome e depois <b>diz alto</b>:
+        {meta.finalProjectIntro}
       </div>
       <input
         value={name}
