@@ -77,9 +77,9 @@ export const aula01: AulaGeoV1 = {
     mapaUrl: celulaAnimalImg,
     pontos: [
       { id: "nucleo", x: 45, y: 42, emoji: "🧬", cor: "from-indigo-500 to-purple-700", titulo: "Núcleo", texto: "Contém o DNA organizado em cromossomos. Comanda a síntese de proteínas e a divisão celular.", fotoUrl: dnaImg },
-      { id: "mitocondria", x: 75, y: 50, emoji: "🔋", cor: "from-red-500 to-rose-700", titulo: "Mitocôndria", texto: "Faz respiração celular: glicose + O₂ → ATP (energia química da célula).", fotoUrl: celulaAnimalImg },
-      { id: "reticulo", x: 25, y: 65, emoji: "🕸️", cor: "from-amber-500 to-orange-700", titulo: "Retículo endoplasmático", texto: "Rede de canais que sintetiza proteínas (rugoso) e lipídios (liso).", fotoUrl: celulaAnimalImg },
-      { id: "golgi", x: 65, y: 75, emoji: "📦", cor: "from-emerald-500 to-teal-700", titulo: "Complexo de Golgi", texto: "Empacota e envia proteínas para dentro ou fora da célula. Como o setor de expedição.", fotoUrl: celulaAnimalImg },
+      { id: "mitocondria", x: 75, y: 50, emoji: "🔋", cor: "from-red-500 to-rose-700", titulo: "Mitocôndria", texto: "Faz respiração celular: glicose + O₂ → ATP (energia química da célula).", fotoUrl: mitocondriaImg },
+      { id: "reticulo", x: 25, y: 65, emoji: "🕸️", cor: "from-amber-500 to-orange-700", titulo: "Retículo endoplasmático", texto: "Rede de canais que sintetiza proteínas (rugoso) e lipídios (liso).", fotoUrl: organelasImg },
+      { id: "golgi", x: 65, y: 75, emoji: "📦", cor: "from-emerald-500 to-teal-700", titulo: "Complexo de Golgi", texto: "Empacota e envia proteínas para dentro ou fora da célula. Como o setor de expedição.", fotoUrl: organelasImg },
     ],
     falaFinal:
       "Cada organela tem função específica — como órgãos dentro da célula.",
