@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import digestorioImg from "@/assets/ciencias-7ano/u3-a1/sistema-digestorio.jpg";
-import circulatorioImg from "@/assets/ciencias-7ano/u3-a1/sistema-circulatorio.jpg";
-import respiratorioImg from "@/assets/ciencias-7ano/u3-a1/sistema-respiratorio.jpg";
+import { url as digestorioImg } from "@/assets/ciencias-7ano/u3-a1/sistema-digestorio.jpg.asset.json";
+import { url as circulatorioImg } from "@/assets/ciencias-7ano/u3-a1/sistema-circulatorio.jpg.asset.json";
+import { url as respiratorioImg } from "@/assets/ciencias-7ano/u3-a1/sistema-respiratorio.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 3 · Aula 01

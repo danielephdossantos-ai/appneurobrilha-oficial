@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import forcasImg from "@/assets/ciencias-8ano/u3/forcas-diagrama.jpg";
-import maquinasImg from "@/assets/ciencias-8ano/u3/maquinas-simples.jpg";
-import rampaImg from "@/assets/ciencias-8ano/u3/rampa-plano-inclinado.jpg";
-import alavancaImg from "@/assets/ciencias-8ano/u3/alavanca-fulcro.jpg";
-import roldanaImg from "@/assets/ciencias-8ano/u3/roldana-polia.jpg";
-import pressaoImg from "@/assets/ciencias-8ano/u3/pressao-faca-agulha.jpg";
+import { url as forcasImg } from "@/assets/ciencias-8ano/u3/forcas-diagrama.jpg.asset.json";
+import { url as maquinasImg } from "@/assets/ciencias-8ano/u3/maquinas-simples.jpg.asset.json";
+import { url as rampaImg } from "@/assets/ciencias-8ano/u3/rampa-plano-inclinado.jpg.asset.json";
+import { url as alavancaImg } from "@/assets/ciencias-8ano/u3/alavanca-fulcro.jpg.asset.json";
+import { url as roldanaImg } from "@/assets/ciencias-8ano/u3/roldana-polia.jpg.asset.json";
+import { url as pressaoImg } from "@/assets/ciencias-8ano/u3/pressao-faca-agulha.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U3 · A01 — "Laboratório de Física"

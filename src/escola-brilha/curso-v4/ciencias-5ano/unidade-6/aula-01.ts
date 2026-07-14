@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import sistema from "@/assets/ciencias-5ano/u6-a1/sistema-solar.jpg";
-import terra from "@/assets/ciencias-5ano/u6-a1/terra-espaco.jpg";
-import lua from "@/assets/ciencias-5ano/u6-a1/lua-fases.jpg";
-import tempestade from "@/assets/ciencias-5ano/u6-a1/tempestade.jpg";
+import { url as sistema } from "@/assets/ciencias-5ano/u6-a1/sistema-solar.jpg.asset.json";
+import { url as terra } from "@/assets/ciencias-5ano/u6-a1/terra-espaco.jpg.asset.json";
+import { url as lua } from "@/assets/ciencias-5ano/u6-a1/lua-fases.jpg.asset.json";
+import { url as tempestade } from "@/assets/ciencias-5ano/u6-a1/tempestade.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-terra-universo-clima",

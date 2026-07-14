@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import forcasImg from "@/assets/ciencias-8ano/u3/forcas-diagrama.jpg";
-import alavancaImg from "@/assets/ciencias-8ano/u3/alavanca-fulcro.jpg";
-import rampaImg from "@/assets/ciencias-8ano/u3/rampa-plano-inclinado.jpg";
-import roldanaImg from "@/assets/ciencias-8ano/u3/roldana-polia.jpg";
-import circuitoImg from "@/assets/ciencias-8ano/u5/circuito-eletrico.jpg";
-import ledImg from "@/assets/ciencias-8ano/u5/lampada-led.jpg";
+import { url as forcasImg } from "@/assets/ciencias-8ano/u3/forcas-diagrama.jpg.asset.json";
+import { url as alavancaImg } from "@/assets/ciencias-8ano/u3/alavanca-fulcro.jpg.asset.json";
+import { url as rampaImg } from "@/assets/ciencias-8ano/u3/rampa-plano-inclinado.jpg.asset.json";
+import { url as roldanaImg } from "@/assets/ciencias-8ano/u3/roldana-polia.jpg.asset.json";
+import { url as circuitoImg } from "@/assets/ciencias-8ano/u5/circuito-eletrico.jpg.asset.json";
+import { url as ledImg } from "@/assets/ciencias-8ano/u5/lampada-led.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U4 · A01 — "Centro de Física Experimental"

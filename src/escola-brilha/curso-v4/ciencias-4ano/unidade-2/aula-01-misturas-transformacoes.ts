@@ -1,12 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import diarioImg from "@/assets/ciencias-4ano/u1-a1/diario-campo.jpg";
-import bancadaImg from "@/assets/ciencias-4ano/u2-a1/bancada-lab.jpg";
-import aguaOleoImg from "@/assets/ciencias-4ano/u2-a1/agua-oleo.jpg";
-import salAguaImg from "@/assets/ciencias-4ano/u2-a1/sal-agua.jpg";
-import filtroImg from "@/assets/ciencias-4ano/u2-a1/filtracao-cafe.jpg";
-import imaImg from "@/assets/ciencias-4ano/u2-a1/ima-limalha.jpg";
-import ovoImg from "@/assets/ciencias-4ano/u2-a1/ovo-fritando.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as diarioImg } from "@/assets/ciencias-4ano/u1-a1/diario-campo.jpg.asset.json";
+import { url as bancadaImg } from "@/assets/ciencias-4ano/u2-a1/bancada-lab.jpg.asset.json";
+import { url as aguaOleoImg } from "@/assets/ciencias-4ano/u2-a1/agua-oleo.jpg.asset.json";
+import { url as salAguaImg } from "@/assets/ciencias-4ano/u2-a1/sal-agua.jpg.asset.json";
+import { url as filtroImg } from "@/assets/ciencias-4ano/u2-a1/filtracao-cafe.jpg.asset.json";
+import { url as imaImg } from "@/assets/ciencias-4ano/u2-a1/ima-limalha.jpg.asset.json";
+import { url as ovoImg } from "@/assets/ciencias-4ano/u2-a1/ovo-fritando.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 2 · Aula 01

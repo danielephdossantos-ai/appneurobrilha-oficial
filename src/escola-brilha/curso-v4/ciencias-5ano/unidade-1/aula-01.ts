@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import equipe from "@/assets/ciencias-5ano/u1-a1/equipe-cientistas.jpg";
-import caderno from "@/assets/ciencias-5ano/u1-a1/caderno-hipoteses.jpg";
-import grafico from "@/assets/ciencias-5ano/u1-a1/grafico-barras.jpg";
-import vasos from "@/assets/ciencias-5ano/u1-a1/experimento-vasos.jpg";
-import tabela from "@/assets/ciencias-5ano/u1-a1/tabela-dados.jpg";
+import { url as equipe } from "@/assets/ciencias-5ano/u1-a1/equipe-cientistas.jpg.asset.json";
+import { url as caderno } from "@/assets/ciencias-5ano/u1-a1/caderno-hipoteses.jpg.asset.json";
+import { url as grafico } from "@/assets/ciencias-5ano/u1-a1/grafico-barras.jpg.asset.json";
+import { url as vasos } from "@/assets/ciencias-5ano/u1-a1/experimento-vasos.jpg.asset.json";
+import { url as tabela } from "@/assets/ciencias-5ano/u1-a1/tabela-dados.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-laboratorio-cientista",

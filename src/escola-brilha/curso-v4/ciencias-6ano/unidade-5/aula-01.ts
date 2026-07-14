@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import bancadaImg from "@/assets/ciencias-6ano/u5-a1/bancada-fisica.jpg";
-import renovaveisImg from "@/assets/ciencias-6ano/u5-a1/energias-renovaveis.jpg";
-import luzImg from "@/assets/ciencias-6ano/u5-a1/luz-eletrica.jpg";
-import fotossinteseImg from "@/assets/ciencias-6ano/u5-a1/fotossintese.jpg";
+import { url as bancadaImg } from "@/assets/ciencias-6ano/u5-a1/bancada-fisica.jpg.asset.json";
+import { url as renovaveisImg } from "@/assets/ciencias-6ano/u5-a1/energias-renovaveis.jpg.asset.json";
+import { url as luzImg } from "@/assets/ciencias-6ano/u5-a1/luz-eletrica.jpg.asset.json";
+import { url as fotossinteseImg } from "@/assets/ciencias-6ano/u5-a1/fotossintese.jpg.asset.json";
 import ledVideo from "@/assets/ciencias-6ano/u5-a1/led-acendendo.mp4.asset.json";
 
 /**

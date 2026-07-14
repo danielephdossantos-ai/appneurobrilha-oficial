@@ -1,12 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import microscopioImg from "@/assets/ciencias-4ano/u1-a1/microscopio-real.jpg";
-import bacteriasImg from "@/assets/ciencias-4ano/u4-a1/bacterias-micro.jpg";
-import fungoPaoImg from "@/assets/ciencias-4ano/u4-a1/fungo-pao.jpg";
-import maosImg from "@/assets/ciencias-4ano/u4-a1/maos-lavando.jpg";
-import iogurteImg from "@/assets/ciencias-4ano/u4-a1/iogurte.jpg";
-import vacinaImg from "@/assets/ciencias-4ano/u4-a1/vacina.jpg";
-import decomposicaoImg from "@/assets/ciencias-4ano/u4-a1/decomposicao.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as microscopioImg } from "@/assets/ciencias-4ano/u1-a1/microscopio-real.jpg.asset.json";
+import { url as bacteriasImg } from "@/assets/ciencias-4ano/u4-a1/bacterias-micro.jpg.asset.json";
+import { url as fungoPaoImg } from "@/assets/ciencias-4ano/u4-a1/fungo-pao.jpg.asset.json";
+import { url as maosImg } from "@/assets/ciencias-4ano/u4-a1/maos-lavando.jpg.asset.json";
+import { url as iogurteImg } from "@/assets/ciencias-4ano/u4-a1/iogurte.jpg.asset.json";
+import { url as vacinaImg } from "@/assets/ciencias-4ano/u4-a1/vacina.jpg.asset.json";
+import { url as decomposicaoImg } from "@/assets/ciencias-4ano/u4-a1/decomposicao.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 4 · Aula 01

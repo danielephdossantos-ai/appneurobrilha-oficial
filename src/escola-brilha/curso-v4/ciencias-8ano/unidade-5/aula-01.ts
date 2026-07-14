@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import circuitoImg from "@/assets/ciencias-8ano/u5/circuito-eletrico.jpg";
-import painelImg from "@/assets/ciencias-8ano/u5/painel-solar.jpg";
-import chuveiroImg from "@/assets/ciencias-8ano/u5/chuveiro-eletrico.jpg";
-import hidreletricaImg from "@/assets/ciencias-8ano/u5/hidreletrica.jpg";
-import ledImg from "@/assets/ciencias-8ano/u5/lampada-led.jpg";
-import eolicaImg from "@/assets/ciencias-8ano/u5/turbinas-eolicas.jpg";
+import { url as circuitoImg } from "@/assets/ciencias-8ano/u5/circuito-eletrico.jpg.asset.json";
+import { url as painelImg } from "@/assets/ciencias-8ano/u5/painel-solar.jpg.asset.json";
+import { url as chuveiroImg } from "@/assets/ciencias-8ano/u5/chuveiro-eletrico.jpg.asset.json";
+import { url as hidreletricaImg } from "@/assets/ciencias-8ano/u5/hidreletrica.jpg.asset.json";
+import { url as ledImg } from "@/assets/ciencias-8ano/u5/lampada-led.jpg.asset.json";
+import { url as eolicaImg } from "@/assets/ciencias-8ano/u5/turbinas-eolicas.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U5 · A01 — "Centro de Engenharia"

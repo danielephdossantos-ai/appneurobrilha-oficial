@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import relogioImg from "@/assets/ciencias-1ano/u5-a1/relogio-parede.jpg";
-import ampulhetaImg from "@/assets/ciencias-1ano/u5-a1/ampulheta.jpg";
-import semanaImg from "@/assets/ciencias-1ano/u5-a1/calendario-semana.jpg";
-import mesImg from "@/assets/ciencias-1ano/u5-a1/calendario-mes.jpg";
-import aniversarioImg from "@/assets/ciencias-1ano/u5-a1/aniversario-ano.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as relogioImg } from "@/assets/ciencias-1ano/u5-a1/relogio-parede.jpg.asset.json";
+import { url as ampulhetaImg } from "@/assets/ciencias-1ano/u5-a1/ampulheta.jpg.asset.json";
+import { url as semanaImg } from "@/assets/ciencias-1ano/u5-a1/calendario-semana.jpg.asset.json";
+import { url as mesImg } from "@/assets/ciencias-1ano/u5-a1/calendario-mes.jpg.asset.json";
+import { url as aniversarioImg } from "@/assets/ciencias-1ano/u5-a1/aniversario-ano.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U5 · A01 — Escalas de Tempo (EF01CI06)

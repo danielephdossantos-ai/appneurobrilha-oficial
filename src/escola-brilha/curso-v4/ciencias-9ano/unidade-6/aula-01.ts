@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import painelImg from "@/assets/ciencias-8ano/u5/painel-solar.jpg";
-import turbinasImg from "@/assets/ciencias-8ano/u5/turbinas-eolicas.jpg";
-import hidreletricaImg from "@/assets/ciencias-8ano/u5/hidreletrica.jpg";
-import ledImg from "@/assets/ciencias-8ano/u5/lampada-led.jpg";
-import mudancaImg from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg";
-import pesquisaImg from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg";
+import { url as painelImg } from "@/assets/ciencias-8ano/u5/painel-solar.jpg.asset.json";
+import { url as turbinasImg } from "@/assets/ciencias-8ano/u5/turbinas-eolicas.jpg.asset.json";
+import { url as hidreletricaImg } from "@/assets/ciencias-8ano/u5/hidreletrica.jpg.asset.json";
+import { url as ledImg } from "@/assets/ciencias-8ano/u5/lampada-led.jpg.asset.json";
+import { url as mudancaImg } from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg.asset.json";
+import { url as pesquisaImg } from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U6 · A01 — "Centro de Inovação Sustentável"

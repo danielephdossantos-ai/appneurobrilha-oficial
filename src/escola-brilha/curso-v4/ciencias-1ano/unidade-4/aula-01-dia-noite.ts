@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import diaImg from "@/assets/ciencias-1ano/u4-a1/paisagem-dia.jpg";
-import noiteImg from "@/assets/ciencias-1ano/u4-a1/paisagem-noite.jpg";
-import solImg from "@/assets/ciencias-1ano/u4-a1/sol-sorrindo.jpg";
-import luaImg from "@/assets/ciencias-1ano/u4-a1/lua-estrelas.jpg";
-import dormindoImg from "@/assets/ciencias-1ano/u4-a1/crianca-dormindo.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as diaImg } from "@/assets/ciencias-1ano/u4-a1/paisagem-dia.jpg.asset.json";
+import { url as noiteImg } from "@/assets/ciencias-1ano/u4-a1/paisagem-noite.jpg.asset.json";
+import { url as solImg } from "@/assets/ciencias-1ano/u4-a1/sol-sorrindo.jpg.asset.json";
+import { url as luaImg } from "@/assets/ciencias-1ano/u4-a1/lua-estrelas.jpg.asset.json";
+import { url as dormindoImg } from "@/assets/ciencias-1ano/u4-a1/crianca-dormindo.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U4 · A01 — Dia e Noite (EF01CI05)

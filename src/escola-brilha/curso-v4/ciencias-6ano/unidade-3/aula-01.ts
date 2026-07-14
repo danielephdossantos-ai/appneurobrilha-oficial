@@ -1,8 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import mataImg from "@/assets/ciencias-6ano/u3-a1/mata-atlantica.jpg";
-import lagoImg from "@/assets/ciencias-6ano/u3-a1/ecossistema-lago.jpg";
-import predadorImg from "@/assets/ciencias-6ano/u3-a1/predador-presa.jpg";
-import decompImg from "@/assets/ciencias-6ano/u3-a1/decompositores.jpg";
+import { url as mataImg } from "@/assets/ciencias-6ano/u3-a1/mata-atlantica.jpg.asset.json";
+import { url as lagoImg } from "@/assets/ciencias-6ano/u3-a1/ecossistema-lago.jpg.asset.json";
+import { url as predadorImg } from "@/assets/ciencias-6ano/u3-a1/predador-presa.jpg.asset.json";
+import { url as decompImg } from "@/assets/ciencias-6ano/u3-a1/decompositores.jpg.asset.json";
 import cacaVideo from "@/assets/ciencias-6ano/u3-a1/caca-pantanal.mp4.asset.json";
 
 /**

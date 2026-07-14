@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import madeiraImg from "@/assets/ciencias-1ano/u1-a1/brinquedos-madeira.jpg";
-import vidroImg from "@/assets/ciencias-1ano/u1-a1/copo-vidro.jpg";
-import metalImg from "@/assets/ciencias-1ano/u1-a1/panela-metal.jpg";
-import tecidoImg from "@/assets/ciencias-1ano/u1-a1/roupa-tecido.jpg";
-import plasticoImg from "@/assets/ciencias-1ano/u1-a1/garrafa-plastico.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as madeiraImg } from "@/assets/ciencias-1ano/u1-a1/brinquedos-madeira.jpg.asset.json";
+import { url as vidroImg } from "@/assets/ciencias-1ano/u1-a1/copo-vidro.jpg.asset.json";
+import { url as metalImg } from "@/assets/ciencias-1ano/u1-a1/panela-metal.jpg.asset.json";
+import { url as tecidoImg } from "@/assets/ciencias-1ano/u1-a1/roupa-tecido.jpg.asset.json";
+import { url as plasticoImg } from "@/assets/ciencias-1ano/u1-a1/garrafa-plastico.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U1 · A01 — Objetos e Materiais (EF01CI01)

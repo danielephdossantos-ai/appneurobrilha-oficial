@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import florestaImg from "@/assets/ciencias-4ano/u3-a1/floresta.jpg";
-import produtorImg from "@/assets/ciencias-4ano/u3-a1/produtor-planta.jpg";
-import herbivoroImg from "@/assets/ciencias-4ano/u3-a1/herbivoro-coelho.jpg";
-import carnivoroImg from "@/assets/ciencias-4ano/u3-a1/carnivoro-onca.jpg";
-import decompositorImg from "@/assets/ciencias-4ano/u3-a1/decompositor-fungo.jpg";
-import cadeiaImg from "@/assets/ciencias-4ano/u3-a1/cadeia-diagrama.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as florestaImg } from "@/assets/ciencias-4ano/u3-a1/floresta.jpg.asset.json";
+import { url as produtorImg } from "@/assets/ciencias-4ano/u3-a1/produtor-planta.jpg.asset.json";
+import { url as herbivoroImg } from "@/assets/ciencias-4ano/u3-a1/herbivoro-coelho.jpg.asset.json";
+import { url as carnivoroImg } from "@/assets/ciencias-4ano/u3-a1/carnivoro-onca.jpg.asset.json";
+import { url as decompositorImg } from "@/assets/ciencias-4ano/u3-a1/decompositor-fungo.jpg.asset.json";
+import { url as cadeiaImg } from "@/assets/ciencias-4ano/u3-a1/cadeia-diagrama.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 3 · Aula 01

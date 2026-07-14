@@ -1,12 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import laboratorioImg from "@/assets/ciencias-7ano/u5-a1/laboratorio-quimica.jpg";
-import moleculasImg from "@/assets/ciencias-7ano/u5-a1/moleculas-atomos.jpg";
-import transformacoesImg from "@/assets/ciencias-7ano/u5-a1/transformacoes-materia.jpg";
-import tabelaImg from "@/assets/ciencias-8ano/u4/tabela-periodica.jpg";
-import reacaoImg from "@/assets/ciencias-8ano/u4/reacao-bicarbonato-vinagre.jpg";
-import atomoImg from "@/assets/ciencias-8ano/u4/atomo-modelo.jpg";
-import moleculaAguaImg from "@/assets/ciencias-8ano/u4/molecula-agua.jpg";
-import ferrugemImg from "@/assets/ciencias-8ano/u4/ferrugem-oxidacao.jpg";
+import { url as laboratorioImg } from "@/assets/ciencias-7ano/u5-a1/laboratorio-quimica.jpg.asset.json";
+import { url as moleculasImg } from "@/assets/ciencias-7ano/u5-a1/moleculas-atomos.jpg.asset.json";
+import { url as transformacoesImg } from "@/assets/ciencias-7ano/u5-a1/transformacoes-materia.jpg.asset.json";
+import { url as tabelaImg } from "@/assets/ciencias-8ano/u4/tabela-periodica.jpg.asset.json";
+import { url as reacaoImg } from "@/assets/ciencias-8ano/u4/reacao-bicarbonato-vinagre.jpg.asset.json";
+import { url as atomoImg } from "@/assets/ciencias-8ano/u4/atomo-modelo.jpg.asset.json";
+import { url as moleculaAguaImg } from "@/assets/ciencias-8ano/u4/molecula-agua.jpg.asset.json";
+import { url as ferrugemImg } from "@/assets/ciencias-8ano/u4/ferrugem-oxidacao.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U4 · A01 — "Laboratório de Química"

@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import maosImg from "@/assets/ciencias-1ano/u3-a1/lavando-maos.jpg";
-import dentesImg from "@/assets/ciencias-1ano/u3-a1/banho.jpg";
-import banhoImg from "@/assets/ciencias-1ano/u3-a1/banho.jpg";
-import cabeloImg from "@/assets/ciencias-1ano/u3-a1/penteando-cabelo.jpg";
-import unhasImg from "@/assets/ciencias-1ano/u3-a1/unhas-cortadas.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as maosImg } from "@/assets/ciencias-1ano/u3-a1/lavando-maos.jpg.asset.json";
+import { url as dentesImg } from "@/assets/ciencias-1ano/u3-a1/banho.jpg.asset.json";
+import { url as banhoImg } from "@/assets/ciencias-1ano/u3-a1/banho.jpg.asset.json";
+import { url as cabeloImg } from "@/assets/ciencias-1ano/u3-a1/penteando-cabelo.jpg.asset.json";
+import { url as unhasImg } from "@/assets/ciencias-1ano/u3-a1/unhas-cortadas.jpg.asset.json";
 
 /**
  * Ciências · 1º Ano · U3 · A01 — Higiene e Saúde (EF01CI03)

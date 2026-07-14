@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import viaLacteaImg from "@/assets/ciencias-8ano/u6/via-lactea.jpg";
-import atmosferaImg from "@/assets/ciencias-8ano/u6/atmosfera-camadas.jpg";
-import vulcaoImg from "@/assets/ciencias-8ano/u6/vulcao-erupcao.jpg";
-import placasImg from "@/assets/ciencias-8ano/u6/placas-tectonicas.jpg";
-import mudancaImg from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg";
-import painelImg from "@/assets/ciencias-8ano/u5/painel-solar.jpg";
+import { url as viaLacteaImg } from "@/assets/ciencias-8ano/u6/via-lactea.jpg.asset.json";
+import { url as atmosferaImg } from "@/assets/ciencias-8ano/u6/atmosfera-camadas.jpg.asset.json";
+import { url as vulcaoImg } from "@/assets/ciencias-8ano/u6/vulcao-erupcao.jpg.asset.json";
+import { url as placasImg } from "@/assets/ciencias-8ano/u6/placas-tectonicas.jpg.asset.json";
+import { url as mudancaImg } from "@/assets/ciencias-8ano/u6/mudanca-climatica.jpg.asset.json";
+import { url as painelImg } from "@/assets/ciencias-8ano/u5/painel-solar.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U5 · A01 — "Observatório Espacial"

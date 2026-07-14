@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import congressoImg from "@/assets/ciencias-7ano/u7-a1/painel-congresso.jpg";
-import palcoImg from "@/assets/ciencias-7ano/u7-a1/palco-apresentacao.jpg";
-import posterImg from "@/assets/ciencias-7ano/u7-a1/poster-cientifico.jpg";
-import campoImg from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg";
-import graficosImg from "@/assets/ciencias-8ano/u7/graficos-dados.jpg";
-import feiraImg from "@/assets/ciencias-8ano/u7/apresentacao-feira.jpg";
-import equipeImg from "@/assets/ciencias-8ano/u7/equipe-laboratorio.jpg";
+import { url as congressoImg } from "@/assets/ciencias-7ano/u7-a1/painel-congresso.jpg.asset.json";
+import { url as palcoImg } from "@/assets/ciencias-7ano/u7-a1/palco-apresentacao.jpg.asset.json";
+import { url as posterImg } from "@/assets/ciencias-7ano/u7-a1/poster-cientifico.jpg.asset.json";
+import { url as campoImg } from "@/assets/ciencias-8ano/u7/pesquisa-campo.jpg.asset.json";
+import { url as graficosImg } from "@/assets/ciencias-8ano/u7/graficos-dados.jpg.asset.json";
+import { url as feiraImg } from "@/assets/ciencias-8ano/u7/apresentacao-feira.jpg.asset.json";
+import { url as equipeImg } from "@/assets/ciencias-8ano/u7/equipe-laboratorio.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U7 · A01 — "Projeto Científico Integrador"

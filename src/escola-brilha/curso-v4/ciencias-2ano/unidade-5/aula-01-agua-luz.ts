@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import estufaImg from "@/assets/ciencias-2ano/u5-a1/estufa-plantas.jpg";
-import brotoImg from "@/assets/ciencias-2ano/u5-a1/broto-crescendo.jpg";
-import mapaCam_u5_entraImg from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg";
-import mapaCam_u5_produzImg from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as estufaImg } from "@/assets/ciencias-2ano/u5-a1/estufa-plantas.jpg.asset.json";
+import { url as brotoImg } from "@/assets/ciencias-2ano/u5-a1/broto-crescendo.jpg.asset.json";
+import { url as mapaCam_u5_entraImg } from "@/assets/ciencias-2ano/mapa-camadas/u5-entra.jpg.asset.json";
+import { url as mapaCam_u5_produzImg } from "@/assets/ciencias-2ano/mapa-camadas/u5-produz.jpg.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 5 · Aula 01

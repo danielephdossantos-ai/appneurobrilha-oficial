@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import atomoImg from "@/assets/ciencias-8ano/u4/atomo-modelo.jpg";
-import tabelaImg from "@/assets/ciencias-8ano/u4/tabela-periodica.jpg";
-import aguaImg from "@/assets/ciencias-8ano/u4/molecula-agua.jpg";
-import reacaoImg from "@/assets/ciencias-8ano/u4/reacao-bicarbonato-vinagre.jpg";
-import ferrugemImg from "@/assets/ciencias-8ano/u4/ferrugem-oxidacao.jpg";
+import { url as atomoImg } from "@/assets/ciencias-8ano/u4/atomo-modelo.jpg.asset.json";
+import { url as tabelaImg } from "@/assets/ciencias-8ano/u4/tabela-periodica.jpg.asset.json";
+import { url as aguaImg } from "@/assets/ciencias-8ano/u4/molecula-agua.jpg.asset.json";
+import { url as reacaoImg } from "@/assets/ciencias-8ano/u4/reacao-bicarbonato-vinagre.jpg.asset.json";
+import { url as ferrugemImg } from "@/assets/ciencias-8ano/u4/ferrugem-oxidacao.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U3 · A01 — "Laboratório de Química Aplicada"

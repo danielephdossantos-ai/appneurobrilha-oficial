@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import feiraImg from "@/assets/ciencias-6ano/u7-a1/feira-ciencias.jpg";
-import equipeImg from "@/assets/ciencias-6ano/u7-a1/equipe-projeto.jpg";
-import posterImg from "@/assets/ciencias-6ano/u7-a1/poster-cientifico.jpg";
+import { url as feiraImg } from "@/assets/ciencias-6ano/u7-a1/feira-ciencias.jpg.asset.json";
+import { url as equipeImg } from "@/assets/ciencias-6ano/u7-a1/equipe-projeto.jpg.asset.json";
+import { url as posterImg } from "@/assets/ciencias-6ano/u7-a1/poster-cientifico.jpg.asset.json";
 import equipeVideo from "@/assets/ciencias-6ano/u7-a1/equipe-trabalhando.mp4.asset.json";
 
 /**

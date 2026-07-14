@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import cerebroImg from "@/assets/ciencias-8ano/u2/cerebro-neuronios.jpg";
-import hormonalImg from "@/assets/ciencias-8ano/u2/sistema-hormonal.jpg";
-import circulatorioImg from "@/assets/ciencias-7ano/u3-a1/sistema-circulatorio.jpg";
-import neuroniosImg from "@/assets/ciencias-8ano/u2/neuronios-sinapses.jpg";
-import glandulasImg from "@/assets/ciencias-8ano/u2/glandulas-endocrinas.jpg";
-import arcoReflexoImg from "@/assets/ciencias-8ano/u2/arco-reflexo-medula.jpg";
-import adolescentesImg from "@/assets/ciencias-8ano/u2/adolescentes-puberdade.jpg";
+import { url as cerebroImg } from "@/assets/ciencias-8ano/u2/cerebro-neuronios.jpg.asset.json";
+import { url as hormonalImg } from "@/assets/ciencias-8ano/u2/sistema-hormonal.jpg.asset.json";
+import { url as circulatorioImg } from "@/assets/ciencias-7ano/u3-a1/sistema-circulatorio.jpg.asset.json";
+import { url as neuroniosImg } from "@/assets/ciencias-8ano/u2/neuronios-sinapses.jpg.asset.json";
+import { url as glandulasImg } from "@/assets/ciencias-8ano/u2/glandulas-endocrinas.jpg.asset.json";
+import { url as arcoReflexoImg } from "@/assets/ciencias-8ano/u2/arco-reflexo-medula.jpg.asset.json";
+import { url as adolescentesImg } from "@/assets/ciencias-8ano/u2/adolescentes-puberdade.jpg.asset.json";
 
 /**
  * Ciências · 8º Ano · U2 · A01 — "Centro Biomédico Virtual"

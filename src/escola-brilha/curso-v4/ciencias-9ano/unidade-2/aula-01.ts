@@ -1,10 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import cerebroImg from "@/assets/ciencias-8ano/u2/cerebro-neuronios.jpg";
-import neuroniosImg from "@/assets/ciencias-8ano/u2/neuronios-sinapses.jpg";
-import hormonalImg from "@/assets/ciencias-8ano/u2/sistema-hormonal.jpg";
-import glandulasImg from "@/assets/ciencias-8ano/u2/glandulas-endocrinas.jpg";
-import puberdadeImg from "@/assets/ciencias-8ano/u2/adolescentes-puberdade.jpg";
-import dnaImg from "@/assets/ciencias-8ano/u1/dna-helice.jpg";
+import { url as cerebroImg } from "@/assets/ciencias-8ano/u2/cerebro-neuronios.jpg.asset.json";
+import { url as neuroniosImg } from "@/assets/ciencias-8ano/u2/neuronios-sinapses.jpg.asset.json";
+import { url as hormonalImg } from "@/assets/ciencias-8ano/u2/sistema-hormonal.jpg.asset.json";
+import { url as glandulasImg } from "@/assets/ciencias-8ano/u2/glandulas-endocrinas.jpg.asset.json";
+import { url as puberdadeImg } from "@/assets/ciencias-8ano/u2/adolescentes-puberdade.jpg.asset.json";
+import { url as dnaImg } from "@/assets/ciencias-8ano/u1/dna-helice.jpg.asset.json";
 
 /**
  * Ciências · 9º Ano · U2 · A01 — "Centro Biomédico"

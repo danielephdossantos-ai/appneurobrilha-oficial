@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import feira from "@/assets/ciencias-5ano/u7-a1/feira-cientifica.jpg";
-import poster from "@/assets/ciencias-5ano/u7-a1/poster.jpg";
-import apresentacao from "@/assets/ciencias-5ano/u7-a1/apresentacao.jpg";
-import experimento from "@/assets/ciencias-5ano/u7-a1/experimento.jpg";
-import medalha from "@/assets/ciencias-5ano/u7-a1/medalha.jpg";
+import { url as feira } from "@/assets/ciencias-5ano/u7-a1/feira-cientifica.jpg.asset.json";
+import { url as poster } from "@/assets/ciencias-5ano/u7-a1/poster.jpg.asset.json";
+import { url as apresentacao } from "@/assets/ciencias-5ano/u7-a1/apresentacao.jpg.asset.json";
+import { url as experimento } from "@/assets/ciencias-5ano/u7-a1/experimento.jpg.asset.json";
+import { url as medalha } from "@/assets/ciencias-5ano/u7-a1/medalha.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-feira-cientifica",

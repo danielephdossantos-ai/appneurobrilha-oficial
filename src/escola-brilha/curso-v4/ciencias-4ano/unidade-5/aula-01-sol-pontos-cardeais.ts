@@ -1,11 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import nascerImg from "@/assets/ciencias-4ano/u5-a1/nascer-sol.jpg";
-import sombraImg from "@/assets/ciencias-4ano/u5-a1/sombra-vara.jpg";
-import bussolaImg from "@/assets/ciencias-4ano/u5-a1/bussola.jpg";
-import relogioImg from "@/assets/ciencias-4ano/u5-a1/relogio-solar.jpg";
-import rosaImg from "@/assets/ciencias-4ano/u5-a1/rosa-ventos.jpg";
-import porDoSolImg from "@/assets/ciencias-4ano/u5-a1/por-do-sol.jpg";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as nascerImg } from "@/assets/ciencias-4ano/u5-a1/nascer-sol.jpg.asset.json";
+import { url as sombraImg } from "@/assets/ciencias-4ano/u5-a1/sombra-vara.jpg.asset.json";
+import { url as bussolaImg } from "@/assets/ciencias-4ano/u5-a1/bussola.jpg.asset.json";
+import { url as relogioImg } from "@/assets/ciencias-4ano/u5-a1/relogio-solar.jpg.asset.json";
+import { url as rosaImg } from "@/assets/ciencias-4ano/u5-a1/rosa-ventos.jpg.asset.json";
+import { url as porDoSolImg } from "@/assets/ciencias-4ano/u5-a1/por-do-sol.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 5 · Aula 01

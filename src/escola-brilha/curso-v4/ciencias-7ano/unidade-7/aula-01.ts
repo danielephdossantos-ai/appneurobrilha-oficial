@@ -1,7 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import painelImg from "@/assets/ciencias-7ano/u7-a1/painel-congresso.jpg";
-import posterImg from "@/assets/ciencias-7ano/u7-a1/poster-cientifico.jpg";
-import palcoImg from "@/assets/ciencias-7ano/u7-a1/palco-apresentacao.jpg";
+import { url as painelImg } from "@/assets/ciencias-7ano/u7-a1/painel-congresso.jpg.asset.json";
+import { url as posterImg } from "@/assets/ciencias-7ano/u7-a1/poster-cientifico.jpg.asset.json";
+import { url as palcoImg } from "@/assets/ciencias-7ano/u7-a1/palco-apresentacao.jpg.asset.json";
 
 /**
  * Ciências · 7º Ano · Unidade 7 · Aula 01

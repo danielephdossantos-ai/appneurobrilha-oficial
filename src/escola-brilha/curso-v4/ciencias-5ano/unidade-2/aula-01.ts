@@ -1,9 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import floresta from "@/assets/ciencias-5ano/u2-a1/ecossistema-floresta.jpg";
-import cadeia from "@/assets/ciencias-5ano/u2-a1/cadeia-alimentar.jpg";
-import produtor from "@/assets/ciencias-5ano/u2-a1/produtor-planta.jpg";
-import consumidor from "@/assets/ciencias-5ano/u2-a1/consumidor-onca.jpg";
-import decompositor from "@/assets/ciencias-5ano/u2-a1/decompositor-fungo.jpg";
+import { url as floresta } from "@/assets/ciencias-5ano/u2-a1/ecossistema-floresta.jpg.asset.json";
+import { url as cadeia } from "@/assets/ciencias-5ano/u2-a1/cadeia-alimentar.jpg.asset.json";
+import { url as produtor } from "@/assets/ciencias-5ano/u2-a1/produtor-planta.jpg.asset.json";
+import { url as consumidor } from "@/assets/ciencias-5ano/u2-a1/consumidor-onca.jpg.asset.json";
+import { url as decompositor } from "@/assets/ciencias-5ano/u2-a1/decompositor-fungo.jpg.asset.json";
 
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ecossistemas",

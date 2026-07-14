@@ -1,13 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
-import diarioImg from "@/assets/ciencias-4ano/u1-a1/diario-campo.jpg";
-import microscopioImg from "@/assets/ciencias-4ano/u1-a1/microscopio-real.jpg";
-import lupaImg from "@/assets/ciencias-4ano/u1-a1/lupa-campo.jpg";
-import graficoImg from "@/assets/ciencias-4ano/u1-a1/grafico-plantas.jpg";
-import mesaImg from "@/assets/ciencias-4ano/u1-a1/mesa-pesquisa.jpg";
-import brilhaImg from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png";
-import termometroImg from "@/assets/ciencias-4ano/u1-a1/termometro-real.jpg";
-import reguaImg from "@/assets/ciencias-4ano/u1-a1/regua-real.jpg";
-import tubosImg from "@/assets/ciencias-4ano/u1-a1/tubos-real.jpg";
+import { url as diarioImg } from "@/assets/ciencias-4ano/u1-a1/diario-campo.jpg.asset.json";
+import { url as microscopioImg } from "@/assets/ciencias-4ano/u1-a1/microscopio-real.jpg.asset.json";
+import { url as lupaImg } from "@/assets/ciencias-4ano/u1-a1/lupa-campo.jpg.asset.json";
+import { url as graficoImg } from "@/assets/ciencias-4ano/u1-a1/grafico-plantas.jpg.asset.json";
+import { url as mesaImg } from "@/assets/ciencias-4ano/u1-a1/mesa-pesquisa.jpg.asset.json";
+import { url as brilhaImg } from "@/assets/ciencias-4ano/u1-a1/brilha-pesquisador.png.asset.json";
+import { url as termometroImg } from "@/assets/ciencias-4ano/u1-a1/termometro-real.jpg.asset.json";
+import { url as reguaImg } from "@/assets/ciencias-4ano/u1-a1/regua-real.jpg.asset.json";
+import { url as tubosImg } from "@/assets/ciencias-4ano/u1-a1/tubos-real.jpg.asset.json";
 
 /**
  * Ciências · 4º Ano · Unidade 1 · Aula 01

@@ -1,14 +1,14 @@
 import type { AulaGeoV1 } from "../../types";
-import bancadaImg from "@/assets/ciencias-2ano/u1-a1/bancada-laboratorio.jpg";
-import brilhaImg from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png";
-import microscopioImg from "@/assets/ciencias-2ano/u1-a1/microscopio-magico.jpg";
-import bequerImg from "@/assets/ciencias-2ano/u1-a1/bequer-experimento.jpg";
-import placasImg from "@/assets/ciencias-2ano/u1-a1/placas-petri.jpg";
-import tubosImg from "@/assets/ciencias-2ano/u1-a1/tubos-ensaio.jpg";
-import folhaNervurasImg from "@/assets/ciencias-2ano/u1-a1/folha-nervuras.jpg";
+import { url as bancadaImg } from "@/assets/ciencias-2ano/u1-a1/bancada-laboratorio.jpg.asset.json";
+import { url as brilhaImg } from "@/assets/ciencias-2ano/u1-a1/brilha-cientista.png.asset.json";
+import { url as microscopioImg } from "@/assets/ciencias-2ano/u1-a1/microscopio-magico.jpg.asset.json";
+import { url as bequerImg } from "@/assets/ciencias-2ano/u1-a1/bequer-experimento.jpg.asset.json";
+import { url as placasImg } from "@/assets/ciencias-2ano/u1-a1/placas-petri.jpg.asset.json";
+import { url as tubosImg } from "@/assets/ciencias-2ano/u1-a1/tubos-ensaio.jpg.asset.json";
+import { url as folhaNervurasImg } from "@/assets/ciencias-2ano/u1-a1/folha-nervuras.jpg.asset.json";
 import geloVideoAsset from "@/assets/ciencias-2ano/u1-a1/gelo-derretendo.mp4.asset.json";
-import mapaCamu1_instrumentosImg from "@/assets/ciencias-2ano/mapa-camadas/u1-instrumentos.jpg";
-import mapaCamu1_cristaisImg from "@/assets/ciencias-2ano/mapa-camadas/u1-cristais.jpg";
+import { url as mapaCamu1_instrumentosImg } from "@/assets/ciencias-2ano/mapa-camadas/u1-instrumentos.jpg.asset.json";
+import { url as mapaCamu1_cristaisImg } from "@/assets/ciencias-2ano/mapa-camadas/u1-cristais.jpg.asset.json";
 
 /**
  * Ciências · 2º Ano · Unidade 1 · Aula 01
