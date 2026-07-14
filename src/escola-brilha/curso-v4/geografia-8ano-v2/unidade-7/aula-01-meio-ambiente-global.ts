@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import cop from "@/assets/geografia-8ano/cop-clima.jpg";
-import amazonia from "@/assets/geografia-8ano/desmatamento-amazonia.jpg";
-import solar from "@/assets/geografia-8ano/energia-solar.jpg";
-import poluicao from "@/assets/geografia-8ano/poluicao-cidade.jpg";
-
+import { url as cop } from "@/assets/geografia-8ano/cop-clima.jpg.asset.json";
+import { url as amazonia } from "@/assets/geografia-8ano/desmatamento-amazonia.jpg.asset.json";
+import { url as solar } from "@/assets/geografia-8ano/energia-solar.jpg.asset.json";
+import { url as poluicao } from "@/assets/geografia-8ano/poluicao-cidade.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 7 · Aula 01
  * "Meio Ambiente e Desafios Globais" — BNCC EF08GE19, EF08GE22

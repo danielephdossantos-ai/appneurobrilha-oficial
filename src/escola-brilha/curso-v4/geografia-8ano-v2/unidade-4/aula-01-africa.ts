@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import sahel from "@/assets/geografia-8ano/africa-sahel.jpg";
-import savana from "@/assets/geografia-8ano/savana-africana.jpg";
-import fronteiras from "@/assets/geografia-8ano/africa-fronteiras-artificiais.jpg";
-import urbana from "@/assets/geografia-8ano/africa-urbana.jpg";
-
+import { url as sahel } from "@/assets/geografia-8ano/africa-sahel.jpg.asset.json";
+import { url as savana } from "@/assets/geografia-8ano/savana-africana.jpg.asset.json";
+import { url as fronteiras } from "@/assets/geografia-8ano/africa-fronteiras-artificiais.jpg.asset.json";
+import { url as urbana } from "@/assets/geografia-8ano/africa-urbana.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 4 · Aula 01
  * "África" — BNCC EF08GE08, EF08GE09

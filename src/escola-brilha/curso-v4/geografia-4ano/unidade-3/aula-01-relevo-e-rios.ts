@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import relevo from "@/assets/geografia-4ano/relevo-planalto-planicie.jpg";
-import hidreletrica from "@/assets/geografia-4ano/usina-hidreletrica-brasil.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import sul from "@/assets/geografia-4ano/regiao-sul-serra.jpg";
-import centro from "@/assets/geografia-4ano/regiao-centro-oeste-cerrado.jpg";
-
+import { url as relevo } from "@/assets/geografia-4ano/relevo-planalto-planicie.jpg.asset.json";
+import { url as hidreletrica } from "@/assets/geografia-4ano/usina-hidreletrica-brasil.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as sul } from "@/assets/geografia-4ano/regiao-sul-serra.jpg.asset.json";
+import { url as centro } from "@/assets/geografia-4ano/regiao-centro-oeste-cerrado.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 3 · Aula 01
  * "Relevo e Rios do Brasil" — EF04GE04

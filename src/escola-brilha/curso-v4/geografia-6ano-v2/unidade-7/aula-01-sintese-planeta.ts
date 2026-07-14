@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import planeta from "@/assets/geografia-6ano/planeta-conexoes.jpg";
-import desmate from "@/assets/geografia-6ano/desmatamento.jpg";
-import energia from "@/assets/geografia-6ano/energia-renovavel.jpg";
-import aquecimento from "@/assets/geografia-6ano/aquecimento-global.jpg";
-import sustenta from "@/assets/geografia-6ano/sustentabilidade.jpg";
-import amaz from "@/assets/geografia-6ano/bioma-amazonia.jpg";
-import cinturaoFogo from "@/assets/geografia-6ano/cinturao-fogo.jpg";
-
+import { url as planeta } from "@/assets/geografia-6ano/planeta-conexoes.jpg.asset.json";
+import { url as desmate } from "@/assets/geografia-6ano/desmatamento.jpg.asset.json";
+import { url as energia } from "@/assets/geografia-6ano/energia-renovavel.jpg.asset.json";
+import { url as aquecimento } from "@/assets/geografia-6ano/aquecimento-global.jpg.asset.json";
+import { url as sustenta } from "@/assets/geografia-6ano/sustentabilidade.jpg.asset.json";
+import { url as amaz } from "@/assets/geografia-6ano/bioma-amazonia.jpg.asset.json";
+import { url as cinturaoFogo } from "@/assets/geografia-6ano/cinturao-fogo.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 7 · Aula 01
  * "Síntese: O Planeta Integrado" — BNCC EF06GE01, EF06GE03, EF06GE12, EF06GE13

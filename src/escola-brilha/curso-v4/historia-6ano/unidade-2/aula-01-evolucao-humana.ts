@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgLuzia from "@/assets/historia-6ano/u2-luzia-cranio.jpg";
-import imgCapivara from "@/assets/historia-6ano/u2-pintura-rupestre-capivara.jpg";
-import imgBering from "@/assets/historia-6ano/u2-bering.jpg";
-import imgPedra from "@/assets/historia-6ano/u2-pedra-lascada.jpg";
-import imgEvolucao from "@/assets/historia-6ano/u2-infografico-evolucao.jpg";
-
+import { url as imgLuzia } from "@/assets/historia-6ano/u2-luzia-cranio.jpg.asset.json";
+import { url as imgCapivara } from "@/assets/historia-6ano/u2-pintura-rupestre-capivara.jpg.asset.json";
+import { url as imgBering } from "@/assets/historia-6ano/u2-bering.jpg.asset.json";
+import { url as imgPedra } from "@/assets/historia-6ano/u2-pedra-lascada.jpg.asset.json";
+import { url as imgEvolucao } from "@/assets/historia-6ano/u2-infografico-evolucao.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-evolucao-humana",
   titulo: "Evolução Humana e Povoamento das Américas",

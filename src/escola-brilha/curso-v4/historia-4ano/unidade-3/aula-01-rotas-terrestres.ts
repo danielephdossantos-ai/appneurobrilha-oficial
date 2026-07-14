@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import imgTropeiros from "@/assets/historia-4ano/tropeiros-mulas.jpg";
-import imgFeijao from "@/assets/historia-4ano/feijao-tropeiro.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-tropeiros.jpg";
-import imgFerradura from "@/assets/historia-4ano/ferradura.jpg";
-
+import { url as imgTropeiros } from "@/assets/historia-4ano/tropeiros-mulas.jpg.asset.json";
+import { url as imgFeijao } from "@/assets/historia-4ano/feijao-tropeiro.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-tropeiros.jpg.asset.json";
+import { url as imgFerradura } from "@/assets/historia-4ano/ferradura.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 3 · Aula 01
  * "As Rotas Terrestres: Ouro e Tropeirismo" — trilhas do interior do Brasil.

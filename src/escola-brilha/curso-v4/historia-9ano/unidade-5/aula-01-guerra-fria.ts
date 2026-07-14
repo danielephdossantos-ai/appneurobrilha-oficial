@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMuro from "@/assets/historia-9ano/u5-guerra-fria.jpg";
-import imgLua from "@/assets/historia-9ano/u5-corrida-espacial.jpg";
-
-import imgArmas from "@/assets/historia-9ano/u5-corrida-armas.jpg";
+import { url as imgMuro } from "@/assets/historia-9ano/u5-guerra-fria.jpg.asset.json";
+import { url as imgLua } from "@/assets/historia-9ano/u5-corrida-espacial.jpg.asset.json";
+import { url as imgArmas } from "@/assets/historia-9ano/u5-corrida-armas.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-guerra-fria",
   titulo: "Guerra Fria (1947–1991)",

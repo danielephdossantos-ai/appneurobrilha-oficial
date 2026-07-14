@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import selo from "@/assets/geografia-5ano/selo-eco-cidadao.jpg";
-import renovavel from "@/assets/geografia-5ano/energia-renovavel.jpg";
-import litoral from "@/assets/geografia-5ano/distribuicao-litoral.jpg";
-
+import { url as selo } from "@/assets/geografia-5ano/selo-eco-cidadao.jpg.asset.json";
+import { url as renovavel } from "@/assets/geografia-5ano/energia-renovavel.jpg.asset.json";
+import { url as litoral } from "@/assets/geografia-5ano/distribuicao-litoral.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 7 · Aula 01
  * "O Selo Eco-Cidadão" — Consolidação do Fundamental 1

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgRampa from "@/assets/historia-5ano/rampa-acessibilidade.jpg";
-import imgIndig from "@/assets/historia-5ano/manifestacao-indigena.jpg";
-import imgLibras from "@/assets/historia-5ano/libras-escola.jpg";
-import imgInfo from "@/assets/historia-5ano/movimentos-sociais-infografico.jpg";
-import imgConst from "@/assets/historia-5ano/constituicao-1988.jpg";
-
+import { url as imgRampa } from "@/assets/historia-5ano/rampa-acessibilidade.jpg.asset.json";
+import { url as imgIndig } from "@/assets/historia-5ano/manifestacao-indigena.jpg.asset.json";
+import { url as imgLibras } from "@/assets/historia-5ano/libras-escola.jpg.asset.json";
+import { url as imgInfo } from "@/assets/historia-5ano/movimentos-sociais-infografico.jpg.asset.json";
+import { url as imgConst } from "@/assets/historia-5ano/constituicao-1988.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 6 · Aula 01
  * "Movimentos Sociais e Inclusão na Atualidade"

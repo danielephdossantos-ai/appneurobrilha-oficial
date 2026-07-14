@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import modosDeVida from "@/assets/geografia-3ano/modos-de-vida-comunidades.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as modosDeVida } from "@/assets/geografia-3ano/modos-de-vida-comunidades.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 03
  * "Modos de Vida" — EF03GE03

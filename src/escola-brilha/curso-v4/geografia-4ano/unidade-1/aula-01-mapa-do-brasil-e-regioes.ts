@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaBrasil from "@/assets/geografia-4ano/mapa-brasil-regioes.jpg";
-import heroExplorador from "@/assets/geografia-4ano/hero-explorador-brasil.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import nordeste from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg";
-import centroOeste from "@/assets/geografia-4ano/regiao-centro-oeste-cerrado.jpg";
-import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
-import sul from "@/assets/geografia-4ano/regiao-sul-serra.jpg";
-
+import { url as mapaBrasil } from "@/assets/geografia-4ano/mapa-brasil-regioes.jpg.asset.json";
+import { url as heroExplorador } from "@/assets/geografia-4ano/hero-explorador-brasil.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as nordeste } from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg.asset.json";
+import { url as centroOeste } from "@/assets/geografia-4ano/regiao-centro-oeste-cerrado.jpg.asset.json";
+import { url as sudeste } from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg.asset.json";
+import { url as sul } from "@/assets/geografia-4ano/regiao-sul-serra.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 1 · Aula 01
  * "O Mapa do Brasil e Suas 5 Regiões" — EF04GE01

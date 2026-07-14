@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import nyc from "@/assets/geografia-8ano/nyc-skyline.jpg";
-import silicon from "@/assets/geografia-8ano/silicon-valley.jpg";
-import toronto from "@/assets/geografia-8ano/toronto-canada.jpg";
-import hollywood from "@/assets/geografia-8ano/hollywood-cultura.jpg";
-
+import { url as nyc } from "@/assets/geografia-8ano/nyc-skyline.jpg.asset.json";
+import { url as silicon } from "@/assets/geografia-8ano/silicon-valley.jpg.asset.json";
+import { url as toronto } from "@/assets/geografia-8ano/toronto-canada.jpg.asset.json";
+import { url as hollywood } from "@/assets/geografia-8ano/hollywood-cultura.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 3 · Aula 01
  * "América Anglo-Saxônica" — BNCC EF08GE07, EF08GE18

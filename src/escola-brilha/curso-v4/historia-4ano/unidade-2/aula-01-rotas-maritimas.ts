@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import imgAstro from "@/assets/historia-4ano/astrolabio-bussola.jpg";
-import imgCaravela from "@/assets/historia-4ano/caravela.jpg";
-import imgEspec from "@/assets/historia-4ano/especiarias.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-navegacoes.jpg";
-
+import { url as imgAstro } from "@/assets/historia-4ano/astrolabio-bussola.jpg.asset.json";
+import { url as imgCaravela } from "@/assets/historia-4ano/caravela.jpg.asset.json";
+import { url as imgEspec } from "@/assets/historia-4ano/especiarias.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-navegacoes.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 2 · Aula 01
  * "As Rotas Marítimas e as Novas Tecnologias" — Grandes Navegações.

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import fotoIndigena from "@/assets/geografia-3ano/comunidade-indigena.jpg";
-import fotoQuilombola from "@/assets/geografia-3ano/comunidade-quilombola.jpg";
-import fotoRibeirinha from "@/assets/geografia-3ano/comunidade-ribeirinha.jpg";
-import balaoComunidades from "@/assets/geografia-3ano/balao-comunidades-tradicionais.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as fotoIndigena } from "@/assets/geografia-3ano/comunidade-indigena.jpg.asset.json";
+import { url as fotoQuilombola } from "@/assets/geografia-3ano/comunidade-quilombola.jpg.asset.json";
+import { url as fotoRibeirinha } from "@/assets/geografia-3ano/comunidade-ribeirinha.jpg.asset.json";
+import { url as balaoComunidades } from "@/assets/geografia-3ano/balao-comunidades-tradicionais.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 2 · Aula 01
  * "O Balão das Comunidades" — EF03GE03

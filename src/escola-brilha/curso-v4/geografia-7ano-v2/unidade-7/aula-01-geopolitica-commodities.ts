@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import commod from "@/assets/geografia-7ano/commodities-agricolas.jpg";
-import navio from "@/assets/geografia-7ano/porto-container-brasil.jpg";
-import brics from "@/assets/geografia-7ano/brics-cupula.jpg";
-import comercio from "@/assets/geografia-7ano/mapa-mundi-comercio.jpg";
-
+import { url as commod } from "@/assets/geografia-7ano/commodities-agricolas.jpg.asset.json";
+import { url as navio } from "@/assets/geografia-7ano/porto-container-brasil.jpg.asset.json";
+import { url as brics } from "@/assets/geografia-7ano/brics-cupula.jpg.asset.json";
+import { url as comercio } from "@/assets/geografia-7ano/mapa-mundi-comercio.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 7 · Aula 01
  * "Brasil no Mundo — Commodities e Geopolítica" — BNCC EF07GE07, EF07GE12

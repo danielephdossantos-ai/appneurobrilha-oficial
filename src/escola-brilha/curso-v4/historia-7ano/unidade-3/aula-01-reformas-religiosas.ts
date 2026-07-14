@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import img95 from "@/assets/historia-7ano/u3-95-teses.jpg";
-import imgIndulgencia from "@/assets/historia-7ano/u3-indulgencia.jpg";
-import imgTrento from "@/assets/historia-7ano/u3-concilio-trento.jpg";
-import imgBiblia from "@/assets/historia-7ano/u3-biblia-traduzida.jpg";
-import imgReformas from "@/assets/historia-7ano/u3-infografico-reformas.jpg";
-
+import { url as img95 } from "@/assets/historia-7ano/u3-95-teses.jpg.asset.json";
+import { url as imgIndulgencia } from "@/assets/historia-7ano/u3-indulgencia.jpg.asset.json";
+import { url as imgTrento } from "@/assets/historia-7ano/u3-concilio-trento.jpg.asset.json";
+import { url as imgBiblia } from "@/assets/historia-7ano/u3-biblia-traduzida.jpg.asset.json";
+import { url as imgReformas } from "@/assets/historia-7ano/u3-infografico-reformas.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-reformas-religiosas",
   titulo: "As Reformas Religiosas do Século XVI",

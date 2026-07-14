@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgNavio from "@/assets/historia-4ano/navio-vapor.jpg";
-import imgMala from "@/assets/historia-4ano/mala-imigrante.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-imigracao.jpg";
-import imgFesta from "@/assets/historia-4ano/festa-uva.jpg";
-import imgPassaporte from "@/assets/historia-4ano/passaporte-antigo.jpg";
-
+import { url as imgNavio } from "@/assets/historia-4ano/navio-vapor.jpg.asset.json";
+import { url as imgMala } from "@/assets/historia-4ano/mala-imigrante.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-imigracao.jpg.asset.json";
+import { url as imgFesta } from "@/assets/historia-4ano/festa-uva.jpg.asset.json";
+import { url as imgPassaporte } from "@/assets/historia-4ano/passaporte-antigo.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 5 · Aula 01
  * "A Imigração no Brasil: Séculos XIX e XX" — italianos, alemães, japoneses.

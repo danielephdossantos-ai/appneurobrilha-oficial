@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import parlamento from "@/assets/geografia-9ano/parlamento-europeu.jpg";
-import alpes from "@/assets/geografia-9ano/alpes-europeus.jpg";
-import londres from "@/assets/geografia-9ano/londres-city.jpg";
-import trem from "@/assets/geografia-9ano/trem-alta-velocidade.jpg";
-
+import { url as parlamento } from "@/assets/geografia-9ano/parlamento-europeu.jpg.asset.json";
+import { url as alpes } from "@/assets/geografia-9ano/alpes-europeus.jpg.asset.json";
+import { url as londres } from "@/assets/geografia-9ano/londres-city.jpg.asset.json";
+import { url as trem } from "@/assets/geografia-9ano/trem-alta-velocidade.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 2 · Aula 01
  * "Europa" — BNCC EF09GE03, EF09GE04

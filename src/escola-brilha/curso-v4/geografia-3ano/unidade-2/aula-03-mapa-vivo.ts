@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import mapa3dCartografia from "@/assets/geografia-3ano/mapa-3d-cartografia.jpg";
-import vistaDeCimaCasa from "@/assets/geografia-3ano/vista-de-cima-casa.jpg";
-import maqueteMunicipio from "@/assets/geografia-3ano/maquete-municipio.jpg";
-import mapa2dSimbolos from "@/assets/geografia-3ano/mapa-2d-simbolos.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as mapa3dCartografia } from "@/assets/geografia-3ano/mapa-3d-cartografia.jpg.asset.json";
+import { url as vistaDeCimaCasa } from "@/assets/geografia-3ano/vista-de-cima-casa.jpg.asset.json";
+import { url as maqueteMunicipio } from "@/assets/geografia-3ano/maquete-municipio.jpg.asset.json";
+import { url as mapa2dSimbolos } from "@/assets/geografia-3ano/mapa-2d-simbolos.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 2 · Aula 03
  * "O Mapa Vivo do Município" — EF03GE06

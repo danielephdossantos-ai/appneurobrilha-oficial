@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import caatinga from "@/assets/geografia-4ano/bioma-caatinga.jpg";
-import cerrado from "@/assets/geografia-4ano/bioma-cerrado.jpg";
-import amazonia from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import sul from "@/assets/geografia-4ano/regiao-sul-serra.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-
+import { url as caatinga } from "@/assets/geografia-4ano/bioma-caatinga.jpg.asset.json";
+import { url as cerrado } from "@/assets/geografia-4ano/bioma-cerrado.jpg.asset.json";
+import { url as amazonia } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as sul } from "@/assets/geografia-4ano/regiao-sul-serra.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 4 · Aula 01
  * "Clima e Biomas do Brasil" — EF04GE05

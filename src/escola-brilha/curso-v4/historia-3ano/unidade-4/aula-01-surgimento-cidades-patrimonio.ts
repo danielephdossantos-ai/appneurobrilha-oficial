@@ -1,13 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCentroHistorico from "@/assets/historia-3ano/centro-historico.jpg";
-import imgCasarao from "@/assets/historia-3ano/casarao-tombado.jpg";
-import imgMonumento from "@/assets/historia-3ano/monumento-bronze.jpg";
-import imgFestaFolclorica from "@/assets/historia-3ano/festa-folclorica.jpg";
-import imgComidaTipica from "@/assets/historia-3ano/comida-tipica.jpg";
-import imgInfografico from "@/assets/historia-3ano/infografico-patrimonio.jpg";
-import imgLinhaTempo from "@/assets/historia-3ano/linha-tempo-municipio.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgCentroHistorico } from "@/assets/historia-3ano/centro-historico.jpg.asset.json";
+import { url as imgCasarao } from "@/assets/historia-3ano/casarao-tombado.jpg.asset.json";
+import { url as imgMonumento } from "@/assets/historia-3ano/monumento-bronze.jpg.asset.json";
+import { url as imgFestaFolclorica } from "@/assets/historia-3ano/festa-folclorica.jpg.asset.json";
+import { url as imgComidaTipica } from "@/assets/historia-3ano/comida-tipica.jpg.asset.json";
+import { url as imgInfografico } from "@/assets/historia-3ano/infografico-patrimonio.jpg.asset.json";
+import { url as imgLinhaTempo } from "@/assets/historia-3ano/linha-tempo-municipio.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 4 · Aula 01
  * "O Surgimento das Cidades e o Patrimônio"

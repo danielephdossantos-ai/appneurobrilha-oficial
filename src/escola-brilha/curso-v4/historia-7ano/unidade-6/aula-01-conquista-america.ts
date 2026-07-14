@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCortes from "@/assets/historia-7ano/u6-cortes-astecas.jpg";
-import imgVilca from "@/assets/historia-7ano/u6-vilcabamba.jpg";
-import imgCodice from "@/assets/historia-7ano/u6-codice-florentino.jpg";
-import imgObs from "@/assets/historia-7ano/u6-obsidiana-aco.jpg";
-import imgConq from "@/assets/historia-7ano/u6-infografico-conquista.jpg";
-
+import { url as imgCortes } from "@/assets/historia-7ano/u6-cortes-astecas.jpg.asset.json";
+import { url as imgVilca } from "@/assets/historia-7ano/u6-vilcabamba.jpg.asset.json";
+import { url as imgCodice } from "@/assets/historia-7ano/u6-codice-florentino.jpg.asset.json";
+import { url as imgObs } from "@/assets/historia-7ano/u6-obsidiana-aco.jpg.asset.json";
+import { url as imgConq } from "@/assets/historia-7ano/u6-infografico-conquista.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-conquista-america",
   titulo: "A Conquista da América e as Sociedades Indígenas",

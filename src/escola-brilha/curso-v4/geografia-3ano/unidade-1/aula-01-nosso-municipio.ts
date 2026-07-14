@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import imgMunicipioAereo from "@/assets/geografia-3ano/municipio-aereo.jpg";
-import imgZonaUrbana from "@/assets/geografia-3ano/zona-urbana-cidade.jpg";
-import imgZonaRural from "@/assets/geografia-3ano/zona-rural-campo.jpg";
-import imgFronteira from "@/assets/geografia-3ano/fronteira-placa.jpg";
-import imgRio from "@/assets/geografia-3ano/rio-municipio.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as imgMunicipioAereo } from "@/assets/geografia-3ano/municipio-aereo.jpg.asset.json";
+import { url as imgZonaUrbana } from "@/assets/geografia-3ano/zona-urbana-cidade.jpg.asset.json";
+import { url as imgZonaRural } from "@/assets/geografia-3ano/zona-rural-campo.jpg.asset.json";
+import { url as imgFronteira } from "@/assets/geografia-3ano/fronteira-placa.jpg.asset.json";
+import { url as imgRio } from "@/assets/geografia-3ano/rio-municipio.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 01
  * "Meu Município tem Cidade e Campo" — EF03GE01

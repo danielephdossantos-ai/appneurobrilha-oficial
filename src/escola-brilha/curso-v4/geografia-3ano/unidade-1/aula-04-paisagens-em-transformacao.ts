@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import paisagemTransformacao from "@/assets/geografia-3ano/paisagem-transformacao-antes-agora.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as paisagemTransformacao } from "@/assets/geografia-3ano/paisagem-transformacao-antes-agora.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 04
  * "Paisagens em Transformação" — EF03GE04

@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import comunidadeRibeirinha from "@/assets/geografia-3ano/comunidade-ribeirinha.jpg";
-import comunidadeIndigena from "@/assets/geografia-3ano/comunidade-indigena.jpg";
-import vistaCasa from "@/assets/geografia-3ano/vista-de-cima-casa.jpg";
-import feira from "@/assets/geografia-3ano/feira-livre-bairro.jpg";
-import sitio from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as comunidadeRibeirinha } from "@/assets/geografia-3ano/comunidade-ribeirinha.jpg.asset.json";
+import { url as comunidadeIndigena } from "@/assets/geografia-3ano/comunidade-indigena.jpg.asset.json";
+import { url as vistaCasa } from "@/assets/geografia-3ano/vista-de-cima-casa.jpg.asset.json";
+import { url as feira } from "@/assets/geografia-3ano/feira-livre-bairro.jpg.asset.json";
+import { url as sitio } from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg.asset.json";
 /**
  * Geografia · 2º Ano (v2) · Unidade 1 · Aula 01
  * "Os Lugares Onde Vivemos" — EF02GE01

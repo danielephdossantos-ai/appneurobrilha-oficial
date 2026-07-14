@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgVersalhes from "@/assets/historia-7ano/u4-versalhes.jpg";
-import imgLuis from "@/assets/historia-7ano/u4-luis-xiv.jpg";
-import imgMoeda from "@/assets/historia-7ano/u4-moeda-ouro.jpg";
-import imgPorto from "@/assets/historia-7ano/u4-porto-mercantil.jpg";
-import imgMerc from "@/assets/historia-7ano/u4-infografico-mercantilismo.jpg";
-
+import { url as imgVersalhes } from "@/assets/historia-7ano/u4-versalhes.jpg.asset.json";
+import { url as imgLuis } from "@/assets/historia-7ano/u4-luis-xiv.jpg.asset.json";
+import { url as imgMoeda } from "@/assets/historia-7ano/u4-moeda-ouro.jpg.asset.json";
+import { url as imgPorto } from "@/assets/historia-7ano/u4-porto-mercantil.jpg.asset.json";
+import { url as imgMerc } from "@/assets/historia-7ano/u4-infografico-mercantilismo.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-absolutismo-mercantilismo",
   titulo: "O Absolutismo e o Mercantilismo",

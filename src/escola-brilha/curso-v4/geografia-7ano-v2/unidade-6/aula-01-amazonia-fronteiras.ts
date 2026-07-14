@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import amaz from "@/assets/geografia-7ano/amazonia-aerea.jpg";
-import desmate from "@/assets/geografia-7ano/desmatamento-arco.jpg";
-import garimpo from "@/assets/geografia-7ano/garimpo-ilegal-amazonia.jpg";
-import indigena from "@/assets/geografia-7ano/terra-indigena.jpg";
-
+import { url as amaz } from "@/assets/geografia-7ano/amazonia-aerea.jpg.asset.json";
+import { url as desmate } from "@/assets/geografia-7ano/desmatamento-arco.jpg.asset.json";
+import { url as garimpo } from "@/assets/geografia-7ano/garimpo-ilegal-amazonia.jpg.asset.json";
+import { url as indigena } from "@/assets/geografia-7ano/terra-indigena.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 6 · Aula 01
  * "Amazônia e Novas Fronteiras" — BNCC EF07GE11, EF07GE12

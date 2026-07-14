@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import tordesilhas from "@/assets/geografia-7ano/tordesilhas-1494.jpg";
-import bandeirantes from "@/assets/geografia-7ano/bandeirantes-expansao.jpg";
-import tratado from "@/assets/geografia-7ano/tratado-madri.jpg";
-import brasilAtual from "@/assets/geografia-7ano/brasil-fronteiras.jpg";
-
+import { url as tordesilhas } from "@/assets/geografia-7ano/tordesilhas-1494.jpg.asset.json";
+import { url as bandeirantes } from "@/assets/geografia-7ano/bandeirantes-expansao.jpg.asset.json";
+import { url as tratado } from "@/assets/geografia-7ano/tratado-madri.jpg.asset.json";
+import { url as brasilAtual } from "@/assets/geografia-7ano/brasil-fronteiras.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 1 · Aula 01
  * "Formação Territorial do Brasil" — BNCC EF07GE01, EF07GE02

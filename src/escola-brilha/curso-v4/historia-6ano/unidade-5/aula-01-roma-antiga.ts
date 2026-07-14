@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgColiseu from "@/assets/historia-6ano/u5-coliseu.jpg";
-import imgForum from "@/assets/historia-6ano/u5-forum.jpg";
-import imgAqueduto from "@/assets/historia-6ano/u5-aqueduto.jpg";
-import imgPompeia from "@/assets/historia-6ano/u5-pompeia.jpg";
-import imgFases from "@/assets/historia-6ano/u5-infografico-fases.jpg";
-
+import { url as imgColiseu } from "@/assets/historia-6ano/u5-coliseu.jpg.asset.json";
+import { url as imgForum } from "@/assets/historia-6ano/u5-forum.jpg.asset.json";
+import { url as imgAqueduto } from "@/assets/historia-6ano/u5-aqueduto.jpg.asset.json";
+import { url as imgPompeia } from "@/assets/historia-6ano/u5-pompeia.jpg.asset.json";
+import { url as imgFases } from "@/assets/historia-6ano/u5-infografico-fases.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-roma-antiga",
   titulo: "Roma Antiga: da República ao Império",

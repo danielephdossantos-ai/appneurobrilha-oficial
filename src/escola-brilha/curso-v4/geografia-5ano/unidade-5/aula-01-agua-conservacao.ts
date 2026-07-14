@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import irrigacao from "@/assets/geografia-5ano/irrigacao-agricultura.jpg";
-import consciente from "@/assets/geografia-5ano/uso-consciente-agua.jpg";
-
+import { url as irrigacao } from "@/assets/geografia-5ano/irrigacao-agricultura.jpg.asset.json";
+import { url as consciente } from "@/assets/geografia-5ano/uso-consciente-agua.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 5 · Aula 01
  * "O Uso da Água e a Conservação" — EF05GE08

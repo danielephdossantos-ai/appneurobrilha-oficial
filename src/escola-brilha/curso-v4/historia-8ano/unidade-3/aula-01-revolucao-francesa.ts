@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgBast from "@/assets/historia-8ano/u3-bastilha.jpg";
-import imgGuil from "@/assets/historia-8ano/u3-guilhotina.jpg";
-
-import imgBandeira from "@/assets/historia-8ano/u3-bandeira-tricolor.jpg";
-import imgEstados from "@/assets/historia-8ano/u3-estados-gerais.jpg";
-import imgDeclara from "@/assets/historia-8ano/u3-declaracao-direitos.jpg";
+import { url as imgBast } from "@/assets/historia-8ano/u3-bastilha.jpg.asset.json";
+import { url as imgGuil } from "@/assets/historia-8ano/u3-guilhotina.jpg.asset.json";
+import { url as imgBandeira } from "@/assets/historia-8ano/u3-bandeira-tricolor.jpg.asset.json";
+import { url as imgEstados } from "@/assets/historia-8ano/u3-estados-gerais.jpg.asset.json";
+import { url as imgDeclara } from "@/assets/historia-8ano/u3-declaracao-direitos.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-revolucao-francesa",
   titulo: "A Revolução Francesa: Liberdade, Igualdade, Fraternidade",

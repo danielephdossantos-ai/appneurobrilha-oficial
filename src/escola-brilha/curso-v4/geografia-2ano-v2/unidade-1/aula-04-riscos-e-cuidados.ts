@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import feira from "@/assets/geografia-3ano/feira-livre-bairro.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as feira } from "@/assets/geografia-3ano/feira-livre-bairro.jpg.asset.json";
 /**
  * Geografia · 2º Ano (v2) · Unidade 1 · Aula 04
  * "Riscos e Cuidados no Lugar Onde Vivo" — EF02GE04

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgHoplita from "@/assets/historia-6ano/u4-hoplita.jpg";
-import imgAtenas from "@/assets/historia-6ano/u4-atenas.jpg";
-import imgOstracon from "@/assets/historia-6ano/u4-ostracon.jpg";
-import imgVaso from "@/assets/historia-6ano/u4-vaso-grego.jpg";
-import imgAtEs from "@/assets/historia-6ano/u4-infografico-atenas-esparta.jpg";
-
+import { url as imgHoplita } from "@/assets/historia-6ano/u4-hoplita.jpg.asset.json";
+import { url as imgAtenas } from "@/assets/historia-6ano/u4-atenas.jpg.asset.json";
+import { url as imgOstracon } from "@/assets/historia-6ano/u4-ostracon.jpg.asset.json";
+import { url as imgVaso } from "@/assets/historia-6ano/u4-vaso-grego.jpg.asset.json";
+import { url as imgAtEs } from "@/assets/historia-6ano/u4-infografico-atenas-esparta.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-grecia-antiga",
   titulo: "Grécia Antiga: Democracia e Cidadania",

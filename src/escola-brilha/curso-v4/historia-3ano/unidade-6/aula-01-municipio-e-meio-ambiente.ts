@@ -1,13 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import imgEnchente from "@/assets/historia-3ano/enchente-urbana.jpg";
-import imgRioCanalizado from "@/assets/historia-3ano/rio-canalizado.jpg";
-import imgParque from "@/assets/historia-3ano/parque-ecologico.jpg";
-import imgColeta from "@/assets/historia-3ano/coleta-seletiva.jpg";
-import imgInfografico from "@/assets/historia-3ano/infografico-sustentabilidade.jpg";
-import imgCampo from "@/assets/historia-3ano/campo-real.jpg";
-import imgCidade from "@/assets/historia-3ano/cidade-real.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgEnchente } from "@/assets/historia-3ano/enchente-urbana.jpg.asset.json";
+import { url as imgRioCanalizado } from "@/assets/historia-3ano/rio-canalizado.jpg.asset.json";
+import { url as imgParque } from "@/assets/historia-3ano/parque-ecologico.jpg.asset.json";
+import { url as imgColeta } from "@/assets/historia-3ano/coleta-seletiva.jpg.asset.json";
+import { url as imgInfografico } from "@/assets/historia-3ano/infografico-sustentabilidade.jpg.asset.json";
+import { url as imgCampo } from "@/assets/historia-3ano/campo-real.jpg.asset.json";
+import { url as imgCidade } from "@/assets/historia-3ano/cidade-real.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 6 · Aula 01
  * "O Município e o Meio Ambiente"

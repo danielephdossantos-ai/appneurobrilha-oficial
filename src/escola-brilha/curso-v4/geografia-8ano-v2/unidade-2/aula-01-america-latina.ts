@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import andes from "@/assets/geografia-8ano/cordilheira-andes.jpg";
-import favela from "@/assets/geografia-8ano/favela-latina.jpg";
-import mercosul from "@/assets/geografia-8ano/mercosul-mapa.jpg";
-import cultura from "@/assets/geografia-8ano/cultura-latina.jpg";
-
+import { url as andes } from "@/assets/geografia-8ano/cordilheira-andes.jpg.asset.json";
+import { url as favela } from "@/assets/geografia-8ano/favela-latina.jpg.asset.json";
+import { url as mercosul } from "@/assets/geografia-8ano/mercosul-mapa.jpg.asset.json";
+import { url as cultura } from "@/assets/geografia-8ano/cultura-latina.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 2 · Aula 01
  * "América Latina" — BNCC EF08GE05, EF08GE06

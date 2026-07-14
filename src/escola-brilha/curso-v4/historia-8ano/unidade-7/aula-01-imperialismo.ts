@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgBerlim from "@/assets/historia-8ano/u7-conferencia-berlim.jpg";
-import imgAfrica from "@/assets/historia-8ano/u7-imperialismo-africa.jpg";
-
-import imgMapaAfr from "@/assets/historia-8ano/u7-mapa-africa-colonial.jpg";
-import imgFerrovia from "@/assets/historia-8ano/u7-ferrovia-colonial.jpg";
-import imgMissio from "@/assets/historia-8ano/u7-missionarios.jpg";
+import { url as imgBerlim } from "@/assets/historia-8ano/u7-conferencia-berlim.jpg.asset.json";
+import { url as imgAfrica } from "@/assets/historia-8ano/u7-imperialismo-africa.jpg.asset.json";
+import { url as imgMapaAfr } from "@/assets/historia-8ano/u7-mapa-africa-colonial.jpg.asset.json";
+import { url as imgFerrovia } from "@/assets/historia-8ano/u7-ferrovia-colonial.jpg.asset.json";
+import { url as imgMissio } from "@/assets/historia-8ano/u7-missionarios.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-imperialismo",
   titulo: "O Imperialismo e a Partilha do Mundo",

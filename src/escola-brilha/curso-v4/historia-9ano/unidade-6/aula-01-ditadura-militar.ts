@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgDir from "@/assets/historia-9ano/u6-diretas-ja.jpg";
-import imgRes from "@/assets/historia-9ano/u6-resistencia-cultural.jpg";
-
-import imgTanqueDit from "@/assets/historia-9ano/u6-tanque-ditadura.jpg";
-import imgMpb from "@/assets/historia-9ano/u6-mpb-resistencia.jpg";
-import imgDiretas from "@/assets/historia-9ano/u6-diretas-comicio.jpg";
+import { url as imgDir } from "@/assets/historia-9ano/u6-diretas-ja.jpg.asset.json";
+import { url as imgRes } from "@/assets/historia-9ano/u6-resistencia-cultural.jpg.asset.json";
+import { url as imgTanqueDit } from "@/assets/historia-9ano/u6-tanque-ditadura.jpg.asset.json";
+import { url as imgMpb } from "@/assets/historia-9ano/u6-mpb-resistencia.jpg.asset.json";
+import { url as imgDiretas } from "@/assets/historia-9ano/u6-diretas-comicio.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ditadura-militar",
   titulo: "Ditadura Militar Brasileira (1964–1985)",

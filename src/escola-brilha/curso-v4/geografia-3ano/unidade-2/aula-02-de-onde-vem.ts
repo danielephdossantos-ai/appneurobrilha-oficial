@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import fotoFazenda from "@/assets/geografia-3ano/origem-fazenda-leite.jpg";
-import fotoHorta from "@/assets/geografia-3ano/origem-horta.jpg";
-import fotoRoca from "@/assets/geografia-3ano/origem-roca-mandioca.jpg";
-import fotoFeira from "@/assets/geografia-3ano/origem-feira-cidade.jpg";
-import rotaAlimentos from "@/assets/geografia-3ano/rota-alimentos-campo-cidade.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as fotoFazenda } from "@/assets/geografia-3ano/origem-fazenda-leite.jpg.asset.json";
+import { url as fotoHorta } from "@/assets/geografia-3ano/origem-horta.jpg.asset.json";
+import { url as fotoRoca } from "@/assets/geografia-3ano/origem-roca-mandioca.jpg.asset.json";
+import { url as fotoFeira } from "@/assets/geografia-3ano/origem-feira-cidade.jpg.asset.json";
+import { url as rotaAlimentos } from "@/assets/geografia-3ano/rota-alimentos-campo-cidade.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 2 · Aula 02
  * "De Onde Vem Isso?" — EF03GE05

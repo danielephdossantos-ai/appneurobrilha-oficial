@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgBairroAntigo from "@/assets/historia-2ano/bairro-antigo.png";
-import imgBairroHoje from "@/assets/historia-2ano/bairro-hoje.png";
-import imgPracaCoreto from "@/assets/historia-2ano/praca-coreto.png";
-import imgMonumento from "@/assets/historia-2ano/monumento-historico.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-
+import { url as imgBairroAntigo } from "@/assets/historia-2ano/bairro-antigo.png.asset.json";
+import { url as imgBairroHoje } from "@/assets/historia-2ano/bairro-hoje.png.asset.json";
+import { url as imgPracaCoreto } from "@/assets/historia-2ano/praca-coreto.png.asset.json";
+import { url as imgMonumento } from "@/assets/historia-2ano/monumento-historico.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 4 · Aula 01
  * "A História da Comunidade" — EF02HI08 + EF02HI11

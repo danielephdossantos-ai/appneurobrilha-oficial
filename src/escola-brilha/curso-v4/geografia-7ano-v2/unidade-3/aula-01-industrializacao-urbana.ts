@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import industria from "@/assets/geografia-7ano/industria-brasil.jpg";
-import metropole from "@/assets/geografia-7ano/metropole-sao-paulo.jpg";
-import favela from "@/assets/geografia-7ano/favela-urbanizacao.jpg";
-import migracao from "@/assets/geografia-7ano/migracao-rural-urbana.jpg";
-
+import { url as industria } from "@/assets/geografia-7ano/industria-brasil.jpg.asset.json";
+import { url as metropole } from "@/assets/geografia-7ano/metropole-sao-paulo.jpg.asset.json";
+import { url as favela } from "@/assets/geografia-7ano/favela-urbanizacao.jpg.asset.json";
+import { url as migracao } from "@/assets/geografia-7ano/migracao-rural-urbana.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 3 · Aula 01
  * "Industrialização e Urbanização" — BNCC EF07GE05, EF07GE08

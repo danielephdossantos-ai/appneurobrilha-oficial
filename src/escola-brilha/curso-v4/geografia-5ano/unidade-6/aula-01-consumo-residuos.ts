@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import lixao from "@/assets/geografia-5ano/lixao.jpg";
-import aterro from "@/assets/geografia-5ano/aterro-sanitario.jpg";
-import logistica from "@/assets/geografia-5ano/logistica-reversa.jpg";
-
+import { url as lixao } from "@/assets/geografia-5ano/lixao.jpg.asset.json";
+import { url as aterro } from "@/assets/geografia-5ano/aterro-sanitario.jpg.asset.json";
+import { url as logistica } from "@/assets/geografia-5ano/logistica-reversa.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 6 · Aula 01
  * "Consumo, Resíduos e Tecnologia" — EF05GE11 / EF05GE12

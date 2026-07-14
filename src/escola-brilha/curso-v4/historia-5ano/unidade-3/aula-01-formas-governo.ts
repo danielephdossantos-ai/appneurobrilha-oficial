@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCong from "@/assets/historia-5ano/congresso-nacional.jpg";
-import imgPlan from "@/assets/historia-5ano/palacio-planalto.jpg";
-import imgStf from "@/assets/historia-5ano/stf-brasilia.jpg";
-import imgInfo from "@/assets/historia-5ano/tres-poderes-infografico.jpg";
-import imgUrna from "@/assets/historia-5ano/urna-eletronica.jpg";
-
+import { url as imgCong } from "@/assets/historia-5ano/congresso-nacional.jpg.asset.json";
+import { url as imgPlan } from "@/assets/historia-5ano/palacio-planalto.jpg.asset.json";
+import { url as imgStf } from "@/assets/historia-5ano/stf-brasilia.jpg.asset.json";
+import { url as imgInfo } from "@/assets/historia-5ano/tres-poderes-infografico.jpg.asset.json";
+import { url as imgUrna } from "@/assets/historia-5ano/urna-eletronica.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 3 · Aula 01
  * "As Formas de Governo e a Organização Política"

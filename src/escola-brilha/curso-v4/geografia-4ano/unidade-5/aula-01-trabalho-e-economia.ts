@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import primario from "@/assets/geografia-4ano/setor-primario-agricultura.jpg";
-import secundario from "@/assets/geografia-4ano/setor-secundario-industria.jpg";
-import terciario from "@/assets/geografia-4ano/setor-terciario-servicos.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-
+import { url as primario } from "@/assets/geografia-4ano/setor-primario-agricultura.jpg.asset.json";
+import { url as secundario } from "@/assets/geografia-4ano/setor-secundario-industria.jpg.asset.json";
+import { url as terciario } from "@/assets/geografia-4ano/setor-terciario-servicos.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 5 · Aula 01
  * "Trabalho e Economia do Brasil" — EF04GE07

@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import imgPau from "@/assets/historia-4ano/pau-de-arara.jpg";
-import imgCandangos from "@/assets/historia-4ano/candangos-brasilia.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-exodo-rural.jpg";
-
+import { url as imgPau } from "@/assets/historia-4ano/pau-de-arara.jpg.asset.json";
+import { url as imgCandangos } from "@/assets/historia-4ano/candangos-brasilia.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-exodo-rural.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 6 · Aula 01
  * "As Migrações Internas: Do Campo para a Cidade" — êxodo rural e Brasília.

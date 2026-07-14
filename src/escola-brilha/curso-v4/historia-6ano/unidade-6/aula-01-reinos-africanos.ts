@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMeroe from "@/assets/historia-6ano/u6-meroe.jpg";
-import imgMoeda from "@/assets/historia-6ano/u6-moeda-axum.jpg";
-import imgObelisco from "@/assets/historia-6ano/u6-obelisco-axum.jpg";
-import imgCandace from "@/assets/historia-6ano/u6-candace.jpg";
-import imgAfrica from "@/assets/historia-6ano/u6-infografico-africa.jpg";
-
+import { url as imgMeroe } from "@/assets/historia-6ano/u6-meroe.jpg.asset.json";
+import { url as imgMoeda } from "@/assets/historia-6ano/u6-moeda-axum.jpg.asset.json";
+import { url as imgObelisco } from "@/assets/historia-6ano/u6-obelisco-axum.jpg.asset.json";
+import { url as imgCandace } from "@/assets/historia-6ano/u6-candace.jpg.asset.json";
+import { url as imgAfrica } from "@/assets/historia-6ano/u6-infografico-africa.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-reinos-africanos",
   titulo: "Reinos Africanos: Kush e Axum",

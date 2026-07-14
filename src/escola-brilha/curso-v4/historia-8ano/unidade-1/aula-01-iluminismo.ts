@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgEnc from "@/assets/historia-8ano/u1-enciclopedia.jpg";
-import imgCafe from "@/assets/historia-8ano/u1-cafe-filosofos.jpg";
-
-import imgVoltaire from "@/assets/historia-8ano/u1-voltaire.jpg";
-import imgContrato from "@/assets/historia-8ano/u1-contrato-social.jpg";
-import imgTres from "@/assets/historia-8ano/u1-tres-poderes.jpg";
+import { url as imgEnc } from "@/assets/historia-8ano/u1-enciclopedia.jpg.asset.json";
+import { url as imgCafe } from "@/assets/historia-8ano/u1-cafe-filosofos.jpg.asset.json";
+import { url as imgVoltaire } from "@/assets/historia-8ano/u1-voltaire.jpg.asset.json";
+import { url as imgContrato } from "@/assets/historia-8ano/u1-contrato-social.jpg.asset.json";
+import { url as imgTres } from "@/assets/historia-8ano/u1-tres-poderes.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-iluminismo",
   titulo: "O Iluminismo e o Poder das Ideias",

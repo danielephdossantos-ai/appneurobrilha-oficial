@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import piramide from "@/assets/geografia-7ano/piramide-etaria-brasil.jpg";
-import populacao from "@/assets/geografia-7ano/populacao-brasileira.jpg";
-import velhos from "@/assets/geografia-7ano/envelhecimento-brasil.jpg";
-import mae from "@/assets/geografia-7ano/natalidade-queda.jpg";
-
+import { url as piramide } from "@/assets/geografia-7ano/piramide-etaria-brasil.jpg.asset.json";
+import { url as populacao } from "@/assets/geografia-7ano/populacao-brasileira.jpg.asset.json";
+import { url as velhos } from "@/assets/geografia-7ano/envelhecimento-brasil.jpg.asset.json";
+import { url as mae } from "@/assets/geografia-7ano/natalidade-queda.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 2 · Aula 01
  * "Dinâmica Demográfica" — BNCC EF07GE03, EF07GE04

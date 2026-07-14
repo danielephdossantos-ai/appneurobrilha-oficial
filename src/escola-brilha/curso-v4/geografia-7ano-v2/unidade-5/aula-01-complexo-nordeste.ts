@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import sertao from "@/assets/geografia-7ano/sertao-nordeste.jpg";
-import litoral from "@/assets/geografia-7ano/litoral-nordeste-turismo.jpg";
-import petrolina from "@/assets/geografia-7ano/petrolina-irrigacao.jpg";
-import transp from "@/assets/geografia-7ano/transposicao-sao-francisco.jpg";
-
+import { url as sertao } from "@/assets/geografia-7ano/sertao-nordeste.jpg.asset.json";
+import { url as litoral } from "@/assets/geografia-7ano/litoral-nordeste-turismo.jpg.asset.json";
+import { url as petrolina } from "@/assets/geografia-7ano/petrolina-irrigacao.jpg.asset.json";
+import { url as transp } from "@/assets/geografia-7ano/transposicao-sao-francisco.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 5 · Aula 01
  * "Complexo Nordeste" — BNCC EF07GE10, EF07GE11

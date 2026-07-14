@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCrise from "@/assets/historia-9ano/u2-crise-1929.jpg";
-import imgTot from "@/assets/historia-9ano/u2-crise-social.jpg";
-
-import imgFila from "@/assets/historia-9ano/u2-fila-desempregados.jpg";
-import imgComicio from "@/assets/historia-9ano/u2-comicio-fascista.jpg";
-import imgBolsa from "@/assets/historia-9ano/u2-quebra-bolsa.jpg";
+import { url as imgCrise } from "@/assets/historia-9ano/u2-crise-1929.jpg.asset.json";
+import { url as imgTot } from "@/assets/historia-9ano/u2-crise-social.jpg.asset.json";
+import { url as imgFila } from "@/assets/historia-9ano/u2-fila-desempregados.jpg.asset.json";
+import { url as imgComicio } from "@/assets/historia-9ano/u2-comicio-fascista.jpg.asset.json";
+import { url as imgBolsa } from "@/assets/historia-9ano/u2-quebra-bolsa.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-crise-totalitarismo",
   titulo: "Crise de 1929 e a Ascensão dos Totalitarismos",

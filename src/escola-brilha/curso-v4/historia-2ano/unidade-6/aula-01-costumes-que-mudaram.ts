@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgBrincadeiras from "@/assets/historia-2ano/brincadeiras-rua.png";
-import imgRadio from "@/assets/historia-2ano/radio-familia-1930.png";
-import imgVitrola from "@/assets/historia-2ano/vitrola-vinil.png";
-import imgRoupas from "@/assets/historia-2ano/roupas-1920.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-
+import { url as imgBrincadeiras } from "@/assets/historia-2ano/brincadeiras-rua.png.asset.json";
+import { url as imgRadio } from "@/assets/historia-2ano/radio-familia-1930.png.asset.json";
+import { url as imgVitrola } from "@/assets/historia-2ano/vitrola-vinil.png.asset.json";
+import { url as imgRoupas } from "@/assets/historia-2ano/roupas-1920.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 6 · Aula 01
  * "Costumes que Mudaram" — EF02HI06 + EF02HI07

@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaRelevo from "@/assets/geografia-6ano/mapa-relevo-brasil.jpg";
-import planalto from "@/assets/geografia-6ano/planalto-central.jpg";
-import planicieAmz from "@/assets/geografia-6ano/planicie-amazonica.jpg";
-import chapada from "@/assets/geografia-6ano/chapada.jpg";
-import serraMar from "@/assets/geografia-6ano/serra-mar.jpg";
-import depSertaneja from "@/assets/geografia-6ano/depressao-sertaneja.jpg";
-
+import { url as mapaRelevo } from "@/assets/geografia-6ano/mapa-relevo-brasil.jpg.asset.json";
+import { url as planalto } from "@/assets/geografia-6ano/planalto-central.jpg.asset.json";
+import { url as planicieAmz } from "@/assets/geografia-6ano/planicie-amazonica.jpg.asset.json";
+import { url as chapada } from "@/assets/geografia-6ano/chapada.jpg.asset.json";
+import { url as serraMar } from "@/assets/geografia-6ano/serra-mar.jpg.asset.json";
+import { url as depSertaneja } from "@/assets/geografia-6ano/depressao-sertaneja.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 4 · Aula 01
  * "Relevo do Brasil" — BNCC EF06GE03, EF06GE11
