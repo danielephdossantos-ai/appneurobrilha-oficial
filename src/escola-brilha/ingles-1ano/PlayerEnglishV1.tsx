@@ -604,16 +604,16 @@ function ListeningDialog() {
       {playedAll && (
         <div className="mt-5 bg-amber-50 border border-amber-200 rounded-xl p-4">
           <div className="text-sm font-bold text-slate-700 mb-2">
-            Pergunta de compreensão: qual é o nome da menina?
+            {meta.listeningQuestion}
           </div>
           <div className="grid grid-cols-3 gap-2">
-            {["Ana", "Lily", "Mia"].map((opt) => (
+            {meta.listeningOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => setAnswer(opt)}
                 className={`py-2 rounded-lg font-bold border-2 transition ${
                   answer === opt
-                    ? opt === "Lily"
+                    ? opt === meta.listeningCorrect
                       ? "bg-emerald-500 text-white border-emerald-500"
                       : "bg-rose-500 text-white border-rose-500"
                     : "bg-white border-slate-200 text-slate-700 hover:border-sky-300"
@@ -623,12 +623,12 @@ function ListeningDialog() {
               </button>
             ))}
           </div>
-          {answer === "Lily" && (
+          {answer === meta.listeningCorrect && (
             <div className="mt-2 text-emerald-600 font-bold text-sm">✔ Correct!</div>
           )}
-          {answer && answer !== "Lily" && (
+          {answer && answer !== meta.listeningCorrect && (
             <div className="mt-2 text-rose-600 font-bold text-sm">
-              ✘ Ouve outra vez: ela diz "My name is Lily".
+              ✘ {meta.listeningWrongHint}
             </div>
           )}
         </div>
@@ -665,7 +665,7 @@ function Reading() {
         ))}
       </div>
       <div className="mt-4">
-        <PlayPt text={`Vamos ler juntos. A Lily é uma menina. Ela vai para a escola. Ela diz "Hello". A professora responde "Good morning".`} />
+        <PlayPt text={meta.readingNarration} />
       </div>
     </div>
   );
@@ -790,7 +790,7 @@ function GrammarWhy() {
   return (
     <div>
       <PlayPt
-        text={`Por que dizemos "My name is"? Em inglês, MY quer dizer MEU. NAME é NOME. IS é a palavrinha que junta as duas ideias. Sempre juntas: MY NAME IS mais o seu nome.`}
+        text={meta.grammarNarration}
       />
       <div className="mt-3 rounded-xl bg-indigo-50 border border-indigo-200 p-4">
         <div className="text-xs uppercase tracking-wider text-indigo-600 font-black">Por quê?</div>
@@ -1067,12 +1067,12 @@ function FinalProject({ onFinish }: { onFinish: () => void }) {
   const { meta } = useLesson();
   const [name, setName] = useState("");
   const [done, setDone] = useState(false);
-  const phrase = name.trim() ? `Hello! My name is ${name.trim()}. Nice to meet you!` : "";
+  const phrase = name.trim() ? meta.finalProjectPhrase(name.trim()) : "";
 
   return (
     <div>
       <div className="text-sm text-slate-600 mb-3">
-        Se apresenta em inglês! Escreve seu nome e depois <b>diz alto</b>:
+        {meta.finalProjectIntro}
       </div>
       <input
         value={name}
