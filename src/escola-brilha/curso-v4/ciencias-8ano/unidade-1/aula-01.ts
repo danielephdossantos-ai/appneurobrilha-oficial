@@ -5,6 +5,10 @@ import celulaVegetalImg from "@/assets/ciencias-7ano/u1-a1/celula-vegetal.jpg";
 import niveisImg from "@/assets/ciencias-7ano/u1-a1/niveis-organizacao.jpg";
 import mitoseVideo from "@/assets/ciencias-7ano/u1-a1/mitose-celular.mp4.asset.json";
 import dnaImg from "@/assets/ciencias-8ano/u1/dna-helice.jpg";
+import mitocondriaImg from "@/assets/ciencias-8ano/u1/mitocondria.jpg";
+import organelasImg from "@/assets/ciencias-8ano/u1/organelas-citoplasma.jpg";
+import cromossomosImg from "@/assets/ciencias-8ano/u1/cromossomos-mitose.jpg";
+import teoriaCelularImg from "@/assets/ciencias-8ano/u1/teoria-celular-historia.jpg";
 
 /**
  * Ciências · 8º Ano · U1 · A01 — "Laboratório de Biologia Celular"
@@ -56,7 +60,7 @@ export const aula01: AulaGeoV1 = {
       "Cinco conceitos-chave. Um traz microscopia real: mitose acelerada.",
     instrucao: "Vocabulário da célula",
     cadernos: [
-      { id: "teoria", capa: "TEORIA CELULAR", emoji: "📜", cor: "from-violet-500 to-purple-700", conteudo: "Três princípios: (1) todo ser vivo é feito de células, (2) a célula é a unidade funcional da vida, (3) toda célula vem de outra célula.", exemplo: "Formulada por Schleiden, Schwann e Virchow (séc. XIX).", fotoUrl: celulaAnimalImg },
+      { id: "teoria", capa: "TEORIA CELULAR", emoji: "📜", cor: "from-violet-500 to-purple-700", conteudo: "Três princípios: (1) todo ser vivo é feito de células, (2) a célula é a unidade funcional da vida, (3) toda célula vem de outra célula.", exemplo: "Formulada por Schleiden, Schwann e Virchow (séc. XIX).", fotoUrl: teoriaCelularImg },
       { id: "dna", capa: "DNA", emoji: "🧬", cor: "from-indigo-500 to-purple-700", conteudo: "Molécula em dupla-hélice que guarda o CÓDIGO GENÉTICO. Formada por 4 bases: A, T, C, G. Fica dentro do núcleo.", exemplo: "Ex.: 3 bilhões de pares de bases no genoma humano.", fotoUrl: dnaImg },
       { id: "gene", capa: "GENE", emoji: "🎯", cor: "from-fuchsia-500 to-pink-700", conteudo: "Trecho de DNA que carrega a RECEITA de uma característica ou proteína. O humano tem cerca de 20 mil genes.", exemplo: "Ex.: gene da cor dos olhos, gene da insulina.", fotoUrl: dnaImg },
       { id: "mitose", capa: "MITOSE", emoji: "✂️", cor: "from-sky-500 to-cyan-700", conteudo: "Divisão celular que gera DUAS células-filhas GENETICAMENTE IGUAIS. Base do crescimento, cicatrização e reprodução assexuada.", exemplo: "Ex.: cicatrização de um corte na pele.", videoUrl: mitoseVideo.url },
@@ -73,9 +77,9 @@ export const aula01: AulaGeoV1 = {
     mapaUrl: celulaAnimalImg,
     pontos: [
       { id: "nucleo", x: 45, y: 42, emoji: "🧬", cor: "from-indigo-500 to-purple-700", titulo: "Núcleo", texto: "Contém o DNA organizado em cromossomos. Comanda a síntese de proteínas e a divisão celular.", fotoUrl: dnaImg },
-      { id: "mitocondria", x: 75, y: 50, emoji: "🔋", cor: "from-red-500 to-rose-700", titulo: "Mitocôndria", texto: "Faz respiração celular: glicose + O₂ → ATP (energia química da célula).", fotoUrl: celulaAnimalImg },
-      { id: "reticulo", x: 25, y: 65, emoji: "🕸️", cor: "from-amber-500 to-orange-700", titulo: "Retículo endoplasmático", texto: "Rede de canais que sintetiza proteínas (rugoso) e lipídios (liso).", fotoUrl: celulaAnimalImg },
-      { id: "golgi", x: 65, y: 75, emoji: "📦", cor: "from-emerald-500 to-teal-700", titulo: "Complexo de Golgi", texto: "Empacota e envia proteínas para dentro ou fora da célula. Como o setor de expedição.", fotoUrl: celulaAnimalImg },
+      { id: "mitocondria", x: 75, y: 50, emoji: "🔋", cor: "from-red-500 to-rose-700", titulo: "Mitocôndria", texto: "Faz respiração celular: glicose + O₂ → ATP (energia química da célula).", fotoUrl: mitocondriaImg },
+      { id: "reticulo", x: 25, y: 65, emoji: "🕸️", cor: "from-amber-500 to-orange-700", titulo: "Retículo endoplasmático", texto: "Rede de canais que sintetiza proteínas (rugoso) e lipídios (liso).", fotoUrl: organelasImg },
+      { id: "golgi", x: 65, y: 75, emoji: "📦", cor: "from-emerald-500 to-teal-700", titulo: "Complexo de Golgi", texto: "Empacota e envia proteínas para dentro ou fora da célula. Como o setor de expedição.", fotoUrl: organelasImg },
     ],
     falaFinal:
       "Cada organela tem função específica — como órgãos dentro da célula.",
@@ -94,7 +98,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Correto. Núcleo delimitado = eucarionte. Ali fica quase todo o DNA.",
         feedbackErro: "Há um pouco de DNA na mitocôndria, mas a MAIOR PARTE fica no NÚCLEO." },
-      { id: "q2", pergunta: "O que a MITOSE produz?", fotoUrl: celulaAnimalImg,
+      { id: "q2", pergunta: "O que a MITOSE produz?", fotoUrl: cromossomosImg,
         cards: [
           { id: "a", emoji: "🧬", titulo: "Duas células idênticas à mãe", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌱", titulo: "Uma célula vegetal e uma animal", cor: "from-red-500 to-rose-700" },
@@ -136,9 +140,9 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Do início ao fim da divisão celular:",
     paradas: [
       { id: "intersefase", emoji: "🧬", rotulo: "1. Intérfase", descricao: "Célula duplica o DNA.", fotoUrl: dnaImg },
-      { id: "prof", emoji: "🎯", rotulo: "2. Prófase", descricao: "Cromossomos se condensam. Membrana nuclear desaparece.", fotoUrl: celulaAnimalImg },
-      { id: "meta", emoji: "➖", rotulo: "3. Metáfase", descricao: "Cromossomos se alinham no centro.", fotoUrl: celulaAnimalImg },
-      { id: "ana", emoji: "↔️", rotulo: "4. Anáfase", descricao: "Cromátides-irmãs se separam.", fotoUrl: celulaAnimalImg },
+      { id: "prof", emoji: "🎯", rotulo: "2. Prófase", descricao: "Cromossomos se condensam. Membrana nuclear desaparece.", fotoUrl: cromossomosImg },
+      { id: "meta", emoji: "➖", rotulo: "3. Metáfase", descricao: "Cromossomos se alinham no centro.", fotoUrl: cromossomosImg },
+      { id: "ana", emoji: "↔️", rotulo: "4. Anáfase", descricao: "Cromátides-irmãs se separam.", fotoUrl: cromossomosImg },
       { id: "telo", emoji: "🔀", rotulo: "5. Telófase", descricao: "Duas células-filhas se formam.", fotoUrl: celulaAnimalImg },
     ],
     ordemCerta: ["intersefase", "prof", "meta", "ana", "telo"],
@@ -157,7 +161,7 @@ export const aula01: AulaGeoV1 = {
     subtitulo: "Do DNA à formação de tecidos",
     paragrafos: [
       { id: "p1", texto: "PROBLEMA: como um único óvulo fecundado dá origem a um corpo com 37 trilhões de células? A resposta é MITOSE repetida bilhões de vezes, controlada por genes do DNA.", chaves: ["mitose", "genes"], definicoes: { mitose: "Divisão que gera 2 células-filhas idênticas.", genes: "Trechos de DNA com receitas para proteínas." }, fotoUrl: dnaImg },
-      { id: "p2", texto: "OBSERVAÇÃO: antes de cada divisão, a célula DUPLICA todo o DNA (intérfase). Depois, cromossomos condensam, alinham, separam e a célula parte-se em duas. Todo o processo demora horas.", chaves: ["cromossomos"], definicoes: { cromossomos: "DNA condensado em bastões visíveis ao microscópio." }, fotoUrl: celulaAnimalImg },
+      { id: "p2", texto: "OBSERVAÇÃO: antes de cada divisão, a célula DUPLICA todo o DNA (intérfase). Depois, cromossomos condensam, alinham, separam e a célula parte-se em duas. Todo o processo demora horas.", chaves: ["cromossomos"], definicoes: { cromossomos: "DNA condensado em bastões visíveis ao microscópio." }, fotoUrl: cromossomosImg },
       { id: "p3", texto: "CONCLUSÃO: a continuidade da vida depende de dois pilares — a MOLÉCULA de DNA (informação) e o PROCESSO de mitose (execução). Erros na cópia podem gerar mutações; algumas são benéficas (evolução), outras causam doenças.", chaves: ["mutações"], definicoes: { mutações: "Alterações na sequência do DNA." }, fotoUrl: dnaImg },
     ],
     falaFinal:
@@ -178,7 +182,7 @@ export const aula01: AulaGeoV1 = {
       { id: "r1", municipioA: { nome: "Parede celular", emoji: "🧱", cor: "from-amber-500 to-orange-700" }, municipioB: { nome: "Celulose rígida", emoji: "🌾", cor: "from-emerald-500 to-teal-700" }, contexto: "Camada externa que dá forma geométrica.", pecaCertaId: "vegetal", fotoUrl: celulaVegetalImg, feedbackAcerto: "Só vegetal. Animal não tem parede.", feedbackErro: "Célula animal é flexível — não tem parede. Só vegetal." },
       { id: "r2", municipioA: { nome: "Núcleo com DNA", emoji: "🧬", cor: "from-indigo-500 to-purple-700" }, municipioB: { nome: "Cromossomos", emoji: "📚", cor: "from-sky-500 to-cyan-700" }, contexto: "Centro de comando genético.", pecaCertaId: "ambas", fotoUrl: dnaImg, feedbackAcerto: "Ambas — toda eucarionte tem núcleo.", feedbackErro: "Núcleo existe nas duas — é o que define eucarionte." },
       { id: "r3", municipioA: { nome: "Cloroplasto", emoji: "🌿", cor: "from-emerald-500 to-teal-700" }, municipioB: { nome: "Faz fotossíntese", emoji: "☀️", cor: "from-yellow-500 to-amber-700" }, contexto: "Capta luz solar e produz glicose.", pecaCertaId: "vegetal", fotoUrl: celulaVegetalImg, feedbackAcerto: "Só vegetal — animal não faz fotossíntese.", feedbackErro: "Animal não faz fotossíntese. Cloroplasto é exclusivo de plantas e algas." },
-      { id: "r4", municipioA: { nome: "Mitocôndria", emoji: "🔋", cor: "from-red-500 to-rose-700" }, municipioB: { nome: "Produz ATP", emoji: "⚡", cor: "from-amber-500 to-yellow-700" }, contexto: "Respiração celular.", pecaCertaId: "ambas", fotoUrl: celulaAnimalImg, feedbackAcerto: "Ambas — plantas também respiram.", feedbackErro: "Plantas TAMBÉM respiram e precisam de mitocôndria." },
+      { id: "r4", municipioA: { nome: "Mitocôndria", emoji: "🔋", cor: "from-red-500 to-rose-700" }, municipioB: { nome: "Produz ATP", emoji: "⚡", cor: "from-amber-500 to-yellow-700" }, contexto: "Respiração celular.", pecaCertaId: "ambas", fotoUrl: mitocondriaImg, feedbackAcerto: "Ambas — plantas também respiram.", feedbackErro: "Plantas TAMBÉM respiram e precisam de mitocôndria." },
     ],
     falaFinal:
       "Você já distingue animal, vegetal e o que ambas compartilham.",
@@ -192,7 +196,7 @@ export const aula01: AulaGeoV1 = {
     fotoUrl: niveisImg,
     fatias: [
       { id: "info", rotulo: "Informação", emoji: "🧬", percentual: 40, cor: "#8b5cf6", descricao: "Núcleo + DNA + cromossomos + genes. Comanda o que a célula produz e quando se divide.", exemplos: ["DNA", "Gene", "Cromossomo"], fotoUrl: dnaImg },
-      { id: "meta", rotulo: "Metabolismo", emoji: "⚡", percentual: 60, cor: "#f59e0b", descricao: "Mitocôndria, retículo, Golgi. Produz energia (ATP), sintetiza e envia proteínas.", exemplos: ["Mitocôndria", "Ribossomo", "Golgi"], fotoUrl: celulaAnimalImg },
+      { id: "meta", rotulo: "Metabolismo", emoji: "⚡", percentual: 60, cor: "#f59e0b", descricao: "Mitocôndria, retículo, Golgi. Produz energia (ATP), sintetiza e envia proteínas.", exemplos: ["Mitocôndria", "Ribossomo", "Golgi"], fotoUrl: mitocondriaImg },
     ],
     falaFinal:
       "Informação e metabolismo integrados. Fim do Setor 1.",
@@ -205,7 +209,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: microscopioImg,
     perguntas: [
-      { id: "q1", pergunta: "Quais são os três princípios da teoria celular?", fotoUrl: celulaAnimalImg,
+      { id: "q1", pergunta: "Quais são os três princípios da teoria celular?", fotoUrl: teoriaCelularImg,
         opcoes: [
           { id: "a", texto: "Todo ser vivo é feito de células; célula é unidade funcional; toda célula vem de outra célula", correta: true },
           { id: "b", texto: "Toda vida vem do sol; célula é como um tijolo; DNA existe só em animais" },
@@ -219,7 +223,7 @@ export const aula01: AulaGeoV1 = {
         ],
         feedbackAcerto: "Sim. Gene = pedaço de DNA com informação para uma proteína.",
         feedbackErro: "Gene NÃO é organela — é um trecho de DNA com uma receita." },
-      { id: "q3", pergunta: "Qual a diferença entre MITOSE e MEIOSE?", fotoUrl: celulaAnimalImg,
+      { id: "q3", pergunta: "Qual a diferença entre MITOSE e MEIOSE?", fotoUrl: cromossomosImg,
         opcoes: [
           { id: "a", texto: "Mitose gera 2 células idênticas; meiose gera 4 células diferentes (gametas)", correta: true },
           { id: "b", texto: "Mitose acontece só em plantas; meiose só em animais" },
