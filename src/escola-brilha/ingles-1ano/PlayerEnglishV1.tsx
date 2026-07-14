@@ -33,27 +33,27 @@ export function PlayerEnglishV1({ onSair, onConcluir }: Props) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-100 via-white to-amber-50 text-slate-900">
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-slate-200">
+      <header className="sticky top-0 z-40 backdrop-blur bg-[#0d1f55]/80 border-b border-white/10">
         <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
           <button
             onClick={onSair}
-            className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900"
+            className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
           >
             <ArrowLeft size={18} /> Sair
           </button>
           <div className="text-center">
-            <div className="text-[10px] uppercase tracking-widest text-sky-600 font-black">
+            <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
               My First English Adventure
             </div>
-            <div className="text-sm font-black text-slate-800">Unit 1 · Lesson 1 — Hello!</div>
+            <div className="text-sm font-black text-white">Unit 1 · Lesson 1 — Hello!</div>
           </div>
           <div className="w-14" />
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32">
+      <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
         <SectionCover onStart={() => scrollToId("s1")} />
         <Section id="s1" step={1} label="História inicial" title="Meet Lily!">
           <Story />
