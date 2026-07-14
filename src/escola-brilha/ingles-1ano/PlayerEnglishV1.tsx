@@ -1140,6 +1140,31 @@ function Quiz() {
               );
             })}
           </div>
+          {answers[i] !== null && (() => {
+            const chosen = q.options[answers[i]!];
+            const correctOpt = q.options.find((o) => o.correct);
+            const acertou = !!chosen?.correct;
+            const explicacao =
+              chosen?.explain ||
+              q.explain ||
+              (acertou
+                ? `Isso mesmo! "${correctOpt?.text}" é a resposta certa.`
+                : `A resposta certa é "${correctOpt?.text}". Você escolheu "${chosen?.text}".`);
+            return (
+              <div
+                className={`mt-3 rounded-xl border-2 p-3 text-sm font-semibold ${
+                  acertou
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                    : "border-rose-300 bg-rose-50 text-rose-800"
+                }`}
+              >
+                <div className="text-xs font-black uppercase tracking-widest mb-1 opacity-70">
+                  {acertou ? "✔ Explicação" : "✘ Vamos entender"}
+                </div>
+                {explicacao}
+              </div>
+            );
+          })()}
           {answers[i] !== null && (
             <button
               onClick={() => setI((v) => Math.min(QUIZ.length - 1, v + 1))}
