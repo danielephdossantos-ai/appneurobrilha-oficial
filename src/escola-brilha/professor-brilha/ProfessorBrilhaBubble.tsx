@@ -85,7 +85,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
     setMensagens(novasLocais);
     setCarregando(true);
     try {
-      const res = await enviar({ data: { contexto, mensagem: texto } });
+      const res = await enviar({ data: { contexto, mensagem: texto, historico: mensagens.slice(-20) } });
       if (res.ok) {
         setMensagens([...novasLocais, { role: "assistant", content: res.resposta }]);
       } else {
