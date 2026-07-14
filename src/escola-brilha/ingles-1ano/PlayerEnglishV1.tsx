@@ -53,43 +53,42 @@ export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: 
 }
 
 function MainSections({ onConcluir }: { onConcluir: () => void }) {
-  const { meta, READING, GRAMMAR } = useLesson();
+  const lesson = useLesson();
+  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK } = lesson;
+
+  // Monta lista de seções na ordem certa, pulando as opcionais ausentes.
+  const sections: { label: string; title: string; node: React.ReactNode }[] = [
+    { label: "História inicial", title: meta.storyTitle, node: <Story /> },
+    { label: "Vocabulário novo", title: meta.vocabularyTitle, node: <Vocabulary /> },
+    { label: "Speaking", title: "Now you speak!", node: <SpeakingMic /> },
+    { label: "Listening", title: "Listen carefully", node: <ListeningDialog /> },
+    { label: "Reading", title: READING.title, node: <Reading /> },
+    { label: "Writing", title: "Complete the sentence", node: <Writing /> },
+    { label: "Grammar", title: GRAMMAR.focus, node: <GrammarWhy /> },
+    { label: "Real Life", title: "In real life", node: <RealLife /> },
+  ];
+  if (SONG) sections.push({ label: "Song", title: SONG.title, node: <Song /> });
+  if (HUNTER) sections.push({ label: "Mini Game", title: "Color / Object Hunter", node: <Hunter /> });
+  if (PAINT) sections.push({ label: "Mini Game", title: "Paint the Picture", node: <Paint /> });
+  if (MEMORY) sections.push({ label: "Mini Game", title: "Memory Game", node: <Memory /> });
+  sections.push({ label: "Mini Game", title: "Match the word!", node: <MiniGameMatch /> });
+  sections.push({ label: "Quiz", title: "Quick check", node: <Quiz /> });
+  if (BOOK) sections.push({ label: "Livrinho", title: BOOK.title, node: <Book /> });
+  if (VIRTUAL_ROOM) sections.push({ label: "Missão", title: "Explore the room!", node: <VirtualRoom /> });
+  sections.push({
+    label: "Projeto",
+    title: meta.finalProjectSectionTitle,
+    node: <FinalProject onFinish={onConcluir} />,
+  });
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-6 space-y-8 pb-32 text-slate-900">
       <SectionCover onStart={() => scrollToId("s1")} />
-      <Section id="s1" step={1} label="História inicial" title={meta.storyTitle}>
-        <Story />
-      </Section>
-      <Section id="s2" step={2} label="Vocabulário novo" title={meta.vocabularyTitle}>
-        <Vocabulary />
-      </Section>
-      <Section id="s3" step={3} label="Speaking" title="Now you speak!">
-        <SpeakingMic />
-      </Section>
-      <Section id="s4" step={4} label="Listening" title="Listen carefully">
-        <ListeningDialog />
-      </Section>
-      <Section id="s5" step={5} label="Reading" title={READING.title}>
-        <Reading />
-      </Section>
-      <Section id="s6" step={6} label="Writing" title="Complete the sentence">
-        <Writing />
-      </Section>
-      <Section id="s7" step={7} label="Grammar" title={GRAMMAR.focus}>
-        <GrammarWhy />
-      </Section>
-      <Section id="s8" step={8} label="Real Life" title="In real life">
-        <RealLife />
-      </Section>
-      <Section id="s9" step={9} label="Mini Game" title="Match the word!">
-        <MiniGameMatch />
-      </Section>
-      <Section id="s10" step={10} label="Quiz" title="Quick check">
-        <Quiz />
-      </Section>
-      <Section id="s11" step={11} label="Projeto" title={meta.finalProjectSectionTitle}>
-        <FinalProject onFinish={onConcluir} />
-      </Section>
+      {sections.map((s, i) => (
+        <Section key={i} id={`s${i + 1}`} step={i + 1} label={s.label} title={s.title}>
+          {s.node}
+        </Section>
+      ))}
     </main>
   );
 }
