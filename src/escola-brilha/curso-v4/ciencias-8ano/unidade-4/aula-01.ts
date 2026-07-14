@@ -37,7 +37,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Problema: quando você mistura VINAGRE com BICARBONATO, borbulha. Mas água + açúcar não borbulha. Por quê?",
     pergunta: "Formule sua HIPÓTESE:",
-    fotoUrl: transformacoesImg,
+    fotoUrl: ferrugemImg,
     opcoes: [
       { id: "quimica", titulo: "Transformação QUÍMICA", subtitulo: "novas substâncias aparecem (gás)", emoji: "🧪", cor: "from-emerald-500 to-teal-700", fotoUrl: transformacoesImg },
       { id: "fisica", titulo: "Só transformação FÍSICA", subtitulo: "as substâncias continuam iguais", emoji: "💧", cor: "from-red-500 to-rose-700", fotoUrl: transformacoesImg },
