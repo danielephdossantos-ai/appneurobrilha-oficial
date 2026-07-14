@@ -51,8 +51,7 @@ function TrilhaIngles() {
     setModoLivre(!params.has("aluno"));
   }, []);
 
-  // Por enquanto só temos aulas de 1º Ano
-  const aulas = useMemo(() => LESSONS, []);
+  const aulas = useMemo(() => getLessonsBySerie(serie), [serie]);
 
   useEffect(() => {
     if (!activeChild?.id) return;
