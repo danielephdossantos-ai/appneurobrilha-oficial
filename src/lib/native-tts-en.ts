@@ -57,6 +57,17 @@ export function speakEnglish(text: string, opts: SpeakEnOpts = {}): Promise<void
       return;
     }
     const synth = window.speechSynthesis;
+    const normalized = text.trim();
+    const now = Date.now();
+    // Dedupe: mesma fala pedida em <1.2s (StrictMode / re-render duplo)
+    // evita "I am am am" quando useEffect dispara 2x seguido.
+    if (!opts.queue && normalized === lastEnText && now - lastEnAt < 1200) {
+      opts.onEnd?.();
+      resolve();
+      return;
+    }
+    lastEnText = normalized;
+    lastEnAt = now;
     if (!opts.queue) {
       enRunId += 1;
       synth.cancel();
