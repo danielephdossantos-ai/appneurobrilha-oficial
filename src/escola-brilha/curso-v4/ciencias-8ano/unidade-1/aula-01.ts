@@ -98,7 +98,7 @@ export const aula01: AulaGeoV1 = {
         ], correta: "a",
         feedbackAcerto: "Correto. Núcleo delimitado = eucarionte. Ali fica quase todo o DNA.",
         feedbackErro: "Há um pouco de DNA na mitocôndria, mas a MAIOR PARTE fica no NÚCLEO." },
-      { id: "q2", pergunta: "O que a MITOSE produz?", fotoUrl: celulaAnimalImg,
+      { id: "q2", pergunta: "O que a MITOSE produz?", fotoUrl: cromossomosImg,
         cards: [
           { id: "a", emoji: "🧬", titulo: "Duas células idênticas à mãe", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌱", titulo: "Uma célula vegetal e uma animal", cor: "from-red-500 to-rose-700" },
