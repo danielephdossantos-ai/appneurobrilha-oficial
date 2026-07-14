@@ -190,10 +190,10 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "A coordenação do corpo funciona em duas velocidades: RÁPIDA (nervoso) e LENTA (endócrino).",
     instrucao: "🍕 Toque nas fatias",
-    fotoUrl: cerebroImg,
+    fotoUrl: neuroniosImg,
     fatias: [
-      { id: "rapido", rotulo: "Rápido (Nervoso)", emoji: "⚡", percentual: 55, cor: "#6366f1", descricao: "Sinal elétrico. Milissegundos. Ideal para reação imediata e movimento.", exemplos: ["Reflexo", "Movimento voluntário", "Sentidos"], fotoUrl: cerebroImg },
-      { id: "lento", rotulo: "Lento (Endócrino)", emoji: "💧", percentual: 45, cor: "#ec4899", descricao: "Hormônios no sangue. Minutos a anos. Ideal para crescimento e metabolismo.", exemplos: ["Insulina", "Puberdade", "Homeostase"], fotoUrl: hormonalImg },
+      { id: "rapido", rotulo: "Rápido (Nervoso)", emoji: "⚡", percentual: 55, cor: "#6366f1", descricao: "Sinal elétrico. Milissegundos. Ideal para reação imediata e movimento.", exemplos: ["Reflexo", "Movimento voluntário", "Sentidos"], fotoUrl: neuroniosImg },
+      { id: "lento", rotulo: "Lento (Endócrino)", emoji: "💧", percentual: 45, cor: "#ec4899", descricao: "Hormônios no sangue. Minutos a anos. Ideal para crescimento e metabolismo.", exemplos: ["Insulina", "Puberdade", "Homeostase"], fotoUrl: glandulasImg },
     ],
     falaFinal:
       "Corpo saudável = os dois sistemas em equilíbrio. Fim do Setor 2.",
