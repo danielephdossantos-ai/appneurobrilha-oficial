@@ -158,34 +158,49 @@ function Section({
   );
 }
 
-/** Botão de áudio em inglês (falante nativo). */
+/** Botão de áudio em inglês (falante nativo) + botão "devagar". */
 function PlayEn({ text, size = "md" }: { text: string; size?: "sm" | "md" }) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState<"normal" | "slow" | null>(null);
   const cls =
-    size === "sm"
-      ? "w-9 h-9 text-sm"
-      : "w-11 h-11 text-base";
+    size === "sm" ? "w-9 h-9 text-sm" : "w-11 h-11 text-base";
+  const play = async (mode: "normal" | "slow") => {
+    if (playing) {
+      stopSpeakingEn();
+      setPlaying(null);
+      return;
+    }
+    setPlaying(mode);
+    await speakEnglish(text, {
+      rate: mode === "slow" ? 0.55 : 0.9,
+      onEnd: () => setPlaying(null),
+    });
+  };
   return (
-    <button
-      onClick={async () => {
-        if (playing) {
-          stopSpeakingEn();
-          setPlaying(false);
-          return;
-        }
-        setPlaying(true);
-        await speakEnglish(text, { onEnd: () => setPlaying(false) });
-      }}
-      className={`${cls} rounded-full grid place-items-center shrink-0 transition ${
-        playing ? "bg-rose-500 text-white" : "bg-sky-500 text-white hover:bg-sky-600"
-      }`}
-      aria-label={playing ? "Parar" : "Ouvir em inglês"}
-      title="Ouvir em inglês"
-    >
-      <Volume2 size={size === "sm" ? 16 : 20} />
-    </button>
+    <div className="flex items-center gap-1.5 shrink-0">
+      <button
+        onClick={() => play("normal")}
+        className={`${cls} rounded-full grid place-items-center transition ${
+          playing === "normal" ? "bg-rose-500 text-white" : "bg-sky-500 text-white hover:bg-sky-600"
+        }`}
+        aria-label={playing === "normal" ? "Parar" : "Ouvir em inglês"}
+        title="Ouvir em inglês (normal)"
+      >
+        <Volume2 size={size === "sm" ? 16 : 20} />
+      </button>
+      <button
+        onClick={() => play("slow")}
+        className={`${cls} rounded-full grid place-items-center transition text-lg ${
+          playing === "slow" ? "bg-rose-500 text-white" : "bg-amber-400 text-white hover:bg-amber-500"
+        }`}
+        aria-label={playing === "slow" ? "Parar" : "Ouvir devagar"}
+        title="Ouvir devagar 🐢"
+      >
+        🐢
+      </button>
+    </div>
   );
 }
+
 
 /** Botão de narração em português (Aurora explica). */
 function PlayPt({ text }: { text: string }) {
