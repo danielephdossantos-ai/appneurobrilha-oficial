@@ -17,6 +17,7 @@ const SERIES_LABEL: Record<string, string> = {
   "3ano": "3º Ano",
   "4ano": "4º Ano",
   "5ano": "5º Ano",
+  "6ano": "6º Ano",
 };
 
 const MASCOTE = {
