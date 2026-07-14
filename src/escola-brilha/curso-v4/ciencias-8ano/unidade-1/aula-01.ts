@@ -223,7 +223,7 @@ export const aula01: AulaGeoV1 = {
         ],
         feedbackAcerto: "Sim. Gene = pedaço de DNA com informação para uma proteína.",
         feedbackErro: "Gene NÃO é organela — é um trecho de DNA com uma receita." },
-      { id: "q3", pergunta: "Qual a diferença entre MITOSE e MEIOSE?", fotoUrl: celulaAnimalImg,
+      { id: "q3", pergunta: "Qual a diferença entre MITOSE e MEIOSE?", fotoUrl: cromossomosImg,
         opcoes: [
           { id: "a", texto: "Mitose gera 2 células idênticas; meiose gera 4 células diferentes (gametas)", correta: true },
           { id: "b", texto: "Mitose acontece só em plantas; meiose só em animais" },
