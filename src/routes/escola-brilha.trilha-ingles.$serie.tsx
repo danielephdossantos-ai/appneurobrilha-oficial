@@ -13,6 +13,7 @@ import type { MascotePersonagem } from "@/escola-brilha/mascotes-personagens";
 
 const SERIES_LABEL: Record<string, string> = {
   "1ano": "1º Ano",
+  "2ano": "2º Ano",
 };
 
 const MASCOTE = {
