@@ -140,9 +140,9 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Do início ao fim da divisão celular:",
     paradas: [
       { id: "intersefase", emoji: "🧬", rotulo: "1. Intérfase", descricao: "Célula duplica o DNA.", fotoUrl: dnaImg },
-      { id: "prof", emoji: "🎯", rotulo: "2. Prófase", descricao: "Cromossomos se condensam. Membrana nuclear desaparece.", fotoUrl: celulaAnimalImg },
-      { id: "meta", emoji: "➖", rotulo: "3. Metáfase", descricao: "Cromossomos se alinham no centro.", fotoUrl: celulaAnimalImg },
-      { id: "ana", emoji: "↔️", rotulo: "4. Anáfase", descricao: "Cromátides-irmãs se separam.", fotoUrl: celulaAnimalImg },
+      { id: "prof", emoji: "🎯", rotulo: "2. Prófase", descricao: "Cromossomos se condensam. Membrana nuclear desaparece.", fotoUrl: cromossomosImg },
+      { id: "meta", emoji: "➖", rotulo: "3. Metáfase", descricao: "Cromossomos se alinham no centro.", fotoUrl: cromossomosImg },
+      { id: "ana", emoji: "↔️", rotulo: "4. Anáfase", descricao: "Cromátides-irmãs se separam.", fotoUrl: cromossomosImg },
       { id: "telo", emoji: "🔀", rotulo: "5. Telófase", descricao: "Duas células-filhas se formam.", fotoUrl: celulaAnimalImg },
     ],
     ordemCerta: ["intersefase", "prof", "meta", "ana", "telo"],
