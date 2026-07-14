@@ -54,7 +54,7 @@ export function PlayerEnglishV1({ onSair, onConcluir, lesson = defaultLesson }: 
 
 function MainSections({ onConcluir }: { onConcluir: () => void }) {
   const lesson = useLesson();
-  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK } = lesson;
+  const { meta, READING, GRAMMAR, SONG, HUNTER, PAINT, MEMORY, VIRTUAL_ROOM, BOOK, PACK, COMMANDS, CULTURE } = lesson;
 
   // Monta lista de seções na ordem certa, pulando as opcionais ausentes.
   const sections: { label: string; title: string; node: React.ReactNode }[] = [
@@ -68,11 +68,14 @@ function MainSections({ onConcluir }: { onConcluir: () => void }) {
     { label: "Real Life", title: "In real life", node: <RealLife /> },
   ];
   if (SONG) sections.push({ label: "Song", title: SONG.title, node: <Song /> });
-  if (HUNTER) sections.push({ label: "Mini Game", title: "Color / Object Hunter", node: <Hunter /> });
+  if (HUNTER) sections.push({ label: "Mini Game", title: "Classroom Explorer", node: <Hunter /> });
+  if (COMMANDS) sections.push({ label: "Mini Game", title: "Follow the Teacher", node: <Commands /> });
+  if (PACK) sections.push({ label: "Mini Game", title: "Pack My Backpack", node: <Pack /> });
   if (PAINT) sections.push({ label: "Mini Game", title: "Paint the Picture", node: <Paint /> });
   if (MEMORY) sections.push({ label: "Mini Game", title: "Memory Game", node: <Memory /> });
   sections.push({ label: "Mini Game", title: "Match the word!", node: <MiniGameMatch /> });
   sections.push({ label: "Quiz", title: "Quick check", node: <Quiz /> });
+  if (CULTURE) sections.push({ label: "Cultura", title: CULTURE.title, node: <Culture /> });
   if (BOOK) sections.push({ label: "Livrinho", title: BOOK.title, node: <Book /> });
   if (VIRTUAL_ROOM) sections.push({ label: "Missão", title: "Explore the room!", node: <VirtualRoom /> });
   sections.push({
