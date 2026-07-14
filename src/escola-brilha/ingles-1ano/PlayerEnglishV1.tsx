@@ -1232,10 +1232,7 @@ function Hunter() {
               {o.img ? (
                 <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
               ) : (
-                <div className="text-center">
-                  <div className="text-4xl leading-none">{extractEmoji(o.label)}</div>
-                  <div className="text-[11px] font-bold mt-1 text-slate-700">{stripEmoji(o.label)}</div>
-                </div>
+                <div className="text-sm font-bold text-slate-700 text-center px-1">{o.label}</div>
               )}
             </button>
           );
