@@ -103,6 +103,7 @@ function scrollToId(id: string) {
 /* ============================= UI base ============================= */
 
 function SectionCover({ onStart }: { onStart: () => void }) {
+  const { meta } = useLesson();
   return (
     <div className="text-center py-10">
       <motion.div
@@ -110,10 +111,10 @@ function SectionCover({ onStart }: { onStart: () => void }) {
         animate={{ scale: 1, opacity: 1 }}
         className="inline-block bg-gradient-to-br from-sky-400 to-indigo-500 text-white rounded-3xl px-8 py-6 shadow-xl"
       >
-        <div className="text-xs uppercase tracking-widest opacity-80">Lesson 1</div>
-        <div className="text-3xl font-black mt-1">Hello, friend!</div>
+        <div className="text-xs uppercase tracking-widest opacity-80">{meta.coverKicker}</div>
+        <div className="text-3xl font-black mt-1">{meta.coverTitle}</div>
         <div className="text-sm opacity-90 mt-2 max-w-xs mx-auto">
-          Hoje você vai aprender a cumprimentar e dizer seu nome em inglês.
+          {meta.coverSubtitle}
         </div>
       </motion.div>
       <div className="mt-6">
