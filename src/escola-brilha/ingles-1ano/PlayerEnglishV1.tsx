@@ -1229,7 +1229,14 @@ function Hunter() {
                   : "bg-white border-slate-200 hover:border-sky-300"
               }`}
             >
-              <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
+              {o.img ? (
+                <img src={o.img} alt={o.label} className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-center">
+                  <div className="text-4xl leading-none">{extractEmoji(o.label)}</div>
+                  <div className="text-[11px] font-bold mt-1 text-slate-700">{stripEmoji(o.label)}</div>
+                </div>
+              )}
             </button>
           );
         })}
