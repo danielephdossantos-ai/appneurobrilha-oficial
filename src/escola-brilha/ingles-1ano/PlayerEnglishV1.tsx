@@ -775,10 +775,14 @@ function highlightWords(text: string, words: string[]) {
 
 function Writing() {
   const { WRITING } = useLesson();
+  const translate = useTranslator();
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<string | null>(null);
+  const [tapped, setTapped] = useState<string | null>(null);
   const q = WRITING[i];
   const correct = pick === q.answer;
+  const fullSentence = q.prompt.replace("___", pick ?? q.answer);
+  const promptPt = translate(fullSentence);
   return (
     <div>
       <div className="rounded-xl bg-slate-50 p-4 text-center">
@@ -798,28 +802,57 @@ function Writing() {
             </span>
           ))}
         </div>
+        {promptPt && pick && (
+          <div className="text-sm text-slate-600 italic mt-2">🇧🇷 {promptPt}</div>
+        )}
         <div className="text-xs text-slate-500 mt-2 italic">Dica: {q.hint}</div>
       </div>
-      <div className="grid grid-cols-3 gap-2 mt-3">
-        {q.options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => {
-              setPick(opt);
-              if (opt === q.answer) speakEnglish(q.prompt.replace("___", opt));
-            }}
-            className={`py-2 rounded-lg font-bold border-2 transition ${
-              pick === opt
-                ? opt === q.answer
-                  ? "bg-emerald-500 text-white border-emerald-500"
-                  : "bg-rose-500 text-white border-rose-500"
-                : "bg-white text-slate-700 border-slate-200 hover:border-sky-300"
-            }`}
-          >
-            {opt}
-          </button>
-        ))}
+      <div className="text-[11px] text-slate-500 text-center mt-3 mb-1">
+        👆 Toque em uma palavra pra ver o significado
       </div>
+      <div className="grid grid-cols-3 gap-2">
+        {q.options.map((opt) => {
+          const optPt = translate(opt);
+          const isTapped = tapped === opt;
+          return (
+            <button
+              key={opt}
+              onClick={() => {
+                if (pick === null && !isTapped && optPt) {
+                  // primeiro toque: mostra tradução + fala
+                  setTapped(opt);
+                  speakEnglish(opt);
+                  return;
+                }
+                setTapped(null);
+                setPick(opt);
+                if (opt === q.answer) speakEnglish(q.prompt.replace("___", opt));
+              }}
+              className={`py-2 px-1 rounded-lg font-bold border-2 transition flex flex-col items-center ${
+                pick === opt
+                  ? opt === q.answer
+                    ? "bg-emerald-500 text-white border-emerald-500"
+                    : "bg-rose-500 text-white border-rose-500"
+                  : isTapped
+                    ? "bg-amber-50 text-slate-800 border-amber-400"
+                    : "bg-white text-slate-700 border-slate-200 hover:border-sky-300"
+              }`}
+            >
+              <span>{opt}</span>
+              {(isTapped || pick) && optPt && (
+                <span className={`text-[10px] italic mt-0.5 ${pick === opt ? "text-white/90" : "text-slate-500"}`}>
+                  = {optPt}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {tapped && !pick && (
+        <div className="mt-2 text-[11px] text-center text-amber-700">
+          Toque de novo pra escolher <b>{tapped}</b> como resposta.
+        </div>
+      )}
       {pick && (
         <div className={`mt-3 text-sm font-bold ${correct ? "text-emerald-600" : "text-rose-600"}`}>
           {correct ? "✔ Great job!" : `✘ Não é essa. A resposta é "${q.answer}".`}
