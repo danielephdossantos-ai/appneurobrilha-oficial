@@ -294,18 +294,18 @@ function EscolaBrilhaCatalogo() {
 
                   {aberta && (
                     <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
-                      {serie === "1º Ano" && (
+                      {(serie === "1º Ano" || serie === "2º Ano") && (
                         <Link
                           to="/escola-brilha/trilha-ingles/$serie"
-                          params={{ serie: "1ano" }}
+                          params={{ serie: serie === "1º Ano" ? "1ano" : "2ano" }}
                           className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                           style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}
                         >
                           <div className="text-[10px] uppercase tracking-widest opacity-90">
-                            🇺🇸 Inglês · 1º Ano
+                            🇺🇸 Inglês · {serie}
                           </div>
                           <div className="text-lg leading-tight mt-0.5">
-                            My First English Adventure
+                            {serie === "1º Ano" ? "My First English Adventure" : "My English Journey"}
                           </div>
                           <div className="text-[11px] font-bold opacity-90 mt-1">
                             Trilha estilo Duolingo — abrir mapa de aulas →
