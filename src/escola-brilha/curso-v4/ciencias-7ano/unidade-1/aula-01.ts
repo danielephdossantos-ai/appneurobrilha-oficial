@@ -63,7 +63,12 @@ export const aula01: AulaGeoV1 = {
       { id: "mitose", capa: "MITOSE", emoji: "🧬", cor: "from-indigo-500 to-purple-700", conteudo: "Divisão celular que gera 2 células idênticas. Base do crescimento, regeneração e reprodução assexuada. Veja em tempo real: cromossomos se alinham e se separam.", exemplo: "Ex.: cicatrização de um corte na pele.", videoUrl: mitoseVideo.url },
       { id: "cloroplasto", capa: "CLOROPLASTO", emoji: "🌱", cor: "from-emerald-500 to-green-700", conteudo: "Organela EXCLUSIVA de células vegetais e algas. Contém clorofila (verde) e faz FOTOSSÍNTESE. Veja a corrente citoplasmática movendo cloroplastos.", exemplo: "Ex.: folha viva ao microscópio óptico.", videoUrl: cloroplastosVideo.url },
       { id: "tecido", capa: "TECIDO", emoji: "🧵", cor: "from-rose-500 to-pink-700", conteudo: "Conjunto de células SEMELHANTES que trabalham juntas na mesma função.", exemplo: "Ex.: tecido muscular = fibras alongadas que contraem.", fotoUrl: tecidosImg },
-      { id: "orgao", capa: "ÓRGÃO", emoji: "🫀", cor: "from-red-500 to-rose-700", conteudo: "Estrutura formada por VÁRIOS TECIDOS diferentes que juntos cumprem uma função específica.", exemplo: "Ex.: coração = muscular + conjuntivo + nervoso + epitelial.", fotoUrl: niveisImg },
+      { id: "orgao", capa: "ÓRGÃO", emoji: "🫀", cor: "from-red-500 to-rose-700", conteudo: "Estrutura formada por VÁRIOS TECIDOS diferentes que juntos cumprem uma função específica.", exemplo: "Ex.: coração = tecido muscular + tecido conjuntivo + tecido nervoso + tecido epitelial.", fotoUrl: tecidosImg, partes: [
+        { titulo: "Tecido muscular", texto: "Contrai e faz o coração bater." },
+        { titulo: "Tecido conjuntivo", texto: "Sustenta, une e dá resistência ao órgão." },
+        { titulo: "Tecido nervoso", texto: "Conduz sinais que regulam os batimentos." },
+        { titulo: "Tecido epitelial", texto: "Reveste e protege superfícies internas e externas." },
+      ] },
     ],
     falaFinal:
       "Célula, mitose, cloroplasto, tecido, órgão. Cinco palavras que abrem a porta da Biologia.",
