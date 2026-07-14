@@ -33,13 +33,15 @@ export interface WritingBlank {
   answer: string;
   hint: string;
   options: string[];
+  explain?: string; // explicação exibida após responder
 }
 
 export interface QuizQ {
   q: string;
   qEn?: string;
   img?: string;
-  options: { text: string; correct?: boolean }[];
+  options: { text: string; correct?: boolean; explain?: string }[];
+  explain?: string; // explicação geral (fallback quando a opção não tem)
 }
 
 export interface RealLifeItem {
