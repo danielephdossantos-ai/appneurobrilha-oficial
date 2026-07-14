@@ -942,11 +942,23 @@ function MiniGameMatch() {
           })}
         </div>
       </div>
-      {wrong && (
-        <div className="mt-3 text-center text-sm font-bold text-rose-600">
-          Ops! Tente de novo 💪
-        </div>
-      )}
+      {wrong && (() => {
+        const wEn = pool.find((p) => p.id === wrong.en)!;
+        const wPt = pool.find((p) => p.id === wrong.pt)!;
+        return (
+          <div className="mt-3 rounded-xl bg-rose-50 border-2 border-rose-200 p-3 text-sm text-rose-800">
+            <div className="font-black mb-1">Ops! Ainda não é essa 💪</div>
+            <div>
+              <b>{wEn.en}</b> em português é <b>“{wEn.pt}”</b>.
+            </div>
+            <div className="text-rose-700/80 mt-0.5">
+              <b>“{wPt.pt}”</b> é a tradução de <b>{wPt.en}</b>.
+            </div>
+            <div className="mt-1 text-xs text-rose-600">Toque de novo em <b>{wEn.en}</b> e escolha a resposta certa.</div>
+          </div>
+        );
+      })()}
+
       {done && (
         <div className="mt-4 rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center text-emerald-700 font-black">
           <Sparkles className="inline mr-1" size={18} /> Você conectou tudo!
