@@ -138,7 +138,7 @@ const lesson: LessonData = {
       { promptEn: "'Weekend' é:", promptPt: "'Weekend' é:", targetLabel: "Fim de semana", objects: [
         { id: "a", label: "Fim de semana", img: "", isTarget: true },
         { id: "b", label: "Semana", img: "" },
-        { id: "c", label: "Hora" },
+        { id: "c", label: "Hora", img: "" },
       ]},
       { promptEn: "Frequência 100%:", promptPt: "Frequência 100%:", targetLabel: "always", objects: [
         { id: "a", label: "never", img: "" },
