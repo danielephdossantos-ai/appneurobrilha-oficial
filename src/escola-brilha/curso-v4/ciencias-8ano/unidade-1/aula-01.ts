@@ -161,7 +161,7 @@ export const aula01: AulaGeoV1 = {
     subtitulo: "Do DNA à formação de tecidos",
     paragrafos: [
       { id: "p1", texto: "PROBLEMA: como um único óvulo fecundado dá origem a um corpo com 37 trilhões de células? A resposta é MITOSE repetida bilhões de vezes, controlada por genes do DNA.", chaves: ["mitose", "genes"], definicoes: { mitose: "Divisão que gera 2 células-filhas idênticas.", genes: "Trechos de DNA com receitas para proteínas." }, fotoUrl: dnaImg },
-      { id: "p2", texto: "OBSERVAÇÃO: antes de cada divisão, a célula DUPLICA todo o DNA (intérfase). Depois, cromossomos condensam, alinham, separam e a célula parte-se em duas. Todo o processo demora horas.", chaves: ["cromossomos"], definicoes: { cromossomos: "DNA condensado em bastões visíveis ao microscópio." }, fotoUrl: celulaAnimalImg },
+      { id: "p2", texto: "OBSERVAÇÃO: antes de cada divisão, a célula DUPLICA todo o DNA (intérfase). Depois, cromossomos condensam, alinham, separam e a célula parte-se em duas. Todo o processo demora horas.", chaves: ["cromossomos"], definicoes: { cromossomos: "DNA condensado em bastões visíveis ao microscópio." }, fotoUrl: cromossomosImg },
       { id: "p3", texto: "CONCLUSÃO: a continuidade da vida depende de dois pilares — a MOLÉCULA de DNA (informação) e o PROCESSO de mitose (execução). Erros na cópia podem gerar mutações; algumas são benéficas (evolução), outras causam doenças.", chaves: ["mutações"], definicoes: { mutações: "Alterações na sequência do DNA." }, fotoUrl: dnaImg },
     ],
     falaFinal:
