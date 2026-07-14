@@ -246,7 +246,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-cyan-500 to-sky-700",
         rect: { x: 5, y: 45, w: 90, h: 45 },
         descricao:
-          "Aqui moram as ferramentas: microscópio, tubos, béquer e placas. Servem pra INVESTIGAR.",,
+          "Aqui moram as ferramentas: microscópio, tubos, béquer e placas. Servem pra INVESTIGAR.",
         fotoUrl: mapaCamu1_instrumentosImg,
       },
       {
@@ -256,7 +256,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-fuchsia-500 to-purple-700",
         rect: { x: 20, y: 5, w: 60, h: 35 },
         descricao:
-          "Aqui moram os 7 cristais de energia. Cada um destrava uma área da Ciência.",,
+          "Aqui moram os 7 cristais de energia. Cada um destrava uma área da Ciência.",
         fotoUrl: mapaCamu1_cristaisImg,
       },
     ],

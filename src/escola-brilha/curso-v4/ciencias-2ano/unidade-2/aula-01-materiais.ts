@@ -175,7 +175,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌳",
         cor: "from-emerald-500 to-green-700",
         rect: { x: 5, y: 40, w: 45, h: 50 },
-        descricao: "Madeira e vidro vêm de coisas da natureza: árvores e areia derretida.",,
+        descricao: "Madeira e vidro vêm de coisas da natureza: árvores e areia derretida.",
         fotoUrl: mapaCamu2_naturaisImg,
       },
       {
@@ -184,7 +184,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-purple-500 to-fuchsia-700",
         rect: { x: 50, y: 40, w: 45, h: 50 },
-        descricao: "Plástico e metal são fabricados em indústrias, transformando o que vem da natureza.",,
+        descricao: "Plástico e metal são fabricados em indústrias, transformando o que vem da natureza.",
         fotoUrl: mapaCamu2_industriaisImg,
       },
     ],
