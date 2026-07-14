@@ -57,10 +57,10 @@ export const aula01: AulaGeoV1 = {
     aurora: "Cinco conceitos-chave da fisiologia integrada.",
     instrucao: "Vocabulário do corpo integrado",
     cadernos: [
-      { id: "neuronio", capa: "NEURÔNIO", emoji: "⚡", cor: "from-sky-500 to-cyan-700", conteudo: "Célula do sistema nervoso especializada em transmitir impulsos elétricos. Tem dendritos (recebem), corpo celular e axônio (envia).", exemplo: "Ex.: ~86 bilhões no cérebro humano.", fotoUrl: cerebroImg },
-      { id: "sinapse", capa: "SINAPSE", emoji: "🔌", cor: "from-indigo-500 to-purple-700", conteudo: "Ponto de comunicação entre dois neurônios. Usa neurotransmissores (dopamina, serotonina).", exemplo: "Ex.: aprendizagem cria novas sinapses.", fotoUrl: cerebroImg },
-      { id: "hormonio", capa: "HORMÔNIO", emoji: "💧", cor: "from-pink-500 to-rose-700", conteudo: "Mensageiro químico produzido por glândulas endócrinas. Viaja pelo sangue e age em órgãos-alvo.", exemplo: "Ex.: insulina controla açúcar; adrenalina prepara para lutar/fugir.", fotoUrl: hormonalImg },
-      { id: "puberdade", capa: "PUBERDADE", emoji: "🌱", cor: "from-fuchsia-500 to-pink-700", conteudo: "Fase de maturação sexual: hipófise libera hormônios que ativam testículos (testosterona) e ovários (estrogênio).", exemplo: "Ex.: entre 9-14 anos, com grande variação individual.", fotoUrl: hormonalImg },
+      { id: "neuronio", capa: "NEURÔNIO", emoji: "⚡", cor: "from-sky-500 to-cyan-700", conteudo: "Célula do sistema nervoso especializada em transmitir impulsos elétricos. Tem dendritos (recebem), corpo celular e axônio (envia).", exemplo: "Ex.: ~86 bilhões no cérebro humano.", fotoUrl: neuroniosImg },
+      { id: "sinapse", capa: "SINAPSE", emoji: "🔌", cor: "from-indigo-500 to-purple-700", conteudo: "Ponto de comunicação entre dois neurônios. Usa neurotransmissores (dopamina, serotonina).", exemplo: "Ex.: aprendizagem cria novas sinapses.", fotoUrl: neuroniosImg },
+      { id: "hormonio", capa: "HORMÔNIO", emoji: "💧", cor: "from-pink-500 to-rose-700", conteudo: "Mensageiro químico produzido por glândulas endócrinas. Viaja pelo sangue e age em órgãos-alvo.", exemplo: "Ex.: insulina controla açúcar; adrenalina prepara para lutar/fugir.", fotoUrl: glandulasImg },
+      { id: "puberdade", capa: "PUBERDADE", emoji: "🌱", cor: "from-fuchsia-500 to-pink-700", conteudo: "Fase de maturação sexual: hipófise libera hormônios que ativam testículos (testosterona) e ovários (estrogênio).", exemplo: "Ex.: entre 9-14 anos, com grande variação individual.", fotoUrl: adolescentesImg },
       { id: "homeostase", capa: "HOMEOSTASE", emoji: "⚖️", cor: "from-emerald-500 to-teal-700", conteudo: "Manutenção do EQUILÍBRIO interno (temperatura, açúcar, pH) apesar das variações externas.", exemplo: "Ex.: você sua no calor e treme no frio.", fotoUrl: circulatorioImg },
     ],
     falaFinal:
