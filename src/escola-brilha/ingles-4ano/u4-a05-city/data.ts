@@ -160,27 +160,27 @@ const lesson: LessonData = {
   MEMORY: {
     intro: "Pares da cidade!",
     pairs: [
-      { id: "a", en: "Hospital 🏥", pt: "Hospital", img: IMG.SCHOOL },
-      { id: "b", en: "Museum 🖼️", pt: "Museu", img: IMG.CLASSROOM },
-      { id: "c", en: "Library 📚", pt: "Biblioteca", img: IMG.CLASSROOM },
-      { id: "d", en: "Bakery 🥖", pt: "Padaria", img: IMG.SCHOOL },
+      { id: "a", en: "Hospital 🏥", pt: "Hospital", img: IMG.HOSPITAL },
+      { id: "b", en: "Museum 🖼️", pt: "Museu", img: IMG.MUSEUM },
+      { id: "c", en: "Library 📚", pt: "Biblioteca", img: IMG.LIBRARY },
+      { id: "d", en: "Bakery 🥖", pt: "Padaria", img: IMG.BAKERY },
     ],
   },
   BOOK: {
     title: "My City Guide",
     intro: "Seu guia da cidade!",
     pages: [
-      { en: "Welcome to my city!", pt: "Bem-vindo à minha cidade!", img: IMG.SCHOOL, badge: "🏙️" },
-      { en: "The museum — Main Street.", pt: "O museu — Rua Principal.", img: IMG.CLASSROOM, badge: "🖼️" },
-      { en: "The library — next to the school.", pt: "A biblioteca — ao lado da escola.", img: IMG.CLASSROOM, badge: "📚" },
-      { en: "The bakery — on the corner.", pt: "A padaria — na esquina.", img: IMG.SCHOOL, badge: "🥖" },
-      { en: "The park — in front of my house.", pt: "O parque — em frente à minha casa.", img: IMG.RAINBOW, badge: "🌳" },
-      { en: "Come visit! It's amazing!", pt: "Venha visitar! É incrível!", img: IMG.SCHOOL, badge: "⭐" },
+      { en: "Welcome to my city!", pt: "Bem-vindo à minha cidade!", img: IMG.CITY_COVER, badge: "🏙️" },
+      { en: "The museum — Main Street.", pt: "O museu — Rua Principal.", img: IMG.MUSEUM, badge: "🖼️" },
+      { en: "The library — next to the school.", pt: "A biblioteca — ao lado da escola.", img: IMG.LIBRARY, badge: "📚" },
+      { en: "The bakery — on the corner.", pt: "A padaria — na esquina.", img: IMG.BAKERY, badge: "🥖" },
+      { en: "The park — in front of my house.", pt: "O parque — em frente à minha casa.", img: IMG.PARK, badge: "🌳" },
+      { en: "Come visit! It's amazing!", pt: "Venha visitar! É incrível!", img: IMG.CITY_COVER, badge: "⭐" },
     ],
   },
   VIRTUAL_ROOM: {
     intro: "O mapa virtual! Toque em cada lugar.",
-    img: IMG.SCHOOL,
+    img: IMG.CITY_COVER,
     items: [
       { en: "Museum", pt: "Museu", emoji: "🖼️" },
       { en: "Library", pt: "Biblioteca", emoji: "📚" },
