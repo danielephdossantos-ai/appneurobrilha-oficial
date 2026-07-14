@@ -209,7 +209,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: microscopioImg,
     perguntas: [
-      { id: "q1", pergunta: "Quais são os três princípios da teoria celular?", fotoUrl: celulaAnimalImg,
+      { id: "q1", pergunta: "Quais são os três princípios da teoria celular?", fotoUrl: teoriaCelularImg,
         opcoes: [
           { id: "a", texto: "Todo ser vivo é feito de células; célula é unidade funcional; toda célula vem de outra célula", correta: true },
           { id: "b", texto: "Toda vida vem do sol; célula é como um tijolo; DNA existe só em animais" },
