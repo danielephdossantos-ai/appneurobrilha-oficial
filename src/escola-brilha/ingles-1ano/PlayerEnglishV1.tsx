@@ -854,8 +854,20 @@ function Writing() {
         </div>
       )}
       {pick && (
-        <div className={`mt-3 text-sm font-bold ${correct ? "text-emerald-600" : "text-rose-600"}`}>
-          {correct ? "✔ Great job!" : `✘ Não é essa. A resposta é "${q.answer}".`}
+        <div
+          className={`mt-3 rounded-xl border-2 p-3 text-sm font-semibold ${
+            correct
+              ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+              : "border-rose-300 bg-rose-50 text-rose-800"
+          }`}
+        >
+          <div className="text-xs font-black uppercase tracking-widest mb-1 opacity-70">
+            {correct ? "✔ Explicação" : "✘ Vamos entender"}
+          </div>
+          {correct
+            ? `"${q.answer}" completa a frase: ${fullSentence}. ${q.hint ? `Dica: ${q.hint}` : ""}`
+            : `A resposta certa é "${q.answer}". Frase completa: ${q.prompt.replace("___", q.answer)}. ${q.hint ? `Dica: ${q.hint}` : ""}`}
+          {q.explain && <div className="mt-1 opacity-90">{q.explain}</div>}
         </div>
       )}
       <div className="flex justify-between items-center mt-4">
