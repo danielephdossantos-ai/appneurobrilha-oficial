@@ -172,17 +172,47 @@ export const aula01: AulaGeoV1 = {
     falaFinal: "Você já classifica níveis ecológicos na hora. Vocabulário de biólogo de campo.",
   },
 
-  cena10_professorBrilha: {
-    tipo: "professorBrilhaChat",
-    aurora: "Fale com o Professor Brilha sobre ecologia.",
-    saudacao: "E aí. Dúvida sobre cadeia alimentar, biomas ou ecossistemas brasileiros? Pergunta.",
-    sugestoes: ["O que é bioma?", "Qual bioma mais ameaçado do Brasil?", "Como funciona uma cadeia alimentar?"],
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "Um ecossistema tem duas dimensões: fatores BIÓTICOS (vivos) e ABIÓTICOS (físicos).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: lagoImg,
+    fatias: [
+      { id: "bio", rotulo: "Biótico", emoji: "🦜", percentual: 50, cor: "#10b981", descricao: "Todos os seres vivos: plantas, animais, fungos, bactérias. Formam a comunidade biológica.", exemplos: ["Onças", "Árvores", "Bactérias do solo"], fotoUrl: mataImg },
+      { id: "abio", rotulo: "Abiótico", emoji: "💧", percentual: 50, cor: "#0ea5e9", descricao: "Fatores físicos e químicos: água, luz solar, temperatura, solo, ar. Base para a vida existir.", exemplos: ["Água", "Luz solar", "Solo"], fotoUrl: lagoImg },
+    ],
+    falaFinal: "Biótico + abiótico juntos = ECOSSISTEMA. Sem um dos dois, não há sistema.",
   },
 
-  cena11_proxima: {
-    tipo: "proximaHabilidade",
-    aurora: "Missão 3 concluída. Próximo laboratório: matéria e transformações químicas.",
-    proximaMissao: "Matéria e Transformações",
-    proximaHabilidade: "EF06CI02",
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "Última missão do Programa 3. 3 perguntas e sua Certificação de Ecólogo Júnior é liberada.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: mataImg,
+    perguntas: [
+      { id: "q1", pergunta: "O que diferencia uma COMUNIDADE de uma POPULAÇÃO?", fotoUrl: mataImg,
+        opcoes: [
+          { id: "a", texto: "População = 1 espécie; comunidade = várias espécies interagindo", correta: true },
+          { id: "b", texto: "Comunidade tem mais indivíduos que população" },
+        ],
+        feedbackAcerto: "Correto. Número de espécies é a chave — não o número de indivíduos.",
+        feedbackErro: "Não é quantidade de indivíduos — é quantidade de ESPÉCIES." },
+      { id: "q2", pergunta: "Qual o papel dos DECOMPOSITORES no ecossistema?", fotoUrl: decompImg,
+        opcoes: [
+          { id: "a", texto: "Reciclar matéria morta e devolver nutrientes ao solo", correta: true },
+          { id: "b", texto: "Caçar animais menores para se alimentar" },
+        ],
+        feedbackAcerto: "Sim. Sem decompositores, nutrientes ficariam presos em matéria morta.",
+        feedbackErro: "Decompositores não caçam — quebram matéria orgânica MORTA reciclando nutrientes." },
+      { id: "q3", pergunta: "Por que remover um predador de topo AFETA todo o ecossistema?", fotoUrl: predadorImg,
+        opcoes: [
+          { id: "a", texto: "Porque gera efeito cascata em todos os níveis abaixo", correta: true },
+          { id: "b", texto: "Porque só faz falta pra outros predadores" },
+        ],
+        feedbackAcerto: "Exato. Cascata trófica — presas explodem, vegetação some, rios erodem.",
+        feedbackErro: "Efeito atinge TODOS os níveis — presas, plantas, solo, água. Isso é cascata trófica." },
+    ],
+    selo: { nome: "Certificação de Ecólogo Júnior", subtitulo: "Academia Científica · Programa 3 concluído", emoji: "🌳", cor: "from-emerald-600 to-green-700" },
+    falaFinal: "Programa 3 concluído. Você entende como ecossistemas funcionam como redes.",
   },
 };

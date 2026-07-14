@@ -165,17 +165,47 @@ export const aula01: AulaGeoV1 = {
     falaFinal: "Você já classifica reações na hora. Isso é olho de químico.",
   },
 
-  cena10_professorBrilha: {
-    tipo: "professorBrilhaChat",
-    aurora: "Fale com o Professor Brilha sobre química.",
-    saudacao: "E aí. Dúvida sobre átomos, moléculas ou reações do dia a dia? Pergunta.",
-    sugestoes: ["Por que ferro enferruja?", "O que é átomo?", "Como fogo funciona?"],
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "Toda transformação da matéria se enquadra em duas categorias: FÍSICA (só muda estado/forma) ou QUÍMICA (cria substância nova).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: bancadaImg,
+    fatias: [
+      { id: "fis", rotulo: "Física", emoji: "🔄", percentual: 50, cor: "#0ea5e9", descricao: "Muda ESTADO ou FORMA — a substância continua a mesma. Geralmente reversível.", exemplos: ["Derreter gelo", "Dissolver sal", "Cortar papel"], fotoUrl: estadosImg },
+      { id: "qui", rotulo: "Química", emoji: "⚗️", percentual: 50, cor: "#f59e0b", descricao: "Cria SUBSTÂNCIA NOVA com propriedades diferentes. Geralmente irreversível.", exemplos: ["Queimar madeira", "Ferro enferrujando", "Cozinhar ovo"], fotoUrl: ferrugemImg },
+    ],
+    falaFinal: "Regra final: se a substância CONTINUA igual = física. Se surge substância NOVA = química.",
   },
 
-  cena11_proxima: {
-    tipo: "proximaHabilidade",
-    aurora: "Missão 4 concluída. Próximo laboratório: sentidos e luz.",
-    proximaMissao: "Sentidos e Luz",
-    proximaHabilidade: "EF06CI08",
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "Última missão do Programa 4. 3 perguntas e sua Certificação de Químico Júnior é liberada.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: bancadaImg,
+    perguntas: [
+      { id: "q1", pergunta: "O que caracteriza uma transformação QUÍMICA?", fotoUrl: ferrugemImg,
+        opcoes: [
+          { id: "a", texto: "Formação de uma substância NOVA com propriedades diferentes", correta: true },
+          { id: "b", texto: "Apenas mudança de temperatura" },
+        ],
+        feedbackAcerto: "Correto. Substância nova = química, sem exceção.",
+        feedbackErro: "Temperatura sozinha não define. O que define é o surgimento de SUBSTÂNCIA NOVA." },
+      { id: "q2", pergunta: "Ao passar gelo → água → vapor, o que acontece com as MOLÉCULAS de H₂O?", fotoUrl: moleculasImg,
+        opcoes: [
+          { id: "a", texto: "Continuam H₂O — só mudam o quanto se movem e se afastam", correta: true },
+          { id: "b", texto: "Viram substâncias químicas diferentes" },
+        ],
+        feedbackAcerto: "Sim. Mudança de estado é FÍSICA — molécula continua a mesma.",
+        feedbackErro: "H₂O continua sendo H₂O em qualquer estado. Só muda o quanto as moléculas se movem." },
+      { id: "q3", pergunta: "A Lei da Conservação da Massa (Lavoisier) diz que...", fotoUrl: bancadaImg,
+        opcoes: [
+          { id: "a", texto: "Na natureza, nada se cria nem se destrói, tudo se transforma", correta: true },
+          { id: "b", texto: "Massa sempre AUMENTA depois de uma reação" },
+        ],
+        feedbackAcerto: "Exato. Massa total antes = massa total depois. Princípio de 1789.",
+        feedbackErro: "Massa se CONSERVA — não aumenta nem diminui. Só se redistribui em novos produtos." },
+    ],
+    selo: { nome: "Certificação de Químico Júnior", subtitulo: "Academia Científica · Programa 4 concluído", emoji: "⚗️", cor: "from-amber-500 to-orange-700" },
+    falaFinal: "Programa 4 concluído. Você domina o vocabulário básico da química.",
   },
 };
