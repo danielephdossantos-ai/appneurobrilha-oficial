@@ -196,7 +196,7 @@ export const aula01: AulaGeoV1 = {
     fotoUrl: niveisImg,
     fatias: [
       { id: "info", rotulo: "Informação", emoji: "🧬", percentual: 40, cor: "#8b5cf6", descricao: "Núcleo + DNA + cromossomos + genes. Comanda o que a célula produz e quando se divide.", exemplos: ["DNA", "Gene", "Cromossomo"], fotoUrl: dnaImg },
-      { id: "meta", rotulo: "Metabolismo", emoji: "⚡", percentual: 60, cor: "#f59e0b", descricao: "Mitocôndria, retículo, Golgi. Produz energia (ATP), sintetiza e envia proteínas.", exemplos: ["Mitocôndria", "Ribossomo", "Golgi"], fotoUrl: celulaAnimalImg },
+      { id: "meta", rotulo: "Metabolismo", emoji: "⚡", percentual: 60, cor: "#f59e0b", descricao: "Mitocôndria, retículo, Golgi. Produz energia (ATP), sintetiza e envia proteínas.", exemplos: ["Mitocôndria", "Ribossomo", "Golgi"], fotoUrl: mitocondriaImg },
     ],
     falaFinal:
       "Informação e metabolismo integrados. Fim do Setor 1.",
