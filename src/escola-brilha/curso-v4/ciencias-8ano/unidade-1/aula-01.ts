@@ -60,7 +60,7 @@ export const aula01: AulaGeoV1 = {
       "Cinco conceitos-chave. Um traz microscopia real: mitose acelerada.",
     instrucao: "Vocabulário da célula",
     cadernos: [
-      { id: "teoria", capa: "TEORIA CELULAR", emoji: "📜", cor: "from-violet-500 to-purple-700", conteudo: "Três princípios: (1) todo ser vivo é feito de células, (2) a célula é a unidade funcional da vida, (3) toda célula vem de outra célula.", exemplo: "Formulada por Schleiden, Schwann e Virchow (séc. XIX).", fotoUrl: celulaAnimalImg },
+      { id: "teoria", capa: "TEORIA CELULAR", emoji: "📜", cor: "from-violet-500 to-purple-700", conteudo: "Três princípios: (1) todo ser vivo é feito de células, (2) a célula é a unidade funcional da vida, (3) toda célula vem de outra célula.", exemplo: "Formulada por Schleiden, Schwann e Virchow (séc. XIX).", fotoUrl: teoriaCelularImg },
       { id: "dna", capa: "DNA", emoji: "🧬", cor: "from-indigo-500 to-purple-700", conteudo: "Molécula em dupla-hélice que guarda o CÓDIGO GENÉTICO. Formada por 4 bases: A, T, C, G. Fica dentro do núcleo.", exemplo: "Ex.: 3 bilhões de pares de bases no genoma humano.", fotoUrl: dnaImg },
       { id: "gene", capa: "GENE", emoji: "🎯", cor: "from-fuchsia-500 to-pink-700", conteudo: "Trecho de DNA que carrega a RECEITA de uma característica ou proteína. O humano tem cerca de 20 mil genes.", exemplo: "Ex.: gene da cor dos olhos, gene da insulina.", fotoUrl: dnaImg },
       { id: "mitose", capa: "MITOSE", emoji: "✂️", cor: "from-sky-500 to-cyan-700", conteudo: "Divisão celular que gera DUAS células-filhas GENETICAMENTE IGUAIS. Base do crescimento, cicatrização e reprodução assexuada.", exemplo: "Ex.: cicatrização de um corte na pele.", videoUrl: mitoseVideo.url },
