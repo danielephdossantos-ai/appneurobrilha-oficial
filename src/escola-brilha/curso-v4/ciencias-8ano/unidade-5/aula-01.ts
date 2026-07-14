@@ -1,6 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
 import circuitoImg from "@/assets/ciencias-8ano/u5/circuito-eletrico.jpg";
 import painelImg from "@/assets/ciencias-8ano/u5/painel-solar.jpg";
+import chuveiroImg from "@/assets/ciencias-8ano/u5/chuveiro-eletrico.jpg";
+import hidreletricaImg from "@/assets/ciencias-8ano/u5/hidreletrica.jpg";
+import ledImg from "@/assets/ciencias-8ano/u5/lampada-led.jpg";
+import eolicaImg from "@/assets/ciencias-8ano/u5/turbinas-eolicas.jpg";
 
 /**
  * Ciências · 8º Ano · U5 · A01 — "Centro de Engenharia"
@@ -31,7 +35,7 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Problema: numa casa comum, qual aparelho consome MAIS energia elétrica em uma hora ligado?",
     pergunta: "Formule sua HIPÓTESE:",
-    fotoUrl: circuitoImg,
+    fotoUrl: ledImg,
     opcoes: [
       { id: "led", titulo: "Lâmpada LED (10 W)", subtitulo: "fica ligada muito tempo", emoji: "💡", cor: "from-slate-500 to-slate-700", fotoUrl: circuitoImg },
       { id: "chuveiro", titulo: "Chuveiro elétrico (5.500 W)", subtitulo: "esquenta água instantâneo", emoji: "🚿", cor: "from-emerald-500 to-teal-700", fotoUrl: painelImg },
