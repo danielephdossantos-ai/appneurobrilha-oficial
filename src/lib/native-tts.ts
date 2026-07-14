@@ -77,6 +77,8 @@ export interface SpeakOpts {
 
 const activeSpeechResolvers = new Set<() => void>();
 let speechRunId = 0;
+let lastPtText = "";
+let lastPtAt = 0;
 
 function resolveActiveSpeech() {
   activeSpeechResolvers.forEach((resolve) => resolve());
@@ -93,6 +95,15 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       return;
     }
     const synth = window.speechSynthesis;
+    const normalized = text.trim();
+    const now = Date.now();
+    if (!opts.queue && normalized === lastPtText && now - lastPtAt < 1200) {
+      opts.onEnd?.();
+      resolve();
+      return;
+    }
+    lastPtText = normalized;
+    lastPtAt = now;
     if (!opts.queue) {
       speechRunId += 1;
       synth.cancel();
