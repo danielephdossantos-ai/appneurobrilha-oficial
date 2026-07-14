@@ -1,6 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { PlayerEnglishV1 } from "@/escola-brilha/ingles-1ano/PlayerEnglishV1";
-import { getLesson } from "@/escola-brilha/ingles-1ano/lessons";
+import { getLessonByCursoAula } from "@/escola-brilha/ingles-lessons-index";
+const getLesson = (aula: string, curso?: string) =>
+  getLessonByCursoAula(curso ?? "ingles-1ano", aula);
 
 export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
   head: ({ params }) => {
