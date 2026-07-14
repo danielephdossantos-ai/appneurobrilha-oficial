@@ -37,10 +37,10 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Problema: você encosta a mão em uma superfície QUENTE. O que puxa a mão em fração de segundo?",
     pergunta: "Formule sua HIPÓTESE:",
-    fotoUrl: cerebroImg,
+    fotoUrl: arcoReflexoImg,
     opcoes: [
-      { id: "hormonio", titulo: "Um hormônio no sangue", subtitulo: "avisa o músculo", emoji: "💧", cor: "from-slate-500 to-slate-700", fotoUrl: hormonalImg },
-      { id: "reflexo", titulo: "Arco reflexo medular", subtitulo: "sinal vai à medula e volta ao músculo", emoji: "⚡", cor: "from-emerald-500 to-teal-700", fotoUrl: cerebroImg },
+      { id: "hormonio", titulo: "Um hormônio no sangue", subtitulo: "avisa o músculo", emoji: "💧", cor: "from-slate-500 to-slate-700", fotoUrl: glandulasImg },
+      { id: "reflexo", titulo: "Arco reflexo medular", subtitulo: "sinal vai à medula e volta ao músculo", emoji: "⚡", cor: "from-emerald-500 to-teal-700", fotoUrl: arcoReflexoImg },
       { id: "vontade", titulo: "Sua consciência pensou rápido", subtitulo: "cérebro decidiu", emoji: "🤔", cor: "from-red-500 to-rose-700", fotoUrl: cerebroImg },
     ],
     respostaCerta: "reflexo",
