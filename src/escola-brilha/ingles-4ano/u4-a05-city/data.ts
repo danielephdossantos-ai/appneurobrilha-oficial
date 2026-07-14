@@ -66,7 +66,7 @@ const lesson: LessonData = {
   ],
   READING: {
     title: "My Neighborhood",
-    img: IMG.SCHOOL,
+    img: IMG.CITY_COVER,
     parts: [
       { en: "The library is next to the school.", pt: "A biblioteca fica ao lado da escola.", highlight: ["next to"] },
       { en: "The bakery is on the corner.", pt: "A padaria fica na esquina.", highlight: ["corner"] },
