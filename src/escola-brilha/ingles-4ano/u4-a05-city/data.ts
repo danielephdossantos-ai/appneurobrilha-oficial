@@ -47,13 +47,13 @@ const lesson: LessonData = {
   ],
   STORY: [
     { img: IMG.LILY, en: "Lily is new in town and looks for the museum.", pt: "Lily é nova na cidade e procura o museu." },
-    { img: IMG.LILY, en: "She asks a friend: 'Excuse me, where is the museum?'", pt: "Ela pergunta: 'Com licença, onde é o museu?'" },
+    { img: IMG.CITY_COVER, en: "She asks a friend: 'Excuse me, where is the museum?'", pt: "Ela pergunta: 'Com licença, onde é o museu?'" },
     { img: IMG.BEN, en: "Ben says: 'Go straight two blocks.'", pt: "Ben: 'Siga reto duas quadras.'" },
-    { img: IMG.SCHOOL, en: "'Then turn right at the bakery.'", pt: "'Depois vire à direita na padaria.'" },
-    { img: IMG.CLASSROOM, en: "'The museum is next to the library.'", pt: "'O museu fica ao lado da biblioteca.'" },
+    { img: IMG.BAKERY, en: "'Then turn right at the bakery.'", pt: "'Depois vire à direita na padaria.'" },
+    { img: IMG.LIBRARY, en: "'The museum is next to the library.'", pt: "'O museu fica ao lado da biblioteca.'" },
     { img: IMG.LILY, en: "'Thank you very much!' says Lily.", pt: "'Muito obrigada!' diz Lily." },
-    { img: IMG.CLASSROOM, en: "Lily finds the museum easily!", pt: "Lily encontra o museu fácil!" },
-    { img: IMG.RAINBOW, en: "The city is fun when you know the way.", pt: "A cidade é legal quando você sabe o caminho." },
+    { img: IMG.MUSEUM, en: "Lily finds the museum easily!", pt: "Lily encontra o museu fácil!" },
+    { img: IMG.CITY_COVER, en: "The city is fun when you know the way.", pt: "A cidade é legal quando você sabe o caminho." },
   ],
   DIALOG: [
     { who: "Lily", img: IMG.LILY, en: "Excuse me, where is the hospital?", pt: "Com licença, onde é o hospital?" },
