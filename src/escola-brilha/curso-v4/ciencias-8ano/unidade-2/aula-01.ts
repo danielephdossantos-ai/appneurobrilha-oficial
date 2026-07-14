@@ -204,23 +204,23 @@ export const aula01: AulaGeoV1 = {
     aurora:
       "Última missão do Setor 2. Responda 3 perguntas para sua Certificação de Fisiologista Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
-    fotoUrl: cerebroImg,
+    fotoUrl: neuroniosImg,
     perguntas: [
-      { id: "q1", pergunta: "Qual órgão é a GLÂNDULA-MESTRE do sistema endócrino?", fotoUrl: hormonalImg,
+      { id: "q1", pergunta: "Qual órgão é a GLÂNDULA-MESTRE do sistema endócrino?", fotoUrl: glandulasImg,
         opcoes: [
           { id: "a", texto: "Hipófise (comanda tireoide, suprarrenais e gônadas)", correta: true },
           { id: "b", texto: "Pâncreas" },
         ],
         feedbackAcerto: "Sim. Hipófise fica na base do cérebro e é a chefe do sistema.",
         feedbackErro: "Pâncreas é importante (insulina), mas quem COMANDA as outras é a HIPÓFISE." },
-      { id: "q2", pergunta: "O ARCO REFLEXO passa pelo cérebro?", fotoUrl: cerebroImg,
+      { id: "q2", pergunta: "O ARCO REFLEXO passa pelo cérebro?", fotoUrl: arcoReflexoImg,
         opcoes: [
           { id: "a", texto: "Não. Vai só até a medula e volta. Cérebro é avisado depois.", correta: true },
           { id: "b", texto: "Sim. O cérebro decide puxar a mão." },
         ],
         feedbackAcerto: "Correto. Por isso é tão rápido — atalho medular.",
         feedbackErro: "Se passasse pelo cérebro seria lento demais. Vai só na medula." },
-      { id: "q3", pergunta: "Na PUBERDADE, quem produz TESTOSTERONA?", fotoUrl: hormonalImg,
+      { id: "q3", pergunta: "Na PUBERDADE, quem produz TESTOSTERONA?", fotoUrl: adolescentesImg,
         opcoes: [
           { id: "a", texto: "Testículos, estimulados pela hipófise", correta: true },
           { id: "b", texto: "Estômago" },
