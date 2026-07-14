@@ -77,6 +77,8 @@ export interface SpeakOpts {
 
 const activeSpeechResolvers = new Set<() => void>();
 let speechRunId = 0;
+let lastPtText = "";
+let lastPtAt = 0;
 
 function resolveActiveSpeech() {
   activeSpeechResolvers.forEach((resolve) => resolve());
