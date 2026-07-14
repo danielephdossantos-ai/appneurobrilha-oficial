@@ -136,11 +136,11 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque na ORDEM correta",
     pergunta: "Ao encostar em algo quente:",
     paradas: [
-      { id: "receptor", emoji: "👆", rotulo: "1. Receptor na pele", descricao: "Detecta o calor.", fotoUrl: cerebroImg },
-      { id: "nervo_sens", emoji: "➡️", rotulo: "2. Nervo sensitivo", descricao: "Leva o sinal à medula.", fotoUrl: cerebroImg },
-      { id: "medula", emoji: "🧬", rotulo: "3. Medula espinhal", descricao: "Faz a conexão (sem passar pelo cérebro).", fotoUrl: cerebroImg },
-      { id: "nervo_mot", emoji: "⬅️", rotulo: "4. Nervo motor", descricao: "Leva o comando ao músculo.", fotoUrl: cerebroImg },
-      { id: "musculo", emoji: "💪", rotulo: "5. Músculo contrai", descricao: "Puxa a mão.", fotoUrl: cerebroImg },
+      { id: "receptor", emoji: "👆", rotulo: "1. Receptor na pele", descricao: "Detecta o calor.", fotoUrl: arcoReflexoImg },
+      { id: "nervo_sens", emoji: "➡️", rotulo: "2. Nervo sensitivo", descricao: "Leva o sinal à medula.", fotoUrl: arcoReflexoImg },
+      { id: "medula", emoji: "🧬", rotulo: "3. Medula espinhal", descricao: "Faz a conexão (sem passar pelo cérebro).", fotoUrl: arcoReflexoImg },
+      { id: "nervo_mot", emoji: "⬅️", rotulo: "4. Nervo motor", descricao: "Leva o comando ao músculo.", fotoUrl: arcoReflexoImg },
+      { id: "musculo", emoji: "💪", rotulo: "5. Músculo contrai", descricao: "Puxa a mão.", fotoUrl: arcoReflexoImg },
     ],
     ordemCerta: ["receptor", "nervo_sens", "medula", "nervo_mot", "musculo"],
     feedbackAcerto:
