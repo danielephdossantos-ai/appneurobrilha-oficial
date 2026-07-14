@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCargueiro from "@/assets/historia-4ano/navio-cargueiro.jpg";
-import imgCabo from "@/assets/historia-4ano/cabo-submarino.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-globalizacao.jpg";
-import imgVideo from "@/assets/historia-4ano/videochamada.jpg";
-
+import { url as imgCargueiro } from "@/assets/historia-4ano/navio-cargueiro.jpg.asset.json";
+import { url as imgCabo } from "@/assets/historia-4ano/cabo-submarino.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-globalizacao.jpg.asset.json";
+import { url as imgVideo } from "@/assets/historia-4ano/videochamada.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 7 · Aula 01 (FINAL)
  * "As Rotas Modernas: A Era Digital e Global" — globalização.

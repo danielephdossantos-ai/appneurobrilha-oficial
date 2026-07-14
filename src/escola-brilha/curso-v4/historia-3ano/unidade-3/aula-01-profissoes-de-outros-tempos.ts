@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMaquinaEscrever from "@/assets/historia-3ano/maquina-escrever-antiga.jpg";
-import imgTelefonista from "@/assets/historia-3ano/telefonista-antiga.jpg";
-import imgAcendedor from "@/assets/historia-3ano/acendedor-lampiao.jpg";
-import imgProgramador from "@/assets/historia-3ano/programador-moderno.jpg";
-import imgInfografico from "@/assets/historia-3ano/infografico-trabalho.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgMaquinaEscrever } from "@/assets/historia-3ano/maquina-escrever-antiga.jpg.asset.json";
+import { url as imgTelefonista } from "@/assets/historia-3ano/telefonista-antiga.jpg.asset.json";
+import { url as imgAcendedor } from "@/assets/historia-3ano/acendedor-lampiao.jpg.asset.json";
+import { url as imgProgramador } from "@/assets/historia-3ano/programador-moderno.jpg.asset.json";
+import { url as imgInfografico } from "@/assets/historia-3ano/infografico-trabalho.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 3 · Aula 01
  * "Trabalho e Profissões de Outros Tempos"

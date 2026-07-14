@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgPiramides from "@/assets/historia-6ano/u3-piramides-egito.jpg";
-import imgHamurabi from "@/assets/historia-6ano/u3-hamurabi.jpg";
-import imgTabua from "@/assets/historia-6ano/u3-tabua-cuneiforme.jpg";
-import imgNilo from "@/assets/historia-6ano/u3-nilo-canais.jpg";
-import imgCrescente from "@/assets/historia-6ano/u3-infografico-crescente.jpg";
-
+import { url as imgPiramides } from "@/assets/historia-6ano/u3-piramides-egito.jpg.asset.json";
+import { url as imgHamurabi } from "@/assets/historia-6ano/u3-hamurabi.jpg.asset.json";
+import { url as imgTabua } from "@/assets/historia-6ano/u3-tabua-cuneiforme.jpg.asset.json";
+import { url as imgNilo } from "@/assets/historia-6ano/u3-nilo-canais.jpg.asset.json";
+import { url as imgCrescente } from "@/assets/historia-6ano/u3-infografico-crescente.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-civilizacoes-hidraulicas",
   titulo: "Neolítico, Mesopotâmia e Egito",

@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaTematico from "@/assets/geografia-5ano/mapa-tematico.jpg";
-import desigualdade from "@/assets/geografia-5ano/desigualdade-regional.jpg";
-
+import { url as mapaTematico } from "@/assets/geografia-5ano/mapa-tematico.jpg.asset.json";
+import { url as desigualdade } from "@/assets/geografia-5ano/desigualdade-regional.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 3 · Aula 01
  * "Mapas Temáticos e Diferenças Regionais" — EF05GE05 / EF05GE09

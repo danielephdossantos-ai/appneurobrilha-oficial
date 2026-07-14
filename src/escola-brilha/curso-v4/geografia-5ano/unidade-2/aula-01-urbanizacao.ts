@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import metropole from "@/assets/geografia-5ano/metropole-sp.jpg";
-import exodo from "@/assets/geografia-5ano/exodo-rural.jpg";
-import litoral from "@/assets/geografia-5ano/distribuicao-litoral.jpg";
-
+import { url as metropole } from "@/assets/geografia-5ano/metropole-sp.jpg.asset.json";
+import { url as exodo } from "@/assets/geografia-5ano/exodo-rural.jpg.asset.json";
+import { url as litoral } from "@/assets/geografia-5ano/distribuicao-litoral.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 2 · Aula 01
  * "A Urbanização e as Grandes Cidades" — EF05GE03

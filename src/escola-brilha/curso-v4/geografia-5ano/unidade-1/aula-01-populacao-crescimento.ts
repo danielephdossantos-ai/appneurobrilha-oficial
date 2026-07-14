@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import censo from "@/assets/geografia-5ano/censo-demografico.jpg";
-import litoral from "@/assets/geografia-5ano/distribuicao-litoral.jpg";
-import metropole from "@/assets/geografia-5ano/metropole-sp.jpg";
-
+import { url as censo } from "@/assets/geografia-5ano/censo-demografico.jpg.asset.json";
+import { url as litoral } from "@/assets/geografia-5ano/distribuicao-litoral.jpg.asset.json";
+import { url as metropole } from "@/assets/geografia-5ano/metropole-sp.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 1 · Aula 01
  * "A Dinâmica Populacional e Crescimento" — EF05GE01

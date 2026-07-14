@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import heroTrigoPao from "@/assets/geografia-3ano/hero-trigo-pao.jpg";
-import lavoura from "@/assets/geografia-3ano/lavoura-trigo-dourada.jpg";
-import silo from "@/assets/geografia-3ano/silo-armazenagem-graos.jpg";
-import moinho from "@/assets/geografia-3ano/moinho-farinha-industria.jpg";
-import padaria from "@/assets/geografia-3ano/padaria-artesanal-paes.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as heroTrigoPao } from "@/assets/geografia-3ano/hero-trigo-pao.jpg.asset.json";
+import { url as lavoura } from "@/assets/geografia-3ano/lavoura-trigo-dourada.jpg.asset.json";
+import { url as silo } from "@/assets/geografia-3ano/silo-armazenagem-graos.jpg.asset.json";
+import { url as moinho } from "@/assets/geografia-3ano/moinho-farinha-industria.jpg.asset.json";
+import { url as padaria } from "@/assets/geografia-3ano/padaria-artesanal-paes.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 3 · Aula 03
  * "Do Trigo ao Pão" — EF03GE03

@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaClimas from "@/assets/geografia-6ano/mapa-climas-brasil.jpg";
-import climaEquatorial from "@/assets/geografia-6ano/clima-equatorial.jpg";
-import climaTropical from "@/assets/geografia-6ano/clima-tropical.jpg";
-import climaSubtropical from "@/assets/geografia-6ano/clima-subtropical.jpg";
-import climaSemiarido from "@/assets/geografia-6ano/clima-semiarido.jpg";
-import massasAr from "@/assets/geografia-6ano/massas-ar.jpg";
-
+import { url as mapaClimas } from "@/assets/geografia-6ano/mapa-climas-brasil.jpg.asset.json";
+import { url as climaEquatorial } from "@/assets/geografia-6ano/clima-equatorial.jpg.asset.json";
+import { url as climaTropical } from "@/assets/geografia-6ano/clima-tropical.jpg.asset.json";
+import { url as climaSubtropical } from "@/assets/geografia-6ano/clima-subtropical.jpg.asset.json";
+import { url as climaSemiarido } from "@/assets/geografia-6ano/clima-semiarido.jpg.asset.json";
+import { url as massasAr } from "@/assets/geografia-6ano/massas-ar.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 5 · Aula 01
  * "Clima e Tempo" — BNCC EF06GE12

@@ -1,18 +1,17 @@
 import type { AulaGeoV1 } from "../../types";
-import imgInfograficoFluxo from "@/assets/historia-3ano/infografico-campo-cidade.jpg";
-import imgInfograficoMP from "@/assets/historia-3ano/infografico-materia-prima.jpg";
-import imgFeiraAntiga from "@/assets/historia-3ano/feira-antiga-sepia.jpg";
-import imgFeiraHoje from "@/assets/historia-3ano/feira-livre-hoje.jpg";
-import imgCaminhao from "@/assets/historia-3ano/caminhao-carga.jpg";
-import imgAlgodao from "@/assets/historia-3ano/algodao-campo.jpg";
-import imgFabrica from "@/assets/historia-3ano/fabrica-textil.jpg";
-import imgSupermercado from "@/assets/historia-3ano/supermercado.jpg";
-import imgVaca from "@/assets/historia-3ano/vaca-leite.jpg";
-import imgMorango from "@/assets/historia-3ano/plantacao-morango.jpg";
-import imgCampo from "@/assets/historia-3ano/campo-real.jpg";
-import imgCidade from "@/assets/historia-3ano/cidade-real.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgInfograficoFluxo } from "@/assets/historia-3ano/infografico-campo-cidade.jpg.asset.json";
+import { url as imgInfograficoMP } from "@/assets/historia-3ano/infografico-materia-prima.jpg.asset.json";
+import { url as imgFeiraAntiga } from "@/assets/historia-3ano/feira-antiga-sepia.jpg.asset.json";
+import { url as imgFeiraHoje } from "@/assets/historia-3ano/feira-livre-hoje.jpg.asset.json";
+import { url as imgCaminhao } from "@/assets/historia-3ano/caminhao-carga.jpg.asset.json";
+import { url as imgAlgodao } from "@/assets/historia-3ano/algodao-campo.jpg.asset.json";
+import { url as imgFabrica } from "@/assets/historia-3ano/fabrica-textil.jpg.asset.json";
+import { url as imgSupermercado } from "@/assets/historia-3ano/supermercado.jpg.asset.json";
+import { url as imgVaca } from "@/assets/historia-3ano/vaca-leite.jpg.asset.json";
+import { url as imgMorango } from "@/assets/historia-3ano/plantacao-morango.jpg.asset.json";
+import { url as imgCampo } from "@/assets/historia-3ano/campo-real.jpg.asset.json";
+import { url as imgCidade } from "@/assets/historia-3ano/cidade-real.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 2 · Aula 01
  * "O Campo e a Cidade: Vidas Conectadas"

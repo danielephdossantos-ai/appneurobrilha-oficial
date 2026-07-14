@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgSuf from "@/assets/historia-5ano/sufragistas-brasil.jpg";
-import imgCarteira from "@/assets/historia-5ano/carteira-trabalho.jpg";
-import imgUrna from "@/assets/historia-5ano/urna-eletronica.jpg";
-import imgConst from "@/assets/historia-5ano/constituicao-1988.jpg";
-import imgTimeline from "@/assets/historia-5ano/timeline-voto-brasil.jpg";
-
+import { url as imgSuf } from "@/assets/historia-5ano/sufragistas-brasil.jpg.asset.json";
+import { url as imgCarteira } from "@/assets/historia-5ano/carteira-trabalho.jpg.asset.json";
+import { url as imgUrna } from "@/assets/historia-5ano/urna-eletronica.jpg.asset.json";
+import { url as imgConst } from "@/assets/historia-5ano/constituicao-1988.jpg.asset.json";
+import { url as imgTimeline } from "@/assets/historia-5ano/timeline-voto-brasil.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 4 · Aula 01
  * "A Conquista dos Direitos Sociais e Políticos no Brasil"

@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMapaBrasil from "@/assets/historia-3ano/mapa-brasil-politico.jpg";
-import imgPalacio from "@/assets/historia-3ano/palacio-governador.jpg";
-import imgCongresso from "@/assets/historia-3ano/congresso-brasilia.jpg";
-import imgInfografico from "@/assets/historia-3ano/infografico-municipio-estado-pais.jpg";
-import imgPrefeitura from "@/assets/historia-3ano/prefeitura-real.jpg";
-import imgCidade from "@/assets/historia-3ano/cidade-real.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgMapaBrasil } from "@/assets/historia-3ano/mapa-brasil-politico.jpg.asset.json";
+import { url as imgPalacio } from "@/assets/historia-3ano/palacio-governador.jpg.asset.json";
+import { url as imgCongresso } from "@/assets/historia-3ano/congresso-brasilia.jpg.asset.json";
+import { url as imgInfografico } from "@/assets/historia-3ano/infografico-municipio-estado-pais.jpg.asset.json";
+import { url as imgPrefeitura } from "@/assets/historia-3ano/prefeitura-real.jpg.asset.json";
+import { url as imgCidade } from "@/assets/historia-3ano/cidade-real.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 7 · Aula 01 (FECHAMENTO)
  * "O Município e o Estado: Organização Territorial"

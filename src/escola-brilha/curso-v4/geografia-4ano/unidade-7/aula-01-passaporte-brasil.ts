@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import passaporte from "@/assets/geografia-4ano/passaporte-brasil.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import diversidade from "@/assets/geografia-4ano/diversidade-povo-brasileiro.jpg";
-import relevo from "@/assets/geografia-4ano/relevo-planalto-planicie.jpg";
-import caatinga from "@/assets/geografia-4ano/bioma-caatinga.jpg";
-import primario from "@/assets/geografia-4ano/setor-primario-agricultura.jpg";
-import sustentavel from "@/assets/geografia-4ano/sustentabilidade-crianca.jpg";
-
+import { url as passaporte } from "@/assets/geografia-4ano/passaporte-brasil.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as diversidade } from "@/assets/geografia-4ano/diversidade-povo-brasileiro.jpg.asset.json";
+import { url as relevo } from "@/assets/geografia-4ano/relevo-planalto-planicie.jpg.asset.json";
+import { url as caatinga } from "@/assets/geografia-4ano/bioma-caatinga.jpg.asset.json";
+import { url as primario } from "@/assets/geografia-4ano/setor-primario-agricultura.jpg.asset.json";
+import { url as sustentavel } from "@/assets/geografia-4ano/sustentabilidade-crianca.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 7 · Aula 01
  * "Passaporte Brasil" — Consolidação de toda a jornada

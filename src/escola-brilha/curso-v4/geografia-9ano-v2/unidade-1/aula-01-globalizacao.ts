@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import containers from "@/assets/geografia-9ano/containers-porto-global.jpg";
-import internet from "@/assets/geografia-9ano/internet-fibra-submarina.jpg";
-import multi from "@/assets/geografia-9ano/multinacional-hq.jpg";
-import protesto from "@/assets/geografia-9ano/protesto-globalizacao.jpg";
-
+import { url as containers } from "@/assets/geografia-9ano/containers-porto-global.jpg.asset.json";
+import { url as internet } from "@/assets/geografia-9ano/internet-fibra-submarina.jpg.asset.json";
+import { url as multi } from "@/assets/geografia-9ano/multinacional-hq.jpg.asset.json";
+import { url as protesto } from "@/assets/geografia-9ano/protesto-globalizacao.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 1 · Aula 01
  * "Globalização e Mundo Contemporâneo" — BNCC EF09GE01, EF09GE02

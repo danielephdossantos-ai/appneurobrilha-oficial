@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgHaiti from "@/assets/historia-8ano/u5-haiti-revolucao.jpg";
-import imgBoli from "@/assets/historia-8ano/u5-bolivar-andes.jpg";
-
-import imgToussaint from "@/assets/historia-8ano/u5-toussaint.jpg";
-import imgSanmartin from "@/assets/historia-8ano/u5-san-martin.jpg";
-import imgMapaInd from "@/assets/historia-8ano/u5-mapa-independencias.jpg";
+import { url as imgHaiti } from "@/assets/historia-8ano/u5-haiti-revolucao.jpg.asset.json";
+import { url as imgBoli } from "@/assets/historia-8ano/u5-bolivar-andes.jpg.asset.json";
+import { url as imgToussaint } from "@/assets/historia-8ano/u5-toussaint.jpg.asset.json";
+import { url as imgSanmartin } from "@/assets/historia-8ano/u5-san-martin.jpg.asset.json";
+import { url as imgMapaInd } from "@/assets/historia-8ano/u5-mapa-independencias.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-haiti-hispanoamerica",
   titulo: "Haiti e as Independências Hispano-Americanas",

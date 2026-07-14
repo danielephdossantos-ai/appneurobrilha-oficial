@@ -1,15 +1,14 @@
 import type { AulaGeoV1 } from "../../types";
-import imgVistaAerea from "@/assets/historia-3ano/municipio-vista-aerea.jpg";
-import imgInfograficoUR from "@/assets/historia-3ano/infografico-urbano-rural.jpg";
-import imgPrefeitura from "@/assets/historia-3ano/prefeitura-real.jpg";
-import imgCampo from "@/assets/historia-3ano/campo-real.jpg";
-import imgCidade from "@/assets/historia-3ano/cidade-real.jpg";
-import imgLinhaTempo from "@/assets/historia-3ano/linha-tempo-municipio.jpg";
-import imgPracaAntiga from "@/assets/historia-3ano/praca-antiga-sepia.jpg";
-import imgPracaHoje from "@/assets/historia-3ano/praca-hoje.jpg";
-import imgMapa from "@/assets/historia-3ano/mapa-municipio-infografico.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgVistaAerea } from "@/assets/historia-3ano/municipio-vista-aerea.jpg.asset.json";
+import { url as imgInfograficoUR } from "@/assets/historia-3ano/infografico-urbano-rural.jpg.asset.json";
+import { url as imgPrefeitura } from "@/assets/historia-3ano/prefeitura-real.jpg.asset.json";
+import { url as imgCampo } from "@/assets/historia-3ano/campo-real.jpg.asset.json";
+import { url as imgCidade } from "@/assets/historia-3ano/cidade-real.jpg.asset.json";
+import { url as imgLinhaTempo } from "@/assets/historia-3ano/linha-tempo-municipio.jpg.asset.json";
+import { url as imgPracaAntiga } from "@/assets/historia-3ano/praca-antiga-sepia.jpg.asset.json";
+import { url as imgPracaHoje } from "@/assets/historia-3ano/praca-hoje.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-3ano/mapa-municipio-infografico.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 1 · Aula 01
  * "O que é o meu Município?" — EF03HI01 + EF03HI02

@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import xangai from "@/assets/geografia-9ano/xangai-skyline.jpg";
-import tokyo from "@/assets/geografia-9ano/tokyo-shibuya.jpg";
-import mumbai from "@/assets/geografia-9ano/mumbai-india.jpg";
-import arroz from "@/assets/geografia-9ano/arrozal-asia.jpg";
-
+import { url as xangai } from "@/assets/geografia-9ano/xangai-skyline.jpg.asset.json";
+import { url as tokyo } from "@/assets/geografia-9ano/tokyo-shibuya.jpg.asset.json";
+import { url as mumbai } from "@/assets/geografia-9ano/mumbai-india.jpg.asset.json";
+import { url as arroz } from "@/assets/geografia-9ano/arrozal-asia.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 3 · Aula 01
  * "Ásia" — BNCC EF09GE05, EF09GE06

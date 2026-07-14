@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgDig from "@/assets/historia-9ano/u7-era-digital.jpg";
-import imgClima from "@/assets/historia-9ano/u7-clima-global.jpg";
-
-import imgSmart from "@/assets/historia-9ano/u7-smartphone-jovem.jpg";
-import imgNyc from "@/assets/historia-9ano/u7-nova-iorque-global.jpg";
-import imgFavela from "@/assets/historia-9ano/u7-favela-cidade.jpg";
+import { url as imgDig } from "@/assets/historia-9ano/u7-era-digital.jpg.asset.json";
+import { url as imgClima } from "@/assets/historia-9ano/u7-clima-global.jpg.asset.json";
+import { url as imgSmart } from "@/assets/historia-9ano/u7-smartphone-jovem.jpg.asset.json";
+import { url as imgNyc } from "@/assets/historia-9ano/u7-nova-iorque-global.jpg.asset.json";
+import { url as imgFavela } from "@/assets/historia-9ano/u7-favela-cidade.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-globalizacao-digital",
   titulo: "Globalização, Era Digital e o Mundo de Hoje",

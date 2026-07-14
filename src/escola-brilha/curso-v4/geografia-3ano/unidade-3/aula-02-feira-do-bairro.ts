@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import heroSitioFeira from "@/assets/geografia-3ano/hero-sitio-feira.jpg";
-import colheita from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg";
-import caminhonete from "@/assets/geografia-3ano/caminhonete-hortalicas-estrada.jpg";
-import entreposto from "@/assets/geografia-3ano/entreposto-atacadista.jpg";
-import feira from "@/assets/geografia-3ano/feira-livre-bairro.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as heroSitioFeira } from "@/assets/geografia-3ano/hero-sitio-feira.jpg.asset.json";
+import { url as colheita } from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg.asset.json";
+import { url as caminhonete } from "@/assets/geografia-3ano/caminhonete-hortalicas-estrada.jpg.asset.json";
+import { url as entreposto } from "@/assets/geografia-3ano/entreposto-atacadista.jpg.asset.json";
+import { url as feira } from "@/assets/geografia-3ano/feira-livre-bairro.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 3 · Aula 02
  * "A Feira do Bairro" — EF03GE03

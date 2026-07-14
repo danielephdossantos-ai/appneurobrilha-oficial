@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import refugiados from "@/assets/geografia-8ano/refugiados-siria.jpg";
-import mapaMig from "@/assets/geografia-8ano/mapa-migracao.jpg";
-import mediterraneo from "@/assets/geografia-8ano/mediterraneo-travessia.jpg";
-import brasileiros from "@/assets/geografia-8ano/brasileiros-exterior.jpg";
-
+import { url as refugiados } from "@/assets/geografia-8ano/refugiados-siria.jpg.asset.json";
+import { url as mapaMig } from "@/assets/geografia-8ano/mapa-migracao.jpg.asset.json";
+import { url as mediterraneo } from "@/assets/geografia-8ano/mediterraneo-travessia.jpg.asset.json";
+import { url as brasileiros } from "@/assets/geografia-8ano/brasileiros-exterior.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 5 · Aula 01
  * "Fluxos Migratórios" — BNCC EF08GE10, EF08GE11

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgOnu from "@/assets/historia-5ano/onu-assembleia.jpg";
-import imgDecl from "@/assets/historia-5ano/declaracao-direitos-humanos.jpg";
-import imgRev from "@/assets/historia-5ano/revolucao-francesa.jpg";
-import imgConst from "@/assets/historia-5ano/constituicao-1988.jpg";
-import imgTimeline from "@/assets/historia-5ano/timeline-direitos.jpg";
-
+import { url as imgOnu } from "@/assets/historia-5ano/onu-assembleia.jpg.asset.json";
+import { url as imgDecl } from "@/assets/historia-5ano/declaracao-direitos-humanos.jpg.asset.json";
+import { url as imgRev } from "@/assets/historia-5ano/revolucao-francesa.jpg.asset.json";
+import { url as imgConst } from "@/assets/historia-5ano/constituicao-1988.jpg.asset.json";
+import { url as imgTimeline } from "@/assets/historia-5ano/timeline-direitos.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 2 · Aula 01
  * "A Declaração dos Direitos Humanos"

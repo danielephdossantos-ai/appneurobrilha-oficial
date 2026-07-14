@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgGuerra from "@/assets/historia-9ano/u3-segunda-guerra.jpg";
-import imgHolo from "@/assets/historia-9ano/u3-holocausto-memorial.jpg";
-
-import imgNormandia from "@/assets/historia-9ano/u3-desembarque-normandia.jpg";
-import imgHiroshima from "@/assets/historia-9ano/u3-hiroshima-bomba.jpg";
-import imgCampo from "@/assets/historia-9ano/u3-campo-concentracao.jpg";
+import { url as imgGuerra } from "@/assets/historia-9ano/u3-segunda-guerra.jpg.asset.json";
+import { url as imgHolo } from "@/assets/historia-9ano/u3-holocausto-memorial.jpg.asset.json";
+import { url as imgNormandia } from "@/assets/historia-9ano/u3-desembarque-normandia.jpg.asset.json";
+import { url as imgHiroshima } from "@/assets/historia-9ano/u3-hiroshima-bomba.jpg.asset.json";
+import { url as imgCampo } from "@/assets/historia-9ano/u3-campo-concentracao.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-segunda-guerra-holocausto",
   titulo: "Segunda Guerra Mundial e Holocausto",

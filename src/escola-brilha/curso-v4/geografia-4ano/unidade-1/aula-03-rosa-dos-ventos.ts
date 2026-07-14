@@ -1,14 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import rosaDosVentos from "@/assets/geografia-4ano/rosa-dos-ventos.jpg";
-import bussola from "@/assets/geografia-4ano/bussola-mascote.jpg";
-import mapaCoord from "@/assets/geografia-4ano/mapa-coordenadas.jpg";
-import gpsVsBussola from "@/assets/geografia-4ano/gps-vs-bussola.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import nordeste from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg";
-import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
-import sul from "@/assets/geografia-4ano/regiao-sul-serra.jpg";
-
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as rosaDosVentos } from "@/assets/geografia-4ano/rosa-dos-ventos.jpg.asset.json";
+import { url as bussola } from "@/assets/geografia-4ano/bussola-mascote.jpg.asset.json";
+import { url as mapaCoord } from "@/assets/geografia-4ano/mapa-coordenadas.jpg.asset.json";
+import { url as gpsVsBussola } from "@/assets/geografia-4ano/gps-vs-bussola.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as nordeste } from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg.asset.json";
+import { url as sudeste } from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg.asset.json";
+import { url as sul } from "@/assets/geografia-4ano/regiao-sul-serra.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 1 · Aula 03
  * "Rosa dos Ventos e Coordenadas" — EF04GE09

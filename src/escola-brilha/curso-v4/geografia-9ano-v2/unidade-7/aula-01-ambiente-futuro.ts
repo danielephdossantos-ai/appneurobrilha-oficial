@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import eolica from "@/assets/geografia-9ano/eolica-oceano.jpg";
-import ia from "@/assets/geografia-9ano/ia-datacenter.jpg";
-import plastico from "@/assets/geografia-9ano/plastico-oceano.jpg";
-import cidade from "@/assets/geografia-9ano/cidade-inteligente.jpg";
-
+import { url as eolica } from "@/assets/geografia-9ano/eolica-oceano.jpg.asset.json";
+import { url as ia } from "@/assets/geografia-9ano/ia-datacenter.jpg.asset.json";
+import { url as plastico } from "@/assets/geografia-9ano/plastico-oceano.jpg.asset.json";
+import { url as cidade } from "@/assets/geografia-9ano/cidade-inteligente.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 7 · Aula 01
  * "Meio Ambiente, Tecnologia e Futuro" — BNCC EF09GE17, EF09GE18

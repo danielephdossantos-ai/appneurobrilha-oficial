@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import imgRelogio from "@/assets/historia-2ano/relogio-tempo.png";
-import imgMuseu from "@/assets/historia-2ano/museu-final.png";
-import imgLinhaVida from "@/assets/historia-2ano/linha-vida-crianca.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-import imgArvore from "@/assets/historia-2ano/arvore-genealogica-diagrama.png";
-import imgBairro from "@/assets/historia-2ano/bairro-hoje.png";
-
+import { url as imgRelogio } from "@/assets/historia-2ano/relogio-tempo.png.asset.json";
+import { url as imgMuseu } from "@/assets/historia-2ano/museu-final.png.asset.json";
+import { url as imgLinhaVida } from "@/assets/historia-2ano/linha-vida-crianca.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
+import { url as imgArvore } from "@/assets/historia-2ano/arvore-genealogica-diagrama.png.asset.json";
+import { url as imgBairro } from "@/assets/historia-2ano/bairro-hoje.png.asset.json";
 /**
  * História · 2º Ano · Unidade 7 · Aula 01
  * "Grandes Historiadores" — Revisão Final

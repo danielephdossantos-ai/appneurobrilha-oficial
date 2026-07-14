@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgFeudo from "@/assets/historia-7ano/u1-feudo.jpg";
-import imgMedico from "@/assets/historia-7ano/u1-medico-peste.jpg";
-import imgIluminura from "@/assets/historia-7ano/u1-iluminura.jpg";
-import imgCamponeses from "@/assets/historia-7ano/u1-camponeses.jpg";
-import imgOrdens from "@/assets/historia-7ano/u1-infografico-ordens.jpg";
-
+import { url as imgFeudo } from "@/assets/historia-7ano/u1-feudo.jpg.asset.json";
+import { url as imgMedico } from "@/assets/historia-7ano/u1-medico-peste.jpg.asset.json";
+import { url as imgIluminura } from "@/assets/historia-7ano/u1-iluminura.jpg.asset.json";
+import { url as imgCamponeses } from "@/assets/historia-7ano/u1-camponeses.jpg.asset.json";
+import { url as imgOrdens } from "@/assets/historia-7ano/u1-infografico-ordens.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-mundo-feudal-crise",
   titulo: "O Mundo Feudal e a Crise do Século XIV",

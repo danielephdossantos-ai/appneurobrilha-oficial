@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import diversidade from "@/assets/geografia-4ano/diversidade-povo-brasileiro.jpg";
-import migracao from "@/assets/geografia-4ano/migracao-interna-brasil.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import nordeste from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg";
-import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
-
+import { url as diversidade } from "@/assets/geografia-4ano/diversidade-povo-brasileiro.jpg.asset.json";
+import { url as migracao } from "@/assets/geografia-4ano/migracao-interna-brasil.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as nordeste } from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg.asset.json";
+import { url as sudeste } from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 2 · Aula 01
  * "População Brasileira e Migrações" — EF04GE02

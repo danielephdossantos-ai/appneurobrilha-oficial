@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import soja from "@/assets/geografia-7ano/agronegocio-soja.jpg";
-import itaipu from "@/assets/geografia-7ano/itaipu-hidreletrica.jpg";
-import porto from "@/assets/geografia-7ano/porto-santos.jpg";
-import industria from "@/assets/geografia-7ano/industria-brasil.jpg";
-import metropole from "@/assets/geografia-7ano/metropole-sao-paulo.jpg";
-import pampa from "@/assets/geografia-7ano/pampa-agropecuaria.jpg";
-
+import { url as soja } from "@/assets/geografia-7ano/agronegocio-soja.jpg.asset.json";
+import { url as itaipu } from "@/assets/geografia-7ano/itaipu-hidreletrica.jpg.asset.json";
+import { url as porto } from "@/assets/geografia-7ano/porto-santos.jpg.asset.json";
+import { url as industria } from "@/assets/geografia-7ano/industria-brasil.jpg.asset.json";
+import { url as metropole } from "@/assets/geografia-7ano/metropole-sao-paulo.jpg.asset.json";
+import { url as pampa } from "@/assets/geografia-7ano/pampa-agropecuaria.jpg.asset.json";
 /**
  * Geografia · 7º Ano · Unidade 4 · Aula 01
  * "Complexo Centro-Sul" — BNCC EF07GE09, EF07GE10

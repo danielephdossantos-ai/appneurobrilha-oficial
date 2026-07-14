@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgSol from "@/assets/historia-5ano/paineis-solares.jpg";
-import imgParis from "@/assets/historia-5ano/acordo-paris.jpg";
-import imgTerra from "@/assets/historia-5ano/planeta-terra.jpg";
-import imgOds from "@/assets/historia-5ano/ods-17-cartaz.jpg";
-import imgOnu from "@/assets/historia-5ano/onu-assembleia.jpg";
-
+import { url as imgSol } from "@/assets/historia-5ano/paineis-solares.jpg.asset.json";
+import { url as imgParis } from "@/assets/historia-5ano/acordo-paris.jpg.asset.json";
+import { url as imgTerra } from "@/assets/historia-5ano/planeta-terra.jpg.asset.json";
+import { url as imgOds } from "@/assets/historia-5ano/ods-17-cartaz.jpg.asset.json";
+import { url as imgOnu } from "@/assets/historia-5ano/onu-assembleia.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 7 · Aula 01
  * "Cidadania Global e Meio Ambiente: O Futuro do Planeta"

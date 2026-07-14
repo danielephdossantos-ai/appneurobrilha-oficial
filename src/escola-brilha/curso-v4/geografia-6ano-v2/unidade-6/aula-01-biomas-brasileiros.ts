@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import biomas from "@/assets/geografia-6ano/biomas-brasil.jpg";
-import amaz from "@/assets/geografia-6ano/bioma-amazonia.jpg";
-import cer from "@/assets/geografia-6ano/bioma-cerrado.jpg";
-import caa from "@/assets/geografia-6ano/bioma-caatinga.jpg";
-import mat from "@/assets/geografia-6ano/bioma-mata-atlantica.jpg";
-import pam from "@/assets/geografia-6ano/bioma-pampa.jpg";
-import pan from "@/assets/geografia-6ano/bioma-pantanal.jpg";
-
+import { url as biomas } from "@/assets/geografia-6ano/biomas-brasil.jpg.asset.json";
+import { url as amaz } from "@/assets/geografia-6ano/bioma-amazonia.jpg.asset.json";
+import { url as cer } from "@/assets/geografia-6ano/bioma-cerrado.jpg.asset.json";
+import { url as caa } from "@/assets/geografia-6ano/bioma-caatinga.jpg.asset.json";
+import { url as mat } from "@/assets/geografia-6ano/bioma-mata-atlantica.jpg.asset.json";
+import { url as pam } from "@/assets/geografia-6ano/bioma-pampa.jpg.asset.json";
+import { url as pan } from "@/assets/geografia-6ano/bioma-pantanal.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 6 · Aula 01
  * "Biomas Brasileiros" — BNCC EF06GE13

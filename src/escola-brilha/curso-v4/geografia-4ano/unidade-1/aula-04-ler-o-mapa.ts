@@ -1,17 +1,16 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaLegenda from "@/assets/geografia-4ano/mapa-com-legenda.jpg";
-import escalaMapa from "@/assets/geografia-4ano/escala-do-mapa.jpg";
-import legendaSimbolos from "@/assets/geografia-4ano/legenda-simbolos.jpg";
-import cartografoMestre from "@/assets/geografia-4ano/cartografo-mestre.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import rosaDosVentos from "@/assets/geografia-4ano/rosa-dos-ventos.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
-import simboloEscola from "@/assets/geografia-4ano/simbolo-escola.jpg";
-import simboloHospital from "@/assets/geografia-4ano/simbolo-hospital.jpg";
-import simboloParque from "@/assets/geografia-4ano/simbolo-parque.jpg";
-import simboloRio from "@/assets/geografia-4ano/simbolo-rio.jpg";
-
+import { url as mapaLegenda } from "@/assets/geografia-4ano/mapa-com-legenda.jpg.asset.json";
+import { url as escalaMapa } from "@/assets/geografia-4ano/escala-do-mapa.jpg.asset.json";
+import { url as legendaSimbolos } from "@/assets/geografia-4ano/legenda-simbolos.jpg.asset.json";
+import { url as cartografoMestre } from "@/assets/geografia-4ano/cartografo-mestre.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as rosaDosVentos } from "@/assets/geografia-4ano/rosa-dos-ventos.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as sudeste } from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg.asset.json";
+import { url as simboloEscola } from "@/assets/geografia-4ano/simbolo-escola.jpg.asset.json";
+import { url as simboloHospital } from "@/assets/geografia-4ano/simbolo-hospital.jpg.asset.json";
+import { url as simboloParque } from "@/assets/geografia-4ano/simbolo-parque.jpg.asset.json";
+import { url as simboloRio } from "@/assets/geografia-4ano/simbolo-rio.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 1 · Aula 04
  * "Ler o Mapa: título, legenda, escala e rosa dos ventos" — EF04GE10

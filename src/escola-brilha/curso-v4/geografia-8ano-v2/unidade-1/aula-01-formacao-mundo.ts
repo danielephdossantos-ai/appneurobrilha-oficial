@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import colonizacao from "@/assets/geografia-8ano/colonizacao-europeia.jpg";
-import industrial from "@/assets/geografia-8ano/revolucao-industrial.jpg";
-import independencias from "@/assets/geografia-8ano/independencias-latinas.jpg";
-import descoloniza from "@/assets/geografia-8ano/mapa-descolonizacao.jpg";
-
+import { url as colonizacao } from "@/assets/geografia-8ano/colonizacao-europeia.jpg.asset.json";
+import { url as industrial } from "@/assets/geografia-8ano/revolucao-industrial.jpg.asset.json";
+import { url as independencias } from "@/assets/geografia-8ano/independencias-latinas.jpg.asset.json";
+import { url as descoloniza } from "@/assets/geografia-8ano/mapa-descolonizacao.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 1 · Aula 01
  * "Formação do Mundo Contemporâneo" — BNCC EF08GE01, EF08GE04

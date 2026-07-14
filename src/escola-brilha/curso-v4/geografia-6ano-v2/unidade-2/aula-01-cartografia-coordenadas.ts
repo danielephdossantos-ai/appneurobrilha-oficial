@@ -1,14 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
-import cartografia from "@/assets/geografia-6ano/cartografia-coordenadas.jpg";
-import globoEquador from "@/assets/geografia-6ano/globo-equador.jpg";
-import globoGreenwich from "@/assets/geografia-6ano/globo-greenwich.jpg";
-import globoLatitude from "@/assets/geografia-6ano/globo-latitude.jpg";
-import globoLongitude from "@/assets/geografia-6ano/globo-longitude.jpg";
-import escalaMapas from "@/assets/geografia-6ano/escala-mapas.jpg";
-import legendaMapa from "@/assets/geografia-6ano/legenda-mapa.jpg";
-import tropicosGlobo from "@/assets/geografia-6ano/tropicos-globo.jpg";
-import circulosPolares from "@/assets/geografia-6ano/circulos-polares.jpg";
-
+import { url as cartografia } from "@/assets/geografia-6ano/cartografia-coordenadas.jpg.asset.json";
+import { url as globoEquador } from "@/assets/geografia-6ano/globo-equador.jpg.asset.json";
+import { url as globoGreenwich } from "@/assets/geografia-6ano/globo-greenwich.jpg.asset.json";
+import { url as globoLatitude } from "@/assets/geografia-6ano/globo-latitude.jpg.asset.json";
+import { url as globoLongitude } from "@/assets/geografia-6ano/globo-longitude.jpg.asset.json";
+import { url as escalaMapas } from "@/assets/geografia-6ano/escala-mapas.jpg.asset.json";
+import { url as legendaMapa } from "@/assets/geografia-6ano/legenda-mapa.jpg.asset.json";
+import { url as tropicosGlobo } from "@/assets/geografia-6ano/tropicos-globo.jpg.asset.json";
+import { url as circulosPolares } from "@/assets/geografia-6ano/circulos-polares.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 2 · Aula 01
  * "Cartografia e Coordenadas Geográficas" — BNCC EF06GE04, EF06GE05

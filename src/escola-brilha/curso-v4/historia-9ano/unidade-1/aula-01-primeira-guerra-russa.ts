@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgTrin from "@/assets/historia-9ano/u1-trincheiras.jpg";
-import imgRev from "@/assets/historia-9ano/u1-revolucao-russa.jpg";
-
-import imgTrincDet from "@/assets/historia-9ano/u1-trincheiras-detalhe.jpg";
-import imgLenin from "@/assets/historia-9ano/u1-lenin-discurso.jpg";
-import imgTanque from "@/assets/historia-9ano/u1-tanque-primeira-guerra.jpg";
+import { url as imgTrin } from "@/assets/historia-9ano/u1-trincheiras.jpg.asset.json";
+import { url as imgRev } from "@/assets/historia-9ano/u1-revolucao-russa.jpg.asset.json";
+import { url as imgTrincDet } from "@/assets/historia-9ano/u1-trincheiras-detalhe.jpg.asset.json";
+import { url as imgLenin } from "@/assets/historia-9ano/u1-lenin-discurso.jpg.asset.json";
+import { url as imgTanque } from "@/assets/historia-9ano/u1-tanque-primeira-guerra.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-primeira-guerra-russa",
   titulo: "Trincheiras e Revolução (1914–1917)",

@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import imgImigrantes from "@/assets/historia-3ano/imigrantes-navio.jpg";
-import imgIndigena from "@/assets/historia-3ano/indigena-tradicional.jpg";
-import imgCapoeira from "@/assets/historia-3ano/capoeira-roda.jpg";
-import imgFeiraCultural from "@/assets/historia-3ano/feira-cultural.jpg";
-import imgInfografico from "@/assets/historia-3ano/infografico-populacao.jpg";
-import imgComidaTipica from "@/assets/historia-3ano/comida-tipica.jpg";
-import imgLivro from "@/assets/historia-3ano/livro-cidades.jpg";
-
+import { url as imgImigrantes } from "@/assets/historia-3ano/imigrantes-navio.jpg.asset.json";
+import { url as imgIndigena } from "@/assets/historia-3ano/indigena-tradicional.jpg.asset.json";
+import { url as imgCapoeira } from "@/assets/historia-3ano/capoeira-roda.jpg.asset.json";
+import { url as imgFeiraCultural } from "@/assets/historia-3ano/feira-cultural.jpg.asset.json";
+import { url as imgInfografico } from "@/assets/historia-3ano/infografico-populacao.jpg.asset.json";
+import { url as imgComidaTipica } from "@/assets/historia-3ano/comida-tipica.jpg.asset.json";
+import { url as imgLivro } from "@/assets/historia-3ano/livro-cidades.jpg.asset.json";
 /**
  * História · 3º Ano · Unidade 5 · Aula 01
  * "A Formação da População: Muitas Culturas"

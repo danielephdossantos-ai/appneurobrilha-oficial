@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import heroParceria from "@/assets/geografia-3ano/hero-parceria-total.jpg";
-import mercadoMunicipal from "@/assets/geografia-3ano/mercado-municipal-diversidade.jpg";
-import caminhoesRodovia from "@/assets/geografia-3ano/caminhoes-rodovia-municipio.jpg";
-import familiaSupermercado from "@/assets/geografia-3ano/familia-supermercado-compras.jpg";
-import feiranteCliente from "@/assets/geografia-3ano/feirante-cliente-conversando.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as heroParceria } from "@/assets/geografia-3ano/hero-parceria-total.jpg.asset.json";
+import { url as mercadoMunicipal } from "@/assets/geografia-3ano/mercado-municipal-diversidade.jpg.asset.json";
+import { url as caminhoesRodovia } from "@/assets/geografia-3ano/caminhoes-rodovia-municipio.jpg.asset.json";
+import { url as familiaSupermercado } from "@/assets/geografia-3ano/familia-supermercado-compras.jpg.asset.json";
+import { url as feiranteCliente } from "@/assets/geografia-3ano/feirante-cliente-conversando.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 3 · Aula 04
  * "A Parceria que Alimenta o Município" — EF03GE03

@@ -1,18 +1,17 @@
 import type { AulaGeoV1 } from "../../types";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-import imgPresenteLupa from "@/assets/historia-2ano/presente-lupa.png";
-import imgFuturo from "@/assets/historia-2ano/futuro-xicara-calendario.png";
-import imgPresenteBrilha from "@/assets/historia-2ano/presente-brilha-agora.png";
-import imgFuturoAniversario from "@/assets/historia-2ano/futuro-aniversario-brilha.png";
-import imgPassadoEscola from "@/assets/historia-2ano/passado-escola-antiga-brilha.png";
-import imgFuturoAmanha from "@/assets/historia-2ano/futuro-amanha-brilha.png";
-import imgPassadoNascimento from "@/assets/historia-2ano/passado-nascimento-brilha.png";
-import imgFuturoPlano from "@/assets/historia-2ano/futuro-plano-amanha-brilha.png";
-import imgPresenteAgora from "@/assets/historia-2ano/presente-agora-brilha.png";
-import imgPassadoPrimeiraEscola from "@/assets/historia-2ano/passado-primeira-escola-brilha.png";
-import imgPassadoDiario from "@/assets/historia-2ano/passado-diario-antigo-brilha.png";
-import imgTempoLinha from "@/assets/historia-2ano/tempo-passado-presente-futuro-brilha.png";
-
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
+import { url as imgPresenteLupa } from "@/assets/historia-2ano/presente-lupa.png.asset.json";
+import { url as imgFuturo } from "@/assets/historia-2ano/futuro-xicara-calendario.png.asset.json";
+import { url as imgPresenteBrilha } from "@/assets/historia-2ano/presente-brilha-agora.png.asset.json";
+import { url as imgFuturoAniversario } from "@/assets/historia-2ano/futuro-aniversario-brilha.png.asset.json";
+import { url as imgPassadoEscola } from "@/assets/historia-2ano/passado-escola-antiga-brilha.png.asset.json";
+import { url as imgFuturoAmanha } from "@/assets/historia-2ano/futuro-amanha-brilha.png.asset.json";
+import { url as imgPassadoNascimento } from "@/assets/historia-2ano/passado-nascimento-brilha.png.asset.json";
+import { url as imgFuturoPlano } from "@/assets/historia-2ano/futuro-plano-amanha-brilha.png.asset.json";
+import { url as imgPresenteAgora } from "@/assets/historia-2ano/presente-agora-brilha.png.asset.json";
+import { url as imgPassadoPrimeiraEscola } from "@/assets/historia-2ano/passado-primeira-escola-brilha.png.asset.json";
+import { url as imgPassadoDiario } from "@/assets/historia-2ano/passado-diario-antigo-brilha.png.asset.json";
+import { url as imgTempoLinha } from "@/assets/historia-2ano/tempo-passado-presente-futuro-brilha.png.asset.json";
 /**
  * História · 2º Ano · Unidade 1 · Aula 01
  * "Ontem, Hoje e Amanhã" — EF02HI06 + EF02HI07

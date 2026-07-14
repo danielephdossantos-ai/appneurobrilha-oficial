@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgFerro from "@/assets/historia-2ano/ferro-carvao.png";
-import imgMaquina from "@/assets/historia-2ano/maquina-escrever.png";
-import imgCarta from "@/assets/historia-2ano/carta-antiga.png";
-import imgTelefone from "@/assets/historia-2ano/telefone-disco.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-
+import { url as imgFerro } from "@/assets/historia-2ano/ferro-carvao.png.asset.json";
+import { url as imgMaquina } from "@/assets/historia-2ano/maquina-escrever.png.asset.json";
+import { url as imgCarta } from "@/assets/historia-2ano/carta-antiga.png.asset.json";
+import { url as imgTelefone } from "@/assets/historia-2ano/telefone-disco.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 5 · Aula 01
  * "Descobrindo Objetos do Passado" — EF02HI04 + EF02HI05

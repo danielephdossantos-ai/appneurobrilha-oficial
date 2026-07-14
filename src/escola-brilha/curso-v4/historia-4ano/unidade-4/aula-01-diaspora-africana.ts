@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import imgQuilombo from "@/assets/historia-4ano/quilombo-palmares.jpg";
-import imgZumbi from "@/assets/historia-4ano/estatua-zumbi.jpg";
-import imgDoc from "@/assets/historia-4ano/documento-navio.jpg";
-import imgMapa from "@/assets/historia-4ano/mapa-diaspora.jpg";
-
+import { url as imgQuilombo } from "@/assets/historia-4ano/quilombo-palmares.jpg.asset.json";
+import { url as imgZumbi } from "@/assets/historia-4ano/estatua-zumbi.jpg.asset.json";
+import { url as imgDoc } from "@/assets/historia-4ano/documento-navio.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-4ano/mapa-diaspora.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 4 · Aula 01
  * "As Migrações Forçadas: A Diáspora Africana" — escravidão e resistência.

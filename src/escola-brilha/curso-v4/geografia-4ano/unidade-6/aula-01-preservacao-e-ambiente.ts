@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import contraste from "@/assets/geografia-4ano/desmatamento-vs-preservacao.jpg";
-import crianca from "@/assets/geografia-4ano/sustentabilidade-crianca.jpg";
-import amazonia from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-
+import { url as contraste } from "@/assets/geografia-4ano/desmatamento-vs-preservacao.jpg.asset.json";
+import { url as crianca } from "@/assets/geografia-4ano/sustentabilidade-crianca.jpg.asset.json";
+import { url as amazonia } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 6 · Aula 01
  * "Preservação e Impactos Ambientais" — EF04GE06

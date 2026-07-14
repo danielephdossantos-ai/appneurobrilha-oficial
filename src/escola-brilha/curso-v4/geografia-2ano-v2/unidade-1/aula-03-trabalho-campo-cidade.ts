@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import feira from "@/assets/geografia-3ano/feira-livre-bairro.jpg";
-import sitio from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg";
-import ordenha from "@/assets/geografia-3ano/ordenha-manha-fazenda.jpg";
-import padaria from "@/assets/geografia-3ano/padaria-artesanal-paes.jpg";
-import mercado from "@/assets/geografia-3ano/prateleira-leite-mercado.jpg";
-import caminhao from "@/assets/geografia-3ano/caminhao-leite-estrada.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as feira } from "@/assets/geografia-3ano/feira-livre-bairro.jpg.asset.json";
+import { url as sitio } from "@/assets/geografia-3ano/colheita-sitio-hortalicas.jpg.asset.json";
+import { url as ordenha } from "@/assets/geografia-3ano/ordenha-manha-fazenda.jpg.asset.json";
+import { url as padaria } from "@/assets/geografia-3ano/padaria-artesanal-paes.jpg.asset.json";
+import { url as mercado } from "@/assets/geografia-3ano/prateleira-leite-mercado.jpg.asset.json";
+import { url as caminhao } from "@/assets/geografia-3ano/caminhao-leite-estrada.jpg.asset.json";
 /**
  * Geografia · 2º Ano (v2) · Unidade 1 · Aula 03
  * "Trabalho no Campo e na Cidade" — EF02GE03

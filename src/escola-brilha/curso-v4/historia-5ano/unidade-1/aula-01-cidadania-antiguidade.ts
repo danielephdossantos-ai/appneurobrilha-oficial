@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgAgora from "@/assets/historia-5ano/agora-atenas.jpg";
-import imgOstraco from "@/assets/historia-5ano/ostraco.jpg";
-import imgColiseu from "@/assets/historia-5ano/coliseu-roma.jpg";
-import imgConst from "@/assets/historia-5ano/constituicao-1988.jpg";
-import imgTimeline from "@/assets/historia-5ano/timeline-cidadania.jpg";
-
+import { url as imgAgora } from "@/assets/historia-5ano/agora-atenas.jpg.asset.json";
+import { url as imgOstraco } from "@/assets/historia-5ano/ostraco.jpg.asset.json";
+import { url as imgColiseu } from "@/assets/historia-5ano/coliseu-roma.jpg.asset.json";
+import { url as imgConst } from "@/assets/historia-5ano/constituicao-1988.jpg.asset.json";
+import { url as imgTimeline } from "@/assets/historia-5ano/timeline-cidadania.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 1 · Aula 01 (PILOTO)
  * "O Conceito de Cidadania e a Antiguidade"

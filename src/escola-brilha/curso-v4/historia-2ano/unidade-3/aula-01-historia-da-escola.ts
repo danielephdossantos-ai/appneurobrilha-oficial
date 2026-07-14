@@ -1,13 +1,12 @@
 import type { AulaGeoV1 } from "../../types";
-import imgSalaAntiga from "@/assets/historia-2ano/sala-antiga-1940.png";
-import imgSalaModerna from "@/assets/historia-2ano/sala-moderna-atual.png";
-import imgPalmatoria from "@/assets/historia-2ano/palmatoria-antiga.png";
-import imgPena from "@/assets/historia-2ano/caneta-pena-tinta.png";
-import imgLousa from "@/assets/historia-2ano/lousa-pedra.png";
-import imgTablet from "@/assets/historia-2ano/tablet-livros-digital.png";
-import imgPatio from "@/assets/historia-2ano/patio-escola-atual.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-
+import { url as imgSalaAntiga } from "@/assets/historia-2ano/sala-antiga-1940.png.asset.json";
+import { url as imgSalaModerna } from "@/assets/historia-2ano/sala-moderna-atual.png.asset.json";
+import { url as imgPalmatoria } from "@/assets/historia-2ano/palmatoria-antiga.png.asset.json";
+import { url as imgPena } from "@/assets/historia-2ano/caneta-pena-tinta.png.asset.json";
+import { url as imgLousa } from "@/assets/historia-2ano/lousa-pedra.png.asset.json";
+import { url as imgTablet } from "@/assets/historia-2ano/tablet-livros-digital.png.asset.json";
+import { url as imgPatio } from "@/assets/historia-2ano/patio-escola-atual.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 3 · Aula 01
  * "A História da Minha Escola" — EF02HI09 + EF02HI10

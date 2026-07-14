@@ -1,8 +1,7 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import feira from "@/assets/geografia-3ano/feira-livre-bairro.jpg";
-import familiaMercado from "@/assets/geografia-3ano/familia-supermercado-compras.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as feira } from "@/assets/geografia-3ano/feira-livre-bairro.jpg.asset.json";
+import { url as familiaMercado } from "@/assets/geografia-3ano/familia-supermercado-compras.jpg.asset.json";
 /**
  * Geografia · 2º Ano (v2) · Unidade 1 · Aula 02
  * "Convivência no Lugar" — EF02GE02

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgIpi from "@/assets/historia-8ano/u6-ipiranga.jpg";
-import imgCafe from "@/assets/historia-8ano/u6-fazenda-cafe.jpg";
-
-import imgDomPedro from "@/assets/historia-8ano/u6-dom-pedro.jpg";
-import imgFico from "@/assets/historia-8ano/u6-dia-fico.jpg";
-import imgConst from "@/assets/historia-8ano/u6-constituicao-1824.jpg";
+import { url as imgIpi } from "@/assets/historia-8ano/u6-ipiranga.jpg.asset.json";
+import { url as imgCafe } from "@/assets/historia-8ano/u6-fazenda-cafe.jpg.asset.json";
+import { url as imgDomPedro } from "@/assets/historia-8ano/u6-dom-pedro.jpg.asset.json";
+import { url as imgFico } from "@/assets/historia-8ano/u6-dia-fico.jpg.asset.json";
+import { url as imgConst } from "@/assets/historia-8ano/u6-constituicao-1824.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-independencia-brasil",
   titulo: "A Independência do Brasil e o Império",

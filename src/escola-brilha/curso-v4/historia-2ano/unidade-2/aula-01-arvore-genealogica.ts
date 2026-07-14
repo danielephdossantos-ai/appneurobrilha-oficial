@@ -1,16 +1,15 @@
 import type { AulaGeoV1 } from "../../types";
-import imgArvore from "@/assets/historia-2ano/arvore-genealogica-diagrama.png";
-import imgGeracoes from "@/assets/historia-2ano/geracoes-familia.png";
-import imgCaixa from "@/assets/historia-2ano/caixa-fotos-antigas.png";
-import imgCertidao from "@/assets/historia-2ano/certidao-antiga.png";
-import imgSapatinhos from "@/assets/historia-2ano/sapatinhos-bronze.png";
-import imgMala from "@/assets/historia-2ano/mala-velha-objetos.png";
-import imgTradicao from "@/assets/historia-2ano/tradicao-bolo-familia.png";
-import imgAvos from "@/assets/historia-2ano/avos-familia.png";
-import imgPais from "@/assets/historia-2ano/pais-familia.png";
-import imgBrilhaCrianca from "@/assets/historia-2ano/presente-brilha-agora.png";
-import imgFotoAntiga from "@/assets/historia-2ano/foto-antiga.png";
-
+import { url as imgArvore } from "@/assets/historia-2ano/arvore-genealogica-diagrama.png.asset.json";
+import { url as imgGeracoes } from "@/assets/historia-2ano/geracoes-familia.png.asset.json";
+import { url as imgCaixa } from "@/assets/historia-2ano/caixa-fotos-antigas.png.asset.json";
+import { url as imgCertidao } from "@/assets/historia-2ano/certidao-antiga.png.asset.json";
+import { url as imgSapatinhos } from "@/assets/historia-2ano/sapatinhos-bronze.png.asset.json";
+import { url as imgMala } from "@/assets/historia-2ano/mala-velha-objetos.png.asset.json";
+import { url as imgTradicao } from "@/assets/historia-2ano/tradicao-bolo-familia.png.asset.json";
+import { url as imgAvos } from "@/assets/historia-2ano/avos-familia.png.asset.json";
+import { url as imgPais } from "@/assets/historia-2ano/pais-familia.png.asset.json";
+import { url as imgBrilhaCrianca } from "@/assets/historia-2ano/presente-brilha-agora.png.asset.json";
+import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 2 · Aula 01
  * "Minha História e Minha Família" — EF02HI03 + EF02HI04

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgVargas from "@/assets/historia-9ano/u4-era-vargas.jpg";
-import imgTrab from "@/assets/historia-9ano/u4-trabalhadores-brasil.jpg";
-
-import imgRadio from "@/assets/historia-9ano/u4-vargas-radio.jpg";
-import imgEstadoNovo from "@/assets/historia-9ano/u4-estado-novo.jpg";
-import imgTrabFab from "@/assets/historia-9ano/u4-trabalhadores-fabrica.jpg";
+import { url as imgVargas } from "@/assets/historia-9ano/u4-era-vargas.jpg.asset.json";
+import { url as imgTrab } from "@/assets/historia-9ano/u4-trabalhadores-brasil.jpg.asset.json";
+import { url as imgRadio } from "@/assets/historia-9ano/u4-vargas-radio.jpg.asset.json";
+import { url as imgEstadoNovo } from "@/assets/historia-9ano/u4-estado-novo.jpg.asset.json";
+import { url as imgTrabFab } from "@/assets/historia-9ano/u4-trabalhadores-fabrica.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-era-vargas",
   titulo: "Era Vargas (1930–1945)",

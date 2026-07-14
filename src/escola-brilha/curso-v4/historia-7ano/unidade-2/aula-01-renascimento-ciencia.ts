@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgAtenas from "@/assets/historia-7ano/u2-escola-atenas.jpg";
-import imgDavinci from "@/assets/historia-7ano/u2-davinci-caderno.jpg";
-import imgPrensa from "@/assets/historia-7ano/u2-prensa-gutenberg.jpg";
-import imgHelio from "@/assets/historia-7ano/u2-heliocentrico.jpg";
-import imgHumanismo from "@/assets/historia-7ano/u2-infografico-humanismo.jpg";
-
+import { url as imgAtenas } from "@/assets/historia-7ano/u2-escola-atenas.jpg.asset.json";
+import { url as imgDavinci } from "@/assets/historia-7ano/u2-davinci-caderno.jpg.asset.json";
+import { url as imgPrensa } from "@/assets/historia-7ano/u2-prensa-gutenberg.jpg.asset.json";
+import { url as imgHelio } from "@/assets/historia-7ano/u2-heliocentrico.jpg.asset.json";
+import { url as imgHumanismo } from "@/assets/historia-7ano/u2-infografico-humanismo.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-renascimento-ciencia",
   titulo: "O Renascimento Cultural e Científico",

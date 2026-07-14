@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import petroleo from "@/assets/geografia-9ano/petroleo-golfo.jpg";
-import jerusalem from "@/assets/geografia-9ano/jerusalem-cidade.jpg";
-import refugiados from "@/assets/geografia-9ano/refugiados-oriente.jpg";
-import mecca from "@/assets/geografia-9ano/mecca-peregrinacao.jpg";
-
+import { url as petroleo } from "@/assets/geografia-9ano/petroleo-golfo.jpg.asset.json";
+import { url as jerusalem } from "@/assets/geografia-9ano/jerusalem-cidade.jpg.asset.json";
+import { url as refugiados } from "@/assets/geografia-9ano/refugiados-oriente.jpg.asset.json";
+import { url as mecca } from "@/assets/geografia-9ano/mecca-peregrinacao.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 4 · Aula 01
  * "Oriente Médio e Conflitos" — BNCC EF09GE07, EF09GE12

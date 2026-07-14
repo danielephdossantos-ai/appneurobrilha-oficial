@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMachu from "@/assets/historia-6ano/u7-machu-picchu.jpg";
-import imgQuipu from "@/assets/historia-6ano/u7-quipu.jpg";
-import imgCalendario from "@/assets/historia-6ano/u7-calendario-asteca.jpg";
-import imgTeno from "@/assets/historia-6ano/u7-tenochtitlan.jpg";
-import imgMapa from "@/assets/historia-6ano/u7-infografico-precolombianos.jpg";
-
+import { url as imgMachu } from "@/assets/historia-6ano/u7-machu-picchu.jpg.asset.json";
+import { url as imgQuipu } from "@/assets/historia-6ano/u7-quipu.jpg.asset.json";
+import { url as imgCalendario } from "@/assets/historia-6ano/u7-calendario-asteca.jpg.asset.json";
+import { url as imgTeno } from "@/assets/historia-6ano/u7-tenochtitlan.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-6ano/u7-infografico-precolombianos.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-povos-pre-colombianos",
   titulo: "Maias, Astecas e Incas",

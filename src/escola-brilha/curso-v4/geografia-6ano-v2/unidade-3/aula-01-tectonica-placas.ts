@@ -1,12 +1,11 @@
 import type { AulaGeoV1 } from "../../types";
-import tectonica from "@/assets/geografia-6ano/tectonica-placas.jpg";
-import cinturaoFogo from "@/assets/geografia-6ano/cinturao-fogo.jpg";
-import himalaia from "@/assets/geografia-6ano/himalaia.jpg";
-import andes from "@/assets/geografia-6ano/andes.jpg";
-import vulcaoErupcao from "@/assets/geografia-6ano/vulcao-erupcao.jpg";
-import tsunami from "@/assets/geografia-6ano/tsunami.jpg";
-import placasCrosta from "@/assets/geografia-6ano/placas-crosta.jpg";
-
+import { url as tectonica } from "@/assets/geografia-6ano/tectonica-placas.jpg.asset.json";
+import { url as cinturaoFogo } from "@/assets/geografia-6ano/cinturao-fogo.jpg.asset.json";
+import { url as himalaia } from "@/assets/geografia-6ano/himalaia.jpg.asset.json";
+import { url as andes } from "@/assets/geografia-6ano/andes.jpg.asset.json";
+import { url as vulcaoErupcao } from "@/assets/geografia-6ano/vulcao-erupcao.jpg.asset.json";
+import { url as tsunami } from "@/assets/geografia-6ano/tsunami.jpg.asset.json";
+import { url as placasCrosta } from "@/assets/geografia-6ano/placas-crosta.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2) · Unidade 3 · Aula 01
  * "Tectônica de Placas" — BNCC EF06GE02, EF06GE03

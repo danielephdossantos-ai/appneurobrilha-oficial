@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import renovavel from "@/assets/geografia-5ano/energia-renovavel.jpg";
-import fossil from "@/assets/geografia-5ano/energia-fossil.jpg";
-
+import { url as renovavel } from "@/assets/geografia-5ano/energia-renovavel.jpg.asset.json";
+import { url as fossil } from "@/assets/geografia-5ano/energia-fossil.jpg.asset.json";
 /**
  * Geografia · 5º Ano · Unidade 4 · Aula 01
  * "Matriz Energética do Brasil" — EF05GE06 / EF05GE07

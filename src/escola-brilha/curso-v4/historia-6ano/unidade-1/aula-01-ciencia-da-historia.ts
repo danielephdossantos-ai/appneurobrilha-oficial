@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import imgMesa from "@/assets/historia-6ano/mesa-arqueologo.jpg";
-import imgMoeda from "@/assets/historia-6ano/moeda-julio-cesar.jpg";
-import imgDiario from "@/assets/historia-6ano/diario-soldado.jpg";
-import imgRupestre from "@/assets/historia-6ano/pintura-rupestre.jpg";
-import imgIndig from "@/assets/historia-6ano/lider-indigena.jpg";
-import imgFontes from "@/assets/historia-6ano/infografico-fontes.jpg";
-
+import { url as imgMesa } from "@/assets/historia-6ano/mesa-arqueologo.jpg.asset.json";
+import { url as imgMoeda } from "@/assets/historia-6ano/moeda-julio-cesar.jpg.asset.json";
+import { url as imgDiario } from "@/assets/historia-6ano/diario-soldado.jpg.asset.json";
+import { url as imgRupestre } from "@/assets/historia-6ano/pintura-rupestre.jpg.asset.json";
+import { url as imgIndig } from "@/assets/historia-6ano/lider-indigena.jpg.asset.json";
+import { url as imgFontes } from "@/assets/historia-6ano/infografico-fontes.jpg.asset.json";
 /**
  * História · 6º Ano (PILOTO Teen) · Unidade 1 · Aula 01
  * "A Ciência da História e os Ofícios do Historiador"

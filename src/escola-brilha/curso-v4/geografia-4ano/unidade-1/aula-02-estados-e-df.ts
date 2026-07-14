@@ -1,14 +1,13 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
-import heroEstados from "@/assets/geografia-4ano/hero-estados-brasil.jpg";
-import brasiliaDF from "@/assets/geografia-4ano/brasilia-df.jpg";
-import bandeiras from "@/assets/geografia-4ano/bandeiras-estados.jpg";
-import lupaEstado from "@/assets/geografia-4ano/lupa-estado.jpg";
-import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
-import nordeste from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg";
-import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
-import sul from "@/assets/geografia-4ano/regiao-sul-serra.jpg";
-
+import { url as mapaEstados } from "@/assets/geografia-4ano/mapa-brasil-estados.jpg.asset.json";
+import { url as heroEstados } from "@/assets/geografia-4ano/hero-estados-brasil.jpg.asset.json";
+import { url as brasiliaDF } from "@/assets/geografia-4ano/brasilia-df.jpg.asset.json";
+import { url as bandeiras } from "@/assets/geografia-4ano/bandeiras-estados.jpg.asset.json";
+import { url as lupaEstado } from "@/assets/geografia-4ano/lupa-estado.jpg.asset.json";
+import { url as norte } from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg.asset.json";
+import { url as nordeste } from "@/assets/geografia-4ano/regiao-nordeste-praia.jpg.asset.json";
+import { url as sudeste } from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg.asset.json";
+import { url as sul } from "@/assets/geografia-4ano/regiao-sul-serra.jpg.asset.json";
 /**
  * Geografia · 4º Ano · Unidade 1 · Aula 02
  * "Os 26 Estados + o Distrito Federal" — EF04GE02

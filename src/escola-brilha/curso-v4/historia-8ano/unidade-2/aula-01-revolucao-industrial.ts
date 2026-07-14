@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgFab from "@/assets/historia-8ano/u2-fabrica-manchester.jpg";
-import imgTear from "@/assets/historia-8ano/u2-tear-mecanico.jpg";
-
-import imgLoco from "@/assets/historia-8ano/u2-locomotiva-vapor.jpg";
-import imgCriancas from "@/assets/historia-8ano/u2-criancas-fabrica.jpg";
-import imgCidade from "@/assets/historia-8ano/u2-cidade-industrial.jpg";
+import { url as imgFab } from "@/assets/historia-8ano/u2-fabrica-manchester.jpg.asset.json";
+import { url as imgTear } from "@/assets/historia-8ano/u2-tear-mecanico.jpg.asset.json";
+import { url as imgLoco } from "@/assets/historia-8ano/u2-locomotiva-vapor.jpg.asset.json";
+import { url as imgCriancas } from "@/assets/historia-8ano/u2-criancas-fabrica.jpg.asset.json";
+import { url as imgCidade } from "@/assets/historia-8ano/u2-cidade-industrial.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-revolucao-industrial",
   titulo: "A Revolução Industrial e o Mundo do Trabalho",

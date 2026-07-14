@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import bolsa from "@/assets/geografia-8ano/bolsa-valores.jpg";
-import china from "@/assets/geografia-8ano/china-fabrica.jpg";
-import ue from "@/assets/geografia-8ano/uniao-europeia.jpg";
-import brics from "@/assets/geografia-8ano/brics-cupula.jpg";
-
+import { url as bolsa } from "@/assets/geografia-8ano/bolsa-valores.jpg.asset.json";
+import { url as china } from "@/assets/geografia-8ano/china-fabrica.jpg.asset.json";
+import { url as ue } from "@/assets/geografia-8ano/uniao-europeia.jpg.asset.json";
+import { url as brics } from "@/assets/geografia-8ano/brics-cupula.jpg.asset.json";
 /**
  * Geografia · 8º Ano · Unidade 6 · Aula 01
  * "Economia Mundial e Blocos" — BNCC EF08GE12, EF08GE18

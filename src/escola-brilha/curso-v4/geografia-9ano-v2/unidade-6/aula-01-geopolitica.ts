@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import onu from "@/assets/geografia-9ano/onu-assembleia.jpg";
-import otan from "@/assets/geografia-9ano/otan-cupula.jpg";
-import brics from "@/assets/geografia-9ano/brics-lideres.jpg";
-import chinaEua from "@/assets/geografia-9ano/china-eua-tensao.jpg";
-
+import { url as onu } from "@/assets/geografia-9ano/onu-assembleia.jpg.asset.json";
+import { url as otan } from "@/assets/geografia-9ano/otan-cupula.jpg.asset.json";
+import { url as brics } from "@/assets/geografia-9ano/brics-lideres.jpg.asset.json";
+import { url as chinaEua } from "@/assets/geografia-9ano/china-eua-tensao.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 6 · Aula 01
  * "Geopolítica e Blocos de Poder" — BNCC EF09GE10, EF09GE11

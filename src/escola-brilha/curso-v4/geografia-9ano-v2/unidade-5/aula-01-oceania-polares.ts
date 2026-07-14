@@ -1,9 +1,8 @@
 import type { AulaGeoV1 } from "../../types";
-import sydney from "@/assets/geografia-9ano/sydney-opera.jpg";
-import corais from "@/assets/geografia-9ano/barreira-corais.jpg";
-import antartida from "@/assets/geografia-9ano/antartida-base.jpg";
-import artico from "@/assets/geografia-9ano/artico-iceberg.jpg";
-
+import { url as sydney } from "@/assets/geografia-9ano/sydney-opera.jpg.asset.json";
+import { url as corais } from "@/assets/geografia-9ano/barreira-corais.jpg.asset.json";
+import { url as antartida } from "@/assets/geografia-9ano/antartida-base.jpg.asset.json";
+import { url as artico } from "@/assets/geografia-9ano/artico-iceberg.jpg.asset.json";
 /**
  * Geografia · 9º Ano · Unidade 5 · Aula 01
  * "Oceania e Regiões Polares" — BNCC EF09GE13, EF09GE18

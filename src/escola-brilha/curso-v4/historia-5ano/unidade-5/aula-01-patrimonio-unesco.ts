@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgOuro from "@/assets/historia-5ano/ouro-preto.jpg";
-import imgIguacu from "@/assets/historia-5ano/cataratas-iguacu.jpg";
-import imgMachu from "@/assets/historia-5ano/machu-picchu.jpg";
-import imgMapa from "@/assets/historia-5ano/mapa-patrimonios-brasil.jpg";
-import imgOnu from "@/assets/historia-5ano/onu-assembleia.jpg";
-
+import { url as imgOuro } from "@/assets/historia-5ano/ouro-preto.jpg.asset.json";
+import { url as imgIguacu } from "@/assets/historia-5ano/cataratas-iguacu.jpg.asset.json";
+import { url as imgMachu } from "@/assets/historia-5ano/machu-picchu.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-5ano/mapa-patrimonios-brasil.jpg.asset.json";
+import { url as imgOnu } from "@/assets/historia-5ano/onu-assembleia.jpg.asset.json";
 /**
  * História · 5º Ano · Unidade 5 · Aula 01
  * "Patrimônio da Humanidade e Diversidade Cultural"

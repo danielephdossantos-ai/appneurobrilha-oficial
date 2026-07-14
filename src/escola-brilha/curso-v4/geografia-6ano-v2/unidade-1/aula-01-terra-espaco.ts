@@ -1,20 +1,19 @@
 import type { AulaGeoV1 } from "../../types";
-import terraEspaco from "@/assets/geografia-6ano/terra-espaco.jpg";
-import orbitaEstacoes from "@/assets/geografia-6ano/orbita-estacoes.jpg";
-import rotacaoDiaNoite from "@/assets/geografia-6ano/rotacao-dia-noite.jpg";
-import rotacaoReal from "@/assets/geografia-6ano/rotacao-real.jpg";
-import translacaoOrbita from "@/assets/geografia-6ano/translacao-orbita.jpg";
-import eixoInclinado from "@/assets/geografia-6ano/eixo-inclinado.jpg";
-import quatroEstacoes from "@/assets/geografia-6ano/quatro-estacoes.jpg";
-import estacaoVerao from "@/assets/geografia-6ano/estacao-verao.jpg";
-import estacaoOutono from "@/assets/geografia-6ano/estacao-outono.jpg";
-import estacaoInverno from "@/assets/geografia-6ano/estacao-inverno.jpg";
-import estacaoPrimavera from "@/assets/geografia-6ano/estacao-primavera.jpg";
-import orbitaJun from "@/assets/geografia-6ano/orbita-jun-solsticio.jpg";
-import orbitaSet from "@/assets/geografia-6ano/orbita-set-equinocio.jpg";
-import orbitaDez from "@/assets/geografia-6ano/orbita-dez-solsticio.jpg";
-import orbitaMar from "@/assets/geografia-6ano/orbita-mar-equinocio.jpg";
-
+import { url as terraEspaco } from "@/assets/geografia-6ano/terra-espaco.jpg.asset.json";
+import { url as orbitaEstacoes } from "@/assets/geografia-6ano/orbita-estacoes.jpg.asset.json";
+import { url as rotacaoDiaNoite } from "@/assets/geografia-6ano/rotacao-dia-noite.jpg.asset.json";
+import { url as rotacaoReal } from "@/assets/geografia-6ano/rotacao-real.jpg.asset.json";
+import { url as translacaoOrbita } from "@/assets/geografia-6ano/translacao-orbita.jpg.asset.json";
+import { url as eixoInclinado } from "@/assets/geografia-6ano/eixo-inclinado.jpg.asset.json";
+import { url as quatroEstacoes } from "@/assets/geografia-6ano/quatro-estacoes.jpg.asset.json";
+import { url as estacaoVerao } from "@/assets/geografia-6ano/estacao-verao.jpg.asset.json";
+import { url as estacaoOutono } from "@/assets/geografia-6ano/estacao-outono.jpg.asset.json";
+import { url as estacaoInverno } from "@/assets/geografia-6ano/estacao-inverno.jpg.asset.json";
+import { url as estacaoPrimavera } from "@/assets/geografia-6ano/estacao-primavera.jpg.asset.json";
+import { url as orbitaJun } from "@/assets/geografia-6ano/orbita-jun-solsticio.jpg.asset.json";
+import { url as orbitaSet } from "@/assets/geografia-6ano/orbita-set-equinocio.jpg.asset.json";
+import { url as orbitaDez } from "@/assets/geografia-6ano/orbita-dez-solsticio.jpg.asset.json";
+import { url as orbitaMar } from "@/assets/geografia-6ano/orbita-mar-equinocio.jpg.asset.json";
 /**
  * Geografia · 6º Ano (PILOTO v2 — formato 5º Ano) · Unidade 1 · Aula 01
  * "A Terra no Espaço: Rotação, Translação e Inclinação"

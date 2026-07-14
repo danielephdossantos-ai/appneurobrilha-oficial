@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgCaravela from "@/assets/historia-7ano/u5-caravela.jpg";
-import imgAstrolabio from "@/assets/historia-7ano/u5-astrolabio.jpg";
-import imgMapa from "@/assets/historia-7ano/u5-mapa-monstros.jpg";
-import imgEsp from "@/assets/historia-7ano/u5-especiarias.jpg";
-import imgTord from "@/assets/historia-7ano/u5-infografico-tordesilhas.jpg";
-
+import { url as imgCaravela } from "@/assets/historia-7ano/u5-caravela.jpg.asset.json";
+import { url as imgAstrolabio } from "@/assets/historia-7ano/u5-astrolabio.jpg.asset.json";
+import { url as imgMapa } from "@/assets/historia-7ano/u5-mapa-monstros.jpg.asset.json";
+import { url as imgEsp } from "@/assets/historia-7ano/u5-especiarias.jpg.asset.json";
+import { url as imgTord } from "@/assets/historia-7ano/u5-infografico-tordesilhas.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-grandes-navegacoes",
   titulo: "As Grandes Navegações e a Expansão Marítima",

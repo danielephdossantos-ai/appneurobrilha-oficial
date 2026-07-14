@@ -1,11 +1,10 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import heroCampoCidade from "@/assets/geografia-3ano/campo-cidade-trabalham-juntos.jpg";
-import ordenha from "@/assets/geografia-3ano/ordenha-manha-fazenda.jpg";
-import caminhao from "@/assets/geografia-3ano/caminhao-leite-estrada.jpg";
-import fabrica from "@/assets/geografia-3ano/fabrica-pasteurizacao-leite.jpg";
-import mercado from "@/assets/geografia-3ano/prateleira-leite-mercado.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as heroCampoCidade } from "@/assets/geografia-3ano/campo-cidade-trabalham-juntos.jpg.asset.json";
+import { url as ordenha } from "@/assets/geografia-3ano/ordenha-manha-fazenda.jpg.asset.json";
+import { url as caminhao } from "@/assets/geografia-3ano/caminhao-leite-estrada.jpg.asset.json";
+import { url as fabrica } from "@/assets/geografia-3ano/fabrica-pasteurizacao-leite.jpg.asset.json";
+import { url as mercado } from "@/assets/geografia-3ano/prateleira-leite-mercado.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 3 · Aula 01
  * "A Rota do Leite" — EF03GE03

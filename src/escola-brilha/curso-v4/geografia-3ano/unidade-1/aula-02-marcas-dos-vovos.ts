@@ -1,7 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
-import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
-import feiraHerancas from "@/assets/geografia-3ano/herancas-feira-municipio.jpg";
-
+import { url as mapaMunicipio } from "@/assets/geografia-3ano/mapa-municipio.jpg.asset.json";
+import { url as feiraHerancas } from "@/assets/geografia-3ano/herancas-feira-municipio.jpg.asset.json";
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 02
  * "Marcas dos Vovôs" — EF03GE02

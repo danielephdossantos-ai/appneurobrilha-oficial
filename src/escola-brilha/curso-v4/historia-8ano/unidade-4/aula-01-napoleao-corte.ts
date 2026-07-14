@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgNap from "@/assets/historia-8ano/u4-napoleao-batalha.jpg";
-import imgFam from "@/assets/historia-8ano/u4-familia-real-embarque.jpg";
-
-import imgCoroacao from "@/assets/historia-8ano/u4-coroacao-napoleao.jpg";
-import imgCorte from "@/assets/historia-8ano/u4-corte-rio.jpg";
-import imgPortos from "@/assets/historia-8ano/u4-abertura-portos.jpg";
+import { url as imgNap } from "@/assets/historia-8ano/u4-napoleao-batalha.jpg.asset.json";
+import { url as imgFam } from "@/assets/historia-8ano/u4-familia-real-embarque.jpg.asset.json";
+import { url as imgCoroacao } from "@/assets/historia-8ano/u4-coroacao-napoleao.jpg.asset.json";
+import { url as imgCorte } from "@/assets/historia-8ano/u4-corte-rio.jpg.asset.json";
+import { url as imgPortos } from "@/assets/historia-8ano/u4-abertura-portos.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-napoleao-corte",
   titulo: "Napoleão e a Vinda da Corte para o Brasil",

@@ -1,10 +1,9 @@
 import type { AulaGeoV1 } from "../../types";
-import imgEngenho from "@/assets/historia-7ano/u7-engenho.jpg";
-import imgPalmares from "@/assets/historia-7ano/u7-palmares.jpg";
-import imgPao from "@/assets/historia-7ano/u7-pao-acucar.jpg";
-import imgInv from "@/assets/historia-7ano/u7-inventario.jpg";
-import imgInf from "@/assets/historia-7ano/u7-infografico-engenho.jpg";
-
+import { url as imgEngenho } from "@/assets/historia-7ano/u7-engenho.jpg.asset.json";
+import { url as imgPalmares } from "@/assets/historia-7ano/u7-palmares.jpg.asset.json";
+import { url as imgPao } from "@/assets/historia-7ano/u7-pao-acucar.jpg.asset.json";
+import { url as imgInv } from "@/assets/historia-7ano/u7-inventario.jpg.asset.json";
+import { url as imgInf } from "@/assets/historia-7ano/u7-infografico-engenho.jpg.asset.json";
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-brasil-colonial",
   titulo: "O Brasil Colonial: Açúcar, Escravidão e Resistência",

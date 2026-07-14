@@ -1,15 +1,14 @@
 import type { AulaGeoV1 } from "../../types";
-import imgPinturas from "@/assets/historia-4ano/pinturas-rupestres.jpg";
-import imgFerramentas from "@/assets/historia-4ano/ferramentas-pedra-lascada.jpg";
-import imgMapaMigracoes from "@/assets/historia-4ano/mapa-migracoes-humanas.jpg";
-import imgSavana from "@/assets/historia-4ano/savana-africa.jpg";
-import imgNomades from "@/assets/historia-4ano/nomades-caminhando.jpg";
-import imgCaverna from "@/assets/historia-4ano/caverna-fogueira.jpg";
-import imgAldeia from "@/assets/historia-4ano/aldeia-neolitica.jpg";
-import imgSerra from "@/assets/historia-4ano/serra-capivara.jpg";
-import imgLanca from "@/assets/historia-4ano/ponta-lanca-quartzo.jpg";
-import imgComparativo from "@/assets/historia-4ano/infografico-nomade-sedentario.jpg";
-
+import { url as imgPinturas } from "@/assets/historia-4ano/pinturas-rupestres.jpg.asset.json";
+import { url as imgFerramentas } from "@/assets/historia-4ano/ferramentas-pedra-lascada.jpg.asset.json";
+import { url as imgMapaMigracoes } from "@/assets/historia-4ano/mapa-migracoes-humanas.jpg.asset.json";
+import { url as imgSavana } from "@/assets/historia-4ano/savana-africa.jpg.asset.json";
+import { url as imgNomades } from "@/assets/historia-4ano/nomades-caminhando.jpg.asset.json";
+import { url as imgCaverna } from "@/assets/historia-4ano/caverna-fogueira.jpg.asset.json";
+import { url as imgAldeia } from "@/assets/historia-4ano/aldeia-neolitica.jpg.asset.json";
+import { url as imgSerra } from "@/assets/historia-4ano/serra-capivara.jpg.asset.json";
+import { url as imgLanca } from "@/assets/historia-4ano/ponta-lanca-quartzo.jpg.asset.json";
+import { url as imgComparativo } from "@/assets/historia-4ano/infografico-nomade-sedentario.jpg.asset.json";
 /**
  * História · 4º Ano · Unidade 1 · Aula 01
  * "Os Primeiros Deslocamentos Humanos" — Nomadismo × Sedentarismo.
