@@ -192,9 +192,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: moleculasImg,
     fatias: [
-      { id: "hidrogenio", rotulo: "Hidrogênio (H)", emoji: "⚛️", percentual: 74, cor: "#0ea5e9", descricao: "Elemento mais abundante do universo. Combustível das estrelas.", exemplos: ["Sol", "Água (H₂O)", "Estrelas"], fotoUrl: moleculasImg },
-      { id: "helio", rotulo: "Hélio (He)", emoji: "🎈", percentual: 24, cor: "#f59e0b", descricao: "Segundo mais abundante. Gerado nas estrelas por fusão do hidrogênio.", exemplos: ["Balões", "Sol", "Estrelas"], fotoUrl: moleculasImg },
-      { id: "resto", rotulo: "Outros elementos", emoji: "✨", percentual: 2, cor: "#ef4444", descricao: "Todo o resto da tabela periódica — carbono, oxigênio, ferro, ouro. Somos feitos DESSES 2%.", exemplos: ["Carbono (nós)", "Oxigênio", "Ferro"], fotoUrl: moleculasImg },
+      { id: "hidrogenio", rotulo: "Hidrogênio + Hélio", emoji: "⚛️", percentual: 98, cor: "#0ea5e9", descricao: "Só dois elementos (H e He) formam 98% da matéria do universo — combustível e cinzas das estrelas.", exemplos: ["Sol", "Estrelas", "Balões"], fotoUrl: moleculasImg },
+      { id: "resto", rotulo: "Todos os outros elementos", emoji: "✨", percentual: 2, cor: "#ef4444", descricao: "Todo o resto da tabela periódica — carbono, oxigênio, ferro, ouro. Somos feitos DESSES 2%.", exemplos: ["Carbono (nós)", "Oxigênio", "Ferro"], fotoUrl: moleculasImg },
     ],
     falaFinal:
       "Somos feitos de 'poeira das estrelas' — só 2% do que existe no universo. Poesia é química.",
@@ -206,6 +205,7 @@ export const aula01: AulaGeoV1 = {
       "Última missão do Departamento 5. 3 perguntas para receber sua Certificação de Químico Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: laboratorioImg,
+    selo: { nome: "Certificação · Químico Júnior", subtitulo: "Departamento 5 · Química Básica", emoji: "⚗️", cor: "from-amber-500 to-orange-700" },
     perguntas: [
       { id: "q1", pergunta: "Menor unidade da matéria com identidade química é o...", fotoUrl: moleculasImg,
         opcoes: [

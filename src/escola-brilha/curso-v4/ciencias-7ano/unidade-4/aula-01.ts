@@ -193,9 +193,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: cadeiaImg,
     fatias: [
-      { id: "produtor", rotulo: "Produtor", emoji: "🌿", percentual: 90, cor: "#10b981", descricao: "Plantas absorvem energia solar. Base larga da pirâmide — muita biomassa disponível.", exemplos: ["Capim", "Árvores", "Algas"], fotoUrl: florestaImg },
-      { id: "consumidor1", rotulo: "Herbívoro", emoji: "🦗", percentual: 9, cor: "#f59e0b", descricao: "Só 10% da energia da planta vira corpo de herbívoro. Resto vira calor.", exemplos: ["Gafanhoto", "Capivara", "Vaca"], fotoUrl: cadeiaImg },
-      { id: "consumidor2", rotulo: "Carnívoro / Topo", emoji: "🦅", percentual: 1, cor: "#ef4444", descricao: "Só 1% da energia original chega ao topo. Por isso predadores são SEMPRE raros.", exemplos: ["Onça", "Gavião", "Tubarão"], fotoUrl: cadeiaImg },
+      { id: "produtor", rotulo: "Produtor (base)", emoji: "🌿", percentual: 90, cor: "#10b981", descricao: "Plantas absorvem energia solar. Base larga da pirâmide — muita biomassa disponível para o próximo nível.", exemplos: ["Capim", "Árvores", "Algas"], fotoUrl: florestaImg },
+      { id: "consumidores", rotulo: "Consumidores (herbívoros + carnívoros)", emoji: "🦅", percentual: 10, cor: "#ef4444", descricao: "A cada elo, só 10% da energia passa. Herbívoros ficam com ~9%, carnívoros com ~1%. Topo é sempre estreito.", exemplos: ["Gafanhoto", "Sapo", "Gavião"], fotoUrl: cadeiaImg },
     ],
     falaFinal:
       "Pirâmide da energia é INEVITAVELMENTE estreita no topo. Física impõe.",
@@ -207,6 +206,7 @@ export const aula01: AulaGeoV1 = {
       "Última missão do Departamento 4. 3 perguntas para receber sua Certificação de Ecólogo Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: florestaImg,
+    selo: { nome: "Certificação · Ecólogo Júnior", subtitulo: "Departamento 4 · Rede da Vida", emoji: "🌳", cor: "from-green-500 to-emerald-700" },
     perguntas: [
       { id: "q1", pergunta: "Qual afirmação é VERDADEIRA sobre ecossistemas?", fotoUrl: cadeiaImg,
         opcoes: [

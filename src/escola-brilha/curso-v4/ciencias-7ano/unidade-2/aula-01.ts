@@ -189,9 +189,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: arvoreImg,
     fatias: [
-      { id: "animais", rotulo: "Animais", emoji: "🐆", percentual: 75, cor: "#ef4444", descricao: "~1,3 milhão de espécies descritas — sendo ~1 milhão só de INSETOS. Maior diversidade de todos os grupos.", exemplos: ["Insetos", "Peixes", "Mamíferos"], fotoUrl: especiesImg },
-      { id: "plantas", rotulo: "Plantas", emoji: "🌿", percentual: 18, cor: "#10b981", descricao: "~300 mil espécies. Base de quase toda cadeia alimentar terrestre.", exemplos: ["Musgos", "Samambaias", "Angiospermas"], fotoUrl: especiesImg },
-      { id: "outros", rotulo: "Fungos + Protistas + Bactérias", emoji: "🦠", percentual: 7, cor: "#f59e0b", descricao: "Menor número DESCRITO — mas provavelmente muito maior na natureza. A maioria ainda não foi catalogada.", exemplos: ["Cogumelos", "Amebas", "Bactérias do solo"], fotoUrl: microorgImg },
+      { id: "animais", rotulo: "Animais", emoji: "🐆", percentual: 75, cor: "#ef4444", descricao: "~1,3 milhão de espécies descritas — sendo ~1 milhão só de INSETOS. Maior diversidade catalogada.", exemplos: ["Insetos", "Peixes", "Mamíferos"], fotoUrl: especiesImg },
+      { id: "outros", rotulo: "Plantas + Fungos + Micróbios", emoji: "🌿", percentual: 25, cor: "#10b981", descricao: "Plantas (~300 mil espécies), fungos e microrganismos juntos. Base de todos os ecossistemas — a maioria ainda não catalogada.", exemplos: ["Samambaias", "Cogumelos", "Bactérias"], fotoUrl: microorgImg },
     ],
     falaFinal:
       "Insetos dominam o número de espécies. Bactérias dominam o número de INDIVÍDUOS. Escalas diferentes.",
@@ -203,6 +202,7 @@ export const aula01: AulaGeoV1 = {
       "Última missão do Departamento 2. Responda 3 perguntas para receber sua Certificação de Taxonomista Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: arvoreImg,
+    selo: { nome: "Certificação · Taxonomista Júnior", subtitulo: "Departamento 2 · Árvore da Vida", emoji: "🌳", cor: "from-emerald-500 to-teal-700" },
     perguntas: [
       { id: "q1", pergunta: "Qual grupo NÃO tem núcleo definido em suas células?", fotoUrl: microorgImg,
         opcoes: [

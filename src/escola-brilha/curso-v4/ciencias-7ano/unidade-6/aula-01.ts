@@ -207,6 +207,7 @@ export const aula01: AulaGeoV1 = {
       "Última missão do Departamento 6. 3 perguntas para receber sua Certificação de Astrônomo Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: galaxiaImg,
+    selo: { nome: "Certificação · Astrônomo Júnior", subtitulo: "Departamento 6 · Endereço Cósmico", emoji: "🌌", cor: "from-indigo-500 to-purple-700" },
     perguntas: [
       { id: "q1", pergunta: "Diferença essencial entre estrela e planeta:", fotoUrl: solarImg,
         opcoes: [

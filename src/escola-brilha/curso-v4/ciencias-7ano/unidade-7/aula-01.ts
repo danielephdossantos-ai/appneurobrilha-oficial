@@ -199,9 +199,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: posterImg,
     fatias: [
-      { id: "dados", rotulo: "Resultados (gráficos, dados)", emoji: "📊", percentual: 50, cor: "#0ea5e9", descricao: "Metade do pôster é DADO VISUAL. Gráficos, tabelas, fotos do experimento. É o coração do trabalho.", exemplos: ["Gráfico de barras", "Foto do experimento", "Tabela de medidas"], fotoUrl: posterImg },
-      { id: "metodo", rotulo: "Método", emoji: "🔬", percentual: 25, cor: "#10b981", descricao: "Como você fez. Materiais, passos, tempo. Outra pessoa deve conseguir REPETIR.", exemplos: ["Lista de materiais", "Passo a passo", "Variáveis controladas"], fotoUrl: posterImg },
-      { id: "texto", rotulo: "Intro + Conclusão", emoji: "📝", percentual: 25, cor: "#f59e0b", descricao: "Contexto no início, resposta no fim. Curtos e diretos — deixe os dados falarem.", exemplos: ["Pergunta de pesquisa", "Resposta baseada em dados", "Próximos passos"], fotoUrl: posterImg },
+      { id: "dados", rotulo: "Resultados visuais (gráficos + fotos)", emoji: "📊", percentual: 50, cor: "#0ea5e9", descricao: "Metade do pôster é DADO VISUAL. Gráficos, tabelas, fotos do experimento. É o coração do trabalho.", exemplos: ["Gráfico de barras", "Foto do experimento", "Tabela de medidas"], fotoUrl: posterImg },
+      { id: "texto", rotulo: "Texto (método + intro + conclusão)", emoji: "📝", percentual: 50, cor: "#f59e0b", descricao: "Metade em texto: contexto no início, método no meio, resposta no fim. Curtos e diretos — os dados devem brilhar.", exemplos: ["Pergunta de pesquisa", "Passo a passo", "Conclusão baseada em dados"], fotoUrl: posterImg },
     ],
     falaFinal:
       "Menos texto, mais dado visual. Assim se comunica ciência com eficácia.",
@@ -213,6 +212,7 @@ export const aula01: AulaGeoV1 = {
       "ÚLTIMA MISSÃO DO CENTRO. Responda 3 perguntas para receber sua Certificação Final: Cientista Formado — Centro de Pesquisas da Vida e da Terra.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: palcoImg,
+    selo: { nome: "Certificação Final · Cientista Formado", subtitulo: "Centro de Pesquisas da Vida e da Terra · 7º Ano", emoji: "🎓", cor: "from-violet-500 to-purple-700" },
     perguntas: [
       { id: "q1", pergunta: "Qual é a ordem correta do MÉTODO CIENTÍFICO?", fotoUrl: posterImg,
         opcoes: [

@@ -206,6 +206,7 @@ export const aula01: AulaGeoV1 = {
       "Última missão do Departamento 3. 3 perguntas para receber sua Certificação de Fisiologista Júnior.",
     instrucao: "Responda 3 perguntas para receber o selo",
     fotoUrl: circulatorioImg,
+    selo: { nome: "Certificação · Fisiologista Júnior", subtitulo: "Departamento 3 · Máquina Humana", emoji: "🫀", cor: "from-red-500 to-rose-700" },
     perguntas: [
       { id: "q1", pergunta: "A produção de ATP requer glicose (do intestino) e O₂ (dos pulmões). Onde ocorre?", fotoUrl: circulatorioImg,
         opcoes: [
