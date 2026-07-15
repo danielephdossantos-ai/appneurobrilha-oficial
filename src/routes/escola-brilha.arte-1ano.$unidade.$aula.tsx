@@ -25,11 +25,11 @@ function AulaArtePage() {
 
 function ErrPage({ error, reset }: { error: unknown; reset: () => void }) {
   return (
-    <div className="min-h-screen grid place-items-center bg-[#FBF6EC] p-6 text-center">
+    <div className="min-h-screen grid place-items-center bg-[#F5F0FF] p-6 text-center">
       <div>
         <div className="text-6xl mb-3">🎨</div>
         <div className="font-black text-xl mb-2">Algo deu errado no Estúdio Brilha.</div>
-        <div className="text-sm text-[#2A2320]/70 mb-4">{String((error as any)?.message ?? error)}</div>
+        <div className="text-sm text-[#4C1D95]/70 mb-4">{String((error as any)?.message ?? error)}</div>
         <button onClick={reset} className="px-4 py-2 rounded-full bg-[#FF6B4A] text-white font-black">Tentar de novo</button>
       </div>
     </div>
@@ -38,14 +38,14 @@ function ErrPage({ error, reset }: { error: unknown; reset: () => void }) {
 
 function NotFoundPage() {
   return (
-    <div className="min-h-screen grid place-items-center bg-[#FBF6EC] p-6 text-center">
+    <div className="min-h-screen grid place-items-center bg-[#F5F0FF] p-6 text-center">
       <div>
         <div className="text-6xl mb-3">🖼️</div>
         <div className="font-black text-xl mb-2">Essa aula ainda não existe.</div>
-        <Link to="/escola-brilha/arte-1ano" className="px-4 py-2 rounded-full bg-[#2A2320] text-white font-black inline-block">
+        <Link to="/escola-brilha/arte-1ano" className="px-4 py-2 rounded-full bg-[#4C1D95] text-white font-black inline-block">
           Voltar ao mapa
         </Link>
-        <div className="text-xs text-[#2A2320]/60 mt-3">Curso: {CURSO_ARTE_1ANO.titulo}</div>
+        <div className="text-xs text-[#4C1D95]/60 mt-3">Curso: {CURSO_ARTE_1ANO.titulo}</div>
       </div>
     </div>
   );

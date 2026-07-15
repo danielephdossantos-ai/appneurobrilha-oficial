@@ -3,7 +3,7 @@ import { GraduationCap, Lock, ChevronDown, ChevronUp } from "lucide-react";
 import { useParentMode } from "@/contexts/ParentModeContext";
 import type { ModoProfessor } from "./types";
 
-const TINTA = "#2A2320";
+const TINTA = "#4C1D95";
 
 /**
  * Modo Professor — bloco pedagógico invisível para a criança.
