@@ -101,17 +101,17 @@ export const NUMBERS_1_10_LESSON = {
     "Nos países de língua inglesa, os números aparecem em placas, ônibus, telefones, endereços e preços. Saber contar de 1 a 10 já resolve muitas situações do dia a dia!",
   quiz: [
     { type: "listening", q: "Ouça e escolha:", audio: "eight", correct: 8, options: [6, 7, 8, 9] },
-    { type: "reading",   q: "'I have nine pencils.' — quantos lápis?", correct: 9, options: [7, 8, 9, 10] },
-    { type: "translation", q: "Como se diz '4' em inglês?", correctEn: "four", options: ["four", "five", "for", "fore"] },
+    { type: "reading",   q: "'I have nine pencils.' — quantos lápis?", qEn: "I have nine pencils.", correct: 9, options: [7, 8, 9, 10] },
+    { type: "translation", q: "Como se diz '4' em inglês?", correctEn: "four", options: ["four", "five", "for", "fore"], optionsPt: ["quatro", "cinco", "por", "à frente"] },
     { type: "count",     q: "Conte os balões:", emoji: "🎈🎈🎈🎈🎈🎈🎈", correct: 7, options: [5, 6, 7, 8] },
   ],
   finalMission: {
     title: "Mercado Virtual",
     instruction: "Compre exatamente estes itens. Fale ou toque para contar.",
     shopping: [
-      { emoji: "🍎", en: "apples",  quantity: 4 },
-      { emoji: "🍌", en: "bananas", quantity: 2 },
-      { emoji: "🍊", en: "oranges", quantity: 6 },
+      { emoji: "🍎", en: "apples",  pt: "maçãs",    quantity: 4 },
+      { emoji: "🍌", en: "bananas", pt: "bananas",  quantity: 2 },
+      { emoji: "🍊", en: "oranges", pt: "laranjas", quantity: 6 },
     ],
     badge: "🏆 Number Master",
   },
