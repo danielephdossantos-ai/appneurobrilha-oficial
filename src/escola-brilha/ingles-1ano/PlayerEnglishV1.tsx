@@ -1492,19 +1492,27 @@ function Paint() {
 /* ============================ 🧠 Memory ============================ */
 
 function Memory() {
-  const { MEMORY } = useLesson();
-  // 2 cartas por par: uma "en" e uma "img"
-  type Card = { key: string; pairId: string; kind: "en" | "img"; en: string; pt: string; img: string };
+  const lesson = useLesson();
+  const { MEMORY, meta } = lesson;
+  // 6º–9º Ano usam pares TEXTO (en) ↔ TRADUÇÃO (pt); 1º–5º mantêm imagem.
+  const kicker = meta?.headerKicker ?? "";
+  const useTranslationPairs = /6th|7th|8th|9th/i.test(kicker);
+
+  type Card = { key: string; pairId: string; kind: "en" | "img" | "pt"; en: string; pt: string; img: string };
   const initialCards: Card[] = useMemo(() => {
     if (!MEMORY) return [];
     const cards: Card[] = [];
     for (const p of MEMORY.pairs) {
       cards.push({ key: `${p.id}-en`, pairId: p.id, kind: "en", en: p.en, pt: p.pt, img: p.img });
-      cards.push({ key: `${p.id}-img`, pairId: p.id, kind: "img", en: p.en, pt: p.pt, img: p.img });
+      if (useTranslationPairs) {
+        cards.push({ key: `${p.id}-pt`, pairId: p.id, kind: "pt", en: p.en, pt: p.pt, img: p.img });
+      } else {
+        cards.push({ key: `${p.id}-img`, pairId: p.id, kind: "img", en: p.en, pt: p.pt, img: p.img });
+      }
     }
     return shuffle(cards);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [MEMORY?.pairs.length]);
+  }, [MEMORY?.pairs.length, useTranslationPairs]);
 
   const [flipped, setFlipped] = useState<string[]>([]);
   const [matched, setMatched] = useState<Set<string>>(new Set());
@@ -1560,7 +1568,9 @@ function Memory() {
             >
               {isShown ? (
                 c.kind === "en" ? (
-                  <div className="font-black text-slate-800 text-sm px-1">{c.en}</div>
+                  <div className="font-black text-slate-800 text-sm px-1 leading-tight">{c.en}</div>
+                ) : c.kind === "pt" ? (
+                  <div className="font-bold text-slate-700 text-sm px-1 leading-tight italic">{c.pt}</div>
                 ) : (
                   <img src={c.img} alt="" className="w-full h-full object-contain p-1" />
                 )
