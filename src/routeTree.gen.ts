@@ -49,6 +49,7 @@ import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
+import { Route as EnglishAcademyAcademyRouteImport } from './routes/english-academy.$academy'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -271,6 +272,11 @@ const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
   path: '/escola-brilha/$codigo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnglishAcademyAcademyRoute = EnglishAcademyAcademyRouteImport.update({
+  id: '/english-academy/$academy',
+  path: '/english-academy/$academy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BnccCodigoRoute = BnccCodigoRouteImport.update({
   id: '/bncc/$codigo',
   path: '/bncc/$codigo',
@@ -433,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
+  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -495,6 +502,7 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
+  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -559,6 +567,7 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
+  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -624,6 +633,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
+    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
@@ -686,6 +696,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
+    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
@@ -749,6 +760,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
+    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
@@ -813,6 +825,7 @@ export interface RootRouteChildren {
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
+  EnglishAcademyAcademyRoute: typeof EnglishAcademyAcademyRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
   EnglishAcademyIndexRoute: typeof EnglishAcademyIndexRoute
@@ -1115,6 +1128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaCodigoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/english-academy/$academy': {
+      id: '/english-academy/$academy'
+      path: '/english-academy/$academy'
+      fullPath: '/english-academy/$academy'
+      preLoaderRoute: typeof EnglishAcademyAcademyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bncc/$codigo': {
       id: '/bncc/$codigo'
       path: '/bncc/$codigo'
@@ -1343,6 +1363,7 @@ const rootRouteChildren: RootRouteChildren = {
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,
+  EnglishAcademyAcademyRoute: EnglishAcademyAcademyRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
   EnglishAcademyIndexRoute: EnglishAcademyIndexRoute,
