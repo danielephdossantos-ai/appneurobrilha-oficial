@@ -94,7 +94,7 @@ function AcademyPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {lessons.map((l, i) => {
+          {lessons.map((l: LessonEntry, i: number) => {
             const isOpen = l.status === "aberta";
             const card = (
               <motion.div
