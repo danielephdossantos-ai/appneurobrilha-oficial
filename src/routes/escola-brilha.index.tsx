@@ -363,6 +363,33 @@ function EscolaBrilhaCatalogo() {
                         const serieSlug =
                           serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
                         const cursoV4Aqui = cursoPorSerieDisc[serie]?.[disc];
+                        // Arte 1º Ano → novo Estúdio Brilha (substitui a trilha Duo genérica)
+                        if (serie === "1º Ano" && (disc === "arte" || disc === "artes")) {
+                          return (
+                            <Link
+                              key={disc}
+                              to="/escola-brilha/arte-1ano"
+                              className="block rounded-2xl p-4 font-black active:scale-[0.98] shadow-lg border-4"
+                              style={{
+                                background:
+                                  "radial-gradient(circle at 20% 10%, #F4B74050 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7A5CFF40 0%, transparent 50%), #FBF6EC",
+                                color: "#2A2320",
+                                borderColor: "#2A2320",
+                                fontFamily: "'Fraunces', Georgia, serif",
+                              }}
+                            >
+                              <div className="text-[10px] uppercase tracking-widest opacity-70" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                🎨 Arte · 1º Ano · Estúdio Brilha (novo)
+                              </div>
+                              <div className="text-lg leading-tight mt-0.5">
+                                Estúdio Brilha — 5 linguagens, um ano inteiro de arte
+                              </div>
+                              <div className="text-[11px] font-bold opacity-90 mt-1" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                Cores · Formas · Música · Teatro · Dança · Exposição →
+                              </div>
+                            </Link>
+                          );
+                        }
                         if (usaTrilhaDuo && !cursoV4Aqui) {
                           const masc = mascoteDaDisciplina(disc);
                           const serieLabel = serie === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
