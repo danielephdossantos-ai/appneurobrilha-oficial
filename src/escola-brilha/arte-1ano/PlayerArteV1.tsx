@@ -9,8 +9,8 @@ import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blo
 import { ModoProfessorPanel } from "./ModoProfessorPanel";
 import type { AulaArte, UnidadeArte } from "./types";
 
-const PAPEL = "#FBF6EC";
-const TINTA = "#2A2320";
+const PAPEL = "#F5F0FF";
+const TINTA = "#4C1D95";
 
 /* ================================================================= HISTÓRIA */
 function Historia({ aula, muted }: { aula: AulaArte; muted: boolean }) {
@@ -881,14 +881,14 @@ export function PlayerArteV1({
     <div className="min-h-screen"
       style={{
         background:
-          "radial-gradient(circle at 20% 10%, #F4B74025 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7A5CFF20 0%, transparent 50%), #FBF6EC",
+          "radial-gradient(circle at 20% 10%, #A855F730 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7C3AED30 0%, transparent 50%), #F5F0FF",
       }}>
       <style>{`
-        .arte-font-serif { font-family: 'Fraunces', Georgia, serif; }
+        .arte-font-serif { font-family: 'Nunito', system-ui, sans-serif; }
         .arte-font-body { font-family: 'Nunito', system-ui, sans-serif; }
       `}</style>
 
-      <header className="sticky top-0 z-20 backdrop-blur border-b-4" style={{ background: "#FBF6ECD9", borderColor: TINTA }}>
+      <header className="sticky top-0 z-20 backdrop-blur border-b-4" style={{ background: "#F5F0FFD9", borderColor: TINTA }}>
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link to="/escola-brilha/arte-1ano"
             className="h-10 w-10 rounded-full grid place-items-center"
