@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Will, Going To ou First Conditional?",
     rounds: [
       { promptEn: "The phone is ringing! I ___ answer.", promptPt: "The phone is ringing! I ___ answer.", targetLabel: "will", objects: [
-        { id: "a", label: "will", isTarget: true }, { id: "b", label: "am going to" }, { id: "c", label: "go" },
+        { id: "a", label: "will", isTarget: true, img: "" }, { id: "b", label: "am going to", img: "" }, { id: "c", label: "go", img: "" },
       ]},
       { promptEn: "Look at the clouds — it ___ rain.", promptPt: "Look at the clouds — it ___ rain.", targetLabel: "is going to", objects: [
-        { id: "a", label: "will" }, { id: "b", label: "is going to", isTarget: true }, { id: "c", label: "rains" },
+        { id: "a", label: "will", img: "" }, { id: "b", label: "is going to", isTarget: true, img: "" }, { id: "c", label: "rains", img: "" },
       ]},
       { promptEn: "If it rains, we ___ stay home.", promptPt: "If it rains, we ___ stay home.", targetLabel: "will", objects: [
-        { id: "a", label: "would" }, { id: "b", label: "will", isTarget: true }, { id: "c", label: "are" },
+        { id: "a", label: "would", img: "" }, { id: "b", label: "will", isTarget: true, img: "" }, { id: "c", label: "are", img: "" },
       ]},
       { promptEn: "Next year I ___ study biology (plan).", promptPt: "Next year I ___ study biology (plan).", targetLabel: "am going to", objects: [
-        { id: "a", label: "am going to", isTarget: true }, { id: "b", label: "will" }, { id: "c", label: "study" },
+        { id: "a", label: "am going to", isTarget: true, img: "" }, { id: "b", label: "will", img: "" }, { id: "c", label: "study", img: "" },
       ]},
       { promptEn: "'Renewable' =", promptPt: "'Renewable' =", targetLabel: "Renovável", objects: [
-        { id: "a", label: "Renovável", isTarget: true }, { id: "b", label: "Reciclável" }, { id: "c", label: "Reunível" },
+        { id: "a", label: "Renovável", isTarget: true, img: "" }, { id: "b", label: "Reciclável", img: "" }, { id: "c", label: "Reunível", img: "" },
       ]},
     ],
   },

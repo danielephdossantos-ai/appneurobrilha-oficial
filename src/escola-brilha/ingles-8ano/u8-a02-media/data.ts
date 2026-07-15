@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Escolha o reported speech correto!",
     rounds: [
       { promptEn: "'I am tired' → She said she ___ tired.", promptPt: "'I am tired' → She said she ___ tired.", targetLabel: "was", objects: [
-        { id: "a", label: "is" }, { id: "b", label: "was", isTarget: true }, { id: "c", label: "were" },
+        { id: "a", label: "is", img: "" }, { id: "b", label: "was", isTarget: true, img: "" }, { id: "c", label: "were", img: "" },
       ]},
       { promptEn: "'I have finished' → He said he ___ finished.", promptPt: "'I have finished' → He said he ___ finished.", targetLabel: "had", objects: [
-        { id: "a", label: "has" }, { id: "b", label: "had", isTarget: true }, { id: "c", label: "have" },
+        { id: "a", label: "has", img: "" }, { id: "b", label: "had", isTarget: true, img: "" }, { id: "c", label: "have", img: "" },
       ]},
       { promptEn: "'Where do you live?' → She asked where I ___.", promptPt: "'Where do you live?' → She asked where I ___.", targetLabel: "lived", objects: [
-        { id: "a", label: "live" }, { id: "b", label: "lived", isTarget: true }, { id: "c", label: "do live" },
+        { id: "a", label: "live", img: "" }, { id: "b", label: "lived", isTarget: true, img: "" }, { id: "c", label: "do live", img: "" },
       ]},
       { promptEn: "'Fake news' =", promptPt: "'Fake news' =", targetLabel: "Notícia falsa", objects: [
-        { id: "a", label: "Notícia falsa", isTarget: true }, { id: "b", label: "Notícia real" }, { id: "c", label: "Fofoca" },
+        { id: "a", label: "Notícia falsa", isTarget: true, img: "" }, { id: "b", label: "Notícia real", img: "" }, { id: "c", label: "Fofoca", img: "" },
       ]},
       { promptEn: "'Do you like it?' → He asked ___ I liked it.", promptPt: "'Do you like it?' → He asked ___ I liked it.", targetLabel: "if", objects: [
-        { id: "a", label: "that" }, { id: "b", label: "if", isTarget: true }, { id: "c", label: "do" },
+        { id: "a", label: "that", img: "" }, { id: "b", label: "if", isTarget: true, img: "" }, { id: "c", label: "do", img: "" },
       ]},
     ],
   },

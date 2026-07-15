@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Modal ou First Conditional?",
     rounds: [
       { promptEn: "You ___ recycle (conselho).", promptPt: "You ___ recycle (conselho).", targetLabel: "should", objects: [
-        { id: "a", label: "must" }, { id: "b", label: "should", isTarget: true }, { id: "c", label: "might" },
+        { id: "a", label: "must", img: "" }, { id: "b", label: "should", isTarget: true, img: "" }, { id: "c", label: "might", img: "" },
       ]},
       { promptEn: "We ___ stop deforestation (obrigação forte).", promptPt: "We ___ stop deforestation (obrigação forte).", targetLabel: "must", objects: [
-        { id: "a", label: "must", isTarget: true }, { id: "b", label: "should" }, { id: "c", label: "might" },
+        { id: "a", label: "must", isTarget: true, img: "" }, { id: "b", label: "should", img: "" }, { id: "c", label: "might", img: "" },
       ]},
       { promptEn: "It ___ rain (possibilidade).", promptPt: "It ___ rain (possibilidade).", targetLabel: "might", objects: [
-        { id: "a", label: "must" }, { id: "b", label: "should" }, { id: "c", label: "might", isTarget: true },
+        { id: "a", label: "must", img: "" }, { id: "b", label: "should", img: "" }, { id: "c", label: "might", isTarget: true, img: "" },
       ]},
       { promptEn: "If we act, the planet ___ recover.", promptPt: "If we act, the planet ___ recover.", targetLabel: "will", objects: [
-        { id: "a", label: "would" }, { id: "b", label: "will", isTarget: true }, { id: "c", label: "should" },
+        { id: "a", label: "would", img: "" }, { id: "b", label: "will", isTarget: true, img: "" }, { id: "c", label: "should", img: "" },
       ]},
       { promptEn: "'Recycling' =", promptPt: "'Recycling' =", targetLabel: "Reciclagem", objects: [
-        { id: "a", label: "Reciclagem", isTarget: true }, { id: "b", label: "Reserva" }, { id: "c", label: "Redação" },
+        { id: "a", label: "Reciclagem", isTarget: true, img: "" }, { id: "b", label: "Reserva", img: "" }, { id: "c", label: "Redação", img: "" },
       ]},
     ],
   },

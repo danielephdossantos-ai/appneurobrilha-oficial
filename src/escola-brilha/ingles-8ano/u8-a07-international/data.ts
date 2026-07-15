@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Escolha o tempo verbal certo!",
     rounds: [
       { promptEn: "I ___ English for 3 years (Present Perfect).", promptPt: "I ___ English for 3 years (Present Perfect).", targetLabel: "have studied", objects: [
-        { id: "a", label: "studied" }, { id: "b", label: "have studied", isTarget: true }, { id: "c", label: "study" },
+        { id: "a", label: "studied", img: "" }, { id: "b", label: "have studied", isTarget: true, img: "" }, { id: "c", label: "study", img: "" },
       ]},
       { promptEn: "If I ___ rich, I would travel (Second Cond.).", promptPt: "If I ___ rich, I would travel.", targetLabel: "were", objects: [
-        { id: "a", label: "am" }, { id: "b", label: "were", isTarget: true }, { id: "c", label: "have" },
+        { id: "a", label: "am", img: "" }, { id: "b", label: "were", isTarget: true, img: "" }, { id: "c", label: "have", img: "" },
       ]},
       { promptEn: "Next year I ___ study abroad (plan).", promptPt: "Next year I ___ study abroad (plan).", targetLabel: "am going to", objects: [
-        { id: "a", label: "will" }, { id: "b", label: "am going to", isTarget: true }, { id: "c", label: "would" },
+        { id: "a", label: "will", img: "" }, { id: "b", label: "am going to", isTarget: true, img: "" }, { id: "c", label: "would", img: "" },
       ]},
       { promptEn: "She ___ that the world needed us (reported).", promptPt: "She ___ that the world needed us (reported).", targetLabel: "said", objects: [
-        { id: "a", label: "says" }, { id: "b", label: "said", isTarget: true }, { id: "c", label: "tell" },
+        { id: "a", label: "says", img: "" }, { id: "b", label: "said", isTarget: true, img: "" }, { id: "c", label: "tell", img: "" },
       ]},
       { promptEn: "'Portfolio' =", promptPt: "'Portfolio' =", targetLabel: "Portfólio", objects: [
-        { id: "a", label: "Portfólio", isTarget: true }, { id: "b", label: "Retrato" }, { id: "c", label: "Política" },
+        { id: "a", label: "Portfólio", isTarget: true, img: "" }, { id: "b", label: "Retrato", img: "" }, { id: "c", label: "Política", img: "" },
       ]},
     ],
   },

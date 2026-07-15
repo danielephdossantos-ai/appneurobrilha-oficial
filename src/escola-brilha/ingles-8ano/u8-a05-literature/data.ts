@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Past Continuous ou Simple Past?",
     rounds: [
       { promptEn: "I ___ TV when he arrived.", promptPt: "I ___ TV when he arrived.", targetLabel: "was watching", objects: [
-        { id: "a", label: "watched" }, { id: "b", label: "was watching", isTarget: true }, { id: "c", label: "watch" },
+        { id: "a", label: "watched", img: "" }, { id: "b", label: "was watching", isTarget: true, img: "" }, { id: "c", label: "watch", img: "" },
       ]},
       { promptEn: "While I was reading, the phone ___.", promptPt: "While I was reading, the phone ___.", targetLabel: "rang", objects: [
-        { id: "a", label: "was ringing" }, { id: "b", label: "rang", isTarget: true }, { id: "c", label: "rings" },
+        { id: "a", label: "was ringing", img: "" }, { id: "b", label: "rang", isTarget: true, img: "" }, { id: "c", label: "rings", img: "" },
       ]},
       { promptEn: "They ___ football at 5 pm yesterday.", promptPt: "They ___ football at 5 pm yesterday.", targetLabel: "were playing", objects: [
-        { id: "a", label: "were playing", isTarget: true }, { id: "b", label: "was playing" }, { id: "c", label: "played" },
+        { id: "a", label: "were playing", isTarget: true, img: "" }, { id: "b", label: "was playing", img: "" }, { id: "c", label: "played", img: "" },
       ]},
       { promptEn: "'Plot' =", promptPt: "'Plot' =", targetLabel: "Enredo", objects: [
-        { id: "a", label: "Enredo", isTarget: true }, { id: "b", label: "Personagem" }, { id: "c", label: "Título" },
+        { id: "a", label: "Enredo", isTarget: true, img: "" }, { id: "b", label: "Personagem", img: "" }, { id: "c", label: "Título", img: "" },
       ]},
       { promptEn: "Suddenly, a wolf ___.", promptPt: "Suddenly, a wolf ___.", targetLabel: "appeared", objects: [
-        { id: "a", label: "was appearing" }, { id: "b", label: "appeared", isTarget: true }, { id: "c", label: "appears" },
+        { id: "a", label: "was appearing", img: "" }, { id: "b", label: "appeared", isTarget: true, img: "" }, { id: "c", label: "appears", img: "" },
       ]},
     ],
   },

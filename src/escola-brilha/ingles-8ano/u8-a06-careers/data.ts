@@ -134,19 +134,19 @@ const lesson: LessonData = {
     intro: "Second Conditional ou modal?",
     rounds: [
       { promptEn: "If I ___ rich, I would help people.", promptPt: "If I ___ rich, I would help people.", targetLabel: "were", objects: [
-        { id: "a", label: "am" }, { id: "b", label: "were", isTarget: true }, { id: "c", label: "have" },
+        { id: "a", label: "am", img: "" }, { id: "b", label: "were", isTarget: true, img: "" }, { id: "c", label: "have", img: "" },
       ]},
       { promptEn: "If I had money, I ___ travel.", promptPt: "If I had money, I ___ travel.", targetLabel: "would", objects: [
-        { id: "a", label: "will" }, { id: "b", label: "would", isTarget: true }, { id: "c", label: "am going to" },
+        { id: "a", label: "will", img: "" }, { id: "b", label: "would", isTarget: true, img: "" }, { id: "c", label: "am going to", img: "" },
       ]},
       { promptEn: "You ___ be confident in interviews.", promptPt: "You ___ be confident in interviews.", targetLabel: "should", objects: [
-        { id: "a", label: "should", isTarget: true }, { id: "b", label: "would" }, { id: "c", label: "were" },
+        { id: "a", label: "should", isTarget: true, img: "" }, { id: "b", label: "would", img: "" }, { id: "c", label: "were", img: "" },
       ]},
       { promptEn: "'Interview' =", promptPt: "'Interview' =", targetLabel: "Entrevista", objects: [
-        { id: "a", label: "Entrevista", isTarget: true }, { id: "b", label: "Currículo" }, { id: "c", label: "Reunião" },
+        { id: "a", label: "Entrevista", isTarget: true, img: "" }, { id: "b", label: "Currículo", img: "" }, { id: "c", label: "Reunião", img: "" },
       ]},
       { promptEn: "You ___ learn online (possibilidade).", promptPt: "You ___ learn online (possibilidade).", targetLabel: "could", objects: [
-        { id: "a", label: "would" }, { id: "b", label: "could", isTarget: true }, { id: "c", label: "must" },
+        { id: "a", label: "would", img: "" }, { id: "b", label: "could", isTarget: true, img: "" }, { id: "c", label: "must", img: "" },
       ]},
     ],
   },

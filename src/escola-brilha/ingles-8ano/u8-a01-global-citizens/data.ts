@@ -159,8 +159,8 @@ const lesson: LessonData = {
       ]},
       { promptEn: "'Equality' =", promptPt: "'Equality' =", targetLabel: "Igualdade", objects: [
         { id: "a", label: "Igualdade", img: "", isTarget: true },
-        { id: "b", label: "Equipe" },
-        { id: "c", label: "Igreja" },
+        { id: "b", label: "Equipe", img: "" },
+        { id: "c", label: "Igreja", img: "" },
       ]},
     ],
   },
