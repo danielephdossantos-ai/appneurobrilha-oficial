@@ -60,7 +60,6 @@ function AcademyPage() {
           }}
         >
           <div className="relative z-10 flex items-center gap-4">
-            <div className="text-5xl md:text-6xl drop-shadow-lg">{academy.emoji}</div>
             <div className="flex-1">
               <div className="text-white/60 text-[10px] font-black uppercase tracking-[0.3em]">
                 Academia
@@ -89,7 +88,6 @@ function AcademyPage() {
             >
               <div className="relative bg-gradient-to-br from-white/8 to-white/2 border-2 border-white/15 rounded-2xl p-4 hover:border-[#FFC93C]/60 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="text-4xl">{v.emoji}</div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-2">
                       <div className="text-white font-black text-xl leading-none">{v.base}</div>
