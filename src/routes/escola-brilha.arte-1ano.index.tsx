@@ -33,7 +33,7 @@ function MapaArte() {
           "radial-gradient(circle at 20% 10%, #A855F725 0%, transparent 50%), radial-gradient(circle at 80% 90%, #A855F720 0%, transparent 50%), #F5F0FF",
       }}
     >
-      <style>{`.arte-serif{font-family:'Fraunces',Georgia,serif}.arte-body{font-family:'Nunito',system-ui,sans-serif}`}</style>
+      <style>{`.arte-serif{font-family:'Nunito',system-ui,sans-serif}.arte-body{font-family:'Nunito',system-ui,sans-serif}`}</style>
 
       <header className="border-b-4" style={{ borderColor: TINTA, background: "#F5F0FFD9" }}>
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-3">
