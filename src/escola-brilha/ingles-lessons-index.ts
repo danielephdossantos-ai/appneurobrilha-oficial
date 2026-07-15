@@ -8,6 +8,7 @@ import { LESSONS_5ANO, getLesson5ano } from "./ingles-5ano/lessons";
 import { LESSONS_6ANO, getLesson6ano } from "./ingles-6ano/lessons";
 import { LESSONS_7ANO, getLesson7ano } from "./ingles-7ano/lessons";
 import { LESSONS_8ANO, getLesson8ano } from "./ingles-8ano/lessons";
+import { LESSONS_9ANO, getLesson9ano } from "./ingles-9ano/lessons";
 
 export function getLessonsBySerie(serie: string): LessonData[] {
   if (serie === "2ano") return LESSONS_2ANO;
@@ -17,6 +18,7 @@ export function getLessonsBySerie(serie: string): LessonData[] {
   if (serie === "6ano") return LESSONS_6ANO;
   if (serie === "7ano") return LESSONS_7ANO;
   if (serie === "8ano") return LESSONS_8ANO;
+  if (serie === "9ano") return LESSONS_9ANO;
   return LESSONS_1ANO;
 }
 
@@ -28,5 +30,6 @@ export function getLessonByCursoAula(curso: string, slug: string): LessonData | 
   if (curso === "ingles-6ano") return getLesson6ano(slug);
   if (curso === "ingles-7ano") return getLesson7ano(slug);
   if (curso === "ingles-8ano") return getLesson8ano(slug);
+  if (curso === "ingles-9ano") return getLesson9ano(slug);
   return getLesson1(slug);
 }
