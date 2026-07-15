@@ -497,16 +497,23 @@ function Reading({ lesson, onDone }: any) {
     return (
       <div>
         <div className="text-white/70 text-xs font-bold mb-3">📖 Leia o texto e ouça</div>
-        <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3 space-y-1">
-          {lesson.reading.text.map((line: string, i: number) => (
-            <div key={i} className="flex items-center gap-2">
-              <SpeakBtn text={line} size="sm" />
-              <div className="text-white font-bold text-sm md:text-base">{line}</div>
-            </div>
-          ))}
+        <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3 space-y-2">
+          {lesson.reading.text.map((line: any, i: number) => {
+            const en = typeof line === "string" ? line : line.en;
+            const pt = typeof line === "string" ? "" : line.pt;
+            return (
+              <div key={i} className="flex items-start gap-2">
+                <SpeakBtn text={en} size="sm" />
+                <div className="flex-1">
+                  <div className="text-white font-bold text-sm md:text-base">{en}</div>
+                  {pt && <div className="text-white/60 text-xs italic mt-0.5">{pt}</div>}
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div className="flex gap-2 justify-end">
-          <button onClick={() => speakEnglish(lesson.reading.text.join(" "))}
+          <button onClick={() => speakEnglish(lesson.reading.text.map((l: any) => typeof l === "string" ? l : l.en).join(" "))}
             className="bg-white/10 text-white px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider">
             Ouvir tudo
           </button>
