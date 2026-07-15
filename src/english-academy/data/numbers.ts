@@ -71,21 +71,21 @@ export const NUMBERS_1_10_LESSON = {
   ],
   reading: {
     text: [
-      "Hello! My name is Tom.",
-      "I have two sisters.",
-      "I have one dog.",
-      "I am eight years old.",
+      { en: "Hello! My name is Tom.", pt: "Olá! Meu nome é Tom." },
+      { en: "I have two sisters.",    pt: "Eu tenho duas irmãs." },
+      { en: "I have one dog.",        pt: "Eu tenho um cachorro." },
+      { en: "I am eight years old.",  pt: "Eu tenho oito anos." },
     ],
     questions: [
-      { q: "How many sisters does Tom have?", correct: 2, options: [1, 2, 3, 4] },
-      { q: "How many dogs does Tom have?",    correct: 1, options: [1, 2, 3, 0] },
-      { q: "How old is Tom?",                 correct: 8, options: [6, 7, 8, 9] },
+      { q: "How many sisters does Tom have?", qPt: "Quantas irmãs o Tom tem?", correct: 2, options: [1, 2, 3, 4] },
+      { q: "How many dogs does Tom have?",    qPt: "Quantos cachorros o Tom tem?", correct: 1, options: [1, 2, 3, 0] },
+      { q: "How old is Tom?",                 qPt: "Quantos anos o Tom tem?", correct: 8, options: [6, 7, 8, 9] },
     ],
   },
   writing: [
-    { sentence: "I have ___ books.", emoji: "📚📚📚📚📚📚", correctEn: "six",   correctN: 6 },
-    { sentence: "I see ___ stars.",  emoji: "⭐⭐⭐⭐",       correctEn: "four",  correctN: 4 },
-    { sentence: "There are ___ cats.", emoji: "🐱🐱🐱🐱🐱🐱🐱", correctEn: "seven", correctN: 7 },
+    { sentence: "I have ___ books.",   sentencePt: "Eu tenho ___ livros.",  emoji: "📚📚📚📚📚📚", correctEn: "six",   correctN: 6 },
+    { sentence: "I see ___ stars.",    sentencePt: "Eu vejo ___ estrelas.", emoji: "⭐⭐⭐⭐",       correctEn: "four",  correctN: 4 },
+    { sentence: "There are ___ cats.", sentencePt: "Há ___ gatos.",         emoji: "🐱🐱🐱🐱🐱🐱🐱", correctEn: "seven", correctN: 7 },
   ],
   realSituation: {
     place: "No supermercado",
