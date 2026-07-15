@@ -532,6 +532,7 @@ function Reading({ lesson, onDone }: any) {
       <div className="text-white/70 text-xs font-bold mb-3">❓ Reading — {qi + 1}/{lesson.reading.questions.length}</div>
       <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3">
         <div className="text-white font-black text-base md:text-lg">{q.q}</div>
+        {q.qPt && q.qPt !== q.q && <div className="text-white/60 text-xs italic mt-1">{q.qPt}</div>}
       </div>
       <div className="grid grid-cols-4 gap-2">
         {q.options.map((op: number) => (
