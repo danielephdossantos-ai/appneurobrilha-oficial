@@ -30,7 +30,7 @@ export const Route = createFileRoute("/english-academy/$academy")({
     const academy = ACADEMIES.find((a) => a.slug === params.academy);
     if (!academy || academy.status !== "aberta") throw notFound();
     const level = LEVELS.find((l) => l.id === academy.level)!;
-    const lessons = LESSONS_BY_ACADEMY[academy.slug] ?? [];
+    const lessons: LessonEntry[] = LESSONS_BY_ACADEMY[academy.slug] ?? [];
     return { academy, level, lessons };
   },
   head: ({ loaderData }) => ({
