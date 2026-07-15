@@ -62,6 +62,7 @@ import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-
 import { Route as EscolaBrilhaGeo6anoUnidadeRouteImport } from './routes/escola-brilha.geo-6ano.$unidade'
 import { Route as EscolaBrilhaCursoSlugRouteImport } from './routes/escola-brilha.curso.$slug'
 import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
+import { Route as EnglishAcademyNumbersLessonRouteImport } from './routes/english-academy.numbers.$lesson'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -346,6 +347,12 @@ const EscolaBrilhaAtlasFinalCursoRoute =
     path: '/escola-brilha/atlas-final/$curso',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EnglishAcademyNumbersLessonRoute =
+  EnglishAcademyNumbersLessonRouteImport.update({
+    id: '/english-academy/numbers/$lesson',
+    path: '/english-academy/numbers/$lesson',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AnamneseChildIdResultadoRoute =
   AnamneseChildIdResultadoRouteImport.update({
     id: '/resultado',
@@ -450,6 +457,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -513,6 +521,7 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -578,6 +587,7 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -644,6 +654,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -707,6 +718,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -771,6 +783,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -831,6 +844,7 @@ export interface RootRouteChildren {
   EnglishAcademyIndexRoute: typeof EnglishAcademyIndexRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  EnglishAcademyNumbersLessonRoute: typeof EnglishAcademyNumbersLessonRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
   EscolaBrilhaCursoSlugRoute: typeof EscolaBrilhaCursoSlugRoute
   EscolaBrilhaGeo6anoUnidadeRoute: typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -1219,6 +1233,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaAtlasFinalCursoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/english-academy/numbers/$lesson': {
+      id: '/english-academy/numbers/$lesson'
+      path: '/english-academy/numbers/$lesson'
+      fullPath: '/english-academy/numbers/$lesson'
+      preLoaderRoute: typeof EnglishAcademyNumbersLessonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/anamnese/$childId/resultado': {
       id: '/anamnese/$childId/resultado'
       path: '/resultado'
@@ -1369,6 +1390,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnglishAcademyIndexRoute: EnglishAcademyIndexRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  EnglishAcademyNumbersLessonRoute: EnglishAcademyNumbersLessonRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
   EscolaBrilhaCursoSlugRoute: EscolaBrilhaCursoSlugRoute,
   EscolaBrilhaGeo6anoUnidadeRoute: EscolaBrilhaGeo6anoUnidadeRoute,
