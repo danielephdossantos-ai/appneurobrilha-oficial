@@ -70,7 +70,6 @@ function VerbPage() {
           }}
         >
           <div className="relative z-10 flex items-center gap-4">
-            <div className="text-6xl md:text-7xl drop-shadow-lg">{verb.emoji}</div>
             <div className="flex-1 min-w-0">
               <div className="text-white/60 text-[10px] font-black uppercase tracking-[0.3em]">
                 Verbo {verb.tipo}
@@ -106,7 +105,6 @@ function VerbPage() {
                   : "bg-white/8 text-white/70 border-white/15 hover:border-white/30",
               )}
             >
-              <span className="mr-1">{s.emoji}</span>
               {s.label}
             </button>
           ))}
@@ -390,7 +388,7 @@ function QuizView({
     <div>
       <div className="flex items-center justify-between mb-3">
         <div className="text-white/60 text-[10px] font-black uppercase tracking-[0.3em]">
-          🎯 Quiz — {i + 1}/{verb.quiz.length}
+          Quiz — {i + 1}/{verb.quiz.length}
         </div>
         <div className="text-white/70 text-xs font-black">Pontos: {score}</div>
       </div>
