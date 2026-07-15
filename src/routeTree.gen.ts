@@ -43,6 +43,7 @@ import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
+import { Route as EnglishAcademyIndexRouteImport } from './routes/english-academy.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
@@ -240,6 +241,11 @@ const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
   path: '/escola-brilha/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnglishAcademyIndexRoute = EnglishAcademyIndexRouteImport.update({
+  id: '/english-academy/',
+  path: '/english-academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -432,6 +438,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
+  '/english-academy/': typeof EnglishAcademyIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -493,6 +500,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
+  '/english-academy': typeof EnglishAcademyIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -556,6 +564,7 @@ export interface FileRoutesById {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
+  '/english-academy/': typeof EnglishAcademyIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -620,6 +629,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
+    | '/english-academy/'
     | '/escola-brilha/'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -681,6 +691,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin'
+    | '/english-academy'
     | '/escola-brilha'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -743,6 +754,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
+    | '/english-academy/'
     | '/escola-brilha/'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -803,6 +815,7 @@ export interface RootRouteChildren {
   BnccCodigoRoute: typeof BnccCodigoRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
+  EnglishAcademyIndexRoute: typeof EnglishAcademyIndexRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
@@ -1058,6 +1071,13 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha'
       fullPath: '/escola-brilha/'
       preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/english-academy/': {
+      id: '/english-academy/'
+      path: '/english-academy'
+      fullPath: '/english-academy/'
+      preLoaderRoute: typeof EnglishAcademyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -1325,6 +1345,7 @@ const rootRouteChildren: RootRouteChildren = {
   BnccCodigoRoute: BnccCodigoRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
+  EnglishAcademyIndexRoute: EnglishAcademyIndexRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
