@@ -5,8 +5,8 @@ import { speakChunked, stopSpeaking, sanitizeForSpeech } from "@/lib/native-tts"
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 import type { AulaArte, UnidadeArte } from "./types";
 
-const PAPEL = "#F5F0FF";
-const TINTA = "#3B1D6E";
+const PAPEL = "#FBF6EC";
+const TINTA = "#2A2320";
 
 // ============================================================== HISTÓRIA
 function Historia({ aula, muted }: { aula: AulaArte; muted: boolean }) {
@@ -248,7 +248,7 @@ function CanvasPintura({ aula }: { aula: AulaArte }) {
         <button onClick={limpar} className="px-4 py-2 rounded-full text-sm font-black bg-[#F1E7D0]" style={{ color: TINTA }}>
           Limpar
         </button>
-        <button onClick={baixar} className="px-4 py-2 rounded-full text-sm font-black text-white" style={{ background: "#7C3AED" }}>
+        <button onClick={baixar} className="px-4 py-2 rounded-full text-sm font-black text-white" style={{ background: "#FF6B4A" }}>
           Salvar imagem ↓
         </button>
       </div>
@@ -346,7 +346,7 @@ function RitmoBatuque({ aula, muted }: { aula: AulaArte; muted: boolean }) {
       <button
         onClick={() => setTocando((t) => !t)}
         className="px-5 py-3 rounded-full font-black text-white flex items-center gap-2"
-        style={{ background: tocando ? "#E63946" : "#A855F7" }}
+        style={{ background: tocando ? "#E63946" : "#7A5CFF" }}
       >
         {tocando ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
         {tocando ? "Parar" : "Tocar o ritmo"}
@@ -456,7 +456,7 @@ function MovimentoImitar({ aula }: { aula: AulaArte }) {
           {pose.emoji}
         </div>
         <div className="font-black font-serif text-xl" style={{ color: TINTA }}>{pose.nome}</div>
-        <div className="text-5xl font-black mt-2" style={{ color: "#7C3AED" }}>
+        <div className="text-5xl font-black mt-2" style={{ color: "#FF6B4A" }}>
           {rodando ? t : pose.segundos}s
         </div>
       </div>
@@ -468,7 +468,7 @@ function MovimentoImitar({ aula }: { aula: AulaArte }) {
             setRodando(true);
           }}
           className="px-5 py-3 rounded-full font-black text-white"
-          style={{ background: "#A855F7" }}
+          style={{ background: "#7A5CFF" }}
         >
           ▶ Começar dança
         </button>
@@ -536,7 +536,7 @@ function JogoArte({ aula, muted }: { aula: AulaArte; muted: boolean }) {
             setAcertos(0);
           }}
           className="mt-3 px-4 py-2 rounded-full font-black text-white"
-          style={{ background: "#A855F7" }}
+          style={{ background: "#7A5CFF" }}
         >
           Jogar de novo
         </button>
@@ -684,16 +684,16 @@ export function PlayerArteV1({
       className="min-h-screen"
       style={{
         background:
-          "radial-gradient(circle at 20% 10%, #A855F725 0%, transparent 50%), radial-gradient(circle at 80% 90%, #A855F720 0%, transparent 50%), #F5F0FF",
+          "radial-gradient(circle at 20% 10%, #F4B74025 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7A5CFF20 0%, transparent 50%), #FBF6EC",
       }}
     >
       <style>{`
-        .arte-font-serif { font-family: 'Nunito', system-ui, sans-serif; }
+        .arte-font-serif { font-family: 'Fraunces', Georgia, serif; }
         .arte-font-body { font-family: 'Nunito', system-ui, sans-serif; }
       `}</style>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 backdrop-blur border-b-4" style={{ background: "#F5F0FFD9", borderColor: TINTA }}>
+      <header className="sticky top-0 z-20 backdrop-blur border-b-4" style={{ background: "#FBF6ECD9", borderColor: TINTA }}>
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link
             to="/escola-brilha/arte-1ano"
@@ -737,12 +737,12 @@ export function PlayerArteV1({
         </div>
 
         {/* 1 História */}
-        <Secao n={1} icon={Sparkles} cor="#A855F7" titulo="História Inicial" eixo="🎬 Cena de abertura">
+        <Secao n={1} icon={Sparkles} cor="#7A5CFF" titulo="História Inicial" eixo="🎬 Cena de abertura">
           <Historia aula={aula} muted={muted} />
         </Secao>
 
         {/* 2 Atividade */}
-        <Secao n={2} icon={Palette} cor="#7C3AED" titulo={aula.atividade.titulo} eixo="🎨 Atividade artística">
+        <Secao n={2} icon={Palette} cor="#FF6B4A" titulo={aula.atividade.titulo} eixo="🎨 Atividade artística">
           <Atividade aula={aula} muted={muted} />
         </Secao>
 
@@ -757,12 +757,12 @@ export function PlayerArteV1({
         </Secao>
 
         {/* 5 Música */}
-        <Secao n={5} icon={Music} cor="#A855F7" titulo={aula.musica.titulo} eixo="🎵 Momento música">
+        <Secao n={5} icon={Music} cor="#7A5CFF" titulo={aula.musica.titulo} eixo="🎵 Momento música">
           <RitmoBatuque aula={aula} muted={muted} />
         </Secao>
 
         {/* 6 Teatro */}
-        <Secao n={6} icon={Drama} cor="#7C3AED" titulo={aula.teatro.titulo} eixo="🎭 Momento teatro">
+        <Secao n={6} icon={Drama} cor="#FF6B4A" titulo={aula.teatro.titulo} eixo="🎭 Momento teatro">
           <TeatroExpressao aula={aula} muted={muted} />
         </Secao>
 
@@ -784,8 +784,8 @@ export function PlayerArteV1({
         </Secao>
 
         {/* 11 Conquista */}
-        <Secao n={11} icon={Trophy} cor="#7C3AED" titulo="Conquista desbloqueada!" eixo="🏆 Sua medalha">
-          <div className="text-center rounded-3xl p-6" style={{ background: "linear-gradient(135deg,#F4B740,#7C3AED)", color: "white" }}>
+        <Secao n={11} icon={Trophy} cor="#FF6B4A" titulo="Conquista desbloqueada!" eixo="🏆 Sua medalha">
+          <div className="text-center rounded-3xl p-6" style={{ background: "linear-gradient(135deg,#F4B740,#FF6B4A)", color: "white" }}>
             <div className="text-7xl">{aula.conquista.medalha}</div>
             <div className="arte-font-serif text-3xl font-black mt-2">{aula.conquista.nome}</div>
             <div className="text-sm mt-1 opacity-90">{aula.conquista.descricao}</div>

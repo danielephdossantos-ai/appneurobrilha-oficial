@@ -372,10 +372,10 @@ function EscolaBrilhaCatalogo() {
                               className="block rounded-2xl p-4 font-black active:scale-[0.98] shadow-lg border-4"
                               style={{
                                 background:
-                                  "radial-gradient(circle at 20% 10%, #A855F750 0%, transparent 50%), radial-gradient(circle at 80% 90%, #A855F740 0%, transparent 50%), #F5F0FF",
-                                color: "#3B1D6E",
-                                borderColor: "#3B1D6E",
-                                fontFamily: "'Nunito', system-ui, sans-serif",
+                                  "radial-gradient(circle at 20% 10%, #F4B74050 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7A5CFF40 0%, transparent 50%), #FBF6EC",
+                                color: "#2A2320",
+                                borderColor: "#2A2320",
+                                fontFamily: "'Fraunces', Georgia, serif",
                               }}
                             >
                               <div className="text-[10px] uppercase tracking-widest opacity-70" style={{ fontFamily: "'Nunito', sans-serif" }}>

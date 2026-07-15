@@ -15,14 +15,14 @@ export const Route = createFileRoute("/escola-brilha/arte-1ano/")({
 });
 
 const EIXOS = [
-  { icon: Palette, cor: "#7C3AED", nome: "Artes Visuais" },
-  { icon: Music, cor: "#A855F7", nome: "Música" },
+  { icon: Palette, cor: "#FF6B4A", nome: "Artes Visuais" },
+  { icon: Music, cor: "#7A5CFF", nome: "Música" },
   { icon: Wind, cor: "#7BA05B", nome: "Dança" },
   { icon: Drama, cor: "#E63946", nome: "Teatro" },
   { icon: Sparkles, cor: "#F4B740", nome: "Integradas" },
 ];
 
-const TINTA = "#3B1D6E";
+const TINTA = "#2A2320";
 
 function MapaArte() {
   return (
@@ -30,12 +30,12 @@ function MapaArte() {
       className="min-h-screen"
       style={{
         background:
-          "radial-gradient(circle at 20% 10%, #A855F725 0%, transparent 50%), radial-gradient(circle at 80% 90%, #A855F720 0%, transparent 50%), #F5F0FF",
+          "radial-gradient(circle at 20% 10%, #F4B74025 0%, transparent 50%), radial-gradient(circle at 80% 90%, #7A5CFF20 0%, transparent 50%), #FBF6EC",
       }}
     >
-      <style>{`.arte-serif{font-family:'Nunito',system-ui,sans-serif}.arte-body{font-family:'Nunito',system-ui,sans-serif}`}</style>
+      <style>{`.arte-serif{font-family:'Fraunces',Georgia,serif}.arte-body{font-family:'Nunito',system-ui,sans-serif}`}</style>
 
-      <header className="border-b-4" style={{ borderColor: TINTA, background: "#F5F0FFD9" }}>
+      <header className="border-b-4" style={{ borderColor: TINTA, background: "#FBF6ECD9" }}>
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-3">
           <Link to="/escola-brilha" className="h-10 w-10 rounded-full grid place-items-center border-2" style={{ background: "white", color: TINTA, borderColor: TINTA }} aria-label="Voltar">
             <ArrowLeft className="h-5 w-5" />
