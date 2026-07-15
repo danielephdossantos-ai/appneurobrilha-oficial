@@ -101,10 +101,10 @@ export const unidade1: UnidadeArte = {
       // 1 História de abertura — caixa mágica sem cor
       historia: [
         { emoji: "📦", fundo: "#EDEDED", texto: "Brilha acordou e encontrou uma caixa mágica... completamente sem cor! Todas as cores do mundo desapareceram." },
-        { emoji: "😮", fundo: "#FBF6EC", texto: "Brilha disse: 'Hoje acordei e todas as cores desapareceram! Será que conseguimos encontrá-las novamente?'" },
+        { emoji: "😮", fundo: "#F5F0FF", texto: "Brilha disse: 'Hoje acordei e todas as cores desapareceram! Será que conseguimos encontrá-las novamente?'" },
         { emoji: "🌟", fundo: "#F1C40F", texto: "Lily respondeu: 'Vamos procurar as cores escondidas pelo mundo!'" },
         { emoji: "🎒", fundo: "#1D8FE1", texto: "Ben disse: 'Cada desafio vai devolver uma cor para a caixa mágica.'" },
-        { emoji: "▶️", fundo: "#FBF6EC", texto: "Toque em 'Começar aventura' para ajudar a encontrar as cores perdidas!" },
+        { emoji: "▶️", fundo: "#F5F0FF", texto: "Toque em 'Começar aventura' para ajudar a encontrar as cores perdidas!" },
       ],
 
       // 2 Descobrindo as cores
@@ -289,11 +289,11 @@ export const unidade1: UnidadeArte = {
       titulo: "Cores Que Nascem da Mistura",
       subtitulo: "Laranja, verde e roxo",
       historia: [
-        { emoji: "🧪", fundo: "#FBF6EC", texto: "As três amigas de ontem descobriram uma coisa mágica: quando se abraçam, viram outra cor!" },
+        { emoji: "🧪", fundo: "#F5F0FF", texto: "As três amigas de ontem descobriram uma coisa mágica: quando se abraçam, viram outra cor!" },
         { emoji: "🟠", fundo: "#F97316", texto: "Vermelho + Amarelo = LARANJA! A cor da abóbora e do pôr do sol." },
         { emoji: "🟢", fundo: "#22C55E", texto: "Amarelo + Azul = VERDE! A cor da grama e das folhas." },
         { emoji: "🟣", fundo: "#8B5CF6", texto: "Azul + Vermelho = ROXO! A cor da uva e das flores." },
-        { emoji: "🎨", fundo: "#FBF6EC", texto: "Essas são as CORES SECUNDÁRIAS — nascem da mistura das primárias!" },
+        { emoji: "🎨", fundo: "#F5F0FF", texto: "Essas são as CORES SECUNDÁRIAS — nascem da mistura das primárias!" },
       ],
       atividade: {
         titulo: "Laboratório de cores",
@@ -350,7 +350,7 @@ export const unidade1: UnidadeArte = {
         { emoji: "🔥", fundo: "#E63946", texto: "Vermelho, laranja e amarelo lembram o fogo, o sol, o outono." },
         { emoji: "❄️", fundo: "#1D8FE1", texto: "Outras dão calma e frescor: são as CORES FRIAS." },
         { emoji: "🌊", fundo: "#0EA5E9", texto: "Azul, verde e roxo lembram água, floresta e noite." },
-        { emoji: "🎨", fundo: "#FBF6EC", texto: "Os artistas usam cores quentes para animar e cores frias para acalmar." },
+        { emoji: "🎨", fundo: "#F5F0FF", texto: "Os artistas usam cores quentes para animar e cores frias para acalmar." },
       ],
       atividade: {
         titulo: "Divide sua paleta",
@@ -403,7 +403,7 @@ export const unidade1: UnidadeArte = {
       titulo: "Projeto: Meu Primeiro Arco-Íris",
       subtitulo: "Juntar tudo que aprendeu",
       historia: [
-        { emoji: "🌈", fundo: "#FBF6EC", texto: "Chegou o dia! Você já conhece cores primárias, secundárias, quentes e frias." },
+        { emoji: "🌈", fundo: "#F5F0FF", texto: "Chegou o dia! Você já conhece cores primárias, secundárias, quentes e frias." },
         { emoji: "🎨", fundo: "#F1C40F", texto: "O arco-íris tem 7 cores nesta ordem: vermelho, laranja, amarelo, verde, azul, anil e violeta." },
         { emoji: "☁️", fundo: "#1D8FE1", texto: "Ele aparece quando o sol encontra a chuva no céu — é a natureza pintando!" },
         { emoji: "✨", fundo: "#8B5CF6", texto: "Hoje você vai pintar o SEU arco-íris e guardar no álbum do Estúdio Brilha." },

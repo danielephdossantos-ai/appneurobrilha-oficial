@@ -7,7 +7,7 @@ const router = getRouter();
 function App() {
   useEffect(() => {
     // Limpeza de cache de reconstrução pedagógica
-    const CACHE_VERSION = "2.6.0-arte-1ano-speb13";
+    const CACHE_VERSION = "2.7.0-arte-1ano-roxo";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
