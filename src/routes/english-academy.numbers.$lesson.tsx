@@ -887,6 +887,11 @@ function FinalMission({ lesson }: any) {
                 <div className="text-white font-black text-sm">
                   {s.quantity} {s.en}
                 </div>
+                {s.pt && (
+                  <div className="text-white/60 text-[11px] italic">
+                    {s.quantity} {s.pt}
+                  </div>
+                )}
                 <button onClick={() => speakEnglish(`${NUMBERS_1_10[s.quantity - 1].en} ${s.en}`)}
                   className="text-[#FFC93C] text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1 mt-0.5">
                   <Volume2 className="h-3 w-3" strokeWidth={3} /> Ouvir pedido
