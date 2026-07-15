@@ -586,6 +586,11 @@ function Writing({ lesson, onDone }: any) {
           </span>
           {q.sentence.split("___")[1]}
         </div>
+        {q.sentencePt && (
+          <div className="text-white/60 text-xs italic mt-2">
+            {q.sentencePt.replace("___", done ? String(q.correctN) : "___")}
+          </div>
+        )}
       </div>
       <div className="flex gap-2">
         <input
