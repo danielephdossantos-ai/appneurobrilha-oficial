@@ -808,15 +808,18 @@ function Quiz({ lesson, onDone }: any) {
         )}
       </div>
       <div className={cn("grid gap-2", isTrans ? "grid-cols-2" : "grid-cols-4")}>
-        {q.options.map((op: any) => (
+        {q.options.map((op: any, idx: number) => (
           <button key={String(op)} onClick={() => pick(op)} disabled={picked !== null}
-            className={cn("py-3 rounded-xl font-black border-2 transition-all",
+            className={cn("py-3 px-2 rounded-xl font-black border-2 transition-all flex flex-col items-center justify-center gap-0.5",
               isTrans ? "text-base" : "text-xl",
               picked === null ? "bg-white/10 text-white border-white/25 hover:border-white/60" :
               op === correctVal ? "bg-emerald-500/30 text-emerald-100 border-emerald-400" :
               op === picked ? "bg-rose-500/30 text-rose-100 border-rose-400" :
               "bg-white/5 text-white/40 border-white/10")}>
-            {op}
+            <span>{op}</span>
+            {isTrans && q.optionsPt?.[idx] && (
+              <span className="text-[10px] font-normal italic opacity-70">{q.optionsPt[idx]}</span>
+            )}
           </button>
         ))}
       </div>
