@@ -16,7 +16,7 @@ function Historia({ aula, muted }: { aula: AulaArte; muted: boolean }) {
 
   useEffect(() => {
     if (muted) return;
-    speakChunked(sanitizeForSpeech(cena.texto), { lang: "pt-BR", rate: 0.95 });
+    speakChunked(sanitizeForSpeech(cena.texto), { rate: 0.95 });
     return () => stopSpeaking();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i, muted]);
@@ -67,7 +67,7 @@ function Atividade({ aula, muted }: { aula: AulaArte; muted: boolean }) {
   const passo = aula.atividade.passos[step];
   useEffect(() => {
     if (muted) return;
-    speakChunked(sanitizeForSpeech(passo), { lang: "pt-BR", rate: 0.95 });
+    speakChunked(sanitizeForSpeech(passo), { rate: 0.95 });
     return () => stopSpeaking();
   }, [step, muted, passo]);
 
@@ -389,7 +389,7 @@ function TeatroExpressao({ aula, muted }: { aula: AulaArte; muted: boolean }) {
 
   function ouvirModelo() {
     if (muted) return;
-    speakChunked(sanitizeForSpeech(t.fala), { lang: "pt-BR", rate: 0.95 });
+    speakChunked(sanitizeForSpeech(t.fala), { rate: 0.95 });
   }
 
   return (
@@ -511,10 +511,10 @@ function JogoArte({ aula, muted }: { aula: AulaArte; muted: boolean }) {
     if (c === corCerta) {
       setAcertos((a) => a + 1);
       setFeedback(`✔ Isso mesmo! ${r.alvo.toUpperCase()} é essa cor. ${r.dica ? `Dica: ${r.dica}.` : ""}`);
-      if (!muted) speakChunked("Muito bem! Você acertou.", { lang: "pt-BR" });
+      if (!muted) speakChunked("Muito bem! Você acertou.", {});
     } else {
       setFeedback(`✖ Ops! Tenta de novo — procure a cor ${r.alvo}.`);
-      if (!muted) speakChunked("Quase! Tente outra.", { lang: "pt-BR" });
+      if (!muted) speakChunked("Quase! Tente outra.", {});
       return;
     }
     setTimeout(() => {
@@ -584,7 +584,7 @@ function JogoOrdenar({ aula, muted }: { aula: AulaArte; muted: boolean }) {
     if (alvo.length >= ordem.length) return;
     const proxima = ordem[alvo.length];
     if (c !== proxima) {
-      if (!muted) speakChunked("Essa não é a próxima. Tenta outra.", { lang: "pt-BR" });
+      if (!muted) speakChunked("Essa não é a próxima. Tenta outra.", {});
       return;
     }
     const novo = [...alvo, c];
@@ -592,7 +592,7 @@ function JogoOrdenar({ aula, muted }: { aula: AulaArte; muted: boolean }) {
     setEmb(emb.filter((x) => x !== c));
     if (novo.length === ordem.length) {
       setOk(true);
-      if (!muted) speakChunked("Perfeito! Arco-íris na ordem certa.", { lang: "pt-BR" });
+      if (!muted) speakChunked("Perfeito! Arco-íris na ordem certa.", {});
     }
   }
 
