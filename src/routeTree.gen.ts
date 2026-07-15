@@ -43,13 +43,11 @@ import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
-import { Route as EnglishAcademyIndexRouteImport } from './routes/english-academy.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
-import { Route as EnglishAcademyAcademyRouteImport } from './routes/english-academy.$academy'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -62,7 +60,6 @@ import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-
 import { Route as EscolaBrilhaGeo6anoUnidadeRouteImport } from './routes/escola-brilha.geo-6ano.$unidade'
 import { Route as EscolaBrilhaCursoSlugRouteImport } from './routes/escola-brilha.curso.$slug'
 import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
-import { Route as EnglishAcademyNumbersLessonRouteImport } from './routes/english-academy.numbers.$lesson'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -243,11 +240,6 @@ const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
   path: '/escola-brilha/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EnglishAcademyIndexRoute = EnglishAcademyIndexRouteImport.update({
-  id: '/english-academy/',
-  path: '/english-academy/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -271,11 +263,6 @@ const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
 const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
   id: '/escola-brilha/$codigo',
   path: '/escola-brilha/$codigo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EnglishAcademyAcademyRoute = EnglishAcademyAcademyRouteImport.update({
-  id: '/english-academy/$academy',
-  path: '/english-academy/$academy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BnccCodigoRoute = BnccCodigoRouteImport.update({
@@ -345,12 +332,6 @@ const EscolaBrilhaAtlasFinalCursoRoute =
   EscolaBrilhaAtlasFinalCursoRouteImport.update({
     id: '/escola-brilha/atlas-final/$curso',
     path: '/escola-brilha/atlas-final/$curso',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EnglishAcademyNumbersLessonRoute =
-  EnglishAcademyNumbersLessonRouteImport.update({
-    id: '/english-academy/numbers/$lesson',
-    path: '/english-academy/numbers/$lesson',
     getParentRoute: () => rootRouteImport,
   } as any)
 const AnamneseChildIdResultadoRoute =
@@ -446,18 +427,15 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
-  '/english-academy/': typeof EnglishAcademyIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -510,18 +488,15 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
-  '/english-academy': typeof EnglishAcademyIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -576,18 +551,15 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/english-academy/$academy': typeof EnglishAcademyAcademyRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
-  '/english-academy/': typeof EnglishAcademyIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/english-academy/numbers/$lesson': typeof EnglishAcademyNumbersLessonRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/curso/$slug': typeof EscolaBrilhaCursoSlugRoute
   '/escola-brilha/geo-6ano/$unidade': typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -643,18 +615,15 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
-    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
-    | '/english-academy/'
     | '/escola-brilha/'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -707,18 +676,15 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
-    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin'
-    | '/english-academy'
     | '/escola-brilha'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -772,18 +738,15 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
-    | '/english-academy/$academy'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
-    | '/english-academy/'
     | '/escola-brilha/'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/english-academy/numbers/$lesson'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/curso/$slug'
     | '/escola-brilha/geo-6ano/$unidade'
@@ -838,13 +801,10 @@ export interface RootRouteChildren {
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
-  EnglishAcademyAcademyRoute: typeof EnglishAcademyAcademyRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
-  EnglishAcademyIndexRoute: typeof EnglishAcademyIndexRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
-  EnglishAcademyNumbersLessonRoute: typeof EnglishAcademyNumbersLessonRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
   EscolaBrilhaCursoSlugRoute: typeof EscolaBrilhaCursoSlugRoute
   EscolaBrilhaGeo6anoUnidadeRoute: typeof EscolaBrilhaGeo6anoUnidadeRoute
@@ -1100,13 +1060,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/english-academy/': {
-      id: '/english-academy/'
-      path: '/english-academy'
-      fullPath: '/english-academy/'
-      preLoaderRoute: typeof EnglishAcademyIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -1140,13 +1093,6 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha/$codigo'
       fullPath: '/escola-brilha/$codigo'
       preLoaderRoute: typeof EscolaBrilhaCodigoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/english-academy/$academy': {
-      id: '/english-academy/$academy'
-      path: '/english-academy/$academy'
-      fullPath: '/english-academy/$academy'
-      preLoaderRoute: typeof EnglishAcademyAcademyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bncc/$codigo': {
@@ -1231,13 +1177,6 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha/atlas-final/$curso'
       fullPath: '/escola-brilha/atlas-final/$curso'
       preLoaderRoute: typeof EscolaBrilhaAtlasFinalCursoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/english-academy/numbers/$lesson': {
-      id: '/english-academy/numbers/$lesson'
-      path: '/english-academy/numbers/$lesson'
-      fullPath: '/english-academy/numbers/$lesson'
-      preLoaderRoute: typeof EnglishAcademyNumbersLessonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/anamnese/$childId/resultado': {
@@ -1384,13 +1323,10 @@ const rootRouteChildren: RootRouteChildren = {
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,
-  EnglishAcademyAcademyRoute: EnglishAcademyAcademyRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
-  EnglishAcademyIndexRoute: EnglishAcademyIndexRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
-  EnglishAcademyNumbersLessonRoute: EnglishAcademyNumbersLessonRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
   EscolaBrilhaCursoSlugRoute: EscolaBrilhaCursoSlugRoute,
   EscolaBrilhaGeo6anoUnidadeRoute: EscolaBrilhaGeo6anoUnidadeRoute,
