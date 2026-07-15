@@ -1,40 +1,41 @@
 /**
  * Arte · 1º Ano — Estúdio Brilha
- * Engine independente. Cada aula tem 12 momentos SPEB 1.0 obrigatórios.
+ * Engine independente. Cada aula segue o esqueleto SPEB 1.0 (13 etapas).
+ * Campos opcionais permitem retrocompatibilidade com aulas antigas.
  */
 
 export type EixoArte = "visuais" | "musica" | "danca" | "teatro" | "integradas";
 
 export interface HistoriaCena {
-  imagem?: string;      // url opcional
-  emoji?: string;       // fallback ilustrativo grande
-  fundo?: string;       // cor de fundo da cena
-  texto: string;        // narrado por TTS
+  imagem?: string;
+  emoji?: string;
+  fundo?: string;
+  texto: string;
 }
 
 export interface AtividadeArtistica {
   titulo: string;
-  passos: string[];       // instruções curtas, narradas em sequência
-  materiais?: string[];   // "papel", "lápis de cor"...
+  passos: string[];
+  materiais?: string[];
 }
 
 export interface FerramentaDesenho {
-  brief: string;           // o que a criança deve desenhar/pintar
-  cores?: string[];        // paleta sugerida (hex)
-  imagemBase?: string;     // desenho para colorir (opcional, PNG contorno preto)
+  brief: string;
+  cores?: string[];
+  imagemBase?: string;
 }
 
 export interface MomentoMusica {
   titulo: string;
-  padrao: Array<"palma" | "pé" | "boca" | "silencio">;  // sequência p/ tocar
-  bpm?: number;             // 60 default
+  padrao: Array<"palma" | "pé" | "boca" | "silencio">;
+  bpm?: number;
 }
 
 export interface MomentoTeatro {
   titulo: string;
-  emocao: string;           // "alegria", "surpresa"...
+  emocao: string;
   emoji: string;
-  fala: string;             // frase p/ gravar
+  fala: string;
 }
 
 export interface MomentoMovimento {
@@ -49,34 +50,132 @@ export interface JogoArte {
 }
 
 export interface Registro {
-  pergunta: string;         // "Tire uma foto do seu arco-íris"
+  pergunta: string;
   tipo: "foto" | "audio";
 }
 
 export interface Conquista {
-  medalha: string;          // emoji
+  medalha: string;
   nome: string;
   descricao: string;
 }
 
+/* ---------- Novos blocos SPEB 1.0 (opcionais) ---------- */
+
+export interface DescobertaCor {
+  titulo: string;
+  intro?: string;
+  itens: Array<{ nome: string; emoji: string; cor: string; corNome: string }>;
+  fecho?: string;
+}
+
+export interface ExploracaoRodada {
+  instrucao: string;                                // "Toque apenas nos objetos vermelhos"
+  corAlvo: string;                                  // "#E63946"
+  corAlvoNome: string;                              // "vermelho"
+  objetos: Array<{ emoji: string; cor: string; correto: boolean }>;
+}
+
+export interface Exploracao {
+  titulo: string;
+  rodadas: ExploracaoRodada[];
+}
+
+export interface MisturaPasso {
+  corA: string; corAEmoji: string;
+  corB: string; corBEmoji: string;
+  resultado: string; resultadoNome: string; resultadoEmoji: string;
+}
+
+export interface Mistura {
+  titulo: string;
+  passos: MisturaPasso[];
+}
+
+export interface MiniJogoArrastar {
+  titulo: string;
+  instrucao: string;
+  pares: Array<{ objetoEmoji: string; objetoNome: string; cor: string; corNome: string }>;
+}
+
+export interface MissaoCasa {
+  titulo: string;
+  instrucao: string;                                 // "Encontre três objetos vermelhos"
+  emoji?: string;
+}
+
+export interface Curiosidade {
+  titulo: string;
+  fatos: string[];
+}
+
+export interface QuizPergunta {
+  pergunta: string;
+  opcoes: Array<{ label: string; emoji?: string; cor?: string; correto: boolean }>;
+  explicacao?: string;
+}
+
+export interface Quiz {
+  titulo: string;
+  perguntas: QuizPergunta[];
+}
+
+export interface DesafioFinal {
+  titulo: string;
+  narrativa: string;                                 // "A caixa mágica ficou colorida!"
+  medalha: string;
+  nomeMedalha: string;
+  xp: number;
+}
+
+/* ---------- Modo Professor (rodapé, invisível para criança) ---------- */
+
+export interface ModoProfessor {
+  bncc: Array<{ codigo: string; descricao: string }>;
+  objetivos: string[];
+  materiaisDigitais: string[];
+  materiaisFisicos?: string[];
+  adaptacoesTEA: string[];
+  adaptacoesTDAH: string[];
+  criteriosAvaliacao: Array<{ criterio: string; observavel: string; consolidado: string }>;
+  orientacoesPais: string[];
+  duracaoMin?: [number, number];
+}
+
+/* ---------- Aula ---------- */
+
 export interface AulaArte {
-  slug: string;             // "aula-01-cores-primarias"
+  slug: string;
   numero: number;
   eixoPrincipal: EixoArte;
   titulo: string;
   subtitulo: string;
-  historia: HistoriaCena[];             // 1
-  atividade: AtividadeArtistica;        // 2
-  video?: { titulo: string; descricao: string; poster?: string }; // 3 (placeholder)
-  ferramenta: FerramentaDesenho;        // 4
-  musica: MomentoMusica;                // 5
-  teatro: MomentoTeatro;                // 6
-  movimento: MomentoMovimento;          // 7
-  // 8 galeria — vem do supabase (compartilhada)
-  jogo: JogoArte;                       // 9
-  registro: Registro;                   // 10
-  conquista: Conquista;                 // 11
-  relatorio: string[];                  // 12 — bullets curtos p/ o adulto
+
+  // Etapas SPEB 1.0
+  historia: HistoriaCena[];               // 1
+  descoberta?: DescobertaCor;             // 2 (novo)
+  exploracao?: Exploracao;                // 3 (novo)
+  ferramenta: FerramentaDesenho;          // 4
+  mistura?: Mistura;                      // 5 (novo)
+  miniJogo?: MiniJogoArrastar;            // 6 (novo)
+  musica: MomentoMusica;                  // 7
+  missaoCasa?: MissaoCasa;                // 8 (novo)
+  atividade: AtividadeArtistica;          // 9
+  curiosidade?: Curiosidade;              // 10 (novo)
+  quiz?: Quiz;                            // 11 (novo)
+  desafioFinal?: DesafioFinal;            // 12 (novo)
+  relatorio: string[];                    // 13
+
+  // Blocos herdados (retrocompatibilidade com aulas 2-4)
+  video?: { titulo: string; descricao: string; poster?: string };
+  teatro?: MomentoTeatro;
+  movimento?: MomentoMovimento;
+  jogo?: JogoArte;
+  registro?: Registro;
+  conquista?: Conquista;
+
+  // Rodapé pedagógico (invisível para criança)
+  modoProfessor?: ModoProfessor;
 }
 
 export interface UnidadeArte {
@@ -86,7 +185,7 @@ export interface UnidadeArte {
   subtitulo: string;
   tema: string;
   projeto: string;
-  corPrincipal: string;       // hex — cor de destaque da unidade
+  corPrincipal: string;
   emoji: string;
   aulas: AulaArte[];
 }
