@@ -1,16 +1,37 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, Play, Volume2 } from "lucide-react";
+import { ArrowLeft, Play, Lock } from "lucide-react";
 import { Shell } from "@/components/Layout";
-import { ACADEMIES } from "@/english-academy/data/academies";
-import { VERBS } from "@/english-academy/data/verbs";
-import { speakEnglish } from "@/lib/native-tts-en";
+import { ACADEMIES, LEVELS } from "@/english-academy/data/academies";
+import { NUMBERS_1_10_LESSON } from "@/english-academy/data/numbers";
+import { cn } from "@/utils/utils";
+
+type LessonEntry = {
+  slug: string;
+  title: string;
+  descricao: string;
+  status: "aberta" | "em-breve";
+};
+
+// Índice de aulas por academia. Só a Numbers Academy tem aula funcional.
+const LESSONS_BY_ACADEMY: Record<string, LessonEntry[]> = {
+  numbers: [
+    { slug: NUMBERS_1_10_LESSON.slug, title: NUMBERS_1_10_LESSON.title, descricao: NUMBERS_1_10_LESSON.descricao, status: "aberta" },
+    { slug: "11-20",     title: "Numbers 11–20",       descricao: "Onze a vinte, com pronúncia e jogos.",           status: "em-breve" },
+    { slug: "21-100",    title: "Numbers 21–100",      descricao: "Contar em dezenas até cem.",                     status: "em-breve" },
+    { slug: "ordinals",  title: "Ordinal Numbers",     descricao: "First, second, third… posições e datas.",        status: "em-breve" },
+    { slug: "money",     title: "Money & Prices",      descricao: "Dólares, centavos, preços e troco.",             status: "em-breve" },
+    { slug: "time",      title: "Telling the Time",    descricao: "Horas, minutos e agenda do dia.",                status: "em-breve" },
+  ],
+};
 
 export const Route = createFileRoute("/english-academy/$academy")({
   loader: ({ params }) => {
     const academy = ACADEMIES.find((a) => a.slug === params.academy);
     if (!academy || academy.status !== "aberta") throw notFound();
-    return { academy };
+    const level = LEVELS.find((l) => l.id === academy.level)!;
+    const lessons = LESSONS_BY_ACADEMY[academy.slug] ?? [];
+    return { academy, level, lessons };
   },
   head: ({ loaderData }) => ({
     meta: [
@@ -27,8 +48,7 @@ function NotFound() {
   return (
     <Shell>
       <div className="max-w-md mx-auto text-center py-12">
-        <div className="text-6xl mb-3">🔒</div>
-        <h1 className="text-white text-2xl font-black mb-2">Academia indisponível</h1>
+        <div className="text-white text-2xl font-black mb-2">Academia indisponível</div>
         <p className="text-white/70 mb-4">Esta academia ainda não foi aberta.</p>
         <Link to="/english-academy" className="text-[#FFC93C] font-black">← Voltar para a English Academy</Link>
       </div>
@@ -37,10 +57,7 @@ function NotFound() {
 }
 
 function AcademyPage() {
-  const { academy } = Route.useLoaderData();
-
-  // Currently only Verb Academy has content
-  if (academy.slug !== "verbs") return <NotFound />;
+  const { academy, level, lessons } = Route.useLoaderData();
 
   return (
     <Shell>
@@ -53,73 +70,71 @@ function AcademyPage() {
         </Link>
 
         <div
-          className="relative rounded-[2rem] overflow-hidden border-[3px] border-white/80 p-5 md:p-7 mb-5"
-          style={{
-            background:
-              "radial-gradient(ellipse at 30% 20%, #7f1d1d 0%, #450a0a 55%, #1c0505 100%)",
-          }}
+          className={cn(
+            "relative rounded-[2rem] overflow-hidden border-[3px] border-white/80 p-5 md:p-7 mb-5 bg-gradient-to-br",
+            academy.gradient,
+          )}
+          style={{ boxShadow: `0 0 32px ${academy.glow}` }}
         >
-          <div className="relative z-10 flex items-center gap-4">
-            <div className="flex-1">
-              <div className="text-white/60 text-[10px] font-black uppercase tracking-[0.3em]">
-                Academia
-              </div>
-              <h1 className="text-white text-2xl md:text-3xl font-black leading-tight">
-                {academy.title}
-              </h1>
-              <p className="text-white/85 text-xs md:text-sm mt-1.5">{academy.descricao}</p>
+          <div className="relative z-10">
+            <div className="text-white/70 text-[10px] font-black uppercase tracking-[0.3em]">
+              {level.cefr} · {level.title}
             </div>
+            <h1 className="text-white text-2xl md:text-3xl font-black leading-tight">
+              {academy.title}
+            </h1>
+            <p className="text-white/85 text-xs md:text-sm mt-1.5">{academy.descricao}</p>
           </div>
         </div>
 
         <div className="mb-3 px-1">
           <span className="text-[11px] font-black uppercase tracking-[0.25em] text-white/70">
-            {VERBS.length} verbos essenciais
+            {lessons.length} aulas nesta academia
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {VERBS.map((v, i) => (
-            <motion.div
-              key={v.slug}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.03 * i }}
-            >
-              <div className="relative bg-gradient-to-br from-white/8 to-white/2 border-2 border-white/15 rounded-2xl p-4 hover:border-[#FFC93C]/60 transition-colors">
-                <div className="flex items-center gap-3">
+          {lessons.map((l, i) => {
+            const isOpen = l.status === "aberta";
+            const card = (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.03 * i }}
+                className={cn(
+                  "relative bg-gradient-to-br from-white/8 to-white/2 border-2 rounded-2xl p-4 transition-colors",
+                  isOpen ? "border-white/25 hover:border-[#FFC93C]/70 cursor-pointer" : "border-white/10 opacity-70",
+                )}
+              >
+                <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-2">
-                      <div className="text-white font-black text-xl leading-none">{v.base}</div>
-                      <div className="text-white/50 text-xs font-mono">{v.ipa}</div>
-                    </div>
-                    <div className="text-white/80 text-sm font-bold mt-0.5">{v.pt}</div>
-                    <div className="text-white/50 text-[10px] uppercase tracking-wider font-black mt-1">
-                      {v.tipo}
-                    </div>
+                    <div className="text-white font-black text-lg leading-tight">{l.title}</div>
+                    <div className="text-white/70 text-xs mt-1">{l.descricao}</div>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      speakEnglish(v.base);
-                    }}
-                    aria-label={`Ouvir ${v.base}`}
-                    className="shrink-0 h-10 w-10 rounded-full bg-[#FFC93C] hover:bg-[#FFD966] text-[#0d1f55] grid place-items-center transition-transform active:scale-90"
-                  >
-                    <Volume2 className="h-5 w-5" strokeWidth={3} />
-                  </button>
+                  {isOpen ? (
+                    <div className="shrink-0 inline-flex items-center gap-1 bg-[#FFC93C] text-[#0d1f55] px-3 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider">
+                      <Play className="h-3.5 w-3.5" strokeWidth={3} /> Estudar
+                    </div>
+                  ) : (
+                    <div className="shrink-0 inline-flex items-center gap-1 bg-black/40 text-white/80 px-3 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider">
+                      <Lock className="h-3.5 w-3.5" strokeWidth={3} /> Em breve
+                    </div>
+                  )}
                 </div>
-                <Link
-                  to="/english-academy/verbs/$verb"
-                  params={{ verb: v.slug }}
-                  className="mt-3 inline-flex items-center gap-1.5 bg-white/95 text-[#7F1D1D] px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider hover:bg-white"
-                >
-                  <Play className="h-3.5 w-3.5" strokeWidth={3} /> Estudar
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+
+            if (!isOpen || academy.slug !== "numbers") return <div key={l.slug}>{card}</div>;
+            return (
+              <Link
+                key={l.slug}
+                to="/english-academy/numbers/$lesson"
+                params={{ lesson: l.slug }}
+              >
+                {card}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </Shell>
