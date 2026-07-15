@@ -497,16 +497,23 @@ function Reading({ lesson, onDone }: any) {
     return (
       <div>
         <div className="text-white/70 text-xs font-bold mb-3">📖 Leia o texto e ouça</div>
-        <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3 space-y-1">
-          {lesson.reading.text.map((line: string, i: number) => (
-            <div key={i} className="flex items-center gap-2">
-              <SpeakBtn text={line} size="sm" />
-              <div className="text-white font-bold text-sm md:text-base">{line}</div>
-            </div>
-          ))}
+        <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3 space-y-2">
+          {lesson.reading.text.map((line: any, i: number) => {
+            const en = typeof line === "string" ? line : line.en;
+            const pt = typeof line === "string" ? "" : line.pt;
+            return (
+              <div key={i} className="flex items-start gap-2">
+                <SpeakBtn text={en} size="sm" />
+                <div className="flex-1">
+                  <div className="text-white font-bold text-sm md:text-base">{en}</div>
+                  {pt && <div className="text-white/60 text-xs italic mt-0.5">{pt}</div>}
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div className="flex gap-2 justify-end">
-          <button onClick={() => speakEnglish(lesson.reading.text.join(" "))}
+          <button onClick={() => speakEnglish(lesson.reading.text.map((l: any) => typeof l === "string" ? l : l.en).join(" "))}
             className="bg-white/10 text-white px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider">
             Ouvir tudo
           </button>
@@ -525,6 +532,7 @@ function Reading({ lesson, onDone }: any) {
       <div className="text-white/70 text-xs font-bold mb-3">❓ Reading — {qi + 1}/{lesson.reading.questions.length}</div>
       <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-3">
         <div className="text-white font-black text-base md:text-lg">{q.q}</div>
+        {q.qPt && q.qPt !== q.q && <div className="text-white/60 text-xs italic mt-1">{q.qPt}</div>}
       </div>
       <div className="grid grid-cols-4 gap-2">
         {q.options.map((op: number) => (
@@ -578,6 +586,11 @@ function Writing({ lesson, onDone }: any) {
           </span>
           {q.sentence.split("___")[1]}
         </div>
+        {q.sentencePt && (
+          <div className="text-white/60 text-xs italic mt-2">
+            {q.sentencePt.replace("___", done ? String(q.correctN) : "___")}
+          </div>
+        )}
       </div>
       <div className="flex gap-2">
         <input
@@ -795,15 +808,18 @@ function Quiz({ lesson, onDone }: any) {
         )}
       </div>
       <div className={cn("grid gap-2", isTrans ? "grid-cols-2" : "grid-cols-4")}>
-        {q.options.map((op: any) => (
+        {q.options.map((op: any, idx: number) => (
           <button key={String(op)} onClick={() => pick(op)} disabled={picked !== null}
-            className={cn("py-3 rounded-xl font-black border-2 transition-all",
+            className={cn("py-3 px-2 rounded-xl font-black border-2 transition-all flex flex-col items-center justify-center gap-0.5",
               isTrans ? "text-base" : "text-xl",
               picked === null ? "bg-white/10 text-white border-white/25 hover:border-white/60" :
               op === correctVal ? "bg-emerald-500/30 text-emerald-100 border-emerald-400" :
               op === picked ? "bg-rose-500/30 text-rose-100 border-rose-400" :
               "bg-white/5 text-white/40 border-white/10")}>
-            {op}
+            <span>{op}</span>
+            {isTrans && q.optionsPt?.[idx] && (
+              <span className="text-[10px] font-normal italic opacity-70">{q.optionsPt[idx]}</span>
+            )}
           </button>
         ))}
       </div>
@@ -871,6 +887,11 @@ function FinalMission({ lesson }: any) {
                 <div className="text-white font-black text-sm">
                   {s.quantity} {s.en}
                 </div>
+                {s.pt && (
+                  <div className="text-white/60 text-[11px] italic">
+                    {s.quantity} {s.pt}
+                  </div>
+                )}
                 <button onClick={() => speakEnglish(`${NUMBERS_1_10[s.quantity - 1].en} ${s.en}`)}
                   className="text-[#FFC93C] text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1 mt-0.5">
                   <Volume2 className="h-3 w-3" strokeWidth={3} /> Ouvir pedido
