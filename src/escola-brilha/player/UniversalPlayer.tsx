@@ -252,6 +252,7 @@ export function UniversalPlayer({
       </div>
       <AulaPlayer
         aula={aula}
+        skin={aula.codigo === "EF01GE01" ? "geo-cartografo" : "default"}
         onConcluir={({ desempenho }) => {
           // Comemora conclusão com nova mensagem positiva.
           const gat = desempenho >= 70 ? "conclusao_missao" : "esforco";

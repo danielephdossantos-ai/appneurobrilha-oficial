@@ -1,5 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square } from "lucide-react";
+import { PERSONAGENS } from "../mascotes-personagens";
+
 
 import { useNavigate } from "@tanstack/react-router";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
@@ -73,13 +75,20 @@ const ETAPAS_METODO = [
 export function AulaPlayer({
   aula,
   onConcluir,
+  skin = "default",
 }: {
   aula: Aula;
   /** Disparado APÓS o registro de conclusão no backend. Usado pelo
    *  UniversalPlayer para auto-redirecionar quando a missão atual
    *  é de recuperação e existe uma missão principal aguardando. */
   onConcluir?: (info: { codigo: string; desempenho: number }) => void;
+  /** Skin visual do player. "geo-cartografo" aplica a identidade do
+   *  Cartógrafo do Município (verde/âmbar + Aurora), reaproveitando
+   *  todas as mecânicas atuais das aulas. */
+  skin?: "default" | "geo-cartografo";
 }) {
+  const isCarto = skin === "geo-cartografo";
+
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
@@ -217,8 +226,21 @@ export function AulaPlayer({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-16">
-      <div className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b-2 border-white/10 px-4 py-3 flex items-center gap-3">
+    <div
+      data-skin={skin}
+      className={`min-h-screen text-white pb-16 ${
+        isCarto
+          ? "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"
+          : "bg-gradient-to-b from-[#0d1f55] to-[#050a2c]"
+      }`}
+    >
+      <div
+        className={`sticky top-0 z-20 backdrop-blur px-4 py-3 flex items-center gap-3 border-b-2 ${
+          isCarto
+            ? "bg-black/40 border-emerald-400/20"
+            : "bg-[#0d1f55]/95 border-white/10"
+        }`}
+      >
         <button
           onClick={() => navigate({ to: "/escola-brilha" })}
           className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
@@ -227,7 +249,12 @@ export function AulaPlayer({
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div className="flex-1 min-w-0">
-          <div className="text-[10px] font-black uppercase tracking-widest text-white/60">
+          <div
+            className={`text-[10px] font-black uppercase tracking-widest ${
+              isCarto ? "text-emerald-300/80" : "text-white/60"
+            }`}
+          >
+            {isCarto ? "🗺️ Cartógrafo · " : ""}
             {aula.disciplina} · {aula.ano} · {aula.codigo}
           </div>
           <div className="text-sm font-black truncate">{aula.titulo}</div>
@@ -240,6 +267,28 @@ export function AulaPlayer({
           {tts.speaking ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
         </button>
       </div>
+
+      {isCarto && (
+        <div className="px-4 pt-3">
+          <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-3 py-2 flex items-center gap-3">
+            <img
+              src={PERSONAGENS.aurora.img}
+              alt="Aurora"
+              className="h-10 w-10 rounded-full object-cover ring-2 ring-emerald-300/60 shrink-0"
+              draggable={false}
+            />
+            <div className="min-w-0">
+              <div className="text-[10px] font-black uppercase tracking-widest text-emerald-200/90">
+                Aurora, sua cartógrafa
+              </div>
+              <div className="text-xs text-white/90 truncate">
+                Vamos abrir o mapa e descobrir o seu lugar!
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       <div className="px-4 pt-3">
         <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
