@@ -75,7 +75,18 @@ function TrilhaSerieDisc() {
 
   const escritas = useMemo(() => new Set(listAulas().map((a) => a.codigo.toUpperCase())), []);
 
+  const isArte2ano = serie === "2ano" && disc === "arte";
+
   useEffect(() => {
+    if (isArte2ano) {
+      // Arte 2ano tem registry próprio e roteia para /escola-brilha/arte/2ano/$aula
+      const rows: HabRow[] = listAulasArte()
+        .sort((a, b) => (a.unidade - b.unidade) || (a.aula - b.aula))
+        .map((a) => ({ codigo: a.id, titulo: `U${a.unidade} · ${a.titulo}`, ano: "2º Ano" }));
+      setHabilidades(rows);
+      setLoading(false);
+      return;
+    }
     (async () => {
       const PAGE = 1000;
       const acc: Array<{ codigo_bncc: string; titulo: string | null; ano: string | null; disciplina: string | null }> = [];
@@ -98,7 +109,7 @@ function TrilhaSerieDisc() {
       setHabilidades(rows);
       setLoading(false);
     })();
-  }, [serie, disc, escritas]);
+  }, [serie, disc, escritas, isArte2ano]);
 
   useEffect(() => {
     if (!activeChild?.id) return;
