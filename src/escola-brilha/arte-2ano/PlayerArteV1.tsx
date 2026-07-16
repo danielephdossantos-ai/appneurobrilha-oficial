@@ -224,9 +224,14 @@ function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "hi
       <p className="text-lg leading-relaxed mb-5">{etapa.texto}</p>
       <div className="grid grid-cols-5 gap-3 mb-5">
         {etapa.lapis.map((l) => (
-          <button key={l.cor} onClick={() => say(l.frase)} className="flex flex-col items-center gap-1 group" aria-label={`Lápis ${l.cor}`}>
-            <div className="paint-chip" style={{ background: l.hex }} />
-            <div className="text-xs font-bold opacity-70 group-hover:opacity-100">{NOMES_CORES[l.cor]}</div>
+          <button
+            key={l.cor}
+            onClick={() => say(l.frase)}
+            className="flex flex-col items-center gap-1 group transition active:scale-95"
+            aria-label={`Lápis ${l.cor}`}
+          >
+            <LapisDeCor hex={l.hex} />
+            <div className="text-xs font-bold opacity-80 group-hover:opacity-100 mt-1">{NOMES_CORES[l.cor]}</div>
             <div className="text-[11px] opacity-60">{l.emocao}</div>
           </button>
         ))}
