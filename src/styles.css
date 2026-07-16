@@ -188,6 +188,54 @@
   }
 }
 
+/* Geografia 1º ano — skin visual do Cartógrafo (piloto EF01GE01).
+   Mantém as mecânicas antigas, mas remove a aparência branca/colorida do player base. */
+[data-skin="geo-cartografo"] .geo-cartografo-bloco,
+[data-skin="geo-cartografo"] .geo-cartografo-bloco * {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco > div,
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-white"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-amber"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-sky"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-blue"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-purple"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-pink"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-orange"] {
+  background: rgba(15, 23, 42, 0.58) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-white"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-amber"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-sky"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-blue"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-purple"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-pink"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-orange"] {
+  border-color: rgba(52, 211, 153, 0.22) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-[#0d1f55]"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-slate"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-gray"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-black"] {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-[#FFC93C]"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-amber"] {
+  color: rgb(252, 211, 77) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco button {
+  border-color: rgba(52, 211, 153, 0.25) !important;
+  box-shadow: none !important;
+}
+
 /* Botões grandes e acessíveis */
 .btn-tap {
   min-height: 48px;
