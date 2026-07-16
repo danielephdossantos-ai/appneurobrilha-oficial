@@ -650,14 +650,23 @@ function SpeakingMic() {
         {heard && (
           <div className="mt-3 text-sm">
             <div className="text-slate-500">
-              Ouvi{confidencePct !== null ? ` (${confidencePct}% de certeza)` : ""}:
+              Ouvi em {heardLang === "pt" ? "🇧🇷 português" : "🇺🇸 inglês"}
+              {confidencePct !== null ? ` (${confidencePct}% de certeza)` : ""}:
             </div>
-            <div className="font-bold text-slate-700">{heard}</div>
+            <div className={`font-bold ${heardLang === "pt" ? "text-amber-700" : "text-slate-700"}`}>{heard}</div>
           </div>
         )}
         {result === "ok" && (
           <div className="mt-3 text-emerald-600 font-black flex items-center justify-center gap-2">
             <Check size={18} /> Perfect pronunciation!
+          </div>
+        )}
+        {result === "wrong-lang" && (
+          <div className="mt-3 text-amber-600 font-black flex flex-col items-center gap-1">
+            <div className="flex items-center gap-2"><X size={18} /> Você falou em português!</div>
+            <div className="text-xs font-normal text-amber-700">
+              Essa atividade é em inglês. Escuta o 🔊 e repete a palavra em inglês.
+            </div>
           </div>
         )}
         {result === "close" && (
@@ -676,6 +685,7 @@ function SpeakingMic() {
             </div>
           </div>
         )}
+
 
       </div>
       <div className="flex justify-between items-center mt-4">
