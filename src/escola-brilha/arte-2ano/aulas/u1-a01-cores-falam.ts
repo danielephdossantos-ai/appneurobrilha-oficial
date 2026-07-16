@@ -10,7 +10,7 @@ export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "lara
 export type EtapaBloco1 =
   | { tipo: "historia"; titulo: string; texto: string; lapis: Array<{ cor: CorNome; hex: string; emocao: string; frase: string }>; convite: string }
   | { tipo: "observar-cores"; titulo: string; instrucao: string; cenas: Array<{ nome: string; svg: "por-do-sol" | "jardim" | "praia" | "floresta"; coresPresentes: CorNome[] }> }
-  | { tipo: "cor-emocao"; titulo: string; instrucao: string; cartoes: Array<{ cor: CorNome; hex: string; emoji: string; emocao: string; explicacao: string }> }
+  | { tipo: "cor-emocao"; titulo: string; instrucao: string; cartoes: Array<{ cor: CorNome; hex: string; emoji: string; rostoUrl?: string; emocao: string; explicacao: string }> }
   | { tipo: "artista"; titulo: string; obraUrl: string; obraLegenda: string; pergunta: string; opcoes: string[]; comentario: string }
   | { tipo: "texturas"; titulo: string; instrucao: string; itens: Array<{ nome: string; textura: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas"; combina: string }> }
   | { tipo: "curiosidade"; titulo: string; texto: string }
