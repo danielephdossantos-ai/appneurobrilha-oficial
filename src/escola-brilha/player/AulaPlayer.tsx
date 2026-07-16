@@ -75,13 +75,20 @@ const ETAPAS_METODO = [
 export function AulaPlayer({
   aula,
   onConcluir,
+  skin = "default",
 }: {
   aula: Aula;
   /** Disparado APÓS o registro de conclusão no backend. Usado pelo
    *  UniversalPlayer para auto-redirecionar quando a missão atual
    *  é de recuperação e existe uma missão principal aguardando. */
   onConcluir?: (info: { codigo: string; desempenho: number }) => void;
+  /** Skin visual do player. "geo-cartografo" aplica a identidade do
+   *  Cartógrafo do Município (verde/âmbar + Aurora), reaproveitando
+   *  todas as mecânicas atuais das aulas. */
+  skin?: "default" | "geo-cartografo";
 }) {
+  const isCarto = skin === "geo-cartografo";
+
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
