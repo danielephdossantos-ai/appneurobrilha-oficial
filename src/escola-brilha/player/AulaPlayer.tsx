@@ -370,32 +370,52 @@ export function AulaPlayer({
                   id={`bloco-${bloco.id}`}
                   className="scroll-mt-24"
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span
-                      className="inline-block h-2.5 w-2.5 rounded-full"
-                      style={{ background: etapa.cor }}
-                    />
-                    <span
-                      className="text-[10px] font-black uppercase tracking-widest"
-                      style={{ color: etapa.cor }}
-                    >
-                      Etapa {bloco.etapa} · {etapa.nome}
-                    </span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
-                      · {bloco.nome}
-                    </span>
-                    <span className="ml-auto text-[10px] font-black text-white/40">
-                      {i + 1}/{BLOCOS.length}
-                    </span>
+                  {isCarto ? (
+                    <div className="text-[11px] uppercase tracking-[0.2em] mb-3 flex items-center gap-2 text-amber-300/80">
+                      <span className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-black bg-amber-300/20 border border-amber-300/40 text-amber-200">
+                        {i + 1}
+                      </span>
+                      <span>{bloco.nome}</span>
+                      <span className="ml-auto text-white/40 tracking-widest">
+                        {i + 1}/{BLOCOS.length}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 mb-2">
+                      <span
+                        className="inline-block h-2.5 w-2.5 rounded-full"
+                        style={{ background: etapa.cor }}
+                      />
+                      <span
+                        className="text-[10px] font-black uppercase tracking-widest"
+                        style={{ color: etapa.cor }}
+                      >
+                        Etapa {bloco.etapa} · {etapa.nome}
+                      </span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
+                        · {bloco.nome}
+                      </span>
+                      <span className="ml-auto text-[10px] font-black text-white/40">
+                        {i + 1}/{BLOCOS.length}
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className={
+                      isCarto
+                        ? "rounded-2xl border border-emerald-400/15 bg-slate-900/60 ring-1 ring-white/5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.35)] p-4 [&_.bg-white]:!bg-transparent [&_.text-slate-900]:!text-white [&_.text-gray-900]:!text-white [&_.text-black]:!text-white [&_.text-slate-800]:!text-white/90 [&_.text-gray-800]:!text-white/90 [&_.text-slate-700]:!text-white/80 [&_.text-gray-700]:!text-white/80 [&_.text-slate-600]:!text-white/70 [&_.text-gray-600]:!text-white/70"
+                        : ""
+                    }
+                  >
+                    {renderBloco(aula, bloco.id, {
+                      acertos,
+                      erros,
+                      childId: activeChild?.id,
+                      setAcertos,
+                      setErros,
+                      onQuizEnd: concluirAula,
+                    })}
                   </div>
-                  {renderBloco(aula, bloco.id, {
-                    acertos,
-                    erros,
-                    childId: activeChild?.id,
-                    setAcertos,
-                    setErros,
-                    onQuizEnd: concluirAula,
-                  })}
                   <ProfessorVirtual
                     aula={aula}
                     blocoId={bloco.id}
