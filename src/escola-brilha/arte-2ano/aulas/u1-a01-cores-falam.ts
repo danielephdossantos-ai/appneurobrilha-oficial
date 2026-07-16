@@ -9,7 +9,15 @@ export type EtapaBloco1 =
   | { tipo: "artista"; titulo: string; obraUrl: string; obraLegenda: string; pergunta: string; opcoes: string[]; comentario: string }
   | { tipo: "texturas"; titulo: string; instrucao: string; itens: Array<{ nome: string; textura: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas"; combina: string }> }
   | { tipo: "curiosidade"; titulo: string; texto: string }
-  | { tipo: "quiz"; titulo: string; perguntas: Array<{ pergunta: string; opcoes: string[]; correta: number; explicacao: string }> };
+  | { tipo: "quiz"; titulo: string; perguntas: Array<{ pergunta: string; opcoes: string[]; correta: number; explicacao: string }> }
+  // ---- Bloco 2 (agora ativo) ----
+  | { tipo: "pintura-digital"; titulo: string; instrucao: string; paleta: CorNome[] }
+  | { tipo: "cor-emocao-drag"; titulo: string; instrucao: string; pares: Array<{ emocao: string; emoji: string; cor: CorNome; hex: string }> }
+  | { tipo: "musica-e-arte"; titulo: string; instrucao: string; paleta: CorNome[]; humor: "calmo" | "alegre" | "misterioso" }
+  | { tipo: "missao-casa"; titulo: string; instrucao: string; ideias: string[]; cursoSlug: string; aulaSlug: string }
+  | { tipo: "atividade-manual"; titulo: string; instrucao: string; materiais: string[]; passos: Array<{ n: number; texto: string; icone: "corte" | "cola" | "desenho" | "montagem" | "pronto" }> }
+  | { tipo: "desafio-final"; titulo: string; instrucao: string; paleta: CorNome[] }
+  | { tipo: "relatorio"; titulo: string; texto: string };
 
 export type AulaArte = {
   id: string;
@@ -21,7 +29,6 @@ export type AulaArte = {
   duracaoMin: string;
   objetivos: string[];
   etapas: EtapaBloco1[];
-  etapasBloco2: Array<{ n: number; nome: string; descricao: string }>;
 };
 
 const aula: AulaArte = {
@@ -31,12 +38,14 @@ const aula: AulaArte = {
   aula: 1,
   tituloUnidade: "Cores, Texturas e Emoções",
   titulo: "As Cores Também Falam",
-  duracaoMin: "35 a 45 min",
+  duracaoMin: "45 a 60 min",
   objetivos: [
     "compreender que as cores transmitem emoções",
     "identificar cores quentes e frias",
     "observar obras de arte simples",
     "explicar a escolha das cores utilizadas",
+    "produzir uma pintura digital e uma manual",
+    "registrar uma missão em casa com foto",
   ],
   etapas: [
     {
@@ -100,6 +109,68 @@ const aula: AulaArte = {
       ],
     },
     {
+      tipo: "pintura-digital",
+      titulo: "Pintura Digital",
+      instrucao: "Escolhe uma ferramenta e uma cor. Depois pinta na tela em branco!",
+      paleta: ["vermelho", "amarelo", "azul", "verde", "roxo", "laranja", "rosa", "marrom", "preto"],
+    },
+    {
+      tipo: "cor-emocao-drag",
+      titulo: "Jogo Cor × Emoção",
+      instrucao: "Toca em uma emoção e depois na cor que combina com ela.",
+      pares: [
+        { emocao: "Alegria",       emoji: "😊", cor: "amarelo",  hex: "#F0C24A" },
+        { emocao: "Calma",         emoji: "😌", cor: "azul",     hex: "#5A8FBF" },
+        { emocao: "Coragem",       emoji: "🦁", cor: "vermelho", hex: "#D64545" },
+        { emocao: "Esperança",     emoji: "🌱", cor: "verde",    hex: "#7FAE73" },
+        { emocao: "Imaginação",    emoji: "🌌", cor: "roxo",     hex: "#8A5A83" },
+      ],
+    },
+    {
+      tipo: "musica-e-arte",
+      titulo: "Música e Arte",
+      instrucao: "Toca a música e pinta livre. Deixa a mão seguir o som!",
+      paleta: ["vermelho", "amarelo", "azul", "verde", "roxo", "laranja", "rosa"],
+      humor: "calmo",
+    },
+    {
+      tipo: "missao-casa",
+      titulo: "Missão em Casa",
+      instrucao: "Procure em casa 3 objetos coloridos e tire uma foto. Depois envie aqui!",
+      ideias: [
+        "🍎 Uma fruta bem colorida",
+        "👕 Uma roupa da cor que você mais gosta",
+        "🧸 Um brinquedo cheio de cores",
+        "🌼 Uma flor ou planta do quintal",
+      ],
+      cursoSlug: "arte-2ano",
+      aulaSlug: "u1-a01-cores-falam",
+    },
+    {
+      tipo: "atividade-manual",
+      titulo: "Rosto das Emoções",
+      instrucao: "Vamos montar o Rosto das Emoções com papel e cores. Marca cada passo quando terminar.",
+      materiais: [
+        "🟡 Papel colorido (amarelo, azul, vermelho, verde)",
+        "✂️ Tesoura sem ponta",
+        "🖍 Lápis de cor ou giz",
+        "🪣 Cola",
+      ],
+      passos: [
+        { n: 1, texto: "Recorte 4 círculos grandes de cores diferentes.", icone: "corte" },
+        { n: 2, texto: "Em cada círculo, desenhe uma emoção: alegria, calma, coragem, surpresa.", icone: "desenho" },
+        { n: 3, texto: "Cole os olhos e a boca com pedacinhos de papel.", icone: "cola" },
+        { n: 4, texto: "Junte os 4 rostos em uma folha maior.", icone: "montagem" },
+        { n: 5, texto: "Mostre pra alguém e explique cada cor.", icone: "pronto" },
+      ],
+    },
+    {
+      tipo: "desafio-final",
+      titulo: "Meu Dia Colorido",
+      instrucao: "Pinta como foi o seu dia hoje. Depois grave um áudio explicando as cores que escolheu.",
+      paleta: ["vermelho", "amarelo", "azul", "verde", "roxo", "laranja", "rosa", "marrom", "preto"],
+    },
+    {
       tipo: "curiosidade",
       titulo: "Você sabia?",
       texto:
@@ -135,15 +206,11 @@ const aula: AulaArte = {
         },
       ],
     },
-  ],
-  etapasBloco2: [
-    { n: 5, nome: "Pintura Digital", descricao: "Tela em branco com pincel, lápis, giz e carimbos." },
-    { n: 7, nome: "Jogo Cor × Emoção", descricao: "Arrastar cada emoção para a cor certa." },
-    { n: 8, nome: "Música e Arte", descricao: "Pintar livre enquanto uma música toca." },
-    { n: 9, nome: "Missão em Casa", descricao: "Fotografar objetos coloridos da sua casa." },
-    { n: 10, nome: "Atividade Manual", descricao: "Montar o Rosto das Emoções com papel e cores." },
-    { n: 13, nome: "Desafio Final", descricao: "Pintar 'Meu Dia Colorido' e gravar áudio explicando." },
-    { n: 14, nome: "Relatório", descricao: "Ver seu progresso artístico." },
+    {
+      tipo: "relatorio",
+      titulo: "Seu progresso artístico",
+      texto: "Você percorreu todas as etapas do Ateliê das Cores! Veja tudo que você fez nessa jornada.",
+    },
   ],
 };
 
