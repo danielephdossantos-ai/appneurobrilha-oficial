@@ -479,8 +479,7 @@ function CanvasPintura({ paleta, alturaCanvas = 320, etapaId, overlay }: { palet
     const ctx = c.getContext("2d");
     if (!ctx) return;
     ctx.scale(dpr, dpr);
-    ctx.fillStyle = "#FFFDF7";
-    ctx.fillRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
   }, [alturaCanvas, etapaId]);
 
   const coords = (ev: React.PointerEvent<HTMLCanvasElement>) => {
