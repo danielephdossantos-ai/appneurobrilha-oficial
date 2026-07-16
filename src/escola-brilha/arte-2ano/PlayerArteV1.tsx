@@ -106,16 +106,34 @@ type Concluidas = Set<number>;
 const CtxConcluidas = React.createContext<{ concluidas: Concluidas; marcar: (n: number) => void } | null>(null);
 
 export function PlayerArteV1({ aula, onSair }: { aula: AulaArte; onSair: () => void }) {
-  const [i, setI] = useState(0);
   const [concluidas, setConcluidas] = useState<Concluidas>(new Set());
   const total = aula.etapas.length;
   const { say, stop } = useSpeak();
   useEffect(() => () => stop(), [stop]);
 
-  const etapa = aula.etapas[i];
-  const podeAvancar = i < total - 1;
-
   const marcar = (n: number) => setConcluidas((s) => { const nv = new Set(s); nv.add(n); return nv; });
+
+  // Progresso baseado em quantas etapas já apareceram no viewport
+  const [vistas, setVistas] = useState<Set<number>>(new Set([0]));
+  const refs = useRef<Array<HTMLDivElement | null>>([]);
+  useEffect(() => {
+    const obs = new IntersectionObserver((entries) => {
+      setVistas((s) => {
+        const nv = new Set(s);
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const idx = Number((e.target as HTMLElement).dataset.idx);
+            if (!Number.isNaN(idx)) nv.add(idx);
+          }
+        });
+        return nv;
+      });
+    }, { threshold: 0.35 });
+    refs.current.forEach((el) => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, [total]);
+
+  const progresso = Math.min(100, (vistas.size / total) * 100);
 
   return (
     <CtxConcluidas.Provider value={{ concluidas, marcar }}>
@@ -133,24 +151,30 @@ export function PlayerArteV1({ aula, onSair }: { aula: AulaArte; onSair: () => v
             Unidade {aula.unidade} — {aula.tituloUnidade} · Aula {aula.aula}
           </div>
 
-          <div className="progress-track mb-6">
-            <div className="progress-fill" style={{ width: `${((i + 1) / total) * 100}%` }} />
+          <div className="sticky top-2 z-20 mb-6">
+            <div className="progress-track">
+              <div className="progress-fill" style={{ width: `${progresso}%` }} />
+            </div>
           </div>
 
-          <div key={i} className="fade-up">
-            <Etapa etapa={etapa} indice={i} say={say} aula={aula} />
-          </div>
+          <div className="space-y-8">
+            {aula.etapas.map((etapa, i) => (
+              <div
+                key={i}
+                data-idx={i}
+                ref={(el) => { refs.current[i] = el; }}
+                className="fade-up scroll-mt-24"
+              >
+                <div className="text-xs font-bold opacity-60 mb-2">{i + 1} / {total}</div>
+                <Etapa etapa={etapa} indice={i} say={say} aula={aula} />
+              </div>
+            ))}
 
-          <div className="flex items-center justify-between mt-6">
-            <button className="brush-btn secondary" disabled={i === 0} onClick={() => setI((v) => Math.max(0, v - 1))}>
-              ← Voltar
-            </button>
-            <div className="text-sm opacity-70">{i + 1} / {total}</div>
-            {podeAvancar ? (
-              <button className="brush-btn" onClick={() => { marcar(i); setI((v) => v + 1); }}>Próxima →</button>
-            ) : (
-              <button className="brush-btn" onClick={() => { marcar(i); onSair(); }}>Concluir ✓</button>
-            )}
+            <div className="pt-4">
+              <button className="brush-btn w-full !py-3 !text-lg" onClick={() => { for (let k = 0; k < total; k++) marcar(k); onSair(); }}>
+                Concluir aula ✓
+              </button>
+            </div>
           </div>
         </div>
       </div>
