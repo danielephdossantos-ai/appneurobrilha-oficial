@@ -835,6 +835,18 @@ function EtapaAtividadeManual({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
       </div>
       <div className="text-center text-sm mt-3 opacity-70">{feitos.size} / {etapa.passos.length} passos marcados</div>
       <p className="text-xs opacity-60 text-center mt-2">Faça em casa com a família e marque cada passo aqui quando terminar.</p>
+
+      <div className="mt-5 pt-5 border-t border-black/10">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xl">📸</span>
+          <div className="font-black text-base">Tire uma foto do seu rosto pronto</div>
+        </div>
+        <p className="text-xs opacity-70 mb-3">
+          Quando terminar em casa, tire uma foto do rosto que você criou. Ela vai ficar guardada
+          no seu Diário do Artista, junto com as outras aulas do curso. 💛
+        </p>
+        <MissaoFamiliaFoto cursoSlug="arte-2ano" aulaSlug="u1-a01-rosto-emocoes-manual" />
+      </div>
     </div>
   );
 }
