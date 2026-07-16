@@ -213,6 +213,38 @@ function BtnFala({ onClick }: { onClick: () => void }) {
 
 /* --------------------------- Etapas Bloco 1 --------------------------- */
 
+function LapisDeCor({ hex }: { hex: string }) {
+  // Escurece o hex pra sombra da ponta de madeira
+  const darker = (() => {
+    const h = hex.replace("#", "");
+    const r = Math.max(0, parseInt(h.substring(0, 2), 16) - 50);
+    const g = Math.max(0, parseInt(h.substring(2, 4), 16) - 50);
+    const b = Math.max(0, parseInt(h.substring(4, 6), 16) - 50);
+    return `rgb(${r},${g},${b})`;
+  })();
+  return (
+    <svg viewBox="0 0 40 120" width="44" height="132" className="drop-shadow-md group-hover:-translate-y-1 transition-transform">
+      {/* Ponta de grafite */}
+      <polygon points="20,4 14,20 26,20" fill="#2a2a2a" />
+      {/* Madeira exposta */}
+      <polygon points="14,20 26,20 30,34 10,34" fill="#f4d9a8" />
+      <polygon points="14,20 20,20 10,34" fill="#e0bd83" opacity="0.7" />
+      {/* Corpo do lápis (cor da emoção) */}
+      <rect x="10" y="34" width="20" height="70" fill={hex} />
+      {/* Sombra lateral no corpo */}
+      <rect x="10" y="34" width="6" height="70" fill={darker} opacity="0.35" />
+      {/* Brilho lateral */}
+      <rect x="24" y="34" width="3" height="70" fill="#fff" opacity="0.35" />
+      {/* Faixa metálica */}
+      <rect x="9" y="104" width="22" height="6" fill="#c9c9c9" />
+      <rect x="9" y="107" width="22" height="1.5" fill="#8a8a8a" />
+      {/* Borracha */}
+      <rect x="11" y="110" width="18" height="8" rx="2" fill="#f3a6b7" />
+      <rect x="11" y="110" width="18" height="2.5" rx="1.5" fill="#fff" opacity="0.5" />
+    </svg>
+  );
+}
+
 function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "historia" }>; say: (t: string) => Promise<void> }) {
   useEffect(() => { say(etapa.texto); }, []);
   return (
