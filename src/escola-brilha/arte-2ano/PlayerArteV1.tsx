@@ -785,7 +785,8 @@ function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "
           <button className="brush-btn" onClick={tocar}><Play size={18}/> Tocar música</button>
         )}
       </div>
-      <CanvasPintura paleta={etapa.paleta} etapaId="musica-arte" />
+      <div className="text-xs text-center opacity-70 mb-2">Pinta dentro do desenho seguindo o ritmo da música 🎵</div>
+      <CanvasPintura paleta={etapa.paleta} etapaId="musica-arte" alturaCanvas={360} overlay={<MusicaColoringOverlay tocando={tocando} />} />
     </div>
   );
 }
