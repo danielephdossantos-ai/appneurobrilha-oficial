@@ -295,10 +295,14 @@ function EtapaCorEmocao({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "c
         <BtnFala onClick={() => say(etapa.instrucao)} />
       </div>
       <p className="opacity-80 mb-4">{etapa.instrucao}</p>
-      <div className="flex justify-center items-center mb-5" style={{ minHeight: 130 }}>
-        <div className="rounded-full grid place-items-center transition-all"
-          style={{ width: 130, height: 130, fontSize: 72, background: cartao ? cartao.hex : "#F4EAD5", boxShadow: "0 10px 24px -12px rgba(45,36,24,.35)" }}>
-          {cartao ? cartao.emoji : "😐"}
+      <div className="flex justify-center items-center mb-5" style={{ minHeight: 150 }}>
+        <div className="rounded-full grid place-items-center transition-all overflow-hidden"
+          style={{ width: 150, height: 150, background: cartao ? cartao.hex : "#F4EAD5", boxShadow: "0 10px 24px -12px rgba(45,36,24,.35)" }}>
+          {cartao?.rostoUrl ? (
+            <img src={cartao.rostoUrl} alt={cartao.emocao} width={140} height={140} className="w-[88%] h-[88%] object-contain drop-shadow" />
+          ) : (
+            <span style={{ fontSize: 72 }}>{cartao ? cartao.emoji : "😐"}</span>
+          )}
         </div>
       </div>
       <div className="grid grid-cols-5 gap-2 mb-4">
