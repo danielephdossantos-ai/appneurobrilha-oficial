@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Volume2, Mic, MicOff, Check, X, Sparkles, PartyPopper } from "lucide-react";
-import { speakEnglish, stopSpeakingEn, warmupEnVoices } from "@/lib/native-tts-en";
+import { speakEnglish, stopSpeakingEn, warmupEnVoices, speakBilingual } from "@/lib/native-tts-en";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { LessonData, Vocab } from "./types";
 import defaultLesson from "./u1-a01-hello/data";
@@ -266,12 +266,15 @@ function PlayPt({ text }: { text: string }) {
     <button
       onClick={async () => {
         if (playing) {
+          stopSpeakingEn();
           stopSpeaking();
           setPlaying(false);
           return;
         }
         setPlaying(true);
-        await speakChunked(text, { onEnd: () => setPlaying(false) });
+        // Fala bilíngue: PT com voz PT, trechos entre "aspas"/(parênteses) com voz EN,
+        // separados — como uma professora de verdade explicando.
+        await speakBilingual(text, { onEnd: () => setPlaying(false) });
       }}
       className={`text-xs px-3 py-1.5 rounded-full font-bold transition inline-flex items-center gap-1.5 ${
         playing ? "bg-rose-500 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
