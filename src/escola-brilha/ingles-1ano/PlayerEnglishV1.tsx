@@ -513,9 +513,11 @@ function SpeakingMic() {
   const [i, setI] = useState(0);
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string>("");
-  const [result, setResult] = useState<"idle" | "ok" | "close" | "again">("idle");
+  const [heardLang, setHeardLang] = useState<"en" | "pt" | null>(null);
+  const [result, setResult] = useState<"idle" | "ok" | "close" | "again" | "wrong-lang">("idle");
   const [confidencePct, setConfidencePct] = useState<number | null>(null);
-  const recRef = useRef<SR>(null);
+  const recEnRef = useRef<SR>(null);
+  const recPtRef = useRef<SR>(null);
   const target = targets[i];
   const translateTarget = (en: string): string => {
     const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
@@ -537,43 +539,42 @@ function SpeakingMic() {
   const start = () => {
     if (!supported) return;
     setHeard("");
-    setResult("idle"); setConfidencePct(null);
+    setHeardLang(null);
+    setResult("idle");
     setConfidencePct(null);
     const SRClass: any =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const rec = new SRClass();
-    rec.lang = "en-US";
-    rec.interimResults = false;
-    rec.maxAlternatives = 5;
-    rec.onresult = (e: any) => {
-      const alts: { text: string; conf: number }[] = [];
-      for (let j = 0; j < e.results[0].length; j++) {
-        alts.push({
-          text: e.results[0][j].transcript,
-          conf: e.results[0][j].confidence ?? 0,
-        });
+
+    // Detecção de idioma: dispara EN e PT em paralelo e usa o mais confiante.
+    const results: { lang: "en" | "pt"; text: string; conf: number }[] = [];
+    let finished = 0;
+
+    const finalize = () => {
+      if (finished < 2) return;
+      setListening(false);
+      if (results.length === 0) { setResult("again"); return; }
+      const best = results.reduce((a, b) => (b.conf > a.conf ? b : a));
+      setHeard(best.text);
+      setHeardLang(best.lang);
+      setConfidencePct(Math.round(best.conf * 100));
+
+      if (best.lang === "pt") {
+        setResult("wrong-lang");
+        return;
       }
-      const said = alts.map((a) => a.text).join(" | ");
-      setHeard(said);
       const norm = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/\s+/g, " ");
       const t = norm(target);
-      // Melhor pontuação entre as alternativas: similaridade + confiança
+      const enResults = results.filter((r) => r.lang === "en");
       let bestSim = 0;
       let bestConf = 0;
       let exact = false;
-      for (const a of alts) {
+      for (const a of enResults) {
         const na = norm(a.text);
         if (!na) continue;
         if (na === t) { exact = true; bestConf = Math.max(bestConf, a.conf); }
         const sim = similarity(na, t);
-        if (sim > bestSim) { bestSim = sim; bestConf = a.conf; }
+        if (sim > bestSim) { bestSim = sim; if (a.conf > bestConf) bestConf = a.conf; }
       }
-      const conf = bestConf > 0 ? bestConf : bestSim;
-      setConfidencePct(Math.round(conf * 100));
-      // Regras rigorosas — não passa só por o reconhecedor ter "corrigido"
-      // Perfeito: match exato E confiança alta do reconhecedor.
-      // Quase:   muito parecido mas não bateu, ou confiança baixa mesmo com match.
-      // Again:   muito diferente.
       if (exact && bestConf >= 0.75) {
         setResult("ok");
         speakEnglish("Very good!");
@@ -583,25 +584,38 @@ function SpeakingMic() {
         setResult("again");
       }
     };
-    rec.onend = () => setListening(false);
-    rec.onerror = () => setListening(false);
-    try {
-      rec.start();
-      setListening(true);
-      recRef.current = rec;
-    } catch {
-      setListening(false);
-    }
+
+    const makeRec = (lang: "en" | "pt") => {
+      const rec = new SRClass();
+      rec.lang = lang === "en" ? "en-US" : "pt-BR";
+      rec.interimResults = false;
+      rec.maxAlternatives = 3;
+      rec.onresult = (e: any) => {
+        let bestConf = 0;
+        let bestText = "";
+        for (let j = 0; j < e.results[0].length; j++) {
+          const c = e.results[0][j].confidence ?? 0;
+          if (c >= bestConf) { bestConf = c; bestText = e.results[0][j].transcript; }
+        }
+        if (bestText) results.push({ lang, text: bestText, conf: bestConf || 0.5 });
+      };
+      rec.onend = () => { finished++; finalize(); };
+      rec.onerror = () => { finished++; finalize(); };
+      try { rec.start(); } catch { finished++; finalize(); }
+      return rec;
+    };
+
+    recEnRef.current = makeRec("en");
+    recPtRef.current = makeRec("pt");
+    setListening(true);
   };
 
   const stop = () => {
-    try {
-      recRef.current?.stop?.();
-    } catch {
-      /* ignore */
-    }
+    try { recEnRef.current?.stop?.(); } catch { /* ignore */ }
+    try { recPtRef.current?.stop?.(); } catch { /* ignore */ }
     setListening(false);
   };
+
 
 
   return (
@@ -636,14 +650,23 @@ function SpeakingMic() {
         {heard && (
           <div className="mt-3 text-sm">
             <div className="text-slate-500">
-              Ouvi{confidencePct !== null ? ` (${confidencePct}% de certeza)` : ""}:
+              Ouvi em {heardLang === "pt" ? "🇧🇷 português" : "🇺🇸 inglês"}
+              {confidencePct !== null ? ` (${confidencePct}% de certeza)` : ""}:
             </div>
-            <div className="font-bold text-slate-700">{heard}</div>
+            <div className={`font-bold ${heardLang === "pt" ? "text-amber-700" : "text-slate-700"}`}>{heard}</div>
           </div>
         )}
         {result === "ok" && (
           <div className="mt-3 text-emerald-600 font-black flex items-center justify-center gap-2">
             <Check size={18} /> Perfect pronunciation!
+          </div>
+        )}
+        {result === "wrong-lang" && (
+          <div className="mt-3 text-amber-600 font-black flex flex-col items-center gap-1">
+            <div className="flex items-center gap-2"><X size={18} /> Você falou em português!</div>
+            <div className="text-xs font-normal text-amber-700">
+              Essa atividade é em inglês. Escuta o 🔊 e repete a palavra em inglês.
+            </div>
           </div>
         )}
         {result === "close" && (
@@ -662,6 +685,7 @@ function SpeakingMic() {
             </div>
           </div>
         )}
+
 
       </div>
       <div className="flex justify-between items-center mt-4">
