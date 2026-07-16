@@ -635,20 +635,34 @@ function SpeakingMic() {
         )}
         {heard && (
           <div className="mt-3 text-sm">
-            <div className="text-slate-500">Ouvi:</div>
+            <div className="text-slate-500">
+              Ouvi{confidencePct !== null ? ` (${confidencePct}% de certeza)` : ""}:
+            </div>
             <div className="font-bold text-slate-700">{heard}</div>
           </div>
         )}
         {result === "ok" && (
           <div className="mt-3 text-emerald-600 font-black flex items-center justify-center gap-2">
-            <Check size={18} /> Very good!
+            <Check size={18} /> Perfect pronunciation!
+          </div>
+        )}
+        {result === "close" && (
+          <div className="mt-3 text-amber-600 font-black flex flex-col items-center gap-1">
+            <div className="flex items-center gap-2"><X size={18} /> Quase! Pronúncia não ficou certa.</div>
+            <div className="text-xs font-normal text-amber-700">
+              Escuta o modelo 🔊 e repete devagar, marcando cada som.
+            </div>
           </div>
         )}
         {result === "again" && (
-          <div className="mt-3 text-amber-600 font-black flex items-center justify-center gap-2">
-            <X size={18} /> Tenta de novo, mais devagar.
+          <div className="mt-3 text-rose-600 font-black flex flex-col items-center gap-1">
+            <div className="flex items-center gap-2"><X size={18} /> Não entendi. Fala mais alto e devagar.</div>
+            <div className="text-xs font-normal text-rose-700">
+              Cola o ouvido no botão 🔊 e tenta imitar exatamente.
+            </div>
           </div>
         )}
+
       </div>
       <div className="flex justify-between items-center mt-4">
         <button
