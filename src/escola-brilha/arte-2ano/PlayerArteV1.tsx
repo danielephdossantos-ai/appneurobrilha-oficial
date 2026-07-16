@@ -30,60 +30,34 @@ const NOMES_CORES: Record<CorNome, string> = {
   preto: "Preto", marrom: "Marrom",
 };
 
-/* --------------------------- Cenas SVG --------------------------- */
+/* --------------------------- Cenas (fotos reais) --------------------------- */
+
+import cenaPorDoSol from "@/assets/atelier/cena-por-do-sol.jpg.asset.json";
+import cenaJardim from "@/assets/atelier/cena-jardim.jpg.asset.json";
+import cenaPraia from "@/assets/atelier/cena-praia.jpg.asset.json";
+import cenaFloresta from "@/assets/atelier/cena-floresta.jpg.asset.json";
+
+const CENA_FOTOS: Record<"por-do-sol" | "jardim" | "praia" | "floresta", { url: string; alt: string }> = {
+  "por-do-sol": { url: cenaPorDoSol.url, alt: "Pôr do sol sobre o mar com céu laranja, rosa e roxo" },
+  jardim:      { url: cenaJardim.url,   alt: "Jardim colorido com flores vermelhas, amarelas e rosas" },
+  praia:       { url: cenaPraia.url,    alt: "Praia com mar azul turquesa e areia branca" },
+  floresta:    { url: cenaFloresta.url, alt: "Floresta verde com árvores altas e folhas amarelas no chão" },
+};
 
 function CenaSVG({ tipo }: { tipo: "por-do-sol" | "jardim" | "praia" | "floresta" }) {
-  const common = { viewBox: "0 0 400 240", width: "100%", height: 240 as const, style: { display: "block" as const, borderRadius: 16 } };
-  if (tipo === "por-do-sol") {
-    return (
-      <svg {...common}>
-        <defs>
-          <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#8A5A83" /><stop offset=".5" stopColor="#E89AB0" /><stop offset="1" stopColor="#F0C24A" />
-          </linearGradient>
-        </defs>
-        <rect width="400" height="240" fill="url(#sky1)" />
-        <circle cx="200" cy="170" r="55" fill="#E8934A" />
-        <rect y="200" width="400" height="40" fill="#5A3F2A" />
-      </svg>
-    );
-  }
-  if (tipo === "jardim") {
-    return (
-      <svg {...common}>
-        <rect width="400" height="240" fill="#B7DDF2" />
-        <rect y="150" width="400" height="90" fill="#7FAE73" />
-        {[40, 100, 170, 240, 320].map((x, i) => (
-          <g key={i}><circle cx={x} cy="140" r="10" fill={["#D64545", "#F0C24A", "#E89AB0", "#D64545", "#F0C24A"][i]} /><rect x={x - 2} y="140" width="4" height="30" fill="#4F7A44" /></g>
-        ))}
-      </svg>
-    );
-  }
-  if (tipo === "praia") {
-    return (
-      <svg {...common}>
-        <rect width="400" height="140" fill="#B7DDF2" />
-        <circle cx="330" cy="50" r="28" fill="#F0C24A" />
-        <rect y="140" width="400" height="50" fill="#5A8FBF" />
-        <rect y="190" width="400" height="50" fill="#F4EAD5" />
-        <path d="M0 140 Q100 130 200 140 T400 140" fill="none" stroke="#F5F0E4" strokeWidth="2" />
-      </svg>
-    );
-  }
+  const foto = CENA_FOTOS[tipo];
   return (
-    <svg {...common}>
-      <rect width="400" height="240" fill="#3E6A3A" />
-      {[30, 80, 130, 200, 260, 340].map((x, i) => (
-        <g key={i}>
-          <rect x={x - 4} y={110 - (i % 3) * 10} width="8" height="100" fill="#5A3F2A" />
-          <circle cx={x} cy={100 - (i % 3) * 10} r="30" fill={i % 2 === 0 ? "#4F7A44" : "#7FAE73"} />
-        </g>
-      ))}
-      <rect y="210" width="400" height="30" fill="#8B5A3C" />
-      <circle cx="350" cy="30" r="14" fill="#F0C24A" opacity=".7" />
-    </svg>
+    <img
+      src={foto.url}
+      alt={foto.alt}
+      loading="lazy"
+      width={800}
+      height={512}
+      style={{ display: "block", width: "100%", height: 240, objectFit: "cover", borderRadius: 16 }}
+    />
   );
 }
+
 
 /* --------------------------- Textura tile SVG --------------------------- */
 
