@@ -13,7 +13,7 @@
   --atelier-plum: #8A5A83;
 
   color: var(--atelier-ink);
-  font-family: "Nunito", system-ui, sans-serif;
+  font-family: "Nunito", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif;
   background-color: var(--atelier-cream);
   background-image:
     radial-gradient(circle at 25% 15%, rgba(232, 184, 74, 0.10) 0, transparent 45%),
@@ -25,7 +25,7 @@
 }
 
 .atelier .brush-title {
-  font-family: "Caveat", cursive;
+  font-family: "Caveat", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", cursive;
   color: var(--atelier-ink);
   line-height: 1.05;
   letter-spacing: 0.5px;
@@ -58,7 +58,7 @@
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 22px;
   border-radius: 26px 30px 24px 28px / 28px 24px 28px 26px;
-  font-family: "Caveat", cursive;
+  font-family: "Caveat", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", cursive;
   font-weight: 700;
   font-size: 22px;
   color: #fff;
@@ -120,7 +120,7 @@
   border-radius: 999px;
   background: var(--atelier-cream-2);
   border: 1px solid rgba(45,36,24,.12);
-  font-family: "Caveat", cursive;
+  font-family: "Caveat", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", cursive;
   font-size: 18px;
   color: var(--atelier-ink);
 }
