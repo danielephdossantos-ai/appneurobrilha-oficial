@@ -1,11 +1,16 @@
 import obraAsset from "@/assets/atelier/atelier-obra.jpg.asset.json";
+import rostoFeliz from "@/assets/neuro-treino/emocoes/feliz.png.asset.json";
+import rostoSono from "@/assets/neuro-treino/emocoes/sono.png.asset.json";
+import rostoSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png.asset.json";
+import rostoTriste from "@/assets/neuro-treino/emocoes/triste.png.asset.json";
+import rostoBravo from "@/assets/neuro-treino/emocoes/bravo.png.asset.json";
 
 export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "laranja" | "rosa" | "branco" | "preto" | "marrom";
 
 export type EtapaBloco1 =
   | { tipo: "historia"; titulo: string; texto: string; lapis: Array<{ cor: CorNome; hex: string; emocao: string; frase: string }>; convite: string }
   | { tipo: "observar-cores"; titulo: string; instrucao: string; cenas: Array<{ nome: string; svg: "por-do-sol" | "jardim" | "praia" | "floresta"; coresPresentes: CorNome[] }> }
-  | { tipo: "cor-emocao"; titulo: string; instrucao: string; cartoes: Array<{ cor: CorNome; hex: string; emoji: string; emocao: string; explicacao: string }> }
+  | { tipo: "cor-emocao"; titulo: string; instrucao: string; cartoes: Array<{ cor: CorNome; hex: string; emoji: string; rostoUrl?: string; emocao: string; explicacao: string }> }
   | { tipo: "artista"; titulo: string; obraUrl: string; obraLegenda: string; pergunta: string; opcoes: string[]; comentario: string }
   | { tipo: "texturas"; titulo: string; instrucao: string; itens: Array<{ nome: string; textura: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas"; combina: string }> }
   | { tipo: "curiosidade"; titulo: string; texto: string }
@@ -78,11 +83,11 @@ const aula: AulaArte = {
       titulo: "As cores mudam o rosto",
       instrucao: "Toca em cada cor. Vê como o rostinho muda de emoção.",
       cartoes: [
-        { cor: "amarelo",  hex: "#F0C24A", emoji: "😊", emocao: "Alegria",       explicacao: "O amarelo é quente e brilhante como o sol." },
-        { cor: "azul",     hex: "#5A8FBF", emoji: "😌", emocao: "Calma",         explicacao: "O azul lembra o céu e a água tranquila." },
-        { cor: "vermelho", hex: "#D64545", emoji: "❤️", emocao: "Amor",          explicacao: "O vermelho é forte e pulsa como o coração." },
-        { cor: "verde",    hex: "#7FAE73", emoji: "😴", emocao: "Tranquilidade", explicacao: "O verde vem das folhas e das plantas." },
-        { cor: "roxo",     hex: "#8A5A83", emoji: "😲", emocao: "Surpresa",      explicacao: "O roxo é misterioso, mistura fogo e água." },
+        { cor: "amarelo",  hex: "#F0C24A", emoji: "😊", rostoUrl: rostoFeliz.url,    emocao: "Alegria",       explicacao: "O amarelo é quente e brilhante como o sol." },
+        { cor: "azul",     hex: "#5A8FBF", emoji: "😌", rostoUrl: rostoSono.url,     emocao: "Calma",         explicacao: "O azul lembra o céu e a água tranquila." },
+        { cor: "vermelho", hex: "#D64545", emoji: "😠", rostoUrl: rostoBravo.url,    emocao: "Raiva",         explicacao: "O vermelho é forte e quente — lembra fogo e o coração acelerado quando ficamos bravos." },
+        { cor: "verde",    hex: "#7FAE73", emoji: "😴", rostoUrl: rostoSono.url,     emocao: "Tranquilidade", explicacao: "O verde vem das folhas e das plantas, dá vontade de descansar." },
+        { cor: "roxo",     hex: "#8A5A83", emoji: "😲", rostoUrl: rostoSurpreso.url, emocao: "Surpresa",      explicacao: "O roxo é misterioso, mistura fogo e água." },
       ],
     },
     {
