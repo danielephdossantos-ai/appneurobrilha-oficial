@@ -599,52 +599,123 @@ function EtapaCorEmocaoDrag({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo
 
 /* --------------------------- Bloco 2 · Música e Arte --------------------------- */
 
+// Melodias infantis por humor. Cada nota: [frequência Hz, duração em beats]
+const MELODIAS: Record<"alegre" | "calmo" | "misterioso", { bpm: number; notas: Array<[number, number]>; baixo: Array<[number, number]> }> = {
+  // "Twinkle Twinkle Little Star" — clássico infantil, alegre e reconhecível
+  alegre: {
+    bpm: 120,
+    notas: [
+      [523.25, 1], [523.25, 1], [783.99, 1], [783.99, 1], [880.00, 1], [880.00, 1], [783.99, 2],
+      [698.46, 1], [698.46, 1], [659.25, 1], [659.25, 1], [587.33, 1], [587.33, 1], [523.25, 2],
+      [783.99, 1], [783.99, 1], [698.46, 1], [698.46, 1], [659.25, 1], [659.25, 1], [587.33, 2],
+      [783.99, 1], [783.99, 1], [698.46, 1], [698.46, 1], [659.25, 1], [659.25, 1], [587.33, 2],
+    ],
+    baixo: [
+      [130.81, 4], [174.61, 4], [130.81, 4], [196.00, 2], [130.81, 2],
+      [130.81, 4], [174.61, 4], [130.81, 2], [196.00, 2], [130.81, 4],
+    ],
+  },
+  // "Brilha, brilha estrelinha" em ritmo lento — ninar / calmo
+  calmo: {
+    bpm: 72,
+    notas: [
+      [392.00, 2], [392.00, 2], [587.33, 2], [587.33, 2], [659.25, 2], [659.25, 2], [587.33, 4],
+      [523.25, 2], [523.25, 2], [493.88, 2], [493.88, 2], [440.00, 2], [440.00, 2], [392.00, 4],
+      [587.33, 2], [587.33, 2], [523.25, 2], [523.25, 2], [493.88, 2], [493.88, 2], [440.00, 4],
+      [587.33, 2], [587.33, 2], [523.25, 2], [523.25, 2], [493.88, 2], [493.88, 2], [440.00, 4],
+    ],
+    baixo: [
+      [98.00, 8], [130.81, 8], [98.00, 8], [146.83, 4], [98.00, 4],
+      [98.00, 8], [130.81, 4], [146.83, 4], [98.00, 8],
+    ],
+  },
+  // Melodia menor, ondulante — misteriosa mas amigável
+  misterioso: {
+    bpm: 96,
+    notas: [
+      [440.00, 2], [523.25, 1], [587.33, 1], [659.25, 2], [587.33, 2],
+      [523.25, 2], [440.00, 1], [392.00, 1], [440.00, 4],
+      [440.00, 2], [523.25, 1], [659.25, 1], [783.99, 2], [659.25, 2],
+      [587.33, 2], [523.25, 1], [493.88, 1], [440.00, 4],
+    ],
+    baixo: [
+      [110.00, 4], [146.83, 4], [130.81, 4], [110.00, 4],
+      [110.00, 4], [146.83, 4], [164.81, 4], [110.00, 4],
+    ],
+  },
+};
+
 function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "musica-e-arte" }>; say: (t: string) => Promise<void> }) {
   const [tocando, setTocando] = useState(false);
   const ctxRef = useRef<AudioContext | null>(null);
-  const oscsRef = useRef<OscillatorNode[]>([]);
-  const gainRef = useRef<GainNode | null>(null);
+  const masterRef = useRef<GainNode | null>(null);
+  const timeoutRef = useRef<number | null>(null);
   useEffect(() => { say(etapa.instrucao); }, []);
   useEffect(() => () => parar(), []);
 
-  const notas = etapa.humor === "alegre" ? [261.63, 329.63, 392.00, 523.25]
-              : etapa.humor === "misterioso" ? [220.00, 261.63, 311.13, 415.30]
-              : [196.00, 246.94, 293.66, 392.00];
+  const tocarNota = (ctx: AudioContext, master: GainNode, freq: number, start: number, dur: number, tipo: OscillatorType, vol: number) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = tipo;
+    o.frequency.value = freq;
+    // envelope ADSR curto — evita clicks e dá sensação de nota tocada
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(vol, start + 0.02);
+    g.gain.linearRampToValueAtTime(vol * 0.7, start + dur * 0.5);
+    g.gain.linearRampToValueAtTime(0, start + dur - 0.02);
+    o.connect(g); g.connect(master);
+    o.start(start);
+    o.stop(start + dur);
+  };
+
+  const agendarLoop = (ctx: AudioContext, master: GainNode) => {
+    const melodia = MELODIAS[etapa.humor];
+    const beat = 60 / melodia.bpm;
+    let t = ctx.currentTime + 0.1;
+    const inicioLoop = t;
+    // melodia
+    for (const [f, dur] of melodia.notas) {
+      tocarNota(ctx, master, f, t, dur * beat * 0.95, "triangle", 0.22);
+      t += dur * beat;
+    }
+    // baixo em paralelo
+    let tb = inicioLoop;
+    for (const [f, dur] of melodia.baixo) {
+      tocarNota(ctx, master, f, tb, dur * beat * 0.95, "sine", 0.18);
+      tb += dur * beat;
+    }
+    const durLoop = (t - inicioLoop) * 1000;
+    timeoutRef.current = window.setTimeout(() => {
+      if (ctxRef.current === ctx) agendarLoop(ctx, master);
+    }, durLoop - 50);
+  };
 
   const tocar = async () => {
     try {
       const AC = (window.AudioContext || (window as any).webkitAudioContext);
       const ctx = new AC();
       ctxRef.current = ctx;
-      const gain = ctx.createGain();
-      gain.gain.value = 0;
-      gain.connect(ctx.destination);
-      gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 1.2);
-      const oscs = notas.map((f, i) => {
-        const o = ctx.createOscillator();
-        o.type = i === 0 ? "sine" : "triangle";
-        o.frequency.value = f;
-        const g = ctx.createGain();
-        g.gain.value = 0.25;
-        o.connect(g); g.connect(gain);
-        o.start();
-        return o;
-      });
-      oscsRef.current = oscs;
-      gainRef.current = gain;
+      const master = ctx.createGain();
+      master.gain.value = 0;
+      master.connect(ctx.destination);
+      master.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 0.4);
+      masterRef.current = master;
+      agendarLoop(ctx, master);
       setTocando(true);
     } catch { setTocando(false); }
   };
+
   const parar = () => {
     try {
+      if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; }
       const ctx = ctxRef.current;
-      const gain = gainRef.current;
-      if (gain && ctx) gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+      const master = masterRef.current;
+      if (master && ctx) master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
       setTimeout(() => {
-        oscsRef.current.forEach((o) => { try { o.stop(); } catch {} });
-        oscsRef.current = [];
-        ctxRef.current?.close(); ctxRef.current = null;
-      }, 500);
+        try { ctxRef.current?.close(); } catch {}
+        ctxRef.current = null;
+        masterRef.current = null;
+      }, 400);
     } catch {}
     setTocando(false);
   };
