@@ -291,16 +291,30 @@ export function AulaPlayer({
 
 
       <div className="px-4 pt-3">
-        <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
-          {ETAPAS_METODO.map((e) => (
-            <div
-              key={e.n}
-              className="flex-1 h-1.5 rounded-full"
-              style={{ background: e.cor }}
-              title={e.nome}
-            />
-          ))}
-        </div>
+        {isCarto ? (
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-400 to-amber-300"
+                style={{ width: `${Math.min(100, Math.round(((acertos + erros) / Math.max(1, aula.quiz.length)) * 100))}%` }}
+              />
+            </div>
+            <div className="text-[11px] uppercase tracking-widest text-emerald-300/80 shrink-0">
+              Missão em andamento
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
+            {ETAPAS_METODO.map((e) => (
+              <div
+                key={e.n}
+                className="flex-1 h-1.5 rounded-full"
+                style={{ background: e.cor }}
+                title={e.nome}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {tts.supported && (
