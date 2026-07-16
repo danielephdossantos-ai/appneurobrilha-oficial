@@ -110,3 +110,12 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 .atelier .fade-up { animation: atelier-fade-up 300ms ease-out both; }
+
+/* Aliases retrocompat para variáveis usadas inline no PlayerArteV1. */
+.atelier {
+  --atelier-cream: var(--brilha-navy-1);
+  --atelier-cream-2: rgba(255, 255, 255, 0.1);
+  --atelier-terracotta: var(--brilha-amber);
+  --atelier-ochre: var(--brilha-orange);
+  --atelier-ink: #fff;
+}
