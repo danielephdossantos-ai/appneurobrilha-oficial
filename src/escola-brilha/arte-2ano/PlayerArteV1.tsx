@@ -88,7 +88,7 @@ function CenaSVG({ tipo }: { tipo: "por-do-sol" | "jardim" | "praia" | "floresta
 
 function TexturaTile({ t }: { t: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas" }) {
   const w = 100;
-  const styles: Record<typeof t, JSX.Element> = {
+  const styles: Record<typeof t, React.ReactNode> = {
     madeira: (<><rect width={w} height={w} fill="#8B5A3C" /><path d="M0 20 Q50 15 100 22 M0 45 Q50 50 100 40 M0 70 Q50 66 100 75" stroke="#5A3F2A" strokeWidth="2" fill="none" /></>),
     pedra:   (<><rect width={w} height={w} fill="#A8A29E" /><circle cx="25" cy="30" r="14" fill="#8C867F" /><circle cx="70" cy="55" r="18" fill="#8C867F" /><circle cx="45" cy="80" r="12" fill="#8C867F" /></>),
     areia:   (<><rect width={w} height={w} fill="#EDD9A9" /><g fill="#C9AC70">{Array.from({length:40}).map((_,i)=><circle key={i} cx={(i*13)%w} cy={(i*17)%w} r="1.2" />)}</g></>),
