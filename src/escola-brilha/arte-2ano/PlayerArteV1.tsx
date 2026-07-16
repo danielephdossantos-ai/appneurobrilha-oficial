@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Volume2, Check, X, Lock } from "lucide-react";
 import { speakChunked } from "@/lib/native-tts";
 import "./atelier-skin.css";
