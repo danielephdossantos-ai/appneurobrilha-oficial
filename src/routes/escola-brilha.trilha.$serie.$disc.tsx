@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
+import { listAulasArte } from "@/escola-brilha/arte-2ano/registry";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
@@ -74,7 +75,18 @@ function TrilhaSerieDisc() {
 
   const escritas = useMemo(() => new Set(listAulas().map((a) => a.codigo.toUpperCase())), []);
 
+  const isArte2ano = serie === "2ano" && disc === "arte";
+
   useEffect(() => {
+    if (isArte2ano) {
+      // Arte 2ano tem registry próprio e roteia para /escola-brilha/arte/2ano/$aula
+      const rows: HabRow[] = listAulasArte()
+        .sort((a, b) => (a.unidade - b.unidade) || (a.aula - b.aula))
+        .map((a) => ({ codigo: a.id, titulo: `U${a.unidade} · ${a.titulo}`, ano: "2º Ano" }));
+      setHabilidades(rows);
+      setLoading(false);
+      return;
+    }
     (async () => {
       const PAGE = 1000;
       const acc: Array<{ codigo_bncc: string; titulo: string | null; ano: string | null; disciplina: string | null }> = [];
@@ -97,7 +109,7 @@ function TrilhaSerieDisc() {
       setHabilidades(rows);
       setLoading(false);
     })();
-  }, [serie, disc, escritas]);
+  }, [serie, disc, escritas, isArte2ano]);
 
   useEffect(() => {
     if (!activeChild?.id) return;
@@ -173,7 +185,9 @@ function TrilhaSerieDisc() {
                   <button
                     disabled={!desbloqueada}
                     onClick={() =>
-                      navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
+                      isArte2ano
+                        ? navigate({ to: "/escola-brilha/arte/2ano/$aula", params: { aula: h.codigo } })
+                        : navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
                     }
                     className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
                       desbloqueada
