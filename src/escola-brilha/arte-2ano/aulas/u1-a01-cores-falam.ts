@@ -83,11 +83,11 @@ const aula: AulaArte = {
       titulo: "As cores mudam o rosto",
       instrucao: "Toca em cada cor. Vê como o rostinho muda de emoção.",
       cartoes: [
-        { cor: "amarelo",  hex: "#F0C24A", emoji: "😊", emocao: "Alegria",       explicacao: "O amarelo é quente e brilhante como o sol." },
-        { cor: "azul",     hex: "#5A8FBF", emoji: "😌", emocao: "Calma",         explicacao: "O azul lembra o céu e a água tranquila." },
-        { cor: "vermelho", hex: "#D64545", emoji: "❤️", emocao: "Amor",          explicacao: "O vermelho é forte e pulsa como o coração." },
-        { cor: "verde",    hex: "#7FAE73", emoji: "😴", emocao: "Tranquilidade", explicacao: "O verde vem das folhas e das plantas." },
-        { cor: "roxo",     hex: "#8A5A83", emoji: "😲", emocao: "Surpresa",      explicacao: "O roxo é misterioso, mistura fogo e água." },
+        { cor: "amarelo",  hex: "#F0C24A", emoji: "😊", rostoUrl: rostoFeliz.url,    emocao: "Alegria",       explicacao: "O amarelo é quente e brilhante como o sol." },
+        { cor: "azul",     hex: "#5A8FBF", emoji: "😌", rostoUrl: rostoSono.url,     emocao: "Calma",         explicacao: "O azul lembra o céu e a água tranquila." },
+        { cor: "vermelho", hex: "#D64545", emoji: "😠", rostoUrl: rostoBravo.url,    emocao: "Coragem",       explicacao: "O vermelho é forte e pulsa como o coração." },
+        { cor: "verde",    hex: "#7FAE73", emoji: "😢", rostoUrl: rostoTriste.url,   emocao: "Tristeza",      explicacao: "O verde escuro pode lembrar dias nublados e calmos." },
+        { cor: "roxo",     hex: "#8A5A83", emoji: "😲", rostoUrl: rostoSurpreso.url, emocao: "Surpresa",      explicacao: "O roxo é misterioso, mistura fogo e água." },
       ],
     },
     {
