@@ -67,10 +67,10 @@ const aula: AulaArte = {
       titulo: "Cores no mundo",
       instrucao: "Olha cada paisagem e toca nas cores que você vê nela.",
       cenas: [
-        { nome: "Pôr do sol", svg: "por-do-sol", coresPresentes: ["amarelo", "laranja", "rosa", "roxo"] },
-        { nome: "Jardim",     svg: "jardim",     coresPresentes: ["verde", "vermelho", "amarelo", "rosa"] },
-        { nome: "Praia",      svg: "praia",      coresPresentes: ["azul", "amarelo", "branco"] },
-        { nome: "Floresta",   svg: "floresta",   coresPresentes: ["verde", "marrom", "amarelo"] },
+        { nome: "Pôr do sol", svg: "por-do-sol", coresPresentes: ["laranja", "vermelho", "amarelo", "roxo", "marrom", "preto"] },
+        { nome: "Jardim",     svg: "jardim",     coresPresentes: ["verde", "vermelho", "amarelo", "rosa", "laranja", "marrom"] },
+        { nome: "Praia",      svg: "praia",      coresPresentes: ["azul", "branco", "marrom"] },
+        { nome: "Floresta",   svg: "floresta",   coresPresentes: ["verde", "marrom", "amarelo", "preto"] },
       ],
     },
     {
