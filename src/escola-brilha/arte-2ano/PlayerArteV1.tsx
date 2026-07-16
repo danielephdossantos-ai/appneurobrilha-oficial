@@ -696,6 +696,70 @@ const MELODIAS: Record<"alegre" | "calmo" | "misterioso", { bpm: number; notas: 
   },
 };
 
+function MusicaColoringOverlay({ tocando }: { tocando: boolean }) {
+  return (
+    <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+      <defs>
+        <style>{`
+          .ln { fill: none; stroke: #2D2418; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+          .lnT { fill: none; stroke: #2D2418; stroke-width: 1.6; stroke-linecap: round; }
+          .fl { fill: #2D2418; }
+          @keyframes floatY { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+          @keyframes wave  { 0%{ stroke-dashoffset: 0;} 100%{ stroke-dashoffset: -40;} }
+          .note-a { animation: floatY 2.6s ease-in-out infinite; transform-origin: center; }
+          .note-b { animation: floatY 2.6s ease-in-out infinite; animation-delay: .8s; transform-origin: center; }
+          .note-c { animation: floatY 2.6s ease-in-out infinite; animation-delay: 1.4s; transform-origin: center; }
+          .wv    { stroke-dasharray: 8 6; animation: wave 1.8s linear infinite; }
+        `}</style>
+      </defs>
+
+      {/* Pentagrama ondulado */}
+      <g className="lnT" opacity="0.85">
+        {[0,1,2,3,4].map(i => (
+          <path key={i} d={`M20 ${170 + i*14} Q120 ${160 + i*14} 220 ${170 + i*14} T400 ${170 + i*14}`} />
+        ))}
+      </g>
+
+      {/* Onda sonora animada quando tocando */}
+      {tocando && (
+        <path className="ln wv" d="M10 300 Q50 270 90 300 T170 300 T250 300 T330 300 T410 300" opacity="0.5" />
+      )}
+
+      {/* Clave de Sol grande — contorno para pintar */}
+      <g transform="translate(48 60)" className="ln">
+        <path d="M40 10 C 30 40, 5 55, 5 95 C 5 130, 40 145, 55 120 C 65 100, 55 75, 40 60 C 25 45, 30 25, 45 20 C 60 15, 70 30, 65 45 C 60 60, 50 70, 40 80 L 40 210 C 40 235, 20 250, 5 240" />
+        <circle cx="18" cy="230" r="10" />
+      </g>
+
+      {/* Notas musicais grandes (bolas + hastes) para pintar */}
+      <g className="note-a">
+        <ellipse className="fl" cx="180" cy="150" rx="16" ry="12" transform="rotate(-18 180 150)" />
+        <path className="ln" d="M195 148 L200 80" />
+        <path className="ln" d="M200 80 Q225 88 228 108" />
+      </g>
+      <g className="note-b">
+        <ellipse className="fl" cx="255" cy="185" rx="16" ry="12" transform="rotate(-18 255 185)" />
+        <path className="ln" d="M270 183 L275 115" />
+      </g>
+      <g className="note-c">
+        <ellipse className="fl" cx="325" cy="160" rx="16" ry="12" transform="rotate(-18 325 160)" />
+        <ellipse className="fl" cx="360" cy="150" rx="16" ry="12" transform="rotate(-18 360 150)" />
+        <path className="ln" d="M340 158 L340 90 L375 82 L375 148" />
+      </g>
+
+      {/* Estrelas / brilhos decorativos vazios (pra colorir) */}
+      <g className="ln">
+        <path d="M155 55 l6 12 13 2 -9 9 2 13 -12 -6 -12 6 2 -13 -9 -9 13 -2 z" />
+        <path d="M300 260 l5 10 11 2 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -2 z" />
+        <path d="M370 300 l4 8 9 1 -6 6 1 9 -8 -4 -8 4 1 -9 -6 -6 9 -1 z" />
+      </g>
+
+      {/* Coração musical vazio */}
+      <path className="ln" d="M90 275 c -14 -14 -30 -2 -30 12 c 0 18 30 34 30 34 c 0 0 30 -16 30 -34 c 0 -14 -16 -26 -30 -12 z" />
+    </svg>
+  );
+}
+
 function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "musica-e-arte" }>; say: (t: string) => Promise<void> }) {
   const [tocando, setTocando] = useState(false);
   const ctxRef = useRef<AudioContext | null>(null);
