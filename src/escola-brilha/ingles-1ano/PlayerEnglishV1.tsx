@@ -537,7 +537,7 @@ function SpeakingMic() {
   const start = () => {
     if (!supported) return;
     setHeard("");
-    setResult("idle");
+    setResult("idle"); setConfidencePct(null);
     setConfidencePct(null);
     const SRClass: any =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -669,7 +669,7 @@ function SpeakingMic() {
           onClick={() => {
             setI((v) => Math.max(0, v - 1));
             setHeard("");
-            setResult("idle");
+            setResult("idle"); setConfidencePct(null);
           }}
           disabled={i === 0}
           className="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold disabled:opacity-40"
@@ -683,7 +683,7 @@ function SpeakingMic() {
           onClick={() => {
             setI((v) => Math.min(targets.length - 1, v + 1));
             setHeard("");
-            setResult("idle");
+            setResult("idle"); setConfidencePct(null);
           }}
           disabled={i === targets.length - 1}
           className="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-bold disabled:opacity-40"
