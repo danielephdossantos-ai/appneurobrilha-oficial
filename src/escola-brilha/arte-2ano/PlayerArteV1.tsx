@@ -61,17 +61,24 @@ function CenaSVG({ tipo }: { tipo: "por-do-sol" | "jardim" | "praia" | "floresta
 
 /* --------------------------- Textura tile SVG --------------------------- */
 
+import texMadeira from "@/assets/arte-2ano/texturas/madeira.jpg.asset.json";
+import texPedra from "@/assets/arte-2ano/texturas/pedra.jpg.asset.json";
+import texAreia from "@/assets/arte-2ano/texturas/areia.jpg.asset.json";
+import texAgua from "@/assets/arte-2ano/texturas/agua.jpg.asset.json";
+import texTecido from "@/assets/arte-2ano/texturas/tecido.jpg.asset.json";
+import texFolhas from "@/assets/arte-2ano/texturas/folhas.jpg.asset.json";
+
+const TEXTURA_URLS: Record<"madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas", string> = {
+  madeira: texMadeira.url,
+  pedra: texPedra.url,
+  areia: texAreia.url,
+  agua: texAgua.url,
+  tecido: texTecido.url,
+  folhas: texFolhas.url,
+};
+
 function TexturaTile({ t }: { t: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas" }) {
-  const w = 100;
-  const styles: Record<typeof t, React.ReactNode> = {
-    madeira: (<><rect width={w} height={w} fill="#8B5A3C" /><path d="M0 20 Q50 15 100 22 M0 45 Q50 50 100 40 M0 70 Q50 66 100 75" stroke="#5A3F2A" strokeWidth="2" fill="none" /></>),
-    pedra:   (<><rect width={w} height={w} fill="#A8A29E" /><circle cx="25" cy="30" r="14" fill="#8C867F" /><circle cx="70" cy="55" r="18" fill="#8C867F" /><circle cx="45" cy="80" r="12" fill="#8C867F" /></>),
-    areia:   (<><rect width={w} height={w} fill="#EDD9A9" /><g fill="#C9AC70">{Array.from({length:40}).map((_,i)=><circle key={i} cx={(i*13)%w} cy={(i*17)%w} r="1.2" />)}</g></>),
-    agua:    (<><rect width={w} height={w} fill="#5A8FBF" /><path d="M0 25 Q25 15 50 25 T100 25 M0 55 Q25 45 50 55 T100 55 M0 85 Q25 75 50 85 T100 85" stroke="#8FBADD" strokeWidth="2" fill="none" /></>),
-    tecido:  (<><rect width={w} height={w} fill="#F0C4B4" /><path d="M0 0 L100 100 M0 20 L80 100 M20 0 L100 80" stroke="#E0A090" strokeWidth="1" /><path d="M100 0 L0 100 M0 80 L20 100 M80 0 L100 20" stroke="#E0A090" strokeWidth="1" /></>),
-    folhas:  (<><rect width={w} height={w} fill="#3E6A3A" /><g fill="#7FAE73"><ellipse cx="25" cy="30" rx="14" ry="6" transform="rotate(30 25 30)" /><ellipse cx="65" cy="55" rx="14" ry="6" transform="rotate(-20 65 55)" /><ellipse cx="40" cy="80" rx="14" ry="6" transform="rotate(45 40 80)" /></g></>),
-  };
-  return <svg viewBox={`0 0 ${w} ${w}`} style={{ width: "100%", height: "100%", borderRadius: 12 }}>{styles[t]}</svg>;
+  return <img src={TEXTURA_URLS[t]} alt={t} loading="lazy" width={512} height={512} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 12, display: "block" }} />;
 }
 
 /* --------------------------- Player --------------------------- */
