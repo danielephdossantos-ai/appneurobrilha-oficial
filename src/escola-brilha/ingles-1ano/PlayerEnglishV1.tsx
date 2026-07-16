@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Volume2, Mic, MicOff, Check, X, Sparkles, PartyPopper } from "lucide-react";
-import { speakEnglish, stopSpeakingEn, warmupEnVoices } from "@/lib/native-tts-en";
+import { speakEnglish, stopSpeakingEn, warmupEnVoices, speakBilingual } from "@/lib/native-tts-en";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { LessonData, Vocab } from "./types";
 import defaultLesson from "./u1-a01-hello/data";
