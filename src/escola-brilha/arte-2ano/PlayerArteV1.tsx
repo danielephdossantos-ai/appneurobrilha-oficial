@@ -763,49 +763,217 @@ function EtapaMissaoCasa({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "
   );
 }
 
-/* --------------------------- Bloco 2 · Atividade Manual --------------------------- */
+/* --------------------------- Bloco 2 · Atividade Manual (Rosto das Emoções — digital) --------------------------- */
 
-function IconePasso({ tipo }: { tipo: "corte" | "cola" | "desenho" | "montagem" | "pronto" }) {
-  const map: Record<typeof tipo, string> = { corte: "✂️", cola: "🪣", desenho: "🖍", montagem: "🧩", pronto: "🎉" };
-  return <span className="text-2xl">{map[tipo]}</span>;
+type EmocaoFace = { id: string; nome: string; cor: CorNome; corHex: string; dica: string };
+const EMOCOES_FACE: EmocaoFace[] = [
+  { id: "alegria",  nome: "Alegria",  cor: "amarelo",  corHex: CORES_HEX.amarelo,  dica: "Faça um sorriso grande!" },
+  { id: "calma",    nome: "Calma",    cor: "azul",     corHex: CORES_HEX.azul,     dica: "Uma boca suave, olhinhos leves." },
+  { id: "coragem",  nome: "Coragem",  cor: "vermelho", corHex: CORES_HEX.vermelho, dica: "Sobrancelhas firmes, boca decidida." },
+  { id: "surpresa", nome: "Surpresa", cor: "verde",    corHex: CORES_HEX.verde,    dica: "Olhos bem grandes e boca em O!" },
+];
+
+type Carimbo = "olho-feliz" | "olho-calmo" | "olho-brava" | "olho-surpresa" | "boca-sorriso" | "boca-linha" | "boca-brava" | "boca-o" | "sobrancelha" | "bochecha";
+const CARIMBOS: { id: Carimbo; nome: string; emoji: string }[] = [
+  { id: "olho-feliz",    nome: "Olho feliz",    emoji: "😊" },
+  { id: "olho-calmo",    nome: "Olho calmo",    emoji: "😌" },
+  { id: "olho-brava",    nome: "Olho firme",    emoji: "😠" },
+  { id: "olho-surpresa", nome: "Olho surpreso", emoji: "😮" },
+  { id: "boca-sorriso",  nome: "Sorriso",       emoji: "🙂" },
+  { id: "boca-linha",    nome: "Boca calma",    emoji: "➖" },
+  { id: "boca-brava",    nome: "Boca firme",    emoji: "🙁" },
+  { id: "boca-o",        nome: "Boca em O",     emoji: "😯" },
+  { id: "sobrancelha",   nome: "Sobrancelha",   emoji: "︿" },
+  { id: "bochecha",      nome: "Bochecha",      emoji: "🌸" },
+];
+
+function desenharCarimboNoCanvas(ctx: CanvasRenderingContext2D, tipo: Carimbo, x: number, y: number) {
+  ctx.save();
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  if (tipo === "olho-feliz") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 4; ctx.beginPath();
+    ctx.arc(x, y, 10, Math.PI * 0.15, Math.PI * 0.85, false); ctx.stroke();
+  } else if (tipo === "olho-calmo") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 4; ctx.beginPath();
+    ctx.moveTo(x - 12, y); ctx.quadraticCurveTo(x, y + 6, x + 12, y); ctx.stroke();
+  } else if (tipo === "olho-brava") {
+    ctx.fillStyle = "#2D2418"; ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 3; ctx.beginPath();
+    ctx.moveTo(x - 14, y - 10); ctx.lineTo(x + 8, y - 4); ctx.stroke();
+  } else if (tipo === "olho-surpresa") {
+    ctx.fillStyle = "#FFFDF7"; ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#2D2418"; ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill();
+  } else if (tipo === "boca-sorriso") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 5; ctx.beginPath();
+    ctx.arc(x, y, 24, Math.PI * 0.15, Math.PI * 0.85, false); ctx.stroke();
+  } else if (tipo === "boca-linha") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 5; ctx.beginPath();
+    ctx.moveTo(x - 22, y); ctx.lineTo(x + 22, y); ctx.stroke();
+  } else if (tipo === "boca-brava") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 5; ctx.beginPath();
+    ctx.arc(x, y + 20, 22, Math.PI * 1.15, Math.PI * 1.85, false); ctx.stroke();
+  } else if (tipo === "boca-o") {
+    ctx.fillStyle = "#2D2418"; ctx.beginPath(); ctx.ellipse(x, y, 12, 16, 0, 0, Math.PI * 2); ctx.fill();
+  } else if (tipo === "sobrancelha") {
+    ctx.strokeStyle = "#2D2418"; ctx.lineWidth = 5; ctx.beginPath();
+    ctx.moveTo(x - 20, y + 4); ctx.quadraticCurveTo(x, y - 8, x + 20, y + 4); ctx.stroke();
+  } else if (tipo === "bochecha") {
+    ctx.fillStyle = "rgba(232,154,176,.75)"; ctx.beginPath();
+    ctx.arc(x, y, 14, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function RostoCanvas({ face, prontos, onPronto, onLimpar }: {
+  face: EmocaoFace; prontos: boolean;
+  onPronto: () => void; onLimpar: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [modo, setModo] = useState<"carimbo" | "lapis">("carimbo");
+  const [carimbo, setCarimbo] = useState<Carimbo>("olho-feliz");
+  const [corLapis, setCorLapis] = useState<CorNome>("preto");
+  const desenhandoRef = useRef(false);
+  const ultimoRef = useRef<{ x: number; y: number } | null>(null);
+
+  const LADO = 320;
+
+  const pintarFundo = () => {
+    const c = canvasRef.current; if (!c) return;
+    const ctx = c.getContext("2d"); if (!ctx) return;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.scale(dpr, dpr);
+    ctx.fillStyle = "#FFFDF7"; ctx.fillRect(0, 0, LADO, LADO);
+    ctx.fillStyle = face.corHex;
+    ctx.beginPath(); ctx.arc(LADO / 2, LADO / 2, LADO / 2 - 12, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(45,36,24,.25)"; ctx.lineWidth = 2; ctx.stroke();
+  };
+
+  useEffect(() => {
+    const c = canvasRef.current; if (!c) return;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    c.width = Math.round(LADO * dpr); c.height = Math.round(LADO * dpr);
+    pintarFundo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [face.id]);
+
+  const coords = (ev: React.PointerEvent<HTMLCanvasElement>) => {
+    const c = canvasRef.current!; const r = c.getBoundingClientRect();
+    const escala = LADO / r.width;
+    return { x: (ev.clientX - r.left) * escala, y: (ev.clientY - r.top) * escala };
+  };
+
+  const onDown = (ev: React.PointerEvent<HTMLCanvasElement>) => {
+    ev.preventDefault();
+    (ev.target as HTMLCanvasElement).setPointerCapture(ev.pointerId);
+    const p = coords(ev);
+    const ctx = canvasRef.current?.getContext("2d"); if (!ctx) return;
+    if (modo === "carimbo") {
+      desenharCarimboNoCanvas(ctx, carimbo, p.x, p.y);
+    } else {
+      desenhandoRef.current = true; ultimoRef.current = p;
+      ctx.fillStyle = CORES_HEX[corLapis];
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
+    }
+  };
+  const onMove = (ev: React.PointerEvent<HTMLCanvasElement>) => {
+    if (modo !== "lapis" || !desenhandoRef.current) return;
+    ev.preventDefault();
+    const p = coords(ev);
+    const ctx = canvasRef.current?.getContext("2d"); if (!ctx) return;
+    ctx.strokeStyle = CORES_HEX[corLapis]; ctx.lineWidth = 4; ctx.lineCap = "round"; ctx.lineJoin = "round";
+    if (ultimoRef.current) { ctx.beginPath(); ctx.moveTo(ultimoRef.current.x, ultimoRef.current.y); ctx.lineTo(p.x, p.y); ctx.stroke(); }
+    ultimoRef.current = p;
+  };
+  const onUp = () => { desenhandoRef.current = false; ultimoRef.current = null; };
+
+  const limpar = () => { pintarFundo(); onLimpar(); };
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-2">
+        <button onClick={() => setModo("carimbo")} className={`brush-btn !py-1.5 !px-3 !text-sm ${modo === "carimbo" ? "" : "secondary"}`}>🧷 Carimbos</button>
+        <button onClick={() => setModo("lapis")}   className={`brush-btn !py-1.5 !px-3 !text-sm ${modo === "lapis"   ? "" : "secondary"}`}>✏️ Lápis</button>
+        <button onClick={limpar} className="brush-btn ghost !py-1.5 !px-3 !text-sm ml-auto"><Eraser size={14}/> Limpar</button>
+      </div>
+
+      {modo === "carimbo" ? (
+        <div className="grid grid-cols-5 gap-1.5 mb-3">
+          {CARIMBOS.map((c) => (
+            <button key={c.id} onClick={() => setCarimbo(c.id)}
+              className={`p-2 rounded-xl border-2 text-xl ${carimbo === c.id ? "border-[var(--atelier-sage)] bg-[var(--atelier-sage)]/15" : "border-transparent bg-white/60"}`}
+              aria-label={c.nome} title={c.nome}>{c.emoji}</button>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-wrap gap-2 mb-3 justify-center">
+          {(["preto","vermelho","azul","amarelo","verde","roxo","laranja","rosa","branco"] as CorNome[]).map((c) => (
+            <button key={c} onClick={() => setCorLapis(c)} aria-label={NOMES_CORES[c]}
+              className={`paint-chip ${corLapis === c ? "selected" : ""}`} style={{ background: CORES_HEX[c] }} />
+          ))}
+        </div>
+      )}
+
+      <div className="grid place-items-center">
+        <canvas ref={canvasRef}
+          style={{ width: "min(100%, 320px)", aspectRatio: "1 / 1", touchAction: "none", borderRadius: 16, background: "#FFFDF7", boxShadow: "inset 0 0 0 2px rgba(0,0,0,.06)" }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} />
+      </div>
+
+      <div className="text-center text-sm opacity-70 mt-2">{face.dica}</div>
+
+      <div className="flex justify-center mt-3">
+        <button onClick={onPronto} className={`brush-btn !py-2 !px-4 !text-base ${prontos ? "secondary" : ""}`}>
+          {prontos ? <><Check size={14}/> {face.nome} pronto!</> : <>✓ Marcar {face.nome} como pronto</>}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function EtapaAtividadeManual({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "atividade-manual" }>; say: (t: string) => Promise<void> }) {
-  const [feitos, setFeitos] = useState<Set<number>>(new Set());
+  const [ativo, setAtivo] = useState(0);
+  const [prontos, setProntos] = useState<Set<string>>(new Set());
   useEffect(() => { say(etapa.instrucao); }, []);
-  const toggle = (n: number) => setFeitos((s) => { const nv = new Set(s); nv.has(n) ? nv.delete(n) : nv.add(n); return nv; });
+  const face = EMOCOES_FACE[ativo];
+
+  const marcarPronto = () => {
+    setProntos((s) => { const nv = new Set(s); nv.add(face.id); return nv; });
+    say(`${face.nome} pronto! Muito bem.`);
+  };
+  const desmarcar = () => {
+    setProntos((s) => { const nv = new Set(s); nv.delete(face.id); return nv; });
+  };
+
   return (
     <div className="paper-card p-6">
       <div className="flex items-start justify-between gap-3 mb-2">
-        <h2 className="brush-title text-3xl">✂️ {etapa.titulo}</h2>
+        <h2 className="brush-title text-3xl">🎭 {etapa.titulo}</h2>
         <BtnFala onClick={() => say(etapa.instrucao)} />
       </div>
-      <p className="opacity-80 mb-3">{etapa.instrucao}</p>
-      <div className="rounded-2xl bg-white/60 p-3 mb-4">
-        <div className="text-sm font-bold mb-2 opacity-80">Materiais:</div>
-        <ul className="text-sm space-y-1">
-          {etapa.materiais.map((m, k) => <li key={k}>{m}</li>)}
-        </ul>
-      </div>
-      <div className="space-y-2">
-        {etapa.passos.map((p) => {
-          const feito = feitos.has(p.n);
+      <p className="opacity-80 mb-3">Monte 4 rostos direto no app. Toque nos carimbos ou use o lápis para desenhar. Quando terminar um rosto, marque como pronto.</p>
+
+      <div className="flex flex-wrap gap-2 mb-3">
+        {EMOCOES_FACE.map((e, i) => {
+          const done = prontos.has(e.id);
           return (
-            <button key={p.n} onClick={() => { toggle(p.n); say(p.texto); }}
-              className={`w-full text-left flex items-center gap-3 p-3 rounded-2xl border-2 transition ${feito ? "bg-[var(--atelier-sage)]/25 border-[var(--atelier-sage)]" : "bg-white/60 border-transparent"}`}>
-              <IconePasso tipo={p.icone} />
-              <div className="flex-1">
-                <div className="font-bold text-sm opacity-70">Passo {p.n}</div>
-                <div>{p.texto}</div>
-              </div>
-              <div className={`w-6 h-6 rounded-full grid place-items-center border-2 ${feito ? "bg-[var(--atelier-sage)] border-transparent text-white" : "border-black/20"}`}>
-                {feito && <Check size={14}/>}
-              </div>
+            <button key={e.id} onClick={() => setAtivo(i)}
+              className={`flex items-center gap-2 py-1.5 px-3 rounded-full border-2 text-sm font-bold transition ${ativo === i ? "border-[var(--atelier-sage)] bg-white" : "border-transparent bg-white/60"}`}>
+              <span className="w-4 h-4 rounded-full" style={{ background: e.corHex }} />
+              {e.nome} {done && <Check size={14} className="opacity-70" />}
             </button>
           );
         })}
       </div>
-      <div className="text-center text-sm mt-3 opacity-70">{feitos.size} / {etapa.passos.length} passos concluídos</div>
+
+      <RostoCanvas key={face.id} face={face} prontos={prontos.has(face.id)} onPronto={prontos.has(face.id) ? desmarcar : marcarPronto} onLimpar={desmarcar} />
+
+      <div className="text-center text-sm mt-4 opacity-70">{prontos.size} / {EMOCOES_FACE.length} rostos prontos</div>
+      {prontos.size === EMOCOES_FACE.length && (
+        <div className="fade-up mt-3 p-3 rounded-xl bg-[var(--atelier-sage)]/20 text-center font-bold">🎉 Você criou o Rosto das Emoções completo!</div>
+      )}
     </div>
   );
 }
