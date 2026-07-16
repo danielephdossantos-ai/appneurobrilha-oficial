@@ -185,7 +185,9 @@ function TrilhaSerieDisc() {
                   <button
                     disabled={!desbloqueada}
                     onClick={() =>
-                      navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
+                      isArte2ano
+                        ? navigate({ to: "/escola-brilha/arte/2ano/$aula", params: { aula: h.codigo } })
+                        : navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
                     }
                     className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
                       desbloqueada
