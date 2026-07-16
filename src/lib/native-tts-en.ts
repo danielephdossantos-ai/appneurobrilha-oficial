@@ -1,7 +1,77 @@
 // English TTS helper (en-US preferred, en-GB fallback).
 // Reaproveita a lógica de chunking do native-tts pt-BR.
 
-import { sanitizeForSpeech, chunkText } from "./native-tts";
+import { sanitizeForSpeech, chunkText, speakChunked } from "./native-tts";
+
+/**
+ * Divide um texto misto (narração PT com trechos em EN entre "aspas" ou (parênteses))
+ * em segmentos por idioma para serem falados com a voz correta.
+ *
+ * Heurística: conteúdo entre aspas ("..." '...' “...” ‘...’) ou parênteses (...)
+ * é tratado como EN se não tiver acentos/cedilha/til típicos do português.
+ * O resto é PT.
+ */
+export type BilingualSegment = { lang: "pt" | "en"; text: string };
+
+const PT_ACCENT_RE = /[áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ]/;
+// Palavras que existem em PT e não devem ser tratadas como EN só por não ter acento.
+const PT_ONLY_HINT_RE = /\b(eu|você|voce|nós|nos|ele|ela|isso|é|são|sao|do|da|de|para|com|uma|um|não|nao|sim|também|tambem)\b/i;
+
+export function splitBilingual(text: string): BilingualSegment[] {
+  if (!text) return [];
+  const src = text;
+  const re = /("([^"]+)"|'([^']+)'|“([^”]+)”|‘([^’]+)’|\(([^)]+)\))/g;
+  const out: BilingualSegment[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  const pushPt = (t: string) => {
+    const trimmed = t.trim();
+    if (trimmed) out.push({ lang: "pt", text: trimmed });
+  };
+  while ((m = re.exec(src)) !== null) {
+    if (m.index > last) pushPt(src.slice(last, m.index));
+    const inner = m[2] ?? m[3] ?? m[4] ?? m[5] ?? m[6] ?? "";
+    const looksEn = !PT_ACCENT_RE.test(inner) && !PT_ONLY_HINT_RE.test(inner) && /[a-zA-Z]/.test(inner);
+    if (looksEn) {
+      out.push({ lang: "en", text: inner.trim() });
+    } else {
+      // Mantém aspas/parênteses no PT pra fluir natural
+      pushPt(m[0]);
+    }
+    last = m.index + m[0].length;
+  }
+  if (last < src.length) pushPt(src.slice(last));
+  return out;
+}
+
+/** Fala um texto bilíngue segmentado: PT com voz PT, EN com voz EN, em sequência. */
+export async function speakBilingual(
+  text: string,
+  opts: { onEnd?: () => void; rateEn?: number; ratePt?: number } = {},
+): Promise<void> {
+  const segments = splitBilingual(text);
+  if (segments.length === 0) {
+    opts.onEnd?.();
+    return;
+  }
+  // Cancela qualquer fala anterior antes de iniciar a sequência
+  stopSpeakingEn();
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+  for (const seg of segments) {
+    if (seg.lang === "en") {
+      await speakEnglish(seg.text, { queue: true, rate: opts.rateEn ?? 0.8 });
+    } else {
+      await new Promise<void>((r) =>
+        speakChunked(seg.text, { queue: true, rate: opts.ratePt ?? 0.95, onEnd: () => r() }),
+      );
+    }
+    // Pequena pausa entre idiomas pra soar como professora explicando
+    await new Promise((r) => setTimeout(r, 180));
+  }
+  opts.onEnd?.();
+}
 
 export function pickEnVoice(): SpeechSynthesisVoice | null {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
