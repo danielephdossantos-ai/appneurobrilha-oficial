@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
+import { listAulasArte } from "@/escola-brilha/arte-2ano/registry";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
