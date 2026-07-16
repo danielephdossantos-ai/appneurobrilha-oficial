@@ -561,8 +561,15 @@ function CanvasPintura({ paleta, alturaCanvas = 320, etapaId, overlay }: { palet
             className={`paint-chip ${cor === c ? "selected" : ""}`} style={{ background: CORES_HEX[c] }} />
         ))}
       </div>
-      <canvas ref={canvasRef} style={{ width: "100%", height: alturaCanvas, borderRadius: 16, background: "#FFFDF7", touchAction: "none", boxShadow: "inset 0 0 0 2px rgba(0,0,0,.06)" }}
-        onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} />
+      <div style={{ position: "relative", width: "100%", height: alturaCanvas, borderRadius: 16, overflow: "hidden", background: "#FFFDF7", boxShadow: "inset 0 0 0 2px rgba(0,0,0,.06)" }}>
+        <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", touchAction: "none" }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} />
+        {overlay && (
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+            {overlay}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
