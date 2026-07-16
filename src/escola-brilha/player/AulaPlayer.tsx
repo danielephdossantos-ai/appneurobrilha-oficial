@@ -1,5 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square } from "lucide-react";
+import { PERSONAGENS } from "../mascotes-personagens";
+
 
 import { useNavigate } from "@tanstack/react-router";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
