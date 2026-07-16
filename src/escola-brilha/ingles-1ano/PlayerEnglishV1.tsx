@@ -266,12 +266,15 @@ function PlayPt({ text }: { text: string }) {
     <button
       onClick={async () => {
         if (playing) {
+          stopSpeakingEn();
           stopSpeaking();
           setPlaying(false);
           return;
         }
         setPlaying(true);
-        await speakChunked(text, { onEnd: () => setPlaying(false) });
+        // Fala bilíngue: PT com voz PT, trechos entre "aspas"/(parênteses) com voz EN,
+        // separados — como uma professora de verdade explicando.
+        await speakBilingual(text, { onEnd: () => setPlaying(false) });
       }}
       className={`text-xs px-3 py-1.5 rounded-full font-bold transition inline-flex items-center gap-1.5 ${
         playing ? "bg-rose-500 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
