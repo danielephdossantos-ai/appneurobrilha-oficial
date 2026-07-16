@@ -228,48 +228,50 @@ export function AulaPlayer({
   return (
     <div
       data-skin={skin}
-      className={`min-h-screen text-white pb-16 ${
+      className={`min-h-screen text-white pb-16 ${isCarto ? "geo-cartografo-player" : ""} ${
         isCarto
           ? "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"
           : "bg-gradient-to-b from-[#0d1f55] to-[#050a2c]"
       }`}
     >
       <div
-        className={`sticky top-0 z-20 backdrop-blur px-4 py-3 flex items-center gap-3 border-b-2 ${
+        className={`sticky top-0 z-20 backdrop-blur border-b ${
           isCarto
             ? "bg-black/40 border-emerald-400/20"
             : "bg-[#0d1f55]/95 border-white/10"
         }`}
       >
-        <button
-          onClick={() => navigate({ to: "/escola-brilha" })}
-          className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
-          aria-label="Voltar"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
-        <div className="flex-1 min-w-0">
-          <div
-            className={`text-[10px] font-black uppercase tracking-widest ${
-              isCarto ? "text-emerald-300/80" : "text-white/60"
-            }`}
+        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+          <button
+            onClick={() => navigate({ to: "/escola-brilha" })}
+            className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
+            aria-label="Voltar"
           >
-            {isCarto ? "🗺️ Cartógrafo · " : ""}
-            {aula.disciplina} · {aula.ano} · {aula.codigo}
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div className="flex-1 min-w-0">
+            <div
+              className={`text-[10px] font-black uppercase tracking-widest ${
+                isCarto ? "text-emerald-300/80" : "text-white/60"
+              }`}
+            >
+              {isCarto ? "CARTÓGRAFO · " : ""}
+              {aula.disciplina} · {aula.ano} · {aula.codigo}
+            </div>
+            <div className="text-sm font-black truncate">{aula.titulo}</div>
           </div>
-          <div className="text-sm font-black truncate">{aula.titulo}</div>
+          <button
+            onClick={speak}
+            className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
+            aria-label={tts.speaking ? "Parar leitura" : "Ler em voz alta"}
+          >
+            {tts.speaking ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+          </button>
         </div>
-        <button
-          onClick={speak}
-          className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
-          aria-label={tts.speaking ? "Parar leitura" : "Ler em voz alta"}
-        >
-          {tts.speaking ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-        </button>
       </div>
 
       {isCarto && (
-        <div className="px-4 pt-3">
+        <div className="max-w-3xl mx-auto px-4 pt-3">
           <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-3 py-2 flex items-center gap-3">
             <img
               src={PERSONAGENS.aurora.img}
@@ -290,7 +292,7 @@ export function AulaPlayer({
       )}
 
 
-      <div className="px-4 pt-3">
+      <div className="max-w-3xl mx-auto px-4 pt-3">
         {isCarto ? (
           <div className="flex items-center gap-3">
             <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
@@ -318,11 +320,15 @@ export function AulaPlayer({
       </div>
 
       {tts.supported && (
-        <div className="px-4 pt-3">
+        <div className="max-w-3xl mx-auto px-4 pt-3">
           <button
             onClick={speakTudo}
             className={`w-full h-14 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg transition-colors ${
-              tts.speaking
+              isCarto
+                ? tts.speaking
+                  ? "bg-red-500/90 text-white border border-red-300/30"
+                  : "bg-emerald-400/15 text-emerald-100 border border-emerald-300/25 hover:bg-emerald-400/20"
+                : tts.speaking
                 ? "bg-gradient-to-r from-[#EF4444] to-[#F97316] text-white"
                 : "bg-gradient-to-r from-[#22C55E] to-[#10B981] text-white"
             }`}
@@ -338,14 +344,14 @@ export function AulaPlayer({
               </>
             )}
           </button>
-          <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/60 mt-1">
+          <p className={`text-center text-[11px] font-black uppercase tracking-widest mt-1 ${isCarto ? "text-emerald-300/60" : "text-white/60"}`}>
             O professor lê a aula toda em voz alta
           </p>
         </div>
       )}
 
 
-      <div className="px-4 pt-5">
+      <div className="max-w-3xl mx-auto px-4 pt-6">
         {emDiagnostico ? (
           <Diagnostico
             aula={aula}
@@ -361,7 +367,7 @@ export function AulaPlayer({
             }}
           />
         ) : (
-          <div className="space-y-8">
+          <div className={isCarto ? "space-y-10" : "space-y-8"}>
             {BLOCOS.map((bloco, i) => {
               const etapa = ETAPAS_METODO[bloco.etapa - 1];
               return (
@@ -403,7 +409,7 @@ export function AulaPlayer({
                   <div
                     className={
                       isCarto
-                        ? "rounded-2xl border border-emerald-400/15 bg-slate-900/60 ring-1 ring-white/5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.35)] p-4 [&_.bg-white]:!bg-transparent [&_.text-slate-900]:!text-white [&_.text-gray-900]:!text-white [&_.text-black]:!text-white [&_.text-slate-800]:!text-white/90 [&_.text-gray-800]:!text-white/90 [&_.text-slate-700]:!text-white/80 [&_.text-gray-700]:!text-white/80 [&_.text-slate-600]:!text-white/70 [&_.text-gray-600]:!text-white/70"
+                        ? "geo-cartografo-bloco rounded-2xl border border-emerald-400/15 bg-slate-900/60 ring-1 ring-white/5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.35)] p-4"
                         : ""
                     }
                   >
@@ -424,6 +430,7 @@ export function AulaPlayer({
                     acertos={acertos}
                     erros={erros}
                     childId={activeChild?.id}
+                    skin={skin}
                   />
                 </section>
               );

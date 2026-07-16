@@ -37,6 +37,7 @@ export function ProfessorVirtual({
   acertos,
   erros,
   childId,
+  skin = "default",
 }: {
   aula: Aula;
   blocoId: BlocoId;
@@ -45,9 +46,11 @@ export function ProfessorVirtual({
   acertos: number;
   erros: number;
   childId?: string | null;
+  skin?: "default" | "geo-cartografo";
 }) {
   const tts = useDeviceTTS();
   const [aberto, setAberto] = useState(true);
+  const isCarto = skin === "geo-cartografo";
   const mascote = useMemo(() => {
     const disc = disciplinaDaAula(aula);
     const override = mascoteAtribuido(childId, disc);
@@ -70,17 +73,17 @@ export function ProfessorVirtual({
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(fala));
 
   return (
-    <div className="px-4 mt-6">
+    <div className="px-0 mt-5">
       <div className="max-w-2xl mx-auto flex items-end gap-3">
         <motion.button
           onClick={() => setAberto((v) => !v)}
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           whileTap={{ scale: 0.95 }}
-          className="shrink-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full p-1 shadow-lg"
+          className={`shrink-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full p-1 shadow-lg ${isCarto ? "ring-2 ring-emerald-300/30 bg-slate-900/80" : ""}`}
           style={{
-            backgroundImage: `linear-gradient(135deg, ${mascote.corPrimaria}, ${mascote.corSecundaria})`,
-            boxShadow: `0 10px 25px -8px ${mascote.corPrimaria}80`,
+            backgroundImage: isCarto ? "linear-gradient(135deg, #34d399, #fcd34d)" : `linear-gradient(135deg, ${mascote.corPrimaria}, ${mascote.corSecundaria})`,
+            boxShadow: isCarto ? "0 18px 45px -18px rgba(52, 211, 153, 0.75)" : `0 10px 25px -8px ${mascote.corPrimaria}80`,
           }}
           aria-label={aberto ? `Esconder ${mascote.nome}` : `Chamar ${mascote.nome}`}
         >
@@ -99,26 +102,30 @@ export function ProfessorVirtual({
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="relative flex-1 rounded-3xl rounded-bl-md bg-white text-[#0d1f55] px-4 py-3 shadow-xl border-2"
-              style={{ borderColor: mascote.corPrimaria }}
+              className={`relative flex-1 rounded-2xl rounded-bl-md px-4 py-3 shadow-xl border ${
+                isCarto
+                  ? "bg-slate-900/80 text-white border-emerald-400/25 ring-1 ring-white/5"
+                  : "bg-white text-[#0d1f55] border-2"
+              }`}
+              style={{ borderColor: isCarto ? undefined : mascote.corPrimaria }}
             >
               <div className="flex items-center justify-between mb-1">
                 <span
                   className="text-[10px] font-black uppercase tracking-widest flex items-center gap-1"
-                  style={{ color: mascote.corSecundaria }}
+                  style={{ color: isCarto ? "#6ee7b7" : mascote.corSecundaria }}
                 >
                   <span aria-hidden>{mascote.emoji}</span> {mascote.nome} · {mascote.papel}
                 </span>
                 <button
                   onClick={speak}
                   className="h-7 w-7 rounded-lg grid place-items-center active:scale-95"
-                  style={{ background: `${mascote.corPrimaria}22` }}
+                  style={{ background: isCarto ? "rgba(52, 211, 153, 0.16)" : `${mascote.corPrimaria}22` }}
                   aria-label={tts.speaking ? `Parar ${mascote.nome}` : `Ouvir ${mascote.nome}`}
                 >
                   {tts.speaking ? (
-                    <VolumeX className="h-3.5 w-3.5" style={{ color: mascote.corSecundaria }} />
+                    <VolumeX className="h-3.5 w-3.5" style={{ color: isCarto ? "#fcd34d" : mascote.corSecundaria }} />
                   ) : (
-                    <Volume2 className="h-3.5 w-3.5" style={{ color: mascote.corSecundaria }} />
+                    <Volume2 className="h-3.5 w-3.5" style={{ color: isCarto ? "#fcd34d" : mascote.corSecundaria }} />
                   )}
                 </button>
               </div>
