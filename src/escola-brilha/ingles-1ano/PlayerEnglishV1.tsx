@@ -483,13 +483,38 @@ function StepBtn({
 
 type SR = any;
 
+// Levenshtein distance para medir quão perto a fala ficou do alvo.
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  const dp: number[] = new Array(n + 1);
+  for (let j = 0; j <= n; j++) dp[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = dp[j];
+      dp[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
+      prev = tmp;
+    }
+  }
+  return dp[n];
+}
+function similarity(a: string, b: string): number {
+  const max = Math.max(a.length, b.length);
+  if (!max) return 1;
+  return 1 - levenshtein(a, b) / max;
+}
+
 function SpeakingMic() {
   const { meta, VOCAB, DIALOG, STORY } = useLesson();
   const targets = meta.speakingTargets;
   const [i, setI] = useState(0);
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string>("");
-  const [result, setResult] = useState<"idle" | "ok" | "again">("idle");
+  const [result, setResult] = useState<"idle" | "ok" | "close" | "again">("idle");
+  const [confidencePct, setConfidencePct] = useState<number | null>(null);
   const recRef = useRef<SR>(null);
   const target = targets[i];
   const translateTarget = (en: string): string => {
@@ -513,22 +538,50 @@ function SpeakingMic() {
     if (!supported) return;
     setHeard("");
     setResult("idle");
+    setConfidencePct(null);
     const SRClass: any =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const rec = new SRClass();
     rec.lang = "en-US";
     rec.interimResults = false;
-    rec.maxAlternatives = 3;
+    rec.maxAlternatives = 5;
     rec.onresult = (e: any) => {
-      const alts: string[] = [];
-      for (let j = 0; j < e.results[0].length; j++) alts.push(e.results[0][j].transcript);
-      const said = alts.join(" | ");
+      const alts: { text: string; conf: number }[] = [];
+      for (let j = 0; j < e.results[0].length; j++) {
+        alts.push({
+          text: e.results[0][j].transcript,
+          conf: e.results[0][j].confidence ?? 0,
+        });
+      }
+      const said = alts.map((a) => a.text).join(" | ");
       setHeard(said);
-      const norm = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, "").trim();
+      const norm = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/\s+/g, " ");
       const t = norm(target);
-      const okAny = alts.some((a) => norm(a).includes(t) || t.includes(norm(a)));
-      setResult(okAny ? "ok" : "again");
-      if (okAny) speakEnglish("Very good!");
+      // Melhor pontuação entre as alternativas: similaridade + confiança
+      let bestSim = 0;
+      let bestConf = 0;
+      let exact = false;
+      for (const a of alts) {
+        const na = norm(a.text);
+        if (!na) continue;
+        if (na === t) { exact = true; bestConf = Math.max(bestConf, a.conf); }
+        const sim = similarity(na, t);
+        if (sim > bestSim) { bestSim = sim; bestConf = a.conf; }
+      }
+      const conf = bestConf > 0 ? bestConf : bestSim;
+      setConfidencePct(Math.round(conf * 100));
+      // Regras rigorosas — não passa só por o reconhecedor ter "corrigido"
+      // Perfeito: match exato E confiança alta do reconhecedor.
+      // Quase:   muito parecido mas não bateu, ou confiança baixa mesmo com match.
+      // Again:   muito diferente.
+      if (exact && bestConf >= 0.75) {
+        setResult("ok");
+        speakEnglish("Very good!");
+      } else if (bestSim >= 0.7) {
+        setResult("close");
+      } else {
+        setResult("again");
+      }
     };
     rec.onend = () => setListening(false);
     rec.onerror = () => setListening(false);
@@ -549,6 +602,7 @@ function SpeakingMic() {
     }
     setListening(false);
   };
+
 
   return (
     <div>
