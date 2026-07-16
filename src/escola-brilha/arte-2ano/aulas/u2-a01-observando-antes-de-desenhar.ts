@@ -33,7 +33,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "lupa-magica",
-      titulo: "🔎 Passa a Lupa Mágica",
+      titulo: "Passa a Lupa Mágica",
       instrucao:
         "Arrasta a lupa em cima da folha e toca nos círculos brilhantes para descobrir o que só um artista vê.",
       fotoUrl: folhaMacro.url,
@@ -47,7 +47,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "formas-basicas",
-      titulo: "🔺 Toda Coisa Vira Forma",
+      titulo: "Toda Coisa Vira Forma",
       instrucao:
         "Antes de desenhar, todo artista enxerga formas simples nos objetos. Toca no objeto e depois escolhe a forma que ele parece.",
       itens: [
@@ -61,7 +61,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "desenho-observacao",
-      titulo: "🌳 Desenha a Árvore Observando",
+      titulo: "Desenha a Árvore Observando",
       instrucao:
         "Olha bem a foto da árvore. Depois desenha do lado, seguindo os passos. Não precisa ficar igual — o importante é observar!",
       referenciaUrl: arvoreRef.url,
@@ -76,7 +76,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "sete-erros",
-      titulo: "🕵️ Jogo das 5 Diferenças",
+      titulo: "Jogo das 5 Diferenças",
       instrucao:
         "Olha as duas imagens do parque. Toca nas coisas diferentes na imagem da direita. Tem 5 diferenças!",
       cena: "parque",

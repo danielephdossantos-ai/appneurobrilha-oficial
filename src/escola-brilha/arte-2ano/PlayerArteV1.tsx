@@ -1327,7 +1327,7 @@ function EtapaDesenhoObservacao({ etapa, say }: { etapa: Extract<EtapaBloco1, { 
                 <div className={`w-6 h-6 rounded-full grid place-items-center flex-shrink-0 ${feito ? "bg-[var(--atelier-sage)] text-white" : "bg-black/10"}`}>
                   {feito ? <Check size={14}/> : k + 1}
                 </div>
-                <div className="text-sm">{p}</div>
+                <div className="text-sm text-slate-800">{p}</div>
               </button>
             );
           })}

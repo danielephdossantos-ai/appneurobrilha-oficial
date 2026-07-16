@@ -31,7 +31,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "floresta-sonora",
-      titulo: "🌳 Toca em Cada Som da Floresta",
+      titulo: "Toca em Cada Som da Floresta",
       instrucao: "Toca nos pontinhos brilhantes da foto. Cada um tem um som diferente. Escuta com atenção!",
       fotoUrl: floresta.url,
       alt: "Floresta com árvores altas e raios de sol filtrando",
@@ -46,7 +46,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "sequenciador",
-      titulo: "🎼 Cria a Sua Sequência",
+      titulo: "Cria a Sua Sequência",
       instrucao:
         "Toca nos quadradinhos para acender cada som. Depois aperta ▶ e escuta a música que VOCÊ criou!",
       passos: 8,
@@ -59,7 +59,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "memoria-sonora",
-      titulo: "🧠 Memória Sonora",
+      titulo: "Memória Sonora",
       instrucao:
         "Vira duas cartas. Se os sons forem iguais, ganhou o par! Escuta com bastante atenção.",
       pares: [
@@ -71,7 +71,7 @@ const aula: AulaArte = {
     },
     {
       tipo: "ritmo-repetir",
-      titulo: "🥁 Repete o Ritmo",
+      titulo: "Repete o Ritmo",
       instrucao:
         "Escuta a sequência de sons e depois repita tocando na mesma ordem. Fica atento!",
       sons: [
