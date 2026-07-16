@@ -1,4 +1,9 @@
 import obraAsset from "@/assets/atelier/atelier-obra.jpg.asset.json";
+import rostoFeliz from "@/assets/neuro-treino/emocoes/feliz.png.asset.json";
+import rostoSono from "@/assets/neuro-treino/emocoes/sono.png.asset.json";
+import rostoSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png.asset.json";
+import rostoTriste from "@/assets/neuro-treino/emocoes/triste.png.asset.json";
+import rostoBravo from "@/assets/neuro-treino/emocoes/bravo.png.asset.json";
 
 export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "laranja" | "rosa" | "branco" | "preto" | "marrom";
 
