@@ -461,7 +461,7 @@ function EtapaQuiz({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "quiz" 
 
 type Ferramenta = "pincel" | "lapis" | "giz" | "carimbo";
 
-function CanvasPintura({ paleta, alturaCanvas = 320, etapaId }: { paleta: CorNome[]; alturaCanvas?: number; etapaId: string }) {
+function CanvasPintura({ paleta, alturaCanvas = 320, etapaId, overlay }: { paleta: CorNome[]; alturaCanvas?: number; etapaId: string; overlay?: React.ReactNode }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cor, setCor] = useState<CorNome>(paleta[0] ?? "vermelho");
   const [ferramenta, setFerramenta] = useState<Ferramenta>("pincel");
