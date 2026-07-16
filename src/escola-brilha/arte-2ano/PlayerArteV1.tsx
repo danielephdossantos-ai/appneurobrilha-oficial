@@ -530,8 +530,7 @@ function CanvasPintura({ paleta, alturaCanvas = 320, etapaId, overlay }: { palet
     const c = canvasRef.current; if (!c) return;
     const ctx = c.getContext("2d"); if (!ctx) return;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = "#FFFDF7";
-    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.clearRect(0, 0, c.width, c.height);
     const dpr = Math.max(1, window.devicePixelRatio || 1);
     ctx.scale(dpr, dpr);
   };
