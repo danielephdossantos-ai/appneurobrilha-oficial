@@ -1,4 +1,20 @@
 import type { AulaArteV1 } from "../../types";
+import vocabReta from "@/assets/arte-2ano/u2-vocab-reta.jpg";
+import vocabCurva from "@/assets/arte-2ano/u2-vocab-curva.jpg";
+import vocabForma from "@/assets/arte-2ano/u2-vocab-forma.jpg";
+import vocabContorno from "@/assets/arte-2ano/u2-vocab-contorno.jpg";
+import pigKandinsky from "@/assets/arte-2ano/u2-pig-kandinsky.jpg";
+import pigMondrian from "@/assets/arte-2ano/u2-pig-mondrian.jpg";
+import pigTriangulo from "@/assets/arte-2ano/u2-pig-triangulo.jpg";
+import pigRetangulo from "@/assets/arte-2ano/u2-pig-retangulo.jpg";
+import objPizza from "@/assets/arte-2ano/u2-obj-pizza.jpg";
+import objBola from "@/assets/arte-2ano/u2-obj-bola.jpg";
+import objPorta from "@/assets/arte-2ano/u2-obj-porta.jpg";
+import passo1Img from "@/assets/arte-2ano/u2-passo1-quadrado.jpg";
+import passo2Img from "@/assets/arte-2ano/u2-passo2-triangulo.jpg";
+import passo3Img from "@/assets/arte-2ano/u2-passo3-porta.jpg";
+import passo4Img from "@/assets/arte-2ano/u2-passo4-janela.jpg";
+import passo5Img from "@/assets/arte-2ano/u2-passo5-sol.jpg";
 
 /**
  * Arte · 2º Ano · Unidade 2 · Aula 01 — "Linhas, Formas e o Desenho Geométrico"
@@ -68,10 +84,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada cartão pra aprender as palavras do artista geométrico.",
     cards: [
-      { termo: "Linha Reta", definicao: "Vai direto de um ponto ao outro, sem curvar. Como uma régua.", emoji: "➖", cor: "#2563eb" },
-      { termo: "Linha Curva", definicao: "Se dobra suave, como uma onda do mar ou uma nuvem.", emoji: "〰️", cor: "#22c55e" },
-      { termo: "Forma Geométrica", definicao: "Figura fechada feita de linhas: quadrado, círculo, triângulo.", emoji: "🔷", cor: "#f97316" },
-      { termo: "Contorno", definicao: "É a borda que faz aparecer a forma no papel.", emoji: "✏️", cor: "#a855f7" },
+      { termo: "Linha Reta", definicao: "Vai direto de um ponto ao outro, sem curvar. Como uma régua.", emoji: "➖", cor: "#2563eb", fotoUrl: vocabReta },
+      { termo: "Linha Curva", definicao: "Se dobra suave, como uma onda do mar ou uma nuvem.", emoji: "〰️", cor: "#22c55e", fotoUrl: vocabCurva },
+      { termo: "Forma Geométrica", definicao: "Figura fechada feita de linhas: quadrado, círculo, triângulo.", emoji: "🔷", cor: "#f97316", fotoUrl: vocabForma },
+      { termo: "Contorno", definicao: "É a borda que faz aparecer a forma no papel.", emoji: "✏️", cor: "#a855f7", fotoUrl: vocabContorno },
     ],
   },
 
@@ -86,10 +102,10 @@ export const aula01: AulaArteV1 = {
       "Hoje, esses quadros estão em museus do mundo inteiro — e tudo começou com formas simples como as suas!",
     ],
     pigmentos: [
-      { nome: "Círculo de Kandinsky", hex: "#f97316", fonte: "Cores concêntricas", emoji: "⭕" },
-      { nome: "Quadrado de Mondrian", hex: "#dc2626", fonte: "Linhas pretas grossas", emoji: "🟥" },
-      { nome: "Triângulo do Foguete", hex: "#facc15", fonte: "Aponta pra cima", emoji: "🔺" },
-      { nome: "Retângulo da Porta", hex: "#2563eb", fonte: "Alto e estreito", emoji: "🟦" },
+      { nome: "Círculo de Kandinsky", hex: "#f97316", fonte: "Cores concêntricas", emoji: "⭕", fotoUrl: pigKandinsky },
+      { nome: "Quadrado de Mondrian", hex: "#dc2626", fonte: "Linhas pretas grossas", emoji: "🟥", fotoUrl: pigMondrian },
+      { nome: "Triângulo do Foguete", hex: "#facc15", fonte: "Aponta pra cima", emoji: "🔺", fotoUrl: pigTriangulo },
+      { nome: "Retângulo da Porta", hex: "#2563eb", fonte: "Alto e estreito", emoji: "🟦", fotoUrl: pigRetangulo },
     ],
   },
 
@@ -134,7 +150,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada objeto do dia a dia tem uma forma escondida. Escolhe a forma certa pra cada um!",
     animais: [
       {
-        nome: "Fatia de pizza", emoji: "🍕",
+        nome: "Fatia de pizza", emoji: "🍕", fotoUrl: objPizza,
         corAlvo: { nome: "Triângulo", hex: "#f97316" },
         opcoes: [
           { nome: "Círculo", hex: "#22c55e" },
@@ -144,7 +160,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Triângulo! 3 lados iguais que apontam pra fora.",
       },
       {
-        nome: "Bola de futebol", emoji: "⚽",
+        nome: "Bola de futebol", emoji: "⚽", fotoUrl: objBola,
         corAlvo: { nome: "Círculo", hex: "#22c55e" },
         opcoes: [
           { nome: "Retângulo", hex: "#a855f7" },
@@ -154,7 +170,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Círculo! Redondinho sem nenhuma ponta.",
       },
       {
-        nome: "Porta da sala", emoji: "🚪",
+        nome: "Porta da sala", emoji: "🚪", fotoUrl: objPorta,
         corAlvo: { nome: "Retângulo", hex: "#a855f7" },
         opcoes: [
           { nome: "Círculo", hex: "#22c55e" },
@@ -171,11 +187,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA de como desenhamos uma casa usando só formas.",
     passos: [
-      { id: "p1", texto: "Desenho um QUADRADO grande (a parede)", emoji: "⬛", ordem: 1 },
-      { id: "p2", texto: "Em cima, um TRIÂNGULO (o telhado)", emoji: "🔺", ordem: 2 },
-      { id: "p3", texto: "No meio, um RETÂNGULO pequeno (a porta)", emoji: "🟪", ordem: 3 },
-      { id: "p4", texto: "Do lado, um QUADRADINHO (a janela)", emoji: "🟦", ordem: 4 },
-      { id: "p5", texto: "Um CÍRCULO amarelo no céu (o sol!)", emoji: "☀️", ordem: 5 },
+      { id: "p1", texto: "Desenho um QUADRADO grande (a parede)", emoji: "⬛", ordem: 1, fotoUrl: passo1Img },
+      { id: "p2", texto: "Em cima, um TRIÂNGULO (o telhado)", emoji: "🔺", ordem: 2, fotoUrl: passo2Img },
+      { id: "p3", texto: "No meio, um RETÂNGULO pequeno (a porta)", emoji: "🟪", ordem: 3, fotoUrl: passo3Img },
+      { id: "p4", texto: "Do lado, um QUADRADINHO (a janela)", emoji: "🟦", ordem: 4, fotoUrl: passo4Img },
+      { id: "p5", texto: "Um CÍRCULO amarelo no céu (o sol!)", emoji: "☀️", ordem: 5, fotoUrl: passo5Img },
     ],
     falaAcerto: "Uau! Você construiu uma casa inteira só com formas!",
   },
