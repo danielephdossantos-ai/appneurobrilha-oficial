@@ -489,13 +489,21 @@ function CenaVocabulario({
               style={{ backgroundColor: virado ? "white" : c.cor }}>
               {!virado ? (
                 <div className="h-full flex flex-col items-center justify-center gap-2 text-white">
-                  <div className="text-5xl drop-shadow">{c.emoji}</div>
+                  {c.fotoUrl ? (
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-20 h-20 object-cover rounded-full border-2 border-white/50 shadow-md" />
+                  ) : (
+                    <div className="text-5xl drop-shadow">{c.emoji}</div>
+                  )}
                   <div className="text-lg font-black uppercase tracking-wider drop-shadow-lg">{c.termo}</div>
                   <div className="text-[10px] mt-2 text-white/80">toque para virar</div>
                 </div>
               ) : (
-                <div className="h-full flex flex-col items-center justify-center gap-2 p-3 text-slate-900">
-                  <div className="text-3xl">{c.emoji}</div>
+                <div className="h-full flex flex-col items-center justify-center gap-2 p-2 text-slate-900">
+                  {c.fotoUrl ? (
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-full h-24 object-cover rounded-lg" />
+                  ) : (
+                    <div className="text-3xl">{c.emoji}</div>
+                  )}
                   <div className="text-sm font-black" style={{ color: c.cor }}>{c.termo}</div>
                   <div className="text-xs leading-tight text-center">{c.definicao}</div>
                 </div>
