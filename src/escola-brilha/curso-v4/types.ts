@@ -1001,7 +1001,7 @@ export type CenaArteV1 =
   | {
       tipo: "sequenciaMistura";
       aurora: string;
-      passos: Array<{ id: string; texto: string; emoji: string; ordem: number }>;
+      passos: Array<{ id: string; texto: string; emoji: string; ordem: number; fotoUrl?: string }>;
       falaAcerto: string;
     }
   | {
