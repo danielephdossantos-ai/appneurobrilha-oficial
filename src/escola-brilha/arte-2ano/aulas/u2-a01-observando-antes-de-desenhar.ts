@@ -30,6 +30,7 @@ const aula: AulaArte = {
         { cor: "preto",   hex: "#2D2418", emocao: "Detalhe",     frase: "Preto: linhas finas para os detalhes." },
       ],
       convite: "Pega sua lupa mágica e vem descobrir!",
+      icone: "lupa",
     },
     {
       tipo: "lupa-magica",
