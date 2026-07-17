@@ -2266,11 +2266,25 @@ const METADES: Record<string, { viewBox: string; render: () => React.ReactElemen
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
       <g>
-        <ellipse cx="200" cy="150" rx="8" ry="80" fill="#4B2E1E"/>
-        <path d="M 200 100 Q 120 50 80 100 Q 60 160 120 180 Q 180 170 200 150" fill="#F472B6" stroke="#831843" strokeWidth="2"/>
-        <path d="M 200 160 Q 140 200 130 240 Q 170 250 200 220" fill="#FB923C" stroke="#7C2D12" strokeWidth="2"/>
-        <circle cx="120" cy="130" r="8" fill="#FEF3C7"/>
-        <circle cx="150" cy="230" r="5" fill="#FEF3C7"/>
+        {/* asa superior */}
+        <path d="M 200 150 C 170 70, 90 40, 60 90 C 40 130, 70 165, 130 170 C 165 172, 190 165, 200 150 Z"
+              fill="#F472B6" stroke="#831843" strokeWidth="3" strokeLinejoin="round"/>
+        <path d="M 200 150 C 175 105, 130 85, 100 105 C 85 125, 105 150, 140 155 C 170 158, 195 158, 200 150 Z"
+              fill="#FBCFE8" opacity="0.85"/>
+        <circle cx="110" cy="105" r="9" fill="#FEF3C7" stroke="#831843" strokeWidth="1.5"/>
+        <circle cx="85" cy="135" r="5" fill="#FDE68A"/>
+        {/* asa inferior */}
+        <path d="M 200 155 C 170 190, 130 205, 115 240 C 130 260, 175 250, 200 215 Z"
+              fill="#FB923C" stroke="#7C2D12" strokeWidth="3" strokeLinejoin="round"/>
+        <path d="M 200 165 C 175 195, 150 210, 145 230 C 165 240, 190 225, 200 205 Z"
+              fill="#FED7AA" opacity="0.85"/>
+        <circle cx="150" cy="220" r="5" fill="#FEF3C7"/>
+        {/* corpo */}
+        <ellipse cx="200" cy="155" rx="9" ry="70" fill="#4B2E1E"/>
+        <circle cx="200" cy="85" r="12" fill="#4B2E1E"/>
+        {/* antena */}
+        <path d="M 200 78 C 190 60, 178 50, 168 42" fill="none" stroke="#4B2E1E" strokeWidth="3" strokeLinecap="round"/>
+        <circle cx="167" cy="41" r="4" fill="#4B2E1E"/>
       </g>
     ),
   },
@@ -2278,7 +2292,10 @@ const METADES: Record<string, { viewBox: string; render: () => React.ReactElemen
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
       <g>
-        <path d="M 200 260 L 200 120 Q 200 60 140 60 Q 80 60 80 130 Q 80 190 200 260 Z" fill="#EF4444" stroke="#7F1D1D" strokeWidth="3"/>
+        <path d="M 200 265 C 200 265, 60 180, 60 115 C 60 75, 95 55, 130 60 C 165 65, 190 90, 200 115 L 200 265 Z"
+              fill="#EF4444" stroke="#7F1D1D" strokeWidth="4" strokeLinejoin="round"/>
+        <path d="M 175 100 C 145 90, 105 100, 95 130 C 90 150, 105 165, 125 168"
+              fill="none" stroke="#FCA5A5" strokeWidth="6" strokeLinecap="round" opacity="0.7"/>
       </g>
     ),
   },
@@ -2286,10 +2303,24 @@ const METADES: Record<string, { viewBox: string; render: () => React.ReactElemen
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
       <g>
-        <path d="M 200 40 Q 100 40 100 150 Q 100 260 200 260" fill="#FDE68A" stroke="#78350F" strokeWidth="3"/>
-        <circle cx="150" cy="130" r="10" fill="#1F2937"/>
-        <path d="M 200 155 Q 175 175 165 165" fill="none" stroke="#78350F" strokeWidth="3"/>
-        <path d="M 200 210 Q 160 230 130 210" fill="none" stroke="#B91C1C" strokeWidth="4" strokeLinecap="round"/>
+        {/* cabelo */}
+        <path d="M 200 30 C 130 30, 90 75, 90 140 C 90 155, 92 168, 96 178 C 96 130, 130 105, 200 100 Z"
+              fill="#6B3410"/>
+        {/* rosto */}
+        <path d="M 200 55 C 130 55, 105 105, 105 155 C 105 215, 150 260, 200 268 L 200 55 Z"
+              fill="#FDE68A" stroke="#78350F" strokeWidth="3" strokeLinejoin="round"/>
+        {/* sobrancelha */}
+        <path d="M 135 128 Q 160 118 180 125" fill="none" stroke="#4B2E1E" strokeWidth="4" strokeLinecap="round"/>
+        {/* olho */}
+        <ellipse cx="155" cy="150" rx="12" ry="14" fill="#fff" stroke="#78350F" strokeWidth="2"/>
+        <circle cx="157" cy="152" r="7" fill="#1F2937"/>
+        <circle cx="159" cy="149" r="2.5" fill="#fff"/>
+        {/* nariz */}
+        <path d="M 200 155 C 190 175, 185 190, 195 200" fill="none" stroke="#B45309" strokeWidth="3" strokeLinecap="round"/>
+        {/* boca */}
+        <path d="M 200 225 C 175 235, 155 232, 140 222" fill="none" stroke="#B91C1C" strokeWidth="5" strokeLinecap="round"/>
+        {/* bochecha */}
+        <circle cx="140" cy="195" r="10" fill="#FCA5A5" opacity="0.6"/>
       </g>
     ),
   },
@@ -2297,8 +2328,16 @@ const METADES: Record<string, { viewBox: string; render: () => React.ReactElemen
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
       <g>
-        <rect x="180" y="180" width="20" height="90" fill="#78350F"/>
-        <path d="M 200 180 Q 100 180 90 100 Q 130 40 200 60" fill="#16A34A" stroke="#14532D" strokeWidth="3"/>
+        <path d="M 200 275 L 200 190 C 185 185, 178 175, 180 165 L 200 165 Z"
+              fill="#78350F" stroke="#3F1D0A" strokeWidth="2"/>
+        <path d="M 190 210 C 175 205, 168 200, 165 190" fill="none" stroke="#3F1D0A" strokeWidth="2"/>
+        <circle cx="145" cy="130" r="45" fill="#22C55E" stroke="#14532D" strokeWidth="3"/>
+        <circle cx="115" cy="100" r="35" fill="#16A34A" stroke="#14532D" strokeWidth="3"/>
+        <circle cx="155" cy="75" r="38" fill="#22C55E" stroke="#14532D" strokeWidth="3"/>
+        <circle cx="190" cy="95" r="30" fill="#4ADE80" stroke="#14532D" strokeWidth="3"/>
+        <circle cx="130" cy="115" r="7" fill="#DC2626" stroke="#7F1D1D" strokeWidth="1.5"/>
+        <circle cx="170" cy="140" r="7" fill="#DC2626" stroke="#7F1D1D" strokeWidth="1.5"/>
+        <circle cx="105" cy="90" r="6" fill="#DC2626" stroke="#7F1D1D" strokeWidth="1.5"/>
       </g>
     ),
   },
@@ -2306,12 +2345,17 @@ const METADES: Record<string, { viewBox: string; render: () => React.ReactElemen
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
       <g>
-        <line x1="200" y1="150" x2="200" y2="270" stroke="#166534" strokeWidth="5"/>
-        <path d="M 200 200 Q 140 200 140 230 Q 180 240 200 220" fill="#22C55E"/>
-        <circle cx="200" cy="120" r="30" fill="#F59E0B"/>
-        <ellipse cx="160" cy="80" rx="30" ry="20" fill="#EC4899"/>
-        <ellipse cx="140" cy="130" rx="30" ry="20" fill="#F472B6"/>
-        <ellipse cx="160" cy="180" rx="30" ry="20" fill="#F9A8D4"/>
+        <path d="M 200 280 C 195 240, 205 200, 200 130" fill="none" stroke="#166534" strokeWidth="6" strokeLinecap="round"/>
+        <path d="M 200 210 C 165 200, 135 210, 130 240 C 165 250, 195 235, 200 220 Z"
+              fill="#22C55E" stroke="#14532D" strokeWidth="2.5"/>
+        <path d="M 195 220 C 175 220, 155 228, 145 240" fill="none" stroke="#14532D" strokeWidth="1.5"/>
+        <ellipse cx="165" cy="70" rx="28" ry="22" fill="#EC4899" stroke="#831843" strokeWidth="2.5" transform="rotate(-30 165 70)"/>
+        <ellipse cx="130" cy="115" rx="28" ry="22" fill="#F472B6" stroke="#831843" strokeWidth="2.5" transform="rotate(15 130 115)"/>
+        <ellipse cx="145" cy="170" rx="28" ry="22" fill="#F9A8D4" stroke="#831843" strokeWidth="2.5" transform="rotate(55 145 170)"/>
+        <circle cx="200" cy="115" r="32" fill="#F59E0B" stroke="#78350F" strokeWidth="3"/>
+        <circle cx="188" cy="105" r="5" fill="#78350F"/>
+        <circle cx="200" cy="120" r="5" fill="#78350F"/>
+        <circle cx="185" cy="122" r="4" fill="#78350F"/>
       </g>
     ),
   },
@@ -2336,7 +2380,8 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
     cv.width = rect.width * 2; cv.height = rect.height * 2;
     const cx = cv.getContext("2d"); if (!cx) return;
     cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round"; cx.lineWidth = 4; cx.strokeStyle = cor;
-  }, [cor]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
   useEffect(() => {
     const cx = canvasRef.current?.getContext("2d"); if (cx) cx.strokeStyle = cor;
