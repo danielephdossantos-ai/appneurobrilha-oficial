@@ -32,6 +32,41 @@ function isPortugues(c: CursoAny): c is CursoPortugues {
 function isGeoV1(c: CursoAny): c is CursoGeoV1 {
   return c.tipoAula === "geo-v1";
 }
+function isArteV1(c: CursoAny): c is CursoArteV1 {
+  return c.tipoAula === "arte-v1";
+}
+
+export function getCursoArteV1(slug: string): CursoArteV1 | undefined {
+  const c = registry[slug];
+  return c && isArteV1(c) ? c : undefined;
+}
+
+export function getAulaArteV1FromCurso(
+  cursoSlug: string,
+  aulaSlug: string,
+): { curso: CursoArteV1; aula: AulaArteV1; unidadeIdx: number; aulaIdx: number } | undefined {
+  const curso = getCursoArteV1(cursoSlug);
+  if (!curso) return undefined;
+  for (let u = 0; u < curso.unidades.length; u++) {
+    const unidade = curso.unidades[u];
+    const idx = unidade.aulas.findIndex((a) => a.slug === aulaSlug);
+    if (idx >= 0) return { curso, aula: unidade.aulas[idx], unidadeIdx: u, aulaIdx: idx };
+  }
+  return undefined;
+}
+
+export function getProximaAulaArteV1(
+  cursoSlug: string,
+  aulaSlug: string,
+): { aula: AulaArteV1; unidadeIdx: number; aulaIdx: number } | undefined {
+  const curso = getCursoArteV1(cursoSlug);
+  if (!curso) return undefined;
+  const flat: Array<{ aula: AulaArteV1; unidadeIdx: number; aulaIdx: number }> = [];
+  curso.unidades.forEach((u, ui) => u.aulas.forEach((a, ai) => flat.push({ aula: a, unidadeIdx: ui, aulaIdx: ai })));
+  const i = flat.findIndex((x) => x.aula.slug === aulaSlug);
+  if (i < 0 || i + 1 >= flat.length) return undefined;
+  return flat[i + 1];
+}
 
 export function getCursoGeoV1(slug: string): CursoGeoV1 | undefined {
   const c = registry[slug];
