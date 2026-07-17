@@ -123,7 +123,12 @@ function TrilhaCurso() {
                     <button
                       disabled={!desbloqueada}
                       onClick={() => {
-                        if (ehGeoV1) {
+                        if (ehArteV1) {
+                          navigate({
+                            to: "/escola-brilha/aula-arte-v1/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                          });
+                        } else if (ehGeoV1) {
                           navigate({
                             to: "/escola-brilha/aula-geo-v1/$curso/$aula",
                             params: { curso: slug, aula: a.slug },
