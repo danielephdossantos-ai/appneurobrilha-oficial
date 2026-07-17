@@ -1003,7 +1003,7 @@ function CenaAvaliacaoFinal({
   const escolher = (i: number) => {
     if (resp !== null) return;
     setResp(i);
-    if (cena.quiz.alternativas[i].correta) { cancelSpeak(); setTimeout(() => speakChunked(cena.feedback ?? cena.quiz.feedback), 250); }
+    if (cena.quiz.alternativas[i].correta) { cancelSpeak(); setTimeout(() => speakChunked(cena.quiz.feedback), 250); }
     else { cancelSpeak(); setTimeout(() => speakChunked("Quase! Olha bem: as primárias são Vermelho, Azul e Amarelo."), 200); }
   };
 
