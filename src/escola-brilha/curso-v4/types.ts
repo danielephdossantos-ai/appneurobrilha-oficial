@@ -938,20 +938,108 @@ export type CursoAny = Curso | CursoPortugues | CursoGeoV1 | CursoArteV1;
 // Player 100% customizado (arte-v1). Cada cena tem uma mecânica exclusiva
 // (mistura de cores, frotagem, teatro de sombras, land art, etc.).
 
+export type CorPrimariaId = "vermelho" | "azul" | "amarelo";
+export type PotePrimario = { id: CorPrimariaId; hex: string; nome: string };
+
 export type CenaArteV1 =
   | {
-      // Cena 1 — arrasta 2 potes de tinta primária pro caldeirão e vê nascer a cor secundária.
       tipo: "misturaCores";
       aurora: string;
       instrucao: string;
       falaFinal: string;
       misturas: Array<{
         id: string;
-        primariaA: { id: "vermelho" | "azul" | "amarelo"; hex: string; nome: string };
-        primariaB: { id: "vermelho" | "azul" | "amarelo"; hex: string; nome: string };
+        primariaA: PotePrimario;
+        primariaB: PotePrimario;
         resultado: { hex: string; nome: string };
         falaAcerto: string;
       }>;
+    }
+  | {
+      tipo: "previsaoCores";
+      aurora: string;
+      rodadas: Array<{
+        primariaA: PotePrimario;
+        primariaB: PotePrimario;
+        opcoes: Array<{ nome: string; hex: string; correta: boolean }>;
+        feedbackAcerto: string;
+      }>;
+    }
+  | {
+      tipo: "vocabularioCards";
+      aurora: string;
+      cards: Array<{ termo: string; definicao: string; emoji: string; cor: string }>;
+    }
+  | {
+      tipo: "leituraTintas";
+      aurora: string;
+      paragrafos: string[];
+      pigmentos: Array<{ nome: string; hex: string; fonte: string; emoji: string }>;
+    }
+  | {
+      tipo: "quizCores";
+      aurora: string;
+      perguntas: Array<{
+        pergunta: string;
+        alternativas: Array<{ texto: string; correta: boolean }>;
+        feedbackAcerto: string;
+        feedbackErro: string;
+      }>;
+    }
+  | {
+      tipo: "pintarAnimais";
+      aurora: string;
+      animais: Array<{
+        nome: string;
+        emoji: string;
+        corAlvo: { nome: string; hex: string };
+        opcoes: Array<{ nome: string; hex: string }>;
+        falaAcerto: string;
+      }>;
+    }
+  | {
+      tipo: "sequenciaMistura";
+      aurora: string;
+      passos: Array<{ id: string; texto: string; emoji: string; ordem: number }>;
+      falaAcerto: string;
+    }
+  | {
+      tipo: "diarioPintor";
+      aurora: string;
+      titulo: string;
+      trechos: Array<{ texto: string; palavraDestaque?: string; corDestaque?: string }>;
+    }
+  | {
+      tipo: "fabricaPocoes";
+      aurora: string;
+      tempoSeg: number;
+      pedidos: Array<{
+        corAlvo: { nome: string; hex: string };
+        ingredientes: [PotePrimario, PotePrimario];
+      }>;
+      potes: PotePrimario[];
+    }
+  | {
+      tipo: "rodaCores";
+      aurora: string;
+      primarias: PotePrimario[];
+      secundarias: Array<{
+        nome: string;
+        hex: string;
+        entre: [CorPrimariaId, CorPrimariaId];
+      }>;
+    }
+  | {
+      tipo: "avaliacaoFinal";
+      aurora: string;
+      quiz: {
+        pergunta: string;
+        alternativas: Array<{ texto: string; correta: boolean }>;
+        feedback: string;
+      };
+      missaoFamilia: string;
+      recompensaTitulo: string;
+      recompensaItem: string;
     }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
