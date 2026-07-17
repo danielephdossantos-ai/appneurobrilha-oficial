@@ -1440,6 +1440,9 @@ function EtapaRelatorio({ etapa, say, aula, indiceAtual }: { etapa: Extract<Etap
     "traco-guiado": "✏️ Traço guiado",
     "completar-metade": "🪞 Completar a metade",
     "detetive-obra": "🕵️ Detetive da obra",
+    "bater-ritmo": "🥁 Bater o ritmo",
+    "pintar-compasso": "🎨 Pintar no compasso",
+    "som-vira-traco": "🌊 Som vira traço",
   };
 
   const feitas = aula.etapas.filter((_, k) => k < indiceAtual || concluidas.has(k)).length;
