@@ -932,6 +932,69 @@ export type CursoGeoV1 = {
 };
 
 /** Union usado pelo registry e pela trilha. */
-export type CursoAny = Curso | CursoPortugues | CursoGeoV1;
+export type CursoAny = Curso | CursoPortugues | CursoGeoV1 | CursoArteV1;
+
+// ============ ARTE 2º ANO — "🎨 O Pincel Mágico de Aurora" =============
+// Player 100% customizado (arte-v1). Cada cena tem uma mecânica exclusiva
+// (mistura de cores, frotagem, teatro de sombras, land art, etc.).
+
+export type CenaArteV1 =
+  | {
+      // Cena 1 — arrasta 2 potes de tinta primária pro caldeirão e vê nascer a cor secundária.
+      tipo: "misturaCores";
+      aurora: string;
+      instrucao: string;
+      falaFinal: string;
+      misturas: Array<{
+        id: string;
+        primariaA: { id: "vermelho" | "azul" | "amarelo"; hex: string; nome: string };
+        primariaB: { id: "vermelho" | "azul" | "amarelo"; hex: string; nome: string };
+        resultado: { hex: string; nome: string };
+        falaAcerto: string;
+      }>;
+    }
+  | { tipo: "placeholder"; titulo: string; descricao: string };
+
+export type AulaArteV1 = {
+  slug: string;
+  titulo: string;
+  iconeTrilha: string;
+  bncc: string[];
+  duracaoMin: number;
+  cena01_motivacao: CenaArteV1;
+  cena02_previsao: CenaArteV1;
+  cena03_vocabulario: CenaArteV1;
+  cena04_leituraGuiada: CenaArteV1;
+  cena05_compreensao: CenaArteV1;
+  cena06_personagensLugar: CenaArteV1;
+  cena07_sequencia: CenaArteV1;
+  cena08_voceLe: CenaArteV1;
+  cena09_minijogo: CenaArteV1;
+  cena10_revisao: CenaArteV1;
+  cena11_avaliacao: CenaArteV1;
+  recompensa: { xp: number; moedas: number; medalha?: string };
+};
+
+export type UnidadeArteV1 = {
+  slug: string;
+  numero: number;
+  titulo: string;
+  subtitulo: string;
+  descricao: string;
+  corTema: string;
+  aulas: AulaArteV1[];
+};
+
+export type CursoArteV1 = {
+  slug: string;
+  disciplina: string;
+  ano: string;
+  titulo: string;
+  descricao: string;
+  corPrimaria: string;
+  corSecundaria: string;
+  tipoAula: "arte-v1";
+  unidades: UnidadeArteV1[];
+};
 
 
