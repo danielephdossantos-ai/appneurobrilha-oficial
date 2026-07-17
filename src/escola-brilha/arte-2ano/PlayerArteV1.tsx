@@ -269,9 +269,44 @@ function LupaGrandeIlustracao() {
   );
 }
 
+function NotaMusicalColorida({ hex }: { hex: string }) {
+  return (
+    <svg viewBox="0 0 90 130" width="56" height="82" className="drop-shadow-md">
+      {/* Haste */}
+      <rect x="55" y="18" width="7" height="82" rx="2" fill="#2d2d2d" />
+      {/* Bandeirola */}
+      <path d="M62 18 C 82 30, 84 52, 68 62 C 78 48, 74 34, 62 30 Z" fill={hex} stroke="#2d2d2d" strokeWidth="2" />
+      {/* Cabeça da nota */}
+      <ellipse cx="42" cy="100" rx="22" ry="16" fill={hex} stroke="#2d2d2d" strokeWidth="2.5" transform="rotate(-18 42 100)" />
+      <ellipse cx="36" cy="94" rx="6" ry="3" fill="#ffffff" opacity="0.55" transform="rotate(-18 36 94)" />
+    </svg>
+  );
+}
+
+function NotaGrandeIlustracao() {
+  return (
+    <div className="flex justify-center mb-4">
+      <svg viewBox="0 0 240 180" width="200" height="150" className="drop-shadow-lg">
+        {/* Pauta suave */}
+        {[40, 62, 84, 106, 128].map((y) => (
+          <line key={y} x1="20" y1={y} x2="220" y2={y} stroke="#2d2d2d" strokeWidth="1.5" opacity="0.35" />
+        ))}
+        {/* Clave estilizada */}
+        <path d="M55 40 C 40 70, 80 90, 70 120 C 62 145, 40 138, 45 118 C 50 100, 78 100, 82 120" fill="none" stroke="#2d2d2d" strokeWidth="5" strokeLinecap="round" />
+        {/* Nota grande */}
+        <rect x="150" y="30" width="7" height="90" rx="2" fill="#2d2d2d" />
+        <path d="M157 30 C 185 44, 188 72, 168 84 C 182 68, 176 50, 157 46 Z" fill="#F0C24A" stroke="#2d2d2d" strokeWidth="2" />
+        <ellipse cx="135" cy="122" rx="22" ry="15" fill="#D64545" stroke="#2d2d2d" strokeWidth="2.5" transform="rotate(-18 135 122)" />
+        <ellipse cx="129" cy="116" rx="6" ry="3" fill="#ffffff" opacity="0.6" transform="rotate(-18 129 116)" />
+      </svg>
+    </div>
+  );
+}
+
 function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "historia" }>; say: (t: string) => Promise<void> }) {
   useEffect(() => { say(etapa.texto); }, []);
   const usarLupa = etapa.icone === "lupa";
+  const usarNota = etapa.icone === "nota";
   return (
     <div className="paper-card p-6">
       <div className="flex items-start justify-between gap-3 mb-3">
@@ -279,6 +314,7 @@ function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "hi
         <BtnFala onClick={() => say(etapa.texto)} />
       </div>
       {usarLupa && <LupaGrandeIlustracao />}
+      {usarNota && <NotaGrandeIlustracao />}
       <p className="text-lg leading-relaxed mb-5">{etapa.texto}</p>
       <div className="grid grid-cols-5 gap-3 mb-5">
         {etapa.lapis.map((l) => (
@@ -286,9 +322,9 @@ function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "hi
             key={l.cor}
             onClick={() => say(l.frase)}
             className="flex flex-col items-center gap-1 group transition active:scale-95"
-            aria-label={`${usarLupa ? "Lupa" : "Lápis"} ${l.cor}`}
+            aria-label={`${usarLupa ? "Lupa" : usarNota ? "Nota" : "Lápis"} ${l.cor}`}
           >
-            {usarLupa ? <LupaColorida hex={l.hex} /> : <LapisDeCor hex={l.hex} />}
+            {usarLupa ? <LupaColorida hex={l.hex} /> : usarNota ? <NotaMusicalColorida hex={l.hex} /> : <LapisDeCor hex={l.hex} />}
             <div className="text-xs font-bold opacity-80 group-hover:opacity-100 mt-1">{NOMES_CORES[l.cor]}</div>
             <div className="text-[11px] opacity-60">{l.emocao}</div>
           </button>
