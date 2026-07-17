@@ -273,8 +273,6 @@ function Index() {
         {/* Lembretes de provas e trabalhos — clicáveis */}
         {activeChild && <LembretesDiarios childId={activeChild.id} />}
 
-        <ArteAtalhoCard />
-
         {/* Grade completa — todas as 12 categorias */}
         <div>
           <div className="flex items-center gap-2 mb-2 px-0.5">
@@ -424,10 +422,6 @@ function Index() {
             </motion.div>
           </div>
 
-          <div className="relative z-20 max-w-5xl mx-auto px-8 pb-4">
-            <ArteAtalhoCard />
-          </div>
-
           {/* Grade 4×3 desktop — todas as 12 */}
           <div className="relative z-10 px-8 pb-10">
             <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
@@ -541,37 +535,6 @@ function Index() {
         </div>
       </div>
     </Shell>
-  );
-}
-
-function ArteAtalhoCard() {
-  return (
-    <Link
-      to="/escola-brilha/trilha/$serie/$disc"
-      params={{ serie: "2ano", disc: "arte" }}
-      className="block rounded-[1.4rem] overflow-hidden border-[2.5px] border-white/85 active:scale-[0.98] transition-transform shadow-lg"
-      style={{
-        background: "linear-gradient(135deg, #0d1f55 0%, #1D4ED8 58%, #FF8A4C 100%)",
-        boxShadow: "0 5px 0 rgba(0,0,0,0.18), 0 0 18px rgba(76,158,255,0.45)",
-      }}
-    >
-      <div className="flex items-center gap-3 p-3 md:p-4">
-        <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl bg-white/18 border-2 border-white/25 grid place-items-center text-3xl shrink-0">
-          🎨
-        </div>
-        <div className="min-w-0 text-white">
-          <div className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.22em] text-white/70">
-            Arte · 2º Ano
-          </div>
-          <div className="text-sm md:text-lg font-black leading-tight">
-            Trilha Ateliê das Cores
-          </div>
-          <div className="text-[10px] md:text-[11px] font-bold text-white/85 mt-0.5">
-            Abrir mapa Duolingo →
-          </div>
-        </div>
-      </div>
-    </Link>
   );
 }
 

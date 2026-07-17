@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
-import { listAulasArte } from "@/escola-brilha/arte-2ano/registry";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
@@ -53,7 +52,7 @@ export const Route = createFileRoute("/escola-brilha/trilha/$serie/$disc")({
   component: TrilhaSerieDisc,
 });
 
-type HabRow = { codigo: string; titulo: string; ano: string; unidade?: number; tituloUnidade?: string };
+type HabRow = { codigo: string; titulo: string; ano: string };
 
 function TrilhaSerieDisc() {
   const { serie, disc } = Route.useParams();
@@ -75,24 +74,7 @@ function TrilhaSerieDisc() {
 
   const escritas = useMemo(() => new Set(listAulas().map((a) => a.codigo.toUpperCase())), []);
 
-  const isArte2ano = serie === "2ano" && disc === "arte";
-
   useEffect(() => {
-    if (isArte2ano) {
-      // Arte 2ano tem registry próprio e roteia para /escola-brilha/arte/2ano/$aula
-      const rows: HabRow[] = listAulasArte()
-        .sort((a, b) => (a.unidade - b.unidade) || (a.aula - b.aula))
-        .map((a) => ({
-          codigo: a.id,
-          titulo: `Aula ${a.aula} · ${a.titulo}`,
-          ano: "2º Ano",
-          unidade: a.unidade,
-          tituloUnidade: a.tituloUnidade,
-        }));
-      setHabilidades(rows);
-      setLoading(false);
-      return;
-    }
     (async () => {
       const PAGE = 1000;
       const acc: Array<{ codigo_bncc: string; titulo: string | null; ano: string | null; disciplina: string | null }> = [];
@@ -115,7 +97,7 @@ function TrilhaSerieDisc() {
       setHabilidades(rows);
       setLoading(false);
     })();
-  }, [serie, disc, escritas, isArte2ano]);
+  }, [serie, disc, escritas]);
 
   useEffect(() => {
     if (!activeChild?.id) return;
@@ -187,56 +169,42 @@ function TrilhaSerieDisc() {
               const eProxima = i === proximoIdx && !concluida;
               const align = i % 2 === 0 ? "justify-start" : "justify-end";
               return (
-                <div key={h.codigo} className="space-y-2">
-                  {isArte2ano && h.unidade && h.tituloUnidade && (
-                    <div className="rounded-2xl bg-white/10 border border-white/15 px-4 py-3 text-center shadow-inner">
-                      <div className="text-[10px] font-black uppercase tracking-[0.22em] text-amber-300">
-                        Unidade {h.unidade}
-                      </div>
-                      <div className="text-base font-black leading-tight text-white">
-                        {h.tituloUnidade}
+                <div key={h.codigo} className={`flex ${align}`}>
+                  <button
+                    disabled={!desbloqueada}
+                    onClick={() =>
+                      navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
+                    }
+                    className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
+                      desbloqueada
+                        ? "text-[#0d1f55] shadow-xl hover:scale-105"
+                        : "bg-white/10 text-white/40 cursor-not-allowed"
+                    } ${eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""}`}
+                    style={
+                      desbloqueada
+                        ? {
+                            background: `linear-gradient(135deg, ${mascote.corPrimaria}, #fde68a)`,
+                          }
+                        : undefined
+                    }
+                  >
+                    <div className="text-center px-3">
+                      <div className="text-4xl">{tema.emoji}</div>
+                      <div className="text-[11px] font-bold mt-1 leading-tight line-clamp-3">
+                        {h.titulo}
                       </div>
                     </div>
-                  )}
-                  <div className={`flex ${align}`}>
-                    <button
-                      disabled={!desbloqueada}
-                      onClick={() =>
-                        isArte2ano
-                          ? navigate({ to: "/escola-brilha/arte/2ano/$aula", params: { aula: h.codigo } })
-                          : navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
-                      }
-                      className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
-                        desbloqueada
-                          ? "text-[#0d1f55] shadow-xl hover:scale-105"
-                          : "bg-white/10 text-white/40 cursor-not-allowed"
-                      } ${eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""}`}
-                      style={
-                        desbloqueada
-                          ? {
-                              background: `linear-gradient(135deg, ${mascote.corPrimaria}, #fde68a)`,
-                            }
-                          : undefined
-                      }
-                    >
-                      <div className="text-center px-3">
-                        <div className="text-4xl">{tema.emoji}</div>
-                        <div className="text-[11px] font-bold mt-1 leading-tight line-clamp-3">
-                          {h.titulo}
-                        </div>
+                    {concluida && (
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-500 grid place-items-center text-white text-lg">
+                        ✓
                       </div>
-                      {concluida && (
-                        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-500 grid place-items-center text-white text-lg">
-                          ✓
-                        </div>
-                      )}
-                      {!desbloqueada && (
-                        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white/20 grid place-items-center">
-                          🔒
-                        </div>
-                      )}
-                    </button>
-                  </div>
+                    )}
+                    {!desbloqueada && (
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white/20 grid place-items-center">
+                        🔒
+                      </div>
+                    )}
+                  </button>
                 </div>
               );
             })}

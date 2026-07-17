@@ -232,7 +232,6 @@ function EscolaBrilhaCatalogo() {
           <span className="text-xs font-bold opacity-80">Escolher / Desbloquear →</span>
         </Link>
 
-
         {/* Filtro */}
 
         <div className="flex gap-2 mb-4">
@@ -348,27 +347,6 @@ function EscolaBrilhaCatalogo() {
                           </div>
                         </Link>
                       )}
-
-                      {serie === "2º Ano" && (
-                        <Link
-                          to="/escola-brilha/trilha/$serie/$disc"
-                          params={{ serie: "2ano", disc: "arte" }}
-                          className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                          style={{ background: "linear-gradient(135deg, #d97a4a, #b85450)" }}
-                        >
-                          <div className="text-[10px] uppercase tracking-widest opacity-90">
-                            🎨 Arte · 2º Ano
-                          </div>
-                          <div className="text-lg leading-tight mt-0.5">
-                            🖌️ Ateliê das Cores
-                          </div>
-                          <div className="text-[11px] font-bold opacity-90 mt-1">
-                            Trilha estilo Duolingo — abrir mapa de aulas →
-                          </div>
-                        </Link>
-                      )}
-
-
 
 
                       {disciplinas.length === 0 && (

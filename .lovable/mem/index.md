@@ -17,7 +17,6 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 **PT-BR obrigatório em imagens**: mapas, infográficos e qualquer texto embutido em imagem gerada devem estar 100% em português brasileiro — nunca inglês. Ver [Português somente](mem://constraints/portugues-somente).
 
 ## Memories
-- [Identidade visual Escola Brilha](mem://preferences/identidade-visual-escola-brilha) — Shell do app é OBRIGATÓRIO em todo curso novo. Trilha da série sempre em estilo Duolingo. Cards navy/amber. Cada matéria pode ter identidade própria (mascote/mecânica), mas dentro do shell. Geografia, História, Ciências TRAVADAS.
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
 - [Postura de professor excelente](mem://preferences/postura-professor-excelente) — Mapa idade × série.
 - [Padrão EF01MA02 travado](mem://features/padrao-ef01ma02) — Gabarito obrigatório.
