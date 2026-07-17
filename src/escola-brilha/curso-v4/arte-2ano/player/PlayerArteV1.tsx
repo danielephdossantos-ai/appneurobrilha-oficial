@@ -197,12 +197,15 @@ function CenaMisturaCores({
     return Array.from(map.values());
   }, [cena]);
 
+  const [indiceDesafio, setIndiceDesafio] = useState(0);
   const [caldeirao, setCaldeirao] = useState<string[]>([]);
   const [resultado, setResultado] = useState<Mistura | null>(null);
   const [descobertas, setDescobertas] = useState<string[]>([]);
   const [erro, setErro] = useState<string | null>(null);
-  const [dragId, setDragId] = useState<string | null>(null);
   const jaFalou = useRef(false);
+
+  const desafio = cena.misturas[indiceDesafio];
+  const idsCorretosDoDesafio = desafio ? [desafio.primariaA.id, desafio.primariaB.id] : [];
 
   const caldeiraoCor = resultado?.resultado.hex ??
     (caldeirao.length === 1 ? potes.find((p) => p.id === caldeirao[0])?.hex ?? "#312e81" : "#312e81");
@@ -211,28 +214,39 @@ function CenaMisturaCores({
     if (ativa && !jaFalou.current) { speakChunked(cena.aurora); jaFalou.current = true; }
   }, [ativa, cena.aurora]);
 
-  const soltar = (idPote: string) => {
-    if (resultado || caldeirao.includes(idPote)) return;
+  const limpar = () => { setCaldeirao([]); setResultado(null); setErro(null); cancelSpeak(); };
+
+  const tocarPote = (idPote: string) => {
+    if (resultado || caldeirao.includes(idPote) || !desafio) return;
     const novo = [...caldeirao, idPote];
     setCaldeirao(novo);
+    setErro(null);
+
     if (novo.length === 2) {
       const [a, b] = novo;
-      const achou = cena.misturas.find(
-        (m) => (m.primariaA.id === a && m.primariaB.id === b) || (m.primariaA.id === b && m.primariaB.id === a),
-      );
-      if (achou) {
-        setResultado(achou);
-        setDescobertas((d) => (d.includes(achou.id) ? d : [...d, achou.id]));
-        setErro(null);
+      const acertou =
+        (a === desafio.primariaA.id && b === desafio.primariaB.id) ||
+        (a === desafio.primariaB.id && b === desafio.primariaA.id);
+
+      if (acertou) {
+        setResultado(desafio);
+        setDescobertas((d) => (d.includes(desafio.id) ? d : [...d, desafio.id]));
         cancelSpeak();
-        setTimeout(() => speakChunked(achou.falaAcerto), 500);
+        setTimeout(() => speakChunked(desafio.falaAcerto), 400);
+        setTimeout(() => {
+          if (indiceDesafio < cena.misturas.length - 1) {
+            setIndiceDesafio((i) => i + 1);
+            setCaldeirao([]);
+            setResultado(null);
+          }
+        }, 2600);
       } else {
-        setErro("Essas duas cores não fazem uma mistura nova. Tenta outra combinação!");
+        setErro(`Ops! Essa mistura não faz ${desafio.resultado.nome}. Tenta outra combinação!`);
+        setTimeout(() => { setCaldeirao([]); setErro(null); }, 1400);
       }
     }
   };
 
-  const limpar = () => { setCaldeirao([]); setResultado(null); setErro(null); cancelSpeak(); };
   const todasFeitas = descobertas.length === cena.misturas.length;
 
   useEffect(() => {
@@ -245,14 +259,22 @@ function CenaMisturaCores({
   return (
     <Painel>
       <FalaAurora texto={cena.aurora} />
-      <div className="text-center text-sm font-bold text-amber-200 mb-3">{cena.instrucao}</div>
+      <div className="text-center text-sm font-bold text-amber-200 mb-2">{cena.instrucao}</div>
+
+      {desafio && !todasFeitas && (
+        <div className="mb-3 rounded-2xl bg-white/10 border-2 border-amber-300/50 p-3 text-center">
+          <div className="text-[11px] uppercase tracking-widest text-amber-200 mb-1">Missão {indiceDesafio + 1} de {cena.misturas.length}</div>
+          <div className="text-white font-bold text-sm mb-2">Misture DOIS potes para fazer:</div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-slate-900 font-black shadow-lg border-4"
+            style={{ borderColor: desafio.resultado.hex }}>
+            <span className="w-6 h-6 rounded-full border-2 border-slate-900/20" style={{ backgroundColor: desafio.resultado.hex }} />
+            {desafio.resultado.nome}
+          </div>
+        </div>
+      )}
 
       <div className="relative mx-auto w-full max-w-xs aspect-square mb-4">
-        <div
-          className={`absolute inset-0 rounded-full transition-all border-4 ${dragId ? "border-amber-300 scale-105" : "border-white/30"} bg-gradient-to-b from-stone-700 to-stone-900 shadow-inner`}
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => { e.preventDefault(); const id = e.dataTransfer.getData("text/plain"); if (id) soltar(id); setDragId(null); }}
-        >
+        <div className="absolute inset-0 rounded-full border-4 border-white/30 bg-gradient-to-b from-stone-700 to-stone-900 shadow-inner">
           <div className="absolute inset-6 rounded-full overflow-hidden">
             <motion.div key={caldeiraoCor}
               initial={{ scale: 0.7, opacity: 0.5 }} animate={{ scale: 1, opacity: 1 }}
@@ -282,19 +304,21 @@ function CenaMisturaCores({
         </div>
       </div>
 
-      {erro && <div className="mb-3 rounded-xl bg-rose-500/20 border border-rose-400/40 p-3 text-sm text-center font-medium">{erro}</div>}
+      {erro && <div className="mb-3 rounded-xl bg-rose-500/20 border border-rose-400/40 p-3 text-sm text-center font-medium text-white">{erro}</div>}
 
       <div className="grid grid-cols-3 gap-3 mb-4">
         {potes.map((p) => {
           const jaNo = caldeirao.includes(p.id);
+          const dica = desafio && idsCorretosDoDesafio.includes(p.id) && caldeirao.length === 1 && caldeirao[0] !== p.id;
           return (
             <button key={p.id}
-              draggable={!jaNo && !resultado}
-              onDragStart={(e) => { e.dataTransfer.setData("text/plain", p.id); setDragId(p.id); }}
-              onDragEnd={() => setDragId(null)}
-              onClick={() => !jaNo && !resultado && soltar(p.id)}
+              onClick={() => tocarPote(p.id)}
               disabled={jaNo || !!resultado}
-              className={`relative aspect-square rounded-2xl border-4 border-white/40 flex flex-col items-center justify-center gap-1 font-black text-white shadow-lg transition-all ${jaNo || resultado ? "opacity-40 cursor-not-allowed" : "hover:scale-110 active:scale-95 cursor-grab"}`}
+              className={`relative aspect-square rounded-2xl border-4 flex flex-col items-center justify-center gap-1 font-black text-white shadow-lg transition-all ${
+                jaNo || resultado ? "opacity-40 cursor-not-allowed border-white/20" :
+                dica ? "border-amber-300 animate-pulse hover:scale-110" :
+                "border-white/40 hover:scale-110 active:scale-95"
+              }`}
               style={{ backgroundColor: p.hex }}>
               <div className="text-3xl drop-shadow">🎨</div>
               <div className="text-xs uppercase tracking-wider drop-shadow-lg">{p.nome}</div>
@@ -304,7 +328,7 @@ function CenaMisturaCores({
       </div>
 
       <div className="flex items-center justify-between text-xs text-white/80 mb-3">
-        <span className="font-bold">Misturas: {descobertas.length} / {cena.misturas.length}</span>
+        <span className="font-bold">Descobertas: {descobertas.length} / {cena.misturas.length}</span>
         <button onClick={limpar} className="px-3 py-1 rounded-lg bg-white/10 border border-white/25 hover:bg-white/20 font-bold text-xs">
           🧽 Limpar
         </button>
