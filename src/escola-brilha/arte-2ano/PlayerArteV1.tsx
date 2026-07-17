@@ -2380,7 +2380,8 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
     cv.width = rect.width * 2; cv.height = rect.height * 2;
     const cx = cv.getContext("2d"); if (!cx) return;
     cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round"; cx.lineWidth = 4; cx.strokeStyle = cor;
-  }, [cor]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
   useEffect(() => {
     const cx = canvasRef.current?.getContext("2d"); if (cx) cx.strokeStyle = cor;
