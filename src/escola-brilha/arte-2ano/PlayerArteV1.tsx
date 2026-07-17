@@ -1115,6 +1115,8 @@ const MODELOS_PINTURA_MUSICA: { id: string; nome: string; emoji: string; render:
 
 function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "musica-e-arte" }>; say: (t: string) => Promise<void> }) {
   const [tocando, setTocando] = useState(false);
+  const [modeloId, setModeloId] = useState<string>(MODELOS_PINTURA_MUSICA[0].id);
+  const [canvasKey, setCanvasKey] = useState<number>(0);
   const ctxRef = useRef<AudioContext | null>(null);
   const masterRef = useRef<GainNode | null>(null);
   const timeoutRef = useRef<number | null>(null);
