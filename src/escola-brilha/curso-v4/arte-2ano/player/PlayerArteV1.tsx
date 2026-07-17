@@ -684,9 +684,14 @@ function CenaPintarAnimais({
         Animal {idx + 1} / {cena.animais.length}
       </div>
 
-      <div className="relative mx-auto w-40 h-40 rounded-full grid place-items-center mb-4 border-4 border-white/30 transition-colors"
+      <div className="relative mx-auto w-44 h-44 rounded-full grid place-items-center mb-4 border-4 border-white/30 overflow-hidden transition-colors"
         style={{ backgroundColor: pintado === animal.corAlvo.hex ? animal.corAlvo.hex : "rgba(255,255,255,0.1)" }}>
-        <div className="text-7xl drop-shadow-lg" style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.7)" }}>{animal.emoji}</div>
+        {animal.fotoUrl ? (
+          <img src={animal.fotoUrl} alt={animal.nome} loading="lazy" className="w-full h-full object-cover transition-all"
+            style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.6)" }} />
+        ) : (
+          <div className="text-7xl drop-shadow-lg" style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.7)" }}>{animal.emoji}</div>
+        )}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-slate-900 px-3 py-0.5 rounded-full text-xs font-black shadow">{animal.nome}</div>
       </div>
 
