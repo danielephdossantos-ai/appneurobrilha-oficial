@@ -1,4 +1,21 @@
 import type { AulaArteV1 } from "../../types";
+import vocabAspero from "@/assets/arte-2ano/u3-vocab-aspero.jpg";
+import vocabLiso from "@/assets/arte-2ano/u3-vocab-liso.jpg";
+import vocabMacio from "@/assets/arte-2ano/u3-vocab-macio.jpg";
+import vocabFrotagem from "@/assets/arte-2ano/u3-vocab-frotagem.jpg";
+import pigMadeira from "@/assets/arte-2ano/u3-pig-madeira.jpg";
+import pigFolha from "@/assets/arte-2ano/u3-pig-folha.jpg";
+import pigMoeda from "@/assets/arte-2ano/u3-pig-moeda.jpg";
+import pigTijolo from "@/assets/arte-2ano/u3-pig-tijolo.jpg";
+import animalOvelha from "@/assets/arte-2ano/u3-animal-ovelha.jpg";
+import animalPeixe from "@/assets/arte-2ano/u3-animal-peixe.jpg";
+import animalTatu from "@/assets/arte-2ano/u3-animal-tatu.jpg";
+import passo1Img from "@/assets/arte-2ano/u3-passo1-folha.jpg";
+import passo2Img from "@/assets/arte-2ano/u3-passo2-papel.jpg";
+import passo3Img from "@/assets/arte-2ano/u3-passo3-lapis.jpg";
+import passo4Img from "@/assets/arte-2ano/u3-passo4-esfregar.jpg";
+import passo5Img from "@/assets/arte-2ano/u3-passo5-magico.jpg";
+
 
 /**
  * Arte · 2º Ano · Unidade 3 · Aula 01 — "Texturas: o mundo que a mão sente"
@@ -65,10 +82,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada palavra do vocabulário do artista das texturas.",
     cards: [
-      { termo: "Áspero", definicao: "Cheio de saliências, arranha um pouquinho. Ex: casca de árvore.", emoji: "🌳", cor: "#78350f" },
-      { termo: "Liso", definicao: "Sem relevos, a mão desliza. Ex: vidro, mármore.", emoji: "🪞", cor: "#0ea5e9" },
-      { termo: "Macio", definicao: "Fofinho, cede quando aperta. Ex: algodão, pluma.", emoji: "☁️", cor: "#f3f4f6" },
-      { termo: "Frotagem", definicao: "Coloca papel sobre uma textura e passa lápis: aparece o desenho dela!", emoji: "✏️", cor: "#a855f7" },
+      { termo: "Áspero", definicao: "Cheio de saliências, arranha um pouquinho. Ex: casca de árvore.", emoji: "🌳", cor: "#78350f", fotoUrl: vocabAspero },
+      { termo: "Liso", definicao: "Sem relevos, a mão desliza. Ex: vidro, mármore.", emoji: "🪞", cor: "#0ea5e9", fotoUrl: vocabLiso },
+      { termo: "Macio", definicao: "Fofinho, cede quando aperta. Ex: algodão, pluma.", emoji: "☁️", cor: "#f3f4f6", fotoUrl: vocabMacio },
+      { termo: "Frotagem", definicao: "Coloca papel sobre uma textura e passa lápis: aparece o desenho dela!", emoji: "✏️", cor: "#a855f7", fotoUrl: vocabFrotagem },
     ],
   },
 
@@ -82,10 +99,10 @@ export const aula01: AulaArteV1 = {
       "Cada superfície virava um desenho novo. E hoje, no mundo todo, crianças e artistas usam essa técnica pra colecionar texturas.",
     ],
     pigmentos: [
-      { nome: "Madeira", hex: "#78350f", fonte: "Veios do assoalho", emoji: "🪵" },
-      { nome: "Folha de árvore", hex: "#16a34a", fonte: "Nervuras finas", emoji: "🍃" },
-      { nome: "Moeda", hex: "#eab308", fonte: "Relevo do desenho", emoji: "🪙" },
-      { nome: "Tijolo", hex: "#dc2626", fonte: "Ranhuras ásperas", emoji: "🧱" },
+      { nome: "Madeira", hex: "#78350f", fonte: "Veios do assoalho", emoji: "🪵", fotoUrl: pigMadeira },
+      { nome: "Folha de árvore", hex: "#16a34a", fonte: "Nervuras finas", emoji: "🍃", fotoUrl: pigFolha },
+      { nome: "Moeda", hex: "#eab308", fonte: "Relevo do desenho", emoji: "🪙", fotoUrl: pigMoeda },
+      { nome: "Tijolo", hex: "#dc2626", fonte: "Ranhuras ásperas", emoji: "🧱", fotoUrl: pigTijolo },
     ],
   },
 
@@ -128,7 +145,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada bicho tem uma textura. Escolhe qual combina com a pele dele!",
     animais: [
       {
-        nome: "Ovelha", emoji: "🐑",
+        nome: "Ovelha", emoji: "🐑", fotoUrl: animalOvelha,
         corAlvo: { nome: "Fofa e felpuda", hex: "#f3f4f6" },
         opcoes: [
           { nome: "Fofa e felpuda", hex: "#f3f4f6" },
@@ -138,7 +155,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Isso! A lã da ovelha é a coisa mais fofa da fazenda.",
       },
       {
-        nome: "Peixe", emoji: "🐟",
+        nome: "Peixe", emoji: "🐟", fotoUrl: animalPeixe,
         corAlvo: { nome: "Lisa e escorregadia", hex: "#0ea5e9" },
         opcoes: [
           { nome: "Espinhenta", hex: "#dc2626" },
@@ -148,7 +165,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Peixe é lisinho pra deslizar na água!",
       },
       {
-        nome: "Tatu-bola", emoji: "🦔",
+        nome: "Tatu-bola", emoji: "🦔", fotoUrl: animalTatu,
         corAlvo: { nome: "Casca dura", hex: "#78350f" },
         opcoes: [
           { nome: "Fofa e felpuda", hex: "#f3f4f6" },
@@ -164,11 +181,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA pra fazer uma frotagem de folha.",
     passos: [
-      { id: "p1", texto: "Escolho uma folha bem cheia de nervuras", emoji: "🍃", ordem: 1 },
-      { id: "p2", texto: "Coloco a folha embaixo do papel branco", emoji: "📄", ordem: 2 },
-      { id: "p3", texto: "Pego um lápis de cor DEITADO", emoji: "✏️", ordem: 3 },
-      { id: "p4", texto: "Esfrego o lápis por cima do papel bem devagar", emoji: "🖐️", ordem: 4 },
-      { id: "p5", texto: "A textura da folha aparece como MÁGICA!", emoji: "✨", ordem: 5 },
+      { id: "p1", texto: "Escolho uma folha bem cheia de nervuras", emoji: "🍃", ordem: 1, fotoUrl: passo1Img },
+      { id: "p2", texto: "Coloco a folha embaixo do papel branco", emoji: "📄", ordem: 2, fotoUrl: passo2Img },
+      { id: "p3", texto: "Pego um lápis de cor DEITADO", emoji: "✏️", ordem: 3, fotoUrl: passo3Img },
+      { id: "p4", texto: "Esfrego o lápis por cima do papel bem devagar", emoji: "🖐️", ordem: 4, fotoUrl: passo4Img },
+      { id: "p5", texto: "A textura da folha aparece como MÁGICA!", emoji: "✨", ordem: 5, fotoUrl: passo5Img },
     ],
     falaAcerto: "Frotagem perfeita! O papel virou um retrato da natureza.",
   },
