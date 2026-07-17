@@ -806,11 +806,11 @@ function CenaSequencia({
                 usado ? "bg-white/5 border-white/10 opacity-40" : "bg-white/10 border-white/25 hover:bg-white/20 active:scale-95"
               }`}>
               {p.fotoUrl ? (
-                <img src={p.fotoUrl} alt="" loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
+                <img src={p.fotoUrl} alt="" loading="lazy" className="w-24 h-24 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
               ) : (
-                <span className="text-xl shrink-0">{p.emoji}</span>
+                <span className="text-2xl shrink-0">{p.emoji}</span>
               )}
-              <span>{p.texto}</span>
+              <span className="min-w-0">{p.texto}</span>
             </button>
           );
         })}
