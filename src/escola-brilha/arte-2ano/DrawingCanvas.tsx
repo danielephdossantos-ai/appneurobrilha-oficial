@@ -9,19 +9,10 @@ import { useEffect, useRef, useState } from "react";
  * - Botão exporta PNG e chama onExportar(blob, dataUrl)
  */
 
-const CORES = [
-  { nome: "Preto", hex: "#2a1a10" },
-  { nome: "Vermelho", hex: "#e53e3e" },
-  { nome: "Rosa", hex: "#f472b6" },
-  { nome: "Laranja", hex: "#fb923c" },
-  { nome: "Amarelo", hex: "#fbbf24" },
-  { nome: "Verde", hex: "#22c55e" },
-  { nome: "Azul", hex: "#3b82f6" },
-  { nome: "Roxo", hex: "#a855f7" },
-  { nome: "Marrom", hex: "#8b5a2b" },
-  { nome: "Pele clara", hex: "#f4d1ae" },
-  { nome: "Pele média", hex: "#c99172" },
-  { nome: "Pele escura", hex: "#6b4423" },
+const CORES_PADRAO = [
+  "#2a1a10", "#e53e3e", "#f472b6", "#fb923c", "#fbbf24",
+  "#22c55e", "#3b82f6", "#a855f7", "#8b5a2b",
+  "#f4d1ae", "#c99172", "#6b4423",
 ];
 
 const ESPESSURAS = [
@@ -36,6 +27,8 @@ type Props = {
   textoBotao?: string;
   onExportar?: (blob: Blob, dataUrl: string) => void | Promise<void>;
   ocultarExportar?: boolean;
+  /** Paleta customizada (hex). Se ausente, usa a padrão do ateliê. */
+  paleta?: string[];
 };
 
 export function DrawingCanvas({
@@ -44,11 +37,13 @@ export function DrawingCanvas({
   textoBotao = "💾 Salvar meu desenho",
   onExportar,
   ocultarExportar = false,
+  paleta,
 }: Props) {
+  const cores = paleta && paleta.length > 0 ? paleta : CORES_PADRAO;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const desenhandoRef = useRef(false);
   const ultimoRef = useRef<{ x: number; y: number } | null>(null);
-  const [cor, setCor] = useState(CORES[0].hex);
+  const [cor, setCor] = useState(cores[0]);
   const [espessura, setEspessura] = useState(ESPESSURAS[1].valor);
   const [borracha, setBorracha] = useState(false);
   const [salvando, setSalvando] = useState(false);
@@ -137,21 +132,21 @@ export function DrawingCanvas({
     <div className="rounded-2xl border-2 border-rose-200 bg-white p-3 shadow-sm">
       {/* Paleta */}
       <div className="flex flex-wrap gap-2 mb-2">
-        {CORES.map((c) => (
+        {cores.map((c) => (
           <button
-            key={c.hex}
+            key={c}
             type="button"
             onClick={() => {
-              setCor(c.hex);
+              setCor(c);
               setBorracha(false);
             }}
-            title={c.nome}
+            title={c}
             className={`w-8 h-8 rounded-full border-2 transition ${
-              !borracha && cor === c.hex
+              !borracha && cor === c
                 ? "border-rose-500 scale-110 shadow"
                 : "border-white/70 shadow-sm"
             }`}
-            style={{ background: c.hex }}
+            style={{ background: c }}
           />
         ))}
       </div>
