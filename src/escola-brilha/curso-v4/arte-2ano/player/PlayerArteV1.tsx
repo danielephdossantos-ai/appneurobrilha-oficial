@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { AulaArteV1, CenaArteV1 } from "@/escola-brilha/curso-v4/types";
-import { speakChunked, cancelSpeak } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking as cancelSpeak } from "@/lib/native-tts";
 
 /**
  * PlayerArteV1 — player 100% custom de Arte (2º ano em diante).
