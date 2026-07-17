@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { AulaArteV1, CenaArteV1, CorPrimariaId, PotePrimario } from "@/escola-brilha/curso-v4/types";
 import { speakChunked, stopSpeaking as cancelSpeak } from "@/lib/native-tts";
+import { useMascot } from "@/contexts/MascotContext";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
@@ -146,12 +147,21 @@ function CenaRenderer({
 // UI helpers
 // ============================================================================
 function FalaAurora({ texto }: { texto: string }) {
+  const { activeMascot } = useMascot();
+  const nome = activeMascot?.mascot?.name ?? "Mascote Brilha";
+  const img = activeMascot?.mascot?.image_url;
   return (
     <div className="flex items-start gap-3 mb-4">
-      <div className="text-4xl shrink-0 drop-shadow">🧑‍🎨</div>
-      <div className="rounded-2xl bg-white/15 border border-white/25 p-3 text-sm leading-relaxed font-medium">
+      <div className="shrink-0 w-14 h-14 rounded-full overflow-hidden bg-white/20 border-2 border-amber-300/60 shadow-lg grid place-items-center">
+        {img ? (
+          <img src={img} alt={nome} className="w-full h-full object-cover" />
+        ) : (
+          <span className="text-[10px] text-white/70 text-center px-1 font-bold">Escolha seu mascote na loja</span>
+        )}
+      </div>
+      <div className="rounded-2xl bg-white/15 border border-white/25 p-3 text-sm leading-relaxed font-medium flex-1">
         <div className="text-[10px] uppercase tracking-widest text-amber-200 font-black mb-1">
-          Professora Aurora
+          {nome}
         </div>
         {texto}
         <button
@@ -163,6 +173,7 @@ function FalaAurora({ texto }: { texto: string }) {
     </div>
   );
 }
+
 
 function BotaoProxima({ onProxima, ehUltima, label }: { onProxima: () => void; ehUltima: boolean; label?: string }) {
   return (
