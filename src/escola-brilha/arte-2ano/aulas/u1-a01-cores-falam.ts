@@ -1,9 +1,94 @@
-import obraAsset from "@/assets/atelier/atelier-obra.jpg.asset.json";
 import rostoFeliz from "@/assets/neuro-treino/emocoes/feliz.png.asset.json";
 import rostoSono from "@/assets/neuro-treino/emocoes/sono.png.asset.json";
 import rostoSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png.asset.json";
-import rostoTriste from "@/assets/neuro-treino/emocoes/triste.png.asset.json";
 import rostoBravo from "@/assets/neuro-treino/emocoes/bravo.png.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
+
+export type ObraFamosa = {
+  id: string;
+  titulo: string;
+  artista: string;
+  pais: string;
+  ano: string;
+  url: string;
+  cores: string[];
+  sentimento: string;
+  historia: string;
+};
+
+export const OBRAS_FAMOSAS: ObraFamosa[] = [
+  {
+    id: "noite-estrelada",
+    titulo: "A Noite Estrelada",
+    artista: "Vincent van Gogh",
+    pais: "🇳🇱 Holanda",
+    ano: "1889",
+    url: obraNoiteEstrelada.url,
+    cores: ["Azul escuro", "Amarelo", "Branco"],
+    sentimento: "Mistério e movimento",
+    historia: "Van Gogh pintou o céu da noite que via da janela do quarto dele. Ele usou o pincel fazendo rodinhas pra dar a sensação de vento. Você consegue ver os redemoinhos no céu?",
+  },
+  {
+    id: "girassois",
+    titulo: "Os Girassóis",
+    artista: "Vincent van Gogh",
+    pais: "🇳🇱 Holanda",
+    ano: "1888",
+    url: obraGirassois.url,
+    cores: ["Amarelo", "Laranja", "Verde"],
+    sentimento: "Alegria e calor",
+    historia: "Van Gogh amava a cor amarela. Ele dizia que amarelo era a cor da amizade. Por isso pintou muitos girassóis pra decorar o quarto de um amigo artista.",
+  },
+  {
+    id: "nenufares",
+    titulo: "Os Nenúfares",
+    artista: "Claude Monet",
+    pais: "🇫🇷 França",
+    ano: "1906",
+    url: obraNenufares.url,
+    cores: ["Azul", "Verde", "Rosa"],
+    sentimento: "Calma e sonho",
+    historia: "Monet plantou um lago cheio de flores no jardim da casa dele. Ele passava horas pintando as flores boiando na água. Cores suaves fazem a gente se sentir em paz.",
+  },
+  {
+    id: "tarsila",
+    titulo: "A Boneca de Sol",
+    artista: "Inspirado em Tarsila do Amaral",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo de 1928",
+    url: obraTarsila.url,
+    cores: ["Azul", "Amarelo", "Verde", "Marrom"],
+    sentimento: "Brasilidade e sol forte",
+    historia: "Tarsila pintou o Brasil com cores fortes: sol grande e amarelo, terra vermelha, cactos e o céu bem azul. Ela mostrou que o Brasil tem cores próprias!",
+  },
+  {
+    id: "portinari",
+    titulo: "Retrato do Povo",
+    artista: "Inspirado em Cândido Portinari",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo de 1944",
+    url: obraPortinari.url,
+    cores: ["Marrom", "Vermelho", "Cinza"],
+    sentimento: "Respeito e coragem",
+    historia: "Portinari pintou trabalhadores brasileiros com muita dignidade. Ele usou cores da terra pra mostrar que essas pessoas fazem parte do nosso chão.",
+  },
+  {
+    id: "athos",
+    titulo: "Azulejos de Brasília",
+    artista: "Inspirado em Athos Bulcão",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo dos anos 1960",
+    url: obraAthos.url,
+    cores: ["Azul", "Branco", "Preto"],
+    sentimento: "Ritmo e organização",
+    historia: "Athos criou padrões geométricos que decoram prédios de Brasília. Cada azulejo é simples, mas juntos eles formam desenhos incríveis, como uma música feita de formas.",
+  },
+];
 
 export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "laranja" | "rosa" | "branco" | "preto" | "marrom";
 
