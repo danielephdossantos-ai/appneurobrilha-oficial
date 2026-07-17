@@ -941,7 +941,7 @@ const MELODIAS: Record<"alegre" | "calmo" | "misterioso", { bpm: number; notas: 
   },
 };
 
-function MusicaColoringOverlay({ tocando }: { tocando: boolean }) {
+function OverlayNotasMusicais({ tocando }: { tocando: boolean }) {
   return (
     <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
       <defs>
@@ -957,26 +957,18 @@ function MusicaColoringOverlay({ tocando }: { tocando: boolean }) {
           .wv    { stroke-dasharray: 8 6; animation: wave 1.8s linear infinite; }
         `}</style>
       </defs>
-
-      {/* Pentagrama ondulado */}
       <g className="lnT" opacity="0.85">
         {[0,1,2,3,4].map(i => (
           <path key={i} d={`M20 ${170 + i*14} Q120 ${160 + i*14} 220 ${170 + i*14} T400 ${170 + i*14}`} />
         ))}
       </g>
-
-      {/* Onda sonora animada quando tocando */}
       {tocando && (
         <path className="ln wv" d="M10 300 Q50 270 90 300 T170 300 T250 300 T330 300 T410 300" opacity="0.5" />
       )}
-
-      {/* Clave de Sol grande — contorno para pintar */}
       <g transform="translate(48 60)" className="ln">
         <path d="M40 10 C 30 40, 5 55, 5 95 C 5 130, 40 145, 55 120 C 65 100, 55 75, 40 60 C 25 45, 30 25, 45 20 C 60 15, 70 30, 65 45 C 60 60, 50 70, 40 80 L 40 210 C 40 235, 20 250, 5 240" />
         <circle cx="18" cy="230" r="10" />
       </g>
-
-      {/* Notas musicais grandes (bolas + hastes) para pintar */}
       <g className="note-a">
         <ellipse className="fl" cx="180" cy="150" rx="16" ry="12" transform="rotate(-18 180 150)" />
         <path className="ln" d="M195 148 L200 80" />
@@ -991,19 +983,135 @@ function MusicaColoringOverlay({ tocando }: { tocando: boolean }) {
         <ellipse className="fl" cx="360" cy="150" rx="16" ry="12" transform="rotate(-18 360 150)" />
         <path className="ln" d="M340 158 L340 90 L375 82 L375 148" />
       </g>
-
-      {/* Estrelas / brilhos decorativos vazios (pra colorir) */}
       <g className="ln">
         <path d="M155 55 l6 12 13 2 -9 9 2 13 -12 -6 -12 6 2 -13 -9 -9 13 -2 z" />
         <path d="M300 260 l5 10 11 2 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -2 z" />
         <path d="M370 300 l4 8 9 1 -6 6 1 9 -8 -4 -8 4 1 -9 -6 -6 9 -1 z" />
       </g>
-
-      {/* Coração musical vazio */}
       <path className="ln" d="M90 275 c -14 -14 -30 -2 -30 12 c 0 18 30 34 30 34 c 0 0 30 -16 30 -34 c 0 -14 -16 -26 -30 -12 z" />
     </svg>
   );
 }
+
+function OverlayMandala() {
+  const ln = { fill: "none", stroke: "#2D2418", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const petals = Array.from({ length: 12 });
+  return (
+    <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+      <g transform="translate(200 180)">
+        <circle {...ln} r={18} />
+        <circle {...ln} r={42} />
+        <circle {...ln} r={78} />
+        <circle {...ln} r={118} />
+        <circle {...ln} r={150} />
+        {petals.map((_, i) => (
+          <g key={i} transform={`rotate(${(360 / 12) * i})`}>
+            <path {...ln} d="M0 -42 Q 14 -70 0 -118 Q -14 -70 0 -42 Z" />
+            <circle {...ln} cx={0} cy={-134} r={10} />
+            <path {...ln} d="M-6 -150 l 6 12 6 -12 z" />
+          </g>
+        ))}
+        {petals.map((_, i) => (
+          <path key={"p2"+i} {...ln} transform={`rotate(${(360 / 12) * i + 15})`} d="M0 -78 Q 8 -95 0 -118 Q -8 -95 0 -78 Z" />
+        ))}
+      </g>
+    </svg>
+  );
+}
+
+function OverlayPassaroCantando() {
+  const ln = { fill: "none", stroke: "#2D2418", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  return (
+    <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+      <path {...ln} d="M20 300 Q 150 280 260 290 Q 340 296 390 285" />
+      <path {...ln} d="M120 292 q 6 -18 22 -22" />
+      <path {...ln} d="M220 290 q 8 -20 26 -24" />
+      <path {...ln} d="M138 268 q 14 -6 22 4 q -6 14 -22 4 z" />
+      <path {...ln} d="M244 264 q 14 -6 22 4 q -6 14 -22 4 z" />
+      <path {...ln} d="M180 200 q 40 -60 110 -30 q 30 14 30 44 q 0 30 -30 44 q -50 22 -100 -8 q -18 -12 -10 -50 z" />
+      <path {...ln} d="M230 210 q 30 -18 60 -6 q -8 30 -46 32 q -18 1 -14 -26 z" />
+      <path {...ln} d="M244 218 q 14 -6 26 0" />
+      <path {...ln} d="M250 228 q 14 -4 24 2" />
+      <circle {...ln} cx={188} cy={188} r={6} />
+      <path {...ln} d="M176 196 l -22 -4 l 22 6 z" />
+      <path {...ln} d="M176 202 l -22 6 l 22 -2 z" />
+      <path {...ln} d="M320 220 l 42 -6 l -34 18 z" />
+      <path {...ln} d="M220 254 l 0 34 M215 288 l 10 0 M210 288 l 4 -4 M230 288 l -4 -4" />
+      <path {...ln} d="M270 254 l 0 34 M265 288 l 10 0 M260 288 l 4 -4 M280 288 l -4 -4" />
+      <g {...ln}>
+        <circle cx={120} cy={150} r={8} />
+        <path d="M128 150 L 130 118" />
+        <path d="M130 118 q 14 4 16 18" />
+        <circle cx={80} cy={110} r={7} />
+        <path d="M87 110 L 89 78" />
+        <circle cx={50} cy={150} r={6} />
+        <path d="M56 150 L 58 122" />
+      </g>
+      <g {...ln}>
+        <circle cx={350} cy={70} r={18} />
+        <path d="M350 40 v -10 M350 100 v 10 M320 70 h -10 M380 70 h 10 M328 48 l -7 -7 M372 48 l 7 -7 M328 92 l -7 7 M372 92 l 7 7" />
+      </g>
+    </svg>
+  );
+}
+
+function OverlayGuitarra() {
+  const ln = { fill: "none", stroke: "#2D2418", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  return (
+    <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+      <path {...ln} d="M120 260 q -40 -30 -20 -70 q 20 -40 60 -30 q 40 12 60 -14 q 30 -40 70 -14 q 30 22 20 60 q -10 34 -40 42 q -30 8 -30 40 q 0 32 -40 38 q -50 8 -80 -20 q -18 -18 0 -32 z" />
+      <circle {...ln} cx={170} cy={210} r={34} />
+      <circle {...ln} cx={170} cy={210} r={42} />
+      <rect {...ln} x={120} y={248} width={60} height={10} rx={2} />
+      <rect {...ln} x={220} y={120} width={30} height={80} transform="rotate(30 235 160)" />
+      <path {...ln} d="M254 108 l 46 -70" />
+      <path {...ln} d="M266 118 l 46 -70" />
+      <path {...ln} d="M300 20 l 22 12 l -14 24 l -22 -12 z" />
+      {[0,1,2,3,4].map(i => (
+        <path key={i} {...ln} d={`M${125 + i*12} 258 L ${255 + i*8} 92`} strokeWidth={1} />
+      ))}
+      <g {...ln}>
+        <circle cx={60} cy={90} r={8} />
+        <path d="M68 90 L 70 58" />
+        <path d="M70 58 q 14 4 16 18" />
+        <circle cx={340} cy={290} r={7} />
+        <path d="M347 290 L 349 260" />
+      </g>
+    </svg>
+  );
+}
+
+function OverlayCoracaoMusical() {
+  const ln = { fill: "none", stroke: "#2D2418", strokeWidth: 2.4, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  return (
+    <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+      <path {...ln} d="M200 300 C 60 220, 60 100, 150 90 C 180 88, 200 108, 200 130 C 200 108, 220 88, 250 90 C 340 100, 340 220, 200 300 Z" />
+      <g stroke="#2D2418" strokeWidth={1.2} fill="none" opacity={0.9}>
+        {[0,1,2,3,4].map(i => (
+          <path key={i} d={`M120 ${170 + i*10} Q 200 ${162 + i*10} 280 ${170 + i*10}`} />
+        ))}
+      </g>
+      <g {...ln}>
+        <ellipse cx={200} cy={200} rx={18} ry={14} transform="rotate(-18 200 200)" />
+        <path d="M217 197 L 222 130" />
+        <path d="M222 130 q 22 6 24 24" />
+      </g>
+      <g {...ln}>
+        <path d="M90 60 l 6 12 13 2 -9 9 2 13 -12 -6 -12 6 2 -13 -9 -9 13 -2 z" />
+        <path d="M320 70 l 5 10 11 2 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -2 z" />
+        <path d="M60 300 l 4 8 9 1 -6 6 1 9 -8 -4 -8 4 1 -9 -6 -6 9 -1 z" />
+      </g>
+    </svg>
+  );
+}
+
+const MODELOS_PINTURA_MUSICA: { id: string; nome: string; emoji: string; render: (tocando: boolean) => React.ReactNode }[] = [
+  { id: "notas",    nome: "Notas Musicais",    emoji: "🎵", render: (t) => <OverlayNotasMusicais tocando={t} /> },
+  { id: "mandala",  nome: "Mandala Sonora",    emoji: "🌀", render: () => <OverlayMandala /> },
+  { id: "passaro",  nome: "Pássaro Cantor",    emoji: "🐦", render: () => <OverlayPassaroCantando /> },
+  { id: "guitarra", nome: "Violão Mágico",     emoji: "🎸", render: () => <OverlayGuitarra /> },
+  { id: "coracao",  nome: "Coração da Música", emoji: "💗", render: () => <OverlayCoracaoMusical /> },
+];
 
 function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "musica-e-arte" }>; say: (t: string) => Promise<void> }) {
   const [tocando, setTocando] = useState(false);
