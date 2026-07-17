@@ -2149,3 +2149,344 @@ function EtapaRitmoRepetir({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo:
     </div>
   );
 }
+
+/* --------------------------- U2 v2 · Traço Guiado --------------------------- */
+
+const FIGURAS_TRACO: Record<string, { d: string; viewBox: string }> = {
+  casa:    { d: "M 30 130 L 30 70 L 100 20 L 170 70 L 170 130 L 30 130 M 80 130 L 80 90 L 120 90 L 120 130", viewBox: "0 0 200 160" },
+  gato:    { d: "M 60 40 L 45 20 L 65 30 M 140 40 L 155 20 L 135 30 M 40 60 Q 40 130 100 140 Q 160 130 160 60 Q 160 30 100 30 Q 40 30 40 60 M 80 70 L 82 72 M 118 70 L 120 72 M 100 90 L 95 100 L 105 100 Z", viewBox: "0 0 200 160" },
+  arvore:  { d: "M 90 150 L 90 90 L 110 90 L 110 150 M 100 90 Q 30 90 40 40 Q 30 20 100 25 Q 170 20 160 40 Q 170 90 100 90", viewBox: "0 0 200 160" },
+  peixe:   { d: "M 40 80 Q 90 30 140 80 Q 90 130 40 80 M 140 80 L 180 50 L 180 110 Z M 60 75 L 63 78", viewBox: "0 0 200 160" },
+  flor:    { d: "M 100 80 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0 M 100 60 Q 80 30 100 20 Q 120 30 100 60 M 100 100 Q 80 130 100 140 Q 120 130 100 100 M 80 80 Q 40 60 30 80 Q 40 100 80 80 M 120 80 Q 160 60 170 80 Q 160 100 120 80 M 100 100 L 100 150", viewBox: "0 0 200 160" },
+};
+
+function EtapaTracoGuiado({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "traco-guiado" }>; say: (t: string) => Promise<void> }) {
+  const [idx, setIdx] = React.useState(0);
+  const fig = etapa.figuras[idx];
+  const spec = FIGURAS_TRACO[fig.d] ?? { d: fig.d, viewBox: fig.viewBox ?? "0 0 200 160" };
+  const pathRef = React.useRef<SVGPathElement | null>(null);
+  const svgRef = React.useRef<SVGSVGElement | null>(null);
+  const [visited, setVisited] = React.useState<boolean[]>([]);
+  const [total, setTotal] = React.useState(0);
+  const [drawing, setDrawing] = React.useState(false);
+  const [showFinal, setShowFinal] = React.useState(false);
+  const ctx = React.useContext(CtxConcluidas);
+
+  useEffect(() => { say(`${etapa.instrucao} Vamos começar pela ${fig.nome}.`); /* eslint-disable-next-line */ }, [idx]);
+
+  useEffect(() => {
+    if (!pathRef.current) return;
+    const len = pathRef.current.getTotalLength();
+    const n = Math.max(40, Math.floor(len / 6));
+    setTotal(n);
+    setVisited(new Array(n).fill(false));
+    setShowFinal(false);
+  }, [idx]);
+
+  const check = (clientX: number, clientY: number) => {
+    if (!pathRef.current || !svgRef.current || total === 0) return;
+    const pt = svgRef.current.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    const ctm = svgRef.current.getScreenCTM();
+    if (!ctm) return;
+    const local = pt.matrixTransform(ctm.inverse());
+    const len = pathRef.current.getTotalLength();
+    setVisited(prev => {
+      const next = [...prev];
+      let mudou = false;
+      for (let i = 0; i < total; i++) {
+        if (next[i]) continue;
+        const p = pathRef.current!.getPointAtLength((i / total) * len);
+        const dx = p.x - local.x, dy = p.y - local.y;
+        if (dx*dx + dy*dy < 400) { next[i] = true; mudou = true; }
+      }
+      return mudou ? next : prev;
+    });
+  };
+
+  const progresso = total ? Math.round((visited.filter(Boolean).length / total) * 100) : 0;
+  useEffect(() => {
+    if (progresso >= 80 && !showFinal) {
+      setShowFinal(true);
+      say("Maravilha! Você seguiu o traço com precisão de artista.");
+    }
+  }, [progresso, showFinal, say]);
+
+  const proxima = () => {
+    if (idx + 1 < etapa.figuras.length) { setIdx(idx + 1); return; }
+    ctx?.marcarConcluida();
+  };
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+        </div>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+      <div className="flex items-center gap-2 mb-3">
+        <div className="text-xl">{fig.emoji}</div>
+        <div className="brush-title text-xl">{fig.nome}</div>
+        <div className="ml-auto text-sm px-3 py-1 rounded-full bg-amber-100 border border-amber-300">
+          Precisão: <b>{progresso}%</b>
+        </div>
+      </div>
+      <div className="rounded-2xl bg-white border-4 border-amber-200 overflow-hidden touch-none select-none"
+           onPointerDown={e => { setDrawing(true); (e.target as Element).setPointerCapture(e.pointerId); check(e.clientX, e.clientY); }}
+           onPointerMove={e => { if (drawing) check(e.clientX, e.clientY); }}
+           onPointerUp={() => setDrawing(false)}>
+        <svg ref={svgRef} viewBox={spec.viewBox} className="w-full h-auto" style={{ aspectRatio: "5 / 4" }}>
+          {/* linha pontilhada de referência */}
+          <path ref={pathRef} d={spec.d} fill="none" stroke="#9CA3AF" strokeWidth={3} strokeDasharray="6 6" strokeLinecap="round" strokeLinejoin="round"/>
+          {/* pontos marcadores */}
+          {visited.map((v, i) => {
+            if (!pathRef.current) return null;
+            const len = pathRef.current.getTotalLength();
+            const p = pathRef.current.getPointAtLength((i / total) * len);
+            return <circle key={i} cx={p.x} cy={p.y} r={v ? 4 : 2.5} fill={v ? "#F59E0B" : "#E5E7EB"} />;
+          })}
+        </svg>
+      </div>
+      <div className="mt-3 flex flex-wrap gap-2 items-center">
+        <button className="brush-btn secondary" onClick={() => { setVisited(new Array(total).fill(false)); setShowFinal(false); }}>Recomeçar</button>
+        {showFinal && <button className="brush-btn" onClick={proxima}>
+          {idx + 1 < etapa.figuras.length ? "Próxima figura →" : "Concluir ✓"}
+        </button>}
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------- U2 v2 · Completar a Metade --------------------------- */
+
+const METADES: Record<string, { viewBox: string; render: () => JSX.Element; centro: number }> = {
+  borboleta: {
+    viewBox: "0 0 400 300", centro: 200,
+    render: () => (
+      <g>
+        <ellipse cx="200" cy="150" rx="8" ry="80" fill="#4B2E1E"/>
+        <path d="M 200 100 Q 120 50 80 100 Q 60 160 120 180 Q 180 170 200 150" fill="#F472B6" stroke="#831843" strokeWidth="2"/>
+        <path d="M 200 160 Q 140 200 130 240 Q 170 250 200 220" fill="#FB923C" stroke="#7C2D12" strokeWidth="2"/>
+        <circle cx="120" cy="130" r="8" fill="#FEF3C7"/>
+        <circle cx="150" cy="230" r="5" fill="#FEF3C7"/>
+      </g>
+    ),
+  },
+  coracao: {
+    viewBox: "0 0 400 300", centro: 200,
+    render: () => (
+      <g>
+        <path d="M 200 260 L 200 120 Q 200 60 140 60 Q 80 60 80 130 Q 80 190 200 260 Z" fill="#EF4444" stroke="#7F1D1D" strokeWidth="3"/>
+      </g>
+    ),
+  },
+  rosto: {
+    viewBox: "0 0 400 300", centro: 200,
+    render: () => (
+      <g>
+        <path d="M 200 40 Q 100 40 100 150 Q 100 260 200 260" fill="#FDE68A" stroke="#78350F" strokeWidth="3"/>
+        <circle cx="150" cy="130" r="10" fill="#1F2937"/>
+        <path d="M 200 155 Q 175 175 165 165" fill="none" stroke="#78350F" strokeWidth="3"/>
+        <path d="M 200 210 Q 160 230 130 210" fill="none" stroke="#B91C1C" strokeWidth="4" strokeLinecap="round"/>
+      </g>
+    ),
+  },
+  arvore: {
+    viewBox: "0 0 400 300", centro: 200,
+    render: () => (
+      <g>
+        <rect x="180" y="180" width="20" height="90" fill="#78350F"/>
+        <path d="M 200 180 Q 100 180 90 100 Q 130 40 200 60" fill="#16A34A" stroke="#14532D" strokeWidth="3"/>
+      </g>
+    ),
+  },
+  flor: {
+    viewBox: "0 0 400 300", centro: 200,
+    render: () => (
+      <g>
+        <line x1="200" y1="150" x2="200" y2="270" stroke="#166534" strokeWidth="5"/>
+        <path d="M 200 200 Q 140 200 140 230 Q 180 240 200 220" fill="#22C55E"/>
+        <circle cx="200" cy="120" r="30" fill="#F59E0B"/>
+        <ellipse cx="160" cy="80" rx="30" ry="20" fill="#EC4899"/>
+        <ellipse cx="140" cy="130" rx="30" ry="20" fill="#F472B6"/>
+        <ellipse cx="160" cy="180" rx="30" ry="20" fill="#F9A8D4"/>
+      </g>
+    ),
+  },
+};
+
+function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "completar-metade" }>; say: (t: string) => Promise<void> }) {
+  const [idx, setIdx] = React.useState(0);
+  const [showEspelho, setShowEspelho] = React.useState(false);
+  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const [drawing, setDrawing] = React.useState(false);
+  const [key, setKey] = React.useState(0);
+  const [cor, setCor] = React.useState("#111827");
+  const ctx = React.useContext(CtxConcluidas);
+  const item = etapa.itens[idx];
+  const meta = METADES[item.figura];
+
+  useEffect(() => { say(`${etapa.instrucao} ${item.dica}`); /* eslint-disable-next-line */ }, [idx]);
+
+  const setupCanvas = React.useCallback(() => {
+    const cv = canvasRef.current; if (!cv) return;
+    const rect = cv.getBoundingClientRect();
+    cv.width = rect.width * 2; cv.height = rect.height * 2;
+    const cx = cv.getContext("2d"); if (!cx) return;
+    cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round"; cx.lineWidth = 4; cx.strokeStyle = cor;
+  }, [cor]);
+  useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
+  useEffect(() => {
+    const cx = canvasRef.current?.getContext("2d"); if (cx) cx.strokeStyle = cor;
+  }, [cor]);
+
+  const pos = (e: React.PointerEvent) => {
+    const cv = canvasRef.current!; const rect = cv.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  };
+  const onDown = (e: React.PointerEvent) => {
+    setDrawing(true); const cx = canvasRef.current!.getContext("2d")!; const p = pos(e);
+    cx.beginPath(); cx.moveTo(p.x, p.y);
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!drawing) return; const cx = canvasRef.current!.getContext("2d")!; const p = pos(e);
+    cx.lineTo(p.x, p.y); cx.stroke();
+  };
+
+  const CORES = ["#111827", "#EF4444", "#F59E0B", "#22C55E", "#3B82F6", "#EC4899"];
+  const proxima = () => {
+    if (idx + 1 < etapa.itens.length) { setIdx(idx + 1); setKey(k => k + 1); setShowEspelho(false); return; }
+    ctx?.marcarConcluida();
+  };
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+        </div>
+        <BtnFala onClick={() => say(`${item.dica}`)} />
+      </div>
+      <div className="brush-title text-xl mb-2">{item.nome}</div>
+      <div className="relative rounded-2xl overflow-hidden border-4 border-amber-200 bg-white" style={{ aspectRatio: "4/3" }}>
+        <svg viewBox={meta.viewBox} className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" style={{ pointerEvents: "none" }}>
+          {/* lado esquerdo revelado */}
+          <defs>
+            <clipPath id={`clip-esq-${item.figura}`}><rect x="0" y="0" width={meta.centro} height="300"/></clipPath>
+            <clipPath id={`clip-dir-${item.figura}`}><rect x={meta.centro} y="0" width={400 - meta.centro} height="300"/></clipPath>
+          </defs>
+          <g clipPath={`url(#clip-esq-${item.figura})`}>{meta.render()}</g>
+          {showEspelho && (
+            <g clipPath={`url(#clip-dir-${item.figura})`} transform={`matrix(-1 0 0 1 ${2 * meta.centro} 0)`} opacity="0.35">
+              {meta.render()}
+            </g>
+          )}
+          <line x1={meta.centro} y1="0" x2={meta.centro} y2="300" stroke="#F59E0B" strokeWidth="2" strokeDasharray="6 4"/>
+        </svg>
+        <canvas key={key} ref={canvasRef}
+          className="absolute inset-0 w-full h-full touch-none"
+          style={{ clipPath: `inset(0 0 0 ${(meta.centro / 400) * 100}%)` }}
+          onPointerDown={e => { (e.target as Element).setPointerCapture(e.pointerId); onDown(e); }}
+          onPointerMove={onMove}
+          onPointerUp={() => setDrawing(false)}
+        />
+      </div>
+      <div className="mt-3 flex flex-wrap gap-2 items-center">
+        {CORES.map(c => (
+          <button key={c} aria-label={c} onClick={() => setCor(c)}
+            className="w-9 h-9 rounded-full border-2"
+            style={{ background: c, borderColor: cor === c ? "#F59E0B" : "#fff", boxShadow: cor === c ? "0 0 0 3px #FCD34D" : "0 2px 4px rgba(0,0,0,.2)" }}/>
+        ))}
+        <button className="brush-btn secondary ml-auto" onClick={() => setKey(k => k + 1)}>Limpar</button>
+        <button className="brush-btn secondary" onClick={() => setShowEspelho(s => !s)}>
+          {showEspelho ? "Esconder espelho" : "Ver o espelho"}
+        </button>
+        <button className="brush-btn" onClick={proxima}>
+          {idx + 1 < etapa.itens.length ? "Próxima →" : "Concluir ✓"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------- U2 v2 · Detetive da Obra --------------------------- */
+
+function EtapaDetetiveObra({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "detetive-obra" }>; say: (t: string) => Promise<void> }) {
+  const [found, setFound] = React.useState<Set<number>>(new Set());
+  const [active, setActive] = React.useState<number | null>(null);
+  const [zoom, setZoom] = React.useState<{ x: number; y: number } | null>(null);
+  const ctx = React.useContext(CtxConcluidas);
+
+  useEffect(() => { say(etapa.instrucao); /* eslint-disable-next-line */ }, []);
+  useEffect(() => {
+    if (found.size === etapa.achados.length && found.size > 0) {
+      say(`Você é um verdadeiro detetive da arte! Encontrou tudo em ${etapa.obra} de ${etapa.artista}.`);
+    }
+  }, [found.size]);
+
+  const tap = (i: number, e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+    const ach = etapa.achados[i];
+    setZoom({ x: ach.x, y: ach.y });
+    setActive(i);
+    setFound(prev => { const n = new Set(prev); n.add(i); return n; });
+    say(`${ach.nome}. ${ach.revelacao}`);
+    void rect;
+  };
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+        </div>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+      <div className="mb-2 text-sm px-3 py-2 rounded-lg bg-amber-50 border border-amber-200">
+        <b>{etapa.obra}</b> — {etapa.artista} · {etapa.ano}
+      </div>
+      <div className="relative rounded-2xl overflow-hidden border-4 border-amber-300 bg-black" style={{ aspectRatio: "4/3" }}>
+        <div className="absolute inset-0 transition-transform duration-500"
+             style={{ transform: zoom ? `scale(1.8) translate(${(50 - zoom.x)}%, ${(50 - zoom.y)}%)` : "none", transformOrigin: "center" }}>
+          <img src={etapa.obraUrl} alt={etapa.alt} className="w-full h-full object-cover"/>
+          {etapa.achados.map((a, i) => (
+            <button key={i} onClick={(e) => tap(i, e as any)} aria-label={a.nome}
+              className="absolute rounded-full transition-all"
+              style={{
+                left: `${a.x}%`, top: `${a.y}%`, width: `${a.r * 2}%`, aspectRatio: "1",
+                transform: "translate(-50%, -50%)",
+                background: found.has(i) ? "rgba(250,204,21,.35)" : "rgba(255,255,255,.25)",
+                border: `3px solid ${found.has(i) ? "#F59E0B" : "#fff"}`,
+                boxShadow: found.has(i) ? "0 0 20px rgba(250,204,21,.9)" : "0 0 14px rgba(255,255,255,.6)",
+                animation: found.has(i) ? undefined : "pulse 1.6s infinite",
+              }}/>
+          ))}
+        </div>
+        {zoom && (
+          <button className="absolute top-2 right-2 z-10 px-3 py-1 rounded-full bg-white/90 text-sm font-bold" onClick={() => { setZoom(null); setActive(null); }}>
+            ← Ver obra inteira
+          </button>
+        )}
+      </div>
+      {active !== null && (
+        <div className="mt-3 p-4 rounded-2xl bg-amber-50 border-2 border-amber-300">
+          <div className="brush-title text-xl mb-1">🔍 {etapa.achados[active].nome}</div>
+          <div className="text-base opacity-80 mb-1"><i>{etapa.achados[active].dica}</i></div>
+          <div className="text-lg">{etapa.achados[active].revelacao}</div>
+        </div>
+      )}
+      <div className="mt-3 flex flex-wrap gap-2 items-center">
+        <div className="text-sm px-3 py-1 rounded-full bg-amber-100 border border-amber-300">
+          Detalhes encontrados: <b>{found.size}/{etapa.achados.length}</b>
+        </div>
+        {found.size === etapa.achados.length && (
+          <button className="brush-btn ml-auto" onClick={() => ctx?.marcarConcluida()}>Concluir ✓</button>
+        )}
+      </div>
+    </div>
+  );
+}
