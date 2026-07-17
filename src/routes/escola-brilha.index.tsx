@@ -348,6 +348,27 @@ function EscolaBrilhaCatalogo() {
                         </Link>
                       )}
 
+                      {serie === "2º Ano" && (
+                        <Link
+                          to="/escola-brilha/arte-2ano/$aula"
+                          params={{ aula: "u1-a01-autorretrato" }}
+                          className="block rounded-2xl p-4 text-stone-900 font-black active:scale-[0.98] shadow-lg"
+                          style={{ background: "linear-gradient(135deg, #fbcfe8, #fde68a)" }}
+                        >
+                          <div className="text-[10px] uppercase tracking-widest opacity-80">
+                            🎨 NOVO · Arte · 2º Ano
+                          </div>
+                          <div className="text-lg leading-tight mt-0.5">
+                            🖼️ Ateliê Brilha — Eu sou uma obra de arte
+                          </div>
+                          <div className="text-[11px] font-bold opacity-90 mt-1">
+                            Aula Modelo SPEB · 17 cenas · autorretrato digital →
+                          </div>
+                        </Link>
+                      )}
+
+
+
 
                       {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
