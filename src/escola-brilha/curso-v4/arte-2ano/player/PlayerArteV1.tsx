@@ -567,9 +567,13 @@ function CenaLeituraTintas({
       <div className="grid grid-cols-4 gap-2 mb-3">
         {cena.pigmentos.map((p, i) => (
           <button key={i} onClick={() => tocarPigmento(i)}
-            className={`aspect-square rounded-xl border-4 flex flex-col items-center justify-center gap-1 transition-all ${pigmentoOn === i ? "border-amber-300 scale-105" : "border-white/30 hover:scale-105"}`}
-            style={{ backgroundColor: p.hex }}>
-            <div className="text-2xl drop-shadow">{p.emoji}</div>
+            className={`aspect-square rounded-xl border-4 flex flex-col items-center justify-center gap-1 overflow-hidden transition-all ${pigmentoOn === i ? "border-amber-300 scale-105" : "border-white/30 hover:scale-105"}`}
+            style={{ backgroundColor: p.fotoUrl ? "transparent" : p.hex }}>
+            {p.fotoUrl ? (
+              <img src={p.fotoUrl} alt={p.nome} loading="lazy" className="w-full h-full object-cover" />
+            ) : (
+              <div className="text-2xl drop-shadow">{p.emoji}</div>
+            )}
           </button>
         ))}
       </div>
