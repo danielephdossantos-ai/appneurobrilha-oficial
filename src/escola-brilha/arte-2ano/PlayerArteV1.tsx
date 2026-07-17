@@ -2564,3 +2564,397 @@ function EtapaDetetiveObra({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo:
     </div>
   );
 }
+
+/* =====================================================================
+ * U3 v2 — Música vira Pincelada
+ * ===================================================================== */
+
+/* --------------------------- Bater o Ritmo --------------------------- */
+function EtapaBaterRitmo({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "bater-ritmo" }>; say: (t: string) => Promise<void> }) {
+  const intervalo = 60000 / etapa.bpm;
+  const [rodando, setRodando] = React.useState(false);
+  const [batidaAtual, setBatidaAtual] = React.useState(-1);
+  const [acertos, setAcertos] = React.useState<Array<"perfeito" | "bom" | "errado">>([]);
+  const [pulse, setPulse] = React.useState(0);
+  const proximaBatidaRef = React.useRef(0);
+  const timerRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => { say(`${etapa.instrucao} Toca junto com o coração!`); /* eslint-disable-next-line */ }, []);
+
+  const iniciar = () => {
+    setAcertos([]); setBatidaAtual(-1); setRodando(true);
+    const ctx = getAC(); const start = (ctx?.currentTime ?? 0) * 1000 + performance.now() * 0 + Date.now();
+    const t0 = performance.now() + 800;
+    let i = 0;
+    proximaBatidaRef.current = t0;
+    const tick = () => {
+      if (i >= etapa.batidasTotais) {
+        setRodando(false); setBatidaAtual(-1);
+        const n = acertos.filter(a => a === "perfeito").length;
+        say(n >= etapa.batidasTotais - 1 ? "Uau! Ritmista de primeira!" : "Boa! Vamos treinar mais uma vez?");
+        return;
+      }
+      const alvo = t0 + i * intervalo;
+      const espera = alvo - performance.now();
+      timerRef.current = window.setTimeout(() => {
+        playTimbre("pedra");
+        setBatidaAtual(i); setPulse(p => p + 1);
+        proximaBatidaRef.current = alvo;
+        i++;
+        tick();
+      }, Math.max(0, espera));
+    };
+    tick();
+  };
+
+  React.useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+
+  const tocar = () => {
+    if (!rodando) return;
+    const delta = Math.abs(performance.now() - proximaBatidaRef.current);
+    const nota: "perfeito" | "bom" | "errado" = delta < 120 ? "perfeito" : delta < 260 ? "bom" : "errado";
+    setAcertos(a => [...a, nota]);
+    playTimbre(nota === "errado" ? "folha" : "sino");
+  };
+
+  const perfeitos = acertos.filter(a => a === "perfeito").length;
+  const bons = acertos.filter(a => a === "bom").length;
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+          <p className="text-sm opacity-60 mt-1">{etapa.bpm} batidas por minuto · {etapa.batidasTotais} batidas</p>
+        </div>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+
+      <button
+        onPointerDown={tocar}
+        disabled={!rodando}
+        className="relative w-full rounded-3xl border-4 border-amber-200 bg-gradient-to-br from-rose-50 to-amber-50 touch-none select-none"
+        style={{ minHeight: 280 }}
+        aria-label="Toca aqui no compasso"
+      >
+        <div
+          key={pulse}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <div
+            className="rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl"
+            style={{
+              width: 160, height: 160,
+              background: batidaAtual >= 0 ? "radial-gradient(circle, #ef4444, #b91c1c)" : "radial-gradient(circle, #d1d5db, #9ca3af)",
+              transform: batidaAtual >= 0 ? "scale(1.15)" : "scale(1)",
+              transition: "transform 120ms ease-out, background 200ms",
+            }}
+          >💗</div>
+        </div>
+        {!rodando && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/40 backdrop-blur-sm rounded-3xl">
+            <span className="text-2xl font-black text-amber-800">Toca em qualquer lugar quando o coração pulsar</span>
+          </div>
+        )}
+      </button>
+
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {Array.from({ length: etapa.batidasTotais }).map((_, i) => {
+          const nota = acertos[i];
+          const cor = nota === "perfeito" ? "bg-green-500" : nota === "bom" ? "bg-yellow-400" : nota === "errado" ? "bg-red-400" : "bg-gray-200";
+          return <span key={i} className={`w-6 h-6 rounded-full ${cor} border-2 border-white`} />;
+        })}
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2 items-center">
+        <div className="text-sm px-3 py-1 rounded-full bg-green-100 border border-green-300">✨ Perfeito: <b>{perfeitos}</b></div>
+        <div className="text-sm px-3 py-1 rounded-full bg-yellow-100 border border-yellow-300">👍 Bom: <b>{bons}</b></div>
+        <button className="brush-btn ml-auto" onClick={iniciar} disabled={rodando}>
+          {rodando ? "Tocando…" : acertos.length ? "Tentar de novo" : "Começar ▶"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------- Pintar no Compasso --------------------------- */
+function EtapaPintarCompasso({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "pintar-compasso" }>; say: (t: string) => Promise<void> }) {
+  const intervalo = 60000 / etapa.bpm;
+  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const posRef = React.useRef<{ x: number; y: number } | null>(null);
+  const drawingRef = React.useRef(false);
+  const [cor, setCor] = React.useState(etapa.paleta[0]);
+  const [tamanho, setTamanho] = React.useState(22);
+  const [rodando, setRodando] = React.useState(false);
+  const [pulse, setPulse] = React.useState(0);
+  const [key, setKey] = React.useState(0);
+  const timerRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => { say(`${etapa.instrucao}`); /* eslint-disable-next-line */ }, []);
+
+  const setupCanvas = React.useCallback(() => {
+    const cv = canvasRef.current; if (!cv) return;
+    const rect = cv.getBoundingClientRect();
+    cv.width = rect.width * 2; cv.height = rect.height * 2;
+    const cx = cv.getContext("2d"); if (!cx) return;
+    cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round";
+  }, []);
+  React.useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
+
+  const stamp = React.useCallback(() => {
+    const p = posRef.current; const cv = canvasRef.current;
+    if (!cv) return;
+    const cx = cv.getContext("2d"); if (!cx) return;
+    setPulse(x => x + 1);
+    if (!drawingRef.current || !p) return;
+    cx.fillStyle = cor;
+    cx.globalAlpha = 0.75;
+    cx.beginPath();
+    cx.arc(p.x, p.y, tamanho, 0, Math.PI * 2);
+    cx.fill();
+    cx.globalAlpha = 1;
+  }, [cor, tamanho]);
+
+  const iniciar = () => {
+    if (rodando) { setRodando(false); if (timerRef.current) clearTimeout(timerRef.current); return; }
+    setRodando(true);
+    const t0 = performance.now() + 400;
+    let i = 0;
+    const tick = () => {
+      const alvo = t0 + i * intervalo;
+      const espera = alvo - performance.now();
+      timerRef.current = window.setTimeout(() => {
+        playTimbre(i % 2 === 0 ? "pedra" : "sino");
+        stamp();
+        i++;
+        tick();
+      }, Math.max(0, espera));
+    };
+    tick();
+  };
+
+  React.useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+
+  const pos = (e: React.PointerEvent) => {
+    const cv = canvasRef.current!; const rect = cv.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  };
+  const onDown = (e: React.PointerEvent) => { drawingRef.current = true; posRef.current = pos(e); (e.target as Element).setPointerCapture(e.pointerId); };
+  const onMove = (e: React.PointerEvent) => { if (drawingRef.current) posRef.current = pos(e); };
+  const onUp = () => { drawingRef.current = false; };
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+          <p className="text-sm opacity-60 mt-1">Aperta ▶, arrasta o dedo pela tela. A cor só "carimba" quando a batida acontece.</p>
+        </div>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+
+      <div className="relative rounded-2xl overflow-hidden border-4 bg-white touch-none" style={{ aspectRatio: "4/3", borderColor: rodando ? cor : "#fde68a" }}>
+        <canvas key={key} ref={canvasRef}
+          className="absolute inset-0 w-full h-full"
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
+        />
+        {rodando && (
+          <div
+            key={pulse}
+            className="absolute top-3 right-3 rounded-full pointer-events-none"
+            style={{
+              width: 28, height: 28,
+              background: cor,
+              boxShadow: `0 0 24px ${cor}`,
+              animation: "pulse-beat 200ms ease-out",
+            }}
+          />
+        )}
+      </div>
+
+      <div className="mt-3 space-y-2">
+        <div className="flex flex-wrap gap-1.5 items-center">
+          {etapa.paleta.map(c => (
+            <button key={c} onClick={() => setCor(c)}
+              className="w-9 h-9 rounded-full border-2 transition-transform hover:scale-110"
+              style={{ background: c, borderColor: cor === c ? "#F59E0B" : "#fff", boxShadow: cor === c ? "0 0 0 3px #FCD34D" : "0 2px 4px rgba(0,0,0,.2)" }}/>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-xs font-bold opacity-70">Pincel:</span>
+          {[10, 18, 28, 40].map(t => (
+            <button key={t} onClick={() => setTamanho(t)}
+              className="rounded-full border-2 flex items-center justify-center bg-white transition-transform hover:scale-110"
+              style={{ width: 40, height: 40, borderColor: tamanho === t ? "#F59E0B" : "#e5e7eb" }}
+              aria-label={`${t}px`}>
+              <span className="rounded-full block" style={{ width: t, height: t, background: cor }}/>
+            </button>
+          ))}
+          <button className="brush-btn secondary ml-auto" onClick={() => setKey(k => k + 1)}>Limpar</button>
+          <button className="brush-btn" onClick={iniciar}>
+            {rodando ? "⏸ Parar" : "▶ Tocar & Pintar"}
+          </button>
+        </div>
+      </div>
+      <style>{`@keyframes pulse-beat{0%{transform:scale(.6);opacity:.4}60%{transform:scale(1.4);opacity:1}100%{transform:scale(1);opacity:.9}}`}</style>
+    </div>
+  );
+}
+
+/* --------------------------- Som Vira Traço --------------------------- */
+function EtapaSomViraTraco({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "som-vira-traco" }>; say: (t: string) => Promise<void> }) {
+  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const [somIdx, setSomIdx] = React.useState(0);
+  const [key, setKey] = React.useState(0);
+  const drawingRef = React.useRef(false);
+  const lastRef = React.useRef<{ x: number; y: number; t: number } | null>(null);
+  const som = etapa.sons[somIdx];
+
+  React.useEffect(() => { say(etapa.instrucao); /* eslint-disable-next-line */ }, []);
+  React.useEffect(() => { say(`Toca no som ${som.nome} e desenha. Cada som faz um traço diferente!`); /* eslint-disable-next-line */ }, [somIdx]);
+
+  const setupCanvas = React.useCallback(() => {
+    const cv = canvasRef.current; if (!cv) return;
+    const rect = cv.getBoundingClientRect();
+    cv.width = rect.width * 2; cv.height = rect.height * 2;
+    const cx = cv.getContext("2d"); if (!cx) return;
+    cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round";
+  }, []);
+  React.useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
+
+  const pos = (e: React.PointerEvent) => {
+    const cv = canvasRef.current!; const rect = cv.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  };
+
+  const desenharPadrao = (from: { x: number; y: number; t: number }, to: { x: number; y: number; t: number }) => {
+    const cx = canvasRef.current?.getContext("2d"); if (!cx) return;
+    cx.strokeStyle = som.cor; cx.fillStyle = som.cor;
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const dist = Math.hypot(dx, dy);
+    const ang = Math.atan2(dy, dx);
+    switch (som.padrao) {
+      case "linha":
+        cx.lineWidth = 6; cx.beginPath(); cx.moveTo(from.x, from.y); cx.lineTo(to.x, to.y); cx.stroke();
+        break;
+      case "pontos": {
+        const passos = Math.max(1, Math.floor(dist / 12));
+        for (let i = 0; i <= passos; i++) {
+          const x = from.x + (dx * i) / passos, y = from.y + (dy * i) / passos;
+          cx.beginPath(); cx.arc(x, y, 4 + Math.random() * 3, 0, Math.PI * 2); cx.fill();
+        }
+        break;
+      }
+      case "zigzag": {
+        const passos = Math.max(1, Math.floor(dist / 8));
+        cx.lineWidth = 3; cx.beginPath(); cx.moveTo(from.x, from.y);
+        for (let i = 1; i <= passos; i++) {
+          const t = i / passos;
+          const bx = from.x + dx * t, by = from.y + dy * t;
+          const off = i % 2 === 0 ? 6 : -6;
+          cx.lineTo(bx + Math.cos(ang + Math.PI / 2) * off, by + Math.sin(ang + Math.PI / 2) * off);
+        }
+        cx.stroke();
+        break;
+      }
+      case "onda": {
+        const passos = Math.max(1, Math.floor(dist / 4));
+        cx.lineWidth = 4; cx.beginPath();
+        for (let i = 0; i <= passos; i++) {
+          const t = i / passos;
+          const bx = from.x + dx * t, by = from.y + dy * t;
+          const off = Math.sin(t * Math.PI * 4) * 10;
+          const px = bx + Math.cos(ang + Math.PI / 2) * off;
+          const py = by + Math.sin(ang + Math.PI / 2) * off;
+          if (i === 0) cx.moveTo(px, py); else cx.lineTo(px, py);
+        }
+        cx.stroke();
+        break;
+      }
+      case "espiral": {
+        cx.lineWidth = 2; cx.beginPath();
+        const cxp = (from.x + to.x) / 2, cyp = (from.y + to.y) / 2;
+        const raio = Math.max(4, dist / 2);
+        for (let a = 0; a < Math.PI * 3; a += 0.15) {
+          const r = (a / (Math.PI * 3)) * raio;
+          const x = cxp + Math.cos(a) * r, y = cyp + Math.sin(a) * r;
+          if (a === 0) cx.moveTo(x, y); else cx.lineTo(x, y);
+        }
+        cx.stroke();
+        break;
+      }
+    }
+  };
+
+  const onDown = (e: React.PointerEvent) => {
+    drawingRef.current = true; (e.target as Element).setPointerCapture(e.pointerId);
+    lastRef.current = { ...pos(e), t: performance.now() };
+    playTimbre(som.timbre);
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!drawingRef.current || !lastRef.current) return;
+    const now = { ...pos(e), t: performance.now() };
+    if (Math.hypot(now.x - lastRef.current.x, now.y - lastRef.current.y) < 6) return;
+    desenharPadrao(lastRef.current, now);
+    lastRef.current = now;
+  };
+  const onUp = () => { drawingRef.current = false; lastRef.current = null; };
+
+  const PadraoIcone = ({ p }: { p: typeof som.padrao }) => {
+    const paths: Record<typeof som.padrao, string> = {
+      linha: "M4 12 L20 12",
+      pontos: "M4 12 h.1 M9 12 h.1 M14 12 h.1 M19 12 h.1",
+      zigzag: "M2 12 L6 6 L10 18 L14 6 L18 18 L22 12",
+      onda: "M2 12 Q6 4 10 12 T18 12 T22 12",
+      espiral: "M12 12 m-1 0 a1 1 0 1 1 2 0 a3 3 0 1 1 -6 0 a5 5 0 1 1 10 0",
+    };
+    return (
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d={paths[p]}/>
+      </svg>
+    );
+  };
+
+  return (
+    <div className="paper-card p-4 md:p-6">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div>
+          <h2 className="brush-title text-2xl md:text-3xl">{etapa.titulo}</h2>
+          <p className="text-lg opacity-80">{etapa.instrucao}</p>
+        </div>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-3">
+        {etapa.sons.map((s, k) => (
+          <button key={s.nome} onClick={() => { setSomIdx(k); playTimbre(s.timbre); }}
+            className="flex items-center gap-2 px-3 py-2 rounded-2xl border-2 bg-white transition-transform hover:scale-105"
+            style={{ borderColor: somIdx === k ? s.cor : "#e5e7eb", boxShadow: somIdx === k ? `0 0 0 3px ${s.cor}44` : "none", color: s.cor }}>
+            <span className="text-2xl">{s.emoji}</span>
+            <div className="text-left">
+              <div className="text-sm font-bold text-slate-800">{s.nome}</div>
+              <div className="opacity-70"><PadraoIcone p={s.padrao}/></div>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <div className="relative rounded-2xl overflow-hidden border-4 border-amber-200 bg-white touch-none" style={{ aspectRatio: "4/3" }}>
+        <canvas key={key} ref={canvasRef}
+          className="absolute inset-0 w-full h-full"
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
+        />
+        <div className="absolute top-2 left-2 px-3 py-1 rounded-full text-sm font-bold text-white shadow" style={{ background: som.cor }}>
+          {som.emoji} {som.nome} → {som.padrao}
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2 items-center">
+        <span className="text-sm opacity-70">Escolhe um som e arrasta o dedo. Cada som deixa um traço com a "voz" dele.</span>
+        <button className="brush-btn secondary ml-auto" onClick={() => setKey(k => k + 1)}>Limpar</button>
+      </div>
+    </div>
+  );
+}
