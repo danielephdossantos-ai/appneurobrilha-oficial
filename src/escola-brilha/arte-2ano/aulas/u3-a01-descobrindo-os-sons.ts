@@ -50,6 +50,13 @@ const aula: AulaArte = {
       ],
     },
     {
+      tipo: "bater-ritmo",
+      titulo: "🥁 Bater o Ritmo",
+      instrucao: "Toca na tela toda vez que o coração pulsar. Consegue acompanhar?",
+      bpm: 80,
+      batidasTotais: 12,
+    },
+    {
       tipo: "sequenciador",
       titulo: "Cria a Sua Sequência",
       instrucao:
@@ -61,6 +68,13 @@ const aula: AulaArte = {
         { nome: "Água",     emoji: "💧", timbre: "agua",    cor: "#5A8FBF" },
         { nome: "Pedra",    emoji: "🪨", timbre: "pedra",   cor: "#8B5A3C" },
       ],
+    },
+    {
+      tipo: "pintar-compasso",
+      titulo: "🎨 Pintar no Compasso",
+      instrucao: "Arrasta o dedo pela tela e aperta ▶. A tinta só carimba na batida da música!",
+      bpm: 90,
+      paleta: ["#EF4444", "#F59E0B", "#22C55E", "#3B82F6", "#8B5CF6", "#EC4899"],
     },
     {
       tipo: "memoria-sonora",
@@ -92,11 +106,18 @@ const aula: AulaArte = {
       ],
     },
     {
-      tipo: "curiosidade",
-      titulo: "Você Sabia?",
-      texto:
-        "Silêncio também é música! Nas partituras existe um sinal chamado pausa. Quando a música para por um instante, seu ouvido descansa e a próxima nota fica muito mais bonita.",
+      tipo: "som-vira-traco",
+      titulo: "🌊 Som Vira Traço",
+      instrucao: "Cada som deixa um risco diferente. Toca no som, arrasta o dedo e vê o que aparece!",
+      sons: [
+        { nome: "Água",     emoji: "💧", timbre: "agua",    padrao: "onda",    cor: "#3B82F6" },
+        { nome: "Pedra",    emoji: "🪨", timbre: "pedra",   padrao: "pontos",  cor: "#78350F" },
+        { nome: "Pássaro",  emoji: "🐦", timbre: "passaro", padrao: "zigzag",  cor: "#F59E0B" },
+        { nome: "Vento",    emoji: "🌬", timbre: "vento",   padrao: "espiral", cor: "#8B5CF6" },
+        { nome: "Sino",     emoji: "🔔", timbre: "sino",    padrao: "linha",   cor: "#EF4444" },
+      ],
     },
+
     {
       tipo: "galeria-obras",
       titulo: "🖼 Obras com Ritmo",
