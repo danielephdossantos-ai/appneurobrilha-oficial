@@ -2484,7 +2484,7 @@ function EtapaDetetiveObra({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo:
           Detalhes encontrados: <b>{found.size}/{etapa.achados.length}</b>
         </div>
         {found.size === etapa.achados.length && (
-          <button className="brush-btn ml-auto" onClick={() => ctx?.marcarConcluida()}>Concluir ✓</button>
+          <button className="brush-btn ml-auto" onClick={() => void 0}>Concluir ✓</button>
         )}
       </div>
     </div>
