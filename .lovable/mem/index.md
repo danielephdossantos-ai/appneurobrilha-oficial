@@ -32,3 +32,4 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 - [Geografia INTEIRA TRAVADA](mem://constraints/geografia-travada) — Toda a disciplina Geografia (Infantil ao 9º Ano, incluindo v2) está aprovada. Proibido editar sem pedido explícito com "destravar geografia".
 - [História 2º Ano visual + explicação](mem://preferences/historia-2ano-visual-explicacao) — Tema central sempre com imagem concreta e explicação visível.
 - [Ciências INTEIRA TRAVADA](mem://constraints/ciencias-travada) — Toda a disciplina Ciências (1º ao 9º Ano) está aprovada. Proibido editar `ciencias-*ano/**` sem pedido explícito.
+- [Contrato SPEB 1.0 Arte](mem://features/contrato-arte-speb) — 10 etapas obrigatórias + projeto + avaliação + medalha. Nunca reduzir a jogos/quizzes. Modelo: `arte-2ano/u1-a01-autorretrato`.
