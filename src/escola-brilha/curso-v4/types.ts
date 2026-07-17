@@ -974,7 +974,7 @@ export type CenaArteV1 =
       tipo: "leituraTintas";
       aurora: string;
       paragrafos: string[];
-      pigmentos: Array<{ nome: string; hex: string; fonte: string; emoji: string }>;
+      pigmentos: Array<{ nome: string; hex: string; fonte: string; emoji: string; fotoUrl?: string }>;
     }
   | {
       tipo: "quizCores";
