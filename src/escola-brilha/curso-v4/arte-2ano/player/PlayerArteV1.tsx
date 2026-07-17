@@ -798,10 +798,15 @@ function CenaSequencia({
           const usado = ordem.includes(p.id);
           return (
             <button key={p.id} onClick={() => escolher(p.id)} disabled={usado || completo}
-              className={`text-left rounded-xl p-3 border-2 font-bold text-sm flex items-center gap-2 transition-all ${
+              className={`text-left rounded-xl p-3 border-2 font-bold text-sm flex items-center gap-3 transition-all ${
                 usado ? "bg-white/5 border-white/10 opacity-40" : "bg-white/10 border-white/25 hover:bg-white/20 active:scale-95"
               }`}>
-              <span className="text-xl">{p.emoji}</span><span>{p.texto}</span>
+              {p.fotoUrl ? (
+                <img src={p.fotoUrl} alt="" loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
+              ) : (
+                <span className="text-xl shrink-0">{p.emoji}</span>
+              )}
+              <span>{p.texto}</span>
             </button>
           );
         })}
