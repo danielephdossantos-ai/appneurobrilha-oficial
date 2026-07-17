@@ -37,11 +37,13 @@ export function DrawingCanvas({
   textoBotao = "💾 Salvar meu desenho",
   onExportar,
   ocultarExportar = false,
+  paleta,
 }: Props) {
+  const cores = paleta && paleta.length > 0 ? paleta : CORES_PADRAO;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const desenhandoRef = useRef(false);
   const ultimoRef = useRef<{ x: number; y: number } | null>(null);
-  const [cor, setCor] = useState(CORES[0].hex);
+  const [cor, setCor] = useState(cores[0]);
   const [espessura, setEspessura] = useState(ESPESSURAS[1].valor);
   const [borracha, setBorracha] = useState(false);
   const [salvando, setSalvando] = useState(false);
@@ -130,21 +132,21 @@ export function DrawingCanvas({
     <div className="rounded-2xl border-2 border-rose-200 bg-white p-3 shadow-sm">
       {/* Paleta */}
       <div className="flex flex-wrap gap-2 mb-2">
-        {CORES.map((c) => (
+        {cores.map((c) => (
           <button
-            key={c.hex}
+            key={c}
             type="button"
             onClick={() => {
-              setCor(c.hex);
+              setCor(c);
               setBorracha(false);
             }}
-            title={c.nome}
+            title={c}
             className={`w-8 h-8 rounded-full border-2 transition ${
-              !borracha && cor === c.hex
+              !borracha && cor === c
                 ? "border-rose-500 scale-110 shadow"
                 : "border-white/70 shadow-sm"
             }`}
-            style={{ background: c.hex }}
+            style={{ background: c }}
           />
         ))}
       </div>
