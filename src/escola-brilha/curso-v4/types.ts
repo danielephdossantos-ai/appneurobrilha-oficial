@@ -968,7 +968,7 @@ export type CenaArteV1 =
   | {
       tipo: "vocabularioCards";
       aurora: string;
-      cards: Array<{ termo: string; definicao: string; emoji: string; cor: string }>;
+      cards: Array<{ termo: string; definicao: string; emoji: string; cor: string; fotoUrl?: string }>;
     }
   | {
       tipo: "leituraTintas";
