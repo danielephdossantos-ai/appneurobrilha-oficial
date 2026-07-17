@@ -1434,6 +1434,9 @@ function EtapaRelatorio({ etapa, say, aula, indiceAtual }: { etapa: Extract<Etap
     "relatorio": "📊 Relatório",
     "galeria-obras": "🖼 Museu das Cores",
     "memoria-obras": "🃏 Memória das Obras",
+    "traco-guiado": "✏️ Traço guiado",
+    "completar-metade": "🪞 Completar a metade",
+    "detetive-obra": "🕵️ Detetive da obra",
   };
 
   const feitas = aula.etapas.filter((_, k) => k < indiceAtual || concluidas.has(k)).length;
