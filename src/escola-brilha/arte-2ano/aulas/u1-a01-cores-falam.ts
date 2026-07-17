@@ -191,12 +191,18 @@ const aula: AulaArte = {
     {
       tipo: "artista",
       titulo: "Uma obra pra sentir",
-      obraUrl: obraAsset.url,
-      obraLegenda: "Pintura inspirada no estilo de Tarsila do Amaral — cores brasileiras.",
-      pergunta: "O que você sente quando olha esta pintura?",
-      opcoes: ["😊 Feliz", "😌 Calmo", "🤔 Curioso", "😮 Surpreso"],
+      obraUrl: obraNoiteEstrelada.url,
+      obraLegenda: "A Noite Estrelada — Vincent van Gogh, 1889 (Holanda). Uma das pinturas mais famosas do mundo!",
+      pergunta: "O que você sente quando olha essa pintura?",
+      opcoes: ["🌌 Mistério", "😌 Calmo", "🤔 Curioso", "😮 Surpreso"],
       comentario:
-        "Não existe resposta errada! A artista escolheu amarelo forte, verde das plantas e azul do rio. Cores quentes deixam a cena viva e alegre.",
+        "Não existe resposta errada! Van Gogh pintou o céu que via da janela do quarto dele. Ele usou o pincel fazendo redemoinhos pra dar a sensação de vento. Azul escuro traz mistério, e o amarelo dos astros dá esperança no meio da noite.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "Museu das Cores",
+      instrucao: "Toca em cada obra pra conhecer o artista, o país e o que a pintura conta.",
+      obras: OBRAS_FAMOSAS,
     },
     {
       tipo: "texturas",
