@@ -95,10 +95,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada cartão para ouvir a palavra do ateliê e ver o que ela significa.",
     cards: [
-      { termo: "Primária", definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.", emoji: "🎨", cor: "#ef4444" },
-      { termo: "Secundária", definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.", emoji: "🌈", cor: "#8b5cf6" },
-      { termo: "Mistura", definicao: "É quando duas tintas se juntam e viram uma cor nova.", emoji: "🫙", cor: "#f97316" },
-      { termo: "Pigmento", definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.", emoji: "🌿", cor: "#22c55e" },
+      { termo: "Primária", definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.", emoji: "🎨", cor: "#ef4444", fotoUrl: vocabPrimaria },
+      { termo: "Secundária", definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.", emoji: "🌈", cor: "#8b5cf6", fotoUrl: vocabSecundaria },
+      { termo: "Mistura", definicao: "É quando duas tintas se juntam e viram uma cor nova.", emoji: "🫙", cor: "#f97316", fotoUrl: vocabMistura },
+      { termo: "Pigmento", definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.", emoji: "🌿", cor: "#22c55e", fotoUrl: vocabPigmento },
     ],
   },
 
