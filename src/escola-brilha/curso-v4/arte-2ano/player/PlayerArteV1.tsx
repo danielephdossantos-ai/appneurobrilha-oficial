@@ -139,6 +139,7 @@ function CenaRenderer({
     case "fabricaPocoes": return <CenaFabricaPocoes cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "rodaCores": return <CenaRodaCores cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "avaliacaoFinal": return <CenaAvaliacaoFinal cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
+    case "cenaTematica": return <CenaTematica cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     default: return <div className="rounded-3xl bg-white/10 p-6 text-center text-sm">Cena em construção</div>;
   }
 }
