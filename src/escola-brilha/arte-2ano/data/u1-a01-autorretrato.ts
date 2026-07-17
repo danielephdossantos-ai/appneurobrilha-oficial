@@ -4,188 +4,216 @@ const aula: AulaArte = {
   slug: "u1-a01-autorretrato",
   unidade: {
     numero: 1,
-    titulo: "Unidade 1 — Eu, Artista",
-    subtitulo:
-      "Descobrir que cada pessoa é única e pode se expressar através da arte.",
+    titulo: "Unidade 1 — Quem Sou Eu?",
+    subtitulo: "Descobrir a si mesmo através da arte.",
   },
-  titulo: "Eu sou uma obra de arte",
-  bncc: [
-    {
-      codigo: "EF15AR01",
-      descricao:
-        "Identificar e apreciar formas distintas das artes visuais tradicionais e contemporâneas, exercitando a percepção, o imaginário, a capacidade de simbolizar e o repertório imagético.",
-      oQueOAlunoAprende:
-        "Vai observar autorretratos de artistas de verdade (Frida Kahlo, Van Gogh, Tarsila do Amaral) e perceber como cada um mostrou a si mesmo de um jeito diferente.",
-    },
-    {
-      codigo: "EF15AR23",
-      descricao:
-        "Reconhecer e experimentar, em projetos temáticos, as relações processuais entre diversas linguagens artísticas.",
-      oQueOAlunoAprende:
-        "Vai fazer o próprio autorretrato usando cores, linhas e formas escolhidas por ele — não copiando, mas criando.",
-    },
+  titulo: "Meu Primeiro Retrato de Artista",
+  duracaoMin: "40 a 50 minutos",
+
+  objetivos: [
+    "Observar as características do próprio rosto.",
+    "Identificar as formas básicas presentes na face.",
+    "Compreender que cada pessoa possui características únicas.",
+    "Produzir um autorretrato.",
+    "Explicar as escolhas feitas durante sua criação.",
   ],
+
   materiais: {
-    digitais: [
-      "Ateliê Digital do Escola Brilha (canvas com pincéis e cores)",
-      "Galeria de autorretratos famosos (Frida, Van Gogh, Tarsila)",
-      "Espelho digital (câmera do celular ou tablet — opcional)",
+    ferramentasApp: [
+      "Canvas de desenho",
+      "Paleta de cores",
+      "Pincel fino",
+      "Pincel grosso",
+      "Borracha",
+      "Desfazer / Refazer",
+      "Salvar automaticamente no portfólio",
     ],
     fisicos: [
-      "Um espelho pequeno (ou selfie no celular)",
-      "Folha de papel A4",
-      "Lápis de cor OU giz de cera OU canetinha",
-    ],
-    opcionais: [
-      "Foto de rosto da criança impressa",
-      "Tinta guache e pincel",
-      "Cola e papéis coloridos para colagem",
+      "Folha de papel",
+      "Lápis",
+      "Lápis de cor",
+      "Espelho pequeno",
     ],
   },
+
   historia: {
-    titulo: "A pintora que se pintou 55 vezes",
-    narrativa: [
-      "Você sabia que existe uma pintora que se pintou a si mesma… 55 vezes? 🎨",
-      "O nome dela é Frida Kahlo. Ela morava no México e passou muito tempo doente, sem poder sair de casa.",
-      "Então, na cama, sozinha, ela olhava num espelho no teto e pintava seu próprio rosto. Cada vez de um jeito. Cada vez com uma sensação diferente: alegre, triste, brava, apaixonada.",
-      "Ela dizia: 'Eu me pinto porque estou sozinha comigo mesma. E porque sou o assunto que eu conheço melhor.'",
-      "Hoje, o mundo inteiro conhece a Frida. Só porque ela se olhou no espelho e se pintou.",
-      "Hoje, é a sua vez de se olhar. E se pintar. 🌸",
+    cenario:
+      "Brilha entra em um grande ateliê. As paredes estão cheias de quadros lindos… menos UM, no centro, que está totalmente vazio.",
+    carta: [
+      "Todo grande artista fez um autorretrato.",
+      "Mas este quadro só pode ser preenchido pelo artista mais importante de hoje…",
+      "Você.",
     ],
+    pergunta:
+      "Será que conseguimos mostrar quem somos através da arte?",
+    botao: "🎨 Quero começar",
   },
-  descoberta: {
-    perguntaGuia: "O que faz uma pessoa ser ÚNICA no mundo?",
-    observacoes: [
-      "Olhe seu rosto no espelho (ou na câmera).",
-      "Tem alguém no mundo com o rosto EXATAMENTE igual ao seu? Não! Nem gêmeos são 100% iguais.",
-      "Repare: seus olhos têm uma cor. Seu cabelo tem um jeito. Sua boca sorri de um jeito só seu.",
+
+  observacao: {
+    convite:
+      "Antes de desenhar, o artista OBSERVA. Olhe no espelho (ou na tela) e repare em cada parte do seu rosto:",
+    partesDoRosto: [
+      "Formato do rosto (redondo, oval, quadradinho?)",
+      "Cabelo (liso, cacheado, curto, comprido, cor?)",
+      "Sobrancelhas (finas, grossas, arqueadas?)",
+      "Olhos (cor, tamanho, formato)",
+      "Nariz (arrebitadinho, redondo, comprido?)",
+      "Boca (fina, cheia, sorrindo?)",
+      "Orelhas (grandes, pequenas, tem brinco?)",
     ],
-    hipoteses: [
-      "Cada rosto tem detalhes diferentes: cor dos olhos, formato da boca, cabelo.",
-      "As roupas e acessórios (óculos, brinco, tiara) também dizem quem eu sou.",
-      "Até as sardas, pintinhas e cicatrizes contam a minha história.",
-    ],
+    faladoPeloBrilha:
+      "Os artistas observam antes de desenhar. Cada detalhe conta uma parte da nossa história.",
   },
-  explicacao: {
-    ideia: "AUTORRETRATO = quando o artista pinta ele mesmo.",
-    exemplos: [
+
+  obras: {
+    intro:
+      "Vamos conhecer três artistas que se pintaram. Cada um mostrou a si mesmo de um jeito único.",
+    referencias: [
+      {
+        artista: "Tarsila do Amaral (Brasil)",
+        obra: "Autorretrato com vestido rosa",
+        sobre:
+          "Se pintou usando um vestido rosa, com o cabelo penteado e o céu azul do Brasil atrás. Elegante e serena.",
+      },
       {
         artista: "Frida Kahlo (México)",
-        detalhe:
-          "Se pintou com flores no cabelo, um macaquinho no ombro e sobrancelhas grossas — do jeitinho dela.",
+        obra: "Autorretrato com colar de espinhos",
+        sobre:
+          "Se pintou com flores no cabelo, sobrancelhas grossas e bichinhos ao redor — sempre do jeito dela, sem esconder nada.",
       },
       {
         artista: "Vincent van Gogh (Holanda)",
-        detalhe:
-          "Se pintou com o cabelo laranja, olhos verdes e um chapéu de palha, usando pinceladas que parecem vento.",
-      },
-      {
-        artista: "Tarsila do Amaral (Brasil)",
-        detalhe:
-          "Se pintou com um vestido rosa e cabelo penteado, com o céu azul do Brasil atrás.",
+        obra: "Autorretrato com chapéu de palha",
+        sobre:
+          "Se pintou com cabelo laranja e pinceladas que parecem vento. Ele fez mais de 30 autorretratos na vida!",
       },
     ],
-    regraSimples:
-      "No autorretrato NÃO existe certo ou errado. Existe o SEU jeito de se ver.",
-  },
-  demonstracao: {
-    titulo: "Aurora mostra como começar",
-    passos: [
-      "1️⃣ Desenhe um círculo (ou um ovinho) — vai ser a cabeça.",
-      "2️⃣ Duas bolinhas para os olhos.",
-      "3️⃣ Uma linha curvinha para o nariz.",
-      "4️⃣ Uma curva sorridente (ou reta, ou triste — do jeito que você se sente hoje).",
-      "5️⃣ O cabelo! Do jeito que ELE é: cacheado, liso, curto, comprido, colorido.",
-      "6️⃣ Detalhes só seus: óculos? Brinco? Sardas? Uma tiara?",
-    ],
-    dica: "Não precisa ficar igual foto. Autorretrato NÃO É foto. É como VOCÊ SE VÊ.",
-  },
-  experimentacao: {
-    convite:
-      "Antes de valer, TESTE. Rabisque, erre, apague, tente de novo. É assim que artista faz.",
-    desafios: [
-      "Desenhe UM olho bem grande. Só um.",
-      "Escolha uma cor bem doida para o cabelo (verde? roxo?).",
-      "Faça uma bocona sorrindo mostrando os dentes.",
-    ],
-  },
-  producaoGuiada: {
-    passoAPasso: [
-      "Agora vamos juntos. Aurora acompanha você.",
-      "Passo 1: escolha uma cor de contorno (preto, marrom ou roxo funcionam bem).",
-      "Passo 2: desenhe o formato do rosto. Devagar.",
-      "Passo 3: agora os olhos. Repare no seu no espelho — são redondos? Puxadinhos?",
-      "Passo 4: nariz e boca. Aurora dica: menos é mais.",
-      "Passo 5: cabelo. Troque pra cor do seu cabelo (ou uma cor inventada).",
-      "Passo 6: pinte a pele. Escolha o tom que combina com você.",
-      "Passo 7: adicione UM detalhe só seu (óculos, brinco, tiara, chapéu).",
-    ],
-  },
-  producaoLivre: {
-    titulo: "Agora é SÓ SEU 🎨",
-    instrucao:
-      "Faça o SEU autorretrato do zero. Sem professora ajudando. Do jeito que VOCÊ quer se ver hoje.",
-    dicas: [
-      "Você pode se pintar sorrindo, sério, dançando… como quiser.",
-      "Você pode inventar um fundo (jardim, escola, quarto).",
-      "Você pode se pintar como super-herói, princesa, cientista — se é assim que você se sente hoje.",
-    ],
-  },
-  compartilhar: {
     perguntas: [
-      "Por que você escolheu ESSAS cores?",
-      "O que tem no seu autorretrato que é SÓ SEU?",
-      "Se você fizesse amanhã, seria igual? Por quê?",
+      "O que você percebe primeiro em cada obra?",
+      "Essa pessoa parece alegre ou séria?",
+      "Qual cor chamou mais a sua atenção?",
     ],
+    faladoPeloBrilha:
+      "Os artistas fazem autorretratos para mostrar quem são e como se sentem por dentro.",
   },
-  curiosidade: {
-    titulo: "Você sabia?",
-    fatos: [
-      "A pintora Frida Kahlo tinha uma cama com um espelho no teto — foi por causa dela que aprendeu a se pintar!",
-      "O artista Van Gogh se pintou mais de 30 vezes. Em uma delas, ele estava sem uma orelha (uma história bem doida!).",
-      "No mundo todo tem mais de 8 bilhões de pessoas. E nenhuma tem o rosto igual ao seu. NENHUMA.",
-    ],
-  },
-  projetoFinal: {
-    titulo: "Meu Autorretrato — Obra Oficial",
-    entregavel:
-      "Salvar o autorretrato final no Álbum de Recordações do aluno. Fica pra vida toda.",
-    legendaSugerida: "Meu autorretrato — Eu sou uma obra de arte 🎨",
-  },
-  rubrica: {
-    criterios: [
+
+  passoAPasso: {
+    intro:
+      "Agora eu, Brilha, vou te ensinar passo a passo. Faça devagar, no seu ritmo. Cada passo pode ser repetido.",
+    passos: [
       {
-        nome: "Rosto tem os elementos principais",
-        descricao: "Olhos, nariz, boca e cabelo aparecem no desenho.",
+        titulo: "1. Desenhe um círculo ou um oval",
+        descricao: "Esse é o formato do rosto. Não precisa ser perfeito!",
       },
       {
-        nome: "Escolha de cores intencional",
-        descricao: "A criança escolheu cores de propósito, não aleatórias.",
-      },
-      {
-        nome: "Um detalhe pessoal",
-        descricao: "Óculos, brinco, tiara, cicatriz, sarda — algo só dela.",
-      },
-      {
-        nome: "Coragem de arriscar",
+        titulo: "2. Marque onde ficam os olhos",
         descricao:
-          "Tentou algo diferente (fundo, cor inventada, expressão fora do óbvio).",
+          "Uma linha no meio do rosto ajuda. Os olhos ficam nessa linha.",
+      },
+      {
+        titulo: "3. Acrescente o nariz",
+        descricao: "Entre os olhos e a boca. Uma curvinha ou duas bolinhas.",
+      },
+      {
+        titulo: "4. Desenhe a boca",
+        descricao: "Sorrindo? Séria? Do jeito que VOCÊ está hoje.",
+      },
+      {
+        titulo: "5. Faça o cabelo",
+        descricao: "Do jeitinho que ele é: liso, cacheado, curto, comprido…",
+      },
+      {
+        titulo: "6. Acrescente detalhes",
+        descricao:
+          "Sardas, pintinhas, óculos, brinco, tiara — o que faz VOCÊ ser você.",
       },
     ],
-    niveis: [
-      { nome: "🌱 Começando", cor: "bg-stone-100 text-stone-700" },
-      { nome: "🌸 Explorando", cor: "bg-rose-100 text-rose-700" },
-      { nome: "🎨 Criando com autoria", cor: "bg-amber-100 text-amber-700" },
-      { nome: "⭐ Artista brilhante", cor: "bg-yellow-200 text-yellow-800" },
+  },
+
+  producao: {
+    instrucao:
+      "Agora o canvas está liberado. Faça o SEU primeiro autorretrato. Sem pressa.",
+    dicasDoBrilha: [
+      "Observe seu cabelo.",
+      "Seu sorriso é diferente de qualquer outro.",
+      "Não existe desenho perfeito. Existe desenho verdadeiro.",
+    ],
+    legendaSalvar: "Meu Primeiro Retrato de Artista 🎨",
+  },
+
+  conversa: {
+    intro: "Toda vez que um artista termina uma obra, ele conversa sobre ela. Sua vez:",
+    perguntas: [
+      "Qual foi a parte mais fácil de desenhar?",
+      "Qual foi a parte mais difícil?",
+      "O que você mais gosta no seu desenho?",
     ],
   },
-  relatorio: {
-    paraPais:
-      "Hoje seu(sua) filho(a) fez o próprio autorretrato depois de conhecer Frida Kahlo, Van Gogh e Tarsila do Amaral. Peça pra ele(a) contar POR QUÊ escolheu as cores — é aí que a arte ensina a se conhecer.",
-    paraProfessor:
-      "Aula EF15AR01/23 — autorretrato como percepção de si. Observar se o aluno arrisca cores não-realistas (indicador de expressão simbólica) e se inclui um detalhe pessoal (indicador de autoria).",
-    paraAdmin:
-      "Aula Modelo SPEB 1.0 · Arte 2º Ano · Unidade 1 · Aula 01. 17 seções obrigatórias implementadas. Portfólio salvo em missao_familia_registros com curso_slug='arte-2ano'.",
+
+  cores: {
+    explicacao:
+      "As cores também mostram sentimentos. Amarelo pode ser alegria. Azul pode ser calma. Vermelho pode ser força.",
+    perguntaEmocao: "Como você está se sentindo hoje?",
+    emocoes: [
+      { nome: "Alegre", cor: "amarelo", hex: "#FCD34D" },
+      { nome: "Calmo(a)", cor: "azul", hex: "#7DD3FC" },
+      { nome: "Forte", cor: "vermelho", hex: "#F87171" },
+      { nome: "Sonhador(a)", cor: "roxo", hex: "#C4B5FD" },
+      { nome: "Cheio(a) de energia", cor: "laranja", hex: "#FDBA74" },
+      { nome: "Em paz", cor: "verde", hex: "#86EFAC" },
+    ],
+  },
+
+  missaoCasa: {
+    convite:
+      "Olhe para as pessoas da sua família. Repare bem em cada rosto. O que muda de uma pessoa para outra?",
+    observarNaFamilia: [
+      "Cabelo (cor, tamanho, formato)",
+      "Olhos",
+      "Sorriso",
+      "Formato do rosto",
+    ],
+    entregavel:
+      "Se quiser, desenhe outra pessoa da família e fotografe o desenho para adicionar ao seu portfólio.",
+  },
+
+  galeria: {
+    intro:
+      "Toda obra de arte tem uma ficha. A sua também. Veja como ela aparece na sua galeria:",
+    exemploTitulo: "Meu Primeiro Retrato de Artista",
+  },
+
+  curiosidade: {
+    fato:
+      "Muitos artistas fazem vários autorretratos ao longo da vida para perceber como mudaram com o tempo. Van Gogh pintou a si mesmo mais de 30 vezes!",
+    conexaoFuturo:
+      "No final do 2º ano você fará um novo autorretrato — e poderá comparar sua evolução como artista.",
+  },
+
+  projeto: {
+    nome: "Meu Primeiro Retrato de Artista",
+    descricao:
+      "O desenho criado hoje será a PRIMEIRA obra do seu Portfólio Artístico do 2º Ano. Durante o ano, novas produções serão adicionadas até formar uma coleção completa.",
+  },
+
+  avaliacao: {
+    intro: "Durante a aula, o sistema observa:",
+    criterios: [
+      "Participação",
+      "Observação dos detalhes",
+      "Organização do desenho",
+      "Criatividade",
+      "Explicação sobre a própria obra",
+      "Conclusão da atividade",
+    ],
+    obs: "Não existe nota pela beleza do desenho. O foco é o desenvolvimento da observação, da expressão e da criatividade.",
+  },
+
+  encerramento: {
+    medalhaNome: "Meu Primeiro Retrato",
+    medalhaIcone: "🎨",
+    mensagem:
+      "Hoje você descobriu que todo artista começa olhando para si mesmo. Seu retrato será a primeira página da sua história na Arte.",
   },
 };
 
