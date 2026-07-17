@@ -18,6 +18,7 @@ const aula: AulaArte = {
     {
       tipo: "historia",
       titulo: "A Floresta Musical",
+      icone: "nota",
       texto:
         "Brilha entrou numa floresta bem diferente: nela, tudo faz música! O vento cantarola, a água canta baixinho, os passarinhos assoviam, até as pedras têm som. Vem descobrir quantos sons diferentes existem no mundo!",
       lapis: [
