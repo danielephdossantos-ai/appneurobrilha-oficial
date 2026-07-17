@@ -120,6 +120,10 @@ export type EtapaBloco1 =
   | { tipo: "sequenciador"; titulo: string; instrucao: string; passos: number; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino"; cor: string }> }
   | { tipo: "memoria-sonora"; titulo: string; instrucao: string; pares: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino" }> }
   | { tipo: "ritmo-repetir"; titulo: string; instrucao: string; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino"; cor: string }>; sequencias: number[][] }
+  // ---- Unidade 2 v2 · Desenhando o Mundo (mecânicas novas) ----
+  | { tipo: "traco-guiado"; titulo: string; instrucao: string; figuras: Array<{ nome: string; emoji: string; d: string; viewBox?: string }> }
+  | { tipo: "completar-metade"; titulo: string; instrucao: string; itens: Array<{ nome: string; figura: "borboleta" | "coracao" | "rosto" | "arvore" | "flor"; dica: string }> }
+  | { tipo: "detetive-obra"; titulo: string; instrucao: string; obraUrl: string; alt: string; artista: string; obra: string; ano: string; achados: Array<{ x: number; y: number; r: number; nome: string; dica: string; revelacao: string }> }
   | { tipo: "relatorio"; titulo: string; texto: string };
 
 export type AulaArte = {
