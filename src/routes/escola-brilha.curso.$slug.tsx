@@ -35,6 +35,7 @@ function TrilhaCurso() {
   const aulas = listAulasFlat(slug);
   const ehPortugues = curso?.tipoAula === "portugues";
   const ehGeoV1 = curso?.tipoAula === "geo-v1";
+  const ehArteV1 = curso?.tipoAula === "arte-v1";
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   // Admin/testador: TODAS as aulas ficam destravadas por padrão.
   // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
@@ -122,7 +123,12 @@ function TrilhaCurso() {
                     <button
                       disabled={!desbloqueada}
                       onClick={() => {
-                        if (ehGeoV1) {
+                        if (ehArteV1) {
+                          navigate({
+                            to: "/escola-brilha/aula-arte-v1/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                          });
+                        } else if (ehGeoV1) {
                           navigate({
                             to: "/escola-brilha/aula-geo-v1/$curso/$aula",
                             params: { curso: slug, aula: a.slug },
