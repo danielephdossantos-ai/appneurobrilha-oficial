@@ -28,10 +28,10 @@ export type EtapaBloco1 =
   | { tipo: "desenho-observacao"; titulo: string; instrucao: string; referenciaUrl: string; referenciaAlt: string; passos: string[]; paleta: CorNome[] }
   | { tipo: "sete-erros"; titulo: string; instrucao: string; cena: "parque" | "quarto"; diferencas: Array<{ x: number; y: number; r: number; nome: string }>; totalPontos: number; fotoOriginalUrl?: string; fotoModificadaUrl?: string; alt?: string }
   // ---- Unidade 3 · Música em Todo Lugar ----
-  | { tipo: "floresta-sonora"; titulo: string; instrucao: string; fotoUrl: string; alt: string; sons: Array<{ x: number; y: number; nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino" }> }
-  | { tipo: "sequenciador"; titulo: string; instrucao: string; passos: number; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino"; cor: string }> }
-  | { tipo: "memoria-sonora"; titulo: string; instrucao: string; pares: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino" }> }
-  | { tipo: "ritmo-repetir"; titulo: string; instrucao: string; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino"; cor: string }>; sequencias: number[][] }
+  | { tipo: "floresta-sonora"; titulo: string; instrucao: string; fotoUrl: string; alt: string; sons: Array<{ x: number; y: number; nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino" }> }
+  | { tipo: "sequenciador"; titulo: string; instrucao: string; passos: number; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino"; cor: string }> }
+  | { tipo: "memoria-sonora"; titulo: string; instrucao: string; pares: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino" }> }
+  | { tipo: "ritmo-repetir"; titulo: string; instrucao: string; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino"; cor: string }>; sequencias: number[][] }
   | { tipo: "relatorio"; titulo: string; texto: string };
 
 export type AulaArte = {
