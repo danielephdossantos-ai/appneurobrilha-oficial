@@ -42,7 +42,7 @@ const aula: AulaArte = {
         { x: 70, y: 40, nome: "Água correndo",    emoji: "💧", timbre: "agua" },
         { x: 25, y: 78, nome: "Folhas no chão",   emoji: "🍂", timbre: "folha" },
         { x: 60, y: 82, nome: "Pedra caindo",     emoji: "🪨", timbre: "pedra" },
-        { x: 85, y: 60, nome: "Sino distante",    emoji: "🔔", timbre: "sino" },
+        { x: 85, y: 60, nome: "Grilo cantando",   emoji: "🦗", timbre: "grilo" },
       ],
     },
     {
