@@ -2448,20 +2448,34 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
           onPointerUp={() => setDrawing(false)}
         />
       </div>
-      <div className="mt-3 flex flex-wrap gap-2 items-center">
-        {CORES.map(c => (
-          <button key={c} aria-label={c} onClick={() => setCor(c)}
-            className="w-9 h-9 rounded-full border-2"
-            style={{ background: c, borderColor: cor === c ? "#F59E0B" : "#fff", boxShadow: cor === c ? "0 0 0 3px #FCD34D" : "0 2px 4px rgba(0,0,0,.2)" }}/>
-        ))}
-        <button className="brush-btn secondary ml-auto" onClick={() => setKey(k => k + 1)}>Limpar</button>
-        <button className="brush-btn secondary" onClick={() => setShowEspelho(s => !s)}>
-          {showEspelho ? "Esconder espelho" : "Ver o espelho"}
-        </button>
-        <button className="brush-btn" onClick={proxima}>
-          {idx + 1 < etapa.itens.length ? "Próxima →" : "Concluir ✓"}
-        </button>
+      <div className="mt-3 space-y-2">
+        <div className="flex flex-wrap gap-1.5 items-center">
+          {CORES.map(c => (
+            <button key={c} aria-label={c} onClick={() => setCor(c)}
+              className="w-9 h-9 rounded-full border-2 transition-transform hover:scale-110"
+              style={{ background: c, borderColor: cor === c ? "#F59E0B" : "#fff", boxShadow: cor === c ? "0 0 0 3px #FCD34D" : "0 2px 4px rgba(0,0,0,.2)" }}/>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-xs font-bold opacity-70">Pincel:</span>
+          {TAMANHOS.map(t => (
+            <button key={t} onClick={() => setTamanho(t)}
+              className="rounded-full border-2 flex items-center justify-center bg-white transition-transform hover:scale-110"
+              style={{ width: 40, height: 40, borderColor: tamanho === t ? "#F59E0B" : "#e5e7eb", boxShadow: tamanho === t ? "0 0 0 3px #FCD34D" : "none" }}
+              aria-label={`Pincel ${t}px`}>
+              <span className="rounded-full block" style={{ width: t, height: t, background: cor }}/>
+            </button>
+          ))}
+          <button className="brush-btn secondary ml-auto" onClick={() => setKey(k => k + 1)}>Limpar</button>
+          <button className="brush-btn secondary" onClick={() => setShowEspelho(s => !s)}>
+            {showEspelho ? "Esconder espelho" : "Ver o espelho"}
+          </button>
+          <button className="brush-btn" onClick={proxima}>
+            {idx + 1 < etapa.itens.length ? "Próxima →" : "Concluir ✓"}
+          </button>
+        </div>
       </div>
+
     </div>
   );
 }
