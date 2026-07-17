@@ -112,10 +112,10 @@ export const aula01: AulaArteV1 = {
       "Cada pigmento era um segredo da natureza. E até hoje, quando misturamos duas cores primárias, a MESMA magia acontece.",
     ],
     pigmentos: [
-      { nome: "Vermelho da terra", hex: "#b91c1c", fonte: "Terra argilosa", emoji: "🟫" },
-      { nome: "Amarelo do urucum", hex: "#eab308", fonte: "Sementes de urucum", emoji: "🌰" },
-      { nome: "Verde da folha", hex: "#16a34a", fonte: "Folhas amassadas", emoji: "🍃" },
-      { nome: "Azul do anil", hex: "#1d4ed8", fonte: "Planta anileira", emoji: "🌿" },
+      { nome: "Vermelho da terra", hex: "#b91c1c", fonte: "Terra argilosa", emoji: "🟫", fotoUrl: pigVermelho },
+      { nome: "Amarelo do urucum", hex: "#eab308", fonte: "Sementes de urucum", emoji: "🌰", fotoUrl: pigUrucum },
+      { nome: "Verde da folha", hex: "#16a34a", fonte: "Folhas amassadas", emoji: "🍃", fotoUrl: pigFolha },
+      { nome: "Azul do anil", hex: "#1d4ed8", fonte: "Planta anileira", emoji: "🌿", fotoUrl: pigAnil },
     ],
   },
 
