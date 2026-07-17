@@ -480,32 +480,36 @@ function CenaVocabulario({
   return (
     <Painel>
       <FalaAurora texto={cena.aurora} />
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {cena.cards.map((c, i) => {
           const virado = virados.has(i);
           return (
             <button key={i} onClick={() => virar(i)}
-              className="relative aspect-[3/4] rounded-2xl border-4 border-white/30 shadow-lg transition-all hover:scale-105 overflow-hidden"
+              className="relative w-full min-h-[9rem] sm:aspect-[3/4] sm:min-h-0 rounded-2xl border-4 border-white/30 shadow-lg transition-all hover:scale-[1.02] overflow-hidden"
               style={{ backgroundColor: virado ? "white" : c.cor }}>
               {!virado ? (
-                <div className="h-full flex flex-col items-center justify-center gap-2 text-white">
+                <div className="h-full flex flex-row sm:flex-col items-center justify-center sm:justify-center gap-3 sm:gap-2 p-3 text-white">
                   {c.fotoUrl ? (
-                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-20 h-20 object-cover rounded-full border-2 border-white/50 shadow-md" />
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 object-cover rounded-full border-2 border-white/50 shadow-md" />
                   ) : (
-                    <div className="text-5xl drop-shadow">{c.emoji}</div>
+                    <div className="text-4xl sm:text-5xl shrink-0 drop-shadow">{c.emoji}</div>
                   )}
-                  <div className="text-lg font-black uppercase tracking-wider drop-shadow-lg">{c.termo}</div>
-                  <div className="text-[10px] mt-2 text-white/80">toque para virar</div>
+                  <div className="min-w-0 flex-1 sm:flex-none text-left sm:text-center">
+                    <div className="text-lg font-black uppercase tracking-wider drop-shadow-lg">{c.termo}</div>
+                    <div className="text-[10px] mt-1 text-white/80">toque para virar</div>
+                  </div>
                 </div>
               ) : (
-                <div className="h-full flex flex-col items-center justify-center gap-2 p-2 text-slate-900">
+                <div className="h-full flex flex-row sm:flex-col items-center gap-3 sm:gap-2 p-3 sm:p-2 text-slate-900">
                   {c.fotoUrl ? (
-                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-full h-24 object-cover rounded-lg" />
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-20 h-20 sm:w-full sm:h-24 shrink-0 object-cover rounded-lg" />
                   ) : (
-                    <div className="text-3xl">{c.emoji}</div>
+                    <div className="text-3xl shrink-0">{c.emoji}</div>
                   )}
-                  <div className="text-sm font-black" style={{ color: c.cor }}>{c.termo}</div>
-                  <div className="text-xs leading-tight text-center">{c.definicao}</div>
+                  <div className="min-w-0 flex-1 text-left sm:text-center">
+                    <div className="text-sm font-black" style={{ color: c.cor }}>{c.termo}</div>
+                    <div className="text-xs leading-tight">{c.definicao}</div>
+                  </div>
                 </div>
               )}
             </button>
