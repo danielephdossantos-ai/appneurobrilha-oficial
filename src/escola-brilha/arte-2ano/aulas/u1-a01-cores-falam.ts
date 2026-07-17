@@ -1,9 +1,94 @@
-import obraAsset from "@/assets/atelier/atelier-obra.jpg.asset.json";
 import rostoFeliz from "@/assets/neuro-treino/emocoes/feliz.png.asset.json";
 import rostoSono from "@/assets/neuro-treino/emocoes/sono.png.asset.json";
 import rostoSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png.asset.json";
-import rostoTriste from "@/assets/neuro-treino/emocoes/triste.png.asset.json";
 import rostoBravo from "@/assets/neuro-treino/emocoes/bravo.png.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
+
+export type ObraFamosa = {
+  id: string;
+  titulo: string;
+  artista: string;
+  pais: string;
+  ano: string;
+  url: string;
+  cores: string[];
+  sentimento: string;
+  historia: string;
+};
+
+export const OBRAS_FAMOSAS: ObraFamosa[] = [
+  {
+    id: "noite-estrelada",
+    titulo: "A Noite Estrelada",
+    artista: "Vincent van Gogh",
+    pais: "🇳🇱 Holanda",
+    ano: "1889",
+    url: obraNoiteEstrelada.url,
+    cores: ["Azul escuro", "Amarelo", "Branco"],
+    sentimento: "Mistério e movimento",
+    historia: "Van Gogh pintou o céu da noite que via da janela do quarto dele. Ele usou o pincel fazendo rodinhas pra dar a sensação de vento. Você consegue ver os redemoinhos no céu?",
+  },
+  {
+    id: "girassois",
+    titulo: "Os Girassóis",
+    artista: "Vincent van Gogh",
+    pais: "🇳🇱 Holanda",
+    ano: "1888",
+    url: obraGirassois.url,
+    cores: ["Amarelo", "Laranja", "Verde"],
+    sentimento: "Alegria e calor",
+    historia: "Van Gogh amava a cor amarela. Ele dizia que amarelo era a cor da amizade. Por isso pintou muitos girassóis pra decorar o quarto de um amigo artista.",
+  },
+  {
+    id: "nenufares",
+    titulo: "Os Nenúfares",
+    artista: "Claude Monet",
+    pais: "🇫🇷 França",
+    ano: "1906",
+    url: obraNenufares.url,
+    cores: ["Azul", "Verde", "Rosa"],
+    sentimento: "Calma e sonho",
+    historia: "Monet plantou um lago cheio de flores no jardim da casa dele. Ele passava horas pintando as flores boiando na água. Cores suaves fazem a gente se sentir em paz.",
+  },
+  {
+    id: "tarsila",
+    titulo: "A Boneca de Sol",
+    artista: "Inspirado em Tarsila do Amaral",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo de 1928",
+    url: obraTarsila.url,
+    cores: ["Azul", "Amarelo", "Verde", "Marrom"],
+    sentimento: "Brasilidade e sol forte",
+    historia: "Tarsila pintou o Brasil com cores fortes: sol grande e amarelo, terra vermelha, cactos e o céu bem azul. Ela mostrou que o Brasil tem cores próprias!",
+  },
+  {
+    id: "portinari",
+    titulo: "Retrato do Povo",
+    artista: "Inspirado em Cândido Portinari",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo de 1944",
+    url: obraPortinari.url,
+    cores: ["Marrom", "Vermelho", "Cinza"],
+    sentimento: "Respeito e coragem",
+    historia: "Portinari pintou trabalhadores brasileiros com muita dignidade. Ele usou cores da terra pra mostrar que essas pessoas fazem parte do nosso chão.",
+  },
+  {
+    id: "athos",
+    titulo: "Azulejos de Brasília",
+    artista: "Inspirado em Athos Bulcão",
+    pais: "🇧🇷 Brasil",
+    ano: "estilo dos anos 1960",
+    url: obraAthos.url,
+    cores: ["Azul", "Branco", "Preto"],
+    sentimento: "Ritmo e organização",
+    historia: "Athos criou padrões geométricos que decoram prédios de Brasília. Cada azulejo é simples, mas juntos eles formam desenhos incríveis, como uma música feita de formas.",
+  },
+];
 
 export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "laranja" | "rosa" | "branco" | "preto" | "marrom";
 
@@ -15,6 +100,9 @@ export type EtapaBloco1 =
   | { tipo: "texturas"; titulo: string; instrucao: string; itens: Array<{ nome: string; textura: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas"; combina: string }> }
   | { tipo: "curiosidade"; titulo: string; texto: string }
   | { tipo: "quiz"; titulo: string; perguntas: Array<{ pergunta: string; opcoes: string[]; correta: number; explicacao: string }> }
+  // ---- Novas mecânicas U1-A01 (piloto) ----
+  | { tipo: "galeria-obras"; titulo: string; instrucao: string; obras: ObraFamosa[] }
+  | { tipo: "memoria-obras"; titulo: string; instrucao: string; pares: Array<{ id: string; titulo: string; artista: string; url: string }> }
   // ---- Bloco 2 (agora ativo) ----
   | { tipo: "pintura-digital"; titulo: string; instrucao: string; paleta: CorNome[] }
   | { tipo: "cor-emocao-drag"; titulo: string; instrucao: string; pares: Array<{ emocao: string; emoji: string; cor: CorNome; hex: string }> }
@@ -103,12 +191,18 @@ const aula: AulaArte = {
     {
       tipo: "artista",
       titulo: "Uma obra pra sentir",
-      obraUrl: obraAsset.url,
-      obraLegenda: "Pintura inspirada no estilo de Tarsila do Amaral — cores brasileiras.",
-      pergunta: "O que você sente quando olha esta pintura?",
-      opcoes: ["😊 Feliz", "😌 Calmo", "🤔 Curioso", "😮 Surpreso"],
+      obraUrl: obraNoiteEstrelada.url,
+      obraLegenda: "A Noite Estrelada — Vincent van Gogh, 1889 (Holanda). Uma das pinturas mais famosas do mundo!",
+      pergunta: "O que você sente quando olha essa pintura?",
+      opcoes: ["🌌 Mistério", "😌 Calmo", "🤔 Curioso", "😮 Surpreso"],
       comentario:
-        "Não existe resposta errada! A artista escolheu amarelo forte, verde das plantas e azul do rio. Cores quentes deixam a cena viva e alegre.",
+        "Não existe resposta errada! Van Gogh pintou o céu que via da janela do quarto dele. Ele usou o pincel fazendo redemoinhos pra dar a sensação de vento. Azul escuro traz mistério, e o amarelo dos astros dá esperança no meio da noite.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "Museu das Cores",
+      instrucao: "Toca em cada obra pra conhecer o artista, o país e o que a pintura conta.",
+      obras: OBRAS_FAMOSAS,
     },
     {
       tipo: "texturas",
@@ -121,6 +215,17 @@ const aula: AulaArte = {
         { nome: "Rio",             textura: "agua",    combina: "🐟 Peixinho" },
         { nome: "Cobertor",        textura: "tecido",  combina: "🧸 Ursinho" },
         { nome: "Chão do parque",  textura: "folhas",  combina: "🍂 Outono" },
+      ],
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "Memória das Obras",
+      instrucao: "Vira duas cartas: a pintura e o nome do artista. Encontra todos os pares!",
+      pares: [
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+        { id: "girassois",       titulo: "Os Girassóis",      artista: "Van Gogh", url: obraGirassois.url },
+        { id: "nenufares",       titulo: "Os Nenúfares",      artista: "Monet",    url: obraNenufares.url },
+        { id: "tarsila",         titulo: "Boneca de Sol",     artista: "Tarsila",  url: obraTarsila.url },
       ],
     },
     {
