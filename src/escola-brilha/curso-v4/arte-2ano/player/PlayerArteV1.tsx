@@ -489,13 +489,21 @@ function CenaVocabulario({
               style={{ backgroundColor: virado ? "white" : c.cor }}>
               {!virado ? (
                 <div className="h-full flex flex-col items-center justify-center gap-2 text-white">
-                  <div className="text-5xl drop-shadow">{c.emoji}</div>
+                  {c.fotoUrl ? (
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-20 h-20 object-cover rounded-full border-2 border-white/50 shadow-md" />
+                  ) : (
+                    <div className="text-5xl drop-shadow">{c.emoji}</div>
+                  )}
                   <div className="text-lg font-black uppercase tracking-wider drop-shadow-lg">{c.termo}</div>
                   <div className="text-[10px] mt-2 text-white/80">toque para virar</div>
                 </div>
               ) : (
-                <div className="h-full flex flex-col items-center justify-center gap-2 p-3 text-slate-900">
-                  <div className="text-3xl">{c.emoji}</div>
+                <div className="h-full flex flex-col items-center justify-center gap-2 p-2 text-slate-900">
+                  {c.fotoUrl ? (
+                    <img src={c.fotoUrl} alt="" loading="lazy" className="w-full h-24 object-cover rounded-lg" />
+                  ) : (
+                    <div className="text-3xl">{c.emoji}</div>
+                  )}
                   <div className="text-sm font-black" style={{ color: c.cor }}>{c.termo}</div>
                   <div className="text-xs leading-tight text-center">{c.definicao}</div>
                 </div>
@@ -559,9 +567,13 @@ function CenaLeituraTintas({
       <div className="grid grid-cols-4 gap-2 mb-3">
         {cena.pigmentos.map((p, i) => (
           <button key={i} onClick={() => tocarPigmento(i)}
-            className={`aspect-square rounded-xl border-4 flex flex-col items-center justify-center gap-1 transition-all ${pigmentoOn === i ? "border-amber-300 scale-105" : "border-white/30 hover:scale-105"}`}
-            style={{ backgroundColor: p.hex }}>
-            <div className="text-2xl drop-shadow">{p.emoji}</div>
+            className={`aspect-square rounded-xl border-4 flex flex-col items-center justify-center gap-1 overflow-hidden transition-all ${pigmentoOn === i ? "border-amber-300 scale-105" : "border-white/30 hover:scale-105"}`}
+            style={{ backgroundColor: p.fotoUrl ? "transparent" : p.hex }}>
+            {p.fotoUrl ? (
+              <img src={p.fotoUrl} alt={p.nome} loading="lazy" className="w-full h-full object-cover" />
+            ) : (
+              <div className="text-2xl drop-shadow">{p.emoji}</div>
+            )}
           </button>
         ))}
       </div>
@@ -672,9 +684,14 @@ function CenaPintarAnimais({
         Animal {idx + 1} / {cena.animais.length}
       </div>
 
-      <div className="relative mx-auto w-40 h-40 rounded-full grid place-items-center mb-4 border-4 border-white/30 transition-colors"
+      <div className="relative mx-auto w-44 h-44 rounded-full grid place-items-center mb-4 border-4 border-white/30 overflow-hidden transition-colors"
         style={{ backgroundColor: pintado === animal.corAlvo.hex ? animal.corAlvo.hex : "rgba(255,255,255,0.1)" }}>
-        <div className="text-7xl drop-shadow-lg" style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.7)" }}>{animal.emoji}</div>
+        {animal.fotoUrl ? (
+          <img src={animal.fotoUrl} alt={animal.nome} loading="lazy" className="w-full h-full object-cover transition-all"
+            style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.6)" }} />
+        ) : (
+          <div className="text-7xl drop-shadow-lg" style={{ filter: pintado === animal.corAlvo.hex ? "none" : "grayscale(1) opacity(0.7)" }}>{animal.emoji}</div>
+        )}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-slate-900 px-3 py-0.5 rounded-full text-xs font-black shadow">{animal.nome}</div>
       </div>
 
@@ -760,8 +777,13 @@ function CenaSequencia({
               const p = cena.passos.find((x) => x.id === id)!;
               return (
                 <div key={id} className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-300/40 rounded-lg p-2 text-sm font-bold">
-                  <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black">{i + 1}</span>
-                  <span>{p.emoji}</span><span>{p.texto}</span>
+                  <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black shrink-0">{i + 1}</span>
+                  {p.fotoUrl ? (
+                    <img src={p.fotoUrl} alt="" loading="lazy" className="w-10 h-10 rounded object-cover shrink-0" />
+                  ) : (
+                    <span className="text-xl shrink-0">{p.emoji}</span>
+                  )}
+                  <span>{p.texto}</span>
                 </div>
               );
             })}
@@ -776,10 +798,15 @@ function CenaSequencia({
           const usado = ordem.includes(p.id);
           return (
             <button key={p.id} onClick={() => escolher(p.id)} disabled={usado || completo}
-              className={`text-left rounded-xl p-3 border-2 font-bold text-sm flex items-center gap-2 transition-all ${
+              className={`text-left rounded-xl p-3 border-2 font-bold text-sm flex items-center gap-3 transition-all ${
                 usado ? "bg-white/5 border-white/10 opacity-40" : "bg-white/10 border-white/25 hover:bg-white/20 active:scale-95"
               }`}>
-              <span className="text-xl">{p.emoji}</span><span>{p.texto}</span>
+              {p.fotoUrl ? (
+                <img src={p.fotoUrl} alt="" loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
+              ) : (
+                <span className="text-xl shrink-0">{p.emoji}</span>
+              )}
+              <span>{p.texto}</span>
             </button>
           );
         })}

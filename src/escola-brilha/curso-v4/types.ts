@@ -968,13 +968,13 @@ export type CenaArteV1 =
   | {
       tipo: "vocabularioCards";
       aurora: string;
-      cards: Array<{ termo: string; definicao: string; emoji: string; cor: string }>;
+      cards: Array<{ termo: string; definicao: string; emoji: string; cor: string; fotoUrl?: string }>;
     }
   | {
       tipo: "leituraTintas";
       aurora: string;
       paragrafos: string[];
-      pigmentos: Array<{ nome: string; hex: string; fonte: string; emoji: string }>;
+      pigmentos: Array<{ nome: string; hex: string; fonte: string; emoji: string; fotoUrl?: string }>;
     }
   | {
       tipo: "quizCores";
@@ -992,6 +992,7 @@ export type CenaArteV1 =
       animais: Array<{
         nome: string;
         emoji: string;
+        fotoUrl?: string;
         corAlvo: { nome: string; hex: string };
         opcoes: Array<{ nome: string; hex: string }>;
         falaAcerto: string;
@@ -1000,7 +1001,7 @@ export type CenaArteV1 =
   | {
       tipo: "sequenciaMistura";
       aurora: string;
-      passos: Array<{ id: string; texto: string; emoji: string; ordem: number }>;
+      passos: Array<{ id: string; texto: string; emoji: string; ordem: number; fotoUrl?: string }>;
       falaAcerto: string;
     }
   | {

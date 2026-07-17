@@ -1,4 +1,20 @@
 import type { AulaArteV1, PotePrimario } from "../../types";
+import vocabPrimaria from "@/assets/arte-2ano/u1-vocab-primaria.jpg";
+import vocabSecundaria from "@/assets/arte-2ano/u1-vocab-secundaria.jpg";
+import vocabMistura from "@/assets/arte-2ano/u1-vocab-mistura.jpg";
+import vocabPigmento from "@/assets/arte-2ano/u1-vocab-pigmento.jpg";
+import pigVermelho from "@/assets/arte-2ano/u1-pig-vermelho-terra.jpg";
+import pigUrucum from "@/assets/arte-2ano/u1-pig-urucum.jpg";
+import pigFolha from "@/assets/arte-2ano/u1-pig-folha-verde.jpg";
+import pigAnil from "@/assets/arte-2ano/u1-pig-anil.jpg";
+import animalSapo from "@/assets/arte-2ano/u1-animal-sapo.jpg";
+import animalRaposa from "@/assets/arte-2ano/u1-animal-raposa.jpg";
+import animalBorboleta from "@/assets/arte-2ano/u1-animal-borboleta.jpg";
+import passo1Img from "@/assets/arte-2ano/u1-passo1-escolho.jpg";
+import passo2Img from "@/assets/arte-2ano/u1-passo2-cauldron.jpg";
+import passo3Img from "@/assets/arte-2ano/u1-passo3-segunda.jpg";
+import passo4Img from "@/assets/arte-2ano/u1-passo4-misturo.jpg";
+import passo5Img from "@/assets/arte-2ano/u1-passo5-nasce.jpg";
 
 const VERMELHO: PotePrimario = { id: "vermelho", hex: "#ef4444", nome: "Vermelho" };
 const AZUL: PotePrimario = { id: "azul", hex: "#2563eb", nome: "Azul" };
@@ -79,10 +95,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada cartão para ouvir a palavra do ateliê e ver o que ela significa.",
     cards: [
-      { termo: "Primária", definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.", emoji: "🎨", cor: "#ef4444" },
-      { termo: "Secundária", definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.", emoji: "🌈", cor: "#8b5cf6" },
-      { termo: "Mistura", definicao: "É quando duas tintas se juntam e viram uma cor nova.", emoji: "🫙", cor: "#f97316" },
-      { termo: "Pigmento", definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.", emoji: "🌿", cor: "#22c55e" },
+      { termo: "Primária", definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.", emoji: "🎨", cor: "#ef4444", fotoUrl: vocabPrimaria },
+      { termo: "Secundária", definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.", emoji: "🌈", cor: "#8b5cf6", fotoUrl: vocabSecundaria },
+      { termo: "Mistura", definicao: "É quando duas tintas se juntam e viram uma cor nova.", emoji: "🫙", cor: "#f97316", fotoUrl: vocabMistura },
+      { termo: "Pigmento", definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.", emoji: "🌿", cor: "#22c55e", fotoUrl: vocabPigmento },
     ],
   },
 
@@ -96,10 +112,10 @@ export const aula01: AulaArteV1 = {
       "Cada pigmento era um segredo da natureza. E até hoje, quando misturamos duas cores primárias, a MESMA magia acontece.",
     ],
     pigmentos: [
-      { nome: "Vermelho da terra", hex: "#b91c1c", fonte: "Terra argilosa", emoji: "🟫" },
-      { nome: "Amarelo do urucum", hex: "#eab308", fonte: "Sementes de urucum", emoji: "🌰" },
-      { nome: "Verde da folha", hex: "#16a34a", fonte: "Folhas amassadas", emoji: "🍃" },
-      { nome: "Azul do anil", hex: "#1d4ed8", fonte: "Planta anileira", emoji: "🌿" },
+      { nome: "Vermelho da terra", hex: "#b91c1c", fonte: "Terra argilosa", emoji: "🟫", fotoUrl: pigVermelho },
+      { nome: "Amarelo do urucum", hex: "#eab308", fonte: "Sementes de urucum", emoji: "🌰", fotoUrl: pigUrucum },
+      { nome: "Verde da folha", hex: "#16a34a", fonte: "Folhas amassadas", emoji: "🍃", fotoUrl: pigFolha },
+      { nome: "Azul do anil", hex: "#1d4ed8", fonte: "Planta anileira", emoji: "🌿", fotoUrl: pigAnil },
     ],
   },
 
@@ -145,19 +161,19 @@ export const aula01: AulaArteV1 = {
       "Os animais da floresta perderam o colorido! Escolha a cor SECUNDÁRIA certa para pintar cada um.",
     animais: [
       {
-        nome: "Sapo da folha", emoji: "🐸",
+        nome: "Sapo da folha", emoji: "🐸", fotoUrl: animalSapo,
         corAlvo: VERDE,
         opcoes: [VERDE, ROXO, LARANJA],
         falaAcerto: "Verde igual à folha! O sapinho ficou feliz.",
       },
       {
-        nome: "Raposa do pôr do sol", emoji: "🦊",
+        nome: "Raposa do pôr do sol", emoji: "🦊", fotoUrl: animalRaposa,
         corAlvo: LARANJA,
         opcoes: [VERDE, LARANJA, ROXO],
         falaAcerto: "Laranja brilhante! A raposa voltou a correr no fim da tarde.",
       },
       {
-        nome: "Borboleta da uva", emoji: "🦋",
+        nome: "Borboleta da uva", emoji: "🦋", fotoUrl: animalBorboleta,
         corAlvo: ROXO,
         opcoes: [ROXO, VERDE, LARANJA],
         falaAcerto: "Roxo lindo! A borboleta abriu as asas.",
@@ -170,11 +186,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA de como fazemos uma mistura mágica.",
     passos: [
-      { id: "p1", texto: "Escolho a primeira tinta primária", emoji: "🫙", ordem: 1 },
-      { id: "p2", texto: "Coloco no caldeirão", emoji: "⚗️", ordem: 2 },
-      { id: "p3", texto: "Escolho a segunda tinta primária", emoji: "🎨", ordem: 3 },
-      { id: "p4", texto: "Misturo bem devagar", emoji: "🥄", ordem: 4 },
-      { id: "p5", texto: "A cor secundária aparece!", emoji: "🌈", ordem: 5 },
+      { id: "p1", texto: "Escolho a primeira tinta primária", emoji: "🫙", ordem: 1, fotoUrl: passo1Img },
+      { id: "p2", texto: "Coloco no caldeirão", emoji: "⚗️", ordem: 2, fotoUrl: passo2Img },
+      { id: "p3", texto: "Escolho a segunda tinta primária", emoji: "🎨", ordem: 3, fotoUrl: passo3Img },
+      { id: "p4", texto: "Misturo bem devagar", emoji: "🥄", ordem: 4, fotoUrl: passo4Img },
+      { id: "p5", texto: "A cor secundária aparece!", emoji: "🌈", ordem: 5, fotoUrl: passo5Img },
     ],
     falaAcerto: "Uau! Você conhece a receita mágica da mistura!",
   },
