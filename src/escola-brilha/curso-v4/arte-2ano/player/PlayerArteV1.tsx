@@ -777,8 +777,13 @@ function CenaSequencia({
               const p = cena.passos.find((x) => x.id === id)!;
               return (
                 <div key={id} className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-300/40 rounded-lg p-2 text-sm font-bold">
-                  <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black">{i + 1}</span>
-                  <span>{p.emoji}</span><span>{p.texto}</span>
+                  <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black shrink-0">{i + 1}</span>
+                  {p.fotoUrl ? (
+                    <img src={p.fotoUrl} alt="" loading="lazy" className="w-10 h-10 rounded object-cover shrink-0" />
+                  ) : (
+                    <span className="text-xl shrink-0">{p.emoji}</span>
+                  )}
+                  <span>{p.texto}</span>
                 </div>
               );
             })}
