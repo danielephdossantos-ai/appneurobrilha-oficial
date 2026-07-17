@@ -1202,8 +1202,38 @@ function EtapaMusicaArte({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "
           <button className="brush-btn" onClick={tocar}><Play size={18}/> Tocar música</button>
         )}
       </div>
+      <div className="mb-3">
+        <div className="text-sm font-bold mb-2 text-center">🎨 Escolhe um desenho preto e branco pra pintar:</div>
+        <div className="flex flex-wrap gap-2 justify-center">
+          {MODELOS_PINTURA_MUSICA.map(m => {
+            const ativo = modeloId === m.id;
+            return (
+              <button
+                key={m.id}
+                onClick={() => { setModeloId(m.id); setCanvasKey(k => k + 1); }}
+                className="brush-btn"
+                style={{
+                  padding: "8px 14px",
+                  fontSize: 13,
+                  background: ativo ? undefined : "rgba(255,255,255,0.12)",
+                  color: ativo ? undefined : "#fff",
+                  boxShadow: ativo ? undefined : "inset 0 0 0 1px rgba(255,255,255,0.25)",
+                }}
+              >
+                {m.emoji} {m.nome}
+              </button>
+            );
+          })}
+        </div>
+      </div>
       <div className="text-xs text-center opacity-70 mb-2">Pinta dentro do desenho seguindo o ritmo da música 🎵</div>
-      <CanvasPintura paleta={etapa.paleta} etapaId="musica-arte" alturaCanvas={360} overlay={<MusicaColoringOverlay tocando={tocando} />} />
+      <CanvasPintura
+        key={`musica-${modeloId}-${canvasKey}`}
+        paleta={etapa.paleta}
+        etapaId={`musica-arte-${modeloId}`}
+        alturaCanvas={360}
+        overlay={MODELOS_PINTURA_MUSICA.find(m => m.id === modeloId)!.render(tocando)}
+      />
     </div>
   );
 }
