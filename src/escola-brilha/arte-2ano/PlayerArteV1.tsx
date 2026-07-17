@@ -2214,7 +2214,7 @@ function EtapaTracoGuiado({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: 
 
   const proxima = () => {
     if (idx + 1 < etapa.figuras.length) { setIdx(idx + 1); return; }
-    ctx?.marcarConcluida();
+    /* auto-tracked by scroll */
   };
 
   return (
@@ -2358,7 +2358,7 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
   const CORES = ["#111827", "#EF4444", "#F59E0B", "#22C55E", "#3B82F6", "#EC4899"];
   const proxima = () => {
     if (idx + 1 < etapa.itens.length) { setIdx(idx + 1); setKey(k => k + 1); setShowEspelho(false); return; }
-    ctx?.marcarConcluida();
+    /* auto-tracked by scroll */
   };
 
   return (
