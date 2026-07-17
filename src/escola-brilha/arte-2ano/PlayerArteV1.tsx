@@ -438,6 +438,165 @@ function EtapaArtista({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "art
   );
 }
 
+/* --------------------------- Museu das Cores (galeria interativa) --------------------------- */
+
+function EtapaGaleriaObras({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "galeria-obras" }>; say: (t: string) => Promise<void> }) {
+  const [aberta, setAberta] = useState<string | null>(null);
+  const [visitadas, setVisitadas] = useState<Set<string>>(new Set());
+  useEffect(() => { say(etapa.instrucao); }, []);
+  const obraAberta = etapa.obras.find((o) => o.id === aberta) ?? null;
+
+  const abrir = (id: string) => {
+    setAberta(id);
+    setVisitadas((s) => new Set(s).add(id));
+    const o = etapa.obras.find((x) => x.id === id);
+    if (o) say(`${o.titulo}, do artista ${o.artista}. ${o.historia}`);
+  };
+
+  return (
+    <div className="paper-card p-6">
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <h2 className="brush-title text-3xl">🖼 {etapa.titulo}</h2>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+      <p className="opacity-80 mb-4">{etapa.instrucao}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {etapa.obras.map((o) => {
+          const visitada = visitadas.has(o.id);
+          return (
+            <button
+              key={o.id}
+              onClick={() => abrir(o.id)}
+              className="relative aspect-square rounded-xl overflow-hidden border-2 border-black/10 hover:border-[var(--atelier-terracotta)] transition group"
+              style={{ boxShadow: "0 6px 14px -8px rgba(45,36,24,.4)" }}
+            >
+              <img src={o.url} alt={o.titulo} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                <div className="text-[11px] font-bold text-white leading-tight">{o.titulo}</div>
+                <div className="text-[10px] text-white/80">{o.pais}</div>
+              </div>
+              {visitada && <div className="absolute top-1 right-1 bg-green-500 text-white rounded-full p-1"><Check size={12} /></div>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="text-xs opacity-60 mt-2 text-center">Obras visitadas: {visitadas.size} / {etapa.obras.length}</div>
+
+      {obraAberta && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setAberta(null)}>
+          <div className="paper-card max-w-lg w-full max-h-[90vh] overflow-y-auto p-4" onClick={(e) => e.stopPropagation()}>
+            <img src={obraAberta.url} alt={obraAberta.titulo} className="w-full rounded-xl mb-3" />
+            <div className="flex items-start justify-between gap-2 mb-1">
+              <h3 className="brush-title text-2xl">{obraAberta.titulo}</h3>
+              <button className="brush-btn ghost !py-1 !px-2" onClick={() => setAberta(null)}><X size={16}/></button>
+            </div>
+            <div className="text-sm opacity-80 mb-2"><b>{obraAberta.artista}</b> · {obraAberta.pais} · {obraAberta.ano}</div>
+            <div className="flex flex-wrap gap-1 mb-3">
+              {obraAberta.cores.map((c) => (
+                <span key={c} className="text-[11px] bg-[var(--atelier-cream-2)] px-2 py-0.5 rounded-full border border-black/10">{c}</span>
+              ))}
+              <span className="text-[11px] bg-[var(--atelier-sage)]/20 px-2 py-0.5 rounded-full">💭 {obraAberta.sentimento}</span>
+            </div>
+            <p className="text-sm leading-relaxed mb-3">{obraAberta.historia}</p>
+            <div className="flex gap-2">
+              <BtnFala onClick={() => say(`${obraAberta.titulo}, do artista ${obraAberta.artista}. ${obraAberta.historia}`)} />
+              <button className="brush-btn !py-2 !px-3 !text-base flex-1" onClick={() => setAberta(null)}>Fechar</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* --------------------------- Memória de Obras (par obra × artista) --------------------------- */
+
+type CartaMem = { key: string; parId: string; tipo: "obra" | "artista"; url?: string; texto?: string };
+
+function EtapaMemoriaObras({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "memoria-obras" }>; say: (t: string) => Promise<void> }) {
+  const cartas = useMemo<CartaMem[]>(() => {
+    const base: CartaMem[] = [];
+    etapa.pares.forEach((p) => {
+      base.push({ key: `${p.id}-obra`, parId: p.id, tipo: "obra", url: p.url });
+      base.push({ key: `${p.id}-artista`, parId: p.id, tipo: "artista", texto: p.artista });
+    });
+    // embaralha uma vez
+    return base
+      .map((c) => ({ c, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(({ c }) => c);
+  }, [etapa]);
+
+  const [viradas, setViradas] = useState<Set<string>>(new Set());
+  const [acertadas, setAcertadas] = useState<Set<string>>(new Set());
+  const [travado, setTravado] = useState(false);
+  useEffect(() => { say(etapa.instrucao); }, []);
+
+  const virar = (carta: CartaMem) => {
+    if (travado) return;
+    if (viradas.has(carta.key) || acertadas.has(carta.parId)) return;
+    const nv = new Set(viradas); nv.add(carta.key); setViradas(nv);
+    if (nv.size < 2) return;
+    // avalia
+    setTravado(true);
+    const abertas = cartas.filter((c) => nv.has(c.key) && !acertadas.has(c.parId));
+    if (abertas.length >= 2 && abertas[0].parId === abertas[1].parId) {
+      setTimeout(() => {
+        setAcertadas((s) => new Set(s).add(abertas[0].parId));
+        setViradas(new Set());
+        setTravado(false);
+        const par = etapa.pares.find((p) => p.id === abertas[0].parId);
+        say(par ? `Par! ${par.titulo}, de ${par.artista}.` : "Par!");
+      }, 500);
+    } else {
+      setTimeout(() => { setViradas(new Set()); setTravado(false); }, 900);
+    }
+  };
+
+  const completo = acertadas.size === etapa.pares.length;
+
+  return (
+    <div className="paper-card p-6">
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <h2 className="brush-title text-3xl">🃏 {etapa.titulo}</h2>
+        <BtnFala onClick={() => say(etapa.instrucao)} />
+      </div>
+      <p className="opacity-80 mb-4">{etapa.instrucao}</p>
+      <div className="grid grid-cols-4 gap-2">
+        {cartas.map((c) => {
+          const aberta = viradas.has(c.key) || acertadas.has(c.parId);
+          const feita = acertadas.has(c.parId);
+          return (
+            <button
+              key={c.key}
+              onClick={() => virar(c)}
+              className={`aspect-square rounded-xl overflow-hidden border-2 transition ${feita ? "border-green-500 opacity-70" : aberta ? "border-[var(--atelier-terracotta)]" : "border-black/10 bg-[var(--atelier-ochre)]"}`}
+              style={{ boxShadow: "0 4px 10px -6px rgba(45,36,24,.4)" }}
+            >
+              {aberta ? (
+                c.tipo === "obra" ? (
+                  <img src={c.url} alt="" loading="lazy" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-1 text-center text-xs sm:text-sm font-bold bg-[var(--atelier-cream)] text-[var(--atelier-terracotta)] leading-tight">
+                    {c.texto}
+                  </div>
+                )
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-white text-2xl font-bold">?</div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="text-xs opacity-70 mt-3 text-center">Pares encontrados: {acertadas.size} / {etapa.pares.length}</div>
+      {completo && (
+        <div className="fade-up mt-3 p-3 rounded-xl bg-[var(--atelier-sage)]/20 text-sm text-center">
+          🎉 <b>Parabéns!</b> Você conhece as obras e os artistas!
+        </div>
+      )}
+    </div>
+  );
+
 function EtapaTexturas({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "texturas" }>; say: (t: string) => Promise<void> }) {
   const [ligacoes, setLigacoes] = useState<Record<string, string>>({});
   const [selecionada, setSelecionada] = useState<string | null>(null);
