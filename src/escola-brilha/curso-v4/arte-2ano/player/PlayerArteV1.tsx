@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { AulaArteV1, CenaArteV1, CorPrimariaId, PotePrimario } from "@/escola-brilha/curso-v4/types";
 import { speakChunked, stopSpeaking as cancelSpeak } from "@/lib/native-tts";
 import { useMascot } from "@/contexts/MascotContext";
+import { useAppState } from "@/core/store";
+import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
+import { mascoteAtribuido } from "@/escola-brilha/mascote-assign";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
