@@ -1171,7 +1171,7 @@ function EtapaRelatorio({ etapa, say, aula, indiceAtual }: { etapa: Extract<Etap
  * ===================================================================== */
 
 /* ---------- Áudio compartilhado (timbres da floresta) ---------- */
-type Timbre = "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino";
+type Timbre = "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino";
 
 let _ac: AudioContext | null = null;
 function getAC(): AudioContext | null {
@@ -1179,6 +1179,7 @@ function getAC(): AudioContext | null {
   if (!_ac) {
     try { const AC = window.AudioContext || (window as any).webkitAudioContext; _ac = new AC(); } catch { _ac = null; }
   }
+  if (_ac && _ac.state === "suspended") { try { _ac.resume(); } catch {} }
   return _ac;
 }
 
@@ -1187,40 +1188,86 @@ function playTimbre(t: Timbre) {
   const now = ctx.currentTime;
   const out = ctx.createGain(); out.gain.value = 0.35; out.connect(ctx.destination);
 
-  const beep = (freq: number, dur: number, tipo: OscillatorType = "sine", vol = 0.5, glide?: number) => {
+  const beepAt = (start: number, freq: number, dur: number, tipo: OscillatorType = "sine", vol = 0.5, glide?: number) => {
     const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = tipo; o.frequency.value = freq;
-    if (glide !== undefined) o.frequency.exponentialRampToValueAtTime(Math.max(20, glide), now + dur);
-    g.gain.setValueAtTime(0, now);
-    g.gain.linearRampToValueAtTime(vol, now + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+    o.type = tipo; o.frequency.setValueAtTime(freq, start);
+    if (glide !== undefined) o.frequency.exponentialRampToValueAtTime(Math.max(20, glide), start + dur);
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(vol, start + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
     o.connect(g); g.connect(out);
-    o.start(now); o.stop(now + dur + 0.05);
+    o.start(start); o.stop(start + dur + 0.05);
   };
+  const beep = (freq: number, dur: number, tipo: OscillatorType = "sine", vol = 0.5, glide?: number) =>
+    beepAt(now, freq, dur, tipo, vol, glide);
 
-  const noise = (dur: number, cutoff: number, vol = 0.5) => {
+  const noiseAt = (start: number, dur: number, cutoff: number, vol = 0.5) => {
     const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
     const d = buf.getChannelData(0);
     for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
     const src = ctx.createBufferSource(); src.buffer = buf;
     const bp = ctx.createBiquadFilter(); bp.type = "lowpass"; bp.frequency.value = cutoff;
-    const g = ctx.createGain(); g.gain.value = vol;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(vol, start + 0.05);
+    g.gain.linearRampToValueAtTime(0, start + dur);
     src.connect(bp); bp.connect(g); g.connect(out);
-    src.start(now); src.stop(now + dur);
+    src.start(start); src.stop(start + dur);
   };
+  const noise = (dur: number, cutoff: number, vol = 0.5) => noiseAt(now, dur, cutoff, vol);
 
   switch (t) {
-    case "sino":    beep(880, 1.4, "sine", 0.6, 800); beep(1760, 1.0, "sine", 0.15, 1600); break;
-    case "passaro": beep(1200, 0.12, "sine", 0.5, 2200); setTimeout(() => beep(1600, 0.1, "sine", 0.4, 2400), 130); setTimeout(() => beep(1400, 0.08, "sine", 0.3, 2000), 260); break;
-    case "agua":    noise(0.45, 1200, 0.25); beep(600, 0.3, "sine", 0.25, 300); setTimeout(() => beep(500, 0.25, "sine", 0.2, 250), 120); break;
-    case "pedra":   beep(90, 0.35, "sine", 0.7, 40); noise(0.18, 400, 0.35); break;
-    case "folha":   noise(0.35, 3000, 0.4); break;
-    case "vento":   noise(1.2, 800, 0.45); break;
+    case "sino":
+      beep(880, 1.8, "sine", 0.6, 660);
+      beep(1760, 1.4, "sine", 0.18, 1320);
+      break;
+    case "passaro": {
+      // 3 trinados longos com pausa
+      const notas = [1400, 1800, 1600, 2000, 1500];
+      notas.forEach((f, i) => beepAt(now + i * 0.18, f, 0.16, "sine", 0.45, f + 400));
+      // segunda leva
+      const notas2 = [1700, 1900];
+      notas2.forEach((f, i) => beepAt(now + 1.3 + i * 0.22, f, 0.2, "sine", 0.4, f + 300));
+      break;
+    }
+    case "agua": {
+      // borbulhar contínuo por ~2s
+      noise(2.0, 1500, 0.22);
+      for (let i = 0; i < 8; i++) {
+        const t0 = now + i * 0.22;
+        beepAt(t0, 500 + Math.random() * 400, 0.18, "sine", 0.22, 280 + Math.random() * 200);
+      }
+      break;
+    }
+    case "pedra":
+      beep(90, 0.5, "sine", 0.7, 40);
+      noise(0.25, 400, 0.35);
+      beepAt(now + 0.18, 70, 0.35, "sine", 0.35, 30);
+      break;
+    case "folha":
+      // farfalhar longo com dois pulsos
+      noiseAt(now, 0.7, 3200, 0.4);
+      noiseAt(now + 0.55, 0.6, 2800, 0.3);
+      break;
+    case "vento":
+      // vento longo modulado
+      noiseAt(now, 2.2, 900, 0.5);
+      noiseAt(now + 0.8, 1.4, 600, 0.35);
+      break;
+    case "grilo": {
+      // cri-cri-cri repetido
+      for (let i = 0; i < 6; i++) {
+        const t0 = now + i * 0.22;
+        beepAt(t0, 4200, 0.05, "triangle", 0.35);
+        beepAt(t0 + 0.06, 4200, 0.05, "triangle", 0.35);
+      }
+      break;
+    }
   }
 }
 
 const NOMES_TIMBRE: Record<Timbre, string> = {
-  vento: "Vento", passaro: "Pássaro", agua: "Água", pedra: "Pedra", folha: "Folha", sino: "Sino",
+  vento: "Vento", passaro: "Pássaro", agua: "Água", pedra: "Pedra", folha: "Folha", grilo: "Grilo", sino: "Sino",
 };
 
 /* ==================== UNIDADE 2 ==================== */
