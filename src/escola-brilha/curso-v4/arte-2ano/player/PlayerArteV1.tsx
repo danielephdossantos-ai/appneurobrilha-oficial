@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { AulaArteV1, CenaArteV1, CorPrimariaId, PotePrimario } from "@/escola-brilha/curso-v4/types";
 import { speakChunked, stopSpeaking as cancelSpeak } from "@/lib/native-tts";
 import { useMascot } from "@/contexts/MascotContext";
+import { useAppState } from "@/core/store";
+import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
+import { mascoteAtribuido } from "@/escola-brilha/mascote-assign";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
@@ -149,16 +152,20 @@ function CenaRenderer({
 // ============================================================================
 function FalaAurora({ texto }: { texto: string }) {
   const { activeMascot } = useMascot();
-  const nome = activeMascot?.mascot?.name ?? "Mascote Brilha";
-  const img = activeMascot?.mascot?.image_url;
+  const { activeChild } = useAppState();
+  const atribuidoSlug = mascoteAtribuido(activeChild?.id, "arte");
+  const mascoteArte = mascoteDaDisciplina(atribuidoSlug ?? "arte");
+  // Prioridade: mascote atribuído/escolhido para Arte > mascote ativo global > padrão da disciplina
+  const nome = atribuidoSlug
+    ? mascoteArte.nome
+    : (activeMascot?.mascot?.name ?? mascoteArte.nome);
+  const img = atribuidoSlug
+    ? mascoteArte.imagem
+    : (activeMascot?.mascot?.image_url ?? mascoteArte.imagem);
   return (
     <div className="flex items-start gap-3 mb-4">
       <div className="shrink-0 w-14 h-14 rounded-full overflow-hidden bg-white/20 border-2 border-amber-300/60 shadow-lg grid place-items-center">
-        {img ? (
-          <img src={img} alt={nome} className="w-full h-full object-cover" />
-        ) : (
-          <span className="text-[10px] text-white/70 text-center px-1 font-bold">Escolha seu mascote na loja</span>
-        )}
+        <img src={img} alt={nome} className="w-full h-full object-cover" />
       </div>
       <div className="rounded-2xl bg-white/15 border border-white/25 p-3 text-sm leading-relaxed font-medium flex-1">
         <div className="text-[10px] uppercase tracking-widest text-amber-200 font-black mb-1">
@@ -174,6 +181,7 @@ function FalaAurora({ texto }: { texto: string }) {
     </div>
   );
 }
+
 
 
 function BotaoProxima({ onProxima, ehUltima, label }: { onProxima: () => void; ehUltima: boolean; label?: string }) {
