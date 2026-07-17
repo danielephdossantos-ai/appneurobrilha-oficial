@@ -596,6 +596,9 @@ function EtapaMemoriaObras({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo:
       )}
     </div>
   );
+}
+
+
 
 function EtapaTexturas({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "texturas" }>; say: (t: string) => Promise<void> }) {
   const [ligacoes, setLigacoes] = useState<Record<string, string>>({});
