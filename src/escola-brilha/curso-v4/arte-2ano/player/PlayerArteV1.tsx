@@ -1090,3 +1090,112 @@ function CenaAvaliacaoFinal({
     </Painel>
   );
 }
+
+// ============================================================================
+// CENA GENÉRICA TEMÁTICA — motivação/revisão/minijogo/criação
+// ============================================================================
+function CenaTematica({
+  cena, onProxima, ehUltima, ativa,
+}: { cena: Extract<CenaArteV1, { tipo: "cenaTematica" }>; onProxima: () => void; ehUltima: boolean; ativa: boolean }) {
+  const [tocados, setTocados] = useState<Set<number>>(new Set());
+  const [tempo, setTempo] = useState(cena.tempoSeg ?? 0);
+  const [rodando, setRodando] = useState(false);
+  const jaFalou = useRef(false);
+
+  useEffect(() => {
+    if (!ativa) return;
+    if (jaFalou.current) return;
+    jaFalou.current = true;
+    speakChunked([cena.aurora, cena.instrucao ?? ""].filter(Boolean).join(" "));
+  }, [ativa, cena]);
+
+  useEffect(() => {
+    if (!rodando || tempo <= 0) return;
+    const t = setTimeout(() => setTempo((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [rodando, tempo]);
+
+  const isMinijogo = cena.variante === "minijogo";
+  const completo = tocados.size >= cena.itens.length;
+
+  const badge =
+    cena.variante === "explorar" ? { emoji: "🔎", label: "Explorar" }
+    : cena.variante === "revisar" ? { emoji: "🔁", label: "Revisar" }
+    : cena.variante === "criacao" ? { emoji: "🎨", label: "Criação" }
+    : { emoji: "🎮", label: "Minijogo" };
+
+  return (
+    <Painel>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs font-black uppercase tracking-widest text-amber-200">{badge.emoji} {badge.label}</span>
+        {isMinijogo && cena.tempoSeg && (
+          <span className="ml-auto text-xs font-bold bg-rose-500/30 border border-rose-300/40 rounded-full px-3 py-1">
+            ⏱ {tempo}s
+          </span>
+        )}
+      </div>
+      {cena.titulo && <div className="text-lg font-black mb-2">{cena.titulo}</div>}
+      <FalaAurora texto={cena.aurora} />
+      {cena.instrucao && (
+        <div className="rounded-2xl bg-amber-400/15 border border-amber-300/30 p-3 text-sm font-bold mb-3 text-center">
+          {cena.instrucao}
+        </div>
+      )}
+
+      {isMinijogo && !rodando && !completo && (
+        <button
+          onClick={() => setRodando(true)}
+          className="w-full rounded-2xl bg-gradient-to-r from-rose-500 to-amber-400 text-slate-900 font-black py-3 mb-3 shadow-lg"
+        >
+          ▶ Começar
+        </button>
+      )}
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+        {cena.itens.map((it, i) => {
+          const foiTocado = tocados.has(i);
+          const cor = it.cor ?? "#f59e0b";
+          return (
+            <motion.button
+              key={i}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => {
+                if (isMinijogo && (!rodando || tempo <= 0)) return;
+                setTocados((s) => new Set(s).add(i));
+                speakChunked([it.rotulo, it.descricao ?? ""].filter(Boolean).join(". "));
+              }}
+              className={`rounded-2xl p-3 text-left border-2 transition-all ${
+                foiTocado ? "bg-white/20 border-white/60 shadow-lg" : "bg-white/10 border-white/20"
+              }`}
+              style={foiTocado ? { boxShadow: `0 10px 30px -10px ${cor}` } : undefined}
+            >
+              <div className="text-3xl mb-1">{it.emoji ?? "✨"}</div>
+              <div className="text-sm font-black" style={{ color: foiTocado ? cor : undefined }}>
+                {it.rotulo}
+              </div>
+              {foiTocado && it.descricao && (
+                <div className="text-[11px] text-white/80 mt-1 leading-snug">{it.descricao}</div>
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <div className="text-xs text-white/70 text-center mb-3">
+        {tocados.size} / {cena.itens.length} descobertos
+      </div>
+
+      {(completo || (isMinijogo && tempo <= 0 && rodando)) && (
+        <>
+          {cena.falaFinal && (
+            <div className="rounded-2xl bg-emerald-500/20 border border-emerald-300/40 p-3 text-sm font-bold mb-3 text-center">
+              ✨ {cena.falaFinal}
+            </div>
+          )}
+          <BotaoProxima onProxima={onProxima} ehUltima={ehUltima} />
+        </>
+      )}
+    </Painel>
+  );
+}
+
