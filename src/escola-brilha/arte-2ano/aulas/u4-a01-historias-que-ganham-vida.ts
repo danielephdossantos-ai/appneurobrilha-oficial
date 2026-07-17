@@ -1,5 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import obra from "@/assets/atelier/atelier-obra.jpg.asset.json";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u4-a01-historias-que-ganham-vida",
@@ -61,6 +65,22 @@ const aula: AulaArte = {
         "Uma lista de compras",
       ],
       comentario: "Uma ilustração conta uma história pelas cores, formas e expressões dos personagens.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Obras que Contam Histórias",
+      instrucao: "Toca em cada obra. Toda pintura é uma HISTÓRIA parada no tempo.",
+      obras: OBRAS_FAMOSAS.filter(o => ["portinari", "tarsila", "girassois"].includes(o.id)),
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Encontra os pares: obra ↔ artista que contou essa história.",
+      pares: [
+        { id: "portinari", titulo: "Trabalhadores", artista: "Portinari", url: obraPortinari.url },
+        { id: "tarsila", titulo: "Boneca de Sol", artista: "Tarsila", url: obraTarsila.url },
+        { id: "girassois", titulo: "Os Girassóis", artista: "Van Gogh", url: obraGirassois.url },
+      ],
     },
     {
       tipo: "quiz",

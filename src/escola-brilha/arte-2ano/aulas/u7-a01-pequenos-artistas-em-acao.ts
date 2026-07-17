@@ -1,4 +1,11 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u7-a01-pequenos-artistas-em-acao",
@@ -34,6 +41,25 @@ const aula: AulaArte = {
       titulo: "Você Sabia?",
       texto:
         "Em uma EXPOSIÇÃO cada obra tem uma plaquinha com o nome do artista, o título e o material usado. Isso ajuda quem visita a entender a arte.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Museu Final",
+      instrucao: "Sua última visita ao museu! Toca em cada obra e recorda o que aprendeu.",
+      obras: OBRAS_FAMOSAS,
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Desafio final: encontra TODOS os pares obra ↔ artista.",
+      pares: [
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+        { id: "girassois", titulo: "Os Girassóis", artista: "Van Gogh", url: obraGirassois.url },
+        { id: "nenufares", titulo: "Os Nenúfares", artista: "Monet", url: obraNenufares.url },
+        { id: "tarsila", titulo: "Boneca de Sol", artista: "Tarsila", url: obraTarsila.url },
+        { id: "portinari", titulo: "Trabalhadores", artista: "Portinari", url: obraPortinari.url },
+        { id: "athos", titulo: "Mosaico Geométrico", artista: "Athos Bulcão", url: obraAthos.url },
+      ],
     },
     {
       tipo: "quiz",

@@ -1,4 +1,8 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u5-a01-arte-e-natureza",
@@ -57,6 +61,22 @@ const aula: AulaArte = {
       titulo: "Você Sabia?",
       texto:
         "Muitos artistas usam a natureza como MATERIAL: fazem tinta com terra, pincel com galhos, colagens com folhas. A arte com natureza chama-se Land Art.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Natureza nas Obras",
+      instrucao: "Toca em cada obra. Vê como esses artistas amavam a NATUREZA.",
+      obras: OBRAS_FAMOSAS.filter(o => ["noite-estrelada", "girassois", "nenufares"].includes(o.id)),
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Encontra os pares: paisagem natural ↔ artista.",
+      pares: [
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+        { id: "girassois", titulo: "Os Girassóis", artista: "Van Gogh", url: obraGirassois.url },
+        { id: "nenufares", titulo: "Os Nenúfares", artista: "Monet", url: obraNenufares.url },
+      ],
     },
     {
       tipo: "quiz",

@@ -1,5 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import obra from "@/assets/atelier/atelier-obra.jpg.asset.json";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u6-a01-movimento-e-cultura",
@@ -59,6 +63,22 @@ const aula: AulaArte = {
         { cor: "azul",     hex: "#5A8FBF", emoji: "🌊", emocao: "Suave",   explicacao: "Ritmo calmo, como ondas do mar." },
         { cor: "verde",    hex: "#7FAE73", emoji: "🌿", emocao: "Balanço", explicacao: "Ritmo gostoso, como caminhar na natureza." },
         { cor: "roxo",     hex: "#8A5A83", emoji: "🎭", emocao: "Misterio",explicacao: "Ritmo misterioso, das máscaras e festas." },
+      ],
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Arte Brasileira",
+      instrucao: "Toca em cada obra brasileira. Essas pinturas mostram nossa CULTURA.",
+      obras: OBRAS_FAMOSAS.filter(o => ["tarsila", "portinari", "athos"].includes(o.id)),
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Encontra os pares: obra ↔ artista brasileiro.",
+      pares: [
+        { id: "tarsila", titulo: "Boneca de Sol", artista: "Tarsila", url: obraTarsila.url },
+        { id: "portinari", titulo: "Trabalhadores", artista: "Portinari", url: obraPortinari.url },
+        { id: "athos", titulo: "Mosaico Geométrico", artista: "Athos Bulcão", url: obraAthos.url },
       ],
     },
     {
