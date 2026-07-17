@@ -218,6 +218,17 @@ const aula: AulaArte = {
       ],
     },
     {
+      tipo: "memoria-obras",
+      titulo: "Memória das Obras",
+      instrucao: "Vira duas cartas: a pintura e o nome do artista. Encontra todos os pares!",
+      pares: [
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+        { id: "girassois",       titulo: "Os Girassóis",      artista: "Van Gogh", url: obraGirassois.url },
+        { id: "nenufares",       titulo: "Os Nenúfares",      artista: "Monet",    url: obraNenufares.url },
+        { id: "tarsila",         titulo: "Boneca de Sol",     artista: "Tarsila",  url: obraTarsila.url },
+      ],
+    },
+    {
       tipo: "pintura-digital",
       titulo: "Pintura Digital",
       instrucao: "Escolhe uma ferramenta e uma cor. Depois pinta na tela em branco!",
