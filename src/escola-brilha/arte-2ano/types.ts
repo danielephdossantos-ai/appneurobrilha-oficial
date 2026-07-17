@@ -1,105 +1,124 @@
 /**
- * SPEB 1.0 · Arte · Contrato oficial
- * Toda aula de Arte deve seguir esta estrutura de 10 etapas + projeto +
- * avaliação + encerramento. É proibido reduzir a aula a jogos ou quizzes.
+ * SPEB 1.0 · Arte · Contrato oficial (v2 — Ateliê Vivo)
+ *
+ * Arquitetura obrigatória a partir da Aula 1 "Meu Primeiro Retrato de Artista":
+ *   0 · Cena de abertura (ateliê vivo, Brilha entra, cavalete vazio)
+ *   1 · Espelho do Artista (brincadeira de expressões)
+ *   2 · Visitando Grandes Artistas (galeria interativa, tocar em cada obra)
+ *   3 · Aprendendo a Desenhar (canvas guiado passo-a-passo)
+ *   4 · Minha Primeira Obra (canvas livre, Brilha comenta suavemente)
+ *   5 · As Cores Também Falam (emoção troca a paleta)
+ *   6 · Galeria Brilha (quadro sobe pra parede, moldura dourada, confetes)
+ *   7 · Missão em Família (opcional — desenhar alguém e fotografar)
+ *   8 · Meu Ateliê Cresceu (recompensa: nova decoração permanente)
+ *   9 · Encerramento (Pincel dourado + mensagem)
+ *
+ * Os jogos deixam de ser o centro. A experiência é o ritual do ateliê.
  */
+
+export type ExpressaoEspelho = {
+  emoji: string;
+  desafio: string;
+  falaBrilha: string;
+};
+
+export type ObraGaleria = {
+  id: string;
+  artista: string;
+  pais: string;
+  obra: string;
+  falaBrilha: string; // o que Brilha diz quando a criança toca no quadro
+  cor: string; // cor dominante para o card (token do design system)
+};
+
+export type PassoTutorial = {
+  titulo: string;
+  fala: string; // fala do Brilha durante o passo
+};
+
+export type EmocaoPaleta = {
+  nome: string;
+  emoji: string;
+  paleta: string[]; // hex das cores que aparecem no canvas quando escolhida
+  falaBrilha: string;
+};
+
+export type DecoracaoAtelie = {
+  id: string;
+  nome: string; // "planta suculenta"
+  emoji: string; // "🪴"
+  posicao: { x: number; y: number }; // % dentro da cena
+};
 
 export type AulaArte = {
   slug: string;
   unidade: { numero: number; titulo: string; subtitulo: string };
   titulo: string;
-  duracaoMin: string; // "40 a 50 minutos"
-  objetivos: string[];
-  materiais: {
-    ferramentasApp: string[];
-    fisicos: string[];
+  duracaoMin: string;
+
+  // Cena de abertura — Brilha entra correndo no ateliê
+  abertura: {
+    falasBrilha: string[]; // aparecem em sequência
+    botaoComecar: string; // "🎨 Começar minha primeira obra"
   };
 
-  // Etapa 1 — A História
-  historia: {
-    cenario: string; // "Brilha entra em um grande ateliê..."
-    carta: string[]; // linhas da carta encontrada
-    pergunta: string; // pergunta do Brilha
-    botao: string; // texto do botão inicial
-  };
-
-  // Etapa 2 — Observando Como um Artista
-  observacao: {
-    convite: string;
-    partesDoRosto: string[];
-    faladoPeloBrilha: string;
-  };
-
-  // Etapa 3 — Conhecendo Obras
-  obras: {
+  // Etapa 1 — Espelho do Artista
+  espelho: {
     intro: string;
-    referencias: { artista: string; obra: string; sobre: string }[];
-    perguntas: string[];
-    faladoPeloBrilha: string;
+    expressoes: ExpressaoEspelho[];
+    fechamento: string;
   };
 
-  // Etapa 4 — Aprendendo a Desenhar o Rosto
-  passoAPasso: {
+  // Etapa 2 — Galeria interativa
+  galeriaInterativa: {
     intro: string;
-    passos: { titulo: string; descricao: string }[];
+    obras: ObraGaleria[];
+    convite: string; // "🎨 Agora chegou a sua vez."
   };
 
-  // Etapa 5 — Meu Primeiro Autorretrato (canvas livre)
-  producao: {
+  // Etapa 3 — Aprendendo a desenhar (guiado)
+  aprender: {
+    intro: string;
+    passos: PassoTutorial[];
+    fechamento: string;
+  };
+
+  // Etapa 4 — Minha primeira obra (livre)
+  obraLivre: {
     instrucao: string;
-    dicasDoBrilha: string[];
+    comentariosBrilha: string[]; // aparecem rotacionando enquanto desenha
     legendaSalvar: string;
   };
 
-  // Etapa 6 — Conversa de Artista
-  conversa: {
-    intro: string;
-    perguntas: string[];
-  };
-
-  // Etapa 7 — Dando Vida ao Retrato (cores × emoções)
+  // Etapa 5 — Cores × Emoção
   cores: {
-    explicacao: string;
-    perguntaEmocao: string;
-    emocoes: { nome: string; cor: string; hex: string }[];
+    pergunta: string; // "Como você está hoje?"
+    emocoes: EmocaoPaleta[];
   };
 
-  // Etapa 8 — Missão em Casa
-  missaoCasa: {
-    convite: string;
-    observarNaFamilia: string[];
-    entregavel: string;
-  };
-
-  // Etapa 9 — Minha Pequena Galeria
+  // Etapa 6 — Galeria Brilha (animação de moldura)
   galeria: {
     intro: string;
     exemploTitulo: string;
+    parabens: string;
   };
 
-  // Etapa 10 — Curiosidade
-  curiosidade: {
-    fato: string;
-    conexaoFuturo: string; // "No final do 2º ano você fará outro..."
+  // Etapa 7 — Missão em Família
+  missaoFamilia: {
+    convite: string;
+    entregavel: string;
   };
 
-  // Projeto da aula
-  projeto: {
-    nome: string;
-    descricao: string;
+  // Etapa 8 — Ateliê Cresceu
+  atelieCresceu: {
+    decoracao: DecoracaoAtelie; // nova decoração desbloqueada nesta aula
+    falaBrilha: string;
   };
 
-  // Avaliação
-  avaliacao: {
-    intro: string;
-    criterios: string[];
-    obs: string; // "Não existe nota pela beleza do desenho."
-  };
-
-  // Encerramento
+  // Encerramento — pincel dourado
   encerramento: {
-    medalhaNome: string;
-    medalhaIcone: string;
+    recompensa: string; // "Pincel da Observação"
+    icone: string; // "🖌️"
     mensagem: string;
   };
 };
