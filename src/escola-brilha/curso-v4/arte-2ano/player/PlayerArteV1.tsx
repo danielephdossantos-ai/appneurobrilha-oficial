@@ -780,14 +780,14 @@ function CenaSequencia({
             {ordem.map((id, i) => {
               const p = cena.passos.find((x) => x.id === id)!;
               return (
-                <div key={id} className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-300/40 rounded-lg p-2 text-sm font-bold">
-                  <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black shrink-0">{i + 1}</span>
+                <div key={id} className="flex items-center gap-3 bg-emerald-500/20 border border-emerald-300/40 rounded-xl p-2 text-sm font-bold">
+                  <span className="w-7 h-7 rounded-full bg-emerald-400 text-slate-900 grid place-items-center text-xs font-black shrink-0">{i + 1}</span>
                   {p.fotoUrl ? (
-                    <img src={p.fotoUrl} alt="" loading="lazy" className="w-10 h-10 rounded object-cover shrink-0" />
+                    <img src={p.fotoUrl} alt="" loading="lazy" className="w-16 h-16 sm:w-12 sm:h-12 rounded-lg object-cover shrink-0" />
                   ) : (
-                    <span className="text-xl shrink-0">{p.emoji}</span>
+                    <span className="text-2xl shrink-0">{p.emoji}</span>
                   )}
-                  <span>{p.texto}</span>
+                  <span className="min-w-0">{p.texto}</span>
                 </div>
               );
             })}
@@ -806,11 +806,11 @@ function CenaSequencia({
                 usado ? "bg-white/5 border-white/10 opacity-40" : "bg-white/10 border-white/25 hover:bg-white/20 active:scale-95"
               }`}>
               {p.fotoUrl ? (
-                <img src={p.fotoUrl} alt="" loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
+                <img src={p.fotoUrl} alt="" loading="lazy" className="w-24 h-24 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
               ) : (
-                <span className="text-xl shrink-0">{p.emoji}</span>
+                <span className="text-2xl shrink-0">{p.emoji}</span>
               )}
-              <span>{p.texto}</span>
+              <span className="min-w-0">{p.texto}</span>
             </button>
           );
         })}
