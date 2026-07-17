@@ -8,7 +8,7 @@ import rostoBravo from "@/assets/neuro-treino/emocoes/bravo.png.asset.json";
 export type CorNome = "vermelho" | "amarelo" | "azul" | "verde" | "roxo" | "laranja" | "rosa" | "branco" | "preto" | "marrom";
 
 export type EtapaBloco1 =
-  | { tipo: "historia"; titulo: string; texto: string; lapis: Array<{ cor: CorNome; hex: string; emocao: string; frase: string }>; convite: string }
+  | { tipo: "historia"; titulo: string; texto: string; lapis: Array<{ cor: CorNome; hex: string; emocao: string; frase: string }>; convite: string; icone?: "lapis" | "lupa" }
   | { tipo: "observar-cores"; titulo: string; instrucao: string; cenas: Array<{ nome: string; svg: "por-do-sol" | "jardim" | "praia" | "floresta"; coresPresentes: CorNome[] }> }
   | { tipo: "cor-emocao"; titulo: string; instrucao: string; cartoes: Array<{ cor: CorNome; hex: string; emoji: string; rostoUrl?: string; emocao: string; explicacao: string }> }
   | { tipo: "artista"; titulo: string; obraUrl: string; obraLegenda: string; pergunta: string; opcoes: string[]; comentario: string }
