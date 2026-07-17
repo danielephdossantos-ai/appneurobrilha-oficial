@@ -1453,15 +1453,35 @@ function EtapaSeteErros({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "s
       <div className="grid grid-cols-2 gap-2 mb-3">
         <div>
           <div className="text-xs font-bold opacity-70 mb-1 text-center">Original</div>
-          <CenaParque modificada={false} />
+          {etapa.fotoOriginalUrl ? (
+            <img
+              src={etapa.fotoOriginalUrl}
+              alt={etapa.alt ?? "Cena original"}
+              loading="lazy"
+              className="w-full h-auto rounded-lg border-2 border-[var(--atelier-ink)]/20 select-none"
+              draggable={false}
+            />
+          ) : (
+            <CenaParque modificada={false} />
+          )}
         </div>
         <div>
           <div className="text-xs font-bold opacity-70 mb-1 text-center">Ache as diferenças</div>
           <div ref={wrapRef} onPointerDown={onClickCena} style={{ position: "relative", cursor: "crosshair", touchAction: "none" }}>
-            <CenaParque modificada={true} />
+            {etapa.fotoModificadaUrl ? (
+              <img
+                src={etapa.fotoModificadaUrl}
+                alt={etapa.alt ?? "Cena com diferenças"}
+                loading="lazy"
+                className="w-full h-auto rounded-lg border-2 border-[var(--atelier-ink)]/20 select-none block"
+                draggable={false}
+              />
+            ) : (
+              <CenaParque modificada={true} />
+            )}
             {etapa.diferencas.map((d, i) => encontradas.has(i) && (
               <div key={i} style={{ position: "absolute", left: `${d.x}%`, top: `${d.y}%`, transform: "translate(-50%,-50%)",
-                width: 26, height: 26, borderRadius: "50%", border: "3px solid #D64545", background: "rgba(214,69,69,.2)", pointerEvents: "none" }}/>
+                width: 34, height: 34, borderRadius: "50%", border: "3px solid #D64545", background: "rgba(214,69,69,.2)", pointerEvents: "none" }}/>
             ))}
           </div>
         </div>
