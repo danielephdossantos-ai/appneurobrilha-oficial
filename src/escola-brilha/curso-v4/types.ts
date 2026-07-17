@@ -992,6 +992,7 @@ export type CenaArteV1 =
       animais: Array<{
         nome: string;
         emoji: string;
+        fotoUrl?: string;
         corAlvo: { nome: string; hex: string };
         opcoes: Array<{ nome: string; hex: string }>;
         falaAcerto: string;
