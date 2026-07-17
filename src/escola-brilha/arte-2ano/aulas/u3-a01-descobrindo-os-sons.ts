@@ -1,5 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import floresta from "@/assets/arte-2ano/referencias/floresta-sonora.jpg.asset.json";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraAthos from "@/assets/arte-obras/athos-inspirado.jpg.asset.json";
+import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-obras/noite-estrelada.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u3-a01-descobrindo-os-sons",
@@ -92,6 +96,22 @@ const aula: AulaArte = {
       titulo: "Você Sabia?",
       texto:
         "Silêncio também é música! Nas partituras existe um sinal chamado pausa. Quando a música para por um instante, seu ouvido descansa e a próxima nota fica muito mais bonita.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Obras com Ritmo",
+      instrucao: "Toca nessas obras. Cada uma tem um RITMO visual — repetição, movimento, batida.",
+      obras: OBRAS_FAMOSAS.filter(o => ["athos", "tarsila", "noite-estrelada"].includes(o.id)),
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Encontra os pares: obra ↔ artista das pinturas ritmadas.",
+      pares: [
+        { id: "athos", titulo: "Mosaico Geométrico", artista: "Athos Bulcão", url: obraAthos.url },
+        { id: "tarsila", titulo: "Boneca de Sol", artista: "Tarsila", url: obraTarsila.url },
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+      ],
     },
     {
       tipo: "quiz",

@@ -3,6 +3,13 @@ import folhaMacro from "@/assets/arte-2ano/referencias/folha-macro.jpg.asset.jso
 import arvoreRef from "@/assets/arte-2ano/referencias/arvore-referencia.jpg.asset.json";
 import parqueOriginal from "@/assets/arte-2ano/jogos/parque-original.jpg.asset.json";
 import parqueModificada from "@/assets/arte-2ano/jogos/parque-modificada.jpg.asset.json";
+import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
+import obraNoiteEstrelada from "@/assets/arte-obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-obras/nenufares.jpg.asset.json";
+import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-obras/athos-inspirado.jpg.asset.json";
 
 
 const aula: AulaArte = {
@@ -101,6 +108,25 @@ const aula: AulaArte = {
       titulo: "Você Sabia?",
       texto:
         "Leonardo da Vinci passava horas só olhando uma folha antes de desenhar! Ele dizia que quem sabe olhar, já sabe desenhar metade. Observar é o primeiro superpoder do artista.",
+    },
+    {
+      tipo: "galeria-obras",
+      titulo: "🖼 Observar as Obras",
+      instrucao: "Toca em cada obra e descobre qual DETALHE o artista observou pra pintar.",
+      obras: OBRAS_FAMOSAS,
+    },
+    {
+      tipo: "memoria-obras",
+      titulo: "🃏 Memória das Obras",
+      instrucao: "Encontra os pares: pintura ↔ artista que observou a cena.",
+      pares: [
+        { id: "noite-estrelada", titulo: "A Noite Estrelada", artista: "Van Gogh", url: obraNoiteEstrelada.url },
+        { id: "girassois", titulo: "Os Girassóis", artista: "Van Gogh", url: obraGirassois.url },
+        { id: "nenufares", titulo: "Os Nenúfares", artista: "Monet", url: obraNenufares.url },
+        { id: "tarsila", titulo: "Boneca de Sol", artista: "Tarsila", url: obraTarsila.url },
+        { id: "portinari", titulo: "Trabalhadores", artista: "Portinari", url: obraPortinari.url },
+        { id: "athos", titulo: "Mosaico Geométrico", artista: "Athos Bulcão", url: obraAthos.url },
+      ],
     },
     {
       tipo: "quiz",
