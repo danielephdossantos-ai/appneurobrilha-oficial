@@ -26,7 +26,7 @@ export type EtapaBloco1 =
   | { tipo: "lupa-magica"; titulo: string; instrucao: string; fotoUrl: string; alt: string; descobertas: Array<{ x: number; y: number; r: number; nome: string; texto: string }> }
   | { tipo: "formas-basicas"; titulo: string; instrucao: string; itens: Array<{ objeto: string; emoji: string; forma: "circulo" | "quadrado" | "triangulo" | "retangulo"; explicacao: string }> }
   | { tipo: "desenho-observacao"; titulo: string; instrucao: string; referenciaUrl: string; referenciaAlt: string; passos: string[]; paleta: CorNome[] }
-  | { tipo: "sete-erros"; titulo: string; instrucao: string; cena: "parque" | "quarto"; diferencas: Array<{ x: number; y: number; r: number; nome: string }>; totalPontos: number }
+  | { tipo: "sete-erros"; titulo: string; instrucao: string; cena: "parque" | "quarto"; diferencas: Array<{ x: number; y: number; r: number; nome: string }>; totalPontos: number; fotoOriginalUrl?: string; fotoModificadaUrl?: string; alt?: string }
   // ---- Unidade 3 · Música em Todo Lugar ----
   | { tipo: "floresta-sonora"; titulo: string; instrucao: string; fotoUrl: string; alt: string; sons: Array<{ x: number; y: number; nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino" }> }
   | { tipo: "sequenciador"; titulo: string; instrucao: string; passos: number; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "sino"; cor: string }> }
