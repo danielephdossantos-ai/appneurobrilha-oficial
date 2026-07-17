@@ -1041,6 +1041,21 @@ export type CenaArteV1 =
       recompensaTitulo: string;
       recompensaItem: string;
     }
+  | {
+      tipo: "cenaTematica";
+      variante: "explorar" | "revisar" | "minijogo" | "criacao";
+      aurora: string;
+      titulo?: string;
+      instrucao?: string;
+      itens: Array<{
+        emoji?: string;
+        rotulo: string;
+        descricao?: string;
+        cor?: string;
+      }>;
+      falaFinal?: string;
+      tempoSeg?: number;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaArteV1 = {
