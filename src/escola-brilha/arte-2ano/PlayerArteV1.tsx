@@ -188,6 +188,8 @@ function Etapa({ etapa, indice, say, aula }: { etapa: EtapaBloco1; indice: numbe
     case "sequenciador":        return <EtapaSequenciador etapa={etapa} say={say} />;
     case "memoria-sonora":      return <EtapaMemoriaSonora etapa={etapa} say={say} />;
     case "ritmo-repetir":       return <EtapaRitmoRepetir etapa={etapa} say={say} />;
+    case "galeria-obras":       return <EtapaGaleriaObras etapa={etapa} say={say} />;
+    case "memoria-obras":       return <EtapaMemoriaObras etapa={etapa} say={say} />;
     case "relatorio":           return <EtapaRelatorio etapa={etapa} say={say} aula={aula} indiceAtual={indice} />;
   }
 }
