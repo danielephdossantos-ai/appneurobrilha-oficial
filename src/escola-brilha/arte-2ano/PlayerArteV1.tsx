@@ -2368,6 +2368,7 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
   const [drawing, setDrawing] = React.useState(false);
   const [key, setKey] = React.useState(0);
   const [cor, setCor] = React.useState("#111827");
+  const [tamanho, setTamanho] = React.useState(16);
   const ctx = React.useContext(CtxConcluidas);
   const item = etapa.itens[idx];
   const meta = METADES[item.figura];
@@ -2379,13 +2380,13 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
     const rect = cv.getBoundingClientRect();
     cv.width = rect.width * 2; cv.height = rect.height * 2;
     const cx = cv.getContext("2d"); if (!cx) return;
-    cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round"; cx.lineWidth = 4; cx.strokeStyle = cor;
+    cx.scale(2, 2); cx.lineCap = "round"; cx.lineJoin = "round"; cx.lineWidth = tamanho; cx.strokeStyle = cor;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => { setupCanvas(); }, [setupCanvas, key]);
   useEffect(() => {
-    const cx = canvasRef.current?.getContext("2d"); if (cx) cx.strokeStyle = cor;
-  }, [cor]);
+    const cx = canvasRef.current?.getContext("2d"); if (cx) { cx.strokeStyle = cor; cx.lineWidth = tamanho; }
+  }, [cor, tamanho]);
 
   const pos = (e: React.PointerEvent) => {
     const cv = canvasRef.current!; const rect = cv.getBoundingClientRect();
@@ -2393,14 +2394,22 @@ function EtapaCompletarMetade({ etapa, say }: { etapa: Extract<EtapaBloco1, { ti
   };
   const onDown = (e: React.PointerEvent) => {
     setDrawing(true); const cx = canvasRef.current!.getContext("2d")!; const p = pos(e);
+    cx.lineWidth = tamanho; cx.strokeStyle = cor;
     cx.beginPath(); cx.moveTo(p.x, p.y);
+    cx.lineTo(p.x + 0.01, p.y + 0.01); cx.stroke();
   };
   const onMove = (e: React.PointerEvent) => {
     if (!drawing) return; const cx = canvasRef.current!.getContext("2d")!; const p = pos(e);
     cx.lineTo(p.x, p.y); cx.stroke();
   };
 
-  const CORES = ["#111827", "#EF4444", "#F59E0B", "#22C55E", "#3B82F6", "#EC4899"];
+  const CORES = [
+    "#111827", "#FFFFFF", "#7C2D12", "#EF4444", "#F97316", "#F59E0B",
+    "#FDE047", "#84CC16", "#22C55E", "#14B8A6", "#3B82F6", "#1E3A8A",
+    "#8B5CF6", "#EC4899", "#F9A8D4", "#A16207"
+  ];
+  const TAMANHOS = [6, 12, 20, 32];
+
   const proxima = () => {
     if (idx + 1 < etapa.itens.length) { setIdx(idx + 1); setKey(k => k + 1); setShowEspelho(false); return; }
     /* auto-tracked by scroll */
