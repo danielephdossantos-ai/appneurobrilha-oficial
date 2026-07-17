@@ -1,4 +1,14 @@
-import type { Curso, CursoPortugues, CursoAny, AulaV4, AulaPortuguesV4, CursoGeoV1, AulaGeoV1 } from "./types";
+import type {
+  Curso,
+  CursoPortugues,
+  CursoAny,
+  AulaV4,
+  AulaPortuguesV4,
+  CursoGeoV1,
+  AulaGeoV1,
+  CursoArteV1,
+  AulaArteV1,
+} from "./types";
 
 /**
  * Auto-registro de cursos v4.1 (Matemática + Português).
