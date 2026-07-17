@@ -193,6 +193,9 @@ function Etapa({ etapa, indice, say, aula }: { etapa: EtapaBloco1; indice: numbe
     case "traco-guiado":        return <EtapaTracoGuiado etapa={etapa} say={say} />;
     case "completar-metade":    return <EtapaCompletarMetade etapa={etapa} say={say} />;
     case "detetive-obra":       return <EtapaDetetiveObra etapa={etapa} say={say} />;
+    case "bater-ritmo":         return <EtapaBaterRitmo etapa={etapa} say={say} />;
+    case "pintar-compasso":     return <EtapaPintarCompasso etapa={etapa} say={say} />;
+    case "som-vira-traco":      return <EtapaSomViraTraco etapa={etapa} say={say} />;
     case "relatorio":           return <EtapaRelatorio etapa={etapa} say={say} aula={aula} indiceAtual={indice} />;
   }
 }
