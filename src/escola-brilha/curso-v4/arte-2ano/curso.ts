@@ -1,5 +1,6 @@
 import type { CursoArteV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Arte · 2º Ano — "🎨 O Pincel Mágico de Aurora"
