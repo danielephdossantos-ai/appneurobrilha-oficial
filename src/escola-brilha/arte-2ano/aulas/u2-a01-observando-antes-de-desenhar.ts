@@ -1,6 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import folhaMacro from "@/assets/arte-2ano/referencias/folha-macro.jpg.asset.json";
 import arvoreRef from "@/assets/arte-2ano/referencias/arvore-referencia.jpg.asset.json";
+import parqueOriginal from "@/assets/arte-2ano/jogos/parque-original.jpg.asset.json";
+import parqueModificada from "@/assets/arte-2ano/jogos/parque-modificada.jpg.asset.json";
+
 
 const aula: AulaArte = {
   id: "u2-a01-observando-antes-de-desenhar",
