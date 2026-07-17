@@ -1,4 +1,20 @@
 import type { AulaArteV1, PotePrimario } from "../../types";
+import vocabPrimaria from "@/assets/arte-2ano/u1-vocab-primaria.jpg";
+import vocabSecundaria from "@/assets/arte-2ano/u1-vocab-secundaria.jpg";
+import vocabMistura from "@/assets/arte-2ano/u1-vocab-mistura.jpg";
+import vocabPigmento from "@/assets/arte-2ano/u1-vocab-pigmento.jpg";
+import pigVermelho from "@/assets/arte-2ano/u1-pig-vermelho-terra.jpg";
+import pigUrucum from "@/assets/arte-2ano/u1-pig-urucum.jpg";
+import pigFolha from "@/assets/arte-2ano/u1-pig-folha-verde.jpg";
+import pigAnil from "@/assets/arte-2ano/u1-pig-anil.jpg";
+import animalSapo from "@/assets/arte-2ano/u1-animal-sapo.jpg";
+import animalRaposa from "@/assets/arte-2ano/u1-animal-raposa.jpg";
+import animalBorboleta from "@/assets/arte-2ano/u1-animal-borboleta.jpg";
+import passo1Img from "@/assets/arte-2ano/u1-passo1-escolho.jpg";
+import passo2Img from "@/assets/arte-2ano/u1-passo2-cauldron.jpg";
+import passo3Img from "@/assets/arte-2ano/u1-passo3-segunda.jpg";
+import passo4Img from "@/assets/arte-2ano/u1-passo4-misturo.jpg";
+import passo5Img from "@/assets/arte-2ano/u1-passo5-nasce.jpg";
 
 const VERMELHO: PotePrimario = { id: "vermelho", hex: "#ef4444", nome: "Vermelho" };
 const AZUL: PotePrimario = { id: "azul", hex: "#2563eb", nome: "Azul" };
