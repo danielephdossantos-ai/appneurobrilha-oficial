@@ -103,7 +103,9 @@ export function PlayerArteV1({
         {cenas.map((c, i) => (
           <section
             key={c.chave}
-            ref={(el) => (sectionRefs.current[i] = el)}
+            ref={(el) => {
+              sectionRefs.current[i] = el;
+            }}
             data-cena-idx={i}
             className="scroll-mt-24"
           >
