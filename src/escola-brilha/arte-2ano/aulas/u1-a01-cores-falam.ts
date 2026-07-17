@@ -124,7 +124,12 @@ export type EtapaBloco1 =
   | { tipo: "traco-guiado"; titulo: string; instrucao: string; figuras: Array<{ nome: string; emoji: string; d: string; viewBox?: string }> }
   | { tipo: "completar-metade"; titulo: string; instrucao: string; itens: Array<{ nome: string; figura: "borboleta" | "coracao" | "rosto" | "arvore" | "flor"; dica: string }> }
   | { tipo: "detetive-obra"; titulo: string; instrucao: string; obraUrl: string; alt: string; artista: string; obra: string; ano: string; achados: Array<{ x: number; y: number; r: number; nome: string; dica: string; revelacao: string }> }
+  // ---- Unidade 3 v2 · Música vira Pincelada ----
+  | { tipo: "bater-ritmo"; titulo: string; instrucao: string; bpm: number; batidasTotais: number }
+  | { tipo: "pintar-compasso"; titulo: string; instrucao: string; bpm: number; paleta: string[] }
+  | { tipo: "som-vira-traco"; titulo: string; instrucao: string; sons: Array<{ nome: string; emoji: string; timbre: "vento" | "passaro" | "agua" | "pedra" | "folha" | "grilo" | "sino"; padrao: "onda" | "pontos" | "zigzag" | "espiral" | "linha"; cor: string }> }
   | { tipo: "relatorio"; titulo: string; texto: string };
+
 
 export type AulaArte = {
   id: string;
