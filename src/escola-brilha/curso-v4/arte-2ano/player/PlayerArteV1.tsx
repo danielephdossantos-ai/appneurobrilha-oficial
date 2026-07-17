@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { AulaArteV1, CenaArteV1, CorPrimariaId, PotePrimario } from "@/escola-brilha/curso-v4/types";
 import { speakChunked, stopSpeaking as cancelSpeak } from "@/lib/native-tts";
+import { useMascot } from "@/contexts/MascotContext";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
