@@ -234,14 +234,51 @@ function LapisDeCor({ hex }: { hex: string }) {
   );
 }
 
+function LupaColorida({ hex }: { hex: string }) {
+  return (
+    <svg viewBox="0 0 80 120" width="60" height="90" className="drop-shadow-md group-hover:-translate-y-1 transition-transform">
+      {/* Cabo da lupa */}
+      <rect x="52" y="70" width="10" height="42" rx="4" fill="#8B5A3C" transform="rotate(35 57 91)" />
+      <rect x="52" y="70" width="3" height="42" rx="1.5" fill="#5c3a24" opacity="0.55" transform="rotate(35 57 91)" />
+      {/* Aro metálico */}
+      <circle cx="34" cy="42" r="30" fill="none" stroke="#2d2d2d" strokeWidth="6" />
+      {/* Aro colorido (cor da emoção) */}
+      <circle cx="34" cy="42" r="30" fill="none" stroke={hex} strokeWidth="3" />
+      {/* Lente com leve tint da cor */}
+      <circle cx="34" cy="42" r="26" fill={hex} opacity="0.18" />
+      <circle cx="34" cy="42" r="26" fill="#ffffff" opacity="0.35" />
+      {/* Brilho da lente */}
+      <ellipse cx="24" cy="32" rx="8" ry="5" fill="#ffffff" opacity="0.85" />
+      <ellipse cx="44" cy="52" rx="4" ry="2.5" fill="#ffffff" opacity="0.55" />
+    </svg>
+  );
+}
+
+function LupaGrandeIlustracao() {
+  return (
+    <div className="flex justify-center mb-4">
+      <svg viewBox="0 0 240 180" width="200" height="150" className="drop-shadow-lg">
+        <rect x="155" y="110" width="22" height="70" rx="8" fill="#8B5A3C" transform="rotate(35 166 145)" />
+        <rect x="155" y="110" width="6" height="70" rx="3" fill="#5c3a24" opacity="0.55" transform="rotate(35 166 145)" />
+        <circle cx="100" cy="80" r="62" fill="none" stroke="#2d2d2d" strokeWidth="10" />
+        <circle cx="100" cy="80" r="62" fill="#eaf6ff" opacity="0.85" />
+        <ellipse cx="78" cy="58" rx="22" ry="12" fill="#ffffff" opacity="0.9" />
+        <ellipse cx="118" cy="102" rx="10" ry="5" fill="#ffffff" opacity="0.55" />
+      </svg>
+    </div>
+  );
+}
+
 function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "historia" }>; say: (t: string) => Promise<void> }) {
   useEffect(() => { say(etapa.texto); }, []);
+  const usarLupa = etapa.icone === "lupa";
   return (
     <div className="paper-card p-6">
       <div className="flex items-start justify-between gap-3 mb-3">
         <h2 className="brush-title text-3xl">{etapa.titulo}</h2>
         <BtnFala onClick={() => say(etapa.texto)} />
       </div>
+      {usarLupa && <LupaGrandeIlustracao />}
       <p className="text-lg leading-relaxed mb-5">{etapa.texto}</p>
       <div className="grid grid-cols-5 gap-3 mb-5">
         {etapa.lapis.map((l) => (
@@ -249,9 +286,9 @@ function EtapaHistoria({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: "hi
             key={l.cor}
             onClick={() => say(l.frase)}
             className="flex flex-col items-center gap-1 group transition active:scale-95"
-            aria-label={`Lápis ${l.cor}`}
+            aria-label={`${usarLupa ? "Lupa" : "Lápis"} ${l.cor}`}
           >
-            <LapisDeCor hex={l.hex} />
+            {usarLupa ? <LupaColorida hex={l.hex} /> : <LapisDeCor hex={l.hex} />}
             <div className="text-xs font-bold opacity-80 group-hover:opacity-100 mt-1">{NOMES_CORES[l.cor]}</div>
             <div className="text-[11px] opacity-60">{l.emocao}</div>
           </button>
