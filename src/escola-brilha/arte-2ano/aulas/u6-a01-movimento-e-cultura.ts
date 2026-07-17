@@ -1,9 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import obra from "@/assets/atelier/atelier-obra.jpg.asset.json";
 import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
-import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
-import obraPortinari from "@/assets/arte-obras/portinari-inspirado.jpg.asset.json";
-import obraAthos from "@/assets/arte-obras/athos-inspirado.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u6-a01-movimento-e-cultura",

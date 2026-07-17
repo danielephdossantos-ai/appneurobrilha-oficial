@@ -1,8 +1,8 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
-import obraNoiteEstrelada from "@/assets/arte-obras/noite-estrelada.jpg.asset.json";
-import obraGirassois from "@/assets/arte-obras/girassois.jpg.asset.json";
-import obraNenufares from "@/assets/arte-obras/nenufares.jpg.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u5-a01-arte-e-natureza",

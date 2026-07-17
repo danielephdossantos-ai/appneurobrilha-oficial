@@ -1,11 +1,11 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
-import obraNoiteEstrelada from "@/assets/arte-obras/noite-estrelada.jpg.asset.json";
-import obraGirassois from "@/assets/arte-obras/girassois.jpg.asset.json";
-import obraNenufares from "@/assets/arte-obras/nenufares.jpg.asset.json";
-import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
-import obraPortinari from "@/assets/arte-obras/portinari-inspirado.jpg.asset.json";
-import obraAthos from "@/assets/arte-obras/athos-inspirado.jpg.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
+import obraNenufares from "@/assets/arte-2ano/obras/nenufares.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u7-a01-pequenos-artistas-em-acao",

@@ -1,9 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import floresta from "@/assets/arte-2ano/referencias/floresta-sonora.jpg.asset.json";
 import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
-import obraAthos from "@/assets/arte-obras/athos-inspirado.jpg.asset.json";
-import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
-import obraNoiteEstrelada from "@/assets/arte-obras/noite-estrelada.jpg.asset.json";
+import obraAthos from "@/assets/arte-2ano/obras/athos-inspirado.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraNoiteEstrelada from "@/assets/arte-2ano/obras/noite-estrelada.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u3-a01-descobrindo-os-sons",

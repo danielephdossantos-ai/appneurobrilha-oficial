@@ -1,9 +1,9 @@
 import type { AulaArte } from "./u1-a01-cores-falam";
 import obra from "@/assets/atelier/atelier-obra.jpg.asset.json";
 import { OBRAS_FAMOSAS } from "./u1-a01-cores-falam";
-import obraPortinari from "@/assets/arte-obras/portinari-inspirado.jpg.asset.json";
-import obraTarsila from "@/assets/arte-obras/tarsila-inspirado.jpg.asset.json";
-import obraGirassois from "@/assets/arte-obras/girassois.jpg.asset.json";
+import obraPortinari from "@/assets/arte-2ano/obras/portinari-inspirado.jpg.asset.json";
+import obraTarsila from "@/assets/arte-2ano/obras/tarsila-inspirado.jpg.asset.json";
+import obraGirassois from "@/assets/arte-2ano/obras/girassois.jpg.asset.json";
 
 const aula: AulaArte = {
   id: "u4-a01-historias-que-ganham-vida",
