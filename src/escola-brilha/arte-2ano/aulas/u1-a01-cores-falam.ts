@@ -100,6 +100,9 @@ export type EtapaBloco1 =
   | { tipo: "texturas"; titulo: string; instrucao: string; itens: Array<{ nome: string; textura: "madeira" | "pedra" | "areia" | "agua" | "tecido" | "folhas"; combina: string }> }
   | { tipo: "curiosidade"; titulo: string; texto: string }
   | { tipo: "quiz"; titulo: string; perguntas: Array<{ pergunta: string; opcoes: string[]; correta: number; explicacao: string }> }
+  // ---- Novas mecânicas U1-A01 (piloto) ----
+  | { tipo: "galeria-obras"; titulo: string; instrucao: string; obras: ObraFamosa[] }
+  | { tipo: "memoria-obras"; titulo: string; instrucao: string; pares: Array<{ id: string; titulo: string; artista: string; url: string }> }
   // ---- Bloco 2 (agora ativo) ----
   | { tipo: "pintura-digital"; titulo: string; instrucao: string; paleta: CorNome[] }
   | { tipo: "cor-emocao-drag"; titulo: string; instrucao: string; pares: Array<{ emocao: string; emoji: string; cor: CorNome; hex: string }> }
