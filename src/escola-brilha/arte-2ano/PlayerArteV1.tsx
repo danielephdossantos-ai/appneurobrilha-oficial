@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { speakChunked, stopSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { AulaArte, DecoracaoAtelie } from "./types";
 import { DrawingCanvas } from "./DrawingCanvas";
 import { AlbumRecordacoes } from "@/components/AlbumRecordacoes";
@@ -238,7 +238,7 @@ function Abertura({ aula, onEntrar }: { aula: AulaArte; onEntrar: () => void }) 
         {prontoParaComecar && (
           <button
             onClick={() => {
-              stopSpeech();
+              stopSpeaking();
               onEntrar();
             }}
             className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-black text-lg shadow-kid hover:opacity-90 animate-in fade-in duration-700"
@@ -248,7 +248,7 @@ function Abertura({ aula, onEntrar }: { aula: AulaArte; onEntrar: () => void }) 
         )}
         <button
           onClick={() => {
-            stopSpeech();
+            stopSpeaking();
             onEntrar();
           }}
           className="w-full text-xs text-foreground/50 hover:text-foreground/80 py-1"
@@ -407,7 +407,7 @@ export function PlayerArteV1({ aula, onSair }: Props) {
       <header className="sticky top-0 z-30 backdrop-blur bg-background/85 border-b border-border">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <button
-            onClick={() => { stopSpeech(); onSair(); }}
+            onClick={() => { stopSpeaking(); onSair(); }}
             className="text-primary font-bold text-sm px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 transition"
           >
             ← Sair
@@ -723,7 +723,7 @@ export function PlayerArteV1({ aula, onSair }: Props) {
 
         <div className="text-center pt-2 pb-10">
           <button
-            onClick={() => { stopSpeech(); onSair(); }}
+            onClick={() => { stopSpeaking(); onSair(); }}
             className="px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-black shadow-kid hover:opacity-90 transition"
           >
             ✨ Terminei minha aula de arte
