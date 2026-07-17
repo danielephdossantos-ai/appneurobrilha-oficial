@@ -2261,7 +2261,7 @@ function EtapaTracoGuiado({ etapa, say }: { etapa: Extract<EtapaBloco1, { tipo: 
 
 /* --------------------------- U2 v2 · Completar a Metade --------------------------- */
 
-const METADES: Record<string, { viewBox: string; render: () => JSX.Element; centro: number }> = {
+const METADES: Record<string, { viewBox: string; render: () => React.ReactElement; centro: number }> = {
   borboleta: {
     viewBox: "0 0 400 300", centro: 200,
     render: () => (
