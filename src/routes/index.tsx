@@ -547,8 +547,8 @@ function Index() {
 function ArteAtalhoCard() {
   return (
     <Link
-      to="/escola-brilha/arte/2ano/$aula"
-      params={{ aula: "u1-a01-cores-falam" }}
+      to="/escola-brilha/trilha/$serie/$disc"
+      params={{ serie: "2ano", disc: "arte" }}
       className="block rounded-[1.4rem] overflow-hidden border-[2.5px] border-white/85 active:scale-[0.98] transition-transform shadow-lg"
       style={{
         background: "linear-gradient(135deg, #0d1f55 0%, #1D4ED8 58%, #FF8A4C 100%)",
@@ -564,10 +564,10 @@ function ArteAtalhoCard() {
             Arte · 2º Ano
           </div>
           <div className="text-sm md:text-lg font-black leading-tight">
-            Aula das Cores no padrão Escola Brilha
+            Trilha Ateliê das Cores
           </div>
           <div className="text-[10px] md:text-[11px] font-bold text-white/85 mt-0.5">
-            Abrir agora →
+            Abrir mapa Duolingo →
           </div>
         </div>
       </div>
