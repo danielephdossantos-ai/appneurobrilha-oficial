@@ -115,6 +115,8 @@ export function PlayerArteV1({
             </div>
             <CenaRenderer
               cena={c.cena}
+              cursoSlug={cursoSlug}
+              aulaSlug={aulaSlug}
               onProxima={() => (i + 1 < total ? irPara(i + 1) : onConcluir())}
               ehUltima={i + 1 >= total}
               ativa={i === ativo}
