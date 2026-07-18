@@ -1053,6 +1053,7 @@ export type CenaArteV1 =
         rotulo: string;
         descricao?: string;
         cor?: string;
+        fotoUrl?: string;
       }>;
       falaFinal?: string;
       tempoSeg?: number;

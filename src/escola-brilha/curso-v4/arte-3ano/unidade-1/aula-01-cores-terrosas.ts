@@ -15,6 +15,10 @@ import u1passo2 from "@/assets/arte-3ano/u1-passo2-triturar.jpg";
 import u1passo3 from "@/assets/arte-3ano/u1-passo3-misturar.jpg";
 import u1passo4 from "@/assets/arte-3ano/u1-passo4-pintar.jpg";
 import u1passo5 from "@/assets/arte-3ano/u1-passo5-soprar.jpg";
+import mapaLascaux from "@/assets/arte-3ano/u1-mapa-lascaux.jpg";
+import mapaCapivara from "@/assets/arte-3ano/u1-mapa-capivara.jpg";
+import mapaPincel from "@/assets/arte-3ano/u1-mapa-pincel-osso.jpg";
+import mapaCarvao from "@/assets/arte-3ano/u1-mapa-carvao.jpg";
 
 /**
  * Arte · 3º Ano · Unidade 1 · Aula 01 — "Os Segredos das Cores Terrosas e a Pintura Rupestre"
@@ -36,10 +40,10 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 O Mapa na Parede da Caverna",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🕳️", rotulo: "Caverna de Lascaux (França)", descricao: "Descoberta em 1940 por 4 meninos e um cão. Cheia de bisões, cavalos e cervos em ocre e carvão.", cor: "#78350f" },
-      { emoji: "🏞️", rotulo: "Serra da Capivara (Piauí, Brasil)", descricao: "As pinturas mais antigas das Américas — caçadores, danças e árvores em vermelho-ocre.", cor: "#dc2626" },
-      { emoji: "🦴", rotulo: "Pincel de osso e pelo", descricao: "Nossos ancestrais mastigavam pontas de galho ou usavam pelos de animal amarrados em ossos.", cor: "#a16207" },
-      { emoji: "🔥", rotulo: "Carvão da fogueira", descricao: "Depois de queimar madeira, o pedaço preto virava o primeiro lápis da humanidade.", cor: "#1f2937" },
+      { emoji: "🕳️", rotulo: "Caverna de Lascaux (França)", descricao: "Descoberta em 1940 por 4 meninos e um cão. Cheia de bisões, cavalos e cervos em ocre e carvão.", cor: "#78350f", fotoUrl: mapaLascaux },
+      { emoji: "🏞️", rotulo: "Serra da Capivara (Piauí, Brasil)", descricao: "As pinturas mais antigas das Américas — caçadores, danças e árvores em vermelho-ocre.", cor: "#dc2626", fotoUrl: mapaCapivara },
+      { emoji: "🦴", rotulo: "Pincel de osso e pelo", descricao: "Nossos ancestrais usavam pelos de animal amarrados em ossos ou pontas de galho mastigadas.", cor: "#a16207", fotoUrl: mapaPincel },
+      { emoji: "🔥", rotulo: "Carvão da fogueira", descricao: "Depois de queimar madeira, o pedaço preto virava o primeiro lápis da humanidade.", cor: "#1f2937", fotoUrl: mapaCarvao },
     ],
     falaFinal: "Eles inventaram a PRIMEIRA PALETA da humanidade — as Cores Terrosas: tudo vindo direto do chão.",
   },
