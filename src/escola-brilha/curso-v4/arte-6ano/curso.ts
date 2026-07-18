@@ -1,6 +1,7 @@
 import type { CursoArteV1 } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
+import { unidade5 } from "./unidade-5";
 import { unidade3 } from "./unidade-3";
 
 /**
@@ -21,7 +22,7 @@ const curso: CursoArteV1 = {
   corPrimaria: "#7c2d12",
   corSecundaria: "#f59e0b",
   tipoAula: "arte-v1",
-  unidades: [unidade1, unidade2, unidade3],
+  unidades: [unidade1, unidade2, unidade3, unidade5],
 };
 
 export default curso;
