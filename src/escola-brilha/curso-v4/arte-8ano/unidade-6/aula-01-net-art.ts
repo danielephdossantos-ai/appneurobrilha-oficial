@@ -1,16 +1,16 @@
 import type { AulaArteV1 } from "../../types";
-import modemOld from "@/assets/arte-8ano/u6-modem-old.jpg";
-import computerLab from "@/assets/arte-8ano/u6-computer-lab.jpg";
-import crtMonitor from "@/assets/arte-8ano/u6-crt-monitor.jpg";
-import htmlSource from "@/assets/arte-8ano/u6-html-source.jpg";
-import keyboard from "@/assets/arte-8ano/u6-keyboard.jpg";
-import chat90s from "@/assets/arte-8ano/u6-chat-90s.jpg";
-import hyperlink from "@/assets/arte-8ano/u6-hyperlink.jpg";
-import serverRoom from "@/assets/arte-8ano/u6-server-room.jpg";
-import fiberOptics from "@/assets/arte-8ano/u6-fiber-optics.jpg";
-import digitalCollage from "@/assets/arte-8ano/u6-digital-collage.jpg";
-import telepresence from "@/assets/arte-8ano/u6-telepresence.jpg";
-import meme from "@/assets/arte-8ano/u6-meme.jpg";
+import { url as modemOld } from "@/assets/arte-8ano/u6-modem-old.jpg.asset.json";
+import { url as computerLab } from "@/assets/arte-8ano/u6-computer-lab.jpg.asset.json";
+import { url as crtMonitor } from "@/assets/arte-8ano/u6-crt-monitor.jpg.asset.json";
+import { url as htmlSource } from "@/assets/arte-8ano/u6-html-source.jpg.asset.json";
+import { url as keyboard } from "@/assets/arte-8ano/u6-keyboard.jpg.asset.json";
+import { url as chat90s } from "@/assets/arte-8ano/u6-chat-90s.jpg.asset.json";
+import { url as hyperlink } from "@/assets/arte-8ano/u6-hyperlink.jpg.asset.json";
+import { url as serverRoom } from "@/assets/arte-8ano/u6-server-room.jpg.asset.json";
+import { url as fiberOptics } from "@/assets/arte-8ano/u6-fiber-optics.jpg.asset.json";
+import { url as digitalCollage } from "@/assets/arte-8ano/u6-digital-collage.jpg.asset.json";
+import { url as telepresence } from "@/assets/arte-8ano/u6-telepresence.jpg.asset.json";
+import { url as meme } from "@/assets/arte-8ano/u6-meme.jpg.asset.json";
 
 /**
  * Arte · 8º Ano · Unidade 6 · Aula 01 — "Net Art e Cultura de Rede: A Estética do Compartilhamento"
