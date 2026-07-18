@@ -57,6 +57,7 @@ export const aula01: AulaArteV1 = {
     perguntas: [
       {
         pergunta: "As pinturas rupestres eram feitas com…",
+        fotoUrl: q1PinturaCaverna,
         alternativas: [
           { texto: "Tinta acrílica comprada em loja", correta: false },
           { texto: "Terra, pedras trituradas e carvão", correta: true },
@@ -66,6 +67,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Qual dessas cores VOCÊ NÃO encontra nas paredes de Lascaux?",
+        fotoUrl: q2CoresTerrosas,
         alternativas: [
           { texto: "Azul-neon brilhante", correta: true },
           { texto: "Marrom, ocre e vermelho-escuro", correta: false },
