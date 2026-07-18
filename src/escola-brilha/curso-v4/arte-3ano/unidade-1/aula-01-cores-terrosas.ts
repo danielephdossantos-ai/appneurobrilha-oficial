@@ -77,6 +77,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Um dos pincéis pré-históricos era feito de…",
+        fotoUrl: q3PincelOsso,
         alternativas: [
           { texto: "Pelos de animal amarrados em osso", correta: true },
           { texto: "Cerdas plásticas coloridas", correta: false },
