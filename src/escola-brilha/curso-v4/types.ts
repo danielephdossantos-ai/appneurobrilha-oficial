@@ -1055,6 +1055,7 @@ export type CenaArteV1 =
         descricao?: string;
         cor?: string;
         fotoUrl?: string;
+        somUrl?: string;
       }>;
       falaFinal?: string;
       tempoSeg?: number;
