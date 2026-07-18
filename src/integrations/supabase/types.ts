@@ -4421,6 +4421,7 @@ export type Database = {
           foto_path: string
           id: string
           legenda: string | null
+          tipo: string
           user_id: string
         }
         Insert: {
@@ -4430,6 +4431,7 @@ export type Database = {
           foto_path: string
           id?: string
           legenda?: string | null
+          tipo?: string
           user_id: string
         }
         Update: {
@@ -4439,6 +4441,7 @@ export type Database = {
           foto_path?: string
           id?: string
           legenda?: string | null
+          tipo?: string
           user_id?: string
         }
         Relationships: []
