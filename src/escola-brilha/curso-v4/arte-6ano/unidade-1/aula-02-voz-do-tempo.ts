@@ -240,7 +240,8 @@ export const aula02: AulaArteV1 = {
       { emoji: "🕵️", rotulo: "Etno-historiador", descricao: "Cientista que grava, transcreve e cruza fontes orais com materiais e visuais.", cor: "#0ea5e9", fotoUrl: etnoHistoriador },
       { emoji: "📜", rotulo: "Cruzar as fontes", descricao: "Nunca confiar em UMA voz só. Oral + material + visual + documental = várias camadas da verdade.", cor: "#1e3a8a", fotoUrl: decreto },
       { emoji: "🌊", rotulo: "Risco do silêncio", descricao: "Sem transmissão viva ou registro, o Patrimônio Imaterial desaparece PRA SEMPRE.", cor: "#0ea5e9", fotoUrl: ribeirinha },
-    ],
+      { emoji: "🔮", rotulo: "Amuleto do Eco", descricao: "Sua recompensa: desbloqueia os arquivos de áudio ocultos do Códice e a Linha do Tempo Sonora.", cor: "#f59e0b", fotoUrl: amuletoEco },
+      { emoji: "🌐", rotulo: "Linha do Tempo Sonora", descricao: "Mapa global das vozes humanas atravessando as eras — sua página restaurada.", cor: "#a16207", fotoUrl: linhaSonora },
     falaFinal: "Segunda página do Códice dos Impérios Perdidos RESTAURADA — Linha do Tempo Sonora desbloqueada!",
   },
 
