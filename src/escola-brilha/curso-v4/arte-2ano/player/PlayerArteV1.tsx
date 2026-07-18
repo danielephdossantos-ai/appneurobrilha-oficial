@@ -12,10 +12,14 @@ import { mascoteAtribuido } from "@/escola-brilha/mascote-assign";
 // ============================================================================
 export function PlayerArteV1({
   aula,
+  cursoSlug,
+  aulaSlug,
   onSair,
   onConcluir,
 }: {
   aula: AulaArteV1;
+  cursoSlug?: string;
+  aulaSlug?: string;
   onSair: () => void;
   onConcluir: () => void;
 }) {
