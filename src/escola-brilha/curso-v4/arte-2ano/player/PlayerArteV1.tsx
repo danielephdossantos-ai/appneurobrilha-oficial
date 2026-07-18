@@ -1208,9 +1208,18 @@ function CenaTematica({
               }`}
               style={foiTocado ? { boxShadow: `0 10px 30px -10px ${cor}` } : undefined}
             >
-              <div className="text-3xl mb-1">{it.emoji ?? "✨"}</div>
+              {it.fotoUrl ? (
+                <img
+                  src={it.fotoUrl}
+                  alt={it.rotulo}
+                  loading="lazy"
+                  className="w-full h-24 sm:h-28 object-cover rounded-xl mb-2 border border-white/30"
+                />
+              ) : (
+                <div className="text-3xl mb-1">{it.emoji ?? "✨"}</div>
+              )}
               <div className="text-sm font-black" style={{ color: foiTocado ? cor : undefined }}>
-                {it.rotulo}
+                {it.emoji && it.fotoUrl ? `${it.emoji} ` : ""}{it.rotulo}
               </div>
               {foiTocado && it.descricao && (
                 <div className="text-[11px] text-white/80 mt-1 leading-snug">{it.descricao}</div>
