@@ -1,15 +1,28 @@
 import type { AulaArteV1 } from "../../types";
+import { url as amazoniaAereaFoto } from "@/assets/arte-8ano/u5-amazonia-aerea.jpg.asset.json";
+import { url as bacteriaBioluminescenteFoto } from "@/assets/arte-8ano/u5-bacteria-bioluminescente.jpg.asset.json";
+import { url as bioluminescenciaLuxFoto } from "@/assets/arte-8ano/u5-bioluminescencia-lux.jpg.asset.json";
+import { url as cientistaLabFoto } from "@/assets/arte-8ano/u5-cientista-lab.jpg.asset.json";
+import { url as coralBranqueadoFoto } from "@/assets/arte-8ano/u5-coral-branqueado.jpg.asset.json";
+import { url as culturaBacterianaFoto } from "@/assets/arte-8ano/u5-cultura-bacteriana.jpg.asset.json";
+import { url as desmatamentoFoto } from "@/assets/arte-8ano/u5-desmatamento.jpg.asset.json";
+import { url as dnaHeliceFoto } from "@/assets/arte-8ano/u5-dna-helice.jpg.asset.json";
+import { url as dnaModeloFoto } from "@/assets/arte-8ano/u5-dna-modelo.jpg.asset.json";
+import { url as ecoliPlacaFoto } from "@/assets/arte-8ano/u5-ecoli-placa.jpg.asset.json";
+import { url as estufaSensorFoto } from "@/assets/arte-8ano/u5-estufa-sensor.jpg.asset.json";
+import { url as fluorescenciaCelulaFoto } from "@/assets/arte-8ano/u5-fluorescencia-celula.jpg.asset.json";
+import { url as fotobioreatorFoto } from "@/assets/arte-8ano/u5-fotobioreator.jpg.asset.json";
+import { url as micropipetasFoto } from "@/assets/arte-8ano/u5-micropipetas.jpg.asset.json";
+import { url as paredeVerdeFoto } from "@/assets/arte-8ano/u5-parede-verde.jpg.asset.json";
+import { url as placaPetriFoto } from "@/assets/arte-8ano/u5-placa-petri.jpg.asset.json";
+import { url as plantaExperimentoFoto } from "@/assets/arte-8ano/u5-planta-experimento.jpg.asset.json";
+import { url as plantaLabFoto } from "@/assets/arte-8ano/u5-planta-lab.jpg.asset.json";
+import { url as recifeCoralFoto } from "@/assets/arte-8ano/u5-recife-coral.jpg.asset.json";
 
 /**
  * Arte · 8º Ano · Unidade 5 · Aula 01 — "Bioarte e Eco-Ativismo Digital: A Natureza Programada"
  * Metanarrativa: 🌿 Eco-Simulacros da Revolução Digital
  * Foco: bioarte, eco-ativismo visual, sinais biônicos, Eduardo Kac, arte + biotecnologia + software.
- *
- * OBS: nesta sessão a ferramenta interna de geração de imagens não estava
- * disponível no ambiente, então as cenas foram construídas sem fotoUrl
- * (todos os campos de imagem são opcionais no contrato CenaArteV1). Basta
- * gerar os 20 arquivos u5-*.jpg descritos no relatório final e importar
- * cada um no topo deste arquivo, atribuindo-os aos itens correspondentes.
  */
 export const aula01: AulaArteV1 = {
   slug: "aula-01-bioarte",
@@ -26,10 +39,10 @@ export const aula01: AulaArteV1 = {
     titulo: "🌿 O Despertar da Natureza Programada",
     instrucao: "Toca em cada pista pra ativar o módulo Bio-Maker",
     itens: [
-      { emoji: "🧫", rotulo: "Bioarte (arte + organismos vivos)", descricao: "A Bioarte usa bactérias, plantas, fungos e até DNA como MATERIAL artístico, combinando biotecnologia com softwares que traduzem sinais biológicos em som, luz e imagem.", cor: "#16a34a" },
-      { emoji: "🌱", rotulo: "Plantas com eletrodos", descricao: "Sensores presos às folhas captam variações elétricas naturais da planta e um software converte esses sinais em MELODIAS — a planta 'compõe' em tempo real.", cor: "#0891b2" },
-      { emoji: "📡", rotulo: "Eco-Ativismo Visual", descricao: "Gráficos, mapas e instalações que traduzem dados ambientais (desmatamento, poluição, seca) em imagens que DENUNCIAM o colapso climático.", cor: "#dc2626" },
-      { emoji: "🔌", rotulo: "Sinais Biônicos", descricao: "Impulsos elétricos de seres vivos (plantas, corpo humano, bactérias) captados por sensores e reprogramados em dados digitais interpretáveis por máquinas.", cor: "#7c3aed" },
+      { emoji: "🧫", rotulo: "Bioarte (arte + organismos vivos)", fotoUrl: culturaBacterianaFoto, descricao: "A Bioarte usa bactérias, plantas, fungos e até DNA como MATERIAL artístico, combinando biotecnologia com softwares que traduzem sinais biológicos em som, luz e imagem.", cor: "#16a34a" },
+      { emoji: "🌱", rotulo: "Plantas com eletrodos", fotoUrl: plantaExperimentoFoto, descricao: "Sensores presos às folhas captam variações elétricas naturais da planta e um software converte esses sinais em MELODIAS — a planta 'compõe' em tempo real.", cor: "#0891b2" },
+      { emoji: "📡", rotulo: "Eco-Ativismo Visual", fotoUrl: desmatamentoFoto, descricao: "Gráficos, mapas e instalações que traduzem dados ambientais (desmatamento, poluição, seca) em imagens que DENUNCIAM o colapso climático.", cor: "#dc2626" },
+      { emoji: "🔌", rotulo: "Sinais Biônicos", fotoUrl: bioluminescenciaLuxFoto, descricao: "Impulsos elétricos de seres vivos (plantas, corpo humano, bactérias) captados por sensores e reprogramados em dados digitais interpretáveis por máquinas.", cor: "#7c3aed" },
     ],
     falaFinal: "Sua missão: entender como a vida biológica virou matéria-prima da arte digital — e como isso pode SALVAR o planeta.",
   },
@@ -40,6 +53,7 @@ export const aula01: AulaArteV1 = {
     perguntas: [
       {
         pergunta: "Um artista cria uma bactéria com uma mutação controlada pela internet, a partir de uma frase da Bíblia traduzida em código Morse e depois em DNA. Que tipo de arte é essa?",
+        fotoUrl: bacteriaBioluminescenteFoto,
         alternativas: [
           { texto: "Bioarte — usa organismos vivos (bactérias, DNA) como material artístico junto com tecnologia digital", correta: true },
           { texto: "Escultura em mármore — obra estática sem organismos vivos", correta: false },
@@ -49,6 +63,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Uma samambaia tem um sensor de umidade que publica um tuíte automático quando a terra está seca. Isso é um exemplo de quê?",
+        fotoUrl: estufaSensorFoto,
         alternativas: [
           { texto: "Sinal Biônico traduzido em Eco-Ativismo Digital — a planta 'fala' pra pedir ajuda", correta: true },
           { texto: "Um erro de programação sem nenhuma intenção artística ou ecológica", correta: false },
@@ -58,6 +73,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Um gráfico mostra árvores mudando de cor de verde pra vermelho conforme dados de satélite indicam desmatamento. Que linguagem artística é essa?",
+        fotoUrl: amazoniaAereaFoto,
         alternativas: [
           { texto: "Eco-Ativismo Visual — dados ambientais viram imagem pra sensibilizar o público", correta: true },
           { texto: "Pintura decorativa sem relação nenhuma com dados reais", correta: false },
@@ -72,10 +88,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário técnico do bio-designer. Toca em cada verbete!",
     cards: [
-      { termo: "Bioarte", definicao: "Linguagem artística que usa organismos vivos — bactérias, plantas, fungos, DNA — como material, combinando biotecnologia e software.", emoji: "🧫", cor: "#16a34a" },
-      { termo: "Eco-Ativismo Visual", definicao: "Uso de dados ambientais (satélite, sensores) transformados em imagens, gráficos e instalações que denunciam problemas ecológicos.", emoji: "📡", cor: "#dc2626" },
-      { termo: "Sinais Biônicos", definicao: "Impulsos elétricos naturais de seres vivos captados por sensores e convertidos em dados digitais interpretáveis por softwares e máquinas.", emoji: "🔌", cor: "#7c3aed" },
-      { termo: "Mutação Controlada", definicao: "Alteração genética induzida artisticamente (ex.: luz UV) e comandada remotamente pela internet, unindo genética e interatividade digital.", emoji: "🧬", cor: "#0891b2" },
+      { termo: "Bioarte", fotoUrl: placaPetriFoto, definicao: "Linguagem artística que usa organismos vivos — bactérias, plantas, fungos, DNA — como material, combinando biotecnologia e software.", emoji: "🧫", cor: "#16a34a" },
+      { termo: "Eco-Ativismo Visual", fotoUrl: paredeVerdeFoto, definicao: "Uso de dados ambientais (satélite, sensores) transformados em imagens, gráficos e instalações que denunciam problemas ecológicos.", emoji: "📡", cor: "#dc2626" },
+      { termo: "Sinais Biônicos", fotoUrl: fluorescenciaCelulaFoto, definicao: "Impulsos elétricos naturais de seres vivos captados por sensores e convertidos em dados digitais interpretáveis por softwares e máquinas.", emoji: "🔌", cor: "#7c3aed" },
+      { termo: "Mutação Controlada", fotoUrl: dnaHeliceFoto, definicao: "Alteração genética induzida artisticamente (ex.: luz UV) e comandada remotamente pela internet, unindo genética e interatividade digital.", emoji: "🧬", cor: "#0891b2" },
     ],
   },
 
@@ -90,10 +106,10 @@ export const aula01: AulaArteV1 = {
       "Tudo isso usa SINAIS BIÔNICOS: impulsos elétricos que a vida produz naturalmente, mas que só se tornam visíveis, sonoros ou virais quando um sensor e um software os traduzem. Bio-designer é isso: escutar a natureza com tecnologia — e transformar essa escuta em denúncia e em arte.",
     ],
     pigmentos: [
-      { nome: "Bioarte", hex: "#16a34a", fonte: "Organismos vivos como material", emoji: "🧫" },
-      { nome: "Eduardo Kac / Genesis", hex: "#0891b2", fonte: "DNA + Morse + mutação via web", emoji: "🧬" },
-      { nome: "Eco-Ativismo Visual", hex: "#dc2626", fonte: "Dados de satélite viram imagem", emoji: "📡" },
-      { nome: "Sinais Biônicos", hex: "#7c3aed", fonte: "Impulsos da vida traduzidos em dados", emoji: "🔌" },
+      { nome: "Bioarte", hex: "#16a34a", fonte: "Organismos vivos como material", emoji: "🧫", fotoUrl: ecoliPlacaFoto },
+      { nome: "Eduardo Kac / Genesis", hex: "#0891b2", fonte: "DNA + Morse + mutação via web", emoji: "🧬", fotoUrl: dnaModeloFoto },
+      { nome: "Eco-Ativismo Visual", hex: "#dc2626", fonte: "Dados de satélite viram imagem", emoji: "📡", fotoUrl: coralBranqueadoFoto },
+      { nome: "Sinais Biônicos", hex: "#7c3aed", fonte: "Impulsos da vida traduzidos em dados", emoji: "🔌", fotoUrl: micropipetasFoto },
     ],
   },
 
@@ -103,6 +119,7 @@ export const aula01: AulaArteV1 = {
     perguntas: [
       {
         pergunta: "Na obra 'Genesis' de Eduardo Kac, qual foi o CAMINHO da transformação da frase original até a bactéria?",
+        fotoUrl: fotobioreatorFoto,
         alternativas: [
           { texto: "Frase bíblica → código Morse → sequência genética (A, C, T, G) → gene inserido numa bactéria real", correta: true },
           { texto: "Frase bíblica → tinta a óleo → tela → moldura de madeira entalhada", correta: false },
@@ -112,6 +129,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "O que torna o sensor de umidade da samambaia uma obra de ECO-ATIVISMO?",
+        fotoUrl: cientistaLabFoto,
         alternativas: [
           { texto: "Ele traduz um sinal biológico (sede da planta) em uma ação digital pública (o tuíte) que sensibiliza pessoas", correta: true },
           { texto: "Ele só serve pra regar a planta automaticamente, sem nenhuma intenção comunicativa", correta: false },
@@ -121,6 +139,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Por que os eletrodos nas folhas de uma planta podem gerar MÚSICA?",
+        fotoUrl: plantaLabFoto,
         alternativas: [
           { texto: "Porque captam sinais biônicos (impulsos elétricos naturais) e um software os converte em notas musicais", correta: true },
           { texto: "Porque as plantas têm cordas vocais escondidas dentro do caule", correta: false },
@@ -136,7 +155,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada obra pelo CONCEITO de bioarte e eco-ativismo que ela usa!",
     animais: [
       {
-        nome: "Bactéria mutante controlada pela web", emoji: "🧬",
+        nome: "Bactéria mutante controlada pela web", emoji: "🧬", fotoUrl: bacteriaBioluminescenteFoto,
         corAlvo: { nome: "Bioarte", hex: "#16a34a" },
         opcoes: [
           { nome: "Bioarte", hex: "#16a34a" },
@@ -146,7 +165,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Isso! Organismo vivo modificado como obra = bioarte.",
       },
       {
-        nome: "Gráfico de árvores mudando de cor por dados de satélite", emoji: "📡",
+        nome: "Gráfico de árvores mudando de cor por dados de satélite", emoji: "📡", fotoUrl: recifeCoralFoto,
         corAlvo: { nome: "Eco-Ativismo Visual", hex: "#dc2626" },
         opcoes: [
           { nome: "Eco-Ativismo Visual", hex: "#dc2626" },
@@ -156,7 +175,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Correto! Dados ambientais virando imagem de alerta = eco-ativismo visual.",
       },
       {
-        nome: "Planta com eletrodos que vira melodia", emoji: "🔌",
+        nome: "Planta com eletrodos que vira melodia", emoji: "🔌", fotoUrl: plantaExperimentoFoto,
         corAlvo: { nome: "Sinais Biônicos", hex: "#7c3aed" },
         opcoes: [
           { nome: "Sinais Biônicos", hex: "#7c3aed" },
@@ -172,11 +191,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra criar o SEU próprio Cartaz Bio-Ativista.",
     passos: [
-      { id: "p1", texto: "Observo de perto uma folha real por alguns minutos, notando veias, textura e formato", emoji: "🍃", ordem: 1 },
-      { id: "p2", texto: "Desenho o contorno de uma árvore com galhos que viram RAÍZES de circuito eletrônico", emoji: "🌳", ordem: 2 },
-      { id: "p3", texto: "Marco com linhas vermelhas onde ficariam sensores fictícios (umidade, luz, som)", emoji: "📝", ordem: 3 },
-      { id: "p4", texto: "Coloro com verdes, azuis e dourados indicando folhas, fios de cobre e dados digitais", emoji: "🎨", ordem: 4 },
-      { id: "p5", texto: "Escrevo uma frase de denúncia ecológica embaixo e dou um TÍTULO ao cartaz — está pronto!", emoji: "🏷️", ordem: 5 },
+      { id: "p1", texto: "Observo de perto uma folha real por alguns minutos, notando veias, textura e formato", emoji: "🍃", ordem: 1, fotoUrl: plantaLabFoto },
+      { id: "p2", texto: "Desenho o contorno de uma árvore com galhos que viram RAÍZES de circuito eletrônico", emoji: "🌳", ordem: 2, fotoUrl: paredeVerdeFoto },
+      { id: "p3", texto: "Marco com linhas vermelhas onde ficariam sensores fictícios (umidade, luz, som)", emoji: "📝", ordem: 3, fotoUrl: estufaSensorFoto },
+      { id: "p4", texto: "Coloro com verdes, azuis e dourados indicando folhas, fios de cobre e dados digitais", emoji: "🎨", ordem: 4, fotoUrl: fluorescenciaCelulaFoto },
+      { id: "p5", texto: "Escrevo uma frase de denúncia ecológica embaixo e dou um TÍTULO ao cartaz — está pronto!", emoji: "🏷️", ordem: 5, fotoUrl: amazoniaAereaFoto },
     ],
     falaAcerto: "Você acabou de criar o primeiro Cartaz Bio-Ativista da Estufa Digital!",
   },
@@ -203,12 +222,12 @@ export const aula01: AulaArteV1 = {
     instrucao: "Toca cada impulso da planta digital na ordem certa pra formar a melodia biônica!",
     tempoSeg: 40,
     itens: [
-      { emoji: "🌿", rotulo: "Impulso da folha nº1", cor: "#16a34a" },
-      { emoji: "🎵", rotulo: "Nota traduzida (Dó biônico)", cor: "#0891b2" },
-      { emoji: "⚡", rotulo: "Sinal elétrico da raiz", cor: "#f59e0b" },
-      { emoji: "🎚️", rotulo: "Sintetizador de seiva", cor: "#7c3aed" },
-      { emoji: "🔊", rotulo: "Amplificador orgânico", cor: "#dc2626" },
-      { emoji: "🎶", rotulo: "Melodia final da planta", cor: "#16a34a" },
+      { emoji: "🌿", rotulo: "Impulso da folha nº1", cor: "#16a34a", fotoUrl: plantaExperimentoFoto },
+      { emoji: "🎵", rotulo: "Nota traduzida (Dó biônico)", cor: "#0891b2", fotoUrl: bioluminescenciaLuxFoto },
+      { emoji: "⚡", rotulo: "Sinal elétrico da raiz", cor: "#f59e0b", fotoUrl: dnaHeliceFoto },
+      { emoji: "🎚️", rotulo: "Sintetizador de seiva", cor: "#7c3aed", fotoUrl: micropipetasFoto },
+      { emoji: "🔊", rotulo: "Amplificador orgânico", cor: "#dc2626", fotoUrl: fotobioreatorFoto },
+      { emoji: "🎶", rotulo: "Melodia final da planta", cor: "#16a34a", fotoUrl: culturaBacterianaFoto },
     ],
     falaFinal: "Melodia sintetizada! A planta digital acabou de compor sua primeira música biônica.",
   },
@@ -219,12 +238,12 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a Estufa Digital. Toca em cada verbete pra consolidar!",
     titulo: "🌿 Caderno do Bio-Designer",
     itens: [
-      { emoji: "🧫", rotulo: "Bioarte", descricao: "Organismos vivos (bactérias, plantas, DNA) usados como material artístico, combinando biotecnologia e software.", cor: "#16a34a" },
-      { emoji: "🧬", rotulo: "Eduardo Kac / Genesis (1999)", descricao: "Frase bíblica → Morse → código genético (A, C, T, G) → bactéria com mutação controlada pela internet via luz UV.", cor: "#0891b2" },
-      { emoji: "📡", rotulo: "Eco-Ativismo Visual", descricao: "Dados ambientais (satélite, sensores) transformados em imagens e gráficos que denunciam o colapso ecológico.", cor: "#dc2626" },
-      { emoji: "🔌", rotulo: "Sinais Biônicos", descricao: "Impulsos elétricos naturais de seres vivos captados por sensores e traduzidos em dados digitais interpretáveis.", cor: "#7c3aed" },
-      { emoji: "🌱", rotulo: "Sensor de Umidade Ativista", descricao: "Dispositivo que capta a sede de uma planta e publica um alerta digital automático — natureza que 'fala' online.", cor: "#0e7490" },
-      { emoji: "🎶", rotulo: "Sintetizador de Seiva", descricao: "Software que converte impulsos elétricos de plantas em melodias — a planta como compositora biônica.", cor: "#f59e0b" },
+      { emoji: "🧫", rotulo: "Bioarte", fotoUrl: placaPetriFoto, descricao: "Organismos vivos (bactérias, plantas, DNA) usados como material artístico, combinando biotecnologia e software.", cor: "#16a34a" },
+      { emoji: "🧬", rotulo: "Eduardo Kac / Genesis (1999)", fotoUrl: dnaModeloFoto, descricao: "Frase bíblica → Morse → código genético (A, C, T, G) → bactéria com mutação controlada pela internet via luz UV.", cor: "#0891b2" },
+      { emoji: "📡", rotulo: "Eco-Ativismo Visual", fotoUrl: desmatamentoFoto, descricao: "Dados ambientais (satélite, sensores) transformados em imagens e gráficos que denunciam o colapso ecológico.", cor: "#dc2626" },
+      { emoji: "🔌", rotulo: "Sinais Biônicos", fotoUrl: fluorescenciaCelulaFoto, descricao: "Impulsos elétricos naturais de seres vivos captados por sensores e traduzidos em dados digitais interpretáveis.", cor: "#7c3aed" },
+      { emoji: "🌱", rotulo: "Sensor de Umidade Ativista", fotoUrl: estufaSensorFoto, descricao: "Dispositivo que capta a sede de uma planta e publica um alerta digital automático — natureza que 'fala' online.", cor: "#0e7490" },
+      { emoji: "🎶", rotulo: "Sintetizador de Seiva", fotoUrl: plantaLabFoto, descricao: "Software que converte impulsos elétricos de plantas em melodias — a planta como compositora biônica.", cor: "#f59e0b" },
     ],
     falaFinal: "Estufa Digital ATIVADA — mais um módulo dos Eco-Simulacros online!",
   },
