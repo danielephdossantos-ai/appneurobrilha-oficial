@@ -1080,8 +1080,8 @@ function CenaRodaCores({
 // CENA 11 — Avaliação final + missão família
 // ============================================================================
 function CenaAvaliacaoFinal({
-  cena, onProxima, ehUltima, ativa,
-}: { cena: Extract<CenaArteV1, { tipo: "avaliacaoFinal" }>; onProxima: () => void; ehUltima: boolean; ativa: boolean }) {
+  cena, cursoSlug, aulaSlug, onProxima, ehUltima, ativa,
+}: { cena: Extract<CenaArteV1, { tipo: "avaliacaoFinal" }>; cursoSlug?: string; aulaSlug?: string; onProxima: () => void; ehUltima: boolean; ativa: boolean }) {
   const [resp, setResp] = useState<number | null>(null);
   const jaFalou = useRef(false);
   useEffect(() => { if (ativa && !jaFalou.current) { speakChunked(cena.aurora); jaFalou.current = true; } }, [ativa, cena.aurora]);
