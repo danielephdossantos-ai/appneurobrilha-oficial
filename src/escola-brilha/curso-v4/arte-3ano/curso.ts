@@ -1,5 +1,6 @@
 import type { CursoArteV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Arte · 3º Ano — "🕵️ Os Exploradores do Tempo e do Espaço"
@@ -18,7 +19,7 @@ const curso: CursoArteV1 = {
   corPrimaria: "#b45309",
   corSecundaria: "#0f766e",
   tipoAula: "arte-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
