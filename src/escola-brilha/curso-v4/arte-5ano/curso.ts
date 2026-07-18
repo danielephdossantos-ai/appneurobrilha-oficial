@@ -26,7 +26,7 @@ const curso: CursoArteV1 = {
   corPrimaria: "#1e3a8a",
   corSecundaria: "#0ea5e9",
   tipoAula: "arte-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
