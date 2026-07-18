@@ -1,4 +1,21 @@
 import type { AulaArteV1 } from "../../types";
+import vocabArtesao from "@/assets/arte-2ano/u6-vocab-artesao.jpg";
+import vocabCordel from "@/assets/arte-2ano/u6-vocab-cordel.jpg";
+import vocabCeramica from "@/assets/arte-2ano/u6-vocab-ceramica.jpg";
+import vocabCultura from "@/assets/arte-2ano/u6-vocab-cultura.jpg";
+import pigCarranca from "@/assets/arte-2ano/u6-pig-carranca.jpg";
+import pigBonecas from "@/assets/arte-2ano/u6-pig-bonecas.jpg";
+import pigCordel from "@/assets/arte-2ano/u6-pig-cordel.jpg";
+import pigBoi from "@/assets/arte-2ano/u6-pig-boi.jpg";
+import animalBoi from "@/assets/arte-2ano/u6-animal-boi.jpg";
+import animalCarranca from "@/assets/arte-2ano/u6-animal-carranca.jpg";
+import animalBonecas from "@/assets/arte-2ano/u6-animal-bonecas.jpg";
+import u6passo1 from "@/assets/arte-2ano/u6-passo1-barro.jpg";
+import u6passo2 from "@/assets/arte-2ano/u6-passo2-amassar.jpg";
+import u6passo3 from "@/assets/arte-2ano/u6-passo3-modelar.jpg";
+import u6passo4 from "@/assets/arte-2ano/u6-passo4-secar.jpg";
+import u6passo5 from "@/assets/arte-2ano/u6-passo5-pintar.jpg";
+
 
 /**
  * Arte · 2º Ano · Unidade 6 · Aula 01 — "Arte Popular Brasileira"
@@ -65,10 +82,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras da arte popular — toca em cada uma!",
     cards: [
-      { termo: "Artesão", definicao: "Quem faz arte COM AS MÃOS — barro, madeira, palha, tecido.", emoji: "🧑‍🎨", cor: "#78350f" },
-      { termo: "Cordel", definicao: "Livrinho de POESIA com xilogravura, pendurado em barbante no Nordeste.", emoji: "📚", cor: "#1f2937" },
-      { termo: "Cerâmica", definicao: "Arte de moldar o BARRO e depois queimar no forno pra ficar duro.", emoji: "🏺", cor: "#f97316" },
-      { termo: "Cultura", definicao: "TUDO que um povo faz: música, comida, arte, festa, dança.", emoji: "🌎", cor: "#16a34a" },
+      { termo: "Artesão", definicao: "Quem faz arte COM AS MÃOS — barro, madeira, palha, tecido.", emoji: "🧑‍🎨", cor: "#78350f", fotoUrl: vocabArtesao },
+      { termo: "Cordel", definicao: "Livrinho de POESIA com xilogravura, pendurado em barbante no Nordeste.", emoji: "📚", cor: "#1f2937", fotoUrl: vocabCordel },
+      { termo: "Cerâmica", definicao: "Arte de moldar o BARRO e depois queimar no forno pra ficar duro.", emoji: "🏺", cor: "#f97316", fotoUrl: vocabCeramica },
+      { termo: "Cultura", definicao: "TUDO que um povo faz: música, comida, arte, festa, dança.", emoji: "🌎", cor: "#16a34a", fotoUrl: vocabCultura },
     ],
   },
 
@@ -82,10 +99,10 @@ export const aula01: AulaArteV1 = {
       "No MARANHÃO, todo mês de junho tem BUMBA-MEU-BOI: um boi de pano dança, morre e ressuscita, com música e cores explodindo pelas ruas.",
     ],
     pigmentos: [
-      { nome: "Vermelho da carranca", hex: "#dc2626", fonte: "Madeira pintada", emoji: "🎭" },
-      { nome: "Barro do Jequitinhonha", hex: "#f97316", fonte: "Argila queimada", emoji: "🏺" },
-      { nome: "Preto do cordel", hex: "#1f2937", fonte: "Tinta na xilogravura", emoji: "📚" },
-      { nome: "Fita do boi", hex: "#eab308", fonte: "Cetim colorido", emoji: "🪁" },
+      { nome: "Vermelho da carranca", hex: "#dc2626", fonte: "Madeira pintada", emoji: "🎭", fotoUrl: pigCarranca },
+      { nome: "Barro do Jequitinhonha", hex: "#f97316", fonte: "Argila queimada", emoji: "🏺", fotoUrl: pigBonecas },
+      { nome: "Preto do cordel", hex: "#1f2937", fonte: "Tinta na xilogravura", emoji: "📚", fotoUrl: pigCordel },
+      { nome: "Fita do boi", hex: "#eab308", fonte: "Cetim colorido", emoji: "🪁", fotoUrl: pigBoi },
     ],
   },
 
@@ -128,7 +145,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada arte é de uma região do Brasil. Acerta de onde vem!",
     animais: [
       {
-        nome: "Bumba-meu-boi", emoji: "🐂",
+        nome: "Bumba-meu-boi", emoji: "🐂", fotoUrl: animalBoi,
         corAlvo: { nome: "Maranhão (Nordeste)", hex: "#eab308" },
         opcoes: [
           { nome: "Rio Grande do Sul (Sul)", hex: "#16a34a" },
@@ -138,7 +155,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Bumba-meu-boi é a alma do Maranhão!",
       },
       {
-        nome: "Carranca", emoji: "🎭",
+        nome: "Carranca", emoji: "🎭", fotoUrl: animalCarranca,
         corAlvo: { nome: "Rio São Francisco (BA/PE)", hex: "#dc2626" },
         opcoes: [
           { nome: "Rio São Francisco (BA/PE)", hex: "#dc2626" },
@@ -148,7 +165,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Rio São Francisco! Barqueiros usavam carrancas na proa.",
       },
       {
-        nome: "Bonecas de barro", emoji: "🏺",
+        nome: "Bonecas de barro", emoji: "🏺", fotoUrl: animalBonecas,
         corAlvo: { nome: "Vale do Jequitinhonha (MG)", hex: "#f97316" },
         opcoes: [
           { nome: "Vale do Jequitinhonha (MG)", hex: "#f97316" },
@@ -164,11 +181,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA pra fazer uma boneca de barro como as do Jequitinhonha.",
     passos: [
-      { id: "p1", texto: "Cavo o BARRO na beira do rio", emoji: "🌊", ordem: 1 },
-      { id: "p2", texto: "Amasso bem pra tirar as pedrinhas", emoji: "🖐️", ordem: 2 },
-      { id: "p3", texto: "MODELO o corpinho da boneca", emoji: "👧", ordem: 3 },
-      { id: "p4", texto: "Deixo SECAR no sol por um dia", emoji: "☀️", ordem: 4 },
-      { id: "p5", texto: "Queimo no forno e PINTO com cores fortes", emoji: "🎨", ordem: 5 },
+      { id: "p1", texto: "Cavo o BARRO na beira do rio", emoji: "🌊", ordem: 1, fotoUrl: u6passo1 },
+      { id: "p2", texto: "Amasso bem pra tirar as pedrinhas", emoji: "🖐️", ordem: 2, fotoUrl: u6passo2 },
+      { id: "p3", texto: "MODELO o corpinho da boneca", emoji: "👧", ordem: 3, fotoUrl: u6passo3 },
+      { id: "p4", texto: "Deixo SECAR no sol por um dia", emoji: "☀️", ordem: 4, fotoUrl: u6passo4 },
+      { id: "p5", texto: "Queimo no forno e PINTO com cores fortes", emoji: "🎨", ordem: 5, fotoUrl: u6passo5 },
     ],
     falaAcerto: "Sua boneca virou obra de arte popular brasileira!",
   },
