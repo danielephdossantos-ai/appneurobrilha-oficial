@@ -1,4 +1,20 @@
 import type { AulaArteV1 } from "../../types";
+import vocabLandArt from "@/assets/arte-2ano/u7-vocab-landart.jpg";
+import vocabEfemero from "@/assets/arte-2ano/u7-vocab-efemero.jpg";
+import vocabMandala from "@/assets/arte-2ano/u7-vocab-mandala.jpg";
+import vocabNatureza from "@/assets/arte-2ano/u7-vocab-natureza.jpg";
+import pigFolhas from "@/assets/arte-2ano/u7-pig-folhas.jpg";
+import pigPetalas from "@/assets/arte-2ano/u7-pig-petalas.jpg";
+import pigPedras from "@/assets/arte-2ano/u7-pig-pedras.jpg";
+import pigMusgo from "@/assets/arte-2ano/u7-pig-musgo.jpg";
+import animalTorre from "@/assets/arte-2ano/u7-animal-torre.jpg";
+import animalMandala from "@/assets/arte-2ano/u7-animal-mandala.jpg";
+import animalCaminho from "@/assets/arte-2ano/u7-animal-caminho.jpg";
+import u7passo1 from "@/assets/arte-2ano/u7-passo1-sair.jpg";
+import u7passo2 from "@/assets/arte-2ano/u7-passo2-coletar.jpg";
+import u7passo3 from "@/assets/arte-2ano/u7-passo3-circulo.jpg";
+import u7passo4 from "@/assets/arte-2ano/u7-passo4-organizar.jpg";
+import u7passo5 from "@/assets/arte-2ano/u7-passo5-foto.jpg";
 
 /**
  * Arte · 2º Ano · Unidade 7 · Aula 01 — "Land Art: a natureza é meu ateliê"
@@ -65,10 +81,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do artista da natureza — toca em cada uma!",
     cards: [
-      { termo: "Land Art", definicao: "Arte feita AO AR LIVRE, só com materiais da natureza.", emoji: "🌿", cor: "#16a34a" },
-      { termo: "Efêmero", definicao: "Que dura pouco tempo, depois some. Como uma nuvem.", emoji: "☁️", cor: "#94a3b8" },
-      { termo: "Mandala", definicao: "Desenho em forma de CÍRCULO, cheio de simetria e cor.", emoji: "🌸", cor: "#f472b6" },
-      { termo: "Natureza", definicao: "Todos os seres vivos e coisas que a Terra criou sem a mão do homem.", emoji: "🌍", cor: "#0ea5e9" },
+      { termo: "Land Art", definicao: "Arte feita AO AR LIVRE, só com materiais da natureza.", emoji: "🌿", cor: "#16a34a", fotoUrl: vocabLandArt },
+      { termo: "Efêmero", definicao: "Que dura pouco tempo, depois some. Como uma nuvem.", emoji: "☁️", cor: "#94a3b8", fotoUrl: vocabEfemero },
+      { termo: "Mandala", definicao: "Desenho em forma de CÍRCULO, cheio de simetria e cor.", emoji: "🌸", cor: "#f472b6", fotoUrl: vocabMandala },
+      { termo: "Natureza", definicao: "Todos os seres vivos e coisas que a Terra criou sem a mão do homem.", emoji: "🌍", cor: "#0ea5e9", fotoUrl: vocabNatureza },
     ],
   },
 
@@ -82,10 +98,10 @@ export const aula01: AulaArteV1 = {
       "Ele diz que a arte dele é PARTE DA NATUREZA — e que a natureza é a maior artista do mundo!",
     ],
     pigmentos: [
-      { nome: "Amarelo das folhas", hex: "#eab308", fonte: "Outono no chão", emoji: "🍂" },
-      { nome: "Rosa das pétalas", hex: "#f472b6", fonte: "Mandala de flores", emoji: "🌸" },
-      { nome: "Cinza da pedra", hex: "#6b7280", fonte: "Espirais no rio", emoji: "🪨" },
-      { nome: "Verde do musgo", hex: "#16a34a", fonte: "Tapete natural", emoji: "🌿" },
+      { nome: "Amarelo das folhas", hex: "#eab308", fonte: "Outono no chão", emoji: "🍂", fotoUrl: pigFolhas },
+      { nome: "Rosa das pétalas", hex: "#f472b6", fonte: "Mandala de flores", emoji: "🌸", fotoUrl: pigPetalas },
+      { nome: "Cinza da pedra", hex: "#6b7280", fonte: "Espirais no rio", emoji: "🪨", fotoUrl: pigPedras },
+      { nome: "Verde do musgo", hex: "#16a34a", fonte: "Tapete natural", emoji: "🌿", fotoUrl: pigMusgo },
     ],
   },
 
@@ -128,7 +144,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada obra da natureza tem um material principal. Escolhe qual combina!",
     animais: [
       {
-        nome: "Torre no jardim", emoji: "🗿",
+        nome: "Torre no jardim", emoji: "🗿", fotoUrl: animalTorre,
         corAlvo: { nome: "Pedras empilhadas", hex: "#6b7280" },
         opcoes: [
           { nome: "Pétalas soltas", hex: "#f472b6" },
@@ -138,7 +154,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Torres de pedra! Precisa equilíbrio pra não cair.",
       },
       {
-        nome: "Mandala colorida", emoji: "🌸",
+        nome: "Mandala colorida", emoji: "🌸", fotoUrl: animalMandala,
         corAlvo: { nome: "Pétalas soltas", hex: "#f472b6" },
         opcoes: [
           { nome: "Pedras empilhadas", hex: "#6b7280" },
@@ -148,7 +164,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Pétalas coloridas viram uma flor gigante no chão!",
       },
       {
-        nome: "Caminho na terra", emoji: "🛤️",
+        nome: "Caminho na terra", emoji: "🛤️", fotoUrl: animalCaminho,
         corAlvo: { nome: "Sementes e grãos", hex: "#78350f" },
         opcoes: [
           { nome: "Água do rio", hex: "#0ea5e9" },
@@ -164,11 +180,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA pra fazer sua primeira MANDALA de folhas!",
     passos: [
-      { id: "p1", texto: "SAIO no jardim ou na praça", emoji: "🚶", ordem: 1 },
-      { id: "p2", texto: "COLETO folhas, pétalas e pedrinhas", emoji: "🍂", ordem: 2 },
-      { id: "p3", texto: "Marco um CÍRCULO grande na terra", emoji: "⭕", ordem: 3 },
-      { id: "p4", texto: "Vou ORGANIZANDO por cor e tamanho", emoji: "🌈", ordem: 4 },
-      { id: "p5", texto: "Tiro uma FOTO e deixo a natureza levar", emoji: "📷", ordem: 5 },
+      { id: "p1", texto: "SAIO no jardim ou na praça", emoji: "🚶", ordem: 1, fotoUrl: u7passo1 },
+      { id: "p2", texto: "COLETO folhas, pétalas e pedrinhas", emoji: "🍂", ordem: 2, fotoUrl: u7passo2 },
+      { id: "p3", texto: "Marco um CÍRCULO grande na terra", emoji: "⭕", ordem: 3, fotoUrl: u7passo3 },
+      { id: "p4", texto: "Vou ORGANIZANDO por cor e tamanho", emoji: "🌈", ordem: 4, fotoUrl: u7passo4 },
+      { id: "p5", texto: "Tiro uma FOTO e deixo a natureza levar", emoji: "📷", ordem: 5, fotoUrl: u7passo5 },
     ],
     falaAcerto: "Sua primeira mandala tá pronta! Amanhã ela vira parte da natureza de novo.",
   },
