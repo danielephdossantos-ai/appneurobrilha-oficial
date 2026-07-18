@@ -1,5 +1,6 @@
 import type { CursoArteV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Arte · 6º Ano — "🧩 O Códice dos Impérios Perdidos"
@@ -19,7 +20,7 @@ const curso: CursoArteV1 = {
   corPrimaria: "#7c2d12",
   corSecundaria: "#f59e0b",
   tipoAula: "arte-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
