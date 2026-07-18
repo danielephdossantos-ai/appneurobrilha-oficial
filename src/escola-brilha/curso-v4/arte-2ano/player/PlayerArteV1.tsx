@@ -627,6 +627,11 @@ function CenaQuizCores({
         <span className="uppercase tracking-widest text-amber-200 font-black">Pergunta {idx + 1}/{cena.perguntas.length}</span>
         <span className="font-bold text-white/80">✨ {acertos} acertos</span>
       </div>
+      {q.fotoUrl && (
+        <div className="rounded-2xl overflow-hidden border-2 border-amber-300/40 mb-3 bg-black/20">
+          <img src={q.fotoUrl} alt="" loading="lazy" className="w-full h-48 object-cover" />
+        </div>
+      )}
       <div className="rounded-2xl bg-white/10 border border-white/20 p-4 mb-3 text-lg font-black leading-snug">{q.pergunta}</div>
       <div className="grid grid-cols-1 gap-2">
         {q.alternativas.map((a, i) => {

@@ -981,6 +981,7 @@ export type CenaArteV1 =
       aurora: string;
       perguntas: Array<{
         pergunta: string;
+        fotoUrl?: string;
         alternativas: Array<{ texto: string; correta: boolean }>;
         feedbackAcerto: string;
         feedbackErro: string;
