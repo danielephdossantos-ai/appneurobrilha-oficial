@@ -31,10 +31,10 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 A Cidade dos Sons Invisíveis",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🌳", rotulo: "Praça pela manhã", descricao: "Pássaros cantando, folhas ao vento, crianças brincando — sons NATURAIS e HUMANOS misturados.", cor: "#16a34a", fotoUrl: mapaPraca, somUrl: "https://actions.google.com/sounds/v1/ambiences/park_ambience.ogg" },
-      { emoji: "🦜", rotulo: "Floresta amazônica", descricao: "Só sons da natureza: chuva, macacos, insetos, rio. É chamada BIOFONIA.", cor: "#15803d", fotoUrl: mapaFloresta, somUrl: "https://actions.google.com/sounds/v1/ambiences/forest_ambience.ogg" },
+      { emoji: "🌳", rotulo: "Praça pela manhã", descricao: "Pássaros cantando, folhas ao vento, crianças brincando — sons NATURAIS e HUMANOS misturados.", cor: "#16a34a", fotoUrl: mapaPraca, somUrl: "https://actions.google.com/sounds/v1/ambiences/kids_playing.ogg" },
+      { emoji: "🦜", rotulo: "Floresta amazônica", descricao: "Só sons da natureza: chuva, macacos, insetos, rio. É chamada BIOFONIA.", cor: "#15803d", fotoUrl: mapaFloresta, somUrl: "https://actions.google.com/sounds/v1/ambiences/jungle_atmosphere_morning.ogg" },
       { emoji: "🚗", rotulo: "Avenida movimentada", descricao: "Carros, buzinas, motores, ambulâncias — sons ARTIFICIAIS feitos pelas máquinas.", cor: "#4b5563", fotoUrl: mapaCidade, somUrl: "https://actions.google.com/sounds/v1/transportation/city_traffic.ogg" },
-      { emoji: "🎙️", rotulo: "Artista com gravador", descricao: "Ele CAPTURA os sons do mundo pra transformar em ARTE — uma paisagem sonora.", cor: "#7c3aed", fotoUrl: mapaGravador, somUrl: "https://actions.google.com/sounds/v1/foley/tape_recorder_start.ogg" },
+      { emoji: "🎙️", rotulo: "Artista com gravador", descricao: "Ele CAPTURA os sons do mundo pra transformar em ARTE — uma paisagem sonora.", cor: "#7c3aed", fotoUrl: mapaGravador, somUrl: "https://actions.google.com/sounds/v1/foley/cassette_tape_play.ogg" },
     ],
     falaFinal: "Cada lugar tem SUA paisagem sonora — a assinatura invisível de onde você está.",
   },
