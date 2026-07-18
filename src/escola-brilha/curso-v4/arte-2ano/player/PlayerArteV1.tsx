@@ -1126,6 +1126,9 @@ function CenaAvaliacaoFinal({
       <div className="rounded-2xl bg-rose-500/15 border-2 border-rose-300/30 p-4 mb-3">
         <div className="text-[10px] uppercase tracking-widest text-rose-200 font-black mb-1">🏠 Missão em Família</div>
         <div className="text-sm font-medium leading-relaxed">{cena.missaoFamilia}</div>
+        {cursoSlug && aulaSlug && (
+          <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aulaSlug} />
+        )}
       </div>
 
       {acertou && (
