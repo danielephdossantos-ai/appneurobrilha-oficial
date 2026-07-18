@@ -17,6 +17,7 @@ type Registro = {
   aula_slug: string;
   criado_em: string;
   legenda: string | null;
+  tipo: "foto" | "audio";
 };
 
 type Props = {
