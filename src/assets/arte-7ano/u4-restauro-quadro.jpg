@@ -33,9 +33,9 @@ details[open] { background: #970302; color: #dfdedd; }
 <div class="content-text">
 <h1>Error</h1>
 
-<p>Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)</p>
+<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also https://phabricator.wikimedia.org/T400119</p>
 </div>
 </div>
-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp3080 cp3080, Varnish XID 578300510<br>Upstream caches: cp3080 int<br>Error: 429, Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) at Sat, 18 Jul 2026 22:15:09 GMT<br><details><summary>Sensitive client information</summary>IP address: 2a07:8241:fff:1101:0:b5:0:6b46</details></code></p>
+<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp3070 cp3070, Varnish XID 68342624<br>Upstream caches: cp3070 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also https://phabricator.wikimedia.org/T400119 at Sat, 18 Jul 2026 22:15:10 GMT<br><details><summary>Sensitive client information</summary>IP address: 2a07:8241:fff:1101:0:b5:0:6b46</details></code></p>
 </div>
 </html>
