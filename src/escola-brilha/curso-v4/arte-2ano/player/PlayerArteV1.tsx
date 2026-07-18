@@ -1262,14 +1262,22 @@ function CenaTematica({
                 if (isMinijogo && (!rodando || tempo <= 0)) return;
                 setTocados((s) => new Set(s).add(i));
                 const texto = [it.rotulo, it.descricao ?? ""].filter(Boolean).join(". ");
+                // Sempre para qualquer som/fala anterior antes de tocar o próximo
+                pararSom();
+                cancelSpeak();
                 speakChunked(texto);
                 if (it.somUrl) {
                   const palavras = texto.split(/\s+/).length;
                   const delayMs = Math.max(1200, palavras * 320);
-                  window.setTimeout(() => {
+                  somTimeoutRef.current = window.setTimeout(() => {
+                    somTimeoutRef.current = null;
                     try {
                       const a = new Audio(it.somUrl);
                       a.volume = 0.7;
+                      audioRef.current = a;
+                      a.addEventListener("ended", () => {
+                        if (audioRef.current === a) audioRef.current = null;
+                      });
                       void a.play().catch(() => {});
                     } catch {}
                   }, delayMs);
