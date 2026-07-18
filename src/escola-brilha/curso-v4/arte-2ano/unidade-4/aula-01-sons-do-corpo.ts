@@ -1,4 +1,21 @@
 import type { AulaArteV1 } from "../../types";
+import vocabRitmo from "@/assets/arte-2ano/u4-vocab-ritmo.jpg";
+import vocabGrave from "@/assets/arte-2ano/u4-vocab-grave.jpg";
+import vocabAgudo from "@/assets/arte-2ano/u4-vocab-agudo.jpg";
+import vocabPercussao from "@/assets/arte-2ano/u4-vocab-percussao.jpg";
+import pigPeito from "@/assets/arte-2ano/u4-pig-peito.jpg";
+import pigBoca from "@/assets/arte-2ano/u4-pig-boca.jpg";
+import pigCoxa from "@/assets/arte-2ano/u4-pig-coxa.jpg";
+import pigVoz from "@/assets/arte-2ano/u4-pig-voz.jpg";
+import animalLeao from "@/assets/arte-2ano/u4-animal-leao.jpg";
+import animalPassarinho from "@/assets/arte-2ano/u4-animal-passarinho.jpg";
+import animalElefante from "@/assets/arte-2ano/u4-animal-elefante.jpg";
+import passo1Img from "@/assets/arte-2ano/u4-passo1-palma.jpg";
+import passo2Img from "@/assets/arte-2ano/u4-passo2-coxa.jpg";
+import passo3Img from "@/assets/arte-2ano/u4-passo3-estalo.jpg";
+import passo4Img from "@/assets/arte-2ano/u4-passo4-pe.jpg";
+import passo5Img from "@/assets/arte-2ano/u4-passo5-musica.jpg";
+
 
 /**
  * Arte · 2º Ano · Unidade 4 · Aula 01 — "Sons do Corpo: minha primeira banda"
@@ -65,10 +82,10 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do músico do corpo — toca em cada uma!",
     cards: [
-      { termo: "Ritmo", definicao: "O 'tum-tum' que se repete, como o coração batendo.", emoji: "❤️", cor: "#dc2626" },
-      { termo: "Grave", definicao: "Som GROSSO, fundo. Como o pai falando ou um tambor grande.", emoji: "🥁", cor: "#78350f" },
-      { termo: "Agudo", definicao: "Som FININHO, alto. Como um passarinho ou um assobio.", emoji: "🎵", cor: "#eab308" },
-      { termo: "Percussão", definicao: "Fazer música BATENDO em coisas — palmas, tambor, o corpo.", emoji: "🥁", cor: "#a855f7" },
+      { termo: "Ritmo", definicao: "O 'tum-tum' que se repete, como o coração batendo.", emoji: "❤️", cor: "#dc2626", fotoUrl: vocabRitmo },
+      { termo: "Grave", definicao: "Som GROSSO, fundo. Como o pai falando ou um tambor grande.", emoji: "🥁", cor: "#78350f", fotoUrl: vocabGrave },
+      { termo: "Agudo", definicao: "Som FININHO, alto. Como um passarinho ou um assobio.", emoji: "🎵", cor: "#eab308", fotoUrl: vocabAgudo },
+      { termo: "Percussão", definicao: "Fazer música BATENDO em coisas — palmas, tambor, o corpo.", emoji: "🥁", cor: "#a855f7", fotoUrl: vocabPercussao },
     ],
   },
 
@@ -82,10 +99,10 @@ export const aula01: AulaArteV1 = {
       "Isso mostra que a música não precisa de instrumento caro. Ela pode nascer do SEU CORPO agora mesmo!",
     ],
     pigmentos: [
-      { nome: "Batida do peito", hex: "#dc2626", fonte: "Grave e forte", emoji: "🫁" },
-      { nome: "Estalo boca", hex: "#eab308", fonte: "Agudo e curto", emoji: "👄" },
-      { nome: "Tapa na coxa", hex: "#f97316", fonte: "Médio e seco", emoji: "🦵" },
-      { nome: "Voz vibrando", hex: "#a855f7", fonte: "Diversos tons", emoji: "🗣️" },
+      { nome: "Batida do peito", hex: "#dc2626", fonte: "Grave e forte", emoji: "🫁", fotoUrl: pigPeito },
+      { nome: "Estalo boca", hex: "#eab308", fonte: "Agudo e curto", emoji: "👄", fotoUrl: pigBoca },
+      { nome: "Tapa na coxa", hex: "#f97316", fonte: "Médio e seco", emoji: "🦵", fotoUrl: pigCoxa },
+      { nome: "Voz vibrando", hex: "#a855f7", fonte: "Diversos tons", emoji: "🗣️", fotoUrl: pigVoz },
     ],
   },
 
@@ -128,7 +145,7 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada animal faz um tipo de som. Descobre qual combina!",
     animais: [
       {
-        nome: "Leão rugindo", emoji: "🦁",
+        nome: "Leão rugindo", emoji: "🦁", fotoUrl: animalLeao,
         corAlvo: { nome: "Grave e potente", hex: "#78350f" },
         opcoes: [
           { nome: "Agudo e fino", hex: "#eab308" },
@@ -138,7 +155,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Rugido do leão é GRAVE e faz a terra tremer.",
       },
       {
-        nome: "Passarinho", emoji: "🐦",
+        nome: "Passarinho", emoji: "🐦", fotoUrl: animalPassarinho,
         corAlvo: { nome: "Agudo e fino", hex: "#eab308" },
         opcoes: [
           { nome: "Grave e potente", hex: "#78350f" },
@@ -148,7 +165,7 @@ export const aula01: AulaArteV1 = {
         falaAcerto: "Passarinho canta AGUDO, um assobio bem fino.",
       },
       {
-        nome: "Elefante pisando", emoji: "🐘",
+        nome: "Elefante pisando", emoji: "🐘", fotoUrl: animalElefante,
         corAlvo: { nome: "Grave e potente", hex: "#78350f" },
         opcoes: [
           { nome: "Agudo e fino", hex: "#eab308" },
@@ -164,11 +181,11 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM certa pra montar um ritmo de percussão corporal!",
     passos: [
-      { id: "p1", texto: "Bato PALMA (1x)", emoji: "👏", ordem: 1 },
-      { id: "p2", texto: "Bato NA COXA (1x)", emoji: "🦵", ordem: 2 },
-      { id: "p3", texto: "ESTALO os dedos (1x)", emoji: "🫰", ordem: 3 },
-      { id: "p4", texto: "PISO no chão (1x)", emoji: "🦶", ordem: 4 },
-      { id: "p5", texto: "Repito tudo mais rápido — virou música!", emoji: "🎶", ordem: 5 },
+      { id: "p1", texto: "Bato PALMA (1x)", emoji: "👏", ordem: 1, fotoUrl: passo1Img },
+      { id: "p2", texto: "Bato NA COXA (1x)", emoji: "🦵", ordem: 2, fotoUrl: passo2Img },
+      { id: "p3", texto: "ESTALO os dedos (1x)", emoji: "🫰", ordem: 3, fotoUrl: passo3Img },
+      { id: "p4", texto: "PISO no chão (1x)", emoji: "🦶", ordem: 4, fotoUrl: passo4Img },
+      { id: "p5", texto: "Repito tudo mais rápido — virou música!", emoji: "🎶", ordem: 5, fotoUrl: passo5Img },
     ],
     falaAcerto: "Bravo! Você criou seu PRIMEIRO ritmo de percussão corporal.",
   },
