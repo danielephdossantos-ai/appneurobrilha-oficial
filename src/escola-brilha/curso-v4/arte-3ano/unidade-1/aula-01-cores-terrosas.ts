@@ -22,6 +22,9 @@ import mapaCarvao from "@/assets/arte-3ano/u1-mapa-carvao.jpg";
 import q1PinturaCaverna from "@/assets/arte-3ano/u1-q1-pintura-caverna.jpg";
 import q2CoresTerrosas from "@/assets/arte-3ano/u1-q2-cores-terrosas.jpg";
 import q3PincelOsso from "@/assets/arte-3ano/u1-q3-pincel-osso.jpg";
+import q4Hematita from "@/assets/arte-3ano/u1-q4-hematita.jpg";
+import q5Mistura from "@/assets/arte-3ano/u1-q5-mistura.jpg";
+import q6MaoNegativo from "@/assets/arte-3ano/u1-q6-mao-negativo.jpg";
 
 /**
  * Arte · 3º Ano · Unidade 1 · Aula 01 — "Os Segredos das Cores Terrosas e a Pintura Rupestre"
@@ -122,6 +125,7 @@ export const aula01: AulaArteV1 = {
     perguntas: [
       {
         pergunta: "De onde vem a cor VERMELHA das pinturas rupestres?",
+        fotoUrl: q4Hematita,
         alternativas: [
           { texto: "De sangue de animal", correta: false },
           { texto: "De minerais com óxido de ferro (hematita)", correta: true },
@@ -131,6 +135,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "Pra fazer a tinta grudar na parede, misturavam o pigmento com…",
+        fotoUrl: q5Mistura,
         alternativas: [
           { texto: "Água + gordura animal", correta: true },
           { texto: "Cola branca escolar", correta: false },
@@ -140,6 +145,7 @@ export const aula01: AulaArteV1 = {
       },
       {
         pergunta: "As mãos em negativo (spray) das cavernas eram feitas…",
+        fotoUrl: q6MaoNegativo,
         alternativas: [
           { texto: "Soprando a tinta por um osso oco em volta da mão", correta: true },
           { texto: "Pintando com um rolinho de espuma", correta: false },
