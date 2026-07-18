@@ -63,6 +63,15 @@ export function PlayerArteV1({
 
   useEffect(() => () => cancelSpeak(), []);
 
+  // Ao mudar de cena: para TTS e emite evento pra qualquer <audio> em cena
+  // (sons ambiente, trilhas) parar imediatamente. Evita "eco" entre atividades.
+  useEffect(() => {
+    cancelSpeak();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("arte-v1:stop-audio"));
+    }
+  }, [ativo]);
+
   const irPara = (i: number) => {
     const el = sectionRefs.current[i];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
