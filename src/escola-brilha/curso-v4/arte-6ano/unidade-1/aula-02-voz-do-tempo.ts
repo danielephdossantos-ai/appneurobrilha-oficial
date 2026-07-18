@@ -12,6 +12,7 @@ import feiraAntiga from "@/assets/arte-6ano/u2-feira-antiga.jpg";
 import decreto from "@/assets/arte-6ano/u2-decreto.jpg";
 import passoGravar from "@/assets/arte-6ano/u2-passo-gravar.jpg";
 import cadernoNotas from "@/assets/arte-6ano/u2-caderno-notas.jpg";
+// amuletoEco e linhaSonora são referenciados na cena10 abaixo
 import linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg";
 import amuletoEco from "@/assets/arte-6ano/u2-amuleto-eco.jpg";
 
