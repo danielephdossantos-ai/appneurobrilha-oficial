@@ -1164,6 +1164,42 @@ function CenaTematica({
   const [tempo, setTempo] = useState(cena.tempoSeg ?? 0);
   const [rodando, setRodando] = useState(false);
   const jaFalou = useRef(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const somTimeoutRef = useRef<number | null>(null);
+
+  const pararSom = () => {
+    if (somTimeoutRef.current !== null) {
+      window.clearTimeout(somTimeoutRef.current);
+      somTimeoutRef.current = null;
+    }
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      } catch {}
+      audioRef.current = null;
+    }
+  };
+
+  // Cleanup ao desmontar e ao sair da cena
+  useEffect(() => {
+    if (!ativa) {
+      pararSom();
+      cancelSpeak();
+    }
+    return () => {
+      pararSom();
+    };
+  }, [ativa]);
+
+  // Escuta evento global de mudança de cena disparado pelo player
+  useEffect(() => {
+    const handler = () => pararSom();
+    if (typeof window !== "undefined") {
+      window.addEventListener("arte-v1:stop-audio", handler);
+      return () => window.removeEventListener("arte-v1:stop-audio", handler);
+    }
+  }, []);
 
   useEffect(() => {
     if (!ativa) return;
