@@ -17,6 +17,7 @@ type Registro = {
   aula_slug: string;
   criado_em: string;
   legenda: string | null;
+  tipo: "foto" | "audio";
 };
 
 type Props = {
@@ -45,7 +46,7 @@ export function AlbumRecordacoes({ cursoSlug, tituloPorAula }: Props) {
       }
       const { data, error } = await supabase
         .from("missao_familia_registros")
-        .select("id, foto_path, aula_slug, criado_em, legenda")
+        .select("id, foto_path, aula_slug, criado_em, legenda, tipo")
         .eq("user_id", uid)
         .eq("curso_slug", cursoSlug)
         .order("criado_em", { ascending: false });
@@ -126,6 +127,31 @@ export function AlbumRecordacoes({ cursoSlug, tituloPorAula }: Props) {
                     "pt-BR",
                     { day: "2-digit", month: "2-digit" },
                   );
+                  const ehAudio = r.tipo === "audio";
+                  if (ehAudio) {
+                    return (
+                      <div
+                        key={r.id}
+                        className="relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-rose-500/30 to-purple-500/30 border border-white/15 p-2 flex flex-col items-center justify-center gap-1"
+                      >
+                        <div className="text-3xl">🎙️</div>
+                        {url ? (
+                          <audio
+                            src={url}
+                            controls
+                            preload="metadata"
+                            className="w-full"
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        ) : (
+                          <div className="text-white/40 text-xs">…</div>
+                        )}
+                        <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] px-1.5 py-0.5">
+                          🎙️ {data}
+                        </div>
+                      </div>
+                    );
+                  }
                   return (
                     <button
                       key={r.id}

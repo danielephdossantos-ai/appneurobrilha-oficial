@@ -101,6 +101,8 @@ function AulaArteV1Page() {
     <PlayerArteV1
       key={aula}
       aula={dados.aula}
+      cursoSlug={curso}
+      aulaSlug={aula}
       onSair={sair}
       onConcluir={concluir}
     />

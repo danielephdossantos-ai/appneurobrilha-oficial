@@ -6,16 +6,21 @@ import { useMascot } from "@/contexts/MascotContext";
 import { useAppState } from "@/core/store";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 import { mascoteAtribuido } from "@/escola-brilha/mascote-assign";
+import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
 // ============================================================================
 export function PlayerArteV1({
   aula,
+  cursoSlug,
+  aulaSlug,
   onSair,
   onConcluir,
 }: {
   aula: AulaArteV1;
+  cursoSlug?: string;
+  aulaSlug?: string;
   onSair: () => void;
   onConcluir: () => void;
 }) {
@@ -111,6 +116,8 @@ export function PlayerArteV1({
             </div>
             <CenaRenderer
               cena={c.cena}
+              cursoSlug={cursoSlug}
+              aulaSlug={aulaSlug}
               onProxima={() => (i + 1 < total ? irPara(i + 1) : onConcluir())}
               ehUltima={i + 1 >= total}
               ativa={i === ativo}
@@ -126,9 +133,9 @@ export function PlayerArteV1({
 // Dispatcher
 // ============================================================================
 function CenaRenderer({
-  cena, onProxima, ehUltima, ativa,
+  cena, cursoSlug, aulaSlug, onProxima, ehUltima, ativa,
 }: {
-  cena: CenaArteV1; onProxima: () => void; ehUltima: boolean; ativa: boolean;
+  cena: CenaArteV1; cursoSlug?: string; aulaSlug?: string; onProxima: () => void; ehUltima: boolean; ativa: boolean;
 }) {
   switch (cena.tipo) {
     case "misturaCores": return <CenaMisturaCores cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
@@ -141,7 +148,7 @@ function CenaRenderer({
     case "diarioPintor": return <CenaDiario cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "fabricaPocoes": return <CenaFabricaPocoes cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "rodaCores": return <CenaRodaCores cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
-    case "avaliacaoFinal": return <CenaAvaliacaoFinal cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
+    case "avaliacaoFinal": return <CenaAvaliacaoFinal cena={cena} cursoSlug={cursoSlug} aulaSlug={aulaSlug} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "cenaTematica": return <CenaTematica cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     default: return <div className="rounded-3xl bg-white/10 p-6 text-center text-sm">Cena em construção</div>;
   }
@@ -1074,8 +1081,8 @@ function CenaRodaCores({
 // CENA 11 — Avaliação final + missão família
 // ============================================================================
 function CenaAvaliacaoFinal({
-  cena, onProxima, ehUltima, ativa,
-}: { cena: Extract<CenaArteV1, { tipo: "avaliacaoFinal" }>; onProxima: () => void; ehUltima: boolean; ativa: boolean }) {
+  cena, cursoSlug, aulaSlug, onProxima, ehUltima, ativa,
+}: { cena: Extract<CenaArteV1, { tipo: "avaliacaoFinal" }>; cursoSlug?: string; aulaSlug?: string; onProxima: () => void; ehUltima: boolean; ativa: boolean }) {
   const [resp, setResp] = useState<number | null>(null);
   const jaFalou = useRef(false);
   useEffect(() => { if (ativa && !jaFalou.current) { speakChunked(cena.aurora); jaFalou.current = true; } }, [ativa, cena.aurora]);
@@ -1120,6 +1127,9 @@ function CenaAvaliacaoFinal({
       <div className="rounded-2xl bg-rose-500/15 border-2 border-rose-300/30 p-4 mb-3">
         <div className="text-[10px] uppercase tracking-widest text-rose-200 font-black mb-1">🏠 Missão em Família</div>
         <div className="text-sm font-medium leading-relaxed">{cena.missaoFamilia}</div>
+        {cursoSlug && aulaSlug && (
+          <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aulaSlug} />
+        )}
       </div>
 
       {acertou && (
