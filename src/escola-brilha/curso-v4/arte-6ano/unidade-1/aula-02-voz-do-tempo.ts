@@ -242,6 +242,7 @@ export const aula02: AulaArteV1 = {
       { emoji: "🌊", rotulo: "Risco do silêncio", descricao: "Sem transmissão viva ou registro, o Patrimônio Imaterial desaparece PRA SEMPRE.", cor: "#0ea5e9", fotoUrl: ribeirinha },
       { emoji: "🔮", rotulo: "Amuleto do Eco", descricao: "Sua recompensa: desbloqueia os arquivos de áudio ocultos do Códice e a Linha do Tempo Sonora.", cor: "#f59e0b", fotoUrl: amuletoEco },
       { emoji: "🌐", rotulo: "Linha do Tempo Sonora", descricao: "Mapa global das vozes humanas atravessando as eras — sua página restaurada.", cor: "#a16207", fotoUrl: linhaSonora },
+    ],
     falaFinal: "Segunda página do Códice dos Impérios Perdidos RESTAURADA — Linha do Tempo Sonora desbloqueada!",
   },
 
