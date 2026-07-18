@@ -132,9 +132,9 @@ export function PlayerArteV1({
 // Dispatcher
 // ============================================================================
 function CenaRenderer({
-  cena, onProxima, ehUltima, ativa,
+  cena, cursoSlug, aulaSlug, onProxima, ehUltima, ativa,
 }: {
-  cena: CenaArteV1; onProxima: () => void; ehUltima: boolean; ativa: boolean;
+  cena: CenaArteV1; cursoSlug?: string; aulaSlug?: string; onProxima: () => void; ehUltima: boolean; ativa: boolean;
 }) {
   switch (cena.tipo) {
     case "misturaCores": return <CenaMisturaCores cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
@@ -147,7 +147,7 @@ function CenaRenderer({
     case "diarioPintor": return <CenaDiario cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "fabricaPocoes": return <CenaFabricaPocoes cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "rodaCores": return <CenaRodaCores cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
-    case "avaliacaoFinal": return <CenaAvaliacaoFinal cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
+    case "avaliacaoFinal": return <CenaAvaliacaoFinal cena={cena} cursoSlug={cursoSlug} aulaSlug={aulaSlug} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     case "cenaTematica": return <CenaTematica cena={cena} onProxima={onProxima} ehUltima={ehUltima} ativa={ativa} />;
     default: return <div className="rounded-3xl bg-white/10 p-6 text-center text-sm">Cena em construção</div>;
   }
