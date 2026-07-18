@@ -1,22 +1,22 @@
 import type { AulaArteV1 } from "../../types";
-import veraMolnar from "@/assets/arte-8ano/u7-vera-molnar.jpg";
-import manfredMohr from "@/assets/arte-8ano/u7-manfred-mohr.jpg";
-import manfredMohr2 from "@/assets/arte-8ano/u7-manfred-mohr2.jpg";
-import mandelbrot from "@/assets/arte-8ano/u7-mandelbrot.jpg";
-import mandelbrot2 from "@/assets/arte-8ano/u7-mandelbrot2.jpg";
-import juliaSet from "@/assets/arte-8ano/u7-julia-set.jpg";
-import fractalPattern from "@/assets/arte-8ano/u7-fractal-pattern.jpg";
-import neuralNetwork from "@/assets/arte-8ano/u7-neural-network.jpg";
-import dataCenter from "@/assets/arte-8ano/u7-data-center.jpg";
-import dataCenter2 from "@/assets/arte-8ano/u7-data-center2.jpg";
-import connectome from "@/assets/arte-8ano/u7-connectome.jpg";
-import codeScreen from "@/assets/arte-8ano/u7-code-screen.jpg";
-import codeScreen2 from "@/assets/arte-8ano/u7-code-screen2.jpg";
-import binaryMatrix from "@/assets/arte-8ano/u7-binary-matrix.jpg";
-import museuDigital from "@/assets/arte-8ano/u7-museum-digital.jpg";
-import generativeArt from "@/assets/arte-8ano/u7-generative-art.jpg";
-import supercomputer from "@/assets/arte-8ano/u7-supercomputer.jpg";
-import sculpture3d from "@/assets/arte-8ano/u7-3d-print-sculpture.jpg";
+import veraMolnar from "@/assets/arte-8ano/u7-vera-molnar.jpg.asset.json";
+import manfredMohr from "@/assets/arte-8ano/u7-manfred-mohr.jpg.asset.json";
+import manfredMohr2 from "@/assets/arte-8ano/u7-manfred-mohr2.jpg.asset.json";
+import mandelbrot from "@/assets/arte-8ano/u7-mandelbrot.jpg.asset.json";
+import mandelbrot2 from "@/assets/arte-8ano/u7-mandelbrot2.jpg.asset.json";
+import juliaSet from "@/assets/arte-8ano/u7-julia-set.jpg.asset.json";
+import fractalPattern from "@/assets/arte-8ano/u7-fractal-pattern.jpg.asset.json";
+import neuralNetwork from "@/assets/arte-8ano/u7-neural-network.jpg.asset.json";
+import dataCenter from "@/assets/arte-8ano/u7-data-center.jpg.asset.json";
+import dataCenter2 from "@/assets/arte-8ano/u7-data-center2.jpg.asset.json";
+import connectome from "@/assets/arte-8ano/u7-connectome.jpg.asset.json";
+import codeScreen from "@/assets/arte-8ano/u7-code-screen.jpg.asset.json";
+import codeScreen2 from "@/assets/arte-8ano/u7-code-screen2.jpg.asset.json";
+import binaryMatrix from "@/assets/arte-8ano/u7-binary-matrix.jpg.asset.json";
+import museuDigital from "@/assets/arte-8ano/u7-museum-digital.jpg.asset.json";
+import generativeArt from "@/assets/arte-8ano/u7-generative-art.jpg.asset.json";
+import supercomputer from "@/assets/arte-8ano/u7-supercomputer.jpg.asset.json";
+import sculpture3d from "@/assets/arte-8ano/u7-3d-print-sculpture.jpg.asset.json";
 
 /**
  * Arte · 8º Ano · Unidade 7 (FINAL) · Aula 01 — "Inteligência Artificial, Algoritmos e o Futuro da Criação"
