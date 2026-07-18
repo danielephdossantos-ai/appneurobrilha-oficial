@@ -1,5 +1,6 @@
 import type { CursoArteV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade6 } from "./unidade-6";
 
 /**
  * Arte · 7º Ano — "🚀 Crônicas das Cidades Suspensas"
@@ -18,7 +19,7 @@ const curso: CursoArteV1 = {
   corPrimaria: "#0891b2",
   corSecundaria: "#0f172a",
   tipoAula: "arte-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade6],
 };
 
 export default curso;
