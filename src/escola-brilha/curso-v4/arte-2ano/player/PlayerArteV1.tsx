@@ -63,6 +63,15 @@ export function PlayerArteV1({
 
   useEffect(() => () => cancelSpeak(), []);
 
+  // Ao mudar de cena: para TTS e emite evento pra qualquer <audio> em cena
+  // (sons ambiente, trilhas) parar imediatamente. Evita "eco" entre atividades.
+  useEffect(() => {
+    cancelSpeak();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("arte-v1:stop-audio"));
+    }
+  }, [ativo]);
+
   const irPara = (i: number) => {
     const el = sectionRefs.current[i];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1155,6 +1164,42 @@ function CenaTematica({
   const [tempo, setTempo] = useState(cena.tempoSeg ?? 0);
   const [rodando, setRodando] = useState(false);
   const jaFalou = useRef(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const somTimeoutRef = useRef<number | null>(null);
+
+  const pararSom = () => {
+    if (somTimeoutRef.current !== null) {
+      window.clearTimeout(somTimeoutRef.current);
+      somTimeoutRef.current = null;
+    }
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      } catch {}
+      audioRef.current = null;
+    }
+  };
+
+  // Cleanup ao desmontar e ao sair da cena
+  useEffect(() => {
+    if (!ativa) {
+      pararSom();
+      cancelSpeak();
+    }
+    return () => {
+      pararSom();
+    };
+  }, [ativa]);
+
+  // Escuta evento global de mudança de cena disparado pelo player
+  useEffect(() => {
+    const handler = () => pararSom();
+    if (typeof window !== "undefined") {
+      window.addEventListener("arte-v1:stop-audio", handler);
+      return () => window.removeEventListener("arte-v1:stop-audio", handler);
+    }
+  }, []);
 
   useEffect(() => {
     if (!ativa) return;
@@ -1217,14 +1262,22 @@ function CenaTematica({
                 if (isMinijogo && (!rodando || tempo <= 0)) return;
                 setTocados((s) => new Set(s).add(i));
                 const texto = [it.rotulo, it.descricao ?? ""].filter(Boolean).join(". ");
+                // Sempre para qualquer som/fala anterior antes de tocar o próximo
+                pararSom();
+                cancelSpeak();
                 speakChunked(texto);
                 if (it.somUrl) {
                   const palavras = texto.split(/\s+/).length;
                   const delayMs = Math.max(1200, palavras * 320);
-                  window.setTimeout(() => {
+                  somTimeoutRef.current = window.setTimeout(() => {
+                    somTimeoutRef.current = null;
                     try {
                       const a = new Audio(it.somUrl);
                       a.volume = 0.7;
+                      audioRef.current = a;
+                      a.addEventListener("ended", () => {
+                        if (audioRef.current === a) audioRef.current = null;
+                      });
                       void a.play().catch(() => {});
                     } catch {}
                   }, delayMs);
