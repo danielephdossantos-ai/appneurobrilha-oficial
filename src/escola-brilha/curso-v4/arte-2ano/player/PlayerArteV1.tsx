@@ -1206,7 +1206,19 @@ function CenaTematica({
               onClick={() => {
                 if (isMinijogo && (!rodando || tempo <= 0)) return;
                 setTocados((s) => new Set(s).add(i));
-                speakChunked([it.rotulo, it.descricao ?? ""].filter(Boolean).join(". "));
+                const texto = [it.rotulo, it.descricao ?? ""].filter(Boolean).join(". ");
+                speakChunked(texto);
+                if (it.somUrl) {
+                  const palavras = texto.split(/\s+/).length;
+                  const delayMs = Math.max(1200, palavras * 320);
+                  window.setTimeout(() => {
+                    try {
+                      const a = new Audio(it.somUrl);
+                      a.volume = 0.7;
+                      void a.play().catch(() => {});
+                    } catch {}
+                  }, delayMs);
+                }
               }}
               className={`rounded-2xl p-3 text-left border-2 transition-all ${
                 foiTocado ? "bg-white/20 border-white/60 shadow-lg" : "bg-white/10 border-white/20"
