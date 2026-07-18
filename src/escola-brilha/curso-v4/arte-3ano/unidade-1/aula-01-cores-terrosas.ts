@@ -19,6 +19,9 @@ import mapaLascaux from "@/assets/arte-3ano/u1-mapa-lascaux.jpg";
 import mapaCapivara from "@/assets/arte-3ano/u1-mapa-capivara.jpg";
 import mapaPincel from "@/assets/arte-3ano/u1-mapa-pincel-osso.jpg";
 import mapaCarvao from "@/assets/arte-3ano/u1-mapa-carvao.jpg";
+import q1PinturaCaverna from "@/assets/arte-3ano/u1-q1-pintura-caverna.jpg";
+import q2CoresTerrosas from "@/assets/arte-3ano/u1-q2-cores-terrosas.jpg";
+import q3PincelOsso from "@/assets/arte-3ano/u1-q3-pincel-osso.jpg";
 
 /**
  * Arte · 3º Ano · Unidade 1 · Aula 01 — "Os Segredos das Cores Terrosas e a Pintura Rupestre"
