@@ -46,7 +46,7 @@ export function AlbumRecordacoes({ cursoSlug, tituloPorAula }: Props) {
       }
       const { data, error } = await supabase
         .from("missao_familia_registros")
-        .select("id, foto_path, aula_slug, criado_em, legenda")
+        .select("id, foto_path, aula_slug, criado_em, legenda, tipo")
         .eq("user_id", uid)
         .eq("curso_slug", cursoSlug)
         .order("criado_em", { ascending: false });
