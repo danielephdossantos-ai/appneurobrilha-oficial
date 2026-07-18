@@ -260,5 +260,5 @@ export const aula02: AulaArteV1 = {
     recompensaItem: "🔮 Amuleto do Eco (desbloqueia arquivos de áudio ocultos do Códice)",
   },
 
-  recompensa: { xp: 110, moedas: 55, medalha: "Amuleto do Eco", medalhaImg: amuletoEco, extraImg: linhaSonora },
+  recompensa: { xp: 110, moedas: 55, medalha: "Amuleto do Eco" },
 };
