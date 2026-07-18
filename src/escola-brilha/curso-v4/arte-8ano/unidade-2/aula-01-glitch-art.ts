@@ -1,23 +1,23 @@
 import type { AulaArteV1 } from "../../types";
-import artistaHacker from "@/assets/arte-8ano/u2-artista-hacker.jpg";
-import blocosPixel from "@/assets/arte-8ano/u2-blocos-pixel.jpg";
-import codigoCorrompido from "@/assets/arte-8ano/u2-codigo-corrompido.jpg";
-import datamoshingVideo from "@/assets/arte-8ano/u2-datamoshing-video.jpg";
-import faixaCromatica from "@/assets/arte-8ano/u2-faixa-cromatica.jpg";
-import glitchCromatico from "@/assets/arte-8ano/u2-glitch-cromatico.jpg";
-import imasTv from "@/assets/arte-8ano/u2-imas-tv.jpg";
-import interferenciaSatelite from "@/assets/arte-8ano/u2-interferencia-satelite.jpg";
-import laboratorioVideoArte from "@/assets/arte-8ano/u2-laboratorio-video-arte.jpg";
-import monitorTubo from "@/assets/arte-8ano/u2-monitor-tubo.jpg";
-import namJunePaik from "@/assets/arte-8ano/u2-nam-june-paik-tv-distorcida.jpg";
-import passo1 from "@/assets/arte-8ano/u2-passo1.jpg";
-import passo2 from "@/assets/arte-8ano/u2-passo2.jpg";
-import passo3 from "@/assets/arte-8ano/u2-passo3.jpg";
-import passo4 from "@/assets/arte-8ano/u2-passo4.jpg";
-import passo5 from "@/assets/arte-8ano/u2-passo5.jpg";
-import pinturaClassicaDistorcida from "@/assets/arte-8ano/u2-pintura-classica-distorcida.jpg";
-import pixelsEstourados from "@/assets/arte-8ano/u2-pixels-estourados.jpg";
-import ranhurasRgb from "@/assets/arte-8ano/u2-ranhuras-rgb.jpg";
+import { url as artistaHacker } from "@/assets/arte-8ano/u2-artista-hacker.jpg.asset.json";
+import { url as blocosPixel } from "@/assets/arte-8ano/u2-blocos-pixel.jpg.asset.json";
+import { url as codigoCorrompido } from "@/assets/arte-8ano/u2-codigo-corrompido.jpg.asset.json";
+import { url as datamoshingVideo } from "@/assets/arte-8ano/u2-datamoshing-video.jpg.asset.json";
+import { url as faixaCromatica } from "@/assets/arte-8ano/u2-faixa-cromatica.jpg.asset.json";
+import { url as glitchCromatico } from "@/assets/arte-8ano/u2-glitch-cromatico.jpg.asset.json";
+import { url as imasTv } from "@/assets/arte-8ano/u2-imas-tv.jpg.asset.json";
+import { url as interferenciaSatelite } from "@/assets/arte-8ano/u2-interferencia-satelite.jpg.asset.json";
+import { url as laboratorioVideoArte } from "@/assets/arte-8ano/u2-laboratorio-video-arte.jpg.asset.json";
+import { url as monitorTubo } from "@/assets/arte-8ano/u2-monitor-tubo.jpg.asset.json";
+import { url as namJunePaik } from "@/assets/arte-8ano/u2-nam-june-paik-tv-distorcida.jpg.asset.json";
+import { url as passo1 } from "@/assets/arte-8ano/u2-passo1.jpg.asset.json";
+import { url as passo2 } from "@/assets/arte-8ano/u2-passo2.jpg.asset.json";
+import { url as passo3 } from "@/assets/arte-8ano/u2-passo3.jpg.asset.json";
+import { url as passo4 } from "@/assets/arte-8ano/u2-passo4.jpg.asset.json";
+import { url as passo5 } from "@/assets/arte-8ano/u2-passo5.jpg.asset.json";
+import { url as pinturaClassicaDistorcida } from "@/assets/arte-8ano/u2-pintura-classica-distorcida.jpg.asset.json";
+import { url as pixelsEstourados } from "@/assets/arte-8ano/u2-pixels-estourados.jpg.asset.json";
+import { url as ranhurasRgb } from "@/assets/arte-8ano/u2-ranhuras-rgb.jpg.asset.json";
 
 /**
  * Arte · 8º Ano · Unidade 2 · Aula 01 — "A Estética do Erro: Glitch Art e a Crítica ao Controle Digital"
