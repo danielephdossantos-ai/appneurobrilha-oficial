@@ -3,6 +3,9 @@ import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as bebe } from "@/assets/neuro-treino/objetos/bebe.png.asset.json";
 import { url as mae } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as pai } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
+import { url as vovo } from "@/assets/neuro-treino/objetos/avo-mulher.png.asset.json";
+import { url as ursinho } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 import { url as abraco } from "@/assets/neuro-treino/objetos/abraco.png.asset.json";
@@ -105,7 +108,12 @@ const aula01: AulaEI = {
       tipo: "rodaConversa",
       imagemUrl: abraco,
       pergunta: "Quem você abraça todo dia? Fala o nome pro Brilha!",
-      exemplos: ["mamãe", "papai", "vovó", "meu ursinho"],
+      exemplos: [
+        { nome: "mamãe", imagemUrl: mae },
+        { nome: "papai", imagemUrl: pai },
+        { nome: "vovó", imagemUrl: vovo },
+        { nome: "meu ursinho", imagemUrl: ursinho },
+      ],
     },
     {
       tipo: "missaoFamilia",

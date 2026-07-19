@@ -81,7 +81,7 @@ export type MomentoEI =
       // Pergunta aberta, sem resposta certa. Adulto/criança conversa.
       imagemUrl: string;
       pergunta: string; // TTS
-      exemplos?: string[];
+      exemplos?: Array<string | { nome: string; imagemUrl?: string }>;
     }
   | {
       tipo: "missaoFamilia";
