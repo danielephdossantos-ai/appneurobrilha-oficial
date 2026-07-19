@@ -516,6 +516,7 @@ export function PlayerGeoV2({
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.35 }}
             className="rounded-xl border border-slate-800 bg-slate-900/40 overflow-hidden"
+            data-momento={m.n}
           >
             <div className="flex items-center gap-3 border-b border-slate-800 bg-slate-900/60 px-4 py-2.5">
               <div className="flex h-7 w-7 items-center justify-center rounded border border-cyan-500/40 bg-cyan-500/10 font-mono text-[11px] text-cyan-300">
@@ -526,21 +527,19 @@ export function PlayerGeoV2({
                 <div className="text-[10px] uppercase tracking-widest text-slate-500">{m.rotulo}</div>
                 <div className="truncate text-slate-200 text-sm font-medium">{m.titulo}</div>
               </div>
-              {m.narracao && (
-                <button
-                  type="button"
-                  onClick={() => narrar(m.n, m.narracao)}
-                  className={[
-                    "rounded border p-1.5 transition",
-                    narrando === m.n
-                      ? "border-cyan-400 bg-cyan-500/20 text-cyan-200 animate-pulse"
-                      : "border-slate-700 text-slate-500 hover:text-cyan-300 hover:border-cyan-500/60",
-                  ].join(" ")}
-                  aria-label="Narrar seção"
-                >
-                  <Volume2 className="h-3.5 w-3.5" />
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={() => narrar(m.n, m.narracao)}
+                className={[
+                  "rounded border p-1.5 transition",
+                  narrando === m.n
+                    ? "border-cyan-400 bg-cyan-500/20 text-cyan-200 animate-pulse"
+                    : "border-slate-700 text-slate-500 hover:text-cyan-300 hover:border-cyan-500/60",
+                ].join(" ")}
+                aria-label="Ouvir seção"
+              >
+                <Volume2 className="h-3.5 w-3.5" />
+              </button>
             </div>
             <div className="px-4 py-4">{m.corpo}</div>
           </motion.section>
