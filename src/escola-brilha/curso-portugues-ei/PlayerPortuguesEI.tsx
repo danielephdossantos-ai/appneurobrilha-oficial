@@ -38,10 +38,15 @@ function BigListenButton({ onClick, label = "Ouvir" }: { onClick: () => void; la
 
 function ImageFrame({ src, alt, size = "xl" }: { src: string; alt: string; size?: "md" | "xl" | "hero" }) {
   const px = size === "hero" ? 340 : size === "xl" ? 220 : 140;
+  // md = responsivo (ocupa a coluna do grid, quadrado, com teto de 140px)
+  const style: React.CSSProperties =
+    size === "md"
+      ? { width: "100%", aspectRatio: "1 / 1", maxWidth: px }
+      : { width: px, height: px };
   return (
     <div
       className="mx-auto rounded-[32px] bg-gradient-to-br from-yellow-100 to-pink-100 border-4 border-white shadow-inner grid place-items-center overflow-hidden"
-      style={{ width: px, height: px }}
+      style={style}
     >
       <img src={src} alt={alt} className="max-w-[85%] max-h-[85%] object-contain" />
     </div>
