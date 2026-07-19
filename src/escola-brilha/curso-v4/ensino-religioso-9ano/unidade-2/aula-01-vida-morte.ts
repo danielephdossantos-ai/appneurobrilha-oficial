@@ -158,9 +158,8 @@ export const aula01: AulaGeoV1 = {
     aurora: "Pizza: como as tradições mundiais respondem 'o que acontece depois?'",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "linear", rotulo: "Visão LINEAR (~55%)", emoji: "➡️", percentual: 55, cor: "#0ea5e9", descricao: "Uma vida, uma morte, um destino final. Céu, inferno, purgatório, paraíso. Julgamento decide tudo. Cristianismo e islamismo dominam essa família.", exemplos: ["✝️ Ressurreição cristã", "☪️ Paraíso islâmico", "✡️ Olam ha-Bá"] },
-      { id: "ciclica", rotulo: "Visão CÍCLICA (~30%)", emoji: "🌀", percentual: 30, cor: "#f59e0b", descricao: "A alma renasce em ciclos até alcançar libertação. Hinduísmo, budismo, jainismo, espiritismo. Karma decide o próximo renascimento.", exemplos: ["🕉️ Samsara hindu", "☸️ Renascimento budista", "🕊️ Espiritismo"] },
-      { id: "ancestral", rotulo: "Visão ANCESTRAL/MEMÓRIA (~15%)", emoji: "🌿", percentual: 15, cor: "#10b981", descricao: "Quem morre continua na comunidade — como ancestral, como memória, como legado transmitido. Tradições afro, indígenas e visões seculares.", exemplos: ["🥁 Egungun", "🌾 Ancestrais indígenas", "📔 Memória secular"] },
+      { id: "linear", rotulo: "Visão LINEAR (~55%)", emoji: "➡️", percentual: 55, cor: "#0ea5e9", descricao: "Uma vida, uma morte, um destino final (céu, inferno, paraíso). Julgamento decide tudo. Cristianismo e islamismo dominam essa família.", exemplos: ["✝️ Ressurreição cristã", "☪️ Paraíso islâmico", "✡️ Olam ha-Bá"] },
+      { id: "outras", rotulo: "CÍCLICA + ANCESTRAL/MEMÓRIA (~45%)", emoji: "🌀", percentual: 45, cor: "#f59e0b", descricao: "Ciclos de renascimento (hindu/budista/espírita) OU continuidade na comunidade como ancestral/memória (afro, indígena, secular). Visões não-lineares.", exemplos: ["🕉️ Samsara", "🥁 Egungun", "📔 Memória"] },
     ],
     falaFinal: "3 grandes famílias de resposta. Todas coerentes.",
   },

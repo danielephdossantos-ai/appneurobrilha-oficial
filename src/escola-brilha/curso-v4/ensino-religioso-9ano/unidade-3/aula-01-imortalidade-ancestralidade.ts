@@ -156,8 +156,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fatias: [
       { id: "imort", rotulo: "Imortalidade da alma (~78%)", emoji: "✨", percentual: 78, cor: "#0ea5e9", descricao: "Cristãos (católicos, evangélicos), muçulmanos, judeus. Vida única, destino final decidido por julgamento divino.", exemplos: ["✝️ Católicos e evangélicos", "☪️ Muçulmanos", "✡️ Judeus"] },
-      { id: "reenc-anc", rotulo: "Reencarnação + Ancestralidade (~13%)", emoji: "🌀", percentual: 13, cor: "#f59e0b", descricao: "Espíritas, umbandistas, candomblecistas, budistas, hindus, indígenas. Ciclos ou continuidade na comunidade.", exemplos: ["🕊️ Espíritas", "🥁 Terreiros", "🕉️ Hindus/Budistas"] },
-      { id: "secular", rotulo: "Sem religião / secular (~9%)", emoji: "🌍", percentual: 9, cor: "#10b981", descricao: "Sem religião, ateus, agnósticos. Duração através de memória, legado, obras, filhos, valores transmitidos.", exemplos: ["📔 Memória viva", "🌱 Legado", "🌍 Humanismo"] },
+      { id: "outras", rotulo: "Reencarnação + Ancestralidade + Secular (~22%)", emoji: "🌀", percentual: 22, cor: "#f59e0b", descricao: "Espíritas, terreiros, hindus, budistas, indígenas (ciclos ou ancestralidade) + sem religião (memória e legado).", exemplos: ["🕊️ Espíritas", "🥁 Terreiros", "🌍 Sem religião"] },
     ],
     falaFinal: "Brasil real: 3 visões convivendo em 210 milhões de pessoas.",
   },

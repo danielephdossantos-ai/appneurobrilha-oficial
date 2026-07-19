@@ -159,8 +159,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fatias: [
       { id: "familia", rotulo: "FAMÍLIA / RELAÇÕES (~40%)", emoji: "👨‍👩‍👧", percentual: 40, cor: "#ef4444", descricao: "Prioridade nº 1 dos jovens brasileiros: construir família, cuidar dos pais, ter filhos ou relações estáveis.", exemplos: ["❤️ Casar/união", "👶 Ter filhos", "🏠 Cuidar da família"] },
-      { id: "trabalho", rotulo: "TRABALHO / CARREIRA (~35%)", emoji: "💼", percentual: 35, cor: "#0ea5e9", descricao: "Estabilidade financeira, profissão que faça sentido, empreender, crescer profissionalmente.", exemplos: ["🎓 Faculdade", "💼 Emprego bom", "🚀 Empreender"] },
-      { id: "causa", rotulo: "CAUSAS / FÉ (~25%)", emoji: "✊", percentual: 25, cor: "#10b981", descricao: "Engajamento em causa social, religiosa, ambiental, política. Deixar marca no mundo além de si.", exemplos: ["🙏 Vida religiosa", "🌍 Militância", "🎨 Arte engajada"] },
+      { id: "trab-causa", rotulo: "TRABALHO + CAUSAS/FÉ (~60%)", emoji: "💼", percentual: 60, cor: "#0ea5e9", descricao: "Estabilidade financeira, profissão com sentido, empreender + engajamento em causa social, religiosa, ambiental ou política. Deixar marca no mundo.", exemplos: ["🎓 Faculdade", "🚀 Empreender", "✊ Militância"] },
     ],
     falaFinal: "3 pilares. Um projeto forte equilibra os três.",
   },

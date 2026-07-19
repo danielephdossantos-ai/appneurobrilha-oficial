@@ -160,8 +160,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque em cada fatia",
     fatias: [
       { id: "religioso", rotulo: "Fonte RELIGIOSA (~55%)", emoji: "🙏", percentual: 55, cor: "#f59e0b", descricao: "Sentido vem da fé — servir a Deus, seguir o caminho da tradição, participar da comunidade religiosa. Ainda a fonte mais comum no mundo.", exemplos: ["✝️ Amar e servir", "☪️ Submissão", "☸️ Iluminação"] },
-      { id: "misto", rotulo: "MISTO (~30%)", emoji: "🌗", percentual: 30, cor: "#8b5cf6", descricao: "Combina elementos religiosos e seculares: alguns têm fé E também constroem sentido no trabalho, nas relações, em causas.", exemplos: ["🕊️ Fé + causa social", "🎨 Religião + arte", "🌱 Espiritualidade + ativismo"] },
-      { id: "secular", rotulo: "SECULAR (~15%)", emoji: "🌍", percentual: 15, cor: "#10b981", descricao: "Sentido construído sem religião — nas relações, no trabalho, na arte, na luta política, no autoconhecimento.", exemplos: ["🤝 Relacionamentos", "🎨 Arte / causa", "🧠 Autoconhecimento"] },
+      { id: "misto-sec", rotulo: "MISTO + SECULAR (~45%)", emoji: "🌍", percentual: 45, cor: "#10b981", descricao: "Combina fé com trabalho, arte, causas — ou constrói sentido totalmente sem religião: relações, autoconhecimento, luta política, criação.", exemplos: ["🕊️ Fé + causa", "🎨 Arte", "🤝 Relações"] },
     ],
     falaFinal: "3 fontes. Todas legítimas.",
   },
