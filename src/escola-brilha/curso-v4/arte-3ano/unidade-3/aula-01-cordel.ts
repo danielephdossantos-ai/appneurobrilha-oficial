@@ -15,7 +15,8 @@ import __asset_vocabMatriz from "@/assets/arte-3ano/u3-vocab-matriz.jpg.asset.js
 const vocabMatriz = __asset_vocabMatriz.url;
 import __asset_vocabPoesia from "@/assets/arte-3ano/u3-vocab-poesia.jpg.asset.json";
 const vocabPoesia = __asset_vocabPoesia.url;
-import passo1 from "@/assets/arte-3ano/u3-passo1-batata.jpg";
+import __asset_passo1 from "@/assets/arte-3ano/u3-passo1-batata.jpg.asset.json";
+const passo1 = __asset_passo1.url;
 import __asset_passo2 from "@/assets/arte-3ano/u3-passo2-isopor.jpg.asset.json";
 const passo2 = __asset_passo2.url;
 import __asset_passo3 from "@/assets/arte-3ano/u3-passo3-tinta.jpg.asset.json";

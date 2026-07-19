@@ -1,15 +1,26 @@
 import type { AulaArteV1 } from "../../types";
-import fundicaoMetal from "@/assets/arte-6ano/u5-fundicao-metal.jpg";
-import forjaFogo from "@/assets/arte-6ano/u5-forja-fogo.jpg";
-import espadaBronze from "@/assets/arte-6ano/u5-espada-bronze.jpg";
-import mascaraTaotie from "@/assets/arte-6ano/u5-mascara-taotie.jpg";
-import mascaraSanxingdui from "@/assets/arte-6ano/u5-mascara-sanxingdui.jpg";
-import vasoShang from "@/assets/arte-6ano/u5-vaso-shang.jpg";
-import capaceteBronze from "@/assets/arte-6ano/u5-capacete-bronze.jpg";
-import machadoBronze from "@/assets/arte-6ano/u5-machado-bronze.jpg";
-import anelPrata from "@/assets/arte-6ano/u5-anel-prata.jpg";
-import ceraPerdidaEtapas from "@/assets/arte-6ano/u5-cera-perdida-etapas.png";
-import lingoteBronze from "@/assets/arte-6ano/u5-lingote-bronze.jpg";
+import __asset_fundicaoMetal from "@/assets/arte-6ano/u5-fundicao-metal.jpg.asset.json";
+const fundicaoMetal = __asset_fundicaoMetal.url;
+import __asset_forjaFogo from "@/assets/arte-6ano/u5-forja-fogo.jpg.asset.json";
+const forjaFogo = __asset_forjaFogo.url;
+import __asset_espadaBronze from "@/assets/arte-6ano/u5-espada-bronze.jpg.asset.json";
+const espadaBronze = __asset_espadaBronze.url;
+import __asset_mascaraTaotie from "@/assets/arte-6ano/u5-mascara-taotie.jpg.asset.json";
+const mascaraTaotie = __asset_mascaraTaotie.url;
+import __asset_mascaraSanxingdui from "@/assets/arte-6ano/u5-mascara-sanxingdui.jpg.asset.json";
+const mascaraSanxingdui = __asset_mascaraSanxingdui.url;
+import __asset_vasoShang from "@/assets/arte-6ano/u5-vaso-shang.jpg.asset.json";
+const vasoShang = __asset_vasoShang.url;
+import __asset_capaceteBronze from "@/assets/arte-6ano/u5-capacete-bronze.jpg.asset.json";
+const capaceteBronze = __asset_capaceteBronze.url;
+import __asset_machadoBronze from "@/assets/arte-6ano/u5-machado-bronze.jpg.asset.json";
+const machadoBronze = __asset_machadoBronze.url;
+import __asset_anelPrata from "@/assets/arte-6ano/u5-anel-prata.jpg.asset.json";
+const anelPrata = __asset_anelPrata.url;
+import __asset_ceraPerdidaEtapas from "@/assets/arte-6ano/u5-cera-perdida-etapas.png.asset.json";
+const ceraPerdidaEtapas = __asset_ceraPerdidaEtapas.url;
+import __asset_lingoteBronze from "@/assets/arte-6ano/u5-lingote-bronze.jpg.asset.json";
+const lingoteBronze = __asset_lingoteBronze.url;
 
 /**
  * Arte · 6º Ano · Unidade 4 · Aula 01 — "A Estética dos Metais"

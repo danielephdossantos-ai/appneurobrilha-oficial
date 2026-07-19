@@ -1,7 +1,8 @@
 import type { AulaArteV1 } from "../../types";
 import __asset_vocabLandArt from "@/assets/arte-2ano/u7-vocab-landart.jpg.asset.json";
 const vocabLandArt = __asset_vocabLandArt.url;
-import vocabEfemero from "@/assets/arte-2ano/u7-vocab-efemero.jpg";
+import __asset_vocabEfemero from "@/assets/arte-2ano/u7-vocab-efemero.jpg.asset.json";
+const vocabEfemero = __asset_vocabEfemero.url;
 import __asset_vocabMandala from "@/assets/arte-2ano/u7-vocab-mandala.jpg.asset.json";
 const vocabMandala = __asset_vocabMandala.url;
 import __asset_vocabNatureza from "@/assets/arte-2ano/u7-vocab-natureza.jpg.asset.json";

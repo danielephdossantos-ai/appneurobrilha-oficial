@@ -7,8 +7,10 @@ import __asset_mapaRussolo from "@/assets/arte-4ano/u5-mapa-russolo.jpg.asset.js
 const mapaRussolo = __asset_mapaRussolo.url;
 import __asset_mapaUakti from "@/assets/arte-4ano/u5-mapa-uakti.jpg.asset.json";
 const mapaUakti = __asset_mapaUakti.url;
-import vocabFrequencia from "@/assets/arte-4ano/u5-vocab-frequencia.jpg";
-import vocabTimbre from "@/assets/arte-4ano/u5-vocab-timbre.jpg";
+import __asset_vocabFrequencia from "@/assets/arte-4ano/u5-vocab-frequencia.jpg.asset.json";
+const vocabFrequencia = __asset_vocabFrequencia.url;
+import __asset_vocabTimbre from "@/assets/arte-4ano/u5-vocab-timbre.jpg.asset.json";
+const vocabTimbre = __asset_vocabTimbre.url;
 import __asset_vocabNaoConv from "@/assets/arte-4ano/u5-vocab-naoconv.jpg.asset.json";
 const vocabNaoConv = __asset_vocabNaoConv.url;
 import __asset_matCaixa from "@/assets/arte-4ano/u5-mat-caixaElastico.jpg.asset.json";

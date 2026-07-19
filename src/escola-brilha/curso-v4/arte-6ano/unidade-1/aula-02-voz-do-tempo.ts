@@ -15,7 +15,8 @@ import __asset_patrimonio from "@/assets/arte-6ano/u2-patrimonio-imaterial.jpg.a
 const patrimonio = __asset_patrimonio.url;
 import __asset_etnoHistoriador from "@/assets/arte-6ano/u2-etno-historiador.jpg.asset.json";
 const etnoHistoriador = __asset_etnoHistoriador.url;
-import ondaSonora from "@/assets/arte-6ano/u2-onda-sonora.jpg";
+import __asset_ondaSonora from "@/assets/arte-6ano/u2-onda-sonora.jpg.asset.json";
+const ondaSonora = __asset_ondaSonora.url;
 import __asset_feiraAntiga from "@/assets/arte-6ano/u2-feira-antiga.jpg.asset.json";
 const feiraAntiga = __asset_feiraAntiga.url;
 import __asset_decreto from "@/assets/arte-6ano/u2-decreto.jpg.asset.json";
@@ -25,7 +26,8 @@ const passoGravar = __asset_passoGravar.url;
 import __asset_cadernoNotas from "@/assets/arte-6ano/u2-caderno-notas.jpg.asset.json";
 const cadernoNotas = __asset_cadernoNotas.url;
 // amuletoEco e linhaSonora são referenciados na cena10 abaixo
-import linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg";
+import __asset_linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg.asset.json";
+const linhaSonora = __asset_linhaSonora.url;
 import __asset_amuletoEco from "@/assets/arte-6ano/u2-amuleto-eco.jpg.asset.json";
 const amuletoEco = __asset_amuletoEco.url;
 

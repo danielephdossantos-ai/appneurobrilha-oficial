@@ -13,7 +13,8 @@ import __asset_perspectivaHierarquica from "@/assets/arte-6ano/u6-perspectiva-hi
 const perspectivaHierarquica = __asset_perspectivaHierarquica.url;
 import __asset_pigmentosEgito from "@/assets/arte-6ano/u6-pigmentos-egito.jpg.asset.json";
 const pigmentosEgito = __asset_pigmentosEgito.url;
-import paletaEscriba from "@/assets/arte-6ano/u6-paleta-escriba.jpg";
+import __asset_paletaEscriba from "@/assets/arte-6ano/u6-paleta-escriba.jpg.asset.json";
+const paletaEscriba = __asset_paletaEscriba.url;
 
 /**
  * Arte · 6º Ano · Unidade 5 · Aula 01 — "A Estrutura do Sagrado: Arte e Rigor no Egito dos Faraós"

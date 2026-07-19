@@ -19,8 +19,10 @@ import __asset_matBarbante from "@/assets/arte-5ano/u6-mat-barbante.jpg.asset.js
 const matBarbante = __asset_matBarbante.url;
 import __asset_matOrigami from "@/assets/arte-5ano/u6-mat-origami.jpg.asset.json";
 const matOrigami = __asset_matOrigami.url;
-import matLanterna from "@/assets/arte-5ano/u6-mat-lanterna.jpg";
-import matFitaadesiva from "@/assets/arte-5ano/u6-mat-fitaadesiva.jpg";
+import __asset_matLanterna from "@/assets/arte-5ano/u6-mat-lanterna.jpg.asset.json";
+const matLanterna = __asset_matLanterna.url;
+import __asset_matFitaadesiva from "@/assets/arte-5ano/u6-mat-fitaadesiva.jpg.asset.json";
+const matFitaadesiva = __asset_matFitaadesiva.url;
 import __asset_qPenetravel from "@/assets/arte-5ano/u6-q-penetravel.jpg.asset.json";
 const qPenetravel = __asset_qPenetravel.url;
 import __asset_qEspelhos from "@/assets/arte-5ano/u6-q-espelhos.jpg.asset.json";
@@ -33,7 +35,8 @@ import __asset_passo3 from "@/assets/arte-5ano/u6-passo3.jpg.asset.json";
 const passo3 = __asset_passo3.url;
 import __asset_passo4 from "@/assets/arte-5ano/u6-passo4.jpg.asset.json";
 const passo4 = __asset_passo4.url;
-import passo5 from "@/assets/arte-5ano/u6-passo5.jpg";
+import __asset_passo5 from "@/assets/arte-5ano/u6-passo5.jpg.asset.json";
+const passo5 = __asset_passo5.url;
 
 /**
  * Arte · 5º Ano · Unidade 6 · Aula 01 — "A Escultura no Espaço e as Instalações Tridimensionais"

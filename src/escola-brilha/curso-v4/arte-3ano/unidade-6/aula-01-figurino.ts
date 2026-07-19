@@ -19,7 +19,8 @@ import __asset_nosCoroa from "@/assets/arte-3ano/u6-nos-coroa.jpg.asset.json";
 const nosCoroa = __asset_nosCoroa.url;
 import __asset_nosPirata from "@/assets/arte-3ano/u6-nos-pirata.jpg.asset.json";
 const nosPirata = __asset_nosPirata.url;
-import nosJaleco from "@/assets/arte-3ano/u6-nos-jaleco.jpg";
+import __asset_nosJaleco from "@/assets/arte-3ano/u6-nos-jaleco.jpg.asset.json";
+const nosJaleco = __asset_nosJaleco.url;
 import __asset_passoMascara from "@/assets/arte-3ano/u6-passo-mascara.jpg.asset.json";
 const passoMascara = __asset_passoMascara.url;
 

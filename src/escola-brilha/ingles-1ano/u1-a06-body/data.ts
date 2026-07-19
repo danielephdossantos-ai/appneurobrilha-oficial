@@ -11,7 +11,8 @@ const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
 import __asset_teacherEmilyAsset from "@/assets/ingles-1ano/u1-a05/teacher-emily.png.asset.json";
 const teacherEmilyAsset = __asset_teacherEmilyAsset.url;
-import parkAsset from "@/assets/ingles-1ano/u1-a05/school.png"; // fallback cena externa
+import __asset_parkAsset from "@/assets/ingles-1ano/u1-a05/school.png.asset.json"; // fallback cena externa
+const parkAsset = __asset_parkAsset.url;
 import type { LessonData } from "../types";
 
 const BUDDY = buddyAsset;
