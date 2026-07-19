@@ -21,6 +21,7 @@ function prepararParlendaParaAudio(versos: string[]) {
     .replace(/\bpra\b/gi, "para")
     .replace(/Bebê,\s*Bebê/gi, "Neném, neném")
     .replace(/Bebê/g, "Neném")
+    .replace(/\.{2,}/g, ".")
     .replace(/\s+/g, " ")
     .trim();
 }
