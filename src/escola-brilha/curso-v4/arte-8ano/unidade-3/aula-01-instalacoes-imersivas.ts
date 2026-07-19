@@ -1,25 +1,25 @@
 import type { AulaArteV1 } from "../../types";
-import teamlabImersivo from "@/assets/arte-8ano/u3-teamlab-imersivo.jpg";
-import ondasLuzChao from "@/assets/arte-8ano/u3-ondas-luz-chao.jpg";
-import projecao360 from "@/assets/arte-8ano/u3-projecao-360.jpg";
-import publicoImerso from "@/assets/arte-8ano/u3-publico-imerso.jpg";
-import oiticicaTropicalia from "@/assets/arte-8ano/u3-oiticica-tropicalia.jpg";
-import museuVr from "@/assets/arte-8ano/u3-museu-vr.jpg";
-import projetorArtistico from "@/assets/arte-8ano/u3-projetor-artistico.jpg";
-import sensorPiso from "@/assets/arte-8ano/u3-sensor-piso.jpg";
-import cortinaFiosLuz from "@/assets/arte-8ano/u3-cortina-fios-luz.jpg";
-import salaProjecaoRios from "@/assets/arte-8ano/u3-sala-projecao-rios.jpg";
-import plantaBaixaInstalacao from "@/assets/arte-8ano/u3-planta-baixa-instalacao.jpg";
-import passo1 from "@/assets/arte-8ano/u3-passo1.jpg";
-import passo2 from "@/assets/arte-8ano/u3-passo2.jpg";
-import passo3 from "@/assets/arte-8ano/u3-passo3.jpg";
-import passo4 from "@/assets/arte-8ano/u3-passo4.jpg";
-import passo5 from "@/assets/arte-8ano/u3-passo5.jpg";
-import sombrasParede from "@/assets/arte-8ano/u3-sombras-parede.jpg";
-import espelhosLentes from "@/assets/arte-8ano/u3-espelhos-lentes.jpg";
-import laserEscultura from "@/assets/arte-8ano/u3-laser-escultura.jpg";
-import mapeamentoSuperficie from "@/assets/arte-8ano/u3-mapeamento-superficie.jpg";
-import esculturaHolografica from "@/assets/arte-8ano/u3-escultura-holografica.jpg";
+import { url as teamlabImersivo } from "@/assets/arte-8ano/u3-teamlab-imersivo.jpg.asset.json";
+import { url as ondasLuzChao } from "@/assets/arte-8ano/u3-ondas-luz-chao.jpg.asset.json";
+import { url as projecao360 } from "@/assets/arte-8ano/u3-projecao-360.jpg.asset.json";
+import { url as publicoImerso } from "@/assets/arte-8ano/u3-publico-imerso.jpg.asset.json";
+import { url as oiticicaTropicalia } from "@/assets/arte-8ano/u3-oiticica-tropicalia.jpg.asset.json";
+import { url as museuVr } from "@/assets/arte-8ano/u3-museu-vr.jpg.asset.json";
+import { url as projetorArtistico } from "@/assets/arte-8ano/u3-projetor-artistico.jpg.asset.json";
+import { url as sensorPiso } from "@/assets/arte-8ano/u3-sensor-piso.jpg.asset.json";
+import { url as cortinaFiosLuz } from "@/assets/arte-8ano/u3-cortina-fios-luz.jpg.asset.json";
+import { url as salaProjecaoRios } from "@/assets/arte-8ano/u3-sala-projecao-rios.jpg.asset.json";
+import { url as plantaBaixaInstalacao } from "@/assets/arte-8ano/u3-planta-baixa-instalacao.jpg.asset.json";
+import { url as passo1 } from "@/assets/arte-8ano/u3-passo1.jpg.asset.json";
+import { url as passo2 } from "@/assets/arte-8ano/u3-passo2.jpg.asset.json";
+import { url as passo3 } from "@/assets/arte-8ano/u3-passo3.jpg.asset.json";
+import { url as passo4 } from "@/assets/arte-8ano/u3-passo4.jpg.asset.json";
+import { url as passo5 } from "@/assets/arte-8ano/u3-passo5.jpg.asset.json";
+import { url as sombrasParede } from "@/assets/arte-8ano/u3-sombras-parede.jpg.asset.json";
+import { url as espelhosLentes } from "@/assets/arte-8ano/u3-espelhos-lentes.jpg.asset.json";
+import { url as laserEscultura } from "@/assets/arte-8ano/u3-laser-escultura.jpg.asset.json";
+import { url as mapeamentoSuperficie } from "@/assets/arte-8ano/u3-mapeamento-superficie.jpg.asset.json";
+import { url as esculturaHolografica } from "@/assets/arte-8ano/u3-escultura-holografica.jpg.asset.json";
 
 /**
  * Arte · 8º Ano · Unidade 3 · Aula 01 — "Instalações Imersivas e a Realidade Virtual Artística"
