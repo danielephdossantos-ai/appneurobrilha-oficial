@@ -16,6 +16,7 @@ function speak(text: string) {
 
 function prepararParlendaParaAudio(versos: string[]) {
   return versos
+    .map((v) => v.replace(/[.!?…]+$/g, ""))
     .join(". ")
     .replace(/\bpra\b/gi, "para")
     .replace(/Bebê,\s*Bebê/gi, "Neném, neném")
