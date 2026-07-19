@@ -135,6 +135,7 @@ export function PlayerArteV1({
           </section>
         ))}
       </main>
+      <BotaoOuvirCena ativoIdx={ativo} />
     </div>
   );
 }
