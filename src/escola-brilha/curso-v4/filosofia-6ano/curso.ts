@@ -25,7 +25,7 @@ const curso: CursoGeoV1 = {
   corPrimaria: "#a78bfa",
   corSecundaria: "#0f172a",
   tipoAula: "geo-v1",
-  unidades: [unidade1, unidade2],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
