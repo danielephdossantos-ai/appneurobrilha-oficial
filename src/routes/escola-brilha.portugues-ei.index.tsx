@@ -5,7 +5,7 @@ import { cursosEI } from "@/escola-brilha/curso-portugues-ei/registry";
  * Trilha inicial do Códice de Português - Educação Infantil.
  * Mostra as 3 séries (Maternal, Pré I, Pré II) como cards gigantes.
  */
-export const Route = createFileRoute("/escola-brilha/portugues-ei")({
+export const Route = createFileRoute("/escola-brilha/portugues-ei/")({
   head: () => ({
     meta: [
       { title: "Códice de Português — Educação Infantil" },
