@@ -7,9 +7,18 @@ import { useEffect, useRef, useState } from "react";
  * Uso: renderizar 1x no player. Ele encontra a seção com [data-cena-idx="{ativo}"]
  * e narra todo o textContent com speechSynthesis (pt-BR).
  */
-export function BotaoOuvirCena({ ativoIdx }: { ativoIdx: number }) {
+export function BotaoOuvirCena({
+  ativoIdx,
+  selector,
+}: {
+  /** Índice numérico (busca [data-cena-idx="{ativoIdx}"]) */
+  ativoIdx?: number | string;
+  /** Ou um seletor CSS direto (ex.: "#m1"). Se passado, tem prioridade. */
+  selector?: string;
+}) {
   const [falando, setFalando] = useState(false);
   const utterRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const chave = selector ?? String(ativoIdx ?? "");
 
   // Para a fala ao trocar de cena
   useEffect(() => {
@@ -17,7 +26,7 @@ export function BotaoOuvirCena({ ativoIdx }: { ativoIdx: number }) {
       window.speechSynthesis?.cancel();
     } catch {}
     setFalando(false);
-  }, [ativoIdx]);
+  }, [chave]);
 
   // Cleanup ao desmontar
   useEffect(() => {
