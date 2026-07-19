@@ -205,17 +205,17 @@ function MomentoRender({
       const [count, setCount] = useState(0);
       const target = m.silabas;
       const silabas = m.palavra.split("-");
+      const palavraLimpa = m.palavra.replace(/-/g, "").toLowerCase();
       const bater = () => {
         if (count >= target) return;
         const n = count + 1;
         setCount(n);
-        const sil = silabas[n - 1];
-        if (sil) speak(sil.toLowerCase());
         if (n === target) {
           setTimeout(() => {
-            speak(m.elogio);
-            setTimeout(marcarOk, 900);
-          }, 500);
+            // Ao completar, o professor fala a PALAVRA INTEIRA + elogio
+            speak(palavraLimpa + ". " + m.elogio);
+            setTimeout(marcarOk, 1200);
+          }, 400);
         }
       };
       return (
@@ -223,7 +223,8 @@ function MomentoRender({
           <TituloMomento n={idx + 1} texto="Bate palma no ritmo" cor={cor} />
           <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
           <div className="mt-4 grid gap-3">
-            <BigListenButton onClick={() => speak(m.instrucaoAudio + " " + m.palavra.toLowerCase().replace(/-/g, " "))} label="Ouvir a palavra" />
+            <BigListenButton onClick={() => speak(m.instrucaoAudio + " " + palavraLimpa)} label="Ouvir a palavra" />
+
             <div className="flex justify-center gap-3 mt-2 flex-wrap">
               {silabas.map((sil, i) => {
                 const aceso = i < count;
