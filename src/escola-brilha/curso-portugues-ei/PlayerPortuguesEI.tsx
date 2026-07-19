@@ -14,6 +14,16 @@ function speak(text: string) {
   speakChunked(sanitizeForSpeech(text), { rate: 0.95, pitch: 1.15 });
 }
 
+function prepararParlendaParaAudio(versos: string[]) {
+  return versos
+    .join(". ")
+    .replace(/\bpra\b/gi, "para")
+    .replace(/Bebê,\s*Bebê/gi, "Neném, neném")
+    .replace(/Bebê/g, "Neném")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function CardScreen({ children, cor }: { children: React.ReactNode; cor: string }) {
   return (
     <div
@@ -114,12 +124,7 @@ function MomentoRender({
             <BigListenButton
               onClick={() => {
                 stopSpeaking();
-                const seq = async () => {
-                  for (const v of m.versos) {
-                    await speakChunked(sanitizeForSpeech(v), { rate: 0.85, pitch: 1.2 });
-                  }
-                };
-                seq();
+                speakChunked(prepararParlendaParaAudio(m.versos), { rate: 0.82, pitch: 1.08 });
               }}
               label="Ouvir a parlenda"
             />
