@@ -13,6 +13,7 @@ import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
+import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 
 /**
