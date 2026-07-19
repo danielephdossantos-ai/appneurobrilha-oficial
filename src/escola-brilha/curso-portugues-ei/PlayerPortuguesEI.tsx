@@ -210,7 +210,7 @@ function MomentoRender({
         const n = count + 1;
         setCount(n);
         const sil = silabas[n - 1];
-        if (sil) speak(sil);
+        if (sil) speak(sil.toLowerCase());
         if (n === target) {
           setTimeout(() => {
             speak(m.elogio);
