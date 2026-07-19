@@ -223,7 +223,7 @@ function MomentoRender({
           <TituloMomento n={idx + 1} texto="Bate palma no ritmo" cor={cor} />
           <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
           <div className="mt-4 grid gap-3">
-            <BigListenButton onClick={() => speak(m.instrucaoAudio + " " + m.palavra)} label="Ouvir a palavra" />
+            <BigListenButton onClick={() => speak(m.instrucaoAudio + " " + m.palavra.toLowerCase().replace(/-/g, " "))} label="Ouvir a palavra" />
             <div className="flex justify-center gap-3 mt-2 flex-wrap">
               {silabas.map((sil, i) => {
                 const aceso = i < count;
