@@ -316,6 +316,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </div>
         </main>
       </div>
+      <BotaoOuvirCena selector={`#${ativo}`} />
     </div>
   );
 }
