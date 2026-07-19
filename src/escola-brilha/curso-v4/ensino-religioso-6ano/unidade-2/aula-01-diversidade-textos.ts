@@ -158,13 +158,11 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza: os 5 maiores conjuntos de textos religiosos por número de adeptos no mundo.",
+    aurora: "Pizza: os textos religiosos por número de adeptos no mundo.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "biblia", rotulo: "Bíblia (~31%)", emoji: "📖", percentual: 31, cor: "#3b82f6", descricao: "Base das tradições cristãs — católicos, evangélicos, ortodoxos.", exemplos: ["✝️ Cristianismo"] },
-      { id: "alcorao", rotulo: "Alcorão (~25%)", emoji: "☪️", percentual: 25, cor: "#10b981", descricao: "Base da tradição islâmica — 2ª maior religião do mundo.", exemplos: ["🌙 Islamismo"] },
-      { id: "vedas", rotulo: "Vedas / Upanixades (~15%)", emoji: "🕉️", percentual: 15, cor: "#f59e0b", descricao: "Textos hindus antigos, base do hinduísmo contemporâneo.", exemplos: ["🕉️ Hinduísmo"] },
-      { id: "outros", rotulo: "Sutras / Torá / Orais (~29%)", emoji: "🌍", percentual: 29, cor: "#8b5cf6", descricao: "Budistas, judaicos, sikhs, indígenas, afro-brasileiros e sem religião.", exemplos: ["☸️ Budismo", "🕎 Judaísmo", "🪶 Indígenas", "🥁 Afro"] },
+      { id: "abraamicas", rotulo: "Bíblia + Alcorão + Torá (~56%)", emoji: "📖", percentual: 56, cor: "#3b82f6", descricao: "As três grandes tradições abraâmicas: cristianismo, islamismo e judaísmo. Compartilham raízes históricas e algumas narrativas.", exemplos: ["✝️ Bíblia", "☪️ Alcorão", "🕎 Torá"] },
+      { id: "outras", rotulo: "Vedas + Sutras + Orais (~44%)", emoji: "🌍", percentual: 44, cor: "#f59e0b", descricao: "Hinduísmo, budismo, sikhismo, tradições indígenas, afro-brasileiras e pessoas sem religião. Enorme diversidade.", exemplos: ["🕉️ Vedas", "☸️ Sutras", "🪶 Indígenas", "🥁 Afro"] },
     ],
     falaFinal: "Diversidade real. Nenhuma tradição é dona sozinha do sagrado.",
   },

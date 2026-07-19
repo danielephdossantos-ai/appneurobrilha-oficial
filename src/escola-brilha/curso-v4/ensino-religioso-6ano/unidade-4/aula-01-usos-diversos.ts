@@ -158,13 +158,11 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza: 4 usos principais dos textos sagrados nas tradições do mundo.",
+    aurora: "Pizza: dois grandes contextos de uso dos textos sagrados.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "coletivo", rotulo: "USO COLETIVO em celebrações (~40%)", emoji: "👥", percentual: 40, cor: "#3b82f6", descricao: "Leitura pública, canto de coral, recitação por sacerdote em cerimônias comunitárias.", exemplos: ["📖 Missa", "🎼 Coral", "🕌 Recitação"] },
-      { id: "individual", rotulo: "USO INDIVIDUAL / oração (~25%)", emoji: "🙏", percentual: 25, cor: "#10b981", descricao: "Leitura pessoal, oração silenciosa, meditação com mantras.", exemplos: ["🧘 Mantra", "📖 Lectio divina"] },
-      { id: "arte", rotulo: "ARTE e ARQUITETURA (~20%)", emoji: "🎨", percentual: 20, cor: "#f59e0b", descricao: "Caligrafia em templos, versículos gravados em pedra, iluminuras em livros.", exemplos: ["🕌 Caligrafia", "⛪ Vitrais"] },
-      { id: "cotidiano", rotulo: "COTIDIANO / bênçãos (~15%)", emoji: "🏠", percentual: 15, cor: "#ef4444", descricao: "Frases sagradas usadas em bênçãos de comida, saudações, começo do dia.", exemplos: ["🍞 Bênção", "🌅 Início do dia"] },
+      { id: "coletivo", rotulo: "USO COLETIVO em celebrações (~65%)", emoji: "👥", percentual: 65, cor: "#3b82f6", descricao: "Leitura pública, canto de coral, recitação por sacerdote, dança sagrada, arte e arquitetura em templos.", exemplos: ["📖 Missa", "🎼 Coral", "💃 Dança", "🕌 Caligrafia"] },
+      { id: "individual", rotulo: "USO INDIVIDUAL / cotidiano (~35%)", emoji: "🙏", percentual: 35, cor: "#10b981", descricao: "Oração silenciosa, meditação com mantras, leitura pessoal, bênçãos de comida e frases do dia a dia.", exemplos: ["🧘 Mantra", "📖 Lectio", "🍞 Bênção"] },
     ],
     falaFinal: "Coletivo, individual, arte, cotidiano. Um texto ocupa a vida inteira.",
   },

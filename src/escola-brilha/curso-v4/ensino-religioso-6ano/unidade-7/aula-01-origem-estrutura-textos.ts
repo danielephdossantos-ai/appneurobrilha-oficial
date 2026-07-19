@@ -156,14 +156,11 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza: as 5 FUNÇÕES que um texto sagrado cumpre ao mesmo tempo.",
+    aurora: "Pizza: as grandes FUNÇÕES que um texto sagrado cumpre ao mesmo tempo.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "ensinar", rotulo: "ENSINAR (~25%)", emoji: "🎓", percentual: 25, cor: "#3b82f6", descricao: "Explica o mundo, a origem, o sentido da vida, os princípios éticos.", exemplos: ["📖 Sabedoria", "📚 Regras"] },
-      { id: "consolar", rotulo: "CONSOLAR (~20%)", emoji: "🕊️", percentual: 20, cor: "#10b981", descricao: "Dá palavras pra momentos de dor, medo, luto e esperança.", exemplos: ["🕯️ Salmos", "🌈 Esperança"] },
-      { id: "orientar", rotulo: "ORIENTAR conduta (~20%)", emoji: "🧭", percentual: 20, cor: "#f59e0b", descricao: "Mostra o que fazer e o que evitar — comportamento, ritos, relações.", exemplos: ["⚖️ Leis", "🤝 Convivência"] },
-      { id: "identidade", rotulo: "DEFINIR IDENTIDADE (~20%)", emoji: "🪶", percentual: 20, cor: "#8b5cf6", descricao: "Diz quem o povo É, de onde veio, o que faz dele único.", exemplos: ["🕎 Povo eleito", "☸️ Sangha"] },
-      { id: "inspirar", rotulo: "INSPIRAR arte (~15%)", emoji: "🎨", percentual: 15, cor: "#ef4444", descricao: "Alimenta música, pintura, escultura, arquitetura e literatura por séculos.", exemplos: ["🎼 Cânticos", "⛪ Catedrais"] },
+      { id: "orientar", rotulo: "ORIENTAR a vida (~65%)", emoji: "🧭", percentual: 65, cor: "#3b82f6", descricao: "Ensina princípios, consola em momentos difíceis e orienta condutas — o que fazer, o que evitar, como conviver.", exemplos: ["🎓 Ensinar", "🕊️ Consolar", "⚖️ Leis"] },
+      { id: "identidade-arte", rotulo: "IDENTIDADE e ARTE (~35%)", emoji: "🎨", percentual: 35, cor: "#ef4444", descricao: "Define quem o povo é e alimenta séculos de música, pintura, escultura e arquitetura.", exemplos: ["🪶 Identidade", "🎼 Cânticos", "⛪ Catedrais"] },
     ],
     falaFinal: "Ensinar, consolar, orientar, identidade, inspirar. Um livro só, muitas funções.",
   },

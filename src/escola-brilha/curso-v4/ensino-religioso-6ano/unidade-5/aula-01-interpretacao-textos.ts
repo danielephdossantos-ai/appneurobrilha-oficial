@@ -158,12 +158,11 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza: 3 métodos de estudar textos sagrados nas tradições sérias.",
+    aurora: "Pizza: as duas grandes camadas do estudo dos textos sagrados.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "textual", rotulo: "TEXTUAL — o que diz a letra (~40%)", emoji: "🔍", percentual: 40, cor: "#3b82f6", descricao: "Ler no original, verificar traduções, comparar versões, entender a gramática antiga.", exemplos: ["🔤 Hebraico", "🔤 Grego", "🔤 Árabe"] },
-      { id: "historico", rotulo: "HISTÓRICO — o que dizia na época (~35%)", emoji: "🏺", percentual: 35, cor: "#f59e0b", descricao: "Entender a cultura, política e vida cotidiana do tempo em que o texto foi escrito.", exemplos: ["🏛️ Contexto"] },
-      { id: "aplicado", rotulo: "APLICADO — o que diz PRA HOJE (~25%)", emoji: "🌱", percentual: 25, cor: "#10b981", descricao: "Perguntar como aquele princípio antigo se traduz nas escolhas da vida atual.", exemplos: ["🌍 Aplicação"] },
+      { id: "exegese", rotulo: "EXEGESE — o que o texto dizia (~60%)", emoji: "🔍", percentual: 60, cor: "#3b82f6", descricao: "Estudo textual e histórico: ler no original, comparar versões, entender a cultura e a política do tempo em que o texto foi escrito.", exemplos: ["🔤 Original", "🏺 Contexto"] },
+      { id: "hermeneutica", rotulo: "HERMENÊUTICA — o que diz PRA HOJE (~40%)", emoji: "🌱", percentual: 40, cor: "#10b981", descricao: "Como aquele princípio antigo se traduz nas escolhas da vida atual, sem forçar nem trair o sentido original.", exemplos: ["🌍 Aplicação", "💡 Sentido"] },
     ],
     falaFinal: "Textual, histórico, aplicado. Três camadas de qualquer boa leitura.",
   },

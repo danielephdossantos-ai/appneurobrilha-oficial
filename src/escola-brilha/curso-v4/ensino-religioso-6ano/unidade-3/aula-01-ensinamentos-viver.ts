@@ -158,12 +158,11 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza: os 3 grandes temas que aparecem em quase TODOS os textos sagrados do mundo.",
+    aurora: "Pizza: os grandes temas éticos que aparecem em quase TODOS os textos sagrados do mundo.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "outro", rotulo: "Cuidar do OUTRO (~40%)", emoji: "🤝", percentual: 40, cor: "#10b981", descricao: "Ensinamentos sobre não fazer mal, ajudar quem precisa, respeitar o próximo, praticar a regra de ouro.", exemplos: ["🎁 Zakat", "❤️ Compaixão", "🕯️ Caridade"] },
-      { id: "si", rotulo: "Cuidar de SI (~35%)", emoji: "🌱", percentual: 35, cor: "#f59e0b", descricao: "Ensinamentos sobre honestidade consigo mesmo, humildade, moderação, disciplina, verdade.", exemplos: ["🔍 Não mentir", "🌱 Humildade"] },
-      { id: "mundo", rotulo: "Cuidar do MUNDO (~25%)", emoji: "🌍", percentual: 25, cor: "#3b82f6", descricao: "Ensinamentos sobre proteger a natureza, respeitar a criação, cuidar de animais, não desperdiçar.", exemplos: ["🌳 Terra sagrada", "🐘 Vida animal"] },
+      { id: "outros", rotulo: "Cuidar dos OUTROS (~60%)", emoji: "🤝", percentual: 60, cor: "#10b981", descricao: "Regra de ouro, generosidade, compaixão, respeito, honestidade — quase todos os textos religiosos ensinam a cuidar do próximo.", exemplos: ["🎁 Zakat", "❤️ Compaixão", "🕯️ Caridade"] },
+      { id: "si-mundo", rotulo: "Cuidar de SI e do MUNDO (~40%)", emoji: "🌍", percentual: 40, cor: "#f59e0b", descricao: "Humildade, verdade consigo mesmo, respeito pela natureza, moderação, disciplina interior.", exemplos: ["🌱 Humildade", "🌳 Terra sagrada"] },
     ],
     falaFinal: "Outro, si, mundo. Três eixos éticos universais.",
   },

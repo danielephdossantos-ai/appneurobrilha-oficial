@@ -160,10 +160,8 @@ export const aula01: AulaGeoV1 = {
     aurora: "Pizza: como as 4 linguagens se dividem em uma celebração típica.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "rito", rotulo: "RITO — o que se FAZ (~35%)", emoji: "🕯️", percentual: 35, cor: "#3b82f6", descricao: "Gestos, procissões, cânticos, ajoelhar, comer junto — o corpo em ação.", exemplos: ["🙏 Ajoelhar", "🕯️ Acender vela"] },
-      { id: "texto", rotulo: "TEXTO — o que se DIZ (~30%)", emoji: "📖", percentual: 30, cor: "#10b981", descricao: "Leituras públicas, orações, cantos escritos — a palavra sonora.", exemplos: ["📖 Evangelho", "🎼 Salmo"] },
-      { id: "mito", rotulo: "MITO — o que se LEMBRA (~20%)", emoji: "📜", percentual: 20, cor: "#f59e0b", descricao: "As narrativas fundadoras que dão sentido a tudo que se está fazendo.", exemplos: ["🌟 Nascimento", "🕊️ Ressurreição"] },
-      { id: "simbolo", rotulo: "SÍMBOLO — o que se VÊ (~15%)", emoji: "✨", percentual: 15, cor: "#8b5cf6", descricao: "Cruz, altar, vestes, ícones — presentes o tempo todo, mesmo em silêncio.", exemplos: ["✝️ Cruz", "🕎 Menorá"] },
+      { id: "acao", rotulo: "AÇÃO — Ritos + Textos falados (~65%)", emoji: "🕯️", percentual: 65, cor: "#3b82f6", descricao: "O que se FAZ e o que se DIZ: gestos, procissões, ajoelhar, ler em voz alta, cantar. O corpo e a voz em movimento.", exemplos: ["🙏 Ajoelhar", "📖 Evangelho", "🎼 Salmo"] },
+      { id: "memoria-visual", rotulo: "MEMÓRIA — Mitos + Símbolos (~35%)", emoji: "✨", percentual: 35, cor: "#8b5cf6", descricao: "O que se LEMBRA e o que se VÊ: narrativas fundadoras e objetos-emblema presentes o tempo todo.", exemplos: ["🌟 Nascimento", "✝️ Cruz", "🕎 Menorá"] },
     ],
     falaFinal: "FAZ, DIZ, LEMBRA, VÊ. As 4 formas de participar do sagrado.",
   },
