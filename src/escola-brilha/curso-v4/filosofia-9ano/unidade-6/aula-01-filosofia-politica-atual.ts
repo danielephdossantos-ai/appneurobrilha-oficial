@@ -152,14 +152,13 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Pizza rápida: as 3 atividades da vita activa.",
+    aurora: "Pizza rápida: 2 modos de existir na vita activa.",
     instrucao: "Toque em cada fatia",
     fatias: [
-      { id: "trabalho", rotulo: "TRABALHO (necessidade)", emoji: "🍞", percentual: 33, cor: "#64748b", descricao: "Atividade cíclica de sustentar a vida — comer, produzir alimento, manter o corpo. Repetição biológica sem obra durável.", exemplos: ["🍞 Pão do dia", "💧 Buscar água", "🧺 Faxina cotidiana"] },
-      { id: "fabricacao", rotulo: "FABRICAÇÃO (obra)", emoji: "🛠️", percentual: 33, cor: "#f59e0b", descricao: "Produzir objetos duráveis que ficam no mundo — casa, livro, ponte, cadeira. Deixa um legado material.", exemplos: ["🏠 Construir uma casa", "📖 Escrever um livro", "🌉 Erguer uma ponte"] },
-      { id: "acao", rotulo: "AÇÃO (pluralidade)", emoji: "🌱", percentual: 34, cor: "#10b981", descricao: "Começar algo novo em público, junto com outros. Só a ação revela QUEM somos e sustenta a política. Sem ação, ficamos só na sobrevivência e no consumo.", exemplos: ["🗳️ Assembleia cidadã", "📢 Protesto público", "🤝 Fundar movimento novo"] },
+      { id: "trabalho-fabricacao", rotulo: "TRABALHO + FABRICAÇÃO", emoji: "🛠️", percentual: 50, cor: "#64748b", descricao: "Trabalho sustenta a vida biológica (comer, faxinar); fabricação produz objetos duráveis (casa, livro, ponte). Necessárias — mas insuficientes. Sem a próxima fatia, viramos só produção e consumo.", exemplos: ["🍞 Pão do dia", "🏠 Construir casa", "📖 Escrever um livro"] },
+      { id: "acao", rotulo: "AÇÃO (pluralidade)", emoji: "🌱", percentual: 50, cor: "#10b981", descricao: "Começar algo novo em público, junto com outros. Só a ação revela QUEM somos e sustenta a política. Sem ação, restam sobrevivência e obra — a esfera pública morre.", exemplos: ["🗳️ Assembleia cidadã", "📢 Protesto público", "🤝 Fundar movimento novo"] },
     ],
-    falaFinal: "Trabalho, fabricação, ação. Arendt insiste na 3ª.",
+    falaFinal: "Trabalho/fabricação × ação. Arendt insiste na 2ª fatia.",
   },
 
   cena11_avaliacao: {
