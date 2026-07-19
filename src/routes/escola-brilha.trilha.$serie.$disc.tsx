@@ -57,6 +57,13 @@ type HabRow = { codigo: string; titulo: string; ano: string };
 function TrilhaSerieDisc() {
   const { serie, disc } = Route.useParams();
   const navigate = useNavigate();
+
+  // Educação Infantil de Português tem trilha dedicada (Maternal/Pré I/Pré II).
+  useEffect(() => {
+    if (serie === "educacao-infantil" && disc === "portugues") {
+      navigate({ to: "/escola-brilha/portugues-ei", replace: true });
+    }
+  }, [serie, disc, navigate]);
   const { activeChild } = useAppState();
   const mascote = mascoteDaDisciplina(disc);
   const tema = temaDaDisciplina(disc);
