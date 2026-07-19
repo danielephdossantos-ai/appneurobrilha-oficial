@@ -5,6 +5,7 @@ import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
+import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
@@ -112,6 +113,7 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           </div>
         </main>
       </div>
+      <BotaoOuvirCena selector={`#${ativo}`} />
     </div>
   );
 }
