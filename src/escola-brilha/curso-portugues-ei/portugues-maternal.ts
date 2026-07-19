@@ -108,7 +108,12 @@ const aula01: AulaEI = {
       tipo: "rodaConversa",
       imagemUrl: abraco,
       pergunta: "Quem você abraça todo dia? Fala o nome pro Brilha!",
-      exemplos: ["mamãe", "papai", "vovó", "meu ursinho"],
+      exemplos: [
+        { nome: "mamãe", imagemUrl: mae },
+        { nome: "papai", imagemUrl: pai },
+        { nome: "vovó", imagemUrl: vovo },
+        { nome: "meu ursinho", imagemUrl: ursinho },
+      ],
     },
     {
       tipo: "missaoFamilia",
