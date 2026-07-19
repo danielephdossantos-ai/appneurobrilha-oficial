@@ -47,6 +47,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
+import { Route as EscolaBrilhaPortuguesEiRouteImport } from './routes/escola-brilha.portugues-ei'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
@@ -65,6 +66,7 @@ import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$c
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as EscolaBrilhaTrilhaSerieDiscRouteImport } from './routes/escola-brilha.trilha.$serie.$disc'
 import { Route as EscolaBrilhaTrilhaFund2SerieDiscRouteImport } from './routes/escola-brilha.trilha-fund2.$serie.$disc'
+import { Route as EscolaBrilhaPortuguesEiSerieAulaRouteImport } from './routes/escola-brilha.portugues-ei.$serie.$aula'
 import { Route as EscolaBrilhaInglesV1CursoAulaRouteImport } from './routes/escola-brilha.ingles-v1.$curso.$aula'
 import { Route as EscolaBrilhaAulaV4CursoAulaRouteImport } from './routes/escola-brilha.aula-v4.$curso.$aula'
 import { Route as EscolaBrilhaAulaPtV4CursoAulaRouteImport } from './routes/escola-brilha.aula-pt-v4.$curso.$aula'
@@ -261,6 +263,11 @@ const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
   path: '/escola-brilha/professores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EscolaBrilhaPortuguesEiRoute = EscolaBrilhaPortuguesEiRouteImport.update({
+  id: '/escola-brilha/portugues-ei',
+  path: '/escola-brilha/portugues-ei',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
   id: '/escola-brilha/$codigo',
   path: '/escola-brilha/$codigo',
@@ -364,6 +371,12 @@ const EscolaBrilhaTrilhaFund2SerieDiscRoute =
     path: '/escola-brilha/trilha-fund2/$serie/$disc',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EscolaBrilhaPortuguesEiSerieAulaRoute =
+  EscolaBrilhaPortuguesEiSerieAulaRouteImport.update({
+    id: '/$serie/$aula',
+    path: '/$serie/$aula',
+    getParentRoute: () => EscolaBrilhaPortuguesEiRoute,
+  } as any)
 const EscolaBrilhaInglesV1CursoAulaRoute =
   EscolaBrilhaInglesV1CursoAulaRouteImport.update({
     id: '/escola-brilha/ingles-v1/$curso/$aula',
@@ -435,6 +448,7 @@ export interface FileRoutesByFullPath {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiRouteWithChildren
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
@@ -455,6 +469,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
   '/escola-brilha/aula-v4/$curso/$aula': typeof EscolaBrilhaAulaV4CursoAulaRoute
   '/escola-brilha/ingles-v1/$curso/$aula': typeof EscolaBrilhaInglesV1CursoAulaRoute
+  '/escola-brilha/portugues-ei/$serie/$aula': typeof EscolaBrilhaPortuguesEiSerieAulaRoute
   '/escola-brilha/trilha-fund2/$serie/$disc': typeof EscolaBrilhaTrilhaFund2SerieDiscRoute
   '/escola-brilha/trilha/$serie/$disc': typeof EscolaBrilhaTrilhaSerieDiscRoute
 }
@@ -497,6 +512,7 @@ export interface FileRoutesByTo {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiRouteWithChildren
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
@@ -517,6 +533,7 @@ export interface FileRoutesByTo {
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
   '/escola-brilha/aula-v4/$curso/$aula': typeof EscolaBrilhaAulaV4CursoAulaRoute
   '/escola-brilha/ingles-v1/$curso/$aula': typeof EscolaBrilhaInglesV1CursoAulaRoute
+  '/escola-brilha/portugues-ei/$serie/$aula': typeof EscolaBrilhaPortuguesEiSerieAulaRoute
   '/escola-brilha/trilha-fund2/$serie/$disc': typeof EscolaBrilhaTrilhaFund2SerieDiscRoute
   '/escola-brilha/trilha/$serie/$disc': typeof EscolaBrilhaTrilhaSerieDiscRoute
 }
@@ -561,6 +578,7 @@ export interface FileRoutesById {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiRouteWithChildren
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
@@ -581,6 +599,7 @@ export interface FileRoutesById {
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
   '/escola-brilha/aula-v4/$curso/$aula': typeof EscolaBrilhaAulaV4CursoAulaRoute
   '/escola-brilha/ingles-v1/$curso/$aula': typeof EscolaBrilhaInglesV1CursoAulaRoute
+  '/escola-brilha/portugues-ei/$serie/$aula': typeof EscolaBrilhaPortuguesEiSerieAulaRoute
   '/escola-brilha/trilha-fund2/$serie/$disc': typeof EscolaBrilhaTrilhaFund2SerieDiscRoute
   '/escola-brilha/trilha/$serie/$disc': typeof EscolaBrilhaTrilhaSerieDiscRoute
 }
@@ -626,6 +645,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/portugues-ei'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
@@ -646,6 +666,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
     | '/escola-brilha/aula-v4/$curso/$aula'
     | '/escola-brilha/ingles-v1/$curso/$aula'
+    | '/escola-brilha/portugues-ei/$serie/$aula'
     | '/escola-brilha/trilha-fund2/$serie/$disc'
     | '/escola-brilha/trilha/$serie/$disc'
   fileRoutesByTo: FileRoutesByTo
@@ -688,6 +709,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/portugues-ei'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
@@ -708,6 +730,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
     | '/escola-brilha/aula-v4/$curso/$aula'
     | '/escola-brilha/ingles-v1/$curso/$aula'
+    | '/escola-brilha/portugues-ei/$serie/$aula'
     | '/escola-brilha/trilha-fund2/$serie/$disc'
     | '/escola-brilha/trilha/$serie/$disc'
   id:
@@ -751,6 +774,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/portugues-ei'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
@@ -771,6 +795,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
     | '/escola-brilha/aula-v4/$curso/$aula'
     | '/escola-brilha/ingles-v1/$curso/$aula'
+    | '/escola-brilha/portugues-ei/$serie/$aula'
     | '/escola-brilha/trilha-fund2/$serie/$disc'
     | '/escola-brilha/trilha/$serie/$disc'
   fileRoutesById: FileRoutesById
@@ -815,6 +840,7 @@ export interface RootRouteChildren {
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
+  EscolaBrilhaPortuguesEiRoute: typeof EscolaBrilhaPortuguesEiRouteWithChildren
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -1102,6 +1128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaProfessoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escola-brilha/portugues-ei': {
+      id: '/escola-brilha/portugues-ei'
+      path: '/escola-brilha/portugues-ei'
+      fullPath: '/escola-brilha/portugues-ei'
+      preLoaderRoute: typeof EscolaBrilhaPortuguesEiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escola-brilha/$codigo': {
       id: '/escola-brilha/$codigo'
       path: '/escola-brilha/$codigo'
@@ -1228,6 +1261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaTrilhaFund2SerieDiscRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escola-brilha/portugues-ei/$serie/$aula': {
+      id: '/escola-brilha/portugues-ei/$serie/$aula'
+      path: '/$serie/$aula'
+      fullPath: '/escola-brilha/portugues-ei/$serie/$aula'
+      preLoaderRoute: typeof EscolaBrilhaPortuguesEiSerieAulaRouteImport
+      parentRoute: typeof EscolaBrilhaPortuguesEiRoute
+    }
     '/escola-brilha/ingles-v1/$curso/$aula': {
       id: '/escola-brilha/ingles-v1/$curso/$aula'
       path: '/escola-brilha/ingles-v1/$curso/$aula'
@@ -1304,6 +1344,21 @@ const AnamneseChildIdRouteWithChildren = AnamneseChildIdRoute._addFileChildren(
   AnamneseChildIdRouteChildren,
 )
 
+interface EscolaBrilhaPortuguesEiRouteChildren {
+  EscolaBrilhaPortuguesEiSerieAulaRoute: typeof EscolaBrilhaPortuguesEiSerieAulaRoute
+}
+
+const EscolaBrilhaPortuguesEiRouteChildren: EscolaBrilhaPortuguesEiRouteChildren =
+  {
+    EscolaBrilhaPortuguesEiSerieAulaRoute:
+      EscolaBrilhaPortuguesEiSerieAulaRoute,
+  }
+
+const EscolaBrilhaPortuguesEiRouteWithChildren =
+  EscolaBrilhaPortuguesEiRoute._addFileChildren(
+    EscolaBrilhaPortuguesEiRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -1345,6 +1400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
+  EscolaBrilhaPortuguesEiRoute: EscolaBrilhaPortuguesEiRouteWithChildren,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
