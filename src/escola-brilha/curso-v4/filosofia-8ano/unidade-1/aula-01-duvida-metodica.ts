@@ -255,195 +255,155 @@ export const aula01: AulaGeoV1 = {
   },
 
   cena06_personagensLugar: {
-    tipo: "cenaTematica",
+    tipo: "mapaBrasilInterativo",
     aurora:
-      "Personagens e lugares desta virada histórica.",
-    instrucao: "Toque em cada card",
-    cenas: [
+      "A tradição cartesiana chegou às maiores universidades brasileiras — onde a filosofia moderna é estudada até hoje. Escolha 5 estados com departamentos de Filosofia de referência.",
+    instrucao: "Acenda 5 estados com departamentos de Filosofia de peso",
+    missao: {
+      tipo: "selecionar",
+      siglas: ["SP", "RJ", "MG", "RS", "PR"],
+      pergunta:
+        "Quais 5 estados abrigam departamentos de Filosofia (USP, UFRJ, UFMG, UFRGS, UFPR) de referência no país?",
+    },
+    falaFinal:
+      "USP-SP, UFRJ-RJ, UFMG-MG, UFRGS-RS e UFPR-PR. Descartes lido, discutido e criticado em cada uma.",
+  },
+
+  cena07_sequencia: {
+    tipo: "linhaEstrada",
+    aurora:
+      "Como Descartes chega ao COGITO passo a passo. Coloque na ordem certa.",
+    instrucao: "Toque na ordem correta",
+    pergunta: "Da 1ª meditação ao alicerce da modernidade:",
+    paradas: [
       {
-        id: "descartes",
-        titulo: "René Descartes (1596–1650)",
-        subtitulo: "O pai da filosofia moderna",
-        emoji: "🧑‍🔬",
-        cor: "from-sky-500 to-blue-700",
-        descricao:
-          "Francês, matemático, filósofo e soldado. Criou a geometria analítica (o plano cartesiano leva seu nome). Escreveu o 'Discurso do Método' (1637) em francês — não em latim — pra qualquer pessoa alfabetizada poder ler. É um gesto revolucionário: filosofia deixa de ser só dos padres.",
-        fotoUrl: descartes,
-      },
-      {
-        id: "quarto",
-        titulo: "O quarto aquecido — 1619",
-        subtitulo: "O laboratório da modernidade",
+        id: "trancar",
         emoji: "🕯️",
-        cor: "from-amber-500 to-orange-700",
+        rotulo: "1. Isolar-se e decidir duvidar",
         descricao:
-          "Numa cidade da Alemanha (perto de Ulm), Descartes passa um inverno inteiro isolado num quarto com estufa. Ali tem 3 sonhos que descreve como visões filosóficas. Sai dali convencido de que precisa reconstruir TODO o saber a partir da razão individual. É o momento mítico do nascimento do 'eu penso' moderno.",
-        fotoUrl: meditacoes,
+          "Descartes se tranca no quarto aquecido e resolve não aceitar nenhuma ideia sem examiná-la.",
       },
       {
-        id: "meditacoes",
-        titulo: "'Meditações Metafísicas' — 1641",
-        subtitulo: "O livro que estruturou a dúvida",
-        emoji: "📖",
-        cor: "from-purple-500 to-fuchsia-700",
-        descricao:
-          "6 meditações. Na 1ª ele derruba tudo (sentidos, matemática, gênio maligno). Na 2ª chega ao cogito. Nas seguintes tenta provar Deus e reconstruir o mundo. Todo curso universitário de filosofia hoje ainda passa por esse livro — porque ele fundou a maneira MODERNA de pensar: partir do sujeito, não da tradição.",
-        fotoUrl: cogito,
-      },
-    ],
-    falaFinal:
-      "Descartes, o quarto, o livro. A tríade que abre a Modernidade filosófica.",
-  },
-
-  cena07_praticaGuiada: {
-    tipo: "arrastarParaAlvo",
-    aurora:
-      "Classifique 6 afirmações: sobrevive à dúvida cartesiana ou NÃO sobrevive?",
-    instrucao: "Arraste cada card pro alvo certo",
-    titulo: "Testando o alicerce",
-    alvos: [
-      {
-        id: "sobrevive",
-        rotulo: "SOBREVIVE à dúvida",
-        emoji: "🧱",
-        cor: "from-emerald-500 to-teal-700",
-      },
-      {
-        id: "cai",
-        rotulo: "CAI na dúvida",
-        emoji: "💥",
-        cor: "from-red-500 to-rose-700",
-      },
-    ],
-    itens: [
-      {
-        id: "i1",
-        texto: "'Estou pensando neste exato momento'",
-        emoji: "🧠",
-        alvoCertoId: "sobrevive",
-      },
-      {
-        id: "i2",
-        texto: "'Vejo uma mesa na minha frente'",
-        emoji: "🪑",
-        alvoCertoId: "cai",
-      },
-      {
-        id: "i3",
-        texto: "'2 + 2 = 4' (se o gênio maligno existir)",
-        emoji: "🔢",
-        alvoCertoId: "cai",
-      },
-      {
-        id: "i4",
-        texto: "'Eu existo como algo que pensa'",
-        emoji: "💡",
-        alvoCertoId: "sobrevive",
-      },
-      {
-        id: "i5",
-        texto: "'Meu corpo tem duas mãos'",
-        emoji: "✋",
-        alvoCertoId: "cai",
-      },
-      {
-        id: "i6",
-        texto: "'Estou duvidando de alguma coisa'",
-        emoji: "❓",
-        alvoCertoId: "sobrevive",
-      },
-    ],
-    feedbackFinal:
-      "Só sobrevive o que envolve o próprio ato de pensar. Sentidos, corpo e até matemática caem sob a dúvida extrema.",
-    falaFinal:
-      "3 sobrevivem, 3 caem. O alicerce é fininho — e é o cogito.",
-  },
-
-  cena08_missao: {
-    tipo: "missaoFamilia",
-    aurora:
-      "Missão de campo em casa: virar Descartes por 10 minutos.",
-    titulo: "Meditação metódica",
-    passos: [
-      "1. Escolha uma crença sua sobre alguma coisa (ex.: 'meu time é o melhor', 'aquele professor não gosta de mim', 'redes sociais são só entretenimento').",
-      "2. Pergunte: essa crença veio de onde? Sentidos, tradição, moda, alguém falou?",
-      "3. Aplique a dúvida metódica: existe algum motivo pra duvidar dela?",
-      "4. Registre por escrito (ou por áudio): sobrou alguma certeza indestrutível depois da dúvida?",
-    ],
-    registro: "📸 Foto do caderno OU 🎙️ áudio de 30s explicando o que sobrou",
-    falaFinal:
-      "Você acabou de fazer, na sua casa, o que Descartes fez em 1619 num quarto aquecido.",
-  },
-
-  cena09_desafio: {
-    tipo: "encaixePecas",
-    aurora:
-      "6 situações contemporâneas — encaixe qual conceito cartesiano cada uma revela.",
-    instrucao: "Ligue a situação ao conceito",
-    pecas: [
-      {
-        id: "duvida-metodica",
-        rotulo: "Dúvida metódica",
-        emoji: "❓",
-        cor: "from-sky-500 to-blue-700",
-      },
-      {
-        id: "sentidos-enganam",
-        rotulo: "Sentidos enganam",
+        id: "sentidos",
         emoji: "👁️",
-        cor: "from-amber-500 to-orange-700",
+        rotulo: "2. Duvidar dos sentidos",
+        descricao:
+          "Se os sentidos às vezes enganam, não podem servir de alicerce de certeza.",
       },
       {
-        id: "genio-maligno",
-        rotulo: "Gênio maligno",
+        id: "genio",
         emoji: "👹",
-        cor: "from-purple-500 to-fuchsia-700",
+        rotulo: "3. Levantar o gênio maligno",
+        descricao:
+          "E se um ser super poderoso me enganasse até na matemática? Toda tradição fica sob suspeita.",
+      },
+      {
+        id: "resiste",
+        emoji: "🧠",
+        rotulo: "4. Perceber o que resiste",
+        descricao:
+          "Mesmo enganado, pra ser enganado eu preciso PENSAR — e isso não pode ser negado.",
       },
       {
         id: "cogito",
-        rotulo: "Cogito ergo sum",
         emoji: "💡",
-        cor: "from-emerald-500 to-teal-700",
+        rotulo: "5. Formular o cogito",
+        descricao:
+          "Penso, logo existo — a primeira certeza indestrutível vira alicerce da ciência moderna.",
       },
+    ],
+    ordemCerta: ["trancar", "sentidos", "genio", "resiste", "cogito"],
+    feedbackAcerto:
+      "Exato. Isolar → duvidar dos sentidos → gênio maligno → o que resiste → cogito. Método cartesiano em 5 passos.",
+    feedbackErro:
+      "A ordem é: isolar-se, duvidar dos sentidos, levantar o gênio maligno, perceber o que resiste, formular o cogito.",
+    falaFinal: "5 passos. Toda a virada moderna em uma escada.",
+  },
+
+  cena08_voceLe: {
+    tipo: "voceLeSozinho",
+    aurora: "Sua vez. Leia com atenção.",
+    tituloLivro: "📔 Caderno do Investigador",
+    subtitulo: "Página 1 — A dúvida que fundou a modernidade",
+    paragrafos: [
+      {
+        id: "p1",
+        texto:
+          "No inverno de 1619, o jovem soldado René Descartes se tranca num quarto aquecido na Alemanha. Ali toma uma decisão radical: reconstruir todo o conhecimento humano a partir da sua própria razão, sem aceitar nada só porque a tradição, a escola ou os padres disseram.",
+        chaves: ["Descartes", "razão"],
+      },
+      {
+        id: "p2",
+        texto:
+          "Ele cria a DÚVIDA METÓDICA: um método para duvidar de propósito de tudo o que puder ser duvidado, até achar uma certeza que resista. Começa pelos SENTIDOS (que às vezes enganam) e sobe até a hipótese extrema do GÊNIO MALIGNO — um ser que poderia enganá-lo em tudo, até em 2+2=4.",
+        chaves: ["dúvida metódica", "gênio maligno"],
+      },
+      {
+        id: "p3",
+        texto:
+          "No fundo desse abismo, Descartes descobre algo indestrutível: mesmo que o gênio maligno o engane em tudo, ele não pode fazê-lo duvidar sem pensar. Pra ser enganado, é preciso existir como algo que pensa. É o COGITO, ERGO SUM — penso, logo existo.",
+        chaves: ["cogito", "existo"],
+      },
+      {
+        id: "p4",
+        texto:
+          "Com o cogito, nasce a MODERNIDADE FILOSÓFICA: o conhecimento não parte mais de Deus, da tradição ou dos livros antigos — parte do SUJEITO que pensa. Toda a ciência moderna, do método experimental à filosofia contemporânea, ainda anda sobre esse alicerce.",
+        chaves: ["modernidade", "sujeito"],
+      },
+    ],
+    falaFinal: "Leu? Bora pro minijogo.",
+  },
+
+  cena09_minijogo: {
+    tipo: "construtorMarcos",
+    aurora:
+      "Minijogo LABORATÓRIO DA DÚVIDA! Cada caso mostra uma situação. Qual conceito cartesiano ela ilustra?",
+    instrucao: "⏱️ Qual conceito cartesiano é este?",
+    duracaoSegundos: 15,
+    pecas: [
+      { id: "duvida-metodica", emoji: "❓", rotulo: "Dúvida metódica" },
+      { id: "sentidos-enganam", emoji: "👁️", rotulo: "Sentidos enganam" },
+      { id: "genio-maligno", emoji: "👹", rotulo: "Gênio maligno" },
+      { id: "cogito", emoji: "💡", rotulo: "Cogito ergo sum" },
     ],
     rodadas: [
       {
         id: "r1",
         municipioA: {
-          nome: "'Vi um vídeo no TikTok, será que é real?'",
+          nome: "'Vi um vídeo no TikTok, vou checar antes de acreditar'",
           emoji: "📱",
           cor: "from-sky-400 to-blue-600",
         },
         municipioB: {
-          nome: "Checar fontes antes de acreditar",
+          nome: "Suspender juízo antes de aceitar",
           emoji: "🔍",
           cor: "from-cyan-400 to-blue-600",
         },
-        contexto: "Antes de acreditar, duvidar de propósito.",
+        contexto: "Duvidar de propósito antes de aceitar.",
         pecaCertaId: "duvida-metodica",
         feedbackAcerto:
-          "Isso. DÚVIDA METÓDICA — não é desconfiar de tudo pra sempre, é checar antes de aceitar.",
+          "Isso. DÚVIDA METÓDICA aplicada à internet — vacina contra fake news.",
         feedbackErro:
           "É DÚVIDA METÓDICA: duvidar de propósito pra depois aceitar só o que passa no teste.",
       },
       {
         id: "r2",
         municipioA: {
-          nome: "'Achei que era meu amigo acenando, era outra pessoa'",
+          nome: "'Achei que era meu amigo acenando — era outra pessoa'",
           emoji: "🙋",
           cor: "from-amber-400 to-orange-600",
         },
         municipioB: {
-          nome: "Visão pode enganar à distância",
+          nome: "Visão errou à distância",
           emoji: "👀",
           cor: "from-yellow-400 to-orange-600",
         },
         contexto: "Os sentidos falharam num caso simples.",
         pecaCertaId: "sentidos-enganam",
         feedbackAcerto:
-          "Perfeito. SENTIDOS ENGANAM — não são fonte de certeza absoluta.",
+          "Perfeito. SENTIDOS ENGANAM — não podem ser alicerce de certeza absoluta.",
         feedbackErro:
-          "É SENTIDOS ENGANAM: se erram em coisas simples, não podem ser alicerce.",
+          "É SENTIDOS ENGANAM: se erram em coisas simples, não servem de alicerce.",
       },
       {
         id: "r3",
@@ -453,21 +413,21 @@ export const aula01: AulaGeoV1 = {
           cor: "from-purple-400 to-fuchsia-600",
         },
         municipioB: {
-          nome: "Hipótese extrema pra testar a realidade",
+          nome: "Hipótese-limite pra testar a realidade",
           emoji: "🧪",
           cor: "from-fuchsia-400 to-purple-600",
         },
-        contexto: "Versão contemporânea da mesma experiência.",
+        contexto: "Versão contemporânea da mesma experiência de 1641.",
         pecaCertaId: "genio-maligno",
         feedbackAcerto:
-          "Isso. Matrix É o GÊNIO MALIGNO do século XXI — a mesma hipótese-limite.",
+          "Isso. Matrix É o GÊNIO MALIGNO do século XXI — mesma hipótese-limite.",
         feedbackErro:
           "É GÊNIO MALIGNO: Descartes inventou a Matrix filosófica 400 anos antes de Neo.",
       },
       {
         id: "r4",
         municipioA: {
-          nome: "'Mesmo em dúvida, eu SEI que estou pensando agora'",
+          nome: "'Mesmo em dúvida, SEI que estou pensando agora'",
           emoji: "💭",
           cor: "from-emerald-400 to-teal-600",
         },
@@ -486,7 +446,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r5",
         municipioA: {
-          nome: "'Aquela vara na piscina parece torta — mas está reta'",
+          nome: "'A vara na piscina parece torta — mas está reta'",
           emoji: "🏊",
           cor: "from-amber-400 to-orange-600",
         },
@@ -505,19 +465,19 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r6",
         municipioA: {
-          nome: "'Antes de acreditar no boato, vou pesquisar'",
+          nome: "'Antes de espalhar o boato, vou verificar'",
           emoji: "🧐",
           cor: "from-sky-400 to-blue-600",
         },
         municipioB: {
-          nome: "Suspender o juízo até ter evidência",
+          nome: "Método cartesiano na prática",
           emoji: "⚖️",
           cor: "from-cyan-400 to-blue-600",
         },
-        contexto: "Método cartesiano aplicado à internet.",
+        contexto: "Suspender o juízo até ter evidência.",
         pecaCertaId: "duvida-metodica",
         feedbackAcerto:
-          "Perfeito. DÚVIDA METÓDICA — vacina contra fake news.",
+          "Perfeito. DÚVIDA METÓDICA — a régua cartesiana contra a desinformação.",
         feedbackErro:
           "É DÚVIDA METÓDICA — suspender o juízo até ter razão pra aceitar.",
       },
@@ -525,6 +485,8 @@ export const aula01: AulaGeoV1 = {
     falaFinal:
       "6 casos, 4 conceitos. Descartes está mais vivo do que nunca.",
   },
+
+
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
