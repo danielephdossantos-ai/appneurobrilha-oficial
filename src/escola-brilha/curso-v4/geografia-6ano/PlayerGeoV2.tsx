@@ -402,10 +402,23 @@ export function PlayerGeoV2({
   ];
 
   const narrar = (n: number, texto?: string) => {
-    if (!texto || !audioLigado) return;
+    if (!audioLigado) return;
+    let fala = texto?.trim();
+    if (!fala) {
+      // Fallback: lê o texto renderizado do bloco (m-{n}) sem botões/controles
+      const bloco = document.querySelector<HTMLElement>(`[data-momento="${n}"]`);
+      if (bloco) {
+        const clone = bloco.cloneNode(true) as HTMLElement;
+        clone
+          .querySelectorAll('button, [role="button"], input, select, textarea')
+          .forEach((el) => el.remove());
+        fala = (clone.textContent || "").replace(/\s+/g, " ").trim();
+      }
+    }
+    if (!fala) return;
     stopSpeaking();
     setNarrando(n);
-    speakChunked(texto, { onEnd: () => setNarrando(null) });
+    speakChunked(fala, { onEnd: () => setNarrando(null) });
   };
 
   return (
