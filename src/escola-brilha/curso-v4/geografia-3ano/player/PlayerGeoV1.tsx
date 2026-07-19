@@ -140,6 +140,7 @@ export function PlayerGeoV1({
         ))}
         <div className="h-24" />
       </main>
+      <BotaoOuvirCena ativoIdx={ativo} />
     </div>
     </ScrollLivreContext.Provider>
     </TeenContext.Provider>
