@@ -351,11 +351,28 @@ function MomentoRender({
           <div className="mt-5 grid gap-3">
             <BigListenButton onClick={() => speak(m.pergunta)} label="Ouvir pergunta" />
             {m.exemplos && (
-              <ul className="mx-auto max-w-md text-sm text-slate-600 space-y-1">
-                {m.exemplos.map((e, i) => (
-                  <li key={i} className="text-center italic">"{e}"</li>
-                ))}
-              </ul>
+              <div className="mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl w-full px-2">
+                {m.exemplos.map((e, i) => {
+                  const nome = typeof e === "string" ? e : e.nome;
+                  const img = typeof e === "string" ? undefined : e.imagemUrl;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => speak(nome.toLowerCase())}
+                      className="flex flex-col items-center gap-2 rounded-2xl bg-white border-2 border-purple-200 p-3 shadow-sm active:scale-95 transition"
+                    >
+                      {img ? (
+                        <img src={img} alt={nome} className="w-full aspect-square object-contain rounded-xl bg-purple-50" />
+                      ) : (
+                        <div className="w-full aspect-square rounded-xl bg-purple-50 flex items-center justify-center text-4xl">💬</div>
+                      )}
+                      <span className="text-sm font-bold text-purple-900 flex items-center gap-1">
+                        🔊 {nome}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
             <button onClick={marcarOk} className="mt-2 mx-auto text-purple-700 underline">
               Já conversamos ▸
