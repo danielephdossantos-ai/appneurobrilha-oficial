@@ -1,12 +1,19 @@
 import type { CursoGeoV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
+import { unidade3 } from "./unidade-3";
+import { unidade4 } from "./unidade-4";
+import { unidade5 } from "./unidade-5";
+import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Filosofia 9º Ano — "Investigador do Contemporâneo"
  * Componente autoral. Códigos internos: EF09FI01 → EF09FI07.
  * ÁPICE do Fund. 2: da Escola de Frankfurt ao pensamento decolonial brasileiro.
  *
- * PILOTO — apenas Unidade 1 liberada. Unidades 2-7 seguem após validação.
+ * Curso completo: 7 unidades (Frankfurt → Fenomenologia → Foucault/Derrida →
+ * Wittgenstein → Bioética → Arendt → Freire/Krenak).
  */
 const curso: CursoGeoV1 = {
   slug: "filosofia-9ano",
@@ -18,7 +25,7 @@ const curso: CursoGeoV1 = {
   corPrimaria: "#dc2626",
   corSecundaria: "#0f172a",
   tipoAula: "geo-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
