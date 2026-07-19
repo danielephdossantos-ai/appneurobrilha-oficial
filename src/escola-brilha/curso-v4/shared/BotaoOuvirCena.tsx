@@ -38,9 +38,8 @@ export function BotaoOuvirCena({
   }, []);
 
   const coletarTexto = (): string => {
-    const sec = document.querySelector<HTMLElement>(
-      `[data-cena-idx="${ativoIdx}"]`,
-    );
+    const sel = selector ?? `[data-cena-idx="${ativoIdx}"]`;
+    const sec = document.querySelector<HTMLElement>(sel);
     if (!sec) return "";
     // Remove botões e controles p/ não ler "Ouvir", "Próxima", etc.
     const clone = sec.cloneNode(true) as HTMLElement;
