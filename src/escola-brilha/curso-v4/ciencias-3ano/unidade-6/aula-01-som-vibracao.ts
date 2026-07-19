@@ -167,9 +167,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: ouvidoImg,
     fatias: [
-      { id: "fonte", rotulo: "Fonte que vibra", emoji: "🥁", percentual: 33, cor: "#a855f7", descricao: "Instrumento, garganta, qualquer objeto que treme.", exemplos: ["Tambor", "Violão", "Voz"], fotoUrl: tamborImg },
-      { id: "meio", rotulo: "Meio (ar/sólido)", emoji: "💨", percentual: 33, cor: "#0ea5e9", descricao: "Caminho por onde as ondas viajam.", exemplos: ["Ar", "Madeira", "Água"], fotoUrl: telefoneImg },
-      { id: "receptor", rotulo: "Receptor (ouvido)", emoji: "👂", percentual: 34, cor: "#ec4899", descricao: "Onde as ondas chegam e viram som.", exemplos: ["Orelha", "Tímpano"], fotoUrl: ouvidoImg },
+      { id: "fonte", rotulo: "Fonte + Meio", emoji: "🥁", percentual: 60, cor: "#a855f7", descricao: "Objeto que vibra (fonte) e o caminho por onde as ondas viajam (ar, água, sólidos).", exemplos: ["Tambor vibrando", "Ondas no ar", "Som na madeira"], fotoUrl: tamborImg },
+      { id: "receptor", rotulo: "Receptor (ouvido)", emoji: "👂", percentual: 40, cor: "#ec4899", descricao: "Onde as ondas chegam e viram som interpretado pelo cérebro.", exemplos: ["Orelha", "Tímpano"], fotoUrl: ouvidoImg },
     ],
     falaFinal: "Fonte + meio + receptor. Sem qualquer um, não há som.",
   },

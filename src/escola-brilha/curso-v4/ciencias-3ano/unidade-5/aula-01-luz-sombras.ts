@@ -164,9 +164,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: lanternaImg,
     fatias: [
-      { id: "opaco", rotulo: "Opacos", emoji: "🌑", percentual: 60, cor: "#334155", descricao: "Maioria dos materiais. Bloqueiam a luz. Formam sombras nítidas.", exemplos: ["Madeira", "Pedra", "Metal", "Pele"], fotoUrl: sombraImg },
-      { id: "trans", rotulo: "Transparentes", emoji: "✨", percentual: 25, cor: "#0ea5e9", descricao: "Deixam a luz passar toda. Vidro, água limpa, ar.", exemplos: ["Vidro", "Água"], fotoUrl: vidroImg },
-      { id: "trlu", rotulo: "Translúcidos", emoji: "🌫️", percentual: 15, cor: "#f59e0b", descricao: "Deixam passar parte. Imagem borrada.", exemplos: ["Papel manteiga", "Vidro fosco"], fotoUrl: transImg },
+      { id: "opaco", rotulo: "Opacos (bloqueiam luz)", emoji: "🌑", percentual: 60, cor: "#334155", descricao: "Maioria dos materiais. Bloqueiam a luz e formam sombras nítidas.", exemplos: ["Madeira", "Pedra", "Metal", "Pele"], fotoUrl: sombraImg },
+      { id: "passa", rotulo: "Deixam luz passar (transparente/translúcido)", emoji: "✨", percentual: 40, cor: "#0ea5e9", descricao: "Transparentes (vidro, água, ar) e translúcidos (papel manteiga, vidro fosco).", exemplos: ["Vidro", "Água", "Papel manteiga"], fotoUrl: vidroImg },
     ],
     falaFinal: "Todo material se enquadra em um desses três grupos.",
   },

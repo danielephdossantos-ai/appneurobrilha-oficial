@@ -171,10 +171,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: borboletaImg,
     fatias: [
-      { id: "nasc", rotulo: "Nascimento", emoji: "🥚", percentual: 20, cor: "#f59e0b", descricao: "Sai do ovo ou nasce do corpo da mãe.", exemplos: ["Ovo", "Filhote"], fotoUrl: ovoImg },
-      { id: "cresc", rotulo: "Crescimento", emoji: "🐛", percentual: 40, cor: "#10b981", descricao: "Come, cresce, se desenvolve. Pode metamorfosear.", exemplos: ["Lagarta", "Girino", "Pintinho"], fotoUrl: lagartaImg },
-      { id: "repro", rotulo: "Reprodução", emoji: "🦋", percentual: 30, cor: "#ec4899", descricao: "Adulto encontra par e gera nova geração.", exemplos: ["Borboleta pondo ovos"], fotoUrl: borboletaImg },
-      { id: "morte", rotulo: "Envelhecer", emoji: "🍂", percentual: 10, cor: "#78716c", descricao: "Fim natural do ciclo. Faz parte da vida.", exemplos: ["Sapo idoso"], fotoUrl: sapoImg },
+      { id: "cresc", rotulo: "Crescimento", emoji: "🐛", percentual: 60, cor: "#10b981", descricao: "Nasce, come, cresce, se desenvolve — pode metamorfosear ou só aumentar de tamanho.", exemplos: ["Ovo", "Lagarta", "Girino", "Pintinho"], fotoUrl: lagartaImg },
+      { id: "repro", rotulo: "Reprodução e fim", emoji: "🦋", percentual: 40, cor: "#ec4899", descricao: "Adulto se reproduz gerando nova geração e um dia envelhece. Ciclo se renova.", exemplos: ["Borboleta pondo ovos", "Sapo idoso"], fotoUrl: borboletaImg },
     ],
     falaFinal: "Todo ser vivo passa por essas fases. É a lei da biosfera.",
   },

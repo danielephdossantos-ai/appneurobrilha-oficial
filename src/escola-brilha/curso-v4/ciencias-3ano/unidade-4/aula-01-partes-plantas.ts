@@ -171,11 +171,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: plantaImg,
     fatias: [
-      { id: "raiz", rotulo: "Raiz", emoji: "🥕", percentual: 20, cor: "#b45309", descricao: "Fixação + absorção.", exemplos: ["Cenoura", "Mandioca"], fotoUrl: cenouraImg },
-      { id: "caule", rotulo: "Caule", emoji: "🌱", percentual: 20, cor: "#10b981", descricao: "Sustentação + transporte.", exemplos: ["Tronco", "Cana"], fotoUrl: plantaImg },
-      { id: "folha", rotulo: "Folha", emoji: "🍃", percentual: 20, cor: "#84cc16", descricao: "Captura luz + produz alimento.", exemplos: ["Alface", "Espinafre"], fotoUrl: folhaImg },
-      { id: "flor", rotulo: "Flor", emoji: "🌻", percentual: 20, cor: "#f59e0b", descricao: "Reprodução.", exemplos: ["Girassol", "Rosa"], fotoUrl: florImg },
-      { id: "fruto", rotulo: "Fruto", emoji: "🍅", percentual: 20, cor: "#ef4444", descricao: "Protege sementes.", exemplos: ["Tomate", "Maçã"], fotoUrl: tomateImg },
+      { id: "sub", rotulo: "Parte subterrânea (raiz)", emoji: "🥕", percentual: 25, cor: "#b45309", descricao: "Fixa a planta e absorve água e nutrientes do solo.", exemplos: ["Cenoura", "Mandioca"], fotoUrl: cenouraImg },
+      { id: "aer", rotulo: "Parte aérea (caule, folha, flor, fruto)", emoji: "🌿", percentual: 75, cor: "#10b981", descricao: "Sustenta, capta luz, se reproduz e produz frutos com sementes.", exemplos: ["Tronco", "Alface", "Girassol", "Tomate"], fotoUrl: plantaImg },
     ],
     falaFinal: "Todas as partes trabalham em equipe.",
   },

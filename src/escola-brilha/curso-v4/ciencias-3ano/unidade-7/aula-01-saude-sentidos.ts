@@ -165,10 +165,8 @@ export const aula01: AulaGeoV1 = {
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: pausaImg,
     fatias: [
-      { id: "pausa", rotulo: "Pausas nas telas", emoji: "⏸️", percentual: 30, cor: "#0ea5e9", descricao: "20-20: a cada 20 min, olhar 20 seg longe.", exemplos: ["Timer", "Janela"], fotoUrl: pausaImg },
-      { id: "vol", rotulo: "Volume moderado", emoji: "🔉", percentual: 30, cor: "#10b981", descricao: "Metade da barra ou menos, especialmente com fone.", exemplos: ["Fone", "Caixa de som"], fotoUrl: foneImg },
-      { id: "luz", rotulo: "Boa iluminação", emoji: "💡", percentual: 20, cor: "#f59e0b", descricao: "Nunca ler ou usar tela no escuro.", exemplos: ["Luz de leitura"], fotoUrl: oculosImg },
-      { id: "higi", rotulo: "Higiene", emoji: "🧼", percentual: 20, cor: "#ec4899", descricao: "Não esfregar os olhos com mão suja, nem enfiar nada no ouvido.", exemplos: ["Mãos limpas"], fotoUrl: oculosImg },
+      { id: "olhos", rotulo: "Cuidados com os olhos", emoji: "👁️", percentual: 50, cor: "#0ea5e9", descricao: "Pausas 20-20, boa iluminação, distância da tela, mãos limpas.", exemplos: ["Regra 20-20", "Luz acesa", "Óculos"], fotoUrl: pausaImg },
+      { id: "ouvidos", rotulo: "Cuidados com os ouvidos", emoji: "👂", percentual: 50, cor: "#10b981", descricao: "Volume moderado, evitar ruídos altos, nunca introduzir objetos.", exemplos: ["Volume 50%", "Sem cotonete"], fotoUrl: foneImg },
     ],
     falaFinal: "Hábitos simples que salvam sentidos.",
   },
