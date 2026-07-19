@@ -1,11 +1,14 @@
 // Ingles 2º Ano — Unit 7 "Around the World 🌍"
 // Revisão global do 2º ano: rotina, casa, comida, roupa, comunidade, hobbies.
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
 import airportAsset from "@/assets/ingles-1ano/u1-a02/airport.png.asset.json";
-import friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png";
-import morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png";
+import __asset_friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png.asset.json";
+const friendsImg = __asset_friendsImg.url;
+import __asset_morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png.asset.json";
+const morningImg = __asset_morningImg.url;
 import type { LessonData } from "../../ingles-1ano/types";
 
 const LILY = lilyImg;

@@ -1,10 +1,13 @@
 // Ingles 2º Ano — Unit 5 "My Community 🏘️"
 // Lugares do bairro, profissões, "Where is...?", "It's next to..."
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
-import schoolImg from "@/assets/ingles-1ano/u1-a01/school.png";
-import teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png";
+import __asset_schoolImg from "@/assets/ingles-1ano/u1-a01/school.png.asset.json";
+const schoolImg = __asset_schoolImg.url;
+import __asset_teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png.asset.json";
+const teacherImg = __asset_teacherImg.url;
 import type { LessonData } from "../../ingles-1ano/types";
 
 const LILY = lilyImg;

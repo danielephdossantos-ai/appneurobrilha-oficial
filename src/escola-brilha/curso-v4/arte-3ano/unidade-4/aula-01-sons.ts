@@ -1,16 +1,26 @@
 import type { AulaArteV1 } from "../../types";
-import mapaPraca from "@/assets/arte-3ano/u4-mapa-praca.jpg";
-import mapaFloresta from "@/assets/arte-3ano/u4-mapa-floresta.jpg";
-import mapaCidade from "@/assets/arte-3ano/u4-mapa-cidade.jpg";
-import mapaGravador from "@/assets/arte-3ano/u4-mapa-gravador.jpg";
-import vocabPaisagem from "@/assets/arte-3ano/u4-vocab-paisagem.jpg";
-import vocabNatural from "@/assets/arte-3ano/u4-vocab-natural.jpg";
-import vocabArtificial from "@/assets/arte-3ano/u4-vocab-artificial.jpg";
+import __asset_mapaPraca from "@/assets/arte-3ano/u4-mapa-praca.jpg.asset.json";
+const mapaPraca = __asset_mapaPraca.url;
+import __asset_mapaFloresta from "@/assets/arte-3ano/u4-mapa-floresta.jpg.asset.json";
+const mapaFloresta = __asset_mapaFloresta.url;
+import __asset_mapaCidade from "@/assets/arte-3ano/u4-mapa-cidade.jpg.asset.json";
+const mapaCidade = __asset_mapaCidade.url;
+import __asset_mapaGravador from "@/assets/arte-3ano/u4-mapa-gravador.jpg.asset.json";
+const mapaGravador = __asset_mapaGravador.url;
+import __asset_vocabPaisagem from "@/assets/arte-3ano/u4-vocab-paisagem.jpg.asset.json";
+const vocabPaisagem = __asset_vocabPaisagem.url;
+import __asset_vocabNatural from "@/assets/arte-3ano/u4-vocab-natural.jpg.asset.json";
+const vocabNatural = __asset_vocabNatural.url;
+import __asset_vocabArtificial from "@/assets/arte-3ano/u4-vocab-artificial.jpg.asset.json";
+const vocabArtificial = __asset_vocabArtificial.url;
 import vocabIntensidade from "@/assets/arte-3ano/u4-vocab-intensidade.jpg";
-import nosOndas from "@/assets/arte-3ano/u4-nos-ondas.jpg";
-import nosLancha from "@/assets/arte-3ano/u4-nos-lancha.jpg";
+import __asset_nosOndas from "@/assets/arte-3ano/u4-nos-ondas.jpg.asset.json";
+const nosOndas = __asset_nosOndas.url;
+import __asset_nosLancha from "@/assets/arte-3ano/u4-nos-lancha.jpg.asset.json";
+const nosLancha = __asset_nosLancha.url;
 import nosGaivotas from "@/assets/arte-3ano/u4-nos-gaivotas.jpg";
-import quizTrovao from "@/assets/arte-3ano/u4-quiz-trovao.jpg";
+import __asset_quizTrovao from "@/assets/arte-3ano/u4-quiz-trovao.jpg.asset.json";
+const quizTrovao = __asset_quizTrovao.url;
 
 /**
  * Arte · 3º Ano · Unidade 4 · Aula 01 — "Paisagens Sonoras"

@@ -1,20 +1,30 @@
 import type { AulaArteV1 } from "../../types";
-import mapaRavena from "@/assets/arte-5ano/u5-mapa-ravena.jpg";
-import mapaGaudi from "@/assets/arte-5ano/u5-mapa-gaudi.jpg";
-import mapaTesselas from "@/assets/arte-5ano/u5-mapa-tesselas.jpg";
-import mapaRomano from "@/assets/arte-5ano/u5-mapa-romano.jpg";
+import __asset_mapaRavena from "@/assets/arte-5ano/u5-mapa-ravena.jpg.asset.json";
+const mapaRavena = __asset_mapaRavena.url;
+import __asset_mapaGaudi from "@/assets/arte-5ano/u5-mapa-gaudi.jpg.asset.json";
+const mapaGaudi = __asset_mapaGaudi.url;
+import __asset_mapaTesselas from "@/assets/arte-5ano/u5-mapa-tesselas.jpg.asset.json";
+const mapaTesselas = __asset_mapaTesselas.url;
+import __asset_mapaRomano from "@/assets/arte-5ano/u5-mapa-romano.jpg.asset.json";
+const mapaRomano = __asset_mapaRomano.url;
 import vocabTessela from "@/assets/arte-5ano/u5-vocab-tessela.jpg";
-import vocabAndamento from "@/assets/arte-5ano/u5-vocab-andamento.jpg";
-import vocabMosaico from "@/assets/arte-5ano/u5-vocab-mosaico.jpg";
-import vocabRejunte from "@/assets/arte-5ano/u5-vocab-rejunte.jpg";
+import __asset_vocabAndamento from "@/assets/arte-5ano/u5-vocab-andamento.jpg.asset.json";
+const vocabAndamento = __asset_vocabAndamento.url;
+import __asset_vocabMosaico from "@/assets/arte-5ano/u5-vocab-mosaico.jpg.asset.json";
+const vocabMosaico = __asset_vocabMosaico.url;
+import __asset_vocabRejunte from "@/assets/arte-5ano/u5-vocab-rejunte.jpg.asset.json";
+const vocabRejunte = __asset_vocabRejunte.url;
 import matRevista from "@/assets/arte-5ano/u5-mat-revista.jpg";
 import matVidro from "@/assets/arte-5ano/u5-mat-vidro.jpg";
-import matOuro from "@/assets/arte-5ano/u5-mat-ouro.jpg";
+import __asset_matOuro from "@/assets/arte-5ano/u5-mat-ouro.jpg.asset.json";
+const matOuro = __asset_matOuro.url;
 import passo1 from "@/assets/arte-5ano/u5-passo1.jpg";
 import passo2 from "@/assets/arte-5ano/u5-passo2.jpg";
 import passo3 from "@/assets/arte-5ano/u5-passo3.jpg";
-import passo4 from "@/assets/arte-5ano/u5-passo4.jpg";
-import passo5 from "@/assets/arte-5ano/u5-passo5.jpg";
+import __asset_passo4 from "@/assets/arte-5ano/u5-passo4.jpg.asset.json";
+const passo4 = __asset_passo4.url;
+import __asset_passo5 from "@/assets/arte-5ano/u5-passo5.jpg.asset.json";
+const passo5 = __asset_passo5.url;
 
 /**
  * Arte · 5º Ano · Unidade 5 · Aula 01 — "A Arquitetura dos Mosaicos e a Fragmentação da Imagem"

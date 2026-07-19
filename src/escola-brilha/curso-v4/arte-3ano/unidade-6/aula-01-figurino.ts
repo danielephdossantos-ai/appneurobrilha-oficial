@@ -1,16 +1,27 @@
 import type { AulaArteV1 } from "../../types";
-import mapaBau from "@/assets/arte-3ano/u6-mapa-bau.jpg";
-import mapaMascara from "@/assets/arte-3ano/u6-mapa-mascara.jpg";
-import mapaCroqui from "@/assets/arte-3ano/u6-mapa-croqui.jpg";
-import mapaPalco from "@/assets/arte-3ano/u6-mapa-palco.jpg";
-import vocabFigurino from "@/assets/arte-3ano/u6-vocab-figurino.jpg";
-import vocabFigurinista from "@/assets/arte-3ano/u6-vocab-figurinista.jpg";
-import vocabAderecos from "@/assets/arte-3ano/u6-vocab-aderecos.jpg";
-import vocabPersonagem from "@/assets/arte-3ano/u6-vocab-personagem.jpg";
-import nosCoroa from "@/assets/arte-3ano/u6-nos-coroa.jpg";
-import nosPirata from "@/assets/arte-3ano/u6-nos-pirata.jpg";
+import __asset_mapaBau from "@/assets/arte-3ano/u6-mapa-bau.jpg.asset.json";
+const mapaBau = __asset_mapaBau.url;
+import __asset_mapaMascara from "@/assets/arte-3ano/u6-mapa-mascara.jpg.asset.json";
+const mapaMascara = __asset_mapaMascara.url;
+import __asset_mapaCroqui from "@/assets/arte-3ano/u6-mapa-croqui.jpg.asset.json";
+const mapaCroqui = __asset_mapaCroqui.url;
+import __asset_mapaPalco from "@/assets/arte-3ano/u6-mapa-palco.jpg.asset.json";
+const mapaPalco = __asset_mapaPalco.url;
+import __asset_vocabFigurino from "@/assets/arte-3ano/u6-vocab-figurino.jpg.asset.json";
+const vocabFigurino = __asset_vocabFigurino.url;
+import __asset_vocabFigurinista from "@/assets/arte-3ano/u6-vocab-figurinista.jpg.asset.json";
+const vocabFigurinista = __asset_vocabFigurinista.url;
+import __asset_vocabAderecos from "@/assets/arte-3ano/u6-vocab-aderecos.jpg.asset.json";
+const vocabAderecos = __asset_vocabAderecos.url;
+import __asset_vocabPersonagem from "@/assets/arte-3ano/u6-vocab-personagem.jpg.asset.json";
+const vocabPersonagem = __asset_vocabPersonagem.url;
+import __asset_nosCoroa from "@/assets/arte-3ano/u6-nos-coroa.jpg.asset.json";
+const nosCoroa = __asset_nosCoroa.url;
+import __asset_nosPirata from "@/assets/arte-3ano/u6-nos-pirata.jpg.asset.json";
+const nosPirata = __asset_nosPirata.url;
 import nosJaleco from "@/assets/arte-3ano/u6-nos-jaleco.jpg";
-import passoMascara from "@/assets/arte-3ano/u6-passo-mascara.jpg";
+import __asset_passoMascara from "@/assets/arte-3ano/u6-passo-mascara.jpg.asset.json";
+const passoMascara = __asset_passoMascara.url;
 
 /**
  * Arte · 3º Ano · Unidade 6 · Aula 01 — "Figurino e Teatro"

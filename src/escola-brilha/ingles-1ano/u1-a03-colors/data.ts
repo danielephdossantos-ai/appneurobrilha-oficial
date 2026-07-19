@@ -5,7 +5,8 @@
 import coverAsset from "@/assets/ingles-1ano/u1-a03/cover-rainbow.png.asset.json";
 import roomAsset from "@/assets/ingles-1ano/u1-a03/room-colors.png.asset.json";
 import dogAsset from "@/assets/ingles-1ano/u1-a03/dog-red-balloon.png.asset.json";
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import type { LessonData } from "../types";
 
 const coverImg = coverAsset.url;

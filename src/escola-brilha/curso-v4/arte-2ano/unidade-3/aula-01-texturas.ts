@@ -1,20 +1,28 @@
 import type { AulaArteV1 } from "../../types";
-import vocabAspero from "@/assets/arte-2ano/u3-vocab-aspero.jpg";
-import vocabLiso from "@/assets/arte-2ano/u3-vocab-liso.jpg";
+import __asset_vocabAspero from "@/assets/arte-2ano/u3-vocab-aspero.jpg.asset.json";
+const vocabAspero = __asset_vocabAspero.url;
+import __asset_vocabLiso from "@/assets/arte-2ano/u3-vocab-liso.jpg.asset.json";
+const vocabLiso = __asset_vocabLiso.url;
 import vocabMacio from "@/assets/arte-2ano/u3-vocab-macio.jpg";
 import vocabFrotagem from "@/assets/arte-2ano/u3-vocab-frotagem.jpg";
-import pigMadeira from "@/assets/arte-2ano/u3-pig-madeira.jpg";
-import pigFolha from "@/assets/arte-2ano/u3-pig-folha.jpg";
-import pigMoeda from "@/assets/arte-2ano/u3-pig-moeda.jpg";
-import pigTijolo from "@/assets/arte-2ano/u3-pig-tijolo.jpg";
+import __asset_pigMadeira from "@/assets/arte-2ano/u3-pig-madeira.jpg.asset.json";
+const pigMadeira = __asset_pigMadeira.url;
+import __asset_pigFolha from "@/assets/arte-2ano/u3-pig-folha.jpg.asset.json";
+const pigFolha = __asset_pigFolha.url;
+import __asset_pigMoeda from "@/assets/arte-2ano/u3-pig-moeda.jpg.asset.json";
+const pigMoeda = __asset_pigMoeda.url;
+import __asset_pigTijolo from "@/assets/arte-2ano/u3-pig-tijolo.jpg.asset.json";
+const pigTijolo = __asset_pigTijolo.url;
 import animalOvelha from "@/assets/arte-2ano/u3-animal-ovelha.jpg";
 import animalPeixe from "@/assets/arte-2ano/u3-animal-peixe.jpg";
-import animalTatu from "@/assets/arte-2ano/u3-animal-tatu.jpg";
+import __asset_animalTatu from "@/assets/arte-2ano/u3-animal-tatu.jpg.asset.json";
+const animalTatu = __asset_animalTatu.url;
 import passo1Img from "@/assets/arte-2ano/u3-passo1-folha.jpg";
 import passo2Img from "@/assets/arte-2ano/u3-passo2-papel.jpg";
 import passo3Img from "@/assets/arte-2ano/u3-passo3-lapis.jpg";
 import passo4Img from "@/assets/arte-2ano/u3-passo4-esfregar.jpg";
-import passo5Img from "@/assets/arte-2ano/u3-passo5-magico.jpg";
+import __asset_passo5Img from "@/assets/arte-2ano/u3-passo5-magico.jpg.asset.json";
+const passo5Img = __asset_passo5Img.url;
 
 
 /**

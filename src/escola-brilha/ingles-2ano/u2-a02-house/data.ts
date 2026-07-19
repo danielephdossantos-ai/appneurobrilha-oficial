@@ -1,7 +1,8 @@
 // Ingles 2º Ano — Unit 2 "My House 🏠"
 // Cômodos, móveis, "This is my ...", "There is a ... in the ..."
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
 import roomAsset from "@/assets/ingles-1ano/u1-a03/room-colors.png.asset.json";
 import type { LessonData } from "../../ingles-1ano/types";

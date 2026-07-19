@@ -4,10 +4,13 @@
 // + PACK (Build Buddy) + COMMANDS (Simon Says) + MEMORY + CULTURE
 // + BOOK (My Happy Body Book) + VIRTUAL_ROOM (Missão Final).
 
-import buddyAsset from "@/assets/ingles-1ano/u1-a06/buddy.png";
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_buddyAsset from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
+const buddyAsset = __asset_buddyAsset.url;
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
-import teacherEmilyAsset from "@/assets/ingles-1ano/u1-a05/teacher-emily.png";
+import __asset_teacherEmilyAsset from "@/assets/ingles-1ano/u1-a05/teacher-emily.png.asset.json";
+const teacherEmilyAsset = __asset_teacherEmilyAsset.url;
 import parkAsset from "@/assets/ingles-1ano/u1-a05/school.png"; // fallback cena externa
 import type { LessonData } from "../types";
 

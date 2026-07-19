@@ -1,11 +1,15 @@
 // Ingles 2º Ano — Unit 1 "Welcome Back! My Daily Routine" ☀️
 // Rotina diária: wake up, brush teeth, eat breakfast, go to school, come home, go to bed.
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
-import teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png";
-import schoolImg from "@/assets/ingles-1ano/u1-a01/school.png";
-import morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png";
+import __asset_teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png.asset.json";
+const teacherImg = __asset_teacherImg.url;
+import __asset_schoolImg from "@/assets/ingles-1ano/u1-a01/school.png.asset.json";
+const schoolImg = __asset_schoolImg.url;
+import __asset_morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png.asset.json";
+const morningImg = __asset_morningImg.url;
 import type { LessonData } from "../../ingles-1ano/types";
 
 const LILY = lilyImg;

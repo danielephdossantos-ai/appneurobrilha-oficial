@@ -1,12 +1,18 @@
 // Dados da aula: Ingles 1º Ano — Unit 1, Aula 01 "Hello!"
 // Método SPEB: Ver → Ouvir → Repetir → Ler → Escrever → Conversar → Jogar → Revisar → Usar.
 
-import helloImg from "@/assets/ingles-1ano/u1-a01/hello-wave.png";
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
-import teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png";
-import friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png";
-import morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png";
-import schoolImg from "@/assets/ingles-1ano/u1-a01/school.png";
+import __asset_helloImg from "@/assets/ingles-1ano/u1-a01/hello-wave.png.asset.json";
+const helloImg = __asset_helloImg.url;
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
+import __asset_teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png.asset.json";
+const teacherImg = __asset_teacherImg.url;
+import __asset_friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png.asset.json";
+const friendsImg = __asset_friendsImg.url;
+import __asset_morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png.asset.json";
+const morningImg = __asset_morningImg.url;
+import __asset_schoolImg from "@/assets/ingles-1ano/u1-a01/school.png.asset.json";
+const schoolImg = __asset_schoolImg.url;
 import type { LessonData } from "../types";
 
 const lesson: LessonData = {
