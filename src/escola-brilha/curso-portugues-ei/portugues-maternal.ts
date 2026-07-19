@@ -5,10 +5,7 @@ import { url as bebe } from "@/assets/neuro-treino/objetos/bebe.png.asset.json";
 import { url as mae } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as chuva } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
 import { url as abraco } from "@/assets/neuro-treino/objetos/abraco.png.asset.json";
-import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
-import { url as mamadeira } from "@/assets/neuro-treino/objetos/mamadeira.png.asset.json";
 
 /**
  * Maternal (3-4 anos) — Unidade 1 · Aula 1
