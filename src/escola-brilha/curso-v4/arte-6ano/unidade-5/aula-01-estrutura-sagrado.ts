@@ -1,11 +1,18 @@
 import type { AulaArteV1 } from "../../types";
-import valeDosReis from "@/assets/arte-6ano/u6-vale-dos-reis.jpg";
-import entradaTumba from "@/assets/arte-6ano/u6-entrada-tumba.jpg";
-import faraoPintura from "@/assets/arte-6ano/u6-fara-pintura.jpg";
-import leiFrontalidade from "@/assets/arte-6ano/u6-lei-frontalidade.jpg";
-import canoneProporcao from "@/assets/arte-6ano/u6-canone-proporcao.jpg";
-import perspectivaHierarquica from "@/assets/arte-6ano/u6-perspectiva-hierarquica.jpg";
-import pigmentosEgito from "@/assets/arte-6ano/u6-pigmentos-egito.jpg";
+import __asset_valeDosReis from "@/assets/arte-6ano/u6-vale-dos-reis.jpg.asset.json";
+const valeDosReis = __asset_valeDosReis.url;
+import __asset_entradaTumba from "@/assets/arte-6ano/u6-entrada-tumba.jpg.asset.json";
+const entradaTumba = __asset_entradaTumba.url;
+import __asset_faraoPintura from "@/assets/arte-6ano/u6-fara-pintura.jpg.asset.json";
+const faraoPintura = __asset_faraoPintura.url;
+import __asset_leiFrontalidade from "@/assets/arte-6ano/u6-lei-frontalidade.jpg.asset.json";
+const leiFrontalidade = __asset_leiFrontalidade.url;
+import __asset_canoneProporcao from "@/assets/arte-6ano/u6-canone-proporcao.jpg.asset.json";
+const canoneProporcao = __asset_canoneProporcao.url;
+import __asset_perspectivaHierarquica from "@/assets/arte-6ano/u6-perspectiva-hierarquica.jpg.asset.json";
+const perspectivaHierarquica = __asset_perspectivaHierarquica.url;
+import __asset_pigmentosEgito from "@/assets/arte-6ano/u6-pigmentos-egito.jpg.asset.json";
+const pigmentosEgito = __asset_pigmentosEgito.url;
 import paletaEscriba from "@/assets/arte-6ano/u6-paleta-escriba.jpg";
 
 /**

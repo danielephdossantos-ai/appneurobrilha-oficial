@@ -4,11 +4,16 @@
 // + COMMANDS (Follow the Teacher) + PACK (Pack My Backpack)
 // + MEMORY + CULTURE + BOOK (My School Album) + VIRTUAL_ROOM (Missão Final).
 
-import schoolAsset from "@/assets/ingles-1ano/u1-a05/school.png";
-import classroomAsset from "@/assets/ingles-1ano/u1-a05/classroom.png";
-import backpackOpenAsset from "@/assets/ingles-1ano/u1-a05/backpack-open.png";
-import teacherEmilyAsset from "@/assets/ingles-1ano/u1-a05/teacher-emily.png";
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_schoolAsset from "@/assets/ingles-1ano/u1-a05/school.png.asset.json";
+const schoolAsset = __asset_schoolAsset.url;
+import __asset_classroomAsset from "@/assets/ingles-1ano/u1-a05/classroom.png.asset.json";
+const classroomAsset = __asset_classroomAsset.url;
+import __asset_backpackOpenAsset from "@/assets/ingles-1ano/u1-a05/backpack-open.png.asset.json";
+const backpackOpenAsset = __asset_backpackOpenAsset.url;
+import __asset_teacherEmilyAsset from "@/assets/ingles-1ano/u1-a05/teacher-emily.png.asset.json";
+const teacherEmilyAsset = __asset_teacherEmilyAsset.url;
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
 import type { LessonData } from "../types";
 

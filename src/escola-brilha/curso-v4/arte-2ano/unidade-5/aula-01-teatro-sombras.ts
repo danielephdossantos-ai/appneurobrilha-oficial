@@ -1,20 +1,32 @@
 import type { AulaArteV1 } from "../../types";
-import vocabSombra from "@/assets/arte-2ano/u5-vocab-sombra.jpg";
+import __asset_vocabSombra from "@/assets/arte-2ano/u5-vocab-sombra.jpg.asset.json";
+const vocabSombra = __asset_vocabSombra.url;
 import vocabSilhueta from "@/assets/arte-2ano/u5-vocab-silhueta.jpg";
-import vocabTela from "@/assets/arte-2ano/u5-vocab-tela.jpg";
+import __asset_vocabTela from "@/assets/arte-2ano/u5-vocab-tela.jpg.asset.json";
+const vocabTela = __asset_vocabTela.url;
 import vocabPersonagem from "@/assets/arte-2ano/u5-vocab-personagem.jpg";
-import pigDragao from "@/assets/arte-2ano/u5-pig-dragao.jpg";
-import pigPrincesa from "@/assets/arte-2ano/u5-pig-princesa.jpg";
-import pigArvore from "@/assets/arte-2ano/u5-pig-arvore.jpg";
-import pigTela from "@/assets/arte-2ano/u5-pig-tela.jpg";
+import __asset_pigDragao from "@/assets/arte-2ano/u5-pig-dragao.jpg.asset.json";
+const pigDragao = __asset_pigDragao.url;
+import __asset_pigPrincesa from "@/assets/arte-2ano/u5-pig-princesa.jpg.asset.json";
+const pigPrincesa = __asset_pigPrincesa.url;
+import __asset_pigArvore from "@/assets/arte-2ano/u5-pig-arvore.jpg.asset.json";
+const pigArvore = __asset_pigArvore.url;
+import __asset_pigTela from "@/assets/arte-2ano/u5-pig-tela.jpg.asset.json";
+const pigTela = __asset_pigTela.url;
 import animalGirafa from "@/assets/arte-2ano/u5-animal-girafa.jpg";
-import animalElefante5 from "@/assets/arte-2ano/u5-animal-elefante.jpg";
-import animalMorcego from "@/assets/arte-2ano/u5-animal-morcego.jpg";
-import u5passo1 from "@/assets/arte-2ano/u5-passo1-lencol.jpg";
-import u5passo2 from "@/assets/arte-2ano/u5-passo2-escuro.jpg";
+import __asset_animalElefante5 from "@/assets/arte-2ano/u5-animal-elefante.jpg.asset.json";
+const animalElefante5 = __asset_animalElefante5.url;
+import __asset_animalMorcego from "@/assets/arte-2ano/u5-animal-morcego.jpg.asset.json";
+const animalMorcego = __asset_animalMorcego.url;
+import __asset_u5passo1 from "@/assets/arte-2ano/u5-passo1-lencol.jpg.asset.json";
+const u5passo1 = __asset_u5passo1.url;
+import __asset_u5passo2 from "@/assets/arte-2ano/u5-passo2-escuro.jpg.asset.json";
+const u5passo2 = __asset_u5passo2.url;
 import u5passo3 from "@/assets/arte-2ano/u5-passo3-lanterna.jpg";
-import u5passo4 from "@/assets/arte-2ano/u5-passo4-bonecos.jpg";
-import u5passo5 from "@/assets/arte-2ano/u5-passo5-historia.jpg";
+import __asset_u5passo4 from "@/assets/arte-2ano/u5-passo4-bonecos.jpg.asset.json";
+const u5passo4 = __asset_u5passo4.url;
+import __asset_u5passo5 from "@/assets/arte-2ano/u5-passo5-historia.jpg.asset.json";
+const u5passo5 = __asset_u5passo5.url;
 
 
 /**

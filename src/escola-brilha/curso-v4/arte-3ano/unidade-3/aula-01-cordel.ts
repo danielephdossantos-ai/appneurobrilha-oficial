@@ -1,17 +1,29 @@
 import type { AulaArteV1 } from "../../types";
-import mapaCordeis from "@/assets/arte-3ano/u3-mapa-cordeis.jpg";
-import mapaMatriz from "@/assets/arte-3ano/u3-mapa-matriz.jpg";
-import mapaXilogravura from "@/assets/arte-3ano/u3-mapa-xilogravura.jpg";
-import mapaGoiva from "@/assets/arte-3ano/u3-mapa-goiva.jpg";
-import vocabCordel from "@/assets/arte-3ano/u3-vocab-cordel.jpg";
-import vocabGravura from "@/assets/arte-3ano/u3-vocab-gravura.jpg";
-import vocabMatriz from "@/assets/arte-3ano/u3-vocab-matriz.jpg";
-import vocabPoesia from "@/assets/arte-3ano/u3-vocab-poesia.jpg";
+import __asset_mapaCordeis from "@/assets/arte-3ano/u3-mapa-cordeis.jpg.asset.json";
+const mapaCordeis = __asset_mapaCordeis.url;
+import __asset_mapaMatriz from "@/assets/arte-3ano/u3-mapa-matriz.jpg.asset.json";
+const mapaMatriz = __asset_mapaMatriz.url;
+import __asset_mapaXilogravura from "@/assets/arte-3ano/u3-mapa-xilogravura.jpg.asset.json";
+const mapaXilogravura = __asset_mapaXilogravura.url;
+import __asset_mapaGoiva from "@/assets/arte-3ano/u3-mapa-goiva.jpg.asset.json";
+const mapaGoiva = __asset_mapaGoiva.url;
+import __asset_vocabCordel from "@/assets/arte-3ano/u3-vocab-cordel.jpg.asset.json";
+const vocabCordel = __asset_vocabCordel.url;
+import __asset_vocabGravura from "@/assets/arte-3ano/u3-vocab-gravura.jpg.asset.json";
+const vocabGravura = __asset_vocabGravura.url;
+import __asset_vocabMatriz from "@/assets/arte-3ano/u3-vocab-matriz.jpg.asset.json";
+const vocabMatriz = __asset_vocabMatriz.url;
+import __asset_vocabPoesia from "@/assets/arte-3ano/u3-vocab-poesia.jpg.asset.json";
+const vocabPoesia = __asset_vocabPoesia.url;
 import passo1 from "@/assets/arte-3ano/u3-passo1-batata.jpg";
-import passo2 from "@/assets/arte-3ano/u3-passo2-isopor.jpg";
-import passo3 from "@/assets/arte-3ano/u3-passo3-tinta.jpg";
-import passo4 from "@/assets/arte-3ano/u3-passo4-carimbo.jpg";
-import cotidianoCarimbo from "@/assets/arte-3ano/u3-cotidiano-carimbo.jpg";
+import __asset_passo2 from "@/assets/arte-3ano/u3-passo2-isopor.jpg.asset.json";
+const passo2 = __asset_passo2.url;
+import __asset_passo3 from "@/assets/arte-3ano/u3-passo3-tinta.jpg.asset.json";
+const passo3 = __asset_passo3.url;
+import __asset_passo4 from "@/assets/arte-3ano/u3-passo4-carimbo.jpg.asset.json";
+const passo4 = __asset_passo4.url;
+import __asset_cotidianoCarimbo from "@/assets/arte-3ano/u3-cotidiano-carimbo.jpg.asset.json";
+const cotidianoCarimbo = __asset_cotidianoCarimbo.url;
 
 /**
  * Arte · 3º Ano · Unidade 3 · Aula 01 — "Xilogravura e Cordel"

@@ -1,20 +1,30 @@
 import type { AulaArteV1 } from "../../types";
-import vocabRitmo from "@/assets/arte-2ano/u4-vocab-ritmo.jpg";
-import vocabGrave from "@/assets/arte-2ano/u4-vocab-grave.jpg";
+import __asset_vocabRitmo from "@/assets/arte-2ano/u4-vocab-ritmo.jpg.asset.json";
+const vocabRitmo = __asset_vocabRitmo.url;
+import __asset_vocabGrave from "@/assets/arte-2ano/u4-vocab-grave.jpg.asset.json";
+const vocabGrave = __asset_vocabGrave.url;
 import vocabAgudo from "@/assets/arte-2ano/u4-vocab-agudo.jpg";
 import vocabPercussao from "@/assets/arte-2ano/u4-vocab-percussao.jpg";
 import pigPeito from "@/assets/arte-2ano/u4-pig-peito.jpg";
 import pigBoca from "@/assets/arte-2ano/u4-pig-boca.jpg";
-import pigCoxa from "@/assets/arte-2ano/u4-pig-coxa.jpg";
-import pigVoz from "@/assets/arte-2ano/u4-pig-voz.jpg";
-import animalLeao from "@/assets/arte-2ano/u4-animal-leao.jpg";
-import animalPassarinho from "@/assets/arte-2ano/u4-animal-passarinho.jpg";
-import animalElefante from "@/assets/arte-2ano/u4-animal-elefante.jpg";
+import __asset_pigCoxa from "@/assets/arte-2ano/u4-pig-coxa.jpg.asset.json";
+const pigCoxa = __asset_pigCoxa.url;
+import __asset_pigVoz from "@/assets/arte-2ano/u4-pig-voz.jpg.asset.json";
+const pigVoz = __asset_pigVoz.url;
+import __asset_animalLeao from "@/assets/arte-2ano/u4-animal-leao.jpg.asset.json";
+const animalLeao = __asset_animalLeao.url;
+import __asset_animalPassarinho from "@/assets/arte-2ano/u4-animal-passarinho.jpg.asset.json";
+const animalPassarinho = __asset_animalPassarinho.url;
+import __asset_animalElefante from "@/assets/arte-2ano/u4-animal-elefante.jpg.asset.json";
+const animalElefante = __asset_animalElefante.url;
 import passo1Img from "@/assets/arte-2ano/u4-passo1-palma.jpg";
-import passo2Img from "@/assets/arte-2ano/u4-passo2-coxa.jpg";
+import __asset_passo2Img from "@/assets/arte-2ano/u4-passo2-coxa.jpg.asset.json";
+const passo2Img = __asset_passo2Img.url;
 import passo3Img from "@/assets/arte-2ano/u4-passo3-estalo.jpg";
-import passo4Img from "@/assets/arte-2ano/u4-passo4-pe.jpg";
-import passo5Img from "@/assets/arte-2ano/u4-passo5-musica.jpg";
+import __asset_passo4Img from "@/assets/arte-2ano/u4-passo4-pe.jpg.asset.json";
+const passo4Img = __asset_passo4Img.url;
+import __asset_passo5Img from "@/assets/arte-2ano/u4-passo5-musica.jpg.asset.json";
+const passo5Img = __asset_passo5Img.url;
 
 
 /**

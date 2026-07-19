@@ -1,14 +1,24 @@
 import type { AulaArteV1 } from "../../types";
-import fallingwaterExt from "@/assets/arte-7ano/u3-fallingwater-exterior.jpg";
-import fallingwaterInt from "@/assets/arte-7ano/u3-fallingwater-interior.jpg";
-import casaBatllo from "@/assets/arte-7ano/u3-casa-batllo.jpg";
-import sagradaColunas from "@/assets/arte-7ano/u3-sagrada-familia-colunas.jpg";
-import milwaukeeMuseum from "@/assets/arte-7ano/u3-milwaukee-museum.jpg";
-import favoMel from "@/assets/arte-7ano/u3-favo-mel-fachada.jpg";
-import vitoriaRegia from "@/assets/arte-7ano/u3-vitoria-regia.jpg";
-import nautilus from "@/assets/arte-7ano/u3-nautilus-espiral.jpg";
-import sementeGeom from "@/assets/arte-7ano/u3-semente-geometrica.jpg";
-import boscoVerticale from "@/assets/arte-7ano/u3-bosco-verticale.jpg";
+import __asset_fallingwaterExt from "@/assets/arte-7ano/u3-fallingwater-exterior.jpg.asset.json";
+const fallingwaterExt = __asset_fallingwaterExt.url;
+import __asset_fallingwaterInt from "@/assets/arte-7ano/u3-fallingwater-interior.jpg.asset.json";
+const fallingwaterInt = __asset_fallingwaterInt.url;
+import __asset_casaBatllo from "@/assets/arte-7ano/u3-casa-batllo.jpg.asset.json";
+const casaBatllo = __asset_casaBatllo.url;
+import __asset_sagradaColunas from "@/assets/arte-7ano/u3-sagrada-familia-colunas.jpg.asset.json";
+const sagradaColunas = __asset_sagradaColunas.url;
+import __asset_milwaukeeMuseum from "@/assets/arte-7ano/u3-milwaukee-museum.jpg.asset.json";
+const milwaukeeMuseum = __asset_milwaukeeMuseum.url;
+import __asset_favoMel from "@/assets/arte-7ano/u3-favo-mel-fachada.jpg.asset.json";
+const favoMel = __asset_favoMel.url;
+import __asset_vitoriaRegia from "@/assets/arte-7ano/u3-vitoria-regia.jpg.asset.json";
+const vitoriaRegia = __asset_vitoriaRegia.url;
+import __asset_nautilus from "@/assets/arte-7ano/u3-nautilus-espiral.jpg.asset.json";
+const nautilus = __asset_nautilus.url;
+import __asset_sementeGeom from "@/assets/arte-7ano/u3-semente-geometrica.jpg.asset.json";
+const sementeGeom = __asset_sementeGeom.url;
+import __asset_boscoVerticale from "@/assets/arte-7ano/u3-bosco-verticale.jpg.asset.json";
+const boscoVerticale = __asset_boscoVerticale.url;
 
 /**
  * Arte · 7º Ano · Unidade 3 · Aula 01 — "Arquitetura Orgânica e Cidades Sustentáveis"

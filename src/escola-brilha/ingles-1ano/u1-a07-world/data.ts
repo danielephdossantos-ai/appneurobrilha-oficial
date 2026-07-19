@@ -2,18 +2,26 @@
 // Revisão geral do 1º ano: Greetings + Colors + Animals + Family + School
 // + Body/Feelings. Projeto: My First English Adventure Book.
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
-import teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png";
-import friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png";
-import schoolCoverImg from "@/assets/ingles-1ano/u1-a01/school.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
+import __asset_teacherImg from "@/assets/ingles-1ano/u1-a01/teacher.png.asset.json";
+const teacherImg = __asset_teacherImg.url;
+import __asset_friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png.asset.json";
+const friendsImg = __asset_friendsImg.url;
+import __asset_schoolCoverImg from "@/assets/ingles-1ano/u1-a01/school.png.asset.json";
+const schoolCoverImg = __asset_schoolCoverImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
 import rainbowAsset from "@/assets/ingles-1ano/u1-a03/cover-rainbow.png.asset.json";
 import dogAsset from "@/assets/ingles-1ano/u1-a03/dog-red-balloon.png.asset.json";
 import roomColorsAsset from "@/assets/ingles-1ano/u1-a03/room-colors.png.asset.json";
-import classroomImg from "@/assets/ingles-1ano/u1-a05/classroom.png";
-import backpackImg from "@/assets/ingles-1ano/u1-a05/backpack-open.png";
-import teacherEmilyImg from "@/assets/ingles-1ano/u1-a05/teacher-emily.png";
-import buddyImg from "@/assets/ingles-1ano/u1-a06/buddy.png";
+import __asset_classroomImg from "@/assets/ingles-1ano/u1-a05/classroom.png.asset.json";
+const classroomImg = __asset_classroomImg.url;
+import __asset_backpackImg from "@/assets/ingles-1ano/u1-a05/backpack-open.png.asset.json";
+const backpackImg = __asset_backpackImg.url;
+import __asset_teacherEmilyImg from "@/assets/ingles-1ano/u1-a05/teacher-emily.png.asset.json";
+const teacherEmilyImg = __asset_teacherEmilyImg.url;
+import __asset_buddyImg from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
+const buddyImg = __asset_buddyImg.url;
 import type { LessonData } from "../types";
 
 const LILY = lilyImg;

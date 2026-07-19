@@ -1,16 +1,28 @@
 import type { AulaArteV1 } from "../../types";
-import mapaMural from "@/assets/arte-3ano/u7-mapa-mural.jpg";
-import mapaSpray from "@/assets/arte-3ano/u7-mapa-spray.jpg";
-import mapaGrafiteiro from "@/assets/arte-3ano/u7-mapa-grafiteiro.jpg";
-import mapaCaverna from "@/assets/arte-3ano/u7-mapa-caverna.jpg";
-import vocabGrafite from "@/assets/arte-3ano/u7-vocab-grafite.jpg";
-import vocabMuralismo from "@/assets/arte-3ano/u7-vocab-muralismo.jpg";
-import vocabEstencil from "@/assets/arte-3ano/u7-vocab-estencil.jpg";
-import vocabUrbano from "@/assets/arte-3ano/u7-vocab-urbano.jpg";
-import nosRupestre from "@/assets/arte-3ano/u7-nos-rupestre.jpg";
-import nosGrafiteUrbano from "@/assets/arte-3ano/u7-nos-grafite-urbano.jpg";
-import nosCacada from "@/assets/arte-3ano/u7-nos-cacada.jpg";
-import passoEsboco from "@/assets/arte-3ano/u7-passo-esboco.jpg";
+import __asset_mapaMural from "@/assets/arte-3ano/u7-mapa-mural.jpg.asset.json";
+const mapaMural = __asset_mapaMural.url;
+import __asset_mapaSpray from "@/assets/arte-3ano/u7-mapa-spray.jpg.asset.json";
+const mapaSpray = __asset_mapaSpray.url;
+import __asset_mapaGrafiteiro from "@/assets/arte-3ano/u7-mapa-grafiteiro.jpg.asset.json";
+const mapaGrafiteiro = __asset_mapaGrafiteiro.url;
+import __asset_mapaCaverna from "@/assets/arte-3ano/u7-mapa-caverna.jpg.asset.json";
+const mapaCaverna = __asset_mapaCaverna.url;
+import __asset_vocabGrafite from "@/assets/arte-3ano/u7-vocab-grafite.jpg.asset.json";
+const vocabGrafite = __asset_vocabGrafite.url;
+import __asset_vocabMuralismo from "@/assets/arte-3ano/u7-vocab-muralismo.jpg.asset.json";
+const vocabMuralismo = __asset_vocabMuralismo.url;
+import __asset_vocabEstencil from "@/assets/arte-3ano/u7-vocab-estencil.jpg.asset.json";
+const vocabEstencil = __asset_vocabEstencil.url;
+import __asset_vocabUrbano from "@/assets/arte-3ano/u7-vocab-urbano.jpg.asset.json";
+const vocabUrbano = __asset_vocabUrbano.url;
+import __asset_nosRupestre from "@/assets/arte-3ano/u7-nos-rupestre.jpg.asset.json";
+const nosRupestre = __asset_nosRupestre.url;
+import __asset_nosGrafiteUrbano from "@/assets/arte-3ano/u7-nos-grafite-urbano.jpg.asset.json";
+const nosGrafiteUrbano = __asset_nosGrafiteUrbano.url;
+import __asset_nosCacada from "@/assets/arte-3ano/u7-nos-cacada.jpg.asset.json";
+const nosCacada = __asset_nosCacada.url;
+import __asset_passoEsboco from "@/assets/arte-3ano/u7-passo-esboco.jpg.asset.json";
+const passoEsboco = __asset_passoEsboco.url;
 
 /**
  * Arte · 3º Ano · Unidade 7 · Aula 01 — "Grafite e Muralismo"

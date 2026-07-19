@@ -1,20 +1,29 @@
 import type { AulaArteV1 } from "../../types";
 import vocabReta from "@/assets/arte-2ano/u2-vocab-reta.jpg";
-import vocabCurva from "@/assets/arte-2ano/u2-vocab-curva.jpg";
-import vocabForma from "@/assets/arte-2ano/u2-vocab-forma.jpg";
+import __asset_vocabCurva from "@/assets/arte-2ano/u2-vocab-curva.jpg.asset.json";
+const vocabCurva = __asset_vocabCurva.url;
+import __asset_vocabForma from "@/assets/arte-2ano/u2-vocab-forma.jpg.asset.json";
+const vocabForma = __asset_vocabForma.url;
 import vocabContorno from "@/assets/arte-2ano/u2-vocab-contorno.jpg";
-import pigKandinsky from "@/assets/arte-2ano/u2-pig-kandinsky.jpg";
-import pigMondrian from "@/assets/arte-2ano/u2-pig-mondrian.jpg";
+import __asset_pigKandinsky from "@/assets/arte-2ano/u2-pig-kandinsky.jpg.asset.json";
+const pigKandinsky = __asset_pigKandinsky.url;
+import __asset_pigMondrian from "@/assets/arte-2ano/u2-pig-mondrian.jpg.asset.json";
+const pigMondrian = __asset_pigMondrian.url;
 import pigTriangulo from "@/assets/arte-2ano/u2-pig-triangulo.jpg";
 import pigRetangulo from "@/assets/arte-2ano/u2-pig-retangulo.jpg";
-import objPizza from "@/assets/arte-2ano/u2-obj-pizza.jpg";
-import objBola from "@/assets/arte-2ano/u2-obj-bola.jpg";
+import __asset_objPizza from "@/assets/arte-2ano/u2-obj-pizza.jpg.asset.json";
+const objPizza = __asset_objPizza.url;
+import __asset_objBola from "@/assets/arte-2ano/u2-obj-bola.jpg.asset.json";
+const objBola = __asset_objBola.url;
 import objPorta from "@/assets/arte-2ano/u2-obj-porta.jpg";
 import passo1Img from "@/assets/arte-2ano/u2-passo1-quadrado.jpg";
 import passo2Img from "@/assets/arte-2ano/u2-passo2-triangulo.jpg";
-import passo3Img from "@/assets/arte-2ano/u2-passo3-porta.jpg";
-import passo4Img from "@/assets/arte-2ano/u2-passo4-janela.jpg";
-import passo5Img from "@/assets/arte-2ano/u2-passo5-sol.jpg";
+import __asset_passo3Img from "@/assets/arte-2ano/u2-passo3-porta.jpg.asset.json";
+const passo3Img = __asset_passo3Img.url;
+import __asset_passo4Img from "@/assets/arte-2ano/u2-passo4-janela.jpg.asset.json";
+const passo4Img = __asset_passo4Img.url;
+import __asset_passo5Img from "@/assets/arte-2ano/u2-passo5-sol.jpg.asset.json";
+const passo5Img = __asset_passo5Img.url;
 
 /**
  * Arte · 2º Ano · Unidade 2 · Aula 01 — "Linhas, Formas e o Desenho Geométrico"

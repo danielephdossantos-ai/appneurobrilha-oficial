@@ -1,17 +1,30 @@
 import type { AulaArteV1 } from "../../types";
-import stonehengeGeral from "@/assets/arte-6ano/u3m-stonehenge-geral.jpg";
-import carnacAlinhamento from "@/assets/arte-6ano/u3m-carnac-alinhamento.jpg";
-import trilito from "@/assets/arte-6ano/u3m-trilito.jpg";
-import menir from "@/assets/arte-6ano/u3m-menir.jpg";
-import dolmen from "@/assets/arte-6ano/u3m-dolmen.jpg";
-import cromlech from "@/assets/arte-6ano/u3m-cromlech.jpg";
-import solsticio from "@/assets/arte-6ano/u3m-solsticio.jpg";
-import blocosConstrucao from "@/assets/arte-6ano/u3m-blocos-construcao.jpg";
-import arqueologo from "@/assets/arte-6ano/u3m-arqueologo.jpg";
-import nivelBolha from "@/assets/arte-6ano/u3m-nivel-bolha.jpg";
-import prumo from "@/assets/arte-6ano/u3m-prumo.jpg";
-import relogioSol from "@/assets/arte-6ano/u3m-relogio-sol.jpg";
-import varaSombra from "@/assets/arte-6ano/u3m-vara-sombra.jpg";
+import __asset_stonehengeGeral from "@/assets/arte-6ano/u3m-stonehenge-geral.jpg.asset.json";
+const stonehengeGeral = __asset_stonehengeGeral.url;
+import __asset_carnacAlinhamento from "@/assets/arte-6ano/u3m-carnac-alinhamento.jpg.asset.json";
+const carnacAlinhamento = __asset_carnacAlinhamento.url;
+import __asset_trilito from "@/assets/arte-6ano/u3m-trilito.jpg.asset.json";
+const trilito = __asset_trilito.url;
+import __asset_menir from "@/assets/arte-6ano/u3m-menir.jpg.asset.json";
+const menir = __asset_menir.url;
+import __asset_dolmen from "@/assets/arte-6ano/u3m-dolmen.jpg.asset.json";
+const dolmen = __asset_dolmen.url;
+import __asset_cromlech from "@/assets/arte-6ano/u3m-cromlech.jpg.asset.json";
+const cromlech = __asset_cromlech.url;
+import __asset_solsticio from "@/assets/arte-6ano/u3m-solsticio.jpg.asset.json";
+const solsticio = __asset_solsticio.url;
+import __asset_blocosConstrucao from "@/assets/arte-6ano/u3m-blocos-construcao.jpg.asset.json";
+const blocosConstrucao = __asset_blocosConstrucao.url;
+import __asset_arqueologo from "@/assets/arte-6ano/u3m-arqueologo.jpg.asset.json";
+const arqueologo = __asset_arqueologo.url;
+import __asset_nivelBolha from "@/assets/arte-6ano/u3m-nivel-bolha.jpg.asset.json";
+const nivelBolha = __asset_nivelBolha.url;
+import __asset_prumo from "@/assets/arte-6ano/u3m-prumo.jpg.asset.json";
+const prumo = __asset_prumo.url;
+import __asset_relogioSol from "@/assets/arte-6ano/u3m-relogio-sol.jpg.asset.json";
+const relogioSol = __asset_relogioSol.url;
+import __asset_varaSombra from "@/assets/arte-6ano/u3m-vara-sombra.jpg.asset.json";
+const varaSombra = __asset_varaSombra.url;
 
 /**
  * Arte · 6º Ano · Unidade 3 · Aula 01 — "A Geometria dos Monumentos"

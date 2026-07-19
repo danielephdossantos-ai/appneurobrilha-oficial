@@ -1,16 +1,26 @@
 import type { AulaArteV1 } from "../../types";
-import mapaEstatua from "@/assets/arte-3ano/u5-mapa-estatua.jpg";
-import mapaArgila from "@/assets/arte-3ano/u5-mapa-argila.jpg";
-import mapaMarmore from "@/assets/arte-3ano/u5-mapa-marmore.jpg";
-import mapaMadeira from "@/assets/arte-3ano/u5-mapa-madeira.jpg";
-import vocabEscultura from "@/assets/arte-3ano/u5-vocab-escultura.jpg";
+import __asset_mapaEstatua from "@/assets/arte-3ano/u5-mapa-estatua.jpg.asset.json";
+const mapaEstatua = __asset_mapaEstatua.url;
+import __asset_mapaArgila from "@/assets/arte-3ano/u5-mapa-argila.jpg.asset.json";
+const mapaArgila = __asset_mapaArgila.url;
+import __asset_mapaMarmore from "@/assets/arte-3ano/u5-mapa-marmore.jpg.asset.json";
+const mapaMarmore = __asset_mapaMarmore.url;
+import __asset_mapaMadeira from "@/assets/arte-3ano/u5-mapa-madeira.jpg.asset.json";
+const mapaMadeira = __asset_mapaMadeira.url;
+import __asset_vocabEscultura from "@/assets/arte-3ano/u5-vocab-escultura.jpg.asset.json";
+const vocabEscultura = __asset_vocabEscultura.url;
 import vocabBidimensional from "@/assets/arte-3ano/u5-vocab-bidimensional.jpg";
 import vocabTridimensional from "@/assets/arte-3ano/u5-vocab-tridimensional.jpg";
-import vocabVolume from "@/assets/arte-3ano/u5-vocab-volume.jpg";
-import nosPintura from "@/assets/arte-3ano/u5-nos-pintura.jpg";
-import nosVaso from "@/assets/arte-3ano/u5-nos-vaso.jpg";
-import nosGrafite from "@/assets/arte-3ano/u5-nos-grafite.jpg";
-import cotidianoBoneco from "@/assets/arte-3ano/u5-cotidiano-boneco.jpg";
+import __asset_vocabVolume from "@/assets/arte-3ano/u5-vocab-volume.jpg.asset.json";
+const vocabVolume = __asset_vocabVolume.url;
+import __asset_nosPintura from "@/assets/arte-3ano/u5-nos-pintura.jpg.asset.json";
+const nosPintura = __asset_nosPintura.url;
+import __asset_nosVaso from "@/assets/arte-3ano/u5-nos-vaso.jpg.asset.json";
+const nosVaso = __asset_nosVaso.url;
+import __asset_nosGrafite from "@/assets/arte-3ano/u5-nos-grafite.jpg.asset.json";
+const nosGrafite = __asset_nosGrafite.url;
+import __asset_cotidianoBoneco from "@/assets/arte-3ano/u5-cotidiano-boneco.jpg.asset.json";
+const cotidianoBoneco = __asset_cotidianoBoneco.url;
 
 /**
  * Arte · 3º Ano · Unidade 5 · Aula 01 — "Escultura e Tridimensionalidade"

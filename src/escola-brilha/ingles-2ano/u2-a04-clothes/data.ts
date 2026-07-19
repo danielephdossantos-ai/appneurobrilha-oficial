@@ -1,9 +1,11 @@
 // Ingles 2º Ano — Unit 4 "Clothes and Weather 👕☀️"
 // Roupas, tempo, "It's sunny / I'm wearing..."
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
-import morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png";
+import __asset_morningImg from "@/assets/ingles-1ano/u1-a01/good-morning.png.asset.json";
+const morningImg = __asset_morningImg.url;
 import type { LessonData } from "../../ingles-1ano/types";
 
 const LILY = lilyImg;

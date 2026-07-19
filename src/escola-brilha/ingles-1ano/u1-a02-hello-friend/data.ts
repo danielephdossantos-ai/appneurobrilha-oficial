@@ -10,7 +10,8 @@ import eveningAsset from "@/assets/ingles-1ano/u1-a02/good-evening.png.asset.jso
 import goodbyeAsset from "@/assets/ingles-1ano/u1-a02/goodbye.png.asset.json";
 import niceToMeetAsset from "@/assets/ingles-1ano/u1-a02/nice-to-meet-you.png.asset.json";
 import passportAsset from "@/assets/ingles-1ano/u1-a02/passport.png.asset.json";
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import type { LessonData } from "../types";
 
 const airport = airportAsset.url;

@@ -1,9 +1,11 @@
 // Ingles 2º Ano — Unit 6 "Hobbies and Sports ⚽"
 // "I can / I can't", esportes e hobbies
 
-import lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png";
+import __asset_lilyImg from "@/assets/ingles-1ano/u1-a01/lily.png.asset.json";
+const lilyImg = __asset_lilyImg.url;
 import benAsset from "@/assets/ingles-1ano/u1-a02/ben.png.asset.json";
-import friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png";
+import __asset_friendsImg from "@/assets/ingles-1ano/u1-a01/friends.png.asset.json";
+const friendsImg = __asset_friendsImg.url;
 import type { LessonData } from "../../ingles-1ano/types";
 
 const LILY = lilyImg;

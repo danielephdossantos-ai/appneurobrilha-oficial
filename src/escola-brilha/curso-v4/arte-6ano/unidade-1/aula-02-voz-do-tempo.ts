@@ -1,20 +1,33 @@
 import type { AulaArteV1 } from "../../types";
-import cantoKraho from "@/assets/arte-6ano/u2-canto-kraho.jpg";
-import ancianoNarrando from "@/assets/arte-6ano/u2-anciao-narrando.jpg";
-import avoCozinha from "@/assets/arte-6ano/u2-avo-cozinha.jpg";
-import ribeirinha from "@/assets/arte-6ano/u2-ribeirinha.jpg";
-import gravador from "@/assets/arte-6ano/u2-gravador.jpg";
-import carta1910 from "@/assets/arte-6ano/u2-carta-1910.jpg";
-import patrimonio from "@/assets/arte-6ano/u2-patrimonio-imaterial.jpg";
-import etnoHistoriador from "@/assets/arte-6ano/u2-etno-historiador.jpg";
+import __asset_cantoKraho from "@/assets/arte-6ano/u2-canto-kraho.jpg.asset.json";
+const cantoKraho = __asset_cantoKraho.url;
+import __asset_ancianoNarrando from "@/assets/arte-6ano/u2-anciao-narrando.jpg.asset.json";
+const ancianoNarrando = __asset_ancianoNarrando.url;
+import __asset_avoCozinha from "@/assets/arte-6ano/u2-avo-cozinha.jpg.asset.json";
+const avoCozinha = __asset_avoCozinha.url;
+import __asset_ribeirinha from "@/assets/arte-6ano/u2-ribeirinha.jpg.asset.json";
+const ribeirinha = __asset_ribeirinha.url;
+import __asset_gravador from "@/assets/arte-6ano/u2-gravador.jpg.asset.json";
+const gravador = __asset_gravador.url;
+import __asset_carta1910 from "@/assets/arte-6ano/u2-carta-1910.jpg.asset.json";
+const carta1910 = __asset_carta1910.url;
+import __asset_patrimonio from "@/assets/arte-6ano/u2-patrimonio-imaterial.jpg.asset.json";
+const patrimonio = __asset_patrimonio.url;
+import __asset_etnoHistoriador from "@/assets/arte-6ano/u2-etno-historiador.jpg.asset.json";
+const etnoHistoriador = __asset_etnoHistoriador.url;
 import ondaSonora from "@/assets/arte-6ano/u2-onda-sonora.jpg";
-import feiraAntiga from "@/assets/arte-6ano/u2-feira-antiga.jpg";
-import decreto from "@/assets/arte-6ano/u2-decreto.jpg";
-import passoGravar from "@/assets/arte-6ano/u2-passo-gravar.jpg";
-import cadernoNotas from "@/assets/arte-6ano/u2-caderno-notas.jpg";
+import __asset_feiraAntiga from "@/assets/arte-6ano/u2-feira-antiga.jpg.asset.json";
+const feiraAntiga = __asset_feiraAntiga.url;
+import __asset_decreto from "@/assets/arte-6ano/u2-decreto.jpg.asset.json";
+const decreto = __asset_decreto.url;
+import __asset_passoGravar from "@/assets/arte-6ano/u2-passo-gravar.jpg.asset.json";
+const passoGravar = __asset_passoGravar.url;
+import __asset_cadernoNotas from "@/assets/arte-6ano/u2-caderno-notas.jpg.asset.json";
+const cadernoNotas = __asset_cadernoNotas.url;
 // amuletoEco e linhaSonora são referenciados na cena10 abaixo
 import linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg";
-import amuletoEco from "@/assets/arte-6ano/u2-amuleto-eco.jpg";
+import __asset_amuletoEco from "@/assets/arte-6ano/u2-amuleto-eco.jpg.asset.json";
+const amuletoEco = __asset_amuletoEco.url;
 
 /**
  * Arte · 6º Ano · Unidade 1 · Aula 02 — "A Voz do Tempo"
