@@ -15,12 +15,18 @@ import __asset_stonehengeGeral from "@/assets/arte-6ano/u3m-stonehenge-geral.jpg
 const stonehengeGeral = __asset_stonehengeGeral.url;
 import __asset_arqueologo from "@/assets/arte-6ano/u3m-arqueologo.jpg.asset.json";
 const arqueologo = __asset_arqueologo.url;
-import codiceGrafismos from "@/assets/arte-6ano/u3-codice-grafismos.jpg";
-import internetAbstracao from "@/assets/arte-6ano/u3-internet-abstracao.jpg";
-import mascaraSanxingdui from "@/assets/arte-6ano/u5-mascara-sanxingdui.jpg";
-import espadaBronze from "@/assets/arte-6ano/u5-espada-bronze.jpg";
-import anelPrata from "@/assets/arte-6ano/u5-anel-prata.jpg";
-import linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg";
+import __asset_codiceGrafismos from "@/assets/arte-6ano/u3-codice-grafismos.jpg.asset.json";
+const codiceGrafismos = __asset_codiceGrafismos.url;
+import __asset_internetAbstracao from "@/assets/arte-6ano/u3-internet-abstracao.jpg.asset.json";
+const internetAbstracao = __asset_internetAbstracao.url;
+import __asset_mascaraSanxingdui from "@/assets/arte-6ano/u5-mascara-sanxingdui.jpg.asset.json";
+const mascaraSanxingdui = __asset_mascaraSanxingdui.url;
+import __asset_espadaBronze from "@/assets/arte-6ano/u5-espada-bronze.jpg.asset.json";
+const espadaBronze = __asset_espadaBronze.url;
+import __asset_anelPrata from "@/assets/arte-6ano/u5-anel-prata.jpg.asset.json";
+const anelPrata = __asset_anelPrata.url;
+import __asset_linhaSonora from "@/assets/arte-6ano/u2-linha-sonora.jpg.asset.json";
+const linhaSonora = __asset_linhaSonora.url;
 
 /**
  * Arte · 6º Ano · Unidade 6 · Aula 01 — "O Códice Decifrado"

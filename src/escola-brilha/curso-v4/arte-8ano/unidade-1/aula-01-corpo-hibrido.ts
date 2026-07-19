@@ -7,7 +7,8 @@ import __asset_arduinoDiy from "@/assets/arte-8ano/u1-arduino-diy.jpg.asset.json
 const arduinoDiy = __asset_arduinoDiy.url;
 import __asset_performanceGaleria from "@/assets/arte-8ano/u1-performance-galeria.jpg.asset.json";
 const performanceGaleria = __asset_performanceGaleria.url;
-import oculosCobre from "@/assets/arte-8ano/u1-oculos-cobre.jpg";
+import __asset_oculosCobre from "@/assets/arte-8ano/u1-oculos-cobre.jpg.asset.json";
+const oculosCobre = __asset_oculosCobre.url;
 import __asset_jaquetaSensor from "@/assets/arte-8ano/u1-jaqueta-sensor.jpg.asset.json";
 const jaquetaSensor = __asset_jaquetaSensor.url;
 import __asset_luvaPoetica from "@/assets/arte-8ano/u1-luva-poetica.jpg.asset.json";
@@ -26,14 +27,16 @@ import __asset_materiaisReciclados from "@/assets/arte-8ano/u1-materiais-recicla
 const materiaisReciclados = __asset_materiaisReciclados.url;
 import __asset_anatomiaBraco from "@/assets/arte-8ano/u1-anatomia-braco.jpg.asset.json";
 const anatomiaBraco = __asset_anatomiaBraco.url;
-import passo1 from "@/assets/arte-8ano/u1-passo1.jpg";
+import __asset_passo1 from "@/assets/arte-8ano/u1-passo1.jpg.asset.json";
+const passo1 = __asset_passo1.url;
 import __asset_passo2 from "@/assets/arte-8ano/u1-passo2.jpg.asset.json";
 const passo2 = __asset_passo2.url;
 import __asset_passo3 from "@/assets/arte-8ano/u1-passo3.jpg.asset.json";
 const passo3 = __asset_passo3.url;
 import __asset_passo4 from "@/assets/arte-8ano/u1-passo4.jpg.asset.json";
 const passo4 = __asset_passo4.url;
-import passo5 from "@/assets/arte-8ano/u1-passo5.jpg";
+import __asset_passo5 from "@/assets/arte-8ano/u1-passo5.jpg.asset.json";
+const passo5 = __asset_passo5.url;
 import __asset_ciberAtivista from "@/assets/arte-8ano/u1-ciber-ativista.jpg.asset.json";
 const ciberAtivista = __asset_ciberAtivista.url;
 

@@ -9,8 +9,10 @@ import __asset_mapaMadeira from "@/assets/arte-3ano/u5-mapa-madeira.jpg.asset.js
 const mapaMadeira = __asset_mapaMadeira.url;
 import __asset_vocabEscultura from "@/assets/arte-3ano/u5-vocab-escultura.jpg.asset.json";
 const vocabEscultura = __asset_vocabEscultura.url;
-import vocabBidimensional from "@/assets/arte-3ano/u5-vocab-bidimensional.jpg";
-import vocabTridimensional from "@/assets/arte-3ano/u5-vocab-tridimensional.jpg";
+import __asset_vocabBidimensional from "@/assets/arte-3ano/u5-vocab-bidimensional.jpg.asset.json";
+const vocabBidimensional = __asset_vocabBidimensional.url;
+import __asset_vocabTridimensional from "@/assets/arte-3ano/u5-vocab-tridimensional.jpg.asset.json";
+const vocabTridimensional = __asset_vocabTridimensional.url;
 import __asset_vocabVolume from "@/assets/arte-3ano/u5-vocab-volume.jpg.asset.json";
 const vocabVolume = __asset_vocabVolume.url;
 import __asset_nosPintura from "@/assets/arte-3ano/u5-nos-pintura.jpg.asset.json";

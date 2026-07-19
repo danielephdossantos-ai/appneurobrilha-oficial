@@ -11,8 +11,10 @@ import __asset_vocabPersistencia from "@/assets/arte-4ano/u4-vocab-persistencia.
 const vocabPersistencia = __asset_vocabPersistencia.url;
 import __asset_vocabTaumatropio from "@/assets/arte-4ano/u4-vocab-taumatropio.jpg.asset.json";
 const vocabTaumatropio = __asset_vocabTaumatropio.url;
-import vocabFrame from "@/assets/arte-4ano/u4-vocab-frame.jpg";
-import vocabFps from "@/assets/arte-4ano/u4-vocab-fps.jpg";
+import __asset_vocabFrame from "@/assets/arte-4ano/u4-vocab-frame.jpg.asset.json";
+const vocabFrame = __asset_vocabFrame.url;
+import __asset_vocabFps from "@/assets/arte-4ano/u4-vocab-fps.jpg.asset.json";
+const vocabFps = __asset_vocabFps.url;
 import __asset_matBloco from "@/assets/arte-4ano/u4-mat-blocoNotas.jpg.asset.json";
 const matBloco = __asset_matBloco.url;
 import __asset_matCartao from "@/assets/arte-4ano/u4-mat-cartaoElastico.jpg.asset.json";

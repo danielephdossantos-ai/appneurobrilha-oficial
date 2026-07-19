@@ -13,12 +13,14 @@ import __asset_vocabNatural from "@/assets/arte-3ano/u4-vocab-natural.jpg.asset.
 const vocabNatural = __asset_vocabNatural.url;
 import __asset_vocabArtificial from "@/assets/arte-3ano/u4-vocab-artificial.jpg.asset.json";
 const vocabArtificial = __asset_vocabArtificial.url;
-import vocabIntensidade from "@/assets/arte-3ano/u4-vocab-intensidade.jpg";
+import __asset_vocabIntensidade from "@/assets/arte-3ano/u4-vocab-intensidade.jpg.asset.json";
+const vocabIntensidade = __asset_vocabIntensidade.url;
 import __asset_nosOndas from "@/assets/arte-3ano/u4-nos-ondas.jpg.asset.json";
 const nosOndas = __asset_nosOndas.url;
 import __asset_nosLancha from "@/assets/arte-3ano/u4-nos-lancha.jpg.asset.json";
 const nosLancha = __asset_nosLancha.url;
-import nosGaivotas from "@/assets/arte-3ano/u4-nos-gaivotas.jpg";
+import __asset_nosGaivotas from "@/assets/arte-3ano/u4-nos-gaivotas.jpg.asset.json";
+const nosGaivotas = __asset_nosGaivotas.url;
 import __asset_quizTrovao from "@/assets/arte-3ano/u4-quiz-trovao.jpg.asset.json";
 const quizTrovao = __asset_quizTrovao.url;
 

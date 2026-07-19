@@ -9,20 +9,26 @@ import __asset_grafiteRua from "@/assets/arte-7ano/u2-grafite-rua-brasileira.jpg
 const grafiteRua = __asset_grafiteRua.url;
 import __asset_stencilBanksy from "@/assets/arte-7ano/u2-stencil-banksy.jpg.asset.json";
 const stencilBanksy = __asset_stencilBanksy.url;
-import comparacaoMuro from "@/assets/arte-7ano/u2-comparacao-muro.jpg";
+import __asset_comparacaoMuro from "@/assets/arte-7ano/u2-comparacao-muro.jpg.asset.json";
+const comparacaoMuro = __asset_comparacaoMuro.url;
 import __asset_planejamentoComunitario from "@/assets/arte-7ano/u2-planejamento-comunitario.jpg.asset.json";
 const planejamentoComunitario = __asset_planejamentoComunitario.url;
-import latasSpray from "@/assets/arte-7ano/u2-latas-spray.jpg";
-import muralistaAndaime from "@/assets/arte-7ano/u2-muralista-andaime.jpg";
-import pichacaoContraste from "@/assets/arte-7ano/u2-pichacao-contraste.jpg";
+import __asset_latasSpray from "@/assets/arte-7ano/u2-latas-spray.jpg.asset.json";
+const latasSpray = __asset_latasSpray.url;
+import __asset_muralistaAndaime from "@/assets/arte-7ano/u2-muralista-andaime.jpg.asset.json";
+const muralistaAndaime = __asset_muralistaAndaime.url;
+import __asset_pichacaoContraste from "@/assets/arte-7ano/u2-pichacao-contraste.jpg.asset.json";
+const pichacaoContraste = __asset_pichacaoContraste.url;
 import __asset_muralPoluicao from "@/assets/arte-7ano/u2-mural-poluicao-natureza.jpg.asset.json";
 const muralPoluicao = __asset_muralPoluicao.url;
 import __asset_muralDiversidade from "@/assets/arte-7ano/u2-mural-diversidade.jpg.asset.json";
 const muralDiversidade = __asset_muralDiversidade.url;
 import __asset_favelaMural from "@/assets/arte-7ano/u2-favela-mural-colorido.jpg.asset.json";
 const favelaMural = __asset_favelaMural.url;
-import fachadaTransformacao from "@/assets/arte-7ano/u2-fachada-transformacao.jpg";
-import equipeMuralistas from "@/assets/arte-7ano/u2-equipe-muralistas.jpg";
+import __asset_fachadaTransformacao from "@/assets/arte-7ano/u2-fachada-transformacao.jpg.asset.json";
+const fachadaTransformacao = __asset_fachadaTransformacao.url;
+import __asset_equipeMuralistas from "@/assets/arte-7ano/u2-equipe-muralistas.jpg.asset.json";
+const equipeMuralistas = __asset_equipeMuralistas.url;
 
 /**
  * Arte · 7º Ano · Unidade 2 · Aula 01 — "A Cidade como Tela — Muralismo, Grafite e Intervenção Social"
