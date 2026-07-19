@@ -204,12 +204,18 @@ function MomentoRender({
     case "ritmoCorpo": {
       const [count, setCount] = useState(0);
       const target = m.silabas;
+      const silabas = m.palavra.split("-");
       const bater = () => {
+        if (count >= target) return;
         const n = count + 1;
         setCount(n);
+        const sil = silabas[n - 1];
+        if (sil) speak(sil);
         if (n === target) {
-          speak(m.elogio);
-          setTimeout(marcarOk, 500);
+          setTimeout(() => {
+            speak(m.elogio);
+            setTimeout(marcarOk, 900);
+          }, 500);
         }
       };
       return (
@@ -218,19 +224,27 @@ function MomentoRender({
           <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
           <div className="mt-4 grid gap-3">
             <BigListenButton onClick={() => speak(m.instrucaoAudio + " " + m.palavra)} label="Ouvir a palavra" />
-            <div className="flex justify-center gap-2 mt-2">
-              {Array.from({ length: target }).map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-10 h-10 rounded-full border-2 ${
-                    i < count ? "bg-yellow-300 border-yellow-500" : "bg-white border-purple-200"
-                  }`}
-                />
-              ))}
+            <div className="flex justify-center gap-3 mt-2 flex-wrap">
+              {silabas.map((sil, i) => {
+                const aceso = i < count;
+                return (
+                  <div
+                    key={i}
+                    className={`min-w-[3.5rem] h-14 px-3 rounded-full border-2 grid place-items-center font-black text-lg transition-all ${
+                      aceso
+                        ? "bg-yellow-300 border-yellow-500 text-purple-800 scale-110 shadow"
+                        : "bg-white border-purple-200 text-transparent"
+                    }`}
+                  >
+                    {aceso ? sil : "•"}
+                  </div>
+                );
+              })}
             </div>
             <button
               onClick={bater}
-              className="mx-auto mt-2 rounded-full bg-pink-500 text-white px-10 py-6 text-2xl font-black shadow-lg active:scale-90 transition"
+              disabled={count >= target}
+              className="mx-auto mt-2 rounded-full bg-pink-500 text-white px-10 py-6 text-2xl font-black shadow-lg active:scale-90 transition disabled:opacity-60"
             >
               👏 BATE PALMA
             </button>
