@@ -576,27 +576,49 @@ function MomentoRender({
 
 // ============ Utilidades da Fase 3 ============
 
+/**
+ * Converte uma sílaba escrita ("PA", "TO", "MÃE") numa string que o
+ * Web Speech pronuncia como sílaba natural (evita "pê-á", "tê-ó").
+ * Estratégia:
+ *  - lowercase + trailing "."
+ *  - se a última letra é vogal simples (a e i o u), coloca acento tônico
+ *    forçando o TTS a tratar como palavra oxítona ("pá", "pé", "pí", "pó", "pú").
+ *  - se já tem acento ou é sílaba fechada (consoante final), mantém.
+ */
+function silabaParaFala(s: string): string {
+  const raw = s.toLowerCase().trim();
+  if (!raw) return "";
+  // Já tem acento ou nasal? Deixa como está.
+  if (/[áéíóúâêôãõà]/.test(raw)) return raw + ".";
+  const acentos: Record<string, string> = { a: "á", e: "é", i: "í", o: "ó", u: "ú" };
+  const ultima = raw[raw.length - 1];
+  if (acentos[ultima]) {
+    return raw.slice(0, -1) + acentos[ultima] + ".";
+  }
+  // Sílaba fechada tipo "sol", "jar", "dim" — deixa natural.
+  return raw + ".";
+}
+
 /** Fala uma sílaba CV natural, com pausa. */
 function falarSilaba(s: string) {
-  // Já vem em maiúsculas; falamos em minúsculas para o TTS pronunciar como sílaba.
-  speak(s.toLowerCase());
+  speak(silabaParaFala(s));
 }
 
 /** Fala sílabas em sequência com pausa, depois a palavra inteira. */
 function falarBlending(silabas: string[], palavra: string, cb?: () => void) {
   stopSpeaking();
-  const seq = silabas.map((s) => s.toLowerCase());
+  const seq = silabas.map(silabaParaFala);
   let i = 0;
   const step = () => {
     if (i < seq.length) {
-      speakChunked(seq[i], { rate: 0.85, pitch: 1.15 });
+      speakChunked(seq[i], { rate: 0.85, pitch: 1.15, queue: true });
       i++;
-      setTimeout(step, 750);
+      setTimeout(step, 850);
     } else {
       setTimeout(() => {
-        speakChunked(palavra.toLowerCase(), { rate: 0.95, pitch: 1.15 });
+        speakChunked(palavra.toLowerCase(), { rate: 0.95, pitch: 1.15, queue: true });
         if (cb) setTimeout(cb, 600);
-      }, 300);
+      }, 350);
     }
   };
   step();
