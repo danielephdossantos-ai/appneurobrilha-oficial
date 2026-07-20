@@ -215,7 +215,7 @@ const aula08: AulaEI = {
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "M de mãe, de maçã, de mochila!" },
     { tipo: "somDaLetra", letra: "M", som: "M", instrucaoAudio: "M faz um som com a boca fechada.", exemplos: [{ nome: "maçã", imagemUrl: maca }, { nome: "mochila", imagemUrl: mochila }, { nome: "mãe", imagemUrl: mae }], elogio: "M de mãe!" },
     { tipo: "tracadoLetra", letra: "M", instrucaoAudio: "Duas montanhas juntas. Traça o M.", elogio: "Que M forte!" },
-    { tipo: "elkoninBoxes", imagemUrl: mae, palavra: "MAMÃE", fonemas: ["M", "A", "M", "Ã"], instrucaoAudio: "MAMÃE tem quantos sons? Toca uma caixa por vez.", elogio: "4 sons!" },
+    { tipo: "elkoninBoxes", imagemUrl: mae, palavra: "MAMÃE", fonemas: ["M", "A", "M", "Ã", "E"], instrucaoAudio: "MAMÃE tem quantos sons? Toca uma caixa por vez.", elogio: "5 sons!" },
     { tipo: "letrasMoveis", imagemUrl: mamadeira, palavra: "MAMA", distratoras: ["P", "B"], instrucaoAudio: "Monta MAMA.", elogio: "MAMA!" },
     { tipo: "celebracao", medalha: "Escudeiro do M", mascoteUrl: mascote, falaFinal: "Três consoantes dominadas!" },
   ],
