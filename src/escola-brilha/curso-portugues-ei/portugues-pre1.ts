@@ -258,6 +258,363 @@ const aula02: AulaEI = {
   ],
 };
 
+/**
+ * Pré I — Aula 03 · "As rimas do jardim" (EI03EF02)
+ * Consciência fonológica: RIMA como categoria (Heggerty rhyme).
+ */
+const aula03: AulaEI = {
+  slug: "aula-03-rimas-do-jardim",
+  titulo: "As rimas do jardim",
+  icone: "🌸",
+  bncc: ["EI03EF02", "EI03EF08"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Vem cá! Hoje a gente vai brincar de achar palavras que RIMAM. Rimar é quando termina igualzinho!" },
+    { tipo: "escutaRitmada", imagemUrl: flor, versos: [
+      "No jardim tem uma flor, cheirosa como o amor.",
+      "Uma abelha voou, e no mel se esbaldou.",
+      "Rima é assim, tim-tim, som igual chegando ao fim!",
+    ] },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada bichinho do jardim:", itens: [
+      { nome: "flor", imagemUrl: flor },
+      { nome: "abelha", imagemUrl: abelha },
+      { nome: "borboleta", imagemUrl: borboleta },
+    ] },
+    { tipo: "somInicial", instrucaoAudio: "Qual palavra RIMA com FLOR? Escuta o finalzinho: fllll-OR.", referencia: { nome: "flor", imagemUrl: flor }, opcoes: [
+      { nome: "amor (coração)", imagemUrl: coelho, correta: true },
+      { nome: "casa", imagemUrl: casa, correta: false },
+      { nome: "sapo", imagemUrl: sapo, correta: false },
+    ], feedbackAcerto: "Isso! FLOR e AMOR terminam em OR!", feedbackErro: "Escuta o final: fl-OR, am-OR. Iguais!" },
+    { tipo: "somInicial", instrucaoAudio: "Agora: qual rima com GATO?", referencia: { nome: "gato", imagemUrl: gato }, opcoes: [
+      { nome: "sapato (pé)", imagemUrl: sapo, correta: true },
+      { nome: "flor", imagemUrl: flor, correta: false },
+      { nome: "chuva", imagemUrl: chuva, correta: false },
+    ], feedbackAcerto: "Boa! GA-TO / SAPA-TO — ambos terminam em ATO!", feedbackErro: "Escuta o final: ga-TO, sapa-TO." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "BOR-BO-LE-TA", silabas: 4, imagemUrl: borboleta, elogio: "Quatro palmas! Que palavra grande!" },
+    { tipo: "historiaIlustrada", titulo: "A borboleta poeta", cenas: [
+      { imagemUrl: borboleta, narracao: "A borboleta Lila era uma POETA — ela só falava rimando!" },
+      { imagemUrl: flor, narracao: "Ela chegou na flor e disse: 'Bom dia, flor, cheia de cor!'" },
+      { imagemUrl: abelha, narracao: "A abelha achou tão bonito que aprendeu também: 'Meu nome é Zizi, e trabalho aqui!'" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "O que a borboleta Lila fazia de especial?", opcoes: [
+      { nome: "falar rimando", imagemUrl: borboleta, correta: true },
+      { nome: "correr rápido", imagemUrl: cachorro, correta: false },
+      { nome: "cantar alto", imagemUrl: galo, correta: false },
+    ], feedbackAcerto: "Isso! Ela era POETA — falava rimando!", feedbackErro: "Ela falava RIMANDO, todas as palavras combinavam!" },
+    { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Fala pro Brilha: seu nome rima com o quê? Pensa numa palavrinha que termine igual!", exemplos: [
+      { nome: "Lila / vila", imagemUrl: borboleta },
+      { nome: "Léo / véu", imagemUrl: passaro },
+      { nome: "Ana / banana", imagemUrl: flor },
+      { nome: "Bruno / uno", imagemUrl: cachorro },
+    ] },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Brinca de rima no jantar: alguém fala uma palavra, você tenta rimar! Ex: PÃO → MÃO!", dicaAdulto: "Rima é o preditor mais forte de leitura futura. 5 min/dia = alfabetização mais fácil." },
+    { tipo: "celebracao", medalha: "Poeta do Jardim", mascoteUrl: brilha, falaFinal: "Você achou rimas! Suas orelhinhas viraram poetas!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 04 · "O poema da chuva" (EI03EF03)
+ * Escuta atenta de poema. Prosódia + imagem mental.
+ */
+const aula04: AulaEI = {
+  slug: "aula-04-poema-da-chuva",
+  titulo: "O poema da chuva",
+  icone: "🌧️",
+  bncc: ["EI03EF03", "EI03EF02"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Escuta! Está chovendo. Toda chuva é um poema caindo do céu!" },
+    { tipo: "escutaRitmada", imagemUrl: chuva, versos: [
+      "Chuva, chuvinha, chuvarada!",
+      "Molha a rua, molha a estrada.",
+      "Depois vem o sol e faz arco-íris na varanda!",
+    ] },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada palavra do tempo:", itens: [
+      { nome: "chuva", imagemUrl: chuva },
+      { nome: "arco-íris", imagemUrl: arcoIris },
+      { nome: "flor", imagemUrl: flor },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "No poema, o que aparece DEPOIS da chuva?", opcoes: [
+      { nome: "arco-íris", imagemUrl: arcoIris, correta: true },
+      { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "sapo", imagemUrl: sapo, correta: false },
+    ], feedbackAcerto: "Isso! Depois da chuva vem o SOL e o ARCO-ÍRIS!", feedbackErro: "Escuta o final: depois vem o SOL e o ARCO-ÍRIS." },
+    { tipo: "somInicial", instrucaoAudio: "CHUVA começa com CHHH. Qual outra começa com CHHH?", referencia: { nome: "chuva", imagemUrl: chuva }, opcoes: [
+      { nome: "chocalho (agita)", imagemUrl: passaro, correta: true },
+      { nome: "flor", imagemUrl: flor, correta: false },
+      { nome: "gato", imagemUrl: gato, correta: false },
+    ], feedbackAcerto: "Boa! CHHH-uva, CHHH-ocalho!", feedbackErro: "O sopro do início é CHHH." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "CHU-VA", silabas: 2, imagemUrl: chuva, elogio: "Duas palminhas! Chu-va!" },
+    { tipo: "historiaIlustrada", titulo: "A gota Pingo", cenas: [
+      { imagemUrl: chuva, narracao: "A gotinha Pingo estava lá em cima na nuvem, com muitas amigas." },
+      { imagemUrl: flor, narracao: "Ela caiu numa flor e disse: 'Vim molhar você pra crescer forte!'" },
+      { imagemUrl: arcoIris, narracao: "Quando o sol chegou, Pingo se transformou em cores no arco-íris!" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "Em que Pingo se transformou no final?", opcoes: [
+      { nome: "arco-íris", imagemUrl: arcoIris, correta: true },
+      { nome: "árvore", imagemUrl: arvore, correta: false },
+      { nome: "bichinho", imagemUrl: coelho, correta: false },
+    ], feedbackAcerto: "Sim! Virou cor no arco-íris!", feedbackErro: "Pingo virou ARCO-ÍRIS!" },
+    { tipo: "fazDeConta", imagemUrl: chuva, convite: "Faz de conta que é chuva! Estala os dedos ou bate os pezinhos rápido, rápido!" },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Peça pra um adulto ler UM poeminha antes de dormir. Escuta com os olhos fechados!", dicaAdulto: "Escuta de poema desenvolve consciência prosódica — base da leitura fluente." },
+    { tipo: "celebracao", medalha: "Ouvidos de Chuva", mascoteUrl: brilha, falaFinal: "Você escutou cada gotinha do poema! Que atenção linda!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 05 · "Meu passeio predileto" (EI03EF05)
+ * Relatar experiência com sequência (ANTES / DURANTE / DEPOIS).
+ */
+const aula05: AulaEI = {
+  slug: "aula-05-meu-passeio-predileto",
+  titulo: "Meu passeio predileto",
+  icone: "🚶",
+  bncc: ["EI03EF05", "EI03EF01"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Ei! Me conta um passeio LEGAL que você já fez. O Brilha quer ouvir tudinho!" },
+    { tipo: "escutaRitmada", imagemUrl: arcoIris, versos: [
+      "Ontem eu fui, ontem eu vi!",
+      "Andei, brinquei, corri por aí!",
+      "Vou contar direitinho tudo o que eu vivi!",
+    ] },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada lugar de passeio:", itens: [
+      { nome: "parque", imagemUrl: flor },
+      { nome: "casa da vovó", imagemUrl: casa },
+      { nome: "praia", imagemUrl: bola },
+    ] },
+    { tipo: "historiaIlustrada", titulo: "O passeio da Nina", cenas: [
+      { imagemUrl: casa, narracao: "ANTES: Nina acordou e disse: 'Hoje vou pro parque com o papai!'" },
+      { imagemUrl: passaro, narracao: "DURANTE: No parque, subiu no escorregador 5 vezes e viu passarinhos comendo!" },
+      { imagemUrl: flor, narracao: "DEPOIS: Voltou pra casa cansada, mostrou uma flor que achou e comeu bolo!" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "O que a Nina fez no parque?", opcoes: [
+      { nome: "escorregou muitas vezes", imagemUrl: passaro, correta: true },
+      { nome: "dormiu", imagemUrl: chuva, correta: false },
+      { nome: "brigou", imagemUrl: gato, correta: false },
+    ], feedbackAcerto: "Isso! Escorregou 5 vezes!", feedbackErro: "Ela escorregou e viu passarinhos!" },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "PAR-QUE", silabas: 2, imagemUrl: flor, elogio: "Duas palmas! Par-que!" },
+    { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Agora VOCÊ! Conta pro Brilha: aonde você foi passear e o que fez lá? Fala ANTES, DURANTE e DEPOIS!", exemplos: [
+      { nome: "parque com papai", imagemUrl: flor },
+      { nome: "vovó no domingo", imagemUrl: casa },
+      { nome: "praia com a mamãe", imagemUrl: bola },
+      { nome: "passeio na bicicleta", imagemUrl: passaro },
+    ] },
+    { tipo: "fazDeConta", imagemUrl: flor, convite: "Faz de conta que está no parque agora! Balança os braços como se estivesse no balanço!" },
+    { tipo: "somInicial", instrucaoAudio: "PARQUE começa com PPP. Qual outra começa igual?", referencia: { nome: "parque", imagemUrl: flor }, opcoes: [
+      { nome: "peixe", imagemUrl: peixe, correta: true },
+      { nome: "casa", imagemUrl: casa, correta: false },
+      { nome: "gato", imagemUrl: gato, correta: false },
+    ], feedbackAcerto: "Boa! PPP-arque, PPP-eixe!", feedbackErro: "Escuta o sopro do começo: PPP!" },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Na hora de dormir, conta pro adulto o passeio MAIS legal que já fez. Fala ANTES, DURANTE, DEPOIS!", dicaAdulto: "Estruturar narrativa (começo/meio/fim) é essencial para escrita futura." },
+    { tipo: "celebracao", medalha: "Explorador do Dia", mascoteUrl: brilha, falaFinal: "Que passeio legal você contou! Sua boquinha já sabe fazer história!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 06 · "O rei que perdeu a coroa" (EI03EF06)
+ * Criar e recontar história. Manipulação de personagens.
+ */
+const aula06: AulaEI = {
+  slug: "aula-06-rei-perdeu-coroa",
+  titulo: "O rei que perdeu a coroa",
+  icone: "👑",
+  bncc: ["EI03EF06", "EI03EF04"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "O Brilha ouviu uma HISTÓRIA meio maluca... e precisa que você ajude a terminar. Topa?" },
+    { tipo: "escutaRitmada", imagemUrl: arcoIris, versos: [
+      "Era uma vez, era uma vez, um rei que sumiu com a coroa!",
+      "Cadê, cadê? Perdi de vez! Onde será que ela voa?",
+      "Você quem vai me ajudar — vamos a coroa achar!",
+    ] },
+    { tipo: "historiaIlustrada", titulo: "O rei sem coroa", cenas: [
+      { imagemUrl: coelho, narracao: "Era uma vez um rei muito distraído, chamado Rei Coco. Ele adorava sua coroa dourada." },
+      { imagemUrl: flor, narracao: "Um dia, o rei foi ao jardim, tirou a coroa pra cheirar uma flor... e SUMIU!" },
+      { imagemUrl: brilha, narracao: "Aí ele chorou: 'Cadê minha coroa?!' Você sabe onde pode estar?" },
+    ] },
+    { tipo: "rodaConversa", imagemUrl: coelho, pergunta: "Onde você acha que está a coroa do rei? Conta pro Brilha!", exemplos: [
+      { nome: "num ninho de passarinho", imagemUrl: passaro },
+      { nome: "escondida na árvore", imagemUrl: arvore },
+      { nome: "levada por uma abelha", imagemUrl: abelha },
+      { nome: "no fundo do lago", imagemUrl: peixe },
+    ] },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca nos personagens que apareceram:", itens: [
+      { nome: "rei (coelho)", imagemUrl: coelho },
+      { nome: "flor", imagemUrl: flor },
+      { nome: "passarinho", imagemUrl: passaro },
+    ] },
+    { tipo: "somInicial", instrucaoAudio: "REI começa com RRR. Qual outra começa igual?", referencia: { nome: "rei", imagemUrl: coelho }, opcoes: [
+      { nome: "raposa (bicho)", imagemUrl: sapo, correta: true },
+      { nome: "flor", imagemUrl: flor, correta: false },
+      { nome: "gato", imagemUrl: gato, correta: false },
+    ], feedbackAcerto: "Boa! RRR-ei, RRR-aposa!", feedbackErro: "Escuta o rrrronco do começo: RRR!" },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "CO-RO-A", silabas: 3, imagemUrl: coelho, elogio: "Três palminhas! Co-ro-a!" },
+    { tipo: "compreensaoImagem", perguntaAudio: "Onde o rei tirou a coroa da cabeça?", opcoes: [
+      { nome: "no jardim, pra cheirar uma flor", imagemUrl: flor, correta: true },
+      { nome: "no banho", imagemUrl: chuva, correta: false },
+      { nome: "no parque", imagemUrl: bola, correta: false },
+    ], feedbackAcerto: "Isso! No JARDIM, cheirando a flor!", feedbackErro: "Foi no jardim, cheirando uma FLOR." },
+    { tipo: "fazDeConta", imagemUrl: coelho, convite: "Faz de conta que você é o rei procurando! Olha embaixo da mesa, olha atrás da porta!" },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Conta a história do rei sem coroa pra alguém em casa — e INVENTA o final!", dicaAdulto: "Recontar história alimenta memória, imaginação e sintaxe. Aceite todo final inventado." },
+    { tipo: "celebracao", medalha: "Salvador do Reino", mascoteUrl: brilha, falaFinal: "Você achou o final da história! O rei ficou feliz e você ficou GENIAL!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 07 · "O livro é do tamanho do mundo" (EI03EF07 · EI03EF08)
+ * Portadores de texto: livro, revista, receita, bilhete.
+ */
+const aula07: AulaEI = {
+  slug: "aula-07-livro-tamanho-mundo",
+  titulo: "O livro é do tamanho do mundo",
+  icone: "📚",
+  bncc: ["EI03EF07", "EI03EF08"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Olha! O Brilha trouxe TIPOS diferentes de coisas escritas: livro, receita, bilhete... cada um serve pra uma coisa!" },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada suporte de leitura:", itens: [
+      { nome: "livro de história", imagemUrl: coelho },
+      { nome: "receita de bolo", imagemUrl: flor },
+      { nome: "cartinha da vovó", imagemUrl: casa },
+    ] },
+    { tipo: "escutaRitmada", imagemUrl: arcoIris, versos: [
+      "Livro tem história, receita tem bolo!",
+      "Bilhete tem recado, cartaz tem apelo!",
+      "Cada texto tem seu jeito — vamos ler no meu colo!",
+    ] },
+    { tipo: "historiaIlustrada", titulo: "A vovó escreveu", cenas: [
+      { imagemUrl: casa, narracao: "A vovó Lia escreveu uma cartinha pra netinha: 'Venha almoçar domingo!'" },
+      { imagemUrl: flor, narracao: "Depois abriu o LIVRO de receitas e leu: 'Bolo de fubá — 3 ovos, farinha...'" },
+      { imagemUrl: coelho, narracao: "À noite, leu um LIVRO de história pro netinho dormir: 'Era uma vez um coelho...'" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "Onde a vovó leu como fazer o bolo?", opcoes: [
+      { nome: "no livro de receitas", imagemUrl: flor, correta: true },
+      { nome: "na história do coelho", imagemUrl: coelho, correta: false },
+      { nome: "na cartinha", imagemUrl: casa, correta: false },
+    ], feedbackAcerto: "Isso! No livro de RECEITAS!", feedbackErro: "Bolo se aprende no livro de RECEITAS!" },
+    { tipo: "compreensaoImagem", perguntaAudio: "E o que a vovó leu pra o netinho dormir?", opcoes: [
+      { nome: "livro de história", imagemUrl: coelho, correta: true },
+      { nome: "receita", imagemUrl: flor, correta: false },
+      { nome: "cartinha", imagemUrl: casa, correta: false },
+    ], feedbackAcerto: "Isso! Livro de HISTÓRIA!", feedbackErro: "Pra dormir a vovó leu um livro de HISTÓRIA." },
+    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com LLL. Qual outra começa igual?", referencia: { nome: "livro", imagemUrl: coelho }, opcoes: [
+      { nome: "lua (bicho leão)", imagemUrl: gato, correta: true },
+      { nome: "sapo", imagemUrl: sapo, correta: false },
+      { nome: "flor", imagemUrl: flor, correta: false },
+    ], feedbackAcerto: "Boa! LLL-ivro, LLL-eão!", feedbackErro: "O sopro é LLLLL." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LI-VRO", silabas: 2, imagemUrl: coelho, elogio: "Duas palmas! Li-vro!" },
+    { tipo: "fazDeConta", imagemUrl: casa, convite: "Faz de conta que está lendo uma cartinha da vovó! Aponta com o dedinho e finge que lê!" },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Ache em casa 3 coisas escritas DIFERENTES: um livro, uma embalagem e um cartaz!", dicaAdulto: "Cultura escrita se aprende percebendo textos no ambiente (rótulos, placas, bilhetes)." },
+    { tipo: "celebracao", medalha: "Caçador de Textos", mascoteUrl: brilha, falaFinal: "Você já sabe que existem MUITOS tipos de coisa escrita! O mundo é cheio de texto!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 08 · "Meu nome, meu risco" (EI03EF09)
+ * Pré-escrita: reconhecer o nome como palavra especial + traços.
+ */
+const aula08: AulaEI = {
+  slug: "aula-08-meu-nome-meu-risco",
+  titulo: "Meu nome, meu risco",
+  icone: "🖍️",
+  bncc: ["EI03EF09", "EI03EF01"],
+  duracaoMin: 12,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Sabia que seu NOME é uma palavra ESPECIAL? Ninguém escreve igual ao seu! Vamos brincar de risco?" },
+    { tipo: "vocabularioVisual", instrucaoAudio: "Toca no que serve pra escrever:", itens: [
+      { nome: "lápis", imagemUrl: passaro },
+      { nome: "papel", imagemUrl: flor },
+      { nome: "tinta", imagemUrl: arcoIris },
+    ] },
+    { tipo: "escutaRitmada", imagemUrl: brilha, versos: [
+      "Meu nome, meu nome, sou eu que sei!",
+      "Rabisco, rabisco, do jeitinho que quero fazer.",
+      "Cada letra é minha — vamos aprender!",
+    ] },
+    { tipo: "historiaIlustrada", titulo: "O rabisco da Mia", cenas: [
+      { imagemUrl: flor, narracao: "A Mia pegou um giz e riscou um sol grandão." },
+      { imagemUrl: casa, narracao: "Depois riscou uma casa com telhado pontudo." },
+      { imagemUrl: brilha, narracao: "Por último, tentou escrever o próprio nome: M-I-A. Ficou torto, mas era o NOME dela!" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "O que a Mia tentou escrever no final?", opcoes: [
+      { nome: "o próprio nome", imagemUrl: brilha, correta: true },
+      { nome: "uma flor", imagemUrl: flor, correta: false },
+      { nome: "um bicho", imagemUrl: coelho, correta: false },
+    ], feedbackAcerto: "Isso! O NOME dela!", feedbackErro: "Foi o NOME dela: M-I-A!" },
+    { tipo: "somInicial", instrucaoAudio: "MIA começa com MMM. Qual outra começa com MMM?", referencia: { nome: "mia (miau)", imagemUrl: gato }, opcoes: [
+      { nome: "mel (abelha)", imagemUrl: abelha, correta: true },
+      { nome: "flor", imagemUrl: flor, correta: false },
+      { nome: "sapo", imagemUrl: sapo, correta: false },
+    ], feedbackAcerto: "Boa! MMM-ia, MMM-el!", feedbackErro: "O começo é MMMM." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "PA-PEL", silabas: 2, imagemUrl: flor, elogio: "Duas palminhas! Pa-pel!" },
+    { tipo: "fazDeConta", imagemUrl: brilha, convite: "Levanta o dedinho e escreve seu NOME no ar! Bem grande!" },
+    { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Como começa o seu nome? Qual é a primeira letra? Fala pro Brilha!", exemplos: [
+      { nome: "com A", imagemUrl: arcoIris },
+      { nome: "com M", imagemUrl: gato },
+      { nome: "com L", imagemUrl: coelho },
+      { nome: "com P", imagemUrl: peixe },
+    ] },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Peça pra um adulto escrever seu NOME num papel bem grande. Depois tenta copiar do seu jeito!", dicaAdulto: "Reconhecer o próprio nome é o PRIMEIRO passo do letramento formal. Faça caber em rótulos, sapatos, canecas." },
+    { tipo: "celebracao", medalha: "Dono do Meu Nome", mascoteUrl: brilha, falaFinal: "Seu nome é UNICO no mundo! E você já sabe onde ele começa!" },
+  ],
+};
+
+/**
+ * Pré I — Aula 09 · "Festival do Pré I" (revisão)
+ * Integra rima, sílaba, som inicial, narração, leitura.
+ */
+const aula09: AulaEI = {
+  slug: "aula-09-festival-do-pre1",
+  titulo: "Festival do Pré I",
+  icone: "🎪",
+  bncc: ["EI03EF01", "EI03EF02", "EI03EF06", "EI03EF08"],
+  duracaoMin: 14,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "É FESTIVAL! Todas as palavras que aprendemos vieram brincar juntas! Bora?" },
+    { tipo: "escutaRitmada", imagemUrl: arcoIris, versos: [
+      "Flor, chuva, arco-íris no ar!",
+      "Rei, coroa, coelho a passear!",
+      "Meu nome grita: quero brilhar!",
+    ] },
+    { tipo: "somInicial", instrucaoAudio: "Rima com FLOR:", referencia: { nome: "flor", imagemUrl: flor }, opcoes: [
+      { nome: "amor (coração)", imagemUrl: coelho, correta: true },
+      { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "chuva", imagemUrl: chuva, correta: false },
+    ], feedbackAcerto: "FLOR / AMOR!", feedbackErro: "Termina em OR." },
+    { tipo: "somInicial", instrucaoAudio: "Começa com o mesmo som de SAPO:", referencia: { nome: "sapo", imagemUrl: sapo }, opcoes: [
+      { nome: "sol (peixe)", imagemUrl: peixe, correta: false },
+      { nome: "sapato (calçado)", imagemUrl: coelho, correta: true },
+      { nome: "flor", imagemUrl: flor, correta: false },
+    ], feedbackAcerto: "Boa! SSS-apo, SSS-apato!", feedbackErro: "O sopro do começo é SSS." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra maior:", palavra: "AR-CO-Í-RIS", silabas: 4, imagemUrl: arcoIris, elogio: "QUATRO palmas! Arco-íris é grandão!" },
+    { tipo: "historiaIlustrada", titulo: "A festa que reuniu todo mundo", cenas: [
+      { imagemUrl: coelho, narracao: "O coelho rei chamou todos os bichos: 'Vamos fazer uma FESTA!'" },
+      { imagemUrl: borboleta, narracao: "A borboleta poeta rimou, a abelha cantou, o sapo pulou." },
+      { imagemUrl: arcoIris, narracao: "E no céu apareceu um arco-íris ENORME celebrando com eles!" },
+    ] },
+    { tipo: "compreensaoImagem", perguntaAudio: "Quem chamou os bichos pra festa?", opcoes: [
+      { nome: "coelho rei", imagemUrl: coelho, correta: true },
+      { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "abelha", imagemUrl: abelha, correta: false },
+    ], feedbackAcerto: "Isso! O COELHO REI!", feedbackErro: "Foi o COELHO — que era o rei!" },
+    { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Fala pro Brilha: qual foi a palavra MAIS legal que você aprendeu no Pré I?", exemplos: [
+      { nome: "borboleta", imagemUrl: borboleta },
+      { nome: "arco-íris", imagemUrl: arcoIris },
+      { nome: "coroa", imagemUrl: coelho },
+      { nome: "chuva", imagemUrl: chuva },
+    ] },
+    { tipo: "fazDeConta", imagemUrl: brilha, convite: "Faz de conta que subiu num palco e apresenta a palavra que mais gosta bem alto!" },
+    { tipo: "compreensaoImagem", perguntaAudio: "O que apareceu no céu no final da festa?", opcoes: [
+      { nome: "arco-íris", imagemUrl: arcoIris, correta: true },
+      { nome: "chuva", imagemUrl: chuva, correta: false },
+      { nome: "sol", imagemUrl: arvore, correta: false },
+    ], feedbackAcerto: "Sim! ARCO-ÍRIS lindo!", feedbackErro: "Foi um arco-íris ENORME!" },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Ensina UMA palavra nova pra alguém em casa e bata palma nas sílabas juntos!", dicaAdulto: "Ensinar é o melhor jeito de fixar. Deixe a criança ser a professora por 5 min." },
+    { tipo: "celebracao", medalha: "Estrela do Pré I", mascoteUrl: brilha, falaFinal: "VOCÊ TERMINOU o Pré I! Que jornada linda de palavras, ritmo e histórias!" },
+  ],
+};
+
 void bola; void arvore;
 
 export const cursoPre1: CursoEI = {
@@ -276,7 +633,21 @@ export const cursoPre1: CursoEI = {
       numero: 1,
       titulo: "O Som das Palavras e o Ritmo do Corpo",
       subtitulo: "Escutar, imitar, imaginar",
-      aulas: [aula01, aula02],
+      aulas: [aula01, aula02, aula03],
+    },
+    {
+      slug: "unidade-2",
+      numero: 2,
+      titulo: "Poemas, Passeios e Reinos Inventados",
+      subtitulo: "Escutar poemas, relatar, criar",
+      aulas: [aula04, aula05, aula06],
+    },
+    {
+      slug: "unidade-3",
+      numero: 3,
+      titulo: "Textos, Nomes e o Grande Festival",
+      subtitulo: "Livros, meu nome, minhas conquistas",
+      aulas: [aula07, aula08, aula09],
     },
   ],
 };
