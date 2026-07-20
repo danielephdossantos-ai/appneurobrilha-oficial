@@ -1933,3 +1933,253 @@ function CompreensaoLeituraBloco({
     </CardScreen>
   );
 }
+
+// ============ FASE 6 · Semana 2 — Leitura Eco ============
+
+function LeituraEcoBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "leituraEco" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [linhaIdx, setLinhaIdx] = useState(0);
+  const [ativa, setAtiva] = useState(-1);
+  const [ouvindo, setOuvindo] = useState(false);
+  const [tentativa, setTentativa] = useState("");
+  const [feedback, setFeedback] = useState<"ok" | "quase" | "erro" | null>(null);
+  const [feedbackDetalhe, setFeedbackDetalhe] = useState("");
+  const [validadas, setValidadas] = useState<Set<number>>(new Set());
+  const timersRef = useRef<number[]>([]);
+  const karaokeRunRef = useRef(0);
+  const recRef = useRef<any>(null);
+
+  const linhas = m.linhas;
+  const linhaAtual = linhas[linhaIdx] ?? "";
+  const palavras = linhaAtual.replace(/[.!?]$/, "").split(/\s+/).filter(Boolean);
+
+  const SR: any =
+    typeof window !== "undefined"
+      ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      : null;
+  const micDisponivel = !!SR;
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((t) => clearTimeout(t));
+      timersRef.current = [];
+      stopSpeaking();
+      try { recRef.current?.stop?.(); } catch {}
+    };
+  }, []);
+
+  useEffect(() => {
+    // Reset visual quando muda de linha
+    setAtiva(-1);
+    setTentativa("");
+    setFeedback(null);
+    setFeedbackDetalhe("");
+  }, [linhaIdx]);
+
+  const lerKaraoke = async (rate: number) => {
+    timersRef.current.forEach((t) => clearTimeout(t));
+    timersRef.current = [];
+    stopSpeaking();
+    setAtiva(-1);
+    const runToken = ++karaokeRunRef.current;
+    const gap = rate < 0.85 ? 320 : 160;
+    await new Promise((r) => setTimeout(r, 80));
+    for (let i = 0; i < palavras.length; i++) {
+      if (runToken !== karaokeRunRef.current) return;
+      await speakWordSync(palavras[i].toLowerCase(), rate, () => {
+        if (runToken === karaokeRunRef.current) setAtiva(i);
+      });
+      if (runToken !== karaokeRunRef.current) return;
+      await new Promise((r) => {
+        const t = window.setTimeout(r, gap);
+        timersRef.current.push(t);
+      });
+    }
+    if (runToken === karaokeRunRef.current) setAtiva(-1);
+  };
+
+  const gravarEco = () => {
+    if (!SR) return;
+    try { recRef.current?.stop?.(); } catch {}
+    stopSpeaking();
+    setFeedback(null);
+    setFeedbackDetalhe("");
+    setTentativa("");
+    const rec = new SR();
+    rec.lang = "pt-BR";
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    rec.continuous = false;
+    recRef.current = rec;
+    setOuvindo(true);
+    rec.onresult = (e: any) => {
+      const alternativas: string[] = [];
+      for (let i = 0; i < e.results[0].length; i++) alternativas.push(e.results[0][i].transcript);
+      let melhorTxt = alternativas[0] || "";
+      let melhorRes = avaliarLeituraFalada(melhorTxt, linhaAtual);
+      for (const alt of alternativas) {
+        const r = avaliarLeituraFalada(alt, linhaAtual);
+        const menosProblemas =
+          r.faltando.length + r.extras.length <
+          melhorRes.faltando.length + melhorRes.extras.length;
+        if (r.score > melhorRes.score || (r.score === melhorRes.score && menosProblemas)) {
+          melhorTxt = alt;
+          melhorRes = r;
+        }
+      }
+      setTentativa(melhorTxt);
+      if (melhorRes.ok) {
+        setFeedback("ok");
+        setValidadas((s) => new Set(s).add(linhaIdx));
+        const proxima = linhaIdx + 1;
+        if (proxima < linhas.length) {
+          speak("Isso! Próxima linha.");
+          const t = window.setTimeout(() => setLinhaIdx(proxima), 900);
+          timersRef.current.push(t);
+        } else {
+          speak(m.elogio);
+        }
+      } else if (melhorRes.score >= 0.45) {
+        setFeedback("quase");
+        const problema = [...melhorRes.faltando, ...melhorRes.extras][0];
+        const detalhe = problema ? `A palavra ${problema.toUpperCase()} não bateu.` : "Repita igual ao professor.";
+        setFeedbackDetalhe(detalhe);
+        speak(`${detalhe} Ouve de novo e repete.`);
+      } else {
+        setFeedback("erro");
+        setFeedbackDetalhe("Repita a linha inteira, do mesmo jeito.");
+        speak("Não peguei. Repita a linha inteira, do mesmo jeito.");
+      }
+    };
+    rec.onerror = () => { setOuvindo(false); setFeedback("erro"); };
+    rec.onend = () => setOuvindo(false);
+    try { rec.start(); } catch { setOuvindo(false); }
+  };
+
+  const pararGravacao = () => {
+    try { recRef.current?.stop?.(); } catch {}
+    setOuvindo(false);
+  };
+
+  const totalOk = validadas.size;
+  const completo = totalOk >= linhas.length;
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={m.titulo ?? "Eco: eu leio, você repete!"} cor={cor} />
+      <div className="mx-auto max-w-md text-center">
+        <ImageFrame src={m.imagemUrl} alt={linhaAtual} size="xl" />
+
+        {/* Progresso de linhas */}
+        <div className="mt-3 flex justify-center gap-2">
+          {linhas.map((_, i) => (
+            <span
+              key={i}
+              className={`w-8 h-2 rounded-full ${
+                validadas.has(i) ? "bg-emerald-400" : i === linhaIdx ? "bg-yellow-300" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+        <p className="text-xs text-white/80 mt-1 font-bold">Linha {Math.min(linhaIdx + 1, linhas.length)}/{linhas.length}</p>
+
+        <p className="mt-4 font-black leading-snug flex flex-wrap justify-center gap-x-2 gap-y-1" style={{ fontSize: 30 }}>
+          {palavras.map((p, i) => (
+            <span
+              key={i}
+              className={`inline-block px-1 rounded-md transition-all duration-150 ${
+                ativa === i ? "bg-yellow-300 text-slate-900 scale-110 shadow-md" : ""
+              }`}
+            >
+              <PalavraColorida palavra={p} />
+              {i === palavras.length - 1 ? linhaAtual.trim().slice(-1).match(/[.!?]/) ? linhaAtual.trim().slice(-1) : "" : ""}
+            </span>
+          ))}
+        </p>
+        <p className="text-xs text-slate-500 mt-2">{m.instrucaoAudio}</p>
+
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <button
+            onClick={() => lerKaraoke(0.7)}
+            className="rounded-full bg-purple-600 text-white px-4 py-3 font-bold shadow active:scale-95 text-sm"
+          >
+            🐢 Ouvir devagar
+          </button>
+          <button
+            onClick={() => lerKaraoke(0.92)}
+            className="rounded-full bg-pink-500 text-white px-4 py-3 font-bold shadow active:scale-95 text-sm"
+          >
+            🐇 Ouvir junto
+          </button>
+        </div>
+
+        {micDisponivel ? (
+          <button
+            onClick={ouvindo ? pararGravacao : gravarEco}
+            disabled={completo}
+            className={`mt-3 w-full rounded-full px-6 py-4 font-black shadow-lg text-white transition ${
+              completo
+                ? "bg-slate-400"
+                : ouvindo
+                ? "bg-red-500 animate-pulse"
+                : "bg-blue-600 active:scale-95"
+            }`}
+          >
+            {completo
+              ? "✓ Eco concluído"
+              : ouvindo
+              ? "🎤 Ouvindo… toque para parar"
+              : "🎤 Repetir a linha"}
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setValidadas((s) => new Set(s).add(linhaIdx));
+              const prox = linhaIdx + 1;
+              if (prox < linhas.length) setLinhaIdx(prox);
+            }}
+            disabled={completo}
+            className="mt-3 w-full rounded-full px-6 py-4 font-black shadow-lg text-white bg-blue-600 active:scale-95 disabled:bg-slate-400"
+          >
+            {completo ? "✓ Eco marcado" : "✓ Já repeti"}
+          </button>
+        )}
+
+        {tentativa && (
+          <div
+            className={`mt-3 rounded-2xl px-4 py-2 text-sm font-bold ${
+              feedback === "ok"
+                ? "bg-green-100 text-green-800"
+                : feedback === "quase"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            {feedback === "ok" ? "🎉 Isso!" : feedback === "quase" ? "🤏 Quase!" : "🔁 Não peguei."}
+            {feedbackDetalhe && <div className="text-xs font-black mt-1">{feedbackDetalhe}</div>}
+            <div className="text-xs font-normal mt-1 opacity-80">Você disse: "{tentativa}"</div>
+          </div>
+        )}
+
+        {completo && (
+          <button
+            onClick={() => { speak(m.elogio); onOk(); }}
+            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg active:scale-95"
+          >
+            ➜ Continuar
+          </button>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
