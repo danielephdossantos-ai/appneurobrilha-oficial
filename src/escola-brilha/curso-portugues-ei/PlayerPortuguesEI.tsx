@@ -649,8 +649,11 @@ function MomentoRender({
       return <PalavraNaFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
     case "diplomaFase":
       return <DiplomaFaseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "preverHistoria":
+      return <PreverHistoriaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
+
 
 
 // ============ Utilidades da Fase 3 ============

@@ -273,6 +273,21 @@ export type MomentoEI =
       instrucaoAudio: string;
       elogio: string;
     }
+  // ============ FASE 8 · Semana 1 — Prever (Duke & Pearson 2002) ============
+  | {
+      tipo: "preverHistoria";
+      // Estratégia de compreensão "Prever": criança escuta 2-3 cenas
+      // iniciais de uma micro-história e escolhe entre 3 imagens qual
+      // mostra o que ela ACHA que vai acontecer depois.
+      titulo?: string;
+      cenas: Array<{ imagemUrl: string; narracao: string }>;
+      pergunta: string;              // TTS
+      instrucaoAudio: string;
+      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
+      elogio: string;
+    }
   // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
   | {
       tipo: "diplomaFase";
@@ -284,6 +299,7 @@ export type MomentoEI =
       totalColecao?: number;
       falaFinal: string;          // TTS na abertura
     };
+
 
 
 export interface AulaEI {
