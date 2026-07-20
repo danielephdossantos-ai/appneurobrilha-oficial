@@ -9,6 +9,12 @@ import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as galo } from "@/assets/neuro-treino/objetos/galo.png.asset.json";
+import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as abelha } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
+import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
 
 /**
  * Pré I (4-5 anos) — Unidade 1 · Aula 1
