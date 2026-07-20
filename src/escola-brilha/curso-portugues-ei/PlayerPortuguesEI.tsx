@@ -14,6 +14,26 @@ function speak(text: string) {
   speakChunked(sanitizeForSpeech(text), { rate: 0.95, pitch: 1.15 });
 }
 
+/**
+ * Fala segura do som da letra. Evita bugs de TTS que leem "III"/"AAA"
+ * como algarismo romano (III → "três") ou nome de letra ("A" → "á").
+ * Vogais: som elongado em minúsculo com acento. Consoantes: nome da letra em PT.
+ */
+function somFalado(letra: string): string {
+  const L = letra.toUpperCase().trim();
+  const vogais: Record<string, string> = {
+    A: "ááááá", E: "êêêêê", I: "iiiiii", O: "óóóóó", U: "uuuuuu",
+  };
+  if (vogais[L]) return vogais[L];
+  const consoantes: Record<string, string> = {
+    B: "bê", C: "cê", D: "dê", F: "éfe", G: "guê", H: "agá",
+    J: "jóta", K: "cá", L: "éle", M: "eme", N: "ene", P: "pê",
+    Q: "quê", R: "erre", S: "esse", T: "tê", V: "vê", W: "dáblio",
+    X: "xis", Y: "ípsilon", Z: "zê",
+  };
+  return consoantes[L] ?? L.toLowerCase();
+}
+
 function prepararParlendaParaAudio(versos: string[]) {
   return versos
     .map((v) => v.trim())
@@ -441,7 +461,7 @@ function MomentoRender({
           </div>
           <div className="mt-4 grid gap-3">
             <BigListenButton
-              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. O som dela é ${m.som}.`)}
+              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. Escuta o som: ${somFalado(m.letra)}.`)}
               label={`Ouvir "${m.letra}"`}
             />
             <p className="text-center text-sm text-slate-600">
@@ -451,7 +471,7 @@ function MomentoRender({
               {m.exemplos.map((e) => (
                 <button
                   key={e.nome}
-                  onClick={() => speak(`${m.som}... ${e.nome}`)}
+                  onClick={() => speak(`${somFalado(m.letra)}... ${e.nome}`)}
                   className="rounded-3xl bg-white border-2 border-purple-200 p-2 shadow active:scale-95"
                 >
                   <ImageFrame src={e.imagemUrl} alt={e.nome} size="md" />
