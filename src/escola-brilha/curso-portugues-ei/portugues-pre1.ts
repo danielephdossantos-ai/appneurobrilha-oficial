@@ -175,15 +175,15 @@ const aula02: AulaEI = {
     },
     {
       tipo: "somInicial",
-      instrucaoAudio: "Qual dessas palavras começa com o mesmo som de SAPO?",
-      referencia: { nome: "sapo", imagemUrl: sapo },
+      instrucaoAudio: "Qual dessas palavras começa com o mesmo som de GATO?",
+      referencia: { nome: "gato", imagemUrl: gato },
       opcoes: [
-        { nome: "sol", imagemUrl: passaro, correta: false },
-        { nome: "peixe", imagemUrl: peixe, correta: false },
-        { nome: "sapato", imagemUrl: casa, correta: true },
+        { nome: "galo", imagemUrl: galo, correta: true },
+        { nome: "sapo", imagemUrl: sapo, correta: false },
+        { nome: "borboleta", imagemUrl: borboleta, correta: false },
       ],
-      feedbackAcerto: "Isso! Sapo e sapato começam com o som ÉSSE!",
-      feedbackErro: "Escuta: SAAA-po. Qual outra começa com o som ÉSSE?",
+      feedbackAcerto: "Isso! Gato e galo começam com o som GÊ!",
+      feedbackErro: "Escuta: GAAA-to. Qual outra começa com o som GÊ?",
     },
     {
       tipo: "ritmoCorpo",
