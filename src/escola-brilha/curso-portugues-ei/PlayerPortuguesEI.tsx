@@ -1403,6 +1403,7 @@ function LeituraFraseBloco({
   const [feedback, setFeedback] = useState<"ok" | "quase" | "erro" | null>(null);
   const [leiturasOk, setLeiturasOk] = useState(0);
   const timersRef = useRef<number[]>([]);
+  const karaokeRunRef = useRef(0);
   const recRef = useRef<any>(null);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
   const alvoTokens = normalizarFrase(m.frase);
