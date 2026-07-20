@@ -1610,6 +1610,7 @@ function LeituraTextoBloco({
   const [ouviu, setOuviu] = useState(false);
   const [ativa, setAtiva] = useState<{ f: number; w: number }>({ f: -1, w: -1 });
   const timersRef = useRef<number[]>([]);
+  const karaokeRunRef = useRef(0);
 
   const palavrasPorFrase = m.frases.map((f) =>
     f.replace(/[.!?]$/, "").split(/\s+/),
