@@ -314,16 +314,16 @@ const a6: AulaEI = {
     },
     {
       tipo: "antonimoContraste",
-      imagemUrl: predio,
+      imagemUrl: arvore,
       palavra: "ALTO",
       antonimo: "BAIXO",
       opcoes: [
-        { nome: "CASA", imagemUrl: casa, correta: true },
-        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "JOANINHA", imagemUrl: joaninha, correta: true },
+        { nome: "PRÉDIO", imagemUrl: predio, correta: false },
         { nome: "LEÃO", imagemUrl: leao, correta: false },
       ],
-      instrucaoAudio: "O prédio é ALTO. Qual imagem mostra algo BAIXO?",
-      elogio: "A casa é mais baixa que o prédio!",
+      instrucaoAudio: "A árvore é ALTA, lá em cima. Qual bichinho é BAIXINHO, pertinho do chão?",
+      elogio: "Isso! A joaninha é bem BAIXINHA — cabe no seu dedo!",
     },
     {
       tipo: "celebracao",
