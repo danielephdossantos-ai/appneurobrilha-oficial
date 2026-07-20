@@ -21,8 +21,10 @@ function speak(text: string) {
  */
 function somFalado(letra: string): string {
   const L = letra.toUpperCase().trim();
+  // Vogais: apenas 2-3 caracteres para soar como um som curto e natural,
+  // sem virar um "arrastado" esquisito ("iiiiii") logo depois de "escuta o som".
   const vogais: Record<string, string> = {
-    A: "ááááá", E: "êêêêê", I: "iiiiii", O: "óóóóó", U: "uuuuuu",
+    A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
   };
   if (vogais[L]) return vogais[L];
   const consoantes: Record<string, string> = {
@@ -461,7 +463,7 @@ function MomentoRender({
           </div>
           <div className="mt-4 grid gap-3">
             <BigListenButton
-              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. Escuta o som: ${somFalado(m.letra)}.`)}
+              onClick={() => speak(`${m.instrucaoAudio} ${somFalado(m.letra)}.`)}
               label={`Ouvir "${m.letra}"`}
             />
             <p className="text-center text-sm text-slate-600">
