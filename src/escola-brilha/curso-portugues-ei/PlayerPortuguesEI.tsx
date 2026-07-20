@@ -586,17 +586,31 @@ function MomentoRender({
  *  - se já tem acento ou é sílaba fechada (consoante final), mantém.
  */
 function silabaParaFala(s: string): string {
-  const raw = s.toLowerCase().trim();
-  if (!raw) return "";
-  // Já tem acento ou nasal? Deixa como está.
-  if (/[áéíóúâêôãõà]/.test(raw)) return raw + ".";
-  const acentos: Record<string, string> = { a: "á", e: "é", i: "í", o: "ó", u: "ú" };
-  const ultima = raw[raw.length - 1];
-  if (acentos[ultima]) {
-    return raw.slice(0, -1) + acentos[ultima] + ".";
-  }
-  // Sílaba fechada tipo "sol", "jar", "dim" — deixa natural.
-  return raw + ".";
+  const token = s.toUpperCase().trim();
+  if (!token) return "";
+
+  // Mapa explícito para sílabas CV da Fase 3. Não usamos a letra isolada
+  // ("M A", "P O") em nenhuma fala; a voz recebe uma forma fonética curta.
+  const cv: Record<string, string> = {
+    BA: "bá", BE: "be", BI: "bi", BO: "bó", BU: "bu",
+    CA: "cá", CO: "có", CU: "cu",
+    DA: "dá", DE: "de", DI: "di", DO: "dó", DU: "du",
+    FA: "fá", FE: "fe", FI: "fi", FO: "fó", FU: "fu",
+    GA: "gá", GO: "gó", GU: "gu",
+    JA: "já", JE: "je", JI: "ji", JO: "jó", JU: "ju",
+    LA: "lá", LE: "le", LI: "li", LO: "ló", LU: "lu",
+    MA: "má", ME: "me", MI: "mi", MO: "mó", MU: "mu",
+    NA: "ná", NE: "ne", NI: "ni", NO: "nó", NU: "nu",
+    PA: "pá", PE: "pe", PI: "pi", PO: "pó", PU: "pu",
+    RA: "rá", RE: "re", RI: "ri", RO: "ró", RU: "ru",
+    SA: "sá", SE: "se", SI: "si", SO: "só", SU: "su",
+    TA: "tá", TE: "te", TI: "ti", TO: "tó", TU: "tu",
+    VA: "vá", VE: "ve", VI: "vi", VO: "vó", VU: "vu",
+  };
+  if (cv[token]) return `${cv[token]}.`;
+
+  // Se não for CV controlada, fala a palavra/sílaba natural em minúsculo.
+  return `${s.toLowerCase().trim()}.`;
 }
 
 /** Fala uma sílaba CV natural, com pausa. */
