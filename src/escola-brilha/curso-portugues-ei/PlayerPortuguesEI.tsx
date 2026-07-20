@@ -1686,13 +1686,15 @@ function LeituraTextoBloco({
     setOuviu(true);
     setAtiva({ f: -1, w: -1 });
     const runToken = ++karaokeRunRef.current;
-    const gap = rate < 0.85 ? 160 : 110;
+    const gap = rate < 0.85 ? 320 : 160;
+    await new Promise((r) => setTimeout(r, 80));
     for (let fi = 0; fi < palavrasPorFrase.length; fi++) {
       const palavras = palavrasPorFrase[fi];
       for (let wi = 0; wi < palavras.length; wi++) {
         if (runToken !== karaokeRunRef.current) return;
-        setAtiva({ f: fi, w: wi });
-        await speakChunked(palavras[wi].toLowerCase(), { rate, queue: true });
+        await speakWordSync(palavras[wi].toLowerCase(), rate, () => {
+          if (runToken === karaokeRunRef.current) setAtiva({ f: fi, w: wi });
+        });
         if (runToken !== karaokeRunRef.current) return;
         await new Promise((r) => {
           const t = window.setTimeout(r, gap);
@@ -1700,7 +1702,7 @@ function LeituraTextoBloco({
         });
       }
       await new Promise((r) => {
-        const t = window.setTimeout(r, 300);
+        const t = window.setTimeout(r, 400);
         timersRef.current.push(t);
       });
     }
