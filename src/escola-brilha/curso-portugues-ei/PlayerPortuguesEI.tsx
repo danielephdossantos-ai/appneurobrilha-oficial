@@ -21,10 +21,10 @@ function speak(text: string) {
  */
 function somFalado(letra: string): string {
   const L = letra.toUpperCase().trim();
-  // Vogais: apenas 2-3 caracteres para soar como um som curto e natural,
-  // sem virar um "arrastado" esquisito ("iiiiii") logo depois de "escuta o som".
+  // Vogais: som único e curto — repetir a vogal fazia o TTS pronunciar
+  // duas vezes ("é é"), o que confundia a criança.
   const vogais: Record<string, string> = {
-    A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
+    A: "á", E: "é", I: "i", O: "ó", U: "u",
   };
   if (vogais[L]) return vogais[L];
   const consoantes: Record<string, string> = {
