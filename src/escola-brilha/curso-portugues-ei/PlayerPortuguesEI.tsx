@@ -1475,7 +1475,7 @@ function palavrasEssenciais(tokens: string[]) {
   return essenciais.length ? essenciais : tokens;
 }
 
-function avaliarLeituraFaladA(transcricao: string, fraseAlvo: string) {
+function avaliarLeituraFalada(transcricao: string, fraseAlvo: string) {
   const ditas = normalizarFrase(transcricao);
   const alvo = normalizarFrase(fraseAlvo);
   const essenciais = palavrasEssenciais(alvo);
@@ -1526,7 +1526,6 @@ function LeituraFraseBloco({
   const karaokeRunRef = useRef(0);
   const recRef = useRef<any>(null);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
-  const alvoTokens = normalizarFrase(m.frase);
 
   const SR: any =
     typeof window !== "undefined"
@@ -1586,9 +1585,9 @@ function LeituraFraseBloco({
       for (let i = 0; i < e.results[0].length; i++) alternativas.push(e.results[0][i].transcript);
       let melhor = 0;
       let melhorTxt = alternativas[0] || "";
-      let melhorResultado = avaliarLeituraFaladA(melhorTxt, m.frase);
+      let melhorResultado = avaliarLeituraFalada(melhorTxt, m.frase);
       for (const alt of alternativas) {
-        const resultado = avaliarLeituraFaladA(alt, m.frase);
+        const resultado = avaliarLeituraFalada(alt, m.frase);
         const score = resultado.score;
         const melhorTemMenosProblemas =
           resultado.faltando.length + resultado.extras.length <
