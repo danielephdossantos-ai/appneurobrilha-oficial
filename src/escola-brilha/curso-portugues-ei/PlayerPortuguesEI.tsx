@@ -2550,3 +2550,185 @@ function CampoSemanticoBloco({
   );
 }
 
+
+// ============ FASE 7 · Semana 4 — Palavra na frase (cloze) ============
+function PalavraNaFraseBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "palavraNaFrase" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const opcoes = useMemo(() => {
+    const arr = [m.palavraCorreta, ...m.distratores];
+    return arr
+      .map((t, i) => ({ t, k: (t.charCodeAt(0) + i * 11 + m.frase.length) % 97 }))
+      .sort((a, b) => a.k - b.k)
+      .map((x) => x.t);
+  }, [m.palavraCorreta, m.distratores, m.frase]);
+
+  const [escolhida, setEscolhida] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+
+  const partes = m.frase.split(/_{2,}/);
+  const fraseCompleta = m.frase.replace(/_{2,}/, m.palavraCorreta);
+
+  const tocar = () => {
+    stopSpeaking();
+    // Lê frase com pausa no lugar da lacuna.
+    const comPausa = m.frase.replace(/_{2,}/, "... hummm ...");
+    speakChunked(`${m.instrucaoAudio} ${comPausa}`, { rate: 0.9, pitch: 1.1 });
+  };
+
+  const escolher = (t: string) => {
+    setEscolhida(t);
+    if (t === m.palavraCorreta) {
+      setOk(true);
+      setMsg(`Isso! "${fraseCompleta}"`);
+      stopSpeaking();
+      speakChunked(`Isso! ${fraseCompleta}. ${m.elogio}`, { rate: 0.95, pitch: 1.1 });
+      setTimeout(onOk, 1800);
+    } else {
+      setMsg("Quase! Escuta a frase de novo e tenta outra.");
+      stopSpeaking();
+      speakChunked(
+        `${m.frase.replace(/_{2,}/, t.toLowerCase())}... não combina. Tenta outra.`,
+        { rate: 0.95, pitch: 1.05 },
+      );
+      setTimeout(() => setEscolhida(null), 900);
+    }
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Palavra na frase" cor={cor} />
+      <ImageFrame src={m.imagemUrl} alt={m.palavraCorreta} size="xl" />
+
+      <div className="mt-4 mx-auto max-w-lg rounded-2xl bg-white border-4 border-purple-300 px-5 py-4 shadow text-center">
+        <p className="text-2xl md:text-3xl font-black text-purple-900 leading-snug">
+          {partes[0]}
+          <span
+            className={`inline-block min-w-[6ch] mx-1 px-2 rounded-lg border-b-4 ${
+              ok
+                ? "border-green-500 bg-green-50 text-green-700"
+                : "border-purple-400 bg-purple-50 text-purple-400"
+            }`}
+          >
+            {ok ? m.palavraCorreta : "____"}
+          </span>
+          {partes[1] ?? ""}
+        </p>
+      </div>
+
+      <BigListenButton onClick={tocar} label="Ouvir a frase" />
+
+      <div className="mt-4 grid grid-cols-1 gap-3 max-w-md mx-auto w-full">
+        {opcoes.map((t) => {
+          const isEscolhida = escolhida === t;
+          const acertou = ok && t === m.palavraCorreta;
+          const errou = isEscolhida && !ok;
+          return (
+            <button
+              key={t}
+              disabled={ok}
+              onClick={() => {
+                stopSpeaking();
+                speakChunked(t.toLowerCase(), { rate: 0.95, pitch: 1.1 });
+                setTimeout(() => escolher(t), 480);
+              }}
+              className={`rounded-2xl border-4 px-5 py-4 text-2xl font-black shadow-md active:scale-95 transition ${
+                acertou
+                  ? "border-green-500 bg-green-50 text-green-800"
+                  : errou
+                  ? "border-red-400 bg-red-50 text-red-700"
+                  : "border-purple-200 bg-white text-purple-900"
+              }`}
+            >
+              🔊 {t}
+            </button>
+          );
+        })}
+      </div>
+
+      {msg && (
+        <p className={`mt-4 text-center font-bold ${ok ? "text-green-700" : "text-amber-700"}`}>
+          {msg}
+        </p>
+      )}
+    </CardScreen>
+  );
+}
+
+
+// ============ FASE 7 · Diploma final — Colecionador de Palavras ============
+function DiplomaFaseBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "diplomaFase" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [aberto, setAberto] = useState(false);
+  const mascote = PERSONAGENS[m.personagem] ?? ESQUILO_BRILHA;
+
+  const abrir = () => {
+    stopSpeaking();
+    speakChunked(m.falaFinal, { rate: 0.95, pitch: 1.1 });
+    setAberto(true);
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Diploma da Fase" cor={cor} />
+      <div className="text-center">
+        <div className="text-6xl mb-2">🏆</div>
+        <p className="text-xl font-black text-purple-700">{m.titulo}</p>
+        <p className="text-sm text-slate-600 mt-1">{m.curso}</p>
+      </div>
+      <div className="mt-3">
+        <ImageFrame src={mascote.img} alt={mascote.nome} size="xl" />
+      </div>
+      <div className="mt-5 grid gap-3">
+        <BigListenButton onClick={() => speakChunked(m.falaFinal)} label="Ouvir a Aurora" />
+        <button
+          onClick={abrir}
+          className="mx-auto rounded-full bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 font-black shadow-lg active:scale-95"
+        >
+          🏅 Abrir meu diploma
+        </button>
+        <button
+          onClick={onOk}
+          className="mx-auto text-purple-700 underline text-sm"
+        >
+          Terminei ✓
+        </button>
+      </div>
+
+      {aberto && (
+        <DiplomaBrilha
+          aluno="Pequeno(a) Leitor(a)"
+          titulo={m.titulo}
+          curso={m.curso}
+          descricao={m.descricao}
+          mascote={mascote}
+          numeroColecao={m.numeroColecao}
+          totalColecao={m.totalColecao}
+          onFechar={() => {
+            setAberto(false);
+            onOk();
+          }}
+        />
+      )}
+    </CardScreen>
+  );
+}
+
