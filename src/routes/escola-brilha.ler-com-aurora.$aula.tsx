@@ -4,10 +4,14 @@ import {
   cursoLerComAurora,
   getAulaLerComAurora,
 } from "@/escola-brilha/curso-ler-com-aurora/aulas";
+import {
+  cursoLerComAuroraFase2,
+  getAulaLerComAuroraFase2,
+} from "@/escola-brilha/curso-ler-com-aurora/aulas-fase2";
 
 /**
- * Player de uma missão do curso "Ler com Aurora — Fase 1".
- * Reusa PlayerPortuguesEI (audio-first, jogos por imagem).
+ * Player de uma missão do curso "Ler com Aurora".
+ * Aceita slugs da Fase 1 (dia-*) ou da Fase 2 (f2-dia-*).
  * URL: /escola-brilha/ler-com-aurora/<slug-da-aula>
  */
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
@@ -18,7 +22,10 @@ export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
 function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
-  const aula = getAulaLerComAurora(aulaSlug);
+
+  const aulaF2 = getAulaLerComAuroraFase2(aulaSlug);
+  const aula = aulaF2 ?? getAulaLerComAurora(aulaSlug);
+  const curso = aulaF2 ? cursoLerComAuroraFase2 : cursoLerComAurora;
 
   if (!aula) {
     return (
@@ -35,7 +42,7 @@ function AulaLerComAuroraRoute() {
 
   return (
     <PlayerPortuguesEI
-      curso={cursoLerComAurora}
+      curso={curso}
       aula={aula}
       voltarPara="/escola-brilha/ler-com-aurora"
       onConcluir={() => {
@@ -45,7 +52,6 @@ function AulaLerComAuroraRoute() {
           const list: string[] = raw ? JSON.parse(raw) : [];
           if (!list.includes(aulaSlug)) list.push(aulaSlug);
           localStorage.setItem(key, JSON.stringify(list));
-          // marca streak diário (uma missão/dia)
           localStorage.setItem("eb.ler-aurora.ultimo-dia", new Date().toISOString().slice(0, 10));
         } catch {
           /* ignore */

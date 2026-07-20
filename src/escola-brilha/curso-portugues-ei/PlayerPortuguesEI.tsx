@@ -428,8 +428,475 @@ function MomentoRender({
           </div>
         </CardScreen>
       );
+
+    // ============ FASE 2 ============
+    case "somDaLetra":
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto="Som da letra" cor={cor} />
+          <div className="mx-auto w-40 h-40 rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500 grid place-items-center shadow-xl">
+            <span className="text-white font-black" style={{ fontSize: 110, lineHeight: 1 }}>
+              {m.letra}
+            </span>
+          </div>
+          <div className="mt-4 grid gap-3">
+            <BigListenButton
+              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. O som dela é ${m.som}.`)}
+              label={`Ouvir "${m.letra}"`}
+            />
+            <p className="text-center text-sm text-slate-600">
+              Começam com <b>{m.letra}</b>:
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              {m.exemplos.map((e) => (
+                <button
+                  key={e.nome}
+                  onClick={() => speak(`${m.som}... ${e.nome}`)}
+                  className="rounded-3xl bg-white border-2 border-purple-200 p-2 shadow active:scale-95"
+                >
+                  <ImageFrame src={e.imagemUrl} alt={e.nome} size="md" />
+                  <p className="text-center text-xs font-bold text-purple-700 mt-1">
+                    🔊 {e.nome}
+                  </p>
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => {
+                speak(m.elogio);
+                marcarOk();
+              }}
+              className="mt-2 mx-auto rounded-full bg-green-600 text-white px-6 py-2 font-bold"
+            >
+              Entendi ✓
+            </button>
+          </div>
+        </CardScreen>
+      );
+
+    case "tracadoLetra":
+      return <TracadoLetraBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "letrasMoveis":
+      return <LetrasMoveisBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "elkoninBoxes":
+      return <ElkoninBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "delecaoFonemica": {
+      const [msg, setMsg] = useState<string | null>(null);
+      const [ok, setOk] = useState(false);
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto="Tira o som" cor={cor} />
+          <div className="mx-auto rounded-3xl bg-purple-50 border-2 border-purple-200 p-5 max-w-md">
+            <p className="text-center text-sm text-slate-600">Palavra</p>
+            <p className="text-center text-4xl font-black text-purple-700 tracking-widest">
+              {m.palavraOriginal}
+            </p>
+            <p className="text-center text-sm text-slate-600 mt-3">
+              Tira o som <b>/{m.fonemaRemovido}/</b>. O que sobra?
+            </p>
+          </div>
+          <div className="mt-4 grid gap-3">
+            <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir a pergunta" />
+            <div className="grid gap-2">
+              {m.opcoes.map((o, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    speak(o.texto);
+                    if (o.correta) {
+                      setOk(true);
+                      setMsg(m.feedbackAcerto);
+                      speak(m.feedbackAcerto);
+                      setTimeout(marcarOk, 700);
+                    } else {
+                      setMsg(m.feedbackErro);
+                      speak(m.feedbackErro);
+                    }
+                  }}
+                  className={`mx-auto w-full max-w-sm rounded-2xl border-2 px-4 py-3 font-bold text-lg shadow active:scale-95 transition ${
+                    ok && o.correta ? "border-green-500 bg-green-50 text-green-800" : "border-purple-200 bg-white text-purple-800"
+                  }`}
+                >
+                  🔊 {o.texto}
+                </button>
+              ))}
+            </div>
+            {msg && <p className="mt-3 text-center font-semibold text-slate-700">{msg}</p>}
+          </div>
+        </CardScreen>
+      );
+    }
+
+    case "pareamentoLetraSom":
+      return <PareamentoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
+
+// ============ Componentes auxiliares da Fase 2 ============
+
+function TracadoLetraBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "tracadoLetra" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [pontos, setPontos] = useState(0);
+  const [ok, setOk] = useState(false);
+  const min = m.minTracos ?? 40;
+  const desenhando = useRef(false);
+
+  const posicao = (e: React.PointerEvent) => {
+    const c = canvasRef.current!;
+    const r = c.getBoundingClientRect();
+    return { x: ((e.clientX - r.left) / r.width) * c.width, y: ((e.clientY - r.top) / r.height) * c.height };
+  };
+
+  const start = (e: React.PointerEvent) => {
+    desenhando.current = true;
+    const ctx = canvasRef.current!.getContext("2d")!;
+    const p = posicao(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  };
+  const move = (e: React.PointerEvent) => {
+    if (!desenhando.current) return;
+    const ctx = canvasRef.current!.getContext("2d")!;
+    const p = posicao(e);
+    ctx.lineWidth = 18;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = cor;
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    setPontos((n) => {
+      const nv = n + 1;
+      if (!ok && nv >= min) {
+        setOk(true);
+        speak(m.elogio);
+        setTimeout(onOk, 900);
+      }
+      return nv;
+    });
+  };
+  const end = () => {
+    desenhando.current = false;
+  };
+
+  const limpar = () => {
+    const c = canvasRef.current!;
+    c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
+    setPontos(0);
+    setOk(false);
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Traça com o dedo" cor={cor} />
+      <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+      <div className="relative mx-auto mt-4" style={{ width: 300, height: 300 }}>
+        {/* Letra guia por trás */}
+        <div className="absolute inset-0 grid place-items-center pointer-events-none select-none">
+          <span
+            style={{
+              fontSize: 260,
+              lineHeight: 1,
+              fontWeight: 900,
+              color: cor,
+              opacity: 0.15,
+            }}
+          >
+            {m.letra}
+          </span>
+        </div>
+        <canvas
+          ref={canvasRef}
+          width={300}
+          height={300}
+          className="absolute inset-0 rounded-3xl border-4 touch-none"
+          style={{ borderColor: cor, background: "rgba(255,255,255,0.6)" }}
+          onPointerDown={start}
+          onPointerMove={move}
+          onPointerUp={end}
+          onPointerLeave={end}
+        />
+      </div>
+      <div className="mt-3 flex items-center justify-center gap-3">
+        <div className="h-2 w-40 bg-purple-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-purple-600 transition-all"
+            style={{ width: `${Math.min(100, (pontos / min) * 100)}%` }}
+          />
+        </div>
+        <button onClick={limpar} className="text-sm text-purple-700 underline">
+          Apagar
+        </button>
+      </div>
+      {ok && (
+        <p className="mt-3 text-center font-black text-green-700">
+          🌟 Muito bem! Você desenhou o {m.letra}!
+        </p>
+      )}
+    </CardScreen>
+  );
+}
+
+function LetrasMoveisBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "letrasMoveis" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const alvo = m.palavra.toUpperCase().split("");
+  const banco = useMemo(() => {
+    const all = [...alvo, ...m.distratoras.map((l) => l.toUpperCase())];
+    // embaralho estável (não pode reordenar a cada render)
+    return all
+      .map((l, i) => ({ l, k: `${l}-${i}` }))
+      .sort(() => Math.random() - 0.5);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const [slots, setSlots] = useState<(string | null)[]>(() => alvo.map(() => null));
+  const [usados, setUsados] = useState<Set<string>>(new Set());
+  const [msg, setMsg] = useState<string | null>(null);
+
+  const posicaoLivre = () => slots.findIndex((s) => s === null);
+
+  const colocar = (letra: string, chave: string) => {
+    const idxLivre = posicaoLivre();
+    if (idxLivre < 0) return;
+    const next = [...slots];
+    next[idxLivre] = letra;
+    setSlots(next);
+    setUsados((s) => new Set(s).add(chave));
+    speak(letra);
+    // valida
+    if (next.every((v, i) => v === alvo[i])) {
+      setTimeout(() => {
+        speak(m.palavra + ". " + m.elogio);
+        setMsg(m.elogio);
+        setTimeout(onOk, 900);
+      }, 400);
+    } else if (next.every((v) => v !== null)) {
+      setTimeout(() => {
+        speak("Quase! Vamos tentar de novo.");
+        setSlots(alvo.map(() => null));
+        setUsados(new Set());
+      }, 700);
+    }
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Monta a palavra" cor={cor} />
+      <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
+      <BigListenButton
+        onClick={() => speak(`${m.instrucaoAudio}. A palavra é ${m.palavra}.`)}
+        label="Ouvir"
+      />
+      {/* Slots da palavra */}
+      <div className="mt-4 flex justify-center gap-2 flex-wrap">
+        {slots.map((l, i) => (
+          <div
+            key={i}
+            className="w-14 h-16 rounded-xl border-2 border-dashed grid place-items-center font-black text-3xl"
+            style={{ borderColor: cor, color: cor, background: l ? "rgba(255,255,255,0.9)" : "transparent" }}
+          >
+            {l ?? ""}
+          </div>
+        ))}
+      </div>
+      {/* Banco de letras */}
+      <div className="mt-4 flex justify-center gap-2 flex-wrap">
+        {banco.map(({ l, k }) => {
+          const usado = usados.has(k);
+          return (
+            <button
+              key={k}
+              disabled={usado}
+              onClick={() => colocar(l, k)}
+              className={`w-14 h-14 rounded-xl font-black text-2xl shadow active:scale-90 transition ${
+                usado ? "bg-slate-200 text-slate-400" : "bg-white text-purple-700 border-2 border-purple-300"
+              }`}
+            >
+              {l}
+            </button>
+          );
+        })}
+      </div>
+      {msg && <p className="mt-3 text-center font-black text-green-700">🌟 {msg}</p>}
+    </CardScreen>
+  );
+}
+
+function ElkoninBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "elkoninBoxes" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [passo, setPasso] = useState(0);
+  const [ok, setOk] = useState(false);
+  const tocar = (i: number) => {
+    if (i !== passo) return;
+    speak(m.fonemas[i]);
+    const n = i + 1;
+    if (n >= m.fonemas.length) {
+      setOk(true);
+      setTimeout(() => {
+        speak(`${m.palavra}. ${m.elogio}`);
+        setTimeout(onOk, 900);
+      }, 500);
+    }
+    setPasso(n);
+  };
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Uma caixa, um som" cor={cor} />
+      <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
+      <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+      <div className="mt-5 flex justify-center gap-3">
+        {m.fonemas.map((_, i) => {
+          const feito = i < passo;
+          const ativo = i === passo && !ok;
+          return (
+            <button
+              key={i}
+              onClick={() => tocar(i)}
+              disabled={!ativo}
+              className={`w-16 h-16 rounded-xl border-4 grid place-items-center text-2xl font-black transition ${
+                feito
+                  ? "bg-yellow-300 border-yellow-500 text-purple-800 scale-110"
+                  : ativo
+                  ? "bg-white border-purple-500 text-purple-500 animate-pulse"
+                  : "bg-slate-100 border-slate-300 text-transparent"
+              }`}
+            >
+              {feito ? "●" : "?"}
+            </button>
+          );
+        })}
+      </div>
+      {ok && (
+        <p className="mt-3 text-center font-black text-green-700">
+          🌟 {m.palavra} tem {m.fonemas.length} sons!
+        </p>
+      )}
+    </CardScreen>
+  );
+}
+
+function PareamentoBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "pareamentoLetraSom" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [selLetra, setSelLetra] = useState<string | null>(null);
+  const [pares, setPares] = useState<Set<string>>(new Set());
+  const [erro, setErro] = useState<string | null>(null);
+  const imagens = useMemo(
+    () => [...m.pares].sort(() => Math.random() - 0.5),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const clicarImagem = (nome: string) => {
+    if (!selLetra) return;
+    const par = m.pares.find((p) => p.letra === selLetra);
+    if (par && par.nome === nome) {
+      const novo = new Set(pares).add(selLetra);
+      setPares(novo);
+      speak(`${selLetra}, ${nome}. Isso!`);
+      setSelLetra(null);
+      setErro(null);
+      if (novo.size >= m.pares.length) {
+        setTimeout(() => {
+          speak(m.elogio);
+          setTimeout(onOk, 800);
+        }, 500);
+      }
+    } else {
+      setErro("Quase! Escute o som da letra de novo.");
+      speak("Quase! Escute o som da letra de novo.");
+    }
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Liga a letra ao som" cor={cor} />
+      <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+      <p className="mt-4 text-center text-sm text-slate-600">1. Toca numa letra e escuta:</p>
+      <div className="flex justify-center gap-3 mt-2 flex-wrap">
+        {m.pares.map((p) => {
+          const feito = pares.has(p.letra);
+          const sel = selLetra === p.letra;
+          return (
+            <button
+              key={p.letra}
+              disabled={feito}
+              onClick={() => {
+                setSelLetra(p.letra);
+                speak(p.letra);
+                setErro(null);
+              }}
+              className={`w-16 h-16 rounded-2xl font-black text-3xl shadow transition ${
+                feito
+                  ? "bg-emerald-500 text-white"
+                  : sel
+                  ? "bg-yellow-300 text-purple-800 scale-110 ring-4 ring-yellow-500"
+                  : "bg-white text-purple-700 border-2 border-purple-300"
+              }`}
+            >
+              {feito ? "✓" : p.letra}
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-4 text-center text-sm text-slate-600">
+        2. Depois toca na figura que começa com esse som:
+      </p>
+      <div className="mt-2 grid grid-cols-3 gap-3">
+        {imagens.map((p) => (
+          <button
+            key={p.nome}
+            disabled={pares.has(p.letra)}
+            onClick={() => clicarImagem(p.nome)}
+            className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
+              pares.has(p.letra) ? "border-emerald-500 bg-emerald-50" : "border-purple-200 bg-white"
+            }`}
+          >
+            <ImageFrame src={p.imagemUrl} alt={p.nome} size="md" />
+          </button>
+        ))}
+      </div>
+      {erro && <p className="mt-3 text-center text-orange-700 font-semibold">{erro}</p>}
+    </CardScreen>
+  );
+}
+
 
 // -------- Player principal --------------------------------------------
 
@@ -498,6 +965,15 @@ export function PlayerPortuguesEI({
           <MomentoRender key={i} m={m} idx={i} cor={cor} onOk={() => marcar(i)} />
         ))}
 
+        {aula.baseCientifica && (
+          <div className="rounded-2xl bg-white/85 border-2 border-white/60 p-4 text-[11px] text-slate-700 leading-relaxed">
+            <p className="font-black text-purple-700 mb-1">
+              📚 Base científica desta missão
+            </p>
+            <p>{aula.baseCientifica}</p>
+          </div>
+        )}
+
         {feitos.size === aula.momentos.length && (
           <div className="text-center py-6">
             <button
@@ -508,6 +984,7 @@ export function PlayerPortuguesEI({
             </button>
           </div>
         )}
+
       </div>
     </div>
   );
