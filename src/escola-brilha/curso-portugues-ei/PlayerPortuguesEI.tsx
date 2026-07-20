@@ -1,6 +1,58 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { speakChunked, stopSpeaking, sanitizeForSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking, sanitizeForSpeech, pickPtBrVoice } from "@/lib/native-tts";
+
+/** Fala UMA palavra com sincronia real: destaca no onstart e resolve no onend.
+ *  Usa Utterance direto para evitar dedupe/queue do speakChunked em loops de karaokê. */
+function speakWordSync(
+  word: string,
+  rate: number,
+  onStart: () => void,
+): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      onStart();
+      resolve();
+      return;
+    }
+    const synth = window.speechSynthesis;
+    const texto = sanitizeForSpeech(word).trim() || word;
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "pt-BR";
+    u.rate = rate;
+    u.pitch = 1.15;
+    const voice = pickPtBrVoice();
+    if (voice) u.voice = voice;
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      resolve();
+    };
+    // Alguns navegadores atrasam onstart; destacamos imediatamente ao enfileirar.
+    onStart();
+    u.onstart = () => {
+      // Reforça o destaque se o React já processou.
+      onStart();
+    };
+    u.onend = finish;
+    u.onerror = finish;
+    // Watchdog proporcional ao tamanho da palavra e ao rate.
+    const watchdogMs = Math.max(900, Math.ceil((texto.length * 260) / Math.max(rate, 0.5)));
+    const wd = window.setTimeout(finish, watchdogMs);
+    // limpa o timeout ao terminar
+    const clearWd = () => window.clearTimeout(wd);
+    u.addEventListener?.("end", clearWd);
+    u.addEventListener?.("error", clearWd);
+    try {
+      synth.resume();
+      synth.speak(u);
+      synth.resume();
+    } catch {
+      finish();
+    }
+  });
+}
 import type { AulaEI, MomentoEI, CursoEI } from "./types";
 
 /**
