@@ -233,7 +233,7 @@ function TrilhaLerComAurora() {
           curso={cursoLerComAuroraFase8}
           concluidas={concluidas}
           gradiente="linear-gradient(135deg,#0ea5e9,#0c4a6e)"
-          badge="FASE 8 · COMPREENSÃO ESTRATÉGICA (semana 1/4)"
+          badge="FASE 8 · COMPREENSÃO ESTRATÉGICA (semana 2/4)"
         />
 
 
