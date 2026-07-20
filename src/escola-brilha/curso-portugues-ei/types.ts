@@ -288,6 +288,20 @@ export type MomentoEI =
       feedbackErro: string;
       elogio: string;
     }
+  // ============ FASE 8 · Semana 2 — Resumir (frase-chave) ============
+  | {
+      tipo: "resumirFrase";
+      // Estratégia "Resumir": criança escuta uma micro-história (3 cenas)
+      // e escolhe entre 3 FRASES qual conta a história inteira em uma
+      // frase só. Base: Duke & Pearson 2002 · NRP 2000.
+      titulo?: string;
+      cenas: Array<{ imagemUrl: string; narracao: string }>;
+      pergunta: string;              // "Qual frase conta a história?"
+      instrucaoAudio: string;
+      opcoes: Array<{ frase: string; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
+      elogio: string;
   // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
   | {
       tipo: "diplomaFase";
