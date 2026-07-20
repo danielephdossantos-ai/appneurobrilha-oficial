@@ -633,8 +633,12 @@ function MomentoRender({
 
     case "compreensaoLeitura":
       return <CompreensaoLeituraBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "leituraEco":
+      return <LeituraEcoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
+
 
 // ============ Utilidades da Fase 3 ============
 
