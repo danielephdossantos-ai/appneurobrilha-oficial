@@ -296,7 +296,7 @@ export const cursoPre2: CursoEI = {
       numero: 1,
       titulo: "O Som das Palavras e o Ritmo do Corpo",
       subtitulo: "Palavras grandes, ideias grandes",
-      aulas: [aula01],
+      aulas: [aula01, aula02],
     },
   ],
 };
