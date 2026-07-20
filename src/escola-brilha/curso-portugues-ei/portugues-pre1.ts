@@ -15,6 +15,13 @@ import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 import { url as abelha } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
 import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as chocalho } from "@/assets/neuro-treino/objetos/chocalho.png.asset.json";
+import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
+import { url as raposa } from "@/assets/neuro-treino/objetos/raposa.png.asset.json";
+import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
+import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
 
 /**
  * Pré I (4-5 anos) — Unidade 1 · Aula 1
@@ -63,7 +70,7 @@ const aula01: AulaEI = {
         { nome: "flor", imagemUrl: flor, correta: false },
       ],
       feedbackAcerto: "Isso! Casa e coelho começam com o som CÊ!",
-      feedbackErro: "Vamos escutar de novo: CAAA-sa. Qual começa com CÊ?",
+      feedbackErro: "Vamos escutar de novo: casa começa com CÊ. Qual começa com CÊ?",
     },
     {
       tipo: "ritmoCorpo",
@@ -183,7 +190,7 @@ const aula02: AulaEI = {
         { nome: "borboleta", imagemUrl: borboleta, correta: false },
       ],
       feedbackAcerto: "Isso! Gato e galo começam com o som GÊ!",
-      feedbackErro: "Escuta: GAAA-to. Qual outra começa com o som GÊ?",
+      feedbackErro: "Escuta: gato começa com GÊ. Qual outra começa com o som GÊ?",
     },
     {
       tipo: "ritmoCorpo",
@@ -339,11 +346,11 @@ const aula04: AulaEI = {
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "sapo", imagemUrl: sapo, correta: false },
     ], feedbackAcerto: "Isso! Depois da chuva vem o SOL e o ARCO-ÍRIS!", feedbackErro: "Escuta o final: depois vem o SOL e o ARCO-ÍRIS." },
-    { tipo: "somInicial", instrucaoAudio: "CHUVA começa com CHHH. Qual outra começa com CHHH?", referencia: { nome: "chuva", imagemUrl: chuva }, opcoes: [
-      { nome: "chocalho (agita)", imagemUrl: passaro, correta: true },
+    { tipo: "somInicial", instrucaoAudio: "CHUVA começa com CH. Qual outra começa com CH?", referencia: { nome: "chuva", imagemUrl: chuva }, opcoes: [
+      { nome: "chocalho", imagemUrl: chocalho, correta: true },
       { nome: "flor", imagemUrl: flor, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
-    ], feedbackAcerto: "Boa! CHHH-uva, CHHH-ocalho!", feedbackErro: "O sopro do início é CHHH." },
+    ], feedbackAcerto: "Boa! Chuva e chocalho começam com CH!", feedbackErro: "O som do início é CH." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "CHU-VA", silabas: 2, imagemUrl: chuva, elogio: "Duas palminhas! Chu-va!" },
     { tipo: "historiaIlustrada", titulo: "A gota Pingo", cenas: [
       { imagemUrl: chuva, narracao: "A gotinha Pingo estava lá em cima na nuvem, com muitas amigas." },
@@ -379,14 +386,14 @@ const aula05: AulaEI = {
       "Vou contar direitinho tudo o que eu vivi!",
     ] },
     { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada lugar de passeio:", itens: [
-      { nome: "parque", imagemUrl: flor },
+      { nome: "parque", imagemUrl: parque },
       { nome: "casa da vovó", imagemUrl: casa },
       { nome: "praia", imagemUrl: bola },
     ] },
     { tipo: "historiaIlustrada", titulo: "O passeio da Nina", cenas: [
       { imagemUrl: casa, narracao: "ANTES: Nina acordou e disse: 'Hoje vou pro parque com o papai!'" },
       { imagemUrl: passaro, narracao: "DURANTE: No parque, subiu no escorregador 5 vezes e viu passarinhos comendo!" },
-      { imagemUrl: flor, narracao: "DEPOIS: Voltou pra casa cansada, mostrou uma flor que achou e comeu bolo!" },
+      { imagemUrl: parque, narracao: "DEPOIS: Voltou pra casa cansada, mostrou uma flor que achou e comeu bolo!" },
     ] },
     { tipo: "compreensaoImagem", perguntaAudio: "O que a Nina fez no parque?", opcoes: [
       { nome: "escorregou muitas vezes", imagemUrl: passaro, correta: true },
@@ -401,11 +408,11 @@ const aula05: AulaEI = {
       { nome: "passeio na bicicleta", imagemUrl: passaro },
     ] },
     { tipo: "fazDeConta", imagemUrl: flor, convite: "Faz de conta que está no parque agora! Balança os braços como se estivesse no balanço!" },
-    { tipo: "somInicial", instrucaoAudio: "PARQUE começa com PPP. Qual outra começa igual?", referencia: { nome: "parque", imagemUrl: flor }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "PARQUE começa com P. Qual outra começa igual?", referencia: { nome: "parque", imagemUrl: parque }, opcoes: [
       { nome: "peixe", imagemUrl: peixe, correta: true },
       { nome: "casa", imagemUrl: casa, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
-    ], feedbackAcerto: "Boa! PPP-arque, PPP-eixe!", feedbackErro: "Escuta o sopro do começo: PPP!" },
+    ], feedbackAcerto: "Boa! Parque e peixe começam com P!", feedbackErro: "Escuta o começo: parque e peixe começam com P." },
     { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Na hora de dormir, conta pro adulto o passeio MAIS legal que já fez. Fala ANTES, DURANTE, DEPOIS!", dicaAdulto: "Estruturar narrativa (começo/meio/fim) é essencial para escrita futura." },
     { tipo: "celebracao", medalha: "Explorador do Dia", mascoteUrl: brilha, falaFinal: "Que passeio legal você contou! Sua boquinha já sabe fazer história!" },
   ],
@@ -444,11 +451,11 @@ const aula06: AulaEI = {
       { nome: "flor", imagemUrl: flor },
       { nome: "passarinho", imagemUrl: passaro },
     ] },
-    { tipo: "somInicial", instrucaoAudio: "REI começa com RRR. Qual outra começa igual?", referencia: { nome: "rei", imagemUrl: coelho }, opcoes: [
-      { nome: "raposa (bicho)", imagemUrl: sapo, correta: true },
+    { tipo: "somInicial", instrucaoAudio: "REI começa com R. Qual outra começa igual?", referencia: { nome: "rei", imagemUrl: coelho }, opcoes: [
+      { nome: "raposa", imagemUrl: raposa, correta: true },
       { nome: "flor", imagemUrl: flor, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
-    ], feedbackAcerto: "Boa! RRR-ei, RRR-aposa!", feedbackErro: "Escuta o rrrronco do começo: RRR!" },
+    ], feedbackAcerto: "Boa! Rei e raposa começam com R!", feedbackErro: "Escuta o começo: rei e raposa começam com R." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "CO-RO-A", silabas: 3, imagemUrl: coelho, elogio: "Três palminhas! Co-ro-a!" },
     { tipo: "compreensaoImagem", perguntaAudio: "Onde o rei tirou a coroa da cabeça?", opcoes: [
       { nome: "no jardim, pra cheirar uma flor", imagemUrl: flor, correta: true },
@@ -523,8 +530,8 @@ const aula08: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Sabia que seu NOME é uma palavra ESPECIAL? Ninguém escreve igual ao seu! Vamos brincar de risco?" },
     { tipo: "vocabularioVisual", instrucaoAudio: "Toca no que serve pra escrever:", itens: [
-      { nome: "lápis", imagemUrl: passaro },
-      { nome: "papel", imagemUrl: flor },
+      { nome: "lápis", imagemUrl: lapis },
+      { nome: "papel", imagemUrl: papel },
       { nome: "tinta", imagemUrl: arcoIris },
     ] },
     { tipo: "escutaRitmada", imagemUrl: brilha, versos: [
@@ -533,8 +540,8 @@ const aula08: AulaEI = {
       "Cada letra é minha — vamos aprender!",
     ] },
     { tipo: "historiaIlustrada", titulo: "O rabisco da Mia", cenas: [
-      { imagemUrl: flor, narracao: "A Mia pegou um giz e riscou um sol grandão." },
-      { imagemUrl: casa, narracao: "Depois riscou uma casa com telhado pontudo." },
+      { imagemUrl: lapis, narracao: "A Mia pegou um giz e riscou um sol grandão." },
+      { imagemUrl: papel, narracao: "Depois riscou uma casa com telhado pontudo." },
       { imagemUrl: brilha, narracao: "Por último, tentou escrever o próprio nome: M-I-A. Ficou torto, mas era o NOME dela!" },
     ] },
     { tipo: "compreensaoImagem", perguntaAudio: "O que a Mia tentou escrever no final?", opcoes: [
@@ -542,12 +549,12 @@ const aula08: AulaEI = {
       { nome: "uma flor", imagemUrl: flor, correta: false },
       { nome: "um bicho", imagemUrl: coelho, correta: false },
     ], feedbackAcerto: "Isso! O NOME dela!", feedbackErro: "Foi o NOME dela: M-I-A!" },
-    { tipo: "somInicial", instrucaoAudio: "MIA começa com MMM. Qual outra começa com MMM?", referencia: { nome: "mia (miau)", imagemUrl: gato }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "MIA começa com M. Qual outra começa com M?", referencia: { nome: "mia (miau)", imagemUrl: gato }, opcoes: [
       { nome: "mel (abelha)", imagemUrl: abelha, correta: true },
       { nome: "flor", imagemUrl: flor, correta: false },
       { nome: "sapo", imagemUrl: sapo, correta: false },
-    ], feedbackAcerto: "Boa! MMM-ia, MMM-el!", feedbackErro: "O começo é MMMM." },
-    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "PA-PEL", silabas: 2, imagemUrl: flor, elogio: "Duas palminhas! Pa-pel!" },
+    ], feedbackAcerto: "Boa! Mia e mel começam com M!", feedbackErro: "O começo é M." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "PA-PEL", silabas: 2, imagemUrl: papel, elogio: "Duas palminhas! Pa-pel!" },
     { tipo: "fazDeConta", imagemUrl: brilha, convite: "Levanta o dedinho e escreve seu NOME no ar! Bem grande!" },
     { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Como começa o seu nome? Qual é a primeira letra? Fala pro Brilha!", exemplos: [
       { nome: "com A", imagemUrl: arcoIris },
@@ -586,7 +593,7 @@ const aula09: AulaEI = {
       { nome: "sol (peixe)", imagemUrl: peixe, correta: false },
       { nome: "sapato (calçado)", imagemUrl: coelho, correta: true },
       { nome: "flor", imagemUrl: flor, correta: false },
-    ], feedbackAcerto: "Boa! SSS-apo, SSS-apato!", feedbackErro: "O sopro do começo é SSS." },
+    ], feedbackAcerto: "Boa! Sapo e sapato começam com S!", feedbackErro: "O começo é S." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra maior:", palavra: "AR-CO-Í-RIS", silabas: 4, imagemUrl: arcoIris, elogio: "QUATRO palmas! Arco-íris é grandão!" },
     { tipo: "historiaIlustrada", titulo: "A festa que reuniu todo mundo", cenas: [
       { imagemUrl: coelho, narracao: "O coelho rei chamou todos os bichos: 'Vamos fazer uma FESTA!'" },
