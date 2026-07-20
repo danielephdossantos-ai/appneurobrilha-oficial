@@ -10,6 +10,12 @@ import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecari
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as rato } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as pipa } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
 
 /**
  * Pré II (5-6 anos) — Unidade 1 · Aula 1
