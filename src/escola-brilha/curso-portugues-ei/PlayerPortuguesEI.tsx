@@ -1624,27 +1624,32 @@ function LeituraTextoBloco({
     };
   }, []);
 
-  const lerTexto = (rate: number) => {
+  const lerTexto = async (rate: number) => {
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
     stopSpeaking();
     setOuviu(true);
     setAtiva({ f: -1, w: -1 });
-    const gap = rate < 0.85 ? 120 : 90;
-    let delay = 0;
-    palavrasPorFrase.forEach((palavras, fi) => {
-      palavras.forEach((p, wi) => {
-        const t = window.setTimeout(() => {
-          setAtiva({ f: fi, w: wi });
-          speakChunked(p.toLowerCase(), { rate, queue: false });
-        }, delay);
+    const runToken = ++karaokeRunRef.current;
+    const gap = rate < 0.85 ? 160 : 110;
+    for (let fi = 0; fi < palavrasPorFrase.length; fi++) {
+      const palavras = palavrasPorFrase[fi];
+      for (let wi = 0; wi < palavras.length; wi++) {
+        if (runToken !== karaokeRunRef.current) return;
+        setAtiva({ f: fi, w: wi });
+        await speakChunked(palavras[wi].toLowerCase(), { rate, queue: true });
+        if (runToken !== karaokeRunRef.current) return;
+        await new Promise((r) => {
+          const t = window.setTimeout(r, gap);
+          timersRef.current.push(t);
+        });
+      }
+      await new Promise((r) => {
+        const t = window.setTimeout(r, 300);
         timersRef.current.push(t);
-        delay += Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
       });
-      delay += 300; // pausa entre frases
-    });
-    const tFim = window.setTimeout(() => setAtiva({ f: -1, w: -1 }), delay + 200);
-    timersRef.current.push(tFim);
+    }
+    if (runToken === karaokeRunRef.current) setAtiva({ f: -1, w: -1 });
   };
 
   return (
