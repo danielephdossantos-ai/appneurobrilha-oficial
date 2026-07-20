@@ -8,9 +8,41 @@
  * duplica palavras (título "🏫 — ESCOLA" ficava "escola escola").
  * Também converte separadores visuais (— · • | →) em pausa curta.
  */
-export function sanitizeForSpeech(text: string): string {
+export function normalizeLiteracyTextForSpeech(text: string): string {
   if (!text) return "";
   let out = text;
+
+  // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
+  out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
+
+  // O Web Speech costuma se perder quando uma palavra aparece silabada
+  // com espaços/hífens (ex.: BOR-BO-LE-TA ou bo bo le ta). Para a voz do
+  // professor, juntamos palavras de treino conhecidas sem alterar o visual.
+  const replacements: Array<[RegExp, string]> = [
+    [/\b(?:bor|bo)\s*[-·]?\s*bo\s*[-·]?\s*le\s*[-·]?\s*ta\b/gi, "borboleta"],
+    [/\bdi\s*[-·]?\s*nos\s*[-·]?\s*sau\s*[-·]?\s*ro\b/gi, "dinossauro"],
+    [/\bca\s*[-·]?\s*chor\s*[-·]?\s*ro\b/gi, "cachorro"],
+    [/\bpas\s*[-·]?\s*sa\s*[-·]?\s*ri\s*[-·]?\s*nho\b/gi, "passarinho"],
+    [/\ba\s*[-·]?\s*be\s*[-·]?\s*lha\b/gi, "abelha"],
+    [/\bbo\s*[-·]?\s*la\b/gi, "bola"],
+    [/\bca\s*[-·]?\s*sa\b/gi, "casa"],
+    [/\bga\s*[-·]?\s*to\b/gi, "gato"],
+    [/\bpa\s*[-·]?\s*to\b/gi, "pato"],
+    [/\bsa\s*[-·]?\s*po\b/gi, "sapo"],
+    [/\blu\s*[-·]?\s*a\b/gi, "lua"],
+    [/\bso\s*[-·]?\s*l\b/gi, "sol"],
+  ];
+
+  replacements.forEach(([pattern, replacement]) => {
+    out = out.replace(pattern, replacement);
+  });
+
+  return out;
+}
+
+export function sanitizeForSpeech(text: string): string {
+  if (!text) return "";
+  let out = normalizeLiteracyTextForSpeech(text);
   // Remove qualquer símbolo/pictograma/emoji unicode
   out = out.replace(/\p{Extended_Pictographic}/gu, " ");
   out = out.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, " ");
