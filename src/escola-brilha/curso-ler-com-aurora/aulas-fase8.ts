@@ -354,8 +354,325 @@ const a5: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 8 (Semana 1 · 5 missões)
- * Próximas semanas: Resumir · Inferir · Conectar + Diploma
+ * SEMANA 2 — Resumir (contar a história em UMA frase)
+ * ============================================================ */
+
+const BASE_RESUMIR =
+  "Estratégia 'Resumir' (Duke & Pearson 2002): dentre várias frases, a criança escolhe a que captura a ideia principal da micro-história. Sumarizar é um dos preditores mais fortes de compreensão leitora (NRP 2000; Kintsch 1998).";
+
+const a6: AulaEI = {
+  slug: "f8-dia-06-resumir-cachorro-perdido",
+  titulo: "Dia 6 · Cadê meu cachorro?",
+  icone: "🐶",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_RESUMIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana nova! Agora a gente vai contar a história inteira em UMA frase só. Isso se chama RESUMIR.",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "Cadê o cachorro?",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina foi passear com o cachorro no parque." },
+        { imagemUrl: cachorro, narracao: "O cachorro correu atrás de um passarinho e sumiu." },
+        { imagemUrl: menina, narracao: "A menina procurou muito e achou o cachorro debaixo de uma árvore." },
+      ],
+      pergunta: "Qual frase conta a história inteira?",
+      instrucaoAudio: "Toque na frase que resume a história toda.",
+      opcoes: [
+        { frase: "A menina achou o cachorro que tinha fugido.", correta: true },
+        { frase: "A menina comeu sorvete no parque.", correta: false },
+        { frase: "O cachorro foi para a escola.", correta: false },
+      ],
+      feedbackAcerto: "Isso mesmo! Essa frase conta tudo: começo, meio e fim.",
+      feedbackErro: "Essa é só um pedacinho. Procure a frase que conta a história inteira.",
+      elogio: "Você resumiu como um leitor de verdade!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "A menina esperta",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina viu que o cachorro estava com sede." },
+        { imagemUrl: regador, narracao: "Ela foi buscar água pra ele beber." },
+        { imagemUrl: cachorro, narracao: "O cachorro tomou toda a água e ficou feliz." },
+      ],
+      pergunta: "Qual frase resume a história?",
+      instrucaoAudio: "Escolha a frase certa.",
+      opcoes: [
+        { frase: "A menina deu água pro cachorro com sede.", correta: true },
+        { frase: "O cachorro correu atrás de um balão.", correta: false },
+        { frase: "A menina foi na escola de manhã.", correta: false },
+      ],
+      feedbackAcerto: "Perfeito! Você achou a ideia principal!",
+      feedbackErro: "Essa frase não fala do que aconteceu. Tenta de novo.",
+      elogio: "Muito bem!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Resumidor · Dia 6",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: um menino que caiu na escola. O que será que aconteceu?",
+    },
+  ],
+};
+
+const a7: AulaEI = {
+  slug: "f8-dia-07-resumir-tropeco-escola",
+  titulo: "Dia 7 · O tropeção",
+  icone: "🎒",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_RESUMIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje a história é de escola. Escuta bem e resume!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "Na escola",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino correu para a escola porque estava atrasado." },
+        { imagemUrl: mochila, narracao: "A mochila estava aberta e os cadernos caíram no chão." },
+        { imagemUrl: menino, narracao: "Uma amiga viu, ajudou a juntar tudo e os dois entraram na sala." },
+      ],
+      pergunta: "Qual frase conta a história inteira?",
+      instrucaoAudio: "Toque na frase certa.",
+      opcoes: [
+        { frase: "O menino derrubou a mochila e uma amiga ajudou.", correta: true },
+        { frase: "O menino comeu bolo no parque.", correta: false },
+        { frase: "A escola foi fechada por causa da chuva.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Essa frase tem começo, meio e fim.",
+      feedbackErro: "Não é sobre isso. Escuta de novo e escolhe.",
+      elogio: "Você é craque em resumir!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "Amigos na sala",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina não queria dividir o lápis novo." },
+        { imagemUrl: menino, narracao: "O colega ficou triste e não pediu de novo." },
+        { imagemUrl: menina, narracao: "Ela pensou, sorriu e emprestou o lápis pro amigo." },
+      ],
+      pergunta: "Qual frase resume tudo?",
+      instrucaoAudio: "Escolha a frase que fala da história inteira.",
+      opcoes: [
+        { frase: "A menina resolveu emprestar o lápis pro colega.", correta: true },
+        { frase: "O menino jogou o lápis fora.", correta: false },
+        { frase: "A menina foi comer sopa em casa.", correta: false },
+      ],
+      feedbackAcerto: "Boa! Essa frase mostra o começo e o fim da história.",
+      feedbackErro: "Isso não aconteceu na história. Tenta de novo.",
+      elogio: "Mandou bem!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Resumidor · Dia 7",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã tem festa de aniversário e bolo. Prepara o resumo!",
+    },
+  ],
+};
+
+const a8: AulaEI = {
+  slug: "f8-dia-08-resumir-bolo-aniversario",
+  titulo: "Dia 8 · Bolo de aniversário",
+  icone: "🎂",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_RESUMIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje é dia de festa! Vamos contar a história do aniversário em uma frase só.",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "Festa surpresa",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina fez aniversário e a família preparou uma surpresa." },
+        { imagemUrl: bolo, narracao: "Trouxeram um bolo bem grande com velinhas coloridas." },
+        { imagemUrl: menina, narracao: "Ela pediu um desejo, soprou as velas e todo mundo bateu palma." },
+      ],
+      pergunta: "Qual frase conta a história?",
+      instrucaoAudio: "Escolha a frase que resume tudo.",
+      opcoes: [
+        { frase: "A menina soprou as velas do bolo de aniversário.", correta: true },
+        { frase: "O cachorro correu no parque.", correta: false },
+        { frase: "O menino soltou a pipa no vento.", correta: false },
+      ],
+      feedbackAcerto: "Sim! Essa frase fala do momento principal.",
+      feedbackErro: "Essa não é a história de hoje. Escuta e tenta de novo.",
+      elogio: "Você achou a ideia principal!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "O cachorro guloso",
+      cenas: [
+        { imagemUrl: bolo, narracao: "O bolo ficou em cima da mesa, esperando os convidados." },
+        { imagemUrl: cachorro, narracao: "O cachorro subiu na cadeira sem ninguém ver." },
+        { imagemUrl: cachorro, narracao: "Ele lambeu o brigadeiro e todo mundo riu quando descobriu." },
+      ],
+      pergunta: "Qual frase resume a história?",
+      instrucaoAudio: "Escolha a frase certa.",
+      opcoes: [
+        { frase: "O cachorro lambeu o bolo da festa.", correta: true },
+        { frase: "A menina foi na escola.", correta: false },
+        { frase: "O menino comprou uma pipa nova.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Essa frase tem tudo o que importa.",
+      feedbackErro: "Essa frase é de outra história. Escuta de novo.",
+      elogio: "Você é um resumidor de primeira!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Resumidor · Dia 8",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã a gente vai pra escola com a mochila cheia. Prepara os ouvidos!",
+    },
+  ],
+};
+
+const a9: AulaEI = {
+  slug: "f8-dia-09-resumir-caminho-escola",
+  titulo: "Dia 9 · A caminho da escola",
+  icone: "🚸",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_RESUMIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Uma historinha do caminho pra escola. Ouve e resume!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "O guarda-chuva",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino saiu de casa e viu que o céu estava fechado." },
+        { imagemUrl: sombrinha, narracao: "Ele voltou correndo e pegou a sombrinha." },
+        { imagemUrl: chuva, narracao: "Quando começou a chover, ele chegou seco na escola." },
+      ],
+      pergunta: "Qual frase resume a história?",
+      instrucaoAudio: "Toque na frase certa.",
+      opcoes: [
+        { frase: "O menino pegou a sombrinha e chegou seco na escola.", correta: true },
+        { frase: "O menino esqueceu a mochila em casa.", correta: false },
+        { frase: "A menina foi ao parque brincar de pipa.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Essa frase conta a história do começo ao fim.",
+      feedbackErro: "Escuta de novo. Qual foi o final da história?",
+      elogio: "Mandou muito bem!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "A amiga nova",
+      cenas: [
+        { imagemUrl: menina, narracao: "Chegou uma menina nova na escola e ela estava tímida." },
+        { imagemUrl: menino, narracao: "Um colega foi até ela e chamou pra brincar no recreio." },
+        { imagemUrl: menina, narracao: "Elas viraram amigas e começaram a rir juntas." },
+      ],
+      pergunta: "Qual frase conta tudo?",
+      instrucaoAudio: "Escolha a frase que fala da história inteira.",
+      opcoes: [
+        { frase: "Um colega ajudou a menina nova e viraram amigos.", correta: true },
+        { frase: "A menina caiu do balanço no parque.", correta: false },
+        { frase: "O cachorro comeu o bolo da festa.", correta: false },
+      ],
+      feedbackAcerto: "Perfeito! Essa é a ideia principal.",
+      feedbackErro: "Essa frase é de outra história. Tenta de novo.",
+      elogio: "Você resumiu direitinho!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Resumidor · Dia 9",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã é o último dia da semana. Tem missão em família e medalha nova!",
+    },
+  ],
+};
+
+const a10: AulaEI = {
+  slug: "f8-dia-10-resumir-final-semana",
+  titulo: "Dia 10 · O passeio de bicicleta",
+  icone: "🚲",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_RESUMIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Último dia da Semana 2! Duas histórias, uma missão em família e a medalha da Semana 2 te esperam.",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "A pipa que voou",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino foi ao parque com a pipa nova." },
+        { imagemUrl: pipa, narracao: "O vento aumentou e levou a pipa até o alto da árvore." },
+        { imagemUrl: arvore, narracao: "Um vizinho ajudou a tirar a pipa da árvore e o menino sorriu de novo." },
+      ],
+      pergunta: "Qual frase resume tudo?",
+      instrucaoAudio: "Escolha a frase certa.",
+      opcoes: [
+        { frase: "O vizinho ajudou a tirar a pipa que ficou presa na árvore.", correta: true },
+        { frase: "O menino ganhou um cachorro novo.", correta: false },
+        { frase: "A menina apagou as velinhas do bolo.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Você achou o essencial da história.",
+      feedbackErro: "Essa frase não é dessa história. Escuta de novo.",
+      elogio: "Detetive do resumo!",
+    },
+    {
+      tipo: "resumirFrase",
+      titulo: "A florzinha salva",
+      cenas: [
+        { imagemUrl: flor, narracao: "A florzinha do quintal estava murcha por causa do sol forte." },
+        { imagemUrl: regador, narracao: "A menina pegou o regador e molhou bem a terra." },
+        { imagemUrl: flor, narracao: "No outro dia a flor abriu bonita de novo." },
+      ],
+      pergunta: "Qual frase conta a história inteira?",
+      instrucaoAudio: "Toque na frase certa.",
+      opcoes: [
+        { frase: "A menina regou a florzinha e ela ficou bonita de novo.", correta: true },
+        { frase: "O menino jogou bola no parque.", correta: false },
+        { frase: "O cachorro dormiu embaixo da mesa.", correta: false },
+      ],
+      feedbackAcerto: "Sim! Essa frase tem tudo o que aconteceu.",
+      feedbackErro: "Essa não é a história de hoje. Tenta de novo.",
+      elogio: "Você fechou com chave de ouro!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "🎒 Missão em Família — Conta em uma frase",
+      convite:
+        "Peça pra alguém da casa te contar uma historinha curta (do dia dela ou inventada). Depois, você conta a MESMA história em UMA frase só. Troquem: agora ela resume a sua!",
+      dicaAdulto:
+        "Resumir em uma frase é um dos preditores mais fortes de compreensão leitora (Kintsch 1998; NRP 2000). Aceite qualquer resumo que mantenha personagem + ação principal + desfecho.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Resumidor · Semana 2",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Você fechou a Semana 2! Semana que vem: descobrir o que o personagem SENTE mesmo sem a história dizer. Isso é INFERIR!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 8 (Semanas 1-2 · 10 missões)
+ * Próximas semanas: Inferir · Conectar + Diploma final
  * ============================================================ */
 
 export const cursoLerComAuroraFase8: CursoEI = {
@@ -375,6 +692,13 @@ export const cursoLerComAuroraFase8: CursoEI = {
       titulo: "Semana 1 · Prever",
       subtitulo: "Detetive da História",
       aulas: [a1, a2, a3, a4, a5],
+    },
+    {
+      slug: "f8-semana-02",
+      numero: 2,
+      titulo: "Semana 2 · Resumir",
+      subtitulo: "Conta em uma frase",
+      aulas: [a6, a7, a8, a9, a10],
     },
   ],
 };
