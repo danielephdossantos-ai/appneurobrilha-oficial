@@ -206,7 +206,20 @@ export type MomentoEI =
       opcoes: Array<{ texto: string; correta: boolean }>;
       feedbackAcerto: string;
       feedbackErro: string;
+    }
+  // ============ FASE 6 — Fluência Verdadeira ============
+  | {
+      tipo: "leituraEco";
+      // Aurora lê uma linha → criança repete no microfone (1×) →
+      // avança para a próxima linha. Modelagem + eco imediato
+      // (Rasinski 2004; NRP 2000).
+      titulo?: string;
+      imagemUrl: string;
+      linhas: string[]; // 3-5 frases curtas
+      instrucaoAudio: string;
+      elogio: string;
     };
+
 
 export interface AulaEI {
   slug: string;
