@@ -22,6 +22,30 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     return `${String(ch).toLowerCase()}${String(rest).toLowerCase()}`;
   });
 
+  // Sílabas CV em MAIÚSCULO dentro de instruções ("Junta MA com PA")
+  // fazem algumas vozes lerem "eme á". Para a fala do professor, convertemos
+  // apenas tokens isolados de sílabas para uma forma fonética curta.
+  const silabasSeguras: Record<string, string> = {
+    BA: "bá", BE: "be", BI: "bi", BO: "bó", BU: "bu",
+    CA: "cá", CO: "có", CU: "cu",
+    DA: "dá", DE: "de", DI: "di", DO: "dó", DU: "du",
+    FA: "fá", FE: "fe", FI: "fi", FO: "fó", FU: "fu",
+    GA: "gá", GO: "gó", GU: "gu",
+    JA: "já", JE: "je", JI: "ji", JO: "jó", JU: "ju",
+    LA: "lá", LE: "le", LI: "li", LO: "ló", LU: "lu",
+    MA: "má", ME: "me", MI: "mi", MO: "mó", MU: "mu",
+    NA: "ná", NE: "ne", NI: "ni", NO: "nó", NU: "nu",
+    PA: "pá", PE: "pe", PI: "pi", PO: "pó", PU: "pu",
+    RA: "rá", RE: "re", RI: "ri", RO: "ró", RU: "ru",
+    SA: "sá", SE: "se", SI: "si", SO: "só", SU: "su",
+    TA: "tá", TE: "te", TI: "ti", TO: "tó", TU: "tu",
+    VA: "vá", VE: "ve", VI: "vi", VO: "vó", VU: "vu",
+  };
+  out = out.replace(
+    /\b(BA|BE|BI|BO|BU|CA|CO|CU|DA|DE|DI|DO|DU|FA|FE|FI|FO|FU|GA|GO|GU|JA|JE|JI|JO|JU|LA|LE|LI|LO|LU|MA|ME|MI|MO|MU|NA|NE|NI|NO|NU|PA|PE|PI|PO|PU|RA|RE|RI|RO|RU|SA|SE|SI|SO|SU|TA|TE|TI|TO|TU|VA|VE|VI|VO|VU)\b/g,
+    (s) => silabasSeguras[s] ?? s.toLowerCase(),
+  );
+
   // Runs de letras romanas maiúsculas são lidas como
   // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
   // Convertemos vogais em som curto e consoantes em "som de X" para não virar
