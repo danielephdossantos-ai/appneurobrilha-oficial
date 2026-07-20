@@ -1403,6 +1403,7 @@ function LeituraFraseBloco({
   const [feedback, setFeedback] = useState<"ok" | "quase" | "erro" | null>(null);
   const [leiturasOk, setLeiturasOk] = useState(0);
   const timersRef = useRef<number[]>([]);
+  const karaokeRunRef = useRef(0);
   const recRef = useRef<any>(null);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
   const alvoTokens = normalizarFrase(m.frase);
@@ -1422,24 +1423,25 @@ function LeituraFraseBloco({
     };
   }, []);
 
-  const lerKaraoke = (rate: number) => {
+  const lerKaraoke = async (rate: number) => {
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
     stopSpeaking();
     setAtiva(-1);
-    const gap = rate < 0.85 ? 120 : 90;
-    let delay = 0;
-    palavras.forEach((p, i) => {
-      const t1 = window.setTimeout(() => {
-        setAtiva(i);
-        speakChunked(p.toLowerCase(), { rate, queue: false });
-      }, delay);
-      timersRef.current.push(t1);
-      const dur = Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
-      delay += dur;
-    });
-    const tFim = window.setTimeout(() => setAtiva(-1), delay + 200);
-    timersRef.current.push(tFim);
+    const runToken = ++karaokeRunRef.current;
+    const gap = rate < 0.85 ? 160 : 110;
+    for (let i = 0; i < palavras.length; i++) {
+      if (runToken !== karaokeRunRef.current) return;
+      setAtiva(i);
+      // enfileira (não cancela a fala anterior) e AGUARDA terminar antes de ir pra próxima
+      await speakChunked(palavras[i].toLowerCase(), { rate, queue: true });
+      if (runToken !== karaokeRunRef.current) return;
+      await new Promise((r) => {
+        const t = window.setTimeout(r, gap);
+        timersRef.current.push(t);
+      });
+    }
+    if (runToken === karaokeRunRef.current) setAtiva(-1);
   };
 
   const gravarLeitura = () => {
@@ -1608,6 +1610,7 @@ function LeituraTextoBloco({
   const [ouviu, setOuviu] = useState(false);
   const [ativa, setAtiva] = useState<{ f: number; w: number }>({ f: -1, w: -1 });
   const timersRef = useRef<number[]>([]);
+  const karaokeRunRef = useRef(0);
 
   const palavrasPorFrase = m.frases.map((f) =>
     f.replace(/[.!?]$/, "").split(/\s+/),
@@ -1621,27 +1624,32 @@ function LeituraTextoBloco({
     };
   }, []);
 
-  const lerTexto = (rate: number) => {
+  const lerTexto = async (rate: number) => {
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
     stopSpeaking();
     setOuviu(true);
     setAtiva({ f: -1, w: -1 });
-    const gap = rate < 0.85 ? 120 : 90;
-    let delay = 0;
-    palavrasPorFrase.forEach((palavras, fi) => {
-      palavras.forEach((p, wi) => {
-        const t = window.setTimeout(() => {
-          setAtiva({ f: fi, w: wi });
-          speakChunked(p.toLowerCase(), { rate, queue: false });
-        }, delay);
+    const runToken = ++karaokeRunRef.current;
+    const gap = rate < 0.85 ? 160 : 110;
+    for (let fi = 0; fi < palavrasPorFrase.length; fi++) {
+      const palavras = palavrasPorFrase[fi];
+      for (let wi = 0; wi < palavras.length; wi++) {
+        if (runToken !== karaokeRunRef.current) return;
+        setAtiva({ f: fi, w: wi });
+        await speakChunked(palavras[wi].toLowerCase(), { rate, queue: true });
+        if (runToken !== karaokeRunRef.current) return;
+        await new Promise((r) => {
+          const t = window.setTimeout(r, gap);
+          timersRef.current.push(t);
+        });
+      }
+      await new Promise((r) => {
+        const t = window.setTimeout(r, 300);
         timersRef.current.push(t);
-        delay += Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
       });
-      delay += 300; // pausa entre frases
-    });
-    const tFim = window.setTimeout(() => setAtiva({ f: -1, w: -1 }), delay + 200);
-    timersRef.current.push(tFim);
+    }
+    if (runToken === karaokeRunRef.current) setAtiva({ f: -1, w: -1 });
   };
 
   return (
