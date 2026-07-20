@@ -3213,3 +3213,136 @@ function InferirEmocaoBloco({
     </CardScreen>
   );
 }
+
+// ============ FASE 8 · Semana 4 — Conectar (texto ↔ vida) ============
+function ConexaoPessoalBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "conexaoPessoal" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [cenaAtual, setCenaAtual] = useState(0);
+  const [contouTudo, setContouTudo] = useState(false);
+  const [escolhida, setEscolhida] = useState<number | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+
+  const contarHistoria = () => {
+    stopSpeaking();
+    setContouTudo(false);
+    setCenaAtual(0);
+    let i = 0;
+    let cancelado = false;
+    const step = async () => {
+      if (cancelado) return;
+      if (i >= m.cenas.length) {
+        setContouTudo(true);
+        await new Promise((r) => setTimeout(r, 500));
+        if (cancelado) return;
+        await speakChunked(m.pergunta, { rate: 0.9, pitch: 1.1 });
+        return;
+      }
+      setCenaAtual(i);
+      await new Promise((r) => setTimeout(r, 350));
+      if (cancelado) return;
+      await speakChunked(m.cenas[i].narracao, { rate: 0.88, pitch: 1.1 });
+      if (cancelado) return;
+      await new Promise((r) => setTimeout(r, 700));
+      i++;
+      step();
+    };
+    step();
+  };
+
+  const escolher = (i: number) => {
+    const alvo = m.opcoes[i];
+    setEscolhida(i);
+    setMsg(alvo.respostaAurora);
+    stopSpeaking();
+    speakChunked(`${alvo.respostaAurora} ${m.elogio}`, { rate: 0.95, pitch: 1.1 });
+    setTimeout(onOk, 2600);
+  };
+
+  const cena = m.cenas[cenaAtual];
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={m.titulo ?? "Já aconteceu com você?"} cor={cor} />
+
+      <div className="mx-auto max-w-lg">
+        <ImageFrame src={cena.imagemUrl} alt={`cena ${cenaAtual + 1}`} size="xl" />
+        <p className="mt-3 text-center text-lg font-bold text-white/95 bg-black/40 rounded-2xl px-4 py-3">
+          {cena.narracao}
+        </p>
+        <div className="mt-2 flex justify-center gap-1">
+          {m.cenas.map((_, i) => (
+            <span
+              key={i}
+              className={`h-2 w-6 rounded-full ${i <= cenaAtual ? "bg-yellow-300" : "bg-white/30"}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <BigListenButton onClick={contarHistoria} label="▶ Contar de novo" />
+
+      {contouTudo && (
+        <>
+          <div className="mt-5 text-center">
+            <p className="text-xl font-black text-yellow-200 drop-shadow">
+              💬 {m.pergunta}
+            </p>
+            <p className="text-xs text-white/80 mt-1">{m.instrucaoAudio}</p>
+            <p className="text-[11px] text-white/60 mt-1 italic">
+              Não tem resposta errada — escolha o que combina com você.
+            </p>
+          </div>
+
+          <div className="mt-4 flex flex-col gap-3 max-w-lg mx-auto w-full">
+            {m.opcoes.map((o, i) => {
+              const isEscolhida = escolhida === i;
+              return (
+                <button
+                  key={i}
+                  disabled={escolhida !== null}
+                  onClick={() => {
+                    stopSpeaking();
+                    speakChunked(o.texto, { rate: 0.92, pitch: 1.05 });
+                    setTimeout(() => escolher(i), 500);
+                  }}
+                  className={`rounded-2xl border-4 px-4 py-3 shadow-md active:scale-95 transition flex items-center gap-4 ${
+                    isEscolhida
+                      ? "border-green-400 bg-green-50"
+                      : "border-white/40 bg-white"
+                  }`}
+                >
+                  <span className="text-5xl leading-none">{o.emoji}</span>
+                  <span className="text-lg md:text-xl font-black text-slate-800 text-left">
+                    {o.texto}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {!contouTudo && cenaAtual === 0 && (
+        <p className="mt-3 text-center text-xs text-white/80">
+          Toque ▶ para ouvir a história antes de responder.
+        </p>
+      )}
+
+      {msg && (
+        <p className="mt-4 text-center font-bold text-green-300">
+          💛 {msg}
+        </p>
+      )}
+    </CardScreen>
+  );
+}
+
