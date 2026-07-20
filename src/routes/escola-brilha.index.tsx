@@ -201,8 +201,8 @@ function EscolaBrilhaCatalogo() {
             <Compass className="h-4 w-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">
               {aulasEscritas.length + totalMissoesLerAurora} missão
-              {aulasEscritas.length + totalMissoesLerAurora === 1 ? "" : "es"} disponível
-              {aulasEscritas.length === 1 ? "" : "eis"} · {habilidades.length} aventuras no total
+              {aulasEscritas.length + totalMissoesLerAurora === 1 ? "" : "es"} disponíve
+              {aulasEscritas.length + totalMissoesLerAurora === 1 ? "l" : "is"} · {habilidades.length} aventuras no total
             </span>
           </div>
           <p className="text-sm text-[#0d1f55] leading-relaxed">
@@ -237,7 +237,7 @@ function EscolaBrilhaCatalogo() {
 
         {/* Curso especial de alfabetização — aparece como categoria própria */}
         <Link
-          to="/escola-brilha/ler-com-aurora"
+          to="/escola-brilha/ler-com-aurora/"
           className="mb-4 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
           style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
         >
@@ -376,7 +376,7 @@ function EscolaBrilhaCatalogo() {
 
                         {mostraLerComAurora && (
                           <Link
-                            to="/escola-brilha/ler-com-aurora"
+                            to="/escola-brilha/ler-com-aurora/"
                             className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                             style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
                           >
