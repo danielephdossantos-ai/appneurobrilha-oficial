@@ -18,7 +18,7 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Evita leituras artificiais como "SOLLL" ou "SSSS-ol".
   // O visual pode destacar o som repetido, mas a voz do professor precisa soar natural.
   out = out.replace(/\bSO\s*[-·]?\s*L+\b/gi, "sol");
-  out = out.replace(/\b([BCDFGHJKLMNPQRSTVWXYZ])\1{1,}\s*[-·]?\s*([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç]+)\b/g, (_, ch, rest) => {
+  out = out.replace(/\b([BCDFGHJKLMNPQRSTVWXYZ])\1{1,}\s*[-·]?\s*([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç]+)\b/g, (_, ch, rest) => {
     return `${String(ch).toLowerCase()}${String(rest).toLowerCase()}`;
   });
 
