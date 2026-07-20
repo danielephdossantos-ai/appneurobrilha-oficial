@@ -1481,12 +1481,15 @@ function LeituraFraseBloco({
     stopSpeaking();
     setAtiva(-1);
     const runToken = ++karaokeRunRef.current;
-    const gap = rate < 0.85 ? 160 : 110;
+    // pausa entre palavras: maior no modo lento para dar respiro
+    const gap = rate < 0.85 ? 320 : 160;
+    // Pequeno delay para o cancel do TTS assentar antes de enfileirar
+    await new Promise((r) => setTimeout(r, 80));
     for (let i = 0; i < palavras.length; i++) {
       if (runToken !== karaokeRunRef.current) return;
-      setAtiva(i);
-      // enfileira (não cancela a fala anterior) e AGUARDA terminar antes de ir pra próxima
-      await speakChunked(palavras[i].toLowerCase(), { rate, queue: true });
+      await speakWordSync(palavras[i].toLowerCase(), rate, () => {
+        if (runToken === karaokeRunRef.current) setAtiva(i);
+      });
       if (runToken !== karaokeRunRef.current) return;
       await new Promise((r) => {
         const t = window.setTimeout(r, gap);
