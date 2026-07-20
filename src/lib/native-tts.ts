@@ -15,6 +15,19 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
   out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
 
+  // Runs de letras romanas maiúsculas (II, III, VI, IX, XX...) são lidas como
+  // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
+  // Convertemos em letras minúsculas elongadas com acento para forçar leitura fonética.
+  const somVogalElongada: Record<string, string> = {
+    A: "ááááá", E: "êêêê", I: "iiiii", O: "óóóó", U: "uuuuu",
+    Á: "ááááá", É: "êêêê", Í: "iiiii", Ó: "óóóó", Ú: "uuuuu",
+    Ã: "ãããã", Õ: "õõõõ", Ê: "êêêê", Ô: "óóóó", Î: "iiiii", Û: "uuuuu",
+  };
+  out = out.replace(/\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])\1{1,}\b/g, (_, ch) => {
+    const upper = ch.toUpperCase();
+    return somVogalElongada[upper] ?? ch.toLowerCase().repeat(4);
+  });
+
   // O Web Speech costuma se perder quando uma palavra aparece silabada
   // com espaços/hífens (ex.: BOR-BO-LE-TA ou bo bo le ta). Para a voz do
   // professor, juntamos palavras de treino conhecidas sem alterar o visual.
