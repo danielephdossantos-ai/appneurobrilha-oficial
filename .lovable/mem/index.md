@@ -32,3 +32,4 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 - [Geografia INTEIRA TRAVADA](mem://constraints/geografia-travada) — Toda a disciplina Geografia (Infantil ao 9º Ano, incluindo v2) está aprovada. Proibido editar sem pedido explícito com "destravar geografia".
 - [História 2º Ano visual + explicação](mem://preferences/historia-2ano-visual-explicacao) — Tema central sempre com imagem concreta e explicação visível.
 - [Ciências INTEIRA TRAVADA](mem://constraints/ciencias-travada) — Toda a disciplina Ciências (1º ao 9º Ano) está aprovada. Proibido editar `ciencias-*ano/**` sem pedido explícito.
+- [Contrato Ler com Aurora — Fases 6/7/8 + Transversais](mem://preferences/contrato-ler-com-aurora-fases-6-8) — Escopo TRAVADO. Ordem: F6 → F7 → F8 → Diagnóstico Dia 0 → Painel Adulto. Sempre entregar em lotes de 1 semana (5 missões) para validação.

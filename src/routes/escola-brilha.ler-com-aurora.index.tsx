@@ -4,6 +4,7 @@ import { cursoLerComAuroraFase2 } from "@/escola-brilha/curso-ler-com-aurora/aul
 import { cursoLerComAuroraFase3 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase3";
 import { cursoLerComAuroraFase4 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase4";
 import { cursoLerComAuroraFase5 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase5";
+import { cursoLerComAuroraFase6 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase6";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 /**
@@ -41,7 +42,7 @@ function FaseBloco({
   gradiente,
   badge,
 }: {
-  fase: 1 | 2 | 3 | 4 | 5;
+  fase: 1 | 2 | 3 | 4 | 5 | 6;
   curso: CursoEI;
   concluidas: Set<string>;
   gradiente: string;
@@ -143,7 +144,8 @@ function TrilhaLerComAurora() {
     cursoLerComAuroraFase2.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase3.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase4.unidades.flatMap((u) => u.aulas).length +
-    cursoLerComAuroraFase5.unidades.flatMap((u) => u.aulas).length;
+    cursoLerComAuroraFase5.unidades.flatMap((u) => u.aulas).length +
+    cursoLerComAuroraFase6.unidades.flatMap((u) => u.aulas).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
@@ -202,6 +204,14 @@ function TrilhaLerComAurora() {
           concluidas={concluidas}
           gradiente="linear-gradient(135deg,#10b981,#064e3b)"
           badge="FASE 5 · ORTOGRAFIA INICIAL"
+        />
+
+        <FaseBloco
+          fase={6}
+          curso={cursoLerComAuroraFase6}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#facc15,#78350f)"
+          badge="FASE 6 · FLUÊNCIA VERDADEIRA (semana 1/4)"
         />
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
