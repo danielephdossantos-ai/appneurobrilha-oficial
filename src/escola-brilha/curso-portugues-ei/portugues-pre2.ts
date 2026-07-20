@@ -10,6 +10,12 @@ import { url as bibliotecaria } from "@/assets/neuro-treino/objetos/bibliotecari
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as rato } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as pipa } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
 
 /**
  * Pré II (5-6 anos) — Unidade 1 · Aula 1
@@ -143,6 +149,137 @@ const aula01: AulaEI = {
   ],
 };
 
+
+
+/**
+ * Pré II — Unidade 1 · Aula 2
+ * "Palavras que rimam" — consciência fonológica: identificar rimas,
+ * criar rimas simples, brincar com pares sonoros.
+ * BNCC: EI03EF01 · EI03EF04 · EI03EF09
+ */
+const aula02: AulaEI = {
+  slug: "aula-02-palavras-que-rimam",
+  titulo: "Palavras que rimam",
+  icone: "🎤",
+  bncc: ["EI03EF01", "EI03EF04", "EI03EF09"],
+  duracaoMin: 15,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote:
+        "Alô, poeta! Hoje o Brilha vai te ensinar um truque MÁGICO: descobrir palavras que combinam no som. Chama-se RIMA!",
+    },
+    {
+      tipo: "escutaRitmada",
+      imagemUrl: gato,
+      versos: [
+        "O gato subiu no mato, o mato balançou.",
+        "O rato saiu do buraco e do gato ele fugiu!",
+        "Gato, mato, rato — todas terminam igual!",
+        "Isso, meu amigo, chama-se RIMAR!",
+      ],
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio:
+        "Toca em cada palavra e escuta como o FINAL delas soa igualzinho.",
+      itens: [
+        { nome: "gato", imagemUrl: gato },
+        { nome: "rato", imagemUrl: rato },
+        { nome: "pipa", imagemUrl: pipa },
+      ],
+    },
+    {
+      tipo: "somInicial",
+      instrucaoAudio: "Qual dessas palavras RIMA com GATO? Escuta o final: GA-TO.",
+      referencia: { nome: "gato", imagemUrl: gato },
+      opcoes: [
+        { nome: "rato", imagemUrl: rato, correta: true },
+        { nome: "pipa", imagemUrl: pipa, correta: false },
+        { nome: "nuvem", imagemUrl: nuvem, correta: false },
+      ],
+      feedbackAcerto: "Isso! Gato e rato terminam com ATO — elas RIMAM!",
+      feedbackErro:
+        "Escuta o final: GA-TO. Qual outra termina com ATO? RA-TO!",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Vamos separar em pedaços e bater palma:",
+      palavra: "ES-TRE-LA",
+      silabas: 3,
+      imagemUrl: estrela,
+      elogio: "Muito bem! Estrela tem TRÊS pedaços!",
+    },
+    {
+      tipo: "historiaIlustrada",
+      titulo: "O gato que sonhava com a lua",
+      cenas: [
+        {
+          imagemUrl: gato,
+          narracao:
+            "Havia um gato preto chamado Zé. Toda noite Zé olhava a lua e sonhava com ela.",
+        },
+        {
+          imagemUrl: pipa,
+          narracao:
+            "Um dia, Zé achou uma PIPA velha no quintal. Ele pensou: 'Se eu subir na pipa, chego na lua!'",
+        },
+        {
+          imagemUrl: lua,
+          narracao:
+            "O vento levou a pipa bem alto. Zé não chegou na lua, mas viu o mundo inteiro lá de cima!",
+        },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Com o que o gato Zé sonhava toda noite?",
+      opcoes: [
+        { nome: "lua", imagemUrl: lua, correta: true },
+        { nome: "rato", imagemUrl: rato, correta: false },
+        { nome: "bola", imagemUrl: bola, correta: false },
+      ],
+      feedbackAcerto: "Isso! Zé sonhava com a LUA todas as noites!",
+      feedbackErro: "Escuta de novo: Zé olhava e sonhava com a LUA.",
+    },
+    {
+      tipo: "fazDeConta",
+      imagemUrl: gato,
+      convite:
+        "Agora VOCÊ inventa uma rima! Fala uma palavra e depois outra que termine igual. Ex: PÃO e MÃO!",
+      dica:
+        "Improvisar rimas é o mais alto nível de consciência fonológica na Ed. Infantil — celebre qualquer tentativa.",
+    },
+    {
+      tipo: "rodaConversa",
+      imagemUrl: estrela,
+      pergunta:
+        "Se você fosse um gato como o Zé, o que você iria olhar no céu? Conta pro Brilha!",
+      exemplos: [
+        { nome: "a lua cheia", imagemUrl: lua },
+        { nome: "as estrelas", imagemUrl: estrela },
+        { nome: "as nuvens", imagemUrl: nuvem },
+      ],
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família",
+      convite:
+        "Brinca de rimar com um adulto! Ele fala uma palavra e você inventa outra que termina igual.",
+      dicaAdulto:
+        "Comece por pares fáceis (pão/mão, bola/cola, gato/rato). Depois deixe a criança tentar sozinha. Errar faz parte — o cérebro está processando o som final das palavras.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Poeta Mirim",
+      mascoteUrl: brilha,
+      falaFinal:
+        "Uhuuu! Você descobriu o segredo das palavras que combinam! Você é um POETA de verdade!",
+    },
+  ],
+};
+
 export const cursoPre2: CursoEI = {
   slug: "portugues-ei-pre2",
   serie: "pre2",
@@ -159,7 +296,7 @@ export const cursoPre2: CursoEI = {
       numero: 1,
       titulo: "O Som das Palavras e o Ritmo do Corpo",
       subtitulo: "Palavras grandes, ideias grandes",
-      aulas: [aula01],
+      aulas: [aula01, aula02],
     },
   ],
 };

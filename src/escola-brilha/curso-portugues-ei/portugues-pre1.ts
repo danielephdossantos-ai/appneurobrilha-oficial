@@ -9,6 +9,12 @@ import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as galo } from "@/assets/neuro-treino/objetos/galo.png.asset.json";
+import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as abelha } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
+import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
 
 /**
  * Pré I (4-5 anos) — Unidade 1 · Aula 1
@@ -130,6 +136,130 @@ const aula01: AulaEI = {
   ],
 };
 
+/**
+ * Pré I — Unidade 1 · Aula 2
+ * "Os bichos falam" — sons dos animais, sílabas, discriminação auditiva.
+ * BNCC: EI03EF01 · EI03EF04 · EI03EF06
+ */
+const aula02: AulaEI = {
+  slug: "aula-02-bichos-falam",
+  titulo: "Os bichos falam",
+  icone: "🐸",
+  bncc: ["EI03EF01", "EI03EF04", "EI03EF06"],
+  duracaoMin: 12,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote:
+        "Amiguinho! Hoje o Brilha vai apresentar uma turma barulhenta: os BICHOS! Cada um fala do seu jeito.",
+    },
+    {
+      tipo: "escutaRitmada",
+      imagemUrl: galo,
+      versos: [
+        "De manhã bem cedinho, o galo cantou.",
+        "Có-có-ri-có! Có-có-ri-có! O sol acordou!",
+        "O gato disse miau, o cachorro au-au.",
+        "E o sapo lá no lago faz coax, coax!",
+      ],
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada bichinho para ouvir o nome dele.",
+      itens: [
+        { nome: "sapo", imagemUrl: sapo },
+        { nome: "galo", imagemUrl: galo },
+        { nome: "abelha", imagemUrl: abelha },
+      ],
+    },
+    {
+      tipo: "somInicial",
+      instrucaoAudio: "Qual dessas palavras começa com o mesmo som de GATO?",
+      referencia: { nome: "gato", imagemUrl: gato },
+      opcoes: [
+        { nome: "galo", imagemUrl: galo, correta: true },
+        { nome: "sapo", imagemUrl: sapo, correta: false },
+        { nome: "borboleta", imagemUrl: borboleta, correta: false },
+      ],
+      feedbackAcerto: "Isso! Gato e galo começam com o som GÊ!",
+      feedbackErro: "Escuta: GAAA-to. Qual outra começa com o som GÊ?",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma no ritmo desta palavra:",
+      palavra: "CA-CHOR-RO",
+      silabas: 3,
+      imagemUrl: cachorro,
+      elogio: "Boa! Cachorro tem TRÊS palmas!",
+    },
+    {
+      tipo: "historiaIlustrada",
+      titulo: "O sapo cantor",
+      cenas: [
+        {
+          imagemUrl: sapo,
+          narracao: "Era uma vez um sapo verde chamado Coa. Ele adorava cantar no lago à noite.",
+        },
+        {
+          imagemUrl: abelha,
+          narracao: "Uma abelha zumbindo passou e disse: 'Coa, seu canto é muito alto, não deixa a gente dormir!'",
+        },
+        {
+          imagemUrl: passaro,
+          narracao: "O pássaro sábio ensinou: 'Cada um tem sua hora de cantar!'. E Coa passou a cantar só à noite.",
+        },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Quem reclamou do canto alto do sapo?",
+      opcoes: [
+        { nome: "abelha", imagemUrl: abelha, correta: true },
+        { nome: "cachorro", imagemUrl: cachorro, correta: false },
+        { nome: "gato", imagemUrl: gato, correta: false },
+      ],
+      feedbackAcerto: "Isso mesmo! A ABELHA reclamou porque queria dormir!",
+      feedbackErro: "Escuta de novo: quem passou zumbindo foi a ABELHA!",
+    },
+    {
+      tipo: "fazDeConta",
+      imagemUrl: sapo,
+      convite:
+        "Agora você é o sapo Coa! Agacha bem baixinho e pula alto três vezes fazendo COAX, COAX!",
+      dica: "Combinar som, movimento e contagem trabalha coordenação e ritmo.",
+    },
+    {
+      tipo: "rodaConversa",
+      imagemUrl: cachorro,
+      pergunta: "Você tem um bichinho em casa ou conhece um? Como ele se chama?",
+      exemplos: [
+        { nome: "cachorro", imagemUrl: cachorro },
+        { nome: "gato", imagemUrl: gato },
+        { nome: "peixinho", imagemUrl: peixe },
+        { nome: "passarinho", imagemUrl: passaro },
+      ],
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família",
+      convite:
+        "Peça pra um adulto imitar 3 bichos DIFERENTES pra você adivinhar. Depois é a sua vez de imitar!",
+      dicaAdulto:
+        "Alterne bichos comuns (cachorro, gato) com bichos menos óbvios (leão, abelha, sapo). Reforça vocabulário e discriminação auditiva.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Fala dos Bichos",
+      mascoteUrl: brilha,
+      falaFinal:
+        "Você imitou o sapo, reconheceu o canto do galo e escutou a abelha! Você entende a fala dos bichos!",
+    },
+  ],
+};
+
+void bola; void arvore;
+
 export const cursoPre1: CursoEI = {
   slug: "portugues-ei-pre1",
   serie: "pre1",
@@ -146,7 +276,7 @@ export const cursoPre1: CursoEI = {
       numero: 1,
       titulo: "O Som das Palavras e o Ritmo do Corpo",
       subtitulo: "Escutar, imitar, imaginar",
-      aulas: [aula01],
+      aulas: [aula01, aula02],
     },
   ],
 };
