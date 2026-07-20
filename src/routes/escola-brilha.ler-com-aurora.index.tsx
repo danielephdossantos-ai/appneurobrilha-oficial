@@ -5,6 +5,7 @@ import { cursoLerComAuroraFase3 } from "@/escola-brilha/curso-ler-com-aurora/aul
 import { cursoLerComAuroraFase4 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase4";
 import { cursoLerComAuroraFase5 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase5";
 import { cursoLerComAuroraFase6 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase6";
+import { cursoLerComAuroraFase7 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase7";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 /**
@@ -42,7 +43,7 @@ function FaseBloco({
   gradiente,
   badge,
 }: {
-  fase: 1 | 2 | 3 | 4 | 5 | 6;
+  fase: 1 | 2 | 3 | 4 | 5 | 6 | 7;
   curso: CursoEI;
   concluidas: Set<string>;
   gradiente: string;

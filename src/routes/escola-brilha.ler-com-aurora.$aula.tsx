@@ -24,11 +24,14 @@ import {
   cursoLerComAuroraFase6,
   getAulaLerComAuroraFase6,
 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase6";
+import {
+  cursoLerComAuroraFase7,
+  getAulaLerComAuroraFase7,
+} from "@/escola-brilha/curso-ler-com-aurora/aulas-fase7";
 
 /**
  * Player de uma missão do curso "Ler com Aurora".
- * Aceita slugs da Fase 1 (dia-*), Fase 2 (f2-dia-*), Fase 3 (f3-dia-*),
- * Fase 4 (f4-dia-*) ou Fase 5 (f5-dia-*).
+ * Aceita slugs das Fases 1-7.
  */
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
   head: () => ({ meta: [{ title: "Ler com Aurora — Missão" }] }),
@@ -39,23 +42,26 @@ function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
 
-  const aulaF6 = getAulaLerComAuroraFase6(aulaSlug);
-  const aulaF5 = aulaF6 ? undefined : getAulaLerComAuroraFase5(aulaSlug);
-  const aulaF4 = aulaF6 || aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
-  const aulaF3 = aulaF6 || aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
-  const aulaF2 = aulaF6 || aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
-  const aula = aulaF6 ?? aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
-  const curso = aulaF6
-    ? cursoLerComAuroraFase6
-    : aulaF5
-      ? cursoLerComAuroraFase5
-      : aulaF4
-        ? cursoLerComAuroraFase4
-        : aulaF3
-          ? cursoLerComAuroraFase3
-          : aulaF2
-            ? cursoLerComAuroraFase2
-            : cursoLerComAurora;
+  const aulaF7 = getAulaLerComAuroraFase7(aulaSlug);
+  const aulaF6 = aulaF7 ? undefined : getAulaLerComAuroraFase6(aulaSlug);
+  const aulaF5 = aulaF7 || aulaF6 ? undefined : getAulaLerComAuroraFase5(aulaSlug);
+  const aulaF4 = aulaF7 || aulaF6 || aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
+  const aulaF3 = aulaF7 || aulaF6 || aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
+  const aulaF2 = aulaF7 || aulaF6 || aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
+  const aula = aulaF7 ?? aulaF6 ?? aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
+  const curso = aulaF7
+    ? cursoLerComAuroraFase7
+    : aulaF6
+      ? cursoLerComAuroraFase6
+      : aulaF5
+        ? cursoLerComAuroraFase5
+        : aulaF4
+          ? cursoLerComAuroraFase4
+          : aulaF3
+            ? cursoLerComAuroraFase3
+            : aulaF2
+              ? cursoLerComAuroraFase2
+              : cursoLerComAurora;
 
   if (!aula) {
     return (
