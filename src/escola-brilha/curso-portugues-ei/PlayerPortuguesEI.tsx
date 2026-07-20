@@ -1376,6 +1376,16 @@ function PalavraColorida({ palavra }: { palavra: string }) {
   );
 }
 
+function normalizarFrase(s: string): string[] {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
 function LeituraFraseBloco({
   m,
   idx,
@@ -1387,16 +1397,28 @@ function LeituraFraseBloco({
   cor: string;
   onOk: () => void;
 }) {
-  const [ouviu, setOuviu] = useState(false);
   const [ativa, setAtiva] = useState(-1);
+  const [ouvindo, setOuvindo] = useState(false);
+  const [tentativaTexto, setTentativaTexto] = useState("");
+  const [feedback, setFeedback] = useState<"ok" | "quase" | "erro" | null>(null);
+  const [leiturasOk, setLeiturasOk] = useState(0);
   const timersRef = useRef<number[]>([]);
+  const recRef = useRef<any>(null);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
+  const alvoTokens = normalizarFrase(m.frase);
+
+  const SR: any =
+    typeof window !== "undefined"
+      ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      : null;
+  const micDisponivel = !!SR;
 
   useEffect(() => {
     return () => {
       timersRef.current.forEach((t) => clearTimeout(t));
       timersRef.current = [];
       stopSpeaking();
+      try { recRef.current?.stop?.(); } catch {}
     };
   }, []);
 
@@ -1404,10 +1426,7 @@ function LeituraFraseBloco({
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
     stopSpeaking();
-    setOuviu(true);
     setAtiva(-1);
-    // Fala palavra a palavra em fila, marcando cada uma como ativa
-    // (destaque amarelo pulsante) para trabalhar associação som↔texto.
     const gap = rate < 0.85 ? 120 : 90;
     let delay = 0;
     palavras.forEach((p, i) => {
@@ -1416,7 +1435,6 @@ function LeituraFraseBloco({
         speakChunked(p.toLowerCase(), { rate, queue: false });
       }, delay);
       timersRef.current.push(t1);
-      // Estima duração para próxima palavra
       const dur = Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
       delay += dur;
     });
@@ -1424,9 +1442,62 @@ function LeituraFraseBloco({
     timersRef.current.push(tFim);
   };
 
+  const gravarLeitura = () => {
+    if (!SR) return;
+    try { recRef.current?.stop?.(); } catch {}
+    stopSpeaking();
+    setFeedback(null);
+    setTentativaTexto("");
+    const rec = new SR();
+    rec.lang = "pt-BR";
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    rec.continuous = false;
+    recRef.current = rec;
+    setOuvindo(true);
+    rec.onresult = (e: any) => {
+      const alternativas: string[] = [];
+      for (let i = 0; i < e.results[0].length; i++) alternativas.push(e.results[0][i].transcript);
+      let melhor = 0;
+      let melhorTxt = alternativas[0] || "";
+      for (const alt of alternativas) {
+        const tokens = normalizarFrase(alt);
+        const acertos = alvoTokens.filter((t) => tokens.includes(t)).length;
+        const score = acertos / alvoTokens.length;
+        if (score > melhor) { melhor = score; melhorTxt = alt; }
+      }
+      setTentativaTexto(melhorTxt);
+      if (melhor >= 0.6) {
+        setFeedback("ok");
+        setLeiturasOk((n) => {
+          const novo = Math.min(3, n + 1);
+          if (novo === 3) speak(m.elogio);
+          else speak(novo === 1 ? "Muito bem! Faltam duas." : "Boa! Falta só mais uma.");
+          return novo;
+        });
+      } else if (melhor >= 0.3) {
+        setFeedback("quase");
+        speak("Quase! Ouve o professor e tenta de novo.");
+      } else {
+        setFeedback("erro");
+        speak("Não peguei bem. Ouve o professor e tenta de novo.");
+      }
+    };
+    rec.onerror = () => { setOuvindo(false); setFeedback("erro"); };
+    rec.onend = () => setOuvindo(false);
+    try { rec.start(); } catch { setOuvindo(false); }
+  };
+
+  const pararGravacao = () => {
+    try { recRef.current?.stop?.(); } catch {}
+    setOuvindo(false);
+  };
+
+  const completo = leiturasOk >= 3;
+
   return (
     <CardScreen cor={cor}>
-      <TituloMomento n={idx + 1} texto="Eu leio a frase!" cor={cor} />
+      <TituloMomento n={idx + 1} texto="Eu leio a frase 3 vezes!" cor={cor} />
       <div className="mx-auto max-w-md text-center">
         <ImageFrame src={m.imagemUrl} alt={m.frase} size="xl" />
         <p className="mt-4 font-black leading-snug flex flex-wrap justify-center gap-x-2 gap-y-1" style={{ fontSize: 32 }}>
@@ -1434,9 +1505,7 @@ function LeituraFraseBloco({
             <span
               key={i}
               className={`inline-block px-1 rounded-md transition-all duration-150 ${
-                ativa === i
-                  ? "bg-yellow-300 text-slate-900 scale-110 shadow-md"
-                  : ""
+                ativa === i ? "bg-yellow-300 text-slate-900 scale-110 shadow-md" : ""
               }`}
             >
               <PalavraColorida palavra={p} />
@@ -1446,38 +1515,84 @@ function LeituraFraseBloco({
         </p>
         <p className="text-xs text-slate-500 mt-2">{m.instrucaoAudio}</p>
 
-        <div className="mt-4 grid gap-2">
+        {/* Progresso 3 estrelas */}
+        <div className="mt-4 flex justify-center gap-3 text-3xl">
+          {[0, 1, 2].map((i) => (
+            <span key={i} className={i < leiturasOk ? "grayscale-0" : "grayscale opacity-40"}>
+              {i < leiturasOk ? "⭐" : "☆"}
+            </span>
+          ))}
+        </div>
+        <p className="text-sm font-bold text-slate-600 mt-1">Leitura {Math.min(leiturasOk, 3)}/3</p>
+
+        <div className="mt-4 grid grid-cols-2 gap-2">
           <button
             onClick={() => lerKaraoke(0.7)}
-            className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
+            className="rounded-full bg-purple-600 text-white px-4 py-3 font-bold shadow active:scale-95 text-sm"
           >
             🐢 Ouvir devagar
           </button>
           <button
             onClick={() => lerKaraoke(0.92)}
-            className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
+            className="rounded-full bg-pink-500 text-white px-4 py-3 font-bold shadow active:scale-95 text-sm"
           >
             🐇 Ouvir junto
           </button>
         </div>
 
-        {ouviu && (
+        {/* Microfone */}
+        {micDisponivel ? (
           <button
-            onClick={() => {
-              timersRef.current.forEach((t) => clearTimeout(t));
-              setAtiva(-1);
-              speak(m.elogio);
-              onOk();
-            }}
-            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg"
+            onClick={ouvindo ? pararGravacao : gravarLeitura}
+            disabled={completo}
+            className={`mt-3 w-full rounded-full px-6 py-4 font-black shadow-lg text-white transition ${
+              completo
+                ? "bg-slate-400"
+                : ouvindo
+                ? "bg-red-500 animate-pulse"
+                : "bg-blue-600 active:scale-95"
+            }`}
           >
-            ✓ Eu li a frase!
+            {completo ? "✓ 3 leituras concluídas" : ouvindo ? "🎤 Ouvindo… toque para parar" : "🎤 Ler no microfone"}
+          </button>
+        ) : (
+          <button
+            onClick={() => setLeiturasOk((n) => Math.min(3, n + 1))}
+            disabled={completo}
+            className="mt-3 w-full rounded-full px-6 py-4 font-black shadow-lg text-white bg-blue-600 active:scale-95 disabled:bg-slate-400"
+          >
+            {completo ? "✓ 3 leituras marcadas" : "✓ Já li (marcar +1)"}
+          </button>
+        )}
+
+        {tentativaTexto && (
+          <div
+            className={`mt-3 rounded-2xl px-4 py-2 text-sm font-bold ${
+              feedback === "ok"
+                ? "bg-green-100 text-green-800"
+                : feedback === "quase"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            {feedback === "ok" ? "🎉 Muito bem!" : feedback === "quase" ? "🤏 Quase! Tenta de novo." : "🔁 Não peguei. Tenta de novo."}
+            <div className="text-xs font-normal mt-1 opacity-80">Você disse: "{tentativaTexto}"</div>
+          </div>
+        )}
+
+        {completo && (
+          <button
+            onClick={() => { speak(m.elogio); onOk(); }}
+            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg active:scale-95"
+          >
+            ➜ Continuar
           </button>
         )}
       </div>
     </CardScreen>
   );
 }
+
 
 function LeituraTextoBloco({
   m,
