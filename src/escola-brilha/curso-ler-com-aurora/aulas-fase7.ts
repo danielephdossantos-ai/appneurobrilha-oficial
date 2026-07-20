@@ -837,7 +837,278 @@ const a15: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 7 (Semanas 1-3 no ar; Semana 4 pendente)
+ * SEMANA 4 — Palavra na frase (cloze) + Diploma final
+ * Base: Beck & McKeown 2013 (uso da palavra em contexto ativa
+ * o léxico). Reaproveita palavras das Semanas 1–3.
+ * ============================================================ */
+
+const BASE_CLOZE =
+  "Cloze com apoio visual: a criança ouve a frase com uma lacuna, olha a imagem e escolhe a palavra que completa (Beck & McKeown 2013).";
+
+const a16: AulaEI = {
+  slug: "f7-dia-16-frase-casa-flor",
+  titulo: "Dia 16 · CASA · FLOR · GATO na frase",
+  icone: "📝",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CLOZE,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Chegou a última semana da Fase do Vocabulário! Agora as palavras vão pra dentro da frase. Escuta, olha a figura e escolhe a certa!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: casa,
+      frase: "A menina mora numa ___.",
+      palavraCorreta: "CASA",
+      distratores: ["FLOR", "GATO"],
+      instrucaoAudio: "Qual palavra completa a frase?",
+      elogio: "Casa é onde a gente mora — perfeito!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: flor,
+      frase: "A ___ do jardim é bonita.",
+      palavraCorreta: "FLOR",
+      distratores: ["CARRO", "SORVETE"],
+      instrucaoAudio: "Qual palavra combina com a imagem?",
+      elogio: "Flor bonita no jardim!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: gato,
+      frase: "O ___ mia em cima do muro.",
+      palavraCorreta: "GATO",
+      distratores: ["PEIXE", "LEÃO"],
+      instrucaoAudio: "Quem mia no muro?",
+      elogio: "Miau! O gato mia mesmo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Frase · Dia 16",
+      mascoteUrl: mascote,
+      falaFinal: "Três frases completas! Amanhã as palavras contrárias entram na frase.",
+    },
+  ],
+};
+
+const a17: AulaEI = {
+  slug: "f7-dia-17-frase-grande-pequeno",
+  titulo: "Dia 17 · GRANDE · PEQUENO · ALTO na frase",
+  icone: "📏",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CLOZE,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje as palavras contrárias entram na frase. Presta atenção na figura!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: leao,
+      frase: "O leão é um bicho ___.",
+      palavraCorreta: "GRANDE",
+      distratores: ["PEQUENO", "TRISTE"],
+      instrucaoAudio: "Olha o tamanho do leão. Qual palavra combina?",
+      elogio: "O leão é grande mesmo!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: joaninha,
+      frase: "A joaninha é bem ___.",
+      palavraCorreta: "PEQUENA",
+      distratores: ["GRANDE", "FEIA"],
+      instrucaoAudio: "E a joaninha? Como ela é?",
+      elogio: "Joaninha pequenininha!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: arvore,
+      frase: "A árvore é muito ___.",
+      palavraCorreta: "ALTA",
+      distratores: ["BAIXA", "FRIA"],
+      instrucaoAudio: "Olha a árvore lá em cima. Como ela é?",
+      elogio: "Bem alta, chega até o céu!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Frase · Dia 17",
+      mascoteUrl: mascote,
+      falaFinal: "Contrários na frase — mandou bem! Amanhã: categorias na frase.",
+    },
+  ],
+};
+
+const a18: AulaEI = {
+  slug: "f7-dia-18-frase-familia-cidade",
+  titulo: "Dia 18 · FAMÍLIA · CIDADE · NATUREZA na frase",
+  icone: "🏘️",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CLOZE,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje as categorias entram nas frases. Pensa: onde essa palavra encaixa?",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: criancasGrupo,
+      frase: "Meu pai, minha mãe e eu somos uma ___.",
+      palavraCorreta: "FAMÍLIA",
+      distratores: ["CIDADE", "FLOR"],
+      instrucaoAudio: "Quem mora junto e cuida um do outro?",
+      elogio: "Família é quem cuida da gente!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: predio,
+      frase: "Na ___ tem muitos prédios e carros.",
+      palavraCorreta: "CIDADE",
+      distratores: ["CAMPO", "CASA"],
+      instrucaoAudio: "Onde tem prédio alto e muito carro?",
+      elogio: "Cidade grande, cheia de gente!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: arvore,
+      frase: "A árvore, a flor e o rio são da ___.",
+      palavraCorreta: "NATUREZA",
+      distratores: ["ESCOLA", "COZINHA"],
+      instrucaoAudio: "O que nasce sozinho na Terra?",
+      elogio: "Natureza — tudo que nasce sem a gente fazer!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Frase · Dia 18",
+      mascoteUrl: mascote,
+      falaFinal: "Categorias na frase — dominado! Amanhã: revisão geral.",
+    },
+  ],
+};
+
+const a19: AulaEI = {
+  slug: "f7-dia-19-revisao-frase",
+  titulo: "Dia 19 · Revisão — palavras nas frases",
+  icone: "🔁",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CLOZE,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Revisão! Vou misturar tudo: sinônimo, contrário e categoria numa frase só.",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: quadroAlegre,
+      frase: "A criança está ___ com o presente.",
+      palavraCorreta: "FELIZ",
+      distratores: ["TRISTE", "FRIA"],
+      instrucaoAudio: "Quem ganha presente fica como?",
+      elogio: "Feliz — igual a alegre!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: sol,
+      frase: "De ___ o sol brilha lá no alto.",
+      palavraCorreta: "DIA",
+      distratores: ["NOITE", "CASA"],
+      instrucaoAudio: "Quando o sol brilha?",
+      elogio: "De dia mesmo — à noite aparece a lua!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: casaModerna,
+      frase: "Essa casa é ___, foi construída há pouco tempo.",
+      palavraCorreta: "NOVA",
+      distratores: ["ANTIGA", "PEQUENA"],
+      instrucaoAudio: "Casa que acabou de ser feita é como?",
+      elogio: "Nova — o contrário de antiga!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "🎒 Missão em Família — Frase do dia",
+      convite:
+        "Escolha uma palavra que você aprendeu (casa, flor, grande, feliz, família…) e monte uma frase com ela para alguém da casa. Depois peça pra pessoa montar outra frase com a mesma palavra.",
+      dicaAdulto:
+        "Usar a palavra em frases próprias é o que fixa o vocabulário ativo (Beck & McKeown 2013). Elogie tentativas, não corrija a gramática — o foco é a palavra dentro do contexto.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Revisão · Dia 19",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã é o grande dia: seu diploma da Fase do Vocabulário!",
+    },
+  ],
+};
+
+const a20: AulaEI = {
+  slug: "f7-dia-20-diploma-colecionador-palavras",
+  titulo: "Dia 20 · Diploma — Colecionador(a) de Palavras",
+  icone: "🏆",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica:
+    "Encerramento da Fase 7: consolidação de sinônimos, antônimos, campos semânticos e uso em contexto (Beck & McKeown 2013 · Nation 2001).",
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Chegou o grande dia! Vamos fazer três desafios finais e depois abrir o seu diploma.",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: casa,
+      frase: "Todo mundo gosta de voltar pro seu ___.",
+      palavraCorreta: "LAR",
+      distratores: ["CARRO", "PEIXE"],
+      instrucaoAudio: "Outra palavra pra casa é...",
+      elogio: "Lar é o mesmo que casa!",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: quadroTriste,
+      frase: "Quem perdeu o brinquedo fica ___.",
+      palavraCorreta: "TRISTE",
+      distratores: ["FELIZ", "GRANDE"],
+      instrucaoAudio: "O contrário de feliz é...",
+      elogio: "Triste — o contrário de feliz.",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: campo,
+      frase: "No ___ tem muita árvore, flor e bicho.",
+      palavraCorreta: "CAMPO",
+      distratores: ["PRÉDIO", "SORVETE"],
+      instrucaoAudio: "Onde tem muito verde e pouca gente?",
+      elogio: "Campo — cheio de natureza!",
+    },
+    {
+      tipo: "diplomaFase",
+      titulo: "Colecionador(a) de Palavras",
+      curso: "Ler com Aurora — Fase 7 · Vocabulário Ativo",
+      descricao:
+        "Por dominar sinônimos, antônimos, campos semânticos e o uso das palavras em frases — ampliando o vocabulário ativo, base da compreensão leitora.",
+      personagem: "aurora",
+      numeroColecao: 7,
+      totalColecao: 8,
+      falaFinal:
+        "Você concluiu a Fase 7! Agora coleciona palavras de verdade. Seu diploma tá pronto — clica pra abrir!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 7 (Semanas 1-4 completas · 20 missões)
  * ============================================================ */
 
 export const cursoLerComAuroraFase7: CursoEI = {
@@ -846,7 +1117,7 @@ export const cursoLerComAuroraFase7: CursoEI = {
   serieLabel: "Pré II / 1º Ano (Vocabulário)",
   titulo: "Vocabulário Ativo",
   descricao:
-    "Palavras que dizem a mesma coisa, palavras contrárias e palavras que andam juntas. Quanto mais palavras, melhor a leitura.",
+    "Palavras que dizem a mesma coisa, palavras contrárias, palavras que andam juntas e palavras usadas na frase certa.",
   corPrimaria: "#a855f7",
   corSecundaria: "#3b0764",
   mascoteUrl: mascote,
@@ -871,6 +1142,13 @@ export const cursoLerComAuroraFase7: CursoEI = {
       titulo: "Semana 3 · Campos semânticos",
       subtitulo: "Palavras que Andam Juntas",
       aulas: [a11, a12, a13, a14, a15],
+    },
+    {
+      slug: "f7-semana-04",
+      numero: 4,
+      titulo: "Semana 4 · Palavra na frase + Diploma",
+      subtitulo: "Colecionador(a) de Palavras",
+      aulas: [a16, a17, a18, a19, a20],
     },
   ],
 };
