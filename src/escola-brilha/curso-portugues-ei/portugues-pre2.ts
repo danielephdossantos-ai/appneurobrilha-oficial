@@ -16,6 +16,8 @@ import { url as pipa } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as nuvem } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
+import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as elefante } from "@/assets/hiperfocos/animais/elefante.png.asset.json";
 
 /**
  * Pré II (5-6 anos) — Unidade 1 · Aula 1
@@ -293,35 +295,35 @@ const aula03: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: brilha, falaMascote: "Hoje o Brilha vai te ensinar um SUPERPODER: escutar o primeiríssimo som de qualquer palavra!" },
     { tipo: "escutaRitmada", imagemUrl: coruja, versos: [
-      "PPP de pipa, RRR de rato!",
-      "SSS de sapo, GGG de gato!",
+      "P de pipa, R de rato!",
+      "S de sapo, G de gato!",
       "Cada palavra começa com um som — quem escuta com atenção acha em segundos!",
     ] },
     { tipo: "vocabularioVisual", instrucaoAudio: "Toca em cada palavra e escuta o começo:", itens: [
       { nome: "pipa", imagemUrl: pipa },
       { nome: "rato", imagemUrl: rato },
-      { nome: "sapo", imagemUrl: rato },
+      { nome: "sapo", imagemUrl: sapo },
       { nome: "gato", imagemUrl: gato },
     ] },
-    { tipo: "somInicial", instrucaoAudio: "Qual palavra começa com PPP (como PIPA)?", referencia: { nome: "pipa", imagemUrl: pipa }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "Qual palavra começa com P, como PIPA?", referencia: { nome: "pipa", imagemUrl: pipa }, opcoes: [
       { nome: "passarinho", imagemUrl: passaro, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "lua", imagemUrl: lua, correta: false },
-    ], feedbackAcerto: "Isso! PPP-ipa e PPP-assarinho!", feedbackErro: "Sopra: PPP! Pipa e Passarinho começam iguais." },
-    { tipo: "somInicial", instrucaoAudio: "Qual começa com LLL (como LUA)?", referencia: { nome: "lua", imagemUrl: lua }, opcoes: [
+    ], feedbackAcerto: "Isso! Pipa e passarinho começam com P!", feedbackErro: "Pipa e passarinho começam iguais: P." },
+    { tipo: "somInicial", instrucaoAudio: "Qual começa com L, como LUA?", referencia: { nome: "lua", imagemUrl: lua }, opcoes: [
       { nome: "livro", imagemUrl: livro, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "rato", imagemUrl: rato, correta: false },
-    ], feedbackAcerto: "Boa! LLL-ua, LLL-ivro!", feedbackErro: "O sopro é LLLLL." },
-    { tipo: "somInicial", instrucaoAudio: "Qual começa com EEE (como ESTRELA)?", referencia: { nome: "estrela", imagemUrl: estrela }, opcoes: [
-      { nome: "elefante (bicho)", imagemUrl: dinossauro, correta: true },
+    ], feedbackAcerto: "Boa! Lua e livro começam com L!", feedbackErro: "O som do começo é L." },
+    { tipo: "somInicial", instrucaoAudio: "Qual começa com E, como ESTRELA?", referencia: { nome: "estrela", imagemUrl: estrela }, opcoes: [
+      { nome: "elefante", imagemUrl: elefante, correta: true },
       { nome: "pipa", imagemUrl: pipa, correta: false },
       { nome: "nuvem", imagemUrl: nuvem, correta: false },
-    ], feedbackAcerto: "Isso! EEE-strela, EEE-lefante!", feedbackErro: "O som é EEE." },
+    ], feedbackAcerto: "Isso! Estrela e elefante começam com E!", feedbackErro: "O som do começo é E." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "ES-TRE-LA", silabas: 3, imagemUrl: estrela, elogio: "Três palmas! Es-tre-la!" },
     { tipo: "historiaIlustrada", titulo: "A coruja que ouvia tudo", cenas: [
       { imagemUrl: coruja, narracao: "A coruja Otília tinha ouvidos MÁGICOS: ouvia o primeiro som de cada palavra do mundo." },
-      { imagemUrl: lua, narracao: "'LLLLua', dizia ela. 'EEEstrela', 'NNNuvem'." },
+      { imagemUrl: lua, narracao: "'Lua começa com L', dizia ela. 'Estrela começa com E. Nuvem começa com N'." },
       { imagemUrl: brilha, narracao: "Agora VOCÊ tem ouvidos mágicos também! Escuta o começo de tudo!" },
     ] },
     { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Fala pro Brilha: com qual SOM começa o seu nome?", exemplos: [
@@ -330,7 +332,7 @@ const aula03: AulaEI = {
       { nome: "M de Maria", imagemUrl: gato },
       { nome: "P de Pedro", imagemUrl: pipa },
     ] },
-    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Escolha 5 objetos da casa e ache o PRIMEIRO SOM de cada: mesa (MMM), sofá (SSS)...", dicaAdulto: "Isolar fonemas é O PREDITOR mais forte da leitura fluente. 5 min/dia = alfabetização com base sólida." },
+    { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Escolha 5 objetos da casa e ache o PRIMEIRO SOM de cada: mesa começa com M, sofá começa com S.", dicaAdulto: "Isolar fonemas é O PREDITOR mais forte da leitura fluente. 5 min/dia = alfabetização com base sólida." },
     { tipo: "celebracao", medalha: "Ouvidos de Coruja", mascoteUrl: brilha, falaFinal: "Agora você escuta o COMEÇO de tudo! Superpoder desbloqueado!" },
   ],
 };
@@ -362,10 +364,10 @@ const aula04: AulaEI = {
       { nome: "correm", imagemUrl: rato, correta: false },
       { nome: "cantam", imagemUrl: passaro, correta: false },
     ], feedbackAcerto: "Isso! Elas PISCAM pra lua!", feedbackErro: "As estrelas PISCAM lá do cantinho." },
-    { tipo: "somInicial", instrucaoAudio: "LUA e NUVEM: qual começa com LLL?", referencia: { nome: "lua", imagemUrl: lua }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "LUA e NUVEM: qual começa com L?", referencia: { nome: "lua", imagemUrl: lua }, opcoes: [
       { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "nuvem", imagemUrl: nuvem, correta: false },
-    ], feedbackAcerto: "Isso! LLLua começa com L, NNNuvem com N.", feedbackErro: "L de Lua!" },
+    ], feedbackAcerto: "Isso! Lua começa com L, nuvem com N.", feedbackErro: "L de Lua!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "ES-TRE-LI-NHA", silabas: 4, imagemUrl: estrela, elogio: "Quatro palminhas!" },
     { tipo: "historiaIlustrada", titulo: "A poeta da noite", cenas: [
       { imagemUrl: coruja, narracao: "A coruja Otília era também POETA. Toda noite recitava um poema pra lua." },
@@ -424,7 +426,7 @@ const aula05: AulaEI = {
       { nome: "gato", imagemUrl: gato, correta: true },
       { nome: "lua", imagemUrl: lua, correta: false },
       { nome: "pipa", imagemUrl: pipa, correta: false },
-    ], feedbackAcerto: "Boa! GGG-irassol, GGG-ato!", feedbackErro: "O começo é GGG." },
+    ], feedbackAcerto: "Boa! Girassol e gato começam com G!", feedbackErro: "O começo é G." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "GI-RAS-SOL", silabas: 3, imagemUrl: girassol, elogio: "Três palmas! Gi-ras-sol!" },
     { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "AGORA VOCÊ! Conta uma viagem — QUEM foi, ONDE, QUANDO e O QUE aconteceu.", exemplos: [
       { nome: "praia com a família", imagemUrl: bola },
@@ -470,11 +472,11 @@ const aula06: AulaEI = {
       { nome: "nuvem", imagemUrl: nuvem },
       { nome: "vento (folhas)", imagemUrl: girassol },
     ] },
-    { tipo: "somInicial", instrucaoAudio: "PIPA começa com PPP. Qual outra começa igual?", referencia: { nome: "pipa", imagemUrl: pipa }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "PIPA começa com P. Qual outra começa igual?", referencia: { nome: "pipa", imagemUrl: pipa }, opcoes: [
       { nome: "passarinho", imagemUrl: passaro, correta: true },
       { nome: "lua", imagemUrl: lua, correta: false },
       { nome: "coruja", imagemUrl: coruja, correta: false },
-    ], feedbackAcerto: "Boa! PPP-ipa, PPP-assarinho!", feedbackErro: "O sopro é PPP." },
+    ], feedbackAcerto: "Boa! Pipa e passarinho começam com P!", feedbackErro: "O começo é P." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "NU-VEM", silabas: 2, imagemUrl: nuvem, elogio: "Duas palminhas!" },
     { tipo: "compreensaoImagem", perguntaAudio: "O que aconteceu ANTES da pipa sumir?", opcoes: [
       { nome: "veio um vento forte", imagemUrl: nuvem, correta: true },
@@ -524,11 +526,11 @@ const aula07: AulaEI = {
       { nome: "quem vendeu", imagemUrl: bibliotecaria, correta: false },
       { nome: "quem leu", imagemUrl: brilha, correta: false },
     ], feedbackAcerto: "Sim! Quem ESCREVEU!", feedbackErro: "Autor é quem ESCREVEU o livro." },
-    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com LLL. Qual outra?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com L. Qual outra?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
       { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "pipa", imagemUrl: pipa, correta: false },
-    ], feedbackAcerto: "Boa! LLL-ivro, LLL-ua!", feedbackErro: "O som é LLLLL." },
+    ], feedbackAcerto: "Boa! Livro e lua começam com L!", feedbackErro: "O som é L." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LI-VRA-RI-A", silabas: 4, imagemUrl: biblioteca, elogio: "Quatro palminhas!" },
     { tipo: "fazDeConta", imagemUrl: bibliotecaria, convite: "Faz de conta que é bibliotecária e apresenta um livro imaginário: 'Este livro se chama...'!" },
     { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Pega 3 livros de casa e descobre: qual o TÍTULO, quem é o AUTOR, e o que a CAPA mostra!", dicaAdulto: "Explorar paratextos (capa, título, autor) é competência leitora essencial no 1º ano." },
@@ -560,7 +562,7 @@ const aula08: AulaEI = {
     ] },
     { tipo: "historiaIlustrada", titulo: "As letras do nome", cenas: [
       { imagemUrl: coruja, narracao: "A coruja Otília explicou: 'Cada palavra é feita de LETRAS. E cada letra faz um SOM.'" },
-      { imagemUrl: gato, narracao: "'GATO tem 4 letras: G-A-T-O. E começa com o som GGG.'" },
+      { imagemUrl: gato, narracao: "'GATO tem 4 letras: G-A-T-O. E começa com o som G.'" },
       { imagemUrl: brilha, narracao: "'Seu nome também é assim! Vamos descobrir as letras dele?'" },
     ] },
     { tipo: "somInicial", instrucaoAudio: "GATO começa com G. RATO começa com R. Qual começa com G?", referencia: { nome: "letra G", imagemUrl: gato }, opcoes: [
@@ -568,11 +570,11 @@ const aula08: AulaEI = {
       { nome: "rato", imagemUrl: rato, correta: false },
       { nome: "pipa", imagemUrl: pipa, correta: false },
     ], feedbackAcerto: "Isso! G de GATO!", feedbackErro: "G é o som do começo de GATO." },
-    { tipo: "somInicial", instrucaoAudio: "Qual começa com M (som MMMMM)?", referencia: { nome: "letra M", imagemUrl: lua }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "Qual começa com M?", referencia: { nome: "letra M", imagemUrl: mapa }, opcoes: [
       { nome: "mapa", imagemUrl: mapa, correta: true },
       { nome: "livro", imagemUrl: livro, correta: false },
       { nome: "coruja", imagemUrl: coruja, correta: false },
-    ], feedbackAcerto: "Boa! MMM-apa!", feedbackErro: "MMM é o som de M." },
+    ], feedbackAcerto: "Boa! Mapa começa com M!", feedbackErro: "M é o som do começo." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma nas sílabas do seu nome de exemplo:", palavra: "MA-RI-A", silabas: 3, imagemUrl: brilha, elogio: "Três sílabas! Muitos nomes têm 3!" },
     { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Fala pro Brilha: quantas letras tem no seu nome? Conta com o adulto!", exemplos: [
       { nome: "3 letras (Ana)", imagemUrl: arcoIris },
@@ -613,11 +615,11 @@ const aula09: AulaEI = {
       { nome: "lua", imagemUrl: lua, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
     ], feedbackAcerto: "PIPA / TRIPA — rimam!", feedbackErro: "Termina em IPA." },
-    { tipo: "somInicial", instrucaoAudio: "Começa com o som de ESTRELA (EEE):", referencia: { nome: "estrela", imagemUrl: estrela }, opcoes: [
-      { nome: "elefante", imagemUrl: dinossauro, correta: true },
+    { tipo: "somInicial", instrucaoAudio: "Começa com o som de ESTRELA, que é E:", referencia: { nome: "estrela", imagemUrl: estrela }, opcoes: [
+      { nome: "elefante", imagemUrl: elefante, correta: true },
       { nome: "pipa", imagemUrl: pipa, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
-    ], feedbackAcerto: "Boa! EEE!", feedbackErro: "O sopro é EEE." },
+    ], feedbackAcerto: "Boa! Elefante começa com E!", feedbackErro: "O som do começo é E." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra maior:", palavra: "BI-BLI-O-TE-CA", silabas: 5, imagemUrl: biblioteca, elogio: "CINCO palmas! Palavra grandona!" },
     { tipo: "historiaIlustrada", titulo: "A formatura da turminha", cenas: [
       { imagemUrl: bibliotecaria, narracao: "A professora chamou toda a turma: 'Hoje vocês se FORMAM no Pré II!'" },

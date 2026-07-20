@@ -1100,8 +1100,8 @@ const aula17: AulaEI = {
         { nome: "flor", imagemUrl: flor, correta: false },
         { nome: "banana", imagemUrl: banana, correta: false },
       ],
-      feedbackAcerto: "K-oelho, K-oruja!",
-      feedbackErro: "Escuta: K-oelho. Coruja começa igual.",
+      feedbackAcerto: "Coelho e coruja começam com C!",
+      feedbackErro: "Escuta: coelho e coruja começam igual.",
     },
     {
       tipo: "somInicial",
