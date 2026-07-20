@@ -463,7 +463,7 @@ const a9: AulaEI = {
       antonimo: "POUCOS",
       opcoes: [
         { nome: "UMA CRIANÇA", imagemUrl: menino, correta: true },
-        { nome: "GRUPO", imagemUrl: criancasGrupo, correta: false },
+        { nome: "CIDADE CHEIA", imagemUrl: cidade, correta: false },
         { nome: "PEIXE", imagemUrl: peixe, correta: false },
       ],
       instrucaoAudio: "No grupo tem MUITAS crianças. Qual imagem mostra POUCOS?",
