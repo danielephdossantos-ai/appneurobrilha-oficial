@@ -15,17 +15,17 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
   out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
 
-  // Evita leituras artificiais como "SOLLL" ou "SSSS-ol".
+  // Evita leituras artificiais com letras repetidas na alfabetização.
   // O visual pode destacar o som repetido, mas a voz do professor precisa soar natural.
   out = out.replace(/\bSO\s*[-·]?\s*L+\b/gi, "sol");
   out = out.replace(/\b([BCDFGHJKLMNPQRSTVWXYZ])\1{1,}\s*[-·]?\s*([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç]+)\b/g, (_, ch, rest) => {
     return `${String(ch).toLowerCase()}${String(rest).toLowerCase()}`;
   });
 
-  // Runs de letras romanas maiúsculas (II, III, VI, IX, XX...) são lidas como
+  // Runs de letras romanas maiúsculas são lidas como
   // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
   // Convertemos vogais em som curto e consoantes em "som de X" para não virar
-  // ruído tipo "SOLLL" / "eme eme eme".
+  // ruído repetitivo de letra isolada.
   const somVogalElongada: Record<string, string> = {
     A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
     Á: "áá", É: "éé", Í: "ii", Ó: "óó", Ú: "uu",

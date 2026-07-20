@@ -71,7 +71,7 @@ const aula: Aula = {
   exemploResolvido: {
     enunciado: "Vamos escrever a palavra SOL. Quais letras usamos?",
     passos: [
-      "Escute a palavra bem devagar: SSS · OOO · LLL.",
+      "Escute a palavra bem devagar: S, depois O, depois L.",
       "Cada som pede uma letra: S, depois O, depois L.",
       "Coloque as letras na ordem, da esquerda pra direita.",
     ],
@@ -102,7 +102,7 @@ const aula: Aula = {
       enunciado:
         "🌞 A palavra SOL tem quantas letras?",
       resposta: "3 letras: S, O, L.",
-      dica: "Fala a palavra devagar: SSS · OOO · LLL.",
+      dica: "Fala a palavra devagar: S, depois O, depois L.",
     },
     {
       enunciado:

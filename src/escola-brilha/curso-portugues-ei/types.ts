@@ -102,7 +102,7 @@ export type MomentoEI =
       // Apresenta a letra + som + palavras-imagem que começam com ela.
       // Baseado em ensino explícito de correspondência grafema-fonema (Ehri).
       letra: string; // "A" ou "P"
-      som: string; // TTS: como o som da letra é (ex.: "AAA" ou "PPP")
+      som: string; // TTS: som curto e natural da letra (ex.: "A" ou "P")
       instrucaoAudio: string;
       exemplos: Array<{ nome: string; imagemUrl: string }>;
       elogio: string;
@@ -130,7 +130,7 @@ export type MomentoEI =
       // enquanto o professor pronuncia o som isolado. (Elkonin 1973)
       imagemUrl: string;
       palavra: string; // "SOL"
-      fonemas: string[]; // ["SSS","OOO","LLL"]
+      fonemas: string[]; // ["S", "O", "L"]
       instrucaoAudio: string;
       elogio: string;
     }
