@@ -2735,3 +2735,157 @@ function DiplomaFaseBloco({
   );
 }
 
+
+// ============ FASE 8 · Semana 1 — Prever ============
+function PreverHistoriaBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "preverHistoria" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [cenaAtual, setCenaAtual] = useState(0);
+  const [contouTudo, setContouTudo] = useState(false);
+  const [escolhida, setEscolhida] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
+
+  const opcoes = useMemo(() => {
+    const seed = m.pergunta.length;
+    return [...m.opcoes]
+      .map((o, i) => ({ o, k: (o.nome.charCodeAt(0) + i * 13 + seed) % 97 }))
+      .sort((a, b) => a.k - b.k)
+      .map((x) => x.o);
+  }, [m.opcoes, m.pergunta]);
+
+  const contarHistoria = () => {
+    stopSpeaking();
+    setContouTudo(false);
+    setCenaAtual(0);
+    let i = 0;
+    const step = () => {
+      if (i >= m.cenas.length) {
+        setContouTudo(true);
+        setTimeout(() => {
+          speakChunked(m.pergunta, { rate: 0.95, pitch: 1.1 });
+        }, 400);
+        return;
+      }
+      setCenaAtual(i);
+      speakChunked(m.cenas[i].narracao, { rate: 0.9, pitch: 1.1 });
+      const dur = Math.max(2400, m.cenas[i].narracao.length * 70);
+      i++;
+      setTimeout(step, dur);
+    };
+    step();
+  };
+
+  const escolher = (nome: string) => {
+    const alvo = m.opcoes.find((o) => o.nome === nome);
+    if (!alvo) return;
+    setEscolhida(nome);
+    if (alvo.correta) {
+      setOk(true);
+      setMsg(m.feedbackAcerto);
+      stopSpeaking();
+      speakChunked(`${m.feedbackAcerto} ${m.elogio}`, { rate: 0.95, pitch: 1.1 });
+      setTimeout(onOk, 2000);
+    } else {
+      setMsg(m.feedbackErro);
+      stopSpeaking();
+      speakChunked(m.feedbackErro, { rate: 0.95, pitch: 1.05 });
+      setTimeout(() => setEscolhida(null), 900);
+    }
+  };
+
+  const cena = m.cenas[cenaAtual];
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={m.titulo ?? "O que vai acontecer?"} cor={cor} />
+
+      <div className="mx-auto max-w-lg">
+        <ImageFrame src={cena.imagemUrl} alt={`cena ${cenaAtual + 1}`} size="xl" />
+        <p className="mt-3 text-center text-lg font-bold text-white/95 bg-black/40 rounded-2xl px-4 py-3">
+          {cena.narracao}
+        </p>
+        <div className="mt-2 flex justify-center gap-1">
+          {m.cenas.map((_, i) => (
+            <span
+              key={i}
+              className={`h-2 w-6 rounded-full ${i <= cenaAtual ? "bg-yellow-300" : "bg-white/30"}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <BigListenButton onClick={contarHistoria} label="▶ Contar de novo" />
+
+      {contouTudo && (
+        <>
+          <div className="mt-5 text-center">
+            <p className="text-xl font-black text-yellow-200 drop-shadow">
+              🤔 {m.pergunta}
+            </p>
+            <p className="text-xs text-white/80 mt-1">{m.instrucaoAudio}</p>
+          </div>
+
+          <div className="mt-4 grid grid-cols-3 gap-3 max-w-lg mx-auto w-full">
+            {opcoes.map((o) => {
+              const isEscolhida = escolhida === o.nome;
+              const acertou = ok && o.correta;
+              const errou = isEscolhida && !o.correta;
+              return (
+                <button
+                  key={o.nome}
+                  disabled={ok}
+                  onClick={() => {
+                    stopSpeaking();
+                    speakChunked(o.nome.toLowerCase(), { rate: 0.95, pitch: 1.1 });
+                    setTimeout(() => escolher(o.nome), 500);
+                  }}
+                  className={`rounded-2xl border-4 p-2 shadow-md active:scale-95 transition ${
+                    acertou
+                      ? "border-green-400 bg-green-50"
+                      : errou
+                      ? "border-red-400 bg-red-50"
+                      : "border-white/40 bg-white"
+                  }`}
+                >
+                  <img
+                    src={o.imagemUrl}
+                    alt={o.nome}
+                    className="w-full h-24 object-contain"
+                  />
+                  <div className="mt-1 text-[11px] font-black text-slate-800 uppercase text-center">
+                    {o.nome}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {!contouTudo && cenaAtual === 0 && (
+        <p className="mt-3 text-center text-xs text-white/80">
+          Toque ▶ para ouvir a história antes de escolher.
+        </p>
+      )}
+
+      {msg && (
+        <p
+          className={`mt-4 text-center font-bold ${
+            ok ? "text-green-300" : "text-amber-200"
+          }`}
+        >
+          {msg}
+        </p>
+      )}
+    </CardScreen>
+  );
+}
