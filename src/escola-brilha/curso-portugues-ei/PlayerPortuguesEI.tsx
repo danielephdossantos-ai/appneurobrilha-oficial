@@ -2767,21 +2767,32 @@ function PreverHistoriaBloco({
     setContouTudo(false);
     setCenaAtual(0);
     let i = 0;
-    const step = () => {
+    let cancelado = false;
+    const step = async () => {
+      if (cancelado) return;
       if (i >= m.cenas.length) {
         setContouTudo(true);
-        setTimeout(() => {
-          speakChunked(m.pergunta, { rate: 0.95, pitch: 1.1 });
-        }, 400);
+        await new Promise((r) => setTimeout(r, 500));
+        if (cancelado) return;
+        await speakChunked(m.pergunta, { rate: 0.9, pitch: 1.1 });
         return;
       }
       setCenaAtual(i);
-      speakChunked(m.cenas[i].narracao, { rate: 0.9, pitch: 1.1 });
-      const dur = Math.max(2400, m.cenas[i].narracao.length * 70);
+      // Pequena pausa pra imagem/texto aparecerem antes da narração
+      await new Promise((r) => setTimeout(r, 350));
+      if (cancelado) return;
+      await speakChunked(m.cenas[i].narracao, { rate: 0.88, pitch: 1.1 });
+      if (cancelado) return;
+      // Respiro entre cenas
+      await new Promise((r) => setTimeout(r, 700));
       i++;
-      setTimeout(step, dur);
+      step();
     };
     step();
+    // guarda um cancelador caso o usuário toque de novo
+    (contarHistoria as unknown as { _cancel?: () => void })._cancel = () => {
+      cancelado = true;
+    };
   };
 
   const escolher = (nome: string) => {
