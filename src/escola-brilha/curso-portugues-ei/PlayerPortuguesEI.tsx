@@ -1388,17 +1388,59 @@ function LeituraFraseBloco({
   onOk: () => void;
 }) {
   const [ouviu, setOuviu] = useState(false);
+  const [ativa, setAtiva] = useState(-1);
+  const timersRef = useRef<number[]>([]);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((t) => clearTimeout(t));
+      timersRef.current = [];
+      stopSpeaking();
+    };
+  }, []);
+
+  const lerKaraoke = (rate: number) => {
+    timersRef.current.forEach((t) => clearTimeout(t));
+    timersRef.current = [];
+    stopSpeaking();
+    setOuviu(true);
+    setAtiva(-1);
+    // Fala palavra a palavra em fila, marcando cada uma como ativa
+    // (destaque amarelo pulsante) para trabalhar associação som↔texto.
+    const gap = rate < 0.85 ? 120 : 90;
+    let delay = 0;
+    palavras.forEach((p, i) => {
+      const t1 = window.setTimeout(() => {
+        setAtiva(i);
+        speakChunked(p.toLowerCase(), { rate, queue: false });
+      }, delay);
+      timersRef.current.push(t1);
+      // Estima duração para próxima palavra
+      const dur = Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
+      delay += dur;
+    });
+    const tFim = window.setTimeout(() => setAtiva(-1), delay + 200);
+    timersRef.current.push(tFim);
+  };
+
   return (
     <CardScreen cor={cor}>
       <TituloMomento n={idx + 1} texto="Eu leio a frase!" cor={cor} />
       <div className="mx-auto max-w-md text-center">
         <ImageFrame src={m.imagemUrl} alt={m.frase} size="xl" />
-        <p className="mt-4 font-black leading-snug" style={{ fontSize: 32 }}>
+        <p className="mt-4 font-black leading-snug flex flex-wrap justify-center gap-x-2 gap-y-1" style={{ fontSize: 32 }}>
           {palavras.map((p, i) => (
-            <span key={i}>
+            <span
+              key={i}
+              className={`inline-block px-1 rounded-md transition-all duration-150 ${
+                ativa === i
+                  ? "bg-yellow-300 text-slate-900 scale-110 shadow-md"
+                  : ""
+              }`}
+            >
               <PalavraColorida palavra={p} />
-              {i < palavras.length - 1 ? " " : "."}
+              {i === palavras.length - 1 ? "." : ""}
             </span>
           ))}
         </p>
@@ -1406,21 +1448,13 @@ function LeituraFraseBloco({
 
         <div className="mt-4 grid gap-2">
           <button
-            onClick={() => {
-              setOuviu(true);
-              stopSpeaking();
-              speakChunked(m.frase.toLowerCase(), { rate: 0.75 });
-            }}
+            onClick={() => lerKaraoke(0.7)}
             className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
             🐢 Ouvir devagar
           </button>
           <button
-            onClick={() => {
-              setOuviu(true);
-              stopSpeaking();
-              speakChunked(m.frase.toLowerCase(), { rate: 0.95 });
-            }}
+            onClick={() => lerKaraoke(0.92)}
             className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
             🐇 Ouvir junto
@@ -1430,6 +1464,8 @@ function LeituraFraseBloco({
         {ouviu && (
           <button
             onClick={() => {
+              timersRef.current.forEach((t) => clearTimeout(t));
+              setAtiva(-1);
               speak(m.elogio);
               onOk();
             }}
