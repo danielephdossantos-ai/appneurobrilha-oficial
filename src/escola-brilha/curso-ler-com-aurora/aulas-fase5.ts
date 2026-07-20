@@ -393,9 +393,10 @@ const a16: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Cinco sons de nariz: AN, EN, IN, ON, UN!" },
     { tipo: "familiaSilabica", consoante: "N (nasal)", silabas: ["AN","EN","IN","ON","UN"], instrucaoAudio: "Toca em cada uma. Ouve o som do nariz.", elogio: "Isso!" },
-    { tipo: "leituraSilabica", imagemUrl: campo, palavra: "CANTO", silabas: ["CAN","TO"], instrucaoAudio: "CAN nasal.", elogio: "CANTO!" },
-    { tipo: "leituraSilabica", imagemUrl: pente, palavra: "VENTO", silabas: ["VEN","TO"], instrucaoAudio: "VEN nasal.", elogio: "VENTO!" },
-    { tipo: "leituraSilabica", imagemUrl: tinta, palavra: "PINTOR", silabas: ["PIN","TOR"], instrucaoAudio: "PIN nasal.", elogio: "PINTOR!" },
+    { tipo: "leituraSilabica", imagemUrl: campo, palavra: "CAMPO", silabas: ["CAM","PO"], instrucaoAudio: "CAM tem som AN nasal.", elogio: "CAMPO!" },
+    { tipo: "leituraSilabica", imagemUrl: pente, palavra: "PENTE", silabas: ["PEN","TE"], instrucaoAudio: "PEN tem som EN nasal.", elogio: "PENTE!" },
+    { tipo: "leituraSilabica", imagemUrl: tinta, palavra: "TINTA", silabas: ["TIN","TA"], instrucaoAudio: "TIN tem som IN nasal.", elogio: "TINTA!" },
+    { tipo: "leituraSilabica", imagemUrl: ponte, palavra: "PONTE", silabas: ["PON","TE"], instrucaoAudio: "PON tem som ON nasal.", elogio: "PONTE!" },
     { tipo: "celebracao", medalha: "Família Nasal", mascoteUrl: mascote, falaFinal: "Amanhã: revisão geral!" },
   ],
 };
