@@ -2098,7 +2098,7 @@ function LeituraEcoBloco({
     <CardScreen cor={cor}>
       <TituloMomento n={idx + 1} texto={m.titulo ?? "Eco: eu leio, você repete!"} cor={cor} />
       <div className="mx-auto max-w-md text-center">
-        <ImageFrame src={m.imagemUrl} alt={linhaAtual} size="xl" />
+        <ImageFrame src={m.imagensLinhas?.[linhaIdx] ?? m.imagemUrl} alt={linhaAtual} size="xl" />
 
         {/* Progresso de linhas */}
         <div className="mt-3 flex justify-center gap-2">

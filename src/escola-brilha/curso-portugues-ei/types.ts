@@ -215,6 +215,10 @@ export type MomentoEI =
       // (Rasinski 2004; NRP 2000).
       titulo?: string;
       imagemUrl: string;
+      /** Opcional: imagem por linha (mesmo tamanho de `linhas`).
+       *  Quando presente, sobrepõe `imagemUrl` na linha correspondente
+       *  para casar figura ↔ texto em diálogos/mini-cenas. */
+      imagensLinhas?: string[];
       linhas: string[]; // 3-5 frases curtas
       instrucaoAudio: string;
       elogio: string;

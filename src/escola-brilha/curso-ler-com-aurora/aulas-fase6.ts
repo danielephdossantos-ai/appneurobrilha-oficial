@@ -269,7 +269,7 @@ const a15: AulaEI = {
   baseCientifica: BASE_PROSODIA,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Última missão da semana! Um mini-diálogo: dois personagens conversam. Muda a voz junto comigo!" },
-    { tipo: "leituraEco", titulo: "Diálogo — a bola perdida", imagemUrl: bola, linhas: ["A MENINA PERGUNTA:", "CADÊ A BOLA?", "O GATO RESPONDE:", "ESTÁ AQUI!", "QUE BOM!"], instrucaoAudio: "Copie a entonação de cada linha. Perguntas sobem, exclamações vibram.", elogio: "Um diálogo inteiro com voz de verdade!" },
+    { tipo: "leituraEco", titulo: "Diálogo — a bola perdida", imagemUrl: bola, imagensLinhas: [menina, bola, gato, bola, menina], linhas: ["A MENINA PERGUNTA:", "CADÊ A BOLA?", "O GATO RESPONDE:", "ESTÁ AQUI!", "QUE BOM!"], instrucaoAudio: "Copie a entonação de cada linha. Perguntas sobem, exclamações vibram.", elogio: "Um diálogo inteiro com voz de verdade!" },
     { tipo: "celebracao", medalha: "Fluência Semana 3", mascoteUrl: mascote, falaFinal: "Semana 4 vem aí: mini-textos completos e o Diploma de Leitor Fluente!" },
   ],
 };
