@@ -259,6 +259,30 @@ export type MomentoEI =
       opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
       instrucaoAudio: string;
       elogio: string;
+    }
+  // ============ FASE 7 · Semana 4 — Palavra na frase (cloze) ============
+  | {
+      tipo: "palavraNaFrase";
+      // Cloze com apoio visual. Frase curta com "___" no lugar da palavra
+      // alvo; criança escolhe entre 3 palavras qual completa a frase
+      // (Beck & McKeown 2013 · uso da palavra em contexto).
+      imagemUrl: string;
+      frase: string;              // "A criança mora na ___."
+      palavraCorreta: string;     // "CASA"
+      distratores: string[];      // 2 palavras erradas
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
+  | {
+      tipo: "diplomaFase";
+      titulo: string;             // "Colecionador de Palavras"
+      curso: string;              // "Ler com Aurora — Fase 7"
+      descricao?: string;
+      personagem: string;         // chave em PERSONAGENS (ex.: "aurora")
+      numeroColecao?: number;
+      totalColecao?: number;
+      falaFinal: string;          // TTS na abertura
     };
 
 
