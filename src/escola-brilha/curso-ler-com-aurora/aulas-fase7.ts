@@ -563,7 +563,281 @@ const a10: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 7 (Semanas 1-2 no ar; Semanas 3-4 pendentes)
+ * SEMANA 3 — Campos semânticos (Família, Casa, Natureza, Cidade)
+ * ============================================================
+ * Base: Nation (2001) — palavras aprendidas em rede semântica são
+ * retidas melhor. A criança agrupa imagens sob uma categoria e,
+ * no fim, identifica a "intrusa" (metacognição de categoria).
+ */
+const BASE_CAMPO =
+  "Campos semânticos (Nation 2001): agrupar palavras por categoria fortalece a memória lexical. A criança vê a categoria, escuta a pergunta e escolhe a imagem que pertence — ou a intrusa — reforçando a rede de significados.";
+
+const a11: AulaEI = {
+  slug: "f7-dia-11-campo-familia",
+  titulo: "Dia 11 · Família",
+  icone: "👨‍👩‍👧",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CAMPO,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Nova semana! Agora vamos juntar palavras que ANDAM JUNTAS. Hoje: FAMÍLIA.",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "FAMÍLIA",
+      categoriaEmoji: "👨‍👩‍👧",
+      pergunta: "Qual é da FAMÍLIA?",
+      opcoes: [
+        { nome: "MENINA", imagemUrl: menina, correta: true },
+        { nome: "LEÃO", imagemUrl: leao, correta: false },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+      ],
+      instrucaoAudio: "Família é o grupo de pessoas que mora junto. Qual imagem é da família?",
+      elogio: "A menina faz parte da família!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "FAMÍLIA",
+      categoriaEmoji: "👨‍👩‍👧",
+      pergunta: "Qual TAMBÉM é da FAMÍLIA?",
+      opcoes: [
+        { nome: "MENINO", imagemUrl: menino, correta: true },
+        { nome: "PEIXE", imagemUrl: peixe, correta: false },
+        { nome: "SORVETE", imagemUrl: sorvete, correta: false },
+      ],
+      instrucaoAudio: "Quem mais faz parte da família?",
+      elogio: "Menino também é da família!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Campos · Dia 11",
+      mascoteUrl: mascote,
+      falaFinal: "FAMÍLIA na coleção. Amanhã: coisas de CASA!",
+    },
+  ],
+};
+
+const a12: AulaEI = {
+  slug: "f7-dia-12-campo-casa",
+  titulo: "Dia 12 · Casa",
+  icone: "🏠",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CAMPO,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje: coisas que a gente encontra numa CASA.",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "CASA",
+      categoriaEmoji: "🏠",
+      pergunta: "Qual é uma CASA?",
+      opcoes: [
+        { nome: "CASA", imagemUrl: casa, correta: true },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "PEIXE", imagemUrl: peixe, correta: false },
+      ],
+      instrucaoAudio: "Casa é o lugar onde a gente mora. Qual imagem é uma casa?",
+      elogio: "Essa é uma casa!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "CASA",
+      categoriaEmoji: "🏠",
+      pergunta: "Qual TAMBÉM é uma CASA?",
+      opcoes: [
+        { nome: "CASA MODERNA", imagemUrl: casaModerna, correta: true },
+        { nome: "LEÃO", imagemUrl: leao, correta: false },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+      ],
+      instrucaoAudio: "As casas mudam de forma, mas continuam sendo casa. Qual é a outra casa?",
+      elogio: "Também é uma casa, só que mais nova!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Campos · Dia 12",
+      mascoteUrl: mascote,
+      falaFinal: "CASA na coleção. Amanhã: NATUREZA!",
+    },
+  ],
+};
+
+const a13: AulaEI = {
+  slug: "f7-dia-13-campo-natureza",
+  titulo: "Dia 13 · Natureza",
+  icone: "🌳",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CAMPO,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje: coisas da NATUREZA — o que não é feito por gente.",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "NATUREZA",
+      categoriaEmoji: "🌳",
+      pergunta: "Qual é da NATUREZA?",
+      opcoes: [
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: true },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+        { nome: "PRÉDIO", imagemUrl: predio, correta: false },
+      ],
+      instrucaoAudio: "Natureza são as coisas que crescem sozinhas na terra. Qual é da natureza?",
+      elogio: "A árvore é da natureza!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "NATUREZA",
+      categoriaEmoji: "🌳",
+      pergunta: "Qual TAMBÉM é da NATUREZA?",
+      opcoes: [
+        { nome: "FLOR", imagemUrl: flor, correta: true },
+        { nome: "SORVETE", imagemUrl: sorvete, correta: false },
+        { nome: "CASA MODERNA", imagemUrl: casaModerna, correta: false },
+      ],
+      instrucaoAudio: "O que mais nasce na natureza?",
+      elogio: "A flor é da natureza!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Campos · Dia 13",
+      mascoteUrl: mascote,
+      falaFinal: "NATUREZA na coleção. Amanhã: CIDADE!",
+    },
+  ],
+};
+
+const a14: AulaEI = {
+  slug: "f7-dia-14-campo-cidade",
+  titulo: "Dia 14 · Cidade",
+  icone: "🏙️",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CAMPO,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje: coisas da CIDADE — o que a gente vê nas ruas.",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "CIDADE",
+      categoriaEmoji: "🏙️",
+      pergunta: "Qual é da CIDADE?",
+      opcoes: [
+        { nome: "PRÉDIO", imagemUrl: predio, correta: true },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "PEIXE", imagemUrl: peixe, correta: false },
+      ],
+      instrucaoAudio: "Na cidade tem muitos prédios altos. Qual imagem é da cidade?",
+      elogio: "Prédio é bem da cidade!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "CIDADE",
+      categoriaEmoji: "🏙️",
+      pergunta: "Qual TAMBÉM é da CIDADE?",
+      opcoes: [
+        { nome: "CARRO", imagemUrl: carro, correta: true },
+        { nome: "FLOR", imagemUrl: flor, correta: false },
+        { nome: "CAMPO", imagemUrl: campo, correta: false },
+      ],
+      instrucaoAudio: "O que anda pelas ruas da cidade?",
+      elogio: "O carro é da cidade!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Campos · Dia 14",
+      mascoteUrl: mascote,
+      falaFinal: "CIDADE na coleção. Amanhã: caça à INTRUSA!",
+    },
+  ],
+};
+
+const a15: AulaEI = {
+  slug: "f7-dia-15-campos-intrusa",
+  titulo: "Dia 15 · Caça à Intrusa",
+  icone: "🕵️",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CAMPO,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Agora vira o jogo: descubra qual imagem NÃO pertence à categoria. Pense antes de tocar!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "FAMÍLIA",
+      categoriaEmoji: "👨‍👩‍👧",
+      pergunta: "Qual NÃO é da FAMÍLIA?",
+      opcoes: [
+        { nome: "LEÃO", imagemUrl: leao, correta: true },
+        { nome: "MENINA", imagemUrl: menina, correta: false },
+        { nome: "MENINO", imagemUrl: menino, correta: false },
+      ],
+      instrucaoAudio: "Duas dessas fazem parte da família. Qual NÃO é?",
+      elogio: "Leão é bicho — não é da família!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "NATUREZA",
+      categoriaEmoji: "🌳",
+      pergunta: "Qual NÃO é da NATUREZA?",
+      opcoes: [
+        { nome: "PRÉDIO", imagemUrl: predio, correta: true },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "FLOR", imagemUrl: flor, correta: false },
+      ],
+      instrucaoAudio: "Duas nascem sozinhas. Qual foi construída por gente?",
+      elogio: "Prédio é feito por gente — não é da natureza!",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "CIDADE",
+      categoriaEmoji: "🏙️",
+      pergunta: "Qual NÃO é da CIDADE?",
+      opcoes: [
+        { nome: "CAMPO", imagemUrl: campo, correta: true },
+        { nome: "PRÉDIO", imagemUrl: predio, correta: false },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+      ],
+      instrucaoAudio: "Duas são da cidade. Qual é do outro lugar?",
+      elogio: "Campo é o contrário de cidade!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "🎒 Missão em Família — Caça aos Campos",
+      convite:
+        "Escolha uma categoria (família, casa, natureza ou cidade) e ache em casa 3 coisas que pertencem a ela. Depois, invente uma INTRUSA — algo que NÃO pertence — e desafie alguém a descobrir.",
+      dicaAdulto:
+        "Nomear em voz alta reforça a categoria. Peça à criança para explicar POR QUE cada coisa pertence (ou não) — a justificativa é o momento em que o vocabulário fica ativo (Nation 2001).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "🏅 Colecionador de Palavras · Semana 3",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Semana 3 fechada! Você já sabe agrupar palavras. Semana 4: palavra na frase — usar as palavras na hora certa!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 7 (Semanas 1-3 no ar; Semana 4 pendente)
  * ============================================================ */
 
 export const cursoLerComAuroraFase7: CursoEI = {
@@ -590,6 +864,13 @@ export const cursoLerComAuroraFase7: CursoEI = {
       titulo: "Semana 2 · Antônimos por contraste",
       subtitulo: "Caça aos Contrários",
       aulas: [a6, a7, a8, a9, a10],
+    },
+    {
+      slug: "f7-semana-03",
+      numero: 3,
+      titulo: "Semana 3 · Campos semânticos",
+      subtitulo: "Palavras que Andam Juntas",
+      aulas: [a11, a12, a13, a14, a15],
     },
   ],
 };

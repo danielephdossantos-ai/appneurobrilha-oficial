@@ -247,6 +247,18 @@ export type MomentoEI =
       opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
       instrucaoAudio: string;
       elogio: string;
+    }
+  | {
+      tipo: "campoSemantico";
+      // Campos semânticos — palavras que "andam juntas" (Nation 2001).
+      // Mostra categoria + 3 imagens. Criança seleciona a que se
+      // encaixa (ou a intrusa, dependendo da pergunta).
+      categoria: string;         // "FAMÍLIA"
+      categoriaEmoji?: string;   // "👨‍👩‍👧"
+      pergunta: string;          // "Qual DELES é da FAMÍLIA?"
+      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
+      instrucaoAudio: string;
+      elogio: string;
     };
 
 

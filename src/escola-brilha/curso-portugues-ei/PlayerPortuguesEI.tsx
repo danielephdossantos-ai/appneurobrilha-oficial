@@ -641,6 +641,8 @@ function MomentoRender({
       return <SinonimoImagemBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
     case "antonimoContraste":
       return <AntonimoContrasteBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "campoSemantico":
+      return <CampoSemanticoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
@@ -2434,4 +2436,111 @@ function AntonimoContrasteBloco({
 }
 
 
+// ============ FASE 7 · Semana 3 — Campos semânticos ============
+function CampoSemanticoBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "campoSemantico" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const opcoes = useMemo(() => {
+    return [...m.opcoes]
+      .map((o, i) => ({ o, k: (o.nome.charCodeAt(0) + i * 17 + m.categoria.length) % 97 }))
+      .sort((a, b) => a.k - b.k)
+      .map((x) => x.o);
+  }, [m.opcoes, m.categoria]);
+
+  const [escolhida, setEscolhida] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+
+  const tocar = () => {
+    stopSpeaking();
+    speakChunked(m.instrucaoAudio, { rate: 0.9, pitch: 1.1 });
+  };
+
+  const escolher = (o: { nome: string; correta: boolean }) => {
+    setEscolhida(o.nome);
+    if (o.correta) {
+      setOk(true);
+      setMsg(`Isso! ${m.elogio}`);
+      stopSpeaking();
+      speakChunked(`Isso! ${m.elogio}`, { rate: 0.95, pitch: 1.1 });
+      setTimeout(onOk, 1500);
+    } else {
+      setMsg("Quase! Pense na categoria e tente outra.");
+      stopSpeaking();
+      speakChunked(`${o.nome.toLowerCase()} não é. Tente outra.`, {
+        rate: 0.95,
+        pitch: 1.05,
+      });
+      setTimeout(() => setEscolhida(null), 900);
+    }
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={m.pergunta} cor={cor} />
+      <div className="mt-2 text-center">
+        <div className="inline-flex items-center gap-2 rounded-2xl bg-white border-4 border-purple-300 px-6 py-3 shadow">
+          {m.categoriaEmoji && <span className="text-4xl">{m.categoriaEmoji}</span>}
+          <span className="text-3xl font-black tracking-wide text-purple-800">{m.categoria}</span>
+        </div>
+      </div>
+
+      <BigListenButton onClick={tocar} label="Ouvir professor" />
+
+      <div className="mt-4 grid grid-cols-3 gap-3 max-w-xl mx-auto w-full">
+        {opcoes.map((o) => {
+          const isEscolhida = escolhida === o.nome;
+          const acertou = ok && o.correta;
+          const errou = isEscolhida && !ok;
+          return (
+            <button
+              key={o.nome}
+              disabled={ok}
+              onClick={() => {
+                stopSpeaking();
+                speakChunked(o.nome.toLowerCase(), { rate: 0.95, pitch: 1.1 });
+                setTimeout(() => escolher(o), 450);
+              }}
+              className={`rounded-2xl border-4 p-2 shadow-md active:scale-95 transition ${
+                acertou
+                  ? "border-green-500 bg-green-50"
+                  : errou
+                  ? "border-red-400 bg-red-50"
+                  : "border-purple-200 bg-white"
+              }`}
+            >
+              <img
+                src={o.imagemUrl}
+                alt={o.nome}
+                className="w-full h-24 object-contain"
+                loading="lazy"
+              />
+              <div className="mt-1 text-center text-sm font-black text-purple-900">
+                {o.nome}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {msg && (
+        <p
+          className={`mt-4 text-center font-bold ${
+            ok ? "text-green-700" : "text-amber-700"
+          }`}
+        >
+          {msg}
+        </p>
+      )}
+    </CardScreen>
+  );
+}
 
