@@ -3,6 +3,7 @@ import { cursoLerComAurora } from "@/escola-brilha/curso-ler-com-aurora/aulas";
 import { cursoLerComAuroraFase2 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase2";
 import { cursoLerComAuroraFase3 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase3";
 import { cursoLerComAuroraFase4 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase4";
+import { cursoLerComAuroraFase5 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase5";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 /**
@@ -40,7 +41,7 @@ function FaseBloco({
   gradiente,
   badge,
 }: {
-  fase: 1 | 2 | 3 | 4;
+  fase: 1 | 2 | 3 | 4 | 5;
   curso: CursoEI;
   concluidas: Set<string>;
   gradiente: string;
@@ -141,7 +142,8 @@ function TrilhaLerComAurora() {
     cursoLerComAurora.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase2.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase3.unidades.flatMap((u) => u.aulas).length +
-    cursoLerComAuroraFase4.unidades.flatMap((u) => u.aulas).length;
+    cursoLerComAuroraFase4.unidades.flatMap((u) => u.aulas).length +
+    cursoLerComAuroraFase5.unidades.flatMap((u) => u.aulas).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
@@ -150,7 +152,7 @@ function TrilhaLerComAurora() {
 
         <header className="text-center mt-3 mb-6">
           <p className="text-yellow-200 font-bold text-xs tracking-wider">
-            CURSO ESPECIAL · CIÊNCIA DA LEITURA
+            ALFABETIZAÇÃO ATÉ 6 ANOS · CIÊNCIA DA LEITURA
           </p>
           <h1 className="text-3xl sm:text-4xl font-black mt-1">Ler com Aurora</h1>
           <p className="text-yellow-100 text-sm mt-1">
@@ -194,8 +196,13 @@ function TrilhaLerComAurora() {
           badge="FASE 4 · FLUÊNCIA E COMPREENSÃO"
         />
 
-
-
+        <FaseBloco
+          fase={5}
+          curso={cursoLerComAuroraFase5}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#10b981,#064e3b)"
+          badge="FASE 5 · ORTOGRAFIA INICIAL"
+        />
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
           <p className="font-bold text-yellow-200 mb-1">📚 Base científica</p>
@@ -203,9 +210,9 @@ function TrilhaLerComAurora() {
             Não prometemos prazos — cada criança aprende no próprio ritmo.
             Usamos técnicas com evidência: consciência fonológica (Heggerty,
             NRP 2000), princípio alfabético (Ehri 2005), traçado motor
-            (Longcamp 2008), caixas de Elkonin (1973), deleção fonêmica
-            e ensino explícito de correspondência grafema-fonema
-            (PNA-MEC, 2019).
+            (Longcamp 2008), caixas de Elkonin (1973), deleção fonêmica,
+            ensino explícito de correspondência grafema-fonema (PNA-MEC
+            2019) e ortografia por padrões regulares (Morais 2020).
           </p>
         </div>
       </div>
