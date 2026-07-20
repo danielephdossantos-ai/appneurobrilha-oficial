@@ -318,6 +318,21 @@ export type MomentoEI =
       feedbackErro: string;
       elogio: string;
     }
+  // ============ FASE 8 · Semana 4 — Conectar (texto ↔ vida) ============
+  | {
+      tipo: "conexaoPessoal";
+      // Estratégia "Conectar" (Duke & Pearson 2002 · Keene & Zimmermann
+      // 1997): a criança escuta uma micro-história e escolhe entre 3
+      // opções de conexão pessoal (todas válidas). Não há errado — a
+      // meta é ATIVAR a conexão texto ↔ vida, um dos preditores mais
+      // fortes de compreensão profunda.
+      titulo?: string;
+      cenas: Array<{ imagemUrl: string; narracao: string }>;
+      pergunta: string;               // "Já aconteceu com você?"
+      instrucaoAudio: string;
+      opcoes: Array<{ emoji: string; texto: string; respostaAurora: string }>;
+      elogio: string;
+    }
   // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
   | {
       tipo: "diplomaFase";

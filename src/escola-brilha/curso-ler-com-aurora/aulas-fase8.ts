@@ -988,8 +988,294 @@ const a15: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 8 (Semanas 1-3 · 15 missões)
- * Próxima semana: Conectar + Diploma final "Leitor Estratégico"
+ * SEMANA 4 — Conectar (texto ↔ vida) + Diploma "Leitor Estratégico"
+ * ============================================================ */
+
+const BASE_CONECTAR =
+  "Estratégia 'Conectar' (Duke & Pearson 2002 · Keene & Zimmermann 1997): a criança relaciona a história com a própria vida (texto ↔ eu). Conexões pessoais aumentam engajamento, memória e profundidade de compreensão. Não há resposta errada — o que importa é ativar a ponte.";
+
+const a16: AulaEI = {
+  slug: "f8-dia-16-conectar-medo-escuro",
+  titulo: "Dia 16 · Medo do escuro",
+  icone: "🌙",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CONECTAR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Última semana da Fase 8! Agora a gente CONECTA a história com a sua vida. Não tem certo nem errado — é sobre você!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "A luz apagada",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino foi dormir e a luz do quarto se apagou." },
+        { imagemUrl: nuvem, narracao: "Ficou tudo escuro e ele ouviu um barulhinho estranho." },
+      ],
+      pergunta: "Você já sentiu medo do escuro?",
+      instrucaoAudio: "Escolha a resposta que combina com você.",
+      opcoes: [
+        { emoji: "😨", texto: "SIM, JÁ SENTI!", respostaAurora: "Muita gente sente. Faz parte de ser criança." },
+        { emoji: "🙂", texto: "ÀS VEZES", respostaAurora: "Alguns dias sim, outros não — normal!" },
+        { emoji: "😎", texto: "NUNCA TIVE", respostaAurora: "Que coragem! Cada um é de um jeito." },
+      ],
+      elogio: "Você conectou a história com você!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "Quem me acalma",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina acordou com medo no meio da noite." },
+        { imagemUrl: menina, narracao: "Ela chamou alguém que veio dar um abraço bem apertado." },
+      ],
+      pergunta: "Quem te acalma quando você tem medo?",
+      instrucaoAudio: "Escolha quem cuida de você.",
+      opcoes: [
+        { emoji: "👩", texto: "MINHA MÃE / MÃES", respostaAurora: "Mães sabem fazer o medo ir embora." },
+        { emoji: "👨", texto: "MEU PAI / PAIS", respostaAurora: "Colo de pai também é super seguro!" },
+        { emoji: "🧸", texto: "UM BICHINHO DE PELÚCIA", respostaAurora: "Bichinho de pelúcia é um herói silencioso." },
+      ],
+      elogio: "Que bom ter alguém pra chamar!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Conector · Dia 16",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: a alegria de reencontrar alguém que a gente ama.",
+    },
+  ],
+};
+
+const a17: AulaEI = {
+  slug: "f8-dia-17-conectar-saudade",
+  titulo: "Dia 17 · Saudade e reencontro",
+  icone: "💛",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CONECTAR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje é sobre saudade — quando a gente sente falta de alguém.",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "O reencontro",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina não via a avó dela fazia muito tempo." },
+        { imagemUrl: menina, narracao: "Um dia a avó chegou de surpresa e ela correu pra abraçar." },
+      ],
+      pergunta: "De quem você sente saudade?",
+      instrucaoAudio: "Pensa em alguém que você quer ver de novo.",
+      opcoes: [
+        { emoji: "👵", texto: "DE UM AVÓ OU AVÓ", respostaAurora: "Avós têm um lugar especial no coração." },
+        { emoji: "🧑‍🤝‍🧑", texto: "DE UM AMIGO OU AMIGA", respostaAurora: "Amigos que ficam longe fazem falta mesmo." },
+        { emoji: "🐶", texto: "DE UM BICHINHO", respostaAurora: "Bichinhos também mexem com a gente." },
+      ],
+      elogio: "Sentir saudade é sinal de amor!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "O abraço apertado",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino esperou o dia inteiro pra ver o pai chegar do trabalho." },
+        { imagemUrl: menino, narracao: "Quando o pai apareceu na porta, ele voou no colo dele." },
+      ],
+      pergunta: "Como você recebe alguém que ama?",
+      instrucaoAudio: "Escolha o jeito que combina com você.",
+      opcoes: [
+        { emoji: "🤗", texto: "COM UM ABRAÇO", respostaAurora: "Abraço apertado cura tudo!" },
+        { emoji: "😄", texto: "COM UM SORRISO", respostaAurora: "Sorriso também é um abraço com o rosto." },
+        { emoji: "🎁", texto: "COM UMA SURPRESA", respostaAurora: "Surpresa é jeito criativo de dizer 'te amo'." },
+      ],
+      elogio: "Você entende de carinho!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Conector · Dia 17",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: a alegria de aprender uma coisa nova!",
+    },
+  ],
+};
+
+const a18: AulaEI = {
+  slug: "f8-dia-18-conectar-aprender",
+  titulo: "Dia 18 · Consegui aprender!",
+  icone: "🌟",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CONECTAR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje é sobre aquele momento em que a gente aprende algo novo. Duas histórias!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "Andar de bicicleta",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina tentou andar de bicicleta e caiu várias vezes." },
+        { imagemUrl: menina, narracao: "Depois de muito treinar, ela conseguiu pedalar sozinha!" },
+      ],
+      pergunta: "Você já aprendeu algo depois de tentar muito?",
+      instrucaoAudio: "Pensa numa coisa que você conseguiu.",
+      opcoes: [
+        { emoji: "🚴", texto: "ANDAR DE BICICLETA", respostaAurora: "Que orgulho! Bicicleta pede coragem." },
+        { emoji: "🖍️", texto: "DESENHAR / ESCREVER", respostaAurora: "Desenhar é jeito de contar histórias!" },
+        { emoji: "🏊", texto: "OUTRA COISA", respostaAurora: "Toda coisa nova aprendida é vitória!" },
+      ],
+      elogio: "Você sabe que tentar de novo funciona!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "Lendo a primeira palavra",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino olhou pra uma placa na rua." },
+        { imagemUrl: menino, narracao: "E leu sozinho: 'PADARIA'! Ficou muito feliz." },
+      ],
+      pergunta: "Qual palavra você já leu sozinho(a)?",
+      instrucaoAudio: "Pensa numa palavra que você já conseguiu ler.",
+      opcoes: [
+        { emoji: "🅰️", texto: "MEU NOME", respostaAurora: "Nome é a primeira palavra de todo mundo!" },
+        { emoji: "📖", texto: "UMA PALAVRA DO LIVRO", respostaAurora: "Cada palavra é uma porta que abre!" },
+        { emoji: "🤔", texto: "AINDA ESTOU APRENDENDO", respostaAurora: "Você está no caminho — cada dia é um passo." },
+      ],
+      elogio: "Ler é uma aventura sem fim!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Conector · Dia 18",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: emoções misturadas — quando a gente sente coisas ao mesmo tempo.",
+    },
+  ],
+};
+
+const a19: AulaEI = {
+  slug: "f8-dia-19-conectar-emocoes",
+  titulo: "Dia 19 · Coração cheio de coisas",
+  icone: "💗",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CONECTAR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje é sobre sentimentos misturados. Já sentiu duas coisas ao mesmo tempo?",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "O primeiro dia",
+      cenas: [
+        { imagemUrl: escola, narracao: "A menina foi pro primeiro dia de escola." },
+        { imagemUrl: menina, narracao: "Ela sentiu vontade de chorar E vontade de rir ao mesmo tempo." },
+      ],
+      pergunta: "Você já sentiu duas emoções juntas?",
+      instrucaoAudio: "Escolha uma mistura que você já sentiu.",
+      opcoes: [
+        { emoji: "😢😄", texto: "TRISTE E FELIZ", respostaAurora: "Isso acontece com todo mundo — é normal!" },
+        { emoji: "😨🤩", texto: "COM MEDO E ANIMADO", respostaAurora: "Coisas novas fazem esse frio na barriga." },
+        { emoji: "😠💛", texto: "COM RAIVA MAS AMANDO", respostaAurora: "A gente pode sentir raiva de quem ama. Faz parte." },
+      ],
+      elogio: "Coração humano é assim mesmo!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "A partida",
+      cenas: [
+        { imagemUrl: menino, narracao: "O melhor amigo do menino mudou de cidade." },
+        { imagemUrl: menino, narracao: "Ele ficou triste, mas guardou boas lembranças no coração." },
+      ],
+      pergunta: "Como você guarda alguém no coração?",
+      instrucaoAudio: "Escolha o jeito que combina com você.",
+      opcoes: [
+        { emoji: "🖼️", texto: "LEMBRANDO DE FOTOS", respostaAurora: "Fotos ajudam muito a lembrar!" },
+        { emoji: "💭", texto: "PENSANDO NELA(E)", respostaAurora: "Pensar em quem a gente ama já é amor." },
+        { emoji: "📞", texto: "MANDANDO MENSAGEM", respostaAurora: "Falar mata a saudade — que ideia boa!" },
+      ],
+      elogio: "Você cuida bem do coração!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Conector · Dia 19",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Amanhã é o GRANDE DIA: você fecha a Fase 8 e ganha o Diploma de Leitor Estratégico!",
+    },
+  ],
+};
+
+const a20: AulaEI = {
+  slug: "f8-dia-20-conectar-diploma-final",
+  titulo: "Dia 20 · Diploma · Leitor Estratégico",
+  icone: "🏆",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_CONECTAR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Hoje é o último dia da Fase 8! Uma historinha pra conectar, missão em família e o diploma final chegando!",
+    },
+    {
+      tipo: "conexaoPessoal",
+      titulo: "A jornada",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina começou a Fase 8 sem saber contar história." },
+        { imagemUrl: menino, narracao: "Prevendo, resumindo, sentindo com o personagem e conectando com a vida dela..." },
+        { imagemUrl: escola, narracao: "Hoje ela é uma detetive de histórias de verdade!" },
+      ],
+      pergunta: "E você, o que aprendeu na Fase 8?",
+      instrucaoAudio: "Escolha o que mais te marcou.",
+      opcoes: [
+        { emoji: "🔮", texto: "PREVER O FINAL", respostaAurora: "Prever é super poder de leitor!" },
+        { emoji: "🧠", texto: "RESUMIR EM UMA FRASE", respostaAurora: "Resumir é ficar craque na história!" },
+        { emoji: "💗", texto: "SENTIR COM O PERSONAGEM", respostaAurora: "Sentir junto é a melhor parte da leitura." },
+      ],
+      elogio: "Você virou leitor de verdade!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "📖 Missão em Família — Nossa história favorita",
+      convite:
+        "Escolha um livro ou história que você AMA e conte pra alguém da casa. Diga: o que vai acontecer (prever), a história em uma frase (resumir), como o personagem se sente (inferir) e por que você gosta (conectar).",
+      dicaAdulto:
+        "A criança está aplicando as 4 estratégias de Duke & Pearson (2002) num contexto real. Faça perguntas abertas ('por quê?', 'como você sabe?') sem corrigir — o objetivo é ativar o metacognitivo.",
+    },
+    {
+      tipo: "diplomaFase",
+      titulo: "Leitor(a) Estratégico(a)",
+      curso: "Ler com Aurora — Fase 8 · Compreensão Estratégica",
+      descricao:
+        "Por dominar as quatro estratégias da compreensão leitora — prever, resumir, inferir e conectar — tornando-se um(a) verdadeiro(a) detetive de histórias.",
+      personagem: "aurora",
+      numeroColecao: 8,
+      totalColecao: 8,
+      falaFinal:
+        "Você concluiu a Fase 8 E TODA A TRILHA LER COM AURORA! Oito diplomas na coleção. Você é oficialmente um leitor estratégico. Estou orgulhosa!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Leitor Estratégico · Fase 8 completa",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Parabéns, grande leitor! Você fechou a jornada de 160 missões, das primeiras rimas até a compreensão estratégica. Que sorte tem quem lê pra você — e quem escuta você contar!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 8 COMPLETA (20 missões · 4 semanas)
+ * Encerra a trilha "Ler com Aurora".
  * ============================================================ */
 
 export const cursoLerComAuroraFase8: CursoEI = {
@@ -1023,6 +1309,13 @@ export const cursoLerComAuroraFase8: CursoEI = {
       titulo: "Semana 3 · Inferir",
       subtitulo: "Detetive de Sentimentos",
       aulas: [a11, a12, a13, a14, a15],
+    },
+    {
+      slug: "f8-semana-04",
+      numero: 4,
+      titulo: "Semana 4 · Conectar",
+      subtitulo: "História ↔ Minha vida + Diploma",
+      aulas: [a16, a17, a18, a19, a20],
     },
   ],
 };
