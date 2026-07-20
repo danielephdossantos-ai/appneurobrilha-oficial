@@ -21,6 +21,8 @@ import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json
 import { url as pente } from "@/assets/neuro-treino/objetos/pente.png.asset.json";
 import { url as tinta } from "@/assets/neuro-treino/objetos/tinta.png.asset.json";
 import { url as planta } from "@/assets/neuro-treino/objetos/planta-pequena.png.asset.json";
+import { url as cadeira } from "@/assets/neuro-treino/objetos/cadeira.png.asset.json";
+import { url as madeira } from "@/assets/neuro-treino/objetos/madeira.png.asset.json";
 
 /**
  * Ler com Aurora — Fase 5: Ortografia Inicial
@@ -181,16 +183,19 @@ const a6: AulaEI = {
 
 const a7: AulaEI = {
   slug: "f5-dia-07-r-meio-fraco",
-  titulo: "Dia 7 · R fraco no meio (CARA, PARA)",
+  titulo: "Dia 7 · R fraco no meio (CADEIRA, MADEIRA)",
   icone: "💧",
   bncc: ["EF01LP10", "EF01LP11"],
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "R no meio, entre duas vogais, tem som suave, como um pinguinho." },
-    { tipo: "leituraSilabica", imagemUrl: cachorro, palavra: "CARA", silabas: ["CA","RA"], instrucaoAudio: "R suave no meio.", elogio: "CARA!" },
-    { tipo: "leituraSilabica", imagemUrl: coelho, palavra: "PARA", silabas: ["PA","RA"], instrucaoAudio: "R fraquinho.", elogio: "PARA!" },
-    { tipo: "leituraSilabica", imagemUrl: raposa, palavra: "PIRATA", silabas: ["PI","RA","TA"], instrucaoAudio: "R suave também.", elogio: "PIRATA!" },
+    { tipo: "somDaLetra", letra: "R", som: "re", instrucaoAudio: "Entre duas vogais, o R tem som fraquinho. Ouve as palavras.", exemplos: [
+      { nome: "cadeira", imagemUrl: cadeira },
+      { nome: "madeira", imagemUrl: madeira },
+    ], elogio: "Isso, R suave!" },
+    { tipo: "leituraSilabica", imagemUrl: cadeira, palavra: "CADEIRA", silabas: ["CA","DEI","RA"], instrucaoAudio: "R suave entre as vogais.", elogio: "CADEIRA!" },
+    { tipo: "leituraSilabica", imagemUrl: madeira, palavra: "MADEIRA", silabas: ["MA","DEI","RA"], instrucaoAudio: "R fraquinho no meio.", elogio: "MADEIRA!" },
     { tipo: "delecaoFonemica", palavraOriginal: "RATO", fonemaRemovido: "r", instrucaoAudio: "Diga RATO sem o R forte do começo. O que sobra?", opcoes: [
       { texto: "ATO", correta: true },
       { texto: "TRA", correta: false },
@@ -231,12 +236,12 @@ const a9: AulaEI = {
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Ouve com atenção: um R = fraco, dois erres = forte!" },
     { tipo: "compreensaoImagem", perguntaAudio: "Qual palavra tem RR (som forte)?", opcoes: [
       { nome: "CARRO", imagemUrl: carro, correta: true },
-      { nome: "CARA", imagemUrl: coelho, correta: false },
+      { nome: "CADEIRA", imagemUrl: cadeira, correta: false },
     ], feedbackAcerto: "Isso, CARRO tem som forte!", feedbackErro: "O som forte no meio pede dois erres." },
     { tipo: "compreensaoImagem", perguntaAudio: "Qual palavra tem RR?", opcoes: [
       { nome: "CACHORRO", imagemUrl: cachorro, correta: true },
-      { nome: "PIRATA", imagemUrl: raposa, correta: false },
-    ], feedbackAcerto: "CACHORRO!", feedbackErro: "O R de PIRATA é suavinho." },
+      { nome: "MADEIRA", imagemUrl: madeira, correta: false },
+    ], feedbackAcerto: "CACHORRO!", feedbackErro: "O R de MADEIRA é suavinho, com um R só." },
     { tipo: "leituraFrase", imagemUrl: carro, frase: "O CARRO PASSA NA RUA.", instrucaoAudio: "Duas palavras com R forte.", elogio: "Muito bem!" },
     { tipo: "celebracao", medalha: "Ouvido do R e RR", mascoteUrl: mascote, falaFinal: "Amanhã: texto do cachorro!" },
   ],
