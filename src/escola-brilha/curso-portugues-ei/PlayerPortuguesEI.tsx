@@ -54,6 +54,8 @@ function speakWordSync(
   });
 }
 import type { AulaEI, MomentoEI, CursoEI } from "./types";
+import { DiplomaBrilha } from "@/components/DiplomaBrilha";
+import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 
 /**
  * PlayerPortuguesEI — leitura via IMAGENS + ÁUDIO + TOQUE.
