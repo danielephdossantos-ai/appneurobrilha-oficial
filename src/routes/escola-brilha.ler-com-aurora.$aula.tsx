@@ -12,10 +12,14 @@ import {
   cursoLerComAuroraFase3,
   getAulaLerComAuroraFase3,
 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase3";
+import {
+  cursoLerComAuroraFase4,
+  getAulaLerComAuroraFase4,
+} from "@/escola-brilha/curso-ler-com-aurora/aulas-fase4";
 
 /**
  * Player de uma missão do curso "Ler com Aurora".
- * Aceita slugs da Fase 1 (dia-*), Fase 2 (f2-dia-*) ou Fase 3 (f3-dia-*).
+ * Aceita slugs da Fase 1 (dia-*), Fase 2 (f2-dia-*), Fase 3 (f3-dia-*) ou Fase 4 (f4-dia-*).
  */
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
   head: () => ({ meta: [{ title: "Ler com Aurora — Missão" }] }),
@@ -26,10 +30,17 @@ function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
 
-  const aulaF3 = getAulaLerComAuroraFase3(aulaSlug);
-  const aulaF2 = aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
-  const aula = aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
-  const curso = aulaF3 ? cursoLerComAuroraFase3 : aulaF2 ? cursoLerComAuroraFase2 : cursoLerComAurora;
+  const aulaF4 = getAulaLerComAuroraFase4(aulaSlug);
+  const aulaF3 = aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
+  const aulaF2 = aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
+  const aula = aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
+  const curso = aulaF4
+    ? cursoLerComAuroraFase4
+    : aulaF3
+      ? cursoLerComAuroraFase3
+      : aulaF2
+        ? cursoLerComAuroraFase2
+        : cursoLerComAurora;
 
   if (!aula) {
     return (
