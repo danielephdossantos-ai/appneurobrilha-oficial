@@ -965,6 +965,15 @@ export function PlayerPortuguesEI({
           <MomentoRender key={i} m={m} idx={i} cor={cor} onOk={() => marcar(i)} />
         ))}
 
+        {aula.baseCientifica && (
+          <div className="rounded-2xl bg-white/85 border-2 border-white/60 p-4 text-[11px] text-slate-700 leading-relaxed">
+            <p className="font-black text-purple-700 mb-1">
+              📚 Base científica desta missão
+            </p>
+            <p>{aula.baseCientifica}</p>
+          </div>
+        )}
+
         {feitos.size === aula.momentos.length && (
           <div className="text-center py-6">
             <button
@@ -975,6 +984,7 @@ export function PlayerPortuguesEI({
             </button>
           </div>
         )}
+
       </div>
     </div>
   );
