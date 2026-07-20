@@ -6,6 +6,8 @@ import { cursoLerComAuroraFase4 } from "@/escola-brilha/curso-ler-com-aurora/aul
 import { cursoLerComAuroraFase5 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase5";
 import { cursoLerComAuroraFase6 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase6";
 import { cursoLerComAuroraFase7 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase7";
+import { cursoLerComAuroraFase8 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase8";
+
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 /**
@@ -43,7 +45,7 @@ function FaseBloco({
   gradiente,
   badge,
 }: {
-  fase: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  fase: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   curso: CursoEI;
   concluidas: Set<string>;
   gradiente: string;
@@ -147,7 +149,9 @@ function TrilhaLerComAurora() {
     cursoLerComAuroraFase4.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase5.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase6.unidades.flatMap((u) => u.aulas).length +
-    cursoLerComAuroraFase7.unidades.flatMap((u) => u.aulas).length;
+    cursoLerComAuroraFase7.unidades.flatMap((u) => u.aulas).length +
+    cursoLerComAuroraFase8.unidades.flatMap((u) => u.aulas).length;
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
@@ -223,6 +227,16 @@ function TrilhaLerComAurora() {
           gradiente="linear-gradient(135deg,#a855f7,#3b0764)"
           badge="FASE 7 · VOCABULÁRIO ATIVO (completa 4/4)"
         />
+
+        <FaseBloco
+          fase={8}
+          curso={cursoLerComAuroraFase8}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#0ea5e9,#0c4a6e)"
+          badge="FASE 8 · COMPREENSÃO ESTRATÉGICA (semana 1/4)"
+        />
+
+
 
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
