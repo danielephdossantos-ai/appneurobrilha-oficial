@@ -1491,18 +1491,42 @@ function LeituraTextoBloco({
   onOk: () => void;
 }) {
   const [ouviu, setOuviu] = useState(false);
+  const [ativa, setAtiva] = useState<{ f: number; w: number }>({ f: -1, w: -1 });
+  const timersRef = useRef<number[]>([]);
+
+  const palavrasPorFrase = m.frases.map((f) =>
+    f.replace(/[.!?]$/, "").split(/\s+/),
+  );
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((t) => clearTimeout(t));
+      timersRef.current = [];
+      stopSpeaking();
+    };
+  }, []);
 
   const lerTexto = (rate: number) => {
+    timersRef.current.forEach((t) => clearTimeout(t));
+    timersRef.current = [];
     stopSpeaking();
     setOuviu(true);
-    let i = 0;
-    const step = () => {
-      if (i >= m.frases.length) return;
-      const frase = m.frases[i++].toLowerCase();
-      speakChunked(frase, { rate, queue: true });
-      setTimeout(step, Math.max(1400, frase.length * (rate < 0.85 ? 90 : 70)));
-    };
-    step();
+    setAtiva({ f: -1, w: -1 });
+    const gap = rate < 0.85 ? 120 : 90;
+    let delay = 0;
+    palavrasPorFrase.forEach((palavras, fi) => {
+      palavras.forEach((p, wi) => {
+        const t = window.setTimeout(() => {
+          setAtiva({ f: fi, w: wi });
+          speakChunked(p.toLowerCase(), { rate, queue: false });
+        }, delay);
+        timersRef.current.push(t);
+        delay += Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
+      });
+      delay += 300; // pausa entre frases
+    });
+    const tFim = window.setTimeout(() => setAtiva({ f: -1, w: -1 }), delay + 200);
+    timersRef.current.push(tFim);
   };
 
   return (
@@ -1511,24 +1535,42 @@ function LeituraTextoBloco({
       <div className="mx-auto max-w-md text-center">
         <ImageFrame src={m.imagemUrl} alt={m.titulo} size="xl" />
         <div className="mt-4 rounded-2xl bg-white/90 p-4 text-left shadow-inner border border-slate-200">
-          {m.frases.map((f, i) => (
-            <p key={i} className="font-bold text-slate-800 leading-relaxed" style={{ fontSize: 22 }}>
-              <PalavraColorida palavra={f.replace(/[.!?]$/, "")} />
-              {f.match(/[.!?]$/)?.[0] ?? "."}
-            </p>
-          ))}
+          {palavrasPorFrase.map((palavras, fi) => {
+            const finalChar = m.frases[fi].match(/[.!?]$/)?.[0] ?? ".";
+            return (
+              <p
+                key={fi}
+                className="font-bold text-slate-800 leading-relaxed flex flex-wrap gap-x-1.5 gap-y-1"
+                style={{ fontSize: 22 }}
+              >
+                {palavras.map((p, wi) => (
+                  <span
+                    key={wi}
+                    className={`inline-block px-1 rounded-md transition-all duration-150 ${
+                      ativa.f === fi && ativa.w === wi
+                        ? "bg-yellow-300 text-slate-900 scale-110 shadow-sm"
+                        : ""
+                    }`}
+                  >
+                    <PalavraColorida palavra={p} />
+                    {wi === palavras.length - 1 ? finalChar : ""}
+                  </span>
+                ))}
+              </p>
+            );
+          })}
         </div>
         <p className="text-xs text-slate-500 mt-2">{m.instrucaoAudio}</p>
 
         <div className="mt-4 grid gap-2">
           <button
-            onClick={() => lerTexto(0.75)}
+            onClick={() => lerTexto(0.7)}
             className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
             🐢 Ouvir devagar
           </button>
           <button
-            onClick={() => lerTexto(0.95)}
+            onClick={() => lerTexto(0.92)}
             className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
             🐇 Ouvir junto
@@ -1538,6 +1580,8 @@ function LeituraTextoBloco({
         {ouviu && (
           <button
             onClick={() => {
+              timersRef.current.forEach((t) => clearTimeout(t));
+              setAtiva({ f: -1, w: -1 });
               speak(m.elogio);
               onOk();
             }}
