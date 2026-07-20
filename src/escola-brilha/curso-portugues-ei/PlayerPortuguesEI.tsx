@@ -592,20 +592,20 @@ function silabaParaFala(s: string): string {
   // Mapa explícito para sílabas CV da Fase 3. Não usamos a letra isolada
   // ("M A", "P O") em nenhuma fala; a voz recebe uma forma fonética curta.
   const cv: Record<string, string> = {
-    BA: "bá", BE: "be", BI: "bi", BO: "bó", BU: "bu",
-    CA: "cá", CO: "có", CU: "cu",
-    DA: "dá", DE: "de", DI: "di", DO: "dó", DU: "du",
-    FA: "fá", FE: "fe", FI: "fi", FO: "fó", FU: "fu",
-    GA: "gá", GO: "gó", GU: "gu",
-    JA: "já", JE: "je", JI: "ji", JO: "jó", JU: "ju",
-    LA: "lá", LE: "le", LI: "li", LO: "ló", LU: "lu",
-    MA: "má", ME: "me", MI: "mi", MO: "mó", MU: "mu",
-    NA: "ná", NE: "ne", NI: "ni", NO: "nó", NU: "nu",
-    PA: "pá", PE: "pe", PI: "pi", PO: "pó", PU: "pu",
-    RA: "rá", RE: "re", RI: "ri", RO: "ró", RU: "ru",
-    SA: "sá", SE: "se", SI: "si", SO: "só", SU: "su",
-    TA: "tá", TE: "te", TI: "ti", TO: "tó", TU: "tu",
-    VA: "vá", VE: "ve", VI: "vi", VO: "vó", VU: "vu",
+    BA: "bá", BE: "bé", BI: "bí", BO: "bó", BU: "bú",
+    CA: "cá", CO: "có", CU: "cú",
+    DA: "dá", DE: "dé", DI: "dí", DO: "dó", DU: "dú",
+    FA: "fá", FE: "fé", FI: "fí", FO: "fó", FU: "fú",
+    GA: "gá", GO: "gó", GU: "gú",
+    JA: "já", JE: "jé", JI: "jí", JO: "jó", JU: "jú",
+    LA: "lá", LE: "lé", LI: "lí", LO: "ló", LU: "lú",
+    MA: "má", ME: "mé", MI: "mí", MO: "mó", MU: "mú",
+    NA: "ná", NE: "né", NI: "ní", NO: "nó", NU: "nú",
+    PA: "pá", PE: "pé", PI: "pí", PO: "pó", PU: "pú",
+    RA: "rá", RE: "ré", RI: "rí", RO: "ró", RU: "rú",
+    SA: "sá", SE: "sé", SI: "sí", SO: "só", SU: "sú",
+    TA: "tá", TE: "té", TI: "tí", TO: "tó", TU: "tú",
+    VA: "vá", VE: "vé", VI: "ví", VO: "vó", VU: "vú",
   };
   if (cv[token]) return `${cv[token]}.`;
 
