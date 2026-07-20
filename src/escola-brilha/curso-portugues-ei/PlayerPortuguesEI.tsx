@@ -571,6 +571,16 @@ function MomentoRender({
 
     case "leituraSilabica":
       return <LeituraSilabicaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    // ============ FASE 4 ============
+    case "leituraFrase":
+      return <LeituraFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "leituraTexto":
+      return <LeituraTextoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "compreensaoLeitura":
+      return <CompreensaoLeituraBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
