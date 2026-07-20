@@ -222,6 +222,19 @@ export type MomentoEI =
       linhas: string[]; // 3-5 frases curtas
       instrucaoAudio: string;
       elogio: string;
+    }
+  // ============ FASE 7 — Vocabulário Ativo ============
+  | {
+      tipo: "sinonimoImagem";
+      // Ensino explícito de sinônimos Tier-2 (Beck & McKeown 2013).
+      // Mostra imagem + palavra-alvo. Criança escolhe entre 3 palavras
+      // qual significa o MESMO que a palavra-alvo.
+      imagemUrl: string;
+      palavra: string;      // "CASA"
+      sinonimo: string;     // "LAR"
+      distratores: string[]; // 2 palavras que NÃO são sinônimos
+      instrucaoAudio: string;
+      elogio: string;
     };
 
 
