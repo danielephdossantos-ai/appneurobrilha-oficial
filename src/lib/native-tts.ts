@@ -51,9 +51,9 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Convertemos vogais em som curto e consoantes em "som de X" para não virar
   // ruído repetitivo de letra isolada.
   const somVogalElongada: Record<string, string> = {
-    A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
-    Á: "áá", É: "éé", Í: "ii", Ó: "óó", Ú: "uu",
-    Ã: "ãã", Õ: "õõ", Ê: "éé", Ô: "óó", Î: "ii", Û: "uu",
+    A: "á", E: "é", I: "i", O: "ó", U: "u",
+    Á: "á", É: "é", Í: "i", Ó: "ó", Ú: "u",
+    Ã: "ã", Õ: "õ", Ê: "é", Ô: "ó", Î: "i", Û: "u",
   };
   const consoanteSegura: Record<string, string> = {
     B: "som de B", C: "som de C", D: "som de D", F: "som de F", G: "som de G",
