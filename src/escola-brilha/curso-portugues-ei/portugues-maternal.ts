@@ -175,15 +175,15 @@ const aula02: AulaEI = {
     },
     {
       tipo: "somInicial",
-      instrucaoAudio: "Qual dessas palavras começa com o mesmo som de GATO?",
-      referencia: { nome: "gato", imagemUrl: gato },
+      instrucaoAudio: "Qual dessas palavras começa com o mesmo som de CASA?",
+      referencia: { nome: "casa", imagemUrl: casa },
       opcoes: [
-        { nome: "galo", imagemUrl: cachorro, correta: false },
-        { nome: "girassol", imagemUrl: sol, correta: true },
+        { nome: "cachorro", imagemUrl: cachorro, correta: true },
+        { nome: "sol", imagemUrl: sol, correta: false },
         { nome: "mamãe", imagemUrl: mae, correta: false },
       ],
-      feedbackAcerto: "Isso! Gato e girassol começam com o som GÊ!",
-      feedbackErro: "Escuta de novo: GAAA-to. Qual outra começa com o som GÊ?",
+      feedbackAcerto: "Isso! Casa e cachorro começam com o som CÊ!",
+      feedbackErro: "Escuta de novo: CAAA-sa. Qual outra começa com o som CÊ?",
     },
     {
       tipo: "ritmoCorpo",
