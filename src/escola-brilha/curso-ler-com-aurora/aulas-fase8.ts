@@ -671,8 +671,325 @@ const a10: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 8 (Semanas 1-2 · 10 missões)
- * Próximas semanas: Inferir · Conectar + Diploma final
+ * SEMANA 3 — Inferir (o que o personagem sente/quer?)
+ * ============================================================ */
+
+const BASE_INFERIR =
+  "Estratégia de compreensão 'Inferir' (Duke & Pearson 2002 · Kispal 2008): o texto não diz o sentimento explicitamente; a criança deduz a partir de pistas visuais + contexto + experiência prévia. Inferência é um dos preditores mais fortes de compreensão leitora futura.";
+
+const a11: AulaEI = {
+  slug: "f8-dia-11-inferir-balao-perdido",
+  titulo: "Dia 11 · O balão que voou",
+  icone: "🎈",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_INFERIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Começa a Semana 3! Agora a gente vira detetive de sentimentos. A história não diz o que o personagem sente — você adivinha pelas pistas!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "O balão perdido",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina segurava o balão bem apertado." },
+        { imagemUrl: balao, narracao: "Sem querer, ela soltou e o balão subiu bem alto." },
+        { imagemUrl: menina, narracao: "Ela ficou parada, olhando o balão sumir no céu." },
+      ],
+      pergunta: "Como a menina está se sentindo?",
+      instrucaoAudio: "Escolha o sentimento que combina com a história.",
+      opcoes: [
+        { emoji: "😢", nome: "TRISTE", correta: true },
+        { emoji: "😄", nome: "FELIZ", correta: false },
+        { emoji: "😠", nome: "COM RAIVA", correta: false },
+      ],
+      feedbackAcerto: "Isso! Perder algo querido deixa a gente triste.",
+      feedbackErro: "Pensa: ela perdeu o balão. Como ela deve estar?",
+      elogio: "Você leu o coração da personagem!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "O bolo do aniversário",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino fez aniversário e ganhou um bolo enorme." },
+        { imagemUrl: bolo, narracao: "O bolo tinha o desenho do super-herói favorito dele." },
+        { imagemUrl: menino, narracao: "Ele bateu palma e pulou quando viu." },
+      ],
+      pergunta: "Como o menino está se sentindo?",
+      instrucaoAudio: "Escolha o sentimento certo.",
+      opcoes: [
+        { emoji: "🤩", nome: "MUITO FELIZ", correta: true },
+        { emoji: "😴", nome: "COM SONO", correta: false },
+        { emoji: "😢", nome: "TRISTE", correta: false },
+      ],
+      feedbackAcerto: "Sim! Bater palma e pular são pistas de alegria.",
+      feedbackErro: "Olha as pistas: ele pulou e bateu palma. Que sentimento é esse?",
+      elogio: "Você é craque em ler emoções!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Sentimentos · Dia 11",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: um cachorro perdido na chuva. Prepara o coração de detetive!",
+    },
+  ],
+};
+
+const a12: AulaEI = {
+  slug: "f8-dia-12-inferir-cachorro-chuva",
+  titulo: "Dia 12 · O cachorro na chuva",
+  icone: "🐶",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_INFERIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje tem duas historinhas pra você adivinhar o sentimento.",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "Sozinho na chuva",
+      cenas: [
+        { imagemUrl: chuva, narracao: "Começou a cair uma chuva muito forte na rua." },
+        { imagemUrl: cachorro, narracao: "O cachorrinho ficou encolhido embaixo de uma árvore." },
+        { imagemUrl: cachorro, narracao: "Ele tremia e olhava pra todo lado sem saber pra onde ir." },
+      ],
+      pergunta: "Como o cachorro está se sentindo?",
+      instrucaoAudio: "Escolha a emoção que combina.",
+      opcoes: [
+        { emoji: "😨", nome: "COM MEDO", correta: true },
+        { emoji: "😄", nome: "FELIZ", correta: false },
+        { emoji: "😋", nome: "COM FOME", correta: false },
+      ],
+      feedbackAcerto: "Isso! Encolhido e tremendo são pistas de medo.",
+      feedbackErro: "Olha as pistas: ele estava tremendo. Que sentimento causa isso?",
+      elogio: "Detetive de sentimentos de primeira!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "O resgate",
+      cenas: [
+        { imagemUrl: menina, narracao: "A menina passou correndo com a sombrinha." },
+        { imagemUrl: sombrinha, narracao: "Ela viu o cachorrinho e o levou pra casa no colo." },
+        { imagemUrl: cachorro, narracao: "Em casa, o cachorro balançou o rabo sem parar." },
+      ],
+      pergunta: "Como o cachorro está se sentindo agora?",
+      instrucaoAudio: "Escolha o sentimento certo.",
+      opcoes: [
+        { emoji: "😊", nome: "FELIZ", correta: true },
+        { emoji: "😠", nome: "COM RAIVA", correta: false },
+        { emoji: "😢", nome: "TRISTE", correta: false },
+      ],
+      feedbackAcerto: "Sim! Balançar o rabo é jeito de cachorro dizer 'estou feliz'.",
+      feedbackErro: "Ele foi salvo e está no colo quentinho. Como se sente?",
+      elogio: "Você entende até o que o cachorro sente!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Sentimentos · Dia 12",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã tem sopa quentinha e uma criança com fome. Ouve as pistas!",
+    },
+  ],
+};
+
+const a13: AulaEI = {
+  slug: "f8-dia-13-inferir-fome-sopa",
+  titulo: "Dia 13 · A sopa quentinha",
+  icone: "🍲",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_INFERIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Duas histórias, dois sentimentos escondidos. Vem descobrir!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "Antes do jantar",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino brincou a tarde inteira sem parar." },
+        { imagemUrl: menino, narracao: "A barriga dele começou a fazer barulho: rrrrróóóóó." },
+        { imagemUrl: sopa, narracao: "Ele correu pra cozinha quando sentiu o cheiro da sopa." },
+      ],
+      pergunta: "O que o menino está sentindo?",
+      instrucaoAudio: "Escolha a opção certa.",
+      opcoes: [
+        { emoji: "🍽️", nome: "COM FOME", correta: true },
+        { emoji: "😴", nome: "COM SONO", correta: false },
+        { emoji: "🥶", nome: "COM FRIO", correta: false },
+      ],
+      feedbackAcerto: "Isso! Barriga fazendo barulho é pista clara de fome.",
+      feedbackErro: "A barriga dele fez barulho. Que sensação é essa?",
+      elogio: "Você é detetive das pistas do corpo!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "Depois da sopa",
+      cenas: [
+        { imagemUrl: sopa, narracao: "Ele tomou toda a sopa quentinha, até raspar o prato." },
+        { imagemUrl: menino, narracao: "Depois se deitou no sofá e bocejou bem grande." },
+        { imagemUrl: menino, narracao: "Os olhos dele foram fechando devagarinho." },
+      ],
+      pergunta: "Como o menino está se sentindo agora?",
+      instrucaoAudio: "Escolha o sentimento certo.",
+      opcoes: [
+        { emoji: "😴", nome: "COM SONO", correta: true },
+        { emoji: "😨", nome: "COM MEDO", correta: false },
+        { emoji: "😠", nome: "COM RAIVA", correta: false },
+      ],
+      feedbackAcerto: "Sim! Bocejar e fechar os olhos = sono chegando.",
+      feedbackErro: "Ele bocejou e os olhos foram fechando. Que sensação é essa?",
+      elogio: "Você leu direitinho as pistas!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Sentimentos · Dia 13",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: alguém não quer emprestar o brinquedo. O que será que sente?",
+    },
+  ],
+};
+
+const a14: AulaEI = {
+  slug: "f8-dia-14-inferir-raiva-emprestar",
+  titulo: "Dia 14 · O brinquedo novo",
+  icone: "😠",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_INFERIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje tem sentimento difícil: raiva e vergonha. Vamos descobrir juntas!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "O carrinho novo",
+      cenas: [
+        { imagemUrl: menino, narracao: "O menino ganhou um carrinho novo de presente." },
+        { imagemUrl: carro, narracao: "Um coleguinha pegou o carrinho sem pedir." },
+        { imagemUrl: menino, narracao: "Ele cerrou os punhos e ficou vermelho." },
+      ],
+      pergunta: "Como o menino está se sentindo?",
+      instrucaoAudio: "Escolha o sentimento certo.",
+      opcoes: [
+        { emoji: "😠", nome: "COM RAIVA", correta: true },
+        { emoji: "😄", nome: "FELIZ", correta: false },
+        { emoji: "😨", nome: "COM MEDO", correta: false },
+      ],
+      feedbackAcerto: "Isso! Punhos fechados e rosto vermelho são pistas de raiva.",
+      feedbackErro: "Pegaram o brinquedo dele sem pedir. Que sentimento vem?",
+      elogio: "Detetive das emoções fortes!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "A pergunta na sala",
+      cenas: [
+        { imagemUrl: escola, narracao: "A professora fez uma pergunta pra turma toda." },
+        { imagemUrl: menina, narracao: "A menina sabia a resposta, mas todo mundo olhou pra ela." },
+        { imagemUrl: menina, narracao: "Ela abaixou a cabeça e ficou com as bochechas rosadas." },
+      ],
+      pergunta: "O que a menina está sentindo?",
+      instrucaoAudio: "Escolha o sentimento.",
+      opcoes: [
+        { emoji: "😳", nome: "VERGONHA", correta: true },
+        { emoji: "😠", nome: "COM RAIVA", correta: false },
+        { emoji: "😋", nome: "COM FOME", correta: false },
+      ],
+      feedbackAcerto: "Sim! Abaixar a cabeça com o rosto rosado é sinal de vergonha.",
+      feedbackErro: "Ela abaixou a cabeça com bochecha rosada. Que sentimento é esse?",
+      elogio: "Você leu direitinho a cena!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Sentimentos · Dia 14",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã é o último dia da semana. Missão em família e medalha esperando!",
+    },
+  ],
+};
+
+const a15: AulaEI = {
+  slug: "f8-dia-15-inferir-surpresa-final",
+  titulo: "Dia 15 · A grande surpresa",
+  icone: "🎁",
+  bncc: ["EF01LP26"],
+  duracaoMin: 15,
+  baseCientifica: BASE_INFERIR,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Último dia da Semana 3! Duas histórias, uma missão em família e a medalha da Semana 3!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "A gaiola vazia",
+      cenas: [
+        { imagemUrl: passaro, narracao: "A menina tinha um passarinho de estimação." },
+        { imagemUrl: ninho, narracao: "De manhã ela viu a gaiola aberta e vazia." },
+        { imagemUrl: menina, narracao: "Ela abriu bem os olhos e a boca sem acreditar." },
+      ],
+      pergunta: "Como a menina está se sentindo?",
+      instrucaoAudio: "Escolha a emoção certa.",
+      opcoes: [
+        { emoji: "😲", nome: "SURPRESA", correta: true },
+        { emoji: "😴", nome: "COM SONO", correta: false },
+        { emoji: "😋", nome: "COM FOME", correta: false },
+      ],
+      feedbackAcerto: "Isso! Olhos e boca abertos são pistas de surpresa.",
+      feedbackErro: "Ela nunca esperou isso. Que sentimento acontece?",
+      elogio: "Você percebeu na hora!",
+    },
+    {
+      tipo: "inferirEmocao",
+      titulo: "A florzinha secreta",
+      cenas: [
+        { imagemUrl: semente, narracao: "O menino plantou uma semente com muito cuidado." },
+        { imagemUrl: regador, narracao: "Todo dia ele regava, mas nada nascia." },
+        { imagemUrl: flor, narracao: "Numa manhã ele viu uma flor bonita no vaso e sorriu grande." },
+      ],
+      pergunta: "Como o menino está se sentindo?",
+      instrucaoAudio: "Escolha o sentimento.",
+      opcoes: [
+        { emoji: "🥰", nome: "ORGULHOSO", correta: true },
+        { emoji: "😠", nome: "COM RAIVA", correta: false },
+        { emoji: "😢", nome: "TRISTE", correta: false },
+      ],
+      feedbackAcerto: "Sim! Ele cuidou muito e conseguiu — isso é orgulho!",
+      feedbackErro: "Ele cuidou muito e a flor nasceu. Que sentimento é esse?",
+      elogio: "Você chegou lá!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "💭 Missão em Família — Detetive de Sentimentos",
+      convite:
+        "Peça pra alguém da casa contar uma coisa que aconteceu com ela hoje SEM dizer como se sentiu. Você vira detetive e adivinha! Depois troquem: você conta e a pessoa adivinha o seu sentimento.",
+      dicaAdulto:
+        "Inferir emoções alheias é base da 'Teoria da Mente' (Baron-Cohen 1995) e melhora a compreensão de textos narrativos (Kispal 2008). Aceite qualquer palavra emocional coerente com as pistas dadas.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Sentimentos · Semana 3",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Você fechou a Semana 3! Próxima e última semana: CONECTAR — comparar a história com a sua vida. E aí vem o diploma final da Fase 8!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 8 (Semanas 1-3 · 15 missões)
+ * Próxima semana: Conectar + Diploma final "Leitor Estratégico"
  * ============================================================ */
 
 export const cursoLerComAuroraFase8: CursoEI = {
@@ -699,6 +1016,13 @@ export const cursoLerComAuroraFase8: CursoEI = {
       titulo: "Semana 2 · Resumir",
       subtitulo: "Conta em uma frase",
       aulas: [a6, a7, a8, a9, a10],
+    },
+    {
+      slug: "f8-semana-03",
+      numero: 3,
+      titulo: "Semana 3 · Inferir",
+      subtitulo: "Detetive de Sentimentos",
+      aulas: [a11, a12, a13, a14, a15],
     },
   ],
 };
