@@ -1438,6 +1438,73 @@ function normalizarFrase(s: string): string[] {
     .filter(Boolean);
 }
 
+const PALAVRAS_DE_APOIO_LEITURA = new Set([
+  "a",
+  "o",
+  "as",
+  "os",
+  "um",
+  "uma",
+  "uns",
+  "umas",
+  "e",
+  "de",
+  "do",
+  "da",
+  "dos",
+  "das",
+  "no",
+  "na",
+  "nos",
+  "nas",
+  "para",
+  "por",
+  "com",
+  "em",
+  "que",
+  "se",
+  "ao",
+  "aos",
+  "e",
+  "eh",
+  "é",
+]);
+
+function palavrasEssenciais(tokens: string[]) {
+  const essenciais = tokens.filter((t) => !PALAVRAS_DE_APOIO_LEITURA.has(t));
+  return essenciais.length ? essenciais : tokens;
+}
+
+function avaliarLeituraFalada(transcricao: string, fraseAlvo: string) {
+  const ditas = normalizarFrase(transcricao);
+  const alvo = normalizarFrase(fraseAlvo);
+  const essenciais = palavrasEssenciais(alvo);
+  const ditasEssenciais = palavrasEssenciais(ditas);
+  const faltando: string[] = [];
+  let cursor = 0;
+
+  for (const palavra of essenciais) {
+    const pos = ditasEssenciais.findIndex((dita, i) => i >= cursor && dita === palavra);
+    if (pos < 0) {
+      faltando.push(palavra);
+    } else {
+      cursor = pos + 1;
+    }
+  }
+
+  const alvoSet = new Set(essenciais);
+  const extras = ditasEssenciais.filter((dita) => !alvoSet.has(dita));
+  const acertos = essenciais.length - faltando.length;
+  const score = essenciais.length ? acertos / essenciais.length : 0;
+
+  return {
+    ok: essenciais.length > 0 && faltando.length === 0 && extras.length === 0,
+    score,
+    faltando,
+    extras,
+  };
+}
+
 function LeituraFraseBloco({
   m,
   idx,
@@ -1453,12 +1520,12 @@ function LeituraFraseBloco({
   const [ouvindo, setOuvindo] = useState(false);
   const [tentativaTexto, setTentativaTexto] = useState("");
   const [feedback, setFeedback] = useState<"ok" | "quase" | "erro" | null>(null);
+  const [feedbackDetalhe, setFeedbackDetalhe] = useState("");
   const [leiturasOk, setLeiturasOk] = useState(0);
   const timersRef = useRef<number[]>([]);
   const karaokeRunRef = useRef(0);
   const recRef = useRef<any>(null);
   const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
-  const alvoTokens = normalizarFrase(m.frase);
 
   const SR: any =
     typeof window !== "undefined"
@@ -1504,6 +1571,7 @@ function LeituraFraseBloco({
     try { recRef.current?.stop?.(); } catch {}
     stopSpeaking();
     setFeedback(null);
+    setFeedbackDetalhe("");
     setTentativaTexto("");
     const rec = new SR();
     rec.lang = "pt-BR";
@@ -1517,27 +1585,39 @@ function LeituraFraseBloco({
       for (let i = 0; i < e.results[0].length; i++) alternativas.push(e.results[0][i].transcript);
       let melhor = 0;
       let melhorTxt = alternativas[0] || "";
+      let melhorResultado = avaliarLeituraFalada(melhorTxt, m.frase);
       for (const alt of alternativas) {
-        const tokens = normalizarFrase(alt);
-        const acertos = alvoTokens.filter((t) => tokens.includes(t)).length;
-        const score = acertos / alvoTokens.length;
-        if (score > melhor) { melhor = score; melhorTxt = alt; }
+        const resultado = avaliarLeituraFalada(alt, m.frase);
+        const score = resultado.score;
+        const melhorTemMenosProblemas =
+          resultado.faltando.length + resultado.extras.length <
+          melhorResultado.faltando.length + melhorResultado.extras.length;
+        if (score > melhor || (score === melhor && melhorTemMenosProblemas)) {
+          melhor = score;
+          melhorTxt = alt;
+          melhorResultado = resultado;
+        }
       }
       setTentativaTexto(melhorTxt);
-      if (melhor >= 0.6) {
+      if (melhorResultado.ok) {
         setFeedback("ok");
+        setFeedbackDetalhe("");
         setLeiturasOk((n) => {
           const novo = Math.min(3, n + 1);
           if (novo === 3) speak(m.elogio);
           else speak(novo === 1 ? "Muito bem! Faltam duas." : "Boa! Falta só mais uma.");
           return novo;
         });
-      } else if (melhor >= 0.3) {
+      } else if (melhorResultado.score >= 0.45) {
         setFeedback("quase");
-        speak("Quase! Ouve o professor e tenta de novo.");
+        const problema = [...melhorResultado.faltando, ...melhorResultado.extras][0];
+        const detalhe = problema ? `A palavra ${problema.toUpperCase()} não bateu.` : "Leia a frase do mesmo jeitinho.";
+        setFeedbackDetalhe(detalhe);
+        speak(`${detalhe} Ouve o professor e tenta de novo.`);
       } else {
         setFeedback("erro");
-        speak("Não peguei bem. Ouve o professor e tenta de novo.");
+        setFeedbackDetalhe("Leia a frase inteira, palavra por palavra.");
+        speak("Não posso marcar como certo ainda. Leia a frase inteira, palavra por palavra.");
       }
     };
     rec.onerror = () => { setOuvindo(false); setFeedback("erro"); };
@@ -1633,6 +1713,7 @@ function LeituraFraseBloco({
             }`}
           >
             {feedback === "ok" ? "🎉 Muito bem!" : feedback === "quase" ? "🤏 Quase! Tenta de novo." : "🔁 Não peguei. Tenta de novo."}
+            {feedbackDetalhe && <div className="text-xs font-black mt-1">{feedbackDetalhe}</div>}
             <div className="text-xs font-normal mt-1 opacity-80">Você disse: "{tentativaTexto}"</div>
           </div>
         )}
