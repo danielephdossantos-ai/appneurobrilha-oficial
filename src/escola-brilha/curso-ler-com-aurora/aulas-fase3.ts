@@ -2,12 +2,12 @@ import type { CursoEI, AulaEI } from "@/escola-brilha/curso-portugues-ei/types";
 import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 import { url as pipa } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as fada } from "@/assets/pip-girl-fada.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
 import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as mae } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
-import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
-import { url as mamadeira } from "@/assets/neuro-treino/objetos/mamadeira.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
 import { url as dado } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
 import { url as lata } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
 import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
@@ -51,10 +51,10 @@ const a1: AulaEI = {
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
-    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Agora vamos juntar consoante e vogal para formar sílabas! Começamos com P." },
-    { tipo: "familiaSilabica", consoante: "P", silabas: ["PA", "PE", "PI", "PO", "PU"], instrucaoAudio: "Toca em cada sílaba para ouvir.", elogio: "Cinco sílabas da família P!" },
-    { tipo: "juntarSilabas", imagemUrl: pato, silabas: ["PA", "TO"], palavra: "PATO", instrucaoAudio: "Junta PA com TO.", elogio: "Isso! PATO!" },
-    { tipo: "juntarSilabas", imagemUrl: pipa, silabas: ["PI", "PA"], palavra: "PIPA", instrucaoAudio: "Junta PI com PA.", elogio: "PIPA! Duas palavras hoje!" },
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Agora vamos juntar uma consoante com uma vogal para formar sílabas! Começamos com P." },
+    { tipo: "familiaSilabica", consoante: "P", silabas: ["PA", "PE", "PI", "PO", "PU"], instrucaoAudio: "Toca em cada sílaba para ouvir o som junto.", elogio: "Cinco sílabas da família P!" },
+    { tipo: "juntarSilabas", imagemUrl: pato, silabas: ["PA", "TO"], palavra: "PATO", instrucaoAudio: "Junta pá com tó.", elogio: "Isso! PATO!" },
+    { tipo: "juntarSilabas", imagemUrl: pipa, silabas: ["PI", "PA"], palavra: "PIPA", instrucaoAudio: "Junta pi com pá.", elogio: "PIPA! Duas palavras hoje!" },
     { tipo: "leituraSilabica", imagemUrl: pato, palavra: "PATO", silabas: ["PA", "TO"], instrucaoAudio: "Tenta ler sozinho.", elogio: "Você leu!" },
     { tipo: "celebracao", medalha: "Leitor da Família P", mascoteUrl: mascote, falaFinal: "Amanhã: família B!" },
   ],
@@ -70,8 +70,8 @@ const a2: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família B! B tem voz, P é só sopro." },
     { tipo: "familiaSilabica", consoante: "B", silabas: ["BA", "BE", "BI", "BO", "BU"], instrucaoAudio: "Toca em cada sílaba.", elogio: "Família B completa!" },
-    { tipo: "juntarSilabas", imagemUrl: bola, silabas: ["BO", "LA"], palavra: "BOLA", instrucaoAudio: "Junta BO com LA.", elogio: "BOLA!" },
-    { tipo: "juntarSilabas", imagemUrl: bolo, silabas: ["BO", "LO"], palavra: "BOLO", instrucaoAudio: "Junta BO com LO.", elogio: "BOLO!" },
+    { tipo: "juntarSilabas", imagemUrl: bola, silabas: ["BO", "LA"], palavra: "BOLA", instrucaoAudio: "Junta bó com lá.", elogio: "BOLA!" },
+    { tipo: "juntarSilabas", imagemUrl: bolo, silabas: ["BO", "LO"], palavra: "BOLO", instrucaoAudio: "Junta bó com ló.", elogio: "BOLO!" },
     { tipo: "leituraSilabica", imagemUrl: bola, palavra: "BOLA", silabas: ["BO", "LA"], instrucaoAudio: "Sua vez de ler.", elogio: "Muito bem!" },
     { tipo: "celebracao", medalha: "Leitor da Família B", mascoteUrl: mascote, falaFinal: "Amanhã: família M!" },
   ],
@@ -87,9 +87,9 @@ const a3: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família M. A boca fecha para fazer o som!" },
     { tipo: "familiaSilabica", consoante: "M", silabas: ["MA", "ME", "MI", "MO", "MU"], instrucaoAudio: "Toca em cada sílaba.", elogio: "Família M!" },
-    { tipo: "juntarSilabas", imagemUrl: mochila, silabas: ["MO", "CHI", "LA"], palavra: "MOCHILA", instrucaoAudio: "Três sílabas: MO, CHI, LA.", elogio: "MOCHILA!" },
-    { tipo: "juntarSilabas", imagemUrl: mamadeira, silabas: ["MA", "MA"], palavra: "MAMA", instrucaoAudio: "Junta MA com MA.", elogio: "MAMA!" },
-    { tipo: "leituraSilabica", imagemUrl: mamadeira, palavra: "MAMA", silabas: ["MA", "MA"], instrucaoAudio: "Sua vez.", elogio: "Isso!" },
+    { tipo: "juntarSilabas", imagemUrl: mapa, silabas: ["MA", "PA"], palavra: "MAPA", instrucaoAudio: "Junta má com pá.", elogio: "MAPA!" },
+    { tipo: "juntarSilabas", imagemUrl: menina, silabas: ["ME", "NI", "NA"], palavra: "MENINA", instrucaoAudio: "Junta me, ni, ná.", elogio: "MENINA!" },
+    { tipo: "leituraSilabica", imagemUrl: mapa, palavra: "MAPA", silabas: ["MA", "PA"], instrucaoAudio: "Sua vez.", elogio: "Isso!" },
     { tipo: "celebracao", medalha: "Leitor da Família M", mascoteUrl: mascote, falaFinal: "Amanhã: T e D!" },
   ],
 };
@@ -105,7 +105,7 @@ const a4: AulaEI = {
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Duas famílias hoje: T (sem voz) e D (com voz)." },
     { tipo: "familiaSilabica", consoante: "T", silabas: ["TA", "TE", "TI", "TO", "TU"], instrucaoAudio: "Família T.", elogio: "Família T!" },
     { tipo: "familiaSilabica", consoante: "D", silabas: ["DA", "DE", "DI", "DO", "DU"], instrucaoAudio: "Família D.", elogio: "Família D!" },
-    { tipo: "juntarSilabas", imagemUrl: dado, silabas: ["DA", "DO"], palavra: "DADO", instrucaoAudio: "Junta DA com DO.", elogio: "DADO!" },
+    { tipo: "juntarSilabas", imagemUrl: dado, silabas: ["DA", "DO"], palavra: "DADO", instrucaoAudio: "Junta dá com dó.", elogio: "DADO!" },
     { tipo: "leituraSilabica", imagemUrl: dado, palavra: "DADO", silabas: ["DA", "DO"], instrucaoAudio: "Leia comigo.", elogio: "Excelente!" },
     { tipo: "celebracao", medalha: "Leitor T e D", mascoteUrl: mascote, falaFinal: "Amanhã: revisão!" },
   ],
@@ -142,8 +142,8 @@ const a6: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família L! Língua no céu da boca." },
     { tipo: "familiaSilabica", consoante: "L", silabas: ["LA", "LE", "LI", "LO", "LU"], instrucaoAudio: "Família L.", elogio: "Família L!" },
-    { tipo: "juntarSilabas", imagemUrl: lata, silabas: ["LA", "TA"], palavra: "LATA", instrucaoAudio: "Junta LA com TA.", elogio: "LATA!" },
-    { tipo: "juntarSilabas", imagemUrl: lua, silabas: ["LU", "A"], palavra: "LUA", instrucaoAudio: "Junta LU com A.", elogio: "LUA!" },
+    { tipo: "juntarSilabas", imagemUrl: lata, silabas: ["LA", "TA"], palavra: "LATA", instrucaoAudio: "Junta lá com tá.", elogio: "LATA!" },
+    { tipo: "juntarSilabas", imagemUrl: lua, silabas: ["LU", "A"], palavra: "LUA", instrucaoAudio: "Escute: lu, a. Depois junto: lua.", elogio: "LUA!" },
     { tipo: "leituraSilabica", imagemUrl: lata, palavra: "LATA", silabas: ["LA", "TA"], instrucaoAudio: "Leia.", elogio: "Ótimo!" },
     { tipo: "celebracao", medalha: "Leitor Família L", mascoteUrl: mascote, falaFinal: "Amanhã: F!" },
   ],
@@ -159,9 +159,9 @@ const a7: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família F! Dente em cima do lábio." },
     { tipo: "familiaSilabica", consoante: "F", silabas: ["FA", "FE", "FI", "FO", "FU"], instrucaoAudio: "Família F.", elogio: "Família F!" },
-    { tipo: "juntarSilabas", imagemUrl: fogo, silabas: ["FO", "GO"], palavra: "FOGO", instrucaoAudio: "Junta FO com GO.", elogio: "FOGO!" },
+    { tipo: "juntarSilabas", imagemUrl: fogo, silabas: ["FO", "GO"], palavra: "FOGO", instrucaoAudio: "Junta fó com gó.", elogio: "FOGO!" },
     { tipo: "leituraSilabica", imagemUrl: fogo, palavra: "FOGO", silabas: ["FO", "GO"], instrucaoAudio: "Leia sozinho.", elogio: "Muito bem!" },
-    { tipo: "juntarSilabas", imagemUrl: mae, silabas: ["MA", "MÃE"], palavra: "MAMÃE", instrucaoAudio: "Junta MA com MÃE.", elogio: "MAMÃE!" },
+    { tipo: "juntarSilabas", imagemUrl: fada, silabas: ["FA", "DA"], palavra: "FADA", instrucaoAudio: "Junta fá com dá.", elogio: "FADA!" },
     { tipo: "celebracao", medalha: "Leitor Família F", mascoteUrl: mascote, falaFinal: "Amanhã: V!" },
   ],
 };
@@ -176,8 +176,8 @@ const a8: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família V! Como F, mas com voz." },
     { tipo: "familiaSilabica", consoante: "V", silabas: ["VA", "VE", "VI", "VO", "VU"], instrucaoAudio: "Família V.", elogio: "Família V!" },
-    { tipo: "juntarSilabas", imagemUrl: vaca, silabas: ["VA", "CA"], palavra: "VACA", instrucaoAudio: "Junta VA com CA.", elogio: "VACA!" },
-    { tipo: "juntarSilabas", imagemUrl: vela, silabas: ["VE", "LA"], palavra: "VELA", instrucaoAudio: "Junta VE com LA.", elogio: "VELA!" },
+    { tipo: "juntarSilabas", imagemUrl: vaca, silabas: ["VA", "CA"], palavra: "VACA", instrucaoAudio: "Junta vá com cá.", elogio: "VACA!" },
+    { tipo: "juntarSilabas", imagemUrl: vela, silabas: ["VE", "LA"], palavra: "VELA", instrucaoAudio: "Junta ve com lá.", elogio: "VELA!" },
     { tipo: "leituraSilabica", imagemUrl: vela, palavra: "VELA", silabas: ["VE", "LA"], instrucaoAudio: "Leia.", elogio: "Isso!" },
     { tipo: "celebracao", medalha: "Leitor Família V", mascoteUrl: mascote, falaFinal: "Amanhã: N!" },
   ],
@@ -209,7 +209,7 @@ const a10: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família S! Sopro da cobrinha." },
     { tipo: "familiaSilabica", consoante: "S", silabas: ["SA", "SE", "SI", "SO", "SU"], instrucaoAudio: "Família S.", elogio: "Família S!" },
-    { tipo: "juntarSilabas", imagemUrl: sapo, silabas: ["SA", "PO"], palavra: "SAPO", instrucaoAudio: "Junta SA com PO.", elogio: "SAPO!" },
+    { tipo: "juntarSilabas", imagemUrl: sapo, silabas: ["SA", "PO"], palavra: "SAPO", instrucaoAudio: "Junta sá com pó.", elogio: "SAPO!" },
     { tipo: "juntarSilabas", imagemUrl: sol, silabas: ["SOL"], palavra: "SOL", instrucaoAudio: "Uma sílaba só: SOL.", elogio: "SOL!" },
     { tipo: "leituraSilabica", imagemUrl: sapo, palavra: "SAPO", silabas: ["SA", "PO"], instrucaoAudio: "Sua vez.", elogio: "Perfeito!" },
     { tipo: "celebracao", medalha: "Semana 2 Concluída", mascoteUrl: mascote, falaFinal: "Você lê 10 famílias!" },
@@ -230,7 +230,7 @@ const a11: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família R! No começo da palavra é forte." },
     { tipo: "familiaSilabica", consoante: "R", silabas: ["RA", "RE", "RI", "RO", "RU"], instrucaoAudio: "Família R.", elogio: "Família R!" },
-    { tipo: "juntarSilabas", imagemUrl: rato, silabas: ["RA", "TO"], palavra: "RATO", instrucaoAudio: "Junta RA com TO.", elogio: "RATO!" },
+    { tipo: "juntarSilabas", imagemUrl: rato, silabas: ["RA", "TO"], palavra: "RATO", instrucaoAudio: "Junta rá com tó.", elogio: "RATO!" },
     { tipo: "leituraSilabica", imagemUrl: rato, palavra: "RATO", silabas: ["RA", "TO"], instrucaoAudio: "Leia.", elogio: "Ótimo!" },
     { tipo: "celebracao", medalha: "Leitor Família R", mascoteUrl: mascote, falaFinal: "Amanhã: C!" },
   ],
@@ -246,7 +246,7 @@ const a12: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: C com A, O, U faz som forte." },
     { tipo: "familiaSilabica", consoante: "C", silabas: ["CA", "CO", "CU"], instrucaoAudio: "Família C forte.", elogio: "Família C!" },
-    { tipo: "juntarSilabas", imagemUrl: casa, silabas: ["CA", "SA"], palavra: "CASA", instrucaoAudio: "Junta CA com SA.", elogio: "CASA!" },
+    { tipo: "juntarSilabas", imagemUrl: casa, silabas: ["CA", "SA"], palavra: "CASA", instrucaoAudio: "Junta cá com sá.", elogio: "CASA!" },
     { tipo: "juntarSilabas", imagemUrl: vaca, silabas: ["VA", "CA"], palavra: "VACA", instrucaoAudio: "Já vimos: VACA.", elogio: "VACA!" },
     { tipo: "leituraSilabica", imagemUrl: casa, palavra: "CASA", silabas: ["CA", "SA"], instrucaoAudio: "Leia.", elogio: "Muito bem!" },
     { tipo: "celebracao", medalha: "Leitor Família C", mascoteUrl: mascote, falaFinal: "Amanhã: G!" },
@@ -263,7 +263,7 @@ const a13: AulaEI = {
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: G com A, O, U faz som forte." },
     { tipo: "familiaSilabica", consoante: "G", silabas: ["GA", "GO", "GU"], instrucaoAudio: "Família G forte.", elogio: "Família G!" },
-    { tipo: "juntarSilabas", imagemUrl: gato, silabas: ["GA", "TO"], palavra: "GATO", instrucaoAudio: "Junta GA com TO.", elogio: "GATO!" },
+    { tipo: "juntarSilabas", imagemUrl: gato, silabas: ["GA", "TO"], palavra: "GATO", instrucaoAudio: "Junta gá com tó.", elogio: "GATO!" },
     { tipo: "leituraSilabica", imagemUrl: gato, palavra: "GATO", silabas: ["GA", "TO"], instrucaoAudio: "Leia sozinho.", elogio: "Ótimo!" },
     { tipo: "celebracao", medalha: "Leitor Família G", mascoteUrl: mascote, falaFinal: "Amanhã: J!" },
   ],
