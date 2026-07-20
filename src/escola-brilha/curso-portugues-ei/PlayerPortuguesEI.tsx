@@ -571,6 +571,16 @@ function MomentoRender({
 
     case "leituraSilabica":
       return <LeituraSilabicaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    // ============ FASE 4 ============
+    case "leituraFrase":
+      return <LeituraFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "leituraTexto":
+      return <LeituraTextoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "compreensaoLeitura":
+      return <CompreensaoLeituraBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
@@ -1312,6 +1322,266 @@ function LeituraSilabicaBloco({
             className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg"
           >
             ✓ Eu li!
+          </button>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
+// ============ FASE 4 — Fluência e Compreensão ============
+
+/** Divide uma palavra em sílabas aproximadas para colorir visualmente.
+ *  Não é análise fonética exata — é só para o realce visual funcionar. */
+function silabificarSimples(palavra: string): string[] {
+  const p = palavra.toLowerCase();
+  const vogais = "aeiouáéíóúâêîôûãõ";
+  const out: string[] = [];
+  let atual = "";
+  for (let i = 0; i < p.length; i++) {
+    atual += p[i];
+    const prox = p[i + 1] ?? "";
+    const prox2 = p[i + 2] ?? "";
+    if (vogais.includes(p[i])) {
+      // corta depois da vogal se a próxima é consoante seguida de vogal
+      if (prox && !vogais.includes(prox) && vogais.includes(prox2)) {
+        out.push(atual);
+        atual = "";
+      } else if (prox && vogais.includes(prox)) {
+        out.push(atual);
+        atual = "";
+      }
+    }
+  }
+  if (atual) {
+    if (out.length && !vogais.split("").some((v) => atual.includes(v))) {
+      out[out.length - 1] += atual;
+    } else {
+      out.push(atual);
+    }
+  }
+  return out.length ? out : [p];
+}
+
+function PalavraColorida({ palavra }: { palavra: string }) {
+  const silabas = silabificarSimples(palavra);
+  return (
+    <span>
+      {silabas.map((s, i) => (
+        <span key={i} style={{ color: CORES_SILABA[i % CORES_SILABA.length] }}>
+          {s.toUpperCase()}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function LeituraFraseBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "leituraFrase" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [ouviu, setOuviu] = useState(false);
+  const palavras = m.frase.replace(/\.$/, "").split(/\s+/);
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Eu leio a frase!" cor={cor} />
+      <div className="mx-auto max-w-md text-center">
+        <ImageFrame src={m.imagemUrl} alt={m.frase} size="xl" />
+        <p className="mt-4 font-black leading-snug" style={{ fontSize: 32 }}>
+          {palavras.map((p, i) => (
+            <span key={i}>
+              <PalavraColorida palavra={p} />
+              {i < palavras.length - 1 ? " " : "."}
+            </span>
+          ))}
+        </p>
+        <p className="text-xs text-slate-500 mt-2">{m.instrucaoAudio}</p>
+
+        <div className="mt-4 grid gap-2">
+          <button
+            onClick={() => {
+              setOuviu(true);
+              stopSpeaking();
+              speakChunked(m.frase.toLowerCase(), { rate: 0.75 });
+            }}
+            className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐢 Ouvir devagar
+          </button>
+          <button
+            onClick={() => {
+              setOuviu(true);
+              stopSpeaking();
+              speakChunked(m.frase.toLowerCase(), { rate: 0.95 });
+            }}
+            className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐇 Ouvir junto
+          </button>
+        </div>
+
+        {ouviu && (
+          <button
+            onClick={() => {
+              speak(m.elogio);
+              onOk();
+            }}
+            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg"
+          >
+            ✓ Eu li a frase!
+          </button>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
+function LeituraTextoBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "leituraTexto" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [ouviu, setOuviu] = useState(false);
+
+  const lerTexto = (rate: number) => {
+    stopSpeaking();
+    setOuviu(true);
+    let i = 0;
+    const step = () => {
+      if (i >= m.frases.length) return;
+      const frase = m.frases[i++].toLowerCase();
+      speakChunked(frase, { rate, queue: true });
+      setTimeout(step, Math.max(1400, frase.length * (rate < 0.85 ? 90 : 70)));
+    };
+    step();
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={m.titulo} cor={cor} />
+      <div className="mx-auto max-w-md text-center">
+        <ImageFrame src={m.imagemUrl} alt={m.titulo} size="xl" />
+        <div className="mt-4 rounded-2xl bg-white/90 p-4 text-left shadow-inner border border-slate-200">
+          {m.frases.map((f, i) => (
+            <p key={i} className="font-bold text-slate-800 leading-relaxed" style={{ fontSize: 22 }}>
+              <PalavraColorida palavra={f.replace(/[.!?]$/, "")} />
+              {f.match(/[.!?]$/)?.[0] ?? "."}
+            </p>
+          ))}
+        </div>
+        <p className="text-xs text-slate-500 mt-2">{m.instrucaoAudio}</p>
+
+        <div className="mt-4 grid gap-2">
+          <button
+            onClick={() => lerTexto(0.75)}
+            className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐢 Ouvir devagar
+          </button>
+          <button
+            onClick={() => lerTexto(0.95)}
+            className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐇 Ouvir junto
+          </button>
+        </div>
+
+        {ouviu && (
+          <button
+            onClick={() => {
+              speak(m.elogio);
+              onOk();
+            }}
+            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg"
+          >
+            ✓ Eu li o texto!
+          </button>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
+function CompreensaoLeituraBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "compreensaoLeitura" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+
+  useEffect(() => {
+    const t = setTimeout(() => speak(m.perguntaAudio), 300);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [m.perguntaAudio]);
+
+  const escolher = (i: number) => {
+    if (escolha !== null) return;
+    setEscolha(i);
+    const acertou = m.opcoes[i].correta;
+    speak(acertou ? m.feedbackAcerto : m.feedbackErro);
+    if (acertou) setTimeout(onOk, 1200);
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Entendeu o texto?" cor={cor} />
+      <div className="mx-auto max-w-md text-center">
+        <button
+          onClick={() => speak(m.perguntaAudio)}
+          className="mx-auto flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700 shadow"
+        >
+          🔊 Ouvir pergunta
+        </button>
+
+        <div className="mt-5 grid gap-3">
+          {m.opcoes.map((op, i) => {
+            const marcado = escolha === i;
+            const bg =
+              escolha === null
+                ? "bg-white text-slate-800"
+                : op.correta
+                  ? "bg-green-500 text-white"
+                  : marcado
+                    ? "bg-red-400 text-white"
+                    : "bg-white text-slate-500 opacity-60";
+            return (
+              <button
+                key={i}
+                onClick={() => escolher(i)}
+                className={`rounded-2xl px-4 py-4 font-bold text-lg shadow active:scale-95 ${bg}`}
+              >
+                {op.texto}
+              </button>
+            );
+          })}
+        </div>
+
+        {escolha !== null && !m.opcoes[escolha].correta && (
+          <button
+            onClick={() => setEscolha(null)}
+            className="mt-4 rounded-full bg-yellow-400 text-slate-900 px-6 py-2 font-bold shadow"
+          >
+            🔁 Tentar de novo
           </button>
         )}
       </div>

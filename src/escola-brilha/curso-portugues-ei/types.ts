@@ -180,6 +180,32 @@ export type MomentoEI =
       silabas: string[]; // ["LA","TA"]
       instrucaoAudio: string;
       elogio: string;
+    }
+  // ============ FASE 4 — Fluência e Compreensão ============
+  | {
+      tipo: "leituraFrase";
+      // Frase curta ilustrada. Sílabas destacadas por palavra.
+      imagemUrl: string;
+      frase: string; // "O GATO CORRE."
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "leituraTexto";
+      // Mini-texto (2-4 frases) + ilustração. TTS lê inteiro.
+      titulo: string;
+      imagemUrl: string;
+      frases: string[]; // cada frase é lida com pausa
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "compreensaoLeitura";
+      // Pergunta em áudio sobre o texto lido. Opções em texto.
+      perguntaAudio: string;
+      opcoes: Array<{ texto: string; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
     };
 
 export interface AulaEI {
