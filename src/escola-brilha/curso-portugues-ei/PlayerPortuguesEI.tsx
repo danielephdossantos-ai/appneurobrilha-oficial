@@ -808,10 +808,10 @@ function ElkoninBloco({
                   ? "bg-yellow-300 border-yellow-500 text-purple-800 scale-110"
                   : ativo
                   ? "bg-white border-purple-500 text-purple-500 animate-pulse"
-                  : "bg-slate-100 border-slate-300 text-transparent"
+                  : "bg-slate-100 border-slate-300 text-slate-300"
               }`}
             >
-              {feito ? "●" : "?"}
+              {feito ? m.fonemas[i] : ativo ? "?" : "·"}
             </button>
           );
         })}
