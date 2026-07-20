@@ -1422,24 +1422,25 @@ function LeituraFraseBloco({
     };
   }, []);
 
-  const lerKaraoke = (rate: number) => {
+  const lerKaraoke = async (rate: number) => {
     timersRef.current.forEach((t) => clearTimeout(t));
     timersRef.current = [];
     stopSpeaking();
     setAtiva(-1);
-    const gap = rate < 0.85 ? 120 : 90;
-    let delay = 0;
-    palavras.forEach((p, i) => {
-      const t1 = window.setTimeout(() => {
-        setAtiva(i);
-        speakChunked(p.toLowerCase(), { rate, queue: false });
-      }, delay);
-      timersRef.current.push(t1);
-      const dur = Math.max(360, p.length * (rate < 0.85 ? 130 : 95)) + gap;
-      delay += dur;
-    });
-    const tFim = window.setTimeout(() => setAtiva(-1), delay + 200);
-    timersRef.current.push(tFim);
+    const runToken = ++karaokeRunRef.current;
+    const gap = rate < 0.85 ? 160 : 110;
+    for (let i = 0; i < palavras.length; i++) {
+      if (runToken !== karaokeRunRef.current) return;
+      setAtiva(i);
+      // enfileira (não cancela a fala anterior) e AGUARDA terminar antes de ir pra próxima
+      await speakChunked(palavras[i].toLowerCase(), { rate, queue: true });
+      if (runToken !== karaokeRunRef.current) return;
+      await new Promise((r) => {
+        const t = window.setTimeout(r, gap);
+        timersRef.current.push(t);
+      });
+    }
+    if (runToken === karaokeRunRef.current) setAtiva(-1);
   };
 
   const gravarLeitura = () => {
