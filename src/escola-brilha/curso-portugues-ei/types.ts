@@ -95,6 +95,61 @@ export type MomentoEI =
       medalha: string; // nome da conquista
       mascoteUrl: string;
       falaFinal: string;
+    }
+  // ============ FASE 2 — Princípio Alfabético (evidências) ============
+  | {
+      tipo: "somDaLetra";
+      // Apresenta a letra + som + palavras-imagem que começam com ela.
+      // Baseado em ensino explícito de correspondência grafema-fonema (Ehri).
+      letra: string; // "A" ou "P"
+      som: string; // TTS: como o som da letra é (ex.: "AAA" ou "PPP")
+      instrucaoAudio: string;
+      exemplos: Array<{ nome: string; imagemUrl: string }>;
+      elogio: string;
+    }
+  | {
+      tipo: "tracadoLetra";
+      // Traçado motor+visual (Longcamp 2008: ativa córtex de leitura).
+      letra: string;
+      instrucaoAudio: string;
+      minTracos?: number; // mínimo de pontos desenhados p/ concluir (default 40)
+      elogio: string;
+    }
+  | {
+      tipo: "letrasMoveis";
+      // Arrastar letras para formar a palavra (Montessori + Ehri).
+      imagemUrl: string;
+      palavra: string; // "PATO"
+      distratoras: string[]; // letras extras
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "elkoninBoxes";
+      // Uma caixa por FONEMA da palavra. Criança clica cada caixa
+      // enquanto o professor pronuncia o som isolado. (Elkonin 1973)
+      imagemUrl: string;
+      palavra: string; // "SOL"
+      fonemas: string[]; // ["SSS","OOO","LLL"]
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "delecaoFonemica";
+      // "Diga BOLA sem o /b/" → escolha entre opções áudio (Heggerty).
+      palavraOriginal: string; // "BOLA"
+      fonemaRemovido: string; // "b" (só para o texto do enunciado)
+      instrucaoAudio: string;
+      opcoes: Array<{ texto: string; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
+    }
+  | {
+      tipo: "pareamentoLetraSom";
+      // Ligar a letra ao objeto cujo nome começa com aquele som.
+      instrucaoAudio: string;
+      pares: Array<{ letra: string; nome: string; imagemUrl: string }>;
+      elogio: string;
     };
 
 export interface AulaEI {
@@ -104,7 +159,10 @@ export interface AulaEI {
   bncc: string[]; // ex ["EI03EF01","EI03EF06"]
   duracaoMin: number;
   momentos: MomentoEI[]; // 11
+  /** Base científica exibida ao final (transparência p/ os pais). */
+  baseCientifica?: string;
 }
+
 
 export interface UnidadeEI {
   slug: string;
