@@ -1005,8 +1005,8 @@ const aula16: AulaEI = {
       tipo: "escutaRitmada",
       imagemUrl: maca,
       versos: [
-        "MMMM-AÇÃ. Escuta o começo:",
-        "MMM. O primeiro som é MMM.",
+        "MAÇÃ. Escuta o começo:",
+        "O primeiro som é M.",
         "É o som da letra M.",
       ],
     },
@@ -1019,8 +1019,8 @@ const aula16: AulaEI = {
         { nome: "sol", imagemUrl: sol, correta: false },
         { nome: "pato", imagemUrl: pato, correta: false },
       ],
-      feedbackAcerto: "MMM-aça, MMM-ochila. Mesmo começo!",
-      feedbackErro: "Escuta: MMM-aça. Qual outra começa com MMM?",
+      feedbackAcerto: "Maçã e mochila começam com M. Mesmo começo!",
+      feedbackErro: "Escuta o começo de maçã: M. Qual outra começa com M?",
     },
     {
       tipo: "somInicial",
@@ -1031,8 +1031,8 @@ const aula16: AulaEI = {
         { nome: "gato", imagemUrl: gato, correta: false },
         { nome: "bola", imagemUrl: bola, correta: false },
       ],
-      feedbackAcerto: "SSSS-ol, SSSS-apo. Som SSS!",
-      feedbackErro: "Escuta: SSSS-ol. Sapo também começa com SSSS.",
+      feedbackAcerto: "Sol e sapo começam com S. Mesmo começo!",
+      feedbackErro: "Escuta o começo de sol: S. Sapo também começa com S.",
     },
     {
       tipo: "somInicial",
@@ -1043,8 +1043,8 @@ const aula16: AulaEI = {
         { nome: "gato", imagemUrl: gato, correta: false },
         { nome: "sol", imagemUrl: sol, correta: false },
       ],
-      feedbackAcerto: "BBB-ola, BBB-anana. Som B!",
-      feedbackErro: "BBB é o começo. Banana também tem BBB.",
+      feedbackAcerto: "Bola e banana começam com B!",
+      feedbackErro: "B é o começo de bola. Banana também começa com B.",
     },
     {
       tipo: "celebracao",
@@ -1076,8 +1076,8 @@ const aula17: AulaEI = {
         { nome: "sol", imagemUrl: sol, correta: false },
         { nome: "gato", imagemUrl: gato, correta: false },
       ],
-      feedbackAcerto: "PPP-ato, PPP-ipa!",
-      feedbackErro: "PPP é o começo de pato. Pipa também.",
+      feedbackAcerto: "Pato e pipa começam com P!",
+      feedbackErro: "P é o começo de pato. Pipa também começa com P.",
     },
     {
       tipo: "somInicial",
@@ -1088,8 +1088,8 @@ const aula17: AulaEI = {
         { nome: "gato", imagemUrl: gato, correta: false },
         { nome: "sol", imagemUrl: sol, correta: false },
       ],
-      feedbackAcerto: "LLL-ua, LLL-eão!",
-      feedbackErro: "LLL é o som. Leão começa com LLL.",
+      feedbackAcerto: "Lua e leão começam com L!",
+      feedbackErro: "L é o começo de lua. Leão começa com L.",
     },
     {
       tipo: "somInicial",
@@ -1100,8 +1100,8 @@ const aula17: AulaEI = {
         { nome: "flor", imagemUrl: flor, correta: false },
         { nome: "banana", imagemUrl: banana, correta: false },
       ],
-      feedbackAcerto: "K-oelho, K-oruja!",
-      feedbackErro: "Escuta: K-oelho. Coruja começa igual.",
+      feedbackAcerto: "Coelho e coruja começam com C!",
+      feedbackErro: "Escuta: coelho e coruja começam igual.",
     },
     {
       tipo: "somInicial",
@@ -1112,8 +1112,8 @@ const aula17: AulaEI = {
         { nome: "gato", imagemUrl: gato, correta: false },
         { nome: "sol", imagemUrl: sol, correta: false },
       ],
-      feedbackAcerto: "PPP-eixe, PPP-ipa!",
-      feedbackErro: "PPP no começo. Pipa também tem PPP.",
+      feedbackAcerto: "Peixe e pipa começam com P!",
+      feedbackErro: "P no começo. Pipa também começa com P.",
     },
     {
       tipo: "celebracao",
@@ -1140,7 +1140,7 @@ const aula18: AulaEI = {
     {
       tipo: "escutaRitmada",
       imagemUrl: sol,
-      versos: ["SO-LLL. Escuta o fim:", "L. O último som é L."],
+      versos: ["SOL. Escuta o fim da palavra.", "O último som é L."],
     },
     {
       tipo: "compreensaoImagem",
@@ -1150,7 +1150,7 @@ const aula18: AulaEI = {
         { nome: "gato", imagemUrl: gato, correta: false },
         { nome: "banana", imagemUrl: banana, correta: false },
       ],
-      feedbackAcerto: "SO-L, girasso-L. Mesmo fim!",
+      feedbackAcerto: "Sol e girassol terminam com L. Mesmo fim!",
       feedbackErro: "Fim de sol é L. Girassol termina com L também.",
     },
     {
@@ -1236,8 +1236,8 @@ const aula19: AulaEI = {
         { nome: "sol", imagemUrl: sol, correta: false },
         { nome: "pato", imagemUrl: pato, correta: false },
       ],
-      feedbackAcerto: "BBB-alão, BBB-ola!",
-      feedbackErro: "Começo é BBB.",
+      feedbackAcerto: "Balão e bola começam com B!",
+      feedbackErro: "Começo é B.",
     },
     {
       tipo: "compreensaoImagem",
@@ -1314,8 +1314,8 @@ const aula20: AulaEI = {
         { nome: "flor mesmo (repete)", imagemUrl: flor, correta: true },
         { nome: "gato", imagemUrl: gato, correta: false },
       ],
-      feedbackAcerto: "FFF é o som!",
-      feedbackErro: "FFF-lor. Começo FFF.",
+      feedbackAcerto: "Flor começa com F!",
+      feedbackErro: "Flor começa com F.",
     },
     {
       tipo: "missaoFamilia",

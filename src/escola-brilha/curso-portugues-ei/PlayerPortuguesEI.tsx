@@ -36,6 +36,13 @@ function somFalado(letra: string): string {
   return consoantes[L] ?? L.toLowerCase();
 }
 
+function falarGrafema(valor: string): string {
+  const limpo = valor.trim().toUpperCase();
+  if (/^([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])\1+$/.test(limpo)) return somFalado(limpo[0]);
+  if (/^[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]$/.test(limpo)) return somFalado(limpo);
+  return valor;
+}
+
 function prepararParlendaParaAudio(versos: string[]) {
   return versos
     .map((v) => v.trim())
@@ -703,7 +710,7 @@ function LetrasMoveisBloco({
     next[idxLivre] = letra;
     setSlots(next);
     setUsados((s) => new Set(s).add(chave));
-    speak(letra);
+    speak(falarGrafema(letra));
     // valida
     if (next.every((v, i) => v === alvo[i])) {
       setTimeout(() => {
@@ -778,7 +785,7 @@ function ElkoninBloco({
   const [ok, setOk] = useState(false);
   const tocar = (i: number) => {
     if (i !== passo) return;
-    speak(m.fonemas[i]);
+    speak(falarGrafema(m.fonemas[i]));
     const n = i + 1;
     if (n >= m.fonemas.length) {
       setOk(true);
@@ -881,7 +888,7 @@ function PareamentoBloco({
               disabled={feito}
               onClick={() => {
                 setSelLetra(p.letra);
-                speak(p.letra);
+                speak(falarGrafema(p.letra));
                 setErro(null);
               }}
               className={`w-16 h-16 rounded-2xl font-black text-3xl shadow transition ${

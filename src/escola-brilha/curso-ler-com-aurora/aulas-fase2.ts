@@ -89,7 +89,7 @@ const aula01: AulaEI = {
   baseCientifica: BASE_PADRAO,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Bem-vindo à Fase 2! Agora a gente vai VER as letras. Hoje: a letra A." },
-    { tipo: "somDaLetra", letra: "A", som: "AAA", instrucaoAudio: "Escuta o som da letra A.", exemplos: [{ nome: "abelha", imagemUrl: abelha }, { nome: "árvore", imagemUrl: arvore }, { nome: "asa", imagemUrl: asa }], elogio: "Isso! A de abelha, A de árvore, A de asa." },
+    { tipo: "somDaLetra", letra: "A", som: "A", instrucaoAudio: "Escuta o som da letra A.", exemplos: [{ nome: "abelha", imagemUrl: abelha }, { nome: "árvore", imagemUrl: arvore }, { nome: "asa", imagemUrl: asa }], elogio: "Isso! A de abelha, A de árvore, A de asa." },
     { tipo: "tracadoLetra", letra: "A", instrucaoAudio: "Traça o A com o dedinho na tela.", elogio: "Que A lindo!" },
     { tipo: "pareamentoLetraSom", instrucaoAudio: "Toca no A e depois no bichinho que começa com o som A.", pares: [{ letra: "A", nome: "abelha", imagemUrl: abelha }, { letra: "B", nome: "bola", imagemUrl: bola }, { letra: "P", nome: "pato", imagemUrl: pato }], elogio: "Você já reconhece o A!" },
     { tipo: "vocabularioVisual", instrucaoAudio: "Escuta as palavras com A.", itens: [{ nome: "abelha", imagemUrl: abelha }, { nome: "árvore", imagemUrl: arvore }, { nome: "asa", imagemUrl: asa }] },
@@ -107,7 +107,7 @@ const aula02: AulaEI = {
   baseCientifica: BASE_PADRAO,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: a letra E! E de estrela." },
-    { tipo: "somDaLetra", letra: "E", som: "EEE", instrucaoAudio: "Escuta o som da letra E.", exemplos: [{ nome: "estrela", imagemUrl: estrela }, { nome: "escola", imagemUrl: escola }, { nome: "esquilo", imagemUrl: brilha }], elogio: "É! E de estrela, E de escola, E de esquilo." },
+    { tipo: "somDaLetra", letra: "E", som: "E", instrucaoAudio: "Escuta o som da letra E.", exemplos: [{ nome: "estrela", imagemUrl: estrela }, { nome: "escola", imagemUrl: escola }, { nome: "esquilo", imagemUrl: brilha }], elogio: "É! E de estrela, E de escola, E de esquilo." },
     { tipo: "tracadoLetra", letra: "E", instrucaoAudio: "Três risquinhos para a direita. Traça o E.", elogio: "Perfeito!" },
     { tipo: "pareamentoLetraSom", instrucaoAudio: "Liga cada letra ao seu som.", pares: [{ letra: "E", nome: "estrela", imagemUrl: estrela }, { letra: "A", nome: "abelha", imagemUrl: abelha }], elogio: "Já são duas vogais!" },
     { tipo: "somInicial", instrucaoAudio: "Qual começa como ESTRELA?", referencia: { nome: "estrela", imagemUrl: estrela }, opcoes: [{ nome: "escola", imagemUrl: escola, correta: true }, { nome: "bola", imagemUrl: bola, correta: false }, { nome: "pato", imagemUrl: pato, correta: false }], feedbackAcerto: "É! Escola começa com E.", feedbackErro: "Escuta de novo: eeee-strela." },
@@ -124,9 +124,9 @@ const aula03: AulaEI = {
   baseCientifica: BASE_PADRAO,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje três de uma vez: I, O, U. As vogais que faltam!" },
-    { tipo: "somDaLetra", letra: "I", som: "III", instrucaoAudio: "Escuta o I.", exemplos: [{ nome: "ioiô", imagemUrl: ioio }, { nome: "idoso", imagemUrl: idoso }], elogio: "iiii de ioiô!" },
-    { tipo: "somDaLetra", letra: "O", som: "OOO", instrucaoAudio: "Escuta o O.", exemplos: [{ nome: "ovelha", imagemUrl: ovelha }, { nome: "oca", imagemUrl: oca }], elogio: "óóó de ovelha!" },
-    { tipo: "somDaLetra", letra: "U", som: "UUU", instrucaoAudio: "Escuta o U.", exemplos: [{ nome: "ursinho", imagemUrl: ursinho }], elogio: "uuu de ursinho!" },
+    { tipo: "somDaLetra", letra: "I", som: "I", instrucaoAudio: "Escuta o som da letra I.", exemplos: [{ nome: "ioiô", imagemUrl: ioio }, { nome: "idoso", imagemUrl: idoso }], elogio: "I de ioiô!" },
+    { tipo: "somDaLetra", letra: "O", som: "O", instrucaoAudio: "Escuta o som da letra O.", exemplos: [{ nome: "ovelha", imagemUrl: ovelha }, { nome: "oca", imagemUrl: oca }], elogio: "O de ovelha!" },
+    { tipo: "somDaLetra", letra: "U", som: "U", instrucaoAudio: "Escuta o som da letra U.", exemplos: [{ nome: "ursinho", imagemUrl: ursinho }], elogio: "U de ursinho!" },
     { tipo: "tracadoLetra", letra: "O", instrucaoAudio: "Um círculo fechado. Traça o O.", minTracos: 30, elogio: "Redondinho!" },
     { tipo: "celebracao", medalha: "Rainha das Vogais", mascoteUrl: mascote, falaFinal: "Você já conhece as CINCO vogais!" },
   ],
@@ -144,7 +144,7 @@ const aula04: AulaEI = {
     { tipo: "pareamentoLetraSom", instrucaoAudio: "Liga cada vogal a uma figura.", pares: [{ letra: "A", nome: "abelha", imagemUrl: abelha }, { letra: "E", nome: "estrela", imagemUrl: estrela }, { letra: "O", nome: "ovelha", imagemUrl: ovelha }], elogio: "Três acertos!" },
     { tipo: "tracadoLetra", letra: "A", instrucaoAudio: "Vamos traçar de novo. Comece pelo A.", elogio: "Muito bem!" },
     { tipo: "tracadoLetra", letra: "E", instrucaoAudio: "Agora o E.", elogio: "Perfeito!" },
-    { tipo: "elkoninBoxes", imagemUrl: ovelha, palavra: "OI", fonemas: ["OOO", "III"], instrucaoAudio: "Toca uma caixa para cada som que você ouvir.", elogio: "OI tem 2 sons!" },
+    { tipo: "elkoninBoxes", imagemUrl: ovelha, palavra: "OI", fonemas: ["O", "I"], instrucaoAudio: "Toca uma caixa para cada som que você ouvir.", elogio: "OI tem 2 sons!" },
     { tipo: "celebracao", medalha: "Detetive das Vogais", mascoteUrl: mascote, falaFinal: "Amanhã começam as CONSOANTES!" },
   ],
 };
@@ -158,10 +158,10 @@ const aula05: AulaEI = {
   baseCientifica: BASE_PADRAO,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje vamos contar os sons das palavras com caixinhas!" },
-    { tipo: "elkoninBoxes", imagemUrl: ovelha, palavra: "OI", fonemas: ["OOO", "III"], instrucaoAudio: "OI: quantos sons?", elogio: "2 sons!" },
-    { tipo: "elkoninBoxes", imagemUrl: cachorro, palavra: "AU", fonemas: ["AAA", "UUU"], instrucaoAudio: "AU: quantos sons?", elogio: "2 sons!" },
-    { tipo: "elkoninBoxes", imagemUrl: mascote, palavra: "EU", fonemas: ["EEE", "UUU"], instrucaoAudio: "EU: quantos sons?", elogio: "2 sons!" },
-    { tipo: "somInicial", instrucaoAudio: "Qual começa igual a URSINHO?", referencia: { nome: "ursinho", imagemUrl: ursinho }, opcoes: [{ nome: "uva? Não. Escolha OVELHA que começa com O.", imagemUrl: ovelha, correta: false }, { nome: "outro ursinho", imagemUrl: ursinho, correta: true }, { nome: "bola", imagemUrl: bola, correta: false }], feedbackAcerto: "uuu! Ursinho e ursinho.", feedbackErro: "uuu-rsinho. Procure o U." },
+    { tipo: "elkoninBoxes", imagemUrl: ovelha, palavra: "OI", fonemas: ["O", "I"], instrucaoAudio: "OI: quantos sons?", elogio: "2 sons!" },
+    { tipo: "elkoninBoxes", imagemUrl: cachorro, palavra: "AU", fonemas: ["A", "U"], instrucaoAudio: "AU: quantos sons?", elogio: "2 sons!" },
+    { tipo: "elkoninBoxes", imagemUrl: mascote, palavra: "EU", fonemas: ["E", "U"], instrucaoAudio: "EU: quantos sons?", elogio: "2 sons!" },
+    { tipo: "somInicial", instrucaoAudio: "Qual começa igual a URSINHO?", referencia: { nome: "ursinho", imagemUrl: ursinho }, opcoes: [{ nome: "ovelha", imagemUrl: ovelha, correta: false }, { nome: "outro ursinho", imagemUrl: ursinho, correta: true }, { nome: "bola", imagemUrl: bola, correta: false }], feedbackAcerto: "Ursinho começa com U!", feedbackErro: "Escuta o começo de ursinho: U. Procure o U." },
     { tipo: "celebracao", medalha: "Ouvido de Fonema", mascoteUrl: mascote, falaFinal: "Semana 1 terminada! Amanhã: consoantes!" },
   ],
 };

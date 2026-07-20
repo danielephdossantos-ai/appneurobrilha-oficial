@@ -90,7 +90,7 @@ const aula01: AulaEI = {
         { nome: "mãe", imagemUrl: mae, correta: false },
       ],
       feedbackAcerto: "Isso! Bola e bebê começam com o som BÊ!",
-      feedbackErro: "Escuta de novo: BOOO-la. Qual outra começa com BÊ?",
+      feedbackErro: "Escuta de novo: bola começa com BÊ. Qual outra começa com BÊ?",
     },
     {
       tipo: "ritmoCorpo",
@@ -174,7 +174,7 @@ const aula02: AulaEI = {
       { nome: "cachorro", imagemUrl: cachorro, correta: true },
       { nome: "sol", imagemUrl: sol, correta: false },
       { nome: "mamãe", imagemUrl: mae, correta: false },
-    ], feedbackAcerto: "Isso! Casa e cachorro começam com o som CÊ!", feedbackErro: "Escuta de novo: CAAA-sa. Qual outra começa com o som CÊ?" },
+    ], feedbackAcerto: "Isso! Casa e cachorro começam com o som CÊ!", feedbackErro: "Escuta de novo: casa começa com CÊ. Qual outra começa com o som CÊ?" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Vamos bater palma no ritmo:", palavra: "CA-SA", silabas: 2, imagemUrl: casa, elogio: "Boa! Casa tem duas palmas!" },
     { tipo: "historiaIlustrada", titulo: "O gatinho da lua", cenas: [
       { imagemUrl: gato, narracao: "Era uma vez um gatinho branco chamado Miau. Ele morava em uma casa aconchegante." },
@@ -271,11 +271,11 @@ const aula04: AulaEI = {
       { nome: "lua", imagemUrl: lua },
       { nome: "estrela", imagemUrl: estrela },
     ] },
-    { tipo: "somInicial", instrucaoAudio: "Qual dessas começa com o mesmo som de SOL? Escuta: SSSS-ol.", referencia: { nome: "sol", imagemUrl: sol }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "Qual dessas começa com o mesmo som de SOL? Escuta o começo: S.", referencia: { nome: "sol", imagemUrl: sol }, opcoes: [
       { nome: "sapo", imagemUrl: sapo, correta: true },
       { nome: "lua", imagemUrl: lua, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
-    ], feedbackAcerto: "Isso! Sol e sapo começam com SSSSS!", feedbackErro: "Escuta o sopro do começo: SSSS-ol, SSSS-apo!" },
+    ], feedbackAcerto: "Isso! Sol e sapo começam com S!", feedbackErro: "Escuta o começo: sol, sapo. As duas começam com S." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra sol:", palavra: "SOL", silabas: 1, imagemUrl: sol, elogio: "Uma palma só! Sol é palavra pequenininha!" },
     { tipo: "historiaIlustrada", titulo: "A estrela que dormiu tarde", cenas: [
       { imagemUrl: estrela, narracao: "Uma estrelinha ficou brincando a noite toda no céu." },
@@ -432,11 +432,11 @@ const aula07: AulaEI = {
       { nome: "no sapato", imagemUrl: casa, correta: false },
     ], feedbackAcerto: "Isso! No livro tem historinhas de montão!", feedbackErro: "Historinhas moram nos LIVROS!" },
     { tipo: "fazDeConta", imagemUrl: livros, convite: "Faz de conta que você está lendo um livro pro seu ursinho! Aponta as figuras e conta!" },
-    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com o som LLLL. Qual palavra começa igual?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com o som L. Qual palavra começa igual?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
       { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "sapo", imagemUrl: sapo, correta: false },
       { nome: "pato", imagemUrl: pato, correta: false },
-    ], feedbackAcerto: "Boa! LI-vro e LU-a começam iguais!", feedbackErro: "Escuta: LI-vro, LU-a. Começam com LLLL!" },
+    ], feedbackAcerto: "Boa! Livro e lua começam com L!", feedbackErro: "Escuta: livro, lua. Começam com L!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LI-VRO", silabas: 2, imagemUrl: livro, elogio: "Duas palminhas! Li-vro!" },
     { tipo: "rodaConversa", imagemUrl: livro, pergunta: "Você tem um livro favorito? Conta como ele é pro Brilha!", exemplos: [
       { nome: "livro de bicho", imagemUrl: sapo },
@@ -481,11 +481,11 @@ const aula08: AulaEI = {
       { nome: "sopa", imagemUrl: sopa, correta: false },
       { nome: "bola", imagemUrl: bola, correta: false },
     ], feedbackAcerto: "Isso! Com o LÁ-PIS!", feedbackErro: "A menina usou um LÁ-PIS pra desenhar." },
-    { tipo: "somInicial", instrucaoAudio: "LÁPIS começa com LLLL. Qual outra começa igual?", referencia: { nome: "lápis", imagemUrl: lapis }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "LÁPIS começa com L. Qual outra começa igual?", referencia: { nome: "lápis", imagemUrl: lapis }, opcoes: [
       { nome: "livro", imagemUrl: livro, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "pato", imagemUrl: pato, correta: false },
-    ], feedbackAcerto: "Boa! LÁ-pis e LI-vro começam com LLLL!", feedbackErro: "Escuta: LLLL-ápis, LLLL-ivro. Iguais no começo!" },
+    ], feedbackAcerto: "Boa! Lápis e livro começam com L!", feedbackErro: "Escuta: lápis, livro. Iguais no começo!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LÁ-PIS", silabas: 2, imagemUrl: lapis, elogio: "Duas palminhas! Lá-pis!" },
     { tipo: "fazDeConta", imagemUrl: papel, convite: "Faz de conta que seu dedo é um lápis! Risca no ar um SOL bem redondo, e depois uma CASA!" },
     { tipo: "rodaConversa", imagemUrl: desenho, pergunta: "Se você pudesse desenhar QUALQUER coisa agora, o que seria? Conta pro Brilha!", exemplos: [
@@ -521,11 +521,11 @@ const aula09: AulaEI = {
       { nome: "sapo", imagemUrl: sapo },
       { nome: "lua", imagemUrl: lua },
     ] },
-    { tipo: "somInicial", instrucaoAudio: "SAPO começa com SSSSS. Qual outra começa igual?", referencia: { nome: "sapo", imagemUrl: sapo }, opcoes: [
+    { tipo: "somInicial", instrucaoAudio: "SAPO começa com S. Qual outra começa igual?", referencia: { nome: "sapo", imagemUrl: sapo }, opcoes: [
       { nome: "sol", imagemUrl: sol, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "bola", imagemUrl: bola, correta: false },
-    ], feedbackAcerto: "Boa! SSSS-apo e SSSS-ol!", feedbackErro: "Escuta o começo: SSSS-apo, SSSS-ol!" },
+    ], feedbackAcerto: "Boa! Sapo e sol começam com S!", feedbackErro: "Escuta o começo: sapo, sol. Começam com S!" },
     { tipo: "somInicial", instrucaoAudio: "Qual palavra RIMA com PATO?", referencia: { nome: "pato", imagemUrl: pato }, opcoes: [
       { nome: "rato", imagemUrl: rato, correta: true },
       { nome: "casa", imagemUrl: casa, correta: false },
