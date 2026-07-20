@@ -636,6 +636,9 @@ function MomentoRender({
 
     case "leituraEco":
       return <LeituraEcoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "sinonimoImagem":
+      return <SinonimoImagemBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
