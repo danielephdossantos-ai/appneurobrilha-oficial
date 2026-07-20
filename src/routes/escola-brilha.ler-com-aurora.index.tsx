@@ -1,19 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { cursoLerComAurora } from "@/escola-brilha/curso-ler-com-aurora/aulas";
+import { cursoLerComAuroraFase2 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase2";
+import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 /**
- * Trilha Duolingo do curso "Ler com Aurora — Fase 1".
- * 20 missões destravadas (modo teste), agrupadas por semana.
- * Mostra streak diário salvo em localStorage.
+ * Trilha Duolingo do curso "Ler com Aurora".
+ * Fases 1 (Consciência Fonológica) e 2 (Princípio Alfabético).
+ * Modo teste: todas as missões destravadas.
  */
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/")({
   head: () => ({
     meta: [
-      { title: "Ler com Aurora — Fase 1 · Escola Brilha" },
+      { title: "Ler com Aurora · Escola Brilha" },
       {
         name: "description",
         content:
-          "20 missões diárias de 15 minutos que ensinam consciência fonológica — a base científica da leitura. Para Pré II e 1º Ano.",
+          "Trilha de alfabetização baseada na ciência da leitura (NRP, PNA, Ehri, Heggerty, Longcamp). 40 missões de 15 min/dia.",
       },
     ],
   }),
@@ -29,13 +31,113 @@ function loadConcluidas(): Set<string> {
   }
 }
 
-function TrilhaLerComAurora() {
-  const c = cursoLerComAurora;
-  const concluidas = loadConcluidas();
-  const aulasFlat = c.unidades.flatMap((u) => u.aulas);
+function FaseBloco({
+  fase,
+  curso,
+  concluidas,
+  gradiente,
+  badge,
+}: {
+  fase: 1 | 2;
+  curso: CursoEI;
+  concluidas: Set<string>;
+  gradiente: string;
+  badge: string;
+}) {
+  const aulasFlat = curso.unidades.flatMap((u) => u.aulas);
   const total = aulasFlat.length;
   const feitas = aulasFlat.filter((a) => concluidas.has(a.slug)).length;
   const progresso = Math.round((feitas / total) * 100);
+
+  return (
+    <section className="mt-8">
+      <div
+        className="rounded-3xl px-5 py-4 mb-4 shadow-xl"
+        style={{ background: gradiente }}
+      >
+        <p className="text-[10px] tracking-widest font-black text-white/90">
+          {badge}
+        </p>
+        <h2 className="text-2xl font-black text-white leading-tight">
+          {curso.titulo}
+        </h2>
+        <p className="text-white/90 text-xs mt-1">{curso.descricao}</p>
+        <div className="mt-3 flex items-center justify-between text-[11px] font-bold text-white">
+          <span>Fase {fase} · {feitas}/{total} missões</span>
+          <span>{progresso}%</span>
+        </div>
+        <div className="mt-1 h-2 rounded-full bg-black/25 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-yellow-300 to-lime-400"
+            style={{ width: `${progresso}%` }}
+          />
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        {curso.unidades.map((u) => (
+          <div key={u.slug}>
+            <div className="text-center mb-3">
+              <div className="inline-block bg-black/40 rounded-full px-4 py-1 text-[11px] uppercase tracking-wider font-bold text-yellow-300">
+                {u.titulo}
+              </div>
+              <div className="text-xs text-white/80 mt-1 italic">
+                Medalha: {u.subtitulo}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {u.aulas.map((a, i) => {
+                const flatIdx = aulasFlat.findIndex((x) => x.slug === a.slug);
+                const align = flatIdx % 2 === 0 ? "justify-start" : "justify-end";
+                const feito = concluidas.has(a.slug);
+                return (
+                  <div key={a.slug} className={`flex ${align} px-6`}>
+                    <Link
+                      to="/escola-brilha/ler-com-aurora/$aula"
+                      params={{ aula: a.slug }}
+                      className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
+                      style={{
+                        background: `linear-gradient(135deg, ${curso.corPrimaria}, #fde68a)`,
+                        color: curso.corSecundaria,
+                      }}
+                    >
+                      <div className="text-center px-2">
+                        <div className="text-3xl">{a.icone}</div>
+                        <div className="text-[10px] font-black mt-1 leading-tight line-clamp-3">
+                          {a.titulo}
+                        </div>
+                        <div className="text-[9px] opacity-70 mt-0.5">
+                          Missão {flatIdx + 1}/{total}
+                        </div>
+                      </div>
+                      {feito && (
+                        <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 grid place-items-center text-white text-sm">
+                          ✓
+                        </div>
+                      )}
+                      {i === 0 && flatIdx === 0 && !feito && (
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] bg-lime-400 text-emerald-950 rounded-full px-2 py-0.5 font-black shadow">
+                          COMECE AQUI
+                        </div>
+                      )}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TrilhaLerComAurora() {
+  const concluidas = loadConcluidas();
+  const totalGeral =
+    cursoLerComAurora.unidades.flatMap((u) => u.aulas).length +
+    cursoLerComAuroraFase2.unidades.flatMap((u) => u.aulas).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
@@ -47,92 +149,40 @@ function TrilhaLerComAurora() {
             CURSO ESPECIAL · CIÊNCIA DA LEITURA
           </p>
           <h1 className="text-3xl sm:text-4xl font-black mt-1">Ler com Aurora</h1>
-          <p className="text-yellow-100 text-sm mt-1">Fase 1 · Consciência Fonológica</p>
-          <p className="text-white/80 text-sm mt-3 max-w-xl mx-auto">
-            {c.descricao}
+          <p className="text-yellow-100 text-sm mt-1">
+            {totalGeral} missões · 15 min/dia · Pré II + 1º Ano
           </p>
         </header>
 
-        <div className="rounded-2xl bg-black/30 backdrop-blur p-4 mb-6">
-          <div className="flex items-center justify-between text-xs font-bold mb-2">
-            <span>Progresso</span>
-            <span>{feitas} / {total} missões</span>
-          </div>
-          <div className="h-3 rounded-full bg-white/20 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-yellow-300 to-lime-400"
-              style={{ width: `${progresso}%` }}
-            />
-          </div>
+        <div className="rounded-2xl bg-amber-300/90 text-amber-950 px-4 py-2 text-xs font-bold text-center mb-2">
+          🔓 Modo teste: todas as {totalGeral} missões destravadas
         </div>
 
-        <div className="rounded-2xl bg-amber-300/90 text-amber-950 px-4 py-2 text-xs font-bold text-center mb-6">
-          🔓 Modo teste: todas as 20 missões destravadas
-        </div>
+        <FaseBloco
+          fase={1}
+          curso={cursoLerComAurora}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#f59e0b,#ea580c)"
+          badge="FASE 1 · CONSCIÊNCIA FONOLÓGICA"
+        />
 
-        <div className="space-y-6">
-          {c.unidades.map((u) => (
-            <div key={u.slug}>
-              <div className="text-center mb-3">
-                <div className="inline-block bg-black/40 rounded-full px-4 py-1 text-[11px] uppercase tracking-wider font-bold text-yellow-300">
-                  {u.titulo}
-                </div>
-                <div className="text-xs text-white/80 mt-1 italic">
-                  Medalha: {u.subtitulo}
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {u.aulas.map((a, i) => {
-                  const flatIdx = aulasFlat.findIndex((x) => x.slug === a.slug);
-                  const align = flatIdx % 2 === 0 ? "justify-start" : "justify-end";
-                  const feito = concluidas.has(a.slug);
-                  return (
-                    <div key={a.slug} className={`flex ${align} px-6`}>
-                      <Link
-                        to="/escola-brilha/ler-com-aurora/$aula"
-                        params={{ aula: a.slug }}
-                        className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
-                        style={{
-                          background: `linear-gradient(135deg, ${c.corPrimaria}, #fde68a)`,
-                          color: c.corSecundaria,
-                        }}
-                      >
-                        <div className="text-center px-2">
-                          <div className="text-3xl">{a.icone}</div>
-                          <div className="text-[10px] font-black mt-1 leading-tight line-clamp-3">
-                            {a.titulo}
-                          </div>
-                          <div className="text-[9px] opacity-70 mt-0.5">
-                            Missão {flatIdx + 1}/20
-                          </div>
-                        </div>
-                        {feito && (
-                          <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 grid place-items-center text-white text-sm">
-                            ✓
-                          </div>
-                        )}
-                        {i === 0 && flatIdx === 0 && !feito && (
-                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] bg-lime-400 text-emerald-950 rounded-full px-2 py-0.5 font-black shadow">
-                            COMECE AQUI
-                          </div>
-                        )}
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
+        <FaseBloco
+          fase={2}
+          curso={cursoLerComAuroraFase2}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#7c3aed,#4338ca)"
+          badge="FASE 2 · PRINCÍPIO ALFABÉTICO"
+        />
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
-          <p className="font-bold text-yellow-200 mb-1">📚 Sobre esta fase</p>
+          <p className="font-bold text-yellow-200 mb-1">📚 Base científica</p>
           <p>
-            Baseado em Heggerty, PNA-MEC (2019) e National Reading Panel. A
-            criança aprende a <b>ouvir</b> os sons da língua — pré-requisito
-            científico para decifrar letras. Ao completar as 20 missões, ela
-            está pronta para a <b>Fase 2 — Ver as letras</b>.
+            Não prometemos prazos — cada criança aprende no próprio ritmo.
+            Usamos técnicas com evidência: consciência fonológica (Heggerty,
+            NRP 2000), princípio alfabético (Ehri 2005), traçado motor
+            (Longcamp 2008), caixas de Elkonin (1973), deleção fonêmica
+            e ensino explícito de correspondência grafema-fonema
+            (PNA-MEC, 2019).
           </p>
         </div>
       </div>
