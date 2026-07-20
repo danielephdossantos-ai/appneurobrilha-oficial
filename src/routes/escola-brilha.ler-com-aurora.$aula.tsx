@@ -20,6 +20,10 @@ import {
   cursoLerComAuroraFase5,
   getAulaLerComAuroraFase5,
 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase5";
+import {
+  cursoLerComAuroraFase6,
+  getAulaLerComAuroraFase6,
+} from "@/escola-brilha/curso-ler-com-aurora/aulas-fase6";
 
 /**
  * Player de uma missão do curso "Ler com Aurora".
@@ -35,20 +39,23 @@ function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
 
-  const aulaF5 = getAulaLerComAuroraFase5(aulaSlug);
-  const aulaF4 = aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
-  const aulaF3 = aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
-  const aulaF2 = aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
-  const aula = aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
-  const curso = aulaF5
-    ? cursoLerComAuroraFase5
-    : aulaF4
-      ? cursoLerComAuroraFase4
-      : aulaF3
-        ? cursoLerComAuroraFase3
-        : aulaF2
-          ? cursoLerComAuroraFase2
-          : cursoLerComAurora;
+  const aulaF6 = getAulaLerComAuroraFase6(aulaSlug);
+  const aulaF5 = aulaF6 ? undefined : getAulaLerComAuroraFase5(aulaSlug);
+  const aulaF4 = aulaF6 || aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
+  const aulaF3 = aulaF6 || aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
+  const aulaF2 = aulaF6 || aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
+  const aula = aulaF6 ?? aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
+  const curso = aulaF6
+    ? cursoLerComAuroraFase6
+    : aulaF5
+      ? cursoLerComAuroraFase5
+      : aulaF4
+        ? cursoLerComAuroraFase4
+        : aulaF3
+          ? cursoLerComAuroraFase3
+          : aulaF2
+            ? cursoLerComAuroraFase2
+            : cursoLerComAurora;
 
   if (!aula) {
     return (
