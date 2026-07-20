@@ -1408,7 +1408,8 @@ function LeituraFraseBloco({
           <button
             onClick={() => {
               setOuviu(true);
-              speak(m.frase.toLowerCase(), { rate: 0.75 });
+              stopSpeaking();
+              speakChunked(m.frase.toLowerCase(), { rate: 0.75 });
             }}
             className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
@@ -1417,7 +1418,8 @@ function LeituraFraseBloco({
           <button
             onClick={() => {
               setOuviu(true);
-              speak(m.frase.toLowerCase(), { rate: 0.95 });
+              stopSpeaking();
+              speakChunked(m.frase.toLowerCase(), { rate: 0.95 });
             }}
             className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
           >
