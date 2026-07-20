@@ -655,6 +655,8 @@ function MomentoRender({
       return <ResumirFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
     case "inferirEmocao":
       return <InferirEmocaoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "conexaoPessoal":
+      return <ConexaoPessoalBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
