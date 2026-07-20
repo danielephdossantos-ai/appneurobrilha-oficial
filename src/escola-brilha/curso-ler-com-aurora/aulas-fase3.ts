@@ -16,11 +16,11 @@ import { url as vaca } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
 import { url as vela } from "@/assets/neuro-treino/objetos/vela.png.asset.json";
 import { url as navio } from "@/assets/neuro-treino/objetos/navio.png.asset.json";
 import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as sopa } from "@/assets/neuro-treino/objetos/sopa.png.asset.json";
 import { url as rato } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
 import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as jardim } from "@/assets/neuro-treino/objetos/jardim.png.asset.json";
+import { url as joaninha } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
 
 /**
  * Ler com Aurora — Fase 3: Decodificação Silábica (CV)
@@ -210,7 +210,7 @@ const a10: AulaEI = {
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família S! Sopro da cobrinha." },
     { tipo: "familiaSilabica", consoante: "S", silabas: ["SA", "SE", "SI", "SO", "SU"], instrucaoAudio: "Família S.", elogio: "Família S!" },
     { tipo: "juntarSilabas", imagemUrl: sapo, silabas: ["SA", "PO"], palavra: "SAPO", instrucaoAudio: "Junta sá com pó.", elogio: "SAPO!" },
-    { tipo: "juntarSilabas", imagemUrl: sol, silabas: ["SOL"], palavra: "SOL", instrucaoAudio: "Uma sílaba só: SOL.", elogio: "SOL!" },
+    { tipo: "juntarSilabas", imagemUrl: sopa, silabas: ["SO", "PA"], palavra: "SOPA", instrucaoAudio: "Junta só com pá.", elogio: "SOPA!" },
     { tipo: "leituraSilabica", imagemUrl: sapo, palavra: "SAPO", silabas: ["SA", "PO"], instrucaoAudio: "Sua vez.", elogio: "Perfeito!" },
     { tipo: "celebracao", medalha: "Semana 2 Concluída", mascoteUrl: mascote, falaFinal: "Você lê 10 famílias!" },
   ],
@@ -277,10 +277,10 @@ const a14: AulaEI = {
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
-    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família J!" },
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje: família J! Vamos só treinar sílabas claras." },
     { tipo: "familiaSilabica", consoante: "J", silabas: ["JA", "JE", "JI", "JO", "JU"], instrucaoAudio: "Família J.", elogio: "Família J!" },
-    { tipo: "juntarSilabas", imagemUrl: jardim, silabas: ["JAR", "DIM"], palavra: "JARDIM", instrucaoAudio: "Junta JAR com DIM.", elogio: "JARDIM!" },
-    { tipo: "leituraSilabica", imagemUrl: jardim, palavra: "JARDIM", silabas: ["JAR", "DIM"], instrucaoAudio: "Sua vez.", elogio: "Perfeito!" },
+    { tipo: "juntarSilabas", imagemUrl: joaninha, silabas: ["JO", "A", "NI", "NHA"], palavra: "JOANINHA", instrucaoAudio: "Escute a palavra joaninha inteira. Depois toque nas partes devagar.", elogio: "JOANINHA!" },
+    { tipo: "leituraSilabica", imagemUrl: joaninha, palavra: "JOANINHA", silabas: ["JO", "A", "NI", "NHA"], instrucaoAudio: "Agora ouve devagar e depois junto.", elogio: "Perfeito!" },
     { tipo: "celebracao", medalha: "Leitor Família J", mascoteUrl: mascote, falaFinal: "Amanhã: mistura tudo!" },
   ],
 };
