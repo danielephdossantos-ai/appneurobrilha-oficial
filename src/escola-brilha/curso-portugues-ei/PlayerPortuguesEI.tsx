@@ -2005,6 +2005,27 @@ function LeituraEcoBloco({
       });
     }
     if (runToken === karaokeRunRef.current) setAtiva(-1);
+    // Modela a prosódia: fala a linha inteira em uma única utterance,
+    // preservando o ".", "?" ou "!" para a entonação correta.
+    const term = linhaAtual.trim().slice(-1);
+    if (rate < 0.85 && (term === "?" || term === "!" || term === ".")) {
+      await new Promise((r) => {
+        const t = window.setTimeout(r, 260);
+        timersRef.current.push(t);
+      });
+      if (runToken !== karaokeRunRef.current) return;
+      await new Promise<void>((resolve) => {
+        const u = new SpeechSynthesisUtterance(linhaAtual);
+        u.lang = "pt-BR";
+        u.rate = 0.9;
+        u.pitch = term === "?" ? 1.25 : term === "!" ? 1.15 : 1.0;
+        const v = pickPtBrVoice();
+        if (v) u.voice = v;
+        u.onend = () => resolve();
+        u.onerror = () => resolve();
+        try { window.speechSynthesis.speak(u); } catch { resolve(); }
+      });
+    }
   };
 
   const gravarEco = () => {

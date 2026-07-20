@@ -198,6 +198,83 @@ const a10: AulaEI = {
 };
 
 /* ============================================================
+ * SEMANA 3 — Prosódia (. ? !)
+ * ============================================================ */
+
+const BASE_PROSODIA =
+  "Prosódia (NRP 2000; Rasinski 2004; Kuhn & Stahl 2003): ler com a entonação certa do ponto final, da pergunta e da exclamação. A leitura expressiva sustenta a compreensão.";
+
+const a11: AulaEI = {
+  slug: "f6-dia-11-prosodia-ponto",
+  titulo: "Dia 11 · Ponto final — leio com calma",
+  icone: "•",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_PROSODIA,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Semana 3! Hoje o segredo é o PONTO FINAL. Quando ele aparece, a voz desce e a gente respira." },
+    { tipo: "leituraEco", titulo: "Ponto final · voz que desce", imagemUrl: gato, linhas: ["O GATO DORME.", "A LUA APARECE.", "A FLOR ABRE."], instrucaoAudio: "Ouça o professor descer a voz no ponto final e repita igualzinho no microfone.", elogio: "Você fechou cada frase com calma!" },
+    { tipo: "celebracao", medalha: "Voz do Ponto Final", mascoteUrl: mascote, falaFinal: "Amanhã: a voz SOBE — chega a pergunta!" },
+  ],
+};
+
+const a12: AulaEI = {
+  slug: "f6-dia-12-prosodia-pergunta",
+  titulo: "Dia 12 · Pergunta — a voz sobe",
+  icone: "?",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_PROSODIA,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Perguntou? A voz SOBE lá no final. Ouça e copie o jeitinho!" },
+    { tipo: "leituraEco", titulo: "Perguntas · voz que sobe", imagemUrl: coelho, linhas: ["ONDE ESTÁ O COELHO?", "QUEM PEGOU A BOLA?", "A LUA APARECEU?"], instrucaoAudio: "Ouça a voz do professor SUBIR na pergunta e repita no microfone.", elogio: "Perguntas com voz de verdade!" },
+    { tipo: "celebracao", medalha: "Voz de Pergunta", mascoteUrl: mascote, falaFinal: "Amanhã: exclamação — voz com emoção!" },
+  ],
+};
+
+const a13: AulaEI = {
+  slug: "f6-dia-13-prosodia-exclamacao",
+  titulo: "Dia 13 · Exclamação — voz com emoção",
+  icone: "!",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_PROSODIA,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "EXCLAMAÇÃO é emoção! Alegria, susto, força. Ouça e copie a energia!" },
+    { tipo: "leituraEco", titulo: "Exclamação · voz com energia", imagemUrl: estrela, linhas: ["QUE ESTRELA LINDA!", "O SOL BRILHA MUITO!", "QUE PIPA GRANDE!"], instrucaoAudio: "Ouça a voz do professor com ENERGIA e repita igual no microfone.", elogio: "Você leu com sentimento!" },
+    { tipo: "celebracao", medalha: "Voz de Exclamação", mascoteUrl: mascote, falaFinal: "Amanhã: misturar tudo — ponto, pergunta e exclamação!" },
+  ],
+};
+
+const a14: AulaEI = {
+  slug: "f6-dia-14-prosodia-misturado",
+  titulo: "Dia 14 · Misturei tudo!",
+  icone: "🎭",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_PROSODIA,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje tem os três misturados: ponto, pergunta e exclamação. Preste atenção no final de cada linha!" },
+    { tipo: "leituraEco", titulo: "Três vozes numa história", imagemUrl: menina, linhas: ["A MENINA VIU A LUA.", "ONDE ESTÁ A ESTRELA?", "QUE CÉU LINDO!", "A NOITE CHEGOU."], instrucaoAudio: "Cada linha tem um final diferente. Copie a voz do professor no microfone.", elogio: "Você mudou a voz certinho em cada linha!" },
+    { tipo: "celebracao", medalha: "Voz Camaleoa", mascoteUrl: mascote, falaFinal: "Amanhã: mini-diálogo com dois personagens!" },
+  ],
+};
+
+const a15: AulaEI = {
+  slug: "f6-dia-15-prosodia-dialogo",
+  titulo: "Dia 15 · Mini-diálogo com prosódia",
+  icone: "💬",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_PROSODIA,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Última missão da semana! Um mini-diálogo: dois personagens conversam. Muda a voz junto comigo!" },
+    { tipo: "leituraEco", titulo: "Diálogo — a bola perdida", imagemUrl: bola, linhas: ["A MENINA PERGUNTA:", "CADÊ A BOLA?", "O GATO RESPONDE:", "ESTÁ AQUI!", "QUE BOM!"], instrucaoAudio: "Copie a entonação de cada linha. Perguntas sobem, exclamações vibram.", elogio: "Um diálogo inteiro com voz de verdade!" },
+    { tipo: "celebracao", medalha: "Fluência Semana 3", mascoteUrl: mascote, falaFinal: "Semana 4 vem aí: mini-textos completos e o Diploma de Leitor Fluente!" },
+  ],
+};
+
+/* ============================================================
  * Curso (Fase 6 — expandirá para 20 missões)
  * ============================================================ */
 
@@ -225,6 +302,13 @@ export const cursoLerComAuroraFase6: CursoEI = {
       titulo: "Semana 2 · Leitura Eco",
       subtitulo: "Eco Expressivo",
       aulas: [a6, a7, a8, a9, a10],
+    },
+    {
+      slug: "f6-semana-03",
+      numero: 3,
+      titulo: "Semana 3 · Prosódia (. ? !)",
+      subtitulo: "Voz Camaleoa",
+      aulas: [a11, a12, a13, a14, a15],
     },
   ],
 };

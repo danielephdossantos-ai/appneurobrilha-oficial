@@ -211,7 +211,7 @@ function TrilhaLerComAurora() {
           curso={cursoLerComAuroraFase6}
           concluidas={concluidas}
           gradiente="linear-gradient(135deg,#facc15,#78350f)"
-          badge="FASE 6 · FLUÊNCIA VERDADEIRA (semana 2/4)"
+          badge="FASE 6 · FLUÊNCIA VERDADEIRA (semana 3/4)"
         />
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
