@@ -147,6 +147,9 @@ const aula01: AulaEI = {
         "Você é FERA! Já separa palavras em pedaços, escuta os sons e reconta histórias. Está pertinho do 1º ano!",
     },
   ],
+};
+
+
 
 /**
  * Pré II — Unidade 1 · Aula 2
