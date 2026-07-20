@@ -15,17 +15,31 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
   out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
 
+  // Evita leituras artificiais como "SOLLL" ou "SSSS-ol".
+  // O visual pode destacar o som repetido, mas a voz do professor precisa soar natural.
+  out = out.replace(/\bSO\s*[-·]?\s*L+\b/gi, "sol");
+  out = out.replace(/\b([BCDFGHJKLMNPQRSTVWXYZ])\1{1,}\s*[-·]?\s*([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç]+)\b/g, (_, ch, rest) => {
+    return `${String(ch).toLowerCase()}${String(rest).toLowerCase()}`;
+  });
+
   // Runs de letras romanas maiúsculas (II, III, VI, IX, XX...) são lidas como
   // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
-  // Convertemos em letras minúsculas elongadas com acento para forçar leitura fonética.
+  // Convertemos vogais em som curto e consoantes em "som de X" para não virar
+  // ruído tipo "SOLLL" / "eme eme eme".
   const somVogalElongada: Record<string, string> = {
     A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
     Á: "áá", É: "éé", Í: "ii", Ó: "óó", Ú: "uu",
     Ã: "ãã", Õ: "õõ", Ê: "éé", Ô: "óó", Î: "ii", Û: "uu",
   };
+  const consoanteSegura: Record<string, string> = {
+    B: "som de B", C: "som de C", D: "som de D", F: "som de F", G: "som de G",
+    H: "som de H", J: "som de J", K: "som de C", L: "som de L", M: "som de M",
+    N: "som de N", P: "som de P", Q: "som de Q", R: "som de R", S: "som de S",
+    T: "som de T", V: "som de V", W: "som de W", X: "som de X", Y: "som de Y", Z: "som de Z",
+  };
   out = out.replace(/\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])\1{1,}\b/g, (_, ch) => {
     const upper = ch.toUpperCase();
-    return somVogalElongada[upper] ?? ch.toLowerCase().repeat(4);
+    return somVogalElongada[upper] ?? consoanteSegura[upper] ?? ch.toLowerCase();
   });
 
   // O Web Speech costuma se perder quando uma palavra aparece silabada
@@ -43,7 +57,7 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     [/\bpa\s*[-·]?\s*to\b/gi, "pato"],
     [/\bsa\s*[-·]?\s*po\b/gi, "sapo"],
     [/\blu\s*[-·]?\s*a\b/gi, "lua"],
-    [/\bso\s*[-·]?\s*l\b/gi, "sol"],
+    [/\bso\s*[-·]?\s*l+\b/gi, "sol"],
   ];
 
   replacements.forEach(([pattern, replacement]) => {
