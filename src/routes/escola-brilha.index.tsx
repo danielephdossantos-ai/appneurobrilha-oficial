@@ -239,7 +239,7 @@ function EscolaBrilhaCatalogo() {
 
         {/* Curso especial de alfabetização — aparece como categoria própria */}
         <Link
-          to="/escola-brilha/ler-com-aurora/"
+          to="/escola-brilha/ler-com-aurora"
           className="mb-4 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
           style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
         >
@@ -378,7 +378,7 @@ function EscolaBrilhaCatalogo() {
 
                         {mostraLerComAurora && (
                           <Link
-                            to="/escola-brilha/ler-com-aurora/"
+                            to="/escola-brilha/ler-com-aurora"
                             className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                             style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
                           >
