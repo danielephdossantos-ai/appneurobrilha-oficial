@@ -651,6 +651,8 @@ function MomentoRender({
       return <DiplomaFaseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
     case "preverHistoria":
       return <PreverHistoriaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "resumirFrase":
+      return <ResumirFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
