@@ -561,8 +561,49 @@ function MomentoRender({
 
     case "pareamentoLetraSom":
       return <PareamentoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    // ============ FASE 3 ============
+    case "familiaSilabica":
+      return <FamiliaSilabicaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "juntarSilabas":
+      return <JuntarSilabasBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "leituraSilabica":
+      return <LeituraSilabicaBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
+
+// ============ Utilidades da Fase 3 ============
+
+/** Fala uma sílaba CV natural, com pausa. */
+function falarSilaba(s: string) {
+  // Já vem em maiúsculas; falamos em minúsculas para o TTS pronunciar como sílaba.
+  speak(s.toLowerCase());
+}
+
+/** Fala sílabas em sequência com pausa, depois a palavra inteira. */
+function falarBlending(silabas: string[], palavra: string, cb?: () => void) {
+  stopSpeaking();
+  const seq = silabas.map((s) => s.toLowerCase());
+  let i = 0;
+  const step = () => {
+    if (i < seq.length) {
+      speakChunked(seq[i], { rate: 0.85, pitch: 1.15 });
+      i++;
+      setTimeout(step, 750);
+    } else {
+      setTimeout(() => {
+        speakChunked(palavra.toLowerCase(), { rate: 0.95, pitch: 1.15 });
+        if (cb) setTimeout(cb, 600);
+      }, 300);
+    }
+  };
+  step();
+}
+
+const CORES_SILABA = ["#7c3aed", "#db2777", "#0891b2", "#ea580c"];
+
 
 // ============ Componentes auxiliares da Fase 2 ============
 
@@ -1016,5 +1057,228 @@ export function PlayerPortuguesEI({
 
       </div>
     </div>
+  );
+}
+
+// ============ Componentes da Fase 3 ============
+
+function FamiliaSilabicaBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "familiaSilabica" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [tocadas, setTocadas] = useState<Set<number>>(new Set());
+  const todas = tocadas.size >= m.silabas.length;
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto={`Família do ${m.consoante}`} cor={cor} />
+      <div className="mx-auto max-w-md">
+        <p className="text-center text-sm text-slate-600 mb-3">
+          Toca em cada sílaba para ouvir.
+        </p>
+        <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+        <div className="mt-4 grid grid-cols-5 gap-2">
+          {m.silabas.map((s, i) => {
+            const feita = tocadas.has(i);
+            return (
+              <button
+                key={s + i}
+                onClick={() => {
+                  falarSilaba(s);
+                  setTocadas((prev) => new Set(prev).add(i));
+                }}
+                className="aspect-square rounded-2xl grid place-items-center font-black text-2xl shadow active:scale-95 transition"
+                style={{
+                  background: feita ? CORES_SILABA[i % CORES_SILABA.length] : "#fff",
+                  color: feita ? "#fff" : CORES_SILABA[i % CORES_SILABA.length],
+                  border: `3px solid ${CORES_SILABA[i % CORES_SILABA.length]}`,
+                }}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+        {todas && (
+          <button
+            onClick={() => {
+              speak(m.elogio);
+              onOk();
+            }}
+            className="mt-5 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-black shadow-lg"
+          >
+            ✓ Escutei todas
+          </button>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
+function JuntarSilabasBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "juntarSilabas" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [tocadas, setTocadas] = useState<number[]>([]);
+  const [revelou, setRevelou] = useState(false);
+  const proxima = tocadas.length;
+  const completa = tocadas.length === m.silabas.length;
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Junta as sílabas" cor={cor} />
+      <div className="mx-auto max-w-md">
+        <p className="text-center text-sm text-slate-600 mb-2">
+          Toca nas sílabas em ordem.
+        </p>
+        <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+
+        <div className="mt-5 flex justify-center gap-3 flex-wrap">
+          {m.silabas.map((s, i) => {
+            const feita = tocadas.includes(i);
+            const podeTocar = i === proxima;
+            return (
+              <button
+                key={i}
+                disabled={!podeTocar && !feita}
+                onClick={() => {
+                  if (i !== proxima) return;
+                  falarSilaba(s);
+                  setTocadas((t) => [...t, i]);
+                }}
+                className="rounded-2xl grid place-items-center font-black text-3xl shadow active:scale-95 transition"
+                style={{
+                  width: 90,
+                  height: 90,
+                  background: feita ? CORES_SILABA[i % CORES_SILABA.length] : podeTocar ? "#fff" : "#e5e7eb",
+                  color: feita ? "#fff" : CORES_SILABA[i % CORES_SILABA.length],
+                  border: `3px solid ${CORES_SILABA[i % CORES_SILABA.length]}`,
+                  opacity: !podeTocar && !feita ? 0.5 : 1,
+                }}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+
+        {completa && !revelou && (
+          <button
+            onClick={() => {
+              setRevelou(true);
+              falarBlending(m.silabas, m.palavra);
+            }}
+            className="mt-5 mx-auto block rounded-full bg-purple-600 text-white px-8 py-3 font-black shadow-lg"
+          >
+            🔊 Junta tudo
+          </button>
+        )}
+
+        {revelou && (
+          <div className="mt-5 text-center">
+            <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
+            <p
+              className="mt-3 font-black tracking-widest"
+              style={{ color: cor, fontSize: 40 }}
+            >
+              {m.silabas.map((s, i) => (
+                <span key={i} style={{ color: CORES_SILABA[i % CORES_SILABA.length] }}>
+                  {s}
+                </span>
+              ))}
+            </p>
+            <button
+              onClick={() => {
+                speak(m.elogio);
+                onOk();
+              }}
+              className="mt-4 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-black shadow-lg"
+            >
+              ✓ Consegui!
+            </button>
+          </div>
+        )}
+      </div>
+    </CardScreen>
+  );
+}
+
+function LeituraSilabicaBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "leituraSilabica" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [ouviuDevagar, setOuviuDevagar] = useState(false);
+  const [ouviuJunto, setOuviuJunto] = useState(false);
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Eu leio!" cor={cor} />
+      <div className="mx-auto max-w-md text-center">
+        <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
+        <p
+          className="mt-4 font-black tracking-widest"
+          style={{ fontSize: 44 }}
+        >
+          {m.silabas.map((s, i) => (
+            <span key={i} style={{ color: CORES_SILABA[i % CORES_SILABA.length] }}>
+              {s}
+            </span>
+          ))}
+        </p>
+        <p className="text-xs text-slate-500 mt-1">{m.instrucaoAudio}</p>
+
+        <div className="mt-4 grid gap-2">
+          <button
+            onClick={() => {
+              setOuviuDevagar(true);
+              falarBlending(m.silabas, m.palavra);
+            }}
+            className="rounded-full bg-purple-600 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐢 Ouvir devagar
+          </button>
+          <button
+            onClick={() => {
+              setOuviuJunto(true);
+              speak(m.palavra.toLowerCase());
+            }}
+            className="rounded-full bg-pink-500 text-white px-6 py-3 font-bold shadow active:scale-95"
+          >
+            🐇 Ouvir junto
+          </button>
+        </div>
+
+        {ouviuDevagar && ouviuJunto && (
+          <button
+            onClick={() => {
+              speak(m.elogio);
+              onOk();
+            }}
+            className="mt-5 rounded-full bg-green-600 text-white px-10 py-3 font-black shadow-lg"
+          >
+            ✓ Eu li!
+          </button>
+        )}
+      </div>
+    </CardScreen>
   );
 }

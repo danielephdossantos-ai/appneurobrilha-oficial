@@ -150,6 +150,36 @@ export type MomentoEI =
       instrucaoAudio: string;
       pares: Array<{ letra: string; nome: string; imagemUrl: string }>;
       elogio: string;
+    }
+  // ============ FASE 3 — Decodificação Silábica (CV) ============
+  | {
+      tipo: "familiaSilabica";
+      // Família consonantal: LA-LE-LI-LO-LU. Criança toca cada sílaba
+      // e o professor fala. (Ehri, ensino explícito de sílabas CV.)
+      consoante: string; // "L"
+      silabas: string[]; // ["LA","LE","LI","LO","LU"]
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "juntarSilabas";
+      // Blending: mostra 2-3 cards com sílabas; criança toca em ordem
+      // e o professor fala cada sílaba pausada + junta a palavra + revela imagem.
+      imagemUrl: string;
+      silabas: string[]; // ["LA","TA"]
+      palavra: string; // "LATA"
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "leituraSilabica";
+      // Palavra escrita com sílabas coloridas. "Ouvir devagar" fala silabado;
+      // "Ouvir junto" fala inteira; criança marca "Eu li!".
+      imagemUrl: string;
+      palavra: string; // "LATA"
+      silabas: string[]; // ["LA","TA"]
+      instrucaoAudio: string;
+      elogio: string;
     };
 
 export interface AulaEI {
