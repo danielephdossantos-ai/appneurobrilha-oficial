@@ -14,6 +14,26 @@ function speak(text: string) {
   speakChunked(sanitizeForSpeech(text), { rate: 0.95, pitch: 1.15 });
 }
 
+/**
+ * Fala segura do som da letra. Evita bugs de TTS que leem "III"/"AAA"
+ * como algarismo romano (III → "três") ou nome de letra ("A" → "á").
+ * Vogais: som elongado em minúsculo com acento. Consoantes: nome da letra em PT.
+ */
+function somFalado(letra: string): string {
+  const L = letra.toUpperCase().trim();
+  const vogais: Record<string, string> = {
+    A: "ááááá", E: "êêêêê", I: "iiiiii", O: "óóóóó", U: "uuuuuu",
+  };
+  if (vogais[L]) return vogais[L];
+  const consoantes: Record<string, string> = {
+    B: "bê", C: "cê", D: "dê", F: "éfe", G: "guê", H: "agá",
+    J: "jóta", K: "cá", L: "éle", M: "eme", N: "ene", P: "pê",
+    Q: "quê", R: "erre", S: "esse", T: "tê", V: "vê", W: "dáblio",
+    X: "xis", Y: "ípsilon", Z: "zê",
+  };
+  return consoantes[L] ?? L.toLowerCase();
+}
+
 function prepararParlendaParaAudio(versos: string[]) {
   return versos
     .map((v) => v.trim())
