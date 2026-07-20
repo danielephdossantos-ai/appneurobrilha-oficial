@@ -28,10 +28,14 @@ import {
   cursoLerComAuroraFase7,
   getAulaLerComAuroraFase7,
 } from "@/escola-brilha/curso-ler-com-aurora/aulas-fase7";
+import {
+  cursoLerComAuroraFase8,
+  getAulaLerComAuroraFase8,
+} from "@/escola-brilha/curso-ler-com-aurora/aulas-fase8";
 
 /**
  * Player de uma missão do curso "Ler com Aurora".
- * Aceita slugs das Fases 1-7.
+ * Aceita slugs das Fases 1-8.
  */
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
   head: () => ({ meta: [{ title: "Ler com Aurora — Missão" }] }),
@@ -42,26 +46,30 @@ function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
 
-  const aulaF7 = getAulaLerComAuroraFase7(aulaSlug);
-  const aulaF6 = aulaF7 ? undefined : getAulaLerComAuroraFase6(aulaSlug);
-  const aulaF5 = aulaF7 || aulaF6 ? undefined : getAulaLerComAuroraFase5(aulaSlug);
-  const aulaF4 = aulaF7 || aulaF6 || aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
-  const aulaF3 = aulaF7 || aulaF6 || aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
-  const aulaF2 = aulaF7 || aulaF6 || aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
-  const aula = aulaF7 ?? aulaF6 ?? aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
-  const curso = aulaF7
-    ? cursoLerComAuroraFase7
-    : aulaF6
-      ? cursoLerComAuroraFase6
-      : aulaF5
-        ? cursoLerComAuroraFase5
-        : aulaF4
-          ? cursoLerComAuroraFase4
-          : aulaF3
-            ? cursoLerComAuroraFase3
-            : aulaF2
-              ? cursoLerComAuroraFase2
-              : cursoLerComAurora;
+  const aulaF8 = getAulaLerComAuroraFase8(aulaSlug);
+  const aulaF7 = aulaF8 ? undefined : getAulaLerComAuroraFase7(aulaSlug);
+  const aulaF6 = aulaF8 || aulaF7 ? undefined : getAulaLerComAuroraFase6(aulaSlug);
+  const aulaF5 = aulaF8 || aulaF7 || aulaF6 ? undefined : getAulaLerComAuroraFase5(aulaSlug);
+  const aulaF4 = aulaF8 || aulaF7 || aulaF6 || aulaF5 ? undefined : getAulaLerComAuroraFase4(aulaSlug);
+  const aulaF3 = aulaF8 || aulaF7 || aulaF6 || aulaF5 || aulaF4 ? undefined : getAulaLerComAuroraFase3(aulaSlug);
+  const aulaF2 = aulaF8 || aulaF7 || aulaF6 || aulaF5 || aulaF4 || aulaF3 ? undefined : getAulaLerComAuroraFase2(aulaSlug);
+  const aula = aulaF8 ?? aulaF7 ?? aulaF6 ?? aulaF5 ?? aulaF4 ?? aulaF3 ?? aulaF2 ?? getAulaLerComAurora(aulaSlug);
+  const curso = aulaF8
+    ? cursoLerComAuroraFase8
+    : aulaF7
+      ? cursoLerComAuroraFase7
+      : aulaF6
+        ? cursoLerComAuroraFase6
+        : aulaF5
+          ? cursoLerComAuroraFase5
+          : aulaF4
+            ? cursoLerComAuroraFase4
+            : aulaF3
+              ? cursoLerComAuroraFase3
+              : aulaF2
+                ? cursoLerComAuroraFase2
+                : cursoLerComAurora;
+
 
   if (!aula) {
     return (
