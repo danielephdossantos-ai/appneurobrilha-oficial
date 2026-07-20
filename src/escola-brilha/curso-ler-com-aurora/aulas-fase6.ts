@@ -41,9 +41,7 @@ const a1: AulaEI = {
   baseCientifica: BASE,
   momentos: [
     { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje começa a Fase da Fluência! Você vai ler a MESMA frase três vezes. Cada vez fica mais fácil." },
-    { tipo: "leituraFrase", imagemUrl: gato, frase: "O GATO CORRE.", instrucaoAudio: "1ª leitura — ouve devagar comigo.", elogio: "Primeira leitura pronta!" },
-    { tipo: "leituraFrase", imagemUrl: gato, frase: "O GATO CORRE.", instrucaoAudio: "2ª leitura — agora tenta ler JUNTO comigo.", elogio: "Você leu junto!" },
-    { tipo: "leituraFrase", imagemUrl: gato, frase: "O GATO CORRE.", instrucaoAudio: "3ª leitura — agora só você. Vai!", elogio: "Sozinho! Isso é fluência!" },
+    { tipo: "leituraFrase", imagemUrl: gato, frase: "O GATO CORRE.", instrucaoAudio: "Ouça o professor e depois leia 3 vezes no microfone.", elogio: "Três leituras! Isso é fluência!" },
     { tipo: "celebracao", medalha: "Leitor de 3 Rodadas", mascoteUrl: mascote, falaFinal: "Amanhã: uma frase nova, três leituras de novo!" },
   ],
 };
@@ -56,10 +54,8 @@ const a2: AulaEI = {
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
-    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "De novo: mesma frase, três leituras. Cada vez mais solta!" },
-    { tipo: "leituraFrase", imagemUrl: pato, frase: "O PATO NADA.", instrucaoAudio: "1ª leitura — devagar comigo.", elogio: "Primeira!" },
-    { tipo: "leituraFrase", imagemUrl: pato, frase: "O PATO NADA.", instrucaoAudio: "2ª leitura — junto comigo.", elogio: "Segunda!" },
-    { tipo: "leituraFrase", imagemUrl: pato, frase: "O PATO NADA.", instrucaoAudio: "3ª leitura — só você.", elogio: "Terceira! Ficou mais fácil, não é?" },
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "De novo: mesma frase, três leituras no microfone. Cada vez mais solta!" },
+    { tipo: "leituraFrase", imagemUrl: pato, frase: "O PATO NADA.", instrucaoAudio: "Ouça o professor e leia 3 vezes no microfone.", elogio: "Três leituras! Ficou mais fácil, não é?" },
     { tipo: "celebracao", medalha: "Leitor Repetido", mascoteUrl: mascote, falaFinal: "Amanhã: duas frases, três leituras cada!" },
   ],
 };
@@ -72,13 +68,9 @@ const a3: AulaEI = {
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
-    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje são DUAS frases. Cada uma três leituras. Bora!" },
-    { tipo: "leituraFrase", imagemUrl: sapo, frase: "O SAPO PULA.", instrucaoAudio: "Frase 1 — 1ª leitura devagar.", elogio: "Boa!" },
-    { tipo: "leituraFrase", imagemUrl: sapo, frase: "O SAPO PULA.", instrucaoAudio: "Frase 1 — 2ª leitura junto.", elogio: "Junto!" },
-    { tipo: "leituraFrase", imagemUrl: sapo, frase: "O SAPO PULA.", instrucaoAudio: "Frase 1 — 3ª leitura sozinho.", elogio: "Sozinho!" },
-    { tipo: "leituraFrase", imagemUrl: sol, frase: "O SOL BRILHA.", instrucaoAudio: "Frase 2 — 1ª leitura devagar.", elogio: "Nova frase!" },
-    { tipo: "leituraFrase", imagemUrl: sol, frase: "O SOL BRILHA.", instrucaoAudio: "Frase 2 — 2ª leitura junto.", elogio: "Junto!" },
-    { tipo: "leituraFrase", imagemUrl: sol, frase: "O SOL BRILHA.", instrucaoAudio: "Frase 2 — 3ª leitura sozinho.", elogio: "Duas frases dominadas!" },
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje são DUAS frases. Cada uma três leituras no microfone. Bora!" },
+    { tipo: "leituraFrase", imagemUrl: sapo, frase: "O SAPO PULA.", instrucaoAudio: "Frase 1 — leia 3 vezes no microfone.", elogio: "Sozinho, três vezes!" },
+    { tipo: "leituraFrase", imagemUrl: sol, frase: "O SOL BRILHA.", instrucaoAudio: "Frase 2 — leia 3 vezes no microfone.", elogio: "Duas frases dominadas!" },
     { tipo: "celebracao", medalha: "Leitor de Duas Frases", mascoteUrl: mascote, falaFinal: "Amanhã: frases mais compridas!" },
   ],
 };
@@ -91,11 +83,9 @@ const a4: AulaEI = {
   duracaoMin: 15,
   baseCientifica: BASE,
   momentos: [
-    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje a frase é maior. Não corre — leia com calma nas três vezes." },
-    { tipo: "leituraFrase", imagemUrl: menina, frase: "A MENINA PEGA A FLOR.", instrucaoAudio: "1ª leitura — bem devagar comigo.", elogio: "Palavra por palavra!" },
-    { tipo: "leituraFrase", imagemUrl: menina, frase: "A MENINA PEGA A FLOR.", instrucaoAudio: "2ª leitura — junto comigo, sem parar.", elogio: "Fluiu bem!" },
-    { tipo: "leituraFrase", imagemUrl: menina, frase: "A MENINA PEGA A FLOR.", instrucaoAudio: "3ª leitura — só você, no seu ritmo.", elogio: "Frase longa, três vezes!" },
-    { tipo: "leituraFrase", imagemUrl: flor, frase: "A FLOR É AMARELA.", instrucaoAudio: "Frase-bônus — só uma leitura. Manda ver!", elogio: "Bônus concluído!" },
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje a frase é maior. Leia com calma três vezes no microfone." },
+    { tipo: "leituraFrase", imagemUrl: menina, frase: "A MENINA PEGA A FLOR.", instrucaoAudio: "Leia 3 vezes no microfone, no seu ritmo.", elogio: "Frase longa, três vezes!" },
+    { tipo: "leituraFrase", imagemUrl: flor, frase: "A FLOR É AMARELA.", instrucaoAudio: "Frase-bônus — leia 3 vezes no microfone.", elogio: "Bônus concluído!" },
     { tipo: "celebracao", medalha: "Leitor de Frases Longas", mascoteUrl: mascote, falaFinal: "Amanhã: mini-texto com duas frases!" },
   ],
 };
