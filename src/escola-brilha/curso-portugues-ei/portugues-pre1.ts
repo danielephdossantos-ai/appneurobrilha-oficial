@@ -505,11 +505,11 @@ const aula07: AulaEI = {
       { nome: "receita", imagemUrl: flor, correta: false },
       { nome: "cartinha", imagemUrl: casa, correta: false },
     ], feedbackAcerto: "Isso! Livro de HISTÓRIA!", feedbackErro: "Pra dormir a vovó leu um livro de HISTÓRIA." },
-    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com LLL. Qual outra começa igual?", referencia: { nome: "livro", imagemUrl: coelho }, opcoes: [
-      { nome: "lua (bicho leão)", imagemUrl: gato, correta: true },
+    { tipo: "somInicial", instrucaoAudio: "LIVRO começa com L. Qual outra começa igual?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
+      { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "sapo", imagemUrl: sapo, correta: false },
       { nome: "flor", imagemUrl: flor, correta: false },
-    ], feedbackAcerto: "Boa! LLL-ivro, LLL-eão!", feedbackErro: "O sopro é LLLLL." },
+    ], feedbackAcerto: "Boa! Livro e lua começam com L!", feedbackErro: "O som do começo é L." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LI-VRO", silabas: 2, imagemUrl: coelho, elogio: "Duas palmas! Li-vro!" },
     { tipo: "fazDeConta", imagemUrl: casa, convite: "Faz de conta que está lendo uma cartinha da vovó! Aponta com o dedinho e finge que lê!" },
     { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Ache em casa 3 coisas escritas DIFERENTES: um livro, uma embalagem e um cartaz!", dicaAdulto: "Cultura escrita se aprende percebendo textos no ambiente (rótulos, placas, bilhetes)." },
