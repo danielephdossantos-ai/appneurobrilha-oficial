@@ -302,6 +302,7 @@ export type MomentoEI =
       feedbackAcerto: string;
       feedbackErro: string;
       elogio: string;
+    }
   // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
   | {
       tipo: "diplomaFase";
