@@ -192,16 +192,16 @@ const aula02: AulaEI = {
     },
     {
       tipo: "somInicial",
-      instrucaoAudio: "Qual dessas palavras RIMA com LUA? Escuta o final: LU-A.",
-      referencia: { nome: "lua", imagemUrl: lua },
+      instrucaoAudio: "Qual dessas palavras RIMA com GATO? Escuta o final: GA-TO.",
+      referencia: { nome: "gato", imagemUrl: gato },
       opcoes: [
+        { nome: "rato", imagemUrl: rato, correta: true },
+        { nome: "pipa", imagemUrl: pipa, correta: false },
         { nome: "nuvem", imagemUrl: nuvem, correta: false },
-        { nome: "estrela", imagemUrl: estrela, correta: false },
-        { nome: "rua (chão da rua)", imagemUrl: bola, correta: true },
       ],
-      feedbackAcerto: "Isso! Lua e rua terminam com UA — elas RIMAM!",
+      feedbackAcerto: "Isso! Gato e rato terminam com ATO — elas RIMAM!",
       feedbackErro:
-        "Escuta o final: LU-A. Qual outra termina com UA? RUA!",
+        "Escuta o final: GA-TO. Qual outra termina com ATO? RA-TO!",
     },
     {
       tipo: "ritmoCorpo",
