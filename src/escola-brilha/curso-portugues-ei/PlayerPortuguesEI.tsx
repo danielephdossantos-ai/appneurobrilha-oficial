@@ -1,6 +1,58 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { speakChunked, stopSpeaking, sanitizeForSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking, sanitizeForSpeech, pickPtBrVoice } from "@/lib/native-tts";
+
+/** Fala UMA palavra com sincronia real: destaca no onstart e resolve no onend.
+ *  Usa Utterance direto para evitar dedupe/queue do speakChunked em loops de karaokê. */
+function speakWordSync(
+  word: string,
+  rate: number,
+  onStart: () => void,
+): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      onStart();
+      resolve();
+      return;
+    }
+    const synth = window.speechSynthesis;
+    const texto = sanitizeForSpeech(word).trim() || word;
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "pt-BR";
+    u.rate = rate;
+    u.pitch = 1.15;
+    const voice = pickPtBrVoice();
+    if (voice) u.voice = voice;
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      resolve();
+    };
+    // Alguns navegadores atrasam onstart; destacamos imediatamente ao enfileirar.
+    onStart();
+    u.onstart = () => {
+      // Reforça o destaque se o React já processou.
+      onStart();
+    };
+    u.onend = finish;
+    u.onerror = finish;
+    // Watchdog proporcional ao tamanho da palavra e ao rate.
+    const watchdogMs = Math.max(900, Math.ceil((texto.length * 260) / Math.max(rate, 0.5)));
+    const wd = window.setTimeout(finish, watchdogMs);
+    // limpa o timeout ao terminar
+    const clearWd = () => window.clearTimeout(wd);
+    u.addEventListener?.("end", clearWd);
+    u.addEventListener?.("error", clearWd);
+    try {
+      synth.resume();
+      synth.speak(u);
+      synth.resume();
+    } catch {
+      finish();
+    }
+  });
+}
 import type { AulaEI, MomentoEI, CursoEI } from "./types";
 
 /**
@@ -1429,12 +1481,15 @@ function LeituraFraseBloco({
     stopSpeaking();
     setAtiva(-1);
     const runToken = ++karaokeRunRef.current;
-    const gap = rate < 0.85 ? 160 : 110;
+    // pausa entre palavras: maior no modo lento para dar respiro
+    const gap = rate < 0.85 ? 320 : 160;
+    // Pequeno delay para o cancel do TTS assentar antes de enfileirar
+    await new Promise((r) => setTimeout(r, 80));
     for (let i = 0; i < palavras.length; i++) {
       if (runToken !== karaokeRunRef.current) return;
-      setAtiva(i);
-      // enfileira (não cancela a fala anterior) e AGUARDA terminar antes de ir pra próxima
-      await speakChunked(palavras[i].toLowerCase(), { rate, queue: true });
+      await speakWordSync(palavras[i].toLowerCase(), rate, () => {
+        if (runToken === karaokeRunRef.current) setAtiva(i);
+      });
       if (runToken !== karaokeRunRef.current) return;
       await new Promise((r) => {
         const t = window.setTimeout(r, gap);
@@ -1631,13 +1686,15 @@ function LeituraTextoBloco({
     setOuviu(true);
     setAtiva({ f: -1, w: -1 });
     const runToken = ++karaokeRunRef.current;
-    const gap = rate < 0.85 ? 160 : 110;
+    const gap = rate < 0.85 ? 320 : 160;
+    await new Promise((r) => setTimeout(r, 80));
     for (let fi = 0; fi < palavrasPorFrase.length; fi++) {
       const palavras = palavrasPorFrase[fi];
       for (let wi = 0; wi < palavras.length; wi++) {
         if (runToken !== karaokeRunRef.current) return;
-        setAtiva({ f: fi, w: wi });
-        await speakChunked(palavras[wi].toLowerCase(), { rate, queue: true });
+        await speakWordSync(palavras[wi].toLowerCase(), rate, () => {
+          if (runToken === karaokeRunRef.current) setAtiva({ f: fi, w: wi });
+        });
         if (runToken !== karaokeRunRef.current) return;
         await new Promise((r) => {
           const t = window.setTimeout(r, gap);
@@ -1645,7 +1702,7 @@ function LeituraTextoBloco({
         });
       }
       await new Promise((r) => {
-        const t = window.setTimeout(r, 300);
+        const t = window.setTimeout(r, 400);
         timersRef.current.push(t);
       });
     }
