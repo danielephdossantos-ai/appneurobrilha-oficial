@@ -40,7 +40,7 @@ function FaseBloco({
   gradiente,
   badge,
 }: {
-  fase: 1 | 2 | 3;
+  fase: 1 | 2 | 3 | 4;
   curso: CursoEI;
   concluidas: Set<string>;
   gradiente: string;
@@ -140,7 +140,8 @@ function TrilhaLerComAurora() {
   const totalGeral =
     cursoLerComAurora.unidades.flatMap((u) => u.aulas).length +
     cursoLerComAuroraFase2.unidades.flatMap((u) => u.aulas).length +
-    cursoLerComAuroraFase3.unidades.flatMap((u) => u.aulas).length;
+    cursoLerComAuroraFase3.unidades.flatMap((u) => u.aulas).length +
+    cursoLerComAuroraFase4.unidades.flatMap((u) => u.aulas).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
@@ -184,6 +185,16 @@ function TrilhaLerComAurora() {
           gradiente="linear-gradient(135deg,#0ea5e9,#0c4a6e)"
           badge="FASE 3 · DECODIFICAÇÃO SILÁBICA (CV)"
         />
+
+        <FaseBloco
+          fase={4}
+          curso={cursoLerComAuroraFase4}
+          concluidas={concluidas}
+          gradiente="linear-gradient(135deg,#f43f5e,#881337)"
+          badge="FASE 4 · FLUÊNCIA E COMPREENSÃO"
+        />
+
+
 
 
         <div className="mt-10 rounded-2xl bg-black/30 p-4 text-xs text-white/80">
