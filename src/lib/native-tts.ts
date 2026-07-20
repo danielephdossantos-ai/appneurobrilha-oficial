@@ -19,9 +19,9 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
   // Convertemos em letras minúsculas elongadas com acento para forçar leitura fonética.
   const somVogalElongada: Record<string, string> = {
-    A: "ááááá", E: "êêêê", I: "iiiii", O: "óóóó", U: "uuuuu",
-    Á: "ááááá", É: "êêêê", Í: "iiiii", Ó: "óóóó", Ú: "uuuuu",
-    Ã: "ãããã", Õ: "õõõõ", Ê: "êêêê", Ô: "óóóó", Î: "iiiii", Û: "uuuuu",
+    A: "áá", E: "éé", I: "ii", O: "óó", U: "uu",
+    Á: "áá", É: "éé", Í: "ii", Ó: "óó", Ú: "uu",
+    Ã: "ãã", Õ: "õõ", Ê: "éé", Ô: "óó", Î: "ii", Û: "uu",
   };
   out = out.replace(/\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])\1{1,}\b/g, (_, ch) => {
     const upper = ch.toUpperCase();
