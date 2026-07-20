@@ -235,6 +235,18 @@ export type MomentoEI =
       distratores: string[]; // 2 palavras que NÃO são sinônimos
       instrucaoAudio: string;
       elogio: string;
+    }
+  | {
+      tipo: "antonimoContraste";
+      // Antônimos por contraste visual (Beck & McKeown 2013 · Nagy 1988).
+      // Mostra imagem-alvo + palavra. Criança escolhe entre 3 IMAGENS
+      // qual mostra o CONTRÁRIO.
+      imagemUrl: string;
+      palavra: string;   // "GRANDE"
+      antonimo: string;  // "PEQUENO"
+      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
+      instrucaoAudio: string;
+      elogio: string;
     };
 
 

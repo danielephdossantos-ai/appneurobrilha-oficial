@@ -5,6 +5,7 @@ import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as quadroTriste } from "@/assets/neuro-treino/objetos/quadro-triste.png.asset.json";
+import { url as quadroAlegre } from "@/assets/neuro-treino/objetos/quadro-alegre.png.asset.json";
 import { url as leao } from "@/assets/neuro-treino/objetos/leao.png.asset.json";
 import { url as joaninha } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
 import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
@@ -12,6 +13,20 @@ import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
 import { url as sorvete } from "@/assets/neuro-treino/objetos/sorvete.png.asset.json";
 import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as predio } from "@/assets/neuro-treino/objetos/predio.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as fogo } from "@/assets/neuro-treino/objetos/fogo.png.asset.json";
+import { url as casaAntiga } from "@/assets/neuro-treino/objetos/casa-antiga.png.asset.json";
+import { url as casaModerna } from "@/assets/neuro-treino/objetos/casa-moderna.png.asset.json";
+import { url as bicicletaAntiga } from "@/assets/neuro-treino/objetos/bicicleta-antiga.png.asset.json";
+import { url as bicicletaModerna } from "@/assets/neuro-treino/objetos/bicicleta-moderna.png.asset.json";
+import { url as cidade } from "@/assets/neuro-treino/objetos/cidade.png.asset.json";
+import { url as campo } from "@/assets/neuro-treino/objetos/campo.png.asset.json";
+import { url as criancasGrupo } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
+import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as peixe } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+
 
 /**
  * Ler com Aurora — Fase 7: Vocabulário Ativo
@@ -264,7 +279,291 @@ const a5: AulaEI = {
 };
 
 /* ============================================================
- * Curso — Fase 7 (Semana 1 no ar; Semanas 2–4 pendentes)
+ * SEMANA 2 — Antônimos por contraste visual
+ * ============================================================ */
+
+const BASE_ANT =
+  "Antônimos por contraste visual (Beck & McKeown 2013; Nagy 1988). A criança vê a palavra-alvo com uma imagem prototípica e escolhe entre 3 imagens qual mostra o CONTRÁRIO — o contraste facilita a fixação do par lexical.";
+
+const a6: AulaEI = {
+  slug: "f7-dia-06-antonimos-grande-alto",
+  titulo: "Dia 6 · GRANDE ↔ PEQUENO · ALTO ↔ BAIXO",
+  icone: "🦁",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_ANT,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana 2! Agora vamos brincar de CONTRÁRIOS. Eu mostro uma imagem, você acha a imagem do contrário.",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: leao,
+      palavra: "GRANDE",
+      antonimo: "PEQUENO",
+      opcoes: [
+        { nome: "JOANINHA", imagemUrl: joaninha, correta: true },
+        { nome: "PRÉDIO", imagemUrl: predio, correta: false },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+      ],
+      instrucaoAudio: "O leão é GRANDE. Qual imagem mostra o contrário — algo PEQUENO?",
+      elogio: "A joaninha é pequenininha!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: predio,
+      palavra: "ALTO",
+      antonimo: "BAIXO",
+      opcoes: [
+        { nome: "CASA", imagemUrl: casa, correta: true },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "LEÃO", imagemUrl: leao, correta: false },
+      ],
+      instrucaoAudio: "O prédio é ALTO. Qual imagem mostra algo BAIXO?",
+      elogio: "A casa é mais baixa que o prédio!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contrários · Dia 6",
+      mascoteUrl: mascote,
+      falaFinal: "GRANDE↔PEQUENO e ALTO↔BAIXO na coleção. Amanhã: DIA↔NOITE!",
+    },
+  ],
+};
+
+const a7: AulaEI = {
+  slug: "f7-dia-07-antonimos-dia-quente",
+  titulo: "Dia 7 · DIA ↔ NOITE · QUENTE ↔ FRIO",
+  icone: "☀️",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_ANT,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Hoje: o céu e a temperatura. Duas duplas de contrários!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: sol,
+      palavra: "DIA",
+      antonimo: "NOITE",
+      opcoes: [
+        { nome: "LUA", imagemUrl: lua, correta: true },
+        { nome: "FLOR", imagemUrl: flor, correta: false },
+        { nome: "CASA", imagemUrl: casa, correta: false },
+      ],
+      instrucaoAudio: "O sol aparece no DIA. Qual imagem mostra a NOITE?",
+      elogio: "A lua vem à noite!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: fogo,
+      palavra: "QUENTE",
+      antonimo: "FRIO",
+      opcoes: [
+        { nome: "SORVETE", imagemUrl: sorvete, correta: true },
+        { nome: "BOLO", imagemUrl: bolo, correta: false },
+        { nome: "SOL", imagemUrl: sol, correta: false },
+      ],
+      instrucaoAudio: "O fogo é QUENTE. Qual imagem mostra algo FRIO?",
+      elogio: "O sorvete é geladinho!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contrários · Dia 7",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: sentimentos e coisas novas e antigas!",
+    },
+  ],
+};
+
+const a8: AulaEI = {
+  slug: "f7-dia-08-antonimos-feliz-novo",
+  titulo: "Dia 8 · FELIZ ↔ TRISTE · NOVO ↔ ANTIGO",
+  icone: "😊",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_ANT,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Sentimentos e tempo. Vamos ver o contrário de cada um.",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: quadroAlegre,
+      palavra: "FELIZ",
+      antonimo: "TRISTE",
+      opcoes: [
+        { nome: "TRISTE", imagemUrl: quadroTriste, correta: true },
+        { nome: "MENINA", imagemUrl: menina, correta: false },
+        { nome: "GATO", imagemUrl: gato, correta: false },
+      ],
+      instrucaoAudio: "Esse rosto é FELIZ. Qual imagem mostra o contrário, TRISTE?",
+      elogio: "Feliz e triste — sentimentos opostos!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: bicicletaModerna,
+      palavra: "NOVO",
+      antonimo: "ANTIGO",
+      opcoes: [
+        { nome: "BICICLETA ANTIGA", imagemUrl: bicicletaAntiga, correta: true },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+        { nome: "CASA NOVA", imagemUrl: casaModerna, correta: false },
+      ],
+      instrucaoAudio: "A bicicleta moderna é NOVA. Qual imagem mostra algo ANTIGO?",
+      elogio: "A bicicleta antiga é de outra época!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contrários · Dia 8",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: lugares e quantidades!",
+    },
+  ],
+};
+
+const a9: AulaEI = {
+  slug: "f7-dia-09-antonimos-cidade-muitos",
+  titulo: "Dia 9 · CIDADE ↔ CAMPO · MUITOS ↔ POUCOS",
+  icone: "🏙️",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_ANT,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote: "Lugares e quantidades. Ache o contrário!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: cidade,
+      palavra: "CIDADE",
+      antonimo: "CAMPO",
+      opcoes: [
+        { nome: "CAMPO", imagemUrl: campo, correta: true },
+        { nome: "PRÉDIO", imagemUrl: predio, correta: false },
+        { nome: "CARRO", imagemUrl: carro, correta: false },
+      ],
+      instrucaoAudio: "Aqui é a CIDADE. Qual imagem mostra o contrário, o CAMPO?",
+      elogio: "No campo tem árvores, no céu aberto!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: criancasGrupo,
+      palavra: "MUITOS",
+      antonimo: "POUCOS",
+      opcoes: [
+        { nome: "UMA CRIANÇA", imagemUrl: menino, correta: true },
+        { nome: "GRUPO", imagemUrl: criancasGrupo, correta: false },
+        { nome: "PEIXE", imagemUrl: peixe, correta: false },
+      ],
+      instrucaoAudio: "No grupo tem MUITAS crianças. Qual imagem mostra POUCOS?",
+      elogio: "Uma criança sozinha é pouco!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contrários · Dia 9",
+      mascoteUrl: mascote,
+      falaFinal: "Amanhã: revisão da semana e medalha grande!",
+    },
+  ],
+};
+
+const a10: AulaEI = {
+  slug: "f7-dia-10-antonimos-revisao",
+  titulo: "Dia 10 · Revisão — Contrários",
+  icone: "🏅",
+  bncc: ["EF01LP24"],
+  duracaoMin: 15,
+  baseCientifica: BASE_ANT,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Revisão dos CONTRÁRIOS! Mistura de todos os pares. Pense bem antes de escolher.",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: joaninha,
+      palavra: "PEQUENO",
+      antonimo: "GRANDE",
+      opcoes: [
+        { nome: "LEÃO", imagemUrl: leao, correta: true },
+        { nome: "FLOR", imagemUrl: flor, correta: false },
+        { nome: "GATO", imagemUrl: gato, correta: false },
+      ],
+      instrucaoAudio: "A joaninha é PEQUENA. Qual imagem mostra algo GRANDE?",
+      elogio: "Lembrou! Grande é o contrário de pequeno.",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: lua,
+      palavra: "NOITE",
+      antonimo: "DIA",
+      opcoes: [
+        { nome: "SOL", imagemUrl: sol, correta: true },
+        { nome: "CASA", imagemUrl: casa, correta: false },
+        { nome: "FLOR", imagemUrl: flor, correta: false },
+      ],
+      instrucaoAudio: "A lua aparece à NOITE. Qual imagem mostra o DIA?",
+      elogio: "O sol é do dia!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: quadroTriste,
+      palavra: "TRISTE",
+      antonimo: "FELIZ",
+      opcoes: [
+        { nome: "FELIZ", imagemUrl: quadroAlegre, correta: true },
+        { nome: "MENINO", imagemUrl: menino, correta: false },
+        { nome: "COELHO", imagemUrl: coelho, correta: false },
+      ],
+      instrucaoAudio: "Esse rosto é TRISTE. Qual imagem mostra FELIZ?",
+      elogio: "Feliz é o contrário de triste!",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: campo,
+      palavra: "CAMPO",
+      antonimo: "CIDADE",
+      opcoes: [
+        { nome: "CIDADE", imagemUrl: cidade, correta: true },
+        { nome: "ÁRVORE", imagemUrl: arvore, correta: false },
+        { nome: "SORVETE", imagemUrl: sorvete, correta: false },
+      ],
+      instrucaoAudio: "Aqui é o CAMPO. Qual imagem mostra a CIDADE?",
+      elogio: "Na cidade tem prédios!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "🎒 Missão em Família — Caça aos Contrários",
+      convite:
+        "Escolha 3 pares de contrários da semana e mostre para alguém da família. Peça para essa pessoa dar outros exemplos de contrários em casa (ex.: aberto/fechado, quente/frio).",
+      dicaAdulto:
+        "Pares desta semana: grande/pequeno, alto/baixo, dia/noite, quente/frio, feliz/triste, novo/antigo, cidade/campo, muitos/poucos. Use o dia a dia para reforçar: 'Olha, o café está QUENTE — o sorvete é FRIO'. Contraste explícito acelera a memorização (Nagy 1988).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "🏅 Colecionador de Palavras · Semana 2",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Semana 2 fechada! Você já sabe palavras iguais E palavras contrárias. Semana 3: palavras que andam juntas — campos semânticos!",
+    },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 7 (Semanas 1-2 no ar; Semanas 3-4 pendentes)
  * ============================================================ */
 
 export const cursoLerComAuroraFase7: CursoEI = {
@@ -285,6 +584,13 @@ export const cursoLerComAuroraFase7: CursoEI = {
       subtitulo: "Colecionador de Palavras",
       aulas: [a1, a2, a3, a4, a5],
     },
+    {
+      slug: "f7-semana-02",
+      numero: 2,
+      titulo: "Semana 2 · Antônimos por contraste",
+      subtitulo: "Caça aos Contrários",
+      aulas: [a6, a7, a8, a9, a10],
+    },
   ],
 };
 
@@ -295,3 +601,4 @@ export function getAulaLerComAuroraFase7(slug: string): AulaEI | undefined {
   }
   return undefined;
 }
+
