@@ -636,6 +636,9 @@ function MomentoRender({
 
     case "leituraEco":
       return <LeituraEcoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "sinonimoImagem":
+      return <SinonimoImagemBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
@@ -2203,4 +2206,114 @@ function LeituraEcoBloco({
     </CardScreen>
   );
 }
+
+// ============ FASE 7 · Vocabulário Ativo — Sinônimos por imagem ============
+
+function SinonimoImagemBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "sinonimoImagem" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const opcoes = useMemo(() => {
+    const arr = [m.sinonimo, ...m.distratores];
+    // embaralho estável por palavra-alvo (não muda a cada render)
+    return arr
+      .map((t, i) => ({ t, k: (t.charCodeAt(0) + i * 7 + m.palavra.length) % 97 }))
+      .sort((a, b) => a.k - b.k)
+      .map((x) => x.t);
+  }, [m.sinonimo, m.distratores, m.palavra]);
+
+  const [escolhida, setEscolhida] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+
+  const tocar = () => {
+    stopSpeaking();
+    speakChunked(
+      `Outra forma de dizer ${m.palavra.toLowerCase()} é...`,
+      { rate: 0.9, pitch: 1.1 },
+    );
+  };
+
+  const escolher = (t: string) => {
+    setEscolhida(t);
+    if (t === m.sinonimo) {
+      setOk(true);
+      setMsg(`${m.palavra} e ${m.sinonimo} querem dizer a mesma coisa!`);
+      stopSpeaking();
+      speakChunked(
+        `Isso! ${m.palavra.toLowerCase()} e ${m.sinonimo.toLowerCase()} querem dizer a mesma coisa. ${m.elogio}`,
+        { rate: 0.95, pitch: 1.1 },
+      );
+      setTimeout(onOk, 1400);
+    } else {
+      setMsg("Quase! Ouve de novo e tente outra.");
+      stopSpeaking();
+      speakChunked(`${t.toLowerCase()} não é o mesmo que ${m.palavra.toLowerCase()}. Tente outra.`, {
+        rate: 0.95,
+        pitch: 1.05,
+      });
+      setTimeout(() => setEscolhida(null), 900);
+    }
+  };
+
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Palavras que dizem a mesma coisa" cor={cor} />
+      <ImageFrame src={m.imagemUrl} alt={m.palavra} size="xl" />
+      <div className="mt-4 text-center">
+        <div className="inline-block rounded-2xl bg-white border-4 border-purple-300 px-6 py-3 shadow">
+          <span className="text-3xl font-black tracking-wide text-purple-800">{m.palavra}</span>
+        </div>
+      </div>
+
+      <BigListenButton onClick={tocar} label="Ouvir professor" />
+
+      <div className="mt-4 grid grid-cols-1 gap-3 max-w-md mx-auto w-full">
+        {opcoes.map((t) => {
+          const isEscolhida = escolhida === t;
+          const acertou = ok && t === m.sinonimo;
+          const errou = isEscolhida && !ok;
+          return (
+            <button
+              key={t}
+              disabled={ok}
+              onClick={() => {
+                stopSpeaking();
+                speakChunked(t.toLowerCase(), { rate: 0.95, pitch: 1.1 });
+                setTimeout(() => escolher(t), 500);
+              }}
+              className={`rounded-2xl border-4 px-5 py-4 text-2xl font-black shadow-md active:scale-95 transition ${
+                acertou
+                  ? "border-green-500 bg-green-50 text-green-800"
+                  : errou
+                  ? "border-red-400 bg-red-50 text-red-700"
+                  : "border-purple-200 bg-white text-purple-900"
+              }`}
+            >
+              🔊 {t}
+            </button>
+          );
+        })}
+      </div>
+
+      {msg && (
+        <p
+          className={`mt-4 text-center font-bold ${
+            ok ? "text-green-700" : "text-amber-700"
+          }`}
+        >
+          {msg}
+        </p>
+      )}
+    </CardScreen>
+  );
+}
+
 
