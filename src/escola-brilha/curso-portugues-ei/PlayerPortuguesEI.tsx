@@ -639,6 +639,8 @@ function MomentoRender({
 
     case "sinonimoImagem":
       return <SinonimoImagemBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "antonimoContraste":
+      return <AntonimoContrasteBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
