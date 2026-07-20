@@ -303,6 +303,21 @@ export type MomentoEI =
       feedbackErro: string;
       elogio: string;
     }
+  // ============ FASE 8 · Semana 3 — Inferir (emoção/desejo do personagem) ============
+  | {
+      tipo: "inferirEmocao";
+      // Estratégia "Inferir" (Duke & Pearson 2002 · Kispal 2008): a
+      // história NÃO diz o sentimento; a criança deduz pelo contexto
+      // e escolhe entre 3 opções (emoji grande + palavra).
+      titulo?: string;
+      cenas: Array<{ imagemUrl: string; narracao: string }>;
+      pergunta: string;              // "Como o menino está se sentindo?"
+      instrucaoAudio: string;
+      opcoes: Array<{ emoji: string; nome: string; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
+      elogio: string;
+    }
   // ============ FASE 7 · Diploma final (Colecionador de Palavras) ============
   | {
       tipo: "diplomaFase";
