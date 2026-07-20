@@ -275,7 +275,130 @@ const a15: AulaEI = {
 };
 
 /* ============================================================
- * Curso (Fase 6 — expandirá para 20 missões)
+ * SEMANA 4 — Fluência em mini-textos + Diploma "Leitor Fluente"
+ * ============================================================ */
+
+const BASE_MINITEXTO =
+  "Fluência em textos curtos com propósito comunicativo (NRP 2000; Duke & Pearson 2002): três leituras da mesma história, com foco sucessivo em precisão, ritmo e expressão, seguidas de checagem breve de compreensão.";
+
+const a16: AulaEI = {
+  slug: "f6-dia-16-minitexto-gato",
+  titulo: "Dia 16 · Mini-texto — O gato e a casa",
+  icone: "🏠",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_MINITEXTO,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Começamos a última semana! Cada dia um mini-texto novo, lido três vezes." },
+    { tipo: "leituraTexto", titulo: "O gato e a casa", imagemUrl: gato, frases: ["O GATO MORA NA CASA.", "A CASA É AZUL.", "O GATO DORME NO SOL."], instrucaoAudio: "1ª leitura — ouça devagar comigo, sem pressa.", elogio: "Primeira leitura pronta!" },
+    { tipo: "leituraTexto", titulo: "O gato e a casa", imagemUrl: casa, frases: ["O GATO MORA NA CASA.", "A CASA É AZUL.", "O GATO DORME NO SOL."], instrucaoAudio: "2ª leitura — leia JUNTO comigo, sem parar.", elogio: "Junto ficou mais solto!" },
+    { tipo: "leituraTexto", titulo: "O gato e a casa", imagemUrl: sol, frases: ["O GATO MORA NA CASA.", "A CASA É AZUL.", "O GATO DORME NO SOL."], instrucaoAudio: "3ª leitura — só você, com voz bonita.", elogio: "Três leituras completas!" },
+    { tipo: "compreensaoLeitura", perguntaAudio: "Onde o gato dorme?", opcoes: [
+      { texto: "No sol", correta: true },
+      { texto: "Na chuva", correta: false },
+      { texto: "Na árvore", correta: false },
+    ], feedbackAcerto: "Isso! Ele dorme no sol.", feedbackErro: "Ouve a última frase de novo." },
+    { tipo: "celebracao", medalha: "Leitor de Mini-texto 1", mascoteUrl: mascote, falaFinal: "Amanhã: mini-texto com pergunta!" },
+  ],
+};
+
+const a17: AulaEI = {
+  slug: "f6-dia-17-minitexto-pipa",
+  titulo: "Dia 17 · Mini-texto — A pipa no vento",
+  icone: "🪁",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_MINITEXTO,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje tem pergunta no meio! Faça a voz subir na pergunta." },
+    { tipo: "leituraTexto", titulo: "A pipa no vento", imagemUrl: pipa, frases: ["A PIPA SOBE NO CÉU.", "ONDE ESTÁ A PIPA?", "A PIPA VOLTOU!"], instrucaoAudio: "1ª leitura — devagar, prestando atenção nos finais.", elogio: "Primeira leitura pronta!" },
+    { tipo: "leituraEco", titulo: "Eco com prosódia", imagemUrl: pipa, imagensLinhas: [pipa, nuvem, pipa], linhas: ["A PIPA SOBE NO CÉU.", "ONDE ESTÁ A PIPA?", "A PIPA VOLTOU!"], instrucaoAudio: "Agora eu leio e você repete no microfone, copiando a entonação.", elogio: "Você fez a pergunta subir!" },
+    { tipo: "leituraTexto", titulo: "A pipa no vento", imagemUrl: nuvem, frases: ["A PIPA SOBE NO CÉU.", "ONDE ESTÁ A PIPA?", "A PIPA VOLTOU!"], instrucaoAudio: "3ª leitura — só você, com voz de contador de histórias.", elogio: "Fluência de verdade!" },
+    { tipo: "compreensaoLeitura", perguntaAudio: "O que acontece no fim da história?", opcoes: [
+      { texto: "A pipa voltou", correta: true },
+      { texto: "A pipa caiu", correta: false },
+      { texto: "A pipa sumiu", correta: false },
+    ], feedbackAcerto: "Isso! Ela voltou.", feedbackErro: "Ouve a última linha." },
+    { tipo: "celebracao", medalha: "Leitor de Mini-texto 2", mascoteUrl: mascote, falaFinal: "Amanhã: mini-texto com exclamação!" },
+  ],
+};
+
+const a18: AulaEI = {
+  slug: "f6-dia-18-minitexto-sapo",
+  titulo: "Dia 18 · Mini-texto — O passeio do sapo",
+  icone: "🐸",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_MINITEXTO,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje tem exclamação: solte a voz com energia no que tem !" },
+    { tipo: "leituraTexto", titulo: "O passeio do sapo", imagemUrl: sapo, frases: ["O SAPO PULOU NA FLOR.", "QUE PULO GRANDE!", "O SAPO CAIU NA ÁGUA."], instrucaoAudio: "1ª leitura — devagar, ouvindo o final de cada frase.", elogio: "Primeira leitura pronta!" },
+    { tipo: "leituraEco", titulo: "Eco com exclamação", imagemUrl: sapo, imagensLinhas: [sapo, flor, peixe], linhas: ["O SAPO PULOU NA FLOR.", "QUE PULO GRANDE!", "O SAPO CAIU NA ÁGUA."], instrucaoAudio: "Eu leio e você repete no microfone — solte a voz na exclamação.", elogio: "Que exclamação linda!" },
+    { tipo: "leituraTexto", titulo: "O passeio do sapo", imagemUrl: peixe, frases: ["O SAPO PULOU NA FLOR.", "QUE PULO GRANDE!", "O SAPO CAIU NA ÁGUA."], instrucaoAudio: "3ª leitura — só você, com a voz do sapo.", elogio: "Fluência com sentimento!" },
+    { tipo: "compreensaoLeitura", perguntaAudio: "Onde o sapo caiu?", opcoes: [
+      { texto: "Na água", correta: true },
+      { texto: "Na areia", correta: false },
+      { texto: "Na árvore", correta: false },
+    ], feedbackAcerto: "Isso! Na água.", feedbackErro: "Ouve a última frase." },
+    { tipo: "celebracao", medalha: "Leitor de Mini-texto 3", mascoteUrl: mascote, falaFinal: "Amanhã: ensaio final antes do diploma!" },
+  ],
+};
+
+const a19: AulaEI = {
+  slug: "f6-dia-19-ensaio-final",
+  titulo: "Dia 19 · Ensaio final — três vozes",
+  icone: "🎭",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_MINITEXTO,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Ensaio final! Um mini-texto com ponto, pergunta e exclamação. Amanhã é o Diploma!" },
+    { tipo: "leituraEco", titulo: "Três vozes numa história", imagemUrl: coelho, imagensLinhas: [coelho, arvore, coelho, estrela], linhas: ["O COELHO SAIU DE CASA.", "ONDE ESTÁ A CENOURA?", "A CENOURA ESTAVA AQUI!", "O COELHO COMEU FELIZ."], instrucaoAudio: "Copie a voz do professor em cada linha: ponto desce, pergunta sobe, exclamação vibra.", elogio: "Você mudou a voz certinho em cada final!" },
+    { tipo: "leituraTexto", titulo: "O coelho e a cenoura", imagemUrl: coelho, frases: ["O COELHO SAIU DE CASA.", "ONDE ESTÁ A CENOURA?", "A CENOURA ESTAVA AQUI!", "O COELHO COMEU FELIZ."], instrucaoAudio: "Agora só você, do começo ao fim, com voz bonita.", elogio: "Ensaio pronto!" },
+    { tipo: "compreensaoLeitura", perguntaAudio: "Como o coelho ficou no fim?", opcoes: [
+      { texto: "Feliz", correta: true },
+      { texto: "Triste", correta: false },
+      { texto: "Com medo", correta: false },
+    ], feedbackAcerto: "Isso, feliz!", feedbackErro: "Ouve a última frase." },
+    { tipo: "celebracao", medalha: "Pronto pro Diploma", mascoteUrl: mascote, falaFinal: "Amanhã: DIPLOMA DE LEITOR FLUENTE!" },
+  ],
+};
+
+const a20: AulaEI = {
+  slug: "f6-dia-20-diploma-leitor-fluente",
+  titulo: "Dia 20 · Diploma — Leitor Fluente",
+  icone: "🎓",
+  bncc: ["EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+  baseCientifica: BASE_MINITEXTO,
+  momentos: [
+    { tipo: "boasVindas", mascoteUrl: mascote, falaMascote: "Hoje é o grande dia: você vai ler um texto inteiro com voz de verdade e ganhar o Diploma de Leitor Fluente!" },
+    { tipo: "leituraTexto", titulo: "Meu caminho de leitor", imagemUrl: brilha, frases: [
+      "EU APRENDI OS SONS.",
+      "EU APRENDI AS LETRAS.",
+      "EU APRENDI AS SÍLABAS.",
+      "AGORA EU LEIO FRASES E HISTÓRIAS!",
+      "EU SOU UM LEITOR FLUENTE!",
+    ], instrucaoAudio: "Sua história de leitor — leia devagar com o professor.", elogio: "Que jornada linda!" },
+    { tipo: "leituraEco", titulo: "Leitura de gala", imagemUrl: brilha, imagensLinhas: [sol, lua, estrela, brilha, brilha], linhas: [
+      "O SOL BRILHOU NO CÉU.",
+      "A LUA APARECEU CALMA.",
+      "AS ESTRELAS DANÇARAM.",
+      "QUE NOITE LINDA!",
+      "EU LI TUDO SOZINHO!",
+    ], instrucaoAudio: "Última leitura eco: copie a voz do professor em cada linha, com ritmo e emoção.", elogio: "Uma leitura de gala!" },
+    { tipo: "compreensaoLeitura", perguntaAudio: "O que você é agora?", opcoes: [
+      { texto: "Um leitor fluente", correta: true },
+      { texto: "Um bebê", correta: false },
+      { texto: "Um cantor", correta: false },
+    ], feedbackAcerto: "Sim! Um leitor fluente!", feedbackErro: "Ouve a última frase de novo." },
+    { tipo: "missaoFamilia", titulo: "🎓 DIPLOMA LEITOR FLUENTE", convite: "Leia os dois textos de hoje em voz alta para a família. Depois escolham juntos um livrinho de casa e leiam 3 páginas com ritmo e emoção.", dicaAdulto: "Sua criança concluiu a Fase 6 de fluência — 20 missões de leitura repetida, eco e prosódia. Ela agora lê frases inteiras com precisão, ritmo e entonação (pontos descem, perguntas sobem, exclamações vibram). Continue lendo com ela 15 min por dia: livros ilustrados curtos são ideais nesta fase." },
+    { tipo: "celebracao", medalha: "🎓 LEITOR FLUENTE — Fase 6 concluída!", mascoteUrl: mascote, falaFinal: "Você é oficialmente um Leitor Fluente. Nunca pare de ler — a próxima aventura é o Vocabulário Ativo!" },
+  ],
+};
+
+/* ============================================================
+ * Curso — Fase 6 completa (20 missões)
  * ============================================================ */
 
 export const cursoLerComAuroraFase6: CursoEI = {
@@ -284,7 +407,7 @@ export const cursoLerComAuroraFase6: CursoEI = {
   serieLabel: "Pré II / 1º Ano (Fluência)",
   titulo: "Fluência Verdadeira",
   descricao:
-    "Ler com precisão, ritmo e expressão. Leitura repetida, eco e prosódia — a atenção libera para o significado.",
+    "Ler com precisão, ritmo e expressão. Leitura repetida, eco, prosódia e mini-textos — a atenção libera para o significado.",
   corPrimaria: "#facc15",
   corSecundaria: "#78350f",
   mascoteUrl: mascote,
@@ -310,6 +433,13 @@ export const cursoLerComAuroraFase6: CursoEI = {
       subtitulo: "Voz Camaleoa",
       aulas: [a11, a12, a13, a14, a15],
     },
+    {
+      slug: "f6-semana-04",
+      numero: 4,
+      titulo: "Semana 4 · Mini-textos + Diploma",
+      subtitulo: "Leitor Fluente",
+      aulas: [a16, a17, a18, a19, a20],
+    },
   ],
 };
 
@@ -320,4 +450,5 @@ export function getAulaLerComAuroraFase6(slug: string): AulaEI | undefined {
   }
   return undefined;
 }
+
 
