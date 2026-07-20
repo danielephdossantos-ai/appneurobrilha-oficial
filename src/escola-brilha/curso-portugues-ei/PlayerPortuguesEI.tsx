@@ -441,7 +441,7 @@ function MomentoRender({
           </div>
           <div className="mt-4 grid gap-3">
             <BigListenButton
-              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. O som dela é ${m.som}.`)}
+              onClick={() => speak(`${m.instrucaoAudio}. Esta é a letra ${m.letra}. Escuta o som: ${somFalado(m.letra)}.`)}
               label={`Ouvir "${m.letra}"`}
             />
             <p className="text-center text-sm text-slate-600">
@@ -451,7 +451,7 @@ function MomentoRender({
               {m.exemplos.map((e) => (
                 <button
                   key={e.nome}
-                  onClick={() => speak(`${m.som}... ${e.nome}`)}
+                  onClick={() => speak(`${somFalado(m.letra)}... ${e.nome}`)}
                   className="rounded-3xl bg-white border-2 border-purple-200 p-2 shadow active:scale-95"
                 >
                   <ImageFrame src={e.imagemUrl} alt={e.nome} size="md" />
