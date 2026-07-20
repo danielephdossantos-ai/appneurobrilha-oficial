@@ -221,7 +221,7 @@ function TrilhaLerComAurora() {
           curso={cursoLerComAuroraFase7}
           concluidas={concluidas}
           gradiente="linear-gradient(135deg,#a855f7,#3b0764)"
-          badge="FASE 7 · VOCABULÁRIO ATIVO (semana 2/4)"
+          badge="FASE 7 · VOCABULÁRIO ATIVO (completa 4/4)"
         />
 
 

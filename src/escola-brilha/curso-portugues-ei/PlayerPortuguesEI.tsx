@@ -645,6 +645,10 @@ function MomentoRender({
       return <AntonimoContrasteBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
     case "campoSemantico":
       return <CampoSemanticoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "palavraNaFrase":
+      return <PalavraNaFraseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+    case "diplomaFase":
+      return <DiplomaFaseBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
   }
 }
 
