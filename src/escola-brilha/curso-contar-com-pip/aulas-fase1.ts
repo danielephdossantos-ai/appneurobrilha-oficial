@@ -531,6 +531,505 @@ const dia05: AulaEI = {
 
 
 
+// ============================================================
+// SEMANA 2 · Consolidação + subitizing conceitual
+// Ver 4 como 2+2, comparar rápido, MENOS/IGUAL, cenários reais.
+// Clements & Sarama: subitizing conceitual = ver o todo pelas partes.
+// ============================================================
+
+const dia06: AulaEI = {
+  slug: "pip-f1-s2-d6-dominos",
+  titulo: "Dia 6 · Padrão do dominó",
+  icone: "🁢",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana 2 começou! Hoje o Pip te mostra o truque do dominó: dois grupinhos que juntos viram um número maior.",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 2,
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha o primeiro grupinho.",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS. Olha de novo!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 2,
+      itemPlural: "bolas",
+      instrucaoAudio: "Agora o segundo grupinho, igualzinho.",
+      perguntaAudio: "E agora, quantas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "Mais DUAS!",
+      feedbackErro: "Eram DUAS de novo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 4,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio:
+        "Duas bolas mais duas bolas dá QUATRO! Toca em cada uma pra confirmar.",
+      elogio: "Isso! DOIS e DOIS é QUATRO!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 3,
+      itemPlural: "estrelas",
+      instrucaoAudio: "Agora um dominó diferente: DOIS e UM.",
+      perguntaAudio: "Quantas estrelas ao todo?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS! Dois de um lado, um do outro!",
+      feedbackErro: "Eram TRÊS. Dois mais um dá três!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra QUATRO?",
+      opcoes: [
+        { nome: "duas bolas", imagemUrl: bola, correta: false, quantidade: 2 },
+        { nome: "quatro corações", imagemUrl: coracao, correta: true, quantidade: 4 },
+        { nome: "três flores", imagemUrl: flor, correta: false, quantidade: 3 },
+      ],
+      feedbackAcerto: "Isso! QUATRO — dois em cima, dois embaixo!",
+      feedbackErro: "QUATRO tem quatro itens. Escolhe o grupo cheio!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Dominó caseiro",
+      convite:
+        "Pega feijões ou botões. Faz dois grupinhos: 2 + 2. Junta e conta: QUATRO! Depois tenta 2 + 1 = TRÊS.",
+      dicaAdulto:
+        "Clements & Sarama: subitizing conceitual = ver o todo pelas partes. Trabalhar 2+2 e 2+1 antes da soma formal.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Leitor de Dominó",
+      mascoteUrl: mascote,
+      falaFinal: "Agora você vê dois grupinhos e já sabe o total!",
+    },
+  ],
+  baseCientifica:
+    "Subitizing conceitual (Clements & Sarama): 4 como 2+2, 3 como 2+1 — base pré-aditiva.",
+};
+
+const dia07: AulaEI = {
+  slug: "pip-f1-s2-d7-comparar-rapido",
+  titulo: "Dia 7 · Quem tem MAIS?",
+  icone: "⚖️",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Hoje é dia de comparar! Só de olhar, sem contar: qual grupo tem MAIS?",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Dois grupos de flores.",
+      perguntaAudio: "Qual grupo tem MAIS flores?",
+      imagemUrl: flor,
+      itemPlural: "flores",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 1, correta: false },
+        { qtd: 4, correta: true },
+      ],
+      feedbackAcerto: "Isso! QUATRO é bem mais que UMA!",
+      feedbackErro: "O grupo com 4 tem mais. Olha de novo!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Agora borboletas.",
+      perguntaAudio: "Qual grupo tem MAIS borboletas?",
+      imagemUrl: borboleta,
+      itemPlural: "borboletas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 3, correta: true },
+        { qtd: 2, correta: false },
+      ],
+      feedbackAcerto: "Isso! TRÊS é mais que DUAS!",
+      feedbackErro: "TRÊS é mais que DUAS. Compara de novo!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Difícil agora! Bem parecido.",
+      perguntaAudio: "Qual grupo tem MAIS maçãs?",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 3, correta: false },
+        { qtd: 4, correta: true },
+      ],
+      feedbackAcerto: "Boa! QUATRO é uma a mais que TRÊS!",
+      feedbackErro: "QUATRO é uma a mais que TRÊS. Olha bem!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: balao,
+      quantidade: 4,
+      itemSingular: "balão",
+      itemPlural: "balões",
+      instrucaoAudio: "Confirma tocando: um, dois, três, QUATRO balões.",
+      elogio: "Quatro balões!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem MENOS itens?",
+      opcoes: [
+        { nome: "uma bola", imagemUrl: bola, correta: true, quantidade: 1 },
+        { nome: "três estrelas", imagemUrl: estrela, correta: false, quantidade: 3 },
+        { nome: "quatro corações", imagemUrl: coracao, correta: false, quantidade: 4 },
+      ],
+      feedbackAcerto: "Isso! UM é o MENOS de todos!",
+      feedbackErro: "MENOS é o grupo com pouquinho. Escolhe o menor!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Mais ou menos?",
+      convite:
+        "Pega dois potinhos. Coloca 2 em um e 4 no outro. Pergunta: qual tem MAIS? Depois inverte e pergunta qual tem MENOS.",
+      dicaAdulto:
+        "ANS (Approximate Number System — Feigenson & Dehaene): crianças comparam quantidade de olhada antes de saber contar. Explorar 'mais' e 'menos' fortalece essa via inata.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Comparador Rápido",
+      mascoteUrl: mascote,
+      falaFinal: "Você já compara MAIS e MENOS de olhada! Isso é senso numérico!",
+    },
+  ],
+  baseCientifica:
+    "Comparação de magnitude — ANS (Feigenson, Dehaene, Spelke).",
+};
+
+const dia08: AulaEI = {
+  slug: "pip-f1-s2-d8-cenarios-reais",
+  titulo: "Dia 8 · Contar no mundo real",
+  icone: "🌳",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Hoje a gente subitiza coisas do dia a dia: bolas no parque, flores no jardim, joaninhas na folha!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 3,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Joaninhas na folha — olha rapidinho!",
+      perguntaAudio: "Quantas joaninhas?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS joaninhas!",
+      feedbackErro: "Eram TRÊS. Vamos ver de novo!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemPlural: "maçãs",
+      instrucaoAudio: "Maçãs na fruteira!",
+      perguntaAudio: "Quantas maçãs?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO maçãs!",
+      feedbackErro: "Eram QUATRO. Um em cada canto!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: balao,
+      quantidade: 2,
+      itemPlural: "balões",
+      instrucaoAudio: "Balões na festa!",
+      perguntaAudio: "Quantos balões?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DOIS balões!",
+      feedbackErro: "Eram DOIS. Olha de novo!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: sol,
+      quantidade: 1,
+      itemPlural: "sóis",
+      instrucaoAudio: "E no céu?",
+      perguntaAudio: "Quantos sóis?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UM sol só! O nosso!",
+      feedbackErro: "Só tem UM sol no céu!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Bate palma em cada flor: UM! DOIS! TRÊS!",
+      elogio: "Três palmas para três flores!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Onde tem QUATRO?",
+      opcoes: [
+        { nome: "um sol", imagemUrl: sol, correta: false, quantidade: 1 },
+        { nome: "quatro joaninhas", imagemUrl: joaninha, correta: true, quantidade: 4 },
+        { nome: "duas borboletas", imagemUrl: borboleta, correta: false, quantidade: 2 },
+      ],
+      feedbackAcerto: "Isso! QUATRO joaninhas na folha!",
+      feedbackErro: "QUATRO tem quatro itens. Escolhe o grupo cheio!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Caça ao número",
+      convite:
+        "Anda pela casa com alguém e ache: 1 coisa (o sofá), 2 coisas iguais (2 sapatos), 3 coisas (3 pratos), 4 coisas (4 cadeiras).",
+      dicaAdulto:
+        "Contextualizar subitizing em objetos reais consolida a transferência (Clements & Sarama).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Caçador de Números",
+      mascoteUrl: mascote,
+      falaFinal: "Você viu números no mundo todo! Matemática está em tudo!",
+    },
+  ],
+  baseCientifica:
+    "Transferência do subitizing para o mundo real — Clements & Sarama, NCTM Early Childhood.",
+};
+
+const dia09: AulaEI = {
+  slug: "pip-f1-s2-d9-igual-diferente",
+  titulo: "Dia 9 · IGUAL ou DIFERENTE?",
+  icone: "🟰",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Hoje um jeito novo: dois grupos podem ser IGUAIS (mesma quantidade) ou DIFERENTES. Vamos ver?",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Dois grupos de estrelas.",
+      perguntaAudio: "Qual grupo tem MAIS estrelas?",
+      imagemUrl: estrela,
+      itemPlural: "estrelas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 2, correta: false },
+        { qtd: 3, correta: true },
+      ],
+      feedbackAcerto: "TRÊS é mais que DUAS!",
+      feedbackErro: "TRÊS é mais que DUAS!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Agora corações.",
+      perguntaAudio: "Qual grupo tem MENOS corações?",
+      imagemUrl: coracao,
+      itemPlural: "corações",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 1, correta: true },
+        { qtd: 4, correta: false },
+      ],
+      feedbackAcerto: "UM é MENOS que QUATRO!",
+      feedbackErro: "MENOS é o grupo com pouquinho: UM.",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 3,
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha rapidinho!",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS bolas!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemPlural: "flores",
+      instrucaoAudio: "E agora, flores!",
+      perguntaAudio: "Quantas flores?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS flores!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Se as bolas eram 3 e as flores eram 3, elas são?",
+      opcoes: [
+        { nome: "IGUAL", imagemUrl: estrelas, correta: true },
+        { nome: "MAIS bolas", imagemUrl: bola, correta: false, quantidade: 4 },
+        { nome: "MAIS flores", imagemUrl: flor, correta: false, quantidade: 4 },
+      ],
+      feedbackAcerto: "Isso! Mesma quantidade = IGUAL!",
+      feedbackErro: "Se as duas têm 3, elas são IGUAIS!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 4,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Confirma: um, dois, três, QUATRO joaninhas.",
+      elogio: "Quatro joaninhas!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Igual ou diferente?",
+      convite:
+        "Pega dois pratinhos. Coloca 3 uvas em cada um. Pergunta: os pratos têm quantidades IGUAIS ou DIFERENTES? Depois muda: 2 num prato e 4 no outro.",
+      dicaAdulto:
+        "IGUAL/DIFERENTE prepara equivalência — base da adição/subtração (Griffin, Number Worlds).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive do Igual",
+      mascoteUrl: mascote,
+      falaFinal: "Você já vê MAIS, MENOS e IGUAL! Que olho de matemático!",
+    },
+  ],
+  baseCientifica:
+    "Equivalência e comparação (Griffin, Number Worlds) — pré-requisito para operações.",
+};
+
+const dia10: AulaEI = {
+  slug: "pip-f1-s2-d10-revisao-semana2",
+  titulo: "Dia 10 · Olho Rápido (revisão)",
+  icone: "⚡",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Fim da Semana 2! Hoje o Pip te desafia: rapidinho, sem contar, quantos são?",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 2,
+      itemPlural: "estrelas",
+      instrucaoAudio: "Rapidinho!",
+      perguntaAudio: "Quantas estrelas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: coracao,
+      quantidade: 4,
+      itemPlural: "corações",
+      instrucaoAudio: "E agora!",
+      perguntaAudio: "Quantos corações?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 3,
+      itemPlural: "bolas",
+      instrucaoAudio: "De novo!",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Dois grupos.",
+      perguntaAudio: "Qual tem MAIS balões?",
+      imagemUrl: balao,
+      itemPlural: "balões",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 4, correta: true },
+        { qtd: 2, correta: false },
+      ],
+      feedbackAcerto: "QUATRO é mais que DOIS!",
+      feedbackErro: "QUATRO é mais!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Agora com maçãs.",
+      perguntaAudio: "Qual tem MENOS maçãs?",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 1, correta: true },
+        { qtd: 3, correta: false },
+      ],
+      feedbackAcerto: "UM é MENOS que TRÊS!",
+      feedbackErro: "MENOS é o grupo pequeno!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 4,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Confirma tocando: uma, duas, três, QUATRO.",
+      elogio: "Quatro flores!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra o padrão do dominó DOIS e DOIS?",
+      opcoes: [
+        { nome: "uma bola", imagemUrl: bola, correta: false, quantidade: 1 },
+        { nome: "quatro joaninhas", imagemUrl: joaninha, correta: true, quantidade: 4 },
+        { nome: "três estrelas", imagemUrl: estrela, correta: false, quantidade: 3 },
+      ],
+      feedbackAcerto: "Isso! DOIS mais DOIS é QUATRO!",
+      feedbackErro: "DOIS e DOIS forma um QUADRADO de 4!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Jogo do Dado",
+      convite:
+        "Pega um dado. Joga rapidinho e diz o número SEM contar os pontinhos. Depois deixa o adulto jogar e você confere.",
+      dicaAdulto:
+        "Jogos de dado repetidos consolidam padrões canônicos (Clements & Sarama). Meta: reconhecer 1–4 em menos de 1 segundo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Semana 2 · Olho Rápido",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Fim da Semana 2! Agora seu olho é RÁPIDO! Você compara, vê padrões e sabe quantos são de olhada!",
+    },
+  ],
+  baseCientifica:
+    "Revisão semanal: subitizing rápido, comparação MAIS/MENOS/IGUAL e padrões de dominó.",
+};
+
+
 export const cursoContarComPipFase1: CursoEI = {
   slug: "contar-com-pip-f1",
   serie: "pre2",
@@ -548,6 +1047,13 @@ export const cursoContarComPipFase1: CursoEI = {
       titulo: "Semana 1 · Ver de olhada",
       subtitulo: "Olho de Subitizar",
       aulas: [dia01, dia02, dia03, dia04, dia05],
+    },
+    {
+      slug: "pip-f1-s2",
+      numero: 2,
+      titulo: "Semana 2 · Olho Rápido",
+      subtitulo: "Comparar, padrões de dominó e cenários reais",
+      aulas: [dia06, dia07, dia08, dia09, dia10],
     },
   ],
 };
