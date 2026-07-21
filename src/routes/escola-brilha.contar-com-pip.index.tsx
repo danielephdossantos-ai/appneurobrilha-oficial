@@ -104,9 +104,9 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 8,
-    curso: null,
+    curso: cursoContarComPipFase8,
     gradiente: "linear-gradient(135deg,#6366f1,#312e81)",
-    badge: "FASE 8 · PROBLEMAS EM HISTÓRIA",
+    badge: "FASE 8 · PROBLEMAS EM HISTÓRIA (CGI)",
     nome: "Problemas em História",
     descricao: "Cognitively Guided Instruction: juntar, tirar, comparar.",
   },
