@@ -91,30 +91,25 @@ const dia01: AulaEI = {
       feedbackErro: "Olha de novo: aqui tem uma, aqui tem duas. Duas é mais!",
     },
     {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma DUAS vezes comigo: um, dois!",
-      palavra: "PAL-MA",
-      silabas: 2,
-      imagemUrl: estrelas,
-      elogio: "Duas palmas para o número dois!",
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 2,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Agora bate palma em cada estrela: UM! DOIS! Toca em cada uma!",
+      elogio: "Duas palmas para o número DOIS!",
     },
     {
-      tipo: "historiaIlustrada",
-      titulo: "O passarinho e a amiga",
-      cenas: [
-        {
-          imagemUrl: passaro,
-          narracao: "UM passarinho estava sozinho no galho, cantando bem baixinho.",
-        },
-        {
-          imagemUrl: parque,
-          narracao: "Aí chegou uma amiga voando! Agora eram DOIS passarinhos juntos.",
-        },
-        {
-          imagemUrl: coracao,
-          narracao: "Os dois cantaram juntos, e a árvore ficou cheia de música.",
-        },
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra DOIS?",
+      opcoes: [
+        { nome: "uma bola", imagemUrl: bola, correta: false },
+        { nome: "duas estrelas", imagemUrl: estrelas, correta: true },
+        { nome: "um coração", imagemUrl: coracao, correta: false },
       ],
+      feedbackAcerto: "Isso! DUAS estrelas!",
+      feedbackErro: "DOIS tem dois itens. Escolhe o par!",
     },
     {
       tipo: "missaoFamilia",
