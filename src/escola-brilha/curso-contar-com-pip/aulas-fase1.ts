@@ -1495,6 +1495,436 @@ const dia15: AulaEI = {
 };
 
 
+// ================= SEMANA 4 · Formatura em Subitizing (1–4) =================
+// Foco: transferência total, avaliação lúdica, ponte para o 5 e DIPLOMA da Fase 1.
+// Base: Griffin (Number Worlds — bridging to counting), Clements & Sarama
+// (assessment through play), Ramani & Siegler (linear number board — preview).
+
+const dia16: AulaEI = {
+  slug: "pip-f1-s4-d16-tudo-junto",
+  titulo: "Dia 16 · Tudo junto",
+  icone: "🎯",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Última semana da Fase 1! Hoje o Pip mistura tudo que você aprendeu: ver, contar, comparar e compor de 1 a 4.",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 3,
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha rapidinho!",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Só de olhar.",
+      perguntaAudio: "Qual grupo tem MAIS corações?",
+      imagemUrl: coracao,
+      itemPlural: "corações",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 1, correta: false },
+        { qtd: 3, correta: true },
+      ],
+      feedbackAcerto: "TRÊS é mais que UM!",
+      feedbackErro: "TRÊS é mais que UM. Olha o grupão!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 4,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Toca em cada flor: UM, DOIS, TRÊS, QUATRO.",
+      elogio: "Quatro flores!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 2,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Olhinho rápido!",
+      perguntaAudio: "Quantas joaninhas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O 4 pode ser 2 e mais quanto?",
+      opcoes: [
+        { nome: "mais 1", imagemUrl: estrela, correta: false, quantidade: 1 },
+        { nome: "mais 2", imagemUrl: coracao, correta: true, quantidade: 2 },
+        { nome: "mais 3", imagemUrl: bola, correta: false, quantidade: 3 },
+      ],
+      feedbackAcerto: "2 + 2 = 4! Dobro!",
+      feedbackErro: "2 mais 2 dá 4 — isso é o DOBRO!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Mesa dos números",
+      convite:
+        "Coloca 1, 2, 3 e 4 objetos na mesa. Um adulto aponta e pergunta 'quantos?' — a criança fala rápido, sem contar.",
+      dicaAdulto:
+        "Avaliação lúdica: se a criança acerta 1–4 em menos de 3 segundos, subitizing perceptual está consolidado.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Tudo Junto",
+      mascoteUrl: mascote,
+      falaFinal: "Você usou tudo que aprendeu! Bora pro próximo desafio!",
+    },
+  ],
+  baseCientifica:
+    "Prática distribuída e mista — retenção e transferência (Rohrer & Taylor).",
+};
+
+const dia17: AulaEI = {
+  slug: "pip-f1-s4-d17-preparando-5",
+  titulo: "Dia 17 · Espiando o 5",
+  icone: "🖐️",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Segredinho: depois do 4 vem o 5! O 5 é 4 mais UM. E cabe certinho numa mãozinha!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 4,
+      itemPlural: "estrelas",
+      instrucaoAudio: "Começa com QUATRO.",
+      perguntaAudio: "Quantas estrelas?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 5,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio: "Agora tem MAIS UMA! Toca em cada: UM, DOIS, TRÊS, QUATRO, CINCO.",
+      elogio: "CINCO! 4 + 1 é CINCO!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Onde tem CINCO?",
+      opcoes: [
+        { nome: "quatro maçãs", imagemUrl: maca, correta: false, quantidade: 4 },
+        { nome: "cinco flores", imagemUrl: flor, correta: true, quantidade: 5 },
+        { nome: "três balões", imagemUrl: balao, correta: false, quantidade: 3 },
+      ],
+      feedbackAcerto: "Isso! CINCO flores — igual aos dedos de uma mão!",
+      feedbackErro: "CINCO tem cinco itens. Escolhe o grupo maior!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara CINCO com um grupinho pequeno.",
+      perguntaAudio: "Qual grupo tem MAIS bolas?",
+      imagemUrl: bola,
+      itemPlural: "bolas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 5, correta: true },
+        { qtd: 2, correta: false },
+      ],
+      feedbackAcerto: "CINCO é mais que DUAS!",
+      feedbackErro: "CINCO é mais. É a mão INTEIRA!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 5,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Confirma: UM, DOIS, TRÊS, QUATRO, CINCO joaninhas.",
+      elogio: "Cinco joaninhas! Uma mãozinha cheia!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Mão inteira",
+      convite:
+        "Abre a mão toda: 5 dedinhos. Depois fecha 1 → 4. Fecha mais 1 → 3. Volta abrindo: 3, 4, 5. Cinco é a mão inteira!",
+      dicaAdulto:
+        "Cinco como âncora perceptual (five-ness): base para ten-frame e para toda a Fase 2 (contagem 1-a-1 até 10).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Espião do 5",
+      mascoteUrl: mascote,
+      falaFinal: "Você já viu o 5 de longe! Vem aí a Fase 2!",
+    },
+  ],
+  baseCientifica:
+    "Preview do 5 como âncora — ponte para contagem 1-a-1 (Griffin, Fuson).",
+};
+
+const dia18: AulaEI = {
+  slug: "pip-f1-s4-d18-historia-do-pip",
+  titulo: "Dia 18 · A festa do Pip",
+  icone: "🎉",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "O Pip vai dar uma festa! Vamos ajudar? Precisa contar balões, maçãs e convidados. Cada um de olhada!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: balao,
+      quantidade: 3,
+      itemPlural: "balões",
+      instrucaoAudio: "O Pip pendurou balões. Olha!",
+      perguntaAudio: "Quantos balões?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS balões pra festa!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemPlural: "maçãs",
+      instrucaoAudio: "Na fruteira, maçãs!",
+      perguntaAudio: "Quantas maçãs?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO maçãs!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Chegaram convidados!",
+      perguntaAudio: "Qual grupo de amigos é MAIOR?",
+      imagemUrl: joaninha,
+      itemPlural: "amigos",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 4, correta: true },
+        { qtd: 2, correta: false },
+      ],
+      feedbackAcerto: "QUATRO é mais! A festa tá cheia!",
+      feedbackErro: "QUATRO é mais que DOIS!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: coracao,
+      quantidade: 4,
+      itemSingular: "coração",
+      itemPlural: "corações",
+      instrucaoAudio: "O Pip deu QUATRO abraços. Toca em cada coração!",
+      elogio: "Quatro abraços de amor!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O Pip tem 2 balões e ganha mais 2. Fica com quantos?",
+      opcoes: [
+        { nome: "3 balões", imagemUrl: balao, correta: false, quantidade: 3 },
+        { nome: "4 balões", imagemUrl: balao, correta: true, quantidade: 4 },
+        { nome: "1 balão", imagemUrl: balao, correta: false, quantidade: 1 },
+      ],
+      feedbackAcerto: "QUATRO! 2 + 2 = 4!",
+      feedbackErro: "2 mais 2 dá 4! O Pip fica com 4 balões.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Festinha em casa",
+      convite:
+        "Faz uma festinha de faz-de-conta. Conta 3 pratos, 4 copos, 2 bichinhos convidados. Depois pergunta: onde tem mais?",
+      dicaAdulto:
+        "Cognitively Guided Instruction (Carpenter): problema em contexto de história ativa raciocínio matemático antes do símbolo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Anfitrião da Festa",
+      mascoteUrl: mascote,
+      falaFinal: "Você ajudou o Pip a fazer a festa perfeita!",
+    },
+  ],
+  baseCientifica:
+    "Subitizing em contexto narrativo — preview de problemas CGI (Carpenter et al.).",
+};
+
+const dia19: AulaEI = {
+  slug: "pip-f1-s4-d19-desafio-final",
+  titulo: "Dia 19 · Desafio do Pip",
+  icone: "🏆",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Desafio final antes do diploma! O Pip vai te testar: acerta tudo e amanhã você forma!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: sol,
+      quantidade: 1,
+      itemPlural: "sóis",
+      instrucaoAudio: "Fácil primeiro.",
+      perguntaAudio: "Quantos sóis?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UM só!",
+      feedbackErro: "Era UM!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: borboleta,
+      quantidade: 2,
+      itemPlural: "borboletas",
+      instrucaoAudio: "Rapidinho!",
+      perguntaAudio: "Quantas borboletas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemPlural: "flores",
+      instrucaoAudio: "E agora?",
+      perguntaAudio: "Quantas flores?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemPlural: "maçãs",
+      instrucaoAudio: "Última rapidinha!",
+      perguntaAudio: "Quantas maçãs?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara!",
+      perguntaAudio: "Qual grupo tem MENOS bolas?",
+      imagemUrl: bola,
+      itemPlural: "bolas",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 4, correta: false },
+        { qtd: 1, correta: true },
+      ],
+      feedbackAcerto: "UMA é MENOS de todas!",
+      feedbackErro: "MENOS é o menor grupo: UMA.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O 3 é feito de 2 e mais quanto?",
+      opcoes: [
+        { nome: "mais 1", imagemUrl: estrela, correta: true, quantidade: 1 },
+        { nome: "mais 3", imagemUrl: coracao, correta: false, quantidade: 3 },
+        { nome: "mais 2", imagemUrl: bola, correta: false, quantidade: 2 },
+      ],
+      feedbackAcerto: "2 + 1 = 3!",
+      feedbackErro: "2 mais 1 dá 3!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Prepara pra formatura",
+      convite:
+        "Amanhã é o diploma da Fase 1! Conta pra alguém tudo que você aprendeu: ver rápido, comparar, compor. Ensinar é o melhor jeito de aprender!",
+      dicaAdulto:
+        "Peer teaching (Fiorella & Mayer): explicar em voz alta consolida o aprendizado. Aproveita pra celebrar antes do diploma.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Pronto pra Formatura",
+      mascoteUrl: mascote,
+      falaFinal: "Você passou no desafio! Amanhã, DIPLOMA!",
+    },
+  ],
+  baseCientifica:
+    "Avaliação lúdica pré-diploma — checagem de fluência em subitizing 1–4.",
+};
+
+const dia20: AulaEI = {
+  slug: "pip-f1-s4-d20-diploma",
+  titulo: "Dia 20 · Diploma da Fase 1",
+  icone: "🎓",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Chegou o dia! Você terminou a Fase 1 do Contar com Pip! Vamos revisar tudo rapidinho e pegar o seu diploma!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: coracao,
+      quantidade: 4,
+      itemPlural: "corações",
+      instrucaoAudio: "Última rodada!",
+      perguntaAudio: "Quantos corações?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO! Perfeito!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 3,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio: "Confirma: UM, DOIS, TRÊS.",
+      elogio: "Três estrelas — brilhando pra você!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra 2 + 2?",
+      opcoes: [
+        { nome: "três bolas", imagemUrl: bola, correta: false, quantidade: 3 },
+        { nome: "quatro joaninhas", imagemUrl: joaninha, correta: true, quantidade: 4 },
+        { nome: "duas flores", imagemUrl: flor, correta: false, quantidade: 2 },
+      ],
+      feedbackAcerto: "Isso! 2 + 2 = 4!",
+      feedbackErro: "2 mais 2 dá 4. Escolhe o grupo com 4!",
+    },
+    {
+      tipo: "diplomaFase",
+      titulo: "Subitizador(a) do Pip",
+      curso: "Contar com Pip — Fase 1 · Subitizing (1–4)",
+      descricao:
+        "Por reconhecer 1, 2, 3 e 4 sem contar; comparar MAIS, MENOS e IGUAL; e compor 3 e 4 de vários jeitos — construindo o senso numérico, base de toda a matemática.",
+      personagem: "pip",
+      numeroColecao: 1,
+      totalColecao: 8,
+      falaFinal:
+        "PARABÉNS! Você é oficialmente Subitizador do Pip! Seu diploma tá pronto — clica pra abrir!",
+    },
+  ],
+  baseCientifica:
+    "Diploma da Fase 1. Marcadores de fluência: acerto de 1–4 em <3s, comparação MAIS/MENOS/IGUAL, composição 2+1, 2+2, 3+1. Pronto para Fase 2 (contagem 1-a-1 até 10).",
+};
+
+
 export const cursoContarComPipFase1: CursoEI = {
   slug: "contar-com-pip-f1",
   serie: "pre2",
@@ -1526,6 +1956,13 @@ export const cursoContarComPipFase1: CursoEI = {
       titulo: "Semana 3 · Mestre do 4",
       subtitulo: "Compor, decompor e ver rápido",
       aulas: [dia11, dia12, dia13, dia14, dia15],
+    },
+    {
+      slug: "pip-f1-s4",
+      numero: 4,
+      titulo: "Semana 4 · Formatura em Subitizing",
+      subtitulo: "Mistura, ponte pro 5 e diploma da Fase 1",
+      aulas: [dia16, dia17, dia18, dia19, dia20],
     },
   ],
 };
