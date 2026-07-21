@@ -1288,6 +1288,440 @@ const dia15: AulaEI = {
     "Revisão semanal — cardinalidade, ordem estável reversa e irrelevância da ordem.",
 };
 
+// ============================================================
+// SEMANA 4 · Formatura da Fase 2
+// Foco: contextos do dia a dia + "quantos ao todo?" (juntar pequenos grupos)
+// + prova final de contagem 1-10 + DIPLOMA da Fase 2.
+// ============================================================
+
+const dia16: AulaEI = {
+  slug: "pip-f2-s4-d16-contar-no-dia-a-dia",
+  titulo: "Dia 16 · Contar no dia a dia",
+  icone: "🏠",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Última semana da Fase 2! Hoje contamos coisas da vida real: bolas, maçãs, balões. Qualquer coisa vira contagem!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemSingular: "maçã",
+      itemPlural: "maçãs",
+      instrucaoAudio: "A mamãe comprou maçãs. Conta pra ela: quantas tem?",
+      elogio: "QUATRO maçãs!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: balao,
+      quantidade: 6,
+      itemSingular: "balão",
+      itemPlural: "balões",
+      instrucaoAudio: "Balões da festa do Pip! Conta tocando em cada um.",
+      elogio: "SEIS balões!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 8,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Joaninhas no jardim. Conta todas!",
+      elogio: "OITO joaninhas!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "Na cesta tem 5 flores. Você põe MAIS UMA. Qual grupo mostra quantas ficaram?",
+      opcoes: [
+        { nome: "cinco", imagemUrl: flor, correta: false, quantidade: 5 },
+        { nome: "seis", imagemUrl: flor, correta: true, quantidade: 6 },
+        { nome: "sete", imagemUrl: flor, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "SEIS! 5 e mais 1 dá 6!",
+      feedbackErro: "5 e mais 1 dá 6. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Contando em casa",
+      convite:
+        "Escolhe 3 lugares da casa. Em cada um, contem coisas: 4 sapatos, 6 canecas, 8 talheres. Sempre pergunta 'quantos tem?' no final.",
+      dicaAdulto:
+        "Contextualizar contagem em objetos reais aumenta transferência (Clements & Sarama). Objetos diferentes reforçam abstração.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contador do Dia a Dia",
+      mascoteUrl: mascote,
+      falaFinal: "Você conta em qualquer lugar!",
+    },
+  ],
+  baseCientifica:
+    "Contextualização — contagem em objetos reais (Clements & Sarama).",
+};
+
+const dia17: AulaEI = {
+  slug: "pip-f2-s4-d17-quantos-ao-todo",
+  titulo: "Dia 17 · Quantos ao todo?",
+  icone: "➕",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Segredo novo: JUNTAR dois grupinhos e contar TUDO. Isso é adição chegando devagarinho!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 3,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "Conta as bolas do primeiro grupo: 1, 2, 3.",
+      elogio: "Três!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 5,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio:
+        "Agora tem 3 bolas MAIS 2 bolas juntas. Conta TUDO: 1, 2, 3, 4, 5.",
+      elogio: "CINCO ao todo! 3 e 2 dá 5!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Se juntar 2 corações e mais 2 corações, quantos ao todo?",
+      opcoes: [
+        { nome: "três", imagemUrl: coracao, correta: false, quantidade: 3 },
+        { nome: "quatro", imagemUrl: coracao, correta: true, quantidade: 4 },
+        { nome: "cinco", imagemUrl: coracao, correta: false, quantidade: 5 },
+      ],
+      feedbackAcerto: "QUATRO! 2 e 2 dá 4!",
+      feedbackErro: "2 e 2 dá 4. Conta 1, 2, 3, 4!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "O Pip tem 4 balões. Ganhou mais 3. Quantos balões ele tem AO TODO?",
+      opcoes: [
+        { nome: "seis", imagemUrl: balao, correta: false, quantidade: 6 },
+        { nome: "sete", imagemUrl: balao, correta: true, quantidade: 7 },
+        { nome: "oito", imagemUrl: balao, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SETE! 4 e mais 3 dá 7!",
+      feedbackErro: "4 e mais 3 dá 7. Continua contando: 4… 5, 6, 7!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "5 estrelas e mais 1 estrela — quantas ao todo?",
+      opcoes: [
+        { nome: "cinco", imagemUrl: estrela, correta: false, quantidade: 5 },
+        { nome: "seis", imagemUrl: estrela, correta: true, quantidade: 6 },
+        { nome: "sete", imagemUrl: estrela, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "SEIS! 5 e mais 1 dá 6!",
+      feedbackErro: "5 e mais 1 dá 6.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Juntando grupinhos",
+      convite:
+        "Coloca 2 uvas em um pratinho e 3 em outro. Pergunta: 'quantas AO TODO?' A criança junta e conta tudo. Repete com combinações diferentes até 10.",
+      dicaAdulto:
+        "Contar TUDO ('count all') é a primeira estratégia de adição (Carpenter & Moser). Depois vem 'contar a partir de' — mais adiante.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Juntador de Grupos",
+      mascoteUrl: mascote,
+      falaFinal: "Você já JUNTA e conta ao todo!",
+    },
+  ],
+  baseCientifica:
+    "Estratégia 'count all' — porta de entrada para adição (Carpenter & Moser).",
+};
+
+const dia18: AulaEI = {
+  slug: "pip-f2-s4-d18-prova-1-a-10",
+  titulo: "Dia 18 · Prova do Pip (1 a 10)",
+  icone: "🎯",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Prova do Pip! Vou misturar TUDO da Fase 2. Se passar, você recebe o DIPLOMA no Dia 20!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 7,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Conta as flores tocando em cada uma.",
+      elogio: "SETE!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Depois do 5 vem o…",
+      opcoes: [
+        { nome: "6 (seis maçãs)", imagemUrl: maca, correta: true, quantidade: 6 },
+        { nome: "4 (quatro joaninhas)", imagemUrl: joaninha, correta: false, quantidade: 4 },
+        { nome: "8 (oito balões)", imagemUrl: balao, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SEIS vem depois do CINCO!",
+      feedbackErro: "5, 6, 7… SEIS vem depois do CINCO.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 9 vem o…",
+      opcoes: [
+        { nome: "7 (sete borboletas)", imagemUrl: borboleta, correta: false, quantidade: 7 },
+        { nome: "8 (oito corações)", imagemUrl: coracao, correta: true, quantidade: 8 },
+        { nome: "10 (dez estrelas)", imagemUrl: estrela, correta: false, quantidade: 10 },
+      ],
+      feedbackAcerto: "OITO! Antes do 9 vem o 8!",
+      feedbackErro: "9, 8, 7… OITO vem antes do NOVE.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Contamos até 10. Quantos tem?",
+      opcoes: [
+        { nome: "nove", imagemUrl: bola, correta: false, quantidade: 9 },
+        { nome: "dez", imagemUrl: bola, correta: true, quantidade: 10 },
+        { nome: "oito", imagemUrl: bola, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "DEZ! Último dito = total!",
+      feedbackErro: "Se parou no 10, tem 10.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "3 maçãs e mais 4 maçãs — quantas ao todo?",
+      opcoes: [
+        { nome: "seis", imagemUrl: maca, correta: false, quantidade: 6 },
+        { nome: "sete", imagemUrl: maca, correta: true, quantidade: 7 },
+        { nome: "oito", imagemUrl: maca, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SETE! 3 e mais 4 dá 7!",
+      feedbackErro: "Conta 1, 2, 3, 4, 5, 6, 7 — SETE!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara.",
+      perguntaAudio: "Qual grupo tem MENOS estrelas?",
+      imagemUrl: estrela,
+      itemPlural: "estrelas",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 2, correta: true },
+        { qtd: 9, correta: false },
+      ],
+      feedbackAcerto: "DOIS é menos que NOVE!",
+      feedbackErro: "DOIS é menor. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Ensaio do diploma",
+      convite:
+        "Amanhã tem a festa. Hoje a criança treina: conta 10 objetos, diz o que vem antes e depois de 3, 5, 8 e junta dois grupinhos.",
+      dicaAdulto:
+        "Se algum item ainda titubear, volta 1 dia da semana correspondente antes do Dia 20.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Prova do Pip",
+      mascoteUrl: mascote,
+      falaFinal: "Passou na prova! Amanhã tem festa!",
+    },
+  ],
+  baseCientifica:
+    "Avaliação integrativa — 5 princípios de Gelman + 'count all'.",
+};
+
+const dia19: AulaEI = {
+  slug: "pip-f2-s4-d19-festa-do-pip",
+  titulo: "Dia 19 · A festa do Pip",
+  icone: "🎉",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Festa do Pip! Balões, bolos, presentes. Vamos contar tudo pra festa ficar perfeita!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: balao,
+      quantidade: 9,
+      itemSingular: "balão",
+      itemPlural: "balões",
+      instrucaoAudio: "Conta os balões da festa.",
+      elogio: "NOVE balões!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Faltou UM balão pra dar 10. Quantos tem AGORA na festa?",
+      opcoes: [
+        { nome: "nove", imagemUrl: balao, correta: true, quantidade: 9 },
+        { nome: "dez", imagemUrl: balao, correta: false, quantidade: 10 },
+        { nome: "oito", imagemUrl: balao, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "NOVE! Falta 1 pra chegar em 10!",
+      feedbackErro: "Se faltou 1 pra 10, tem NOVE.",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: coracao,
+      quantidade: 6,
+      itemSingular: "coração",
+      itemPlural: "corações",
+      instrucaoAudio: "Corações de decoração! Conta.",
+      elogio: "SEIS!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "Chegaram 4 amiguinhos e depois mais 3. Quantos amiguinhos AO TODO?",
+      opcoes: [
+        { nome: "seis", imagemUrl: joaninha, correta: false, quantidade: 6 },
+        { nome: "sete", imagemUrl: joaninha, correta: true, quantidade: 7 },
+        { nome: "oito", imagemUrl: joaninha, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SETE! 4 e mais 3 dá 7!",
+      feedbackErro: "4 e mais 3 dá 7. Junta e conta tudo!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Sobraram 3 pedaços de bolo. Antes do 3 vem o…",
+      opcoes: [
+        { nome: "2 (dois)", imagemUrl: bola, correta: true, quantidade: 2 },
+        { nome: "4 (quatro)", imagemUrl: bola, correta: false, quantidade: 4 },
+        { nome: "1 (um)", imagemUrl: bola, correta: false, quantidade: 1 },
+      ],
+      feedbackAcerto: "DOIS! 3, 2, 1!",
+      feedbackErro: "3, 2, 1 — DOIS vem antes do TRÊS.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Festa em casa",
+      convite:
+        "Simulem uma festa: contem convidados, pratos, colheres, doces. Cada coisa é uma contagem. É a última noite antes do DIPLOMA!",
+      dicaAdulto:
+        "Contexto festivo aumenta engajamento e memória (Bruner). Amanhã é o Dia 20 — celebre!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Festeiro do Pip",
+      mascoteUrl: mascote,
+      falaFinal: "Festa perfeita! Amanhã é o DIPLOMA!",
+    },
+  ],
+  baseCientifica:
+    "Prática em contexto lúdico — engajamento e memória (Bruner).",
+};
+
+const dia20: AulaEI = {
+  slug: "pip-f2-s4-d20-diploma-fase2",
+  titulo: "Dia 20 · Diploma da Fase 2",
+  icone: "🎓",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "DIA DO DIPLOMA! Você aprendeu os 5 SEGREDOS do Pip: contar tocando, ordem certa, o último é o total, tanto faz a ordem, e qualquer coisa pode ser contada. Bora fechar em grande estilo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 10,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio: "Prova de ouro: conta DEZ estrelas tocando em cada uma.",
+      elogio: "DEZ! Você é MESTRE!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem CINCO?",
+      opcoes: [
+        { nome: "quatro flores", imagemUrl: flor, correta: false, quantidade: 4 },
+        { nome: "cinco corações", imagemUrl: coracao, correta: true, quantidade: 5 },
+        { nome: "seis maçãs", imagemUrl: maca, correta: false, quantidade: 6 },
+      ],
+      feedbackAcerto: "CINCO corações! Mão inteira!",
+      feedbackErro: "CINCO tem cinco. Conta um por um!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Depois do 7 vem o…",
+      opcoes: [
+        { nome: "6 (seis bolas)", imagemUrl: bola, correta: false, quantidade: 6 },
+        { nome: "8 (oito joaninhas)", imagemUrl: joaninha, correta: true, quantidade: 8 },
+        { nome: "10 (dez balões)", imagemUrl: balao, correta: false, quantidade: 10 },
+      ],
+      feedbackAcerto: "OITO! Depois do 7 vem o 8!",
+      feedbackErro: "7, 8, 9… OITO vem depois do SETE.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "3 balões e mais 2 balões — quantos AO TODO?",
+      opcoes: [
+        { nome: "quatro", imagemUrl: balao, correta: false, quantidade: 4 },
+        { nome: "cinco", imagemUrl: balao, correta: true, quantidade: 5 },
+        { nome: "seis", imagemUrl: balao, correta: false, quantidade: 6 },
+      ],
+      feedbackAcerto: "CINCO! 3 e mais 2 dá 5!",
+      feedbackErro: "3 e mais 2 dá 5. Junta e conta tudo!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Última comparação!",
+      perguntaAudio: "Qual grupo tem MAIS borboletas?",
+      imagemUrl: borboleta,
+      itemPlural: "borboletas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 10, correta: true },
+        { qtd: 4, correta: false },
+      ],
+      feedbackAcerto: "DEZ é bem mais que QUATRO!",
+      feedbackErro: "DEZ é maior. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Cerimônia do diploma",
+      convite:
+        "É dia de festa! Imprima ou mostre o diploma para a criança. Peça pra ela contar 10 coisas na frente da família. Aplausos!",
+      dicaAdulto:
+        "Ritualizar a conquista consolida autoconfiança matemática (Dweck). Fase 3 (cardinalidade avançada e representação escrita dos números) libera na sequência.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "DIPLOMA · Contador do Pip",
+      mascoteUrl: mascote,
+      falaFinal:
+        "DIPLOMA CONQUISTADO! Você é oficialmente CONTADOR DO PIP! Parabéns!",
+    },
+  ],
+  baseCientifica:
+    "Cerimônia de fechamento — autoconfiança matemática (Dweck).",
+};
+
 
 export const cursoContarComPipFase2: CursoEI = {
   slug: "contar-com-pip-f2",
@@ -1321,8 +1755,16 @@ export const cursoContarComPipFase2: CursoEI = {
       subtitulo: "Cardinalidade, contagem regressiva e irrelevância da ordem",
       aulas: [dia11, dia12, dia13, dia14, dia15],
     },
+    {
+      slug: "pip-f2-s4",
+      numero: 4,
+      titulo: "Semana 4 · Formatura do Pip",
+      subtitulo: "Contextos reais, juntar grupinhos e DIPLOMA da Fase 2",
+      aulas: [dia16, dia17, dia18, dia19, dia20],
+    },
   ],
 };
+
 
 
 
