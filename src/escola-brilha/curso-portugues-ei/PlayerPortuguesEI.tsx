@@ -56,6 +56,9 @@ function speakWordSync(
 import type { AulaEI, MomentoEI, CursoEI } from "./types";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
+import { TapCountGroup } from "@/escola-brilha/player/blocos/TapCountGroup";
+import { OperacaoVisual } from "@/escola-brilha/player/blocos/OperacaoVisual";
+
 
 /**
  * PlayerPortuguesEI — leitura via IMAGENS + ÁUDIO + TOQUE.
