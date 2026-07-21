@@ -395,28 +395,50 @@ function MomentoRender({
           <TituloMomento n={idx + 1} texto="Escolhe a resposta certa" cor={cor} />
           <BigListenButton onClick={() => speak(m.perguntaAudio)} label="Ouvir pergunta" />
           <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {m.opcoes.map((o) => (
-              <button
-                key={o.nome}
-                onClick={() => {
-                  speak(o.nome);
-                  if (o.correta) {
-                    setOk(true);
-                    setMsg(m.feedbackAcerto);
-                    speak(m.feedbackAcerto);
-                    setTimeout(marcarOk, 600);
-                  } else {
-                    setMsg(m.feedbackErro);
-                    speak(m.feedbackErro);
-                  }
-                }}
-                className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
-                  ok && o.correta ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
-                }`}
-              >
-                <ImageFrame src={o.imagemUrl} alt={o.nome} size="md" />
-              </button>
-            ))}
+            {m.opcoes.map((o) => {
+              const qtd = Math.max(1, o.quantidade ?? 1);
+              return (
+                <button
+                  key={o.nome}
+                  onClick={() => {
+                    speak(o.nome);
+                    if (o.correta) {
+                      setOk(true);
+                      setMsg(m.feedbackAcerto);
+                      speak(m.feedbackAcerto);
+                      setTimeout(marcarOk, 600);
+                    } else {
+                      setMsg(m.feedbackErro);
+                      speak(m.feedbackErro);
+                    }
+                  }}
+                  className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
+                    ok && o.correta ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
+                  }`}
+                >
+                  {qtd === 1 ? (
+                    <ImageFrame src={o.imagemUrl} alt={o.nome} size="md" />
+                  ) : (
+                    <div
+                      className={`flex flex-wrap items-center justify-center gap-1 p-2 ${
+                        qtd >= 4 ? "max-w-[140px] mx-auto" : ""
+                      }`}
+                    >
+                      {Array.from({ length: qtd }).map((_, i) => (
+                        <img
+                          key={i}
+                          src={o.imagemUrl}
+                          alt=""
+                          className="w-12 h-12 object-contain select-none"
+                          draggable={false}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  <p className="mt-1 text-center text-sm font-semibold text-slate-700">{o.nome}</p>
+                </button>
+              );
+            })}
           </div>
           {msg && <p className="mt-4 text-center font-semibold text-slate-700">{msg}</p>}
         </CardScreen>
