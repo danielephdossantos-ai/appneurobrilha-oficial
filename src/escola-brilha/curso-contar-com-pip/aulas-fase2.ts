@@ -449,6 +449,409 @@ const dia05: AulaEI = {
 
 
 
+// ============================================================
+// SEMANA 2 · Contar até 10 (6, 7, 8, 9, 10)
+// Base: contagem 1-a-1 estendida + cardinalidade (o último dito é o total).
+// Âncora: 5 (mão cheia) + mais dedos da outra mão.
+// ============================================================
+
+const dia06: AulaEI = {
+  slug: "pip-f2-s2-d6-contar-ate-6",
+  titulo: "Dia 6 · Contar até 6",
+  icone: "6️⃣",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana 2! Já sabemos até 5 (mão cheia). Hoje vamos passar do 5: chega o SEIS! É 5 e mais 1.",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 5,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "Aquece: conta as CINCO bolas — UM, DOIS, TRÊS, QUATRO, CINCO.",
+      elogio: "Cinco! Mão cheia!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 6,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Agora SEIS estrelas. Toca uma por uma: UM, DOIS, TRÊS, QUATRO, CINCO, SEIS.",
+      elogio: "SEIS! Passou do cinco!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 6,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "De novo, com joaninhas: até SEIS.",
+      elogio: "Seis joaninhas!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem SEIS?",
+      opcoes: [
+        { nome: "cinco flores", imagemUrl: flor, correta: false, quantidade: 5 },
+        { nome: "seis corações", imagemUrl: coracao, correta: true, quantidade: 6 },
+        { nome: "quatro maçãs", imagemUrl: maca, correta: false, quantidade: 4 },
+      ],
+      feedbackAcerto: "Isso! SEIS corações!",
+      feedbackErro: "SEIS é CINCO e mais UM. Conta um por um!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Seis coisinhas",
+      convite:
+        "Ache 6 tampinhas. Enfileira. A criança conta tocando: 1, 2, 3, 4, 5, 6. Pergunta: 'Quantos tem?' — resposta esperada: SEIS.",
+      dicaAdulto:
+        "Cardinalidade (Gelman): o ÚLTIMO número dito é o total. Se recontar quando você pergunta 'quantos?', ainda está firmando esse princípio.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contador de 6",
+      mascoteUrl: mascote,
+      falaFinal: "SEIS! Você já conta mais que a mão!",
+    },
+  ],
+  baseCientifica:
+    "Extensão da contagem 1-a-1 para além do 5 — ponte perceptual (Fuson).",
+};
+
+const dia07: AulaEI = {
+  slug: "pip-f2-s2-d7-contar-ate-7",
+  titulo: "Dia 7 · Contar até 7",
+  icone: "7️⃣",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Hoje é o SETE! Cinco na mão cheia mais DOIS dedos da outra mão.",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 6,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Aquece: SEIS flores — 1, 2, 3, 4, 5, 6.",
+      elogio: "Seis!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: balao,
+      quantidade: 7,
+      itemSingular: "balão",
+      itemPlural: "balões",
+      instrucaoAudio:
+        "Agora SETE balões. Toca cada um: 1, 2, 3, 4, 5, 6, 7.",
+      elogio: "SETE! Nenhum pulou!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: borboleta,
+      quantidade: 7,
+      itemSingular: "borboleta",
+      itemPlural: "borboletas",
+      instrucaoAudio: "De novo, com borboletas: até SETE.",
+      elogio: "Sete borboletas!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem SETE?",
+      opcoes: [
+        { nome: "seis maçãs", imagemUrl: maca, correta: false, quantidade: 6 },
+        { nome: "sete estrelas", imagemUrl: estrela, correta: true, quantidade: 7 },
+        { nome: "cinco bolas", imagemUrl: bola, correta: false, quantidade: 5 },
+      ],
+      feedbackAcerto: "Isso! SETE estrelas!",
+      feedbackErro: "SETE é SEIS e mais UM. Conta tocando!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara os dois grupos.",
+      perguntaAudio: "Qual grupo tem MAIS joaninhas?",
+      imagemUrl: joaninha,
+      itemPlural: "joaninhas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 4, correta: false },
+        { qtd: 7, correta: true },
+      ],
+      feedbackAcerto: "SETE é bem mais que QUATRO!",
+      feedbackErro: "SETE é maior. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Sete pecinhas",
+      convite:
+        "Pega 7 blocos ou pecinhas. A criança conta tocando cada um. Depois pergunta: 'quantos tem?' — resposta: SETE.",
+      dicaAdulto:
+        "Se a criança recontar toda vez, tudo bem — o princípio da cardinalidade ainda está sendo interiorizado.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contador de 7",
+      mascoteUrl: mascote,
+      falaFinal: "SETE! Cinco dedos + dois. Muito bem!",
+    },
+  ],
+  baseCientifica:
+    "Contagem 1-a-1 até 7 + reforço de cardinalidade.",
+};
+
+const dia08: AulaEI = {
+  slug: "pip-f2-s2-d8-contar-ate-8",
+  titulo: "Dia 8 · Contar até 8",
+  icone: "8️⃣",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "OITO hoje! Cinco na mão cheia mais TRÊS dedos. Vem contar!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: coracao,
+      quantidade: 7,
+      itemSingular: "coração",
+      itemPlural: "corações",
+      instrucaoAudio: "Aquece com SETE corações.",
+      elogio: "Sete!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: maca,
+      quantidade: 8,
+      itemSingular: "maçã",
+      itemPlural: "maçãs",
+      instrucaoAudio:
+        "Agora OITO maçãs. Toca cada uma: 1, 2, 3, 4, 5, 6, 7, 8.",
+      elogio: "OITO maçãs!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 8,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio: "De novo, com estrelas: até OITO.",
+      elogio: "Oito estrelas!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem OITO?",
+      opcoes: [
+        { nome: "sete balões", imagemUrl: balao, correta: false, quantidade: 7 },
+        { nome: "oito joaninhas", imagemUrl: joaninha, correta: true, quantidade: 8 },
+        { nome: "seis flores", imagemUrl: flor, correta: false, quantidade: 6 },
+      ],
+      feedbackAcerto: "Isso! OITO joaninhas!",
+      feedbackErro: "OITO é SETE e mais UM. Conta tocando!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Oito passos",
+      convite:
+        "Andem juntos contando cada passo até 8. Depois: 8 uvas, 8 pedrinhas — qualquer coisa que der pra tocar.",
+      dicaAdulto:
+        "Abstração (Gelman): qualquer coisa pode ser contada — passos, sons, objetos. Variar o material fortalece o conceito.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contador de 8",
+      mascoteUrl: mascote,
+      falaFinal: "OITO! Cada vez mais longe!",
+    },
+  ],
+  baseCientifica:
+    "Contagem 1-a-1 até 8 + princípio da abstração (Gelman).",
+};
+
+const dia09: AulaEI = {
+  slug: "pip-f2-s2-d9-contar-ate-9",
+  titulo: "Dia 9 · Contar até 9",
+  icone: "9️⃣",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "NOVE! Quase chegando na mão inteira DE NOVO. Falta só um pro DEZ.",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 8,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "Aquece com OITO bolas.",
+      elogio: "Oito!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 9,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio:
+        "Agora NOVE flores. Toca cada uma: 1, 2, 3, 4, 5, 6, 7, 8, 9.",
+      elogio: "NOVE flores!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: borboleta,
+      quantidade: 9,
+      itemSingular: "borboleta",
+      itemPlural: "borboletas",
+      instrucaoAudio: "De novo, com borboletas: até NOVE.",
+      elogio: "Nove borboletas!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Depois do 8 vem o…",
+      opcoes: [
+        { nome: "7 (sete corações)", imagemUrl: coracao, correta: false, quantidade: 7 },
+        { nome: "9 (nove balões)", imagemUrl: balao, correta: true, quantidade: 9 },
+        { nome: "5 (cinco bolas)", imagemUrl: bola, correta: false, quantidade: 5 },
+      ],
+      feedbackAcerto: "NOVE vem depois do OITO!",
+      feedbackErro: "1, 2, 3, 4, 5, 6, 7, 8, 9 — NOVE vem depois do OITO.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem NOVE?",
+      opcoes: [
+        { nome: "oito estrelas", imagemUrl: estrela, correta: false, quantidade: 8 },
+        { nome: "nove maçãs", imagemUrl: maca, correta: true, quantidade: 9 },
+        { nome: "sete joaninhas", imagemUrl: joaninha, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "Isso! NOVE maçãs!",
+      feedbackErro: "Conta tocando cada uma até 9.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Nove batidas",
+      convite:
+        "Bate palma 9 vezes contando junto. Depois separa 9 objetos e conta tocando.",
+      dicaAdulto:
+        "Contar sons treina abstração e memória sequencial — importante para o próximo passo (DEZ).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Contador de 9",
+      mascoteUrl: mascote,
+      falaFinal: "NOVE! Amanhã: DEZ!",
+    },
+  ],
+  baseCientifica:
+    "Contagem 1-a-1 até 9 + ordem estável estendida.",
+};
+
+const dia10: AulaEI = {
+  slug: "pip-f2-s2-d10-contador-de-10",
+  titulo: "Dia 10 · Contador de 10 (revisão)",
+  icone: "🏅",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Chegou o DEZ! As DUAS mãos inteiras. Fim da Semana 2 — bora provar tudo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 10,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Toca em cada estrela: 1, 2, 3, 4, 5, 6, 7, 8, 9, DEZ!",
+      elogio: "DEZ estrelas! As duas mãos!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: coracao,
+      quantidade: 10,
+      itemSingular: "coração",
+      itemPlural: "corações",
+      instrucaoAudio: "De novo, com corações: até DEZ.",
+      elogio: "Dez corações!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo tem DEZ?",
+      opcoes: [
+        { nome: "nove flores", imagemUrl: flor, correta: false, quantidade: 9 },
+        { nome: "dez balões", imagemUrl: balao, correta: true, quantidade: 10 },
+        { nome: "oito maçãs", imagemUrl: maca, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "Isso! DEZ balões!",
+      feedbackErro: "DEZ é NOVE e mais UM. Conta tocando!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Depois do 6 vem o…",
+      opcoes: [
+        { nome: "7 (sete joaninhas)", imagemUrl: joaninha, correta: true, quantidade: 7 },
+        { nome: "5 (cinco bolas)", imagemUrl: bola, correta: false, quantidade: 5 },
+        { nome: "9 (nove borboletas)", imagemUrl: borboleta, correta: false, quantidade: 9 },
+      ],
+      feedbackAcerto: "SETE vem depois do SEIS!",
+      feedbackErro: "1, 2, 3, 4, 5, 6, 7 — SETE vem depois do SEIS!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara.",
+      perguntaAudio: "Qual grupo tem MAIS bolas?",
+      imagemUrl: bola,
+      itemPlural: "bolas",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 10, correta: true },
+        { qtd: 6, correta: false },
+      ],
+      feedbackAcerto: "DEZ é bem mais que SEIS!",
+      feedbackErro: "DEZ é maior. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Show do 10",
+      convite:
+        "A criança abre as DUAS mãos: 10 dedinhos. Conta tocando. Depois: 10 uvas, 10 blocos, 10 passos — tudo até 10.",
+      dicaAdulto:
+        "Marcadores da Semana 2: contar 1-a-1 até 10 sem pular, responder 'quantos tem?' sem recontar (cardinalidade) e saber o número seguinte. Firme? Fase 2 fechada, Fase 3 (cardinalidade avançada) libera.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Semana 2 · Contador de 10",
+      mascoteUrl: mascote,
+      falaFinal:
+        "MEDALHA de Contador de 10! Você conta as DUAS mãos inteiras!",
+    },
+  ],
+  baseCientifica:
+    "Revisão semanal — contagem 1-a-1 e cardinalidade até 10.",
+};
+
 
 export const cursoContarComPipFase2: CursoEI = {
   slug: "contar-com-pip-f2",
@@ -468,8 +871,16 @@ export const cursoContarComPipFase2: CursoEI = {
       subtitulo: "Correspondência 1-a-1 e ordem estável até 5",
       aulas: [dia01, dia02, dia03, dia04, dia05],
     },
+    {
+      slug: "pip-f2-s2",
+      numero: 2,
+      titulo: "Semana 2 · Contador de 10",
+      subtitulo: "Contagem 1-a-1 e cardinalidade de 6 até 10",
+      aulas: [dia06, dia07, dia08, dia09, dia10],
+    },
   ],
 };
+
 
 export function getAulaContarComPipFase2(slug: string): AulaEI | undefined {
   for (const u of cursoContarComPipFase2.unidades) {
