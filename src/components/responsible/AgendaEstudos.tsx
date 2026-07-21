@@ -31,9 +31,11 @@ export interface AgendaItem {
   topic: string;
   description: string;
   exam_date: string;
-  type: "prova" | "trabalho" | "exercicio" | "estudo" | "outro";
+  type: "prova" | "trabalho" | "exercicio" | "estudo" | "aurora" | "outro";
   completed: boolean;
   child_id?: string;
+  time_of_day?: string | null;
+  category?: string | null;
 }
 
 export function AgendaEstudos({ childId }: AgendaEstudosProps) {
