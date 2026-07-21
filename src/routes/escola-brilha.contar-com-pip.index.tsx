@@ -42,8 +42,8 @@ const FASES: BlocoFase[] = [
     n: 1,
     curso: cursoContarComPipFase1,
     gradiente: "linear-gradient(135deg,#22C55E,#0f766e)",
-    badge: "FASE 1 · SUBITIZING (1–4)",
-    nome: "Subitizing",
+    badge: "FASE 1 · VER DE RELANCE (1–4)",
+    nome: "Ver de Relance",
     descricao: "Ver 1, 2, 3 e 4 de olhada, sem contar.",
   },
   {
