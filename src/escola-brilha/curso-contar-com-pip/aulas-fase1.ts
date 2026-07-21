@@ -521,6 +521,19 @@ const dia05: AulaEI = {
       dicaAdulto:
         "Butterworth (1999): o uso dos dedos aos 5 anos prediz o desempenho matemático aos 8. Não é 'muleta' — é o primeiro ábaco do cérebro. Mostre você primeiro cada quantidade, deixe a criança copiar, e depois alterne quem pede e quem mostra.",
     },
+    {
+      tipo: "celebracao",
+      medalha: "Semana 1 · Olho de Subitizar",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Fim da Semana 1! Você já vê 1, 2, 3 e 4 de olhada! Que olhão de matemático!",
+    },
+  ],
+  baseCientifica:
+    "Revisão semanal de subitizing 1–4 + finger gnosia em casa (Butterworth 1999; Noel 2005).",
+};
+
+
 
 
 export const cursoContarComPipFase1: CursoEI = {
