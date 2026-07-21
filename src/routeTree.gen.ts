@@ -56,6 +56,8 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as EscolaBrilhaPortuguesEiIndexRouteImport } from './routes/escola-brilha.portugues-ei.index'
 import { Route as EscolaBrilhaLerComAuroraIndexRouteImport } from './routes/escola-brilha.ler-com-aurora.index'
 import { Route as EscolaBrilhaTrilhaInglesSerieRouteImport } from './routes/escola-brilha.trilha-ingles.$serie'
+import { Route as EscolaBrilhaLerComAuroraPainelRouteImport } from './routes/escola-brilha.ler-com-aurora.painel'
+import { Route as EscolaBrilhaLerComAuroraDiagnosticoRouteImport } from './routes/escola-brilha.ler-com-aurora.diagnostico'
 import { Route as EscolaBrilhaLerComAuroraAulaRouteImport } from './routes/escola-brilha.ler-com-aurora.$aula'
 import { Route as EscolaBrilhaGeo9anoUnidadeRouteImport } from './routes/escola-brilha.geo-9ano.$unidade'
 import { Route as EscolaBrilhaGeo8anoUnidadeRouteImport } from './routes/escola-brilha.geo-8ano.$unidade'
@@ -316,6 +318,18 @@ const EscolaBrilhaTrilhaInglesSerieRoute =
     path: '/escola-brilha/trilha-ingles/$serie',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EscolaBrilhaLerComAuroraPainelRoute =
+  EscolaBrilhaLerComAuroraPainelRouteImport.update({
+    id: '/escola-brilha/ler-com-aurora/painel',
+    path: '/escola-brilha/ler-com-aurora/painel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaLerComAuroraDiagnosticoRoute =
+  EscolaBrilhaLerComAuroraDiagnosticoRouteImport.update({
+    id: '/escola-brilha/ler-com-aurora/diagnostico',
+    path: '/escola-brilha/ler-com-aurora/diagnostico',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EscolaBrilhaLerComAuroraAulaRoute =
   EscolaBrilhaLerComAuroraAulaRouteImport.update({
     id: '/escola-brilha/ler-com-aurora/$aula',
@@ -478,6 +492,8 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
   '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
+  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
+  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
   '/escola-brilha/ler-com-aurora/': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
@@ -544,6 +560,8 @@ export interface FileRoutesByTo {
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
   '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
+  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
+  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
   '/escola-brilha/ler-com-aurora': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiIndexRoute
@@ -612,6 +630,8 @@ export interface FileRoutesById {
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
   '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
+  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
+  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
   '/escola-brilha/ler-com-aurora/': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
@@ -681,6 +701,8 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
     | '/escola-brilha/ler-com-aurora/$aula'
+    | '/escola-brilha/ler-com-aurora/diagnostico'
+    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
     | '/escola-brilha/ler-com-aurora/'
     | '/escola-brilha/portugues-ei/'
@@ -747,6 +769,8 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
     | '/escola-brilha/ler-com-aurora/$aula'
+    | '/escola-brilha/ler-com-aurora/diagnostico'
+    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
     | '/escola-brilha/ler-com-aurora'
     | '/escola-brilha/portugues-ei'
@@ -814,6 +838,8 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
     | '/escola-brilha/ler-com-aurora/$aula'
+    | '/escola-brilha/ler-com-aurora/diagnostico'
+    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
     | '/escola-brilha/ler-com-aurora/'
     | '/escola-brilha/portugues-ei/'
@@ -877,6 +903,8 @@ export interface RootRouteChildren {
   EscolaBrilhaGeo8anoUnidadeRoute: typeof EscolaBrilhaGeo8anoUnidadeRoute
   EscolaBrilhaGeo9anoUnidadeRoute: typeof EscolaBrilhaGeo9anoUnidadeRoute
   EscolaBrilhaLerComAuroraAulaRoute: typeof EscolaBrilhaLerComAuroraAulaRoute
+  EscolaBrilhaLerComAuroraDiagnosticoRoute: typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
+  EscolaBrilhaLerComAuroraPainelRoute: typeof EscolaBrilhaLerComAuroraPainelRoute
   EscolaBrilhaTrilhaInglesSerieRoute: typeof EscolaBrilhaTrilhaInglesSerieRoute
   EscolaBrilhaLerComAuroraIndexRoute: typeof EscolaBrilhaLerComAuroraIndexRoute
   EscolaBrilhaPortuguesEiIndexRoute: typeof EscolaBrilhaPortuguesEiIndexRoute
@@ -1221,6 +1249,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaTrilhaInglesSerieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escola-brilha/ler-com-aurora/painel': {
+      id: '/escola-brilha/ler-com-aurora/painel'
+      path: '/escola-brilha/ler-com-aurora/painel'
+      fullPath: '/escola-brilha/ler-com-aurora/painel'
+      preLoaderRoute: typeof EscolaBrilhaLerComAuroraPainelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/ler-com-aurora/diagnostico': {
+      id: '/escola-brilha/ler-com-aurora/diagnostico'
+      path: '/escola-brilha/ler-com-aurora/diagnostico'
+      fullPath: '/escola-brilha/ler-com-aurora/diagnostico'
+      preLoaderRoute: typeof EscolaBrilhaLerComAuroraDiagnosticoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escola-brilha/ler-com-aurora/$aula': {
       id: '/escola-brilha/ler-com-aurora/$aula'
       path: '/escola-brilha/ler-com-aurora/$aula'
@@ -1439,6 +1481,9 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaGeo8anoUnidadeRoute: EscolaBrilhaGeo8anoUnidadeRoute,
   EscolaBrilhaGeo9anoUnidadeRoute: EscolaBrilhaGeo9anoUnidadeRoute,
   EscolaBrilhaLerComAuroraAulaRoute: EscolaBrilhaLerComAuroraAulaRoute,
+  EscolaBrilhaLerComAuroraDiagnosticoRoute:
+    EscolaBrilhaLerComAuroraDiagnosticoRoute,
+  EscolaBrilhaLerComAuroraPainelRoute: EscolaBrilhaLerComAuroraPainelRoute,
   EscolaBrilhaTrilhaInglesSerieRoute: EscolaBrilhaTrilhaInglesSerieRoute,
   EscolaBrilhaLerComAuroraIndexRoute: EscolaBrilhaLerComAuroraIndexRoute,
   EscolaBrilhaPortuguesEiIndexRoute: EscolaBrilhaPortuguesEiIndexRoute,
