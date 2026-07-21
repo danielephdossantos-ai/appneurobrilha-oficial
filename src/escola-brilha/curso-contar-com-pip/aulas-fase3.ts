@@ -19,7 +19,7 @@ import { url as n6 } from "@/assets/banco-midias/numeros/numero-6.png.asset.json
 import { url as n7 } from "@/assets/banco-midias/numeros/numero-7.png.asset.json";
 import { url as n8 } from "@/assets/banco-midias/numeros/numero-8.png.asset.json";
 import { url as n9 } from "@/assets/banco-midias/numeros/numero-9.png.asset.json";
-import { url as n10 } from "@/assets/banco-midias/numeros/numero-10.png.asset.json";
+import n10 from "@/assets/banco-midias/numeros/numero-10.png";
 
 /**
  * Contar com Pip — FASE 3 · Cardinalidade + Numeral (0–10)
