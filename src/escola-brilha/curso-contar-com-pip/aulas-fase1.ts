@@ -10,8 +10,6 @@ import { url as borboleta } from "@/assets/neuro-treino/objetos/borboleta.png.as
 import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
-import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
 
 /**
  * Contar com Pip — FASE 1 · Subitizing (1–4)
