@@ -59,7 +59,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 3,
-    curso: null,
+    curso: cursoContarComPipFase3,
     gradiente: "linear-gradient(135deg,#a855f7,#4c1d95)",
     badge: "FASE 3 · CARDINALIDADE + NUMERAL",
     nome: "Cardinalidade + Numeral",
