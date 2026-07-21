@@ -12,6 +12,7 @@ import {
   BookOpen,
   Calculator,
   Pencil,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -30,9 +31,11 @@ export interface AgendaItem {
   topic: string;
   description: string;
   exam_date: string;
-  type: "prova" | "trabalho" | "exercicio" | "estudo" | "outro";
+  type: "prova" | "trabalho" | "exercicio" | "estudo" | "aurora" | "outro";
   completed: boolean;
   child_id?: string;
+  time_of_day?: string | null;
+  category?: string | null;
 }
 
 export function AgendaEstudos({ childId }: AgendaEstudosProps) {
@@ -40,6 +43,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newTopic, setNewTopic] = useState("");
   const [newDate, setNewDate] = useState("");
+  const [newTime, setNewTime] = useState("");
   const [newType, setNewType] = useState<AgendaItem["type"]>("prova");
   const { sendNotification } = useNotifications();
 
@@ -90,6 +94,8 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         exam_date: newDate || new Date().toISOString().split("T")[0],
         type: newType,
         completed: false,
+        time_of_day: newTime || null,
+        category: newType === "aurora" ? "aurora" : null,
       };
 
       // Persistência Offline Imediata
@@ -100,7 +106,10 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         sendNotification({
           child_id: childId,
           title: `Novo item na sua Agenda!`,
-          message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
+          message:
+            newType === "aurora"
+              ? `Mamãe agendou o Ler com Aurora${newTime ? ` para as ${newTime}` : ""}. Vamos ler juntos?`
+              : `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
           type: "estudo",
         });
       }
@@ -110,9 +119,18 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       setIsAdding(false);
       setNewTopic("");
       setNewDate("");
+      setNewTime("");
       toast.success("Estudo agendado com sucesso!");
     },
   });
+
+  const adicionarAurora = () => {
+    setIsAdding(true);
+    setNewType("aurora");
+    setNewTopic("Ler com Aurora · 15 min");
+    setNewTime((t) => t || "18:00");
+  };
+
 
   const toggleMutation = useMutation({
     mutationFn: async ({ id, completed }: { id: string; completed: boolean }) => {
@@ -153,6 +171,8 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         return <BookOpen className="h-4 w-4 text-purple-500" />;
       case "exercicio":
         return <Calculator className="h-4 w-4 text-blue-500" />;
+      case "aurora":
+        return <Sparkles className="h-4 w-4 text-amber-500" />;
       default:
         return <Clock className="h-4 w-4 text-slate-500" />;
     }
@@ -179,6 +199,22 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       </div>
 
       <div className="p-6 space-y-4">
+        <button
+          onClick={adicionarAurora}
+          className="w-full flex items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-4 py-3 text-left hover:from-amber-100 hover:to-orange-100 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-amber-500 text-white flex items-center justify-center">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-bold text-sm text-amber-900">Agendar Ler com Aurora</p>
+              <p className="text-[11px] text-amber-700">15 min/dia · a criança recebe lembrete no horário</p>
+            </div>
+          </div>
+          <Plus className="h-5 w-5 text-amber-700" />
+        </button>
+
         {isAdding && (
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -200,13 +236,21 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
               <select
                 className="flex-1 px-4 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                 value={newType}
-                onChange={(e) => setNewType(e.target.value as any)}
+                onChange={(e) => setNewType(e.target.value as AgendaItem["type"])}
               >
                 <option value="prova">Prova</option>
                 <option value="trabalho">Trabalho</option>
                 <option value="exercicio">Exercício</option>
                 <option value="estudo">Estudo Regular</option>
+                <option value="aurora">Ler com Aurora</option>
               </select>
+              <input
+                type="time"
+                className="w-28 px-3 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                value={newTime}
+                onChange={(e) => setNewTime(e.target.value)}
+                placeholder="Hora"
+              />
               <button
                 disabled={!newTopic || addMutation.isPending}
                 onClick={() => addMutation.mutate()}
@@ -217,6 +261,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
             </div>
           </div>
         )}
+
 
         <div className="space-y-3">
           {agenda.length === 0 && !isAdding && (
@@ -266,6 +311,12 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
                         : "Sem data"}
                     </span>
                   </div>
+                  {item.time_of_day && (
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{item.time_of_day}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
