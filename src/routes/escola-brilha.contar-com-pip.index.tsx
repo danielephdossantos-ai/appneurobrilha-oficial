@@ -50,7 +50,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 2,
-    curso: null,
+    curso: cursoContarComPipFase2,
     gradiente: "linear-gradient(135deg,#0ea5e9,#1e3a8a)",
     badge: "FASE 2 · CONTAGEM 1-A-1 (até 10)",
     nome: "Contagem 1-a-1",
