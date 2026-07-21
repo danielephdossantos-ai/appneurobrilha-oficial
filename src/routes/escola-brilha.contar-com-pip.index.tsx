@@ -42,8 +42,8 @@ const FASES: BlocoFase[] = [
     n: 1,
     curso: cursoContarComPipFase1,
     gradiente: "linear-gradient(135deg,#22C55E,#0f766e)",
-    badge: "FASE 1 · SUBITIZING (1–4)",
-    nome: "Subitizing",
+    badge: "FASE 1 · VER DE RELANCE (1–4)",
+    nome: "Ver de Relance",
     descricao: "Ver 1, 2, 3 e 4 de olhada, sem contar.",
   },
   {
@@ -277,7 +277,7 @@ function TrilhaContarComPip() {
             🔢 Contar com Pip
           </h1>
           <p className="text-yellow-100 text-sm mt-1">
-            8 fases · subitizing → problemas em história · 10 min/dia
+            8 fases · ver de relance → problemas em história · 10 min/dia
           </p>
         </header>
 
@@ -286,7 +286,7 @@ function TrilhaContarComPip() {
             <Sparkles className="h-4 w-4" /> Comece pela Fase 1
           </div>
           <div className="mt-1 text-lg font-black leading-tight">
-            Subitizing (ver 1 a 4 de olhada)
+            Ver de Relance (1 a 4 de olhada)
           </div>
           <p className="text-sm mt-1">
             Base do senso numérico segundo Dehaene. As outras fases liberam
