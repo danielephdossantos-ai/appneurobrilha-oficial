@@ -882,7 +882,7 @@ const dia09: AulaEI = {
       tipo: "compreensaoImagem",
       perguntaAudio: "Se as bolas eram 3 e as flores eram 3, elas são?",
       opcoes: [
-        { nome: "IGUAL", imagemUrl: estrelas, correta: true },
+        { nome: "IGUAL", imagemUrl: SINAL_IGUAL, correta: true },
         { nome: "MAIS bolas", imagemUrl: bola, correta: false, quantidade: 4 },
         { nome: "MAIS flores", imagemUrl: flor, correta: false, quantidade: 4 },
       ],
