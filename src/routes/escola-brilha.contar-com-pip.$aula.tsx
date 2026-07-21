@@ -12,6 +12,10 @@ import {
   cursoContarComPipFase3,
   getAulaContarComPipFase3,
 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase3";
+import {
+  cursoContarComPipFase4,
+  getAulaContarComPipFase4,
+} from "@/escola-brilha/curso-contar-com-pip/aulas-fase4";
 import { marcarMissaoPipConcluida } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 
