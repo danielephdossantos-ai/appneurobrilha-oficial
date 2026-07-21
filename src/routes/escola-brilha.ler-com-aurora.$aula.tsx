@@ -86,9 +86,10 @@ function AulaLerComAuroraRoute() {
     );
   }
 
-  return (
   const { activeChild } = useAppState();
   const fase = aulaF8 ? 8 : aulaF7 ? 7 : aulaF6 ? 6 : aulaF5 ? 5 : aulaF4 ? 4 : aulaF3 ? 3 : aulaF2 ? 2 : 1;
+
+
 
   return (
     <PlayerPortuguesEI
