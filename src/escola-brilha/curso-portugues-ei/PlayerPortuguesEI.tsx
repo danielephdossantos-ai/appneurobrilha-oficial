@@ -58,6 +58,7 @@ import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 import { TapCountGroup } from "@/escola-brilha/player/blocos/TapCountGroup";
 import { OperacaoVisual } from "@/escola-brilha/player/blocos/OperacaoVisual";
+import { SubitizingFlash } from "@/escola-brilha/player/blocos/SubitizingFlash";
 
 
 /**
@@ -612,6 +613,27 @@ function MomentoRender({
           >
             Entendi ✓
           </button>
+        </CardScreen>
+      );
+
+    case "subitizingFlash":
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto="Quantos você viu?" cor={cor} />
+          <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir" />
+          <div className="mt-4">
+            <SubitizingFlash
+              imagemUrl={m.imagemUrl}
+              quantidade={m.quantidade}
+              itemPlural={m.itemPlural}
+              perguntaAudio={m.perguntaAudio}
+              opcoes={m.opcoes}
+              feedbackAcerto={m.feedbackAcerto}
+              feedbackErro={m.feedbackErro}
+              duracaoFlashMs={m.duracaoFlashMs}
+              onAcerto={marcarOk}
+            />
+          </div>
         </CardScreen>
       );
 
