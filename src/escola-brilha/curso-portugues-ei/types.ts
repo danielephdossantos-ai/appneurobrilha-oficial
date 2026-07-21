@@ -382,6 +382,22 @@ export type MomentoEI =
       numeroColecao?: number;
       totalColecao?: number;
       falaFinal: string;          // TTS na abertura
+    }
+  // ============ CONTAR COM PIP · Fase 1 — Subitizing (1–4) ============
+  | {
+      tipo: "subitizingFlash";
+      // Mostra um grupo de N itens por ~1.5s, esconde, e pergunta
+      // "quantos você viu?". Subitizing perceptual (Kaufman 1949;
+      // Clements 1999). Range 1–4 (limite do subitizing perceptual).
+      imagemUrl: string;
+      quantidade: number;         // 1–4
+      itemPlural: string;
+      instrucaoAudio: string;
+      perguntaAudio: string;      // "Quantos você viu?"
+      opcoes: number[];           // [1, 2, 3] — inclui a resposta certa
+      feedbackAcerto: string;
+      feedbackErro: string;
+      duracaoFlashMs?: number;    // default 1500
     };
 
 
