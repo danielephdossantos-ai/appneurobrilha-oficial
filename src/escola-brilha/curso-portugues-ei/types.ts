@@ -398,6 +398,42 @@ export type MomentoEI =
       feedbackAcerto: string;
       feedbackErro: string;
       duracaoFlashMs?: number;    // default 1500
+    }
+  // ============ FASE 6 — Ensino explícito de Magnitude ============
+  | {
+      tipo: "ensinoMagnitude";
+      // Modelagem "think-aloud" do Pip antes do quiz (Rosenshine 2012).
+      // Mostra 2 grupos, narra a comparação em voz alta e destaca o
+      // grupo alvo. Sem julgamento de acerto/erro — só "Entendi ✓".
+      grupoA: { qtd: number; imagemUrl: string; rotulo?: string };
+      grupoB: { qtd: number; imagemUrl: string; rotulo?: string };
+      itemPlural: string;
+      alvo: "mais" | "menos" | "igual";
+      falaModelagem: string;   // TTS pausado, ~2 frases
+      mascoteUrl?: string;
+      elogio: string;
+    }
+  | {
+      tipo: "pareamento1a1";
+      // Correspondência 1-a-1 visível: linhas ligando A[i] → B[i],
+      // itens "sobrando" ficam com halo. Piaget · Gelman & Gallistel.
+      grupoA: { qtd: number; imagemUrl: string };
+      grupoB: { qtd: number; imagemUrl: string };
+      itemPlural: string;
+      instrucaoAudio: string;
+      conclusao: string;       // "Sobrou 1 aqui — esse tem MAIS!"
+      elogio: string;
+    }
+  | {
+      tipo: "contraexemploTamanho";
+      // Anti-erro de conservação: 1 objeto grande × N pequenos.
+      // Ensina que MAIS = quantidade, não tamanho (Piaget).
+      itemGrande: { imagemUrl: string; nome: string };
+      itemPequeno: { imagemUrl: string; nome: string; qtd: number };
+      perguntaAudio: string;
+      falaEnsino: string;
+      feedbackAcerto: string;
+      feedbackErro: string;
     };
 
 
