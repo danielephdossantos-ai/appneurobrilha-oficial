@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Lock, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
 import { cursoContarComPipFase1 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase1";
 import { cursoContarComPipFase2 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase2";
+import { cursoContarComPipFase3 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase3";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
@@ -58,7 +59,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 3,
-    curso: null,
+    curso: cursoContarComPipFase3,
     gradiente: "linear-gradient(135deg,#a855f7,#4c1d95)",
     badge: "FASE 3 · CARDINALIDADE + NUMERAL",
     nome: "Cardinalidade + Numeral",
