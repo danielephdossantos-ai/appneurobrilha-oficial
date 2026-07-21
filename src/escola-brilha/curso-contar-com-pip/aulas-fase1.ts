@@ -391,9 +391,9 @@ const dia04: AulaEI = {
       tipo: "compreensaoImagem",
       perguntaAudio: "Qual padrão mostra QUATRO?",
       opcoes: [
-        { nome: "uma bola", imagemUrl: bola, correta: false },
-        { nome: "quatro estrelas", imagemUrl: estrelas, correta: true },
-        { nome: "uma flor", imagemUrl: flor, correta: false },
+        { nome: "uma bola", imagemUrl: bola, correta: false, quantidade: 1 },
+        { nome: "quatro estrelas", imagemUrl: estrela, correta: true, quantidade: 4 },
+        { nome: "uma flor", imagemUrl: flor, correta: false, quantidade: 1 },
       ],
       feedbackAcerto: "Isso! Quatro forma um quadradinho!",
       feedbackErro: "QUATRO tem quatro pontinhos. Escolhe o grupo cheio!",
