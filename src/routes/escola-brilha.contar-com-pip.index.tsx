@@ -237,12 +237,14 @@ function TrilhaContarComPip() {
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
   const { concluidas } = usePipConcluidas(childId);
+  const [adminOn, setAdminOn] = useAdminMode();
 
   const fasesEstado = useMemo(() => {
     const map = new Map<number, EstadoFase>();
     let jaEncontrouAtual = false;
     for (const f of FASES) {
       if (!f.curso) {
+        // Em modo admin, "em breve" (sem curso) segue travada — não há aula pra abrir.
         map.set(f.n, "travada");
         continue;
       }
@@ -253,6 +255,11 @@ function TrilhaContarComPip() {
         map.set(f.n, "concluida");
         continue;
       }
+      if (adminOn) {
+        // Admin: toda fase com curso fica liberada como "atual".
+        map.set(f.n, "atual");
+        continue;
+      }
       if (!jaEncontrouAtual) {
         map.set(f.n, "atual");
         jaEncontrouAtual = true;
@@ -261,7 +268,7 @@ function TrilhaContarComPip() {
       }
     }
     return map;
-  }, [concluidas]);
+  }, [concluidas, adminOn]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-600 via-teal-700 to-indigo-900 text-white">
