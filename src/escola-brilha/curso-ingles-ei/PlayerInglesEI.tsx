@@ -186,7 +186,7 @@ function MomentoRender({
                   .join(" ");
                 speakBilingual(texto, { ratePt: 0.9, rateEn: 0.7 });
               }}
-              label="Ouvir a música"
+              label="Ouvir a conversa"
               variant="en"
             />
             <div className="mt-2 grid gap-2">
