@@ -394,6 +394,24 @@ function EscolaBrilhaCatalogo() {
                           </Link>
                         )}
 
+                        {serie === "Educação Infantil" && (
+                          <Link
+                            to="/escola-brilha/matematica-ei"
+                            className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                            style={{ background: "linear-gradient(135deg, #10b981, #0ea5e9)" }}
+                          >
+                            <div className="text-[10px] uppercase tracking-widest opacity-90">
+                              🔢 Matemática EI · Maternal + Pré I + Pré II
+                            </div>
+                            <div className="text-lg leading-tight mt-0.5">
+                              Matemática Kawaii — Trilha
+                            </div>
+                            <div className="text-[11px] font-bold opacity-90 mt-1">
+                              Contagem, formas e quantidades · abrir trilha →
+                            </div>
+                          </Link>
+                        )}
+
                         {disciplinas.length === 0 && !mostraLerComAurora && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
                           Nenhuma missão {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
