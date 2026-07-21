@@ -369,9 +369,9 @@ export function OperacaoVisual({
             </div>
           </div>
         ) : fase < 4 ? (
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <div className="flex flex-col items-center gap-1">
-              <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+            <div className="flex flex-col items-center gap-1 w-full sm:w-auto rounded-xl bg-white/70 p-2">
+              <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} numerar />
               <span className="text-sm font-black" style={{ color: cor }}>
                 {fase === 1 ? contadoA : a}
               </span>
@@ -385,8 +385,8 @@ export function OperacaoVisual({
                 transition: "all .3s",
               }}
             />
-            <div className="flex flex-col items-center gap-1">
-              <Grupo total={b} mostrar={fase === 0 ? b : contadoB} />
+            <div className="flex flex-col items-center gap-1 w-full sm:w-auto rounded-xl bg-white/70 p-2">
+              <Grupo total={b} mostrar={fase === 0 ? b : contadoB} numerar />
               <span className="text-sm font-black" style={{ color: cor }}>
                 {fase === 3 ? contadoB : b}
               </span>
@@ -394,9 +394,9 @@ export function OperacaoVisual({
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <Grupo total={a + b} mostrar={a + b} />
+            <Grupo total={a + b} mostrar={contadoTotal || (a + b)} numerar />
             <span
-              className="text-lg font-black"
+              className="text-2xl font-black"
               style={{ color: fase === 5 ? "#22C55E" : cor }}
             >
               {contadoTotal || "…"}
