@@ -79,6 +79,7 @@ const navCrianca = [
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/missao-tarefa", label: "Missão Tarefa", icon: ClipboardList },
   { to: "/missao-trabalho", label: "Missão Trabalho", icon: ClipboardList },
+  { to: "/escola-brilha/matematica-ei", label: "Matemática Kawaii", icon: Ruler },
   
 
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
