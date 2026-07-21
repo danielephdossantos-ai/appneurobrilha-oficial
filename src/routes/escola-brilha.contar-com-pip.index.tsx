@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
-import { Lock, CheckCircle2, Sparkles } from "lucide-react";
+import { Lock, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
 import { cursoContarComPipFase1 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase1";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
+import { useAdminMode } from "@/escola-brilha/admin-mode";
 
 export const Route = createFileRoute("/escola-brilha/contar-com-pip/")({
   head: () => ({
@@ -236,12 +237,14 @@ function TrilhaContarComPip() {
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
   const { concluidas } = usePipConcluidas(childId);
+  const [adminOn, setAdminOn] = useAdminMode();
 
   const fasesEstado = useMemo(() => {
     const map = new Map<number, EstadoFase>();
     let jaEncontrouAtual = false;
     for (const f of FASES) {
       if (!f.curso) {
+        // Em modo admin, "em breve" (sem curso) segue travada — não há aula pra abrir.
         map.set(f.n, "travada");
         continue;
       }
@@ -252,6 +255,11 @@ function TrilhaContarComPip() {
         map.set(f.n, "concluida");
         continue;
       }
+      if (adminOn) {
+        // Admin: toda fase com curso fica liberada como "atual".
+        map.set(f.n, "atual");
+        continue;
+      }
       if (!jaEncontrouAtual) {
         map.set(f.n, "atual");
         jaEncontrouAtual = true;
@@ -260,7 +268,7 @@ function TrilhaContarComPip() {
       }
     }
     return map;
-  }, [concluidas]);
+  }, [concluidas, adminOn]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-600 via-teal-700 to-indigo-900 text-white">
@@ -279,6 +287,19 @@ function TrilhaContarComPip() {
           <p className="text-yellow-100 text-sm mt-1">
             8 fases · ver de relance → problemas em história · 10 min/dia
           </p>
+
+          <button
+            onClick={() => setAdminOn(!adminOn)}
+            className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-black shadow ${
+              adminOn
+                ? "bg-yellow-300 text-emerald-950"
+                : "bg-black/40 text-white/80"
+            }`}
+            title="Libera todas as fases pra testar"
+          >
+            <ShieldCheck className="h-3.5 w-3.5" />
+            MODO ADMIN: {adminOn ? "LIGADO (tudo aberto)" : "desligado"}
+          </button>
         </header>
 
         <div className="rounded-3xl p-4 mb-3 bg-gradient-to-br from-lime-400 to-emerald-500 text-emerald-950 shadow-xl">
