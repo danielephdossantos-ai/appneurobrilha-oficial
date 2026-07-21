@@ -16,6 +16,10 @@ import {
   cursoContarComPipFase4,
   getAulaContarComPipFase4,
 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase4";
+import {
+  cursoContarComPipFase5,
+  getAulaContarComPipFase5,
+} from "@/escola-brilha/curso-contar-com-pip/aulas-fase5";
 import { marcarMissaoPipConcluida } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 
@@ -33,14 +37,17 @@ function AulaContarComPipRoute() {
   const aulaF2 = aulaF1 ? undefined : getAulaContarComPipFase2(aulaSlug);
   const aulaF3 = aulaF1 || aulaF2 ? undefined : getAulaContarComPipFase3(aulaSlug);
   const aulaF4 = aulaF1 || aulaF2 || aulaF3 ? undefined : getAulaContarComPipFase4(aulaSlug);
-  const aula = aulaF1 ?? aulaF2 ?? aulaF3 ?? aulaF4;
+  const aulaF5 = aulaF1 || aulaF2 || aulaF3 || aulaF4 ? undefined : getAulaContarComPipFase5(aulaSlug);
+  const aula = aulaF1 ?? aulaF2 ?? aulaF3 ?? aulaF4 ?? aulaF5;
   const curso = aulaF1
     ? cursoContarComPipFase1
     : aulaF2
       ? cursoContarComPipFase2
       : aulaF3
         ? cursoContarComPipFase3
-        : cursoContarComPipFase4;
+        : aulaF4
+          ? cursoContarComPipFase4
+          : cursoContarComPipFase5;
 
   if (!aula) {
     return (

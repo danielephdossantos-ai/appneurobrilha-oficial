@@ -5,6 +5,7 @@ import { cursoContarComPipFase1 } from "@/escola-brilha/curso-contar-com-pip/aul
 import { cursoContarComPipFase2 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase2";
 import { cursoContarComPipFase3 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase3";
 import { cursoContarComPipFase4 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase4";
+import { cursoContarComPipFase5 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase5";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
@@ -76,7 +77,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 5,
-    curso: null,
+    curso: cursoContarComPipFase5,
     gradiente: "linear-gradient(135deg,#ec4899,#831843)",
     badge: "FASE 5 · TEN-FRAME (composição do 10)",
     nome: "Ten-frame",
