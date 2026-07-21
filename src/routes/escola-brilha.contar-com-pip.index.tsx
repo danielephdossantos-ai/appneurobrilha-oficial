@@ -86,7 +86,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 6,
-    curso: null,
+    curso: cursoContarComPipFase6,
     gradiente: "linear-gradient(135deg,#14b8a6,#134e4a)",
     badge: "FASE 6 · COMPARAÇÃO",
     nome: "Comparação",
