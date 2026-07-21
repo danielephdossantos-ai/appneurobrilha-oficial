@@ -311,6 +311,12 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
                         : "Sem data"}
                     </span>
                   </div>
+                  {item.time_of_day && (
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{item.time_of_day}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
