@@ -654,13 +654,17 @@ const aula05: AulaIng = {
 // ============================================================
 // CURSO — Pré I
 // ============================================================
+import { semana2Pre1 } from "./ingles-pre1-s2";
+import { semana3Pre1 } from "./ingles-pre1-s3";
+import { semana4Pre1 } from "./ingles-pre1-s4";
+
 export const cursoInglesPre1: CursoIng = {
   slug: "ingles-ei-pre1",
   serie: "pre1",
   serieLabel: "Pré I (4–5 anos)",
   titulo: "My First English — Pré I",
   descricao:
-    "Semana 1 disponível: cores do mundo. Aprendizado por imagem, música e imitação — sem leitura.",
+    "Pré I completo: cores, números, movimentos, família e sentimentos. 20 aulas orais com música, imitação e brincadeira.",
   corPrimaria: "#0ea5e9",
   corSecundaria: "#dbeafe",
   mascoteUrl: buddy,
@@ -671,6 +675,27 @@ export const cursoInglesPre1: CursoIng = {
       titulo: "Semana 1 — Colors around me",
       subtitulo: "Red, yellow, blue, green e o rainbow!",
       aulas: [aula01, aula02, aula03, aula04, aula05],
+    },
+    {
+      slug: "semana-2",
+      numero: 2,
+      titulo: "Semana 2 — Count with me!",
+      subtitulo: "One, two, three, four, high five!",
+      aulas: semana2Pre1,
+    },
+    {
+      slug: "semana-3",
+      numero: 3,
+      titulo: "Semana 3 — Move with me!",
+      subtitulo: "Jump, dance, wave, hug — TPR party!",
+      aulas: semana3Pre1,
+    },
+    {
+      slug: "semana-4",
+      numero: 4,
+      titulo: "Semana 4 — My family & feelings",
+      subtitulo: "Mommy, daddy, happy, sad — formatura Little English Star!",
+      aulas: semana4Pre1,
     },
   ],
 };
