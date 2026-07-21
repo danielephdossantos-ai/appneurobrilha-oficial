@@ -1,4 +1,5 @@
 import type { CursoEI, AulaEI } from "@/escola-brilha/curso-portugues-ei/types";
+import { SINAL_IGUAL } from "./_sinais";
 import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
@@ -881,7 +882,7 @@ const dia09: AulaEI = {
       tipo: "compreensaoImagem",
       perguntaAudio: "Se as bolas eram 3 e as flores eram 3, elas são?",
       opcoes: [
-        { nome: "IGUAL", imagemUrl: estrelas, correta: true },
+        { nome: "IGUAL", imagemUrl: SINAL_IGUAL, correta: true },
         { nome: "MAIS bolas", imagemUrl: bola, correta: false, quantidade: 4 },
         { nome: "MAIS flores", imagemUrl: flor, correta: false, quantidade: 4 },
       ],
