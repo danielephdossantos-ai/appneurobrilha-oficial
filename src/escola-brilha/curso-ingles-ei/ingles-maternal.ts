@@ -1,4 +1,5 @@
 import type { CursoIng, AulaIng } from "./types";
+import { aulasMaternalSemana2 } from "./ingles-maternal-s2";
 import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
@@ -656,6 +657,13 @@ export const cursoInglesMaternal: CursoIng = {
       titulo: "Semana 1 — Hello, my world!",
       subtitulo: "Cumprimentos, família, comida, animais e brinquedos",
       aulas: [aula01, aula02, aula03, aula04, aula05],
+    },
+    {
+      slug: "semana-2",
+      numero: 2,
+      titulo: "Semana 2 — The world outside",
+      subtitulo: "Sol, lua, chuva, arco-íris e jardim",
+      aulas: aulasMaternalSemana2,
     },
   ],
 };
