@@ -1,5 +1,5 @@
 import type { CursoIng, AulaIng } from "./types";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
 import { url as familia } from "@/assets/neuro-treino/objetos/familia-tradicional.png.asset.json";

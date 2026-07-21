@@ -120,12 +120,12 @@ function TrilhaCurso({ curso }: { curso: CursoIng }) {
       }}
     >
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full bg-white/20 grid place-items-center overflow-hidden shrink-0">
-          <img src={curso.mascoteUrl} alt="" className="w-14 h-14 object-contain" />
+        <div className="w-16 h-16 rounded-full bg-white/20 grid place-items-center overflow-hidden shrink-0 ring-2 ring-amber-300">
+          <img src={curso.mascoteUrl} alt="Teacher Buddy" className="w-14 h-14 object-contain" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[10px] uppercase tracking-widest text-white/90 font-black">
-            {curso.serieLabel}
+            {curso.serieLabel} · com Teacher Buddy
           </p>
           <h2 className="text-xl font-black leading-tight">{curso.titulo}</h2>
           <p className="text-[11px] text-white/85 mt-0.5">

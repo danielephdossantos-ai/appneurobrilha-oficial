@@ -123,7 +123,12 @@ function MomentoRender({
       return (
         <CardScreen cor={cor}>
           <TituloMomento n={idx + 1} texto="Welcome!" cor={cor} />
-          <ImageFrame src={m.mascoteUrl} alt="Mascote" size="hero" />
+          <ImageFrame src={m.mascoteUrl} alt="Teacher Buddy" size="hero" />
+          <div className="text-center -mt-2 mb-2">
+            <span className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-black px-4 py-1.5 rounded-full text-sm shadow-lg">
+              Teacher Buddy 🌟
+            </span>
+          </div>
           <div className="mt-6 grid gap-4">
             <BigListenButton onClick={() => speakMixed(m.falaMascote)} />
             {m.legenda && (
@@ -339,7 +344,12 @@ function MomentoRender({
           <div className="text-center text-2xl font-black text-amber-600 my-3">
             {m.medalha}
           </div>
-          <ImageFrame src={m.mascoteUrl} alt="Mascote" size="xl" />
+          <ImageFrame src={m.mascoteUrl} alt="Teacher Buddy" size="xl" />
+          <div className="text-center -mt-2 mb-2">
+            <span className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-black px-4 py-1.5 rounded-full text-sm shadow-lg">
+              Teacher Buddy 🌟
+            </span>
+          </div>
           <div className="mt-4 grid gap-3">
             <BigListenButton
               onClick={() => speakMixed(m.falaFinal)}
