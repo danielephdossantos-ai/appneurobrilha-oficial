@@ -344,6 +344,22 @@ function EscolaBrilhaCatalogo() {
 
                   {aberta && (
                     <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
+                      {serie === "Educação Infantil" && (
+                        <Link
+                          to="/escola-brilha/ingles-ei"
+                          className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                          style={{ background: "linear-gradient(135deg, #a855f7, #ec4899)" }}
+                        >
+                          <div className="text-[10px] uppercase tracking-widest opacity-90">
+                            🇺🇸 Inglês · Educação Infantil
+                          </div>
+                          <div className="text-lg leading-tight mt-0.5">My First English</div>
+                          <div className="text-[11px] font-bold opacity-90 mt-1">
+                            Maternal · Pré I · Pré II — só oralidade e imagens →
+                          </div>
+                        </Link>
+                      )}
+
                       {(serie === "1º Ano" || serie === "2º Ano" || serie === "3º Ano" || serie === "4º Ano" || serie === "5º Ano" || serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") && (
                         <Link
                           to="/escola-brilha/trilha-ingles/$serie"
