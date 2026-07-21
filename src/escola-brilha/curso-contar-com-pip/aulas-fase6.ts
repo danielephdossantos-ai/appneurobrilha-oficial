@@ -5,6 +5,8 @@ import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as joaninha } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
 import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
 import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as doce } from "@/assets/neuro-treino/objetos/doce.png.asset.json";
+import { url as uva } from "@/assets/neuro-treino/frutas/uva.png.asset.json";
 
 import { url as n0 } from "@/assets/banco-midias/numeros/numero-0.png.asset.json";
 import { url as n1 } from "@/assets/banco-midias/numeros/numero-1.png.asset.json";
