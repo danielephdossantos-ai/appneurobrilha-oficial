@@ -658,5 +658,12 @@ export const cursoInglesMaternal: CursoIng = {
       subtitulo: "Cumprimentos, família, comida, animais e brinquedos",
       aulas: [aula01, aula02, aula03, aula04, aula05],
     },
+    {
+      slug: "semana-2",
+      numero: 2,
+      titulo: "Semana 2 — The world outside",
+      subtitulo: "Sol, lua, chuva, arco-íris e jardim",
+      aulas: aulasMaternalSemana2,
+    },
   ],
 };
