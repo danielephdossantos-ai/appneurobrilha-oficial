@@ -68,7 +68,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 4,
-    curso: null,
+    curso: cursoContarComPipFase4,
     gradiente: "linear-gradient(135deg,#f59e0b,#7c2d12)",
     badge: "FASE 4 · LINHA NUMÉRICA MENTAL (0–10)",
     nome: "Linha Numérica",
