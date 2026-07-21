@@ -15,7 +15,7 @@ export function SubitizingFlash({
   opcoes,
   feedbackAcerto,
   feedbackErro,
-  duracaoFlashMs = 1500,
+  duracaoFlashMs,
   onAcerto,
 }: {
   imagemUrl: string;
@@ -34,6 +34,11 @@ export function SubitizingFlash({
 
   useEffect(() => () => stopSpeaking(), []);
 
+  // Tempo escala com a quantidade: criança que está aprendendo precisa
+  // de tempo pra "ver" cada item. Base 2000ms + 800ms por item.
+  const duracaoEfetiva =
+    duracaoFlashMs ?? Math.max(2000, 1200 + quantidade * 800);
+
   const iniciar = () => {
     setMsg(null);
     setFase("flash");
@@ -42,7 +47,7 @@ export function SubitizingFlash({
     setTimeout(() => {
       setFase("pergunta");
       speakChunked(perguntaAudio, { rate: 0.9, pitch: 1.15 });
-    }, duracaoFlashMs);
+    }, duracaoEfetiva);
   };
 
   const escolher = (n: number) => {
