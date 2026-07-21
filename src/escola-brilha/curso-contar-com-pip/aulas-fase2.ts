@@ -395,9 +395,9 @@ const dia05: AulaEI = {
       tipo: "compreensaoImagem",
       perguntaAudio: "Depois do 3 vem o…",
       opcoes: [
-        { nome: "2", imagemUrl: bola, correta: false, quantidade: 2 },
-        { nome: "4", imagemUrl: joaninha, correta: true, quantidade: 4 },
-        { nome: "1", imagemUrl: sol_ph(), correta: false, quantidade: 1 },
+        { nome: "2 bolas", imagemUrl: bola, correta: false, quantidade: 2 },
+        { nome: "4 joaninhas", imagemUrl: joaninha, correta: true, quantidade: 4 },
+        { nome: "1 borboleta", imagemUrl: borboleta, correta: false, quantidade: 1 },
       ],
       feedbackAcerto: "QUATRO!",
       feedbackErro: "1, 2, 3, 4 — QUATRO vem depois do TRÊS!",
