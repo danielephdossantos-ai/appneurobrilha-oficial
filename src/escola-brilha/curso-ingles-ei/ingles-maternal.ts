@@ -667,5 +667,19 @@ export const cursoInglesMaternal: CursoIng = {
       subtitulo: "Sol, lua, chuva, arco-íris e jardim",
       aulas: aulasMaternalSemana2,
     },
+    {
+      slug: "semana-3",
+      numero: 3,
+      titulo: "Semana 3 — Animal friends",
+      subtitulo: "Fazenda, quintal, zoo e sons dos bichos",
+      aulas: aulasMaternalSemana3,
+    },
+    {
+      slug: "semana-4",
+      numero: 4,
+      titulo: "Semana 4 — Yummy party!",
+      subtitulo: "Comidas, bebidas, aniversário e formatura",
+      aulas: aulasMaternalSemana4,
+    },
   ],
 };
