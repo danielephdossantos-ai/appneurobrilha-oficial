@@ -16,6 +16,7 @@ import {
 } from "@/escola-brilha/curso-ler-com-aurora/faseRecomendada";
 import { useAppState } from "@/core/store";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuroraConcluidas } from "@/escola-brilha/curso-ler-com-aurora/progresso";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/")({
