@@ -96,7 +96,46 @@ export type MomentoEI =
       mascoteUrl: string;
       falaFinal: string;
     }
+  // ============ MATEMÁTICA EI — Contagem e Operações Visuais ============
+  | {
+      tipo: "contarBolas";
+      // Subitizing/cardinalidade: a criança TOCA em cada imagem e o
+      // professor fala "um, dois, três..." (usa TapCountGroup).
+      imagemUrl: string;
+      quantidade: number;
+      itemSingular: string;   // "bola"
+      itemPlural?: string;    // "bolas"
+      instrucaoAudio: string;
+      elogio: string;
+    }
+  | {
+      tipo: "compararGrupos";
+      // Comparação por percepção direta: dois grupos com quantidades
+      // diferentes de uma mesma figura. Criança escolhe qual tem MAIS
+      // (ou MENOS) sem precisar contar exato.
+      instrucaoAudio: string;
+      perguntaAudio: string;   // "Qual grupo tem MAIS bolas?"
+      imagemUrl: string;       // figura repetida em cada grupo
+      itemPlural: string;      // "bolas"
+      alvo: "mais" | "menos";
+      opcoes: Array<{ qtd: number; correta: boolean }>;
+      feedbackAcerto: string;
+      feedbackErro: string;
+    }
+  | {
+      tipo: "operacaoVisual";
+      // Soma/subtração animada: dois grupos + sinal no meio. Conta cada
+      // item em voz alta (usa OperacaoVisual).
+      operacao: "soma" | "subtracao";
+      imagemUrl: string;
+      itemPlural: string;
+      a: number;
+      b: number;
+      instrucaoAudio: string;
+      elogio: string;
+    }
   // ============ FASE 2 — Princípio Alfabético (evidências) ============
+
   | {
       tipo: "somDaLetra";
       // Apresenta a letra + som + palavras-imagem que começam com ela.
