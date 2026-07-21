@@ -27,7 +27,8 @@ import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json
  *  - Dia 5: Revisão + medalha "Contador de 5"
  */
 
-const mascote = brilha;
+import { url as pipMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+const mascote = pipMascot;
 
 const dia01: AulaEI = {
   slug: "pip-f2-s1-d1-contar-ate-3",

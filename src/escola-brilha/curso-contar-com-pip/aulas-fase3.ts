@@ -40,7 +40,8 @@ import n10 from "@/assets/banco-midias/numeros/numero-10.png";
  *    pictórico (grupo) → abstrato (numeral escrito).
  */
 
-const mascote = brilha;
+import { url as pipMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+const mascote = pipMascot;
 
 // helper para gerar opções de numeral com destaque
 const opcaoNumeral = (

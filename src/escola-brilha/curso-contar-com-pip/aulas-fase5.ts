@@ -35,7 +35,8 @@ import n10 from "@/assets/banco-midias/numeros/numero-10.png";
  * Semana 4 · Mestre do 10 + DIPLOMA
  */
 
-const mascote = brilha;
+import { url as pipMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+const mascote = pipMascot;
 
 const NUM: Record<number, string> = {
   0: n0, 1: n1, 2: n2, 3: n3, 4: n4, 5: n5,

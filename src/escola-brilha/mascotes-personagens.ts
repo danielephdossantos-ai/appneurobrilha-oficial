@@ -10,6 +10,7 @@
  */
 import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { url as pipMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 
 export type MascotePersonagem = {
   id: string;
@@ -25,6 +26,14 @@ export const ESQUILO_BRILHA: MascotePersonagem = {
   img: esquiloBrilha,
 };
 
+/** Mascote oficial da trilha Contar com Pip */
+export const PIP: MascotePersonagem = {
+  id: "pip",
+  nome: "Pip",
+  img: pipMascot,
+  storeId: "pip-girl-mascot",
+};
+
 /** Personagens narrativos → mascote da loja */
 export const PERSONAGENS: Record<string, MascotePersonagem> = {
   aurora: {
@@ -33,6 +42,7 @@ export const PERSONAGENS: Record<string, MascotePersonagem> = {
     img: pipaAstronauta,
     storeId: "pipa-astronauta",
   },
+  pip: PIP,
 };
 
 export function getPersonagem(nome: string): MascotePersonagem | undefined {
