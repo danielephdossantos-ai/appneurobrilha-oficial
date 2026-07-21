@@ -171,6 +171,8 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         return <BookOpen className="h-4 w-4 text-purple-500" />;
       case "exercicio":
         return <Calculator className="h-4 w-4 text-blue-500" />;
+      case "aurora":
+        return <Sparkles className="h-4 w-4 text-amber-500" />;
       default:
         return <Clock className="h-4 w-4 text-slate-500" />;
     }
