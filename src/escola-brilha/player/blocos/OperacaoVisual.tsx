@@ -87,124 +87,74 @@ export function OperacaoVisual({
     setReplayKey((k) => k + 1);
     if (operacao === "subtracao") {
       void rodarSubtracao();
-      return;
+    } else {
+      void rodarSoma();
     }
+  }
 
+  async function rodarSoma() {
     limpar();
+    const id = runId.current;
+    const vivo = () => id === runId.current;
+    const pausa = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const falar = async (texto: string, rate = 0.72) => {
+      if (!vivo()) return;
+      await speakChunked(texto, { rate });
+    };
+
     setFase(1);
     setContadoA(0);
     setContadoB(0);
     setContadoTotal(0);
     setRemovidos(0);
 
-    // Introdução
-    const intro =
-      operacao === "soma"
-        ? `Vamos contar. Primeiro grupo, ${a} ${itemPlural}.`
-        : `Vamos ver. Temos ${a} ${itemPlural}.`;
-    speakChunked(intro, { rate: 0.75 });
+    await falar(`Vamos contar. Primeiro grupo, ${nome(a)} ${itemPlural}.`, 0.72);
+    await pausa(500);
+    if (!vivo()) return;
 
-    let t = 3000;
-    const passo = 1900; // tempo entre cada número contado (bem devagar)
-    const rateNum = 0.7; // ritmo lento do número falado
-
-    // Conta grupo A um por um (enfileirado, não corta)
+    // Conta grupo A um por um — imagem aparece JUNTO com o número falado
     for (let i = 1; i <= a; i++) {
-      add(() => {
-        setContadoA(i);
-        speakChunked(nome(i), { rate: rateNum, queue: true });
-      }, t);
-      t += passo;
+      setContadoA(i);
+      await falar(nome(i), 0.62);
+      await pausa(600);
+      if (!vivo()) return;
     }
 
-    // Pausa antes do sinal
-    t += 800;
+    await pausa(700);
+    if (!vivo()) return;
+    setFase(2);
+    await falar(`Agora, mais ${nome(b)}.`, 0.72);
+    await pausa(600);
+    if (!vivo()) return;
 
-    if (operacao === "soma") {
-      // Anuncia grupo B
-      add(() => {
-        setFase(2);
-        speakChunked(`Agora, mais ${nome(b)}.`, { rate: 0.75, queue: true });
-      }, t);
-      t += 2600;
-
-      for (let i = 1; i <= b; i++) {
-        add(() => {
-          setFase(3);
-          setContadoB(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
-      t += 900;
-      // Junta e conta total
-      add(() => {
-        setFase(4);
-        speakChunked(`Agora vamos juntar tudo e contar de novo, bem devagar.`, {
-          rate: 0.75,
-          queue: true,
-        });
-      }, t);
-      t += 3800;
-      for (let i = 1; i <= resultado; i++) {
-        add(() => {
-          setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
-    } else {
-      // Subtração: aviso ANTES de começar a tirar
-      add(() => {
-        setFase(2);
-        speakChunked(
-          `Muito bem! Temos ${nome(a)} ${itemPlural}. Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`,
-          { rate: 0.75, queue: true },
-        );
-      }, t);
-      t += 6000;
-      // Remove uma por uma explicando quantas sobram a cada passo
-      for (let i = 1; i <= b; i++) {
-        const sobram = a - i;
-        add(() => {
-          setFase(3);
-          setRemovidos(i);
-          speakChunked(
-            `Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`,
-            { rate: 0.7, queue: true },
-          );
-        }, t);
-        t += 3800;
-      }
-      t += 900;
-      add(() => {
-        setFase(4);
-        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, {
-          rate: 0.75,
-          queue: true,
-        });
-      }, t);
-      t += 3800;
-      for (let i = 1; i <= resultado; i++) {
-        add(() => {
-          setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
+    // Conta grupo B um por um
+    setFase(3);
+    for (let i = 1; i <= b; i++) {
+      setContadoB(i);
+      await falar(nome(i), 0.62);
+      await pausa(600);
+      if (!vivo()) return;
     }
 
+    await pausa(700);
+    if (!vivo()) return;
+    setFase(4);
+    await falar(`Agora vamos juntar tudo e contar de novo, bem devagar.`, 0.72);
+    await pausa(600);
+    if (!vivo()) return;
 
-    t += 800;
-    add(() => {
-      setFase(5);
-      speakChunked(
-        operacao === "soma"
-          ? `${a} mais ${b} é igual a ${resultado}!`
-          : `${a} menos ${b} é igual a ${resultado}!`,
-        { rate: 0.8 },
-      );
-    }, t);
+    // Conta o total um por um
+    for (let i = 1; i <= resultado; i++) {
+      setContadoTotal(i);
+      await falar(nome(i), 0.6);
+      await pausa(700);
+      if (!vivo()) return;
+    }
+
+    await pausa(500);
+    if (!vivo()) return;
+    setFase(5);
+    await falar(`${a} mais ${b} é igual a ${resultado}!`, 0.75);
   }
 
   async function rodarSubtracao() {
@@ -300,41 +250,50 @@ export function OperacaoVisual({
     riscados = 0,
     total,
     compacto = false,
+    numerar = false,
   }: {
     mostrar: number;
     riscados?: number;
-    total: number; // usado só para reservar largura
+    total: number;
     compacto?: boolean;
-  }) => (
-    <div
-      className={`flex flex-wrap items-center justify-center ${compacto ? "gap-1" : "gap-1.5"}`}
-      style={{ minWidth: compacto ? undefined : Math.min(total, 5) * 52, maxWidth: "100%" }}
-    >
-      {Array.from({ length: mostrar }).map((_, i) => {
-        const foiRiscado = i >= mostrar - riscados && riscados > 0;
-        return (
-          <motion.div
-            key={i}
-            initial={{ scale: 0, opacity: 0, y: -12 }}
-            animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
-            transition={{ duration: 0.35, ease: "backOut" }}
-            className="relative"
-          >
-            <img
-              src={imagemUrl}
-              alt=""
-              className={`${compacto ? "h-9 w-9 sm:h-10 sm:w-10" : "h-11 w-11 sm:h-12 sm:w-12"} object-contain drop-shadow`}
-            />
-            {foiRiscado && (
-              <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
-                ✕
-              </span>
-            )}
-          </motion.div>
-        );
-      })}
-    </div>
-  );
+    numerar?: boolean;
+  }) => {
+    void total;
+    return (
+      <div
+        className={`flex flex-wrap items-center justify-center ${compacto ? "gap-1" : "gap-1.5"} max-w-full`}
+      >
+        {Array.from({ length: mostrar }).map((_, i) => {
+          const foiRiscado = i >= mostrar - riscados && riscados > 0;
+          return (
+            <motion.div
+              key={i}
+              initial={{ scale: 0, opacity: 0, y: -12 }}
+              animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
+              transition={{ duration: 0.35, ease: "backOut" }}
+              className="relative"
+            >
+              <img
+                src={imagemUrl}
+                alt=""
+                className={`${compacto ? "h-8 w-8 sm:h-10 sm:w-10" : "h-10 w-10 sm:h-12 sm:w-12"} object-contain drop-shadow`}
+              />
+              {numerar && !foiRiscado && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[#22C55E] text-white grid place-items-center text-[10px] sm:text-xs font-black shadow border-2 border-white">
+                  {i + 1}
+                </span>
+              )}
+              {foiRiscado && (
+                <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
+                  ✕
+                </span>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    );
+  };
 
 
   return (
@@ -410,9 +369,9 @@ export function OperacaoVisual({
             </div>
           </div>
         ) : fase < 4 ? (
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <div className="flex flex-col items-center gap-1">
-              <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+            <div className="flex flex-col items-center gap-1 w-full sm:w-auto rounded-xl bg-white/70 p-2">
+              <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} numerar />
               <span className="text-sm font-black" style={{ color: cor }}>
                 {fase === 1 ? contadoA : a}
               </span>
@@ -426,8 +385,8 @@ export function OperacaoVisual({
                 transition: "all .3s",
               }}
             />
-            <div className="flex flex-col items-center gap-1">
-              <Grupo total={b} mostrar={fase === 0 ? b : contadoB} />
+            <div className="flex flex-col items-center gap-1 w-full sm:w-auto rounded-xl bg-white/70 p-2">
+              <Grupo total={b} mostrar={fase === 0 ? b : contadoB} numerar />
               <span className="text-sm font-black" style={{ color: cor }}>
                 {fase === 3 ? contadoB : b}
               </span>
@@ -435,9 +394,9 @@ export function OperacaoVisual({
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <Grupo total={a + b} mostrar={a + b} />
+            <Grupo total={a + b} mostrar={fase === 5 ? a + b : contadoTotal || 0} numerar />
             <span
-              className="text-lg font-black"
+              className="text-2xl font-black"
               style={{ color: fase === 5 ? "#22C55E" : cor }}
             >
               {contadoTotal || "…"}
