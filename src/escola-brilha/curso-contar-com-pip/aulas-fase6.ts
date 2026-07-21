@@ -47,6 +47,14 @@ const NUM: Record<number, string> = {
   6: n6, 7: n7, 8: n8, 9: n9, 10: n10,
 };
 
+const svgSimbolo = (texto: string, cor: string) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" rx="24" fill="white" stroke="${cor}" stroke-width="6"/><text x="60" y="82" font-family="system-ui,sans-serif" font-size="78" font-weight="900" text-anchor="middle" fill="${cor}">${texto}</text></svg>`
+  )}`;
+
+const SINAL_IGUAL = svgSimbolo("=", "#16a34a");
+const SINAL_DIFERENTE = svgSimbolo("≠", "#dc2626");
+
 const opN = (n: number, correta: boolean) => ({
   nome: String(n),
   imagemUrl: NUM[n],
