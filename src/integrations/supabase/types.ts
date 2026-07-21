@@ -1480,6 +1480,7 @@ export type Database = {
           id: string
           idade: number | null
           niveis: Json | null
+          nivel_portugues_ei: string | null
           nome: string
           observacoes: string | null
           perfil: Json | null
@@ -1506,6 +1507,7 @@ export type Database = {
           id?: string
           idade?: number | null
           niveis?: Json | null
+          nivel_portugues_ei?: string | null
           nome: string
           observacoes?: string | null
           perfil?: Json | null
@@ -1532,6 +1534,7 @@ export type Database = {
           id?: string
           idade?: number | null
           niveis?: Json | null
+          nivel_portugues_ei?: string | null
           nome?: string
           observacoes?: string | null
           perfil?: Json | null
