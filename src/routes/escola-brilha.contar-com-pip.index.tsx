@@ -287,6 +287,19 @@ function TrilhaContarComPip() {
           <p className="text-yellow-100 text-sm mt-1">
             8 fases · ver de relance → problemas em história · 10 min/dia
           </p>
+
+          <button
+            onClick={() => setAdminOn(!adminOn)}
+            className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-black shadow ${
+              adminOn
+                ? "bg-yellow-300 text-emerald-950"
+                : "bg-black/40 text-white/80"
+            }`}
+            title="Libera todas as fases pra testar"
+          >
+            <ShieldCheck className="h-3.5 w-3.5" />
+            MODO ADMIN: {adminOn ? "LIGADO (tudo aberto)" : "desligado"}
+          </button>
         </header>
 
         <div className="rounded-3xl p-4 mb-3 bg-gradient-to-br from-lime-400 to-emerald-500 text-emerald-950 shadow-xl">
