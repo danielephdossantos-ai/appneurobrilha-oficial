@@ -277,25 +277,6 @@ function EscolaBrilhaCatalogo() {
           <Sparkles className="h-6 w-6 shrink-0" />
         </Link>
 
-        {/* Matemática EI — atalho de categoria */}
-        <Link
-          to="/escola-brilha/matematica-ei"
-          className="mb-4 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-          style={{ background: "linear-gradient(135deg, #10b981, #0ea5e9)" }}
-        >
-          <span>
-            <span className="block text-[10px] uppercase tracking-widest opacity-90">
-              Categoria · Maternal + Pré I + Pré II
-            </span>
-            <span className="block text-lg leading-tight mt-0.5">
-              🔢 Matemática Kawaii
-            </span>
-            <span className="block text-[11px] font-bold opacity-90 mt-1">
-              Contagem, formas e quantidades · abrir trilha →
-            </span>
-          </span>
-          <Sparkles className="h-6 w-6 shrink-0" />
-        </Link>
 
 
 
