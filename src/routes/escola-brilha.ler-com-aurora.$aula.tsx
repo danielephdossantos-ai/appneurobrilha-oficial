@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
+import { marcarMissaoConcluida } from "@/escola-brilha/curso-ler-com-aurora/progresso";
+import { useAppState } from "@/core/store";
 import {
   cursoLerComAurora,
   getAulaLerComAurora,
@@ -84,22 +86,22 @@ function AulaLerComAuroraRoute() {
     );
   }
 
+  const { activeChild } = useAppState();
+  const fase = aulaF8 ? 8 : aulaF7 ? 7 : aulaF6 ? 6 : aulaF5 ? 5 : aulaF4 ? 4 : aulaF3 ? 3 : aulaF2 ? 2 : 1;
+
+
+
   return (
     <PlayerPortuguesEI
       curso={curso}
       aula={aula}
       voltarPara="/escola-brilha/ler-com-aurora"
       onConcluir={() => {
-        try {
-          const key = "eb.ler-aurora.concluidas";
-          const raw = localStorage.getItem(key);
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(key, JSON.stringify(list));
-          localStorage.setItem("eb.ler-aurora.ultimo-dia", new Date().toISOString().slice(0, 10));
-        } catch {
-          /* ignore */
-        }
+        void marcarMissaoConcluida({
+          childId: activeChild?.id ?? null,
+          slug: aulaSlug,
+          fase,
+        });
         navigate({ to: "/escola-brilha/ler-com-aurora" });
       }}
     />

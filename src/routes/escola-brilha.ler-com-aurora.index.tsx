@@ -16,6 +16,7 @@ import {
 } from "@/escola-brilha/curso-ler-com-aurora/faseRecomendada";
 import { useAppState } from "@/core/store";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuroraConcluidas } from "@/escola-brilha/curso-ler-com-aurora/progresso";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
 export const Route = createFileRoute("/escola-brilha/ler-com-aurora/")({
@@ -190,7 +191,7 @@ function TrilhaLerComAurora() {
     },
   });
 
-  const concluidas = useMemo(() => loadConcluidas(childId), [childId]);
+  const { concluidas } = useAuroraConcluidas(childId);
 
   const step6 = (anamnese?.responses as { step6?: Record<string, number> } | null)?.step6 ?? null;
   const idade = activeChild?.idade ?? null;
