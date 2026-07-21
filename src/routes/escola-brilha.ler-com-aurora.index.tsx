@@ -172,6 +172,25 @@ function TrilhaLerComAurora() {
           🔓 Modo teste: todas as {totalGeral} missões destravadas
         </div>
 
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <Link
+            to="/escola-brilha/ler-com-aurora/diagnostico"
+            className="rounded-2xl bg-white/10 border-2 border-white/15 px-4 py-3 text-center active:scale-[0.98]"
+          >
+            <div className="text-lg">🧭</div>
+            <div className="text-[11px] font-black uppercase tracking-widest text-yellow-200">Diagnóstico</div>
+            <div className="text-[10px] text-white/75 mt-0.5">Descubra por onde começar</div>
+          </Link>
+          <Link
+            to="/escola-brilha/ler-com-aurora/painel"
+            className="rounded-2xl bg-white/10 border-2 border-white/15 px-4 py-3 text-center active:scale-[0.98]"
+          >
+            <div className="text-lg">📊</div>
+            <div className="text-[11px] font-black uppercase tracking-widest text-yellow-200">Painel do Adulto</div>
+            <div className="text-[10px] text-white/75 mt-0.5">Acompanhe o progresso</div>
+          </Link>
+        </div>
+
         <FaseBloco
           fase={1}
           curso={cursoLerComAurora}
