@@ -447,10 +447,7 @@ const dia05: AulaEI = {
     "Revisão semanal — correspondência 1-a-1 e ordem estável até 5.",
 };
 
-// Helper: sol asset (import inline to avoid extra top-level import)
-function sol_ph() {
-  return bola;
-}
+
 
 
 export const cursoContarComPipFase2: CursoEI = {
