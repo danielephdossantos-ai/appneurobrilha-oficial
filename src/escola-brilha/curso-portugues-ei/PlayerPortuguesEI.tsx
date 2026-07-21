@@ -56,6 +56,9 @@ function speakWordSync(
 import type { AulaEI, MomentoEI, CursoEI } from "./types";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
+import { TapCountGroup } from "@/escola-brilha/player/blocos/TapCountGroup";
+import { OperacaoVisual } from "@/escola-brilha/player/blocos/OperacaoVisual";
+
 
 /**
  * PlayerPortuguesEI — leitura via IMAGENS + ÁUDIO + TOQUE.
@@ -512,7 +515,108 @@ function MomentoRender({
         </CardScreen>
       );
 
+    // ============ MATEMÁTICA EI ============
+    case "contarBolas":
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto="Vamos contar!" cor={cor} />
+          <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir" />
+          <div className="mt-5 rounded-3xl bg-gradient-to-br from-blue-900 to-indigo-900 p-4">
+            <TapCountGroup
+              imagemUrl={m.imagemUrl}
+              quantidade={m.quantidade}
+              itemSingular={m.itemSingular}
+              itemPlural={m.itemPlural}
+              size="lg"
+              rotulo={`Toque para contar até ${m.quantidade}`}
+            />
+          </div>
+          <button
+            onClick={() => { speak(m.elogio); marcarOk(); }}
+            className="mt-5 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-bold shadow"
+          >
+            Contei ✓
+          </button>
+        </CardScreen>
+      );
+
+    case "compararGrupos": {
+      const [msg, setMsg] = useState<string | null>(null);
+      const [ok, setOk] = useState(false);
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto={m.alvo === "mais" ? "Qual tem MAIS?" : "Qual tem MENOS?"} cor={cor} />
+          <div className="grid gap-2">
+            <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir" />
+            <BigListenButton onClick={() => speak(m.perguntaAudio)} label="Ouvir pergunta" />
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            {m.opcoes.map((o, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (o.correta) {
+                    setOk(true);
+                    setMsg(m.feedbackAcerto);
+                    speak(m.feedbackAcerto);
+                    setTimeout(marcarOk, 700);
+                  } else {
+                    setMsg(m.feedbackErro);
+                    speak(m.feedbackErro);
+                  }
+                }}
+                className={`rounded-3xl p-3 border-4 shadow active:scale-95 transition ${
+                  ok && o.correta ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
+                }`}
+              >
+                <div className="flex flex-wrap justify-center gap-1">
+                  {Array.from({ length: o.qtd }).map((_, k) => (
+                    <img
+                      key={k}
+                      src={m.imagemUrl}
+                      alt=""
+                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                    />
+                  ))}
+                </div>
+                <p className="text-center text-xs font-black text-purple-700 mt-2">
+                  {o.qtd} {m.itemPlural}
+                </p>
+              </button>
+            ))}
+          </div>
+          {msg && <p className="mt-4 text-center font-semibold text-slate-700">{msg}</p>}
+        </CardScreen>
+      );
+    }
+
+    case "operacaoVisual":
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto={m.operacao === "soma" ? "Juntar (soma)" : "Tirar (subtração)"} cor={cor} />
+          <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir" />
+          <div className="mt-5">
+            <OperacaoVisual
+              operacao={m.operacao}
+              imagemUrl={m.imagemUrl}
+              itemPlural={m.itemPlural}
+              a={m.a}
+              b={m.b}
+              cor={cor}
+              autoPlay
+            />
+          </div>
+          <button
+            onClick={() => { speak(m.elogio); marcarOk(); }}
+            className="mt-5 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-bold shadow"
+          >
+            Entendi ✓
+          </button>
+        </CardScreen>
+      );
+
     // ============ FASE 2 ============
+
     case "somDaLetra":
       return (
         <CardScreen cor={cor}>
