@@ -57,109 +57,117 @@ const aula01: AulaEI = {
   bncc: ["EI02ET07", "EI02ET08"],
   duracaoMin: 10,
   momentos: [
+    // 1 — Boas-vindas
     {
       tipo: "boasVindas",
       mascoteUrl: brilha,
       falaMascote:
-        "Oi! Eu sou o Brilha! Hoje vamos brincar de contar: um, dois, três! Vem comigo?",
-      legenda: "Sente-se com a criança e toque para ouvir.",
+        "Oi! Eu sou o Brilha! Hoje vamos contar bolinhas de verdade: uma, duas, três! Toca em cada uma comigo!",
+      legenda: "Ajude a criança a tocar em cada bola pra escutar o número.",
     },
+    // 2 — Contar UMA bola
     {
-      tipo: "escutaRitmada",
+      tipo: "contarBolas",
       imagemUrl: bola,
-      versos: [
-        "Uma bolinha na mão, duas bolinhas no chão.",
-        "Três bolinhas pra brincar, vem comigo até contar!",
-        "Um, dois, três!",
-      ],
-      legenda: "Bata palma junto na hora de contar.",
+      quantidade: 1,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha, tem UMA bola. Toca nela pra contar!",
+      elogio: "Isso! Uma bola só!",
     },
+    // 3 — Contar DUAS bolas
     {
-      tipo: "vocabularioVisual",
-      instrucaoAudio: "Toca em cada imagem e escuta o número.",
-      itens: [
-        { nome: "uma bola", imagemUrl: bola },
-        { nome: "duas maçãs", imagemUrl: maca },
-        { nome: "três estrelas", imagemUrl: estrelas },
-      ],
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 2,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "Agora apareceu mais uma! Toca em cada bola: um, dois.",
+      elogio: "Boa! Duas bolinhas!",
     },
+    // 4 — Contar TRÊS bolas
     {
-      tipo: "compreensaoImagem",
-      perguntaAudio: "Qual dessas figuras mostra UMA coisa só?",
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 3,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio: "E chegou mais uma! Toca em cada bola: um, dois, três!",
+      elogio: "Uhuu! Três bolinhas para brincar!",
+    },
+    // 5 — Comparar: qual grupo tem MAIS?
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Olha os dois grupos de bolinhas.",
+      perguntaAudio: "Qual grupo tem MAIS bolas?",
+      imagemUrl: bola,
+      itemPlural: "bolas",
+      alvo: "mais",
       opcoes: [
-        { nome: "uma flor", imagemUrl: flor, correta: true },
-        { nome: "três estrelas", imagemUrl: estrelas, correta: false },
-        { nome: "família de quatro", imagemUrl: familia, correta: false },
+        { qtd: 1, correta: false },
+        { qtd: 3, correta: true },
       ],
-      feedbackAcerto: "Isso! Uma flor sozinha, só uma!",
-      feedbackErro: "Escuta de novo: UMA é uma coisinha só. Qual mostra só uma?",
+      feedbackAcerto: "Isso! Três bolas é MAIS do que uma!",
+      feedbackErro: "Conta de novo: aqui tem uma, aqui tem três. Três é mais!",
     },
+    // 6 — Ritmo do corpo: três palmas
     {
       tipo: "ritmoCorpo",
-      instrucaoAudio: "Vamos bater palma DUAS vezes:",
-      palavra: "PALMA-PALMA",
-      silabas: 2,
-      imagemUrl: maca,
-      elogio: "Boa! Duas palmas para o número dois!",
+      instrucaoAudio: "Agora bate palma TRÊS vezes comigo:",
+      palavra: "PALMA-PALMA-PALMA",
+      silabas: 3,
+      imagemUrl: estrelas,
+      elogio: "Boa! Três palmas para o número três!",
     },
+    // 7 — História: as joaninhas chegando de uma em uma
     {
       tipo: "historiaIlustrada",
       titulo: "As três joaninhas",
       cenas: [
         {
           imagemUrl: joaninha,
-          narracao:
-            "Era uma vez uma joaninha bem pequenininha, que morava numa flor amarela.",
+          narracao: "Era uma vez UMA joaninha bem pequenininha na flor amarela.",
         },
         {
           imagemUrl: flor,
-          narracao:
-            "Um dia, a joaninha achou uma amiga. Agora eram DUAS joaninhas na flor!",
+          narracao: "Chegou uma amiga! Agora eram DUAS joaninhas na flor.",
         },
         {
           imagemUrl: parque,
-          narracao:
-            "Depois chegou mais uma amiga! TRÊS joaninhas voando juntas pelo jardim.",
+          narracao: "Aí chegou mais uma! TRÊS joaninhas voando juntas no jardim.",
         },
       ],
     },
+    // 8 — Compreensão: quantas no final?
     {
       tipo: "compreensaoImagem",
-      perguntaAudio: "Quantas joaninhas ficaram no final da história? Uma, duas ou três?",
+      perguntaAudio: "Quantas joaninhas ficaram no final? Uma, duas ou três?",
       opcoes: [
-        { nome: "três joaninhas", imagemUrl: joaninha, correta: true },
         { nome: "uma flor", imagemUrl: flor, correta: false },
+        { nome: "três joaninhas", imagemUrl: joaninha, correta: true },
         { nome: "uma bola", imagemUrl: bola, correta: false },
       ],
-      feedbackAcerto: "Isso! No final ficaram TRÊS joaninhas voando juntas!",
-      feedbackErro: "Vamos escutar de novo: uma… duas… TRÊS joaninhas amigas!",
+      feedbackAcerto: "Isso! Três joaninhas voando juntas!",
+      feedbackErro: "Escuta de novo: uma… duas… TRÊS joaninhas!",
     },
+    // 9 — Faz de conta: três pulinhos
     {
       tipo: "fazDeConta",
       imagemUrl: coelho,
       convite:
-        "Agora finge que você é um coelhinho! Dá UM pulinho… agora DOIS pulinhos… agora TRÊS!",
-      dica: "Contar pulando junto ajuda a criança a associar número + quantidade.",
+        "Agora finge que você é um coelhinho! Dá UM pulinho… agora DOIS… agora TRÊS!",
+      dica: "Contar pulando ajuda a associar número + quantidade no corpo.",
     },
-    {
-      tipo: "rodaConversa",
-      imagemUrl: familia,
-      pergunta:
-        "Quantas pessoas moram na sua casa? Conta com o dedinho pro Brilha!",
-      exemplos: [
-        { nome: "mamãe", imagemUrl: mae },
-        { nome: "papai", imagemUrl: pai },
-        { nome: "eu", imagemUrl: ursinho },
-      ],
-    },
+    // 10 — Missão família
     {
       tipo: "missaoFamilia",
       titulo: "Missão Família",
       convite:
-        "Pega três brinquedos favoritos e conta pra alguém em casa: 'UM… DOIS… TRÊS!'",
+        "Pega três brinquedos favoritos e conta pra alguém em casa: UM, DOIS, TRÊS!",
       dicaAdulto:
-        "Aponte cada objeto ao contar. A criança aprende cardinalidade quando o último número dito = quantidade total.",
+        "Aponte cada objeto ao contar. Cardinalidade = último número dito é a quantidade total.",
     },
+    // 11 — Celebração
     {
       tipo: "celebracao",
       medalha: "Primeira Contagem",
@@ -169,8 +177,9 @@ const aula01: AulaEI = {
     },
   ],
   baseCientifica:
-    "Subitizing 1–3 (Kaufman 1949) e cardinalidade (Gelman & Gallistel 1978). Contar apontando + fechar com o total ancora a quantidade.",
+    "Subitizing 1–3 (Kaufman 1949) + cardinalidade (Gelman & Gallistel 1978) + comparação por percepção direta antes de número exato (Clements & Sarama).",
 };
+
 
 const aula02: AulaEI = {
   slug: "mat-mat-02-grande-pequeno",
