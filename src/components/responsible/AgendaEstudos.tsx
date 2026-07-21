@@ -12,6 +12,7 @@ import {
   BookOpen,
   Calculator,
   Pencil,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
