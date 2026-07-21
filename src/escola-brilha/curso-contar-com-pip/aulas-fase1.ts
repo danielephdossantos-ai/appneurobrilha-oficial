@@ -102,9 +102,9 @@ const dia01: AulaEI = {
       tipo: "compreensaoImagem",
       perguntaAudio: "Qual grupo mostra DOIS?",
       opcoes: [
-        { nome: "uma bola", imagemUrl: bola, correta: false },
-        { nome: "duas estrelas", imagemUrl: estrelas, correta: true },
-        { nome: "um coração", imagemUrl: coracao, correta: false },
+        { nome: "uma bola", imagemUrl: bola, correta: false, quantidade: 1 },
+        { nome: "duas estrelas", imagemUrl: estrela, correta: true, quantidade: 2 },
+        { nome: "um coração", imagemUrl: coracao, correta: false, quantidade: 1 },
       ],
       feedbackAcerto: "Isso! DUAS estrelas!",
       feedbackErro: "DOIS tem dois itens. Escolhe o par!",
