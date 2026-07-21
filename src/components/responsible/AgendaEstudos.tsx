@@ -43,6 +43,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newTopic, setNewTopic] = useState("");
   const [newDate, setNewDate] = useState("");
+  const [newTime, setNewTime] = useState("");
   const [newType, setNewType] = useState<AgendaItem["type"]>("prova");
   const { sendNotification } = useNotifications();
 
