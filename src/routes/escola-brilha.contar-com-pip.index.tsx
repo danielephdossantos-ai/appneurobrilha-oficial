@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { Lock, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
 import { cursoContarComPipFase1 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase1";
+import { cursoContarComPipFase2 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase2";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
