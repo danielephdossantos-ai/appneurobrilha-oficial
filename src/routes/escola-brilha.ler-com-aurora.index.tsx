@@ -191,7 +191,7 @@ function TrilhaLerComAurora() {
     },
   });
 
-  const concluidas = useMemo(() => loadConcluidas(childId), [childId]);
+  const { concluidas } = useAuroraConcluidas(childId);
 
   const step6 = (anamnese?.responses as { step6?: Record<string, number> } | null)?.step6 ?? null;
   const idade = activeChild?.idade ?? null;
