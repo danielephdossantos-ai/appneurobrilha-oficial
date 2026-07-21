@@ -735,6 +735,47 @@ export type Database = {
           },
         ]
       }
+      aurora_progresso: {
+        Row: {
+          child_id: string
+          created_at: string
+          fase_atual: number
+          id: string
+          missoes_concluidas: Json
+          ultima_data: string | null
+          ultima_missao_slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          fase_atual?: number
+          id?: string
+          missoes_concluidas?: Json
+          ultima_data?: string | null
+          ultima_missao_slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          fase_atual?: number
+          id?: string
+          missoes_concluidas?: Json
+          ultima_data?: string | null
+          ultima_missao_slug?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aurora_progresso_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       banco_midias_categorias: {
         Row: {
           created_at: string
