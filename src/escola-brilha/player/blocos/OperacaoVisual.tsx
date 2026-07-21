@@ -394,7 +394,7 @@ export function OperacaoVisual({
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <Grupo total={a + b} mostrar={contadoTotal || (a + b)} numerar />
+            <Grupo total={a + b} mostrar={fase === 5 ? a + b : contadoTotal || 0} numerar />
             <span
               className="text-2xl font-black"
               style={{ color: fase === 5 ? "#22C55E" : cor }}
