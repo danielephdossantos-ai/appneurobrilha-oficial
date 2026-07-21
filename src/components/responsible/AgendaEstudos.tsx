@@ -94,6 +94,8 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         exam_date: newDate || new Date().toISOString().split("T")[0],
         type: newType,
         completed: false,
+        time_of_day: newTime || null,
+        category: newType === "aurora" ? "aurora" : null,
       };
 
       // Persistência Offline Imediata
@@ -104,7 +106,10 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         sendNotification({
           child_id: childId,
           title: `Novo item na sua Agenda!`,
-          message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
+          message:
+            newType === "aurora"
+              ? `Mamãe agendou o Ler com Aurora${newTime ? ` para as ${newTime}` : ""}. Vamos ler juntos?`
+              : `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
           type: "estudo",
         });
       }
@@ -114,9 +119,18 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       setIsAdding(false);
       setNewTopic("");
       setNewDate("");
+      setNewTime("");
       toast.success("Estudo agendado com sucesso!");
     },
   });
+
+  const adicionarAurora = () => {
+    setIsAdding(true);
+    setNewType("aurora");
+    setNewTopic("Ler com Aurora · 15 min");
+    setNewTime((t) => t || "18:00");
+  };
+
 
   const toggleMutation = useMutation({
     mutationFn: async ({ id, completed }: { id: string; completed: boolean }) => {
