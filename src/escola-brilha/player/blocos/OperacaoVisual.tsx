@@ -250,41 +250,50 @@ export function OperacaoVisual({
     riscados = 0,
     total,
     compacto = false,
+    numerar = false,
   }: {
     mostrar: number;
     riscados?: number;
-    total: number; // usado só para reservar largura
+    total: number;
     compacto?: boolean;
-  }) => (
-    <div
-      className={`flex flex-wrap items-center justify-center ${compacto ? "gap-1" : "gap-1.5"}`}
-      style={{ minWidth: compacto ? undefined : Math.min(total, 5) * 52, maxWidth: "100%" }}
-    >
-      {Array.from({ length: mostrar }).map((_, i) => {
-        const foiRiscado = i >= mostrar - riscados && riscados > 0;
-        return (
-          <motion.div
-            key={i}
-            initial={{ scale: 0, opacity: 0, y: -12 }}
-            animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
-            transition={{ duration: 0.35, ease: "backOut" }}
-            className="relative"
-          >
-            <img
-              src={imagemUrl}
-              alt=""
-              className={`${compacto ? "h-9 w-9 sm:h-10 sm:w-10" : "h-11 w-11 sm:h-12 sm:w-12"} object-contain drop-shadow`}
-            />
-            {foiRiscado && (
-              <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
-                ✕
-              </span>
-            )}
-          </motion.div>
-        );
-      })}
-    </div>
-  );
+    numerar?: boolean;
+  }) => {
+    void total;
+    return (
+      <div
+        className={`flex flex-wrap items-center justify-center ${compacto ? "gap-1" : "gap-1.5"} max-w-full`}
+      >
+        {Array.from({ length: mostrar }).map((_, i) => {
+          const foiRiscado = i >= mostrar - riscados && riscados > 0;
+          return (
+            <motion.div
+              key={i}
+              initial={{ scale: 0, opacity: 0, y: -12 }}
+              animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
+              transition={{ duration: 0.35, ease: "backOut" }}
+              className="relative"
+            >
+              <img
+                src={imagemUrl}
+                alt=""
+                className={`${compacto ? "h-8 w-8 sm:h-10 sm:w-10" : "h-10 w-10 sm:h-12 sm:w-12"} object-contain drop-shadow`}
+              />
+              {numerar && !foiRiscado && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[#22C55E] text-white grid place-items-center text-[10px] sm:text-xs font-black shadow border-2 border-white">
+                  {i + 1}
+                </span>
+              )}
+              {foiRiscado && (
+                <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
+                  ✕
+                </span>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    );
+  };
 
 
   return (
