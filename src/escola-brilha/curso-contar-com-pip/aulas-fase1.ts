@@ -1030,6 +1030,471 @@ const dia10: AulaEI = {
 };
 
 
+// ================= SEMANA 3 · Compondo e Decompondo (1–4) =================
+// Foco: subitizing conceitual — 4 = 3+1 = 2+2, 3 = 2+1, velocidade e precisão.
+// Base: Clements & Sarama (subitizing conceitual), Griffin (Number Worlds),
+// Baroody (early composition), NCTM Early Childhood.
+
+const dia11: AulaEI = {
+  slug: "pip-f1-s3-d11-compor-3",
+  titulo: "Dia 11 · Compondo o 3",
+  icone: "🧩",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana 3 começou! Hoje o Pip te mostra como o número TRÊS pode ser feito de pedacinhos: 2 e 1, ou 1 e 2.",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 2,
+      itemPlural: "estrelas",
+      instrucaoAudio: "Primeiro grupinho de estrelas.",
+      perguntaAudio: "Quantas estrelas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS. Olha de novo!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 1,
+      itemPlural: "estrela",
+      instrucaoAudio: "E mais uma estrelinha.",
+      perguntaAudio: "Quantas agora?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UMA!",
+      feedbackErro: "Era UMA só!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 3,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio: "DUAS mais UMA dá TRÊS. Toca em cada uma!",
+      elogio: "Isso! 2 + 1 = TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemPlural: "flores",
+      instrucaoAudio: "Agora um grupinho novo, do outro jeito: UMA e depois DUAS.",
+      perguntaAudio: "Quantas flores ao todo?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS! 1 + 2 também dá TRÊS!",
+      feedbackErro: "TRÊS. Um mais dois é a mesma coisa que dois mais um!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra TRÊS?",
+      opcoes: [
+        { nome: "duas bolas", imagemUrl: bola, correta: false, quantidade: 2 },
+        { nome: "três corações", imagemUrl: coracao, correta: true, quantidade: 3 },
+        { nome: "quatro joaninhas", imagemUrl: joaninha, correta: false, quantidade: 4 },
+      ],
+      feedbackAcerto: "Isso! TRÊS coraçõezinhos!",
+      feedbackErro: "TRÊS tem três itens. Olha o grupinho do meio!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Fazendo 3",
+      convite:
+        "Pega 3 tampinhas. Separa em 2 + 1. Depois em 1 + 2. Depois em 3 + 0. Junta e sempre dá TRÊS!",
+      dicaAdulto:
+        "Baroody: decomposição é base pré-aditiva. Ver 3 = 2+1 = 1+2 = 3+0 prepara adição sem símbolo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Mestre do 3",
+      mascoteUrl: mascote,
+      falaFinal: "Você já sabe montar o TRÊS de vários jeitos!",
+    },
+  ],
+  baseCientifica:
+    "Composição do 3 (Baroody, Clements & Sarama) — pré-aditivo sem símbolo.",
+};
+
+const dia12: AulaEI = {
+  slug: "pip-f1-s3-d12-compor-4-dobro",
+  titulo: "Dia 12 · O 4 é o dobro de 2",
+  icone: "✌️",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Segredo do Pip: QUATRO é o DOBRO de DOIS. Dois de um lado, dois do outro — igualzinho o dominó!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 2,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Duas joaninhas na folha de cima.",
+      perguntaAudio: "Quantas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 2,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Mais duas na folha de baixo.",
+      perguntaAudio: "E agora?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "Mais DUAS!",
+      feedbackErro: "Eram DUAS de novo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 4,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Duas mais duas dá QUATRO. Toca em cada joaninha!",
+      elogio: "2 + 2 = QUATRO! Isso é o DOBRO!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: coracao,
+      quantidade: 4,
+      itemPlural: "corações",
+      instrucaoAudio: "Olha rapidinho — dois em cima, dois embaixo.",
+      perguntaAudio: "Quantos corações?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "QUATRO! O dobro de 2!",
+      feedbackErro: "QUATRO. Dois de cada lado dá quatro!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara os dois grupos de balões.",
+      perguntaAudio: "Qual grupo é o DOBRO do outro?",
+      imagemUrl: balao,
+      itemPlural: "balões",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 2, correta: false },
+        { qtd: 4, correta: true },
+      ],
+      feedbackAcerto: "Isso! QUATRO é o dobro de DOIS!",
+      feedbackErro: "O DOBRO é quando fica duas vezes maior: 4 é o dobro de 2.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · O dobro dos dedos",
+      convite:
+        "Levanta 2 dedinhos numa mão. Agora mais 2 na outra. Junta: QUATRO! Isso é o DOBRO de 2.",
+      dicaAdulto:
+        "Doubles (2+2, 3+3) são fatos-âncora — Baroody mostra que crianças aprendem mais rápido que outras somas. Introduzir cedo, sem símbolo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Rei do Dobro",
+      mascoteUrl: mascote,
+      falaFinal: "Você descobriu o truque do DOBRO! 2 + 2 = 4!",
+    },
+  ],
+  baseCientifica:
+    "Doubles como fatos-âncora (Baroody) — 2+2 aprendido antes de 2+1 e 1+3.",
+};
+
+const dia13: AulaEI = {
+  slug: "pip-f1-s3-d13-compor-4-31",
+  titulo: "Dia 13 · O 4 também é 3 e 1",
+  icone: "🧮",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "O QUATRO tem outro jeito: TRÊS de um lado e UM do outro. Ou UM e depois TRÊS. Bora ver?",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemPlural: "flores",
+      instrucaoAudio: "Três flores no primeiro canteiro.",
+      perguntaAudio: "Quantas?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: flor,
+      quantidade: 1,
+      itemPlural: "flor",
+      instrucaoAudio: "E mais UMA flor no outro canteiro.",
+      perguntaAudio: "Quantas agora?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UMA!",
+      feedbackErro: "Era UMA só!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 4,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "TRÊS mais UMA dá QUATRO. Toca em cada uma!",
+      elogio: "3 + 1 = QUATRO!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemPlural: "maçãs",
+      instrucaoAudio: "Agora do outro jeito: UMA maçã e depois TRÊS.",
+      perguntaAudio: "Quantas maçãs ao todo?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO! 1 + 3 é igual a 3 + 1!",
+      feedbackErro: "QUATRO. Um mais três dá quatro do mesmo jeito!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Onde está QUATRO?",
+      opcoes: [
+        { nome: "três estrelas", imagemUrl: estrela, correta: false, quantidade: 3 },
+        { nome: "quatro balões", imagemUrl: balao, correta: true, quantidade: 4 },
+        { nome: "duas borboletas", imagemUrl: borboleta, correta: false, quantidade: 2 },
+      ],
+      feedbackAcerto: "Isso! QUATRO balões!",
+      feedbackErro: "QUATRO tem quatro itens. Escolhe o grupo maior!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Todos os jeitos do 4",
+      convite:
+        "Pega 4 tampinhas. Faz 2+2. Depois 3+1. Depois 1+3. Depois 4+0. Todos dão QUATRO!",
+      dicaAdulto:
+        "Part-part-whole (Resnick, Fuson): entender que o todo pode ser dividido em partes de vários modos é o pilar da adição/subtração até 10.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Arquiteto do 4",
+      mascoteUrl: mascote,
+      falaFinal: "Você já monta o QUATRO de vários jeitos! Isso é super matemático!",
+    },
+  ],
+  baseCientifica:
+    "Part-part-whole (Resnick, Fuson) — decomposição do 4 em 2+2, 3+1, 1+3.",
+};
+
+const dia14: AulaEI = {
+  slug: "pip-f1-s3-d14-velocidade",
+  titulo: "Dia 14 · Desafio Velocidade",
+  icone: "⚡",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Desafio do Pip! Hoje é velocidade: olho rápido, resposta rápida. Sem contar no dedinho!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 4,
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha rapidinho!",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO!",
+      feedbackErro: "Eram QUATRO. Olha de novo!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: estrela,
+      quantidade: 2,
+      itemPlural: "estrelas",
+      instrucaoAudio: "E agora?",
+      perguntaAudio: "Quantas estrelas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "DUAS!",
+      feedbackErro: "Eram DUAS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: coracao,
+      quantidade: 3,
+      itemPlural: "corações",
+      instrucaoAudio: "Rapidão!",
+      perguntaAudio: "Quantos?",
+      opcoes: [2, 3, 4],
+      feedbackAcerto: "TRÊS!",
+      feedbackErro: "Eram TRÊS!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: borboleta,
+      quantidade: 1,
+      itemPlural: "borboleta",
+      instrucaoAudio: "E essa aqui?",
+      perguntaAudio: "Quantas borboletas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UMA só!",
+      feedbackErro: "Era UMA!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 4,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Última rapidinha!",
+      perguntaAudio: "Quantas joaninhas?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO! Que olho rápido!",
+      feedbackErro: "QUATRO. Duas em cima, duas embaixo!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Só de olhar, sem contar.",
+      perguntaAudio: "Qual grupo tem MAIS balões?",
+      imagemUrl: balao,
+      itemPlural: "balões",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 4, correta: true },
+        { qtd: 1, correta: false },
+      ],
+      feedbackAcerto: "QUATRO é muito mais que UM!",
+      feedbackErro: "QUATRO é mais. UM é bem pouquinho!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Cartas rápidas",
+      convite:
+        "Um adulto mostra a mão bem rápido com 1, 2, 3 ou 4 dedinhos e esconde. A criança fala o número sem contar. Trocam de vez!",
+      dicaAdulto:
+        "Prática de subitizing rápido com dedos treina reconhecimento perceptual (Butterworth 1999; Berteletti & Booth 2015).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Flash do Pip",
+      mascoteUrl: mascote,
+      falaFinal: "Você é RAPIDÃO agora! Bateu o olho, acertou!",
+    },
+  ],
+  baseCientifica:
+    "Fluência em subitizing perceptual — velocidade sem perder precisão (Clements, Butterworth).",
+};
+
+const dia15: AulaEI = {
+  slug: "pip-f1-s3-d15-revisao-semana3",
+  titulo: "Dia 15 · Mestre do 4 (revisão)",
+  icone: "🏅",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Fim da Semana 3! Hoje o Pip te testa: compor, decompor e ver rápido de 1 a 4.",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: sol,
+      quantidade: 1,
+      itemPlural: "sóis",
+      instrucaoAudio: "Rapidinho!",
+      perguntaAudio: "Quantos sóis?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "UM só!",
+      feedbackErro: "Era UM!",
+    },
+    {
+      tipo: "subitizingFlash",
+      imagemUrl: maca,
+      quantidade: 4,
+      itemPlural: "maçãs",
+      instrucaoAudio: "E agora?",
+      perguntaAudio: "Quantas maçãs?",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO!",
+      feedbackErro: "Eram QUATRO!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 3,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Confirma tocando: UM, DOIS, TRÊS.",
+      elogio: "Três flores!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O 4 pode ser feito de 2 e mais quanto?",
+      opcoes: [
+        { nome: "mais 2", imagemUrl: coracao, correta: true, quantidade: 2 },
+        { nome: "mais 4", imagemUrl: bola, correta: false, quantidade: 4 },
+        { nome: "mais 1", imagemUrl: estrela, correta: false, quantidade: 1 },
+      ],
+      feedbackAcerto: "Isso! 2 + 2 = 4!",
+      feedbackErro: "2 mais 2 dá 4! Esse é o DOBRO!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "E o 3, pode ser feito de 2 e mais quanto?",
+      opcoes: [
+        { nome: "mais 2", imagemUrl: coracao, correta: false, quantidade: 2 },
+        { nome: "mais 1", imagemUrl: estrela, correta: true, quantidade: 1 },
+        { nome: "mais 3", imagemUrl: bola, correta: false, quantidade: 3 },
+      ],
+      feedbackAcerto: "Isso! 2 + 1 = 3!",
+      feedbackErro: "2 mais 1 dá 3!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara sem contar.",
+      perguntaAudio: "Qual grupo tem MENOS estrelas?",
+      imagemUrl: estrela,
+      itemPlural: "estrelas",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 4, correta: false },
+        { qtd: 2, correta: true },
+      ],
+      feedbackAcerto: "DUAS é menos que QUATRO!",
+      feedbackErro: "MENOS é o grupo com pouquinho: DUAS.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Feirinha do 4",
+      convite:
+        "Coloca 4 objetos na mesa. Peça pra criança separar de todos os jeitos: 2+2, 3+1, 1+3, 4+0. Todos dão 4!",
+      dicaAdulto:
+        "Fim da Semana 3. Se a criança compõe e decompõe 3 e 4 sem contar nos dedos, está pronta pra Fase 2 (contagem 1-a-1 até 10).",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Semana 3 · Mestre do 4",
+      mascoteUrl: mascote,
+      falaFinal:
+        "Você é MESTRE do 4! Compõe, decompõe e vê rapidinho. Vem aí a última semana antes do diploma!",
+    },
+  ],
+  baseCientifica:
+    "Revisão semanal: composição/decomposição do 3 e do 4, doubles e comparação.",
+};
+
+
 export const cursoContarComPipFase1: CursoEI = {
   slug: "contar-com-pip-f1",
   serie: "pre2",
@@ -1054,6 +1519,13 @@ export const cursoContarComPipFase1: CursoEI = {
       titulo: "Semana 2 · Olho Rápido",
       subtitulo: "Comparar, padrões de dominó e cenários reais",
       aulas: [dia06, dia07, dia08, dia09, dia10],
+    },
+    {
+      slug: "pip-f1-s3",
+      numero: 3,
+      titulo: "Semana 3 · Mestre do 4",
+      subtitulo: "Compor, decompor e ver rápido",
+      aulas: [dia11, dia12, dia13, dia14, dia15],
     },
   ],
 };
