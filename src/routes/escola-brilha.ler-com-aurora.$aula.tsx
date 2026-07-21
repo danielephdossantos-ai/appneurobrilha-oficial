@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
+import { marcarMissaoConcluida } from "@/escola-brilha/curso-ler-com-aurora/progresso";
+import { useAppState } from "@/core/store";
 import {
   cursoLerComAurora,
   getAulaLerComAurora,
