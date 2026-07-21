@@ -87,124 +87,74 @@ export function OperacaoVisual({
     setReplayKey((k) => k + 1);
     if (operacao === "subtracao") {
       void rodarSubtracao();
-      return;
+    } else {
+      void rodarSoma();
     }
+  }
 
+  async function rodarSoma() {
     limpar();
+    const id = runId.current;
+    const vivo = () => id === runId.current;
+    const pausa = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const falar = async (texto: string, rate = 0.72) => {
+      if (!vivo()) return;
+      await speakChunked(texto, { rate });
+    };
+
     setFase(1);
     setContadoA(0);
     setContadoB(0);
     setContadoTotal(0);
     setRemovidos(0);
 
-    // Introdução
-    const intro =
-      operacao === "soma"
-        ? `Vamos contar. Primeiro grupo, ${a} ${itemPlural}.`
-        : `Vamos ver. Temos ${a} ${itemPlural}.`;
-    speakChunked(intro, { rate: 0.75 });
+    await falar(`Vamos contar. Primeiro grupo, ${nome(a)} ${itemPlural}.`, 0.72);
+    await pausa(500);
+    if (!vivo()) return;
 
-    let t = 3000;
-    const passo = 1900; // tempo entre cada número contado (bem devagar)
-    const rateNum = 0.7; // ritmo lento do número falado
-
-    // Conta grupo A um por um (enfileirado, não corta)
+    // Conta grupo A um por um — imagem aparece JUNTO com o número falado
     for (let i = 1; i <= a; i++) {
-      add(() => {
-        setContadoA(i);
-        speakChunked(nome(i), { rate: rateNum, queue: true });
-      }, t);
-      t += passo;
+      setContadoA(i);
+      await falar(nome(i), 0.62);
+      await pausa(600);
+      if (!vivo()) return;
     }
 
-    // Pausa antes do sinal
-    t += 800;
+    await pausa(700);
+    if (!vivo()) return;
+    setFase(2);
+    await falar(`Agora, mais ${nome(b)}.`, 0.72);
+    await pausa(600);
+    if (!vivo()) return;
 
-    if (operacao === "soma") {
-      // Anuncia grupo B
-      add(() => {
-        setFase(2);
-        speakChunked(`Agora, mais ${nome(b)}.`, { rate: 0.75, queue: true });
-      }, t);
-      t += 2600;
-
-      for (let i = 1; i <= b; i++) {
-        add(() => {
-          setFase(3);
-          setContadoB(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
-      t += 900;
-      // Junta e conta total
-      add(() => {
-        setFase(4);
-        speakChunked(`Agora vamos juntar tudo e contar de novo, bem devagar.`, {
-          rate: 0.75,
-          queue: true,
-        });
-      }, t);
-      t += 3800;
-      for (let i = 1; i <= resultado; i++) {
-        add(() => {
-          setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
-    } else {
-      // Subtração: aviso ANTES de começar a tirar
-      add(() => {
-        setFase(2);
-        speakChunked(
-          `Muito bem! Temos ${nome(a)} ${itemPlural}. Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`,
-          { rate: 0.75, queue: true },
-        );
-      }, t);
-      t += 6000;
-      // Remove uma por uma explicando quantas sobram a cada passo
-      for (let i = 1; i <= b; i++) {
-        const sobram = a - i;
-        add(() => {
-          setFase(3);
-          setRemovidos(i);
-          speakChunked(
-            `Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`,
-            { rate: 0.7, queue: true },
-          );
-        }, t);
-        t += 3800;
-      }
-      t += 900;
-      add(() => {
-        setFase(4);
-        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, {
-          rate: 0.75,
-          queue: true,
-        });
-      }, t);
-      t += 3800;
-      for (let i = 1; i <= resultado; i++) {
-        add(() => {
-          setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum, queue: true });
-        }, t);
-        t += passo;
-      }
+    // Conta grupo B um por um
+    setFase(3);
+    for (let i = 1; i <= b; i++) {
+      setContadoB(i);
+      await falar(nome(i), 0.62);
+      await pausa(600);
+      if (!vivo()) return;
     }
 
+    await pausa(700);
+    if (!vivo()) return;
+    setFase(4);
+    await falar(`Agora vamos juntar tudo e contar de novo, bem devagar.`, 0.72);
+    await pausa(600);
+    if (!vivo()) return;
 
-    t += 800;
-    add(() => {
-      setFase(5);
-      speakChunked(
-        operacao === "soma"
-          ? `${a} mais ${b} é igual a ${resultado}!`
-          : `${a} menos ${b} é igual a ${resultado}!`,
-        { rate: 0.8 },
-      );
-    }, t);
+    // Conta o total um por um
+    for (let i = 1; i <= resultado; i++) {
+      setContadoTotal(i);
+      await falar(nome(i), 0.6);
+      await pausa(700);
+      if (!vivo()) return;
+    }
+
+    await pausa(500);
+    if (!vivo()) return;
+    setFase(5);
+    await falar(`${a} mais ${b} é igual a ${resultado}!`, 0.75);
   }
 
   async function rodarSubtracao() {
