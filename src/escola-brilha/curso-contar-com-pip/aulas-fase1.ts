@@ -10,8 +10,6 @@ import { url as borboleta } from "@/assets/neuro-treino/objetos/borboleta.png.as
 import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
-import { url as parque } from "@/assets/neuro-treino/objetos/parque.png.asset.json";
 
 /**
  * Contar com Pip — FASE 1 · Subitizing (1–4)
@@ -91,30 +89,25 @@ const dia01: AulaEI = {
       feedbackErro: "Olha de novo: aqui tem uma, aqui tem duas. Duas é mais!",
     },
     {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma DUAS vezes comigo: um, dois!",
-      palavra: "PAL-MA",
-      silabas: 2,
-      imagemUrl: estrelas,
-      elogio: "Duas palmas para o número dois!",
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 2,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Agora bate palma em cada estrela: UM! DOIS! Toca em cada uma!",
+      elogio: "Duas palmas para o número DOIS!",
     },
     {
-      tipo: "historiaIlustrada",
-      titulo: "O passarinho e a amiga",
-      cenas: [
-        {
-          imagemUrl: passaro,
-          narracao: "UM passarinho estava sozinho no galho, cantando bem baixinho.",
-        },
-        {
-          imagemUrl: parque,
-          narracao: "Aí chegou uma amiga voando! Agora eram DOIS passarinhos juntos.",
-        },
-        {
-          imagemUrl: coracao,
-          narracao: "Os dois cantaram juntos, e a árvore ficou cheia de música.",
-        },
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual grupo mostra DOIS?",
+      opcoes: [
+        { nome: "uma bola", imagemUrl: bola, correta: false },
+        { nome: "duas estrelas", imagemUrl: estrelas, correta: true },
+        { nome: "um coração", imagemUrl: coracao, correta: false },
       ],
+      feedbackAcerto: "Isso! DUAS estrelas!",
+      feedbackErro: "DOIS tem dois itens. Escolhe o par!",
     },
     {
       tipo: "missaoFamilia",
@@ -205,12 +198,14 @@ const dia02: AulaEI = {
       feedbackErro: "TRÊS é mais que DUAS. Vê de novo!",
     },
     {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma TRÊS vezes: um, dois, TRÊS!",
-      palavra: "PAL-MA-PAL",
-      silabas: 3,
-      imagemUrl: estrelas,
-      elogio: "Três palmas para o número três!",
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 3,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Bate palma em cada estrela: UM! DOIS! TRÊS! Toca em cada uma!",
+      elogio: "Três palmas para o número TRÊS!",
     },
     {
       tipo: "missaoFamilia",
