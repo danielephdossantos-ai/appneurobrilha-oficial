@@ -6,6 +6,7 @@ import { cursoContarComPipFase2 } from "@/escola-brilha/curso-contar-com-pip/aul
 import { cursoContarComPipFase3 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase3";
 import { cursoContarComPipFase4 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase4";
 import { cursoContarComPipFase5 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase5";
+import { cursoContarComPipFase6 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase6";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
