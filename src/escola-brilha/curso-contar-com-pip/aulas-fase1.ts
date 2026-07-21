@@ -200,12 +200,14 @@ const dia02: AulaEI = {
       feedbackErro: "TRÊS é mais que DUAS. Vê de novo!",
     },
     {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma TRÊS vezes: um, dois, TRÊS!",
-      palavra: "PAL-MA-PAL",
-      silabas: 3,
-      imagemUrl: estrelas,
-      elogio: "Três palmas para o número três!",
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 3,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Bate palma em cada estrela: UM! DOIS! TRÊS! Toca em cada uma!",
+      elogio: "Três palmas para o número TRÊS!",
     },
     {
       tipo: "missaoFamilia",
