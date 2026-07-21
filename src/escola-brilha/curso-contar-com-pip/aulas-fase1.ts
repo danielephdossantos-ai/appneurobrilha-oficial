@@ -424,7 +424,7 @@ const dia04: AulaEI = {
 
 const dia05: AulaEI = {
   slug: "pip-f1-s1-d5-dedinhos-do-pip",
-  titulo: "Dia 5 · Os dedinhos do Pip",
+  titulo: "Dia 5 · Ver 1, 2, 3 e 4 (revisão da semana)",
   icone: "🖐️",
   bncc: ["EI03ET07"],
   duracaoMin: 10,
@@ -433,57 +433,80 @@ const dia05: AulaEI = {
       tipo: "boasVindas",
       mascoteUrl: mascote,
       falaMascote:
-        "Sabia que seus dedinhos são o primeiro ábaco do mundo? Hoje a gente mostra 1, 2, 3 e 4 com os dedos!",
+        "Chegou o Dia 5! Hoje a gente revisa TUDO: bater o olho e saber se é 1, 2, 3 ou 4. No fim, brinca com os dedinhos com quem está com você em casa!",
     },
     {
-      tipo: "fazDeConta",
-      imagemUrl: sol,
-      convite:
-        "Mostra UM dedinho pro Pip! Só o dedo indicador, pra cima!",
-      dica: "Uso dos dedos aos 5 anos prediz desempenho matemático aos 8 (pesquisa de Butterworth).",
+      tipo: "subitizingFlash",
+      imagemUrl: bola,
+      quantidade: 1,
+      itemPlural: "bolas",
+      instrucaoAudio: "Olha rapidinho: quantas bolas?",
+      perguntaAudio: "Quantas bolas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "Isso! UMA bolinha só!",
+      feedbackErro: "Era UMA só. Vamos ver de novo!",
     },
     {
-      tipo: "fazDeConta",
-      imagemUrl: sol,
-      convite: "Agora DOIS dedinhos! Igual sinal de paz!",
-    },
-    {
-      tipo: "fazDeConta",
-      imagemUrl: sol,
-      convite: "TRÊS dedinhos agora! Como se pedisse silêncio!",
-    },
-    {
-      tipo: "fazDeConta",
-      imagemUrl: sol,
-      convite: "E agora QUATRO! Só o polegar fica escondido!",
+      tipo: "subitizingFlash",
+      imagemUrl: joaninha,
+      quantidade: 2,
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Agora com joaninhas!",
+      perguntaAudio: "Quantas joaninhas?",
+      opcoes: [1, 2, 3],
+      feedbackAcerto: "Boa! DUAS joaninhas!",
+      feedbackErro: "Eram DUAS. Olha de novo!",
     },
     {
       tipo: "subitizingFlash",
       imagemUrl: estrela,
       quantidade: 3,
       itemPlural: "estrelas",
-      instrucaoAudio: "Olha rapidinho e mostra a resposta com os dedinhos!",
+      instrucaoAudio: "Rapidinho de novo!",
       perguntaAudio: "Quantas estrelas?",
       opcoes: [2, 3, 4],
-      feedbackAcerto: "Três dedinhos, três estrelas!",
-      feedbackErro: "Eram três. Mostra três dedinhos!",
+      feedbackAcerto: "TRÊS estrelas! Boa!",
+      feedbackErro: "Eram TRÊS. Vamos ver mais uma vez!",
     },
     {
       tipo: "subitizingFlash",
       imagemUrl: coracao,
       quantidade: 4,
       itemPlural: "corações",
-      instrucaoAudio: "Mais uma!",
+      instrucaoAudio: "Última rodada: olha o padrão!",
       perguntaAudio: "Quantos corações?",
-      opcoes: [3, 4, 2],
-      feedbackAcerto: "Quatro dedinhos, quatro corações!",
-      feedbackErro: "Eram quatro. Só o polegar fica escondido!",
+      opcoes: [3, 4, 5],
+      feedbackAcerto: "QUATRO! Um em cada canto!",
+      feedbackErro: "Eram QUATRO — dois em cima, dois embaixo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 4,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Confirma tocando em cada flor: um, dois, três, quatro.",
+      elogio: "Quatro flores no jardim!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Dois grupos aparecem.",
+      perguntaAudio: "Qual tem MAIS balões?",
+      imagemUrl: balao,
+      itemPlural: "balões",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 2, correta: false },
+        { qtd: 4, correta: true },
+      ],
+      feedbackAcerto: "Isso! QUATRO é mais que DOIS!",
+      feedbackErro: "QUATRO é mais que DOIS. Olha os dois grupos!",
     },
     {
       tipo: "rodaConversa",
-      imagemUrl: joaninha,
+      imagemUrl: mascote,
       pergunta:
-        "Você tem quantos anos? Mostra com os dedinhos pro Pip!",
+        "O Pip quer saber: quantos anos você tem? Fala em voz alta pro Pip!",
       exemplos: [
         { nome: "3 anos" },
         { nome: "4 anos" },
@@ -492,11 +515,11 @@ const dia05: AulaEI = {
     },
     {
       tipo: "missaoFamilia",
-      titulo: "Missão Família",
+      titulo: "Missão Família · Dedinhos",
       convite:
-        "Brinca com alguém em casa: um mostra dedinhos e o outro fala o número na hora, sem contar!",
+        "Agora é hora dos dedinhos! Chama alguém em casa e brinca: a pessoa fala um número (1, 2, 3 ou 4) e você mostra na mão. Depois inverte!",
       dicaAdulto:
-        "Dedos são o ábaco natural. Estimule — não é 'muleta', é neurociência.",
+        "Butterworth (1999): o uso dos dedos aos 5 anos prediz o desempenho matemático aos 8. Não é 'muleta' — é o primeiro ábaco do cérebro. Mostre você primeiro cada quantidade, deixe a criança copiar, e depois alterne quem pede e quem mostra.",
     },
     {
       tipo: "celebracao",
@@ -507,8 +530,11 @@ const dia05: AulaEI = {
     },
   ],
   baseCientifica:
-    "Finger gnosia (Butterworth 1999; Noel 2005) — uso de dedos correlaciona com competência aritmética futura.",
+    "Revisão semanal de subitizing 1–4 + finger gnosia em casa (Butterworth 1999; Noel 2005).",
 };
+
+
+
 
 export const cursoContarComPipFase1: CursoEI = {
   slug: "contar-com-pip-f1",
