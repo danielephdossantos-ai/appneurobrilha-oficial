@@ -28,7 +28,8 @@ import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json
  *  - Dia 5: Dedinhos do Pip + medalha semanal
  */
 
-const mascote = brilha;
+import { url as pipMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+const mascote = pipMascot;
 
 const dia01: AulaEI = {
   slug: "pip-f1-s1-d1-um-e-dois",
