@@ -77,7 +77,7 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 5,
-    curso: null,
+    curso: cursoContarComPipFase5,
     gradiente: "linear-gradient(135deg,#ec4899,#831843)",
     badge: "FASE 5 · TEN-FRAME (composição do 10)",
     nome: "Ten-frame",
