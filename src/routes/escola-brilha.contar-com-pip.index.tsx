@@ -8,6 +8,7 @@ import { cursoContarComPipFase4 } from "@/escola-brilha/curso-contar-com-pip/aul
 import { cursoContarComPipFase5 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase5";
 import { cursoContarComPipFase6 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase6";
 import { cursoContarComPipFase7 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase7";
+import { cursoContarComPipFase8 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase8";
 import { usePipConcluidas } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
@@ -103,9 +104,9 @@ const FASES: BlocoFase[] = [
   },
   {
     n: 8,
-    curso: null,
+    curso: cursoContarComPipFase8,
     gradiente: "linear-gradient(135deg,#6366f1,#312e81)",
-    badge: "FASE 8 · PROBLEMAS EM HISTÓRIA",
+    badge: "FASE 8 · PROBLEMAS EM HISTÓRIA (CGI)",
     nome: "Problemas em História",
     descricao: "Cognitively Guided Instruction: juntar, tirar, comparar.",
   },
