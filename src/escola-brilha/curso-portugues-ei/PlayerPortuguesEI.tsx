@@ -659,7 +659,17 @@ function MomentoRender({
         </CardScreen>
       );
 
+    case "ensinoMagnitude":
+      return <EnsinoMagnitudeBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "pareamento1a1":
+      return <Pareamento1a1Bloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
+    case "contraexemploTamanho":
+      return <ContraexemploTamanhoBloco m={m} idx={idx} cor={cor} onOk={marcarOk} />;
+
     // ============ FASE 2 ============
+
 
     case "somDaLetra":
       return (
@@ -877,7 +887,310 @@ function falarBlending(silabas: string[], palavra: string, cb?: () => void) {
 const CORES_SILABA = ["#7c3aed", "#db2777", "#0891b2", "#ea580c"];
 
 
+// ============ Componentes auxiliares — Fase 6 (Magnitude) ============
+
+function DoisGrupos({
+  a,
+  b,
+  imgA,
+  imgB,
+  destaque,
+  rotuloA,
+  rotuloB,
+}: {
+  a: number;
+  b: number;
+  imgA: string;
+  imgB: string;
+  destaque?: "a" | "b" | "empate" | null;
+  rotuloA?: string;
+  rotuloB?: string;
+}) {
+  const box = (n: number, img: string, on: boolean, rotulo?: string) => (
+    <div
+      className={`flex-1 rounded-3xl p-3 border-4 transition ${
+        on ? "border-green-500 bg-green-50 shadow-lg scale-105" : "border-purple-200 bg-white"
+      }`}
+    >
+      <div className="flex flex-wrap justify-center gap-1 min-h-[64px]">
+        {Array.from({ length: n }).map((_, k) => (
+          <img key={k} src={img} alt="" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+        ))}
+      </div>
+      {rotulo && (
+        <p className="text-center text-xs font-black text-purple-700 mt-2">{rotulo}</p>
+      )}
+      <p className="text-center text-sm font-black text-slate-700 mt-1">{n}</p>
+    </div>
+  );
+  return (
+    <div className="mt-4 flex flex-col sm:flex-row gap-3 items-stretch">
+      {box(a, imgA, destaque === "a" || destaque === "empate", rotuloA)}
+      {box(b, imgB, destaque === "b" || destaque === "empate", rotuloB)}
+    </div>
+  );
+}
+
+function EnsinoMagnitudeBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "ensinoMagnitude" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [revelado, setRevelado] = useState(false);
+  const destaque =
+    !revelado
+      ? null
+      : m.alvo === "igual"
+      ? "empate"
+      : m.alvo === "mais"
+      ? m.grupoA.qtd > m.grupoB.qtd
+        ? "a"
+        : "b"
+      : m.grupoA.qtd < m.grupoB.qtd
+      ? "a"
+      : "b";
+  const ouvirPip = () => {
+    setRevelado(true);
+    speak(m.falaModelagem);
+  };
+  useEffect(() => {
+    const t = setTimeout(ouvirPip, 400);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="O Pip ensina" cor={cor} />
+      <div className="flex items-center gap-3">
+        {m.mascoteUrl && (
+          <img src={m.mascoteUrl} alt="Pip" className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
+        )}
+        <BigListenButton onClick={ouvirPip} label="Ouvir o Pip" />
+      </div>
+      <DoisGrupos
+        a={m.grupoA.qtd}
+        b={m.grupoB.qtd}
+        imgA={m.grupoA.imagemUrl}
+        imgB={m.grupoB.imagemUrl}
+        destaque={destaque as any}
+        rotuloA={m.grupoA.rotulo}
+        rotuloB={m.grupoB.rotulo}
+      />
+      {revelado && (
+        <p className="mt-4 text-center text-sm font-semibold text-slate-700">
+          {m.alvo === "igual" ? "🟰 IGUAL" : m.alvo === "mais" ? "🟢 esse tem MAIS" : "🟢 esse tem MENOS"}
+        </p>
+      )}
+      <button
+        onClick={() => {
+          speak(m.elogio);
+          onOk();
+        }}
+        className="mt-5 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-bold shadow"
+      >
+        Entendi ✓
+      </button>
+    </CardScreen>
+  );
+}
+
+function Pareamento1a1Bloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "pareamento1a1" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [step, setStep] = useState(0); // quantas linhas desenhadas
+  const maxPares = Math.min(m.grupoA.qtd, m.grupoB.qtd);
+  const sobra = m.grupoA.qtd - m.grupoB.qtd;
+  const grupoMais = sobra > 0 ? "a" : sobra < 0 ? "b" : "empate";
+  const [terminou, setTerminou] = useState(false);
+  const iniciar = () => {
+    setStep(0);
+    setTerminou(false);
+    speak(m.instrucaoAudio);
+    let i = 0;
+    const tick = () => {
+      i += 1;
+      setStep(i);
+      if (i < maxPares) {
+        setTimeout(tick, 650);
+      } else {
+        setTimeout(() => {
+          setTerminou(true);
+          speak(m.conclusao);
+        }, 500);
+      }
+    };
+    setTimeout(tick, 900);
+  };
+  useEffect(() => {
+    const t = setTimeout(iniciar, 300);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const renderColuna = (qtd: number, img: string, lado: "a" | "b") => (
+    <div className="flex-1 flex flex-col items-center gap-2">
+      {Array.from({ length: qtd }).map((_, k) => {
+        const pareado = k < step;
+        const sobrando = terminou && k >= maxPares && grupoMais === lado;
+        return (
+          <div
+            key={k}
+            className={`rounded-full p-1 border-2 transition ${
+              sobrando
+                ? "border-yellow-500 bg-yellow-100 animate-pulse"
+                : pareado
+                ? "border-green-500 bg-green-50"
+                : "border-slate-200 bg-white"
+            }`}
+          >
+            <img src={img} alt="" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+          </div>
+        );
+      })}
+    </div>
+  );
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Emparelhar 1 a 1" cor={cor} />
+      <BigListenButton onClick={iniciar} label="Ver de novo" />
+      <div className="mt-4 flex gap-4 items-start justify-center min-h-[220px] relative">
+        {renderColuna(m.grupoA.qtd, m.grupoA.imagemUrl, "a")}
+        <div className="flex flex-col items-center justify-start pt-2 gap-2 min-w-[36px]">
+          {Array.from({ length: maxPares }).map((_, k) => (
+            <div
+              key={k}
+              className={`h-[36px] sm:h-[44px] flex items-center transition ${
+                k < step ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <span className="text-green-600 font-black text-xl">↔</span>
+            </div>
+          ))}
+        </div>
+        {renderColuna(m.grupoB.qtd, m.grupoB.imagemUrl, "b")}
+      </div>
+      {terminou && (
+        <p className="mt-3 text-center text-sm font-semibold text-slate-700">{m.conclusao}</p>
+      )}
+      <button
+        onClick={() => {
+          speak(m.elogio);
+          onOk();
+        }}
+        disabled={!terminou}
+        className="mt-5 mx-auto block rounded-full bg-green-600 text-white px-8 py-3 font-bold shadow disabled:opacity-40"
+      >
+        Entendi ✓
+      </button>
+    </CardScreen>
+  );
+}
+
+function ContraexemploTamanhoBloco({
+  m,
+  idx,
+  cor,
+  onOk,
+}: {
+  m: Extract<MomentoEI, { tipo: "contraexemploTamanho" }>;
+  idx: number;
+  cor: string;
+  onOk: () => void;
+}) {
+  const [msg, setMsg] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => speak(m.falaEnsino), 400);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const escolher = (correta: boolean) => {
+    if (correta) {
+      setOk(true);
+      setMsg(m.feedbackAcerto);
+      speak(m.feedbackAcerto);
+      setTimeout(onOk, 900);
+    } else {
+      setMsg(m.feedbackErro);
+      speak(m.feedbackErro);
+    }
+  };
+  return (
+    <CardScreen cor={cor}>
+      <TituloMomento n={idx + 1} texto="Cuidado! Tamanho ≠ quantidade" cor={cor} />
+      <BigListenButton onClick={() => speak(m.falaEnsino)} label="Ouvir explicação" />
+      <div className="mt-4 grid grid-cols-2 gap-3 items-end">
+        <div
+          className={`rounded-3xl p-3 border-4 flex flex-col items-center transition ${
+            ok ? "border-slate-200 bg-white opacity-60" : "border-purple-200 bg-white"
+          }`}
+        >
+          <img
+            src={m.itemGrande.imagemUrl}
+            alt={m.itemGrande.nome}
+            className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
+          />
+          <p className="text-center text-xs font-black text-purple-700 mt-1">
+            1 {m.itemGrande.nome} (grande)
+          </p>
+        </div>
+        <div
+          className={`rounded-3xl p-3 border-4 flex flex-col items-center transition ${
+            ok ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
+          }`}
+        >
+          <div className="flex flex-wrap justify-center gap-1">
+            {Array.from({ length: m.itemPequeno.qtd }).map((_, k) => (
+              <img
+                key={k}
+                src={m.itemPequeno.imagemUrl}
+                alt=""
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+              />
+            ))}
+          </div>
+          <p className="text-center text-xs font-black text-purple-700 mt-1">
+            {m.itemPequeno.qtd} {m.itemPequeno.nome} (pequenos)
+          </p>
+        </div>
+      </div>
+      <p className="mt-3 text-center text-sm text-slate-600">Qual grupo tem MAIS?</p>
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        <button
+          disabled={ok}
+          onClick={() => escolher(false)}
+          className="rounded-full bg-white border-2 border-purple-300 py-2 font-bold text-purple-700 active:scale-95 disabled:opacity-40"
+        >
+          1 grande
+        </button>
+        <button
+          disabled={ok}
+          onClick={() => escolher(true)}
+          className="rounded-full bg-white border-2 border-purple-300 py-2 font-bold text-purple-700 active:scale-95 disabled:opacity-40"
+        >
+          {m.itemPequeno.qtd} pequenos
+        </button>
+      </div>
+      {msg && <p className="mt-3 text-center font-semibold text-slate-700">{msg}</p>}
+    </CardScreen>
+  );
+}
+
 // ============ Componentes auxiliares da Fase 2 ============
+
 
 function TracadoLetraBloco({
   m,
