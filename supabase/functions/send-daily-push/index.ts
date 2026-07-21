@@ -43,6 +43,11 @@ Deno.serve(async (req) => {
   let removed = 0;
   let skipped = 0;
 
+  const nowUtc = new Date();
+  // horário local aproximado (Brasil, UTC-3)
+  const nowLocal = new Date(nowUtc.getTime() - 3 * 60 * 60 * 1000);
+  const hhmmNow = nowLocal.toISOString().slice(11, 16); // "HH:MM"
+
   for (const s of subs || []) {
     if (!s.child_id) { skipped++; continue; }
 
@@ -71,18 +76,57 @@ Deno.serve(async (req) => {
       .eq("concluido", false);
     const trabalhos = trabalhosCount || 0;
 
-    if (estudosHoje === 0 && trabalhos === 0) { skipped++; continue; }
+    // === Ler com Aurora ===
+    // busca agendamentos aurora pendentes (hoje ou atrasados) que ainda não foram concluídos
+    const { data: auroraAgenda } = await supabase
+      .from("study_agenda")
+      .select("id, topic, exam_date, time_of_day, completed")
+      .eq("child_id", s.child_id)
+      .eq("category", "aurora")
+      .eq("completed", false)
+      .lte("exam_date", hoje);
+
+    // criança fez aula do Aurora hoje?
+    const { data: progresso } = await supabase
+      .from("aurora_progresso")
+      .select("ultima_data")
+      .eq("child_id", s.child_id)
+      .maybeSingle();
+    const fezAuroraHoje = progresso?.ultima_data === hoje;
+
+    // filtra: só envia se ainda não fez aula hoje E (horário passou OU está atrasado de dias anteriores)
+    const auroraPendentes = (auroraAgenda || []).filter((a: any) => {
+      if (fezAuroraHoje) return false;
+      if (a.exam_date < hoje) return true; // atrasado
+      // é hoje: só lembra se horário já passou (ou não tem hora)
+      if (!a.time_of_day) return true;
+      return a.time_of_day <= hhmmNow;
+    });
+    const auroraCount = auroraPendentes.length;
+
+    if (estudosHoje === 0 && trabalhos === 0 && auroraCount === 0) { skipped++; continue; }
+
+    const primeiraAurora = auroraPendentes[0];
+    const auroraAtrasada = primeiraAurora && primeiraAurora.exam_date < hoje;
 
     const body = [
+      auroraCount > 0
+        ? (auroraAtrasada
+            ? `✨ Você tem Ler com Aurora atrasado — bora recuperar?`
+            : `✨ Hora do Ler com Aurora${primeiraAurora?.time_of_day ? ` (${primeiraAurora.time_of_day})` : ""}`)
+        : null,
       estudosHoje > 0 ? `📚 ${estudosHoje} estudo(s) pra hoje` : null,
       trabalhos > 0 ? `📝 ${trabalhos} trabalho(s) pendente(s)` : null,
     ].filter(Boolean).join(" • ");
 
     const payload = JSON.stringify({
-      title: "Neuro Brilha — hoje tem missão! ✨",
+      title: auroraCount > 0
+        ? "Aurora está te esperando 🌟"
+        : "Neuro Brilha — hoje tem missão! ✨",
       body,
-      url: "/reforco-brilha",
-      tag: `daily-${s.child_id}`,
+      url: auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
+      // tag muda a cada hora pra permitir múltiplos lembretes ao longo do dia
+      tag: `aurora-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
     });
 
     try {
