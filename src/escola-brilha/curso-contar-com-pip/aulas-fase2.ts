@@ -853,6 +853,442 @@ const dia10: AulaEI = {
 };
 
 
+// ============================================================
+// SEMANA 3 · Mestre da Contagem
+// Foco: cardinalidade sem recontar, contagem para trás (10→1),
+// irrelevância da ordem (contar por qualquer lado dá o mesmo total).
+// ============================================================
+
+const dia11: AulaEI = {
+  slug: "pip-f2-s3-d11-quantos-tem",
+  titulo: "Dia 11 · Quantos tem? (sem recontar)",
+  icone: "🎯",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Semana 3! Hoje o Pip te ensina o segredo dos contadores de verdade: o ÚLTIMO número que você diz é QUANTOS TEM. Não precisa contar de novo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: bola,
+      quantidade: 4,
+      itemSingular: "bola",
+      itemPlural: "bolas",
+      instrucaoAudio:
+        "Conta as bolas: UM, DOIS, TRÊS, QUATRO. QUATRO! Esse foi o último — então tem QUATRO.",
+      elogio: "Quatro! Não precisa contar de novo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 6,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio:
+        "Conta: 1, 2, 3, 4, 5, 6. Tem SEIS. O último número é o total!",
+      elogio: "Isso! SEIS!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "O Pip contou até OITO e parou. Quantas maçãs tem?",
+      opcoes: [
+        { nome: "seis", imagemUrl: maca, correta: false, quantidade: 6 },
+        { nome: "oito", imagemUrl: maca, correta: true, quantidade: 8 },
+        { nome: "sete", imagemUrl: maca, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "OITO! O último número dito é o total!",
+      feedbackErro: "Se parou no OITO, tem OITO. Esse é o segredo!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "A gente contou até CINCO. Quantas flores tem?",
+      opcoes: [
+        { nome: "três", imagemUrl: flor, correta: false, quantidade: 3 },
+        { nome: "cinco", imagemUrl: flor, correta: true, quantidade: 5 },
+        { nome: "quatro", imagemUrl: flor, correta: false, quantidade: 4 },
+      ],
+      feedbackAcerto: "CINCO! O último é o total!",
+      feedbackErro: "Contou até CINCO, então tem CINCO.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Quantos tem?",
+      convite:
+        "Coloca alguns objetos. A criança conta tocando. Quando terminar, pergunta 'quantos tem?' — o ideal é ela responder o último número SEM recontar.",
+      dicaAdulto:
+        "Cardinalidade (Gelman): saber que o último número dito É o total é a virada de chave da contagem. Se ela recontar, tudo bem — ainda está firmando.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Sabe Quantos Tem",
+      mascoteUrl: mascote,
+      falaFinal: "O último número é QUANTOS TEM! Segredo desbloqueado!",
+    },
+  ],
+  baseCientifica:
+    "Princípio da cardinalidade (Gelman & Gallistel) — o último número dito é o total.",
+};
+
+const dia12: AulaEI = {
+  slug: "pip-f2-s3-d12-contar-para-tras",
+  titulo: "Dia 12 · Contar para trás (10 → 1)",
+  icone: "🚀",
+  bncc: ["EI03ET07"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Foguete do Pip vai decolar! Mas antes precisa contar PARA TRÁS: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1… DECOLA!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: estrela,
+      quantidade: 5,
+      itemSingular: "estrela",
+      itemPlural: "estrelas",
+      instrucaoAudio:
+        "Aquece indo pra frente: 1, 2, 3, 4, 5.",
+      elogio: "Cinco!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 3 vem o…",
+      opcoes: [
+        { nome: "2 (duas estrelas)", imagemUrl: estrela, correta: true, quantidade: 2 },
+        { nome: "4 (quatro balões)", imagemUrl: balao, correta: false, quantidade: 4 },
+        { nome: "5 (cinco maçãs)", imagemUrl: maca, correta: false, quantidade: 5 },
+      ],
+      feedbackAcerto: "DOIS! Antes do TRÊS vem o DOIS!",
+      feedbackErro: "Contando pra trás: 3, 2, 1. DOIS vem antes do TRÊS.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 5 vem o…",
+      opcoes: [
+        { nome: "3 (três flores)", imagemUrl: flor, correta: false, quantidade: 3 },
+        { nome: "4 (quatro corações)", imagemUrl: coracao, correta: true, quantidade: 4 },
+        { nome: "6 (seis joaninhas)", imagemUrl: joaninha, correta: false, quantidade: 6 },
+      ],
+      feedbackAcerto: "QUATRO! Antes do 5 vem o 4!",
+      feedbackErro: "5, 4, 3, 2, 1 — QUATRO vem antes do CINCO.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 8 vem o…",
+      opcoes: [
+        { nome: "6 (seis bolas)", imagemUrl: bola, correta: false, quantidade: 6 },
+        { nome: "7 (sete borboletas)", imagemUrl: borboleta, correta: true, quantidade: 7 },
+        { nome: "9 (nove maçãs)", imagemUrl: maca, correta: false, quantidade: 9 },
+      ],
+      feedbackAcerto: "SETE! Antes do 8 vem o 7!",
+      feedbackErro: "8, 7, 6… SETE vem antes do OITO.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 10 vem o…",
+      opcoes: [
+        { nome: "8 (oito estrelas)", imagemUrl: estrela, correta: false, quantidade: 8 },
+        { nome: "9 (nove balões)", imagemUrl: balao, correta: true, quantidade: 9 },
+        { nome: "7 (sete flores)", imagemUrl: flor, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "NOVE! Antes do 10 vem o 9!",
+      feedbackErro: "10, 9, 8… NOVE vem antes do DEZ.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Contagem regressiva",
+      convite:
+        "Brinca de foguete: contem juntos 10, 9, 8, 7, 6, 5, 4, 3, 2, 1… DECOLA! Repete algumas vezes.",
+      dicaAdulto:
+        "Contar para trás fortalece a sequência numérica e prepara subtração. Comece do 5 se 10 for difícil.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Foguete do Pip",
+      mascoteUrl: mascote,
+      falaFinal: "Você já conta pra frente E pra trás!",
+    },
+  ],
+  baseCientifica:
+    "Contagem regressiva — pré-requisito para subtração (Fuson).",
+};
+
+const dia13: AulaEI = {
+  slug: "pip-f2-s3-d13-tanto-faz-a-ordem",
+  titulo: "Dia 13 · Tanto faz a ordem",
+  icone: "🔄",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Segredo grande hoje: TANTO FAZ por onde começa a contar. Da esquerda, da direita, do meio — o TOTAL é sempre o mesmo!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 5,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio: "Conta as flores da esquerda pra direita.",
+      elogio: "Cinco flores!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: flor,
+      quantidade: 5,
+      itemSingular: "flor",
+      itemPlural: "flores",
+      instrucaoAudio:
+        "Agora conta AS MESMAS flores começando pela outra ponta. Quantas dá?",
+      elogio: "CINCO de novo! Tanto faz a ordem!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: joaninha,
+      quantidade: 7,
+      itemSingular: "joaninha",
+      itemPlural: "joaninhas",
+      instrucaoAudio: "Conta as sete joaninhas por qualquer lado.",
+      elogio: "Sete!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "O Pip contou 6 maçãs. A Cate contou as MESMAS maçãs começando pelo outro lado. Quantas ela achou?",
+      opcoes: [
+        { nome: "cinco", imagemUrl: maca, correta: false, quantidade: 5 },
+        { nome: "seis", imagemUrl: maca, correta: true, quantidade: 6 },
+        { nome: "sete", imagemUrl: maca, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "SEIS! Tanto faz por onde começa!",
+      feedbackErro: "As mesmas maçãs dão o MESMO total. SEIS!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "Tem 8 corações na mesa. Se você contar de trás pra frente, quantos vai dar?",
+      opcoes: [
+        { nome: "oito", imagemUrl: coracao, correta: true, quantidade: 8 },
+        { nome: "sete", imagemUrl: coracao, correta: false, quantidade: 7 },
+        { nome: "nove", imagemUrl: coracao, correta: false, quantidade: 9 },
+      ],
+      feedbackAcerto: "OITO! O total não muda!",
+      feedbackErro: "Se tem 8, dá 8 — não importa a ordem.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Por qualquer lado",
+      convite:
+        "Enfileira 6 objetos. A criança conta da esquerda. Depois da direita. Depois do meio. Toda vez tem que dar SEIS!",
+      dicaAdulto:
+        "Irrelevância da ordem (Gelman): o total independe do ponto de partida. Isso libera a ideia de comutatividade (2+3=3+2) mais adiante.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Tanto Faz",
+      mascoteUrl: mascote,
+      falaFinal: "O total é o total! Não muda!",
+    },
+  ],
+  baseCientifica:
+    "Princípio da irrelevância da ordem (Gelman & Gallistel).",
+};
+
+const dia14: AulaEI = {
+  slug: "pip-f2-s3-d14-desafio-relampago",
+  titulo: "Dia 14 · Desafio Relâmpago",
+  icone: "⚡",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "DESAFIO RELÂMPAGO! Vou misturar tudo da Semana 3: quantos tem, o que vem antes e depois, e comparação. Bora?",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Contamos até 7. Quantos tem?",
+      opcoes: [
+        { nome: "seis", imagemUrl: bola, correta: false, quantidade: 6 },
+        { nome: "sete", imagemUrl: bola, correta: true, quantidade: 7 },
+        { nome: "oito", imagemUrl: bola, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SETE! Último dito = total!",
+      feedbackErro: "Se parou no 7, tem 7.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 6 vem o…",
+      opcoes: [
+        { nome: "4 (quatro joaninhas)", imagemUrl: joaninha, correta: false, quantidade: 4 },
+        { nome: "5 (cinco estrelas)", imagemUrl: estrela, correta: true, quantidade: 5 },
+        { nome: "7 (sete flores)", imagemUrl: flor, correta: false, quantidade: 7 },
+      ],
+      feedbackAcerto: "CINCO vem antes do SEIS!",
+      feedbackErro: "6, 5, 4… CINCO vem antes do SEIS.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Depois do 7 vem o…",
+      opcoes: [
+        { nome: "8 (oito maçãs)", imagemUrl: maca, correta: true, quantidade: 8 },
+        { nome: "6 (seis balões)", imagemUrl: balao, correta: false, quantidade: 6 },
+        { nome: "10 (dez borboletas)", imagemUrl: borboleta, correta: false, quantidade: 10 },
+      ],
+      feedbackAcerto: "OITO! Depois do 7 vem o 8!",
+      feedbackErro: "7, 8, 9… OITO vem depois do SETE.",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara os dois grupos.",
+      perguntaAudio: "Qual grupo tem MENOS corações?",
+      imagemUrl: coracao,
+      itemPlural: "corações",
+      alvo: "menos",
+      opcoes: [
+        { qtd: 3, correta: true },
+        { qtd: 9, correta: false },
+      ],
+      feedbackAcerto: "TRÊS é menos que NOVE!",
+      feedbackErro: "TRÊS é menor. Conta pra confirmar!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara.",
+      perguntaAudio: "Qual grupo tem MAIS flores?",
+      imagemUrl: flor,
+      itemPlural: "flores",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 8, correta: true },
+        { qtd: 4, correta: false },
+      ],
+      feedbackAcerto: "OITO é mais que QUATRO!",
+      feedbackErro: "OITO é maior. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Rodada rápida",
+      convite:
+        "Adulto fala um número (ex.: 6). A criança responde: 'antes vem 5, depois vem 7'. Repete com 3, 5, 8, 9.",
+      dicaAdulto:
+        "Responder antes/depois rápido mostra que a sequência 1-10 está automatizada — pré-requisito para adição por contagem.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Raio Contador",
+      mascoteUrl: mascote,
+      falaFinal: "Você contou como raio! Amanhã fecha a semana!",
+    },
+  ],
+  baseCientifica:
+    "Prática mista automatizando cardinalidade, sequência e comparação.",
+};
+
+const dia15: AulaEI = {
+  slug: "pip-f2-s3-d15-mestre-da-contagem",
+  titulo: "Dia 15 · Mestre da Contagem (revisão)",
+  icone: "🏅",
+  bncc: ["EI03ET07", "EI03ET08"],
+  duracaoMin: 10,
+  momentos: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: mascote,
+      falaMascote:
+        "Fim da Semana 3! Você já conta pra frente, pra trás, sabe QUANTOS TEM e que a ordem TANTO FAZ. Bora provar!",
+    },
+    {
+      tipo: "contarBolas",
+      imagemUrl: balao,
+      quantidade: 8,
+      itemSingular: "balão",
+      itemPlural: "balões",
+      instrucaoAudio: "Conta OITO balões tocando em cada um.",
+      elogio: "OITO!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Contamos até 9. Quantos tem?",
+      opcoes: [
+        { nome: "sete", imagemUrl: joaninha, correta: false, quantidade: 7 },
+        { nome: "nove", imagemUrl: joaninha, correta: true, quantidade: 9 },
+        { nome: "dez", imagemUrl: joaninha, correta: false, quantidade: 10 },
+      ],
+      feedbackAcerto: "NOVE! Último dito = total!",
+      feedbackErro: "Se parou no 9, tem 9.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Antes do 4 vem o…",
+      opcoes: [
+        { nome: "3 (três corações)", imagemUrl: coracao, correta: true, quantidade: 3 },
+        { nome: "5 (cinco estrelas)", imagemUrl: estrela, correta: false, quantidade: 5 },
+        { nome: "2 (duas bolas)", imagemUrl: bola, correta: false, quantidade: 2 },
+      ],
+      feedbackAcerto: "TRÊS! Antes do 4 vem o 3!",
+      feedbackErro: "4, 3, 2… TRÊS vem antes do QUATRO.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio:
+        "A gente contou 7 flores pela esquerda. Contando pela direita, quantas dá?",
+      opcoes: [
+        { nome: "seis", imagemUrl: flor, correta: false, quantidade: 6 },
+        { nome: "sete", imagemUrl: flor, correta: true, quantidade: 7 },
+        { nome: "oito", imagemUrl: flor, correta: false, quantidade: 8 },
+      ],
+      feedbackAcerto: "SETE! Tanto faz o lado!",
+      feedbackErro: "As mesmas flores dão o mesmo total. SETE!",
+    },
+    {
+      tipo: "compararGrupos",
+      instrucaoAudio: "Compara.",
+      perguntaAudio: "Qual grupo tem MAIS maçãs?",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      alvo: "mais",
+      opcoes: [
+        { qtd: 9, correta: true },
+        { qtd: 5, correta: false },
+      ],
+      feedbackAcerto: "NOVE é mais que CINCO!",
+      feedbackErro: "NOVE é maior. Conta pra confirmar!",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Missão Família · Prova de Mestre",
+      convite:
+        "1) A criança conta 10 objetos tocando. 2) Adulto pergunta 'quantos tem?' — ideal responder sem recontar. 3) Contam juntos regressivo: 10, 9, 8… 1.",
+      dicaAdulto:
+        "Marcadores da Semana 3: cardinalidade automática, contar regressivo até 10 e entender que o total não depende da ordem. Firme? Semana 4 (fechamento da Fase 2) libera.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Semana 3 · Mestre da Contagem",
+      mascoteUrl: mascote,
+      falaFinal:
+        "MEDALHA de Mestre da Contagem! Você domina os 5 segredos do Pip!",
+    },
+  ],
+  baseCientifica:
+    "Revisão semanal — cardinalidade, ordem estável reversa e irrelevância da ordem.",
+};
+
+
 export const cursoContarComPipFase2: CursoEI = {
   slug: "contar-com-pip-f2",
   serie: "pre2",
@@ -878,8 +1314,16 @@ export const cursoContarComPipFase2: CursoEI = {
       subtitulo: "Contagem 1-a-1 e cardinalidade de 6 até 10",
       aulas: [dia06, dia07, dia08, dia09, dia10],
     },
+    {
+      slug: "pip-f2-s3",
+      numero: 3,
+      titulo: "Semana 3 · Mestre da Contagem",
+      subtitulo: "Cardinalidade, contagem regressiva e irrelevância da ordem",
+      aulas: [dia11, dia12, dia13, dia14, dia15],
+    },
   ],
 };
+
 
 
 export function getAulaContarComPipFase2(slug: string): AulaEI | undefined {
