@@ -28,6 +28,10 @@ import {
   cursoContarComPipFase7,
   getAulaContarComPipFase7,
 } from "@/escola-brilha/curso-contar-com-pip/aulas-fase7";
+import {
+  cursoContarComPipFase8,
+  getAulaContarComPipFase8,
+} from "@/escola-brilha/curso-contar-com-pip/aulas-fase8";
 import { marcarMissaoPipConcluida } from "@/escola-brilha/curso-contar-com-pip/progresso";
 import { useAppState } from "@/core/store";
 
