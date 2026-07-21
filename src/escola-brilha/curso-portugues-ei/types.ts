@@ -65,7 +65,7 @@ export type MomentoEI =
       tipo: "compreensaoImagem";
       // Quem/onde/o quê. Escolha entre imagens.
       perguntaAudio: string;
-      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
+      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean; quantidade?: number }>;
       feedbackAcerto: string;
       feedbackErro: string;
     }
