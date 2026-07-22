@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { cursosInglesEI } from "@/escola-brilha/curso-ingles-ei/registry";
-import type { CursoIng } from "@/escola-brilha/curso-ingles-ei/types";
+import type { CursoIng, NivelIng, UnidadeIng } from "@/escola-brilha/curso-ingles-ei/types";
 
 /**
  * Trilha visual estilo Duolingo do Inglês EI.
@@ -106,11 +106,7 @@ function TrilhaCurso({ curso }: { curso: CursoIng }) {
     }
   }, [curso.slug]);
 
-  const todasAulas = curso.unidades.flatMap((u) => u.aulas);
-  const total = todasAulas.length;
-  const feitas = todasAulas.filter((a) => concluidas.has(a.slug)).length;
-  const proximaIdx = todasAulas.findIndex((a) => !concluidas.has(a.slug));
-  const tudoConcluido = total > 0 && feitas >= total;
+  const niveis: NivelIng[] | undefined = curso.niveis;
 
   return (
     <div
@@ -129,86 +125,150 @@ function TrilhaCurso({ curso }: { curso: CursoIng }) {
           </p>
           <h2 className="text-xl font-black leading-tight">{curso.titulo}</h2>
           <p className="text-[11px] text-white/85 mt-0.5">
-            {feitas}/{total} aulas · {curso.unidades.length} semana(s)
+            {niveis ? `${niveis.length} níveis` : `${curso.unidades.length} semanas`}
           </p>
-          <div className="mt-2 bg-black/25 rounded-full h-2 overflow-hidden">
-            <div
-              className="h-full bg-amber-300 transition-all"
-              style={{ width: total > 0 ? `${(feitas / total) * 100}%` : "0%" }}
-            />
-          </div>
         </div>
       </div>
 
-      <div className="mt-6 space-y-6">
-        {curso.unidades.map((u) => (
-          <div key={u.slug}>
-            <div className="text-center mb-3">
-              <div className="inline-block bg-black/40 rounded-full px-3 py-1 text-[11px] uppercase tracking-wider font-black text-yellow-300">
-                {u.titulo}
-              </div>
-              {u.subtitulo && (
-                <div className="text-[11px] text-white/80 mt-1">{u.subtitulo}</div>
-              )}
-            </div>
-
-            <div className="space-y-4">
-              {u.aulas.map((a) => {
-                const globalIdx = todasAulas.findIndex((x) => x.slug === a.slug);
-                const feita = concluidas.has(a.slug);
-                const eProxima = globalIdx === proximaIdx && !feita;
-                const align = globalIdx % 2 === 0 ? "justify-start" : "justify-end";
-                return (
-                  <div key={a.slug} className={`flex ${align}`}>
-                    <Link
-                      to="/escola-brilha/ingles-ei/$serie/$aula"
-                      params={{ serie: curso.serie, aula: a.slug }}
-                      className={`group relative w-36 h-36 rounded-full grid place-items-center shadow-xl active:scale-95 transition ${
-                        eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""
-                      }`}
-                      style={{
-                        background: feita
-                          ? "linear-gradient(135deg, #34d399, #059669)"
-                          : "linear-gradient(135deg, #fde68a, #f59e0b)",
-                        color: "#1a0d3d",
-                      }}
-                    >
-                      <div className="text-center px-3">
-                        <div className="text-3xl">{a.icone ?? "🎧"}</div>
-                        <div className="text-[11px] font-black mt-1 leading-tight line-clamp-3">
-                          {a.titulo}
-                        </div>
-                      </div>
-                      {feita && (
-                        <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-emerald-500 grid place-items-center text-white text-lg border-2 border-white">
-                          ✓
-                        </div>
-                      )}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-
-        {/* Diploma final por nível */}
-        <div className="pt-2">
-          <div
-            className={`rounded-2xl p-5 text-center ${
-              tudoConcluido
-                ? "bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 text-[#1a0d3d] font-black shadow-2xl"
-                : "bg-white/10 border border-dashed border-white/25 text-white/70"
-            }`}
-          >
-            <div className="text-4xl mb-1">{tudoConcluido ? "🏅" : "🔒"}</div>
-            <div className="text-sm font-black">
-              {tudoConcluido
-                ? `Little English Star — ${curso.serieLabel}`
-                : `Diploma trancado — conclua as ${total} aulas`}
-            </div>
-          </div>
+      {niveis ? (
+        <div className="mt-6 space-y-4">
+          {niveis.map((n) => (
+            <NivelCard key={n.slug} curso={curso} nivel={n} concluidas={concluidas} />
+          ))}
         </div>
+      ) : (
+        <div className="mt-6 space-y-6">
+          {curso.unidades.map((u) => (
+            <UnidadeTrilha key={u.slug} curso={curso} unidade={u} concluidas={concluidas} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NivelCard({
+  curso,
+  nivel,
+  concluidas,
+}: {
+  curso: CursoIng;
+  nivel: NivelIng;
+  concluidas: Set<string>;
+}) {
+  const [aberto, setAberto] = useState(nivel.numero === 1);
+  const aulas = nivel.unidades.flatMap((u) => u.aulas);
+  const total = aulas.length;
+  const feitas = aulas.filter((a) => concluidas.has(a.slug)).length;
+  const bloqueado = !nivel.destravado || total === 0;
+
+  return (
+    <div className="rounded-2xl bg-black/25 border border-white/15 overflow-hidden">
+      <button
+        type="button"
+        onClick={() => !bloqueado && setAberto((v) => !v)}
+        className="w-full flex items-center gap-3 p-4 text-left"
+      >
+        <div
+          className={`w-12 h-12 rounded-full grid place-items-center text-lg font-black ${
+            bloqueado
+              ? "bg-white/10 text-white/50"
+              : feitas === total && total > 0
+                ? "bg-emerald-500 text-white"
+                : "bg-amber-400 text-[#1a0d3d]"
+          }`}
+        >
+          {bloqueado ? "🔒" : nivel.numero}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-black text-white leading-tight">{nivel.titulo}</div>
+          <div className="text-[11px] text-white/75 mt-0.5">{nivel.subtitulo}</div>
+          {!bloqueado && total > 0 && (
+            <div className="mt-1.5 bg-black/40 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="h-full bg-amber-300 transition-all"
+                style={{ width: `${(feitas / total) * 100}%` }}
+              />
+            </div>
+          )}
+          {!bloqueado && (
+            <div className="text-[10px] text-white/70 mt-1">
+              {feitas}/{total} aulas
+            </div>
+          )}
+        </div>
+        {!bloqueado && (
+          <div className="text-white/70 text-lg">{aberto ? "▾" : "▸"}</div>
+        )}
+      </button>
+
+      {aberto && !bloqueado && (
+        <div className="px-4 pb-5 space-y-5">
+          {nivel.unidades.map((u) => (
+            <UnidadeTrilha key={u.slug} curso={curso} unidade={u} concluidas={concluidas} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UnidadeTrilha({
+  curso,
+  unidade,
+  concluidas,
+}: {
+  curso: CursoIng;
+  unidade: UnidadeIng;
+  concluidas: Set<string>;
+}) {
+  const aulas = unidade.aulas;
+  const proximaIdx = aulas.findIndex((a) => !concluidas.has(a.slug));
+  return (
+    <div>
+      <div className="text-center mb-3">
+        <div className="inline-block bg-black/40 rounded-full px-3 py-1 text-[11px] uppercase tracking-wider font-black text-yellow-300">
+          {unidade.titulo}
+        </div>
+        {unidade.subtitulo && (
+          <div className="text-[11px] text-white/80 mt-1">{unidade.subtitulo}</div>
+        )}
+      </div>
+      <div className="space-y-4">
+        {aulas.map((a, idx) => {
+          const feita = concluidas.has(a.slug);
+          const eProxima = idx === proximaIdx && !feita;
+          const align = idx % 2 === 0 ? "justify-start" : "justify-end";
+          return (
+            <div key={a.slug} className={`flex ${align}`}>
+              <Link
+                to="/escola-brilha/ingles-ei/$serie/$aula"
+                params={{ serie: curso.serie, aula: a.slug }}
+                className={`group relative w-36 h-36 rounded-full grid place-items-center shadow-xl active:scale-95 transition ${
+                  eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""
+                }`}
+                style={{
+                  background: feita
+                    ? "linear-gradient(135deg, #34d399, #059669)"
+                    : "linear-gradient(135deg, #fde68a, #f59e0b)",
+                  color: "#1a0d3d",
+                }}
+              >
+                <div className="text-center px-3">
+                  <div className="text-3xl">{a.icone ?? "🎧"}</div>
+                  <div className="text-[11px] font-black mt-1 leading-tight line-clamp-3">
+                    {a.titulo}
+                  </div>
+                </div>
+                {feita && (
+                  <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-emerald-500 grid place-items-center text-white text-lg border-2 border-white">
+                    ✓
+                  </div>
+                )}
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
