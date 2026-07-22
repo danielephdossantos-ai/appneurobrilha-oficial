@@ -85,25 +85,8 @@ function BibliotecaEncantadaIndex() {
                 </div>
               );
             })}
-
-            {Array.from({ length: 4 }).map((_, i) => {
-              const idx = trilha.aulas.length + i;
-              const align = idx % 2 === 0 ? "justify-start" : "justify-end";
-              return (
-                <div key={`lock-${i}`} className={`flex ${align}`}>
-                  <div className="relative w-40 h-40 rounded-full grid place-items-center bg-white/10 text-white/40 cursor-not-allowed">
-                    <div className="text-center px-3">
-                      <div className="text-4xl">🔒</div>
-                      <div className="text-[11px] font-black mt-1">Em breve</div>
-                    </div>
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white/20 text-white/60 text-[10px] font-black px-2 py-0.5 rounded-full">
-                      {String(idx + 1).padStart(2, "0")}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
+
         </div>
       </section>
     </div>
