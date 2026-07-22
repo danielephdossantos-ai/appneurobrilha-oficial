@@ -94,7 +94,7 @@ const n4S4A01: AulaIng = {
 const n4S4A02: AulaIng = {
   slug: "n4-s4-a02-graduation-pre2",
   titulo: "Graduation Pré II!",
-  subtitulo: "Nível 4 · Semana 4 · Dia 2 · Formatura do Pré II',",
+  subtitulo: "Nível 4 · Semana 4 · Dia 2 · Formatura do Pré II",
   icone: "🎓",
   duracaoMin: 9,
   baseCientifica:
