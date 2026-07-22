@@ -412,6 +412,17 @@ export function AulaPlayer({
                         {i + 1}/{BLOCOS.length}
                       </span>
                     </div>
+                  ) : isPipEi ? (
+                    <div className="flex items-center justify-center gap-1 mb-3" aria-hidden>
+                      {BLOCOS.map((_, k) => (
+                        <span
+                          key={k}
+                          className={`h-2 rounded-full transition-all ${
+                            k === i ? "w-6 bg-purple-500" : "w-2 bg-purple-200"
+                          }`}
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 mb-2">
                       <span
@@ -436,9 +447,12 @@ export function AulaPlayer({
                     className={
                       isCarto
                         ? "geo-cartografo-bloco rounded-2xl border border-emerald-400/15 bg-slate-900/60 ring-1 ring-white/5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.35)] p-4"
+                        : isPipEi
+                        ? "rounded-[2rem] bg-white/85 backdrop-blur border-4 border-white shadow-xl p-5 md:p-6"
                         : ""
                     }
                   >
+
                     {renderBloco(aula, bloco.id, {
                       acertos,
                       erros,
