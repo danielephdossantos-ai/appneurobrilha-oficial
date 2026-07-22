@@ -662,6 +662,10 @@ import { n3Pre1_semana1 } from "./ingles-pre1-n3-s1";
 import { n3Pre1_semana2 } from "./ingles-pre1-n3-s2";
 import { n3Pre1_semana3 } from "./ingles-pre1-n3-s3";
 import { n3Pre1_semana4 } from "./ingles-pre1-n3-s4";
+import { n4Pre1_semana1 } from "./ingles-pre1-n4-s1";
+import { n4Pre1_semana2 } from "./ingles-pre1-n4-s2";
+import { n4Pre1_semana3 } from "./ingles-pre1-n4-s3";
+import { n4Pre1_semana4 } from "./ingles-pre1-n4-s4";
 
 const nivel2Pre1: NivelIng = {
   slug: "n2",
