@@ -1,7 +1,8 @@
-import type { CursoIng, AulaIng } from "./types";
+import type { CursoIng, AulaIng, NivelIng } from "./types";
 import { aulasMaternalSemana2 } from "./ingles-maternal-s2";
 import { aulasMaternalSemana3 } from "./ingles-maternal-s3";
 import { aulasMaternalSemana4 } from "./ingles-maternal-s4";
+import { nivel1Maternal } from "./ingles-maternal-n1";
 import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
@@ -642,44 +643,72 @@ const aula05: AulaIng = {
 // ============================================================
 // CURSO
 // ============================================================
-export const cursoInglesMaternal: CursoIng = {
-  slug: "ingles-ei-maternal",
-  serie: "maternal",
-  serieLabel: "Maternal (3–4 anos)",
-  titulo: "My First English — Maternal",
-  descricao:
-    "Trilha de 4 semanas com 20 missões orais. Aprendizado por imagem, música e imitação — sem leitura.",
-  corPrimaria: "#7c3aed",
-  corSecundaria: "#fce7f3",
-  mascoteUrl: brilha,
+const nivel2Maternal: NivelIng = {
+  slug: "n2",
+  numero: 2,
+  titulo: "Nível 2 · My World",
+  subtitulo: "3 palavras/aula + primeira frase e música — 4 semanas",
+  destravado: true,
   unidades: [
     {
-      slug: "semana-1",
+      slug: "n2-semana-1",
       numero: 1,
       titulo: "Semana 1 — Hello, my world!",
       subtitulo: "Cumprimentos, família, comida, animais e brinquedos",
       aulas: [aula01, aula02, aula03, aula04, aula05],
     },
     {
-      slug: "semana-2",
+      slug: "n2-semana-2",
       numero: 2,
       titulo: "Semana 2 — The world outside",
       subtitulo: "Sol, lua, chuva, arco-íris e jardim",
       aulas: aulasMaternalSemana2,
     },
     {
-      slug: "semana-3",
+      slug: "n2-semana-3",
       numero: 3,
       titulo: "Semana 3 — Animal friends",
       subtitulo: "Fazenda, quintal, zoo e sons dos bichos",
       aulas: aulasMaternalSemana3,
     },
     {
-      slug: "semana-4",
+      slug: "n2-semana-4",
       numero: 4,
       titulo: "Semana 4 — Yummy party!",
       subtitulo: "Comidas, bebidas, aniversário e formatura",
       aulas: aulasMaternalSemana4,
     },
   ],
+};
+
+const nivel3Maternal: NivelIng = {
+  slug: "n3",
+  numero: 3,
+  titulo: "Nível 3 · I Can Say",
+  subtitulo: "Perguntas e respostas curtas — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+const nivel4Maternal: NivelIng = {
+  slug: "n4",
+  numero: 4,
+  titulo: "Nível 4 · Little Talker",
+  subtitulo: "Mini-diálogos e micro-histórias — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+export const cursoInglesMaternal: CursoIng = {
+  slug: "ingles-ei-maternal",
+  serie: "maternal",
+  serieLabel: "Maternal (3–4 anos)",
+  titulo: "My First English — Maternal",
+  descricao:
+    "4 níveis de progressão. Começa muito leve no Nível 1 (Baby English) e vai ganhando frases, perguntas e mini-diálogos.",
+  corPrimaria: "#7c3aed",
+  corSecundaria: "#fce7f3",
+  mascoteUrl: brilha,
+  unidades: [],
+  niveis: [nivel1Maternal, nivel2Maternal, nivel3Maternal, nivel4Maternal],
 };
