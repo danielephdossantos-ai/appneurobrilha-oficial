@@ -200,6 +200,13 @@ export function UniversalPlayer({
 
   const { aula, adaptacao } = estado;
   const isGeoCartoPilot = aula.codigo === "EF01GE01";
+  const etapaSigla = estado.resolvido.existe ? estado.resolvido.bncc.etapaSigla : "";
+  const isPipEi = etapaSigla === "EI" && !isGeoCartoPilot;
+  const skinAtiva: "default" | "geo-cartografo" | "pip-ei" = isGeoCartoPilot
+    ? "geo-cartografo"
+    : isPipEi
+    ? "pip-ei"
+    : "default";
   const fonteClasse = adaptacao.fonteMaior ? "text-[1.06rem] leading-relaxed" : "";
 
   const voltarParaPrincipal = () => {
@@ -214,7 +221,7 @@ export function UniversalPlayer({
   return (
     <div
       className={fonteClasse}
-      data-skin={isGeoCartoPilot ? "geo-cartografo" : undefined}
+      data-skin={skinAtiva}
       data-banda={adaptacao.banda}
       data-serie={adaptacao.ano}
       data-etapa={estado.resolvido.existe ? estado.resolvido.bncc.etapaSigla : undefined}
@@ -234,7 +241,7 @@ export function UniversalPlayer({
           </button>
         </div>
       )}
-      {plano && (
+      {plano && !isPipEi && (
         <div className={`w-full px-3 py-1.5 text-[10px] sm:text-[11px] flex flex-wrap items-center gap-x-2 gap-y-1 border-b ${
           isGeoCartoPilot
             ? "bg-slate-950/80 text-emerald-100 border-emerald-400/15"
@@ -248,19 +255,22 @@ export function UniversalPlayer({
           <span className={`px-1.5 py-0.5 rounded-full ${isGeoCartoPilot ? "bg-emerald-400/10 border border-emerald-300/10" : "bg-[#0d1f55]/10"}`}>ritmo <b>{plano.ritmo}</b></span>
         </div>
       )}
-      <div
-        role="status"
-        aria-live="polite"
-        className={`w-full text-white px-4 py-2 flex items-center gap-2 text-sm font-semibold border-b ${
-          isGeoCartoPilot ? "bg-black/35 border-emerald-400/15" : "bg-[#0d1f55]/60 border-white/10"
-        }`}
-      >
-        <span aria-hidden className="text-lg shrink-0">{motivacao.emoji}</span>
-        <span className="min-w-0 flex-1">{motivacao.texto}</span>
-      </div>
+      {!isPipEi && (
+        <div
+          role="status"
+          aria-live="polite"
+          className={`w-full text-white px-4 py-2 flex items-center gap-2 text-sm font-semibold border-b ${
+            isGeoCartoPilot ? "bg-black/35 border-emerald-400/15" : "bg-[#0d1f55]/60 border-white/10"
+          }`}
+        >
+          <span aria-hidden className="text-lg shrink-0">{motivacao.emoji}</span>
+          <span className="min-w-0 flex-1">{motivacao.texto}</span>
+        </div>
+      )}
       <AulaPlayer
         aula={aula}
-        skin={isGeoCartoPilot ? "geo-cartografo" : "default"}
+        skin={skinAtiva}
+
         onConcluir={({ desempenho }) => {
           // Comemora conclusão com nova mensagem positiva.
           const gat = desempenho >= 70 ? "conclusao_missao" : "esforco";
