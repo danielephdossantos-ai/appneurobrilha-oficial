@@ -11,6 +11,7 @@ import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
 import {
   recomendarAtividadesTerapeuticas,
   agruparPorGrupo,
+  precisaNeuroTreino,
 } from "@/modules/anamnese/relatorio/neuro-bridge";
 import { gerarCursoRecomendado } from "@/modules/anamnese/relatorio/curso-bridge";
 import { Card } from "@/components/ui/card";
@@ -54,8 +55,9 @@ function ResultadoRoute() {
     valor: scores[k],
   }));
 
-  const atividadesTerapeuticas = recomendarAtividadesTerapeuticas(scores, risk);
-  const gruposApoio = agruparPorGrupo(atividadesTerapeuticas);
+  const mostrarNeuro = precisaNeuroTreino(risk, responses as any);
+  const atividadesTerapeuticas = mostrarNeuro ? recomendarAtividadesTerapeuticas(scores, risk) : [];
+  const gruposApoio = mostrarNeuro ? agruparPorGrupo(atividadesTerapeuticas) : [];
   const curso = gerarCursoRecomendado(responses);
 
   const handlePDF = () => {
