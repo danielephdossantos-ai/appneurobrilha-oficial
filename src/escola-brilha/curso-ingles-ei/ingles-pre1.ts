@@ -717,10 +717,10 @@ const nivel3Pre1: NivelIng = {
 const nivel4Pre1: NivelIng = {
   slug: "n4",
   numero: 4,
-  titulo: "Nível 4 · Little Talker",
-  subtitulo: "Mini-diálogos e micro-histórias — em breve",
-  destravado: false,
-  unidades: [],
+  titulo: "Nível 4 · Little Storyteller",
+  subtitulo: "Mini-histórias e frases encadeadas — 8 aulas",
+  destravado: true,
+  unidades: [n4Pre1_semana1, n4Pre1_semana2, n4Pre1_semana3, n4Pre1_semana4],
 };
 
 export const cursoInglesPre1: CursoIng = {
