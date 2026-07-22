@@ -1,4 +1,5 @@
-import type { CursoIng, AulaIng } from "./types";
+import type { CursoIng, AulaIng, NivelIng } from "./types";
+import { nivel1Pre1 } from "./ingles-pre1-n1";
 import { url as buddy } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
 import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
@@ -658,16 +659,12 @@ import { semana2Pre1 } from "./ingles-pre1-s2";
 import { semana3Pre1 } from "./ingles-pre1-s3";
 import { semana4Pre1 } from "./ingles-pre1-s4";
 
-export const cursoInglesPre1: CursoIng = {
-  slug: "ingles-ei-pre1",
-  serie: "pre1",
-  serieLabel: "Pré I (4–5 anos)",
-  titulo: "My First English — Pré I",
-  descricao:
-    "Pré I completo: cores, números, movimentos, família e sentimentos. 20 aulas orais com música, imitação e brincadeira.",
-  corPrimaria: "#0ea5e9",
-  corSecundaria: "#dbeafe",
-  mascoteUrl: buddy,
+const nivel2Pre1: NivelIng = {
+  slug: "n2",
+  numero: 2,
+  titulo: "Nível 2 · First Words",
+  subtitulo: "Cores, números, movimentos, família — 20 aulas",
+  destravado: true,
   unidades: [
     {
       slug: "semana-1",
@@ -698,4 +695,36 @@ export const cursoInglesPre1: CursoIng = {
       aulas: semana4Pre1,
     },
   ],
+};
+
+const nivel3Pre1: NivelIng = {
+  slug: "n3",
+  numero: 3,
+  titulo: "Nível 3 · I Can Say",
+  subtitulo: "Perguntas e respostas curtas — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+const nivel4Pre1: NivelIng = {
+  slug: "n4",
+  numero: 4,
+  titulo: "Nível 4 · Little Talker",
+  subtitulo: "Mini-diálogos e micro-histórias — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+export const cursoInglesPre1: CursoIng = {
+  slug: "ingles-ei-pre1",
+  serie: "pre1",
+  serieLabel: "Pré I (4–5 anos)",
+  titulo: "My First English — Pré I",
+  descricao:
+    "4 níveis de progressão para 4–5 anos. Começa muito leve no Nível 1 (Baby English).",
+  corPrimaria: "#0ea5e9",
+  corSecundaria: "#dbeafe",
+  mascoteUrl: buddy,
+  unidades: [],
+  niveis: [nivel1Pre1, nivel2Pre1, nivel3Pre1, nivel4Pre1],
 };
