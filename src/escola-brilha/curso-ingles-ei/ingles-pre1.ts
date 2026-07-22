@@ -658,6 +658,10 @@ const aula05: AulaIng = {
 import { semana2Pre1 } from "./ingles-pre1-s2";
 import { semana3Pre1 } from "./ingles-pre1-s3";
 import { semana4Pre1 } from "./ingles-pre1-s4";
+import { n3Pre1_semana1 } from "./ingles-pre1-n3-s1";
+import { n3Pre1_semana2 } from "./ingles-pre1-n3-s2";
+import { n3Pre1_semana3 } from "./ingles-pre1-n3-s3";
+import { n3Pre1_semana4 } from "./ingles-pre1-n3-s4";
 
 const nivel2Pre1: NivelIng = {
   slug: "n2",
@@ -701,9 +705,9 @@ const nivel3Pre1: NivelIng = {
   slug: "n3",
   numero: 3,
   titulo: "Nível 3 · I Can Say",
-  subtitulo: "Perguntas e respostas curtas — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Perguntas e respostas curtas — 8 aulas",
+  destravado: true,
+  unidades: [n3Pre1_semana1, n3Pre1_semana2, n3Pre1_semana3, n3Pre1_semana4],
 };
 
 const nivel4Pre1: NivelIng = {
