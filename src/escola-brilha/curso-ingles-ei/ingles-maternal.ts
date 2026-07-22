@@ -4,6 +4,7 @@ import { aulasMaternalSemana3 } from "./ingles-maternal-s3";
 import { aulasMaternalSemana4 } from "./ingles-maternal-s4";
 import { nivel1Maternal } from "./ingles-maternal-n1";
 import { n3Maternal_semana1 } from "./ingles-maternal-n3-s1";
+import { n3Maternal_semana2 } from "./ingles-maternal-n3-s2";
 import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
@@ -688,7 +689,7 @@ const nivel3Maternal: NivelIng = {
   titulo: "Nível 3 · I Can Say",
   subtitulo: "Perguntas e respostas curtas — 'What's this? It's a…'",
   destravado: true,
-  unidades: [n3Maternal_semana1],
+  unidades: [n3Maternal_semana1, n3Maternal_semana2],
 };
 
 const nivel4Maternal: NivelIng = {
