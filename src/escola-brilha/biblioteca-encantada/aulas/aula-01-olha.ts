@@ -9,7 +9,7 @@ import type { AulaBE } from "../types";
 import cavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
 import vaquinha from "@/assets/hiperfocos/fazendinha/vaquinha.png";
 import galinha from "@/assets/hiperfocos/fazendinha/galinha.png";
-import pipVet from "@/assets/pip-girl-veterinaria.png";
+import { url as pipVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
 
 export const aula01Olha: AulaBE = {
   slug: "aula-01-olha",
