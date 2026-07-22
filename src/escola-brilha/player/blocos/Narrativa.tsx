@@ -17,27 +17,27 @@ export function Narrativa({
 }) {
   return (
     <Secao icon={BookOpen} rotulo="Nossa história começa assim…" cor="#FFC93C">
-      <h2 className="text-2xl font-black leading-tight mb-4">{dados.titulo}</h2>
+      <h2 className="text-2xl font-black leading-tight mb-4 [[data-skin=pip-ei]_&]:text-[#4a1d6b]">{dados.titulo}</h2>
 
       <div className="space-y-4">
-        <div className="rounded-2xl bg-white/10 border border-white/15 p-4">
-          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FFC93C] mb-1.5">
+        <div className="rounded-2xl bg-white/10 border border-white/15 p-4 [[data-skin=pip-ei]_&]:bg-purple-50 [[data-skin=pip-ei]_&]:border-purple-200">
+          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FFC93C] mb-1.5 [[data-skin=pip-ei]_&]:text-purple-600">
             <Sparkles className="h-3.5 w-3.5" />
             Era uma vez…
           </div>
           <TextoComMascotes texto={dados.contexto} />
         </div>
 
-        <div className="rounded-2xl bg-white/10 border border-white/15 p-4">
-          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FF8A4C] mb-1.5">
+        <div className="rounded-2xl bg-white/10 border border-white/15 p-4 [[data-skin=pip-ei]_&]:bg-pink-50 [[data-skin=pip-ei]_&]:border-pink-200">
+          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FF8A4C] mb-1.5 [[data-skin=pip-ei]_&]:text-pink-600">
             <HelpCircle className="h-3.5 w-3.5" />
             Só que apareceu um probleminha…
           </div>
           <TextoComMascotes texto={dados.problema} />
         </div>
 
-        <div className="rounded-2xl bg-gradient-to-br from-[#FFC93C]/25 to-[#FF8A4C]/25 border-2 border-[#FFC93C]/40 p-4">
-          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FFC93C] mb-1.5">
+        <div className="rounded-2xl bg-gradient-to-br from-[#FFC93C]/25 to-[#FF8A4C]/25 border-2 border-[#FFC93C]/40 p-4 [[data-skin=pip-ei]_&]:from-purple-100 [[data-skin=pip-ei]_&]:to-pink-100 [[data-skin=pip-ei]_&]:border-purple-300">
+          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#FFC93C] mb-1.5 [[data-skin=pip-ei]_&]:text-purple-700">
             <Hand className="h-3.5 w-3.5" />
             E aí, topa entrar nessa?
           </div>
