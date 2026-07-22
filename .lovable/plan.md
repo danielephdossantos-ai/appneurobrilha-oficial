@@ -1,52 +1,81 @@
-## Unidade 1 · Geografia 2º Ano — "Os Lugares Onde Vivemos" (EF02GE01)
+# Anamnese → Neuro Treino → Relatório + PDF
 
-Vou construir uma aula 100% gamificada e customizada (fora do template padrão), com 6 cenas encadeadas: Galeria → GeoScanner → Painel Trunfo → Laboratório → Minijogo Arquiteto → Vitória.
+Fechar o ciclo: ao terminar a anamnese, o app já cospe um **relatório clínico-pedagógico** com o que foi diagnosticado, o que recomenda, quais categorias vão apoiar a criança e as **atividades terapêuticas** sugeridas — com botão de **exportar PDF** pra levar ao terapeuta ou à escola.
 
-### ⚠️ 2 pontos que preciso confirmar antes de codar
+## O que o usuário pediu
+- Anamnese conectada ao **Neuro Treino** (atividades terapêuticas).
+- Relatório com: **dificuldades detectadas**, **o que a criança precisa**, **categorias que o app vai auxiliar**, **curso completo gerado**.
+- **Exportar PDF** pra levar pro terapeuta / escola.
+- App adaptativo com foco em crianças com deficiência.
 
-**1. "Fotografias reais" × padrão visual travado**
-A memória do projeto diz explicitamente: *"Proibido emoji cru, ícones genéricos, **fotos**, 3D realista"* — o padrão travado é ilustração 2D kawaii/Pixar. Como resolver os 5 tipos de moradia (Apartamento, Casa Urbana, Fazenda, Ribeirinha, Aldeia)?
-- **A)** Gerar 5 ilustrações kawaii detalhadas (mantém o padrão travado). *Recomendado.*
-- **B)** Abrir exceção e gerar imagens fotorrealistas só nesta aula.
-- **C)** Você me envia 5 fotos reais (upload).
-
-**2. Onde encaixar a aula no app**
-- **A)** Nova rota `escola-brilha/geo-2ano/unidade-1` com player próprio (isolado do curso-v4). *Recomendado — a experiência é bem diferente do padrão de aula.*
-- **B)** Registrar como aula normal em `src/escola-brilha/data/EF02GE01.ts` usando os blocos existentes (perde muito do "wow").
-- **C)** Criar `curso-v4/geografia-2ano/unidade-1/aula-01…` seguindo o padrão de Português 2º Ano.
-
-### Escopo técnico (assumindo A+A acima)
-
-**Nova pasta:** `src/escola-brilha/geo-2ano/unidade-1-lugares/`
-
-```
-components/
-  GaleriaMoradias.tsx        cena 1 — grid 5 cards com hover/pulse, botão narração Aurora
-  GeoScanner.tsx             cena 2 — modal full-screen, mira animada, pins piscantes na imagem
-  PainelTrunfo.tsx           cena 3 — cards comparativos (clima/material/motivo) que acendem no clique
-  LaboratorioExplorador.tsx  cena 4 — toggles ☀️/🌧️/🌊 + ilustração reativa (casa ribeirinha sobe nas estacas)
-  ArquitetoMinijogo.tsx      cena 5 — drag-drop cenário↔material
-  VitoriaModal.tsx           cena 6 — confete + distintivo "Investigador das Moradias"
-  BarraXP.tsx                topbar fixa XP/moedas com contagem animada
-  hooks/useAurora.ts         wrapper de speakChunked (voz pt-BR, sem falar feedbacks)
-dados.ts                     as 5 moradias + pistas + comparativos + cenários
-assets/                      5 ilustrações geradas + camadas do laboratório
-index.tsx                    orquestrador de cenas + estado XP/coins
+## Fluxo final
+```text
+Mãe termina anamnese
+        │
+        ▼
+ useAnamneseV2.finish()  ──► AnamnesisProcessor (já existe)
+        │                         │ perfil interno + scores + risk
+        ▼                         ▼
+ Tela "Resultado da Anamnese"  (nova rota /anamnese/$childId/relatorio)
+   ├─ Perfil da criança (idade, série, diagnóstico declarado)
+   ├─ O que o app detectou (linguagem, atenção, sensorial, motor, socioemocional)
+   ├─ O que a criança precisa (recomendações práticas)
+   ├─ Categorias que o app vai auxiliar (com ícones + link direto)
+   ├─ Atividades terapêuticas recomendadas (Neuro Treino)
+   ├─ Curso pedagógico gerado (trilhas EI/Fund por disciplina)
+   └─ [ Baixar PDF ]  [ Ver Neuro Treino ]  [ Ir pro Curso ]
 ```
 
-**Rota:** nova entrada em `src/routes/escola-brilha.geo-2ano.$aula.tsx`.
+## Entregáveis (nesta ordem, em passos pequenos pra você validar cena por cena)
 
-**Bibliotecas:** `canvas-confetti` (add via bun), `framer-motion` (já no projeto — verifico).
+### 1) Motor único de recomendação
+`src/modules/relatorio-clinico/engine.ts` — recebe `InternalProfile + AnamneseV2Responses + scores + risk` e devolve:
+```ts
+{
+  perfil: { nome, idadeMeses, serie, diagnosticoDeclarado, perfilNeuro },
+  deteccoes: { area, nivel: 'ok'|'atenção'|'apoio_urgente', evidencias[] }[],
+  necessidades: string[],
+  categoriasApoio: { id, titulo, porQue, rota }[],
+  atividadesTerapeuticas: { id, titulo, area, objetivo, duracaoMin, rota }[],
+  cursoGerado: { disciplina, trilha, primeirasAulas[] }[],
+  observacoesClinicas: string,
+}
+```
+Reaproveita `AnamnesisProcessor`, `ReportGenerator`, mapeamento `diagnosticoToNeuroProfile`.
 
-**Áudio:** reutilizo `speakChunked` de `src/lib/native-tts.ts` para a Aurora. Sons eletrônicos dos pins: WebAudio inline (bleep sintetizado), sem asset.
+### 2) Ponte com Neuro Treino
+`src/modules/relatorio-clinico/neuro-bridge.ts` — mapeia detecções pra atividades já existentes do Neuro Treino (atenção, regulação sensorial, linguagem, motor, socioemocional). Sem inventar módulos novos: só linkar.
 
-**Padrões respeitados:**
-- Nenhuma leitura automática de feedback (só a Aurora nas intros, como fizemos em Português).
-- Tokens semânticos de `src/styles.css` (sem cores hardcoded).
-- Mobile-first: grid responsivo, drag-drop com fallback tap-to-place.
+### 3) Ponte com o curso
+`src/modules/relatorio-clinico/curso-bridge.ts` — a partir da série detectada, lista as trilhas ativas (Ler com Aurora, Contar com Pip, Biblioteca Encantada, English Kids, etc.) e as 3 primeiras aulas de cada.
 
-**Fora de escopo desta entrega:** persistência de XP no Supabase (uso estado local; se quiser gravar, faço num próximo passo).
+### 4) Tela de relatório
+Rota nova: `src/routes/anamnese.$childId.relatorio.tsx` — usa design tokens do projeto (roxo/creme, sem cores hardcoded), seções colapsáveis, botão flutuante **Baixar PDF**. Redireciono `finish()` da anamnese pra cá.
 
----
+### 5) Exportação PDF
+Client-side com `@react-pdf/renderer` (uma dependência, sem servidor). Documento com capa (nome, idade, data), resumo executivo, detecções por área com barra visual, recomendações, atividades terapêuticas, curso, rodapé "Gerado por Neuro Brilha — documento de apoio, não substitui laudo clínico."
 
-Me diga suas escolhas nos 2 pontos (ex.: "1-A, 2-A") e eu já começo.
+### 6) Entradas de acesso ao relatório
+- Card "Ver Relatório" no painel dos pais quando `anamnese_completa = true`.
+- Botão no fim da anamnese ("Ver relatório completo").
+- Atalho no menu do responsável.
+
+## Detalhes técnicos
+- Sem edge functions novas — tudo em `createServerFn` só se precisar buscar dados; a geração do relatório é client-side a partir do que já está em `children` + `anamnese_v2`.
+- PDF: `@react-pdf/renderer` (compatível com Worker/SSR pq só roda no client via `<ClientOnly>`).
+- Sem hardcode de cores — usar tokens (`--primary`, `--muted`, etc.).
+- Textos em PT-BR, linguagem acolhedora, evitar termos que soem como diagnóstico médico ("indícios de", "sugere apoio em", nunca "a criança tem TEA").
+
+## Fora do escopo desta rodada
+- Assinatura digital do relatório.
+- Envio por e-mail direto.
+- Comparativo evolutivo mês a mês (já existe parcial no `ReportGenerator`, mas fica pra depois).
+
+## Ordem de validação (você aprova cena por cena)
+1. Engine + tela de relatório com dados mockados renderizando.
+2. Ligação real com anamnese da criança logada.
+3. Pontes com Neuro Treino e curso.
+4. Exportação PDF.
+5. Entradas de acesso no painel dos pais.
+
+Confirma esse plano ou quer ajustar alguma seção do relatório antes de eu começar?
