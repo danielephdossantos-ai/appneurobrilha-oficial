@@ -31,6 +31,34 @@ import { aula29OlhaViolao } from "./aulas/aula-29-olha-violao";
 import { aula30Toca } from "./aulas/aula-30-toca";
 import { aula31Canta } from "./aulas/aula-31-canta";
 import { aula32RevisaoMusica } from "./aulas/aula-32-revisao-musica";
+import { aula33OlhaPincel } from "./aulas/aula-33-olha-pincel";
+import { aula34Pinta } from "./aulas/aula-34-pinta";
+import { aula35Colore } from "./aulas/aula-35-colore";
+import { aula36RevisaoArte } from "./aulas/aula-36-revisao-arte";
+import { aula37OlhaPrincesa } from "./aulas/aula-37-olha-princesa";
+import { aula38Mora } from "./aulas/aula-38-mora";
+import { aula39Voa } from "./aulas/aula-39-voa";
+import { aula40RevisaoReino } from "./aulas/aula-40-revisao-reino";
+import { aula41OlhaHeroi } from "./aulas/aula-41-olha-heroi";
+import { aula42Salva } from "./aulas/aula-42-salva";
+import { aula43VoaHeroi } from "./aulas/aula-43-voa-heroi";
+import { aula44RevisaoHerois } from "./aulas/aula-44-revisao-herois";
+import { aula45OlhaRobo } from "./aulas/aula-45-olha-robo";
+import { aula46VoaDrone } from "./aulas/aula-46-voa-drone";
+import { aula47AstronautaBot } from "./aulas/aula-47-astronauta-bot";
+import { aula48RevisaoRobos } from "./aulas/aula-48-revisao-robos";
+import { aula49OlhaSereia } from "./aulas/aula-49-olha-sereia";
+import { aula50Nada } from "./aulas/aula-50-nada";
+import { aula51Concha } from "./aulas/aula-51-concha";
+import { aula52RevisaoMar } from "./aulas/aula-52-revisao-mar";
+import { aula53OlhaBailarina } from "./aulas/aula-53-olha-bailarina";
+import { aula54Danca } from "./aulas/aula-54-danca";
+import { aula55Sapatilha } from "./aulas/aula-55-sapatilha";
+import { aula56RevisaoBale } from "./aulas/aula-56-revisao-bale";
+import { aula57OlhaSteve } from "./aulas/aula-57-olha-steve";
+import { aula58Constroi } from "./aulas/aula-58-constroi";
+import { aula59CuidadoCreeper } from "./aulas/aula-59-cuidado-creeper";
+import { aula60GrandeFesta } from "./aulas/aula-60-grande-festa";
 
 export const trilhaBibliotecaEncantada: TrilhaBE = {
   slug: "biblioteca-encantada",
@@ -70,6 +98,34 @@ export const trilhaBibliotecaEncantada: TrilhaBE = {
     aula30Toca,
     aula31Canta,
     aula32RevisaoMusica,
+    aula33OlhaPincel,
+    aula34Pinta,
+    aula35Colore,
+    aula36RevisaoArte,
+    aula37OlhaPrincesa,
+    aula38Mora,
+    aula39Voa,
+    aula40RevisaoReino,
+    aula41OlhaHeroi,
+    aula42Salva,
+    aula43VoaHeroi,
+    aula44RevisaoHerois,
+    aula45OlhaRobo,
+    aula46VoaDrone,
+    aula47AstronautaBot,
+    aula48RevisaoRobos,
+    aula49OlhaSereia,
+    aula50Nada,
+    aula51Concha,
+    aula52RevisaoMar,
+    aula53OlhaBailarina,
+    aula54Danca,
+    aula55Sapatilha,
+    aula56RevisaoBale,
+    aula57OlhaSteve,
+    aula58Constroi,
+    aula59CuidadoCreeper,
+    aula60GrandeFesta,
   ],
 };
 
