@@ -35,7 +35,7 @@ const n3S1A01: AulaIng = {
     {
       tipo: "vocabEn",
       instrucaoAudio:
-        'Toca em cada figura e escuta: "three" (três velinhas), "four" (quatro velinhas).',
+        'Toca em cada número e escuta: "three" (3), "four" (4).',
       itens: [
         { en: "Three", pt: "Três", imagemUrl: num3 },
         { en: "Four", pt: "Quatro", imagemUrl: num4 },
@@ -44,27 +44,27 @@ const n3S1A01: AulaIng = {
     {
       tipo: "escolhaImagem",
       instrucaoAudio:
-        '"How old are you? I\'m… three!". Toca no bolinho com TRÊS velinhas.',
+        '"How old are you? I\'m… three!". Toca no número TRÊS.',
       palavraAlvoEn: "Three",
       opcoes: [
         { nome: "três", imagemUrl: num3, correta: true },
         { nome: "quatro", imagemUrl: num4, correta: false },
-        { nome: "coração", imagemUrl: num2, correta: false },
+        { nome: "dois", imagemUrl: num2, correta: false },
       ],
       feedbackAcerto: 'Yes! "I\'m three!". Três dedinhos!',
-      feedbackErro: 'Escuta de novo: "three" é 1, 2, 3.',
+      feedbackErro: 'Escuta de novo: "three" é o número 3.',
     },
     {
       tipo: "escolhaImagem",
-      instrucaoAudio: '"How old are you? I\'m… four!". Toca no que mostra QUATRO.',
+      instrucaoAudio: '"How old are you? I\'m… four!". Toca no número QUATRO.',
       palavraAlvoEn: "Four",
       opcoes: [
-        { nome: "quatro balões", imagemUrl: num4, correta: true },
+        { nome: "quatro", imagemUrl: num4, correta: true },
         { nome: "três", imagemUrl: num3, correta: false },
-        { nome: "num5", imagemUrl: num5, correta: false },
+        { nome: "cinco", imagemUrl: num5, correta: false },
       ],
       feedbackAcerto: 'Perfect! "I\'m four!". Quatro dedinhos!',
-      feedbackErro: '"Four" é 1, 2, 3, 4. Mostra 4 dedinhos.',
+      feedbackErro: '"Four" é o número 4.',
     },
     {
       tipo: "escolhaImagem",
@@ -74,7 +74,7 @@ const n3S1A01: AulaIng = {
       opcoes: [
         { nome: "quatro", imagemUrl: num4, correta: true },
         { nome: "três", imagemUrl: num3, correta: false },
-        { nome: "num6", imagemUrl: num6, correta: false },
+        { nome: "seis", imagemUrl: num6, correta: false },
       ],
       feedbackAcerto: 'Great! Fala alto: "I\'m four!".',
       feedbackErro: 'Sem problema. Fala com a família e escolhe de novo.',
