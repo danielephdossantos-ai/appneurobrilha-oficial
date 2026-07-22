@@ -103,7 +103,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                 transition={{ duration: 0.25 }}
                 className="rounded-2xl bg-white/5 border border-white/10 p-4"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
                   <div className="text-[10px] font-black uppercase tracking-widest text-white/40">
                     Bloco {i + 1} de {total}
                   </div>
@@ -113,6 +113,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                     </div>
                   )}
                 </div>
+
 
                 <p className="text-base leading-relaxed whitespace-pre-line">{c.texto}</p>
 
