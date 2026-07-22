@@ -431,19 +431,3 @@
     height: 300px !important;
   }
 }
-
-/* Pip EI skin — força texto escuro sobre fundo claro */
-[data-skin="pip-ei"] .text-white { color: #4a1d6b !important; }
-[data-skin="pip-ei"] .text-white\/90,
-[data-skin="pip-ei"] .text-white\/85,
-[data-skin="pip-ei"] .text-white\/80,
-[data-skin="pip-ei"] .text-white\/70,
-[data-skin="pip-ei"] .text-white\/60,
-[data-skin="pip-ei"] .text-white\/50,
-[data-skin="pip-ei"] .text-white\/40 { color: rgba(74,29,107,0.75) !important; }
-[data-skin="pip-ei"] .bg-white\/10 { background-color: rgba(168,85,247,0.08) !important; }
-[data-skin="pip-ei"] .bg-white\/15 { background-color: rgba(168,85,247,0.12) !important; }
-[data-skin="pip-ei"] .bg-white\/5  { background-color: rgba(168,85,247,0.05) !important; }
-[data-skin="pip-ei"] .border-white\/15,
-[data-skin="pip-ei"] .border-white\/20,
-[data-skin="pip-ei"] .border-white\/10 { border-color: rgba(168,85,247,0.25) !important; }

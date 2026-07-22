@@ -101,22 +101,9 @@ export function AulaPlayer({
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
         if (b.id === "minijogo" && !aula.minijogo) return false;
         if (b.id === "familia" && !aula.missaoFamilia) return false;
-        // Skin pip-ei (Educação Infantil): manter TODAS as atividades e
-        // jogos — só remover blocos puramente textuais (missão, objetivos,
-        // explicação, resumo). Tudo que tem imagem/interação fica.
-        if (isPipEi) {
-          const removidos = new Set([
-            "missao",
-            "objetivos",
-            "explicacao",
-            "resumo",
-          ]);
-          if (removidos.has(b.id)) return false;
-        }
-
         return true;
       }),
-    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia, isPipEi],
+    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
   );
 
 

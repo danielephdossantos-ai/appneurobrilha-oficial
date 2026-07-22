@@ -70,18 +70,6 @@ export function ProfessorVirtual({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocoId, aula.codigo]);
 
-  // No skin pip-ei (Educação Infantil), Pip fala automaticamente quando
-  // o bloco entra na tela — o texto sumiu, a voz é o principal.
-  const isPipEi = skin === "pip-ei";
-  useEffect(() => {
-    if (!isPipEi || !fala) return;
-    const timer = window.setTimeout(() => {
-      try { tts.speak(fala); } catch { /* noop */ }
-    }, 350);
-    return () => window.clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fala, isPipEi]);
-
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(fala));
 
   return (
