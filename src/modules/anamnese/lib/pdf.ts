@@ -4,6 +4,11 @@ import autoTable from "jspdf-autotable";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { PERFIL_LABEL, RISK_LABEL } from "../v2/scoring";
 import { getRecommendations, needsProfessionalReferral } from "../v2/recommendations";
+import {
+  recomendarAtividadesTerapeuticas,
+  agruparPorGrupo,
+} from "../relatorio/neuro-bridge";
+import { gerarCursoRecomendado } from "../relatorio/curso-bridge";
 
 const RISK_HEX: Record<string, [number, number, number]> = {
   verde: [22, 163, 74],
@@ -158,6 +163,101 @@ export function generateAnamnesePDF(args: {
     columnStyles: { 0: { cellWidth: 35, fontStyle: "bold" } },
   });
   y = (doc as any).lastAutoTable.finalY + 8;
+
+  // Como o app vai apoiar (grupos do Neuro Treino)
+  const atividades = recomendarAtividadesTerapeuticas(scores, risk);
+  const grupos = agruparPorGrupo(atividades);
+  if (grupos.length > 0) {
+    if (y > 220) {
+      doc.addPage();
+      y = 20;
+    }
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Como o app vai apoiar a criança", 14, y);
+    y += 4;
+    autoTable(doc, {
+      startY: y + 2,
+      head: [["Eixo de trabalho", "Categorias ativadas"]],
+      body: grupos.map((g) => [g.grupo, g.itens.map((i) => i.nome).join(" • ")]),
+      theme: "grid",
+      headStyles: { fillColor: [16, 185, 129] },
+      styles: { fontSize: 9, cellPadding: 2 },
+      columnStyles: { 0: { cellWidth: 50, fontStyle: "bold" } },
+    });
+    y = (doc as any).lastAutoTable.finalY + 8;
+  }
+
+  // Atividades terapêuticas priorizadas
+  if (atividades.length > 0) {
+    if (y > 210) {
+      doc.addPage();
+      y = 20;
+    }
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Atividades terapêuticas recomendadas (Neuro Treino)", 14, y);
+    y += 4;
+    const prio = ["Alta", "Média", "Manutenção"] as const;
+    autoTable(doc, {
+      startY: y + 2,
+      head: [["Prioridade", "Atividade", "Objetivo", "Por quê"]],
+      body: atividades.slice(0, 12).map((a) => [
+        prio[a.prioridade - 1],
+        a.nome,
+        a.objetivo,
+        a.porQue,
+      ]),
+      theme: "striped",
+      headStyles: { fillColor: [147, 51, 234] },
+      styles: { fontSize: 8, cellPadding: 2 },
+      columnStyles: {
+        0: { cellWidth: 20, fontStyle: "bold" },
+        1: { cellWidth: 40, fontStyle: "bold" },
+      },
+      didParseCell: (data) => {
+        if (data.section === "body" && data.column.index === 0) {
+          const v = String(data.cell.raw ?? "");
+          if (v === "Alta") {
+            data.cell.styles.fillColor = [220, 38, 38];
+            data.cell.styles.textColor = [255, 255, 255];
+          } else if (v === "Média") {
+            data.cell.styles.fillColor = [234, 179, 8];
+            data.cell.styles.textColor = [255, 255, 255];
+          }
+        }
+      },
+    });
+    y = (doc as any).lastAutoTable.finalY + 8;
+  }
+
+  // Curso pedagógico gerado
+  const curso = gerarCursoRecomendado(responses);
+  if (curso.trilhas.length > 0) {
+    if (y > 210) {
+      doc.addPage();
+      y = 20;
+    }
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Curso pedagógico gerado — ${curso.faixa}`, 14, y);
+    y += 4;
+    autoTable(doc, {
+      startY: y + 2,
+      head: [["Disciplina", "Trilha", "Descrição"]],
+      body: curso.trilhas.map((t) => [t.disciplina, t.titulo, t.descricao]),
+      theme: "grid",
+      headStyles: { fillColor: [5, 150, 105] },
+      styles: { fontSize: 9, cellPadding: 2 },
+      columnStyles: {
+        0: { cellWidth: 30, fontStyle: "bold" },
+        1: { cellWidth: 50 },
+      },
+    });
+    y = (doc as any).lastAutoTable.finalY + 8;
+  }
+
+
 
   // Encaminhamento profissional
   if (needsProfessionalReferral(risk)) {
