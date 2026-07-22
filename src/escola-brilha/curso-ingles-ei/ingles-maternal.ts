@@ -689,7 +689,7 @@ const nivel3Maternal: NivelIng = {
   titulo: "Nível 3 · I Can Say",
   subtitulo: "Perguntas e respostas curtas — 'What's this? It's a…'",
   destravado: true,
-  unidades: [n3Maternal_semana1],
+  unidades: [n3Maternal_semana1, n3Maternal_semana2],
 };
 
 const nivel4Maternal: NivelIng = {
