@@ -71,7 +71,7 @@ const ano2: NivelIng = {
 
 export const cursoInglesKids: CursoIng = {
   slug: "ingles-ei-kids",
-  serie: "kids" as never, // serie nova, fora do enum EI original
+  serie: "kids",
   serieLabel: "Kids (4–6 anos)",
   titulo: "English Kids — Plano de 2 anos",
   descricao:
