@@ -8,7 +8,7 @@
  *  - Cada aula segue o esqueleto fixo de 11 momentos.
  */
 
-export type SerieEI = "maternal" | "pre1" | "pre2";
+export type SerieEI = "maternal" | "pre1" | "pre2" | "kids";
 
 export type MomentoIng =
   | {
