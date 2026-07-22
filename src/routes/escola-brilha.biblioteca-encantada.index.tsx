@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { trilhaBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/registry";
 import { BookOpen, Play, Lock, ArrowLeft } from "lucide-react";
-import pipVet from "@/assets/pip-girl-veterinaria.png";
+import { url as pipVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
 
 export const Route = createFileRoute("/escola-brilha/biblioteca-encantada/")({
   head: () => ({
