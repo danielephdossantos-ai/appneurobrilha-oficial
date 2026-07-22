@@ -54,6 +54,10 @@ function ResultadoRoute() {
     valor: scores[k],
   }));
 
+  const atividadesTerapeuticas = recomendarAtividadesTerapeuticas(scores, risk);
+  const gruposApoio = agruparPorGrupo(atividadesTerapeuticas);
+  const curso = gerarCursoRecomendado(responses);
+
   const handlePDF = () => {
     generateAnamnesePDF({ childName, responses, scores, risk });
   };
