@@ -147,6 +147,106 @@ function ResultadoRoute() {
           </Card>
         )}
 
+        {/* O que o app vai auxiliar */}
+        {gruposApoio.length > 0 && (
+          <Card className="p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-5 w-5 text-primary" />
+              <h2 className="font-bold">Como o app vai apoiar {childName}</h2>
+            </div>
+            <p className="text-xs text-muted-foreground mb-3">
+              Com base nas respostas, o app já ativou os seguintes eixos de trabalho:
+            </p>
+            <div className="space-y-3">
+              {gruposApoio.map((g) => (
+                <div key={g.grupo}>
+                  <p className="text-sm font-bold text-primary mb-1">{g.grupo}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {g.itens.map((it) => (
+                      <span
+                        key={it.slug}
+                        className="text-xs px-2 py-1 rounded-full bg-muted border"
+                        title={it.objetivo}
+                      >
+                        {it.emoji} {it.nome}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        {/* Atividades terapêuticas prioritárias (Neuro Treino) */}
+        {atividadesTerapeuticas.length > 0 && (
+          <Card className="p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Brain className="h-5 w-5 text-purple-600" />
+              <h2 className="font-bold">Atividades terapêuticas recomendadas</h2>
+            </div>
+            <p className="text-xs text-muted-foreground mb-3">
+              Do módulo Neuro Treino — priorizadas pelo perfil da criança.
+            </p>
+            <div className="grid gap-2">
+              {atividadesTerapeuticas.slice(0, 6).map((a) => (
+                <Link
+                  key={a.slug}
+                  to="/neuro-treino"
+                  className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
+                >
+                  <span className="text-2xl">{a.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-bold text-sm">{a.nome}</span>
+                      {a.prioridade === 1 && (
+                        <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-red-100 text-red-700">
+                          Prioridade
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">{a.objetivo}</p>
+                    <p className="text-xs text-primary mt-0.5">{a.porQue}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Button asChild variant="outline" size="sm" className="w-full mt-3">
+              <Link to="/neuro-treino">Abrir Neuro Treino</Link>
+            </Button>
+          </Card>
+        )}
+
+        {/* Curso pedagógico gerado */}
+        <Card className="p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <GraduationCap className="h-5 w-5 text-emerald-600" />
+            <h2 className="font-bold">Curso pedagógico gerado</h2>
+          </div>
+          <p className="text-xs text-muted-foreground mb-3">
+            Trilhas ativadas para <b>{curso.faixa}</b> — comece por qualquer uma:
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {curso.trilhas.map((t) => (
+              <a
+                key={t.rota}
+                href={t.rota}
+                className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
+              >
+                <span className="text-2xl">{t.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-sm">{t.titulo}</p>
+                  <p className="text-xs text-muted-foreground line-clamp-2">
+                    {t.descricao}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </Card>
+
+
+
         {/* Recomendações */}
         <Card className="p-4">
           <h2 className="font-bold mb-3">Recomendações educacionais</h2>
