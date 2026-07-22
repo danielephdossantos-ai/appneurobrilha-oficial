@@ -466,16 +466,19 @@ export function AulaPlayer({
                       onQuizEnd: concluirAula,
                     })}
                   </div>
-                  <ProfessorVirtual
-                    aula={aula}
-                    blocoId={bloco.id}
-                    idade={activeChild?.idade}
-                    nomeCrianca={activeChild?.nome}
-                    acertos={acertos}
-                    erros={erros}
-                    childId={activeChild?.id}
-                    skin={skin}
-                  />
+                  {!isPipEi && (
+                    <ProfessorVirtual
+                      aula={aula}
+                      blocoId={bloco.id}
+                      idade={activeChild?.idade}
+                      nomeCrianca={activeChild?.nome}
+                      acertos={acertos}
+                      erros={erros}
+                      childId={activeChild?.id}
+                      skin={skin}
+                    />
+                  )}
+
                 </section>
               );
             })}
