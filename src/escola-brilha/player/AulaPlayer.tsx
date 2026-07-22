@@ -479,9 +479,14 @@ export function AulaPlayer({
             <div className="pt-4">
               <button
                 onClick={concluirAula}
-                className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
+                className={`w-full h-14 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] ${
+                  isPipEi
+                    ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+                    : "bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55]"
+                }`}
               >
-                Concluir aula <CheckCircle2 className="h-5 w-5" />
+                {isPipEi ? "Terminei! 🎉" : "Concluir aula"} <CheckCircle2 className="h-5 w-5" />
+
               </button>
             </div>
           </div>
