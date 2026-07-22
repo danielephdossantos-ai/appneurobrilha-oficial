@@ -85,9 +85,11 @@ export function AulaPlayer({
   /** Skin visual do player. "geo-cartografo" aplica a identidade do
    *  Cartógrafo do Município (verde/âmbar + Aurora), reaproveitando
    *  todas as mecânicas atuais das aulas. */
-  skin?: "default" | "geo-cartografo";
+  skin?: "default" | "geo-cartografo" | "pip-ei";
 }) {
   const isCarto = skin === "geo-cartografo";
+  const isPipEi = skin === "pip-ei";
+
 
   const navigate = useNavigate();
   const { activeChild } = useAppState();
@@ -228,15 +230,19 @@ export function AulaPlayer({
   return (
     <div
       data-skin={skin}
-      className={`min-h-screen text-white pb-16 ${isCarto ? "geo-cartografo-player" : ""} ${
-        isCarto
-          ? "bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"
-          : "bg-gradient-to-b from-[#0d1f55] to-[#050a2c]"
+      className={`min-h-screen pb-16 ${isCarto ? "geo-cartografo-player text-white" : ""} ${
+        isPipEi
+          ? "text-[#4a1d6b] bg-gradient-to-b from-[#F7E9FF] via-[#FFE8F0] to-[#FFF5E6]"
+          : isCarto
+          ? "text-white bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55]"
+          : "text-white bg-gradient-to-b from-[#0d1f55] to-[#050a2c]"
       }`}
     >
       <div
         className={`sticky top-0 z-20 backdrop-blur border-b ${
-          isCarto
+          isPipEi
+            ? "bg-white/70 border-purple-200"
+            : isCarto
             ? "bg-black/40 border-emerald-400/20"
             : "bg-[#0d1f55]/95 border-white/10"
         }`}
@@ -244,31 +250,40 @@ export function AulaPlayer({
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <button
             onClick={() => navigate({ to: "/escola-brilha" })}
-            className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
+            className={`h-10 w-10 rounded-xl grid place-items-center active:scale-95 ${
+              isPipEi ? "bg-purple-100 text-purple-700" : "bg-white/15"
+            }`}
             aria-label="Voltar"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
           <div className="flex-1 min-w-0">
-            <div
-              className={`text-[10px] font-black uppercase tracking-widest ${
-                isCarto ? "text-emerald-300/80" : "text-white/60"
-              }`}
-            >
-              {isCarto ? "CARTÓGRAFO · " : ""}
-              {aula.disciplina} · {aula.ano} · {aula.codigo}
+            {!isPipEi && (
+              <div
+                className={`text-[10px] font-black uppercase tracking-widest ${
+                  isCarto ? "text-emerald-300/80" : "text-white/60"
+                }`}
+              >
+                {isCarto ? "CARTÓGRAFO · " : ""}
+                {aula.disciplina} · {aula.ano} · {aula.codigo}
+              </div>
+            )}
+            <div className={`text-sm font-black truncate ${isPipEi ? "text-purple-800" : ""}`}>
+              {aula.titulo}
             </div>
-            <div className="text-sm font-black truncate">{aula.titulo}</div>
           </div>
           <button
             onClick={speak}
-            className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center active:scale-95"
+            className={`h-10 w-10 rounded-xl grid place-items-center active:scale-95 ${
+              isPipEi ? "bg-purple-100 text-purple-700" : "bg-white/15"
+            }`}
             aria-label={tts.speaking ? "Parar leitura" : "Ler em voz alta"}
           >
             {tts.speaking ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
           </button>
         </div>
       </div>
+
 
       {isCarto && (
         <div className="max-w-3xl mx-auto px-4 pt-3">
@@ -305,6 +320,16 @@ export function AulaPlayer({
               Missão em andamento
             </div>
           </div>
+        ) : isPipEi ? (
+          <div className="flex gap-1" aria-hidden>
+            {ETAPAS_METODO.map((e) => (
+              <div
+                key={e.n}
+                className="flex-1 h-2 rounded-full bg-white/70"
+                style={{ background: e.cor, opacity: 0.6 }}
+              />
+            ))}
+          </div>
         ) : (
           <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
             {ETAPAS_METODO.map((e) => (
@@ -319,7 +344,7 @@ export function AulaPlayer({
         )}
       </div>
 
-      {tts.supported && (
+      {tts.supported && !isPipEi && (
         <div className="max-w-3xl mx-auto px-4 pt-3">
           <button
             onClick={speakTudo}
@@ -349,6 +374,7 @@ export function AulaPlayer({
           </p>
         </div>
       )}
+
 
 
       <div className="max-w-3xl mx-auto px-4 pt-6">
@@ -386,6 +412,17 @@ export function AulaPlayer({
                         {i + 1}/{BLOCOS.length}
                       </span>
                     </div>
+                  ) : isPipEi ? (
+                    <div className="flex items-center justify-center gap-1 mb-3" aria-hidden>
+                      {BLOCOS.map((_, k) => (
+                        <span
+                          key={k}
+                          className={`h-2 rounded-full transition-all ${
+                            k === i ? "w-6 bg-purple-500" : "w-2 bg-purple-200"
+                          }`}
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 mb-2">
                       <span
@@ -410,9 +447,12 @@ export function AulaPlayer({
                     className={
                       isCarto
                         ? "geo-cartografo-bloco rounded-2xl border border-emerald-400/15 bg-slate-900/60 ring-1 ring-white/5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.35)] p-4"
+                        : isPipEi
+                        ? "rounded-[2rem] bg-white/85 backdrop-blur border-4 border-white shadow-xl p-5 md:p-6"
                         : ""
                     }
                   >
+
                     {renderBloco(aula, bloco.id, {
                       acertos,
                       erros,
@@ -439,9 +479,14 @@ export function AulaPlayer({
             <div className="pt-4">
               <button
                 onClick={concluirAula}
-                className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
+                className={`w-full h-14 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] ${
+                  isPipEi
+                    ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+                    : "bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55]"
+                }`}
               >
-                Concluir aula <CheckCircle2 className="h-5 w-5" />
+                {isPipEi ? "Terminei! 🎉" : "Concluir aula"} <CheckCircle2 className="h-5 w-5" />
+
               </button>
             </div>
           </div>

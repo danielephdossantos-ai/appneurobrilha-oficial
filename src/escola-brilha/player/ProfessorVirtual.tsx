@@ -46,7 +46,7 @@ export function ProfessorVirtual({
   acertos: number;
   erros: number;
   childId?: string | null;
-  skin?: "default" | "geo-cartografo";
+  skin?: "default" | "geo-cartografo" | "pip-ei";
 }) {
   const tts = useDeviceTTS();
   const [aberto, setAberto] = useState(true);
