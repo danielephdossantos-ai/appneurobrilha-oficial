@@ -1,10 +1,10 @@
 import type { AulaIng } from "./types";
 import { url as buddy } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
-import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
-import { url as balao } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
-import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as num3 } from "@/assets/banco-midias/numeros/numero-3.png.asset.json";
+import { url as num4 } from "@/assets/banco-midias/numeros/numero-4.png.asset.json";
+import { url as num5 } from "@/assets/banco-midias/numeros/numero-5.png.asset.json";
+import { url as num2 } from "@/assets/banco-midias/numeros/numero-2.png.asset.json";
+import { url as num6 } from "@/assets/banco-midias/numeros/numero-6.png.asset.json";
 
 /**
  * Inglês EI — Pré I · Nível 3 · Semana 1
