@@ -1,7 +1,7 @@
 // Ponte entre a Anamnese e o Neuro Treino:
 // Recebe scores + risk da anamnese e sugere categorias reais do Neuro Treino
 // (slugs existentes em @/data/neuro-treino/variations) por prioridade.
-import type { PerfilScores, RiskMap, RiskLevel } from "@/modules/anamnese/v2/types";
+import type { PerfilScores, RiskMap, RiskLevel, AnamneseV2Responses } from "@/modules/anamnese/v2/types";
 import { CATEGORIAS, type CategoriaSlug } from "@/data/neuro-treino/variations";
 
 export interface AtividadeTerapeutica {
@@ -14,6 +14,34 @@ export interface AtividadeTerapeutica {
   prioridade: 1 | 2 | 3; // 1 = alta
   rota: string;
 }
+
+/**
+ * Gate: Neuro Treino só é recomendado para crianças com sinais de atraso/DEFTHS.
+ * Regra: recomenda quando (a) idade < 8 (até ~2º ano) OU (b) há diagnóstico
+ * profissional OU (c) alguma escala está em amarelo/laranja/vermelho.
+ */
+export function precisaNeuroTreino(
+  risk: RiskMap,
+  responses?: Partial<AnamneseV2Responses>,
+): boolean {
+  const anySignal = Object.values(risk).some(
+    (n) => n === "amarelo" || n === "laranja" || n === "vermelho",
+  );
+  if (anySignal) return true;
+
+  const idade = Number((responses?.step1 as any)?.idade ?? 0);
+  if (idade > 0 && idade < 8) return true;
+
+  const diag = (responses as any)?.step4?.diagnostico_profissional;
+  if (diag && String(diag).toLowerCase() !== "nao" && String(diag).toLowerCase() !== "nenhum") {
+    return true;
+  }
+  const terapias = (responses as any)?.step4?.terapias_atuais;
+  if (terapias && String(terapias).trim().length > 0) return true;
+
+  return false;
+}
+
 
 /** Mapa: área de risco da anamnese → categorias do Neuro Treino que ajudam. */
 const AREA_TO_CATEGORIAS: Record<keyof PerfilScores, CategoriaSlug[]> = {
