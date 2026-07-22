@@ -101,9 +101,24 @@ export function AulaPlayer({
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
         if (b.id === "minijogo" && !aula.minijogo) return false;
         if (b.id === "familia" && !aula.missaoFamilia) return false;
+        // Skin pip-ei (Educação Infantil): tirar quase tudo — só imagem +
+        // voz do Pip + jogos. Mantém história curta, prática guiada,
+        // desafio, minijogo, quiz, missão em família e conclusão.
+        if (isPipEi) {
+          const permitidos = new Set([
+            "narrativa",
+            "guiada",
+            "desafio",
+            "minijogo",
+            "quiz",
+            "familia",
+            "conclusao",
+          ]);
+          if (!permitidos.has(b.id)) return false;
+        }
         return true;
       }),
-    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
+    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia, isPipEi],
   );
 
 
