@@ -85,9 +85,11 @@ export function AulaPlayer({
   /** Skin visual do player. "geo-cartografo" aplica a identidade do
    *  Cartógrafo do Município (verde/âmbar + Aurora), reaproveitando
    *  todas as mecânicas atuais das aulas. */
-  skin?: "default" | "geo-cartografo";
+  skin?: "default" | "geo-cartografo" | "pip-ei";
 }) {
   const isCarto = skin === "geo-cartografo";
+  const isPipEi = skin === "pip-ei";
+
 
   const navigate = useNavigate();
   const { activeChild } = useAppState();
