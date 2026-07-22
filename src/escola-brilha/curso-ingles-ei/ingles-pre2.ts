@@ -1,32 +1,25 @@
-import type { CursoIng } from "./types";
+import type { CursoIng, NivelIng } from "./types";
 import { url as buddy } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { semana1Pre2 } from "./ingles-pre2-s1";
 import { semana2Pre2 } from "./ingles-pre2-s2";
 import { semana3Pre2 } from "./ingles-pre2-s3";
 import { semana4Pre2 } from "./ingles-pre2-s4";
+import { nivel1Pre2 } from "./ingles-pre2-n1";
 
 /**
- * Inglês EI — Pré II (5–6 anos) · Curso completo (20 aulas)
+ * Inglês EI — Pré II (5–6 anos) · 4 níveis
  *
- * Progressão pedagógica em cima do Pré I:
- *  - S1 Greetings: hello/hi/name/how are you/goodbye/please+thanks (conversa completa)
- *  - S2 Weather: "It is sunny/rainy/cloudy/windy" + day/night (descrever o mundo)
- *  - S3 Routine: put on/wash/brush/bath (rotina diária em ações)
- *  - S4 Food + Feelings + Graduation: "I like / I love" + happy/sad + formatura EI
- *
- * Fecha a Educação Infantil inteira (Maternal + Pré I + Pré II) — 60 aulas totais.
+ * Nível 1 (Baby English): recomeço leve, 2 palavras/aula, 8 aulas.
+ * Nível 2 (First Words): conteúdo pedagógico original — greetings, weather,
+ * rotina, comida + feelings — 20 aulas.
  */
 
-export const cursoInglesPre2: CursoIng = {
-  slug: "ingles-ei-pre2",
-  serie: "pre2",
-  serieLabel: "Pré II (5–6 anos)",
-  titulo: "My First English — Pré II",
-  descricao:
-    "Pré II completo: conversa, tempo, rotina diária, comida e sentimentos. Fecha a Educação Infantil com formatura Little English Explorer.",
-  corPrimaria: "#4338ca",
-  corSecundaria: "#c7d2fe",
-  mascoteUrl: buddy,
+const nivel2Pre2: NivelIng = {
+  slug: "n2",
+  numero: 2,
+  titulo: "Nível 2 · First Words",
+  subtitulo: "Greetings, weather, rotina e sentimentos — 20 aulas",
+  destravado: true,
   unidades: [
     {
       slug: "semana-1",
@@ -57,4 +50,36 @@ export const cursoInglesPre2: CursoIng = {
       aulas: semana4Pre2,
     },
   ],
+};
+
+const nivel3Pre2: NivelIng = {
+  slug: "n3",
+  numero: 3,
+  titulo: "Nível 3 · I Can Say",
+  subtitulo: "Perguntas e respostas curtas — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+const nivel4Pre2: NivelIng = {
+  slug: "n4",
+  numero: 4,
+  titulo: "Nível 4 · Little Talker",
+  subtitulo: "Mini-diálogos e micro-histórias — em breve",
+  destravado: false,
+  unidades: [],
+};
+
+export const cursoInglesPre2: CursoIng = {
+  slug: "ingles-ei-pre2",
+  serie: "pre2",
+  serieLabel: "Pré II (5–6 anos)",
+  titulo: "My First English — Pré II",
+  descricao:
+    "4 níveis para 5–6 anos. Começa leve no Nível 1 (Baby English) e vai até mini-diálogos no Nível 4.",
+  corPrimaria: "#4338ca",
+  corSecundaria: "#c7d2fe",
+  mascoteUrl: buddy,
+  unidades: [],
+  niveis: [nivel1Pre2, nivel2Pre2, nivel3Pre2, nivel4Pre2],
 };
