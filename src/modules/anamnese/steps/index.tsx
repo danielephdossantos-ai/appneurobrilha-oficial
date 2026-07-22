@@ -108,11 +108,84 @@ export function Step1({
       </div>
       <div>
         <Label>Série escolar</Label>
-        <Input
-          value={value.serie ?? ""}
-          onChange={(e) => set({ serie: e.target.value })}
-          placeholder="Ex: Pré II, 1º ano, 3º ano…"
-        />
+        <p className="text-xs text-muted-foreground mb-2">
+          Toque na série da criança. A anamnese vai ajustar as aulas pra essa faixa.
+        </p>
+
+        <p className="text-[11px] font-black uppercase tracking-widest text-primary mt-2 mb-1">
+          Educação Infantil
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { v: "Maternal", l: "Maternal", sub: "2–3 anos" },
+            { v: "Pré I", l: "Pré I", sub: "4 anos" },
+            { v: "Pré II", l: "Pré II", sub: "5 anos" },
+          ].map((o) => (
+            <button
+              key={o.v}
+              type="button"
+              onClick={() => set({ serie: o.v })}
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium flex flex-col items-center gap-0.5 ${value.serie === o.v ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}
+            >
+              <span className="font-bold">{o.l}</span>
+              <span className="text-[10px] opacity-80">{o.sub}</span>
+            </button>
+          ))}
+        </div>
+
+        <p className="text-[11px] font-black uppercase tracking-widest text-primary mt-3 mb-1">
+          Fundamental I
+        </p>
+        <div className="grid grid-cols-5 gap-2">
+          {["1º ano", "2º ano", "3º ano", "4º ano", "5º ano"].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => set({ serie: s })}
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${value.serie === s ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        <p className="text-[11px] font-black uppercase tracking-widest text-primary mt-3 mb-1">
+          Fundamental II
+        </p>
+        <div className="grid grid-cols-4 gap-2">
+          {["6º ano", "7º ano", "8º ano", "9º ano"].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => set({ serie: s })}
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${value.serie === s ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        <p className="text-[11px] font-black uppercase tracking-widest text-primary mt-3 mb-1">
+          Ensino Médio
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          {["1º EM", "2º EM", "3º EM"].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => set({ serie: s })}
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${value.serie === s ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        {value.serie && (
+          <p className="mt-2 text-xs font-bold text-emerald-700">
+            Série selecionada: {value.serie}
+          </p>
+        )}
       </div>
       <div>
         <Label>Nome do responsável</Label>
