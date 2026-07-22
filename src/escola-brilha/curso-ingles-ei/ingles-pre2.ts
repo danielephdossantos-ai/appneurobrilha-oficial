@@ -5,6 +5,14 @@ import { semana2Pre2 } from "./ingles-pre2-s2";
 import { semana3Pre2 } from "./ingles-pre2-s3";
 import { semana4Pre2 } from "./ingles-pre2-s4";
 import { nivel1Pre2 } from "./ingles-pre2-n1";
+import { n3Pre2_semana1 } from "./ingles-pre2-n3-s1";
+import { n3Pre2_semana2 } from "./ingles-pre2-n3-s2";
+import { n3Pre2_semana3 } from "./ingles-pre2-n3-s3";
+import { n3Pre2_semana4 } from "./ingles-pre2-n3-s4";
+import { n4Pre2_semana1 } from "./ingles-pre2-n4-s1";
+import { n4Pre2_semana2 } from "./ingles-pre2-n4-s2";
+import { n4Pre2_semana3 } from "./ingles-pre2-n4-s3";
+import { n4Pre2_semana4 } from "./ingles-pre2-n4-s4";
 
 /**
  * Inglês EI — Pré II (5–6 anos) · 4 níveis
@@ -56,18 +64,18 @@ const nivel3Pre2: NivelIng = {
   slug: "n3",
   numero: 3,
   titulo: "Nível 3 · I Can Say",
-  subtitulo: "Perguntas e respostas curtas — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Clima, sentimentos, roupas e casa — 8 aulas",
+  destravado: true,
+  unidades: [n3Pre2_semana1, n3Pre2_semana2, n3Pre2_semana3, n3Pre2_semana4],
 };
 
 const nivel4Pre2: NivelIng = {
   slug: "n4",
   numero: 4,
   titulo: "Nível 4 · Little Talker",
-  subtitulo: "Mini-diálogos e micro-histórias — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Pedidos, convites, descrições e histórias — 8 aulas",
+  destravado: true,
+  unidades: [n4Pre2_semana1, n4Pre2_semana2, n4Pre2_semana3, n4Pre2_semana4],
 };
 
 export const cursoInglesPre2: CursoIng = {
