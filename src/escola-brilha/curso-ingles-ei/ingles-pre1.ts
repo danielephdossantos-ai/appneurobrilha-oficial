@@ -662,6 +662,10 @@ import { n3Pre1_semana1 } from "./ingles-pre1-n3-s1";
 import { n3Pre1_semana2 } from "./ingles-pre1-n3-s2";
 import { n3Pre1_semana3 } from "./ingles-pre1-n3-s3";
 import { n3Pre1_semana4 } from "./ingles-pre1-n3-s4";
+import { n4Pre1_semana1 } from "./ingles-pre1-n4-s1";
+import { n4Pre1_semana2 } from "./ingles-pre1-n4-s2";
+import { n4Pre1_semana3 } from "./ingles-pre1-n4-s3";
+import { n4Pre1_semana4 } from "./ingles-pre1-n4-s4";
 
 const nivel2Pre1: NivelIng = {
   slug: "n2",
@@ -713,10 +717,10 @@ const nivel3Pre1: NivelIng = {
 const nivel4Pre1: NivelIng = {
   slug: "n4",
   numero: 4,
-  titulo: "Nível 4 · Little Talker",
-  subtitulo: "Mini-diálogos e micro-histórias — em breve",
-  destravado: false,
-  unidades: [],
+  titulo: "Nível 4 · Little Storyteller",
+  subtitulo: "Mini-histórias e frases encadeadas — 8 aulas",
+  destravado: true,
+  unidades: [n4Pre1_semana1, n4Pre1_semana2, n4Pre1_semana3, n4Pre1_semana4],
 };
 
 export const cursoInglesPre1: CursoIng = {
