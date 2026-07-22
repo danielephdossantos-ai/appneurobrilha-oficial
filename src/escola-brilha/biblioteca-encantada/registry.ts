@@ -23,6 +23,10 @@ import { aula21OlhaFoguete } from "./aulas/aula-21-olha-foguete";
 import { aula22Sobe } from "./aulas/aula-22-sobe";
 import { aula23Brilha } from "./aulas/aula-23-brilha";
 import { aula24RevisaoEspaco } from "./aulas/aula-24-revisao-espaco";
+import { aula25OlhaCarro } from "./aulas/aula-25-olha-carro";
+import { aula26Anda } from "./aulas/aula-26-anda";
+import { aula27Trem } from "./aulas/aula-27-trem";
+import { aula28RevisaoVeiculos } from "./aulas/aula-28-revisao-veiculos";
 
 export const trilhaBibliotecaEncantada: TrilhaBE = {
   slug: "biblioteca-encantada",
@@ -54,6 +58,10 @@ export const trilhaBibliotecaEncantada: TrilhaBE = {
     aula22Sobe,
     aula23Brilha,
     aula24RevisaoEspaco,
+    aula25OlhaCarro,
+    aula26Anda,
+    aula27Trem,
+    aula28RevisaoVeiculos,
   ],
 };
 
