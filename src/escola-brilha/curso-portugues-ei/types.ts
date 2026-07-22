@@ -434,6 +434,18 @@ export type MomentoEI =
       falaEnsino: string;
       feedbackAcerto: string;
       feedbackErro: string;
+    }
+  // ============ FASE 1 — Variações de jogo (aditivas) ============
+  | {
+      tipo: "cacaAoSom";
+      // Multi-seleção: mostra 6 imagens, criança toca em TODAS que
+      // começam com o som alvo. Reforça consciência fonêmica (Semana 4).
+      somAlvo: string;             // ex.: "P" — usado na instrução falada
+      exemploFala: string;         // ex.: "pato" — o professor fala o exemplo
+      instrucaoAudio: string;      // "Toca em tudo que começa com o som P, como PATO."
+      opcoes: Array<{ nome: string; imagemUrl: string; correta: boolean }>;
+      elogio: string;
+      feedbackErro: string;
     };
 
 

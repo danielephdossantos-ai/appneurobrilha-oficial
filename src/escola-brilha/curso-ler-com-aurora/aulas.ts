@@ -1068,6 +1068,22 @@ const aula17: AulaEI = {
       falaMascote: "Missão de caça! Achar palavras com o mesmo som do começo.",
     },
     {
+      tipo: "cacaAoSom",
+      somAlvo: "P",
+      exemploFala: "pato",
+      instrucaoAudio: "Toca em TUDO que começa com o som P, como PATO. Achou? Toca!",
+      opcoes: [
+        { nome: "pato", imagemUrl: pato, correta: true },
+        { nome: "pipa", imagemUrl: pipa, correta: true },
+        { nome: "peixe", imagemUrl: peixe, correta: true },
+        { nome: "sol", imagemUrl: sol, correta: false },
+        { nome: "gato", imagemUrl: gato, correta: false },
+        { nome: "bola", imagemUrl: bola, correta: false },
+      ],
+      elogio: "Isso! Pato, pipa e peixe: todos começam com P.",
+      feedbackErro: "Esse não começa com P. Escuta de novo o som: P… PATO.",
+    },
+    {
       tipo: "somInicial",
       instrucaoAudio: "Mesmo começo de PATO?",
       referencia: { nome: "pato", imagemUrl: pato },
