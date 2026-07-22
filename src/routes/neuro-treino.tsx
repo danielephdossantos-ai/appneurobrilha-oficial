@@ -11,8 +11,6 @@ import {
   BookOpen,
   Sparkles,
   Zap,
-  MessageCircle,
-  ArrowRight,
 } from "lucide-react";
 
 import { useAppState } from "@/core/store";
