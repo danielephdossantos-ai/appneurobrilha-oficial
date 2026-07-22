@@ -4,6 +4,11 @@ import autoTable from "jspdf-autotable";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { PERFIL_LABEL, RISK_LABEL } from "../v2/scoring";
 import { getRecommendations, needsProfessionalReferral } from "../v2/recommendations";
+import {
+  recomendarAtividadesTerapeuticas,
+  agruparPorGrupo,
+} from "../relatorio/neuro-bridge";
+import { gerarCursoRecomendado } from "../relatorio/curso-bridge";
 
 const RISK_HEX: Record<string, [number, number, number]> = {
   verde: [22, 163, 74],
