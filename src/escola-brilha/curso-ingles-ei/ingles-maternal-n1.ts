@@ -1,4 +1,7 @@
 import type { AulaIng, NivelIng } from "./types";
+import { n1Semana2 } from "./ingles-maternal-n1-s2";
+import { n1Semana3 } from "./ingles-maternal-n1-s3";
+import { n1Semana4 } from "./ingles-maternal-n1-s4";
 import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import appleRed from "@/assets/ingles-ei/n1-colors/apple-red.png";
 import ballBlue from "@/assets/ingles-ei/n1-colors/ball-blue.png";
@@ -184,5 +187,8 @@ export const nivel1Maternal: NivelIng = {
       subtitulo: "Só cores: red, blue, yellow, green",
       aulas: [n1S1A01, n1S1A02],
     },
+    n1Semana2,
+    n1Semana3,
+    n1Semana4,
   ],
 };
