@@ -101,10 +101,14 @@ export function AulaPlayer({
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
         if (b.id === "minijogo" && !aula.minijogo) return false;
         if (b.id === "familia" && !aula.missaoFamilia) return false;
+        // Skin pip-ei (Educação Infantil): remove blocos só de texto
+        // (Missão da aula / Objetivos) — criança pequena não lê.
+        if (skin === "pip-ei" && (b.id === "missao" || b.id === "objetivos")) return false;
         return true;
       }),
-    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
+    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia, skin],
   );
+
 
 
   const [acertos, setAcertos] = useState(0);
@@ -462,16 +466,19 @@ export function AulaPlayer({
                       onQuizEnd: concluirAula,
                     })}
                   </div>
-                  <ProfessorVirtual
-                    aula={aula}
-                    blocoId={bloco.id}
-                    idade={activeChild?.idade}
-                    nomeCrianca={activeChild?.nome}
-                    acertos={acertos}
-                    erros={erros}
-                    childId={activeChild?.id}
-                    skin={skin}
-                  />
+                  {!isPipEi && (
+                    <ProfessorVirtual
+                      aula={aula}
+                      blocoId={bloco.id}
+                      idade={activeChild?.idade}
+                      nomeCrianca={activeChild?.nome}
+                      acertos={acertos}
+                      erros={erros}
+                      childId={activeChild?.id}
+                      skin={skin}
+                    />
+                  )}
+
                 </section>
               );
             })}
