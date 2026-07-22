@@ -36,6 +36,7 @@ import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pe
 import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
 import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AulasApoioRouteImport } from './routes/aulas-apoio'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
@@ -218,6 +219,11 @@ const BancoMidiasRoute = BancoMidiasRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AulasApoioRoute = AulasApoioRouteImport.update({
+  id: '/aulas-apoio',
+  path: '/aulas-apoio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
@@ -500,6 +506,7 @@ export interface FileRoutesByFullPath {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
+  '/aulas-apoio': typeof AulasApoioRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
@@ -576,6 +583,7 @@ export interface FileRoutesByTo {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
+  '/aulas-apoio': typeof AulasApoioRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
@@ -654,6 +662,7 @@ export interface FileRoutesById {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
+  '/aulas-apoio': typeof AulasApoioRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
@@ -733,6 +742,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
+    | '/aulas-apoio'
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
@@ -809,6 +819,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
+    | '/aulas-apoio'
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
@@ -886,6 +897,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
+    | '/aulas-apoio'
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
@@ -964,6 +976,7 @@ export interface RootRouteChildren {
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
+  AulasApoioRoute: typeof AulasApoioRoute
   AuthRoute: typeof AuthRoute
   BancoMidiasRoute: typeof BancoMidiasRoute
   BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
@@ -1219,6 +1232,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aulas-apoio': {
+      id: '/aulas-apoio'
+      path: '/aulas-apoio'
+      fullPath: '/aulas-apoio'
+      preLoaderRoute: typeof AulasApoioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auditoria-pedagogica': {
@@ -1605,6 +1625,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
+  AulasApoioRoute: AulasApoioRoute,
   AuthRoute: AuthRoute,
   BancoMidiasRoute: BancoMidiasRoute,
   BibliotecaAlfaRoute: BibliotecaAlfaRoute,

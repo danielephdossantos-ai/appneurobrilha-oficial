@@ -6969,6 +6969,7 @@ export type Database = {
           topic: string
           type: string | null
           updated_at: string
+          weekdays: Json | null
         }
         Insert: {
           category?: string | null
@@ -6982,6 +6983,7 @@ export type Database = {
           topic: string
           type?: string | null
           updated_at?: string
+          weekdays?: Json | null
         }
         Update: {
           category?: string | null
@@ -6995,6 +6997,7 @@ export type Database = {
           topic?: string
           type?: string | null
           updated_at?: string
+          weekdays?: Json | null
         }
         Relationships: [
           {

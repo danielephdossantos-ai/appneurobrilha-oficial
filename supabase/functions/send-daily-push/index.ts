@@ -104,15 +104,39 @@ Deno.serve(async (req) => {
     });
     const auroraCount = auroraPendentes.length;
 
-    if (estudosHoje === 0 && trabalhos === 0 && auroraCount === 0) { skipped++; continue; }
+    // === Aulas de Apoio (trilha personalizada com horário editável pela mãe) ===
+    // hoje é dia da semana (0=dom..6=sáb) — só envia se hora local >= hora agendada e não enviou nesta hora.
+    const weekdayHoje = nowLocal.getDay();
+    const { data: apoioRow } = await supabase
+      .from("study_agenda")
+      .select("time_of_day, weekdays")
+      .eq("child_id", s.child_id)
+      .eq("category", "aulas_apoio")
+      .maybeSingle();
+
+    let aulaApoioAgora = false;
+    if (apoioRow) {
+      const dias: number[] = Array.isArray((apoioRow as any).weekdays)
+        ? ((apoioRow as any).weekdays as number[])
+        : [1, 2, 3, 4, 5];
+      const hora = (apoioRow.time_of_day as string | null) ?? "14:00";
+      if (dias.includes(weekdayHoje) && hora <= hhmmNow) {
+        // dispara na hora exata (janela: hora bate)
+        if (hora.slice(0, 2) === hhmmNow.slice(0, 2)) aulaApoioAgora = true;
+      }
+    }
+
+    if (estudosHoje === 0 && trabalhos === 0 && auroraCount === 0 && !aulaApoioAgora) { skipped++; continue; }
+
 
     const primeiraAurora = auroraPendentes[0];
     const auroraAtrasada = primeiraAurora && primeiraAurora.exam_date < hoje;
 
     const body = [
+      aulaApoioAgora ? `🌟 Hora das Aulas de Apoio!` : null,
       auroraCount > 0
         ? (auroraAtrasada
-            ? `✨ Você tem Ler com Aurora atrasado — bora recuperar?`
+            ? `✨ Ler com Aurora atrasado — bora recuperar?`
             : `✨ Hora do Ler com Aurora${primeiraAurora?.time_of_day ? ` (${primeiraAurora.time_of_day})` : ""}`)
         : null,
       estudosHoje > 0 ? `📚 ${estudosHoje} estudo(s) pra hoje` : null,
@@ -120,14 +144,17 @@ Deno.serve(async (req) => {
     ].filter(Boolean).join(" • ");
 
     const payload = JSON.stringify({
-      title: auroraCount > 0
-        ? "Aurora está te esperando 🌟"
-        : "Neuro Brilha — hoje tem missão! ✨",
+      title: aulaApoioAgora
+        ? "Hora de estudar com o Pip 🌟"
+        : auroraCount > 0
+          ? "Aurora está te esperando 🌟"
+          : "Neuro Brilha — hoje tem missão! ✨",
       body,
-      url: auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
+      url: aulaApoioAgora ? "/aulas-apoio" : auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
       // tag muda a cada hora pra permitir múltiplos lembretes ao longo do dia
-      tag: `aurora-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
+      tag: `nb-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
     });
+
 
     try {
       await webpush.sendNotification(
