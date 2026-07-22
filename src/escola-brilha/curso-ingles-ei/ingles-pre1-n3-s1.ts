@@ -123,7 +123,7 @@ const n3S1A02: AulaIng = {
     },
     {
       tipo: "escolhaImagem",
-      instrucaoAudio: '"How old are you? I\'m… five!". Toca na estrelinha de CINCO pontas.',
+      instrucaoAudio: '"How old are you? I\'m… five!". Toca no número CINCO.',
       palavraAlvoEn: "Five",
       opcoes: [
         { nome: "cinco", imagemUrl: num5, correta: true },
@@ -131,7 +131,7 @@ const n3S1A02: AulaIng = {
         { nome: "três", imagemUrl: num3, correta: false },
       ],
       feedbackAcerto: 'Yes! "I\'m five!". High five! ✋',
-      feedbackErro: 'A estrelinha tem 5 pontinhas. Isso é "five".',
+      feedbackErro: 'O número 5 é "five". High five!',
     },
     {
       tipo: "escolhaImagem",
@@ -144,12 +144,12 @@ const n3S1A02: AulaIng = {
         { nome: "três", imagemUrl: num3, correta: false },
       ],
       feedbackAcerto: 'Perfect! "He is four!".',
-      feedbackErro: '"Four" — 1, 2, 3, 4 balõezinhos.',
+      feedbackErro: '"Four" é o número 4.',
     },
     {
       tipo: "escolhaImagem",
       instrucaoAudio:
-        'E a irmãzinha bebê? "I\'m… three!". Toca no bolinho de TRÊS velinhas.',
+        'E a irmãzinha bebê? "I\'m… three!". Toca no número TRÊS.',
       palavraAlvoEn: "Three",
       opcoes: [
         { nome: "três", imagemUrl: num3, correta: true },
@@ -157,7 +157,7 @@ const n3S1A02: AulaIng = {
         { nome: "quatro", imagemUrl: num4, correta: false },
       ],
       feedbackAcerto: 'Great! "She is three!".',
-      feedbackErro: '"Three" — mostra 3 dedinhos.',
+      feedbackErro: '"Three" é o número 3.',
     },
     {
       tipo: "fazDeConta",
