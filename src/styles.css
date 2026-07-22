@@ -471,5 +471,18 @@
 [data-skin="pip-ei"] .bg-\[\#0d1f55\] .text-white\/60,
 [data-skin="pip-ei"] .bg-\[\#0d1f55\] .text-white\/70 {
   color: rgba(255, 255, 255, 0.95) !important;
+
+
+/* Botão "Entendi · Próximo bloco" (emerald translúcido) →
+ * ganha fundo sólido e texto branco no skin claro. */
+[data-skin="pip-ei"] .bg-emerald-500\/25 {
+  background-color: #10b981 !important;
+  border-color: #059669 !important;
+  color: #fff !important;
 }
+[data-skin="pip-ei"] .bg-emerald-500\/25.text-emerald-100,
+[data-skin="pip-ei"] .text-emerald-100 {
+  color: #fff !important;
+}
+
 
