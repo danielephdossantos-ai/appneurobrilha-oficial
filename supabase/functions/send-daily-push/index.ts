@@ -133,9 +133,10 @@ Deno.serve(async (req) => {
     const auroraAtrasada = primeiraAurora && primeiraAurora.exam_date < hoje;
 
     const body = [
+      aulaApoioAgora ? `🌟 Hora das Aulas de Apoio!` : null,
       auroraCount > 0
         ? (auroraAtrasada
-            ? `✨ Você tem Ler com Aurora atrasado — bora recuperar?`
+            ? `✨ Ler com Aurora atrasado — bora recuperar?`
             : `✨ Hora do Ler com Aurora${primeiraAurora?.time_of_day ? ` (${primeiraAurora.time_of_day})` : ""}`)
         : null,
       estudosHoje > 0 ? `📚 ${estudosHoje} estudo(s) pra hoje` : null,
@@ -143,14 +144,17 @@ Deno.serve(async (req) => {
     ].filter(Boolean).join(" • ");
 
     const payload = JSON.stringify({
-      title: auroraCount > 0
-        ? "Aurora está te esperando 🌟"
-        : "Neuro Brilha — hoje tem missão! ✨",
+      title: aulaApoioAgora
+        ? "Hora de estudar com o Pip 🌟"
+        : auroraCount > 0
+          ? "Aurora está te esperando 🌟"
+          : "Neuro Brilha — hoje tem missão! ✨",
       body,
-      url: auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
+      url: aulaApoioAgora ? "/aulas-apoio" : auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
       // tag muda a cada hora pra permitir múltiplos lembretes ao longo do dia
-      tag: `aurora-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
+      tag: `nb-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
     });
+
 
     try {
       await webpush.sendNotification(
