@@ -320,6 +320,16 @@ export function AulaPlayer({
               Missão em andamento
             </div>
           </div>
+        ) : isPipEi ? (
+          <div className="flex gap-1" aria-hidden>
+            {ETAPAS_METODO.map((e) => (
+              <div
+                key={e.n}
+                className="flex-1 h-2 rounded-full bg-white/70"
+                style={{ background: e.cor, opacity: 0.6 }}
+              />
+            ))}
+          </div>
         ) : (
           <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
             {ETAPAS_METODO.map((e) => (
@@ -334,7 +344,7 @@ export function AulaPlayer({
         )}
       </div>
 
-      {tts.supported && (
+      {tts.supported && !isPipEi && (
         <div className="max-w-3xl mx-auto px-4 pt-3">
           <button
             onClick={speakTudo}
@@ -364,6 +374,7 @@ export function AulaPlayer({
           </p>
         </div>
       )}
+
 
 
       <div className="max-w-3xl mx-auto px-4 pt-6">
