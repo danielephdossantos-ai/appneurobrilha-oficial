@@ -90,14 +90,26 @@ export interface UnidadeIng {
   aulas: AulaIng[];
 }
 
+export interface NivelIng {
+  slug: string; // "n1", "n2"...
+  numero: 1 | 2 | 3 | 4;
+  titulo: string; // "Nível 1 · Baby English"
+  subtitulo: string; // "First words · 2 palavras por aula"
+  destravado?: boolean;
+  unidades: UnidadeIng[];
+}
+
 export interface CursoIng {
-  slug: string; // "ingles-ei-maternal" etc.
+  slug: string;
   serie: SerieEI;
-  serieLabel: string; // "Maternal (3–4 anos)"
+  serieLabel: string;
   titulo: string;
   descricao: string;
   corPrimaria: string;
   corSecundaria: string;
   mascoteUrl: string;
+  /** Legado — usado quando o curso ainda não foi migrado para níveis. */
   unidades: UnidadeIng[];
+  /** Nova estrutura de 4 níveis por faixa. Quando presente, tem prioridade. */
+  niveis?: NivelIng[];
 }
