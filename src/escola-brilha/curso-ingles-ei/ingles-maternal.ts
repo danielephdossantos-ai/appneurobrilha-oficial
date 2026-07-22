@@ -702,9 +702,14 @@ const nivel4Maternal: NivelIng = {
   slug: "n4",
   numero: 4,
   titulo: "Nível 4 · Little Talker",
-  subtitulo: "Mini-diálogos e micro-histórias — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Mini-diálogos e micro-histórias — 4 semanas",
+  destravado: true,
+  unidades: [
+    n4Maternal_semana1,
+    n4Maternal_semana2,
+    n4Maternal_semana3,
+    n4Maternal_semana4,
+  ],
 };
 
 export const cursoInglesMaternal: CursoIng = {
