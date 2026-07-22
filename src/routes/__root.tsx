@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { stopSpeaking } from "@/lib/native-tts";
 import {
   Outlet,
   Link,
@@ -129,6 +131,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useStopSpeechOnScroll();
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
@@ -150,6 +154,48 @@ function RootComponent() {
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );
+}
+
+/**
+ * Regra global: quando o usuário rola a tela, para qualquer fala do
+ * professor virtual em andamento. Evita que a última aula continue
+ * falando enquanto a criança já subiu/desceu a página.
+ */
+function useStopSpeechOnScroll() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let lastY = window.scrollY;
+    let lastStop = 0;
+    const THRESHOLD = 24;
+
+    const stop = () => {
+      const now = Date.now();
+      if (now - lastStop < 150) return;
+      lastStop = now;
+      try {
+        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      } catch {}
+      stopSpeaking();
+    };
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) < THRESHOLD) return;
+      lastY = y;
+      stop();
+    };
+    const onWheel = () => stop();
+    const onTouchMove = () => stop();
+
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll, { capture: true } as any);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  }, []);
 }
 
 import { Toaster } from "sonner";
