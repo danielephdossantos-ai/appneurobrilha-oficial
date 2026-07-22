@@ -7,6 +7,10 @@ import { n3Maternal_semana1 } from "./ingles-maternal-n3-s1";
 import { n3Maternal_semana2 } from "./ingles-maternal-n3-s2";
 import { n3Maternal_semana3 } from "./ingles-maternal-n3-s3";
 import { n3Maternal_semana4 } from "./ingles-maternal-n3-s4";
+import { n4Maternal_semana1 } from "./ingles-maternal-n4-s1";
+import { n4Maternal_semana2 } from "./ingles-maternal-n4-s2";
+import { n4Maternal_semana3 } from "./ingles-maternal-n4-s3";
+import { n4Maternal_semana4 } from "./ingles-maternal-n4-s4";
 import { url as brilha } from "@/assets/ingles-1ano/u1-a06/buddy.png.asset.json";
 import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
@@ -698,9 +702,14 @@ const nivel4Maternal: NivelIng = {
   slug: "n4",
   numero: 4,
   titulo: "Nível 4 · Little Talker",
-  subtitulo: "Mini-diálogos e micro-histórias — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Mini-diálogos e micro-histórias — 4 semanas",
+  destravado: true,
+  unidades: [
+    n4Maternal_semana1,
+    n4Maternal_semana2,
+    n4Maternal_semana3,
+    n4Maternal_semana4,
+  ],
 };
 
 export const cursoInglesMaternal: CursoIng = {
