@@ -7,6 +7,7 @@ import { getRecommendations, needsProfessionalReferral } from "../v2/recommendat
 import {
   recomendarAtividadesTerapeuticas,
   agruparPorGrupo,
+  precisaNeuroTreino,
 } from "../relatorio/neuro-bridge";
 import { gerarCursoRecomendado } from "../relatorio/curso-bridge";
 
@@ -164,9 +165,10 @@ export function generateAnamnesePDF(args: {
   });
   y = (doc as any).lastAutoTable.finalY + 8;
 
-  // Como o app vai apoiar (grupos do Neuro Treino)
-  const atividades = recomendarAtividadesTerapeuticas(scores, risk);
-  const grupos = agruparPorGrupo(atividades);
+  // Como o app vai apoiar (grupos do Neuro Treino) — só se houver sinal de DEFTHS
+  const mostrarNeuro = precisaNeuroTreino(risk, responses as any);
+  const atividades = mostrarNeuro ? recomendarAtividadesTerapeuticas(scores, risk) : [];
+  const grupos = mostrarNeuro ? agruparPorGrupo(atividades) : [];
   if (grupos.length > 0) {
     if (y > 220) {
       doc.addPage();
