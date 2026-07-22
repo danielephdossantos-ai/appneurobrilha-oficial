@@ -8,9 +8,14 @@ import {
   needsProfessionalReferral,
 } from "@/modules/anamnese/v2/recommendations";
 import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
+import {
+  recomendarAtividadesTerapeuticas,
+  agruparPorGrupo,
+} from "@/modules/anamnese/relatorio/neuro-bridge";
+import { gerarCursoRecomendado } from "@/modules/anamnese/relatorio/curso-bridge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle } from "lucide-react";
+import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, Sparkles, GraduationCap, Brain } from "lucide-react";
 import {
   Radar,
   RadarChart,
