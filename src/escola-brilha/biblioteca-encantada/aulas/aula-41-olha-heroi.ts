@@ -13,58 +13,58 @@ export const aula41OlhaHeroi: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip conhece os HERÓIS!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA um HERÓI! He-rói! Forte!",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "palavra": "HEROI"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no HERÓI.",
     "palavra": "HEROI",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "distratores": [
       {
         "palavra": "HEROINA",
-        "imagem": heroina_TOKEN
+        "imagem": heroina
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! HERÓI!",
-    "imagem": heroi_TOKEN
+    "imagem": heroi
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma HEROÍNA! He-ro-í-na! Poderosa!",
-    "imagem": heroina_TOKEN,
+    "imagem": heroina,
     "palavra": "HEROINA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na HEROÍNA.",
     "palavra": "HEROINA",
-    "imagem": heroina_TOKEN,
+    "imagem": heroina,
     "distratores": [
       {
         "palavra": "HEROI",
-        "imagem": heroi_TOKEN
+        "imagem": heroi
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! HEROÍNA!",
-    "imagem": heroina_TOKEN
+    "imagem": heroina
   },
   {
     "tipo": "fim",
     "fala": "HERÓI e HEROÍNA salvam o dia! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

@@ -13,52 +13,52 @@ export const aula38Mora: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Onde a PRINCESA MORA?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA um CASTELO! Cas-te-lo! A princesa MORA aqui!",
-    "imagem": castelo_TOKEN,
+    "imagem": castelo,
     "palavra": "CASTELO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no CASTELO.",
     "palavra": "CASTELO",
-    "imagem": castelo_TOKEN,
+    "imagem": castelo,
     "distratores": [
       {
         "palavra": "PRINCESA",
-        "imagem": princesa_TOKEN
+        "imagem": princesa
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CASTELO!",
-    "imagem": castelo_TOKEN
+    "imagem": castelo
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PRINCESA que MORA no castelo.",
     "palavra": "PRINCESA",
-    "imagem": princesa_TOKEN,
+    "imagem": princesa,
     "distratores": [
       {
         "palavra": "CASTELO",
-        "imagem": castelo_TOKEN
+        "imagem": castelo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PRINCESA MORA no CASTELO!",
-    "imagem": princesa_TOKEN
+    "imagem": princesa
   },
   {
     "tipo": "fim",
     "fala": "A PRINCESA MORA no CASTELO! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

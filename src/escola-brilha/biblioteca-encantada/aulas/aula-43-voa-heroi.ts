@@ -14,58 +14,58 @@ export const aula43VoaHeroi: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! O HERÓI VOA no céu!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o HERÓI VOAR! Uau!",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "palavra": "HEROI"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no HERÓI que VOA.",
     "palavra": "HEROI",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "distratores": [
       {
         "palavra": "CAPITA",
-        "imagem": capita_TOKEN
+        "imagem": capita
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! HERÓI VOA!",
-    "imagem": heroi_TOKEN
+    "imagem": heroi
   },
   {
     "tipo": "olha",
     "fala": "OLHA um ROBÔ herói! Ro-bô! Bip bip!",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "palavra": "ROBO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ROBÔ.",
     "palavra": "ROBO",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "distratores": [
       {
         "palavra": "HEROI",
-        "imagem": heroi_TOKEN
+        "imagem": heroi
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! ROBÔ!",
-    "imagem": robo_TOKEN
+    "imagem": robo
   },
   {
     "tipo": "fim",
     "fala": "HERÓI VOA e ROBÔ faz bip! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

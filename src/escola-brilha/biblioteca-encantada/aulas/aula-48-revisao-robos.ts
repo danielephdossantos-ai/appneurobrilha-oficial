@@ -16,63 +16,63 @@ export const aula48RevisaoRobos: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa dos ROBÔS!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ROBÔ.",
     "palavra": "ROBO",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "distratores": [
       {
         "palavra": "DRONE",
-        "imagem": drone_TOKEN
+        "imagem": drone
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! ROBÔ!",
-    "imagem": robo_TOKEN
+    "imagem": robo
   },
   {
     "tipo": "pecs",
     "fala": "Toca no que VOA (DRONE).",
     "palavra": "DRONE",
-    "imagem": drone_TOKEN,
+    "imagem": drone,
     "distratores": [
       {
         "palavra": "ENGRENAGEM",
-        "imagem": engrenagem_TOKEN
+        "imagem": engrenagem
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! DRONE VOA!",
-    "imagem": drone_TOKEN
+    "imagem": drone
   },
   {
     "tipo": "pecs",
     "fala": "Toca no FOGUETE.",
     "palavra": "FOGUETE",
-    "imagem": foguete_TOKEN,
+    "imagem": foguete,
     "distratores": [
       {
         "palavra": "ASTRONAUTA",
-        "imagem": astro_TOKEN
+        "imagem": astro
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! FOGUETE SOBE!",
-    "imagem": foguete_TOKEN
+    "imagem": foguete
   },
   {
     "tipo": "fim",
     "fala": "Você conhece os ROBÔS! Bip bip! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

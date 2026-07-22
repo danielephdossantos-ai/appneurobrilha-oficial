@@ -13,58 +13,58 @@ export const aula37OlhaPrincesa: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip vai ao REINO ENCANTADO!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma PRINCESA! Prin-ce-sa!",
-    "imagem": princesa_TOKEN,
+    "imagem": princesa,
     "palavra": "PRINCESA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PRINCESA.",
     "palavra": "PRINCESA",
-    "imagem": princesa_TOKEN,
+    "imagem": princesa,
     "distratores": [
       {
         "palavra": "COROA",
-        "imagem": coroa_TOKEN
+        "imagem": coroa
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PRINCESA!",
-    "imagem": princesa_TOKEN
+    "imagem": princesa
   },
   {
     "tipo": "olha",
     "fala": "OLHA a COROA! Co-ro-a! Dourada!",
-    "imagem": coroa_TOKEN,
+    "imagem": coroa,
     "palavra": "COROA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na COROA.",
     "palavra": "COROA",
-    "imagem": coroa_TOKEN,
+    "imagem": coroa,
     "distratores": [
       {
         "palavra": "PRINCESA",
-        "imagem": princesa_TOKEN
+        "imagem": princesa
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! COROA!",
-    "imagem": coroa_TOKEN
+    "imagem": coroa
   },
   {
     "tipo": "fim",
     "fala": "A PRINCESA usa a COROA! Beijo da Pip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

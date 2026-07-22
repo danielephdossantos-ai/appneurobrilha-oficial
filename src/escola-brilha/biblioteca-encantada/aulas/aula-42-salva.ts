@@ -13,58 +13,58 @@ export const aula42Salva: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem SALVA a cidade?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA a CAPITÃ! Ca-pi-tã! Ela SALVA!",
-    "imagem": capita_TOKEN,
+    "imagem": capita,
     "palavra": "CAPITA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na CAPITÃ.",
     "palavra": "CAPITA",
-    "imagem": capita_TOKEN,
+    "imagem": capita,
     "distratores": [
       {
         "palavra": "JUSTICEIRO",
-        "imagem": justiceiro_TOKEN
+        "imagem": justiceiro
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CAPITÃ SALVA!",
-    "imagem": capita_TOKEN
+    "imagem": capita
   },
   {
     "tipo": "olha",
     "fala": "OLHA o JUSTICEIRO! Jus-ti-cei-ro!",
-    "imagem": justiceiro_TOKEN,
+    "imagem": justiceiro,
     "palavra": "JUSTICEIRO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no JUSTICEIRO.",
     "palavra": "JUSTICEIRO",
-    "imagem": justiceiro_TOKEN,
+    "imagem": justiceiro,
     "distratores": [
       {
         "palavra": "CAPITA",
-        "imagem": capita_TOKEN
+        "imagem": capita
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! JUSTICEIRO!",
-    "imagem": justiceiro_TOKEN
+    "imagem": justiceiro
   },
   {
     "tipo": "fim",
     "fala": "CAPITÃ e JUSTICEIRO SALVAM! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

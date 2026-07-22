@@ -14,58 +14,58 @@ export const aula47AstronautaBot: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Um ROBÔ ASTRONAUTA!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o ASTRONAUTA BOT! As-tro-nau-ta!",
-    "imagem": astro_TOKEN,
+    "imagem": astro,
     "palavra": "ASTRONAUTA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ASTRONAUTA BOT.",
     "palavra": "ASTRONAUTA",
-    "imagem": astro_TOKEN,
+    "imagem": astro,
     "distratores": [
       {
         "palavra": "ROBO",
-        "imagem": robo_TOKEN
+        "imagem": robo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! ASTRONAUTA BOT!",
-    "imagem": astro_TOKEN
+    "imagem": astro
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma ENGRENAGEM! Ela GIRA o robô! Cliqui!",
-    "imagem": engrenagem_TOKEN,
+    "imagem": engrenagem,
     "palavra": "ENGRENAGEM"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na ENGRENAGEM.",
     "palavra": "ENGRENAGEM",
-    "imagem": engrenagem_TOKEN,
+    "imagem": engrenagem,
     "distratores": [
       {
         "palavra": "ASTRONAUTA",
-        "imagem": astro_TOKEN
+        "imagem": astro
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! ENGRENAGEM!",
-    "imagem": engrenagem_TOKEN
+    "imagem": engrenagem
   },
   {
     "tipo": "fim",
     "fala": "ASTRONAUTA BOT com sua ENGRENAGEM! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

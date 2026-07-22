@@ -14,58 +14,58 @@ export const aula51Concha: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! O que tem no fundo do mar?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma CONCHA! Con-cha! Rosinha!",
-    "imagem": concha_TOKEN,
+    "imagem": concha,
     "palavra": "CONCHA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na CONCHA.",
     "palavra": "CONCHA",
-    "imagem": concha_TOKEN,
+    "imagem": concha,
     "distratores": [
       {
         "palavra": "PEIXINHO",
-        "imagem": peixinho_TOKEN
+        "imagem": peixinho
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CONCHA!",
-    "imagem": concha_TOKEN
+    "imagem": concha
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma PÉROLA! Pé-ro-la! Brilha na CONCHA!",
-    "imagem": perola_TOKEN,
+    "imagem": perola,
     "palavra": "PEROLA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PÉROLA.",
     "palavra": "PEROLA",
-    "imagem": perola_TOKEN,
+    "imagem": perola,
     "distratores": [
       {
         "palavra": "CONCHA",
-        "imagem": concha_TOKEN
+        "imagem": concha
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PÉROLA!",
-    "imagem": perola_TOKEN
+    "imagem": perola
   },
   {
     "tipo": "fim",
     "fala": "A CONCHA guarda a PÉROLA! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

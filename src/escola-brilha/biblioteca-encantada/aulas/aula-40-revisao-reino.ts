@@ -16,63 +16,63 @@ export const aula40RevisaoReino: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa do REINO ENCANTADO!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PRINCESA.",
     "palavra": "PRINCESA",
-    "imagem": princesa_TOKEN,
+    "imagem": princesa,
     "distratores": [
       {
         "palavra": "FADA",
-        "imagem": fada_TOKEN
+        "imagem": fada
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PRINCESA!",
-    "imagem": princesa_TOKEN
+    "imagem": princesa
   },
   {
     "tipo": "pecs",
     "fala": "Toca na COROA.",
     "palavra": "COROA",
-    "imagem": coroa_TOKEN,
+    "imagem": coroa,
     "distratores": [
       {
         "palavra": "CASTELO",
-        "imagem": castelo_TOKEN
+        "imagem": castelo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! COROA!",
-    "imagem": coroa_TOKEN
+    "imagem": coroa
   },
   {
     "tipo": "pecs",
     "fala": "Toca no que VOA.",
     "palavra": "FADA",
-    "imagem": fada_TOKEN,
+    "imagem": fada,
     "distratores": [
       {
         "palavra": "UNICORNIO",
-        "imagem": unicornio_TOKEN
+        "imagem": unicornio
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! FADA VOA!",
-    "imagem": fada_TOKEN
+    "imagem": fada
   },
   {
     "tipo": "fim",
     "fala": "Você conhece o REINO! PRINCESA, COROA, CASTELO, FADA e UNICÓRNIO! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

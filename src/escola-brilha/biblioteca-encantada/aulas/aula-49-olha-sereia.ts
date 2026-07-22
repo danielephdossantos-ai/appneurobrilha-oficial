@@ -13,58 +13,58 @@ export const aula49OlhaSereia: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip vai ao FUNDO DO MAR! Splash!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma SEREIA! Se-rei-a! Cauda brilhando!",
-    "imagem": sereia_TOKEN,
+    "imagem": sereia,
     "palavra": "SEREIA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na SEREIA.",
     "palavra": "SEREIA",
-    "imagem": sereia_TOKEN,
+    "imagem": sereia,
     "distratores": [
       {
         "palavra": "PEIXINHO",
-        "imagem": peixinho_TOKEN
+        "imagem": peixinho
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! SEREIA!",
-    "imagem": sereia_TOKEN
+    "imagem": sereia
   },
   {
     "tipo": "olha",
     "fala": "OLHA um PEIXINHO! Pei-xi-nho! Blub blub!",
-    "imagem": peixinho_TOKEN,
+    "imagem": peixinho,
     "palavra": "PEIXINHO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no PEIXINHO.",
     "palavra": "PEIXINHO",
-    "imagem": peixinho_TOKEN,
+    "imagem": peixinho,
     "distratores": [
       {
         "palavra": "SEREIA",
-        "imagem": sereia_TOKEN
+        "imagem": sereia
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PEIXINHO!",
-    "imagem": peixinho_TOKEN
+    "imagem": peixinho
   },
   {
     "tipo": "fim",
     "fala": "SEREIA e PEIXINHO no MAR! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

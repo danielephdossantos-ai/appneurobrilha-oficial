@@ -14,58 +14,58 @@ export const aula58Constroi: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem CONSTRÓI? Cons-trói!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o STEVE CONSTRUIR! Bloco em cima de bloco!",
-    "imagem": steve_TOKEN,
+    "imagem": steve,
     "palavra": "STEVE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca em quem CONSTRÓI (STEVE).",
     "palavra": "STEVE",
-    "imagem": steve_TOKEN,
+    "imagem": steve,
     "distratores": [
       {
         "palavra": "ALDEAO",
-        "imagem": aldeao_TOKEN
+        "imagem": aldeao
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! STEVE CONSTRÓI!",
-    "imagem": steve_TOKEN
+    "imagem": steve
   },
   {
     "tipo": "olha",
     "fala": "OLHA um ALDEÃO! Al-de-ão! Ele mora na vila!",
-    "imagem": aldeao_TOKEN,
+    "imagem": aldeao,
     "palavra": "ALDEAO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ALDEÃO.",
     "palavra": "ALDEAO",
-    "imagem": aldeao_TOKEN,
+    "imagem": aldeao,
     "distratores": [
       {
         "palavra": "ALEX",
-        "imagem": alex_TOKEN
+        "imagem": alex
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! ALDEÃO!",
-    "imagem": aldeao_TOKEN
+    "imagem": aldeao
   },
   {
     "tipo": "fim",
     "fala": "STEVE CONSTRÓI a casa do ALDEÃO! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

@@ -13,58 +13,58 @@ export const aula57OlhaSteve: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip vai ao MUNDO DOS BLOCOS!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o STEVE! Ste-ve! Ele CONSTRÓI!",
-    "imagem": steve_TOKEN,
+    "imagem": steve,
     "palavra": "STEVE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no STEVE.",
     "palavra": "STEVE",
-    "imagem": steve_TOKEN,
+    "imagem": steve,
     "distratores": [
       {
         "palavra": "ALEX",
-        "imagem": alex_TOKEN
+        "imagem": alex
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! STEVE!",
-    "imagem": steve_TOKEN
+    "imagem": steve
   },
   {
     "tipo": "olha",
     "fala": "OLHA a ALEX! A-lex! Ela também CONSTRÓI!",
-    "imagem": alex_TOKEN,
+    "imagem": alex,
     "palavra": "ALEX"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na ALEX.",
     "palavra": "ALEX",
-    "imagem": alex_TOKEN,
+    "imagem": alex,
     "distratores": [
       {
         "palavra": "STEVE",
-        "imagem": steve_TOKEN
+        "imagem": steve
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! ALEX!",
-    "imagem": alex_TOKEN
+    "imagem": alex
   },
   {
     "tipo": "fim",
     "fala": "STEVE e ALEX CONSTROEM juntos! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

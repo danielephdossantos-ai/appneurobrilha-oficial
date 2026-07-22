@@ -13,58 +13,58 @@ export const aula45OlhaRobo: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip vai ao mundo dos ROBÔS! Bip bip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA um ROBÔ! Ro-bô! Bip bip bop!",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "palavra": "ROBO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ROBÔ.",
     "palavra": "ROBO",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "distratores": [
       {
         "palavra": "DRONE",
-        "imagem": drone_TOKEN
+        "imagem": drone
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! ROBÔ!",
-    "imagem": robo_TOKEN
+    "imagem": robo
   },
   {
     "tipo": "olha",
     "fala": "OLHA um DRONE! Dro-ne! Zumm!",
-    "imagem": drone_TOKEN,
+    "imagem": drone,
     "palavra": "DRONE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no DRONE.",
     "palavra": "DRONE",
-    "imagem": drone_TOKEN,
+    "imagem": drone,
     "distratores": [
       {
         "palavra": "ROBO",
-        "imagem": robo_TOKEN
+        "imagem": robo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! DRONE!",
-    "imagem": drone_TOKEN
+    "imagem": drone
   },
   {
     "tipo": "fim",
     "fala": "ROBÔ e DRONE fazem bip! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

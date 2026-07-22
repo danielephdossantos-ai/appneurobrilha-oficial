@@ -14,58 +14,58 @@ export const aula46VoaDrone: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem VOA no mundo robô?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o DRONE VOAR! Zumm!",
-    "imagem": drone_TOKEN,
+    "imagem": drone,
     "palavra": "DRONE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no DRONE que VOA.",
     "palavra": "DRONE",
-    "imagem": drone_TOKEN,
+    "imagem": drone,
     "distratores": [
       {
         "palavra": "ROBO",
-        "imagem": robo_TOKEN
+        "imagem": robo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! DRONE VOA!",
-    "imagem": drone_TOKEN
+    "imagem": drone
   },
   {
     "tipo": "olha",
     "fala": "OLHA um FOGUETE ROBÔ! Ele SOBE! Whoosh!",
-    "imagem": foguete_TOKEN,
+    "imagem": foguete,
     "palavra": "FOGUETE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no FOGUETE.",
     "palavra": "FOGUETE",
-    "imagem": foguete_TOKEN,
+    "imagem": foguete,
     "distratores": [
       {
         "palavra": "DRONE",
-        "imagem": drone_TOKEN
+        "imagem": drone
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! FOGUETE!",
-    "imagem": foguete_TOKEN
+    "imagem": foguete
   },
   {
     "tipo": "fim",
     "fala": "DRONE VOA e FOGUETE SOBE! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

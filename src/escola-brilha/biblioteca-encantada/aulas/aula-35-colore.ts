@@ -14,52 +14,52 @@ export const aula35Colore: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a gente vai COLORIR! Co-lo-re!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA os LÁPIS DE COR! Muitas cores! COLORE!",
-    "imagem": lapis_TOKEN,
+    "imagem": lapis,
     "palavra": "LAPIS"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no LÁPIS DE COR.",
     "palavra": "LAPIS",
-    "imagem": lapis_TOKEN,
+    "imagem": lapis,
     "distratores": [
       {
         "palavra": "TINTA",
-        "imagem": tinta_TOKEN
+        "imagem": tinta
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! LÁPIS DE COR!",
-    "imagem": lapis_TOKEN
+    "imagem": lapis
   },
   {
     "tipo": "pecs",
     "fala": "Toca no PINCEL.",
     "palavra": "PINCEL",
-    "imagem": pincel_TOKEN,
+    "imagem": pincel,
     "distratores": [
       {
         "palavra": "LAPIS",
-        "imagem": lapis_TOKEN
+        "imagem": lapis
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PINCEL PINTA!",
-    "imagem": pincel_TOKEN
+    "imagem": pincel
   },
   {
     "tipo": "fim",
     "fala": "Você COLORE com LÁPIS e PINTA com PINCEL! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

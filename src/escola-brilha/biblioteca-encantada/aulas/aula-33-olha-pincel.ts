@@ -13,58 +13,58 @@ export const aula33OlhaPincel: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip trouxe ARTE! Vamos PINTAR!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA um PINCEL! Pin-cel. Ele PINTA!",
-    "imagem": pincel_TOKEN,
+    "imagem": pincel,
     "palavra": "PINCEL"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no PINCEL.",
     "palavra": "PINCEL",
-    "imagem": pincel_TOKEN,
+    "imagem": pincel,
     "distratores": [
       {
         "palavra": "TINTA",
-        "imagem": tinta_TOKEN
+        "imagem": tinta
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PINCEL!",
-    "imagem": pincel_TOKEN
+    "imagem": pincel
   },
   {
     "tipo": "olha",
     "fala": "OLHA a TINTA! Tin-ta. Colorida!",
-    "imagem": tinta_TOKEN,
+    "imagem": tinta,
     "palavra": "TINTA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na TINTA.",
     "palavra": "TINTA",
-    "imagem": tinta_TOKEN,
+    "imagem": tinta,
     "distratores": [
       {
         "palavra": "PINCEL",
-        "imagem": pincel_TOKEN
+        "imagem": pincel
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! TINTA!",
-    "imagem": tinta_TOKEN
+    "imagem": tinta
   },
   {
     "tipo": "fim",
     "fala": "Você conheceu PINCEL e TINTA! Beijo da Pip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

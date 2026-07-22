@@ -14,58 +14,58 @@ export const aula54Danca: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem DANÇA no palco?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA a BAILARINA DANÇAR! Dan-ça!",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "palavra": "BAILARINA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca em quem DANÇA (BAILARINA).",
     "palavra": "BAILARINA",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "distratores": [
       {
         "palavra": "SAPATILHA",
-        "imagem": sapatilha_TOKEN
+        "imagem": sapatilha
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! BAILARINA DANÇA!",
-    "imagem": bailarina_TOKEN
+    "imagem": bailarina
   },
   {
     "tipo": "olha",
     "fala": "OLHA um CISNE! Cis-ne! Ele também DANÇA no lago!",
-    "imagem": cisne_TOKEN,
+    "imagem": cisne,
     "palavra": "CISNE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no CISNE.",
     "palavra": "CISNE",
-    "imagem": cisne_TOKEN,
+    "imagem": cisne,
     "distratores": [
       {
         "palavra": "BAILARINA",
-        "imagem": bailarina_TOKEN
+        "imagem": bailarina
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! CISNE!",
-    "imagem": cisne_TOKEN
+    "imagem": cisne
   },
   {
     "tipo": "fim",
     "fala": "BAILARINA e CISNE DANÇAM! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

@@ -17,97 +17,97 @@ export const aula60GrandeFesta: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje é FESTA! 60 AULAS! Você é INCRÍVEL!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PRINCESA.",
     "palavra": "PRINCESA",
-    "imagem": princesa_TOKEN,
+    "imagem": princesa,
     "distratores": [
       {
         "palavra": "HEROI",
-        "imagem": heroi_TOKEN
+        "imagem": heroi
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PRINCESA!",
-    "imagem": princesa_TOKEN
+    "imagem": princesa
   },
   {
     "tipo": "pecs",
     "fala": "Toca no HERÓI.",
     "palavra": "HEROI",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "distratores": [
       {
         "palavra": "ROBO",
-        "imagem": robo_TOKEN
+        "imagem": robo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! HERÓI!",
-    "imagem": heroi_TOKEN
+    "imagem": heroi
   },
   {
     "tipo": "pecs",
     "fala": "Toca na SEREIA.",
     "palavra": "SEREIA",
-    "imagem": sereia_TOKEN,
+    "imagem": sereia,
     "distratores": [
       {
         "palavra": "BAILARINA",
-        "imagem": bailarina_TOKEN
+        "imagem": bailarina
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! SEREIA!",
-    "imagem": sereia_TOKEN
+    "imagem": sereia
   },
   {
     "tipo": "pecs",
     "fala": "Toca na BAILARINA.",
     "palavra": "BAILARINA",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "distratores": [
       {
         "palavra": "STEVE",
-        "imagem": steve_TOKEN
+        "imagem": steve
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! BAILARINA!",
-    "imagem": bailarina_TOKEN
+    "imagem": bailarina
   },
   {
     "tipo": "pecs",
     "fala": "Toca no ROBÔ.",
     "palavra": "ROBO",
-    "imagem": robo_TOKEN,
+    "imagem": robo,
     "distratores": [
       {
         "palavra": "STEVE",
-        "imagem": steve_TOKEN
+        "imagem": steve
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! ROBÔ! Bip bip!",
-    "imagem": robo_TOKEN
+    "imagem": robo
   },
   {
     "tipo": "fim",
     "fala": "PARABÉNS! Você fez 60 AULAS com a Pip! Você é um LEITOR e um AMIGO! Beijo enorme!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

@@ -16,63 +16,63 @@ export const aula52RevisaoMar: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa do FUNDO DO MAR!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca na SEREIA.",
     "palavra": "SEREIA",
-    "imagem": sereia_TOKEN,
+    "imagem": sereia,
     "distratores": [
       {
         "palavra": "CAVALOMAR",
-        "imagem": cavalomar_TOKEN
+        "imagem": cavalomar
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! SEREIA!",
-    "imagem": sereia_TOKEN
+    "imagem": sereia
   },
   {
     "tipo": "pecs",
     "fala": "Toca no que NADA (PEIXINHO).",
     "palavra": "PEIXINHO",
-    "imagem": peixinho_TOKEN,
+    "imagem": peixinho,
     "distratores": [
       {
         "palavra": "CONCHA",
-        "imagem": concha_TOKEN
+        "imagem": concha
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PEIXINHO NADA!",
-    "imagem": peixinho_TOKEN
+    "imagem": peixinho
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PÉROLA.",
     "palavra": "PEROLA",
-    "imagem": perola_TOKEN,
+    "imagem": perola,
     "distratores": [
       {
         "palavra": "SEREIA",
-        "imagem": sereia_TOKEN
+        "imagem": sereia
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PÉROLA!",
-    "imagem": perola_TOKEN
+    "imagem": perola
   },
   {
     "tipo": "fim",
     "fala": "Você conhece o MAR! Beijo da Pip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

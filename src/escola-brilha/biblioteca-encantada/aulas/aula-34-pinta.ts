@@ -14,58 +14,58 @@ export const aula34Pinta: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a gente vai PINTAR! Pin-ta!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA um CAVALETE! É onde a gente PINTA!",
-    "imagem": cavalete_TOKEN,
+    "imagem": cavalete,
     "palavra": "CAVALETE"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no CAVALETE.",
     "palavra": "CAVALETE",
-    "imagem": cavalete_TOKEN,
+    "imagem": cavalete,
     "distratores": [
       {
         "palavra": "PINCEL",
-        "imagem": pincel_TOKEN
+        "imagem": pincel
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CAVALETE!",
-    "imagem": cavalete_TOKEN
+    "imagem": cavalete
   },
   {
     "tipo": "olha",
     "fala": "OLHA a PALETA! Cheia de cores pra PINTAR!",
-    "imagem": paleta_TOKEN,
+    "imagem": paleta,
     "palavra": "PALETA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na PALETA.",
     "palavra": "PALETA",
-    "imagem": paleta_TOKEN,
+    "imagem": paleta,
     "distratores": [
       {
         "palavra": "CAVALETE",
-        "imagem": cavalete_TOKEN
+        "imagem": cavalete
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! PALETA!",
-    "imagem": paleta_TOKEN
+    "imagem": paleta
   },
   {
     "tipo": "fim",
     "fala": "A Pip PINTA no CAVALETE com a PALETA! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

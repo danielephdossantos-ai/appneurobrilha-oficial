@@ -14,58 +14,58 @@ export const aula50Nada: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem NADA no mar?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA o PEIXINHO NADAR! Na-da!",
-    "imagem": peixinho_TOKEN,
+    "imagem": peixinho,
     "palavra": "PEIXINHO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no PEIXINHO que NADA.",
     "palavra": "PEIXINHO",
-    "imagem": peixinho_TOKEN,
+    "imagem": peixinho,
     "distratores": [
       {
         "palavra": "SEREIA",
-        "imagem": sereia_TOKEN
+        "imagem": sereia
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PEIXINHO NADA!",
-    "imagem": peixinho_TOKEN
+    "imagem": peixinho
   },
   {
     "tipo": "olha",
     "fala": "OLHA um CAVALO MARINHO! Ca-va-lo ma-ri-nho!",
-    "imagem": cavalomar_TOKEN,
+    "imagem": cavalomar,
     "palavra": "CAVALOMAR"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no CAVALO MARINHO.",
     "palavra": "CAVALOMAR",
-    "imagem": cavalomar_TOKEN,
+    "imagem": cavalomar,
     "distratores": [
       {
         "palavra": "PEIXINHO",
-        "imagem": peixinho_TOKEN
+        "imagem": peixinho
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! CAVALO MARINHO!",
-    "imagem": cavalomar_TOKEN
+    "imagem": cavalomar
   },
   {
     "tipo": "fim",
     "fala": "Todo mundo NADA no MAR! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

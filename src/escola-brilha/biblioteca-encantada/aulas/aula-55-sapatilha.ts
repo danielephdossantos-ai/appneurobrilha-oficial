@@ -14,58 +14,58 @@ export const aula55Sapatilha: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! O que a bailarina usa nos pés?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA a SAPATILHA! Sa-pa-ti-lha! Rosinha!",
-    "imagem": sapatilha_TOKEN,
+    "imagem": sapatilha,
     "palavra": "SAPATILHA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na SAPATILHA.",
     "palavra": "SAPATILHA",
-    "imagem": sapatilha_TOKEN,
+    "imagem": sapatilha,
     "distratores": [
       {
         "palavra": "BAILARINA",
-        "imagem": bailarina_TOKEN
+        "imagem": bailarina
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! SAPATILHA!",
-    "imagem": sapatilha_TOKEN
+    "imagem": sapatilha
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma CAIXINHA DE MÚSICA! Plim plim plim!",
-    "imagem": caixinha_TOKEN,
+    "imagem": caixinha,
     "palavra": "CAIXINHA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na CAIXINHA DE MÚSICA.",
     "palavra": "CAIXINHA",
-    "imagem": caixinha_TOKEN,
+    "imagem": caixinha,
     "distratores": [
       {
         "palavra": "SAPATILHA",
-        "imagem": sapatilha_TOKEN
+        "imagem": sapatilha
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! CAIXINHA! Plim plim!",
-    "imagem": caixinha_TOKEN
+    "imagem": caixinha
   },
   {
     "tipo": "fim",
     "fala": "SAPATILHA nos pés e CAIXINHA tocando! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

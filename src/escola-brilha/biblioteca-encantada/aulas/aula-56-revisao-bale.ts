@@ -16,63 +16,63 @@ export const aula56RevisaoBale: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa do BALÉ!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca na BAILARINA.",
     "palavra": "BAILARINA",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "distratores": [
       {
         "palavra": "CISNE",
-        "imagem": cisne_TOKEN
+        "imagem": cisne
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! BAILARINA!",
-    "imagem": bailarina_TOKEN
+    "imagem": bailarina
   },
   {
     "tipo": "pecs",
     "fala": "Toca no TUTU.",
     "palavra": "TUTU",
-    "imagem": tutu_TOKEN,
+    "imagem": tutu,
     "distratores": [
       {
         "palavra": "SAPATILHA",
-        "imagem": sapatilha_TOKEN
+        "imagem": sapatilha
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! TUTU!",
-    "imagem": tutu_TOKEN
+    "imagem": tutu
   },
   {
     "tipo": "pecs",
     "fala": "Toca na CAIXINHA DE MÚSICA.",
     "palavra": "CAIXINHA",
-    "imagem": caixinha_TOKEN,
+    "imagem": caixinha,
     "distratores": [
       {
         "palavra": "CISNE",
-        "imagem": cisne_TOKEN
+        "imagem": cisne
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CAIXINHA!",
-    "imagem": caixinha_TOKEN
+    "imagem": caixinha
   },
   {
     "tipo": "fim",
     "fala": "Você conhece o BALÉ! DANÇA com a Pip! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

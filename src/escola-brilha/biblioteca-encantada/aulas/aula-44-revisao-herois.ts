@@ -16,63 +16,63 @@ export const aula44RevisaoHerois: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa dos HERÓIS!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca no HERÓI.",
     "palavra": "HEROI",
-    "imagem": heroi_TOKEN,
+    "imagem": heroi,
     "distratores": [
       {
         "palavra": "ROBO",
-        "imagem": robo_TOKEN
+        "imagem": robo
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! HERÓI!",
-    "imagem": heroi_TOKEN
+    "imagem": heroi
   },
   {
     "tipo": "pecs",
     "fala": "Toca na HEROÍNA.",
     "palavra": "HEROINA",
-    "imagem": heroina_TOKEN,
+    "imagem": heroina,
     "distratores": [
       {
         "palavra": "CAPITA",
-        "imagem": capita_TOKEN
+        "imagem": capita
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! HEROÍNA!",
-    "imagem": heroina_TOKEN
+    "imagem": heroina
   },
   {
     "tipo": "pecs",
     "fala": "Toca em quem SALVA a cidade (CAPITÃ).",
     "palavra": "CAPITA",
-    "imagem": capita_TOKEN,
+    "imagem": capita,
     "distratores": [
       {
         "palavra": "JUSTICEIRO",
-        "imagem": justiceiro_TOKEN
+        "imagem": justiceiro
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! CAPITÃ SALVA!",
-    "imagem": capita_TOKEN
+    "imagem": capita
   },
   {
     "tipo": "fim",
     "fala": "Você conhece HERÓIS! Beijo da Pip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

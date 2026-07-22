@@ -13,58 +13,58 @@ export const aula53OlhaBailarina: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Hoje a Pip vai ao BALÉ! Um dois três!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma BAILARINA! Bai-la-ri-na!",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "palavra": "BAILARINA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na BAILARINA.",
     "palavra": "BAILARINA",
-    "imagem": bailarina_TOKEN,
+    "imagem": bailarina,
     "distratores": [
       {
         "palavra": "TUTU",
-        "imagem": tutu_TOKEN
+        "imagem": tutu
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! BAILARINA!",
-    "imagem": bailarina_TOKEN
+    "imagem": bailarina
   },
   {
     "tipo": "olha",
     "fala": "OLHA um TUTU! Tu-tu! Rodadinho!",
-    "imagem": tutu_TOKEN,
+    "imagem": tutu,
     "palavra": "TUTU"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no TUTU.",
     "palavra": "TUTU",
-    "imagem": tutu_TOKEN,
+    "imagem": tutu,
     "distratores": [
       {
         "palavra": "BAILARINA",
-        "imagem": bailarina_TOKEN
+        "imagem": bailarina
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! TUTU!",
-    "imagem": tutu_TOKEN
+    "imagem": tutu
   },
   {
     "tipo": "fim",
     "fala": "A BAILARINA usa TUTU! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

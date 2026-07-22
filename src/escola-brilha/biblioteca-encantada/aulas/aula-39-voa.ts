@@ -13,58 +13,58 @@ export const aula39Voa: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Quem VOA no reino?",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "olha",
     "fala": "OLHA uma FADA! Fa-da! Ela VOA! Fiu!",
-    "imagem": fada_TOKEN,
+    "imagem": fada,
     "palavra": "FADA"
   },
   {
     "tipo": "pecs",
     "fala": "Toca na FADA que VOA.",
     "palavra": "FADA",
-    "imagem": fada_TOKEN,
+    "imagem": fada,
     "distratores": [
       {
         "palavra": "UNICORNIO",
-        "imagem": unicornio_TOKEN
+        "imagem": unicornio
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! FADA VOA!",
-    "imagem": fada_TOKEN
+    "imagem": fada
   },
   {
     "tipo": "olha",
     "fala": "OLHA um UNICÓRNIO! U-ni-cór-nio!",
-    "imagem": unicornio_TOKEN,
+    "imagem": unicornio,
     "palavra": "UNICORNIO"
   },
   {
     "tipo": "pecs",
     "fala": "Toca no UNICÓRNIO.",
     "palavra": "UNICORNIO",
-    "imagem": unicornio_TOKEN,
+    "imagem": unicornio,
     "distratores": [
       {
         "palavra": "FADA",
-        "imagem": fada_TOKEN
+        "imagem": fada
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! UNICÓRNIO!",
-    "imagem": unicornio_TOKEN
+    "imagem": unicornio
   },
   {
     "tipo": "fim",
     "fala": "A FADA VOA e o UNICÓRNIO galopa! Beijo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };

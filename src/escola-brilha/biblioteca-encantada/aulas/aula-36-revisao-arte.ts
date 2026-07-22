@@ -16,63 +16,63 @@ export const aula36RevisaoArte: AulaBE = {
   {
     "tipo": "abertura",
     "fala": "Oi! Festa da ARTE! Vamos lembrar tudo!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   },
   {
     "tipo": "pecs",
     "fala": "Toca no PINCEL.",
     "palavra": "PINCEL",
-    "imagem": pincel_TOKEN,
+    "imagem": pincel,
     "distratores": [
       {
         "palavra": "TINTA",
-        "imagem": tinta_TOKEN
+        "imagem": tinta
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! PINCEL!",
-    "imagem": pincel_TOKEN
+    "imagem": pincel
   },
   {
     "tipo": "pecs",
     "fala": "Toca no CAVALETE.",
     "palavra": "CAVALETE",
-    "imagem": cavalete_TOKEN,
+    "imagem": cavalete,
     "distratores": [
       {
         "palavra": "PALETA",
-        "imagem": paleta_TOKEN
+        "imagem": paleta
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Perfeito! CAVALETE!",
-    "imagem": cavalete_TOKEN
+    "imagem": cavalete
   },
   {
     "tipo": "pecs",
     "fala": "Toca no LÁPIS DE COR.",
     "palavra": "LAPIS",
-    "imagem": lapis_TOKEN,
+    "imagem": lapis,
     "distratores": [
       {
         "palavra": "PINCEL",
-        "imagem": pincel_TOKEN
+        "imagem": pincel
       }
     ]
   },
   {
     "tipo": "reforco",
     "fala": "Isso! LÁPIS!",
-    "imagem": lapis_TOKEN
+    "imagem": lapis
   },
   {
     "tipo": "fim",
     "fala": "Você é um ARTISTA! PINCEL, TINTA, CAVALETE, PALETA e LÁPIS! Beijo da Pip!",
-    "imagem": pipVet_TOKEN
+    "imagem": pipVet
   }
 ],
 };
