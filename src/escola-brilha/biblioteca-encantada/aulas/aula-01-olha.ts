@@ -5,7 +5,7 @@
  * Nota: usamos cavalo e vaquinha do módulo hiperfocos/fazendinha pra ter certeza
  * de que os arquivos existem no build.
  */
-import type { AulaBE } from "./types";
+import type { AulaBE } from "../types";
 import cavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
 import vaquinha from "@/assets/hiperfocos/fazendinha/vaquinha.png";
 import galinha from "@/assets/hiperfocos/fazendinha/galinha.png";
