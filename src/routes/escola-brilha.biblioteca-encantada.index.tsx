@@ -55,55 +55,55 @@ function BibliotecaEncantadaIndex() {
           </div>
         </div>
 
-        <div className="mt-6">
-          <h3 className="text-xs font-black uppercase tracking-widest text-purple-200 mb-3">
-            Aulas
+        <div className="mt-8">
+          <h3 className="text-xs font-black uppercase tracking-widest text-purple-200 mb-6 text-center">
+            Trilha das Aulas
           </h3>
-          <ul className="space-y-3">
-            {trilha.aulas.map((aula, i) => (
-              <li key={aula.slug}>
-                <Link
-                  to="/escola-brilha/biblioteca-encantada/$aula"
-                  params={{ aula: aula.slug }}
-                  className="flex items-center gap-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 p-4 transition-all"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-400 flex items-center justify-center font-black text-lg shadow-lg">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-black text-lg leading-tight">
-                      {aula.titulo}
+          <div className="space-y-6 pb-12">
+            {trilha.aulas.map((aula, i) => {
+              const align = i % 2 === 0 ? "justify-start" : "justify-end";
+              const eProxima = i === 0;
+              return (
+                <div key={aula.slug} className={`flex ${align}`}>
+                  <Link
+                    to="/escola-brilha/biblioteca-encantada/$aula"
+                    params={{ aula: aula.slug }}
+                    className={`group relative w-40 h-40 rounded-full grid place-items-center transition bg-gradient-to-br from-amber-300 to-amber-500 text-[#2A1A4A] shadow-xl hover:scale-105 ${
+                      eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""
+                    }`}
+                  >
+                    <div className="text-center px-3">
+                      <div className="text-4xl">📖</div>
+                      <div className="text-xs font-black mt-1 leading-tight">
+                        {aula.titulo}
+                      </div>
                     </div>
-                    <div className="text-xs text-white/70 truncate">
-                      {aula.palavrasAlvo.join(" · ")}
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#2A1A4A] text-[10px] font-black px-2 py-0.5 rounded-full shadow">
+                      {String(i + 1).padStart(2, "0")}
                     </div>
-                  </div>
-                  <Play className="h-5 w-5 text-purple-200" />
-                </Link>
-              </li>
-            ))}
+                  </Link>
+                </div>
+              );
+            })}
 
-            {/* Placeholders visuais das próximas aulas (bloqueadas até a construção) */}
-            {Array.from({ length: 4 }).map((_, i) => (
-              <li
-                key={`lock-${i}`}
-                className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 p-4 opacity-60"
-              >
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                  <Lock className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <div className="font-black text-sm text-white/70">
-                    Aula {String(trilha.aulas.length + i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="text-xs text-white/50">
-                    Em construção
+            {Array.from({ length: 4 }).map((_, i) => {
+              const idx = trilha.aulas.length + i;
+              const align = idx % 2 === 0 ? "justify-start" : "justify-end";
+              return (
+                <div key={`lock-${i}`} className={`flex ${align}`}>
+                  <div className="relative w-40 h-40 rounded-full grid place-items-center bg-white/10 text-white/40 cursor-not-allowed">
+                    <div className="text-center px-3">
+                      <div className="text-4xl">🔒</div>
+                      <div className="text-[11px] font-black mt-1">Em breve</div>
+                    </div>
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white/20 text-white/60 text-[10px] font-black px-2 py-0.5 rounded-full">
+                      {String(idx + 1).padStart(2, "0")}
+                    </div>
                   </div>
                 </div>
-                <BookOpen className="h-4 w-4 text-white/40" />
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>
