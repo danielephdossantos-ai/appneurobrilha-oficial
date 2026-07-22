@@ -326,6 +326,33 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
+          {/* ── TRILHA DA LEITURA · programa clínico dislexia ───── */}
+          <Link
+            to="/escola-brilha/dislexia"
+            className="group block rounded-3xl overflow-hidden border-2 border-orange-200 dark:border-orange-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-purple-600 via-fuchsia-500 to-orange-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🎧
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Programa Clínico · Dislexia
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Trilha da Leitura · Orton-Gillingham
+                </div>
+                <div className="text-xs text-white/85">
+                  Multissensorial · 8 fases · começa pelo ouvido
+                </div>
+              </div>
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+
 
 
           {GRUPOS.map((g) => {
