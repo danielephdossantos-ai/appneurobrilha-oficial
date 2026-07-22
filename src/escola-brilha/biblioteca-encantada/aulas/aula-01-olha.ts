@@ -6,9 +6,9 @@
  * de que os arquivos existem no build.
  */
 import type { AulaBE } from "../types";
-import cavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
-import vaquinha from "@/assets/hiperfocos/fazendinha/vaquinha.png";
-import galinha from "@/assets/hiperfocos/fazendinha/galinha.png";
+import { url as cavalo } from "@/assets/hiperfocos/fazendinha/cavalo.png.asset.json";
+import { url as vaquinha } from "@/assets/hiperfocos/fazendinha/vaquinha.png.asset.json";
+import { url as galinha } from "@/assets/hiperfocos/fazendinha/galinha.png.asset.json";
 import { url as pipVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
 
 export const aula01Olha: AulaBE = {
