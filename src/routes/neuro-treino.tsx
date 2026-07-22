@@ -11,7 +11,8 @@ import {
   BookOpen,
   Sparkles,
   Zap,
-  
+  MessageCircle,
+  ArrowRight,
 } from "lucide-react";
 
 import { useAppState } from "@/core/store";
@@ -327,6 +328,44 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
+          {/* ── COMUNICAÇÃO FUNCIONAL · destaque terapêutico ──────── */}
+          <Link
+            to="/escola-brilha/biblioteca-encantada"
+            className="group relative block rounded-3xl overflow-hidden border-2 border-fuchsia-200 dark:border-fuchsia-800 shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            <div className="bg-gradient-to-br from-fuchsia-500 via-purple-500 to-indigo-500 p-5 relative">
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 80% 20%, #fff 0%, transparent 40%), radial-gradient(circle at 10% 90%, #fff 0%, transparent 40%)",
+                }}
+              />
+              <div className="relative z-10 flex items-center gap-4">
+                <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 grid place-items-center shrink-0">
+                  <MessageCircle className="h-8 w-8 text-white" strokeWidth={2.5} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                      Programa Clínico
+                    </span>
+                    <span className="text-[10px] font-bold text-white bg-white/20 px-2 py-0.5 rounded-full">
+                      PECS · TEACCH · Denver
+                    </span>
+                  </div>
+                  <h2 className="font-black text-white text-lg leading-tight">
+                    Comunicação Funcional
+                  </h2>
+                  <div className="text-xs text-white/90 mt-0.5">
+                    60 aulas estruturadas · Biblioteca Encantada
+                  </div>
+                </div>
+                <ArrowRight className="h-6 w-6 text-white group-hover:translate-x-1 transition-transform shrink-0" />
+              </div>
+            </div>
+          </Link>
+
           {GRUPOS.map((g) => {
 
             const cfg = GROUP_CONFIG[g.nome];
