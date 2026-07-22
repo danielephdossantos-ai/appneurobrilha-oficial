@@ -295,6 +295,69 @@ function MomentoRender({
       );
     }
 
+    case "cacaAoSom": {
+      const corretos = m.opcoes.filter((o) => o.correta).length;
+      const [achados, setAchados] = useState<Set<string>>(new Set());
+      const [errados, setErrados] = useState<Set<string>>(new Set());
+      const [msg, setMsg] = useState<string | null>(null);
+      const tocar = (o: (typeof m.opcoes)[number]) => {
+        speak(o.nome);
+        if (o.correta) {
+          if (achados.has(o.nome)) return;
+          const nv = new Set(achados);
+          nv.add(o.nome);
+          setAchados(nv);
+          setMsg(null);
+          if (nv.size === corretos) {
+            setTimeout(() => {
+              speak(m.elogio);
+              setTimeout(marcarOk, 1200);
+            }, 300);
+          }
+        } else {
+          const nv = new Set(errados);
+          nv.add(o.nome);
+          setErrados(nv);
+          setMsg(m.feedbackErro);
+          speak(m.feedbackErro);
+        }
+      };
+      return (
+        <CardScreen cor={cor}>
+          <TituloMomento n={idx + 1} texto={`Caça ao som ${m.somAlvo}`} cor={cor} />
+          <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
+          <p className="mt-3 text-center text-sm text-slate-500">
+            Ache <b className="text-purple-700">{corretos}</b> — já achou{" "}
+            <b className="text-green-600">{achados.size}</b>
+          </p>
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {m.opcoes.map((o) => {
+              const ok = achados.has(o.nome);
+              const err = errados.has(o.nome) && !o.correta;
+              return (
+                <button
+                  key={o.nome}
+                  onClick={() => tocar(o)}
+                  className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
+                    ok
+                      ? "border-green-500 bg-green-50 scale-105"
+                      : err
+                      ? "border-red-300 bg-red-50 opacity-70"
+                      : "border-purple-200 bg-white"
+                  }`}
+                >
+                  <ImageFrame src={o.imagemUrl} alt={o.nome} size="md" />
+                  {ok && <div className="text-center text-2xl mt-1">✓</div>}
+                </button>
+              );
+            })}
+          </div>
+          {msg && <p className="mt-4 text-center font-semibold text-slate-700">{msg}</p>}
+        </CardScreen>
+      );
+    }
+
+
     case "ritmoCorpo": {
       const [count, setCount] = useState(0);
       const target = m.silabas;
