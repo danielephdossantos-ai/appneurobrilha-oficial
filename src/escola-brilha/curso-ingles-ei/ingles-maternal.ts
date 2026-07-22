@@ -686,9 +686,9 @@ const nivel3Maternal: NivelIng = {
   slug: "n3",
   numero: 3,
   titulo: "Nível 3 · I Can Say",
-  subtitulo: "Perguntas e respostas curtas — em breve",
-  destravado: false,
-  unidades: [],
+  subtitulo: "Perguntas e respostas curtas — 'What's this? It's a…'",
+  destravado: true,
+  unidades: [n3Maternal_semana1],
 };
 
 const nivel4Maternal: NivelIng = {
