@@ -326,15 +326,15 @@ export const dlx18: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal também mora no MEIO da palavra! Escuta: P-AAA-TO. O AAA tá no meio.",
+      fala: "A vogal também mora no meio da palavra! Escuta: pato. O aaa tá no meio.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "P-A-TO. A vogal do meio é AAA.", palavra: "PATO", enfase: "A" },
-    { tipo: "escuta", fala: "S-O-L. A vogal do meio é OOO.", palavra: "SOL", enfase: "O" },
-    { tipo: "escuta", fala: "L-U-A. A vogal é UUU.", palavra: "LUA", imagem: lua, enfase: "U" },
+    { tipo: "escuta", fala: "pato. A vogal do meio é aaa.", palavra: "PATO", enfase: "A" },
+    { tipo: "escuta", fala: "sol. A vogal do meio é ooo.", palavra: "SOL", enfase: "O" },
+    { tipo: "escuta", fala: "lua. A vogal é uuu.", palavra: "LUA", imagem: lua, enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Que vogal tem no meio de PAPO? P-?-PO.",
+      fala: "Que vogal tem no meio de papo?",
       opcoes: [
         { palavra: "A", correta: true },
         { palavra: "E", correta: false },
@@ -343,7 +343,7 @@ export const dlx18: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E no meio de SINO? S-?-NO.",
+      fala: "E no meio de sino?",
       opcoes: [
         { palavra: "I", correta: true },
         { palavra: "O", correta: false },
