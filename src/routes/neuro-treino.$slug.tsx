@@ -369,7 +369,7 @@ function NeuroAtividade() {
 
       <div className="mt-4 flex justify-end">
         <button
-          onClick={() => setIndex((i) => i + 1)}
+          onClick={onSkip}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-muted font-bold hover:bg-muted/70"
         >
           Pular <ChevronRight size={16} />
