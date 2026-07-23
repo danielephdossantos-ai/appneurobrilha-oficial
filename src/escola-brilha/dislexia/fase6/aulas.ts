@@ -21,7 +21,7 @@ export const dlx51: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Segredo novo! Quando o C e o H se juntam, eles viram UM som: SHHH. É o dígrafo CH. Boca em bico e ar sai: SHHH.",
+      fala: "Segredo novo! Quando o c e o h se juntam, eles viram um som só: chê. É o dígrafo ch. Boca em bico e o ar sai: chê.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "cha-ve. Escuta o SHHH no começo.", palavra: "CHAVE", enfase: "CH" },
@@ -73,7 +73,7 @@ export const dlx52: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "L e H juntinhos fazem um som molhadinho: LHHH. Encosta a língua no céu da boca e solta o ar dos lados. LHHH!",
+      fala: "L e h juntinhos fazem um som molhadinho: lhê. Encosta a língua no céu da boca e solta o ar dos lados. Lhê!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "pa-lha-ço. Escuta o LH no meio.", palavra: "PALHAÇO", enfase: "LH" },
@@ -126,7 +126,7 @@ export const dlx53: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "N e H juntos fazem som pelo NARIZ: NHHH. Igual quando você diz 'não'. Sente vibrar no nariz!",
+      fala: "N e h juntos fazem som pelo nariz: nhê. Igual quando você diz 'não'. Sente vibrar no nariz!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "ga-li-nha. NH no fim.", palavra: "GALINHA", enfase: "NH" },
@@ -178,7 +178,7 @@ export const dlx54: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Quando o R aparece SOZINHO entre duas vogais, o som é fraquinho (CARO). Mas dois R juntinhos = SOM FORTE de motor: CARRRRO! RRRR!",
+      fala: "Quando o r aparece sozinho entre duas vogais, o som é fraquinho, tipo caro. Mas dois erres juntinhos dão som forte de motor: cárro! Rrr!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "ca-rro. R forte no meio.", palavra: "CARRO", enfase: "RR" },
@@ -230,7 +230,7 @@ export const dlx55: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "S sozinho entre vogais fica com som de Z (CASA = /caza/). Mas dois S juntos ficam SEMPRE com som de S de cobra: SSSS!",
+      fala: "S sozinho entre vogais fica com som de z, tipo casa que soa caza. Mas dois esses juntos ficam sempre com som de s de cobra: sss!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "o-sso. Ossinho.", palavra: "OSSO", enfase: "SS" },
@@ -258,7 +258,7 @@ export const dlx55: AulaDlx = {
         { palavra: "CASA", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "SS = SSSS de cobra. S sozinho no meio de vogais = Z de zumbi.", imagem: pipVet },
+    { tipo: "reforco", fala: "Dois esses dão sss de cobra. S sozinho no meio de vogais dá z de zumbi.", imagem: pipVet },
     { tipo: "fim", fala: "Dígrafo SS dominado! 🌟", imagem: pipVet },
   ],
 };

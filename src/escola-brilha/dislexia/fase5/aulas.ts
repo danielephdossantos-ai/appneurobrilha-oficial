@@ -28,7 +28,7 @@ export const dlx41: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora a sílaba GANHA um fecho! Depois da vogal vem uma consoante. Presta atenção: S + O + L… SOL! A boca fecha no L no fim.",
+      fala: "Agora a sílaba ganha um fecho! Depois da vogal vem uma consoante. Presta atenção: s... ó... l... Sol! A boca fecha no l no fim.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "s, o, l… SOL! O L fecha no fim.", palavra: "SOL", enfase: "L" },
@@ -83,7 +83,7 @@ export const dlx42: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora o fecho é o R! Ele raspa na garganta bem levinho no fim: MAAAR. A boca abre e o R fecha.",
+      fala: "Agora o fecho é o r! Ele raspa na garganta bem levinho no fim: Máá... r. A boca abre e o r fecha.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "m, a, r… MAR! Águas azuis.", palavra: "MAR", enfase: "R" },
@@ -137,7 +137,7 @@ export const dlx43: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Segredo: o Z no fim da palavra faz som de S bem levinho: LUZZZ… LUS. Ouve com atenção!",
+      fala: "Segredo: o z no fim da palavra faz som de s bem levinho: Luz soa como lus. Ouve com atenção!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "l, u, z… LUZ! Que clareia tudo.", palavra: "LUZ", enfase: "Z" },
@@ -183,7 +183,7 @@ export const dlx44: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Truque novo! O M no fim faz o som sair pelo NARIZ. Aperta o nariz e tenta: BOOOM. Não sai! Solta e sai. É nasal!",
+      fala: "Truque novo! O m no fim faz o som sair pelo nariz. Aperta o nariz e tenta: Bóóó... m. Não sai! Solta e sai. É nasal!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "s, i, m… SIM! Palavra do sim e do não.", palavra: "SIM", enfase: "M" },

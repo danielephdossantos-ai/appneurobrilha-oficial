@@ -247,7 +247,7 @@ export const dlx66: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Regra importante: Q sempre vem com U. E antes de E ou I, o U fica CALADO. QUE se lê KE. QUI se lê KI.",
+      fala: "Regra importante: o q sempre vem com u. E antes de e ou i, o u fica calado. Que se lê quê. Qui se lê qui.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "QUEIJO. Começa com KE, o U não fala.", palavra: "QUEIJO", enfase: "QUE" },
@@ -284,7 +284,7 @@ export const dlx67: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Igual o Q! Antes de E ou I, o G leva um U que fica CALADO pra manter o som duro. GUE lê GHE. GUI lê GHI.",
+      fala: "Igual o q! Antes de e ou i, o g leva um u que fica calado pra manter o som duro. Gue soa como guê. Gui soa como gui.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "guer-ra. GUE com som duro de G.", palavra: "GUERRA", enfase: "GUE" },
