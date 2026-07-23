@@ -33,15 +33,15 @@ export const dlx11: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Hoje a estrela é a vogal A. Abre a boca bem grande e faz: AAAAA. Igual quando o médico olha sua garganta.",
+      fala: "Hoje a estrela é a vogal a. Abre a boca bem grande e faz: aaa. Igual quando o médico olha sua garganta.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra A. AAAAA.", palavra: "A", enfase: "A" },
-    { tipo: "escuta", fala: "AAAVIÃO. A-VI-ÃO. Começa com AAA.", palavra: "AVIÃO", enfase: "A" },
-    { tipo: "escuta", fala: "AAABELHA. A-BE-LHA. Também AAA.", palavra: "ABELHA", enfase: "A" },
+    { tipo: "escuta", fala: "Essa é a letra a. aaa.", palavra: "A", enfase: "A" },
+    { tipo: "escuta", fala: "Aaa... avião. Começa com aaa.", palavra: "AVIÃO", enfase: "A" },
+    { tipo: "escuta", fala: "Aaa... abelha. Também aaa.", palavra: "ABELHA", enfase: "A" },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ABACAXI", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -49,15 +49,15 @@ export const dlx11: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com AAA?",
+      fala: "E qual dessas começa com aaa?",
       opcoes: [
         { palavra: "ANEL", correta: true },
         { palavra: "SOL", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "Isso! A boca abre bem grande no A.", imagem: pipVet },
-    { tipo: "fim", fala: "A de AURORA, A de AMIGO. Você achou o A!", imagem: pipVet },
+    { tipo: "reforco", fala: "Isso! A boca abre bem grande no a.", imagem: pipVet },
+    { tipo: "fim", fala: "a de aurora, a de amigo. Você achou o a!", imagem: pipVet },
   ],
 };
 
