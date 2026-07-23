@@ -66,9 +66,52 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     return somVogalElongada[upper] ?? consoanteSegura[upper] ?? ch.toLowerCase();
   });
 
-  // O Web Speech costuma se perder quando uma palavra aparece silabada
-  // com espaços/hífens (ex.: BOR-BO-LE-TA ou bo bo le ta). Para a voz do
-  // professor, juntamos palavras de treino conhecidas sem alterar o visual.
+  // ─────────────────────────────────────────────────────────────
+  // Hifenação silábica em MAIÚSCULO: "BRA-ÇO", "PA-LHA-ÇO", "GRAN-DE",
+  // "P-A-TO", "S-O-L". Vozes nativas tratam o hífen como pausa e leem cada
+  // pedaço como letra ("BRA cê-cedilha ó"). Para a fala do professor,
+  // colapsamos a palavra hifenada num token único em minúsculo — o visual
+  // (silabas: […]) mantém a segmentação sem depender disso.
+  // Aceita 1–6 letras por pedaço para cobrir sílabas simples até encontros
+  // consonantais complexos (CHOR, CHOR-RO, TRAN, etc.).
+  out = out.replace(
+    /\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}(?:[-·][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}){1,6})\b/g,
+    (token) => token.replace(/[-·]/g, "").toLowerCase(),
+  );
+
+  // Dígrafos e encontros consonantais aparecem soltos na fala explicativa
+  // ("BR forte", "CH = SHHH"). Sem tradução, o TTS soletra "bê-erre".
+  // Mapeamos para uma leitura curta e natural — o VISUAL na tela continua
+  // mostrando as letras em maiúsculo (essa transformação só afeta a voz).
+  const digrafosEncontros: Record<string, string> = {
+    // dígrafos (um som)
+    CH: "che", LH: "lhe", NH: "nhe", RR: "erre forte", SS: "esse",
+    QU: "que", GU: "gue",
+    // encontros com R
+    BR: "bê com erre", PR: "pê com erre", TR: "tê com erre",
+    CR: "cê com erre", DR: "dê com erre", FR: "efe com erre",
+    GR: "gê com erre", VR: "vê com erre",
+    // encontros com L
+    BL: "bê com ele", CL: "cê com ele", FL: "efe com ele",
+    GL: "gê com ele", PL: "pê com ele",
+    // ditongo nasal
+    "ÃO": "ão",
+    // outros pares clínicos
+    "Ç": "cê-cedilha", // som SSS mas quando lida como letra na explicação
+  };
+  out = out.replace(
+    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO|Ç)\b/g,
+    (s) => digrafosEncontros[s] ?? s.toLowerCase(),
+  );
+
+  // Fallback: qualquer sequência de 2+ maiúsculas isolada (não capturada
+  // pelas regras acima nem pelo run-de-letras-repetidas) vira minúscula
+  // pra não ser soletrada letra-por-letra.
+  out = out.replace(/\b[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{2,}\b/g, (s) => s.toLowerCase());
+
+  // Palavras de treino conhecidas hifenadas em minúsculo (BOR-BO-LE-TA
+  // depois de já estar em lowercase por outra origem, ou aparecer em texto
+  // fixo). Mantém o dicionário original.
   const replacements: Array<[RegExp, string]> = [
     [/\b(?:bor|bo)\s*[-·]?\s*bo\s*[-·]?\s*le\s*[-·]?\s*ta\b/gi, "borboleta"],
     [/\bdi\s*[-·]?\s*nos\s*[-·]?\s*sau\s*[-·]?\s*ro\b/gi, "dinossauro"],
