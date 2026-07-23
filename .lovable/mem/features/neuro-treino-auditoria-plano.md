@@ -30,10 +30,12 @@ Ordem fixa. Cada passo é entregue e validado antes do próximo.
 - Componentes de jogo leem `adjustment.difficultyScale`, `adjustment.stimuliReduction`, `adjustment.maxInformationDensity`.
 - Aplicar em: nº de distratores, tempo de exposição, complexidade de cena.
 
-## ⬜ #5 — Unificar métricas + gravar por habilidade
-- Escolher fonte única (`activity_logs` ou `child_skill_mastery` — decidir).
-- Gravar por resposta: habilidade, tipo de erro, tentativa, tempo.
-- Matar o motor órfão em `src/modules/neuro-treino/` OU alimentá-lo de verdade.
+## ✅ #5 — Unificar métricas + gravar por habilidade
+- Fonte única: `activity_logs` (bruto por resposta) + `child_skill_mastery` (agregado por skill_code).
+- Cada resposta no `/neuro-treino/$slug` grava skill_code=`NT:<slug>` e materia=grupo cognitivo (Fono Clínico, Coordenação Motora, Atenção, Alfabetização, Fala e Som, Funções Executivas, Oficina Criativa).
+- Serviço: `src/services/neuro-treino/neuroMetrics.ts` (upsert com hits/errors/total/tempo/mastery_percentage).
+- Mapa: `src/data/neuro-treino/skill-map.ts`.
+- `CognitiveMemoryService` fica como cache de perfil cognitivo separado; a fonte oficial de mastery por habilidade agora é `child_skill_mastery`.
 
 ## ⬜ #6 — Hierarquia ABA de prompting (com fading)
 - 4 níveis de ajuda: físico → gestual → verbal → independente.
