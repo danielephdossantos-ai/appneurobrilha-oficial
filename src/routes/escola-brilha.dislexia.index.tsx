@@ -2,6 +2,51 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
 import { Ear, BookOpen, Waves, CheckCircle2, Sparkles } from "lucide-react";
+import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
+import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
+import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
+import { url as icDiscrimAud } from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.png.asset.json";
+import { url as icConscFono } from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png.asset.json";
+import { url as icLetraSom } from "@/assets/neuro-treino/icons/v2/letra-som.png.asset.json";
+import { url as icArticulacao } from "@/assets/neuro-treino/icons/v2/articulacao-sons.png.asset.json";
+import { url as icFormandoPal } from "@/assets/neuro-treino/icons/v2/formando-palavras.png.asset.json";
+
+// Mapa aula → ilustração (mesmas crianças do Neuro Treino Fono Clínico).
+const ICONE_POR_AULA: Record<string, string> = {
+  // Fase 1 · Consciência Fonológica
+  "dlx-01-rimas-1": icRimas,
+  "dlx-02-rimas-2": icRimas,
+  "dlx-03-som-inicial-m": icSonsIniciais,
+  "dlx-04-som-inicial-s": icSonsIniciais,
+  "dlx-05-som-inicial-p": icSonsIniciais,
+  "dlx-06-contagem-silabas": icPedacinhos,
+  "dlx-07-pares-minimos-pb": icDiscrimAud,
+  "dlx-08-pares-minimos-fv": icDiscrimAud,
+  "dlx-09-sons-finais": icSonsIniciais,
+  "dlx-10-revisao-fase1": icConscFono,
+  // Fase 2 · Vogais
+  "dlx-11-vogal-a": icLetraSom,
+  "dlx-12-vogal-e": icLetraSom,
+  "dlx-13-vogal-i": icLetraSom,
+  "dlx-14-vogal-o": icLetraSom,
+  "dlx-15-vogal-u": icLetraSom,
+  "dlx-16-revisao-aei": icLetraSom,
+  "dlx-17-revisao-ou": icDiscrimAud,
+  "dlx-18-vogal-no-meio": icPedacinhos,
+  "dlx-19-silabas-vogal": icFormandoPal,
+  "dlx-20-revisao-vogais": icLetraSom,
+  // Fase 3 · Consoantes Contínuas
+  "dlx-21-consoante-m": icArticulacao,
+  "dlx-22-consoante-s": icArticulacao,
+  "dlx-23-consoante-l": icArticulacao,
+  "dlx-24-consoante-f": icArticulacao,
+  "dlx-25-consoante-v": icArticulacao,
+  "dlx-26-consoante-n": icArticulacao,
+  "dlx-27-consoante-r": icArticulacao,
+  "dlx-28-consoante-z": icArticulacao,
+  "dlx-29-revisao-mslf": icDiscrimAud,
+  "dlx-30-revisao-vnrz": icFormandoPal,
+};
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
   head: () => ({
