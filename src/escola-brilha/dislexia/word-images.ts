@@ -79,6 +79,15 @@ import { url as iguana } from "@/assets/dislexia/palavras/iguana.png.asset.json"
 import { url as igreja } from "@/assets/dislexia/palavras/igreja.png.asset.json";
 import { url as rio } from "@/assets/dislexia/palavras/rio.png.asset.json";
 import { url as borda } from "@/assets/dislexia/palavras/borda.png.asset.json";
+import mar from "@/assets/dislexia/palavras/mar.png";
+import mel from "@/assets/dislexia/palavras/mel.png";
+import luz from "@/assets/dislexia/palavras/luz.png";
+import salImg from "@/assets/dislexia/palavras/sal.png";
+import gol from "@/assets/dislexia/palavras/gol.png";
+import onibus from "@/assets/dislexia/palavras/onibus.png";
+import flor from "@/assets/dislexia/palavras/flor.png";
+import tucano from "@/assets/dislexia/palavras/tucano.png";
+
 
 // Normaliza (remove acentos, uppercase) — mesmo raciocínio usado no TTS.
 function normalizar(palavra: string): string {
@@ -163,6 +172,14 @@ const MAPA: Record<string, string> = {
   IGREJA: igreja,
   RIO: rio,
   BORDA: borda,
+  MAR: mar,
+  MEL: mel,
+  LUZ: luz,
+  SAL: salImg,
+  GOL: gol,
+  ONIBUS: onibus,
+  FLOR: flor,
+  TUCANO: tucano,
 };
 
 /** Retorna a URL da imagem correspondente à palavra, se existir no banco. */
