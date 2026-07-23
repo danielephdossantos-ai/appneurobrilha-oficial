@@ -28,13 +28,13 @@ export const dlx41: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora a sílaba GANHA um fecho! Depois da vogal vem uma consoante. Presta atenção: S + O + L… SOL! A boca fecha no L no fim.",
+      fala: "Agora a sílaba ganha um fecho! Depois da vogal vem uma consoante. Presta atenção: s... ó... l... Sol! A boca fecha no l no fim.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "S-O-L… SOL! O L fecha no fim.", palavra: "SOL", enfase: "L" },
-    { tipo: "escuta", fala: "M-E-L… MEL! Doce, doce.", palavra: "MEL", enfase: "L" },
-    { tipo: "escuta", fala: "S-A-L… SAL! Tempero da comida.", palavra: "SAL", enfase: "L" },
-    { tipo: "escuta", fala: "G-O-L… GOL! Bola dentro da rede.", palavra: "GOL", enfase: "L" },
+    { tipo: "escuta", fala: "s, o, l… SOL! O L fecha no fim.", palavra: "SOL", enfase: "L" },
+    { tipo: "escuta", fala: "m, e, l… MEL! Doce, doce.", palavra: "MEL", enfase: "L" },
+    { tipo: "escuta", fala: "s, a, l… SAL! Tempero da comida.", palavra: "SAL", enfase: "L" },
+    { tipo: "escuta", fala: "g, o, l… GOL! Bola dentro da rede.", palavra: "GOL", enfase: "L" },
     {
       tipo: "silabas",
       fala: "SOL é uma sílaba só. Toca nela pra ler.",
@@ -83,12 +83,12 @@ export const dlx42: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora o fecho é o R! Ele raspa na garganta bem levinho no fim: MAAAR. A boca abre e o R fecha.",
+      fala: "Agora o fecho é o r! Ele raspa na garganta bem levinho no fim: Máá... r. A boca abre e o r fecha.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "M-A-R… MAR! Águas azuis.", palavra: "MAR", enfase: "R" },
-    { tipo: "escuta", fala: "D-O-R… DOR! Quando algo dói.", palavra: "DOR", enfase: "R" },
-    { tipo: "escuta", fala: "F-L-O-R… FLOR! Cheirosa no jardim.", palavra: "FLOR", enfase: "R" },
+    { tipo: "escuta", fala: "m, a, r… MAR! Águas azuis.", palavra: "MAR", enfase: "R" },
+    { tipo: "escuta", fala: "d, o, r… DOR! Quando algo dói.", palavra: "DOR", enfase: "R" },
+    { tipo: "escuta", fala: "f, l, o, r… FLOR! Cheirosa no jardim.", palavra: "FLOR", enfase: "R" },
     {
       tipo: "silabas",
       fala: "MAR — uma sílaba, três letrinhas.",
@@ -137,11 +137,11 @@ export const dlx43: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Segredo: o Z no fim da palavra faz som de S bem levinho: LUZZZ… LUS. Ouve com atenção!",
+      fala: "Segredo: o z no fim da palavra faz som de s bem levinho: Luz soa como lus. Ouve com atenção!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "L-U-Z… LUZ! Que clareia tudo.", palavra: "LUZ", enfase: "Z" },
-    { tipo: "escuta", fala: "P-A-Z… PAZ! Tranquilidade.", palavra: "PAZ", enfase: "Z" },
+    { tipo: "escuta", fala: "l, u, z… LUZ! Que clareia tudo.", palavra: "LUZ", enfase: "Z" },
+    { tipo: "escuta", fala: "p, a, z… PAZ! Tranquilidade.", palavra: "PAZ", enfase: "Z" },
     {
       tipo: "silabas",
       fala: "LUZ — uma sílaba. Toca pra ler.",
@@ -183,13 +183,13 @@ export const dlx44: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Truque novo! O M no fim faz o som sair pelo NARIZ. Aperta o nariz e tenta: BOOOM. Não sai! Solta e sai. É nasal!",
+      fala: "Truque novo! O m no fim faz o som sair pelo nariz. Aperta o nariz e tenta: Bóóó... m. Não sai! Solta e sai. É nasal!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "S-I-M… SIM! Palavra do sim e do não.", palavra: "SIM", enfase: "M" },
-    { tipo: "escuta", fala: "B-O-M… BOM! Muito bom!", palavra: "BOM", enfase: "M" },
-    { tipo: "escuta", fala: "T-O-M… TOM! Nome de gente.", palavra: "TOM", enfase: "M" },
-    { tipo: "escuta", fala: "S-O-M… SOM! O que a gente ouve.", palavra: "SOM", enfase: "M" },
+    { tipo: "escuta", fala: "s, i, m… SIM! Palavra do sim e do não.", palavra: "SIM", enfase: "M" },
+    { tipo: "escuta", fala: "b, o, m… BOM! Muito bom!", palavra: "BOM", enfase: "M" },
+    { tipo: "escuta", fala: "t, o, m… TOM! Nome de gente.", palavra: "TOM", enfase: "M" },
+    { tipo: "escuta", fala: "s, o, m… SOM! O que a gente ouve.", palavra: "SOM", enfase: "M" },
     {
       tipo: "silabas",
       fala: "SIM — uma sílaba nasal. Sente vibrar no nariz.",
@@ -275,7 +275,7 @@ export const dlx46: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Duas palavras podem parecer parecidas, mas uma FECHA e a outra NÃO. Tipo LUA e LUZ: L-U-A abre, L-U-Z fecha no Z. Escuta!",
+      fala: "Duas palavras podem parecer parecidas, mas uma FECHA e a outra NÃO. Tipo LUA e LUZ: l, u, a abre, l, u, z fecha no Z. Escuta!",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "LUA — abre no A.", palavra: "LUA", enfase: "A" },
@@ -327,30 +327,30 @@ export const dlx47: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora o fecho vem na SEGUNDA sílaba. Tipo A-NEL: primeira sílaba abre, segunda fecha no L. Vamo!",
+      fala: "Agora o fecho vem na SEGUNDA sílaba. Tipo a-nel: primeira sílaba abre, segunda fecha no L. Vamo!",
       imagem: pipVet,
     },
     {
       tipo: "silabas",
-      fala: "A-NEL. Toca nas duas sílabas.",
+      fala: "a-nel. Toca nas duas sílabas.",
       palavra: "ANEL",
       silabas: ["A", "NEL"],
     },
     {
       tipo: "escuta",
-      fala: "Escuta: A-NEL. O L fecha.",
+      fala: "Escuta: a-nel. O L fecha.",
       palavra: "ANEL",
       enfase: "L",
     },
     {
       tipo: "silabas",
-      fala: "NA-RIZ. Fecha no Z.",
+      fala: "na-riz. Fecha no Z.",
       palavra: "NARIZ",
       silabas: ["NA", "RIZ"],
     },
     {
       tipo: "escuta",
-      fala: "NA-RIZ — a última sílaba fecha em Z.",
+      fala: "na-riz — a última sílaba fecha em Z.",
       palavra: "NARIZ",
       enfase: "Z",
     },
@@ -484,13 +484,13 @@ export const dlx49: AulaDlx = {
     },
     {
       tipo: "silabas",
-      fala: "Junta: S-A-L.",
+      fala: "Junta: s, a, l.",
       palavra: "SAL",
       silabas: ["SAL"],
     },
     {
       tipo: "silabas",
-      fala: "Junta: M-A-R.",
+      fala: "Junta: m, a, r.",
       palavra: "MAR",
       silabas: ["MAR"],
     },
@@ -553,13 +553,13 @@ export const dlx50: AulaDlx = {
     },
     {
       tipo: "silabas",
-      fala: "Última leitura: L-U-Z.",
+      fala: "Última leitura: l, u, z.",
       palavra: "LUZ",
       silabas: ["LUZ"],
     },
     {
       tipo: "silabas",
-      fala: "E T-O-M.",
+      fala: "E t, o, m.",
       palavra: "TOM",
       silabas: ["TOM"],
     },

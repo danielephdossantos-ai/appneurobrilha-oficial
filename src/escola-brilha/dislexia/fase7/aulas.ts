@@ -24,20 +24,20 @@ export const dlx61: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Novo truque! Às vezes o R fecha a sílaba antes de outra letra. POR-TA. Sente a boca parar no R e depois abrir de novo.",
+      fala: "Novo truque! Às vezes o R fecha a sílaba antes de outra letra. por-ta. Sente a boca parar no R e depois abrir de novo.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "POR-TA. Escuta o R no fim do primeiro pedaço.", palavra: "PORTA", enfase: "OR" },
-    { tipo: "escuta", fala: "GAR-FO. R fechando de novo.", palavra: "GARFO", enfase: "AR" },
+    { tipo: "escuta", fala: "por-ta. Escuta o R no fim do primeiro pedaço.", palavra: "PORTA", enfase: "OR" },
+    { tipo: "escuta", fala: "gar-fo. R fechando de novo.", palavra: "GARFO", enfase: "AR" },
     {
       tipo: "silabas",
-      fala: "Toca cada pedaço: POR-TA.",
+      fala: "Toca cada pedaço: por-ta.",
       palavra: "PORTA",
       silabas: ["POR", "TA"],
     },
     {
       tipo: "silabas",
-      fala: "Toca: GAR-FO.",
+      fala: "Toca: gar-fo.",
       palavra: "GARFO",
       silabas: ["GAR", "FO"],
     },
@@ -58,7 +58,7 @@ export const dlx61: AulaDlx = {
         { palavra: "GATO", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "R fecha a sílaba: POR-TA, GAR-FO. Boca para, depois abre.", imagem: pipVet },
+    { tipo: "reforco", fala: "R fecha a sílaba: por-ta, gar-fo. Boca para, depois abre.", imagem: pipVet },
     { tipo: "fim", fala: "R fechado dominado! 🌟", imagem: pipVet },
   ],
 };
@@ -79,17 +79,17 @@ export const dlx62: AulaDlx = {
       fala: "Agora palavras MAIORES. O R fecha a sílaba dentro delas. Vai por pedaço.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "LA-GAR-TA. Ouve o GAR no meio.", palavra: "LAGARTA", enfase: "GAR" },
-    { tipo: "escuta", fala: "TAR-TA-RU-GA. Dois pedaços com R!", palavra: "TARTARUGA", enfase: "TAR" },
+    { tipo: "escuta", fala: "la-gar-ta. Ouve o GAR no meio.", palavra: "LAGARTA", enfase: "GAR" },
+    { tipo: "escuta", fala: "tar-ta-ru-ga. Dois pedaços com R!", palavra: "TARTARUGA", enfase: "TAR" },
     {
       tipo: "silabas",
-      fala: "Toca cada pedaço: LA-GAR-TA.",
+      fala: "Toca cada pedaço: la-gar-ta.",
       palavra: "LAGARTA",
       silabas: ["LA", "GAR", "TA"],
     },
     {
       tipo: "silabas",
-      fala: "Toca: TAR-TA-RU-GA.",
+      fala: "Toca: tar-ta-ru-ga.",
       palavra: "TARTARUGA",
       silabas: ["TAR", "TA", "RU", "GA"],
     },
@@ -125,7 +125,7 @@ export const dlx63: AulaDlx = {
     { tipo: "escuta", fala: "SAL. Sente a língua parar no L.", palavra: "SAL", enfase: "AL" },
     { tipo: "escuta", fala: "MEL. Doce e curto.", palavra: "MEL", enfase: "EL" },
     { tipo: "escuta", fala: "GOL. Grito da torcida!", palavra: "GOL", enfase: "OL" },
-    { tipo: "escuta", fala: "A-NEL. L fecha o segundo pedaço.", palavra: "ANEL", enfase: "NEL" },
+    { tipo: "escuta", fala: "a-nel. L fecha o segundo pedaço.", palavra: "ANEL", enfase: "NEL" },
     {
       tipo: "escolha",
       fala: "Qual palavra é MEL?",
@@ -166,7 +166,7 @@ export const dlx64: AulaDlx = {
     },
     { tipo: "escuta", fala: "PÃO. Som nasal no fim.", palavra: "PÃO", enfase: "ÃO" },
     { tipo: "escuta", fala: "MÃO. De novo o ÃO.", palavra: "MÃO", enfase: "ÃO" },
-    { tipo: "escuta", fala: "A-VI-ÃO. ÃO bem no fim.", palavra: "AVIÃO", enfase: "ÃO" },
+    { tipo: "escuta", fala: "a-vi-ão. ÃO bem no fim.", palavra: "AVIÃO", enfase: "ÃO" },
     {
       tipo: "escolha",
       fala: "Qual palavra termina com ÃO?",
@@ -213,10 +213,10 @@ export const dlx65: AulaDlx = {
       fala: "Olha essa letra: Ç. É o C com um rabinho. E o rabinho manda ele fazer o som SSS, mesmo antes de A, O, U.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "PA-LHA-ÇO. Ouve o SSS no fim.", palavra: "PALHAÇO", enfase: "ÇO" },
+    { tipo: "escuta", fala: "pa-lha-ço. Ouve o SSS no fim.", palavra: "PALHAÇO", enfase: "ÇO" },
     {
       tipo: "silabas",
-      fala: "Toca: PA-LHA-ÇO.",
+      fala: "Toca: pa-lha-ço.",
       palavra: "PALHAÇO",
       silabas: ["PA", "LHA", "ÇO"],
     },
@@ -247,14 +247,14 @@ export const dlx66: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Regra importante: Q sempre vem com U. E antes de E ou I, o U fica CALADO. QUE se lê KE. QUI se lê KI.",
+      fala: "Regra importante: o q sempre vem com u. E antes de e ou i, o u fica calado. Que se lê quê. Qui se lê qui.",
       imagem: pipVet,
     },
     { tipo: "escuta", fala: "QUEIJO. Começa com KE, o U não fala.", palavra: "QUEIJO", enfase: "QUE" },
     { tipo: "escuta", fala: "QUINZE. Começa com KI.", palavra: "QUINZE", enfase: "QUI" },
     {
       tipo: "silabas",
-      fala: "Toca: QUEI-JO.",
+      fala: "Toca: quei-jo.",
       palavra: "QUEIJO",
       silabas: ["QUEI", "JO"],
     },
@@ -284,11 +284,11 @@ export const dlx67: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Igual o Q! Antes de E ou I, o G leva um U que fica CALADO pra manter o som duro. GUE lê GHE. GUI lê GHI.",
+      fala: "Igual o q! Antes de e ou i, o g leva um u que fica calado pra manter o som duro. Gue soa como guê. Gui soa como gui.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "GUER-RA. GUE com som duro de G.", palavra: "GUERRA", enfase: "GUE" },
-    { tipo: "escuta", fala: "I-GUA-NA. Aqui o U fala, porque vem A.", palavra: "IGUANA", enfase: "GUA" },
+    { tipo: "escuta", fala: "guer-ra. GUE com som duro de G.", palavra: "GUERRA", enfase: "GUE" },
+    { tipo: "escuta", fala: "i-gua-na. Aqui o U fala, porque vem A.", palavra: "IGUANA", enfase: "GUA" },
     {
       tipo: "escolha",
       fala: "Em GUERRA, o U fica...",
@@ -315,12 +315,12 @@ export const dlx68: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Segredo do S: quando ele fica entre duas vogais, ele muda de som e vira ZZZ (abelhinha). RO-SA soa RO-ZA.",
+      fala: "Segredo do S: quando ele fica entre duas vogais, ele muda de som e vira ZZZ (abelhinha). ro-sa soa ro-za.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "RO-SA. Ouve o Z no meio.", palavra: "ROSA", enfase: "SA" },
-    { tipo: "escuta", fala: "ME-SA. De novo, S soa Z.", palavra: "MESA", enfase: "SA" },
-    { tipo: "escuta", fala: "NA-RIZ. Aqui o Z é escrito com Z mesmo.", palavra: "NARIZ", enfase: "IZ" },
+    { tipo: "escuta", fala: "ro-sa. Ouve o Z no meio.", palavra: "ROSA", enfase: "SA" },
+    { tipo: "escuta", fala: "me-sa. De novo, S soa Z.", palavra: "MESA", enfase: "SA" },
+    { tipo: "escuta", fala: "na-riz. Aqui o Z é escrito com Z mesmo.", palavra: "NARIZ", enfase: "IZ" },
     {
       tipo: "escolha",
       fala: "Qual palavra tem S soando Z?",
@@ -353,25 +353,25 @@ export const dlx69: AulaDlx = {
     },
     {
       tipo: "silabas",
-      fala: "Toca: A-BA-CA-XI.",
+      fala: "Toca: a-ba-ca-xi.",
       palavra: "ABACAXI",
       silabas: ["A", "BA", "CA", "XI"],
     },
     {
       tipo: "silabas",
-      fala: "Toca: CA-CHOR-RO.",
+      fala: "Toca: ca-chor-ro.",
       palavra: "CACHORRO",
       silabas: ["CA", "CHOR", "RO"],
     },
     {
       tipo: "silabas",
-      fala: "Toca: SOR-VE-TE.",
+      fala: "Toca: sor-ve-te.",
       palavra: "SORVETE",
       silabas: ["SOR", "VE", "TE"],
     },
     {
       tipo: "silabas",
-      fala: "Toca: BOR-BO-LE-TA.",
+      fala: "Toca: bor-bo-le-ta.",
       palavra: "BORBOLETA",
       silabas: ["BOR", "BO", "LE", "TA"],
     },
