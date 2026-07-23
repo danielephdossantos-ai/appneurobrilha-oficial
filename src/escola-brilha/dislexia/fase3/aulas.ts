@@ -157,15 +157,15 @@ export const dlx24: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante F! Dente de cima morde de leve o lábio de baixo e sopra: FFFFFF.",
+      fala: "Consoante f! Dente de cima morde de leve o lábio de baixo e sopra: fff.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra F. FFFFF.", palavra: "F", enfase: "F" },
-    { tipo: "escuta", fala: "FFFOGUETE. FO-GUE-TE.", palavra: "FOGUETE", imagem: foguete, enfase: "F" },
-    { tipo: "escuta", fala: "FFFACA. FA-CA.", palavra: "FACA", enfase: "F" },
+    { tipo: "escuta", fala: "Essa é a letra f. fff.", palavra: "F", enfase: "F" },
+    { tipo: "escuta", fala: "Fff... foguete.", palavra: "FOGUETE", imagem: foguete, enfase: "F" },
+    { tipo: "escuta", fala: "Fff... faca.", palavra: "FACA", enfase: "F" },
     {
       tipo: "escolha",
-      fala: "Qual começa com FFFF?",
+      fala: "Qual começa com fff?",
       opcoes: [
         { palavra: "FOGUETE", correta: true, imagem: foguete },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -173,15 +173,15 @@ export const dlx24: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com FFFF?",
+      fala: "E qual dessas começa com fff?",
       opcoes: [
         { palavra: "FADA", correta: true },
         { palavra: "SOL", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "Dente encosta no lábio, sopra. Isso é o FFF!", imagem: pipVet },
-    { tipo: "fim", fala: "F de FOGUETE, F de FADA. Sopro certo!", imagem: pipVet },
+    { tipo: "reforco", fala: "Dente encosta no lábio, sopra. Isso é o fff!", imagem: pipVet },
+    { tipo: "fim", fala: "f de foguete, f de fada. Sopro certo!", imagem: pipVet },
   ],
 };
 
