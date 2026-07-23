@@ -328,15 +328,15 @@ export const dlx28: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante Z! Mesma boca do S — dentes juntos — mas agora VIBRA. Som da abelha: ZZZZZ!",
+      fala: "Consoante z! Mesma boca do s — dentes juntos — mas agora vibra. Som da abelha: zzz!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra Z. ZZZZZ. Vibrando!", palavra: "Z", enfase: "Z" },
-    { tipo: "escuta", fala: "ZZZEBRA. ZE-BRA.", palavra: "ZEBRA", enfase: "Z" },
-    { tipo: "escuta", fala: "ZZZERO. ZE-RO.", palavra: "ZERO", enfase: "Z" },
+    { tipo: "escuta", fala: "Essa é a letra z. zzz. Vibrando!", palavra: "Z", enfase: "Z" },
+    { tipo: "escuta", fala: "Zzz... zebra.", palavra: "ZEBRA", enfase: "Z" },
+    { tipo: "escuta", fala: "Zzz... zero.", palavra: "ZERO", enfase: "Z" },
     {
       tipo: "escolha",
-      fala: "Qual começa com ZZZ?",
+      fala: "Qual começa com zzz?",
       opcoes: [
         { palavra: "ZEBRA", correta: true },
         { palavra: "SAPO", correta: false },
@@ -344,15 +344,15 @@ export const dlx28: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "S sopra, Z vibra. Qual começa com ZZZ?",
+      fala: "O s sopra, o z vibra. Qual começa com zzz?",
       opcoes: [
         { palavra: "ZERO", correta: true },
         { palavra: "SINO", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "S é sopro, Z é sopro que TREME — som de abelha!", imagem: pipVet },
-    { tipo: "fim", fala: "Z de ZEBRA, Z de ZERO. Abelha zumbindo!", imagem: pipVet },
+    { tipo: "reforco", fala: "O s é sopro, o z é sopro que treme — som de abelha!", imagem: pipVet },
+    { tipo: "fim", fala: "z de zebra, z de zero. Abelha zumbindo!", imagem: pipVet },
   ],
 };
 
