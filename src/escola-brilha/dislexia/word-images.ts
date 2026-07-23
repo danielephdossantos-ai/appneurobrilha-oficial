@@ -87,6 +87,14 @@ import gol from "@/assets/dislexia/palavras/gol.png";
 import onibus from "@/assets/dislexia/palavras/onibus.png";
 import flor from "@/assets/dislexia/palavras/flor.png";
 import tucano from "@/assets/dislexia/palavras/tucano.png";
+import chave from "@/assets/dislexia/palavras/chave.png";
+import chuva from "@/assets/dislexia/palavras/chuva.png";
+import palhaco from "@/assets/dislexia/palavras/palhaco.png";
+import coelho from "@/assets/dislexia/palavras/coelho.png";
+import cachorro from "@/assets/dislexia/palavras/cachorro.png";
+import prato from "@/assets/dislexia/palavras/prato.png";
+import arvore from "@/assets/dislexia/palavras/arvore.png";
+import garfo from "@/assets/dislexia/palavras/garfo.png";
 
 
 // Normaliza (remove acentos, uppercase) — mesmo raciocínio usado no TTS.
