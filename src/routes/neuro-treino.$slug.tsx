@@ -39,6 +39,23 @@ import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from 
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
+import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
+
+// Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
+// - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
+// - Além disso, aplica um teto de índice (bancos costumam estar ordenados fácil→difícil).
+function filterByDifficulty<T extends { payload?: any }>(list: T[], scale: number): T[] {
+  if (!list?.length) return list;
+  const s = Math.max(0.1, Math.min(1, scale));
+  const nivelCap = s < 0.4 ? 1 : s < 0.75 ? 2 : 3;
+  const byNivel = list.filter((v) => {
+    const n = v?.payload?.nivel;
+    return typeof n === "number" ? n <= nivelCap : true;
+  });
+  const ceiling = Math.max(3, Math.ceil(byNivel.length * s));
+  const capped = byNivel.slice(0, ceiling);
+  return capped.length >= 3 ? capped : byNivel.length ? byNivel : list;
+}
 import { url as soproCarro } from "@/assets/neuro-treino/sopro/carro.png.asset.json";
 import { url as soproVela } from "@/assets/neuro-treino/sopro/vela.png.asset.json";
 import { url as soproBalao } from "@/assets/neuro-treino/sopro/balao.png.asset.json";
