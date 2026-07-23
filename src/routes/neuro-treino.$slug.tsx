@@ -40,6 +40,7 @@ import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
+import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
