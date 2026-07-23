@@ -100,7 +100,7 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
                 setEstado("acerto");
                 setEstrelas((s) => s + 1);
                 stopSpeaking();
-                speakChunked("Isso! Muito bem.");
+                speakChunked("Isso! Muito bem.", { rate: 0.85 });
                 window.setTimeout(avancar, 1300);
               }}
               onErro={() => {
@@ -108,10 +108,10 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
                 setTentativas(nova);
                 setEstado("erro");
                 stopSpeaking();
-                if (nova === 1) speakChunked("Quase. Olha de novo.");
-                else if (nova === 2) speakChunked("Ouve com atenção.");
+                if (nova === 1) speakChunked("Quase. Olha de novo.", { rate: 0.8 });
+                else if (nova === 2) speakChunked("Ouve com atenção.", { rate: 0.8 });
                 else {
-                  speakChunked("Deixa eu te mostrar. É essa aqui.");
+                  speakChunked("Deixa eu te mostrar. É essa aqui.", { rate: 0.8 });
                   window.setTimeout(() => {
                     setEstado("acerto");
                     setEstrelas((s) => s + 1);
