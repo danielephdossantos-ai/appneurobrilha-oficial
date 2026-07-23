@@ -280,14 +280,14 @@ export const dlx17: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "O e U são parecidas — as duas fazem bico. Mas O é bolinha e U é bico apertado. Escuta: OVO... UVA.",
+      fala: "O e u são parecidas — as duas fazem bico. Mas o o é bolinha e o u é bico apertado. Escuta: ovo... uva.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "OOOVO. Boca redonda.", palavra: "OVO", enfase: "O" },
-    { tipo: "escuta", fala: "UUUVA. Bico apertado.", palavra: "UVA", enfase: "U" },
+    { tipo: "escuta", fala: "Ooo... ovo. Boca redonda.", palavra: "OVO", enfase: "O" },
+    { tipo: "escuta", fala: "Uuu... uva. Bico apertado.", palavra: "UVA", enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "ORELHA", correta: true },
         { palavra: "URSO", correta: false },
@@ -295,7 +295,7 @@ export const dlx17: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "UNHA", correta: true },
         { palavra: "ÓCULOS", correta: false },
@@ -303,14 +303,14 @@ export const dlx17: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Última: qual começa com OOO?",
+      fala: "Última: qual começa com ooo?",
       opcoes: [
         { palavra: "OVELHA", correta: true, imagem: ovelha },
         { palavra: "URUBU", correta: false },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "fim", fala: "Bolinha O, bico U. Sons diferentes!", imagem: pipVet },
+    { tipo: "fim", fala: "Bolinha o, bico u. Sons diferentes!", imagem: pipVet },
   ],
 };
 
