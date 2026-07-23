@@ -368,12 +368,12 @@ export const dlx29: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vamos misturar M, S, L e F. Escuta o COMECINHO com atenção.",
+      fala: "Vamos misturar m, s, l e f. Escuta o comecinho com atenção.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com MMM (boca fechada)?",
+      fala: "Qual começa com mmm, de boca fechada?",
       opcoes: [
         { palavra: "MACACO", correta: true, imagem: macaco },
         { palavra: "SAPO", correta: false },
@@ -382,7 +382,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com SSS (sopro de cobra)?",
+      fala: "Qual começa com sss, sopro de cobra?",
       opcoes: [
         { palavra: "SOL", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -391,7 +391,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com LLL (língua em cima)?",
+      fala: "Qual começa com lll, língua em cima?",
       opcoes: [
         { palavra: "LUA", correta: true, imagem: lua },
         { palavra: "FADA", correta: false },
@@ -400,7 +400,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com FFF (dente no lábio)?",
+      fala: "Qual começa com fff, dente no lábio?",
       opcoes: [
         { palavra: "FACA", correta: true },
         { palavra: "MÃO", correta: false },
@@ -408,7 +408,7 @@ export const dlx29: AulaDlx = {
       ],
     },
     { tipo: "reforco", fala: "Cada consoante tem uma boca diferente. Você separou!", imagem: pipVet },
-    { tipo: "fim", fala: "M, S, L, F — quatro sons, quatro bocas. Muito bem!", imagem: pipVet },
+    { tipo: "fim", fala: "m, s, l, f — quatro sons, quatro bocas. Muito bem!", imagem: pipVet },
   ],
 };
 
