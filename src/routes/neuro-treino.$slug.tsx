@@ -2620,65 +2620,165 @@ function VocabularioSemantico({ p, onDone }: any) {
 }
 
 
-// 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
-function NomeacaoRapida({ p, onDone }: any) {
+// 27. NOMEAÇÃO RÁPIDA — RAN clínico: fala em ordem uma sequência de figuras.
+// Mede itens/segundo (automaticidade). Fallback: toque em ordem, se sem voz.
+function NomeacaoRapida({ p, onDone, promptLevel }: any) {
   const { effective: sens } = useSensoryProfile();
-  const [fase, setFase] = useState<"flash" | "resposta" | "done">("flash");
-  const [escolhido, setEscolhido] = useState<string | null>(null);
-  const flashMsAdj = sens.lowStim ? Math.round(p.flashMs * 1.5) : p.flashMs;
-  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const { speak } = usePipVoice();
+  const { listen, isListening, supported } = useSpeechMatcher();
   const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
-  const flashImg = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
-  const optImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
-  useEffect(() => {
-    const t = setTimeout(() => setFase("resposta"), flashMsAdj);
-    return () => clearTimeout(t);
-  }, [flashMsAdj]);
-  const handleClick = (opt: string) => {
-    if (fase !== "resposta" || escolhido) return;
-    setEscolhido(opt);
-    setFase("done");
-    setTimeout(() => onDone(opt === p.nome), 600);
+  const cellSize = sens.largerTargets ? "w-20 h-20 md:w-24 md:h-24" : "w-16 h-16 md:w-20 md:h-20";
+
+  // Monta sequência RAN: 12 itens repetindo (2 linhas x 6)
+  const bancoItens: { emoji: string; nome: string }[] = useMemo(() => {
+    const base: { emoji: string; nome: string }[] = [
+      { emoji: p.emoji, nome: p.nome },
+      ...(p.opts as string[])
+        .filter((n) => n !== p.nome)
+        .slice(0, 3)
+        .map((n) => ({ emoji: p.emoji, nome: n })),
+    ];
+    // Se payload tiver bank, prefere; senão usa opts
+    return base;
+  }, [p]);
+
+  const sequencia: { emoji: string; nome: string }[] = useMemo(() => {
+    const out: { emoji: string; nome: string }[] = [];
+    for (let i = 0; i < 12; i++) out.push(bancoItens[i % bancoItens.length]);
+    // Baralha levemente sem duplicar consecutivos
+    for (let i = 1; i < out.length; i++) {
+      if (out[i].nome === out[i - 1].nome) {
+        const swap = out.findIndex((x, j) => j > i && x.nome !== out[i - 1].nome);
+        if (swap > -1) [out[i], out[swap]] = [out[swap], out[i]];
+      }
+    }
+    return out;
+  }, [bancoItens]);
+
+  const [idx, setIdx] = useState(0);
+  const [inicio, setInicio] = useState<number | null>(null);
+  const [erros, setErros] = useState(0);
+  const [modo, setModo] = useState<"idle" | "correndo" | "done">("idle");
+  const [transcricoes, setTranscricoes] = useState<string[]>([]);
+
+  const mostrarNomes = promptLevel <= 3;
+  const modeloAudio = promptLevel <= 2;
+  const semVoz = !supported;
+
+  const iniciar = () => {
+    setIdx(0);
+    setErros(0);
+    setTranscricoes([]);
+    setInicio(Date.now());
+    setModo("correndo");
+    if (modeloAudio) speak(sequencia[0].nome);
   };
+
+  const proximo = () => {
+    if (idx + 1 >= sequencia.length) {
+      setModo("done");
+      const dur = (Date.now() - (inicio ?? Date.now())) / 1000;
+      const ips = sequencia.length / Math.max(dur, 0.1);
+      const acertou = erros <= 2 && ips >= 0.6; // 0.6 itens/s ≈ ritmo funcional mínimo
+      setTimeout(() => onDone(acertou), 800);
+    } else {
+      setIdx((i) => i + 1);
+      if (modeloAudio) speak(sequencia[idx + 1].nome);
+    }
+  };
+
+  const ouvir = async () => {
+    if (modo !== "correndo" || isListening) return;
+    const alvo = sequencia[idx].nome;
+    const r = await listen(alvo, { timeoutMs: 3500 });
+    setTranscricoes((t) => [...t, r.transcript || "-"]);
+    if (r.matched) {
+      proximo();
+    } else {
+      setErros((e) => e + 1);
+      // Continua no mesmo item — pede pra falar de novo
+    }
+  };
+
+  const tocouItem = (i: number) => {
+    if (semVoz && modo === "correndo" && i === idx) proximo();
+  };
+
+  const dur = inicio ? ((modo === "done" ? Date.now() : Date.now()) - inicio) / 1000 : 0;
+  const ips = idx > 0 ? idx / Math.max(dur, 0.1) : 0;
+
   return (
-    <div className="text-center space-y-5">
-      <div
-        className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}
-      >
-        <div className={fase === "flash" ? pulseCls : "opacity-90"}>
-          <RenderEmoji e={p.emoji} label={p.nome} className={flashImg} />
-        </div>
+    <div className="text-center space-y-4">
+      <div className="text-sm font-bold text-muted-foreground">
+        {semVoz
+          ? "Toque nas figuras EM ORDEM (esquerda→direita, cima→baixo)"
+          : "Fale o nome de cada figura EM ORDEM, o mais rápido que conseguir"}
       </div>
-      {fase !== "flash" && (
-        <>
-          <div className="text-muted-foreground font-bold text-base">Qual é?</div>
-          <div className="grid grid-cols-2 gap-3">
-            {p.opts.map((opt: string, i: number) => {
-              const certa = opt === p.nome;
-              const bg =
-                escolhido === opt
-                  ? certa
-                    ? "border-success bg-success/10 text-success"
-                    : errorBg
-                  : escolhido && certa
-                    ? "border-success bg-success/10"
-                    : "border-border bg-card hover:border-amber/60";
-              return (
-                <button
-                  key={i}
-                  onClick={() => handleClick(opt)}
-                  className={`rounded-2xl border-2 p-3 transition-all flex flex-col items-center gap-2 ${bg}`}
-                >
-                  <RenderEmoji label={opt} className={optImg} />
-                  <span className="font-black text-base">{opt}</span>
-                </button>
-              );
-            })}
-          </div>
-        </>
+
+      <div className="grid grid-cols-6 gap-2 justify-items-center bg-white/60 border-2 border-amber/30 rounded-2xl p-3">
+        {sequencia.map((it, i) => {
+          const feito = i < idx;
+          const atual = i === idx && modo === "correndo";
+          return (
+            <button
+              key={i}
+              onClick={() => tocouItem(i)}
+              disabled={!semVoz}
+              className={`${cellSize} rounded-xl border-2 flex flex-col items-center justify-center p-1 transition-all ${
+                feito
+                  ? "border-emerald-400 bg-emerald-50 opacity-70"
+                  : atual
+                    ? `border-amber-500 bg-amber-50 ${pulseCls}`
+                    : "border-slate-200 bg-white"
+              }`}
+            >
+              <RenderEmoji e={it.emoji} label={it.nome} className="w-8 h-8 md:w-10 md:h-10" />
+              {mostrarNomes && (
+                <span className="text-[10px] font-bold mt-1">{it.nome}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {modo === "correndo" && (
+        <div className="text-xs text-muted-foreground">
+          Item {idx + 1}/{sequencia.length} · erros: {erros} ·{" "}
+          {dur > 0 ? `${ips.toFixed(1)} itens/s` : ""}
+        </div>
       )}
-      {fase === "flash" && (
-        <div className={`text-sm text-muted-foreground ${pulseCls}`}>Olha a figura!</div>
+
+      <div className="flex gap-2 justify-center">
+        {modo === "idle" && (
+          <button
+            onClick={iniciar}
+            className="bg-amber-500 text-white font-black px-6 py-3 rounded-full shadow-md"
+          >
+            Começar
+          </button>
+        )}
+        {modo === "correndo" && !semVoz && (
+          <button
+            onClick={ouvir}
+            disabled={isListening}
+            className={`bg-rose-500 text-white font-black px-6 py-3 rounded-full shadow-md flex items-center gap-2 ${isListening ? pulseCls : ""}`}
+          >
+            <Mic className="w-5 h-5" /> {isListening ? "Ouvindo..." : "Falar"}
+          </button>
+        )}
+      </div>
+
+      {modo === "done" && (
+        <div className="text-sm font-bold text-emerald-600">
+          Concluído! {sequencia.length} figuras em {dur.toFixed(1)}s ({ips.toFixed(2)} itens/s) ·
+          {erros} erro{erros === 1 ? "" : "s"}
+        </div>
+      )}
+
+      {!supported && modo === "idle" && (
+        <div className="text-xs text-amber-600">
+          Voz indisponível — usaremos toque em ordem para medir velocidade.
+        </div>
       )}
     </div>
   );
