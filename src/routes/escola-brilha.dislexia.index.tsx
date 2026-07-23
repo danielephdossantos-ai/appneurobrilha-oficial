@@ -174,6 +174,14 @@ const FASES: Record<
     border: "border-amber-200 dark:border-amber-800",
     accent: "bg-amber-500",
   },
+  8: {
+    nome: "Fase 8 · Fluência e Compreensão",
+    icon: Sparkles,
+    color: "text-teal-600",
+    bg: "from-teal-50 to-teal-100/50 dark:from-teal-950/30 dark:to-teal-900/20",
+    border: "border-teal-200 dark:border-teal-800",
+    accent: "bg-teal-500",
+  },
 };
 
 function DislexiaIndex() {
