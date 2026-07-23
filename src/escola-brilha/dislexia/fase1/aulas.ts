@@ -556,7 +556,7 @@ export const dlx10: AulaDlx = {
       fala: "Rima: qual rima com tartaruga?",
       opcoes: [
         { palavra: "LAGARTA", correta: false },
-        { palavra: "JARRUGA", correta: true },
+        { palavra: "RUGA", correta: true },
         { palavra: "CORUJA", correta: false, imagem: coruja },
       ],
     },
