@@ -194,15 +194,15 @@ export const dlx15: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Última vogal: U! Bico igual assobiando: UUUUU. Como o trem: UUUU!",
+      fala: "Última vogal: u! Bico igual assobiando: uuu. Como o trem: uuu!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra U. UUUUU.", palavra: "U", enfase: "U" },
-    { tipo: "escuta", fala: "UUUVA. U-VA.", palavra: "UVA", enfase: "U" },
-    { tipo: "escuta", fala: "UUURSO. UR-SO.", palavra: "URSO", enfase: "U" },
+    { tipo: "escuta", fala: "Essa é a letra u. uuu.", palavra: "U", enfase: "U" },
+    { tipo: "escuta", fala: "Uuu... uva.", palavra: "UVA", enfase: "U" },
+    { tipo: "escuta", fala: "Uuu... urso.", palavra: "URSO", enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "UNHA", correta: true },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
@@ -210,14 +210,14 @@ export const dlx15: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com UUU?",
+      fala: "E qual dessas começa com uuu?",
       opcoes: [
         { palavra: "URUBU", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "PORCO", correta: false, imagem: porco },
       ],
     },
-    { tipo: "fim", fala: "Bico feito, saiu UUU. Você conhece TODAS as vogais!", imagem: pipVet },
+    { tipo: "fim", fala: "Bico feito, saiu uuu. Você conhece todas as vogais!", imagem: pipVet },
   ],
 };
 
