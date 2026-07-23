@@ -234,7 +234,7 @@ function CenaView({
             />
           ) : null;
         })()}
-        <div className="text-3xl md:text-4xl font-black text-white tracking-widest">
+        <div className="w-full text-center text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-wider sm:tracking-widest leading-tight break-words px-2">
           {cena.palavra}
         </div>
         <p className="text-sm text-orange-200 flex items-center gap-2">
