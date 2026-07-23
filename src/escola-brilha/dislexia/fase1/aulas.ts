@@ -53,7 +53,7 @@ export const dlx01: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual palavra rima com VACA? Escuta: VA-CA... escolhe a que termina igual.",
+      fala: "Qual palavra rima com vaca? Escuta: vaca... escolhe a que termina igual.",
       opcoes: [
         { palavra: "FACA", correta: true },
         { palavra: "SOL", correta: false },
