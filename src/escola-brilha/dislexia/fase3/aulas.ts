@@ -34,15 +34,15 @@ export const dlx21: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante M! Fecha a boca e faz MMMMM, igual quando a comida tá gostosa. Sente vibrar no nariz.",
+      fala: "Consoante m! Fecha a boca e faz mmm, igual quando a comida tá gostosa. Sente vibrar no nariz.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra M. MMMMM.", palavra: "M", enfase: "M" },
-    { tipo: "escuta", fala: "MMMACACO. M-A-CA-CO. Começa com MMM.", palavra: "MACACO", imagem: macaco, enfase: "M" },
-    { tipo: "escuta", fala: "MMMÃO. MÃO. Também MMM.", palavra: "MÃO", enfase: "M" },
+    { tipo: "escuta", fala: "Essa é a letra m. mmm.", palavra: "M", enfase: "M" },
+    { tipo: "escuta", fala: "Mmm... macaco. Começa com mmm.", palavra: "MACACO", imagem: macaco, enfase: "M" },
+    { tipo: "escuta", fala: "Mmm... mão. Também mmm.", palavra: "MÃO", enfase: "M" },
     {
       tipo: "escolha",
-      fala: "Qual começa com MMM?",
+      fala: "Qual começa com mmm?",
       opcoes: [
         { palavra: "MACACO", correta: true, imagem: macaco },
         { palavra: "VACA", correta: false, imagem: vaca },
@@ -50,15 +50,15 @@ export const dlx21: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com MMM?",
+      fala: "E qual dessas começa com mmm?",
       opcoes: [
         { palavra: "MALA", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "reforco", fala: "Boca fechada, som sai pelo nariz. Isso é o MMM!", imagem: pipVet },
-    { tipo: "fim", fala: "M de MÃE, M de MEL. Você achou o M!", imagem: pipVet },
+    { tipo: "reforco", fala: "Boca fechada, som sai pelo nariz. Isso é o mmm!", imagem: pipVet },
+    { tipo: "fim", fala: "m de mãe, m de mel. Você achou o m!", imagem: pipVet },
   ],
 };
 
