@@ -269,8 +269,10 @@ function NeuroAtividade() {
     // Tempo de resposta desta questão (segundos)
     const responseTimeSec = Math.max(0.1, (Date.now() - startedAtRef.current) / 1000);
     const activityId = variation ? `${slug}:${variation.id}` : slug;
-    // Persiste em activity_logs e atualiza métricas do núcleo adaptativo
-    registerPerformance(correto, responseTimeSec, activityId);
+    // Persiste em activity_logs + child_skill_mastery e atualiza métricas do núcleo adaptativo
+    registerPerformance(correto, responseTimeSec, activityId, getNeuroSkillInfo(slug));
+    // Reinicia cronômetro pra próxima resposta
+    startedAtRef.current = Date.now();
 
     if (correto) {
       setAcertos((a) => a + 1);
