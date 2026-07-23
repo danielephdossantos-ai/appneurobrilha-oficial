@@ -30,7 +30,7 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
     setEstado("idle");
     setTentativas(0);
     stopSpeaking();
-    const t = window.setTimeout(() => speakChunked(cena.fala), 250);
+    const t = window.setTimeout(() => speakChunked(cena.fala, { rate: 0.75 }), 250);
     return () => {
       window.clearTimeout(t);
       stopSpeaking();
@@ -46,7 +46,7 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
 
   function tocarFala(texto?: string) {
     stopSpeaking();
-    speakChunked(texto ?? cena.fala);
+    speakChunked(texto ?? cena.fala, { rate: 0.75 });
   }
 
   return (
