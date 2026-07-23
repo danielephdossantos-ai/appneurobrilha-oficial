@@ -9,9 +9,10 @@ type: feature
 Ordem fixa. Cada passo é entregue e validado antes do próximo.
 
 ## ✅ #1 — Integrar Biblioteca Encantada como grupo "Comunicação (PECS/TEACCH)"
-- Adicionar card destacado no topo do dashboard `/neuro-treino` linkando para `/escola-brilha/biblioteca-encantada`.
-- Rotular como "Comunicação Funcional · PECS/TEACCH/Denver · 60 aulas".
-- Status: **em andamento**
+- Card destacado no topo do dashboard `/neuro-treino` linkando para `/escola-brilha/biblioteca-encantada`.
+- Rotulado como "Comunicação Funcional · PECS/TEACCH/Denver · 60 aulas".
+- Status: **concluído** (validado por screenshot mobile 390x1600).
+
 
 ## ⬜ #2 — Trilha Dislexia (Orton-Gillingham)
 - Criar novo grupo "Dislexia · Trilha Orton-Gillingham" no Neuro Treino.
