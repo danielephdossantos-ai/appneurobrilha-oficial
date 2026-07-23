@@ -107,7 +107,7 @@ export const dlx02: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual rima com CORAÇÃO?",
+      fala: "Qual rima com coração?",
       opcoes: [
         { palavra: "LEÃO", correta: true, imagem: leao },
         { palavra: "GATO", correta: false },
@@ -116,7 +116,7 @@ export const dlx02: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual rima com MACARRÃO?",
+      fala: "Qual rima com macarrão?",
       opcoes: [
         { palavra: "PÃO", correta: true },
         { palavra: "MESA", correta: false },
@@ -125,7 +125,7 @@ export const dlx02: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual rima com FOGUETE?",
+      fala: "E qual rima com foguete?",
       opcoes: [
         { palavra: "SORVETE", correta: true },
         { palavra: "SOL", correta: false },
@@ -134,7 +134,7 @@ export const dlx02: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "Você é o rei da rima! FINAL igual é rima.",
+      fala: "Você é o rei da rima! Final igual é rima.",
       imagem: pipVet,
     },
   ],
@@ -159,21 +159,21 @@ export const dlx03: AulaDlx = {
     },
     {
       tipo: "escuta",
-      fala: "MMMACACO. MA-CA-CO. Começa com MMM.",
+      fala: "Mmm... macaco. Ma-ca-co. Começa com o som mmm.",
       palavra: "MACACO",
       imagem: macaco,
       enfase: "M",
     },
     {
       tipo: "escuta",
-      fala: "MMMOTO. MO-TO. Também começa com MMM.",
+      fala: "Mmm... moto. Mo-to. Também começa com mmm.",
       palavra: "MOTO",
       imagem: moto,
       enfase: "M",
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com o som MMM?",
+      fala: "Qual começa com o som mmm?",
       opcoes: [
         { palavra: "MACACO", correta: true, imagem: macaco },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -181,7 +181,7 @@ export const dlx03: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E agora, qual começa com MMM?",
+      fala: "E agora, qual começa com mmm?",
       opcoes: [
         { palavra: "MOTO", correta: true, imagem: moto },
         { palavra: "CARRO", correta: false, imagem: carro },
@@ -190,12 +190,12 @@ export const dlx03: AulaDlx = {
     },
     {
       tipo: "reforco",
-      fala: "Perfeito! MACACO e MOTO começam com MMM.",
+      fala: "Perfeito! Macaco e moto começam com mmm.",
       imagem: macaco,
     },
     {
       tipo: "fim",
-      fala: "O som M mora no COMECINHO das palavras. Você achou!",
+      fala: "O som m mora no comecinho das palavras. Você achou!",
       imagem: pipVet,
     },
   ],
@@ -215,24 +215,24 @@ export const dlx04: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "O som de hoje é o S. Faz de cobrinha comigo: SSSSSS. Ar saindo pela boca.",
+        "O som de hoje é o s. Faz de cobrinha comigo: sssss. Ar saindo pela boca.",
       imagem: pipVet,
     },
     {
       tipo: "escuta",
-      fala: "SSSOL. SOL. Começa com SSS.",
+      fala: "Sss... sol. Começa com o som sss.",
       palavra: "SOL",
       enfase: "S",
     },
     {
       tipo: "escuta",
-      fala: "SSSAPO. SA-PO. Também SSS.",
+      fala: "Sss... sapo. Sa-po. Também sss.",
       palavra: "SAPO",
       enfase: "S",
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com o som SSS?",
+      fala: "Qual começa com o som sss?",
       opcoes: [
         { palavra: "SAPO", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -240,7 +240,7 @@ export const dlx04: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual outra começa com SSS?",
+      fala: "Qual outra começa com sss?",
       opcoes: [
         { palavra: "SINO", correta: true },
         { palavra: "MOTO", correta: false, imagem: moto },
@@ -249,7 +249,7 @@ export const dlx04: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "SSSS! A cobrinha S começa muitas palavras. Muito bem!",
+      fala: "Sss! A cobrinha s começa muitas palavras. Muito bem!",
       imagem: pipVet,
     },
   ],
@@ -269,26 +269,26 @@ export const dlx05: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "Som novo: P. É um estouro pequenininho: P! P! Como estourar bolha.",
+        "Som novo: p. É um estouro pequenininho: p, p, p. Como estourar bolha.",
       imagem: pipVet,
     },
     {
       tipo: "escuta",
-      fala: "P! PIANO. PI-A-NO.",
+      fala: "P... piano. Pi-a-no.",
       palavra: "PIANO",
       imagem: piano,
       enfase: "P",
     },
     {
       tipo: "escuta",
-      fala: "P! PORCO. POR-CO.",
+      fala: "P... porco. Por-co.",
       palavra: "PORCO",
       imagem: porco,
       enfase: "P",
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com P?",
+      fala: "Qual começa com o som p?",
       opcoes: [
         { palavra: "PINCEL", correta: true, imagem: pincel },
         { palavra: "VACA", correta: false, imagem: vaca },
@@ -296,7 +296,7 @@ export const dlx05: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual começa com P?",
+      fala: "E qual outra começa com p?",
       opcoes: [
         { palavra: "PLANETA", correta: true, imagem: planeta },
         { palavra: "MOTO", correta: false, imagem: moto },
@@ -305,7 +305,7 @@ export const dlx05: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "P de PIP! Você tá voando.",
+      fala: "P de Pip! Você tá voando.",
       imagem: pipVet,
     },
   ],
@@ -329,28 +329,28 @@ export const dlx06: AulaDlx = {
     },
     {
       tipo: "silabas",
-      fala: "VACA tem dois pedaços: VA-CA. Toca em cada um.",
+      fala: "Vaca tem dois pedaços: va-ca. Toca em cada um.",
       palavra: "VACA",
       silabas: ["VA", "CA"],
       imagem: vaca,
     },
     {
       tipo: "silabas",
-      fala: "MACACO tem três pedaços: MA-CA-CO.",
+      fala: "Macaco tem três pedaços: ma-ca-co.",
       palavra: "MACACO",
       silabas: ["MA", "CA", "CO"],
       imagem: macaco,
     },
     {
       tipo: "silabas",
-      fala: "FOGUETE: FO-GUE-TE. Três pedaços.",
+      fala: "Foguete: fo-gue-te. Três pedaços.",
       palavra: "FOGUETE",
       silabas: ["FO", "GUE", "TE"],
       imagem: foguete,
     },
     {
       tipo: "silabas",
-      fala: "ELEFANTE tem quatro: E-LE-FAN-TE.",
+      fala: "Elefante tem quatro: e-le-fan-te.",
       palavra: "ELEFANTE",
       silabas: ["E", "LE", "FAN", "TE"],
       imagem: elefante,
@@ -376,24 +376,24 @@ export const dlx07: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "Alguns sons são parecidos, mas MUDAM a palavra. P e B são assim. Escuta: PATO... BATO. Diferente!",
+        "Alguns sons são parecidos, mas mudam a palavra. P e b são assim. Escuta: pato... bato. Diferente!",
       imagem: pipVet,
     },
     {
       tipo: "escuta",
-      fala: "PATO. P! P! P!",
+      fala: "Pato. Som p, p, p.",
       palavra: "PATO",
       enfase: "P",
     },
     {
       tipo: "escuta",
-      fala: "BATO. B! B! B!",
+      fala: "Bato. Som b, b, b.",
       palavra: "BATO",
       enfase: "B",
     },
     {
       tipo: "escolha",
-      fala: "Escuta: PATO. Toca em PATO.",
+      fala: "Escuta: pato. Toca em pato.",
       opcoes: [
         { palavra: "PATO", correta: true },
         { palavra: "BATO", correta: false },
@@ -401,7 +401,7 @@ export const dlx07: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Agora: BOLA. Toca em BOLA.",
+      fala: "Agora: bola. Toca em bola.",
       opcoes: [
         { palavra: "BOLA", correta: true },
         { palavra: "POLA", correta: false },
@@ -409,7 +409,7 @@ export const dlx07: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Última: PORTA. Toca em PORTA.",
+      fala: "Última: porta. Toca em porta.",
       opcoes: [
         { palavra: "PORTA", correta: true },
         { palavra: "BORDA", correta: false },
@@ -417,7 +417,7 @@ export const dlx07: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "P e B são vizinhos, mas diferentes. Ouvido afiado!",
+      fala: "P e b são vizinhos, mas diferentes. Ouvido afiado!",
       imagem: pipVet,
     },
   ],
@@ -436,25 +436,25 @@ export const dlx08: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "F e V são feitos com os dentes no lábio. F não vibra. V vibra! Põe a mão no pescoço. FFF... VVV.",
+        "F e v são feitos com os dentes no lábio. O f não vibra. O v vibra! Põe a mão no pescoço. Fff... vvv.",
       imagem: pipVet,
     },
     {
       tipo: "escuta",
-      fala: "FACA. FFF.",
+      fala: "Faca. Fff.",
       palavra: "FACA",
       enfase: "F",
     },
     {
       tipo: "escuta",
-      fala: "VACA. VVV.",
+      fala: "Vaca. Vvv.",
       palavra: "VACA",
       imagem: vaca,
       enfase: "V",
     },
     {
       tipo: "escolha",
-      fala: "Escuta: VACA. Toca em VACA.",
+      fala: "Escuta: vaca. Toca em vaca.",
       opcoes: [
         { palavra: "VACA", correta: true, imagem: vaca },
         { palavra: "FACA", correta: false },
@@ -462,7 +462,7 @@ export const dlx08: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Agora: FOCA. Toca em FOCA.",
+      fala: "Agora: foca. Toca em foca.",
       opcoes: [
         { palavra: "FOCA", correta: true },
         { palavra: "VOCA", correta: false },
@@ -470,7 +470,7 @@ export const dlx08: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E: VELA. Toca em VELA.",
+      fala: "E agora: vela. Toca em vela.",
       opcoes: [
         { palavra: "VELA", correta: true },
         { palavra: "FELA", correta: false },
@@ -478,7 +478,7 @@ export const dlx08: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "F sem voz, V com voz. Você sentiu a vibração!",
+      fala: "F sem voz, v com voz. Você sentiu a vibração!",
       imagem: pipVet,
     },
   ],
@@ -497,12 +497,12 @@ export const dlx09: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "Toda palavra tem UM som no final. Escuta: SOL. O último som é... LLL. SO-L.",
+        "Toda palavra tem um som no final. Escuta: sol. O último som é... lll. So-l.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Escuta CAVALO. Qual som termina? Toca no som certo.",
+      fala: "Escuta cavalo. Qual som termina? Toca no som certo.",
       opcoes: [
         { palavra: "O", correta: true },
         { palavra: "A", correta: false },
@@ -511,7 +511,7 @@ export const dlx09: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Escuta ESTRELA. Qual som termina?",
+      fala: "Escuta estrela. Qual som termina?",
       opcoes: [
         { palavra: "A", correta: true },
         { palavra: "L", correta: false },
@@ -520,7 +520,7 @@ export const dlx09: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Escuta PIANO. Qual som termina?",
+      fala: "Escuta piano. Qual som termina?",
       opcoes: [
         { palavra: "O", correta: true },
         { palavra: "A", correta: false },
@@ -529,7 +529,7 @@ export const dlx09: AulaDlx = {
     },
     {
       tipo: "fim",
-      fala: "Você achou o FINAL. Ouvido de espião!",
+      fala: "Você achou o final. Ouvido de espião!",
       imagem: pipVet,
     },
   ],
@@ -553,7 +553,7 @@ export const dlx10: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Rima: qual rima com TARTARUGA?",
+      fala: "Rima: qual rima com tartaruga?",
       opcoes: [
         { palavra: "LAGARTA", correta: false },
         { palavra: "JARRUGA", correta: true },
@@ -562,7 +562,7 @@ export const dlx10: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Som inicial: qual começa com MMM?",
+      fala: "Som inicial: qual começa com o som mmm?",
       opcoes: [
         { palavra: "MOTO", correta: true, imagem: moto },
         { palavra: "SAPO", correta: false },
@@ -571,14 +571,14 @@ export const dlx10: AulaDlx = {
     },
     {
       tipo: "silabas",
-      fala: "Conta os pedaços de TARTARUGA.",
+      fala: "Conta os pedaços de tartaruga.",
       palavra: "TARTARUGA",
       silabas: ["TAR", "TA", "RU", "GA"],
       imagem: tartaruga,
     },
     {
       tipo: "escolha",
-      fala: "Som final: qual som termina CAMINHÃO?",
+      fala: "Som final: qual som termina caminhão?",
       opcoes: [
         { palavra: "ÃO", correta: true },
         { palavra: "A", correta: false },
@@ -587,7 +587,7 @@ export const dlx10: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Par mínimo: escuta FACA. Toca em FACA.",
+      fala: "Par mínimo: escuta faca. Toca em faca.",
       opcoes: [
         { palavra: "FACA", correta: true },
         { palavra: "VACA", correta: false, imagem: vaca },
@@ -595,7 +595,7 @@ export const dlx10: AulaDlx = {
     },
     {
       tipo: "reforco",
-      fala: "Você fechou a Fase 1! O ouvido tá pronto pra ver as LETRAS.",
+      fala: "Você fechou a Fase 1! O ouvido tá pronto pra ver as letras.",
       imagem: pipVet,
     },
     {
