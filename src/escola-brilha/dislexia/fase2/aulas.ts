@@ -74,15 +74,15 @@ export const dlx12: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora é a vogal E. Sorriso pequeno, canto da boca pro lado: EEEEE.",
+      fala: "Agora é a vogal e. Sorriso pequeno, canto da boca pro lado: eee.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra E. EEEEE.", palavra: "E", enfase: "E" },
-    { tipo: "escuta", fala: "EEELEFANTE. E-LE-FAN-TE.", palavra: "ELEFANTE", imagem: elefante, enfase: "E" },
-    { tipo: "escuta", fala: "EEESTRELA. ES-TRE-LA.", palavra: "ESTRELA", imagem: estrela, enfase: "E" },
+    { tipo: "escuta", fala: "Essa é a letra e. eee.", palavra: "E", enfase: "E" },
+    { tipo: "escuta", fala: "Eee... elefante.", palavra: "ELEFANTE", imagem: elefante, enfase: "E" },
+    { tipo: "escuta", fala: "Eee... estrela.", palavra: "ESTRELA", imagem: estrela, enfase: "E" },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ELEFANTE", correta: true, imagem: elefante },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -90,14 +90,14 @@ export const dlx12: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual também começa com EEE?",
+      fala: "E qual também começa com eee?",
       opcoes: [
         { palavra: "ESCADA", correta: true },
         { palavra: "PORCO", correta: false, imagem: porco },
         { palavra: "LUA", correta: false, imagem: lua },
       ],
     },
-    { tipo: "fim", fala: "Boca sorri, sai EEE. Muito bem!", imagem: pipVet },
+    { tipo: "fim", fala: "Boca sorri, sai eee. Muito bem!", imagem: pipVet },
   ],
 };
 
