@@ -46,6 +46,17 @@ const ICONE_POR_AULA: Record<string, string> = {
   "dlx-28-consoante-z": icArticulacao,
   "dlx-29-revisao-mslf": icDiscrimAud,
   "dlx-30-revisao-vnrz": icFormandoPal,
+  // Fase 4 · Sílabas Simples CV
+  "dlx-31-familia-m": icFormandoPal,
+  "dlx-32-familia-p": icFormandoPal,
+  "dlx-33-familia-t": icFormandoPal,
+  "dlx-34-familia-l": icFormandoPal,
+  "dlx-35-familia-f": icFormandoPal,
+  "dlx-36-familia-v": icFormandoPal,
+  "dlx-37-familia-b": icFormandoPal,
+  "dlx-38-familia-c": icFormandoPal,
+  "dlx-39-revisao-mptl": icPedacinhos,
+  "dlx-40-revisao-fvbc": icPedacinhos,
 };
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
