@@ -83,8 +83,18 @@ function NeuroAtividade() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Núcleo adaptativo: métricas, ajuste, registro em activity_logs
+  const { adjustment, metrics, registerPerformance, requestHelp } = useNeuroAdaptive();
+  const startedAtRef = useRef<number>(Date.now());
+  const breakToastFiredRef = useRef<boolean>(false);
+
   const meta = CATEGORIAS[slug];
-  const vars = VARIATIONS[slug];
+  const rawVars = VARIATIONS[slug];
+  // Filtragem por dificuldade adaptativa
+  const vars = useMemo(
+    () => (rawVars ? filterByDifficulty(rawVars, adjustment.difficultyScale) : rawVars),
+    [rawVars, adjustment.difficultyScale],
+  );
 
   useEffect(() => {
     setIndex(0);
@@ -97,6 +107,8 @@ function NeuroAtividade() {
         hiperfoco: hiperfoco?.label ?? null,
         metaEncontrada: Boolean(meta),
         quantidadeVariacoes: vars?.length ?? 0,
+        difficultyScale: adjustment.difficultyScale,
+        stimuliReduction: adjustment.stimuliReduction,
       });
 
       if (!meta || !vars) {
@@ -123,7 +135,7 @@ function NeuroAtividade() {
       setError(err.message || "Falha ao carregar atividade");
       setIsLoading(false);
     }
-  }, [slug, meta, vars, hiperfoco?.label]);
+  }, [slug, meta, vars, hiperfoco?.label, adjustment.difficultyScale, adjustment.stimuliReduction]);
 
   // ⚠️ TODOS os hooks devem ficar ANTES dos early returns
   const hasData = Boolean(meta && vars && vars.length > 0);
@@ -134,6 +146,24 @@ function NeuroAtividade() {
   const instrucaoTematica =
     hiperfoco && meta ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : "";
   const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
+
+  // Timestamp por questão para medir tempo de resposta
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, [variation?.id]);
+
+  // Alerta de pausa quando o núcleo indica fadiga
+  useEffect(() => {
+    const needsBreak = adjustment.suggestBreak || metrics.fatigue.needForBreak;
+    if (needsBreak && !breakToastFiredRef.current) {
+      breakToastFiredRef.current = true;
+      toast("Que tal uma pausa curtinha? 💧✨", {
+        description: "Respira, bebe água e volta quando estiver pronto.",
+        duration: 6000,
+      });
+    }
+    if (!needsBreak) breakToastFiredRef.current = false;
+  }, [adjustment.suggestBreak, metrics.fatigue.needForBreak]);
 
   const narracao = useMemo(() => {
     if (!variation || !instrucaoTematica) return "";
@@ -150,6 +180,7 @@ function NeuroAtividade() {
     const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
     return `${saud}${instrucaoTematica}${extra}`;
   }, [variation, instrucaoTematica, nomeCrianca]);
+
 
   useEffect(() => {
     if (!voiceOn || !narracao) return;
