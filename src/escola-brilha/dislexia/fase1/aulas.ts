@@ -66,7 +66,7 @@ export const dlx01: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Agora escuta LUA. Qual rima com LUA?",
+      fala: "Agora escuta lua. Qual rima com lua?",
       opcoes: [
         { palavra: "RUA", correta: true, imagem: undefined },
         { palavra: "PÉ", correta: false },
