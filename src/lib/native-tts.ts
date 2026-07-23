@@ -15,6 +15,21 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
   out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
 
+  // ─────────────────────────────────────────────────────────────
+  // (Precisa vir ANTES dos dicionários de sílabas — se um pedaço da
+  // palavra hifenada for uma sílaba CV conhecida, a regra CV vai comer
+  // primeiro e sobra "PA lhaço" em vez de "palhaço".)
+  // Hifenação silábica em MAIÚSCULO: "BRA-ÇO", "PA-LHA-ÇO", "GRAN-DE",
+  // "P-A-TO", "S-O-L". Vozes nativas tratam o hífen como pausa e leem cada
+  // pedaço como letra ("BRA cê-cedilha ó"). Para a fala do professor,
+  // colapsamos a palavra hifenada num token único em minúsculo — o visual
+  // (silabas: […]) mantém a segmentação sem depender disso.
+  out = out.replace(
+    /\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}(?:[-·][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}){1,6})\b/g,
+    (token) => token.replace(/[-·]/g, "").toLowerCase(),
+  );
+
+
   // Evita leituras artificiais com letras repetidas na alfabetização.
   // O visual pode destacar o som repetido, mas a voz do professor precisa soar natural.
   out = out.replace(/\bSO\s*[-·]?\s*L+\b/gi, "sol");
