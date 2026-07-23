@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks, Lock } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks, Lock, Combine } from "lucide-react";
 import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
 import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
