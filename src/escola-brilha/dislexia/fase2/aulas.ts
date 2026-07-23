@@ -114,15 +114,15 @@ export const dlx13: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal I! Sorriso bem grande, mostra os dentes: IIIIII.",
+      fala: "Vogal i! Sorriso bem grande, mostra os dentes: iii.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra I. IIIII.", palavra: "I", enfase: "I" },
-    { tipo: "escuta", fala: "IIIGREJA. I-GRE-JA.", palavra: "IGREJA", enfase: "I" },
-    { tipo: "escuta", fala: "IIILHA. I-LHA.", palavra: "ILHA", enfase: "I" },
+    { tipo: "escuta", fala: "Essa é a letra i. iii.", palavra: "I", enfase: "I" },
+    { tipo: "escuta", fala: "Iii... igreja.", palavra: "IGREJA", enfase: "I" },
+    { tipo: "escuta", fala: "Iii... ilha.", palavra: "ILHA", enfase: "I" },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IGUANA", correta: true },
         { palavra: "GALINHA", correta: false, imagem: galinha },
@@ -130,14 +130,14 @@ export const dlx13: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com IIII?",
+      fala: "E qual dessas começa com iii?",
       opcoes: [
         { palavra: "IMÃ", correta: true },
         { palavra: "OVELHA", correta: false, imagem: ovelha },
         { palavra: "FOGUETE", correta: false, imagem: foguete },
       ],
     },
-    { tipo: "fim", fala: "IIII é o sorriso do dentista! Achou!", imagem: pipVet },
+    { tipo: "fim", fala: "Iii é o sorriso do dentista! Achou!", imagem: pipVet },
   ],
 };
 
