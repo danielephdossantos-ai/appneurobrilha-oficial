@@ -41,6 +41,8 @@ import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
+import { useAbaPrompting } from "@/hooks/useAbaPrompting";
+import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
@@ -88,6 +90,9 @@ function NeuroAtividade() {
   const { adjustment, metrics, registerPerformance, requestHelp } = useNeuroAdaptive();
   const startedAtRef = useRef<number>(Date.now());
   const breakToastFiredRef = useRef<boolean>(false);
+  // Hierarquia ABA de prompting por habilidade (nível 1..4)
+  const skillInfo = useMemo(() => getNeuroSkillInfo(slug), [slug]);
+  const aba = useAbaPrompting(activeChild?.id, skillInfo.skillCode);
 
   const meta = CATEGORIAS[slug];
   const rawVars = VARIATIONS[slug];
@@ -269,8 +274,11 @@ function NeuroAtividade() {
     // Tempo de resposta desta questão (segundos)
     const responseTimeSec = Math.max(0.1, (Date.now() - startedAtRef.current) / 1000);
     const activityId = variation ? `${slug}:${variation.id}` : slug;
-    // Persiste em activity_logs + child_skill_mastery e atualiza métricas do núcleo adaptativo
-    registerPerformance(correto, responseTimeSec, activityId, getNeuroSkillInfo(slug));
+    // Persiste em activity_logs + child_skill_mastery, atualiza núcleo adaptativo
+    // e recebe o novo estado ABA de prompting.
+    void registerPerformance(correto, responseTimeSec, activityId, skillInfo).then((next) => {
+      aba.applyLocal(next);
+    });
     // Reinicia cronômetro pra próxima resposta
     startedAtRef.current = Date.now();
 
@@ -346,6 +354,26 @@ function NeuroAtividade() {
         </span>
       </div>
 
+      {/* Chip de nível de ajuda ABA (fading de prompting) */}
+      {activeChild && !aba.loading && (
+        <div className="mb-3 flex items-center justify-between rounded-2xl bg-card border-2 border-primary/20 px-3 py-2 text-xs">
+          <div className="flex items-center gap-2">
+            <Hand size={14} className="text-primary" />
+            <span className="font-black uppercase tracking-wider text-primary">
+              Ajuda: {aba.label}
+            </span>
+          </div>
+          <span className="text-muted-foreground truncate max-w-[60%] text-right">
+            {aba.hint}
+          </span>
+        </div>
+      )}
+      {aba.mastery.achieved && (
+        <div className="mb-3 rounded-2xl bg-success/10 border-2 border-success/40 px-3 py-2 text-xs font-bold text-success text-center">
+          🎓 Habilidade dominada — pronta para avançar!
+        </div>
+      )}
+
       {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
         <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
           <img
@@ -366,6 +394,7 @@ function NeuroAtividade() {
           slug={slug}
           variation={variation}
           onConcluir={onConcluir}
+          promptLevel={aba.level}
           key={variation.id}
         />
       </Card>
@@ -389,10 +418,12 @@ function MechanicRenderer({
   slug,
   variation,
   onConcluir,
+  promptLevel,
 }: {
   slug: CategoriaSlug;
   variation: any;
   onConcluir: (c: boolean) => void;
+  promptLevel: import("@/services/neuro-treino/promptingEngine").PromptLevel;
 }) {
   switch (slug) {
     case "sons-iniciais":
@@ -426,7 +457,7 @@ function MechanicRenderer({
     case "paromatopeias-corpo":
       return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
     case "tracado-letras":
-      return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
+      return <TracadoLetras p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     case "triagem-categorias":
       return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
     case "expressao-emocao":
@@ -435,11 +466,11 @@ function MechanicRenderer({
     case "discriminacao-auditiva":
       return <DiscriminacaoAuditiva p={variation.payload} onDone={onConcluir} />;
     case "articulacao-sons":
-      return <ArticulacaoSons p={variation.payload} onDone={onConcluir} />;
+      return <ArticulacaoSons p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     case "vocabulario-semantico":
       return <VocabularioSemantico p={variation.payload} onDone={onConcluir} />;
     case "nomeacao-rapida":
-      return <NomeacaoRapida p={variation.payload} onDone={onConcluir} />;
+      return <NomeacaoRapida p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     // COORDENAÇÃO MOTORA
     case "toque-sequencia":
       return <ToqueSequencia p={variation.payload} onDone={onConcluir} />;

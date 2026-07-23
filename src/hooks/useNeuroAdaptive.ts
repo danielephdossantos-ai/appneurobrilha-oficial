@@ -169,7 +169,7 @@ export function useNeuroAdaptive() {
   );
 
   const registerPerformance = useCallback(
-    (
+    async (
       isCorrect: boolean,
       responseTime: number,
       activityId?: string,
@@ -204,9 +204,10 @@ export function useNeuroAdaptive() {
         activityId,
         isCorrect,
       });
-      // Persiste agregado por habilidade (child_skill_mastery)
+      // Persiste agregado por habilidade (child_skill_mastery) e retorna o novo
+      // estado de prompting ABA para a UI atualizar imediatamente.
       if (activeChild && skillInfo) {
-        void recordSkillAttempt({
+        return await recordSkillAttempt({
           childId: activeChild.id,
           skillCode: skillInfo.skillCode,
           materia: skillInfo.materia,
@@ -214,6 +215,7 @@ export function useNeuroAdaptive() {
           durationMs: Math.round(responseTime * 1000),
         });
       }
+      return null;
     },
     [persistLog, activeChild],
   );
