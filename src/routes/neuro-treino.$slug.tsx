@@ -343,7 +343,7 @@ function NeuroAtividade() {
         </span>
       </div>
 
-      {slug !== "motorzinho-dos-sons" && (
+      {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
         <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
           <img
             src={getElementoImg(elemento)}
@@ -356,6 +356,7 @@ function NeuroAtividade() {
           </div>
         </div>
       )}
+
 
       <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
         <MechanicRenderer
