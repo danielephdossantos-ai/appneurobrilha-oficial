@@ -61,7 +61,7 @@ export const dlx01: AulaDlx = {
     },
     {
       tipo: "reforco",
-      fala: "Isso! VACA e FACA rimam. O final é IGUAL.",
+      fala: "Isso! Vaca e faca rimam. O final é igual.",
       imagem: vaca,
     },
     {
