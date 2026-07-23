@@ -366,24 +366,24 @@ export const dlx19: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Quando o V encontra a vogal, faz uma sílaba! V + A = VA. V + I = VI. Escuta.",
+      fala: "Quando o v encontra a vogal, faz uma sílaba! V mais a dá vá. V mais i dá vi. Escuta.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "V + A = VA. VVVA. VACA começa com VA!", palavra: "VA", enfase: "V" },
-    { tipo: "silabas", fala: "VACA: VA-CA.", palavra: "VACA", silabas: ["VA", "CA"], imagem: vaca },
-    { tipo: "silabas", fala: "VELA: VE-LA.", palavra: "VELA", silabas: ["VE", "LA"] },
-    { tipo: "silabas", fala: "VIDA: VI-DA.", palavra: "VIDA", silabas: ["VI", "DA"] },
-    { tipo: "silabas", fala: "VOVÔ: VO-VÔ.", palavra: "VOVÔ", silabas: ["VO", "VÔ"] },
+    { tipo: "escuta", fala: "V mais a dá vá. Vaca começa com vá!", palavra: "VA", enfase: "V" },
+    { tipo: "silabas", fala: "vaca: vá, ca.", palavra: "VACA", silabas: ["VA", "CA"], imagem: vaca },
+    { tipo: "silabas", fala: "vela: vé, la.", palavra: "VELA", silabas: ["VE", "LA"] },
+    { tipo: "silabas", fala: "vida: vi, da.", palavra: "VIDA", silabas: ["VI", "DA"] },
+    { tipo: "silabas", fala: "vovô: vó, vô.", palavra: "VOVÔ", silabas: ["VO", "VÔ"] },
     {
       tipo: "escolha",
-      fala: "Qual sílaba começa VACA?",
+      fala: "Qual sílaba começa a palavra vaca?",
       opcoes: [
         { palavra: "VA", correta: true },
         { palavra: "VI", correta: false },
         { palavra: "VU", correta: false },
       ],
     },
-    { tipo: "fim", fala: "Consoante + vogal = sílaba. Segredo revelado!", imagem: pipVet },
+    { tipo: "fim", fala: "Consoante mais vogal é igual a sílaba. Segredo revelado!", imagem: pipVet },
   ],
 };
 
