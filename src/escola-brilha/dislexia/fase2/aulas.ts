@@ -399,12 +399,12 @@ export const dlx20: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Chegou o fim da Fase 2! Vamos rever as CINCO vogais que você aprendeu.",
+      fala: "Chegou o fim da Fase 2! Vamos rever as cinco vogais que você aprendeu.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ANEL", correta: true },
         { palavra: "URSO", correta: false },
@@ -413,7 +413,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ELEFANTE", correta: true, imagem: elefante },
         { palavra: "IMÃ", correta: false },
@@ -422,7 +422,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IGREJA", correta: true },
         { palavra: "AVIÃO", correta: false },
@@ -431,7 +431,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "ÓCULOS", correta: true },
         { palavra: "ESCADA", correta: false },
@@ -440,14 +440,14 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "URSO", correta: true },
         { palavra: "ABELHA", correta: false },
         { palavra: "ILHA", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "As CINCO vogais no seu ouvido!", imagem: pipVet },
-    { tipo: "fim", fala: "A, E, I, O, U — as vogais são as MÃES das palavras. Fase 2 completa!", imagem: pipVet },
+    { tipo: "reforco", fala: "As cinco vogais no seu ouvido!", imagem: pipVet },
+    { tipo: "fim", fala: "a, e, i, o, u — as vogais são as mães das palavras. Fase 2 completa!", imagem: pipVet },
   ],
 };
