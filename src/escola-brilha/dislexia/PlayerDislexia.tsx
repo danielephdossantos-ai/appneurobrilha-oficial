@@ -191,14 +191,17 @@ function CenaView({
                         : "border-white hover:border-orange-300"
                 }`}
               >
-                {o.imagem ? (
-                  <img
-                    src={o.imagem}
-                    alt=""
-                    className="w-full h-20 object-contain"
-                    draggable={false}
-                  />
-                ) : null}
+                {(() => {
+                  const src = o.imagem ?? imagemPalavra(o.palavra);
+                  return src ? (
+                    <img
+                      src={src}
+                      alt=""
+                      className="w-full h-20 object-contain"
+                      draggable={false}
+                    />
+                  ) : null;
+                })()}
                 <div className="text-2xl font-black tracking-wider">
                   {o.palavra}
                 </div>
