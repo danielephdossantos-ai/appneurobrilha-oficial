@@ -188,19 +188,22 @@ function DislexiaIndex() {
                         </div>
 
                         <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
-                          <div className="w-full h-full rounded-2xl bg-gradient-to-br from-orange-100 to-fuchsia-100 dark:from-orange-950/40 dark:to-fuchsia-950/40 grid place-items-center overflow-hidden p-2">
-                            {getAulaImagem(aula) ? (
-                              <img
-                                src={getAulaImagem(aula)!}
-                                alt={aula.titulo}
-                                className="w-full h-full object-contain drop-shadow-md"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <span className="text-5xl">
-                                {aula.fone ? aula.fone.replaceAll("/", "") : "🎧"}
-                              </span>
-                            )}
+                          <div className="w-full h-full rounded-2xl bg-white dark:bg-slate-900/40 grid place-items-center overflow-hidden p-1">
+                            {(() => {
+                              const icone = ICONE_POR_AULA[aula.slug] ?? getAulaImagem(aula);
+                              return icone ? (
+                                <img
+                                  src={icone}
+                                  alt={aula.titulo}
+                                  className="w-full h-full object-contain"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <span className="text-5xl">
+                                  {aula.fone ? aula.fone.replaceAll("/", "") : "🎧"}
+                                </span>
+                              );
+                            })()}
                           </div>
                         </div>
 
