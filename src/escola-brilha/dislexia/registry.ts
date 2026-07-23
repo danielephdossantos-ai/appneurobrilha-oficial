@@ -19,6 +19,10 @@ import {
   dlx41, dlx42, dlx43, dlx44, dlx45,
   dlx46, dlx47, dlx48, dlx49, dlx50,
 } from "./fase5/aulas";
+import {
+  dlx51, dlx52, dlx53, dlx54, dlx55,
+  dlx56, dlx57, dlx58, dlx59, dlx60,
+} from "./fase6/aulas";
 
 export const trilhaDislexia: TrilhaDlx = {
   slug: "dislexia",

@@ -188,6 +188,15 @@ const MAPA: Record<string, string> = {
   ONIBUS: onibus,
   FLOR: flor,
   TUCANO: tucano,
+  CHAVE: chave,
+  CHUVA: chuva,
+  "PALHAÇO": palhaco,
+  PALHACO: palhaco,
+  COELHO: coelho,
+  CACHORRO: cachorro,
+  PRATO: prato,
+  ARVORE: arvore,
+  GARFO: garfo,
 };
 
 /** Retorna a URL da imagem correspondente à palavra, se existir no banco. */
