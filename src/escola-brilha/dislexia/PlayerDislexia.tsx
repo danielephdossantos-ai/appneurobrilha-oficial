@@ -272,13 +272,14 @@ function CenaView({
   }
 
   // abertura, escuta, reforco, fim
+  const palavra = cena.tipo === "escuta" ? cena.palavra : undefined;
+  const enfase = cena.tipo === "escuta" ? cena.enfase : undefined;
   const imgSrc =
     ("imagem" in cena && cena.imagem) ||
+    imagemPalavra(palavra) ||
     (cena.tipo === "abertura" || cena.tipo === "reforco" || cena.tipo === "fim"
       ? pipVet
       : undefined);
-  const palavra = cena.tipo === "escuta" ? cena.palavra : undefined;
-  const enfase = cena.tipo === "escuta" ? cena.enfase : undefined;
 
   return (
     <div className="flex flex-col items-center gap-5">
