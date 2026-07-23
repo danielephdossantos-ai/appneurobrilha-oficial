@@ -81,18 +81,10 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     return somVogalElongada[upper] ?? consoanteSegura[upper] ?? ch.toLowerCase();
   });
 
-  // ─────────────────────────────────────────────────────────────
-  // Hifenação silábica em MAIÚSCULO: "BRA-ÇO", "PA-LHA-ÇO", "GRAN-DE",
-  // "P-A-TO", "S-O-L". Vozes nativas tratam o hífen como pausa e leem cada
-  // pedaço como letra ("BRA cê-cedilha ó"). Para a fala do professor,
-  // colapsamos a palavra hifenada num token único em minúsculo — o visual
-  // (silabas: […]) mantém a segmentação sem depender disso.
-  // Aceita 1–6 letras por pedaço para cobrir sílabas simples até encontros
-  // consonantais complexos (CHOR, CHOR-RO, TRAN, etc.).
-  out = out.replace(
-    /\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}(?:[-·][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}){1,6})\b/g,
-    (token) => token.replace(/[-·]/g, "").toLowerCase(),
-  );
+  // (A regra de hifenação em maiúsculo roda lá em cima, ANTES do dicionário
+  //  de sílabas CV, para não deixar pedaços da palavra escaparem.)
+
+
 
   // Dígrafos e encontros consonantais aparecem soltos na fala explicativa
   // ("BR forte", "CH = SHHH"). Sem tradução, o TTS soletra "bê-erre".
