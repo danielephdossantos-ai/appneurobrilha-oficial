@@ -106,8 +106,11 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     // outros pares clínicos
     "Ç": "cê-cedilha", // som SSS mas quando lida como letra na explicação
   };
+  // Nota: NÃO incluir "Ç" aqui — em JS, \b considera Ç como não-word, então
+  // dispara dentro de palavras ("BRAÇO" viraria "BRA cê-cedilha O"). Ç isolado
+  // em explicações é raríssimo e cai no fallback abaixo.
   out = out.replace(
-    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO|Ç)\b/g,
+    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO)\b/g,
     (s) => digrafosEncontros[s] ?? s.toLowerCase(),
   );
 
