@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, CheckCircle2, Sparkles } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
   head: () => ({
@@ -44,6 +44,14 @@ const FASES: Record<
     bg: "from-fuchsia-50 to-fuchsia-100/50 dark:from-fuchsia-950/30 dark:to-fuchsia-900/20",
     border: "border-fuchsia-200 dark:border-fuchsia-800",
     accent: "bg-fuchsia-500",
+  },
+  3: {
+    nome: "Fase 3 · Consoantes Contínuas",
+    icon: Waves,
+    color: "text-emerald-600",
+    bg: "from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20",
+    border: "border-emerald-200 dark:border-emerald-800",
+    accent: "bg-emerald-500",
   },
 };
 
