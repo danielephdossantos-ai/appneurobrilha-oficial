@@ -84,7 +84,7 @@ export const dlx01: AulaDlx = {
     {
       tipo: "fim",
       fala:
-        "Você achou as rimas! Rima é o som do FINAL. Amanhã a gente treina mais.",
+        "Você achou as rimas! Rima é o som do final. Amanhã a gente treina mais.",
       imagem: pipVet,
     },
   ],
