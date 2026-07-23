@@ -173,8 +173,10 @@ function CenaView({
         </button>
 
         <div
-          className={`grid gap-3 w-full ${
-            opcoes.length <= 2 ? "grid-cols-2" : "grid-cols-3"
+          className={`grid gap-2 sm:gap-3 w-full ${
+            opcoes.length <= 2
+              ? "grid-cols-2"
+              : "grid-cols-2 sm:grid-cols-3"
           }`}
         >
           {opcoes.map((o, i) => {
@@ -185,7 +187,7 @@ function CenaView({
                 whileTap={{ scale: 0.94 }}
                 onClick={() => (o.correta ? onAcerto() : onErro())}
                 onDoubleClick={() => onFalar(o.palavra)}
-                className={`rounded-2xl border-4 bg-white text-purple-900 shadow-lg p-3 flex flex-col items-center justify-center gap-2 min-h-[9rem] transition-all ${
+                className={`rounded-2xl border-4 bg-white text-purple-900 shadow-lg p-2 sm:p-3 flex flex-col items-center justify-center gap-2 min-h-[9rem] transition-all ${
                   estado === "acerto" && o.correta
                     ? "border-emerald-400 ring-4 ring-emerald-200"
                     : dica
@@ -201,12 +203,12 @@ function CenaView({
                     <img
                       src={src}
                       alt=""
-                      className="w-full h-20 object-contain"
+                      className="w-full h-16 sm:h-20 object-contain"
                       draggable={false}
                     />
                   ) : null;
                 })()}
-                <div className="text-2xl font-black tracking-wider">
+                <div className="w-full text-center text-base sm:text-2xl font-black tracking-normal sm:tracking-wider leading-tight break-words">
                   {o.palavra}
                 </div>
               </motion.button>
