@@ -424,12 +424,12 @@ export const dlx30: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Últimas quatro: V, N, R, Z. Depois a gente junta com vogal!",
+      fala: "Últimas quatro: v, n, r, z. Depois a gente junta com vogal!",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com VVV (vibra no lábio)?",
+      fala: "Qual começa com vvv, que vibra no lábio?",
       opcoes: [
         { palavra: "VACA", correta: true, imagem: vaca },
         { palavra: "NAVIO", correta: false },
@@ -438,7 +438,7 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com NNN (som pelo nariz)?",
+      fala: "Qual começa com nnn, som pelo nariz?",
       opcoes: [
         { palavra: "NUVEM", correta: true },
         { palavra: "ZEBRA", correta: false },
@@ -447,7 +447,7 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com RRR (motor)?",
+      fala: "Qual começa com rrr, som de motor?",
       opcoes: [
         { palavra: "ROSA", correta: true },
         { palavra: "VOVÔ", correta: false },
@@ -456,15 +456,15 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com ZZZ (abelha)?",
+      fala: "Qual começa com zzz, som de abelha?",
       opcoes: [
         { palavra: "ZERO", correta: true },
         { palavra: "NAVIO", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "silabas", fala: "Agora junta: M + A = MA. MACACO começa com MA.", palavra: "MACACO", silabas: ["MA", "CA", "CO"], imagem: macaco },
-    { tipo: "silabas", fala: "S + O = SO. SOL tem SO.", palavra: "SOL", silabas: ["SOL"] },
-    { tipo: "fim", fala: "Fase 3 fechada! Você já tem VOGAIS + CONSOANTES CONTÍNUAS. Agora vem SÍLABA!", imagem: pipVet },
+    { tipo: "silabas", fala: "Agora junta: m mais a dá má. macaco começa com má.", palavra: "MACACO", silabas: ["MA", "CA", "CO"], imagem: macaco },
+    { tipo: "silabas", fala: "s mais o dá só. sol tem só.", palavra: "SOL", silabas: ["SOL"] },
+    { tipo: "fim", fala: "Fase 3 fechada! Você já tem as vogais e as consoantes contínuas. Agora vem sílaba!", imagem: pipVet },
   ],
 };
