@@ -33,15 +33,15 @@ export const dlx11: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Hoje a estrela é a vogal A. Abre a boca bem grande e faz: AAAAA. Igual quando o médico olha sua garganta.",
+      fala: "Hoje a estrela é a vogal a. Abre a boca bem grande e faz: aaa. Igual quando o médico olha sua garganta.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra A. AAAAA.", palavra: "A", enfase: "A" },
-    { tipo: "escuta", fala: "AAAVIÃO. A-VI-ÃO. Começa com AAA.", palavra: "AVIÃO", enfase: "A" },
-    { tipo: "escuta", fala: "AAABELHA. A-BE-LHA. Também AAA.", palavra: "ABELHA", enfase: "A" },
+    { tipo: "escuta", fala: "Essa é a letra a. aaa.", palavra: "A", enfase: "A" },
+    { tipo: "escuta", fala: "Aaa... avião. Começa com aaa.", palavra: "AVIÃO", enfase: "A" },
+    { tipo: "escuta", fala: "Aaa... abelha. Também aaa.", palavra: "ABELHA", enfase: "A" },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ABACAXI", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -49,15 +49,15 @@ export const dlx11: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com AAA?",
+      fala: "E qual dessas começa com aaa?",
       opcoes: [
         { palavra: "ANEL", correta: true },
         { palavra: "SOL", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "Isso! A boca abre bem grande no A.", imagem: pipVet },
-    { tipo: "fim", fala: "A de AURORA, A de AMIGO. Você achou o A!", imagem: pipVet },
+    { tipo: "reforco", fala: "Isso! A boca abre bem grande no a.", imagem: pipVet },
+    { tipo: "fim", fala: "a de aurora, a de amigo. Você achou o a!", imagem: pipVet },
   ],
 };
 
@@ -74,15 +74,15 @@ export const dlx12: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Agora é a vogal E. Sorriso pequeno, canto da boca pro lado: EEEEE.",
+      fala: "Agora é a vogal e. Sorriso pequeno, canto da boca pro lado: eee.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra E. EEEEE.", palavra: "E", enfase: "E" },
-    { tipo: "escuta", fala: "EEELEFANTE. E-LE-FAN-TE.", palavra: "ELEFANTE", imagem: elefante, enfase: "E" },
-    { tipo: "escuta", fala: "EEESTRELA. ES-TRE-LA.", palavra: "ESTRELA", imagem: estrela, enfase: "E" },
+    { tipo: "escuta", fala: "Essa é a letra e. eee.", palavra: "E", enfase: "E" },
+    { tipo: "escuta", fala: "Eee... elefante.", palavra: "ELEFANTE", imagem: elefante, enfase: "E" },
+    { tipo: "escuta", fala: "Eee... estrela.", palavra: "ESTRELA", imagem: estrela, enfase: "E" },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ELEFANTE", correta: true, imagem: elefante },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -90,14 +90,14 @@ export const dlx12: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual também começa com EEE?",
+      fala: "E qual também começa com eee?",
       opcoes: [
         { palavra: "ESCADA", correta: true },
         { palavra: "PORCO", correta: false, imagem: porco },
         { palavra: "LUA", correta: false, imagem: lua },
       ],
     },
-    { tipo: "fim", fala: "Boca sorri, sai EEE. Muito bem!", imagem: pipVet },
+    { tipo: "fim", fala: "Boca sorri, sai eee. Muito bem!", imagem: pipVet },
   ],
 };
 
@@ -114,15 +114,15 @@ export const dlx13: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal I! Sorriso bem grande, mostra os dentes: IIIIII.",
+      fala: "Vogal i! Sorriso bem grande, mostra os dentes: iii.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra I. IIIII.", palavra: "I", enfase: "I" },
-    { tipo: "escuta", fala: "IIIGREJA. I-GRE-JA.", palavra: "IGREJA", enfase: "I" },
-    { tipo: "escuta", fala: "IIILHA. I-LHA.", palavra: "ILHA", enfase: "I" },
+    { tipo: "escuta", fala: "Essa é a letra i. iii.", palavra: "I", enfase: "I" },
+    { tipo: "escuta", fala: "Iii... igreja.", palavra: "IGREJA", enfase: "I" },
+    { tipo: "escuta", fala: "Iii... ilha.", palavra: "ILHA", enfase: "I" },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IGUANA", correta: true },
         { palavra: "GALINHA", correta: false, imagem: galinha },
@@ -130,14 +130,14 @@ export const dlx13: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com IIII?",
+      fala: "E qual dessas começa com iii?",
       opcoes: [
         { palavra: "IMÃ", correta: true },
         { palavra: "OVELHA", correta: false, imagem: ovelha },
         { palavra: "FOGUETE", correta: false, imagem: foguete },
       ],
     },
-    { tipo: "fim", fala: "IIII é o sorriso do dentista! Achou!", imagem: pipVet },
+    { tipo: "fim", fala: "Iii é o sorriso do dentista! Achou!", imagem: pipVet },
   ],
 };
 
@@ -154,15 +154,15 @@ export const dlx14: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal O! A boca faz uma bolinha, uma OVA redondinha: OOOOO.",
+      fala: "Vogal o! A boca faz uma bolinha bem redondinha: ooo.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra O. OOOOO.", palavra: "O", enfase: "O" },
-    { tipo: "escuta", fala: "OOOVO. O-VO.", palavra: "OVO", enfase: "O" },
-    { tipo: "escuta", fala: "OOORELHA. O-RE-LHA.", palavra: "ORELHA", enfase: "O" },
+    { tipo: "escuta", fala: "Essa é a letra o. ooo.", palavra: "O", enfase: "O" },
+    { tipo: "escuta", fala: "Ooo... ovo.", palavra: "OVO", enfase: "O" },
+    { tipo: "escuta", fala: "Ooo... orelha.", palavra: "ORELHA", enfase: "O" },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "OVELHA", correta: true, imagem: ovelha },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -170,14 +170,14 @@ export const dlx14: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com OOO?",
+      fala: "E qual dessas começa com ooo?",
       opcoes: [
         { palavra: "ÓCULOS", correta: true },
         { palavra: "CAVALO", correta: false, imagem: cavalo },
         { palavra: "TARTARUGA", correta: false, imagem: tartaruga },
       ],
     },
-    { tipo: "fim", fala: "Boca redonda, sai OOO. Show!", imagem: pipVet },
+    { tipo: "fim", fala: "Boca redonda, sai ooo. Show!", imagem: pipVet },
   ],
 };
 
@@ -194,15 +194,15 @@ export const dlx15: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Última vogal: U! Bico igual assobiando: UUUUU. Como o trem: UUUU!",
+      fala: "Última vogal: u! Bico igual assobiando: uuu. Como o trem: uuu!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra U. UUUUU.", palavra: "U", enfase: "U" },
-    { tipo: "escuta", fala: "UUUVA. U-VA.", palavra: "UVA", enfase: "U" },
-    { tipo: "escuta", fala: "UUURSO. UR-SO.", palavra: "URSO", enfase: "U" },
+    { tipo: "escuta", fala: "Essa é a letra u. uuu.", palavra: "U", enfase: "U" },
+    { tipo: "escuta", fala: "Uuu... uva.", palavra: "UVA", enfase: "U" },
+    { tipo: "escuta", fala: "Uuu... urso.", palavra: "URSO", enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "UNHA", correta: true },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
@@ -210,14 +210,14 @@ export const dlx15: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com UUU?",
+      fala: "E qual dessas começa com uuu?",
       opcoes: [
         { palavra: "URUBU", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "PORCO", correta: false, imagem: porco },
       ],
     },
-    { tipo: "fim", fala: "Bico feito, saiu UUU. Você conhece TODAS as vogais!", imagem: pipVet },
+    { tipo: "fim", fala: "Bico feito, saiu uuu. Você conhece todas as vogais!", imagem: pipVet },
   ],
 };
 
@@ -233,12 +233,12 @@ export const dlx16: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vamos misturar A, E e I. Escuta o COMECINHO de cada palavra.",
+      fala: "Vamos misturar a, e e i. Escuta o comecinho de cada palavra.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ABELHA", correta: true },
         { palavra: "ELEFANTE", correta: false, imagem: elefante },
@@ -247,7 +247,7 @@ export const dlx16: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ESTRELA", correta: true, imagem: estrela },
         { palavra: "ANEL", correta: false },
@@ -256,7 +256,7 @@ export const dlx16: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IMÃ", correta: true },
         { palavra: "AVIÃO", correta: false },
@@ -280,14 +280,14 @@ export const dlx17: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "O e U são parecidas — as duas fazem bico. Mas O é bolinha e U é bico apertado. Escuta: OVO... UVA.",
+      fala: "O e u são parecidas — as duas fazem bico. Mas o o é bolinha e o u é bico apertado. Escuta: ovo... uva.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "OOOVO. Boca redonda.", palavra: "OVO", enfase: "O" },
-    { tipo: "escuta", fala: "UUUVA. Bico apertado.", palavra: "UVA", enfase: "U" },
+    { tipo: "escuta", fala: "Ooo... ovo. Boca redonda.", palavra: "OVO", enfase: "O" },
+    { tipo: "escuta", fala: "Uuu... uva. Bico apertado.", palavra: "UVA", enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "ORELHA", correta: true },
         { palavra: "URSO", correta: false },
@@ -295,7 +295,7 @@ export const dlx17: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "UNHA", correta: true },
         { palavra: "ÓCULOS", correta: false },
@@ -303,14 +303,14 @@ export const dlx17: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Última: qual começa com OOO?",
+      fala: "Última: qual começa com ooo?",
       opcoes: [
         { palavra: "OVELHA", correta: true, imagem: ovelha },
         { palavra: "URUBU", correta: false },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "fim", fala: "Bolinha O, bico U. Sons diferentes!", imagem: pipVet },
+    { tipo: "fim", fala: "Bolinha o, bico u. Sons diferentes!", imagem: pipVet },
   ],
 };
 
@@ -326,15 +326,15 @@ export const dlx18: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal também mora no MEIO da palavra! Escuta: P-AAA-TO. O AAA tá no meio.",
+      fala: "A vogal também mora no meio da palavra! Escuta: pato. O aaa tá no meio.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "P-A-TO. A vogal do meio é AAA.", palavra: "PATO", enfase: "A" },
-    { tipo: "escuta", fala: "S-O-L. A vogal do meio é OOO.", palavra: "SOL", enfase: "O" },
-    { tipo: "escuta", fala: "L-U-A. A vogal é UUU.", palavra: "LUA", imagem: lua, enfase: "U" },
+    { tipo: "escuta", fala: "pato. A vogal do meio é aaa.", palavra: "PATO", enfase: "A" },
+    { tipo: "escuta", fala: "sol. A vogal do meio é ooo.", palavra: "SOL", enfase: "O" },
+    { tipo: "escuta", fala: "lua. A vogal é uuu.", palavra: "LUA", imagem: lua, enfase: "U" },
     {
       tipo: "escolha",
-      fala: "Que vogal tem no meio de PAPO? P-?-PO.",
+      fala: "Que vogal tem no meio de papo?",
       opcoes: [
         { palavra: "A", correta: true },
         { palavra: "E", correta: false },
@@ -343,7 +343,7 @@ export const dlx18: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E no meio de SINO? S-?-NO.",
+      fala: "E no meio de sino?",
       opcoes: [
         { palavra: "I", correta: true },
         { palavra: "O", correta: false },
@@ -366,24 +366,24 @@ export const dlx19: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Quando o V encontra a vogal, faz uma sílaba! V + A = VA. V + I = VI. Escuta.",
+      fala: "Quando o v encontra a vogal, faz uma sílaba! V mais a dá vá. V mais i dá vi. Escuta.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "V + A = VA. VVVA. VACA começa com VA!", palavra: "VA", enfase: "V" },
-    { tipo: "silabas", fala: "VACA: VA-CA.", palavra: "VACA", silabas: ["VA", "CA"], imagem: vaca },
-    { tipo: "silabas", fala: "VELA: VE-LA.", palavra: "VELA", silabas: ["VE", "LA"] },
-    { tipo: "silabas", fala: "VIDA: VI-DA.", palavra: "VIDA", silabas: ["VI", "DA"] },
-    { tipo: "silabas", fala: "VOVÔ: VO-VÔ.", palavra: "VOVÔ", silabas: ["VO", "VÔ"] },
+    { tipo: "escuta", fala: "V mais a dá vá. Vaca começa com vá!", palavra: "VA", enfase: "V" },
+    { tipo: "silabas", fala: "vaca: vá, ca.", palavra: "VACA", silabas: ["VA", "CA"], imagem: vaca },
+    { tipo: "silabas", fala: "vela: vé, la.", palavra: "VELA", silabas: ["VE", "LA"] },
+    { tipo: "silabas", fala: "vida: vi, da.", palavra: "VIDA", silabas: ["VI", "DA"] },
+    { tipo: "silabas", fala: "vovô: vó, vô.", palavra: "VOVÔ", silabas: ["VO", "VÔ"] },
     {
       tipo: "escolha",
-      fala: "Qual sílaba começa VACA?",
+      fala: "Qual sílaba começa a palavra vaca?",
       opcoes: [
         { palavra: "VA", correta: true },
         { palavra: "VI", correta: false },
         { palavra: "VU", correta: false },
       ],
     },
-    { tipo: "fim", fala: "Consoante + vogal = sílaba. Segredo revelado!", imagem: pipVet },
+    { tipo: "fim", fala: "Consoante mais vogal é igual a sílaba. Segredo revelado!", imagem: pipVet },
   ],
 };
 
@@ -399,12 +399,12 @@ export const dlx20: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Chegou o fim da Fase 2! Vamos rever as CINCO vogais que você aprendeu.",
+      fala: "Chegou o fim da Fase 2! Vamos rever as cinco vogais que você aprendeu.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ANEL", correta: true },
         { palavra: "URSO", correta: false },
@@ -413,7 +413,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ELEFANTE", correta: true, imagem: elefante },
         { palavra: "IMÃ", correta: false },
@@ -422,7 +422,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IGREJA", correta: true },
         { palavra: "AVIÃO", correta: false },
@@ -431,7 +431,7 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "ÓCULOS", correta: true },
         { palavra: "ESCADA", correta: false },
@@ -440,14 +440,14 @@ export const dlx20: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com UUU?",
+      fala: "Qual começa com uuu?",
       opcoes: [
         { palavra: "URSO", correta: true },
         { palavra: "ABELHA", correta: false },
         { palavra: "ILHA", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "As CINCO vogais no seu ouvido!", imagem: pipVet },
-    { tipo: "fim", fala: "A, E, I, O, U — as vogais são as MÃES das palavras. Fase 2 completa!", imagem: pipVet },
+    { tipo: "reforco", fala: "As cinco vogais no seu ouvido!", imagem: pipVet },
+    { tipo: "fim", fala: "a, e, i, o, u — as vogais são as mães das palavras. Fase 2 completa!", imagem: pipVet },
   ],
 };
