@@ -46,7 +46,7 @@ export const dlx01: AulaDlx = {
     },
     {
       tipo: "escuta",
-      fala: "VACA. FA-CA. Escuta o final: A-CA... A-CA. Rima!",
+      fala: "Vaca. Faca. Escuta o final: aca... aca. Rima!",
       palavra: "VACA",
       imagem: vaca,
       enfase: "V",
