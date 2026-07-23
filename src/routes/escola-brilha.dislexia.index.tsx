@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks, Lock } from "lucide-react";
 import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
 import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
@@ -57,6 +57,17 @@ const ICONE_POR_AULA: Record<string, string> = {
   "dlx-38-familia-c": icFormandoPal,
   "dlx-39-revisao-mptl": icPedacinhos,
   "dlx-40-revisao-fvbc": icPedacinhos,
+  // Fase 5 · Palavras CVC
+  "dlx-41-cvc-fecho-l": icFormandoPal,
+  "dlx-42-cvc-fecho-r": icFormandoPal,
+  "dlx-43-cvc-fecho-z": icFormandoPal,
+  "dlx-44-cvc-fecho-m": icArticulacao,
+  "dlx-45-leitura-livre-cvc": icFormandoPal,
+  "dlx-46-cv-vs-cvc": icDiscrimAud,
+  "dlx-47-palavras-longas-fecho": icPedacinhos,
+  "dlx-48-frases-curtas": icConscFono,
+  "dlx-49-revisao-lrz": icPedacinhos,
+  "dlx-50-revisao-cvc-final": icConscFono,
 };
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
@@ -116,6 +127,14 @@ const FASES: Record<
     bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20",
     border: "border-sky-200 dark:border-sky-800",
     accent: "bg-sky-500",
+  },
+  5: {
+    nome: "Fase 5 · Palavras CVC",
+    icon: Lock,
+    color: "text-rose-600",
+    bg: "from-rose-50 to-rose-100/50 dark:from-rose-950/30 dark:to-rose-900/20",
+    border: "border-rose-200 dark:border-rose-800",
+    accent: "bg-rose-500",
   },
 };
 

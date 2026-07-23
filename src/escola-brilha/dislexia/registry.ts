@@ -15,6 +15,10 @@ import {
   dlx31, dlx32, dlx33, dlx34, dlx35,
   dlx36, dlx37, dlx38, dlx39, dlx40,
 } from "./fase4/aulas";
+import {
+  dlx41, dlx42, dlx43, dlx44, dlx45,
+  dlx46, dlx47, dlx48, dlx49, dlx50,
+} from "./fase5/aulas";
 
 export const trilhaDislexia: TrilhaDlx = {
   slug: "dislexia",
@@ -30,6 +34,8 @@ export const trilhaDislexia: TrilhaDlx = {
     dlx26, dlx27, dlx28, dlx29, dlx30,
     dlx31, dlx32, dlx33, dlx34, dlx35,
     dlx36, dlx37, dlx38, dlx39, dlx40,
+    dlx41, dlx42, dlx43, dlx44, dlx45,
+    dlx46, dlx47, dlx48, dlx49, dlx50,
   ],
 };
 
