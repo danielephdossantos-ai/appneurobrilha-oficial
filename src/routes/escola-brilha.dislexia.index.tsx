@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks, Lock, Combine } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks, Lock, Combine, Layers } from "lucide-react";
 import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
 import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
@@ -79,6 +79,17 @@ const ICONE_POR_AULA: Record<string, string> = {
   "dlx-58-encontros-cr-fr-gr": icFormandoPal,
   "dlx-59-encontros-com-l": icFormandoPal,
   "dlx-60-revisao-fase6": icConscFono,
+  // Fase 7 · Sílabas Complexas
+  "dlx-61-r-fechando-silaba": icArticulacao,
+  "dlx-62-r-fechando-longa": icPedacinhos,
+  "dlx-63-l-fechando-silaba": icArticulacao,
+  "dlx-64-ditongo-ao": icArticulacao,
+  "dlx-65-c-cedilha": icLetraSom,
+  "dlx-66-qu-mudo": icLetraSom,
+  "dlx-67-gu-mudo": icLetraSom,
+  "dlx-68-s-entre-vogais": icDiscrimAud,
+  "dlx-69-palavras-longas": icPedacinhos,
+  "dlx-70-revisao-fase7": icConscFono,
 };
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
@@ -154,6 +165,14 @@ const FASES: Record<
     bg: "from-violet-50 to-violet-100/50 dark:from-violet-950/30 dark:to-violet-900/20",
     border: "border-violet-200 dark:border-violet-800",
     accent: "bg-violet-500",
+  },
+  7: {
+    nome: "Fase 7 · Sílabas Complexas",
+    icon: Layers,
+    color: "text-amber-600",
+    bg: "from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20",
+    border: "border-amber-200 dark:border-amber-800",
+    accent: "bg-amber-500",
   },
 };
 
