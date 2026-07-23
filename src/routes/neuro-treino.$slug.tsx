@@ -1972,14 +1972,26 @@ const CORES_DIR = [
   { nome: "Pêssego", hex: "#fdba74" },
 ];
 
-function TracadoLetras({ p, onDone }: any) {
+function TracadoLetras({ p, onDone, promptLevel }: any) {
   const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
   const [nomeCor, setNomeCor] = useState<string>(CORES_ESQ[0].nome);
   const [strokes, setStrokes] = useState<{ d: string; cor: string }[]>([]);
   const [drawing, setDrawing] = useState(false);
-  const [pintado, setPintado] = useState(false);
+  const [checkpointIdx, setCheckpointIdx] = useState(0);
+  const [foraDaLetra, setForaDaLetra] = useState(false);
+  const [erroOrdem, setErroOrdem] = useState(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const clipId = `letra-clip-${p.letra}`;
+
+  const checkpoints = useMemo(
+    () => require("@/data/neuro-treino/stroke-checkpoints").getCheckpoints(p.letra) as {
+      x: number;
+      y: number;
+    }[],
+    [p.letra],
+  );
+  const totalCheckpoints = checkpoints.length;
+  const proximoCP = checkpoints[checkpointIdx];
 
   const escolher = (c: { nome: string; hex: string }) => {
     setCor(c.hex);
@@ -1996,25 +2008,59 @@ function TracadoLetras({ p, onDone }: any) {
     };
   };
 
+  const dist = (a: { x: number; y: number }, b: { x: number; y: number }) =>
+    Math.hypot(a.x - b.x, a.y - b.y);
+
+  const validarPonto = (pt: { x: number; y: number }) => {
+    // Se ainda faltam checkpoints, verificar se atingiu o próximo (raio 18).
+    if (checkpointIdx >= totalCheckpoints) return;
+    if (dist(pt, proximoCP) <= 18) {
+      setCheckpointIdx((i) => i + 1);
+      setErroOrdem(false);
+    } else {
+      // Pulou pra um checkpoint mais adiante = erro de ordem.
+      for (let j = checkpointIdx + 1; j < totalCheckpoints; j++) {
+        if (dist(pt, checkpoints[j]) <= 12) {
+          setErroOrdem(true);
+          return;
+        }
+      }
+    }
+  };
+
   const onDown = (e: React.PointerEvent) => {
     (e.target as Element).setPointerCapture(e.pointerId);
     setDrawing(true);
-    const { x, y } = getPt(e);
-    setStrokes((s) => [...s, { d: `M ${x} ${y}`, cor }]);
+    const pt = getPt(e);
+    setStrokes((s) => [...s, { d: `M ${pt.x} ${pt.y}`, cor }]);
+    validarPonto(pt);
   };
   const onMove = (e: React.PointerEvent) => {
     if (!drawing) return;
-    const { x, y } = getPt(e);
+    const pt = getPt(e);
+    // Detectar saída da letra (fora do bounding box aproximado)
+    const foraX = pt.x < 15 || pt.x > 85;
+    const foraY = pt.y < 10 || pt.y > 90;
+    setForaDaLetra(foraX || foraY);
     setStrokes((s) => {
       const copy = s.slice();
       const last = copy[copy.length - 1];
-      copy[copy.length - 1] = { ...last, d: `${last.d} L ${x} ${y}` };
+      copy[copy.length - 1] = { ...last, d: `${last.d} L ${pt.x} ${pt.y}` };
       return copy;
     });
-    setPintado(true);
+    validarPonto(pt);
   };
   const onUp = () => setDrawing(false);
-  const limpar = () => { setStrokes([]); setPintado(false); };
+  const limpar = () => {
+    setStrokes([]);
+    setCheckpointIdx(0);
+    setForaDaLetra(false);
+    setErroOrdem(false);
+  };
+
+  const completou = checkpointIdx >= totalCheckpoints;
+  const acertouOrdem = completou && !erroOrdem;
+  const progresso = Math.round((checkpointIdx / totalCheckpoints) * 100);
 
   const { effective: sens } = useSensoryProfile();
   const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
@@ -2031,11 +2077,15 @@ function TracadoLetras({ p, onDone }: any) {
     />
   );
 
+  // Prompt ABA: quanto menor promptLevel, mais dicas visuais.
+  const mostrarNumeros = promptLevel <= 3;
+  const mostrarSetaProxima = promptLevel <= 2;
+  const mostrarMaoGuia = promptLevel <= 1;
 
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Escolha uma cor e contorne a letra <span className="text-coral">{p.letra}</span> com o dedo
+        Contorne a letra <span className="text-coral">{p.letra}</span> seguindo a ordem correta
       </div>
 
       <div className="flex items-center justify-center gap-3 md:gap-5">
@@ -2073,7 +2123,7 @@ function TracadoLetras({ p, onDone }: any) {
               </clipPath>
             </defs>
 
-            {/* Letra-guia (fundo claro) */}
+            {/* Letra-guia */}
             <text
               x={50}
               y={54}
@@ -2090,7 +2140,7 @@ function TracadoLetras({ p, onDone }: any) {
               {p.letra}
             </text>
 
-            {/* Tinta do dedo: só aparece DENTRO da letra */}
+            {/* Tinta */}
             <g clipPath={`url(#${clipId})`}>
               {strokes.map((s, i) => (
                 <path
@@ -2104,6 +2154,58 @@ function TracadoLetras({ p, onDone }: any) {
                 />
               ))}
             </g>
+
+            {/* Checkpoints numerados (dicas ABA) */}
+            {mostrarNumeros &&
+              checkpoints.map((cp, i) => {
+                const feito = i < checkpointIdx;
+                const atual = i === checkpointIdx;
+                return (
+                  <g key={i}>
+                    <circle
+                      cx={cp.x}
+                      cy={cp.y}
+                      r={4}
+                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#e2e8f0"}
+                      stroke="#0f172a"
+                      strokeWidth={0.5}
+                    />
+                    <text
+                      x={cp.x}
+                      y={cp.y + 1}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize={4}
+                      fontWeight={900}
+                      fill="#0f172a"
+                    >
+                      {i + 1}
+                    </text>
+                  </g>
+                );
+              })}
+
+            {/* Seta piscante no próximo ponto */}
+            {mostrarSetaProxima && !completou && (
+              <circle
+                cx={proximoCP.x}
+                cy={proximoCP.y}
+                r={9}
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth={1.5}
+                strokeDasharray="2 1"
+              >
+                <animate attributeName="r" values="7;11;7" dur="1s" repeatCount="indefinite" />
+              </circle>
+            )}
+
+            {/* Guia física (mão) — nível 1 */}
+            {mostrarMaoGuia && !completou && (
+              <text x={proximoCP.x + 6} y={proximoCP.y - 6} fontSize={8}>
+                👆
+              </text>
+            )}
           </svg>
 
           <button
@@ -2129,19 +2231,42 @@ function TracadoLetras({ p, onDone }: any) {
       </div>
 
       <div className="text-xs text-muted-foreground">
-        Cor escolhida: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span>
+        Cor: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span> ·
+        Progresso: <span className="font-bold text-emerald-600">{progresso}%</span> (
+        {checkpointIdx}/{totalCheckpoints})
       </div>
+      {foraDaLetra && (
+        <div className="text-xs font-bold text-amber-600">Volte pra dentro da letra ✋</div>
+      )}
+      {erroOrdem && (
+        <div className="text-xs font-bold text-rose-600">
+          Ordem errada — comece do ponto 1 e vá seguindo
+        </div>
+      )}
 
-      <button
-        onClick={() => {
-          toast.success(`Letra ${p.letra} contornada de ${nomeCor}! 🎨`);
-          onDone(true);
-        }}
-        disabled={!pintado}
-        className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
-      >
-        Terminei! ✨
-      </button>
+      <div className="flex gap-2 justify-center">
+        <button
+          onClick={limpar}
+          className="mt-2 bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-full"
+        >
+          Recomeçar
+        </button>
+        <button
+          onClick={() => {
+            if (acertouOrdem) {
+              toast.success(`Letra ${p.letra} traçada na ordem certa! 🎨`);
+              onDone(true);
+            } else {
+              toast(`Ainda faltam ${totalCheckpoints - checkpointIdx} pontos ou a ordem está errada`);
+              onDone(false);
+            }
+          }}
+          disabled={!completou && checkpointIdx === 0}
+          className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
+        >
+          Terminei! ✨
+        </button>
+      </div>
     </div>
   );
 }
