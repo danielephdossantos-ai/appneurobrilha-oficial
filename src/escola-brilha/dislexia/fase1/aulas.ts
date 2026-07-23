@@ -74,7 +74,7 @@ export const dlx01: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual rima com ESTRELA?",
+      fala: "E qual rima com estrela?",
       opcoes: [
         { palavra: "PANELA", correta: true },
         { palavra: "BOLA", correta: false },
