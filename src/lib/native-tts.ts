@@ -138,6 +138,13 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     out = out.replace(pattern, replacement);
   });
 
+  // Palavras 100% MAIÚSCULAS que sobraram (ex.: "PALHAÇO", "COELHO", "ESCOLA")
+  // fazem algumas vozes soletrarem letra a letra ("pê á ele há á cê-cedilha ó").
+  // Para a fala do professor, jogamos para minúsculo — o visual continua em caixa
+  // alta na tela porque essa transformação só afeta o texto enviado ao TTS.
+  // Preserva siglas curtas de 1 letra (A, E, O usados em explicação fonética).
+  out = out.replace(/\b[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{2,}\b/g, (w) => w.toLowerCase());
+
   return out;
 }
 
