@@ -138,6 +138,7 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
 
 function CenaView({
   cena,
+  aula,
   estado,
   tentativas,
   onAcerto,
@@ -147,6 +148,7 @@ function CenaView({
   isUltima,
 }: {
   cena: CenaDlx;
+  aula: AulaDlx;
   estado: "idle" | "acerto" | "erro";
   tentativas: number;
   onAcerto: () => void;
@@ -157,8 +159,24 @@ function CenaView({
 }) {
   const opcoes = useMemo(() => {
     if (cena.tipo !== "escolha") return [];
-    return [...cena.opcoes].sort(() => Math.random() - 0.5);
-  }, [cena]);
+    const base = [...cena.opcoes];
+    // Preenche até 4 opções puxando distratores de outras cenas de escolha da aula
+    if (base.length < 4) {
+      const usadas = new Set(base.map((o) => o.palavra.toUpperCase()));
+      const pool: typeof base = [];
+      for (const c of aula.cenas) {
+        if (c.tipo !== "escolha") continue;
+        for (const o of c.opcoes) {
+          if (usadas.has(o.palavra.toUpperCase())) continue;
+          usadas.add(o.palavra.toUpperCase());
+          pool.push({ ...o, correta: false });
+        }
+      }
+      pool.sort(() => Math.random() - 0.5);
+      while (base.length < 4 && pool.length) base.push(pool.shift()!);
+    }
+    return base.sort(() => Math.random() - 0.5);
+  }, [cena, aula]);
 
   const [silabasTocadas, setSilabasTocadas] = useState<number[]>([]);
   useEffect(() => setSilabasTocadas([]), [cena]);
@@ -177,9 +195,9 @@ function CenaView({
           className={`grid gap-2 sm:gap-3 w-full ${
             opcoes.length <= 2
               ? "grid-cols-2"
-              : opcoes.length === 4
-                ? "grid-cols-2"
-                : "grid-cols-2 sm:grid-cols-3"
+              : opcoes.length === 3
+                ? "grid-cols-3"
+                : "grid-cols-2"
           }`}
         >
           {opcoes.map((o, i) => {
