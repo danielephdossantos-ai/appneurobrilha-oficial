@@ -1448,14 +1448,17 @@ export type Database = {
       child_skill_mastery: {
         Row: {
           child_id: string
+          consec_correct: number
           created_at: string
           errors_count: number | null
           hits_count: number | null
           id: string
+          indep_sessions: Json
           last_attempt_at: string | null
           mastery_level: number
           mastery_percentage: number | null
           materia: string
+          prompt_level: number
           skill_code: string
           success_rate: number
           total_attempts: number
@@ -1464,14 +1467,17 @@ export type Database = {
         }
         Insert: {
           child_id: string
+          consec_correct?: number
           created_at?: string
           errors_count?: number | null
           hits_count?: number | null
           id?: string
+          indep_sessions?: Json
           last_attempt_at?: string | null
           mastery_level?: number
           mastery_percentage?: number | null
           materia: string
+          prompt_level?: number
           skill_code: string
           success_rate?: number
           total_attempts?: number
@@ -1480,14 +1486,17 @@ export type Database = {
         }
         Update: {
           child_id?: string
+          consec_correct?: number
           created_at?: string
           errors_count?: number | null
           hits_count?: number | null
           id?: string
+          indep_sessions?: Json
           last_attempt_at?: string | null
           mastery_level?: number
           mastery_percentage?: number | null
           materia?: string
+          prompt_level?: number
           skill_code?: string
           success_rate?: number
           total_attempts?: number

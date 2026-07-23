@@ -38,9 +38,12 @@ import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
+import { getCheckpoints as getLetterCheckpoints } from "@/data/neuro-treino/stroke-checkpoints";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
+import { useAbaPrompting } from "@/hooks/useAbaPrompting";
+import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
@@ -88,6 +91,9 @@ function NeuroAtividade() {
   const { adjustment, metrics, registerPerformance, requestHelp } = useNeuroAdaptive();
   const startedAtRef = useRef<number>(Date.now());
   const breakToastFiredRef = useRef<boolean>(false);
+  // Hierarquia ABA de prompting por habilidade (nível 1..4)
+  const skillInfo = useMemo(() => getNeuroSkillInfo(slug), [slug]);
+  const aba = useAbaPrompting(activeChild?.id, skillInfo.skillCode);
 
   const meta = CATEGORIAS[slug];
   const rawVars = VARIATIONS[slug];
@@ -269,8 +275,11 @@ function NeuroAtividade() {
     // Tempo de resposta desta questão (segundos)
     const responseTimeSec = Math.max(0.1, (Date.now() - startedAtRef.current) / 1000);
     const activityId = variation ? `${slug}:${variation.id}` : slug;
-    // Persiste em activity_logs + child_skill_mastery e atualiza métricas do núcleo adaptativo
-    registerPerformance(correto, responseTimeSec, activityId, getNeuroSkillInfo(slug));
+    // Persiste em activity_logs + child_skill_mastery, atualiza núcleo adaptativo
+    // e recebe o novo estado ABA de prompting.
+    void registerPerformance(correto, responseTimeSec, activityId, skillInfo).then((next) => {
+      aba.applyLocal(next);
+    });
     // Reinicia cronômetro pra próxima resposta
     startedAtRef.current = Date.now();
 
@@ -346,6 +355,26 @@ function NeuroAtividade() {
         </span>
       </div>
 
+      {/* Chip de nível de ajuda ABA (fading de prompting) */}
+      {activeChild && !aba.loading && (
+        <div className="mb-3 flex items-center justify-between rounded-2xl bg-card border-2 border-primary/20 px-3 py-2 text-xs">
+          <div className="flex items-center gap-2">
+            <Hand size={14} className="text-primary" />
+            <span className="font-black uppercase tracking-wider text-primary">
+              Ajuda: {aba.label}
+            </span>
+          </div>
+          <span className="text-muted-foreground truncate max-w-[60%] text-right">
+            {aba.hint}
+          </span>
+        </div>
+      )}
+      {aba.mastery.achieved && (
+        <div className="mb-3 rounded-2xl bg-success/10 border-2 border-success/40 px-3 py-2 text-xs font-bold text-success text-center">
+          🎓 Habilidade dominada — pronta para avançar!
+        </div>
+      )}
+
       {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
         <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
           <img
@@ -366,6 +395,7 @@ function NeuroAtividade() {
           slug={slug}
           variation={variation}
           onConcluir={onConcluir}
+          promptLevel={aba.level}
           key={variation.id}
         />
       </Card>
@@ -389,10 +419,12 @@ function MechanicRenderer({
   slug,
   variation,
   onConcluir,
+  promptLevel,
 }: {
   slug: CategoriaSlug;
   variation: any;
   onConcluir: (c: boolean) => void;
+  promptLevel: import("@/services/neuro-treino/promptingEngine").PromptLevel;
 }) {
   switch (slug) {
     case "sons-iniciais":
@@ -426,7 +458,7 @@ function MechanicRenderer({
     case "paromatopeias-corpo":
       return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
     case "tracado-letras":
-      return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
+      return <TracadoLetras p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     case "triagem-categorias":
       return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
     case "expressao-emocao":
@@ -435,11 +467,11 @@ function MechanicRenderer({
     case "discriminacao-auditiva":
       return <DiscriminacaoAuditiva p={variation.payload} onDone={onConcluir} />;
     case "articulacao-sons":
-      return <ArticulacaoSons p={variation.payload} onDone={onConcluir} />;
+      return <ArticulacaoSons p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     case "vocabulario-semantico":
       return <VocabularioSemantico p={variation.payload} onDone={onConcluir} />;
     case "nomeacao-rapida":
-      return <NomeacaoRapida p={variation.payload} onDone={onConcluir} />;
+      return <NomeacaoRapida p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
     // COORDENAÇÃO MOTORA
     case "toque-sequencia":
       return <ToqueSequencia p={variation.payload} onDone={onConcluir} />;
@@ -1941,14 +1973,23 @@ const CORES_DIR = [
   { nome: "Pêssego", hex: "#fdba74" },
 ];
 
-function TracadoLetras({ p, onDone }: any) {
+function TracadoLetras({ p, onDone, promptLevel }: any) {
   const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
   const [nomeCor, setNomeCor] = useState<string>(CORES_ESQ[0].nome);
   const [strokes, setStrokes] = useState<{ d: string; cor: string }[]>([]);
   const [drawing, setDrawing] = useState(false);
-  const [pintado, setPintado] = useState(false);
+  const [checkpointIdx, setCheckpointIdx] = useState(0);
+  const [foraDaLetra, setForaDaLetra] = useState(false);
+  const [erroOrdem, setErroOrdem] = useState(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const clipId = `letra-clip-${p.letra}`;
+
+  const checkpoints = useMemo(
+    () => getLetterCheckpoints(p.letra),
+    [p.letra],
+  );
+  const totalCheckpoints = checkpoints.length;
+  const proximoCP = checkpoints[checkpointIdx];
 
   const escolher = (c: { nome: string; hex: string }) => {
     setCor(c.hex);
@@ -1965,25 +2006,59 @@ function TracadoLetras({ p, onDone }: any) {
     };
   };
 
+  const dist = (a: { x: number; y: number }, b: { x: number; y: number }) =>
+    Math.hypot(a.x - b.x, a.y - b.y);
+
+  const validarPonto = (pt: { x: number; y: number }) => {
+    // Se ainda faltam checkpoints, verificar se atingiu o próximo (raio 18).
+    if (checkpointIdx >= totalCheckpoints) return;
+    if (dist(pt, proximoCP) <= 18) {
+      setCheckpointIdx((i) => i + 1);
+      setErroOrdem(false);
+    } else {
+      // Pulou pra um checkpoint mais adiante = erro de ordem.
+      for (let j = checkpointIdx + 1; j < totalCheckpoints; j++) {
+        if (dist(pt, checkpoints[j]) <= 12) {
+          setErroOrdem(true);
+          return;
+        }
+      }
+    }
+  };
+
   const onDown = (e: React.PointerEvent) => {
     (e.target as Element).setPointerCapture(e.pointerId);
     setDrawing(true);
-    const { x, y } = getPt(e);
-    setStrokes((s) => [...s, { d: `M ${x} ${y}`, cor }]);
+    const pt = getPt(e);
+    setStrokes((s) => [...s, { d: `M ${pt.x} ${pt.y}`, cor }]);
+    validarPonto(pt);
   };
   const onMove = (e: React.PointerEvent) => {
     if (!drawing) return;
-    const { x, y } = getPt(e);
+    const pt = getPt(e);
+    // Detectar saída da letra (fora do bounding box aproximado)
+    const foraX = pt.x < 15 || pt.x > 85;
+    const foraY = pt.y < 10 || pt.y > 90;
+    setForaDaLetra(foraX || foraY);
     setStrokes((s) => {
       const copy = s.slice();
       const last = copy[copy.length - 1];
-      copy[copy.length - 1] = { ...last, d: `${last.d} L ${x} ${y}` };
+      copy[copy.length - 1] = { ...last, d: `${last.d} L ${pt.x} ${pt.y}` };
       return copy;
     });
-    setPintado(true);
+    validarPonto(pt);
   };
   const onUp = () => setDrawing(false);
-  const limpar = () => { setStrokes([]); setPintado(false); };
+  const limpar = () => {
+    setStrokes([]);
+    setCheckpointIdx(0);
+    setForaDaLetra(false);
+    setErroOrdem(false);
+  };
+
+  const completou = checkpointIdx >= totalCheckpoints;
+  const acertouOrdem = completou && !erroOrdem;
+  const progresso = Math.round((checkpointIdx / totalCheckpoints) * 100);
 
   const { effective: sens } = useSensoryProfile();
   const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
@@ -2000,11 +2075,15 @@ function TracadoLetras({ p, onDone }: any) {
     />
   );
 
+  // Prompt ABA: quanto menor promptLevel, mais dicas visuais.
+  const mostrarNumeros = promptLevel <= 3;
+  const mostrarSetaProxima = promptLevel <= 2;
+  const mostrarMaoGuia = promptLevel <= 1;
 
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Escolha uma cor e contorne a letra <span className="text-coral">{p.letra}</span> com o dedo
+        Contorne a letra <span className="text-coral">{p.letra}</span> seguindo a ordem correta
       </div>
 
       <div className="flex items-center justify-center gap-3 md:gap-5">
@@ -2042,7 +2121,7 @@ function TracadoLetras({ p, onDone }: any) {
               </clipPath>
             </defs>
 
-            {/* Letra-guia (fundo claro) */}
+            {/* Letra-guia */}
             <text
               x={50}
               y={54}
@@ -2059,7 +2138,7 @@ function TracadoLetras({ p, onDone }: any) {
               {p.letra}
             </text>
 
-            {/* Tinta do dedo: só aparece DENTRO da letra */}
+            {/* Tinta */}
             <g clipPath={`url(#${clipId})`}>
               {strokes.map((s, i) => (
                 <path
@@ -2073,6 +2152,58 @@ function TracadoLetras({ p, onDone }: any) {
                 />
               ))}
             </g>
+
+            {/* Checkpoints numerados (dicas ABA) */}
+            {mostrarNumeros &&
+              checkpoints.map((cp, i) => {
+                const feito = i < checkpointIdx;
+                const atual = i === checkpointIdx;
+                return (
+                  <g key={i}>
+                    <circle
+                      cx={cp.x}
+                      cy={cp.y}
+                      r={4}
+                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#e2e8f0"}
+                      stroke="#0f172a"
+                      strokeWidth={0.5}
+                    />
+                    <text
+                      x={cp.x}
+                      y={cp.y + 1}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize={4}
+                      fontWeight={900}
+                      fill="#0f172a"
+                    >
+                      {i + 1}
+                    </text>
+                  </g>
+                );
+              })}
+
+            {/* Seta piscante no próximo ponto */}
+            {mostrarSetaProxima && !completou && (
+              <circle
+                cx={proximoCP.x}
+                cy={proximoCP.y}
+                r={9}
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth={1.5}
+                strokeDasharray="2 1"
+              >
+                <animate attributeName="r" values="7;11;7" dur="1s" repeatCount="indefinite" />
+              </circle>
+            )}
+
+            {/* Guia física (mão) — nível 1 */}
+            {mostrarMaoGuia && !completou && (
+              <text x={proximoCP.x + 6} y={proximoCP.y - 6} fontSize={8}>
+                👆
+              </text>
+            )}
           </svg>
 
           <button
@@ -2098,19 +2229,42 @@ function TracadoLetras({ p, onDone }: any) {
       </div>
 
       <div className="text-xs text-muted-foreground">
-        Cor escolhida: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span>
+        Cor: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span> ·
+        Progresso: <span className="font-bold text-emerald-600">{progresso}%</span> (
+        {checkpointIdx}/{totalCheckpoints})
       </div>
+      {foraDaLetra && (
+        <div className="text-xs font-bold text-amber-600">Volte pra dentro da letra ✋</div>
+      )}
+      {erroOrdem && (
+        <div className="text-xs font-bold text-rose-600">
+          Ordem errada — comece do ponto 1 e vá seguindo
+        </div>
+      )}
 
-      <button
-        onClick={() => {
-          toast.success(`Letra ${p.letra} contornada de ${nomeCor}! 🎨`);
-          onDone(true);
-        }}
-        disabled={!pintado}
-        className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
-      >
-        Terminei! ✨
-      </button>
+      <div className="flex gap-2 justify-center">
+        <button
+          onClick={limpar}
+          className="mt-2 bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-full"
+        >
+          Recomeçar
+        </button>
+        <button
+          onClick={() => {
+            if (acertouOrdem) {
+              toast.success(`Letra ${p.letra} traçada na ordem certa! 🎨`);
+              onDone(true);
+            } else {
+              toast(`Ainda faltam ${totalCheckpoints - checkpointIdx} pontos ou a ordem está errada`);
+              onDone(false);
+            }
+          }}
+          disabled={!completou && checkpointIdx === 0}
+          className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
+        >
+          Terminei! ✨
+        </button>
+      </div>
     </div>
   );
 }
@@ -2266,8 +2420,10 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
 // Criança aperta o mic, vê as sílabas acendendo uma a uma enquanto fala.
 // Detecta SOM no microfone (volume), não palavras → reconhece na hora.
 // Sempre celebra. Sem reconhecimento de voz que demora e frustra.
-function ArticulacaoSons({ p, onDone }: any) {
+function ArticulacaoSons({ p, onDone, promptLevel }: any) {
   const { effective: sens } = useSensoryProfile();
+  const { speak } = usePipVoice();
+  const { listen, isListening, supported } = useSpeechMatcher();
   const press = sens.reduceMotion ? "" : "active:scale-95";
   const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
   const scaleCls = sens.reduceMotion ? "" : "scale-110";
@@ -2276,21 +2432,30 @@ function ArticulacaoSons({ p, onDone }: any) {
   const silabas: string[] = p.silabas;
 
   const [acesas, setAcesas] = useState<Set<number>>(new Set());
-  const [feedback, setFeedback] = useState("Toque no microfone e fale a palavra 🎤");
-  const [ouvindo, setOuvindo] = useState(false);
+  const [feedback, setFeedback] = useState(
+    supported
+      ? "Toque no microfone e fale a palavra 🎤"
+      : "Seu aparelho não reconhece voz — tentaremos por volume",
+  );
+  const [tentativas, setTentativas] = useState(0);
   const [done, setDone] = useState(false);
   const [celebrar, setCelebrar] = useState(false);
-  const streamRef = useRef<MediaStream | null>(null);
-  const ctxRef = useRef<AudioContext | null>(null);
+  const [ultimaSim, setUltimaSim] = useState<number | null>(null);
 
   const PRAISES = ["Muito bem! 🌟", "Isso aí! 👏", "Mandou bem! 💪", "Você arrasou! ✨"];
 
+  // Dicas ABA
+  const mostrarSilabas = promptLevel <= 3;
+  const modeloAudio = promptLevel <= 2;
+  const guiaFala = promptLevel <= 1;
+
   useEffect(() => {
-    return () => {
-      streamRef.current?.getTracks().forEach((t) => t.stop());
-      ctxRef.current?.close().catch(() => {});
-    };
-  }, []);
+    if (modeloAudio && !done) {
+      // Fala a palavra devagar antes de a criança tentar
+      const t = setTimeout(() => speak(palavra), 400);
+      return () => clearTimeout(t);
+    }
+  }, [modeloAudio, palavra, done, speak]);
 
   const celebrarPalavra = () => {
     setAcesas(new Set(silabas.map((_, i) => i)));
@@ -2300,71 +2465,40 @@ function ArticulacaoSons({ p, onDone }: any) {
     setTimeout(() => onDone(true), 1400);
   };
 
-  const acenderSilabaPorSilaba = () => {
-    // acende sílabas em sequência com timing animado (~500ms cada)
-    silabas.forEach((_, i) => {
-      setTimeout(() => {
-        setAcesas((prev) => {
-          const n = new Set(prev);
-          n.add(i);
-          return n;
-        });
-      }, 400 + i * 500);
-    });
-    setTimeout(celebrarPalavra, 400 + silabas.length * 500 + 200);
-  };
-
   const gravar = async () => {
-    if (done || ouvindo) return;
-    setOuvindo(true);
+    if (done || isListening) return;
     setFeedback("Estou ouvindo... fale a palavra 🎧");
     setAcesas(new Set());
+    setTentativas((n) => n + 1);
 
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
-      const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
-      const ctx: AudioContext = new Ctx();
-      ctxRef.current = ctx;
-      const src = ctx.createMediaStreamSource(stream);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 512;
-      src.connect(analyser);
-      const buf = new Uint8Array(analyser.frequencyBinCount);
+    const result = await listen(palavra, { timeoutMs: 5000 });
+    setUltimaSim(result.similarity);
 
-      let detectouSom = false;
-      const inicio = Date.now();
-      const tick = () => {
-        analyser.getByteTimeDomainData(buf);
-        // RMS aproximado
-        let soma = 0;
-        for (let i = 0; i < buf.length; i++) {
-          const v = (buf[i] - 128) / 128;
-          soma += v * v;
-        }
-        const rms = Math.sqrt(soma / buf.length);
-        if (rms > 0.04) detectouSom = true;
-
-        const decorrido = Date.now() - inicio;
-        if (detectouSom || decorrido > 3500) {
-          finalizar();
-        } else {
-          requestAnimationFrame(tick);
-        }
-      };
-
-      const finalizar = () => {
-        stream.getTracks().forEach((t) => t.stop());
-        ctx.close().catch(() => {});
-        setOuvindo(false);
-        acenderSilabaPorSilaba();
-      };
-
-      requestAnimationFrame(tick);
-    } catch {
-      // sem permissão de mic → ainda celebra
-      setOuvindo(false);
-      acenderSilabaPorSilaba();
+    if (result.matched) {
+      // Acende sílabas em sequência antes de celebrar
+      silabas.forEach((_, i) => {
+        setTimeout(() => {
+          setAcesas((prev) => {
+            const n = new Set(prev);
+            n.add(i);
+            return n;
+          });
+        }, i * 300);
+      });
+      setTimeout(celebrarPalavra, silabas.length * 300 + 200);
+    } else {
+      const sim = Math.round(result.similarity * 100);
+      const transcricao = result.transcript || "(não entendi)";
+      setFeedback(
+        supported
+          ? `Ouvi "${transcricao}" (${sim}%). Tenta de novo devagar 🎯`
+          : "Seu navegador não reconheceu — tenta de novo",
+      );
+      // 3 erros = considera errado e avança
+      if (tentativas >= 2) {
+        setDone(true);
+        setTimeout(() => onDone(false), 1200);
+      }
     }
   };
 
@@ -2376,44 +2510,69 @@ function ArticulacaoSons({ p, onDone }: any) {
           className={`${emojiSize} ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
         />
       </div>
-      <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
-        {silabas.map((s, i) => {
-          const acesa = acesas.has(i);
-          return (
-            <span
-              key={i}
-              className={`px-3 py-1 rounded-xl transition-all duration-300 ${
-                celebrar
-                  ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
-                  : acesa
-                    ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
-                    : "text-muted-foreground/50"
-              }`}
-            >
-              {s}
-            </span>
-          );
-        })}
-      </div>
+      {mostrarSilabas && (
+        <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
+          {silabas.map((s, i) => {
+            const acesa = acesas.has(i);
+            return (
+              <span
+                key={i}
+                className={`px-3 py-1 rounded-xl transition-all duration-300 ${
+                  celebrar
+                    ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
+                    : acesa
+                      ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
+                      : "text-muted-foreground/50"
+                }`}
+              >
+                {s}
+              </span>
+            );
+          })}
+        </div>
+      )}
       <div className="bg-card border-2 border-rose/20 rounded-2xl p-4">
         <div className="text-xs uppercase text-muted-foreground">Fale a palavra</div>
         <div className="text-4xl font-black text-rose-600">{palavra}</div>
+        {modeloAudio && (
+          <button
+            onClick={() => speak(palavra)}
+            className="mt-2 text-xs font-bold rounded-full bg-rose-500/10 border border-rose-500/30 px-3 py-1"
+          >
+            🔊 Ouvir como se fala
+          </button>
+        )}
       </div>
       <div className="min-h-[2.5rem] text-base font-bold text-rose-700">{feedback}</div>
+      {ultimaSim !== null && !done && (
+        <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+          <div
+            className="h-full bg-emerald-500 transition-all"
+            style={{ width: `${Math.round(ultimaSim * 100)}%` }}
+          />
+        </div>
+      )}
+      {guiaFala && !done && (
+        <div className="text-xs text-muted-foreground">
+          Dica: fale devagar, uma sílaba de cada vez.
+        </div>
+      )}
       <button
         onClick={gravar}
-        disabled={done || ouvindo}
-        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
+        disabled={done || isListening || !supported}
+        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${isListening ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
       >
         <Mic className="w-7 h-7" />
-        {done ? "Muito bem!" : ouvindo ? "Ouvindo..." : `Falar 🎤`}
+        {done ? "Muito bem!" : isListening ? "Ouvindo..." : "Falar 🎤"}
       </button>
-
+      {!supported && (
+        <div className="text-xs text-amber-600">
+          Seu navegador não permite reconhecimento de voz. Use Chrome, Edge ou Safari recentes.
+        </div>
+      )}
     </div>
   );
 }
-
-// 26. VOCABULÁRIO SEMÂNTICO — qual item NÃO pertence ao grupo?
 function VocabularioSemantico({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
@@ -2459,65 +2618,165 @@ function VocabularioSemantico({ p, onDone }: any) {
 }
 
 
-// 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
-function NomeacaoRapida({ p, onDone }: any) {
+// 27. NOMEAÇÃO RÁPIDA — RAN clínico: fala em ordem uma sequência de figuras.
+// Mede itens/segundo (automaticidade). Fallback: toque em ordem, se sem voz.
+function NomeacaoRapida({ p, onDone, promptLevel }: any) {
   const { effective: sens } = useSensoryProfile();
-  const [fase, setFase] = useState<"flash" | "resposta" | "done">("flash");
-  const [escolhido, setEscolhido] = useState<string | null>(null);
-  const flashMsAdj = sens.lowStim ? Math.round(p.flashMs * 1.5) : p.flashMs;
-  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const { speak } = usePipVoice();
+  const { listen, isListening, supported } = useSpeechMatcher();
   const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
-  const flashImg = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
-  const optImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
-  useEffect(() => {
-    const t = setTimeout(() => setFase("resposta"), flashMsAdj);
-    return () => clearTimeout(t);
-  }, [flashMsAdj]);
-  const handleClick = (opt: string) => {
-    if (fase !== "resposta" || escolhido) return;
-    setEscolhido(opt);
-    setFase("done");
-    setTimeout(() => onDone(opt === p.nome), 600);
+  const cellSize = sens.largerTargets ? "w-20 h-20 md:w-24 md:h-24" : "w-16 h-16 md:w-20 md:h-20";
+
+  // Monta sequência RAN: 12 itens repetindo (2 linhas x 6)
+  const bancoItens: { emoji: string; nome: string }[] = useMemo(() => {
+    const base: { emoji: string; nome: string }[] = [
+      { emoji: p.emoji, nome: p.nome },
+      ...(p.opts as string[])
+        .filter((n) => n !== p.nome)
+        .slice(0, 3)
+        .map((n) => ({ emoji: p.emoji, nome: n })),
+    ];
+    // Se payload tiver bank, prefere; senão usa opts
+    return base;
+  }, [p]);
+
+  const sequencia: { emoji: string; nome: string }[] = useMemo(() => {
+    const out: { emoji: string; nome: string }[] = [];
+    for (let i = 0; i < 12; i++) out.push(bancoItens[i % bancoItens.length]);
+    // Baralha levemente sem duplicar consecutivos
+    for (let i = 1; i < out.length; i++) {
+      if (out[i].nome === out[i - 1].nome) {
+        const swap = out.findIndex((x, j) => j > i && x.nome !== out[i - 1].nome);
+        if (swap > -1) [out[i], out[swap]] = [out[swap], out[i]];
+      }
+    }
+    return out;
+  }, [bancoItens]);
+
+  const [idx, setIdx] = useState(0);
+  const [inicio, setInicio] = useState<number | null>(null);
+  const [erros, setErros] = useState(0);
+  const [modo, setModo] = useState<"idle" | "correndo" | "done">("idle");
+  const [transcricoes, setTranscricoes] = useState<string[]>([]);
+
+  const mostrarNomes = promptLevel <= 3;
+  const modeloAudio = promptLevel <= 2;
+  const semVoz = !supported;
+
+  const iniciar = () => {
+    setIdx(0);
+    setErros(0);
+    setTranscricoes([]);
+    setInicio(Date.now());
+    setModo("correndo");
+    if (modeloAudio) speak(sequencia[0].nome);
   };
+
+  const proximo = () => {
+    if (idx + 1 >= sequencia.length) {
+      setModo("done");
+      const dur = (Date.now() - (inicio ?? Date.now())) / 1000;
+      const ips = sequencia.length / Math.max(dur, 0.1);
+      const acertou = erros <= 2 && ips >= 0.6; // 0.6 itens/s ≈ ritmo funcional mínimo
+      setTimeout(() => onDone(acertou), 800);
+    } else {
+      setIdx((i) => i + 1);
+      if (modeloAudio) speak(sequencia[idx + 1].nome);
+    }
+  };
+
+  const ouvir = async () => {
+    if (modo !== "correndo" || isListening) return;
+    const alvo = sequencia[idx].nome;
+    const r = await listen(alvo, { timeoutMs: 3500 });
+    setTranscricoes((t) => [...t, r.transcript || "-"]);
+    if (r.matched) {
+      proximo();
+    } else {
+      setErros((e) => e + 1);
+      // Continua no mesmo item — pede pra falar de novo
+    }
+  };
+
+  const tocouItem = (i: number) => {
+    if (semVoz && modo === "correndo" && i === idx) proximo();
+  };
+
+  const dur = inicio ? ((modo === "done" ? Date.now() : Date.now()) - inicio) / 1000 : 0;
+  const ips = idx > 0 ? idx / Math.max(dur, 0.1) : 0;
+
   return (
-    <div className="text-center space-y-5">
-      <div
-        className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}
-      >
-        <div className={fase === "flash" ? pulseCls : "opacity-90"}>
-          <RenderEmoji e={p.emoji} label={p.nome} className={flashImg} />
-        </div>
+    <div className="text-center space-y-4">
+      <div className="text-sm font-bold text-muted-foreground">
+        {semVoz
+          ? "Toque nas figuras EM ORDEM (esquerda→direita, cima→baixo)"
+          : "Fale o nome de cada figura EM ORDEM, o mais rápido que conseguir"}
       </div>
-      {fase !== "flash" && (
-        <>
-          <div className="text-muted-foreground font-bold text-base">Qual é?</div>
-          <div className="grid grid-cols-2 gap-3">
-            {p.opts.map((opt: string, i: number) => {
-              const certa = opt === p.nome;
-              const bg =
-                escolhido === opt
-                  ? certa
-                    ? "border-success bg-success/10 text-success"
-                    : errorBg
-                  : escolhido && certa
-                    ? "border-success bg-success/10"
-                    : "border-border bg-card hover:border-amber/60";
-              return (
-                <button
-                  key={i}
-                  onClick={() => handleClick(opt)}
-                  className={`rounded-2xl border-2 p-3 transition-all flex flex-col items-center gap-2 ${bg}`}
-                >
-                  <RenderEmoji label={opt} className={optImg} />
-                  <span className="font-black text-base">{opt}</span>
-                </button>
-              );
-            })}
-          </div>
-        </>
+
+      <div className="grid grid-cols-6 gap-2 justify-items-center bg-white/60 border-2 border-amber/30 rounded-2xl p-3">
+        {sequencia.map((it, i) => {
+          const feito = i < idx;
+          const atual = i === idx && modo === "correndo";
+          return (
+            <button
+              key={i}
+              onClick={() => tocouItem(i)}
+              disabled={!semVoz}
+              className={`${cellSize} rounded-xl border-2 flex flex-col items-center justify-center p-1 transition-all ${
+                feito
+                  ? "border-emerald-400 bg-emerald-50 opacity-70"
+                  : atual
+                    ? `border-amber-500 bg-amber-50 ${pulseCls}`
+                    : "border-slate-200 bg-white"
+              }`}
+            >
+              <RenderEmoji e={it.emoji} label={it.nome} className="w-8 h-8 md:w-10 md:h-10" />
+              {mostrarNomes && (
+                <span className="text-[10px] font-bold mt-1">{it.nome}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {modo === "correndo" && (
+        <div className="text-xs text-muted-foreground">
+          Item {idx + 1}/{sequencia.length} · erros: {erros} ·{" "}
+          {dur > 0 ? `${ips.toFixed(1)} itens/s` : ""}
+        </div>
       )}
-      {fase === "flash" && (
-        <div className={`text-sm text-muted-foreground ${pulseCls}`}>Olha a figura!</div>
+
+      <div className="flex gap-2 justify-center">
+        {modo === "idle" && (
+          <button
+            onClick={iniciar}
+            className="bg-amber-500 text-white font-black px-6 py-3 rounded-full shadow-md"
+          >
+            Começar
+          </button>
+        )}
+        {modo === "correndo" && !semVoz && (
+          <button
+            onClick={ouvir}
+            disabled={isListening}
+            className={`bg-rose-500 text-white font-black px-6 py-3 rounded-full shadow-md flex items-center gap-2 ${isListening ? pulseCls : ""}`}
+          >
+            <Mic className="w-5 h-5" /> {isListening ? "Ouvindo..." : "Falar"}
+          </button>
+        )}
+      </div>
+
+      {modo === "done" && (
+        <div className="text-sm font-bold text-emerald-600">
+          Concluído! {sequencia.length} figuras em {dur.toFixed(1)}s ({ips.toFixed(2)} itens/s) ·
+          {erros} erro{erros === 1 ? "" : "s"}
+        </div>
+      )}
+
+      {!supported && modo === "idle" && (
+        <div className="text-xs text-amber-600">
+          Voz indisponível — usaremos toque em ordem para medir velocidade.
+        </div>
       )}
     </div>
   );

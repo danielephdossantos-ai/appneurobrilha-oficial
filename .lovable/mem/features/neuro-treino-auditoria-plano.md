@@ -20,27 +20,31 @@ Ordem fixa. Cada passo é entregue e validado antes do próximo.
 - Status: **concluído**.
 
 
-## ⬜ #3 — Grupo Discalculia (Numicon / senso numérico) — **depois da infra**
-- Novo grupo "Matemática Terapêutica".
-- Reaproveitar `SubitizingFlash`, `OperacaoVisual` e reta numérica do Contar com Pip.
-- Só depois de #4/#5/#6 pra já nascer com adjustment + métricas + mastery ligados.
+## ✅ #3 — Grupo Discalculia (Numicon / senso numérico)
+- Card "Matemática Terapêutica · Discalculia" no topo do `/neuro-treino` apontando pra `/escola-brilha/contar-com-pip` (8 fases já vivas: subitizing, Numicon, reta numérica, +/−).
+- Status: **card entregue**; expansão futura pode adicionar mecânicas específicas de discalculia dentro do próprio Neuro Treino.
 
+## ✅ #4 — `NeuroAdaptiveCore.adjustment` ligado aos jogos
+- `useNeuroAdaptive` acoplado ao `/neuro-treino/$slug`.
+- `adjustment.difficultyScale` filtra `variations`; `stimuliReduction` esconde linha decorativa; `suggestBreak` dispara toast; `requestHelp` no botão "Pular".
 
-## ⬜ #4 — Ligar `NeuroAdaptiveCore.adjustment` aos jogos
-- Componentes de jogo leem `adjustment.difficultyScale`, `adjustment.stimuliReduction`, `adjustment.maxInformationDensity`.
-- Aplicar em: nº de distratores, tempo de exposição, complexidade de cena.
+## ✅ #5 — Métricas unificadas + gravar por habilidade
+- `activity_logs` bruto + `child_skill_mastery` agregado por `skill_code=NT:<slug>` e `materia=grupo cognitivo`.
+- `src/services/neuro-treino/neuroMetrics.ts` faz upsert com hits/errors/total/tempo/mastery_percentage + estado ABA.
+- `src/data/neuro-treino/skill-map.ts` mapeia slug→(skill_code, materia).
 
-## ✅ #5 — Unificar métricas + gravar por habilidade
-- Fonte única: `activity_logs` (bruto por resposta) + `child_skill_mastery` (agregado por skill_code).
-- Cada resposta no `/neuro-treino/$slug` grava skill_code=`NT:<slug>` e materia=grupo cognitivo (Fono Clínico, Coordenação Motora, Atenção, Alfabetização, Fala e Som, Funções Executivas, Oficina Criativa).
-- Serviço: `src/services/neuro-treino/neuroMetrics.ts` (upsert com hits/errors/total/tempo/mastery_percentage).
-- Mapa: `src/data/neuro-treino/skill-map.ts`.
-- `CognitiveMemoryService` fica como cache de perfil cognitivo separado; a fonte oficial de mastery por habilidade agora é `child_skill_mastery`.
+## ✅ #5.5 — Correção clínica dos 3 buracos graves
+- `ArticulacaoSons` agora usa `useSpeechMatcher` (Web Speech API pt-BR) com similaridade real, barra de match, e falha após 3 tentativas.
+- `NomeacaoRapida` reescrita como RAN real: sequência de 12 figuras nomeadas por voz, itens/segundo medidos, fallback tátil quando sem voz.
+- `TracadoLetras` valida ordem via checkpoints numerados por letra (`src/data/neuro-treino/stroke-checkpoints.ts`) com raio 18 e detecção de erro de ordem.
+- Stub `AdaptiveEngine` (`src/modules/neuro-treino/engine/adaptive-engine.ts`) agora delega no `NeuroAdaptiveCore` real.
 
-## ⬜ #6 — Hierarquia ABA de prompting (com fading)
-- 4 níveis de ajuda: físico → gestual → verbal → independente.
-- Sistema desce um nível a cada acerto consecutivo e sobe um nível a cada erro.
-- Critério de mastery para avançar de missão: 8/10 no nível "independente" em 3 sessões.
+## ✅ #6 — Hierarquia ABA de prompting (com fading)
+- 4 níveis (físico → gestual → verbal → independente) em `src/services/neuro-treino/promptingEngine.ts`.
+- Sobe 1 nível a cada 3 acertos consecutivos, desce 1 a cada erro.
+- Mastery: 8/10 em nível 4 em 3 sessões — chip "🎓 Habilidade dominada" aparece no cabeçalho.
+- Colunas `prompt_level`, `consec_correct`, `indep_sessions` em `child_skill_mastery`; hook `useAbaPrompting` reflete estado na UI.
+- Cada mecânica clínica (Articulação, Nomeação, Traçado) usa `promptLevel` para revelar/ocultar dicas.
 
 ## Regras
 - Nunca dizer "pronto" sem validar visualmente (Playwright + screenshot) no passo em que houver mudança de UI.
