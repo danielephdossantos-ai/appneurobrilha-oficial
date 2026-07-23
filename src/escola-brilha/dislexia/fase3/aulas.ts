@@ -75,15 +75,15 @@ export const dlx22: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante S! Junta os dentes e sopra: SSSSSS. É o som da cobra!",
+      fala: "Consoante s! Junta os dentes e sopra: sss. É o som da cobra!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra S. SSSSS.", palavra: "S", enfase: "S" },
-    { tipo: "escuta", fala: "SSSOL. SOL. Sopro no começo.", palavra: "SOL", enfase: "S" },
-    { tipo: "escuta", fala: "SSSAPO. SA-PO.", palavra: "SAPO", enfase: "S" },
+    { tipo: "escuta", fala: "Essa é a letra s. sss.", palavra: "S", enfase: "S" },
+    { tipo: "escuta", fala: "Sss... sol. Sopro no começo.", palavra: "SOL", enfase: "S" },
+    { tipo: "escuta", fala: "Sss... sapo.", palavra: "SAPO", enfase: "S" },
     {
       tipo: "escolha",
-      fala: "Qual começa com SSSS?",
+      fala: "Qual começa com sss?",
       opcoes: [
         { palavra: "SAPATO", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -91,15 +91,15 @@ export const dlx22: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com SSSS?",
+      fala: "E qual dessas começa com sss?",
       opcoes: [
         { palavra: "SINO", correta: true },
         { palavra: "OVELHA", correta: false, imagem: ovelha },
         { palavra: "LUA", correta: false, imagem: lua },
       ],
     },
-    { tipo: "reforco", fala: "O ar sai devagar entre os dentes. Isso é o SSS!", imagem: pipVet },
-    { tipo: "fim", fala: "S de SOL, S de SAPO. Sopro perfeito!", imagem: pipVet },
+    { tipo: "reforco", fala: "O ar sai devagar entre os dentes. Isso é o sss!", imagem: pipVet },
+    { tipo: "fim", fala: "s de sol, s de sapo. Sopro perfeito!", imagem: pipVet },
   ],
 };
 
