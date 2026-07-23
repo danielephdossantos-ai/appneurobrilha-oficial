@@ -109,6 +109,14 @@ const FASES: Record<
     border: "border-emerald-200 dark:border-emerald-800",
     accent: "bg-emerald-500",
   },
+  4: {
+    nome: "Fase 4 · Sílabas Simples (CV)",
+    icon: Blocks,
+    color: "text-sky-600",
+    bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20",
+    border: "border-sky-200 dark:border-sky-800",
+    accent: "bg-sky-500",
+  },
 };
 
 function DislexiaIndex() {
