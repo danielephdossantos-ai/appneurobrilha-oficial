@@ -239,15 +239,15 @@ export const dlx26: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante N! Língua encosta atrás dos dentes, boca aberta, som sai pelo nariz: NNNNN.",
+      fala: "Consoante n! Língua encosta atrás dos dentes, boca aberta, som sai pelo nariz: nnn.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra N. NNNNN.", palavra: "N", enfase: "N" },
-    { tipo: "escuta", fala: "NNNAVIO. NA-VI-O.", palavra: "NAVIO", enfase: "N" },
-    { tipo: "escuta", fala: "NNNUVEM. NU-VEM.", palavra: "NUVEM", enfase: "N" },
+    { tipo: "escuta", fala: "Essa é a letra n. nnn.", palavra: "N", enfase: "N" },
+    { tipo: "escuta", fala: "Nnn... navio.", palavra: "NAVIO", enfase: "N" },
+    { tipo: "escuta", fala: "Nnn... nuvem.", palavra: "NUVEM", enfase: "N" },
     {
       tipo: "escolha",
-      fala: "Qual começa com NNN?",
+      fala: "Qual começa com nnn?",
       opcoes: [
         { palavra: "NARIZ", correta: true },
         { palavra: "SAPO", correta: false },
@@ -255,7 +255,7 @@ export const dlx26: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com NNN?",
+      fala: "E qual dessas começa com nnn?",
       opcoes: [
         { palavra: "NENÊ", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -264,13 +264,13 @@ export const dlx26: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Cuidado! M e N são parecidos. Qual começa com NNN (língua em cima)?",
+      fala: "Cuidado! O m e o n são parecidos. Qual começa com nnn, com a língua em cima?",
       opcoes: [
         { palavra: "NAVIO", correta: true },
         { palavra: "MALA", correta: false },
       ],
     },
-    { tipo: "fim", fala: "M fecha a boca, N deixa a língua em cima. Você achou o N!", imagem: pipVet },
+    { tipo: "fim", fala: "O m fecha a boca, o n deixa a língua em cima. Você achou o n!", imagem: pipVet },
   ],
 };
 
