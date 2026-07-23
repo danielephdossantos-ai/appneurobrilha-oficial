@@ -4,6 +4,7 @@ import { ArrowLeft, Volume2, Sparkles, Hand } from "lucide-react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { url as pipVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
 import type { AulaDlx, CenaDlx } from "./types";
+import { imagemPalavra } from "./word-images";
 
 interface Props {
   aula: AulaDlx;
