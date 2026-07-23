@@ -378,6 +378,32 @@ function Treino() {
             </div>
           </Link>
 
+          {/* ── MATEMÁTICA TERAPÊUTICA · Discalculia ───────────────── */}
+          <Link
+            to="/escola-brilha/contar-com-pip"
+            className="group block rounded-3xl overflow-hidden border-2 border-sky-200 dark:border-sky-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🔢
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Matemática Terapêutica · Discalculia
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Contar com Pip · Senso Numérico
+                </div>
+                <div className="text-xs text-white/85">
+                  Subitizing · Numicon · reta numérica · 8 fases
+                </div>
+              </div>
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
 
 
 
