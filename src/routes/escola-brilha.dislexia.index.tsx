@@ -178,3 +178,14 @@ function getConcluidas(): string[] {
     return [];
   }
 }
+
+function getAulaImagem(aula: { cenas: Array<Record<string, unknown>> }): string | undefined {
+  // Pega a primeira imagem de cena que NÃO seja abertura (Pip),
+  // caindo pra abertura se for a única com imagem.
+  const naoAbertura = aula.cenas.find(
+    (c) => c.tipo !== "abertura" && typeof c.imagem === "string",
+  );
+  if (naoAbertura) return naoAbertura.imagem as string;
+  const qualquer = aula.cenas.find((c) => typeof c.imagem === "string");
+  return qualquer?.imagem as string | undefined;
+}
