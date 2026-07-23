@@ -127,6 +127,10 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      <footer className="sticky bottom-0 left-0 right-0 bg-amber-100/95 backdrop-blur border-t-2 border-amber-300 text-amber-900 text-xs md:text-sm px-4 py-2 text-center font-semibold shadow-lg">
+        ⚠️ A voz do professor é gerada por computador (TTS) e pode errar a pronúncia de algumas palavras. É importante que um adulto acompanhe a criança durante a atividade.
+      </footer>
     </div>
   );
 }
