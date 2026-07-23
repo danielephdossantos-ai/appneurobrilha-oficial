@@ -116,15 +116,15 @@ export const dlx23: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante L! A ponta da língua sobe e encosta atrás dos dentes de cima: LLLLL.",
+      fala: "Consoante l! A ponta da língua sobe e encosta atrás dos dentes de cima: lll.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra L. LLLLL.", palavra: "L", enfase: "L" },
-    { tipo: "escuta", fala: "LLLEÃO. LE-ÃO. Começa com LLL.", palavra: "LEÃO", imagem: leao, enfase: "L" },
-    { tipo: "escuta", fala: "LLLUA. LU-A.", palavra: "LUA", imagem: lua, enfase: "L" },
+    { tipo: "escuta", fala: "Essa é a letra l. lll.", palavra: "L", enfase: "L" },
+    { tipo: "escuta", fala: "Lll... leão. Começa com lll.", palavra: "LEÃO", imagem: leao, enfase: "L" },
+    { tipo: "escuta", fala: "Lll... lua.", palavra: "LUA", imagem: lua, enfase: "L" },
     {
       tipo: "escolha",
-      fala: "Qual começa com LLL?",
+      fala: "Qual começa com lll?",
       opcoes: [
         { palavra: "LEÃO", correta: true, imagem: leao },
         { palavra: "SAPO", correta: false },
@@ -132,15 +132,15 @@ export const dlx23: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com LLL?",
+      fala: "E qual dessas começa com lll?",
       opcoes: [
         { palavra: "LIVRO", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "reforco", fala: "Língua encosta, som sai dos lados. Isso é o LLL!", imagem: pipVet },
-    { tipo: "fim", fala: "L de LUA, L de LEÃO. Muito bem!", imagem: pipVet },
+    { tipo: "reforco", fala: "Língua encosta, som sai dos lados. Isso é o lll!", imagem: pipVet },
+    { tipo: "fim", fala: "l de lua, l de leão. Muito bem!", imagem: pipVet },
   ],
 };
 
