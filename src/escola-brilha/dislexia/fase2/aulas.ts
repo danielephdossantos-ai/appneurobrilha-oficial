@@ -233,12 +233,12 @@ export const dlx16: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vamos misturar A, E e I. Escuta o COMECINHO de cada palavra.",
+      fala: "Vamos misturar a, e e i. Escuta o comecinho de cada palavra.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com AAA?",
+      fala: "Qual começa com aaa?",
       opcoes: [
         { palavra: "ABELHA", correta: true },
         { palavra: "ELEFANTE", correta: false, imagem: elefante },
@@ -247,7 +247,7 @@ export const dlx16: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com EEE?",
+      fala: "Qual começa com eee?",
       opcoes: [
         { palavra: "ESTRELA", correta: true, imagem: estrela },
         { palavra: "ANEL", correta: false },
@@ -256,7 +256,7 @@ export const dlx16: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com IIII?",
+      fala: "Qual começa com iii?",
       opcoes: [
         { palavra: "IMÃ", correta: true },
         { palavra: "AVIÃO", correta: false },
