@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, CheckCircle2, Sparkles } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
   head: () => ({
