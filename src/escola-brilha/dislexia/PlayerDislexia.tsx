@@ -286,11 +286,20 @@ function CenaView({
 
       {palavra ? (
         <div className="text-5xl md:text-6xl font-black text-white tracking-widest">
-          {enfase ? (
-            <>
-              <span className="text-orange-300">{enfase}</span>
-              {palavra.slice(enfase.length)}
-            </>
+          {enfase && palavra.toUpperCase().includes(enfase.toUpperCase()) ? (
+            (() => {
+              const upper = palavra.toUpperCase();
+              const idx = upper.indexOf(enfase.toUpperCase());
+              return (
+                <>
+                  {palavra.slice(0, idx)}
+                  <span className="text-orange-300">
+                    {palavra.slice(idx, idx + enfase.length)}
+                  </span>
+                  {palavra.slice(idx + enfase.length)}
+                </>
+              );
+            })()
           ) : (
             palavra
           )}
