@@ -299,7 +299,7 @@ function CenaView({
       ) : null}
 
       {palavra ? (
-        <div className="text-5xl md:text-6xl font-black text-white tracking-widest">
+        <div className="w-full text-center text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-wider sm:tracking-widest leading-tight break-words px-2">
           {enfase && palavra.toUpperCase().includes(enfase.toUpperCase()) ? (
             (() => {
               const upper = palavra.toUpperCase();
