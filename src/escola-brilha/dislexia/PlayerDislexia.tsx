@@ -176,7 +176,9 @@ function CenaView({
           className={`grid gap-2 sm:gap-3 w-full ${
             opcoes.length <= 2
               ? "grid-cols-2"
-              : "grid-cols-2 sm:grid-cols-3"
+              : opcoes.length === 4
+                ? "grid-cols-2"
+                : "grid-cols-2 sm:grid-cols-3"
           }`}
         >
           {opcoes.map((o, i) => {
