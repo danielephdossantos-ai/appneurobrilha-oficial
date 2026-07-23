@@ -68,6 +68,17 @@ const ICONE_POR_AULA: Record<string, string> = {
   "dlx-48-frases-curtas": icConscFono,
   "dlx-49-revisao-lrz": icPedacinhos,
   "dlx-50-revisao-cvc-final": icConscFono,
+  // Fase 6 · Dígrafos e Encontros
+  "dlx-51-digrafo-ch": icArticulacao,
+  "dlx-52-digrafo-lh": icArticulacao,
+  "dlx-53-digrafo-nh": icArticulacao,
+  "dlx-54-digrafo-rr": icArticulacao,
+  "dlx-55-digrafo-ss": icArticulacao,
+  "dlx-56-revisao-digrafos": icDiscrimAud,
+  "dlx-57-encontros-br-pr-tr": icFormandoPal,
+  "dlx-58-encontros-cr-fr-gr": icFormandoPal,
+  "dlx-59-encontros-com-l": icFormandoPal,
+  "dlx-60-revisao-fase6": icConscFono,
 };
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
@@ -135,6 +146,14 @@ const FASES: Record<
     bg: "from-rose-50 to-rose-100/50 dark:from-rose-950/30 dark:to-rose-900/20",
     border: "border-rose-200 dark:border-rose-800",
     accent: "bg-rose-500",
+  },
+  6: {
+    nome: "Fase 6 · Dígrafos e Encontros",
+    icon: Combine,
+    color: "text-violet-600",
+    bg: "from-violet-50 to-violet-100/50 dark:from-violet-950/30 dark:to-violet-900/20",
+    border: "border-violet-200 dark:border-violet-800",
+    accent: "bg-violet-500",
   },
 };
 
