@@ -265,6 +265,12 @@ function NeuroAtividade() {
   };
 
   const onConcluir = (correto: boolean) => {
+    // Tempo de resposta desta questão (segundos)
+    const responseTimeSec = Math.max(0.1, (Date.now() - startedAtRef.current) / 1000);
+    const activityId = variation ? `${slug}:${variation.id}` : slug;
+    // Persiste em activity_logs e atualiza métricas do núcleo adaptativo
+    registerPerformance(correto, responseTimeSec, activityId);
+
     if (correto) {
       setAcertos((a) => a + 1);
       const frase = pipFraseAcerto(hiperfoco);
@@ -277,6 +283,14 @@ function NeuroAtividade() {
     }
     setTimeout(() => setIndex((i) => i + 1), 900);
   };
+
+  // Marca "pulei" como pedido de ajuda (registra no log e sinaliza dificuldade)
+  const onSkip = () => {
+    const activityId = variation ? `${slug}:${variation.id}` : slug;
+    requestHelp(activityId);
+    setIndex((i) => i + 1);
+  };
+
 
   return (
     <Shell>
