@@ -38,6 +38,7 @@ import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
+import { getCheckpoints as getLetterCheckpoints } from "@/data/neuro-treino/stroke-checkpoints";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
