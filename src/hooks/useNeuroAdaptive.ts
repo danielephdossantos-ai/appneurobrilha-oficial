@@ -169,7 +169,12 @@ export function useNeuroAdaptive() {
   );
 
   const registerPerformance = useCallback(
-    (isCorrect: boolean, responseTime: number, activityId?: string) => {
+    (
+      isCorrect: boolean,
+      responseTime: number,
+      activityId?: string,
+      skillInfo?: NeuroSkillInfo,
+    ) => {
       setMetrics((prev) => {
         const newAccuracy = isCorrect
           ? prev.performance.accuracyRate * 0.9 + 0.1
@@ -192,15 +197,25 @@ export function useNeuroAdaptive() {
           },
         };
       });
-      // Persiste de forma assíncrona (não bloqueia UI)
+      // Persiste log bruto (activity_logs)
       void persistLog({
         score: isCorrect ? 1 : 0,
         durationMs: Math.round(responseTime * 1000),
         activityId,
         isCorrect,
       });
+      // Persiste agregado por habilidade (child_skill_mastery)
+      if (activeChild && skillInfo) {
+        void recordSkillAttempt({
+          childId: activeChild.id,
+          skillCode: skillInfo.skillCode,
+          materia: skillInfo.materia,
+          isCorrect,
+          durationMs: Math.round(responseTime * 1000),
+        });
+      }
     },
-    [persistLog],
+    [persistLog, activeChild],
   );
 
   const reportSensoryIssue = useCallback(() => {
