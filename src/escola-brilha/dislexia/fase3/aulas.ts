@@ -34,15 +34,15 @@ export const dlx21: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante M! Fecha a boca e faz MMMMM, igual quando a comida tá gostosa. Sente vibrar no nariz.",
+      fala: "Consoante m! Fecha a boca e faz mmm, igual quando a comida tá gostosa. Sente vibrar no nariz.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra M. MMMMM.", palavra: "M", enfase: "M" },
-    { tipo: "escuta", fala: "MMMACACO. M-A-CA-CO. Começa com MMM.", palavra: "MACACO", imagem: macaco, enfase: "M" },
-    { tipo: "escuta", fala: "MMMÃO. MÃO. Também MMM.", palavra: "MÃO", enfase: "M" },
+    { tipo: "escuta", fala: "Essa é a letra m. mmm.", palavra: "M", enfase: "M" },
+    { tipo: "escuta", fala: "Mmm... macaco. Começa com mmm.", palavra: "MACACO", imagem: macaco, enfase: "M" },
+    { tipo: "escuta", fala: "Mmm... mão. Também mmm.", palavra: "MÃO", enfase: "M" },
     {
       tipo: "escolha",
-      fala: "Qual começa com MMM?",
+      fala: "Qual começa com mmm?",
       opcoes: [
         { palavra: "MACACO", correta: true, imagem: macaco },
         { palavra: "VACA", correta: false, imagem: vaca },
@@ -50,15 +50,15 @@ export const dlx21: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com MMM?",
+      fala: "E qual dessas começa com mmm?",
       opcoes: [
         { palavra: "MALA", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "reforco", fala: "Boca fechada, som sai pelo nariz. Isso é o MMM!", imagem: pipVet },
-    { tipo: "fim", fala: "M de MÃE, M de MEL. Você achou o M!", imagem: pipVet },
+    { tipo: "reforco", fala: "Boca fechada, som sai pelo nariz. Isso é o mmm!", imagem: pipVet },
+    { tipo: "fim", fala: "m de mãe, m de mel. Você achou o m!", imagem: pipVet },
   ],
 };
 
@@ -75,15 +75,15 @@ export const dlx22: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante S! Junta os dentes e sopra: SSSSSS. É o som da cobra!",
+      fala: "Consoante s! Junta os dentes e sopra: sss. É o som da cobra!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra S. SSSSS.", palavra: "S", enfase: "S" },
-    { tipo: "escuta", fala: "SSSOL. SOL. Sopro no começo.", palavra: "SOL", enfase: "S" },
-    { tipo: "escuta", fala: "SSSAPO. SA-PO.", palavra: "SAPO", enfase: "S" },
+    { tipo: "escuta", fala: "Essa é a letra s. sss.", palavra: "S", enfase: "S" },
+    { tipo: "escuta", fala: "Sss... sol. Sopro no começo.", palavra: "SOL", enfase: "S" },
+    { tipo: "escuta", fala: "Sss... sapo.", palavra: "SAPO", enfase: "S" },
     {
       tipo: "escolha",
-      fala: "Qual começa com SSSS?",
+      fala: "Qual começa com sss?",
       opcoes: [
         { palavra: "SAPATO", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -91,15 +91,15 @@ export const dlx22: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com SSSS?",
+      fala: "E qual dessas começa com sss?",
       opcoes: [
         { palavra: "SINO", correta: true },
         { palavra: "OVELHA", correta: false, imagem: ovelha },
         { palavra: "LUA", correta: false, imagem: lua },
       ],
     },
-    { tipo: "reforco", fala: "O ar sai devagar entre os dentes. Isso é o SSS!", imagem: pipVet },
-    { tipo: "fim", fala: "S de SOL, S de SAPO. Sopro perfeito!", imagem: pipVet },
+    { tipo: "reforco", fala: "O ar sai devagar entre os dentes. Isso é o sss!", imagem: pipVet },
+    { tipo: "fim", fala: "s de sol, s de sapo. Sopro perfeito!", imagem: pipVet },
   ],
 };
 
@@ -116,15 +116,15 @@ export const dlx23: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante L! A ponta da língua sobe e encosta atrás dos dentes de cima: LLLLL.",
+      fala: "Consoante l! A ponta da língua sobe e encosta atrás dos dentes de cima: lll.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra L. LLLLL.", palavra: "L", enfase: "L" },
-    { tipo: "escuta", fala: "LLLEÃO. LE-ÃO. Começa com LLL.", palavra: "LEÃO", imagem: leao, enfase: "L" },
-    { tipo: "escuta", fala: "LLLUA. LU-A.", palavra: "LUA", imagem: lua, enfase: "L" },
+    { tipo: "escuta", fala: "Essa é a letra l. lll.", palavra: "L", enfase: "L" },
+    { tipo: "escuta", fala: "Lll... leão. Começa com lll.", palavra: "LEÃO", imagem: leao, enfase: "L" },
+    { tipo: "escuta", fala: "Lll... lua.", palavra: "LUA", imagem: lua, enfase: "L" },
     {
       tipo: "escolha",
-      fala: "Qual começa com LLL?",
+      fala: "Qual começa com lll?",
       opcoes: [
         { palavra: "LEÃO", correta: true, imagem: leao },
         { palavra: "SAPO", correta: false },
@@ -132,15 +132,15 @@ export const dlx23: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com LLL?",
+      fala: "E qual dessas começa com lll?",
       opcoes: [
         { palavra: "LIVRO", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
         { palavra: "ESTRELA", correta: false, imagem: estrela },
       ],
     },
-    { tipo: "reforco", fala: "Língua encosta, som sai dos lados. Isso é o LLL!", imagem: pipVet },
-    { tipo: "fim", fala: "L de LUA, L de LEÃO. Muito bem!", imagem: pipVet },
+    { tipo: "reforco", fala: "Língua encosta, som sai dos lados. Isso é o lll!", imagem: pipVet },
+    { tipo: "fim", fala: "l de lua, l de leão. Muito bem!", imagem: pipVet },
   ],
 };
 
@@ -157,15 +157,15 @@ export const dlx24: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante F! Dente de cima morde de leve o lábio de baixo e sopra: FFFFFF.",
+      fala: "Consoante f! Dente de cima morde de leve o lábio de baixo e sopra: fff.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra F. FFFFF.", palavra: "F", enfase: "F" },
-    { tipo: "escuta", fala: "FFFOGUETE. FO-GUE-TE.", palavra: "FOGUETE", imagem: foguete, enfase: "F" },
-    { tipo: "escuta", fala: "FFFACA. FA-CA.", palavra: "FACA", enfase: "F" },
+    { tipo: "escuta", fala: "Essa é a letra f. fff.", palavra: "F", enfase: "F" },
+    { tipo: "escuta", fala: "Fff... foguete.", palavra: "FOGUETE", imagem: foguete, enfase: "F" },
+    { tipo: "escuta", fala: "Fff... faca.", palavra: "FACA", enfase: "F" },
     {
       tipo: "escolha",
-      fala: "Qual começa com FFFF?",
+      fala: "Qual começa com fff?",
       opcoes: [
         { palavra: "FOGUETE", correta: true, imagem: foguete },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -173,15 +173,15 @@ export const dlx24: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com FFFF?",
+      fala: "E qual dessas começa com fff?",
       opcoes: [
         { palavra: "FADA", correta: true },
         { palavra: "SOL", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "Dente encosta no lábio, sopra. Isso é o FFF!", imagem: pipVet },
-    { tipo: "fim", fala: "F de FOGUETE, F de FADA. Sopro certo!", imagem: pipVet },
+    { tipo: "reforco", fala: "Dente encosta no lábio, sopra. Isso é o fff!", imagem: pipVet },
+    { tipo: "fim", fala: "f de foguete, f de fada. Sopro certo!", imagem: pipVet },
   ],
 };
 
@@ -198,15 +198,15 @@ export const dlx25: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante V! Mesma boca do F — dente no lábio — mas agora o som VIBRA: VVVVV.",
+      fala: "Consoante v! Mesma boca do f — dente no lábio — mas agora o som vibra: vvv.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra V. VVVVV. Sente vibrar!", palavra: "V", enfase: "V" },
-    { tipo: "escuta", fala: "VVVACA. VA-CA.", palavra: "VACA", imagem: vaca, enfase: "V" },
-    { tipo: "escuta", fala: "VVVELA. VE-LA.", palavra: "VELA", enfase: "V" },
+    { tipo: "escuta", fala: "Essa é a letra v. vvv. Sente vibrar!", palavra: "V", enfase: "V" },
+    { tipo: "escuta", fala: "Vvv... vaca.", palavra: "VACA", imagem: vaca, enfase: "V" },
+    { tipo: "escuta", fala: "Vvv... vela.", palavra: "VELA", enfase: "V" },
     {
       tipo: "escolha",
-      fala: "Qual começa com VVV?",
+      fala: "Qual começa com vvv?",
       opcoes: [
         { palavra: "VACA", correta: true, imagem: vaca },
         { palavra: "FOGUETE", correta: false, imagem: foguete },
@@ -214,15 +214,15 @@ export const dlx25: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "F sopra, V vibra. Qual começa com VVV?",
+      fala: "O f sopra, o v vibra. Qual começa com vvv?",
       opcoes: [
         { palavra: "VOVÔ", correta: true },
         { palavra: "FACA", correta: false },
         { palavra: "SAPO", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "F é só sopro, V é sopro que TREME. Você separou!", imagem: pipVet },
-    { tipo: "fim", fala: "V de VACA, V de VOVÔ. Vibrou tudo!", imagem: pipVet },
+    { tipo: "reforco", fala: "O f é só sopro, o v é sopro que treme. Você separou!", imagem: pipVet },
+    { tipo: "fim", fala: "v de vaca, v de vovô. Vibrou tudo!", imagem: pipVet },
   ],
 };
 
@@ -239,15 +239,15 @@ export const dlx26: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante N! Língua encosta atrás dos dentes, boca aberta, som sai pelo nariz: NNNNN.",
+      fala: "Consoante n! Língua encosta atrás dos dentes, boca aberta, som sai pelo nariz: nnn.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra N. NNNNN.", palavra: "N", enfase: "N" },
-    { tipo: "escuta", fala: "NNNAVIO. NA-VI-O.", palavra: "NAVIO", enfase: "N" },
-    { tipo: "escuta", fala: "NNNUVEM. NU-VEM.", palavra: "NUVEM", enfase: "N" },
+    { tipo: "escuta", fala: "Essa é a letra n. nnn.", palavra: "N", enfase: "N" },
+    { tipo: "escuta", fala: "Nnn... navio.", palavra: "NAVIO", enfase: "N" },
+    { tipo: "escuta", fala: "Nnn... nuvem.", palavra: "NUVEM", enfase: "N" },
     {
       tipo: "escolha",
-      fala: "Qual começa com NNN?",
+      fala: "Qual começa com nnn?",
       opcoes: [
         { palavra: "NARIZ", correta: true },
         { palavra: "SAPO", correta: false },
@@ -255,7 +255,7 @@ export const dlx26: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com NNN?",
+      fala: "E qual dessas começa com nnn?",
       opcoes: [
         { palavra: "NENÊ", correta: true },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -264,13 +264,13 @@ export const dlx26: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Cuidado! M e N são parecidos. Qual começa com NNN (língua em cima)?",
+      fala: "Cuidado! O m e o n são parecidos. Qual começa com nnn, com a língua em cima?",
       opcoes: [
         { palavra: "NAVIO", correta: true },
         { palavra: "MALA", correta: false },
       ],
     },
-    { tipo: "fim", fala: "M fecha a boca, N deixa a língua em cima. Você achou o N!", imagem: pipVet },
+    { tipo: "fim", fala: "O m fecha a boca, o n deixa a língua em cima. Você achou o n!", imagem: pipVet },
   ],
 };
 
@@ -287,15 +287,15 @@ export const dlx27: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante R! No começo da palavra, o R é FORTE, som de motor: RRRRR!",
+      fala: "Consoante r! No começo da palavra, o r é forte, som de motor: rrr!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra R. RRRRR.", palavra: "R", enfase: "R" },
-    { tipo: "escuta", fala: "RRRATO. RA-TO.", palavra: "RATO", enfase: "R" },
-    { tipo: "escuta", fala: "RRROSA. RO-SA.", palavra: "ROSA", enfase: "R" },
+    { tipo: "escuta", fala: "Essa é a letra r. rrr.", palavra: "R", enfase: "R" },
+    { tipo: "escuta", fala: "Rrr... rato.", palavra: "RATO", enfase: "R" },
+    { tipo: "escuta", fala: "Rrr... rosa.", palavra: "ROSA", enfase: "R" },
     {
       tipo: "escolha",
-      fala: "Qual começa com RRR?",
+      fala: "Qual começa com rrr?",
       opcoes: [
         { palavra: "RATO", correta: true },
         { palavra: "SAPO", correta: false },
@@ -303,15 +303,15 @@ export const dlx27: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com RRR?",
+      fala: "E qual dessas começa com rrr?",
       opcoes: [
         { palavra: "RIO", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "R do começo é FORTE, som de motor ligando!", imagem: pipVet },
-    { tipo: "fim", fala: "R de RATO, R de ROSA. Motor ligado!", imagem: pipVet },
+    { tipo: "reforco", fala: "O r do começo é forte, som de motor ligando!", imagem: pipVet },
+    { tipo: "fim", fala: "r de rato, r de rosa. Motor ligado!", imagem: pipVet },
   ],
 };
 
@@ -328,15 +328,15 @@ export const dlx28: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante Z! Mesma boca do S — dentes juntos — mas agora VIBRA. Som da abelha: ZZZZZ!",
+      fala: "Consoante z! Mesma boca do s — dentes juntos — mas agora vibra. Som da abelha: zzz!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra Z. ZZZZZ. Vibrando!", palavra: "Z", enfase: "Z" },
-    { tipo: "escuta", fala: "ZZZEBRA. ZE-BRA.", palavra: "ZEBRA", enfase: "Z" },
-    { tipo: "escuta", fala: "ZZZERO. ZE-RO.", palavra: "ZERO", enfase: "Z" },
+    { tipo: "escuta", fala: "Essa é a letra z. zzz. Vibrando!", palavra: "Z", enfase: "Z" },
+    { tipo: "escuta", fala: "Zzz... zebra.", palavra: "ZEBRA", enfase: "Z" },
+    { tipo: "escuta", fala: "Zzz... zero.", palavra: "ZERO", enfase: "Z" },
     {
       tipo: "escolha",
-      fala: "Qual começa com ZZZ?",
+      fala: "Qual começa com zzz?",
       opcoes: [
         { palavra: "ZEBRA", correta: true },
         { palavra: "SAPO", correta: false },
@@ -344,15 +344,15 @@ export const dlx28: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "S sopra, Z vibra. Qual começa com ZZZ?",
+      fala: "O s sopra, o z vibra. Qual começa com zzz?",
       opcoes: [
         { palavra: "ZERO", correta: true },
         { palavra: "SINO", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "S é sopro, Z é sopro que TREME — som de abelha!", imagem: pipVet },
-    { tipo: "fim", fala: "Z de ZEBRA, Z de ZERO. Abelha zumbindo!", imagem: pipVet },
+    { tipo: "reforco", fala: "O s é sopro, o z é sopro que treme — som de abelha!", imagem: pipVet },
+    { tipo: "fim", fala: "z de zebra, z de zero. Abelha zumbindo!", imagem: pipVet },
   ],
 };
 
@@ -368,12 +368,12 @@ export const dlx29: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vamos misturar M, S, L e F. Escuta o COMECINHO com atenção.",
+      fala: "Vamos misturar m, s, l e f. Escuta o comecinho com atenção.",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com MMM (boca fechada)?",
+      fala: "Qual começa com mmm, de boca fechada?",
       opcoes: [
         { palavra: "MACACO", correta: true, imagem: macaco },
         { palavra: "SAPO", correta: false },
@@ -382,7 +382,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com SSS (sopro de cobra)?",
+      fala: "Qual começa com sss, sopro de cobra?",
       opcoes: [
         { palavra: "SOL", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
@@ -391,7 +391,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com LLL (língua em cima)?",
+      fala: "Qual começa com lll, língua em cima?",
       opcoes: [
         { palavra: "LUA", correta: true, imagem: lua },
         { palavra: "FADA", correta: false },
@@ -400,7 +400,7 @@ export const dlx29: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com FFF (dente no lábio)?",
+      fala: "Qual começa com fff, dente no lábio?",
       opcoes: [
         { palavra: "FACA", correta: true },
         { palavra: "MÃO", correta: false },
@@ -408,7 +408,7 @@ export const dlx29: AulaDlx = {
       ],
     },
     { tipo: "reforco", fala: "Cada consoante tem uma boca diferente. Você separou!", imagem: pipVet },
-    { tipo: "fim", fala: "M, S, L, F — quatro sons, quatro bocas. Muito bem!", imagem: pipVet },
+    { tipo: "fim", fala: "m, s, l, f — quatro sons, quatro bocas. Muito bem!", imagem: pipVet },
   ],
 };
 
@@ -424,12 +424,12 @@ export const dlx30: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Últimas quatro: V, N, R, Z. Depois a gente junta com vogal!",
+      fala: "Últimas quatro: v, n, r, z. Depois a gente junta com vogal!",
       imagem: pipVet,
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com VVV (vibra no lábio)?",
+      fala: "Qual começa com vvv, que vibra no lábio?",
       opcoes: [
         { palavra: "VACA", correta: true, imagem: vaca },
         { palavra: "NAVIO", correta: false },
@@ -438,7 +438,7 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com NNN (som pelo nariz)?",
+      fala: "Qual começa com nnn, som pelo nariz?",
       opcoes: [
         { palavra: "NUVEM", correta: true },
         { palavra: "ZEBRA", correta: false },
@@ -447,7 +447,7 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com RRR (motor)?",
+      fala: "Qual começa com rrr, som de motor?",
       opcoes: [
         { palavra: "ROSA", correta: true },
         { palavra: "VOVÔ", correta: false },
@@ -456,15 +456,15 @@ export const dlx30: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "Qual começa com ZZZ (abelha)?",
+      fala: "Qual começa com zzz, som de abelha?",
       opcoes: [
         { palavra: "ZERO", correta: true },
         { palavra: "NAVIO", correta: false },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "silabas", fala: "Agora junta: M + A = MA. MACACO começa com MA.", palavra: "MACACO", silabas: ["MA", "CA", "CO"], imagem: macaco },
-    { tipo: "silabas", fala: "S + O = SO. SOL tem SO.", palavra: "SOL", silabas: ["SOL"] },
-    { tipo: "fim", fala: "Fase 3 fechada! Você já tem VOGAIS + CONSOANTES CONTÍNUAS. Agora vem SÍLABA!", imagem: pipVet },
+    { tipo: "silabas", fala: "Agora junta: m mais a dá má. macaco começa com má.", palavra: "MACACO", silabas: ["MA", "CA", "CO"], imagem: macaco },
+    { tipo: "silabas", fala: "s mais o dá só. sol tem só.", palavra: "SOL", silabas: ["SOL"] },
+    { tipo: "fim", fala: "Fase 3 fechada! Você já tem as vogais e as consoantes contínuas. Agora vem sílaba!", imagem: pipVet },
   ],
 };
