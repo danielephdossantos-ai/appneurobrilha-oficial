@@ -2422,8 +2422,10 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
 // Criança aperta o mic, vê as sílabas acendendo uma a uma enquanto fala.
 // Detecta SOM no microfone (volume), não palavras → reconhece na hora.
 // Sempre celebra. Sem reconhecimento de voz que demora e frustra.
-function ArticulacaoSons({ p, onDone }: any) {
+function ArticulacaoSons({ p, onDone, promptLevel }: any) {
   const { effective: sens } = useSensoryProfile();
+  const { speak } = usePipVoice();
+  const { listen, isListening, supported } = useSpeechMatcher();
   const press = sens.reduceMotion ? "" : "active:scale-95";
   const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
   const scaleCls = sens.reduceMotion ? "" : "scale-110";
@@ -2432,21 +2434,30 @@ function ArticulacaoSons({ p, onDone }: any) {
   const silabas: string[] = p.silabas;
 
   const [acesas, setAcesas] = useState<Set<number>>(new Set());
-  const [feedback, setFeedback] = useState("Toque no microfone e fale a palavra 🎤");
-  const [ouvindo, setOuvindo] = useState(false);
+  const [feedback, setFeedback] = useState(
+    supported
+      ? "Toque no microfone e fale a palavra 🎤"
+      : "Seu aparelho não reconhece voz — tentaremos por volume",
+  );
+  const [tentativas, setTentativas] = useState(0);
   const [done, setDone] = useState(false);
   const [celebrar, setCelebrar] = useState(false);
-  const streamRef = useRef<MediaStream | null>(null);
-  const ctxRef = useRef<AudioContext | null>(null);
+  const [ultimaSim, setUltimaSim] = useState<number | null>(null);
 
   const PRAISES = ["Muito bem! 🌟", "Isso aí! 👏", "Mandou bem! 💪", "Você arrasou! ✨"];
 
+  // Dicas ABA
+  const mostrarSilabas = promptLevel <= 3;
+  const modeloAudio = promptLevel <= 2;
+  const guiaFala = promptLevel <= 1;
+
   useEffect(() => {
-    return () => {
-      streamRef.current?.getTracks().forEach((t) => t.stop());
-      ctxRef.current?.close().catch(() => {});
-    };
-  }, []);
+    if (modeloAudio && !done) {
+      // Fala a palavra devagar antes de a criança tentar
+      const t = setTimeout(() => speak(palavra), 400);
+      return () => clearTimeout(t);
+    }
+  }, [modeloAudio, palavra, done, speak]);
 
   const celebrarPalavra = () => {
     setAcesas(new Set(silabas.map((_, i) => i)));
@@ -2456,71 +2467,40 @@ function ArticulacaoSons({ p, onDone }: any) {
     setTimeout(() => onDone(true), 1400);
   };
 
-  const acenderSilabaPorSilaba = () => {
-    // acende sílabas em sequência com timing animado (~500ms cada)
-    silabas.forEach((_, i) => {
-      setTimeout(() => {
-        setAcesas((prev) => {
-          const n = new Set(prev);
-          n.add(i);
-          return n;
-        });
-      }, 400 + i * 500);
-    });
-    setTimeout(celebrarPalavra, 400 + silabas.length * 500 + 200);
-  };
-
   const gravar = async () => {
-    if (done || ouvindo) return;
-    setOuvindo(true);
+    if (done || isListening) return;
     setFeedback("Estou ouvindo... fale a palavra 🎧");
     setAcesas(new Set());
+    setTentativas((n) => n + 1);
 
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
-      const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
-      const ctx: AudioContext = new Ctx();
-      ctxRef.current = ctx;
-      const src = ctx.createMediaStreamSource(stream);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 512;
-      src.connect(analyser);
-      const buf = new Uint8Array(analyser.frequencyBinCount);
+    const result = await listen(palavra, { timeoutMs: 5000 });
+    setUltimaSim(result.similarity);
 
-      let detectouSom = false;
-      const inicio = Date.now();
-      const tick = () => {
-        analyser.getByteTimeDomainData(buf);
-        // RMS aproximado
-        let soma = 0;
-        for (let i = 0; i < buf.length; i++) {
-          const v = (buf[i] - 128) / 128;
-          soma += v * v;
-        }
-        const rms = Math.sqrt(soma / buf.length);
-        if (rms > 0.04) detectouSom = true;
-
-        const decorrido = Date.now() - inicio;
-        if (detectouSom || decorrido > 3500) {
-          finalizar();
-        } else {
-          requestAnimationFrame(tick);
-        }
-      };
-
-      const finalizar = () => {
-        stream.getTracks().forEach((t) => t.stop());
-        ctx.close().catch(() => {});
-        setOuvindo(false);
-        acenderSilabaPorSilaba();
-      };
-
-      requestAnimationFrame(tick);
-    } catch {
-      // sem permissão de mic → ainda celebra
-      setOuvindo(false);
-      acenderSilabaPorSilaba();
+    if (result.matched) {
+      // Acende sílabas em sequência antes de celebrar
+      silabas.forEach((_, i) => {
+        setTimeout(() => {
+          setAcesas((prev) => {
+            const n = new Set(prev);
+            n.add(i);
+            return n;
+          });
+        }, i * 300);
+      });
+      setTimeout(celebrarPalavra, silabas.length * 300 + 200);
+    } else {
+      const sim = Math.round(result.similarity * 100);
+      const transcricao = result.transcript || "(não entendi)";
+      setFeedback(
+        supported
+          ? `Ouvi "${transcricao}" (${sim}%). Tenta de novo devagar 🎯`
+          : "Seu navegador não reconheceu — tenta de novo",
+      );
+      // 3 erros = considera errado e avança
+      if (tentativas >= 2) {
+        setDone(true);
+        setTimeout(() => onDone(false), 1200);
+      }
     }
   };
 
@@ -2532,44 +2512,69 @@ function ArticulacaoSons({ p, onDone }: any) {
           className={`${emojiSize} ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
         />
       </div>
-      <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
-        {silabas.map((s, i) => {
-          const acesa = acesas.has(i);
-          return (
-            <span
-              key={i}
-              className={`px-3 py-1 rounded-xl transition-all duration-300 ${
-                celebrar
-                  ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
-                  : acesa
-                    ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
-                    : "text-muted-foreground/50"
-              }`}
-            >
-              {s}
-            </span>
-          );
-        })}
-      </div>
+      {mostrarSilabas && (
+        <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
+          {silabas.map((s, i) => {
+            const acesa = acesas.has(i);
+            return (
+              <span
+                key={i}
+                className={`px-3 py-1 rounded-xl transition-all duration-300 ${
+                  celebrar
+                    ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
+                    : acesa
+                      ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
+                      : "text-muted-foreground/50"
+                }`}
+              >
+                {s}
+              </span>
+            );
+          })}
+        </div>
+      )}
       <div className="bg-card border-2 border-rose/20 rounded-2xl p-4">
         <div className="text-xs uppercase text-muted-foreground">Fale a palavra</div>
         <div className="text-4xl font-black text-rose-600">{palavra}</div>
+        {modeloAudio && (
+          <button
+            onClick={() => speak(palavra)}
+            className="mt-2 text-xs font-bold rounded-full bg-rose-500/10 border border-rose-500/30 px-3 py-1"
+          >
+            🔊 Ouvir como se fala
+          </button>
+        )}
       </div>
       <div className="min-h-[2.5rem] text-base font-bold text-rose-700">{feedback}</div>
+      {ultimaSim !== null && !done && (
+        <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+          <div
+            className="h-full bg-emerald-500 transition-all"
+            style={{ width: `${Math.round(ultimaSim * 100)}%` }}
+          />
+        </div>
+      )}
+      {guiaFala && !done && (
+        <div className="text-xs text-muted-foreground">
+          Dica: fale devagar, uma sílaba de cada vez.
+        </div>
+      )}
       <button
         onClick={gravar}
-        disabled={done || ouvindo}
-        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
+        disabled={done || isListening || !supported}
+        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${isListening ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
       >
         <Mic className="w-7 h-7" />
-        {done ? "Muito bem!" : ouvindo ? "Ouvindo..." : `Falar 🎤`}
+        {done ? "Muito bem!" : isListening ? "Ouvindo..." : "Falar 🎤"}
       </button>
-
+      {!supported && (
+        <div className="text-xs text-amber-600">
+          Seu navegador não permite reconhecimento de voz. Use Chrome, Edge ou Safari recentes.
+        </div>
+      )}
     </div>
   );
 }
-
-// 26. VOCABULÁRIO SEMÂNTICO — qual item NÃO pertence ao grupo?
 function VocabularioSemantico({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
