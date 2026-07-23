@@ -39,6 +39,23 @@ import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from 
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 import { useSensoryProfile } from "@/hooks/useSensoryProfile";
+import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
+
+// Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
+// - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
+// - Além disso, aplica um teto de índice (bancos costumam estar ordenados fácil→difícil).
+function filterByDifficulty<T extends { payload?: any }>(list: T[], scale: number): T[] {
+  if (!list?.length) return list;
+  const s = Math.max(0.1, Math.min(1, scale));
+  const nivelCap = s < 0.4 ? 1 : s < 0.75 ? 2 : 3;
+  const byNivel = list.filter((v) => {
+    const n = v?.payload?.nivel;
+    return typeof n === "number" ? n <= nivelCap : true;
+  });
+  const ceiling = Math.max(3, Math.ceil(byNivel.length * s));
+  const capped = byNivel.slice(0, ceiling);
+  return capped.length >= 3 ? capped : byNivel.length ? byNivel : list;
+}
 import { url as soproCarro } from "@/assets/neuro-treino/sopro/carro.png.asset.json";
 import { url as soproVela } from "@/assets/neuro-treino/sopro/vela.png.asset.json";
 import { url as soproBalao } from "@/assets/neuro-treino/sopro/balao.png.asset.json";
@@ -66,8 +83,18 @@ function NeuroAtividade() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Núcleo adaptativo: métricas, ajuste, registro em activity_logs
+  const { adjustment, metrics, registerPerformance, requestHelp } = useNeuroAdaptive();
+  const startedAtRef = useRef<number>(Date.now());
+  const breakToastFiredRef = useRef<boolean>(false);
+
   const meta = CATEGORIAS[slug];
-  const vars = VARIATIONS[slug];
+  const rawVars = VARIATIONS[slug];
+  // Filtragem por dificuldade adaptativa
+  const vars = useMemo(
+    () => (rawVars ? filterByDifficulty(rawVars, adjustment.difficultyScale) : rawVars),
+    [rawVars, adjustment.difficultyScale],
+  );
 
   useEffect(() => {
     setIndex(0);
@@ -80,6 +107,8 @@ function NeuroAtividade() {
         hiperfoco: hiperfoco?.label ?? null,
         metaEncontrada: Boolean(meta),
         quantidadeVariacoes: vars?.length ?? 0,
+        difficultyScale: adjustment.difficultyScale,
+        stimuliReduction: adjustment.stimuliReduction,
       });
 
       if (!meta || !vars) {
@@ -106,7 +135,7 @@ function NeuroAtividade() {
       setError(err.message || "Falha ao carregar atividade");
       setIsLoading(false);
     }
-  }, [slug, meta, vars, hiperfoco?.label]);
+  }, [slug, meta, vars, hiperfoco?.label, adjustment.difficultyScale, adjustment.stimuliReduction]);
 
   // ⚠️ TODOS os hooks devem ficar ANTES dos early returns
   const hasData = Boolean(meta && vars && vars.length > 0);
@@ -117,6 +146,24 @@ function NeuroAtividade() {
   const instrucaoTematica =
     hiperfoco && meta ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : "";
   const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
+
+  // Timestamp por questão para medir tempo de resposta
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, [variation?.id]);
+
+  // Alerta de pausa quando o núcleo indica fadiga
+  useEffect(() => {
+    const needsBreak = adjustment.suggestBreak || metrics.fatigue.needForBreak;
+    if (needsBreak && !breakToastFiredRef.current) {
+      breakToastFiredRef.current = true;
+      toast("Que tal uma pausa curtinha? 💧✨", {
+        description: "Respira, bebe água e volta quando estiver pronto.",
+        duration: 6000,
+      });
+    }
+    if (!needsBreak) breakToastFiredRef.current = false;
+  }, [adjustment.suggestBreak, metrics.fatigue.needForBreak]);
 
   const narracao = useMemo(() => {
     if (!variation || !instrucaoTematica) return "";
@@ -133,6 +180,7 @@ function NeuroAtividade() {
     const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
     return `${saud}${instrucaoTematica}${extra}`;
   }, [variation, instrucaoTematica, nomeCrianca]);
+
 
   useEffect(() => {
     if (!voiceOn || !narracao) return;
@@ -217,6 +265,12 @@ function NeuroAtividade() {
   };
 
   const onConcluir = (correto: boolean) => {
+    // Tempo de resposta desta questão (segundos)
+    const responseTimeSec = Math.max(0.1, (Date.now() - startedAtRef.current) / 1000);
+    const activityId = variation ? `${slug}:${variation.id}` : slug;
+    // Persiste em activity_logs e atualiza métricas do núcleo adaptativo
+    registerPerformance(correto, responseTimeSec, activityId);
+
     if (correto) {
       setAcertos((a) => a + 1);
       const frase = pipFraseAcerto(hiperfoco);
@@ -229,6 +283,14 @@ function NeuroAtividade() {
     }
     setTimeout(() => setIndex((i) => i + 1), 900);
   };
+
+  // Marca "pulei" como pedido de ajuda (registra no log e sinaliza dificuldade)
+  const onSkip = () => {
+    const activityId = variation ? `${slug}:${variation.id}` : slug;
+    requestHelp(activityId);
+    setIndex((i) => i + 1);
+  };
+
 
   return (
     <Shell>
@@ -281,7 +343,7 @@ function NeuroAtividade() {
         </span>
       </div>
 
-      {slug !== "motorzinho-dos-sons" && (
+      {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
         <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
           <img
             src={getElementoImg(elemento)}
@@ -295,6 +357,7 @@ function NeuroAtividade() {
         </div>
       )}
 
+
       <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
         <MechanicRenderer
           slug={slug}
@@ -306,7 +369,7 @@ function NeuroAtividade() {
 
       <div className="mt-4 flex justify-end">
         <button
-          onClick={() => setIndex((i) => i + 1)}
+          onClick={onSkip}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-muted font-bold hover:bg-muted/70"
         >
           Pular <ChevronRight size={16} />
