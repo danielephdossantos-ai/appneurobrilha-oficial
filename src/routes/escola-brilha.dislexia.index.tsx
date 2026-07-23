@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { trilhaDislexia } from "@/escola-brilha/dislexia/registry";
-import { Ear, BookOpen, Waves, CheckCircle2, Sparkles } from "lucide-react";
+import { Ear, BookOpen, Waves, CheckCircle2, Sparkles, Blocks } from "lucide-react";
 import { url as icRimas } from "@/assets/neuro-treino/icons/v2/rimas.png.asset.json";
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
 import { url as icPedacinhos } from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png.asset.json";
@@ -46,6 +46,17 @@ const ICONE_POR_AULA: Record<string, string> = {
   "dlx-28-consoante-z": icArticulacao,
   "dlx-29-revisao-mslf": icDiscrimAud,
   "dlx-30-revisao-vnrz": icFormandoPal,
+  // Fase 4 · Sílabas Simples CV
+  "dlx-31-familia-m": icFormandoPal,
+  "dlx-32-familia-p": icFormandoPal,
+  "dlx-33-familia-t": icFormandoPal,
+  "dlx-34-familia-l": icFormandoPal,
+  "dlx-35-familia-f": icFormandoPal,
+  "dlx-36-familia-v": icFormandoPal,
+  "dlx-37-familia-b": icFormandoPal,
+  "dlx-38-familia-c": icFormandoPal,
+  "dlx-39-revisao-mptl": icPedacinhos,
+  "dlx-40-revisao-fvbc": icPedacinhos,
 };
 
 export const Route = createFileRoute("/escola-brilha/dislexia/")({
@@ -97,6 +108,14 @@ const FASES: Record<
     bg: "from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20",
     border: "border-emerald-200 dark:border-emerald-800",
     accent: "bg-emerald-500",
+  },
+  4: {
+    nome: "Fase 4 · Sílabas Simples (CV)",
+    icon: Blocks,
+    color: "text-sky-600",
+    bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20",
+    border: "border-sky-200 dark:border-sky-800",
+    accent: "bg-sky-500",
   },
 };
 
