@@ -94,6 +94,7 @@ export function PlayerDislexia({ aula, onSair, onConcluir }: Props) {
           >
             <CenaView
               cena={cena}
+              aula={aula}
               estado={estado}
               tentativas={tentativas}
               onAcerto={() => {
