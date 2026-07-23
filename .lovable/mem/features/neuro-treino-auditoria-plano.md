@@ -14,10 +14,11 @@ Ordem fixa. Cada passo é entregue e validado antes do próximo.
 - Status: **concluído** (validado por screenshot mobile 390x1600).
 
 
-## ⬜ #2 — Trilha Dislexia (Orton-Gillingham)
-- Criar novo grupo "Dislexia · Trilha Orton-Gillingham" no Neuro Treino.
-- Progressão estruturada: fonema → sílaba → palavra → frase, com critério de mastery (8/10 em 3 sessões).
-- Reaproveitar `letra-som`, `formando-palavras`, `leitura-palavras`, `completar-letra` como etapas ordenadas, não como cards soltos.
+## ✅ #2 — Trilha Dislexia (Orton-Gillingham)
+- Implementado como programa clínico completo em `src/escola-brilha/dislexia/` (Fases 1–8, dlx-01 a dlx-80) com `PlayerDislexia.tsx`.
+- Card destacado no topo do `/neuro-treino` já aponta pra `/escola-brilha/dislexia`.
+- Status: **concluído**.
+
 
 ## ⬜ #3 — Grupo Discalculia (Numicon / senso numérico)
 - Novo grupo "Matemática Terapêutica".
