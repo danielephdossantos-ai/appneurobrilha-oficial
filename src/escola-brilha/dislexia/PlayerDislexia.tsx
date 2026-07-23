@@ -4,6 +4,7 @@ import { ArrowLeft, Volume2, Sparkles, Hand } from "lucide-react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { url as pipVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
 import type { AulaDlx, CenaDlx } from "./types";
+import { imagemPalavra } from "./word-images";
 
 interface Props {
   aula: AulaDlx;
@@ -190,14 +191,17 @@ function CenaView({
                         : "border-white hover:border-orange-300"
                 }`}
               >
-                {o.imagem ? (
-                  <img
-                    src={o.imagem}
-                    alt=""
-                    className="w-full h-20 object-contain"
-                    draggable={false}
-                  />
-                ) : null}
+                {(() => {
+                  const src = o.imagem ?? imagemPalavra(o.palavra);
+                  return src ? (
+                    <img
+                      src={src}
+                      alt=""
+                      className="w-full h-20 object-contain"
+                      draggable={false}
+                    />
+                  ) : null;
+                })()}
                 <div className="text-2xl font-black tracking-wider">
                   {o.palavra}
                 </div>
@@ -213,14 +217,17 @@ function CenaView({
     const todasTocadas = silabasTocadas.length === cena.silabas.length;
     return (
       <div className="flex flex-col items-center gap-5">
-        {cena.imagem ? (
-          <img
-            src={cena.imagem}
-            alt=""
-            className="w-40 h-40 object-contain drop-shadow-xl"
-            draggable={false}
-          />
-        ) : null}
+        {(() => {
+          const src = cena.imagem ?? imagemPalavra(cena.palavra);
+          return src ? (
+            <img
+              src={src}
+              alt=""
+              className="w-40 h-40 object-contain drop-shadow-xl"
+              draggable={false}
+            />
+          ) : null;
+        })()}
         <div className="text-3xl md:text-4xl font-black text-white tracking-widest">
           {cena.palavra}
         </div>
@@ -265,13 +272,14 @@ function CenaView({
   }
 
   // abertura, escuta, reforco, fim
+  const palavra = cena.tipo === "escuta" ? cena.palavra : undefined;
+  const enfase = cena.tipo === "escuta" ? cena.enfase : undefined;
   const imgSrc =
     ("imagem" in cena && cena.imagem) ||
+    imagemPalavra(palavra) ||
     (cena.tipo === "abertura" || cena.tipo === "reforco" || cena.tipo === "fim"
       ? pipVet
       : undefined);
-  const palavra = cena.tipo === "escuta" ? cena.palavra : undefined;
-  const enfase = cena.tipo === "escuta" ? cena.enfase : undefined;
 
   return (
     <div className="flex flex-col items-center gap-5">
