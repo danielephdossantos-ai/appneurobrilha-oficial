@@ -198,15 +198,15 @@ export const dlx25: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante V! Mesma boca do F — dente no lábio — mas agora o som VIBRA: VVVVV.",
+      fala: "Consoante v! Mesma boca do f — dente no lábio — mas agora o som vibra: vvv.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra V. VVVVV. Sente vibrar!", palavra: "V", enfase: "V" },
-    { tipo: "escuta", fala: "VVVACA. VA-CA.", palavra: "VACA", imagem: vaca, enfase: "V" },
-    { tipo: "escuta", fala: "VVVELA. VE-LA.", palavra: "VELA", enfase: "V" },
+    { tipo: "escuta", fala: "Essa é a letra v. vvv. Sente vibrar!", palavra: "V", enfase: "V" },
+    { tipo: "escuta", fala: "Vvv... vaca.", palavra: "VACA", imagem: vaca, enfase: "V" },
+    { tipo: "escuta", fala: "Vvv... vela.", palavra: "VELA", enfase: "V" },
     {
       tipo: "escolha",
-      fala: "Qual começa com VVV?",
+      fala: "Qual começa com vvv?",
       opcoes: [
         { palavra: "VACA", correta: true, imagem: vaca },
         { palavra: "FOGUETE", correta: false, imagem: foguete },
@@ -214,15 +214,15 @@ export const dlx25: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "F sopra, V vibra. Qual começa com VVV?",
+      fala: "O f sopra, o v vibra. Qual começa com vvv?",
       opcoes: [
         { palavra: "VOVÔ", correta: true },
         { palavra: "FACA", correta: false },
         { palavra: "SAPO", correta: false },
       ],
     },
-    { tipo: "reforco", fala: "F é só sopro, V é sopro que TREME. Você separou!", imagem: pipVet },
-    { tipo: "fim", fala: "V de VACA, V de VOVÔ. Vibrou tudo!", imagem: pipVet },
+    { tipo: "reforco", fala: "O f é só sopro, o v é sopro que treme. Você separou!", imagem: pipVet },
+    { tipo: "fim", fala: "v de vaca, v de vovô. Vibrou tudo!", imagem: pipVet },
   ],
 };
 
