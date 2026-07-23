@@ -154,15 +154,15 @@ export const dlx14: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Vogal O! A boca faz uma bolinha, uma OVA redondinha: OOOOO.",
+      fala: "Vogal o! A boca faz uma bolinha bem redondinha: ooo.",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra O. OOOOO.", palavra: "O", enfase: "O" },
-    { tipo: "escuta", fala: "OOOVO. O-VO.", palavra: "OVO", enfase: "O" },
-    { tipo: "escuta", fala: "OOORELHA. O-RE-LHA.", palavra: "ORELHA", enfase: "O" },
+    { tipo: "escuta", fala: "Essa é a letra o. ooo.", palavra: "O", enfase: "O" },
+    { tipo: "escuta", fala: "Ooo... ovo.", palavra: "OVO", enfase: "O" },
+    { tipo: "escuta", fala: "Ooo... orelha.", palavra: "ORELHA", enfase: "O" },
     {
       tipo: "escolha",
-      fala: "Qual começa com OOO?",
+      fala: "Qual começa com ooo?",
       opcoes: [
         { palavra: "OVELHA", correta: true, imagem: ovelha },
         { palavra: "MACACO", correta: false, imagem: macaco },
@@ -170,14 +170,14 @@ export const dlx14: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com OOO?",
+      fala: "E qual dessas começa com ooo?",
       opcoes: [
         { palavra: "ÓCULOS", correta: true },
         { palavra: "CAVALO", correta: false, imagem: cavalo },
         { palavra: "TARTARUGA", correta: false, imagem: tartaruga },
       ],
     },
-    { tipo: "fim", fala: "Boca redonda, sai OOO. Show!", imagem: pipVet },
+    { tipo: "fim", fala: "Boca redonda, sai ooo. Show!", imagem: pipVet },
   ],
 };
 
