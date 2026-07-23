@@ -217,14 +217,17 @@ function CenaView({
     const todasTocadas = silabasTocadas.length === cena.silabas.length;
     return (
       <div className="flex flex-col items-center gap-5">
-        {cena.imagem ? (
-          <img
-            src={cena.imagem}
-            alt=""
-            className="w-40 h-40 object-contain drop-shadow-xl"
-            draggable={false}
-          />
-        ) : null}
+        {(() => {
+          const src = cena.imagem ?? imagemPalavra(cena.palavra);
+          return src ? (
+            <img
+              src={src}
+              alt=""
+              className="w-40 h-40 object-contain drop-shadow-xl"
+              draggable={false}
+            />
+          ) : null;
+        })()}
         <div className="text-3xl md:text-4xl font-black text-white tracking-widest">
           {cena.palavra}
         </div>
