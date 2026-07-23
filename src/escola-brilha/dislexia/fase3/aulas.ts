@@ -287,15 +287,15 @@ export const dlx27: AulaDlx = {
   cenas: [
     {
       tipo: "abertura",
-      fala: "Consoante R! No começo da palavra, o R é FORTE, som de motor: RRRRR!",
+      fala: "Consoante r! No começo da palavra, o r é forte, som de motor: rrr!",
       imagem: pipVet,
     },
-    { tipo: "escuta", fala: "Essa é a letra R. RRRRR.", palavra: "R", enfase: "R" },
-    { tipo: "escuta", fala: "RRRATO. RA-TO.", palavra: "RATO", enfase: "R" },
-    { tipo: "escuta", fala: "RRROSA. RO-SA.", palavra: "ROSA", enfase: "R" },
+    { tipo: "escuta", fala: "Essa é a letra r. rrr.", palavra: "R", enfase: "R" },
+    { tipo: "escuta", fala: "Rrr... rato.", palavra: "RATO", enfase: "R" },
+    { tipo: "escuta", fala: "Rrr... rosa.", palavra: "ROSA", enfase: "R" },
     {
       tipo: "escolha",
-      fala: "Qual começa com RRR?",
+      fala: "Qual começa com rrr?",
       opcoes: [
         { palavra: "RATO", correta: true },
         { palavra: "SAPO", correta: false },
@@ -303,15 +303,15 @@ export const dlx27: AulaDlx = {
     },
     {
       tipo: "escolha",
-      fala: "E qual dessas começa com RRR?",
+      fala: "E qual dessas começa com rrr?",
       opcoes: [
         { palavra: "RIO", correta: true },
         { palavra: "LEÃO", correta: false, imagem: leao },
         { palavra: "VACA", correta: false, imagem: vaca },
       ],
     },
-    { tipo: "reforco", fala: "R do começo é FORTE, som de motor ligando!", imagem: pipVet },
-    { tipo: "fim", fala: "R de RATO, R de ROSA. Motor ligado!", imagem: pipVet },
+    { tipo: "reforco", fala: "O r do começo é forte, som de motor ligando!", imagem: pipVet },
+    { tipo: "fim", fala: "r de rato, r de rosa. Motor ligado!", imagem: pipVet },
   ],
 };
 
