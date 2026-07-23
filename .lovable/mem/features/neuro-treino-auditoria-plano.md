@@ -20,9 +20,11 @@ Ordem fixa. Cada passo é entregue e validado antes do próximo.
 - Status: **concluído**.
 
 
-## ⬜ #3 — Grupo Discalculia (Numicon / senso numérico)
+## ⬜ #3 — Grupo Discalculia (Numicon / senso numérico) — **depois da infra**
 - Novo grupo "Matemática Terapêutica".
 - Reaproveitar `SubitizingFlash`, `OperacaoVisual` e reta numérica do Contar com Pip.
+- Só depois de #4/#5/#6 pra já nascer com adjustment + métricas + mastery ligados.
+
 
 ## ⬜ #4 — Ligar `NeuroAdaptiveCore.adjustment` aos jogos
 - Componentes de jogo leem `adjustment.difficultyScale`, `adjustment.stimuliReduction`, `adjustment.maxInformationDensity`.
