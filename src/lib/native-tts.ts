@@ -106,8 +106,11 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
     // outros pares clínicos
     "Ç": "cê-cedilha", // som SSS mas quando lida como letra na explicação
   };
+  // Nota: NÃO incluir "Ç" aqui — em JS, \b considera Ç como não-word, então
+  // dispara dentro de palavras ("BRAÇO" viraria "BRA cê-cedilha O"). Ç isolado
+  // em explicações é raríssimo e cai no fallback abaixo.
   out = out.replace(
-    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO|Ç)\b/g,
+    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO)\b/g,
     (s) => digrafosEncontros[s] ?? s.toLowerCase(),
   );
 
@@ -137,6 +140,13 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
   replacements.forEach(([pattern, replacement]) => {
     out = out.replace(pattern, replacement);
   });
+
+  // Palavras 100% MAIÚSCULAS que sobraram (ex.: "PALHAÇO", "COELHO", "ESCOLA")
+  // fazem algumas vozes soletrarem letra a letra ("pê á ele há á cê-cedilha ó").
+  // Para a fala do professor, jogamos para minúsculo — o visual continua em caixa
+  // alta na tela porque essa transformação só afeta o texto enviado ao TTS.
+  // Preserva siglas curtas de 1 letra (A, E, O usados em explicação fonética).
+  out = out.replace(/\b[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{2,}\b/g, (w) => w.toLowerCase());
 
   return out;
 }
