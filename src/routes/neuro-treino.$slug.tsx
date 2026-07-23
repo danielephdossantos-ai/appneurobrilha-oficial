@@ -1985,10 +1985,7 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   const clipId = `letra-clip-${p.letra}`;
 
   const checkpoints = useMemo(
-    () => require("@/data/neuro-treino/stroke-checkpoints").getCheckpoints(p.letra) as {
-      x: number;
-      y: number;
-    }[],
+    () => getLetterCheckpoints(p.letra),
     [p.letra],
   );
   const totalCheckpoints = checkpoints.length;
