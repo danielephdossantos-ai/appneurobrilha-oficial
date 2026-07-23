@@ -3,6 +3,12 @@ import { useAppState, Child, Diagnostico } from "@/core/store";
 import { NeuroAdaptiveCore } from "@/engines/neuro-engine/core";
 import { NeuroState, NeuroAdjustment, NeuroProfile } from "@/engines/neuro-engine/types";
 import { supabase } from "@/database/supabase/client";
+import { recordSkillAttempt } from "@/services/neuro-treino/neuroMetrics";
+
+export interface NeuroSkillInfo {
+  skillCode: string;
+  materia: string;
+}
 
 const INITIAL_METRICS = {
   attention: {
