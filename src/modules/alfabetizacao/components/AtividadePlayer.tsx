@@ -5,6 +5,8 @@ import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
 import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
+import { falarSom } from "../data/palavras";
+import { recordSkillAttempt } from "@/services/neuro-treino/neuroMetrics";
 import {
   Volume2,
   ArrowLeft,
@@ -107,7 +109,9 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const [errosNaRodada, setErrosNaRodada] = useState(0);
   const [revelar, setRevelar] = useState(false);
   const [ultimaRegra, setUltimaRegra] = useState<string | null>(null);
+  const [modelagem, setModelagem] = useState<string | null>(null); // grafema/som exibido no erro
   const timers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+  const rodadaInicio = useRef<number>(Date.now());
 
   const intro = INTRO_ETAPA[etapa.id] ?? {
     titulo: etapa.titulo,
@@ -162,6 +166,26 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     setErrosNaRodada(0);
     setRevelar(false);
     setUltimaRegra(null);
+    setModelagem(null);
+    rodadaInicio.current = Date.now();
+  }
+
+  // Modelagem sonora: fala o som do grafema/rima 3x, com pausas curtas.
+  function modelarSom(foco: string) {
+    const fonema = falarSom(foco);
+    const trilha = [0, 900, 1800];
+    trilha.forEach((delay) =>
+      agendar(() => falar(fonema), delay + 200),
+    );
+  }
+
+  function grafemaDaRodada(): string | null {
+    // Prioridade: foco explícito → primeira letra da resposta certa.
+    if (rodada.foco && rodada.foco.length <= 4) return rodada.foco.toUpperCase();
+    if (rodada.correta && /^[A-ZÀ-Ú]/i.test(rodada.correta)) {
+      return rodada.correta[0].toUpperCase();
+    }
+    return null;
   }
 
   function responder(resposta: string) {
@@ -179,6 +203,16 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       agendar(() => setAjuste(null), 1800);
     }
 
+    // Persistência clínica (child_skill_mastery + prompting ABA).
+    const durationMs = Date.now() - rodadaInicio.current;
+    void recordSkillAttempt({
+      childId,
+      skillCode: `alfa:${etapa.id}`,
+      materia: "alfabetizacao",
+      isCorrect: ok,
+      durationMs,
+    });
+
     if (ok) {
       falar("Isso! " + rodada.regra);
       onAcerto();
@@ -190,16 +224,24 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     setErrosNaRodada(novoErros);
     setUltimaRegra(rodada.regra);
 
+    // Fase D · Modelagem sonora: mostra o grafema/som e ecoa 3x.
+    const grafema = grafemaDaRodada();
+    if (grafema) {
+      setModelagem(grafema);
+      modelarSom(grafema);
+    }
+
     if (novoErros >= 2) {
       setRevelar(true);
-      falar(`Olha só. ${rodada.regra} Vamos para a próxima.`);
-      agendar(() => proximaRodada(nivelDepois), 4200);
+      agendar(() => falar(`Olha só. ${rodada.regra} Vamos para a próxima.`), 3000);
+      agendar(() => proximaRodada(nivelDepois), 4800);
     } else {
-      falar(`Ainda não. ${rodada.regra}`);
+      agendar(() => falar(`Ainda não. ${rodada.regra}`), 3000);
       agendar(() => {
         setFeedback(null);
         setTravado(false);
-      }, 3200);
+        setModelagem(null);
+      }, 4200);
     }
   }
 
@@ -366,6 +408,39 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
               </div>
               {ultimaRegra}
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fase D · Modelagem sonora — grafema grande + eco do som */}
+      <AnimatePresence>
+        {modelagem && feedback === "erro" && (
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.7, opacity: 0 }}
+            className="mx-auto mt-3 flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+              O som é
+            </span>
+            <button
+              onClick={() => modelarSom(modelagem)}
+              className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl flex items-center justify-center border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform"
+              aria-label={`Ouvir o som ${modelagem}`}
+            >
+              <motion.span
+                key={modelagem}
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ duration: 0.9, repeat: 2 }}
+                className="text-6xl sm:text-7xl font-black leading-none"
+              >
+                {modelagem}
+              </motion.span>
+            </button>
+            <span className="text-xs font-bold text-white/80">
+              toque para ouvir de novo
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
