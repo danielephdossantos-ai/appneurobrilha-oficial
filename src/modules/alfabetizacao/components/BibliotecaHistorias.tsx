@@ -723,26 +723,94 @@ function LeitorHistoria({
         );
       })()}
 
-      {fase === "fim" && (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center">
-          <Sparkles className="w-20 h-20 text-amber-500" />
-          <h2 className="text-3xl font-black text-slate-800">
-            Você leu tudinho!
-          </h2>
-          <p className="text-slate-600">
-            Acertou {acertos} de {historia.perguntas.length} perguntas.
-          </p>
-          <button
-            onClick={() => {
-              pararKaraoke();
-              onSair();
-            }}
-            className="mt-4 px-6 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
-          >
-            Voltar para a biblioteca
-          </button>
-        </div>
-      )}
+      {fase === "fim" && (() => {
+        const total = historia.perguntas.length;
+        const wpm = fluencia.wpmMedio;
+        const clas = fluencia.temMedicao ? classificarWPM(wpm) : null;
+        const delta =
+          fluencia.temMedicao && recordePrevio != null
+            ? wpm - recordePrevio
+            : null;
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center overflow-y-auto">
+            <Sparkles className="w-20 h-20 text-amber-500" />
+            <h2 className="text-3xl font-black text-slate-800">
+              Você leu tudinho!
+            </h2>
+            <p className="text-slate-600">
+              Acertou <strong>{acertos}</strong> de <strong>{total}</strong>{" "}
+              perguntas.
+            </p>
+
+            {clas && (
+              <div className="bg-white rounded-3xl shadow-xl p-5 max-w-sm w-full flex flex-col items-center gap-2 border-2 border-slate-100">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-500">
+                  <Gauge className="w-3.5 h-3.5" /> Sua fluência
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-black text-slate-800">
+                    {wpm}
+                  </span>
+                  <span className="text-sm font-bold text-slate-500">
+                    palavras/min
+                  </span>
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${clas.cor}`}
+                >
+                  {clas.emoji} {clas.rotulo}
+                </span>
+                {delta != null && (
+                  <p
+                    className={`text-xs font-bold mt-1 ${
+                      delta > 0
+                        ? "text-emerald-600"
+                        : delta < 0
+                          ? "text-slate-500"
+                          : "text-slate-400"
+                    }`}
+                  >
+                    {delta > 0
+                      ? `📈 +${delta} wpm melhor que a última vez!`
+                      : delta < 0
+                        ? `Última vez: ${recordePrevio} wpm`
+                        : `Igualzinho à última leitura`}
+                  </p>
+                )}
+                <p className="text-[10px] text-slate-400 mt-1">
+                  📊 Medido só nas páginas que você leu sozinho
+                </p>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full max-w-sm">
+              <button
+                onClick={relerHistoria}
+                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-indigo-500 text-white font-bold shadow-lg flex items-center justify-center gap-2"
+              >
+                <Repeat className="w-4 h-4" /> Ler de novo
+              </button>
+              <button
+                onClick={() => {
+                  pararKaraoke();
+                  onSair();
+                }}
+                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
+              >
+                Voltar
+              </button>
+            </div>
+
+            {fluencia.temMedicao && (
+              <p className="text-[11px] text-slate-500 max-w-xs mt-2 flex items-center gap-1 justify-center">
+                <Zap className="w-3 h-3 text-amber-500" />
+                Reler a mesma história é o jeito mais rápido de ganhar
+                fluência (leitura repetida — NRP).
+              </p>
+            )}
+          </div>
+        );
+      })()}
 
       <AnimatePresence>
         {feedback && (
