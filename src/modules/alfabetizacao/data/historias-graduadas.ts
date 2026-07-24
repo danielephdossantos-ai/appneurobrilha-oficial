@@ -1698,7 +1698,7 @@ export const HISTORIAS_GRADUADAS: HistoriaGraduada[] = [
   {
     id: "h4-globo-mundo",
     titulo: "O Globo Girando",
-    nivel: 4, capa: "PLANETA_ALT",
+    nivel: 4, capa: "LUA",
     vocabBase: [],
     foneticos: ["GL", "BR"],
     etapaAlinhada: "encontros",
