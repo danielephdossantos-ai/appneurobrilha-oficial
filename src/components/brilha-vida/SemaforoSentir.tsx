@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const LUZ_METRICS: Record<string, { valence: number; energy: number; quadrante: "vermelho" | "amarelo" | "verde" }> = {
+  vermelho: { valence: -2, energy: 2, quadrante: "vermelho" },
+  amarelo: { valence: -0.5, energy: 1, quadrante: "amarelo" },
+  verde: { valence: 2, energy: 0, quadrante: "verde" },
+};
 
 import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
 import { url as imgConfuso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
