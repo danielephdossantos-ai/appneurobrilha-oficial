@@ -453,6 +453,82 @@ function LeitorHistoria({
         )}
       </div>
 
+      {fase === "vocab" && vocabChave.length > 0 && (() => {
+        const v = vocabChave[vocabIdx];
+        const total = vocabChave.length;
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 gap-4 overflow-y-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow bg-fuchsia-500 text-white">
+              <BookOpen className="w-3.5 h-3.5" /> Antes de ler — palavras novas
+            </div>
+            <div className="bg-white rounded-3xl shadow-xl p-6 max-w-md w-full flex flex-col items-center gap-4 text-center">
+              {v.imagem ? (
+                <img
+                  src={objetoImg(v.imagem)}
+                  alt=""
+                  className="h-32 sm:h-40 object-contain"
+                />
+              ) : (
+                <div className="h-24 w-24 rounded-full bg-gradient-to-br from-fuchsia-100 to-rose-100 flex items-center justify-center text-4xl">
+                  🔤
+                </div>
+              )}
+              <h2 className="text-3xl font-black text-slate-800 lowercase">
+                {v.palavra}
+              </h2>
+              <p className="text-slate-600 text-lg leading-snug">{v.definicao}</p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => falar(v.palavra)}
+                  className="px-4 py-2 rounded-full bg-rose-100 text-rose-700 text-sm font-bold flex items-center gap-2"
+                >
+                  <Volume2 className="w-4 h-4" /> Ouvir palavra
+                </button>
+                <button
+                  onClick={() => falar(v.definicao)}
+                  className="px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold flex items-center gap-2"
+                >
+                  <Ear className="w-4 h-4" /> Ouvir o que significa
+                </button>
+              </div>
+              <div className="flex items-center gap-2 mt-2 w-full">
+                <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-fuchsia-400 transition-all"
+                    style={{ width: `${((vocabIdx + 1) / total) * 100}%` }}
+                  />
+                </div>
+                <span className="text-xs text-slate-500">
+                  {vocabIdx + 1}/{total}
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  if (vocabIdx < total - 1) {
+                    setVocabIdx(vocabIdx + 1);
+                  } else {
+                    setFase("leitura");
+                  }
+                }}
+                className="mt-2 px-6 py-3 rounded-full bg-emerald-500 text-white font-bold shadow flex items-center gap-2"
+              >
+                {vocabIdx < total - 1 ? "Já sei — próxima" : "Vamos ler!"}
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setFase("leitura")}
+                className="text-[11px] text-slate-400 underline"
+              >
+                pular vocabulário
+              </button>
+              <p className="text-[10px] text-slate-400 mt-1">
+                📖 Pré-ensino de vocabulário — Pilar 4 do NRP
+              </p>
+            </div>
+          </div>
+        );
+      })()}
+
       {fase === "leitura" && (
         <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 gap-4 overflow-y-auto">
           {/* Chip modo pedagógico */}
