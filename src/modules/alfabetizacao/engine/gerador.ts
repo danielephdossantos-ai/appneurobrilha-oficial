@@ -35,6 +35,8 @@ export interface Rodada {
   regra: string;
   // Som/foco central da rodada (para destacar visualmente ou repetir).
   foco?: string;
+  // Sílabas visíveis (fusão/segmentação) — exibidas como chips grandes.
+  silabas?: string[];
 }
 
 // ============ CONSCIÊNCIA FONOLÓGICA (já existente) ============
