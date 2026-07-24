@@ -2,7 +2,7 @@ import type { Aula } from "../types";
 import { url as pipaImg } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
 import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
 import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
-import { url as sinoImg } from "@/assets/neuro-treino/objetos/sino.png" with { type: "json" };
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
 import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
@@ -23,7 +23,7 @@ const aula: Aula = {
     contexto:
       "Depois de dominar o A, o Brilha achou duas amigas curiosas: E e I. Agora as consoantes querem grudar nelas também.",
     problema:
-      "As sílabas PE, ME, PI, SI, LI ficaram escondidas dentro de palavras: PEIXE, MENINO, PIPA, SINO…",
+      "As sílabas PE, ME, PI, SI, LI ficaram escondidas dentro de palavras: PEIXE, MENINO, PIPA, NINHO…",
     convite: "Bora ouvir com atenção e achar cada sílaba dentro das palavras?",
   },
   conhecimentosPrevios: [
@@ -39,9 +39,9 @@ const aula: Aula = {
     "Diferenciar sílaba com A x sílaba com E/I.",
   ],
   motivacao:
-    "PEIXE, MENINO, PIPA, SINO — a criança encontra essas palavras todo dia. Sem saber juntar C+E e C+I ela lê metade das palavras.",
+    "PEIXE, MENINO, PIPA, NINHO — a criança encontra essas palavras todo dia. Sem saber juntar C+E e C+I ela lê metade das palavras.",
   explicacao:
-    "Consoante + E ou I também vira sílaba.\n\n👉 P + E → PE (PEixe)\n👉 M + E → ME (MEnino)\n👉 P + I → PI (PIpa)\n👉 S + I → SI (SIno)\n👉 L + I → LI (LImão)\n\nDica: fale a consoante curtinha e emenda com a vogal, sem quebrar. /p/+/e/ = PE, uma batida só.",
+    "Consoante + E ou I também vira sílaba.\n\n👉 P + E → PE (PEixe)\n👉 M + E → ME (MEnino)\n👉 P + I → PI (PIpa)\n👉 N + I → NI (NInho)\n👉 L + I → LI (LImão)\n\nDica: fale a consoante curtinha e emenda com a vogal, sem quebrar. /p/+/e/ = PE, uma batida só.",
   explicacaoAtiva: [
     {
       texto: "P + E vira PE. Aparece em PEixe.",
@@ -68,13 +68,13 @@ const aula: Aula = {
       },
     },
     {
-      texto: "P + I vira PI (PIpa). S + I vira SI (SIno).",
-      exemplo: "P + I = PI · S + I = SI.",
+      texto: "P + I vira PI (PIpa). N + I vira NI (NInho).",
+      exemplo: "P + I = PI · N + I = NI.",
       imagem: pipaImg,
       imagemAlt: "Pipa — começa com PI",
       checagem: {
         pergunta: "Qual começa com PI?",
-        opcoes: ["Sino", "Pipa", "Menino"],
+        opcoes: ["Ninho", "Pipa", "Menino"],
         correta: 1,
         explicacao: "PIpa — PI.",
       },
@@ -87,24 +87,24 @@ const aula: Aula = {
     nivel4: "As vogais fechadas (I) mudam o timbre da sílaba mas mantêm a estrutura CV.",
   },
   exemploResolvido: {
-    enunciado: "Como fica S + I?",
+    enunciado: "Como fica N + I?",
     passos: [
-      "Fale o som da S: /sss/.",
+      "Fale o som da S: /nnn/.",
       "Fale o som da I: /iii/.",
-      "Cola sem parar: /sssiii/ = SI.",
+      "Cola sem parar: /nnniii/ = NI.",
     ],
-    resposta: "S + I = SI (aparece em SIno).",
+    resposta: "N + I = NI (aparece em SIno).",
   },
   atividadeGuiada: {
     enunciado: "Toque na figura que começa com PI.",
     resposta: "PIPA — começa com PI.",
-    explicacao: "Fale: PI-pa · SI-no · PEi-xe.",
+    explicacao: "Fale: PI-pa · NI-nho · PEi-xe.",
     visual: {
       tipo: "escolherImagem",
       pergunta: "Qual começa com PI?",
       opcoes: [
         { nome: "pipa", imagemUrl: pipaImg },
-        { nome: "sino", imagemUrl: sinoImg },
+        { nome: "ninho", imagemUrl: ninhoImg },
         { nome: "peixe", imagemUrl: peixeImg },
       ],
       respostaCerta: "pipa",
@@ -114,31 +114,31 @@ const aula: Aula = {
     { enunciado: "🔊 P + E = ?", resposta: "PE.", dica: "Emenda /p/ com /e/." },
     { enunciado: "🔊 M + I = ?", resposta: "MI.", dica: "Emenda /m/ com /i/." },
     {
-      enunciado: "🔊 Qual começa com SI: SINO, SAPO ou SOL?",
-      resposta: "SINO — SI.",
-      dica: "SI-no. A primeira batida é SI.",
+      enunciado: "🔊 Qual começa com NI: NINHO, SAPO ou SOL?",
+      resposta: "NINHO — SI.",
+      dica: "NI-nho. A primeira batida é SI.",
     },
   ],
   desafio: {
     enunciado: "Desafio Brilha: separar por vogal da sílaba.",
-    resposta: "Time E: peixe, menino · Time I: pipa, sino.",
+    resposta: "Time E: peixe, menino · Time I: pipa, ninho.",
     visual: {
       cena: [
         { personagem: "PE", itemImagemUrl: peixeImg, quantidade: 1, cor: "#60A5FA" },
         { personagem: "ME", itemImagemUrl: meninoImg, quantidade: 1, cor: "#34D399" },
         { personagem: "PI", itemImagemUrl: pipaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "SI", itemImagemUrl: sinoImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "NI", itemImagemUrl: ninhoImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
         {
           pergunta: "Qual começa com PE?",
-          opcoes: ["Peixe", "Pipa", "Sino"],
+          opcoes: ["Peixe", "Pipa", "Ninho"],
           correta: 0,
           explicacao: "PEixe.",
         },
         {
-          pergunta: "Qual começa com SI?",
-          opcoes: ["Peixe", "Sino", "Menino"],
+          pergunta: "Qual começa com NI?",
+          opcoes: ["Peixe", "Ninho", "Menino"],
           correta: 1,
           explicacao: "SIno.",
         },
@@ -154,7 +154,7 @@ const aula: Aula = {
   revisao: {
     pontos: [
       "C + E ou C + I = sílaba.",
-      "PE (peixe) · ME (menino) · PI (pipa) · SI (sino).",
+      "PE (peixe) · ME (menino) · PI (pipa) · SI (ninho).",
       "Cada sílaba = 1 batida.",
       "A vogal muda o som, mas a cola é a mesma.",
     ],
@@ -182,8 +182,8 @@ const aula: Aula = {
       },
     },
     {
-      pergunta: "Qual começa com SI?",
-      opcoes: ["Sol", "Sino", "Sapo"],
+      pergunta: "Qual começa com NI?",
+      opcoes: ["Sol", "Ninho", "Sapo"],
       correta: 1,
       explicacao: "SIno.",
     },
@@ -225,7 +225,7 @@ const aula: Aula = {
         { a: "PE", b: "Peixe", aImagem: estrelaImg, bImagem: peixeImg },
         { a: "ME", b: "Menino", aImagem: estrelaImg, bImagem: meninoImg },
         { a: "PI", b: "Pipa", aImagem: estrelaImg, bImagem: pipaImg },
-        { a: "SI", b: "Sino", aImagem: estrelaImg, bImagem: sinoImg },
+        { a: "NI", b: "Ninho", aImagem: estrelaImg, bImagem: ninhoImg },
       ],
     },
     {
@@ -256,14 +256,14 @@ const aula: Aula = {
     {
       tipo: "contarQuiz",
       titulo: "Fase 5 · Reconhecer SI",
-      instrucao: "Qual começa com SI?",
+      instrucao: "Qual começa com NI?",
       grupos: [
-        { imagemUrl: sinoImg, quantidade: 1, rotulo: "sino" },
+        { imagemUrl: ninhoImg, quantidade: 1, rotulo: "ninho" },
         { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
         { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
       ],
-      pergunta: "Qual começa com SI?",
-      opcoes: ["Sino", "Sol", "Sapo"],
+      pergunta: "Qual começa com NI?",
+      opcoes: ["Ninho", "Sol", "Sapo"],
       correta: 0,
       acerto: "SIno — SI!",
       erro: "SOL é SO, SAPO é SA. SIno é SI.",
@@ -273,7 +273,7 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       { pergunta: "P + E = ?", opcoes: ["PE", "PA", "PI"], correta: 0, explicacao: "P+E = PE." },
-      { pergunta: "S + I = ?", opcoes: ["SA", "SI", "SO"], correta: 1, explicacao: "S+I = SI." },
+      { pergunta: "N + I = ?", opcoes: ["SA", "NI", "SO"], correta: 1, explicacao: "N+I = NI." },
       {
         pergunta: "Qual começa com PI?",
         opcoes: ["Pipa", "Sapo", "Mãe"],
@@ -297,10 +297,10 @@ const aula: Aula = {
           ],
         },
       },
-      { pergunta: "Quantas sílabas tem SINO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "SI-NO = 2." },
+      { pergunta: "Quantas sílabas tem NINHO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "SI-NO = 2." },
       {
         pergunta: "Qual NÃO começa com sílaba com I?",
-        opcoes: ["Pipa", "Sino", "Peixe"],
+        opcoes: ["Pipa", "Ninho", "Peixe"],
         correta: 2,
         explicacao: "PEixe começa com E.",
       },
