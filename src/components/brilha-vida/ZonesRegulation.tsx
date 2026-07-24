@@ -141,6 +141,14 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
                 onClick={() => {
                   setZona(id);
                   setEtapa("gatilho");
+                  const m = ZONE_METRICS[id];
+                  recordMood({
+                    source: "zones",
+                    valence: m.valence,
+                    energy: m.energy,
+                    emocao: ZONES[id].nome,
+                    quadrante: id,
+                  });
                 }}
                 className="p-5 rounded-3xl text-white font-black shadow-lg border-4 border-white/40 transition-all hover:scale-105 text-left"
                 style={{ background: zz.cor }}
