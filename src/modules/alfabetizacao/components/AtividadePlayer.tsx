@@ -412,6 +412,39 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
+      {/* Fase D · Modelagem sonora — grafema grande + eco do som */}
+      <AnimatePresence>
+        {modelagem && feedback === "erro" && (
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.7, opacity: 0 }}
+            className="mx-auto mt-3 flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+              O som é
+            </span>
+            <button
+              onClick={() => modelarSom(modelagem)}
+              className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl flex items-center justify-center border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform"
+              aria-label={`Ouvir o som ${modelagem}`}
+            >
+              <motion.span
+                key={modelagem}
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ duration: 0.9, repeat: 2 }}
+                className="text-6xl sm:text-7xl font-black leading-none"
+              >
+                {modelagem}
+              </motion.span>
+            </button>
+            <span className="text-xs font-bold text-white/80">
+              toque para ouvir de novo
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
         {usaReferencia && (
           <div className="flex flex-col items-center gap-2">
