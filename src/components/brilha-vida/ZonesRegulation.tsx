@@ -2,6 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
 import { MicrofoneFala } from "./shared/MicrofoneFala";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const ZONE_METRICS: Record<ZoneId, { valence: number; energy: number }> = {
+  azul: { valence: -1, energy: -2 },
+  verde: { valence: 2, energy: 0 },
+  amarelo: { valence: -1, energy: 2 },
+  vermelho: { valence: -2, energy: 2 },
+};
 
 
 /**
@@ -92,6 +100,7 @@ const ORDER: ZoneId[] = ["azul", "verde", "amarelo", "vermelho"];
 export function ZonesRegulation({ onClose }: { onClose: () => void }) {
   const [zona, setZona] = useState<ZoneId | null>(null);
   const [etapa, setEtapa] = useState<"identificar" | "gatilho" | "ferramenta">("identificar");
+  const recordMood = useMoodRecorder();
 
   const z = zona ? ZONES[zona] : null;
 
@@ -132,6 +141,14 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
                 onClick={() => {
                   setZona(id);
                   setEtapa("gatilho");
+                  const m = ZONE_METRICS[id];
+                  recordMood({
+                    source: "zones",
+                    valence: m.valence,
+                    energy: m.energy,
+                    emocao: ZONES[id].nome,
+                    quadrante: id,
+                  });
                 }}
                 className="p-5 rounded-3xl text-white font-black shadow-lg border-4 border-white/40 transition-all hover:scale-105 text-left"
                 style={{ background: zz.cor }}

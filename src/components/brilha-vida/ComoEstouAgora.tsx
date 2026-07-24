@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const ROSTO_VALENCIA: Record<string, number> = {
+  feliz: 2,
+  tranquilo: 1,
+  confuso: -0.5,
+  triste: -1.5,
+  bravo: -2,
+};
+const ENERGIA_MAP: Record<number, number> = { 1: -1, 2: 0, 3: 2 };
 
 import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
@@ -41,6 +51,7 @@ export function ComoEstouAgora({ onClose }: { onClose: () => void }) {
   const [rosto, setRosto] = useState<typeof ROSTOS[number] | null>(null);
   const [sensacao, setSensacao] = useState<typeof SENSACOES[number] | null>(null);
   const [energia, setEnergia] = useState<typeof ENERGIAS[number] | null>(null);
+  const recordMood = useMoodRecorder();
 
   const passo = !rosto ? 1 : !sensacao ? 2 : !energia ? 3 : 4;
 
@@ -145,7 +156,18 @@ export function ComoEstouAgora({ onClose }: { onClose: () => void }) {
               {ENERGIAS.map((e) => (
                 <button
                   key={e.id}
-                  onClick={() => setEnergia(e)}
+                  onClick={() => {
+                    setEnergia(e);
+                    if (rosto) {
+                      recordMood({
+                        source: "como-estou",
+                        valence: ROSTO_VALENCIA[rosto.id] ?? 0,
+                        energy: ENERGIA_MAP[e.id] ?? 0,
+                        emocao: rosto.nome,
+                        note: sensacao?.nome,
+                      });
+                    }
+                  }}
                   className="flex flex-col items-center gap-1 p-5 rounded-2xl bg-white border-2 border-slate-100 hover:border-slate-300 hover:scale-105 transition-all"
                 >
                   <span className="text-4xl" aria-hidden>{e.emoji}</span>

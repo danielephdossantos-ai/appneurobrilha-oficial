@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
 
 /**
  * Mood Meter (Marc Brackett / Yale Center for Emotional Intelligence — RULER)
@@ -85,6 +86,7 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
   const [selecionada, setSelecionada] = useState<Emocao | null>(null);
   const [etapa, setEtapa] = useState<"reconhecer" | "entender" | "expressar">("reconhecer");
   const [nota, setNota] = useState("");
+  const recordMood = useMoodRecorder();
 
   const quadranteBg = selecionada ? CORES[selecionada.quadrante].bg : "from-slate-50 to-white";
 
@@ -144,6 +146,13 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
               onClick={() => {
                 setSelecionada(e);
                 setEtapa("entender");
+                recordMood({
+                  source: "ruler",
+                  valence: (e.x - 50) / 25,
+                  energy: (e.y - 50) / 25,
+                  emocao: e.nome,
+                  quadrante: e.quadrante,
+                });
               }}
               className="absolute -translate-x-1/2 -translate-y-1/2 text-[10px] font-black bg-white/90 hover:bg-white text-slate-800 px-2 py-1 rounded-full shadow-md border-2 border-white hover:scale-110 transition-transform"
               style={{

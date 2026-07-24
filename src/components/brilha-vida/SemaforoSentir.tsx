@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const LUZ_METRICS: Record<string, { valence: number; energy: number; quadrante: "vermelho" | "amarelo" | "verde" }> = {
+  vermelho: { valence: -2, energy: 2, quadrante: "vermelho" },
+  amarelo: { valence: -0.5, energy: 1, quadrante: "amarelo" },
+  verde: { valence: 2, energy: 0, quadrante: "verde" },
+};
 
 import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
 import { url as imgConfuso } from "@/assets/brilha-vida/emocoes/confuso.png.asset.json";
@@ -50,6 +57,22 @@ type LuzId = (typeof LUZES)[number]["id"];
 export function SemaforoSentir({ onClose }: { onClose: () => void }) {
   const [ativa, setAtiva] = useState<LuzId | null>(null);
   const luz = LUZES.find((l) => l.id === ativa);
+  const recordMood = useMoodRecorder();
+  const escolher = useCallback(
+    (l: (typeof LUZES)[number]) => {
+      if (ativa === l.id) return;
+      setAtiva(l.id);
+      const m = LUZ_METRICS[l.id];
+      recordMood({
+        source: "semaforo",
+        valence: m.valence,
+        energy: m.energy,
+        emocao: l.titulo,
+        quadrante: m.quadrante,
+      });
+    },
+    [ativa, recordMood],
+  );
 
   return (
     <div
@@ -78,7 +101,7 @@ export function SemaforoSentir({ onClose }: { onClose: () => void }) {
             return (
               <button
                 key={l.id}
-                onClick={() => setAtiva(l.id)}
+                onClick={() => escolher(l)}
                 aria-label={l.rotulo}
                 className={`relative w-20 h-20 rounded-full border-4 border-slate-900 transition-all ${
                   acesa ? l.glow : "opacity-40 hover:opacity-70"
@@ -106,7 +129,7 @@ export function SemaforoSentir({ onClose }: { onClose: () => void }) {
           {LUZES.map((l) => (
             <button
               key={l.id}
-              onClick={() => setAtiva(l.id)}
+              onClick={() => escolher(l)}
               className={`flex items-center gap-3 p-3 rounded-2xl border-2 transition-all text-left ${
                 ativa === l.id
                   ? "bg-white shadow-lg scale-105"

@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, BookHeart } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const DIARIO_VALENCIA: Record<string, number> = {
+  feliz: 2,
+  tranquilo: 1,
+  confuso: -0.5,
+  triste: -1.5,
+  bravo: -2,
+};
 
 import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
@@ -36,6 +45,20 @@ export function DiarioSentir({ onClose }: { onClose: () => void }) {
   const [emocao, setEmocao] = useState<typeof EMOJIS[number] | null>(null);
   const [momento, setMomento] = useState<typeof MOMENTOS[number] | null>(null);
   const [gratidao, setGratidao] = useState<typeof GRATIDOES[number] | null>(null);
+  const recordMood = useMoodRecorder();
+  const escolherGratidao = (g: (typeof GRATIDOES)[number]) => {
+    setGratidao(g);
+    if (emocao) {
+      recordMood({
+        source: "diario-sentir",
+        valence: DIARIO_VALENCIA[emocao.id] ?? 0,
+        energy: 0,
+        emocao: emocao.nome,
+        momento: momento?.nome,
+        note: `Gratidão: ${g.texto}`,
+      });
+    }
+  };
 
   const passo = !emocao ? 1 : !momento ? 2 : !gratidao ? 3 : 4;
 
@@ -92,7 +115,7 @@ export function DiarioSentir({ onClose }: { onClose: () => void }) {
             <h3 className="font-black text-center text-slate-700 mb-3">3. Pelo que você é grato(a) hoje?</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {GRATIDOES.map((g) => (
-                <button key={g.texto} onClick={() => setGratidao(g)} className="flex items-center gap-2 p-3 rounded-2xl bg-white border-2 border-slate-100 hover:border-pink-300 hover:scale-105 transition-all">
+                <button key={g.texto} onClick={() => escolherGratidao(g)} className="flex items-center gap-2 p-3 rounded-2xl bg-white border-2 border-slate-100 hover:border-pink-300 hover:scale-105 transition-all">
                   <span className="text-3xl" aria-hidden>{g.emoji}</span>
                   <span className="font-black text-sm text-slate-700">{g.texto}</span>
                 </button>
