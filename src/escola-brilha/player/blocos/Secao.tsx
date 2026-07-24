@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Volume2, Pause } from "lucide-react";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 /**
  * Cartão genérico usado por quase todos os blocos da aula.
