@@ -128,6 +128,7 @@ export function gerarSegmentacao(nivel = 2): Rodada {
     numeroOpcoes: opcoesNum,
     regra: `${alvo.palavra.toLowerCase()} tem ${correto} pedacinhos: ${alvo.silabas.join("... ").toLowerCase()}.`,
     foco: String(correto),
+    silabas: alvo.silabas,
   };
 }
 
@@ -147,6 +148,7 @@ export function gerarFusao(nivel = 2): Rodada {
     correta: alvo.palavra,
     regra: `${fala} juntinho vira ${alvo.palavra.toLowerCase()}.`,
     foco: alvo.palavra,
+    silabas: alvo.silabas,
   };
 }
 
