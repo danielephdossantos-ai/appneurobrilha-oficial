@@ -15,13 +15,18 @@ import {
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
+  PerguntaHistoria,
+  TipoPergunta,
   calcularNivelLeitor,
   historiasParaNivel,
+  etapaAtiva,
+  historiasOrdenadasPorRelevancia,
 } from "../data/historias-graduadas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
 import { useAdminMode } from "@/escola-brilha/admin-mode";
+import { ETAPA_POR_ID } from "../data/etapas";
 
 interface Props {
   childId: string;
