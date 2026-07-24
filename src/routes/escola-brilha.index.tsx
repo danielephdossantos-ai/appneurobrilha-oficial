@@ -379,23 +379,7 @@ function EscolaBrilhaCatalogo() {
                       )}
 
 
-                        {mostraLerComAurora && (
-                          <Link
-                            to="/neuro-treino/ler-com-aurora"
-                            className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                            style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
-                          >
-                            <div className="text-[10px] uppercase tracking-widest opacity-90">
-                              🔤 Curso especial de leitura · Pré II + 1º Ano
-                            </div>
-                            <div className="text-lg leading-tight mt-0.5">
-                              Ler com Aurora — Fase 1
-                            </div>
-                            <div className="text-[11px] font-bold opacity-90 mt-1">
-                              {totalMissoesLerAurora} missões destravadas · abrir trilha →
-                            </div>
-                          </Link>
-                        )}
+                        {/* Ler com Aurora movido para Neuro Treino */}
 
                         {serie === "Educação Infantil" && (
                           <Link
