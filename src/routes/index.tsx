@@ -116,15 +116,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.12)",
   },
   {
-    to: "/rotina",
-    title: "Rotina",
-    subtitle: "Organize o Dia",
-    gradient: "from-[#14B8A6] via-[#0D9488] to-[#0F766E]",
-    glow: "rgba(20,184,166,0.7)",
-    emoji: "⏰",
-    shine: "rgba(255,255,255,0.12)",
-  },
-  {
     to: "/loja-mascotes",
     title: "Loja do Pip",
     subtitle: "Shopping do Saber",
