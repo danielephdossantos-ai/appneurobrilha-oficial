@@ -4,13 +4,11 @@ import { ProfessorBrilho } from "./ProfessorBrilho";
 
 type Modulo =
   | "reforco-brilha"
-  | "jornada-365"
   | "missao-prova"
   | "missao-trabalho";
 
 function detectModulo(pathname: string): Modulo | null {
   if (pathname.startsWith("/reforco-brilha")) return "reforco-brilha";
-  if (pathname.startsWith("/jornada-365")) return "jornada-365";
   if (pathname.startsWith("/missao-prova")) return "missao-prova";
   if (pathname.startsWith("/missao-trabalho")) return "missao-trabalho";
   return null;
