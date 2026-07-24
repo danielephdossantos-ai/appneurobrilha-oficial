@@ -54,11 +54,17 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
   const etapaId = useMemo(() => etapaAtiva(progresso), [progresso]);
   const etapaAtual = ETAPA_POR_ID[etapaId];
-  // Em modo admin, mostra tudo. Ordena SEMPRE por relevância clínica.
+  // Biblioteca mostra SEMPRE o banco inteiro (98 histórias), ordenado por
+  // relevância clínica (fase ativa da criança no topo). Antes filtrávamos
+  // por nivelLeitor e escondia níveis 2-6 até a criança progredir —
+  // ficavam invisíveis mesmo para o adulto/admin testar.
+  // `disponiveis` continua calculado para o badge visual de "nível travado".
+  void disponiveis;
   const listaOrdenada = useMemo(() => {
-    const base = admin ? HISTORIAS_GRADUADAS : disponiveis;
-    return historiasOrdenadasPorRelevancia(base, nivelLeitor, etapaId);
-  }, [admin, disponiveis, nivelLeitor, etapaId]);
+    void admin;
+    return historiasOrdenadasPorRelevancia(HISTORIAS_GRADUADAS, nivelLeitor, etapaId);
+  }, [admin, nivelLeitor, etapaId]);
+
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
 
   return (
