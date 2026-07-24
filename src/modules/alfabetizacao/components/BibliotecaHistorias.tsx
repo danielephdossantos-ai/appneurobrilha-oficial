@@ -95,8 +95,9 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {HISTORIAS_GRADUADAS.map((h) => {
+          {listaOrdenada.map((h) => {
             const desbloq = admin || disponiveis.includes(h);
+            const alinhado = h.etapaAlinhada === etapaId;
             return (
               <button
                 key={h.id}
@@ -104,8 +105,13 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                 onClick={() => desbloq && setAtiva(h)}
                 className={`relative rounded-3xl shadow-md p-4 text-left transition-transform ${
                   desbloq ? "bg-white hover:scale-105" : "bg-slate-100"
-                }`}
+                } ${alinhado && desbloq ? "ring-2 ring-emerald-400" : ""}`}
               >
+                {alinhado && desbloq && (
+                  <span className="absolute -top-2 -right-2 z-10 text-[9px] font-black bg-emerald-500 text-white px-2 py-0.5 rounded-full shadow">
+                    {etapaAtual?.emoji ?? "⭐"} PRA SUA FASE
+                  </span>
+                )}
                 <div
                   className={`aspect-square rounded-2xl mb-3 flex items-center justify-center ${
                     desbloq
@@ -138,6 +144,18 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                 >
                   {h.titulo}
                 </h3>
+                {desbloq && h.foneticos.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {h.foneticos.slice(0, 4).map((f) => (
+                      <span
+                        key={f}
+                        className="text-[9px] font-mono font-bold bg-indigo-100 text-indigo-700 rounded px-1.5 py-0.5"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
             );
           })}
