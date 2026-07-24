@@ -195,8 +195,6 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
  *    lê em voz alta. Escutar palavra isolada = prompting nível 1.
  * =======================================================================*/
 
-type ModoPagina = "professor" | "crianca";
-
 /* =========================================================================
  * LEITOR — Blocos 1 + 2 + 3
  *   A) Karaoke sincronizado (Bloco 1)
