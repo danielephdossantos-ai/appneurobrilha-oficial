@@ -1,233 +1,273 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as galinhaImg } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
-import { url as pintinhoImg } from "@/assets/neuro-treino/objetos/pintinho.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
-import { url as chocalhoImg } from "@/assets/neuro-treino/objetos/chocalho.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 
 /**
- * EF01LP18 — Aula 018
- * BNCC: Registrar cantigas, quadras, quadrinhas, parlendas, trava-línguas.
- * Missão: "O Caderno das Cantigas".
+ * EF01LP18 — Aula 018 · MAIÚSCULA e PONTO FINAL
+ * Foco: sinais que abrem e fecham a frase.
  */
 const aula: Aula = {
   codigo: "EF01LP18",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Caderno das Cantigas",
-
+  disciplina: "Português",
+  titulo: "Maiúscula no Começo, Ponto no Fim",
   narrativa: {
-    titulo: "O Caderno das Cantigas",
+    titulo: "Maiúscula no Começo, Ponto no Fim",
     contexto:
-      "A vovó Coruja tem um caderno mágico com todas as cantigas antigas da floresta. As páginas mais bonitas foram apagadas pelo tempo.",
+      "Toda frase tem dois sinais importantes: uma letra MAIÚSCULA GRANDÃO no começo e um PONTINHO (.) no fim.",
     problema:
-      "Sem o registro, as próximas crianças não vão poder cantar essas músicas.",
-    convite:
-      "Bora ajudar o Brilha a REGISTRAR (escrever) cantigas, parlendas e quadrinhas no caderno?",
+      "Se a frase esquece a maiúscula, parece que começou pela metade. Se esquece o ponto, parece que nunca termina.",
+    convite: "Bora garantir que toda frase comece e termine do jeito certo?",
   },
-
   conhecimentosPrevios: [
-    "Ler parlendas e cantigas (EF01LP16).",
-    "Reconhecer palavras conhecidas.",
-    "Perceber rima.",
+    "Ler frases de 3 a 5 palavras (LP15, LP17).",
+    "Perceber espaço entre palavras (LP16).",
+    "Diferenciar letras MAIÚSCULAS e minúsculas.",
   ],
-
-  missao:
-    "Escrever, com ajuda do professor, cantigas, quadrinhas, parlendas e trava-línguas — para não deixar essas brincadeiras se perderem.",
-
+  missao: "Reconhecer maiúscula no início e ponto final no fim de toda frase.",
   objetivos: [
-    "Registrar por escrito textos que sabemos de cor.",
-    "Perceber que cada verso vira uma linha.",
-    "Cuidar do espaço entre palavras.",
-    "Valorizar a tradição oral.",
+    "Identificar a letra maiúscula que abre a frase.",
+    "Identificar o ponto final (.) que fecha a frase.",
+    "Corrigir frases sem maiúscula ou sem ponto.",
+    "Ler frases fazendo pausa maior no ponto final.",
   ],
-
-  motivacao: "Quem escreve uma cantiga guarda ela pra sempre!",
-
+  motivacao:
+    "Maiúscula e ponto são como o portão da casa: um abre, o outro fecha. Sem eles, a frase fica bagunçada.",
   explicacao:
-    "REGISTRAR é escrever pra guardar.\n\nCada VERSO vira uma linha:\n\n🎵 Ciranda, cirandinha\n🎵 Vamos todos cirandar\n🎵 Vamos dar a meia volta\n🎵 Volta e meia vamos dar\n\nEscreva devagar, com espaço entre as palavras.",
-
+    "🔹 MAIÚSCULA no começo: O · A · SAPO... a primeira letra é grandona.\n🔹 PONTO no fim: um pontinho pequenininho (.).\n\n👉 CERTO: O PATO NADA.\n👉 ERRADO: o pato nada  (sem maiúscula, sem ponto)\n👉 ERRADO: O PATO NADA  (sem ponto)\n\nQuando você lê e chega no ponto, faz uma PAUSA maior — como se respirasse fundo.",
+  explicacaoAtiva: [
+    {
+      texto: "Olha essa frase: 'O PATO NADA.' O 'O' é MAIÚSCULO e tem PONTO no fim.",
+      exemplo: "🔵 O (maiúscula) · PATO · NADA · . (ponto)",
+      imagem: patoImg,
+      imagemAlt: "Pato nadando",
+      checagem: {
+        pergunta: "Qual sinal fecha a frase?",
+        opcoes: ["!", ".", "?"],
+        correta: 1,
+        explicacao: "O PONTO (.) fecha frases normais.",
+      },
+    },
+    {
+      texto: "Compare: 'o gato dorme' (errado) x 'O GATO DORME.' (certo).",
+      exemplo: "❌ o gato dorme  |  ✅ O GATO DORME.",
+      imagem: gatoImg,
+      imagemAlt: "Gato dormindo",
+      checagem: {
+        pergunta: "Qual está TODA certa?",
+        opcoes: ["o gato dorme", "O GATO DORME.", "O GATO DORME"],
+        correta: 1,
+        explicacao: "Maiúscula + ponto.",
+      },
+    },
+    {
+      texto: "No ponto final, faça uma PAUSA maior. Como respirar fundo.",
+      exemplo: "O SAPO PULA. (pausa longa)  O RATO CORRE. (pausa longa)",
+      imagem: sapoImg,
+      imagemAlt: "Sapo pulando",
+      checagem: {
+        pergunta: "Quando devo fazer pausa MAIOR ao ler?",
+        opcoes: ["No espaço", "No ponto final", "Na maiúscula"],
+        correta: 1,
+        explicacao: "No ponto final se respira fundo.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Registrar = escrever pra guardar.",
-    nivel2: "Cada verso é uma linha nova.",
-    nivel3: "Palavras separadas com espaço.",
-    nivel4: "Escrever cantiga ajuda outras crianças a aprenderem.",
+    nivel1: "Maiúscula abre, ponto fecha.",
+    nivel2: "Sem maiúscula ou sem ponto, a frase fica errada.",
+    nivel3: "Ao ler, faça pausa maior no ponto final.",
+    nivel4: "Prosódia inicial: o leitor começa a marcar unidades sintáticas com pausa.",
   },
-
   exemploResolvido: {
-    enunciado: "Como escrevo a cantiga 'Ciranda, cirandinha'?",
+    enunciado: "Como CORRIGIR 'o sol brilha' para virar uma frase certa?",
     passos: [
-      "Cada VERSO vai numa linha.",
-      "Deixo ESPAÇO entre as palavras.",
-      "Uso letras que já conheço.",
+      "Coloco MAIÚSCULA no O do começo → 'O sol brilha'.",
+      "Coloco PONTO no fim → 'O sol brilha.'",
+      "Melhor ainda em maiúsculas: 'O SOL BRILHA.'",
     ],
-    resposta: "Um verso em cada linha, com espaços. ✅",
+    resposta: "O SOL BRILHA.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Como devo escrever a cantiga 'O sapo não lava o pé'?",
-    resposta: "Um verso em cada linha.",
-    explicacao: "Cada versinho ocupa uma linha do caderno.",
+    enunciado: "Escolha a frase escrita do jeito CERTO.",
+    resposta: "O GATO DORME.",
+    explicacao: "Maiúscula no início, ponto no fim, espaços entre palavras.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Modo certo de registrar:",
+      pergunta: "Qual figura combina com 'O GATO DORME.'?",
       opcoes: [
-        { nome: "linhas", imagemUrl: livroImg },
-        { nome: "cantar", imagemUrl: sapoImg },
-        { nome: "desenhar", imagemUrl: estrelaImg },
+        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "pato", imagemUrl: patoImg },
       ],
-      respostaCerta: "linhas",
+      respostaCerta: "gato",
     },
   },
-
   exercicios: [
-    { enunciado: "Registrar significa…", resposta: "ESCREVER pra guardar.", dica: "Guardar por escrito." },
-    { enunciado: "Cada verso da cantiga vai…", resposta: "Numa linha.", dica: "Uma linha pra cada verso." },
-    { enunciado: "Entre as palavras eu deixo…", resposta: "ESPAÇO.", dica: "Palavra separada, com espaço." },
+    { enunciado: "🔊 Qual sinal ABRE a frase?", resposta: "Letra MAIÚSCULA.", dica: "Vem antes de tudo." },
+    { enunciado: "🔊 Qual sinal FECHA a frase?", resposta: "PONTO (.).", dica: "Vem no final." },
+    { enunciado: "🔊 Corrija: 'o pato nada'", resposta: "O PATO NADA.", dica: "Maiúscula + ponto." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: ajude a registrar cantigas antigas!",
-    resposta: "Cada verso numa linha, com espaços.",
+    enunciado: "Desafio Brilha: achar as frases CERTAS entre as opções.",
+    resposta: "Toda frase precisa começar com maiúscula e terminar com ponto.",
     visual: {
       cena: [
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "SAPO", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "GALINHA", itemImagemUrl: galinhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "PINTINHO", itemImagemUrl: pintinhoImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "PÁSSARO", itemImagemUrl: passaroImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "O PATO NADA.", itemImagemUrl: patoImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "O SAPO PULA.", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "O GATO DORME.", itemImagemUrl: gatoImg, quantidade: 1, cor: "#A78BFA" },
       ],
       perguntas: [
-        { pergunta: "Registrar é:", opcoes: ["Escrever pra guardar", "Cantar alto", "Correr"], correta: 0, explicacao: "Escrever pra guardar." },
-        { pergunta: "Cada verso vai:", opcoes: ["Numa linha", "Tudo junto", "Sem ordem"], correta: 0, explicacao: "Uma linha por verso." },
-        { pergunta: "Entre palavras deixo:", opcoes: ["Espaço", "Nada", "Ponto"], correta: 0, explicacao: "Espaço separa palavras." },
-        { pergunta: "Registrar uma cantiga ajuda:", opcoes: ["Outras crianças aprenderem", "Ninguém", "Só a mim"], correta: 0, explicacao: "Todos ganham." },
-        { pergunta: "'Ciranda, cirandinha' é uma:", opcoes: ["Cantiga de roda", "Receita", "Aviso"], correta: 0, explicacao: "Cantiga de roda." },
+        { pergunta: "Qual está TODA certa?", opcoes: ["o pato nada", "O PATO NADA.", "O PATO NADA"], correta: 1, explicacao: "Maiúscula + ponto." },
+        { pergunta: "O que abre a frase?", opcoes: ["Ponto", "Maiúscula", "Vírgula"], correta: 1, explicacao: "Letra maiúscula." },
+        { pergunta: "O que fecha a frase?", opcoes: ["Ponto", "Maiúscula", "Espaço"], correta: 0, explicacao: "Ponto final (.)." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "✍️ Registrar = escrever pra guardar.",
-      "📏 Cada verso ocupa uma linha.",
-      "🔤 Espaço entre palavras.",
-      "💛 Registrar preserva a tradição.",
+      "MAIÚSCULA no começo abre a frase.",
+      "PONTO (.) no fim fecha a frase.",
+      "Sem esses sinais, a frase fica errada.",
+      "No ponto, faça pausa MAIOR ao ler.",
     ],
-    dica: "Escreva devagar, verso por verso.",
+    dica: "Quando escrever uma frase, confira: começa maiúscula? termina com ponto?",
   },
-
   quiz: [
-    { pergunta: "Registrar é:", opcoes: ["Escrever pra guardar", "Cantar", "Dançar"], correta: 0, explicacao: "Escrever pra guardar." },
-    { pergunta: "Cada verso vai:", opcoes: ["Em uma linha", "Tudo junto", "Sem espaço"], correta: 0, explicacao: "Um verso por linha." },
-    { pergunta: "Entre palavras eu deixo:", opcoes: ["Espaço", "Traço", "Nada"], correta: 0, explicacao: "Espaço." },
-    { pergunta: "'Ciranda, cirandinha' é:", opcoes: ["Cantiga", "Receita", "Aviso"], correta: 0, explicacao: "Cantiga." },
-    { pergunta: "Por que registrar cantigas?", opcoes: ["Pra guardar a tradição", "Pra apagar", "Pra vender"], correta: 0, explicacao: "Preservar tradição." },
+    { pergunta: "O que abre a frase?", opcoes: ["Ponto", "Maiúscula", "Vírgula"], correta: 1, explicacao: "Letra maiúscula." },
+    { pergunta: "O que fecha a frase?", opcoes: ["Espaço", "Ponto (.)", "Maiúscula"], correta: 1, explicacao: "Ponto final." },
+    { pergunta: "Qual está toda certa?", opcoes: ["o gato dorme", "O GATO DORME.", "OGATODORME"], correta: 1, explicacao: "Maiúscula + ponto + espaços." },
+    { pergunta: "No ponto final, o leitor:", opcoes: ["Grita", "Faz pausa maior", "Pula palavra"], correta: 1, explicacao: "Faz pausa maior." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Guardião das Cantigas! Missão em Família: escrevam juntos, num papel bonito, uma cantiga que a família canta há muitos anos.",
-
+    "🏅 Medalha: Guardião da Frase! Missão em Casa: escrever 3 frases com maiúscula e ponto e mostrar pra alguém.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Muitas cantigas de roda vieram de Portugal, África e do Brasil indígena — quem canta hoje conecta três continentes!",
+      "O ponto final é uma das invenções mais antigas da escrita — mais de 2 mil anos. Antes dele, ninguém sabia onde uma frase acabava.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Como registrar",
-      instrucao: "Toque pra ouvir. Qual é o jeito certo de escrever uma cantiga no caderno?",
-      pergunta: "Escolha:",
-      opcoes: [
-        { nome: "LINHAS", imagemUrl: livroImg, rotulo: "📖 Um verso por linha" },
-        { nome: "JUNTO", imagemUrl: tamborImg, rotulo: "🥁 Tudo em uma linha só" },
-        { nome: "DESENHO", imagemUrl: estrelaImg, rotulo: "⭐ Só desenhos" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Achar a maiúscula",
+      instrucao: "Qual está começando com MAIÚSCULA?",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "o pato" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "O PATO" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "opato" },
       ],
-      correta: 0,
-      acerto: "📖 Isso! Um verso por linha.",
-      erro: "Cada versinho ocupa uma linha nova.",
+      pergunta: "Qual começa com maiúscula?",
+      opcoes: ["o pato", "O PATO", "opato"],
+      correta: 1,
+      acerto: "O 'O' está grandão!",
+      erro: "Maiúscula é a letra GRANDONA.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Espaço entre palavras",
-      instrucao: "Toque pra ouvir. Entre as palavras eu deixo:",
-      figura: { imagemUrl: balaoImg, rotulo: "🎈" },
-      pergunta: "O quê?",
-      opcoes: ["ESPAÇO", "NADA", "PONTO"],
-      correta: 0,
-      acerto: "👍 ESPAÇO separa as palavras.",
-      erro: "Palavras precisam de ESPAÇO entre si.",
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Achar o ponto",
+      instrucao: "Qual tem PONTO no fim?",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "O GATO DORME" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "O GATO DORME." },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "O GATO DORME!" },
+      ],
+      pergunta: "Qual tem PONTO FINAL?",
+      opcoes: ["Sem ponto", "Com ponto (.)", "Com !"],
+      correta: 1,
+      acerto: "Ponto (.) — fecha a frase normal!",
+      erro: "Procure o pontinho (.) no fim.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Registrar é…",
-      instrucao: "Toque pra ouvir. Registrar uma cantiga é:",
-      figura: { imagemUrl: livroImg, rotulo: "📓" },
-      pergunta: "Registrar é:",
-      opcoes: ["Escrever pra guardar", "Só cantar", "Dançar"],
-      correta: 0,
-      acerto: "✍️ Isso! Escrever pra guardar.",
-      erro: "Registrar = escrever pra guardar.",
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Frase TODA certa",
+      instrucao: "Qual está com maiúscula + espaços + ponto?",
+      grupos: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "o sapo pula" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "O SAPO PULA." },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "OSAPOPULA" },
+      ],
+      pergunta: "Qual está toda certa?",
+      opcoes: ["o sapo pula", "O SAPO PULA.", "OSAPOPULA"],
+      correta: 1,
+      acerto: "Perfeito — maiúscula + espaços + ponto!",
+      erro: "Precisa de todos os 3: maiúscula, espaços, ponto.",
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Ordem dos versos",
-      instrucao: "Arraste cada verso pra ordem certa de 'Ciranda, cirandinha'.",
+      tipo: "ligar",
+      titulo: "Fase 4 · Frase x Figura",
+      instrucao: "Ligue cada frase à figura.",
       pares: [
-        { item: "Ciranda, cirandinha", alvo: "1º" },
-        { item: "Vamos todos cirandar", alvo: "2º" },
-        { item: "Vamos dar a meia volta", alvo: "3º" },
-      ],
-      alvosVisuais: [
-        { nome: "1º", cor: "#34D399", capacidade: 1 },
-        { nome: "2º", cor: "#FBBF24", capacidade: 1 },
-        { nome: "3º", cor: "#A78BFA", capacidade: 1 },
+        { a: "O PATO NADA.", b: "pato", aImagem: estrelaImg, bImagem: patoImg },
+        { a: "O SAPO PULA.", b: "sapo", aImagem: estrelaImg, bImagem: sapoImg },
+        { a: "O GATO DORME.", b: "gato", aImagem: estrelaImg, bImagem: gatoImg },
+        { a: "O SOL BRILHA.", b: "sol", aImagem: estrelaImg, bImagem: solImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Caderno da Coruja",
-      instrucao: "A Coruja quer preservar a cantiga do sapo. O que ela deve fazer?",
-      pergunta: "Escolha:",
-      opcoes: [
-        { nome: "REGISTRAR", imagemUrl: livroImg, rotulo: "📓 Escrever no caderno" },
-        { nome: "APAGAR", imagemUrl: chocalhoImg, rotulo: "❌ Apagar" },
-        { nome: "GRITAR", imagemUrl: tamborImg, rotulo: "🥁 Só gritar" },
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Pausa maior",
+      instrucao: "Quando o leitor faz pausa MAIOR?",
+      grupos: [
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "no ponto" },
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "no espaço" },
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "na maiúscula" },
       ],
+      pergunta: "Pausa maior é no…",
+      opcoes: ["Ponto final", "Espaço entre palavras", "Maiúscula"],
       correta: 0,
-      acerto: "📓 Registrar = guardar pra sempre!",
-      erro: "Pra preservar, é preciso REGISTRAR (escrever).",
+      acerto: "No ponto se respira fundo!",
+      erro: "Espaço = pausinha. Ponto = pausa MAIOR.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Registrar é:", opcoes: ["Escrever", "Cantar", "Dançar"], correta: 0, explicacao: "Escrever.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "✍️" } },
-      { pergunta: "Cada verso:", opcoes: ["Uma linha", "Tudo junto", "Sem letra"], correta: 0, explicacao: "Uma linha.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📏" } },
-      { pergunta: "Entre palavras:", opcoes: ["Espaço", "Nada", "Ponto"], correta: 0, explicacao: "Espaço.", visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "␣" } },
+      { pergunta: "O que ABRE a frase?", opcoes: ["Ponto", "Maiúscula"], correta: 1, explicacao: "Maiúscula." },
+      { pergunta: "O que FECHA a frase?", opcoes: ["Ponto", "Maiúscula"], correta: 0, explicacao: "Ponto." },
+      { pergunta: "Qual está certa?", opcoes: ["o sol", "O SOL BRILHA."], correta: 1, explicacao: "Maiúscula + ponto." },
     ],
     medio: [
-      { pergunta: "'Ciranda, cirandinha' é:", opcoes: ["Cantiga", "Receita", "Aviso"], correta: 0, explicacao: "Cantiga.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎵" } },
-      { pergunta: "Registrar serve pra:", opcoes: ["Guardar", "Perder", "Esconder"], correta: 0, explicacao: "Guardar.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "💾" } },
-      { pergunta: "Escrever cantiga ajuda:", opcoes: ["Outras crianças", "Ninguém", "Só o autor"], correta: 0, explicacao: "Ajuda todos.", visual: { tipo: "itens", imagemUrl: pintinhoImg, quantidade: 1, rotulo: "🧒" } },
+      {
+        pergunta: "Qual figura combina com 'A FLOR CAIU.'?",
+        opcoes: ["Flor", "Gato", "Sapo"],
+        correta: 0,
+        explicacao: "Flor.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+          ],
+        },
+      },
+      { pergunta: "'O RATO CORRE' está completo?", opcoes: ["Sim", "Falta o ponto"], correta: 1, explicacao: "Falta o ponto final." },
+      { pergunta: "Pausa maior é no…", opcoes: ["Espaço", "Ponto"], correta: 1, explicacao: "Ponto." },
     ],
     dificil: [
-      { pergunta: "Tradição oral é:", opcoes: ["Passa de boca em boca", "Vem só de livros", "Nasce na TV"], correta: 0, explicacao: "De boca em boca.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🗣️" } },
-      { pergunta: "Ao registrar cuido de:", opcoes: ["Verso por linha e espaços", "Só cor", "Só tamanho"], correta: 0, explicacao: "Verso por linha + espaços.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📖" } },
-      { pergunta: "Quem registra cantiga:", opcoes: ["Preserva a cultura", "Perde tempo", "Nada muda"], correta: 0, explicacao: "Preserva cultura.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "🌟" } },
+      { pergunta: "Qual frase está TODA certa?", opcoes: ["obolarolou.", "A BOLA ROLOU.", "ABOLAROLOU"], correta: 1, explicacao: "Maiúscula + espaços + ponto." },
+      {
+        pergunta: "Qual figura combina com 'A CASA É AZUL.'?",
+        opcoes: ["Casa", "Bola", "Flor"],
+        correta: 0,
+        explicacao: "Casa.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+      },
+      { pergunta: "Se falta o ponto na frase, ela:", opcoes: ["Está certa", "Está incompleta"], correta: 1, explicacao: "Frase precisa fechar." },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP19" },
+  proximaHabilidade: {
+    codigo: "EF01LP19",
+    titulo: "Ler duas frases seguidas (mini-texto)",
+  },
 };
 
 export default aula;

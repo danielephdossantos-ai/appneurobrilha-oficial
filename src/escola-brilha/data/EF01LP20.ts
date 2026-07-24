@@ -1,234 +1,268 @@
 import type { Aula } from "../types";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
-import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
-import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as velaImg } from "@/assets/neuro-treino/objetos/vela.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as nuvemImg } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
 
 /**
- * EF01LP20 — Aula 020
- * BNCC: Identificar e reproduzir a formatação de listas, agendas, calendários,
- * regras, avisos, convites, receitas, instruções e legendas.
- * Missão: "As Placas dos Textos".
+ * EF01LP20 — Aula 020 · MINHA PRIMEIRA LEITURA FLUENTE
+ * Fecha o Lote 5. Mini-texto de 3 frases lido com fluência inicial.
  */
 const aula: Aula = {
   codigo: "EF01LP20",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "As Placas dos Textos",
-
+  disciplina: "Português",
+  titulo: "Minha Primeira Leitura Fluente",
   narrativa: {
-    titulo: "As Placas dos Textos",
+    titulo: "Minha Primeira Leitura Fluente",
     contexto:
-      "Os textos do dia a dia usam placas próprias: lista tem itens em linhas, calendário tem quadrinhos com dias, convite tem borda bonita…",
+      "Brilha juntou tudo o que aprendeu: sílabas, palavras, frases. Hoje ele vai LER SOZINHO um mini-texto de 3 frases — a primeira leitura fluente da vida dele.",
     problema:
-      "As placas caíram das paredes da Floresta e os textos ficaram sem forma.",
-    convite: "Bora ajudar o Brilha a devolver cada texto ao seu formato?",
+      "Ler fluente é ler seguido, sem gaguejar em cada sílaba, com pausa nos pontos e sentido nas palavras.",
+    convite: "Bora fazer sua primeira leitura fluente do jeito certo?",
   },
-
   conhecimentosPrevios: [
-    "Reconhecer lista, convite, aviso, receita (EF01LP17).",
-    "Perceber que cada texto tem finalidade.",
-    "Ler pequenos textos com apoio.",
+    "Ler frases de 3 a 5 palavras (LP15, LP17).",
+    "Perceber espaço, maiúscula e ponto (LP16, LP18).",
+    "Ler mini-texto de 2 frases (LP19).",
   ],
-
-  missao:
-    "Identificar o formato (diagramação) de listas, convites, calendários, avisos e receitas — e reproduzir esse formato ao escrever.",
-
+  missao: "Ler um mini-texto de 3 frases com fluência inicial, entendendo o que leu.",
   objetivos: [
-    "Perceber a forma visual de cada gênero.",
-    "Diferenciar convite, aviso, lista, receita e calendário pelo formato.",
-    "Reproduzir a formatação em pequenos textos.",
-    "Perceber que forma e função caminham juntas.",
+    "Ler 3 frases seguidas sem parar em cada sílaba.",
+    "Fazer pausa maior em cada ponto final.",
+    "Manter o sentido do mini-texto.",
+    "Responder perguntas de compreensão sobre o texto.",
   ],
-
-  motivacao: "A forma do texto já conta metade do recado!",
-
+  motivacao:
+    "Ler fluente é o começo da autonomia. Quem lê fluente aprende sozinho o resto da vida.",
   explicacao:
-    "Cada texto tem uma FORMA:\n\n📝 LISTA → itens um embaixo do outro.\n📅 CALENDÁRIO → quadradinhos com dias.\n💌 CONVITE → borda, título grande, DATA e LUGAR.\n📢 AVISO → letras grandes, mensagem curta.\n🍰 RECEITA → 2 partes: ingredientes + modo de fazer.",
-
+    "Mini-texto de hoje:\n\n👉 'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.'\n\nComo ler fluente:\n1) Não pare em cada sílaba. Junte a palavra inteira.\n2) Pausinha entre palavras (espaço).\n3) Pausa MAIOR no ponto final.\n4) No fim, pense: o que aconteceu no texto?\n\nOutro mini-texto:\n👉 'O PATO NADA. O SAPO PULA. O GATO OLHA.'",
+  explicacaoAtiva: [
+    {
+      texto: "Leia devagar mas seguido: 'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.'",
+      exemplo: "3 frases · 3 pontos · 3 pausas maiores.",
+      imagem: solImg,
+      imagemAlt: "Sol brilhando",
+      checagem: {
+        pergunta: "Quantas frases tem o mini-texto?",
+        opcoes: ["2", "3", "4"],
+        correta: 1,
+        explicacao: "3 frases, 3 pontos.",
+      },
+    },
+    {
+      texto: "Compreensão: o que o SOL faz no texto?",
+      exemplo: "1ª frase: O SOL BRILHA. Verbo = BRILHA.",
+      imagem: solImg,
+      imagemAlt: "Sol",
+      checagem: {
+        pergunta: "O que o SOL faz no texto?",
+        opcoes: ["Passa", "Brilha", "Abre"],
+        correta: 1,
+        explicacao: "O sol BRILHA (1ª frase).",
+      },
+    },
+    {
+      texto: "E a FLOR? Aparece em qual frase?",
+      exemplo: "3ª frase: A FLOR ABRE.",
+      imagem: florImg,
+      imagemAlt: "Flor abrindo",
+      checagem: {
+        pergunta: "O que a FLOR faz no texto?",
+        opcoes: ["Brilha", "Passa", "Abre"],
+        correta: 2,
+        explicacao: "A flor ABRE (3ª frase).",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Cada texto tem um jeito de ser escrito.",
-    nivel2: "A forma ajuda a entender rápido o texto.",
-    nivel3: "Convite tem título, data, lugar e é enfeitado.",
-    nivel4: "Receita separa ingredientes e modo de fazer.",
+    nivel1: "Ler fluente = ler seguido, sem gaguejar em cada sílaba.",
+    nivel2: "Pausinha no espaço, pausa MAIOR no ponto.",
+    nivel3: "Depois de ler, pense: o que aconteceu no texto?",
+    nivel4: "Fluência inicial + compreensão: leitor autônomo emergente.",
   },
-
   exemploResolvido: {
-    enunciado: "Qual texto tem quadradinhos com dias?",
+    enunciado: "Leia: 'O PATO NADA. O SAPO PULA. O GATO OLHA.' O que o GATO faz?",
     passos: [
-      "Pense: onde vejo dias e semanas?",
-      "Quadros pequenos com números.",
-      "É o CALENDÁRIO.",
+      "Leio as 3 frases com pausa nos pontos.",
+      "Procuro a frase do gato: 3ª frase.",
+      "3ª frase: 'O GATO OLHA.'",
+      "Resposta: o gato OLHA.",
     ],
-    resposta: "CALENDÁRIO. ✅",
+    resposta: "OLHA.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Qual formato mostra itens um embaixo do outro?",
-    resposta: "LISTA.",
-    explicacao: "Lista organiza itens em linhas.",
+    enunciado: "No mini-texto 'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.', quem BRILHA?",
+    resposta: "O SOL.",
+    explicacao: "1ª frase: O SOL BRILHA.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Itens em linhas:",
+      pergunta: "Quem BRILHA?",
       opcoes: [
-        { nome: "lista", imagemUrl: livroImg },
-        { nome: "convite", imagemUrl: presenteImg },
-        { nome: "receita", imagemUrl: boloImg },
+        { nome: "sol", imagemUrl: solImg },
+        { nome: "nuvem", imagemUrl: nuvemImg },
+        { nome: "flor", imagemUrl: florImg },
       ],
-      respostaCerta: "lista",
+      respostaCerta: "sol",
     },
   },
-
   exercicios: [
-    { enunciado: "Convite tem sempre…", resposta: "DATA e LUGAR.", dica: "Quando e onde." },
-    { enunciado: "Receita tem duas partes:", resposta: "INGREDIENTES + MODO DE FAZER.", dica: "O que usa e como faz." },
-    { enunciado: "Calendário mostra:", resposta: "DIAS em quadradinhos.", dica: "Semanas e datas." },
+    { enunciado: "🔊 'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.' — quantas frases?", resposta: "3.", dica: "Conte os pontos." },
+    { enunciado: "🔊 Nesse texto, quem PASSA?", resposta: "A NUVEM.", dica: "2ª frase." },
+    { enunciado: "🔊 Nesse texto, quem ABRE?", resposta: "A FLOR.", dica: "3ª frase." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: identifique o formato certo.",
-    resposta: "A forma vai com a função.",
+    enunciado: "Desafio Brilha: ler o mini-texto e responder 3 perguntas.",
+    resposta: "1ª quem brilha → SOL · 2ª quem passa → NUVEM · 3ª quem abre → FLOR.",
     visual: {
       cena: [
-        { personagem: "LIVRO", itemImagemUrl: livroImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "PRESENTE", itemImagemUrl: presenteImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "BOLO", itemImagemUrl: boloImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "ESCOLA", itemImagemUrl: escolaImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "MAÇÃ", itemImagemUrl: macaImg, quantidade: 1, cor: "#EF4444" },
+        { personagem: "1ª: O SOL BRILHA", itemImagemUrl: solImg, quantidade: 1, cor: "#F59E0B" },
+        { personagem: "2ª: A NUVEM PASSA", itemImagemUrl: nuvemImg, quantidade: 1, cor: "#93C5FD" },
+        { personagem: "3ª: A FLOR ABRE", itemImagemUrl: florImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
-        { pergunta: "Itens um embaixo do outro:", opcoes: ["Lista", "Convite", "Aviso"], correta: 0, explicacao: "Lista." },
-        { pergunta: "Quadradinhos com dias:", opcoes: ["Calendário", "Receita", "Convite"], correta: 0, explicacao: "Calendário." },
-        { pergunta: "Título + data + lugar:", opcoes: ["Convite", "Lista", "Legenda"], correta: 0, explicacao: "Convite." },
-        { pergunta: "Ingredientes + modo:", opcoes: ["Receita", "Aviso", "Lista"], correta: 0, explicacao: "Receita." },
-        { pergunta: "Letra grande e curta:", opcoes: ["Aviso", "Convite", "Receita"], correta: 0, explicacao: "Aviso." },
+        { pergunta: "Quem BRILHA?", opcoes: ["Sol", "Nuvem", "Flor"], correta: 0, explicacao: "1ª frase — o sol." },
+        { pergunta: "Quem PASSA?", opcoes: ["Sol", "Nuvem", "Flor"], correta: 1, explicacao: "2ª frase — a nuvem." },
+        { pergunta: "Quem ABRE?", opcoes: ["Sol", "Nuvem", "Flor"], correta: 2, explicacao: "3ª frase — a flor." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "📋 Lista = linhas de itens.",
-      "📅 Calendário = quadradinhos com dias.",
-      "💌 Convite = data + lugar + enfeite.",
-      "🍰 Receita = ingredientes + modo.",
-      "📢 Aviso = curto e chamativo.",
+      "Fluência = ler seguido, com sentido.",
+      "Pausinha entre palavras, pausa MAIOR no ponto.",
+      "Depois de ler, pense: o que aconteceu?",
+      "Cada frase conta UMA coisa que aconteceu.",
     ],
-    dica: "Olhe primeiro o FORMATO — ele já entrega o tipo do texto.",
+    dica: "Se travou, respire fundo, aponte o dedo e leia palavra por palavra.",
   },
-
   quiz: [
-    { pergunta: "Itens em linhas:", opcoes: ["Lista", "Convite", "Aviso"], correta: 0, explicacao: "Lista." },
-    { pergunta: "Quadradinhos com dias:", opcoes: ["Calendário", "Convite", "Receita"], correta: 0, explicacao: "Calendário." },
-    { pergunta: "Título + data + lugar:", opcoes: ["Convite", "Lista", "Aviso"], correta: 0, explicacao: "Convite." },
-    { pergunta: "2 partes (ingredientes/modo):", opcoes: ["Receita", "Convite", "Legenda"], correta: 0, explicacao: "Receita." },
-    { pergunta: "Aviso é:", opcoes: ["Curto e chamativo", "Longo e privado", "Só oral"], correta: 0, explicacao: "Curto e chamativo." },
+    { pergunta: "'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.' tem quantas frases?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 frases." },
+    { pergunta: "Nesse texto, quem BRILHA?", opcoes: ["Sol", "Nuvem", "Flor"], correta: 0, explicacao: "O sol." },
+    { pergunta: "Ler fluente é…", opcoes: ["Gaguejar em cada letra", "Ler seguido com sentido"], correta: 1, explicacao: "Ler seguido." },
+    { pergunta: "Pausa maior é…", opcoes: ["Na maiúscula", "No ponto final"], correta: 1, explicacao: "No ponto." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Detetive dos Formatos! Missão em Família: procurem em casa uma lista, um calendário e uma receita — mostrem os formatos.",
-
+    "🏅 Medalha: LEITOR FLUENTE INICIAL! Missão em Casa: ler um mini-texto de 3 frases pra alguém. Você já lê livros de verdade.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Bons formatos ajudam nosso cérebro a entender mais rápido — é por isso que o cardápio, a bula e o convite parecem tão diferentes.",
+      "Quando uma criança lê 3 frases seguidas com sentido, o cérebro dela cria uma nova estrada — a mesma estrada que qualquer leitor adulto usa a vida toda.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Itens em linhas",
-      instrucao: "Toque pra ouvir. Qual texto mostra itens um embaixo do outro?",
-      pergunta: "Formato certo:",
-      opcoes: [
-        { nome: "LISTA", imagemUrl: livroImg, rotulo: "📝 LISTA" },
-        { nome: "CONVITE", imagemUrl: presenteImg, rotulo: "💌 CONVITE" },
-        { nome: "RECEITA", imagemUrl: boloImg, rotulo: "🍰 RECEITA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Quantas frases?",
+      instrucao: "'O SOL BRILHA. A NUVEM PASSA. A FLOR ABRE.' — quantas frases?",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "1ª" },
+        { imagemUrl: nuvemImg, quantidade: 1, rotulo: "2ª" },
+        { imagemUrl: florImg, quantidade: 1, rotulo: "3ª" },
       ],
-      correta: 0,
-      acerto: "📝 LISTA!",
-      erro: "Itens em linhas = LISTA.",
+      pergunta: "Quantas frases?",
+      opcoes: ["2", "3", "4"],
+      correta: 1,
+      acerto: "3 frases — 3 pontos!",
+      erro: "Conte os pontos: 3.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Convite",
-      instrucao: "Toque pra ouvir. O que um convite precisa sempre ter?",
-      figura: { imagemUrl: velaImg, rotulo: "🎉" },
-      pergunta: "Escolha:",
-      opcoes: ["DATA e LUGAR", "PREÇO", "MARCA"],
-      correta: 0,
-      acerto: "📅 DATA e LUGAR!",
-      erro: "Convite precisa de DATA e LUGAR.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Receita",
-      instrucao: "Toque pra ouvir. Receita tem quantas partes?",
-      figura: { imagemUrl: boloImg, rotulo: "🎂" },
-      pergunta: "Quantas partes?",
-      opcoes: ["2 (ingredientes + modo)", "1", "5"],
-      correta: 0,
-      acerto: "🥣 Ingredientes + modo de fazer.",
-      erro: "Receita tem 2 partes.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Cada formato no seu texto",
-      instrucao: "Arraste cada formato pro texto certo.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Quem faz o quê?",
+      instrucao: "Ligue quem faz cada ação.",
       pares: [
-        { item: "Itens em linhas", alvo: "LISTA" },
-        { item: "Quadradinhos com dias", alvo: "CALENDÁRIO" },
-        { item: "Data + lugar", alvo: "CONVITE" },
-      ],
-      alvosVisuais: [
-        { nome: "LISTA", cor: "#34D399", capacidade: 1 },
-        { nome: "CALENDÁRIO", cor: "#60A5FA", capacidade: 1 },
-        { nome: "CONVITE", cor: "#F472B6", capacidade: 1 },
+        { a: "BRILHA", b: "sol", aImagem: estrelaImg, bImagem: solImg },
+        { a: "PASSA", b: "nuvem", aImagem: estrelaImg, bImagem: nuvemImg },
+        { a: "ABRE", b: "flor", aImagem: estrelaImg, bImagem: florImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Placa da Coruja",
-      instrucao: "A Coruja precisa avisar a turma que a aula será no pátio. Que placa usa?",
-      pergunta: "Escolha:",
-      opcoes: [
-        { nome: "AVISO", imagemUrl: escolaImg, rotulo: "📢 AVISO (curto e chamativo)" },
-        { nome: "RECEITA", imagemUrl: boloImg, rotulo: "🍰 RECEITA" },
-        { nome: "LISTA", imagemUrl: livroImg, rotulo: "📝 LISTA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Compreensão",
+      instrucao: "No texto, quem PASSA?",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: nuvemImg, quantidade: 1, rotulo: "nuvem" },
+        { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
       ],
-      correta: 0,
-      acerto: "📢 AVISO — curto e visível!",
-      erro: "Pra avisar todos = AVISO.",
+      pergunta: "Quem passa?",
+      opcoes: ["Sol", "Nuvem", "Flor"],
+      correta: 1,
+      acerto: "A nuvem — 2ª frase!",
+      erro: "Volte na 2ª frase: A NUVEM PASSA.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Monta o mini-texto",
+      instrucao: "Ordene as frases: SOL → NUVEM → FLOR.",
+      itens: ["O SOL BRILHA.", "A NUVEM PASSA.", "A FLOR ABRE."],
+      imagens: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "1ª · SOL" },
+        { imagemUrl: nuvemImg, quantidade: 1, rotulo: "2ª · NUVEM" },
+        { imagemUrl: florImg, quantidade: 1, rotulo: "3ª · FLOR" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Outro mini-texto",
+      instrucao: "'O PATO NADA. O SAPO PULA. O GATO OLHA.' Quem OLHA?",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+      ],
+      pergunta: "Quem olha?",
+      opcoes: ["Pato", "Sapo", "Gato"],
+      correta: 2,
+      acerto: "O gato olha — 3ª frase!",
+      erro: "Volte na 3ª frase: O GATO OLHA.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Itens em linhas:", opcoes: ["Lista", "Convite", "Aviso"], correta: 0, explicacao: "Lista.", visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "📝" } },
-      { pergunta: "Dias em quadradinhos:", opcoes: ["Calendário", "Receita", "Convite"], correta: 0, explicacao: "Calendário.", visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "📅" } },
-      { pergunta: "Enfeitado + data:", opcoes: ["Convite", "Lista", "Aviso"], correta: 0, explicacao: "Convite.", visual: { tipo: "itens", imagemUrl: presenteImg, quantidade: 1, rotulo: "💌" } },
+      { pergunta: "Mini-texto tem quantas frases no mínimo?", opcoes: ["1", "2"], correta: 1, explicacao: "2 ou mais." },
+      { pergunta: "Pausa maior é…", opcoes: ["No espaço", "No ponto"], correta: 1, explicacao: "No ponto." },
+      { pergunta: "Ler fluente é…", opcoes: ["Gaguejar", "Ler seguido"], correta: 1, explicacao: "Ler seguido." },
     ],
     medio: [
-      { pergunta: "Receita tem:", opcoes: ["Ingredientes e modo", "Só título", "Só data"], correta: 0, explicacao: "Ingredientes + modo.", visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "🥣" } },
-      { pergunta: "Aviso é:", opcoes: ["Curto e chamativo", "Longo", "Secreto"], correta: 0, explicacao: "Curto e chamativo.", visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "📢" } },
-      { pergunta: "Legenda descreve:", opcoes: ["Uma foto ou desenho", "O tempo", "A idade"], correta: 0, explicacao: "Descreve imagem.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "🖼️" } },
+      {
+        pergunta: "Em 'O SOL BRILHA. A LUA APARECE.', quem APARECE?",
+        opcoes: ["Sol", "Lua"],
+        correta: 1,
+        explicacao: "A lua.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+            { imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
+          ],
+        },
+      },
+      { pergunta: "Depois de ler, o leitor deve…", opcoes: ["Esquecer", "Pensar no que aconteceu"], correta: 1, explicacao: "Compreensão." },
+      { pergunta: "Cada frase conta…", opcoes: ["Nada", "Uma coisa que aconteceu"], correta: 1, explicacao: "Uma ideia por frase." },
     ],
     dificil: [
-      { pergunta: "Formato ajuda a:", opcoes: ["Entender rápido", "Confundir", "Nada"], correta: 0, explicacao: "Entender rápido.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "👀" } },
-      { pergunta: "Convite sem data:", opcoes: ["Falta info importante", "Está perfeito", "É melhor"], correta: 0, explicacao: "Falta info.", visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "❓" } },
-      { pergunta: "Instrução de montagem:", opcoes: ["Passo a passo em ordem", "Bagunçada", "Só desenho"], correta: 0, explicacao: "Passo a passo.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "🔧" } },
+      { pergunta: "'O RATO CORRE. O GATO PULA. A CASA CAI.' — 2ª frase é…", opcoes: ["O RATO CORRE", "O GATO PULA", "A CASA CAI"], correta: 1, explicacao: "2ª frase." },
+      {
+        pergunta: "Nesse texto, quem CAI?",
+        opcoes: ["Rato", "Gato", "Casa"],
+        correta: 2,
+        explicacao: "A casa cai (3ª frase).",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+      },
+      { pergunta: "Quem lê fluente pode…", opcoes: ["Ler livrinhos sozinho", "Só ouvir"], correta: 0, explicacao: "Autonomia leitora." },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP21" },
+  proximaHabilidade: {
+    codigo: "EF01LP21",
+    titulo: "Textos com título e frases mais longas",
+  },
 };
 
 export default aula;

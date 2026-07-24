@@ -1,353 +1,291 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as galinhaImg } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
-import { url as pintinhoImg } from "@/assets/neuro-treino/objetos/pintinho.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP16 — Aula 016 · Biblioteca Pedagógica Escola Brilha
- * 1º Ano · Língua Portuguesa
- * Missão do Dia: "A Roda das Parlendas".
- * BNCC: Ler e compreender quadras, quadrinhas, parlendas e trava-línguas.
+ * EF01LP16 — Aula 016 · O ESPAÇO ENTRE AS PALAVRAS
+ * Foco: segmentação lexical dentro da frase. A criança percebe que
+ * cada palavra é uma "ilha" separada por espaço.
  */
 const aula: Aula = {
   codigo: "EF01LP16",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "A Roda das Parlendas",
-
+  disciplina: "Português",
+  titulo: "O Espaço entre as Palavras",
   narrativa: {
-    titulo: "A Roda das Parlendas",
+    titulo: "O Espaço entre as Palavras",
     contexto:
-      "Na Floresta Encantada, os animais formaram uma grande roda cantada. Cada bicho trouxe uma parlenda antiga que aprendeu com a vovó Coruja.",
+      "Brilha leu 'O PATO NADA.' e ficou pensando: por que tem um espaço vazio entre O e PATO? E entre PATO e NADA?",
     problema:
-      "Mas o vento levou os versos e agora ninguém sabe qual parlenda combina com cada brincadeira.",
-    convite:
-      "Bora ajudar o Brilha a escutar cada versinho e descobrir de qual brincadeira ele é?",
+      "Sem o espaço, a frase vira uma palavra gigante: OPATONADA — e ninguém entende nada.",
+    convite: "Bora descobrir por que o espaço é o melhor amigo do leitor?",
   },
-
   conhecimentosPrevios: [
-    "Escutar histórias e cantigas.",
-    "Perceber palavras que rimam.",
-    "Reconhecer palavras conhecidas em pequenos textos.",
+    "Ler palavras CVCV (PATO, SAPO, MAPA).",
+    "Ler uma frase curta (LP15).",
+    "Reconhecer maiúscula no início e ponto no fim.",
   ],
-
-  missao:
-    "Ouvir, ler junto e compreender parlendas, quadrinhas e trava-línguas, percebendo o tema e a brincadeira que cada uma acompanha.",
-
+  missao: "Perceber o espaço entre palavras e contar quantas palavras tem uma frase.",
   objetivos: [
-    "Reconhecer parlendas, quadrinhas e trava-línguas.",
-    "Perceber a finalidade lúdica desses textos.",
-    "Identificar o tema/assunto de cada versinho.",
-    "Perceber ritmo, rima e repetição.",
+    "Identificar espaços entre palavras como separadores.",
+    "Contar quantas palavras tem uma frase.",
+    "Separar uma frase 'grudada' em palavras.",
+    "Ler frases pausando entre cada palavra.",
   ],
-
   motivacao:
-    "Parlenda é brincadeira feita de palavras — quem canta se diverte duas vezes!",
-
+    "O espaço em branco é uma invenção antiga: antes, tudo era escrito grudado. Quando inventaram o espaço, a leitura ficou MUITO mais fácil.",
   explicacao:
-    "PARLENDA é um versinho antigo, cheio de rima e ritmo, usado em brincadeiras.\n\n🐔 'Uma, duas, angolinhas, três, quatro, caminito…' (brincar de contar)\n\n🐸 'O sapo não lava o pé, não lava porque não quer…' (roda cantada)\n\nToda parlenda tem um TEMA (do que ela fala) e serve pra uma brincadeira.",
-
+    "Cada palavra é uma ILHA. Entre uma ilha e outra tem um mar branquinho: o ESPAÇO.\n\n👉 O·PATO·NADA. (3 ilhas)\n👉 A·LUA·BRILHA. (3 ilhas)\n👉 O·GATO·OLHA·A·LUA. (5 ilhas)\n\nSe alguém escrever OPATONADA sem espaço, ninguém consegue ler direito. O espaço avisa: 'acabou uma palavra, começa outra'.",
+  explicacaoAtiva: [
+    {
+      texto: "Olha a frase: 'O PATO NADA.' Cada palavra é uma ilha. Conta as ilhas.",
+      exemplo: "O · PATO · NADA · .",
+      imagem: patoImg,
+      imagemAlt: "Pato nadando",
+      checagem: {
+        pergunta: "Quantas palavras (ilhas) tem 'O PATO NADA'?",
+        opcoes: ["2", "3", "4"],
+        correta: 1,
+        explicacao: "O · PATO · NADA = 3 palavras.",
+      },
+    },
+    {
+      texto: "Agora essa: 'A LUA BRILHA NO CÉU.' Tem mais ilhas!",
+      exemplo: "A · LUA · BRILHA · NO · CÉU · .",
+      imagem: luaImg,
+      imagemAlt: "Lua brilhando no céu",
+      checagem: {
+        pergunta: "Quantas palavras tem 'A LUA BRILHA NO CÉU'?",
+        opcoes: ["3", "4", "5"],
+        correta: 2,
+        explicacao: "A · LUA · BRILHA · NO · CÉU = 5.",
+      },
+    },
+    {
+      texto: "E se tirar o espaço? 'OPATONADA' fica IMPOSSÍVEL de ler. Espaço = amigo do leitor.",
+      exemplo: "SEM espaço: OPATONADA ❌ · COM espaço: O PATO NADA ✅",
+      checagem: {
+        pergunta: "Qual está ESCRITA CERTO?",
+        opcoes: ["OGATODORME", "O GATO DORME", "ogato dorme"],
+        correta: 1,
+        explicacao: "Espaço entre cada palavra e maiúscula no começo.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Parlenda é um versinho pra brincar e cantar.",
-    nivel2: "Ela tem RIMA (sons parecidos no fim das palavras).",
-    nivel3: "Toda parlenda fala de ALGUMA COISA — é o tema.",
-    nivel4: "Trava-língua é uma parlenda difícil de falar rápido.",
+    nivel1: "Cada palavra é uma ilha. Entre elas tem um espaço.",
+    nivel2: "Sem espaço, as palavras grudam e ninguém lê. Com espaço, dá pra ler.",
+    nivel3: "Contar espaços + 1 = número de palavras da frase.",
+    nivel4: "Segmentação lexical: a criança percebe a palavra como unidade dentro do texto escrito.",
   },
-
   exemploResolvido: {
-    enunciado:
-      "Do que fala esta parlenda? 'O sapo não lava o pé, não lava porque não quer…'",
+    enunciado: "Quantas palavras tem 'O SAPO PULA NA PEDRA.'?",
     passos: [
-      "Escute com atenção quem aparece: o SAPO.",
-      "O que ele faz? NÃO lava o pé.",
-      "Tema: um sapo que não quer se lavar.",
+      "Aponto o dedo em cada palavra: O ... SAPO ... PULA ... NA ... PEDRA.",
+      "Conto: 1, 2, 3, 4, 5.",
+      "5 palavras.",
     ],
-    resposta: "Fala de um SAPO que não lava o pé. ✅",
+    resposta: "5 palavras.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir. Qual bichinho é o personagem da parlenda 'O sapo não lava o pé'?",
-    resposta: "SAPO.",
-    explicacao: "A parlenda toda fala do SAPO.",
+    enunciado: "Toque na frase escrita do jeito CERTO (com espaços).",
+    resposta: "O GATO OLHA A LUA.",
+    explicacao: "Palavras separadas por espaço, maiúscula no começo, ponto no fim.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Quem é o personagem?",
+      pergunta: "Qual figura combina com 'O GATO OLHA A LUA.'?",
       opcoes: [
-        { nome: "sapo", imagemUrl: sapoImg },
         { nome: "gato", imagemUrl: gatoImg },
-        { nome: "galinha", imagemUrl: galinhaImg },
+        { nome: "pato", imagemUrl: patoImg },
+        { nome: "sapo", imagemUrl: sapoImg },
       ],
-      respostaCerta: "sapo",
+      respostaCerta: "gato",
     },
   },
-
   exercicios: [
-    {
-      enunciado: "Complete: 'O sapo não lava o ___.'",
-      resposta: "PÉ.",
-      dica: "É a parte do corpo que rima com 'quer'.",
-    },
-    {
-      enunciado: "Quem canta a parlenda da galinha do vizinho?",
-      resposta: "A GALINHA (bota ovo amarelinho).",
-      dica: "Bota ovinho amarelinho.",
-    },
-    {
-      enunciado: "Trava-língua serve pra:",
-      resposta: "BRINCAR falando rápido.",
-      dica: "Quem consegue falar sem tropeçar?",
-    },
+    { enunciado: "🔊 Quantas palavras tem 'O RATO CORRE.'?", resposta: "3.", dica: "O · RATO · CORRE." },
+    { enunciado: "🔊 Quantas palavras tem 'A BOLA ROLA NO CHÃO.'?", resposta: "5.", dica: "A · BOLA · ROLA · NO · CHÃO." },
+    { enunciado: "🔊 'OSOLBRILHA' está certo?", resposta: "Não — falta o ESPAÇO entre as palavras.", dica: "O · SOL · BRILHA." },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: escute cada versinho e diga do que a parlenda fala.",
-    resposta:
-      "Cada parlenda tem um tema e uma brincadeira.",
+    enunciado: "Desafio Brilha: contar palavras de 3 frases.",
+    resposta: "O PATO NADA → 3 · A LUA BRILHA NO CÉU → 5 · O SOL SAIU → 3.",
     visual: {
       cena: [
-        { personagem: "SAPO", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "GALINHA", itemImagemUrl: galinhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "PINTINHO", itemImagemUrl: pintinhoImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "RATO", itemImagemUrl: ratoImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "O PATO NADA", itemImagemUrl: patoImg, quantidade: 3, cor: "#60A5FA" },
+        { personagem: "A LUA BRILHA NO CÉU", itemImagemUrl: luaImg, quantidade: 5, cor: "#FBBF24" },
+        { personagem: "O SOL SAIU", itemImagemUrl: solImg, quantidade: 3, cor: "#F59E0B" },
       ],
       perguntas: [
         {
-          pergunta: "'O sapo não lava o pé…' fala de quem?",
-          opcoes: ["Sapo", "Gato", "Cachorro"],
-          correta: 0,
-          explicacao: "Parlenda do SAPO.",
+          pergunta: "Quantas palavras tem 'O PATO NADA'?",
+          opcoes: ["2", "3", "4"],
+          correta: 1,
+          explicacao: "3 palavras.",
         },
         {
-          pergunta: "'A galinha do vizinho bota ovo…'",
-          opcoes: ["Amarelinho", "Vermelhinho", "Azulzinho"],
-          correta: 0,
-          explicacao: "Ovo AMARELINHO — rima com vizinho.",
+          pergunta: "Quantas palavras tem 'A LUA BRILHA NO CÉU'?",
+          opcoes: ["4", "5", "6"],
+          correta: 1,
+          explicacao: "5 palavras.",
         },
         {
-          pergunta: "'Um, dois, feijão com arroz…' serve pra:",
-          opcoes: ["Contar/brincar", "Dormir", "Cozinhar"],
-          correta: 0,
-          explicacao: "É pra contar e brincar em roda.",
-        },
-        {
-          pergunta: "Trava-língua é feito pra:",
-          opcoes: ["Falar rápido brincando", "Ler em silêncio", "Cantar triste"],
-          correta: 0,
-          explicacao: "Trava-língua = brincar de falar rápido.",
-        },
-        {
-          pergunta: "Parlenda tem sempre:",
-          opcoes: ["Rima e ritmo", "Números", "Fotos"],
-          correta: 0,
-          explicacao: "Rima e ritmo fazem a graça.",
+          pergunta: "Qual frase está com o ESPAÇO certo?",
+          opcoes: ["OSOLSAIU", "O SOL SAIU.", "o solsaiu"],
+          correta: 1,
+          explicacao: "Espaço entre cada palavra, maiúscula, ponto.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🎵 Parlenda = versinho pra brincar.",
-      "🔁 Tem rima, ritmo e repetição.",
-      "🎯 Cada parlenda tem um TEMA (do que fala).",
-      "👅 Trava-língua = parlenda difícil de falar rápido.",
+      "Cada palavra é uma ILHA separada por ESPAÇO.",
+      "Contar espaços + 1 = número de palavras.",
+      "Sem espaço, a frase grudou e ninguém lê.",
+      "Frase começa com MAIÚSCULA e termina com PONTO.",
     ],
-    dica: "Escute o final das palavras — as rimas mostram o compasso.",
+    dica: "Aponta o dedo em cada palavra pra treinar a pausa.",
   },
-
   quiz: [
-    {
-      pergunta: "Parlenda serve pra:",
-      opcoes: ["Brincar e cantar", "Fazer conta", "Desenhar"],
-      correta: 0,
-      explicacao: "Parlenda = brincadeira com palavras.",
-    },
-    {
-      pergunta: "'O sapo não lava o ___' — o que rima?",
-      opcoes: ["PÉ", "MÃO", "OLHO"],
-      correta: 0,
-      explicacao: "Pé rima com quer.",
-    },
-    {
-      pergunta: "Trava-língua é pra:",
-      opcoes: ["Falar rápido", "Ler baixinho", "Dormir"],
-      correta: 0,
-      explicacao: "Trava-língua = falar rápido sem tropeçar.",
-    },
-    {
-      pergunta: "Toda parlenda tem:",
-      opcoes: ["Rima", "Só números", "Só letras difíceis"],
-      correta: 0,
-      explicacao: "Rima é a marca da parlenda.",
-    },
-    {
-      pergunta: "A parlenda da galinha do vizinho fala de:",
-      opcoes: ["Ovo amarelinho", "Bolo", "Sapato"],
-      correta: 0,
-      explicacao: "Ovo amarelinho.",
-    },
+    { pergunta: "Quantas palavras tem 'O GATO DORME.'?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "O · GATO · DORME." },
+    { pergunta: "Qual está CERTO?", opcoes: ["OGATODORME", "O GATO DORME.", "ogato dorme"], correta: 1, explicacao: "Espaços + maiúscula + ponto." },
+    { pergunta: "'A LUA BRILHA.' tem quantas palavras?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "A · LUA · BRILHA." },
+    { pergunta: "O que separa uma palavra da outra?", opcoes: ["Ponto", "Espaço", "Vírgula"], correta: 1, explicacao: "O espaço em branco." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Cantador de Parlendas! Missão em Família: escolham uma parlenda antiga da família e cantem juntos batendo palmas.",
-
+    "🏅 Medalha: Detetive dos Espaços! Missão em Casa: contar as palavras de 3 frases num livrinho.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "As parlendas passam de vovó pra neto há mais de 100 anos — quando você canta uma, mantém uma tradição viva!",
+      "Nos livros mais antigos do mundo, as palavras eram escritas TODAS GRUDADAS. Foi só depois que monges inventaram o espaço em branco pra facilitar a leitura.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · O sapo não lava o pé",
-      instrucao: "Toque pra ouvir. Quem é o personagem da parlenda?",
-      pergunta: "Personagem:",
-      opcoes: [
-        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
-        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
-        { nome: "RATO", imagemUrl: ratoImg, rotulo: "🐭 RATO" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Conta as palavras",
+      instrucao: "Quantas palavras tem 'O PATO NADA'?",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "O" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "PATO" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "NADA" },
       ],
-      correta: 0,
-      acerto: "🐸 Isso! É o SAPO.",
-      erro: "Escute de novo: 'O SAPO não lava o pé…'",
+      pergunta: "Quantas palavras?",
+      opcoes: ["2", "3", "4"],
+      correta: 1,
+      acerto: "3 palavras — O · PATO · NADA!",
+      erro: "Conta de novo: O · PATO · NADA = 3.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · A galinha do vizinho",
-      instrucao: "Toque pra ouvir. Que ovo a galinha bota?",
-      figura: { imagemUrl: galinhaImg, rotulo: "🐔" },
-      pergunta: "Bota ovo…?",
-      opcoes: ["AMARELINHO", "VERMELHO", "PRETO"],
-      correta: 0,
-      acerto: "🥚 Ovo AMARELINHO!",
-      erro: "Rima com vizinho: AMARELINHO.",
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Frase maior",
+      instrucao: "Quantas palavras tem 'A LUA BRILHA NO CÉU'?",
+      grupos: [
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "A" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "LUA" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "BRILHA" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "NO" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "CÉU" },
+      ],
+      pergunta: "Quantas palavras?",
+      opcoes: ["3", "4", "5"],
+      correta: 2,
+      acerto: "5 palavras!",
+      erro: "A · LUA · BRILHA · NO · CÉU = 5.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Um, dois, feijão com arroz",
-      instrucao: "Toque pra ouvir. Essa parlenda serve pra:",
-      figura: { imagemUrl: balaoImg, rotulo: "🎈" },
-      pergunta: "Pra que serve?",
-      opcoes: ["Contar e brincar", "Dormir", "Estudar sozinho"],
-      correta: 0,
-      acerto: "🎉 Isso! É pra CONTAR e brincar.",
-      erro: "É uma parlenda de contar/brincar em roda.",
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Achar o espaço",
+      instrucao: "Qual dessas está escrita CERTO?",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "OGATODORME" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "O GATO DORME." },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "ogatod orme" },
+      ],
+      pergunta: "Qual está certo?",
+      opcoes: ["OGATODORME", "O GATO DORME.", "ogatod orme"],
+      correta: 1,
+      acerto: "Espaço entre cada palavra, maiúscula, ponto!",
+      erro: "Toda palavra precisa de espaço antes e depois.",
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Cada parlenda no seu tema",
-      instrucao: "Arraste cada versinho pro tema certo.",
-      pares: [
-        { item: "O sapo não lava o pé", alvo: "BICHOS" },
-        { item: "A galinha do vizinho", alvo: "BICHOS" },
-        { item: "Um, dois, feijão com arroz", alvo: "CONTAR" },
-      ],
-      alvosVisuais: [
-        { nome: "BICHOS", cor: "#34D399", capacidade: 2 },
-        { nome: "CONTAR", cor: "#FBBF24", capacidade: 1 },
+      tipo: "ordenar",
+      titulo: "Fase 4 · Monta a frase",
+      instrucao: "Coloque as palavras na ordem: O · SAPO · PULA · NA · PEDRA.",
+      itens: ["O", "SAPO", "PULA", "NA", "PEDRA"],
+      imagens: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "1º · O" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "2º · SAPO" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "3º · PULA" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "4º · NA" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "5º · PEDRA" },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Trava-língua da Coruja",
-      instrucao: "A Coruja pediu: qual parlenda é DIFÍCIL de falar rápido (trava-língua)?",
-      pergunta: "Escolha o trava-língua:",
-      opcoes: [
-        { nome: "RATO", imagemUrl: ratoImg, rotulo: "🐭 O rato roeu a roupa…" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ Boa noite" },
-        { nome: "FLOR", imagemUrl: florImg, rotulo: "🌸 Dorme, dorme" },
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Frase e figura",
+      instrucao: "Qual figura combina com 'O GATO OLHA A LUA.'?",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
       ],
+      pergunta: "'O GATO OLHA A LUA' fala de quem?",
+      opcoes: ["Gato", "Pato", "Bola"],
       correta: 0,
-      acerto: "🐭 'O RATO roeu a roupa do rei de Roma' — clássico!",
-      erro: "Trava-língua tem sons repetidos difíceis: R, R, R…",
+      acerto: "O gato — a frase começa com O GATO.",
+      erro: "Leia de novo: O GATO OLHA A LUA.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      {
-        pergunta: "Parlenda é feita pra:",
-        opcoes: ["Brincar", "Somar", "Correr"],
-        correta: 0,
-        explicacao: "Brincar com palavras.",
-        visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "🎈" },
-      },
-      {
-        pergunta: "'O sapo não lava o…'",
-        opcoes: ["PÉ", "MÃO", "NARIZ"],
-        correta: 0,
-        explicacao: "PÉ rima com quer.",
-        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸" },
-      },
-      {
-        pergunta: "A galinha do vizinho bota ovo:",
-        opcoes: ["Amarelinho", "Preto", "Verde"],
-        correta: 0,
-        explicacao: "Amarelinho.",
-        visual: { tipo: "itens", imagemUrl: galinhaImg, quantidade: 1, rotulo: "🥚" },
-      },
+      { pergunta: "'O RATO CORRE' tem quantas palavras?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3." },
+      { pergunta: "O que separa palavras?", opcoes: ["Ponto", "Espaço", "Nada"], correta: 1, explicacao: "O espaço." },
+      { pergunta: "Qual está certo?", opcoes: ["OSOLSAIU", "O SOL SAIU.", "osolsaiu"], correta: 1, explicacao: "Espaço + ponto." },
     ],
     medio: [
+      { pergunta: "'A BOLA ROLA NO CHÃO' tem quantas palavras?", opcoes: ["3", "4", "5"], correta: 2, explicacao: "A · BOLA · ROLA · NO · CHÃO." },
       {
-        pergunta: "Toda parlenda tem:",
-        opcoes: ["Rima", "Fotos", "Números grandes"],
+        pergunta: "Qual figura combina com 'O MAPA CAIU.'?",
+        opcoes: ["Mapa", "Sapo", "Estrela"],
         correta: 0,
-        explicacao: "Rima e ritmo.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎵" },
+        explicacao: "A frase fala do MAPA.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: mapaImg, quantidade: 1, rotulo: "mapa" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "estrela" },
+          ],
+        },
       },
-      {
-        pergunta: "Trava-língua é pra:",
-        opcoes: ["Falar rápido", "Cantar triste", "Escrever"],
-        correta: 0,
-        explicacao: "Falar rápido sem tropeçar.",
-        visual: { tipo: "itens", imagemUrl: ratoImg, quantidade: 1, rotulo: "👅" },
-      },
-      {
-        pergunta: "Um, dois, feijão com arroz é parlenda de:",
-        opcoes: ["Contar", "Dormir", "Comer"],
-        correta: 0,
-        explicacao: "Contar/brincar.",
-        visual: { tipo: "itens", imagemUrl: pintinhoImg, quantidade: 1, rotulo: "1·2" },
-      },
+      { pergunta: "Se tiro os espaços de 'A LUA BRILHA', fica:", opcoes: ["ALUABRILHA", "A LUA", "LUA BRILHA"], correta: 0, explicacao: "Vira uma palavra grudada." },
     ],
     dificil: [
+      { pergunta: "'O SAPO PULA NA PEDRA.' tem quantas palavras?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "5 palavras." },
+      { pergunta: "Qual frase está TODA certa?", opcoes: ["ogato dorme.", "O GATO DORME.", "O GATODORME."], correta: 1, explicacao: "Maiúscula + espaços + ponto." },
       {
-        pergunta: "Quem passa parlendas de geração em geração?",
-        opcoes: ["A família e a comunidade", "Só a escola", "Só a TV"],
-        correta: 0,
-        explicacao: "Vem da tradição oral.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "👵" },
-      },
-      {
-        pergunta: "O tema de uma parlenda é:",
-        opcoes: ["Do que ela fala", "A cor", "O tamanho"],
-        correta: 0,
-        explicacao: "Tema = assunto.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "🎯" },
-      },
-      {
-        pergunta: "Quando canto uma parlenda antiga eu:",
-        opcoes: ["Mantenho a tradição", "Invento uma nova", "Faço uma conta"],
-        correta: 0,
-        explicacao: "Tradição viva.",
-        visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "❤️" },
+        pergunta: "Quantas palavras tem 'A CASA É AZUL'?",
+        opcoes: ["3", "4", "5"],
+        correta: 1,
+        explicacao: "A · CASA · É · AZUL = 4.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
       },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP17" },
+  proximaHabilidade: {
+    codigo: "EF01LP17",
+    titulo: "Frases com mais palavras (4 e 5 palavras)",
+  },
 };
 
 export default aula;

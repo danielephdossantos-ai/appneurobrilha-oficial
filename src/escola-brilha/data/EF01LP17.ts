@@ -1,232 +1,273 @@
 import type { Aula } from "../types";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
-import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as velaImg } from "@/assets/neuro-treino/objetos/vela.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP17 — Aula 017
- * BNCC: Planejar e produzir listas, agendas, calendários, avisos, convites, receitas…
- * Missão: "A Fábrica dos Bilhetinhos".
+ * EF01LP17 — Aula 017 · FRASES MAIORES (4 e 5 palavras)
+ * Foco: leitura de frases com preposição e artigo.
  */
 const aula: Aula = {
   codigo: "EF01LP17",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "A Fábrica dos Bilhetinhos",
-
+  disciplina: "Português",
+  titulo: "Frases um Pouco Maiores",
   narrativa: {
-    titulo: "A Fábrica dos Bilhetinhos",
+    titulo: "Frases um Pouco Maiores",
     contexto:
-      "O Brilha vai dar uma festa na Floresta! Precisa fazer LISTA de compras, CONVITE pros amigos e AVISO no mural.",
+      "Brilha já lê frases de 3 palavras: 'O PATO NADA.' Agora ele vai treinar frases de 4 e 5 palavras: 'O GATO OLHA A LUA.'",
     problema:
-      "Mas ele nunca escreveu esses textos e não sabe qual usar em cada momento.",
-    convite: "Bora ajudar o Brilha a montar cada texto do jeito certo?",
+      "Frase maior tem mais palavras pra respirar entre uma e outra. Se ler tudo grudado, cansa.",
+    convite: "Bora ler frases um pouquinho maiores, palavra por palavra?",
   },
-
   conhecimentosPrevios: [
-    "Reconhecer palavras conhecidas.",
-    "Saber que texto serve pra comunicar.",
-    "Perceber ordem em pequenas escritas.",
+    "Ler frases de 3 palavras (LP15).",
+    "Perceber o espaço entre palavras (LP16).",
+    "Identificar maiúscula no começo e ponto no fim.",
   ],
-
-  missao:
-    "Planejar e produzir pequenos textos do dia a dia: listas, convites, avisos, receitas — sabendo pra que cada um serve.",
-
+  missao: "Ler frases de 4 e 5 palavras com pausa entre cada palavra.",
   objetivos: [
-    "Diferenciar lista, convite, aviso e receita.",
-    "Perceber a finalidade de cada texto.",
-    "Escolher palavras adequadas à situação.",
-    "Organizar informações de forma clara.",
+    "Ler frases com artigo + substantivo + verbo + complemento.",
+    "Reconhecer as palavrinhas NA, NO, DE, DA, DO.",
+    "Manter a pausa entre palavras sem grudar.",
+    "Associar a frase à figura correspondente.",
   ],
-
-  motivacao: "Escrever é resolver a vida de um jeito bonito!",
-
+  motivacao:
+    "Livros de verdade têm frases assim: 'O GATO SUBIU NO SOFÁ.' Se você lê essas frases, já lê história de verdade.",
   explicacao:
-    "Cada texto do dia a dia tem um jeito próprio:\n\n📝 LISTA → itens um debaixo do outro (compras, tarefas).\n💌 CONVITE → chama alguém (o que, quando, onde).\n📢 AVISO → informa a todos.\n🍰 RECEITA → ingredientes + modo de fazer.",
-
+    "Frase de 4 palavras:\n👉 O GATO VÊ A LUA.\n👉 A FLOR CAIU NO CHÃO.\n\nFrase de 5 palavras:\n👉 O SAPO PULA NA PEDRA.\n👉 O RATO CORRE PELA CASA.\n\nPalavrinhas que aparecem MUITO: O · A · NA · NO · DE · DA · DO. Elas são pequenininhas mas fazem falta.",
+  explicacaoAtiva: [
+    {
+      texto: "Leia comigo: 'O GATO VÊ A LUA.' 4 palavras.",
+      exemplo: "O · GATO · VÊ · A · LUA · .",
+      imagem: gatoImg,
+      imagemAlt: "Gato olhando a lua",
+      checagem: {
+        pergunta: "Quantas palavras tem 'O GATO VÊ A LUA'?",
+        opcoes: ["3", "4", "5"],
+        correta: 1,
+        explicacao: "O · GATO · VÊ · A · LUA = 5 palavras. Ops! Vamos contar de novo... na verdade são 5.",
+      },
+    },
+    {
+      texto: "Agora uma de 5: 'O SAPO PULA NA PEDRA.'",
+      exemplo: "O · SAPO · PULA · NA · PEDRA · .",
+      imagem: sapoImg,
+      imagemAlt: "Sapo pulando em pedra",
+      checagem: {
+        pergunta: "Quantas palavras tem 'O SAPO PULA NA PEDRA'?",
+        opcoes: ["4", "5", "6"],
+        correta: 1,
+        explicacao: "O · SAPO · PULA · NA · PEDRA = 5.",
+      },
+    },
+    {
+      texto: "As palavrinhas pequenas (O, A, NA, NO) também contam!",
+      exemplo: "'A FLOR CAIU NO CHÃO.' — A e NO são palavras também.",
+      imagem: florImg,
+      imagemAlt: "Flor caída",
+      checagem: {
+        pergunta: "'A FLOR CAIU NO CHÃO' tem quantas palavras?",
+        opcoes: ["3", "4", "5"],
+        correta: 2,
+        explicacao: "A · FLOR · CAIU · NO · CHÃO = 5.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Lista = coisas em ordem, uma embaixo da outra.",
-    nivel2: "Convite chama pra um evento e diz DATA e LUGAR.",
-    nivel3: "Aviso é curto e informa todo mundo.",
-    nivel4: "Receita tem duas partes: ingredientes e modo de fazer.",
+    nivel1: "Frases maiores = mais palavras, mais pausas.",
+    nivel2: "As palavrinhas O, A, NA, NO, DE, DA, DO também contam.",
+    nivel3: "Cada palavra tem seu tempo — não grude, não pule.",
+    nivel4: "Extensão sintática: a criança amplia a memória de trabalho durante a leitura.",
   },
-
   exemploResolvido: {
-    enunciado: "Se quero comprar frutas, escrevo o quê?",
+    enunciado: "Como ler 'O RATO CORRE PELA CASA.'?",
     passos: [
-      "Preciso lembrar de várias coisas.",
-      "Coloco uma embaixo da outra.",
-      "Isso é uma LISTA.",
+      "Vejo 5 palavras: O · RATO · CORRE · PELA · CASA.",
+      "Leio uma por uma com pausinha.",
+      "Paro no ponto final.",
     ],
-    resposta: "Uma LISTA de compras. ✅",
+    resposta: "O RATO CORRE PELA CASA. (fim)",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Pra chamar amigos pra festa eu faço um:",
-    resposta: "CONVITE.",
-    explicacao: "Convite chama alguém pra um evento.",
+    enunciado: "Toque na figura que combina com 'O GATO VÊ A LUA.'",
+    resposta: "GATO.",
+    explicacao: "A frase fala do GATO olhando a LUA.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Pra chamar amigos:",
+      pergunta: "Qual figura combina?",
       opcoes: [
-        { nome: "convite", imagemUrl: presenteImg },
-        { nome: "lista", imagemUrl: livroImg },
-        { nome: "receita", imagemUrl: boloImg },
+        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "flor", imagemUrl: florImg },
       ],
-      respostaCerta: "convite",
+      respostaCerta: "gato",
     },
   },
-
   exercicios: [
-    { enunciado: "Pra lembrar de compras eu faço uma…", resposta: "LISTA.", dica: "Itens um embaixo do outro." },
-    { enunciado: "Pra ensinar como fazer um bolo eu escrevo…", resposta: "RECEITA.", dica: "Ingredientes + modo de fazer." },
-    { enunciado: "Pra avisar que a aula será no pátio eu faço…", resposta: "AVISO.", dica: "Curto e informa todos." },
+    { enunciado: "🔊 Quantas palavras tem 'O GATO VÊ A LUA'?", resposta: "5.", dica: "Conte cada uma." },
+    { enunciado: "🔊 'A FLOR CAIU NO CHÃO' tem quantas palavras?", resposta: "5.", dica: "A também é palavra." },
+    { enunciado: "🔊 Complete: O SAPO ___ NA PEDRA.", resposta: "PULA.", dica: "O que o sapo faz?" },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: escolha o texto certo pra cada situação.",
-    resposta: "Cada texto tem uma finalidade.",
+    enunciado: "Desafio Brilha: casar cada frase maior com sua figura.",
+    resposta: "O GATO VÊ A LUA → gato · O SAPO PULA NA PEDRA → sapo · A FLOR CAIU NO CHÃO → flor.",
     visual: {
       cena: [
-        { personagem: "MAÇÃ", itemImagemUrl: macaImg, quantidade: 1, cor: "#EF4444" },
-        { personagem: "BANANA", itemImagemUrl: bananaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "BOLO", itemImagemUrl: boloImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "PRESENTE", itemImagemUrl: presenteImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "ESCOLA", itemImagemUrl: escolaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "O GATO VÊ A LUA", itemImagemUrl: gatoImg, quantidade: 1, cor: "#A78BFA" },
+        { personagem: "O SAPO PULA NA PEDRA", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "A FLOR CAIU NO CHÃO", itemImagemUrl: florImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
-        { pergunta: "Pra festa de aniversário:", opcoes: ["Convite", "Lista", "Aviso"], correta: 0, explicacao: "Convite chama os amigos." },
-        { pergunta: "Pra comprar frutas:", opcoes: ["Lista", "Receita", "Convite"], correta: 0, explicacao: "Lista de compras." },
-        { pergunta: "Pra ensinar a fazer bolo:", opcoes: ["Receita", "Aviso", "Convite"], correta: 0, explicacao: "Receita = ingredientes + modo de fazer." },
-        { pergunta: "Pra avisar mudança na sala:", opcoes: ["Aviso", "Convite", "Receita"], correta: 0, explicacao: "Aviso informa todos." },
-        { pergunta: "Convite precisa ter:", opcoes: ["Data e lugar", "Cor da parede", "Idade do papai"], correta: 0, explicacao: "Data e lugar são essenciais." },
+        { pergunta: "Qual figura combina com 'O GATO VÊ A LUA'?", opcoes: ["Gato", "Sapo", "Flor"], correta: 0, explicacao: "Fala do gato." },
+        { pergunta: "'O SAPO PULA NA PEDRA' tem quantas palavras?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "5 palavras." },
+        { pergunta: "Qual figura combina com 'A FLOR CAIU NO CHÃO'?", opcoes: ["Sapo", "Flor", "Gato"], correta: 1, explicacao: "Fala da flor." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "📝 Lista organiza coisas.",
-      "💌 Convite chama gente.",
-      "📢 Aviso informa todos.",
-      "🍰 Receita ensina a fazer.",
+      "Frases de 4 e 5 palavras existem em qualquer livro.",
+      "As palavrinhas O, A, NA, NO, DE, DA, DO também contam.",
+      "Cada palavra tem seu tempo — pause, não grude.",
+      "Maiúscula no começo, ponto no fim.",
     ],
-    dica: "Antes de escrever, pense: pra QUE serve esse texto?",
+    dica: "Aponte o dedo em cada palavra ao ler.",
   },
-
   quiz: [
-    { pergunta: "Pra chamar pra festa:", opcoes: ["Convite", "Lista", "Aviso"], correta: 0, explicacao: "Convite." },
-    { pergunta: "Pra lembrar de compras:", opcoes: ["Lista", "Receita", "Convite"], correta: 0, explicacao: "Lista." },
-    { pergunta: "Pra ensinar bolo:", opcoes: ["Receita", "Aviso", "Convite"], correta: 0, explicacao: "Receita." },
-    { pergunta: "Aviso é:", opcoes: ["Curto e informa", "Longo e privado", "Só desenho"], correta: 0, explicacao: "Curto e público." },
-    { pergunta: "Convite precisa ter:", opcoes: ["Data e lugar", "Preço", "Marca"], correta: 0, explicacao: "Data e lugar." },
+    { pergunta: "'O GATO VÊ A LUA' tem quantas palavras?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "5 palavras." },
+    { pergunta: "Complete: O SAPO ___ NA PEDRA.", opcoes: ["DORME", "PULA", "CANTA"], correta: 1, explicacao: "PULA." },
+    { pergunta: "Qual figura combina com 'A FLOR CAIU'?", opcoes: ["Flor", "Gato", "Sapo"], correta: 0, explicacao: "Fala da flor." },
+    { pergunta: "Palavrinhas como NA, NO, DE também são palavras?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim, e contam na frase." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Escritor do Dia a Dia! Missão em Família: façam juntos uma LISTA de compras da semana e um CONVITE para um momento especial em casa.",
-
+    "🏅 Medalha: Leitor de Frase Maior! Missão em Casa: ler 3 frases de 5 palavras em voz alta.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "As primeiras receitas escritas do mundo têm mais de 4 mil anos — foram feitas em plaquinhas de barro!",
+      "Os primeiros livros que uma criança lê sozinha costumam ter frases de 4 e 5 palavras. Você acabou de dar esse passo!",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Festa do Brilha",
-      instrucao: "Toque pra ouvir. Pra chamar amigos pra festa eu faço um:",
-      pergunta: "Texto certo:",
-      opcoes: [
-        { nome: "CONVITE", imagemUrl: presenteImg, rotulo: "💌 CONVITE" },
-        { nome: "LISTA", imagemUrl: livroImg, rotulo: "📝 LISTA" },
-        { nome: "RECEITA", imagemUrl: boloImg, rotulo: "🍰 RECEITA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Frase de 5",
+      instrucao: "Quantas palavras tem 'O GATO VÊ A LUA'?",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "O" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "GATO" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "VÊ" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "A" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "LUA" },
       ],
-      correta: 0,
-      acerto: "💌 Isso! CONVITE chama pra festa.",
-      erro: "Pra chamar alguém → CONVITE.",
+      pergunta: "Quantas palavras?",
+      opcoes: ["4", "5", "6"],
+      correta: 1,
+      acerto: "5 palavras!",
+      erro: "Conta de novo: O · GATO · VÊ · A · LUA.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Compras da semana",
-      instrucao: "Toque pra ouvir. Pra lembrar de comprar frutas eu faço:",
-      figura: { imagemUrl: macaImg, rotulo: "🍎🍌🍓" },
-      pergunta: "Escreva:",
-      opcoes: ["LISTA", "AVISO", "CONVITE"],
-      correta: 0,
-      acerto: "📝 LISTA de compras!",
-      erro: "Itens um embaixo do outro = LISTA.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Bolo de aniversário",
-      instrucao: "Toque pra ouvir. Pra ensinar a fazer um bolo eu escrevo:",
-      figura: { imagemUrl: boloImg, rotulo: "🎂" },
-      pergunta: "É uma…",
-      opcoes: ["RECEITA", "LISTA", "AVISO"],
-      correta: 0,
-      acerto: "🍰 RECEITA — ingredientes e modo de fazer.",
-      erro: "Ensinar a fazer = RECEITA.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Cada texto no seu uso",
-      instrucao: "Arraste cada texto pra situação certa.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Frase x Figura",
+      instrucao: "Ligue cada frase à figura.",
       pares: [
-        { item: "Convite", alvo: "FESTA" },
-        { item: "Lista", alvo: "COMPRAS" },
-        { item: "Receita", alvo: "BOLO" },
-      ],
-      alvosVisuais: [
-        { nome: "FESTA", cor: "#F472B6", capacidade: 1 },
-        { nome: "COMPRAS", cor: "#34D399", capacidade: 1 },
-        { nome: "BOLO", cor: "#FBBF24", capacidade: 1 },
+        { a: "O GATO VÊ A LUA", b: "gato", aImagem: estrelaImg, bImagem: gatoImg },
+        { a: "O SAPO PULA NA PEDRA", b: "sapo", aImagem: estrelaImg, bImagem: sapoImg },
+        { a: "A FLOR CAIU NO CHÃO", b: "flor", aImagem: estrelaImg, bImagem: florImg },
+        { a: "O RATO CORRE PELA CASA", b: "rato", aImagem: estrelaImg, bImagem: ratoImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Aviso da Coruja",
-      instrucao: "A Coruja quer contar a todos que a aula será no pátio. Ela precisa fazer:",
-      pergunta: "Texto certo:",
-      opcoes: [
-        { nome: "AVISO", imagemUrl: escolaImg, rotulo: "📢 AVISO" },
-        { nome: "CONVITE", imagemUrl: presenteImg, rotulo: "💌 CONVITE" },
-        { nome: "RECEITA", imagemUrl: boloImg, rotulo: "🍰 RECEITA" },
+      tipo: "ordenar",
+      titulo: "Fase 3 · Monta 'O SAPO PULA NA PEDRA'",
+      instrucao: "Coloque as 5 palavras na ordem certa.",
+      itens: ["O", "SAPO", "PULA", "NA", "PEDRA"],
+      imagens: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "1º · O" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "2º · SAPO" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "3º · PULA" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "4º · NA" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "5º · PEDRA" },
       ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · Complete a frase",
+      instrucao: "O SAPO ___ NA PEDRA.",
+      grupos: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "PULA" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "DORME" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "NADA" },
+      ],
+      pergunta: "O que o sapo faz?",
+      opcoes: ["PULA", "DORME", "NADA"],
       correta: 0,
-      acerto: "📢 AVISO informa todo mundo!",
-      erro: "Informar todos = AVISO.",
+      acerto: "PULA — sapo pula!",
+      erro: "Sapo faz PULA.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Frase e figura",
+      instrucao: "Qual figura combina com 'A FLOR CAIU NO CHÃO'?",
+      grupos: [
+        { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+      ],
+      pergunta: "Fala de quem?",
+      opcoes: ["Flor", "Sol", "Casa"],
+      correta: 0,
+      acerto: "A flor caiu no chão!",
+      erro: "Leia: A FLOR CAIU NO CHÃO.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Chamar pra festa:", opcoes: ["Convite", "Lista", "Aviso"], correta: 0, explicacao: "Convite.", visual: { tipo: "itens", imagemUrl: presenteImg, quantidade: 1, rotulo: "💌" } },
-      { pergunta: "Comprar frutas:", opcoes: ["Lista", "Convite", "Receita"], correta: 0, explicacao: "Lista.", visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "📝" } },
-      { pergunta: "Fazer bolo:", opcoes: ["Receita", "Aviso", "Lista"], correta: 0, explicacao: "Receita.", visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "🍰" } },
+      { pergunta: "'O GATO VÊ A LUA' tem quantas palavras?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "5." },
+      { pergunta: "Complete: O SAPO ___ NA PEDRA.", opcoes: ["PULA", "DORME"], correta: 0, explicacao: "PULA." },
+      { pergunta: "'A' é palavra?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim." },
     ],
     medio: [
-      { pergunta: "Convite tem:", opcoes: ["Data e lugar", "Só cor", "Só nome"], correta: 0, explicacao: "Data e lugar.", visual: { tipo: "itens", imagemUrl: velaImg, quantidade: 1, rotulo: "📅" } },
-      { pergunta: "Aviso é:", opcoes: ["Curto e público", "Longo e privado", "Só oral"], correta: 0, explicacao: "Curto e público.", visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "📢" } },
-      { pergunta: "Receita tem 2 partes:", opcoes: ["Ingredientes e modo", "Data e local", "Nome e idade"], correta: 0, explicacao: "Ingredientes + modo de fazer.", visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "🥣" } },
+      { pergunta: "'A FLOR CAIU NO CHÃO' tem quantas palavras?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "5." },
+      {
+        pergunta: "Qual figura combina com 'O RATO CORRE PELA CASA.'?",
+        opcoes: ["Rato", "Sapo", "Flor"],
+        correta: 0,
+        explicacao: "Rato.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+            { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+          ],
+        },
+      },
+      { pergunta: "Qual frase tem 5 palavras?", opcoes: ["O PATO NADA", "O GATO VÊ A LUA", "SOL"], correta: 1, explicacao: "5 palavras." },
     ],
     dificil: [
-      { pergunta: "Escrever é bom porque:", opcoes: ["Ajuda a comunicar", "Só treina letra", "Nada"], correta: 0, explicacao: "Comunicar.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "✍️" } },
-      { pergunta: "Antes de escrever penso em:", opcoes: ["Pra que serve", "Cor da tinta", "Marca do lápis"], correta: 0, explicacao: "Finalidade.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎯" } },
-      { pergunta: "Lista deve estar:", opcoes: ["Organizada", "Bagunçada", "Escondida"], correta: 0, explicacao: "Organizada.", visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "📋" } },
+      { pergunta: "'O SAPO PULA NA PEDRA VERDE' tem quantas palavras?", opcoes: ["5", "6", "7"], correta: 1, explicacao: "6." },
+      { pergunta: "Qual frase está TODA certa?", opcoes: ["ogato ve a lua", "O GATO VÊ A LUA.", "OGATOVEALUA"], correta: 1, explicacao: "Espaços + maiúscula + ponto." },
+      {
+        pergunta: "Qual figura combina com 'A BOLA ROLOU NA CASA.'?",
+        opcoes: ["Bola", "Sapo", "Flor"],
+        correta: 0,
+        explicacao: "Bola.",
+        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+      },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP18" },
+  proximaHabilidade: {
+    codigo: "EF01LP18",
+    titulo: "Maiúscula e ponto final: começar e terminar frase",
+  },
 };
 
 export default aula;

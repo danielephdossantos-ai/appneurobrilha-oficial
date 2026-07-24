@@ -1,232 +1,272 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as galinhaImg } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
-import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP19 — Aula 019
- * BNCC: Recitar parlendas, quadras, quadrinhas, trava-línguas com entonação e rimas.
- * Missão: "O Palco das Rimas".
+ * EF01LP19 — Aula 019 · DUAS FRASES SEGUIDAS (mini-texto)
+ * Foco: ler 2 frases seguidas mantendo pausa e sentido.
  */
 const aula: Aula = {
   codigo: "EF01LP19",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Palco das Rimas",
-
+  disciplina: "Português",
+  titulo: "Duas Frases Seguidas",
   narrativa: {
-    titulo: "O Palco das Rimas",
+    titulo: "Duas Frases Seguidas",
     contexto:
-      "O Teatro da Floresta abriu seu palco pra um FESTIVAL DE PARLENDAS! Cada bichinho vai recitar uma quadrinha.",
+      "Brilha já lê UMA frase inteira. Agora ele vai treinar ler DUAS frases em seguida, respirando no ponto do meio.",
     problema:
-      "Mas o Brilha esqueceu como falar com ritmo e onde marcar as rimas.",
-    convite: "Bora ajudar o Brilha a treinar a fala e brilhar no palco?",
+      "Se ler as duas frases grudadas sem parar no ponto, tudo vira uma coisa só e a criança se perde.",
+    convite: "Bora ler dois versinhos seguidos, respirando no ponto?",
   },
-
   conhecimentosPrevios: [
-    "Conhecer parlendas (EF01LP16).",
-    "Perceber palavras que rimam.",
-    "Falar em voz alta em pequenos grupos.",
+    "Ler uma frase inteira (LP15, LP17).",
+    "Reconhecer espaço entre palavras (LP16).",
+    "Reconhecer maiúscula e ponto (LP18).",
   ],
-
-  missao:
-    "Recitar parlendas, quadras e trava-línguas usando ENTONAÇÃO (subir e descer a voz) e destacando as RIMAS.",
-
+  missao: "Ler 2 frases seguidas fazendo pausa maior no ponto final da primeira.",
   objetivos: [
-    "Falar com ritmo e entonação.",
-    "Destacar as rimas do final dos versos.",
-    "Ter coragem de se apresentar.",
-    "Brincar com trava-línguas.",
+    "Ler duas frases seguidas em voz alta.",
+    "Respirar no ponto final (pausa longa).",
+    "Perceber que a próxima frase começa com maiúscula.",
+    "Associar cada frase à figura correspondente.",
   ],
-
   motivacao:
-    "Recitar é dar vida ao versinho — cada palavra vira música!",
-
+    "Quando você lê duas frases seguidas, já está lendo um mini-texto de verdade. É o mesmo que ler um livro.",
   explicacao:
-    "RECITAR é falar um poema/parlenda em voz alta, com ritmo.\n\n🎤 Cuide de 3 coisas:\n1) VELOCIDADE (nem rápido, nem devagar demais);\n2) VOZ (subir e descer);\n3) RIMA (destacar o final que combina).\n\n🐭 'O RATO roeu a roupa do REI de ROMA' — repare no R!",
-
+    "Um mini-texto tem 2 (ou mais) frases:\n\n👉 'O PATO NADA. O SAPO PULA.'\n👉 'O SOL BRILHA. A LUA APARECE.'\n\nComo ler:\n1) Leia a 1ª frase inteira.\n2) No PONTO, RESPIRE FUNDO (pausa maior).\n3) A 2ª frase começa com letra MAIÚSCULA.\n4) Leia a 2ª frase inteira.\n5) Ponto final = fim de tudo.",
+  explicacaoAtiva: [
+    {
+      texto: "Leia: 'O PATO NADA. O SAPO PULA.' 2 frases seguidas.",
+      exemplo: "1ª · O PATO NADA. (pausa longa)  2ª · O SAPO PULA.",
+      imagem: patoImg,
+      imagemAlt: "Pato e sapo",
+      checagem: {
+        pergunta: "Quantas FRASES tem esse mini-texto?",
+        opcoes: ["1", "2", "3"],
+        correta: 1,
+        explicacao: "Duas frases separadas por ponto.",
+      },
+    },
+    {
+      texto: "Onde é a PAUSA MAIOR?",
+      exemplo: "O PATO NADA. ← PAUSA GRANDE ← O SAPO PULA.",
+      imagem: sapoImg,
+      imagemAlt: "Sapo",
+      checagem: {
+        pergunta: "Onde o leitor respira fundo?",
+        opcoes: ["No espaço entre palavras", "No ponto final da 1ª frase", "Não respira"],
+        correta: 1,
+        explicacao: "No ponto final da 1ª frase.",
+      },
+    },
+    {
+      texto: "A 2ª frase começa com MAIÚSCULA nova. É como começar de novo.",
+      exemplo: "O SOL BRILHA. → agora começa outra: A LUA APARECE.",
+      imagem: solImg,
+      imagemAlt: "Sol e lua",
+      checagem: {
+        pergunta: "Como começa a 2ª frase?",
+        opcoes: ["Minúscula", "Maiúscula", "Com número"],
+        correta: 1,
+        explicacao: "Toda frase começa com maiúscula, inclusive a segunda.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Recitar = falar em voz alta com ritmo.",
-    nivel2: "Rima é o som parecido no final dos versos.",
-    nivel3: "Entonação é subir/descer a voz.",
-    nivel4: "Trava-língua se recita rápido, sem tropeçar.",
+    nivel1: "Duas frases seguidas = mini-texto.",
+    nivel2: "No ponto do meio, respire fundo (pausa longa).",
+    nivel3: "A 2ª frase também começa com maiúscula.",
+    nivel4: "Coesão inicial: a criança encadeia frases mantendo o sentido do texto.",
   },
-
   exemploResolvido: {
-    enunciado: "Qual palavra rima com 'PÉ' na parlenda do sapo?",
+    enunciado: "Leia: 'O GATO DORME. O RATO CORRE.' Quantas frases?",
     passos: [
-      "'O sapo não lava o PÉ, não lava porque não QUER…'",
-      "PÉ e QUER têm sons próximos no final.",
-      "Rima: PÉ / QUER.",
+      "Vejo o 1º ponto: fim da 1ª frase.",
+      "Vejo a maiúscula depois: começa a 2ª.",
+      "Vejo o 2º ponto: fim de tudo.",
+      "Total: 2 frases.",
     ],
-    resposta: "QUER rima com PÉ. ✅",
+    resposta: "2 frases.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Qual palavra rima com 'VIZINHO'?",
-    resposta: "AMARELINHO.",
-    explicacao: "AMARELINHO e VIZINHO terminam no mesmo som.",
+    enunciado: "Toque na figura que combina com a 1ª frase de 'O PATO NADA. O SAPO PULA.'",
+    resposta: "PATO.",
+    explicacao: "A 1ª frase é 'O PATO NADA.' — fala do pato.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Rima com VIZINHO:",
+      pergunta: "Qual é a 1ª frase?",
       opcoes: [
-        { nome: "amarelinho", imagemUrl: galinhaImg },
-        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "pato", imagemUrl: patoImg },
         { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "gato", imagemUrl: gatoImg },
       ],
-      respostaCerta: "amarelinho",
+      respostaCerta: "pato",
     },
   },
-
   exercicios: [
-    { enunciado: "Rima com PÉ:", resposta: "QUER (ou café).", dica: "Som final parecido." },
-    { enunciado: "Rima com CORAÇÃO:", resposta: "MÃO / IRMÃO.", dica: "Final ÃO." },
-    { enunciado: "Trava-língua eu recito:", resposta: "RÁPIDO.", dica: "Sem tropeçar." },
+    { enunciado: "🔊 'O SOL BRILHA. A LUA APARECE.' tem quantas frases?", resposta: "2.", dica: "Conte os pontos." },
+    { enunciado: "🔊 Onde o leitor respira fundo?", resposta: "No ponto final da 1ª frase.", dica: "Ponto = pausa longa." },
+    { enunciado: "🔊 A 2ª frase começa com…", resposta: "Letra MAIÚSCULA.", dica: "Toda frase começa com maiúscula." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: acerte as rimas e o jeito de recitar.",
-    resposta: "Ritmo + rima = show!",
+    enunciado: "Desafio Brilha: casar cada frase do mini-texto com sua figura.",
+    resposta: "'O PATO NADA. O SAPO PULA.' → 1ª pato · 2ª sapo.",
     visual: {
       cena: [
-        { personagem: "SAPO", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "RATO", itemImagemUrl: ratoImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "GALINHA", itemImagemUrl: galinhaImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "TAMBOR", itemImagemUrl: tamborImg, quantidade: 1, cor: "#EF4444" },
+        { personagem: "1ª frase: O PATO NADA", itemImagemUrl: patoImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "2ª frase: O SAPO PULA", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
       ],
       perguntas: [
-        { pergunta: "Rima com PÉ:", opcoes: ["QUER", "MÃO", "OLHO"], correta: 0, explicacao: "Pé/quer." },
-        { pergunta: "Rima com VIZINHO:", opcoes: ["AMARELINHO", "AZUL", "GRANDE"], correta: 0, explicacao: "Vizinho/amarelinho." },
-        { pergunta: "Trava-língua se fala:", opcoes: ["Rápido", "Chorando", "Sussurrando"], correta: 0, explicacao: "Rápido." },
-        { pergunta: "Recitar bem exige:", opcoes: ["Ritmo e entonação", "Só volume alto", "Silêncio"], correta: 0, explicacao: "Ritmo e voz." },
-        { pergunta: "Rima é:", opcoes: ["Som parecido no fim", "Cor igual", "Tamanho igual"], correta: 0, explicacao: "Som final parecido." },
+        { pergunta: "Qual é a 1ª frase de 'O PATO NADA. O SAPO PULA.'?", opcoes: ["O PATO NADA", "O SAPO PULA"], correta: 0, explicacao: "1ª = O PATO NADA." },
+        { pergunta: "Qual é a 2ª frase?", opcoes: ["O PATO NADA", "O SAPO PULA"], correta: 1, explicacao: "2ª = O SAPO PULA." },
+        { pergunta: "Quantas frases tem o mini-texto?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "2 frases, 2 pontos." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🎤 Recitar = falar com ritmo e voz.",
-      "🎵 Rima = som parecido no final.",
-      "🔊 Entonação = subir e descer a voz.",
-      "👅 Trava-língua = falar rápido.",
+      "Mini-texto = 2 (ou mais) frases seguidas.",
+      "No ponto do meio, respire fundo (pausa longa).",
+      "A 2ª frase também começa com maiúscula.",
+      "Cada ponto marca o FIM de uma frase.",
     ],
-    dica: "Antes de recitar, respire e sinta a batida do verso.",
+    dica: "Ao ler, marque com o dedo cada ponto — respire nele.",
   },
-
   quiz: [
-    { pergunta: "Rima com PÉ:", opcoes: ["QUER", "MÃO", "SOL"], correta: 0, explicacao: "Pé/quer." },
-    { pergunta: "Rima com CORAÇÃO:", opcoes: ["MÃO", "PÉ", "OLHO"], correta: 0, explicacao: "Coração/mão." },
-    { pergunta: "Recitar é:", opcoes: ["Falar com ritmo", "Só ler baixinho", "Escrever"], correta: 0, explicacao: "Falar com ritmo." },
-    { pergunta: "Trava-língua:", opcoes: ["Rápido sem tropeçar", "Muito devagar", "Chorando"], correta: 0, explicacao: "Rápido." },
-    { pergunta: "Entonação é:", opcoes: ["Subir/descer a voz", "Falar sempre igual", "Ficar mudo"], correta: 0, explicacao: "Variar a voz." },
+    { pergunta: "'O GATO DORME. O RATO CORRE.' tem quantas frases?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "2 frases." },
+    { pergunta: "Onde é a pausa MAIOR?", opcoes: ["No espaço", "No ponto final", "No começo"], correta: 1, explicacao: "No ponto final." },
+    { pergunta: "A 2ª frase começa com…", opcoes: ["Minúscula", "Maiúscula", "Número"], correta: 1, explicacao: "Maiúscula." },
+    { pergunta: "Cada ponto marca…", opcoes: ["O começo", "O fim de uma frase"], correta: 1, explicacao: "Fim da frase." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Estrela do Palco das Rimas! Missão em Família: montem um palquinho em casa e cada um recita uma parlenda favorita.",
-
+    "🏅 Medalha: Leitor de Mini-Texto! Missão em Casa: ler 2 frases seguidas de um livrinho pra alguém em casa.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Antes de os livros existirem, todo poema era decorado e RECITADO — os contadores eram as bibliotecas do mundo!",
+      "Um livro inteiro é feito de várias frases seguidas — igual você acabou de ler. Cada ponto é um passinho pro fim da história.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Rima com PÉ",
-      instrucao: "Toque pra ouvir. Qual palavra rima com PÉ?",
-      pergunta: "Rima com PÉ:",
-      opcoes: [
-        { nome: "QUER", imagemUrl: sapoImg, rotulo: "🐸 QUER (o sapo não QUER)" },
-        { nome: "MÃO", imagemUrl: gatoImg, rotulo: "🐱 MÃO" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Quantas frases?",
+      instrucao: "'O PATO NADA. O SAPO PULA.' tem quantas frases?",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "1ª" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "2ª" },
       ],
-      correta: 0,
-      acerto: "🎉 PÉ rima com QUER.",
-      erro: "Escute o final: Pé / Quer.",
+      pergunta: "Quantas frases?",
+      opcoes: ["1", "2", "3"],
+      correta: 1,
+      acerto: "2 frases — 2 pontos!",
+      erro: "Conte os pontos: 2.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Rima com VIZINHO",
-      instrucao: "Toque pra ouvir. Rima com VIZINHO:",
-      figura: { imagemUrl: galinhaImg, rotulo: "🐔🥚" },
-      pergunta: "Escolha:",
-      opcoes: ["AMARELINHO", "AZUL", "GRANDE"],
-      correta: 0,
-      acerto: "🥚 Vizinho / Amarelinho!",
-      erro: "Final -INHO combina.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Trava-língua",
-      instrucao: "Toque pra ouvir. Como se recita um trava-língua?",
-      figura: { imagemUrl: ratoImg, rotulo: "🐭" },
-      pergunta: "Modo certo:",
-      opcoes: ["RÁPIDO sem tropeçar", "Muito devagar", "Chorando"],
-      correta: 0,
-      acerto: "🎤 RÁPIDO sem errar!",
-      erro: "Trava-língua = rápido.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Rima ou Não?",
-      instrucao: "Arraste cada par de palavras pro grupo certo.",
+      tipo: "ligar",
+      titulo: "Fase 2 · 1ª frase x figura",
+      instrucao: "Ligue cada frase à figura certa.",
       pares: [
-        { item: "PÉ · CAFÉ", alvo: "RIMA" },
-        { item: "MÃO · CORAÇÃO", alvo: "RIMA" },
-        { item: "GATO · SOL", alvo: "NÃO RIMA" },
-      ],
-      alvosVisuais: [
-        { nome: "RIMA", cor: "#34D399", capacidade: 2 },
-        { nome: "NÃO RIMA", cor: "#EF4444", capacidade: 1 },
+        { a: "O PATO NADA", b: "pato", aImagem: estrelaImg, bImagem: patoImg },
+        { a: "O SAPO PULA", b: "sapo", aImagem: estrelaImg, bImagem: sapoImg },
+        { a: "O SOL BRILHA", b: "sol", aImagem: estrelaImg, bImagem: solImg },
+        { a: "A LUA APARECE", b: "lua", aImagem: estrelaImg, bImagem: luaImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Palco da Coruja",
-      instrucao: "A Coruja pergunta: pra recitar bem, o mais importante é…",
-      pergunta: "Escolha:",
-      opcoes: [
-        { nome: "RITMO", imagemUrl: tamborImg, rotulo: "🥁 Ritmo e entonação" },
-        { nome: "GRITAR", imagemUrl: balaoImg, rotulo: "🎈 Gritar bem alto" },
-        { nome: "CALADO", imagemUrl: estrelaImg, rotulo: "⭐ Ficar calado" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Onde respira?",
+      instrucao: "Onde o leitor RESPIRA FUNDO ao ler 'O GATO DORME. O RATO CORRE.'?",
+      grupos: [
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "espaço" },
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "ponto" },
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "maiúscula" },
       ],
-      correta: 0,
-      acerto: "🥁 Ritmo e entonação!",
-      erro: "O segredo é RITMO + entonação.",
+      pergunta: "Pausa MAIOR:",
+      opcoes: ["No espaço", "No ponto final", "Na maiúscula"],
+      correta: 1,
+      acerto: "No ponto se respira fundo!",
+      erro: "Ponto = pausa MAIOR.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Monta o mini-texto",
+      instrucao: "Ordene as frases do mini-texto 'O SOL BRILHA. A LUA APARECE.'",
+      itens: ["O SOL BRILHA.", "A LUA APARECE."],
+      imagens: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "1ª · SOL" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "2ª · LUA" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · 2ª frase",
+      instrucao: "Qual é a 2ª frase de 'O GATO DORME. O RATO CORRE.'?",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "1ª" },
+        { imagemUrl: ratoImg, quantidade: 1, rotulo: "2ª" },
+      ],
+      pergunta: "Qual é a 2ª frase?",
+      opcoes: ["O GATO DORME.", "O RATO CORRE."],
+      correta: 1,
+      acerto: "A 2ª é 'O RATO CORRE.'!",
+      erro: "Depois do 1º ponto, começa a 2ª.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Rima com PÉ:", opcoes: ["QUER", "MÃO", "SOL"], correta: 0, explicacao: "Pé/quer.", visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸" } },
-      { pergunta: "Rima com VIZINHO:", opcoes: ["AMARELINHO", "GRANDE", "AZUL"], correta: 0, explicacao: "-INHO.", visual: { tipo: "itens", imagemUrl: galinhaImg, quantidade: 1, rotulo: "🐔" } },
-      { pergunta: "Recitar é:", opcoes: ["Falar com ritmo", "Escrever", "Dançar"], correta: 0, explicacao: "Falar com ritmo.", visual: { tipo: "itens", imagemUrl: tamborImg, quantidade: 1, rotulo: "🎤" } },
+      { pergunta: "'O PATO NADA. O SAPO PULA.' tem quantas frases?", opcoes: ["1", "2"], correta: 1, explicacao: "2 frases." },
+      { pergunta: "Pausa maior é no…", opcoes: ["Espaço", "Ponto"], correta: 1, explicacao: "Ponto." },
+      { pergunta: "A 2ª frase começa com…", opcoes: ["Maiúscula", "Minúscula"], correta: 0, explicacao: "Maiúscula." },
     ],
     medio: [
-      { pergunta: "Rima com MÃO:", opcoes: ["CORAÇÃO", "PÉ", "GATO"], correta: 0, explicacao: "-ÃO.", visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "❤️" } },
-      { pergunta: "Trava-língua:", opcoes: ["Rápido", "Devagar", "Mudo"], correta: 0, explicacao: "Rápido.", visual: { tipo: "itens", imagemUrl: ratoImg, quantidade: 1, rotulo: "👅" } },
-      { pergunta: "Entonação é:", opcoes: ["Subir/descer a voz", "Volume igual", "Silêncio"], correta: 0, explicacao: "Variar a voz.", visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "📈" } },
+      {
+        pergunta: "Qual é a 1ª frase de 'O GATO DORME. A FLOR CAIU.'?",
+        opcoes: ["O GATO DORME", "A FLOR CAIU"],
+        correta: 0,
+        explicacao: "1ª frase.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+            { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+          ],
+        },
+      },
+      { pergunta: "Cada ponto marca o…", opcoes: ["Começo", "Fim de uma frase"], correta: 1, explicacao: "Fim." },
+      { pergunta: "Um mini-texto pode ter…", opcoes: ["Só 1 frase", "2 ou mais frases"], correta: 1, explicacao: "2 ou mais frases." },
     ],
     dificil: [
-      { pergunta: "Pra recitar bem preciso:", opcoes: ["Respirar e treinar", "Nunca ensaiar", "Correr"], correta: 0, explicacao: "Respirar e treinar.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🌬️" } },
-      { pergunta: "Onde a rima aparece?", opcoes: ["No final do verso", "No começo", "Só na 1ª palavra"], correta: 0, explicacao: "Final do verso.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "🔚" } },
-      { pergunta: "Recitar em grupo:", opcoes: ["Fica ainda mais legal", "Não pode", "É proibido"], correta: 0, explicacao: "É ótimo em grupo.", visual: { tipo: "itens", imagemUrl: galinhaImg, quantidade: 1, rotulo: "👥" } },
+      { pergunta: "'O SOL BRILHA. A LUA APARECE. A ESTRELA PISCA.' tem quantas frases?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 pontos = 3 frases." },
+      {
+        pergunta: "Qual figura combina com a 2ª frase de 'O RATO CORRE. A CASA CAIU.'?",
+        opcoes: ["Rato", "Casa", "Bola"],
+        correta: 1,
+        explicacao: "2ª fala da casa.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
+            { imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+            { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          ],
+        },
+      },
+      { pergunta: "Se junto 3 frases seguidas, tenho…", opcoes: ["Uma frase gigante", "Um mini-texto"], correta: 1, explicacao: "Mini-texto." },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP20" },
+  proximaHabilidade: {
+    codigo: "EF01LP20",
+    titulo: "Minha primeira leitura fluente (mini-texto de 3 frases)",
+  },
 };
 
 export default aula;
