@@ -284,93 +284,90 @@ type TSNivel = {
   itens: string[]; // já em ordem correta de toque
 };
 
-const NUM_RANGES: Array<{ ate: number; bg: TSNivel["bg"]; qtd: number }> = [
-  { ate: 5, bg: "ceu", qtd: 5 },
-  { ate: 10, bg: "grama", qtd: 6 },
-  { ate: 15, bg: "fazenda", qtd: 7 },
-  { ate: 20, bg: "oceano", qtd: 8 },
-  { ate: 30, bg: "selva", qtd: 8 },
-  { ate: 50, bg: "espaco", qtd: 10 },
-  { ate: 75, bg: "ceu", qtd: 10 },
-  { ate: 100, bg: "espaco", qtd: 10 },
+// Sequências consecutivas 1..N (SEM pular números) para não confundir
+// crianças que ainda não dominam a ordem numérica.
+const NUM_RANGES: Array<{ ate: number; bg: TSNivel["bg"] }> = [
+  { ate: 5, bg: "ceu" },
+  { ate: 6, bg: "grama" },
+  { ate: 7, bg: "fazenda" },
+  { ate: 8, bg: "oceano" },
+  { ate: 9, bg: "selva" },
+  { ate: 10, bg: "espaco" },
+  { ate: 11, bg: "ceu" },
+  { ate: 12, bg: "espaco" },
 ];
 
-const ALFA_NIVEIS: Array<{ letras: string[]; bg: TSNivel["bg"] }> = [
-  { letras: ["A", "E", "I", "O", "U"], bg: "ceu" },
-  { letras: ["A", "E", "I", "O", "U", "B", "C", "D"], bg: "grama" },
-  { letras: ["A", "E", "I", "O", "U", "B", "C", "D", "F", "G"], bg: "fazenda" },
-  { letras: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"], bg: "oceano" },
-  {
-    letras: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"],
-    bg: "selva",
-  },
-  {
-    letras: [
-      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-      "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-    ],
-    bg: "espaco",
-  },
+// Letras consecutivas do alfabeto (A, AB, ABC...) — sem misturar ordem.
+const ALFA_TAMANHOS: Array<{ n: number; bg: TSNivel["bg"] }> = [
+  { n: 3, bg: "ceu" },
+  { n: 4, bg: "grama" },
+  { n: 5, bg: "fazenda" },
+  { n: 6, bg: "oceano" },
+  { n: 8, bg: "selva" },
+  { n: 10, bg: "espaco" },
 ];
+const ALFA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 const TS_NIVEIS: TSNivel[] = [];
 
-// Números: amostra ordenada do intervalo, sempre incluindo 1 e o teto
-NUM_RANGES.forEach((r, idx) => {
-  const seed = (idx + 1) * 17;
-  const todos = Array.from({ length: r.ate }, (_, k) => k + 1);
-  let escolhidos: number[];
-  if (todos.length <= r.qtd) {
-    escolhidos = todos;
-  } else {
-    const set = new Set<number>([1, r.ate]);
-    let s = seed;
-    while (set.size < r.qtd) {
-      s = (s * 9301 + 49297) % 233280;
-      set.add(1 + (s % r.ate));
-    }
-    escolhidos = [...set].sort((a, b) => a - b);
-  }
+NUM_RANGES.forEach((r) => {
+  const itens = Array.from({ length: r.ate }, (_, k) => String(k + 1));
   TS_NIVEIS.push({
     nome: `Números 1 até ${r.ate}`,
     tipo: "numero",
     bg: r.bg,
-    itens: escolhidos.map(String),
+    itens,
   });
 });
 
-// Letras: amostra ordenada (alfabética) do conjunto
-ALFA_NIVEIS.forEach((n, idx) => {
-  const maxNaTela = 12;
-  let escolhidos: string[];
-  if (n.letras.length <= maxNaTela) {
-    escolhidos = [...n.letras];
-  } else {
-    const set = new Set<string>([n.letras[0], n.letras[n.letras.length - 1]]);
-    let s = (idx + 1) * 31;
-    while (set.size < maxNaTela) {
-      s = (s * 9301 + 49297) % 233280;
-      set.add(n.letras[s % n.letras.length]);
-    }
-    const ALFA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    escolhidos = [...set].sort((a, b) => ALFA.indexOf(a) - ALFA.indexOf(b));
-  }
+ALFA_TAMANHOS.forEach((r) => {
+  const itens = ALFA.slice(0, r.n);
   TS_NIVEIS.push({
-    nome: `Letras ${n.letras[0]}-${n.letras[n.letras.length - 1]}`,
+    nome: `Letras ${itens[0]}-${itens[itens.length - 1]}`,
     tipo: "letra",
-    bg: n.bg,
-    itens: escolhidos,
+    bg: r.bg,
+    itens,
   });
 });
+
+// Posições: grid em ordem de leitura (esquerda→direita, cima→baixo) em TODOS
+// os níveis, exceto o ÚLTIMO, onde a posição é embaralhada — mantendo a
+// sequência a ser tocada, mas exigindo que a criança já reconheça os números.
+const LAST_IDX = TS_NIVEIS.length - 1;
 
 export const TOQUE_SEQUENCIA_VARS: Variation[] = TS_NIVEIS.map((nv, i) => {
   const seed = i + 1;
-  const pontos = nv.itens.map((label, k) => ({
-    id: `${label}-${k}`,
-    label,
-    x: 10 + ((k * 19 + seed * 11) % 78),
-    y: 12 + ((k * 27 + seed * 9) % 72),
-  }));
+  const n = nv.itens.length;
+  const cols = Math.min(n, n <= 6 ? n : Math.ceil(Math.sqrt(n * 1.6)));
+  const rows = Math.ceil(n / cols);
+  const stepX = 80 / cols;
+  const stepY = 70 / rows;
+
+  const basePos = nv.itens.map((_, k) => {
+    const col = k % cols;
+    const row = Math.floor(k / cols);
+    return {
+      x: 10 + stepX * col + stepX / 2,
+      y: 15 + stepY * row + stepY / 2,
+    };
+  });
+
+  // Embaralha só no último nível
+  let posOrder = basePos.map((_, k) => k);
+  if (i === LAST_IDX) {
+    let s = seed * 37 + 13;
+    for (let k = posOrder.length - 1; k > 0; k--) {
+      s = (s * 9301 + 49297) % 233280;
+      const j = s % (k + 1);
+      [posOrder[k], posOrder[j]] = [posOrder[j], posOrder[k]];
+    }
+  }
+
+  const pontos = nv.itens.map((label, k) => {
+    const pos = basePos[posOrder[k]];
+    return { id: `${label}-${k}`, label, x: pos.x, y: pos.y };
+  });
+
   return {
     id: `ts-${i + 1}`,
     payload: {
@@ -380,6 +377,7 @@ export const TOQUE_SEQUENCIA_VARS: Variation[] = TS_NIVEIS.map((nv, i) => {
       pontos,
       ordem: pontos.map((p) => p.id),
       tempoLimite: 20 + pontos.length * 4,
+      embaralhado: i === LAST_IDX,
     },
   };
 });

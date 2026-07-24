@@ -2841,15 +2841,23 @@ function ToqueSequencia({ p, onDone }: any) {
   return (
     <div className="space-y-4">
       <div className={`text-center text-sm font-bold ${escuro ? "text-white" : "text-muted-foreground"}`}>
-        {p.categoria} — toque{" "}
-        {p.tipo === "imagem" ? (
-          <span className="inline-flex items-center gap-1 align-middle">
-            <RenderEmoji label={labelDe(proximo)} className="w-7 h-7 inline-block" />
-            <span className="text-emerald-600 font-black">{labelDe(proximo)}</span>
-          </span>
+        {p.categoria}
+        {p.embaralhado ? (
+          <span className="ml-1 text-amber-600">· nível difícil (embaralhado)</span>
         ) : (
-          <span className="text-emerald-600 text-xl">{labelDe(proximo)}</span>
+          <span className="ml-1 text-emerald-600">· em ordem</span>
         )}
+        <div className="mt-1">
+          toque{" "}
+          {p.tipo === "imagem" ? (
+            <span className="inline-flex items-center gap-1 align-middle">
+              <RenderEmoji label={labelDe(proximo)} className="w-7 h-7 inline-block" />
+              <span className="text-emerald-600 font-black">{labelDe(proximo)}</span>
+            </span>
+          ) : (
+            <span className="text-emerald-600 text-xl">{labelDe(proximo)}</span>
+          )}
+        </div>
       </div>
       <div
         className={`relative border-2 rounded-3xl overflow-hidden ${TS_BG[p.bg] ?? TS_BG.grama}`}
