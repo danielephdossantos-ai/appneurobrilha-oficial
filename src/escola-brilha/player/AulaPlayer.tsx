@@ -511,10 +511,12 @@ function renderBloco(
     acertos: number;
     erros: number;
     childId?: string;
+    nomeCrianca?: string;
     setAcertos: (n: number) => void;
     setErros: (n: number) => void;
     onQuizEnd: () => void;
   },
+
 ) {
   switch (blocoId) {
     case "narrativa":
