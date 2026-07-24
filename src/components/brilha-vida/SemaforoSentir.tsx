@@ -57,6 +57,22 @@ type LuzId = (typeof LUZES)[number]["id"];
 export function SemaforoSentir({ onClose }: { onClose: () => void }) {
   const [ativa, setAtiva] = useState<LuzId | null>(null);
   const luz = LUZES.find((l) => l.id === ativa);
+  const recordMood = useMoodRecorder();
+  const escolher = useCallback(
+    (l: (typeof LUZES)[number]) => {
+      if (ativa === l.id) return;
+      setAtiva(l.id);
+      const m = LUZ_METRICS[l.id];
+      recordMood({
+        source: "semaforo",
+        valence: m.valence,
+        energy: m.energy,
+        emocao: l.titulo,
+        quadrante: m.quadrante,
+      });
+    },
+    [ativa, recordMood],
+  );
 
   return (
     <div
