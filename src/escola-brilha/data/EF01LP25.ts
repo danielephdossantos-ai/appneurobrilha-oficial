@@ -1,234 +1,246 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as meninaImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as tremImg } from "@/assets/neuro-treino/objetos/trem.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
-import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 
 /**
- * EF01LP25 — Aula 025
- * BNCC: Produzir recontagens de histórias (personagens, enredo, tempo, espaço).
- * Missão: "O Contador de Histórias".
+ * EF01LP25 — Aula 025 · ENCONTROS CONSONANTAIS BR, PR, TR, CR, FR, GR
+ * Reforma fônica: duas consoantes seguidas, cada uma com seu som.
  */
 const aula: Aula = {
   codigo: "EF01LP25",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Contador de Histórias",
-
+  disciplina: "Português",
+  titulo: "Duas consoantes seguidas: BR, PR, TR, CR, FR, GR",
   narrativa: {
-    titulo: "O Contador de Histórias",
+    titulo: "Duas consoantes seguidas",
     contexto:
-      "A Coruja Sábia ouviu uma história linda numa noite estrelada. Agora quer que Brilha RECONTE pra todos os bichinhos.",
+      "Brilha achou palavras onde DUAS consoantes aparecem grudadas: BR de BRAÇO, PR de PRATO, TR de TREM.",
     problema:
-      "Mas Brilha não sabe por onde começar: quem eram os personagens? O que aconteceu? Onde?",
-    convite: "Bora ajudar o Brilha a recontar a história direitinho?",
+      "É diferente de dígrafo! Aqui cada consoante GUARDA o seu som — ambas se ouvem.",
+    convite: "Bora ler essas palavras juntas?",
   },
-
   conhecimentosPrevios: [
-    "Ler pequenos textos (EF01LP10).",
-    "Perceber quem, o quê, onde numa história.",
-    "Contar oralmente algo que aconteceu.",
+    "Ler sílabas CV (LP11–LP13).",
+    "Dígrafos CH, LH, NH (LP21–LP23).",
+    "Letras dobradas (LP24).",
   ],
-
-  missao:
-    "Recontar histórias observando os 4 elementos: PERSONAGENS, ENREDO (o que acontece), TEMPO (quando) e ESPAÇO (onde).",
-
+  missao: "Ler palavras com encontros consonantais BR, PR, TR, CR, FR, GR.",
   objetivos: [
-    "Identificar os elementos da narrativa.",
-    "Recontar em ordem: começo, meio e fim.",
-    "Cuidar dos detalhes importantes.",
-    "Criar histórias baseadas em imagens.",
+    "Perceber que cada consoante do encontro tem seu som.",
+    "Ler BRA, PRA, TRA, CRA, FRA, GRA.",
+    "Diferenciar encontro consonantal de dígrafo.",
+    "Ler frases com encontros consonantais.",
   ],
-
-  motivacao:
-    "Toda história merece ser contada de novo — e você pode ser o contador!",
-
+  motivacao: "Com esses encontros você abre a leitura de milhares de palavras — TRABALHAR, ESTRELA, BRINCAR…",
   explicacao:
-    "Toda história tem 4 partes:\n\n👥 PERSONAGENS → quem aparece.\n📖 ENREDO → o que acontece.\n⏰ TEMPO → quando acontece (de dia, de noite, era uma vez…).\n🏠 ESPAÇO → onde acontece (floresta, casa, escola).\n\nAntes de recontar, pense nos 4!",
-
+    "🎯 ENCONTRO CONSONANTAL:\n\nDuas consoantes seguidas, cada uma com SEU som.\n\n· BR (BRAÇO, BRUXA, BRINCAR)\n· PR (PRATO, PRETO, PROVA)\n· TR (TREM, TRÊS, TRAVÃO)\n· CR (CRUZ, CRIANÇA, CROSS)\n· FR (FRUTA, FRIO, FRACO)\n· GR (GRUPO, GRÃO, GRAMA)\n\n⚠️ Diferente de dígrafo (CH, LH, NH): aqui você OUVE as DUAS consoantes.",
+  explicacaoAtiva: [
+    {
+      texto: "TREM tem TR — 2 consoantes, 2 sons.",
+      exemplo: "T + R + EM = TREM.",
+      imagem: tremImg,
+      imagemAlt: "Trem em movimento",
+      checagem: {
+        pergunta: "TR faz quantos sons?",
+        opcoes: ["1 som", "2 sons"],
+        correta: 1,
+        explicacao: "2 sons (T e R).",
+      },
+    },
+    {
+      texto: "FLOR tem FL — dá pra ouvir F e L.",
+      exemplo: "F + L + OR = FLOR.",
+      imagem: florImg,
+      imagemAlt: "Flor",
+      checagem: {
+        pergunta: "FL é dígrafo ou encontro?",
+        opcoes: ["Dígrafo", "Encontro"],
+        correta: 1,
+        explicacao: "Encontro consonantal.",
+      },
+    },
+    {
+      texto: "PRATO tem PR — junta 3 letras na sílaba: P-R-A.",
+      exemplo: "PRA + TO = PRATO.",
+      imagem: estrelaImg,
+      imagemAlt: "Prato",
+      checagem: {
+        pergunta: "PRA tem quantos sons?",
+        opcoes: ["2", "3"],
+        correta: 1,
+        explicacao: "3 sons: P, R, A.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Personagem = quem aparece.",
-    nivel2: "Enredo = o que acontece.",
-    nivel3: "Tempo = quando; Espaço = onde.",
-    nivel4: "Boa recontagem tem começo, meio e fim.",
+    nivel1: "Encontro consonantal = 2 consoantes juntas, 2 sons.",
+    nivel2: "BR, PR, TR, CR, FR, GR (também BL, CL, FL, GL, PL).",
+    nivel3: "Diferente de dígrafo: aqui ouve-se as duas.",
+    nivel4: "Sílabas: BRA, PRE, TRO, CRU…",
   },
-
   exemploResolvido: {
-    enunciado: "Na história de Lili e o gato, quem é o personagem?",
+    enunciado: "Leia: TREM.",
     passos: [
-      "Pense: quem aparece?",
-      "Uma menina chamada LILI e um GATO.",
-      "Personagens: Lili e o gato.",
+      "TR — leio T e R juntos.",
+      "TR + EM = TREM.",
+      "Ouço as 2 consoantes. ✅",
     ],
-    resposta: "LILI e o GATO. ✅",
+    resposta: "TREM.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. 'Era uma vez uma menina que tinha um gato…' — quem é a personagem?",
-    resposta: "A MENINA (LILI).",
-    explicacao: "Personagem = quem aparece na história.",
+    enunciado: "🔊 Qual palavra tem encontro consonantal?",
+    resposta: "TREM (tem TR).",
+    explicacao: "TR = 2 consoantes.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Personagem:",
+      pergunta: "Tem encontro:",
       opcoes: [
-        { nome: "menina", imagemUrl: meninaImg },
-        { nome: "arvore", imagemUrl: arvoreImg },
+        { nome: "trem", imagemUrl: tremImg },
         { nome: "sol", imagemUrl: solImg },
+        { nome: "bola", imagemUrl: bolaImg },
       ],
-      respostaCerta: "menina",
+      respostaCerta: "trem",
     },
   },
-
   exercicios: [
-    { enunciado: "Enredo é…", resposta: "O QUE ACONTECE.", dica: "A sequência de fatos." },
-    { enunciado: "Tempo pode ser…", resposta: "'Era uma vez', 'de noite', 'no verão'.", dica: "QUANDO acontece." },
-    { enunciado: "Espaço é…", resposta: "O LUGAR (floresta, casa).", dica: "ONDE acontece." },
+    { enunciado: "Encontro consonantal tem quantas consoantes juntas?", resposta: "2.", dica: "Duas." },
+    { enunciado: "TR + EM =", resposta: "TREM.", dica: "Junte." },
+    { enunciado: "PR + ATO =", resposta: "PRATO.", dica: "Junte." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: reconhecer os elementos da história.",
-    resposta: "Personagem + enredo + tempo + espaço.",
+    enunciado: "Desafio Brilha: encontrar encontros consonantais.",
+    resposta: "BR, PR, TR, CR, FR, GR.",
     visual: {
       cena: [
-        { personagem: "MENINA", itemImagemUrl: meninaImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "BOLA", itemImagemUrl: bolaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "CASA", itemImagemUrl: casaImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#FDE047" },
+        { personagem: "TREM", itemImagemUrl: tremImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "FLOR", itemImagemUrl: florImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "ÁRVORE", itemImagemUrl: arvoreImg, quantidade: 1, cor: "#22C55E" },
       ],
       perguntas: [
-        { pergunta: "Quem = ?", opcoes: ["Personagem", "Tempo", "Espaço"], correta: 0, explicacao: "Personagem." },
-        { pergunta: "O que acontece = ?", opcoes: ["Enredo", "Personagem", "Espaço"], correta: 0, explicacao: "Enredo." },
-        { pergunta: "Quando = ?", opcoes: ["Tempo", "Enredo", "Personagem"], correta: 0, explicacao: "Tempo." },
-        { pergunta: "Onde = ?", opcoes: ["Espaço", "Tempo", "Enredo"], correta: 0, explicacao: "Espaço." },
-        { pergunta: "Boa história tem:", opcoes: ["Começo, meio e fim", "Só o meio", "Nenhuma ordem"], correta: 0, explicacao: "Começo, meio e fim." },
+        { pergunta: "Encontro = quantas consoantes?", opcoes: ["2", "1"], correta: 0, explicacao: "2." },
+        { pergunta: "TR = quantos sons?", opcoes: ["2", "1"], correta: 0, explicacao: "2." },
+        { pergunta: "FLOR tem…", opcoes: ["Encontro FL", "Dígrafo"], correta: 0, explicacao: "Encontro FL." },
+        { pergunta: "PR+ATO=", opcoes: ["PRATO", "PATO"], correta: 0, explicacao: "PRATO." },
+        { pergunta: "Diferente de dígrafo:", opcoes: ["Ouve as 2", "Ouve 1 só"], correta: 0, explicacao: "Ouve as duas." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "👥 Personagens = quem.",
-      "📖 Enredo = o que acontece.",
-      "⏰ Tempo = quando.",
-      "🏠 Espaço = onde.",
-      "🔢 Começo, meio e fim.",
+      "Encontro = 2 consoantes juntas, 2 sons.",
+      "BR, PR, TR, CR, FR, GR.",
+      "Diferente de dígrafo: aqui ouve as duas.",
+      "Sílabas: BRA, PRE, TRO, CRU, FRI, GRA.",
     ],
-    dica: "Antes de contar, pense: QUEM · O QUÊ · QUANDO · ONDE.",
+    dica: "Se ouviu 2 consoantes, é encontro. Se ouviu 1 só, é dígrafo.",
   },
-
   quiz: [
-    { pergunta: "Personagem =", opcoes: ["Quem aparece", "Onde acontece", "Quando acontece"], correta: 0, explicacao: "Quem aparece." },
-    { pergunta: "Enredo =", opcoes: ["O que acontece", "O lugar", "A hora"], correta: 0, explicacao: "O que acontece." },
-    { pergunta: "Tempo =", opcoes: ["Quando", "Quem", "Onde"], correta: 0, explicacao: "Quando." },
-    { pergunta: "Espaço =", opcoes: ["Onde", "Quando", "Quem"], correta: 0, explicacao: "Onde." },
-    { pergunta: "Boa história tem:", opcoes: ["Começo, meio e fim", "Só meio", "Sem ordem"], correta: 0, explicacao: "Começo, meio e fim." },
+    { pergunta: "Encontro consonantal =", opcoes: ["2 sons", "1 som"], correta: 0, explicacao: "2 sons." },
+    { pergunta: "TR+EM=", opcoes: ["TREM", "TEM"], correta: 0, explicacao: "TREM." },
+    { pergunta: "PR+ATO=", opcoes: ["PRATO", "PATO"], correta: 0, explicacao: "PRATO." },
+    { pergunta: "Dígrafo x encontro:", opcoes: ["Dígrafo=1 som", "Iguais"], correta: 0, explicacao: "Dígrafo 1, encontro 2." },
+    { pergunta: "FLOR tem…", opcoes: ["FL encontro", "FL dígrafo"], correta: 0, explicacao: "Encontro FL." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Contador de Histórias! Missão em Família: escolham um livro infantil, leiam juntos e depois RECONTEM em casa apontando personagem, tempo e lugar.",
-
+    "🏅 Medalha: CAÇADOR DE ENCONTROS! Missão em Casa: procurar 5 palavras com BR/PR/TR/CR/FR/GR.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Recontar histórias faz o cérebro criar imagens novas — cada pessoa reconta de um jeito único!",
+      "Alguns encontros são difíceis pra crianças pequenas — por isso 'prato' pode virar 'pato'. Com treino, o cérebro aprende.",
   },
-
   interativas: [
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · Quem é a personagem?",
-      instrucao: "Toque pra ouvir. 'Era uma vez uma menina com um gato…' — quem é a personagem?",
+      titulo: "Fase 1 · Encontro TR",
+      instrucao: "🔊 Qual tem TR?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "MENINA", imagemUrl: meninaImg, rotulo: "👧 MENINA" },
-        { nome: "ÁRVORE", imagemUrl: arvoreImg, rotulo: "🌳 ÁRVORE" },
+        { nome: "TREM", imagemUrl: tremImg, rotulo: "🚂 TREM" },
         { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "CASA", imagemUrl: casaImg, rotulo: "🏠 CASA" },
       ],
       correta: 0,
-      acerto: "👧 Isso! MENINA.",
-      erro: "Personagem é QUEM aparece: a menina.",
+      acerto: "🚂 TREM — TR!",
+      erro: "TR está em TREM.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 2 · Enredo",
-      instrucao: "Toque pra ouvir. Enredo é:",
-      figura: { imagemUrl: livroImg, rotulo: "📖" },
+      titulo: "Fase 2 · Encontro FL",
+      instrucao: "🔊 FLOR tem…",
+      figura: { imagemUrl: florImg, rotulo: "🌸" },
       pergunta: "Escolha:",
-      opcoes: ["O QUE ACONTECE", "O LUGAR", "A HORA"],
+      opcoes: ["Encontro FL", "Dígrafo FL"],
       correta: 0,
-      acerto: "📖 Enredo = o que acontece.",
-      erro: "Enredo é O QUE acontece.",
+      acerto: "Encontro — ouve F e L!",
+      erro: "Ouve as 2 letras: encontro.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 3 · Tempo / Espaço",
-      instrucao: "Toque pra ouvir. 'De noite, na floresta…' fala de:",
-      figura: { imagemUrl: luaImg, rotulo: "🌙🌳" },
+      titulo: "Fase 3 · PRATO",
+      instrucao: "🔊 PR + ATO = ?",
+      figura: { imagemUrl: estrelaImg, rotulo: "🍽️" },
       pergunta: "Escolha:",
-      opcoes: ["TEMPO e ESPAÇO", "Só personagem", "Só enredo"],
+      opcoes: ["PRATO", "PATO", "PARTO"],
       correta: 0,
-      acerto: "⏰🏠 TEMPO (de noite) e ESPAÇO (floresta).",
-      erro: "'De noite' é tempo; 'na floresta' é espaço.",
+      acerto: "PRATO!",
+      erro: "PR+ATO = PRATO.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 4 · Elementos da história",
-      instrucao: "Arraste cada pista pro elemento certo.",
+      titulo: "Fase 4 · Dígrafo ou Encontro?",
+      instrucao: "Arraste cada palavra.",
       pares: [
-        { item: "Lili", alvo: "PERSONAGEM" },
-        { item: "Brincou com o gato", alvo: "ENREDO" },
-        { item: "Na sala de casa", alvo: "ESPAÇO" },
+        { item: "CHUVA", alvo: "DÍGRAFO" },
+        { item: "NINHO", alvo: "DÍGRAFO" },
+        { item: "TREM", alvo: "ENCONTRO" },
+        { item: "FLOR", alvo: "ENCONTRO" },
+        { item: "PRATO", alvo: "ENCONTRO" },
       ],
       alvosVisuais: [
-        { nome: "PERSONAGEM", cor: "#F472B6", capacidade: 1 },
-        { nome: "ENREDO", cor: "#FBBF24", capacidade: 1 },
-        { nome: "ESPAÇO", cor: "#34D399", capacidade: 1 },
+        { nome: "DÍGRAFO", cor: "#60A5FA", capacidade: 2 },
+        { nome: "ENCONTRO", cor: "#F59E0B", capacidade: 3 },
       ],
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Recontagem da Coruja",
-      instrucao: "A Coruja pede: uma boa história tem que ter:",
+      titulo: "Fase 5 · Leitura",
+      instrucao: "🔊 'O TREM PARA.' O que para?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "3PARTES", imagemUrl: estrelaImg, rotulo: "🌟 Começo, meio e fim" },
-        { nome: "SOMEIO", imagemUrl: bolaImg, rotulo: "⚽ Só o meio" },
-        { nome: "BAGUNCA", imagemUrl: gatoImg, rotulo: "🐱 Sem ordem" },
+        { nome: "TREM", imagemUrl: tremImg, rotulo: "🚂 TREM" },
+        { nome: "FLOR", imagemUrl: florImg, rotulo: "🌸 FLOR" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
       ],
       correta: 0,
-      acerto: "🌟 Começo, meio e fim!",
-      erro: "Toda história tem 3 partes: começo, meio e fim.",
+      acerto: "🚂 O TREM para!",
+      erro: "Frase: O TREM PARA.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Personagem =", opcoes: ["Quem aparece", "Onde", "Quando"], correta: 0, explicacao: "Quem.", visual: { tipo: "itens", imagemUrl: meninaImg, quantidade: 1, rotulo: "👧" } },
-      { pergunta: "Enredo =", opcoes: ["O que acontece", "Onde", "Quando"], correta: 0, explicacao: "O que acontece.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📖" } },
-      { pergunta: "Espaço =", opcoes: ["Onde", "Quem", "Quando"], correta: 0, explicacao: "Onde.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🏠" } },
+      { pergunta: "Encontro = quantas consoantes?", opcoes: ["2", "1"], correta: 0, explicacao: "2.", visual: { tipo: "itens", imagemUrl: tremImg, quantidade: 1, rotulo: "🚂" } },
+      { pergunta: "TR+EM=", opcoes: ["TREM", "TEM"], correta: 0, explicacao: "TREM.", visual: { tipo: "itens", imagemUrl: tremImg, quantidade: 1, rotulo: "🚂" } },
+      { pergunta: "PR+ATO=", opcoes: ["PRATO", "PATO"], correta: 0, explicacao: "PRATO.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "🍽️" } },
     ],
     medio: [
-      { pergunta: "Tempo =", opcoes: ["Quando", "Quem", "Onde"], correta: 0, explicacao: "Quando.", visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "⏰" } },
-      { pergunta: "Ordem:", opcoes: ["Começo, meio, fim", "Só meio", "Só fim"], correta: 0, explicacao: "Começo, meio, fim.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "1·2·3" } },
-      { pergunta: "'Era uma vez':", opcoes: ["Marca do tempo", "Personagem", "Espaço"], correta: 0, explicacao: "Tempo (início).", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "⏳" } },
+      { pergunta: "Dígrafo tem…", opcoes: ["1 som", "2 sons"], correta: 0, explicacao: "1 som.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "CH" } },
+      { pergunta: "Encontro tem…", opcoes: ["2 sons", "1 som"], correta: 0, explicacao: "2 sons.", visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "FL" } },
+      { pergunta: "FRUTA tem…", opcoes: ["Encontro FR", "Dígrafo FR"], correta: 0, explicacao: "Encontro.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "FR" } },
     ],
     dificil: [
-      { pergunta: "Recontar é:", opcoes: ["Contar de novo com detalhes", "Copiar tudo", "Esquecer"], correta: 0, explicacao: "Contar de novo.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🗣️" } },
-      { pergunta: "Personagem pode ser:", opcoes: ["Pessoa, bicho, objeto vivo", "Só menino", "Só menina"], correta: 0, explicacao: "Qualquer ser da história.", visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" } },
-      { pergunta: "Sem enredo:", opcoes: ["Não é história", "É melhor", "É igual"], correta: 0, explicacao: "Sem enredo não vira história.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "❌" } },
+      { pergunta: "'Pato' x 'Prato':", opcoes: ["Prato tem PR", "iguais"], correta: 0, explicacao: "PR muda a palavra.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "PR" } },
+      { pergunta: "Sílaba BRA tem quantos sons?", opcoes: ["3", "2"], correta: 0, explicacao: "B, R, A.", visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "BRA" } },
+      { pergunta: "Se ouviu 2 consoantes seguidas:", opcoes: ["Encontro", "Dígrafo"], correta: 0, explicacao: "Encontro.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "🎧" } },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP26" },
+  proximaHabilidade: { codigo: "EF01LP26", titulo: "Texto completo com título e fluência" },
 };
 
 export default aula;

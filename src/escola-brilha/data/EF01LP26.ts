@@ -1,234 +1,258 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as meninaImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
-import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as nuvemImg } from "@/assets/neuro-treino/objetos/nuvem.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 
 /**
- * EF01LP26 — Aula 026
- * BNCC: Identificar elementos de uma narrativa (personagens, enredo, tempo, espaço).
- * Missão: "As Peças da História".
+ * EF01LP26 — Aula 026 · TEXTO COMPLETO COM TÍTULO
+ * Fecha o Lote 6 e a reforma do 1º ano. Texto de 4-5 frases com título,
+ * lido com fluência e compreensão.
  */
 const aula: Aula = {
   codigo: "EF01LP26",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "As Peças da História",
-
+  disciplina: "Português",
+  titulo: "Meu Primeiro Texto de Verdade",
   narrativa: {
-    titulo: "As Peças da História",
+    titulo: "Meu Primeiro Texto de Verdade",
     contexto:
-      "As páginas de um livro mágico caíram e as PEÇAS DAS HISTÓRIAS se espalharam pela floresta.",
+      "Brilha terminou a jornada: já lê sílabas, dígrafos, encontros consonantais. Hoje ele vai ler um TEXTO DE VERDADE — com TÍTULO e várias frases.",
     problema:
-      "Personagens ficaram sem enredo, tempos sem espaços — nada faz sentido!",
-    convite: "Bora ajudar o Brilha a IDENTIFICAR cada peça e montar as histórias?",
+      "Um texto de verdade tem título (o que o texto vai contar), várias frases seguidas com sentido, e no fim quem lê ENTENDE o que aconteceu.",
+    convite: "Bora ler seu primeiro texto de verdade?",
   },
-
   conhecimentosPrevios: [
-    "Recontar histórias (EF01LP25).",
-    "Compreender textos curtos.",
-    "Perceber ordem: começo, meio, fim.",
+    "Ler mini-textos com fluência (LP20).",
+    "Dígrafos CH, LH, NH (LP21–LP23).",
+    "Letras dobradas (LP24).",
+    "Encontros consonantais (LP25).",
   ],
-
-  missao:
-    "Identificar, em histórias lidas ou escutadas, os PERSONAGENS, o ENREDO, o TEMPO e o ESPAÇO.",
-
+  missao: "Ler um texto de 4 frases COM TÍTULO, com fluência e responder perguntas de compreensão.",
   objetivos: [
-    "Reconhecer os 4 elementos da narrativa.",
-    "Localizar cada elemento no texto.",
-    "Diferenciar tempo e espaço.",
-    "Perceber que sem esses elementos a história não funciona.",
+    "Entender o papel do TÍTULO no texto.",
+    "Ler 4 frases seguidas com pausas nos pontos.",
+    "Responder perguntas de compreensão global.",
+    "Perceber que agora ele lê SOZINHO.",
   ],
-
-  motivacao:
-    "Toda história é feita de peças — quem descobre elas, entende tudo!",
-
+  motivacao: "Hoje é o dia do diploma: você virou leitor. Todo mundo do mundo lê pela primeira vez uma vez só.",
   explicacao:
-    "As 4 PEÇAS da história:\n\n👥 PERSONAGENS → 'Lili e o gato'.\n📖 ENREDO → 'Lili brinca com o gato'.\n⏰ TEMPO → 'De tarde…'\n🏠 ESPAÇO → '…no quintal de casa'.\n\nQuando você lê, escute onde cada peça está.",
-
+    "📖 TEXTO DE HOJE:\n\n**O DIA DO SAPO**\n\nO SAPO ACORDA. ELE OLHA A LUA. O PATO CHEGA. O SAPO PULA COM O PATO.\n\n💡 O TÍTULO ('O DIA DO SAPO') conta rapidinho do que é o texto.\n💡 As frases contam a história em ordem: acordar → olhar → chegar → pular.\n💡 No fim, você entende: o sapo teve um dia bom com o pato.",
+  explicacaoAtiva: [
+    {
+      texto: "TÍTULO = a chamada do texto, conta rapidinho do que fala.",
+      exemplo: "'O DIA DO SAPO' — vai contar o dia dele.",
+      imagem: sapoImg,
+      imagemAlt: "Sapo",
+      checagem: {
+        pergunta: "Sobre quem é o texto?",
+        opcoes: ["Sapo", "Gato", "Sol"],
+        correta: 0,
+        explicacao: "O título diz: O DIA DO SAPO.",
+      },
+    },
+    {
+      texto: "Cada frase conta 1 coisa que aconteceu.",
+      exemplo: "1ª: acorda · 2ª: olha a lua · 3ª: pato chega · 4ª: pula junto.",
+      imagem: luaImg,
+      imagemAlt: "Lua",
+      checagem: {
+        pergunta: "O que o sapo faz na 2ª frase?",
+        opcoes: ["Acorda", "Olha a lua", "Pula"],
+        correta: 1,
+        explicacao: "2ª: ELE OLHA A LUA.",
+      },
+    },
+    {
+      texto: "No fim do texto, pense: o que aconteceu no geral?",
+      exemplo: "O sapo teve um dia bom, brincou com o pato.",
+      imagem: patoImg,
+      imagemAlt: "Pato",
+      checagem: {
+        pergunta: "Quem chegou pra brincar com o sapo?",
+        opcoes: ["Pato", "Gato", "Nuvem"],
+        correta: 0,
+        explicacao: "3ª frase: O PATO CHEGA.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "4 peças: personagem, enredo, tempo, espaço.",
-    nivel2: "Personagem responde QUEM?",
-    nivel3: "Tempo responde QUANDO? Espaço responde ONDE?",
-    nivel4: "Sem enredo não há história — precisa acontecer alguma coisa.",
+    nivel1: "Texto tem TÍTULO + frases seguidas.",
+    nivel2: "Título = do que o texto fala.",
+    nivel3: "Cada frase conta 1 ideia.",
+    nivel4: "No fim, pense no sentido geral do texto.",
   },
-
   exemploResolvido: {
-    enunciado:
-      "'De manhã, no quintal, Bruno correu com Rex.' Quem, onde e quando?",
+    enunciado: "Texto: 'O DIA DO SAPO. O SAPO ACORDA. ELE OLHA A LUA. O PATO CHEGA. O SAPO PULA COM O PATO.' Quem chega?",
     passos: [
-      "QUEM: Bruno e Rex.",
-      "ONDE: no quintal.",
-      "QUANDO: de manhã.",
+      "Leio o título: O DIA DO SAPO.",
+      "Leio as 4 frases com pausa nos pontos.",
+      "3ª frase: O PATO CHEGA.",
+      "Resposta: o pato. ✅",
     ],
-    resposta: "Bruno e Rex · quintal · de manhã. ✅",
+    resposta: "O PATO.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. 'De noite, na casa, Lili leu um livro.' O TEMPO é:",
-    resposta: "DE NOITE.",
-    explicacao: "Tempo = quando aconteceu.",
+    enunciado: "🔊 No texto 'O DIA DO SAPO', quem é o personagem principal?",
+    resposta: "O SAPO.",
+    explicacao: "Título diz 'O DIA DO SAPO'.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Tempo:",
+      pergunta: "Personagem:",
       opcoes: [
-        { nome: "noite", imagemUrl: luaImg },
-        { nome: "menina", imagemUrl: meninaImg },
-        { nome: "casa", imagemUrl: casaImg },
+        { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "sol", imagemUrl: solImg },
       ],
-      respostaCerta: "noite",
+      respostaCerta: "sapo",
     },
   },
-
   exercicios: [
-    { enunciado: "'Lili e o gato' são…", resposta: "PERSONAGENS.", dica: "Quem aparece." },
-    { enunciado: "'No quintal' é…", resposta: "ESPAÇO.", dica: "Onde aconteceu." },
-    { enunciado: "'De manhã' é…", resposta: "TEMPO.", dica: "Quando aconteceu." },
+    { enunciado: "🔊 O que o SAPO faz na 1ª frase?", resposta: "ACORDA.", dica: "Início do dia." },
+    { enunciado: "🔊 Quem chega no texto?", resposta: "O PATO.", dica: "3ª frase." },
+    { enunciado: "🔊 O que os dois fazem no fim?", resposta: "PULAM JUNTOS.", dica: "Última frase." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: identifique cada peça da história.",
-    resposta: "Personagem · enredo · tempo · espaço.",
+    enunciado: "Desafio Brilha: ler o texto todo e responder 5 perguntas.",
+    resposta: "Compreensão global.",
     visual: {
       cena: [
-        { personagem: "MENINA", itemImagemUrl: meninaImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "CACHORRO", itemImagemUrl: cachorroImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "LUA", itemImagemUrl: luaImg, quantidade: 1, cor: "#A78BFA" },
+        { personagem: "1ª: ACORDA", itemImagemUrl: sapoImg, quantidade: 1, cor: "#22C55E" },
+        { personagem: "2ª: OLHA A LUA", itemImagemUrl: luaImg, quantidade: 1, cor: "#A78BFA" },
+        { personagem: "3ª: PATO CHEGA", itemImagemUrl: patoImg, quantidade: 1, cor: "#F59E0B" },
+        { personagem: "4ª: PULA JUNTO", itemImagemUrl: sapoImg, quantidade: 1, cor: "#60A5FA" },
       ],
       perguntas: [
-        { pergunta: "'Lili' é:", opcoes: ["Personagem", "Espaço", "Tempo"], correta: 0, explicacao: "Personagem." },
-        { pergunta: "'De noite' é:", opcoes: ["Tempo", "Espaço", "Personagem"], correta: 0, explicacao: "Tempo." },
-        { pergunta: "'Na casa' é:", opcoes: ["Espaço", "Tempo", "Personagem"], correta: 0, explicacao: "Espaço." },
-        { pergunta: "'Leu um livro' é:", opcoes: ["Enredo", "Personagem", "Espaço"], correta: 0, explicacao: "Enredo (o que aconteceu)." },
-        { pergunta: "Sem enredo:", opcoes: ["Não é história", "Melhora", "Igual"], correta: 0, explicacao: "Não é história." },
+        { pergunta: "Título do texto?", opcoes: ["O DIA DO SAPO", "O SOL", "A CHUVA"], correta: 0, explicacao: "O DIA DO SAPO." },
+        { pergunta: "Quem acorda?", opcoes: ["Sapo", "Pato"], correta: 0, explicacao: "1ª frase." },
+        { pergunta: "O sapo olha…", opcoes: ["A lua", "O sol"], correta: 0, explicacao: "2ª frase: A LUA." },
+        { pergunta: "Quem chega?", opcoes: ["Pato", "Gato"], correta: 0, explicacao: "3ª: O PATO CHEGA." },
+        { pergunta: "No fim, o sapo…", opcoes: ["Pula com o pato", "Dorme"], correta: 0, explicacao: "4ª frase." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "👥 Personagem = QUEM.",
-      "📖 Enredo = O QUÊ.",
-      "⏰ Tempo = QUANDO.",
-      "🏠 Espaço = ONDE.",
+      "Texto de verdade tem TÍTULO + frases.",
+      "Título = do que fala o texto.",
+      "Cada frase conta 1 ideia, em ordem.",
+      "No fim, pense no sentido geral.",
+      "Você virou LEITOR.",
     ],
-    dica: "Ao ler, sublinhe mentalmente cada peça.",
+    dica: "Antes de começar, leia o TÍTULO — ele conta rapidinho do que fala o texto.",
   },
-
   quiz: [
-    { pergunta: "'Bruno' é:", opcoes: ["Personagem", "Tempo", "Espaço"], correta: 0, explicacao: "Personagem." },
-    { pergunta: "'De manhã' é:", opcoes: ["Tempo", "Personagem", "Espaço"], correta: 0, explicacao: "Tempo." },
-    { pergunta: "'Na floresta' é:", opcoes: ["Espaço", "Tempo", "Personagem"], correta: 0, explicacao: "Espaço." },
-    { pergunta: "'Correu' é:", opcoes: ["Enredo", "Espaço", "Tempo"], correta: 0, explicacao: "Enredo (ação)." },
-    { pergunta: "Elementos da narrativa:", opcoes: ["Personagem, enredo, tempo, espaço", "Só personagem", "Só enredo"], correta: 0, explicacao: "Os 4 juntos." },
+    { pergunta: "Título serve pra…", opcoes: ["Contar rapidinho do que fala", "Enfeitar só"], correta: 0, explicacao: "Do que fala." },
+    { pergunta: "Texto com 4 frases tem…", opcoes: ["4 pontos", "1 ponto"], correta: 0, explicacao: "4 pontos." },
+    { pergunta: "Quem é do texto 'O DIA DO SAPO'?", opcoes: ["Sapo (e pato)", "Só gato"], correta: 0, explicacao: "Sapo e pato." },
+    { pergunta: "No fim quem lê deve…", opcoes: ["Entender o texto", "Esquecer"], correta: 0, explicacao: "Compreender." },
+    { pergunta: "Você agora é…", opcoes: ["LEITOR", "Só ouvinte"], correta: 0, explicacao: "LEITOR!" },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Mestre das Peças da História! Missão em Família: escolham uma história antes de dormir e, no fim, apontem juntos personagens, tempo e lugar.",
-
+    "🏅🎉 MEDALHA DE OURO: LEITOR OFICIAL DO 1º ANO! Você fechou os 26 passos: fonemas, sílabas, palavras, frases, dígrafos, letras dobradas, encontros e — agora — um texto completo. Missão em Casa: leia esse texto pra alguém da família. Diga: 'HOJE EU VIREI LEITOR.'",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Todas as histórias do mundo — filmes, livros, quadrinhos — usam essas mesmas 4 peças!",
+      "O cérebro que aprendeu a ler nunca mais volta a ser o mesmo. Você ganhou uma superpotência: pode aprender qualquer coisa lendo livros.",
   },
-
   interativas: [
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · Quem é a personagem?",
-      instrucao: "Toque pra ouvir. 'Lili leu um livro na sala' — quem?",
-      pergunta: "Personagem:",
+      titulo: "Fase 1 · Título do texto",
+      instrucao: "🔊 Qual é o título do texto de hoje?",
+      pergunta: "Escolha:",
       opcoes: [
-        { nome: "MENINA", imagemUrl: meninaImg, rotulo: "👧 LILI" },
-        { nome: "CASA", imagemUrl: casaImg, rotulo: "🏠 CASA" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 O DIA DO SAPO" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ O SOL" },
+        { nome: "FLOR", imagemUrl: florImg, rotulo: "🌸 A FLOR" },
       ],
       correta: 0,
-      acerto: "👧 LILI é a personagem.",
-      erro: "Personagem = quem aparece: LILI.",
+      acerto: "🐸 O DIA DO SAPO!",
+      erro: "Título: O DIA DO SAPO.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Tempo",
-      instrucao: "Toque pra ouvir. 'De noite, ele voltou.' O TEMPO é:",
-      figura: { imagemUrl: luaImg, rotulo: "🌙" },
-      pergunta: "Escolha:",
-      opcoes: ["DE NOITE", "NA RUA", "O MENINO"],
-      correta: 0,
-      acerto: "🌙 De noite = tempo.",
-      erro: "Tempo = quando: 'DE NOITE'.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Espaço",
-      instrucao: "Toque pra ouvir. 'Na floresta, o coelho pulou.' O ESPAÇO é:",
-      figura: { imagemUrl: arvoreImg, rotulo: "🌳" },
-      pergunta: "Escolha:",
-      opcoes: ["NA FLORESTA", "O COELHO", "PULOU"],
-      correta: 0,
-      acerto: "🌳 Na floresta = espaço.",
-      erro: "Espaço = onde: 'NA FLORESTA'.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Cada peça no seu lugar",
-      instrucao: "Arraste cada trecho pra peça certa.",
-      pares: [
-        { item: "Bruno", alvo: "PERSONAGEM" },
-        { item: "De manhã", alvo: "TEMPO" },
-        { item: "No quintal", alvo: "ESPAÇO" },
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Quantas frases?",
+      instrucao: "🔊 O texto tem quantas frases?",
+      grupos: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "1ª" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "2ª" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "3ª" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "4ª" },
       ],
-      alvosVisuais: [
-        { nome: "PERSONAGEM", cor: "#F472B6", capacidade: 1 },
-        { nome: "TEMPO", cor: "#A78BFA", capacidade: 1 },
-        { nome: "ESPAÇO", cor: "#34D399", capacidade: 1 },
+      pergunta: "Quantas frases?",
+      opcoes: ["3", "4", "5"],
+      correta: 1,
+      acerto: "4 frases — 4 pontos!",
+      erro: "Conte os pontos: 4.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 3 · Ordem do texto",
+      instrucao: "Ordene o que acontece com o sapo.",
+      itens: ["O SAPO ACORDA.", "ELE OLHA A LUA.", "O PATO CHEGA.", "O SAPO PULA COM O PATO."],
+      imagens: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "1ª" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "2ª" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "3ª" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "4ª" },
       ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · Compreensão",
+      instrucao: "🔊 Quem chega pra brincar com o sapo?",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        { imagemUrl: nuvemImg, quantidade: 1, rotulo: "nuvem" },
+      ],
+      pergunta: "Quem?",
+      opcoes: ["Pato", "Gato", "Nuvem"],
+      correta: 0,
+      acerto: "🦆 O PATO!",
+      erro: "3ª frase: O PATO CHEGA.",
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Peça que faltou",
-      instrucao: "A Coruja diz: 'Bruno … no quintal, de manhã.' Que peça faltou?",
+      titulo: "Fase 5 · Diploma",
+      instrucao: "🔊 Você fechou o 1º ano de Português. O que você virou?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "ENREDO", imagemUrl: livroImg, rotulo: "📖 ENREDO (o que fez?)" },
-        { nome: "TEMPO", imagemUrl: solImg, rotulo: "☀️ TEMPO" },
-        { nome: "ESPAÇO", imagemUrl: casaImg, rotulo: "🏠 ESPAÇO" },
+        { nome: "LEITOR", imagemUrl: livroImg, rotulo: "📖 LEITOR" },
+        { nome: "SÓ OUVINTE", imagemUrl: estrelaImg, rotulo: "👂 Só ouvinte" },
+        { nome: "NENHUM", imagemUrl: coracaoImg, rotulo: "❌ Nenhum" },
       ],
       correta: 0,
-      acerto: "📖 Faltou o ENREDO — o que Bruno fez?",
-      erro: "Sem ENREDO não sabemos o que aconteceu.",
+      acerto: "📖🎉 VOCÊ É UM LEITOR!",
+      erro: "Você é um LEITOR agora.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "'Lili' é:", opcoes: ["Personagem", "Tempo", "Espaço"], correta: 0, explicacao: "Personagem.", visual: { tipo: "itens", imagemUrl: meninaImg, quantidade: 1, rotulo: "👧" } },
-      { pergunta: "'Na casa' é:", opcoes: ["Espaço", "Tempo", "Personagem"], correta: 0, explicacao: "Espaço.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🏠" } },
-      { pergunta: "'De noite' é:", opcoes: ["Tempo", "Espaço", "Personagem"], correta: 0, explicacao: "Tempo.", visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "🌙" } },
+      { pergunta: "Título serve pra…", opcoes: ["Contar do que fala", "Enfeitar"], correta: 0, explicacao: "Do que fala.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📖" } },
+      { pergunta: "Quem acorda no texto?", opcoes: ["Sapo", "Gato"], correta: 0, explicacao: "Sapo.", visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸" } },
+      { pergunta: "Quem chega?", opcoes: ["Pato", "Sol"], correta: 0, explicacao: "Pato.", visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "🦆" } },
     ],
     medio: [
-      { pergunta: "'Correu no parque' — enredo é:", opcoes: ["Correu", "Parque", "Nada"], correta: 0, explicacao: "Enredo = ação.", visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🏃" } },
-      { pergunta: "Quantas peças tem a narrativa?", opcoes: ["4", "2", "1"], correta: 0, explicacao: "4 peças.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 4, rotulo: "🧩" } },
-      { pergunta: "'Era uma vez' fala de:", opcoes: ["Tempo", "Personagem", "Espaço"], correta: 0, explicacao: "Tempo.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "⏳" } },
+      { pergunta: "O sapo olha…", opcoes: ["A lua", "O sol"], correta: 0, explicacao: "A LUA.", visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "🌙" } },
+      { pergunta: "Ordem: 1º", opcoes: ["Acorda", "Pula"], correta: 0, explicacao: "Acorda primeiro.", visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "1º" } },
+      { pergunta: "Texto tem quantas frases?", opcoes: ["4", "2"], correta: 0, explicacao: "4 frases.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 4, rotulo: "•••• " } },
     ],
     dificil: [
-      { pergunta: "Sem enredo:", opcoes: ["Não é história", "Fica igual", "Fica melhor"], correta: 0, explicacao: "Sem enredo, não é história.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "❌" } },
-      { pergunta: "Personagem pode ser:", opcoes: ["Pessoa, bicho ou objeto vivo", "Só bicho", "Só menina"], correta: 0, explicacao: "Qualquer ser da história.", visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" } },
-      { pergunta: "Ler com atenção ajuda a:", opcoes: ["Identificar as peças", "Esquecer", "Confundir"], correta: 0, explicacao: "Identificar as peças.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎯" } },
+      { pergunta: "No fim, quem lê deve…", opcoes: ["Compreender", "Esquecer"], correta: 0, explicacao: "Compreender.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "🧠" } },
+      { pergunta: "Título ANTES ou DEPOIS do texto?", opcoes: ["Antes", "Depois"], correta: 0, explicacao: "Antes.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "⬆️" } },
+      { pergunta: "Você agora é…", opcoes: ["LEITOR", "Só ouvinte"], correta: 0, explicacao: "LEITOR!", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "🏅" } },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP27" },
+  proximaHabilidade: { codigo: "EF02LP01", titulo: "2º Ano — próxima aventura" },
 };
 
 export default aula;
