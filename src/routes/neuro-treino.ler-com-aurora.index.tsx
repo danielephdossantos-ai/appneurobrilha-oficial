@@ -19,7 +19,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuroraConcluidas } from "@/escola-brilha/curso-ler-com-aurora/progresso";
 import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
 
-export const Route = createFileRoute("/escola-brilha/ler-com-aurora/")({
+export const Route = createFileRoute("/neuro-treino/ler-com-aurora/")({
   head: () => ({
     meta: [
       { title: "Ler com Aurora · Escola Brilha" },
@@ -134,7 +134,7 @@ function FaseBloco({
                   return (
                     <div key={a.slug} className={`flex ${align} px-6`}>
                       <Link
-                        to="/escola-brilha/ler-com-aurora/$aula"
+                        to="/neuro-treino/ler-com-aurora/$aula"
                         params={{ aula: a.slug }}
                         className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
                         style={{

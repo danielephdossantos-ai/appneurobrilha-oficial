@@ -48,7 +48,7 @@ export function gerarCursoRecomendado(
           disciplina: "Alfabetização",
           titulo: "Ler com Aurora",
           descricao: "Trilha completa de leitura com apoio fonológico (Fases 1–8).",
-          rota: "/escola-brilha/ler-com-aurora/painel",
+          rota: "/neuro-treino/ler-com-aurora/painel",
           emoji: "📖",
           faixa,
         },

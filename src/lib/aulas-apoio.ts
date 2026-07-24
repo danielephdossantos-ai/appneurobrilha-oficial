@@ -48,7 +48,7 @@ export function trilhasParaSerie(serie: string | undefined): {
           disciplina: "Alfabetização",
           titulo: "Ler com Aurora",
           descricao: "Leitura passo a passo com apoio fonológico.",
-          rota: "/escola-brilha/ler-com-aurora/painel",
+          rota: "/neuro-treino/ler-com-aurora/painel",
           emoji: "📖",
           cor: "from-[#FF6FA8] to-[#EC4899]",
         },

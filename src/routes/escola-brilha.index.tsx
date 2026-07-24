@@ -11,7 +11,7 @@ import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
-import { cursoLerComAurora } from "@/escola-brilha/curso-ler-com-aurora/aulas";
+
 
 
 
@@ -129,7 +129,7 @@ function EscolaBrilhaCatalogo() {
 
 
   const aulasEscritas = listAulas();
-  const totalMissoesLerAurora = cursoLerComAurora.unidades.reduce((s, u) => s + u.aulas.length, 0);
+  
   const escritasSet = useMemo(() => new Set(aulasEscritas.map((a) => a.codigo)), [aulasEscritas]);
 
   // Agrupa: Série -> Disciplina -> [habilidades]
@@ -200,8 +200,8 @@ function EscolaBrilhaCatalogo() {
           <div className="flex items-center gap-2 text-[#4C9EFF] mb-1">
             <Compass className="h-4 w-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">
-              {aulasEscritas.length + totalMissoesLerAurora}{" "}
-              {aulasEscritas.length + totalMissoesLerAurora === 1
+              {aulasEscritas.length}{" "}
+              {aulasEscritas.length === 1
                 ? "missão disponível"
                 : "missões disponíveis"}{" "}
               · {habilidades.length} aventuras no total
@@ -237,27 +237,7 @@ function EscolaBrilhaCatalogo() {
           <span className="text-xs font-bold opacity-80">Escolher / Desbloquear →</span>
         </Link>
 
-        {/* Curso especial de alfabetização — aparece como categoria própria */}
-        <Link
-          to="/escola-brilha/ler-com-aurora"
-          className="mb-4 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-          style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
-        >
-          <span>
-            <span className="block text-[10px] uppercase tracking-widest opacity-90">
-              Categoria especial · Pré II + 1º Ano
-            </span>
-            <span className="block text-lg leading-tight mt-0.5">
-              🔤 Ler com Aurora
-            </span>
-            <span className="block text-[11px] font-bold opacity-90 mt-1">
-              {totalMissoesLerAurora} missões diárias · Consciência fonológica →
-            </span>
-          </span>
-          <Sparkles className="h-6 w-6 shrink-0" />
-        </Link>
-
-        {/* Contar com Pip e Biblioteca Encantada foram movidos para Neuro Treino */}
+        {/* Ler com Aurora, Contar com Pip e Biblioteca Encantada foram movidos para Neuro Treino */}
 
 
 
@@ -301,7 +281,7 @@ function EscolaBrilhaCatalogo() {
               if (serie === "Educação Infantil") discsExtra.push("portugues");
               
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
-              const mostraLerComAurora = serie === "Educação Infantil" || serie === "1º Ano";
+              
 
               const total = contarSerie(serie);
               const aberta = serieAberta === serie;
@@ -399,23 +379,7 @@ function EscolaBrilhaCatalogo() {
                       )}
 
 
-                        {mostraLerComAurora && (
-                          <Link
-                            to="/escola-brilha/ler-com-aurora"
-                            className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                            style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
-                          >
-                            <div className="text-[10px] uppercase tracking-widest opacity-90">
-                              🔤 Curso especial de leitura · Pré II + 1º Ano
-                            </div>
-                            <div className="text-lg leading-tight mt-0.5">
-                              Ler com Aurora — Fase 1
-                            </div>
-                            <div className="text-[11px] font-bold opacity-90 mt-1">
-                              {totalMissoesLerAurora} missões destravadas · abrir trilha →
-                            </div>
-                          </Link>
-                        )}
+                        {/* Ler com Aurora movido para Neuro Treino */}
 
                         {serie === "Educação Infantil" && (
                           <Link
@@ -435,7 +399,7 @@ function EscolaBrilhaCatalogo() {
                           </Link>
                         )}
 
-                        {disciplinas.length === 0 && !mostraLerComAurora && (
+                        {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
                           Nenhuma missão {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
                         </div>
