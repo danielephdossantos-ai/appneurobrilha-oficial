@@ -96,7 +96,7 @@ export function PersonagemInterativo({
           />
         </motion.button>
       </div>
-      <div className="mt-2 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-white/60">
+      <div className="mt-2 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-white/60" data-no-tts>
         <Volume2 className="h-3 w-3" />
         Toque em {info.label} pra ouvir
       </div>
