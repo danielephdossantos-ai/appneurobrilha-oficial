@@ -754,6 +754,23 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Rodapé científico — visível em toda atividade */}
+      {(() => {
+        const m = metodoDoTipo(rodada.tipo);
+        return (
+          <div className="mt-auto px-3 py-2 bg-black/40 border-t border-white/10 text-[10px] md:text-[11px] text-white/70 leading-tight flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-center">
+            <span className="font-black uppercase tracking-wider text-emerald-300">
+              Base científica:
+            </span>
+            <span className="font-bold text-white/90">{m.nome}</span>
+            <span className="text-white/50">·</span>
+            <span>Pilar NRP: {pilarLabel(m.pilar)}</span>
+            <span className="text-white/50">·</span>
+            <span className="italic">{m.base}</span>
+          </div>
+        );
+      })()}
     </div>
   );
 }
