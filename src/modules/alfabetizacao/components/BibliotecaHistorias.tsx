@@ -666,3 +666,38 @@ function shuffleOnce(
   }
   return arr;
 }
+
+function tipoBadge(tipo: TipoPergunta): {
+  icone: string;
+  texto: string;
+  cor: string;
+} {
+  switch (tipo) {
+    case "literal":
+      return { icone: "📖", texto: "no texto", cor: "bg-sky-100 text-sky-700" };
+    case "inferencia":
+      return {
+        icone: "💡",
+        texto: "pense bem",
+        cor: "bg-amber-100 text-amber-700",
+      };
+    case "sequencia":
+      return {
+        icone: "🔢",
+        texto: "na ordem",
+        cor: "bg-indigo-100 text-indigo-700",
+      };
+    case "causa":
+      return {
+        icone: "🎯",
+        texto: "por quê",
+        cor: "bg-rose-100 text-rose-700",
+      };
+    case "vocabulario":
+      return {
+        icone: "🔤",
+        texto: "vocabulário",
+        cor: "bg-emerald-100 text-emerald-700",
+      };
+  }
+}
