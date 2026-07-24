@@ -154,6 +154,9 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
 export function sanitizeForSpeech(text: string): string {
   if (!text) return "";
   let out = normalizeLiteracyTextForSpeech(text);
+  // Notação fonêmica /x/ — algumas vozes leem "barra". Remove as barras
+  // e mantém só o som/letra (ex.: "/s/" -> "s", "/ssss/" -> "ssss").
+  out = out.replace(/\/([A-Za-zÀ-ÿ]{1,6})\//g, "$1");
   // Remove qualquer símbolo/pictograma/emoji unicode
   out = out.replace(/\p{Extended_Pictographic}/gu, " ");
   out = out.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, " ");
