@@ -22,6 +22,10 @@ import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
 import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
 import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
 import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
+import { Grounding54321 } from "@/components/brilha-vida/Grounding54321";
+import { ButterflyHug } from "@/components/brilha-vida/ButterflyHug";
+import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
+import { InteroceptionScan } from "@/components/brilha-vida/InteroceptionScan";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
