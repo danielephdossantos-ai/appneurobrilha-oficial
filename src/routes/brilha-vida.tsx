@@ -105,6 +105,14 @@ const categorias = [
     descricao: "Regras e harmonia no dia a dia",
     atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos", "Roda do Dia"],
   },
+  {
+    id: "regulacao-aguda",
+    nome: "Regulação Aguda (SOS calma)",
+    img: catAutocontroleImg,
+    cor: "from-rose-300/30 to-rose-100/5",
+    descricao: "Kit clínico para crise, susto ou pico de ansiedade",
+    atividades: ["5-4-3-2-1 Sentidos", "Abraço da Borboleta", "Espaguete e Estátua", "Escuta do Corpo"],
+  },
 ];
 
 function BrilhaVida() {
