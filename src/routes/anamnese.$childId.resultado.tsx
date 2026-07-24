@@ -16,7 +16,9 @@ import {
 import { gerarCursoRecomendado } from "@/modules/anamnese/relatorio/curso-bridge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, Sparkles, GraduationCap, Brain } from "lucide-react";
+import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, Sparkles, GraduationCap, Brain, CalendarDays } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/database/supabase/client";
 import {
   Radar,
   RadarChart,
@@ -59,6 +61,25 @@ function ResultadoRoute() {
   const atividadesTerapeuticas = mostrarNeuro ? recomendarAtividadesTerapeuticas(scores, risk) : [];
   const gruposApoio = mostrarNeuro ? agruparPorGrupo(atividadesTerapeuticas) : [];
   const curso = gerarCursoRecomendado(responses);
+
+  // Plano Anual salvo pra essa criança (gerado ao finalizar a anamnese).
+  const planoQ = useQuery({
+    queryKey: ["plano_anual", childId],
+    queryFn: async () => {
+      const { data: plano } = await supabase
+        .from("plano_anual")
+        .select("id, minutos_por_dia, dias_por_semana, semanas_totais, serie")
+        .eq("child_id", childId)
+        .maybeSingle();
+      if (!plano) return null;
+      const { count } = await supabase
+        .from("plano_anual_itens")
+        .select("id", { count: "exact", head: true })
+        .eq("plano_id", plano.id);
+      return { ...plano, total_blocos: count ?? 0 };
+    },
+    enabled: !!childId,
+  });
 
   const handlePDF = () => {
     generateAnamnesePDF({ childName, responses, scores, risk });
@@ -267,6 +288,36 @@ function ResultadoRoute() {
             ))}
           </div>
         </Card>
+
+        {/* Plano Anual gerado */}
+        {planoQ.data && (
+          <Card className="p-4 border-2 border-primary/40 bg-primary/5">
+            <div className="flex items-center gap-2 mb-2">
+              <CalendarDays className="h-5 w-5 text-primary" />
+              <h2 className="font-bold">Plano Anual de {childName}</h2>
+            </div>
+            <p className="text-sm text-muted-foreground mb-3">
+              Rotina guiada gerada a partir da anamnese, unindo <b>Escola Brilha</b>, <b>Neuro Treino</b> e <b>Brilha Vida</b>.
+            </p>
+            <div className="grid grid-cols-3 gap-2 text-center mb-3">
+              <div className="p-2 rounded-lg bg-background border">
+                <p className="text-xl font-bold text-primary">{planoQ.data.semanas_totais}</p>
+                <p className="text-[10px] text-muted-foreground">semanas</p>
+              </div>
+              <div className="p-2 rounded-lg bg-background border">
+                <p className="text-xl font-bold text-primary">{planoQ.data.dias_por_semana}×</p>
+                <p className="text-[10px] text-muted-foreground">por semana</p>
+              </div>
+              <div className="p-2 rounded-lg bg-background border">
+                <p className="text-xl font-bold text-primary">{planoQ.data.minutos_por_dia}min</p>
+                <p className="text-[10px] text-muted-foreground">por dia</p>
+              </div>
+            </div>
+            <Button asChild className="w-full">
+              <Link to="/plano-anual">Ver plano completo</Link>
+            </Button>
+          </Card>
+        )}
 
         {needsPro && (
           <Card className="p-4 bg-red-50 dark:bg-red-950/30 border-2 border-red-300">
