@@ -1,350 +1,397 @@
 import type { Aula } from "../types";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as pipaImg } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as penteImg } from "@/assets/neuro-treino/objetos/pente.png.asset.json";
+import { url as pandaImg } from "@/assets/neuro-treino/objetos/panda.png.asset.json";
+import { url as porcoImg } from "@/assets/neuro-treino/objetos/porco.png.asset.json";
+import { url as paiImg } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
+import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
+import { url as praiaImg } from "@/assets/neuro-treino/objetos/praia.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as borboletaImg } from "@/assets/neuro-treino/objetos/borboleta.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP06 — Aula 006 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Segmentar oralmente palavras em sílabas.
- *
- * Missão do Dia: "O Trem das Sílabas".
- * Padrão travado (Português): tap-to-speak — toque na figura, o professor
- * fala a palavra em sílabas; toque na sílaba, o professor lê o pedaço.
+ * EF01LP06 — Aula 006 · Letra P · som /p/
+ * REFORMA: substitui a antiga "Trem das Sílabas" (movida para o
+ * bloco de segmentação silábica, mais adiante na trilha).
+ * Base: Orton-Gillingham (multissensorial) + NRP (fonética sistemática).
+ * P é uma oclusiva bilabial surda: lábios fechados, um "puf" de ar.
  */
 const aula: Aula = {
   codigo: "EF01LP06",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Trem das Sílabas",
-
+  disciplina: "Português",
+  titulo: "A Letra P — o Som do Puf",
   narrativa: {
-    titulo: "O Trem das Sílabas",
+    titulo: "A Letra P — o Som do Puf",
     contexto:
-      "O Brilha recebeu uma missão especial: o Trem das Sílabas precisa entregar palavras para toda a floresta.",
+      "O Brilha encontrou uma letra brincalhona: P. Ela fecha os lábios e solta um \"puf\" de ar bem rapidinho: /p/.",
     problema:
-      "Mas os vagões do trem estão vazios! Cada vagão só cabe UMA sílaba — o pedacinho de uma palavra.",
-    convite:
-      "Vamos bater palmas, separar as palavras em pedaços e encher os vagões pra o trem partir?",
+      "A letra P trouxe amigos: PATO, PIPA, PENTE, PANDA, PORCO, PAI. Todos começam com /p/.",
+    convite: "Bora fechar os lábios e fazer /p/... /p/... até encontrar a família da letra P?",
   },
-
   conhecimentosPrevios: [
-    "Escutar e repetir palavras curtas.",
-    "Reconhecer letras do alfabeto (EF01LP04).",
-    "Perceber que as letras representam sons (EF01LP05).",
+    "Reconhecer as 5 vogais.",
+    "Isolar o primeiro som (M, S).",
+    "Diferenciar sons contínuos (/m/, /s/) de sons curtos.",
   ],
-
-  missao:
-    "Descobrir que as palavras são feitas de sílabas e separar oralmente palavras batendo uma palma para cada pedaço.",
-
+  missao: "Associar a letra P ao som /p/ e reconhecer palavras que começam com esse som.",
   objetivos: [
-    "Perceber que as palavras são formadas por sílabas.",
-    "Separar oralmente palavras em sílabas.",
-    "Contar quantas sílabas tem cada palavra.",
-    "Desenvolver a consciência silábica.",
+    "Reconhecer o som /p/ no começo das palavras.",
+    "Associar a letra P ao som /p/.",
+    "Distinguir P de M e de S.",
+    "Sentir os lábios se fechando e o ar saindo de repente.",
   ],
-
   motivacao:
-    "Bater palmas pras sílabas é como fazer música com as palavras! Cada palma é um vagão do trem.",
-
+    "PATO, PIPA, PAI — o P aparece em palavras que a criança usa todo dia. Aprender essa letra é abrir mais uma porta gigante da leitura.",
   explicacao:
-    "Quando falamos uma palavra, ela pode ser dividida em pedaços menores chamados SÍLABAS.\n\n🐱 GA · TO → 2 sílabas\n🍌 BA · NA · NA → 3 sílabas\n🐘 E · LE · FAN · TE → 4 sílabas\n\nDica: fale devagar e bata uma PALMA pra cada pedaço da palavra.\nCada palma é um vagão do trem 🚂.",
-
+    "A letra P faz o som /p/.\n\n👉 Como fazer: lábios bem fechados, um puf de ar sai de repente: /p/.\n👉 Palavras com P: PATO · PIPA · PENTE · PANDA · PORCO · PAI · PINCEL · PRAIA.\n\nP + vogal = sílaba:\nP + A = PA · P + E = PE · P + I = PI · P + O = PO · P + U = PU.\n\nDiferente de M e S, o /p/ é um som CURTO: não dá pra esticar. É um \"toque\" rápido dos lábios.",
+  explicacaoAtiva: [
+    {
+      texto: "A letra P começa com os lábios fechados. Solta um puf: /p/.",
+      exemplo: "Fale: /p/... PATO. Lábios fecham e abrem.",
+      imagem: patoImg,
+      imagemAlt: "Pato — /p/",
+      checagem: {
+        pergunta: "Qual figura começa com /p/?",
+        opcoes: ["Pato", "Bola", "Sol"],
+        correta: 0,
+        explicacao: "PATO — /p/.",
+      },
+    },
+    {
+      texto: "PIPA e PENTE também começam com /p/. São família da letra P.",
+      exemplo: "Fale devagar: /p/IPA, /p/ENTE.",
+      imagem: pipaImg,
+      imagemAlt: "Pipa — /p/",
+      checagem: {
+        pergunta: "Qual figura começa com /p/?",
+        opcoes: ["Mãe", "Pipa", "Gato"],
+        correta: 1,
+        explicacao: "PIPA — /p/.",
+      },
+    },
+    {
+      texto: "Cuidado: /p/ é curto (um puf). /s/ é longo (/ssss/) e /m/ é longo (/mmmm/).",
+      exemplo: "PAI (/p/, curto) x SOL (/s/, esticável).",
+      imagem: paiImg,
+      imagemAlt: "Pai — /p/",
+      checagem: {
+        pergunta: "Qual começa com /p/?",
+        opcoes: ["Sol", "Pai", "Mãe"],
+        correta: 1,
+        explicacao: "PAI — /p/. SOL é /s/. MÃE é /m/.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Sílaba é um pedacinho da palavra que a gente fala numa palma só.",
-    nivel2:
-      "Fala BA-NA-NA batendo palmas. Uma palma pra cada pedaço — deu 3 palmas, então BANANA tem 3 sílabas.",
-    nivel3:
-      "Cada sílaba geralmente tem uma vogal (A, E, I, O, U). É a vogal que faz a boca abrir e o som sair forte.",
-    nivel4:
-      "Separar em sílabas ajuda a LER palavras novas: leio pedaço por pedaço, depois junto tudo.",
+    nivel1: "A letra P faz /p/. Lábios fechados e um puf de ar.",
+    nivel2: "PATO, PIPA, PAI — todas com /p/ no começo.",
+    nivel3: "P + vogal = sílaba: PA, PE, PI, PO, PU.",
+    nivel4: "P é uma oclusiva: o ar é bloqueado pelos lábios e depois solto. Som curtinho.",
   },
-
   exemploResolvido: {
-    enunciado: "Quantas sílabas tem a palavra BOLA?",
+    enunciado: "Qual figura começa com P: PENTE, MÃE ou SOL?",
     passos: [
-      "Fale a palavra devagar: BO... LA.",
-      "Bata uma palma pra cada pedaço: 👏 BO 👏 LA.",
-      "Conte as palmas: foram 2.",
+      "Fale cada palavra devagar: /p/ENTE, /m/ÃE, /s/OL.",
+      "O som /p/ aparece no começo de PENTE.",
+      "P = /p/.",
     ],
-    resposta: "BOLA tem 2 sílabas: BO · LA.",
+    resposta: "PENTE — começa com a letra P (/p/).",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir a palavra em pedaços. Depois responda quantas sílabas ela tem.",
-    resposta: "GATO tem 2 sílabas: GA · TO.",
-    explicacao:
-      "Falando devagar: GA... TO. Duas palmas, dois vagões, duas sílabas.",
+    enunciado: "Toque na figura que começa com P (/p/).",
+    resposta: "PATO — começa com /p/.",
+    explicacao: "Fale cada figura devagar antes de tocar.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Qual figura tem uma palavra com 2 sílabas?",
+      pergunta: "Qual figura começa com /p/?",
       opcoes: [
+        { nome: "pato", imagemUrl: patoImg },
+        { nome: "mãe", imagemUrl: maeImg },
+        { nome: "bola", imagemUrl: bolaImg },
         { nome: "sol", imagemUrl: solImg },
-        { nome: "gato", imagemUrl: gatoImg },
-        { nome: "borboleta", imagemUrl: borboletaImg },
       ],
-      respostaCerta: "gato",
+      respostaCerta: "pato",
     },
   },
-
   exercicios: [
     {
-      enunciado: "🎧 Separe em sílabas: CACHORRO.",
-      resposta: "CA · CHOR · RO — 3 sílabas.",
-      dica: "Fale bem devagar batendo palmas: CA - CHOR - RO.",
+      enunciado: "🔊 Qual começa com /p/: PIPA, MÃE ou GATO?",
+      resposta: "PIPA — /p/.",
+      dica: "Lábios fechados, um puf.",
     },
     {
-      enunciado: "🎧 Separe em sílabas: BANANA.",
-      resposta: "BA · NA · NA — 3 sílabas.",
-      dica: "3 palmas: BA - NA - NA.",
+      enunciado: "🎧 PATO e PAI começam iguais?",
+      resposta: "Sim, os dois com /p/. Aliteração.",
+      dica: "Fale devagar.",
     },
     {
-      enunciado: "🎧 Separe em sílabas: PASSARINHO.",
-      resposta: "PAS · SA · RI · NHO — 4 sílabas.",
-      dica: "4 palmas: PAS - SA - RI - NHO.",
+      enunciado: "👄 Como a boca fica ao falar /p/?",
+      resposta: "Lábios fechados e um puf rápido.",
+      dica: "Coloque a mão perto da boca e sinta o ar.",
     },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: descubra quantas sílabas tem cada palavra do trem.",
-    resposta:
-      "Cada palavra é um pedacinho da fala. Contando as palmas, contamos as sílabas.",
+    enunciado: "Desafio Brilha: separar figuras de P, S e uma pegadinha.",
+    resposta: "Time P: pato, pipa, pai · Time S: sol · Fora: mãe.",
     visual: {
       cena: [
-        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "BANANA", itemImagemUrl: bananaImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "PASSARINHO", itemImagemUrl: passaroImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "Time P", itemImagemUrl: patoImg, quantidade: 3, cor: "#F87171" },
+        { personagem: "Time S", itemImagemUrl: solImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Fora", itemImagemUrl: maeImg, quantidade: 1, cor: "#94A3B8" },
       ],
       perguntas: [
         {
-          pergunta: "☀️ Quantas sílabas tem SOL?",
-          opcoes: ["1", "2", "3"],
+          pergunta: "Qual começa com /p/?",
+          opcoes: ["Pai", "Sol", "Mãe"],
           correta: 0,
-          explicacao: "SOL fala tudo numa palma só — 1 sílaba.",
+          explicacao: "PAI — /p/.",
         },
         {
-          pergunta: "🍌 Quantas sílabas tem BANANA?",
-          opcoes: ["2", "3", "4"],
+          pergunta: "Qual começa com /s/?",
+          opcoes: ["Pipa", "Sol", "Mãe"],
           correta: 1,
-          explicacao: "BA · NA · NA — 3 palmas, 3 sílabas.",
+          explicacao: "SOL — /s/.",
         },
         {
-          pergunta: "🐦 Quantas sílabas tem PASSARINHO?",
-          opcoes: ["3", "4", "5"],
-          correta: 1,
-          explicacao: "PAS · SA · RI · NHO — 4 palmas, 4 sílabas.",
+          pergunta: "Qual NÃO é P nem S?",
+          opcoes: ["Pato", "Sol", "Mãe"],
+          correta: 2,
+          explicacao: "MÃE — /m/.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🚂 Toda palavra é feita de SÍLABAS (pedaços).",
-      "👏 Uma palma pra cada sílaba ajuda a contar.",
-      "🔤 Cada sílaba geralmente tem uma vogal forte.",
-      "📖 Separar em sílabas facilita a leitura e a escrita.",
+      "A letra P faz o som /p/.",
+      "Puf: lábios fechados, ar sai de repente.",
+      "PATO, PIPA, PENTE, PANDA, PORCO, PAI — todas com /p/.",
+      "P + vogal = PA, PE, PI, PO, PU.",
     ],
-    dica: "Antes de ler ou escrever uma palavra difícil, fale devagar e bata palmas.",
+    dica: "Se der pra colocar a mão na frente da boca e sentir um puf, é a letra P.",
   },
-
   quiz: [
     {
-      pergunta: "A palavra SOL possui:",
-      opcoes: ["1 sílaba", "2 sílabas", "3 sílabas"],
+      pergunta: "Qual figura começa com P?",
+      opcoes: ["Pato", "Mãe", "Sol"],
       correta: 0,
-      explicacao: "SOL sai da boca numa palma só — 1 sílaba.",
+      explicacao: "PATO — /p/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+          { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        ],
+      },
     },
     {
-      pergunta: "A palavra BOLA possui:",
-      opcoes: ["1 sílaba", "2 sílabas", "4 sílabas"],
+      pergunta: "Qual figura começa com P?",
+      opcoes: ["Bola", "Pipa", "Sol"],
       correta: 1,
-      explicacao: "BO · LA — 2 palmas, 2 sílabas.",
+      explicacao: "PIPA — /p/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        ],
+      },
     },
     {
-      pergunta: "Qual palavra possui MAIS sílabas?",
-      opcoes: ["Pé", "Banana", "Sol"],
+      pergunta: "Qual é o som da letra P?",
+      opcoes: ["/m/", "/p/", "/s/"],
       correta: 1,
-      explicacao: "Pé = 1, Sol = 1, Banana = 3 sílabas. BANANA ganha!",
+      explicacao: "P = /p/.",
     },
     {
-      pergunta: "Separar palavras em sílabas ajuda a:",
-      opcoes: ["Ler e escrever melhor", "Contar dinheiro", "Medir objetos"],
-      correta: 0,
-      explicacao:
-        "Lendo pedaço por pedaço, o cérebro entende palavras novas com mais facilidade.",
+      pergunta: "Como a boca fica ao falar /p/?",
+      opcoes: ["Dentes juntos", "Lábios fechados, puf de ar", "Boca aberta gritando"],
+      correta: 1,
+      explicacao: "Lábios fechados, um puf rápido.",
     },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Maquinista das Sílabas! Missão em Família: escolha 5 objetos da casa, fale o nome batendo palmas e conte quantas sílabas cada um tem.",
-
+    "🏅 Medalha: Amigo do Puf! Missão em Casa: encontrar 3 coisas em casa que começam com P (porta, panela, prato, papel, pipoca…).",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "As sílabas aparecem quando falamos uma palavra em partes. Perceber esses pedaços ajuda nosso cérebro a identificar os padrões da língua — e faz a leitura ficar mais fácil.",
+      "/p/ é uma das primeiras consoantes que o bebê aprende a falar — por isso PAPAI é uma das primeiras palavras do mundo. Os lábios já sabem fechar antes até de falar frases inteiras.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Bata Palmas",
-      instrucao:
-        "Toque na figura pra ouvir a palavra em sílabas. Qual tem SÓ 2 sílabas (BO · LA)?",
-      pergunta: "Qual figura tem 2 sílabas?",
-      opcoes: [
-        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BO · LA" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
-        { nome: "BORBOLETA", imagemUrl: borboletaImg, rotulo: "🦋 BOR · BO · LE · TA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · P de Pato",
+      instrucao: "Toque na figura que começa com /p/.",
+      grupos: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
       ],
-      correta: 0,
-      acerto: "🎉 BOLA tem 2 sílabas: BO · LA — duas palmas!",
-      erro: "Bata palmas: BO - LA. Deu 2! Procure a figura com 2 sílabas.",
-    },
-    {
-      tipo: "escolherFigura",
-      titulo: "Fase 2 · Quantas Sílabas?",
-      instrucao:
-        "Toque na figura pra ouvir MA · ÇÃ. Quantas sílabas escutou?",
-      pergunta: "Quantas sílabas tem MAÇÃ?",
-      opcoes: [
-        { nome: "1 sílaba", imagemUrl: macaImg, rotulo: "1️⃣ 1 sílaba" },
-        { nome: "2 sílabas", imagemUrl: macaImg, rotulo: "2️⃣ 2 sílabas" },
-        { nome: "3 sílabas", imagemUrl: macaImg, rotulo: "3️⃣ 3 sílabas" },
-      ],
+      pergunta: "Qual começa com /p/?",
+      opcoes: ["Mãe", "Pato", "Sol"],
       correta: 1,
-      acerto: "🍎 Isso! MA · ÇÃ — 2 palmas, 2 sílabas.",
-      erro: "Fala devagar: MA - ÇÃ. Contou quantas palmas?",
+      acerto: "PATO — /p/!",
+      erro: "Faça o puf: /p/ATO.",
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 3 · Separe os Vagões (CARRO)",
-      instrucao:
-        "O trem tem 2 vagões pra palavra CARRO. Arraste cada sílaba pro vagão certo.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Família P",
+      instrucao: "Ligue cada figura à letra P.",
       pares: [
-        { item: "CA", alvo: "🚃 Vagão 1" },
-        { item: "RRO", alvo: "🚃 Vagão 2" },
-      ],
-      alvosVisuais: [
-        { nome: "🚃 Vagão 1", cor: "#F87171", capacidade: 1, imagemUrl: carroImg },
-        { nome: "🚃 Vagão 2", cor: "#60A5FA", capacidade: 1, imagemUrl: carroImg },
+        { a: "P", b: "Pato", aImagem: estrelaImg, bImagem: patoImg },
+        { a: "P", b: "Pipa", aImagem: estrelaImg, bImagem: pipaImg },
+        { a: "P", b: "Pente", aImagem: estrelaImg, bImagem: penteImg },
+        { a: "P", b: "Pai", aImagem: estrelaImg, bImagem: paiImg },
       ],
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Complete o Trem (SAPO)",
-      instrucao:
-        "Arraste as sílabas na ORDEM certa pra completar SA · PO.",
-      pares: [
-        { item: "SA", alvo: "🚃 Vagão 1" },
-        { item: "PO", alvo: "🚃 Vagão 2" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · P ou S?",
+      instrucao: "Toque só na figura que começa com /p/ (não com /s/).",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       ],
-      alvosVisuais: [
-        { nome: "🚃 Vagão 1", cor: "#34D399", capacidade: 1, imagemUrl: sapoImg },
-        { nome: "🚃 Vagão 2", cor: "#FBBF24", capacidade: 1, imagemUrl: sapoImg },
+      pergunta: "Qual começa com /p/?",
+      opcoes: ["Sol", "Pipa", "Gato"],
+      correta: 1,
+      acerto: "PIPA — /p/. SOL é /s/.",
+      erro: "SOL é /s/. O puf /p/ está em PIPA.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Trio P",
+      instrucao: "Coloque em ordem: Pato → Pipa → Pente.",
+      itens: ["pato", "pipa", "pente"],
+      imagens: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "1º · Pato" },
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "2º · Pipa" },
+        { imagemUrl: penteImg, quantidade: 1, rotulo: "3º · Pente" },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Oficina das Sílabas",
-      instrucao:
-        "Toque em cada figura pra ouvir a palavra em pedaços. Qual tem 4 sílabas?",
-      pergunta: "Qual palavra tem 4 sílabas?",
-      opcoes: [
-        { nome: "BORBOLETA", imagemUrl: borboletaImg, rotulo: "🦋 BOR·BO·LE·TA" },
-        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GA·TO" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Mais P",
+      instrucao: "Qual começa com /p/?",
+      grupos: [
+        { imagemUrl: pincelImg, quantidade: 1, rotulo: "pincel" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
       ],
+      pergunta: "Qual começa com /p/?",
+      opcoes: ["Pincel", "Bola", "Mãe"],
       correta: 0,
-      acerto: "🦋 BORBOLETA! BOR · BO · LE · TA — 4 palmas, 4 sílabas.",
-      erro: "Bata palmas em cada palavra e conte. A de 4 palmas é a certa.",
+      acerto: "PINCEL — /p/!",
+      erro: "Fale /p/INCEL. Puf no começo.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "☀️ Quantas sílabas tem SOL?",
-        opcoes: ["1", "2", "3"],
+        pergunta: "Qual começa com P?",
+        opcoes: ["Pato", "Mãe", "Sol"],
         correta: 0,
-        explicacao: "SOL — 1 palma, 1 sílaba.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️ SOL" },
+        explicacao: "PATO.",
+        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
       },
       {
-        pergunta: "🐱 Quantas sílabas tem GATO?",
-        opcoes: ["1", "2", "3"],
+        pergunta: "Qual começa com P?",
+        opcoes: ["Bola", "Pipa", "Sol"],
         correta: 1,
-        explicacao: "GA · TO — 2 palmas, 2 sílabas.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱 GA·TO" },
+        explicacao: "PIPA.",
+        visual: { tipo: "itens", imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
       },
       {
-        pergunta: "🍌 Quantas sílabas tem BANANA?",
-        opcoes: ["2", "3", "4"],
-        correta: 1,
-        explicacao: "BA · NA · NA — 3 palmas, 3 sílabas.",
-        visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BA·NA·NA" },
+        pergunta: "Qual começa com P?",
+        opcoes: ["Mãe", "Gato", "Pai"],
+        correta: 2,
+        explicacao: "PAI.",
+        visual: { tipo: "itens", imagemUrl: paiImg, quantidade: 1, rotulo: "pai" },
       },
     ],
     medio: [
       {
-        pergunta: "🐸 Quantas sílabas tem SAPO?",
-        opcoes: ["1", "2", "3"],
+        pergunta: "PATO e PAI — o que têm em comum?",
+        opcoes: ["Rimam", "Começam com /p/", "Nada"],
         correta: 1,
-        explicacao: "SA · PO — 2 palmas, 2 sílabas.",
-        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸 SA·PO" },
+        explicacao: "Aliteração de /p/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: patoImg, quantidade: 1, rotulo: "PATO", cor: "#F87171" },
+            { imagemUrl: paiImg, quantidade: 1, rotulo: "PAI", cor: "#60A5FA" },
+          ],
+        },
       },
       {
-        pergunta: "🚗 Quantas sílabas tem CARRO?",
-        opcoes: ["2", "3", "4"],
-        correta: 0,
-        explicacao: "CA · RRO — 2 palmas, 2 sílabas.",
-        visual: { tipo: "itens", imagemUrl: carroImg, quantidade: 1, rotulo: "🚗 CA·RRO" },
+        pergunta: "Qual NÃO começa com /p/?",
+        opcoes: ["Pipa", "Panda", "Sol"],
+        correta: 2,
+        explicacao: "SOL — /s/.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+            { imagemUrl: pandaImg, quantidade: 1, rotulo: "panda" },
+            { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+          ],
+        },
       },
       {
-        pergunta: "🐶 Quantas sílabas tem CACHORRO?",
-        opcoes: ["2", "3", "4"],
+        pergunta: "P + A forma:",
+        opcoes: ["AP", "PA", "PI"],
         correta: 1,
-        explicacao: "CA · CHOR · RO — 3 palmas, 3 sílabas.",
-        visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶 CA·CHOR·RO" },
+        explicacao: "P + A = PA.",
       },
     ],
     dificil: [
       {
-        pergunta: "🦋 Quantas sílabas tem BORBOLETA?",
-        opcoes: ["3", "4", "5"],
-        correta: 1,
-        explicacao: "BOR · BO · LE · TA — 4 palmas, 4 sílabas.",
-        visual: { tipo: "itens", imagemUrl: borboletaImg, quantidade: 1, rotulo: "🦋 BOR·BO·LE·TA" },
+        pergunta: "Qual grupo tem SÓ /p/?",
+        opcoes: [
+          "pato · pipa · pai",
+          "pato · mãe · sol",
+          "bola · gato · sol",
+        ],
+        correta: 0,
+        explicacao: "Todas com /p/.",
       },
       {
-        pergunta: "🐦 Quantas sílabas tem PASSARINHO?",
-        opcoes: ["3", "4", "5"],
+        pergunta: "PORCO e PRAIA — o que compartilham?",
+        opcoes: ["Rimam", "Começam com /p/", "Nada"],
         correta: 1,
-        explicacao: "PAS · SA · RI · NHO — 4 palmas, 4 sílabas.",
-        visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "🐦 PAS·SA·RI·NHO" },
+        explicacao: "Aliteração de /p/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: porcoImg, quantidade: 1, rotulo: "PORCO", cor: "#F472B6" },
+            { imagemUrl: praiaImg, quantidade: 1, rotulo: "PRAIA", cor: "#38BDF8" },
+          ],
+        },
       },
       {
-        pergunta: "Qual palavra tem MAIS sílabas?",
-        opcoes: ["SOL", "BANANA", "PÉ"],
-        correta: 1,
-        explicacao: "SOL=1, PÉ=1, BANANA=3. BANANA tem mais sílabas.",
-        visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BA·NA·NA" },
+        pergunta: "Por que /p/ é chamado de som CURTO?",
+        opcoes: [
+          "Porque não dá pra esticar",
+          "Porque é alto",
+          "Porque é doce",
+        ],
+        correta: 0,
+        explicacao: "Oclusivas (/p/, /t/, /k/) são sons curtos: o ar é bloqueado e solto de vez.",
       },
     ],
   },
-
   proximaHabilidade: {
     codigo: "EF01LP07",
+    titulo: "A letra T — som /t/ (tatu, tigre, trem)",
   },
 };
 

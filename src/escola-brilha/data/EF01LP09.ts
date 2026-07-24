@@ -1,379 +1,396 @@
 import type { Aula } from "../types";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
-import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
-import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as festaImg } from "@/assets/neuro-treino/objetos/festa.png.asset.json";
+import { url as fogoImg } from "@/assets/neuro-treino/objetos/fogo.png.asset.json";
+import { url as futebolImg } from "@/assets/neuro-treino/objetos/futebol.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-grande.png.asset.json";
+import { url as leaoImg } from "@/assets/neuro-treino/objetos/leao.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as tigreImg } from "@/assets/neuro-treino/objetos/tigre.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP09 — Aula 009 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * Missão do Dia: "O Mistério das Frases Desmontadas".
- * Padrão travado: tap-to-speak — toque na figura ou palavra pra ouvir.
+ * EF01LP09 — Aula 009 · Letra F · som /f/
+ * Fricativa labiodental surda: dente de cima toca o lábio de baixo
+ * e sopra: /ffff/. Muito boa pra treinar respiração.
+ * Base: Orton-Gillingham + NRP.
  */
 const aula: Aula = {
   codigo: "EF01LP09",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Mistério das Frases Desmontadas",
-
+  disciplina: "Português",
+  titulo: "A Letra F — o Som do Sopro",
   narrativa: {
-    titulo: "O Mistério das Frases Desmontadas",
+    titulo: "A Letra F — o Som do Sopro",
     contexto:
-      "Durante a Festa das Palavras, uma ventania espalhou todas as placas da floresta. As palavras estão fora de ordem e ninguém entende os avisos.",
+      "O Brilha achou uma letra sopradora: F. Ela coloca o dente de cima no lábio de baixo e sopra /ffff/ como uma bexiga soltando ar.",
     problema:
-      "Sem as frases certas, a festa não pode começar!",
-    convite:
-      "Vamos ajudar o Brilha a reorganizar cada frase antes do festival?",
+      "A letra F trouxe amigos: FLOR, FESTA, FOGO, FUTEBOL, FAMÍLIA. Todos começam com /f/.",
+    convite: "Bora encostar o dente no lábio e soprar /ffffff/ até achar a família da letra F?",
   },
-
   conhecimentosPrevios: [
-    "Reconhecer palavras em diferentes contextos (EF01LP08).",
-    "Relacionar imagem e palavra escrita.",
-    "Identificar sílabas e sons iniciais.",
+    "Reconhecer as 5 vogais.",
+    "Isolar o primeiro som (M, S, P, T, L).",
+    "Diferenciar sons contínuos (/s/, /m/, /l/) de sons curtos (/p/, /t/).",
   ],
-
-  missao:
-    "Colocar as palavras na ordem certa pra formar frases com sentido.",
-
+  missao: "Associar a letra F ao som /f/ e reconhecer palavras que começam com esse som.",
   objetivos: [
-    "Compreender que várias palavras formam uma frase.",
-    "Identificar a ordem correta das palavras.",
-    "Relacionar frases com imagens.",
-    "Ampliar o vocabulário e a leitura inicial.",
+    "Reconhecer o som /f/ no começo das palavras.",
+    "Associar a letra F ao som /f/.",
+    "Distinguir F de S (dois sopros diferentes).",
+    "Sentir o dente de cima tocando o lábio de baixo.",
   ],
-
   motivacao:
-    "Uma palavra sozinha diz pouco. Juntas e na ordem certa, elas contam histórias!",
-
+    "FLOR, FESTA, FUTEBOL — a letra F traz alegria. Aprender F deixa a leitura ainda mais completa.",
   explicacao:
-    "Uma frase é um grupo de palavras na ordem certa que diz alguma coisa.\n\n🐶 O cachorro corre.\n👧 A menina pula.\n🐦 O pássaro voa.\n\nSe a ordem muda, a frase pode não fazer mais sentido:\n❌ CORRE O CACHORRO.\n✅ O CACHORRO CORRE.",
-
+    "A letra F faz o som /f/.\n\n👉 Como fazer: encoste o dente de cima no lábio de baixo e sopre: /fffff/.\n👉 Palavras com F: FLOR · FESTA · FOGO · FUTEBOL · FAMÍLIA · FACA · FOCA · FADA.\n\nF + vogal = sílaba:\nF + A = FA · F + E = FE · F + I = FI · F + O = FO · F + U = FU.\n\nCuidado: /s/ é sopro entre os dentes (cobrinha). /f/ é sopro entre dente e lábio. Os dois são longos — dá pra esticar.",
+  explicacaoAtiva: [
+    {
+      texto: "A letra F sopra. Dente em cima do lábio, ar sai devagar: /fffff/.",
+      exemplo: "Fale: /f/... FLOR.",
+      imagem: florImg,
+      imagemAlt: "Flor — /f/",
+      checagem: {
+        pergunta: "Qual figura começa com /f/?",
+        opcoes: ["Flor", "Sol", "Pato"],
+        correta: 0,
+        explicacao: "FLOR — /f/.",
+      },
+    },
+    {
+      texto: "FESTA e FOGO também começam com /f/. É família da letra F.",
+      exemplo: "Fale devagar: /f/ESTA, /f/OGO.",
+      imagem: festaImg,
+      imagemAlt: "Festa — /f/",
+      checagem: {
+        pergunta: "Qual figura começa com /f/?",
+        opcoes: ["Mãe", "Festa", "Tigre"],
+        correta: 1,
+        explicacao: "FESTA — /f/.",
+      },
+    },
+    {
+      texto: "Cuidado: /s/ = dentes juntos, sopro entre eles. /f/ = dente EM CIMA do lábio.",
+      exemplo: "SOL (/s/, cobrinha) x FLOR (/f/, sopro).",
+      imagem: fogoImg,
+      imagemAlt: "Fogo — /f/",
+      checagem: {
+        pergunta: "Qual começa com /f/?",
+        opcoes: ["Sol", "Fogo", "Pato"],
+        correta: 1,
+        explicacao: "FOGO — /f/. SOL é /s/.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Frase = várias palavras juntas que dizem uma ideia completa.",
-    nivel2:
-      "A ordem importa: primeiro QUEM faz, depois O QUE faz. 'O gato mia', 'A menina lê'.",
-    nivel3:
-      "Frases combinam com imagens: a figura mostra o que a frase diz.",
-    nivel4:
-      "Frases começam com letra maiúscula e terminam com ponto final.",
+    nivel1: "A letra F faz /f/. Dente em cima do lábio, sopro.",
+    nivel2: "FLOR, FESTA, FOGO — todas com /f/ no começo.",
+    nivel3: "F + vogal = sílaba: FA, FE, FI, FO, FU.",
+    nivel4: "F é uma fricativa labiodental: o ar passa apertado entre o dente e o lábio.",
   },
-
   exemploResolvido: {
-    enunciado: "Monte a frase com estas palavras: MENINA · A · PULA",
+    enunciado: "Qual figura começa com F: FLOR, SOL ou PATO?",
     passos: [
-      "Comece por QUEM faz a ação: A MENINA.",
-      "Depois coloque O QUE ela faz: PULA.",
-      "Fica: A MENINA PULA.",
+      "Fale cada palavra devagar: /f/LOR, /s/OL, /p/ATO.",
+      "O som /f/ aparece no começo de FLOR.",
+      "F = /f/.",
     ],
-    resposta: "A MENINA PULA. ✅",
+    resposta: "FLOR — começa com a letra F (/f/).",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir. Qual frase combina com a imagem?",
-    resposta: "O CACHORRO CORRE. ✅",
-    explicacao:
-      "A figura é um 🐶 cachorro correndo. A frase certa começa por QUEM (o cachorro) e depois O QUE faz (corre).",
+    enunciado: "Toque na figura que começa com F (/f/).",
+    resposta: "FLOR — começa com /f/.",
+    explicacao: "Fale cada figura devagar antes de tocar.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Qual figura combina com 'O CACHORRO CORRE'?",
+      pergunta: "Qual figura começa com /f/?",
       opcoes: [
-        { nome: "cachorro", imagemUrl: cachorroImg },
-        { nome: "gato", imagemUrl: gatoImg },
-        { nome: "passaro", imagemUrl: passaroImg },
+        { nome: "flor", imagemUrl: florImg },
+        { nome: "sol", imagemUrl: solImg },
+        { nome: "pato", imagemUrl: patoImg },
+        { nome: "mãe", imagemUrl: maeImg },
       ],
-      respostaCerta: "cachorro",
+      respostaCerta: "flor",
     },
   },
-
   exercicios: [
     {
-      enunciado: "Complete: O ___ mia.",
-      resposta: "GATO — O GATO MIA.",
-      dica: "Que animal faz 'miau'? 🐱",
+      enunciado: "🔊 Qual começa com /f/: FOGO, SOL ou GATO?",
+      resposta: "FOGO — /f/.",
+      dica: "Dente em cima do lábio.",
     },
     {
-      enunciado: "Complete: A ___ canta.",
-      resposta: "PASSARINHO — A PASSARINHO CANTA (o passarinho canta).",
-      dica: "Que animal voa e canta? 🐦",
+      enunciado: "🎧 FLOR e FESTA começam iguais?",
+      resposta: "Sim, os dois com /f/. Aliteração.",
+      dica: "Fale devagar.",
     },
     {
-      enunciado: "Coloque em ordem: CORRE · O · MENINO.",
-      resposta: "O MENINO CORRE.",
-      dica: "Comece por QUEM: O MENINO.",
+      enunciado: "😮‍💨 Como a boca fica ao falar /f/?",
+      resposta: "Dente de cima no lábio de baixo, soprando.",
+      dica: "Coloque a mão na frente da boca e sinta o ar.",
     },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: leia cada placa e escolha a frase certa pra imagem.",
-    resposta:
-      "A ordem das palavras muda tudo. Comece por QUEM, depois O QUE faz.",
+    enunciado: "Desafio Brilha: separar figuras de F, S e uma pegadinha.",
+    resposta: "Time F: flor, festa, fogo · Time S: sol · Fora: pato.",
     visual: {
       cena: [
-        { personagem: "MENINO", itemImagemUrl: meninoImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "MAÇÃ", itemImagemUrl: macaImg, quantidade: 1, cor: "#F87171" },
-        { personagem: "PÁSSARO", itemImagemUrl: passaroImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "MENINO", itemImagemUrl: meninoImg, quantidade: 1, cor: "#A78BFA" },
+        { personagem: "Time F", itemImagemUrl: florImg, quantidade: 3, cor: "#F472B6" },
+        { personagem: "Time S", itemImagemUrl: solImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Fora", itemImagemUrl: patoImg, quantidade: 1, cor: "#94A3B8" },
       ],
       perguntas: [
         {
-          pergunta: "Qual frase está correta?",
-          opcoes: ["CORRE MENINO O", "O MENINO CORRE", "MENINO O CORRE"],
-          correta: 1,
-          explicacao: "Começa por QUEM (O MENINO) e depois O QUE faz (CORRE).",
-        },
-        {
-          pergunta: "Qual palavra completa: A ___ mia?",
-          opcoes: ["GATO", "CASA", "LÁPIS"],
+          pergunta: "Qual começa com /f/?",
+          opcoes: ["Flor", "Sol", "Pato"],
           correta: 0,
-          explicacao: "Quem mia é o 🐱 GATO. (A frase certa é 'O GATO MIA'.)",
+          explicacao: "FLOR — /f/.",
         },
         {
-          pergunta: "Qual frase combina com a figura 🍎?",
-          opcoes: [
-            "MAÇÃ COME O MENINO",
-            "O MENINO COME MAÇÃ",
-            "COME O MAÇÃ MENINO",
-          ],
+          pergunta: "Qual começa com /s/?",
+          opcoes: ["Fogo", "Sol", "Pato"],
           correta: 1,
-          explicacao: "Quem come? O MENINO. O que come? MAÇÃ.",
+          explicacao: "SOL — /s/.",
         },
         {
-          pergunta: "Qual palavra completa: O ___ voa?",
-          opcoes: ["PÁSSARO", "SAPATO", "MESA"],
-          correta: 0,
-          explicacao: "Quem voa é o 🐦 PÁSSARO.",
-        },
-        {
-          pergunta: "Qual frase corresponde a um menino chutando a bola?",
-          opcoes: [
-            "A BOLA CHUTA O MENINO",
-            "O MENINO CHUTA A BOLA",
-            "CHUTA MENINO A BOLA",
-          ],
-          correta: 1,
-          explicacao: "Quem chuta? O MENINO. O que chuta? A BOLA.",
+          pergunta: "Qual NÃO é F nem S?",
+          opcoes: ["Festa", "Sol", "Pato"],
+          correta: 2,
+          explicacao: "PATO — /p/.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🧩 Frase = palavras juntas na ordem certa.",
-      "👤 Comece por QUEM faz a ação.",
-      "🏃 Depois venha O QUE essa pessoa/animal faz.",
-      "🖼️ A figura ajuda a entender a frase.",
+      "A letra F faz o som /f/.",
+      "Sopro: dente de cima no lábio de baixo.",
+      "FLOR, FESTA, FOGO, FUTEBOL, FAMÍLIA — todas com /f/.",
+      "F + vogal = FA, FE, FI, FO, FU.",
     ],
-    dica: "Leia sempre da esquerda pra direita: QUEM → O QUE FAZ → COMPLEMENTO.",
+    dica: "F sopra entre dente e lábio. S sopra entre os dentes. Boca diferente.",
   },
-
   quiz: [
     {
-      pergunta: "Qual frase está correta?",
-      opcoes: ["CORRE MENINO O", "O MENINO CORRE", "MENINO O CORRE"],
+      pergunta: "Qual figura começa com F?",
+      opcoes: ["Flor", "Sol", "Pato"],
+      correta: 0,
+      explicacao: "FLOR — /f/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+          { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        ],
+      },
+    },
+    {
+      pergunta: "Qual figura começa com F?",
+      opcoes: ["Bola", "Fogo", "Mãe"],
       correta: 1,
-      explicacao: "A ordem certa é: O MENINO CORRE.",
+      explicacao: "FOGO — /f/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          { imagemUrl: fogoImg, quantidade: 1, rotulo: "fogo" },
+          { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        ],
+      },
     },
     {
-      pergunta: "Qual palavra completa: A ___ mia?",
-      opcoes: ["GATO", "CASA", "LÁPIS"],
-      correta: 0,
-      explicacao: "🐱 GATO — quem mia é o gato.",
-    },
-    {
-      pergunta: "As frases servem pra:",
-      opcoes: ["Organizar ideias", "Fazer desenhos", "Contar números"],
-      correta: 0,
-      explicacao: "Frases organizam ideias em palavras.",
-    },
-    {
-      pergunta: "Qual frase combina com uma menina lendo?",
-      opcoes: ["A MENINA LÊ", "O MENINO DORME", "O GATO PULA"],
-      correta: 0,
-      explicacao: "A menina + a ação de ler = A MENINA LÊ.",
-    },
-    {
-      pergunta: "As palavras da frase precisam estar:",
-      opcoes: ["Misturadas", "Na ordem certa", "Escondidas"],
+      pergunta: "Qual é o som da letra F?",
+      opcoes: ["/s/", "/f/", "/p/"],
       correta: 1,
-      explicacao: "Só na ordem certa a frase faz sentido.",
+      explicacao: "F = /f/.",
+    },
+    {
+      pergunta: "Como a boca fica ao falar /f/?",
+      opcoes: ["Lábios fechados", "Dente em cima do lábio, sopro", "Boca em bico"],
+      correta: 1,
+      explicacao: "Dente de cima toca o lábio de baixo.",
     },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Construtor de Frases! Missão em Família: leiam juntos 3 frases num livro, revista ou embalagem e conversem sobre quem aparece e o que está acontecendo.",
-
+    "🏅 Medalha: Soprador da Flor! Missão em Casa: encontrar 3 coisas em casa que começam com F (faca, fita, farinha, fósforo, foto…).",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Quando colocamos as palavras na ordem certa, fica muito mais fácil entender o que queremos dizer. É por isso que as frases têm começo, meio e fim!",
+      "Soprar /ffff/ bem longo ajuda até a controlar a respiração. Fonoaudiólogos usam esse som pra treinar sopro em crianças e adultos.",
   },
-
   interativas: [
     {
-      tipo: "arrastar",
-      titulo: "Fase 1 · Monte a Frase (A MENINA PULA)",
-      instrucao:
-        "Arraste cada palavra pro lugar certo pra formar a frase: A MENINA PULA.",
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · F de Flor",
+      instrucao: "Toque na figura que começa com /f/.",
+      grupos: [
+        { imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+      ],
+      pergunta: "Qual começa com /f/?",
+      opcoes: ["Sol", "Flor", "Pato"],
+      correta: 1,
+      acerto: "FLOR — /f/!",
+      erro: "Soprar: /f/LOR.",
+    },
+    {
+      tipo: "ligar",
+      titulo: "Fase 2 · Família F",
+      instrucao: "Ligue cada figura à letra F.",
       pares: [
-        { item: "A", alvo: "1º" },
-        { item: "MENINA", alvo: "2º" },
-        { item: "PULA", alvo: "3º" },
-      ],
-      alvosVisuais: [
-        { nome: "1º", cor: "#F97316", capacidade: 1 },
-        { nome: "2º", cor: "#60A5FA", capacidade: 1 },
-        { nome: "3º", cor: "#34D399", capacidade: 1 },
+        { a: "F", b: "Flor", aImagem: estrelaImg, bImagem: florImg },
+        { a: "F", b: "Festa", aImagem: estrelaImg, bImagem: festaImg },
+        { a: "F", b: "Fogo", aImagem: estrelaImg, bImagem: fogoImg },
+        { a: "F", b: "Futebol", aImagem: estrelaImg, bImagem: futebolImg },
       ],
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Qual Frase Está Correta?",
-      instrucao:
-        "Toque na figura pra ouvir. Depois toque em cada frase e escolha a que faz sentido.",
-      figura: { imagemUrl: macaImg, rotulo: "🍎 + 👦" },
-      pergunta: "Qual frase está correta?",
-      opcoes: [
-        "O MENINO COME MAÇÃ",
-        "MAÇÃ COME O MENINO",
-        "COME O MAÇÃ MENINO",
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · F ou S?",
+      instrucao: "Toque só na figura que começa com /f/ (não com /s/).",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: fogoImg, quantidade: 1, rotulo: "fogo" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       ],
-      correta: 0,
-      acerto: "🎉 Isso! Quem come é o MENINO, e o que come é a MAÇÃ.",
-      erro: "Pense: quem come? O menino. Então começa por 'O MENINO...'",
+      pergunta: "Qual começa com /f/?",
+      opcoes: ["Sol", "Fogo", "Gato"],
+      correta: 1,
+      acerto: "FOGO — /f/. SOL é /s/.",
+      erro: "SOL é cobrinha /s/. O sopro /f/ está em FOGO.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Complete: O ___ dorme.",
-      instrucao:
-        "Toque na figura pra ouvir. Depois escolha a palavra que completa a frase.",
-      figura: { imagemUrl: gatoImg, rotulo: "🐱 O ___ dorme." },
-      pergunta: "Qual palavra completa: O ___ dorme?",
-      opcoes: ["GATO", "CASA", "BOLA"],
-      correta: 0,
-      acerto: "🐱 O GATO DORME! Perfeito.",
-      erro: "A figura é um gato. A frase certa é 'O GATO DORME'.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 4 · Complete: A ___ canta.",
-      instrucao:
-        "Toque em cada palavra pra ouvir. Qual completa a frase?",
-      figura: { imagemUrl: passaroImg, rotulo: "🐦 A ___ canta." },
-      pergunta: "Qual palavra completa: A ___ canta?",
-      opcoes: ["PASSARINHO", "SAPATO", "MESA"],
-      correta: 0,
-      acerto: "🐦 A PASSARINHO CANTA — quem canta é o passarinho!",
-      erro: "Quem canta é o 🐦 passarinho.",
-    },
-    {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Correio das Frases (O CACHORRO DORME)",
-      instrucao:
-        "O Piu vai entregar a placa com a frase 'O CACHORRO DORME'. Escolha a figura certa.",
-      pergunta: "Qual figura combina com 'O CACHORRO DORME'?",
-      opcoes: [
-        { nome: "CACHORRO", imagemUrl: cachorroImg, rotulo: "🐶 CACHORRO" },
-        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
-        { nome: "PÁSSARO", imagemUrl: passaroImg, rotulo: "🐦 PÁSSARO" },
+      tipo: "ordenar",
+      titulo: "Fase 4 · Trio F",
+      instrucao: "Coloque em ordem: Flor → Festa → Fogo.",
+      itens: ["flor", "festa", "fogo"],
+      imagens: [
+        { imagemUrl: florImg, quantidade: 1, rotulo: "1º · Flor" },
+        { imagemUrl: festaImg, quantidade: 1, rotulo: "2º · Festa" },
+        { imagemUrl: fogoImg, quantidade: 1, rotulo: "3º · Fogo" },
       ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Mais F",
+      instrucao: "Qual começa com /f/?",
+      grupos: [
+        { imagemUrl: futebolImg, quantidade: 1, rotulo: "futebol" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: leaoImg, quantidade: 1, rotulo: "leão" },
+      ],
+      pergunta: "Qual começa com /f/?",
+      opcoes: ["Futebol", "Bola", "Leão"],
       correta: 0,
-      acerto: "📬 Placa entregue! 🐶 O CACHORRO DORME.",
-      erro: "A frase fala do CACHORRO. Escolha o 🐶.",
+      acerto: "FUTEBOL — /f/!",
+      erro: "Fale /f/UTEBOL. Sopro no começo.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Qual frase combina com 🐶?",
-        opcoes: ["O CACHORRO LATE", "A CASA VOA", "O SOL MIA"],
+        pergunta: "Qual começa com F?",
+        opcoes: ["Flor", "Sol", "Pato"],
         correta: 0,
-        explicacao: "🐶 → O CACHORRO LATE.",
-        visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" },
+        explicacao: "FLOR.",
+        visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "flor" },
       },
       {
-        pergunta: "Qual frase combina com ☀️?",
-        opcoes: ["O SOL BRILHA", "O GATO CORRE", "A BOLA DORME"],
-        correta: 0,
-        explicacao: "☀️ → O SOL BRILHA.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️" },
+        pergunta: "Qual começa com F?",
+        opcoes: ["Bola", "Fogo", "Sol"],
+        correta: 1,
+        explicacao: "FOGO.",
+        visual: { tipo: "itens", imagemUrl: fogoImg, quantidade: 1, rotulo: "fogo" },
       },
       {
-        pergunta: "Qual frase combina com 🌸?",
-        opcoes: ["A FLOR CHEIRA BEM", "O MENINO VOA", "O PÁSSARO NADA"],
-        correta: 0,
-        explicacao: "🌸 → A FLOR CHEIRA BEM.",
-        visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "🌸" },
+        pergunta: "Qual começa com F?",
+        opcoes: ["Mãe", "Tigre", "Festa"],
+        correta: 2,
+        explicacao: "FESTA.",
+        visual: { tipo: "itens", imagemUrl: festaImg, quantidade: 1, rotulo: "festa" },
       },
     ],
     medio: [
       {
-        pergunta: "Coloque em ordem: PULA · MENINA · A.",
-        opcoes: ["A MENINA PULA", "PULA A MENINA", "MENINA PULA A"],
-        correta: 0,
-        explicacao: "Quem pula? A menina. Ordem: A MENINA PULA.",
-        visual: { tipo: "itens", imagemUrl: meninoImg, quantidade: 1, rotulo: "👧 PULA" },
+        pergunta: "FLOR e FOGO — o que têm em comum?",
+        opcoes: ["Rimam", "Começam com /f/", "Nada"],
+        correta: 1,
+        explicacao: "Aliteração de /f/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: florImg, quantidade: 1, rotulo: "FLOR", cor: "#F472B6" },
+            { imagemUrl: fogoImg, quantidade: 1, rotulo: "FOGO", cor: "#FB923C" },
+          ],
+        },
       },
       {
-        pergunta: "Complete: O ___ voa.",
-        opcoes: ["PÁSSARO", "GATO", "CASA"],
-        correta: 0,
-        explicacao: "🐦 PÁSSARO voa.",
-        visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "🐦" },
+        pergunta: "Qual NÃO começa com /f/?",
+        opcoes: ["Festa", "Futebol", "Tigre"],
+        correta: 2,
+        explicacao: "TIGRE — /t/.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: festaImg, quantidade: 1, rotulo: "festa" },
+            { imagemUrl: futebolImg, quantidade: 1, rotulo: "futebol" },
+            { imagemUrl: tigreImg, quantidade: 1, rotulo: "tigre" },
+          ],
+        },
       },
       {
-        pergunta: "Qual frase combina com um menino chutando a bola?",
-        opcoes: [
-          "O MENINO CHUTA A BOLA",
-          "A BOLA CHUTA O MENINO",
-          "CHUTA A BOLA O MENINO",
-        ],
-        correta: 0,
-        explicacao: "Quem chuta? O MENINO. O que chuta? A BOLA.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽" },
+        pergunta: "F + A forma:",
+        opcoes: ["AF", "FA", "FI"],
+        correta: 1,
+        explicacao: "F + A = FA.",
       },
     ],
     dificil: [
       {
-        pergunta: "Qual frase está bem escrita?",
+        pergunta: "Qual grupo tem SÓ /f/?",
         opcoes: [
-          "O gato come peixe.",
-          "Come gato o peixe.",
-          "Peixe come o gato.",
+          "flor · festa · fogo",
+          "flor · sol · pato",
+          "bola · gato · sol",
         ],
         correta: 0,
-        explicacao: "Quem come? O gato. O que come? Peixe.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
+        explicacao: "Todas com /f/.",
       },
       {
-        pergunta: "As frases sempre começam com:",
-        opcoes: ["Letra maiúscula", "Número", "Ponto final"],
-        correta: 0,
-        explicacao: "Toda frase começa com letra maiúscula e termina com ponto final.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Abc." },
+        pergunta: "FUTEBOL e FAMÍLIA — o que compartilham?",
+        opcoes: ["Rimam", "Começam com /f/", "Nada"],
+        correta: 1,
+        explicacao: "Aliteração de /f/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: futebolImg, quantidade: 1, rotulo: "FUTEBOL", cor: "#22C55E" },
+            { imagemUrl: familiaImg, quantidade: 1, rotulo: "FAMÍLIA", cor: "#F472B6" },
+          ],
+        },
       },
       {
-        pergunta: "As palavras de uma frase devem estar:",
-        opcoes: ["Na ordem certa", "Misturadas", "Escondidas"],
+        pergunta: "Qual a diferença entre /f/ e /s/?",
+        opcoes: [
+          "/f/ é dente sobre o lábio; /s/ é dentes juntos",
+          "São iguais",
+          "/f/ é curto",
+        ],
         correta: 0,
-        explicacao: "Só na ordem certa a frase faz sentido.",
-        visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "🧩" },
+        explicacao: "F é labiodental (dente+lábio). S é alveolar (dentes juntos).",
       },
     ],
   },
-
   proximaHabilidade: {
     codigo: "EF01LP10",
+    titulo: "A letra N — som /n/ (navio, ninho, noite)",
   },
 };
 
