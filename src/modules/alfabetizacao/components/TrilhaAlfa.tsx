@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Lock, Check, Play, Sparkles, BookOpen } from "lucide-react";
+import { Check, Play, Sparkles, BookOpen } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
 import { calcularNivelLeitor } from "../data/historias-graduadas";
+import { useAdminMode } from "@/escola-brilha/admin-mode";
 
 interface Props {
   childId: string;
@@ -14,10 +15,12 @@ interface Props {
 export function TrilhaAlfa({ childId, childName }: Props) {
   const { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida } =
     useProgressoAlfa(childId);
+  const [admin] = useAdminMode();
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
   const nivelLeitor = calcularNivelLeitor(progresso);
 
   const etapaAtiva = ETAPAS.find((e) => e.id === etapaAtivaId) ?? null;
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-pink-50 to-white p-6">
