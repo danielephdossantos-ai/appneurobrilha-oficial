@@ -11,17 +11,30 @@ import {
   Hand,
   Ear,
   HelpCircle,
+  Repeat,
+  Gauge,
+  Zap,
 } from "lucide-react";
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
-  PerguntaHistoria,
   TipoPergunta,
   calcularNivelLeitor,
   historiasParaNivel,
   etapaAtiva,
   historiasOrdenadasPorRelevancia,
 } from "../data/historias-graduadas";
+import {
+  PalavraChave,
+  vocabChaveAutomatico,
+  precisaPreEnsinoVocab,
+} from "../data/vocabulario-chave";
+import {
+  useFluencia,
+  registrarLeitura,
+  melhorWPM,
+  classificarWPM,
+} from "../hooks/useFluencia";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
