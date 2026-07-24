@@ -53,8 +53,17 @@ export function trilhasParaSerie(serie: string | undefined): {
           cor: "from-[#FF6FA8] to-[#EC4899]",
         },
         {
+          id: "portugues-ei",
+          disciplina: "Português EI",
+          titulo: "Códice da Língua Portuguesa",
+          descricao: "Trilha BNCC de Português para a Educação Infantil.",
+          rota: "/escola-brilha/portugues-ei",
+          emoji: "📚",
+          cor: "from-[#F43F5E] to-[#9F1239]",
+        },
+        {
           id: "biblioteca",
-          disciplina: "Português",
+          disciplina: "Comunicação",
           titulo: "Biblioteca Encantada",
           descricao: "Comunicação com ABA, PECS e TEACCH.",
           rota: "/escola-brilha/biblioteca-encantada",
@@ -66,9 +75,18 @@ export function trilhasParaSerie(serie: string | undefined): {
           disciplina: "Matemática",
           titulo: "Contar com Pip",
           descricao: "8 fases de matemática visual.",
-          rota: "/escola-brilha/curso/contar-com-pip",
+          rota: "/escola-brilha/contar-com-pip",
           emoji: "🔢",
           cor: "from-[#10B981] to-[#059669]",
+        },
+        {
+          id: "matematica-ei",
+          disciplina: "Matemática EI",
+          titulo: "Códice da Matemática",
+          descricao: "Contar, comparar, formas e cores — base BNCC.",
+          rota: "/escola-brilha/matematica-ei",
+          emoji: "✨",
+          cor: "from-[#0EA5E9] to-[#1D4ED8]",
         },
         {
           id: "english",
@@ -78,6 +96,24 @@ export function trilhasParaSerie(serie: string | undefined): {
           rota: "/escola-brilha/ingles-ei",
           emoji: "🌍",
           cor: "from-[#4C9EFF] to-[#1D4ED8]",
+        },
+        {
+          id: "neuro-treino",
+          disciplina: "Neuro Treino",
+          titulo: "Atividades Terapêuticas",
+          descricao: "Atenção, regulação, linguagem, motor e socioemocional.",
+          rota: "/neuro-treino",
+          emoji: "🧠",
+          cor: "from-[#F59E0B] to-[#B45309]",
+        },
+        {
+          id: "brilha-vida",
+          disciplina: "Socioemocional",
+          titulo: "Brilha Vida",
+          descricao: "Regulação, emoções e ferramentas para o dia a dia.",
+          rota: "/brilha-vida",
+          emoji: "💛",
+          cor: "from-[#FBBF24] to-[#D97706]",
         },
       ],
     };
@@ -93,19 +129,53 @@ export function trilhasParaSerie(serie: string | undefined): {
     { id: "arte", disc: "arte", titulo: "Arte", emoji: "🎨", cor: "from-[#EC4899] to-[#BE185D]" },
   ];
 
+  const extras: TrilhaApoio[] = [
+    {
+      id: "neuro-treino",
+      disciplina: "Neuro Treino",
+      titulo: "Atividades Terapêuticas",
+      descricao: "Atenção, regulação, linguagem, motor e socioemocional.",
+      rota: "/neuro-treino",
+      emoji: "🧠",
+      cor: "from-[#F59E0B] to-[#B45309]",
+    },
+    {
+      id: "brilha-vida",
+      disciplina: "Socioemocional",
+      titulo: "Brilha Vida",
+      descricao: "Regulação, emoções e ferramentas para o dia a dia.",
+      rota: "/brilha-vida",
+      emoji: "💛",
+      cor: "from-[#FBBF24] to-[#D97706]",
+    },
+    {
+      id: "aurora",
+      disciplina: "Alfabetização",
+      titulo: "Ler com Aurora",
+      descricao: "Leitura passo a passo com apoio fonológico.",
+      rota: "/neuro-treino/ler-com-aurora/painel",
+      emoji: "📖",
+      cor: "from-[#FF6FA8] to-[#EC4899]",
+    },
+  ];
+
   return {
     faixa,
-    trilhas: disciplinas.map((d) => ({
-      id: d.id,
-      disciplina: d.titulo,
-      titulo: d.titulo,
-      descricao: `Trilha ${d.titulo} adaptativa (BNCC) para ${serie ?? "sua série"}.`,
-      rota: `/escola-brilha/trilha/${serieSlug}/${d.disc}`,
-      emoji: d.emoji,
-      cor: d.cor,
-    })),
+    trilhas: [
+      ...disciplinas.map((d) => ({
+        id: d.id,
+        disciplina: d.titulo,
+        titulo: d.titulo,
+        descricao: `Trilha ${d.titulo} adaptativa (BNCC) para ${serie ?? "sua série"}.`,
+        rota: `/escola-brilha/trilha/${serieSlug}/${d.disc}`,
+        emoji: d.emoji,
+        cor: d.cor,
+      })),
+      ...extras,
+    ],
   };
 }
+
 
 export const WEEKDAY_LABELS = ["D", "S", "T", "Q", "Q", "S", "S"] as const;
 export const WEEKDAY_LABELS_LONG = [
