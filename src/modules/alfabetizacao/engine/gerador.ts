@@ -68,13 +68,10 @@ export function gerarRima(nivel = 2): Rodada {
   if (rimasValidas.length === 0) return gerarSomInicial(nivel);
   const par = pick(rimasValidas);
   const [a, b] = shuffle(par).slice(0, 2);
-  const distrator = pick(pool.filter((p) => p.rima !== a.rima));
-  const extras =
-    numDistratores(nivel) === 1
-      ? [distrator]
-      : shuffle(pool.filter((p) => p.rima !== a.rima && p.palavra !== distrator.palavra))
-          .slice(0, 1)
-          .concat(distrator);
+  const extras = shuffle(pool.filter((p) => p.rima !== a.rima)).slice(
+    0,
+    numDistratores(nivel),
+  );
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "rima",
