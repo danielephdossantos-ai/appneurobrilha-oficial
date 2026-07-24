@@ -24,6 +24,7 @@ import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
 import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
 import { NrpPillarsCard } from "@/components/responsible/NrpPillarsCard";
 import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
+import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
 import { BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/painel-pais")({
