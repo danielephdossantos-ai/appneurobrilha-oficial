@@ -124,7 +124,7 @@ export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
           {NIVEIS.map((n) => (
             <button
               key={n.id}
-              onClick={() => setSelecionado(n.id)}
+              onClick={() => escolher(n)}
               className={`flex items-center gap-3 p-3 rounded-2xl border-2 transition-all text-left ${
                 selecionado === n.id
                   ? "bg-white border-slate-400 shadow-lg scale-105"
