@@ -22,6 +22,7 @@ import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 import { ConsentGate } from "@/components/legal/ConsentGate";
 import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
 import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
+import { NrpPillarsCard } from "@/components/responsible/NrpPillarsCard";
 
 export const Route = createFileRoute("/painel-pais")({
   component: () => (
@@ -260,6 +261,11 @@ function PainelPremium() {
         {/* Painel Pedagógico para a Família — visão simples e objetiva */}
         <div className="mb-6">
           <PainelPedagogicoFamilia childId={activeChild.id} studentName={activeChild.nome} />
+        </div>
+
+        {/* 5 Pilares da Leitura (National Reading Panel) */}
+        <div className="mb-6">
+          <NrpPillarsCard childId={activeChild.id} />
         </div>
 
 
