@@ -171,6 +171,21 @@ export function TrilhaAlfa({ childId, childName }: Props) {
           onSair={() => setEtapaAtivaId(null)}
         />
       )}
+
+      {screening && (
+        <ScreeningInicial
+          childId={childId}
+          onFinish={(posicao) => {
+            aplicarPosicaoInicial(posicao);
+            marcarScreeningFeito(childId);
+            setScreening(false);
+          }}
+          onSkip={() => {
+            marcarScreeningFeito(childId);
+            setScreening(false);
+          }}
+        />
+      )}
     </div>
   );
 }
