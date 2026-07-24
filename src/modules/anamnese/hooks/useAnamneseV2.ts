@@ -142,6 +142,7 @@ export function useAnamneseV2(childId: string) {
       }
       qc.invalidateQueries({ queryKey: ["children"] });
       qc.invalidateQueries({ queryKey: ["plano_anual"] });
+    }
     return res;
   };
 
