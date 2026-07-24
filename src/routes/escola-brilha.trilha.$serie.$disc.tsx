@@ -58,13 +58,14 @@ function TrilhaSerieDisc() {
   const { serie, disc } = Route.useParams();
   const navigate = useNavigate();
 
-  // Educação Infantil de Português abre a Biblioteca Encantada
-  // (curso standalone, sem mistura com Maternal/Pré I/Pré II).
+  // Educação Infantil de Português foi movido para Neuro Treino
+  // (Biblioteca Encantada · Comunicação Funcional).
   useEffect(() => {
     if (serie === "educacao-infantil" && disc === "portugues") {
-      navigate({ to: "/escola-brilha/biblioteca-encantada", replace: true });
+      navigate({ to: "/neuro-treino", replace: true });
     }
   }, [serie, disc, navigate]);
+
   const { activeChild } = useAppState();
   const mascote = mascoteDaDisciplina(disc);
   const tema = temaDaDisciplina(disc);
