@@ -278,7 +278,7 @@ function EscolaBrilhaCatalogo() {
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
               const discsExtra: string[] = [];
               if (serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") discsExtra.push("geografia");
-              if (serie === "Educação Infantil") discsExtra.push("portugues");
+              // Português da Ed. Infantil (Biblioteca Encantada) foi movido para Neuro Treino — não listar aqui.
               
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
               
