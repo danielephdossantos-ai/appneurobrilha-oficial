@@ -7,7 +7,7 @@ const router = getRouter();
 function App() {
   useEffect(() => {
     // Limpeza de cache de reconstrução pedagógica
-    const CACHE_VERSION = "2.5.0-arte-somente-1ano";
+    const CACHE_VERSION = "2.6.0-mover-pip-biblioteca-para-neuro";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
