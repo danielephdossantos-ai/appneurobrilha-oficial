@@ -85,7 +85,7 @@ export function DemoAnimado({ tipo, size = 160 }: { tipo: DemoTipo; size?: numbe
   const overlay = () => {
     switch (tipo) {
       case "grounding-ver":
-        return <FloatingEmoji emoji="👀" size={size * 0.22} x={size * 0.32} y={-size * 0.28} />;
+        return <FloatingEmoji emoji="🔍" size={size * 0.22} x={size * 0.32} y={-size * 0.28} />;
       case "grounding-tocar":
         return <FloatingEmoji emoji="✋" size={size * 0.24} x={size * 0.3} y={size * 0.05} />;
       case "grounding-ouvir":
