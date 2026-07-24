@@ -72,7 +72,6 @@ const aula: Aula = {
       "Sim, sim, sim → é CARTAZ.",
     ],
     resposta: "Cartaz de festa — porque chama a atenção pra um evento.",
-    interativo: { tipo: "contagem", imagemUrl: bandeirolaImg, quantidade: 4, nomeItem: "cartaz", nomeItemPlural: "cartazes", pergunta: "Quantos cartazes de festa aparecem?" },
   },
 
   atividadeGuiada: {

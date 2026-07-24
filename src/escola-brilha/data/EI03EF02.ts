@@ -88,7 +88,6 @@ const aula: Aula = {
       "Frase completa: 'Meu GATO subiu no PATO'. Rimou!",
     ],
     resposta: "PATO — porque rima com GATO.",
-    interativo: { tipo: "contagem", imagemUrl: patoImg, quantidade: 1, nomeItem: "pato", nomeItemPlural: "patos", pergunta: "Quantos patos rimam com o gato?" },
   },
 
   atividadeGuiada: {

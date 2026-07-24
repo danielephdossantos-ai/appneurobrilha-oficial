@@ -72,7 +72,6 @@ const aula: Aula = {
       "Lê junto o que ficou.",
     ],
     resposta: "Ditou 1 frase inteira e virou texto escrito.",
-    interativo: { tipo: "contagem", imagemUrl: gatoImg, quantidade: 1, nomeItem: "gato", nomeItemPlural: "gatos", pergunta: "Quantos gatos apareceram na história?" },
   },
 
   atividadeGuiada: {

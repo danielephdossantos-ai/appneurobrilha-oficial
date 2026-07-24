@@ -74,7 +74,6 @@ const aula: Aula = {
       "Final: achou embaixo da cama.",
     ],
     resposta: "'O menino foi na vovó, perdeu o brinquedo, achou embaixo da cama. FIM.'",
-    interativo: { tipo: "contagem", imagemUrl: livroImg, quantidade: 4, nomeItem: "parte", nomeItemPlural: "partes", pergunta: "Quantas partes minha história tem?" },
   },
 
   atividadeGuiada: {
