@@ -23,8 +23,9 @@ function poolPorNivel(nivel: number): Palavra[] {
   else pool = PALAVRAS;
   return filtrarComSRS(pool);
 }
-function numDistratores(nivel: number): number {
-  return nivel <= 1 ? 1 : 2;
+function numDistratores(_nivel: number): number {
+  // Padrão fixo: sempre 3 distratores → 4 opções totais (1 correta + 3 distratores)
+  return 3;
 }
 
 function rotuloVisualInicial(som: string): string {
