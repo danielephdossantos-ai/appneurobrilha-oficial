@@ -39,3 +39,5 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 - [EI = só leitura + matemática + inglês](mem://constraints/ei-somente-leitura-mat-ingles) — Educação Infantil TRAVADA em 5 trilhas: Biblioteca Encantada, Aventura com Pip, Ler com Aurora (F1-F8), Contar com Pip, English Kids. Proibido criar Arte/Ciências/Natureza/Ed. Física para EI.
 - [Neuro Treino só p/ DEFTHS](mem://constraints/neuro-treino-so-defths) — Aulas de Apoio é universal. Neuro Treino só recomendar quando anamnese indica atraso/deficiência; a partir do 2º ano sem sinais, ocultar seções terapêuticas.
 - [Plano reforma Neuro Treino](mem://features/neuro-treino-auditoria-plano) — Contrato de 6 passos pós-auditoria: (1) integrar Biblioteca Encantada como PECS/TEACCH, (2) trilha Dislexia Orton-Gillingham, (3) grupo Discalculia, (4) ligar adjustment aos jogos, (5) unificar métricas, (6) prompting ABA com fading.
+
+- [Sem releitura na Biblioteca Alfa](mem://constraints/sem-releitura-repetida) — Currículo de 4 anos (3–7a). Sem "Ler de novo" nem contador de leituras. Cada visita à biblioteca oferece história nova.
