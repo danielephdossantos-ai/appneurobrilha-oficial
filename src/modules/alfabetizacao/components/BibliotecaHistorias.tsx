@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Volume2, X, Lock, BookOpen, Sparkles, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Volume2, X, BookOpen, Sparkles, Check } from "lucide-react";
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
@@ -10,6 +10,7 @@ import {
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
+import { useAdminMode } from "@/escola-brilha/admin-mode";
 
 interface Props {
   childId: string;
