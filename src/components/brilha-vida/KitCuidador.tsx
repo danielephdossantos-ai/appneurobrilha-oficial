@@ -9,11 +9,11 @@ import { VozGuia } from "./shared/VozGuia";
  * consegue oferecer segurança e coregular o sistema nervoso da criança
  * (Porges — Teoria Polivagal).
  */
-const FASES = [
+const FASES: { nome: string; duracao: number; cor: string; escala: number }[] = [
   { nome: "Inspirar pelo nariz", duracao: 4, cor: "from-sky-400 to-sky-600", escala: 1.6 },
   { nome: "Segurar o ar", duracao: 7, cor: "from-violet-400 to-violet-600", escala: 1.6 },
   { nome: "Soltar pela boca", duracao: 8, cor: "from-emerald-400 to-emerald-600", escala: 1 },
-] as const;
+];
 
 export function KitCuidador({ onClose }: { onClose: () => void }) {
   const [rodando, setRodando] = useState(false);
