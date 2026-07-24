@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, RotateCcw, Eye, Ear, Hand, Coffee, Wind } from "lucide-react";
+import { VozGuia } from "./shared/VozGuia";
+import { DemoAnimado, type DemoTipo } from "./shared/DemoAnimado";
 
 /**
  * Grounding 5-4-3-2-1 — técnica clínica de aterramento sensorial
@@ -12,6 +14,8 @@ type Etapa = {
   n: number;
   sentido: string;
   instrucao: string;
+  narracao: string;
+  demo: DemoTipo;
   icone: ReactNode;
   cor: string;
   exemplos: string[];
@@ -22,6 +26,8 @@ const ETAPAS: Etapa[] = [
     n: 5,
     sentido: "ver",
     instrucao: "Olhe ao redor e encontre 5 coisas que você consegue VER",
+    narracao: "Vamos começar olhando. Procure ao seu redor e ache cinco coisas diferentes que você consegue ver. Pode ser um brinquedo, uma cor na parede, a janela. Aponte devagarinho pra cada uma.",
+    demo: "grounding-ver",
     icone: <Eye className="w-8 h-8" />,
     cor: "from-sky-300 to-sky-500",
     exemplos: ["uma janela", "um brinquedo", "a cor da parede", "suas mãos", "uma luz"],
@@ -30,6 +36,8 @@ const ETAPAS: Etapa[] = [
     n: 4,
     sentido: "tocar",
     instrucao: "Toque em 4 coisas diferentes e sinta a textura",
+    narracao: "Agora toque com a mão em quatro coisas diferentes. Sinta se é macio, duro, quente ou frio. Sua roupa, o chão nos pés, um objeto ao lado.",
+    demo: "grounding-tocar",
     icone: <Hand className="w-8 h-8" />,
     cor: "from-emerald-300 to-emerald-500",
     exemplos: ["a roupa que está usando", "o chão com os pés", "um tecido macio", "algo duro"],
@@ -38,6 +46,8 @@ const ETAPAS: Etapa[] = [
     n: 3,
     sentido: "ouvir",
     instrucao: "Fique quietinho e escute 3 sons que você consegue OUVIR",
+    narracao: "Fique bem quietinho. Feche os olhos se quiser. Escute três sons diferentes. Pode ser a sua respiração, um barulho longe, ou o silêncio.",
+    demo: "grounding-ouvir",
     icone: <Ear className="w-8 h-8" />,
     cor: "from-lilac/60 to-lilac",
     exemplos: ["sua respiração", "algum barulho lá fora", "o silêncio da sala"],
@@ -46,6 +56,8 @@ const ETAPAS: Etapa[] = [
     n: 2,
     sentido: "cheirar",
     instrucao: "Respire fundo e sinta 2 cheiros no ar",
+    narracao: "Respira fundo pelo nariz. Sinta dois cheiros. O cheiro do lugar, da sua roupa, das suas mãos.",
+    demo: "grounding-cheirar",
     icone: <Coffee className="w-8 h-8" />,
     cor: "from-amber-300 to-amber-500",
     exemplos: ["o cheiro do lugar onde está", "o cheiro da sua roupa ou das suas mãos"],
@@ -54,6 +66,8 @@ const ETAPAS: Etapa[] = [
     n: 1,
     sentido: "provar",
     instrucao: "Sinta 1 sabor na sua boca (ou tome um gole de água)",
+    narracao: "Por último, sinta um sabor na sua boca. Pode tomar um golinho de água bem gelada. Repare no sabor.",
+    demo: "grounding-provar",
     icone: <Wind className="w-8 h-8" />,
     cor: "from-rose-300 to-rose-500",
     exemplos: ["água", "o gosto da sua boca agora"],
@@ -116,9 +130,14 @@ export function Grounding54321({ onClose }: { onClose: () => void }) {
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-3 bg-white/25 rounded-2xl">{etapa.icone}</div>
                 <div className="text-6xl font-black drop-shadow-md">{etapa.n}</div>
+                <div className="ml-auto rounded-2xl bg-white/25 p-1">
+                  <DemoAnimado tipo={etapa.demo} size={90} />
+                </div>
               </div>
-              <p className="text-lg font-bold leading-tight">{etapa.instrucao}</p>
+              <p className="text-lg font-bold leading-tight mb-3">{etapa.instrucao}</p>
+              <VozGuia texto={etapa.narracao} />
             </div>
+
 
             <div className="bg-white rounded-2xl p-4 border-2 border-slate-100 mb-4">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">

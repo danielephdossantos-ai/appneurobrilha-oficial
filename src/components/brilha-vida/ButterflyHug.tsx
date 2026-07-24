@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { X, Play, Pause, RotateCcw } from "lucide-react";
+import { VozGuia } from "./shared/VozGuia";
+import { DemoAnimado } from "./shared/DemoAnimado";
 
 /**
  * Butterfly Hug — Abraço da Borboleta (Artigas & Jarero, EMDR)
@@ -59,9 +61,18 @@ export function ButterflyHug({ onClose }: { onClose: () => void }) {
       </button>
 
       <h2 className="text-2xl font-black text-slate-800 mb-1">Abraço da Borboleta</h2>
-      <p className="text-sm text-slate-500 mb-6 font-medium text-center max-w-xs">
+      <p className="text-sm text-slate-500 mb-3 font-medium text-center max-w-xs">
         Cruze os braços no peito, com as mãos nos ombros. Toque de leve uma mão de cada vez, seguindo as asas.
       </p>
+
+      <div className="mb-3 flex flex-col items-center gap-2">
+        <div className="rounded-2xl bg-white/70 p-1 shadow-inner">
+          <DemoAnimado tipo="butterfly" size={140} />
+        </div>
+        <VozGuia texto="Cruze seus braços no peito, deixando cada mão em um ombro. Agora vamos bater bem de leve uma mão de cada vez, no ritmo das asas da borboleta. Esquerda, direita, esquerda, direita. Respira devagarinho." />
+      </div>
+
+
 
       <div className="relative w-80 h-56 flex items-center justify-center mb-4">
         {/* Asa esquerda */}
