@@ -439,7 +439,12 @@ function BrilhaVida() {
         </Card>
       </div>
 
+      <div className="mb-8">
+        <MoodTimeline childId={activeChild?.id} />
+      </div>
+
       <div className="space-y-6">
+
         {categorias.map((cat) => (
           <section key={cat.id}>
             <div className="flex flex-col mb-4">
