@@ -641,17 +641,25 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
               tamanho="md"
               onClick={() => falar(rodada.imagens[0].toLowerCase())}
             />
+            <span className="mt-1 px-4 py-1.5 rounded-full bg-white text-[#3A1F5C] text-2xl sm:text-3xl font-black tracking-wide shadow-lg border-2 border-amber-300">
+              {rodada.imagens[0].toUpperCase()}
+            </span>
           </div>
         )}
 
 
         {usaGridNumero ? (
           <>
-            <ImgChip
-              nome={rodada.imagens[0]}
-              tamanho="lg"
-              onClick={() => falar(rodada.imagens[0].toLowerCase())}
-            />
+            <div className="flex flex-col items-center gap-2">
+              <ImgChip
+                nome={rodada.imagens[0]}
+                tamanho="lg"
+                onClick={() => falar(rodada.imagens[0].toLowerCase())}
+              />
+              <span className="mt-1 px-4 py-1.5 rounded-full bg-white text-[#3A1F5C] text-2xl sm:text-3xl font-black tracking-wide shadow-lg border-2 border-amber-300">
+                {rodada.imagens[0].toUpperCase()}
+              </span>
+            </div>
             <div className="grid grid-cols-4 gap-3 w-full max-w-md">
               {rodada.numeroOpcoes!.map((n) => {
                 const isCorreta = String(n) === rodada.correta;
