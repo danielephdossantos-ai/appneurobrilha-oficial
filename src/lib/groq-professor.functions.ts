@@ -11,7 +11,6 @@ const InputSchema = z.object({
   messages: z.array(MessageSchema).min(1).max(40),
   modulo: z.enum([
     "reforco-brilha",
-    "jornada-365",
     "missao-prova",
     "missao-trabalho",
     "missao-tarefa",
