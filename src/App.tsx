@@ -7,7 +7,7 @@ const router = getRouter();
 function App() {
   useEffect(() => {
     // Limpeza de cache de reconstrução pedagógica
-    const CACHE_VERSION = "2.8.0-alfa-player-dark-intro";
+    const CACHE_VERSION = "2.8.1-alfa-vogal-visivel";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
