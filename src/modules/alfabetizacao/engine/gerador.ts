@@ -159,12 +159,13 @@ export function gerarVogalSom(nivel = 2): Rodada {
     numDistratores(nivel),
   );
   const opcoes = shuffle([alvo, ...distratores]);
+  const somVogal = falarSom(vogal);
   return {
     tipo: "vogal-som",
-    instrucaoFalada: `Qual palavra começa com a vogal ${vogal}?`,
+    instrucaoFalada: `Qual palavra começa com a vogal ${somVogal}... ${somVogal}... ${somVogal}?`,
     imagens: opcoes.map((p) => p.palavra),
     correta: alvo.palavra,
-    regra: `${alvo.palavra.toLowerCase()} começa com a vogal ${vogal.toLowerCase()}.`,
+    regra: `${alvo.palavra.toLowerCase()} começa com a vogal ${somVogal}.`,
     foco: vogal,
   };
 }
