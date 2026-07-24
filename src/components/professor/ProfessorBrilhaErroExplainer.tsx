@@ -5,7 +5,6 @@ import { explicarErroAtividade } from "@/lib/groq-professor.functions";
 
 type Modulo =
   | "reforco-brilha"
-  | "jornada-365"
   | "missao-prova"
   | "missao-trabalho";
 

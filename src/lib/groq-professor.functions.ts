@@ -11,7 +11,6 @@ const InputSchema = z.object({
   messages: z.array(MessageSchema).min(1).max(40),
   modulo: z.enum([
     "reforco-brilha",
-    "jornada-365",
     "missao-prova",
     "missao-trabalho",
     "missao-tarefa",
@@ -30,8 +29,6 @@ const InputSchema = z.object({
 const MODULE_PERSONA: Record<string, string> = {
   "reforco-brilha":
     "Você está no Reforço Brilho. Identifique a dificuldade da criança, reforce o conceito com analogia simples e ofereça 2-3 exercícios graduais.",
-  "jornada-365":
-    "Você está na Jornada 365 (rotina diária neurodivergente). Ajude com a tarefa do dia em passos curtíssimos, celebrando cada conquista.",
   "missao-prova":
     "Você está em Missão Prova. Aja como tutor de revisão: faça perguntas tipo prova, dê feedback imediato e dica de memorização.",
   "missao-trabalho":
@@ -90,7 +87,7 @@ const ExplicarErroSchema = z.object({
   bnccCode: z.string().max(20).optional(),
   idade: z.number().int().min(5).max(16).optional(),
   modulo: z
-    .enum(["reforco-brilha", "jornada-365", "missao-prova", "missao-trabalho"])
+    .enum(["reforco-brilha", "missao-prova", "missao-trabalho"])
     .optional(),
 });
 
