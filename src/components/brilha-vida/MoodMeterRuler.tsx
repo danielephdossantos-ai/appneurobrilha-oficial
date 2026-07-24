@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
 
 /**
  * Mood Meter (Marc Brackett / Yale Center for Emotional Intelligence — RULER)
