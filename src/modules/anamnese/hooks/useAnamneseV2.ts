@@ -123,8 +123,25 @@ export function useAnamneseV2(childId: string) {
         .update(childPatch as any)
         .eq("id", childId);
       if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
+
+      // Gera e salva o plano anual automaticamente após a anamnese.
+      try {
+        const step1: any = (localResponses as any).step1 ?? {};
+        const idadeRaw = Number(step1.idade);
+        const idade = Number.isFinite(idadeRaw) ? Math.max(3, Math.min(7, idadeRaw)) : 5;
+        const serie = typeof step1.serie === "string" ? step1.serie : undefined;
+        await salvarPlanoParaCrianca({
+          childId,
+          idade,
+          serie,
+          responses: localResponses,
+          risk: res.risk_levels,
+        });
+      } catch (e) {
+        console.warn("[anamnese] falha ao gerar plano anual", e);
+      }
       qc.invalidateQueries({ queryKey: ["children"] });
-    }
+      qc.invalidateQueries({ queryKey: ["plano_anual"] });
     return res;
   };
 
