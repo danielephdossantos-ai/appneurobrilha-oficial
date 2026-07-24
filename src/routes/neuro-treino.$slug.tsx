@@ -3378,16 +3378,15 @@ function MemoriaVisual({ p, onDone }: any) {
           <div className="text-sm font-bold text-muted-foreground">
             Memorize as cores! ({restante}s)
           </div>
-          <div
-            className="grid gap-2 mx-auto max-w-xs"
-            style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}
-          >
+          <div className="flex gap-2 justify-center items-center flex-wrap mx-auto">
             {p.grid.map((cor: string, i: number) => (
-              <div
-                key={i}
-                className="w-16 h-16 rounded-xl border-2 border-white/20"
-                style={{ backgroundColor: cor }}
-              />
+              <div key={i} className="flex flex-col items-center gap-1">
+                <div className="text-xs font-black text-muted-foreground">{i + 1}</div>
+                <div
+                  className="w-14 h-14 rounded-full border-2 border-white/30 shadow"
+                  style={{ backgroundColor: cor }}
+                />
+              </div>
             ))}
           </div>
           <button
@@ -3402,17 +3401,19 @@ function MemoriaVisual({ p, onDone }: any) {
           <div className="text-sm font-bold">
             Posição {selecionados.length + 1}/{p.grid.length}
           </div>
-          <div
-            className="grid gap-2 mx-auto max-w-xs"
-            style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}
-          >
-            {p.grid.map((_: any, i: number) => (
-              <div
-                key={i}
-                className={`${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-xl border-2 border-dashed border-muted-foreground`}
-                style={{ backgroundColor: selecionados[i] ?? "transparent" }}
-              />
-            ))}
+          <div className="flex gap-2 justify-center items-center flex-wrap mx-auto">
+            {p.grid.map((_: any, i: number) => {
+              const ativo = i === selecionados.length;
+              return (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <div className={`text-xs font-black ${ativo ? "text-emerald-600" : "text-muted-foreground"}`}>{i + 1}</div>
+                  <div
+                    className={`${sens.largerTargets ? "w-16 h-16" : "w-14 h-14"} rounded-full border-2 border-dashed ${ativo ? "border-emerald-500 ring-2 ring-emerald-300/50" : "border-muted-foreground"}`}
+                    style={{ backgroundColor: selecionados[i] ?? "transparent" }}
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="flex gap-3 justify-center flex-wrap">
             {cores.map((cor, i) => (
