@@ -30,7 +30,6 @@ export function TrilhaAlfa({ childId, childName }: Props) {
   const [admin] = useAdminMode();
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
   const [screening, setScreening] = useState(false);
-  void calcularNivelLeitor(progresso);
 
   useEffect(() => {
     setChildAtualSRS(childId);
