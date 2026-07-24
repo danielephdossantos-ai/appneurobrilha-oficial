@@ -1,368 +1,360 @@
 import type { Aula } from "../types";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as lataImg } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
-import { url as pincelImg } from "@/assets/neuro-treino/objetos/pincel.png.asset.json";
-import { url as tintaImg } from "@/assets/neuro-treino/objetos/tinta.png.asset.json";
-import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 
 /**
- * EF01LP11 — Aula 011 · Biblioteca Pedagógica Escola Brilha
- * 1º Ano · Língua Portuguesa
- * Missão do Dia: "A Oficina das Letras Mágicas".
+ * EF01LP11 — Aula 011 · Junção C + V (com a vogal A)
+ * Objetivo: montar as primeiras sílabas MA · SA · PA · TA e ouvir
+ * a "cola" entre consoante e vogal. Base: Orton-Gillingham (blending)
+ * + NRP pilar 2 (fônica sistemática).
  */
 const aula: Aula = {
   codigo: "EF01LP11",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "A Oficina das Letras Mágicas",
-
+  disciplina: "Português",
+  titulo: "Grudando as Letras — MA, SA, PA, TA",
   narrativa: {
-    titulo: "A Oficina das Letras Mágicas",
+    titulo: "Grudando as Letras — MA, SA, PA, TA",
     contexto:
-      "Na Oficina das Letras, o Brilha encontra o Pincel Tico pintando um alfabeto gigante em duas formas: imprensa e cursiva.",
+      "O Brilha descobriu uma cola mágica: quando uma consoante encosta numa vogal, elas grudam e viram uma SÍLABA.",
     problema:
-      "Um vento travesso misturou tudo — agora há letras MAIÚSCULAS, minúsculas, imprensa e cursiva bagunçadas no chão.",
-    convite:
-      "Bora ajudar o Tico a organizar cada letrinha no lugar certo?",
+      "As letras M, S, P, T estão soltas de um lado. A vogal A está sozinha do outro. Falta grudar!",
+    convite: "Bora colar M+A, S+A, P+A, T+A e ouvir as primeiras sílabas de verdade?",
   },
-
   conhecimentosPrevios: [
-    "Reconhecer o alfabeto (EF01LP01).",
-    "Diferenciar letras de números e símbolos.",
-    "Perceber que uma mesma letra pode ter formatos diferentes.",
+    "Vogal A e seu som.",
+    "Consoantes M, S, P, T e seus sons.",
+    "Isolar o primeiro som de uma palavra.",
   ],
-
-  missao:
-    "Conhecer, diferenciar e relacionar letras em formato imprensa e cursiva, maiúsculas e minúsculas.",
-
+  missao: "Formar as sílabas MA, SA, PA, TA juntando consoante + vogal A.",
   objetivos: [
-    "Identificar letras maiúsculas e minúsculas.",
-    "Reconhecer letras em imprensa e em cursiva.",
-    "Relacionar a mesma letra em formatos diferentes.",
-    "Ampliar a familiaridade com a escrita.",
+    "Juntar consoante + vogal formando sílaba (blending).",
+    "Ler MA, SA, PA, TA em voz alta.",
+    "Reconhecer essas sílabas no começo de palavras conhecidas.",
+    "Sentir que a sílaba é 1 batidinha só.",
   ],
-
   motivacao:
-    "Cada letra tem várias roupinhas — e todas contam a mesma história!",
-
+    "Sem juntar letras, ninguém lê. MA, SA, PA e TA aparecem em MAPA, SAPO, PATO e LATA — palavras que a criança já usa.",
   explicacao:
-    "As letras podem aparecer de jeitos diferentes:\n\n🔠 MAIÚSCULA (A, B, C) — grande, aparece no começo do nome e da frase.\n🔡 minúscula (a, b, c) — pequena, aparece no meio das palavras.\n🖨️ Imprensa — a letra dos livros e do teclado (A a).\n✍️ Cursiva — a letra escrita à mão, com curvinhas (𝒜 𝒶).\n\nA MESMA letra pode aparecer de várias formas — o som é o mesmo!",
-
+    "Consoante + vogal = sílaba.\n\n👉 M + A → MA (ex.: MApa, MÃe)\n👉 S + A → SA (ex.: SApo, SAla)\n👉 P + A → PA (ex.: PAto, PApel)\n👉 T + A → TA (ex.: TAtu, laTA)\n\nComo colar: fale a consoante bem curtinha e emenda com a vogal — /mmm/ + /aaa/ = MAAA. Uma batidinha só.\n\nDica clínica: NÃO fale 'M com A'. Fale só o som: emenda /m/ e /a/. Se a criança quebrar em duas batidas, mostre bater palma UMA vez para MA.",
+  explicacaoAtiva: [
+    {
+      texto: "M + A gruda e vira MA. Fale bem devagar e emenda.",
+      exemplo: "M + A = MA · aparece em MApa.",
+      imagem: mapaImg,
+      imagemAlt: "Mapa — começa com MA",
+      checagem: {
+        pergunta: "Qual figura começa com MA?",
+        opcoes: ["Mapa", "Sol", "Pato"],
+        correta: 0,
+        explicacao: "MApa — começa com MA.",
+      },
+    },
+    {
+      texto: "S + A gruda e vira SA. É a primeira sílaba de SApo.",
+      exemplo: "S + A = SA · SApo.",
+      imagem: sapoImg,
+      imagemAlt: "Sapo — começa com SA",
+      checagem: {
+        pergunta: "Qual figura começa com SA?",
+        opcoes: ["Mãe", "Sapo", "Pato"],
+        correta: 1,
+        explicacao: "SApo — começa com SA.",
+      },
+    },
+    {
+      texto: "P + A vira PA (PAto). T + A vira TA (aparece no fim de laTA).",
+      exemplo: "P + A = PA · T + A = TA.",
+      imagem: patoImg,
+      imagemAlt: "Pato — começa com PA",
+      checagem: {
+        pergunta: "Qual figura começa com PA?",
+        opcoes: ["Sapo", "Pato", "Mãe"],
+        correta: 1,
+        explicacao: "PAto — começa com PA.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Letra pode ser GRANDE (MAIÚSCULA) ou pequena (minúscula).",
-    nivel2:
-      "Imprensa é a letra do livro. Cursiva é a letra da mão da professora.",
-    nivel3:
-      "A e a são a MESMA letra — muda o tamanho, não o som.",
-    nivel4:
-      "Nomes de pessoas começam com MAIÚSCULA: Ana, Bruno, Lili.",
+    nivel1: "Consoante + vogal = sílaba. MA, SA, PA, TA.",
+    nivel2: "MA em MApa, SA em SApo, PA em PAto, TA no fim de laTA.",
+    nivel3: "Cada sílaba é 1 batida. MApa = 2 batidas: MA-PA.",
+    nivel4: "Blending: emendar fonemas C+V em uma unidade silábica CV.",
   },
-
   exemploResolvido: {
-    enunciado: "Qual é a letra MAIÚSCULA: A, a ou e?",
+    enunciado: "Como fica M + A?",
     passos: [
-      "Olhe o tamanho da letra.",
-      "A letra grande é MAIÚSCULA.",
-      "Então a resposta é A.",
+      "Fale só o som da M: /mmm/.",
+      "Fale só o som da A: /aaa/.",
+      "Cola os dois sem parar no meio: /mmmaaa/ = MA.",
     ],
-    resposta: "A é MAIÚSCULA. ✅",
+    resposta: "M + A = MA (uma batidinha).",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na imagem pra ouvir. O nome LILI começa com qual letra maiúscula?",
-    resposta: "L.",
-    explicacao:
-      "Todo nome de pessoa começa com letra MAIÚSCULA. LILI começa com L.",
+    enunciado: "Toque na figura que começa com a sílaba SA.",
+    resposta: "SAPO — começa com SA.",
+    explicacao: "Fale devagar cada figura antes de tocar: /s/A-po, /p/A-to, /m/A-pa.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Com qual letra começa o nome LILI?",
+      pergunta: "Qual começa com SA?",
       opcoes: [
-        { nome: "L", imagemUrl: livroImg },
-        { nome: "M", imagemUrl: macaImg },
-        { nome: "S", imagemUrl: solImg },
+        { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "pato", imagemUrl: patoImg },
+        { nome: "mapa", imagemUrl: mapaImg },
       ],
-      respostaCerta: "L",
+      respostaCerta: "sapo",
     },
   },
-
   exercicios: [
     {
-      enunciado: "Qual é a MAIÚSCULA do 'a'?",
-      resposta: "A.",
-      dica: "A minúscula é 'a', a maiúscula é bem grande.",
+      enunciado: "🔊 M + A = ?",
+      resposta: "MA.",
+      dica: "Emenda /m/ com /a/ sem parar.",
     },
     {
-      enunciado: "Qual é a minúscula do 'M'?",
-      resposta: "m.",
-      dica: "Fica pequenininha, com dois montinhos.",
+      enunciado: "🔊 Qual começa com PA: PATO, SAPO ou MÃE?",
+      resposta: "PATO — começa com PA.",
+      dica: "PA-TO tem 2 batidas.",
     },
     {
-      enunciado: "Nome de pessoa começa com letra...?",
-      resposta: "MAIÚSCULA.",
-      dica: "Ana, Bruno, Lili — todos começam com letra grande.",
+      enunciado: "👋 Bata palma uma vez para cada sílaba de MAPA.",
+      resposta: "MA-PA (2 batidas).",
+      dica: "Cada batida é uma sílaba.",
     },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: descubra a letra certa em cada situação.",
-    resposta:
-      "MAIÚSCULA no começo do nome e minúscula no meio da palavra.",
+    enunciado: "Desafio Brilha: separar figuras por sílaba inicial.",
+    resposta: "Time MA: mapa · Time SA: sapo · Time PA: pato · Time TA: lata (no fim).",
     visual: {
       cena: [
-        { personagem: "LIVRO", itemImagemUrl: livroImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "PINCEL", itemImagemUrl: pincelImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "TINTA", itemImagemUrl: tintaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "ESCOLA", itemImagemUrl: escolaImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "MA", itemImagemUrl: mapaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "SA", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "PA", itemImagemUrl: patoImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "laTA", itemImagemUrl: lataImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
         {
-          pergunta: "Qual é a letra MAIÚSCULA?",
-          opcoes: ["A", "a", "e"],
+          pergunta: "Qual começa com MA?",
+          opcoes: ["Mapa", "Sapo", "Pato"],
           correta: 0,
-          explicacao: "A letra GRANDE é a MAIÚSCULA.",
+          explicacao: "MApa — MA.",
         },
         {
-          pergunta: "Qual é a letra minúscula?",
-          opcoes: ["b", "B", "D"],
-          correta: 0,
-          explicacao: "'b' é pequena — minúscula.",
+          pergunta: "Qual começa com PA?",
+          opcoes: ["Sapo", "Pato", "Mapa"],
+          correta: 1,
+          explicacao: "PAto — PA.",
         },
         {
-          pergunta: "Onde usamos letra MAIÚSCULA?",
-          opcoes: [
-            "No começo do nome de pessoa",
-            "No meio da palavra",
-            "No fim de qualquer palavra",
-          ],
-          correta: 0,
-          explicacao: "MAIÚSCULA começa o nome: Ana, Bruno, Lili.",
-        },
-        {
-          pergunta: "Qual dupla mostra a MESMA letra?",
-          opcoes: ["A e a", "A e e", "B e p"],
-          correta: 0,
-          explicacao: "A e a são a mesma letra, só muda o tamanho.",
-        },
-        {
-          pergunta: "Como se chama a letra escrita à mão com curvinhas?",
-          opcoes: ["Cursiva", "Imprensa", "Número"],
-          correta: 0,
-          explicacao: "Cursiva = letra da mão da professora.",
+          pergunta: "Onde ouvimos TA na palavra LATA?",
+          opcoes: ["No começo", "No fim", "No meio"],
+          correta: 1,
+          explicacao: "LA-TA. TA está no fim.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🔠 MAIÚSCULAS são GRANDES; 🔡 minúsculas são pequenas.",
-      "🖨️ Imprensa é a letra do livro; ✍️ cursiva é a da mão.",
-      "👤 Nomes de pessoa começam com MAIÚSCULA.",
-      "🔤 A mesma letra pode aparecer de formas diferentes.",
+      "Consoante + vogal = sílaba.",
+      "M+A=MA · S+A=SA · P+A=PA · T+A=TA.",
+      "Cada sílaba é 1 batida de palma.",
+      "MAPA, SAPO, PATO, LATA — todas com sílabas CV.",
     ],
-    dica: "Olhe o tamanho e o traço da letra pra saber qual formato ela é.",
+    dica: "Se travar, cante a consoante bem longa e emenda na vogal: /mmmm-aaa/.",
   },
-
   quiz: [
     {
-      pergunta: "Qual é a letra MAIÚSCULA?",
-      opcoes: ["A", "a", "e"],
-      correta: 0,
-      explicacao: "A letra grande é MAIÚSCULA.",
+      pergunta: "M + A = ?",
+      opcoes: ["AM", "MA", "MM"],
+      correta: 1,
+      explicacao: "M+A = MA.",
     },
     {
-      pergunta: "Qual é a minúscula do 'M'?",
-      opcoes: ["m", "N", "W"],
+      pergunta: "Qual figura começa com SA?",
+      opcoes: ["Sapo", "Pato", "Mãe"],
       correta: 0,
-      explicacao: "A minúscula do M é 'm'.",
+      explicacao: "SApo — SA.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+          { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+          { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        ],
+      },
     },
     {
-      pergunta: "Nome de pessoa começa com...?",
-      opcoes: ["Letra maiúscula", "Letra minúscula", "Número"],
-      correta: 0,
-      explicacao: "Sempre MAIÚSCULA.",
+      pergunta: "Quantas sílabas tem MAPA?",
+      opcoes: ["1", "2", "3"],
+      correta: 1,
+      explicacao: "MA-PA = 2 sílabas.",
     },
     {
-      pergunta: "Como se chama a letra dos livros?",
-      opcoes: ["Imprensa", "Cursiva", "Número"],
-      correta: 0,
-      explicacao: "Imprensa é a letra do livro.",
-    },
-    {
-      pergunta: "A e a são:",
-      opcoes: [
-        "A mesma letra, tamanhos diferentes",
-        "Letras diferentes",
-        "Um número e uma letra",
-      ],
-      correta: 0,
-      explicacao: "Mesma letra, tamanhos diferentes.",
+      pergunta: "Qual palavra tem TA no fim?",
+      opcoes: ["Mapa", "Sapo", "Lata"],
+      correta: 2,
+      explicacao: "LA-TA — TA no fim.",
     },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Guardião das Letras! Missão em Família: procurem no jornal, na embalagem ou no livro 5 letras MAIÚSCULAS e 5 minúsculas.",
-
+    "🏅 Medalha: Colador de Sílabas! Missão em Casa: bater palma e falar MA-PA, SA-PO, PA-TO, LA-TA com alguém da família.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "A letra cursiva foi criada para escrever mais rápido, ligando uma letra na outra sem tirar o lápis do papel.",
+      "Antes de ler palavras, o cérebro precisa aprender a EMENDAR duas letras. Isso se chama blending — e é a primeira porta para a leitura!",
   },
-
   interativas: [
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 1 · MAIÚSCULA ou minúscula?",
-      instrucao: "Toque na figura pra ouvir. Depois escolha a letra MAIÚSCULA.",
-      figura: { imagemUrl: livroImg, rotulo: "📖" },
-      pergunta: "Qual é a letra MAIÚSCULA?",
-      opcoes: ["A", "a", "e"],
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Achando MA",
+      instrucao: "Toque na figura que começa com MA.",
+      grupos: [
+        { imagemUrl: mapaImg, quantidade: 1, rotulo: "mapa" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+      ],
+      pergunta: "Qual começa com MA?",
+      opcoes: ["Mapa", "Sapo", "Pato"],
       correta: 0,
-      acerto: "🎉 Isso! A é a letra MAIÚSCULA.",
-      erro: "A letra GRANDE é a MAIÚSCULA — A.",
+      acerto: "MAPA — começa com MA!",
+      erro: "Fale devagar: MA-PA. É essa.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Ache a minúscula",
-      instrucao: "Toque pra ouvir. Qual é a MINÚSCULA?",
-      figura: { imagemUrl: gatoImg, rotulo: "🐱" },
-      pergunta: "Qual é a letra minúscula?",
-      opcoes: ["b", "B", "D"],
-      correta: 0,
-      acerto: "🎉 'b' é minúscula.",
-      erro: "Pequena e com uma bolinha embaixo: 'b'.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Começo do nome",
-      instrucao: "O nome ANA começa com qual letra?",
-      figura: { imagemUrl: corujaImg, rotulo: "👧" },
-      pergunta: "Com qual letra começa ANA?",
-      opcoes: ["A", "N", "O"],
-      correta: 0,
-      acerto: "🎉 ANA começa com A (MAIÚSCULA).",
-      erro: "Todo nome começa com letra grande. ANA → A.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Relacione MAIÚSCULA e minúscula",
-      instrucao: "Arraste a MAIÚSCULA pra sua minúscula correspondente.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Cada sílaba, sua figura",
+      instrucao: "Ligue a sílaba à figura que começa com ela.",
       pares: [
-        { item: "A", alvo: "a" },
-        { item: "B", alvo: "b" },
-        { item: "M", alvo: "m" },
-      ],
-      alvosVisuais: [
-        { nome: "a", cor: "#F472B6", capacidade: 1 },
-        { nome: "b", cor: "#60A5FA", capacidade: 1 },
-        { nome: "m", cor: "#34D399", capacidade: 1 },
+        { a: "MA", b: "Mapa", aImagem: estrelaImg, bImagem: mapaImg },
+        { a: "SA", b: "Sapo", aImagem: estrelaImg, bImagem: sapoImg },
+        { a: "PA", b: "Pato", aImagem: estrelaImg, bImagem: patoImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Oficina de Escrita",
-      instrucao:
-        "O Pincel Tico pediu a figura cujo nome começa com a letra M MAIÚSCULA.",
-      pergunta: "Qual nome começa com M?",
-      opcoes: [
-        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
-        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "🏀 BOLA" },
-        { nome: "CASA", imagemUrl: casaImg, rotulo: "🏠 CASA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Achando PA",
+      instrucao: "Qual começa com PA?",
+      grupos: [
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
       ],
+      pergunta: "Qual começa com PA?",
+      opcoes: ["Sapo", "Pato", "Mãe"],
+      correta: 1,
+      acerto: "PATO — PA!",
+      erro: "Fale devagar: PA-TO.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Batidinhas de MAPA",
+      instrucao: "Coloque as sílabas de MAPA em ordem: MA → PA.",
+      itens: ["MA", "PA"],
+      imagens: [
+        { imagemUrl: mapaImg, quantidade: 1, rotulo: "1º · MA" },
+        { imagemUrl: mapaImg, quantidade: 1, rotulo: "2º · PA" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · TA no fim",
+      instrucao: "Qual palavra termina com TA?",
+      grupos: [
+        { imagemUrl: lataImg, quantidade: 1, rotulo: "lata" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+      ],
+      pergunta: "Qual termina com TA?",
+      opcoes: ["Lata", "Sapo", "Sol"],
       correta: 0,
-      acerto: "🍎 Isso! MAÇÃ começa com M.",
-      erro: "Ouça devagar: MMM… MAÇÃ começa com M.",
+      acerto: "LA-TA — termina com TA!",
+      erro: "Bata palma: LA-TA. A última batida é TA.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Qual letra é MAIÚSCULA?",
-        opcoes: ["A", "a", "e"],
+        pergunta: "M + A = ?",
+        opcoes: ["MA", "AM", "MM"],
         correta: 0,
-        explicacao: "MAIÚSCULA = GRANDE.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "A" },
+        explicacao: "M+A = MA.",
       },
       {
-        pergunta: "Qual letra é minúscula?",
-        opcoes: ["b", "B", "T"],
+        pergunta: "Qual começa com MA?",
+        opcoes: ["Mapa", "Sol", "Pato"],
         correta: 0,
-        explicacao: "'b' é pequena.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "b" },
+        explicacao: "MApa.",
+        visual: { tipo: "itens", imagemUrl: mapaImg, quantidade: 1, rotulo: "mapa" },
       },
       {
-        pergunta: "Nome de pessoa começa com...?",
-        opcoes: ["Maiúscula", "Minúscula", "Número"],
+        pergunta: "Qual começa com SA?",
+        opcoes: ["Sapo", "Mãe", "Pato"],
         correta: 0,
-        explicacao: "Sempre MAIÚSCULA.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "👤" },
+        explicacao: "SApo.",
+        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
       },
     ],
     medio: [
       {
-        pergunta: "A minúscula do 'S' é...?",
-        opcoes: ["s", "z", "c"],
-        correta: 0,
-        explicacao: "'S' → 's'.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "S s" },
+        pergunta: "Quantas sílabas tem SAPO?",
+        opcoes: ["1", "2", "3"],
+        correta: 1,
+        explicacao: "SA-PO = 2.",
       },
       {
-        pergunta: "'Lua' começa com qual letra MAIÚSCULA?",
-        opcoes: ["L", "U", "A"],
-        correta: 0,
-        explicacao: "Começa com L.",
-        visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "🌙 L" },
+        pergunta: "Qual começa com PA?",
+        opcoes: ["Mãe", "Pato", "Maçã"],
+        correta: 1,
+        explicacao: "PAto.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+            { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+            { imagemUrl: macaImg, quantidade: 1, rotulo: "maçã" },
+          ],
+        },
       },
       {
-        pergunta: "A letra do livro é chamada...?",
-        opcoes: ["Imprensa", "Cursiva", "Colorida"],
-        correta: 0,
-        explicacao: "Imprensa = livro.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "Aa" },
+        pergunta: "T + A forma qual sílaba?",
+        opcoes: ["AT", "TA", "TT"],
+        correta: 1,
+        explicacao: "T+A = TA.",
       },
     ],
     dificil: [
       {
-        pergunta: "A letra escrita à mão com curvinhas é...?",
-        opcoes: ["Cursiva", "Imprensa", "Reta"],
-        correta: 0,
-        explicacao: "Cursiva = mão.",
-        visual: { tipo: "itens", imagemUrl: pincelImg, quantidade: 1, rotulo: "𝒜𝒶" },
+        pergunta: "Onde ouvimos TA em LATA?",
+        opcoes: ["No começo", "No fim", "Não aparece"],
+        correta: 1,
+        explicacao: "LA-TA. TA é a última sílaba.",
       },
       {
-        pergunta: "A e a são:",
-        opcoes: [
-          "A mesma letra",
-          "Letras diferentes",
-          "Números",
-        ],
+        pergunta: "Qual grupo é SÓ CV com A?",
+        opcoes: ["MA · SA · PA", "MA · S · PA", "M · A · P"],
         correta: 0,
-        explicacao: "Mesma letra, tamanhos diferentes.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "A a" },
+        explicacao: "Todos são consoante + vogal A.",
       },
       {
-        pergunta: "Qual palavra começa com MAIÚSCULA?",
-        opcoes: ["Bruno", "casa", "bola"],
+        pergunta: "Se somo P + A + T + O, o que leio?",
+        opcoes: ["PA-TO", "PO-TA", "TA-PO"],
         correta: 0,
-        explicacao: "Nome de pessoa: Bruno.",
-        visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "🏫 B" },
+        explicacao: "PA + TO = PATO.",
+        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
       },
     ],
   },
-
   proximaHabilidade: {
     codigo: "EF01LP12",
+    titulo: "Sílabas com E e I: ME, PE, SI, PI, LI, FI",
   },
 };
 

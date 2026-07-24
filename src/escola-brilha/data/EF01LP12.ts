@@ -1,368 +1,335 @@
 import type { Aula } from "../types";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as pipaImg } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as meninoImg } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
 import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as trenImg } from "@/assets/neuro-treino/objetos/trem.png.asset.json";
-import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as meninaImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
 
 /**
- * EF01LP12 — Aula 012 · Biblioteca Pedagógica Escola Brilha
- * 1º Ano · Língua Portuguesa
- * Missão do Dia: "O Rio das Palavras Grudadas".
+ * EF01LP12 — Aula 012 · Sílabas CV com as vogais E e I
+ * Foco: ME, PE, SE, PI, NI, LI, FI, MI.
  */
 const aula: Aula = {
   codigo: "EF01LP12",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Rio das Palavras Grudadas",
-
+  disciplina: "Português",
+  titulo: "Sílabas com E e I — PE, ME, PI, NI, LI",
   narrativa: {
-    titulo: "O Rio das Palavras Grudadas",
+    titulo: "Sílabas com E e I — PE, ME, PI, NI, LI",
     contexto:
-      "No Rio das Palavras, cada palavra é um barquinho que precisa de um espaço pra navegar.",
+      "Depois de dominar o A, o Brilha achou duas amigas curiosas: E e I. Agora as consoantes querem grudar nelas também.",
     problema:
-      "Uma corrente forte grudou vários barquinhos: OGATODORME, AMENINACORRE… ninguém entende mais!",
-    convite:
-      "Bora ajudar o Brilha a colocar os espaços de volta entre as palavras?",
+      "As sílabas PE, ME, PI, NI, LI ficaram escondidas dentro de palavras: PEIXE, MENINO, PIPA, NINHO…",
+    convite: "Bora ouvir com atenção e achar cada sílaba dentro das palavras?",
   },
-
   conhecimentosPrevios: [
-    "Reconhecer palavras (EF01LP08).",
-    "Montar frases (EF01LP09).",
-    "Perceber que a leitura vai da esquerda pra direita.",
+    "Sílabas CV com A (MA, SA, PA, TA).",
+    "Sons das vogais E e I.",
+    "Sons das consoantes M, P, S, L, F, N.",
   ],
-
-  missao:
-    "Reconhecer a separação das palavras, na escrita, por espaços em branco.",
-
+  missao: "Formar e reconhecer sílabas CV com E e I.",
   objetivos: [
-    "Perceber que palavras são separadas por espaços.",
-    "Contar palavras em uma frase.",
-    "Reescrever frases separando corretamente.",
-    "Ler frases com melhor entonação por reconhecer as pausas.",
+    "Juntar consoante + E ou I formando sílaba.",
+    "Reconhecer PE, ME, PI, NI, LI no começo de palavras.",
+    "Bater palma para cada sílaba.",
+    "Diferenciar sílaba com A x sílaba com E/I.",
   ],
-
-  motivacao: "Cada palavra tem seu lugar — o espaço é o descanso do olho!",
-
+  motivacao:
+    "PEIXE, MENINO, PIPA, NINHO — a criança encontra essas palavras todo dia. Sem saber juntar C+E e C+I ela lê metade das palavras.",
   explicacao:
-    "Toda frase é feita de PALAVRAS.\nEntre uma palavra e outra existe um ESPAÇO em branco.\n\n❌ OGATODORME  →  difícil de ler\n✅ O GATO DORME  →  fácil de ler\n\nO espaço mostra onde uma palavra termina e outra começa.",
-
+    "Consoante + E ou I também vira sílaba.\n\n👉 P + E → PE (PEixe)\n👉 M + E → ME (MEnino)\n👉 P + I → PI (PIpa)\n👉 N + I → NI (NInho)\n👉 L + I → LI (LImão)\n\nDica: fale a consoante curtinha e emenda com a vogal, sem quebrar. /p/+/e/ = PE, uma batida só.",
+  explicacaoAtiva: [
+    {
+      texto: "P + E vira PE. Aparece em PEixe.",
+      exemplo: "P + E = PE · PEixe.",
+      imagem: peixeImg,
+      imagemAlt: "Peixe — começa com PE",
+      checagem: {
+        pergunta: "Qual figura começa com PE?",
+        opcoes: ["Peixe", "Pato", "Sapo"],
+        correta: 0,
+        explicacao: "PEixe — PE.",
+      },
+    },
+    {
+      texto: "M + E vira ME. Aparece em MEnino.",
+      exemplo: "M + E = ME · MEnino.",
+      imagem: meninoImg,
+      imagemAlt: "Menino — começa com ME",
+      checagem: {
+        pergunta: "Qual figura começa com ME?",
+        opcoes: ["Peixe", "Menino", "Sapo"],
+        correta: 1,
+        explicacao: "MEnino — ME.",
+      },
+    },
+    {
+      texto: "P + I vira PI (PIpa). N + I vira NI (NInho).",
+      exemplo: "P + I = PI · N + I = NI.",
+      imagem: pipaImg,
+      imagemAlt: "Pipa — começa com PI",
+      checagem: {
+        pergunta: "Qual começa com PI?",
+        opcoes: ["Ninho", "Pipa", "Menino"],
+        correta: 1,
+        explicacao: "PIpa — PI.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Entre uma palavra e outra tem um ESPAÇO.",
-    nivel2:
-      "Se as palavras ficam grudadas, a gente não consegue ler direito.",
-    nivel3:
-      "Contar as palavras é contar quantos 'pedaços' com letras existem entre os espaços.",
-    nivel4:
-      "Quando escrevemos, deixamos o espaço de um dedinho entre as palavras.",
+    nivel1: "C + E = sílaba com E · C + I = sílaba com I.",
+    nivel2: "PE em PEixe · ME em MEnino · PI em PIpa · NI em NInho.",
+    nivel3: "PIPA = PI-PA. Duas sílabas, uma com I e outra com A.",
+    nivel4: "As vogais fechadas (I) mudam o timbre da sílaba mas mantêm a estrutura CV.",
   },
-
   exemploResolvido: {
-    enunciado: "Quantas palavras tem: O GATO DORME?",
+    enunciado: "Como fica N + I?",
     passos: [
-      "Olhe cada espaço em branco.",
-      "Conte os pedaços: O · GATO · DORME.",
-      "Total: 3 palavras.",
+      "Fale o som da S: /nnn/.",
+      "Fale o som da I: /iii/.",
+      "Cola sem parar: /nnniii/ = NI.",
     ],
-    resposta: "3 palavras. ✅",
+    resposta: "N + I = NI (aparece em NInho).",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir. Qual escrita está separada CORRETAMENTE?",
-    resposta: "A MENINA CORRE.",
-    explicacao:
-      "Cada palavra tem seu espaço: A · MENINA · CORRE.",
+    enunciado: "Toque na figura que começa com PI.",
+    resposta: "PIPA — começa com PI.",
+    explicacao: "Fale: PI-pa · NI-nho · PEi-xe.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Escrita com espaços corretos:",
+      pergunta: "Qual começa com PI?",
       opcoes: [
-        { nome: "A MENINA CORRE", imagemUrl: meninaImg },
-        { nome: "AMENINACORRE", imagemUrl: corujaImg },
-        { nome: "AME NINACORRE", imagemUrl: gatoImg },
+        { nome: "pipa", imagemUrl: pipaImg },
+        { nome: "ninho", imagemUrl: ninhoImg },
+        { nome: "peixe", imagemUrl: peixeImg },
       ],
-      respostaCerta: "A MENINA CORRE",
+      respostaCerta: "pipa",
     },
   },
-
   exercicios: [
+    { enunciado: "🔊 P + E = ?", resposta: "PE.", dica: "Emenda /p/ com /e/." },
+    { enunciado: "🔊 M + I = ?", resposta: "MI.", dica: "Emenda /m/ com /i/." },
     {
-      enunciado: "Quantas palavras tem 'A BOLA É AZUL'?",
-      resposta: "4 palavras.",
-      dica: "Conte cada pedaço entre os espaços.",
-    },
-    {
-      enunciado: "Separe corretamente: OSOLBRILHA.",
-      resposta: "O SOL BRILHA.",
-      dica: "São 3 palavras: O · SOL · BRILHA.",
-    },
-    {
-      enunciado: "Por que usamos espaço entre as palavras?",
-      resposta: "Para saber onde uma palavra termina e outra começa.",
-      dica: "O espaço ajuda a ler.",
+      enunciado: "🔊 Qual começa com NI: NINHO, SAPO ou SOL?",
+      resposta: "NINHO — NI.",
+      dica: "NI-nho. A primeira batida é NI.",
     },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: descubra a escrita certa com espaços no lugar.",
-    resposta: "Palavras precisam de espaços entre elas.",
+    enunciado: "Desafio Brilha: separar por vogal da sílaba.",
+    resposta: "Time E: peixe, menino · Time I: pipa, ninho.",
     visual: {
       cena: [
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "BOLA", itemImagemUrl: bolaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "PATO", itemImagemUrl: patoImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "CASA", itemImagemUrl: casaImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "PE", itemImagemUrl: peixeImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "ME", itemImagemUrl: meninoImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "PI", itemImagemUrl: pipaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "NI", itemImagemUrl: ninhoImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
         {
-          pergunta: "Escrita CORRETA:",
-          opcoes: ["O GATO DORME", "OGATODORME", "O GATODORME"],
+          pergunta: "Qual começa com PE?",
+          opcoes: ["Peixe", "Pipa", "Ninho"],
           correta: 0,
-          explicacao: "3 palavras: O · GATO · DORME.",
+          explicacao: "PEixe.",
         },
         {
-          pergunta: "Quantas palavras tem 'A BOLA ROLA'?",
-          opcoes: ["3", "2", "4"],
-          correta: 0,
-          explicacao: "A · BOLA · ROLA = 3 palavras.",
+          pergunta: "Qual começa com NI?",
+          opcoes: ["Peixe", "Ninho", "Menino"],
+          correta: 1,
+          explicacao: "NInho.",
         },
         {
-          pergunta: "Escrita CORRETA:",
-          opcoes: ["O SOL É QUENTE", "OSOLÉQUENTE", "O SOLÉ QUENTE"],
-          correta: 0,
-          explicacao: "4 palavras separadas por espaços.",
-        },
-        {
-          pergunta: "Quantas palavras tem 'O PATO NADA NO LAGO'?",
-          opcoes: ["5", "4", "3"],
-          correta: 0,
-          explicacao: "O · PATO · NADA · NO · LAGO = 5.",
-        },
-        {
-          pergunta: "O que separa as palavras na escrita?",
-          opcoes: ["Um espaço em branco", "Uma letra", "Um número"],
-          correta: 0,
-          explicacao: "Um ESPAÇO em branco.",
+          pergunta: "Qual vogal aparece em ME?",
+          opcoes: ["A", "E", "I"],
+          correta: 1,
+          explicacao: "M + E = ME.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🪧 Palavras são separadas por ESPAÇOS.",
-      "🔢 Contar palavras = contar pedaços entre os espaços.",
-      "❌ Palavras grudadas ficam difíceis de ler.",
-      "✍️ Ao escrever, deixe o espaço de um dedinho.",
+      "C + E ou C + I = sílaba.",
+      "PE (peixe) · ME (menino) · PI (pipa) · NI (ninho).",
+      "Cada sílaba = 1 batida.",
+      "A vogal muda o som, mas a cola é a mesma.",
     ],
-    dica: "Se está difícil de ler, olhe se faltam espaços entre as palavras.",
+    dica: "Antes de responder, bata palma. Se der 1 batida, é sílaba única.",
   },
-
   quiz: [
     {
-      pergunta: "Escrita CORRETA:",
-      opcoes: ["O GATO DORME", "OGATODORME", "OGATO DORME"],
-      correta: 0,
-      explicacao: "Cada palavra tem seu espaço.",
+      pergunta: "P + I = ?",
+      opcoes: ["PA", "PI", "IP"],
+      correta: 1,
+      explicacao: "P+I = PI.",
     },
     {
-      pergunta: "Quantas palavras tem 'A CASA É AZUL'?",
-      opcoes: ["4", "3", "2"],
+      pergunta: "Qual figura começa com ME?",
+      opcoes: ["Menino", "Sapo", "Pipa"],
       correta: 0,
-      explicacao: "A · CASA · É · AZUL.",
+      explicacao: "MEnino.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: meninoImg, quantidade: 1, rotulo: "menino" },
+          { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+          { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+        ],
+      },
     },
     {
-      pergunta: "O que separa as palavras?",
-      opcoes: ["Espaço em branco", "Ponto final", "Letra maiúscula"],
-      correta: 0,
-      explicacao: "Espaço em branco.",
+      pergunta: "Qual começa com NI?",
+      opcoes: ["Sol", "Ninho", "Sapo"],
+      correta: 1,
+      explicacao: "NInho.",
     },
     {
-      pergunta: "Escrita CORRETA:",
-      opcoes: ["EU AMO LER", "EUAMOLER", "EU AMOLER"],
-      correta: 0,
-      explicacao: "3 palavras com espaços.",
-    },
-    {
-      pergunta: "Quantas palavras tem 'O SOL NASCEU'?",
-      opcoes: ["3", "2", "4"],
-      correta: 0,
-      explicacao: "O · SOL · NASCEU = 3.",
+      pergunta: "Quantas sílabas tem PIPA?",
+      opcoes: ["1", "2", "3"],
+      correta: 1,
+      explicacao: "PI-PA = 2.",
     },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Capitão dos Espaços! Missão em Família: peça pra alguém escrever uma frase sem espaços e você recoloca os espaços no lugar certo.",
-
+    "🏅 Medalha: Caçador de PE, ME, PI e NI! Missão em Casa: falar 3 palavras com PE e 3 com PI para alguém.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Nos livros antigos, muitas palavras eram escritas grudadas. Foi só depois que inventaram o espaço entre elas — pra facilitar a leitura!",
+      "A vogal I é a mais 'fininha' — sua boca fica quase fechada. Já a A é a mais 'aberta'. Por isso as sílabas soam diferentes mesmo com a mesma consoante!",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Qual escrita é correta?",
-      instrucao:
-        "Toque pra ouvir. Qual escrita tem os espaços no lugar certo?",
-      pergunta: "Escrita CORRETA:",
-      opcoes: [
-        { nome: "O GATO DORME", imagemUrl: gatoImg, rotulo: "O GATO DORME" },
-        { nome: "OGATODORME", imagemUrl: corujaImg, rotulo: "OGATODORME" },
-        { nome: "O GATODORME", imagemUrl: arvoreImg, rotulo: "O GATODORME" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Achando PE",
+      instrucao: "Toque na figura que começa com PE.",
+      grupos: [
+        { imagemUrl: peixeImg, quantidade: 1, rotulo: "peixe" },
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
       ],
+      pergunta: "Qual começa com PE?",
+      opcoes: ["Peixe", "Pipa", "Sapo"],
       correta: 0,
-      acerto: "🎉 Isso! Espaços no lugar certo.",
-      erro: "Cada palavra precisa de um espaço: O · GATO · DORME.",
+      acerto: "PEixe — PE!",
+      erro: "Fale devagar: PE-xe.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Conte as palavras",
-      instrucao:
-        "Toque na figura pra ouvir. Quantas palavras tem 'A BOLA ROLA'?",
-      figura: { imagemUrl: bolaImg, rotulo: "🏀" },
-      pergunta: "Quantas palavras?",
-      opcoes: ["3", "2", "4"],
-      correta: 0,
-      acerto: "🎉 3 palavras: A · BOLA · ROLA.",
-      erro: "Conte cada pedaço entre os espaços.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Separe a frase",
-      instrucao: "Toque pra ouvir. Qual é a separação certa de OSOLBRILHA?",
-      figura: { imagemUrl: solImg, rotulo: "☀️" },
-      pergunta: "Separação CORRETA:",
-      opcoes: ["O SOL BRILHA", "OSOL BRILHA", "O SO LBRILHA"],
-      correta: 0,
-      acerto: "🎉 O · SOL · BRILHA.",
-      erro: "Ouça bem: O SOL BRILHA — 3 palavras.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Um espaço entre cada palavra",
-      instrucao:
-        "Arraste cada palavra pro seu lugar. Cada caixinha vira UM espaço.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Sílaba x Figura",
+      instrucao: "Ligue cada sílaba à figura certa.",
       pares: [
-        { item: "O", alvo: "1ª" },
-        { item: "PATO", alvo: "2ª" },
-        { item: "NADA", alvo: "3ª" },
-      ],
-      alvosVisuais: [
-        { nome: "1ª", cor: "#34D399", capacidade: 1 },
-        { nome: "2ª", cor: "#FBBF24", capacidade: 1 },
-        { nome: "3ª", cor: "#A78BFA", capacidade: 1 },
+        { a: "PE", b: "Peixe", aImagem: estrelaImg, bImagem: peixeImg },
+        { a: "ME", b: "Menino", aImagem: estrelaImg, bImagem: meninoImg },
+        { a: "PI", b: "Pipa", aImagem: estrelaImg, bImagem: pipaImg },
+        { a: "NI", b: "Ninho", aImagem: estrelaImg, bImagem: ninhoImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Biblioteca do Brilha",
-      instrucao:
-        "A Coruja Sábia pediu o livro cuja frase tem 4 palavras separadas.",
-      pergunta: "Frase com 4 palavras:",
-      opcoes: [
-        { nome: "A CASA É AZUL", imagemUrl: casaImg, rotulo: "A CASA É AZUL" },
-        { nome: "O GATO DORME", imagemUrl: gatoImg, rotulo: "O GATO DORME" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "SOL" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · E ou I?",
+      instrucao: "Qual começa com sílaba com I?",
+      grupos: [
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
+        { imagemUrl: meninoImg, quantidade: 1, rotulo: "menino" },
+        { imagemUrl: peixeImg, quantidade: 1, rotulo: "peixe" },
       ],
+      pergunta: "Qual começa com sílaba com I?",
+      opcoes: ["Pipa", "Menino", "Peixe"],
       correta: 0,
-      acerto: "🏠 Certo! A · CASA · É · AZUL — 4 palavras.",
-      erro: "Conte de novo: A CASA É AZUL tem 4 palavras.",
+      acerto: "PIpa — PI (com I)!",
+      erro: "MEnino e PEixe são com E. PIpa é com I.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Sílabas de PIPA",
+      instrucao: "Coloque em ordem: PI → PA.",
+      itens: ["PI", "PA"],
+      imagens: [
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "1º · PI" },
+        { imagemUrl: pipaImg, quantidade: 1, rotulo: "2º · PA" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Reconhecer NI",
+      instrucao: "Qual começa com NI?",
+      grupos: [
+        { imagemUrl: ninhoImg, quantidade: 1, rotulo: "ninho" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+      ],
+      pergunta: "Qual começa com NI?",
+      opcoes: ["Ninho", "Sol", "Sapo"],
+      correta: 0,
+      acerto: "NInho — NI!",
+      erro: "SOL é SO, SAPO é SA. NInho é NI.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
+      { pergunta: "P + E = ?", opcoes: ["PE", "PA", "PI"], correta: 0, explicacao: "P+E = PE." },
+      { pergunta: "N + I = ?", opcoes: ["SA", "NI", "SO"], correta: 1, explicacao: "N+I = NI." },
       {
-        pergunta: "Escrita CORRETA:",
-        opcoes: ["O GATO", "OGATO", "OG ATO"],
+        pergunta: "Qual começa com PI?",
+        opcoes: ["Pipa", "Sapo", "Mãe"],
         correta: 0,
-        explicacao: "Espaço entre as palavras.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
-      },
-      {
-        pergunta: "Quantas palavras tem 'A BOLA'?",
-        opcoes: ["2", "1", "3"],
-        correta: 0,
-        explicacao: "A · BOLA = 2.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "🏀" },
-      },
-      {
-        pergunta: "Escrita CORRETA:",
-        opcoes: ["O SOL", "OSOL", "OSO L"],
-        correta: 0,
-        explicacao: "Espaço no lugar certo.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️" },
+        explicacao: "PIpa.",
+        visual: { tipo: "itens", imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
       },
     ],
     medio: [
       {
-        pergunta: "Quantas palavras tem 'O PATO NADA'?",
-        opcoes: ["3", "2", "4"],
+        pergunta: "Qual começa com ME?",
+        opcoes: ["Menino", "Mãe", "Sapo"],
         correta: 0,
-        explicacao: "O · PATO · NADA.",
-        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "🦆" },
+        explicacao: "MEnino (ME). MÃE é MÃ nasal.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: meninoImg, quantidade: 1, rotulo: "menino" },
+            { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+          ],
+        },
       },
+      { pergunta: "Quantas sílabas tem NINHO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "NI-NHO = 2." },
       {
-        pergunta: "Escrita CORRETA:",
-        opcoes: ["A CASA É AZUL", "ACASAÉAZUL", "A CASAÉ AZUL"],
-        correta: 0,
-        explicacao: "4 palavras separadas.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🏠" },
-      },
-      {
-        pergunta: "Quantas palavras tem 'EU AMO LER'?",
-        opcoes: ["3", "2", "4"],
-        correta: 0,
-        explicacao: "EU · AMO · LER.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📖" },
+        pergunta: "Qual NÃO começa com sílaba com I?",
+        opcoes: ["Pipa", "Ninho", "Peixe"],
+        correta: 2,
+        explicacao: "PEixe começa com E.",
       },
     ],
     dificil: [
       {
-        pergunta: "Escrita CORRETA:",
-        opcoes: [
-          "O TREM CORRE RÁPIDO",
-          "OTREMCORRERÁPIDO",
-          "OTREM CORRERÁPIDO",
-        ],
+        pergunta: "Se leio P-I-P-A, formo:",
+        opcoes: ["PI-PA (pipa)", "PA-PI", "PA-PA"],
         correta: 0,
-        explicacao: "4 palavras: O · TREM · CORRE · RÁPIDO.",
-        visual: { tipo: "itens", imagemUrl: trenImg, quantidade: 1, rotulo: "🚂" },
+        explicacao: "PI + PA = PIPA.",
+        visual: { tipo: "itens", imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
       },
       {
-        pergunta: "Quantas palavras tem 'A MENINA COME MAÇÃ'?",
-        opcoes: ["4", "3", "5"],
+        pergunta: "Qual grupo tem SÓ sílabas com I?",
+        opcoes: ["PI · NI · LI", "PE · ME · PI", "MA · SA · PA"],
         correta: 0,
-        explicacao: "A · MENINA · COME · MAÇÃ.",
-        visual: { tipo: "itens", imagemUrl: macaImg, quantidade: 1, rotulo: "🍎" },
+        explicacao: "Todas terminam em I.",
       },
       {
-        pergunta: "O que separa palavras na escrita?",
-        opcoes: [
-          "Um espaço em branco",
-          "Uma vírgula",
-          "Uma letra maiúscula",
-        ],
-        correta: 0,
-        explicacao: "Espaço em branco separa palavras.",
-        visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "␣" },
+        pergunta: "MENINO tem quantas sílabas?",
+        opcoes: ["2", "3", "4"],
+        correta: 1,
+        explicacao: "ME-NI-NO = 3.",
       },
     ],
   },
-
   proximaHabilidade: {
     codigo: "EF01LP13",
+    titulo: "Sílabas com O e U: MO, PO, LO, NU, LU, SU",
   },
 };
 
