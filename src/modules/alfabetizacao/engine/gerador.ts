@@ -1,6 +1,7 @@
 // Geradores de atividades com regra pedagógica explícita (Professor Digital).
 import { PALAVRAS, Palavra, VOGAIS, falarSom } from "../data/palavras";
 import { FRASES, HISTORIAS } from "../data/historias";
+import { filtrarComSRS, marcarUsada } from "./srs";
 import {
   validarAntesDeGerar,
   sugerirAlternativa,
@@ -14,11 +15,13 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Dificuldade adaptativa
+// Dificuldade adaptativa + revisão espaçada (Fase F).
 function poolPorNivel(nivel: number): Palavra[] {
-  if (nivel <= 1) return PALAVRAS.filter((p) => p.silabas.length <= 2);
-  if (nivel === 2) return PALAVRAS.filter((p) => p.silabas.length <= 3);
-  return PALAVRAS;
+  let pool: Palavra[];
+  if (nivel <= 1) pool = PALAVRAS.filter((p) => p.silabas.length <= 2);
+  else if (nivel === 2) pool = PALAVRAS.filter((p) => p.silabas.length <= 3);
+  else pool = PALAVRAS;
+  return filtrarComSRS(pool);
 }
 function numDistratores(nivel: number): number {
   return nivel <= 1 ? 1 : 2;
@@ -319,22 +322,26 @@ export function gerarTextoCompreensao(_nivel = 2): Rodada {
 // ============ ROTEADOR ============
 
 export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
+  let r: Rodada;
   switch (tipo) {
-    case "vogal-som": return gerarVogalSom(nivel);
-    case "rima": return gerarRima(nivel);
-    case "aliteracao": return gerarAliteracao(nivel);
-    case "som-inicial": return gerarSomInicial(nivel);
-    case "som-final": return gerarSomFinal(nivel);
-    case "som-meio": return gerarSomMeio(nivel);
-    case "contagem-fonemas": return gerarContagemFonemas(nivel);
-    case "substituicao-fonema": return gerarSubstituicaoFonema(nivel);
-    case "categorizacao-som": return gerarCategorizacaoSom(nivel);
-    case "segmentacao": return gerarSegmentacao(nivel);
-    case "fusao": return gerarFusao(nivel);
-    case "frase-imagem": return gerarFraseImagem(nivel);
-    case "texto-compreensao": return gerarTextoCompreensao(nivel);
-    default: return gerarSomInicial(nivel);
+    case "vogal-som": r = gerarVogalSom(nivel); break;
+    case "rima": r = gerarRima(nivel); break;
+    case "aliteracao": r = gerarAliteracao(nivel); break;
+    case "som-inicial": r = gerarSomInicial(nivel); break;
+    case "som-final": r = gerarSomFinal(nivel); break;
+    case "som-meio": r = gerarSomMeio(nivel); break;
+    case "contagem-fonemas": r = gerarContagemFonemas(nivel); break;
+    case "substituicao-fonema": r = gerarSubstituicaoFonema(nivel); break;
+    case "categorizacao-som": r = gerarCategorizacaoSom(nivel); break;
+    case "segmentacao": r = gerarSegmentacao(nivel); break;
+    case "fusao": r = gerarFusao(nivel); break;
+    case "frase-imagem": r = gerarFraseImagem(nivel); break;
+    case "texto-compreensao": r = gerarTextoCompreensao(nivel); break;
+    default: r = gerarSomInicial(nivel);
   }
+  // Marca a resposta correta como usada (SRS anti-repetição).
+  if (r.correta && !r.numero) marcarUsada(r.correta);
+  return r;
 }
 
 export function gerarComValidacao(
