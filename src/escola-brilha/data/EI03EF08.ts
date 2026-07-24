@@ -71,7 +71,6 @@ const aula: Aula = {
       "Escolhe: combina com o que ela ama.",
     ],
     resposta: "O livro do super-herói — combinou o gosto com a capa.",
-    interativo: { tipo: "contagem", imagemUrl: heroiImg, quantidade: 1, nomeItem: "herói", nomeItemPlural: "heróis", pergunta: "Quantos heróis tem na capa?" },
   },
 
   atividadeGuiada: {

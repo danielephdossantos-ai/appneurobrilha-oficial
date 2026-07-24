@@ -79,7 +79,6 @@ const aula: Aula = {
       "A mãe entende e dá a maçã.",
     ],
     resposta: "Pediu com palavras: ganhou a maçã e ainda ficou feliz.",
-    interativo: { tipo: "contagem", imagemUrl: macaImg, quantidade: 1, nomeItem: "maçã", nomeItemPlural: "maçãs", pergunta: "Quantas maçãs ela quer?" },
   },
 
   atividadeGuiada: {

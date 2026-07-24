@@ -69,7 +69,6 @@ const aula: Aula = {
       "Escolhe esse! Combina com o que ela ama.",
     ],
     resposta: "O livro da princesa — porque a capa mostra o que ela ama.",
-    interativo: { tipo: "contagem", imagemUrl: livroImg, quantidade: 3, nomeItem: "livro", nomeItemPlural: "livros", pergunta: "Quantos livros tem no baú pra escolher?" },
   },
 
   atividadeGuiada: {

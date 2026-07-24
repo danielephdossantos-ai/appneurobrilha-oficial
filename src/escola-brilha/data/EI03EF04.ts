@@ -71,7 +71,6 @@ const aula: Aula = {
       "FIM: A lua apareceu e o coelho ficou feliz.",
     ],
     resposta: "Coelho — Medo do escuro — Lua que salva.",
-    interativo: { tipo: "contagem", imagemUrl: livroImg, quantidade: 3, nomeItem: "parte", nomeItemPlural: "partes", pergunta: "Quantas partes tem toda história?" },
   },
 
   atividadeGuiada: {

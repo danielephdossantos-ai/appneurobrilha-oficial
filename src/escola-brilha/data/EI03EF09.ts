@@ -72,7 +72,6 @@ const aula: Aula = {
       "A Maria escolhe: 'MARIA — sou eu!'",
     ],
     resposta: "MARIA — porque as letras seguintes batem com o nome dela.",
-    interativo: { tipo: "contagem", imagemUrl: estrelaImg, quantidade: 5, nomeItem: "letra", nomeItemPlural: "letras", pergunta: "Quantas letras tem o nome MARIA?" },
   },
 
   atividadeGuiada: {
