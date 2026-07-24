@@ -16,7 +16,17 @@ import {
   TrendingDown,
   Lightbulb,
   Play,
+  SkipForward,
 } from "lucide-react";
+
+// Tipos em que a resposta correta REALMENTE começa com o `foco`.
+// Só nesses casos o banner "Toque na imagem que começa com X" faz sentido.
+const TIPOS_COMECA_COM = new Set([
+  "vogal-som",
+  "som-inicial",
+  "aliteracao",
+  "substituicao-fonema",
+]);
 
 interface Props {
   etapa: EtapaCurricular;
@@ -359,6 +369,18 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             </button>
           )}
           <button
+            onClick={() => {
+              limparTimers();
+              parar();
+              proximaRodada(nivel);
+            }}
+            className="w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center"
+            aria-label="Pular esta pergunta"
+            title="Pular esta pergunta"
+          >
+            <SkipForward className="w-5 h-5" />
+          </button>
+          <button
             onClick={() => falar(rodada.instrucaoFalada)}
             className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 text-[#3A1F5C] flex items-center justify-center shadow-lg hover:scale-105"
             aria-label="Ouvir a pergunta"
@@ -446,24 +468,27 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
-        {/* Alvo visível: se o TTS falhar, a mãe vê qual vogal/som precisa tocar */}
-        {rodada.foco && !usaGridNumero && rodada.foco.length <= 3 && (
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
-              Toque na imagem que começa com
-            </span>
-            <button
-              onClick={() => falar(falarSom(rodada.foco!))}
-              className="min-w-[7rem] px-6 py-3 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform flex items-center gap-3"
-              aria-label={`Ouvir o som ${rodada.foco}`}
-            >
-              <span className="text-6xl sm:text-7xl font-black leading-none">
-                {rodada.foco.toUpperCase()}
+        {/* Alvo visível: só mostra quando a resposta REALMENTE começa com o foco. */}
+        {rodada.foco &&
+          !usaGridNumero &&
+          rodada.foco.length <= 3 &&
+          TIPOS_COMECA_COM.has(rodada.tipo) && (
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+                Toque na imagem que começa com
               </span>
-              <Volume2 className="w-6 h-6" />
-            </button>
-          </div>
-        )}
+              <button
+                onClick={() => falar(falarSom(rodada.foco!))}
+                className="min-w-[7rem] px-6 py-3 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform flex items-center gap-3"
+                aria-label={`Ouvir o som ${rodada.foco}`}
+              >
+                <span className="text-6xl sm:text-7xl font-black leading-none">
+                  {rodada.foco.toUpperCase()}
+                </span>
+                <Volume2 className="w-6 h-6" />
+              </button>
+            </div>
+          )}
 
         {usaReferencia && (
           <div className="flex flex-col items-center gap-2">
