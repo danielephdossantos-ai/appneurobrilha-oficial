@@ -49,8 +49,9 @@ export function TrilhaAlfa({ childId, childName }: Props) {
 
         <div className="relative space-y-4">
           {ETAPAS.map((etapa, i) => {
-            const desbloq = etapaDesbloqueada(etapa);
+            const desbloq = admin || etapaDesbloqueada(etapa);
             const concluida = etapaConcluida(etapa);
+
             const acertos = progresso[etapa.id] ?? 0;
             const pct = Math.min(100, Math.round((acertos / etapa.alvo) * 100));
             const ladoEsq = i % 2 === 0;
