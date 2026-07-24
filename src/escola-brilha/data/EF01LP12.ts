@@ -11,19 +11,19 @@ import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json"
 
 /**
  * EF01LP12 — Aula 012 · Sílabas CV com as vogais E e I
- * Foco: ME, PE, SE, PI, SI, LI, FI, MI.
+ * Foco: ME, PE, SE, PI, NI, LI, FI, MI.
  */
 const aula: Aula = {
   codigo: "EF01LP12",
   ano: "1º Ano",
   disciplina: "Português",
-  titulo: "Sílabas com E e I — PE, ME, PI, SI, LI",
+  titulo: "Sílabas com E e I — PE, ME, PI, NI, LI",
   narrativa: {
-    titulo: "Sílabas com E e I — PE, ME, PI, SI, LI",
+    titulo: "Sílabas com E e I — PE, ME, PI, NI, LI",
     contexto:
       "Depois de dominar o A, o Brilha achou duas amigas curiosas: E e I. Agora as consoantes querem grudar nelas também.",
     problema:
-      "As sílabas PE, ME, PI, SI, LI ficaram escondidas dentro de palavras: PEIXE, MENINO, PIPA, NINHO…",
+      "As sílabas PE, ME, PI, NI, LI ficaram escondidas dentro de palavras: PEIXE, MENINO, PIPA, NINHO…",
     convite: "Bora ouvir com atenção e achar cada sílaba dentro das palavras?",
   },
   conhecimentosPrevios: [
@@ -34,7 +34,7 @@ const aula: Aula = {
   missao: "Formar e reconhecer sílabas CV com E e I.",
   objetivos: [
     "Juntar consoante + E ou I formando sílaba.",
-    "Reconhecer PE, ME, PI, SI, LI no começo de palavras.",
+    "Reconhecer PE, ME, PI, NI, LI no começo de palavras.",
     "Bater palma para cada sílaba.",
     "Diferenciar sílaba com A x sílaba com E/I.",
   ],
@@ -82,7 +82,7 @@ const aula: Aula = {
   ],
   explicacoesNiveis: {
     nivel1: "C + E = sílaba com E · C + I = sílaba com I.",
-    nivel2: "PE em PEixe · ME em MEnino · PI em PIpa · SI em SIno.",
+    nivel2: "PE em PEixe · ME em MEnino · PI em PIpa · NI em NInho.",
     nivel3: "PIPA = PI-PA. Duas sílabas, uma com I e outra com A.",
     nivel4: "As vogais fechadas (I) mudam o timbre da sílaba mas mantêm a estrutura CV.",
   },
@@ -93,7 +93,7 @@ const aula: Aula = {
       "Fale o som da I: /iii/.",
       "Cola sem parar: /nnniii/ = NI.",
     ],
-    resposta: "N + I = NI (aparece em SIno).",
+    resposta: "N + I = NI (aparece em NInho).",
   },
   atividadeGuiada: {
     enunciado: "Toque na figura que começa com PI.",
@@ -140,7 +140,7 @@ const aula: Aula = {
           pergunta: "Qual começa com NI?",
           opcoes: ["Peixe", "Ninho", "Menino"],
           correta: 1,
-          explicacao: "SIno.",
+          explicacao: "NInho.",
         },
         {
           pergunta: "Qual vogal aparece em ME?",
@@ -154,7 +154,7 @@ const aula: Aula = {
   revisao: {
     pontos: [
       "C + E ou C + I = sílaba.",
-      "PE (peixe) · ME (menino) · PI (pipa) · SI (ninho).",
+      "PE (peixe) · ME (menino) · PI (pipa) · NI (ninho).",
       "Cada sílaba = 1 batida.",
       "A vogal muda o som, mas a cola é a mesma.",
     ],
@@ -185,7 +185,7 @@ const aula: Aula = {
       pergunta: "Qual começa com NI?",
       opcoes: ["Sol", "Ninho", "Sapo"],
       correta: 1,
-      explicacao: "SIno.",
+      explicacao: "NInho.",
     },
     {
       pergunta: "Quantas sílabas tem PIPA?",
@@ -255,7 +255,7 @@ const aula: Aula = {
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 5 · Reconhecer SI",
+      titulo: "Fase 5 · Reconhecer NI",
       instrucao: "Qual começa com NI?",
       grupos: [
         { imagemUrl: ninhoImg, quantidade: 1, rotulo: "ninho" },
@@ -265,8 +265,8 @@ const aula: Aula = {
       pergunta: "Qual começa com NI?",
       opcoes: ["Ninho", "Sol", "Sapo"],
       correta: 0,
-      acerto: "SIno — SI!",
-      erro: "SOL é SO, SAPO é SA. SIno é SI.",
+      acerto: "NInho — SI!",
+      erro: "SOL é SO, SAPO é SA. NInho é SI.",
     },
   ],
   niveis: {
@@ -297,7 +297,7 @@ const aula: Aula = {
           ],
         },
       },
-      { pergunta: "Quantas sílabas tem NINHO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "SI-NO = 2." },
+      { pergunta: "Quantas sílabas tem NINHO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "NI-NHO = 2." },
       {
         pergunta: "Qual NÃO começa com sílaba com I?",
         opcoes: ["Pipa", "Ninho", "Peixe"],
@@ -315,7 +315,7 @@ const aula: Aula = {
       },
       {
         pergunta: "Qual grupo tem SÓ sílabas com I?",
-        opcoes: ["PI · SI · LI", "PE · ME · PI", "MA · SA · PA"],
+        opcoes: ["PI · NI · LI", "PE · ME · PI", "MA · SA · PA"],
         correta: 0,
         explicacao: "Todas terminam em I.",
       },
