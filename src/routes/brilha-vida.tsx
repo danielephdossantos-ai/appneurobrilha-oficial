@@ -32,6 +32,10 @@ import { FirstThenBoard } from "@/components/brilha-vida/FirstThenBoard";
 import { CronogramaVisual } from "@/components/brilha-vida/CronogramaVisual";
 import { TimerVisual } from "@/components/brilha-vida/TimerVisual";
 import { CartaoEscolha } from "@/components/brilha-vida/CartaoEscolha";
+import { KitCuidador } from "@/components/brilha-vida/KitCuidador";
+import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
+import { GuiaCrise } from "@/components/brilha-vida/GuiaCrise";
+import { BateriaCuidador } from "@/components/brilha-vida/BateriaCuidador";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
@@ -135,12 +139,20 @@ const categorias = [
     descricao: "Suportes visuais clínicos: Primeiro-Depois, Cronograma, Time Timer e Cartão de Escolha",
     atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
   },
+  {
+    id: "cuidador",
+    nome: "Apoio ao Cuidador",
+    img: catAmizadeImg,
+    cor: "from-amber-300/30 to-amber-100/5",
+    descricao: "Ferramentas clínicas pra você que cuida: só um adulto regulado corregula uma criança",
+    atividades: ["Kit do Cuidador", "Diário ABC", "Guia de Crise", "Bateria do Cuidador"],
+  },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha" | "kitcuidador" | "diarioabc" | "guiacrise" | "bateriacuidador">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -250,6 +262,22 @@ function BrilhaVida() {
       setCustomActivity("escolha");
       return;
     }
+    if (tipo === "Kit do Cuidador") {
+      setCustomActivity("kitcuidador");
+      return;
+    }
+    if (tipo === "Diário ABC") {
+      setCustomActivity("diarioabc");
+      return;
+    }
+    if (tipo === "Guia de Crise") {
+      setCustomActivity("guiacrise");
+      return;
+    }
+    if (tipo === "Bateria do Cuidador") {
+      setCustomActivity("bateriacuidador");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
@@ -312,6 +340,10 @@ function BrilhaVida() {
     cronograma: { node: <CronogramaVisual onClose={() => setCustomActivity(null)} />, contexto: "Meu Dia em Cartões" },
     timer: { node: <TimerVisual onClose={() => setCustomActivity(null)} />, contexto: "Relógio Vermelho" },
     escolha: { node: <CartaoEscolha onClose={() => setCustomActivity(null)} />, contexto: "Você Escolhe" },
+    kitcuidador: { node: <KitCuidador onClose={() => setCustomActivity(null)} />, contexto: "Kit do Cuidador" },
+    diarioabc: { node: <DiarioABC onClose={() => setCustomActivity(null)} />, contexto: "Diário ABC" },
+    guiacrise: { node: <GuiaCrise onClose={() => setCustomActivity(null)} />, contexto: "Guia de Crise" },
+    bateriacuidador: { node: <BateriaCuidador onClose={() => setCustomActivity(null)} />, contexto: "Bateria do Cuidador" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
