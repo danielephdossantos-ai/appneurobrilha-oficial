@@ -432,10 +432,8 @@ function LeitorHistoria({
             {fase === "vocab"
               ? `Vocabulário · ${vocabIdx + 1}/${vocabChave.length}`
               : `Nível ${historia.nivel} · Pág ${pagina + 1}/${totalPag}`}
-            {rodada > 1 && fase !== "vocab" && (
-              <span className="ml-2 text-[10px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded">
-                LEITURA {rodada}
-              </span>
+            {false && rodada > 1 && (
+              <span className="hidden" />
             )}
           </div>
           <div className="font-black text-slate-800 truncate">
@@ -783,31 +781,22 @@ function LeitorHistoria({
               </div>
             )}
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full max-w-sm">
-              <button
-                onClick={relerHistoria}
-                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-indigo-500 text-white font-bold shadow-lg flex items-center justify-center gap-2"
-              >
-                <Repeat className="w-4 h-4" /> Ler de novo
-              </button>
+            <div className="flex flex-col items-center gap-3 mt-2 w-full max-w-sm">
               <button
                 onClick={() => {
                   pararKaraoke();
                   onSair();
                 }}
-                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
+                className="w-full px-5 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
               >
-                Voltar
+                Escolher outra história
               </button>
             </div>
 
-            {fluencia.temMedicao && (
-              <p className="text-[11px] text-slate-500 max-w-xs mt-2 flex items-center gap-1 justify-center">
-                <Zap className="w-3 h-3 text-amber-500" />
-                Reler a mesma história é o jeito mais rápido de ganhar
-                fluência (leitura repetida — NRP).
-              </p>
-            )}
+            <p className="text-[11px] text-slate-500 max-w-xs mt-2 text-center">
+              ✨ Sempre uma história nova! Cada leitura amplia vocabulário e
+              compreensão.
+            </p>
           </div>
         );
       })()}
