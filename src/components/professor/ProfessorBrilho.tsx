@@ -7,7 +7,6 @@ import { askProfessorBrilho } from "@/lib/groq-professor.functions";
 
 type Modulo =
   | "reforco-brilha"
-  | "jornada-365"
   | "missao-prova"
   | "missao-trabalho";
 
@@ -21,7 +20,6 @@ interface Props {
 
 const MODULE_LABEL: Record<Modulo, string> = {
   "reforco-brilha": "Reforço Brilho",
-  "jornada-365": "Jornada 365",
   "missao-prova": "Missão Prova",
   "missao-trabalho": "Missão Trabalho",
 };
