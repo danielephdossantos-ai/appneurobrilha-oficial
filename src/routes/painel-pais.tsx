@@ -325,6 +325,8 @@ function PainelPremium() {
 
             <motion.div variants={itemVariants}>
               <MoodTimeline childId={activeChild?.id} />
+            </motion.div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6">
               <motion.div variants={itemVariants}>
