@@ -28,6 +28,10 @@ import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
 import { InteroceptionScan } from "@/components/brilha-vida/InteroceptionScan";
 import { ZonesRegulation } from "@/components/brilha-vida/ZonesRegulation";
 import { MoodMeterRuler } from "@/components/brilha-vida/MoodMeterRuler";
+import { FirstThenBoard } from "@/components/brilha-vida/FirstThenBoard";
+import { CronogramaVisual } from "@/components/brilha-vida/CronogramaVisual";
+import { TimerVisual } from "@/components/brilha-vida/TimerVisual";
+import { CartaoEscolha } from "@/components/brilha-vida/CartaoEscolha";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
