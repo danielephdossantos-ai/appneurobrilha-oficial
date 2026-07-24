@@ -52,7 +52,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {HISTORIAS_GRADUADAS.map((h) => {
-            const desbloq = disponiveis.includes(h);
+            const desbloq = admin || disponiveis.includes(h);
             return (
               <button
                 key={h.id}
@@ -72,7 +72,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                   {desbloq ? (
                     <img src={objetoImg(h.capa)} alt="" className="max-h-[70%] max-w-[70%] object-contain" />
                   ) : (
-                    <Lock className="w-8 h-8 text-slate-400" />
+                    <span className="text-3xl text-slate-400">🔒</span>
                   )}
                 </div>
                 <div className="flex items-center justify-between">
