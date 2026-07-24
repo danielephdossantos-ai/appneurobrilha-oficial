@@ -172,14 +172,13 @@ export function gerarFusao(nivel = 2): Rodada {
 
 export function gerarVogalSom(nivel = 2): Rodada {
   const pool = poolPorNivel(nivel);
-  const vogal = pick([...VOGAIS]);
-  const vogalBusca = vogal.toLowerCase();
-  const candidatos = pool.filter((p) => p.palavra.toLowerCase().startsWith(vogalBusca));
-  if (candidatos.length === 0) return gerarSomInicial(nivel);
+  const candidatos = pool.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
+  const candidatosSeguros = candidatos.length > 0
+    ? candidatos
+    : PALAVRAS.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
   const alvo = pick(candidatos);
-  const distratores = shuffle(
-    pool.filter((p) => !p.palavra.toLowerCase().startsWith(vogalBusca)),
-  ).slice(
+  const vogal = alvo.inicial.toUpperCase();
+  const distratores = shuffle(pool.filter((p) => p.inicial !== alvo.inicial)).slice(
     0,
     numDistratores(nivel),
   );
