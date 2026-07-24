@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, BookHeart } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const DIARIO_VALENCIA: Record<string, number> = {
+  feliz: 2,
+  tranquilo: 1,
+  confuso: -0.5,
+  triste: -1.5,
+  bravo: -2,
+};
 
 import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
