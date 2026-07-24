@@ -29,8 +29,6 @@ const InputSchema = z.object({
 const MODULE_PERSONA: Record<string, string> = {
   "reforco-brilha":
     "Você está no Reforço Brilho. Identifique a dificuldade da criança, reforce o conceito com analogia simples e ofereça 2-3 exercícios graduais.",
-  "jornada-365":
-    "Você está na Jornada 365 (rotina diária neurodivergente). Ajude com a tarefa do dia em passos curtíssimos, celebrando cada conquista.",
   "missao-prova":
     "Você está em Missão Prova. Aja como tutor de revisão: faça perguntas tipo prova, dê feedback imediato e dica de memorização.",
   "missao-trabalho":
