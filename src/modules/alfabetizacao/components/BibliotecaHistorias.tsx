@@ -39,6 +39,13 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const [admin] = useAdminMode();
   const nivelLeitor = useMemo(() => calcularNivelLeitor(progresso), [progresso]);
   const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
+  const etapaId = useMemo(() => etapaAtiva(progresso), [progresso]);
+  const etapaAtual = ETAPA_POR_ID[etapaId];
+  // Em modo admin, mostra tudo. Ordena SEMPRE por relevância clínica.
+  const listaOrdenada = useMemo(() => {
+    const base = admin ? HISTORIAS_GRADUADAS : disponiveis;
+    return historiasOrdenadasPorRelevancia(base, nivelLeitor, etapaId);
+  }, [admin, disponiveis, nivelLeitor, etapaId]);
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
 
   return (
