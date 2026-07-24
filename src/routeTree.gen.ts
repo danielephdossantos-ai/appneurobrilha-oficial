@@ -17,6 +17,7 @@ import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
@@ -125,6 +126,11 @@ const ProgressaoRoute = ProgressaoRouteImport.update({
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
   id: '/privacidade',
   path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanoAnualRoute = PlanoAnualRouteImport.update({
+  id: '/plano-anual',
+  path: '/plano-anual',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerfilAlunoRoute = PerfilAlunoRouteImport.update({
@@ -533,6 +539,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -611,6 +618,7 @@ export interface FileRoutesByTo {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -691,6 +699,7 @@ export interface FileRoutesById {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -772,6 +781,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/plano-anual'
     | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
@@ -850,6 +860,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/plano-anual'
     | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
@@ -929,6 +940,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/plano-anual'
     | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
@@ -1009,6 +1021,7 @@ export interface RootRouteChildren {
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRoute
   PerfilAlunoRoute: typeof PerfilAlunoRoute
+  PlanoAnualRoute: typeof PlanoAnualRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
@@ -1110,6 +1123,13 @@ declare module '@tanstack/react-router' {
       path: '/privacidade'
       fullPath: '/privacidade'
       preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plano-anual': {
+      id: '/plano-anual'
+      path: '/plano-anual'
+      fullPath: '/plano-anual'
+      preLoaderRoute: typeof PlanoAnualRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/perfil-aluno': {
@@ -1671,6 +1691,7 @@ const rootRouteChildren: RootRouteChildren = {
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRoute,
   PerfilAlunoRoute: PerfilAlunoRoute,
+  PlanoAnualRoute: PlanoAnualRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
