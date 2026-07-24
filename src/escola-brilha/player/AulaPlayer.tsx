@@ -461,10 +461,12 @@ export function AulaPlayer({
                       acertos,
                       erros,
                       childId: activeChild?.id,
+                      nomeCrianca: activeChild?.nome,
                       setAcertos,
                       setErros,
                       onQuizEnd: concluirAula,
                     })}
+
                   </div>
                   {!isPipEi && (
                     <ProfessorVirtual
