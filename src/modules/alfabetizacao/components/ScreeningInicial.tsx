@@ -38,6 +38,7 @@ export function ScreeningInicial({ childId: _childId, onFinish, onSkip }: Props)
     return null;
   }, [atual, opcoes]);
   const gradeOpcoes = referencia ? opcoes.slice(1) : opcoes;
+  const textoPergunta = atual?.rodada.instrucaoVisual ?? atual?.rodada.instrucaoFalada ?? "";
 
   useEffect(() => {
     if (!atual) return;
@@ -146,7 +147,7 @@ export function ScreeningInicial({ childId: _childId, onFinish, onSkip }: Props)
       {/* Instrução */}
       <div className="max-w-3xl mx-auto w-full mt-6 text-center">
         <p className="text-white/90 font-bold text-lg leading-snug">
-          {atual.rodada.instrucaoFalada}
+          {textoPergunta}
         </p>
       </div>
 
