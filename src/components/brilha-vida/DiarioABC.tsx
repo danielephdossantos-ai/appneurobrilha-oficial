@@ -86,7 +86,7 @@ export function DiarioABC({ onClose }: { onClose: () => void }) {
     const doc = new jsPDF();
     const nome = activeChild?.nome ?? "Criança";
     const idade = activeChild?.idade ? `${activeChild.idade} anos` : "";
-    const perfil = activeChild?.perfil_neuro ?? "não especificado";
+    const perfil = String((activeChild as any)?.diagnostico ?? (activeChild as any)?.perfil_neuro ?? "não especificado");
 
     doc.setFontSize(18);
     doc.setTextColor(20, 148, 156);
