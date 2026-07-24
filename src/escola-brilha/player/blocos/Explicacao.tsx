@@ -89,6 +89,24 @@ export function Explicacao({ texto, aula, nomeCrianca }: { texto: string; aula?:
         </div>
       </div>
 
+      {mostrarBannerNome && (
+        <div className="mb-4 rounded-2xl border-4 border-[#FFC93C] bg-white p-4 flex flex-col items-center shadow-xl">
+          <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/60 mb-1">
+            Este é o SEU nome
+          </div>
+          <div className="text-4xl md:text-5xl font-black tracking-widest text-[#0d1f55] uppercase">
+            {primeiroNome.toUpperCase()}
+          </div>
+          <div className="mt-2 flex items-center gap-2 text-xs font-black text-[#0d1f55]/70">
+            <span>Letra inicial:</span>
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#FFC93C] text-[#0d1f55] text-lg font-black">
+              {inicial}
+            </span>
+          </div>
+        </div>
+      )}
+
+
       {nivelIdx > 0 && (
         <motion.div
           key={`n-${nivelIdx}`}
