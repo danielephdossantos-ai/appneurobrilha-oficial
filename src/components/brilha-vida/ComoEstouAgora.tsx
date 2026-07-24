@@ -156,7 +156,18 @@ export function ComoEstouAgora({ onClose }: { onClose: () => void }) {
               {ENERGIAS.map((e) => (
                 <button
                   key={e.id}
-                  onClick={() => setEnergia(e)}
+                  onClick={() => {
+                    setEnergia(e);
+                    if (rosto) {
+                      recordMood({
+                        source: "como-estou",
+                        valence: ROSTO_VALENCIA[rosto.id] ?? 0,
+                        energy: ENERGIA_MAP[e.id] ?? 0,
+                        emocao: rosto.nome,
+                        note: sensacao?.nome,
+                      });
+                    }
+                  }}
                   className="flex flex-col items-center gap-1 p-5 rounded-2xl bg-white border-2 border-slate-100 hover:border-slate-300 hover:scale-105 transition-all"
                 >
                   <span className="text-4xl" aria-hidden>{e.emoji}</span>
