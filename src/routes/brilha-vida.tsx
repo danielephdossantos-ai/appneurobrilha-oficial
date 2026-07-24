@@ -256,6 +256,10 @@ function BrilhaVida() {
     elogio: { node: <ElogioMagico onClose={() => setCustomActivity(null)} />, contexto: "Elogio Mágico" },
     bolha: { node: <BolhaBemEstar onClose={() => setCustomActivity(null)} />, contexto: "Bolha de Bem-Estar" },
     roda: { node: <RodaDoDia onClose={() => setCustomActivity(null)} />, contexto: "Roda do Dia" },
+    grounding: { node: <Grounding54321 onClose={() => setCustomActivity(null)} />, contexto: "5-4-3-2-1 Sentidos" },
+    borboleta: { node: <ButterflyHug onClose={() => setCustomActivity(null)} />, contexto: "Abraço da Borboleta" },
+    espaguete: { node: <EspagueteEstatua onClose={() => setCustomActivity(null)} />, contexto: "Espaguete e Estátua" },
+    escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
