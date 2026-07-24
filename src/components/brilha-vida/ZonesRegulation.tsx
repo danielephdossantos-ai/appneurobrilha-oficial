@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
+import { MicrofoneFala } from "./shared/MicrofoneFala";
+
 
 /**
  * Zones of Regulation (Leah Kuypers, 2011)
