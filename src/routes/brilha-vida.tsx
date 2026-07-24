@@ -308,6 +308,10 @@ function BrilhaVida() {
     escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
     zones: { node: <ZonesRegulation onClose={() => setCustomActivity(null)} />, contexto: "Zonas de Regulação" },
     moodmeter: { node: <MoodMeterRuler onClose={() => setCustomActivity(null)} />, contexto: "Medidor de Emoções" },
+    firstthen: { node: <FirstThenBoard onClose={() => setCustomActivity(null)} />, contexto: "Primeiro… Depois" },
+    cronograma: { node: <CronogramaVisual onClose={() => setCustomActivity(null)} />, contexto: "Meu Dia em Cartões" },
+    timer: { node: <TimerVisual onClose={() => setCustomActivity(null)} />, contexto: "Relógio Vermelho" },
+    escolha: { node: <CartaoEscolha onClose={() => setCustomActivity(null)} />, contexto: "Você Escolhe" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
