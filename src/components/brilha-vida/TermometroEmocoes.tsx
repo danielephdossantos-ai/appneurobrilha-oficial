@@ -68,6 +68,18 @@ const NIVEIS = [
 
 export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
   const [selecionado, setSelecionado] = useState<number | null>(null);
+  const recordMood = useMoodRecorder();
+  const escolher = (n: (typeof NIVEIS)[number]) => {
+    if (selecionado === n.id) return;
+    setSelecionado(n.id);
+    const m = NIVEL_METRICS[n.id];
+    recordMood({
+      source: "termometro",
+      valence: m?.valence ?? 0,
+      energy: m?.energy ?? 0,
+      emocao: n.nome,
+    });
+  };
   const nivel = NIVEIS.find((n) => n.id === selecionado);
 
   return (
