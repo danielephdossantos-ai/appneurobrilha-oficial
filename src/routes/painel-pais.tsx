@@ -24,6 +24,7 @@ import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
 import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
 import { NrpPillarsCard } from "@/components/responsible/NrpPillarsCard";
 import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
+import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
 import { BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/painel-pais")({
@@ -321,6 +322,11 @@ function PainelPremium() {
             <motion.div variants={itemVariants}>
               <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
             </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <MoodTimeline childId={activeChild?.id} />
+            </motion.div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6">
               <motion.div variants={itemVariants}>
