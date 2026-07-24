@@ -103,7 +103,7 @@ export function gerarAliteracao(nivel = 2): Rodada {
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "aliteracao",
-    instrucaoFalada: `Qual começa com o mesmo som de ${a.palavra.toLowerCase()}?`,
+    instrucaoFalada: "Olhe a palavra modelo na tela. Qual imagem começa igual?",
     instrucaoVisual: `Qual imagem começa igual a ${a.palavra.toLowerCase()}?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
@@ -173,10 +173,13 @@ export function gerarFusao(nivel = 2): Rodada {
 export function gerarVogalSom(nivel = 2): Rodada {
   const pool = poolPorNivel(nivel);
   const vogal = pick([...VOGAIS]);
-  const candidatos = pool.filter((p) => p.palavra.startsWith(vogal));
+  const vogalBusca = vogal.toLowerCase();
+  const candidatos = pool.filter((p) => p.palavra.toLowerCase().startsWith(vogalBusca));
   if (candidatos.length === 0) return gerarSomInicial(nivel);
   const alvo = pick(candidatos);
-  const distratores = shuffle(pool.filter((p) => !p.palavra.startsWith(vogal))).slice(
+  const distratores = shuffle(
+    pool.filter((p) => !p.palavra.toLowerCase().startsWith(vogalBusca)),
+  ).slice(
     0,
     numDistratores(nivel),
   );
@@ -212,7 +215,7 @@ export function gerarSomFinal(nivel = 2): Rodada {
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "som-final",
-    instrucaoFalada: `Qual palavra termina com o mesmo som de ${a.palavra.toLowerCase()}?`,
+    instrucaoFalada: "Olhe a palavra modelo na tela. Qual imagem termina parecido?",
     instrucaoVisual: `Qual imagem termina parecido com ${a.palavra.toLowerCase()}?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
