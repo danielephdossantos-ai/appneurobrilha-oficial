@@ -11,17 +11,30 @@ import {
   Hand,
   Ear,
   HelpCircle,
+  Repeat,
+  Gauge,
+  Zap,
 } from "lucide-react";
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
-  PerguntaHistoria,
   TipoPergunta,
   calcularNivelLeitor,
   historiasParaNivel,
   etapaAtiva,
   historiasOrdenadasPorRelevancia,
 } from "../data/historias-graduadas";
+import {
+  PalavraChave,
+  vocabChaveAutomatico,
+  precisaPreEnsinoVocab,
+} from "../data/vocabulario-chave";
+import {
+  useFluencia,
+  registrarLeitura,
+  melhorWPM,
+  classificarWPM,
+} from "../hooks/useFluencia";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
@@ -164,7 +177,11 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
 
       <AnimatePresence>
         {ativa && (
-          <LeitorHistoria historia={ativa} onSair={() => setAtiva(null)} />
+          <LeitorHistoria
+            historia={ativa}
+            childId={childId}
+            onSair={() => setAtiva(null)}
+          />
         )}
       </AnimatePresence>
     </div>
@@ -178,21 +195,48 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
  *    lê em voz alta. Escutar palavra isolada = prompting nível 1.
  * =======================================================================*/
 
+/* =========================================================================
+ * LEITOR — Blocos 1 + 2 + 3
+ *   A) Karaoke sincronizado (Bloco 1)
+ *   B) Modo "sua vez" tap-in-order (Bloco 1)
+ *   C) Perguntas com tipo (Bloco 2)
+ *   D) Decodable alignment (Bloco 2 — no card externo)
+ *   E) Pré-ensino de vocabulário + medição de WPM + releitura (Bloco 3)
+ * =======================================================================*/
+
 type ModoPagina = "professor" | "crianca";
+type FaseLeitor = "vocab" | "leitura" | "perguntas" | "fim";
 
 function LeitorHistoria({
   historia,
+  childId,
   onSair,
 }: {
   historia: HistoriaGraduada;
+  childId: string;
   onSair: () => void;
 }) {
   const { falar, parar } = useVoz();
   const [pagina, setPagina] = useState(0);
-  const [fase, setFase] = useState<"leitura" | "perguntas" | "fim">("leitura");
+  // Vocab só faz sentido a partir do N3 e se houver palavras no dicionário
+  const vocabChave = useMemo<PalavraChave[]>(
+    () => (precisaPreEnsinoVocab(historia) ? vocabChaveAutomatico(historia) : []),
+    [historia],
+  );
+  const [fase, setFase] = useState<FaseLeitor>(
+    vocabChave.length > 0 ? "vocab" : "leitura",
+  );
+  const [vocabIdx, setVocabIdx] = useState(0);
   const [perguntaIdx, setPerguntaIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
+  const [rodada, setRodada] = useState(1); // 1 = 1ª leitura, 2+ = releitura
+
+  // Fluência (WPM) — só página em modo criança
+  const fluencia = useFluencia();
+  const [recordePrevio] = useState<number | null>(() =>
+    melhorWPM(childId, historia.id),
+  );
 
   const totalPag = historia.paginas.length;
   const pAtual = historia.paginas[pagina];
@@ -252,14 +296,17 @@ function LeitorHistoria({
     setProximoTokenEsperado(firstPalavraIdx(tokens));
     setPalavrasLidas(new Set());
     setDicaAtiva(null);
-    // Toca automaticamente só quando é a vez do professor
+    if (fase !== "leitura") return;
     if (modo === "professor") {
       const t = setTimeout(() => tocarKaraoke(), 350);
       return () => clearTimeout(t);
+    } else {
+      // Modo criança: começa a cronometrar a leitura da página
+      fluencia.iniciarPagina();
     }
     return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, historia.id]);
+  }, [pagina, historia.id, fase]);
 
   // Cleanup ao fechar
   useEffect(() => {
@@ -296,6 +343,10 @@ function LeitorHistoria({
   }
 
   function proxPag() {
+    // Se a página que estamos deixando é modo criança, finaliza cronômetro
+    if (modo === "crianca") {
+      fluencia.finalizarPagina(countPalavras(tokens));
+    }
     if (pagina < totalPag - 1) {
       setPagina(pagina + 1);
     } else {
@@ -310,6 +361,25 @@ function LeitorHistoria({
 
   function antPag() {
     if (pagina > 0) setPagina(pagina - 1);
+  }
+
+  function finalizarHistoria() {
+    const total = historia.perguntas.length;
+    const acerto = total > 0 ? acertos / total : undefined;
+    if (fluencia.temMedicao) {
+      registrarLeitura(childId, historia.id, fluencia.wpmMedio, acerto);
+    }
+    setFase("fim");
+  }
+
+  function relerHistoria() {
+    // Guided Repeated Oral Reading (NRP): reler aumenta fluência.
+    fluencia.resetar();
+    setPagina(0);
+    setPerguntaIdx(0);
+    setAcertos(0);
+    setRodada(rodada + 1);
+    setFase("leitura");
   }
 
   function responder(opt: string) {
@@ -333,7 +403,7 @@ function LeitorHistoria({
             200,
           );
         } else {
-          setFase("fim");
+          finalizarHistoria();
         }
       }
     }, 1200);
@@ -359,7 +429,14 @@ function LeitorHistoria({
         </button>
         <div className="flex-1 min-w-0">
           <div className="text-xs font-bold text-rose-500 uppercase tracking-wider">
-            Nível {historia.nivel} · Pág {pagina + 1}/{totalPag}
+            {fase === "vocab"
+              ? `Vocabulário · ${vocabIdx + 1}/${vocabChave.length}`
+              : `Nível ${historia.nivel} · Pág ${pagina + 1}/${totalPag}`}
+            {rodada > 1 && fase !== "vocab" && (
+              <span className="ml-2 text-[10px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded">
+                LEITURA {rodada}
+              </span>
+            )}
           </div>
           <div className="font-black text-slate-800 truncate">
             {historia.titulo}
@@ -375,6 +452,82 @@ function LeitorHistoria({
           </button>
         )}
       </div>
+
+      {fase === "vocab" && vocabChave.length > 0 && (() => {
+        const v = vocabChave[vocabIdx];
+        const total = vocabChave.length;
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 gap-4 overflow-y-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow bg-fuchsia-500 text-white">
+              <BookOpen className="w-3.5 h-3.5" /> Antes de ler — palavras novas
+            </div>
+            <div className="bg-white rounded-3xl shadow-xl p-6 max-w-md w-full flex flex-col items-center gap-4 text-center">
+              {v.imagem ? (
+                <img
+                  src={objetoImg(v.imagem)}
+                  alt=""
+                  className="h-32 sm:h-40 object-contain"
+                />
+              ) : (
+                <div className="h-24 w-24 rounded-full bg-gradient-to-br from-fuchsia-100 to-rose-100 flex items-center justify-center text-4xl">
+                  🔤
+                </div>
+              )}
+              <h2 className="text-3xl font-black text-slate-800 lowercase">
+                {v.palavra}
+              </h2>
+              <p className="text-slate-600 text-lg leading-snug">{v.definicao}</p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => falar(v.palavra)}
+                  className="px-4 py-2 rounded-full bg-rose-100 text-rose-700 text-sm font-bold flex items-center gap-2"
+                >
+                  <Volume2 className="w-4 h-4" /> Ouvir palavra
+                </button>
+                <button
+                  onClick={() => falar(v.definicao)}
+                  className="px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold flex items-center gap-2"
+                >
+                  <Ear className="w-4 h-4" /> Ouvir o que significa
+                </button>
+              </div>
+              <div className="flex items-center gap-2 mt-2 w-full">
+                <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-fuchsia-400 transition-all"
+                    style={{ width: `${((vocabIdx + 1) / total) * 100}%` }}
+                  />
+                </div>
+                <span className="text-xs text-slate-500">
+                  {vocabIdx + 1}/{total}
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  if (vocabIdx < total - 1) {
+                    setVocabIdx(vocabIdx + 1);
+                  } else {
+                    setFase("leitura");
+                  }
+                }}
+                className="mt-2 px-6 py-3 rounded-full bg-emerald-500 text-white font-bold shadow flex items-center gap-2"
+              >
+                {vocabIdx < total - 1 ? "Já sei — próxima" : "Vamos ler!"}
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setFase("leitura")}
+                className="text-[11px] text-slate-400 underline"
+              >
+                pular vocabulário
+              </button>
+              <p className="text-[10px] text-slate-400 mt-1">
+                📖 Pré-ensino de vocabulário — Pilar 4 do NRP
+              </p>
+            </div>
+          </div>
+        );
+      })()}
 
       {fase === "leitura" && (
         <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 gap-4 overflow-y-auto">
@@ -570,26 +723,94 @@ function LeitorHistoria({
         );
       })()}
 
-      {fase === "fim" && (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center">
-          <Sparkles className="w-20 h-20 text-amber-500" />
-          <h2 className="text-3xl font-black text-slate-800">
-            Você leu tudinho!
-          </h2>
-          <p className="text-slate-600">
-            Acertou {acertos} de {historia.perguntas.length} perguntas.
-          </p>
-          <button
-            onClick={() => {
-              pararKaraoke();
-              onSair();
-            }}
-            className="mt-4 px-6 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
-          >
-            Voltar para a biblioteca
-          </button>
-        </div>
-      )}
+      {fase === "fim" && (() => {
+        const total = historia.perguntas.length;
+        const wpm = fluencia.wpmMedio;
+        const clas = fluencia.temMedicao ? classificarWPM(wpm) : null;
+        const delta =
+          fluencia.temMedicao && recordePrevio != null
+            ? wpm - recordePrevio
+            : null;
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center overflow-y-auto">
+            <Sparkles className="w-20 h-20 text-amber-500" />
+            <h2 className="text-3xl font-black text-slate-800">
+              Você leu tudinho!
+            </h2>
+            <p className="text-slate-600">
+              Acertou <strong>{acertos}</strong> de <strong>{total}</strong>{" "}
+              perguntas.
+            </p>
+
+            {clas && (
+              <div className="bg-white rounded-3xl shadow-xl p-5 max-w-sm w-full flex flex-col items-center gap-2 border-2 border-slate-100">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-500">
+                  <Gauge className="w-3.5 h-3.5" /> Sua fluência
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-black text-slate-800">
+                    {wpm}
+                  </span>
+                  <span className="text-sm font-bold text-slate-500">
+                    palavras/min
+                  </span>
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${clas.cor}`}
+                >
+                  {clas.emoji} {clas.rotulo}
+                </span>
+                {delta != null && (
+                  <p
+                    className={`text-xs font-bold mt-1 ${
+                      delta > 0
+                        ? "text-emerald-600"
+                        : delta < 0
+                          ? "text-slate-500"
+                          : "text-slate-400"
+                    }`}
+                  >
+                    {delta > 0
+                      ? `📈 +${delta} wpm melhor que a última vez!`
+                      : delta < 0
+                        ? `Última vez: ${recordePrevio} wpm`
+                        : `Igualzinho à última leitura`}
+                  </p>
+                )}
+                <p className="text-[10px] text-slate-400 mt-1">
+                  📊 Medido só nas páginas que você leu sozinho
+                </p>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full max-w-sm">
+              <button
+                onClick={relerHistoria}
+                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-indigo-500 text-white font-bold shadow-lg flex items-center justify-center gap-2"
+              >
+                <Repeat className="w-4 h-4" /> Ler de novo
+              </button>
+              <button
+                onClick={() => {
+                  pararKaraoke();
+                  onSair();
+                }}
+                className="w-full sm:flex-1 px-5 py-3 rounded-full bg-rose-500 text-white font-bold shadow-lg"
+              >
+                Voltar
+              </button>
+            </div>
+
+            {fluencia.temMedicao && (
+              <p className="text-[11px] text-slate-500 max-w-xs mt-2 flex items-center gap-1 justify-center">
+                <Zap className="w-3 h-3 text-amber-500" />
+                Reler a mesma história é o jeito mais rápido de ganhar
+                fluência (leitura repetida — NRP).
+              </p>
+            )}
+          </div>
+        );
+      })()}
 
       <AnimatePresence>
         {feedback && (
