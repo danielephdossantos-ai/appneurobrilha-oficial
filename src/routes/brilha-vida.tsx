@@ -26,6 +26,8 @@ import { Grounding54321 } from "@/components/brilha-vida/Grounding54321";
 import { ButterflyHug } from "@/components/brilha-vida/ButterflyHug";
 import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
 import { InteroceptionScan } from "@/components/brilha-vida/InteroceptionScan";
+import { ZonesRegulation } from "@/components/brilha-vida/ZonesRegulation";
+import { MoodMeterRuler } from "@/components/brilha-vida/MoodMeterRuler";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
@@ -113,12 +115,20 @@ const categorias = [
     descricao: "Kit clínico para crise, susto ou pico de ansiedade",
     atividades: ["5-4-3-2-1 Sentidos", "Abraço da Borboleta", "Espaguete e Estátua", "Escuta do Corpo"],
   },
+  {
+    id: "modelos-clinicos",
+    nome: "Modelos Clínicos de Emoção",
+    img: catEmocoesImg,
+    cor: "from-indigo-300/30 to-indigo-100/5",
+    descricao: "Zones of Regulation + Mood Meter (RULER/Yale) para vocabulário emocional expandido",
+    atividades: ["Zonas de Regulação", "Medidor de Emoções"],
+  },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -204,6 +214,14 @@ function BrilhaVida() {
       setCustomActivity("escutacorpo");
       return;
     }
+    if (tipo === "Zonas de Regulação") {
+      setCustomActivity("zones");
+      return;
+    }
+    if (tipo === "Medidor de Emoções") {
+      setCustomActivity("moodmeter");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
@@ -260,6 +278,8 @@ function BrilhaVida() {
     borboleta: { node: <ButterflyHug onClose={() => setCustomActivity(null)} />, contexto: "Abraço da Borboleta" },
     espaguete: { node: <EspagueteEstatua onClose={() => setCustomActivity(null)} />, contexto: "Espaguete e Estátua" },
     escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
+    zones: { node: <ZonesRegulation onClose={() => setCustomActivity(null)} />, contexto: "Zonas de Regulação" },
+    moodmeter: { node: <MoodMeterRuler onClose={() => setCustomActivity(null)} />, contexto: "Medidor de Emoções" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
