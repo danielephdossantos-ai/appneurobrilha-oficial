@@ -399,7 +399,7 @@ function EscolaBrilhaCatalogo() {
                           </Link>
                         )}
 
-                        {disciplinas.length === 0 && !mostraLerComAurora && (
+                        {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
                           Nenhuma missão {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
                         </div>
