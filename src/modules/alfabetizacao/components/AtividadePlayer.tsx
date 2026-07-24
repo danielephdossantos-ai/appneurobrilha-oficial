@@ -378,9 +378,28 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             className="w-full max-w-2xl bg-white/10 backdrop-blur border-2 border-white/20 rounded-[2rem] shadow-xl p-6 md:p-8 text-center"
           >
             <div className="text-6xl mb-3">{etapa.emoji}</div>
-            <h2 className="text-2xl md:text-3xl font-black text-orange-200 mb-4">
+            <h2 className="text-2xl md:text-3xl font-black text-orange-200 mb-3">
               {intro.titulo}
             </h2>
+
+            {/* Badge do método científico da etapa */}
+            {(() => {
+              const m = metodoDaEtapa(etapa.id);
+              return (
+                <div className="mb-4 mx-auto inline-flex flex-col items-center gap-1 rounded-2xl bg-emerald-500/15 border border-emerald-300/40 px-4 py-2 text-left max-w-lg">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-emerald-300">
+                    Método científico desta etapa
+                  </div>
+                  <div className="text-sm md:text-base font-black text-white leading-tight">
+                    {m.nome}
+                  </div>
+                  <div className="text-[11px] text-emerald-100/90 leading-tight">
+                    Pilar NRP: {pilarLabel(m.pilar)} · {m.base}
+                  </div>
+                </div>
+              );
+            })()}
+
             <p className="text-base md:text-lg text-white/90 leading-relaxed mb-4">
               {intro.texto}
             </p>
