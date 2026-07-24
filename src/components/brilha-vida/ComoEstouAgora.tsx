@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const ROSTO_VALENCIA: Record<string, number> = {
+  feliz: 2,
+  tranquilo: 1,
+  confuso: -0.5,
+  triste: -1.5,
+  bravo: -2,
+};
+const ENERGIA_MAP: Record<number, number> = { 1: -1, 2: 0, 3: 2 };
 
 import { url as imgFeliz } from "@/assets/brilha-vida/emocoes/feliz.png.asset.json";
 import { url as imgTranquilo } from "@/assets/brilha-vida/emocoes/tranquilo.png.asset.json";
