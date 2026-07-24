@@ -24,7 +24,16 @@ export function TrilhaAlfa({ childId, childName }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-pink-50 to-white p-6">
-      <div className="max-w-4xl mx-auto">
+      {/* Botão fixo de voltar — sempre visível */}
+      <Link
+        to="/neuro-treino"
+        className="fixed top-4 left-4 z-40 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur shadow-lg border border-slate-200 text-slate-700 font-bold text-sm hover:bg-white hover:scale-105 transition-transform"
+        aria-label="Voltar para Neuro Treino"
+      >
+        <ArrowLeft className="w-4 h-4" /> Voltar
+      </Link>
+      <div className="max-w-4xl mx-auto pt-10">
+
         <header className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white shadow text-sm font-bold text-indigo-600 mb-3">
             <Sparkles className="w-4 h-4" /> Alfabetização Brilha
