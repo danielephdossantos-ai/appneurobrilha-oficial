@@ -20,6 +20,7 @@ interface Props {
 
 export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const { progresso } = useProgressoAlfa(childId);
+  const [admin] = useAdminMode();
   const nivelLeitor = useMemo(() => calcularNivelLeitor(progresso), [progresso]);
   const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
