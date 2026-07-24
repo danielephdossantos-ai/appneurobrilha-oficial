@@ -1,158 +1,181 @@
 import type { Aula } from "../types";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
-import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as sopaImg } from "@/assets/neuro-treino/objetos/sopa.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as sucoImg } from "@/assets/neuro-treino/objetos/suco.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as pipaImg } from "@/assets/neuro-treino/objetos/pipa.png.asset.json";
+import { url as penteImg } from "@/assets/neuro-treino/objetos/pente.png.asset.json";
 import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as vacaImg } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Escrever, espontaneamente ou por ditado, palavras e frases de
- * forma alfabética, usando letras/grafemas que representem os fonemas.
- *
- * Missão do Dia: "A Fábrica de Palavras do Brilha" (Brilha + Vento Bagunceiro).
- * Padrão travado (gabarito EF01MA02): jogos visuais em toda categoria,
- * imagens do banco de mídias, foco em som ↔ letra.
+ * EF01LP02 — Aula 002 · Aliteração e Rima
+ * Base científica:
+ *  - Heggerty (2020): aliteração + rima são etapas pré-fonêmicas essenciais.
+ *  - NRP (2000): consciência de rima prediz sucesso na leitura no 1º ano.
+ *  - Orton-Gillingham: ouvir → falar → ver imagem.
  */
 const aula: Aula = {
   codigo: "EF01LP02",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "A Fábrica de Palavras do Brilha",
+  disciplina: "Português",
+  titulo: "Palavras que Combinam de Som",
 
   narrativa: {
-    titulo: "A Fábrica de Palavras do Brilha",
+    titulo: "Palavras que Combinam de Som",
     contexto:
-      "O Brilha encontrou uma máquina muito especial escondida na floresta: a Fábrica de Palavras. Ela transforma sons em letras e monta as palavras direitinho.",
+      "O Brilha descobriu duas magias novas do Rádio: a ALITERAÇÃO (palavras que começam iguais, tipo SAPO-SOPA-SOL) e a RIMA (palavras que terminam iguais, tipo PATO-GATO-RATO).",
     problema:
-      "O Vento Bagunceiro passou por ali e espalhou todas as letras pelo chão. Sem elas, a Fábrica não consegue montar nenhuma palavra.",
-    convite:
-      "Vamos ouvir os sons, achar as letras certas e ajudar o Brilha a montar as palavras de novo?",
+      "O Rádio Mágico está bagunçado: misturou palavras que começam iguais com palavras que terminam iguais. O Brilha precisa separar cada grupo.",
+    convite: "Bora ajudar o Brilha a ouvir o COMEÇO e o FIM das palavras?",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer as letras do alfabeto.",
-    "Perceber que a fala é formada por sons.",
-    "Ler da esquerda para a direita (EF01LP01).",
+    "Escutar o primeiro som de uma palavra (aula anterior).",
+    "Falar palavras em voz alta.",
+    "Comparar dois sons parecidos.",
   ],
 
   missao:
-    "Descobrir que cada som da fala tem uma letra correspondente e usar isso para escrever palavras e frases simples.",
+    "Reconhecer aliteração (mesmo COMEÇO) e rima (mesmo FIM) — os dois pilares da consciência fonológica antes das letras.",
 
   objetivos: [
-    "Relacionar som e letra (fonema ↔ grafema).",
-    "Escrever palavras simples ouvindo os sons.",
-    "Completar palavras trocando a letra que falta.",
-    "Montar pequenas frases de forma alfabética.",
+    "Identificar palavras que começam com o mesmo som (aliteração).",
+    "Identificar palavras que terminam com o mesmo som (rima).",
+    "Diferenciar COMEÇO e FIM de uma palavra falada.",
+    "Preparar o ouvido para o mapeamento letra-som.",
   ],
 
   motivacao:
-    "Escrever é um superpoder: a gente ouve um som e transforma em letra. Bora ligar a Fábrica de Palavras do Brilha?",
+    "Quem escuta que PATO rima com GATO já está a um passo de ler. Rima e aliteração são a ginástica secreta do cérebro leitor.",
 
   explicacao:
-    "Toda palavra que a gente fala é um monte de SONS colados um no outro. E cada som tem uma LETRA que representa ele no papel.\n\nEscuta a palavra GATO: G · A · T · O. São 4 sons e 4 letras.\n\nPra escrever, é só ouvir a palavra bem devagar e ir colocando as letras na ordem dos sons — sempre da esquerda pra direita.\n\nÀs vezes vai sair torto, e tá tudo bem! Escrever é praticar. Quanto mais a gente escreve, mais rápido o cérebro aprende quais letras usar.",
+    "Duas mágicas do som:\n\n1) ALITERAÇÃO — palavras que começam iguais.\n   SAPO · SOPA · SOL → todas começam com /s/.\n\n2) RIMA — palavras que terminam iguais.\n   PATO · GATO · RATO → todas terminam com -ATO.\n\nDica do Brilha: para achar aliteração, escute o COMEÇO. Para achar rima, escute o FIM.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Aliteração: SAPO, SOPA e SOL começam com /s/. É o mesmo som no COMEÇO.",
+      exemplo: "Fala devagar: /s/APO, /s/OPA, /s/OL. Sente o /s/ no começo?",
+      imagem: sapoImg,
+      imagemAlt: "Sapo — /s/",
+      checagem: {
+        pergunta: "Qual palavra é ALITERAÇÃO de SAPO (começa com /s/)?",
+        opcoes: ["Bola", "Sopa", "Gato"],
+        correta: 1,
+        explicacao: "SOPA começa com /s/, igualzinho a SAPO.",
+      },
+    },
+    {
+      texto: "Rima: PATO, GATO e RATO terminam iguais: -ATO. É o mesmo som no FIM.",
+      exemplo: "Fala: PA-TO, GA-TO, RA-TO. O final é sempre -ATO.",
+      imagem: patoImg,
+      imagemAlt: "Pato — rima com gato e rato",
+      checagem: {
+        pergunta: "Qual palavra RIMA com PATO?",
+        opcoes: ["Bola", "Sol", "Gato"],
+        correta: 2,
+        explicacao: "GATO termina em -ATO, rima com PATO.",
+      },
+    },
+    {
+      texto: "Cuidado: começar igual é DIFERENTE de rimar. BOLA e BOLO começam iguais (aliteração) mas NÃO rimam.",
+      exemplo: "BOLA termina em -OLA. BOLO termina em -OLO. Fim diferente.",
+      imagem: bolaImg,
+      imagemAlt: "Bola — /b/",
+      checagem: {
+        pergunta: "BOLA e BOLO — o que elas têm em comum?",
+        opcoes: ["Rimam", "Começam iguais", "Não têm nada"],
+        correta: 1,
+        explicacao: "As duas começam com /b/ (aliteração). O fim é diferente.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "Cada som que a gente fala vira uma letra no papel.",
-    nivel2:
-      "SOL tem 3 sons: S · O · L. É por isso que escrevemos com 3 letras.",
-    nivel3:
-      "É como montar um brinquedo de encaixe: o som escolhe a letra certa.",
-    nivel4:
-      "Escrevendo o nome, listas, bilhetes e desenhos, o cérebro treina o caminho som → letra.",
+    nivel1: "Aliteração = começa igual. Rima = termina igual.",
+    nivel2: "SAPO-SOPA começam iguais. PATO-GATO rimam.",
+    nivel3: "Ouça o COMEÇO para aliteração e o FIM para rima.",
+    nivel4: "Poemas e músicas infantis usam RIMA para o cérebro guardar melhor.",
   },
 
   exemploResolvido: {
-    enunciado: "Vamos escrever a palavra SOL. Quais letras usamos?",
+    enunciado: "Qual palavra rima com PATO: BOLA, GATO ou SOL?",
     passos: [
-      "Escute a palavra bem devagar: S, depois O, depois L.",
-      "Cada som pede uma letra: S, depois O, depois L.",
-      "Coloque as letras na ordem, da esquerda pra direita.",
+      "Fale o FIM de PATO: -ATO.",
+      "Fale o fim das opções: BO-LA, GA-TO, SOL.",
+      "GATO termina em -ATO, igual a PATO.",
     ],
-    resposta: "SOL — três sons, três letras: S + O + L.",
+    resposta: "GATO — rima com PATO porque termina em -ATO.",
   },
 
   atividadeGuiada: {
-    enunciado:
-      "O Brilha falou a palavra 'CASA'. Qual figura combina com essa palavra?",
-    resposta: "A casa — CASA tem os sons C · A · S · A.",
-    explicacao:
-      "Ouvindo devagar CA-SA, dá pra montar C + A + S + A. A figura da casa combina com esses sons.",
+    enunciado: "Toque na figura que RIMA com PATO (termina em -ATO).",
+    resposta: "GATO — porque termina em -ATO, igual a PATO.",
+    explicacao: "Fale o fim de cada palavra: BO-LA, GA-TO, SO-PA, SOL. Só GATO termina em -ATO.",
     visual: {
       tipo: "escolherImagem",
-      pergunta:
-        "Toque na figura da palavra que o Brilha falou: 'CASA' (C-A-S-A).",
+      pergunta: "Qual figura RIMA com PATO?",
       opcoes: [
-        { nome: "casa", imagemUrl: casaImg },
         { nome: "gato", imagemUrl: gatoImg },
-        { nome: "carro", imagemUrl: carroImg },
+        { nome: "bola", imagemUrl: bolaImg },
+        { nome: "sopa", imagemUrl: sopaImg },
+        { nome: "sol", imagemUrl: solImg },
       ],
-      respostaCerta: "casa",
+      respostaCerta: "gato",
     },
   },
 
   exercicios: [
     {
-      enunciado:
-        "🌞 A palavra SOL tem quantas letras?",
-      resposta: "3 letras: S, O, L.",
-      dica: "Fala a palavra devagar: S, depois O, depois L.",
+      enunciado: "🔊 Quem é aliteração de SAPO (começa com /s/): SOPA, PATO ou BOLA?",
+      resposta: "SOPA — começa com /s/, igual a SAPO.",
+      dica: "Escute só o COMEÇO de cada palavra.",
     },
     {
-      enunciado:
-        "🍌 Complete: BA _ ANA. Qual letra falta pra formar BANANA?",
-      resposta: "A letra N — BANANA.",
-      dica: "Ouça o som do meio: ba-NA-na.",
+      enunciado: "🎧 Quem rima com GATO: PATO ou BOLA?",
+      resposta: "PATO — termina em -ATO, igual a GATO.",
+      dica: "Escute só o FIM.",
     },
     {
-      enunciado:
-        "🐱 Escreva os sons da palavra GATO, um por vez.",
-      resposta: "G · A · T · O — quatro sons, quatro letras.",
-      dica: "Fala bem devagar, marcando cada som com o dedo.",
+      enunciado: "🎵 BOLA e BOLO — rimam ou começam iguais?",
+      resposta: "Começam iguais (com /b/). NÃO rimam, porque o fim é diferente.",
+      dica: "Começo igual = aliteração. Fim igual = rima.",
     },
   ],
 
   desafio: {
-    enunciado:
-      "Desafio Brilha: o Brilha vai falar 3 palavras. Ouça cada uma com atenção e escolha a figura certa.",
-    resposta:
-      "SAPO 🐸 · MAÇÃ 🍎 · BOLA ⚽. Cada palavra tem sons que combinam com uma figura.",
+    enunciado: "Desafio Brilha: separar 3 grupos — aliteração de /s/, aliteração de /p/, e uma rima de -ATO.",
+    resposta: "1) /s/ → SAPO, SOPA, SOL · 2) /p/ → PATO, PIPA, PENTE · 3) rima -ATO → PATO, GATO, RATO.",
     visual: {
       cena: [
-        { personagem: "SAPO", itemImagemUrl: sapoImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "MAÇÃ", itemImagemUrl: macaImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "BOLA", itemImagemUrl: bolaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "Aliteração /s/", itemImagemUrl: sapoImg, quantidade: 3, cor: "#FBBF24" },
+        { personagem: "Aliteração /p/", itemImagemUrl: patoImg, quantidade: 3, cor: "#60A5FA" },
+        { personagem: "Rima -ATO", itemImagemUrl: gatoImg, quantidade: 3, cor: "#F472B6" },
       ],
       perguntas: [
         {
-          pergunta:
-            "O Brilha falou: 'SAPO' (S · A · P · O). Qual figura é?",
-          opcoes: ["Maçã", "Sapo", "Bola"],
-          correta: 1,
-          explicacao:
-            "SAPO começa com o som SSS — é o bicho verde que pula.",
-        },
-        {
-          pergunta:
-            "Agora ele falou: 'MAÇÃ' (M · A · Ç · Ã). Qual figura é?",
-          opcoes: ["Sapo", "Bola", "Maçã"],
-          correta: 2,
-          explicacao:
-            "MAÇÃ começa com o som MMM — é a frutinha vermelha.",
-        },
-        {
-          pergunta:
-            "Última: 'BOLA' (B · O · L · A). Qual figura é?",
-          opcoes: ["Bola", "Sapo", "Maçã"],
+          pergunta: "Qual grupo tem ALITERAÇÃO de /s/?",
+          opcoes: ["Sapo-Sopa-Sol", "Pato-Pipa-Pente", "Pato-Gato-Rato"],
           correta: 0,
-          explicacao:
-            "BOLA começa com o som BBB — dá pra rolar e chutar.",
+          explicacao: "Todas começam com /s/.",
+        },
+        {
+          pergunta: "Qual grupo tem ALITERAÇÃO de /p/?",
+          opcoes: ["Sapo-Sopa-Sol", "Pato-Pipa-Pente", "Pato-Gato-Rato"],
+          correta: 1,
+          explicacao: "Todas começam com /p/.",
+        },
+        {
+          pergunta: "Qual grupo RIMA em -ATO?",
+          opcoes: ["Sapo-Sopa-Sol", "Pato-Pipa-Pente", "Pato-Gato-Rato"],
+          correta: 2,
+          explicacao: "Todas terminam em -ATO.",
         },
       ],
     },
@@ -160,262 +183,246 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "Toda palavra é formada por sons colados.",
-      "Cada som tem uma letra que representa ele no papel.",
-      "Ouvindo devagar, dá pra escolher as letras certas.",
-      "Praticar todo dia deixa a escrita cada vez melhor.",
+      "ALITERAÇÃO = mesmo som no COMEÇO (SAPO-SOPA).",
+      "RIMA = mesmo som no FIM (PATO-GATO).",
+      "BOLA e BOLO começam iguais mas NÃO rimam.",
+      "Escute o começo para aliteração, o fim para rima.",
     ],
-    dica: "Antes de escrever, fale a palavra devagar e marque cada som com o dedo.",
+    dica: "Fale devagar e separe o começo do fim antes de decidir.",
   },
 
   quiz: [
     {
-      pergunta: "As palavras são formadas por...",
-      opcoes: ["Letras", "Desenhos", "Números"],
+      pergunta: "Qual palavra RIMA com PATO?",
+      opcoes: ["Gato", "Bola", "Sol"],
       correta: 0,
-      explicacao:
-        "Palavras são feitas de letras. Cada letra representa um som da fala.",
+      explicacao: "GATO termina em -ATO, igual a PATO.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        ],
+      },
     },
     {
-      pergunta: "Qual palavra está escrita corretamente pra combinar com 🐱?",
-      opcoes: ["GTO", "GATO", "GAO"],
+      pergunta: "Qual palavra é aliteração de SAPO (começa com /s/)?",
+      opcoes: ["Bola", "Sopa", "Pato"],
       correta: 1,
-      explicacao:
-        "GATO tem 4 sons (G · A · T · O), então precisa de 4 letras na ordem.",
+      explicacao: "SOPA começa com /s/, igual a SAPO.",
+      visual: {
+        tipo: "comparar",
+        lados: [
+          { imagemUrl: sapoImg, quantidade: 1, rotulo: "/s/APO", cor: "#FBBF24" },
+          { imagemUrl: sopaImg, quantidade: 1, rotulo: "/s/OPA", cor: "#34D399" },
+        ],
+      },
     },
     {
-      pergunta: "O que representa os sons da fala no papel?",
-      opcoes: ["Letras", "Cores", "Figuras"],
-      correta: 0,
-      explicacao:
-        "As letras são a forma escrita dos sons que a gente fala.",
+      pergunta: "BOLA e BOLO — o que elas compartilham?",
+      opcoes: ["Rimam", "Começam iguais", "Nada"],
+      correta: 1,
+      explicacao: "As duas começam com /b/ — aliteração. Não rimam.",
+      visual: {
+        tipo: "comparar",
+        lados: [
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "BOLA", cor: "#FBBF24" },
+          { imagemUrl: boloImg, quantidade: 1, rotulo: "BOLO", cor: "#60A5FA" },
+        ],
+      },
     },
     {
-      pergunta: "Pra escrever cada vez melhor, precisamos...",
-      opcoes: ["Praticar todo dia", "Apagar tudo", "Escrever só uma vez"],
-      correta: 0,
-      explicacao:
-        "Quanto mais a gente escreve, mais rápido o cérebro liga som ↔ letra.",
+      pergunta: "Onde a gente escuta a RIMA?",
+      opcoes: ["No começo da palavra", "No meio", "No fim"],
+      correta: 2,
+      explicacao: "Rima está sempre no FIM (som final).",
     },
   ],
 
   conclusao:
-    "🏅 Medalha conquistada: Construtor de Palavras! Agora você sabe que cada som vira uma letra. Missão em Casa: escolha 5 objetos da casa, fale o nome bem devagar e escreva do jeito que conseguir. Ninguém escreve pela criança — cada tentativa vale!",
+    "🏅 Medalha: Ouvido de Poeta! Missão em Casa: brinque de rimar nomes da família — MÃE rima com QUÊ? PAI rima com QUÊ? Descubra 3 rimas juntos.",
 
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Quando você aprende a escrever, seu cérebro cria um caminho novo que liga o SOM que os ouvidos escutam à LETRA que os olhos veem. Quanto mais você escreve, mais forte esse caminho fica — e mais fácil vai ficando escrever qualquer palavra.",
+      "Músicas infantis e poesias usam rima porque o cérebro guarda MAIS FÁCIL palavras que combinam de som. É por isso que é fácil decorar cantiga (A Barata diz que TEM, tem, tem…).",
   },
 
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Ouça e toque na figura",
-      instrucao:
-        "O Brilha falou a palavra 'SOL' (S · O · L). Toque na figura certa — a professora vai falar o nome.",
-      opcoes: [
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
-        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
-        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Aliteração de /s/",
+      instrucao: "Toque na figura que começa com /s/, igual a SAPO.",
+      grupos: [
+        { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
       ],
-      correta: 0,
-      acerto: "Isso! SOL começa com o som SSS — é a estrela do dia!",
-      erro: "Escute de novo: S · O · L. Toque na figura que começa com o som SSS.",
-    },
-
-    {
-      tipo: "escolherFigura",
-      titulo: "Fase 2 · Ouça e toque na figura",
-      instrucao:
-        "O Brilha falou a palavra 'BANANA' (B · A · N · A · N · A). Toque na figura certa.",
-      opcoes: [
-        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
-        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
-        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
-      ],
+      pergunta: "Qual começa com /s/?",
+      opcoes: ["Bola", "Sopa", "Pato"],
       correta: 1,
-      acerto: "Muito bem! BANANA — B · A · N · A · N · A.",
-      erro: "Escute: ba-NA-na. Toque na fruta amarelinha.",
-    },
-
-    {
-      tipo: "ordenar",
-      titulo: "Fase 3 · Monte a palavra",
-      instrucao:
-        "As letras da palavra desta figura estão embaralhadas. Coloque na ordem certa pra formar CASA (C · A · S · A).",
-      itens: ["C", "A", "S", "A"],
-      imagens: [
-        { imagemUrl: casaImg, quantidade: 1, rotulo: "1ª letra · C" },
-        { imagemUrl: casaImg, quantidade: 1, rotulo: "2ª letra · A" },
-        { imagemUrl: casaImg, quantidade: 1, rotulo: "3ª letra · S" },
-        { imagemUrl: casaImg, quantidade: 1, rotulo: "4ª letra · A" },
-      ],
+      acerto: "SOPA começa com /s/, aliteração perfeita!",
+      erro: "Fale /s/OPA. O começo é /s/.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 4 · Ligue som e figura",
-      instrucao:
-        "O Brilha vai falar cada palavra. Ligue cada nome à figura certa.",
+      titulo: "Fase 2 · Ligue quem rima",
+      instrucao: "Ligue cada palavra à outra que termina IGUAL (rima).",
       pares: [
-        { a: "GATO (G · A · T · O)", b: "🐱", aImagem: gatoImg, bImagem: gatoImg },
-        { a: "PEIXE (P · E · I · X · E)", b: "🐟", aImagem: peixeImg, bImagem: peixeImg },
-        { a: "CARRO (C · A · R · R · O)", b: "🚗", aImagem: carroImg, bImagem: carroImg },
+        { a: "Pato", b: "Gato", aImagem: patoImg, bImagem: gatoImg },
+        { a: "Pato", b: "Rato", aImagem: patoImg, bImagem: ratoImg },
+        { a: "Sopa", b: "Sapo (não rima!)", aImagem: sopaImg, bImagem: sapoImg },
+        { a: "Bola", b: "Estrela?", aImagem: bolaImg, bImagem: estrelaImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Oficina do Brilha",
-      instrucao:
-        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Toque na figura certa.",
-      opcoes: [
-        { nome: "CACHORRO", imagemUrl: cachorroImg, rotulo: "🐶 CACHORRO" },
-        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
-        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Rima de -ATO",
+      instrucao: "Toque na figura que RIMA com PATO (termina em -ATO).",
+      grupos: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
       ],
-      correta: 0,
-      acerto: "Excelente! CACHORRO começa com o som C — é o amigo que late.",
-      erro: "Escute: ca-CHO-rro. Toque no animal que late.",
+      pergunta: "Qual rima com PATO?",
+      opcoes: ["Bola", "Gato", "Sopa"],
+      correta: 1,
+      acerto: "GATO rima com PATO — os dois em -ATO!",
+      erro: "Escute o FIM: PA-TO, GA-TO.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Trio que rima",
+      instrucao: "Coloque juntas as figuras que RIMAM em -ATO.",
+      itens: ["pato", "gato", "rato"],
+      imagens: [
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "PA-TO" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "GA-TO" },
+        { imagemUrl: ratoImg, quantidade: 1, rotulo: "RA-TO" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Pegadinha",
+      instrucao: "BOLA e BOLO começam iguais. Mas RIMAM? Escute o fim!",
+      grupos: [
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "bolo" },
+      ],
+      pergunta: "BOLA e BOLO rimam?",
+      opcoes: ["Sim, rimam", "Não, só começam iguais", "Não têm nada"],
+      correta: 1,
+      acerto: "Isso! Começam iguais (/b/) mas terminam diferente. Só aliteração.",
+      erro: "Fale o fim: BO-LA / BO-LO. Fim diferente = não rima.",
     },
   ],
-
 
   niveis: {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Quantas letras tem a palavra SOL?",
-        opcoes: ["2", "3", "4"],
-        correta: 1,
-        explicacao: "SOL tem 3 sons e 3 letras: S · O · L.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: solImg,
-          quantidade: 1,
-          rotulo: "☀️ SOL",
-        },
+        pergunta: "Qual palavra começa com /s/ como SAPO?",
+        opcoes: ["Sopa", "Bola", "Pato"],
+        correta: 0,
+        explicacao: "SOPA começa com /s/.",
+        visual: { tipo: "itens", imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
       },
       {
-        pergunta: "Qual figura tem o nome GATO?",
-        opcoes: ["Cachorro", "Gato", "Sapo"],
+        pergunta: "Qual palavra rima com PATO?",
+        opcoes: ["Bola", "Gato", "Sopa"],
         correta: 1,
-        explicacao: "GATO começa com o som G — é o bichinho de estimação.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: cachorroImg, quantidade: 1, rotulo: "Cachorro", cor: "#F472B6" },
-            { imagemUrl: gatoImg, quantidade: 1, rotulo: "Gato", cor: "#FBBF24" },
-            { imagemUrl: sapoImg, quantidade: 1, rotulo: "Sapo", cor: "#34D399" },
-          ],
-        },
+        explicacao: "GATO rima com PATO (-ATO).",
+        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       },
       {
-        pergunta: "Qual letra completa: BA _ ANA?",
-        opcoes: ["M", "N", "L"],
-        correta: 1,
-        explicacao: "Falando ba-NA-na, o som do meio é N.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: bananaImg,
-          quantidade: 1,
-          rotulo: "🍌 BA _ ANA",
-        },
+        pergunta: "Qual começa com /p/ como PATO?",
+        opcoes: ["Pipa", "Bola", "Sol"],
+        correta: 0,
+        explicacao: "PIPA começa com /p/.",
+        visual: { tipo: "itens", imagemUrl: pipaImg, quantidade: 1, rotulo: "pipa" },
       },
     ],
     medio: [
       {
-        pergunta: "As letras da palavra CASA são C · A · S · A. Quantas letras?",
-        opcoes: ["3", "4", "5"],
+        pergunta: "SAPO e SOPA — o que compartilham?",
+        opcoes: ["Rimam", "Começam iguais (/s/)", "Nada"],
         correta: 1,
-        explicacao: "4 sons, 4 letras: C + A + S + A.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: casaImg,
-          quantidade: 1,
-          rotulo: "🏠 CASA",
-        },
-      },
-      {
-        pergunta: "Qual figura tem o nome MAÇÃ?",
-        opcoes: ["Maçã", "Banana", "Peixe"],
-        correta: 0,
-        explicacao: "MAÇÃ começa com o som M — é a fruta vermelha.",
+        explicacao: "Aliteração: começam com /s/.",
         visual: {
           tipo: "comparar",
           lados: [
-            { imagemUrl: macaImg, quantidade: 1, rotulo: "Maçã", cor: "#F472B6" },
-            { imagemUrl: bananaImg, quantidade: 1, rotulo: "Banana", cor: "#FBBF24" },
-            { imagemUrl: peixeImg, quantidade: 1, rotulo: "Peixe", cor: "#60A5FA" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "SAPO", cor: "#FBBF24" },
+            { imagemUrl: sopaImg, quantidade: 1, rotulo: "SOPA", cor: "#34D399" },
           ],
         },
       },
       {
-        pergunta: "Qual palavra combina com 🐟?",
-        opcoes: ["PEIXE", "PATO", "PORCO"],
+        pergunta: "Quem rima com GATO?",
+        opcoes: ["Pato", "Pente", "Bola"],
         correta: 0,
-        explicacao: "PEIXE — P · E · I · X · E. Começa com o som P.",
+        explicacao: "PATO e GATO terminam em -ATO.",
         visual: {
-          tipo: "itens",
-          imagemUrl: peixeImg,
-          quantidade: 1,
-          rotulo: "🐟",
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+            { imagemUrl: penteImg, quantidade: 1, rotulo: "pente" },
+            { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          ],
+        },
+      },
+      {
+        pergunta: "BOLA e BANANA — o que compartilham?",
+        opcoes: ["Rimam", "Começam iguais (/b/)", "Nada"],
+        correta: 1,
+        explicacao: "Aliteração de /b/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: bolaImg, quantidade: 1, rotulo: "BOLA", cor: "#FBBF24" },
+            { imagemUrl: bananaImg, quantidade: 1, rotulo: "BANANA", cor: "#60A5FA" },
+          ],
         },
       },
     ],
     dificil: [
       {
-        pergunta:
-          "Pra escrever a palavra CARRO, qual é a primeira letra?",
-        opcoes: ["K", "C", "Q"],
-        correta: 1,
-        explicacao: "CARRO começa com o som K, escrito com a letra C.",
+        pergunta: "Qual NÃO rima com PATO?",
+        opcoes: ["Gato", "Rato", "Sopa"],
+        correta: 2,
+        explicacao: "SOPA termina em -OPA, não em -ATO.",
         visual: {
-          tipo: "itens",
-          imagemUrl: carroImg,
-          quantidade: 1,
-          rotulo: "🚗 CARRO",
-        },
-      },
-      {
-        pergunta:
-          "Qual figura combina com a frase 'O cachorro corre'?",
-        opcoes: ["Cachorro", "Sapo", "Gato"],
-        correta: 0,
-        explicacao:
-          "A frase fala de um CACHORRO — figura do bichinho que late.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: cachorroImg, quantidade: 1, rotulo: "Cachorro", cor: "#60A5FA" },
-            { imagemUrl: sapoImg, quantidade: 1, rotulo: "Sapo", cor: "#34D399" },
-            { imagemUrl: gatoImg, quantidade: 1, rotulo: "Gato", cor: "#FBBF24" },
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+            { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
+            { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
           ],
         },
       },
       {
-        pergunta:
-          "Se eu escrever G-T-O em vez de GATO, o que aconteceu?",
+        pergunta: "Qual grupo tem TODAS começando com /s/?",
+        opcoes: ["sapo-sopa-sol", "pato-gato-rato", "bola-bolo-banana"],
+        correta: 0,
+        explicacao: "Aliteração completa de /s/.",
+      },
+      {
+        pergunta: "Por que aprender rima ajuda a ler depois?",
         opcoes: [
-          "Esqueci uma letra (A)",
-          "Escrevi certo",
-          "Sobrou uma letra",
+          "Porque treina o ouvido a separar sons",
+          "Porque é bonito",
+          "Porque é rápido",
         ],
         correta: 0,
         explicacao:
-          "GATO tem 4 sons (G · A · T · O). Sem a letra A, faltou o som do meio.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: gatoImg,
-          quantidade: 1,
-          rotulo: "🐱 GATO",
-        },
+          "Rima ensina o cérebro a segmentar palavras — passo essencial antes das letras (NRP, 2000).",
       },
     ],
   },
 
   proximaHabilidade: {
     codigo: "EF01LP03",
-    titulo: "Observar escritas convencionais e comparar com as próprias tentativas",
+    titulo: "As 5 vogais — A, E, I, O, U",
   },
 };
 
