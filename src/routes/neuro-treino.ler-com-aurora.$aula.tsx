@@ -39,7 +39,7 @@ import {
  * Player de uma missão do curso "Ler com Aurora".
  * Aceita slugs das Fases 1-8.
  */
-export const Route = createFileRoute("/escola-brilha/ler-com-aurora/$aula")({
+export const Route = createFileRoute("/neuro-treino/ler-com-aurora/$aula")({
   head: () => ({ meta: [{ title: "Ler com Aurora — Missão" }] }),
   component: AulaLerComAuroraRoute,
 });

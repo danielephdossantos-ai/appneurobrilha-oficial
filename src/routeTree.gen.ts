@@ -53,17 +53,17 @@ import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro-treino.ler-com-aurora.index'
 import { Route as EscolaBrilhaPortuguesEiIndexRouteImport } from './routes/escola-brilha.portugues-ei.index'
 import { Route as EscolaBrilhaMatematicaEiIndexRouteImport } from './routes/escola-brilha.matematica-ei.index'
-import { Route as EscolaBrilhaLerComAuroraIndexRouteImport } from './routes/escola-brilha.ler-com-aurora.index'
 import { Route as EscolaBrilhaInglesEiIndexRouteImport } from './routes/escola-brilha.ingles-ei.index'
 import { Route as EscolaBrilhaDislexiaIndexRouteImport } from './routes/escola-brilha.dislexia.index'
 import { Route as EscolaBrilhaContarComPipIndexRouteImport } from './routes/escola-brilha.contar-com-pip.index'
 import { Route as EscolaBrilhaBibliotecaEncantadaIndexRouteImport } from './routes/escola-brilha.biblioteca-encantada.index'
+import { Route as NeuroTreinoLerComAuroraPainelRouteImport } from './routes/neuro-treino.ler-com-aurora.painel'
+import { Route as NeuroTreinoLerComAuroraDiagnosticoRouteImport } from './routes/neuro-treino.ler-com-aurora.diagnostico'
+import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
 import { Route as EscolaBrilhaTrilhaInglesSerieRouteImport } from './routes/escola-brilha.trilha-ingles.$serie'
-import { Route as EscolaBrilhaLerComAuroraPainelRouteImport } from './routes/escola-brilha.ler-com-aurora.painel'
-import { Route as EscolaBrilhaLerComAuroraDiagnosticoRouteImport } from './routes/escola-brilha.ler-com-aurora.diagnostico'
-import { Route as EscolaBrilhaLerComAuroraAulaRouteImport } from './routes/escola-brilha.ler-com-aurora.$aula'
 import { Route as EscolaBrilhaGeo9anoUnidadeRouteImport } from './routes/escola-brilha.geo-9ano.$unidade'
 import { Route as EscolaBrilhaGeo8anoUnidadeRouteImport } from './routes/escola-brilha.geo-8ano.$unidade'
 import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-brilha.geo-7ano.$unidade'
@@ -310,6 +310,12 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NeuroTreinoLerComAuroraIndexRoute =
+  NeuroTreinoLerComAuroraIndexRouteImport.update({
+    id: '/ler-com-aurora/',
+    path: '/ler-com-aurora/',
+    getParentRoute: () => NeuroTreinoRoute,
+  } as any)
 const EscolaBrilhaPortuguesEiIndexRoute =
   EscolaBrilhaPortuguesEiIndexRouteImport.update({
     id: '/escola-brilha/portugues-ei/',
@@ -320,12 +326,6 @@ const EscolaBrilhaMatematicaEiIndexRoute =
   EscolaBrilhaMatematicaEiIndexRouteImport.update({
     id: '/escola-brilha/matematica-ei/',
     path: '/escola-brilha/matematica-ei/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaLerComAuroraIndexRoute =
-  EscolaBrilhaLerComAuroraIndexRouteImport.update({
-    id: '/escola-brilha/ler-com-aurora/',
-    path: '/escola-brilha/ler-com-aurora/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EscolaBrilhaInglesEiIndexRoute =
@@ -352,28 +352,28 @@ const EscolaBrilhaBibliotecaEncantadaIndexRoute =
     path: '/escola-brilha/biblioteca-encantada/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NeuroTreinoLerComAuroraPainelRoute =
+  NeuroTreinoLerComAuroraPainelRouteImport.update({
+    id: '/ler-com-aurora/painel',
+    path: '/ler-com-aurora/painel',
+    getParentRoute: () => NeuroTreinoRoute,
+  } as any)
+const NeuroTreinoLerComAuroraDiagnosticoRoute =
+  NeuroTreinoLerComAuroraDiagnosticoRouteImport.update({
+    id: '/ler-com-aurora/diagnostico',
+    path: '/ler-com-aurora/diagnostico',
+    getParentRoute: () => NeuroTreinoRoute,
+  } as any)
+const NeuroTreinoLerComAuroraAulaRoute =
+  NeuroTreinoLerComAuroraAulaRouteImport.update({
+    id: '/ler-com-aurora/$aula',
+    path: '/ler-com-aurora/$aula',
+    getParentRoute: () => NeuroTreinoRoute,
+  } as any)
 const EscolaBrilhaTrilhaInglesSerieRoute =
   EscolaBrilhaTrilhaInglesSerieRouteImport.update({
     id: '/escola-brilha/trilha-ingles/$serie',
     path: '/escola-brilha/trilha-ingles/$serie',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaLerComAuroraPainelRoute =
-  EscolaBrilhaLerComAuroraPainelRouteImport.update({
-    id: '/escola-brilha/ler-com-aurora/painel',
-    path: '/escola-brilha/ler-com-aurora/painel',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaLerComAuroraDiagnosticoRoute =
-  EscolaBrilhaLerComAuroraDiagnosticoRouteImport.update({
-    id: '/escola-brilha/ler-com-aurora/diagnostico',
-    path: '/escola-brilha/ler-com-aurora/diagnostico',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaLerComAuroraAulaRoute =
-  EscolaBrilhaLerComAuroraAulaRouteImport.update({
-    id: '/escola-brilha/ler-com-aurora/$aula',
-    path: '/escola-brilha/ler-com-aurora/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EscolaBrilhaGeo9anoUnidadeRoute =
@@ -564,17 +564,17 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/geo-7ano/$unidade': typeof EscolaBrilhaGeo7anoUnidadeRoute
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
-  '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
-  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
-  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
+  '/neuro-treino/ler-com-aurora/$aula': typeof NeuroTreinoLerComAuroraAulaRoute
+  '/neuro-treino/ler-com-aurora/diagnostico': typeof NeuroTreinoLerComAuroraDiagnosticoRoute
+  '/neuro-treino/ler-com-aurora/painel': typeof NeuroTreinoLerComAuroraPainelRoute
   '/escola-brilha/biblioteca-encantada/': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip/': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia/': typeof EscolaBrilhaDislexiaIndexRoute
   '/escola-brilha/ingles-ei/': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/ler-com-aurora/': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
+  '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
@@ -642,17 +642,17 @@ export interface FileRoutesByTo {
   '/escola-brilha/geo-7ano/$unidade': typeof EscolaBrilhaGeo7anoUnidadeRoute
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
-  '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
-  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
-  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
+  '/neuro-treino/ler-com-aurora/$aula': typeof NeuroTreinoLerComAuroraAulaRoute
+  '/neuro-treino/ler-com-aurora/diagnostico': typeof NeuroTreinoLerComAuroraDiagnosticoRoute
+  '/neuro-treino/ler-com-aurora/painel': typeof NeuroTreinoLerComAuroraPainelRoute
   '/escola-brilha/biblioteca-encantada': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia': typeof EscolaBrilhaDislexiaIndexRoute
   '/escola-brilha/ingles-ei': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/ler-com-aurora': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/matematica-ei': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiIndexRoute
+  '/neuro-treino/ler-com-aurora': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
@@ -722,17 +722,17 @@ export interface FileRoutesById {
   '/escola-brilha/geo-7ano/$unidade': typeof EscolaBrilhaGeo7anoUnidadeRoute
   '/escola-brilha/geo-8ano/$unidade': typeof EscolaBrilhaGeo8anoUnidadeRoute
   '/escola-brilha/geo-9ano/$unidade': typeof EscolaBrilhaGeo9anoUnidadeRoute
-  '/escola-brilha/ler-com-aurora/$aula': typeof EscolaBrilhaLerComAuroraAulaRoute
-  '/escola-brilha/ler-com-aurora/diagnostico': typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
-  '/escola-brilha/ler-com-aurora/painel': typeof EscolaBrilhaLerComAuroraPainelRoute
   '/escola-brilha/trilha-ingles/$serie': typeof EscolaBrilhaTrilhaInglesSerieRoute
+  '/neuro-treino/ler-com-aurora/$aula': typeof NeuroTreinoLerComAuroraAulaRoute
+  '/neuro-treino/ler-com-aurora/diagnostico': typeof NeuroTreinoLerComAuroraDiagnosticoRoute
+  '/neuro-treino/ler-com-aurora/painel': typeof NeuroTreinoLerComAuroraPainelRoute
   '/escola-brilha/biblioteca-encantada/': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip/': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia/': typeof EscolaBrilhaDislexiaIndexRoute
   '/escola-brilha/ingles-ei/': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/ler-com-aurora/': typeof EscolaBrilhaLerComAuroraIndexRoute
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
+  '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
   '/escola-brilha/aula-pt-v4/$curso/$aula': typeof EscolaBrilhaAulaPtV4CursoAulaRoute
@@ -803,17 +803,17 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-7ano/$unidade'
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
-    | '/escola-brilha/ler-com-aurora/$aula'
-    | '/escola-brilha/ler-com-aurora/diagnostico'
-    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
+    | '/neuro-treino/ler-com-aurora/$aula'
+    | '/neuro-treino/ler-com-aurora/diagnostico'
+    | '/neuro-treino/ler-com-aurora/painel'
     | '/escola-brilha/biblioteca-encantada/'
     | '/escola-brilha/contar-com-pip/'
     | '/escola-brilha/dislexia/'
     | '/escola-brilha/ingles-ei/'
-    | '/escola-brilha/ler-com-aurora/'
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
+    | '/neuro-treino/ler-com-aurora/'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
@@ -881,17 +881,17 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-7ano/$unidade'
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
-    | '/escola-brilha/ler-com-aurora/$aula'
-    | '/escola-brilha/ler-com-aurora/diagnostico'
-    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
+    | '/neuro-treino/ler-com-aurora/$aula'
+    | '/neuro-treino/ler-com-aurora/diagnostico'
+    | '/neuro-treino/ler-com-aurora/painel'
     | '/escola-brilha/biblioteca-encantada'
     | '/escola-brilha/contar-com-pip'
     | '/escola-brilha/dislexia'
     | '/escola-brilha/ingles-ei'
-    | '/escola-brilha/ler-com-aurora'
     | '/escola-brilha/matematica-ei'
     | '/escola-brilha/portugues-ei'
+    | '/neuro-treino/ler-com-aurora'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
@@ -960,17 +960,17 @@ export interface FileRouteTypes {
     | '/escola-brilha/geo-7ano/$unidade'
     | '/escola-brilha/geo-8ano/$unidade'
     | '/escola-brilha/geo-9ano/$unidade'
-    | '/escola-brilha/ler-com-aurora/$aula'
-    | '/escola-brilha/ler-com-aurora/diagnostico'
-    | '/escola-brilha/ler-com-aurora/painel'
     | '/escola-brilha/trilha-ingles/$serie'
+    | '/neuro-treino/ler-com-aurora/$aula'
+    | '/neuro-treino/ler-com-aurora/diagnostico'
+    | '/neuro-treino/ler-com-aurora/painel'
     | '/escola-brilha/biblioteca-encantada/'
     | '/escola-brilha/contar-com-pip/'
     | '/escola-brilha/dislexia/'
     | '/escola-brilha/ingles-ei/'
-    | '/escola-brilha/ler-com-aurora/'
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
+    | '/neuro-treino/ler-com-aurora/'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
     | '/escola-brilha/aula-pt-v4/$curso/$aula'
@@ -1035,15 +1035,11 @@ export interface RootRouteChildren {
   EscolaBrilhaGeo7anoUnidadeRoute: typeof EscolaBrilhaGeo7anoUnidadeRoute
   EscolaBrilhaGeo8anoUnidadeRoute: typeof EscolaBrilhaGeo8anoUnidadeRoute
   EscolaBrilhaGeo9anoUnidadeRoute: typeof EscolaBrilhaGeo9anoUnidadeRoute
-  EscolaBrilhaLerComAuroraAulaRoute: typeof EscolaBrilhaLerComAuroraAulaRoute
-  EscolaBrilhaLerComAuroraDiagnosticoRoute: typeof EscolaBrilhaLerComAuroraDiagnosticoRoute
-  EscolaBrilhaLerComAuroraPainelRoute: typeof EscolaBrilhaLerComAuroraPainelRoute
   EscolaBrilhaTrilhaInglesSerieRoute: typeof EscolaBrilhaTrilhaInglesSerieRoute
   EscolaBrilhaBibliotecaEncantadaIndexRoute: typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   EscolaBrilhaContarComPipIndexRoute: typeof EscolaBrilhaContarComPipIndexRoute
   EscolaBrilhaDislexiaIndexRoute: typeof EscolaBrilhaDislexiaIndexRoute
   EscolaBrilhaInglesEiIndexRoute: typeof EscolaBrilhaInglesEiIndexRoute
-  EscolaBrilhaLerComAuroraIndexRoute: typeof EscolaBrilhaLerComAuroraIndexRoute
   EscolaBrilhaMatematicaEiIndexRoute: typeof EscolaBrilhaMatematicaEiIndexRoute
   EscolaBrilhaPortuguesEiIndexRoute: typeof EscolaBrilhaPortuguesEiIndexRoute
   EscolaBrilhaAulaArteV1CursoAulaRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRoute
@@ -1368,6 +1364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/neuro-treino/ler-com-aurora/': {
+      id: '/neuro-treino/ler-com-aurora/'
+      path: '/ler-com-aurora'
+      fullPath: '/neuro-treino/ler-com-aurora/'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraIndexRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
     '/escola-brilha/portugues-ei/': {
       id: '/escola-brilha/portugues-ei/'
       path: '/escola-brilha/portugues-ei'
@@ -1380,13 +1383,6 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha/matematica-ei'
       fullPath: '/escola-brilha/matematica-ei/'
       preLoaderRoute: typeof EscolaBrilhaMatematicaEiIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/ler-com-aurora/': {
-      id: '/escola-brilha/ler-com-aurora/'
-      path: '/escola-brilha/ler-com-aurora'
-      fullPath: '/escola-brilha/ler-com-aurora/'
-      preLoaderRoute: typeof EscolaBrilhaLerComAuroraIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/ingles-ei/': {
@@ -1417,32 +1413,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaBibliotecaEncantadaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/neuro-treino/ler-com-aurora/painel': {
+      id: '/neuro-treino/ler-com-aurora/painel'
+      path: '/ler-com-aurora/painel'
+      fullPath: '/neuro-treino/ler-com-aurora/painel'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraPainelRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/ler-com-aurora/diagnostico': {
+      id: '/neuro-treino/ler-com-aurora/diagnostico'
+      path: '/ler-com-aurora/diagnostico'
+      fullPath: '/neuro-treino/ler-com-aurora/diagnostico'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraDiagnosticoRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/ler-com-aurora/$aula': {
+      id: '/neuro-treino/ler-com-aurora/$aula'
+      path: '/ler-com-aurora/$aula'
+      fullPath: '/neuro-treino/ler-com-aurora/$aula'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraAulaRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
     '/escola-brilha/trilha-ingles/$serie': {
       id: '/escola-brilha/trilha-ingles/$serie'
       path: '/escola-brilha/trilha-ingles/$serie'
       fullPath: '/escola-brilha/trilha-ingles/$serie'
       preLoaderRoute: typeof EscolaBrilhaTrilhaInglesSerieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/ler-com-aurora/painel': {
-      id: '/escola-brilha/ler-com-aurora/painel'
-      path: '/escola-brilha/ler-com-aurora/painel'
-      fullPath: '/escola-brilha/ler-com-aurora/painel'
-      preLoaderRoute: typeof EscolaBrilhaLerComAuroraPainelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/ler-com-aurora/diagnostico': {
-      id: '/escola-brilha/ler-com-aurora/diagnostico'
-      path: '/escola-brilha/ler-com-aurora/diagnostico'
-      fullPath: '/escola-brilha/ler-com-aurora/diagnostico'
-      preLoaderRoute: typeof EscolaBrilhaLerComAuroraDiagnosticoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/ler-com-aurora/$aula': {
-      id: '/escola-brilha/ler-com-aurora/$aula'
-      path: '/escola-brilha/ler-com-aurora/$aula'
-      fullPath: '/escola-brilha/ler-com-aurora/$aula'
-      preLoaderRoute: typeof EscolaBrilhaLerComAuroraAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/geo-9ano/$unidade': {
@@ -1615,11 +1611,20 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
+  NeuroTreinoLerComAuroraAulaRoute: typeof NeuroTreinoLerComAuroraAulaRoute
+  NeuroTreinoLerComAuroraDiagnosticoRoute: typeof NeuroTreinoLerComAuroraDiagnosticoRoute
+  NeuroTreinoLerComAuroraPainelRoute: typeof NeuroTreinoLerComAuroraPainelRoute
+  NeuroTreinoLerComAuroraIndexRoute: typeof NeuroTreinoLerComAuroraIndexRoute
 }
 
 const NeuroTreinoRouteChildren: NeuroTreinoRouteChildren = {
   NeuroTreinoSlugRoute: NeuroTreinoSlugRoute,
   NeuroTreinoConfigurarRoute: NeuroTreinoConfigurarRoute,
+  NeuroTreinoLerComAuroraAulaRoute: NeuroTreinoLerComAuroraAulaRoute,
+  NeuroTreinoLerComAuroraDiagnosticoRoute:
+    NeuroTreinoLerComAuroraDiagnosticoRoute,
+  NeuroTreinoLerComAuroraPainelRoute: NeuroTreinoLerComAuroraPainelRoute,
+  NeuroTreinoLerComAuroraIndexRoute: NeuroTreinoLerComAuroraIndexRoute,
 }
 
 const NeuroTreinoRouteWithChildren = NeuroTreinoRoute._addFileChildren(
@@ -1694,17 +1699,12 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaGeo7anoUnidadeRoute: EscolaBrilhaGeo7anoUnidadeRoute,
   EscolaBrilhaGeo8anoUnidadeRoute: EscolaBrilhaGeo8anoUnidadeRoute,
   EscolaBrilhaGeo9anoUnidadeRoute: EscolaBrilhaGeo9anoUnidadeRoute,
-  EscolaBrilhaLerComAuroraAulaRoute: EscolaBrilhaLerComAuroraAulaRoute,
-  EscolaBrilhaLerComAuroraDiagnosticoRoute:
-    EscolaBrilhaLerComAuroraDiagnosticoRoute,
-  EscolaBrilhaLerComAuroraPainelRoute: EscolaBrilhaLerComAuroraPainelRoute,
   EscolaBrilhaTrilhaInglesSerieRoute: EscolaBrilhaTrilhaInglesSerieRoute,
   EscolaBrilhaBibliotecaEncantadaIndexRoute:
     EscolaBrilhaBibliotecaEncantadaIndexRoute,
   EscolaBrilhaContarComPipIndexRoute: EscolaBrilhaContarComPipIndexRoute,
   EscolaBrilhaDislexiaIndexRoute: EscolaBrilhaDislexiaIndexRoute,
   EscolaBrilhaInglesEiIndexRoute: EscolaBrilhaInglesEiIndexRoute,
-  EscolaBrilhaLerComAuroraIndexRoute: EscolaBrilhaLerComAuroraIndexRoute,
   EscolaBrilhaMatematicaEiIndexRoute: EscolaBrilhaMatematicaEiIndexRoute,
   EscolaBrilhaPortuguesEiIndexRoute: EscolaBrilhaPortuguesEiIndexRoute,
   EscolaBrilhaAulaArteV1CursoAulaRoute: EscolaBrilhaAulaArteV1CursoAulaRoute,

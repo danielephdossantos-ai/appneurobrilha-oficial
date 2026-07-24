@@ -6,7 +6,7 @@ import { useAppState } from "@/core/store";
  * adulto. Esta rota agora só redireciona para a anamnese da criança ativa
  * (ou para o painel de pais, quando não há criança selecionada).
  */
-export const Route = createFileRoute("/escola-brilha/ler-com-aurora/diagnostico")({
+export const Route = createFileRoute("/neuro-treino/ler-com-aurora/diagnostico")({
   head: () => ({
     meta: [
       { title: "Diagnóstico · Ler com Aurora" },
