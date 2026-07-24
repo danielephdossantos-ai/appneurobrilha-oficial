@@ -200,8 +200,8 @@ function EscolaBrilhaCatalogo() {
           <div className="flex items-center gap-2 text-[#4C9EFF] mb-1">
             <Compass className="h-4 w-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">
-              {aulasEscritas.length + totalMissoesLerAurora}{" "}
-              {aulasEscritas.length + totalMissoesLerAurora === 1
+              {aulasEscritas.length}{" "}
+              {aulasEscritas.length === 1
                 ? "missão disponível"
                 : "missões disponíveis"}{" "}
               · {habilidades.length} aventuras no total
