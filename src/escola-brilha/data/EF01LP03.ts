@@ -1,150 +1,179 @@
 import type { Aula } from "../types";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
-import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as abelhaImg } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
+import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
+import { url as asaImg } from "@/assets/neuro-treino/objetos/asa.png.asset.json";
+import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as ioioImg } from "@/assets/neuro-treino/objetos/ioio.png.asset.json";
+import { url as idosoImg } from "@/assets/neuro-treino/objetos/idoso.png.asset.json";
+import { url as ovelhaImg } from "@/assets/neuro-treino/objetos/ovelha.png.asset.json";
+import { url as ocaImg } from "@/assets/neuro-treino/objetos/oca.png.asset.json";
+import { url as ursinhoImg } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 
 /**
- * EF01LP03 — Aula 003 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Comparar escritas convencionais e não convencionais, observando
- * semelhanças e diferenças entre palavras e identificando características
- * do sistema de escrita alfabética.
- *
- * Missão do Dia: "O Mistério das Palavras Perdidas".
- * Padrão travado (Português): jogo escolherEscrita — figura no topo,
- * grafias como botões grandes; TTS fala cada opção quando tocada, pra
- * criança OUVIR a diferença entre escritas certas e trocadas.
+ * EF01LP03 — Aula 003 · Vogais A E I O U
+ * Base: Orton-Gillingham (multissensorial) + NRP (fonética sistemática).
+ * As 5 vogais são o coração de toda sílaba do português.
  */
 const aula: Aula = {
   codigo: "EF01LP03",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Mistério das Palavras Perdidas",
+  disciplina: "Português",
+  titulo: "As 5 Vogais Mágicas — A E I O U",
 
   narrativa: {
-    titulo: "O Mistério das Palavras Perdidas",
+    titulo: "As 5 Vogais Mágicas",
     contexto:
-      "O Brilha encontrou um baú cheio de etiquetas de uma antiga biblioteca da floresta.",
+      "O Brilha encontrou uma casa com 5 janelas. Cada janela tem uma vogal: A, E, I, O, U. Toda vez que a boca canta uma dessas, o ar sai livre, sem trancar em nenhum lugar.",
     problema:
-      "Algumas palavras foram escritas do jeito certo, mas outras estão com letras faltando, trocadas ou inventadas.",
-    convite:
-      "Vamos ser detetives das letras e descobrir juntos quais palavras estão escritas do jeito certo?",
+      "Cada vogal chama figuras diferentes: A chama ABELHA, E chama ESCOLA, I chama IOIÔ, O chama OVELHA, U chama URSINHO.",
+    convite: "Bora abrir cada janela e descobrir as figuras de cada vogal?",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer as letras do alfabeto.",
-    "Perceber que cada som tem uma letra (EF01LP02).",
-    "Ler da esquerda para a direita (EF01LP01).",
+    "Escutar o primeiro som de uma palavra.",
+    "Reconhecer aliteração e rima.",
+    "Falar palavras em voz alta com atenção.",
   ],
 
   missao:
-    "Comparar escritas certas e não certas, olhando semelhanças e diferenças entre as palavras.",
+    "Reconhecer as 5 vogais (A E I O U) como sons e como letras, associando cada uma a figuras que começam com aquele som.",
 
   objetivos: [
-    "Identificar escritas corretas e incorretas.",
-    "Comparar palavras parecidas.",
-    "Perceber a importância da ORDEM das letras.",
-    "Compreender que faltar ou trocar letra muda a palavra.",
+    "Identificar auditivamente as 5 vogais.",
+    "Reconhecer visualmente as letras A, E, I, O, U.",
+    "Associar cada vogal a uma figura-âncora.",
+    "Perceber que TODA sílaba do português tem pelo menos 1 vogal.",
   ],
 
   motivacao:
-    "Quando a gente está aprendendo a escrever, é normal fazer tentativas. Comparar palavras ajuda o cérebro a descobrir como a escrita funciona!",
+    "As vogais são as estrelas do português. Sem elas, nenhuma sílaba fica de pé. Aprender as 5 é ter a chave-mestra da leitura.",
 
   explicacao:
-    "Olha só a palavra GATO:\n\n🐱 GATO ✅ — tá certo!\n🐱 GTO ❌ — faltou uma letra.\n🐱 GTAO ❌ — as letras trocaram de lugar.\n\nA palavra certa tem TODAS as letras na ORDEM certa. Cada letra representa um som importante. Se falta uma letra ou ela muda de lugar, a palavra também muda!",
+    "As 5 vogais e suas âncoras:\n\n👉 A — ABELHA (boca bem aberta)\n👉 E — ESCOLA (sorriso pequeno)\n👉 I — IOIÔ (sorriso esticado)\n👉 O — OVELHA (boca em O)\n👉 U — URSINHO (boquinha de bico)\n\nNa hora de falar uma vogal, o ar sai LIVRE. Não trava nos lábios, nem na língua. Por isso vogais são chamadas de sons LIVRES.",
+
+  explicacaoAtiva: [
+    {
+      texto: "A vogal A abre bem a boca. ABELHA, ARVORE, ASA — todas começam com /a/.",
+      exemplo: "Fale: /a/... /a/... ABELHA.",
+      imagem: abelhaImg,
+      imagemAlt: "Abelha — /a/",
+      checagem: {
+        pergunta: "Qual figura começa com /a/?",
+        opcoes: ["Abelha", "Sol", "Ursinho"],
+        correta: 0,
+        explicacao: "ABELHA começa com /a/.",
+      },
+    },
+    {
+      texto: "A vogal E sorri um pouquinho. ESCOLA, ESTRELA — as duas começam com /e/.",
+      exemplo: "Fale: /e/... ESCOLA.",
+      imagem: escolaImg,
+      imagemAlt: "Escola — /e/",
+      checagem: {
+        pergunta: "Qual figura começa com /e/?",
+        opcoes: ["Gato", "Estrela", "Ovelha"],
+        correta: 1,
+        explicacao: "ESTRELA começa com /e/.",
+      },
+    },
+    {
+      texto: "As vogais I, O, U cada uma tem sua boca: sorriso esticado, boca redonda e bico.",
+      exemplo: "IOIÔ (/i/), OVELHA (/o/), URSINHO (/u/). Sinta a boca mudando.",
+      imagem: ioioImg,
+      imagemAlt: "Ioiô — /i/",
+      checagem: {
+        pergunta: "Qual figura começa com /u/?",
+        opcoes: ["Ovelha", "Ursinho", "Ioiô"],
+        correta: 1,
+        explicacao: "URSINHO começa com /u/.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "Palavra certa = todas as letras na ordem certa.",
-    nivel2:
-      "Se falta uma letra (GTO), a palavra fica errada — falta um som.",
-    nivel3:
-      "Se as letras trocam de lugar (GTAO), a palavra também fica errada.",
-    nivel4:
-      "Comparar escritas ajuda a perceber padrões: cada letra tem sua função e seu lugar.",
+    nivel1: "Vogais são A, E, I, O, U. O ar sai LIVRE.",
+    nivel2: "A-abelha · E-escola · I-ioiô · O-ovelha · U-ursinho.",
+    nivel3: "Toda sílaba do português tem pelo menos uma vogal.",
+    nivel4: "Sem vogal, nenhuma palavra fica de pé — elas são o coração da sílaba.",
   },
 
   exemploResolvido: {
-    enunciado: "Qual das três é a escrita certa de MAÇÃ?",
+    enunciado: "Qual vogal começa a palavra OVELHA?",
     passos: [
-      "Olhe a figura: 🍎.",
-      "Fale MA-ÇÃ bem devagar e ouça os sons.",
-      "Procure a escrita que tem TODAS as letras: M · A · Ç · Ã.",
+      "Fale devagar: /o/... VELHA.",
+      "O primeiro som é /o/.",
+      "A vogal /o/ é a letra O.",
     ],
-    resposta: "MAÇÃ — tem os 4 sons na ordem certa.",
+    resposta: "A vogal O — porque OVELHA começa com /o/.",
   },
 
   atividadeGuiada: {
-    enunciado:
-      "Toque na escrita certa da palavra da figura. Ao tocar, o Brilha fala a palavra como está escrita.",
-    resposta: "MAÇÃ — é a que tem todas as letras.",
-    explicacao:
-      "MAÇA sem til soa diferente. MÇA está sem a letra A do meio. MAÇÃ é a certa.",
+    enunciado: "Toque na figura que começa com a vogal A.",
+    resposta: "ABELHA — começa com /a/.",
+    explicacao: "Fale devagar cada figura antes de tocar. Só ABELHA começa com /a/.",
     visual: {
       tipo: "escolherImagem",
-      pergunta:
-        "🍎 Qual figura combina com a palavra que você acabou de comparar?",
+      pergunta: "Qual figura começa com /a/?",
       opcoes: [
-        { nome: "maca", imagemUrl: macaImg },
-        { nome: "sapo", imagemUrl: sapoImg },
-        { nome: "carro", imagemUrl: carroImg },
+        { nome: "abelha", imagemUrl: abelhaImg },
+        { nome: "escola", imagemUrl: escolaImg },
+        { nome: "ovelha", imagemUrl: ovelhaImg },
+        { nome: "ursinho", imagemUrl: ursinhoImg },
       ],
-      respostaCerta: "maca",
+      respostaCerta: "abelha",
     },
   },
 
   exercicios: [
     {
-      enunciado: "🏠 Qual é a escrita certa de CASA?",
-      resposta: "CASA — C · A · S · A.",
-      dica: "Fale devagar: CA-SA. Precisa das 4 letras.",
+      enunciado: "🔊 Qual figura começa com /e/: ESTRELA, ABELHA ou URSINHO?",
+      resposta: "ESTRELA — começa com /e/.",
+      dica: "Fale devagar: /e/STRELA.",
     },
     {
-      enunciado: "🐸 Qual é a escrita certa de SAPO?",
-      resposta: "SAPO — S · A · P · O.",
-      dica: "Nem SAO nem SAPOO — precisa ter as 4 letras na ordem.",
+      enunciado: "🎧 IOIÔ começa com qual vogal?",
+      resposta: "Com a vogal I — /i/OIÔ.",
+      dica: "Sorriso esticado = /i/.",
     },
     {
-      enunciado: "🚗 Complete: CA _ _ O. Que letras faltam pra formar CARRO?",
-      resposta: "RR — CARRO tem dois R juntos no meio.",
-      dica: "Fale ca-RRR-o. Ouça o som forte do meio.",
+      enunciado: "🐻 URSINHO e OVELHA começam com a mesma vogal?",
+      resposta: "Não. URSINHO com /u/, OVELHA com /o/.",
+      dica: "Sinta a boca mudar de bico para redonda.",
     },
   ],
 
   desafio: {
-    enunciado:
-      "Desafio Brilha: 3 figuras, 3 escritas cada. Toque na certa de cada uma.",
-    resposta: "CACHORRO 🐶 · SOL ☀️ · PEIXE 🐟",
+    enunciado: "Desafio Brilha: encaixar cada figura na sua vogal (A, E, I, O, U).",
+    resposta: "A→abelha · E→escola · I→ioiô · O→ovelha · U→ursinho.",
     visual: {
       cena: [
-        { personagem: "CACHORRO", itemImagemUrl: cachorroImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "PEIXE", itemImagemUrl: peixeImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "🅰️ A", itemImagemUrl: abelhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "🇪 E", itemImagemUrl: escolaImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "🇮 I", itemImagemUrl: ioioImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "🇴 O", itemImagemUrl: ovelhaImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "🇺 U", itemImagemUrl: ursinhoImg, quantidade: 1, cor: "#A78BFA" },
       ],
       perguntas: [
         {
-          pergunta: "🐶 Qual escrita está certa?",
-          opcoes: ["CACHORO", "CACHORRO", "CAXORRO"],
+          pergunta: "Qual figura vai na janela A?",
+          opcoes: ["Escola", "Abelha", "Ovelha"],
           correta: 1,
-          explicacao:
-            "CACHORRO tem dois R juntos: ca-CHO-RRR-o.",
+          explicacao: "ABELHA começa com /a/.",
         },
         {
-          pergunta: "☀️ Qual escrita está certa?",
-          opcoes: ["SOL", "SLO", "SO"],
+          pergunta: "Qual figura vai na janela O?",
+          opcoes: ["Ovelha", "Ursinho", "Ioiô"],
           correta: 0,
-          explicacao: "SOL — S · O · L, na ordem certa.",
+          explicacao: "OVELHA começa com /o/.",
         },
         {
-          pergunta: "🐟 Qual escrita está certa?",
-          opcoes: ["PEXE", "PEIXE", "PEIE"],
-          correta: 1,
-          explicacao: "PEIXE tem 5 letras: P · E · I · X · E.",
+          pergunta: "Qual figura vai na janela U?",
+          opcoes: ["Estrela", "Abelha", "Ursinho"],
+          correta: 2,
+          explicacao: "URSINHO começa com /u/.",
         },
       ],
     },
@@ -152,117 +181,136 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "Cada letra tem sua função na palavra.",
-      "A POSIÇÃO das letras é importante — trocar de lugar muda a palavra.",
-      "Se falta uma letra, a escrita fica errada.",
-      "Comparar palavras ajuda a aprender a escrever certo.",
+      "As 5 vogais: A, E, I, O, U.",
+      "Toda vogal deixa o ar sair LIVRE.",
+      "Cada uma tem uma figura-âncora (A-abelha · E-escola · I-ioiô · O-ovelha · U-ursinho).",
+      "Toda sílaba tem pelo menos uma vogal.",
     ],
-    dica: "Antes de decidir, fale cada escrita devagar e escute — qual soa igual à figura?",
+    dica: "Se a boca abre livre e sem travar, é vogal.",
   },
 
   quiz: [
     {
-      pergunta: "Qual palavra está escrita corretamente?",
-      opcoes: ["BLA", "BOLA", "BOA"],
+      pergunta: "Qual figura começa com /a/?",
+      opcoes: ["Abelha", "Escola", "Ursinho"],
+      correta: 0,
+      explicacao: "ABELHA — /a/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
+          { imagemUrl: escolaImg, quantidade: 1, rotulo: "escola" },
+          { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "ursinho" },
+        ],
+      },
+    },
+    {
+      pergunta: "Qual figura começa com /o/?",
+      opcoes: ["Ioiô", "Ovelha", "Estrela"],
       correta: 1,
-      explicacao: "BOLA — B · O · L · A, todas as letras na ordem certa.",
+      explicacao: "OVELHA — /o/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: ioioImg, quantidade: 1, rotulo: "ioiô" },
+          { imagemUrl: ovelhaImg, quantidade: 1, rotulo: "ovelha" },
+          { imagemUrl: estrelaImg, quantidade: 1, rotulo: "estrela" },
+        ],
+      },
     },
     {
-      pergunta: "Se faltar uma letra na palavra...",
-      opcoes: [
-        "A palavra pode ficar incorreta",
-        "Nada muda",
-        "Ela vira um número",
-      ],
+      pergunta: "Qual vogal falta: A, E, ?, O, U?",
+      opcoes: ["I", "P", "S"],
       correta: 0,
-      explicacao:
-        "Cada letra representa um som. Se falta uma, falta o som — a palavra muda.",
+      explicacao: "A ordem das vogais é A E I O U. Falta o I.",
     },
     {
-      pergunta: "As letras precisam ficar...",
-      opcoes: ["Em uma ordem certa", "Em qualquer lugar", "Misturadas"],
-      correta: 0,
-      explicacao:
-        "A ordem importa: GATO é diferente de GTAO. Cada letra tem seu lugar.",
-    },
-    {
-      pergunta: "Comparar palavras ajuda a...",
-      opcoes: ["Aprender a escrever", "Pintar desenhos", "Contar números"],
-      correta: 0,
-      explicacao:
-        "Comparando, a gente vê padrões e descobre como o sistema de escrita funciona.",
+      pergunta: "Toda sílaba do português precisa ter…",
+      opcoes: ["Uma consoante", "Uma vogal", "Nada"],
+      correta: 1,
+      explicacao: "Vogal é obrigatória em toda sílaba do português.",
     },
   ],
 
   conclusao:
-    "🏅 Medalha conquistada: Detetive das Letras! Missão em Família: escreva 5 nomes de objetos da casa em duas versões — uma certa e outra com um erro de propósito. Peça pra criança descobrir qual está certa e explicar por quê.",
+    "🏅 Medalha: Guardião das Vogais! Missão em Casa: caçar em revistas e livros 1 figura para cada vogal (A, E, I, O, U) e fazer um pôster juntos.",
 
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "As crianças passam por várias etapas até dominar a escrita. Comparar palavras é um jeito poderoso de o cérebro perceber padrões — e isso favorece tanto a leitura quanto a escrita.",
+      "Em português a gente tem 5 vogais escritas mas mais de 10 sons de vogal quando junta com nasal (ã, õ). Por enquanto vamos só das 5 mágicas — o resto vem depois!",
   },
 
   interativas: [
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 1 · Qual palavra está correta?",
-      instrucao:
-        "Toque em cada escrita pra ouvir. Depois escolha a certa da figura.",
-      figura: { imagemUrl: macaImg, rotulo: "🍎" },
-      pergunta: "Qual é a escrita certa?",
-      opcoes: ["MAÇA", "MAÇÃ", "MÇA"],
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · A de Abelha",
+      instrucao: "Toque na figura que começa com /a/.",
+      grupos: [
+        { imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+      ],
+      pergunta: "Qual começa com /a/?",
+      opcoes: ["Sol", "Abelha", "Gato"],
       correta: 1,
-      acerto: "Excelente! MAÇÃ tem todas as letras necessárias.",
-      erro: "Escute de novo tocando em cada uma. Qual soa igual à figura?",
+      acerto: "Isso! ABELHA — vogal A.",
+      erro: "Fale /a/BELHA. Boca bem aberta.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 2 · Encontre o erro",
-      instrucao:
-        "Uma das escritas está certa e as outras têm erro. Toque pra ouvir cada uma.",
-      figura: { imagemUrl: casaImg, rotulo: "🏠" },
-      pergunta: "Qual palavra está escrita corretamente?",
-      opcoes: ["CASA", "CSA", "CAA"],
-      correta: 0,
-      acerto: "Isso! CASA — C · A · S · A.",
-      erro: "Faltou uma letra em uma delas. Escute de novo.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Cada vogal com sua figura",
+      instrucao: "Ligue cada vogal à figura que começa com ela.",
+      pares: [
+        { a: "A", b: "Abelha", aImagem: estrelaImg, bImagem: abelhaImg },
+        { a: "E", b: "Escola", aImagem: estrelaImg, bImagem: escolaImg },
+        { a: "I", b: "Ioiô", aImagem: estrelaImg, bImagem: ioioImg },
+        { a: "O", b: "Ovelha", aImagem: estrelaImg, bImagem: ovelhaImg },
+        { a: "U", b: "Ursinho", aImagem: estrelaImg, bImagem: ursinhoImg },
+      ],
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Compare as escritas",
-      instrucao:
-        "Três escritas parecidas. Toque em cada uma e ouça a diferença.",
-      figura: { imagemUrl: sapoImg, rotulo: "🐸" },
-      pergunta: "Qual representa a figura corretamente?",
-      opcoes: ["SAPO", "SAO", "SAPOO"],
-      correta: 0,
-      acerto: "Muito bem! SAPO — S · A · P · O.",
-      erro: "Escute: SA-PO. Precisa ter 4 letras — nem mais, nem menos.",
+      tipo: "ordenar",
+      titulo: "Fase 3 · A ordem das vogais",
+      instrucao: "Coloque as vogais na ordem A E I O U.",
+      itens: ["A · abelha", "E · escola", "I · ioiô", "O · ovelha", "U · ursinho"],
+      imagens: [
+        { imagemUrl: abelhaImg, quantidade: 1, rotulo: "A" },
+        { imagemUrl: escolaImg, quantidade: 1, rotulo: "E" },
+        { imagemUrl: ioioImg, quantidade: 1, rotulo: "I" },
+        { imagemUrl: ovelhaImg, quantidade: 1, rotulo: "O" },
+        { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "U" },
+      ],
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 4 · Complete a palavra",
-      instrucao:
-        "Faltam duas letras no meio: CA _ _ O. Toque pra ouvir cada opção.",
-      figura: { imagemUrl: carroImg, rotulo: "🚗" },
-      pergunta: "Que letras completam CA _ _ O?",
-      opcoes: ["CARRO", "CALLO", "CAMMO"],
-      correta: 0,
-      acerto: "Perfeito! CARRO tem dois R juntos: ca-RRR-o.",
-      erro: "Fale devagar: ca-RRR-o. Ouça o som forte do meio.",
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · U de Ursinho",
+      instrucao: "Toque na figura que começa com /u/.",
+      grupos: [
+        { imagemUrl: ovelhaImg, quantidade: 1, rotulo: "ovelha" },
+        { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "ursinho" },
+        { imagemUrl: escolaImg, quantidade: 1, rotulo: "escola" },
+      ],
+      pergunta: "Qual começa com /u/?",
+      opcoes: ["Ovelha", "Ursinho", "Escola"],
+      correta: 1,
+      acerto: "URSINHO — vogal U.",
+      erro: "Boca de bico: /u/RSINHO.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 5 · Laboratório da Escrita",
-      instrucao:
-        "Última rodada: figura de bicho na Biblioteca. Toque pra ouvir e escolha a escrita certa.",
-      figura: { imagemUrl: gatoImg, rotulo: "🐱" },
-      pergunta: "Qual escrita está certa?",
-      opcoes: ["GATO", "GTO", "GTAO"],
-      correta: 0,
-      acerto: "Muito bem! GATO — G · A · T · O na ordem certa.",
-      erro: "Escute de novo: GA-TO. Todas as letras, na ordem.",
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Caça à vogal E",
+      instrucao: "Quem começa com /e/?",
+      grupos: [
+        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "estrela" },
+        { imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
+        { imagemUrl: ioioImg, quantidade: 1, rotulo: "ioiô" },
+      ],
+      pergunta: "Qual começa com /e/?",
+      opcoes: ["Abelha", "Estrela", "Ioiô"],
+      correta: 1,
+      acerto: "ESTRELA — vogal E.",
+      erro: "Sorriso pequeno: /e/STRELA.",
     },
   ],
 
@@ -270,83 +318,106 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "🍎 Qual escrita está certa?",
-        opcoes: ["MAÇÃ", "MÇA", "AMÇÃ"],
+        pergunta: "Vogal A começa qual figura?",
+        opcoes: ["Abelha", "Sol", "Gato"],
         correta: 0,
-        explicacao: "MAÇÃ tem todas as letras: M · A · Ç · Ã.",
-        visual: { tipo: "itens", imagemUrl: macaImg, quantidade: 1, rotulo: "🍎 MAÇÃ" },
+        explicacao: "ABELHA.",
+        visual: { tipo: "itens", imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
       },
       {
-        pergunta: "☀️ Qual escrita está certa?",
-        opcoes: ["SLO", "SOL", "OSL"],
+        pergunta: "Vogal E começa qual figura?",
+        opcoes: ["Escola", "Ovelha", "Ursinho"],
+        correta: 0,
+        explicacao: "ESCOLA.",
+        visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "escola" },
+      },
+      {
+        pergunta: "Vogal I começa qual figura?",
+        opcoes: ["Abelha", "Ioiô", "Ovelha"],
         correta: 1,
-        explicacao: "SOL — S · O · L, na ordem certa.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️ SOL" },
-      },
-      {
-        pergunta: "⚽ Qual escrita está certa?",
-        opcoes: ["BOLA", "BLA", "BOA"],
-        correta: 0,
-        explicacao: "BOLA — B · O · L · A, todas as letras.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽ BOLA" },
+        explicacao: "IOIÔ.",
+        visual: { tipo: "itens", imagemUrl: ioioImg, quantidade: 1, rotulo: "ioiô" },
       },
     ],
     medio: [
       {
-        pergunta: "🐸 Qual escrita está certa?",
-        opcoes: ["SAPOO", "SAPO", "SAO"],
+        pergunta: "Qual figura NÃO começa com vogal?",
+        opcoes: ["Abelha", "Gato", "Ovelha"],
         correta: 1,
-        explicacao: "SAPO tem exatamente 4 letras.",
-        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸 SAPO" },
+        explicacao: "GATO começa com /g/ (consoante).",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+            { imagemUrl: ovelhaImg, quantidade: 1, rotulo: "ovelha" },
+          ],
+        },
       },
       {
-        pergunta: "🏠 Qual escrita está certa?",
-        opcoes: ["CSA", "CASA", "CAA"],
+        pergunta: "OCA e OVELHA começam com qual vogal?",
+        opcoes: ["A", "O", "U"],
         correta: 1,
-        explicacao: "CASA — 4 letras, 4 sons.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🏠 CASA" },
+        explicacao: "As duas com /o/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: ocaImg, quantidade: 1, rotulo: "OCA", cor: "#FBBF24" },
+            { imagemUrl: ovelhaImg, quantidade: 1, rotulo: "OVELHA", cor: "#60A5FA" },
+          ],
+        },
       },
       {
-        pergunta: "🐟 Qual escrita está certa?",
-        opcoes: ["PEIE", "PEIXE", "PEXE"],
-        correta: 1,
-        explicacao: "PEIXE — P · E · I · X · E.",
-        visual: { tipo: "itens", imagemUrl: peixeImg, quantidade: 1, rotulo: "🐟 PEIXE" },
+        pergunta: "IDOSO e IOIÔ começam com qual vogal?",
+        opcoes: ["I", "E", "U"],
+        correta: 0,
+        explicacao: "As duas com /i/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: idosoImg, quantidade: 1, rotulo: "IDOSO", cor: "#F472B6" },
+            { imagemUrl: ioioImg, quantidade: 1, rotulo: "IOIÔ", cor: "#34D399" },
+          ],
+        },
       },
     ],
     dificil: [
       {
-        pergunta: "🚗 Qual escrita está certa?",
-        opcoes: ["CARO", "CARRO", "CRARO"],
-        correta: 1,
-        explicacao: "CARRO tem dois R juntos: ca-RRR-o.",
-        visual: { tipo: "itens", imagemUrl: carroImg, quantidade: 1, rotulo: "🚗 CARRO" },
+        pergunta: "Qual figura começa com vogal DIFERENTE das outras duas?",
+        opcoes: ["Abelha", "Asa", "Escola"],
+        correta: 2,
+        explicacao: "Abelha e Asa começam com /a/. Escola com /e/.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: abelhaImg, quantidade: 1, rotulo: "abelha" },
+            { imagemUrl: asaImg, quantidade: 1, rotulo: "asa" },
+            { imagemUrl: escolaImg, quantidade: 1, rotulo: "escola" },
+          ],
+        },
       },
       {
-        pergunta: "🐶 Qual escrita está certa?",
-        opcoes: ["CACHORO", "CACHORRO", "CAXORRO"],
-        correta: 1,
-        explicacao: "CACHORRO tem dois R juntos e é escrito com CH.",
-        visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶 CACHORRO" },
-      },
-      {
-        pergunta: "🐱 O que aconteceu se eu escrevi 'GTAO' em vez de GATO?",
+        pergunta: "Qual grupo tem 3 figuras com vogais DIFERENTES?",
         opcoes: [
-          "As letras trocaram de lugar",
-          "Escrevi certo",
-          "Sobrou uma letra",
+          "Abelha-Escola-Ursinho",
+          "Abelha-Asa-Arvore",
+          "Ovelha-Oca-Ovelha",
         ],
         correta: 0,
-        explicacao:
-          "GATO tem G · A · T · O nessa ordem. GTAO tem as mesmas letras, mas fora de ordem.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱 GATO" },
+        explicacao: "A · E · U — três vogais diferentes.",
+      },
+      {
+        pergunta: "Toda sílaba do português precisa de:",
+        opcoes: ["Consoante", "Vogal", "Ponto"],
+        correta: 1,
+        explicacao: "Vogal é o núcleo obrigatório da sílaba.",
       },
     ],
   },
 
   proximaHabilidade: {
     codigo: "EF01LP04",
-    titulo: "Distinguir as letras do alfabeto de outros sinais gráficos",
+    titulo: "A letra M — som /m/ (mãe, mel, mão)",
   },
 };
 

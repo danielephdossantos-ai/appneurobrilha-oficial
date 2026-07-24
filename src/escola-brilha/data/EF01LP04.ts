@@ -1,143 +1,177 @@
 import type { Aula } from "../types";
-import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as madeiraImg } from "@/assets/neuro-treino/objetos/madeira.png.asset.json";
+import { url as mapaImg } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mochilaImg } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as menino2Img } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as meninaImg } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as moedaImg } from "@/assets/neuro-treino/objetos/moeda.png.asset.json";
+import { url as minhocaImg } from "@/assets/neuro-treino/objetos/minhoca.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP04 — Aula 004 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Distinguir as letras do alfabeto de outros sinais gráficos.
- *
- * Missão do Dia: "O Portal dos Símbolos Perdidos".
- * Padrão travado (Português): novo tipo `selecionarLetras` — cartões
- * misturados (letras/números/símbolos); ao tocar, TTS fala o cartão e
- * valida por categoria.
+ * EF01LP04 — Aula 004 · Letra M · som /m/
+ * Primeira consoante ensinada: nasal contínua, alta frequência, fácil de sentir na boca.
+ * Base: Orton-Gillingham (multissensorial: ver M · falar /m/ · sentir vibração nos lábios).
  */
 const aula: Aula = {
   codigo: "EF01LP04",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Portal dos Símbolos Perdidos",
+  disciplina: "Português",
+  titulo: "A Letra M — o Som da Mamãe",
 
   narrativa: {
-    titulo: "O Portal dos Símbolos Perdidos",
+    titulo: "A Letra M — o Som da Mamãe",
     contexto:
-      "O Brilha encontrou um portal mágico que só abre quando as 26 letras do alfabeto ficam separadas dos outros símbolos.",
+      "O Brilha bateu na porta da letra M. Ela morava numa casa com duas montanhinhas: M. Toda vez que a boca fecha os lábios e o ar sai pelo nariz, aparece o som /m/.",
     problema:
-      "O Vento Bagunceiro misturou tudo: letras, números, emojis e sinais de pontuação. Ninguém sabe mais o que é o quê.",
-    convite:
-      "Vamos ser detetives e descobrir quem é letra, quem é número e quem é símbolo?",
+      "A letra M está chamando as figuras dela: MÃE, MAÇÃ, MOCHILA, MAPA, MENINO. Todas começam com /m/.",
+    convite: "Bora fechar os lábios e sentir o /m/ vibrar?",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer algumas letras do alfabeto.",
-    "Saber que existem números.",
-    "Ler da esquerda para a direita (EF01LP01).",
+    "Reconhecer as 5 vogais.",
+    "Isolar o primeiro som de uma palavra.",
+    "Falar palavras devagar.",
   ],
 
   missao:
-    "Diferenciar LETRAS de números e outros símbolos, sabendo que só as letras formam palavras.",
+    "Associar a letra M ao som /m/ e reconhecer palavras que começam com esse som.",
 
   objetivos: [
-    "Reconhecer as letras do alfabeto.",
-    "Diferenciar letras de números.",
-    "Identificar sinais gráficos (símbolos).",
-    "Compreender que só as letras formam palavras.",
+    "Reconhecer o som /m/ no começo de palavras.",
+    "Associar a letra M (maiúscula) ao som /m/.",
+    "Distinguir M de outras consoantes.",
+    "Sentir a vibração dos lábios ao produzir /m/.",
   ],
 
   motivacao:
-    "Cada símbolo tem uma função! As letras formam palavras, os números servem pra contar, e os símbolos organizam ou representam outras coisas.",
+    "MÃE é a primeira palavra que quase todo bebê fala no mundo — e ela começa com /m/. Aprender M é ganhar a primeira letra do coração.",
 
   explicacao:
-    "Existem 3 tipos de sinais que a gente vê no dia a dia:\n\n🔤 LETRAS: A B C D E F G... São 26 no alfabeto português. Usadas pra escrever palavras (GATO, SOL, CASA).\n\n🔢 NÚMEROS: 1 2 3 4 5 6 7 8 9 0. Usados pra contar (2 gatos, 5 flores).\n\n🔣 SÍMBOLOS: ! ? . , @ % $ + −. Servem pra organizar frases (ponto, vírgula) ou representar outras coisas (@ em e-mail, % de porcentagem).\n\nSó as LETRAS formam palavras!",
+    "A letra M faz o som /m/.\n\n👉 Como fazer: feche os lábios, junte, e deixe o ar sair pelo nariz. Sente a vibração?\n👉 Palavras com M: MÃE · MAÇÃ · MAPA · MOCHILA · MENINO · MENINA · MOEDA.\n\nO M gruda com vogais para formar sílabas:\nM + A = MA · M + E = ME · M + I = MI · M + O = MO · M + U = MU.\n\nA gente ainda não vai LER sílabas — só vai reconhecer o som /m/ no COMEÇO das palavras.",
+
+  explicacaoAtiva: [
+    {
+      texto: "A letra M tem 2 montanhinhas. O som dela é /m/ — os lábios fecham.",
+      exemplo: "Fale: /mmmm/... MÃE. Sente o zumbido nos lábios?",
+      imagem: maeImg,
+      imagemAlt: "Mãe — /m/",
+      checagem: {
+        pergunta: "Qual figura começa com /m/?",
+        opcoes: ["Mãe", "Sol", "Gato"],
+        correta: 0,
+        explicacao: "MÃE — /m/.",
+      },
+    },
+    {
+      texto: "MAÇÃ, MAPA e MOCHILA também começam com /m/.",
+      exemplo: "Fale: /m/AÇÃ, /m/APA, /m/OCHILA.",
+      imagem: macaImg,
+      imagemAlt: "Maçã — /m/",
+      checagem: {
+        pergunta: "Qual figura começa com /m/?",
+        opcoes: ["Bola", "Maçã", "Sol"],
+        correta: 1,
+        explicacao: "MAÇÃ — /m/.",
+      },
+    },
+    {
+      texto: "Cuidado com pegadinhas: BOLA começa com /b/, não com /m/. Fale devagar.",
+      exemplo: "MENINO (/m/) x BOLA (/b/) — sons diferentes.",
+      imagem: menino2Img,
+      imagemAlt: "Menino — /m/",
+      checagem: {
+        pergunta: "Qual dessas NÃO começa com /m/?",
+        opcoes: ["Menina", "Mapa", "Bola"],
+        correta: 2,
+        explicacao: "BOLA começa com /b/. As outras com /m/.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "Letras formam palavras. Números contam. Símbolos organizam.",
-    nivel2:
-      "O alfabeto tem 26 letras: de A até Z. Cada letra pode ser MAIÚSCULA (A) ou minúscula (a).",
-    nivel3:
-      "Números são 10 sinais: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 — servem pra contar.",
-    nivel4:
-      "Sinais como ! ? . , @ % têm outras funções: pontuar, marcar tom, indicar e-mail, porcentagem, etc.",
+    nivel1: "A letra M tem som /m/. Lábios fechados vibrando.",
+    nivel2: "MÃE, MAÇÃ, MAPA, MOCHILA, MENINO — todas com /m/.",
+    nivel3: "M + vogal = sílaba: MA, ME, MI, MO, MU.",
+    nivel4: "M é uma consoante NASAL: o ar sai pelo nariz, não pela boca.",
   },
 
   exemploResolvido: {
-    enunciado: "Nesta lista, quais são letras: A · 7 · % · B · @ · M?",
+    enunciado: "Qual figura começa com a letra M: MOCHILA, SOL ou GATO?",
     passos: [
-      "Olhe cada símbolo com calma.",
-      "Pergunte: 'Isso é do alfabeto?' Só passa quem é do alfabeto.",
-      "A, B e M são letras. 7 é número. % e @ são símbolos.",
+      "Fale cada palavra devagar: /m/OCHILA, /s/OL, /g/ATO.",
+      "O som /m/ está no começo de MOCHILA.",
+      "M = /m/.",
     ],
-    resposta: "Letras: A, B, M. Número: 7. Símbolos: %, @.",
+    resposta: "MOCHILA — começa com a letra M (/m/).",
   },
 
   atividadeGuiada: {
-    enunciado:
-      "Toque em cada cartão pra ouvir. Só as LETRAS abrem o portal.",
-    resposta: "As letras são A, B e M.",
-    explicacao:
-      "Letras fazem parte do alfabeto e formam palavras. Números contam e símbolos têm outras funções.",
+    enunciado: "Toque na figura que começa com M (/m/).",
+    resposta: "MAPA — começa com /m/.",
+    explicacao: "Fale cada figura devagar antes de tocar.",
     visual: {
       tipo: "escolherImagem",
-      pergunta:
-        "Qual figura tem o nome escrito com LETRAS (não com números)?",
+      pergunta: "Qual figura começa com /m/?",
       opcoes: [
-        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "mapa", imagemUrl: mapaImg },
         { nome: "sol", imagemUrl: solImg },
+        { nome: "gato", imagemUrl: gatoImg },
         { nome: "bola", imagemUrl: bolaImg },
       ],
-      respostaCerta: "gato",
+      respostaCerta: "mapa",
     },
   },
 
   exercicios: [
     {
-      enunciado: "🔤 A é letra, número ou símbolo?",
-      resposta: "Letra — a primeira do alfabeto.",
-      dica: "Fala baixinho o alfabeto: A, B, C... A é a primeira!",
+      enunciado: "🔊 Qual começa com /m/: MOEDA, SOL ou GATO?",
+      resposta: "MOEDA — /m/.",
+      dica: "Sinta os lábios fechando.",
     },
     {
-      enunciado: "🔢 5 é letra, número ou símbolo?",
-      resposta: "Número — serve pra contar.",
-      dica: "Você usa quando conta: 1, 2, 3, 4, 5.",
+      enunciado: "🎧 MENINA e MENINO começam iguais?",
+      resposta: "Sim, os dois com /m/.",
+      dica: "Aliteração de /m/.",
     },
     {
-      enunciado: "🔣 @ é letra, número ou símbolo?",
-      resposta: "Símbolo — aparece em e-mails.",
-      dica: "Não faz parte do alfabeto nem serve pra contar.",
+      enunciado: "🧭 A letra M tem quantas montanhinhas?",
+      resposta: "Duas montanhinhas.",
+      dica: "MM — M M.",
     },
   ],
 
   desafio: {
-    enunciado:
-      "Desafio Brilha: 3 perguntas sobre letras, números e símbolos.",
-    resposta:
-      "Letra é do alfabeto. Número conta. Símbolo tem outras funções.",
+    enunciado: "Desafio Brilha: separar as figuras que começam com /m/ das que NÃO começam.",
+    resposta: "Com /m/: mãe, maçã, mapa. Sem /m/: sol, gato, bola.",
     visual: {
       cena: [
-        { personagem: "LETRA", itemImagemUrl: gatoImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "NÚMERO", itemImagemUrl: solImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "SÍMBOLO", itemImagemUrl: bolaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "Time M", itemImagemUrl: maeImg, quantidade: 3, cor: "#F472B6" },
+        { personagem: "Fora do M", itemImagemUrl: solImg, quantidade: 3, cor: "#60A5FA" },
       ],
       perguntas: [
         {
-          pergunta: "Qual destes é uma LETRA?",
-          opcoes: ["9", "K", "%"],
-          correta: 1,
-          explicacao: "K é do alfabeto — faz parte das 26 letras.",
-        },
-        {
-          pergunta: "Qual destes é um NÚMERO?",
-          opcoes: ["C", "3", "@"],
-          correta: 1,
-          explicacao: "3 é número — serve pra contar (1, 2, 3...).",
-        },
-        {
-          pergunta: "Qual destes é um SÍMBOLO?",
-          opcoes: ["!", "A", "2"],
+          pergunta: "Qual dessas começa com /m/?",
+          opcoes: ["Maçã", "Sol", "Gato"],
           correta: 0,
-          explicacao: "! é ponto de exclamação — símbolo que dá tom à frase.",
+          explicacao: "MAÇÃ — /m/.",
+        },
+        {
+          pergunta: "Qual NÃO começa com /m/?",
+          opcoes: ["Mapa", "Menina", "Bola"],
+          correta: 2,
+          explicacao: "BOLA — /b/.",
+        },
+        {
+          pergunta: "Quantas montanhinhas tem a letra M?",
+          opcoes: ["1", "2", "3"],
+          correta: 1,
+          explicacao: "M tem 2 montanhinhas.",
         },
       ],
     },
@@ -145,141 +179,133 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "🔤 Letras (A-Z): formam palavras.",
-      "🔢 Números (0-9): servem pra contar.",
-      "🔣 Símbolos (! ? . , @ %): organizam textos ou representam outras coisas.",
-      "Letras podem ser MAIÚSCULAS (A) ou minúsculas (a) — continuam sendo letras.",
+      "A letra M faz o som /m/.",
+      "Para falar /m/ a gente fecha os lábios e vibra.",
+      "Palavras com M: mãe, maçã, mapa, mochila, menino, menina, moeda.",
+      "M + vogal = sílaba (MA, ME, MI, MO, MU).",
     ],
-    dica: "Antes de decidir, pergunte: 'Isso é do alfabeto? Serve pra contar? Ou tem outra função?'",
+    dica: "Se os lábios fecham e vibram, é /m/.",
   },
 
   quiz: [
     {
-      pergunta: "Qual destes é uma LETRA?",
-      opcoes: ["B", "8", "%"],
+      pergunta: "Qual figura começa com M?",
+      opcoes: ["Mãe", "Sol", "Bola"],
       correta: 0,
-      explicacao: "B é a segunda letra do alfabeto.",
+      explicacao: "MÃE — /m/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        ],
+      },
     },
     {
-      pergunta: "Qual destes é um NÚMERO?",
-      opcoes: ["C", "5", "@"],
+      pergunta: "Qual figura NÃO começa com M?",
+      opcoes: ["Mapa", "Menina", "Gato"],
+      correta: 2,
+      explicacao: "GATO — /g/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: mapaImg, quantidade: 1, rotulo: "mapa" },
+          { imagemUrl: meninaImg, quantidade: 1, rotulo: "menina" },
+          { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        ],
+      },
+    },
+    {
+      pergunta: "Qual é o som da letra M?",
+      opcoes: ["/m/", "/s/", "/p/"],
+      correta: 0,
+      explicacao: "M = /m/.",
+    },
+    {
+      pergunta: "Como a boca fica ao falar /m/?",
+      opcoes: ["Aberta", "Lábios fechados vibrando", "Bico"],
       correta: 1,
-      explicacao: "5 é número — vem depois do 4 e antes do 6.",
-    },
-    {
-      pergunta: "Qual destes é um SÍMBOLO?",
-      opcoes: ["!", "A", "2"],
-      correta: 0,
-      explicacao: "! é o ponto de exclamação, um símbolo de pontuação.",
-    },
-    {
-      pergunta: "As palavras são escritas usando:",
-      opcoes: ["Letras", "Apenas números", "Apenas símbolos"],
-      correta: 0,
-      explicacao:
-        "Só as letras formam palavras. Números contam e símbolos têm outras funções.",
+      explicacao: "Os lábios fecham e vibram (nasal).",
     },
   ],
 
   conclusao:
-    "🏅 Medalha conquistada: Guardião do Alfabeto! Missão em Família: procure letras pela casa (embalagens, revistas, placas). Faça 3 listas: letras, números e símbolos que encontrou.",
+    "🏅 Medalha: Detetive da Letra M! Missão em Casa: procurar 3 objetos em casa que comecem com M (mesa, macarrão, mamadeira, mochila, mel…).",
 
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "O alfabeto da língua portuguesa tem 26 letras. Com elas dá pra escrever MILHARES de palavras diferentes — só mudando a ordem e a combinação!",
+      "MAMÃE é uma das primeiras palavras que bebês do mundo inteiro falam. O som /m/ é fácil porque é o primeiro que a boca aprende — juntando os lábios pra mamar.",
   },
 
   interativas: [
     {
-      tipo: "selecionarLetras",
-      titulo: "Fase 1 · Caça às Letras",
-      instrucao:
-        "Toque em cada cartão pra ouvir. Só toque nas LETRAS do alfabeto.",
-      alvo: "letra",
-      cartoes: [
-        { simbolo: "A", tipo: "letra" },
-        { simbolo: "7", tipo: "numero", fala: "sete" },
-        { simbolo: "%", tipo: "simbolo", fala: "por cento" },
-        { simbolo: "B", tipo: "letra" },
-        { simbolo: "@", tipo: "simbolo", fala: "arroba" },
-        { simbolo: "4", tipo: "numero", fala: "quatro" },
-        { simbolo: "M", tipo: "letra" },
-        { simbolo: "?", tipo: "simbolo", fala: "ponto de interrogação" },
-        { simbolo: "Z", tipo: "letra" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · M de Mãe",
+      instrucao: "Toque na figura que começa com /m/.",
+      grupos: [
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       ],
-      acerto: "🎉 Excelente! Você achou todas as letras. Elas formam palavras!",
-      erro: "Esse não é uma letra. Continue procurando as letras do alfabeto.",
+      pergunta: "Qual começa com /m/?",
+      opcoes: ["Sol", "Mãe", "Gato"],
+      correta: 1,
+      acerto: "Isso! MÃE — /m/.",
+      erro: "Lábios fechados: /m/ÃE.",
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 2 · Arraste para o lugar certo",
-      instrucao:
-        "Toque no cartão e depois na caixa da categoria certa: Letras, Números ou Símbolos.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Ligue à letra M",
+      instrucao: "Ligue cada figura que começa com /m/ à letra M.",
       pares: [
-        { item: "F", alvo: "🔤 Letras" },
-        { item: "R", alvo: "🔤 Letras" },
-        { item: "C", alvo: "🔤 Letras" },
-        { item: "8", alvo: "🔢 Números" },
-        { item: "2", alvo: "🔢 Números" },
-        { item: "$", alvo: "🔣 Símbolos" },
-        { item: "!", alvo: "🔣 Símbolos" },
-        { item: "?", alvo: "🔣 Símbolos" },
-      ],
-      alvosVisuais: [
-        { nome: "🔤 Letras", cor: "#F472B6", capacidade: 3 },
-        { nome: "🔢 Números", cor: "#FBBF24", capacidade: 2 },
-        { nome: "🔣 Símbolos", cor: "#60A5FA", capacidade: 3 },
+        { a: "M", b: "Mapa", aImagem: estrelaImg, bImagem: mapaImg },
+        { a: "M", b: "Maçã", aImagem: estrelaImg, bImagem: macaImg },
+        { a: "M", b: "Mochila", aImagem: estrelaImg, bImagem: mochilaImg },
+        { a: "M", b: "Moeda", aImagem: estrelaImg, bImagem: moedaImg },
       ],
     },
     {
-      tipo: "selecionarLetras",
-      titulo: "Fase 3 · O Trem do Alfabeto",
-      instrucao:
-        "Cada vagão só aceita LETRAS. Toque em cada cartão pra ouvir e coloque só as letras no trem.",
-      alvo: "letra",
-      cartoes: [
-        { simbolo: "A", tipo: "letra" },
-        { simbolo: "3", tipo: "numero", fala: "três" },
-        { simbolo: "G", tipo: "letra" },
-        { simbolo: "%", tipo: "simbolo", fala: "por cento" },
-        { simbolo: "N", tipo: "letra" },
-        { simbolo: "Y", tipo: "letra" },
-        { simbolo: "5", tipo: "numero", fala: "cinco" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Caça ao M",
+      instrucao: "Só uma figura NÃO começa com M. Encontre a intrusa!",
+      grupos: [
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        { imagemUrl: menino2Img, quantidade: 1, rotulo: "menino" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
       ],
-      acerto: "🚂 Trem completo! Todas as letras a bordo.",
-      erro: "Esse não é letra — o vagão não aceita.",
+      pergunta: "Qual NÃO começa com /m/?",
+      opcoes: ["Mãe", "Menino", "Bola"],
+      correta: 2,
+      acerto: "Certo! BOLA começa com /b/.",
+      erro: "Fale devagar: /b/OLA — não é /m/.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 4 · Complete a palavra",
-      instrucao:
-        "Falta a letra do meio na palavra da figura: S _ L. Toque pra ouvir cada opção.",
-      figura: { imagemUrl: solImg, rotulo: "☀️ S _ L" },
-      pergunta: "Qual dessas é uma LETRA que completa a palavra?",
-      opcoes: ["O", "4", "@"],
-      correta: 0,
-      acerto: "Perfeito! SOL — S · O · L. Só letras formam a palavra.",
-      erro: "4 é número e @ é símbolo. Só a letra completa a palavra.",
+      tipo: "ordenar",
+      titulo: "Fase 4 · Família M",
+      instrucao: "Coloque em ordem: Mãe → Menino → Moeda.",
+      itens: ["mãe", "menino", "moeda"],
+      imagens: [
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "1º · Mãe" },
+        { imagemUrl: menino2Img, quantidade: 1, rotulo: "2º · Menino" },
+        { imagemUrl: moedaImg, quantidade: 1, rotulo: "3º · Moeda" },
+      ],
     },
     {
-      tipo: "selecionarLetras",
-      titulo: "Fase 5 · Laboratório do Brilha",
-      instrucao:
-        "Última rodada: selecione somente as LETRAS entre todos os cartões.",
-      alvo: "letra",
-      cartoes: [
-        { simbolo: "P", tipo: "letra" },
-        { simbolo: "9", tipo: "numero", fala: "nove" },
-        { simbolo: "B", tipo: "letra" },
-        { simbolo: "?", tipo: "simbolo", fala: "ponto de interrogação" },
-        { simbolo: "H", tipo: "letra" },
-        { simbolo: "1", tipo: "numero", fala: "um" },
-        { simbolo: "C", tipo: "letra" },
-        { simbolo: "%", tipo: "simbolo", fala: "por cento" },
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Mais uma pegadinha",
+      instrucao: "Qual começa com /m/?",
+      grupos: [
+        { imagemUrl: minhocaImg, quantidade: 1, rotulo: "minhoca" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
       ],
-      acerto: "🏆 Portal aberto! Você é um Guardião do Alfabeto.",
-      erro: "Esse não é letra. Continue procurando.",
+      pergunta: "Qual começa com /m/?",
+      opcoes: ["Gato", "Minhoca", "Sol"],
+      correta: 1,
+      acerto: "MINHOCA — /m/!",
+      erro: "Fale /m/INHOCA. Lábios fechando.",
     },
   ],
 
@@ -287,83 +313,102 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Qual destes é uma LETRA?",
-        opcoes: ["A", "5", "?"],
+        pergunta: "Qual começa com M?",
+        opcoes: ["Mãe", "Sol", "Bola"],
         correta: 0,
-        explicacao: "A é do alfabeto — a primeira letra.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🔤 A" },
+        explicacao: "MÃE.",
+        visual: { tipo: "itens", imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
       },
       {
-        pergunta: "Qual destes é um NÚMERO?",
-        opcoes: ["M", "7", "$"],
+        pergunta: "Qual começa com M?",
+        opcoes: ["Bola", "Mapa", "Gato"],
         correta: 1,
-        explicacao: "7 é número — serve pra contar.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 7, rotulo: "🔢 7" },
+        explicacao: "MAPA.",
+        visual: { tipo: "itens", imagemUrl: mapaImg, quantidade: 1, rotulo: "mapa" },
       },
       {
-        pergunta: "Qual destes é um SÍMBOLO?",
-        opcoes: ["B", "3", "!"],
+        pergunta: "Qual começa com M?",
+        opcoes: ["Sol", "Estrela", "Maçã"],
         correta: 2,
-        explicacao: "! é ponto de exclamação — símbolo de pontuação.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "🔣 !" },
+        explicacao: "MAÇÃ.",
+        visual: { tipo: "itens", imagemUrl: macaImg, quantidade: 1, rotulo: "maçã" },
       },
     ],
     medio: [
       {
-        pergunta: "Quantas letras tem o alfabeto português?",
-        opcoes: ["10", "26", "100"],
-        correta: 1,
-        explicacao: "26 letras, de A até Z.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🔤 A-Z" },
+        pergunta: "Qual dupla começa igual?",
+        opcoes: ["Mãe-Menino", "Mãe-Sol", "Sol-Bola"],
+        correta: 0,
+        explicacao: "Mãe e Menino: aliteração de /m/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: maeImg, quantidade: 1, rotulo: "MÃE", cor: "#F472B6" },
+            { imagemUrl: menino2Img, quantidade: 1, rotulo: "MENINO", cor: "#60A5FA" },
+          ],
+        },
       },
       {
-        pergunta: "As letras servem pra...",
-        opcoes: ["Contar", "Formar palavras", "Marcar tempo"],
-        correta: 1,
-        explicacao: "Letras formam palavras. Números contam.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🔤 GATO" },
+        pergunta: "Qual figura NÃO começa com M?",
+        opcoes: ["Moeda", "Mochila", "Gato"],
+        correta: 2,
+        explicacao: "GATO — /g/.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: moedaImg, quantidade: 1, rotulo: "moeda" },
+            { imagemUrl: mochilaImg, quantidade: 1, rotulo: "mochila" },
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+          ],
+        },
       },
       {
-        pergunta: "Qual destes NÃO forma palavra?",
-        opcoes: ["A", "8", "M"],
-        correta: 1,
-        explicacao: "8 é número — não faz parte de palavras.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "🔢 8" },
+        pergunta: "M + A forma qual sílaba?",
+        opcoes: ["MA", "AM", "MI"],
+        correta: 0,
+        explicacao: "M + A = MA.",
       },
     ],
     dificil: [
       {
-        pergunta: "A e a são a MESMA letra?",
-        opcoes: ["Sim, uma é maiúscula e outra minúscula", "Não, são diferentes", "Só se estiverem juntas"],
-        correta: 0,
-        explicacao: "A (maiúscula) e a (minúscula) representam a mesma letra do alfabeto.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "A = a" },
-      },
-      {
-        pergunta: "@ é usado principalmente em...",
-        opcoes: ["E-mails", "Palavras", "Contas de matemática"],
-        correta: 0,
-        explicacao: "@ (arroba) é o símbolo que separa o nome do e-mail.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🔣 @" },
-      },
-      {
-        pergunta: "Se eu escrever '2ATO' em vez de GATO, o que aconteceu?",
+        pergunta: "Qual grupo tem SÓ figuras com /m/?",
         opcoes: [
-          "Troquei uma letra por um número",
-          "Está certo",
-          "Sobrou uma letra",
+          "mãe · mapa · mochila",
+          "mãe · sol · gato",
+          "bola · sol · estrela",
         ],
         correta: 0,
-        explicacao:
-          "G é letra, 2 é número. Só letras formam palavras — por isso '2ATO' não é uma palavra.",
-        visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱 GATO" },
+        explicacao: "Todas começam com /m/.",
+      },
+      {
+        pergunta: "MENINA e MADEIRA — o que compartilham?",
+        opcoes: ["Rimam", "Começam com /m/", "Nada"],
+        correta: 1,
+        explicacao: "Aliteração de /m/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: meninaImg, quantidade: 1, rotulo: "MENINA", cor: "#FBBF24" },
+            { imagemUrl: madeiraImg, quantidade: 1, rotulo: "MADEIRA", cor: "#34D399" },
+          ],
+        },
+      },
+      {
+        pergunta: "Por que /m/ é chamado de som NASAL?",
+        opcoes: [
+          "Porque o ar sai pelo nariz",
+          "Porque é alto",
+          "Porque é curto",
+        ],
+        correta: 0,
+        explicacao: "Nos sons nasais o ar sai pelo nariz enquanto os lábios ficam fechados.",
       },
     ],
   },
 
   proximaHabilidade: {
     codigo: "EF01LP05",
-    titulo: "Reconhecer o sistema de escrita alfabética como representação dos sons da fala",
+    titulo: "A letra S — som /s/ (sol, sapo, sopa)",
   },
 };
 

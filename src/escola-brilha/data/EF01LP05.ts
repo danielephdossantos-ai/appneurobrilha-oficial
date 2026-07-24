@@ -1,149 +1,178 @@
 import type { Aula } from "../types";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as carroImg } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
-import { url as peixeImg } from "@/assets/neuro-treino/objetos/peixe.png.asset.json";
+import { url as sopaImg } from "@/assets/neuro-treino/objetos/sopa.png.asset.json";
+import { url as sucoImg } from "@/assets/neuro-treino/objetos/suco.png.asset.json";
+import { url as sementeImg } from "@/assets/neuro-treino/objetos/semente.png.asset.json";
+import { url as sorveteImg } from "@/assets/neuro-treino/objetos/sorvete.png.asset.json";
+import { url as sombrinhaImg } from "@/assets/neuro-treino/objetos/sombrinha.png.asset.json";
+import { url as setaCimaImg } from "@/assets/neuro-treino/objetos/seta-cima.png.asset.json";
+import { url as maeImg } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
-import { url as abelhaImg } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
- * EF01LP05 — Aula 005 · Biblioteca Pedagógica Escola Brilha
- * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Reconhecer o sistema de escrita alfabética como representação
- * dos sons da fala.
- *
- * Missão do Dia: "A Ponte dos Sons Encantados".
- * Padrão travado (Português): tap-to-speak — toque na imagem, o professor
- * fala o nome; toque na letra, o professor fala o som.
+ * EF01LP05 — Aula 005 · Letra S · som /s/
+ * Segunda consoante: fricativa contínua, alta frequência, fácil de prolongar.
+ * Base: Orton-Gillingham + NRP.
  */
 const aula: Aula = {
   codigo: "EF01LP05",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "A Ponte dos Sons Encantados",
+  disciplina: "Português",
+  titulo: "A Letra S — o Som da Cobrinha",
 
   narrativa: {
-    titulo: "A Ponte dos Sons Encantados",
+    titulo: "A Letra S — o Som da Cobrinha",
     contexto:
-      "O Brilha chegou a uma ponte mágica. Para atravessá-la, é preciso descobrir quais letras representam os sons das palavras.",
+      "O Brilha achou uma letra que parece uma cobrinha: S. O som dela é /sssss/ — a boca faz um sorriso pequeno e o ar sai devagar entre os dentes.",
     problema:
-      "Cada pedra da ponte está apagada. Só acende quando a criança descobre o primeiro som da palavra.",
-    convite:
-      "Vamos escutar cada palavra e descobrir com qual letra ela começa?",
+      "A letra S trouxe amigos: SOL, SAPO, SOPA, SUCO, SEMENTE, SORVETE. Todos começam com /s/.",
+    convite: "Bora fazer a cobrinha /sssss/ e encontrar as figuras da letra S?",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer as letras do alfabeto (EF01LP04).",
-    "Saber que as letras formam palavras.",
-    "Escutar e repetir palavras curtas.",
+    "Reconhecer as 5 vogais.",
+    "Conhecer o som /m/ da letra M.",
+    "Isolar o primeiro som de uma palavra.",
   ],
 
   missao:
-    "Descobrir que cada letra representa um som da fala e identificar o som inicial de palavras.",
+    "Associar a letra S ao som /s/ e reconhecer palavras que começam com esse som.",
 
   objetivos: [
-    "Compreender que a escrita representa os sons da fala.",
-    "Identificar os sons iniciais de palavras.",
-    "Relacionar fonemas (sons) e grafemas (letras).",
-    "Desenvolver a consciência fonêmica inicial.",
+    "Reconhecer o som /s/ no começo de palavras.",
+    "Associar a letra S ao som /s/.",
+    "Distinguir S de M e de outras consoantes.",
+    "Sentir o ar saindo entre os dentes ao produzir /s/.",
   ],
 
   motivacao:
-    "Quando falamos, saem sons da nossa boca. Quando escrevemos, usamos letras pra registrar esses sons — é assim que a leitura nasce!",
+    "SOL, SORVETE, SUCO — todo dia a gente encontra palavras com S. Aprender essa letra é abrir mais uma porta gigante da leitura.",
 
   explicacao:
-    "Toda palavra que falamos é feita de SONS.\n\nExemplo:\n🐶 CACHORRO — ouvimos: C · A · CH · O · RR · O\n\nCada som que a gente fala tem uma letra (ou um grupo de letras) que o representa no papel.\n\nQuando escrevemos, estamos desenhando os sons da nossa fala.\n\n🔊 Fala: 'BOLA' → ✍️ Escrita: B · O · L · A",
+    "A letra S faz o som /s/.\n\n👉 Como fazer: sorriso pequeno, dentes juntinhos, ar sai entre eles fazendo /ssss/ (parece cobrinha).\n👉 Palavras com S: SOL · SAPO · SOPA · SUCO · SEMENTE · SORVETE · SOMBRINHA.\n\nS + vogal = sílaba:\nS + A = SA · S + E = SE · S + I = SI · S + O = SO · S + U = SU.\n\nO S é uma consoante que pode ser esticada bem longa (/sssssss/), diferente do M (/mmmm/). São dois sons contínuos: bons de treinar o ouvido.",
+
+  explicacaoAtiva: [
+    {
+      texto: "A letra S tem cara de cobrinha. Faz /sssss/ com o ar saindo entre os dentes.",
+      exemplo: "Fale: /s/... SOL. Ar entre os dentes.",
+      imagem: solImg,
+      imagemAlt: "Sol — /s/",
+      checagem: {
+        pergunta: "Qual figura começa com /s/?",
+        opcoes: ["Sol", "Bola", "Mãe"],
+        correta: 0,
+        explicacao: "SOL — /s/.",
+      },
+    },
+    {
+      texto: "SAPO, SOPA e SUCO também começam com /s/. São família da letra S.",
+      exemplo: "Fale devagar: /s/APO, /s/OPA, /s/UCO.",
+      imagem: sapoImg,
+      imagemAlt: "Sapo — /s/",
+      checagem: {
+        pergunta: "Qual figura começa com /s/?",
+        opcoes: ["Gato", "Sopa", "Mãe"],
+        correta: 1,
+        explicacao: "SOPA — /s/.",
+      },
+    },
+    {
+      texto: "Cuidado: M faz /mmmm/ (lábios fechados). S faz /ssss/ (dentes). Sons diferentes.",
+      exemplo: "MÃE (/m/) x SOL (/s/) — boca diferente.",
+      imagem: sucoImg,
+      imagemAlt: "Suco — /s/",
+      checagem: {
+        pergunta: "Qual começa com /s/?",
+        opcoes: ["Mãe", "Suco", "Bola"],
+        correta: 1,
+        explicacao: "SUCO — /s/. MÃE começa com /m/.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "As letras servem pra escrever os sons que a gente fala.",
-    nivel2:
-      "Toda palavra tem um som INICIAL — o primeiro som que sai da boca. BOLA começa com o som /B/.",
-    nivel3:
-      "Cada letra do alfabeto tem um som próprio. Aprender esses sons ajuda a ler novas palavras.",
-    nivel4:
-      "Fonema = som que falamos. Grafema = letra que escrevemos. A escrita alfabética liga um ao outro.",
+    nivel1: "A letra S faz /s/. Dentes juntos, ar saindo.",
+    nivel2: "SOL, SAPO, SOPA, SUCO — todas com /s/.",
+    nivel3: "S + vogal = sílaba: SA, SE, SI, SO, SU.",
+    nivel4: "S é uma fricativa: o som se PROLONGA (/sssss/) — dá pra esticar.",
   },
 
   exemploResolvido: {
-    enunciado: "Qual é o primeiro som da palavra BOLA?",
+    enunciado: "Qual figura começa com S: SORVETE, MÃE ou GATO?",
     passos: [
-      "Fale a palavra bem devagar: B... O... L... A.",
-      "Escute o primeiro som que sai da sua boca.",
-      "Esse som é /B/ — a letra que escreve esse som é o B.",
+      "Fale cada palavra devagar: /s/ORVETE, /m/ÃE, /g/ATO.",
+      "O som /s/ aparece no começo de SORVETE.",
+      "S = /s/.",
     ],
-    resposta: "A palavra BOLA começa com o som da letra B.",
+    resposta: "SORVETE — começa com a letra S (/s/).",
   },
 
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir o nome. Depois, toque na letra que começa a palavra.",
-    resposta: "BOLA começa com B.",
-    explicacao:
-      "Quando falamos 'bola', o primeiro som que sai é /B/. A letra que registra esse som é o B.",
+    enunciado: "Toque na figura que começa com S (/s/).",
+    resposta: "SAPO — começa com /s/.",
+    explicacao: "Fale cada figura devagar antes de tocar.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Qual figura tem o nome que começa com o som /B/?",
+      pergunta: "Qual figura começa com /s/?",
       opcoes: [
+        { nome: "sapo", imagemUrl: sapoImg },
+        { nome: "mãe", imagemUrl: maeImg },
         { nome: "bola", imagemUrl: bolaImg },
         { nome: "gato", imagemUrl: gatoImg },
-        { nome: "sol", imagemUrl: solImg },
       ],
-      respostaCerta: "bola",
+      respostaCerta: "sapo",
     },
   },
 
   exercicios: [
     {
-      enunciado: "🎧 Qual é o primeiro som de MAÇÃ?",
-      resposta: "O som /M/ — a letra M.",
-      dica: "Fale devagar: M... a... çã. O primeiro som é /M/.",
+      enunciado: "🔊 Qual começa com /s/: SOMBRINHA, MÃE ou GATO?",
+      resposta: "SOMBRINHA — /s/.",
+      dica: "Cobrinha /sssss/.",
     },
     {
-      enunciado: "🎧 Qual é o primeiro som de SAPO?",
-      resposta: "O som /S/ — a letra S.",
-      dica: "S... a... po. Começa com /S/, igual em SOL e SAPATO.",
+      enunciado: "🎧 SOL e SOPA começam iguais?",
+      resposta: "Sim, os dois com /s/. Aliteração.",
+      dica: "Fale devagar.",
     },
     {
-      enunciado: "🎧 Qual é o primeiro som de PATO?",
-      resposta: "O som /P/ — a letra P.",
-      dica: "P... a... to. O primeiro som é /P/, com os lábios juntos.",
+      enunciado: "🐍 A letra S parece qual bicho?",
+      resposta: "Uma cobrinha — /sssss/.",
+      dica: "O desenho é curvinho.",
     },
   ],
 
   desafio: {
-    enunciado:
-      "Desafio Brilha: descubra a primeira letra de cada figura da ponte.",
-    resposta:
-      "Cada palavra começa com um som — e cada som tem uma letra pra representá-lo.",
+    enunciado: "Desafio Brilha: separar figuras de M, S e uma pegadinha.",
+    resposta: "Time S: sol, sapo, sopa · Time M: mãe · Fora: gato.",
     visual: {
       cena: [
-        { personagem: "ABELHA", itemImagemUrl: abelhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "BANANA", itemImagemUrl: bananaImg, quantidade: 1, cor: "#FDE047" },
-        { personagem: "PEIXE", itemImagemUrl: peixeImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "Time S", itemImagemUrl: solImg, quantidade: 3, cor: "#FBBF24" },
+        { personagem: "Time M", itemImagemUrl: maeImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fora", itemImagemUrl: gatoImg, quantidade: 1, cor: "#94A3B8" },
       ],
       perguntas: [
         {
-          pergunta: "🐝 Qual é a primeira letra de ABELHA?",
-          opcoes: ["A", "E", "B"],
+          pergunta: "Qual começa com /s/?",
+          opcoes: ["Sopa", "Mãe", "Gato"],
           correta: 0,
-          explicacao: "ABELHA começa com o som /A/ — letra A.",
+          explicacao: "SOPA — /s/.",
         },
         {
-          pergunta: "🍌 Qual é a primeira letra de BANANA?",
-          opcoes: ["N", "B", "A"],
+          pergunta: "Qual começa com /m/?",
+          opcoes: ["Sol", "Mãe", "Bola"],
           correta: 1,
-          explicacao: "BANANA começa com o som /B/ — letra B.",
+          explicacao: "MÃE — /m/.",
         },
         {
-          pergunta: "🐟 Qual é a primeira letra de PEIXE?",
-          opcoes: ["P", "X", "E"],
-          correta: 0,
-          explicacao: "PEIXE começa com o som /P/ — letra P.",
+          pergunta: "Qual NÃO é S nem M?",
+          opcoes: ["Sol", "Mãe", "Gato"],
+          correta: 2,
+          explicacao: "GATO — /g/.",
         },
       ],
     },
@@ -151,130 +180,133 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "🗣️ Fala = sons que saem da nossa boca.",
-      "✍️ Escrita = letras que representam esses sons.",
-      "🔊 Toda palavra tem um som inicial (o primeiro som).",
-      "🔤 Cada som tem uma letra (ou grupo de letras) que o representa.",
+      "A letra S faz o som /s/.",
+      "Cobrinha: /sssss/ com ar entre os dentes.",
+      "SOL, SAPO, SOPA, SUCO, SEMENTE, SORVETE — todas com /s/.",
+      "S + vogal = SA, SE, SI, SO, SU.",
     ],
-    dica: "Antes de escrever, fale a palavra bem devagar e escute cada som.",
+    dica: "Se der pra esticar /sssss/, é a letra S.",
   },
 
   quiz: [
     {
-      pergunta: "As letras servem pra:",
-      opcoes: [
-        "Representar os sons da fala",
-        "Apenas desenhar",
-        "Apenas contar",
-      ],
+      pergunta: "Qual figura começa com S?",
+      opcoes: ["Sol", "Mãe", "Gato"],
       correta: 0,
-      explicacao:
-        "As letras registram no papel os sons que a gente fala. Por isso a escrita alfabética existe.",
+      explicacao: "SOL — /s/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+          { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+          { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+        ],
+      },
     },
     {
-      pergunta: "Qual é a primeira letra da palavra GATO?",
-      opcoes: ["T", "G", "O"],
+      pergunta: "Qual figura começa com S?",
+      opcoes: ["Bola", "Sopa", "Pato"],
       correta: 1,
-      explicacao: "GATO começa com o som /G/ — letra G.",
+      explicacao: "SOPA — /s/.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+          { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
+          { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        ],
+      },
     },
     {
-      pergunta: "Na palavra BOLA, qual som aparece primeiro?",
-      opcoes: ["/L/", "/A/", "/B/"],
-      correta: 2,
-      explicacao: "B... o... la. O primeiro som é /B/.",
+      pergunta: "Qual é o som da letra S?",
+      opcoes: ["/m/", "/s/", "/p/"],
+      correta: 1,
+      explicacao: "S = /s/.",
     },
     {
-      pergunta: "Relacionar sons e letras ajuda a:",
-      opcoes: [
-        "Ler e escrever melhor",
-        "Contar dinheiro",
-        "Medir objetos",
-      ],
-      correta: 0,
-      explicacao:
-        "Quando ligamos som e letra, conseguimos LER palavras novas e ESCREVER o que falamos.",
+      pergunta: "Como a boca fica ao falar /s/?",
+      opcoes: ["Lábios fechados", "Dentes juntos, ar saindo", "Boca em bico"],
+      correta: 1,
+      explicacao: "Dentes juntinhos e ar entre eles.",
     },
   ],
 
   conclusao:
-    "🏅 Medalha conquistada: Guardião dos Sons! Missão em Família: escolha 5 objetos da casa, fale o nome bem devagar e descubra o primeiro som e a letra que o representa.",
+    "🏅 Medalha: Amigo da Cobrinha! Missão em Casa: encontrar 3 coisas em casa que começam com S (sofá, sapato, sabão, suco, sal…).",
 
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Quando aprendemos a relacionar sons e letras, nosso cérebro cria conexões novas — é essa mágica que faz a gente conseguir LER palavras que nunca viu antes.",
+      "O som /s/ é um dos primeiros que a criança aprende a esticar. Sopros longos como /ssss/ ajudam até no controle da respiração — por isso fonoaudiólogos treinam esse som primeiro.",
   },
 
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Escute o Som",
-      instrucao:
-        "Toque na figura pra ouvir. Qual palavra começa com o som /B/?",
-      pergunta: "Qual figura começa com o som /B/?",
-      opcoes: [
-        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
-        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
-        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · S de Sol",
+      instrucao: "Toque na figura que começa com /s/.",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       ],
-      correta: 0,
-      acerto: "🎉 BOLA começa com o som /B/ — letra B!",
-      erro: "Escute de novo: /B/... busque a figura que começa assim.",
+      pergunta: "Qual começa com /s/?",
+      opcoes: ["Mãe", "Sol", "Gato"],
+      correta: 1,
+      acerto: "SOL — /s/!",
+      erro: "Cobrinha /sssss/: /s/OL.",
     },
     {
-      tipo: "arrastar",
-      titulo: "Fase 2 · Ligue Som e Letra",
-      instrucao:
-        "Toque na figura pra ouvir o nome. Depois arraste a letra do som inicial até a caixa da figura.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Família S",
+      instrucao: "Ligue cada figura à letra S.",
       pares: [
-        { item: "M", alvo: "🍎 Maçã" },
-        { item: "G", alvo: "🐱 Gato" },
-        { item: "C", alvo: "🚗 Carro" },
-      ],
-      alvosVisuais: [
-        { nome: "🍎 Maçã", cor: "#F87171", capacidade: 1 },
-        { nome: "🐱 Gato", cor: "#FBBF24", capacidade: 1 },
-        { nome: "🚗 Carro", cor: "#60A5FA", capacidade: 1 },
+        { a: "S", b: "Sol", aImagem: estrelaImg, bImagem: solImg },
+        { a: "S", b: "Sapo", aImagem: estrelaImg, bImagem: sapoImg },
+        { a: "S", b: "Sopa", aImagem: estrelaImg, bImagem: sopaImg },
+        { a: "S", b: "Suco", aImagem: estrelaImg, bImagem: sucoImg },
       ],
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Descubra a Letra que Falta",
-      instrucao:
-        "Falta a primeira letra: _ O L. Toque pra ouvir cada opção e escolha a certa.",
-      figura: { imagemUrl: solImg, rotulo: "☀️ _ O L" },
-      pergunta: "Qual letra completa a palavra SOL?",
-      opcoes: ["S", "P", "T"],
-      correta: 0,
-      acerto: "🌟 SOL! O primeiro som é /S/ — letra S.",
-      erro: "Escute de novo: S... o... l. O primeiro som é /S/.",
-    },
-    {
-      tipo: "escolherFigura",
-      titulo: "Fase 4 · O Eco da Floresta",
-      instrucao:
-        "O Brilha falou uma palavra que começa com o som /S/. Qual dessas figuras é ela?",
-      pergunta: "Qual figura começa com o som /S/?",
-      opcoes: [
-        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
-        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
-        { nome: "PATO", imagemUrl: patoImg, rotulo: "🦆 PATO" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · S ou M?",
+      instrucao: "Toque só na figura que começa com /s/ (não com /m/).",
+      grupos: [
+        { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+        { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
       ],
-      correta: 0,
-      acerto: "🐸 SAPO começa com o som /S/ — letra S!",
-      erro: "Escute de novo: /S/... procure a figura que começa assim.",
+      pergunta: "Qual começa com /s/?",
+      opcoes: ["Mãe", "Sopa", "Pato"],
+      correta: 1,
+      acerto: "SOPA — /s/. MÃE é /m/.",
+      erro: "MÃE é /m/. A cobrinha /s/ está em SOPA.",
     },
     {
-      tipo: "escolherEscrita",
-      titulo: "Fase 5 · Construa a Palavra",
-      instrucao:
-        "Falta a primeira letra da palavra da figura. Toque pra ouvir cada opção.",
-      figura: { imagemUrl: abelhaImg, rotulo: "🐝 _ B E L H A" },
-      pergunta: "Qual letra começa a palavra ABELHA?",
-      opcoes: ["A", "E", "B"],
+      tipo: "ordenar",
+      titulo: "Fase 4 · Trio S",
+      instrucao: "Coloque em ordem: Sol → Sapo → Suco.",
+      itens: ["sol", "sapo", "suco"],
+      imagens: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "1º · Sol" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "2º · Sapo" },
+        { imagemUrl: sucoImg, quantidade: 1, rotulo: "3º · Suco" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Mais S",
+      instrucao: "Qual começa com /s/?",
+      grupos: [
+        { imagemUrl: sombrinhaImg, quantidade: 1, rotulo: "sombrinha" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+      ],
+      pergunta: "Qual começa com /s/?",
+      opcoes: ["Sombrinha", "Bola", "Gato"],
       correta: 0,
-      acerto: "🐝 ABELHA! O primeiro som é /A/ — letra A.",
-      erro: "Fale devagar: A... belha. O primeiro som é /A/.",
+      acerto: "SOMBRINHA — /s/!",
+      erro: "Fale /s/OMBRINHA. Cobrinha no começo.",
     },
   ],
 
@@ -282,81 +314,103 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "🐶 Qual é a primeira letra de CACHORRO?",
-        opcoes: ["C", "R", "O"],
+        pergunta: "Qual começa com S?",
+        opcoes: ["Sol", "Mãe", "Bola"],
         correta: 0,
-        explicacao: "CACHORRO começa com o som /C/ — letra C.",
-        visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶 CACHORRO" },
+        explicacao: "SOL.",
+        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
       },
       {
-        pergunta: "🍌 Qual é a primeira letra de BANANA?",
-        opcoes: ["N", "A", "B"],
+        pergunta: "Qual começa com S?",
+        opcoes: ["Bola", "Sapo", "Pato"],
+        correta: 1,
+        explicacao: "SAPO.",
+        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+      },
+      {
+        pergunta: "Qual começa com S?",
+        opcoes: ["Mãe", "Gato", "Suco"],
         correta: 2,
-        explicacao: "BANANA começa com o som /B/ — letra B.",
-        visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BANANA" },
-      },
-      {
-        pergunta: "🐟 Qual é a primeira letra de PEIXE?",
-        opcoes: ["P", "X", "E"],
-        correta: 0,
-        explicacao: "PEIXE começa com o som /P/ — letra P.",
-        visual: { tipo: "itens", imagemUrl: peixeImg, quantidade: 1, rotulo: "🐟 PEIXE" },
+        explicacao: "SUCO.",
+        visual: { tipo: "itens", imagemUrl: sucoImg, quantidade: 1, rotulo: "suco" },
       },
     ],
     medio: [
       {
-        pergunta: "Qual palavra começa com o som /S/?",
-        opcoes: ["GATO", "SAPO", "PATO"],
+        pergunta: "SOL e SAPO — o que têm em comum?",
+        opcoes: ["Rimam", "Começam com /s/", "Nada"],
         correta: 1,
-        explicacao: "SAPO começa com o som /S/ — letra S.",
-        visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸 SAPO" },
+        explicacao: "Aliteração de /s/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: solImg, quantidade: 1, rotulo: "SOL", cor: "#FBBF24" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "SAPO", cor: "#34D399" },
+          ],
+        },
       },
       {
-        pergunta: "Qual palavra começa com o som /M/?",
-        opcoes: ["MAÇÃ", "CARRO", "PATO"],
-        correta: 0,
-        explicacao: "MAÇÃ começa com o som /M/ — letra M.",
-        visual: { tipo: "itens", imagemUrl: macaImg, quantidade: 1, rotulo: "🍎 MAÇÃ" },
-      },
-      {
-        pergunta: "Qual palavra começa com o som /C/?",
-        opcoes: ["ABELHA", "SAPO", "CARRO"],
+        pergunta: "Qual NÃO começa com /s/?",
+        opcoes: ["Sopa", "Suco", "Mãe"],
         correta: 2,
-        explicacao: "CARRO começa com o som /C/ — letra C.",
-        visual: { tipo: "itens", imagemUrl: carroImg, quantidade: 1, rotulo: "🚗 CARRO" },
+        explicacao: "MÃE — /m/.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
+            { imagemUrl: sucoImg, quantidade: 1, rotulo: "suco" },
+            { imagemUrl: maeImg, quantidade: 1, rotulo: "mãe" },
+          ],
+        },
+      },
+      {
+        pergunta: "S + O forma:",
+        opcoes: ["OS", "SO", "SI"],
+        correta: 1,
+        explicacao: "S + O = SO.",
       },
     ],
     dificil: [
       {
-        pergunta: "As letras servem pra representar...",
-        opcoes: ["Sons da fala", "Números", "Cores"],
+        pergunta: "Qual grupo tem SÓ /s/?",
+        opcoes: [
+          "sol · sapo · suco",
+          "sol · mãe · gato",
+          "bola · pato · gato",
+        ],
         correta: 0,
-        explicacao:
-          "As letras representam no papel os sons que a gente fala. Isso é a escrita alfabética.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "🔊 → ✍️" },
+        explicacao: "Todas com /s/.",
       },
       {
-        pergunta: "Se eu falo /P/, /A/, /T/, /O/, que palavra é essa?",
-        opcoes: ["PATO", "GATO", "MATO"],
-        correta: 0,
-        explicacao: "Juntando os sons /P/ + /A/ + /T/ + /O/ formamos PATO.",
-        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "🦆 PATO" },
+        pergunta: "SEMENTE e SORVETE — o que compartilham?",
+        opcoes: ["Rimam", "Começam com /s/", "Nada"],
+        correta: 1,
+        explicacao: "Aliteração de /s/.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: sementeImg, quantidade: 1, rotulo: "SEMENTE", cor: "#60A5FA" },
+            { imagemUrl: sorveteImg, quantidade: 1, rotulo: "SORVETE", cor: "#F472B6" },
+          ],
+        },
       },
       {
-        pergunta: "Duas palavras começam com o mesmo som. Quais?",
-        opcoes: ["SAPO e SOL", "GATO e PATO", "BOLA e MAÇÃ"],
+        pergunta: "Por que /s/ é chamado de som CONTÍNUO?",
+        opcoes: [
+          "Porque dá pra esticar bem longo",
+          "Porque é curto",
+          "Porque é alto",
+        ],
         correta: 0,
-        explicacao:
-          "SAPO e SOL começam com o som /S/. Palavras que começam com o mesmo som têm a mesma letra inicial.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "🔊 /S/" },
+        explicacao: "Sons contínuos podem ser prolongados: /ssssss/, /mmmmm/, /fffff/.",
+        visual: { tipo: "itens", imagemUrl: setaCimaImg, quantidade: 1, rotulo: "→ contínuo" },
       },
     ],
   },
 
   proximaHabilidade: {
     codigo: "EF01LP06",
-    titulo:
-      "Segmentar oralmente palavras em sílabas",
+    titulo: "A letra P — som /p/ (pato, pipa, pente)",
   },
 };
 
