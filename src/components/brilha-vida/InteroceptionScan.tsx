@@ -178,14 +178,19 @@ export function InteroceptionScan({ onClose }: { onClose: () => void }) {
             <div className="bg-white rounded-3xl p-6 border-2 border-slate-100 shadow-xl mb-3">
               <div className="flex items-center gap-3 mb-3">
                 <div className="text-5xl">{passo.emoji}</div>
-                <div>
+                <div className="flex-1">
                   <div className="text-xs font-black text-primary uppercase tracking-widest">
                     {idx + 1} de {PASSOS.length}
                   </div>
                   <div className="text-xl font-black text-slate-800">{passo.parte}</div>
                 </div>
+                <div className="rounded-2xl bg-rose-50 p-1">
+                  <DemoAnimado tipo={passo.demo} size={90} />
+                </div>
               </div>
-              <p className="text-slate-700 font-medium mb-4">{passo.pergunta}</p>
+              <p className="text-slate-700 font-medium mb-3">{passo.pergunta}</p>
+              <div className="mb-4"><VozGuia texto={passo.narracao} /></div>
+
 
               {pausa > 0 ? (
                 <div className="text-center py-6 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
