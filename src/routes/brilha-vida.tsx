@@ -28,6 +28,10 @@ import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
 import { InteroceptionScan } from "@/components/brilha-vida/InteroceptionScan";
 import { ZonesRegulation } from "@/components/brilha-vida/ZonesRegulation";
 import { MoodMeterRuler } from "@/components/brilha-vida/MoodMeterRuler";
+import { FirstThenBoard } from "@/components/brilha-vida/FirstThenBoard";
+import { CronogramaVisual } from "@/components/brilha-vida/CronogramaVisual";
+import { TimerVisual } from "@/components/brilha-vida/TimerVisual";
+import { CartaoEscolha } from "@/components/brilha-vida/CartaoEscolha";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
@@ -123,12 +127,20 @@ const categorias = [
     descricao: "Zones of Regulation + Mood Meter (RULER/Yale) para vocabulário emocional expandido",
     atividades: ["Zonas de Regulação", "Medidor de Emoções"],
   },
+  {
+    id: "tea-tdah",
+    nome: "Ferramentas TEA e TDAH",
+    img: catRotinaImg,
+    cor: "from-teal-300/30 to-teal-100/5",
+    descricao: "Suportes visuais clínicos: Primeiro-Depois, Cronograma, Time Timer e Cartão de Escolha",
+    atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
+  },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -222,6 +234,22 @@ function BrilhaVida() {
       setCustomActivity("moodmeter");
       return;
     }
+    if (tipo === "Primeiro… Depois") {
+      setCustomActivity("firstthen");
+      return;
+    }
+    if (tipo === "Meu Dia em Cartões") {
+      setCustomActivity("cronograma");
+      return;
+    }
+    if (tipo === "Relógio Vermelho") {
+      setCustomActivity("timer");
+      return;
+    }
+    if (tipo === "Você Escolhe") {
+      setCustomActivity("escolha");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
@@ -280,6 +308,10 @@ function BrilhaVida() {
     escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
     zones: { node: <ZonesRegulation onClose={() => setCustomActivity(null)} />, contexto: "Zonas de Regulação" },
     moodmeter: { node: <MoodMeterRuler onClose={() => setCustomActivity(null)} />, contexto: "Medidor de Emoções" },
+    firstthen: { node: <FirstThenBoard onClose={() => setCustomActivity(null)} />, contexto: "Primeiro… Depois" },
+    cronograma: { node: <CronogramaVisual onClose={() => setCustomActivity(null)} />, contexto: "Meu Dia em Cartões" },
+    timer: { node: <TimerVisual onClose={() => setCustomActivity(null)} />, contexto: "Relógio Vermelho" },
+    escolha: { node: <CartaoEscolha onClose={() => setCustomActivity(null)} />, contexto: "Você Escolhe" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
