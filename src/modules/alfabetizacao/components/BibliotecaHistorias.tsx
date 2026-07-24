@@ -177,7 +177,11 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
 
       <AnimatePresence>
         {ativa && (
-          <LeitorHistoria historia={ativa} onSair={() => setAtiva(null)} />
+          <LeitorHistoria
+            historia={ativa}
+            childId={childId}
+            onSair={() => setAtiva(null)}
+          />
         )}
       </AnimatePresence>
     </div>
@@ -193,19 +197,48 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
 
 type ModoPagina = "professor" | "crianca";
 
+/* =========================================================================
+ * LEITOR — Blocos 1 + 2 + 3
+ *   A) Karaoke sincronizado (Bloco 1)
+ *   B) Modo "sua vez" tap-in-order (Bloco 1)
+ *   C) Perguntas com tipo (Bloco 2)
+ *   D) Decodable alignment (Bloco 2 — no card externo)
+ *   E) Pré-ensino de vocabulário + medição de WPM + releitura (Bloco 3)
+ * =======================================================================*/
+
+type ModoPagina = "professor" | "crianca";
+type FaseLeitor = "vocab" | "leitura" | "perguntas" | "fim";
+
 function LeitorHistoria({
   historia,
+  childId,
   onSair,
 }: {
   historia: HistoriaGraduada;
+  childId: string;
   onSair: () => void;
 }) {
   const { falar, parar } = useVoz();
   const [pagina, setPagina] = useState(0);
-  const [fase, setFase] = useState<"leitura" | "perguntas" | "fim">("leitura");
+  // Vocab só faz sentido a partir do N3 e se houver palavras no dicionário
+  const vocabChave = useMemo<PalavraChave[]>(
+    () => (precisaPreEnsinoVocab(historia) ? vocabChaveAutomatico(historia) : []),
+    [historia],
+  );
+  const [fase, setFase] = useState<FaseLeitor>(
+    vocabChave.length > 0 ? "vocab" : "leitura",
+  );
+  const [vocabIdx, setVocabIdx] = useState(0);
   const [perguntaIdx, setPerguntaIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
+  const [rodada, setRodada] = useState(1); // 1 = 1ª leitura, 2+ = releitura
+
+  // Fluência (WPM) — só página em modo criança
+  const fluencia = useFluencia();
+  const [recordePrevio] = useState<number | null>(() =>
+    melhorWPM(childId, historia.id),
+  );
 
   const totalPag = historia.paginas.length;
   const pAtual = historia.paginas[pagina];
