@@ -2405,7 +2405,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
               onClick={() => handleClick(palavra)}
               className={`rounded-3xl border-2 p-5 flex flex-col items-center gap-3 transition-all font-black text-lg ${bg}`}
             >
-              <RenderEmoji e={emoji} className={imgSize} />
+              <RenderEmoji e={emoji} label={palavra} className={imgSize} />
               <span>{palavra}</span>
             </button>
           );
