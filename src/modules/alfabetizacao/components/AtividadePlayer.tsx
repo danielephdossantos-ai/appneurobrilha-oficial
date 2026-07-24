@@ -5,7 +5,6 @@ import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
 import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { falarSom } from "../data/palavras";
 import { recordSkillAttempt } from "@/services/neuro-treino/neuroMetrics";
 import {
   Volume2,
@@ -67,36 +66,36 @@ const INTRO_ETAPA: Record<
   vogais: {
     titulo: "Hoje vamos treinar as VOGAIS",
     texto:
-      "As vogais são cinco sons especiais: A, E, I, O, U. Elas aparecem em quase toda palavra que a gente fala.",
+      "Algumas palavras começam com vogais. A vogal aparece grande na tela para a criança olhar antes de responder.",
     comoJogar:
-      "Eu falo um som e você toca na imagem que começa com aquele som. Se errar, o Professor Brilha explica e você tenta de novo.",
+      "Olhe a vogal na tela e toque na imagem que começa com ela. Se errar, o Professor Brilha explica e você tenta de novo.",
     paraPais:
-      "Objetivo clínico: consciência fonêmica de vogais (identificação do som inicial). Reforce sempre o SOM da vogal (‘ААА’), não o NOME da letra. Fale devagar, exagere um pouco o som e peça para a criança repetir antes de tocar.",
+      "Objetivo clínico: consciência fonêmica de vogais (identificação do início da palavra). Para evitar erro do sintetizador de voz, o app mostra a vogal na tela e não fala vogais isoladas. O adulto pode modelar oralmente se estiver acompanhando.",
     exemplo: {
       passos: [
-        "1) O Professor fala: “Toque na imagem que começa com Ааа”.",
+        "1) A tela mostra uma vogal grande.",
         "2) Aparecem 4 imagens (ex.: ABELHA, BOLA, IGREJA, UVA).",
-        "3) A criança repete “Ааа-ААA” e escolhe ABELHA.",
+        "3) A criança olha a vogal e escolhe a imagem que começa com ela.",
         "4) Acerto → o Professor confirma e a próxima rodada começa.",
-        "5) Erro → a letra A aparece grande, o som toca 3× e ela tenta de novo.",
+        "5) Erro → a letra aparece grande e a criança tenta de novo sem o app soletrar.",
       ],
-      dica: "Se ela travar, aponte para a imagem e diga o nome bem devagar: “ААААААбelha começa com Ааа”.",
+      dica: "Se ela travar, aponte para a vogal e para a imagem correta; deixe o adulto fazer a fala, não o sintetizador.",
     },
   },
   silabas: {
     titulo: "Vamos brincar com as SÍLABAS",
     texto:
-      "Toda palavra pode ser dividida em pedacinhos. Cada pedacinho é uma sílaba: BO-LA, CA-SA, SA-PA-TO.",
+      "Toda palavra pode ser dividida em pedacinhos. A criança olha os blocos na tela e junta ou conta esses pedacinhos.",
     comoJogar:
       "Você vai contar os pedacinhos da palavra ou juntar sílabas para formar a palavra certa.",
     paraPais:
-      "Objetivo clínico: segmentação silábica e fusão. Bata palma junto a cada sílaba — o toque no corpo ajuda a consolidar a divisão. Não trabalhe leitura ainda: aqui é OUVIDO, não olho.",
+      "Objetivo clínico: segmentação silábica e fusão. Bata palma junto a cada pedacinho — o toque no corpo ajuda a consolidar a divisão. O app mostra os blocos e evita ler sílabas isoladas para não distorcer a pronúncia.",
     exemplo: {
       passos: [
-        "1) O Professor fala a palavra: “SA-PA-TO”.",
-        "2) Bata 3 palmas junto com a criança: SA 👏 PA 👏 TO 👏.",
+        "1) A tela mostra uma palavra ou os pedacinhos dela.",
+        "2) Bata palmas junto com a criança: uma palma para cada pedacinho.",
         "3) Pergunta: “Quantos pedacinhos tem?” → toque no número 3.",
-        "4) Na fusão: aparecem chips SA · PA · TO e 4 imagens. A criança toca no SAPATO.",
+        "4) Na fusão: aparecem blocos de pedacinhos e 4 imagens. A criança junta com os olhos e toca na imagem correta.",
       ],
       dica: "Palmas ou passos com o pé funcionam melhor que contar nos dedos.",
     },
@@ -108,33 +107,33 @@ const INTRO_ETAPA: Record<
     comoJogar:
       "Ouça a palavra de referência e toque na imagem que combina: mesmo som inicial, mesma rima ou mesma letra de começo.",
     paraPais:
-      "Objetivo clínico: consciência fonológica de rima, aliteração e som inicial. Sempre ouça a palavra-referência 2× antes de escolher — bloqueia respostas por adivinhação visual.",
+      "Objetivo clínico: consciência fonológica de rima, aliteração e som inicial. A fala automática fica restrita a palavras completas e instruções seguras; letras isoladas ficam como pista visual na tela.",
     exemplo: {
       passos: [
         "1) Aparece a imagem-referência (ex.: GATO) e o Professor fala: “Qual imagem RIMA com GATO?”.",
         "2) Aparecem 4 imagens: PATO, BOLA, CASA, SOL.",
-        "3) A criança repete: “GAAA-TO… PAAA-TO… rima!”.",
+        "3) A criança compara as imagens e percebe que GATO e PATO terminam parecido.",
         "4) Toca em PATO → acerto e próxima rodada.",
       ],
-      dica: "Alongue o fim da palavra: “ga-TOOO / pa-TOOO”. É o final igual que forma a rima.",
+      dica: "Se necessário, o adulto pode repetir as palavras devagar; o app não força leitura de sons isolados.",
     },
   },
   fonemas: {
     titulo: "Detetive dos FONEMAS",
     texto:
-      "Fonema é o menor som de uma palavra. GATO tem 4 fonemas: G-A-T-O. Trocar um fonema muda a palavra inteira: GATO vira PATO!",
+      "Fonema é o menor som de uma palavra. Nesta etapa, a criança observa a pista visual e escolhe a imagem que combina.",
     comoJogar:
-      "Ouça com atenção e ache o som do começo, do meio, do fim, conte quantos sons tem ou troque um som pelo outro.",
+      "Olhe a pista na tela, pense no começo, no meio ou no fim da palavra e toque na resposta correta.",
     paraPais:
-      "Objetivo clínico: consciência FONÊMICA (o nível mais fino da consciência fonológica — preditor #1 de leitura). Trabalhe SEMPRE em voz alta e devagar; jamais mostre a palavra escrita nesta etapa.",
+      "Objetivo clínico: consciência FONÊMICA (nível fino da consciência fonológica). Para manter a fala confiável, o app não lê consoantes isoladas; ele mostra a pista visual e fala apenas instruções seguras.",
     exemplo: {
       passos: [
-        "1) O Professor fala: “Troque o /g/ de GATO por /p/. Qual palavra aparece?”.",
-        "2) A criança repete: “G-A-T-O… P-A-T-O”.",
-        "3) Toca na imagem de PATO.",
-        "4) Contagem: “GATO tem quantos sons?” → toca no número 4.",
+        "1) A tela mostra a pista visual da troca ou da letra.",
+        "2) A criança compara as imagens com calma.",
+        "3) Toca na imagem correta.",
+        "4) Nas contagens, usa os dedos para marcar cada som percebido.",
       ],
-      dica: "Use dedos: um dedo para cada som (G-A-T-O = 4 dedos). Isso torna o fonema visível.",
+      dica: "Use dedos: um dedo para cada som percebido. Isso torna o fonema visível sem depender da voz automática.",
     },
   },
   frases: {
@@ -277,15 +276,6 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     rodadaInicio.current = Date.now();
   }
 
-  // Modelagem sonora: fala o som do grafema/rima 3x, com pausas curtas.
-  function modelarSom(foco: string) {
-    const fonema = falarSom(foco);
-    const trilha = [0, 900, 1800];
-    trilha.forEach((delay) =>
-      agendar(() => falar(fonema), delay + 200),
-    );
-  }
-
   function grafemaDaRodada(): string | null {
     // Prioridade: foco explícito → primeira letra da resposta certa.
     if (rodada.foco && rodada.foco.length <= 4) return rodada.foco.toUpperCase();
@@ -331,11 +321,10 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     setErrosNaRodada(novoErros);
     setUltimaRegra(rodada.regra);
 
-    // Fase D · Modelagem sonora: mostra o grafema/som e ecoa 3x.
+    // Fase D · Modelagem visual: mostra o grafema, sem falar letras isoladas.
     const grafema = grafemaDaRodada();
     if (grafema) {
       setModelagem(grafema);
-      modelarSom(grafema);
     }
 
     if (novoErros >= 2) {
@@ -355,6 +344,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const usaGridNumero = TIPOS_NUMERO.has(rodada.tipo);
   const usaReferencia = TIPOS_COM_REFERENCIA.has(rodada.tipo);
   const imagensGrid = usaReferencia ? rodada.imagens.slice(1) : rodada.imagens;
+  const textoPergunta = rodada.instrucaoVisual ?? rodada.instrucaoFalada;
 
   // ---- Intro (explicação antes da aula) ----
   if (mostrarIntro) {
@@ -560,7 +550,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
-      {/* Fase D · Modelagem sonora — grafema grande + eco do som */}
+      {/* Fase D · Modelagem visual — grafema grande sem fala de som isolado */}
       <AnimatePresence>
         {modelagem && feedback === "erro" && (
           <motion.div
@@ -570,12 +560,10 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             className="mx-auto mt-3 flex flex-col items-center gap-2"
           >
             <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
-              O som é
+              A pista é
             </span>
-            <button
-              onClick={() => modelarSom(modelagem)}
+              <div
               className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl flex items-center justify-center border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform"
-              aria-label={`Ouvir o som ${modelagem}`}
             >
               <motion.span
                 key={modelagem}
@@ -585,17 +573,25 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
               >
                 {modelagem}
               </motion.span>
-            </button>
+              </div>
             <span className="text-xs font-bold text-white/80">
-              toque para ouvir de novo
+              olhe a pista para tentar de novo
             </span>
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+        {rodada.instrucaoVisual && (
+          <div className="w-full max-w-2xl rounded-2xl bg-white/10 border border-white/15 px-4 py-3 text-center shadow">
+            <p className="text-lg sm:text-2xl font-black text-white leading-tight">
+              {textoPergunta}
+            </p>
+          </div>
+        )}
+
         {/* Sílabas visíveis (fusão / segmentação): chips grandes que a criança
-            toca para ouvir cada pedacinho. Fica em cima das imagens. */}
+            observa antes de responder. Não há áudio de sílabas isoladas para evitar leitura errada. */}
         {rodada.silabas && rodada.silabas.length > 0 && (
           <div className="flex flex-col items-center gap-2">
             <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
@@ -605,22 +601,14 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             </span>
             <div className="flex flex-wrap items-center justify-center gap-2">
               {rodada.silabas.map((s, i) => (
-                <button
+                <div
                   key={`${s}-${i}`}
-                  onClick={() => falar(s.toLowerCase())}
                   className="min-w-[3.5rem] px-4 py-3 rounded-2xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-xl border-2 border-white/40 active:scale-95 hover:scale-105 transition-transform text-3xl sm:text-4xl font-black leading-none"
-                  aria-label={`Ouvir ${s}`}
                 >
                   {s.toUpperCase()}
-                </button>
+                </div>
               ))}
             </div>
-            <button
-              onClick={() => falar(rodada.silabas!.join("... ").toLowerCase())}
-              className="mt-1 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold"
-            >
-              <Volume2 className="w-4 h-4" /> Ouvir tudo
-            </button>
           </div>
         )}
 
@@ -633,16 +621,13 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
               <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
                 Toque na imagem que começa com
               </span>
-              <button
-                onClick={() => falar(falarSom(rodada.foco!))}
+              <div
                 className="min-w-[7rem] px-6 py-3 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform flex items-center gap-3"
-                aria-label={`Ouvir o som ${rodada.foco}`}
               >
                 <span className="text-6xl sm:text-7xl font-black leading-none">
                   {rodada.foco.toUpperCase()}
                 </span>
-                <Volume2 className="w-6 h-6" />
-              </button>
+              </div>
             </div>
           )}
 

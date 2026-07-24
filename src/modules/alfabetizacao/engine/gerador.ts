@@ -1,5 +1,5 @@
 // Geradores de atividades com regra pedagógica explícita (Professor Digital).
-import { PALAVRAS, Palavra, VOGAIS, falarSom } from "../data/palavras";
+import { PALAVRAS, Palavra, VOGAIS } from "../data/palavras";
 import { FRASES, HISTORIAS } from "../data/historias";
 import { filtrarComSRS, marcarUsada } from "./srs";
 import {
@@ -27,9 +27,21 @@ function numDistratores(nivel: number): number {
   return nivel <= 1 ? 1 : 2;
 }
 
+function rotuloVisualInicial(som: string): string {
+  const s = som.toUpperCase();
+  if (VOGAIS.includes(s as (typeof VOGAIS)[number])) return `a vogal ${s}`;
+  if (s.length === 1) return `a consoante ${s}`;
+  return `as letras ${s}`;
+}
+
 export interface Rodada {
   tipo: string;
+  // Texto seguro para o TTS. Não deve conter vogais/consoantes isoladas,
+  // sílabas soletradas ou sequências que o sintetizador possa pronunciar errado.
   instrucaoFalada: string;
+  // Texto visível na tela. Pode mostrar a letra/sílaba que o adulto e a criança veem,
+  // sem obrigar o app a falar esse som isolado.
+  instrucaoVisual?: string;
   imagens: string[];
   correta: string;
   numero?: number;
@@ -68,7 +80,7 @@ export function gerarRima(nivel = 2): Rodada {
     instrucaoFalada: `Qual palavra rima com ${a.palavra.toLowerCase()}?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
-    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} terminam com o mesmo som: ${a.rima.toLowerCase()}.`,
+    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} terminam parecido. Por isso rimam.`,
     foco: a.rima,
   };
 }
@@ -91,10 +103,11 @@ export function gerarAliteracao(nivel = 2): Rodada {
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "aliteracao",
-    instrucaoFalada: `Qual começa com o mesmo som de ${a.palavra.toLowerCase()}?`,
+    instrucaoFalada: "Olhe a palavra modelo na tela. Qual imagem começa igual?",
+    instrucaoVisual: `Qual imagem começa igual a ${a.palavra.toLowerCase()}?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
-    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} começam com o som ${falarSom(a.inicial)}.`,
+    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} começam com a mesma letra.`,
     foco: a.inicial,
   };
 }
@@ -109,10 +122,11 @@ export function gerarSomInicial(nivel = 2): Rodada {
   const opcoes = shuffle([alvo, ...distratores]);
   return {
     tipo: "som-inicial",
-    instrucaoFalada: `Qual palavra começa com o som ${falarSom(alvo.inicial)}?`,
+    instrucaoFalada: "Olhe a letra na tela. Qual imagem começa com ela?",
+    instrucaoVisual: `Qual imagem começa com ${rotuloVisualInicial(alvo.inicial)}?`,
     imagens: opcoes.map((p) => p.palavra),
     correta: alvo.palavra,
-    regra: `${alvo.palavra.toLowerCase()} começa com o som ${falarSom(alvo.inicial)}.`,
+    regra: `${alvo.palavra.toLowerCase()} começa com a letra que está na tela.`,
     foco: alvo.inicial,
   };
 }
@@ -125,11 +139,12 @@ export function gerarSegmentacao(nivel = 2): Rodada {
   return {
     tipo: "segmentacao",
     instrucaoFalada: `Quantos pedacinhos tem a palavra ${alvo.palavra.toLowerCase()}?`,
+    instrucaoVisual: `Conte os pedacinhos de ${alvo.palavra.toLowerCase()}. Quantos tem?`,
     imagens: [alvo.palavra],
     correta: String(correto),
     numero: correto,
     numeroOpcoes: opcoesNum,
-    regra: `${alvo.palavra.toLowerCase()} tem ${correto} pedacinhos: ${alvo.silabas.join("... ").toLowerCase()}.`,
+    regra: `${alvo.palavra.toLowerCase()} tem ${correto} pedacinhos. Conte devagar olhando os blocos da tela.`,
     foco: String(correto),
     silabas: alvo.silabas,
   };
@@ -143,13 +158,13 @@ export function gerarFusao(nivel = 2): Rodada {
     numDistratores(nivel),
   );
   const opcoes = shuffle([alvo.palavra, ...distratores.map((p) => p.palavra)]);
-  const fala = alvo.silabas.join("... ").toLowerCase();
   return {
     tipo: "fusao",
-    instrucaoFalada: `Junte os pedacinhos: ${fala}. Qual palavra é?`,
+    instrucaoFalada: "Olhe os pedacinhos na tela. Qual palavra é?",
+    instrucaoVisual: "Junte os pedacinhos. Qual palavra é?",
     imagens: opcoes,
     correta: alvo.palavra,
-    regra: `${fala} juntinho vira ${alvo.palavra.toLowerCase()}.`,
+    regra: `Quando juntamos os pedacinhos da tela, formamos ${alvo.palavra.toLowerCase()}.`,
     foco: alvo.palavra,
     silabas: alvo.silabas,
   };
@@ -157,22 +172,24 @@ export function gerarFusao(nivel = 2): Rodada {
 
 export function gerarVogalSom(nivel = 2): Rodada {
   const pool = poolPorNivel(nivel);
-  const vogal = pick([...VOGAIS]);
-  const candidatos = pool.filter((p) => p.palavra.startsWith(vogal));
-  if (candidatos.length === 0) return gerarSomInicial(nivel);
-  const alvo = pick(candidatos);
-  const distratores = shuffle(pool.filter((p) => !p.palavra.startsWith(vogal))).slice(
+  const candidatos = pool.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
+  const candidatosSeguros = candidatos.length > 0
+    ? candidatos
+    : PALAVRAS.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
+  const alvo = pick(candidatosSeguros);
+  const vogal = alvo.inicial.toUpperCase();
+  const distratores = shuffle(pool.filter((p) => p.inicial !== alvo.inicial)).slice(
     0,
     numDistratores(nivel),
   );
   const opcoes = shuffle([alvo, ...distratores]);
-  const somVogal = falarSom(vogal);
   return {
     tipo: "vogal-som",
-    instrucaoFalada: `Qual palavra começa com a vogal ${somVogal}... ${somVogal}... ${somVogal}?`,
+    instrucaoFalada: "Olhe a vogal na tela. Qual imagem começa com essa vogal?",
+    instrucaoVisual: `Qual imagem começa com a vogal ${vogal}?`,
     imagens: opcoes.map((p) => p.palavra),
     correta: alvo.palavra,
-    regra: `${alvo.palavra.toLowerCase()} começa com a vogal ${somVogal}.`,
+    regra: `${alvo.palavra.toLowerCase()} começa com a vogal que está na tela.`,
     foco: vogal,
   };
 }
@@ -197,10 +214,11 @@ export function gerarSomFinal(nivel = 2): Rodada {
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "som-final",
-    instrucaoFalada: `Qual palavra termina com o mesmo som de ${a.palavra.toLowerCase()}?`,
+    instrucaoFalada: "Olhe a palavra modelo na tela. Qual imagem termina parecido?",
+    instrucaoVisual: `Qual imagem termina parecido com ${a.palavra.toLowerCase()}?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
-    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} terminam com o som ${falarSom(a.final)}.`,
+    regra: `${a.palavra.toLowerCase()} e ${b.palavra.toLowerCase()} terminam parecido.`,
     foco: a.final,
   };
 }
@@ -216,10 +234,11 @@ export function gerarSomMeio(nivel = 2): Rodada {
   const opcoes = shuffle([alvo, ...distratores]);
   return {
     tipo: "som-meio",
-    instrucaoFalada: `Qual palavra tem o som ${falarSom(somMeio)} no meio?`,
+    instrucaoFalada: "Olhe a letra na tela. Qual imagem tem essa letra no meio?",
+    instrucaoVisual: `Qual imagem tem ${rotuloVisualInicial(somMeio)} no meio?`,
     imagens: opcoes.map((p) => p.palavra),
     correta: alvo.palavra,
-    regra: `Em ${alvo.palavra.toLowerCase()}, o som do meio é ${falarSom(somMeio)}: ${alvo.sons.map(falarSom).join("... ")}.`,
+    regra: `Em ${alvo.palavra.toLowerCase()}, a letra do meio é a que aparece na tela.`,
     foco: somMeio,
   };
 }
@@ -234,11 +253,12 @@ export function gerarContagemFonemas(nivel = 2): Rodada {
   return {
     tipo: "contagem-fonemas",
     instrucaoFalada: `Quantos sons diferentes tem ${alvo.palavra.toLowerCase()}?`,
+    instrucaoVisual: `Conte os sons de ${alvo.palavra.toLowerCase()}. Quantos tem?`,
     imagens: [alvo.palavra],
     correta: String(correto),
     numero: correto,
     numeroOpcoes: opcoesNum.slice(0, 4),
-    regra: `${alvo.palavra.toLowerCase()} tem ${correto} sons: ${alvo.sons.map(falarSom).join("... ")}.`,
+    regra: `${alvo.palavra.toLowerCase()} tem ${correto} sons. Conte um som por dedo, bem devagar.`,
     foco: String(correto),
   };
 }
@@ -261,10 +281,11 @@ export function gerarSubstituicaoFonema(nivel = 2): Rodada {
   const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "substituicao-fonema",
-    instrucaoFalada: `Em ${a.palavra.toLowerCase()}, troque o som ${falarSom(a.inicial)} pelo som ${falarSom(b.inicial)}. Que palavra aparece?`,
+    instrucaoFalada: `Olhe a troca na tela. Que palavra aparece?`,
+    instrucaoVisual: `Em ${a.palavra.toLowerCase()}, troque a primeira letra por ${b.inicial.toUpperCase()}. Que palavra aparece?`,
     imagens: [a.palavra, ...opcoes],
     correta: b.palavra,
-    regra: `Tira o ${falarSom(a.inicial)} de ${a.palavra.toLowerCase()} e põe ${falarSom(b.inicial)}: vira ${b.palavra.toLowerCase()}.`,
+    regra: `Trocando a primeira letra de ${a.palavra.toLowerCase()}, a palavra vira ${b.palavra.toLowerCase()}.`,
     foco: b.inicial,
   };
 }
@@ -286,9 +307,10 @@ export function gerarCategorizacaoSom(nivel = 2): Rodada {
   return {
     tipo: "categorizacao-som",
     instrucaoFalada: `Uma palavra não combina com as outras. Qual começa com um som diferente?`,
+    instrucaoVisual: "Qual imagem começa diferente das outras?",
     imagens: opcoes.map((p) => p.palavra),
     correta: diferente.palavra,
-    regra: `${iguais.map((p) => p.palavra.toLowerCase()).join(", ")} começam com ${falarSom(inicialComum)}. ${diferente.palavra.toLowerCase()} começa com ${falarSom(diferente.inicial)} — é a diferente.`,
+    regra: `${iguais.map((p) => p.palavra.toLowerCase()).join(", ")} começam do mesmo jeito. ${diferente.palavra.toLowerCase()} começa diferente.`,
     foco: diferente.inicial,
   };
 }
