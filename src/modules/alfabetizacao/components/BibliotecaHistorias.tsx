@@ -74,15 +74,23 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
           </div>
         </header>
 
-        {/* Faixa explicando o método científico usado */}
+        {/* Faixa explicando o método + fase ativa */}
         <div className="mb-5 rounded-2xl bg-white/70 border border-rose-100 p-3 flex items-start gap-2 text-[11px] text-slate-600">
           <BookOpen className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
-          <p>
+          <p className="flex-1">
             <strong>Como funciona:</strong> primeiro o Professor lê apontando
-            palavra por palavra (karaoke). Depois é <em>sua vez</em>: você
-            toca em cada palavra na ordem enquanto lê em voz alta. Se travar,
-            aperte <Hand className="inline w-3 h-3 -mt-0.5" /> pra escutar
-            devagar.
+            palavra por palavra (karaoke). Depois é <em>sua vez</em>: toque em
+            cada palavra na ordem enquanto lê em voz alta. Se travar, aperte{" "}
+            <Hand className="inline w-3 h-3 -mt-0.5" /> pra escutar devagar.
+            {etapaAtual && (
+              <>
+                {" "}Livros com o selo{" "}
+                <span className="inline-block px-1.5 rounded bg-emerald-100 text-emerald-700 font-bold">
+                  {etapaAtual.emoji} {etapaAtual.titulo}
+                </span>{" "}
+                usam os sons que você está treinando agora.
+              </>
+            )}
           </p>
         </div>
 
