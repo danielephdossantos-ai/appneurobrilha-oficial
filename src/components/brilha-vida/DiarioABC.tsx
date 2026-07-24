@@ -156,7 +156,7 @@ export function DiarioABC({ onClose }: { onClose: () => void }) {
         )
         .join("\n\n");
 
-      const mensagem = `Sou o cuidador de ${activeChild.nome ?? "uma criança"} (${activeChild.idade ?? "?"} anos, perfil ${activeChild.perfil_neuro ?? "não especificado"}). Registrei ${registros.length} episódios no Diário ABC:
+      const mensagem = `Sou o cuidador de ${activeChild.nome ?? "uma criança"} (${activeChild.idade ?? "?"} anos, perfil ${String((activeChild as any).diagnostico ?? (activeChild as any).perfil_neuro ?? "não especificado")}). Registrei ${registros.length} episódios no Diário ABC:
 
 ${linhas}
 
