@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Check, Play, Sparkles, BookOpen, ArrowLeft, ClipboardCheck } from "lucide-react";
+import { Check, Play, Sparkles, ArrowLeft, ClipboardCheck } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
