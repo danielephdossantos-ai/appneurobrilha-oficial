@@ -1,159 +1,206 @@
 import type { Aula } from "../types";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as setaImg } from "@/assets/neuro-treino/objetos/seta-direita.png.asset.json";
 import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as meninoAcordandoImg } from "@/assets/neuro-treino/objetos/menino-acordando.png.asset.json";
-import { url as escovarImg } from "@/assets/neuro-treino/objetos/escovar-dentes.png.asset.json";
-import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as vacaImg } from "@/assets/neuro-treino/objetos/vaca.png.asset.json";
+import { url as dadoImg } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
 
 /**
- * EF01LP01 — Aula 001 · Biblioteca Pedagógica Escola Brilha
+ * EF01LP01 — Aula 001 · Biblioteca Encantada com Letra
  * Ensino Fundamental I · 1º Ano · Língua Portuguesa
- * BNCC: Reconhecer que textos são lidos e escritos da esquerda para a
- * direita e de cima para baixo da página.
  *
- * Missão do Dia: "O Caminho das Letras" (Brilha + Vento Bagunceiro).
- * Padrão travado (gabarito EF01MA02): jogos visuais em toda categoria,
- * imagens do banco de mídias, nenhum texto avulso sem apoio visual.
+ * REFORMA ESTRUTURAL (Lote 1)
+ * BNCC: EF01LP02 (consciência fonológica) + EF01LP01 (protocolos de leitura).
+ *
+ * Base científica:
+ *  - National Reading Panel (NRP, 2000): consciência fonêmica é o
+ *    preditor #1 de sucesso na alfabetização.
+ *  - Heggerty (2020): som inicial é a habilidade de entrada em fonêmica.
+ *  - Orton-Gillingham: multissensorial (ouvir + falar + ver imagem + tocar).
+ *
+ * Missão: "Que som começa a palavra?" — o Brilha vai ensinar a criança a
+ * ESCUTAR o primeiro som de cada palavra antes de aprender qualquer letra.
+ * É o alicerce de tudo o que vem depois na Biblioteca Encantada.
  */
 const aula: Aula = {
   codigo: "EF01LP01",
   ano: "1º Ano",
   disciplina: "Português",
-  titulo: "O Caminho das Letras",
+  titulo: "O Primeiro Som da Palavra",
 
   narrativa: {
-    titulo: "O Caminho das Letras",
+    titulo: "O Primeiro Som da Palavra",
     contexto:
-      "O Brilha achou um livro mágico na floresta. Quando abriu, todas as palavras estavam voando fora do lugar! O Vento Bagunceiro passou por ali e bagunçou a direção da leitura.",
+      "O Brilha ganhou um Rádio Mágico que só toca o COMEÇO das palavras. Quando ele apertou o botão, ouviu: /g/... /g/... /g/... e apareceu um GATO! Depois: /s/... /s/... /s/... e apareceu um SOL!",
     problema:
-      "Sem saber por onde começar, ninguém consegue entender a história. As palavras precisam voltar pro caminho certo.",
-    convite: "Vamos ajudar o Brilha a descobrir o caminho das letras?",
+      "Agora o Rádio está tocando sons soltinhos e o Brilha precisa descobrir que palavra é. Cada palavra do mundo tem um PRIMEIRO SOM — e é ele que faz a mágica acontecer.",
+    convite: "Bora treinar o ouvido do Brilha pra escutar o começo das palavras?",
   },
 
   conhecimentosPrevios: [
-    "Segurar um livro com a capa virada pra cima.",
-    "Reconhecer que letras formam palavras.",
-    "Apontar imagens em uma página.",
+    "Falar o nome de figuras conhecidas (gato, sol, bola).",
+    "Escutar com atenção sons curtos.",
+    "Repetir uma palavra em voz alta.",
   ],
 
   missao:
-    "Descobrir que, em português, lemos da esquerda para a direita e de cima para baixo — e usar esse caminho pra entender histórias.",
+    "Descobrir que toda palavra começa por um SOM — e treinar o ouvido pra escutar esse primeiro som antes de qualquer letra escrita.",
 
   objetivos: [
-    "Compreender o sentido da leitura na página.",
-    "Identificar por onde começa a ler um texto.",
-    "Acompanhar as linhas de um texto na ordem certa.",
-    "Desenvolver orientação espacial pra ler e escrever.",
+    "Isolar o primeiro som (fonema inicial) de palavras faladas.",
+    "Perceber que palavras diferentes podem começar pelo MESMO som.",
+    "Associar um som ouvido a uma figura correspondente.",
+    "Preparar o ouvido para a fase de letras (alfabético) das próximas aulas.",
   ],
 
   motivacao:
-    "Ler é como andar por um caminho. Se a gente pisa nas pedras na ordem certa, a história aparece. Bora seguir o caminho do Brilha?",
+    "Antes de ler com os olhos, a gente lê com o OUVIDO. Quem escuta bem o começo das palavras vira leitor rápido — e é isso que a gente vai treinar agora.",
 
   explicacao:
-    "No Brasil, todo texto tem um CAMINHO pra ser lido:\n\n➡️ DA ESQUERDA PRA DIREITA — começamos pela palavra do lado esquerdo e vamos andando pro lado direito.\n\n⬇️ DE CIMA PRA BAIXO — quando termina uma linha, descemos pra próxima linha logo abaixo.\n\nExemplo: na frase 'O gato dorme', a gente lê primeiro 'O', depois 'gato', depois 'dorme'. Nunca começamos pelo final.\n\nEm um livro, a primeira palavra fica no CANTO DE CIMA, do lado ESQUERDO. É por ali que começa qualquer história.",
+    "Toda palavra é feita de SONS grudadinhos.\n\nO PRIMEIRO SOM é aquele que sai da boca ANTES de todos os outros.\n\n👉 GATO começa com /g/ (a garganta encosta).\n👉 SOL começa com /s/ (a boca faz cobrinha).\n👉 BOLA começa com /b/ (os lábios batem).\n👉 PATO começa com /p/ (um sopro rapidinho).\n\nQuando duas palavras começam com o mesmo som, elas são AMIGAS DE SOM. Por exemplo: SOL e SAPO — as duas começam com /s/.\n\nPor enquanto a gente só ESCUTA. As letras vêm depois. Primeiro o ouvido, depois o olho.",
+
+  explicacaoAtiva: [
+    {
+      texto:
+        "Toda palavra começa com um SOM. Fecha o olho e escuta o Brilha falar: /g/... /g/... /g/... GATO. O /g/ é o primeiro som.",
+      exemplo: "Fala BOLA bem devagar: /b/... OLA. O /b/ é o começo.",
+      imagem: gatoImg,
+      imagemAlt: "Gato — começa com /g/",
+      checagem: {
+        pergunta: "Qual figura começa com /g/... /g/... como GATO?",
+        opcoes: ["Gato", "Sol", "Bola"],
+        correta: 0,
+        explicacao: "Isso! GATO começa com o mesmo som que /g/... /g/...",
+      },
+    },
+    {
+      texto:
+        "Duas palavras podem ser AMIGAS DE SOM: quando começam iguais. Ex.: SOL e SAPO — as duas começam com /s/.",
+      exemplo: "Fala em voz alta: /s/... SOL. /s/... SAPO. Percebe que é igual?",
+      imagem: solImg,
+      imagemAlt: "Sol — começa com /s/",
+      checagem: {
+        pergunta: "Qual palavra é AMIGA DE SOM de SOL (começa com /s/)?",
+        opcoes: ["Bola", "Sapo", "Gato"],
+        correta: 1,
+        explicacao: "SAPO começa com /s/, igualzinho a SOL.",
+      },
+    },
+    {
+      texto:
+        "O primeiro som fica ESCONDIDO no começo — a gente só precisa escutar com atenção antes de sair falando o resto da palavra.",
+      exemplo: "PATO começa com /p/. Coloca a mão na boca e sente o sopro: /p/.",
+      imagem: patoImg,
+      imagemAlt: "Pato — começa com /p/",
+      checagem: {
+        pergunta: "Qual figura começa com /p/... /p/... como PATO?",
+        opcoes: ["Sol", "Pato", "Gato"],
+        correta: 1,
+        explicacao: "PATO começa com /p/. Você escutou o sopro do começo!",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "A gente lê da esquerda pra direita e de cima pra baixo.",
+    nivel1: "Toda palavra tem um PRIMEIRO SOM. GATO começa com /g/.",
     nivel2:
-      "Na frase 'O gato dorme', 'O' vem primeiro, depois 'gato', depois 'dorme'.",
+      "SOL e SAPO começam iguais — os dois com /s/. Elas são amigas de som.",
     nivel3:
-      "É como um caminho: sua mão segue a seta ➡️ até o fim da linha, aí desce ⬇️ pra próxima.",
+      "É como uma corrida: o primeiro som chega na frente, os outros vêm atrás. /b/... OLA = BOLA.",
     nivel4:
-      "Em livros, gibis, placas e cardápios seguimos sempre esse mesmo caminho. Por isso a gente entende as histórias.",
+      "Escutar o primeiro som é o TREINO SECRETO dos leitores. Faça isso com o nome das pessoas da casa: /m/... AMÃE, /p/... APAI.",
   },
 
   exemploResolvido: {
     enunciado:
-      "O Brilha abriu o livro na frase 'O gato dorme'. Qual palavra a gente lê PRIMEIRO?",
+      "O Rádio Mágico tocou: /g/... /g/... /g/... Qual figura o Rádio está chamando?",
     passos: [
-      "Olhe pra frase: começa no lado ESQUERDO.",
-      "A primeira palavra do lado esquerdo é 'O'.",
-      "Depois vem 'gato' e por último 'dorme'.",
+      "Escute o som soltinho: /g/... /g/... /g/...",
+      "Olhe as figuras: GATO, SOL, BOLA.",
+      "Fale cada uma bem devagar: /g/ATO, /s/OL, /b/OLA.",
+      "Só GATO começa igual a /g/... /g/...",
     ],
-    resposta: "A ordem certa é: O → gato → dorme.",
+    resposta: "É o GATO — ele começa com /g/, mesmo som do Rádio.",
   },
 
   atividadeGuiada: {
     enunciado:
-      "Na frase 'O gato dorme', depois de ler 'O', qual palavra a gente lê em seguida?",
-    resposta: "Gato — é a próxima palavra andando pra direita.",
+      "O Rádio tocou /s/... /s/... /s/... Toque na figura que começa com esse som.",
+    resposta: "SOL — porque começa com /s/, igual ao som do Rádio.",
     explicacao:
-      "A gente sempre segue o caminho da esquerda pra direita. Depois de 'O', a próxima palavra é 'gato', e só depois 'dorme'.",
+      "Fale devagar cada figura antes de tocar: /s/OL — /g/ATO — /b/OLA. Só o SOL começa com /s/.",
     visual: {
       tipo: "escolherImagem",
       pergunta:
-        "Depois de ler 'O', qual palavra vem em seguida em 'O gato dorme'? Toque na figura certa.",
+        "Toque na figura que começa com /s/... /s/... /s/... como o Rádio Mágico tocou.",
       opcoes: [
-        { nome: "gato", imagemUrl: gatoImg },
-        { nome: "cachorro", imagemUrl: cachorroImg },
         { nome: "sol", imagemUrl: solImg },
+        { nome: "gato", imagemUrl: gatoImg },
+        { nome: "bola", imagemUrl: bolaImg },
+        { nome: "pato", imagemUrl: patoImg },
       ],
-      respostaCerta: "gato",
+      respostaCerta: "sol",
     },
   },
 
   exercicios: [
     {
       enunciado:
-        "📖 Você abriu um livro novo. Em que canto da página a leitura começa?",
-      resposta: "No canto de cima, do lado esquerdo.",
-      dica: "Pense na direção da seta ➡️ e na direção pra baixo ⬇️.",
+        "🔊 O Rádio tocou /p/... /p/... /p/... Qual figura começa com esse som: PATO, SOL ou GATO?",
+      resposta: "PATO — começa com /p/.",
+      dica: "Fale cada uma devagar e escute o começo: /p/ATO, /s/OL, /g/ATO.",
     },
     {
       enunciado:
-        "🐱 Na frase 'O gato dorme', qual palavra a gente lê por ÚLTIMO?",
-      resposta: "Dorme — é a palavra mais à direita.",
-      dica: "Siga da esquerda pra direita até chegar no fim.",
+        "🎧 SAPO e SOL começam iguais? Sim ou não? Escute o começo de cada um.",
+      resposta:
+        "Sim! Os dois começam com /s/. São amigos de som.",
+      dica: "Fale /s/APO e /s/OL. O começo é o mesmo som.",
     },
     {
       enunciado:
-        "📚 Terminou de ler a primeira linha. Pra onde você vai agora?",
-      resposta: "Pra próxima linha, logo abaixo.",
-      dica: "Depois da direita da linha 1, desce e volta pra esquerda da linha 2.",
+        "🐱 Qual palavra é AMIGA DE SOM do GATO (começa com /g/)?",
+      resposta:
+        "Também começa com /g/: gato, girafa, galo. Nesta aula: só o gato aparece.",
+      dica: "Procure figuras que começam com /g/... /g/...",
     },
   ],
 
   desafio: {
     enunciado:
-      "Desafio Brilha: o menino faz três coisas de manhã — acorda, escova os dentes e vai pra escola. Toque em cada figura na ORDEM certa, seguindo o caminho da leitura (esquerda → direita).",
+      "Desafio Brilha: o Rádio Mágico vai tocar 3 sons diferentes. Toque na figura que começa com CADA som. Cuidado — algumas figuras são pegadinhas!",
     resposta:
-      "1º Acordou · 2º Escovou os dentes · 3º Foi pra escola. É a mesma ordem que a gente lê: da esquerda pra direita.",
+      "1) /r/ → RATO · 2) /v/ → VACA · 3) /d/ → DADO. Sempre escute o primeiro som antes de escolher.",
     visual: {
       cena: [
-        { personagem: "1º · Acordou", itemImagemUrl: meninoAcordandoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "2º · Escovou", itemImagemUrl: escovarImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "3º · Escola", itemImagemUrl: escolaImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "🔊 Toca /r/", itemImagemUrl: ratoImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "🔊 Toca /v/", itemImagemUrl: vacaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "🔊 Toca /d/", itemImagemUrl: dadoImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
         {
-          pergunta: "O que acontece PRIMEIRO na história do menino?",
-          opcoes: ["Foi pra escola", "Escovou os dentes", "Acordou"],
-          correta: 2,
-          explicacao:
-            "A primeira figura, do lado ESQUERDO, é o menino acordando.",
-        },
-        {
-          pergunta: "E o que acontece por ÚLTIMO?",
-          opcoes: ["Acordou", "Escovou os dentes", "Foi pra escola"],
-          correta: 2,
-          explicacao:
-            "A última figura, do lado DIREITO, é o menino indo pra escola.",
-        },
-        {
-          pergunta:
-            "Quando a gente lê uma frase, segue essa mesma direção. Qual é o caminho certo?",
-          opcoes: [
-            "Da direita pra esquerda",
-            "Da esquerda pra direita",
-            "Do meio pro fim",
-          ],
+          pergunta: "O Rádio tocou /r/... /r/... /r/... Qual figura é?",
+          opcoes: ["Vaca", "Rato", "Dado"],
           correta: 1,
-          explicacao:
-            "Em português, sempre lemos da esquerda pra direita.",
+          explicacao: "RATO começa com /r/. As outras começam com /v/ e /d/.",
+        },
+        {
+          pergunta: "O Rádio tocou /v/... /v/... /v/... Qual figura é?",
+          opcoes: ["Vaca", "Rato", "Dado"],
+          correta: 0,
+          explicacao: "VACA começa com /v/ (o lábio de baixo encosta no dente).",
+        },
+        {
+          pergunta: "O Rádio tocou /d/... /d/... /d/... Qual figura é?",
+          opcoes: ["Vaca", "Rato", "Dado"],
+          correta: 2,
+          explicacao: "DADO começa com /d/. A língua bate atrás dos dentes.",
         },
       ],
     },
@@ -161,139 +208,146 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "Todo texto em português começa no canto de cima, do lado esquerdo.",
-      "A gente lê da esquerda pra direita.",
-      "Quando termina uma linha, desce pra próxima linha embaixo.",
-      "Seguir esse caminho ajuda a entender a história.",
+      "Toda palavra começa com um SOM (o primeiro fonema).",
+      "GATO começa com /g/, SOL com /s/, BOLA com /b/, PATO com /p/.",
+      "Palavras que começam com o mesmo som são AMIGAS DE SOM (ex.: SOL e SAPO).",
+      "Primeiro escutamos o som — as letras vêm nas próximas aulas.",
     ],
-    dica: "Antes de começar a ler, procure onde fica a PRIMEIRA palavra — ela está lá em cima, à esquerda.",
+    dica: "Quando olhar uma figura, fale devagar e ESCUTE o começo antes de responder.",
   },
 
   quiz: [
     {
-      pergunta: "A leitura em português começa em qual canto da página?",
+      pergunta: "Qual figura começa com o som /g/, como GATO?",
+      opcoes: ["Gato", "Sol", "Bola"],
+      correta: 0,
+      explicacao: "GATO começa com /g/. Você treinou o ouvido!",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
+          { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+          { imagemUrl: bolaImg, quantidade: 1, rotulo: "bola" },
+        ],
+      },
+    },
+    {
+      pergunta: "SOL e SAPO começam com o mesmo som?",
+      opcoes: ["Sim, os dois com /s/", "Não, sons diferentes", "Só o SOL tem som"],
+      correta: 0,
+      explicacao: "Isso! /s/OL e /s/APO — as duas com /s/. São amigas de som.",
+      visual: {
+        tipo: "comparar",
+        lados: [
+          { imagemUrl: solImg, quantidade: 1, rotulo: "/s/OL", cor: "#FBBF24" },
+          { imagemUrl: sapoImg, quantidade: 1, rotulo: "/s/APO", cor: "#34D399" },
+        ],
+      },
+    },
+    {
+      pergunta: "Qual figura começa com /p/, como PATO?",
+      opcoes: ["Casa", "Pato", "Rato"],
+      correta: 1,
+      explicacao: "PATO começa com /p/. Você sente o sopro na boca!",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+          { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+          { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
+        ],
+      },
+    },
+    {
+      pergunta: "Por que a gente treina escutar o começo das palavras?",
       opcoes: [
-        "No canto de cima, à esquerda",
-        "No canto de baixo, à direita",
-        "No meio da página",
+        "Pra ficar melhor em ler e escrever depois",
+        "Pra falar mais alto",
+        "Pra decorar figuras",
       ],
       correta: 0,
       explicacao:
-        "Sempre começamos pelo canto de cima, do lado esquerdo.",
-    },
-    {
-      pergunta: "As palavras de uma frase são lidas...",
-      opcoes: [
-        "Da direita pra esquerda",
-        "Da esquerda pra direita",
-        "De trás pra frente",
-      ],
-      correta: 1,
-      explicacao:
-        "Em português, a leitura vai sempre da esquerda pra direita.",
-    },
-    {
-      pergunta: "Terminou de ler uma linha. O que fazemos em seguida?",
-      opcoes: [
-        "Voltamos pro final da página",
-        "Descemos pra próxima linha",
-        "Paramos de ler",
-      ],
-      correta: 1,
-      explicacao:
-        "Depois de terminar uma linha, descemos pra próxima linha embaixo.",
-    },
-    {
-      pergunta: "Por que seguimos uma direção certa pra ler?",
-      opcoes: [
-        "Pra entender melhor o texto",
-        "Porque as letras mudam de cor",
-        "Pra terminar mais rápido",
-      ],
-      correta: 0,
-      explicacao:
-        "Seguindo o caminho certo, as palavras fazem sentido e a história aparece.",
+        "Consciência fonêmica é o alicerce da leitura — quem escuta bem, lê melhor (NRP, 2000).",
     },
   ],
 
   conclusao:
-    "🏅 Medalha conquistada: Explorador da Leitura! Agora você já conhece o caminho das letras — esquerda pra direita e cima pra baixo. Missão em Casa: pegue um livro, uma revista ou um gibi e mostre pra alguém da família onde a leitura começa e como a gente desce pra próxima linha.",
+    "🏅 Medalha conquistada: Ouvido de Leitor! Você treinou hoje a habilidade mais importante pra ler: escutar o primeiro som das palavras. Missão em Casa: brinque com um adulto de falar 3 palavras de casa (mãe, pai, cachorro, mesa, sofá) bem devagar e descobrir o primeiro som de cada uma.",
 
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Nem todos os idiomas do mundo são lidos igual! O português, o inglês e o espanhol seguem da esquerda pra direita. Já o árabe e o hebraico são lidos da direita pra esquerda. Cada idioma tem o seu próprio caminho das letras.",
+      "Todo grande leitor começou aqui: escutando o começo das palavras. Cientistas do National Reading Panel descobriram que crianças que treinam ESCUTAR os sons antes de ver as letras aprendem a ler bem mais rápido e sem sofrer. É o segredo do ouvido de leitor!",
   },
 
   interativas: [
     {
-      tipo: "ordenar",
-      titulo: "Fase 1 · Siga a Flecha",
-      instrucao:
-        "A frase é 'O gato dorme'. Coloque as palavras na ordem certa da leitura — da ESQUERDA pra DIREITA.",
-      itens: ["O", "gato", "dorme"],
-      imagens: [
-        { imagemUrl: setaImg, quantidade: 1, rotulo: "1º · O" },
-        { imagemUrl: gatoImg, quantidade: 1, rotulo: "2º · gato" },
-        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "3º · dorme" },
-      ],
-    },
-    {
       tipo: "contarQuiz",
-      titulo: "Fase 2 · Onde Começa?",
+      titulo: "Fase 1 · O Rádio Tocou /g/",
       instrucao:
-        "Olhe pro livro do Brilha. Pense: por onde a gente começa a ler?",
-      grupos: [{ imagemUrl: livroImg, quantidade: 1, rotulo: "Livro do Brilha" }],
-      pergunta: "Em que canto do livro a leitura começa?",
-      opcoes: [
-        "Canto de cima, à esquerda",
-        "Canto de cima, à direita",
-        "Última linha, embaixo",
-      ],
-      correta: 0,
-      acerto:
-        "Isso! Toda leitura em português começa lá em cima, do lado esquerdo.",
-      erro: "Pense na direção da seta ➡️ e desça ⬇️. O começo fica em cima e à esquerda.",
+        "O Rádio Mágico do Brilha começou tocando /g/... /g/... /g/... Qual figura ele está chamando?",
+      grupos: [{ imagemUrl: gatoImg, quantidade: 1, rotulo: "figura misteriosa" }],
+      pergunta: "Qual palavra começa com /g/?",
+      opcoes: ["Sol", "Gato", "Bola"],
+      correta: 1,
+      acerto: "Isso! GATO começa com /g/, o mesmo som do Rádio.",
+      erro: "Fale devagar: /g/ATO, /s/OL, /b/OLA. Só GATO começa com /g/.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Continue a Leitura",
+      titulo: "Fase 2 · Amigos de Som",
       instrucao:
-        "Ligue cada linha da história do menino com o que acontece nela.",
+        "Ligue cada figura ao SOM que ela começa. Fale devagar antes de ligar.",
       pares: [
-        { a: "Linha 1 · de manhã", b: "O menino acordou", aImagem: solImg, bImagem: meninoAcordandoImg },
-        { a: "Linha 2 · depois", b: "Escovou os dentes", aImagem: estrelaImg, bImagem: escovarImg },
-        { a: "Linha 3 · por fim", b: "Foi pra escola", aImagem: livroImg, bImagem: escolaImg },
-      ],
-    },
-    {
-      tipo: "ordenar",
-      titulo: "Fase 4 · Organize a História",
-      instrucao:
-        "A história do menino ficou embaralhada. Coloque as cenas na ordem certa — CIMA pra BAIXO, como a gente lê.",
-      itens: ["O menino acordou", "Escovou os dentes", "Foi pra escola"],
-      imagens: [
-        { imagemUrl: meninoAcordandoImg, quantidade: 1, rotulo: "1ª cena" },
-        { imagemUrl: escovarImg, quantidade: 1, rotulo: "2ª cena" },
-        { imagemUrl: escolaImg, quantidade: 1, rotulo: "3ª cena" },
+        { a: "/g/", b: "Gato", aImagem: estrelaImg, bImagem: gatoImg },
+        { a: "/s/", b: "Sol", aImagem: estrelaImg, bImagem: solImg },
+        { a: "/b/", b: "Bola", aImagem: estrelaImg, bImagem: bolaImg },
+        { a: "/p/", b: "Pato", aImagem: estrelaImg, bImagem: patoImg },
       ],
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 5 · Explorando o Livro",
+      titulo: "Fase 3 · Pegadinha de /s/",
       instrucao:
-        "O Brilha abriu o livro mágico. Cada linha tem uma frase. Onde fica a PRIMEIRA palavra de cada linha?",
-      grupos: [{ imagemUrl: livroImg, quantidade: 1, rotulo: "Livro aberto" }],
-      pergunta: "A primeira palavra de cada linha fica onde?",
-      opcoes: [
-        "Do lado direito",
-        "Do lado esquerdo",
-        "Bem no meio",
+        "O Rádio tocou /s/. CUIDADO: duas figuras podem parecer certas. Toque só na que REALMENTE começa com /s/.",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
       ],
-      correta: 1,
-      acerto:
-        "Muito bem! Toda linha começa do lado ESQUERDO — é ali que a gente coloca o dedo pra ler.",
-      erro: "Lembre: a gente lê da esquerda pra direita. Então a primeira palavra fica à esquerda.",
+      pergunta: "Qual dessas começa com /s/? (Só uma opção nesta pergunta)",
+      opcoes: ["Sol", "Gato", "Bola"],
+      correta: 0,
+      acerto: "Isso! SOL começa com /s/. SAPO também — os dois são amigos de som.",
+      erro: "Fale devagar: /s/OL. É o som que vem primeiro.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · A Ordem dos Sons",
+      instrucao:
+        "O Rádio tocou 3 sons na ordem: /g/ → /s/ → /b/. Coloque as figuras na MESMA ordem.",
+      itens: ["gato (/g/)", "sol (/s/)", "bola (/b/)"],
+      imagens: [
+        { imagemUrl: gatoImg, quantidade: 1, rotulo: "1º · /g/" },
+        { imagemUrl: solImg, quantidade: 1, rotulo: "2º · /s/" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "3º · /b/" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Novos Sons",
+      instrucao:
+        "O Rádio tocou /v/... /v/... /v/... Qual figura é? Fale VACA, PATO e CASA bem devagar antes de escolher.",
+      grupos: [
+        { imagemUrl: vacaImg, quantidade: 1, rotulo: "vaca" },
+        { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+        { imagemUrl: casaImg, quantidade: 1, rotulo: "casa" },
+      ],
+      pergunta: "Qual começa com /v/?",
+      opcoes: ["Pato", "Casa", "Vaca"],
+      correta: 2,
+      acerto: "Muito bem! VACA começa com /v/ — sinta o lábio de baixo tocando o dente.",
+      erro: "Fale /v/ACA. O primeiro som é /v/.",
     },
   ],
 
@@ -301,158 +355,131 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta:
-          "Olhe pra seta ➡️. É essa a direção certa da leitura em português?",
-        opcoes: ["Sim, esquerda pra direita", "Não, direita pra esquerda", "Não sei"],
-        correta: 0,
-        explicacao:
-          "Isso mesmo — a seta pra direita mostra o caminho certo da leitura.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: setaImg,
-          quantidade: 1,
-          rotulo: "A direção da leitura",
-        },
-      },
-      {
-        pergunta:
-          "Na frase 'O gato dorme', qual palavra a gente lê PRIMEIRO depois do 'O'?",
-        opcoes: ["dorme", "gato", "cachorro"],
+        pergunta: "Qual figura começa com /g/... /g/... como GATO?",
+        opcoes: ["Sol", "Gato", "Bola"],
         correta: 1,
-        explicacao:
-          "Depois de 'O', vem 'gato'. A gente segue da esquerda pra direita.",
+        explicacao: "GATO começa com /g/.",
         visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: gatoImg, quantidade: 1, rotulo: "gato" },
-            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "dorme" },
-          ],
+          tipo: "itens",
+          imagemUrl: gatoImg,
+          quantidade: 1,
+          rotulo: "gato",
         },
       },
       {
-        pergunta:
-          "Você abriu um livro. Onde fica a primeira palavra?",
-        opcoes: ["Em cima, à esquerda", "Em baixo, à direita", "No meio"],
+        pergunta: "Qual figura começa com /s/... /s/... como SOL?",
+        opcoes: ["Sol", "Bola", "Pato"],
         correta: 0,
-        explicacao:
-          "A primeira palavra de qualquer livro fica no canto de cima, do lado esquerdo.",
+        explicacao: "SOL começa com /s/.",
         visual: {
           tipo: "itens",
-          imagemUrl: livroImg,
+          imagemUrl: solImg,
           quantidade: 1,
-          rotulo: "Livro aberto",
+          rotulo: "sol",
+        },
+      },
+      {
+        pergunta: "Qual figura começa com /b/... /b/... como BOLA?",
+        opcoes: ["Gato", "Bola", "Sol"],
+        correta: 1,
+        explicacao: "BOLA começa com /b/. Os lábios batem juntos.",
+        visual: {
+          tipo: "itens",
+          imagemUrl: bolaImg,
+          quantidade: 1,
+          rotulo: "bola",
         },
       },
     ],
     medio: [
       {
-        pergunta:
-          "Depois de terminar uma linha do livro, pra onde a gente vai?",
-        opcoes: [
-          "Pro final da página",
-          "Pra próxima linha, logo abaixo",
-          "Pra capa do livro",
-        ],
+        pergunta: "SOL e SAPO começam com o mesmo som?",
+        opcoes: ["Sim, os dois com /s/", "Não", "Só o SAPO"],
+        correta: 0,
+        explicacao: "Os dois começam com /s/ — são amigos de som.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: solImg, quantidade: 1, rotulo: "/s/OL", cor: "#FBBF24" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "/s/APO", cor: "#34D399" },
+          ],
+        },
+      },
+      {
+        pergunta: "Qual palavra é AMIGA DE SOM do GATO (começa com /g/)?",
+        opcoes: ["Pato", "Gato-galo (do mesmo som)", "Bola"],
         correta: 1,
-        explicacao:
-          "Terminou a linha? Desce ⬇️ pra próxima linha e começa de novo do lado esquerdo.",
+        explicacao: "Palavras com /g/ inicial (galo, girafa) são amigas de som do gato.",
+        visual: {
+          tipo: "itens",
+          imagemUrl: gatoImg,
+          quantidade: 1,
+          rotulo: "/g/ATO",
+        },
+      },
+      {
+        pergunta: "O Rádio tocou /p/. Qual figura é?",
+        opcoes: ["Vaca", "Pato", "Rato"],
+        correta: 1,
+        explicacao: "PATO começa com /p/, um sopro rápido.",
         visual: {
           tipo: "grupos",
           grupos: [
-            { imagemUrl: livroImg, quantidade: 1, rotulo: "Linha 1" },
-            { imagemUrl: livroImg, quantidade: 1, rotulo: "Linha 2" },
-          ],
-        },
-      },
-      {
-        pergunta:
-          "As cenas do menino são: 1º acordou, 2º escovou, 3º escola. Qual é a ÚLTIMA?",
-        opcoes: ["Acordou", "Escovou os dentes", "Foi pra escola"],
-        correta: 2,
-        explicacao:
-          "A cena mais à direita, e mais embaixo, é a última: foi pra escola.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: meninoAcordandoImg, quantidade: 1, rotulo: "1º", cor: "#FBBF24" },
-            { imagemUrl: escovarImg, quantidade: 1, rotulo: "2º", cor: "#60A5FA" },
-            { imagemUrl: escolaImg, quantidade: 1, rotulo: "3º", cor: "#F472B6" },
-          ],
-        },
-      },
-      {
-        pergunta:
-          "Qual bicho aparece PRIMEIRO nesta linha: 🐱 gato · 🐶 cachorro?",
-        opcoes: ["Cachorro", "Gato", "Os dois juntos"],
-        correta: 1,
-        explicacao:
-          "O gato está à esquerda, então é lido primeiro.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: gatoImg, quantidade: 1, rotulo: "Esquerda", cor: "#F472B6" },
-            { imagemUrl: cachorroImg, quantidade: 1, rotulo: "Direita", cor: "#60A5FA" },
+            { imagemUrl: vacaImg, quantidade: 1, rotulo: "vaca" },
+            { imagemUrl: patoImg, quantidade: 1, rotulo: "pato" },
+            { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
           ],
         },
       },
     ],
     dificil: [
       {
-        pergunta:
-          "Numa página existem 3 linhas. Qual linha lemos primeiro?",
-        opcoes: ["A linha de baixo", "A linha do meio", "A linha de cima"],
+        pergunta: "Qual dessas figuras NÃO começa com /s/?",
+        opcoes: ["Sol", "Sapo", "Rato"],
         correta: 2,
-        explicacao:
-          "A gente lê de cima pra baixo — a primeira linha é a de cima.",
+        explicacao: "SOL e SAPO começam com /s/. RATO começa com /r/.",
         visual: {
           tipo: "grupos",
           grupos: [
-            { imagemUrl: livroImg, quantidade: 1, rotulo: "Linha 1 (cima)" },
-            { imagemUrl: livroImg, quantidade: 1, rotulo: "Linha 2 (meio)" },
-            { imagemUrl: livroImg, quantidade: 1, rotulo: "Linha 3 (baixo)" },
+            { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+            { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+            { imagemUrl: ratoImg, quantidade: 1, rotulo: "rato" },
           ],
         },
       },
       {
         pergunta:
-          "Se a gente ler da DIREITA pra esquerda em português, o que acontece?",
-        opcoes: [
-          "A história continua igual",
-          "A história fica sem sentido",
-          "O livro vira revista",
-        ],
+          "O Rádio tocou 3 sons: /g/, /s/, /b/. Qual figura entra no MEIO da ordem?",
+        opcoes: ["Gato", "Sol", "Bola"],
         correta: 1,
-        explicacao:
-          "Lendo na direção errada, as palavras não formam mais frases que a gente entende.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: livroImg,
-          quantidade: 1,
-          rotulo: "Livro do Brilha",
-        },
-      },
-      {
-        pergunta:
-          "A cena do menino tem 3 momentos. Qual é o do MEIO?",
-        opcoes: ["Acordou", "Escovou os dentes", "Foi pra escola"],
-        correta: 1,
-        explicacao:
-          "Entre 'acordou' e 'foi pra escola', o momento do meio é 'escovou os dentes'.",
+        explicacao: "A ordem é /g/ → /s/ → /b/. No meio fica /s/ = SOL.",
         visual: {
           tipo: "comparar",
           lados: [
-            { imagemUrl: meninoAcordandoImg, quantidade: 1, rotulo: "1º", cor: "#FBBF24" },
-            { imagemUrl: escovarImg, quantidade: 1, rotulo: "Meio", cor: "#60A5FA" },
-            { imagemUrl: escolaImg, quantidade: 1, rotulo: "3º", cor: "#F472B6" },
+            { imagemUrl: gatoImg, quantidade: 1, rotulo: "1º /g/", cor: "#FBBF24" },
+            { imagemUrl: solImg, quantidade: 1, rotulo: "Meio /s/", cor: "#60A5FA" },
+            { imagemUrl: bolaImg, quantidade: 1, rotulo: "3º /b/", cor: "#F472B6" },
           ],
         },
+      },
+      {
+        pergunta:
+          "Por que a gente escuta o som ANTES de ver a letra?",
+        opcoes: [
+          "Porque letra é mais difícil",
+          "Porque o ouvido é a porta da leitura",
+          "Porque é mais rápido",
+        ],
+        correta: 1,
+        explicacao:
+          "A ciência da leitura mostra: quem escuta bem os sons vira leitor mais rápido. Primeiro o ouvido, depois o olho.",
       },
     ],
   },
 
   proximaHabilidade: {
     codigo: "EF01LP02",
-    titulo: "Reconhecer o sistema de escrita alfabética",
+    titulo: "Aliteração e Rima — palavras que combinam de som",
   },
 };
 
