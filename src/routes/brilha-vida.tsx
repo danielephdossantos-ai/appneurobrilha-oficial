@@ -22,6 +22,10 @@ import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
 import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
 import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
 import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
+import { Grounding54321 } from "@/components/brilha-vida/Grounding54321";
+import { ButterflyHug } from "@/components/brilha-vida/ButterflyHug";
+import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
+import { InteroceptionScan } from "@/components/brilha-vida/InteroceptionScan";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
@@ -101,12 +105,20 @@ const categorias = [
     descricao: "Regras e harmonia no dia a dia",
     atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos", "Roda do Dia"],
   },
+  {
+    id: "regulacao-aguda",
+    nome: "Regulação Aguda (SOS calma)",
+    img: catAutocontroleImg,
+    cor: "from-rose-300/30 to-rose-100/5",
+    descricao: "Kit clínico para crise, susto ou pico de ansiedade",
+    atividades: ["5-4-3-2-1 Sentidos", "Abraço da Borboleta", "Espaguete e Estátua", "Escuta do Corpo"],
+  },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -176,6 +188,22 @@ function BrilhaVida() {
       setCustomActivity("roda");
       return;
     }
+    if (tipo === "5-4-3-2-1 Sentidos") {
+      setCustomActivity("grounding");
+      return;
+    }
+    if (tipo === "Abraço da Borboleta") {
+      setCustomActivity("borboleta");
+      return;
+    }
+    if (tipo === "Espaguete e Estátua") {
+      setCustomActivity("espaguete");
+      return;
+    }
+    if (tipo === "Escuta do Corpo") {
+      setCustomActivity("escutacorpo");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
@@ -228,6 +256,10 @@ function BrilhaVida() {
     elogio: { node: <ElogioMagico onClose={() => setCustomActivity(null)} />, contexto: "Elogio Mágico" },
     bolha: { node: <BolhaBemEstar onClose={() => setCustomActivity(null)} />, contexto: "Bolha de Bem-Estar" },
     roda: { node: <RodaDoDia onClose={() => setCustomActivity(null)} />, contexto: "Roda do Dia" },
+    grounding: { node: <Grounding54321 onClose={() => setCustomActivity(null)} />, contexto: "5-4-3-2-1 Sentidos" },
+    borboleta: { node: <ButterflyHug onClose={() => setCustomActivity(null)} />, contexto: "Abraço da Borboleta" },
+    espaguete: { node: <EspagueteEstatua onClose={() => setCustomActivity(null)} />, contexto: "Espaguete e Estátua" },
+    escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
