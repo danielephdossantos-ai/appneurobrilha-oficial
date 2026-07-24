@@ -39,6 +39,18 @@ export function useProgressoAlfa(childId: string) {
     [progresso, persistir],
   );
 
+  // Fase E — aplica resultado do screening sem sobrescrever progresso maior.
+  const aplicarPosicaoInicial = useCallback(
+    (posicao: Progresso) => {
+      const next = { ...progresso };
+      for (const [etapaId, val] of Object.entries(posicao)) {
+        next[etapaId] = Math.max(next[etapaId] ?? 0, val);
+      }
+      persistir(next);
+    },
+    [progresso, persistir],
+  );
+
   const etapaDesbloqueada = useCallback(
     (etapa: EtapaCurricular) => {
       if (etapa.ordem === 1) return true;
@@ -53,5 +65,11 @@ export function useProgressoAlfa(childId: string) {
     [progresso],
   );
 
-  return { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida };
+  return {
+    progresso,
+    registrarAcerto,
+    aplicarPosicaoInicial,
+    etapaDesbloqueada,
+    etapaConcluida,
+  };
 }

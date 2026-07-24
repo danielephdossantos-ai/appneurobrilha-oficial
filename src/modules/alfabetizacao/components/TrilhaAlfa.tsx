@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Check, Play, Sparkles, BookOpen, ArrowLeft } from "lucide-react";
+import { Check, Play, Sparkles, BookOpen, ArrowLeft, ClipboardCheck } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
+import { ScreeningInicial } from "./ScreeningInicial";
 import { calcularNivelLeitor } from "../data/historias-graduadas";
 import { useAdminMode } from "@/escola-brilha/admin-mode";
+import {
+  screeningFeito,
+  marcarScreeningFeito,
+  resetarScreening,
+} from "../engine/screening";
+import { setChildAtualSRS } from "../engine/srs";
 
 interface Props {
   childId: string;
@@ -13,11 +20,27 @@ interface Props {
 }
 
 export function TrilhaAlfa({ childId, childName }: Props) {
-  const { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida } =
-    useProgressoAlfa(childId);
+  const {
+    progresso,
+    registrarAcerto,
+    aplicarPosicaoInicial,
+    etapaDesbloqueada,
+    etapaConcluida,
+  } = useProgressoAlfa(childId);
   const [admin] = useAdminMode();
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
+  const [screening, setScreening] = useState(false);
   const nivelLeitor = calcularNivelLeitor(progresso);
+
+  useEffect(() => {
+    setChildAtualSRS(childId);
+    // Abre screening automaticamente na primeira entrada (progresso vazio + não feito).
+    const semProgresso = Object.keys(progresso).length === 0;
+    if (semProgresso && !screeningFeito(childId)) {
+      const t = setTimeout(() => setScreening(true), 400);
+      return () => clearTimeout(t);
+    }
+  }, [childId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const etapaAtiva = ETAPAS.find((e) => e.id === etapaAtivaId) ?? null;
 
@@ -48,12 +71,24 @@ export function TrilhaAlfa({ childId, childName }: Props) {
             Siga a trilha pelos castelos. Cada castelo só destrava depois que você terminar o
             anterior — assim seu cérebro vira um craque das letras!
           </p>
-          <Link
-            to="/biblioteca-alfa"
-            className="inline-flex items-center gap-2 mt-4 px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold shadow hover:scale-105 transition-transform text-sm"
-          >
-            <BookOpen className="w-4 h-4" /> Biblioteca (Nível leitor {nivelLeitor})
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+            <Link
+              to="/biblioteca-alfa"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold shadow hover:scale-105 transition-transform text-sm"
+            >
+              <BookOpen className="w-4 h-4" /> Biblioteca (Nível leitor {nivelLeitor})
+            </Link>
+            <button
+              onClick={() => {
+                resetarScreening(childId);
+                setScreening(true);
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-300 text-slate-700 font-bold shadow-sm hover:bg-slate-50 text-xs"
+              title="Refazer o teste inicial"
+            >
+              <ClipboardCheck className="w-4 h-4" /> Teste inicial
+            </button>
+          </div>
         </header>
 
         <div className="relative space-y-4">
@@ -134,6 +169,21 @@ export function TrilhaAlfa({ childId, childName }: Props) {
           childId={childId}
           onAcerto={() => registrarAcerto(etapaAtiva.id)}
           onSair={() => setEtapaAtivaId(null)}
+        />
+      )}
+
+      {screening && (
+        <ScreeningInicial
+          childId={childId}
+          onFinish={(posicao) => {
+            aplicarPosicaoInicial(posicao);
+            marcarScreeningFeito(childId);
+            setScreening(false);
+          }}
+          onSkip={() => {
+            marcarScreeningFeito(childId);
+            setScreening(false);
+          }}
         />
       )}
     </div>

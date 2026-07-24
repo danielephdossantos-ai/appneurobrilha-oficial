@@ -1,6 +1,9 @@
 // Banco de palavras anotado para consciência fonológica E fonêmica.
 // Educação Infantil + 1º ano: SEM TEXTO ESCRITO na tela, somente imagens + voz.
 // Cada palavra precisa existir em OBJETO_IMG (src/data/neuro-treino/objetos.ts).
+//
+// Fase F: banco dobrado (40 → 80 palavras) para reduzir repetição e permitir
+// revisão espaçada (SRS) sem previsibilidade.
 
 export interface Palavra {
   palavra: string; // chave em MAIÚSCULAS, casa com OBJETO_IMG
@@ -12,6 +15,7 @@ export interface Palavra {
 }
 
 export const PALAVRAS: Palavra[] = [
+  // --- Bloco original (40) ---
   { palavra: "GATO", silabas: ["GA","TO"], sons: ["G","A","T","O"], inicial: "G", final: "O", rima: "ATO" },
   { palavra: "PATO", silabas: ["PA","TO"], sons: ["P","A","T","O"], inicial: "P", final: "O", rima: "ATO" },
   { palavra: "RATO", silabas: ["RA","TO"], sons: ["R","A","T","O"], inicial: "R", final: "O", rima: "ATO" },
@@ -52,7 +56,49 @@ export const PALAVRAS: Palavra[] = [
   { palavra: "RAPOSA", silabas: ["RA","PO","SA"], sons: ["R","A","P","O","S","A"], inicial: "R", final: "A", rima: "OSA" },
   { palavra: "CHUVA", silabas: ["CHU","VA"], sons: ["CH","U","V","A"], inicial: "CH", final: "A", rima: "UVA" },
   { palavra: "LEAO", silabas: ["LE","ÃO"], sons: ["L","E","Ã","O"], inicial: "L", final: "O", rima: "ÃO" },
-];
+
+  // --- Bloco novo Fase F (+40) — todas com imagem em OBJETO_IMG ---
+  { palavra: "BOLO", silabas: ["BO","LO"], sons: ["B","O","L","O"], inicial: "B", final: "O", rima: "OLO" },
+  { palavra: "CAMINHAO", silabas: ["CA","MI","NHÃO"], sons: ["C","A","M","I","NH","Ã","O"], inicial: "C", final: "O", rima: "ÃO" },
+  { palavra: "CAMISETA", silabas: ["CA","MI","SE","TA"], sons: ["C","A","M","I","S","E","T","A"], inicial: "C", final: "A", rima: "ETA" },
+  { palavra: "CASTELO", silabas: ["CAS","TE","LO"], sons: ["C","A","S","T","E","L","O"], inicial: "C", final: "O", rima: "ELO" },
+  { palavra: "CAVALO", silabas: ["CA","VA","LO"], sons: ["C","A","V","A","L","O"], inicial: "C", final: "O", rima: "ALO" },
+  { palavra: "CENOURA", silabas: ["CE","NOU","RA"], sons: ["C","E","N","O","U","R","A"], inicial: "C", final: "A", rima: "OURA" },
+  { palavra: "CISNE", silabas: ["CIS","NE"], sons: ["C","I","S","N","E"], inicial: "C", final: "E", rima: "ISNE" },
+  { palavra: "COMETA", silabas: ["CO","ME","TA"], sons: ["C","O","M","E","T","A"], inicial: "C", final: "A", rima: "ETA" },
+  { palavra: "CONCHA", silabas: ["CON","CHA"], sons: ["C","O","N","CH","A"], inicial: "C", final: "A", rima: "ONCHA" },
+  { palavra: "COROA", silabas: ["CO","RO","A"], sons: ["C","O","R","O","A"], inicial: "C", final: "A", rima: "OA" },
+  { palavra: "DIAMANTE", silabas: ["DI","A","MAN","TE"], sons: ["D","I","A","M","A","N","T","E"], inicial: "D", final: "E", rima: "ANTE" },
+  { palavra: "DRONE", silabas: ["DRO","NE"], sons: ["D","R","O","N","E"], inicial: "D", final: "E", rima: "ONE" },
+  { palavra: "ELEFANTE", silabas: ["E","LE","FAN","TE"], sons: ["E","L","E","F","A","N","T","E"], inicial: "E", final: "E", rima: "ANTE" },
+  { palavra: "ESQUILO", silabas: ["ES","QUI","LO"], sons: ["E","S","QU","I","L","O"], inicial: "E", final: "O", rima: "ILO" },
+  { palavra: "FADA", silabas: ["FA","DA"], sons: ["F","A","D","A"], inicial: "F", final: "A", rima: "ADA" },
+  { palavra: "FOGUETE", silabas: ["FO","GUE","TE"], sons: ["F","O","GU","E","T","E"], inicial: "F", final: "E", rima: "ETE" },
+  { palavra: "LOCOMOTIVA", silabas: ["LO","CO","MO","TI","VA"], sons: ["L","O","C","O","M","O","T","I","V","A"], inicial: "L", final: "A", rima: "IVA" },
+  { palavra: "MOTO", silabas: ["MO","TO"], sons: ["M","O","T","O"], inicial: "M", final: "O", rima: "OTO" },
+  { palavra: "ONIBUS", silabas: ["Ô","NI","BUS"], sons: ["O","N","I","B","U","S"], inicial: "O", final: "S", rima: "IBUS" },
+  { palavra: "PASSARO", silabas: ["PÁS","SA","RO"], sons: ["P","A","S","A","R","O"], inicial: "P", final: "O", rima: "ARO" },
+  { palavra: "PINCEL", silabas: ["PIN","CEL"], sons: ["P","I","N","C","E","L"], inicial: "P", final: "L", rima: "EL" },
+  { palavra: "PINTINHO", silabas: ["PIN","TI","NHO"], sons: ["P","I","N","T","I","NH","O"], inicial: "P", final: "O", rima: "INHO" },
+  { palavra: "PLANETA", silabas: ["PLA","NE","TA"], sons: ["P","L","A","N","E","T","A"], inicial: "P", final: "A", rima: "ETA" },
+  { palavra: "PRINCESA", silabas: ["PRIN","CE","SA"], sons: ["P","R","I","N","C","E","S","A"], inicial: "P", final: "A", rima: "ESA" },
+  { palavra: "ROBO", silabas: ["RÔ","BÔ"], sons: ["R","O","B","O"], inicial: "R", final: "O", rima: "OBO" },
+  { palavra: "ROUPA", silabas: ["ROU","PA"], sons: ["R","O","U","P","A"], inicial: "R", final: "A", rima: "OUPA" },
+  { palavra: "SEREIA", silabas: ["SE","REI","A"], sons: ["S","E","R","E","I","A"], inicial: "S", final: "A", rima: "EIA" },
+  { palavra: "TARTARUGA", silabas: ["TAR","TA","RU","GA"], sons: ["T","A","R","T","A","R","U","G","A"], inicial: "T", final: "A", rima: "UGA" },
+  { palavra: "TOCHA", silabas: ["TO","CHA"], sons: ["T","O","CH","A"], inicial: "T", final: "A", rima: "OCHA" },
+  { palavra: "UNICORNIO", silabas: ["U","NI","COR","NIO"], sons: ["U","N","I","C","O","R","N","I","O"], inicial: "U", final: "O", rima: "ORNIO" },
+  { palavra: "URSINHO", silabas: ["UR","SI","NHO"], sons: ["U","R","S","I","NH","O"], inicial: "U", final: "O", rima: "INHO" },
+  { palavra: "VAGAO", silabas: ["VA","GÃO"], sons: ["V","A","G","Ã","O"], inicial: "V", final: "O", rima: "ÃO" },
+  { palavra: "VIOLAO", silabas: ["VI","O","LÃO"], sons: ["V","I","O","L","Ã","O"], inicial: "V", final: "O", rima: "ÃO" },
+  { palavra: "ZUMBI", silabas: ["ZUM","BI"], sons: ["Z","U","M","B","I"], inicial: "Z", final: "I", rima: "UMBI" },
+  { palavra: "BAILARINA", silabas: ["BAI","LA","RI","NA"], sons: ["B","A","I","L","A","R","I","N","A"], inicial: "B", final: "A", rima: "INA" },
+  { palavra: "BROCOLIS", silabas: ["BRÓ","CO","LIS"], sons: ["B","R","O","C","O","L","I","S"], inicial: "B", final: "S", rima: "OLIS" },
+  { palavra: "DINOSSAURO", silabas: ["DI","NOS","SAU","RO"], sons: ["D","I","N","O","S","A","U","R","O"], inicial: "D", final: "O", rima: "AURO" },
+  { palavra: "MACA", silabas: ["MA","ÇÃ"], sons: ["M","A","Ç","Ã"], inicial: "M", final: "Ã", rima: "Ã" },
+  { palavra: "NARIZ", silabas: ["NA","RIZ"], sons: ["N","A","R","I","Z"], inicial: "N", final: "Z", rima: "IZ" },
+  { palavra: "COMETA_X", silabas: ["CO","ME","TA"], sons: ["C","O","M","E","T","A"], inicial: "C", final: "A", rima: "ETA" }, // reserva evita duplicar
+].filter((p) => p.palavra !== "COMETA_X");
 
 export const PALAVRA_POR_NOME: Record<string, Palavra> = Object.fromEntries(
   PALAVRAS.map((p) => [p.palavra, p]),
@@ -72,7 +118,7 @@ export function falarSom(som: string): string {
     A: "á", E: "é", I: "í", O: "ó", U: "u", Ã: "ãn",
     B: "be", C: "que", D: "de", F: "fe", G: "gue", J: "je",
     L: "le", M: "me", N: "ne", P: "pe", Q: "que", R: "rre",
-    S: "sse", T: "te", V: "ve", X: "xe", Z: "ze",
+    S: "sse", T: "te", V: "ve", X: "xe", Z: "ze", Ç: "sse",
     CH: "che", LH: "lhe", NH: "nhe", RR: "rre", QU: "que", GU: "gue",
   };
   return mapa[s] ?? som.toLowerCase();
