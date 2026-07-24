@@ -166,6 +166,26 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     setErrosNaRodada(0);
     setRevelar(false);
     setUltimaRegra(null);
+    setModelagem(null);
+    rodadaInicio.current = Date.now();
+  }
+
+  // Modelagem sonora: fala o som do grafema/rima 3x, com pausas curtas.
+  function modelarSom(foco: string) {
+    const fonema = falarSom(foco);
+    const trilha = [0, 900, 1800];
+    trilha.forEach((delay) =>
+      agendar(() => falar(fonema), delay + 200),
+    );
+  }
+
+  function grafemaDaRodada(): string | null {
+    // Prioridade: foco explícito → primeira letra da resposta certa.
+    if (rodada.foco && rodada.foco.length <= 4) return rodada.foco.toUpperCase();
+    if (rodada.correta && /^[A-ZÀ-Ú]/i.test(rodada.correta)) {
+      return rodada.correta[0].toUpperCase();
+    }
+    return null;
   }
 
   function responder(resposta: string) {
@@ -183,6 +203,16 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       agendar(() => setAjuste(null), 1800);
     }
 
+    // Persistência clínica (child_skill_mastery + prompting ABA).
+    const durationMs = Date.now() - rodadaInicio.current;
+    void recordSkillAttempt({
+      childId,
+      skillCode: `alfa:${etapa.id}`,
+      materia: "alfabetizacao",
+      isCorrect: ok,
+      durationMs,
+    });
+
     if (ok) {
       falar("Isso! " + rodada.regra);
       onAcerto();
@@ -194,12 +224,19 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     setErrosNaRodada(novoErros);
     setUltimaRegra(rodada.regra);
 
+    // Fase D · Modelagem sonora: mostra o grafema/som e ecoa 3x.
+    const grafema = grafemaDaRodada();
+    if (grafema) {
+      setModelagem(grafema);
+      modelarSom(grafema);
+    }
+
     if (novoErros >= 2) {
       setRevelar(true);
-      falar(`Olha só. ${rodada.regra} Vamos para a próxima.`);
-      agendar(() => proximaRodada(nivelDepois), 4200);
+      agendar(() => falar(`Olha só. ${rodada.regra} Vamos para a próxima.`), 3000);
+      agendar(() => proximaRodada(nivelDepois), 4800);
     } else {
-      falar(`Ainda não. ${rodada.regra}`);
+      agendar(() => falar(`Ainda não. ${rodada.regra}`), 3000);
       agendar(() => {
         setFeedback(null);
         setTravado(false);
