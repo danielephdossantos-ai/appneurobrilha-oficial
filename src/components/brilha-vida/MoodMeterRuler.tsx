@@ -86,6 +86,7 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
   const [selecionada, setSelecionada] = useState<Emocao | null>(null);
   const [etapa, setEtapa] = useState<"reconhecer" | "entender" | "expressar">("reconhecer");
   const [nota, setNota] = useState("");
+  const recordMood = useMoodRecorder();
 
   const quadranteBg = selecionada ? CORES[selecionada.quadrante].bg : "from-slate-50 to-white";
 
