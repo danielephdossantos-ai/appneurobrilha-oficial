@@ -48,9 +48,21 @@ const TIPOS_COM_REFERENCIA = new Set([
 
 // Explicação inicial mostrada ANTES da atividade começar — igual ao padrão
 // clínico das outras trilhas do Neuro Treino (Dislexia, Discalculia).
+//
+// A intro tem 4 blocos:
+//   • texto        → fala infantil (o Professor Brilha lê em voz alta)
+//   • comoJogar    → instrução clara da mecânica
+//   • paraPais     → orientação clínica para o adulto que acompanha
+//   • exemplo      → 1 rodada modelada passo-a-passo (o "modelo de aula")
 const INTRO_ETAPA: Record<
   string,
-  { titulo: string; texto: string; comoJogar: string }
+  {
+    titulo: string;
+    texto: string;
+    comoJogar: string;
+    paraPais: string;
+    exemplo: { passos: string[]; dica?: string };
+  }
 > = {
   vogais: {
     titulo: "Hoje vamos treinar as VOGAIS",
@@ -58,6 +70,18 @@ const INTRO_ETAPA: Record<
       "As vogais são cinco sons especiais: A, E, I, O, U. Elas aparecem em quase toda palavra que a gente fala.",
     comoJogar:
       "Eu falo um som e você toca na imagem que começa com aquele som. Se errar, o Professor Brilha explica e você tenta de novo.",
+    paraPais:
+      "Objetivo clínico: consciência fonêmica de vogais (identificação do som inicial). Reforce sempre o SOM da vogal (‘ААА’), não o NOME da letra. Fale devagar, exagere um pouco o som e peça para a criança repetir antes de tocar.",
+    exemplo: {
+      passos: [
+        "1) O Professor fala: “Toque na imagem que começa com Ааа”.",
+        "2) Aparecem 4 imagens (ex.: ABELHA, BOLA, IGREJA, UVA).",
+        "3) A criança repete “Ааа-ААA” e escolhe ABELHA.",
+        "4) Acerto → o Professor confirma e a próxima rodada começa.",
+        "5) Erro → a letra A aparece grande, o som toca 3× e ela tenta de novo.",
+      ],
+      dica: "Se ela travar, aponte para a imagem e diga o nome bem devagar: “ААААААбelha começa com Ааа”.",
+    },
   },
   silabas: {
     titulo: "Vamos brincar com as SÍLABAS",
@@ -65,6 +89,17 @@ const INTRO_ETAPA: Record<
       "Toda palavra pode ser dividida em pedacinhos. Cada pedacinho é uma sílaba: BO-LA, CA-SA, SA-PA-TO.",
     comoJogar:
       "Você vai contar os pedacinhos da palavra ou juntar sílabas para formar a palavra certa.",
+    paraPais:
+      "Objetivo clínico: segmentação silábica e fusão. Bata palma junto a cada sílaba — o toque no corpo ajuda a consolidar a divisão. Não trabalhe leitura ainda: aqui é OUVIDO, não olho.",
+    exemplo: {
+      passos: [
+        "1) O Professor fala a palavra: “SA-PA-TO”.",
+        "2) Bata 3 palmas junto com a criança: SA 👏 PA 👏 TO 👏.",
+        "3) Pergunta: “Quantos pedacinhos tem?” → toque no número 3.",
+        "4) Na fusão: aparecem chips SA · PA · TO e 4 imagens. A criança toca no SAPATO.",
+      ],
+      dica: "Palmas ou passos com o pé funcionam melhor que contar nos dedos.",
+    },
   },
   palavras: {
     titulo: "Sons das PALAVRAS",
@@ -72,6 +107,17 @@ const INTRO_ETAPA: Record<
       "As palavras têm sons no começo, no meio e no fim. Quando duas palavras terminam com o mesmo som, elas rimam — como GATO e PATO.",
     comoJogar:
       "Ouça a palavra de referência e toque na imagem que combina: mesmo som inicial, mesma rima ou mesma letra de começo.",
+    paraPais:
+      "Objetivo clínico: consciência fonológica de rima, aliteração e som inicial. Sempre ouça a palavra-referência 2× antes de escolher — bloqueia respostas por adivinhação visual.",
+    exemplo: {
+      passos: [
+        "1) Aparece a imagem-referência (ex.: GATO) e o Professor fala: “Qual imagem RIMA com GATO?”.",
+        "2) Aparecem 4 imagens: PATO, BOLA, CASA, SOL.",
+        "3) A criança repete: “GAAA-TO… PAAA-TO… rima!”.",
+        "4) Toca em PATO → acerto e próxima rodada.",
+      ],
+      dica: "Alongue o fim da palavra: “ga-TOOO / pa-TOOO”. É o final igual que forma a rima.",
+    },
   },
   fonemas: {
     titulo: "Detetive dos FONEMAS",
@@ -79,6 +125,17 @@ const INTRO_ETAPA: Record<
       "Fonema é o menor som de uma palavra. GATO tem 4 fonemas: G-A-T-O. Trocar um fonema muda a palavra inteira: GATO vira PATO!",
     comoJogar:
       "Ouça com atenção e ache o som do começo, do meio, do fim, conte quantos sons tem ou troque um som pelo outro.",
+    paraPais:
+      "Objetivo clínico: consciência FONÊMICA (o nível mais fino da consciência fonológica — preditor #1 de leitura). Trabalhe SEMPRE em voz alta e devagar; jamais mostre a palavra escrita nesta etapa.",
+    exemplo: {
+      passos: [
+        "1) O Professor fala: “Troque o /g/ de GATO por /p/. Qual palavra aparece?”.",
+        "2) A criança repete: “G-A-T-O… P-A-T-O”.",
+        "3) Toca na imagem de PATO.",
+        "4) Contagem: “GATO tem quantos sons?” → toca no número 4.",
+      ],
+      dica: "Use dedos: um dedo para cada som (G-A-T-O = 4 dedos). Isso torna o fonema visível.",
+    },
   },
   frases: {
     titulo: "Ouvir FRASES",
@@ -86,6 +143,16 @@ const INTRO_ETAPA: Record<
       "Uma frase junta várias palavras para contar uma ideia. Quando você ouve com atenção, consegue imaginar a cena.",
     comoJogar:
       "Eu leio uma frase e você toca na imagem que mostra o que aconteceu.",
+    paraPais:
+      "Objetivo clínico: compreensão oral (base para compreensão leitora). Peça à criança para FECHAR OS OLHOS enquanto ouve — ativa a imagem mental antes da resposta.",
+    exemplo: {
+      passos: [
+        "1) O Professor fala: “A menina abraçou o cachorro no parque”.",
+        "2) Aparecem 4 imagens diferentes.",
+        "3) A criança escolhe a cena que combina com a frase.",
+      ],
+      dica: "Se errar, releia a frase destacando as palavras-chave (menina, cachorro, parque).",
+    },
   },
   textos: {
     titulo: "Ouvir TEXTOS curtos",
@@ -93,6 +160,16 @@ const INTRO_ETAPA: Record<
       "Textos são histórias pequenas com começo, meio e fim. Prestar atenção é o segredo para entender tudo.",
     comoJogar:
       "Escute a historinha até o fim e depois responda a pergunta escolhendo a imagem certa.",
+    paraPais:
+      "Objetivo clínico: memória de trabalho verbal + compreensão literal. Não interrompa durante a leitura; a pergunta só vem depois.",
+    exemplo: {
+      passos: [
+        "1) O Professor lê um texto de 2-3 frases.",
+        "2) Faz UMA pergunta (“Quem?”, “Onde?”, “O que aconteceu?”).",
+        "3) A criança toca na imagem que responde.",
+      ],
+      dica: "Se ela não lembrar, releia devagar e destaque a informação-chave.",
+    },
   },
   compreensao: {
     titulo: "Entendendo a HISTÓRIA",
@@ -100,6 +177,16 @@ const INTRO_ETAPA: Record<
       "Compreender é lembrar o que aconteceu, quem estava lá e por quê. Todo bom leitor pensa depois de ler.",
     comoJogar:
       "Ouça o texto com calma e escolha a resposta que combina com o que aconteceu.",
+    paraPais:
+      "Objetivo clínico: compreensão inferencial (‘por quê’, ‘como se sentiu’). Depois da atividade, peça para a criança recontar a história com as próprias palavras — o reconto é o teste real de compreensão.",
+    exemplo: {
+      passos: [
+        "1) O Professor lê a história.",
+        "2) Pergunta inferencial: “Por que o coelho ficou feliz?”.",
+        "3) A criança escolhe a imagem/resposta que faz sentido.",
+      ],
+      dica: "Não existe ‘resposta rápida’ aqui — dê tempo para pensar antes de tocar.",
+    },
   },
 };
 
