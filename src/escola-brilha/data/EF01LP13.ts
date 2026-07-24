@@ -1,375 +1,322 @@
 import type { Aula } from "../types";
-import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as ratoImg } from "@/assets/neuro-treino/objetos/rato.png.asset.json";
+import { url as boloImg } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as sopaImg } from "@/assets/neuro-treino/objetos/sopa.png.asset.json";
+import { url as sucoImg } from "@/assets/neuro-treino/objetos/suco.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as patoImg } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as panelaCasa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
 
 /**
- * EF01LP13 — Aula 013 · Biblioteca Pedagógica Escola Brilha
- * 1º Ano · Língua Portuguesa
- * Missão do Dia: "O Eco das Sílabas Parecidas".
+ * EF01LP13 — Aula 013 · Sílabas CV com as vogais O e U
+ * Foco: BO, PO, SO, LO · LU, SU, TU, NU.
  */
 const aula: Aula = {
   codigo: "EF01LP13",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Eco das Sílabas Parecidas",
-
+  disciplina: "Português",
+  titulo: "Sílabas com O e U — BO, SO, LU, SU",
   narrativa: {
-    titulo: "O Eco das Sílabas Parecidas",
+    titulo: "Sílabas com O e U — BO, SO, LU, SU",
     contexto:
-      "Numa clareira mágica, o Brilha ouve palavras que ecoam parecidas: BOLA… COLA… GOLA… todas terminam igual!",
+      "As últimas vogais chegaram na oficina: O e U. Elas também querem grudar nas consoantes.",
     problema:
-      "As palavras se misturaram no ar. Só quem escutar bem os finais e meios das sílabas vai desembaralhar a floresta.",
-    convite:
-      "Bora comparar as sílabas e descobrir quais soam parecidas?",
+      "As sílabas BO, SO, LU e SU se esconderam em BOLO, SOL, LUA e SUCO.",
+    convite: "Bora achar cada sílaba e ler nossa primeira palavra de verdade?",
   },
-
   conhecimentosPrevios: [
-    "Separar palavras em sílabas (EF01LP06).",
-    "Reconhecer sons iniciais (EF01LP07).",
-    "Ler pequenas palavras.",
+    "Sílabas CV com A, E, I.",
+    "Sons de O e U.",
+    "Bater palma para contar sílabas.",
   ],
-
-  missao:
-    "Comparar palavras identificando semelhanças e diferenças entre sons de sílabas mediais e finais.",
-
+  missao: "Formar e reconhecer sílabas CV com O e U.",
   objetivos: [
-    "Perceber sílabas do meio (mediais) e do fim (finais).",
-    "Comparar palavras que terminam parecido.",
-    "Comparar palavras com sílaba do meio parecida.",
-    "Ampliar a consciência fonológica.",
+    "Juntar C + O ou C + U formando sílaba.",
+    "Reconhecer BO, SO, LU, SU no começo de palavras.",
+    "Ler BOLO como BO-LO em duas batidas.",
+    "Diferenciar O (arredondado) de U (bico).",
   ],
-
-  motivacao: "Ouça devagar — as palavras rimam quando o final é parecido!",
-
+  motivacao:
+    "BOLO, SOPA, SOL, LUA, SUCO — palavras do dia a dia. Sem C+O e C+U a criança não consegue ler quase nenhuma frase.",
   explicacao:
-    "Toda palavra pode ser dividida em SÍLABAS.\n\n🎯 Sílaba FINAL = último pedacinho.\n   BOLA · COLA · GOLA → todas terminam em -LA.\n\n🎯 Sílaba MEDIAL = pedacinho do meio.\n   BANANA → BA · NA · NA (o -NA- do meio).\n\nQuando duas palavras terminam parecido, elas RIMAM.",
-
+    "Consoante + O ou U também vira sílaba.\n\n👉 B + O → BO (BOlo)\n👉 S + O → SO (SOpa, SOl)\n👉 L + U → LU (LUa)\n👉 S + U → SU (SUco)\n\nDica: O deixa a boca ARREDONDADA. U deixa a boca em BICO. Faça um espelho e observe.",
+  explicacaoAtiva: [
+    {
+      texto: "B + O vira BO. Aparece em BOlo.",
+      exemplo: "B + O = BO · BOlo.",
+      imagem: boloImg,
+      imagemAlt: "Bolo — começa com BO",
+      checagem: {
+        pergunta: "Qual figura começa com BO?",
+        opcoes: ["Bolo", "Sol", "Pato"],
+        correta: 0,
+        explicacao: "BOlo — BO.",
+      },
+    },
+    {
+      texto: "L + U vira LU. Aparece em LUa.",
+      exemplo: "L + U = LU · LUa.",
+      imagem: luaImg,
+      imagemAlt: "Lua — começa com LU",
+      checagem: {
+        pergunta: "Qual figura começa com LU?",
+        opcoes: ["Lua", "Bolo", "Sapo"],
+        correta: 0,
+        explicacao: "LUa — LU.",
+      },
+    },
+    {
+      texto: "S + U vira SU (SUco). S + O vira SO (SOpa, SOl).",
+      exemplo: "S + U = SU · S + O = SO.",
+      imagem: sucoImg,
+      imagemAlt: "Suco — começa com SU",
+      checagem: {
+        pergunta: "Qual figura começa com SU?",
+        opcoes: ["Suco", "Sol", "Sapo"],
+        correta: 0,
+        explicacao: "SUco — SU.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Sílaba final é o ÚLTIMO pedaço da palavra.",
-    nivel2:
-      "Sílaba do meio é o pedacinho que fica no MEIO da palavra.",
-    nivel3:
-      "Palavras que terminam parecido são RIMAS: pato · gato · rato.",
-    nivel4:
-      "Ouvindo bem, dá pra descobrir palavras com sons parecidos e fazer poesias.",
+    nivel1: "C + O = sílaba com O · C + U = sílaba com U.",
+    nivel2: "BO em BOlo · SO em SOpa · LU em LUa · SU em SUco.",
+    nivel3: "BOLO = BO-LO. Duas sílabas com O.",
+    nivel4: "O é vogal média posterior arredondada; U é alta posterior arredondada.",
   },
-
   exemploResolvido: {
-    enunciado: "Qual palavra termina igual a BOLA?",
+    enunciado: "Como fica L + U?",
     passos: [
-      "Ouça o final de BOLA: -LA.",
-      "Procure outra palavra que termine em -LA.",
-      "COLA termina em -LA.",
+      "Fale /lll/ com a língua no céu da boca.",
+      "Fale /uuu/ fazendo bico com a boca.",
+      "Cola: /llluuu/ = LU.",
     ],
-    resposta: "COLA rima com BOLA. ✅",
+    resposta: "L + U = LU (aparece em LUa).",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque na figura pra ouvir. Qual palavra RIMA com GATO?",
-    resposta: "PATO.",
-    explicacao:
-      "GATO e PATO terminam em -ATO. Sílaba final igual.",
+    enunciado: "Toque na figura que começa com LU.",
+    resposta: "LUA — começa com LU.",
+    explicacao: "Fale: LU-a · BO-lo · SU-co.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Qual rima com GATO?",
+      pergunta: "Qual começa com LU?",
       opcoes: [
-        { nome: "pato", imagemUrl: patoImg },
-        { nome: "sol", imagemUrl: solImg },
-        { nome: "flor", imagemUrl: florImg },
+        { nome: "lua", imagemUrl: luaImg },
+        { nome: "bolo", imagemUrl: boloImg },
+        { nome: "suco", imagemUrl: sucoImg },
       ],
-      respostaCerta: "pato",
+      respostaCerta: "lua",
     },
   },
-
   exercicios: [
+    { enunciado: "🔊 B + O = ?", resposta: "BO.", dica: "Boca redonda no O." },
+    { enunciado: "🔊 S + U = ?", resposta: "SU.", dica: "Faça bico no U." },
     {
-      enunciado: "Qual rima com BOLA?",
-      resposta: "COLA.",
-      dica: "Termina em -LA.",
-    },
-    {
-      enunciado: "Qual é a sílaba do meio de BANANA?",
-      resposta: "NA.",
-      dica: "BA · NA · NA — a sílaba do meio é NA.",
-    },
-    {
-      enunciado: "PATO e GATO rimam por causa da sílaba...",
-      resposta: "FINAL (-TO / -ATO).",
-      dica: "O final -ATO se repete.",
+      enunciado: "🔊 Qual começa com SO: SOL, LUA ou BOLO?",
+      resposta: "SOL — SO.",
+      dica: "SOL tem 1 batida. Começa com SO.",
     },
   ],
-
   desafio: {
-    enunciado:
-      "Desafio Brilha: descubra qual palavra tem sílaba parecida com a do Brilha.",
-    resposta: "Palavras com finais iguais RIMAM.",
+    enunciado: "Desafio Brilha: separar por vogal da sílaba.",
+    resposta: "Time O: bolo, sopa, sol · Time U: lua, suco.",
     visual: {
       cena: [
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "PATO", itemImagemUrl: patoImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "RATO", itemImagemUrl: ratoImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "BOLA", itemImagemUrl: bolaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "BANANA", itemImagemUrl: bananaImg, quantidade: 1, cor: "#FDE047" },
+        { personagem: "BO", itemImagemUrl: boloImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "SO", itemImagemUrl: sopaImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "LU", itemImagemUrl: luaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "SU", itemImagemUrl: sucoImg, quantidade: 1, cor: "#F472B6" },
       ],
       perguntas: [
         {
-          pergunta: "Qual rima com GATO?",
-          opcoes: ["PATO", "SOL", "FLOR"],
+          pergunta: "Qual começa com BO?",
+          opcoes: ["Bolo", "Lua", "Suco"],
           correta: 0,
-          explicacao: "GA-TO / PA-TO → mesma sílaba final -TO.",
+          explicacao: "BOlo — BO.",
         },
         {
-          pergunta: "Qual rima com BOLA?",
-          opcoes: ["COLA", "PATO", "SOL"],
-          correta: 0,
-          explicacao: "BO-LA / CO-LA → -LA no final.",
+          pergunta: "Qual começa com SU?",
+          opcoes: ["Sopa", "Suco", "Sol"],
+          correta: 1,
+          explicacao: "SUco — SU.",
         },
         {
-          pergunta: "Qual é a sílaba do MEIO de BANANA?",
-          opcoes: ["NA", "BA", "MA"],
-          correta: 0,
-          explicacao: "BA · NA · NA — a do meio é NA.",
-        },
-        {
-          pergunta: "PATO e RATO rimam. Por quê?",
-          opcoes: [
-            "Terminam com -ATO",
-            "Começam com P",
-            "Têm cor parecida",
-          ],
-          correta: 0,
-          explicacao: "Sílaba final igual: -ATO.",
-        },
-        {
-          pergunta: "Duas palavras que terminam parecido são chamadas:",
-          opcoes: ["Rimas", "Números", "Cores"],
-          correta: 0,
-          explicacao: "Rimas!",
+          pergunta: "Qual vogal aparece em LU?",
+          opcoes: ["O", "U", "A"],
+          correta: 1,
+          explicacao: "L + U = LU.",
         },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🎯 Sílaba final = último pedacinho da palavra.",
-      "🎯 Sílaba medial = pedacinho do meio.",
-      "🎵 Rimas são palavras com finais parecidos.",
-      "👂 Ouça devagar pra comparar os sons.",
+      "C + O ou C + U = sílaba.",
+      "BO (bolo) · SO (sopa) · LU (lua) · SU (suco).",
+      "O = boca redonda. U = boca de bico.",
+      "BOLO = BO-LO (2 batidas).",
     ],
-    dica: "Fale a palavra em pedacinhos e escute qual pedaço se repete.",
+    dica: "Se ficar em dúvida, olhe seu reflexo: O redondo, U bico.",
   },
-
   quiz: [
+    { pergunta: "L + U = ?", opcoes: ["LO", "LU", "UL"], correta: 1, explicacao: "L+U = LU." },
     {
-      pergunta: "Qual rima com GATO?",
-      opcoes: ["PATO", "SOL", "FLOR"],
+      pergunta: "Qual começa com BO?",
+      opcoes: ["Bolo", "Sapo", "Lua"],
       correta: 0,
-      explicacao: "Ambos terminam em -ATO.",
+      explicacao: "BOlo.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: boloImg, quantidade: 1, rotulo: "bolo" },
+          { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+          { imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
+        ],
+      },
     },
-    {
-      pergunta: "Qual rima com BOLA?",
-      opcoes: ["COLA", "MAÇÃ", "PATO"],
-      correta: 0,
-      explicacao: "-LA no final.",
-    },
-    {
-      pergunta: "Sílaba do meio de BANANA?",
-      opcoes: ["NA", "BA", "TA"],
-      correta: 0,
-      explicacao: "BA · NA · NA.",
-    },
-    {
-      pergunta: "Rima é quando duas palavras...",
-      opcoes: [
-        "Terminam parecido",
-        "Começam com a mesma letra",
-        "Têm a mesma cor",
-      ],
-      correta: 0,
-      explicacao: "Terminam parecido.",
-    },
-    {
-      pergunta: "Qual NÃO rima com PATO?",
-      opcoes: ["SOL", "GATO", "RATO"],
-      correta: 0,
-      explicacao: "SOL não termina em -ATO.",
-    },
+    { pergunta: "Quantas sílabas tem BOLO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "BO-LO = 2." },
+    { pergunta: "Qual começa com SU?", opcoes: ["Sopa", "Suco", "Sol"], correta: 1, explicacao: "SUco." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Ouvido de Poeta! Missão em Família: brinquem de inventar 3 rimas juntos — ex.: 'gato bonito, pato pequenito, rato quietinho'.",
-
+    "🏅 Medalha: Explorador de O e U! Missão em Casa: procurar em casa 2 coisas com BO e 2 com LU.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Muitas cantigas de roda são cheias de rimas — é por isso que a gente decora fácil: o final parecido gruda no ouvido.",
+      "As vogais O e U são 'primas': as duas fazem sua boca ficar redonda. A diferença é o tamanho da abertura — O maior, U menor.",
   },
-
   interativas: [
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 1 · Rima com GATO",
-      instrucao: "Toque pra ouvir. Qual figura RIMA com GATO?",
-      pergunta: "Qual rima com GATO?",
-      opcoes: [
-        { nome: "PATO", imagemUrl: patoImg, rotulo: "🦆 PATO" },
-        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
-        { nome: "FLOR", imagemUrl: florImg, rotulo: "🌸 FLOR" },
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Achando BO",
+      instrucao: "Toque na figura que começa com BO.",
+      grupos: [
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "bolo" },
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
       ],
+      pergunta: "Qual começa com BO?",
+      opcoes: ["Bolo", "Lua", "Sapo"],
       correta: 0,
-      acerto: "🎉 GATO / PATO — rimam em -ATO.",
-      erro: "Ouça o final: GA-TO, PA-TO. Rima!",
+      acerto: "BOlo — BO!",
+      erro: "Fale devagar: BO-LO.",
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 2 · Rima com BOLA",
-      instrucao: "Toque pra ouvir. Qual figura RIMA com BOLA?",
-      pergunta: "Qual rima com BOLA?",
-      opcoes: [
-        { nome: "COLA", imagemUrl: estrelaImg, rotulo: "✨ COLA" },
-        { nome: "PATO", imagemUrl: patoImg, rotulo: "🦆 PATO" },
-        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
-      ],
-      correta: 0,
-      acerto: "🎉 BOLA e COLA rimam em -LA.",
-      erro: "Ouça: BO-LA, CO-LA. Rimam!",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Sílaba do meio",
-      instrucao: "Toque na figura pra ouvir. Qual é a sílaba do MEIO de BANANA?",
-      figura: { imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
-      pergunta: "Sílaba do meio:",
-      opcoes: ["NA", "BA", "MA"],
-      correta: 0,
-      acerto: "🎉 BA · NA · NA — a do meio é NA.",
-      erro: "Fale em pedaços: BA-NA-NA. O do meio é NA.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 4 · Agrupe as rimas",
-      instrucao: "Arraste cada palavra pro grupo de rima certa.",
+      tipo: "ligar",
+      titulo: "Fase 2 · Sílaba x Figura",
+      instrucao: "Ligue cada sílaba à figura certa.",
       pares: [
-        { item: "PATO", alvo: "-ATO" },
-        { item: "RATO", alvo: "-ATO" },
-        { item: "COLA", alvo: "-LA" },
-      ],
-      alvosVisuais: [
-        { nome: "-ATO", cor: "#FBBF24", capacidade: 2 },
-        { nome: "-LA", cor: "#60A5FA", capacidade: 1 },
+        { a: "BO", b: "Bolo", aImagem: estrelaImg, bImagem: boloImg },
+        { a: "SO", b: "Sopa", aImagem: estrelaImg, bImagem: sopaImg },
+        { a: "LU", b: "Lua", aImagem: estrelaImg, bImagem: luaImg },
+        { a: "SU", b: "Suco", aImagem: estrelaImg, bImagem: sucoImg },
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 5 · Biblioteca do Brilha",
-      instrucao:
-        "A Coruja pediu a palavra que termina igual a ESTRELA.",
-      pergunta: "Termina como ESTRELA (-LA):",
-      opcoes: [
-        { nome: "COLA", imagemUrl: estrelaImg, rotulo: "✨ COLA" },
-        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
-        { nome: "CASA", imagemUrl: panelaCasa, rotulo: "🏠 CASA" },
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · O ou U?",
+      instrucao: "Qual começa com sílaba com U?",
+      grupos: [
+        { imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "bolo" },
+        { imagemUrl: sopaImg, quantidade: 1, rotulo: "sopa" },
       ],
+      pergunta: "Qual começa com sílaba com U?",
+      opcoes: ["Lua", "Bolo", "Sopa"],
       correta: 0,
-      acerto: "🎉 ESTRE-LA / CO-LA — mesma sílaba final!",
-      erro: "Ouça o final: -LA. COLA termina em -LA.",
+      acerto: "LUa — LU (com U)!",
+      erro: "BOlo e SOpa são com O. LUa é com U.",
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Fase 4 · Sílabas de BOLO",
+      instrucao: "Coloque em ordem: BO → LO.",
+      itens: ["BO", "LO"],
+      imagens: [
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "1º · BO" },
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "2º · LO" },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 5 · Reconhecer SO",
+      instrucao: "Qual começa com SO?",
+      grupos: [
+        { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+        { imagemUrl: sucoImg, quantidade: 1, rotulo: "suco" },
+        { imagemUrl: sapoImg, quantidade: 1, rotulo: "sapo" },
+      ],
+      pergunta: "Qual começa com SO?",
+      opcoes: ["Sol", "Suco", "Sapo"],
+      correta: 0,
+      acerto: "SOl — SO!",
+      erro: "SUco é SU. SApo é SA. SOl é SO.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
+      { pergunta: "B + O = ?", opcoes: ["BO", "BA", "BU"], correta: 0, explicacao: "B+O = BO." },
+      { pergunta: "L + U = ?", opcoes: ["LO", "LU", "LI"], correta: 1, explicacao: "L+U = LU." },
       {
-        pergunta: "Rima com GATO:",
-        opcoes: ["PATO", "SOL", "FLOR"],
+        pergunta: "Qual começa com LU?",
+        opcoes: ["Lua", "Sapo", "Maçã"],
         correta: 0,
-        explicacao: "-ATO no final.",
-        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "🦆" },
-      },
-      {
-        pergunta: "Rima com BOLA:",
-        opcoes: ["COLA", "MAÇÃ", "RATO"],
-        correta: 0,
-        explicacao: "-LA no final.",
-        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "🏀" },
-      },
-      {
-        pergunta: "Rima com FLOR:",
-        opcoes: ["COR", "PATO", "SOL"],
-        correta: 0,
-        explicacao: "-OR no final.",
-        visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "🌸" },
+        explicacao: "LUa.",
+        visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
       },
     ],
     medio: [
       {
-        pergunta: "Sílaba do meio de BANANA:",
-        opcoes: ["NA", "BA", "PA"],
+        pergunta: "Qual começa com SO?",
+        opcoes: ["Sol", "Suco", "Lua"],
         correta: 0,
-        explicacao: "BA · NA · NA.",
-        visual: { tipo: "itens", imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌" },
+        explicacao: "SOl.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: solImg, quantidade: 1, rotulo: "sol" },
+            { imagemUrl: sucoImg, quantidade: 1, rotulo: "suco" },
+            { imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
+          ],
+        },
       },
+      { pergunta: "Quantas sílabas tem SUCO?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "SU-CO = 2." },
       {
-        pergunta: "Sílaba final de CORUJA:",
-        opcoes: ["JA", "CO", "RU"],
-        correta: 0,
-        explicacao: "CO · RU · JA.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🦉" },
-      },
-      {
-        pergunta: "Qual NÃO rima com RATO?",
-        opcoes: ["SOL", "GATO", "PATO"],
-        correta: 0,
-        explicacao: "SOL não termina em -ATO.",
-        visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️" },
+        pergunta: "Qual NÃO começa com sílaba com O?",
+        opcoes: ["Bolo", "Sopa", "Lua"],
+        correta: 2,
+        explicacao: "LUa começa com U.",
       },
     ],
     dificil: [
       {
-        pergunta: "'Rimam' quer dizer:",
-        opcoes: [
-          "Terminam parecido",
-          "Começam iguais",
-          "Têm a mesma cor",
-        ],
+        pergunta: "Se leio B-O-L-O, formo:",
+        opcoes: ["BO-LO (bolo)", "LO-BO", "BA-LA"],
         correta: 0,
-        explicacao: "Rima = final parecido.",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "🎵" },
+        explicacao: "BO + LO = BOLO.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "bolo" },
       },
       {
-        pergunta: "Sílaba do meio de PANELA:",
-        opcoes: ["NE", "PA", "LA"],
+        pergunta: "Qual grupo tem SÓ sílabas com U?",
+        opcoes: ["LU · SU · NU", "BO · SO · LO", "MA · SA · PA"],
         correta: 0,
-        explicacao: "PA · NE · LA — a do meio é NE.",
-        visual: { tipo: "itens", imagemUrl: panelaCasa, quantidade: 1, rotulo: "PA·NE·LA" },
+        explicacao: "Todas terminam em U.",
       },
       {
-        pergunta: "Grupo que RIMA:",
-        opcoes: [
-          "PATO · GATO · RATO",
-          "SOL · FLOR · MAR",
-          "CASA · BOLA · UVA",
-        ],
+        pergunta: "Se junto L-U-A, o que leio?",
+        opcoes: ["LUA", "ALU", "UAL"],
         correta: 0,
-        explicacao: "Todos terminam em -ATO.",
-        visual: { tipo: "itens", imagemUrl: patoImg, quantidade: 1, rotulo: "-ATO" },
+        explicacao: "LU + A = LUA.",
+        visual: { tipo: "itens", imagemUrl: luaImg, quantidade: 1, rotulo: "lua" },
       },
     ],
   },
-
   proximaHabilidade: {
     codigo: "EF01LP14",
+    titulo: "Lendo minhas primeiras palavras CV+CV: PATO, SAPO, MAPA",
   },
 };
 
