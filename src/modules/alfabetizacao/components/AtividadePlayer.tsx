@@ -1,11 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { EtapaCurricular } from "../data/etapas";
+import { EtapaCurricular, TipoAtividade } from "../data/etapas";
 import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
 import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { Volume2, X, Check, Sparkles, TrendingUp, TrendingDown, Lightbulb } from "lucide-react";
+import {
+  Volume2,
+  ArrowLeft,
+  X,
+  Sparkles,
+  TrendingUp,
+  TrendingDown,
+  Lightbulb,
+  Play,
+} from "lucide-react";
 
 interface Props {
   etapa: EtapaCurricular;
@@ -25,12 +34,70 @@ const TIPOS_COM_REFERENCIA = new Set([
   "substituicao-fonema",
 ]);
 
+// Explicação inicial mostrada ANTES da atividade começar — igual ao padrão
+// clínico das outras trilhas do Neuro Treino (Dislexia, Discalculia).
+const INTRO_ETAPA: Record<
+  string,
+  { titulo: string; texto: string; comoJogar: string }
+> = {
+  vogais: {
+    titulo: "Hoje vamos treinar as VOGAIS",
+    texto:
+      "As vogais são cinco sons especiais: A, E, I, O, U. Elas aparecem em quase toda palavra que a gente fala.",
+    comoJogar:
+      "Eu falo um som e você toca na imagem que começa com aquele som. Se errar, o Professor Brilha explica e você tenta de novo.",
+  },
+  silabas: {
+    titulo: "Vamos brincar com as SÍLABAS",
+    texto:
+      "Toda palavra pode ser dividida em pedacinhos. Cada pedacinho é uma sílaba: BO-LA, CA-SA, SA-PA-TO.",
+    comoJogar:
+      "Você vai contar os pedacinhos da palavra ou juntar sílabas para formar a palavra certa.",
+  },
+  palavras: {
+    titulo: "Sons das PALAVRAS",
+    texto:
+      "As palavras têm sons no começo, no meio e no fim. Quando duas palavras terminam com o mesmo som, elas rimam — como GATO e PATO.",
+    comoJogar:
+      "Ouça a palavra de referência e toque na imagem que combina: mesmo som inicial, mesma rima ou mesma letra de começo.",
+  },
+  fonemas: {
+    titulo: "Detetive dos FONEMAS",
+    texto:
+      "Fonema é o menor som de uma palavra. GATO tem 4 fonemas: G-A-T-O. Trocar um fonema muda a palavra inteira: GATO vira PATO!",
+    comoJogar:
+      "Ouça com atenção e ache o som do começo, do meio, do fim, conte quantos sons tem ou troque um som pelo outro.",
+  },
+  frases: {
+    titulo: "Ouvir FRASES",
+    texto:
+      "Uma frase junta várias palavras para contar uma ideia. Quando você ouve com atenção, consegue imaginar a cena.",
+    comoJogar:
+      "Eu leio uma frase e você toca na imagem que mostra o que aconteceu.",
+  },
+  textos: {
+    titulo: "Ouvir TEXTOS curtos",
+    texto:
+      "Textos são histórias pequenas com começo, meio e fim. Prestar atenção é o segredo para entender tudo.",
+    comoJogar:
+      "Escute a historinha até o fim e depois responda a pergunta escolhendo a imagem certa.",
+  },
+  compreensao: {
+    titulo: "Entendendo a HISTÓRIA",
+    texto:
+      "Compreender é lembrar o que aconteceu, quem estava lá e por quê. Todo bom leitor pensa depois de ler.",
+    comoJogar:
+      "Ouça o texto com calma e escolha a resposta que combina com o que aconteceu.",
+  },
+};
+
 export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSair }: Props) {
   const { falar, parar } = useVoz();
   const { nivel, registrar } = useAdaptiveDifficulty(childId);
+  const [mostrarIntro, setMostrarIntro] = useState(true);
   const [rodada, setRodada] = useState<Rodada>(() =>
     gerarPorTipo(
-      etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)],
+      etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)] as TipoAtividade,
       nivel,
     ),
   );
@@ -38,9 +105,15 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const [travado, setTravado] = useState(false);
   const [ajuste, setAjuste] = useState<"subiu" | "desceu" | null>(null);
   const [errosNaRodada, setErrosNaRodada] = useState(0);
-  const [revelar, setRevelar] = useState(false); // destaca a resposta certa após 2 erros
+  const [revelar, setRevelar] = useState(false);
   const [ultimaRegra, setUltimaRegra] = useState<string | null>(null);
   const timers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+
+  const intro = INTRO_ETAPA[etapa.id] ?? {
+    titulo: etapa.titulo,
+    texto: etapa.descricao,
+    comoJogar: "Ouça a instrução e toque na resposta certa.",
+  };
 
   const progressoPct = useMemo(
     () => Math.min(100, Math.round((acertosAtuais / etapa.alvo) * 100)),
@@ -56,14 +129,29 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     timers.current = [];
   }
 
+  // Lê a explicação da intro assim que o player abre.
   useEffect(() => {
+    if (!mostrarIntro) return;
+    const t = setTimeout(
+      () => falar(`${intro.titulo}. ${intro.texto}. ${intro.comoJogar}`),
+      350,
+    );
+    return () => {
+      clearTimeout(t);
+      parar();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mostrarIntro]);
+
+  useEffect(() => {
+    if (mostrarIntro) return;
     falar(rodada.instrucaoFalada);
     return () => {
       limparTimers();
       parar();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rodada]);
+  }, [rodada, mostrarIntro]);
 
   function proximaRodada(nivelAtual: number) {
     limparTimers();
@@ -98,18 +186,15 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       return;
     }
 
-    // ERRO: Professor Digital explica a regra e mostra o som certo.
     const novoErros = errosNaRodada + 1;
     setErrosNaRodada(novoErros);
     setUltimaRegra(rodada.regra);
 
     if (novoErros >= 2) {
-      // Revela a resposta certa e avança sem contar acerto.
       setRevelar(true);
       falar(`Olha só. ${rodada.regra} Vamos para a próxima.`);
       agendar(() => proximaRodada(nivelDepois), 4200);
     } else {
-      // Primeira tentativa errada: explica e libera nova tentativa.
       falar(`Ainda não. ${rodada.regra}`);
       agendar(() => {
         setFeedback(null);
@@ -122,32 +207,101 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const usaReferencia = TIPOS_COM_REFERENCIA.has(rodada.tipo);
   const imagensGrid = usaReferencia ? rodada.imagens.slice(1) : rodada.imagens;
 
+  // ---- Intro (explicação antes da aula) ----
+  if (mostrarIntro) {
+    return (
+      <div className="fixed inset-0 z-50 bg-gradient-to-b from-[#3A1F5C] via-[#4A2670] to-[#1F1233] text-white flex flex-col">
+        <header className="flex items-center gap-3 p-4">
+          <button
+            onClick={() => {
+              parar();
+              onSair();
+            }}
+            className="rounded-full bg-white/15 hover:bg-white/25 p-2"
+            aria-label="Sair"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div className="flex-1 text-sm font-black uppercase tracking-widest text-orange-200">
+            Etapa {etapa.ordem} · {etapa.titulo}
+          </div>
+        </header>
+
+        <main className="flex-1 flex items-center justify-center px-4 pb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-xl bg-white/10 backdrop-blur border-2 border-white/20 rounded-[2rem] shadow-xl p-6 md:p-8 text-center"
+          >
+            <div className="text-6xl mb-3">{etapa.emoji}</div>
+            <h2 className="text-2xl md:text-3xl font-black text-orange-200 mb-4">
+              {intro.titulo}
+            </h2>
+            <p className="text-base md:text-lg text-white/90 leading-relaxed mb-4">
+              {intro.texto}
+            </p>
+            <div className="rounded-2xl bg-white/10 border border-white/15 p-4 text-sm md:text-base text-white/85 mb-6 flex gap-3 items-start text-left">
+              <Lightbulb className="w-5 h-5 text-amber-300 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-amber-300 mb-1">
+                  Como jogar
+                </div>
+                {intro.comoJogar}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                onClick={() => falar(`${intro.titulo}. ${intro.texto}. ${intro.comoJogar}`)}
+                className="px-5 py-3 rounded-full bg-white/15 hover:bg-white/25 text-white font-black flex items-center gap-2 justify-center border border-white/20"
+              >
+                <Volume2 className="w-5 h-5" /> Ouvir de novo
+              </button>
+              <button
+                onClick={() => {
+                  parar();
+                  setMostrarIntro(false);
+                }}
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-[#3A1F5C] font-black flex items-center gap-2 justify-center shadow-lg hover:scale-105 transition-transform"
+              >
+                <Play className="w-5 h-5" /> Começar
+              </button>
+            </div>
+          </motion.div>
+        </main>
+      </div>
+    );
+  }
+
+  // ---- Atividade ----
   return (
-    <div className="fixed inset-0 z-50 bg-gradient-to-br from-indigo-50 via-white to-pink-50 flex flex-col">
-      {/* Top bar */}
-      <div className="flex items-center gap-3 p-4 border-b bg-white/80 backdrop-blur">
+    <div className="fixed inset-0 z-50 bg-gradient-to-b from-[#3A1F5C] via-[#4A2670] to-[#1F1233] text-white flex flex-col">
+      <div className="flex items-center gap-3 p-4 border-b border-white/10 bg-white/5 backdrop-blur">
         <button
-          onClick={onSair}
-          className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"
+          onClick={() => {
+            parar();
+            onSair();
+          }}
+          className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center"
           aria-label="Sair"
         >
-          <X className="w-5 h-5 text-slate-600" />
+          <X className="w-5 h-5" />
         </button>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
+          <div className="flex items-center gap-2 text-sm font-bold text-white/90">
             <span>{etapa.emoji}</span>
             <span className="truncate">{etapa.titulo}</span>
           </div>
-          <div className="mt-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="mt-1 h-2 bg-white/15 rounded-full overflow-hidden">
             <div
-              className={`h-full bg-gradient-to-r ${etapa.cor} transition-all`}
+              className="h-full bg-gradient-to-r from-orange-400 to-amber-500 transition-all"
               style={{ width: `${progressoPct}%` }}
             />
           </div>
         </div>
         <div className="flex items-center gap-2">
           <div
-            className="px-3 py-1 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-wider text-slate-600"
+            className="px-3 py-1 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-wider text-white/90"
             title="Dificuldade adaptativa atual"
           >
             Nível {nivel}
@@ -155,7 +309,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
           {ultimaRegra && (
             <button
               onClick={() => falar(ultimaRegra)}
-              className="w-11 h-11 rounded-full bg-amber-400 text-white flex items-center justify-center shadow hover:bg-amber-500"
+              className="w-11 h-11 rounded-full bg-amber-400 text-[#3A1F5C] flex items-center justify-center shadow hover:bg-amber-300"
               aria-label="Ouvir a explicação"
               title="Ouvir a dica do Professor"
             >
@@ -164,7 +318,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
           )}
           <button
             onClick={() => falar(rodada.instrucaoFalada)}
-            className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
+            className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 text-[#3A1F5C] flex items-center justify-center shadow-lg hover:scale-105"
             aria-label="Ouvir a pergunta"
           >
             <Volume2 className="w-6 h-6" />
@@ -179,7 +333,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -40, opacity: 0 }}
             className={`mx-auto mt-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider shadow flex items-center gap-2 ${
-              ajuste === "subiu" ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"
+              ajuste === "subiu" ? "bg-emerald-500 text-white" : "bg-amber-500 text-[#3A1F5C]"
             }`}
           >
             {ajuste === "subiu" ? (
@@ -195,14 +349,13 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
-      {/* Balão do Professor Digital com a regra quando erra */}
       <AnimatePresence>
         {feedback === "erro" && ultimaRegra && (
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
-            className="mx-auto mt-3 w-[92%] max-w-2xl rounded-2xl bg-white shadow-lg border-l-4 border-amber-400 px-4 py-3 flex items-start gap-3"
+            className="mx-auto mt-3 w-[92%] max-w-2xl rounded-2xl bg-white/95 shadow-lg border-l-4 border-amber-400 px-4 py-3 flex items-start gap-3"
           >
             <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
               <Lightbulb className="w-5 h-5 text-amber-600" />
@@ -217,11 +370,10 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
-      {/* Conteúdo */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
         {usaReferencia && (
           <div className="flex flex-col items-center gap-2">
-            <span className="text-xs uppercase font-bold text-slate-500 tracking-wider">
+            <span className="text-xs uppercase font-bold text-white/70 tracking-wider">
               Palavra de referência
             </span>
             <ImgChip
@@ -250,8 +402,8 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
                     disabled={travado}
                     className={`aspect-square rounded-2xl border-4 text-4xl font-black shadow-md transition-all disabled:opacity-60 ${
                       destaque
-                        ? "border-emerald-500 bg-emerald-50 text-emerald-600 ring-4 ring-emerald-300 scale-105"
-                        : "border-indigo-200 bg-white text-indigo-600 hover:scale-105"
+                        ? "border-emerald-400 bg-emerald-500/20 text-emerald-200 ring-4 ring-emerald-300/50 scale-105"
+                        : "border-white/20 bg-white/10 text-white hover:scale-105 hover:bg-white/20"
                     }`}
                   >
                     {n}
@@ -287,7 +439,6 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </div>
 
-      {/* Feedback */}
       <AnimatePresence>
         {feedback && (
           <motion.div
@@ -332,18 +483,18 @@ function ImgChip({
   const src = objetoImg(nome);
   const size = tamanho === "lg" ? "h-32 sm:h-40" : "h-24 sm:h-28";
   const borda = destaque
-    ? "border-emerald-500 ring-4 ring-emerald-300 scale-105"
+    ? "border-emerald-400 ring-4 ring-emerald-300/50 scale-105 bg-emerald-500/20"
     : selecionavel
-      ? "border-indigo-200 hover:scale-105"
-      : "border-slate-100";
+      ? "border-white/20 hover:scale-105 hover:bg-white/20"
+      : "border-white/15";
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${size} aspect-square rounded-3xl bg-white shadow-md flex items-center justify-center p-3 border-4 ${borda} transition-all disabled:opacity-60`}
+      className={`${size} aspect-square rounded-3xl bg-white/10 backdrop-blur shadow-md flex items-center justify-center p-3 border-4 ${borda} transition-all disabled:opacity-60`}
     >
       {src ? (
-        <img src={src} alt="" className="max-h-full max-w-full object-contain" />
+        <img src={src} alt="" className="max-h-full max-w-full object-contain drop-shadow" />
       ) : (
         <span className="text-5xl">❓</span>
       )}
