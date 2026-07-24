@@ -72,12 +72,6 @@ export function TrilhaAlfa({ childId, childName }: Props) {
             anterior — assim seu cérebro vira um craque das letras!
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-            <Link
-              to="/biblioteca-alfa"
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold shadow hover:scale-105 transition-transform text-sm"
-            >
-              <BookOpen className="w-4 h-4" /> Biblioteca (Nível leitor {nivelLeitor})
-            </Link>
             <button
               onClick={() => {
                 resetarScreening(childId);
