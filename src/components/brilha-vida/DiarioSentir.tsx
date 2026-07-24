@@ -45,6 +45,20 @@ export function DiarioSentir({ onClose }: { onClose: () => void }) {
   const [emocao, setEmocao] = useState<typeof EMOJIS[number] | null>(null);
   const [momento, setMomento] = useState<typeof MOMENTOS[number] | null>(null);
   const [gratidao, setGratidao] = useState<typeof GRATIDOES[number] | null>(null);
+  const recordMood = useMoodRecorder();
+  const escolherGratidao = (g: (typeof GRATIDOES)[number]) => {
+    setGratidao(g);
+    if (emocao) {
+      recordMood({
+        source: "diario-sentir",
+        valence: DIARIO_VALENCIA[emocao.id] ?? 0,
+        energy: 0,
+        emocao: emocao.nome,
+        momento: momento?.nome,
+        note: `Gratidão: ${g.texto}`,
+      });
+    }
+  };
 
   const passo = !emocao ? 1 : !momento ? 2 : !gratidao ? 3 : 4;
 
