@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Volume2, Pause } from "lucide-react";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 /**
  * Cartão genérico usado por quase todos os blocos da aula.
@@ -30,11 +31,7 @@ export function Secao({
   // Para a leitura ao desmontar / trocar de aula
   useEffect(() => {
     return () => {
-      try {
-        window.speechSynthesis?.cancel();
-      } catch {
-        /* noop */
-      }
+      stopSpeaking();
     };
   }, []);
 
@@ -47,30 +44,30 @@ export function Secao({
         'button, [role="button"], input, select, textarea, [data-no-tts]',
       )
       .forEach((n) => n.remove());
+    // Preserva quebras/pontuação: insere ponto após blocos para gerar pausa natural
+    clone.querySelectorAll("p, div, li, h1, h2, h3, h4, h5, h6, br").forEach((n) => {
+      n.append(document.createTextNode(". "));
+    });
     return (clone.textContent || "")
       .replace(/\s+/g, " ")
-      .replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁💡✨🌟⭐🎯🏆🎉]/gu, " ")
+      .replace(/\s*\.\s*\.+/g, ". ")
       .trim();
   };
 
   const toggle = () => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
     if (falando) {
-      window.speechSynthesis.cancel();
+      stopSpeaking();
       setFalando(false);
       return;
     }
     const texto = coletarTexto();
     if (!texto) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(texto);
-    u.lang = "pt-BR";
-    u.rate = 0.95;
-    u.pitch = 1.05;
-    u.onend = () => setFalando(false);
-    u.onerror = () => setFalando(false);
     setFalando(true);
-    window.speechSynthesis.speak(u);
+    speakChunked(texto, {
+      rate: 0.82,
+      pitch: 1.05,
+      onEnd: () => setFalando(false),
+    });
   };
 
   return (
@@ -78,7 +75,7 @@ export function Secao({
       ref={boxRef}
       className="rounded-3xl bg-white/10 border-2 border-white/20 p-6 relative"
     >
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3" data-no-tts>
         <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: cor }}>
           <Icon className="h-5 w-5 shrink-0" />
           <span className="text-xs font-black uppercase tracking-widest truncate">
