@@ -369,6 +369,18 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             </button>
           )}
           <button
+            onClick={() => {
+              limparTimers();
+              parar();
+              proximaRodada(nivel);
+            }}
+            className="w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center"
+            aria-label="Pular esta pergunta"
+            title="Pular esta pergunta"
+          >
+            <SkipForward className="w-5 h-5" />
+          </button>
+          <button
             onClick={() => falar(rodada.instrucaoFalada)}
             className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 text-[#3A1F5C] flex items-center justify-center shadow-lg hover:scale-105"
             aria-label="Ouvir a pergunta"
