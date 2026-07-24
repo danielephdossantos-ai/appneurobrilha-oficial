@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { EtapaCurricular } from "../data/etapas";
 import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
 import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { Volume2, X, Check, Sparkles, TrendingUp, TrendingDown } from "lucide-react";
+import { Volume2, X, Check, Sparkles, TrendingUp, TrendingDown, Lightbulb } from "lucide-react";
 
 interface Props {
   etapa: EtapaCurricular;
@@ -14,6 +14,16 @@ interface Props {
   onAcerto: () => void;
   onSair: () => void;
 }
+
+// Tipos que usam o grid de números em vez de imagens.
+const TIPOS_NUMERO = new Set(["segmentacao", "contagem-fonemas"]);
+// Tipos que exibem uma "palavra de referência" antes do grid.
+const TIPOS_COM_REFERENCIA = new Set([
+  "rima",
+  "aliteracao",
+  "som-final",
+  "substituicao-fonema",
+]);
 
 export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSair }: Props) {
   const { falar, parar } = useVoz();
@@ -27,24 +37,43 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
   const [travado, setTravado] = useState(false);
   const [ajuste, setAjuste] = useState<"subiu" | "desceu" | null>(null);
+  const [errosNaRodada, setErrosNaRodada] = useState(0);
+  const [revelar, setRevelar] = useState(false); // destaca a resposta certa após 2 erros
+  const [ultimaRegra, setUltimaRegra] = useState<string | null>(null);
+  const timers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
 
   const progressoPct = useMemo(
     () => Math.min(100, Math.round((acertosAtuais / etapa.alvo) * 100)),
     [acertosAtuais, etapa.alvo],
   );
 
-  // Toca instrução ao mudar de rodada
+  function agendar(fn: () => void, ms: number) {
+    const id = setTimeout(fn, ms);
+    timers.current.push(id);
+  }
+  function limparTimers() {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  }
+
   useEffect(() => {
     falar(rodada.instrucaoFalada);
-    return () => parar();
+    return () => {
+      limparTimers();
+      parar();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rodada]);
 
   function proximaRodada(nivelAtual: number) {
+    limparTimers();
     const tipo = etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)];
     setRodada(gerarPorTipo(tipo, nivelAtual));
     setFeedback(null);
     setTravado(false);
+    setErrosNaRodada(0);
+    setRevelar(false);
+    setUltimaRegra(null);
   }
 
   function responder(resposta: string) {
@@ -56,25 +85,42 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     const nivelDepois = registrar(ok);
     if (nivelDepois > nivelAntes) {
       setAjuste("subiu");
-      setTimeout(() => setAjuste(null), 1800);
+      agendar(() => setAjuste(null), 1800);
     } else if (nivelDepois < nivelAntes) {
       setAjuste("desceu");
-      setTimeout(() => setAjuste(null), 1800);
+      agendar(() => setAjuste(null), 1800);
     }
+
     if (ok) {
-      falar("Muito bem!");
+      falar("Isso! " + rodada.regra);
       onAcerto();
-      setTimeout(() => proximaRodada(nivelDepois), 1400);
+      agendar(() => proximaRodada(nivelDepois), 2200);
+      return;
+    }
+
+    // ERRO: Professor Digital explica a regra e mostra o som certo.
+    const novoErros = errosNaRodada + 1;
+    setErrosNaRodada(novoErros);
+    setUltimaRegra(rodada.regra);
+
+    if (novoErros >= 2) {
+      // Revela a resposta certa e avança sem contar acerto.
+      setRevelar(true);
+      falar(`Olha só. ${rodada.regra} Vamos para a próxima.`);
+      agendar(() => proximaRodada(nivelDepois), 4200);
     } else {
-      falar("Quase! Tenta de novo.");
-      setTimeout(() => {
+      // Primeira tentativa errada: explica e libera nova tentativa.
+      falar(`Ainda não. ${rodada.regra}`);
+      agendar(() => {
         setFeedback(null);
         setTravado(false);
-      }, 1200);
+      }, 3200);
     }
   }
 
-  const isSegmentacao = rodada.tipo === "segmentacao";
+  const usaGridNumero = TIPOS_NUMERO.has(rodada.tipo);
+  const usaReferencia = TIPOS_COM_REFERENCIA.has(rodada.tipo);
+  const imagensGrid = usaReferencia ? rodada.imagens.slice(1) : rodada.imagens;
 
   return (
     <div className="fixed inset-0 z-50 bg-gradient-to-br from-indigo-50 via-white to-pink-50 flex flex-col">
@@ -87,10 +133,10 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         >
           <X className="w-5 h-5 text-slate-600" />
         </button>
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
             <span>{etapa.emoji}</span>
-            <span>{etapa.titulo}</span>
+            <span className="truncate">{etapa.titulo}</span>
           </div>
           <div className="mt-1 h-2 bg-slate-200 rounded-full overflow-hidden">
             <div
@@ -106,10 +152,20 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
           >
             Nível {nivel}
           </div>
+          {ultimaRegra && (
+            <button
+              onClick={() => falar(ultimaRegra)}
+              className="w-11 h-11 rounded-full bg-amber-400 text-white flex items-center justify-center shadow hover:bg-amber-500"
+              aria-label="Ouvir a explicação"
+              title="Ouvir a dica do Professor"
+            >
+              <Lightbulb className="w-5 h-5" />
+            </button>
+          )}
           <button
             onClick={() => falar(rodada.instrucaoFalada)}
             className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
-            aria-label="Ouvir de novo"
+            aria-label="Ouvir a pergunta"
           >
             <Volume2 className="w-6 h-6" />
           </button>
@@ -123,9 +179,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -40, opacity: 0 }}
             className={`mx-auto mt-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider shadow flex items-center gap-2 ${
-              ajuste === "subiu"
-                ? "bg-emerald-500 text-white"
-                : "bg-amber-500 text-white"
+              ajuste === "subiu" ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"
             }`}
           >
             {ajuste === "subiu" ? (
@@ -141,49 +195,94 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
+      {/* Balão do Professor Digital com a regra quando erra */}
+      <AnimatePresence>
+        {feedback === "erro" && ultimaRegra && (
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            className="mx-auto mt-3 w-[92%] max-w-2xl rounded-2xl bg-white shadow-lg border-l-4 border-amber-400 px-4 py-3 flex items-start gap-3"
+          >
+            <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+              <Lightbulb className="w-5 h-5 text-amber-600" />
+            </div>
+            <div className="text-sm text-slate-700 leading-snug">
+              <div className="text-[10px] font-black uppercase tracking-wider text-amber-600 mb-0.5">
+                Professor Brilha
+              </div>
+              {ultimaRegra}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Conteúdo */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 gap-8">
-        {/* Para rima/aliteração, a primeira imagem é o "alvo" da pergunta */}
-        {(rodada.tipo === "rima" || rodada.tipo === "aliteracao") && (
+      <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+        {usaReferencia && (
           <div className="flex flex-col items-center gap-2">
             <span className="text-xs uppercase font-bold text-slate-500 tracking-wider">
               Palavra de referência
             </span>
-            <ImgChip nome={rodada.imagens[0]} tamanho="md" onClick={() => falar(rodada.imagens[0].toLowerCase())} />
+            <ImgChip
+              nome={rodada.imagens[0]}
+              tamanho="md"
+              onClick={() => falar(rodada.imagens[0].toLowerCase())}
+            />
           </div>
         )}
 
-        {isSegmentacao ? (
+        {usaGridNumero ? (
           <>
-            <ImgChip nome={rodada.imagens[0]} tamanho="lg" onClick={() => falar(rodada.imagens[0].toLowerCase())} />
+            <ImgChip
+              nome={rodada.imagens[0]}
+              tamanho="lg"
+              onClick={() => falar(rodada.imagens[0].toLowerCase())}
+            />
             <div className="grid grid-cols-4 gap-3 w-full max-w-md">
-              {rodada.numeroOpcoes!.map((n) => (
-                <button
-                  key={n}
-                  onClick={() => responder(String(n))}
-                  disabled={travado}
-                  className="aspect-square rounded-2xl bg-white border-4 border-indigo-200 text-4xl font-black text-indigo-600 shadow-md hover:scale-105 transition-transform disabled:opacity-50"
-                >
-                  {n}
-                </button>
-              ))}
+              {rodada.numeroOpcoes!.map((n) => {
+                const isCorreta = String(n) === rodada.correta;
+                const destaque = revelar && isCorreta;
+                return (
+                  <button
+                    key={n}
+                    onClick={() => responder(String(n))}
+                    disabled={travado}
+                    className={`aspect-square rounded-2xl border-4 text-4xl font-black shadow-md transition-all disabled:opacity-60 ${
+                      destaque
+                        ? "border-emerald-500 bg-emerald-50 text-emerald-600 ring-4 ring-emerald-300 scale-105"
+                        : "border-indigo-200 bg-white text-indigo-600 hover:scale-105"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                );
+              })}
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-3xl">
-            {(rodada.tipo === "rima" || rodada.tipo === "aliteracao"
-              ? rodada.imagens.slice(1)
-              : rodada.imagens
-            ).map((nome) => (
-              <ImgChip
-                key={nome}
-                nome={nome}
-                tamanho="lg"
-                selecionavel
-                onClick={() => responder(nome)}
-                disabled={travado}
-              />
-            ))}
+          <div
+            className={`grid gap-4 w-full max-w-3xl ${
+              imagensGrid.length === 4
+                ? "grid-cols-2"
+                : "grid-cols-2 sm:grid-cols-3"
+            }`}
+          >
+            {imagensGrid.map((nome) => {
+              const isCorreta = nome === rodada.correta;
+              const destaque = revelar && isCorreta;
+              return (
+                <ImgChip
+                  key={nome}
+                  nome={nome}
+                  tamanho="lg"
+                  selecionavel
+                  destaque={destaque}
+                  onClick={() => responder(nome)}
+                  disabled={travado}
+                />
+              );
+            })}
           </div>
         )}
       </div>
@@ -221,22 +320,27 @@ function ImgChip({
   onClick,
   selecionavel,
   disabled,
+  destaque,
 }: {
   nome: string;
   tamanho: "md" | "lg";
   onClick?: () => void;
   selecionavel?: boolean;
   disabled?: boolean;
+  destaque?: boolean;
 }) {
   const src = objetoImg(nome);
   const size = tamanho === "lg" ? "h-32 sm:h-40" : "h-24 sm:h-28";
+  const borda = destaque
+    ? "border-emerald-500 ring-4 ring-emerald-300 scale-105"
+    : selecionavel
+      ? "border-indigo-200 hover:scale-105"
+      : "border-slate-100";
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${size} aspect-square rounded-3xl bg-white shadow-md flex items-center justify-center p-3 ${
-        selecionavel ? "border-4 border-indigo-200 hover:scale-105" : "border-2 border-slate-100"
-      } transition-transform disabled:opacity-50`}
+      className={`${size} aspect-square rounded-3xl bg-white shadow-md flex items-center justify-center p-3 border-4 ${borda} transition-all disabled:opacity-60`}
     >
       {src ? (
         <img src={src} alt="" className="max-h-full max-w-full object-contain" />

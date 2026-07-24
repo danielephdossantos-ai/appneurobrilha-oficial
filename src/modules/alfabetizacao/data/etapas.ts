@@ -3,10 +3,15 @@
 // Quando atinge o alvo, a próxima etapa destrava.
 
 export type TipoAtividade =
-  | "vogal-som" // ouvir vogal e escolher
+  | "vogal-som"
   | "rima"
   | "aliteracao"
   | "som-inicial"
+  | "som-final"
+  | "som-meio"
+  | "contagem-fonemas"
+  | "substituicao-fonema"
+  | "categorizacao-som"
   | "segmentacao"
   | "fusao"
   | "frase-imagem"
@@ -19,7 +24,7 @@ export interface EtapaCurricular {
   descricao: string;
   emoji: string;
   cor: string; // tailwind classes
-  alvo: number; // acertos necessários pra destravar a próxima
+  alvo: number;
   atividades: TipoAtividade[];
 }
 
@@ -55,8 +60,24 @@ export const ETAPAS: EtapaCurricular[] = [
     atividades: ["som-inicial", "rima", "aliteracao"],
   },
   {
-    id: "frases",
+    id: "fonemas",
     ordem: 4,
+    titulo: "Fonemas",
+    descricao: "Som do começo, do meio, do fim, contar e trocar sons",
+    emoji: "🔊",
+    cor: "from-cyan-400 to-sky-500",
+    alvo: 10,
+    atividades: [
+      "som-final",
+      "som-meio",
+      "contagem-fonemas",
+      "categorizacao-som",
+      "substituicao-fonema",
+    ],
+  },
+  {
+    id: "frases",
+    ordem: 5,
     titulo: "Frases curtas",
     descricao: "Ouvir uma frase e achar a imagem",
     emoji: "💬",
@@ -66,7 +87,7 @@ export const ETAPAS: EtapaCurricular[] = [
   },
   {
     id: "textos",
-    ordem: 5,
+    ordem: 6,
     titulo: "Textos curtos",
     descricao: "Ouvir uma história e responder",
     emoji: "📖",
@@ -76,7 +97,7 @@ export const ETAPAS: EtapaCurricular[] = [
   },
   {
     id: "compreensao",
-    ordem: 6,
+    ordem: 7,
     titulo: "Compreensão",
     descricao: "Entender o que aconteceu na história",
     emoji: "🧠",
