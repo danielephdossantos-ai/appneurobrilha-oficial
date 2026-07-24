@@ -89,13 +89,13 @@ const INTRO_ETAPA: Record<
     comoJogar:
       "Você vai contar os pedacinhos da palavra ou juntar sílabas para formar a palavra certa.",
     paraPais:
-      "Objetivo clínico: segmentação silábica e fusão. Bata palma junto a cada sílaba — o toque no corpo ajuda a consolidar a divisão. Não trabalhe leitura ainda: aqui é OUVIDO, não olho.",
+      "Objetivo clínico: segmentação silábica e fusão. Bata palma junto a cada pedacinho — o toque no corpo ajuda a consolidar a divisão. O app mostra os blocos e evita ler sílabas isoladas para não distorcer a pronúncia.",
     exemplo: {
       passos: [
-        "1) O Professor fala a palavra: “SA-PA-TO”.",
-        "2) Bata 3 palmas junto com a criança: SA 👏 PA 👏 TO 👏.",
+        "1) A tela mostra uma palavra ou os pedacinhos dela.",
+        "2) Bata palmas junto com a criança: uma palma para cada pedacinho.",
         "3) Pergunta: “Quantos pedacinhos tem?” → toque no número 3.",
-        "4) Na fusão: aparecem chips SA · PA · TO e 4 imagens. A criança toca no SAPATO.",
+        "4) Na fusão: aparecem blocos de pedacinhos e 4 imagens. A criança junta com os olhos e toca na imagem correta.",
       ],
       dica: "Palmas ou passos com o pé funcionam melhor que contar nos dedos.",
     },
@@ -107,15 +107,15 @@ const INTRO_ETAPA: Record<
     comoJogar:
       "Ouça a palavra de referência e toque na imagem que combina: mesmo som inicial, mesma rima ou mesma letra de começo.",
     paraPais:
-      "Objetivo clínico: consciência fonológica de rima, aliteração e som inicial. Sempre ouça a palavra-referência 2× antes de escolher — bloqueia respostas por adivinhação visual.",
+      "Objetivo clínico: consciência fonológica de rima, aliteração e som inicial. A fala automática fica restrita a palavras completas e instruções seguras; letras isoladas ficam como pista visual na tela.",
     exemplo: {
       passos: [
         "1) Aparece a imagem-referência (ex.: GATO) e o Professor fala: “Qual imagem RIMA com GATO?”.",
         "2) Aparecem 4 imagens: PATO, BOLA, CASA, SOL.",
-        "3) A criança repete: “GAAA-TO… PAAA-TO… rima!”.",
+        "3) A criança compara as imagens e percebe que GATO e PATO terminam parecido.",
         "4) Toca em PATO → acerto e próxima rodada.",
       ],
-      dica: "Alongue o fim da palavra: “ga-TOOO / pa-TOOO”. É o final igual que forma a rima.",
+      dica: "Se necessário, o adulto pode repetir as palavras devagar; o app não força leitura de sons isolados.",
     },
   },
   fonemas: {
@@ -550,7 +550,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
         )}
       </AnimatePresence>
 
-      {/* Fase D · Modelagem sonora — grafema grande + eco do som */}
+      {/* Fase D · Modelagem visual — grafema grande sem fala de som isolado */}
       <AnimatePresence>
         {modelagem && feedback === "erro" && (
           <motion.div
@@ -560,7 +560,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             className="mx-auto mt-3 flex flex-col items-center gap-2"
           >
             <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
-              O som é
+              A pista é
             </span>
               <div
               className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl flex items-center justify-center border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform"
