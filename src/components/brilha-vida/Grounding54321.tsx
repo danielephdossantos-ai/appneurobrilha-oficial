@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, RotateCcw, Eye, Ear, Hand, Coffee, Wind } from "lucide-react";
 
