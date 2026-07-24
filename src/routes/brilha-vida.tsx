@@ -127,6 +127,14 @@ const categorias = [
     descricao: "Zones of Regulation + Mood Meter (RULER/Yale) para vocabulário emocional expandido",
     atividades: ["Zonas de Regulação", "Medidor de Emoções"],
   },
+  {
+    id: "tea-tdah",
+    nome: "Ferramentas TEA e TDAH",
+    img: catRotinaImg,
+    cor: "from-teal-300/30 to-teal-100/5",
+    descricao: "Suportes visuais clínicos: Primeiro-Depois, Cronograma, Time Timer e Cartão de Escolha",
+    atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
+  },
 ];
 
 function BrilhaVida() {
