@@ -176,7 +176,7 @@ export function gerarVogalSom(nivel = 2): Rodada {
   const candidatosSeguros = candidatos.length > 0
     ? candidatos
     : PALAVRAS.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
-  const alvo = pick(candidatos);
+  const alvo = pick(candidatosSeguros);
   const vogal = alvo.inicial.toUpperCase();
   const distratores = shuffle(pool.filter((p) => p.inicial !== alvo.inicial)).slice(
     0,
