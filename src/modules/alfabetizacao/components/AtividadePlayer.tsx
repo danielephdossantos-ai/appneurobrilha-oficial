@@ -16,7 +16,17 @@ import {
   TrendingDown,
   Lightbulb,
   Play,
+  SkipForward,
 } from "lucide-react";
+
+// Tipos em que a resposta correta REALMENTE começa com o `foco`.
+// Só nesses casos o banner "Toque na imagem que começa com X" faz sentido.
+const TIPOS_COMECA_COM = new Set([
+  "vogal-som",
+  "som-inicial",
+  "aliteracao",
+  "substituicao-fonema",
+]);
 
 interface Props {
   etapa: EtapaCurricular;
