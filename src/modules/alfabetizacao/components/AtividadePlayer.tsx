@@ -109,7 +109,9 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   const [errosNaRodada, setErrosNaRodada] = useState(0);
   const [revelar, setRevelar] = useState(false);
   const [ultimaRegra, setUltimaRegra] = useState<string | null>(null);
+  const [modelagem, setModelagem] = useState<string | null>(null); // grafema/som exibido no erro
   const timers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+  const rodadaInicio = useRef<number>(Date.now());
 
   const intro = INTRO_ETAPA[etapa.id] ?? {
     titulo: etapa.titulo,
