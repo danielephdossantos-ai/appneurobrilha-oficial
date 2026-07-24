@@ -5247,6 +5247,7 @@ export type Database = {
           minutos_por_dia: number
           semanas_totais: number
           serie: string
+          template_hash: string | null
           updated_at: string
         }
         Insert: {
@@ -5260,6 +5261,7 @@ export type Database = {
           minutos_por_dia?: number
           semanas_totais?: number
           serie: string
+          template_hash?: string | null
           updated_at?: string
         }
         Update: {
@@ -5273,6 +5275,7 @@ export type Database = {
           minutos_por_dia?: number
           semanas_totais?: number
           serie?: string
+          template_hash?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -5282,6 +5285,13 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "children"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plano_anual_template_hash_fkey"
+            columns: ["template_hash"]
+            isOneToOne: false
+            referencedRelation: "plano_anual_templates"
+            referencedColumns: ["hash"]
           },
         ]
       }
@@ -5356,6 +5366,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      plano_anual_templates: {
+        Row: {
+          created_at: string
+          hash: string
+          idade: number
+          payload: Json
+          serie: string
+          updated_at: string
+          usos: number
+        }
+        Insert: {
+          created_at?: string
+          hash: string
+          idade: number
+          payload: Json
+          serie: string
+          updated_at?: string
+          usos?: number
+        }
+        Update: {
+          created_at?: string
+          hash?: string
+          idade?: number
+          payload?: Json
+          serie?: string
+          updated_at?: string
+          usos?: number
+        }
+        Relationships: []
       }
       professor_brilha_conversas: {
         Row: {
