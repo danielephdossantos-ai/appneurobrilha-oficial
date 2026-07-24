@@ -5,6 +5,7 @@ import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { ACTIVE_STEPS } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
 import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
+import { salvarPlanoParaCrianca } from "@/modules/plano-anual/persist";
 
 interface Row {
   id: string;
