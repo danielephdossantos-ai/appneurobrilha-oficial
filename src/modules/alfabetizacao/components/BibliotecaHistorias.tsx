@@ -296,14 +296,17 @@ function LeitorHistoria({
     setProximoTokenEsperado(firstPalavraIdx(tokens));
     setPalavrasLidas(new Set());
     setDicaAtiva(null);
-    // Toca automaticamente só quando é a vez do professor
+    if (fase !== "leitura") return;
     if (modo === "professor") {
       const t = setTimeout(() => tocarKaraoke(), 350);
       return () => clearTimeout(t);
+    } else {
+      // Modo criança: começa a cronometrar a leitura da página
+      fluencia.iniciarPagina();
     }
     return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, historia.id]);
+  }, [pagina, historia.id, fase]);
 
   // Cleanup ao fechar
   useEffect(() => {
@@ -340,6 +343,10 @@ function LeitorHistoria({
   }
 
   function proxPag() {
+    // Se a página que estamos deixando é modo criança, finaliza cronômetro
+    if (modo === "crianca") {
+      fluencia.finalizarPagina(countPalavras(tokens));
+    }
     if (pagina < totalPag - 1) {
       setPagina(pagina + 1);
     } else {
@@ -354,6 +361,25 @@ function LeitorHistoria({
 
   function antPag() {
     if (pagina > 0) setPagina(pagina - 1);
+  }
+
+  function finalizarHistoria() {
+    const total = historia.perguntas.length;
+    const acerto = total > 0 ? acertos / total : undefined;
+    if (fluencia.temMedicao) {
+      registrarLeitura(childId, historia.id, fluencia.wpmMedio, acerto);
+    }
+    setFase("fim");
+  }
+
+  function relerHistoria() {
+    // Guided Repeated Oral Reading (NRP): reler aumenta fluência.
+    fluencia.resetar();
+    setPagina(0);
+    setPerguntaIdx(0);
+    setAcertos(0);
+    setRodada(rodada + 1);
+    setFase("leitura");
   }
 
   function responder(opt: string) {
