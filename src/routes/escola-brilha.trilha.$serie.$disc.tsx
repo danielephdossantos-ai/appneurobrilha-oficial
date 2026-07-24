@@ -58,13 +58,8 @@ function TrilhaSerieDisc() {
   const { serie, disc } = Route.useParams();
   const navigate = useNavigate();
 
-  // Educação Infantil de Português foi movido para Neuro Treino
-  // (Biblioteca Encantada · Comunicação Funcional).
-  useEffect(() => {
-    if (serie === "educacao-infantil" && disc === "portugues") {
-      navigate({ to: "/neuro-treino", replace: true });
-    }
-  }, [serie, disc, navigate]);
+  // Português EI (Pré II · Escuta, Fala, Pensamento e Imaginação · EI03EF01–09)
+  // agora tem trilha própria dentro da Escola Brilha, com pedagogia infantil.
 
   const { activeChild } = useAppState();
   const mascote = mascoteDaDisciplina(disc);
