@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Check, Play, Sparkles, BookOpen, ArrowLeft, ClipboardCheck } from "lucide-react";
+import { Check, Play, Sparkles, ArrowLeft, ClipboardCheck } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
 import { ScreeningInicial } from "./ScreeningInicial";
-import { calcularNivelLeitor } from "../data/historias-graduadas";
+
 import { useAdminMode } from "@/escola-brilha/admin-mode";
 import {
   screeningFeito,
@@ -30,7 +30,6 @@ export function TrilhaAlfa({ childId, childName }: Props) {
   const [admin] = useAdminMode();
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
   const [screening, setScreening] = useState(false);
-  const nivelLeitor = calcularNivelLeitor(progresso);
 
   useEffect(() => {
     setChildAtualSRS(childId);
@@ -72,12 +71,6 @@ export function TrilhaAlfa({ childId, childName }: Props) {
             anterior — assim seu cérebro vira um craque das letras!
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-            <Link
-              to="/biblioteca-alfa"
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold shadow hover:scale-105 transition-transform text-sm"
-            >
-              <BookOpen className="w-4 h-4" /> Biblioteca (Nível leitor {nivelLeitor})
-            </Link>
             <button
               onClick={() => {
                 resetarScreening(childId);
