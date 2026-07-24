@@ -115,7 +115,7 @@ export function DiarioSentir({ onClose }: { onClose: () => void }) {
             <h3 className="font-black text-center text-slate-700 mb-3">3. Pelo que você é grato(a) hoje?</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {GRATIDOES.map((g) => (
-                <button key={g.texto} onClick={() => setGratidao(g)} className="flex items-center gap-2 p-3 rounded-2xl bg-white border-2 border-slate-100 hover:border-pink-300 hover:scale-105 transition-all">
+                <button key={g.texto} onClick={() => escolherGratidao(g)} className="flex items-center gap-2 p-3 rounded-2xl bg-white border-2 border-slate-100 hover:border-pink-300 hover:scale-105 transition-all">
                   <span className="text-3xl" aria-hidden>{g.emoji}</span>
                   <span className="font-black text-sm text-slate-700">{g.texto}</span>
                 </button>
