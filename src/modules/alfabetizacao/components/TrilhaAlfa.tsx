@@ -5,7 +5,7 @@ import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
 import { ScreeningInicial } from "./ScreeningInicial";
-import { calcularNivelLeitor } from "../data/historias-graduadas";
+
 import { useAdminMode } from "@/escola-brilha/admin-mode";
 import {
   screeningFeito,
