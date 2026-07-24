@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, RotateCcw } from "lucide-react";
+import { X, RotateCcw } from "lucide-react";
+import { VozGuia } from "./shared/VozGuia";
+import { DemoAnimado } from "./shared/DemoAnimado";
 
 /**
  * Relaxamento Muscular Progressivo Infantil — versão "Espaguete e Estátua"
@@ -170,10 +172,16 @@ export function EspagueteEstatua({ onClose }: { onClose: () => void }) {
                 <div className="text-4xl">{grupo.emoji}</div>
               </div>
               <div className="text-xl font-black mb-1">{grupo.nome}</div>
-              <p className="text-base font-medium leading-tight">
+              <p className="text-base font-medium leading-tight mb-3">
                 {fase === "tensao" ? grupo.instrucaoTensao : grupo.instrucaoSolta}
               </p>
-              <div className="mt-4 flex items-center justify-between">
+              <div className="flex items-center gap-3 mb-3 bg-white/20 rounded-2xl p-2">
+                <DemoAnimado tipo={fase === "tensao" ? "pmr-aperta" : "pmr-solta"} size={110} />
+                <VozGuia
+                  texto={fase === "tensao" ? grupo.instrucaoTensao : grupo.instrucaoSolta}
+                />
+              </div>
+              <div className="mt-2 flex items-center justify-between">
                 <motion.div
                   animate={fase === "tensao" ? { scale: [1, 0.85, 1] } : { scale: [1, 1.1, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
@@ -184,6 +192,7 @@ export function EspagueteEstatua({ onClose }: { onClose: () => void }) {
                 <div className="text-6xl font-black tabular-nums drop-shadow">{segundos}</div>
               </div>
             </div>
+
 
             <div className="flex items-center justify-center gap-1 text-xs text-slate-500 font-bold">
               Parte {idx + 1} de {GRUPOS.length}

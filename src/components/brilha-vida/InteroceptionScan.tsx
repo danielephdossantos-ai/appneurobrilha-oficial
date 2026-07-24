@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Heart } from "lucide-react";
+import { VozGuia } from "./shared/VozGuia";
+import { DemoAnimado, type DemoTipo } from "./shared/DemoAnimado";
 
 /**
  * Interocepção Guiada — percepção do estado interno do corpo.
@@ -12,6 +14,8 @@ type Passo = {
   id: string;
   parte: string;
   emoji: string;
+  demo: DemoTipo;
+  narracao: string;
   pergunta: string;
   opcoes: { emoji: string; label: string; valor: string }[];
   dica: string;
@@ -22,6 +26,8 @@ const PASSOS: Passo[] = [
     id: "coracao",
     parte: "O coração",
     emoji: "❤️",
+    demo: "intero-coracao",
+    narracao: "Coloque a sua mão bem no meio do peito. Fique quietinho e sinta as batidinhas do coração. Ele está devagarinho, normal, ou rápido?",
     pergunta: "Coloque a mão no peito. Como está seu coração?",
     opcoes: [
       { emoji: "🐢", label: "Devagarinho", valor: "lento" },
@@ -35,6 +41,8 @@ const PASSOS: Passo[] = [
     id: "respiracao",
     parte: "A respiração",
     emoji: "🌬️",
+    demo: "intero-respiracao",
+    narracao: "Agora preste atenção no ar entrando e saindo pelo seu nariz. A respiração está longa e calma, normal, ou curtinha e presa?",
     pergunta: "Preste atenção no ar entrando e saindo. Como está?",
     opcoes: [
       { emoji: "😌", label: "Longa e calma", valor: "calma" },
@@ -48,6 +56,8 @@ const PASSOS: Passo[] = [
     id: "barriga",
     parte: "A barriga",
     emoji: "🫄",
+    demo: "intero-barriga",
+    narracao: "Coloque as duas mãos na barriga. Ela está tranquila, embrulhada, ou com fome?",
     pergunta: "Coloque a mão na barriga. Como ela está?",
     opcoes: [
       { emoji: "😊", label: "Tranquila", valor: "ok" },
@@ -61,6 +71,8 @@ const PASSOS: Passo[] = [
     id: "temperatura",
     parte: "A temperatura",
     emoji: "🌡️",
+    demo: "intero-temperatura",
+    narracao: "Toque com uma mão no rosto e depois na outra mão. Você está com frio, com o corpo bom, ou está quente?",
     pergunta: "Toque no rosto e nas mãos. Como está a temperatura?",
     opcoes: [
       { emoji: "🥶", label: "Frio", valor: "frio" },
@@ -74,6 +86,8 @@ const PASSOS: Passo[] = [
     id: "musculos",
     parte: "Os músculos",
     emoji: "💪",
+    demo: "intero-musculos",
+    narracao: "Repare nos seus ombros e nas suas mãos. Eles estão molinhos, normais, ou duros e tensos?",
     pergunta: "Repare nos ombros e nas mãos. Estão…",
     opcoes: [
       { emoji: "🧘", label: "Molinhos", valor: "moles" },
@@ -83,6 +97,7 @@ const PASSOS: Passo[] = [
     ],
     dica: "Corpo duro pede a atividade Espaguete e Estátua pra soltar.",
   },
+
 ];
 
 export function InteroceptionScan({ onClose }: { onClose: () => void }) {
@@ -163,14 +178,19 @@ export function InteroceptionScan({ onClose }: { onClose: () => void }) {
             <div className="bg-white rounded-3xl p-6 border-2 border-slate-100 shadow-xl mb-3">
               <div className="flex items-center gap-3 mb-3">
                 <div className="text-5xl">{passo.emoji}</div>
-                <div>
+                <div className="flex-1">
                   <div className="text-xs font-black text-primary uppercase tracking-widest">
                     {idx + 1} de {PASSOS.length}
                   </div>
                   <div className="text-xl font-black text-slate-800">{passo.parte}</div>
                 </div>
+                <div className="rounded-2xl bg-rose-50 p-1">
+                  <DemoAnimado tipo={passo.demo} size={90} />
+                </div>
               </div>
-              <p className="text-slate-700 font-medium mb-4">{passo.pergunta}</p>
+              <p className="text-slate-700 font-medium mb-3">{passo.pergunta}</p>
+              <div className="mb-4"><VozGuia texto={passo.narracao} /></div>
+
 
               {pausa > 0 ? (
                 <div className="text-center py-6 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
