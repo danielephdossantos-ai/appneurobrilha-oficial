@@ -76,7 +76,7 @@ export function TrilhaAlfa({ childId, childName }: Props) {
                         desbloq ? "bg-white/30" : "bg-slate-300"
                       }`}
                     >
-                      {desbloq ? etapa.emoji : <Lock className="w-7 h-7" />}
+                      {desbloq ? etapa.emoji : <span className="text-xl">🔒</span>}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
