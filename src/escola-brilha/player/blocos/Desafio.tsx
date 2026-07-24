@@ -18,6 +18,7 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
         <div data-no-tts>
           <QuizSequencial perguntas={visual.perguntas} cena={visual.cena} />
         </div>
+      </Secao>
     );
   }
 
