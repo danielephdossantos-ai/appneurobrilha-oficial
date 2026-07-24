@@ -5,6 +5,11 @@ import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
 import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
+import {
+  metodoDaEtapa,
+  metodoDoTipo,
+  pilarLabel,
+} from "../data/metodosCientificos";
 import { recordSkillAttempt } from "@/services/neuro-treino/neuroMetrics";
 import {
   Volume2,
