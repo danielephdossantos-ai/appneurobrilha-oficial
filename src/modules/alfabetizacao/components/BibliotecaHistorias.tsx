@@ -15,13 +15,18 @@ import {
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
+  PerguntaHistoria,
+  TipoPergunta,
   calcularNivelLeitor,
   historiasParaNivel,
+  etapaAtiva,
+  historiasOrdenadasPorRelevancia,
 } from "../data/historias-graduadas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
 import { useAdminMode } from "@/escola-brilha/admin-mode";
+import { ETAPA_POR_ID } from "../data/etapas";
 
 interface Props {
   childId: string;
@@ -34,6 +39,13 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const [admin] = useAdminMode();
   const nivelLeitor = useMemo(() => calcularNivelLeitor(progresso), [progresso]);
   const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
+  const etapaId = useMemo(() => etapaAtiva(progresso), [progresso]);
+  const etapaAtual = ETAPA_POR_ID[etapaId];
+  // Em modo admin, mostra tudo. Ordena SEMPRE por relevância clínica.
+  const listaOrdenada = useMemo(() => {
+    const base = admin ? HISTORIAS_GRADUADAS : disponiveis;
+    return historiasOrdenadasPorRelevancia(base, nivelLeitor, etapaId);
+  }, [admin, disponiveis, nivelLeitor, etapaId]);
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
 
   return (
@@ -62,21 +74,30 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
           </div>
         </header>
 
-        {/* Faixa explicando o método científico usado */}
+        {/* Faixa explicando o método + fase ativa */}
         <div className="mb-5 rounded-2xl bg-white/70 border border-rose-100 p-3 flex items-start gap-2 text-[11px] text-slate-600">
           <BookOpen className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
-          <p>
+          <p className="flex-1">
             <strong>Como funciona:</strong> primeiro o Professor lê apontando
-            palavra por palavra (karaoke). Depois é <em>sua vez</em>: você
-            toca em cada palavra na ordem enquanto lê em voz alta. Se travar,
-            aperte <Hand className="inline w-3 h-3 -mt-0.5" /> pra escutar
-            devagar.
+            palavra por palavra (karaoke). Depois é <em>sua vez</em>: toque em
+            cada palavra na ordem enquanto lê em voz alta. Se travar, aperte{" "}
+            <Hand className="inline w-3 h-3 -mt-0.5" /> pra escutar devagar.
+            {etapaAtual && (
+              <>
+                {" "}Livros com o selo{" "}
+                <span className="inline-block px-1.5 rounded bg-emerald-100 text-emerald-700 font-bold">
+                  {etapaAtual.emoji} {etapaAtual.titulo}
+                </span>{" "}
+                usam os sons que você está treinando agora.
+              </>
+            )}
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {HISTORIAS_GRADUADAS.map((h) => {
+          {listaOrdenada.map((h) => {
             const desbloq = admin || disponiveis.includes(h);
+            const alinhado = h.etapaAlinhada === etapaId;
             return (
               <button
                 key={h.id}
@@ -84,8 +105,13 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                 onClick={() => desbloq && setAtiva(h)}
                 className={`relative rounded-3xl shadow-md p-4 text-left transition-transform ${
                   desbloq ? "bg-white hover:scale-105" : "bg-slate-100"
-                }`}
+                } ${alinhado && desbloq ? "ring-2 ring-emerald-400" : ""}`}
               >
+                {alinhado && desbloq && (
+                  <span className="absolute -top-2 -right-2 z-10 text-[9px] font-black bg-emerald-500 text-white px-2 py-0.5 rounded-full shadow">
+                    {etapaAtual?.emoji ?? "⭐"} PRA SUA FASE
+                  </span>
+                )}
                 <div
                   className={`aspect-square rounded-2xl mb-3 flex items-center justify-center ${
                     desbloq
@@ -118,6 +144,18 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                 >
                   {h.titulo}
                 </h3>
+                {desbloq && h.foneticos.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {h.foneticos.slice(0, 4).map((f) => (
+                      <span
+                        key={f}
+                        className="text-[9px] font-mono font-bold bg-indigo-100 text-indigo-700 rounded px-1.5 py-0.5"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
             );
           })}
@@ -460,43 +498,77 @@ function LeitorHistoria({
         </div>
       )}
 
-      {fase === "perguntas" && (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
-          <div className="text-center">
-            <div className="text-xs font-bold text-rose-500 uppercase tracking-wider">
-              Pergunta {perguntaIdx + 1} / {historia.perguntas.length}
-            </div>
-            <p className="text-slate-700 text-base mt-1 font-medium max-w-md">
-              {historia.perguntas[perguntaIdx].pergunta}
-            </p>
-            <button
-              onClick={() =>
-                falar(historia.perguntas[perguntaIdx].pergunta)
-              }
-              className="mt-2 inline-flex items-center gap-1 text-xs text-rose-600 font-bold"
-            >
-              <Volume2 className="w-3 h-3" /> Ouvir de novo
-            </button>
-          </div>
-          <div className="grid grid-cols-3 gap-4 max-w-2xl w-full">
-            {shuffleOnce(historia.perguntas[perguntaIdx], perguntaIdx).map(
-              (nome) => (
-                <button
-                  key={nome}
-                  onClick={() => responder(nome)}
-                  className="aspect-square rounded-3xl bg-white shadow-md border-4 border-rose-200 p-3 flex items-center justify-center hover:scale-105 transition-transform"
+      {fase === "perguntas" && (() => {
+        const p = historia.perguntas[perguntaIdx];
+        const tipoLabel = tipoBadge(p.tipo ?? "literal");
+        const modoOpc: "imagem" | "texto" = p.modo ?? "imagem";
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+            <div className="text-center max-w-md">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-xs font-bold text-rose-500 uppercase tracking-wider">
+                  Pergunta {perguntaIdx + 1} / {historia.perguntas.length}
+                </span>
+                <span
+                  className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${tipoLabel.cor}`}
                 >
-                  <img
-                    src={objetoImg(nome)}
-                    alt=""
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </button>
-              ),
+                  {tipoLabel.icone} {tipoLabel.texto}
+                </span>
+              </div>
+              <p className="text-slate-700 text-base sm:text-lg mt-2 font-medium">
+                {p.pergunta}
+              </p>
+              <button
+                onClick={() => falar(p.pergunta)}
+                className="mt-2 inline-flex items-center gap-1 text-xs text-rose-600 font-bold"
+              >
+                <Volume2 className="w-3 h-3" /> Ouvir de novo
+              </button>
+            </div>
+
+            {modoOpc === "imagem" ? (
+              <div className="grid grid-cols-3 gap-4 max-w-2xl w-full">
+                {shuffleOnce(p, perguntaIdx).map((nome) => (
+                  <button
+                    key={nome}
+                    onClick={() => responder(nome)}
+                    className="aspect-square rounded-3xl bg-white shadow-md border-4 border-rose-200 p-3 flex items-center justify-center hover:scale-105 transition-transform"
+                  >
+                    <img
+                      src={objetoImg(nome)}
+                      alt=""
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3 w-full max-w-md">
+                {shuffleOnce(p, perguntaIdx).map((txt) => (
+                  <button
+                    key={txt}
+                    onClick={() => responder(txt)}
+                    className="rounded-2xl bg-white shadow-md border-4 border-rose-200 p-4 text-left font-medium text-slate-800 hover:scale-[1.02] transition-transform flex items-center gap-3"
+                  >
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        falar(txt);
+                      }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-rose-100 text-rose-600 flex-shrink-0"
+                      role="button"
+                      aria-label="Ouvir opção"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                    </span>
+                    <span className="flex-1">{txt}</span>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {fase === "fim" && (
         <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center">
@@ -593,4 +665,39 @@ function shuffleOnce(
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function tipoBadge(tipo: TipoPergunta): {
+  icone: string;
+  texto: string;
+  cor: string;
+} {
+  switch (tipo) {
+    case "literal":
+      return { icone: "📖", texto: "no texto", cor: "bg-sky-100 text-sky-700" };
+    case "inferencia":
+      return {
+        icone: "💡",
+        texto: "pense bem",
+        cor: "bg-amber-100 text-amber-700",
+      };
+    case "sequencia":
+      return {
+        icone: "🔢",
+        texto: "na ordem",
+        cor: "bg-indigo-100 text-indigo-700",
+      };
+    case "causa":
+      return {
+        icone: "🎯",
+        texto: "por quê",
+        cor: "bg-rose-100 text-rose-700",
+      };
+    case "vocabulario":
+      return {
+        icone: "🔤",
+        texto: "vocabulário",
+        cor: "bg-emerald-100 text-emerald-700",
+      };
+  }
 }
