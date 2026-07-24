@@ -63,7 +63,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
 
   return (
     <Secao icon={BookOpen} rotulo="Explicação" cor="#4C9EFF">
-      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center justify-between gap-2 mb-3" data-no-tts>
         <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/50">
           <Sparkles className="h-3.5 w-3.5" />
           <span>Passo {Math.min(visiveis, total)} de {total}</span>
@@ -103,7 +103,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                 transition={{ duration: 0.25 }}
                 className="rounded-2xl bg-white/5 border border-white/10 p-4"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2" data-no-tts>
                   <div className="text-[10px] font-black uppercase tracking-widest text-white/40">
                     Bloco {i + 1} de {total}
                   </div>
