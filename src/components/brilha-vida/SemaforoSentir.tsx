@@ -101,7 +101,7 @@ export function SemaforoSentir({ onClose }: { onClose: () => void }) {
             return (
               <button
                 key={l.id}
-                onClick={() => setAtiva(l.id)}
+                onClick={() => escolher(l)}
                 aria-label={l.rotulo}
                 className={`relative w-20 h-20 rounded-full border-4 border-slate-900 transition-all ${
                   acesa ? l.glow : "opacity-40 hover:opacity-70"
@@ -129,7 +129,7 @@ export function SemaforoSentir({ onClose }: { onClose: () => void }) {
           {LUZES.map((l) => (
             <button
               key={l.id}
-              onClick={() => setAtiva(l.id)}
+              onClick={() => escolher(l)}
               className={`flex items-center gap-3 p-3 rounded-2xl border-2 transition-all text-left ${
                 ativa === l.id
                   ? "bg-white shadow-lg scale-105"
