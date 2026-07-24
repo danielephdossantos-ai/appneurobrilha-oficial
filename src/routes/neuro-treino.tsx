@@ -326,6 +326,32 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
+          {/* ── BIBLIOTECA · leitura graduada por nível ─────────── */}
+          <Link
+            to="/biblioteca-alfa"
+            className="group block rounded-3xl overflow-hidden border-2 border-rose-200 dark:border-rose-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                📚
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Biblioteca · Leitura graduada
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Histórias por nível leitor
+                </div>
+                <div className="text-xs text-white/85">
+                  Do reconhecimento de palavras à fluência
+                </div>
+              </div>
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
           {/* ── COMUNICAÇÃO FUNCIONAL · Biblioteca Encantada ─────── */}
           <Link
             to="/escola-brilha/biblioteca-encantada"
