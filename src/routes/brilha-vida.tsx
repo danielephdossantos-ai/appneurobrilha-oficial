@@ -234,6 +234,22 @@ function BrilhaVida() {
       setCustomActivity("moodmeter");
       return;
     }
+    if (tipo === "Primeiro… Depois") {
+      setCustomActivity("firstthen");
+      return;
+    }
+    if (tipo === "Meu Dia em Cartões") {
+      setCustomActivity("cronograma");
+      return;
+    }
+    if (tipo === "Relógio Vermelho") {
+      setCustomActivity("timer");
+      return;
+    }
+    if (tipo === "Você Escolhe") {
+      setCustomActivity("escolha");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
