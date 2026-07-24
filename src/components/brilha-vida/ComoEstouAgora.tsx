@@ -51,6 +51,7 @@ export function ComoEstouAgora({ onClose }: { onClose: () => void }) {
   const [rosto, setRosto] = useState<typeof ROSTOS[number] | null>(null);
   const [sensacao, setSensacao] = useState<typeof SENSACOES[number] | null>(null);
   const [energia, setEnergia] = useState<typeof ENERGIAS[number] | null>(null);
+  const recordMood = useMoodRecorder();
 
   const passo = !rosto ? 1 : !sensacao ? 2 : !energia ? 3 : 4;
 
