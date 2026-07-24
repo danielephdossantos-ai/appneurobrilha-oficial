@@ -1,233 +1,248 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
+import { url as ninhoImg } from "@/assets/neuro-treino/objetos/ninho.png.asset.json";
 import { url as galinhaImg } from "@/assets/neuro-treino/objetos/galinha.png.asset.json";
-import { url as gatoImg } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as cachorroImg } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
+import { url as banhoImg } from "@/assets/neuro-treino/objetos/banho.png.asset.json";
+import { url as joaninhaImg } from "@/assets/neuro-treino/objetos/joaninha.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as tamborImg } from "@/assets/neuro-treino/objetos/tambor.png.asset.json";
-import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
- * EF01LP23 — Aula 023
- * BNCC: Planejar e produzir entrevistas e curiosidades orais, em áudio ou vídeo.
- * Missão: "O Microfone Mágico".
+ * EF01LP23 — Aula 023 · DÍGRAFO NH
+ * Reforma fônica: 2 letras, 1 som (/ɲ/).
  */
 const aula: Aula = {
   codigo: "EF01LP23",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "O Microfone Mágico",
-
+  disciplina: "Português",
+  titulo: "Duas letras, um som só: NH",
   narrativa: {
-    titulo: "O Microfone Mágico",
+    titulo: "Duas letras, um som só: NH",
     contexto:
-      "A Rádio Floresta ganhou um MICROFONE MÁGICO! Todo bicho vai gravar entrevistas e curiosidades pra tocar no rádio.",
+      "Falta um dígrafo pra Brilha completar o trio: depois do CH e do LH, chegou o NH!",
     problema:
-      "Brilha ficou tímido — não sabe como falar no microfone nem que perguntas fazer.",
-    convite: "Bora ajudar o Brilha a planejar entrevistas orais bem legais?",
+      "NH está em NINHO, BANHO, GALINHA, JOANINHA — muitas palavras do dia a dia.",
+    convite: "Bora fechar o trio dos dígrafos com o NH?",
   },
-
   conhecimentosPrevios: [
-    "Fazer perguntas simples (EF01LP22).",
-    "Ouvir com atenção.",
-    "Falar em voz alta e clara.",
+    "Dígrafo CH (LP21).",
+    "Dígrafo LH (LP22).",
+    "Ler mini-textos (LP20).",
   ],
-
-  missao:
-    "Planejar e produzir entrevistas e curiosidades para gravação em áudio/vídeo, cuidando da fala clara e das perguntas.",
-
+  missao: "Reconhecer o dígrafo NH e ler palavras com NHA, NHE, NHO.",
   objetivos: [
-    "Planejar perguntas antes de gravar.",
-    "Falar com voz clara e devagar.",
-    "Ouvir bem a resposta do entrevistado.",
-    "Registrar em áudio ou vídeo.",
+    "Perceber que N+H = um som só (/ɲ/).",
+    "Ler NHA, NHE, NHI, NHO, NHU.",
+    "Identificar palavras com NH no meio.",
+    "Ler frases com NH.",
   ],
-
-  motivacao:
-    "Sua voz gravada pode viajar longe — até virar podcast na floresta!",
-
+  motivacao: "Fechando o NH, você conhece os 3 dígrafos H — abre-se um mundo de palavras.",
   explicacao:
-    "Pra gravar uma entrevista boa:\n\n📝 1) PLANEJAR (3 perguntas curtas);\n🎤 2) FALAR devagar e claro;\n👂 3) OUVIR bem a resposta;\n▶️ 4) GRAVAR em áudio ou vídeo.\n\nCuriosidade oral também vale: '🐝 Você sabia que a abelha dança pra avisar as amigas?'.",
-
+    "🎯 DÍGRAFO NH:\n\nN + H = som nasal, tipo 'nh'.\n\nSílabas:\n· NHA (BANHA, GALINHA)\n· NHE (VENHO, TENHO)\n· NHO (NINHO, BANHO, SONHO)\n\n⚠️ NH quase sempre no MEIO da palavra.",
+  explicacaoAtiva: [
+    {
+      texto: "NH tem duas letras, UM som nasal.",
+      exemplo: "NINHO = NI + NHO.",
+      imagem: ninhoImg,
+      imagemAlt: "Ninho com ovinhos",
+      checagem: {
+        pergunta: "NH faz quantos sons?",
+        opcoes: ["Um som", "Dois sons"],
+        correta: 0,
+        explicacao: "Um som só.",
+      },
+    },
+    {
+      texto: "BANHO tem NH: BA + NHO.",
+      exemplo: "BA + NHO = BANHO.",
+      imagem: banhoImg,
+      imagemAlt: "Banho de banheira",
+      checagem: {
+        pergunta: "BA + NHO = ?",
+        opcoes: ["BANHO", "BANO", "BAIO"],
+        correta: 0,
+        explicacao: "BANHO.",
+      },
+    },
+    {
+      texto: "GALINHA tem NH no meio: GA-LI-NHA.",
+      exemplo: "GA + LI + NHA = GALINHA.",
+      imagem: galinhaImg,
+      imagemAlt: "Galinha",
+      checagem: {
+        pergunta: "Onde está o NH em GALINHA?",
+        opcoes: ["Começo", "Meio/fim"],
+        correta: 1,
+        explicacao: "GA-LI-NHA (no meio-fim).",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Antes de gravar, penso nas perguntas.",
-    nivel2: "Falo devagar e claro no microfone.",
-    nivel3: "Escuto a resposta com atenção.",
-    nivel4: "Vídeo mostra imagem; áudio guarda a voz.",
+    nivel1: "NH = 2 letras, 1 som.",
+    nivel2: "NHA · NHE · NHO.",
+    nivel3: "Aparece no MEIO da palavra.",
+    nivel4: "Palavras: NINHO, BANHO, GALINHA, SONHO.",
   },
-
   exemploResolvido: {
-    enunciado: "Vou entrevistar a Coruja. Qual pergunta faço?",
+    enunciado: "Leia: NINHO.",
     passos: [
-      "Escolho o tema: comida.",
-      "Faço pergunta curta.",
-      "'Coruja, o que você come de noite?'",
+      "NI — leio NI.",
+      "NH — 1 som nasal.",
+      "NH + O = NHO.",
+      "NI + NHO = NINHO. ✅",
     ],
-    resposta: "Coruja, o que você come de noite? ✅",
+    resposta: "NINHO.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Qual é o 1º passo pra gravar uma entrevista?",
-    resposta: "PLANEJAR as perguntas.",
-    explicacao: "Planejamento vem antes de gravar.",
+    enunciado: "🔊 Qual palavra tem NH?",
+    resposta: "NINHO.",
+    explicacao: "NI-NHO tem NH.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "1º passo:",
+      pergunta: "Tem NH:",
       opcoes: [
-        { nome: "planejar", imagemUrl: livroImg },
-        { nome: "gritar", imagemUrl: balaoImg },
-        { nome: "dormir", imagemUrl: estrelaImg },
+        { nome: "ninho", imagemUrl: ninhoImg },
+        { nome: "sol", imagemUrl: solImg },
+        { nome: "bola", imagemUrl: bolaImg },
       ],
-      respostaCerta: "planejar",
+      respostaCerta: "ninho",
     },
   },
-
   exercicios: [
-    { enunciado: "Antes de gravar eu…", resposta: "PLANEJO PERGUNTAS.", dica: "Escrevo as perguntas antes." },
-    { enunciado: "No microfone eu falo…", resposta: "DEVAGAR e CLARO.", dica: "Sem gritar, sem correr." },
-    { enunciado: "Depois de perguntar eu…", resposta: "ESCUTO A RESPOSTA.", dica: "Sem interromper." },
+    { enunciado: "NH tem quantos sons?", resposta: "1 som.", dica: "Dígrafo." },
+    { enunciado: "NI + NHO =", resposta: "NINHO.", dica: "Junte." },
+    { enunciado: "BA + NHO =", resposta: "BANHO.", dica: "Junte." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: monte uma entrevista pra Rádio Floresta.",
-    resposta: "Planejar + falar claro + ouvir + gravar.",
+    enunciado: "Desafio Brilha: reconhecer NH.",
+    resposta: "NH no meio das palavras.",
     visual: {
       cena: [
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "PÁSSARO", itemImagemUrl: passaroImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "NINHO", itemImagemUrl: ninhoImg, quantidade: 1, cor: "#F59E0B" },
+        { personagem: "BANHO", itemImagemUrl: banhoImg, quantidade: 1, cor: "#60A5FA" },
         { personagem: "GALINHA", itemImagemUrl: galinhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "GATO", itemImagemUrl: gatoImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "CACHORRO", itemImagemUrl: cachorroImg, quantidade: 1, cor: "#34D399" },
       ],
       perguntas: [
-        { pergunta: "1º passo:", opcoes: ["Planejar perguntas", "Gritar", "Correr"], correta: 0, explicacao: "Planejamento." },
-        { pergunta: "No microfone:", opcoes: ["Falar claro e devagar", "Gritar", "Sussurrar"], correta: 0, explicacao: "Claro e devagar." },
-        { pergunta: "Depois de perguntar:", opcoes: ["Ouvir", "Interromper", "Sair"], correta: 0, explicacao: "Ouvir." },
-        { pergunta: "Curiosidade oral começa:", opcoes: ["Você sabia que…", "Compre", "Adeus"], correta: 0, explicacao: "Você sabia que…" },
-        { pergunta: "Vídeo:", opcoes: ["Mostra imagem", "Só cheiro", "Só som"], correta: 0, explicacao: "Imagem + som." },
+        { pergunta: "NH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som." },
+        { pergunta: "NINHO tem NH?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim." },
+        { pergunta: "BA+NHO=", opcoes: ["BANHO", "BAIO"], correta: 0, explicacao: "BANHO." },
+        { pergunta: "NH aparece mais…", opcoes: ["Meio", "Começo"], correta: 0, explicacao: "Meio." },
+        { pergunta: "SEM NH:", opcoes: ["SOL", "SONHO"], correta: 0, explicacao: "SOL." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "📝 Planejar perguntas antes.",
-      "🎤 Falar claro e devagar.",
-      "👂 Ouvir a resposta.",
-      "▶️ Gravar em áudio ou vídeo.",
+      "NH = 2 letras, 1 som nasal.",
+      "NHA · NHE · NHO.",
+      "Aparece no MEIO da palavra.",
+      "Palavras: NINHO, BANHO, GALINHA, SONHO.",
     ],
-    dica: "Ensaia uma vez antes de apertar o REC!",
+    dica: "Se vir NH, junte no som nasal /nh/.",
   },
-
   quiz: [
-    { pergunta: "Antes de gravar:", opcoes: ["Planejo perguntas", "Grito", "Corro"], correta: 0, explicacao: "Planejo." },
-    { pergunta: "No microfone:", opcoes: ["Claro e devagar", "Muito rápido", "Sussurrando"], correta: 0, explicacao: "Claro e devagar." },
-    { pergunta: "Depois da pergunta:", opcoes: ["Escuto", "Interrompo", "Saio"], correta: 0, explicacao: "Escuto." },
-    { pergunta: "Curiosidade oral começa:", opcoes: ["Você sabia que…", "Compre já", "Boa noite"], correta: 0, explicacao: "Você sabia que…" },
-    { pergunta: "Vídeo tem:", opcoes: ["Imagem e som", "Só cheiro", "Só toque"], correta: 0, explicacao: "Imagem + som." },
+    { pergunta: "NH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som." },
+    { pergunta: "NI+NHO=", opcoes: ["NINHO", "NINO"], correta: 0, explicacao: "NINHO." },
+    { pergunta: "BA+NHO=", opcoes: ["BANHO", "BAO"], correta: 0, explicacao: "BANHO." },
+    { pergunta: "Onde fica NH?", opcoes: ["Meio", "Começo"], correta: 0, explicacao: "Meio." },
+    { pergunta: "Tem NH:", opcoes: ["GALINHA", "SOL"], correta: 0, explicacao: "GALINHA." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Locutor da Rádio Floresta! Missão em Família: gravem juntos, no celular, uma entrevista de 3 perguntas com alguém que a família ama.",
-
+    "🏅 Medalha: TRIO DOS DÍGRAFOS COMPLETO! Missão em Casa: procurar 3 palavras com NH (ninho, banho, galinha, sonho, minhoca…).",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "As primeiras entrevistas de rádio do Brasil foram feitas em 1922 — e ainda hoje o rádio informa milhões de brasileiros!",
+      "Em espanhol, o som do NH tem letra própria: Ñ (com til). No português a gente escreve com duas letras.",
   },
-
   interativas: [
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · 1º passo",
-      instrucao: "Toque pra ouvir. Qual é o 1º passo pra gravar uma entrevista?",
+      titulo: "Fase 1 · Achar o NH",
+      instrucao: "🔊 Qual palavra tem NH?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "PLANEJAR", imagemUrl: livroImg, rotulo: "📝 PLANEJAR" },
-        { nome: "GRITAR", imagemUrl: balaoImg, rotulo: "🎈 Gritar" },
-        { nome: "DORMIR", imagemUrl: estrelaImg, rotulo: "😴 Dormir" },
+        { nome: "NINHO", imagemUrl: ninhoImg, rotulo: "🪺 NINHO" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
       ],
       correta: 0,
-      acerto: "📝 Planejar as perguntas.",
-      erro: "Antes de gravar, PLANEJO.",
+      acerto: "🪺 NINHO — NI-NHO!",
+      erro: "NH está em NI-NHO.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 2 · No microfone",
-      instrucao: "Toque pra ouvir. Como falo no microfone?",
-      figura: { imagemUrl: tamborImg, rotulo: "🎤" },
+      titulo: "Fase 2 · Som do NH",
+      instrucao: "🔊 NH forma quantos sons?",
+      figura: { imagemUrl: ninhoImg, rotulo: "🪺" },
       pergunta: "Escolha:",
-      opcoes: ["CLARO e DEVAGAR", "Gritando", "Sussurrando"],
+      opcoes: ["1 SOM SÓ", "2 SONS"],
       correta: 0,
-      acerto: "🎤 Claro e devagar.",
-      erro: "No microfone falo claro e devagar.",
+      acerto: "1 som — dígrafo!",
+      erro: "2 letras, 1 som.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 3 · Depois de perguntar",
-      instrucao: "Toque pra ouvir. Depois de perguntar eu:",
-      figura: { imagemUrl: corujaImg, rotulo: "🦉" },
+      titulo: "Fase 3 · Sílaba com NH",
+      instrucao: "🔊 BA + NHO = ?",
+      figura: { imagemUrl: banhoImg, rotulo: "🛁" },
       pergunta: "Escolha:",
-      opcoes: ["OUÇO a resposta", "Falo por cima", "Saio"],
+      opcoes: ["BANHO", "BAIO", "BANO"],
       correta: 0,
-      acerto: "👂 Ouço a resposta.",
-      erro: "Depois de perguntar = OUVIR.",
+      acerto: "BANHO!",
+      erro: "BA+NHO = BANHO.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 4 · Ordem dos passos",
-      instrucao: "Arraste cada passo pra ordem certa de uma entrevista gravada.",
+      titulo: "Fase 4 · Tem NH ou não tem?",
+      instrucao: "Arraste cada palavra.",
       pares: [
-        { item: "Planejar perguntas", alvo: "1º" },
-        { item: "Falar no microfone", alvo: "2º" },
-        { item: "Ouvir e gravar", alvo: "3º" },
+        { item: "NINHO", alvo: "TEM NH" },
+        { item: "BANHO", alvo: "TEM NH" },
+        { item: "GALINHA", alvo: "TEM NH" },
+        { item: "SOL", alvo: "NÃO TEM" },
+        { item: "BOLA", alvo: "NÃO TEM" },
       ],
       alvosVisuais: [
-        { nome: "1º", cor: "#34D399", capacidade: 1 },
-        { nome: "2º", cor: "#FBBF24", capacidade: 1 },
-        { nome: "3º", cor: "#A78BFA", capacidade: 1 },
+        { nome: "TEM NH", cor: "#F59E0B", capacidade: 3 },
+        { nome: "NÃO TEM", cor: "#94A3B8", capacidade: 2 },
       ],
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Curiosidade da Coruja",
-      instrucao: "A Coruja vai gravar uma curiosidade. Como começar?",
+      titulo: "Fase 5 · Leitura",
+      instrucao: "🔊 'A GALINHA CHOCA.' Quem choca?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "SABIA", imagemUrl: florImg, rotulo: "💡 'Você sabia que…'" },
-        { nome: "COMPRE", imagemUrl: balaoImg, rotulo: "🛒 'Compre já!'" },
-        { nome: "ADEUS", imagemUrl: estrelaImg, rotulo: "👋 'Adeus!'" },
+        { nome: "GALINHA", imagemUrl: galinhaImg, rotulo: "🐔 GALINHA" },
+        { nome: "JOANINHA", imagemUrl: joaninhaImg, rotulo: "🐞 JOANINHA" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
       ],
       correta: 0,
-      acerto: "💡 'Você sabia que…' é clássico.",
-      erro: "Curiosidade começa com 'Você sabia que…'",
+      acerto: "🐔 A GALINHA choca!",
+      erro: "Volte na frase: A GALINHA CHOCA.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Antes de gravar:", opcoes: ["Planejo", "Grito", "Fujo"], correta: 0, explicacao: "Planejo.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📝" } },
-      { pergunta: "No microfone:", opcoes: ["Claro", "Rápido", "Mudo"], correta: 0, explicacao: "Claro.", visual: { tipo: "itens", imagemUrl: tamborImg, quantidade: 1, rotulo: "🎤" } },
-      { pergunta: "Depois de perguntar:", opcoes: ["Ouço", "Interrompo", "Saio"], correta: 0, explicacao: "Ouço.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "👂" } },
+      { pergunta: "NH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som.", visual: { tipo: "itens", imagemUrl: ninhoImg, quantidade: 1, rotulo: "NH" } },
+      { pergunta: "NI+NHO=", opcoes: ["NINHO", "NINO"], correta: 0, explicacao: "NINHO.", visual: { tipo: "itens", imagemUrl: ninhoImg, quantidade: 1, rotulo: "🪺" } },
+      { pergunta: "BA+NHO=", opcoes: ["BANHO", "BAO"], correta: 0, explicacao: "BANHO.", visual: { tipo: "itens", imagemUrl: banhoImg, quantidade: 1, rotulo: "🛁" } },
     ],
     medio: [
-      { pergunta: "Boa pergunta:", opcoes: ["Curta e clara", "Longa", "Confusa"], correta: 0, explicacao: "Curta e clara.", visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "❓" } },
-      { pergunta: "Vídeo tem:", opcoes: ["Imagem e som", "Só letras", "Só cheiro"], correta: 0, explicacao: "Imagem + som.", visual: { tipo: "itens", imagemUrl: gatoImg, quantidade: 1, rotulo: "🎥" } },
-      { pergunta: "Ensaiar antes:", opcoes: ["Ajuda muito", "Atrapalha", "Nada"], correta: 0, explicacao: "Ajuda muito.", visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "🔁" } },
+      { pergunta: "GALINHA tem NH?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim (fim).", visual: { tipo: "itens", imagemUrl: galinhaImg, quantidade: 1, rotulo: "🐔" } },
+      { pergunta: "JOANINHA tem NH?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim.", visual: { tipo: "itens", imagemUrl: joaninhaImg, quantidade: 1, rotulo: "🐞" } },
+      { pergunta: "SO+NHO=", opcoes: ["SONHO", "SOIO"], correta: 0, explicacao: "SONHO.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "💭" } },
     ],
     dificil: [
-      { pergunta: "Curiosidade oral começa:", opcoes: ["Você sabia que…", "Compre já", "Boa noite"], correta: 0, explicacao: "Você sabia que…", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "💡" } },
-      { pergunta: "Áudio guarda:", opcoes: ["A voz", "A cor", "O gosto"], correta: 0, explicacao: "A voz.", visual: { tipo: "itens", imagemUrl: tamborImg, quantidade: 1, rotulo: "🔊" } },
-      { pergunta: "Interromper o entrevistado:", opcoes: ["Não é legal", "É ótimo", "É preciso"], correta: 0, explicacao: "Não é legal.", visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🤫" } },
+      { pergunta: "SEM NH:", opcoes: ["SOL", "SONHO"], correta: 0, explicacao: "SOL.", visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️" } },
+      { pergunta: "Ler N e H separados:", opcoes: ["Errado", "Certo"], correta: 0, explicacao: "É dígrafo.", visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚠️" } },
+      { pergunta: "Trio dos H:", opcoes: ["CH, LH, NH", "SS, RR, CH"], correta: 0, explicacao: "CH, LH, NH.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "🔗" } },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP24" },
+  proximaHabilidade: { codigo: "EF01LP24", titulo: "RR e SS entre vogais" },
 };
 
 export default aula;

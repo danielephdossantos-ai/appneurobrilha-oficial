@@ -1,232 +1,246 @@
 import type { Aula } from "../types";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as arvoreImg } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
-import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
-import { url as passaroImg } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
-import { url as borboletaImg } from "@/assets/neuro-treino/objetos/borboleta.png.asset.json";
-import { url as abelhaImg } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as lupaImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json"; // reuse
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
+import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as familiaImg } from "@/assets/neuro-treino/objetos/familia-mae-filho.png.asset.json";
 
 /**
- * EF01LP22 — Aula 022
- * BNCC: Planejar e produzir diagramas, entrevistas, curiosidades (gêneros investigativos).
- * Missão: "Os Detetives da Floresta".
+ * EF01LP22 — Aula 022 · DÍGRAFO LH
+ * Reforma fônica: 2 letras, 1 som (/ʎ/).
  */
 const aula: Aula = {
   codigo: "EF01LP22",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "Os Detetives da Floresta",
-
+  disciplina: "Português",
+  titulo: "Duas letras, um som só: LH",
   narrativa: {
-    titulo: "Os Detetives da Floresta",
+    titulo: "Duas letras, um som só: LH",
     contexto:
-      "O Brilha virou detetive junto com a Coruja. Eles querem descobrir por que as borboletas voltam sempre à mesma flor.",
+      "Depois do CH, Brilha achou outro dígrafo escondido: o LH! É o som da FOLHA, do FILHO, do MOLHO.",
     problema:
-      "Precisam ORGANIZAR o que descobriram: fazer um diagrama, uma entrevista e uma lista de curiosidades.",
-    convite: "Bora ajudar os detetives a investigar e registrar tudo?",
+      "Se ler L e H separados, sai errado — o LH tem um som ÚNICO, molhadinho na boca.",
+    convite: "Bora descobrir esse LH gostoso de falar?",
   },
-
   conhecimentosPrevios: [
-    "Escrever pequenas frases.",
-    "Fazer listas (EF01LP17).",
-    "Reconhecer perguntas e respostas.",
+    "Ler sílabas simples (LP11–LP13).",
+    "Ler mini-textos (LP19–LP20).",
+    "Conhecer dígrafo CH (LP21).",
   ],
-
-  missao:
-    "Planejar e produzir textos investigativos simples: diagramas com partes, entrevistas com perguntas/respostas e listas de curiosidades.",
-
+  missao: "Reconhecer o dígrafo LH e ler palavras com LHA, LHE, LHO.",
   objetivos: [
-    "Perceber o que é uma pesquisa/investigação.",
-    "Organizar informações em diagramas.",
-    "Fazer perguntas de entrevista.",
-    "Registrar curiosidades interessantes.",
+    "Perceber que L+H = um som só.",
+    "Ler LHA, LHE, LHI, LHO, LHU.",
+    "Identificar palavras com LH no meio.",
+    "Ler frases com palavras que têm LH.",
   ],
-
-  motivacao: "Todo bom detetive escreve tudo que descobre!",
-
+  motivacao: "Cada dígrafo novo abre portas de leitura — LH está em muitas palavras do dia a dia!",
   explicacao:
-    "Textos investigativos ajudam a organizar descobertas:\n\n🧭 DIAGRAMA → desenho com partes ligadas (a flor tem pétala, caule, folha).\n🎤 ENTREVISTA → perguntas + respostas.\n💡 CURIOSIDADE → 'Você sabia que… a abelha visita mais de 100 flores por dia?'",
-
+    "🎯 DÍGRAFO LH:\n\nL + H = som molhadinho, tipo 'lhh'.\n\nSílabas:\n· LHA (como em FOLHA, PALHA)\n· LHE (como em MULHER)\n· LHO (como em MOLHO, FILHO)\n\n⚠️ LH quase nunca aparece no COMEÇO da palavra — quase sempre no MEIO.",
+  explicacaoAtiva: [
+    {
+      texto: "LH tem duas letras, mas UM som só — molhadinho.",
+      exemplo: "FOLHA = FO + LHA.",
+      imagem: arvoreImg,
+      imagemAlt: "Árvore com folhas",
+      checagem: {
+        pergunta: "LH faz quantos sons?",
+        opcoes: ["Um som", "Dois sons"],
+        correta: 0,
+        explicacao: "Um som só.",
+      },
+    },
+    {
+      texto: "FILHO tem LH no meio: FI-LHO.",
+      exemplo: "FI + LHO = FILHO.",
+      imagem: familiaImg,
+      imagemAlt: "Mãe e filho",
+      checagem: {
+        pergunta: "Onde está o LH em FILHO?",
+        opcoes: ["No começo", "No meio", "No fim"],
+        correta: 1,
+        explicacao: "No meio: FI-LHO.",
+      },
+    },
+    {
+      texto: "MOLHO = MO + LHO. O molho do macarrão!",
+      exemplo: "MO + LHO = MOLHO.",
+      imagem: florImg,
+      imagemAlt: "Molho vermelho",
+      checagem: {
+        pergunta: "MO + LHO = ?",
+        opcoes: ["MOLHO", "MOLO", "MOLIO"],
+        correta: 0,
+        explicacao: "MOLHO.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Investigar = descobrir e escrever.",
-    nivel2: "Diagrama mostra as partes de algo.",
-    nivel3: "Entrevista tem perguntas e respostas.",
-    nivel4: "Curiosidades começam com 'Você sabia que…'.",
+    nivel1: "LH = 2 letras, 1 som.",
+    nivel2: "Sílabas: LHA, LHE, LHO.",
+    nivel3: "LH aparece no MEIO da palavra.",
+    nivel4: "Palavras: FOLHA, FILHO, MOLHO, MULHER, PALHA.",
   },
-
   exemploResolvido: {
-    enunciado: "Como descobrir o que a Coruja come?",
+    enunciado: "Leia: FOLHA.",
     passos: [
-      "Faço uma ENTREVISTA.",
-      "Pergunto: 'Coruja, o que você come?'",
-      "Ela responde. Escrevo tudo.",
+      "Vejo FO — leio FO.",
+      "Vejo LH — 1 som só.",
+      "LH + A = LHA.",
+      "FO + LHA = FOLHA. ✅",
     ],
-    resposta: "Faço uma ENTREVISTA. ✅",
+    resposta: "FOLHA.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Qual texto usa perguntas e respostas?",
-    resposta: "ENTREVISTA.",
-    explicacao: "Perguntas + respostas = entrevista.",
+    enunciado: "🔊 Qual palavra tem LH?",
+    resposta: "FOLHA.",
+    explicacao: "FOLHA tem LH no meio.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Perguntas e respostas:",
+      pergunta: "Tem LH:",
       opcoes: [
-        { nome: "entrevista", imagemUrl: corujaImg },
-        { nome: "diagrama", imagemUrl: florImg },
-        { nome: "curiosidade", imagemUrl: estrelaImg },
+        { nome: "folha", imagemUrl: arvoreImg },
+        { nome: "sol", imagemUrl: solImg },
+        { nome: "casa", imagemUrl: casaImg },
       ],
-      respostaCerta: "entrevista",
+      respostaCerta: "folha",
     },
   },
-
   exercicios: [
-    { enunciado: "Diagrama serve pra…", resposta: "MOSTRAR AS PARTES.", dica: "Partes ligadas por linhas." },
-    { enunciado: "Curiosidade começa com…", resposta: "'Você sabia que…'.", dica: "Chama atenção." },
-    { enunciado: "Entrevista tem…", resposta: "PERGUNTAS e RESPOSTAS.", dica: "Diálogo por escrito." },
+    { enunciado: "LH tem quantos sons?", resposta: "1 som só.", dica: "Dígrafo." },
+    { enunciado: "FO + LHA =", resposta: "FOLHA.", dica: "Junte as sílabas." },
+    { enunciado: "FI + LHO =", resposta: "FILHO.", dica: "Junte as sílabas." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: descubra qual texto usar em cada investigação.",
-    resposta: "Cada texto tem seu jeito investigativo.",
+    enunciado: "Desafio Brilha: reconhecer LH.",
+    resposta: "LH no meio das palavras.",
     visual: {
       cena: [
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "FLOR", itemImagemUrl: florImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "ÁRVORE", itemImagemUrl: arvoreImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "BORBOLETA", itemImagemUrl: borboletaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "ABELHA", itemImagemUrl: abelhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "FOLHA", itemImagemUrl: arvoreImg, quantidade: 1, cor: "#22C55E" },
+        { personagem: "FILHO", itemImagemUrl: familiaImg, quantidade: 1, cor: "#F59E0B" },
+        { personagem: "SOL", itemImagemUrl: solImg, quantidade: 1, cor: "#F97316" },
       ],
       perguntas: [
-        { pergunta: "Descobrir o que a coruja come:", opcoes: ["Entrevista", "Diagrama", "Aviso"], correta: 0, explicacao: "Perguntar = entrevista." },
-        { pergunta: "Mostrar as partes de uma flor:", opcoes: ["Diagrama", "Convite", "Receita"], correta: 0, explicacao: "Diagrama de partes." },
-        { pergunta: "Contar fato interessante:", opcoes: ["Curiosidade", "Aviso", "Lista"], correta: 0, explicacao: "Curiosidade." },
-        { pergunta: "Curiosidade começa com:", opcoes: ["Você sabia que…", "Compre agora", "Boa noite"], correta: 0, explicacao: "Você sabia que…" },
-        { pergunta: "Entrevista precisa de:", opcoes: ["Perguntas boas", "Só desenhos", "Cores fortes"], correta: 0, explicacao: "Perguntas boas." },
+        { pergunta: "LH forma quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som." },
+        { pergunta: "FOLHA tem LH?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim, no meio." },
+        { pergunta: "FI+LHO=", opcoes: ["FILHO", "FILO"], correta: 0, explicacao: "FILHO." },
+        { pergunta: "LH aparece mais…", opcoes: ["No começo", "No meio"], correta: 1, explicacao: "No meio." },
+        { pergunta: "Palavra SEM LH:", opcoes: ["SOL", "FOLHA"], correta: 0, explicacao: "SOL." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🧭 Diagrama = partes ligadas.",
-      "🎤 Entrevista = perguntas e respostas.",
-      "💡 Curiosidade = fato interessante.",
-      "🔍 Investigar = descobrir + registrar.",
+      "LH = 2 letras, 1 som.",
+      "LHA · LHE · LHO.",
+      "Aparece no MEIO da palavra.",
+      "Palavras: FOLHA, FILHO, MOLHO.",
     ],
-    dica: "Antes de investigar, pense: o que quero descobrir?",
+    dica: "Se vir LH, junte num som só, molhadinho.",
   },
-
   quiz: [
-    { pergunta: "Entrevista tem:", opcoes: ["Perguntas e respostas", "Só imagens", "Só título"], correta: 0, explicacao: "Perguntas + respostas." },
-    { pergunta: "Diagrama:", opcoes: ["Mostra as partes", "Cantiga", "Convite"], correta: 0, explicacao: "Partes ligadas." },
-    { pergunta: "Curiosidade começa com:", opcoes: ["Você sabia que…", "Compre já", "Chegou"], correta: 0, explicacao: "Você sabia que…" },
-    { pergunta: "Investigar é:", opcoes: ["Descobrir e registrar", "Copiar", "Ficar parado"], correta: 0, explicacao: "Descobrir + registrar." },
-    { pergunta: "Bom detetive:", opcoes: ["Anota tudo", "Esquece", "Não pergunta"], correta: 0, explicacao: "Anota tudo." },
+    { pergunta: "LH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som." },
+    { pergunta: "FO+LHA=", opcoes: ["FOLHA", "FOLA"], correta: 0, explicacao: "FOLHA." },
+    { pergunta: "Onde fica LH?", opcoes: ["No meio", "No começo"], correta: 0, explicacao: "No meio." },
+    { pergunta: "FI+LHO=", opcoes: ["FILHO", "FILO"], correta: 0, explicacao: "FILHO." },
+    { pergunta: "Tem LH:", opcoes: ["MOLHO", "SOL"], correta: 0, explicacao: "MOLHO." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Detetive da Floresta! Missão em Família: entrevistem alguém da casa com 3 perguntas e escrevam 1 curiosidade sobre o que descobriram.",
-
+    "🏅 Medalha: MESTRE DO LH! Missão em Casa: procurar 3 palavras com LH (folha, filho, colher, molho, mulher…).",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Cientistas de verdade usam entrevistas, diagramas e curiosidades pra explicar suas descobertas ao mundo!",
+      "O som LH é raro no mundo — poucas línguas têm! Português, italiano e catalão têm. Inglês não tem.",
   },
-
   interativas: [
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · Perguntas e respostas",
-      instrucao: "Toque pra ouvir. Qual texto usa perguntas e respostas?",
-      pergunta: "Texto certo:",
+      titulo: "Fase 1 · Tem LH?",
+      instrucao: "🔊 Qual palavra tem LH?",
+      pergunta: "Escolha:",
       opcoes: [
-        { nome: "ENTREVISTA", imagemUrl: corujaImg, rotulo: "🎤 ENTREVISTA" },
-        { nome: "DIAGRAMA", imagemUrl: florImg, rotulo: "🧭 DIAGRAMA" },
-        { nome: "CURIOSIDADE", imagemUrl: estrelaImg, rotulo: "💡 CURIOSIDADE" },
+        { nome: "FOLHA", imagemUrl: arvoreImg, rotulo: "🍃 FOLHA" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
       ],
       correta: 0,
-      acerto: "🎤 ENTREVISTA!",
-      erro: "Perguntas + respostas = ENTREVISTA.",
+      acerto: "🍃 FOLHA tem LH!",
+      erro: "LH está em FO-LHA.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 2 · Partes da flor",
-      instrucao: "Toque pra ouvir. Pra mostrar as partes da flor eu uso:",
-      figura: { imagemUrl: florImg, rotulo: "🌸" },
+      titulo: "Fase 2 · Som do LH",
+      instrucao: "🔊 LH faz quantos sons?",
+      figura: { imagemUrl: arvoreImg, rotulo: "🍃" },
       pergunta: "Escolha:",
-      opcoes: ["DIAGRAMA", "CONVITE", "RECEITA"],
+      opcoes: ["1 SOM SÓ", "2 SONS"],
       correta: 0,
-      acerto: "🧭 DIAGRAMA de partes!",
-      erro: "Mostrar as partes = DIAGRAMA.",
+      acerto: "1 som — dígrafo!",
+      erro: "Dígrafo: 2 letras, 1 som.",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 3 · Fato interessante",
-      instrucao: "Toque pra ouvir. Como começa uma curiosidade?",
-      figura: { imagemUrl: estrelaImg, rotulo: "💡" },
+      titulo: "Fase 3 · Sílaba com LH",
+      instrucao: "🔊 FO + LHA = ?",
+      figura: { imagemUrl: arvoreImg, rotulo: "🍃" },
       pergunta: "Escolha:",
-      opcoes: ["Você sabia que…", "Compre já", "Boa noite"],
+      opcoes: ["FOLHA", "FOLA", "FOIA"],
       correta: 0,
-      acerto: "💡 'Você sabia que…' — clássico!",
-      erro: "Curiosidade começa com 'Você sabia que…'",
+      acerto: "FOLHA!",
+      erro: "FO+LHA = FOLHA.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 4 · Cada texto na sua investigação",
-      instrucao: "Arraste cada situação pro tipo de texto.",
+      titulo: "Fase 4 · Tem LH ou não tem?",
+      instrucao: "Arraste cada palavra.",
       pares: [
-        { item: "Descobrir o que come a coruja", alvo: "ENTREVISTA" },
-        { item: "Partes da flor", alvo: "DIAGRAMA" },
-        { item: "Abelha visita 100 flores/dia", alvo: "CURIOSIDADE" },
+        { item: "FOLHA", alvo: "TEM LH" },
+        { item: "FILHO", alvo: "TEM LH" },
+        { item: "SOL", alvo: "NÃO TEM" },
+        { item: "BOLA", alvo: "NÃO TEM" },
       ],
       alvosVisuais: [
-        { nome: "ENTREVISTA", cor: "#A78BFA", capacidade: 1 },
-        { nome: "DIAGRAMA", cor: "#34D399", capacidade: 1 },
-        { nome: "CURIOSIDADE", cor: "#FBBF24", capacidade: 1 },
+        { nome: "TEM LH", cor: "#22C55E", capacidade: 2 },
+        { nome: "NÃO TEM", cor: "#94A3B8", capacidade: 2 },
       ],
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Investigação da Coruja",
-      instrucao: "A Coruja quer descobrir por que a borboleta gosta da flor. O 1º passo é:",
+      titulo: "Fase 5 · Leitura",
+      instrucao: "🔊 'A FOLHA CAI.' O que cai?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "OBSERVAR", imagemUrl: lupaImg, rotulo: "🔍 Observar e anotar" },
-        { nome: "GRITAR", imagemUrl: passaroImg, rotulo: "📣 Gritar" },
-        { nome: "DORMIR", imagemUrl: solImg, rotulo: "😴 Dormir" },
+        { nome: "FOLHA", imagemUrl: arvoreImg, rotulo: "🍃 FOLHA" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "CASA", imagemUrl: casaImg, rotulo: "🏠 CASA" },
       ],
       correta: 0,
-      acerto: "🔍 Bom detetive observa e anota!",
-      erro: "Investigar começa por OBSERVAR e anotar.",
+      acerto: "🍃 A FOLHA cai!",
+      erro: "Volte na frase: A FOLHA CAI.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Entrevista:", opcoes: ["Perguntas e respostas", "Só título", "Só data"], correta: 0, explicacao: "Perguntas + respostas.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎤" } },
-      { pergunta: "Diagrama:", opcoes: ["Partes ligadas", "Cantiga", "Aviso"], correta: 0, explicacao: "Partes ligadas.", visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "🧭" } },
-      { pergunta: "Curiosidade:", opcoes: ["Fato interessante", "Regra", "Convite"], correta: 0, explicacao: "Fato interessante.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "💡" } },
+      { pergunta: "LH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som.", visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "LH" } },
+      { pergunta: "FOLHA tem LH?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Sim.", visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "🍃" } },
+      { pergunta: "FO+LHA=", opcoes: ["FOLHA", "FOLA"], correta: 0, explicacao: "FOLHA.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "FOLHA" } },
     ],
     medio: [
-      { pergunta: "Investigar é:", opcoes: ["Descobrir + anotar", "Copiar", "Nada"], correta: 0, explicacao: "Descobrir e anotar.", visual: { tipo: "itens", imagemUrl: lupaImg, quantidade: 1, rotulo: "🔍" } },
-      { pergunta: "Boa pergunta:", opcoes: ["Clara e curta", "Confusa", "Sem sentido"], correta: 0, explicacao: "Clara e curta.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "❓" } },
-      { pergunta: "Curiosidade começa com:", opcoes: ["Você sabia que…", "Adeus", "Vamos!"], correta: 0, explicacao: "Você sabia que…", visual: { tipo: "itens", imagemUrl: abelhaImg, quantidade: 1, rotulo: "💡" } },
+      { pergunta: "FI+LHO=", opcoes: ["FILHO", "FILO"], correta: 0, explicacao: "FILHO.", visual: { tipo: "itens", imagemUrl: familiaImg, quantidade: 1, rotulo: "👨‍👦" } },
+      { pergunta: "LH fica…", opcoes: ["No meio", "No começo"], correta: 0, explicacao: "No meio.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "📍" } },
+      { pergunta: "MO+LHO=", opcoes: ["MOLHO", "MOLO"], correta: 0, explicacao: "MOLHO.", visual: { tipo: "itens", imagemUrl: florImg, quantidade: 1, rotulo: "MOLHO" } },
     ],
     dificil: [
-      { pergunta: "Diagrama liga:", opcoes: ["Parte com nome", "Fotos de amigos", "Cores"], correta: 0, explicacao: "Parte com nome.", visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳" } },
-      { pergunta: "Entrevistador é:", opcoes: ["Quem pergunta", "Quem responde", "Quem canta"], correta: 0, explicacao: "Quem pergunta.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🎙️" } },
-      { pergunta: "Anotar tudo:", opcoes: ["Ajuda a lembrar", "Não serve", "Atrapalha"], correta: 0, explicacao: "Ajuda a lembrar.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📓" } },
+      { pergunta: "Palavra SEM LH:", opcoes: ["SOL", "FOLHA"], correta: 0, explicacao: "SOL.", visual: { tipo: "itens", imagemUrl: solImg, quantidade: 1, rotulo: "☀️" } },
+      { pergunta: "LH em MULHER está…", opcoes: ["No meio", "No começo"], correta: 0, explicacao: "MU-LHER.", visual: { tipo: "itens", imagemUrl: familiaImg, quantidade: 1, rotulo: "MULHER" } },
+      { pergunta: "Ler L e H separados:", opcoes: ["Sai errado", "Sai igual"], correta: 0, explicacao: "É dígrafo.", visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚠️" } },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP23" },
+  proximaHabilidade: { codigo: "EF01LP23", titulo: "Dígrafo NH" },
 };
 
 export default aula;

@@ -1,231 +1,246 @@
 import type { Aula } from "../types";
-import { url as escolaImg } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
-import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
-import { url as livroImg } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as chuvaImg } from "@/assets/neuro-treino/objetos/chuva.png.asset.json";
+import { url as casaImg } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as bolaImg } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as escovarImg } from "@/assets/neuro-treino/objetos/escovar-dentes.png.asset.json";
-import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
-import { url as balaoImg } from "@/assets/neuro-treino/objetos/balao.png.asset.json";
-import { url as sapoImg } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
+import { url as solImg } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as florImg } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as coracaoImg } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
- * EF01LP21 — Aula 021
- * BNCC: Escrever, em colaboração, listas de regras e regulamentos da vida escolar.
- * Missão: "Combinados da Turma".
+ * EF01LP21 — Aula 021 · DÍGRAFO CH
+ * Reforma fônica: 2 letras que fazem 1 som só (/x/).
  */
 const aula: Aula = {
   codigo: "EF01LP21",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
-  titulo: "Combinados da Turma",
-
+  disciplina: "Português",
+  titulo: "Duas letras, um som só: CH",
   narrativa: {
-    titulo: "Combinados da Turma",
+    titulo: "Duas letras, um som só: CH",
     contexto:
-      "A turminha da Floresta começou o ano nova e ninguém sabe como se comportar na sala: uns falam alto, outros esquecem de ajudar.",
+      "Brilha descobriu uma coisa curiosa: às vezes DUAS letras se juntam pra fazer UM SOM só. É o caso do CH!",
     problema:
-      "A Coruja diz: — Precisamos escrever COMBINADOS pra vivermos bem juntos!",
-    convite: "Bora ajudar o Brilha a montar a LISTA DE REGRAS da turma?",
+      "Se ler C e H separados, sai errado. Juntos, viram um som especial: como em CHUVA, CHAVE, CHÁ.",
+    convite: "Bora aprender esse som mágico do CH?",
   },
-
   conhecimentosPrevios: [
-    "Saber que a escola é um lugar coletivo.",
-    "Escrever listas (EF01LP17).",
-    "Perceber ações boas e ruins na convivência.",
+    "Ler sílabas CV (LP11–LP13).",
+    "Ler palavras CVCV (LP14–LP15).",
+    "Ler mini-textos (LP19–LP20).",
   ],
-
-  missao:
-    "Escrever, em grupo, uma lista de REGRAS/COMBINADOS que ajudem a viver bem na sala e na escola.",
-
+  missao: "Reconhecer o dígrafo CH e ler palavras que começam ou têm CH.",
   objetivos: [
-    "Perceber a importância das regras.",
-    "Escrever regras curtas e claras.",
-    "Colaborar com colegas.",
-    "Respeitar combinados coletivos.",
+    "Perceber que C+H = um som só (/x/).",
+    "Ler CHA, CHE, CHI, CHO, CHU.",
+    "Identificar palavras com CH.",
+    "Ler frase curta com palavra em CH.",
   ],
-
-  motivacao: "Regra boa é a que ajuda todo mundo a ser feliz!",
-
+  motivacao: "CH é o primeiro dígrafo — abre a porta pra ler MUITAS palavras novas.",
   explicacao:
-    "REGRAS são combinados que ajudam a viver em grupo.\n\n📚 Na escola, por exemplo:\n1) Escutar quando o colega fala.\n2) Guardar os brinquedos depois de usar.\n3) Ajudar quem precisar.\n4) Não correr dentro da sala.\n\nRegras devem ser CURTAS e CLARAS.",
-
+    "🎯 DÍGRAFO CH:\n\nC + H = /x/ (um som só, tipo 'xxx').\n\nSílabas:\n· CHA (como em CHAVE, CHÁ)\n· CHE (como em CHEIRO)\n· CHI (como em CHINELO)\n· CHO (como em CHOCOLATE)\n· CHU (como em CHUVA)\n\n⚠️ Nunca leia C e H separados — juntos formam UM som.",
+  explicacaoAtiva: [
+    {
+      texto: "CH tem duas letras mas UM som só. Como em CHUVA.",
+      exemplo: "CHUVA = CH-U-VA (CH junto = /x/).",
+      imagem: chuvaImg,
+      imagemAlt: "Chuva caindo",
+      checagem: {
+        pergunta: "CH faz quantos sons?",
+        opcoes: ["Dois sons", "Um som só", "Três sons"],
+        correta: 1,
+        explicacao: "Um som só — /x/.",
+      },
+    },
+    {
+      texto: "CHUVA começa com CH. Repita: /xxx/-UVA.",
+      exemplo: "CH + U = CHU. CHU + VA = CHUVA.",
+      imagem: chuvaImg,
+      imagemAlt: "Chuva",
+      checagem: {
+        pergunta: "Com que sílaba começa CHUVA?",
+        opcoes: ["CU", "CHU", "SU"],
+        correta: 1,
+        explicacao: "CHU (com dígrafo CH).",
+      },
+    },
+    {
+      texto: "CHÁ também começa com CH — /x/-Á.",
+      exemplo: "Uma xícara de CHÁ. CH+Á = CHÁ.",
+      imagem: florImg,
+      imagemAlt: "Chá quentinho",
+      checagem: {
+        pergunta: "Quantas letras tem CHÁ?",
+        opcoes: ["2", "3", "4"],
+        correta: 1,
+        explicacao: "3 letras (C, H, Á), mas 2 sons: /x/ e /á/.",
+      },
+    },
+  ],
   explicacoesNiveis: {
-    nivel1: "Regra = combinado do grupo.",
-    nivel2: "Regra ajuda a viver bem juntos.",
-    nivel3: "Escrevo em lista, uma regra por linha.",
-    nivel4: "Regras podem começar com verbo: escutar, ajudar, guardar…",
+    nivel1: "CH = 2 letras, 1 som só.",
+    nivel2: "CH+A=CHA · CH+E=CHE · CH+I=CHI · CH+O=CHO · CH+U=CHU.",
+    nivel3: "Palavras: CHUVA, CHAVE, CHÁ, CHEIRO, CHINELO.",
+    nivel4: "Dígrafo = letras juntas que valem por 1 fonema.",
   },
-
   exemploResolvido: {
-    enunciado: "Escreva uma regra pra ninguém se machucar na sala.",
+    enunciado: "Leia: CHUVA. Como se pronuncia?",
     passos: [
-      "Pense no perigo: correr bate.",
-      "Escrevo curto e claro.",
-      "'Não correr dentro da sala.'",
+      "Vejo CH — não leio C, H separados.",
+      "CH = som /x/.",
+      "CH + U = CHU.",
+      "CHU + VA = CHUVA. ✅",
     ],
-    resposta: "NÃO CORRER DENTRO DA SALA. ✅",
+    resposta: "CHUVA.",
   },
-
   atividadeGuiada: {
-    enunciado:
-      "Toque pra ouvir. Qual é uma boa regra da turma?",
-    resposta: "ESCUTAR o colega quando fala.",
-    explicacao: "Escutar é combinado bom pra todos.",
+    enunciado: "🔊 Qual palavra começa com CH?",
+    resposta: "CHUVA.",
+    explicacao: "CH inicial: CHUVA.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Boa regra:",
+      pergunta: "Começa com CH:",
       opcoes: [
-        { nome: "escutar", imagemUrl: corujaImg },
-        { nome: "gritar", imagemUrl: balaoImg },
-        { nome: "chutar", imagemUrl: bolaImg },
+        { nome: "chuva", imagemUrl: chuvaImg },
+        { nome: "sol", imagemUrl: solImg },
+        { nome: "lua", imagemUrl: luaImg },
       ],
-      respostaCerta: "escutar",
+      respostaCerta: "chuva",
     },
   },
-
   exercicios: [
-    { enunciado: "Regra pra usar o banheiro:", resposta: "LAVAR AS MÃOS.", dica: "Higiene." },
-    { enunciado: "Regra pra hora do lanche:", resposta: "NÃO DESPERDIÇAR / dividir.", dica: "Cuidar do lanche." },
-    { enunciado: "Regra pra brincar:", resposta: "GUARDAR OS BRINQUEDOS depois.", dica: "Deixar a sala organizada." },
+    { enunciado: "CH faz quantos sons?", resposta: "1 som só.", dica: "É um dígrafo." },
+    { enunciado: "CHUVA começa com…", resposta: "CH (som /x/).", dica: "2 letras, 1 som." },
+    { enunciado: "Se leio C-H separados, sai…", resposta: "ERRADO.", dica: "CH é junto." },
   ],
-
   desafio: {
-    enunciado: "Desafio Brilha: escolha regras boas pra convivência escolar.",
-    resposta: "Regra ajuda todos.",
+    enunciado: "Desafio Brilha: reconhecer o dígrafo CH.",
+    resposta: "CH = 1 som.",
     visual: {
       cena: [
-        { personagem: "CORUJA", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "ESCOLA", itemImagemUrl: escolaImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "LIVRO", itemImagemUrl: livroImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "MAÇÃ", itemImagemUrl: macaImg, quantidade: 1, cor: "#EF4444" },
-        { personagem: "CORAÇÃO", itemImagemUrl: coracaoImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "CHUVA", itemImagemUrl: chuvaImg, quantidade: 1, cor: "#60A5FA" },
+        { personagem: "CHÁ", itemImagemUrl: florImg, quantidade: 1, cor: "#34D399" },
+        { personagem: "CASA", itemImagemUrl: casaImg, quantidade: 1, cor: "#F59E0B" },
       ],
       perguntas: [
-        { pergunta: "Boa regra:", opcoes: ["Ajudar o colega", "Empurrar", "Gritar sempre"], correta: 0, explicacao: "Ajudar." },
-        { pergunta: "Antes de comer:", opcoes: ["Lavar as mãos", "Nada", "Correr"], correta: 0, explicacao: "Higiene." },
-        { pergunta: "Depois de brincar:", opcoes: ["Guardar os brinquedos", "Deixar tudo no chão", "Sair correndo"], correta: 0, explicacao: "Organização." },
-        { pergunta: "Quando o professor fala:", opcoes: ["Escutar", "Falar por cima", "Sair da sala"], correta: 0, explicacao: "Escutar." },
-        { pergunta: "Regra deve ser:", opcoes: ["Curta e clara", "Longa e confusa", "Escondida"], correta: 0, explicacao: "Curta e clara." },
+        { pergunta: "CH forma…", opcoes: ["1 som", "2 sons", "3 sons"], correta: 0, explicacao: "1 som." },
+        { pergunta: "CHUVA começa com…", opcoes: ["CU", "CHU", "SU"], correta: 1, explicacao: "CHU." },
+        { pergunta: "CH aparece em…", opcoes: ["CHÁ", "SOL", "CASA"], correta: 0, explicacao: "CHÁ tem CH." },
+        { pergunta: "CHINELO começa com…", opcoes: ["CHI", "SI", "TI"], correta: 0, explicacao: "CHI." },
+        { pergunta: "Dígrafo é:", opcoes: ["Letras juntas = 1 som", "Sinal", "Número"], correta: 0, explicacao: "Letras que valem 1 som." },
       ],
     },
   },
-
   revisao: {
     pontos: [
-      "🤝 Regras = combinados do grupo.",
-      "📝 Uma regra por linha na lista.",
-      "🎯 Curta e clara.",
-      "💛 Faz o grupo viver bem.",
+      "CH = dígrafo (2 letras, 1 som).",
+      "CHA · CHE · CHI · CHO · CHU.",
+      "Palavras: CHUVA, CHÁ, CHAVE, CHINELO.",
+      "Nunca ler C e H separados.",
     ],
-    dica: "Pergunte-se: essa regra AJUDA todo mundo?",
+    dica: "Se vir CH, junte tudo num som só: /xxx/.",
   },
-
   quiz: [
-    { pergunta: "Regra serve pra:", opcoes: ["Viver bem juntos", "Bagunçar", "Chatear"], correta: 0, explicacao: "Viver bem." },
-    { pergunta: "Boa regra:", opcoes: ["Escutar o colega", "Empurrar", "Gritar"], correta: 0, explicacao: "Escutar." },
-    { pergunta: "Depois de brincar:", opcoes: ["Guardar brinquedos", "Deixar espalhado", "Ir embora"], correta: 0, explicacao: "Guardar." },
-    { pergunta: "Regra deve ser:", opcoes: ["Curta e clara", "Enorme e difícil", "Só desenho"], correta: 0, explicacao: "Curta e clara." },
-    { pergunta: "Combinar em grupo é:", opcoes: ["Colaborar", "Competir", "Brigar"], correta: 0, explicacao: "Colaborar." },
+    { pergunta: "CH tem quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som." },
+    { pergunta: "CHUVA começa com…", opcoes: ["CHU", "SU"], correta: 0, explicacao: "CHU." },
+    { pergunta: "CH+A=", opcoes: ["CHA", "CA"], correta: 0, explicacao: "CHA." },
+    { pergunta: "Dígrafo:", opcoes: ["2 letras 1 som", "1 letra 2 sons"], correta: 0, explicacao: "2 letras, 1 som." },
+    { pergunta: "Palavra com CH:", opcoes: ["CHÁ", "SOL"], correta: 0, explicacao: "CHÁ tem CH." },
   ],
-
   conclusao:
-    "🏅 Medalha conquistada: Combinador da Turma! Missão em Família: escrevam juntos 3 combinados da casa (ex.: guardar sapato, lavar mãos, ajudar na mesa).",
-
+    "🏅 Medalha: MESTRE DO DÍGRAFO CH! Missão em Casa: procurar 3 palavras com CH em livros/embalagens (chocolate, chá, chuveiro…).",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Toda escola do mundo tem regras — assim, crianças de idades diferentes podem estudar juntas em paz!",
+      "Antes de 1500, o CH era escrito em latim como uma só letra! Depois virou dígrafo, mas o som ficou.",
   },
-
   interativas: [
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · Escutar o colega",
-      instrucao: "Toque pra ouvir. Qual é uma boa regra?",
-      pergunta: "Boa regra:",
+      titulo: "Fase 1 · Achar o CH",
+      instrucao: "🔊 Qual começa com CH?",
+      pergunta: "Escolha:",
       opcoes: [
-        { nome: "ESCUTAR", imagemUrl: corujaImg, rotulo: "🦉 ESCUTAR" },
-        { nome: "GRITAR", imagemUrl: balaoImg, rotulo: "🎈 GRITAR" },
-        { nome: "CHUTAR", imagemUrl: bolaImg, rotulo: "⚽ CHUTAR" },
+        { nome: "CHUVA", imagemUrl: chuvaImg, rotulo: "🌧️ CHUVA" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "LUA", imagemUrl: luaImg, rotulo: "🌙 LUA" },
       ],
       correta: 0,
-      acerto: "🦉 Escutar é ótimo combinado!",
-      erro: "Boas regras cuidam do grupo — ESCUTAR ajuda.",
+      acerto: "🌧️ CHUVA — começa com CH!",
+      erro: "CH está em CHUVA (/xxx/-UVA).",
     },
     {
       tipo: "escolherEscrita",
-      titulo: "Fase 2 · Higiene",
-      instrucao: "Toque pra ouvir. Regra antes de comer:",
-      figura: { imagemUrl: escovarImg, rotulo: "🧼" },
-      pergunta: "Regra certa:",
-      opcoes: ["LAVAR AS MÃOS", "CORRER", "GRITAR"],
-      correta: 0,
-      acerto: "🧼 Lavar as mãos!",
-      erro: "Antes de comer = LAVAR AS MÃOS.",
-    },
-    {
-      tipo: "escolherEscrita",
-      titulo: "Fase 3 · Depois de brincar",
-      instrucao: "Toque pra ouvir. Regra depois de brincar:",
-      figura: { imagemUrl: bolaImg, rotulo: "🧸" },
+      titulo: "Fase 2 · CH forma…",
+      instrucao: "🔊 CH forma quantos sons?",
+      figura: { imagemUrl: chuvaImg, rotulo: "🌧️" },
       pergunta: "Escolha:",
-      opcoes: ["GUARDAR OS BRINQUEDOS", "DEIXAR NO CHÃO", "IR EMBORA"],
+      opcoes: ["1 SOM SÓ", "2 SONS", "3 SONS"],
       correta: 0,
-      acerto: "🧸 GUARDAR os brinquedos!",
-      erro: "Depois de brincar = GUARDAR.",
+      acerto: "1 som — dígrafo!",
+      erro: "CH é dígrafo: 2 letras, 1 som.",
+    },
+    {
+      tipo: "escolherEscrita",
+      titulo: "Fase 3 · Sílaba com CH",
+      instrucao: "🔊 CH + U = ?",
+      figura: { imagemUrl: chuvaImg, rotulo: "🌧️" },
+      pergunta: "Escolha:",
+      opcoes: ["CHU", "CU", "SU"],
+      correta: 0,
+      acerto: "CHU — como em CHUVA!",
+      erro: "CH+U = CHU.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 4 · Bom ou Ruim combinado?",
-      instrucao: "Arraste cada regra pro grupo certo.",
+      titulo: "Fase 4 · Tem CH ou não tem?",
+      instrucao: "Arraste cada palavra pro grupo certo.",
       pares: [
-        { item: "Ajudar o colega", alvo: "BOM" },
-        { item: "Escutar quem fala", alvo: "BOM" },
-        { item: "Empurrar na fila", alvo: "RUIM" },
+        { item: "CHUVA", alvo: "TEM CH" },
+        { item: "CHÁ", alvo: "TEM CH" },
+        { item: "SOL", alvo: "NÃO TEM" },
+        { item: "CASA", alvo: "NÃO TEM" },
       ],
       alvosVisuais: [
-        { nome: "BOM", cor: "#34D399", capacidade: 2 },
-        { nome: "RUIM", cor: "#EF4444", capacidade: 1 },
+        { nome: "TEM CH", cor: "#60A5FA", capacidade: 2 },
+        { nome: "NÃO TEM", cor: "#94A3B8", capacidade: 2 },
       ],
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Cartaz da Turma",
-      instrucao: "A Coruja quer um cartaz na sala. Que texto colocar?",
+      titulo: "Fase 5 · Leitura",
+      instrucao: "🔊 'A CHUVA CAI.' Quem cai?",
       pergunta: "Escolha:",
       opcoes: [
-        { nome: "REGRAS", imagemUrl: coracaoImg, rotulo: "💛 Lista de combinados" },
-        { nome: "RECEITA", imagemUrl: macaImg, rotulo: "🍎 Receita de bolo" },
-        { nome: "PARLENDA", imagemUrl: sapoImg, rotulo: "🐸 Parlenda" },
+        { nome: "CHUVA", imagemUrl: chuvaImg, rotulo: "🌧️ CHUVA" },
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "CORAÇÃO", imagemUrl: coracaoImg, rotulo: "💛 CORAÇÃO" },
       ],
       correta: 0,
-      acerto: "💛 Cartaz de COMBINADOS da turma!",
-      erro: "Pra convivência = cartaz de REGRAS.",
+      acerto: "🌧️ A CHUVA cai!",
+      erro: "Volte na frase: A CHUVA CAI.",
     },
   ],
-
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Regra é:", opcoes: ["Combinado do grupo", "Segredo", "Brincadeira só"], correta: 0, explicacao: "Combinado.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "🤝" } },
-      { pergunta: "Boa regra:", opcoes: ["Ajudar", "Empurrar", "Bagunçar"], correta: 0, explicacao: "Ajudar.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🌟" } },
-      { pergunta: "Antes de comer:", opcoes: ["Lavar mãos", "Correr", "Pular"], correta: 0, explicacao: "Lavar mãos.", visual: { tipo: "itens", imagemUrl: escovarImg, quantidade: 1, rotulo: "🧼" } },
+      { pergunta: "CH = quantos sons?", opcoes: ["1", "2"], correta: 0, explicacao: "1 som.", visual: { tipo: "itens", imagemUrl: chuvaImg, quantidade: 1, rotulo: "CH" } },
+      { pergunta: "CHUVA começa com…", opcoes: ["CHU", "SU"], correta: 0, explicacao: "CHU.", visual: { tipo: "itens", imagemUrl: chuvaImg, quantidade: 1, rotulo: "🌧️" } },
+      { pergunta: "CH+A=", opcoes: ["CHA", "CA"], correta: 0, explicacao: "CHA.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "CHA" } },
     ],
     medio: [
-      { pergunta: "Regra da sala boa:", opcoes: ["Escutar quem fala", "Falar por cima", "Sair"], correta: 0, explicacao: "Escutar.", visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "🧏" } },
-      { pergunta: "Depois de brincar:", opcoes: ["Guardar brinquedos", "Deixar espalhado", "Chorar"], correta: 0, explicacao: "Guardar.", visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "🧸" } },
-      { pergunta: "Regra é escrita:", opcoes: ["Curta e clara", "Longa", "Escondida"], correta: 0, explicacao: "Curta e clara.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📝" } },
+      { pergunta: "CHINELO tem…", opcoes: ["CH inicial", "S inicial"], correta: 0, explicacao: "CHI-.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "CHI" } },
+      { pergunta: "Dígrafo:", opcoes: ["2 letras 1 som", "1 letra 2 sons"], correta: 0, explicacao: "2 letras, 1 som.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "🔗" } },
+      { pergunta: "'A CHUVA CAI.' Quem cai?", opcoes: ["Chuva", "Sol"], correta: 0, explicacao: "Chuva.", visual: { tipo: "itens", imagemUrl: chuvaImg, quantidade: 1, rotulo: "🌧️" } },
     ],
     dificil: [
-      { pergunta: "Combinar em grupo é:", opcoes: ["Colaborar", "Brigar", "Fugir"], correta: 0, explicacao: "Colaborar.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "🤝" } },
-      { pergunta: "Regra sem sentido:", opcoes: ["Deve ser mudada", "Ficar sempre", "Ninguém liga"], correta: 0, explicacao: "Repensar.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🔁" } },
-      { pergunta: "Todos escrevem juntos:", opcoes: ["Fica mais justo", "Fica pior", "Não muda"], correta: 0, explicacao: "Mais justo.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "👥" } },
+      { pergunta: "CH em CHOCOLATE está em…", opcoes: ["Começo", "Meio", "Fim"], correta: 0, explicacao: "CHO-.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "CHO" } },
+      { pergunta: "Se ler C e H separados…", opcoes: ["Sai errado", "Sai igual"], correta: 0, explicacao: "CH é junto.", visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚠️" } },
+      { pergunta: "Palavra sem CH:", opcoes: ["CASA", "CHUVA"], correta: 0, explicacao: "CASA não tem CH.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "🏠" } },
     ],
   },
-
-  proximaHabilidade: { codigo: "EF01LP22" },
+  proximaHabilidade: { codigo: "EF01LP22", titulo: "Dígrafo LH" },
 };
 
 export default aula;
