@@ -498,43 +498,77 @@ function LeitorHistoria({
         </div>
       )}
 
-      {fase === "perguntas" && (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
-          <div className="text-center">
-            <div className="text-xs font-bold text-rose-500 uppercase tracking-wider">
-              Pergunta {perguntaIdx + 1} / {historia.perguntas.length}
-            </div>
-            <p className="text-slate-700 text-base mt-1 font-medium max-w-md">
-              {historia.perguntas[perguntaIdx].pergunta}
-            </p>
-            <button
-              onClick={() =>
-                falar(historia.perguntas[perguntaIdx].pergunta)
-              }
-              className="mt-2 inline-flex items-center gap-1 text-xs text-rose-600 font-bold"
-            >
-              <Volume2 className="w-3 h-3" /> Ouvir de novo
-            </button>
-          </div>
-          <div className="grid grid-cols-3 gap-4 max-w-2xl w-full">
-            {shuffleOnce(historia.perguntas[perguntaIdx], perguntaIdx).map(
-              (nome) => (
-                <button
-                  key={nome}
-                  onClick={() => responder(nome)}
-                  className="aspect-square rounded-3xl bg-white shadow-md border-4 border-rose-200 p-3 flex items-center justify-center hover:scale-105 transition-transform"
+      {fase === "perguntas" && (() => {
+        const p = historia.perguntas[perguntaIdx];
+        const tipoLabel = tipoBadge(p.tipo ?? "literal");
+        const modoOpc: "imagem" | "texto" = p.modo ?? "imagem";
+        return (
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+            <div className="text-center max-w-md">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-xs font-bold text-rose-500 uppercase tracking-wider">
+                  Pergunta {perguntaIdx + 1} / {historia.perguntas.length}
+                </span>
+                <span
+                  className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${tipoLabel.cor}`}
                 >
-                  <img
-                    src={objetoImg(nome)}
-                    alt=""
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </button>
-              ),
+                  {tipoLabel.icone} {tipoLabel.texto}
+                </span>
+              </div>
+              <p className="text-slate-700 text-base sm:text-lg mt-2 font-medium">
+                {p.pergunta}
+              </p>
+              <button
+                onClick={() => falar(p.pergunta)}
+                className="mt-2 inline-flex items-center gap-1 text-xs text-rose-600 font-bold"
+              >
+                <Volume2 className="w-3 h-3" /> Ouvir de novo
+              </button>
+            </div>
+
+            {modoOpc === "imagem" ? (
+              <div className="grid grid-cols-3 gap-4 max-w-2xl w-full">
+                {shuffleOnce(p, perguntaIdx).map((nome) => (
+                  <button
+                    key={nome}
+                    onClick={() => responder(nome)}
+                    className="aspect-square rounded-3xl bg-white shadow-md border-4 border-rose-200 p-3 flex items-center justify-center hover:scale-105 transition-transform"
+                  >
+                    <img
+                      src={objetoImg(nome)}
+                      alt=""
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3 w-full max-w-md">
+                {shuffleOnce(p, perguntaIdx).map((txt) => (
+                  <button
+                    key={txt}
+                    onClick={() => responder(txt)}
+                    className="rounded-2xl bg-white shadow-md border-4 border-rose-200 p-4 text-left font-medium text-slate-800 hover:scale-[1.02] transition-transform flex items-center gap-3"
+                  >
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        falar(txt);
+                      }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-rose-100 text-rose-600 flex-shrink-0"
+                      role="button"
+                      aria-label="Ouvir opção"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                    </span>
+                    <span className="flex-1">{txt}</span>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {fase === "fim" && (
         <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 text-center">
