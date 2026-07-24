@@ -78,7 +78,7 @@ function AulaLerComAuroraRoute() {
       <div className="min-h-screen grid place-items-center bg-slate-900 text-white p-6">
         <div className="text-center">
           <p className="text-xl mb-4">Missão não encontrada.</p>
-          <Link to="/escola-brilha/ler-com-aurora" className="underline text-yellow-300">
+          <Link to="/neuro-treino/ler-com-aurora" className="underline text-yellow-300">
             Voltar para a trilha
           </Link>
         </div>
@@ -95,14 +95,14 @@ function AulaLerComAuroraRoute() {
     <PlayerPortuguesEI
       curso={curso}
       aula={aula}
-      voltarPara="/escola-brilha/ler-com-aurora"
+      voltarPara="/neuro-treino/ler-com-aurora"
       onConcluir={() => {
         void marcarMissaoConcluida({
           childId: activeChild?.id ?? null,
           slug: aulaSlug,
           fase,
         });
-        navigate({ to: "/escola-brilha/ler-com-aurora" });
+        navigate({ to: "/neuro-treino/ler-com-aurora" });
       }}
     />
   );

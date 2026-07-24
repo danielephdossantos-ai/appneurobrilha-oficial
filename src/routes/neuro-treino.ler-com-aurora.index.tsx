@@ -134,7 +134,7 @@ function FaseBloco({
                   return (
                     <div key={a.slug} className={`flex ${align} px-6`}>
                       <Link
-                        to="/escola-brilha/ler-com-aurora/$aula"
+                        to="/neuro-treino/ler-com-aurora/$aula"
                         params={{ aula: a.slug }}
                         className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
                         style={{
