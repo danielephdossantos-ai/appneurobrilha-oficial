@@ -468,6 +468,36 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+        {/* Sílabas visíveis (fusão / segmentação): chips grandes que a criança
+            toca para ouvir cada pedacinho. Fica em cima das imagens. */}
+        {rodada.silabas && rodada.silabas.length > 0 && (
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+              {rodada.tipo === "fusao"
+                ? "Junte os pedacinhos"
+                : "Pedacinhos da palavra"}
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {rodada.silabas.map((s, i) => (
+                <button
+                  key={`${s}-${i}`}
+                  onClick={() => falar(s.toLowerCase())}
+                  className="min-w-[3.5rem] px-4 py-3 rounded-2xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-xl border-2 border-white/40 active:scale-95 hover:scale-105 transition-transform text-3xl sm:text-4xl font-black leading-none"
+                  aria-label={`Ouvir ${s}`}
+                >
+                  {s.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => falar(rodada.silabas!.join("... ").toLowerCase())}
+              className="mt-1 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold"
+            >
+              <Volume2 className="w-4 h-4" /> Ouvir tudo
+            </button>
+          </div>
+        )}
+
         {/* Alvo visível: só mostra quando a resposta REALMENTE começa com o foco. */}
         {rodada.foco &&
           !usaGridNumero &&
