@@ -15,7 +15,9 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
     return (
       <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
         <p className="font-black mb-3">{dados.enunciado}</p>
-        <QuizSequencial perguntas={visual.perguntas} cena={visual.cena} />
+        <div data-no-tts>
+          <QuizSequencial perguntas={visual.perguntas} cena={visual.cena} />
+        </div>
       </Secao>
     );
   }
