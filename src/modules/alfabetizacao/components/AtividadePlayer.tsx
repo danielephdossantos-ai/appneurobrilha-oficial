@@ -468,24 +468,27 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
-        {/* Alvo visível: se o TTS falhar, a mãe vê qual vogal/som precisa tocar */}
-        {rodada.foco && !usaGridNumero && rodada.foco.length <= 3 && (
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
-              Toque na imagem que começa com
-            </span>
-            <button
-              onClick={() => falar(falarSom(rodada.foco!))}
-              className="min-w-[7rem] px-6 py-3 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform flex items-center gap-3"
-              aria-label={`Ouvir o som ${rodada.foco}`}
-            >
-              <span className="text-6xl sm:text-7xl font-black leading-none">
-                {rodada.foco.toUpperCase()}
+        {/* Alvo visível: só mostra quando a resposta REALMENTE começa com o foco. */}
+        {rodada.foco &&
+          !usaGridNumero &&
+          rodada.foco.length <= 3 &&
+          TIPOS_COMECA_COM.has(rodada.tipo) && (
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+                Toque na imagem que começa com
               </span>
-              <Volume2 className="w-6 h-6" />
-            </button>
-          </div>
-        )}
+              <button
+                onClick={() => falar(falarSom(rodada.foco!))}
+                className="min-w-[7rem] px-6 py-3 rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-[#3A1F5C] shadow-2xl border-4 border-white/40 active:scale-95 hover:scale-105 transition-transform flex items-center gap-3"
+                aria-label={`Ouvir o som ${rodada.foco}`}
+              >
+                <span className="text-6xl sm:text-7xl font-black leading-none">
+                  {rodada.foco.toUpperCase()}
+                </span>
+                <Volume2 className="w-6 h-6" />
+              </button>
+            </div>
+          )}
 
         {usaReferencia && (
           <div className="flex flex-col items-center gap-2">
