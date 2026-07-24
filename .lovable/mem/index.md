@@ -41,3 +41,4 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 - [Plano reforma Neuro Treino](mem://features/neuro-treino-auditoria-plano) — Contrato de 6 passos pós-auditoria: (1) integrar Biblioteca Encantada como PECS/TEACCH, (2) trilha Dislexia Orton-Gillingham, (3) grupo Discalculia, (4) ligar adjustment aos jogos, (5) unificar métricas, (6) prompting ABA com fading.
 
 - [Sem releitura na Biblioteca Alfa](mem://constraints/sem-releitura-repetida) — Currículo de 4 anos (3–7a). Sem "Ler de novo" nem contador de leituras. Cada visita à biblioteca oferece história nova.
+- [Escola Brilha níveis 1-4 por ano](mem://features/escola-brilha-niveis) — Cada série do Escola Brilha terá 4 níveis internos (mais conteúdo por ano). Ainda não implementado.
