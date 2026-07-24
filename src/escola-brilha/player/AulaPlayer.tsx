@@ -528,7 +528,7 @@ function renderBloco(
     case "explicacao":
       return (
         <>
-          <Explicacao texto={a.explicacao} aula={a} />
+          <Explicacao texto={a.explicacao} aula={a} nomeCrianca={ctx.nomeCrianca} />
           <div className="mt-4">
             <MultiModal aula={a} />
           </div>
