@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const NIVEL_METRICS: Record<number, { valence: number; energy: number }> = {
+  1: { valence: 2, energy: 1 },
+  2: { valence: 1, energy: -0.5 },
+  3: { valence: -0.5, energy: 0.5 },
+  4: { valence: -1.5, energy: -1 },
+  5: { valence: -2, energy: 2 },
+};
 
 import { url as imgBravo } from "@/assets/brilha-vida/emocoes/bravo.png.asset.json";
 import { url as imgTriste } from "@/assets/brilha-vida/emocoes/triste.png.asset.json";
