@@ -376,6 +376,12 @@ function PainelPremium() {
           </div>
         </motion.div>
       </div>
+
+      {diarioAberto && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
+          <DiarioABC onClose={() => setDiarioAberto(false)} />
+        </div>
+      )}
     </Shell>
   );
 }
