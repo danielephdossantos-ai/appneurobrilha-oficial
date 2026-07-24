@@ -39,15 +39,28 @@ const ROTULOS: Record<1 | 2 | 3 | 4, string> = {
   4: "Aplicação prática",
 };
 
-export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
-  const chunks = useMemo<Chunk[]>(() => construirChunks(texto, aula), [texto, aula]);
-  const niveis = useMemo<Nivel[]>(() => construirNiveis(texto, aula), [texto, aula]);
+export function Explicacao({ texto, aula, nomeCrianca }: { texto: string; aula?: Aula; nomeCrianca?: string }) {
+  const primeiroNome = (nomeCrianca ?? "").trim().split(/\s+/)[0] ?? "";
+  const inicial = primeiroNome ? primeiroNome.charAt(0).toUpperCase() : "";
+  const aplicarNome = (s: string) =>
+    (s ?? "")
+      .replace(/\{NOME\}/g, primeiroNome || "seu nome")
+      .replace(/\{INICIAL\}/g, inicial || "?");
+  const chunks = useMemo<Chunk[]>(
+    () => construirChunks(texto, aula).map((c) => ({ ...c, texto: aplicarNome(c.texto), exemplo: c.exemplo ? aplicarNome(c.exemplo) : c.exemplo })),
+    [texto, aula, primeiroNome],
+  );
+  const niveis = useMemo<Nivel[]>(
+    () => construirNiveis(texto, aula).map((n) => ({ ...n, texto: aplicarNome(n.texto) })),
+    [texto, aula, primeiroNome],
+  );
   const [visiveis, setVisiveis] = useState(1);
   const [nivelIdx, setNivelIdx] = useState(0);
   const total = chunks.length;
   const podeAvancar = visiveis < total;
   const podeAprofundar = nivelIdx < niveis.length - 1;
   const nivelAtual = niveis[nivelIdx];
+  const mostrarBannerNome = aula?.codigo === "EI03EF09" && !!primeiroNome;
 
 
   const reverExplicacao = () => {
@@ -75,6 +88,24 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
           Nível {nivelAtual.n} · {nivelAtual.rotulo}
         </div>
       </div>
+
+      {mostrarBannerNome && (
+        <div className="mb-4 rounded-2xl border-4 border-[#FFC93C] bg-white p-4 flex flex-col items-center shadow-xl">
+          <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/60 mb-1">
+            Este é o SEU nome
+          </div>
+          <div className="text-4xl md:text-5xl font-black tracking-widest text-[#0d1f55] uppercase">
+            {primeiroNome.toUpperCase()}
+          </div>
+          <div className="mt-2 flex items-center gap-2 text-xs font-black text-[#0d1f55]/70">
+            <span>Letra inicial:</span>
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#FFC93C] text-[#0d1f55] text-lg font-black">
+              {inicial}
+            </span>
+          </div>
+        </div>
+      )}
+
 
       {nivelIdx > 0 && (
         <motion.div
