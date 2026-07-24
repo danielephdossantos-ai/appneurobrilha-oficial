@@ -100,6 +100,7 @@ const ORDER: ZoneId[] = ["azul", "verde", "amarelo", "vermelho"];
 export function ZonesRegulation({ onClose }: { onClose: () => void }) {
   const [zona, setZona] = useState<ZoneId | null>(null);
   const [etapa, setEtapa] = useState<"identificar" | "gatilho" | "ferramenta">("identificar");
+  const recordMood = useMoodRecorder();
 
   const z = zona ? ZONES[zona] : null;
 
