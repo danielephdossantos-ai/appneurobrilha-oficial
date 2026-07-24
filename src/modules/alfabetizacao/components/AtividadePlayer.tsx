@@ -240,7 +240,8 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
       agendar(() => {
         setFeedback(null);
         setTravado(false);
-      }, 3200);
+        setModelagem(null);
+      }, 4200);
     }
   }
 
