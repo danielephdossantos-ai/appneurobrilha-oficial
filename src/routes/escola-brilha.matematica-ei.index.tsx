@@ -9,7 +9,7 @@ export const Route = createFileRoute("/escola-brilha/matematica-ei/")({
       {
         name: "description",
         content:
-          "Trilhas de matemática para Maternal, Pré I e Pré II. Contagem, formas, cores e comparação por percepção.",
+          "Trilha de matemática para Maternal, Pré I e Pré II. Contagem, formas, cores e comparação por percepção.",
       },
       { property: "og:title", content: "Códice de Matemática — Educação Infantil" },
       {
@@ -41,11 +41,14 @@ function TrilhaMatematicaEI() {
           </p>
         </header>
 
-        <div className="grid gap-4">
+        <div className="grid gap-6">
           {cursosMatematicaEI.map((curso) => {
             const total = curso.unidades.reduce((a, u) => a + u.aulas.length, 0);
-            const concluidas = countConcluidas(curso.slug, childId);
-            const completo = concluidas >= total && total > 0;
+            const concluidas = readList(curso.slug, childId);
+            const feitas = concluidas.length;
+            const completo = feitas >= total && total > 0;
+            const aulasFlat = curso.unidades.flatMap((u) => u.aulas.map((a) => ({ aula: a, unidade: u })));
+
             return (
               <div
                 key={curso.slug}
@@ -64,45 +67,57 @@ function TrilhaMatematicaEI() {
                     </p>
                     <h3 className="text-lg font-black leading-tight">{curso.titulo}</h3>
                     <p className="text-[11px] text-white/85 mt-0.5">
-                      {concluidas}/{total} aulas · {completo ? "concluído ✓" : `${curso.unidades.length} semana(s)`}
+                      {feitas}/{total} aulas · {completo ? "concluído ✓" : `${curso.unidades.length} unidade(s)`}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-4 grid gap-2">
-                  {curso.unidades.map((u) => (
-                    <div key={u.slug}>
-                      <div className="text-center my-2">
-                        <div className="inline-block bg-black/30 rounded-full px-3 py-1 text-[11px] uppercase tracking-wider font-bold text-yellow-300">
-                          {u.titulo}
+                <div className="mt-4 rounded-3xl bg-black/25 p-4">
+                  <div className="space-y-2">
+                    {curso.unidades.map((u) => (
+                      <div key={u.slug} className="pt-3">
+                        <div className="text-center mb-3">
+                          <div className="inline-block bg-black/40 rounded-full px-4 py-1 text-xs uppercase tracking-wider font-bold text-yellow-300">
+                            Unidade {u.numero ?? ""}
+                          </div>
+                          <div className="text-sm font-bold mt-1">{u.titulo}</div>
+                        </div>
+                        <div className="space-y-4">
+                          {u.aulas.map((a, i) => {
+                            const flatIdx = aulasFlat.findIndex((x) => x.aula.slug === a.slug);
+                            const align = flatIdx % 2 === 0 ? "justify-start" : "justify-end";
+                            const feito = concluidas.includes(a.slug);
+                            return (
+                              <div key={a.slug} className={`flex ${align} px-6`}>
+                                <Link
+                                  to="/escola-brilha/matematica-ei/$serie/$aula"
+                                  params={{ serie: curso.serie, aula: a.slug }}
+                                  className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
+                                  style={{
+                                    background: `linear-gradient(135deg, ${curso.corPrimaria}, #fde68a)`,
+                                    color: curso.corSecundaria,
+                                  }}
+                                >
+                                  <div className="text-center px-2">
+                                    <div className="text-3xl">{a.icone}</div>
+                                    <div className="text-[10px] font-black mt-1 leading-tight line-clamp-3">
+                                      {a.titulo}
+                                    </div>
+                                    <div className="text-[9px] opacity-70 mt-0.5">Aula {i + 1}</div>
+                                  </div>
+                                  {feito && (
+                                    <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 grid place-items-center text-white text-sm">
+                                      ✓
+                                    </div>
+                                  )}
+                                </Link>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
-                      <div className="grid gap-2">
-                        {u.aulas.map((a) => {
-                          const feito = concluidas > 0 && isConcluida(curso.slug, childId, a.slug);
-                          return (
-                            <Link
-                              key={a.slug}
-                              to="/escola-brilha/matematica-ei/$serie/$aula"
-                              params={{ serie: curso.serie, aula: a.slug }}
-                              className="flex items-center gap-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 px-4 py-3 active:scale-[0.98] transition"
-                            >
-                              <div className="text-2xl">{a.icone}</div>
-                              <div className="flex-1 min-w-0">
-                                <div className="font-black text-sm leading-tight">{a.titulo}</div>
-                                <div className="text-[10px] text-white/70">
-                                  {a.duracaoMin} min · {a.bncc.join(" · ")}
-                                </div>
-                              </div>
-                              <div className="shrink-0 text-white/80">
-                                {feito ? "✓" : "▸"}
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             );
@@ -131,12 +146,4 @@ function readList(cursoSlug: string, childId: string | null): string[] {
   } catch {
     return [];
   }
-}
-
-function countConcluidas(cursoSlug: string, childId: string | null): number {
-  return readList(cursoSlug, childId).length;
-}
-
-function isConcluida(cursoSlug: string, childId: string | null, aulaSlug: string): boolean {
-  return readList(cursoSlug, childId).includes(aulaSlug);
 }
