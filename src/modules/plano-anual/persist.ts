@@ -124,8 +124,21 @@ export async function salvarPlanoParaCrianca(
   // 2. Salva instância da criança
   await salvarInstancia(input.childId, hash, plano);
 
-  // 3. Incrementa contador de uso (best-effort, ignora erro)
-  await supabase.rpc("increment" as any, {}).catch(() => {});
+  // 3. Incrementa contador de uso do template (best-effort).
+  try {
+    const { data: cur } = await supabase
+      .from("plano_anual_templates" as any)
+      .select("usos")
+      .eq("hash", hash)
+      .maybeSingle();
+    const usos = ((cur as any)?.usos ?? 0) + 1;
+    await supabase
+      .from("plano_anual_templates" as any)
+      .update({ usos } as any)
+      .eq("hash", hash);
+  } catch {
+    /* noop */
+  }
 
   return plano;
 }
