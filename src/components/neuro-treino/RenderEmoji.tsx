@@ -104,7 +104,7 @@ export interface RenderEmojiProps {
 export function RenderEmoji({ e, className = "w-16 h-16", label, hideText }: RenderEmojiProps) {
   if (!e && !label) return null;
   const raw = (e ?? "").trim();
-  const img = emojiImg(raw) ?? objetoImg(raw);
+  const img = emojiImg(raw) ?? objetoImg(raw) ?? objetoImg(label);
 
   if (img) {
     return (
