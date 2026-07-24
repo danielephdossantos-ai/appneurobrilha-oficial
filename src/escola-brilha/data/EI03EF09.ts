@@ -38,30 +38,31 @@ const aula: Aula = {
   ],
 
   explicacao:
-    "Cada pessoa tem um NOME. E cada nome é escrito com LETRAS específicas.\n\n• Seu nome começa com uma LETRA especial — é a inicial.\n• As letras do seu nome ficam sempre na MESMA ORDEM.\n• Você pode aprender a reconhecer o seu nome escrito ANTES de saber ler outras palavras.\n\nO nome é a PRIMEIRA palavra que a gente aprende — porque é NOSSA.",
+    "Seu nome é {NOME}. Sim, {NOME}! Cada pessoa tem um nome — e o seu é escrito com letras específicas.\n\n• Seu nome, {NOME}, começa com a letra {INICIAL} — essa é a sua letra inicial.\n• As letras de {NOME} ficam sempre na MESMA ORDEM.\n• Você pode aprender a reconhecer o SEU nome escrito antes de saber ler outras palavras.\n\n{NOME} é a PRIMEIRA palavra que a gente aprende — porque é SUA.",
 
   explicacaoAtiva: [
-    { texto: "Cada criança tem uma etiqueta com o NOME dela na mochila.", imagem: papelImg, imagemAlt: "Etiqueta" },
-    { texto: "Você olha e reconhece: essa etiqueta é MINHA porque a primeira letra é a MINHA.", imagem: meninaImg, imagemAlt: "Menina" },
+    { texto: "Olha em cima ⬆️: esse é o SEU nome, {NOME}. Aponta com o dedinho pra cada letra.", imagem: papelImg, imagemAlt: "Etiqueta com o nome" },
+    { texto: "Seu nome começa com a letra {INICIAL}. Onde você vir {INICIAL} escrito no mundo, pode ser o começo de {NOME}!", imagem: meninaImg, imagemAlt: "Amigo" },
     {
-      texto: "Depois tenta ESCREVER seu nome, do seu jeito, com lápis.",
+      texto: "Agora tenta ESCREVER {NOME} com o lápis, do seu jeito. Cada tentativa conta.",
       imagem: lapisImg,
       imagemAlt: "Lápis",
       checagem: {
-        pergunta: "O que a gente aprende a escrever PRIMEIRO?",
-        opcoes: ["O próprio nome", "Todas as palavras do dicionário"],
+        pergunta: "Qual é a primeira letra do SEU nome ({NOME})?",
+        opcoes: ["{INICIAL}", "Outra letra"],
         correta: 0,
-        explicacao: "Nome é a primeira palavra.",
+        explicacao: "Isso! {NOME} começa com {INICIAL}.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Meu nome é meu.",
-    nivel2: "Meu nome começa com uma letra inicial especial.",
-    nivel3: "Antes de ler outras palavras, eu já reconheço o meu nome.",
-    nivel4: "Escrever o próprio nome é o primeiro passo pra ler o mundo.",
+    nivel1: "Meu nome é {NOME}.",
+    nivel2: "{NOME} começa com a letra {INICIAL} — essa é a minha letra especial.",
+    nivel3: "Antes de ler outras palavras, eu já reconheço o meu nome: {NOME}.",
+    nivel4: "Escrever {NOME} é o primeiro passo pra ler o mundo.",
   },
+
 
   exemploResolvido: {
     enunciado: "MARIA e MATEUS. Qual é o nome da Maria?",
