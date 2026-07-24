@@ -2627,20 +2627,27 @@ function NomeacaoRapida({ p, onDone, promptLevel }: any) {
   const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
   const cellSize = sens.largerTargets ? "w-20 h-20 md:w-24 md:h-24" : "w-16 h-16 md:w-20 md:h-20";
 
-  // Monta sequência RAN: 12 itens repetindo (2 linhas x 6)
+  // Monta sequência RAN: 12 itens DIVERSOS (RAN clássico usa figuras variadas)
   const bancoItens: { emoji: string; nome: string }[] = useMemo(() => {
-    const base: { emoji: string; nome: string }[] = [
+    // Preferir bank vindo no payload (itens distintos com emojis diferentes)
+    if (Array.isArray(p.bank) && p.bank.length > 0) {
+      return p.bank as { emoji: string; nome: string }[];
+    }
+    // Fallback antigo: alvo + 3 distratores (mesmo emoji apenas se bank ausente)
+    return [
       { emoji: p.emoji, nome: p.nome },
       ...(p.opts as string[])
         .filter((n) => n !== p.nome)
         .slice(0, 3)
         .map((n) => ({ emoji: p.emoji, nome: n })),
     ];
-    // Se payload tiver bank, prefere; senão usa opts
-    return base;
   }, [p]);
 
   const sequencia: { emoji: string; nome: string }[] = useMemo(() => {
+    // Se já veio um bank com 12+ itens, usa direto (mantém variedade)
+    if (Array.isArray(p.bank) && p.bank.length >= 12) {
+      return (p.bank as { emoji: string; nome: string }[]).slice(0, 12);
+    }
     const out: { emoji: string; nome: string }[] = [];
     for (let i = 0; i < 12; i++) out.push(bancoItens[i % bancoItens.length]);
     // Baralha levemente sem duplicar consecutivos
@@ -2651,7 +2658,7 @@ function NomeacaoRapida({ p, onDone, promptLevel }: any) {
       }
     }
     return out;
-  }, [bancoItens]);
+  }, [bancoItens, p]);
 
   const [idx, setIdx] = useState(0);
   const [inicio, setInicio] = useState<number | null>(null);

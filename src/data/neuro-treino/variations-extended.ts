@@ -184,12 +184,92 @@ const NOMEACAO_BANK = [
   { emoji: "🌳", nome: "ÁRVORE", outros: ["FLOR", "CASA", "SOL"] },
   { emoji: "☀️", nome: "SOL", outros: ["LUA", "ESTRELA", "CHUVA"] },
   { emoji: "🐰", nome: "COELHO", outros: ["GATO", "RAPOSA", "URSO"] },
+  { emoji: "🐟", nome: "PEIXE", outros: ["SAPO", "TARTARUGA", "GOLFINHO"] },
+  { emoji: "🐢", nome: "TARTARUGA", outros: ["SAPO", "PEIXE", "COELHO"] },
+  { emoji: "🐴", nome: "CAVALO", outros: ["VACA", "OVELHA", "PORCO"] },
+  { emoji: "🐷", nome: "PORCO", outros: ["VACA", "OVELHA", "CAVALO"] },
+  { emoji: "🐔", nome: "GALINHA", outros: ["PATO", "PÁSSARO", "CORUJA"] },
+  { emoji: "🦆", nome: "PATO", outros: ["GALINHA", "PÁSSARO", "CORUJA"] },
+  { emoji: "🐝", nome: "ABELHA", outros: ["BORBOLETA", "FLOR", "SAPO"] },
+  { emoji: "🐘", nome: "ELEFANTE", outros: ["LEÃO", "TIGRE", "MACACO"] },
+  { emoji: "🐵", nome: "MACACO", outros: ["LEÃO", "TIGRE", "ELEFANTE"] },
+  { emoji: "🍇", nome: "UVA", outros: ["MAÇÃ", "BANANA", "MORANGO"] },
+  { emoji: "🍓", nome: "MORANGO", outros: ["UVA", "MAÇÃ", "BANANA"] },
+  { emoji: "🍊", nome: "LARANJA", outros: ["MAÇÃ", "UVA", "LIMÃO"] },
+  { emoji: "🥕", nome: "CENOURA", outros: ["MILHO", "BATATA", "TOMATE"] },
+  { emoji: "🌽", nome: "MILHO", outros: ["CENOURA", "BATATA", "TOMATE"] },
+  { emoji: "🍅", nome: "TOMATE", outros: ["MAÇÃ", "MORANGO", "CENOURA"] },
+  { emoji: "🚌", nome: "ÔNIBUS", outros: ["CARRO", "MOTO", "TREM"] },
+  { emoji: "🏍️", nome: "MOTO", outros: ["CARRO", "ÔNIBUS", "TREM"] },
+  { emoji: "✈️", nome: "AVIÃO", outros: ["CARRO", "TREM", "BARCO"] },
+  { emoji: "⛵", nome: "BARCO", outros: ["AVIÃO", "CARRO", "TREM"] },
+  { emoji: "⭐", nome: "ESTRELA", outros: ["SOL", "LUA", "CHUVA"] },
+  { emoji: "☁️", nome: "NUVEM", outros: ["SOL", "LUA", "ESTRELA"] },
+  { emoji: "🌧️", nome: "CHUVA", outros: ["SOL", "LUA", "NUVEM"] },
+  { emoji: "🎈", nome: "BALÃO", outros: ["BOLA", "PIPA", "FLOR"] },
+  { emoji: "🎁", nome: "PRESENTE", outros: ["CAIXA", "BOLA", "COROA"] },
+  { emoji: "📚", nome: "LIVRO", outros: ["CADERNO", "LÁPIS", "MOCHILA"] },
+  { emoji: "✏️", nome: "LÁPIS", outros: ["LIVRO", "CADERNO", "BORRACHA"] },
+  { emoji: "🎒", nome: "MOCHILA", outros: ["LIVRO", "LÁPIS", "CADERNO"] },
+  { emoji: "🍦", nome: "SORVETE", outros: ["BOLO", "DOCE", "PIRULITO"] },
+  { emoji: "🎂", nome: "BOLO", outros: ["SORVETE", "DOCE", "PIRULITO"] },
+  { emoji: "🍕", nome: "PIZZA", outros: ["BOLO", "PÃO", "HAMBÚRGUER"] },
 ];
+
+// Helper: monta 4 opts distintas (correta + 3 distratores retirados do banco)
+function _optsFor(alvoIdx: number, seed: number): string[] {
+  const b = NOMEACAO_BANK[alvoIdx];
+  const outros: string[] = [];
+  const usados = new Set<string>([b.nome]);
+  // primeiro tenta as "outros" declaradas
+  for (const n of b.outros) {
+    if (outros.length >= 3) break;
+    if (!usados.has(n)) {
+      outros.push(n);
+      usados.add(n);
+    }
+  }
+  // completa com nomes de outros itens do banco
+  let k = seed;
+  while (outros.length < 3) {
+    k = (k + 7) % NOMEACAO_BANK.length;
+    const n = NOMEACAO_BANK[k].nome;
+    if (!usados.has(n)) {
+      outros.push(n);
+      usados.add(n);
+    }
+  }
+  return [b.nome, ...outros].sort(() => (seed % 2 ? -1 : 1));
+}
+
 export const NOMEACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
-  const b = NOMEACAO_BANK[i % NOMEACAO_BANK.length];
-  const opts = [b.nome, ...b.outros].sort(() => (i % 2 ? -1 : 1));
+  // Alvo desta variação
+  const alvoIdx = i % NOMEACAO_BANK.length;
+  const b = NOMEACAO_BANK[alvoIdx];
+  const opts = _optsFor(alvoIdx, i);
+  // Monta um "bank" de 12 itens DIVERSOS (sem repetição consecutiva) girando o banco
+  // a partir do índice do alvo, para o RAN mostrar figuras variadas.
+  const bank: { emoji: string; nome: string }[] = [];
+  for (let j = 0; j < 12; j++) {
+    const idx = (alvoIdx + j * 3) % NOMEACAO_BANK.length; // passo 3 quebra padrão
+    bank.push({ emoji: NOMEACAO_BANK[idx].emoji, nome: NOMEACAO_BANK[idx].nome });
+  }
+  // Embaralho leve estável
+  for (let s = 0; s < bank.length; s++) {
+    const t = (s * 5 + i) % bank.length;
+    [bank[s], bank[t]] = [bank[t], bank[s]];
+  }
+  // Evita repetição consecutiva
+  for (let s = 1; s < bank.length; s++) {
+    if (bank[s].nome === bank[s - 1].nome) {
+      const swap = bank.findIndex(
+        (x, j) => j > s && x.nome !== bank[s - 1].nome && (s + 1 >= bank.length || x.nome !== bank[s + 1]?.nome),
+      );
+      if (swap > -1) [bank[s], bank[swap]] = [bank[swap], bank[s]];
+    }
+  }
   const flashMs = Math.max(700, 1400 - i * 20);
-  return { id: `nr-${i + 1}`, payload: { emoji: b.emoji, nome: b.nome, opts, flashMs } };
+  return { id: `nr-${i + 1}`, payload: { emoji: b.emoji, nome: b.nome, opts, flashMs, bank } };
 });
 
 // ──────────────────────────────────────────────
