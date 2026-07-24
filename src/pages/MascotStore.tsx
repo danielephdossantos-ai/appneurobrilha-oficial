@@ -988,7 +988,7 @@ const WorldsSection: React.FC = () => {
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
       </div>
       <p className="text-center text-muted-foreground font-bold mb-8 max-w-2xl mx-auto">
-        Escolha o mundo que você mais ama! Tudo na Jornada 365 vai se transformar para a sua
+        Escolha o mundo que você mais ama! Todo o app vai se transformar para a sua
         aventura favorita. ✨
       </p>
 
