@@ -323,6 +323,9 @@ function PainelPremium() {
               <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
             </motion.div>
 
+            <motion.div variants={itemVariants}>
+              <MoodTimeline childId={activeChild?.id} />
+
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6">
               <motion.div variants={itemVariants}>
                 <HyperfocusManager />
