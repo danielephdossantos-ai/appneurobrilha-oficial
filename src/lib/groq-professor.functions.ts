@@ -87,7 +87,7 @@ const ExplicarErroSchema = z.object({
   bnccCode: z.string().max(20).optional(),
   idade: z.number().int().min(5).max(16).optional(),
   modulo: z
-    .enum(["reforco-brilha", "jornada-365", "missao-prova", "missao-trabalho"])
+    .enum(["reforco-brilha", "missao-prova", "missao-trabalho"])
     .optional(),
 });
 
