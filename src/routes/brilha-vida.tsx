@@ -36,6 +36,7 @@ import { KitCuidador } from "@/components/brilha-vida/KitCuidador";
 import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
 import { GuiaCrise } from "@/components/brilha-vida/GuiaCrise";
 import { BateriaCuidador } from "@/components/brilha-vida/BateriaCuidador";
+import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
