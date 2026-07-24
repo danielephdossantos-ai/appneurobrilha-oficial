@@ -376,11 +376,11 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
           </div>
         </header>
 
-        <main className="flex-1 flex items-center justify-center px-4 pb-6">
+        <main className="flex-1 overflow-y-auto flex items-start justify-center px-4 pb-6 pt-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-xl bg-white/10 backdrop-blur border-2 border-white/20 rounded-[2rem] shadow-xl p-6 md:p-8 text-center"
+            className="w-full max-w-2xl bg-white/10 backdrop-blur border-2 border-white/20 rounded-[2rem] shadow-xl p-6 md:p-8 text-center"
           >
             <div className="text-6xl mb-3">{etapa.emoji}</div>
             <h2 className="text-2xl md:text-3xl font-black text-orange-200 mb-4">
@@ -389,7 +389,9 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             <p className="text-base md:text-lg text-white/90 leading-relaxed mb-4">
               {intro.texto}
             </p>
-            <div className="rounded-2xl bg-white/10 border border-white/15 p-4 text-sm md:text-base text-white/85 mb-6 flex gap-3 items-start text-left">
+
+            {/* Como jogar (linguagem da criança) */}
+            <div className="rounded-2xl bg-white/10 border border-white/15 p-4 text-sm md:text-base text-white/85 mb-4 flex gap-3 items-start text-left">
               <Lightbulb className="w-5 h-5 text-amber-300 flex-shrink-0 mt-0.5" />
               <div>
                 <div className="text-[10px] font-black uppercase tracking-widest text-amber-300 mb-1">
@@ -398,6 +400,33 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
                 {intro.comoJogar}
               </div>
             </div>
+
+            {/* Exemplo passo-a-passo — o "modelo de aula" antes dos exercícios */}
+            <div className="rounded-2xl bg-emerald-500/10 border border-emerald-300/30 p-4 text-sm md:text-base text-white/90 mb-4 text-left">
+              <div className="text-[10px] font-black uppercase tracking-widest text-emerald-300 mb-2">
+                Exemplo — como se faz uma rodada
+              </div>
+              <ol className="space-y-1.5 leading-snug">
+                {intro.exemplo.passos.map((p, i) => (
+                  <li key={i}>{p}</li>
+                ))}
+              </ol>
+              {intro.exemplo.dica && (
+                <div className="mt-3 rounded-xl bg-white/10 border border-white/15 px-3 py-2 text-xs md:text-sm text-white/85">
+                  <span className="font-black text-emerald-200">Dica: </span>
+                  {intro.exemplo.dica}
+                </div>
+              )}
+            </div>
+
+            {/* Para os pais / adulto que acompanha */}
+            <div className="rounded-2xl bg-sky-500/10 border border-sky-300/30 p-4 text-xs md:text-sm text-white/85 mb-6 text-left">
+              <div className="text-[10px] font-black uppercase tracking-widest text-sky-300 mb-1">
+                Para os pais / adulto que acompanha
+              </div>
+              <p className="leading-snug">{intro.paraPais}</p>
+            </div>
+
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
