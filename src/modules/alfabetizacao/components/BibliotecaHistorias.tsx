@@ -403,7 +403,7 @@ function LeitorHistoria({
             200,
           );
         } else {
-          setFase("fim");
+          finalizarHistoria();
         }
       }
     }, 1200);
@@ -429,7 +429,14 @@ function LeitorHistoria({
         </button>
         <div className="flex-1 min-w-0">
           <div className="text-xs font-bold text-rose-500 uppercase tracking-wider">
-            Nível {historia.nivel} · Pág {pagina + 1}/{totalPag}
+            {fase === "vocab"
+              ? `Vocabulário · ${vocabIdx + 1}/${vocabChave.length}`
+              : `Nível ${historia.nivel} · Pág ${pagina + 1}/${totalPag}`}
+            {rodada > 1 && fase !== "vocab" && (
+              <span className="ml-2 text-[10px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded">
+                LEITURA {rodada}
+              </span>
+            )}
           </div>
           <div className="font-black text-slate-800 truncate">
             {historia.titulo}
