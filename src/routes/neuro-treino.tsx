@@ -352,6 +352,33 @@ function Treino() {
             </div>
           </Link>
 
+          {/* ── ALFABETIZAÇÃO BRILHA · consciência fonológica ─────── */}
+          <Link
+            to="/alfabetizacao"
+            className="group block rounded-3xl overflow-hidden border-2 border-pink-200 dark:border-pink-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-indigo-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🅰️
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Alfabetização Brilha · Consciência fonológica
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Progressão por etapas · só imagens e voz
+                </div>
+                <div className="text-xs text-white/85">
+                  Sons, sílabas, palavras — travada até dominar cada etapa
+                </div>
+              </div>
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+
           {/* ── TRILHA DA LEITURA · programa clínico dislexia ───── */}
           <Link
             to="/escola-brilha/dislexia"
