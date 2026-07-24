@@ -39,15 +39,28 @@ const ROTULOS: Record<1 | 2 | 3 | 4, string> = {
   4: "Aplicação prática",
 };
 
-export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
-  const chunks = useMemo<Chunk[]>(() => construirChunks(texto, aula), [texto, aula]);
-  const niveis = useMemo<Nivel[]>(() => construirNiveis(texto, aula), [texto, aula]);
+export function Explicacao({ texto, aula, nomeCrianca }: { texto: string; aula?: Aula; nomeCrianca?: string }) {
+  const primeiroNome = (nomeCrianca ?? "").trim().split(/\s+/)[0] ?? "";
+  const inicial = primeiroNome ? primeiroNome.charAt(0).toUpperCase() : "";
+  const aplicarNome = (s: string) =>
+    (s ?? "")
+      .replace(/\{NOME\}/g, primeiroNome || "seu nome")
+      .replace(/\{INICIAL\}/g, inicial || "?");
+  const chunks = useMemo<Chunk[]>(
+    () => construirChunks(texto, aula).map((c) => ({ ...c, texto: aplicarNome(c.texto), exemplo: c.exemplo ? aplicarNome(c.exemplo) : c.exemplo })),
+    [texto, aula, primeiroNome],
+  );
+  const niveis = useMemo<Nivel[]>(
+    () => construirNiveis(texto, aula).map((n) => ({ ...n, texto: aplicarNome(n.texto) })),
+    [texto, aula, primeiroNome],
+  );
   const [visiveis, setVisiveis] = useState(1);
   const [nivelIdx, setNivelIdx] = useState(0);
   const total = chunks.length;
   const podeAvancar = visiveis < total;
   const podeAprofundar = nivelIdx < niveis.length - 1;
   const nivelAtual = niveis[nivelIdx];
+  const mostrarBannerNome = aula?.codigo === "EI03EF09" && !!primeiroNome;
 
 
   const reverExplicacao = () => {
