@@ -37,6 +37,7 @@ export const Route = createFileRoute("/painel-pais")({
 function PainelPremium() {
   const { activeChild, children, isLoading, setActiveChild } = useAppState();
   const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
+  const [diarioAberto, setDiarioAberto] = useState(false);
 
   useEffect(() => {
     if (!activeChild) return;
