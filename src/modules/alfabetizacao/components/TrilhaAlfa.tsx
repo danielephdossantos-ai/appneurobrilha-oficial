@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Check, Play, Sparkles, BookOpen, ArrowLeft } from "lucide-react";
+import { Check, Play, Sparkles, BookOpen, ArrowLeft, ClipboardCheck } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
+import { ScreeningInicial } from "./ScreeningInicial";
 import { calcularNivelLeitor } from "../data/historias-graduadas";
 import { useAdminMode } from "@/escola-brilha/admin-mode";
+import {
+  screeningFeito,
+  marcarScreeningFeito,
+  resetarScreening,
+} from "../engine/screening";
+import { setChildAtualSRS } from "../engine/srs";
 
 interface Props {
   childId: string;
@@ -13,11 +20,27 @@ interface Props {
 }
 
 export function TrilhaAlfa({ childId, childName }: Props) {
-  const { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida } =
-    useProgressoAlfa(childId);
+  const {
+    progresso,
+    registrarAcerto,
+    aplicarPosicaoInicial,
+    etapaDesbloqueada,
+    etapaConcluida,
+  } = useProgressoAlfa(childId);
   const [admin] = useAdminMode();
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
+  const [screening, setScreening] = useState(false);
   const nivelLeitor = calcularNivelLeitor(progresso);
+
+  useEffect(() => {
+    setChildAtualSRS(childId);
+    // Abre screening automaticamente na primeira entrada (progresso vazio + não feito).
+    const semProgresso = Object.keys(progresso).length === 0;
+    if (semProgresso && !screeningFeito(childId)) {
+      const t = setTimeout(() => setScreening(true), 400);
+      return () => clearTimeout(t);
+    }
+  }, [childId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const etapaAtiva = ETAPAS.find((e) => e.id === etapaAtivaId) ?? null;
 
