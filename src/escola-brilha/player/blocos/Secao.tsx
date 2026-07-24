@@ -78,7 +78,7 @@ export function Secao({
       ref={boxRef}
       className="rounded-3xl bg-white/10 border-2 border-white/20 p-6 relative"
     >
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3" data-no-tts>
         <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: cor }}>
           <Icon className="h-5 w-5 shrink-0" />
           <span className="text-xs font-black uppercase tracking-widest truncate">
