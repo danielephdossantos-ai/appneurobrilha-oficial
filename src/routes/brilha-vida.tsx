@@ -188,6 +188,22 @@ function BrilhaVida() {
       setCustomActivity("roda");
       return;
     }
+    if (tipo === "5-4-3-2-1 Sentidos") {
+      setCustomActivity("grounding");
+      return;
+    }
+    if (tipo === "Abraço da Borboleta") {
+      setCustomActivity("borboleta");
+      return;
+    }
+    if (tipo === "Espaguete e Estátua") {
+      setCustomActivity("espaguete");
+      return;
+    }
+    if (tipo === "Escuta do Corpo") {
+      setCustomActivity("escutacorpo");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
