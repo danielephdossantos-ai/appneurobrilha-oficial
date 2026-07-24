@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Volume2, X, Lock, BookOpen, Sparkles, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Volume2, X, BookOpen, Sparkles, Check } from "lucide-react";
 import {
   HISTORIAS_GRADUADAS,
   HistoriaGraduada,
@@ -10,6 +10,7 @@ import {
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
+import { useAdminMode } from "@/escola-brilha/admin-mode";
 
 interface Props {
   childId: string;
@@ -19,6 +20,7 @@ interface Props {
 
 export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const { progresso } = useProgressoAlfa(childId);
+  const [admin] = useAdminMode();
   const nivelLeitor = useMemo(() => calcularNivelLeitor(progresso), [progresso]);
   const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
@@ -50,7 +52,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {HISTORIAS_GRADUADAS.map((h) => {
-            const desbloq = disponiveis.includes(h);
+            const desbloq = admin || disponiveis.includes(h);
             return (
               <button
                 key={h.id}
@@ -70,7 +72,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
                   {desbloq ? (
                     <img src={objetoImg(h.capa)} alt="" className="max-h-[70%] max-w-[70%] object-contain" />
                   ) : (
-                    <Lock className="w-8 h-8 text-slate-400" />
+                    <span className="text-3xl text-slate-400">🔒</span>
                   )}
                 </div>
                 <div className="flex items-center justify-between">
