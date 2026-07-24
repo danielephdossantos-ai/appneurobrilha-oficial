@@ -2,6 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
 import { MicrofoneFala } from "./shared/MicrofoneFala";
+import { useMoodRecorder } from "./shared/moodLog";
+
+const ZONE_METRICS: Record<ZoneId, { valence: number; energy: number }> = {
+  azul: { valence: -1, energy: -2 },
+  verde: { valence: 2, energy: 0 },
+  amarelo: { valence: -1, energy: 2 },
+  vermelho: { valence: -2, energy: 2 },
+};
 
 
 /**
