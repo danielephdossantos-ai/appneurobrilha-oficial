@@ -107,7 +107,6 @@ const aula: Aula = {
         { personagem: "Estrela do nome", itemImagemUrl: estrelaImg, quantidade: 1, cor: "#FBBF24" },
       ],
       perguntas: [
-        { pergunta: "O NOME de cada pessoa é…?", opcoes: ["Único", "Igual pra todo mundo"], correta: 0, explicacao: "Cada pessoa tem o seu." },
         { pergunta: "Meu nome tem sempre as MESMAS letras?", opcoes: ["Sim, na mesma ordem", "Não, muda todo dia"], correta: 0, explicacao: "Ordem fixa." },
         { pergunta: "A primeira letra do meu nome é a…?", opcoes: ["Inicial", "Final"], correta: 0, explicacao: "Inicial vem primeiro." },
       ],
