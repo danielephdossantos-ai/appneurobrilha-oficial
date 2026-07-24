@@ -12,7 +12,7 @@ type Etapa = {
   n: number;
   sentido: string;
   instrucao: string;
-  icone: JSX.Element;
+  icone: ReactNode;
   cor: string;
   exemplos: string[];
 };
