@@ -179,13 +179,18 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
 
             <div className="mb-4">
               <div className="text-xs font-bold text-slate-500 uppercase mb-2">O que pode ter causado:</div>
-              <ul className="space-y-1">
+              <ul className="space-y-1 mb-3">
                 {z.gatilhos.map((g) => (
                   <li key={g} className="text-sm text-slate-700 font-medium flex items-start gap-2">
                     <span style={{ color: z.cor }}>•</span> {g}
                   </li>
                 ))}
               </ul>
+              <div className="text-xs font-bold text-slate-500 uppercase mb-2">Ou me conte com sua voz:</div>
+              <MicrofoneFala
+                cor={z.cor}
+                placeholder="Toque no microfone e diga o que aconteceu…"
+              />
             </div>
 
             <button
@@ -195,6 +200,7 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
             >
               Ver ferramentas pra me regular →
             </button>
+
           </motion.div>
         )}
 
