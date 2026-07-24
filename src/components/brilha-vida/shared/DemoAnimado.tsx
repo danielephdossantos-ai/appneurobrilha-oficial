@@ -128,7 +128,7 @@ export function DemoAnimado({ tipo, size = 160 }: { tipo: DemoTipo; size?: numbe
         animate={anim[tipo]}
         transition={{ duration: dur[tipo], repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="absolute inset-0 pointer-events-none">{overlay()}</div>
+      {/* overlays flutuantes removidos — mantém só a ilustração da criança animada */}
     </div>
   );
 }
