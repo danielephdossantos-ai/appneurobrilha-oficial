@@ -5235,6 +5235,128 @@ export type Database = {
           },
         ]
       }
+      plano_anual: {
+        Row: {
+          base_anamnese: Json | null
+          child_id: string
+          created_at: string
+          dias_por_semana: number
+          gerado_em: string
+          id: string
+          idade: number
+          minutos_por_dia: number
+          semanas_totais: number
+          serie: string
+          updated_at: string
+        }
+        Insert: {
+          base_anamnese?: Json | null
+          child_id: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          idade: number
+          minutos_por_dia?: number
+          semanas_totais?: number
+          serie: string
+          updated_at?: string
+        }
+        Update: {
+          base_anamnese?: Json | null
+          child_id?: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          idade?: number
+          minutos_por_dia?: number
+          semanas_totais?: number
+          serie?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plano_anual_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plano_anual_itens: {
+        Row: {
+          categoria: string | null
+          child_id: string
+          concluido: boolean
+          concluido_em: string | null
+          created_at: string
+          descricao: string | null
+          dia_semana: number
+          fonte: string
+          id: string
+          minutos: number
+          ordem: number
+          plano_id: string
+          prioridade: number
+          rota: string
+          semana: number
+          titulo: string
+        }
+        Insert: {
+          categoria?: string | null
+          child_id: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          descricao?: string | null
+          dia_semana: number
+          fonte: string
+          id?: string
+          minutos?: number
+          ordem: number
+          plano_id: string
+          prioridade?: number
+          rota: string
+          semana: number
+          titulo: string
+        }
+        Update: {
+          categoria?: string | null
+          child_id?: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          descricao?: string | null
+          dia_semana?: number
+          fonte?: string
+          id?: string
+          minutos?: number
+          ordem?: number
+          plano_id?: string
+          prioridade?: number
+          rota?: string
+          semana?: number
+          titulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plano_anual_itens_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plano_anual_itens_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "plano_anual"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       professor_brilha_conversas: {
         Row: {
           aula_slug: string
