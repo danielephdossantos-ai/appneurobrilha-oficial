@@ -191,6 +191,178 @@ export const HISTORIAS_GRADUADAS: HistoriaGraduada[] = [
       { pergunta: "Quem ajudou a borboleta?", correta: "ABELHA", distratores: ["PASSARO", "SAPO"] },
     ],
   },
+
+  // --- NÍVEL 1 (novas) ---
+  {
+    id: "h1-lua",
+    titulo: "A Lua Cheia",
+    nivel: 1,
+    capa: "LUA",
+    vocabBase: ["LUA", "SOL"],
+    paginas: [
+      { texto: "A lua acende no céu.", imagem: "LUA" },
+      { texto: "Ela é redonda e branca.", imagem: "LUA" },
+      { texto: "De dia, quem manda é o sol.", imagem: "SOL" },
+    ],
+    perguntas: [
+      { pergunta: "Quem aparece à noite?", correta: "LUA", distratores: ["SOL", "FLOR"] },
+    ],
+  },
+  {
+    id: "h1-uva",
+    titulo: "Uva Docinha",
+    nivel: 1,
+    capa: "UVA",
+    vocabBase: ["UVA", "BANANA"],
+    paginas: [
+      { texto: "A uva é pequena.", imagem: "UVA" },
+      { texto: "A banana é longa.", imagem: "BANANA" },
+      { texto: "Duas frutas gostosas!", imagem: "UVA" },
+    ],
+    perguntas: [
+      { pergunta: "Qual é longa?", correta: "BANANA", distratores: ["UVA", "MACA"] },
+    ],
+  },
+
+  // --- NÍVEL 2 (novas) ---
+  {
+    id: "h2-sapo",
+    titulo: "O Sapo Pulão",
+    nivel: 2,
+    capa: "SAPO",
+    vocabBase: ["SAPO", "FLOR", "CHUVA"],
+    paginas: [
+      { texto: "O sapo mora perto do rio.", imagem: "SAPO" },
+      { texto: "Ele pula na flor mais bonita.", imagem: "FLOR" },
+      { texto: "Quando vem a chuva, ele canta.", imagem: "CHUVA" },
+    ],
+    perguntas: [
+      { pergunta: "Onde o sapo pula?", correta: "FLOR", distratores: ["BOLA", "CASA"] },
+    ],
+  },
+  {
+    id: "h2-galo",
+    titulo: "O Galo Madrugador",
+    nivel: 2,
+    capa: "GALO",
+    vocabBase: ["GALO", "SOL", "GALINHA"],
+    paginas: [
+      { texto: "O galo canta bem cedo.", imagem: "GALO" },
+      { texto: "O sol começa a aparecer.", imagem: "SOL" },
+      { texto: "A galinha vem atrás.", imagem: "GALINHA" },
+    ],
+    perguntas: [
+      { pergunta: "Quem canta cedo?", correta: "GALO", distratores: ["PATO", "GATO"] },
+    ],
+  },
+
+  // --- NÍVEL 3 (novas) ---
+  {
+    id: "h3-fada",
+    titulo: "A Fada e o Castelo",
+    nivel: 3,
+    capa: "FADA",
+    vocabBase: ["FADA", "CASTELO", "COROA"],
+    paginas: [
+      { texto: "A fada mora num castelo.", imagem: "CASTELO" },
+      { texto: "Ela tem uma coroa brilhante.", imagem: "COROA" },
+      { texto: "Todo dia ela faz mágica.", imagem: "FADA" },
+    ],
+    perguntas: [
+      { pergunta: "Onde a fada mora?", correta: "CASTELO", distratores: ["CASA", "CARRO"] },
+      { pergunta: "O que ela usa?", correta: "COROA", distratores: ["BOLA", "FLOR"] },
+    ],
+  },
+  {
+    id: "h3-esquilo",
+    titulo: "O Esquilo Guardão",
+    nivel: 3,
+    capa: "ESQUILO",
+    vocabBase: ["ESQUILO", "ARVORE", "CENOURA"],
+    paginas: [
+      { texto: "O esquilo sobe na árvore.", imagem: "ESQUILO" },
+      { texto: "Ele esconde comida no tronco.", imagem: "ARVORE" },
+      { texto: "No inverno, ele come devagar.", imagem: "ESQUILO" },
+    ],
+    perguntas: [
+      { pergunta: "Onde ele sobe?", correta: "ARVORE", distratores: ["CASA", "MOTO"] },
+    ],
+  },
+
+  // --- NÍVEL 4 (novas) ---
+  {
+    id: "h4-elefante",
+    titulo: "O Elefante Amigo",
+    nivel: 4,
+    capa: "ELEFANTE",
+    vocabBase: ["ELEFANTE", "AGUA", "CHUVA"],
+    paginas: [
+      { texto: "Era uma vez um elefante enorme.", imagem: "ELEFANTE" },
+      { texto: "Ele adorava tomar banho de rio.", imagem: "CHUVA" },
+      { texto: "Todos os bichos gostavam de brincar com ele.", imagem: "ELEFANTE" },
+      { texto: "Ele espirrava água pra todo lado.", imagem: "CHUVA" },
+    ],
+    perguntas: [
+      { pergunta: "O que ele espirra?", correta: "CHUVA", distratores: ["FOGO", "FLOR"] },
+    ],
+  },
+  {
+    id: "h4-princesa",
+    titulo: "A Princesa e a Coruja",
+    nivel: 4,
+    capa: "PRINCESA",
+    vocabBase: ["PRINCESA", "CORUJA", "CASTELO"],
+    paginas: [
+      { texto: "A princesa vivia num castelo alto.", imagem: "CASTELO" },
+      { texto: "Toda noite, uma coruja pousava na janela.", imagem: "CORUJA" },
+      { texto: "As duas conversavam até o sol nascer.", imagem: "PRINCESA" },
+      { texto: "Elas viraram grandes amigas.", imagem: "CORUJA" },
+    ],
+    perguntas: [
+      { pergunta: "Quem pousava na janela?", correta: "CORUJA", distratores: ["PASSARO", "GALO"] },
+      { pergunta: "Onde a princesa morava?", correta: "CASTELO", distratores: ["CASA", "CARRO"] },
+    ],
+  },
+
+  // --- NÍVEL 5 (novas) ---
+  {
+    id: "h5-tartaruga",
+    titulo: "A Tartaruga e o Cavalo",
+    nivel: 5,
+    capa: "TARTARUGA",
+    vocabBase: ["TARTARUGA", "CAVALO", "FLOR"],
+    paginas: [
+      { texto: "Um cavalo veloz zombou da tartaruga lenta.", imagem: "CAVALO" },
+      { texto: "Ela propôs uma corrida até a flor mais distante.", imagem: "FLOR" },
+      { texto: "O cavalo saiu disparado e cansou no meio do caminho.", imagem: "CAVALO" },
+      { texto: "A tartaruga continuou devagar, passo a passo.", imagem: "TARTARUGA" },
+      { texto: "No final, quem ganhou foi a tartaruga.", imagem: "TARTARUGA" },
+    ],
+    perguntas: [
+      { pergunta: "Quem ganhou a corrida?", correta: "TARTARUGA", distratores: ["CAVALO", "COELHO"] },
+    ],
+  },
+
+  // --- NÍVEL 6 (novas) ---
+  {
+    id: "h6-foguete",
+    titulo: "O Foguete e a Lua",
+    nivel: 6,
+    capa: "FOGUETE",
+    vocabBase: ["FOGUETE", "LUA", "PLANETA", "ESTRELA"],
+    paginas: [
+      { texto: "Era uma noite escura e cheia de estrelas.", imagem: "ESTRELA" },
+      { texto: "Um foguete pequeno decidiu visitar a lua.", imagem: "FOGUETE" },
+      { texto: "Pelo caminho, encontrou planetas coloridos e cometas curiosos.", imagem: "PLANETA" },
+      { texto: "A lua abriu um sorriso quando o viu chegar.", imagem: "LUA" },
+      { texto: "Eles conversaram sobre tudo que existia no céu.", imagem: "ESTRELA" },
+      { texto: "No fim, o foguete prometeu voltar toda semana.", imagem: "FOGUETE" },
+    ],
+    perguntas: [
+      { pergunta: "Aonde o foguete foi?", correta: "LUA", distratores: ["SOL", "FLOR"] },
+      { pergunta: "O que ele encontrou pelo caminho?", correta: "PLANETA", distratores: ["PEIXE", "VACA"] },
+    ],
+  },
 ];
 
 // Calcula nível leitor a partir do progresso da trilha (etapas concluídas)
