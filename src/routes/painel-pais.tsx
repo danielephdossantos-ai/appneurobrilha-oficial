@@ -271,6 +271,35 @@ function PainelPremium() {
           <NrpPillarsCard childId={activeChild.id} />
         </div>
 
+        {/* Diário ABC — ferramenta clínica para pais/babá */}
+        <div className="mb-6">
+          <button
+            onClick={() => setDiarioAberto(true)}
+            className="w-full text-left rounded-3xl border-4 border-teal-300 bg-gradient-to-br from-teal-50 to-cyan-50 p-6 shadow-md hover:shadow-lg transition"
+          >
+            <div className="flex items-start gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-teal-600 text-white flex items-center justify-center shrink-0">
+                <BookOpen className="h-7 w-7" />
+              </div>
+              <div className="flex-1">
+                <p className="text-xs font-black tracking-widest uppercase text-teal-700">
+                  Ferramenta clínica
+                </p>
+                <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-1">
+                  Diário ABC de {activeChild.nome}
+                </h3>
+                <p className="text-sm font-medium text-slate-600 mt-1">
+                  Antecedente → Comportamento → Consequência. Registre você, a babá ou o cuidador.
+                  A IA terapêutica identifica padrões e você pode baixar o PDF para o terapeuta.
+                </p>
+              </div>
+              <ArrowRight className="h-6 w-6 text-teal-600 shrink-0 mt-2" />
+            </div>
+          </button>
+        </div>
+
+
+
 
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
