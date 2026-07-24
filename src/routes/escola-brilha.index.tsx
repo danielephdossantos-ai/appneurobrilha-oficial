@@ -237,27 +237,7 @@ function EscolaBrilhaCatalogo() {
           <span className="text-xs font-bold opacity-80">Escolher / Desbloquear →</span>
         </Link>
 
-        {/* Curso especial de alfabetização — aparece como categoria própria */}
-        <Link
-          to="/neuro-treino/ler-com-aurora"
-          className="mb-4 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-          style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}
-        >
-          <span>
-            <span className="block text-[10px] uppercase tracking-widest opacity-90">
-              Categoria especial · Pré II + 1º Ano
-            </span>
-            <span className="block text-lg leading-tight mt-0.5">
-              🔤 Ler com Aurora
-            </span>
-            <span className="block text-[11px] font-bold opacity-90 mt-1">
-              {totalMissoesLerAurora} missões diárias · Consciência fonológica →
-            </span>
-          </span>
-          <Sparkles className="h-6 w-6 shrink-0" />
-        </Link>
-
-        {/* Contar com Pip e Biblioteca Encantada foram movidos para Neuro Treino */}
+        {/* Ler com Aurora, Contar com Pip e Biblioteca Encantada foram movidos para Neuro Treino */}
 
 
 
