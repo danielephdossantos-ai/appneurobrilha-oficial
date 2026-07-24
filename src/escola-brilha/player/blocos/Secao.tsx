@@ -31,11 +31,7 @@ export function Secao({
   // Para a leitura ao desmontar / trocar de aula
   useEffect(() => {
     return () => {
-      try {
-        window.speechSynthesis?.cancel();
-      } catch {
-        /* noop */
-      }
+      stopSpeaking();
     };
   }, []);
 
@@ -48,30 +44,30 @@ export function Secao({
         'button, [role="button"], input, select, textarea, [data-no-tts]',
       )
       .forEach((n) => n.remove());
+    // Preserva quebras/pontuação: insere ponto após blocos para gerar pausa natural
+    clone.querySelectorAll("p, div, li, h1, h2, h3, h4, h5, h6, br").forEach((n) => {
+      n.append(document.createTextNode(". "));
+    });
     return (clone.textContent || "")
       .replace(/\s+/g, " ")
-      .replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁💡✨🌟⭐🎯🏆🎉]/gu, " ")
+      .replace(/\s*\.\s*\.+/g, ". ")
       .trim();
   };
 
   const toggle = () => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
     if (falando) {
-      window.speechSynthesis.cancel();
+      stopSpeaking();
       setFalando(false);
       return;
     }
     const texto = coletarTexto();
     if (!texto) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(texto);
-    u.lang = "pt-BR";
-    u.rate = 0.95;
-    u.pitch = 1.05;
-    u.onend = () => setFalando(false);
-    u.onerror = () => setFalando(false);
     setFalando(true);
-    window.speechSynthesis.speak(u);
+    speakChunked(texto, {
+      rate: 0.82,
+      pitch: 1.05,
+      onEnd: () => setFalando(false),
+    });
   };
 
   return (
