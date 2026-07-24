@@ -129,7 +129,7 @@ function EscolaBrilhaCatalogo() {
 
 
   const aulasEscritas = listAulas();
-  const totalMissoesLerAurora = cursoLerComAurora.unidades.reduce((s, u) => s + u.aulas.length, 0);
+  
   const escritasSet = useMemo(() => new Set(aulasEscritas.map((a) => a.codigo)), [aulasEscritas]);
 
   // Agrupa: Série -> Disciplina -> [habilidades]
