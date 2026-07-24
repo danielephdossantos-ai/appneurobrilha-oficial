@@ -214,6 +214,16 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     titulo: etapa.titulo,
     texto: etapa.descricao,
     comoJogar: "Ouça a instrução e toque na resposta certa.",
+    paraPais:
+      "Objetivo clínico: fortalecer as habilidades desta etapa. Acompanhe a criança ouvindo cada instrução junto e comemore cada acerto — o reforço social é parte do método.",
+    exemplo: {
+      passos: [
+        "1) O Professor fala a instrução em voz alta.",
+        "2) A criança ouve, pensa e toca na resposta.",
+        "3) Se errar, o Professor mostra a resposta certa e explica.",
+      ],
+      dica: "Você pode tocar em ‘Ouvir de novo’ sempre que precisar.",
+    },
   };
 
   const progressoPct = useMemo(
