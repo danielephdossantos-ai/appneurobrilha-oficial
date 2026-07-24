@@ -115,8 +115,8 @@ const aula: Aula = {
     { enunciado: "🔊 M + I = ?", resposta: "MI.", dica: "Emenda /m/ com /i/." },
     {
       enunciado: "🔊 Qual começa com NI: NINHO, SAPO ou SOL?",
-      resposta: "NINHO — SI.",
-      dica: "NI-nho. A primeira batida é SI.",
+      resposta: "NINHO — NI.",
+      dica: "NI-nho. A primeira batida é NI.",
     },
   ],
   desafio: {
@@ -195,7 +195,7 @@ const aula: Aula = {
     },
   ],
   conclusao:
-    "🏅 Medalha: Caçador de PE, ME, PI e SI! Missão em Casa: falar 3 palavras com PE e 3 com PI para alguém.",
+    "🏅 Medalha: Caçador de PE, ME, PI e NI! Missão em Casa: falar 3 palavras com PE e 3 com PI para alguém.",
   curiosidade: {
     titulo: "Você sabia?",
     texto:
@@ -265,8 +265,8 @@ const aula: Aula = {
       pergunta: "Qual começa com NI?",
       opcoes: ["Ninho", "Sol", "Sapo"],
       correta: 0,
-      acerto: "NInho — SI!",
-      erro: "SOL é SO, SAPO é SA. NInho é SI.",
+      acerto: "NInho — NI!",
+      erro: "SOL é SO, SAPO é SA. NInho é NI.",
     },
   ],
   niveis: {
