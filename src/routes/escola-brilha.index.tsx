@@ -281,7 +281,7 @@ function EscolaBrilhaCatalogo() {
               if (serie === "Educação Infantil") discsExtra.push("portugues");
               
               const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso, ...discsExtra])).sort((a, b) => a.localeCompare(b));
-              const mostraLerComAurora = serie === "Educação Infantil" || serie === "1º Ano";
+              
 
               const total = contarSerie(serie);
               const aberta = serieAberta === serie;
