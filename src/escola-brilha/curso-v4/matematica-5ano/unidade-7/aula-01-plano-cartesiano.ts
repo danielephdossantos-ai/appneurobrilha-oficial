@@ -27,13 +27,58 @@ export const aula01_planoCartesiano: AulaV4 = {
   momento04_explicacao: {
     titulo: "Localizar",
     etapas: [
-      { texto: "(0,0) = origem. (5,0) = 5 no eixo X. (0,4) = 4 no eixo Y." },
-      { texto: "Para desenhar uma figura, marque cada vértice pelo par (x,y)." },
+      {
+        texto: "(0,0) = origem. (5,0) = 5 no eixo X. (0,4) = 4 no eixo Y.",
+        exemploReal: {
+          contexto: "Marcando pontos no plano:",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 6,
+            colunas: 7,
+            pinos: [
+              { linha: 6, coluna: 1, rotulo: "(0,0)", cor: "#64748b" },
+              { linha: 6, coluna: 6, rotulo: "(5,0)", cor: "#0ea5e9" },
+              { linha: 2, coluna: 1, rotulo: "(0,4)", cor: "#10b981" },
+            ],
+            legenda: "X: pra direita. Y: pra cima.",
+          },
+          destaque: "Sempre X primeiro, Y depois.",
+        },
+      },
+      {
+        texto: "Para desenhar uma figura, marque cada vértice pelo par (x,y).",
+        exemploReal: {
+          contexto: "Quadrado com vértices (0,0), (3,0), (3,3), (0,3):",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 5,
+            colunas: 5,
+            pinos: [
+              { linha: 5, coluna: 1, rotulo: "A(0,0)", cor: "#ef4444" },
+              { linha: 5, coluna: 4, rotulo: "B(3,0)", cor: "#f59e0b" },
+              { linha: 2, coluna: 4, rotulo: "C(3,3)", cor: "#10b981" },
+              { linha: 2, coluna: 1, rotulo: "D(0,3)", cor: "#0ea5e9" },
+            ],
+          },
+          destaque: "Ligando A→B→C→D→A forma o quadrado.",
+        },
+      },
     ],
   },
   momento05_modelagem: {
     enunciado: "Vértices do quadrado: (0,0), (3,0), (3,3), (0,3).",
     resposta: "Quadrado de lado 3",
+    visualMat: {
+      tipo: "mapaGrade",
+      linhas: 5,
+      colunas: 5,
+      pinos: [
+        { linha: 5, coluna: 1, rotulo: "(0,0)", cor: "#ef4444" },
+        { linha: 5, coluna: 4, rotulo: "(3,0)", cor: "#f59e0b" },
+        { linha: 2, coluna: 4, rotulo: "(3,3)", cor: "#10b981" },
+        { linha: 2, coluna: 1, rotulo: "(0,3)", cor: "#0ea5e9" },
+      ],
+    },
     passos: ["Marca 4 pontos.", "Liga em ordem.", "É um quadrado."],
   },
   momento06_praticaGuiada: {

@@ -33,14 +33,35 @@ export const aula03_compararOrdenar: AulaV4 = {
         texto: "Ordenar 84.500, 84.050, 84.005 em ordem crescente.",
         exemploReal: {
           contexto: "Todos empatam em DM/UM (8·4). Olhe a centena:",
-          destaque: "Centenas: 5, 0, 0 → separa o primeiro. Depois dezena: 0, 5, 0 → depois o segundo. Ordem: 84.005 < 84.050 < 84.500.",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Comparação classe a classe",
+            cabecalhos: ["Número", "DM", "UM", "C", "D", "U"],
+            linhas: [
+              { rotulo: "84.500", valores: ["8", "4", "5", "0", "0"] },
+              { rotulo: "84.050", valores: ["8", "4", "0", "5", "0"] },
+              { rotulo: "84.005", valores: ["8", "4", "0", "0", "5"] },
+            ],
+            destacar: { coluna: 3 },
+          },
+          destaque: "Centenas: 5, 0, 0 → 84.005 < 84.050 < 84.500.",
         },
       },
       {
         texto: "Se um tem 6 algarismos e outro tem 5, o de 6 já é maior — nem precisa comparar dígitos.",
         exemploReal: {
-          contexto: "125.000 e 98.500:",
-          destaque: "125.000 tem 6 algarismos; 98.500 tem 5. Então 125.000 > 98.500.",
+          contexto: "125.000 e 98.500 na reta numérica:",
+          visualMat: {
+            tipo: "retaNumerica",
+            min: 0,
+            max: 150000,
+            passo: 25000,
+            destacar: [
+              { valor: 98500, rotulo: "98.500", cor: "#f97316" },
+              { valor: 125000, rotulo: "125.000", cor: "#10b981" },
+            ],
+          },
+          destaque: "125.000 fica MAIS À DIREITA → é maior.",
         },
       },
     ],
@@ -48,6 +69,17 @@ export const aula03_compararOrdenar: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Ordene em ordem CRESCENTE: 452.108 · 425.108 · 425.810.",
     resposta: "425.108 < 425.810 < 452.108",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "Comparação por casa",
+      cabecalhos: ["Número", "CM", "DM", "UM", "C", "D", "U"],
+      linhas: [
+        { rotulo: "452.108", valores: ["4", "5", "2", "1", "0", "8"] },
+        { rotulo: "425.108", valores: ["4", "2", "5", "1", "0", "8"] },
+        { rotulo: "425.810", valores: ["4", "2", "5", "8", "1", "0"] },
+      ],
+      destacar: { coluna: 2 },
+    },
     passos: [
       "Todos com 6 algarismos.",
       "CM: todos 4.",
