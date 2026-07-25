@@ -1387,10 +1387,11 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
           className="grid gap-x-2 md:gap-x-4 gap-y-1 font-mono font-black text-3xl md:text-5xl"
           style={{ gridTemplateColumns: `2rem repeat(${numCols}, minmax(2.5rem, 3.5rem))` }}
         >
-          {/* Linha de "vai 1" */}
+          {/* Linha de "vai 1" — o vai-um da coluna à direita aparece acima da coluna vizinha da esquerda */}
           <div />
-          {colunas.map((c) => {
-            const v = digitosResultado[c]?.vaiUm;
+          {colunas.map((c, idx) => {
+            const colDireita = colunas[idx + 1];
+            const v = colDireita ? digitosResultado[colDireita]?.vaiUm : undefined;
             return (
               <div key={"v-" + c} className="text-center text-sm md:text-base text-rose-500">
                 {v ? v : ""}
