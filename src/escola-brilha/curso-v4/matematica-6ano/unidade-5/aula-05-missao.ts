@@ -55,12 +55,55 @@ export const aula05_missao: AulaV4 = {
           destaque: "R$ 62,37.",
         },
       },
+      {
+        texto: "Fração, decimal e % são a MESMA quantidade em roupas diferentes.",
+        exemploReal: {
+          contexto: "Converta rapidamente:",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Fração", "Decimal", "Porcentagem"],
+            linhas: [
+              { rotulo: "1/2", valores: ["1/2", "0,5", "50%"] },
+              { rotulo: "1/4", valores: ["1/4", "0,25", "25%"] },
+              { rotulo: "1/5", valores: ["1/5", "0,2", "20%"] },
+              { rotulo: "3/4", valores: ["3/4", "0,75", "75%"] },
+              { rotulo: "1", valores: ["1", "1,0", "100%"] },
+            ],
+          },
+          destaque: "Escolha a 'roupa' mais fácil pra cada conta.",
+        },
+      },
+      {
+        texto: "Multiplicação de decimais: some as casas.",
+        exemploReal: {
+          contexto: "0,4 × 0,3",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Passo", "Cálculo"],
+            linhas: [
+              { rotulo: "1", valores: ["sem vírgula", "4 × 3 = 12"] },
+              { rotulo: "2", valores: ["casas: 1+1", "duas casas"] },
+              { rotulo: "3", valores: ["põe vírgula", "0,12"] },
+            ],
+          },
+          destaque: "0,4 × 0,3 = 0,12.",
+        },
+      },
     ],
   },
 
   momento05_modelagem: {
     enunciado: "Aumento de 5% em R$ 200.",
     resposta: "R$ 210",
+    visualMat: {
+      tipo: "tabela",
+      cabecalhos: ["Passo", "Cálculo"],
+      linhas: [
+        { rotulo: "1", valores: ["5% de 200", "10"] },
+        { rotulo: "2", valores: ["novo preço", "200 + 10"] },
+        { rotulo: "3", valores: ["total", "R$ 210"] },
+      ],
+    },
     passos: ["5% de 200 = 10.", "200 + 10 = 210."],
   },
 
