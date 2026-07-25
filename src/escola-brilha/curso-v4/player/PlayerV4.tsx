@@ -386,9 +386,11 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
 }
 
 function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
+  const conta = detectarContaNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
         💡 Dica: {m.dica}
       </div>
@@ -398,26 +400,35 @@ function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
 }
 
 function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
+  const conta = detectarContaNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
 }
 
 function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
+  const conta = detectarContaNoTexto(`${m.contexto} ${m.problema}`);
   return (
     <Card>
       <div className="text-sm text-amber-300">🌎 Na vida real:</div>
       <div>{m.contexto}</div>
       <div className="text-lg font-bold">{m.problema}</div>
+      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
 }
 
 function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
+  const contaMini = m.miniDesafio
+    ? detectarContaNoTexto(
+        `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`,
+      )
+    : undefined;
   return (
     <Card>
       <div className="text-sm text-amber-300">🔁 Lembrando o que já sabemos:</div>
@@ -426,6 +437,9 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
+      {contaMini && (
+        <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
+      )}
       {m.miniDesafio && <InteracaoView i={m.miniDesafio} />}
     </Card>
   );
