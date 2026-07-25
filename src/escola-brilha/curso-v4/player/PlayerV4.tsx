@@ -570,6 +570,12 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
               {respostas[qi] === q.correta ? q.feedbackAcerto : q.feedbackErro}
             </div>
           )}
+          {errou && conta && (
+            <div className="mt-3">
+              <div className="text-xs text-amber-200 mb-1">Vamos resolver juntos passo a passo:</div>
+              <ContaArmada a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} autoIniciar />
+            </div>
+          )}
         </div>
         );
       })}
