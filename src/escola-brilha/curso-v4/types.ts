@@ -315,6 +315,15 @@ export type AulaV4 = {
     moedas: number;
     medalha?: string;
   };
+
+  /**
+   * Chaves de metodologias científicas de ensino de matemática
+   * aplicadas nesta aula (renderizadas no rodapé como "Base científica").
+   * Chaves válidas em src/escola-brilha/curso-v4/metodologias-mat.ts.
+   * Ex.: ["cpa", "kamii", "skemp", "vergnaud"].
+   * Opcional — Ed. Infantil/1º/2º ano seguem sem este campo.
+   */
+  metodologias?: string[];
 };
 
 export type Unidade = {
