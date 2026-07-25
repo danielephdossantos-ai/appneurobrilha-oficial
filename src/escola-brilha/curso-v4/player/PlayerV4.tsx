@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, useMemo, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import type { AulaV4, Interacao } from "../types";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
