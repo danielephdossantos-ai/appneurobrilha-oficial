@@ -281,24 +281,28 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       const chunk = chunks[i++];
       const u = new SpeechSynthesisUtterance(chunk);
       u.lang = "pt-BR";
-      u.rate = opts.rate ?? 0.95;
+      u.rate = opts.rate ?? 0.82;
       u.pitch = opts.pitch ?? 1;
       u.volume = opts.volume ?? 1;
       if (voice) u.voice = voice;
+      // Pausa natural entre frases: mais tempo se terminou em ponto/interrogação/exclamação,
+      // menos se terminou em vírgula/ponto-e-vírgula. Assim o TTS "respeita" a pontuação.
+      const last = chunk.slice(-1);
+      const pausaMs = /[.!?]/.test(last) ? 550 : /[,;:]/.test(last) ? 300 : 200;
       let advanced = false;
       const timeout = window.setTimeout(
         () => {
           if (advanced) return;
           advanced = true;
-          speakNext();
+          window.setTimeout(speakNext, pausaMs);
         },
-        Math.max(2500, Math.ceil(chunk.length * 120)),
+        Math.max(3000, Math.ceil(chunk.length * 150)),
       );
       const advance = () => {
         if (advanced) return;
         advanced = true;
         window.clearTimeout(timeout);
-        speakNext();
+        window.setTimeout(speakNext, pausaMs);
       };
       u.onend = advance;
       u.onerror = advance;
