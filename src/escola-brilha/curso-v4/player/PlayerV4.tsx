@@ -1340,20 +1340,8 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   const terminou = passoAtual >= totalPassos - 1;
   const modo = i.modo ?? "explicacao";
 
-  // Lê em voz alta a narração do passo atual, parte por parte, sempre que
-  // o passo muda — assim a criança ouve cada etapa até a conta terminar.
-  useEffect(() => {
-    if (passoAtual < 0) return;
-    const p = i.passos[passoAtual];
-    if (!p) return;
-    const texto = `Passo ${passoAtual + 1} de ${totalPassos}. ${p.fala}${
-      p.porque ? ` Por quê? ${p.porque}` : ""
-    }`;
-    stopSpeaking();
-    const t = window.setTimeout(() => speakChunked(texto, { rate: 0.82 }), 120);
-    return () => window.clearTimeout(t);
-  }, [passoAtual, i.passos, totalPassos]);
-
+  // Narração do professor removida a pedido: a criança lê os passos visualmente,
+  // sem TTS repetitivo tipo "Unidades: 2 + 5 = 7".
   useEffect(() => () => stopSpeaking(), []);
 
   // Determina colunas visíveis (U, D, C, UM se algum operando ≥ 1000)
