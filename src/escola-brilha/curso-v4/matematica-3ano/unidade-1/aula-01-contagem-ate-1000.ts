@@ -178,16 +178,15 @@ export const aula01_contagemAte1000: AulaV4 = {
 
   momento08_aplicacao: {
     contexto:
-      "A Prefeita precisa mandar imprimir crachás. Ela pergunta: 'Quantos habitantes tem a Cidade se juntarmos Leste (325) + Oeste (243) + Norte (412) + Sul (235) + Central (523) + Rural (264)?' Antes de calcular tudo, ela quer saber qual é o número CERTO de 3 algarismos que representa quinhentos e seis.",
+      "A Prefeita precisa mandar imprimir crachás para o Censo. Ela pergunta: 'Como é que se escreve o número quinhentos e seis num crachá?' — parece fácil, mas o zero do meio confunde muita gente.",
     problema: "Qual dessas fichas está com 'quinhentos e seis' escrito CORRETAMENTE?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha a ficha certa:",
       opcoes: [
-        { nome: "506", imagemUrl: "" },
-        { nome: "560", imagemUrl: "" },
-        { nome: "56", imagemUrl: "" },
-        { nome: "5006", imagemUrl: "" },
+        { nome: "506" },
+        { nome: "560" },
+        { nome: "56" },
       ],
       respostaCerta: "506",
       feedbackAcerto:
