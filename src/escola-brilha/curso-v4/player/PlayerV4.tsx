@@ -1822,7 +1822,7 @@ function TabuadaReferencia({
   targetN?: number;
 }) {
   return (
-    <div className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
+    <div data-no-tts className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
       <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
         📖 Tabuada do {fator} — consulte
       </div>
