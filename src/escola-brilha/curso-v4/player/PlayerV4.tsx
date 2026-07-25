@@ -9,6 +9,22 @@ import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 
 import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
+import { useAppState } from "@/core/store";
+
+function aplicarNome(texto: string, nome?: string): string {
+  const primeiro = (nome ?? "").trim().split(/\s+/)[0] ?? "";
+  if (primeiro) {
+    return texto
+      .replace(/\{NOME\}/g, primeiro)
+      .replace(/\{INICIAL\}/g, primeiro.charAt(0).toUpperCase());
+  }
+  // Sem nome: remove o token e limpa pontuação/espaços residuais no início.
+  return texto
+    .replace(/\{NOME\},?\s*/g, "")
+    .replace(/\{INICIAL\},?\s*/g, "")
+    .replace(/^\s*[,\-–—]\s*/, "")
+    .replace(/^./, (c) => c.toUpperCase());
+}
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
@@ -165,11 +181,12 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 function Motivacao({ m }: { m: AulaV4["momento01_motivacao"] }) {
+  const { activeChild } = useAppState();
   return (
     <Card>
-      <h2 className="text-2xl font-black">{m.titulo}</h2>
+      <h2 className="text-2xl font-black">{aplicarNome(m.titulo, activeChild?.nome)}</h2>
       {m.imagemUrl && <img src={m.imagemUrl} alt="" className="w-40 mx-auto" />}
-      <p className="text-lg leading-relaxed">{m.historia}</p>
+      <p className="text-lg leading-relaxed">{aplicarNome(m.historia, activeChild?.nome)}</p>
     </Card>
   );
 }
