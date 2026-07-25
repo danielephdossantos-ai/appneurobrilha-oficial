@@ -328,7 +328,9 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         </div>
       )}
 
-      {!m.colecaoVisual && m.visualUrl && (
+      {m.casasValor && <CasasValor {...m.casasValor} />}
+
+      {!m.colecaoVisual && !m.casasValor && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
       )}
 
