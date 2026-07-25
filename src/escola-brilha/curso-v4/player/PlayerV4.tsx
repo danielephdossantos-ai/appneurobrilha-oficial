@@ -837,10 +837,18 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
                       : "bg-white/5 opacity-50"
               }`}
             >
-              <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
-              <span className="text-xs font-medium text-center leading-tight">
-                {op.nome}
-              </span>
+              {op.imagemUrl ? (
+                <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+              ) : (
+                <div className="w-full py-3 grid place-items-center font-black text-3xl md:text-4xl tabular-nums">
+                  {op.nome}
+                </div>
+              )}
+              {op.imagemUrl && (
+                <span className="text-xs font-medium text-center leading-tight">
+                  {op.nome}
+                </span>
+              )}
             </button>
           );
         })}
