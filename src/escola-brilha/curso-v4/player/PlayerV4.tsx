@@ -9,6 +9,22 @@ import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 
 import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
+import { useAppState } from "@/core/store";
+
+function aplicarNome(texto: string, nome?: string): string {
+  const primeiro = (nome ?? "").trim().split(/\s+/)[0] ?? "";
+  if (primeiro) {
+    return texto
+      .replace(/\{NOME\}/g, primeiro)
+      .replace(/\{INICIAL\}/g, primeiro.charAt(0).toUpperCase());
+  }
+  // Sem nome: remove o token e limpa pontuação/espaços residuais no início.
+  return texto
+    .replace(/\{NOME\},?\s*/g, "")
+    .replace(/\{INICIAL\},?\s*/g, "")
+    .replace(/^\s*[,\-–—]\s*/, "")
+    .replace(/^./, (c) => c.toUpperCase());
+}
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
