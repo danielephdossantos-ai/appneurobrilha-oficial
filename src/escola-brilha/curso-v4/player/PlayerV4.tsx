@@ -571,6 +571,7 @@ function InteracaoView({ i }: { i: Interacao }) {
   if (i.tipo === "escolhaVisual") return <EscolhaVisual i={i} />;
   if (i.tipo === "operacaoVisual") return <OperacaoVisual i={i} />;
   if (i.tipo === "minijogoColheita") return <MinijogoColheita {...i} />;
+  if (i.tipo === "contaPassoAPasso") return <ContaPassoAPasso i={i} />;
   return (
     <div className="bg-white/5 rounded-xl p-4 mt-3 text-xs text-white/50">
       Interação "{i.tipo}" ainda sem renderer.
