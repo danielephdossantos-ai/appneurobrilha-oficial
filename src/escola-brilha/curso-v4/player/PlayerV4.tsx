@@ -1429,6 +1429,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   // Passos revelados até agora — mapa coluna → dígito do resultado
   const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
   i.passos.slice(0, passoAtual + 1).forEach((p) => {
+    if (p.coluna == null || p.digito == null) return;
     digitosResultado[p.coluna] = { digito: p.digito, vaiUm: p.vaiUm };
   });
 
