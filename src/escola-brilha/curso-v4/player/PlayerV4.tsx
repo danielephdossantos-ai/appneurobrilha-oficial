@@ -117,7 +117,7 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           </div>
         </main>
       </div>
-      <BotaoOuvirCena selector={`#${ativo}`} />
+      
     </div>
   );
 }
