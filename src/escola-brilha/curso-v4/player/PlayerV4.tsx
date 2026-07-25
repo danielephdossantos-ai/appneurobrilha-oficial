@@ -329,10 +329,12 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
+  const contaMD = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-sm text-amber-300">🧠 Brilha pensa em voz alta:</div>
       <div className="text-lg font-medium">{m.enunciado}</div>
+
 
       {m.colecaoVisual && (
         <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50">
