@@ -143,6 +143,8 @@ export type MomentoDescoberta = {
   perguntaGuia: string;     // "Você percebeu um padrão?"
   pista: string;            // o padrão que a criança deve notar
   revelacao: string;        // a "aha!" que Brilha revela
+  /** Visual opcional que aparece junto com a pista para tornar concreto. */
+  visualMat?: VisualMat;
 };
 
 export type MomentoExplicacao = {
