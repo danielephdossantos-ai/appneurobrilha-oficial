@@ -628,7 +628,15 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
   );
 }
 
-function MissaoFamilia({ m }: { m: AulaV4["momento11_missaoFamilia"] }) {
+function MissaoFamilia({
+  m,
+  cursoSlug,
+  aulaSlug,
+}: {
+  m: AulaV4["momento11_missaoFamilia"];
+  cursoSlug: string;
+  aulaSlug: string;
+}) {
   return (
     <Card>
       <div className="text-sm text-amber-300">🏠 Para fazer com a família:</div>
@@ -650,6 +658,7 @@ function MissaoFamilia({ m }: { m: AulaV4["momento11_missaoFamilia"] }) {
         </ol>
       </div>
       <div className="bg-white/5 rounded-lg p-3 text-sm">📸 {m.registro}</div>
+      <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aulaSlug} />
     </Card>
   );
 }
