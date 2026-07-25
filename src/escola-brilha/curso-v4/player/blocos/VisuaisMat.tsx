@@ -23,7 +23,9 @@ export type VisualMat =
   | SomaFracoesV
   | NotacaoCientificaV
   | TrinomioQuadradoV
-  | ChecklistTQPV;
+  | ChecklistTQPV
+  | TrinomioPassoAPassoV;
+
 
 // ------------------ Trinômio Quadrado Perfeito — prova geométrica ---
 export type TrinomioQuadradoV = {
