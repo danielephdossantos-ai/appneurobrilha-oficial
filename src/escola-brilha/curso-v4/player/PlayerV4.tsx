@@ -100,7 +100,7 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           <Secao id="m8" label="🌎 Na vida real"><Aplicacao m={aula.momento08_aplicacao} /></Secao>
           <Secao id="m9" label="🔁 Revisão"><Revisao m={aula.momento09_revisao} /></Secao>
           <Secao id="m10" label="✅ O que aprendeu"><Avaliacao m={aula.momento10_avaliacao} /></Secao>
-          <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} /></Secao>
+          <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} cursoSlug={cursoSlug} aulaSlug={aula.slug} /></Secao>
 
           <RodapeMetodologias chaves={aula.metodologias} />
 
