@@ -5,7 +5,7 @@
  * de casas de valor quando o conteúdo é geometria, estatística, medidas
  * ou probabilidade.
  */
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 // ============================ Tipos =================================
 
