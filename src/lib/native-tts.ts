@@ -160,8 +160,40 @@ export function sanitizeForSpeech(text: string): string {
   // Remove qualquer símbolo/pictograma/emoji unicode
   out = out.replace(/\p{Extended_Pictographic}/gu, " ");
   out = out.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, " ");
+
+  // ─── LEITURA MATEMÁTICA ─────────────────────────────────────
+  // Sinais matemáticos precisam soar como palavras (o TTS ignora ou
+  // soletra "sinal de igual", "traço"). Só substituímos quando aparecem
+  // em contexto numérico, senão hifen comum ("passo-a-passo") viraria "menos".
+  // "vai 1" / "v1" abreviação usada nos feedbacks das aulas de conta.
+  out = out.replace(/\bv\s*1\b/gi, "vai 1");
+  // Colunas curtas U:/D:/C: nos feedbacks: expandir.
+  out = out.replace(/\bU:\s*/g, "unidades: ");
+  out = out.replace(/\bD:\s*/g, "dezenas: ");
+  out = out.replace(/\bC:\s*/g, "centenas: ");
+  out = out.replace(/\bUM:\s*/g, "unidade de milhar: ");
+  // Operadores entre números (aceita espaço opcional).
+  out = out.replace(/(\d)\s*=\s*(\d)/g, "$1 é igual a $2");
+  out = out.replace(/(\d)\s*\+\s*(\d)/g, "$1 mais $2");
+  out = out.replace(/(\d)\s*[-−–—]\s*(\d)/g, "$1 menos $2");
+  out = out.replace(/(\d)\s*[×x]\s*(\d)/g, "$1 vezes $2");
+  out = out.replace(/(\d)\s*[÷\/]\s*(\d)/g, "$1 dividido por $2");
+  out = out.replace(/(\d)\s*<\s*(\d)/g, "$1 menor que $2");
+  out = out.replace(/(\d)\s*>\s*(\d)/g, "$1 maior que $2");
+  out = out.replace(/(\d)\s*≥\s*(\d)/g, "$1 maior ou igual a $2");
+  out = out.replace(/(\d)\s*≤\s*(\d)/g, "$1 menor ou igual a $2");
+  out = out.replace(/(\d)\s*%/g, "$1 por cento");
+  // Sinal isolado no início da fala ("+ 5 = 13").
+  out = out.replace(/(^|[\s(])\+\s*(\d)/g, "$1mais $2");
+  out = out.replace(/(^|[\s(])[-−]\s*(\d)/g, "$1menos $2");
+
+  // Parênteses viram pausa (o TTS às vezes lê "abre parêntese").
+  out = out.replace(/[()[\]{}]/g, ",");
+
   // Separadores decorativos viram vírgula pra dar respiro
   out = out.replace(/[—–·•|→←↔✦✧★☆]/g, ",");
+  // Dois pontos e ponto-e-vírgula soltos após números curtos: vira pausa.
+  out = out.replace(/(\d)\s*:\s*(?=\D)/g, "$1, ");
   // Colapsa espaços e vírgulas duplicadas
   out = out.replace(/\s*,\s*,+/g, ",");
   out = out.replace(/\s+/g, " ").replace(/\s+([,.!?;:])/g, "$1").trim();
