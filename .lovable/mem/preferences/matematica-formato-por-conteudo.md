@@ -20,7 +20,8 @@ Matemática NÃO tem um padrão único de ensino. O formato da explicação, do 
 | Estatística e probabilidade | Gráfico real (barras, colunas, pictograma, linha, setores) — nunca só texto | componente de gráfico |
 | Medidas (comprimento, massa, capacidade, tempo, dinheiro) | Instrumento real: régua, balança, jarra graduada, relógio, cédulas/moedas | SVG específico |
 | Frações e decimais | Figura repartida (barra, círculo, retângulo) mostrando parte/todo | SVG de fração |
-| Sequências e padrões | Linha/tabela com o padrão visível | grid de sequência |
+| Sequências e padrões | Linha/tabela com os termos e o salto visível — SEM casas de valor | lista dos termos + destaque do salto |
+| Ordenar / comparar / arredondar | Comparação casa a casa em TEXTO ou linha numérica — SEM quadro U/D/C/UM | texto/linha numérica |
 
 ## Regras firmes
 
