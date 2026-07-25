@@ -38,18 +38,16 @@ export const aula06_ordenarAte10000: AulaV4 = {
     titulo: "Passo a passo pra ordenar",
     etapas: [
       {
-        texto: "1º Junte os números. 2º Ache o menor. 3º Ache o próximo menor. 4º Continue.",
+        texto: "1º Junte os números. 2º Ache o menor. 3º Ache o próximo menor. 4º Continue até acabar.",
         exemploReal: {
-          contexto: "Ordenando 3.240, 3.204, 3.402 em ordem crescente:",
-          casasValor: { numero: 3204, extenso: "três mil, duzentos e quatro", mostrarDecomposicao: true },
-          destaque: "UM=3 nos três. C decide: 2, 2, 4. Empate em 3.240 e 3.204 → D decide: 4>0. Fila: 3.204, 3.240, 3.402.",
+          contexto: "Ordenando 3.240, 3.204, 3.402 em ordem CRESCENTE:",
+          destaque: "Compare da esquerda pra direita. Milhar igual (3). Centena: 2, 2, 4 → 3.402 é o maior. Empate em 3.240 e 3.204 → dezena: 4>0. Fila: 3.204, 3.240, 3.402.",
         },
       },
       {
         texto: "Decrescente é o mesmo processo, mas ache o MAIOR primeiro.",
         exemploReal: {
-          contexto: "Ordem decrescente dos mesmos:",
-          casasValor: { numero: 3402, extenso: "três mil, quatrocentos e dois", mostrarDecomposicao: true },
+          contexto: "Ordem DECRESCENTE dos mesmos números:",
           destaque: "3.402 > 3.240 > 3.204.",
         },
       },
@@ -59,11 +57,10 @@ export const aula06_ordenarAte10000: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Ordene em ordem CRESCENTE: 1.900, 1.099, 1.909.",
     resposta: "1.099, 1.900, 1.909.",
-    casasValor: { numero: 1099, mostrarDecomposicao: true, extenso: "mil e noventa e nove" },
     passos: [
-      "UM iguais (todos 1).",
-      "C: 0 (1.099) < 9 (1.900) = 9 (1.909) → menor é 1.099.",
-      "Entre 1.900 e 1.909: D=0=0, U=0<9 → 1.900 < 1.909.",
+      "Milhar igual em todos (1).",
+      "Centena: 0 (1.099) < 9 (1.900) = 9 (1.909) → menor é 1.099.",
+      "Entre 1.900 e 1.909: dezena igual, unidade 0<9 → 1.900 < 1.909.",
       "Fila: 1.099, 1.900, 1.909.",
     ],
   },
