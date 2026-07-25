@@ -1,81 +1,60 @@
-# Anamnese → Neuro Treino → Relatório + PDF
 
-Fechar o ciclo: ao terminar a anamnese, o app já cospe um **relatório clínico-pedagógico** com o que foi diagnosticado, o que recomenda, quais categorias vão apoiar a criança e as **atividades terapêuticas** sugeridas — com botão de **exportar PDF** pra levar ao terapeuta ou à escola.
+## Objetivo
 
-## O que o usuário pediu
-- Anamnese conectada ao **Neuro Treino** (atividades terapêuticas).
-- Relatório com: **dificuldades detectadas**, **o que a criança precisa**, **categorias que o app vai auxiliar**, **curso completo gerado**.
-- **Exportar PDF** pra levar pro terapeuta / escola.
-- App adaptativo com foco em crianças com deficiência.
+Toda etapa do momento **Explicação** (e da **Descoberta/Modelagem** onde couber) precisa terminar com um **Exemplo Real** — um caso concreto e numérico que aplica exatamente o que a explicação acabou de dizer. Nada de "ex.: 5 é 5" — sempre um exemplo aplicado, no contexto da Cidade dos Números (habitantes, placas, páginas, quilômetros).
 
-## Fluxo final
-```text
-Mãe termina anamnese
-        │
-        ▼
- useAnamneseV2.finish()  ──► AnamnesisProcessor (já existe)
-        │                         │ perfil interno + scores + risk
-        ▼                         ▼
- Tela "Resultado da Anamnese"  (nova rota /anamnese/$childId/relatorio)
-   ├─ Perfil da criança (idade, série, diagnóstico declarado)
-   ├─ O que o app detectou (linguagem, atenção, sensorial, motor, socioemocional)
-   ├─ O que a criança precisa (recomendações práticas)
-   ├─ Categorias que o app vai auxiliar (com ícones + link direto)
-   ├─ Atividades terapêuticas recomendadas (Neuro Treino)
-   ├─ Curso pedagógico gerado (trilhas EI/Fund por disciplina)
-   └─ [ Baixar PDF ]  [ Ver Neuro Treino ]  [ Ir pro Curso ]
-```
+## O que muda no schema (mínimo)
 
-## Entregáveis (nesta ordem, em passos pequenos pra você validar cena por cena)
+Hoje `MomentoExplicacao.etapas[]` já tem `exemplo?: string`, `casasValor?`, `agrupamentos?`. Vou estender com um campo opcional `exemploReal` — um bloco visual dedicado, renderizado com destaque **abaixo** do texto da etapa:
 
-### 1) Motor único de recomendação
-`src/modules/relatorio-clinico/engine.ts` — recebe `InternalProfile + AnamneseV2Responses + scores + risk` e devolve:
 ```ts
-{
-  perfil: { nome, idadeMeses, serie, diagnosticoDeclarado, perfilNeuro },
-  deteccoes: { area, nivel: 'ok'|'atenção'|'apoio_urgente', evidencias[] }[],
-  necessidades: string[],
-  categoriasApoio: { id, titulo, porQue, rota }[],
-  atividadesTerapeuticas: { id, titulo, area, objetivo, duracaoMin, rota }[],
-  cursoGerado: { disciplina, trilha, primeirasAulas[] }[],
-  observacoesClinicas: string,
+exemploReal?: {
+  titulo?: string;              // ex.: "Na prática:"
+  contexto: string;             // "A placa do carro do prefeito é 574."
+  casasValor?: { numero, extenso, mostrarDecomposicao };
+  contaPassoAPasso?: { operacao, operandos, resultado, passos[] };
+  destaque?: string;            // conclusão em 1 linha
 }
 ```
-Reaproveita `AnamnesisProcessor`, `ReportGenerator`, mapeamento `diagnosticoToNeuroProfile`.
 
-### 2) Ponte com Neuro Treino
-`src/modules/relatorio-clinico/neuro-bridge.ts` — mapeia detecções pra atividades já existentes do Neuro Treino (atenção, regulação sensorial, linguagem, motor, socioemocional). Sem inventar módulos novos: só linkar.
+Renderização em `PlayerV4.tsx > Explicacao`: card âmbar/branco logo abaixo do texto, com rótulo "🔎 Na prática", contexto, visual (casas de valor OU conta passo a passo em modo somente-leitura), e a conclusão em negrito.
 
-### 3) Ponte com o curso
-`src/modules/relatorio-clinico/curso-bridge.ts` — a partir da série detectada, lista as trilhas ativas (Ler com Aurora, Contar com Pip, Biblioteca Encantada, English Kids, etc.) e as 3 primeiras aulas de cada.
+## Aulas afetadas (10)
 
-### 4) Tela de relatório
-Rota nova: `src/routes/anamnese.$childId.relatorio.tsx` — usa design tokens do projeto (roxo/creme, sem cores hardcoded), seções colapsáveis, botão flutuante **Baixar PDF**. Redireciono `finish()` da anamnese pra cá.
+Unidade 1 · Matemática 3º Ano:
+1. aula-01 · Contagem até 1.000
+2. aula-02 · Valor posicional
+3. aula-03 · A centena
+4. aula-04 · Ler números
+5. aula-05 · Comparar números
+6. aula-06 · Ordenar números
+7. aula-07 · Arredondar
+8. aula-08 · Sequências numéricas
+9. aula-09 · Revisão
+10. aula-10 · Missão final
 
-### 5) Exportação PDF
-Client-side com `@react-pdf/renderer` (uma dependência, sem servidor). Documento com capa (nome, idade, data), resumo executivo, detecções por área com barra visual, recomendações, atividades terapêuticas, curso, rodapé "Gerado por Neuro Brilha — documento de apoio, não substitui laudo clínico."
+Cada aula tem 4–6 etapas de explicação → cada etapa ganha um `exemploReal` concreto.
 
-### 6) Entradas de acesso ao relatório
-- Card "Ver Relatório" no painel dos pais quando `anamnese_completa = true`.
-- Botão no fim da anamnese ("Ver relatório completo").
-- Atalho no menu do responsável.
+## Ordem de execução (revisão cena por cena)
 
-## Detalhes técnicos
-- Sem edge functions novas — tudo em `createServerFn` só se precisar buscar dados; a geração do relatório é client-side a partir do que já está em `children` + `anamnese_v2`.
-- PDF: `@react-pdf/renderer` (compatível com Worker/SSR pq só roda no client via `<ClientOnly>`).
-- Sem hardcode de cores — usar tokens (`--primary`, `--muted`, etc.).
-- Textos em PT-BR, linguagem acolhedora, evitar termos que soem como diagnóstico médico ("indícios de", "sugere apoio em", nunca "a criança tem TEA").
+Conforme sua preferência ("revisar em etapas pequenas e confirmar cena por cena"):
 
-## Fora do escopo desta rodada
-- Assinatura digital do relatório.
-- Envio por e-mail direto.
-- Comparativo evolutivo mês a mês (já existe parcial no `ReportGenerator`, mas fica pra depois).
+- **Passo 1** — Schema (`types.ts`) + render no `PlayerV4.tsx`.
+- **Passo 2** — Reescrever **aula-01** completa com `exemploReal` em cada etapa. Você confere.
+- **Passo 3** — Depois do OK, sigo aula-02 → aula-10 no mesmo padrão, uma por vez (ou em blocos de 2 se você preferir acelerar).
 
-## Ordem de validação (você aprova cena por cena)
-1. Engine + tela de relatório com dados mockados renderizando.
-2. Ligação real com anamnese da criança logada.
-3. Pontes com Neuro Treino e curso.
-4. Exportação PDF.
-5. Entradas de acesso no painel dos pais.
+## Padrão de "Exemplo Real" (referência)
 
-Confirma esse plano ou quer ajustar alguma seção do relatório antes de eu começar?
+Etapa: *"Todo número até 999 mora em 3 casas: C·D·U."*
+Exemplo Real:
+- Contexto: *"O ônibus escolar tem placa 347. Vamos ver onde cada algarismo mora."*
+- `casasValor: { numero: 347, extenso: "trezentos e quarenta e sete", mostrarDecomposicao: true }`
+- Destaque: *"3 na Centena vale 300 · 4 na Dezena vale 40 · 7 na Unidade vale 7."*
+
+Etapa: *"Somar sempre pelas unidades primeiro."*
+Exemplo Real:
+- Contexto: *"O bairro Leste tem 325 pessoas e o Oeste 243. Vamos somar juntos."*
+- `contaPassoAPasso` completo com os 3 passos (U, D, C).
+- Destaque: *"Total: 568 habitantes."*
+
+Posso começar pelo Passo 1+2 (schema + render + aula-01) e te chamar pra validar antes de seguir?

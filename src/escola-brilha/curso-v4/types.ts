@@ -192,6 +192,35 @@ export type MomentoExplicacao = {
       /** Extenso (ex.: "oitocentos e quarenta e sete"). */
       extenso?: string;
     };
+    /**
+     * "Na prática": exemplo real, concreto e numérico que APLICA
+     * exatamente o que a etapa acabou de explicar. Do 3º ano em diante
+     * é OBRIGATÓRIO em toda etapa de explicação — a criança precisa ver
+     * o conceito virando conta/número/situação real.
+     */
+    exemploReal?: {
+      titulo?: string;             // padrão: "🔎 Na prática"
+      contexto: string;            // "A placa do ônibus é 347."
+      casasValor?: {
+        numero: number;
+        rotulos?: { um?: string; c?: string; d?: string; u?: string };
+        mostrarDecomposicao?: boolean;
+        extenso?: string;
+      };
+      contaPassoAPasso?: {
+        operacao: "soma" | "sub" | "mult";
+        operandos: number[];
+        resultado: number;
+        passos: Array<{
+          coluna: "U" | "D" | "C" | "UM";
+          fala: string;
+          digito: number;
+          vaiUm?: number;
+          porque?: string;
+        }>;
+      };
+      destaque?: string;           // conclusão em 1 linha, em negrito
+    };
   }>;
 };
 
