@@ -27,13 +27,39 @@ export const aula04_tempo: AulaV4 = {
   momento04_explicacao: {
     titulo: "Somar durações",
     etapas: [
-      { texto: "1 h 45 min + 30 min = 1 h 75 min. Como 75 > 60, converte: 2 h 15 min." },
+      {
+        texto: "1 h 45 min + 30 min = 1 h 75 min. Como 75 > 60, converte: 2 h 15 min.",
+        exemploReal: {
+          contexto: "Tabela de conversão base 60:",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "h ↔ min ↔ s",
+            cabecalhos: ["Unidade", "= min", "= s"],
+            linhas: [
+              { rotulo: "1 h", valores: ["60 min", "3.600 s"] },
+              { rotulo: "½ h", valores: ["30 min", "1.800 s"] },
+              { rotulo: "¼ h", valores: ["15 min", "900 s"] },
+              { rotulo: "1 min", valores: ["1 min", "60 s"] },
+            ],
+          },
+          destaque: "Todo total ≥ 60 min vira 1 h + o que sobra.",
+        },
+      },
       { texto: "Diferença entre 14:20 e 16:05: 1 h 45 min." },
     ],
   },
   momento05_modelagem: {
     enunciado: "3 h 20 min em min.",
     resposta: "200 min",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "Passo a passo",
+      cabecalhos: ["Passo", "Cálculo", "Resultado"],
+      linhas: [
+        { rotulo: "1", valores: ["3 × 60", "180 min"] },
+        { rotulo: "2", valores: ["180 + 20", "200 min"] },
+      ],
+    },
     passos: ["3 × 60 = 180.", "180 + 20 = 200."],
   },
   momento06_praticaGuiada: {
