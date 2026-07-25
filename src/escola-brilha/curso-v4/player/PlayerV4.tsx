@@ -446,11 +446,16 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const ehSubtracaoInterativa =
           grupoUnico && typeof q.tirar === "number" && q.tirar! > 0;
         const jaTirou = tirados[qi];
+        const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
+        const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
           <div className="font-medium mb-3">
             {qi + 1}. {q.pergunta}
           </div>
+          {conta && (
+            <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
+          )}
           {ehSubtracaoInterativa ? (
             <div className="mb-3 flex flex-col items-center gap-3">
               <div className="rounded-2xl bg-white/5 border border-white/15 p-3 w-full max-w-md">
@@ -563,6 +568,12 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
               }`}
             >
               {respostas[qi] === q.correta ? q.feedbackAcerto : q.feedbackErro}
+            </div>
+          )}
+          {errou && conta && (
+            <div className="mt-3">
+              <div className="text-xs text-amber-200 mb-1">Vamos resolver juntos passo a passo:</div>
+              <ContaArmada a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} autoIniciar />
             </div>
           )}
         </div>
@@ -1521,6 +1532,69 @@ function ExemploReal(props: NonNullable<
           ✅ {destaque}
         </div>
       )}
+    </div>
+  );
+}
+
+// ---------- Helpers da Avaliação: conta armada -----------------------
+
+/**
+ * Detecta um padrão simples "A + B" ou "A − B" (ou "A - B") no texto de
+ * uma pergunta de avaliação de matemática. Usa apenas o PRIMEIRO padrão
+ * encontrado. Retorna undefined se não encontrar.
+ */
+function detectarContaNoTexto(
+  texto: string,
+): { a: number; b: number; operacao: "soma" | "subtracao" } | undefined {
+  // Aceita +, -, − (U+2212) entre dois números inteiros.
+  const m = texto.match(/(\d{1,4})\s*([+\-−])\s*(\d{1,4})/);
+  if (!m) return undefined;
+  const a = parseInt(m[1], 10);
+  const b = parseInt(m[3], 10);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return undefined;
+  const op: "soma" | "subtracao" = m[2] === "+" ? "soma" : "subtracao";
+  return { a, b, operacao: op };
+}
+
+/**
+ * Conta armada MONTADA, sem resultado — usada antes da criança escolher
+ * a resposta. Se ela errar, o Player renderiza <ContaArmada autoIniciar />
+ * logo abaixo do feedback pra resolver passo a passo até o resultado.
+ */
+function ContaMontadaEstatica({
+  a,
+  b,
+  operacao,
+}: {
+  a: number;
+  b: number;
+  operacao: "soma" | "subtracao";
+}) {
+  const sinal = operacao === "soma" ? "+" : "−";
+  const largura = Math.max(String(a).length, String(b).length);
+  const pad = (n: number) => String(n).padStart(largura, "\u00A0");
+  return (
+    <div className="mb-3 rounded-2xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-xs mx-auto">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
+        Conta armada
+      </div>
+      <div className="rounded-xl bg-[#FFF7DC] py-4 px-3 flex justify-center">
+        <div className="font-mono text-4xl sm:text-5xl font-black text-[#0d1f55] leading-tight text-right tabular-nums">
+          <div className="pr-2">
+            <span className="opacity-0">+&nbsp;</span>
+            <span>{pad(a)}</span>
+          </div>
+          <div className="pr-2 flex items-center justify-end gap-3">
+            <span className="text-amber-500">{sinal}</span>
+            <span>{pad(b)}</span>
+          </div>
+          <div className="border-t-4 border-[#0d1f55] my-2" />
+          <div className="pr-2 min-h-[1em]">
+            <span className="opacity-0">+&nbsp;</span>
+            <span className="opacity-20">?</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

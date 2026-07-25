@@ -9,6 +9,8 @@ type Props = {
   resultado?: number;
   itemPlural?: string;
   operacao?: "soma" | "subtracao";
+  /** Dispara "Resolver" automaticamente ao montar (usado quando a criança erra o quiz). */
+  autoIniciar?: boolean;
 };
 
 const NOME: Record<number, string> = {
@@ -24,7 +26,7 @@ const num = (n: number) => NOME[n] ?? String(n);
  * Soma: começa em `a`, conta pra frente somando `b`.
  * Subtração: começa em `a`, conta pra trás tirando `b`.
  */
-export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma" }: Props) {
+export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma", autoIniciar = false }: Props) {
   const ehSoma = operacao === "soma";
   const r = resultado ?? (ehSoma ? a + b : a - b);
   const sinal = ehSoma ? "+" : "−";
@@ -34,6 +36,9 @@ export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma
   const [mostrarResultado, setMostrarResultado] = useState(false);
 
   useEffect(() => () => stopSpeaking(), []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { if (autoIniciar) { const t = setTimeout(() => resolver(), 400); return () => clearTimeout(t); } }, [autoIniciar]);
 
   const resolver = async () => {
     if (contando) return;
