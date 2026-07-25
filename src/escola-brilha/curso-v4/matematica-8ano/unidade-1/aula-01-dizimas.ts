@@ -340,7 +340,7 @@ export const aula01_dizimas: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "0,111… é igual a:", opcoes: ["1/9", "1/10", "1/11"], correta: 0, feedbackAcerto: "🎉 Período 1 sobre 9.", feedbackErro: "10x − x = 1, então 9x = 1, logo x = 1/9." },
-      { pergunta: "0,272727… é igual a:", opcoes: ["27/99", "27/100", "3/10"], correta: 0, feedbackAcerto: "🎉 Dois dígitos → 99.", feedbackErro: "Período tem 2 dígitos. 100x − x = 27 → 99x = 27 → 27/99." },
+      { pergunta: "0,272727… simplificada é igual a:", opcoes: ["3/11", "27/100", "27/9"], correta: 0, feedbackAcerto: "🎉 27/99 = 3/11 (dividindo por 9).", feedbackErro: "100x − x = 27 → 99x = 27 → 27/99. Simplifica por 9: 3/11." },
       { pergunta: "1/3 em decimal:", opcoes: ["0,333…", "0,3", "0,033…"], correta: 0, feedbackAcerto: "🎉 1 ÷ 3 = 0,333…", feedbackErro: "Divida 1 por 3 na chave — o 3 se repete infinitamente." },
     ],
   },
