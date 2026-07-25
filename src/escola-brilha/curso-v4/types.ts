@@ -211,6 +211,17 @@ export type MomentoModelagem = {
     grupos: number[];
     itemPlural?: string;
   };
+  /**
+   * Quadro de valor posicional escrito no momento da modelagem
+   * (3º ano em diante). Não usa frutas — o número escrito é o objeto
+   * matemático em si.
+   */
+  casasValor?: {
+    numero: number;
+    rotulos?: { um?: string; c?: string; d?: string; u?: string };
+    mostrarDecomposicao?: boolean;
+    extenso?: string;
+  };
 };
 
 /** "Nós fazemos" — criança + Brilha juntos, com dicas. */
