@@ -19,26 +19,53 @@ export const aula01_dizimas: AulaV4 = {
   },
 
   momento02_exploracao: {
-    instrucao: "Divida 1 por 3 e observe o que acontece.",
+    instrucao: "Divida 1 por 3 na chave e observe o RESTO. Ele volta.",
     cenas: [
       {
+        tipo: "texto",
+        texto:
+          "Divisão de 1 por 3 na chave:\n\n   1,000 | 3\n  −  9    ────\n     ───   0,333…\n     10\n    − 9\n     ───\n      10\n     − 9\n      ───\n       1  ← o resto NUNCA zera. Sempre volta 1.\n\nComo o resto se repete, o quociente também: 0,333333… — é uma dízima periódica.",
+        destaque: true,
+      },
+      {
         tipo: "tabela",
-        titulo: "Frações que geram dízima",
-        cabecalhos: ["Fração", "Decimal", "Período"],
+        titulo: "Decimal exato × dízima — quem é quem?",
+        cabecalhos: ["Fração", "Decimal", "Denom. só tem 2 e/ou 5?", "Tipo"],
         linhas: [
-          { rotulo: "1/3", valores: ["1/3", "0,333…", "3"] },
-          { rotulo: "2/3", valores: ["2/3", "0,666…", "6"] },
-          { rotulo: "1/9", valores: ["1/9", "0,111…", "1"] },
-          { rotulo: "1/11", valores: ["1/11", "0,0909…", "09"] },
+          { rotulo: "1/2", valores: ["1/2", "0,5", "Sim (2)", "Exato"] },
+          { rotulo: "1/4", valores: ["1/4", "0,25", "Sim (2·2)", "Exato"] },
+          { rotulo: "1/5", valores: ["1/5", "0,2", "Sim (5)", "Exato"] },
+          { rotulo: "1/3", valores: ["1/3", "0,333…", "Não (tem 3)", "Dízima"] },
+          { rotulo: "2/3", valores: ["2/3", "0,666…", "Não (tem 3)", "Dízima"] },
+          { rotulo: "1/9", valores: ["1/9", "0,111…", "Não (tem 3·3)", "Dízima"] },
+          { rotulo: "1/11", valores: ["1/11", "0,0909…", "Não (tem 11)", "Dízima"] },
         ],
+      },
+      {
+        tipo: "texto",
+        texto:
+          "🔑 Critério: uma fração irredutível vira DECIMAL EXATO se o denominador só tiver os fatores 2 e/ou 5. Se aparecer qualquer outro fator (3, 7, 11, 13…), vira DÍZIMA.",
       },
     ],
   },
 
   momento03_descoberta: {
     perguntaGuia: "Como voltar de 0,333… para fração?",
-    pista: "Chame o número de x. Multiplique por 10 (mesmo tamanho do período) e subtraia.",
-    revelacao: "x = 0,333… → 10x = 3,333… → 10x − x = 3 → 9x = 3 → x = 1/3.",
+    pista: "Chame o número de x. Multiplique por 10 (mesmo tamanho do período) e subtraia — a cauda cancela.",
+    revelacao: "Nomeie x, multiplique por 10, subtraia, isole x. Resultado: 1/3.",
+    visualMat: {
+      tipo: "trinomioPassoAPasso",
+      trinomio: "0,333…  →  fração?",
+      passos: [
+        { expr: "x = 0,333…", explica: "Nomeio o número.", status: "neutro", professor: "Dou um nome ao desconhecido: x = 0,333…" },
+        { expr: "10·x = 3,333…", explica: "Multiplico por 10 (1 dígito no período).", status: "ok", professor: "Multiplico os dois lados por 10 para alinhar a cauda periódica." },
+        { expr: "10x − x = 3,333… − 0,333…", explica: "Subtraio uma equação da outra.", status: "ok", professor: "As caudas 0,333… são IDÊNTICAS e se cancelam na subtração." },
+        { expr: "9x = 3", explica: "Cauda cancelou.", status: "ok", professor: "Do lado esquerdo, 10x − x = 9x. Do direito, sobrou 3." },
+        { expr: "x = 3/9 = 1/3", explica: "Isolo x e simplifico.", status: "ok", professor: "Divido por 9 e simplifico por 3: x = 1/3." },
+      ],
+      fatorada: "0,333… = 1/3",
+      legenda: "Descoberta guiada",
+    },
   },
 
   momento04_explicacao: {
