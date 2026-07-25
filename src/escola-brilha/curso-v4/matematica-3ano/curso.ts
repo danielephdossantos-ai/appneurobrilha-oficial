@@ -1,5 +1,6 @@
 import type { Curso } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Curso: Matemática 3º Ano — "A Cidade dos Números"
