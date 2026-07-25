@@ -19,18 +19,15 @@ export const aula03_divisao: AulaV4 = {
     cenas: [
       { tipo: "texto", texto: "Pense: 'quantas vezes o DIVISOR cabe no bloco que peguei?'", destaque: true },
       {
-        tipo: "visualMat",
-        visualMat: {
-          tipo: "tabela",
-          titulo: "Múltiplos de 12 — quantas vezes 12 cabe?",
-          cabecalhos: ["Vezes", "Conta", "Múltiplo"],
-          linhas: [
-            { rotulo: "1×", valores: ["12 × 1", "12"] },
-            { rotulo: "5×", valores: ["12 × 5", "60"] },
-            { rotulo: "6×", valores: ["12 × 6", "72"] },
-            { rotulo: "10×", valores: ["12 × 10", "120"] },
-          ],
-        },
+        tipo: "tabela",
+        titulo: "Múltiplos de 12 — quantas vezes 12 cabe?",
+        cabecalhos: ["Vezes", "Conta", "Múltiplo"],
+        linhas: [
+          { rotulo: "1×", valores: ["12 × 1", "12"] },
+          { rotulo: "5×", valores: ["12 × 5", "60"] },
+          { rotulo: "6×", valores: ["12 × 6", "72"] },
+          { rotulo: "10×", valores: ["12 × 10", "120"] },
+        ],
       },
     ],
   },
