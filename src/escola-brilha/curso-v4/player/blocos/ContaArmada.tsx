@@ -26,7 +26,7 @@ const num = (n: number) => NOME[n] ?? String(n);
  * Soma: começa em `a`, conta pra frente somando `b`.
  * Subtração: começa em `a`, conta pra trás tirando `b`.
  */
-export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma" }: Props) {
+export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma", autoIniciar = false }: Props) {
   const ehSoma = operacao === "soma";
   const r = resultado ?? (ehSoma ? a + b : a - b);
   const sinal = ehSoma ? "+" : "−";
