@@ -123,9 +123,42 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
 
 // ---------- Wrapper de seção ----------------------------------------
 function Secao({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+  const [falando, setFalando] = useState(false);
+  useEffect(() => () => { try { window.speechSynthesis?.cancel(); } catch {} }, []);
+  const ouvir = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (falando) { window.speechSynthesis.cancel(); setFalando(false); return; }
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const clone = sec.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('button, [role="button"], [data-no-tts], input, select, textarea').forEach((n) => n.remove());
+    const txt = (clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim();
+    if (!txt) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = "pt-BR"; u.rate = 0.98; u.pitch = 1;
+    u.onend = () => setFalando(false);
+    u.onerror = () => setFalando(false);
+    setFalando(true);
+    window.speechSynthesis.speak(u);
+  };
   return (
     <section id={id} className="scroll-mt-24">
-      <div className="text-xs uppercase tracking-wider text-amber-300 mb-2">{label}</div>
+      <div className="flex items-center justify-between gap-3 mb-2">
+        <div className="text-xs uppercase tracking-wider text-amber-300">{label}</div>
+        <button
+          onClick={ouvir}
+          data-no-tts
+          aria-label={falando ? "Parar leitura" : "Escutar explicação"}
+          className={`shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition ${
+            falando
+              ? "bg-red-500 text-white border-red-300 animate-pulse"
+              : "bg-white/10 text-white border-white/30 hover:bg-white/20"
+          }`}
+        >
+          {falando ? "⏸ Parar" : "🔊 Escutar explicação"}
+        </button>
+      </div>
       {children}
     </section>
   );
