@@ -1399,20 +1399,61 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
           })}
 
           {/* Operandos */}
-          {i.operandos.map((op, opIdx) => (
-            <Fragment key={"opRow-" + opIdx}>
-              <div className="text-right pr-1 text-[#0d1f55]/60">
-                {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
-              </div>
-              {colunas.map((c) => (
-                <div key={`op-${opIdx}-${c}`} className="text-center">
-                  {digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
-                    ? ""
-                    : digitoDe(op, c)}
+          {i.operandos.map((op, opIdx) => {
+            const ehTopoSub = opIdx === 0 && i.operacao === "sub" && emprestimo != null;
+            return (
+              <Fragment key={"opRow-" + opIdx}>
+                <div className="text-right pr-1 text-[#0d1f55]/60">
+                  {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
                 </div>
-              ))}
-            </Fragment>
-          ))}
+                {colunas.map((c) => {
+                  const digitoStr =
+                    digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
+                      ? ""
+                      : digitoDe(op, c);
+                  if (!ehTopoSub) {
+                    return (
+                      <div key={`op-${opIdx}-${c}`} className="text-center">
+                        {digitoStr}
+                      </div>
+                    );
+                  }
+                  const marca = emprestimo!.marcas[c];
+                  const { recebeu, deu } = mostrarEmprestimoDe(c);
+                  // Valor pra mostrar acima em vermelho quando esta coluna emprestou.
+                  // Se ela TAMBÉM recebeu (cadeia através do zero), o valor acima
+                  // é 10 + topoOriginal - 1 (ex.: 0 vira 10, depois empresta 1 → mostra 9).
+                  const acima = deu
+                    ? recebeu
+                      ? marca.topoOriginal + 10 - 1
+                      : marca.topoOriginal - 1
+                    : null;
+                  return (
+                    <div
+                      key={`op-${opIdx}-${c}`}
+                      className="relative text-center leading-none"
+                    >
+                      {acima !== null && (
+                        <div className="absolute -top-4 md:-top-5 left-0 right-0 text-center text-lg md:text-2xl font-black text-rose-600">
+                          {acima}
+                        </div>
+                      )}
+                      <span className="inline-flex items-baseline justify-center">
+                        {recebeu && (
+                          <span className="text-lg md:text-2xl font-black text-rose-600 mr-0.5">
+                            1
+                          </span>
+                        )}
+                        <span className={deu ? "line-through decoration-rose-600 decoration-[3px]" : ""}>
+                          {digitoStr}
+                        </span>
+                      </span>
+                    </div>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
 
           {/* Linha do resultado */}
           <div />
