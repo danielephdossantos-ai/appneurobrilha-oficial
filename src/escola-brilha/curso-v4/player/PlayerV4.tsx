@@ -1483,3 +1483,44 @@ export function RodapeMetodologias({ chaves }: { chaves?: string[] }) {
   );
 }
 
+
+// =====================================================================
+// ExemploReal — "🔎 Na prática": aparece após cada etapa da Explicação.
+// Ancora o conceito num caso concreto (habitantes, placa, página…) e
+// renderiza o visual apropriado (casas de valor ou conta passo a passo).
+// =====================================================================
+function ExemploReal(props: NonNullable<
+  NonNullable<AulaV4["momento04_explicacao"]["etapas"][number]["exemploReal"]>
+>) {
+  const { titulo = "🔎 Na prática", contexto, casasValor, contaPassoAPasso, destaque } = props;
+  return (
+    <div className="mt-4 rounded-2xl bg-amber-50 text-[#0d1f55] border-2 border-amber-300 p-4">
+      <div className="text-[10px] uppercase tracking-widest font-black text-amber-700 mb-2">
+        {titulo}
+      </div>
+      <div className="text-sm md:text-base leading-relaxed">{contexto}</div>
+      {casasValor && (
+        <div className="mt-3">
+          <CasasValor {...casasValor} />
+        </div>
+      )}
+      {contaPassoAPasso && (
+        <ContaPassoAPasso
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: contaPassoAPasso.operacao,
+            operandos: contaPassoAPasso.operandos,
+            resultado: contaPassoAPasso.resultado,
+            passos: contaPassoAPasso.passos,
+            modo: "explicacao",
+          }}
+        />
+      )}
+      {destaque && (
+        <div className="mt-3 text-sm md:text-base font-black text-emerald-700">
+          ✅ {destaque}
+        </div>
+      )}
+    </div>
+  );
+}
