@@ -42,8 +42,19 @@ export const aula04_estatistica: AulaV4 = {
       {
         texto: "Moda: valor que aparece MAIS.",
         exemploReal: {
-          contexto: "Notas: 7, 8, 8, 9, 6",
-          destaque: "Moda = 8.",
+          contexto: "Notas: 7, 8, 8, 9, 6 — contagem:",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Frequência de cada nota",
+            unidade: "vezes",
+            barras: [
+              { rotulo: "6", valor: 1 },
+              { rotulo: "7", valor: 1 },
+              { rotulo: "8", valor: 2 },
+              { rotulo: "9", valor: 1 },
+            ],
+          },
+          destaque: "A barra mais alta é o 8 → Moda = 8.",
         },
       },
       {
@@ -64,8 +75,19 @@ export const aula04_estatistica: AulaV4 = {
       {
         texto: "Pesquisa: coleta → tabela → gráfico → conclusão.",
         exemploReal: {
-          contexto: "Perguntando idade preferida de filme.",
-          destaque: "Sempre tira uma conclusão do gráfico.",
+          contexto: "Idade preferida de filme (5 pessoas):",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Idade do filme preferido",
+            unidade: "pessoas",
+            barras: [
+              { rotulo: "L", valor: 2 },
+              { rotulo: "10", valor: 3 },
+              { rotulo: "12", valor: 4 },
+              { rotulo: "14", valor: 1 },
+            ],
+          },
+          destaque: "Conclusão: filmes 12 anos foram os preferidos.",
         },
       },
     ],
@@ -74,6 +96,14 @@ export const aula04_estatistica: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Média das notas: 8, 6, 9, 7, 10.",
     resposta: "8",
+    visualMat: {
+      tipo: "tabela",
+      cabecalhos: ["Passo", "Cálculo"],
+      linhas: [
+        { rotulo: "1", valores: ["Soma", "40"] },
+        { rotulo: "2", valores: ["÷ 5", "8"] },
+      ],
+    },
     passos: ["Soma = 40.", "÷ 5 = 8."],
   },
 

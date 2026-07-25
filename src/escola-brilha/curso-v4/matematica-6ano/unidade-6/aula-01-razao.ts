@@ -59,7 +59,16 @@ export const aula01_razao: AulaV4 = {
         texto: "Densidade demográfica = habitantes ÷ km².",
         exemploReal: {
           contexto: "Cidade: 200.000 hab, 100 km²",
-          destaque: "Densidade = 2.000 hab/km².",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Grandeza", "Valor"],
+            linhas: [
+              { rotulo: "hab", valores: ["habitantes", "200.000"] },
+              { rotulo: "área", valores: ["km²", "100"] },
+              { rotulo: "d", valores: ["densidade", "2.000 hab/km²"] },
+            ],
+          },
+          destaque: "200.000 ÷ 100 = 2.000 hab/km².",
         },
       },
     ],
@@ -68,6 +77,16 @@ export const aula01_razao: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Escala 1:1000 numa planta. 5 cm na planta = quantos m no real?",
     resposta: "50 m",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "Escala 1:1000",
+      cabecalhos: ["Passo", "Cálculo", "Resultado"],
+      linhas: [
+        { rotulo: "1", valores: ["1 cm × 1000", "1.000 cm"] },
+        { rotulo: "2", valores: ["1.000 cm ÷ 100", "10 m"] },
+        { rotulo: "3", valores: ["5 × 10", "50 m"] },
+      ],
+    },
     passos: ["Cada 1 cm = 1000 cm reais = 10 m.", "5 × 10 = 50 m."],
   },
 

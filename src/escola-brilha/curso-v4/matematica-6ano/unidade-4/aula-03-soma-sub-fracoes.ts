@@ -40,7 +40,18 @@ export const aula03_somaSub: AulaV4 = {
       {
         texto: "Mesmo denominador: soma os de cima.",
         exemploReal: {
-          contexto: "2/7 + 3/7",
+          contexto: "2/7 + 3/7 — dividimos a mesma pizza em 7 pedaços:",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Somando por cima",
+            cabecalhos: ["Fração", "Numerador", "Denominador"],
+            linhas: [
+              { rotulo: "2/7", valores: ["2", "7"] },
+              { rotulo: "+ 3/7", valores: ["3", "7"] },
+              { rotulo: "= 5/7", valores: ["5", "7"] },
+            ],
+            destacar: { coluna: 1 },
+          },
           destaque: "2/7 + 3/7 = 5/7.",
         },
       },
@@ -64,8 +75,17 @@ export const aula03_somaSub: AulaV4 = {
       {
         texto: "No fim, SIMPLIFIQUE se possível.",
         exemploReal: {
-          contexto: "3/6 + 1/6 = 4/6 = 2/3.",
-          destaque: "Sempre deixar irredutível.",
+          contexto: "3/6 + 1/6 = 4/6. Divida por 2:",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Passo", "Numerador", "Denominador"],
+            linhas: [
+              { rotulo: "4/6", valores: ["4", "6"] },
+              { rotulo: "÷ 2 (MDC)", valores: ["÷2", "÷2"] },
+              { rotulo: "2/3", valores: ["2", "3"] },
+            ],
+          },
+          destaque: "Sempre deixar irredutível: 2/3.",
         },
       },
     ],
@@ -74,6 +94,17 @@ export const aula03_somaSub: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Calcule 5/6 − 1/4.",
     resposta: "7/12",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "Subtração com MMC",
+      cabecalhos: ["Passo", "Cálculo"],
+      linhas: [
+        { rotulo: "1", valores: ["MMC(6,4)", "12"] },
+        { rotulo: "2", valores: ["5/6 = ?/12", "10/12"] },
+        { rotulo: "3", valores: ["1/4 = ?/12", "3/12"] },
+        { rotulo: "4", valores: ["10/12 − 3/12", "7/12"] },
+      ],
+    },
     passos: ["MMC(6,4) = 12.", "5/6 = 10/12.", "1/4 = 3/12.", "10/12 − 3/12 = 7/12."],
   },
 
