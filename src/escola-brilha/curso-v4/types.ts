@@ -103,11 +103,12 @@ export type Interacao =
       operandos: number[];
       /** Ordem: unidades → dezenas → centenas → milhar. */
       passos: Array<{
-        coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
+        /** Coluna alvo. Obrigatório em soma/sub/mult; opcional em div (chave). */
+        coluna?: "U" | "D" | "C" | "UM" | "DM" | "CM";
         /** Fala do Brilha (ex.: "Somo 4 + 7 = 11. Escrevo 1, sobe 1."). */
         fala: string;
-        /** Dígito escrito no resultado nesta coluna. */
-        digito: number;
+        /** Dígito escrito no resultado nesta coluna. Opcional em div. */
+        digito?: number;
         /** "Vai 1" — dígito transportado pra próxima coluna. */
         vaiUm?: number;
         /** Justificativa relacional (por que funciona). Opcional. */
@@ -217,9 +218,9 @@ export type MomentoExplicacao = {
         operandos: number[];
         resultado: number;
         passos: Array<{
-          coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
+          coluna?: "U" | "D" | "C" | "UM" | "DM" | "CM";
           fala: string;
-          digito: number;
+          digito?: number;
           vaiUm?: number;
           porque?: string;
         }>;
@@ -244,9 +245,9 @@ export type MomentoModelagem = {
     operandos: number[];
     resultado: number;
     passos: Array<{
-      coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
+      coluna?: "U" | "D" | "C" | "UM" | "DM" | "CM";
       fala: string;
-      digito: number;
+      digito?: number;
       vaiUm?: number;
       porque?: string;
     }>;

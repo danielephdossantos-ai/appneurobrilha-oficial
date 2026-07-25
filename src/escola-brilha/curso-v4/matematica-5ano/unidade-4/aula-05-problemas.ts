@@ -35,6 +35,15 @@ export const aula05_problemas: AulaV4 = {
     enunciado: "336 páginas em 14 capítulos iguais. Páginas por capítulo?",
     resposta: "24",
     passos: ["Partitiva.", "336 ÷ 14 = 24."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [336, 14],
+      resultado: 24,
+      passos: [
+        { fala: "33 ÷ 14. Estimo: 14 × 2 = 28. Cabe (14 × 3 = 42 passaria). Escrevo 2. 33 − 28 = 5." },
+        { fala: "Desço o 6. Fica 56. 14 × 4 = 56. Escrevo 4. 56 − 56 = 0. Resto 0." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "500 mudas em bandejas de 25.",

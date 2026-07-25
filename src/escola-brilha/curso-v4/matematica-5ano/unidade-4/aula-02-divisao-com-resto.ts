@@ -38,6 +38,15 @@ export const aula02_divisaoComResto: AulaV4 = {
     enunciado: "83 ÷ 4.",
     resposta: "q=20, r=3",
     passos: ["8 ÷ 4 = 2.", "Desce 3 → 3 ÷ 4 = 0, resta 3.", "Verifica: 4×20+3=83."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [83, 4],
+      resultado: 20,
+      passos: [
+        { fala: "8 ÷ 4 = 2. Escrevo 2. 2 × 4 = 8. 8 − 8 = 0." },
+        { fala: "Desço o 3. Fica 3. 3 < 4 → escrevo 0. 0 × 4 = 0. 3 − 0 = 3. Resto 3." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 158 ÷ 7.",

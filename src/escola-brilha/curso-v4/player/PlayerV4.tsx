@@ -1346,7 +1346,224 @@ function CasasValor({
 // Do 3º ano ao Ensino Médio. Substitui a contagem infantil.
 // =====================================================================
 
+// =====================================================================
+// Divisão pela CHAVE — algoritmo tradicional BR.
+// Renderiza dividendo dentro da chave, divisor fora, e desce cada passo
+// (parcial → multiplica → subtrai → desce o próximo dígito) até o resto.
+// =====================================================================
+function DivisaoChave({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  const N = i.operandos[0];
+  const d = i.operandos[1];
+  const Q = i.resultado;
+
+  const digs = String(N).split("");
+  const numDigits = digs.length;
+
+  type Step = { startCol: number; endCol: number; parcial: number; q: number; prod: number; rem: number };
+
+  const steps = useMemo<Step[]>(() => {
+    const arr: Step[] = [];
+    if (!Number.isFinite(N) || !Number.isFinite(d) || d <= 0) return arr;
+    let idx = 0;
+    let current = 0;
+    // consome dígitos até o primeiro parcial que "cabe" o divisor
+    while (idx < numDigits) {
+      current = current * 10 + parseInt(digs[idx], 10);
+      idx += 1;
+      if (current >= d) break;
+    }
+    if (idx === 0) idx = 1;
+    let startCol = 0;
+    let endCol = idx - 1;
+    let q = Math.floor(current / d);
+    let prod = q * d;
+    let rem = current - prod;
+    arr.push({ startCol, endCol, parcial: current, q, prod, rem });
+    while (idx < numDigits) {
+      const brought = parseInt(digs[idx], 10);
+      current = rem * 10 + brought;
+      endCol = idx;
+      startCol = Math.max(0, idx - String(current).length + 1);
+      q = Math.floor(current / d);
+      prod = q * d;
+      rem = current - prod;
+      arr.push({ startCol, endCol, parcial: current, q, prod, rem });
+      idx += 1;
+    }
+    return arr;
+  }, [N, d, numDigits]);
+
+  const [step, setStep] = useState(-1);
+  const total = steps.length;
+  const done = step >= total - 1;
+  const visible = steps.slice(0, step + 1);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const cellCls = "text-center leading-none";
+  const gridCols = `1.2rem repeat(${numDigits}, minmax(1.4rem, 1.8rem))`;
+
+  function placeAtEnd(num: number, end: number) {
+    const s = String(num);
+    return { start: end - s.length + 1, str: s };
+  }
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3">
+        Divisão pela chave · passo a passo
+      </div>
+
+      <div className="flex justify-center items-start gap-4 font-mono font-black text-2xl md:text-4xl overflow-x-auto">
+        {/* ESQUERDA: dividendo + subtrações empilhadas */}
+        <div className="grid gap-y-1" style={{ gridTemplateColumns: gridCols }}>
+          {/* linha 0: dividendo */}
+          <div />
+          {digs.map((c, k) => (
+            <div key={"d-" + k} className={cellCls}>{c}</div>
+          ))}
+
+          {visible.map((s, k) => {
+            const prodP = placeAtEnd(s.prod, s.endCol);
+            const remP = placeAtEnd(s.rem, s.endCol);
+            const next = steps[k + 1];
+            return (
+              <Fragment key={"stp-" + k}>
+                {/* produto (em vermelho, precedido de "−") */}
+                <div className="text-right text-rose-600 pr-1">−</div>
+                {Array.from({ length: numDigits }).map((_, c) => {
+                  if (c >= prodP.start && c <= s.endCol) {
+                    return (
+                      <div key={"p-" + c} className={cellCls + " text-rose-600"}>
+                        {prodP.str[c - prodP.start]}
+                      </div>
+                    );
+                  }
+                  return <div key={"p-" + c} />;
+                })}
+                {/* linha horizontal cobrindo o intervalo do parcial */}
+                <div />
+                {Array.from({ length: numDigits }).map((_, c) => (
+                  <div
+                    key={"l-" + c}
+                    className={
+                      c >= s.startCol && c <= s.endCol
+                        ? "border-t-2 border-[#0d1f55] h-1 mt-1"
+                        : ""
+                    }
+                  />
+                ))}
+                {/* sobra + dígito descido pro próximo parcial (em âmbar) */}
+                <div />
+                {Array.from({ length: numDigits }).map((_, c) => {
+                  if (c >= remP.start && c <= s.endCol) {
+                    return (
+                      <div key={"r-" + c} className={cellCls}>
+                        {remP.str[c - remP.start]}
+                      </div>
+                    );
+                  }
+                  if (next && c === next.endCol) {
+                    return (
+                      <div key={"r-" + c} className={cellCls + " text-amber-600"}>
+                        {digs[c]}
+                      </div>
+                    );
+                  }
+                  return <div key={"r-" + c} />;
+                })}
+              </Fragment>
+            );
+          })}
+        </div>
+
+        {/* DIREITA: chave | divisor em cima, quociente embaixo */}
+        <div className="flex flex-col items-center border-l-4 border-[#0d1f55] pl-3">
+          <div className="flex gap-1">
+            {String(d).split("").map((c, k) => (
+              <span key={k}>{c}</span>
+            ))}
+          </div>
+          <div className="border-t-2 border-[#0d1f55] w-full my-2" />
+          <div className="flex gap-1 text-emerald-600">
+            {String(Q).split("").map((c, k) => (
+              <span key={k} className={k < visible.length ? "" : "opacity-20"}>
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Narração */}
+      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+        {step < 0 && (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span>{" "}
+            Vamos montar a chave: o {N} entra dentro da chave e o {d} fica do lado de fora. Toque em "Começar".
+          </div>
+        )}
+        {step >= 0 && (() => {
+          const s = steps[step];
+          const custom = i.passos[step]?.fala;
+          const nextS = steps[step + 1];
+          const auto =
+            `Pego ${s.parcial} ÷ ${d} = ${s.q}. ` +
+            `Multiplico ${s.q} × ${d} = ${s.prod}. ` +
+            `Subtraio ${s.parcial} − ${s.prod} = ${s.rem}. ` +
+            (nextS ? `Desço o ${digs[nextS.endCol]}.` : `Resto: ${s.rem}.`);
+          return (
+            <div className="text-sm md:text-base">
+              <span className="font-black text-amber-700">Passo {step + 1}/{total}:</span>{" "}
+              {custom ?? auto}
+              {i.passos[step]?.porque && (
+                <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
+                  Por quê? {i.passos[step]!.porque}
+                </div>
+              )}
+            </div>
+          );
+        })()}
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!done && (
+          <button
+            onClick={() => setStep((p) => Math.min(p + 1, total - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {step < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        )}
+        {done && (
+          <div className="text-lg font-black text-emerald-700">
+            ✅ Quociente: {Q}
+            {steps[total - 1]?.rem > 0 ? ` · Resto: ${steps[total - 1].rem}` : ""}
+          </div>
+        )}
+        {done && (
+          <button
+            onClick={() => setStep(-1)}
+            className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline"
+          >
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+
+      {i.metodologia && metodologia(i.metodologia) && (
+        <div className="mt-4 text-[10px] uppercase tracking-widest font-bold text-[#0d1f55]/50">
+          Base: {metodologia(i.metodologia)!.nome}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  // Divisão pela chave tem layout próprio (algoritmo tradicional BR).
+  if (i.operacao === "div") return <DivisaoChave i={i} />;
+
   const [passoAtual, setPassoAtual] = useState(-1); // -1 = ainda não começou
   const [resposta, setResposta] = useState<number | null>(null);
   const [confirmado, setConfirmado] = useState(false);
@@ -1367,7 +1584,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   const COL_ORDEM: Array<Col> = ["CM", "DM", "UM", "C", "D", "U"];
   const colunas = COL_ORDEM.slice(6 - numCols);
 
-  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : i.operacao === "div" ? "÷" : "×";
+  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : "×";
 
   function digitoDe(n: number, coluna: Col) {
     const s = String(Math.abs(n)).padStart(6, "0");
@@ -1426,6 +1643,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   // Passos revelados até agora — mapa coluna → dígito do resultado
   const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
   i.passos.slice(0, passoAtual + 1).forEach((p) => {
+    if (p.coluna == null || p.digito == null) return;
     digitosResultado[p.coluna] = { digito: p.digito, vaiUm: p.vaiUm };
   });
 

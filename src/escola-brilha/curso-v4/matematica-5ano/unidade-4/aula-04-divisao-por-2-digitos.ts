@@ -38,6 +38,15 @@ export const aula04_divisaoPor2Digitos: AulaV4 = {
     enunciado: "648 ÷ 18.",
     resposta: "36",
     passos: ["64 ÷ 18: estime 3 (18×3=54). Cabe.", "64−54=10. Desce 8 → 108.", "108 ÷ 18 = 6 (18×6=108).", "= 36."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [648, 18],
+      resultado: 36,
+      passos: [
+        { fala: "64 ÷ 18. Estimo: 18 × 3 = 54. Cabe. Escrevo 3. 64 − 54 = 10." },
+        { fala: "Desço o 8. Fica 108. 18 × 6 = 108. Escrevo 6. 108 − 108 = 0." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 480 ÷ 15.",

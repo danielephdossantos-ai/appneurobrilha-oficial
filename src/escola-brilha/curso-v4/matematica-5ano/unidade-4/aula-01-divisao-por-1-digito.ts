@@ -39,6 +39,16 @@ export const aula01_divisaoPor1Digito: AulaV4 = {
     enunciado: "936 ÷ 4.",
     resposta: "234",
     passos: ["9 ÷ 4 = 2, resta 1.", "Desce 3 → 13 ÷ 4 = 3, resta 1.", "Desce 6 → 16 ÷ 4 = 4.", "= 234."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [936, 4],
+      resultado: 234,
+      passos: [
+        { fala: "9 ÷ 4 = 2. Escrevo 2 no quociente. 2 × 4 = 8. 9 − 8 = 1." },
+        { fala: "Desço o 3. Fica 13. 13 ÷ 4 = 3. 3 × 4 = 12. 13 − 12 = 1." },
+        { fala: "Desço o 6. Fica 16. 16 ÷ 4 = 4. 4 × 4 = 16. 16 − 16 = 0." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 728 ÷ 4.",
