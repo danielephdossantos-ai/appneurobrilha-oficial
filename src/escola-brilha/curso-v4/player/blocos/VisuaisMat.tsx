@@ -17,7 +17,49 @@ export type VisualMat =
   | GraficoBarrasV
   | TabelaV
   | EscalaProbV
-  | RetaNumericaV;
+  | RetaNumericaV
+  | DizimaGeratrizV
+  | SomaFracoesV
+  | NotacaoCientificaV;
+
+// ------------------ Dízima periódica → fração geratriz ---------------
+export type DizimaGeratrizV = {
+  tipo: "dizimaGeratriz";
+  /** Dízima com reticências, ex.: "0,212121..." ou "0,04777..." */
+  dizima: string;
+  /** Algarismos do período (repetem), ex.: "21" ou "7". */
+  periodo: string;
+  /** Parte não-periódica após a vírgula (dízima composta), ex.: "04". Opcional. */
+  parteNaoPeriodica?: string;
+  /** Fração final já simplificada, ex.: "7/33". */
+  resultado: string;
+  /** Fração antes de simplificar, opcional, ex.: "21/99". */
+  resultadoBruto?: string;
+  legenda?: string;
+};
+
+// ------------------ Soma/subtração de frações ------------------------
+export type SomaFracoesV = {
+  tipo: "somaFracoes";
+  operacao: "+" | "-";
+  a: { num: number; den: number };
+  b: { num: number; den: number };
+  /** Se true, mostra a linha de simplificação final. Padrão: true. */
+  simplificar?: boolean;
+  legenda?: string;
+};
+
+// ------------------ Notação científica -------------------------------
+export type NotacaoCientificaV = {
+  tipo: "notacaoCientifica";
+  /** Número original, ex.: "230000000" ou "0,00000034". */
+  numero: string;
+  /** Coeficiente 1 ≤ N < 10, ex.: "2,3". */
+  coeficiente: string;
+  /** Expoente inteiro (positivo p/ grandes, negativo p/ pequenos). */
+  expoente: number;
+  legenda?: string;
+};
 
 export type FiguraPlanaV = {
   tipo: "figuraPlana";
