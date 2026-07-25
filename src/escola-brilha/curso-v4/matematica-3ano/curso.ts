@@ -1,5 +1,6 @@
 import type { Curso } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Curso: Matemática 3º Ano — "A Cidade dos Números"
@@ -28,7 +29,7 @@ const curso: Curso = {
   corPrimaria: "#2563eb",
   corSecundaria: "#0d1f55",
   tipoAula: "matematica",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
