@@ -11,45 +11,114 @@ export const aula07_missao: AulaV4 = {
   momento01_motivacao: {
     titulo: "Formatura do Laboratório",
     historia:
-      "{NOME}, hoje é o dia da MISSÃO. Você recebe dados reais e precisa usar TUDO da Unidade 1: ler bilhões, comparar, arredondar, localizar na reta, trabalhar com negativos.",
+      "{NOME}, hoje é a MISSÃO. Use TUDO da Unidade 1: ler bilhões, comparar por casa, arredondar na reta, localizar negativos, oposto e módulo.",
   },
+
   momento02_exploracao: {
-    instrucao: "Cheque suas ferramentas.",
+    instrucao: "Cheque suas ferramentas antes da missão.",
     cenas: [
-      { tipo: "texto", texto: "Ferramentas: classes numéricas · comparação por dígitos · arredondamento · reta com negativos · oposto e módulo.", destaque: true },
+      {
+        tipo: "tabela",
+        titulo: "🧰 Ferramentas da Unidade 1",
+        cabecalhos: ["Ferramenta", "Serve pra…"],
+        linhas: [
+          { rotulo: "Classes", valores: ["Classes", "Ler bilhões"] },
+          { rotulo: "Cmp", valores: ["Casas de valor", "Comparar/ordenar"] },
+          { rotulo: "Rd", valores: ["Regra do 5", "Arredondar"] },
+          { rotulo: "Rt", valores: ["Reta numérica", "Localizar/ordenar"] },
+          { rotulo: "Mod", valores: ["Módulo |x|", "Distância ao zero"] },
+        ],
+      },
     ],
   },
+
   momento03_descoberta: {
-    perguntaGuia: "O laboratório funciona com uma regra: SEMPRE HIPÓTESE → TESTE → CONCLUSÃO.",
-    pista: "Antes de responder, escreva mentalmente o que você acha.",
-    revelacao: "Cientistas não chutam: eles verificam.",
+    perguntaGuia: "Cientista trabalha assim: HIPÓTESE → TESTE → CONCLUSÃO.",
+    pista: "Antes de responder, pense qual ferramenta usar.",
+    revelacao: "Cientistas não chutam: verificam.",
   },
+
   momento04_explicacao: {
-    titulo: "Estratégias que valem para tudo",
+    titulo: "Estratégias em ação",
     etapas: [
-      { texto: "Números grandes: separe em classes." },
-      { texto: "Comparar: dígitos primeiro, tamanho depois." },
-      { texto: "Arredondar: olhar o dígito à direita." },
-      { texto: "Negativos: olhar a reta, direita é maior." },
+      {
+        texto: "Números grandes: separe em CLASSES.",
+        exemploReal: {
+          contexto: "1.500.000.000 → 1 · 500 · 000 · 000.",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Bilhão", "Milhão", "Milhar", "Unidade"],
+            linhas: [{ rotulo: "Blocos", valores: ["1", "500", "000", "000"] }],
+          },
+          destaque: "Lê-se: um bilhão e quinhentos milhões.",
+        },
+      },
+      {
+        texto: "Arredondar: a reta mostra pra que lado o número está mais perto.",
+        exemploReal: {
+          contexto: "4.762 → milhar mais próximo?",
+          visualMat: {
+            tipo: "retaNumerica",
+            min: 4000,
+            max: 5000,
+            passo: 100,
+            destacar: [
+              { valor: 4000, rotulo: "4.000" },
+              { valor: 4500, rotulo: "4.500 (meio)", cor: "#f59e0b" },
+              { valor: 4762, rotulo: "4.762", cor: "#10b981" },
+              { valor: 5000, rotulo: "5.000" },
+            ],
+          },
+          destaque: "Passou do meio → 5.000.",
+        },
+      },
+      {
+        texto: "Negativos e positivos numa reta só.",
+        exemploReal: {
+          contexto: "Ordenar: −5 · 2 · 0 · −1 · 4.",
+          visualMat: {
+            tipo: "retaNumerica",
+            min: -6,
+            max: 6,
+            passo: 1,
+            destacar: [
+              { valor: -5, rotulo: "−5", cor: "#ef4444" },
+              { valor: -1, rotulo: "−1", cor: "#f97316" },
+              { valor: 0, rotulo: "0" },
+              { valor: 2, rotulo: "2", cor: "#22c55e" },
+              { valor: 4, rotulo: "4", cor: "#0ea5e9" },
+            ],
+          },
+          destaque: "Da esquerda pra direita = do menor pro maior.",
+        },
+      },
     ],
   },
+
   momento05_modelagem: {
     enunciado: "Escreva 1.500.000.000 por extenso.",
     resposta: "Um bilhão e quinhentos milhões",
-    passos: ["Separe por classes: 1 · 500 · 000 · 000.", "1 bilhão + 500 milhões."],
+    visualMat: {
+      tipo: "tabela",
+      cabecalhos: ["Bilhão", "Milhão", "Milhar", "Unidade"],
+      linhas: [{ rotulo: "Blocos", valores: ["1", "500", "000", "000"] }],
+    },
+    passos: ["Separe: 1 · 500 · 000 · 000.", "1 bilhão + 500 milhões."],
   },
+
   momento06_praticaGuiada: {
     enunciado: "Arredonde 4.762 para o milhar.",
-    dica: "Dígito à direita da casa dos milhares.",
+    dica: "Dígito à direita da casa dos milhares (centena = 7).",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
       opcoes: [{ nome: "5.000" }, { nome: "4.000" }, { nome: "4.700" }],
       respostaCerta: "5.000",
-      feedbackAcerto: "🎯 7≥5.",
-      feedbackErro: "7≥5 → sobe.",
+      feedbackAcerto: "🎯 7 ≥ 5 → sobe.",
+      feedbackErro: "7 ≥ 5 → sobe pro próximo milhar.",
     },
   },
+
   momento07_praticaIndependente: {
     enunciado: "Ordene do menor pro maior: −5 · 2 · 0 · −1 · 4.",
     interacao: {
@@ -61,14 +130,14 @@ export const aula07_missao: AulaV4 = {
         { nome: "4 · 2 · 0 · −1 · −5" },
       ],
       respostaCerta: "−5 · −1 · 0 · 2 · 4",
-      feedbackAcerto: "🎯",
-      feedbackErro: "Da esquerda pra direita da reta.",
+      feedbackAcerto: "🎯 Esquerda → direita.",
+      feedbackErro: "Ordem da reta: esquerda → direita.",
     },
   },
+
   momento08_aplicacao: {
-    contexto:
-      "Um submarino desce até −180 m. Depois sobe 120 m.",
-    problema: "Em qual profundidade fica agora?",
+    contexto: "Um submarino desce até −180 m. Depois SOBE 120 m.",
+    problema: "Em qual profundidade fica agora? (−180 + 120)",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -78,53 +147,32 @@ export const aula07_missao: AulaV4 = {
       feedbackErro: "Subir 120 desde −180 → −60.",
     },
   },
+
   momento09_revisao: {
     pontos: [
       "Você virou Cientista dos Números do Laboratório.",
-      "Ferramentas travadas: bilhões, comparação, arredondamento, reta, negativos.",
+      "Ferramentas travadas: bilhões, comparação, arredondamento, reta, negativos, módulo.",
     ],
   },
+
   momento10_avaliacao: {
     perguntas: [
-      {
-        pergunta: "3.000.000.000 é igual a:",
-        opcoes: ["3 bilhões", "3 milhões", "300 milhões"],
-        correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "3 bi.",
-      },
-      {
-        pergunta: "|−12| vale:",
-        opcoes: ["12", "−12", "0"],
-        correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "12.",
-      },
-      {
-        pergunta: "Arredondar 78.499 para o milhar:",
-        opcoes: ["78.000", "79.000", "80.000"],
-        correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "4<5.",
-      },
-      {
-        pergunta: "Maior entre −3, 0, −10, 2:",
-        opcoes: ["2", "0", "−3"],
-        correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "2 fica mais à direita.",
-      },
+      { pergunta: "3.000.000.000 é igual a:", opcoes: ["3 bilhões", "3 milhões", "300 milhões"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "9 zeros = bilhão." },
+      { pergunta: "|−12| vale:", opcoes: ["12", "−12", "0"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Módulo é sempre ≥ 0." },
+      { pergunta: "Arredondar 78.499 para o milhar:", opcoes: ["78.000", "79.000", "80.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Centena = 4 < 5." },
+      { pergunta: "Maior entre −3, 0, −10, 2:", opcoes: ["2", "0", "−3"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "2 fica mais à direita." },
     ],
   },
+
   momento11_missaoFamilia: {
     titulo: "Diploma de Cientista dos Números",
     materiais: ["Papel, canetas"],
     passos: [
       "Faça seu diploma: 'Cientista dos Números — Unidade 1'.",
-      "Escreva 3 exemplos reais de números que você aprendeu a interpretar (bilhão, negativo, arredondado).",
+      "Escreva 3 exemplos reais (bilhão, negativo, arredondado).",
       "Mostre pra família.",
     ],
     registro: "📸 Foto do diploma.",
   },
-  recompensa: { xp: 240, moedas: 125, medalha: "Cientista dos Números" },
+  recompensa: { xp: 200, moedas: 100, medalha: "Cientista dos Números" },
 };
