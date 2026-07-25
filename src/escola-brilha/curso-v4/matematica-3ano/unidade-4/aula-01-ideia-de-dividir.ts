@@ -24,28 +24,43 @@ export const aula01_ideiaDividir: AulaV4 = {
     revelacao: "20 ÷ 5 = 4, porque 4 × 5 = 20.",
   },
   momento04_explicacao: {
-    titulo: "Repartir em partes iguais",
+    titulo: "Como repartir 15 doces entre 3 crianças",
     etapas: [
       {
-        texto: "15 doces para 3 crianças.",
+        texto: "Temos 15 doces e 3 crianças (A, B, C). Vamos dar 1 doce pra cada uma, dando a volta várias vezes, até acabar. No final, contamos quantos cada uma recebeu.",
+      },
+      {
+        texto: "Rodada 1 — dou 1 pra A, 1 pra B, 1 pra C. Já dei 3 doces. Sobram 15 − 3 = 12. Cada uma tem 1.",
+      },
+      {
+        texto: "Rodada 2 — dou mais 1 pra A, B e C. Já dei 6 doces. Sobram 15 − 6 = 9. Cada uma tem 2.",
+      },
+      {
+        texto: "Rodada 3 — dou mais 1 pra cada. Já dei 9. Sobram 15 − 9 = 6. Cada uma tem 3.",
+      },
+      {
+        texto: "Rodada 4 — dou mais 1 pra cada. Já dei 12. Sobram 15 − 12 = 3. Cada uma tem 4.",
+      },
+      {
+        texto: "Rodada 5 — dou o último pra cada. Já dei 15. Sobram 0. Cada uma tem 5. Acabou!",
         exemploReal: {
-          contexto: "Vá dando 1 pra cada, um por um.",
-          destaque: "15 ÷ 3 = 5.",
-          contaPassoAPasso: {
-            operacao: "div",
-            operandos: [15, 3],
-            resultado: 5,
-            passos: [
-              { coluna: "U", fala: "15 ÷ 3 = 5. Cada criança ganha 5 doces.", digito: 5 },
-            ],
-          },
+          contexto: "Foram 5 rodadas até acabar os 15 doces. Por isso 15 ÷ 3 = 5.",
+          destaque: "15 ÷ 3 = 5 (cada criança ficou com 5).",
         },
+      },
+      {
+        texto: "Atalho da tabuada: qual número vezes 3 dá 15? 5 × 3 = 15. Então 15 ÷ 3 = 5. Dividir é o inverso de multiplicar.",
       },
     ],
   },
   momento05_modelagem: {
     enunciado: "18 ÷ 2 = ?",
-    passos: ["Dois grupos iguais.", "9+9=18.", "Resultado: 9."],
+    passos: [
+      "18 doces, 2 crianças. Vou dando 1 pra cada e contando as rodadas.",
+      "Rodadas: 1, 2, 3, 4, 5, 6, 7, 8, 9 — a cada rodada saem 2 doces (2, 4, 6, 8, 10, 12, 14, 16, 18).",
+      "Na 9ª rodada acabaram os 18. Então cada criança ficou com 9.",
+      "Confere com a tabuada: 9 × 2 = 18. Logo 18 ÷ 2 = 9.",
+    ],
     resposta: "18 ÷ 2 = 9",
     casasValor: { numero: 9, mostrarDecomposicao: true, extenso: "nove" },
   },
