@@ -40,77 +40,20 @@ export const aula02_vaiUmUnidade: AulaV4 = {
     "titulo": "Reagrupar na unidade",
     "etapas": [
       {
-        "texto": "1) Some U: 8 + 5 = 13. Escrevo 3, vai 1.",
+        "texto": "Vamos armar 238 + 145. Quando a coluna passa de 9, reagrupamos: 10 U = 1 D.",
         "exemploReal": {
-          "contexto": "238 + 145.",
-          "destaque": "U = 3, sobe 1.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              238,
-              145
-            ],
-            "resultado": 383,
-            "passos": [
-              {
-                "coluna": "U",
-                "fala": "8 + 5 = 13. Escrevo 3, vai 1.",
-                "digito": 3,
-                "vaiUm": 1
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "2) Some D com o 'vai 1': 3 + 4 + 1 = 8.",
-        "exemploReal": {
-          "contexto": "3+4=7, +1 = 8.",
-          "destaque": "D = 8.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              238,
-              145
-            ],
-            "resultado": 383,
-            "passos": [
-              {
-                "coluna": "D",
-                "fala": "3 + 4 + 1 = 8.",
-                "digito": 8
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "3) Some C: 2 + 1 = 3.",
-        "exemploReal": {
-          "contexto": "Sem reagrupar aqui.",
+          "contexto": "Some U, depois D (com o 'vai 1'), depois C.",
           "destaque": "238 + 145 = 383.",
           "contaPassoAPasso": {
             "operacao": "soma",
-            "operandos": [
-              238,
-              145
-            ],
+            "operandos": [238, 145],
             "resultado": 383,
             "passos": [
-              {
-                "coluna": "C",
-                "fala": "2 + 1 = 3.",
-                "digito": 3
-              }
+              { "coluna": "U", "fala": "Unidades: 8 + 5 = 13. Escrevo 3, vai 1 para a dezena.", "digito": 3, "vaiUm": 1 },
+              { "coluna": "D", "fala": "Dezenas: 3 + 4 + 1 = 8. Escrevo 8.", "digito": 8 },
+              { "coluna": "C", "fala": "Centenas: 2 + 1 = 3. Escrevo 3.", "digito": 3 }
             ]
           }
-        }
-      },
-      {
-        "texto": "IDEIA: 10 U = 1 D — por isso 'vai 1'.",
-        "exemploReal": {
-          "contexto": "13 U = 1 D + 3 U.",
-          "destaque": "Reagrupar é trocar 10 por 1."
         }
       }
     ]

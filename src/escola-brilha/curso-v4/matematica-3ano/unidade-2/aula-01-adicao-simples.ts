@@ -43,79 +43,18 @@ export const aula01_adicaoSimples: AulaV4 = {
     "titulo": "Adição sem reagrupamento",
     "etapas": [
       {
-        "texto": "1) Alinhe pela direita (U sob U, D sob D, C sob C).",
+        "texto": "Vamos armar 234 + 152 e resolver coluna por coluna, da direita pra esquerda.",
         "exemploReal": {
-          "contexto": "234 + 152 alinhados.",
-          "destaque": "Colunas prontas.",
-          "casasValor": {
-            "numero": 234,
-            "mostrarDecomposicao": true,
-            "extenso": "duzentos e trinta e quatro"
-          }
-        }
-      },
-      {
-        "texto": "2) Some UNIDADES: 4 + 2 = 6.",
-        "exemploReal": {
-          "contexto": "U:4+2=6.",
-          "destaque": "U = 6.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              234,
-              152
-            ],
-            "resultado": 386,
-            "passos": [
-              {
-                "coluna": "U",
-                "fala": "4 + 2 = 6.",
-                "digito": 6
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "3) Some DEZENAS: 3 + 5 = 8.",
-        "exemploReal": {
-          "contexto": "D:3+5=8.",
-          "destaque": "D = 8.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              234,
-              152
-            ],
-            "resultado": 386,
-            "passos": [
-              {
-                "coluna": "D",
-                "fala": "3 + 5 = 8.",
-                "digito": 8
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "4) Some CENTENAS: 2 + 1 = 3.",
-        "exemploReal": {
-          "contexto": "C:2+1=3.",
+          "contexto": "Somamos U, depois D, depois C.",
           "destaque": "234 + 152 = 386.",
           "contaPassoAPasso": {
             "operacao": "soma",
-            "operandos": [
-              234,
-              152
-            ],
+            "operandos": [234, 152],
             "resultado": 386,
             "passos": [
-              {
-                "coluna": "C",
-                "fala": "2 + 1 = 3.",
-                "digito": 3
-              }
+              { "coluna": "U", "fala": "Unidades: 4 + 2 = 6. Escrevo 6.", "digito": 6 },
+              { "coluna": "D", "fala": "Dezenas: 3 + 5 = 8. Escrevo 8.", "digito": 8 },
+              { "coluna": "C", "fala": "Centenas: 2 + 1 = 3. Escrevo 3.", "digito": 3 }
             ]
           }
         }

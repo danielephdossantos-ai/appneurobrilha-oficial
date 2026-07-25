@@ -36,68 +36,18 @@ export const aula05_subtracaoComTroca: AulaV4 = {
     "titulo": "Subtração com reagrupamento",
     "etapas": [
       {
-        "texto": "1) 534 − 178. U: 4 − 8. Não dá!",
+        "texto": "Vamos armar 534 − 178. Quando o de cima é menor, pedimos emprestado da próxima coluna.",
         "exemploReal": {
-          "contexto": "Peço 1 dezena emprestada.",
-          "destaque": "4 vira 14.",
-          "contaPassoAPasso": {
-            "operacao": "sub",
-            "operandos": [
-              534,
-              178
-            ],
-            "resultado": 356,
-            "passos": [
-              {
-                "coluna": "U",
-                "fala": "Peço 1 D emprestada: 4 vira 14. 14 − 8 = 6.",
-                "digito": 6,
-                "porque": "Emprestado da dezena."
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "2) Agora D: era 3, virou 2 (emprestou). 2 − 7? Não dá!",
-        "exemploReal": {
-          "contexto": "Peço 1 C emprestada: 2 vira 12.",
-          "destaque": "12 − 7 = 5.",
-          "contaPassoAPasso": {
-            "operacao": "sub",
-            "operandos": [
-              534,
-              178
-            ],
-            "resultado": 356,
-            "passos": [
-              {
-                "coluna": "D",
-                "fala": "Emprestei 1 C: 2 vira 12. 12 − 7 = 5.",
-                "digito": 5
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "3) C: era 5, virou 4. 4 − 1 = 3.",
-        "exemploReal": {
-          "contexto": "",
+          "contexto": "1 D vira 10 U · 1 C vira 10 D.",
           "destaque": "534 − 178 = 356.",
           "contaPassoAPasso": {
             "operacao": "sub",
-            "operandos": [
-              534,
-              178
-            ],
+            "operandos": [534, 178],
             "resultado": 356,
             "passos": [
-              {
-                "coluna": "C",
-                "fala": "5 (agora 4) − 1 = 3.",
-                "digito": 3
-              }
+              { "coluna": "U", "fala": "Unidades: 4 − 8 não dá. Peço 1 D emprestada: 4 vira 14. 14 − 8 = 6.", "digito": 6, "porque": "Emprestado da dezena." },
+              { "coluna": "D", "fala": "Dezenas: 3 virou 2 (emprestou). 2 − 7 não dá. Peço 1 C emprestada: 2 vira 12. 12 − 7 = 5.", "digito": 5, "porque": "Emprestado da centena." },
+              { "coluna": "C", "fala": "Centenas: 5 virou 4 (emprestou). 4 − 1 = 3.", "digito": 3 }
             ]
           }
         }

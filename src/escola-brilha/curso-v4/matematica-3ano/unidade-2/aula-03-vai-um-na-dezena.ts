@@ -40,68 +40,18 @@ export const aula03_vaiUmDezena: AulaV4 = {
     "titulo": "Reagrupar na dezena",
     "etapas": [
       {
-        "texto": "1) 372 + 261. U: 2+1=3.",
+        "texto": "Vamos armar 372 + 261. Se a coluna das dezenas passar de 9, sobe 1 pra centena.",
         "exemploReal": {
-          "contexto": "Sem reagrupar.",
-          "destaque": "U = 3.",
+          "contexto": "10 D = 1 C.",
+          "destaque": "372 + 261 = 633.",
           "contaPassoAPasso": {
             "operacao": "soma",
-            "operandos": [
-              372,
-              261
-            ],
+            "operandos": [372, 261],
             "resultado": 633,
             "passos": [
-              {
-                "coluna": "U",
-                "fala": "2+1=3.",
-                "digito": 3
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "2) D: 7+6=13. Escrevo 3, vai 1.",
-        "exemploReal": {
-          "contexto": "13 D = 1 C + 3 D.",
-          "destaque": "D = 3, sobe 1.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              372,
-              261
-            ],
-            "resultado": 633,
-            "passos": [
-              {
-                "coluna": "D",
-                "fala": "7+6=13. Escrevo 3, vai 1.",
-                "digito": 3,
-                "vaiUm": 1
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "3) C: 3+2+1=6.",
-        "exemploReal": {
-          "contexto": "Somei o 'vai 1'.",
-          "destaque": "372+261 = 633.",
-          "contaPassoAPasso": {
-            "operacao": "soma",
-            "operandos": [
-              372,
-              261
-            ],
-            "resultado": 633,
-            "passos": [
-              {
-                "coluna": "C",
-                "fala": "3+2+1=6.",
-                "digito": 6
-              }
+              { "coluna": "U", "fala": "Unidades: 2 + 1 = 3. Escrevo 3.", "digito": 3 },
+              { "coluna": "D", "fala": "Dezenas: 7 + 6 = 13. Escrevo 3, vai 1 para a centena.", "digito": 3, "vaiUm": 1 },
+              { "coluna": "C", "fala": "Centenas: 3 + 2 + 1 = 6. Escrevo 6.", "digito": 6 }
             ]
           }
         }
