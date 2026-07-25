@@ -213,4 +213,9 @@ export const aula04_lerNumeros: AulaV4 = {
     ],
     registro: "📸 Foto da folha com os 5 números.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

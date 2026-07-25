@@ -211,4 +211,9 @@ export const aula02_valorPosicional: AulaV4 = {
     ],
     registro: "📸 Foto da caixa com o último número montado.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

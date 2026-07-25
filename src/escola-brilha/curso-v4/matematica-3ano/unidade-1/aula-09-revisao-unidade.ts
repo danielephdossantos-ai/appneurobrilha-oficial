@@ -200,4 +200,9 @@ export const aula09_revisaoUnidade: AulaV4 = {
     ],
     registro: "📸 Foto do papel com as 5 estações marcadas.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

@@ -201,4 +201,9 @@ export const aula05_compararNumeros: AulaV4 = {
     ],
     registro: "📸 Foto do duelo final com o vencedor.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

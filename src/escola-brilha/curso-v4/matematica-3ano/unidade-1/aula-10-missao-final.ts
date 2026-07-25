@@ -193,4 +193,9 @@ export const aula10_missaoFinal: AulaV4 = {
     ],
     registro: "📸 Foto do diploma pronto e assinado.",
   },
+  recompensa: {
+    xp: 300,
+    moedas: 150,
+    medalha: "Guardião(ã) da Cidade dos Números",
+  },
 };

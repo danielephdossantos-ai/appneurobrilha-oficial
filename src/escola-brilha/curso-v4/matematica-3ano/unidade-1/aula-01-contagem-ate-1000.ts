@@ -218,4 +218,9 @@ export const aula01_contagemAte1000: AulaV4 = {
     ],
     registro: "📸 Foto do 'seu 132' montado com potes e copinhos.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

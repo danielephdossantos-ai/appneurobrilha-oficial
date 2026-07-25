@@ -221,4 +221,9 @@ export const aula06_ordenarNumeros: AulaV4 = {
     ],
     registro: "📸 Foto da fila crescente final.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

@@ -203,4 +203,9 @@ export const aula03_aCentena: AulaV4 = {
     ],
     registro: "📸 Foto do 1º prédio pronto.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

@@ -202,4 +202,9 @@ export const aula07_arredondar: AulaV4 = {
     ],
     registro: "📸 Foto do recibo com as estimativas ao lado.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };

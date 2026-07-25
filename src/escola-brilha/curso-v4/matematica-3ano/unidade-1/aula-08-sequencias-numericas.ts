@@ -199,4 +199,9 @@ export const aula08_sequenciasNumericas: AulaV4 = {
     ],
     registro: "📸 Foto da sequência escrita.",
   },
+  recompensa: {
+    xp: 120,
+    moedas: 60,
+    medalha: "Explorador(a) da Cidade dos Números",
+  },
 };
