@@ -329,10 +329,12 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
+  const contaMD = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-sm text-amber-300">🧠 Brilha pensa em voz alta:</div>
       <div className="text-lg font-medium">{m.enunciado}</div>
+
 
       {m.colecaoVisual && (
         <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50">
@@ -384,7 +386,11 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         </div>
       )}
 
-      {m.casasValor && <CasasValor {...m.casasValor} />}
+      {contaMD ? (
+        <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
+      ) : (
+        m.casasValor && <CasasValor {...m.casasValor} />
+      )}
 
       {!m.colecaoVisual && !m.casasValor && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
@@ -407,9 +413,11 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
 
 function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
   const conta = detectarContaNoTexto(m.enunciado);
+  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
         💡 Dica: {m.dica}
@@ -421,22 +429,27 @@ function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
 
 function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
   const conta = detectarContaNoTexto(m.enunciado);
+  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
 }
 
+
 function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
   const conta = detectarContaNoTexto(`${m.contexto} ${m.problema}`);
+  const md = detectarMultDivNoTexto(`${m.contexto} ${m.problema}`);
   return (
     <Card>
       <div className="text-sm text-amber-300">🌎 Na vida real:</div>
       <div>{m.contexto}</div>
       <div className="text-lg font-bold">{m.problema}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
@@ -444,11 +457,11 @@ function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
 }
 
 function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
-  const contaMini = m.miniDesafio
-    ? detectarContaNoTexto(
-        `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`,
-      )
-    : undefined;
+  const textoMini = m.miniDesafio
+    ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
+    : "";
+  const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
+  const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
     <Card>
       <div className="text-sm text-amber-300">🔁 Lembrando o que já sabemos:</div>
@@ -457,6 +470,7 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
+      {mdMini && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
       {contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
@@ -481,12 +495,14 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
           grupoUnico && typeof q.tirar === "number" && q.tirar! > 0;
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
+        const md = detectarMultDivNoTexto(q.pergunta);
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
           <div className="font-medium mb-3">
             {qi + 1}. {q.pergunta}
           </div>
+          {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
           {conta && (
             <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
           )}
@@ -1686,6 +1702,161 @@ function detectarContaNoTexto(
   if (!Number.isFinite(a) || !Number.isFinite(b)) return undefined;
   const op: "soma" | "subtracao" = m[2] === "+" ? "soma" : "subtracao";
   return { a, b, operacao: op };
+}
+
+/**
+ * Detecta um padrão simples "A × B" ou "A ÷ B" no texto. Aceita ×, x, *, ÷, /.
+ * Retorna undefined se não achar.
+ */
+function detectarMultDivNoTexto(
+  texto: string,
+): { a: number; b: number; operacao: "mult" | "div" } | undefined {
+  const m = texto.match(/(\d{1,4})\s*([×x*÷/])\s*(\d{1,4})/i);
+  if (!m) return undefined;
+  const a = parseInt(m[1], 10);
+  const b = parseInt(m[3], 10);
+  if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return undefined;
+  const op: "mult" | "div" = m[2] === "÷" || m[2] === "/" ? "div" : "mult";
+  return { a, b, operacao: op };
+}
+
+/**
+ * Tabuada interativa passo a passo. Mostra fator × 1..ate com resultados
+ * ocultos. A cada clique em "Continuar", revela o resultado da próxima
+ * linha, com destaque na linha-alvo (targetN) quando ela é revelada.
+ * Substitui CasasValor em multiplicação/divisão, seguindo o método real
+ * de ensino: a criança acompanha a tabuada até chegar no resultado.
+ */
+function TabuadaInterativa({
+  fator,
+  ate = 10,
+  targetN,
+  operacao = "mult",
+  dividendo,
+}: {
+  fator: number;
+  ate?: number;
+  targetN?: number;
+  operacao?: "mult" | "div";
+  dividendo?: number;
+}) {
+  const [revelados, setRevelados] = useState(0); // quantas linhas já tiveram resultado revelado
+  const terminou = revelados >= ate;
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
+        {operacao === "div"
+          ? `Tabuada do ${fator} — quantas vezes cabe em ${dividendo ?? "?"}`
+          : `Tabuada do ${fator}`}
+      </div>
+      <div className="flex flex-col gap-1 font-mono text-lg tabular-nums max-w-[16rem] mx-auto">
+        {Array.from({ length: ate }).map((_, k) => {
+          const n = k + 1;
+          const r = fator * n;
+          const revelado = k < revelados;
+          const eAlvo =
+            revelado && targetN !== undefined && n === targetN;
+          return (
+            <div
+              key={k}
+              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end items-center rounded px-2 py-0.5 ${
+                eAlvo ? "bg-amber-300 font-black" : ""
+              }`}
+            >
+              <span>{fator}</span>
+              <span>×</span>
+              <span>{n}</span>
+              <span>=</span>
+              <span className={revelado ? "font-bold" : "text-[#0d1f55]/25"}>
+                {revelado ? r : "?"}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      {!terminou ? (
+        <button
+          type="button"
+          onClick={() => setRevelados((v) => Math.min(ate, v + 1))}
+          className="mt-3 mx-auto block px-4 py-2 rounded-lg bg-amber-500 text-white font-bold hover:bg-amber-600"
+        >
+          Continuar ▶
+        </button>
+      ) : (
+        <div className="mt-3 text-center text-sm font-bold text-emerald-600">
+          Tabuada completa ✅
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Tabuada estática de consulta — aparece no topo das atividades pra
+ * criança consultar enquanto resolve.
+ */
+function TabuadaReferencia({
+  fator,
+  ate = 10,
+  targetN,
+}: {
+  fator: number;
+  ate?: number;
+  targetN?: number;
+}) {
+  return (
+    <div className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
+        📖 Tabuada do {fator} — consulte
+      </div>
+      <div className="flex flex-col gap-0.5 font-mono text-sm tabular-nums">
+        {Array.from({ length: ate }).map((_, k) => {
+          const n = k + 1;
+          const eAlvo = targetN !== undefined && n === targetN;
+          return (
+            <div
+              key={k}
+              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end rounded px-1 ${
+                eAlvo ? "bg-amber-300 font-black" : ""
+              }`}
+            >
+              <span>{fator}</span>
+              <span>×</span>
+              <span>{n}</span>
+              <span>=</span>
+              <span className="font-bold">{fator * n}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Escolhe qual tabuada usar a partir de uma conta detectada.
+ * Multiplicação: usa o menor fator; targetN = maior fator.
+ * Divisão A ÷ B: usa a tabuada de B; targetN = A/B (se inteiro).
+ */
+function tabuadaDeConta(c: { a: number; b: number; operacao: "mult" | "div" }) {
+  if (c.operacao === "div") {
+    const q = c.a / c.b;
+    return {
+      fator: c.b,
+      ate: Math.max(10, Math.ceil(q)),
+      targetN: Number.isInteger(q) ? q : undefined,
+      operacao: "div" as const,
+      dividendo: c.a,
+    };
+  }
+  const menor = Math.min(c.a, c.b);
+  const maior = Math.max(c.a, c.b);
+  return {
+    fator: menor,
+    ate: Math.max(10, maior),
+    targetN: maior,
+    operacao: "mult" as const,
+  };
 }
 
 /**
