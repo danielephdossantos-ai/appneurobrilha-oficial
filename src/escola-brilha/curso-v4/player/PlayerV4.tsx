@@ -521,7 +521,18 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
-      {mdMini && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
+      {mdMini && mdMini.operacao === "mult" && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
+      {mdMini && mdMini.operacao === "div" && (
+        <InteracaoView
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: "div",
+            operandos: [mdMini.a, mdMini.b],
+            resultado: Math.floor(mdMini.a / mdMini.b),
+            passos: [],
+          }}
+        />
+      )}
       {contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
@@ -556,7 +567,18 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
             </span>
             <div className="font-medium">{q.pergunta}</div>
           </div>
-          {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
+          {md && md.operacao === "mult" && <TabuadaReferencia {...tabuadaDeConta(md)} />}
+          {md && md.operacao === "div" && (
+            <InteracaoView
+              i={{
+                tipo: "contaPassoAPasso",
+                operacao: "div",
+                operandos: [md.a, md.b],
+                resultado: Math.floor(md.a / md.b),
+                passos: [],
+              }}
+            />
+          )}
           {conta && (
             <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
           )}
