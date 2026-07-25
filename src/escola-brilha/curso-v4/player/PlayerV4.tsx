@@ -2076,7 +2076,7 @@ function ComparacaoCasas({ numeros }: { numeros: number[] }) {
           </div>
         ))}
         {rows.map((r, ri) => (
-          <React.Fragment key={ri}>
+          <Fragment key={ri}>
             <div className="text-xs font-bold pr-2 self-center whitespace-nowrap tabular-nums">
               {numeros[ri].toLocaleString("pt-BR")}
             </div>
@@ -2097,7 +2097,7 @@ function ComparacaoCasas({ numeros }: { numeros: number[] }) {
                 </div>
               );
             })}
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
       {diffCol >= 0 && (
