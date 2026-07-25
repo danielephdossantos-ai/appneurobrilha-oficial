@@ -468,6 +468,10 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
   if (conta) {
     return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
   }
+  const cmp = detectarComparacaoNoTexto(texto);
+  if (cmp) {
+    return <ComparacaoCasas numeros={cmp} />;
+  }
   return null;
 }
 
