@@ -2099,6 +2099,11 @@ function MultiplicacaoArmada({
         const nextCarry = Math.floor(raw / 10);
         const col = calcWidth - 1 - pos - offset;
         const revealCols = [col];
+        if (offset === 0 && pos > 0) {
+          for (let z = col + 1; z < calcWidth; z += 1) {
+            revealCols.push(z);
+          }
+        }
         const isLastTopDigit = offset === topDigits.length - 1;
         if (isLastTopDigit && nextCarry > 0) revealCols.push(col - 1);
         const casa = pos === 0 ? "unidade" : pos === 1 ? "dezena" : pos === 2 ? "centena" : `${pos + 1}ª casa`;
