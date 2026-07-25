@@ -3,10 +3,9 @@ import type { AulaV4 } from "../../types";
 /**
  * Aula-piloto "escola particular top" — Trinômio Quadrado Perfeito.
  *
- * Formato: passo-a-passo interativo. A criança clica "Continuar" e a
- * fatoração aparece linha por linha, igual conta armada de adição.
- * Nada de texto corrido. Cada etapa da explicação = 1 headline curta
- * + 1 visual `trinomioPassoAPasso` que faz o trabalho.
+ * Formato: conta armada + passo a passo interativo. Cada passo tem uma
+ * explicação CURTA (1 linha) e uma explicação LONGA do professor,
+ * expansível, cuidando de sinais (−, ², +, ·) e pontuação.
  */
 export const aula04_trinomio: AulaV4 = {
   slug: "u3-04-trinomio",
@@ -51,7 +50,7 @@ export const aula04_trinomio: AulaV4 = {
   momento04_explicacao: {
     titulo: "Fatorar TQP — clicando passo a passo",
     etapas: [
-      // Etapa 1 — teste das 3 condições (caso mais simples)
+      // Etapa 1 — caso simples
       {
         texto: "Fatorar x² + 6x + 9. Clica em Continuar e veja cada passo.",
         exemploReal: {
@@ -61,11 +60,41 @@ export const aula04_trinomio: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "x² + 6x + 9",
             passos: [
-              { expr: "√x² = x", explica: "Raiz exata do 1º termo. Guardo: a = x.", status: "ok" },
-              { expr: "√9 = 3", explica: "Raiz exata do 3º termo. Guardo: b = 3.", status: "ok" },
-              { expr: "2·x·3 = 6x", explica: "Testo o meio. Bate com o 6x do trinômio.", status: "ok" },
-              { expr: "sinal do meio: +", explica: "Dentro do parêntese vai '+'.", status: "neutro" },
-              { expr: "(x + 3)²", explica: "Escrevo a fatoração final.", status: "ok" },
+              {
+                expr: "√x² = x",
+                explica: "Raiz exata do 1º termo. Guardo: a = x.",
+                status: "ok",
+                professor:
+                  "Todo TQP tem a forma a² + 2·a·b + b². O primeiro passo é achar 'a', que é a raiz quadrada do 1º termo. Aqui o 1º termo é x². A raiz quadrada de x² é x, porque x · x = x². Guardamos: a = x.",
+              },
+              {
+                expr: "√9 = 3",
+                explica: "Raiz exata do 3º termo. Guardo: b = 3.",
+                status: "ok",
+                professor:
+                  "Agora achamos 'b', que é a raiz quadrada do 3º termo. O 3º termo é 9. A raiz de 9 é 3, porque 3 · 3 = 9. Repare: mesmo quando o meio do trinômio for negativo, o 3º termo continua positivo — porque é um número ao quadrado, e quadrado nunca dá negativo. Guardamos: b = 3.",
+              },
+              {
+                expr: "2·x·3 = 6x",
+                explica: "Testo o meio. Bate com o 6x do trinômio.",
+                status: "ok",
+                professor:
+                  "Aqui está o TESTE que confirma se é mesmo um TQP. Calculamos 2 · a · b, ou seja, 2 · x · 3, que dá 6x. Comparamos com o termo do meio do trinômio original (6x). Bateu! Então x² + 6x + 9 é, de fato, um trinômio quadrado perfeito.",
+              },
+              {
+                expr: "sinal do meio: +",
+                explica: "Dentro do parêntese vai '+'.",
+                status: "neutro",
+                professor:
+                  "O sinal do 2º termo do trinômio decide o sinal DENTRO do parêntese na forma fatorada. Como o meio é +6x (positivo), dentro do parêntese vai o sinal +. Se fosse −6x, iria −.",
+              },
+              {
+                expr: "(x + 3)²",
+                explica: "Escrevo a fatoração final.",
+                status: "ok",
+                professor:
+                  "Juntando tudo: a = x, b = 3, sinal do meio +, então a forma fatorada é (x + 3)². Para conferir, basta desenvolver: (x + 3)² = x² + 2·x·3 + 3² = x² + 6x + 9. ✅",
+              },
             ],
             fatorada: "(x + 3)²",
           },
@@ -82,11 +111,42 @@ export const aula04_trinomio: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "x² − 10x + 25",
             passos: [
-              { expr: "√x² = x", explica: "1º termo: raiz exata.", status: "ok" },
-              { expr: "√25 = 5", explica: "3º termo: raiz exata. O 25 continua POSITIVO — número ao quadrado nunca é negativo.", status: "ok" },
-              { expr: "2·x·5 = 10x", explica: "Meio bate (só o sinal é negativo).", status: "ok" },
-              { expr: "sinal do meio: −", explica: "Dentro do parêntese vai '−'.", status: "neutro" },
-              { expr: "(x − 5)²", explica: "Fatoração final.", status: "ok" },
+              {
+                expr: "√x² = x",
+                explica: "1º termo: raiz exata.",
+                status: "ok",
+                professor:
+                  "Começamos igual: a raiz do 1º termo (x²) é x. Guardamos a = x. Note que o sinal do 1º termo é sempre positivo — não existe TQP começando com termo negativo.",
+              },
+              {
+                expr: "√25 = 5",
+                explica:
+                  "3º termo: raiz exata. O 25 continua POSITIVO — número ao quadrado nunca é negativo.",
+                status: "ok",
+                professor:
+                  "A raiz de 25 é 5, porque 5 · 5 = 25. Cuidado com o mito de que 'o meio negativo torna tudo negativo' — não! O 3º termo continua positivo. Só o sinal do MEIO muda a fatoração.",
+              },
+              {
+                expr: "2·x·5 = 10x",
+                explica: "Meio bate (só o sinal é negativo).",
+                status: "ok",
+                professor:
+                  "Fazemos o teste: 2 · a · b = 2 · x · 5 = 10x. O trinômio tem −10x no meio. Os NÚMEROS batem (10 = 10). O que muda é o sinal, e é justamente o sinal que vai dizer se a fatoração é (a + b)² ou (a − b)².",
+              },
+              {
+                expr: "sinal do meio: −",
+                explica: "Dentro do parêntese vai '−'.",
+                status: "neutro",
+                professor:
+                  "Como o 2º termo é −10x (negativo), dentro do parêntese vai o sinal '−'. Regra prática: sinal do meio do trinômio = sinal dentro do parêntese.",
+              },
+              {
+                expr: "(x − 5)²",
+                explica: "Fatoração final.",
+                status: "ok",
+                professor:
+                  "Forma fatorada: (x − 5)². Conferindo: (x − 5)² = x² − 2·x·5 + 5² = x² − 10x + 25. ✅ Bateu.",
+              },
             ],
             fatorada: "(x − 5)²",
           },
@@ -103,11 +163,41 @@ export const aula04_trinomio: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "4x² + 12x + 9",
             passos: [
-              { expr: "√4x² = 2x", explica: "Cuidado: NÃO é x. É 2x, porque √4 = 2.", status: "ok" },
-              { expr: "√9 = 3", explica: "Raiz do 3º termo.", status: "ok" },
-              { expr: "2·(2x)·3 = 12x", explica: "Meio bate.", status: "ok" },
-              { expr: "sinal do meio: +", explica: "Vai '+' dentro do parêntese.", status: "neutro" },
-              { expr: "(2x + 3)²", explica: "Fatoração final.", status: "ok" },
+              {
+                expr: "√4x² = 2x",
+                explica: "Cuidado: NÃO é x. É 2x, porque √4 = 2.",
+                status: "ok",
+                professor:
+                  "Erro comum: pensar que a raiz de 4x² é x. NÃO É. Separamos: √4 · √x² = 2 · x = 2x. Sempre que houver coeficiente no 1º termo, tire a raiz do número TAMBÉM. Guardamos a = 2x.",
+              },
+              {
+                expr: "√9 = 3",
+                explica: "Raiz do 3º termo.",
+                status: "ok",
+                professor:
+                  "A raiz de 9 é 3. Guardamos b = 3. Nada de novo aqui.",
+              },
+              {
+                expr: "2·(2x)·3 = 12x",
+                explica: "Meio bate.",
+                status: "ok",
+                professor:
+                  "Teste do meio: 2 · a · b = 2 · (2x) · 3 = 12x. O trinômio tem +12x no meio. Bateu! Confirmado que é TQP. Preste atenção nos parênteses em (2x): 2 · 2x · 3 = 12x, e não 2 · x · 3.",
+              },
+              {
+                expr: "sinal do meio: +",
+                explica: "Vai '+' dentro do parêntese.",
+                status: "neutro",
+                professor:
+                  "Meio positivo (+12x) → dentro do parêntese vai '+'.",
+              },
+              {
+                expr: "(2x + 3)²",
+                explica: "Fatoração final.",
+                status: "ok",
+                professor:
+                  "Fatorada: (2x + 3)². Conferindo: (2x + 3)² = (2x)² + 2·(2x)·3 + 3² = 4x² + 12x + 9. ✅",
+              },
             ],
             fatorada: "(2x + 3)²",
           },
@@ -124,9 +214,28 @@ export const aula04_trinomio: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "x² + 5x + 9",
             passos: [
-              { expr: "√x² = x", explica: "1º termo ok.", status: "ok" },
-              { expr: "√9 = 3", explica: "3º termo ok.", status: "ok" },
-              { expr: "2·x·3 = 6x", explica: "Meio deveria ser 6x, mas o trinômio tem 5x. Falhou.", status: "x" },
+              {
+                expr: "√x² = x",
+                explica: "1º termo ok.",
+                status: "ok",
+                professor:
+                  "Raiz de x² é x. Até aqui, tudo bem — parece um TQP.",
+              },
+              {
+                expr: "√9 = 3",
+                explica: "3º termo ok.",
+                status: "ok",
+                professor:
+                  "Raiz de 9 é 3. Também bate. Mas atenção: só o 1º e o 3º termos serem quadrados perfeitos NÃO garante que o trinômio seja TQP. O teste do meio é obrigatório.",
+              },
+              {
+                expr: "2·x·3 = 6x",
+                explica:
+                  "Meio deveria ser 6x, mas o trinômio tem 5x. Falhou.",
+                status: "x",
+                professor:
+                  "Teste do meio: 2 · x · 3 = 6x. Mas o trinômio traz 5x no meio. 6x ≠ 5x → NÃO é trinômio quadrado perfeito. Esse é o famoso 'falso alarme'. Nesse caso, usamos outra técnica de fatoração (ex.: soma e produto, Bhaskara ou grupamento).",
+              },
             ],
             falha: "Não é TQP. Precisa de outra técnica de fatoração.",
           },
@@ -150,11 +259,40 @@ export const aula04_trinomio: AulaV4 = {
       tipo: "trinomioPassoAPasso",
       trinomio: "x² + 10x + 25",
       passos: [
-        { expr: "√x² = x", explica: "Raiz do 1º.", status: "ok" },
-        { expr: "√25 = 5", explica: "Raiz do 3º.", status: "ok" },
-        { expr: "2·x·5 = 10x", explica: "Meio bate.", status: "ok" },
-        { expr: "sinal: +", explica: "Vai '+' dentro do parêntese.", status: "neutro" },
-        { expr: "(x + 5)²", explica: "Fatoração final. Confira: (x+5)² = x² + 10x + 25 ✔", status: "ok" },
+        {
+          expr: "√x² = x",
+          explica: "Raiz do 1º.",
+          status: "ok",
+          professor: "Raiz quadrada do 1º termo (x²) é x. Guardamos a = x.",
+        },
+        {
+          expr: "√25 = 5",
+          explica: "Raiz do 3º.",
+          status: "ok",
+          professor:
+            "Raiz quadrada do 3º termo (25) é 5, porque 5 · 5 = 25. Guardamos b = 5.",
+        },
+        {
+          expr: "2·x·5 = 10x",
+          explica: "Meio bate.",
+          status: "ok",
+          professor:
+            "Teste: 2 · a · b = 2 · x · 5 = 10x. O trinômio tem +10x. Bateu! É TQP.",
+        },
+        {
+          expr: "sinal: +",
+          explica: "Vai '+' dentro do parêntese.",
+          status: "neutro",
+          professor:
+            "Como o meio é positivo (+10x), o sinal dentro do parêntese é '+'.",
+        },
+        {
+          expr: "(x + 5)²",
+          explica: "Fatoração final. Confira: (x+5)² = x² + 10x + 25 ✔",
+          status: "ok",
+          professor:
+            "Forma fatorada: (x + 5)². Conferindo: (x + 5)² = x² + 2·x·5 + 5² = x² + 10x + 25. ✅",
+        },
       ],
       fatorada: "(x + 5)²",
       legenda: "Modelagem — Brilha resolve",
