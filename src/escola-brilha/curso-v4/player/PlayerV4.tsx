@@ -145,20 +145,8 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
   };
   return (
     <section id={id} className="scroll-mt-24">
-      <div className="flex items-center justify-between gap-3 mb-2">
+      <div className="mb-2">
         <div className="text-xs uppercase tracking-wider text-amber-300">{label}</div>
-        <button
-          onClick={ouvir}
-          data-no-tts
-          aria-label={falando ? "Parar leitura" : "Escutar explicação"}
-          className={`shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition ${
-            falando
-              ? "bg-red-500 text-white border-red-300 animate-pulse"
-              : "bg-white/10 text-white border-white/30 hover:bg-white/20"
-          }`}
-        >
-          {falando ? "⏸ Parar" : "🔊 Escutar explicação"}
-        </button>
       </div>
       {children}
     </section>
