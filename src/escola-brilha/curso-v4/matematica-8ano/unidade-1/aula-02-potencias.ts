@@ -120,7 +120,7 @@ export const aula02_potencias: AulaV4 = {
             passos: [
               { expr: "(−2)² = (−2) · (−2)", explica: "Parênteses → a base é −2.", status: "neutro", professor: "Os parênteses são DECISIVOS: eles dizem que a base é o número negativo −2. Elevo o −2 inteiro ao quadrado." },
               { expr: "(−2)² = +4", explica: "Menos × menos = mais.", status: "ok", professor: "(−) × (−) = (+). Resultado POSITIVO." },
-              { expr: "−2² = −(2 · 2)", explica: "SEM parênteses → só o 2 é a base.", status: "erro", professor: "SEM parênteses, o expoente age SÓ no 2. O sinal de menos fica DE FORA da potência." },
+              { expr: "−2² = −(2 · 2)", explica: "SEM parênteses → só o 2 é a base.", status: "x", professor: "SEM parênteses, o expoente age SÓ no 2. O sinal de menos fica DE FORA da potência." },
               { expr: "−2² = −4", explica: "Resultado NEGATIVO.", status: "ok", professor: "Primeiro calculo 2² = 4. Depois aplico o sinal de menos: −4. Regra: parênteses definem quem é a base." },
             ],
             fatorada: "(−2)² = +4    ·    −2² = −4",

@@ -113,7 +113,7 @@ export const aula04_notacaoPequeno: AulaV4 = {
               { expr: "10⁻³ = 1/10³", explica: "Expoente negativo INVERTE.", status: "neutro", professor: "Da aula 02: a⁻ⁿ = 1/aⁿ. O expoente negativo INVERTE, não vira sinal negativo." },
               { expr: "10³ = 1000", explica: "Base positiva elevada a positivo é positivo.", status: "ok" },
               { expr: "10⁻³ = 1/1000 = 0,001", explica: "Positivo pequeno.", status: "ok", professor: "0,001 é POSITIVO. Está entre 0 e 1, mas nunca deixa de ser positivo. Número negativo seria −0,001 (com sinal). Sinal do EXPOENTE não é sinal do VALOR." },
-              { expr: "≠ −1000", explica: "Contra-exemplo.", status: "erro", professor: "Se alguém disser que 10⁻³ = −1000, está errando dois conceitos: (i) confundindo sinal do expoente com sinal do valor, e (ii) mudando o módulo." },
+              { expr: "≠ −1000", explica: "Contra-exemplo.", status: "x", professor: "Se alguém disser que 10⁻³ = −1000, está errando dois conceitos: (i) confundindo sinal do expoente com sinal do valor, e (ii) mudando o módulo." },
             ],
             fatorada: "10⁻³ = 0,001 (positivo, pequeno)",
           },

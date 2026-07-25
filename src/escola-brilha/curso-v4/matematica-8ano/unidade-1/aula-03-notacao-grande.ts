@@ -113,7 +113,7 @@ export const aula03_notacaoGrande: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "12 · 10⁵ está certo?",
             passos: [
-              { expr: "12 · 10⁵", explica: "Mantissa = 12.", status: "erro", professor: "ERRADO como notação científica. A mantissa (12) tem 2 dígitos antes da vírgula — precisa ter apenas 1, entre 1 e 10." },
+              { expr: "12 · 10⁵", explica: "Mantissa = 12.", status: "x", professor: "ERRADO como notação científica. A mantissa (12) tem 2 dígitos antes da vírgula — precisa ter apenas 1, entre 1 e 10." },
               { expr: "Ajuste: 12 = 1,2 · 10¹", explica: "Ajusto a mantissa.", status: "ok", professor: "Movo a vírgula 1 casa para deixar só 1 dígito antes: 12 = 1,2 · 10¹." },
               { expr: "12 · 10⁵ = 1,2 · 10¹ · 10⁵", explica: "Substituo.", status: "ok" },
               { expr: "= 1,2 · 10¹⁺⁵ = 1,2 · 10⁶", explica: "Mesma base 10 → soma expoentes.", status: "ok", professor: "1 + 5 = 6. Notação científica CORRETA: 1,2 · 10⁶." },

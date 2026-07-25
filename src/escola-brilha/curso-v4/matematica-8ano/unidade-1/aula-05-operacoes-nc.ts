@@ -131,7 +131,7 @@ export const aula05_operacoesNC: AulaV4 = {
             trinomio: "(5 · 10³) · (4 · 10²)",
             passos: [
               { expr: "(5 · 10³) · (4 · 10²)", explica: "Aplico a regra.", status: "neutro" },
-              { expr: "= 20 · 10⁵", explica: "Mantissas: 5·4 = 20.", status: "erro", professor: "Cuidado: a mantissa 20 está FORA de [1, 10). Como notação científica isso está INCORRETO, precisa ajustar." },
+              { expr: "= 20 · 10⁵", explica: "Mantissas: 5·4 = 20.", status: "x", professor: "Cuidado: a mantissa 20 está FORA de [1, 10). Como notação científica isso está INCORRETO, precisa ajustar." },
               { expr: "20 = 2 · 10¹", explica: "Reescrevo a mantissa.", status: "ok", professor: "Movo a vírgula 1 casa à esquerda em 20 → 2,0. Ganho +1 no expoente." },
               { expr: "= 2 · 10¹ · 10⁵ = 2 · 10⁶", explica: "Soma expoentes.", status: "ok" },
             ],
@@ -152,7 +152,7 @@ export const aula05_operacoesNC: AulaV4 = {
       passos: [
         { expr: "(6 · 10⁵) · (2 · 10³)", explica: "Multiplico.", status: "neutro" },
         { expr: "= (6·2) · 10⁵⁺³", explica: "Junto.", status: "ok" },
-        { expr: "= 12 · 10⁸", explica: "Mantissa 12 → precisa ajuste.", status: "erro", professor: "12 está fora de [1,10). Ajusto reescrevendo 12 = 1,2·10¹." },
+        { expr: "= 12 · 10⁸", explica: "Mantissa 12 → precisa ajuste.", status: "x", professor: "12 está fora de [1,10). Ajusto reescrevendo 12 = 1,2·10¹." },
         { expr: "= 1,2 · 10¹ · 10⁸ = 1,2 · 10⁹", explica: "Ajuste feito.", status: "ok" },
       ],
       fatorada: "= 1,2 · 10⁹",
@@ -216,7 +216,7 @@ export const aula05_operacoesNC: AulaV4 = {
         { expr: "60 = 6 · 10¹", explica: "Coloco 60 em NC também.", status: "neutro", professor: "Para operar, deixo tudo em NC. 60 = 6,0 · 10¹." },
         { expr: "(3 · 10⁸) · (6 · 10¹)", explica: "Reescrevo.", status: "ok" },
         { expr: "= (3·6) · 10⁸⁺¹ = 18 · 10⁹", explica: "Aplico as regras.", status: "ok" },
-        { expr: "18 = 1,8 · 10¹", explica: "Mantissa 18 fora de [1,10) — ajusto.", status: "erro", professor: "Mantissa 18 é maior que 10. Ajusto: 18 = 1,8·10¹." },
+        { expr: "18 = 1,8 · 10¹", explica: "Mantissa 18 fora de [1,10) — ajusto.", status: "x", professor: "Mantissa 18 é maior que 10. Ajusto: 18 = 1,8·10¹." },
         { expr: "= 1,8 · 10¹⁰ m", explica: "Ajuste finaliza.", status: "ok" },
       ],
       fatorada: "= 1,8 · 10¹⁰ m",
