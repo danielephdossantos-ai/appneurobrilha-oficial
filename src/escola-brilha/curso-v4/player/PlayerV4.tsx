@@ -1420,14 +1420,19 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
                   }
                   const marca = emprestimo!.marcas[c];
                   const { recebeu, deu } = mostrarEmprestimoDe(c);
-                  // Valor pra mostrar acima em vermelho quando esta coluna emprestou.
-                  // Se ela TAMBÉM recebeu (cadeia através do zero), o valor acima
-                  // é 10 + topoOriginal - 1 (ex.: 0 vira 10, depois empresta 1 → mostra 9).
-                  const acima = deu
-                    ? recebeu
+                  // Valor a mostrar acima em vermelho:
+                  // - Se recebeu (com ou sem também ter emprestado): o novo topo (ex.: 13, 12, 9 na cadeia do zero).
+                  // - Se só emprestou: topoOriginal - 1.
+                  // O dígito original é riscado; NÃO prefixamos "1" na frente,
+                  // porque o valor completo já aparece acima.
+                  const acima = recebeu
+                    ? deu
                       ? marca.topoOriginal + 10 - 1
-                      : marca.topoOriginal - 1
-                    : null;
+                      : marca.topoOriginal + 10
+                    : deu
+                      ? marca.topoOriginal - 1
+                      : null;
+                  const riscar = deu || recebeu;
                   return (
                     <div
                       key={`op-${opIdx}-${c}`}
@@ -1439,12 +1444,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
                         </div>
                       )}
                       <span className="inline-flex items-baseline justify-center">
-                        {recebeu && (
-                          <span className="text-lg md:text-2xl font-black text-rose-600 mr-0.5">
-                            1
-                          </span>
-                        )}
-                        <span className={deu ? "line-through decoration-rose-600 decoration-[3px]" : ""}>
+                        <span className={riscar ? "line-through decoration-rose-600 decoration-[3px]" : ""}>
                           {digitoStr}
                         </span>
                       </span>
