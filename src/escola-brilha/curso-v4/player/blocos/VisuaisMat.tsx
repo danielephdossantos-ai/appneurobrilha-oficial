@@ -200,6 +200,10 @@ export function RenderVisualMat({ v }: { v: VisualMat }) {
       return <SomaFracoes v={v} />;
     case "notacaoCientifica":
       return <NotacaoCientifica v={v} />;
+    case "trinomioQuadrado":
+      return <TrinomioQuadrado v={v} />;
+    case "checklistTQP":
+      return <ChecklistTQP v={v} />;
   }
 }
 
