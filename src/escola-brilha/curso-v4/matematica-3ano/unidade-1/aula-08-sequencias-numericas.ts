@@ -1,15 +1,11 @@
 import type { AulaV4 } from "../../types";
-import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
-import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
- * Aula 8 — "Sequências Numéricas"
+ * Aula 8 — "Sequências Numéricas (o Pulo)"
  * Curso: Matemática 3º Ano · Unidade 1
  *
- * Foco: descobrir o padrão (pulo) de uma sequência (de 1 em 1, de 10
- * em 10, de 100 em 100, de 5 em 5, de 2 em 2) e prever o próximo.
+ * Foco: descobrir o "pulo" fixo entre termos consecutivos e prever
+ * os próximos termos. Pulos de 1, 2, 5, 10 e 100.
  * BNCC: EF03MA03.
  */
 export const aula08_sequenciasNumericas: AulaV4 = {
@@ -17,59 +13,98 @@ export const aula08_sequenciasNumericas: AulaV4 = {
   titulo: "O Pulo dos Números",
   iconeTrilha: "🦘",
   bncc: ["EF03MA03"],
-  duracaoMin: 18,
+  duracaoMin: 20,
+  metodologias: ["skemp", "vergnaud"],
 
   momento01_motivacao: {
-    titulo: "Números que PULAM!",
+    titulo: "Números que PULAM em ritmo",
     historia:
-      "A Prefeita mostrou uma trilha: 10, 20, 30, 40, ... 'Qual vem depois?', perguntou. Brilha viu o segredo: cada número PULA de 10 em 10! Números em sequência sempre têm um pulo escondido.",
-    imagemUrl: coruja,
+      "A Prefeita mostrou uma trilha numerada: 10, 20, 30, 40, ... 'Qual vem depois?' Você olhou e viu: os números SEMPRE pulam de 10 em 10. Toda sequência tem um pulo escondido — hoje aprendemos a caçar esse pulo.",
   },
 
   momento02_exploracao: {
-    instrucao: "Olhe a sequência: 5, 10, 15, 20, ... Qual o pulo?",
+    instrucao: "Olhe a sequência: 5, 10, 15, 20, ... Qual é o pulo?",
     cenas: [
       { tipo: "texto", texto: "De 5 pra 10 → pulou 5." },
       { tipo: "texto", texto: "De 10 pra 15 → pulou 5.", destaque: true },
-      { tipo: "texto", texto: "Sempre 5! Próximo: 25." },
+      { tipo: "texto", texto: "Sempre 5! Próximo termo: 25." },
     ],
-    interacao: {
-      tipo: "tapContar",
-      imagemUrl: banana,
-      quantidade: 5,
-      itemPlural: "bananas",
-      pergunta: "Quantas bananas em cada pulo? (5!)",
-    },
   },
 
   momento03_descoberta: {
     perguntaGuia: "Como achar o PULO de qualquer sequência?",
-    pista: "Subtrai o número da FRENTE menos o de TRÁS. Isso é o pulo.",
+    pista: "Subtraia o número da FRENTE menos o de TRÁS. Isso é o pulo.",
     revelacao:
-      "PULO = 2º número − 1º número. Se todos os pulos forem iguais, você achou o padrão! Aí é só somar o pulo pra prever o próximo.",
+      "PULO = 2º termo − 1º termo. Se todos os pulos forem iguais, você achou o padrão. Depois é só SOMAR o pulo pra prever o próximo termo.",
   },
 
   momento04_explicacao: {
-    titulo: "Pulos que a gente vai usar muito",
+    titulo: "Pulos que usamos muito",
     etapas: [
       {
-        texto: "De 1 em 1: 47, 48, 49, 50... (contagem normal).",
-        exemplo: "Pulo = 1.",
+        texto:
+          "Pulo de 1 em 1: 47, 48, 49, 50... A contagem normal.",
+        exemploReal: {
+          contexto:
+            "Você conta os degraus da escada da Prefeitura: 1, 2, 3, 4, 5. Pulo constante de 1.",
+          destaque: "Pulo = 1. Só somo 1 pra achar o próximo.",
+        },
       },
       {
-        texto: "De 10 em 10: 120, 130, 140, 150... (só muda a DEZENA).",
-        exemplo: "Pulo = 10. A unidade fica igual.",
+        texto:
+          "Pulo de 10 em 10: 120, 130, 140, 150... Só a DEZENA muda.",
+        exemploReal: {
+          contexto:
+            "Os ônibus da linha passam a cada 10 minutos: 8h00, 8h10, 8h20, 8h30. Próximo: 8h40.",
+          casasValor: {
+            numero: 130,
+            extenso: "cento e trinta",
+            mostrarDecomposicao: true,
+          },
+          destaque: "Pulo = 10. A unidade fica igual; só a dezena avança.",
+        },
       },
       {
-        texto: "De 100 em 100: 250, 350, 450, 550... (só muda a CENTENA).",
-        exemplo: "Pulo = 100.",
-        agrupamentos: [
-          { imagemUrl: maca, tamanhoGrupo: 100, qtdGrupos: 1, rotulo: "🏢 +1 prédio" },
-        ],
+        texto:
+          "Pulo de 100 em 100: 250, 350, 450, 550... Só a CENTENA muda.",
+        exemploReal: {
+          contexto:
+            "A biblioteca compra pacotes de 100 livros. Estoque: 200, 300, 400, 500. Próximo pacote: 600.",
+          casasValor: {
+            numero: 500,
+            extenso: "quinhentos",
+            mostrarDecomposicao: true,
+          },
+          destaque: "Pulo = 100. Só a centena aumenta.",
+        },
       },
       {
-        texto: "Pulos MENORES pra treinar: de 2 em 2 (par/ímpar), de 5 em 5 (contando na mão).",
-        exemplo: "De 5 em 5: 5, 10, 15, 20... De 2 em 2: 2, 4, 6, 8...",
+        texto:
+          "Pulos menores pra treinar: de 2 em 2 (pares/ímpares) e de 5 em 5 (contagem das mãos).",
+        exemploReal: {
+          contexto:
+            "Contar de 2 em 2 os pares de meias na gaveta: 2, 4, 6, 8, 10. Pulo = 2.",
+          destaque: "De 5 em 5: 5, 10, 15, 20, 25. Pulo = 5.",
+        },
+      },
+      {
+        texto:
+          "Pra achar o pulo de uma sequência dada, SUBTRAIA dois termos consecutivos. Depois some o pulo pra prever.",
+        exemploReal: {
+          contexto:
+            "Sequência: 165, 170, 175, ?, ? — 170 − 165 = 5 (pulo). Somo 5 duas vezes.",
+          contaPassoAPasso: {
+            operacao: "soma",
+            operandos: [175, 5],
+            resultado: 180,
+            passos: [
+              { coluna: "U", fala: "5 + 5 = 10. Escrevo 0, vai 1.", digito: 0, vaiUm: 1 },
+              { coluna: "D", fala: "7 + 0 + 1 = 8.", digito: 8 },
+              { coluna: "C", fala: "1 + 0 = 1.", digito: 1 },
+            ],
+          },
+          destaque: "175 + 5 = 180. Próximo termo: 180.",
+        },
       },
     ],
   },
@@ -84,81 +119,66 @@ export const aula08_sequenciasNumericas: AulaV4 = {
       "Depois: 70 + 10 = 80. 🦘",
     ],
     resposta: "70, 80",
-    visualUrl: brilha,
+    casasValor: {
+      numero: 70,
+      mostrarDecomposicao: true,
+      extenso: "setenta",
+    },
   },
 
   momento06_praticaGuiada: {
-    enunciado: "Juntos! Qual é o próximo? 200, 300, 400, ...",
+    enunciado: "Juntos! Qual é o próximo termo? 200, 300, 400, ...",
     dica: "Pulo = 300 − 200 = 100.",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "200" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "300" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "400" },
-      ],
-      pergunta: "Próximo:",
-      opcoes: ["401", "410", "500"],
-      correta: 2,
+      tipo: "escolhaVisual",
+      pergunta: "Próximo termo:",
+      opcoes: [{ nome: "401" }, { nome: "410" }, { nome: "500" }],
+      respostaCerta: "500",
       feedbackAcerto: "🎉 Pulo 100. 400 + 100 = 500.",
-      feedbackErro: "Pulo é 100 (de 100 em 100). 400 + 100 = 500.",
+      feedbackErro: "Pulo é de 100 em 100. 400 + 100 = 500.",
     },
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Sua vez! Qual o pulo desta sequência: 8, 10, 12, 14, ?",
+    enunciado: "Sua vez! Qual o próximo termo desta sequência: 8, 10, 12, 14, ?",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 2, rotulo: "🍎+2" },
-      ],
-      pergunta: "Próximo da fila:",
-      opcoes: ["15", "16", "20"],
-      correta: 1,
-      feedbackAcerto: "🎉 Pulo 2. 14 + 2 = 16.",
+      tipo: "escolhaVisual",
+      pergunta: "Próximo termo:",
+      opcoes: [{ nome: "15" }, { nome: "16" }, { nome: "20" }],
+      respostaCerta: "16",
+      feedbackAcerto: "🎯 Pulo 2 (pares). 14 + 2 = 16.",
       feedbackErro: "10 − 8 = 2. Pulo é 2 (números pares). 14 + 2 = 16.",
     },
   },
 
   momento08_aplicacao: {
     contexto:
-      "A Prefeita organiza as barracas por NÚMERO: 105, 115, 125, 135, ... onde fica a próxima barraca?",
+      "A Prefeita numera as barracas do mercado: 105, 115, 125, 135, ... Quer saber o número da 5ª barraca.",
     problema: "Descubra o pulo e diga o número da 5ª barraca.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "5ª barraca:",
-      opcoes: [
-        { nome: "140", imagemUrl: banana },
-        { nome: "145", imagemUrl: maca },
-        { nome: "150", imagemUrl: coruja },
-      ],
+      opcoes: [{ nome: "140" }, { nome: "145" }, { nome: "150" }],
       respostaCerta: "145",
-      feedbackAcerto:
-        "🎯 Isso! Pulo = 10 (115−105). 135 + 10 = 145.",
-      feedbackErro:
-        "Pulo é 10 (só muda a dezena: 05, 15, 25, 35...). 135 + 10 = 145.",
+      feedbackAcerto: "🎯 Isso! Pulo = 10 (115 − 105). 135 + 10 = 145.",
+      feedbackErro: "Pulo é 10 (só muda a dezena). 135 + 10 = 145.",
     },
   },
 
   momento09_revisao: {
     pontos: [
       "SEQUÊNCIA = fila de números com um PULO fixo.",
-      "PULO = próximo − anterior.",
-      "Somando o pulo, prevejo o próximo.",
-      "🎮 Adivinhe o próximo!",
+      "PULO = próximo termo − termo anterior.",
+      "Somando o pulo ao último termo, prevejo o próximo.",
+      "Pulos comuns: 1, 2, 5, 10, 100.",
     ],
     miniDesafio: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "165" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "170" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "175" },
-      ],
-      pergunta: "Sequência 165, 170, 175, ... próximo?",
-      opcoes: ["176", "180", "185"],
-      correta: 1,
+      tipo: "escolhaVisual",
+      pergunta: "Sequência 165, 170, 175, ... próximo termo?",
+      opcoes: [{ nome: "176" }, { nome: "180" }, { nome: "185" }],
+      respostaCerta: "180",
       feedbackAcerto: "🎉 Pulo 5. 175 + 5 = 180.",
-      feedbackErro: "170 − 165 = 5. Pulo 5. 175 + 5 = 180.",
+      feedbackErro: "170 − 165 = 5. Pulo é 5. 175 + 5 = 180.",
     },
   },
 
@@ -169,21 +189,21 @@ export const aula08_sequenciasNumericas: AulaV4 = {
         opcoes: ["421", "430", "440"],
         correta: 1,
         feedbackAcerto: "🎉 Pulo 10. 420 + 10 = 430.",
-        feedbackErro: "410−400=10. 420+10=430.",
+        feedbackErro: "410 − 400 = 10. 420 + 10 = 430.",
       },
       {
         pergunta: "Qual o pulo de 5, 10, 15, 20, 25?",
         opcoes: ["1", "2", "5"],
         correta: 2,
-        feedbackAcerto: "Isso! Pulo de 5 em 5.",
+        feedbackAcerto: "Isso! De 5 em 5.",
         feedbackErro: "10 − 5 = 5. Pulo = 5.",
       },
       {
-        pergunta: "Sequência 200, 300, 400, ..., 700. Quantos números tem?",
+        pergunta: "Sequência 200, 300, 400, ..., 700. Quantos termos tem?",
         opcoes: ["4", "5", "6"],
         correta: 2,
-        feedbackAcerto: "🎉 200, 300, 400, 500, 600, 700 → 6 números.",
-        feedbackErro: "Conta na fila: 200, 300, 400, 500, 600, 700. São 6.",
+        feedbackAcerto: "🎉 200, 300, 400, 500, 600, 700 → 6 termos.",
+        feedbackErro: "Conte na fila: 200, 300, 400, 500, 600, 700. São 6.",
       },
     ],
   },
@@ -193,12 +213,13 @@ export const aula08_sequenciasNumericas: AulaV4 = {
     materiais: ["Escada da casa OU papel", "Caneta"],
     passos: [
       "Escolha um pulo: 5, 10 ou 100.",
-      "Escreva os 5 primeiros números da sequência começando de qualquer lugar (ex.: 45, 55, 65, ...).",
-      "Peça pra alguém adivinhar os próximos 2 números.",
+      "Escreva os 5 primeiros termos começando de qualquer número (ex.: 45, 55, 65, ...).",
+      "Peça a alguém pra adivinhar os próximos 2 termos.",
       "Depois inverta.",
     ],
     registro: "📸 Foto da sequência escrita.",
   },
+
   recompensa: {
     xp: 120,
     moedas: 60,

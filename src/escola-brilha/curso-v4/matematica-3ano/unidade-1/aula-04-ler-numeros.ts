@@ -1,169 +1,196 @@
 import type { AulaV4 } from "../../types";
-import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
-import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
  * Aula 4 — "Ler e Escrever Números até 1.000"
  * Curso: Matemática 3º Ano · Unidade 1
  *
- * Foco: ler número por extenso (duzentos e trinta e quatro) e escrever
- * a partir do enunciado falado. Ligações "e" entre centena/dezena e
- * dezena/unidade. Casos especiais: 100 (cem), 200-900 e a família do
- * 11-19 (onze, doze...).
+ * Foco: nomes das centenas (cem, duzentos...); ligação com "e" entre
+ * as casas; família dos teens (11-19); zero no meio (pula ao ler).
  * BNCC: EF03MA01.
+ * Metodologias: Skemp (leitura relacional) · RME.
  */
 export const aula04_lerNumeros: AulaV4 = {
   slug: "04-ler-numeros",
   titulo: "Ler e Escrever Números",
   iconeTrilha: "📖",
   bncc: ["EF03MA01"],
-  duracaoMin: 18,
+  duracaoMin: 20,
+  metodologias: ["skemp", "rme"],
 
   momento01_motivacao: {
     titulo: "A Prefeita ditou um número...",
     historia:
-      "A Prefeita ditou pra Brilha: 'Anote trezentos e quarenta e dois maçãs!' Brilha ficou travada — como escreve isso na placa? Depois, ela viu uma placa '705' e não sabia ler. Vamos aprender os dois lados: LER e ESCREVER.",
-    imagemUrl: coruja,
+      "A Prefeita ditou pra você: 'Registre trezentos e quarenta e dois habitantes!' Você precisa escrever esse número na placa. Depois, virou uma placa nova: 705. Como se lê? Hoje aprendemos os dois lados — LER e ESCREVER — sem confusão.",
   },
 
   momento02_exploracao: {
-    instrucao: "Olhe estas três placas e o que elas 'dizem':",
+    instrucao: "Compare três placas e como cada uma se lê.",
     cenas: [
       { tipo: "texto", texto: "100 → cem" },
       { tipo: "texto", texto: "342 → trezentos E quarenta E dois", destaque: true },
-      { tipo: "texto", texto: "705 → setecentos E cinco (sem dezena!)" },
+      { tipo: "texto", texto: "705 → setecentos E cinco (dezena é 0 — não se fala)" },
     ],
-    interacao: {
-      tipo: "tapContar",
-      imagemUrl: maca,
-      quantidade: 10,
-      itemPlural: "maçãs",
-      pergunta: "Quantas maçãs? (10 = 'dez')",
-    },
   },
 
   momento03_descoberta: {
-    perguntaGuia: "Por que a gente coloca 'E' entre as casas?",
+    perguntaGuia: "Por que colocamos 'e' entre as casas ao ler?",
     pista: "O 'e' junta as partes: centena E dezena E unidade.",
     revelacao:
-      "Pra ler: fale a CENTENA + 'e' + a DEZENA + 'e' + a UNIDADE. Se alguma casa for zero, PULE. 100 tem nome próprio: CEM.",
+      "REGRA de leitura: fale a CENTENA + 'e' + a DEZENA + 'e' + a UNIDADE. Se alguma casa for 0, PULE ela. E 100 tem nome próprio: CEM.",
   },
 
   momento04_explicacao: {
-    titulo: "Regras rápidas de leitura",
+    titulo: "Nomes e regras de leitura",
     etapas: [
       {
         texto:
-          "Centenas têm nomes: cem, duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos.",
-        exemplo: "500 = quinhentos. 800 = oitocentos.",
+          "Cada CENTENA tem um nome: cem, duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos.",
+        exemploReal: {
+          contexto:
+            "A biblioteca da Prefeitura tem 500 livros. Lê-se 'quinhentos livros'.",
+          casasValor: {
+            numero: 500,
+            extenso: "quinhentos",
+            mostrarDecomposicao: true,
+          },
+          destaque: "500 = 5 centenas + 0 + 0 → 'quinhentos'.",
+        },
       },
       {
         texto:
-          "Dezenas: dez, vinte, trinta, quarenta, cinquenta, sessenta, setenta, oitenta, noventa.",
-        exemplo: "60 = sessenta.",
+          "As DEZENAS redondas: dez, vinte, trinta, quarenta, cinquenta, sessenta, setenta, oitenta, noventa.",
+        exemploReal: {
+          contexto: "A escola tem 60 alunos no 3º ano. Lê-se 'sessenta alunos'.",
+          casasValor: {
+            numero: 60,
+            extenso: "sessenta",
+            mostrarDecomposicao: true,
+          },
+          destaque: "60 = 6 dezenas + 0 unidades → 'sessenta'.",
+        },
       },
       {
-        texto: "Família dos 'teen' (11–19) tem nomes próprios: onze, doze, treze, catorze, quinze, dezesseis, dezessete, dezoito, dezenove.",
-        exemplo: "215 → duzentos e QUINZE (não 'dez e cinco').",
+        texto:
+          "Família dos TEENS (11–19) tem nomes próprios: onze, doze, treze, catorze, quinze, dezesseis, dezessete, dezoito, dezenove.",
+        exemploReal: {
+          contexto:
+            "O prédio da Prefeitura tem 215 janelas. Cuidado: os últimos dois dígitos são 15 = 'quinze', não 'dez e cinco'.",
+          casasValor: {
+            numero: 215,
+            extenso: "duzentos e quinze",
+            mostrarDecomposicao: true,
+          },
+          destaque: "215 = 200 + 15 → 'duzentos e quinze'.",
+        },
       },
       {
-        texto: "Se a dezena for 0, pula o 'e vinte/trinta...' e vai direto pra unidade.",
-        exemplo: "704 → setecentos E quatro (não fala 'zero').",
+        texto:
+          "Se a DEZENA for 0, PULE ao ler — vai direto da centena pra unidade.",
+        exemploReal: {
+          contexto:
+            "O crachá do zelador é 704. Como a dezena é 0, lê-se 'setecentos e quatro' (a dezena some da fala).",
+          casasValor: {
+            numero: 704,
+            extenso: "setecentos e quatro",
+            mostrarDecomposicao: true,
+          },
+          destaque: "704 = 700 + 0 + 4. Dezena zero não é falada.",
+        },
+      },
+      {
+        texto:
+          "Chegou a 1.000? Nasce a casa do MILHAR. Lê-se 'mil'.",
+        exemploReal: {
+          contexto:
+            "O Censo da Cidade totalizou 1.248 habitantes. Lemos por partes: milhar + centena + dezena + unidade.",
+          casasValor: {
+            numero: 1248,
+            extenso: "mil duzentos e quarenta e oito",
+            mostrarDecomposicao: true,
+          },
+          destaque: "1.248 = 1 milhar + 248 → 'mil duzentos e quarenta e oito'.",
+        },
       },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Brilha vai LER o número 468 alto:",
+    enunciado: "Brilha vai LER o número 468 em voz alta:",
     passos: [
-      "Olho a centena: 4 → QUATROCENTOS.",
-      "Olho a dezena: 6 → SESSENTA.",
-      "Olho a unidade: 8 → OITO.",
-      "Junto com 'e': QUATROCENTOS E SESSENTA E OITO.",
-      "Pronto! 468. 📖",
+      "Olho a CENTENA: 4 → 'quatrocentos'.",
+      "Junto com 'e' + a DEZENA: 6 → 'sessenta'.",
+      "Junto com 'e' + a UNIDADE: 8 → 'oito'.",
+      "Fala completa: 'QUATROCENTOS E SESSENTA E OITO'. 📖",
     ],
     resposta: "quatrocentos e sessenta e oito",
-    visualUrl: brilha,
+    casasValor: {
+      numero: 468,
+      mostrarDecomposicao: true,
+      extenso: "quatrocentos e sessenta e oito",
+    },
   },
 
   momento06_praticaGuiada: {
-    enunciado: "Como se lê o número 250?",
+    enunciado: "Juntos! Como se lê 250?",
     dica: "Centena 2 → duzentos. Dezena 5 → cinquenta. Unidade 0 → pula.",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢×2" },
-        { imagemUrl: banana, quantidade: 10, rotulo: "📦×5" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "250 lê-se:",
       opcoes: [
-        "duzentos e cinquenta",
-        "vinte e cinquenta",
-        "duzentos e cinco",
+        { nome: "duzentos e cinquenta" },
+        { nome: "vinte e cinquenta" },
+        { nome: "duzentos e cinco" },
       ],
-      correta: 0,
-      feedbackAcerto: "🎉 Isso! Duzentos e cinquenta. A unidade é 0, então some.",
-      feedbackErro: "200 = duzentos, 50 = cinquenta. Junte: 'duzentos e cinquenta'.",
+      respostaCerta: "duzentos e cinquenta",
+      feedbackAcerto:
+        "🎉 Isso! 200 + 50 + 0 → 'duzentos e cinquenta'. Unidade zero não se fala.",
+      feedbackErro:
+        "200 = 'duzentos'. 50 = 'cinquenta'. Junte com 'e': 'duzentos e cinquenta'.",
     },
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Sua vez! A Prefeita disse: 'setecentos e treze'. Que número é?",
+    enunciado: "Sua vez! A Prefeita disse: 'setecentos e treze'. Que número é esse?",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢×7" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦" },
-        { imagemUrl: maca, quantidade: 3, rotulo: "🍎" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "Escolha o número:",
-      opcoes: ["73", "703", "713"],
-      correta: 2,
-      feedbackAcerto: "🎉 Isso! Setecentos e treze = 713 (treze é 13, família teen).",
-      feedbackErro: "700 + 13 = 713. Cuidado: 'treze' já é 13, não 'dez e três'.",
+      opcoes: [{ nome: "73" }, { nome: "703" }, { nome: "713" }],
+      respostaCerta: "713",
+      feedbackAcerto:
+        "🎯 Isso! 700 + 13 = 713. 'Treze' já é 13 (família teen).",
+      feedbackErro:
+        "Cuidado: 'treze' já é 13, não 'dez e três'. 700 + 13 = 713.",
     },
   },
 
   momento08_aplicacao: {
     contexto:
-      "A Prefeita pediu um cartaz: 'Escreva cem maçãs.' Brilha ficou em dúvida.",
-    problema: "Qual é o certo?",
+      "A Prefeita pediu um cartaz que diga 'CEM habitantes'. Você precisa escrever esse número.",
+    problema: "Cem = ?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Cem = ?",
-      opcoes: [
-        { nome: "10", imagemUrl: banana },
-        { nome: "100", imagemUrl: maca },
-        { nome: "1.000", imagemUrl: coruja },
-      ],
+      pergunta: "Escolha o número certo:",
+      opcoes: [{ nome: "10" }, { nome: "100" }, { nome: "1.000" }],
       respostaCerta: "100",
       feedbackAcerto:
-        "🎯 Isso! CEM = 100. É o nome próprio de 1 centena redondinha.",
-      feedbackErro:
-        "Cem = 100. Dez = 10. Mil = 1.000. Só 100 tem nome curto especial.",
+        "🎯 Isso! CEM = 100. É o nome próprio de 1 centena cheia.",
+      feedbackErro: "Cem = 100. Dez = 10. Mil = 1.000. Só 100 tem esse nome curto.",
     },
   },
 
   momento09_revisao: {
     pontos: [
       "Ler: CENTENA + 'e' + DEZENA + 'e' + UNIDADE.",
-      "Se alguma casa for 0, PULE.",
-      "100 = cem. 200-900 têm nomes próprios (duzentos, trezentos...).",
+      "Se uma casa é 0, PULE ela.",
+      "100 = cem. 200-900 têm nomes próprios.",
       "11 a 19 têm nomes próprios (onze, doze, treze...).",
     ],
     miniDesafio: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢×4" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦×0" },
-        { imagemUrl: maca, quantidade: 9, rotulo: "🍎" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "'Quatrocentos e nove' é qual número?",
-      opcoes: ["49", "409", "490"],
-      correta: 1,
-      feedbackAcerto: "🎉 Perfeito! 400 + 9 = 409. Dezena é 0 (sem nome falado).",
+      opcoes: [{ nome: "49" }, { nome: "409" }, { nome: "490" }],
+      respostaCerta: "409",
+      feedbackAcerto: "🎉 400 + 0 + 9 = 409. A dezena é 0 (não se fala).",
       feedbackErro: "400 + 0 + 9 = 409. 'quatrocentos e nove' pula a dezena vazia.",
     },
   },
@@ -174,19 +201,16 @@ export const aula04_lerNumeros: AulaV4 = {
         pergunta: "'Oitocentos e vinte e cinco' é:",
         opcoes: ["825", "285", "852"],
         correta: 0,
-        feedbackAcerto: "🎉 825. Oito centenas + duas dezenas + cinco unidades.",
+        feedbackAcerto: "🎉 800 + 20 + 5 = 825.",
         feedbackErro: "800 + 20 + 5 = 825.",
       },
       {
         pergunta: "Como se lê 606?",
-        opcoes: [
-          "seis e seis",
-          "seiscentos e seis",
-          "sessenta e seis",
-        ],
+        opcoes: ["seis e seis", "seiscentos e seis", "sessenta e seis"],
         correta: 1,
-        feedbackAcerto: "Isso! 600 + 6 = seiscentos E seis.",
-        feedbackErro: "600 = seiscentos. Dezena 0 pula. 6 = seis. 'Seiscentos e seis'.",
+        feedbackAcerto: "Isso! 600 + 0 + 6 → 'seiscentos e seis'.",
+        feedbackErro:
+          "600 = 'seiscentos'. Dezena 0 pula. 6 = 'seis'. Fica 'seiscentos e seis'.",
       },
       {
         pergunta: "Como se lê 312?",
@@ -196,8 +220,10 @@ export const aula04_lerNumeros: AulaV4 = {
           "trinta e doze",
         ],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! 12 = doze (família teen). 300 + 12 = 'trezentos e doze'.",
-        feedbackErro: "300 = trezentos, 12 = doze (não 'dez e dois'). Fica 'trezentos e doze'.",
+        feedbackAcerto:
+          "🎉 300 + 12 (doze — família teen) → 'trezentos e doze'.",
+        feedbackErro:
+          "300 = 'trezentos'. 12 = 'doze' (não 'dez e dois'). Fica 'trezentos e doze'.",
       },
     ],
   },
@@ -208,11 +234,12 @@ export const aula04_lerNumeros: AulaV4 = {
     passos: [
       "Um adulto DITA 5 números entre 100 e 999 (ex.: 'quatrocentos e trinta e sete').",
       "Você escreve o número na placa CDU.",
-      "Depois inverta: você fala, o adulto escreve.",
-      "Confiram no fim. Riscar em vermelho os que precisam repetir.",
+      "Depois inverta: você fala em voz alta, o adulto escreve.",
+      "Confiram no fim. Marque em vermelho os que precisam de repetição.",
     ],
-    registro: "📸 Foto da folha com os 5 números.",
+    registro: "📸 Foto da folha com os 5 números escritos.",
   },
+
   recompensa: {
     xp: 120,
     moedas: 60,
