@@ -199,6 +199,26 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
             {c.tipo === "texto" && (
               <div className={c.destaque ? "text-2xl font-bold" : ""}>{c.texto}</div>
             )}
+            {c.tipo === "tabuada" && (
+              <div className={`inline-block rounded-lg px-4 py-3 font-mono ${c.destaque ? "bg-amber-400/20 border border-amber-400" : "bg-white/5"}`}>
+                {c.titulo && <div className="text-base font-bold mb-2 font-sans">{c.titulo}</div>}
+                <div className="flex flex-col gap-1 text-lg leading-tight tabular-nums text-left">
+                  {Array.from({ length: c.ate ?? 10 }).map((_, k) => {
+                    const n = k + 1;
+                    const r = c.fator * n;
+                    return (
+                      <div key={k} className="grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end">
+                        <span>{c.fator}</span>
+                        <span>×</span>
+                        <span>{n}</span>
+                        <span>=</span>
+                        <span className="font-bold">{r}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -14,8 +14,8 @@ export const aula04_tabuadas4e5: AulaV4 = {
   momento02_exploracao: {
     instrucao: "Duas tabuadas úteis.",
     cenas: [
-      { tipo: "texto", texto: "×4: 4, 8, 12, 16, 20, 24, 28, 32, 36, 40." },
-      { tipo: "texto", texto: "×5: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50.", destaque: true },
+      { tipo: "tabuada", fator: 4, ate: 10, titulo: "Tabuada do 4" },
+      { tipo: "tabuada", fator: 5, ate: 10, titulo: "Tabuada do 5", destaque: true },
     ],
   },
   momento03_descoberta: {

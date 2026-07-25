@@ -22,7 +22,8 @@ export type CenaVisual =
       tipo: "comparar";
       lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string }>;
     }
-  | { tipo: "texto"; texto: string; destaque?: boolean };
+  | { tipo: "texto"; texto: string; destaque?: boolean }
+  | { tipo: "tabuada"; fator: number; ate?: number; destaque?: boolean; titulo?: string };
 
 export type Interacao =
   | {
