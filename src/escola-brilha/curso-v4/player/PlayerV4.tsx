@@ -443,11 +443,13 @@ function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
 
 function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
   const conta = detectarContaNoTexto(`${m.contexto} ${m.problema}`);
+  const md = detectarMultDivNoTexto(`${m.contexto} ${m.problema}`);
   return (
     <Card>
       <div className="text-sm text-amber-300">🌎 Na vida real:</div>
       <div>{m.contexto}</div>
       <div className="text-lg font-bold">{m.problema}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
