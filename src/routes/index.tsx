@@ -191,11 +191,17 @@ function Index() {
                 "radial-gradient(ellipse at 15% 20%, rgba(155,108,255,0.3) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(76,158,255,0.3) 0%, transparent 55%)",
             }}
           />
-          <div className="relative z-10 flex items-center gap-3">
+          <div className="relative z-10 flex flex-col items-center text-center">
+            {activeChild && (
+              <div className="absolute top-0 right-0 h-11 w-11 rounded-2xl bg-white/15 border-2 border-white/35 grid place-items-center text-2xl shadow-inner">
+                {activeChild.avatar}
+              </div>
+            )}
+
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="shrink-0 relative"
+              className="relative"
             >
               <div
                 className="absolute inset-0 -m-4 rounded-full"
@@ -207,27 +213,22 @@ function Index() {
               <KidLiveMascot size="sm" emotion="happy" className="relative" />
             </motion.div>
 
-            <div className="flex-1 min-w-0">
+            <div className="mt-2">
               <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
                 Bem-vindo à
               </div>
               <h1 className="text-white text-lg font-black leading-tight">
                 Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
               </h1>
-              <div className="mt-1.5 inline-flex bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-xl border border-[#FFC93C]/70 shadow-sm">
-                <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
-                  {activeChild
-                    ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
-                    : "Escolha um aventureiro! ✨"}
-                </p>
-              </div>
             </div>
 
-            {activeChild && (
-              <div className="shrink-0 h-11 w-11 rounded-2xl bg-white/15 border-2 border-white/35 grid place-items-center text-2xl shadow-inner">
-                {activeChild.avatar}
-              </div>
-            )}
+            <div className="mt-2.5 inline-flex bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-[#FFC93C]/70 shadow-sm max-w-[90%]">
+              <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
+                {activeChild
+                  ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
+                  : "Escolha um aventureiro! ✨"}
+              </p>
+            </div>
           </div>
         </div>
 
