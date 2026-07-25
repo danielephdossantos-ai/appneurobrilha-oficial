@@ -181,11 +181,12 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 function Motivacao({ m }: { m: AulaV4["momento01_motivacao"] }) {
+  const { activeChild } = useAppState();
   return (
     <Card>
-      <h2 className="text-2xl font-black">{m.titulo}</h2>
+      <h2 className="text-2xl font-black">{aplicarNome(m.titulo, activeChild?.nome)}</h2>
       {m.imagemUrl && <img src={m.imagemUrl} alt="" className="w-40 mx-auto" />}
-      <p className="text-lg leading-relaxed">{m.historia}</p>
+      <p className="text-lg leading-relaxed">{aplicarNome(m.historia, activeChild?.nome)}</p>
     </Card>
   );
 }
