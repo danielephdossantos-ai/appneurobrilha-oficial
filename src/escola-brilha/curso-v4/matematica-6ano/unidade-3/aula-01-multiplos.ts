@@ -17,13 +17,24 @@ export const aula01_multiplos: AulaV4 = {
     instrucao: "Múltiplo = resultado de uma multiplicação por natural.",
     cenas: [
       { tipo: "texto", texto: "Múltiplos de 3: 0, 3, 6, 9, 12, 15, 18, 21, 24… (infinitos!)", destaque: true },
-      { tipo: "tabuada", fator: 3, ate: 10, titulo: "Tabuada do 3 = múltiplos do 3" },
+      {
+        tipo: "tabela",
+        titulo: "Múltiplos do 3 — de 3 em 3",
+        cabecalhos: ["3 × n", "Múltiplo"],
+        linhas: [
+          { rotulo: "3 × 1", valores: ["3"] },
+          { rotulo: "3 × 2", valores: ["6"] },
+          { rotulo: "3 × 3", valores: ["9"] },
+          { rotulo: "3 × 4", valores: ["12"] },
+          { rotulo: "3 × 5", valores: ["15"] },
+        ],
+      },
     ],
   },
 
   momento03_descoberta: {
     perguntaGuia: "Como saber se um número é múltiplo de 5?",
-    pista: "Olhe pra tabuada do 5.",
+    pista: "Múltiplos do 5 terminam sempre em 0 ou 5.",
     revelacao: "Termina em 0 ou 5. Se não termina, NÃO é múltiplo.",
   },
 

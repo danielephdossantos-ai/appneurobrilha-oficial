@@ -13,9 +13,13 @@ export const aula04_poligonosRegulares: AulaV4 = {
     historia: "{NOME}, um polígono REGULAR tem TODOS os lados iguais e TODOS os ângulos iguais. Ex.: triângulo equilátero, quadrado, pentágono regular…",
   },
   momento02_exploracao: {
-    instrucao: "Nomes.",
+    instrucao: "Formas.",
     cenas: [
       { tipo: "texto", texto: "3 lados = triângulo. 4 = quadrado. 5 = pentágono. 6 = hexágono. 8 = octógono.", destaque: true },
+      { tipo: "figuraPlana", forma: "triangulo", mostrarVertices: true, legenda: "Triângulo equilátero (3 lados iguais)" },
+      { tipo: "figuraPlana", forma: "quadrado", mostrarAngulos: true, legenda: "Quadrado (4 lados iguais)" },
+      { tipo: "figuraPlana", forma: "pentagono", mostrarVertices: true, legenda: "Pentágono regular (5 lados iguais)" },
+      { tipo: "figuraPlana", forma: "hexagono", mostrarVertices: true, legenda: "Hexágono regular (6 lados iguais)" },
     ],
   },
   momento03_descoberta: {
@@ -27,12 +31,32 @@ export const aula04_poligonosRegulares: AulaV4 = {
     titulo: "Regular vs irregular",
     etapas: [
       { texto: "Regular: todos os lados e ângulos IGUAIS." },
-      { texto: "Perímetro do regular: lado × número de lados." },
+      {
+        texto: "Perímetro do regular: lado × número de lados.",
+        exemploReal: {
+          contexto: "Pentágono regular lado 6",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "pentagono",
+            medidasLados: ["6 cm", "6 cm", "6 cm", "6 cm", "6 cm"],
+          },
+          destaque: "P = 5 × 6 = 30 cm.",
+        },
+      },
     ],
   },
   momento05_modelagem: {
     enunciado: "Pentágono regular com lado 6 cm.",
     resposta: "P = 30 cm",
+    contaPassoAPasso: {
+      operacao: "mult",
+      operandos: [6, 5],
+      resultado: 30,
+      passos: [
+        { fala: "Pentágono tem 5 lados iguais." },
+        { fala: "P = 6 × 5 = 30 cm." },
+      ],
+    },
     passos: ["5 lados.", "6 × 5 = 30."],
   },
   momento06_praticaGuiada: {

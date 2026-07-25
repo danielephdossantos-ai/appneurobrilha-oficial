@@ -13,9 +13,20 @@ export const aula05_graficos: AulaV4 = {
     historia: "{NOME}, gráficos deixam a informação FÁCIL de ver. Cada tipo conta uma história diferente.",
   },
   momento02_exploracao: {
-    instrucao: "Tipos.",
+    instrucao: "Tipos de gráfico.",
     cenas: [
       { tipo: "texto", texto: "Colunas/barras: comparar categorias.", destaque: true },
+      {
+        tipo: "graficoBarras",
+        titulo: "Fruta favorita (turma)",
+        unidade: "alunos",
+        barras: [
+          { rotulo: "Maçã", valor: 8 },
+          { rotulo: "Banana", valor: 12 },
+          { rotulo: "Uva", valor: 5 },
+          { rotulo: "Manga", valor: 3 },
+        ],
+      },
       { tipo: "texto", texto: "Linha: mostrar evolução ao longo do tempo." },
       { tipo: "texto", texto: "Pizza (setores): parte do todo (%)." },
     ],
@@ -28,7 +39,23 @@ export const aula05_graficos: AulaV4 = {
   momento04_explicacao: {
     titulo: "Ler informação",
     etapas: [
-      { texto: "Coluna alta = valor grande. Linha subindo = crescendo." },
+      {
+        texto: "Coluna alta = valor grande. Comparar valores fica fácil.",
+        exemploReal: {
+          contexto: "Notas de uma turma",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Quantidade de alunos por nota",
+            unidade: "alunos",
+            barras: [
+              { rotulo: "Nota 6", valor: 4 },
+              { rotulo: "Nota 7", valor: 8 },
+              { rotulo: "Nota 8", valor: 6 },
+            ],
+          },
+          destaque: "A coluna mais alta é a Nota 7 — mais alunos.",
+        },
+      },
       { texto: "Pizza: fatia maior = maior porcentagem." },
     ],
   },
