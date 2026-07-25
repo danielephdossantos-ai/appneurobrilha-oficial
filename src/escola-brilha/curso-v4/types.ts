@@ -15,6 +15,9 @@
 
 // ---------- Blocos reutilizáveis (visual) ----------------------------
 
+import type { VisualMat } from "./player/blocos/VisuaisMat";
+export type { VisualMat } from "./player/blocos/VisuaisMat";
+
 export type CenaVisual =
   | { tipo: "imagem"; url: string; alt: string; legenda?: string }
   | { tipo: "grupoItens"; imagemUrl: string; quantidade: number; rotulo?: string }
@@ -23,7 +26,8 @@ export type CenaVisual =
       lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string }>;
     }
   | { tipo: "texto"; texto: string; destaque?: boolean }
-  | { tipo: "tabuada"; fator: number; ate?: number; destaque?: boolean; titulo?: string };
+  | { tipo: "tabuada"; fator: number; ate?: number; destaque?: boolean; titulo?: string }
+  | ({ destaque?: boolean } & VisualMat);
 
 export type Interacao =
   | {
@@ -252,6 +256,12 @@ export type MomentoModelagem = {
     mostrarDecomposicao?: boolean;
     extenso?: string;
   };
+  /**
+   * Visual matemático específico do conteúdo (geometria, estatística,
+   * medidas, probabilidade). Quando presente, substitui casasValor no
+   * "Brilha resolve" — casas de valor só serve para numeração/aditivo.
+   */
+  visualMat?: VisualMat;
 };
 
 /** "Nós fazemos" — criança + Brilha juntos, com dicas. */
