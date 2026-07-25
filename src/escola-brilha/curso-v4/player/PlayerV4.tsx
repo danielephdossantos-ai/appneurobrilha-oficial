@@ -6,7 +6,7 @@ import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
-import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
+
 import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
 
 /**
