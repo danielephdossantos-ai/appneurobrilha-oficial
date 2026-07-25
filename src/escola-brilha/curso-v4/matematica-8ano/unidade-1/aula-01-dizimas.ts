@@ -220,12 +220,16 @@ export const aula01_dizimas: AulaV4 = {
                 explica: "Resposta final.",
                 status: "ok",
                 professor:
-                  "Fórmula prática para 0,04777…: numerador = 47 − 4 = 43 (número TODO com um período menos a parte FIXA). Denominador = tantos 9 quanto dígitos do período, seguidos de tantos 0 quanto dígitos fixos. Aqui: 9 (um dígito no período) e 00 (dois dígitos fixos) → 900.",
+                  "Regra geral da dízima composta: numerador = (parte não-periódica SEGUIDA de um período) − (parte não-periódica). Aqui: 047 − 04 = 43. Denominador = tantos 9 quanto dígitos do PERÍODO, seguidos de tantos 0 quanto dígitos NÃO-periódicos. Aqui: 1 nove (período '7') e 2 zeros ('04' fixos) → 900. Logo, 0,04777… = 43/900.",
               },
             ],
             fatorada: "0,04777… = 43/900",
           },
         },
+      },
+
+      {
+        texto: "Contra-exemplo: nem todo decimal é dízima. 0,5 não repete — é exato = 1/2. Só vale a técnica das 9s se HOUVER período.",
       },
     ],
   },
