@@ -20,7 +20,33 @@ export type VisualMat =
   | RetaNumericaV
   | DizimaGeratrizV
   | SomaFracoesV
-  | NotacaoCientificaV;
+  | NotacaoCientificaV
+  | TrinomioQuadradoV
+  | ChecklistTQPV;
+
+// ------------------ Trinômio Quadrado Perfeito — prova geométrica ---
+export type TrinomioQuadradoV = {
+  tipo: "trinomioQuadrado";
+  a: string;
+  b: string;
+  sinal?: "+" | "-";
+  mostrarAreas?: boolean;
+  mostrarExpansao?: boolean;
+  legenda?: string;
+};
+
+// ------------------ Checklist de reconhecimento do TQP ---------------
+export type ChecklistTQPV = {
+  tipo: "checklistTQP";
+  trinomio: string;
+  raiz1: string;
+  raiz3: string;
+  meio: string;
+  sinalMeio: "+" | "-";
+  ehPerfeito: boolean;
+  fatorada?: string;
+  legenda?: string;
+};
 
 // ------------------ Dízima periódica → fração geratriz ---------------
 export type DizimaGeratrizV = {
