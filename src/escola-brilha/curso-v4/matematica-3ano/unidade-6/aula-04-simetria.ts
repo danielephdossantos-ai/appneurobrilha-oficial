@@ -12,39 +12,56 @@ export const aula04_simetria: AulaV4 = {
     historia: "Borboleta tem asas simétricas: se dobra ao meio, as duas metades se sobrepõem.",
   },
   momento02_exploracao: {
-    instrucao: "Simetria = espelho.",
+    instrucao: "O eixo de simetria (linha vermelha tracejada) divide em partes iguais.",
     cenas: [
-      { tipo: "texto", texto: "Um eixo divide a figura em 2 partes iguais." },
-      { tipo: "texto", texto: "Rosto, borboleta, coração: têm eixo de simetria.", destaque: true },
+      { tipo: "simetria", forma: "borboleta", eixos: ["vertical"], legenda: "Borboleta — 1 eixo" },
+      { tipo: "simetria", forma: "quadrado", eixos: ["vertical", "horizontal", "diagonal1", "diagonal2"], legenda: "Quadrado — 4 eixos" },
+      { tipo: "simetria", forma: "circulo", eixos: ["vertical", "horizontal", "diagonal1", "diagonal2"], legenda: "Círculo — infinitos eixos" },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Toda figura é simétrica?",
-    pista: "Não! Depende.",
+    perguntaGuia: "Toda figura tem eixo de simetria?",
+    pista: "Nem sempre.",
     revelacao: "Só é simétrica se existe pelo menos 1 eixo que divide em partes iguais.",
   },
   momento04_explicacao: {
-    titulo: "Achar o eixo",
+    titulo: "Achar os eixos",
     etapas: [
       {
-        texto: "Quadrado: 4 eixos de simetria.",
-        exemploReal: { contexto: "Dobre no meio: horizontal, vertical e 2 diagonais.", destaque: "4 eixos." },
+        texto: "Quadrado: 4 eixos (vertical, horizontal, 2 diagonais).",
+        exemploReal: {
+          contexto: "Dobre o azulejo por todas as linhas de simetria.",
+          destaque: "4 eixos.",
+          visualMat: { tipo: "simetria", forma: "quadrado", eixos: ["vertical", "horizontal", "diagonal1", "diagonal2"] },
+        },
       },
       {
-        texto: "Círculo: infinitos eixos.",
-        exemploReal: { contexto: "Qualquer linha pelo centro.", destaque: "Simetria perfeita." },
+        texto: "Retângulo: só 2 eixos (H e V, sem diagonais).",
+        exemploReal: {
+          contexto: "Dobre a folha ao meio.",
+          destaque: "2 eixos.",
+          visualMat: { tipo: "simetria", forma: "retangulo", eixos: ["vertical", "horizontal"] },
+        },
+      },
+      {
+        texto: "Coração: só 1 eixo vertical.",
+        exemploReal: {
+          contexto: "As duas metades espelham.",
+          destaque: "1 eixo vertical.",
+          visualMat: { tipo: "simetria", forma: "coracao", eixos: ["vertical"] },
+        },
       },
     ],
   },
   momento05_modelagem: {
     enunciado: "Quantos eixos tem o retângulo?",
-    passos: ["1 horizontal + 1 vertical = 2 eixos."],
+    passos: ["1 horizontal.", "1 vertical.", "Total: 2 eixos."],
     resposta: "2 eixos",
-    casasValor: { numero: 2, mostrarDecomposicao: false, extenso: "dois" },
+    visualMat: { tipo: "simetria", forma: "retangulo", eixos: ["vertical", "horizontal"] },
   },
   momento06_praticaGuiada: {
     enunciado: "Borboleta tem quantos eixos?",
-    dica: "Só o vertical.",
+    dica: "Só um.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -55,24 +72,24 @@ export const aula04_simetria: AulaV4 = {
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Letra A: é simétrica?",
+    enunciado: "Letra A: quantos eixos de simetria?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "Sim, 1 eixo" }, { nome: "Não" }, { nome: "Sim, 2 eixos" }],
-      respostaCerta: "Sim, 1 eixo",
+      opcoes: [{ nome: "1 (vertical)" }, { nome: "Nenhum" }, { nome: "2" }],
+      respostaCerta: "1 (vertical)",
       feedbackAcerto: "🎯 Vertical.",
       feedbackErro: "A tem 1 eixo vertical.",
     },
   },
   momento08_aplicacao: {
     contexto: "Coração desenhado.",
-    problema: "É simétrico?",
+    problema: "Onde está o eixo de simetria?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "Sim, vertical" }, { nome: "Não" }, { nome: "Só horizontal" }],
-      respostaCerta: "Sim, vertical",
+      opcoes: [{ nome: "Vertical" }, { nome: "Horizontal" }, { nome: "Diagonal" }],
+      respostaCerta: "Vertical",
       feedbackAcerto: "🎯 Eixo vertical.",
       feedbackErro: "Coração é simétrico verticalmente.",
     },
@@ -91,7 +108,7 @@ export const aula04_simetria: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "Quadrado: quantos eixos?", opcoes: ["4", "2", "1"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "H, V e 2 diagonais." },
-      { pergunta: "Letra F é simétrica?", opcoes: ["Não", "Sim, 1", "Sim, 2"], correta: 0, feedbackAcerto: "🎉 Não é.", feedbackErro: "F não tem eixo." },
+      { pergunta: "Letra F tem eixo de simetria?", opcoes: ["Não tem", "1 vertical", "1 horizontal"], correta: 0, feedbackAcerto: "🎉 Não é simétrica.", feedbackErro: "F não tem eixo." },
       { pergunta: "Letra H tem quantos eixos?", opcoes: ["2", "1", "0"], correta: 0, feedbackAcerto: "🎉 2.", feedbackErro: "H tem H e V." },
     ],
   },

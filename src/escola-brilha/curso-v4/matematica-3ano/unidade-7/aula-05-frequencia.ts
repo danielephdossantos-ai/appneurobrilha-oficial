@@ -12,34 +12,67 @@ export const aula05_frequencia: AulaV4 = {
     historia: "Frequência = quantas vezes cada coisa aparece.",
   },
   momento02_exploracao: {
-    instrucao: "Definição.",
+    instrucao: "Contar quantas vezes cada item aparece.",
     cenas: [
-      { tipo: "texto", texto: "Se 5 pessoas dizem 'banana', a frequência da banana é 5." },
-      { tipo: "texto", texto: "Moda = valor com maior frequência.", destaque: true },
+      {
+        tipo: "graficoBarras",
+        titulo: "Frequência de frutas escolhidas",
+        unidade: "vezes",
+        barras: [
+          { rotulo: "Banana", valor: 5 },
+          { rotulo: "Uva", valor: 3 },
+          { rotulo: "Maçã", valor: 2 },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Como achar a moda?",
-    pista: "Maior frequência.",
-    revelacao: "Se banana=5, uva=3, maçã=2 → moda é banana.",
+    perguntaGuia: "Como achar a MODA?",
+    pista: "Olhe a maior barra.",
+    revelacao: "Moda = valor de maior frequência. Aqui: banana.",
   },
   momento04_explicacao: {
     titulo: "Frequência e moda",
     etapas: [
       {
         texto: "Dias que choveu na semana: 2, 4, 3, 4, 5, 4, 2.",
-        exemploReal: { contexto: "4 aparece 3 vezes.", destaque: "Moda = 4." },
+        exemploReal: {
+          contexto: "Conte quantas vezes cada número aparece.",
+          destaque: "O 4 aparece 3 vezes — é a moda.",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Frequência",
+            cabecalhos: ["Vezes"],
+            linhas: [
+              { rotulo: "2", valores: [2] },
+              { rotulo: "3", valores: [1] },
+              { rotulo: "4", valores: [3] },
+              { rotulo: "5", valores: [1] },
+            ],
+            destacar: { linha: 3, coluna: 1 },
+          },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Qual a moda de 2,3,3,4,5,3?",
-    passos: ["Conte: 3 aparece 3 vezes.", "Moda = 3."],
+    enunciado: "Qual a moda de 2, 3, 3, 4, 5, 3?",
+    passos: ["Conte o 3: aparece 3 vezes.", "Nenhum outro aparece 3 vezes.", "Moda = 3."],
     resposta: "3",
-    casasValor: { numero: 3, mostrarDecomposicao: false, extenso: "três" },
+    visualMat: {
+      tipo: "graficoBarras",
+      titulo: "Frequência dos números",
+      unidade: "vezes",
+      barras: [
+        { rotulo: "2", valor: 1 },
+        { rotulo: "3", valor: 3 },
+        { rotulo: "4", valor: 1 },
+        { rotulo: "5", valor: 1 },
+      ],
+    },
   },
   momento06_praticaGuiada: {
-    enunciado: "Cores: azul 4, vermelho 6, verde 2. Qual moda?",
+    enunciado: "Cores: azul=4, vermelho=6, verde=2. Qual é a moda?",
     dica: "Maior frequência.",
     interacao: {
       tipo: "escolhaVisual",
@@ -51,7 +84,7 @@ export const aula05_frequencia: AulaV4 = {
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Números: 5,5,7,8,5,9. Moda?",
+    enunciado: "Números: 5, 5, 7, 8, 5, 9. Qual a moda?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -62,8 +95,8 @@ export const aula05_frequencia: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "Turma: 6 alunos preferem futebol, 4 preferem vôlei, 5 preferem xadrez.",
-    problema: "Esporte moda:",
+    contexto: "Turma: futebol=6, vôlei=4, xadrez=5.",
+    problema: "Esporte-moda:",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -78,7 +111,7 @@ export const aula05_frequencia: AulaV4 = {
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Se todos aparecem 1 vez:",
-      opcoes: [{ nome: "Sem moda" }, { nome: "Moda 1" }, { nome: "Moda todos" }],
+      opcoes: [{ nome: "Sem moda" }, { nome: "Moda 1" }, { nome: "Todos moda" }],
       respostaCerta: "Sem moda",
       feedbackAcerto: "🎉 Amodal.",
       feedbackErro: "Ninguém repete.",

@@ -12,57 +12,65 @@ export const aula06_congruencia: AulaV4 = {
     historia: "Duas figuras podem ser IGUAIS (congruentes) ou só parecidas (semelhantes).",
   },
   momento02_exploracao: {
-    instrucao: "Congruente × Semelhante.",
+    instrucao: "Compare tamanhos e formas.",
     cenas: [
-      { tipo: "texto", texto: "Congruente: mesmo tamanho e mesma forma." },
-      { tipo: "texto", texto: "Semelhante: mesma forma, tamanho diferente.", destaque: true },
+      { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, medidasLados: ["4", "4", "4", "4"], legenda: "Quadrado 4×4" },
+      { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, medidasLados: ["4", "4", "4", "4"], legenda: "Quadrado 4×4 (congruente)" },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Fotos de tamanhos diferentes são congruentes?",
-    pista: "Não!",
-    revelacao: "Se tamanho é diferente, é apenas semelhante.",
+    pista: "Compare medidas.",
+    revelacao: "Se o tamanho é diferente, são apenas semelhantes.",
   },
   momento04_explicacao: {
     titulo: "Comparar figuras",
     etapas: [
       {
-        texto: "Dois quadrados de mesmo lado: CONGRUENTES.",
-        exemploReal: { contexto: "Azulejos idênticos.", destaque: "Iguais em tudo." },
+        texto: "Congruentes: mesma forma E mesmo tamanho.",
+        exemploReal: {
+          contexto: "Dois azulejos idênticos.",
+          destaque: "Iguais em tudo.",
+          visualMat: { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, medidasLados: ["5", "5", "5", "5"] },
+        },
       },
       {
-        texto: "Quadrado grande e pequeno: SEMELHANTES.",
-        exemploReal: { contexto: "Foto e miniatura.", destaque: "Mesma forma, tamanhos diferentes." },
+        texto: "Semelhantes: mesma forma, tamanhos diferentes.",
+        exemploReal: {
+          contexto: "Foto e sua ampliação.",
+          destaque: "Proporção mantida.",
+          visualMat: { tipo: "figuraPlana", forma: "retangulo", mostrarVertices: true, medidasLados: ["6", "3", "6", "3"] },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "2 círculos de raios diferentes são congruentes?",
-    passos: ["Tamanhos diferentes → não são congruentes.", "São apenas semelhantes."],
-    resposta: "Não. São semelhantes.",
-    casasValor: { numero: 0, mostrarDecomposicao: false, extenso: "zero" },
+    enunciado: "Dois círculos de raios diferentes: congruentes ou semelhantes?",
+    passos: ["Tamanhos diferentes → não são congruentes.", "Mesma forma → semelhantes."],
+    resposta: "Semelhantes",
+    visualMat: { tipo: "figuraPlana", forma: "circulo" },
   },
   momento06_praticaGuiada: {
-    enunciado: "Dois quadrados de 4 cm são?",
-    dica: "Mesmo tamanho.",
+    enunciado: "Dois quadrados de 4 cm cada. São:",
+    dica: "Mesmo tamanho e forma.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
       opcoes: [{ nome: "Congruentes" }, { nome: "Semelhantes" }, { nome: "Diferentes" }],
       respostaCerta: "Congruentes",
-      feedbackAcerto: "🎉 Iguais.",
-      feedbackErro: "Mesmo tamanho e forma.",
+      feedbackAcerto: "🎉 Iguais em tudo.",
+      feedbackErro: "Mesmo tamanho e forma = congruentes.",
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Um triângulo pequeno e um grande com mesma forma são?",
+    enunciado: "Um triângulo pequeno e um grande de mesma forma são:",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
       opcoes: [{ nome: "Semelhantes" }, { nome: "Congruentes" }, { nome: "Iguais" }],
       respostaCerta: "Semelhantes",
       feedbackAcerto: "🎯 Semelhantes.",
-      feedbackErro: "Mesma forma, tamanhos diferentes.",
+      feedbackErro: "Forma igual, tamanhos diferentes.",
     },
   },
   momento08_aplicacao: {
@@ -73,15 +81,15 @@ export const aula06_congruencia: AulaV4 = {
       pergunta: "Escolha:",
       opcoes: [{ nome: "Congruentes" }, { nome: "Semelhantes" }, { nome: "Diferentes" }],
       respostaCerta: "Congruentes",
-      feedbackAcerto: "🎯 Congruentes.",
+      feedbackAcerto: "🎯 Idênticas.",
       feedbackErro: "Idênticas = congruentes.",
     },
   },
   momento09_revisao: {
-    pontos: ["Congruente: iguais.", "Semelhante: mesma forma, tamanho diferente."],
+    pontos: ["Congruente: iguais em tudo.", "Semelhante: mesma forma, tamanhos diferentes."],
     miniDesafio: {
       tipo: "escolhaVisual",
-      pergunta: "Foto 3x4 e sua ampliação são?",
+      pergunta: "Foto 3x4 e sua ampliação são:",
       opcoes: [{ nome: "Semelhantes" }, { nome: "Congruentes" }, { nome: "Diferentes" }],
       respostaCerta: "Semelhantes",
       feedbackAcerto: "🎉 Semelhantes.",
@@ -91,7 +99,7 @@ export const aula06_congruencia: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "Dois retângulos 3×5 idênticos:", opcoes: ["Congruentes", "Semelhantes", "Diferentes"], correta: 0, feedbackAcerto: "🎉 Congruentes.", feedbackErro: "Idênticos." },
-      { pergunta: "Mapa e territrório são?", opcoes: ["Semelhantes", "Congruentes", "Iguais"], correta: 0, feedbackAcerto: "🎉 Semelhantes.", feedbackErro: "Escalas diferentes." },
+      { pergunta: "Mapa e território são:", opcoes: ["Semelhantes", "Congruentes", "Iguais"], correta: 0, feedbackAcerto: "🎉 Semelhantes.", feedbackErro: "Escalas diferentes." },
       { pergunta: "Duas rodas iguais:", opcoes: ["Congruentes", "Semelhantes", "Diferentes"], correta: 0, feedbackAcerto: "🎉 Congruentes.", feedbackErro: "Iguais." },
     ],
   },

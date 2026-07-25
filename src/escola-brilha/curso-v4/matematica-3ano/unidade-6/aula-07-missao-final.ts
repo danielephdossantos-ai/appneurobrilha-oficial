@@ -9,43 +9,61 @@ export const aula07_missaoFinalU6: AulaV4 = {
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
     titulo: "Projetar espaços",
-    historia: "{NOME}, a Prefeita te chamou pra desenhar a nova praça. Você precisa de figuras planas, sólidos, simetria e localização.",
+    historia: "{NOME}, a Prefeita te chamou pra desenhar a nova praça. Você vai usar figuras planas, sólidos, simetria e localização.",
   },
   momento02_exploracao: {
-    instrucao: "Tudo junto.",
+    instrucao: "Tudo junto na praça.",
     cenas: [
-      { tipo: "texto", texto: "Figuras planas na planta baixa." },
-      { tipo: "texto", texto: "Sólidos na cidade. Simetria no jardim. Localização no mapa.", destaque: true },
+      { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, mostrarAngulos: true, medidasLados: ["4 m", "4 m", "4 m", "4 m"], legenda: "Praça quadrada 4 m" },
+      { tipo: "solido", forma: "cilindro", legenda: "Banco cilíndrico" },
+      { tipo: "simetria", forma: "quadrado", eixos: ["vertical", "horizontal", "diagonal1", "diagonal2"], legenda: "Jardim simétrico" },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Por que geometria importa?",
+    perguntaGuia: "Por que geometria importa numa cidade?",
     pista: "Pra construir e localizar.",
-    revelacao: "Toda construção usa geometria.",
+    revelacao: "Toda construção e todo endereço usa geometria.",
   },
   momento04_explicacao: {
     titulo: "Miniprojeto",
     etapas: [
       {
-        texto: "Praça quadrada de 4 m de lado.",
+        texto: "Praça quadrada de 4 m: perímetro = 4 + 4 + 4 + 4.",
         exemploReal: {
-          contexto: "Perímetro = 4×4.",
+          contexto: "Perímetro = soma dos lados.",
           destaque: "16 m de cerca.",
-          contaPassoAPasso: {
-            operacao: "mult",
-            operandos: [4, 4],
-            resultado: 16,
-            passos: [{ coluna: "U", fala: "4 × 4 = 16 metros de cerca.", digito: 6 }],
+          visualMat: { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, mostrarAngulos: true, medidasLados: ["4 m", "4 m", "4 m", "4 m"] },
+        },
+      },
+      {
+        texto: "Banco em forma de cilindro: 2 bases circulares.",
+        exemploReal: {
+          contexto: "Assento redondo em cima e embaixo.",
+          destaque: "3 faces (2 círculos + 1 curva).",
+          visualMat: { tipo: "solido", forma: "cilindro" },
+        },
+      },
+      {
+        texto: "Localização: a entrada fica em (2, A).",
+        exemploReal: {
+          contexto: "Aponte no mapa da praça.",
+          destaque: "Linha 2, coluna A.",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 3,
+            colunas: 4,
+            pinos: [{ linha: 2, coluna: 1, rotulo: "🚪" }, { linha: 2, coluna: 4, rotulo: "🥤" }],
+            destaque: { linha: 2, coluna: 1 },
           },
         },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Praça retangular 5m × 3m. Perímetro?",
-    passos: ["Some os 4 lados.", "5+3+5+3=16."],
+    enunciado: "Praça retangular 5 m × 3 m. Perímetro?",
+    passos: ["Some os 4 lados.", "5 + 3 + 5 + 3 = 16."],
     resposta: "16 m",
-    casasValor: { numero: 16, mostrarDecomposicao: false, extenso: "dezesseis" },
+    visualMat: { tipo: "figuraPlana", forma: "retangulo", mostrarVertices: true, mostrarAngulos: true, medidasLados: ["5 m", "3 m", "5 m", "3 m"] },
   },
   momento06_praticaGuiada: {
     enunciado: "Banco em forma de cilindro. Quantas bases?",
@@ -60,7 +78,7 @@ export const aula07_missaoFinalU6: AulaV4 = {
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Fonte simétrica. Quantos eixos precisa ter no mínimo?",
+    enunciado: "Fonte simétrica precisa de quantos eixos no mínimo?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -71,7 +89,7 @@ export const aula07_missaoFinalU6: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "A entrada da praça está em (2, A). O quiosque em (2, D).",
+    contexto: "Entrada em (2, A) e quiosque em (2, D).",
     problema: "Distância em passos:",
     interacao: {
       tipo: "escolhaVisual",
@@ -95,7 +113,7 @@ export const aula07_missaoFinalU6: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "Perímetro de quadrado 5 cm?", opcoes: ["20", "10", "25"], correta: 0, feedbackAcerto: "🎉 20.", feedbackErro: "5×4=20." },
+      { pergunta: "Perímetro de quadrado 5 cm?", opcoes: ["20", "10", "25"], correta: 0, feedbackAcerto: "🎉 20.", feedbackErro: "5+5+5+5=20." },
       { pergunta: "Círculo tem quantos vértices?", opcoes: ["0", "1", "infinitos"], correta: 0, feedbackAcerto: "🎉 0.", feedbackErro: "Círculo não tem vértice." },
       { pergunta: "Retângulo tem quantos eixos de simetria?", opcoes: ["2", "1", "4"], correta: 0, feedbackAcerto: "🎉 2.", feedbackErro: "H e V." },
     ],

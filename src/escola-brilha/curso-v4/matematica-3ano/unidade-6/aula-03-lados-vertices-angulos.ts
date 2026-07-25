@@ -2,24 +2,25 @@ import type { AulaV4 } from "../../types";
 
 export const aula03_ladosVertices: AulaV4 = {
   slug: "u6-03-lados-vertices",
-  titulo: "Lados, Vértices e Cantos",
+  titulo: "Lados, Vértices e Ângulos",
   iconeTrilha: "📐",
   bncc: ["EF03MA14"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
-    titulo: "Contar peças",
-    historia: "Cada figura tem uma 'ficha técnica': lados, vértices e ângulos.",
+    titulo: "A ficha técnica das figuras",
+    historia: "Cada figura tem 'ficha': número de lados, vértices (A, B, C…) e ângulos.",
   },
   momento02_exploracao: {
-    instrucao: "Vocabulário geométrico.",
+    instrucao: "Vocabulário geométrico com figuras reais.",
     cenas: [
-      { tipo: "texto", texto: "Lado = borda reta. Vértice = canto. Ângulo = abertura." },
-      { tipo: "texto", texto: "Nº de lados = nº de vértices.", destaque: true },
+      { tipo: "figuraPlana", forma: "pentagono", mostrarVertices: true, legenda: "Pentágono — 5 lados" },
+      { tipo: "figuraPlana", forma: "hexagono", mostrarVertices: true, legenda: "Hexágono — 6 lados" },
+      { tipo: "figuraPlana", forma: "octogono", mostrarVertices: true, legenda: "Octógono — 8 lados" },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Ângulo reto é o quê?",
+    perguntaGuia: "O que é ângulo reto?",
     pista: "Formato de L.",
     revelacao: "Ângulo reto = 90°. Quadrado e retângulo têm 4 ângulos retos.",
   },
@@ -27,12 +28,28 @@ export const aula03_ladosVertices: AulaV4 = {
     titulo: "Contar direito",
     etapas: [
       {
-        texto: "Pentágono: 5 lados, 5 vértices.",
-        exemploReal: { contexto: "Home plate do beisebol.", destaque: "Prefixo penta = 5." },
+        texto: "Pentágono: 5 lados, 5 vértices (A, B, C, D, E).",
+        exemploReal: {
+          contexto: "Home plate do beisebol.",
+          destaque: "Penta = 5.",
+          visualMat: { tipo: "figuraPlana", forma: "pentagono", mostrarVertices: true },
+        },
       },
       {
-        texto: "Hexágono: 6 lados.",
-        exemploReal: { contexto: "Colmeia de abelha.", destaque: "Hexa = 6." },
+        texto: "Hexágono: 6 lados, 6 vértices.",
+        exemploReal: {
+          contexto: "Colmeia de abelha.",
+          destaque: "Hexa = 6.",
+          visualMat: { tipo: "figuraPlana", forma: "hexagono", mostrarVertices: true },
+        },
+      },
+      {
+        texto: "Quadrado: 4 ângulos retos (90°).",
+        exemploReal: {
+          contexto: "Janela.",
+          destaque: "Ângulo reto marcado com o quadradinho.",
+          visualMat: { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, mostrarAngulos: true },
+        },
       },
     ],
   },
@@ -40,11 +57,11 @@ export const aula03_ladosVertices: AulaV4 = {
     enunciado: "Um hexágono tem quantos vértices?",
     passos: ["Hexágono = 6 lados.", "6 lados = 6 vértices."],
     resposta: "6 vértices",
-    casasValor: { numero: 6, mostrarDecomposicao: false, extenso: "seis" },
+    visualMat: { tipo: "figuraPlana", forma: "hexagono", mostrarVertices: true },
   },
   momento06_praticaGuiada: {
     enunciado: "Pentágono tem quantos lados?",
-    dica: "Penta.",
+    dica: "Prefixo 'penta'.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -78,7 +95,7 @@ export const aula03_ladosVertices: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Lados = vértices.", "Ângulo reto = 90°."],
+    pontos: ["Nº de lados = nº de vértices.", "Ângulo reto = 90°."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Colmeia lembra qual figura?",

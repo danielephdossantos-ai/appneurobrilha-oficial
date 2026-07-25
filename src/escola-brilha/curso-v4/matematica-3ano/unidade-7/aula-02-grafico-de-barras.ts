@@ -9,37 +9,83 @@ export const aula02_graficoBarras: AulaV4 = {
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
     titulo: "Ver de olhar",
-    historia: "Um gráfico mostra na hora quem venceu. Barra maior = mais votos.",
+    historia: "Um gráfico mostra na hora quem venceu. Barra mais alta = mais votos.",
   },
   momento02_exploracao: {
-    instrucao: "Partes de um gráfico.",
+    instrucao: "Partes de um gráfico: eixo, barras, escala.",
     cenas: [
-      { tipo: "texto", texto: "Eixo horizontal: categorias." },
-      { tipo: "texto", texto: "Eixo vertical: quantidade. Barra alta = mais.", destaque: true },
+      {
+        tipo: "graficoBarras",
+        titulo: "Frutas preferidas",
+        unidade: "votos",
+        barras: [
+          { rotulo: "Banana", valor: 6 },
+          { rotulo: "Maçã", valor: 4 },
+          { rotulo: "Uva", valor: 2 },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Como comparar duas categorias?",
     pista: "Olhe a altura da barra.",
-    revelacao: "Barra mais alta ganha.",
+    revelacao: "Barra mais alta = maior quantidade.",
   },
   momento04_explicacao: {
     titulo: "Ler gráfico",
     etapas: [
       {
-        texto: "Frutas: banana=6, maçã=4, uva=2.",
-        exemploReal: { contexto: "Banana tem barra mais alta.", destaque: "Banana venceu." },
+        texto: "Compare as barras: quem tem a mais alta vence.",
+        exemploReal: {
+          contexto: "Banana=6, maçã=4, uva=2.",
+          destaque: "Banana venceu.",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Frutas preferidas",
+            unidade: "votos",
+            barras: [
+              { rotulo: "Banana", valor: 6 },
+              { rotulo: "Maçã", valor: 4 },
+              { rotulo: "Uva", valor: 2 },
+            ],
+          },
+        },
+      },
+      {
+        texto: "Para saber diferença: subtraia os valores.",
+        exemploReal: {
+          contexto: "Cachorro=10, gato=6.",
+          destaque: "Diferença = 10 − 6 = 4.",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Pets da turma",
+            unidade: "crianças",
+            barras: [
+              { rotulo: "Cachorro", valor: 10 },
+              { rotulo: "Gato", valor: 6 },
+            ],
+          },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Se azul=8, vermelho=5 e verde=7, qual ganha?",
-    passos: ["Compare 8, 5, 7.", "8 é o maior."],
-    resposta: "Azul",
-    casasValor: { numero: 8, mostrarDecomposicao: false, extenso: "oito" },
+    enunciado: "Se azul=8, vermelho=5 e verde=7, qual barra ganha?",
+    passos: ["Compare 8, 5, 7.", "8 é o maior.", "Azul ganha."],
+    resposta: "Azul (8)",
+    visualMat: {
+      tipo: "graficoBarras",
+      titulo: "Cor favorita",
+      unidade: "votos",
+      barras: [
+        { rotulo: "Azul", valor: 8, cor: "#3b82f6" },
+        { rotulo: "Vermelho", valor: 5, cor: "#ef4444" },
+        { rotulo: "Verde", valor: 7, cor: "#10b981" },
+      ],
+    },
   },
   momento06_praticaGuiada: {
-    enunciado: "Se cachorro=10 e gato=6, diferença?",
+    enunciado: "Cachorro=10 e gato=6. Diferença?",
     dica: "Subtração.",
     interacao: {
       tipo: "escolhaVisual",
@@ -51,7 +97,7 @@ export const aula02_graficoBarras: AulaV4 = {
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Numa turma: futebol 9, vôlei 6, xadrez 5. Total?",
+    enunciado: "Numa turma: futebol=9, vôlei=6, xadrez=5. Total?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -62,8 +108,8 @@ export const aula02_graficoBarras: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "Chocolate 15 votos, morango 10, baunilha 5.",
-    problema: "Qual perdeu?",
+    contexto: "Chocolate=15 votos, morango=10, baunilha=5.",
+    problema: "Qual sabor perdeu?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",

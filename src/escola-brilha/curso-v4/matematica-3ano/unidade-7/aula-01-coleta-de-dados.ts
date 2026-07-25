@@ -12,31 +12,61 @@ export const aula01_coletaDados: AulaV4 = {
     historia: "Qual a fruta preferida da turma? Antes de saber, é preciso PERGUNTAR e ANOTAR.",
   },
   momento02_exploracao: {
-    instrucao: "Passos da coleta.",
+    instrucao: "Passos da coleta: perguntar → anotar → contar.",
     cenas: [
-      { tipo: "texto", texto: "1) Faça a pergunta. 2) Anote as respostas. 3) Conte." },
-      { tipo: "texto", texto: "Cada resposta = um 'palito' no papel.", destaque: true },
+      {
+        tipo: "tabela",
+        titulo: "Fruta preferida (10 crianças)",
+        cabecalhos: ["Contagem", "Total"],
+        linhas: [
+          { rotulo: "🍌 Banana", valores: ["||||", 4] },
+          { rotulo: "🍎 Maçã", valores: ["|||", 3] },
+          { rotulo: "🍇 Uva", valores: ["|||", 3] },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Como não esquecer nenhuma resposta?",
-    pista: "Marque um risquinho por resposta.",
-    revelacao: "Tabela com contagem preserva o dado.",
+    pista: "Marque um risquinho a cada resposta.",
+    revelacao: "Tabela de contagem preserva o dado.",
   },
   momento04_explicacao: {
     titulo: "Tabela de contagem",
     etapas: [
       {
         texto: "10 crianças escolheram: 4 banana, 3 maçã, 3 uva.",
-        exemploReal: { contexto: "Total = 4+3+3=10.", destaque: "Banana venceu." },
+        exemploReal: {
+          contexto: "Total = 4 + 3 + 3 = 10.",
+          destaque: "Banana venceu com 4.",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Votos"],
+            linhas: [
+              { rotulo: "Banana", valores: [4] },
+              { rotulo: "Maçã", valores: [3] },
+              { rotulo: "Uva", valores: [3] },
+            ],
+            destacar: { linha: 1, coluna: 1 },
+          },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Some 5+3+2 votos de sorvete.",
-    passos: ["5+3=8.", "8+2=10.", "Total 10 votos."],
-    resposta: "10 votos",
-    casasValor: { numero: 10, mostrarDecomposicao: true, extenso: "dez" },
+    enunciado: "Some 5 + 3 + 2 votos de sabores de sorvete.",
+    passos: ["5 + 3 = 8.", "8 + 2 = 10."],
+    resposta: "10 votos no total",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "Sorvete preferido",
+      cabecalhos: ["Votos"],
+      linhas: [
+        { rotulo: "Chocolate", valores: [5] },
+        { rotulo: "Morango", valores: [3] },
+        { rotulo: "Baunilha", valores: [2] },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Se azul teve 6 votos e vermelho 4, qual venceu?",
@@ -62,7 +92,7 @@ export const aula01_coletaDados: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "Turma de 20 alunos. 8 gostam de futebol, 7 de vôlei, 5 de queimada.",
+    contexto: "Turma de 20: 8 futebol, 7 vôlei, 5 queimada.",
     problema: "Qual venceu?",
     interacao: {
       tipo: "escolhaVisual",
@@ -87,7 +117,7 @@ export const aula01_coletaDados: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "5+4+3 = ?", opcoes: ["12", "10", "14"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "5+4+3=12." },
-      { pergunta: "Qual é o passo 1?", opcoes: ["Perguntar", "Contar", "Comparar"], correta: 0, feedbackAcerto: "🎉 Perguntar.", feedbackErro: "Sempre pergunta primeiro." },
+      { pergunta: "Qual é o passo 1 da coleta?", opcoes: ["Perguntar", "Contar", "Comparar"], correta: 0, feedbackAcerto: "🎉 Perguntar.", feedbackErro: "Sempre pergunta primeiro." },
       { pergunta: "Total de 6+6+6?", opcoes: ["18", "16", "20"], correta: 0, feedbackAcerto: "🎉 18.", feedbackErro: "3×6=18." },
     ],
   },

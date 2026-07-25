@@ -2,7 +2,7 @@ import type { AulaV4 } from "../../types";
 
 export const aula05_localizacao: AulaV4 = {
   slug: "u6-05-localizacao",
-  titulo: "Onde Estou?",
+  titulo: "Onde Estou? — Mapa em Malha",
   iconeTrilha: "🗺️",
   bncc: ["EF03MA12"],
   duracaoMin: 20,
@@ -12,39 +12,78 @@ export const aula05_localizacao: AulaV4 = {
     historia: "'A escola fica 2 quarteirões à direita, depois vira à esquerda.' Sem localização, ninguém chega.",
   },
   momento02_exploracao: {
-    instrucao: "Palavras de localização.",
+    instrucao: "Mapa com linhas (números) e colunas (letras).",
     cenas: [
-      { tipo: "texto", texto: "Direita · Esquerda · Frente · Atrás · Em cima · Embaixo." },
-      { tipo: "texto", texto: "Mapa: linhas e colunas identificam posição.", destaque: true },
+      {
+        tipo: "mapaGrade",
+        linhas: 4,
+        colunas: 4,
+        pinos: [
+          { linha: 3, coluna: 2, rotulo: "🏫", cor: "#3b82f6" },
+          { linha: 1, coluna: 4, rotulo: "🏠", cor: "#f59e0b" },
+        ],
+        legenda: "Escola em (3,B) · Casa em (1,D)",
+      },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Como descrever um lugar em uma malha?",
+    perguntaGuia: "Como descrever uma casa exata na malha?",
     pista: "Linha e coluna.",
-    revelacao: "Linha 3, coluna B → uma casa exata.",
+    revelacao: "Escrevemos (linha, coluna). Ex.: (3, B).",
   },
   momento04_explicacao: {
-    titulo: "Mapa com malha",
+    titulo: "Ler coordenadas",
     etapas: [
       {
-        texto: "A escola está em (2, C).",
-        exemploReal: { contexto: "Linha 2, coluna C.", destaque: "Endereço em mapa." },
+        texto: "A escola está em (3, B) — linha 3, coluna B.",
+        exemploReal: {
+          contexto: "Aponte a célula do cruzamento.",
+          destaque: "Sempre linha primeiro, coluna depois.",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 4,
+            colunas: 4,
+            pinos: [{ linha: 3, coluna: 2, rotulo: "🏫" }],
+            destaque: { linha: 3, coluna: 2 },
+          },
+        },
       },
       {
-        texto: "Descrever movimento: 'ande 3 pra direita e 2 pra cima'.",
-        exemploReal: { contexto: "Robô-labirinto.", destaque: "Direções claras." },
+        texto: "Direita/esquerda muda coluna. Cima/baixo muda linha.",
+        exemploReal: {
+          contexto: "De (1, A), 2 à direita e 1 pra cima chega em (2, C).",
+          destaque: "A → B → C = 2 colunas.",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 4,
+            colunas: 4,
+            pinos: [
+              { linha: 1, coluna: 1, rotulo: "🚶", cor: "#10b981" },
+              { linha: 2, coluna: 3, rotulo: "⭐", cor: "#f59e0b" },
+            ],
+          },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Partindo de (1, A), ande 2 pra direita e 1 pra cima. Onde chega?",
-    passos: ["Coluna A + 2 = C.", "Linha 1 + 1 = 2.", "(2, C)."],
+    enunciado: "Partindo de (1, A), ande 2 à direita e 1 pra cima. Onde chega?",
+    passos: ["Coluna A + 2 = C.", "Linha 1 + 1 = 2.", "Chega em (2, C)."],
     resposta: "(2, C)",
-    casasValor: { numero: 2, mostrarDecomposicao: false, extenso: "dois" },
+    visualMat: {
+      tipo: "mapaGrade",
+      linhas: 4,
+      colunas: 4,
+      pinos: [
+        { linha: 1, coluna: 1, rotulo: "🚶", cor: "#10b981" },
+        { linha: 2, coluna: 3, rotulo: "🏁", cor: "#f59e0b" },
+      ],
+      destaque: { linha: 2, coluna: 3 },
+    },
   },
   momento06_praticaGuiada: {
-    enunciado: "A padaria fica à direita da farmácia. Farmácia em (3, B). Padaria em?",
-    dica: "Direita = coluna maior.",
+    enunciado: "Farmácia em (3, B). Padaria fica à direita. Onde está a padaria?",
+    dica: "Direita = próxima coluna, mesma linha.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -67,7 +106,7 @@ export const aula05_localizacao: AulaV4 = {
   },
   momento08_aplicacao: {
     contexto: "No labirinto, você está em (1, A) e o tesouro em (3, C).",
-    problema: "Vá 2 pra cima e:",
+    problema: "Ande 2 pra cima e...",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -78,7 +117,7 @@ export const aula05_localizacao: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Linha e coluna localizam.", "Direita/esquerda muda coluna. Cima/baixo muda linha."],
+    pontos: ["(linha, coluna) localiza.", "Direita/esquerda = coluna. Cima/baixo = linha."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Ir pra esquerda muda o quê?",
@@ -91,14 +130,14 @@ export const aula05_localizacao: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "De (1,A) para (1,D): quantos passos à direita?", opcoes: ["3", "2", "4"], correta: 0, feedbackAcerto: "🎉 3.", feedbackErro: "A→B→C→D=3." },
-      { pergunta: "Cima muda?", opcoes: ["Linha", "Coluna", "Nada"], correta: 0, feedbackAcerto: "🎉 Linha.", feedbackErro: "Cima = linha muda." },
-      { pergunta: "Se estou em (4,C) e vou 1 pra baixo?", opcoes: ["(3,C)", "(5,C)", "(4,B)"], correta: 0, feedbackAcerto: "🎉 (3,C).", feedbackErro: "Baixo diminui linha." },
+      { pergunta: "Cima muda o quê?", opcoes: ["Linha", "Coluna", "Nada"], correta: 0, feedbackAcerto: "🎉 Linha.", feedbackErro: "Cima = linha muda." },
+      { pergunta: "De (4,C), 1 pra baixo chega em?", opcoes: ["(3,C)", "(5,C)", "(4,B)"], correta: 0, feedbackAcerto: "🎉 (3,C).", feedbackErro: "Baixo diminui linha." },
     ],
   },
   momento11_missaoFamilia: {
     titulo: "Mapa da casa",
     materiais: ["Papel quadriculado"],
-    passos: ["Desenhe um mapa da sua casa em malha.", "Marque quarto, sala e cozinha com (linha, coluna)."],
+    passos: ["Desenhe sua casa em malha.", "Marque quarto, sala e cozinha com (linha, coluna)."],
     registro: "📸 Foto do mapa.",
   },
   recompensa: { xp: 200, moedas: 100 },

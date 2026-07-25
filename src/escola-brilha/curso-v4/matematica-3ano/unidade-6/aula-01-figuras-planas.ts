@@ -12,39 +12,44 @@ export const aula01_figurasPlanas: AulaV4 = {
     historia: "Tudo tem forma. Janela é quadrado. Roda é círculo. Placa de PARE é octógono!",
   },
   momento02_exploracao: {
-    instrucao: "As figuras principais.",
+    instrucao: "As figuras principais — repare em vértices e lados.",
     cenas: [
-      { tipo: "texto", texto: "Quadrado · Retângulo · Triângulo · Círculo." },
-      { tipo: "texto", texto: "Cada uma tem lados e vértices próprios.", destaque: true },
+      { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, mostrarAngulos: true, legenda: "Quadrado ABCD" },
+      { tipo: "figuraPlana", forma: "retangulo", mostrarVertices: true, mostrarAngulos: true, legenda: "Retângulo ABCD" },
+      { tipo: "figuraPlana", forma: "triangulo", mostrarVertices: true, legenda: "Triângulo ABC" },
+      { tipo: "figuraPlana", forma: "circulo", legenda: "Círculo — centro O" },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Qual a diferença entre quadrado e retângulo?",
-    pista: "Lados iguais ou não.",
+    pista: "Compare os lados.",
     revelacao: "Quadrado: 4 lados iguais. Retângulo: 2 pares de lados iguais.",
   },
   momento04_explicacao: {
     titulo: "Identificar figuras",
     etapas: [
       {
-        texto: "Quadrado: 4 lados iguais e 4 cantos retos.",
+        texto: "Quadrado: 4 lados iguais e 4 ângulos retos (90°).",
         exemploReal: {
-          contexto: "Azulejo.",
-          destaque: "4 lados = 4 vértices.",
+          contexto: "Azulejo do banheiro.",
+          destaque: "4 lados = 4 vértices A, B, C, D.",
+          visualMat: { tipo: "figuraPlana", forma: "quadrado", mostrarVertices: true, mostrarAngulos: true, medidasLados: ["4 cm", "4 cm", "4 cm", "4 cm"] },
         },
       },
       {
         texto: "Triângulo: 3 lados, 3 vértices.",
         exemploReal: {
           contexto: "Fatia de pizza.",
-          destaque: "3 lados sempre.",
+          destaque: "Vértices A, B, C.",
+          visualMat: { tipo: "figuraPlana", forma: "triangulo", mostrarVertices: true },
         },
       },
       {
-        texto: "Círculo: sem lados retos, sem vértices.",
+        texto: "Círculo: sem lados retos, sem vértices — só centro.",
         exemploReal: {
           contexto: "Roda de bicicleta.",
           destaque: "Curva contínua.",
+          visualMat: { tipo: "figuraPlana", forma: "circulo" },
         },
       },
     ],
@@ -53,11 +58,11 @@ export const aula01_figurasPlanas: AulaV4 = {
     enunciado: "Quantos lados tem um retângulo?",
     passos: ["Retângulo tem 4 lados.", "2 pares de lados iguais."],
     resposta: "4 lados",
-    casasValor: { numero: 4, mostrarDecomposicao: false, extenso: "quatro" },
+    visualMat: { tipo: "figuraPlana", forma: "retangulo", mostrarVertices: true, mostrarAngulos: true, medidasLados: ["6 cm", "3 cm", "6 cm", "3 cm"] },
   },
   momento06_praticaGuiada: {
     enunciado: "Uma janela quadrada tem quantos vértices?",
-    dica: "Cantos.",
+    dica: "Conte os cantos A, B, C, D.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -91,7 +96,7 @@ export const aula01_figurasPlanas: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Quadrado, retângulo, triângulo, círculo.", "Lados e vértices identificam."],
+    pontos: ["Quadrado, retângulo, triângulo, círculo.", "Vértices em A, B, C, D."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Figura sem lados retos?",
