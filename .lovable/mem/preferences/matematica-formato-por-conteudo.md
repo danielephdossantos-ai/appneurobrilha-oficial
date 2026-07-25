@@ -13,8 +13,10 @@ Matemática NÃO tem um padrão único de ensino. O formato da explicação, do 
 | Conteúdo | Formato de explicação | Componente |
 | --- | --- | --- |
 | Numeração, valor posicional, soma/subtração armadas | Casas de valor (U/D/C/UM) + conta passo a passo | `CasasValor`, `contaPassoAPasso` |
-| Tabuada, multiplicação, divisão exata | Tabuada interativa (linhas reveladas uma a uma, com soma equivalente em vermelho) + tabuada de referência nas atividades | `TabuadaInterativa`, `TabuadaReferencia` |
-| Divisão com repartição | Rodadas de distribuição "1 pra cada" até zerar, ligando à tabuada | cenas passo a passo + tabuada |
+| Tabuada isolada / fatos básicos | Tabuada interativa só quando o OBJETIVO da aula é decorar/entender fatos básicos de multiplicação | `TabuadaInterativa`, `TabuadaReferencia` |
+| Multiplicação 5º–9º / Ensino Médio | Conta armada real, com parciais, deslocamento por dezena/centena e sobras em outra cor; nunca tabuada automática para chegar ao resultado | `contaPassoAPasso` / algoritmo formal |
+| Divisão 5º–9º / Ensino Médio | Divisão pela chave tradicional, com parcial → multiplica → subtrai → desce o próximo algarismo | `DivisaoChave` |
+| Divisão com repartição inicial | Rodadas de distribuição "1 pra cada" até zerar; só depois conectar ao algoritmo formal conforme a série | cenas passo a passo + chave |
 | Geometria plana (quadrado, retângulo, triângulo, polígonos) | Figura real com vértices rotulados (A, B, C, D), lados e ângulos marcados como no padrão internacional | figura SVG com labels |
 | Geometria espacial | Sólido com faces/arestas/vértices contados | SVG do sólido |
 | Estatística e probabilidade | Gráfico real (barras, colunas, pictograma, linha, setores) — nunca só texto | componente de gráfico |
@@ -28,10 +30,13 @@ Matemática NÃO tem um padrão único de ensino. O formato da explicação, do 
 - Antes de escrever a aula, identifique o conteúdo e escolha o formato da tabela acima.
 - Se o Player não tem o componente certo, criar o componente ao invés de cair no formato genérico.
 - Nunca renderizar "Casas de valor" em aulas de tabuada, geometria, estatística, medidas ou frações — está errado pedagogicamente e confunde a criança.
-- Tabuada: sempre em coluna alinhada (fator × 1, × 2, …), nunca inline separado por ponto.
+- Tabuada: sempre em coluna alinhada (fator × 1, × 2, …), nunca inline separado por ponto; porém do 5º ao 9º ela NÃO substitui a conta armada, só aparece se o tema explícito for tabuada/fato básico.
+- Multiplicação do 5º ao 9º: sempre montar a conta como na escola. Ex.: `32 × 18` precisa mostrar `8×2`, `8×3`, depois `1×2`, `1×3`, parcial de cada linha e soma final; não renderizar tabuada do 32/18.
+- Multiplicar por 10, 100, 1.000: mostrar deslocamento/zeros dentro da conta ou em sequência visual de posições; nunca deixar só frase textual.
+- Divisão do 5º ao 9º: sempre chave; tabuada não é o método principal.
 - Geometria: rotular vértices com letras maiúsculas (A, B, C, D…) e marcar ângulos/medidas — é o padrão mundial e a criança já vai encontrar em toda escola/livro.
 - Gráficos: eixos rotulados, escala visível, dados reais da atividade.
 
 ## Detecção automática no Player
 
-O `PlayerV4` já detecta multiplicação/divisão pelo texto (`detectarMultDivNoTexto`) e troca casas de valor pela tabuada. Estender o mesmo padrão para os demais formatos: cada categoria acima ganha seu próprio detector + componente, e o default (casas de valor) só entra quando o conteúdo é realmente numeração/aditivo.
+O `PlayerV4` detecta multiplicação/divisão pelo texto (`detectarMultDivNoTexto`). Para 5º–9º, essa detecção deve renderizar algoritmo formal (multiplicação armada ou divisão pela chave), não tabuada. Tabuada automática só entra em aula cujo conteúdo declarado seja tabuada/fatos básicos. Cada categoria acima ganha seu próprio detector + componente, e o default (casas de valor) só entra quando o conteúdo é realmente numeração/aditivo.
