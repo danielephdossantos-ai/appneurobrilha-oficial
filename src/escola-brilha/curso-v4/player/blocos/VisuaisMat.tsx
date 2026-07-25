@@ -88,6 +88,24 @@ export type EscalaProbV = {
   itens: Array<{ evento: string; nivel: "impossivel" | "pouco" | "provavel" | "muito" | "certo" }>;
 };
 
+/**
+ * Reta numérica horizontal — 6º ano em diante.
+ * Suporta negativos, positivos e zero. Padrão internacional:
+ * setas nas duas pontas, tick central marcado como 0, ticks em passo constante.
+ */
+export type RetaNumericaV = {
+  tipo: "retaNumerica";
+  min: number;
+  max: number;
+  /** Espaçamento entre ticks marcados (padrão = 1). */
+  passo?: number;
+  /** Números com bolinha destacada. */
+  destacar?: Array<{ valor: number; cor?: string; rotulo?: string }>;
+  /** Intervalos coloridos entre dois valores (ex.: −3 a 3). */
+  intervalos?: Array<{ de: number; ate: number; cor?: string; rotulo?: string }>;
+  legenda?: string;
+};
+
 // =========================== Renderer ===============================
 
 export function RenderVisualMat({ v }: { v: VisualMat }) {
@@ -106,8 +124,11 @@ export function RenderVisualMat({ v }: { v: VisualMat }) {
       return <Tabela v={v} />;
     case "escalaProb":
       return <EscalaProb v={v} />;
+    case "retaNumerica":
+      return <RetaNumerica v={v} />;
   }
 }
+
 
 // -------------------- Figuras planas (2D) ----------------------------
 
