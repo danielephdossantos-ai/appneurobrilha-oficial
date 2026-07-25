@@ -94,13 +94,11 @@ export const aula03_notacaoGrande: AulaV4 = {
     enunciado: "Escreva 92.000.000 em notação científica.",
     resposta: "9,2 · 10⁷",
     visualMat: {
-      tipo: "tabela",
-      cabecalhos: ["Passo", "Ação"],
-      linhas: [
-        { rotulo: "1", valores: ["vírgula", "9,2000000"] },
-        { rotulo: "2", valores: ["casas movidas", "7"] },
-        { rotulo: "3", valores: ["resultado", "9,2 · 10⁷"] },
-      ],
+      tipo: "notacaoCientifica",
+      numero: "92.000.000",
+      coeficiente: "9,2",
+      expoente: 7,
+      legenda: "Modelagem",
     },
     passos: ["Andei a vírgula até 9,2.", "Contei 7 casas pra esquerda.", "= 9,2 · 10⁷."],
   },
