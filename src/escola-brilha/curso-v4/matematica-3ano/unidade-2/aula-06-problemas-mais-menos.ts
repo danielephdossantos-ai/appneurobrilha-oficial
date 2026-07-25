@@ -99,15 +99,35 @@ export const aula06_problemas: AulaV4 = {
     "enunciado": "Marina tinha R$ 500. Gastou R$ 187. Quanto sobrou?",
     "passos": [
       "'Sobrou' → SUBTRAÇÃO.",
-      "500 − 187.",
-      "U:10−7=3 (empresta), D empresta, C:4−1=3.",
+      "Monte a conta: 500 − 187.",
+      "Resolva pela unidade, depois dezena, depois centena.",
       "Resultado: R$ 313."
     ],
     "resposta": "Sobrou R$ 313",
-    "casasValor": {
-      "numero": 500,
-      "mostrarDecomposicao": true,
-      "extenso": "quinhentos"
+    "contaPassoAPasso": {
+      "operacao": "sub",
+      "operandos": [
+        500,
+        187
+      ],
+      "resultado": 313,
+      "passos": [
+        {
+          "coluna": "U",
+          "fala": "0 não tira 7. Empresta em cadeia: 10 − 7 = 3.",
+          "digito": 3
+        },
+        {
+          "coluna": "D",
+          "fala": "A dezena virou 9 depois de emprestar: 9 − 8 = 1.",
+          "digito": 1
+        },
+        {
+          "coluna": "C",
+          "fala": "A centena virou 4: 4 − 1 = 3.",
+          "digito": 3
+        }
+      ]
     }
   },
   "momento06_praticaGuiada": {

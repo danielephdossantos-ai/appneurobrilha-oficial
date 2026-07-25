@@ -339,7 +339,9 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
-  const contaMD = detectarMultDivNoTexto(m.enunciado);
+  const textoConta = `${m.enunciado} ${m.passos.join(" ")}`;
+  const contaMD = detectarMultDivNoTexto(textoConta);
+  const contaAditiva = detectarContaNoTexto(textoConta);
   return (
     <Card>
       <div className="text-sm text-amber-300">🧠 Brilha pensa em voz alta:</div>
@@ -396,15 +398,28 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         </div>
       )}
 
-      {m.visualMat ? (
+      {m.contaPassoAPasso ? (
+        <ContaPassoAPasso
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: m.contaPassoAPasso.operacao,
+            operandos: m.contaPassoAPasso.operandos,
+            resultado: m.contaPassoAPasso.resultado,
+            passos: m.contaPassoAPasso.passos,
+            modo: "explicacao",
+          }}
+        />
+      ) : m.visualMat ? (
         <RenderVisualMat v={m.visualMat} />
       ) : contaMD ? (
         <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
+      ) : contaAditiva ? (
+        <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
 
-      {!m.colecaoVisual && !m.casasValor && m.visualUrl && (
+      {!m.colecaoVisual && !m.casasValor && !m.contaPassoAPasso && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
       )}
 
