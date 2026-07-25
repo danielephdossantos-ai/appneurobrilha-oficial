@@ -16,7 +16,8 @@ export type VisualMat =
   | MapaGradeV
   | GraficoBarrasV
   | TabelaV
-  | EscalaProbV;
+  | EscalaProbV
+  | RetaNumericaV;
 
 export type FiguraPlanaV = {
   tipo: "figuraPlana";
@@ -87,6 +88,24 @@ export type EscalaProbV = {
   itens: Array<{ evento: string; nivel: "impossivel" | "pouco" | "provavel" | "muito" | "certo" }>;
 };
 
+/**
+ * Reta numérica horizontal — 6º ano em diante.
+ * Suporta negativos, positivos e zero. Padrão internacional:
+ * setas nas duas pontas, tick central marcado como 0, ticks em passo constante.
+ */
+export type RetaNumericaV = {
+  tipo: "retaNumerica";
+  min: number;
+  max: number;
+  /** Espaçamento entre ticks marcados (padrão = 1). */
+  passo?: number;
+  /** Números com bolinha destacada. */
+  destacar?: Array<{ valor: number; cor?: string; rotulo?: string }>;
+  /** Intervalos coloridos entre dois valores (ex.: −3 a 3). */
+  intervalos?: Array<{ de: number; ate: number; cor?: string; rotulo?: string }>;
+  legenda?: string;
+};
+
 // =========================== Renderer ===============================
 
 export function RenderVisualMat({ v }: { v: VisualMat }) {
@@ -105,8 +124,11 @@ export function RenderVisualMat({ v }: { v: VisualMat }) {
       return <Tabela v={v} />;
     case "escalaProb":
       return <EscalaProb v={v} />;
+    case "retaNumerica":
+      return <RetaNumerica v={v} />;
   }
 }
+
 
 // -------------------- Figuras planas (2D) ----------------------------
 
@@ -630,6 +652,101 @@ function EscalaProb({ v }: { v: EscalaProbV }) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+// -------------------- Reta numérica (com negativos) ------------------
+
+function RetaNumerica({ v }: { v: RetaNumericaV }) {
+  const passo = v.passo ?? 1;
+  const min = v.min;
+  const max = v.max;
+  const total = max - min;
+  if (total <= 0) return null;
+
+  // Layout
+  const W = 640, H = 140;
+  const padX = 40;
+  const y = 70;
+  const usable = W - padX * 2;
+  const scale = (val: number) => padX + ((val - min) / total) * usable;
+
+  const ticks: number[] = [];
+  for (let n = Math.ceil(min / passo) * passo; n <= max; n += passo) ticks.push(n);
+
+  return (
+    <div className="inline-block w-full max-w-[640px]" data-no-tts>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
+        {/* intervalos coloridos */}
+        {v.intervalos?.map((iv, i) => {
+          const x1 = scale(Math.min(iv.de, iv.ate));
+          const x2 = scale(Math.max(iv.de, iv.ate));
+          return (
+            <g key={`iv-${i}`}>
+              <rect x={x1} y={y - 14} width={x2 - x1} height={28} fill={iv.cor ?? "#38bdf8"} opacity={0.25} rx={4} />
+              {iv.rotulo && (
+                <text x={(x1 + x2) / 2} y={y - 20} textAnchor="middle" fontSize={12} fill="#0ea5e9" fontWeight={600}>
+                  {iv.rotulo}
+                </text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* linha principal com setas */}
+        <defs>
+          <marker id="rn-arrow-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M10,0 L0,5 L10,10 z" fill="currentColor" />
+          </marker>
+          <marker id="rn-arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+        <line
+          x1={padX - 20} y1={y} x2={W - padX + 20} y2={y}
+          stroke="currentColor" strokeWidth={2}
+          markerStart="url(#rn-arrow-l)" markerEnd="url(#rn-arrow-r)"
+        />
+
+        {/* ticks */}
+        {ticks.map((n) => {
+          const x = scale(n);
+          const isZero = n === 0;
+          return (
+            <g key={`t-${n}`}>
+              <line x1={x} y1={y - (isZero ? 12 : 8)} x2={x} y2={y + (isZero ? 12 : 8)} stroke="currentColor" strokeWidth={isZero ? 2.5 : 1.5} />
+              <text
+                x={x}
+                y={y + 28}
+                textAnchor="middle"
+                fontSize={isZero ? 16 : 13}
+                fontWeight={isZero ? 700 : 500}
+                fill={n < 0 ? "#f97316" : n > 0 ? "#0ea5e9" : "currentColor"}
+              >
+                {n}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* destaques */}
+        {v.destacar?.map((d, i) => {
+          const x = scale(d.valor);
+          const cor = d.cor ?? (d.valor < 0 ? "#f97316" : d.valor > 0 ? "#0ea5e9" : "#fbbf24");
+          return (
+            <g key={`d-${i}`}>
+              <circle cx={x} cy={y} r={9} fill={cor} stroke="white" strokeWidth={2} />
+              {d.rotulo && (
+                <text x={x} y={y - 20} textAnchor="middle" fontSize={13} fontWeight={700} fill={cor}>
+                  {d.rotulo}
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+      {v.legenda && <div className="text-center text-sm text-white/70 mt-1">{v.legenda}</div>}
     </div>
   );
 }

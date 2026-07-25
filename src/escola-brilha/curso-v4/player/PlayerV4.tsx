@@ -226,7 +226,7 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
                 </div>
               </div>
             )}
-            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb") && (
+            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb" || c.tipo === "retaNumerica") && (
               <RenderVisualMat v={c as VisualMat} />
             )}
           </div>
