@@ -178,6 +178,20 @@ export type MomentoExplicacao = {
       /** "soma" (padrão) ou "subtracao". */
       operacao?: "soma" | "subtracao";
     };
+    /**
+     * Quadro de valor posicional escrito (C-D-U, ou U/M/C/D/U…) —
+     * usado do 3º ano em diante para revelar o significado de cada
+     * algarismo. Substitui a "cesta de frutas" da série anterior.
+     */
+    casasValor?: {
+      numero: number;              // 847 → renderiza 3 casas: 8|4|7
+      /** Rótulos das casas. Padrão: {c:"Centena", d:"Dezena", u:"Unidade"}. */
+      rotulos?: { um?: string; c?: string; d?: string; u?: string };
+      /** Mostra decomposição escrita (800 + 40 + 7). Padrão: true. */
+      mostrarDecomposicao?: boolean;
+      /** Extenso (ex.: "oitocentos e quarenta e sete"). */
+      extenso?: string;
+    };
   }>;
 };
 
