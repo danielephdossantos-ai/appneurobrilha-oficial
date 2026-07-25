@@ -16,7 +16,8 @@ export type VisualMat =
   | MapaGradeV
   | GraficoBarrasV
   | TabelaV
-  | EscalaProbV;
+  | EscalaProbV
+  | RetaNumericaV;
 
 export type FiguraPlanaV = {
   tipo: "figuraPlana";
