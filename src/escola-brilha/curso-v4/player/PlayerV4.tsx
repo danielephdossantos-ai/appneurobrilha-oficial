@@ -411,8 +411,18 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         />
       ) : m.visualMat ? (
         <RenderVisualMat v={m.visualMat} />
-      ) : contaMD ? (
-        <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
+      ) : contaMD?.operacao === "mult" ? (
+        <MultiplicacaoArmada a={contaMD.a} b={contaMD.b} />
+      ) : contaMD?.operacao === "div" ? (
+        <InteracaoView
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: "div",
+            operandos: [contaMD.a, contaMD.b],
+            resultado: Math.floor(contaMD.a / contaMD.b),
+            passos: [],
+          }}
+        />
       ) : contaAditiva ? (
         <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
       ) : detectarComparacaoNoTexto(textoConta) ? (
@@ -443,7 +453,7 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
 /**
  * Renderiza a explicação passo-a-passo COMPLETA quando o enunciado contém
  * uma conta (+, −, ×, ÷). Para divisão, monta a chave real com o
- * algoritmo tradicional; para multiplicação usa tabuada + conta montada;
+ * algoritmo tradicional; para multiplicação monta a conta armada real;
  * para +/− usa a conta montada estática. A criança precisa ver o processo
  * inteiro em Nós fazemos / Você faz / Na vida real, igual em Brilha resolve.
  */
@@ -465,7 +475,7 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
     );
   }
   if (md?.operacao === "mult") {
-    return <TabuadaReferencia {...tabuadaDeConta(md)} />;
+    return <MultiplicacaoArmada a={md.a} b={md.b} />;
   }
   if (conta) {
     return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
@@ -527,7 +537,7 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
-      {mdMini && mdMini.operacao === "mult" && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
+      {mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
       {mdMini && mdMini.operacao === "div" && (
         <InteracaoView
           i={{
@@ -573,7 +583,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
             </span>
             <div className="font-medium">{q.pergunta}</div>
           </div>
-          {md && md.operacao === "mult" && <TabuadaReferencia {...tabuadaDeConta(md)} />}
+          {md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
           {md && md.operacao === "div" && (
             <InteracaoView
               i={{
@@ -1615,6 +1625,8 @@ function DivisaoChave({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" 
 function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
   // Divisão pela chave tem layout próprio (algoritmo tradicional BR).
   if (i.operacao === "div") return <DivisaoChave i={i} />;
+  // Multiplicação do 5º ano em diante: algoritmo formal, com parciais e deslocamentos.
+  if (i.operacao === "mult") return <MultiplicacaoArmada a={i.operandos[0]} b={i.operandos[1]} resultadoEsperado={i.resultado} />;
 
   const [passoAtual, setPassoAtual] = useState(-1); // -1 = ainda não começou
   const [resposta, setResposta] = useState<number | null>(null);
@@ -2013,13 +2025,233 @@ function detectarContaNoTexto(
 function detectarMultDivNoTexto(
   texto: string,
 ): { a: number; b: number; operacao: "mult" | "div" } | undefined {
-  const m = texto.match(/(\d{1,4})\s*([×x*÷/])\s*(\d{1,4})/i);
+  const numero = "(?:\\d{1,3}(?:\\.\\d{3})+|\\d{1,6})";
+  const m = texto.match(new RegExp(`(${numero})\\s*([×x*÷/])\\s*(${numero})`, "i"));
   if (!m) return undefined;
-  const a = parseInt(m[1], 10);
-  const b = parseInt(m[3], 10);
+  const a = parseInt(m[1].replace(/\./g, ""), 10);
+  const b = parseInt(m[3].replace(/\./g, ""), 10);
   if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return undefined;
   const op: "mult" | "div" = m[2] === "÷" || m[2] === "/" ? "div" : "mult";
   return { a, b, operacao: op };
+}
+
+// =====================================================================
+// Multiplicação armada — algoritmo formal com parciais.
+// Usado quando o texto pede multiplicação no 5º–9º/EM: nada de tabuada
+// automática para chegar no resultado. O aluno vê a conta nascer como no
+// caderno: unidade, dezena, deslocamento, sobras e soma final.
+// =====================================================================
+function MultiplicacaoArmada({
+  a,
+  b,
+  resultadoEsperado,
+}: {
+  a: number;
+  b: number;
+  resultadoEsperado?: number;
+}) {
+  const multiplicando = Math.abs(Math.trunc(a));
+  const multiplicador = Math.abs(Math.trunc(b));
+  const resultado = resultadoEsperado ?? multiplicando * multiplicador;
+
+  type Step = {
+    tipo: "digito" | "zero" | "soma";
+    rowIndex?: number;
+    revealCols?: number[];
+    carryCol?: number;
+    carryValue?: number;
+    fala: string;
+  };
+
+  const { rows, steps, width, top, bottom } = useMemo(() => {
+    const topDigits = String(multiplicando).split("").map(Number);
+    const bottomDigits = String(multiplicador).split("").map(Number);
+    const bottomReversed = [...bottomDigits].reverse();
+    const finalResult = multiplicando * multiplicador;
+    const calcWidth = Math.max(String(finalResult).length, String(multiplicando).length, String(multiplicador).length + 1, 2);
+    const partialRows: Array<{ valor: number; texto: string; digit: number; pos: number }> = [];
+    const generatedSteps: Step[] = [];
+
+    bottomReversed.forEach((digit, pos) => {
+      const rowIndex = partialRows.length;
+      const valor = multiplicando * digit * Math.pow(10, pos);
+      const texto = String(valor).padStart(calcWidth, " ");
+      partialRows.push({ valor, texto, digit, pos });
+
+      if (digit === 0) {
+        generatedSteps.push({
+          tipo: "zero",
+          rowIndex,
+          revealCols: [calcWidth - 1],
+          fala:
+            pos === 0
+              ? `A unidade do multiplicador é 0. Então a primeira linha vale 0.`
+              : `Nesta casa apareceu 0, então esta parcial vale 0 e fica deslocada ${pos} casa${pos > 1 ? "s" : ""}.`,
+        });
+        return;
+      }
+
+      let carry = 0;
+      for (let offset = 0; offset < topDigits.length; offset += 1) {
+        const topDigit = topDigits[topDigits.length - 1 - offset];
+        const raw = digit * topDigit + carry;
+        const write = raw % 10;
+        const nextCarry = Math.floor(raw / 10);
+        const col = calcWidth - 1 - pos - offset;
+        const revealCols = [col];
+        const isLastTopDigit = offset === topDigits.length - 1;
+        if (isLastTopDigit && nextCarry > 0) revealCols.push(col - 1);
+        const casa = pos === 0 ? "unidade" : pos === 1 ? "dezena" : pos === 2 ? "centena" : `${pos + 1}ª casa`;
+        const deslocamento = offset === 0 && pos > 0 ? ` Como o ${digit} está na ${casa}, começo esta linha ${pos} casa${pos > 1 ? "s" : ""} à esquerda.` : "";
+        generatedSteps.push({
+          tipo: "digito",
+          rowIndex,
+          revealCols,
+          carryCol: !isLastTopDigit && nextCarry > 0 ? col - 1 : undefined,
+          carryValue: !isLastTopDigit && nextCarry > 0 ? nextCarry : undefined,
+          fala:
+            `${digit} × ${topDigit}${carry > 0 ? ` + ${carry} que subiu` : ""} = ${raw}. ` +
+            `Escrevo ${write}${nextCarry > 0 && !isLastTopDigit ? ` e sobe ${nextCarry}` : ""}.` +
+            (isLastTopDigit && nextCarry > 0 ? ` Como acabou o número de cima, escrevo o ${nextCarry} na frente.` : "") +
+            deslocamento,
+        });
+        carry = nextCarry;
+      }
+    });
+
+    if (partialRows.length > 1) {
+      generatedSteps.push({
+        tipo: "soma",
+        fala: `Agora somo as linhas parciais: ${partialRows.map((r) => r.valor.toLocaleString("pt-BR")).join(" + ")} = ${finalResult.toLocaleString("pt-BR")}.`,
+      });
+    }
+
+    return {
+      rows: partialRows,
+      steps: generatedSteps,
+      width: calcWidth,
+      top: String(multiplicando).padStart(calcWidth, " "),
+      bottom: String(multiplicador).padStart(calcWidth, " "),
+    };
+  }, [multiplicando, multiplicador]);
+
+  const [step, setStep] = useState(-1);
+  const done = step >= steps.length - 1;
+  const active = step >= 0 ? steps[step] : undefined;
+  const showResult = done && (active?.tipo === "soma" || rows.length === 1);
+
+  const visibleColsByRow = useMemo(() => {
+    const visible: Record<number, Set<number>> = {};
+    steps.slice(0, step + 1).forEach((s) => {
+      if (s.rowIndex == null || !s.revealCols) return;
+      const rowIndex = s.rowIndex;
+      if (!visible[rowIndex]) visible[rowIndex] = new Set<number>();
+      s.revealCols.forEach((c) => {
+        if (c >= 0 && c < width) visible[rowIndex].add(c);
+      });
+    });
+    return visible;
+  }, [step, steps, width]);
+
+  function renderChars(texto: string, rowIndex?: number) {
+    return texto.split("").map((char, col) => {
+      const isSpace = char === " ";
+      const visible = rowIndex == null || visibleColsByRow[rowIndex]?.has(col);
+      return (
+        <span key={col} className={isSpace ? "opacity-0" : visible ? "" : "opacity-15"}>
+          {isSpace ? "0" : visible ? char : "·"}
+        </span>
+      );
+    });
+  }
+
+  return (
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3 text-center">
+        Multiplicação armada · parciais passo a passo
+      </div>
+      <div className="flex justify-center overflow-x-auto">
+        <div className="font-mono font-black text-3xl md:text-5xl leading-tight tabular-nums min-w-max">
+          <div className="grid gap-x-2" style={{ gridTemplateColumns: `2rem repeat(${width}, minmax(1.8rem, 2.8rem))` }}>
+            <div />
+            {Array.from({ length: width }).map((_, col) => (
+              <div key={`carry-${col}`} className="h-5 text-center text-sm md:text-base text-rose-600">
+                {active?.carryCol === col ? active.carryValue : ""}
+              </div>
+            ))}
+            <div />
+            {top.split("").map((c, idx) => (
+              <div key={`top-${idx}`} className={`text-center ${c === " " ? "opacity-0" : ""}`}>{c === " " ? "0" : c}</div>
+            ))}
+            <div className="text-right pr-1 text-amber-600">×</div>
+            {bottom.split("").map((c, idx) => (
+              <div key={`bottom-${idx}`} className={`text-center ${c === " " ? "opacity-0" : ""}`}>{c === " " ? "0" : c}</div>
+            ))}
+            <div />
+            {Array.from({ length: width }).map((_, idx) => (
+              <div key={`line1-${idx}`} className="border-t-4 border-[#0d1f55] h-2 mt-1" />
+            ))}
+            {rows.map((row, rowIndex) => (
+              <Fragment key={`row-${rowIndex}`}>
+                <div className="text-right pr-1 text-[#0d1f55]/35">{rowIndex > 0 ? "+" : ""}</div>
+                {row.texto.split("").map((_, col) => (
+                  <div key={`r-${rowIndex}-${col}`} className="text-center text-[#0d1f55]">
+                    {renderChars(row.texto, rowIndex)[col]}
+                  </div>
+                ))}
+              </Fragment>
+            ))}
+            {rows.length > 1 && (
+              <>
+                <div />
+                {Array.from({ length: width }).map((_, idx) => (
+                  <div key={`line2-${idx}`} className="border-t-4 border-[#0d1f55] h-2 mt-1" />
+                ))}
+              </>
+            )}
+            {rows.length > 1 && (
+              <>
+                <div />
+                {String(resultado).padStart(width, " ").split("").map((c, idx) => (
+                  <div key={`res-${idx}`} className={`text-center text-emerald-600 ${showResult ? "" : "opacity-20"}`}>
+                    {c === " " ? "" : showResult ? c : "?"}
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+        {step < 0 ? (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span> Vamos montar {multiplicando.toLocaleString("pt-BR")} × {multiplicador.toLocaleString("pt-BR")} como no caderno: primeiro a unidade, depois a dezena/centena deslocada.
+          </div>
+        ) : (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">Passo {step + 1}/{steps.length}:</span> {steps[step]?.fala ?? "Conta concluída."}
+          </div>
+        )}
+      </div>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!done ? (
+          <button
+            onClick={() => setStep((p) => Math.min(p + 1, steps.length - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {step < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        ) : (
+          <div className="text-lg font-black text-emerald-700">✅ Resultado: {resultado.toLocaleString("pt-BR")}</div>
+        )}
+        {done && (
+          <button onClick={() => setStep(-1)} className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline">
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }
 
 /**

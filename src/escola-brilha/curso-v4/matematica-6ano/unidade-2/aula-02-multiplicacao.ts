@@ -11,14 +11,13 @@ export const aula02_multiplicacao: AulaV4 = {
   momento01_motivacao: {
     titulo: "Multiplicar em escala",
     historia:
-      "{NOME}, no Laboratório multiplicamos em ESCALA. 245 × 12? 348 × 25? Vamos montar direitinho e usar a tabuada como ferramenta.",
+      "{NOME}, no Laboratório multiplicamos em ESCALA. 245 × 12? 348 × 25? Vamos montar a conta como no caderno, com parciais, sobras e deslocamento.",
   },
 
   momento02_exploracao: {
-    instrucao: "A tabuada é o mapa. Ela responde os produtos básicos.",
+    instrucao: "A multiplicação grande nasce em linhas: uma linha pela unidade, outra pela dezena, depois somamos as parciais.",
     cenas: [
-      { tipo: "texto", texto: "Regra: multiplique por CADA algarismo do 2º número; desloque a linha uma casa pra ESQUERDA em cada nível.", destaque: true },
-      { tipo: "tabuada", fator: 7, titulo: "Tabuada do 7 (referência)" },
+      { tipo: "texto", texto: "Regra: multiplique por CADA algarismo do 2º número; cada nova linha anda uma casa para a ESQUERDA.", destaque: true },
     ],
   },
 
@@ -52,24 +51,35 @@ export const aula02_multiplicacao: AulaV4 = {
         texto: "Multiplique 245 pela DEZENA (1) — resultado desloca 1 casa pra esquerda (colocando 0 na unidade).",
         exemploReal: {
           contexto: "245 × 10",
-          visualMat: {
-            tipo: "tabela",
-            titulo: "Deslocamento de casa",
-            cabecalhos: ["Passo", "Resultado"],
-            linhas: [
-              { rotulo: "245 × 2", valores: ["245 × 2", "490"] },
-              { rotulo: "245 × 10", valores: ["245 × 1 desloca 1 casa", "2.450"] },
-              { rotulo: "Soma", valores: ["490 + 2.450", "2.940"] },
+          contaPassoAPasso: {
+            operacao: "mult",
+            operandos: [245, 10],
+            resultado: 2450,
+            passos: [
+              { coluna: "U", fala: "O 0 está na unidade: 0 × 245 = 0. Essa linha só marca a casa da unidade.", digito: 0 },
+              { coluna: "D", fala: "Agora uso o 1 da dezena. Como ele vale 10, a linha começa uma casa à esquerda.", digito: 5 },
+              { coluna: "C", fala: "1 × 4 = 4. Escrevo 4 na centena.", digito: 4 },
+              { coluna: "UM", fala: "1 × 2 = 2. Escrevo 2 no milhar. Resultado: 2.450.", digito: 2 },
             ],
           },
-          destaque: "245 × 12 = 490 + 2.450 = 2.940.",
+          destaque: "245 × 10 = 2.450 porque a linha da dezena anda uma casa para a esquerda.",
         },
       },
       {
         texto: "Multiplicar por 100 = acrescentar 2 zeros. Por 1.000 = 3 zeros.",
         exemploReal: {
           contexto: "37 × 1.000",
-          destaque: "37 × 1.000 = 37.000 (só acrescentei 3 zeros).",
+          contaPassoAPasso: {
+            operacao: "mult",
+            operandos: [37, 1000],
+            resultado: 37000,
+            passos: [
+              { coluna: "U", fala: "Os três zeros do 1.000 ocupam unidade, dezena e centena: essas casas ficam com zero.", digito: 0 },
+              { coluna: "UM", fala: "O 1 está na casa do milhar. Então 37 será escrito começando três casas à esquerda.", digito: 7 },
+              { coluna: "DM", fala: "1 × 3 = 3. Escrevo 3 na dezena de milhar.", digito: 3 },
+            ],
+          },
+          destaque: "37 × 1.000 = 37.000 porque o 37 desloca três casas para a esquerda.",
         },
       },
     ],
@@ -85,7 +95,9 @@ export const aula02_multiplicacao: AulaV4 = {
       passos: [
         { coluna: "U", fala: "8 × 2 = 16 → 6, vai 1", digito: 6, vaiUm: 1 },
         { coluna: "D", fala: "8 × 3 + 1 = 25 → forma linha 256", digito: 5, vaiUm: 2 },
-        { coluna: "UM", fala: "linha 320 (32 × 1 deslocado); somando: 576" },
+        { coluna: "C", fala: "Termino a primeira linha: 256. Agora começo a dezena: 1 × 2 = 2, mas fica deslocado uma casa.", digito: 2 },
+        { coluna: "C", fala: "1 × 3 = 3. A segunda linha fica 320.", digito: 3 },
+        { fala: "Somo as parciais: 256 + 320 = 576." },
       ],
     },
     passos: ["32 × 8 = 256.", "32 × 10 = 320.", "256 + 320 = 576."],
