@@ -44,6 +44,16 @@ export const aula05_missao: AulaV4 = {
         texto: "Toda vez que aparecer 'juntos', 'ao mesmo tempo', 'ciclo': MMC.",
         exemploReal: {
           contexto: "Dois relógios batem a cada 4 e 6 segundos.",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Fatoração",
+            cabecalhos: ["Número", "Fatoração"],
+            linhas: [
+              { rotulo: "4", valores: ["4", "2²"] },
+              { rotulo: "6", valores: ["6", "2 × 3"] },
+              { rotulo: "MMC", valores: ["2² × 3", "12"] },
+            ],
+          },
           destaque: "Batem juntos a cada MMC(4,6) = 12 s.",
         },
       },
@@ -51,6 +61,16 @@ export const aula05_missao: AulaV4 = {
         texto: "Toda vez que aparecer 'dividir em partes iguais', 'pedaços máximos': MDC.",
         exemploReal: {
           contexto: "Cortar duas fitas de 24 e 36 cm em pedaços iguais e MAIORES possíveis.",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Fatoração comum",
+            cabecalhos: ["Número", "Fatoração"],
+            linhas: [
+              { rotulo: "24", valores: ["24", "2³ × 3"] },
+              { rotulo: "36", valores: ["36", "2² × 3²"] },
+              { rotulo: "MDC", valores: ["2² × 3", "12"] },
+            ],
+          },
           destaque: "Pedaços de MDC(24,36) = 12 cm.",
         },
       },
