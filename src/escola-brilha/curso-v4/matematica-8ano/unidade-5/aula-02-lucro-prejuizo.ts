@@ -27,7 +27,7 @@ export const aula02_lucroPrejuizo: AulaV4 = {
         trinomio: "Comprou por 80, vendeu por 100",
         passos: [
           { expr: "Lucro em R$ = 100 − 80 = 20", explica: "Ganho absoluto.", status: "ok", professor: "Primeiro descubra QUANTO foi o lucro em reais. Sempre venda − custo." },
-          { expr: "20 ÷ 100 = 0,20 = 20%", explica: "Errado: dividi pela VENDA.", status: "erro", professor: "Não! Ninguém investe o valor da venda; o comerciante investiu o CUSTO. A base tem que ser o custo." },
+          { expr: "20 ÷ 100 = 0,20 = 20%", explica: "Errado: dividi pela VENDA.", status: "x", professor: "Não! Ninguém investe o valor da venda; o comerciante investiu o CUSTO. A base tem que ser o custo." },
           { expr: "20 ÷ 80 = 0,25 = 25%", explica: "Correto: dividi pelo CUSTO.", status: "ok", professor: "Investi 80 e ganhei 20. 20 é 25% de 80. Esse é o lucro real do negócio." },
         ],
         fatorada: "Base do lucro/prejuízo = CUSTO",

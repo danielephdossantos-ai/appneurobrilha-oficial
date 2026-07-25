@@ -84,8 +84,8 @@ export const aula05_inversa: AulaV4 = {
             tipo: "trinomioPassoAPasso",
             trinomio: "3/10 = 5/x → cruzado (ERRADO)",
             passos: [
-              { expr: "3 · x = 10 · 5 = 50", explica: "Regra de três direta (aplicada por engano).", status: "erro", professor: "Cuidado! Isso só valeria se fosse direta." },
-              { expr: "x = 50/3 ≈ 16,7 dias", explica: "Resultado sem sentido.", status: "erro", professor: "Mais pintores levariam MAIS dias? Impossível. Sempre teste o sentido." },
+              { expr: "3 · x = 10 · 5 = 50", explica: "Regra de três direta (aplicada por engano).", status: "x", professor: "Cuidado! Isso só valeria se fosse direta." },
+              { expr: "x = 50/3 ≈ 16,7 dias", explica: "Resultado sem sentido.", status: "x", professor: "Mais pintores levariam MAIS dias? Impossível. Sempre teste o sentido." },
               { expr: "Regra certa: em linha", explica: "3·10 = 5·x → x = 6.", status: "ok", professor: "Guarde o teste do dobro para escolher a regra certa." },
             ],
           },
