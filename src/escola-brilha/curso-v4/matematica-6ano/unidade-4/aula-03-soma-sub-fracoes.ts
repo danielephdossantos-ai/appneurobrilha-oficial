@@ -40,7 +40,18 @@ export const aula03_somaSub: AulaV4 = {
       {
         texto: "Mesmo denominador: soma os de cima.",
         exemploReal: {
-          contexto: "2/7 + 3/7",
+          contexto: "2/7 + 3/7 — dividimos a mesma pizza em 7 pedaços:",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Somando por cima",
+            cabecalhos: ["Fração", "Numerador", "Denominador"],
+            linhas: [
+              { rotulo: "2/7", valores: ["2", "7"] },
+              { rotulo: "+ 3/7", valores: ["3", "7"] },
+              { rotulo: "= 5/7", valores: ["5", "7"] },
+            ],
+            destacar: { coluna: 1 },
+          },
           destaque: "2/7 + 3/7 = 5/7.",
         },
       },
