@@ -415,6 +415,8 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
       ) : contaAditiva ? (
         <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
+      ) : detectarComparacaoNoTexto(textoConta) ? (
+        <ComparacaoCasas numeros={detectarComparacaoNoTexto(textoConta)!} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
