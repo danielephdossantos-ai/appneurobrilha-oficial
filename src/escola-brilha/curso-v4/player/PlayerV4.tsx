@@ -413,9 +413,11 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
 
 function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
   const conta = detectarContaNoTexto(m.enunciado);
+  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
         💡 Dica: {m.dica}
@@ -427,14 +429,17 @@ function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
 
 function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
   const conta = detectarContaNoTexto(m.enunciado);
+  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
+      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
       {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
 }
+
 
 function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
   const conta = detectarContaNoTexto(`${m.contexto} ${m.problema}`);
