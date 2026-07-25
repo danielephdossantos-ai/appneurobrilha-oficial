@@ -101,6 +101,8 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           <Secao id="m10" label="✅ O que aprendeu"><Avaliacao m={aula.momento10_avaliacao} /></Secao>
           <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} /></Secao>
 
+          <RodapeMetodologias chaves={aula.metodologias} />
+
           <div className="pt-6 flex flex-col items-center gap-3">
             <button
               onClick={() => onConcluir?.()}
