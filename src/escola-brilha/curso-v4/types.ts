@@ -224,6 +224,8 @@ export type MomentoExplicacao = {
           porque?: string;
         }>;
       };
+      /** Visual matemático específico (geometria/estatística/etc). */
+      visualMat?: VisualMat;
       destaque?: string;           // conclusão em 1 linha, em negrito
     };
   }>;
