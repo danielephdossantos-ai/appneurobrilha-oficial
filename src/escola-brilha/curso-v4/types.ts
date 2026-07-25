@@ -300,6 +300,18 @@ export type MomentoAvaliacao = {
      * as últimas N imagens (fade + risco) e a criança conta o que sobrou. */
     tirar?: number;
 
+    /**
+     * Conta armada (adição/subtração) exibida MONTADA (sem resultado) antes
+     * das opções. Se a criança erra, o Player resolve passo a passo até o
+     * resultado. Se omitido, o Player tenta detectar automaticamente um
+     * padrão "A + B" ou "A − B" no texto da pergunta. Padrão obrigatório em
+     * atividades de matemática até o 5º ano.
+     */
+    contaArmada?: {
+      a: number;
+      b: number;
+      operacao?: "soma" | "subtracao";
+    };
   }>;
 };
 
