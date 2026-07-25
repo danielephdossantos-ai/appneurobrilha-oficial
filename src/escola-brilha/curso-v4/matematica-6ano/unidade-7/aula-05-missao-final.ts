@@ -57,20 +57,27 @@ export const aula05_missaoFinal: AulaV4 = {
         exemploReal: {
           contexto: "Sala 5×4 m, cerâmica R$ 30/m²",
           visualMat: {
-            tipo: "tabela",
-            cabecalhos: ["Passo", "Cálculo"],
-            linhas: [
-              { rotulo: "1", valores: ["Área", "20 m²"] },
-              { rotulo: "2", valores: ["Custo", "20 × 30 = R$ 600"] },
-            ],
+            tipo: "figuraPlana",
+            forma: "retangulo",
+            medidasLados: ["5 m", "4 m", "5 m", "4 m"],
+            mostrarAngulos: true,
           },
-          destaque: "R$ 600.",
+          destaque: "Área = 5 · 4 = 20 m² · Custo = 20 · 30 = R$ 600.",
         },
       },
       {
         texto: "Real: velocidade média.",
         exemploReal: {
           contexto: "240 km em 3 h",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Grandeza", "Valor"],
+            linhas: [
+              { rotulo: "d", valores: ["distância", "240 km"] },
+              { rotulo: "t", valores: ["tempo", "3 h"] },
+              { rotulo: "v", valores: ["v = d ÷ t", "80 km/h"] },
+            ],
+          },
           destaque: "v = 80 km/h.",
         },
       },
@@ -89,12 +96,36 @@ export const aula05_missaoFinal: AulaV4 = {
           destaque: "Loja A sai mais barato.",
         },
       },
+      {
+        texto: "Real: estatística — a nota da turma.",
+        exemploReal: {
+          contexto: "Frequência das notas dos 20 colegas",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Notas da turma",
+            unidade: "alunos",
+            barras: [
+              { rotulo: "6", valor: 3 },
+              { rotulo: "7", valor: 6 },
+              { rotulo: "8", valor: 7 },
+              { rotulo: "9", valor: 3 },
+              { rotulo: "10", valor: 1 },
+            ],
+          },
+          destaque: "Moda = 8 (nota que mais apareceu).",
+        },
+      },
     ],
   },
 
   momento05_modelagem: {
     enunciado: "Piscina 6×4×1,5 m. Volume em L? (1 m³ = 1.000 L)",
     resposta: "36.000 L",
+    visualMat: {
+      tipo: "solido",
+      forma: "cubo",
+      legenda: "Bloco 6 · 4 · 1,5",
+    },
     passos: ["V = 6·4·1,5 = 36 m³.", "36 × 1.000 = 36.000 L."],
   },
 

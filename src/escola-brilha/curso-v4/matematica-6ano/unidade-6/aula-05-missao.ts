@@ -55,12 +55,61 @@ export const aula05_missao: AulaV4 = {
           destaque: "4 horas.",
         },
       },
+      {
+        texto: "Regra de três: monte a tabela e cruze.",
+        exemploReal: {
+          contexto: "4 kg custam R$ 32. Quanto custam 7 kg?",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["kg", "R$"],
+            linhas: [
+              { rotulo: "1", valores: ["4", "32"] },
+              { rotulo: "2", valores: ["7", "x"] },
+              { rotulo: "3", valores: ["cruzar", "4 · x = 7 · 32"] },
+              { rotulo: "4", valores: ["isolar x", "x = 224 ÷ 4"] },
+              { rotulo: "5", valores: ["resposta", "R$ 56"] },
+            ],
+          },
+          destaque: "x = 56.",
+        },
+      },
+      {
+        texto: "Sequências: descubra o padrão observando a diferença.",
+        exemploReal: {
+          contexto: "5, 10, 20, 40, __",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Termo", "Valor", "Operação"],
+            linhas: [
+              { rotulo: "1º", valores: ["1º", "5", "—"] },
+              { rotulo: "2º", valores: ["2º", "10", "×2"] },
+              { rotulo: "3º", valores: ["3º", "20", "×2"] },
+              { rotulo: "4º", valores: ["4º", "40", "×2"] },
+              { rotulo: "5º", valores: ["5º", "80", "×2"] },
+            ],
+          },
+          destaque: "Padrão geométrico ×2 → próximo = 80.",
+        },
+      },
     ],
   },
 
   momento05_modelagem: {
     enunciado: "Sequência 5, 10, 20, 40, __.",
     resposta: "80",
+    visualMat: {
+      tipo: "retaNumerica",
+      min: 0,
+      max: 90,
+      passo: 10,
+      destacar: [
+        { valor: 5, rotulo: "5" },
+        { valor: 10, rotulo: "10" },
+        { valor: 20, rotulo: "20" },
+        { valor: 40, rotulo: "40" },
+        { valor: 80, rotulo: "80", cor: "#10b981" },
+      ],
+    },
     passos: ["Geométrica ×2.", "40 × 2 = 80."],
   },
 
