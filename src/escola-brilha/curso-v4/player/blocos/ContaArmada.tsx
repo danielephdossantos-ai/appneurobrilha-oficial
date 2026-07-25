@@ -37,6 +37,9 @@ export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma
 
   useEffect(() => () => stopSpeaking(), []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { if (autoIniciar) { const t = setTimeout(() => resolver(), 400); return () => clearTimeout(t); } }, [autoIniciar]);
+
   const resolver = async () => {
     if (contando) return;
     setContando(true);
