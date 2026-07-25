@@ -1085,3 +1085,170 @@ function NotacaoCientifica({ v }: { v: NotacaoCientificaV }) {
     </div>
   );
 }
+
+// -------------------- Trinômio Quadrado Perfeito ---------------------
+function TrinomioQuadrado({ v }: { v: TrinomioQuadradoV }) {
+  const { a, b, sinal = "+", mostrarAreas = true, mostrarExpansao = true, legenda } = v;
+  const sMeio = sinal === "+" ? "+" : "−";
+  const size = 260;
+  const split = 0.62; // proporção a/(a+b) — só visual
+  const aPx = size * split;
+  const bPx = size * (1 - split);
+
+  return (
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-violet-300/60 max-w-md mx-auto">
+      {legenda && (
+        <div className="text-xs font-black uppercase tracking-widest text-violet-600 text-center mb-3">
+          {legenda}
+        </div>
+      )}
+
+      <div className="text-center text-lg font-black mb-3">
+        Área do quadrado de lado{" "}
+        <span className="px-2 py-0.5 rounded bg-violet-100 border border-violet-300">
+          ({a} {sMeio} {b})
+        </span>
+      </div>
+
+      <div className="relative mx-auto" style={{ width: size, height: size }}>
+        {/* a² (top-left) */}
+        <div
+          className="absolute top-0 left-0 bg-sky-200 border-2 border-sky-500 flex items-center justify-center font-black text-sky-900"
+          style={{ width: aPx, height: aPx }}
+        >
+          {mostrarAreas && <span className="text-xl">{a}²</span>}
+        </div>
+        {/* ab (top-right) */}
+        <div
+          className="absolute top-0 bg-amber-200 border-2 border-amber-500 flex items-center justify-center font-black text-amber-900"
+          style={{ left: aPx, width: bPx, height: aPx }}
+        >
+          {mostrarAreas && <span className="text-base">{a}·{b}</span>}
+        </div>
+        {/* ab (bottom-left) */}
+        <div
+          className="absolute left-0 bg-amber-200 border-2 border-amber-500 flex items-center justify-center font-black text-amber-900"
+          style={{ top: aPx, width: aPx, height: bPx }}
+        >
+          {mostrarAreas && <span className="text-base">{a}·{b}</span>}
+        </div>
+        {/* b² (bottom-right) */}
+        <div
+          className="absolute bg-rose-200 border-2 border-rose-500 flex items-center justify-center font-black text-rose-900"
+          style={{ top: aPx, left: aPx, width: bPx, height: bPx }}
+        >
+          {mostrarAreas && <span className="text-lg">{b}²</span>}
+        </div>
+
+        {/* rótulos de lado */}
+        <div
+          className="absolute -top-6 left-0 text-xs font-bold text-sky-700"
+          style={{ width: aPx, textAlign: "center" }}
+        >
+          {a}
+        </div>
+        <div
+          className="absolute -top-6 text-xs font-bold text-rose-700"
+          style={{ left: aPx, width: bPx, textAlign: "center" }}
+        >
+          {b}
+        </div>
+        <div
+          className="absolute -left-5 top-0 text-xs font-bold text-sky-700 flex items-center"
+          style={{ height: aPx }}
+        >
+          {a}
+        </div>
+        <div
+          className="absolute -left-5 text-xs font-bold text-rose-700 flex items-center"
+          style={{ top: aPx, height: bPx }}
+        >
+          {b}
+        </div>
+      </div>
+
+      {mostrarExpansao && (
+        <div className="mt-6 space-y-2 text-center">
+          <div className="text-sm text-slate-600">Somando as 4 áreas:</div>
+          <div className="text-lg font-black">
+            <span className="text-sky-700">{a}²</span>
+            <span className="mx-1 text-slate-500">+</span>
+            <span className="text-amber-700">{a}·{b}</span>
+            <span className="mx-1 text-slate-500">+</span>
+            <span className="text-amber-700">{a}·{b}</span>
+            <span className="mx-1 text-slate-500">+</span>
+            <span className="text-rose-700">{b}²</span>
+          </div>
+          <div className="text-slate-500 text-lg">↓ juntando os dois {a}·{b}</div>
+          <div className="text-xl font-black text-violet-800 bg-violet-50 border-2 border-violet-300 rounded-lg py-2">
+            ({a} {sMeio} {b})² = {a}² {sMeio} 2·{a}·{b} + {b}²
+          </div>
+          {sinal === "-" && (
+            <div className="text-[11px] text-slate-500 italic mt-1">
+              O sinal do meio (−) vem do produto {a}·(−{b}) que aparece duas vezes.
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// -------------------- Checklist reconhecimento TQP -------------------
+function ChecklistTQP({ v }: { v: ChecklistTQPV }) {
+  const { trinomio, raiz1, raiz3, meio, sinalMeio, ehPerfeito, fatorada, legenda } = v;
+  const check = (ok: boolean) => (ok ? "✅" : "❌");
+
+  return (
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-emerald-300/60 max-w-md mx-auto">
+      {legenda && (
+        <div className="text-xs font-black uppercase tracking-widest text-emerald-600 text-center mb-3">
+          {legenda}
+        </div>
+      )}
+      <div className="text-center text-2xl font-black mb-4 bg-slate-100 border-2 border-slate-300 rounded-lg py-2">
+        {trinomio}
+      </div>
+
+      <div className="space-y-2 text-sm">
+        <div className="flex items-center justify-between bg-sky-50 border-2 border-sky-300 rounded-lg px-3 py-2">
+          <span className="text-slate-700">1º termo tem raiz exata?</span>
+          <span className="font-black text-sky-700">
+            √ = {raiz1} {check(true)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between bg-rose-50 border-2 border-rose-300 rounded-lg px-3 py-2">
+          <span className="text-slate-700">3º termo tem raiz exata?</span>
+          <span className="font-black text-rose-700">
+            √ = {raiz3} {check(true)}
+          </span>
+        </div>
+        <div className={`flex items-center justify-between border-2 rounded-lg px-3 py-2 ${ehPerfeito ? "bg-emerald-50 border-emerald-300" : "bg-red-50 border-red-300"}`}>
+          <span className="text-slate-700">Meio = 2·{raiz1}·{raiz3}?</span>
+          <span className={`font-black ${ehPerfeito ? "text-emerald-700" : "text-red-700"}`}>
+            2·{raiz1}·{raiz3} = {meio} {check(ehPerfeito)}
+          </span>
+        </div>
+      </div>
+
+      {ehPerfeito && fatorada && (
+        <div className="mt-4 text-center">
+          <div className="text-xs uppercase font-black tracking-widest text-emerald-600 mb-1">
+            É Trinômio Quadrado Perfeito
+          </div>
+          <div className="text-2xl font-black text-emerald-800 bg-emerald-50 border-2 border-emerald-400 rounded-lg py-2">
+            {trinomio} = <span className="text-violet-700">{fatorada}</span>
+          </div>
+          <div className="text-[11px] text-slate-500 italic mt-2">
+            Sinal do meio ({sinalMeio}) → dentro do parêntese vira ({raiz1} {sinalMeio === "+" ? "+" : "−"} {raiz3})²
+          </div>
+        </div>
+      )}
+      {!ehPerfeito && (
+        <div className="mt-4 text-center text-sm bg-red-50 border-2 border-red-300 text-red-700 rounded-lg py-2 font-bold">
+          Não passou nas 3 condições → não é TQP.
+        </div>
+      )}
+    </div>
+  );
+}
