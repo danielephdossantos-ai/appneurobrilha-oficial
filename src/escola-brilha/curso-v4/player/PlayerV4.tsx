@@ -415,6 +415,8 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
       ) : contaAditiva ? (
         <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
+      ) : detectarComparacaoNoTexto(textoConta) ? (
+        <ComparacaoCasas numeros={detectarComparacaoNoTexto(textoConta)!} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
@@ -467,6 +469,10 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
   }
   if (conta) {
     return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
+  }
+  const cmp = detectarComparacaoNoTexto(texto);
+  if (cmp) {
+    return <ComparacaoCasas numeros={cmp} />;
   }
   return null;
 }
@@ -2015,6 +2021,94 @@ function detectarMultDivNoTexto(
   const op: "mult" | "div" = m[2] === "÷" || m[2] === "/" ? "div" : "mult";
   return { a, b, operacao: op };
 }
+
+/**
+ * Detecta situação de comparação/ordenação de números grandes (sem operador
+ * aritmético). Ex.: "Qual é maior: 4.567.890 ou 4.576.890?", "Ordene 1.020.000
+ * · 999.900 · 1.020.500". Retorna os números encontrados quando há palavra-
+ * chave de comparação e pelo menos 2 números distintos.
+ */
+function detectarComparacaoNoTexto(texto: string): number[] | undefined {
+  if (!texto) return undefined;
+  // Ignora se já é conta aritmética.
+  if (/\d\s*[+\-−×x*÷/]\s*\d/i.test(texto)) return undefined;
+  const temChave = /(maior|menor|ordena|ordene|ordem|compar|crescent|decrescent|__|[<>=])/i.test(texto);
+  if (!temChave) return undefined;
+  const matches = texto.match(/\d{1,3}(?:\.\d{3})+|\d{2,}/g);
+  if (!matches) return undefined;
+  const nums = Array.from(new Set(matches.map((s) => parseInt(s.replace(/\./g, ""), 10))))
+    .filter((n) => Number.isFinite(n) && n >= 10);
+  if (nums.length < 2) return undefined;
+  if (nums.length > 6) return nums.slice(0, 6);
+  return nums;
+}
+
+/**
+ * Mostra 2+ números empilhados com dígitos alinhados por casa de valor
+ * (U, D, C, UM, DM, CM, UMi, DMi, CMi, UB, DB, CB). Destaca o primeiro
+ * dígito onde eles diferem — que é a casa que decide a comparação.
+ */
+function ComparacaoCasas({ numeros }: { numeros: number[] }) {
+  const LABELS = ["U", "D", "C", "UM", "DM", "CM", "UMi", "DMi", "CMi", "UB", "DB", "CB"];
+  const CORES = ["#34d399", "#22d3ee", "#fb923c", "#f472b6", "#a78bfa", "#f59e0b", "#60a5fa", "#f472b6", "#a3e635", "#f87171", "#38bdf8", "#e879f9"];
+  const digs = numeros.map((n) => String(Math.abs(Math.trunc(n))));
+  const maxLen = Math.max(...digs.map((s) => s.length));
+  const rows = digs.map((s) => s.padStart(maxLen, " ").split(""));
+  // Primeiro índice (esquerda→direita) onde algum dígito difere.
+  let diffCol = -1;
+  for (let c = 0; c < maxLen; c++) {
+    const col = rows.map((r) => r[c]);
+    const first = col[0];
+    if (col.some((x) => x !== first)) { diffCol = c; break; }
+  }
+  const labels = Array.from({ length: maxLen }, (_, i) => LABELS[maxLen - 1 - i] ?? "");
+  const cores = Array.from({ length: maxLen }, (_, i) => CORES[maxLen - 1 - i] ?? "#94a3b8");
+  return (
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40 overflow-x-auto">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
+        Comparação por casa de valor
+      </div>
+      <div className="inline-grid gap-1 mx-auto" style={{ gridTemplateColumns: `auto repeat(${maxLen}, minmax(2.25rem, 1fr))` }}>
+        <div />
+        {labels.map((lb, i) => (
+          <div key={`h-${i}`} className="text-[10px] font-black uppercase text-center px-1 py-1 rounded text-white" style={{ background: cores[i] }}>
+            {lb}
+          </div>
+        ))}
+        {rows.map((r, ri) => (
+          <Fragment key={ri}>
+            <div className="text-xs font-bold pr-2 self-center whitespace-nowrap tabular-nums">
+              {numeros[ri].toLocaleString("pt-BR")}
+            </div>
+            {r.map((d, ci) => {
+              const isDiff = ci === diffCol && d.trim() !== "";
+              const empty = d.trim() === "";
+              return (
+                <div
+                  key={ci}
+                  className={`h-10 grid place-items-center rounded font-black tabular-nums text-xl border-2 ${empty ? "opacity-30" : ""}`}
+                  style={{
+                    borderColor: cores[ci],
+                    color: isDiff ? "#fff" : cores[ci],
+                    background: isDiff ? cores[ci] : "transparent",
+                  }}
+                >
+                  {empty ? "·" : d}
+                </div>
+              );
+            })}
+          </Fragment>
+        ))}
+      </div>
+      {diffCol >= 0 && (
+        <div className="text-center text-xs mt-3 text-[#0d1f55]/80">
+          A comparação é decidida na casa <b>{labels[diffCol]}</b> — o primeiro dígito diferente da esquerda pra direita.
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 /**
  * Tabuada interativa passo a passo. Mostra fator × 1..ate com resultados
