@@ -521,7 +521,18 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
-      {mdMini && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
+      {mdMini && mdMini.operacao === "mult" && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
+      {mdMini && mdMini.operacao === "div" && (
+        <InteracaoView
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: "div",
+            operandos: [mdMini.a, mdMini.b],
+            resultado: Math.floor(mdMini.a / mdMini.b),
+            passos: [],
+          }}
+        />
+      )}
       {contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
