@@ -1,60 +1,75 @@
+# Contrato — Auditoria Matemática do App
 
-## Objetivo
+Aprovado pela usuária. Duas partes obrigatórias, nesta ordem.
 
-Toda etapa do momento **Explicação** (e da **Descoberta/Modelagem** onde couber) precisa terminar com um **Exemplo Real** — um caso concreto e numérico que aplica exatamente o que a explicação acabou de dizer. Nada de "ex.: 5 é 5" — sempre um exemplo aplicado, no contexto da Cidade dos Números (habitantes, placas, páginas, quilômetros).
+---
 
-## O que muda no schema (mínimo)
+## PARTE 1 — Melhorias pedagógicas no 8º ano · U1 · Aulas 02 a 07
 
-Hoje `MomentoExplicacao.etapas[]` já tem `exemplo?: string`, `casasValor?`, `agrupamentos?`. Vou estender com um campo opcional `exemploReal` — um bloco visual dedicado, renderizado com destaque **abaixo** do texto da etapa:
+**Escopo travado** (não expandir):
+- `src/escola-brilha/curso-v4/matematica-8ano/unidade-1/aula-02-potencias.ts`
+- `aula-03-notacao-grande.ts`
+- `aula-04-notacao-pequeno.ts`
+- `aula-05-operacoes-nc.ts`
+- `aula-06-comparar.ts`
+- `aula-07-missao.ts`
 
-```ts
-exemploReal?: {
-  titulo?: string;              // ex.: "Na prática:"
-  contexto: string;             // "A placa do carro do prefeito é 574."
-  casasValor?: { numero, extenso, mostrarDecomposicao };
-  contaPassoAPasso?: { operacao, operandos, resultado, passos[] };
-  destaque?: string;            // conclusão em 1 linha
-}
-```
+Aula 01 já está no padrão piloto — não mexer.
 
-Renderização em `PlayerV4.tsx > Explicacao`: card âmbar/branco logo abaixo do texto, com rótulo "🔎 Na prática", contexto, visual (casas de valor OU conta passo a passo em modo somente-leitura), e a conclusão em negrito.
+**As 6 melhorias a aplicar em cada aula (o que couber):**
 
-## Aulas afetadas (10)
+1. Converter passos de resolução de `tipo: "tabela"` para `trinomioPassoAPasso` com "Continuar" + campo `professor` explicando cada linha (padrão travado da aula 01 e do Trinômio).
+2. Transformar `momento03_descoberta` de texto corrido em passo-a-passo animado com `visualMat` (mesmo motor).
+3. **Aula 02 (Potências)** — adicionar contra-exemplo `(−2)² = 4` vs `−2² = −4` (erro clássico de 8º ano) + destacar `a⁰ = 1` só quando `a ≠ 0`.
+4. **Aula 05 (Operações NC)** — adicionar caso explícito de mantissa que fica < 1 (ex.: `0,4·10⁷ → 4·10⁶`) com explicação, não só como "ajuste".
+5. **Aulas 03 e 04 (NC)** — bônus opcional: mostrar 1÷10 na chave para reforçar padrão das potências de 10.
+6. Rever cada `momento10_avaliacao` para exigir simplificação/forma canônica quando aplicável (mesma correção da aula 01 com 27/99 → 3/11).
 
-Unidade 1 · Matemática 3º Ano:
-1. aula-01 · Contagem até 1.000
-2. aula-02 · Valor posicional
-3. aula-03 · A centena
-4. aula-04 · Ler números
-5. aula-05 · Comparar números
-6. aula-06 · Ordenar números
-7. aula-07 · Arredondar
-8. aula-08 · Sequências numéricas
-9. aula-09 · Revisão
-10. aula-10 · Missão final
+**Regra**: NÃO inventar erro onde não tem. As 6 aulas foram auditadas e estão **matematicamente 100% corretas**. Estas melhorias são para elevar o nível pedagógico ao padrão "escola particular top", não para consertar erros.
 
-Cada aula tem 4–6 etapas de explicação → cada etapa ganha um `exemploReal` concreto.
+**Entrega da Parte 1**: as 6 aulas atualizadas + confirmação de typecheck limpo. Um turno só.
 
-## Ordem de execução (revisão cena por cena)
+---
 
-Conforme sua preferência ("revisar em etapas pequenas e confirmar cena por cena"):
+## PARTE 2 — Auditoria matemática pura, série por série
 
-- **Passo 1** — Schema (`types.ts`) + render no `PlayerV4.tsx`.
-- **Passo 2** — Reescrever **aula-01** completa com `exemploReal` em cada etapa. Você confere.
-- **Passo 3** — Depois do OK, sigo aula-02 → aula-10 no mesmo padrão, uma por vez (ou em blocos de 2 se você preferir acelerar).
+**Ordem obrigatória**: 3º ano → 4º ano → 5º ano → 6º ano. **Uma série por turno.**
 
-## Padrão de "Exemplo Real" (referência)
+**O que é auditoria pura:**
+- Ler cada aula (todas as unidades da série).
+- Conferir **cada cálculo** como professor de matemática de escola particular.
+- Detectar: contas erradas, resultados incorretos, feedback errado na avaliação, gabarito trocado, regra explicada errada, exemplo que quebra a regra que ele mesmo ensina, unidades trocadas, simplificação faltando quando deveria ter.
+- **NÃO propor melhoria pedagógica** nesta fase. Só corretude matemática.
 
-Etapa: *"Todo número até 999 mora em 3 casas: C·D·U."*
-Exemplo Real:
-- Contexto: *"O ônibus escolar tem placa 347. Vamos ver onde cada algarismo mora."*
-- `casasValor: { numero: 347, extenso: "trezentos e quarenta e sete", mostrarDecomposicao: true }`
-- Destaque: *"3 na Centena vale 300 · 4 na Dezena vale 40 · 7 na Unidade vale 7."*
+**Formato do relatório por série (antes de corrigir):**
 
-Etapa: *"Somar sempre pelas unidades primeiro."*
-Exemplo Real:
-- Contexto: *"O bairro Leste tem 325 pessoas e o Oeste 243. Vamos somar juntos."*
-- `contaPassoAPasso` completo com os 3 passos (U, D, C).
-- Destaque: *"Total: 568 habitantes."*
+Tabela com colunas:
+- Aula (arquivo)
+- Momento (ex.: `momento10_avaliacao Q2`)
+- Erro encontrado
+- Correção proposta
+- Severidade: **CRÍTICO** (conta errada / gabarito errado) · **MÉDIO** (regra explicada de forma confusa) · **LEVE** (falta simplificação, texto ambíguo)
 
-Posso começar pelo Passo 1+2 (schema + render + aula-01) e te chamar pra validar antes de seguir?
+**Fluxo por turno:**
+1. Usuária pede: "audita 3º ano".
+2. Eu leio todas as aulas do 3º ano e entrego a tabela de erros.
+3. Usuária aprova as correções.
+4. Só então eu aplico as correções em bloco.
+5. Confirmo typecheck limpo e passo para o próximo ano no próximo turno.
+
+**Séries fora do escopo desta auditoria:**
+- 2º ano de matemática — **TRAVADO** por constraint (`matematica-2ano-travada.md`).
+- Educação Infantil e 1º ano matemática — **SOMENTE LEITURA** por constraint (`ei-somente-leitura-mat-ingles.md`).
+- 7º ano e Ensino Médio — não existem ainda.
+
+**8º ano** — a Parte 1 já cobre a auditoria da U1. As U2 a U7 do 8º entram no ciclo depois do 6º ano, se a usuária quiser.
+
+---
+
+## Regras gerais do contrato
+
+- **Não expandir escopo** sem aprovação explícita da usuária.
+- **Não misturar as duas partes** no mesmo turno.
+- **Não considerar aula "pronta"** sem eu ter conferido cada conta com olhos de professor.
+- Nunca dizer que está pronto sem validar de verdade (memória `mem://~user`).
+- Se durante a auditoria eu encontrar erro crítico (conta errada, gabarito trocado), **avisar imediatamente** mesmo se não for o foco daquele turno.
