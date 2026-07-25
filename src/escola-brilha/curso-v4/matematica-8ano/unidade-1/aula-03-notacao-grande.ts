@@ -46,13 +46,11 @@ export const aula03_notacaoGrande: AulaV4 = {
         exemploReal: {
           contexto: "Transforme 6.400.000 em notação científica.",
           visualMat: {
-            tipo: "tabela",
-            cabecalhos: ["Passo", "Ação", "Resultado"],
-            linhas: [
-              { rotulo: "1", valores: ["ande a vírgula", "6,400000"] },
-              { rotulo: "2", valores: ["conte casas", "6 casas p/ esquerda"] },
-              { rotulo: "3", valores: ["escreva", "6,4 · 10⁶"] },
-            ],
+            tipo: "notacaoCientifica",
+            numero: "6.400.000",
+            coeficiente: "6,4",
+            expoente: 6,
+            legenda: "Número grande → expoente positivo",
           },
           destaque: "6.400.000 = 6,4 · 10⁶.",
         },
