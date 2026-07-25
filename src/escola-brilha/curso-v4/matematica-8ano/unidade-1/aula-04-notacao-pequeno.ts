@@ -94,13 +94,11 @@ export const aula04_notacaoPequeno: AulaV4 = {
     enunciado: "Escreva 0,000048 em notação científica.",
     resposta: "4,8 · 10⁻⁵",
     visualMat: {
-      tipo: "tabela",
-      cabecalhos: ["Passo", "Ação"],
-      linhas: [
-        { rotulo: "1", valores: ["ande p/ direita", "4,8"] },
-        { rotulo: "2", valores: ["casas movidas", "5"] },
-        { rotulo: "3", valores: ["resultado", "4,8 · 10⁻⁵"] },
-      ],
+      tipo: "notacaoCientifica",
+      numero: "0,000048",
+      coeficiente: "4,8",
+      expoente: -5,
+      legenda: "Modelagem",
     },
     passos: ["Andei até 4,8.", "5 casas.", "= 4,8 · 10⁻⁵."],
   },
