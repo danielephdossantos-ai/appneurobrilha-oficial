@@ -41,7 +41,7 @@ export type Interacao =
   | {
       tipo: "escolhaVisual";
       pergunta: string;
-      opcoes: Array<{ nome: string; imagemUrl: string }>;
+      opcoes: Array<{ nome: string; imagemUrl?: string }>;
       respostaCerta: string;
       feedbackAcerto: string;
       feedbackErro: string;
