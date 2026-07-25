@@ -35,6 +35,16 @@ export const aula03_zeroNoQuociente: AulaV4 = {
     enunciado: "918 ÷ 3.",
     resposta: "306",
     passos: ["9÷3=3.", "1<3 → 0.", "Desce 8 → 18÷3=6.", "= 306."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [918, 3],
+      resultado: 306,
+      passos: [
+        { fala: "9 ÷ 3 = 3. Escrevo 3. 3 × 3 = 9. 9 − 9 = 0." },
+        { fala: "Desço o 1. Fica 1. 1 < 3 → escrevo 0 no quociente. 0 × 3 = 0. 1 − 0 = 1." },
+        { fala: "Desço o 8. Fica 18. 18 ÷ 3 = 6. 6 × 3 = 18. 18 − 18 = 0." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 624 ÷ 6.",
