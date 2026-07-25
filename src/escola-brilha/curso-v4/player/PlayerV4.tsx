@@ -201,7 +201,7 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
               <div className={c.destaque ? "text-2xl font-bold" : ""}>{c.texto}</div>
             )}
             {c.tipo === "tabuada" && (
-              <div className={`inline-block rounded-lg px-4 py-3 font-mono ${c.destaque ? "bg-amber-400/20 border border-amber-400" : "bg-white/5"}`}>
+              <div data-no-tts className={`inline-block rounded-lg px-4 py-3 font-mono ${c.destaque ? "bg-amber-400/20 border border-amber-400" : "bg-white/5"}`}>
                 {c.titulo && <div className="text-base font-bold mb-2 font-sans">{c.titulo}</div>}
                 <div className="flex flex-col gap-1 text-lg leading-tight tabular-nums text-left">
                   {Array.from({ length: c.ate ?? 10 }).map((_, k) => {
@@ -1750,7 +1750,7 @@ function TabuadaInterativa({
   const [revelados, setRevelados] = useState(0); // quantas linhas já tiveram resultado revelado
   const terminou = revelados >= ate;
   return (
-    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
       <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
         {operacao === "div"
           ? `Tabuada do ${fator} — quantas vezes cabe em ${dividendo ?? "?"}`
@@ -1822,7 +1822,7 @@ function TabuadaReferencia({
   targetN?: number;
 }) {
   return (
-    <div className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
+    <div data-no-tts className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
       <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
         📖 Tabuada do {fator} — consulte
       </div>
