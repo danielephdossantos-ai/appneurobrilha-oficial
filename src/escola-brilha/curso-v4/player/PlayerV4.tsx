@@ -859,10 +859,17 @@ function ContarQuiz({ i }: { i: Extract<Interacao, { tipo: "contarQuiz" }> }) {
 
 function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }> }) {
   const [escolha, setEscolha] = useState<string | null>(null);
+  const temImagens = i.opcoes.some((op) => !!op.imagemUrl);
   return (
     <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
       <div className="font-semibold text-center">{i.pergunta}</div>
-      <div className="grid grid-cols-3 gap-3">
+      <div
+        className={
+          temImagens
+            ? "grid grid-cols-3 gap-3"
+            : "flex flex-col gap-3 max-w-md mx-auto w-full"
+        }
+      >
         {i.opcoes.map((op) => {
           const dado = escolha !== null;
           const cert = op.nome === i.respostaCerta;
@@ -872,7 +879,11 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
               key={op.nome}
               disabled={dado}
               onClick={() => setEscolha(op.nome)}
-              className={`p-3 rounded-xl flex flex-col items-center gap-2 ${
+              className={`rounded-xl ${
+                temImagens
+                  ? "p-3 flex flex-col items-center gap-2"
+                  : "px-4 py-4 text-left"
+              } ${
                 !dado
                   ? "bg-white/10 hover:bg-white/20"
                   : cert
@@ -883,16 +894,14 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
               }`}
             >
               {op.imagemUrl ? (
-                <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+                <>
+                  <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+                  <span className="text-xs font-medium text-center leading-tight">{op.nome}</span>
+                </>
               ) : (
-                <div className="w-full py-3 grid place-items-center font-black text-3xl md:text-4xl tabular-nums">
+                <div className="font-black text-lg md:text-xl tabular-nums leading-tight">
                   {op.nome}
                 </div>
-              )}
-              {op.imagemUrl && (
-                <span className="text-xs font-medium text-center leading-tight">
-                  {op.nome}
-                </span>
               )}
             </button>
           );
