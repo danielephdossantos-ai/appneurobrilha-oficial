@@ -245,9 +245,9 @@ export type MomentoModelagem = {
     operandos: number[];
     resultado: number;
     passos: Array<{
-      coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
+      coluna?: "U" | "D" | "C" | "UM" | "DM" | "CM";
       fala: string;
-      digito: number;
+      digito?: number;
       vaiUm?: number;
       porque?: string;
     }>;
