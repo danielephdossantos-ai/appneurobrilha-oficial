@@ -40,79 +40,18 @@ export const aula04_subtracaoSimples: AulaV4 = {
     "titulo": "Subtração sem reagrupamento",
     "etapas": [
       {
-        "texto": "1) Alinhe C-D-U.",
+        "texto": "Vamos armar 458 − 235. Subtraímos da direita pra esquerda: U, D, C.",
         "exemploReal": {
-          "contexto": "458 − 235.",
-          "destaque": "Pronto.",
-          "casasValor": {
-            "numero": 458,
-            "mostrarDecomposicao": true,
-            "extenso": "quatrocentos e cinquenta e oito"
-          }
-        }
-      },
-      {
-        "texto": "2) U: 8 − 5 = 3.",
-        "exemploReal": {
-          "contexto": "Tira 5 de 8.",
-          "destaque": "U = 3.",
-          "contaPassoAPasso": {
-            "operacao": "sub",
-            "operandos": [
-              458,
-              235
-            ],
-            "resultado": 223,
-            "passos": [
-              {
-                "coluna": "U",
-                "fala": "8 − 5 = 3.",
-                "digito": 3
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "3) D: 5 − 3 = 2.",
-        "exemploReal": {
-          "contexto": "",
-          "destaque": "D = 2.",
-          "contaPassoAPasso": {
-            "operacao": "sub",
-            "operandos": [
-              458,
-              235
-            ],
-            "resultado": 223,
-            "passos": [
-              {
-                "coluna": "D",
-                "fala": "5 − 3 = 2.",
-                "digito": 2
-              }
-            ]
-          }
-        }
-      },
-      {
-        "texto": "4) C: 4 − 2 = 2.",
-        "exemploReal": {
-          "contexto": "",
+          "contexto": "Cada dígito de cima é maior ou igual ao de baixo — dá pra tirar direto.",
           "destaque": "458 − 235 = 223.",
           "contaPassoAPasso": {
             "operacao": "sub",
-            "operandos": [
-              458,
-              235
-            ],
+            "operandos": [458, 235],
             "resultado": 223,
             "passos": [
-              {
-                "coluna": "C",
-                "fala": "4 − 2 = 2.",
-                "digito": 2
-              }
+              { "coluna": "U", "fala": "Unidades: 8 − 5 = 3. Escrevo 3.", "digito": 3 },
+              { "coluna": "D", "fala": "Dezenas: 5 − 3 = 2. Escrevo 2.", "digito": 2 },
+              { "coluna": "C", "fala": "Centenas: 4 − 2 = 2. Escrevo 2.", "digito": 2 }
             ]
           }
         }
