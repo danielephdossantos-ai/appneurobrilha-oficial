@@ -285,12 +285,14 @@ export type MomentoPraticaGuiada = {
   enunciado: string;
   interacao: Interacao;
   dica: string;             // sempre visível
+  visualMat?: VisualMat;    // conta armada / passo a passo opcional
 };
 
 /** "Você faz" — sozinha, sem dicas. */
 export type MomentoPraticaIndependente = {
   enunciado: string;
   interacao: Interacao;
+  visualMat?: VisualMat;
 };
 
 /** Problema do cotidiano — transferir o conhecimento. */
@@ -298,7 +300,9 @@ export type MomentoAplicacao = {
   contexto: string;         // "Você vai à padaria com sua mãe..."
   problema: string;
   interacao: Interacao;
+  visualMat?: VisualMat;
 };
+
 
 /** Revisão espiral — retomar 1 ponto da aula anterior. */
 export type MomentoRevisao = {

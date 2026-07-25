@@ -303,6 +303,19 @@ export const aula04_trinomio: AulaV4 = {
   momento06_praticaGuiada: {
     enunciado: "Nós fazemos juntos: fatore x² + 4x + 4.",
     dica: "√4 = 2. Testa: 2·x·2 = 4x. Bate.",
+    visualMat: {
+      tipo: "trinomioPassoAPasso",
+      trinomio: "x² + 4x + 4",
+      passos: [
+        { expr: "√x² = x", explica: "Raiz do 1º termo. a = x.", status: "ok" },
+        { expr: "√4 = 2", explica: "Raiz do 3º termo. b = 2.", status: "ok" },
+        { expr: "2·x·2 = 4x", explica: "Teste do meio. Bate com 4x.", status: "ok" },
+        { expr: "sinal: +", explica: "Meio é +4x → dentro do parêntese vai '+'.", status: "neutro" },
+        { expr: "(x + 2)²", explica: "Fatoração final.", status: "ok" },
+      ],
+      fatorada: "(x + 2)²",
+      legenda: "Nós fazemos — conta armada",
+    },
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Qual é a forma fatorada?",
@@ -318,6 +331,19 @@ export const aula04_trinomio: AulaV4 = {
   // -----------------------------------------------------------------
   momento07_praticaIndependente: {
     enunciado: "Você faz: fatore 9x² − 24x + 16.",
+    visualMat: {
+      tipo: "trinomioPassoAPasso",
+      trinomio: "9x² − 24x + 16",
+      passos: [
+        { expr: "√9x² = 3x", explica: "Cuidado: √9 = 3, então √9x² = 3x (não 9x). a = 3x.", status: "ok" },
+        { expr: "√16 = 4", explica: "Raiz do 3º termo. b = 4.", status: "ok" },
+        { expr: "2·(3x)·4 = 24x", explica: "Teste do meio. Bate com 24x (só o sinal é −).", status: "ok" },
+        { expr: "sinal: −", explica: "Meio é −24x → dentro do parêntese vai '−'.", status: "neutro" },
+        { expr: "(3x − 4)²", explica: "Fatoração final.", status: "ok" },
+      ],
+      fatorada: "(3x − 4)²",
+      legenda: "Você faz — conta armada",
+    },
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Qual é a forma fatorada?",
@@ -339,6 +365,19 @@ export const aula04_trinomio: AulaV4 = {
     contexto:
       "Um terreno QUADRADO tem área x² + 12x + 36 m². O engenheiro precisa saber quanto mede o lado.",
     problema: "Área = x² + 12x + 36. Lado do quadrado = ?",
+    visualMat: {
+      tipo: "trinomioPassoAPasso",
+      trinomio: "x² + 12x + 36",
+      passos: [
+        { expr: "√x² = x", explica: "Raiz do 1º termo. a = x (mede em metros).", status: "ok" },
+        { expr: "√36 = 6", explica: "Raiz do 3º termo. b = 6 m.", status: "ok" },
+        { expr: "2·x·6 = 12x", explica: "Teste do meio. Bate com 12x.", status: "ok" },
+        { expr: "sinal: +", explica: "Meio é +12x → dentro do parêntese vai '+'.", status: "neutro" },
+        { expr: "(x + 6)²", explica: "Lado do terreno = (x + 6) metros.", status: "ok" },
+      ],
+      fatorada: "(x + 6) m",
+      legenda: "Aplicação — terreno quadrado",
+    },
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha o lado do terreno:",
@@ -350,6 +389,7 @@ export const aula04_trinomio: AulaV4 = {
         "√36 = 6. 2·x·6 = 12x. Logo (x+6)² = x²+12x+36. O lado é (x+6).",
     },
   },
+
 
   // -----------------------------------------------------------------
   momento09_revisao: {

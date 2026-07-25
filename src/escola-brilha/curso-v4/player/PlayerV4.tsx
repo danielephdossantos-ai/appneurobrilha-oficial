@@ -491,7 +491,7 @@ function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
-      <ExplicacaoContaAuto texto={m.enunciado} />
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={m.enunciado} />}
       <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
         💡 Dica: {m.dica}
       </div>
@@ -504,7 +504,7 @@ function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
-      <ExplicacaoContaAuto texto={m.enunciado} />
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={m.enunciado} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
@@ -517,11 +517,12 @@ function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
       <div className="text-sm text-amber-300">🌎 Na vida real:</div>
       <div>{m.contexto}</div>
       <div className="text-lg font-bold">{m.problema}</div>
-      <ExplicacaoContaAuto texto={`${m.contexto} ${m.problema}`} />
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={`${m.contexto} ${m.problema}`} />}
       <InteracaoView i={m.interacao} />
     </Card>
   );
 }
+
 
 function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
   const textoMini = m.miniDesafio
