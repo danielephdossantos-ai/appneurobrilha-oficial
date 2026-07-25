@@ -320,7 +320,7 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       // Pausa natural entre frases: mais tempo se terminou em ponto/interrogação/exclamação,
       // menos se terminou em vírgula/ponto-e-vírgula. Assim o TTS "respeita" a pontuação.
       const last = chunk.slice(-1);
-      const pausaMs = /[.!?]/.test(last) ? 550 : /[,;:]/.test(last) ? 300 : 200;
+      const pausaMs = /[.!?]/.test(last) ? 750 : /[,;:]/.test(last) ? 420 : 260;
       let advanced = false;
       const timeout = window.setTimeout(
         () => {
