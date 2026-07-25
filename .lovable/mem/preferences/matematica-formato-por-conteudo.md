@@ -1,0 +1,36 @@
+---
+name: Matemática — formato de explicação segue o conteúdo
+description: Cada tópico de matemática usa o visual/estrutura própria: numeração → casas de valor (U/D/C/UM); tabuada → tabuada interativa e de referência; geometria → figura real com vértices/lados/ângulos rotulados como no padrão mundial; estatística → gráficos reais (barras, colunas, pictograma, linha); medidas → régua/relógio/balança; frações → figura repartida. Nunca forçar um único padrão de ensino.
+type: preference
+---
+
+# Regra
+
+Matemática NÃO tem um padrão único de ensino. O formato da explicação, do "Brilha resolve" e das atividades DEVE seguir o conteúdo da aula. Nunca cair no default de casas de valor quando o tópico é outro.
+
+## Mapa conteúdo → formato obrigatório
+
+| Conteúdo | Formato de explicação | Componente |
+| --- | --- | --- |
+| Numeração, valor posicional, soma/subtração armadas | Casas de valor (U/D/C/UM) + conta passo a passo | `CasasValor`, `contaPassoAPasso` |
+| Tabuada, multiplicação, divisão exata | Tabuada interativa (linhas reveladas uma a uma, com soma equivalente em vermelho) + tabuada de referência nas atividades | `TabuadaInterativa`, `TabuadaReferencia` |
+| Divisão com repartição | Rodadas de distribuição "1 pra cada" até zerar, ligando à tabuada | cenas passo a passo + tabuada |
+| Geometria plana (quadrado, retângulo, triângulo, polígonos) | Figura real com vértices rotulados (A, B, C, D), lados e ângulos marcados como no padrão internacional | figura SVG com labels |
+| Geometria espacial | Sólido com faces/arestas/vértices contados | SVG do sólido |
+| Estatística e probabilidade | Gráfico real (barras, colunas, pictograma, linha, setores) — nunca só texto | componente de gráfico |
+| Medidas (comprimento, massa, capacidade, tempo, dinheiro) | Instrumento real: régua, balança, jarra graduada, relógio, cédulas/moedas | SVG específico |
+| Frações e decimais | Figura repartida (barra, círculo, retângulo) mostrando parte/todo | SVG de fração |
+| Sequências e padrões | Linha/tabela com o padrão visível | grid de sequência |
+
+## Regras firmes
+
+- Antes de escrever a aula, identifique o conteúdo e escolha o formato da tabela acima.
+- Se o Player não tem o componente certo, criar o componente ao invés de cair no formato genérico.
+- Nunca renderizar "Casas de valor" em aulas de tabuada, geometria, estatística, medidas ou frações — está errado pedagogicamente e confunde a criança.
+- Tabuada: sempre em coluna alinhada (fator × 1, × 2, …), nunca inline separado por ponto.
+- Geometria: rotular vértices com letras maiúsculas (A, B, C, D…) e marcar ângulos/medidas — é o padrão mundial e a criança já vai encontrar em toda escola/livro.
+- Gráficos: eixos rotulados, escala visível, dados reais da atividade.
+
+## Detecção automática no Player
+
+O `PlayerV4` já detecta multiplicação/divisão pelo texto (`detectarMultDivNoTexto`) e troca casas de valor pela tabuada. Estender o mesmo padrão para os demais formatos: cada categoria acima ganha seu próprio detector + componente, e o default (casas de valor) só entra quando o conteúdo é realmente numeração/aditivo.
