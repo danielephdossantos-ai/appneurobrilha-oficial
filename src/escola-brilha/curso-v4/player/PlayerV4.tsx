@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, useMemo, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import type { AulaV4, Interacao } from "../types";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
@@ -1309,6 +1309,53 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
     return { UM: s[0], C: s[1], D: s[2], U: s[3] }[coluna];
   }
 
+  // Marcações de empréstimo do professor: para subtração, deriva
+  // automaticamente qual coluna do topo foi decrementada (riscada, com o
+  // novo valor em vermelho acima) e qual recebeu +10 (prefixo "1" em
+  // vermelho na frente do dígito). É como o professor escreve no caderno.
+  const emprestimo = useMemo(() => {
+    if (i.operacao !== "sub" || i.operandos.length !== 2) return null;
+    const [A, B] = i.operandos;
+    const cols: Array<"U" | "D" | "C" | "UM"> = ["U", "D", "C", "UM"];
+    const idx: Record<"U" | "D" | "C" | "UM", number> = { U: 0, D: 1, C: 2, UM: 3 };
+    type Marca = { recebeu: boolean; deu: boolean; topoOriginal: number; topoDepois: number };
+    const marcas: Record<"U" | "D" | "C" | "UM", Marca> = {
+      U: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      D: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      C: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      UM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+    };
+    let borrow = 0;
+    for (const c of cols) {
+      const dA = parseInt(digitoDe(A, c) || "0", 10);
+      const dB = parseInt(digitoDe(B, c) || "0", 10);
+      marcas[c].topoOriginal = dA;
+      if (borrow > 0) marcas[c].deu = true;
+      let topo = dA - borrow;
+      if (topo < dB) {
+        topo += 10;
+        marcas[c].recebeu = true;
+        borrow = 1;
+      } else {
+        borrow = 0;
+      }
+      marcas[c].topoDepois = topo;
+    }
+    return { marcas, idx };
+  }, [i.operacao, i.operandos]);
+
+  // Um mark de empréstimo aparece assim que a criança avança pra coluna
+  // que dispara o empréstimo (a coluna filha). Ex.: empréstimo de D→U
+  // aparece quando o passo U (idx 0) já foi processado.
+  function mostrarEmprestimoDe(c: "U" | "D" | "C" | "UM") {
+    if (!emprestimo) return { recebeu: false, deu: false };
+    const i2 = emprestimo.idx[c];
+    return {
+      recebeu: passoAtual >= i2 && emprestimo.marcas[c].recebeu,
+      deu: passoAtual >= Math.max(0, i2 - 1) && emprestimo.marcas[c].deu,
+    };
+  }
+
   // Passos revelados até agora — mapa coluna → dígito do resultado
   const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
   i.passos.slice(0, passoAtual + 1).forEach((p) => {
@@ -1352,20 +1399,61 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
           })}
 
           {/* Operandos */}
-          {i.operandos.map((op, opIdx) => (
-            <Fragment key={"opRow-" + opIdx}>
-              <div className="text-right pr-1 text-[#0d1f55]/60">
-                {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
-              </div>
-              {colunas.map((c) => (
-                <div key={`op-${opIdx}-${c}`} className="text-center">
-                  {digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
-                    ? ""
-                    : digitoDe(op, c)}
+          {i.operandos.map((op, opIdx) => {
+            const ehTopoSub = opIdx === 0 && i.operacao === "sub" && emprestimo != null;
+            return (
+              <Fragment key={"opRow-" + opIdx}>
+                <div className="text-right pr-1 text-[#0d1f55]/60">
+                  {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
                 </div>
-              ))}
-            </Fragment>
-          ))}
+                {colunas.map((c) => {
+                  const digitoStr =
+                    digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
+                      ? ""
+                      : digitoDe(op, c);
+                  if (!ehTopoSub) {
+                    return (
+                      <div key={`op-${opIdx}-${c}`} className="text-center">
+                        {digitoStr}
+                      </div>
+                    );
+                  }
+                  const marca = emprestimo!.marcas[c];
+                  const { recebeu, deu } = mostrarEmprestimoDe(c);
+                  // Valor pra mostrar acima em vermelho quando esta coluna emprestou.
+                  // Se ela TAMBÉM recebeu (cadeia através do zero), o valor acima
+                  // é 10 + topoOriginal - 1 (ex.: 0 vira 10, depois empresta 1 → mostra 9).
+                  const acima = deu
+                    ? recebeu
+                      ? marca.topoOriginal + 10 - 1
+                      : marca.topoOriginal - 1
+                    : null;
+                  return (
+                    <div
+                      key={`op-${opIdx}-${c}`}
+                      className="relative text-center leading-none"
+                    >
+                      {acima !== null && (
+                        <div className="absolute -top-4 md:-top-5 left-0 right-0 text-center text-lg md:text-2xl font-black text-rose-600">
+                          {acima}
+                        </div>
+                      )}
+                      <span className="inline-flex items-baseline justify-center">
+                        {recebeu && (
+                          <span className="text-lg md:text-2xl font-black text-rose-600 mr-0.5">
+                            1
+                          </span>
+                        )}
+                        <span className={deu ? "line-through decoration-rose-600 decoration-[3px]" : ""}>
+                          {digitoStr}
+                        </span>
+                      </span>
+                    </div>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
 
           {/* Linha do resultado */}
           <div />
