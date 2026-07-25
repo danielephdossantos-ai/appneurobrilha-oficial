@@ -79,6 +79,44 @@ export type Interacao =
       duracaoSeg?: number;   // padrão 90
       feedbackAcerto: string;
       feedbackErro: string;
+    }
+  | {
+      /**
+       * Conta escrita passo a passo (algoritmo tradicional). Usado do
+       * 3º ano ao Ensino Médio. Substitui a contagem infantil (frutas).
+       * Renderiza operação vertical com colunas alinhadas e revela cada
+       * dígito conforme o aluno avança "Próximo passo".
+       *
+       * Modos:
+       *  - "explicacao": Brilha resolve, aluno só acompanha e ouve o
+       *    porquê de cada passo (Skemp relacional).
+       *  - "pratica": no fim, pergunta o resultado.
+       */
+      tipo: "contaPassoAPasso";
+      operacao: "soma" | "sub" | "mult";
+      /** 2+ operandos (ex.: [234, 187]). */
+      operandos: number[];
+      /** Ordem: unidades → dezenas → centenas → milhar. */
+      passos: Array<{
+        coluna: "U" | "D" | "C" | "UM";
+        /** Fala do Brilha (ex.: "Somo 4 + 7 = 11. Escrevo 1, sobe 1."). */
+        fala: string;
+        /** Dígito escrito no resultado nesta coluna. */
+        digito: number;
+        /** "Vai 1" — dígito transportado pra próxima coluna. */
+        vaiUm?: number;
+        /** Justificativa relacional (por que funciona). Opcional. */
+        porque?: string;
+      }>;
+      resultado: number;
+      modo?: "explicacao" | "pratica";
+      perguntaFinal?: string;
+      /** Alternativas do modo prática. Se omitido, gera 3 opções. */
+      opcoes?: number[];
+      feedbackAcerto?: string;
+      feedbackErro?: string;
+      /** Chave da metodologia dominante (aparece no rodapé do bloco). */
+      metodologia?: string;
     };
 
 // ---------- Os 11 momentos pedagógicos (contrato v4.1) ---------------
