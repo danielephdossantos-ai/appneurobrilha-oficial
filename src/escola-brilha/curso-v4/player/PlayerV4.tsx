@@ -297,6 +297,7 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
               {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && e.imagemUrl && (
                 <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
               )}
+              {e.exemploReal && <ExemploReal {...e.exemploReal} />}
             </div>
 
           </li>
