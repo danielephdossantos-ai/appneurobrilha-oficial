@@ -1309,6 +1309,53 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
     return { UM: s[0], C: s[1], D: s[2], U: s[3] }[coluna];
   }
 
+  // Marcações de empréstimo do professor: para subtração, deriva
+  // automaticamente qual coluna do topo foi decrementada (riscada, com o
+  // novo valor em vermelho acima) e qual recebeu +10 (prefixo "1" em
+  // vermelho na frente do dígito). É como o professor escreve no caderno.
+  const emprestimo = useMemo(() => {
+    if (i.operacao !== "sub" || i.operandos.length !== 2) return null;
+    const [A, B] = i.operandos;
+    const cols: Array<"U" | "D" | "C" | "UM"> = ["U", "D", "C", "UM"];
+    const idx: Record<"U" | "D" | "C" | "UM", number> = { U: 0, D: 1, C: 2, UM: 3 };
+    type Marca = { recebeu: boolean; deu: boolean; topoOriginal: number; topoDepois: number };
+    const marcas: Record<"U" | "D" | "C" | "UM", Marca> = {
+      U: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      D: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      C: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      UM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+    };
+    let borrow = 0;
+    for (const c of cols) {
+      const dA = parseInt(digitoDe(A, c) || "0", 10);
+      const dB = parseInt(digitoDe(B, c) || "0", 10);
+      marcas[c].topoOriginal = dA;
+      if (borrow > 0) marcas[c].deu = true;
+      let topo = dA - borrow;
+      if (topo < dB) {
+        topo += 10;
+        marcas[c].recebeu = true;
+        borrow = 1;
+      } else {
+        borrow = 0;
+      }
+      marcas[c].topoDepois = topo;
+    }
+    return { marcas, idx };
+  }, [i.operacao, i.operandos]);
+
+  // Um mark de empréstimo aparece assim que a criança avança pra coluna
+  // que dispara o empréstimo (a coluna filha). Ex.: empréstimo de D→U
+  // aparece quando o passo U (idx 0) já foi processado.
+  function mostrarEmprestimoDe(c: "U" | "D" | "C" | "UM") {
+    if (!emprestimo) return { recebeu: false, deu: false };
+    const i2 = emprestimo.idx[c];
+    return {
+      recebeu: passoAtual >= i2 && emprestimo.marcas[c].recebeu,
+      deu: passoAtual >= Math.max(0, i2 - 1) && emprestimo.marcas[c].deu,
+    };
+  }
+
   // Passos revelados até agora — mapa coluna → dígito do resultado
   const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
   i.passos.slice(0, passoAtual + 1).forEach((p) => {
