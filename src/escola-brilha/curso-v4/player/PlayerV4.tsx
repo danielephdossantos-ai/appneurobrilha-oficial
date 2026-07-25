@@ -495,12 +495,14 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
           grupoUnico && typeof q.tirar === "number" && q.tirar! > 0;
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
+        const md = detectarMultDivNoTexto(q.pergunta);
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
           <div className="font-medium mb-3">
             {qi + 1}. {q.pergunta}
           </div>
+          {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
           {conta && (
             <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
           )}
