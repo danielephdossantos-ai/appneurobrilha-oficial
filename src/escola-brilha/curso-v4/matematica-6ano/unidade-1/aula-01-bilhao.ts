@@ -11,57 +11,115 @@ export const aula01_bilhao: AulaV4 = {
   momento01_motivacao: {
     titulo: "O Laboratório abriu as portas",
     historia:
-      "{NOME}, você foi chamado(a) ao LABORATÓRIO. A primeira missão: entender números TÃO grandes que passam do milhão. Chegam ao BILHÃO. Aqui, todo número é uma HIPÓTESE que a gente testa.",
+      "{NOME}, você foi chamado(a) ao LABORATÓRIO. Primeira missão: entender números TÃO grandes que passam do milhão. Chegam ao BILHÃO. Aqui, todo número vira HIPÓTESE que a gente testa.",
   },
+
   momento02_exploracao: {
-    instrucao: "Classes do sistema decimal (grupos de 3 dígitos, da direita para a esquerda).",
+    instrucao: "Toque nas classes. Cada grupo de 3 dígitos é uma CLASSE.",
     cenas: [
-      { tipo: "texto", texto: "Classes: unidades · milhar · milhão · bilhão.", destaque: true },
-      { tipo: "texto", texto: "1.000 unidades = 1 milhar. 1.000 milhares = 1 milhão. 1.000 milhões = 1 bilhão." },
-      { tipo: "texto", texto: "Leitura: leia cada classe e diga o nome dela. Ex.: 2.345.678.901 → 2 bilhões, 345 milhões, 678 mil, 901." },
+      { tipo: "texto", texto: "Da direita pra esquerda: Unidades · Milhar · Milhão · Bilhão.", destaque: true },
+      {
+        tipo: "tabela",
+        titulo: "As 4 classes do sistema decimal",
+        cabecalhos: ["Classe", "Valor de 1", "Nº de zeros"],
+        linhas: [
+          { rotulo: "Unidades", valores: ["1", "0"] },
+          { rotulo: "Milhar", valores: ["1.000", "3"] },
+          { rotulo: "Milhão", valores: ["1.000.000", "6"] },
+          { rotulo: "Bilhão", valores: ["1.000.000.000", "9"] },
+        ],
+        destacar: { linha: 3 },
+      },
+      { tipo: "texto", texto: "Cada classe é 1.000× a anterior. Pule de 3 em 3 zeros." },
     ],
   },
+
   momento03_descoberta: {
     perguntaGuia: "Quantos milhões cabem em 1 bilhão?",
-    pista: "Cada classe é ×1.000 da anterior.",
-    revelacao: "1 bilhão = 1.000 milhões = 1.000.000.000.",
+    pista: "Cada classe é ×1.000 da anterior. Milhão → Bilhão = ×1.000.",
+    revelacao: "1 bilhão = 1.000 milhões = 1.000.000.000 (9 zeros).",
   },
+
   momento04_explicacao: {
-    titulo: "Leitura por classes",
+    titulo: "Ler por classes — separar em blocos de 3",
     etapas: [
-      { texto: "1.250.000 → 1 milhão, 250 mil." },
-      { texto: "42.700.000 → 42 milhões, 700 mil." },
-      { texto: "3.005.000.000 → 3 bilhões, 5 milhões." },
-      { texto: "Dica científica: separe pelos pontos e leia CLASSE por CLASSE." },
+      {
+        texto: "Separe o número em CLASSES pelos pontos. Depois leia cada bloco com o nome dele.",
+        exemploReal: {
+          titulo: "🔎 Na prática",
+          contexto: "Exemplo: 2.345.678.901",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "2 · 345 · 678 · 901",
+            cabecalhos: ["Bilhão", "Milhão", "Milhar", "Unidade"],
+            linhas: [{ rotulo: "Bloco", valores: ["2", "345", "678", "901"] }],
+          },
+          destaque: "Lê-se: dois bilhões, trezentos e quarenta e cinco milhões, seiscentos e setenta e oito mil, novecentos e um.",
+        },
+      },
+      {
+        texto: "Números menores? Mesma regra — só tem menos classes.",
+        exemploReal: {
+          contexto: "42.700.000",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Milhão", "Milhar", "Unidade"],
+            linhas: [{ rotulo: "Bloco", valores: ["42", "700", "000"] }],
+          },
+          destaque: "Quarenta e dois milhões, setecentos mil.",
+        },
+      },
+      {
+        texto: "Zeros de classes intermediárias vazias NÃO são lidos, mas seguram a posição.",
+        exemploReal: {
+          contexto: "3.005.000.000",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Bilhão", "Milhão", "Milhar", "Unidade"],
+            linhas: [{ rotulo: "Bloco", valores: ["3", "005", "000", "000"] }],
+            destacar: { coluna: 2 },
+          },
+          destaque: "Três bilhões e cinco milhões.",
+        },
+      },
     ],
   },
+
   momento05_modelagem: {
-    enunciado: "Escreva por extenso: 1.200.000.000.",
+    enunciado: "Escreva por extenso 1.200.000.000.",
     resposta: "Um bilhão e duzentos milhões",
+    visualMat: {
+      tipo: "tabela",
+      titulo: "1.200.000.000 — separado por classes",
+      cabecalhos: ["Bilhão", "Milhão", "Milhar", "Unidade"],
+      linhas: [{ rotulo: "Bloco", valores: ["1", "200", "000", "000"] }],
+    },
     passos: [
-      "Separe as classes: 1 · 200 · 000 · 000.",
-      "Nomeie da esquerda: 1 bilhão, 200 milhões, 0 mil, 0.",
-      "Leia junto: um bilhão e duzentos milhões.",
+      "Separe pelos pontos: 1 · 200 · 000 · 000.",
+      "Nomeie da esquerda pra direita: 1 bilhão, 200 milhões, 0 mil, 0 unidades.",
+      "Leia junto — pula os zeros: um bilhão e duzentos milhões.",
     ],
   },
+
   momento06_praticaGuiada: {
     enunciado: "Como se lê 5.030.000?",
-    dica: "5 milhões · 30 mil · 0.",
+    dica: "Separe: 5 · 030 · 000. Três classes.",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Escolha:",
+      pergunta: "Escolha a leitura correta:",
       opcoes: [
         { nome: "Cinco milhões e trinta mil" },
         { nome: "Cinco milhões e trezentos mil" },
         { nome: "Cinquenta milhões e trinta mil" },
       ],
       respostaCerta: "Cinco milhões e trinta mil",
-      feedbackAcerto: "🎯 Classes lidas corretamente.",
-      feedbackErro: "Separe: 5 · 030 · 000. Fica cinco milhões e trinta mil.",
+      feedbackAcerto: "🎯 Bloco de milhar = 030 = trinta.",
+      feedbackErro: "5 (milhão) · 030 (milhar) · 000 = cinco milhões e trinta mil.",
     },
   },
+
   momento07_praticaIndependente: {
-    enunciado: "2.400.000.000 é igual a…",
+    enunciado: "2.400.000.000 é igual a:",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -71,54 +129,63 @@ export const aula01_bilhao: AulaV4 = {
         { nome: "240 milhões" },
       ],
       respostaCerta: "2 bilhões e 400 milhões",
-      feedbackAcerto: "🎯",
-      feedbackErro: "2 · 400 · 000 · 000 → 2 bi + 400 mi.",
+      feedbackAcerto: "🎯 2 · 400 · 000 · 000 → 2 bi + 400 mi.",
+      feedbackErro: "Tem 10 algarismos → começa em bilhão. 2 bi + 400 mi.",
     },
   },
+
   momento08_aplicacao: {
-    contexto: "A população do Brasil em 2022: cerca de 203.000.000 pessoas. A do mundo: cerca de 8.000.000.000.",
-    problema: "Quantas vezes o mundo tem mais habitantes que o Brasil (aproximado)?",
+    contexto:
+      "População (aproximada): Brasil ≈ 203.000.000 · Mundo ≈ 8.000.000.000.",
+    problema: "Quantas vezes o mundo tem mais habitantes que o Brasil?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Escolha:",
-      opcoes: [{ nome: "Cerca de 40 vezes" }, { nome: "Cerca de 4 vezes" }, { nome: "Cerca de 400 vezes" }],
+      pergunta: "Estimativa:",
+      opcoes: [
+        { nome: "Cerca de 40 vezes" },
+        { nome: "Cerca de 4 vezes" },
+        { nome: "Cerca de 400 vezes" },
+      ],
       respostaCerta: "Cerca de 40 vezes",
-      feedbackAcerto: "🎯 8.000 ÷ 203 ≈ 40.",
+      feedbackAcerto: "🎯 8.000 (mi) ÷ 200 (mi) ≈ 40.",
       feedbackErro: "8 bilhões ÷ 200 milhões ≈ 40.",
     },
   },
+
   momento09_revisao: {
     pontos: [
-      "Cada classe = 3 dígitos, ×1.000 da anterior.",
-      "Leia da esquerda pra direita, classe por classe.",
-      "Bilhão = 1.000 milhões = 1.000.000.000.",
+      "1 classe = bloco de 3 dígitos. ×1.000 da anterior.",
+      "Da direita pra esquerda: Unidade → Milhar → Milhão → Bilhão.",
+      "Bilhão = 1.000.000.000 (9 zeros).",
     ],
   },
+
   momento10_avaliacao: {
     perguntas: [
       {
         pergunta: "1 bilhão é igual a:",
         opcoes: ["1.000 milhões", "100 milhões", "10 milhões"],
         correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "1 bi = 1.000 mi.",
+        feedbackAcerto: "🎉 1 bi = 1.000 mi.",
+        feedbackErro: "×1.000 do milhão.",
       },
       {
         pergunta: "Como se lê 12.500.000?",
         opcoes: ["Doze milhões e quinhentos mil", "Um bilhão e 250 mil", "Cento e vinte e cinco milhões"],
         correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "12 mi · 500 mil.",
+        feedbackAcerto: "🎉 12 (mi) · 500 (mil).",
+        feedbackErro: "Tem 8 algarismos → começa em milhão.",
       },
       {
         pergunta: "3.000.000.000 é:",
         opcoes: ["3 bilhões", "3 milhões", "300 milhões"],
         correta: 0,
-        feedbackAcerto: "🎉",
-        feedbackErro: "3 bi.",
+        feedbackAcerto: "🎉 9 zeros à direita do 3.",
+        feedbackErro: "9 zeros = bilhão.",
       },
     ],
   },
+
   momento11_missaoFamilia: {
     titulo: "Caça-bilhão",
     materiais: ["Jornal ou site de notícias"],
