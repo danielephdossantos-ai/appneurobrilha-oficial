@@ -457,11 +457,11 @@ function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
 }
 
 function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
-  const contaMini = m.miniDesafio
-    ? detectarContaNoTexto(
-        `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`,
-      )
-    : undefined;
+  const textoMini = m.miniDesafio
+    ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
+    : "";
+  const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
+  const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
     <Card>
       <div className="text-sm text-amber-300">🔁 Lembrando o que já sabemos:</div>
@@ -470,6 +470,7 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
+      {mdMini && <TabuadaReferencia {...tabuadaDeConta(mdMini)} />}
       {contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
