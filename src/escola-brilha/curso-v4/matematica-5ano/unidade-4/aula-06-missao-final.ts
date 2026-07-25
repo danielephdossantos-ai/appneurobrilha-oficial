@@ -25,6 +25,15 @@ export const aula06_missaoFinal: AulaV4 = {
     enunciado: "672 ÷ 8.",
     resposta: "84",
     passos: ["67 ÷ 8 = 8 (64).", "Sobra 3. Desce 2 → 32 ÷ 8 = 4.", "= 84."],
+    contaPassoAPasso: {
+      operacao: "div",
+      operandos: [672, 8],
+      resultado: 84,
+      passos: [
+        { fala: "67 ÷ 8. 8 × 8 = 64. Escrevo 8. 67 − 64 = 3." },
+        { fala: "Desço o 2. Fica 32. 8 × 4 = 32. Escrevo 4. 32 − 32 = 0." },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Desafio 1: 585 ÷ 5.",
