@@ -935,7 +935,7 @@ function SomaFracoes({ v }: { v: SomaFracoesV }) {
 
   const Frac = ({
     num, den, numColor, denColor,
-  }: { num: number | string; den: number | string; numColor?: string; denColor?: string }) => (
+  }: { num: React.ReactNode; den: React.ReactNode; numColor?: string; denColor?: string }) => (
     <span className="inline-flex flex-col items-center align-middle mx-1">
       <span className={`border-b-2 border-[#0d1f55] px-2 font-bold ${numColor ?? ""}`}>{num}</span>
       <span className={`px-2 font-bold ${denColor ?? ""}`}>{den}</span>
