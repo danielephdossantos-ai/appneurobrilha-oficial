@@ -41,25 +41,22 @@ export const aula08_sequenciasRegularidades: AulaV4 = {
       {
         texto: "1º Ache o salto: subtraia dois termos vizinhos.",
         exemploReal: {
-          contexto: "3.240, 3.340, 3.440, ___",
-          casasValor: { numero: 3440, extenso: "três mil, quatrocentos e quarenta", mostrarDecomposicao: true },
-          destaque: "3.340 − 3.240 = 100 → salto de 100.",
+          contexto: "3.240, 3.340, 3.440, ___ → 3.340 − 3.240 = 100.",
+          destaque: "Salto de 100.",
         },
       },
       {
-        texto: "2º Some o salto no último termo.",
+        texto: "2º Some o salto no último termo pra achar o próximo.",
         exemploReal: {
-          contexto: "Continuando: 3.440 + 100 = 3.540.",
-          casasValor: { numero: 3540, extenso: "três mil, quinhentos e quarenta", mostrarDecomposicao: true },
+          contexto: "3.440 + 100 = 3.540 → sequência: 3.240, 3.340, 3.440, 3.540.",
           destaque: "Próximo: 3.540.",
         },
       },
       {
-        texto: "Se o salto é grande (1.000), pula uma casa inteira.",
+        texto: "O salto pode ser grande (10, 100, 1.000) ou negativo (decrescente).",
         exemploReal: {
-          contexto: "1.500, 2.500, 3.500, ___",
-          casasValor: { numero: 4500, extenso: "quatro mil e quinhentos", mostrarDecomposicao: true },
-          destaque: "Salto 1.000 → próximo 4.500.",
+          contexto: "1.500, 2.500, 3.500, ___ → salto 1.000 → próximo 4.500.",
+          destaque: "Regra: o salto sempre se repete igual.",
         },
       },
     ],
