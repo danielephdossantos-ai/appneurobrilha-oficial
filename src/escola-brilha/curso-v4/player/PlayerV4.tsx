@@ -1261,8 +1261,8 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
 
           {/* Operandos */}
           {i.operandos.map((op, opIdx) => (
-            <>
-              <div key={"s-" + opIdx} className="text-right pr-1 text-[#0d1f55]/60">
+            <Fragment key={"opRow-" + opIdx}>
+              <div className="text-right pr-1 text-[#0d1f55]/60">
                 {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
               </div>
               {colunas.map((c) => (
@@ -1272,7 +1272,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
                     : digitoDe(op, c)}
                 </div>
               ))}
-            </>
+            </Fragment>
           ))}
 
           {/* Linha do resultado */}
