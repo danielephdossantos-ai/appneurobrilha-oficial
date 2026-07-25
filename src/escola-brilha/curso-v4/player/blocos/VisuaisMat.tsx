@@ -51,6 +51,30 @@ export type ChecklistTQPV = {
   legenda?: string;
 };
 
+// ------------------ Trinômio passo-a-passo interativo ---------------
+// Constrói a fatoração linha por linha, clicando "Continuar" — igual
+// conta armada. Cada linha tem uma expressão e uma explicação curta
+// embaixo. Ao final, a fatorada aparece em destaque.
+export type TrinomioPassoAPassoV = {
+  tipo: "trinomioPassoAPasso";
+  /** Trinômio original em destaque no topo. Ex.: "x² + 6x + 9". */
+  trinomio: string;
+  /** Passos revelados um por um. */
+  passos: Array<{
+    /** Expressão matemática da linha. Ex.: "√x² = x". */
+    expr: string;
+    /** Explicação curta (1 linha) mostrada abaixo/ao lado. */
+    explica: string;
+    /** ok = verde ✅, x = vermelho ❌, neutro = cinza. */
+    status?: "ok" | "x" | "neutro";
+  }>;
+  /** Resultado final destacado (opcional). Ex.: "(x + 3)²". */
+  fatorada?: string;
+  /** Mensagem final quando NÃO é TQP. */
+  falha?: string;
+  legenda?: string;
+};
+
 // ------------------ Dízima periódica → fração geratriz ---------------
 export type DizimaGeratrizV = {
   tipo: "dizimaGeratriz";
