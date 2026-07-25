@@ -511,8 +511,11 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
-          <div className="font-medium mb-3">
-            {qi + 1}. {q.pergunta}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-full bg-amber-400/20 text-amber-200 text-xs font-bold">
+              {qi + 1}
+            </span>
+            <div className="font-medium">{q.pergunta}</div>
           </div>
           {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
           {conta && (
