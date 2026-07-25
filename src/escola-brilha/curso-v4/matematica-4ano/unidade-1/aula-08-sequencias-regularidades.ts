@@ -65,7 +65,6 @@ export const aula08_sequenciasRegularidades: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Complete: 4.200, 4.400, 4.600, ___, ___.",
     resposta: "4.800, 5.000.",
-    casasValor: { numero: 5000, mostrarDecomposicao: true, extenso: "cinco mil" },
     passos: [
       "Salto: 4.400 − 4.200 = 200.",
       "4.600 + 200 = 4.800.",
