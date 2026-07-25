@@ -41,6 +41,24 @@ export const aula06_missao: AulaV4 = {
     titulo: "Combos de operações",
     etapas: [
       {
+        texto: "Ordem obrigatória de qualquer expressão.",
+        exemploReal: {
+          contexto: "Sempre nessa ordem:",
+          visualMat: {
+            tipo: "tabela",
+            titulo: "Hierarquia das operações",
+            cabecalhos: ["Prioridade", "Operação", "Símbolos"],
+            linhas: [
+              { rotulo: "1º", valores: ["1º", "Parênteses", "( )"] },
+              { rotulo: "2º", valores: ["2º", "Potência e raiz", "^ · √"] },
+              { rotulo: "3º", valores: ["3º", "× e ÷", "× ÷"] },
+              { rotulo: "4º", valores: ["4º", "+ e −", "+ −"] },
+            ],
+          },
+          destaque: "Se estiver no mesmo nível → esquerda para direita.",
+        },
+      },
+      {
         texto: "Expressão completa passo a passo.",
         exemploReal: {
           contexto: "(10² − 4 × 5) ÷ 8",
@@ -63,6 +81,16 @@ export const aula06_missao: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Calcule (5² + √49) × 2.",
     resposta: "64",
+    visualMat: {
+      tipo: "tabela",
+      cabecalhos: ["Passo", "Cálculo", "Resultado"],
+      linhas: [
+        { rotulo: "1", valores: ["potência", "5²", "25"] },
+        { rotulo: "2", valores: ["raiz", "√49", "7"] },
+        { rotulo: "3", valores: ["soma", "25 + 7", "32"] },
+        { rotulo: "4", valores: ["produto", "32 × 2", "64"] },
+      ],
+    },
     passos: ["5² = 25.", "√49 = 7.", "25 + 7 = 32.", "32 × 2 = 64."],
   },
 
