@@ -2110,6 +2110,8 @@ function ComparacaoCasas({ numeros }: { numeros: number[] }) {
 }
 
 
+/**
+ * Tabuada interativa passo a passo. Mostra fator × 1..ate com resultados
  * ocultos. A cada clique em "Continuar", revela o resultado da próxima
  * linha, com destaque na linha-alvo (targetN) quando ela é revelada.
  * Substitui CasasValor em multiplicação/divisão, seguindo o método real
