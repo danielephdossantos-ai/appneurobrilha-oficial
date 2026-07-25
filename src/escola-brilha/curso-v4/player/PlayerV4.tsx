@@ -438,14 +438,44 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   );
 }
 
+/**
+ * Renderiza a explicação passo-a-passo COMPLETA quando o enunciado contém
+ * uma conta (+, −, ×, ÷). Para divisão, monta a chave real com o
+ * algoritmo tradicional; para multiplicação usa tabuada + conta montada;
+ * para +/− usa a conta montada estática. A criança precisa ver o processo
+ * inteiro em Nós fazemos / Você faz / Na vida real, igual em Brilha resolve.
+ */
+function ExplicacaoContaAuto({ texto }: { texto: string }) {
+  const conta = detectarContaNoTexto(texto);
+  const md = detectarMultDivNoTexto(texto);
+  if (md?.operacao === "div") {
+    const q = Math.floor(md.a / md.b);
+    return (
+      <InteracaoView
+        i={{
+          tipo: "contaPassoAPasso",
+          operacao: "div",
+          operandos: [md.a, md.b],
+          resultado: q,
+          passos: [],
+        }}
+      />
+    );
+  }
+  if (md?.operacao === "mult") {
+    return <TabuadaReferencia {...tabuadaDeConta(md)} />;
+  }
+  if (conta) {
+    return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
+  }
+  return null;
+}
+
 function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
-  const conta = detectarContaNoTexto(m.enunciado);
-  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
-      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
-      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
+      <ExplicacaoContaAuto texto={m.enunciado} />
       <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
         💡 Dica: {m.dica}
       </div>
@@ -455,13 +485,10 @@ function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
 }
 
 function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
-  const conta = detectarContaNoTexto(m.enunciado);
-  const md = detectarMultDivNoTexto(m.enunciado);
   return (
     <Card>
       <div className="text-lg">{m.enunciado}</div>
-      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
-      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
+      <ExplicacaoContaAuto texto={m.enunciado} />
       <InteracaoView i={m.interacao} />
     </Card>
   );
@@ -469,15 +496,12 @@ function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
 
 
 function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
-  const conta = detectarContaNoTexto(`${m.contexto} ${m.problema}`);
-  const md = detectarMultDivNoTexto(`${m.contexto} ${m.problema}`);
   return (
     <Card>
       <div className="text-sm text-amber-300">🌎 Na vida real:</div>
       <div>{m.contexto}</div>
       <div className="text-lg font-bold">{m.problema}</div>
-      {md && <TabuadaReferencia {...tabuadaDeConta(md)} />}
-      {conta && <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />}
+      <ExplicacaoContaAuto texto={`${m.contexto} ${m.problema}`} />
       <InteracaoView i={m.interacao} />
     </Card>
   );
