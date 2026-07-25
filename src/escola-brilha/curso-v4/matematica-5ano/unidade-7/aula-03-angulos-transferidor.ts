@@ -16,6 +16,17 @@ export const aula03_angulosTransferidor: AulaV4 = {
     instrucao: "Tipos.",
     cenas: [
       { tipo: "texto", texto: "Reto = 90°. Agudo < 90°. Obtuso > 90° e < 180°. Raso = 180°.", destaque: true },
+      {
+        tipo: "tabela",
+        titulo: "Classificação dos ângulos",
+        cabecalhos: ["Tipo", "Medida", "Exemplo"],
+        linhas: [
+          { rotulo: "Agudo", valores: ["Agudo", "< 90°", "30°, 45°, 60°"] },
+          { rotulo: "Reto", valores: ["Reto", "= 90°", "Quina do caderno"] },
+          { rotulo: "Obtuso", valores: ["Obtuso", "> 90° e < 180°", "120°, 135°"] },
+          { rotulo: "Raso", valores: ["Raso", "= 180°", "Linha reta"] },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
@@ -26,14 +37,46 @@ export const aula03_angulosTransferidor: AulaV4 = {
   momento04_explicacao: {
     titulo: "Como classificar",
     etapas: [
-      { texto: "90° = quina do caderno = reto." },
+      {
+        texto: "90° = quina do caderno = reto.",
+        exemploReal: {
+          contexto: "O quadrado tem 4 ângulos retos:",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "quadrado",
+            mostrarAngulos: true,
+            mostrarVertices: true,
+            legenda: "Cada canto = 90°.",
+          },
+          destaque: "Todo canto de quadrado é reto (90°).",
+        },
+      },
       { texto: "Metade do reto (45°) = agudo." },
-      { texto: "Um pouco maior que o reto (120°) = obtuso." },
+      {
+        texto: "Um pouco maior que o reto (120°) = obtuso.",
+        exemploReal: {
+          contexto: "O hexágono regular tem ângulos internos obtusos:",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "hexagono",
+            mostrarVertices: true,
+            legenda: "Cada ângulo interno = 120°.",
+          },
+          destaque: "120° > 90° → obtuso.",
+        },
+      },
     ],
   },
   momento05_modelagem: {
     enunciado: "Como é um ângulo de 30°?",
     resposta: "Agudo",
+    visualMat: {
+      tipo: "tabela",
+      cabecalhos: ["Comparação", "Resultado"],
+      linhas: [
+        { rotulo: "30 vs 90", valores: ["30 < 90", "Agudo ✅"] },
+      ],
+    },
     passos: ["30 < 90.", "Portanto agudo."],
   },
   momento06_praticaGuiada: {
