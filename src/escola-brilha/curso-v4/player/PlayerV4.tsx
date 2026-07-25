@@ -220,6 +220,9 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
                 </div>
               </div>
             )}
+            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb") && (
+              <RenderVisualMat v={c as VisualMat} />
+            )}
           </div>
         ))}
       </div>
@@ -387,7 +390,9 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         </div>
       )}
 
-      {contaMD ? (
+      {m.visualMat ? (
+        <RenderVisualMat v={m.visualMat} />
+      ) : contaMD ? (
         <TabuadaInterativa {...tabuadaDeConta(contaMD)} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
@@ -1652,14 +1657,15 @@ export function RodapeMetodologias({ chaves }: { chaves?: string[] }) {
 function ExemploReal(props: NonNullable<
   NonNullable<AulaV4["momento04_explicacao"]["etapas"][number]["exemploReal"]>
 >) {
-  const { titulo = "🔎 Na prática", contexto, casasValor, contaPassoAPasso, destaque } = props;
+  const { titulo = "🔎 Na prática", contexto, casasValor, contaPassoAPasso, visualMat, destaque } = props;
   return (
     <div className="mt-4 rounded-2xl bg-amber-50 text-[#0d1f55] border-2 border-amber-300 p-4">
       <div className="text-[10px] uppercase tracking-widest font-black text-amber-700 mb-2">
         {titulo}
       </div>
       <div className="text-sm md:text-base leading-relaxed">{contexto}</div>
-      {casasValor && (
+      {visualMat && <RenderVisualMat v={visualMat} />}
+      {casasValor && !visualMat && (
         <div className="mt-3">
           <CasasValor {...casasValor} />
         </div>
