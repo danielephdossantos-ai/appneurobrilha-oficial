@@ -46,13 +46,11 @@ export const aula04_notacaoPequeno: AulaV4 = {
         exemploReal: {
           contexto: "Transforme 0,00025 em notação científica.",
           visualMat: {
-            tipo: "tabela",
-            cabecalhos: ["Passo", "Ação", "Resultado"],
-            linhas: [
-              { rotulo: "1", valores: ["ande p/ direita", "2,5"] },
-              { rotulo: "2", valores: ["casas movidas", "4"] },
-              { rotulo: "3", valores: ["escreva", "2,5 · 10⁻⁴"] },
-            ],
+            tipo: "notacaoCientifica",
+            numero: "0,00025",
+            coeficiente: "2,5",
+            expoente: -4,
+            legenda: "Número pequeno → expoente negativo",
           },
           destaque: "0,00025 = 2,5 · 10⁻⁴.",
         },
