@@ -92,13 +92,11 @@ export const aula01_dizimas: AulaV4 = {
     enunciado: "Escreva 0,444… como fração.",
     resposta: "4/9",
     visualMat: {
-      tipo: "tabela",
-      cabecalhos: ["Passo", "Cálculo"],
-      linhas: [
-        { rotulo: "1", valores: ["x = 0,444…", "10x = 4,444…"] },
-        { rotulo: "2", valores: ["10x − x", "9x = 4"] },
-        { rotulo: "3", valores: ["isolar x", "x = 4/9"] },
-      ],
+      tipo: "dizimaGeratriz",
+      dizima: "0,444…",
+      periodo: "4",
+      resultado: "4/9",
+      legenda: "Modelagem — dízima simples",
     },
     passos: [
       "Chame x = 0,444….",
