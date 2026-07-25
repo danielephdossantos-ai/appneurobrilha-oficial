@@ -168,6 +168,12 @@ export function RenderVisualMat({ v }: { v: VisualMat }) {
       return <EscalaProb v={v} />;
     case "retaNumerica":
       return <RetaNumerica v={v} />;
+    case "dizimaGeratriz":
+      return <DizimaGeratriz v={v} />;
+    case "somaFracoes":
+      return <SomaFracoes v={v} />;
+    case "notacaoCientifica":
+      return <NotacaoCientifica v={v} />;
   }
 }
 
