@@ -243,6 +243,11 @@ function Descoberta({ m }: { m: AulaV4["momento03_descoberta"] }) {
     <Card>
       <div className="text-xl font-bold">{m.perguntaGuia}</div>
       <div className="text-white/70">💡 Pista: {m.pista}</div>
+      {m.visualMat && (
+        <div className="rounded-xl bg-white/5 p-3">
+          <RenderVisualMat v={m.visualMat} />
+        </div>
+      )}
       {!revelou ? (
         <button
           onClick={() => setRevelou(true)}
