@@ -1358,6 +1358,27 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         </div>
       )}
 
+      {/* ===== PROFESSOR EXPLICA — texto longo expansível ===== */}
+      {passoAtual?.professor && (
+        <details
+          key={`prof-${revelados}`}
+          className="mt-2 group bg-white/95 text-[#0d1f55] rounded-xl border-2 border-amber-200 shadow-sm"
+        >
+          <summary className="cursor-pointer select-none list-none px-3 py-2 flex items-center justify-between text-sm font-black">
+            <span className="flex items-center gap-2">
+              <span className="text-lg">🧑‍🏫</span>
+              <span>Professor explica</span>
+            </span>
+            <span className="text-xs text-amber-600 group-open:hidden">tocar para ver ▾</span>
+            <span className="text-xs text-amber-600 hidden group-open:inline">recolher ▴</span>
+          </summary>
+          <div className="px-4 pb-3 pt-1 text-[13px] md:text-sm leading-relaxed whitespace-pre-line border-t border-amber-100">
+            {passoAtual.professor}
+          </div>
+        </details>
+      )}
+
+
       {/* ===== Controles ===== */}
       <div className="mt-3 flex items-center justify-between gap-2">
         <div className="text-[11px] text-white/70 font-bold">
