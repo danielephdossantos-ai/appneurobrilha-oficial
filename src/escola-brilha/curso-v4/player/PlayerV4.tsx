@@ -463,12 +463,7 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
     );
   }
   if (md?.operacao === "mult") {
-    return (
-      <>
-        <TabuadaReferencia {...tabuadaDeConta(md)} />
-        <ContaMontadaEstatica a={md.a} b={md.b} operacao="mult" />
-      </>
-    );
+    return <TabuadaReferencia {...tabuadaDeConta(md)} />;
   }
   if (conta) {
     return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
