@@ -238,6 +238,19 @@ export type MomentoModelagem = {
   passos: string[];         // cada passo é uma fala do Brilha
   resposta: string;
   visualUrl?: string;
+  /** Conta escrita passo a passo quando o Brilha resolve uma operação. */
+  contaPassoAPasso?: {
+    operacao: "soma" | "sub" | "mult" | "div";
+    operandos: number[];
+    resultado: number;
+    passos: Array<{
+      coluna: "U" | "D" | "C" | "UM";
+      fala: string;
+      digito: number;
+      vaiUm?: number;
+      porque?: string;
+    }>;
+  };
   /**
    * Coleção visual para a criança contar junto com o Brilha.
    * Ex.: { grupos: [10, 10, 3] } renderiza 2 pilhas de 10 + 3 soltas.

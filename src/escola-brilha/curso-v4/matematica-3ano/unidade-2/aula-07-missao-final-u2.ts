@@ -177,15 +177,35 @@ export const aula07_missaoFinalU2: AulaV4 = {
     "enunciado": "Modelo: A doceria tinha 620 doces e vendeu 348. Quanto sobrou?",
     "passos": [
       "'Sobrou' → subtração.",
-      "620 − 348.",
-      "U:10−8=2 (empresta), D:1−4 empresta 11−4=7, C:5−3=2.",
+      "Monte a conta: 620 − 348.",
+      "Resolva pela unidade, depois dezena, depois centena.",
       "Sobrou: 272."
     ],
     "resposta": "272 doces",
-    "casasValor": {
-      "numero": 272,
-      "mostrarDecomposicao": true,
-      "extenso": "duzentos e setenta e dois"
+    "contaPassoAPasso": {
+      "operacao": "sub",
+      "operandos": [
+        620,
+        348
+      ],
+      "resultado": 272,
+      "passos": [
+        {
+          "coluna": "U",
+          "fala": "0 não tira 8. Empresta 1 dezena: 10 − 8 = 2.",
+          "digito": 2
+        },
+        {
+          "coluna": "D",
+          "fala": "A dezena ficou 1. 1 não tira 4; empresta da centena: 11 − 4 = 7.",
+          "digito": 7
+        },
+        {
+          "coluna": "C",
+          "fala": "A centena ficou 5. 5 − 3 = 2.",
+          "digito": 2
+        }
+      ]
     }
   },
   "momento06_praticaGuiada": {
