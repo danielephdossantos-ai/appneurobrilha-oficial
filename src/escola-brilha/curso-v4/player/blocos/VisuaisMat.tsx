@@ -798,3 +798,260 @@ function RetaNumerica({ v }: { v: RetaNumericaV }) {
     </div>
   );
 }
+
+// ============================================================================
+// Dízima periódica → fração geratriz
+// ============================================================================
+function DizimaGeratriz({ v }: { v: DizimaGeratrizV }) {
+  const { dizima, periodo, parteNaoPeriodica, resultado, resultadoBruto, legenda } = v;
+  const nPeriodo = periodo.length;
+  const nNaoPer = parteNaoPeriodica?.length ?? 0;
+  // fator1: 10^(nNaoPer + nPeriodo)  fator2: 10^nNaoPer
+  const fator1 = Math.pow(10, nNaoPer + nPeriodo);
+  const fator2 = Math.pow(10, nNaoPer);
+  const isComposta = nNaoPer > 0;
+
+  // parte inteira dos deslocados
+  const inteiroPeriodo = parseInt(periodo, 10);
+  const inteiroNaoPer = parseInt(parteNaoPeriodica || "0", 10);
+  const numeradorBruto = isComposta
+    ? inteiroNaoPer * Math.pow(10, nPeriodo) + inteiroPeriodo - inteiroNaoPer
+    : inteiroPeriodo;
+  const denominadorBruto = "9".repeat(nPeriodo) + "0".repeat(nNaoPer);
+
+  // parte decimal repetida com destaque colorido
+  const renderDizima = () => {
+    const [intPart, decPart = ""] = dizima.replace("...", "").split(",");
+    return (
+      <span>
+        {intPart},
+        {parteNaoPeriodica && (
+          <span className="text-slate-500">{parteNaoPeriodica}</span>
+        )}
+        <span className="text-red-600 font-black">
+          {decPart.slice(nNaoPer, nNaoPer + nPeriodo)}
+          {decPart.slice(nNaoPer + nPeriodo, nNaoPer + nPeriodo * 2) && (
+            <span className="text-red-600">{decPart.slice(nNaoPer + nPeriodo, nNaoPer + nPeriodo * 2)}</span>
+          )}
+        </span>
+        <span className="text-slate-400">…</span>
+      </span>
+    );
+  };
+
+  return (
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-sky-300/60 max-w-md mx-auto">
+      {legenda && (
+        <div className="text-xs font-black uppercase tracking-widest text-sky-600 text-center mb-3">
+          {legenda}
+        </div>
+      )}
+
+      <div className="text-center text-2xl font-bold mb-4">
+        {renderDizima()}
+      </div>
+
+      {/* Sistema de equações com chave */}
+      <div className="relative pl-6 py-2 mb-3">
+        <div className="absolute left-1 top-2 bottom-2 w-3 border-y-2 border-l-2 border-sky-500 rounded-l-md" />
+        <div className="space-y-1 font-mono text-lg">
+          {isComposta && (
+            <div>
+              <span className="text-slate-500">{fator2}</span>x = {(inteiroNaoPer + inteiroPeriodo / Math.pow(10, nPeriodo)).toString().replace(".", ",")}
+              <span className="text-red-600">{periodo}</span>
+              <span className="text-slate-400">…</span>
+            </div>
+          )}
+          <div>
+            <span className="text-slate-500">{fator1}</span>x = {(isComposta ? inteiroNaoPer : "") + periodo},
+            <span className="text-red-600">{periodo}</span>
+            <span className="text-slate-400">…</span>
+          </div>
+          <div>
+            <span className="text-slate-500">{isComposta ? fator2 : 1}</span>x = {isComposta ? `${inteiroNaoPer},` : "0,"}
+            {parteNaoPeriodica ?? ""}
+            <span className="text-red-600">{periodo}</span>
+            <span className="text-slate-400">…</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center text-slate-400 font-black mb-1">−</div>
+      <div className="border-t-2 border-slate-700 mb-3" />
+
+      {/* Resultado da subtração */}
+      <div className="text-center font-mono text-xl font-bold text-emerald-700 mb-3">
+        {fator1 - fator2}x = {numeradorBruto}
+      </div>
+
+      {/* Isolar x */}
+      <div className="text-center font-mono text-lg mb-2">
+        x = <span className="inline-flex flex-col items-center align-middle mx-1">
+          <span className="border-b-2 border-[#0d1f55] px-2">{numeradorBruto}</span>
+          <span className="px-2">{denominadorBruto}</span>
+        </span>
+      </div>
+
+      {/* Simplificação */}
+      {resultadoBruto && resultadoBruto !== resultado && (
+        <div className="text-center font-mono text-lg text-slate-500 mb-1">
+          = <span className="inline-flex flex-col items-center align-middle mx-1 text-slate-500 line-through">
+            <span className="border-b-2 border-slate-400 px-2">{resultadoBruto.split("/")[0]}</span>
+            <span className="px-2">{resultadoBruto.split("/")[1]}</span>
+          </span>
+        </div>
+      )}
+
+      <div className="text-center mt-2 bg-emerald-100 rounded-xl py-2 px-3 border-2 border-emerald-500">
+        <span className="font-bold text-emerald-900">x = </span>
+        <span className="inline-flex flex-col items-center align-middle mx-1 text-emerald-800 font-black text-2xl">
+          <span className="border-b-2 border-emerald-800 px-3">{resultado.split("/")[0]}</span>
+          <span className="px-3">{resultado.split("/")[1]}</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// Soma / subtração de frações com cruzamento visual
+// ============================================================================
+function gcd(a: number, b: number): number {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { [a, b] = [b, a % b]; }
+  return a || 1;
+}
+
+function SomaFracoes({ v }: { v: SomaFracoesV }) {
+  const { operacao, a, b, simplificar = true, legenda } = v;
+  const denComum = a.den * b.den;
+  const numA = a.num * b.den;
+  const numB = b.num * a.den;
+  const numFinal = operacao === "+" ? numA + numB : numA - numB;
+  const g = gcd(numFinal, denComum);
+  const numSimp = numFinal / g;
+  const denSimp = denComum / g;
+  const podeSimplificar = simplificar && g > 1;
+
+  const Frac = ({
+    num, den, numColor, denColor,
+  }: { num: number | string; den: number | string; numColor?: string; denColor?: string }) => (
+    <span className="inline-flex flex-col items-center align-middle mx-1">
+      <span className={`border-b-2 border-[#0d1f55] px-2 font-bold ${numColor ?? ""}`}>{num}</span>
+      <span className={`px-2 font-bold ${denColor ?? ""}`}>{den}</span>
+    </span>
+  );
+
+  return (
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-fuchsia-300/60 max-w-md mx-auto">
+      {legenda && (
+        <div className="text-xs font-black uppercase tracking-widest text-fuchsia-600 text-center mb-3">
+          {legenda}
+        </div>
+      )}
+
+      {/* Linha 1: as duas frações com denominadores circulados */}
+      <div className="flex items-center justify-center text-2xl mb-4">
+        <span className="relative">
+          <Frac num={a.num} den={a.den} numColor="text-sky-700" denColor="text-red-600" />
+          <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-red-500" />
+        </span>
+        <span className="mx-2 font-black">{operacao}</span>
+        <span className="relative">
+          <Frac num={b.num} den={b.den} numColor="text-sky-700" denColor="text-red-600" />
+          <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-red-500" />
+        </span>
+        <span className="mx-2 font-black">=</span>
+      </div>
+
+      {/* Linha 2: numerador desenvolvido */}
+      <div className="flex items-center justify-center text-xl mb-3">
+        <span className="text-slate-600 mr-2">Denominador comum:</span>
+        <Frac
+          num={<span><span className="text-sky-700">{a.num}·{b.den}</span> {operacao} <span className="text-emerald-700">{b.num}·{a.den}</span></span>}
+          den={<span className="text-red-600">{a.den}·{b.den}</span>}
+        />
+      </div>
+
+      {/* Linha 3: cálculo */}
+      <div className="flex items-center justify-center text-2xl mb-3">
+        <Frac
+          num={<span><span className="text-sky-700">{numA}</span> {operacao} <span className="text-emerald-700">{numB}</span></span>}
+          den={<span className="text-red-600">{denComum}</span>}
+        />
+        <span className="mx-2 font-black">=</span>
+        <Frac num={numFinal} den={denComum} />
+      </div>
+
+      {/* Simplificação */}
+      {podeSimplificar && (
+        <div className="flex items-center justify-center text-xl mb-2 text-slate-500">
+          <span className="mr-1">=</span>
+          <span className="inline-flex flex-col items-center align-middle mx-1 line-through">
+            <span className="border-b-2 border-slate-400 px-2">{numFinal}</span>
+            <span className="px-2">{denComum}</span>
+          </span>
+          <span className="text-slate-400 mx-2">÷{g}</span>
+        </div>
+      )}
+
+      {/* Resultado final */}
+      <div className="flex items-center justify-center bg-emerald-100 rounded-xl py-2 px-3 border-2 border-emerald-500">
+        <span className="font-bold text-emerald-900 mr-2">=</span>
+        <span className="inline-flex flex-col items-center align-middle mx-1 text-emerald-800 font-black text-2xl">
+          <span className="border-b-2 border-emerald-800 px-3">{numSimp}</span>
+          <span className="px-3">{denSimp}</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// Notação científica — deslocamento da vírgula
+// ============================================================================
+function NotacaoCientifica({ v }: { v: NotacaoCientificaV }) {
+  const { numero, coeficiente, expoente, legenda } = v;
+  const casas = Math.abs(expoente);
+  const direcao = expoente > 0 ? "esquerda" : "direita";
+
+  return (
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-amber-300/60 max-w-md mx-auto">
+      {legenda && (
+        <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-3">
+          {legenda}
+        </div>
+      )}
+
+      <div className="text-center text-3xl font-black mb-1 tracking-wider">
+        {numero}
+      </div>
+      <div className="text-center text-amber-600 text-2xl -my-1">↓</div>
+      <div className="text-center text-sm text-slate-600 mb-2">
+        vírgula andou <span className="font-black text-amber-700">{casas}</span> {casas === 1 ? "casa" : "casas"} para a {direcao}
+      </div>
+
+      <div className="text-center text-3xl font-black text-emerald-700 my-3">
+        <span className="text-sky-700">{coeficiente}</span>
+        <span className="mx-1">·</span>
+        <span>10</span>
+        <sup className={`text-xl ml-0.5 ${expoente < 0 ? "text-red-600" : "text-emerald-700"}`}>{expoente}</sup>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 text-xs mt-3">
+        <div className="bg-sky-50 border-2 border-sky-300 rounded-lg p-2 text-center">
+          <div className="font-black text-sky-700 uppercase text-[10px]">Coeficiente</div>
+          <div className="text-slate-600 mt-1">1 ≤ N &lt; 10</div>
+        </div>
+        <div className={`${expoente < 0 ? "bg-red-50 border-red-300" : "bg-emerald-50 border-emerald-300"} border-2 rounded-lg p-2 text-center`}>
+          <div className={`font-black uppercase text-[10px] ${expoente < 0 ? "text-red-700" : "text-emerald-700"}`}>
+            Expoente
+          </div>
+          <div className="text-slate-600 mt-1">
+            {expoente < 0 ? "número pequeno" : "número grande"}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
