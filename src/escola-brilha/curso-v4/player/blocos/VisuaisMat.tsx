@@ -67,6 +67,8 @@ export type TrinomioPassoAPassoV = {
     explica: string;
     /** ok = verde ✅, x = vermelho ❌, neutro = cinza. */
     status?: "ok" | "x" | "neutro";
+    /** Explicação longa "do professor" — texto expansível, cuidando dos sinais e pontuação. */
+    professor?: string;
   }>;
   /** Resultado final destacado (opcional). Ex.: "(x + 3)²". */
   fatorada?: string;
