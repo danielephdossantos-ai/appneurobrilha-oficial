@@ -1750,7 +1750,7 @@ function TabuadaInterativa({
   const [revelados, setRevelados] = useState(0); // quantas linhas já tiveram resultado revelado
   const terminou = revelados >= ate;
   return (
-    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
       <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
         {operacao === "div"
           ? `Tabuada do ${fator} — quantas vezes cabe em ${dividendo ?? "?"}`
