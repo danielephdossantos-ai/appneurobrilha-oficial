@@ -1347,6 +1347,9 @@ function CasasValor({
 // =====================================================================
 
 function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  // Divisão pela chave tem layout próprio (algoritmo tradicional BR).
+  if (i.operacao === "div") return <DivisaoChave i={i} />;
+
   const [passoAtual, setPassoAtual] = useState(-1); // -1 = ainda não começou
   const [resposta, setResposta] = useState<number | null>(null);
   const [confirmado, setConfirmado] = useState(false);
