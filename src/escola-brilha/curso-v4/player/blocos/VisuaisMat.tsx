@@ -231,6 +231,8 @@ export function RenderVisualMat({ v }: { v: VisualMat }) {
       return <TrinomioQuadrado v={v} />;
     case "checklistTQP":
       return <ChecklistTQP v={v} />;
+    case "trinomioPassoAPasso":
+      return <TrinomioPassoAPasso v={v} />;
   }
 }
 
