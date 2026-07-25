@@ -1,16 +1,11 @@
 import type { AulaV4 } from "../../types";
-import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
-import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
  * Aula 10 — "Missão Final: Guardião(ã) da Cidade dos Números"
  * Curso: Matemática 3º Ano · Unidade 1
  *
- * Encerramento narrativo com 5 desafios em sequência, um por habilidade
- * da unidade. Conquista: 🏆 Guardião(ã) da Cidade dos Números.
- * Desbloqueia: Unidade 2 — "Somar e Tirar com Reagrupamento".
+ * Encerramento narrativo com 5 desafios em sequência, um por
+ * habilidade da unidade. Conquista final desbloqueia Unidade 2.
  * BNCC: EF03MA01, EF03MA02, EF03MA03.
  */
 export const aula10_missaoFinal: AulaV4 = {
@@ -19,129 +14,140 @@ export const aula10_missaoFinal: AulaV4 = {
   iconeTrilha: "🏆",
   bncc: ["EF03MA01", "EF03MA02", "EF03MA03"],
   duracaoMin: 25,
+  metodologias: ["skemp", "cpa", "rme"],
 
   momento01_motivacao: {
     titulo: "A Cidade vai receber o Prefeito Estadual!",
     historia:
-      "A Cidade dos Números está em festa: o Prefeito Estadual vai visitar hoje! A Prefeita Coruja escolheu VOCÊ, {NOME}, para provar que a Cidade tem um Guardião(ã) de verdade. São 5 desafios: contar até 1.000, decompor, ler, comparar e sequência. Passa em todos e leva a MEDALHA 🏆!",
-    imagemUrl: brilha,
+      "A Cidade dos Números está em festa: hoje o Prefeito Estadual chega em visita oficial. A Prefeita escolheu VOCÊ, {NOME}, pra representar a Cidade. São 5 desafios: decompor, valor posicional, ler, comparar e sequência. Se passar em todos, leva a MEDALHA 🏆 de Guardião(ã).",
   },
 
   momento02_exploracao: {
-    instrucao: "Desafio 1/5 — CONTAR. Conte estas maçãs:",
-    cenas: [],
-    interacao: {
-      tipo: "tapContar",
-      imagemUrl: maca,
-      quantidade: 30,
-      itemPlural: "maçãs",
-      pergunta: "Quantas maçãs?",
-    },
+    instrucao: "Desafio 1/5 — DECOMPOSIÇÃO. Reveja: 320 = 300 + 20 + 0.",
+    cenas: [
+      { tipo: "texto", texto: "Cada casa contribui com seu valor:" },
+      { tipo: "texto", texto: "320 = 3 centenas + 2 dezenas + 0 unidades", destaque: true },
+      { tipo: "texto", texto: "320 = 300 + 20 + 0." },
+    ],
   },
 
   momento03_descoberta: {
     perguntaGuia: "Você lembra dos 5 desafios que estão vindo?",
-    pista: "Contar · Valor Posicional · Ler · Comparar · Sequência.",
+    pista: "Decompor · Valor Posicional · Ler · Comparar · Sequência.",
     revelacao:
-      "Isso! No fim: 🏆 medalha de Guardião(ã), XP em dobro e Unidade 2 destrancada. Vamos lá?",
+      "Isso! No fim: 🏆 medalha de Guardião(ã), XP dobrado e Unidade 2 destrancada. Vamos lá?",
   },
 
   momento04_explicacao: {
     titulo: "Como funciona a missão",
     etapas: [
-      { texto: "5 desafios em sequência, um por habilidade.", exemplo: "Um erro só não te derruba." },
-      { texto: "Se errar, Brilha explica; você tenta de novo.", exemplo: "O importante é ir até o fim." },
-      { texto: "Prêmio: 🏆 Guardião(ã) da Cidade + Unidade 2 destrancada.", exemplo: "Unidade 2: Somar e Tirar com Reagrupamento." },
+      {
+        texto: "5 desafios em sequência, um por habilidade.",
+        exemploReal: {
+          contexto: "Warm-up: decompor 456.",
+          casasValor: {
+            numero: 456,
+            extenso: "quatrocentos e cinquenta e seis",
+            mostrarDecomposicao: true,
+          },
+          destaque: "456 = 400 + 50 + 6.",
+        },
+      },
+      {
+        texto: "Se errar, Brilha explica e você pode tentar de novo. O importante é ir até o fim.",
+        exemploReal: {
+          contexto: "Warm-up: em 456, quanto vale o 5?",
+          casasValor: {
+            numero: 456,
+            extenso: "quatrocentos e cinquenta e seis",
+            mostrarDecomposicao: true,
+          },
+          destaque: "5 na dezena = 50.",
+        },
+      },
+      {
+        texto: "Prêmio: 🏆 Guardião(ã) da Cidade + Unidade 2 destrancada.",
+        exemploReal: {
+          contexto:
+            "Warm-up de comparação: 456 vs 445. Centena empata (4=4). Dezena: 5 > 4.",
+          destaque: "456 > 445. Boca do '>' aponta pro maior.",
+        },
+      },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Brilha treina um mini de cada desafio:",
+    enunciado: "Brilha treina um mini de cada desafio pra você:",
     passos: [
-      "1) Contar: 3 prédios + 2 caixotes = 320.",
+      "1) Decompor: 320 = 300 + 20 + 0.",
       "2) Valor: em 456, o 5 vale 50.",
       "3) Ler: 456 = 'quatrocentos e cinquenta e seis'.",
-      "4) Comparar: 456 > 445 (D: 5 > 4).",
+      "4) Comparar: 456 > 445 (dezena: 5 > 4).",
       "5) Sequência: 456, 466, 476 (pulo 10).",
     ],
     resposta: "Pronto pra missão! 🏆",
-    visualUrl: brilha,
+    casasValor: {
+      numero: 456,
+      mostrarDecomposicao: true,
+      extenso: "quatrocentos e cinquenta e seis",
+    },
   },
 
   momento06_praticaGuiada: {
     enunciado: "Desafio 2/5 — VALOR POSICIONAL. Quanto vale o 3 em 738?",
     dica: "Da direita: 8 (U), 3 (D), 7 (C).",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢×7" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦×3" },
-        { imagemUrl: maca, quantidade: 8, rotulo: "🍎" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "Em 738, o 3 vale:",
-      opcoes: ["3", "30", "300"],
-      correta: 1,
+      opcoes: [{ nome: "3" }, { nome: "30" }, { nome: "300" }],
+      respostaCerta: "30",
       feedbackAcerto: "🎉 30! O 3 está na dezena.",
-      feedbackErro: "3 é dezena → 30. Da direita: U, D, C.",
+      feedbackErro: "3 na dezena = 30. Da direita: U, D, C.",
     },
   },
 
   momento07_praticaIndependente: {
     enunciado: "Desafio 3/5 — LER. Como se escreve 'novecentos e quatro'?",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢×9" },
-        { imagemUrl: banana, quantidade: 4, rotulo: "🍌" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "novecentos e quatro =",
-      opcoes: ["94", "904", "940"],
-      correta: 1,
-      feedbackAcerto: "🎉 904. Dezena = 0.",
-      feedbackErro: "900 + 4 = 904. Dezena é 0 (pula ao ler).",
+      opcoes: [{ nome: "94" }, { nome: "904" }, { nome: "940" }],
+      respostaCerta: "904",
+      feedbackAcerto: "🎯 904. Dezena = 0 (não se fala).",
+      feedbackErro: "900 + 0 + 4 = 904. Dezena zero pula na leitura.",
     },
   },
 
   momento08_aplicacao: {
     contexto:
-      "Desafio 4/5 — COMPARAR. O Prefeito Estadual perguntou qual barraca vendeu MAIS.",
-    problema: "Maçã 682 · Banana 628 · Pêra 686. Quem venceu?",
+      "Desafio 4/5 — COMPARAR. O Prefeito Estadual perguntou qual barraca do mercado vendeu MAIS. Três barracas: A (682), B (628), C (686).",
+    problema: "Quem venceu?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Maior:",
-      opcoes: [
-        { nome: "Maçã (682)", imagemUrl: maca },
-        { nome: "Banana (628)", imagemUrl: banana },
-        { nome: "Pêra (686)", imagemUrl: coruja },
-      ],
-      respostaCerta: "Pêra (686)",
+      pergunta: "Maior entre A, B, C:",
+      opcoes: [{ nome: "A (682)" }, { nome: "B (628)" }, { nome: "C (686)" }],
+      respostaCerta: "C (686)",
       feedbackAcerto:
-        "🎯 Isso! C todos = 6. D: 628 tem 2 (fora). Entre 682 e 686, U: 2 < 6 → 686 vence.",
+        "🎯 Isso! B tem D=2 (fora). Entre A (682) e C (686), unidade decide: 6 > 2 → C vence.",
       feedbackErro:
-        "C empata (6). D: 628 tem 2 (menor). Entre 682 e 686, U decide: 6 > 2 → 686.",
+        "C empata (6). B tem D=2 (menor). Entre A e C, unidade: 6 > 2 → C (686) é o maior.",
     },
   },
 
   momento09_revisao: {
     pontos: [
       "Falta o último desafio!",
-      "SEQUÊNCIA: descubra o pulo e ache o próximo.",
+      "SEQUÊNCIA: descubra o pulo e ache o próximo termo.",
       "🎯 Se acertar, você vira GUARDIÃO(Ã)!",
     ],
     miniDesafio: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "550" },
-        { imagemUrl: maca, quantidade: 100, rotulo: "560" },
-        { imagemUrl: maca, quantidade: 100, rotulo: "570" },
-      ],
-      pergunta: "Desafio 5/5: 550, 560, 570, ... próximo?",
-      opcoes: ["571", "580", "600"],
-      correta: 1,
+      tipo: "escolhaVisual",
+      pergunta: "Desafio 5/5 — 550, 560, 570, ... próximo?",
+      opcoes: [{ nome: "571" }, { nome: "580" }, { nome: "600" }],
+      respostaCerta: "580",
       feedbackAcerto:
         "🏆 🎉 Pulo 10 → 580. VOCÊ É GUARDIÃO(Ã) DA CIDADE DOS NÚMEROS!",
-      feedbackErro:
-        "Pulo = 560 − 550 = 10. 570 + 10 = 580.",
+      feedbackErro: "Pulo = 560 − 550 = 10. 570 + 10 = 580.",
     },
   },
 
@@ -152,7 +158,7 @@ export const aula10_missaoFinal: AulaV4 = {
         opcoes: ["500 + 70 + 3", "5 + 7 + 3", "50 + 70 + 3"],
         correta: 0,
         feedbackAcerto: "🎉 573 = 500 + 70 + 3.",
-        feedbackErro: "C=5 (500), D=7 (70), U=3. 500+70+3=573.",
+        feedbackErro: "C=5 (500), D=7 (70), U=3. Soma: 500 + 70 + 3.",
       },
       {
         pergunta: "Prova final 2/3 — 'duzentos e dezenove' é:",
@@ -162,7 +168,7 @@ export const aula10_missaoFinal: AulaV4 = {
         feedbackErro: "'dezenove' = 19. 200 + 19 = 219.",
       },
       {
-        pergunta: "Prova final 3/3 — Coloque em ordem crescente: 480, 408, 840.",
+        pergunta: "Prova final 3/3 — Ordem crescente de 480, 408, 840:",
         opcoes: [
           "408 < 480 < 840",
           "480 < 408 < 840",
@@ -172,7 +178,7 @@ export const aula10_missaoFinal: AulaV4 = {
         feedbackAcerto:
           "🏆 GUARDIÃO(Ã) DA CIDADE DOS NÚMEROS confirmado(a)! 408 < 480 < 840. Unidade 2 destrancada!",
         feedbackErro:
-          "840 tem C=8 (maior). Entre 408 e 480: D=0 < D=8. Fica 408 < 480 < 840.",
+          "840 tem C=8 (maior). Entre 408 e 480, D=0 < D=8. Fica 408 < 480 < 840.",
       },
     ],
   },
@@ -187,12 +193,13 @@ export const aula10_missaoFinal: AulaV4 = {
     passos: [
       "Desenhe um diploma escrito: 'Eu, {NOME}, sou GUARDIÃO(Ã) DA CIDADE DOS NÚMEROS.'",
       "Escolha 3 números favoritos entre 100 e 999 e decore o diploma com eles.",
-      "Escreva ao lado de cada um: (a) decomposição, (b) como se lê.",
-      "Peça pra um adulto ASSINAR seu diploma.",
+      "Ao lado de cada número, escreva: (a) decomposição e (b) como se lê.",
+      "Peça a um adulto pra ASSINAR seu diploma.",
       "Pendure num lugar visível!",
     ],
     registro: "📸 Foto do diploma pronto e assinado.",
   },
+
   recompensa: {
     xp: 300,
     moedas: 150,

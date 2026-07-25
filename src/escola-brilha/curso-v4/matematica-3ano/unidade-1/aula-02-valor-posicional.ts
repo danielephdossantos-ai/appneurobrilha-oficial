@@ -1,219 +1,261 @@
 import type { AulaV4 } from "../../types";
-import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
-import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
- * Aula 2 — "Valor Posicional (C · D · U)"
+ * Aula 2 — "O Endereço dos Números (Valor Posicional)"
  * Curso: Matemática 3º Ano · Unidade 1
  *
- * Foco: cada dígito muda de VALOR conforme sua POSIÇÃO. O 2 em 234
- * vale 200; em 24 vale 20; em 2 vale 2.
+ * Padrão formal (3º ano+): sem cesta de frutas. O número escrito
+ * (CDU) é o objeto matemático. Cada etapa da explicação traz um
+ * exemplo real de aplicação.
  * BNCC: EF03MA02 (composição/decomposição por ordens).
+ * Metodologias: CPA · Skemp (compreensão relacional) · RME.
  */
 export const aula02_valorPosicional: AulaV4 = {
   slug: "02-valor-posicional",
   titulo: "O Endereço dos Números",
   iconeTrilha: "🏷️",
   bncc: ["EF03MA02"],
-  duracaoMin: 18,
+  duracaoMin: 20,
+  metodologias: ["cpa", "skemp", "rme"],
 
   momento01_motivacao: {
-    titulo: "Cada número tem um ENDEREÇO",
+    titulo: "Cada dígito tem um ENDEREÇO",
     historia:
-      "Brilha viu uma placa esquisita: '234'. A Prefeita explicou: 'Cada dígito mora numa POSIÇÃO diferente da placa. Onde ele mora muda o valor dele!' O 2 pode valer 200, ou 20, ou 2 — depende do endereço.",
-    imagemUrl: coruja,
+      "A Prefeita entregou pra você três placas: 3, 30 e 300. 'Repare bem: o dígito 3 aparece nas três, mas em cada uma vale uma coisa diferente. Como pode? Hoje vamos descobrir como o LUGAR muda o valor.'",
   },
 
   momento02_exploracao: {
-    instrucao:
-      "Olhe estas duas placas. Tem o dígito 3 nas duas, mas ele vale coisas diferentes:",
+    instrucao: "Observe como o mesmo dígito muda de valor conforme a posição.",
     cenas: [
-      { tipo: "texto", texto: "Placa A: 3   →   3 vale 3 (unidade)" },
-      { tipo: "texto", texto: "Placa B: 300 →   3 vale 300 (centena)", destaque: true },
-      { tipo: "texto", texto: "Mesmo dígito, valor diferente!" },
+      { tipo: "texto", texto: "Placa A: 3   →   3 vale 3 (Unidade)" },
+      { tipo: "texto", texto: "Placa B: 30  →   3 vale 30 (Dezena)" },
+      { tipo: "texto", texto: "Placa C: 300 →   3 vale 300 (Centena)", destaque: true },
+      { tipo: "texto", texto: "Mesmo algarismo. Três valores. Só a POSIÇÃO mudou." },
     ],
-    interacao: {
-      tipo: "tapContar",
-      imagemUrl: banana,
-      quantidade: 13,
-      itemPlural: "bananas",
-      pergunta: "Conte as bananas (o 1 e o 3 juntos formam 13):",
-    },
   },
 
   momento03_descoberta: {
-    perguntaGuia: "Como o mesmo dígito pode valer coisas diferentes?",
-    pista: "Olha a POSIÇÃO dele. Existe o lugar das unidades, das dezenas e das centenas.",
+    perguntaGuia: "Por que o mesmo algarismo vale coisas diferentes em cada posição?",
+    pista:
+      "Nosso sistema é DECIMAL: cada casa vale 10 vezes mais que a casa da direita.",
     revelacao:
-      "Da direita pra esquerda: UNIDADE · DEZENA · CENTENA. Cada casa vale 10 vezes MAIS que a de antes.",
+      "Da direita pra esquerda: Unidade (1) · Dezena (10) · Centena (100). O algarismo NÃO muda de valor sozinho — quem muda é a CASA em que ele mora.",
   },
 
   momento04_explicacao: {
-    titulo: "Placa CDU: 3 casas, 3 tamanhos",
+    titulo: "Ler a placa CDU: 3 casas, 3 tamanhos",
     etapas: [
       {
-        texto: "Casa da UNIDADE (à direita): morador solto. Cada um vale 1.",
-        exemplo: "'4' na casa da unidade = 4.",
+        texto:
+          "Casa da UNIDADE (à direita): cada 1 vale 1. É a casa mais 'fraca'.",
+        exemploReal: {
+          contexto:
+            "A senha do cofre da Prefeitura termina em 4. Esse 4 mora na Unidade e vale 4.",
+          casasValor: {
+            numero: 4,
+            extenso: "quatro",
+            mostrarDecomposicao: false,
+          },
+          destaque: "Na Unidade, cada algarismo vale ele mesmo.",
+        },
       },
       {
-        texto: "Casa da DEZENA (meio): cada um vale 10.",
-        exemplo: "'3' na casa da dezena = 30.",
-        agrupamentos: [
-          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 3, rotulo: "📦📦📦 = 30" },
-        ],
+        texto:
+          "Casa da DEZENA (meio): cada 1 vale 10. Um passo pra esquerda multiplica por 10.",
+        exemploReal: {
+          contexto:
+            "O ônibus 30 passa na Praça Central. O 3 dessa placa está na Dezena — vale 30, não 3.",
+          casasValor: {
+            numero: 30,
+            extenso: "trinta",
+            mostrarDecomposicao: true,
+          },
+          destaque: "3 na Dezena = 3 × 10 = 30.",
+        },
       },
       {
-        texto: "Casa da CENTENA (à esquerda): cada um vale 100.",
-        exemplo: "'2' na casa da centena = 200.",
-        agrupamentos: [
-          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 10, rotulo: "🏢 = 100" },
-          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 10, rotulo: "🏢 = 100" },
-        ],
+        texto:
+          "Casa da CENTENA (à esquerda): cada 1 vale 100.",
+        exemploReal: {
+          contexto:
+            "A biblioteca da Cidade tem 200 livros de história. O 2 está na Centena.",
+          casasValor: {
+            numero: 200,
+            extenso: "duzentos",
+            mostrarDecomposicao: true,
+          },
+          destaque: "2 na Centena = 2 × 100 = 200.",
+        },
       },
       {
-        texto: "Pra decompor: some cada casa com seu valor.",
-        exemplo: "234 = 200 + 30 + 4.",
+        texto:
+          "DECOMPOR um número: somar o valor de cada casa. Vira uma conta transparente.",
+        casasValor: {
+          numero: 234,
+          extenso: "duzentos e trinta e quatro",
+          mostrarDecomposicao: true,
+        },
+        exemploReal: {
+          contexto:
+            "A rua da Prefeita tem 234 postes de luz. Decompondo esse número:",
+          casasValor: {
+            numero: 234,
+            extenso: "duzentos e trinta e quatro",
+            mostrarDecomposicao: true,
+          },
+          destaque: "234 = 200 + 30 + 4. Toda decomposição é apenas somar as casas.",
+        },
+      },
+      {
+        texto:
+          "O ZERO SEGURA uma casa vazia. Sem ele, o algarismo escorrega pra outra casa e o valor muda.",
+        exemploReal: {
+          contexto:
+            "O código do crachá da secretária é 603. Se esquecermos o 0, vira 63 — um crachá completamente diferente.",
+          casasValor: {
+            numero: 603,
+            extenso: "seiscentos e três",
+            mostrarDecomposicao: true,
+          },
+          destaque: "603 = 600 + 0 + 3. O zero na Dezena segura o lugar vazio.",
+        },
       },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Brilha vai decompor o número 456:",
+    enunciado:
+      "Brilha vai decompor 456 falando o valor de cada casa em voz alta:",
     passos: [
-      "Olho a casa das CENTENAS: dígito 4. Vale 4 × 100 = 400.",
-      "Olho a casa das DEZENAS: dígito 5. Vale 5 × 10 = 50.",
-      "Olho a casa das UNIDADES: dígito 6. Vale 6.",
-      "Junto tudo: 400 + 50 + 6 = 456.",
-      "Decompus! 🏷️",
+      "Olho a CENTENA: dígito 4. Vale 4 × 100 = 400.",
+      "Olho a DEZENA: dígito 5. Vale 5 × 10 = 50.",
+      "Olho a UNIDADE: dígito 6. Vale 6.",
+      "Somo o valor de cada casa: 400 + 50 + 6 = 456. ✅",
     ],
     resposta: "456 = 400 + 50 + 6",
-    colecaoVisual: {
-      imagemUrl: banana,
-      grupos: [100, 100, 100, 100, 10, 10, 10, 10, 10, 6],
-      itemPlural: "bananas",
+    casasValor: {
+      numero: 456,
+      mostrarDecomposicao: true,
+      extenso: "quatrocentos e cinquenta e seis",
     },
   },
 
   momento06_praticaGuiada: {
-    enunciado: "Juntos! Qual é a decomposição de 372?",
-    dica: "3 na centena vale 300, 7 na dezena vale 70, 2 na unidade vale 2.",
+    enunciado: "Juntos! Decomponha 372.",
+    dica: "3 na Centena = 300 · 7 na Dezena = 70 · 2 na Unidade = 2.",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢×3" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦×7" },
-        { imagemUrl: maca, quantidade: 2, rotulo: "🍎×2" },
+      tipo: "escolhaVisual",
+      pergunta: "Qual é a decomposição correta de 372?",
+      opcoes: [
+        { nome: "3 + 7 + 2" },
+        { nome: "30 + 70 + 2" },
+        { nome: "300 + 70 + 2" },
       ],
-      pergunta: "372 = ?",
-      opcoes: ["3 + 7 + 2", "30 + 70 + 2", "300 + 70 + 2"],
-      correta: 2,
-      feedbackAcerto: "🎉 Isso! 300 + 70 + 2 = 372.",
-      feedbackErro: "Centena vale 100. 3 centenas = 300. Fica 300 + 70 + 2.",
+      respostaCerta: "300 + 70 + 2",
+      feedbackAcerto:
+        "🎯 Perfeito! 300 (Centena) + 70 (Dezena) + 2 (Unidade) = 372.",
+      feedbackErro:
+        "Centena vale 100. 3 centenas = 300. A decomposição certa é 300 + 70 + 2.",
     },
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Sua vez! Quanto vale o dígito 5 no número 158?",
+    enunciado: "Sua vez, sozinho(a). No número 158, quanto vale o algarismo 5?",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢" },
-        { imagemUrl: banana, quantidade: 10, rotulo: "📦×5" },
-        { imagemUrl: banana, quantidade: 8, rotulo: "🍌" },
-      ],
-      pergunta: "Em 158, o 5 vale...",
-      opcoes: ["5", "50", "500"],
-      correta: 1,
-      feedbackAcerto: "🎉 Boa! O 5 mora na casa da dezena → vale 50.",
-      feedbackErro: "Da direita: 8 (unidade), 5 (DEZENA), 1 (centena). 5 na dezena = 50.",
+      tipo: "escolhaVisual",
+      pergunta: "O 5 em 158 vale:",
+      opcoes: [{ nome: "5" }, { nome: "50" }, { nome: "500" }],
+      respostaCerta: "50",
+      feedbackAcerto:
+        "🎯 Isso! Da direita: 8 (Unidade), 5 (DEZENA), 1 (Centena). 5 na Dezena = 50.",
+      feedbackErro:
+        "Da direita pra esquerda: 8 é Unidade, 5 é DEZENA, 1 é Centena. Na Dezena, 5 vale 50.",
     },
   },
 
   momento08_aplicacao: {
     contexto:
-      "A Prefeita pediu pra Brilha escrever o número que tem: 6 centenas, 0 dezenas e 3 unidades.",
-    problema: "Que número é esse?",
+      "A Prefeita ditou pra Brilha: '6 centenas, 0 dezenas e 3 unidades'. Brilha precisa escrever esse número no cartaz da entrada da Prefeitura.",
+    problema: "Qual das fichas está com o número correto?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha o número certo:",
-      opcoes: [
-        { nome: "63", imagemUrl: coruja },
-        { nome: "603", imagemUrl: brilha },
-        { nome: "630", imagemUrl: maca },
-      ],
+      opcoes: [{ nome: "63" }, { nome: "603" }, { nome: "630" }],
       respostaCerta: "603",
       feedbackAcerto:
-        "🎯 Isso! 600 + 0 + 3 = 603. O zero mostra que a casa da dezena está VAZIA — mas continua lá.",
+        "🎯 Isso! 600 + 0 + 3 = 603. O zero na Dezena segura a casa vazia.",
       feedbackErro:
-        "6 centenas = 600. 0 dezena. 3 unidade. Fica 603 (o zero segura o lugar da dezena).",
+        "6 centenas = 600. 0 dezena. 3 unidade. O zero SEGURA o lugar vazio: 603.",
     },
   },
 
   momento09_revisao: {
     pontos: [
-      "Cada dígito tem uma CASA: unidade, dezena, centena.",
-      "O VALOR do dígito depende da casa onde ele mora.",
-      "234 = 200 + 30 + 4 (decomposição).",
-      "O ZERO segura o lugar de uma casa vazia (ex.: 603).",
+      "Cada algarismo tem uma CASA: Unidade, Dezena, Centena.",
+      "O VALOR do algarismo depende da casa onde mora.",
+      "234 = 200 + 30 + 4 (decomposição = somar as casas).",
+      "O ZERO segura o lugar de uma casa vazia (603 ≠ 63).",
     ],
     miniDesafio: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢×4" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦×0" },
-        { imagemUrl: maca, quantidade: 7, rotulo: "🍎" },
-      ],
+      tipo: "escolhaVisual",
       pergunta: "4 centenas + 0 dezenas + 7 unidades = ?",
-      opcoes: ["47", "407", "470"],
-      correta: 1,
+      opcoes: [{ nome: "47" }, { nome: "407" }, { nome: "470" }],
+      respostaCerta: "407",
       feedbackAcerto: "🎉 Perfeito! 400 + 0 + 7 = 407.",
-      feedbackErro: "0 dezenas mantém o lugar vazio: 400, dezena 0, 7 → 407.",
+      feedbackErro:
+        "0 dezenas mantém a casa vazia: 400 na centena, 0 na dezena, 7 na unidade → 407.",
     },
   },
 
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "Em 528, quanto vale o 5?",
+        pergunta: "Em 528, quanto vale o algarismo 5?",
         opcoes: ["5", "50", "500"],
         correta: 2,
         feedbackAcerto: "🎉 500. O 5 está na casa da CENTENA.",
-        feedbackErro: "Da esquerda: 5 é centena → vale 500.",
+        feedbackErro:
+          "Da esquerda: 5 mora na Centena → vale 500. A posição decide o valor.",
       },
       {
-        pergunta: "Decomposição de 719?",
+        pergunta: "Qual é a decomposição de 719?",
         opcoes: ["7 + 1 + 9", "70 + 10 + 9", "700 + 10 + 9"],
         correta: 2,
         feedbackAcerto: "Isso! 700 + 10 + 9 = 719.",
-        feedbackErro: "7 centenas = 700, 1 dezena = 10, 9 unidades = 9. 700 + 10 + 9.",
+        feedbackErro:
+          "7 centenas = 700, 1 dezena = 10, 9 unidades = 9. Soma: 700 + 10 + 9.",
       },
       {
-        pergunta: "5 centenas + 4 unidades (sem dezenas) = ?",
+        pergunta: "5 centenas + 4 unidades (0 dezenas) escreve-se:",
         opcoes: ["54", "504", "540"],
         correta: 1,
-        feedbackAcerto: "🎉 504. O zero segura a casa da dezena.",
-        feedbackErro: "500 + 0 + 4 → 504. A dezena fica com 0.",
+        feedbackAcerto: "🎉 504. O zero segura a casa da dezena vazia.",
+        feedbackErro:
+          "500 + 0 + 4 → 504. Sem o zero, o 5 escorregaria pra dezena.",
       },
     ],
   },
 
   momento11_missaoFamilia: {
-    titulo: "Caça-Placas em Casa",
-    materiais: ["Uma caixa de sapato", "Papel", "Caneta"],
-    passos: [
-      "Escreva na caixa: [___] [___] [___] (Centena · Dezena · Unidade).",
-      "Peça um número de 3 dígitos pra alguém (ex.: 385).",
-      "Escreva cada dígito em UM papelzinho e coloque na casa certa.",
-      "Fale em voz alta: '3 vale 300, 8 vale 80, 5 vale 5. Total 385.'",
-      "Faça 5 números diferentes.",
+    titulo: "Placas CDU em Casa",
+    materiais: [
+      "3 papeizinhos separados",
+      "Caneta",
+      "Uma caixa ou 3 espaços marcados no papel",
     ],
-    registro: "📸 Foto da caixa com o último número montado.",
+    passos: [
+      "Marque 3 espaços em uma folha: [C] [D] [U].",
+      "Peça um número de 3 dígitos a alguém da família (ex.: 385).",
+      "Escreva cada algarismo em UM papelzinho e coloque na casa certa.",
+      "Fale em voz alta: '3 vale 300, 8 vale 80, 5 vale 5. Total 385.'",
+      "Repita com 5 números diferentes.",
+    ],
+    registro: "📸 Foto da folha com o último número montado nas 3 casas.",
   },
+
   recompensa: {
     xp: 120,
     moedas: 60,
-    medalha: "Explorador(a) da Cidade dos Números",
+    medalha: "Cartógrafo(a) da Cidade dos Números",
   },
 };
