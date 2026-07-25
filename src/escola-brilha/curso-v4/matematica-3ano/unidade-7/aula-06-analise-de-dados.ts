@@ -9,34 +9,70 @@ export const aula06_analiseDados: AulaV4 = {
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
     titulo: "Concluir com números",
-    historia: "Depois de coletar, é hora de decidir. Os números nos ajudam a escolher.",
+    historia: "Depois de coletar, é hora de decidir. Os números guiam a escolha.",
   },
   momento02_exploracao: {
-    instrucao: "Perguntas comuns.",
+    instrucao: "Perguntas comuns: maior? menor? diferença? soma? moda?",
     cenas: [
-      { tipo: "texto", texto: "Qual o maior? O menor? A diferença?" },
-      { tipo: "texto", texto: "Qual a soma? Qual a moda?", destaque: true },
+      {
+        tipo: "graficoBarras",
+        titulo: "Pesquisa de lanche",
+        unidade: "votos",
+        barras: [
+          { rotulo: "Pizza", valor: 15 },
+          { rotulo: "Hambúrguer", valor: 10 },
+          { rotulo: "Cachorro", valor: 8 },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Como decidir a próxima festa?",
-    pista: "Olhando o que mais gente quer.",
-    revelacao: "Escolha o valor de MAIOR frequência (a moda).",
+    perguntaGuia: "Como decidir o lanche da festa?",
+    pista: "Escolha o mais votado.",
+    revelacao: "Escolhemos o valor de MAIOR frequência (a moda).",
   },
   momento04_explicacao: {
     titulo: "Do dado à decisão",
     etapas: [
       {
-        texto: "Pesquisa de lanche: pizza 15, hambúrguer 10, cachorro-quente 8.",
-        exemploReal: { contexto: "Pizza tem maior barra.", destaque: "Vamos de pizza." },
+        texto: "Pesquisa: pizza=15, hambúrguer=10, cachorro=8.",
+        exemploReal: {
+          contexto: "Pizza tem a maior barra.",
+          destaque: "Vamos de pizza.",
+          visualMat: {
+            tipo: "graficoBarras",
+            titulo: "Votos por lanche",
+            unidade: "votos",
+            barras: [
+              { rotulo: "Pizza", valor: 15 },
+              { rotulo: "Hambúrguer", valor: 10 },
+              { rotulo: "Cachorro", valor: 8 },
+            ],
+          },
+        },
+      },
+      {
+        texto: "Diferença = maior − menor.",
+        exemploReal: {
+          contexto: "15 − 8 = 7.",
+          destaque: "A pizza teve 7 votos a mais que o cachorro.",
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Compare 25, 30 e 20. Maior e menor?",
-    passos: ["Maior 30, menor 20.", "Diferença 10."],
-    resposta: "Maior 30, menor 20",
-    casasValor: { numero: 30, mostrarDecomposicao: false, extenso: "trinta" },
+    enunciado: "Compare 25, 30, 20. Maior, menor e diferença?",
+    passos: ["Maior = 30.", "Menor = 20.", "Diferença = 30 − 20 = 10."],
+    resposta: "Maior 30 · Menor 20 · Diferença 10",
+    visualMat: {
+      tipo: "graficoBarras",
+      titulo: "Valores comparados",
+      barras: [
+        { rotulo: "A", valor: 25 },
+        { rotulo: "B", valor: 30 },
+        { rotulo: "C", valor: 20 },
+      ],
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Vendas seg=12, ter=18, qua=15. Total?",
@@ -62,7 +98,7 @@ export const aula06_analiseDados: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "Chuva na semana: 10 mm, 5 mm, 0, 8 mm, 12 mm.",
+    contexto: "Chuva na semana: 10, 5, 0, 8, 12 mm.",
     problema: "Total da semana:",
     interacao: {
       tipo: "escolhaVisual",
@@ -77,10 +113,10 @@ export const aula06_analiseDados: AulaV4 = {
     pontos: ["Maior, menor, soma, moda.", "Números guiam decisão."],
     miniDesafio: {
       tipo: "escolhaVisual",
-      pergunta: "Se 3 opções empatam, escolha qual?",
-      opcoes: [{ nome: "Nova pesquisa" }, { nome: "Sortear" }, { nome: "Ambos podem" }],
-      respostaCerta: "Ambos podem",
-      feedbackAcerto: "🎉 Empate = decidir de outro jeito.",
+      pergunta: "3 opções empatam. O que fazer?",
+      opcoes: [{ nome: "Nova pesquisa" }, { nome: "Sortear" }, { nome: "Ambos servem" }],
+      respostaCerta: "Ambos servem",
+      feedbackAcerto: "🎉 Empate = critério novo.",
       feedbackErro: "Empates precisam de critério.",
     },
   },

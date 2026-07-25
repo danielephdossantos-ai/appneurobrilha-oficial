@@ -12,42 +12,68 @@ export const aula04_probabilidade: AulaV4 = {
     historia: "Vai chover? Vou tirar cara na moeda? Isso é PROBABILIDADE — a chance de algo acontecer.",
   },
   momento02_exploracao: {
-    instrucao: "Palavras da chance.",
+    instrucao: "Escala da chance: de impossível a certo.",
     cenas: [
-      { tipo: "texto", texto: "Certo · Provável · Pouco provável · Impossível." },
-      { tipo: "texto", texto: "Certo = 100%. Impossível = 0%.", destaque: true },
+      {
+        tipo: "escalaProb",
+        itens: [
+          { evento: "O sol nascer amanhã", nivel: "certo" },
+          { evento: "Tirar cara na moeda", nivel: "provavel" },
+          { evento: "Ganhar na loteria hoje", nivel: "pouco" },
+          { evento: "Cachorro voar", nivel: "impossivel" },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Ganhar na loteria é certo?",
-    pista: "Não!",
+    pista: "Aparece na escala em que posição?",
     revelacao: "É POUCO provável. Não é impossível, mas é raro.",
   },
   momento04_explicacao: {
     titulo: "Classificar eventos",
     etapas: [
       {
-        texto: "O sol nascer amanhã: CERTO.",
-        exemploReal: { contexto: "Sempre acontece.", destaque: "100% de chance." },
+        texto: "Sol nascer = CERTO (100%). Cachorro voar = IMPOSSÍVEL (0%).",
+        exemploReal: {
+          contexto: "Coloque cada evento na escala.",
+          destaque: "Certo à direita, impossível à esquerda.",
+          visualMat: {
+            tipo: "escalaProb",
+            itens: [
+              { evento: "Sol nascer amanhã", nivel: "certo" },
+              { evento: "Cachorro voar", nivel: "impossivel" },
+            ],
+          },
+        },
       },
       {
-        texto: "Um cachorro voar: IMPOSSÍVEL.",
-        exemploReal: { contexto: "Nunca acontece.", destaque: "0% de chance." },
-      },
-      {
-        texto: "Tirar cara na moeda: PROVÁVEL (metade das vezes).",
-        exemploReal: { contexto: "50% de chance.", destaque: "1 de 2." },
+        texto: "Moeda: 50% cara, 50% coroa — provável (50/50).",
+        exemploReal: {
+          contexto: "1 chance em 2.",
+          destaque: "Meio a meio.",
+          visualMat: {
+            tipo: "escalaProb",
+            itens: [{ evento: "Cara na moeda", nivel: "provavel" }],
+          },
+        },
       },
     ],
   },
   momento05_modelagem: {
-    enunciado: "Numa urna com 3 bolas azuis e 1 vermelha, tirar azul é?",
-    passos: ["3 de 4 são azuis.", "Provável, quase certo."],
+    enunciado: "Urna com 3 bolas azuis e 1 vermelha. Tirar azul é:",
+    passos: ["3 em 4 são azuis.", "Muito provável, mas não certo."],
     resposta: "Muito provável",
-    casasValor: { numero: 3, mostrarDecomposicao: false, extenso: "três" },
+    visualMat: {
+      tipo: "escalaProb",
+      itens: [
+        { evento: "Tirar azul (3 de 4)", nivel: "muito" },
+        { evento: "Tirar vermelha (1 de 4)", nivel: "pouco" },
+      ],
+    },
   },
   momento06_praticaGuiada: {
-    enunciado: "Uma moeda tem 2 lados. Cair de pé?",
+    enunciado: "Moeda cair em pé é:",
     dica: "É comum?",
     interacao: {
       tipo: "escolhaVisual",
@@ -75,17 +101,17 @@ export const aula04_probabilidade: AulaV4 = {
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "50% de chance" }, { nome: "Certo" }, { nome: "Impossível" }],
-      respostaCerta: "50% de chance",
+      opcoes: [{ nome: "50/50" }, { nome: "Certo" }, { nome: "Impossível" }],
+      respostaCerta: "50/50",
       feedbackAcerto: "🎯 Metade.",
       feedbackErro: "5 de 10 = metade.",
     },
   },
   momento09_revisao: {
-    pontos: ["Certo · Provável · Impossível.", "Mais casos favoráveis = mais chance."],
+    pontos: ["Escala: impossível → pouco → 50/50 → muito → certo.", "Mais casos favoráveis = mais chance."],
     miniDesafio: {
       tipo: "escolhaVisual",
-      pergunta: "Peixe respirar debaixo d'água é?",
+      pergunta: "Peixe respirar debaixo d'água é:",
       opcoes: [{ nome: "Certo" }, { nome: "Impossível" }, { nome: "Pouco provável" }],
       respostaCerta: "Certo",
       feedbackAcerto: "🎉 Certo.",
@@ -95,14 +121,14 @@ export const aula04_probabilidade: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "Nevar no deserto?", opcoes: ["Pouco provável", "Certo", "Impossível"], correta: 0, feedbackAcerto: "🎉 Pouco provável.", feedbackErro: "Muito raro." },
-      { pergunta: "Segunda-feira depois de domingo?", opcoes: ["Certo", "Impossível", "Provável"], correta: 0, feedbackAcerto: "🎉 Certo.", feedbackErro: "Sempre acontece." },
+      { pergunta: "Segunda depois de domingo?", opcoes: ["Certo", "Impossível", "Provável"], correta: 0, feedbackAcerto: "🎉 Certo.", feedbackErro: "Sempre acontece." },
       { pergunta: "Homem sem paraquedas voar?", opcoes: ["Impossível", "Certo", "Provável"], correta: 0, feedbackAcerto: "🎉 Impossível.", feedbackErro: "Não voa sozinho." },
     ],
   },
   momento11_missaoFamilia: {
     titulo: "Aposta divertida",
     materiais: ["Moeda"],
-    passos: ["Jogue moeda 10 vezes.", "Anote cara/coroa.", "Compare com o esperado (metade)."],
+    passos: ["Jogue a moeda 10 vezes.", "Anote cara/coroa.", "Compare com o esperado (metade)."],
     registro: "📸 Foto do registro.",
   },
   recompensa: { xp: 200, moedas: 100 },

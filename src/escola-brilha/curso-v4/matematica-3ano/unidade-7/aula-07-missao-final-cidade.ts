@@ -9,13 +9,21 @@ export const aula07_missaoFinalCidade: AulaV4 = {
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
     titulo: "Formatura oficial",
-    historia: "{NOME}, você chegou ao fim da Cidade dos Números. Prova final: dominar contagem, contas, medidas, geometria e dados.",
+    historia: "{NOME}, você chegou ao fim da Cidade dos Números. Prova final: contas, geometria e dados.",
   },
   momento02_exploracao: {
-    instrucao: "Revisão geral.",
+    instrucao: "Revisão geral com visuais.",
     cenas: [
-      { tipo: "texto", texto: "Contar · Somar · Subtrair · Multiplicar · Dividir." },
-      { tipo: "texto", texto: "Medir · Formas · Dados · Chance.", destaque: true },
+      {
+        tipo: "graficoBarras",
+        titulo: "Pesquisa da cidade",
+        unidade: "votos",
+        barras: [
+          { rotulo: "Parque", valor: 45 },
+          { rotulo: "Quadra", valor: 30 },
+          { rotulo: "Biblioteca", valor: 25 },
+        ],
+      },
     ],
   },
   momento03_descoberta: {
@@ -27,10 +35,10 @@ export const aula07_missaoFinalCidade: AulaV4 = {
     titulo: "Prova mestra",
     etapas: [
       {
-        texto: "Pedido: some 245+178.",
+        texto: "Some 245 + 178.",
         exemploReal: {
           contexto: "Adição com reagrupamento.",
-          destaque: "245+178=423.",
+          destaque: "245 + 178 = 423.",
           contaPassoAPasso: {
             operacao: "soma",
             operandos: [245, 178],
@@ -47,13 +55,13 @@ export const aula07_missaoFinalCidade: AulaV4 = {
   },
   momento05_modelagem: {
     enunciado: "6 × 8 = ?",
-    passos: ["6 grupos de 8.", "6×8=48."],
+    passos: ["6 grupos de 8.", "6 × 8 = 48."],
     resposta: "48",
     casasValor: { numero: 48, mostrarDecomposicao: true, extenso: "quarenta e oito" },
   },
   momento06_praticaGuiada: {
     enunciado: "Metade de 90?",
-    dica: "÷2.",
+    dica: "÷ 2.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -75,7 +83,7 @@ export const aula07_missaoFinalCidade: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "A cidade fez pesquisa: 45 querem parque, 30 querem quadra, 25 querem biblioteca.",
+    contexto: "Cidade fez pesquisa: parque=45, quadra=30, biblioteca=25.",
     problema: "Ganhou:",
     interacao: {
       tipo: "escolhaVisual",
@@ -107,7 +115,7 @@ export const aula07_missaoFinalCidade: AulaV4 = {
   momento11_missaoFamilia: {
     titulo: "Diploma da Cidade dos Números",
     materiais: ["Papel", "Canetinha"],
-    passos: ["Escreva 3 coisas que você aprendeu.", "Peça pra alguém da família assinar como testemunha."],
+    passos: ["Escreva 3 coisas que aprendeu.", "Peça pra alguém da família assinar."],
     registro: "📸 Foto do diploma.",
   },
   recompensa: { xp: 500, moedas: 300 },

@@ -9,42 +9,57 @@ export const aula02_solidos: AulaV4 = {
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
     titulo: "Do plano ao 3D",
-    historia: "Se um quadrado 'cresce' vira cubo. Se um círculo 'cresce' vira esfera ou cilindro.",
+    historia: "Um quadrado 'cresce' e vira cubo. Um círculo 'cresce' e vira esfera ou cilindro.",
   },
   momento02_exploracao: {
-    instrucao: "Sólidos principais.",
+    instrucao: "Sólidos principais — cada um tem faces, vértices e arestas.",
     cenas: [
-      { tipo: "texto", texto: "Cubo · Esfera · Cone · Cilindro · Pirâmide." },
-      { tipo: "texto", texto: "Cubo: 6 faces quadradas. Esfera: sem faces retas.", destaque: true },
+      { tipo: "solido", forma: "cubo", legenda: "Cubo" },
+      { tipo: "solido", forma: "esfera", legenda: "Esfera" },
+      { tipo: "solido", forma: "cone", legenda: "Cone" },
+      { tipo: "solido", forma: "cilindro", legenda: "Cilindro" },
+      { tipo: "solido", forma: "piramide", legenda: "Pirâmide" },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Como diferenciar cone de cilindro?",
-    pista: "Ponta ou não.",
-    revelacao: "Cone tem ponta. Cilindro tem 2 bases iguais.",
+    pista: "Um tem ponta, o outro tem duas bases iguais.",
+    revelacao: "Cone tem ponta. Cilindro tem 2 bases circulares.",
   },
   momento04_explicacao: {
     titulo: "Identificar sólidos",
     etapas: [
       {
         texto: "Cubo: 6 faces quadradas, 8 vértices, 12 arestas.",
-        exemploReal: { contexto: "Dado.", destaque: "Todas as faces iguais." },
+        exemploReal: {
+          contexto: "Dado de jogar.",
+          destaque: "Todas as faces iguais.",
+          visualMat: { tipo: "solido", forma: "cubo" },
+        },
       },
       {
-        texto: "Cilindro: 2 círculos e uma curva.",
-        exemploReal: { contexto: "Latinha de refrigerante.", destaque: "2 bases circulares." },
+        texto: "Cilindro: 2 bases circulares e uma face curva.",
+        exemploReal: {
+          contexto: "Latinha de refrigerante.",
+          destaque: "3 faces (2 círculos + 1 curva).",
+          visualMat: { tipo: "solido", forma: "cilindro" },
+        },
       },
       {
-        texto: "Pirâmide: base + ponta.",
-        exemploReal: { contexto: "Pirâmide do Egito.", destaque: "1 ponta." },
+        texto: "Pirâmide: base poligonal + 1 vértice de ponta.",
+        exemploReal: {
+          contexto: "Pirâmide do Egito.",
+          destaque: "1 ponta no topo.",
+          visualMat: { tipo: "solido", forma: "piramide" },
+        },
       },
     ],
   },
   momento05_modelagem: {
     enunciado: "Quantas faces tem um cubo?",
-    passos: ["Cubo = 6 faces quadradas iguais."],
+    passos: ["Conte cada face quadrada.", "Cubo = 6 faces iguais."],
     resposta: "6 faces",
-    casasValor: { numero: 6, mostrarDecomposicao: false, extenso: "seis" },
+    visualMat: { tipo: "solido", forma: "cubo" },
   },
   momento06_praticaGuiada: {
     enunciado: "Latinha é qual sólido?",
@@ -82,7 +97,7 @@ export const aula02_solidos: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Cubo · Esfera · Cone · Cilindro · Pirâmide.", "Faces, vértices e arestas."],
+    pontos: ["Cubo · Esfera · Cone · Cilindro · Pirâmide.", "Contamos: faces, vértices e arestas."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Quantos vértices o cubo tem?",
