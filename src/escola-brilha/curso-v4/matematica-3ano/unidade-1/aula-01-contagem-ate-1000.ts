@@ -53,6 +53,17 @@ export const aula01_contagemAte1000: AulaV4 = {
       {
         texto:
           "Todo número até 999 mora em 3 casas: Centena · Dezena · Unidade. Da esquerda pra direita, cada casa perde um zero.",
+        exemploReal: {
+          contexto:
+            "O ônibus escolar da Cidade tem a placa 347. Vamos ver onde cada algarismo mora:",
+          casasValor: {
+            numero: 347,
+            extenso: "trezentos e quarenta e sete",
+            mostrarDecomposicao: true,
+          },
+          destaque:
+            "3 na Centena vale 300 · 4 na Dezena vale 40 · 7 na Unidade vale 7. Somando: 300 + 40 + 7 = 347.",
+        },
       },
       {
         texto:
@@ -62,10 +73,32 @@ export const aula01_contagemAte1000: AulaV4 = {
           mostrarDecomposicao: true,
           extenso: "oitocentos e quarenta e sete",
         },
+        exemploReal: {
+          contexto:
+            "A biblioteca da Cidade tem 847 livros. Se eu troco a posição dos algarismos pra 478, muda tudo:",
+          casasValor: {
+            numero: 478,
+            extenso: "quatrocentos e setenta e oito",
+            mostrarDecomposicao: true,
+          },
+          destaque:
+            "Mesmos algarismos (8, 4, 7), mas 478 é MENOR que 847 porque a Centena agora é 4, não 8.",
+        },
       },
       {
         texto:
           "A leitura é sempre da esquerda pra direita: começa pela casa mais forte (Centena), depois Dezena, depois Unidade.",
+        exemploReal: {
+          contexto:
+            "O prédio da Prefeitura tem 625 janelas. Lendo da esquerda pra direita:",
+          casasValor: {
+            numero: 625,
+            extenso: "seiscentos e vinte e cinco",
+            mostrarDecomposicao: true,
+          },
+          destaque:
+            "Seiscentos (600) · e vinte (20) · e cinco (5) → seiscentos e vinte e cinco.",
+        },
       },
       {
         texto:
@@ -75,6 +108,17 @@ export const aula01_contagemAte1000: AulaV4 = {
           mostrarDecomposicao: true,
           extenso: "quinhentos e seis",
         },
+        exemploReal: {
+          contexto:
+            "O código do crachá da Prefeita é 806. Se você esquecer o zero e escrever 86, o crachá vira outro funcionário!",
+          casasValor: {
+            numero: 806,
+            extenso: "oitocentos e seis",
+            mostrarDecomposicao: true,
+          },
+          destaque:
+            "O 0 na Dezena não é 'nada' — ele segura a casa vazia pra que o 8 continue valendo 800.",
+        },
       },
       {
         texto:
@@ -83,6 +127,52 @@ export const aula01_contagemAte1000: AulaV4 = {
           numero: 1000,
           mostrarDecomposicao: true,
           extenso: "mil",
+        },
+        exemploReal: {
+          contexto:
+            "O Censo terminou: a Cidade tem 1.248 habitantes. Um número de 4 algarismos usa 4 casas:",
+          casasValor: {
+            numero: 1248,
+            extenso: "mil duzentos e quarenta e oito",
+            mostrarDecomposicao: true,
+          },
+          destaque:
+            "1 Milhar (1.000) + 2 Centenas (200) + 4 Dezenas (40) + 8 Unidades (8) = 1.248.",
+        },
+      },
+      {
+        texto:
+          "Pra SOMAR dois números de 3 algarismos, começamos sempre pelas UNIDADES (coluna da direita). Depois dezenas. Por último centenas.",
+        exemploReal: {
+          contexto:
+            "O bairro Leste tem 325 pessoas e o Oeste 243. Vamos somar juntos, passo a passo:",
+          contaPassoAPasso: {
+            operacao: "soma",
+            operandos: [325, 243],
+            resultado: 568,
+            passos: [
+              {
+                coluna: "U",
+                fala: "Unidades: 5 + 3 = 8. Escrevo 8 na coluna das unidades.",
+                digito: 8,
+                porque:
+                  "Começamos pela direita: se der 10 ou mais, sobra 1 pra dezena.",
+              },
+              {
+                coluna: "D",
+                fala: "Dezenas: 2 + 4 = 6. Escrevo 6 na coluna das dezenas.",
+                digito: 6,
+                porque: "Cada dezena vale 10. 2 dezenas + 4 dezenas = 60.",
+              },
+              {
+                coluna: "C",
+                fala: "Centenas: 3 + 2 = 5. Escrevo 5 na coluna das centenas.",
+                digito: 5,
+                porque: "Cada centena vale 100. 3 centenas + 2 centenas = 500.",
+              },
+            ],
+          },
+          destaque: "Total: 568 habitantes ao todo entre Leste e Oeste.",
         },
       },
     ],
