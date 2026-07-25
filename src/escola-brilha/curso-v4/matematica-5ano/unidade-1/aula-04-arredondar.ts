@@ -28,15 +28,63 @@ export const aula04_arredondar: AulaV4 = {
   momento04_explicacao: {
     titulo: "Arredondar sem casas de valor — é só olhar o vizinho",
     etapas: [
-      { texto: "48.573 para a dezena de milhar: vizinho é 8 (UM). 8 ≥ 5 → DM sobe: 50.000." },
+      {
+        texto: "48.573 para a dezena de milhar: vizinho é 8 (UM). 8 ≥ 5 → DM sobe: 50.000.",
+        exemploReal: {
+          contexto: "Na reta, 48.573 está mais perto de 50.000 do que de 40.000:",
+          visualMat: {
+            tipo: "retaNumerica",
+            min: 40000,
+            max: 50000,
+            passo: 1000,
+            destacar: [
+              { valor: 40000, rotulo: "40.000" },
+              { valor: 45000, rotulo: "45.000 (meio)", cor: "#f59e0b" },
+              { valor: 48573, rotulo: "48.573", cor: "#10b981" },
+              { valor: 50000, rotulo: "50.000" },
+            ],
+          },
+          destaque: "Passou do meio (45.000) → arredonda pra 50.000.",
+        },
+      },
       { texto: "48.573 para a unidade de milhar: vizinho é 5 (C). 5 ≥ 5 → UM sobe: 49.000." },
-      { texto: "48.573 para a centena: vizinho é 7 (D). 7 ≥ 5 → C sobe: 48.600." },
+      {
+        texto: "48.573 para a centena: vizinho é 7 (D). 7 ≥ 5 → C sobe: 48.600.",
+        exemploReal: {
+          contexto: "Reta zoom entre 48.500 e 48.600:",
+          visualMat: {
+            tipo: "retaNumerica",
+            min: 48500,
+            max: 48600,
+            passo: 10,
+            destacar: [
+              { valor: 48500, rotulo: "48.500" },
+              { valor: 48550, rotulo: "48.550", cor: "#f59e0b" },
+              { valor: 48573, rotulo: "48.573", cor: "#10b981" },
+              { valor: 48600, rotulo: "48.600" },
+            ],
+          },
+          destaque: "48.573 já passou do meio → 48.600.",
+        },
+      },
       { texto: "48.573 para a dezena: vizinho é 3 (U). 3 < 5 → D fica: 48.570." },
     ],
   },
   momento05_modelagem: {
     enunciado: "Arredonde 725.480 para a DEZENA DE MILHAR.",
     resposta: "730.000",
+    visualMat: {
+      tipo: "retaNumerica",
+      min: 720000,
+      max: 730000,
+      passo: 1000,
+      destacar: [
+        { valor: 720000, rotulo: "720.000" },
+        { valor: 725000, rotulo: "725.000 (meio)", cor: "#f59e0b" },
+        { valor: 725480, rotulo: "725.480", cor: "#10b981" },
+        { valor: 730000, rotulo: "730.000" },
+      ],
+    },
     passos: ["Casa DM = 2.", "Vizinho da direita (UM) = 5.", "5 ≥ 5 → DM vira 3.", "Zera C, D, U → 730.000."],
   },
   momento06_praticaGuiada: {
