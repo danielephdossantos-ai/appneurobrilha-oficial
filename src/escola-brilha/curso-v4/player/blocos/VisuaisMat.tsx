@@ -1351,9 +1351,9 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
       {passoAtual?.explica && (
         <div
           key={revelados}
-          className="mt-3 bg-white/10 border-l-4 border-amber-300 rounded-r-lg px-3 py-2 text-sm md:text-base text-white leading-snug animate-in fade-in slide-in-from-left-2 duration-300"
+          className="mt-3 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg px-3 py-2 text-sm md:text-base text-[#0d1f55] leading-snug shadow-sm animate-in fade-in slide-in-from-left-2 duration-300"
         >
-          <span className="text-amber-300 font-black mr-1">Passo {Math.min(revelados, total)}:</span>
+          <span className="text-amber-700 font-black mr-1">Passo {Math.min(revelados, total)}:</span>
           {passoAtual.explica}
         </div>
       )}
@@ -1366,7 +1366,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         >
           <summary className="cursor-pointer select-none list-none px-3 py-2 flex items-center justify-between text-sm font-black">
             <span className="flex items-center gap-2">
-              <span className="text-lg">🧑‍🏫</span>
+              <span className="rounded-md bg-amber-100 px-2 py-0.5 text-[11px] text-amber-700 border border-amber-200">PROF.</span>
               <span>Professor explica</span>
             </span>
             <span className="text-xs text-amber-600 group-open:hidden">tocar para ver ▾</span>
