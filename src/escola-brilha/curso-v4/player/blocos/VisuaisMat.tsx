@@ -1285,83 +1285,93 @@ function ChecklistTQP({ v }: { v: ChecklistTQPV }) {
 // ------------------ Trinômio passo-a-passo (interativo) --------------
 function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const { trinomio, passos, fatorada, falha, legenda } = v;
-  const [revelados, setRevelados] = useState(1); // começa mostrando 1 passo
+  const [revelados, setRevelados] = useState(1);
   const total = passos.length;
   const terminou = revelados >= total;
+  const passoAtual = passos[Math.min(revelados, total) - 1];
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-amber-300/60 max-w-md mx-auto">
+    <div className="my-4 max-w-md mx-auto">
       {legenda && (
-        <div className="text-xs font-black uppercase tracking-widest text-amber-700 text-center mb-3">
+        <div className="text-xs font-black uppercase tracking-widest text-amber-300 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      {/* Trinômio original */}
-      <div className="text-center text-2xl md:text-3xl font-black mb-4 bg-slate-100 border-2 border-slate-300 rounded-lg py-2 font-mono">
-        {trinomio}
-      </div>
+      {/* ===== CONTA ARMADA — só matemática, sem texto ===== */}
+      <div className="rounded-2xl bg-white text-[#0d1f55] p-5 border-2 border-amber-300/70 shadow-lg">
+        {/* Trinômio original no topo */}
+        <div className="text-center text-2xl md:text-3xl font-black font-mono border-b-2 border-slate-300 pb-3 mb-3">
+          {trinomio}
+        </div>
 
-      {/* Passos revelados */}
-      <div className="space-y-2">
-        {passos.slice(0, revelados).map((p, idx) => {
-          const cor =
-            p.status === "ok"
-              ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-              : p.status === "x"
-              ? "bg-red-50 border-red-300 text-red-700"
-              : "bg-sky-50 border-sky-300 text-sky-800";
-          const icone = p.status === "ok" ? "✅" : p.status === "x" ? "❌" : "▸";
-          return (
-            <div
-              key={idx}
-              className={`border-2 rounded-lg px-3 py-2 ${cor} animate-in fade-in slide-in-from-top-1 duration-300`}
-            >
-              <div className="flex items-center gap-2 font-mono font-black text-base md:text-lg">
-                <span className="text-xs">{icone}</span>
+        {/* Linhas de conta empilhadas — só expressão, sem texto */}
+        <div className="flex flex-col items-center gap-2">
+          {passos.slice(0, revelados).map((p, idx) => {
+            const cor =
+              p.status === "ok"
+                ? "text-emerald-700"
+                : p.status === "x"
+                ? "text-red-600"
+                : "text-sky-700";
+            const marcador = p.status === "ok" ? "✓" : p.status === "x" ? "✗" : "▸";
+            const destaque = idx === revelados - 1;
+            return (
+              <div
+                key={idx}
+                className={`flex items-baseline gap-3 font-mono font-black text-xl md:text-2xl ${cor} ${
+                  destaque ? "animate-in fade-in slide-in-from-top-2 duration-300" : ""
+                }`}
+              >
+                <span className="text-sm w-4 text-right opacity-70">{marcador}</span>
                 <span>{p.expr}</span>
               </div>
-              <div className="text-xs md:text-sm text-slate-600 mt-1 leading-snug">
-                {p.explica}
-              </div>
+            );
+          })}
+        </div>
+
+        {/* Resultado final dentro da conta */}
+        {terminou && fatorada && (
+          <div className="mt-4 pt-3 border-t-2 border-emerald-400 text-center animate-in fade-in zoom-in duration-500">
+            <div className="text-xl md:text-2xl font-black font-mono text-emerald-800">
+              {trinomio} = <span className="text-violet-700">{fatorada}</span>
             </div>
-          );
-        })}
+          </div>
+        )}
+        {terminou && !fatorada && falha && (
+          <div className="mt-4 pt-3 border-t-2 border-red-400 text-center text-red-700 font-mono font-black text-lg animate-in fade-in duration-500">
+            {falha}
+          </div>
+        )}
       </div>
 
-      {/* Resultado final */}
-      {terminou && fatorada && (
-        <div className="mt-4 text-center animate-in fade-in zoom-in duration-500">
-          <div className="text-[10px] uppercase font-black tracking-widest text-emerald-600 mb-1">
-            Fatoração concluída
-          </div>
-          <div className="text-xl md:text-2xl font-black text-emerald-800 bg-emerald-50 border-2 border-emerald-400 rounded-lg py-3 font-mono">
-            {trinomio} = <span className="text-violet-700">{fatorada}</span>
-          </div>
-        </div>
-      )}
-      {terminou && !fatorada && falha && (
-        <div className="mt-4 text-center bg-red-50 border-2 border-red-300 text-red-700 rounded-lg py-2 px-3 font-bold text-sm animate-in fade-in duration-500">
-          {falha}
+      {/* ===== EXPLICAÇÃO — FORA da conta ===== */}
+      {passoAtual?.explica && (
+        <div
+          key={revelados}
+          className="mt-3 bg-white/10 border-l-4 border-amber-300 rounded-r-lg px-3 py-2 text-sm md:text-base text-white leading-snug animate-in fade-in slide-in-from-left-2 duration-300"
+        >
+          <span className="text-amber-300 font-black mr-1">Passo {Math.min(revelados, total)}:</span>
+          {passoAtual.explica}
         </div>
       )}
 
-      {/* Controles */}
-      <div className="mt-4 flex items-center justify-between gap-2">
-        <div className="text-[11px] text-slate-500 font-bold">
-          Passo {Math.min(revelados, total)}/{total}
+      {/* ===== Controles ===== */}
+      <div className="mt-3 flex items-center justify-between gap-2">
+        <div className="text-[11px] text-white/70 font-bold">
+          {Math.min(revelados, total)}/{total}
         </div>
         {!terminou ? (
           <button
             onClick={() => setRevelados((r) => Math.min(total, r + 1))}
-            className="px-4 py-2 rounded-lg bg-amber-400 hover:bg-amber-500 text-[#0d1f55] font-black text-sm shadow-md active:scale-95 transition"
+            className="px-5 py-2 rounded-lg bg-amber-400 hover:bg-amber-500 text-[#0d1f55] font-black text-sm shadow-md active:scale-95 transition"
           >
             Continuar ▶
           </button>
         ) : (
           <button
             onClick={() => setRevelados(1)}
-            className="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs"
+            className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white font-bold text-xs"
           >
             ↻ Recomeçar
           </button>
