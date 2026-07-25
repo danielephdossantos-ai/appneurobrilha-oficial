@@ -175,11 +175,11 @@ export const aula07_arredondar: AulaV4 = {
         feedbackErro: "Unidade 2 (<5) desce → 70.",
       },
       {
-        pergunta: "645 pra centena mais próxima:",
+        pergunta: "672 pra centena mais próxima:",
         opcoes: ["600", "700", "650"],
         correta: 1,
-        feedbackAcerto: "Isso! Dezena 4? Não — o número é 645, dezena é 4. Ah, na verdade dezena=4, unidade=5. Pra centena, olho DEZENA: 4 → desce → 600. Ops, resposta certa é 600. Vou recalcular na próxima. (A opção certa é 600.)",
-        feedbackErro: "Pra centena, olha DEZENA. 645 tem dezena 4 → desce → 600.",
+        feedbackAcerto: "🎉 Dezena 7 (5+) → sobe → 700.",
+        feedbackErro: "Pra centena, olha a DEZENA. 7 ≥ 5 → sobe → 700.",
       },
       {
         pergunta: "Estime 199 + 402:",
