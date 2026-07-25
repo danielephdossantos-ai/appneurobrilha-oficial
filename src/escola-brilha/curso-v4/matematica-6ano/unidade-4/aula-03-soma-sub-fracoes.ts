@@ -56,18 +56,15 @@ export const aula03_somaSub: AulaV4 = {
         },
       },
       {
-        texto: "Diferentes: iguale pelo MMC e some.",
+        texto: "Diferentes: cruze — numerador·denominador do outro, sobre o produto dos denominadores.",
         exemploReal: {
           contexto: "1/4 + 2/3",
           visualMat: {
-            tipo: "tabela",
-            cabecalhos: ["Passo", "Cálculo"],
-            linhas: [
-              { rotulo: "1", valores: ["MMC(4,3)", "12"] },
-              { rotulo: "2", valores: ["1/4 = ?/12", "3/12"] },
-              { rotulo: "3", valores: ["2/3 = ?/12", "8/12"] },
-              { rotulo: "4", valores: ["Soma", "11/12"] },
-            ],
+            tipo: "somaFracoes",
+            operacao: "+",
+            a: { num: 1, den: 4 },
+            b: { num: 2, den: 3 },
+            legenda: "Método do cruzamento",
           },
           destaque: "1/4 + 2/3 = 11/12.",
         },
@@ -95,17 +92,13 @@ export const aula03_somaSub: AulaV4 = {
     enunciado: "Calcule 5/6 − 1/4.",
     resposta: "7/12",
     visualMat: {
-      tipo: "tabela",
-      titulo: "Subtração com MMC",
-      cabecalhos: ["Passo", "Cálculo"],
-      linhas: [
-        { rotulo: "1", valores: ["MMC(6,4)", "12"] },
-        { rotulo: "2", valores: ["5/6 = ?/12", "10/12"] },
-        { rotulo: "3", valores: ["1/4 = ?/12", "3/12"] },
-        { rotulo: "4", valores: ["10/12 − 3/12", "7/12"] },
-      ],
+      tipo: "somaFracoes",
+      operacao: "-",
+      a: { num: 5, den: 6 },
+      b: { num: 1, den: 4 },
+      legenda: "Modelagem — subtração",
     },
-    passos: ["MMC(6,4) = 12.", "5/6 = 10/12.", "1/4 = 3/12.", "10/12 − 3/12 = 7/12."],
+    passos: ["Cruze: 5·4 − 1·6 = 20 − 6 = 14.", "Denominador: 6·4 = 24.", "14/24 ÷ 2 = 7/12."],
   },
 
   momento06_praticaGuiada: {
