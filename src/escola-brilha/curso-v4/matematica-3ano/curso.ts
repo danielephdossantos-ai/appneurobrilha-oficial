@@ -1,22 +1,21 @@
 import type { Curso } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
+import { unidade3 } from "./unidade-3";
+import { unidade4 } from "./unidade-4";
+import { unidade5 } from "./unidade-5";
+import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Matemática 3º Ano — "A Cidade dos Números"
  * -------------------------------------------------
- * Evolução narrativa da "Vila dos Números" (2º ano). A Vila cresceu e
- * virou CIDADE: agora existem prédios (centenas), ruas (dezenas) e
- * moradores (unidades). Toda a matemática de 3º ano acontece nesse
- * cenário, ligada ao BNCC.
- *
- * Progressão (7 unidades previstas):
- *  U1 · Números até 1.000 e valor posicional     (EF03MA01–03)  ← esta
+ *  U1 · Números até 1.000 e valor posicional     (EF03MA01–03)
  *  U2 · Adição e subtração com reagrupamento     (EF03MA05–08)
  *  U3 · Multiplicação e tabuadas                 (EF03MA07, 09)
  *  U4 · Divisão                                  (EF03MA10)
- *  U5 · Medidas                                  (EF03MA17–22)
- *  U6 · Geometria e simetria                     (EF03MA13–16)
+ *  U5 · Medidas                                  (EF03MA17–24)
+ *  U6 · Geometria, simetria e localização        (EF03MA12–15)
  *  U7 · Estatística/probabilidade + missão final (EF03MA25–28)
  */
 const curso: Curso = {
@@ -25,11 +24,11 @@ const curso: Curso = {
   ano: "3º Ano",
   titulo: "A Cidade dos Números",
   descricao:
-    "A Vila dos Números cresceu e virou CIDADE. Agora Brilha explora prédios (centenas), ruas (dezenas) e moradores (unidades) para aprender a contar, comparar, ordenar e pensar até 1.000 — como um matemático de verdade.",
+    "A Vila dos Números cresceu e virou CIDADE. Brilha explora prédios (centenas), ruas (dezenas) e moradores (unidades) para dominar contagem, contas, medidas, geometria e dados até o fim do 3º ano.",
   corPrimaria: "#2563eb",
   corSecundaria: "#0d1f55",
   tipoAula: "matematica",
-  unidades: [unidade1, unidade2],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
