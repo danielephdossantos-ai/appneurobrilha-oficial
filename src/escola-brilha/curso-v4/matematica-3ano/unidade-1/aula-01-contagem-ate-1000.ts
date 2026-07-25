@@ -1,226 +1,264 @@
 import type { AulaV4 } from "../../types";
-import { url as maca } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
-import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
-import { url as coruja } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
 
 /**
  * Aula 1 — "Contando até 1.000"
  * Curso: Matemática 3º Ano · Unidade 1: A Cidade dos Números
  *
- * Foco pedagógico: contar coleções grandes agrupando de 10 em 10 e de
- * 100 em 100. A criança percebe que 10 dezenas formam 1 CENTENA.
- * BNCC: EF03MA01 (leitura, escrita e contagem até 1.000).
+ * ⚠️ Novo padrão (3º ano em diante):
+ * - Zero contagem infantil (nada de "toque em cada maçã").
+ * - O número ESCRITO é o objeto matemático. Casas de valor (C-D-U)
+ *   são o centro visual.
+ * - Modelagem usa `casasValor` + `contaPassoAPasso` — algoritmo real.
+ * - Contextos são realistas (Freudenthal / RME): habitantes, placas,
+ *   páginas de livro, quilômetros. Nada de "cesta de frutas".
+ *
+ * BNCC: EF03MA01 (leitura, escrita, comparação e ordenação até 1.000).
+ * Base científica: CPA · Kamii · Skemp · Vergnaud · RME.
  */
 export const aula01_contagemAte1000: AulaV4 = {
   slug: "01-contagem-ate-1000",
   titulo: "Contando até 1.000",
   iconeTrilha: "🏙️",
   bncc: ["EF03MA01"],
-  duracaoMin: 18,
+  duracaoMin: 20,
+  metodologias: ["cpa", "kamii", "skemp", "vergnaud", "rme"],
 
   momento01_motivacao: {
     titulo: "Bem-vindo(a) à CIDADE dos Números!",
     historia:
-      "Brilha volta pra Vila dos Números e leva um susto: a Vila CRESCEU e virou CIDADE! Agora tem prédios enormes, ruas com casas em fila e muita, muita gente. Dona Coruja, agora Prefeita, pediu ajuda: 'Preciso contar até 1.000 sem me perder. Você me ajuda, {NOME}?'",
-    imagemUrl: brilha,
+      "Você é o novo(a) assistente da Prefeitura. Chegou o Censo: precisa registrar TODOS os habitantes da Cidade. São mais de 800 pessoas! Contar de 1 em 1 levaria uma semana. Como escrever esses números de um jeito rápido — e que qualquer pessoa consiga ler?",
   },
 
   momento02_exploracao: {
-    instrucao:
-      "A Prefeita jogou uma cesta de maçãs pra você contar. Toque em cada uma:",
+    instrucao: "Repare como os números crescem quando a gente pula de 100 em 100.",
     cenas: [
-      { tipo: "texto", texto: "🍎 Olha só quanta maçã caiu da árvore da praça!" },
-      { tipo: "texto", texto: "Contar uma a uma até 100 daria muito trabalho...", destaque: true },
+      { tipo: "texto", texto: "Contando de 100 em 100:", destaque: true },
+      { tipo: "texto", texto: "100 · 200 · 300 · 400 · 500 · 600 · 700 · 800 · 900 · 1.000." },
+      { tipo: "texto", texto: "Só 10 saltos e chegamos em MIL. O jeito rápido é ler o número inteiro, não contar pedacinho por pedacinho." },
+      { tipo: "texto", texto: "Um número de 3 algarismos guarda uma mensagem: cada algarismo ocupa uma CASA diferente.", destaque: true },
     ],
-    interacao: {
-      tipo: "tapContar",
-      imagemUrl: maca,
-      quantidade: 24,
-      itemPlural: "maçãs",
-      pergunta: "Conte tocando em cada maçã:",
-    },
   },
 
   momento03_descoberta: {
-    perguntaGuia: "E se fossem 300 maçãs? Dá pra contar de 1 em 1?",
+    perguntaGuia: "Por que o mesmo dígito 5 vale coisas diferentes em 5, 50 e 500?",
     pista:
-      "Lembra da Vila? Lá agrupávamos de 10 em 10. Na CIDADE, o número é maior — precisamos de um grupo AINDA MAIOR.",
+      "Nosso sistema é DECIMAL. Cada casa vale 10 vezes MAIS que a casa da direita. O 5 não muda de valor sozinho — quem muda é a CASA em que ele está.",
     revelacao:
-      "Se juntarmos 10 caixotes de 10 maçãs, formamos 1 CAMINHÃO de 100! É a CENTENA. Com centenas dá pra contar até 1.000 rapidinho.",
+      "Nas Centenas · Dezenas · Unidades, o algarismo mais à esquerda é o mais forte. Em 573, o 5 vale 500. Em 375, o 5 vale só 5. A posição faz o valor.",
   },
 
   momento04_explicacao: {
-    titulo: "3 tamanhos de grupo na Cidade",
+    titulo: "Ler um número de 3 algarismos",
     etapas: [
       {
-        texto: "MORADOR = 1 unidade. Sozinho, solto.",
-        exemplo: "🍎 = 1",
-      },
-      {
-        texto: "RUA = 1 dezena = 10 moradores em fila. Um caixote cheio.",
-        exemplo: "📦 = 10",
-        agrupamentos: [
-          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 1, rotulo: "📦 1 rua = 10" },
-        ],
+        texto:
+          "Todo número até 999 mora em 3 casas: Centena · Dezena · Unidade. Da esquerda pra direita, cada casa perde um zero.",
       },
       {
         texto:
-          "PRÉDIO = 1 centena = 10 ruas empilhadas = 100 moradores. É a CENTENA.",
-        exemplo: "🏢 = 100",
-        agrupamentos: [
-          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 10, rotulo: "🏢 1 prédio = 10 caixotes = 100" },
-        ],
+          "Repare no número 847. Cada algarismo tem um lugar fixo, e o lugar decide quanto ele vale.",
+        casasValor: {
+          numero: 847,
+          mostrarDecomposicao: true,
+          extenso: "oitocentos e quarenta e sete",
+        },
       },
       {
-        texto: "10 prédios formam a CIDADE INTEIRA = 1.000. É o limite deste ano!",
-        exemplo: "10 × 100 = 1.000",
+        texto:
+          "A leitura é sempre da esquerda pra direita: começa pela casa mais forte (Centena), depois Dezena, depois Unidade.",
+      },
+      {
+        texto:
+          "Quando aparece um ZERO no meio, ele SEGURA a casa vazia. Em 506 não é 'cinquenta e seis' — é 'quinhentos e seis'.",
+        casasValor: {
+          numero: 506,
+          mostrarDecomposicao: true,
+          extenso: "quinhentos e seis",
+        },
+      },
+      {
+        texto:
+          "Chegou a 1.000? Nasce uma casa nova: Milhar. É o primeiro número de 4 algarismos.",
+        casasValor: {
+          numero: 1000,
+          mostrarDecomposicao: true,
+          extenso: "mil",
+        },
       },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Brilha vai contar 234 maçãs pensando alto:",
-    passos: [
-      "Primeiro, junto de 100 em 100: 100... 200. São 2 PRÉDIOS.",
-      "Sobram maçãs? Sim. Agora junto de 10 em 10: 210, 220, 230. São 3 RUAS.",
-      "Ainda sobram maçãs soltas: 231, 232, 233, 234. São 4 MORADORES.",
-      "Total: 2 prédios (200) + 3 ruas (30) + 4 moradores (4) = 234.",
-      "Contei 234 sem me perder! 🏙️",
-    ],
-    resposta: "234 maçãs",
-    colecaoVisual: {
-      imagemUrl: maca,
-      grupos: [100, 100, 10, 10, 10, 4],
-      itemPlural: "maçãs",
+    enunciado:
+      "A Prefeita pediu: 'Some as pessoas do bairro Leste (325) com as do Oeste (243). Quantos habitantes ao todo?' — Brilha resolve com o algoritmo, explicando cada passo.",
+    resposta: "568 habitantes",
+    casasValor: {
+      numero: 568,
+      mostrarDecomposicao: true,
+      extenso: "quinhentos e sessenta e oito",
     },
+    passos: [
+      "1º Armar a conta: alinhar unidade com unidade, dezena com dezena, centena com centena.",
+      "2º Começar pela DIREITA (unidades): 5 + 3 = 8. Escrevo 8 nas unidades.",
+      "3º Ir pra dezenas: 2 + 4 = 6. Escrevo 6 nas dezenas.",
+      "4º Ir pra centenas: 3 + 2 = 5. Escrevo 5 nas centenas.",
+      "Total: 568 habitantes. Verificando de cabeça: 300+200=500 e 25+43=68. 500+68 = 568. ✅",
+    ],
   },
 
   momento06_praticaGuiada: {
-    enunciado: "Agora juntos! A Prefeita tem 3 prédios e 2 ruas de bananas.",
-    dica: "Prédio = 100. Rua = 10. Some: 100+100+100 e depois 10+10.",
+    enunciado:
+      "Agora juntos! O bairro Norte tem 412 pessoas e o Sul tem 235. Vamos somar passo a passo.",
+    dica:
+      "Sempre começamos pelas UNIDADES (coluna da direita). Depois dezenas. Por último centenas.",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢 Prédio" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢 Prédio" },
-        { imagemUrl: banana, quantidade: 100, rotulo: "🏢 Prédio" },
-        { imagemUrl: banana, quantidade: 10, rotulo: "📦 Rua" },
-        { imagemUrl: banana, quantidade: 10, rotulo: "📦 Rua" },
+      tipo: "contaPassoAPasso",
+      operacao: "soma",
+      operandos: [412, 235],
+      resultado: 647,
+      modo: "explicacao",
+      metodologia: "skemp",
+      passos: [
+        {
+          coluna: "U",
+          fala: "Unidades: 2 + 5 = 7. Escrevo 7 na coluna das unidades.",
+          digito: 7,
+          porque: "Somamos primeiro as unidades porque, se der 10 ou mais, sobra 1 pra dezena.",
+        },
+        {
+          coluna: "D",
+          fala: "Dezenas: 1 + 3 = 4. Escrevo 4 na coluna das dezenas.",
+          digito: 4,
+          porque: "Cada dezena vale 10. 1 dezena + 3 dezenas = 4 dezenas = 40.",
+        },
+        {
+          coluna: "C",
+          fala: "Centenas: 4 + 2 = 6. Escrevo 6 na coluna das centenas.",
+          digito: 6,
+          porque: "Cada centena vale 100. 4 centenas + 2 centenas = 6 centenas = 600.",
+        },
       ],
-      pergunta: "Quantas bananas ao todo?",
-      opcoes: ["302", "320", "230"],
-      correta: 1,
-      feedbackAcerto: "🎉 Isso! 3 prédios = 300, 2 ruas = 20 → 300 + 20 = 320.",
-      feedbackErro: "Prédios primeiro (300), depois ruas (20): 300 + 20 = 320.",
     },
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Sua vez, sem dica! Conte estas maçãs:",
+    enunciado:
+      "Sua vez, sozinho(a). O Censo do bairro Central deu 523 pessoas e o Rural, 264. Some.",
     interacao: {
-      tipo: "contarQuiz",
-      grupos: [
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢" },
-        { imagemUrl: maca, quantidade: 100, rotulo: "🏢" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦" },
-        { imagemUrl: maca, quantidade: 10, rotulo: "📦" },
-        { imagemUrl: maca, quantidade: 5, rotulo: "🍎" },
+      tipo: "contaPassoAPasso",
+      operacao: "soma",
+      operandos: [523, 264],
+      resultado: 787,
+      modo: "pratica",
+      perguntaFinal: "Quanto deu o total do Central + Rural?",
+      opcoes: [787, 877, 697],
+      feedbackAcerto:
+        "🎯 Perfeito! 3+4=7 (unidades) · 2+6=8 (dezenas) · 5+2=7 (centenas). Total: 787 habitantes.",
+      feedbackErro:
+        "Refaça pelas unidades: 3+4=7, 2+6=8, 5+2=7 → 787. É importante começar da direita.",
+      passos: [
+        {
+          coluna: "U",
+          fala: "Unidades: 3 + 4 = 7.",
+          digito: 7,
+        },
+        {
+          coluna: "D",
+          fala: "Dezenas: 2 + 6 = 8.",
+          digito: 8,
+        },
+        {
+          coluna: "C",
+          fala: "Centenas: 5 + 2 = 7.",
+          digito: 7,
+        },
       ],
-      pergunta: "Qual é o número?",
-      opcoes: ["245", "254", "425"],
-      correta: 0,
-      feedbackAcerto: "Boa! 2 prédios (200) + 4 ruas (40) + 5 soltas = 245.",
-      feedbackErro: "200 + 40 + 5 = 245. Prédios viram centena, ruas dezena, soltas unidade.",
     },
   },
 
   momento08_aplicacao: {
     contexto:
-      "A Prefeita pediu 500 maçãs pra feira da Cidade. Você tem que MONTAR isso rápido.",
-    problema: "Qual é o jeito mais SEGURO de separar 500 maçãs?",
+      "A Prefeita precisa mandar imprimir crachás. Ela pergunta: 'Quantos habitantes tem a Cidade se juntarmos Leste (325) + Oeste (243) + Norte (412) + Sul (235) + Central (523) + Rural (264)?' Antes de calcular tudo, ela quer saber qual é o número CERTO de 3 algarismos que representa quinhentos e seis.",
+    problema: "Qual dessas fichas está com 'quinhentos e seis' escrito CORRETAMENTE?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Escolha:",
+      pergunta: "Escolha a ficha certa:",
       opcoes: [
-        { nome: "Contar 1 por 1 até 500", imagemUrl: coruja },
-        { nome: "Montar 5 prédios de 100", imagemUrl: maca },
-        { nome: "Montar 50 ruas de 10", imagemUrl: banana },
+        { nome: "506", imagemUrl: "" },
+        { nome: "560", imagemUrl: "" },
+        { nome: "56", imagemUrl: "" },
+        { nome: "5006", imagemUrl: "" },
       ],
-      respostaCerta: "Montar 5 prédios de 100",
+      respostaCerta: "506",
       feedbackAcerto:
-        "🎯 Isso! 5 prédios × 100 = 500. Rápido e sem se perder. Matemático da Cidade!",
+        "🎯 Isso! O zero SEGURA a casa das dezenas vazia. Sem esse zero, o 5 escorregaria pra dezena e mudaria o valor.",
       feedbackErro:
-        "1 por 1 cansa. 50 ruas dão certo, mas é muita coisa. 5 prédios de 100 é o melhor caminho.",
+        "Cuidado com o zero do meio. 'Quinhentos e seis' precisa de 3 casas: 5 (centena), 0 (dezena, vazia) e 6 (unidade) → 506.",
     },
   },
 
   momento09_revisao: {
     pontos: [
-      "Na CIDADE, contamos em 3 tamanhos: unidade (morador), dezena (rua) e CENTENA (prédio).",
-      "10 unidades = 1 dezena · 10 dezenas = 1 centena · 10 centenas = 1.000.",
-      "Pra contar rápido: agrupe de 100 em 100 primeiro, depois de 10 em 10.",
-      "🎮 Vamos treinar: Colheita da Cidade!",
+      "Todo número até 999 tem 3 casas: Centena · Dezena · Unidade.",
+      "A posição decide o valor: o 5 em 573 vale 500; em 375 vale só 5.",
+      "Zero no meio SEGURA a casa vazia (506 ≠ 56).",
+      "Somar números de 3 algarismos: sempre pelas UNIDADES primeiro.",
+      "Do 1.000 em diante começa uma casa nova: o MILHAR.",
     ],
-    miniDesafio: {
-      tipo: "minijogoColheita",
-      imagemUrl: maca,
-      itemPlural: "maçãs",
-      alvoInicial: 100,
-      chegaramMais: 30,
-      duracaoSeg: 90,
-      feedbackAcerto: "🎉 1 prédio (100) + 3 ruas (30) = 130 maçãs!",
-      feedbackErro: "Tinha 100 e chegaram 30 → 130. Tenta de novo!",
-    },
   },
 
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "Quantas maçãs há em 4 prédios cheios?",
-        opcoes: ["40", "400", "4.000"],
+        pergunta: "No número 749, quanto vale o algarismo 4?",
+        opcoes: ["4", "40", "400"],
         correta: 1,
-        feedbackAcerto: "🎉 Cada prédio = 100. 4 × 100 = 400.",
-        feedbackErro: "1 prédio = 100. 4 prédios = 4 × 100 = 400.",
+        feedbackAcerto:
+          "🎉 Certo! O 4 está na casa das DEZENAS. Cada dezena vale 10 → 4 × 10 = 40.",
+        feedbackErro:
+          "O 4 está na casa do MEIO (dezena). Dezena vale 10, então 4 dezenas = 40. Se estivesse à esquerda (centena), valeria 400.",
       },
       {
-        pergunta: "3 prédios + 5 ruas + 2 soltas = ?",
-        opcoes: ["352", "325", "532"],
-        correta: 0,
-        feedbackAcerto: "Perfeito! 300 + 50 + 2 = 352.",
-        feedbackErro: "Centena vem primeiro (3), depois dezena (5), depois unidade (2): 352.",
+        pergunta: "Como se escreve 'oitocentos e nove'?",
+        opcoes: ["89", "809", "890"],
+        correta: 1,
+        feedbackAcerto:
+          "🎉 Perfeito! Oitocentos = 8 na centena. E nove unidades. A dezena está vazia → coloca 0 pra segurar: 809.",
+        feedbackErro:
+          "Oitocentos precisa de 3 casas. Como não há dezenas, colocamos 0 na dezena pra segurar a posição: 809.",
       },
       {
-        pergunta: "Quantos prédios cabem em 1.000?",
-        opcoes: ["10", "100", "1.000"],
+        pergunta: "Somando 234 + 152, qual é o resultado?",
+        opcoes: ["386", "376", "486"],
         correta: 0,
-        feedbackAcerto: "Isso! 10 prédios × 100 = 1.000. A cidade inteira!",
-        feedbackErro: "Cada prédio tem 100. 10 prédios × 100 = 1.000.",
+        feedbackAcerto:
+          "🎉 Excelente! 4+2=6 · 3+5=8 · 2+1=3 → 386. Você somou pela direita, do jeito certo.",
+        feedbackErro:
+          "Refaça pelas unidades: 4+2=6, depois 3+5=8, depois 2+1=3 → 386.",
       },
     ],
   },
 
   momento11_missaoFamilia: {
-    titulo: "A Cidade em Casa",
+    titulo: "Caçada aos Números de 3 Algarismos",
     materiais: [
-      "Feijões, botões, tampinhas ou grãos (uns 200)",
-      "Copinhos ou potes pequenos",
-      "Papel e lápis",
+      "Caderno ou folha",
+      "Lápis",
+      "Uma revista, embalagem ou livro à mão",
     ],
     passos: [
-      "Junte 100 objetos em um POTE GRANDE (esse é 1 PRÉDIO).",
-      "Separe grupos de 10 em copinhos (cada copinho = 1 RUA).",
-      "Deixe alguns soltos (MORADORES).",
-      "Peça a alguém pra montar um número: 'Faz 132!' e você monta com prédios, ruas e soltas.",
-      "Depois inverta: você fala o número, o adulto monta.",
+      "Ande pela casa procurando 5 números de 3 algarismos: placa de carro, preço, número da página, código de barras, contador de aparelho.",
+      "Anote cada número no caderno.",
+      "Ao lado de cada um, escreva por extenso (ex.: 347 = 'trezentos e quarenta e sete').",
+      "Marque em qual casa mora o maior dígito de cada número (C, D ou U).",
+      "Peça a alguém da família pra somar 2 dos números que você achou, no papel, passo a passo.",
     ],
-    registro: "📸 Foto do 'seu 132' montado com potes e copinhos.",
+    registro: "📸 Uma foto do caderno com os 5 números anotados e a soma final.",
   },
+
   recompensa: {
     xp: 120,
     moedas: 60,
-    medalha: "Explorador(a) da Cidade dos Números",
+    medalha: "Cartógrafo(a) da Cidade dos Números",
   },
 };
