@@ -9,6 +9,8 @@ type Props = {
   resultado?: number;
   itemPlural?: string;
   operacao?: "soma" | "subtracao";
+  /** Dispara "Resolver" automaticamente ao montar (usado quando a criança erra o quiz). */
+  autoIniciar?: boolean;
 };
 
 const NOME: Record<number, string> = {
