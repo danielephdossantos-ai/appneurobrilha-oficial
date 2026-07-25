@@ -93,7 +93,7 @@ export type Interacao =
        *  - "pratica": no fim, pergunta o resultado.
        */
       tipo: "contaPassoAPasso";
-      operacao: "soma" | "sub" | "mult";
+      operacao: "soma" | "sub" | "mult" | "div";
       /** 2+ operandos (ex.: [234, 187]). */
       operandos: number[];
       /** Ordem: unidades → dezenas → centenas → milhar. */
@@ -208,7 +208,7 @@ export type MomentoExplicacao = {
         extenso?: string;
       };
       contaPassoAPasso?: {
-        operacao: "soma" | "sub" | "mult";
+        operacao: "soma" | "sub" | "mult" | "div";
         operandos: number[];
         resultado: number;
         passos: Array<{

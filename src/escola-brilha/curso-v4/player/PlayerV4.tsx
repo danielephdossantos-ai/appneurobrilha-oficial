@@ -1302,7 +1302,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   const COL_ORDEM: Array<"UM" | "C" | "D" | "U"> = ["UM", "C", "D", "U"];
   const colunas = COL_ORDEM.slice(4 - numCols);
 
-  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : "×";
+  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : i.operacao === "div" ? "÷" : "×";
 
   function digitoDe(n: number, coluna: "UM" | "C" | "D" | "U") {
     const s = String(Math.abs(n)).padStart(4, "0");
