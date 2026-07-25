@@ -41,7 +41,7 @@ export type Interacao =
   | {
       tipo: "escolhaVisual";
       pergunta: string;
-      opcoes: Array<{ nome: string; imagemUrl: string }>;
+      opcoes: Array<{ nome: string; imagemUrl?: string }>;
       respostaCerta: string;
       feedbackAcerto: string;
       feedbackErro: string;
@@ -79,6 +79,44 @@ export type Interacao =
       duracaoSeg?: number;   // padrão 90
       feedbackAcerto: string;
       feedbackErro: string;
+    }
+  | {
+      /**
+       * Conta escrita passo a passo (algoritmo tradicional). Usado do
+       * 3º ano ao Ensino Médio. Substitui a contagem infantil (frutas).
+       * Renderiza operação vertical com colunas alinhadas e revela cada
+       * dígito conforme o aluno avança "Próximo passo".
+       *
+       * Modos:
+       *  - "explicacao": Brilha resolve, aluno só acompanha e ouve o
+       *    porquê de cada passo (Skemp relacional).
+       *  - "pratica": no fim, pergunta o resultado.
+       */
+      tipo: "contaPassoAPasso";
+      operacao: "soma" | "sub" | "mult";
+      /** 2+ operandos (ex.: [234, 187]). */
+      operandos: number[];
+      /** Ordem: unidades → dezenas → centenas → milhar. */
+      passos: Array<{
+        coluna: "U" | "D" | "C" | "UM";
+        /** Fala do Brilha (ex.: "Somo 4 + 7 = 11. Escrevo 1, sobe 1."). */
+        fala: string;
+        /** Dígito escrito no resultado nesta coluna. */
+        digito: number;
+        /** "Vai 1" — dígito transportado pra próxima coluna. */
+        vaiUm?: number;
+        /** Justificativa relacional (por que funciona). Opcional. */
+        porque?: string;
+      }>;
+      resultado: number;
+      modo?: "explicacao" | "pratica";
+      perguntaFinal?: string;
+      /** Alternativas do modo prática. Se omitido, gera 3 opções. */
+      opcoes?: number[];
+      feedbackAcerto?: string;
+      feedbackErro?: string;
+      /** Chave da metodologia dominante (aparece no rodapé do bloco). */
+      metodologia?: string;
     };
 
 // ---------- Os 11 momentos pedagógicos (contrato v4.1) ---------------
@@ -140,6 +178,20 @@ export type MomentoExplicacao = {
       /** "soma" (padrão) ou "subtracao". */
       operacao?: "soma" | "subtracao";
     };
+    /**
+     * Quadro de valor posicional escrito (C-D-U, ou U/M/C/D/U…) —
+     * usado do 3º ano em diante para revelar o significado de cada
+     * algarismo. Substitui a "cesta de frutas" da série anterior.
+     */
+    casasValor?: {
+      numero: number;              // 847 → renderiza 3 casas: 8|4|7
+      /** Rótulos das casas. Padrão: {c:"Centena", d:"Dezena", u:"Unidade"}. */
+      rotulos?: { um?: string; c?: string; d?: string; u?: string };
+      /** Mostra decomposição escrita (800 + 40 + 7). Padrão: true. */
+      mostrarDecomposicao?: boolean;
+      /** Extenso (ex.: "oitocentos e quarenta e sete"). */
+      extenso?: string;
+    };
   }>;
 };
 
@@ -158,6 +210,17 @@ export type MomentoModelagem = {
     imagemUrl: string;
     grupos: number[];
     itemPlural?: string;
+  };
+  /**
+   * Quadro de valor posicional escrito no momento da modelagem
+   * (3º ano em diante). Não usa frutas — o número escrito é o objeto
+   * matemático em si.
+   */
+  casasValor?: {
+    numero: number;
+    rotulos?: { um?: string; c?: string; d?: string; u?: string };
+    mostrarDecomposicao?: boolean;
+    extenso?: string;
   };
 };
 
@@ -252,6 +315,15 @@ export type AulaV4 = {
     moedas: number;
     medalha?: string;
   };
+
+  /**
+   * Chaves de metodologias científicas de ensino de matemática
+   * aplicadas nesta aula (renderizadas no rodapé como "Base científica").
+   * Chaves válidas em src/escola-brilha/curso-v4/metodologias-mat.ts.
+   * Ex.: ["cpa", "kamii", "skemp", "vergnaud"].
+   * Opcional — Ed. Infantil/1º/2º ano seguem sem este campo.
+   */
+  metodologias?: string[];
 };
 
 export type Unidade = {

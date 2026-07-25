@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import type { AulaV4, Interacao } from "../types";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
@@ -6,6 +6,7 @@ import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
+import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
@@ -99,6 +100,8 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           <Secao id="m9" label="🔁 Revisão"><Revisao m={aula.momento09_revisao} /></Secao>
           <Secao id="m10" label="✅ O que aprendeu"><Avaliacao m={aula.momento10_avaliacao} /></Secao>
           <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} /></Secao>
+
+          <RodapeMetodologias chaves={aula.metodologias} />
 
           <div className="pt-6 flex flex-col items-center gap-3">
             <button
@@ -257,7 +260,8 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
                 <FrutasParaNumero {...e.frutasParaNumero} />
               )}
               {e.contaArmada && <ContaArmada {...e.contaArmada} />}
-              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && e.imagemUrl && (
+              {e.casasValor && <CasasValor {...e.casasValor} />}
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && e.imagemUrl && (
                 <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
               )}
             </div>
@@ -326,7 +330,9 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         </div>
       )}
 
-      {!m.colecaoVisual && m.visualUrl && (
+      {m.casasValor && <CasasValor {...m.casasValor} />}
+
+      {!m.colecaoVisual && !m.casasValor && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
       )}
 
@@ -567,6 +573,7 @@ function InteracaoView({ i }: { i: Interacao }) {
   if (i.tipo === "escolhaVisual") return <EscolhaVisual i={i} />;
   if (i.tipo === "operacaoVisual") return <OperacaoVisual i={i} />;
   if (i.tipo === "minijogoColheita") return <MinijogoColheita {...i} />;
+  if (i.tipo === "contaPassoAPasso") return <ContaPassoAPasso i={i} />;
   return (
     <div className="bg-white/5 rounded-xl p-4 mt-3 text-xs text-white/50">
       Interação "{i.tipo}" ainda sem renderer.
@@ -830,10 +837,18 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
                       : "bg-white/5 opacity-50"
               }`}
             >
-              <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
-              <span className="text-xs font-medium text-center leading-tight">
-                {op.nome}
-              </span>
+              {op.imagemUrl ? (
+                <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+              ) : (
+                <div className="w-full py-3 grid place-items-center font-black text-3xl md:text-4xl tabular-nums">
+                  {op.nome}
+                </div>
+              )}
+              {op.imagemUrl && (
+                <span className="text-xs font-medium text-center leading-tight">
+                  {op.nome}
+                </span>
+              )}
             </button>
           );
         })}
@@ -1108,3 +1123,313 @@ function ContaArmadaEmpilhada({
     </div>
   );
 }
+
+// =====================================================================
+// Casas de valor posicional (3º ano em diante) — SEM frutas.
+// =====================================================================
+
+const NUM_EXTENSO: Record<number, string> = {
+  0: "zero", 1: "um", 2: "dois", 3: "três", 4: "quatro", 5: "cinco",
+  6: "seis", 7: "sete", 8: "oito", 9: "nove",
+};
+
+function CasasValor({
+  numero,
+  rotulos,
+  mostrarDecomposicao = true,
+  extenso,
+}: {
+  numero: number;
+  rotulos?: { um?: string; c?: string; d?: string; u?: string };
+  mostrarDecomposicao?: boolean;
+  extenso?: string;
+}) {
+  const digitos = String(Math.abs(Math.trunc(numero))).padStart(4, "0").split("").map(Number);
+  const [dUM, dC, dD, dU] = digitos;
+  const casas: Array<{ chave: "um" | "c" | "d" | "u"; rot: string; peso: number; digito: number; cor: string }> = [
+    { chave: "um", rot: rotulos?.um ?? "Milhar",  peso: 1000, digito: dUM, cor: "#f472b6" },
+    { chave: "c",  rot: rotulos?.c  ?? "Centena", peso: 100,  digito: dC,  cor: "#fb923c" },
+    { chave: "d",  rot: rotulos?.d  ?? "Dezena",  peso: 10,   digito: dD,  cor: "#22d3ee" },
+    { chave: "u",  rot: rotulos?.u  ?? "Unidade", peso: 1,    digito: dU,  cor: "#34d399" },
+  ];
+  const casasVis = numero >= 1000 ? casas : casas.slice(1);
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2">
+        Valor posicional
+      </div>
+      <div className="flex justify-center gap-2 md:gap-4">
+        {casasVis.map((c) => (
+          <div key={c.chave} className="flex flex-col items-center">
+            <div
+              className="text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-t-md text-white"
+              style={{ background: c.cor }}
+            >
+              {c.rot}
+            </div>
+            <div
+              className="w-16 h-20 md:w-20 md:h-24 grid place-items-center border-4 rounded-b-lg font-black text-4xl md:text-5xl"
+              style={{ borderColor: c.cor, color: c.cor }}
+            >
+              {c.digito}
+            </div>
+            <div className="text-[11px] font-bold mt-1 text-[#0d1f55]/70">
+              vale {c.digito * c.peso}
+            </div>
+          </div>
+        ))}
+      </div>
+      {mostrarDecomposicao && (
+        <div className="text-center mt-4 font-black text-lg md:text-xl">
+          {casasVis
+            .filter((c) => c.digito > 0)
+            .map((c) => c.digito * c.peso)
+            .join(" + ") || "0"}{" "}
+          = <span className="text-amber-600">{numero}</span>
+        </div>
+      )}
+      {extenso && (
+        <div className="text-center text-sm mt-1 text-[#0d1f55]/80 italic">
+          "{extenso}"
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =====================================================================
+// Conta escrita passo a passo — ALGORITMO REAL.
+// Do 3º ano ao Ensino Médio. Substitui a contagem infantil.
+// =====================================================================
+
+function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  const [passoAtual, setPassoAtual] = useState(-1); // -1 = ainda não começou
+  const [resposta, setResposta] = useState<number | null>(null);
+  const [confirmado, setConfirmado] = useState(false);
+
+  const totalPassos = i.passos.length;
+  const terminou = passoAtual >= totalPassos - 1;
+  const modo = i.modo ?? "explicacao";
+
+  // Determina colunas visíveis (U, D, C, UM se algum operando ≥ 1000)
+  const maxNum = Math.max(...i.operandos, i.resultado);
+  const numCols = maxNum >= 1000 ? 4 : maxNum >= 100 ? 3 : 2;
+  const COL_ORDEM: Array<"UM" | "C" | "D" | "U"> = ["UM", "C", "D", "U"];
+  const colunas = COL_ORDEM.slice(4 - numCols);
+
+  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : "×";
+
+  function digitoDe(n: number, coluna: "UM" | "C" | "D" | "U") {
+    const s = String(Math.abs(n)).padStart(4, "0");
+    return { UM: s[0], C: s[1], D: s[2], U: s[3] }[coluna];
+  }
+
+  // Passos revelados até agora — mapa coluna → dígito do resultado
+  const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
+  i.passos.slice(0, passoAtual + 1).forEach((p) => {
+    digitosResultado[p.coluna] = { digito: p.digito, vaiUm: p.vaiUm };
+  });
+
+  // Opções para modo prática
+  const opcoes = i.opcoes ?? [
+    i.resultado,
+    i.resultado + 10,
+    i.resultado - 10,
+  ].filter((n) => n >= 0);
+
+  function reset() {
+    setPassoAtual(-1);
+    setResposta(null);
+    setConfirmado(false);
+  }
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3">
+        Conta escrita · passo a passo
+      </div>
+
+      {/* Grelha da conta armada */}
+      <div className="flex justify-center">
+        <div
+          className="grid gap-x-2 md:gap-x-4 gap-y-1 font-mono font-black text-3xl md:text-5xl"
+          style={{ gridTemplateColumns: `2rem repeat(${numCols}, minmax(2.5rem, 3.5rem))` }}
+        >
+          {/* Linha de "vai 1" */}
+          <div />
+          {colunas.map((c) => {
+            const v = digitosResultado[c]?.vaiUm;
+            return (
+              <div key={"v-" + c} className="text-center text-sm md:text-base text-rose-500">
+                {v ? v : ""}
+              </div>
+            );
+          })}
+
+          {/* Operandos */}
+          {i.operandos.map((op, opIdx) => (
+            <Fragment key={"opRow-" + opIdx}>
+              <div className="text-right pr-1 text-[#0d1f55]/60">
+                {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
+              </div>
+              {colunas.map((c) => (
+                <div key={`op-${opIdx}-${c}`} className="text-center">
+                  {digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
+                    ? ""
+                    : digitoDe(op, c)}
+                </div>
+              ))}
+            </Fragment>
+          ))}
+
+          {/* Linha do resultado */}
+          <div />
+          {colunas.map((c) => (
+            <div key={"line-" + c} className="border-t-4 border-[#0d1f55] h-2" />
+          ))}
+          <div />
+          {colunas.map((c) => {
+            const d = digitosResultado[c];
+            return (
+              <div key={"r-" + c} className="text-center text-emerald-600">
+                {d != null ? d.digito : passoAtual >= 0 ? "·" : "?"}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Narração do passo atual */}
+      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+        {passoAtual < 0 && (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span>{" "}
+            Vamos armar a conta. Alinhamos unidade com unidade, dezena com dezena. Toque em "Próximo passo" quando quiser começar.
+          </div>
+        )}
+        {passoAtual >= 0 && (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">
+              Passo {passoAtual + 1}/{totalPassos}:
+            </span>{" "}
+            {i.passos[passoAtual].fala}
+            {i.passos[passoAtual].porque && (
+              <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
+                Por quê? {i.passos[passoAtual].porque}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Botão avançar */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!terminou && (
+          <button
+            onClick={() => setPassoAtual((p) => Math.min(p + 1, totalPassos - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {passoAtual < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        )}
+        {terminou && modo === "explicacao" && (
+          <div className="text-lg font-black text-emerald-700">
+            ✅ Resultado: {i.resultado}
+          </div>
+        )}
+        {terminou && !confirmado && (
+          <button
+            onClick={reset}
+            className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline"
+          >
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+
+      {/* Modo prática: pergunta final */}
+      {terminou && modo === "pratica" && (
+        <div className="mt-4 border-t border-[#0d1f55]/10 pt-4">
+          <div className="text-sm font-bold mb-2">
+            {i.perguntaFinal ?? "Qual é o resultado?"}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {opcoes.map((n) => (
+              <button
+                key={n}
+                onClick={() => {
+                  setResposta(n);
+                  setConfirmado(true);
+                }}
+                disabled={confirmado}
+                className={`px-4 py-2 rounded-lg font-black border-2 ${
+                  confirmado
+                    ? n === i.resultado
+                      ? "bg-emerald-500 text-white border-emerald-600"
+                      : n === resposta
+                      ? "bg-rose-500 text-white border-rose-600"
+                      : "bg-white/60 text-[#0d1f55]/40 border-[#0d1f55]/10"
+                    : "bg-white text-[#0d1f55] border-[#0d1f55]/20 hover:border-amber-400"
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          {confirmado && (
+            <div
+              className={`mt-3 p-3 rounded-lg text-sm ${
+                resposta === i.resultado ? "bg-emerald-50 text-emerald-800" : "bg-rose-50 text-rose-800"
+              }`}
+            >
+              {resposta === i.resultado
+                ? i.feedbackAcerto ?? "🎉 Perfeito! O algoritmo levou você direto ao resultado."
+                : i.feedbackErro ?? `Não foi dessa vez. O resultado é ${i.resultado}. Refaça os passos com calma.`}
+            </div>
+          )}
+        </div>
+      )}
+
+      {i.metodologia && metodologia(i.metodologia) && (
+        <div className="mt-4 text-[10px] uppercase tracking-widest font-bold text-[#0d1f55]/50">
+          Base: {metodologia(i.metodologia)!.nome}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =====================================================================
+// Rodapé "Base científica" — metodologias declaradas pela aula.
+// =====================================================================
+
+export function RodapeMetodologias({ chaves }: { chaves?: string[] }) {
+  if (!chaves?.length) return null;
+  const items = chaves.map((k) => METODOLOGIAS_MAT[k]).filter(Boolean);
+  if (!items.length) return null;
+
+  return (
+    <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-4 md:p-6">
+      <div className="text-[10px] uppercase tracking-widest font-black text-amber-300 mb-3">
+        📚 Base científica desta aula
+      </div>
+      <div className="grid md:grid-cols-2 gap-3">
+        {items.map((m, i) => (
+          <div
+            key={i}
+            className="rounded-xl bg-white/5 border-l-4 p-3"
+            style={{ borderColor: m.cor }}
+          >
+            <div className="font-black text-sm" style={{ color: m.cor }}>
+              {m.nome}
+            </div>
+            <div className="text-xs text-white/70 mt-1">{m.descricao}</div>
+            <div className="text-[10px] text-white/40 mt-1 italic">{m.autores}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
