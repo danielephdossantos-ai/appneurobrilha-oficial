@@ -35,11 +35,16 @@ export const aula03_divisao: AulaV4 = {
         texto: "Pegue o menor bloco onde o divisor CABE. Divida, escreva no quociente, multiplique e subtraia.",
         exemploReal: {
           contexto: "720 ÷ 12",
-          visualMat: {
-            tipo: "contaPassoAPasso",
+          contaPassoAPasso: {
             operacao: "div",
             operandos: [720, 12],
             resultado: 60,
+            passos: [
+              { fala: "12 cabe em 72? Sim, 6 vezes (12 × 6 = 72)." },
+              { fala: "Escrevo 6 no quociente. 72 − 72 = 0." },
+              { fala: "Desce o 0. 0 ÷ 12 = 0 — escrevo 0 no quociente." },
+              { fala: "Quociente: 60. Resto: 0." },
+            ],
           },
           destaque: "12 cabe 6 vezes em 72 · 6 × 12 = 72 · resto 0 · desce 0 · 0 ÷ 12 = 0.",
         },
@@ -48,11 +53,16 @@ export const aula03_divisao: AulaV4 = {
         texto: "Divisão com resto: se o resto NÃO é zero, escrevemos como 'sobrou tanto'.",
         exemploReal: {
           contexto: "857 ÷ 15",
-          visualMat: {
-            tipo: "contaPassoAPasso",
+          contaPassoAPasso: {
             operacao: "div",
             operandos: [857, 15],
             resultado: 57,
+            passos: [
+              { fala: "15 cabe em 85? 15 × 5 = 75. Cabe 5 vezes." },
+              { fala: "85 − 75 = 10. Desce o 7 → 107." },
+              { fala: "15 cabe em 107? 15 × 7 = 105. Cabe 7 vezes." },
+              { fala: "107 − 105 = 2. Fim. Quociente 57, resto 2." },
+            ],
           },
           destaque: "Quociente 57, resto 2. Prova: 57 × 15 + 2 = 857.",
         },
@@ -80,6 +90,12 @@ export const aula03_divisao: AulaV4 = {
       operacao: "div",
       operandos: [480, 16],
       resultado: 30,
+      passos: [
+        { fala: "16 cabe em 48? 16 × 3 = 48. Cabe 3 vezes." },
+        { fala: "48 − 48 = 0. Desce o 0." },
+        { fala: "0 ÷ 16 = 0." },
+        { fala: "Quociente: 30, resto 0." },
+      ],
     },
     passos: [
       "16 cabe em 48? 16 × 3 = 48 → 3.",

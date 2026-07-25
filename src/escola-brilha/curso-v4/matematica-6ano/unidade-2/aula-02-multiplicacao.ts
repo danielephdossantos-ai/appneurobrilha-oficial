@@ -35,15 +35,14 @@ export const aula02_multiplicacao: AulaV4 = {
         texto: "Multiplique 245 pela UNIDADE (2) do multiplicador.",
         exemploReal: {
           contexto: "245 × 2",
-          visualMat: {
-            tipo: "contaPassoAPasso",
-            operacao: "soma",
-            operandos: [245, 245],
+          contaPassoAPasso: {
+            operacao: "mult",
+            operandos: [245, 2],
             resultado: 490,
             passos: [
-              { casa: "U", texto: "2 × 5 = 10 → escreve 0, vai 1" },
-              { casa: "D", texto: "2 × 4 + 1 = 9" },
-              { casa: "C", texto: "2 × 2 = 4" },
+              { coluna: "U", fala: "2 × 5 = 10 → escreve 0, vai 1", digito: 0, vaiUm: 1 },
+              { coluna: "D", fala: "2 × 4 + 1 = 9", digito: 9 },
+              { coluna: "C", fala: "2 × 2 = 4", digito: 4 },
             ],
           },
           destaque: "245 × 2 = 490.",
@@ -80,9 +79,14 @@ export const aula02_multiplicacao: AulaV4 = {
     enunciado: "Uma escola tem 18 turmas com 32 alunos cada. Total?",
     resposta: "576 alunos",
     contaPassoAPasso: {
-      operacao: "soma",
-      operandos: [576],
+      operacao: "mult",
+      operandos: [32, 18],
       resultado: 576,
+      passos: [
+        { coluna: "U", fala: "8 × 2 = 16 → 6, vai 1", digito: 6, vaiUm: 1 },
+        { coluna: "D", fala: "8 × 3 + 1 = 25 → forma linha 256", digito: 5, vaiUm: 2 },
+        { coluna: "UM", fala: "linha 320 (32 × 1 deslocado); somando: 576" },
+      ],
     },
     passos: ["32 × 8 = 256.", "32 × 10 = 320.", "256 + 320 = 576."],
   },
