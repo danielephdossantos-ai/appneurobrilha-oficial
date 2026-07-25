@@ -44,6 +44,13 @@ export const aula04_trinomio: AulaV4 = {
     pista: "Olhe o desenho: o retângulo a·b aparece 2 vezes.",
     revelacao:
       "(a+b)² = a² + 2ab + b². Se o meio for negativo → (a−b)². É só geometria virando álgebra.",
+    visualMat: {
+      tipo: "trinomioQuadrado",
+      a: "a",
+      b: "b",
+      sinal: "+",
+      legenda: "As 4 áreas do quadrado (a+b): a², a·b, a·b, b²",
+    },
   },
 
   // -----------------------------------------------------------------

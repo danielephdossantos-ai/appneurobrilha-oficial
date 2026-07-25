@@ -226,7 +226,7 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
                 </div>
               </div>
             )}
-            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb" || c.tipo === "retaNumerica") && (
+            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb" || c.tipo === "retaNumerica" || c.tipo === "trinomioQuadrado" || c.tipo === "trinomioPassoAPasso" || c.tipo === "checklistTQP" || c.tipo === "dizimaGeratriz" || c.tipo === "somaFracoes" || c.tipo === "notacaoCientifica") && (
               <RenderVisualMat v={c as VisualMat} />
             )}
           </div>
@@ -243,6 +243,11 @@ function Descoberta({ m }: { m: AulaV4["momento03_descoberta"] }) {
     <Card>
       <div className="text-xl font-bold">{m.perguntaGuia}</div>
       <div className="text-white/70">💡 Pista: {m.pista}</div>
+      {m.visualMat && (
+        <div className="rounded-xl bg-white/5 p-3">
+          <RenderVisualMat v={m.visualMat} />
+        </div>
+      )}
       {!revelou ? (
         <button
           onClick={() => setRevelou(true)}
