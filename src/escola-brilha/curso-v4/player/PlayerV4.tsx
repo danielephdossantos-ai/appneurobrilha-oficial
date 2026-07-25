@@ -1749,17 +1749,21 @@ function TabuadaInterativa({
           ? `Tabuada do ${fator} — quantas vezes cabe em ${dividendo ?? "?"}`
           : `Tabuada do ${fator}`}
       </div>
-      <div className="flex flex-col gap-1 font-mono text-lg tabular-nums max-w-[16rem] mx-auto">
+      <div className="flex flex-col gap-1 font-mono text-lg tabular-nums max-w-[22rem] mx-auto">
         {Array.from({ length: ate }).map((_, k) => {
           const n = k + 1;
           const r = fator * n;
           const revelado = k < revelados;
           const eAlvo =
             revelado && targetN !== undefined && n === targetN;
+          const soma =
+            operacao === "mult" && revelado
+              ? Array.from({ length: n }).fill(fator).join("+")
+              : null;
           return (
             <div
               key={k}
-              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end items-center rounded px-2 py-0.5 ${
+              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch_auto] gap-1 justify-items-end items-center rounded px-2 py-0.5 ${
                 eAlvo ? "bg-amber-300 font-black" : ""
               }`}
             >
@@ -1769,6 +1773,12 @@ function TabuadaInterativa({
               <span>=</span>
               <span className={revelado ? "font-bold" : "text-[#0d1f55]/25"}>
                 {revelado ? r : "?"}
+              </span>
+              <span
+                className="text-[11px] font-bold text-red-600 justify-self-start pl-2"
+                data-no-tts="true"
+              >
+                {soma ? `${soma} = ${r}` : ""}
               </span>
             </div>
           );
