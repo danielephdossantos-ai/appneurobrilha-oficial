@@ -1359,17 +1359,19 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   // sem TTS repetitivo tipo "Unidades: 2 + 5 = 7".
   useEffect(() => () => stopSpeaking(), []);
 
-  // Determina colunas visíveis (U, D, C, UM se algum operando ≥ 1000)
+  // Determina colunas visíveis (U..CM conforme magnitude)
+  type Col = "CM" | "DM" | "UM" | "C" | "D" | "U";
   const maxNum = Math.max(...i.operandos, i.resultado);
-  const numCols = maxNum >= 1000 ? 4 : maxNum >= 100 ? 3 : 2;
-  const COL_ORDEM: Array<"UM" | "C" | "D" | "U"> = ["UM", "C", "D", "U"];
-  const colunas = COL_ORDEM.slice(4 - numCols);
+  const numCols =
+    maxNum >= 100000 ? 6 : maxNum >= 10000 ? 5 : maxNum >= 1000 ? 4 : maxNum >= 100 ? 3 : 2;
+  const COL_ORDEM: Array<Col> = ["CM", "DM", "UM", "C", "D", "U"];
+  const colunas = COL_ORDEM.slice(6 - numCols);
 
   const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : i.operacao === "div" ? "÷" : "×";
 
-  function digitoDe(n: number, coluna: "UM" | "C" | "D" | "U") {
-    const s = String(Math.abs(n)).padStart(4, "0");
-    return { UM: s[0], C: s[1], D: s[2], U: s[3] }[coluna];
+  function digitoDe(n: number, coluna: Col) {
+    const s = String(Math.abs(n)).padStart(6, "0");
+    return { CM: s[0], DM: s[1], UM: s[2], C: s[3], D: s[4], U: s[5] }[coluna];
   }
 
   // Marcações de empréstimo do professor: para subtração, deriva
@@ -1379,14 +1381,16 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   const emprestimo = useMemo(() => {
     if (i.operacao !== "sub" || i.operandos.length !== 2) return null;
     const [A, B] = i.operandos;
-    const cols: Array<"U" | "D" | "C" | "UM"> = ["U", "D", "C", "UM"];
-    const idx: Record<"U" | "D" | "C" | "UM", number> = { U: 0, D: 1, C: 2, UM: 3 };
+    const cols: Array<Col> = ["U", "D", "C", "UM", "DM", "CM"];
+    const idx: Record<Col, number> = { U: 0, D: 1, C: 2, UM: 3, DM: 4, CM: 5 };
     type Marca = { recebeu: boolean; deu: boolean; topoOriginal: number; topoDepois: number };
-    const marcas: Record<"U" | "D" | "C" | "UM", Marca> = {
+    const marcas: Record<Col, Marca> = {
       U: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
       D: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
       C: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
       UM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      DM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      CM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
     };
     let borrow = 0;
     for (const c of cols) {
@@ -1410,7 +1414,7 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
   // Um mark de empréstimo aparece assim que a criança avança pra coluna
   // que dispara o empréstimo (a coluna filha). Ex.: empréstimo de D→U
   // aparece quando o passo U (idx 0) já foi processado.
-  function mostrarEmprestimoDe(c: "U" | "D" | "C" | "UM") {
+  function mostrarEmprestimoDe(c: Col) {
     if (!emprestimo) return { recebeu: false, deu: false };
     const i2 = emprestimo.idx[c];
     return {

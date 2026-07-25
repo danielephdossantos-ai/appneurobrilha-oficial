@@ -103,7 +103,7 @@ export type Interacao =
       operandos: number[];
       /** Ordem: unidades → dezenas → centenas → milhar. */
       passos: Array<{
-        coluna: "U" | "D" | "C" | "UM";
+        coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
         /** Fala do Brilha (ex.: "Somo 4 + 7 = 11. Escrevo 1, sobe 1."). */
         fala: string;
         /** Dígito escrito no resultado nesta coluna. */
@@ -217,7 +217,7 @@ export type MomentoExplicacao = {
         operandos: number[];
         resultado: number;
         passos: Array<{
-          coluna: "U" | "D" | "C" | "UM";
+          coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
           fala: string;
           digito: number;
           vaiUm?: number;
@@ -244,7 +244,7 @@ export type MomentoModelagem = {
     operandos: number[];
     resultado: number;
     passos: Array<{
-      coluna: "U" | "D" | "C" | "UM";
+      coluna: "U" | "D" | "C" | "UM" | "DM" | "CM";
       fala: string;
       digito: number;
       vaiUm?: number;
