@@ -13,11 +13,21 @@ export const aula05_area: AulaV4 = {
     historia: "{NOME}, ÁREA mede o quanto uma figura COBRE. Em retângulos: base × altura.",
   },
   momento02_exploracao: {
-    instrucao: "Unidades.",
+    instrucao: "Unidades e figuras.",
     cenas: [
       { tipo: "texto", texto: "1 m² = 10.000 cm². Chão é m². Papel é cm².", destaque: true },
-      { tipo: "texto", texto: "Retângulo: A = base × altura." },
-      { tipo: "texto", texto: "Quadrado: A = lado × lado." },
+      {
+        tipo: "figuraPlana",
+        forma: "retangulo",
+        medidasLados: ["base", "altura", "base", "altura"],
+        legenda: "Retângulo: A = base × altura",
+      },
+      {
+        tipo: "figuraPlana",
+        forma: "quadrado",
+        medidasLados: ["lado", "lado", "lado", "lado"],
+        legenda: "Quadrado: A = lado × lado",
+      },
     ],
   },
   momento03_descoberta: {
@@ -28,14 +38,46 @@ export const aula05_area: AulaV4 = {
   momento04_explicacao: {
     titulo: "Exemplos",
     etapas: [
-      { texto: "Sala 4 m × 3 m → 12 m²." },
-      { texto: "Quadrado 6 cm → 6 × 6 = 36 cm²." },
+      {
+        texto: "Sala 4 m × 3 m — arme a multiplicação.",
+        exemploReal: {
+          contexto: "A = 4 × 3",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "retangulo",
+            medidasLados: ["4 m", "3 m", "4 m", "3 m"],
+            legenda: "Retângulo 4 m × 3 m",
+          },
+          destaque: "A = 4 × 3 = 12 m².",
+        },
+      },
+      {
+        texto: "Quadrado 6 cm de lado.",
+        exemploReal: {
+          contexto: "A = 6 × 6",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "quadrado",
+            medidasLados: ["6 cm", "6 cm", "6 cm", "6 cm"],
+          },
+          destaque: "A = 36 cm².",
+        },
+      },
       { texto: "Área composta: some as partes." },
     ],
   },
   momento05_modelagem: {
     enunciado: "Retângulo 8 m × 5 m.",
     resposta: "40 m²",
+    contaPassoAPasso: {
+      operacao: "mult",
+      operandos: [8, 5],
+      resultado: 40,
+      passos: [
+        { fala: "A = base × altura." },
+        { fala: "8 × 5 = 40. Resposta: 40 m²." },
+      ],
+    },
     passos: ["A = b × h.", "8 × 5 = 40."],
   },
   momento06_praticaGuiada: {

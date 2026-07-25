@@ -13,11 +13,19 @@ export const aula06_volume: AulaV4 = {
     historia: "{NOME}, volume mede o espaço DENTRO de um sólido. Num paralelepípedo: V = comprimento × largura × altura.",
   },
   momento02_exploracao: {
-    instrucao: "Unidades.",
+    instrucao: "Unidades e sólidos.",
     cenas: [
       { tipo: "texto", texto: "1 m³ = 1.000.000 cm³. 1 dm³ = 1 L (importante!).", destaque: true },
-      { tipo: "texto", texto: "Paralelepípedo: V = c × l × a." },
-      { tipo: "texto", texto: "Cubo: V = aresta³." },
+      {
+        tipo: "solido",
+        forma: "cubo",
+        legenda: "Paralelepípedo: V = c × l × a",
+      },
+      {
+        tipo: "solido",
+        forma: "cubo",
+        legenda: "Cubo: V = aresta³",
+      },
     ],
   },
   momento03_descoberta: {
@@ -28,13 +36,44 @@ export const aula06_volume: AulaV4 = {
   momento04_explicacao: {
     titulo: "Exemplos",
     etapas: [
-      { texto: "Aquário 40 × 30 × 20 cm → 24.000 cm³ = 24 L." },
-      { texto: "Cubo 5 cm → 5×5×5 = 125 cm³." },
+      {
+        texto: "Aquário 40 × 30 × 20 cm.",
+        exemploReal: {
+          contexto: "V = 40 × 30 × 20",
+          visualMat: {
+            tipo: "solido",
+            forma: "cubo",
+            legenda: "Aquário 40 × 30 × 20 cm",
+          },
+          destaque: "V = 24.000 cm³ = 24 L.",
+        },
+      },
+      {
+        texto: "Cubo 5 cm de aresta.",
+        exemploReal: {
+          contexto: "V = 5 × 5 × 5",
+          visualMat: {
+            tipo: "solido",
+            forma: "cubo",
+            legenda: "Cubo aresta 5 cm",
+          },
+          destaque: "V = 125 cm³.",
+        },
+      },
     ],
   },
   momento05_modelagem: {
     enunciado: "Caixa 10 × 5 × 4 cm.",
     resposta: "200 cm³",
+    contaPassoAPasso: {
+      operacao: "mult",
+      operandos: [10, 5],
+      resultado: 50,
+      passos: [
+        { fala: "Primeiro: 10 × 5 = 50 (área da base)." },
+        { fala: "Depois: 50 × 4 = 200. Volume = 200 cm³." },
+      ],
+    },
     passos: ["10 × 5 = 50.", "50 × 4 = 200."],
   },
   momento06_praticaGuiada: {

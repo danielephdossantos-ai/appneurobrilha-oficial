@@ -27,16 +27,40 @@ export const aula04_multPor3Digitos: AulaV4 = {
   momento04_explicacao: {
     titulo: "Algoritmo de 3 dígitos",
     etapas: [
-      { texto: "Exemplo: 142 × 213." },
-      { texto: "142 × 3 = 426." },
-      { texto: "142 × 1 = 142 → 1.420." },
-      { texto: "142 × 2 = 284 → 28.400." },
-      { texto: "Some: 426 + 1.420 + 28.400 = 30.246." },
+      {
+        texto: "Exemplo: 142 × 213 — arme e multiplique casa por casa.",
+        exemploReal: {
+          contexto: "142 × 213 — três linhas parciais",
+          contaPassoAPasso: {
+            operacao: "mult",
+            operandos: [142, 213],
+            resultado: 30246,
+            passos: [
+              { fala: "Linha da UNIDADE (3): 142 × 3 = 426." },
+              { fala: "Linha da DEZENA (1): 142 × 1 = 142, desloca 1 casa → 1.420." },
+              { fala: "Linha da CENTENA (2): 142 × 2 = 284, desloca 2 casas → 28.400." },
+              { fala: "Some as 3 linhas: 426 + 1.420 + 28.400 = 30.246." },
+            ],
+          },
+          destaque: "3 linhas · 3 deslocamentos · soma no fim.",
+        },
+      },
     ],
   },
   momento05_modelagem: {
     enunciado: "132 × 145.",
     resposta: "19.140",
+    contaPassoAPasso: {
+      operacao: "mult",
+      operandos: [132, 145],
+      resultado: 19140,
+      passos: [
+        { fala: "132 × 5 = 660 (linha da unidade)." },
+        { fala: "132 × 4 = 528, desloca 1 → 5.280 (linha da dezena)." },
+        { fala: "132 × 1 = 132, desloca 2 → 13.200 (linha da centena)." },
+        { fala: "660 + 5.280 + 13.200 = 19.140." },
+      ],
+    },
     passos: ["132 × 5 = 660.", "132 × 4 = 528 → 5.280.", "132 × 1 = 132 → 13.200.", "660 + 5.280 + 13.200 = 19.140."],
   },
   momento06_praticaGuiada: {
