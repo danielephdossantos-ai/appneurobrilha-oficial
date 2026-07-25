@@ -208,7 +208,7 @@ export type MomentoExplicacao = {
         extenso?: string;
       };
       contaPassoAPasso?: {
-        operacao: "soma" | "sub" | "mult";
+        operacao: "soma" | "sub" | "mult" | "div";
         operandos: number[];
         resultado: number;
         passos: Array<{
