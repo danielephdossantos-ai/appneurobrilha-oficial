@@ -426,7 +426,7 @@ function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
 function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
   const contaMini = m.miniDesafio
     ? detectarContaNoTexto(
-        `${m.miniDesafio.pergunta ?? ""} ${m.miniDesafio.feedbackAcerto ?? ""} ${m.miniDesafio.feedbackErro ?? ""}`,
+        `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`,
       )
     : undefined;
   return (
