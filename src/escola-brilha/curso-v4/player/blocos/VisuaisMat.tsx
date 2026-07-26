@@ -678,7 +678,7 @@ function Tabela({ v }: { v: TabelaV }) {
   return (
     <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto overflow-x-auto">
       {titulo && <div className="text-sm font-black text-center mb-2">{titulo}</div>}
-      <table className="w-full text-sm border-collapse">
+      <table className="w-full text-xs sm:text-sm border-collapse">
         <thead>
           <tr>
             <th className="border-2 p-2 bg-amber-100 font-black" style={cellStyle}></th>
