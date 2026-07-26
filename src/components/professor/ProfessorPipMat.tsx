@@ -120,6 +120,83 @@ export function ProfessorPipMat({ crianca }: Props) {
   const [busy, setBusy] = useState(false);
   const fimRef = useRef<HTMLDivElement>(null);
 
+  // ---- Falar a dúvida (ditado por voz) ----
+  const [ouvindo, setOuvindo] = useState(false);
+  const [micSuportado, setMicSuportado] = useState(true);
+  const [micErro, setMicErro] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recogRef = useRef<any>(null);
+  const finalRef = useRef("");
+  const enviarRef = useRef<(t: string) => void>(() => {});
+
+  useEffect(() => {
+    const Ctor = getRecognitionCtor();
+    if (!Ctor) {
+      setMicSuportado(false);
+      return;
+    }
+    const r = new Ctor();
+    r.lang = "pt-BR";
+    r.continuous = true;
+    r.interimResults = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    r.onresult = (ev: any) => {
+      let parcial = "";
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const t = ev.results[i][0].transcript;
+        if (ev.results[i].isFinal) finalRef.current += t;
+        else parcial += t;
+      }
+      setInput((finalRef.current + parcial).trimStart());
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    r.onerror = (ev: any) => {
+      setOuvindo(false);
+      setMicErro(
+        ev?.error === "not-allowed"
+          ? "Preciso da permissão do microfone para te ouvir."
+          : "Não consegui ouvir agora. Tenta de novo!",
+      );
+    };
+    r.onend = () => {
+      setOuvindo(false);
+      const texto = finalRef.current.trim();
+      finalRef.current = "";
+      if (texto) enviarRef.current(texto);
+    };
+    recogRef.current = r;
+    return () => {
+      try {
+        r.stop();
+      } catch {
+        /* noop */
+      }
+    };
+  }, []);
+
+  function alternarMic() {
+    const r = recogRef.current;
+    if (!r) return;
+    setMicErro(null);
+    if (ouvindo) {
+      try {
+        r.stop();
+      } catch {
+        /* noop */
+      }
+      return;
+    }
+    finalRef.current = "";
+    setInput("");
+    try {
+      r.start();
+      setOuvindo(true);
+    } catch {
+      setMicErro("Não consegui abrir o microfone.");
+    }
+  }
+
+
   useEffect(() => {
     fimRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [itens, busy]);
