@@ -71,6 +71,16 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.16)",
   },
   {
+    to: "/professor-matematica",
+    title: "Pip Teen Roqueiro",
+    subtitle: "Matemática na lousa",
+    gradient: "from-[#7C2D8F] via-[#5B21B6] to-[#1B1035]",
+    glow: "rgba(168,85,247,0.7)",
+    emoji: "🎸",
+    shine: "rgba(255,255,255,0.14)",
+  },
+  {
+
     to: "/reforco-brilha",
     title: "Reforço Brilha",
     subtitle: "Professor Particular",
