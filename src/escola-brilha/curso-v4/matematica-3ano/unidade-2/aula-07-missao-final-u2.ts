@@ -295,7 +295,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
       ],
       "respostaCerta": "308",
       "feedbackAcerto": "🏆 Prova final: 745 − 437 = 308. Você é CONTADOR OFICIAL!",
-      "feedbackErro": "U:15−7=8, D:3−3=0, C:6−4=... 308."
+      "feedbackErro": "U: 5−7 empresta → 15−7=8. D: o 4 virou 3 → 3−3=0. C: 7−4=3. Resultado: 308."
     }
   },
   "momento10_avaliacao": {
