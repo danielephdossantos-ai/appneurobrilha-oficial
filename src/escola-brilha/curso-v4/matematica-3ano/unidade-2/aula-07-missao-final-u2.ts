@@ -247,7 +247,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
         }
       ],
       "respostaCerta": "435",
-      "feedbackAcerto": "🎯 U:14−9=5, D:4−1=4, C:4.",
+      "feedbackAcerto": "🎯 U: 4−9 empresta → 14−9=5. D: o 5 virou 4 → 4−1=3. C: 6−2=4. Resultado: 435.",
       "feedbackErro": "Empresta na unidade: 14−9=5."
     }
   },
