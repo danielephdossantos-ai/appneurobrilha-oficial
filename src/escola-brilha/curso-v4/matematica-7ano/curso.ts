@@ -25,7 +25,7 @@ const curso: Curso = {
   corPrimaria: "#6366f1",
   corSecundaria: "#1e1b4b",
   tipoAula: "matematica",
-  unidades: [unidade1, unidade2, unidade3, unidade4],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5],
 };
 
 export default curso;
