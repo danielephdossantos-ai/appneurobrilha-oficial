@@ -103,6 +103,16 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SpeechRecognitionCtor = new () => any;
+
+function getRecognitionCtor(): SpeechRecognitionCtor | null {
+  if (typeof window === "undefined") return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const w = window as any;
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
+
 export function ProfessorPipMat({ crianca }: Props) {
   const perguntar = useServerFn(professorPipMatChat);
   const [itens, setItens] = useState<Item[]>([]);
