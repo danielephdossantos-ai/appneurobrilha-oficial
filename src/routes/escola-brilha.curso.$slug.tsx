@@ -184,8 +184,10 @@ function TrilhaCurso() {
           modoLivre={modoLivre}
         />
       </main>
+      {slug.toLowerCase().includes("matematica") && <PipMatBubble />}
     </div>
   );
+
 }
 
 function AtlasFinalCard({
