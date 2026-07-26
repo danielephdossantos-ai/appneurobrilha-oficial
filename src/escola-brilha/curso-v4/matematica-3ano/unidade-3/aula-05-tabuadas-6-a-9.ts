@@ -46,7 +46,7 @@ export const aula05_tabuadas6a9: AulaV4 = {
   },
   momento05_modelagem: {
     enunciado: "9 × 6 = ?",
-    passos: ["9×10=90.", "90−9=81. Errado: use ×6.", "6×10=60, 60−6=54. 9×6=54."],
+    passos: ["Truque: 6×10 = 60.", "Tiro um 6: 60 − 6 = 54.", "Logo 9 × 6 = 54."],
     resposta: "9 × 6 = 54",
     casasValor: { numero: 54, mostrarDecomposicao: true, extenso: "cinquenta e quatro" },
   },

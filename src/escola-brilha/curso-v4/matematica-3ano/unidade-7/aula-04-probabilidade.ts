@@ -48,7 +48,7 @@ export const aula04_probabilidade: AulaV4 = {
         },
       },
       {
-        texto: "Moeda: 50% cara, 50% coroa — provável (50/50).",
+        texto: "Moeda: 50% cara, 50% coroa — é 50/50 (meio a meio), no meio da escala.",
         exemploReal: {
           contexto: "1 chance em 2.",
           destaque: "Meio a meio.",
