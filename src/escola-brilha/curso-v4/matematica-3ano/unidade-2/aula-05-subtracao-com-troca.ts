@@ -87,8 +87,8 @@ export const aula05_subtracaoComTroca: AulaV4 = {
         }
       ],
       "respostaCerta": "314",
-      "feedbackAcerto": "🎉 U:12−8=4, D:4−3=4 (emprestou), wait: 452−138. U:2−8 empresta. 12−8=4. D:4(virou)−3=... Correta: 314.",
-      "feedbackErro": "U empresta: 4. D: 4−3=1... 452−138=314."
+      "feedbackAcerto": "🎉 U: 2−8 não dá, empresta → 12−8=4. D: o 5 virou 4 → 4−3=1. C: 4−1=3. Resultado: 314.",
+      "feedbackErro": "U: 2−8 empresta da dezena → 12−8=4. D: o 5 virou 4 → 4−3=1. C: 4−1=3. Então 452−138=314."
     }
   },
   "momento07_praticaIndependente": {
