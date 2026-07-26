@@ -4,6 +4,8 @@ import { unidade2 } from "./unidade-2";
 import { unidade3 } from "./unidade-3";
 import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
+import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Matemática 7º Ano — "O Laboratório dos Números"
@@ -13,7 +15,8 @@ import { unidade5 } from "./unidade-5";
  *  U3 · Razão, Porcentagem e Proporção      ✅ EF07MA09, EF07MA17
  *  U4 · Álgebra e Equações                 ✅ EF07MA13–18
  *  U5 · Geometria                           ✅ EF07MA19–21, EF07MA23–28
- *  (U6 Medidas · U7 Estatística — em construção)
+ *  U6 · Grandezas e Medidas                 ✅ EF07MA30, EF07MA32, EF07MA33
+ *  U7 · Estatística e Probabilidade         ✅ EF07MA34–37
  */
 const curso: Curso = {
   slug: "matematica-7ano",
@@ -25,7 +28,8 @@ const curso: Curso = {
   corPrimaria: "#6366f1",
   corSecundaria: "#1e1b4b",
   tipoAula: "matematica",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
+
 
 export default curso;
