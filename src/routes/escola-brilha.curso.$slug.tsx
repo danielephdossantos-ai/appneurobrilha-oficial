@@ -1,7 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
-import { PipMatBubble } from "@/components/professor/PipMatBubble";
 
 /**
  * Trilha do Curso v4.1 — estilo Duolingo.
@@ -185,7 +184,6 @@ function TrilhaCurso() {
           modoLivre={modoLivre}
         />
       </main>
-      {slug.toLowerCase().includes("matematica") && <PipMatBubble />}
     </div>
   );
 

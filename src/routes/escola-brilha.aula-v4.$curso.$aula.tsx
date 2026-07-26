@@ -1,8 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
-import { PipMatBubble } from "@/components/professor/PipMatBubble";
-import { useAppState } from "@/core/store";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
@@ -26,7 +24,6 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
-  const { activeChild } = useAppState();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
 
   if (!found) {
@@ -37,43 +34,26 @@ function AulaV4Route() {
     );
   }
 
-  const ehMatematica = cursoSlug.toLowerCase().includes("matematica");
-
   return (
-    <>
-      <PlayerV4
-        aula={found.aula}
-        cursoSlug={cursoSlug}
-        voltarPara={`/escola-brilha/curso/${cursoSlug}`}
-        onConcluir={() => {
-          try {
-            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-            const list: string[] = raw ? JSON.parse(raw) : [];
-            if (!list.includes(aulaSlug)) list.push(aulaSlug);
-            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-          } catch {
-            /* ignore */
-          }
-          navigate({
-            to: "/escola-brilha/curso/$slug",
-            params: { slug: cursoSlug },
-          });
-        }}
-      />
-      {ehMatematica && (
-        <PipMatBubble
-          crianca={
-            activeChild
-              ? {
-                  nome: activeChild.nome ?? undefined,
-                  idade: activeChild.idade ?? undefined,
-                  serie: activeChild.serie ?? undefined,
-                }
-              : undefined
-          }
-        />
-      )}
-    </>
+    <PlayerV4
+      aula={found.aula}
+      cursoSlug={cursoSlug}
+      voltarPara={`/escola-brilha/curso/${cursoSlug}`}
+      onConcluir={() => {
+        try {
+          const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+          const list: string[] = raw ? JSON.parse(raw) : [];
+          if (!list.includes(aulaSlug)) list.push(aulaSlug);
+          localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+        } catch {
+          /* ignore */
+        }
+        navigate({
+          to: "/escola-brilha/curso/$slug",
+          params: { slug: cursoSlug },
+        });
+      }}
+    />
   );
 }
 
