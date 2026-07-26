@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, ChevronRight, Guitar, RotateCcw } from "lucide-react";
+import { Send, Loader2, ChevronRight, Guitar, RotateCcw, Mic, Square } from "lucide-react";
 import {
   professorPipMatChat,
   type PipMatResposta,
