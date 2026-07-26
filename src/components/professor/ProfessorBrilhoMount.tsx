@@ -1,6 +1,7 @@
 import { useLocation } from "@tanstack/react-router";
 import { useAppState } from "@/core/store";
 import { ProfessorBrilho } from "./ProfessorBrilho";
+import { PipMatBubble } from "./PipMatBubble";
 
 type Modulo =
   | "reforco-brilha"
@@ -14,12 +15,18 @@ function detectModulo(pathname: string): Modulo | null {
   return null;
 }
 
+function isRotaMatematica(pathname: string) {
+  return (
+    pathname.includes("matematica") ||
+    pathname.startsWith("/escola-brilha/contar-com-pip") ||
+    pathname.startsWith("/professor-matematica")
+  );
+}
+
 export function ProfessorBrilhoMount() {
   const location = useLocation();
   const modulo = detectModulo(location.pathname);
   const { activeChild } = useAppState();
-
-  if (!modulo) return null;
 
   const crianca = activeChild
     ? {
@@ -28,6 +35,12 @@ export function ProfessorBrilhoMount() {
         serie: activeChild.serie ?? undefined,
       }
     : undefined;
+
+  if (isRotaMatematica(location.pathname)) {
+    return <PipMatBubble crianca={crianca} />;
+  }
+
+  if (!modulo) return null;
 
   return (
     <ProfessorBrilho
