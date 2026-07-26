@@ -240,6 +240,10 @@ export function ProfessorPipMat({ crianca }: Props) {
     }
   }
 
+  enviarRef.current = enviar;
+
+
+
   const sugestoes = [
     "Como resolvo 3x + 5 = 20?",
     "Fatore x² + 6x + 9",
