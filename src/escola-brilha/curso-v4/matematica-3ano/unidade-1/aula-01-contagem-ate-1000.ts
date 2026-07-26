@@ -34,7 +34,7 @@ export const aula01_contagemAte1000: AulaV4 = {
     cenas: [
       { tipo: "texto", texto: "Contando de 100 em 100:", destaque: true },
       { tipo: "texto", texto: "100 · 200 · 300 · 400 · 500 · 600 · 700 · 800 · 900 · 1.000." },
-      { tipo: "texto", texto: "Só 10 saltos e chegamos em MIL. O jeito rápido é ler o número inteiro, não contar pedacinho por pedacinho." },
+      { tipo: "texto", texto: "De 100 até 1.000 são 9 saltos de 100 (100, 200, 300... 900, 1.000). Contando desde o 0, são 10 saltos. O jeito rápido é ler o número inteiro, não contar pedacinho por pedacinho." },
       { tipo: "texto", texto: "Um número de 3 algarismos guarda uma mensagem: cada algarismo ocupa uma CASA diferente.", destaque: true },
     ],
   },
