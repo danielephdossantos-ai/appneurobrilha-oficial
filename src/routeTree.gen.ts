@@ -16,6 +16,7 @@ import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
+import { Route as ProfessorMatematicaRouteImport } from './routes/professor-matematica'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
@@ -121,6 +122,11 @@ const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
 const ProgressaoRoute = ProgressaoRouteImport.update({
   id: '/progressao',
   path: '/progressao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfessorMatematicaRoute = ProfessorMatematicaRouteImport.update({
+  id: '/professor-matematica',
+  path: '/professor-matematica',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -541,6 +547,7 @@ export interface FileRoutesByFullPath {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -620,6 +627,7 @@ export interface FileRoutesByTo {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -701,6 +709,7 @@ export interface FileRoutesById {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -783,6 +792,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/privacidade'
+    | '/professor-matematica'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -862,6 +872,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/privacidade'
+    | '/professor-matematica'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -942,6 +953,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/privacidade'
+    | '/professor-matematica'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -1023,6 +1035,7 @@ export interface RootRouteChildren {
   PerfilAlunoRoute: typeof PerfilAlunoRoute
   PlanoAnualRoute: typeof PlanoAnualRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  ProfessorMatematicaRoute: typeof ProfessorMatematicaRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
@@ -1116,6 +1129,13 @@ declare module '@tanstack/react-router' {
       path: '/progressao'
       fullPath: '/progressao'
       preLoaderRoute: typeof ProgressaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/professor-matematica': {
+      id: '/professor-matematica'
+      path: '/professor-matematica'
+      fullPath: '/professor-matematica'
+      preLoaderRoute: typeof ProfessorMatematicaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidade': {
@@ -1693,6 +1713,7 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilAlunoRoute: PerfilAlunoRoute,
   PlanoAnualRoute: PlanoAnualRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  ProfessorMatematicaRoute: ProfessorMatematicaRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
