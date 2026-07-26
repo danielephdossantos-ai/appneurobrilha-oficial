@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, ChevronRight, Guitar, RotateCcw } from "lucide-react";
+import { Send, Loader2, ChevronRight, Guitar, RotateCcw, Mic, Square } from "lucide-react";
 import {
   professorPipMatChat,
   type PipMatResposta,
@@ -103,12 +103,99 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SpeechRecognitionCtor = new () => any;
+
+function getRecognitionCtor(): SpeechRecognitionCtor | null {
+  if (typeof window === "undefined") return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const w = window as any;
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
+
 export function ProfessorPipMat({ crianca }: Props) {
   const perguntar = useServerFn(professorPipMatChat);
   const [itens, setItens] = useState<Item[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const fimRef = useRef<HTMLDivElement>(null);
+
+  // ---- Falar a dúvida (ditado por voz) ----
+  const [ouvindo, setOuvindo] = useState(false);
+  const [micSuportado, setMicSuportado] = useState(true);
+  const [micErro, setMicErro] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recogRef = useRef<any>(null);
+  const finalRef = useRef("");
+  const enviarRef = useRef<(t: string) => void>(() => {});
+
+  useEffect(() => {
+    const Ctor = getRecognitionCtor();
+    if (!Ctor) {
+      setMicSuportado(false);
+      return;
+    }
+    const r = new Ctor();
+    r.lang = "pt-BR";
+    r.continuous = true;
+    r.interimResults = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    r.onresult = (ev: any) => {
+      let parcial = "";
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const t = ev.results[i][0].transcript;
+        if (ev.results[i].isFinal) finalRef.current += t;
+        else parcial += t;
+      }
+      setInput((finalRef.current + parcial).trimStart());
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    r.onerror = (ev: any) => {
+      setOuvindo(false);
+      setMicErro(
+        ev?.error === "not-allowed"
+          ? "Preciso da permissão do microfone para te ouvir."
+          : "Não consegui ouvir agora. Tenta de novo!",
+      );
+    };
+    r.onend = () => {
+      setOuvindo(false);
+      const texto = finalRef.current.trim();
+      finalRef.current = "";
+      if (texto) enviarRef.current(texto);
+    };
+    recogRef.current = r;
+    return () => {
+      try {
+        r.stop();
+      } catch {
+        /* noop */
+      }
+    };
+  }, []);
+
+  function alternarMic() {
+    const r = recogRef.current;
+    if (!r) return;
+    setMicErro(null);
+    if (ouvindo) {
+      try {
+        r.stop();
+      } catch {
+        /* noop */
+      }
+      return;
+    }
+    finalRef.current = "";
+    setInput("");
+    try {
+      r.start();
+      setOuvindo(true);
+    } catch {
+      setMicErro("Não consegui abrir o microfone.");
+    }
+  }
+
 
   useEffect(() => {
     fimRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -152,6 +239,10 @@ export function ProfessorPipMat({ crianca }: Props) {
       setBusy(false);
     }
   }
+
+  enviarRef.current = enviar;
+
+
 
   const sugestoes = [
     "Como resolvo 3x + 5 = 20?",
@@ -238,24 +329,58 @@ export function ProfessorPipMat({ crianca }: Props) {
           e.preventDefault();
           enviar(input);
         }}
-        className="sticky bottom-3 flex items-center gap-2 rounded-full bg-white p-2 shadow-lg dark:bg-slate-900"
+        className="sticky bottom-3 flex flex-col gap-1"
       >
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Escreva sua dúvida de matemática..."
-          className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"
-          aria-label="Sua dúvida de matemática"
-        />
-        <button
-          type="submit"
-          disabled={busy || !input.trim()}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-600 to-violet-600 text-white disabled:opacity-40"
-          aria-label="Enviar pergunta"
-        >
-          <Send className="h-4 w-4" />
-        </button>
+        {ouvindo && (
+          <div className="mx-auto flex items-center gap-2 rounded-full bg-rose-600 px-3 py-1 text-xs font-black text-white shadow">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-white" /> Estou te
+            ouvindo... fale sua dúvida!
+          </div>
+        )}
+        {micErro && (
+          <div className="mx-auto rounded-full bg-rose-100 px-3 py-1 text-xs font-bold text-rose-700">
+            {micErro}
+          </div>
+        )}
+        <div className="flex items-center gap-2 rounded-full bg-white p-2 shadow-lg dark:bg-slate-900">
+          {micSuportado && (
+            <button
+              type="button"
+              onClick={alternarMic}
+              disabled={busy}
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition disabled:opacity-40 ${
+                ouvindo
+                  ? "animate-pulse bg-rose-600"
+                  : "bg-gradient-to-br from-emerald-500 to-teal-600"
+              }`}
+              aria-label={ouvindo ? "Parar de falar e enviar" : "Falar minha dúvida"}
+              title={ouvindo ? "Parar e enviar" : "Falar minha dúvida"}
+            >
+              {ouvindo ? <Square className="h-4 w-4" /> : <Mic className="h-5 w-5" />}
+            </button>
+          )}
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={
+              micSuportado
+                ? "Fale no microfone 🎤 ou escreva sua dúvida..."
+                : "Escreva sua dúvida de matemática..."
+            }
+            className="min-w-0 flex-1 bg-transparent px-1 text-sm outline-none"
+            aria-label="Sua dúvida de matemática"
+          />
+          <button
+            type="submit"
+            disabled={busy || !input.trim()}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-600 to-violet-600 text-white disabled:opacity-40"
+            aria-label="Enviar pergunta"
+          >
+            <Send className="h-4 w-4" />
+          </button>
+        </div>
       </form>
+
     </div>
   );
 }
