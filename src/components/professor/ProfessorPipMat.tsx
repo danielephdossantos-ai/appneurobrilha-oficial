@@ -329,24 +329,58 @@ export function ProfessorPipMat({ crianca }: Props) {
           e.preventDefault();
           enviar(input);
         }}
-        className="sticky bottom-3 flex items-center gap-2 rounded-full bg-white p-2 shadow-lg dark:bg-slate-900"
+        className="sticky bottom-3 flex flex-col gap-1"
       >
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Escreva sua dúvida de matemática..."
-          className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"
-          aria-label="Sua dúvida de matemática"
-        />
-        <button
-          type="submit"
-          disabled={busy || !input.trim()}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-600 to-violet-600 text-white disabled:opacity-40"
-          aria-label="Enviar pergunta"
-        >
-          <Send className="h-4 w-4" />
-        </button>
+        {ouvindo && (
+          <div className="mx-auto flex items-center gap-2 rounded-full bg-rose-600 px-3 py-1 text-xs font-black text-white shadow">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-white" /> Estou te
+            ouvindo... fale sua dúvida!
+          </div>
+        )}
+        {micErro && (
+          <div className="mx-auto rounded-full bg-rose-100 px-3 py-1 text-xs font-bold text-rose-700">
+            {micErro}
+          </div>
+        )}
+        <div className="flex items-center gap-2 rounded-full bg-white p-2 shadow-lg dark:bg-slate-900">
+          {micSuportado && (
+            <button
+              type="button"
+              onClick={alternarMic}
+              disabled={busy}
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition disabled:opacity-40 ${
+                ouvindo
+                  ? "animate-pulse bg-rose-600"
+                  : "bg-gradient-to-br from-emerald-500 to-teal-600"
+              }`}
+              aria-label={ouvindo ? "Parar de falar e enviar" : "Falar minha dúvida"}
+              title={ouvindo ? "Parar e enviar" : "Falar minha dúvida"}
+            >
+              {ouvindo ? <Square className="h-4 w-4" /> : <Mic className="h-5 w-5" />}
+            </button>
+          )}
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={
+              micSuportado
+                ? "Fale no microfone 🎤 ou escreva sua dúvida..."
+                : "Escreva sua dúvida de matemática..."
+            }
+            className="min-w-0 flex-1 bg-transparent px-1 text-sm outline-none"
+            aria-label="Sua dúvida de matemática"
+          />
+          <button
+            type="submit"
+            disabled={busy || !input.trim()}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-600 to-violet-600 text-white disabled:opacity-40"
+            aria-label="Enviar pergunta"
+          >
+            <Send className="h-4 w-4" />
+          </button>
+        </div>
       </form>
+
     </div>
   );
 }
