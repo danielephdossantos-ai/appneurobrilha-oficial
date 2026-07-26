@@ -195,9 +195,9 @@ function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
   return (
     <Card>
       <p className="text-lg">{m.instrucao}</p>
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-wrap gap-3 justify-center w-full min-w-0">
         {m.cenas.map((c, i) => (
-          <div key={i} className="text-center">
+          <div key={i} className="text-center w-full max-w-full min-w-0 overflow-x-auto">
             {c.tipo === "imagem" && <img src={c.url} alt={c.alt} className="w-24" />}
             {c.tipo === "grupoItens" &&
               Array.from({ length: c.quantidade }).map((_, k) => (
@@ -274,14 +274,14 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
             <div className="w-8 h-8 rounded-full bg-amber-400 text-[#0d1f55] font-bold grid place-items-center shrink-0">
               {i + 1}
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div>{e.texto}</div>
               {e.exemplo && (
                 <div className="text-sm text-white/70 mt-1">Ex.: {e.exemplo}</div>
               )}
               {e.agrupamentos && e.agrupamentos.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-3 items-start">
-                  <div className="flex-1 min-w-[200px] space-y-3">
+                  <div className="flex-1 min-w-0 sm:min-w-[200px] space-y-3">
                     {e.agrupamentos.map((ag, idx) => {
                       const total = ag.tamanhoGrupo * ag.qtdGrupos;
                       return (

@@ -521,7 +521,7 @@ function MapaGrade({ v }: { v: MapaGradeV }) {
   const h = linhas * cellSize + 30;
   const colLabel = (c: number) => String.fromCharCode("A".charCodeAt(0) + c - 1);
   return (
-    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto">
+    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
@@ -615,7 +615,7 @@ function GraficoBarras({ v }: { v: GraficoBarrasV }) {
   const maiorValor = Math.max(...barras.map((b) => b.valor));
   const CORES = ["#3b82f6", "#f59e0b", "#10b981", "#ef4444", "#8b5cf6", "#ec4899"];
   return (
-    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto">
+    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto overflow-x-auto">
       {titulo && (
         <div className="text-sm font-black text-center mb-2">{titulo}</div>
       )}
@@ -734,7 +734,7 @@ const NIVEL_POS: Record<EscalaProbV["itens"][number]["nivel"], { pct: number; co
 
 function EscalaProb({ v }: { v: EscalaProbV }) {
   return (
-    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto">
+    <div className="my-3 rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50 w-full max-w-md mx-auto overflow-x-auto">
       {/* Barra da escala */}
       <div className="relative h-6 rounded-full overflow-hidden mb-1"
         style={{ background: "linear-gradient(90deg, #dc2626 0%, #f97316 25%, #eab308 50%, #84cc16 75%, #16a34a 100%)" }}
@@ -901,7 +901,7 @@ function DizimaGeratriz({ v }: { v: DizimaGeratrizV }) {
   };
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-sky-300/60 w-full max-w-md mx-auto">
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-sky-300/60 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-sky-600 text-center mb-3">
           {legenda}
@@ -1004,7 +1004,7 @@ function SomaFracoes({ v }: { v: SomaFracoesV }) {
   );
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-fuchsia-300/60 w-full max-w-md mx-auto">
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-fuchsia-300/60 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-fuchsia-600 text-center mb-3">
           {legenda}
@@ -1077,7 +1077,7 @@ function NotacaoCientifica({ v }: { v: NotacaoCientificaV }) {
   const direcao = expoente > 0 ? "esquerda" : "direita";
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-amber-300/60 w-full max-w-md mx-auto">
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-amber-300/60 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-3">
           {legenda}
@@ -1127,7 +1127,7 @@ function TrinomioQuadrado({ v }: { v: TrinomioQuadradoV }) {
   const bPx = size * (1 - split);
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-violet-300/60 w-full max-w-md mx-auto">
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-violet-300/60 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-violet-600 text-center mb-3">
           {legenda}
@@ -1231,7 +1231,7 @@ function ChecklistTQP({ v }: { v: ChecklistTQPV }) {
   const check = (ok: boolean) => (ok ? "✅" : "❌");
 
   return (
-    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-emerald-300/60 w-full max-w-md mx-auto">
+    <div className="my-4 rounded-2xl bg-white/95 text-[#0d1f55] p-5 border-2 border-emerald-300/60 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-emerald-600 text-center mb-3">
           {legenda}
@@ -1293,7 +1293,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const passoAtual = passos[Math.min(revelados, total) - 1];
 
   return (
-    <div className="my-4 w-full max-w-md mx-auto">
+    <div className="my-4 w-full max-w-md mx-auto overflow-x-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-300 text-center mb-2">
           {legenda}
