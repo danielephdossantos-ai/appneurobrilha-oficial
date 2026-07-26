@@ -1,6 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
+import { PipMatBubble } from "@/components/professor/PipMatBubble";
+import { useAppState } from "@/core/store";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
