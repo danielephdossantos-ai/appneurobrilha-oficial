@@ -1,5 +1,4 @@
 import type { AulaPortuguesV4 } from "../../types";
-import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
 import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
