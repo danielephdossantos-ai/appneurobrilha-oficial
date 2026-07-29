@@ -86,6 +86,124 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  // ✍️ LOUSA DA LÍNGUA — o professor RESOLVE na frente do aluno,
+  // igual conta armada de Matemática: frase armada, pedaço por pedaço.
+  momento_lousa: {
+    titulo: "Lousa da Língua · o professor resolve",
+    instrucao:
+      "Assista o professor destrinchar a frase na lousa. Toque em cada botão e acompanhe passo a passo — depois é a sua vez.",
+    blocos: [
+      {
+        tipo: "fraseAnatomia",
+        titulo: "Frase armada · pedaço por pedaço",
+        frase:
+          "A escola tem 420 alunos e é, sem dúvida, a melhor escola da cidade.",
+        partes: [
+          {
+            texto: "A escola tem 420 alunos",
+            rotulo: "FATO",
+            cor: "verde",
+            explicacao:
+              "Dá pra CONFERIR: basta olhar a lista de matrículas. Se eu contar, dá 420 ou não dá.",
+          },
+          {
+            texto: "e é",
+            rotulo: "conector",
+            cor: "neutro",
+            explicacao: "O 'e' cola as duas partes — e é aqui que a opinião entra escondida.",
+          },
+          {
+            texto: "sem dúvida",
+            rotulo: "MARCA DE OPINIÃO",
+            cor: "amarelo",
+            explicacao:
+              "Expressão de certeza do autor. Serve pra você aceitar sem checar. Ligue o alerta.",
+          },
+          {
+            texto: "a melhor escola da cidade",
+            rotulo: "OPINIÃO",
+            cor: "vermelho",
+            explicacao:
+              "'Melhor' depende do critério: melhor em quê? Nota? Quadra? Comida? Outra pessoa pode discordar sem estar errada.",
+          },
+        ],
+        conclusao:
+          "Uma frase pode ter FATO e OPINIÃO grudados. O leitor crítico separa: 420 alunos = fato conferível; melhor escola = opinião do autor.",
+      },
+      {
+        tipo: "passoAPasso",
+        titulo: "Método dos 3 testes (use sempre)",
+        enunciado:
+          "Frase para analisar: «O novo parque custou R$ 2 milhões e ficou horrível.»",
+        passos: [
+          {
+            pergunta: "1) Dá pra CONFERIR em algum lugar?",
+            resultado: "«custou R$ 2 milhões» → sim: nota fiscal, site da prefeitura. ✅ FATO",
+            porque: "Fato tem fonte. Se existe onde checar, é fato (mesmo que esteja errado).",
+          },
+          {
+            pergunta: "2) Tem palavra de JUÍZO DE VALOR?",
+            resultado: "«horrível» → é avaliação de gosto. ❌ OPINIÃO",
+            porque: "Adjetivos de gosto (horrível, incrível, lindo, melhor) denunciam opinião.",
+          },
+          {
+            pergunta: "3) Alguém pode DISCORDAR sem mentir?",
+            resultado: "«ficou horrível» → outra pessoa pode achar bonito. Confirmado: OPINIÃO.",
+            porque: "Se dá pra discordar sem virar mentira, é opinião.",
+          },
+        ],
+        resposta:
+          "A frase mistura: FATO (custou R$ 2 milhões) + OPINIÃO (ficou horrível).",
+      },
+      {
+        tipo: "duasColunas",
+        titulo: "Tabela de bolso do leitor crítico",
+        esquerda: {
+          rotulo: "Fato",
+          itens: [
+            "«A prova tem 20 questões.»",
+            "«O jogo terminou 3 a 1.»",
+            "«A cidade tem 3 hospitais.»",
+          ],
+          marcas: ["números", "datas", "quantidades", "fontes", "verbos no passado"],
+        },
+        direita: {
+          rotulo: "Opinião",
+          itens: [
+            "«A prova foi injusta.»",
+            "«O jogo foi emocionante.»",
+            "«A cidade deveria ter mais hospitais.»",
+          ],
+          marcas: ["melhor", "pior", "deveria", "acho que", "sem dúvida", "incrível"],
+        },
+        dica:
+          "Truque: tente terminar a frase com «…e dá pra provar mostrando o quê?». Se você não consegue apontar a prova, é opinião.",
+      },
+      {
+        tipo: "cacaMarcas",
+        titulo: "Sua vez · caça às marcas de opinião",
+        instrucao:
+          "Toque nas palavras que denunciam OPINIÃO nesta manchete. Verde = acertou, vermelho = essa é fato.",
+        frase:
+          "A nova biblioteca abriu em março com 5 mil livros e já é o lugar mais incrível do bairro.",
+        alvos: ["mais", "incrível"],
+        explicacao:
+          "«mais incrível» é juízo de valor. «abriu em março» e «5 mil livros» são fatos conferíveis.",
+      },
+      {
+        tipo: "erroComum",
+        titulo: "O erro que derruba todo mundo",
+        errado: "«Está no jornal, então é fato.»",
+        porqueErrado:
+          "Jornal também publica opinião (editorial, coluna, crítica). O lugar não define — o tipo de frase define.",
+        certo: "«Dá pra conferir em uma fonte? Então é fato.»",
+        porqueCerto:
+          "O critério é a VERIFICABILIDADE, não quem falou nem onde saiu publicado.",
+      },
+    ],
+  },
+
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia com o filtro ligado: sublinhe mentalmente tudo que pode ser conferido e desconfie de adjetivos como 'melhor', 'horrível', 'incrível'.",
