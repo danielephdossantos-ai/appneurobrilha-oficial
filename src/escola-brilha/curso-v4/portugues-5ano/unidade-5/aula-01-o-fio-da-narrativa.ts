@@ -86,6 +86,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Narrador e discurso na prática",
+    instrucao:
+      "Mesma cena, escritas diferentes. O professor mostra o que muda na frase quando muda o narrador e o tipo de discurso.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "Narrador em 1ª pessoa participa da história e usa eu/meu; narrador em 3ª pessoa está de fora e usa ele/ela. O discurso direto reproduz a fala; o indireto conta a fala com as palavras do narrador.",
+        comoIdentificar:
+          "Procure os pronomes e a terminação dos verbos. 'Eu abri' = 1ª pessoa. 'Ela abriu' = 3ª pessoa. Travessão ou aspas = discurso direto.",
+        passos: [
+          {
+            frase: "Eu abri o baú devagar e senti o cheiro de papel velho.",
+            destaque: ["Eu", "senti"],
+            analise:
+              "Narrador-personagem: ele está dentro da cena e só pode contar o que ele mesmo vive e sente. Por isso conseguimos saber do cheiro, mas não saberíamos o que outra pessoa está pensando.",
+          },
+          {
+            frase: "Ela abriu o baú devagar, sem imaginar o que a mãe havia escondido ali dez anos antes.",
+            destaque: ["Ela", "sem imaginar"],
+            analise:
+              "Narrador em 3ª pessoa, e onisciente: sabe até o que a personagem NÃO sabe. Esse narrador enxerga o passado e o pensamento dos outros — a história ganha amplitude, mas perde intimidade.",
+          },
+          {
+            frase: "— Não abra isso agora — disse a avó, segurando a tampa.",
+            destaque: ["— Não abra isso agora —"],
+            analise:
+              "Discurso direto: a fala aparece exatamente como foi dita, marcada por travessão, com verbo de elocução ('disse') indicando quem falou. Dá ritmo e presença à cena.",
+            nota: "Verbos de elocução: disse, respondeu, murmurou, gritou, explicou. Variar evita repetição.",
+          },
+          {
+            frase: "A avó pediu que ela não abrisse o baú naquele momento.",
+            destaque: ["pediu que", "não abrisse"],
+            analise:
+              "Discurso indireto: o narrador conta a fala. Some o travessão, entra o conectivo 'que' e o verbo muda de forma (abra → abrisse). O texto fica mais resumido e mais distante.",
+          },
+        ],
+        comparacao: {
+          errado: "Eu abri o baú e ela pensou que aquilo era perigoso.",
+          certo: "Eu abri o baú e percebi, pelo rosto dela, que aquilo parecia perigoso.",
+          porque:
+            "Narrador em 1ª pessoa não tem acesso ao pensamento dos outros. Ele só pode deduzir pelo que vê e ouve — quebrar isso é falha de coerência narrativa.",
+        },
+        curiosidade:
+          "Machado de Assis levou o narrador em 1ª pessoa ao limite em 'Memórias Póstumas de Brás Cubas': quem narra está morto e admite que pode mentir para o leitor.",
+        resumo: [
+          "1ª pessoa: eu, dentro da cena, visão limitada.",
+          "3ª pessoa: ele/ela, de fora, pode ser onisciente.",
+          "Discurso direto: travessão + fala exata.",
+          "Discurso indireto: 'que' + verbo alterado, fala contada.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia observando o travessão (fala direta) e as frases com 'que' (fala indireta).",
     leitura: {

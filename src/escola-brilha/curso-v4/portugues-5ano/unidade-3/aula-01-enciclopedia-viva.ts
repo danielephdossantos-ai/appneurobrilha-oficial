@@ -86,6 +86,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Como se lê um verbete",
+    instrucao:
+      "O professor monta um verbete na lousa, linha por linha, e explica para que serve cada parte.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "Verbete é texto que DEFINE. Ele segue sempre a mesma engenharia: entrada, classe gramatical, definição objetiva e exemplo de uso.",
+        comoIdentificar:
+          "Se o texto começa com uma palavra isolada seguida de abreviação (s.m., adj., v.), você está diante de um verbete — não de uma história.",
+        passos: [
+          {
+            frase: "cardume  s.m.",
+            destaque: ["s.m."],
+            analise:
+              "'Cardume' é a entrada: a palavra que está sendo explicada. 's.m.' significa substantivo masculino — a classe gramatical, que já avisa como usar a palavra na frase ('o cardume', e não 'a cardume').",
+          },
+          {
+            frase: "1. Grande grupo de peixes que nadam juntos na mesma direção.",
+            destaque: ["Grande grupo de peixes"],
+            analise:
+              "A definição vai do geral (grupo) para o específico (de peixes, nadando juntos). É objetiva: nada de 'é lindo ver um cardume'. Verbete não opina.",
+            nota: "Boa definição responde: o que é + de que tipo + o que o distingue dos parecidos.",
+          },
+          {
+            frase: "Ex.: O mergulhador filmou um cardume de sardinhas perto da costa.",
+            destaque: ["cardume de sardinhas"],
+            analise:
+              "O exemplo mostra a palavra funcionando dentro de uma frase real. É ele que ensina a regência e a companhia da palavra: cardume DE alguma coisa.",
+          },
+          {
+            frase: "Ordem alfabética: cachorro · cadeira · cardume · carta · casa",
+            destaque: ["cardume"],
+            analise:
+              "Quando as primeiras letras se repetem, compara-se a letra seguinte: ca-CH, ca-D, ca-R, ca-R-T, ca-S. Por isso 'cardume' vem depois de 'cadeira' e antes de 'carta'.",
+          },
+        ],
+        comparacao: {
+          errado: "cardume: um monte de peixinhos bonitos que eu vi na praia.",
+          certo: "cardume s.m. Grande grupo de peixes que nadam juntos na mesma direção.",
+          porque:
+            "A primeira versão é relato pessoal com opinião ('bonitos', 'que eu vi'). Verbete é impessoal, definidor e serve para qualquer leitor, em qualquer lugar.",
+        },
+        curiosidade:
+          "Dicionaristas chamam de 'palavra-entrada' o termo em negrito. Um dicionário escolar traz cerca de 30 mil entradas; o Houaiss passa de 200 mil.",
+        resumo: [
+          "Entrada + classe + definição + exemplo.",
+          "Linguagem impessoal e objetiva, sem opinião.",
+          "A abreviação avisa a classe gramatical.",
+          "Ordem alfabética compara letra a letra, da esquerda para a direita.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia observando como o verbete de enciclopédia é mais longo que o de dicionário.",
     leitura: {

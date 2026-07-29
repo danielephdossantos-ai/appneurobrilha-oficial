@@ -85,6 +85,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Tese, argumento e prova",
+    instrucao:
+      "O professor escreve na lousa uma opinião fraca e vai transformando em argumentação forte, passo a passo.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "Tese é a sua opinião em uma frase clara. Argumento é a razão que sustenta a tese. Prova é o dado, exemplo ou fonte que sustenta o argumento.",
+        comoIdentificar:
+          "Depois de cada frase sua, pergunte 'por quê?'. Se você consegue responder com um motivo, escreveu tese. Se não consegue, escreveu só um desabafo.",
+        passos: [
+          {
+            frase: "Recreio é bom.",
+            destaque: ["bom"],
+            analise:
+              "Opinião solta: 'bom' não diz nada verificável e não mostra o que se defende. Não é tese, é impressão.",
+          },
+          {
+            frase: "O recreio da nossa escola deveria durar 30 minutos.",
+            destaque: ["deveria durar 30 minutos"],
+            analise:
+              "Agora sim: há posição clara e específica. Dá para concordar ou discordar — e isso é o que define uma tese.",
+          },
+          {
+            frase: "O recreio deveria durar 30 minutos, porque o intervalo maior melhora a concentração nas aulas seguintes.",
+            destaque: ["porque", "melhora a concentração"],
+            analise:
+              "O conectivo 'porque' abre o argumento: a razão que sustenta a tese. Sem conectivo, viram duas frases soltas; com ele, existe raciocínio.",
+            nota: "Conectivos de causa: porque, já que, uma vez que, pois. De conclusão: portanto, logo, por isso.",
+          },
+          {
+            frase: "Uma pesquisa da própria escola mostrou que, nas turmas com intervalo de 30 minutos, as notas de matemática subiram 12%. Portanto, ampliar o recreio é um investimento em aprendizagem.",
+            destaque: ["12%", "Portanto"],
+            analise:
+              "A prova (dado numérico com origem) sustenta o argumento, e 'portanto' fecha o raciocínio retomando a tese. Esse é o parágrafo argumentativo completo: tese → argumento → prova → conclusão.",
+          },
+        ],
+        comparacao: {
+          errado: "Todo mundo sabe que recreio curto é horrível e quem discorda não entende nada.",
+          certo: "O recreio curto reduz o tempo de descanso; segundo a pesquisa da escola, isso afeta a concentração nas aulas seguintes.",
+          porque:
+            "Atacar quem discorda não é argumento, é ofensa — e enfraquece o texto. Quem convence apresenta razão e prova, não desqualifica o outro lado.",
+        },
+        curiosidade:
+          "Aristóteles já dizia que convencer envolve três forças: logos (razão), pathos (emoção) e ethos (credibilidade de quem fala). Texto escolar bem feito usa principalmente logos.",
+        resumo: [
+          "Tese: posição clara em uma frase.",
+          "Argumento: o porquê.",
+          "Prova: dado, exemplo ou fonte.",
+          "Conectivos costuram tudo: porque, além disso, portanto.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia identificando a tese no início e os conectivos que abrem cada argumento.",
     leitura: {
