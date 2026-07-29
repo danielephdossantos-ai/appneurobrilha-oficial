@@ -222,7 +222,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
       <header
         className={
-          tween
+          cyber
+            ? "sticky top-0 z-20 bg-[#0B0F17]/90 backdrop-blur-md border-b border-violet-500/40 shadow-[0_8px_30px_-18px_rgba(139,92,246,.9)]"
+            : tween
             ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
             : kids
             ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
@@ -234,7 +236,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             to="/escola-brilha/curso/$slug"
             params={{ slug: cursoSlug }}
             className={
-              tween
+              cyber
+                ? "shrink-0 h-9 px-3 grid place-items-center rounded-md border border-violet-500/60 bg-violet-500/10 text-violet-200 text-[11px] font-bold uppercase tracking-[.12em] font-mono hover:bg-violet-500/20 active:scale-95 transition duration-200"
+                : tween
                 ? "shrink-0 h-9 px-3 grid place-items-center rounded-lg border border-cyan-400/60 text-cyan-200 text-xs font-bold uppercase tracking-wider hover:bg-cyan-400/10 active:scale-95 transition"
                 : kids
                 ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
@@ -246,7 +250,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           <div className="flex-1 min-w-0">
             <div
               className={
-                tween
+                cyber
+                  ? "text-sm md:text-base font-extrabold uppercase tracking-[.08em] truncate text-slate-100"
+                  : tween
                   ? "text-sm md:text-base font-extrabold uppercase tracking-wide truncate"
                   : kids
                   ? "text-base font-black truncate"
@@ -260,14 +266,18 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <div className="mt-1 flex items-center gap-2">
                 <div
                   className={
-                    tween
+                    cyber
+                      ? "h-1.5 flex-1 rounded-sm bg-slate-700/70 overflow-hidden"
+                      : tween
                       ? "h-1.5 flex-1 rounded-sm bg-white/10 overflow-hidden"
                       : "h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden"
                   }
                 >
                   <div
                     className={
-                      tween
+                      cyber
+                        ? "h-full rounded-sm bg-[linear-gradient(90deg,#8B5CF6,#A855F7,#10B981)] shadow-[0_0_12px_rgba(168,85,247,.7)] transition-all duration-300 ease-in-out"
+                        : tween
                         ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"
                         : "h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
                     }
@@ -276,7 +286,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 </div>
                 <span
                   className={
-                    tween
+                    cyber
+                      ? "shrink-0 text-[10px] font-mono font-bold text-violet-300"
+                      : tween
                       ? "shrink-0 text-[10px] font-mono font-bold text-cyan-300"
                       : "shrink-0 text-[10px] font-black text-amber-200"
                   }
@@ -289,6 +301,19 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             )}
           </div>
         </div>
+        {cyber && (
+          <div className="max-w-5xl mx-auto px-4 pb-2 flex flex-wrap items-center gap-2">
+            <span className="rounded-md border border-violet-500/40 bg-violet-500/10 px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-[.12em] text-violet-200">
+              XP {(idxAtivo + 1) * 25}
+            </span>
+            <span className="rounded-md border border-amber-500/40 bg-amber-500/10 px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-[.12em] text-amber-300">
+              🔥 Streak
+            </span>
+            <span className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-[.12em] text-emerald-300">
+              {aula.codigoBncc ?? "5º ANO"}
+            </span>
+          </div>
+        )}
       </header>
 
 
