@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { EnsinoVisualBloco } from "../../types";
 
 type Licao = Extract<EnsinoVisualBloco, { tipo: "licaoLousa" }>;
@@ -166,6 +166,3 @@ function realcar(frase: string, destaques?: string[]) {
     ),
   );
 }
-
-/** Evita warning de import não usado em builds parciais. */
-export const __licaoLousaMemo = useMemo;
