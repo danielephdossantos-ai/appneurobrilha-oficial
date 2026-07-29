@@ -5,6 +5,14 @@ import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.
 import { url as ioio } from "@/assets/neuro-treino/objetos/ioio.png.asset.json";
 import { url as ovelha } from "@/assets/neuro-treino/objetos/ovelha.png.asset.json";
 import { url as ursinho } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
+import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
+import { url as ovo } from "@/assets/neuro-treino/objetos/ovo.png.asset.json";
+import { url as uva } from "@/assets/neuro-treino/objetos/uva.png.asset.json";
+import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 
 /**
  * Aula 3 — As Cinco Irmãs Vogais
@@ -24,6 +32,61 @@ export const aula03: AulaPortuguesV4 = {
   iconeTrilha: "🅰️",
   bncc: ["EF01LP02", "EF12LP01"],
   duracaoMin: 15,
+
+  momentosJogo: [
+    { tipo: "boasVindas", mascoteUrl: esquiloBrilha,
+      falaMascote: "Hoje conhecemos cinco irmãs muito faladeiras: A, E, I, O, U. Elas moram em quase toda palavra!" },
+    { tipo: "somDaLetra", letra: "A", som: "a",
+      instrucaoAudio: "A abre bem a boca: aaa.",
+      exemplos: [{ nome: "abelha", imagemUrl: abelha }],
+      elogio: "Aaa! Boca bem aberta." },
+    { tipo: "somDaLetra", letra: "E", som: "é",
+      instrucaoAudio: "E estica a boca de ladinho: eee.",
+      exemplos: [{ nome: "escola", imagemUrl: escola }],
+      elogio: "Eee! Isso mesmo." },
+    { tipo: "somDaLetra", letra: "I", som: "i",
+      instrucaoAudio: "I é o sorriso: iii.",
+      exemplos: [{ nome: "ioiô", imagemUrl: ioio }],
+      elogio: "Iii! Sorrindo até a orelha." },
+    { tipo: "somDaLetra", letra: "O", som: "ó",
+      instrucaoAudio: "O faz a boca redondinha: ooo.",
+      exemplos: [{ nome: "ovo", imagemUrl: ovo }, { nome: "ovelha", imagemUrl: ovelha }],
+      elogio: "Ooo! Boca de bolinha." },
+    { tipo: "somDaLetra", letra: "U", som: "u",
+      instrucaoAudio: "U faz biquinho: uuu.",
+      exemplos: [{ nome: "uva", imagemUrl: uva }, { nome: "urso", imagemUrl: ursinho }],
+      elogio: "Uuu! Biquinho perfeito." },
+    { tipo: "cacaAoSom", somAlvo: "O", exemploFala: "ovo",
+      instrucaoAudio: "Toca em tudo que começa com ooo, como em ovo.",
+      opcoes: [
+        { nome: "ovo", imagemUrl: ovo, correta: true },
+        { nome: "bola", imagemUrl: bola, correta: false },
+        { nome: "ovelha", imagemUrl: ovelha, correta: true },
+        { nome: "gato", imagemUrl: gato, correta: false },
+      ],
+      elogio: "Ovo e ovelha! Os dois começam com O.",
+      feedbackErro: "Escuta: o-o-ovo. É esse som que a gente procura." },
+    { tipo: "tracadoLetra", letra: "O",
+      instrucaoAudio: "Faz uma bolinha com o dedo: essa é a letra O.",
+      elogio: "Que O redondinho!" },
+    { tipo: "elkoninBoxes", imagemUrl: sol, palavra: "SOL", fonemas: ["S", "O", "L"],
+      instrucaoAudio: "Toca em cada caixinha enquanto eu falo os sons de SOL.",
+      elogio: "Três sons: sss, ooo, lll. SOL!" },
+    { tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura começa com o som uuu?",
+      opcoes: [
+        { nome: "uva", imagemUrl: uva, correta: true },
+        { nome: "lua", imagemUrl: lua, correta: false },
+        { nome: "pato", imagemUrl: pato, correta: false },
+      ],
+      feedbackAcerto: "Isso! U-u-uva.",
+      feedbackErro: "Lua tem U no meio, mas não começa com U. Escuta: uuu-va." },
+    { tipo: "missaoFamilia", titulo: "Caça-vogais",
+      convite: "Diga o nome de cada pessoa da sua casa e descubra com qual vogal ele começa ou termina.",
+      dicaAdulto: "Alongue a vogal ao falar: A-NA, JO-Ã-O." },
+    { tipo: "celebracao", medalha: "Amiga das Cinco Vogais", mascoteUrl: esquiloBrilha,
+      falaFinal: "Você conhece as cinco vogais! Amanhã elas vão dar voz às consoantes." },
+  ],
 
   // ------------------------------------------------------------
   // 1 · MOTIVAÇÃO
