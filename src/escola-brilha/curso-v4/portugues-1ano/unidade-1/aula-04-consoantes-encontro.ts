@@ -98,6 +98,46 @@ export const aula04: AulaPortuguesV4 = {
       "Olhe cada par. A letra grande é a consoante; a pequena mostra a mesma letra escrita à mão. Depois leia o exemplo em voz alta.",
     blocos: [
       {
+        tipo: "licaoLousa",
+        regra:
+          "A consoante sozinha não forma sílaba. Ela precisa de uma vogal para poder falar: consoante + vogal = sílaba.",
+        comoIdentificar:
+          "Tente falar só o B. Sai só um barulinho. Agora junte com o A: BA. Agora sim virou pedacinho de palavra.",
+        passos: [
+          {
+            frase: "B + A = BA  →  BA-NA-NA",
+            destaque: ["BA"],
+            analise:
+              "O B encostou no A e nasceu a sílaba BA. Repetindo pedacinhos assim montamos a palavra BANANA.",
+          },
+          {
+            frase: "M + E = ME  →  ME-SA",
+            destaque: ["ME"],
+            analise:
+              "O M com o E faz ME. Junto com SA, forma MESA. Cada pedacinho tem uma vogal dentro.",
+          },
+          {
+            frase: "P + I = PI  →  PI-PO-CA",
+            destaque: ["PI", "PO"],
+            analise:
+              "PIPOCA tem três batidas: PI-PO-CA. Em todas elas há uma consoante encostada numa vogal.",
+            nota: "Bata palmas em cada pedacinho: são 3 palmas.",
+          },
+        ],
+        comparacao: {
+          errado: "BNN é uma palavra.",
+          certo: "BANANA é uma palavra.",
+          porque: "Sem vogal a boca não consegue falar o pedacinho. Toda sílaba precisa de vogal.",
+        },
+        curiosidade:
+          "Existem palavras feitas só de vogais, como UAU e AI — mas nenhuma palavra é feita só de consoantes.",
+        resumo: [
+          "Consoante sozinha não fala.",
+          "Consoante + vogal = sílaba (BA, ME, PI).",
+          "Toda sílaba tem pelo menos uma vogal.",
+        ],
+      },
+      {
         tipo: "maiusculaMinuscula",
         pares: [
           { maiuscula: "B", minuscula: "b", exemplo: "B + A = BA (BOLA)" },
