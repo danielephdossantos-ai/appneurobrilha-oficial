@@ -253,7 +253,13 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  kids
+                  tween
+                    ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
+                        ativo === m.id
+                          ? "text-[#0b1020] border-transparent"
+                          : "text-white/70 border-white/10 bg-white/[.04] hover:bg-white/10"
+                      }`
+                    : kids
                     ? `block text-xs px-3 py-2.5 rounded-2xl font-bold transition ${
                         ativo === m.id
                           ? "text-[#2b1258] scale-[1.03] shadow-lg"
@@ -267,7 +273,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 }
                 style={
                   kids && ativo === m.id
-                    ? { background: CORES_KIDS[m.id] ?? "#fbbf24" }
+                    ? { background: CORES[m.id] ?? (tween ? "#22d3ee" : "#fbbf24") }
                     : undefined
                 }
               >
