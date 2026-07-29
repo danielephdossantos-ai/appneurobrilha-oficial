@@ -223,7 +223,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
       <header
         className={
-          tween
+          codex
+            ? "sticky top-0 z-20 bg-[#0B0F17]/90 backdrop-blur-md border-b border-violet-500/40 shadow-[0_10px_30px_-20px_rgba(168,85,247,.9)]"
+            : tween
             ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
             : kids
             ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
@@ -235,7 +237,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             to="/escola-brilha/curso/$slug"
             params={{ slug: cursoSlug }}
             className={
-              tween
+              codex
+                ? "shrink-0 h-9 px-3 grid place-items-center rounded-md border border-violet-400/60 bg-violet-500/10 text-violet-200 text-[11px] font-mono font-bold uppercase tracking-widest hover:bg-violet-500/20 hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] active:scale-95 transition-all duration-200 ease-in-out"
+                : tween
                 ? "shrink-0 h-9 px-3 grid place-items-center rounded-lg border border-cyan-400/60 text-cyan-200 text-xs font-bold uppercase tracking-wider hover:bg-cyan-400/10 active:scale-95 transition"
                 : kids
                 ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
@@ -247,7 +251,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           <div className="flex-1 min-w-0">
             <div
               className={
-                tween
+                codex
+                  ? "text-sm md:text-base font-extrabold uppercase tracking-[0.12em] truncate text-slate-100"
+                  : tween
                   ? "text-sm md:text-base font-extrabold uppercase tracking-wide truncate"
                   : kids
                   ? "text-base font-black truncate"
@@ -261,14 +267,18 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <div className="mt-1 flex items-center gap-2">
                 <div
                   className={
-                    tween
+                    codex
+                      ? "h-1.5 flex-1 rounded-md bg-slate-700/70 overflow-hidden"
+                      : tween
                       ? "h-1.5 flex-1 rounded-sm bg-white/10 overflow-hidden"
                       : "h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden"
                   }
                 >
                   <div
                     className={
-                      tween
+                      codex
+                        ? "h-full rounded-md bg-[linear-gradient(90deg,#8B5CF6,#A855F7,#10B981)] shadow-[0_0_12px_rgba(168,85,247,.7)] transition-all duration-500"
+                        : tween
                         ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"
                         : "h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
                     }
@@ -277,7 +287,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 </div>
                 <span
                   className={
-                    tween
+                    codex
+                      ? "shrink-0 text-[10px] font-mono font-bold text-violet-300"
+                      : tween
                       ? "shrink-0 text-[10px] font-mono font-bold text-cyan-300"
                       : "shrink-0 text-[10px] font-black text-amber-200"
                   }
@@ -290,6 +302,25 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             )}
           </div>
         </div>
+        {codex && (
+          <div className="max-w-5xl mx-auto px-4 pb-2 flex items-center gap-2 overflow-x-auto">
+            {[
+              { l: "XP", v: `${Math.round(progresso * 1.5)}`, c: "#A855F7" },
+              { l: "STREAK", v: "🔥 5", c: "#F59E0B" },
+              { l: "RANK", v: "LVL 5 · CÓDICE", c: "#10B981" },
+              { l: "BNCC", v: aula.slug.toUpperCase().slice(0, 14), c: "#38BDF8" },
+            ].map((s) => (
+              <span
+                key={s.l}
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-widest bg-[#1E293B]"
+                style={{ borderColor: `${s.c}55`, color: s.c }}
+              >
+                <span className="opacity-60">{s.l}</span>
+                <span className="text-slate-100">{s.v}</span>
+              </span>
+            ))}
+          </div>
+        )}
       </header>
 
 
