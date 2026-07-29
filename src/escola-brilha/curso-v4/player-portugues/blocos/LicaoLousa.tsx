@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import type { EnsinoVisualBloco } from "../../types";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Licao = Extract<EnsinoVisualBloco, { tipo: "licaoLousa" }>;
 
