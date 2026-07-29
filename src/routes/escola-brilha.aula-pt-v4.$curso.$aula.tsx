@@ -1,6 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaPortuguesFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerPortuguesV4 } from "@/escola-brilha/curso-v4/player-portugues/PlayerPortuguesV4";
+import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
+import type { CursoEI } from "@/escola-brilha/curso-portugues-ei/types";
+
 
 /**
  * Rota da AULA de Português v4.
