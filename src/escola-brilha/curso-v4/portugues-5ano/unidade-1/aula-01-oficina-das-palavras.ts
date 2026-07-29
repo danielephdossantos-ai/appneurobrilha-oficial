@@ -112,7 +112,7 @@ export const aula1: AulaPortuguesV4 = {
             frase: "A sábia professora explicou a regra duas vezes.",
             destaque: ["sábia"],
             analise:
-              "Agora a força caiu na antepenúltima… não: em SÁ-bi-a a forte é a penúltima considerando a separação sá-bi-a? Conte: sá / bi / a — a forte é a antepenúltima, logo é proparoxítona e TODA proparoxítona é acentuada. Na frase, sábia acompanha 'professora': é adjetivo, diz COMO ela é.",
+              "Em SÁ-bia a força está na penúltima sílaba: é paroxítona. Paroxítona terminada em A normalmente NÃO leva acento (casa, mesa), mas esta termina em ditongo (-ia), e paroxítona terminada em ditongo é acentuada. Na frase, sábia acompanha \'professora\': é adjetivo, diz COMO ela é.",
             nota: "Adjetivo anda colado a um substantivo. Se você tirar 'professora', a frase perde o apoio: 'A sábia explicou' só funciona porque o substantivo fica subentendido.",
           },
           {
