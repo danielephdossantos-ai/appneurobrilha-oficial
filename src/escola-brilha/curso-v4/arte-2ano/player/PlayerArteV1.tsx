@@ -7,7 +7,6 @@ import { useAppState } from "@/core/store";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 import { mascoteAtribuido } from "@/escola-brilha/mascote-assign";
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
-import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
 
 // ============================================================================
 // PlayerArteV1 — 11 cenas, cada uma com mecânica exclusiva do ateliê.
@@ -135,7 +134,6 @@ export function PlayerArteV1({
           </section>
         ))}
       </main>
-      <BotaoOuvirCena ativoIdx={ativo} />
     </div>
   );
 }
