@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { Children, createContext, useContext, useEffect, useState } from "react";
 
 /**
  * Skin dos blocos internos:
@@ -152,7 +152,12 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   useEffect(() => () => stopSpeaking(), []);
 
   const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
-  const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+  // No skin "codex" (5º ano) a aula vira fluxo cena-a-cena: 1 momento por tela.
+  const [passo, setPasso] = useState(0);
+  useEffect(() => setPasso(0), [aula.slug]);
+  const progresso = codex
+    ? ((passo + 1) / MOMENTOS.length) * 100
+    : ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
   return (
     <KidsCtx.Provider value={{ kids, tween, codex }}>
@@ -327,18 +332,33 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
-            {MOMENTOS.map((m) => (
+            {MOMENTOS.map((m, i) =>
+              codex ? (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setPasso(i)}
+                  className={`block w-full text-left text-[10px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-widest border transition-all duration-200 ${
+                    passo === i
+                      ? "text-[#0B0F17] border-transparent shadow-[0_0_16px_-2px_rgba(168,85,247,.8)]"
+                      : i < passo
+                      ? "text-emerald-300 border-emerald-500/40 bg-[#0F172A]"
+                      : "text-slate-400 border-slate-700 bg-[#1E293B] hover:border-violet-400/60 hover:text-violet-200"
+                  }`}
+                  style={passo === i ? { background: CORES[m.id] ?? "#A855F7" } : undefined}
+                >
+                  <span className="opacity-60 mr-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {m.label}
+                  {i < passo && <span className="ml-1">✓</span>}
+                </button>
+              ) : (
               <a
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  codex
-                    ? `block text-[10px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-widest border transition-all duration-200 ${
-                        ativo === m.id
-                          ? "text-[#0B0F17] border-transparent shadow-[0_0_16px_-2px_rgba(168,85,247,.8)]"
-                          : "text-slate-300 border-slate-700 bg-[#1E293B] hover:border-violet-400/60 hover:text-violet-200"
-                      }`
-                    : tween
+                  tween
                     ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
                         ativo === m.id
                           ? "text-[#0b1020] border-transparent"
@@ -364,11 +384,19 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               >
                 {m.label}
               </a>
-            ))}
+              ),
+            )}
           </div>
         </aside>
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
+          <Palco
+            codex={codex}
+            passo={passo}
+            setPasso={setPasso}
+            rotulos={MOMENTOS.map((m) => m.label)}
+            cores={MOMENTOS.map((m) => CORES[m.id] ?? "#A855F7")}
+          >
 
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
@@ -598,6 +626,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               Sair para a trilha
             </Link>
           </div>
+          </Palco>
         </main>
       </div>
     </div>
@@ -762,3 +791,109 @@ function Instrucao({ children }: { children: React.ReactNode }) {
 }
 
 
+
+/**
+ * Palco — no skin "codex" (5º ano) a aula deixa de ser uma apostila rolável
+ * e vira um fluxo cena-a-cena: 1 momento por tela, com HUD de etapa,
+ * navegação "Voltar / Continuar" e tela final de conclusão.
+ * Nos outros skins mantém o scroll contínuo de sempre.
+ */
+function Palco({
+  codex,
+  passo,
+  setPasso,
+  rotulos,
+  cores,
+  children,
+}: {
+  codex: boolean;
+  passo: number;
+  setPasso: (n: number) => void;
+  rotulos: string[];
+  cores: string[];
+  children: React.ReactNode;
+}) {
+  const itens = Children.toArray(children).filter(Boolean);
+  const rodape = itens[itens.length - 1];
+  const cenas = itens.slice(0, -1);
+
+  useEffect(() => {
+    if (codex) window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [passo, codex]);
+
+  if (!codex) {
+    return (
+      <>
+        {cenas}
+        {rodape}
+      </>
+    );
+  }
+
+  const total = cenas.length;
+  const i = Math.min(Math.max(passo, 0), total - 1);
+  const fim = i === total - 1;
+  const cor = cores[i] ?? "#A855F7";
+
+  return (
+    <div className="space-y-5">
+      {/* HUD de etapas */}
+      <div className="flex items-center gap-2">
+        <div className="flex-1 flex items-center gap-1">
+          {cenas.map((_, k) => (
+            <button
+              key={k}
+              type="button"
+              aria-label={`Etapa ${k + 1}`}
+              onClick={() => setPasso(k)}
+              className="h-1.5 flex-1 rounded-full transition-all duration-300"
+              style={{
+                background:
+                  k < i ? "#10B981" : k === i ? cor : "rgba(148,163,184,.25)",
+                boxShadow: k === i ? `0 0 12px ${cor}` : undefined,
+              }}
+            />
+          ))}
+        </div>
+        <span
+          className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-widest"
+          style={{ color: cor }}
+        >
+          {String(i + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-400">
+        {rotulos[i]}
+      </div>
+
+      <div key={i} className="animate-[cenaIn_.35s_ease-out]">
+        {cenas[i]}
+      </div>
+
+      {/* Navegação */}
+      <div className="flex items-center gap-3 pt-2">
+        <button
+          type="button"
+          disabled={i === 0}
+          onClick={() => setPasso(i - 1)}
+          className="h-12 px-4 rounded-lg border border-slate-700 bg-[#1E293B] text-slate-300 font-mono text-[11px] font-bold uppercase tracking-widest disabled:opacity-30 active:scale-95 transition"
+        >
+          ◂ Voltar
+        </button>
+        {!fim && (
+          <button
+            type="button"
+            onClick={() => setPasso(i + 1)}
+            className="flex-1 h-12 rounded-lg font-extrabold uppercase tracking-[0.15em] text-sm text-[#0B0F17] active:scale-95 transition-all duration-200"
+            style={{ background: cor, boxShadow: `0 0 30px -6px ${cor}` }}
+          >
+            Continuar ▸
+          </button>
+        )}
+      </div>
+
+      {fim && <div className="pt-2">{rodape}</div>}
+    </div>
+  );
+}
