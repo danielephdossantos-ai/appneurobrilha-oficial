@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O tambor da poesia",
     historia:
-      "— Pip, por que este texto não é escrito de ponta a ponta como os outros? — Porque é poema, Pipa! No poema a palavra tem batida, como tambor: linha curta, pausa, rima. E o poeta ainda faz uma mágica: chama a lua de moeda de prata sem estar mentindo. Isso é linguagem figurada. Vamos afinar seu ouvido.",
+      "— {NOME}, por que este texto não é escrito de ponta a ponta como os outros? Porque é poema! No poema a palavra tem batida, como tambor: linha curta, pausa, rima. E o poeta ainda faz uma mágica: chama a lua de moeda de prata sem estar mentindo. Isso é linguagem figurada. Vamos afinar seu ouvido.",
     imagemUrl: brilha,
   },
 

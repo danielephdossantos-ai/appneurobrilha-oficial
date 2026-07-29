@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "A prensa travou!",
     historia:
-      "— Pipa, olha só! As engrenagens da Tipografia Real travaram: as letras estão saindo SEM acento e as palavras ficaram bagunçadas nas frases! — Calma, Pip. No 5º ano nós viramos Mestres da Palavra. Para consertar essa máquina, precisamos dominar a sílaba tônica e as regras das oxítonas, paroxítonas e proparoxítonas. Pegue a lupa: vamos revisar cada tipo antes que o jornal seja impresso errado!",
+      "— {NOME}, olha só! As engrenagens da Tipografia Real travaram: as letras estão saindo SEM acento e as palavras ficaram bagunçadas nas frases! No 5º ano você vira Mestre da Palavra. Para consertar essa máquina, precisamos dominar a sílaba tônica e as regras das oxítonas, paroxítonas e proparoxítonas. Vamos revisar cada tipo antes que o jornal seja impresso errado!",
     imagemUrl: brilha,
   },
 

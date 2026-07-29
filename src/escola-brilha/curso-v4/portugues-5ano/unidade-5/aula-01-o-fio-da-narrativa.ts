@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O baú de histórias sem dono",
     historia:
-      "— Pip, achei um baú cheio de histórias, mas nenhuma diz QUEM está contando! — Esse é o segredo mais poderoso da narrativa, Pipa: o narrador. Se ele participa da história, fala 'eu'. Se observa de fora, fala 'ele'. E há ainda os dois jeitos de mostrar a fala dos personagens. Vamos destravar esse baú.",
+      "— {NOME}, achei um baú cheio de histórias, mas nenhuma diz QUEM está contando! Esse é o segredo mais poderoso da narrativa: o narrador. Se ele participa da história, fala 'eu'. Se observa de fora, fala 'ele'. E há ainda os dois jeitos de mostrar a fala dos personagens. Vamos destravar esse baú.",
     imagemUrl: brilha,
   },
 

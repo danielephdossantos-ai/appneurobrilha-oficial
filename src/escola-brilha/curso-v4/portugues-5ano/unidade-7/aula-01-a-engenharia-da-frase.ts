@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "As frases desmontadas",
     historia:
-      "— Pip, as frases da oficina caíram no chão e se remontaram erradas: 'os menino corre no jardim'! — Falta engenharia, Pipa. Toda frase tem duas peças-mestras: o sujeito (de quem se fala) e o predicado (o que se diz dele). E elas precisam combinar em número e gênero. Vamos apertar os parafusos.",
+      "— {NOME}, as frases da oficina caíram no chão e se remontaram erradas: 'os menino corre no jardim'! Falta engenharia. Toda frase tem duas peças-mestras: o sujeito (de quem se fala) e o predicado (o que se diz dele). E elas precisam combinar em número e gênero. Vamos apertar os parafusos.",
     imagemUrl: brilha,
   },
 

@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "A redação está confusa",
     historia:
-      "— Pip, chegaram vários jornais e alguns artigos estão com títulos exagerados, misturando boato com fato real! — Isso é perigoso, Pipa. Um leitor crítico sabe separar o que aconteceu de verdade do que é apenas a opinião de quem escreveu. Hoje vamos aprender a ler manchete, lide e a desmontar notícia falsa antes que ela seja impressa.",
+      "— {NOME}, chegaram vários jornais e alguns artigos estão com títulos exagerados, misturando boato com fato real! Isso é perigoso: um leitor crítico sabe separar o que aconteceu de verdade do que é apenas a opinião de quem escreveu. Hoje você vai aprender a ler manchete e lide, e a desmontar notícia falsa antes que ela seja impressa.",
     imagemUrl: brilha,
   },
 
