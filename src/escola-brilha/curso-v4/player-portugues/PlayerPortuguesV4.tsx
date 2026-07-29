@@ -69,8 +69,8 @@ const CORES_KIDS: Record<string, string> = {
 
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
-  // Skin infantil: só no curso de Português do 1º ano.
-  const kids = cursoSlug === "portugues-1ano";
+  // Skin infantil: Português do 1º e 2º ano.
+  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
 
   const MOMENTOS = MOMENTOS_BASE.filter(
     (m) =>
