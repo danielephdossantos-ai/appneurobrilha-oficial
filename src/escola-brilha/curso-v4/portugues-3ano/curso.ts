@@ -1,10 +1,4 @@
-import type { CursoPortugues } from "../types";
-import { unidade1 } from "./unidade-1";
-import { unidade2 } from "./unidade-2";
-import { unidade3 } from "./unidade-3";
-import { unidade4 } from "./unidade-4";
-import { unidade5 } from "./unidade-5";
-import { unidade6 } from "./unidade-6";
+import type { CursoPortugues, UnidadePortugues } from "../types";
 
 /**
  * Curso: Língua Portuguesa 3º Ano — "O Clube dos Detetives da Palavra"
@@ -12,9 +6,21 @@ import { unidade6 } from "./unidade-6";
  * Faixa de 8 anos: a criança já decodifica — agora precisa COMPREENDER,
  * ESCREVER com regra e REVISAR o próprio texto.
  *
- * Visual: skin "tween" do PlayerPortuguesV4 (grafite + neon), pensado
- * para quem cresceu e não se identifica mais com o visual infantil.
+ * Visual: skin "tween" do PlayerPortuguesV4 (grafite + neon).
+ *
+ * As unidades são carregadas por glob (unidade-N/index.ts) e ordenadas
+ * pelo campo `numero`, para o curso continuar válido enquanto novas
+ * unidades vão sendo publicadas.
  */
+const mods = import.meta.glob<Record<string, UnidadePortugues>>("./unidade-*/index.ts", {
+  eager: true,
+});
+
+const unidades: UnidadePortugues[] = Object.values(mods)
+  .flatMap((m) => Object.values(m))
+  .filter((u): u is UnidadePortugues => !!u && typeof (u as UnidadePortugues).numero === "number")
+  .sort((a, b) => a.numero - b.numero);
+
 const curso: CursoPortugues = {
   slug: "portugues-3ano",
   disciplina: "Língua Portuguesa",
@@ -25,7 +31,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#22d3ee",
   corSecundaria: "#0b1020",
   tipoAula: "portugues",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6],
+  unidades,
 };
 
 export default curso;
