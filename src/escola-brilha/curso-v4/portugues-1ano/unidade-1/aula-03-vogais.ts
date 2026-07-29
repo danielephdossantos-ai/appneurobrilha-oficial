@@ -54,7 +54,7 @@ export const aula03: AulaPortuguesV4 = {
       instrucaoAudio: "U faz biquinho: uuu.",
       exemplos: [{ nome: "urso", imagemUrl: ursinho }],
       elogio: "Uuu! Biquinho perfeito." },
-    { tipo: "cacaAoSom", somAlvo: "O", exemploFala: "ovo",
+    { tipo: "cacaAoSom", somAlvo: "O", exemploFala: "ovelha",
       instrucaoAudio: "Toca em tudo que começa com ooo, como em ovelha.",
       opcoes: [
         { nome: "ovelha", imagemUrl: ovelha, correta: true },
