@@ -7,7 +7,7 @@ import { Children, createContext, useContext, useEffect, useState } from "react"
  *            cartões mais retos, tipografia mais firme, menos fofura)
  */
 type SkinPT = { kids: boolean; tween: boolean; codex: boolean };
-const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, codex: false });
+export const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, codex: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
