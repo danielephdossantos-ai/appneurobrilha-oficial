@@ -14,7 +14,7 @@ export const unidade1: UnidadePortugues = {
   titulo: "Protocolo do Leitor Crítico",
   subtitulo: "Nem tudo que está escrito é verdade comprovada",
   descricao:
-    "A primeira missão de um Mestre da Palavra é aprender a filtrar o que lê: reconhecer fatos que podem ser verificados, identificar opiniões disfarçadas de informação e перceber as marcas de linguagem que denunciam cada uma.",
+    "A primeira missão de um Mestre da Palavra é aprender a filtrar o que lê: reconhecer fatos que podem ser verificados, identificar opiniões disfarçadas de informação e perceber as marcas de linguagem que denunciam cada uma.",
   corTema: "#8B5CF6",
   aulas: [aula1],
 };
