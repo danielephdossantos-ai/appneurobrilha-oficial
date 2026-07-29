@@ -210,20 +210,39 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
-            {aula.momento01_motivacao.imagemUrl && (
-              <img
-                src={aula.momento01_motivacao.imagemUrl}
-                alt=""
-                className="w-24 h-24 object-contain mx-auto mb-3 drop-shadow"
-              />
-            )}
-            <h3 className="text-xl font-black text-amber-200 text-center">
-              {aula.momento01_motivacao.titulo}
-            </h3>
-            <p className="text-white/90 leading-relaxed text-center max-w-2xl mx-auto mt-2">
-              {aula.momento01_motivacao.historia}
-            </p>
+            <div className={kids ? "flex flex-col items-center gap-3" : undefined}>
+              {aula.momento01_motivacao.imagemUrl && (
+                <img
+                  src={aula.momento01_motivacao.imagemUrl}
+                  alt=""
+                  className={
+                    kids
+                      ? "w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,.35)] animate-[bounce_3s_ease-in-out_infinite]"
+                      : "w-24 h-24 object-contain mx-auto mb-3 drop-shadow"
+                  }
+                />
+              )}
+              <h3
+                className={
+                  kids
+                    ? "text-2xl md:text-3xl font-black text-amber-200 text-center"
+                    : "text-xl font-black text-amber-200 text-center"
+                }
+              >
+                {aula.momento01_motivacao.titulo}
+              </h3>
+              <p
+                className={
+                  kids
+                    ? "relative rounded-3xl bg-white/95 text-[#2b1258] font-semibold text-center max-w-2xl px-5 py-4 text-lg leading-relaxed shadow-lg"
+                    : "text-white/90 leading-relaxed text-center max-w-2xl mx-auto mt-2"
+                }
+              >
+                {aula.momento01_motivacao.historia}
+              </p>
+            </div>
           </Secao>
+
 
           {/* M2 · Previsão */}
           <Secao id="m2" label="🔮 Previsão">
