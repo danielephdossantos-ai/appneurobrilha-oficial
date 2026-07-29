@@ -572,18 +572,43 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </div>
           </Secao>
 
+          {cyber && (
+            <section className="mt-2 rounded-lg border border-violet-500/40 bg-[#1E293B]/80 p-5 text-center shadow-[0_0_25px_-8px_rgba(139,92,246,.6)]">
+              <div className="font-mono text-[11px] uppercase tracking-[.22em] text-violet-300">
+                Status da missão
+              </div>
+              <div className="mt-1 text-2xl font-extrabold uppercase tracking-wide text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.4)]">
+                Unidade concluída
+              </div>
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                {[
+                  { l: "XP", v: `+${MOMENTOS.length * 25}`, c: "text-violet-300 border-violet-500/40" },
+                  { l: "Badge", v: "+1", c: "text-amber-300 border-amber-500/40" },
+                  { l: "Códice", v: "+1", c: "text-emerald-300 border-emerald-500/40" },
+                ].map((p) => (
+                  <div key={p.l} className={`rounded-md border bg-slate-900/60 px-2 py-2 ${p.c}`}>
+                    <div className="font-mono text-lg font-extrabold">{p.v}</div>
+                    <div className="text-[10px] uppercase tracking-[.14em] text-slate-400">{p.l}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           <div className="pt-6 flex flex-col items-center gap-3">
             <button
               onClick={() => onConcluir?.()}
               className={
-                tween
+                cyber
+                  ? "px-9 py-4 rounded-lg bg-[linear-gradient(90deg,#8B5CF6,#A855F7)] text-white font-extrabold uppercase tracking-[.14em] text-sm border border-violet-300/40 shadow-[0_0_15px_rgba(139,92,246,0.3)] drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] hover:brightness-110 active:scale-95 transition duration-200 ease-in-out"
+                  : tween
                   ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
                   : kids
                   ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
                   : "px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
               }
             >
-              {tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
+              {cyber ? "➔ Ir para a próxima unidade" : tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
             </button>
             <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
               Sair para a trilha
