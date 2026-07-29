@@ -867,7 +867,7 @@ function Palco({
         {rotulos[i]}
       </div>
 
-      <div key={i} className="animate-[fadeIn_.35s_ease-out]">
+      <div key={i} className="animate-[cenaIn_.35s_ease-out]">
         {cenas[i]}
       </div>
 
