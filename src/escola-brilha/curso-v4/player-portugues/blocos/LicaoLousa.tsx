@@ -19,6 +19,9 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
   const total = bloco.passos.length;
   const [revelados, setRevelados] = useState(1);
   const fim = revelados >= total;
+  const { kids, tween } = useContext(KidsCtx);
+  /** 1º e 2º ano: mesma lousa, letra maior e com áudio. */
+  const inf = kids && !tween;
 
   return (
     <div className="rounded-lg border border-slate-700 bg-[#0B0F17] overflow-hidden">
@@ -27,11 +30,15 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
         <div className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-violet-400">
           Regra
         </div>
-        <p className="mt-1 text-[15px] font-semibold leading-relaxed text-slate-100">
+        <p
+          className={`mt-1 font-semibold leading-relaxed text-slate-100 ${
+            inf ? "text-[17px]" : "text-[15px]"
+          }`}
+        >
           {bloco.regra}
         </p>
         {bloco.comoIdentificar && (
-          <p className="mt-2 rounded-md border-l-2 border-amber-400 bg-amber-400/10 px-3 py-2 text-[13px] leading-relaxed text-amber-100">
+          <p className={`mt-2 rounded-md border-l-2 border-amber-400 bg-amber-400/10 px-3 py-2 leading-relaxed text-amber-100 ${inf ? "text-[15px]" : "text-[13px]"}`}>
             <b className="text-amber-300">Como identificar:</b> {bloco.comoIdentificar}
           </p>
         )}
