@@ -268,10 +268,10 @@ function CacaMarcas({
       <Titulo>🔦 {bloco.titulo}</Titulo>
       <p className="text-sm text-white/70 mb-3">{bloco.instrucao}</p>
 
-      <div className="flex flex-wrap gap-y-2 mb-4 text-lg font-bold leading-relaxed">
+      <p className="mb-4 text-lg font-bold leading-relaxed">
         {tokens.map((t, i) =>
           t.trim() === "" ? (
-            <span key={i}>&nbsp;</span>
+            <span key={i}> </span>
           ) : (
             <button
               key={i}
@@ -292,7 +292,7 @@ function CacaMarcas({
             </button>
           ),
         )}
-      </div>
+      </p>
 
       {acertou && (
         <div className="rounded-xl bg-emerald-500/15 border-2 border-emerald-400/50 p-3 text-sm font-bold">
