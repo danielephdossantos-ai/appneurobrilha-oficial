@@ -152,7 +152,12 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   useEffect(() => () => stopSpeaking(), []);
 
   const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
-  const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+  // No skin "codex" (5º ano) a aula vira fluxo cena-a-cena: 1 momento por tela.
+  const [passo, setPasso] = useState(0);
+  useEffect(() => setPasso(0), [aula.slug]);
+  const progresso = codex
+    ? ((passo + 1) / MOMENTOS.length) * 100
+    : ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
   return (
     <KidsCtx.Provider value={{ kids, tween, codex }}>
