@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
-import { LicaoLousa } from "./LicaoLousa";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -18,10 +17,8 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
   if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
-  if (bloco.tipo === "licaoLousa") return <LicaoLousa bloco={bloco} />;
   return null;
 }
-
 
 // ---------- Alfabeto completo (26 letras clicáveis) ------------------
 

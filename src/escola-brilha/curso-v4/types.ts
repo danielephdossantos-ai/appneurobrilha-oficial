@@ -716,37 +716,7 @@ export type EnsinoVisualBloco =
       tipo: "alfabetoCompleto";
       /** Palavra-exemplo opcional pra cada letra (A→ABELHA, B→BOLA…). */
       exemplos?: Partial<Record<string, string>>;
-    }
-  | {
-      /**
-       * LOUSA DO PROFESSOR — ensino real, passo a passo, sem imagem.
-       * Equivalente ao "eu faço" da Matemática: o professor escreve a
-       * frase na lousa, destaca o alvo e explica POR QUE é assim.
-       */
-      tipo: "licaoLousa";
-      /** Regra/conceito em 1 frase, escrita como o professor fala. */
-      regra: string;
-      /** Como identificar na prática (teste rápido, pergunta-chave). */
-      comoIdentificar?: string;
-      /** Frases resolvidas, reveladas uma a uma. */
-      passos: Array<{
-        /** Frase-exemplo escrita na lousa. */
-        frase: string;
-        /** Trechos da frase que ficam realçados (busca literal). */
-        destaque?: string[];
-        /** Análise: por que é assim, o que a palavra está fazendo ali. */
-        analise: string;
-        /** Observação extra do professor (opcional). */
-        nota?: string;
-      }>;
-      /** Erro comum lado a lado: errado × certo × por quê. */
-      comparacao?: { errado: string; certo: string; porque: string };
-      /** Curiosidade linguística — sem infantilizar. */
-      curiosidade?: string;
-      /** Fecho: o que ficou valendo. */
-      resumo?: string[];
     };
-
 
 export type MomentoEnsinoVisual = {
   titulo: string;

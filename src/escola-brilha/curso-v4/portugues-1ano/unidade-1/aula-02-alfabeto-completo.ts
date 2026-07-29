@@ -87,46 +87,6 @@ export const aula02: AulaPortuguesV4 = {
     instrucao: "Cada letra tem um som e pode começar uma palavra. Veja alguns exemplos.",
     blocos: [
       {
-        tipo: "licaoLousa",
-        regra:
-          "O alfabeto tem 26 letras, sempre na mesma ordem: A, B, C… até Z. Com essas 26 letras escrevemos TODAS as palavras.",
-        comoIdentificar:
-          "Para saber qual letra começa a palavra, fale a palavra devagar e escute o primeiro som.",
-        passos: [
-          {
-            frase: "BOLA começa com B.",
-            destaque: ["B"],
-            analise:
-              "Fale bem devagar: B-B-BOLA. O primeiro som é o do B. Por isso a palavra começa com a letra B.",
-          },
-          {
-            frase: "CASA começa com C.",
-            destaque: ["C"],
-            analise:
-              "C-C-CASA. O som do começo é o do C. A letra C fica logo depois do B no alfabeto.",
-          },
-          {
-            frase: "A · B · C · D · E …",
-            destaque: ["A", "B", "C", "D", "E"],
-            analise:
-              "Essa ordem nunca muda. É por ela que a professora chama a chamada e que o dicionário guarda as palavras.",
-            nota: "Depois do E vem o F, e assim até chegar no Z, a última letra.",
-          },
-        ],
-        comparacao: {
-          errado: "O alfabeto tem 5 letras.",
-          certo: "O alfabeto tem 26 letras.",
-          porque: "5 são só as vogais (A, E, I, O, U). As outras 21 são as consoantes.",
-        },
-        curiosidade:
-          "A palavra alfabeto vem das duas primeiras letras gregas: alfa e beta.",
-        resumo: [
-          "São 26 letras, de A até Z.",
-          "A ordem do alfabeto nunca muda.",
-          "Toda palavra é feita juntando essas letras.",
-        ],
-      },
-      {
         tipo: "alfabetoCompleto",
         exemplos: {
           A: "ABELHA",
