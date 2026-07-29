@@ -59,13 +59,30 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
 
             {/* A frase na lousa */}
             <div className="overflow-x-auto rounded-md border border-slate-700 bg-[#0F172A] px-3 py-3">
-              <p className="whitespace-pre-wrap text-[17px] font-bold leading-relaxed text-slate-100">
+              <p
+                className={`whitespace-pre-wrap font-bold leading-relaxed text-slate-100 ${
+                  inf ? "text-[22px]" : "text-[17px]"
+                }`}
+              >
                 {realcar(p.frase, p.destaque)}
               </p>
             </div>
 
+            {inf && (
+              <button
+                type="button"
+                onClick={() => {
+                  stopSpeaking();
+                  speakChunked(`${p.frase}. ${p.analise}`);
+                }}
+                className="mt-2 rounded-full bg-amber-400 px-4 py-1.5 text-[13px] font-black text-[#0B0F17]"
+              >
+                🔊 Ouvir
+              </button>
+            )}
+
             {/* Análise */}
-            <p className="mt-3 text-[14px] leading-relaxed text-slate-300">
+            <p className={`mt-3 leading-relaxed text-slate-300 ${inf ? "text-[16px]" : "text-[14px]"}`}>
               <b className="text-emerald-300">Por quê:</b> {p.analise}
             </p>
             {p.nota && (
