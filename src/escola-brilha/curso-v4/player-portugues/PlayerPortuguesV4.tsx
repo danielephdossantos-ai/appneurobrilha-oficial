@@ -325,7 +325,13 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  tween
+                  cyber
+                    ? `block text-[11px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-[.1em] border transition duration-200 ease-in-out ${
+                        ativo === m.id
+                          ? "text-[#0B0F17] border-transparent drop-shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                          : "text-slate-400 border-slate-700 bg-slate-800/50 hover:border-violet-500/60 hover:text-violet-200"
+                      }`
+                    : tween
                     ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
                         ativo === m.id
                           ? "text-[#0b1020] border-transparent"
@@ -345,7 +351,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 }
                 style={
                   kids && ativo === m.id
-                    ? { background: CORES[m.id] ?? (tween ? "#22d3ee" : "#fbbf24") }
+                    ? { background: CORES[m.id] ?? (cyber ? "#A855F7" : tween ? "#22d3ee" : "#fbbf24") }
                     : undefined
                 }
               >
