@@ -1,5 +1,4 @@
 import type { AulaPortuguesV4 } from "../../types";
-import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as robo } from "@/assets/neuro-treino/objetos/robo.png.asset.json";
 import { url as bonecaPano } from "@/assets/neuro-treino/objetos/boneca-pano.png.asset.json";
 import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
@@ -25,100 +24,6 @@ export const aula04: AulaPortuguesV4 = {
   iconeTrilha: "🏆",
   bncc: ["EF01LP05", "EF01LP06", "EF01LP07"],
   duracaoMin: 15,
-
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: esquiloBrilha,
-      falaMascote: "Oi! Hoje é o desafio final: palavras com TRÊS pedacinhos! Toca pra começar!",
-    },
-    {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma comigo: BA-NA-NA. Quantas palmas?",
-      palavra: "BA-NA-NA",
-      silabas: 3,
-      imagemUrl: banana,
-      elogio: "Três palmas! BA-NA-NA tem três pedacinhos.",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: banana,
-      silabas: ["BA", "NA", "NA"],
-      palavra: "BANANA",
-      instrucaoAudio: "Toca em BA, depois NA, depois NA de novo.",
-      elogio: "Isso! BA + NA + NA faz BANANA porque juntamos os três pedacinhos.",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: abelha,
-      silabas: ["A", "BE", "LHA"],
-      palavra: "ABELHA",
-      instrucaoAudio: "Toca em A, depois BE, depois LHA.",
-      elogio: "Muito bem! A + BE + LHA faz ABELHA.",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: bicicletaModerna,
-      silabas: ["BI", "CI", "CLE"],
-      palavra: "BICI",
-      instrucaoAudio: "Toca nos pedacinhos na ordem, um de cada vez.",
-      elogio: "Isso! Você juntou os pedacinhos de bicicleta.",
-    },
-    {
-      tipo: "leituraSilabica",
-      imagemUrl: banana,
-      palavra: "BANANA",
-      silabas: ["BA", "NA", "NA"],
-      instrucaoAudio: "Vamos ouvir a palavra devagar e depois inteira.",
-      elogio: "Você leu BANANA! BA-NA-NA junto forma BANANA.",
-    },
-    {
-      tipo: "leituraSilabica",
-      imagemUrl: abelha,
-      palavra: "ABELHA",
-      silabas: ["A", "BE", "LHA"],
-      instrucaoAudio: "Agora ouça ABELHA devagar e depois inteira.",
-      elogio: "Isso! A-BE-LHA junto forma ABELHA.",
-    },
-    {
-      tipo: "elkoninBoxes",
-      imagemUrl: banana,
-      palavra: "BANANA",
-      fonemas: ["B", "A", "N", "A", "N", "A"],
-      instrucaoAudio: "Toca em cada caixinha enquanto eu falo o som.",
-      elogio: "Você tocou em todos os sons de BANANA!",
-    },
-    {
-      tipo: "leituraFrase",
-      imagemUrl: abelha,
-      frase: "A ABELHA FAZ MEL.",
-      instrucaoAudio: "Vamos ler essa frase juntos, bem devagar.",
-      elogio: "Você leu a frase inteira!",
-    },
-    {
-      tipo: "compreensaoLeitura",
-      perguntaAudio: "O que a abelha faz, na frase que você leu?",
-      opcoes: [
-        { texto: "Ela faz mel.", correta: true },
-        { texto: "Ela nada no lago.", correta: false },
-        { texto: "Ela dorme o dia todo.", correta: false },
-      ],
-      feedbackAcerto: "Isso! A frase diz 'A abelha faz mel'.",
-      feedbackErro: "Escuta de novo a frase: 'A abelha faz mel'.",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "Caçada às palavras compridas",
-      convite: "Procurem juntos 3 objetos da casa com nomes de três sílabas.",
-      dicaAdulto: "Ajude a bater palma em cada pedacinho da palavra.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Mestre das Sílabas",
-      mascoteUrl: esquiloBrilha,
-      falaFinal: "Parabéns! Você aprendeu a ler palavras compridas de três pedacinhos!",
-    },
-  ],
 
   momento01_motivacao: {
     titulo: "O Desafio das Palavras Compridas",

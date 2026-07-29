@@ -5,13 +5,6 @@ import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.js
 import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
 import { url as quadroAlegre } from "@/assets/neuro-treino/objetos/quadro-alegre.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as abelha } from "@/assets/neuro-treino/objetos/abelha.png.asset.json";
-import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
-import { url as arcoIris } from "@/assets/neuro-treino/objetos/arco-iris.png.asset.json";
-import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
-import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 
 /**
  * Aula 1 — O Nome Mágico
@@ -35,113 +28,6 @@ export const aula01: AulaPortuguesV4 = {
   iconeTrilha: "✨",
   bncc: ["EF01LP01", "EF12LP01"],
   duracaoMin: 15,
-
-  // ============================================================
-  // MODO JOGO — a criança de 6 anos ainda não lê. Tudo aqui é
-  // ÁUDIO + IMAGEM + TOQUE. Nenhuma tela de texto para ler.
-  // ============================================================
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: esquiloBrilha,
-      falaMascote:
-        "Oi! Eu sou a Aurora, guardiã das letras. Hoje a gente vai brincar com a primeira letra do seu nome. Toca no botão pra começar!",
-    },
-    {
-      tipo: "vocabularioVisual",
-      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
-      itens: [
-        { nome: "menina", imagemUrl: menina },
-        { nome: "menino", imagemUrl: menino },
-        { nome: "estrela", imagemUrl: estrela },
-      ],
-    },
-    {
-      tipo: "somDaLetra",
-      letra: "A",
-      som: "a",
-      instrucaoAudio: "Essa é a letra A. Ela faz o som aaa. Escuta as palavras que começam com A.",
-      exemplos: [
-        { nome: "abelha", imagemUrl: abelha },
-        { nome: "árvore", imagemUrl: arvore },
-        { nome: "arco-íris", imagemUrl: arcoIris },
-      ],
-      elogio: "Isso! A faz aaa, igual em abelha.",
-    },
-    {
-      tipo: "tracadoLetra",
-      letra: "A",
-      instrucaoAudio: "Agora escreve o A com o dedinho na tela. Começa de cima e desce.",
-      elogio: "Que A bonito! Sua mão já aprendeu o caminho da letra.",
-    },
-    {
-      tipo: "cacaAoSom",
-      somAlvo: "A",
-      exemploFala: "abelha",
-      instrucaoAudio: "Toca em TUDO que começa com o som aaa, como em abelha.",
-      opcoes: [
-        { nome: "abelha", imagemUrl: abelha, correta: true },
-        { nome: "bola", imagemUrl: bola, correta: false },
-        { nome: "árvore", imagemUrl: arvore, correta: true },
-        { nome: "sol", imagemUrl: sol, correta: false },
-        { nome: "arco-íris", imagemUrl: arcoIris, correta: true },
-        { nome: "gato", imagemUrl: gato, correta: false },
-      ],
-      elogio: "Achou todas! Abelha, árvore e arco-íris começam com aaa.",
-      feedbackErro: "Escuta de novo: aaa-belha. Essa palavra começa com esse som?",
-    },
-    {
-      tipo: "pareamentoLetraSom",
-      instrucaoAudio: "Liga cada letra com a figura que começa com o som dela.",
-      pares: [
-        { letra: "A", nome: "abelha", imagemUrl: abelha },
-        { letra: "B", nome: "bola", imagemUrl: bola },
-        { letra: "C", nome: "casa", imagemUrl: casa },
-      ],
-      elogio: "Perfeito! Cada letra tem o seu som.",
-    },
-    {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma junto comigo: A-NA. Quantas palmas?",
-      palavra: "A-NA",
-      silabas: 2,
-      imagemUrl: menina,
-      elogio: "Duas palmas! Todo nome tem pedacinhos.",
-    },
-    {
-      tipo: "letrasMoveis",
-      imagemUrl: menina,
-      palavra: "ANA",
-      distratoras: ["O", "M", "E"],
-      instrucaoAudio: "Arrasta as letras pra montar o nome ANA.",
-      elogio: "Você montou ANA! Letras juntas viram nome.",
-    },
-    {
-      tipo: "compreensaoImagem",
-      perguntaAudio: "Qual figura começa com o som aaa?",
-      opcoes: [
-        { nome: "abelha", imagemUrl: abelha, correta: true },
-        { nome: "bola", imagemUrl: bola, correta: false },
-        { nome: "gato", imagemUrl: gato, correta: false },
-      ],
-      feedbackAcerto: "Isso! Aaa-belha começa com A.",
-      feedbackErro: "Quase! Fala devagar: aaa-belha.",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "Caça-letras em casa",
-      convite:
-        "Procure com um adulto três coisas em casa que começam com a letra do seu nome.",
-      dicaAdulto:
-        "Fale o som da letra, não o nome dela. Ex.: /a/ de armário, e não 'á'.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Dona das Letras do Meu Nome",
-      mascoteUrl: esquiloBrilha,
-      falaFinal: "Você descobriu as letras do seu nome! Amanhã a gente anda na trilha do alfabeto.",
-    },
-  ],
 
   // ------------------------------------------------------------
   // 1 · MOTIVAÇÃO

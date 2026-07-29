@@ -8,10 +8,7 @@ import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.js
 import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
-import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
-import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
-import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 /**
  * Aula 4 — Eu Reconto a História
  * -------------------------------------------------------------
@@ -28,108 +25,6 @@ export const aula04: AulaPortuguesV4 = {
   iconeTrilha: "🗣️",
   bncc: ["EF01LP26", "EF12LP19", "EF15LP02", "EF15LP03"],
   duracaoMin: 15,
-
-  // ============================================================
-  // MODO JOGO — audio-first, imagem, toque (criança de 6 anos).
-  // ============================================================
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: esquiloBrilha,
-      falaMascote:
-        "Chegou a hora mais especial: hoje você vai virar um contador de histórias! Toca pra começar!",
-    },
-    {
-      tipo: "historiaIlustrada",
-      titulo: "O Dia em que Bento Plantou um Girassol",
-      cenas: [
-        { imagemUrl: menino, narracao: "No começo, Bento plantou uma sementinha de girassol no quintal, numa manhã de sol." },
-        { imagemUrl: sol, narracao: "No meio, todo dia ele regava a terra e esperava, mesmo sem ver nada crescer." },
-        { imagemUrl: girassol, narracao: "No fim, brotou um girassol enorme e amarelo. Bento ficou muito orgulhoso!" },
-      ],
-    },
-    {
-      tipo: "leituraEco",
-      titulo: "Reconte com a Aurora",
-      imagemUrl: girassol,
-      imagensLinhas: [menino, sol, girassol, menino],
-      linhas: [
-        "Bento plantou uma sementinha.",
-        "Ele regou a terra todo dia.",
-        "Brotou um girassol enorme.",
-        "Bento ficou muito feliz!",
-      ],
-      instrucaoAudio: "Escuta cada linha e repete no microfone, do jeitinho seu!",
-      elogio: "Uhuu! Você recontou a história inteirinha!",
-    },
-    {
-      tipo: "compreensaoImagem",
-      perguntaAudio: "Quem é o personagem principal dessa história?",
-      opcoes: [
-        { nome: "Bento", imagemUrl: menino, correta: true },
-        { nome: "o coelhinho", imagemUrl: coelho, correta: false },
-        { nome: "o cachorro", imagemUrl: cachorro, correta: false },
-      ],
-      feedbackAcerto: "Isso! O Bento é quem planta e cuida do girassol do começo ao fim.",
-      feedbackErro: "Quem fez as ações a história inteira? Foi o Bento.",
-    },
-    {
-      tipo: "compreensaoLeitura",
-      perguntaAudio: "Qual é a ordem certa da história do Bento?",
-      opcoes: [
-        { texto: "Plantou, regou, brotou o girassol", correta: true },
-        { texto: "Brotou, plantou, regou", correta: false },
-        { texto: "Regou, brotou, plantou", correta: false },
-      ],
-      feedbackAcerto: "Isso mesmo! Primeiro planta, depois rega, por último brota.",
-      feedbackErro: "Pensa: o que precisa acontecer PRIMEIRO pra uma planta crescer?",
-    },
-    {
-      tipo: "campoSemantico",
-      categoria: "CUIDANDO DE PLANTAS",
-      categoriaEmoji: "🌻",
-      pergunta: "O que Bento fazia todo dia pra ajudar o girassol crescer?",
-      opcoes: [
-        { nome: "regava a terra", imagemUrl: sol, correta: true },
-        { nome: "brincava de bola", imagemUrl: bola, correta: false },
-        { nome: "dormia o dia todo", imagemUrl: coracao, correta: false },
-      ],
-      instrucaoAudio: "Toca na figura que mostra o cuidado do Bento com a planta.",
-      elogio: "Isso! Ele regava a terra todo dia.",
-    },
-    {
-      tipo: "rodaConversa",
-      imagemUrl: girassol,
-      pergunta: "Você já plantou ou cuidou de alguma planta? Conta pra gente!",
-      exemplos: ["Já plantei uma flor", "Ainda não, mas quero", "Regamos as plantas de casa"],
-    },
-    {
-      tipo: "compreensaoImagem",
-      perguntaAudio: "O coelhinho Bino procurava o quê, escondida atrás da pedra?",
-      opcoes: [
-        { nome: "uma cenoura", imagemUrl: coelho, correta: true },
-        { nome: "um osso", imagemUrl: cachorro, correta: false },
-        { nome: "uma flor", imagemUrl: girassol, correta: false },
-      ],
-      feedbackAcerto: "Isso! Bino procurava uma cenoura e achou atrás da pedra!",
-      feedbackErro: "Lembra da história: o que o coelhinho adora comer?",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "Seja o contador de histórias da família",
-      convite:
-        "Leiam uma história curta juntos e depois reconte pra sua família com suas próprias palavras, olhando as imagens.",
-      dicaAdulto:
-        "Ajude lembrando: quem? onde? quando? o que aconteceu no começo, meio e fim? Grave um áudio se quiser guardar de lembrança.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Contador de Histórias",
-      mascoteUrl: esquiloBrilha,
-      falaFinal: "Parabéns, contador de histórias! Você já sabe recontar uma história inteira com suas próprias palavras!",
-    },
-  ],
-
 
   momento01_motivacao: {
     titulo: "Brilha vira contador de histórias",

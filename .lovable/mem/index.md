@@ -18,7 +18,6 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 **PT-BR obrigatório em imagens**: mapas, infográficos e qualquer texto embutido em imagem gerada devem estar 100% em português brasileiro — nunca inglês. Ver [Português somente](mem://constraints/portugues-somente).
 
 ## Memories
-- [Português 1º ano em modo jogo](mem://features/portugues-1ano-modo-jogo) — aulas do 1º ano rodam no motor audio-first via `momentosJogo`, nunca só texto.
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
 - [Postura de professor excelente](mem://preferences/postura-professor-excelente) — Mapa idade × série.
 - [Padrão EF01MA02 travado](mem://features/padrao-ef01ma02) — Gabarito obrigatório.

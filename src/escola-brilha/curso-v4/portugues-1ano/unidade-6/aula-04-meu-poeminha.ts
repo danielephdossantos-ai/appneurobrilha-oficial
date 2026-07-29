@@ -24,66 +24,6 @@ export const aula04: AulaPortuguesV4 = {
   bncc: ["EF01LP09", "EF01LP10", "EF12LP18", "EF15LP05"],
   duracaoMin: 15,
 
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: brilha,
-      falaMascote: "Oi! Chegou o dia de você virar poeta e criar o seu próprio poeminha. Vamos lá?",
-    },
-    {
-      tipo: "escutaRitmada",
-      imagemUrl: sol,
-      versos: ["O sol de manhã saiu.", "E a florzinha abriu."],
-      legenda: "Escute o poeminha do sol e da flor.",
-    },
-    {
-      tipo: "palavraNaFrase",
-      imagemUrl: flor,
-      frase: "O sol de manhã saiu. E a florzinha ___.",
-      palavraCorreta: "abriu",
-      distratores: ["dormiu", "correu"],
-      instrucaoAudio: "Qual palavra termina o verso e rima com SAIU?",
-      elogio: "Isso! ABRIU rima com SAIU. Os dois terminam em IU.",
-    },
-    {
-      tipo: "palavraNaFrase",
-      imagemUrl: gato,
-      frase: "O gato perdeu o sapato. Achou com o pato no ___.",
-      palavraCorreta: "mato",
-      distratores: ["carro", "livro"],
-      instrucaoAudio: "Qual palavra termina o verso e rima com SAPATO?",
-      elogio: "Isso! MATO rima com SAPATO. Os dois terminam em ATO.",
-    },
-    {
-      tipo: "leituraEco",
-      titulo: "Meu Poeminha",
-      imagemUrl: sol,
-      linhas: ["O sol de manhã saiu.", "E a florzinha abriu."],
-      instrucaoAudio: "Escute o poeminha pronto e repita comigo, com carinho.",
-      elogio: "Lindo! Você já sabe recitar um poeminha inteiro.",
-    },
-    {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma junto comigo: FLO-RZI-NHA. Quantas palmas?",
-      palavra: "FLO-RZI-NHA",
-      silabas: 3,
-      imagemUrl: flor,
-      elogio: "Três palmas! Muito bem, poeta.",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "O Poeminha da Família",
-      convite: "Escolha duas palavras que rimam com um adulto e recite o seu poeminha para a família.",
-      dicaAdulto: "Ajude a criança a pensar em duas palavras que terminam com o mesmo som, como mão/pão ou flor/amor.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Poeta do 1º Ano — Curso Completo!",
-      mascoteUrl: brilha,
-      falaFinal: "Parabéns! Você aprendeu letras, sílabas, palavras, frases, rimas e poesia. Você concluiu o curso de Português do 1º ano! Que orgulho de você!",
-    },
-  ],
-
   momento01_motivacao: {
     titulo: "Brilha vira poeta",
     historia:

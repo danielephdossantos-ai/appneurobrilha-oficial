@@ -1,5 +1,4 @@
 import type { AulaPortuguesV4 } from "../../types";
-import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
 import { url as robo } from "@/assets/neuro-treino/objetos/robo.png.asset.json";
 import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
@@ -30,100 +29,6 @@ export const aula01: AulaPortuguesV4 = {
   iconeTrilha: "🧩",
   bncc: ["EF01LP05", "EF01LP06"],
   duracaoMin: 15,
-
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: esquiloBrilha,
-      falaMascote: "Oi! Eu sou a Aurora. Hoje vamos juntar pedacinhos de som pra formar palavras. Toca pra começar!",
-    },
-    {
-      tipo: "ritmoCorpo",
-      instrucaoAudio: "Bate palma comigo: BO-LA. Quantas palmas?",
-      palavra: "BO-LA",
-      silabas: 2,
-      imagemUrl: bola,
-      elogio: "Duas palmas! BO e LA são os pedacinhos de BOLA.",
-    },
-    {
-      tipo: "somDaLetra",
-      letra: "B",
-      som: "b",
-      instrucaoAudio: "Essa é a letra B. Ela faz o som bbb. Escuta palavras que começam com B.",
-      exemplos: [
-        { nome: "bola", imagemUrl: bola },
-        { nome: "banana", imagemUrl: bola },
-      ],
-      elogio: "Isso! B faz bbb, igual em bola.",
-    },
-    {
-      tipo: "familiaSilabica",
-      consoante: "B",
-      silabas: ["BA", "BE", "BI", "BO", "BU"],
-      instrucaoAudio: "Toca em cada sílaba e escuta o som dela.",
-      elogio: "Você conheceu a família toda do B!",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: bola,
-      silabas: ["BO", "LA"],
-      palavra: "BOLA",
-      instrucaoAudio: "Toca em BO, depois em LA. Vamos ver que palavra aparece.",
-      elogio: "Isso! BO + LA faz BOLA porque juntamos os dois pedacinhos.",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: casa,
-      silabas: ["CA", "SA"],
-      palavra: "CASA",
-      instrucaoAudio: "Agora toca em CA, depois em SA.",
-      elogio: "Muito bem! CA + SA faz CASA.",
-    },
-    {
-      tipo: "juntarSilabas",
-      imagemUrl: pato,
-      silabas: ["PA", "TO"],
-      palavra: "PATO",
-      instrucaoAudio: "Toca em PA, depois em TO.",
-      elogio: "Isso! PA + TO faz PATO.",
-    },
-    {
-      tipo: "elkoninBoxes",
-      imagemUrl: bola,
-      palavra: "BOLA",
-      fonemas: ["B", "O", "L", "A"],
-      instrucaoAudio: "Toca em cada caixinha enquanto eu falo o som.",
-      elogio: "Você tocou em todos os sons de BOLA!",
-    },
-    {
-      tipo: "letrasMoveis",
-      imagemUrl: casa,
-      palavra: "CASA",
-      distratoras: ["B", "O", "P"],
-      instrucaoAudio: "Arrasta as letras pra montar a palavra CASA.",
-      elogio: "Você montou CASA! As letras juntas formam a palavra.",
-    },
-    {
-      tipo: "leituraSilabica",
-      imagemUrl: pato,
-      palavra: "PATO",
-      silabas: ["PA", "TO"],
-      instrucaoAudio: "Vamos ouvir a palavra devagar e depois inteira.",
-      elogio: "Você leu PATO! PA-TO junto forma PATO.",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "Caça-sílabas em casa",
-      convite: "Procure com um adulto um objeto que tenha o pedacinho BO no nome, como BOLA.",
-      dicaAdulto: "Fale a palavra bem devagar, batendo palma em cada pedacinho.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Montador de Palavras",
-      mascoteUrl: esquiloBrilha,
-      falaFinal: "Você aprendeu a juntar sílabas e formar palavras! Amanhã vamos contar mais pedacinhos.",
-    },
-  ],
 
   // ------------------------------------------------------------
   // 1 · MOTIVAÇÃO

@@ -731,16 +731,6 @@ export type AulaPortuguesV4 = {
   bncc: string[];
   duracaoMin: number;
 
-  /**
-   * MODO JOGO (1º ano e turmas que ainda não leem).
-   * Quando presente, o player ignora os 11 momentos de texto e roda a aula
-   * inteira em formato audio-first + imagem + toque (motor do PlayerPortuguesEI).
-   * Os momentos de texto continuam no arquivo como plano de aula do adulto.
-   */
-  momentosJogo?: import("../curso-portugues-ei/types").MomentoEI[];
-
-
-
   momento01_motivacao: MomentoMotivacaoPT;
   momento02_previsao: MomentoPrevisao;
   momento03_vocabulario: MomentoVocabulario;

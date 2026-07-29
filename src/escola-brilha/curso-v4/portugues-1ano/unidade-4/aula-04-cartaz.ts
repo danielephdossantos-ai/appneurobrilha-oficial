@@ -4,7 +4,6 @@ import { url as patioEscola } from "@/assets/neuro-treino/objetos/patio-escola.p
 import { url as quadroAlegre } from "@/assets/neuro-treino/objetos/quadro-alegre.png.asset.json";
 import { url as criancasGrupo } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
 import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
-import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Aula 4 — O Cartaz da Escola
@@ -21,94 +20,6 @@ export const aula04: AulaPortuguesV4 = {
   iconeTrilha: "📢",
   bncc: ["EF01LP16", "EF01LP17", "EF01LP19", "EF01LP20"],
   duracaoMin: 15,
-
-  // ============================================================
-  // MODO JOGO — audio-first, imagem e toque.
-  // ============================================================
-  momentosJogo: [
-    {
-      tipo: "boasVindas",
-      mascoteUrl: brilha,
-      falaMascote:
-        "Oi! Eu sou o Brilha! Hoje vamos ler cartazes bem grandes. Toca no botão pra começar!",
-    },
-    {
-      tipo: "vocabularioVisual",
-      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
-      itens: [
-        { nome: "escola", imagemUrl: escola },
-        { nome: "quadro", imagemUrl: quadroAlegre },
-        { nome: "crianças", imagemUrl: criancasGrupo },
-        { nome: "mochila", imagemUrl: mochila },
-      ],
-    },
-    {
-      tipo: "leituraFrase",
-      imagemUrl: escola,
-      frase: "NÃO CORRA.",
-      instrucaoAudio: "Esse é um cartaz da escola. Vamos ler ele juntos, com letras bem grandes.",
-      elogio: "Isso! Você leu o cartaz. Letras grandes se leem de longe.",
-    },
-    {
-      tipo: "leituraFrase",
-      imagemUrl: quadroAlegre,
-      frase: "SILÊNCIO.",
-      instrucaoAudio: "Esse cartaz fica na porta da biblioteca. Vamos ler.",
-      elogio: "Muito bem! Esse cartaz pede silêncio.",
-    },
-    {
-      tipo: "leituraFrase",
-      imagemUrl: criancasGrupo,
-      frase: "LAVE AS MÃOS.",
-      instrucaoAudio: "Esse cartaz é um lembrete importante. Vamos ler.",
-      elogio: "Isso! Cartazes de aviso ajudam todo mundo a lembrar de coisas importantes.",
-    },
-    {
-      tipo: "compreensaoLeitura",
-      perguntaAudio: "Onde ficava colado o cartaz 'NÃO CORRA'?",
-      opcoes: [
-        { texto: "Na parede do corredor", correta: true },
-        { texto: "Dentro da mochila", correta: false },
-        { texto: "No quadro de giz", correta: false },
-      ],
-      feedbackAcerto: "Isso! Ele ficava colado na parede do corredor, onde todo mundo passa.",
-      feedbackErro: "Pensa: cartazes ficam em lugares onde muita gente passa, não dentro de coisas fechadas.",
-    },
-    {
-      tipo: "compreensaoLeitura",
-      perguntaAudio: "Por que as letras do cartaz são tão grandes?",
-      opcoes: [
-        { texto: "Pra todo mundo ler de longe", correta: true },
-        { texto: "Porque acabou a tinta pequena", correta: false },
-        { texto: "Só pra enfeitar", correta: false },
-      ],
-      feedbackAcerto: "Isso! Letras grandes ajudam a ler de longe, rapidinho.",
-      feedbackErro: "Pensa no motivo prático: quem está longe também precisa ler o aviso.",
-    },
-    {
-      tipo: "compreensaoImagem",
-      perguntaAudio: "Qual cartaz pede silêncio, pra não fazer barulho?",
-      opcoes: [
-        { nome: "quadro", imagemUrl: quadroAlegre, correta: true },
-        { nome: "escola", imagemUrl: escola, correta: false },
-        { nome: "crianças", imagemUrl: criancasGrupo, correta: false },
-      ],
-      feedbackAcerto: "Isso! O cartaz da biblioteca pedia SILÊNCIO.",
-      feedbackErro: "Lembra: o cartaz da biblioteca é o que pede silêncio.",
-    },
-    {
-      tipo: "missaoFamilia",
-      titulo: "Nosso cartaz em casa",
-      convite: "Com um adulto, façam um cartaz com letras BEM grandes pra colar em casa, como 'FECHE A PORTA' ou 'LAVE AS MÃOS'.",
-      dicaAdulto: "Deixe a criança escolher o aviso e desenhar as letras bem grandes, mesmo que não sejam perfeitas.",
-    },
-    {
-      tipo: "celebracao",
-      medalha: "Leitor do Mundo",
-      mascoteUrl: brilha,
-      falaFinal: "Você leu listas, bilhetes, convites e cartazes! Agora você entende os textos do dia a dia.",
-    },
-  ],
 
   momento01_motivacao: {
     titulo: "Um aviso gigante no corredor",

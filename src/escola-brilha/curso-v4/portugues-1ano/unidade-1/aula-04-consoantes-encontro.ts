@@ -7,8 +7,6 @@ import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
-import { url as lata } from "@/assets/neuro-treino/objetos/lata.png.asset.json";
 
 /**
  * Aula 4 — Consoante encontra Vogal
@@ -30,49 +28,6 @@ export const aula04: AulaPortuguesV4 = {
   iconeTrilha: "🔑",
   bncc: ["EF01LP02", "EF01LP04", "EF01LP05", "EF12LP01"],
   duracaoMin: 16,
-
-  momentosJogo: [
-    { tipo: "boasVindas", mascoteUrl: esquiloBrilha,
-      falaMascote: "Segredo de ouro: a vogal dá voz pra consoante. Juntou as duas, virou sílaba — e sílaba já dá pra ler!" },
-    { tipo: "familiaSilabica", consoante: "B", silabas: ["BA", "BE", "BI", "BO", "BU"],
-      instrucaoAudio: "Toca em cada sílaba e escuta o B ganhando voz com cada vogal.",
-      elogio: "BA, BE, BI, BO, BU — a família do B!" },
-    { tipo: "familiaSilabica", consoante: "L", silabas: ["LA", "LE", "LI", "LO", "LU"],
-      instrucaoAudio: "Agora a família do L. Toca em cada uma.",
-      elogio: "LA, LE, LI, LO, LU!" },
-    { tipo: "juntarSilabas", imagemUrl: bola, silabas: ["BO", "LA"], palavra: "BOLA",
-      instrucaoAudio: "Toca nas sílabas na ordem e escuta a palavra aparecer.",
-      elogio: "BO mais LA é BOLA! Você leu sua primeira palavra." },
-    { tipo: "juntarSilabas", imagemUrl: lata, silabas: ["LA", "TA"], palavra: "LATA",
-      instrucaoAudio: "Junta essas duas sílabas.",
-      elogio: "LA mais TA é LATA!" },
-    { tipo: "leituraSilabica", imagemUrl: casa, palavra: "CASA", silabas: ["CA", "SA"],
-      instrucaoAudio: "Escuta devagar e depois junto. Depois tenta ler você.",
-      elogio: "CA-SA. CASA! Você está lendo." },
-    { tipo: "elkoninBoxes", imagemUrl: pato, palavra: "PATO", fonemas: ["P", "A", "T", "O"],
-      instrucaoAudio: "Toca numa caixinha pra cada som de PATO.",
-      elogio: "Quatro sons: p, a, t, o." },
-    { tipo: "letrasMoveis", imagemUrl: gato, palavra: "GATO", distratoras: ["M", "E", "S"],
-      instrucaoAudio: "Monta a palavra GATO.",
-      elogio: "GATO montado! Letras viram sílabas, sílabas viram palavra." },
-    { tipo: "leituraFrase", imagemUrl: gato, frase: "O GATO É MEU.",
-      instrucaoAudio: "Agora uma frase inteirinha. Escuta e acompanha com o dedo.",
-      elogio: "Você leu uma FRASE! Isso é leitura de verdade." },
-    { tipo: "compreensaoImagem",
-      perguntaAudio: "Qual figura é a palavra BO-LA?",
-      opcoes: [
-        { nome: "bola", imagemUrl: bola, correta: true },
-        { nome: "sapo", imagemUrl: sapo, correta: false },
-        { nome: "livro", imagemUrl: livro, correta: false },
-      ],
-      feedbackAcerto: "Isso! BO-LA.",
-      feedbackErro: "Escuta os pedaços: BO... LA." },
-    { tipo: "missaoFamilia", titulo: "Leitura da geladeira",
-      convite: "Procure com um adulto uma embalagem em casa e leia junto uma palavra de duas sílabas.",
-      dicaAdulto: "Cubra metade da palavra e revele sílaba por sílaba." },
-    { tipo: "celebracao", medalha: "Primeira Leitura", mascoteUrl: esquiloBrilha,
-      falaFinal: "Você já lê sílabas, palavras e até uma frase! A Unidade 1 está completa." },
-  ],
 
   // ------------------------------------------------------------
   // 1 · MOTIVAÇÃO
