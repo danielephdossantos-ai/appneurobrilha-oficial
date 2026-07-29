@@ -821,9 +821,7 @@ function Palco({
     if (codex) window.scrollTo({ top: 0, behavior: "smooth" });
   }, [passo, codex]);
 
-  // Todas as skins (inclusive codex) usam scroll contínuo: sem "Continuar",
-  // a aula inteira em uma tela rolável, igual às demais unidades do curso.
-  if (true) {
+  if (!codex) {
     return (
       <>
         {cenas}
@@ -831,6 +829,7 @@ function Palco({
       </>
     );
   }
+
 
 
   const total = cenas.length;
