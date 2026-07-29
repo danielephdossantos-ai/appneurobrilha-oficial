@@ -583,14 +583,16 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             <button
               onClick={() => onConcluir?.()}
               className={
-                tween
+                codex
+                  ? "px-10 py-4 rounded-lg bg-[linear-gradient(90deg,#8B5CF6,#A855F7)] text-slate-50 font-extrabold uppercase tracking-[0.15em] text-base border border-violet-300/50 shadow-[0_0_32px_-4px_rgba(168,85,247,.75)] hover:brightness-115 hover:shadow-[0_0_44px_-4px_rgba(168,85,247,.95)] active:scale-95 transition-all duration-200 ease-out"
+                  : tween
                   ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
                   : kids
                   ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
                   : "px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
               }
             >
-              {tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
+              {codex ? "⚡ Finalizar operação" : tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
             </button>
             <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
               Sair para a trilha
