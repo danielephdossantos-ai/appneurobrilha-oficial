@@ -635,6 +635,51 @@ function Secao({
     );
   }
 
+  if (codex) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-lg overflow-hidden border bg-[#0F172A]/85 backdrop-blur-sm transition-shadow duration-300"
+        style={{
+          borderColor: `${cor}55`,
+          borderWidth: "1.5px",
+          boxShadow: `0 0 30px -18px ${cor}, inset 0 1px 0 ${cor}22`,
+        }}
+      >
+        <div
+          className="flex items-center gap-3 px-4 py-3 border-b"
+          style={{ borderColor: `${cor}33`, background: `${cor}12` }}
+        >
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-md text-lg"
+            style={{
+              background: "#1E293B",
+              border: `1.5px solid ${cor}77`,
+              boxShadow: `0 0 14px -4px ${cor}`,
+            }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-sm md:text-base font-extrabold uppercase tracking-[0.14em]"
+            style={{ color: cor, textShadow: `0 0 14px ${cor}55` }}
+          >
+            {texto}
+          </span>
+          <span
+            className="ml-auto shrink-0 font-mono text-[10px] uppercase tracking-widest opacity-70"
+            style={{ color: cor }}
+          >
+            {id}
+          </span>
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[1rem] leading-relaxed text-slate-100">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
   if (tween) {
     return (
       <section
