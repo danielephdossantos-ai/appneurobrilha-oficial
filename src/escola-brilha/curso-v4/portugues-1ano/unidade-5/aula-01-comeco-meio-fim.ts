@@ -9,6 +9,7 @@ import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.js
 import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as arvore } from "@/assets/neuro-treino/objetos/arvore.png.asset.json";
 
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 /**
  * Aula 1 — Começo, Meio e Fim
  * -------------------------------------------------------------
@@ -29,6 +30,118 @@ export const aula01: AulaPortuguesV4 = {
   iconeTrilha: "📗",
   bncc: ["EF01LP26", "EF12LP19", "EF15LP02", "EF15LP03"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — audio-first, imagem, toque (criança de 6 anos).
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Eu sou a Aurora! Hoje vamos brincar com uma história da coelhinha Fiona. Toca pra começar!",
+    },
+    {
+      tipo: "historiaIlustrada",
+      titulo: "A Coelhinha que Sumiu",
+      cenas: [
+        { imagemUrl: coelho, narracao: "No começo, a coelhinha Fiona brincava pulando no jardim." },
+        { imagemUrl: arvore, narracao: "No meio, ela seguiu uma borboleta e se perdeu na floresta." },
+        { imagemUrl: casa, narracao: "No fim, ela seguiu o cheirinho de cenoura e voltou pra casa, feliz!" },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual foi o COMEÇO da história da Fiona?",
+      opcoes: [
+        { nome: "brincando no jardim", imagemUrl: coelho, correta: true },
+        { nome: "perdida na floresta", imagemUrl: arvore, correta: false },
+        { nome: "voltando pra casa", imagemUrl: casa, correta: false },
+      ],
+      feedbackAcerto: "Isso! No começo, a Fiona estava brincando no jardim.",
+      feedbackErro: "Pensa bem: o que aconteceu ANTES de tudo? Ela estava brincando.",
+    },
+    {
+      tipo: "preverHistoria",
+      titulo: "A Sementinha e o Sol",
+      cenas: [
+        { imagemUrl: girassol, narracao: "A sementinha estava escondida bem fundo na terra escura." },
+        { imagemUrl: sol, narracao: "O sol brilhou forte e a chuva molhou a terrinha todos os dias." },
+      ],
+      pergunta: "O que você acha que vai acontecer com a sementinha?",
+      instrucaoAudio: "Escolhe a figura que mostra o que vem depois.",
+      opcoes: [
+        { nome: "vira uma flor grande", imagemUrl: girassol, correta: true },
+        { nome: "vira uma casa", imagemUrl: casa, correta: false },
+        { nome: "desaparece", imagemUrl: lua, correta: false },
+      ],
+      feedbackAcerto: "Isso mesmo! Com sol e água, a sementinha cresce e vira uma flor.",
+      feedbackErro: "Pensa: o que precisa pra uma planta crescer? Sol e água!",
+      elogio: "Você previu direitinho!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela. Elas ajudam a contar histórias!",
+      itens: [
+        { nome: "livro", imagemUrl: livro },
+        { nome: "coelho", imagemUrl: coelho },
+        { nome: "árvore", imagemUrl: arvore },
+      ],
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "PARTES DA HISTÓRIA",
+      categoriaEmoji: "📖",
+      pergunta: "Qual dessas imagens mostra o FIM de uma história?",
+      opcoes: [
+        { nome: "casa (voltou feliz)", imagemUrl: casa, correta: true },
+        { nome: "sol nascendo", imagemUrl: sol, correta: false },
+        { nome: "livro fechado no começo", imagemUrl: livros, correta: false },
+      ],
+      instrucaoAudio: "Toca na figura que mostra como a história termina.",
+      elogio: "Isso! Ela chegou em casa — esse é o fim.",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma junto comigo: FI-O-NA. Quantas palmas?",
+      palavra: "FI-O-NA",
+      silabas: 3,
+      imagemUrl: coelho,
+      elogio: "Três palmas! Fi-o-na tem três pedacinhos.",
+    },
+    {
+      tipo: "rodaConversa",
+      imagemUrl: coelho,
+      pergunta: "Você já se perdeu de alguém e depois encontrou o caminho? Conta pra gente!",
+      exemplos: ["Sim, no mercado", "Sim, no parque", "Nunca aconteceu comigo"],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O que a Fiona seguiu pra encontrar o caminho de casa?",
+      opcoes: [
+        { nome: "o cheiro de cenoura", imagemUrl: coelho, correta: true },
+        { nome: "uma nuvem", imagemUrl: sol, correta: false },
+        { nome: "um livro", imagemUrl: livro, correta: false },
+      ],
+      feedbackAcerto: "Isso! Ela seguiu o cheirinho de cenoura e voltou feliz.",
+      feedbackErro: "Lembra da última cena: o que ela sentiu no ar?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Conte uma história em três partes",
+      convite:
+        "Escolham juntos uma história curtinha e apontem: isso é o começo, isso é o meio, isso é o fim!",
+      dicaAdulto:
+        "Deixe a criança apontar as partes usando as próprias palavras, sem se preocupar em decorar o texto.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Guardião do Começo, Meio e Fim",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Uhuu! Agora você sabe contar uma história do começo até o fim!",
+    },
+  ],
+
 
   momento01_motivacao: {
     titulo: "Brilha descobre o Livro das Três Partes",

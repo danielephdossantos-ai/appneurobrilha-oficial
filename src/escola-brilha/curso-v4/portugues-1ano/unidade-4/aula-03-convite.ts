@@ -6,6 +6,8 @@ import { url as presente } from "@/assets/neuro-treino/objetos/presente.png.asse
 import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
 import { url as criancasGrupo } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
 import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as praca } from "@/assets/neuro-treino/objetos/praca.png.asset.json";
 
 /**
  * Aula 3 — Convite de Festa
@@ -21,6 +23,117 @@ export const aula03: AulaPortuguesV4 = {
   iconeTrilha: "🎉",
   bncc: ["EF01LP16", "EF01LP17", "EF01LP20"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — audio-first, imagem e toque.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote:
+        "Oi! Eu sou o Brilha! Chegou um convite de festa pra gente ler. Toca no botão pra começar!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela. Tudo isso tem numa festa!",
+      itens: [
+        { nome: "festa", imagemUrl: festa },
+        { nome: "balão", imagemUrl: balao },
+        { nome: "bolo", imagemUrl: bolo },
+        { nome: "presente", imagemUrl: presente },
+      ],
+    },
+    {
+      tipo: "leituraTexto",
+      titulo: "Convite da Ana",
+      imagemUrl: festa,
+      frases: [
+        "A Ana fez um convite de festa.",
+        "O convite dizia o dia: sábado.",
+        "E dizia o lugar: a praça.",
+      ],
+      instrucaoAudio: "Vamos ouvir o que diz o convite da Ana.",
+      elogio: "Você ouviu o convite inteiro!",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Que dia é a festa da Ana?",
+      opcoes: [
+        { texto: "Sexta", correta: false },
+        { texto: "Sábado", correta: true },
+        { texto: "Domingo", correta: false },
+      ],
+      feedbackAcerto: "Isso! O convite dizia: Dia, sábado.",
+      feedbackErro: "Escuta de novo o convite: ele fala o dia da festa logo no começo.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Onde vai ser a festa da Ana?",
+      opcoes: [
+        { texto: "Na escola", correta: false },
+        { texto: "Na praça", correta: true },
+        { texto: "No mercado", correta: false },
+      ],
+      feedbackAcerto: "Isso! O convite dizia: Local, a praça.",
+      feedbackErro: "Pensa: o convite fala um lugar ao ar livre, cheio de gente. Qual é?",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: praca,
+      frase: "A festa da Ana vai ser na ___.",
+      palavraCorreta: "PRAÇA",
+      distratores: ["ESCOLA", "CASA"],
+      instrucaoAudio: "Escuta a frase e escolhe a palavra que combina com o convite.",
+      elogio: "Isso! A festa vai ser na praça, igual dizia o convite.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Quem está fazendo aniversário e mandou o convite?",
+      opcoes: [
+        { nome: "menina", imagemUrl: menina, correta: true },
+        { nome: "bolo", imagemUrl: bolo, correta: false },
+        { nome: "presente", imagemUrl: presente, correta: false },
+      ],
+      feedbackAcerto: "Isso! A Ana é a menina que está fazendo aniversário.",
+      feedbackErro: "Pensa: quem faz aniversário é uma pessoa, não uma coisa da festa.",
+    },
+    {
+      tipo: "leituraTexto",
+      titulo: "Convite do Pedro",
+      imagemUrl: criancasGrupo,
+      frases: [
+        "Festa do Pedro!",
+        "A festa é no domingo, às 16h.",
+        "É pra levar uma fantasia preferida.",
+      ],
+      instrucaoAudio: "Agora vamos ouvir outro convite, o do Pedro.",
+      elogio: "Você ouviu esse convite todo!",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "A que horas começa a festa do Pedro?",
+      opcoes: [
+        { texto: "14h", correta: false },
+        { texto: "15h", correta: false },
+        { texto: "16h", correta: true },
+      ],
+      feedbackAcerto: "Isso! A festa do Pedro é às 16h.",
+      feedbackErro: "Escuta de novo o convite do Pedro: ele fala a hora bem no meio.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Nosso convite em casa",
+      convite: "Com um adulto, invente uma festa e faça um convite com dia, hora e lugar.",
+      dicaAdulto: "Ajude a criança a desenhar e falar em voz alta o dia, a hora e o lugar da festa inventada.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Leitor de Convites",
+      mascoteUrl: brilha,
+      falaFinal: "Você aprendeu a ler um convite de festa! Agora ninguém vai perder o dia certo.",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "Uma festa chegando pelo correio",

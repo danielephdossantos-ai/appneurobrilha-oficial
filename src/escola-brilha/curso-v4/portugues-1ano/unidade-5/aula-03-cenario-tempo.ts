@@ -11,6 +11,7 @@ import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as lago } from "@/assets/neuro-treino/objetos/lago.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 /**
  * Aula 3 — Onde e Quando Aconteceu
  * -------------------------------------------------------------
@@ -26,6 +27,111 @@ export const aula03: AulaPortuguesV4 = {
   iconeTrilha: "🏡",
   bncc: ["EF01LP26", "EF12LP19", "EF15LP02", "EF15LP03"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — audio-first, imagem, toque (criança de 6 anos).
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Hoje vamos virar detetives e descobrir ONDE e QUANDO as histórias acontecem. Toca pra começar!",
+    },
+    {
+      tipo: "historiaIlustrada",
+      titulo: "Uma Noite na Casa Antiga",
+      cenas: [
+        { imagemUrl: casaAntiga, narracao: "Numa noite escura, a lua cheia iluminava a casa antiga no meio do campo." },
+        { imagemUrl: gato, narracao: "O gatinho Tico ouviu um barulhinho vindo do telhado e ficou assustado." },
+        { imagemUrl: lua, narracao: "Era só um passarinho procurando abrigo. Tico se acalmou e dormiu." },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "ONDE acontece essa história?",
+      opcoes: [
+        { nome: "numa casa antiga no campo", imagemUrl: casaAntiga, correta: true },
+        { nome: "numa escola", imagemUrl: menino, correta: false },
+        { nome: "num lago", imagemUrl: lago, correta: false },
+      ],
+      feedbackAcerto: "Isso! É numa casa antiga no meio do campo.",
+      feedbackErro: "Lembra da primeira cena: onde a lua iluminava?",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "É DIA ou é NOITE nessa história?",
+      opcoes: [
+        { nome: "é noite", imagemUrl: noite, correta: true },
+        { nome: "é dia", imagemUrl: dia, correta: false },
+        { nome: "não dá pra saber", imagemUrl: sol, correta: false },
+      ],
+      feedbackAcerto: "Isso mesmo! A lua cheia mostra que é NOITE.",
+      feedbackErro: "Repara: quem aparece brilhando no céu, o sol ou a lua?",
+    },
+    {
+      tipo: "antonimoContraste",
+      imagemUrl: dia,
+      palavra: "DIA",
+      antonimo: "NOITE",
+      opcoes: [
+        { nome: "noite", imagemUrl: noite, correta: true },
+        { nome: "sol forte", imagemUrl: sol, correta: false },
+        { nome: "manhã", imagemUrl: sol, correta: false },
+      ],
+      instrucaoAudio: "Essa figura mostra o DIA. Toca na figura do CONTRÁRIO.",
+      elogio: "Isso! Noite é o contrário de dia.",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "lua", imagemUrl: lua },
+        { nome: "sol", imagemUrl: sol },
+        { nome: "casa antiga", imagemUrl: casaAntiga },
+      ],
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma junto comigo: TI-CO. Quantas palmas?",
+      palavra: "TI-CO",
+      silabas: 2,
+      imagemUrl: gato,
+      elogio: "Duas palmas! Ti-co tem dois pedacinhos.",
+    },
+    {
+      tipo: "rodaConversa",
+      imagemUrl: lua,
+      pergunta: "Você prefere brincar de dia ou de noite? Por quê?",
+      exemplos: ["De dia, tem sol", "De noite, vejo as estrelas", "Os dois são legais"],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "O que fez o barulhinho no telhado?",
+      opcoes: [
+        { nome: "um passarinho", imagemUrl: lago, correta: false },
+        { nome: "um gato", imagemUrl: gato, correta: false },
+        { nome: "o vento", imagemUrl: arvore, correta: true },
+      ],
+      feedbackAcerto: "Quase! Era um passarinho fugindo do vento — mas o vento ajudou a assustar!",
+      feedbackErro: "No fim da história, o passarinho procurava abrigo de quê?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Detetive de onde e quando",
+      convite:
+        "Contem uma história curta juntos e descubram: ONDE ela acontece e QUANDO (dia ou noite)?",
+      dicaAdulto:
+        "Peça pra criança desenhar o cenário com sol (dia) ou lua (noite) pra mostrar o tempo.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Onde e Quando",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Parabéns! Agora você descobre o cenário e o tempo de qualquer história!",
+    },
+  ],
+
 
   momento01_motivacao: {
     titulo: "Brilha vira detetive de histórias",
