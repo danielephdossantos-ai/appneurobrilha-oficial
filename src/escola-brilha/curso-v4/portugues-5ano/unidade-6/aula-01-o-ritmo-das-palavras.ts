@@ -90,6 +90,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Verso, rima e sentido figurado",
+    instrucao:
+      "O professor escreve os versos na lousa e mostra onde nasce o ritmo e onde a palavra sai do sentido literal.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "No poema, a forma faz parte do sentido: verso é cada linha, estrofe é o bloco de versos, rima é a coincidência sonora do final e a metáfora troca o sentido literal por uma imagem.",
+        comoIdentificar:
+          "Para achar a rima, leia só o final de cada verso em voz alta. Para achar metáfora, pergunte: 'isso é possível de verdade?'. Se não é, o sentido é figurado.",
+        passos: [
+          {
+            frase: "O vento assobia no telhado / e some no fim do telhado calado.",
+            destaque: ["telhado", "calado"],
+            analise:
+              "Duas linhas = dois versos. Os finais 'telhado' e 'calado' têm o mesmo som a partir da vogal tônica (-ado): é rima. A rima organiza o ritmo e ajuda a memorizar o poema.",
+          },
+          {
+            frase: "O vento assobia no telhado.",
+            destaque: ["assobia"],
+            analise:
+              "Vento não tem boca: quem assobia é gente. Atribuir ação humana a algo que não é humano é PERSONIFICAÇÃO — o poema faz o leitor ouvir o som sem descrevê-lo tecnicamente.",
+          },
+          {
+            frase: "Meu avô é uma biblioteca de histórias.",
+            destaque: ["é uma biblioteca"],
+            analise:
+              "Metáfora: o avô não é um prédio com estantes. A comparação é feita SEM a palavra 'como' — afirma-se diretamente uma coisa pela outra para transmitir a ideia de acúmulo e sabedoria.",
+            nota: "Se aparecesse 'como' — 'meu avô é como uma biblioteca' — seria comparação (símile), não metáfora.",
+          },
+          {
+            frase: "Girassol, girassol, / você gira e olha o sol; / eu giro e olho você.",
+            destaque: ["gira", "giro"],
+            analise:
+              "Repetição intencional cria ritmo e ligação de sentido: o movimento da flor espelha o movimento de quem observa. No poema, repetir não é erro — é recurso.",
+          },
+        ],
+        comparacao: {
+          errado: "O poema fala do vento porque o autor gosta de vento.",
+          certo: "O poema usa o vento como imagem da passagem do tempo: ele chega, faz barulho e vai embora calado.",
+          porque:
+            "Interpretar poesia não é adivinhar o gosto do autor: é mostrar que sentido as imagens constroem dentro do texto, apontando os versos que sustentam a leitura.",
+        },
+        curiosidade:
+          "Nem todo poema rima. O verso livre, comum a partir do Modernismo, abre mão da rima e da métrica fixa — o ritmo passa a vir do corte das linhas e da repetição.",
+        resumo: [
+          "Verso = linha; estrofe = bloco de versos.",
+          "Rima = som igual a partir da sílaba tônica final.",
+          "Metáfora afirma sem 'como'; comparação usa 'como'.",
+          "Personificação dá ação humana ao que não é humano.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia marcando as rimas no fim dos versos e as imagens figuradas.",
     leitura: {

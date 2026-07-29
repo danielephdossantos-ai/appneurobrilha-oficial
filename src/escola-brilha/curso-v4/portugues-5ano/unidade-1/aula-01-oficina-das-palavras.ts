@@ -89,6 +89,64 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Acento dentro da frase",
+    instrucao:
+      "Antes de você responder qualquer coisa, o professor resolve na lousa. Leia a frase, veja o realce e leia a análise embaixo. Avance passo a passo.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "O acento não é enfeite: ele marca a sílaba mais forte da palavra e, muitas vezes, é ele que decide o SENTIDO dentro da frase.",
+        comoIdentificar:
+          "Fale a palavra em voz alta e alongue a sílaba forte. Depois conte de trás para frente: última (oxítona), penúltima (paroxítona), antepenúltima (proparoxítona — sempre acentuada).",
+        passos: [
+          {
+            frase: "O sabiá cantou no galho da mangueira.",
+            destaque: ["sabiá"],
+            analise:
+              "A força da voz cai na última sílaba: sa-bi-Á. É oxítona terminada em A, então leva acento agudo. Aqui a palavra é substantivo: nomeia o pássaro que praticou a ação de cantar.",
+            nota: "Teste: troque por outro substantivo — 'O pássaro cantou'. A frase continua de pé, o que confirma que sabiá é o nome do ser.",
+          },
+          {
+            frase: "A sábia professora explicou a regra duas vezes.",
+            destaque: ["sábia"],
+            analise:
+              "Em SÁ-bia a força está na penúltima sílaba: é paroxítona. Paroxítona terminada em A normalmente NÃO leva acento (casa, mesa), mas esta termina em ditongo (-ia), e paroxítona terminada em ditongo é acentuada. Na frase, sábia acompanha 'professora': é adjetivo, diz COMO ela é.",
+            nota: "Adjetivo anda colado a um substantivo. Se você tirar 'professora', a frase perde o apoio: 'A sábia explicou' só funciona porque o substantivo fica subentendido.",
+          },
+          {
+            frase: "Eu sabia a resposta, mas fiquei em silêncio.",
+            destaque: ["sabia"],
+            analise:
+              "Sem acento nenhum: sa-BI-a, paroxítona terminada em A, e paroxítona terminada em A não é acentuada. Aqui a palavra é VERBO — indica o que eu fazia no passado (pretérito imperfeito de saber).",
+            nota: "Teste do verbo: coloque um tempo diferente. 'Eu sei a resposta' / 'Eu saberei a resposta'. Se muda de tempo, é verbo.",
+          },
+          {
+            frase: "O médico anotou o número do prontuário.",
+            destaque: ["médico", "número"],
+            analise:
+              "MÉ-di-co e NÚ-me-ro têm a força na antepenúltima sílaba: proparoxítonas. Regra de ouro sem exceção: todas levam acento. Repare que, sem o acento, 'medico' viraria verbo (eu medico) e a frase mudaria de sentido.",
+          },
+        ],
+        comparacao: {
+          errado: "O medico anotou o numero do prontuario.",
+          certo: "O médico anotou o número do prontuário.",
+          porque:
+            "Sem acento, 'medico' é verbo e 'numero' é verbo (eu numero as páginas). A frase deixa de falar de um profissional e de uma quantidade e vira uma sequência de ações sem sentido.",
+        },
+        curiosidade:
+          "O português é uma das poucas línguas que usam acento para separar palavras iguais na escrita. Em inglês, 'record' (disco) e 'record' (gravar) só se diferenciam pela fala; nós resolvemos isso no papel.",
+        resumo: [
+          "Sílaba tônica primeiro, regra depois.",
+          "Proparoxítona: todas acentuadas, sem exceção.",
+          "Oxítona: acentua em A, E, O, EM, ENS.",
+          "O acento pode mudar a classe da palavra (substantivo, adjetivo, verbo) e o sentido da frase inteira.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia contando as sílabas de trás para frente, como faz o tipógrafo: última, penúltima, antepenúltima.",

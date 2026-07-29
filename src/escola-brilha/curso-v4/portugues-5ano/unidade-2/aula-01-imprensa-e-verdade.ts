@@ -88,6 +88,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Fato e opinião dentro da notícia",
+    instrucao:
+      "O professor resolve na lousa: mesma notícia, frases diferentes. Veja o que é verificável e o que é julgamento.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "Fato é o que pode ser conferido por qualquer pessoa (número, data, lugar, ação registrada). Opinião é o julgamento de quem escreve — aparece em adjetivos e advérbios de valor.",
+        comoIdentificar:
+          "Pergunte: 'como eu provaria isso?'. Se dá para conferir em documento, foto ou contagem, é fato. Se depende do que a pessoa acha, é opinião.",
+        passos: [
+          {
+            frase: "A prefeitura entregou a nova ponte no dia 12 de março.",
+            destaque: ["dia 12 de março"],
+            analise:
+              "Há data e ação registrada. Qualquer leitor pode conferir no documento de entrega. É FATO.",
+          },
+          {
+            frase: "A nova ponte ficou linda e resolveu todos os problemas da cidade.",
+            destaque: ["linda", "todos os problemas"],
+            analise:
+              "'Linda' é adjetivo de gosto: não se mede. 'Todos os problemas' é exagero sem prova. É OPINIÃO disfarçada de informação.",
+            nota: "Palavras-alerta de opinião: incrível, absurdo, péssimo, maravilhoso, sempre, nunca, todos.",
+          },
+          {
+            frase: "Segundo a secretaria de trânsito, o tempo de travessia caiu de 20 para 7 minutos.",
+            destaque: ["Segundo a secretaria de trânsito", "de 20 para 7 minutos"],
+            analise:
+              "Aqui há fonte citada e número. É fato atribuído: o jornal diz de onde tirou o dado, e é isso que dá credibilidade ao texto.",
+          },
+          {
+            frase: "PONTE NOVA CORTA TRAVESSIA PELA METADE — obra entregue em março reduz o trajeto de 20 para 7 minutos, informa a secretaria.",
+            destaque: ["PONTE NOVA CORTA TRAVESSIA PELA METADE", "informa a secretaria"],
+            analise:
+              "A manchete é a síntese do fato principal; o lide, logo abaixo, responde o quê, quando, quanto e quem informou. Notícia bem feita entrega o essencial já nas duas primeiras linhas.",
+          },
+        ],
+        comparacao: {
+          errado: "A escola nova é maravilhosa e vai mudar a vida de todo mundo.",
+          certo: "A escola nova tem 12 salas e 480 vagas, segundo a secretaria de educação.",
+          porque:
+            "A primeira frase entrega o julgamento do autor; a segunda entrega dado conferível com fonte. Notícia informa, artigo de opinião opina — e o leitor precisa saber qual está lendo.",
+        },
+        curiosidade:
+          "O lide (do inglês lead, 'guiar') nasceu no telégrafo: como a transmissão podia cair no meio, os jornalistas mandavam primeiro o mais importante. O costume ficou.",
+        resumo: [
+          "Fato: verificável, com número, data, lugar ou fonte.",
+          "Opinião: adjetivo de valor, exagero, generalização.",
+          "Fonte citada transforma afirmação em informação confiável.",
+          "Manchete resume o fato; lide responde o quê, quem, quando, onde, por quê.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia a reportagem procurando o lide no primeiro parágrafo e marcando cada julgamento do autor.",
     leitura: {

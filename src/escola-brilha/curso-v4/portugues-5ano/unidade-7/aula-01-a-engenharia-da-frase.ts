@@ -85,6 +85,62 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · Sujeito, predicado e concordância",
+    instrucao:
+      "O professor desmonta a frase na lousa, peça por peça, e mostra por que o verbo muda de forma.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "Toda oração tem um verbo. Sujeito é quem pratica ou sobre quem se declara algo; predicado é tudo o que se declara — e o verbo concorda em número e pessoa com o núcleo do sujeito.",
+        comoIdentificar:
+          "Ache primeiro o VERBO. Depois pergunte ao verbo: 'quem?'. A resposta é o sujeito; o resto é predicado.",
+        passos: [
+          {
+            frase: "O gato dormiu na janela.",
+            destaque: ["O gato", "dormiu na janela"],
+            analise:
+              "Verbo: dormiu. Quem dormiu? O gato → sujeito, cujo núcleo é 'gato'. Tudo o que sobra ('dormiu na janela') é o predicado. Núcleo no singular, verbo no singular.",
+          },
+          {
+            frase: "Os gatos dormiram na janela.",
+            destaque: ["Os gatos", "dormiram"],
+            analise:
+              "O núcleo foi para o plural ('gatos') e o verbo obrigatoriamente acompanhou: dormiram. Isso é concordância verbal — o verbo não escolhe sozinho, ele obedece ao sujeito.",
+          },
+          {
+            frase: "Os gatos da minha vizinha dormiram na janela.",
+            destaque: ["gatos", "da minha vizinha", "dormiram"],
+            analise:
+              "'da minha vizinha' é só um complemento que acompanha o núcleo; ele não manda no verbo. O núcleo continua sendo 'gatos', por isso 'dormiram' no plural — ainda que 'vizinha' esteja no singular logo antes do verbo.",
+            nota: "Armadilha clássica: a palavra mais próxima do verbo nem sempre é o núcleo do sujeito.",
+          },
+          {
+            frase: "Choveu a noite inteira.",
+            destaque: ["Choveu"],
+            analise:
+              "Não há a quem perguntar 'quem?': verbos que indicam fenômeno da natureza não têm sujeito. A oração é sem sujeito e o verbo fica sempre na 3ª pessoa do singular.",
+          },
+        ],
+        comparacao: {
+          errado: "Os alunos da turma chegou atrasado.",
+          certo: "Os alunos da turma chegaram atrasados.",
+          porque:
+            "O núcleo do sujeito é 'alunos' (plural), não 'turma'. Verbo e adjetivo do predicado acompanham o núcleo: chegaram / atrasados.",
+        },
+        curiosidade:
+          "Em português, o sujeito pode ficar oculto porque a terminação do verbo já indica a pessoa: 'Fomos ao cinema' dispensa o 'nós'. Em inglês isso é impossível — o pronome é obrigatório.",
+        resumo: [
+          "Ache o verbo, pergunte 'quem?' e você achou o sujeito.",
+          "O verbo concorda com o NÚCLEO do sujeito, não com a palavra mais próxima.",
+          "Predicado é tudo o que se declara sobre o sujeito.",
+          "Verbo de fenômeno natural: oração sem sujeito, 3ª pessoa do singular.",
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia observando quem pratica a ação em cada frase e como as palavras combinam.",
     leitura: {
