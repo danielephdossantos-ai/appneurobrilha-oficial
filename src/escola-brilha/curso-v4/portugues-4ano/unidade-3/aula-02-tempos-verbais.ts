@@ -3,8 +3,8 @@ import { url as bussola } from "@/assets/neuro-treino/objetos/bussola.png.asset.
 import { url as calendario } from "@/assets/neuro-treino/objetos/calendario.png.asset.json";
 import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
 import { url as trem } from "@/assets/neuro-treino/objetos/trem.png.asset.json";
-import { url as ilha } from "@/assets/neuro-treino/objetos/ilha.png";
-import { url as macaco } from "@/assets/neuro-treino/objetos/macaco.png";
+import { url as ilha } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as macaco } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as passaro } from "@/assets/neuro-treino/objetos/passaro.png.asset.json";
 import { url as criancasGrupo } from "@/assets/neuro-treino/objetos/criancas-grupo.png.asset.json";
 import { url as ponte } from "@/assets/neuro-treino/objetos/ponte.png.asset.json";
