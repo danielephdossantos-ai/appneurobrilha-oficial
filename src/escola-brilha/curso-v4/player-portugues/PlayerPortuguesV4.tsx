@@ -332,7 +332,13 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  tween
+                  codex
+                    ? `block text-[10px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-widest border transition-all duration-200 ${
+                        ativo === m.id
+                          ? "text-[#0B0F17] border-transparent shadow-[0_0_16px_-2px_rgba(168,85,247,.8)]"
+                          : "text-slate-300 border-slate-700 bg-[#1E293B] hover:border-violet-400/60 hover:text-violet-200"
+                      }`
+                    : tween
                     ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
                         ativo === m.id
                           ? "text-[#0b1020] border-transparent"
