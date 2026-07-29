@@ -6,6 +6,12 @@ import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as dado } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
 import { url as mapaPercurso } from "@/assets/neuro-treino/objetos/mapa-percurso.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 
 /**
  * Aula 2 — A Trilha do Alfabeto
@@ -27,6 +33,64 @@ export const aula02: AulaPortuguesV4 = {
   iconeTrilha: "🔤",
   bncc: ["EF01LP01", "EF12LP01"],
   duracaoMin: 15,
+
+  momentosJogo: [
+    { tipo: "boasVindas", mascoteUrl: esquiloBrilha,
+      falaMascote: "Vem comigo na trilha do alfabeto! Cada pedra da trilha é uma letra. Bora?" },
+    { tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura e escuta com que letra ela começa.",
+      itens: [
+        { nome: "abelha", imagemUrl: abelha },
+        { nome: "bola", imagemUrl: bola },
+        { nome: "casa", imagemUrl: casa },
+      ] },
+    { tipo: "somDaLetra", letra: "B", som: "bê",
+      instrucaoAudio: "Essa é a letra B. Ela faz o som b, b, b. Escuta:",
+      exemplos: [{ nome: "bola", imagemUrl: bola }, { nome: "boneca", imagemUrl: dado }],
+      elogio: "Boa! B de bola." },
+    { tipo: "tracadoLetra", letra: "B",
+      instrucaoAudio: "Faz o B com o dedinho: uma perninha em pé e duas barriguinhas.",
+      elogio: "Seu B ficou show!" },
+    { tipo: "cacaAoSom", somAlvo: "C", exemploFala: "casa",
+      instrucaoAudio: "Toca em tudo que começa com o som c, como em casa.",
+      opcoes: [
+        { nome: "casa", imagemUrl: casa, correta: true },
+        { nome: "sol", imagemUrl: sol, correta: false },
+        { nome: "cachorro", imagemUrl: gato, correta: false },
+        { nome: "bola", imagemUrl: bola, correta: false },
+      ],
+      elogio: "Isso! Casa começa com c.",
+      feedbackErro: "Escuta de novo: c-c-casa." },
+    { tipo: "pareamentoLetraSom",
+      instrucaoAudio: "Liga cada letra à figura certa.",
+      pares: [
+        { letra: "D", nome: "dado", imagemUrl: dado },
+        { letra: "F", nome: "flor", imagemUrl: flor },
+        { letra: "G", nome: "gato", imagemUrl: gato },
+      ],
+      elogio: "Trilha andando! D, F, G no lugar." },
+    { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma nos pedaços: PA-TO.",
+      palavra: "PA-TO", silabas: 2, imagemUrl: pato,
+      elogio: "Duas palmas, dois pedaços!" },
+    { tipo: "letrasMoveis", imagemUrl: sol, palavra: "SOL",
+      distratoras: ["A", "M"],
+      instrucaoAudio: "Monta a palavra SOL com as letras.",
+      elogio: "S, O, L — SOL!" },
+    { tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura começa com a letra L?",
+      opcoes: [
+        { nome: "lua", imagemUrl: lua, correta: true },
+        { nome: "sapo", imagemUrl: sapo, correta: false },
+        { nome: "pato", imagemUrl: pato, correta: false },
+      ],
+      feedbackAcerto: "Isso! L de lua.",
+      feedbackErro: "Fala devagar: l-l-lua." },
+    { tipo: "missaoFamilia", titulo: "Alfabeto no mercado",
+      convite: "Com um adulto, ache no mercado ou na cozinha uma coisa que começa com A, outra com B e outra com C.",
+      dicaAdulto: "Peça a criança a falar o SOM inicial antes de dizer a palavra." },
+    { tipo: "celebracao", medalha: "Andarilha do Alfabeto", mascoteUrl: esquiloBrilha,
+      falaFinal: "Você andou a trilha inteira! Agora vamos conhecer as cinco irmãs vogais." },
+  ],
 
   // ------------------------------------------------------------
   // 1 · MOTIVAÇÃO
