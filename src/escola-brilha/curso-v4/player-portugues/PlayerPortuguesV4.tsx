@@ -175,7 +175,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
       <header
         className={
-          kids
+          tween
+            ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
+            : kids
             ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
             : "sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10"
         }
@@ -185,7 +187,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             to="/escola-brilha/curso/$slug"
             params={{ slug: cursoSlug }}
             className={
-              kids
+              tween
+                ? "shrink-0 h-9 px-3 grid place-items-center rounded-lg border border-cyan-400/60 text-cyan-200 text-xs font-bold uppercase tracking-wider hover:bg-cyan-400/10 active:scale-95 transition"
+                : kids
                 ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
                 : "text-sm text-white/70 hover:text-white"
             }
@@ -193,19 +197,43 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             ← Trilha
           </Link>
           <div className="flex-1 min-w-0">
-            <div className={kids ? "text-base font-black truncate" : "text-sm font-bold truncate"}>
-              {kids ? "📖 " : ""}
+            <div
+              className={
+                tween
+                  ? "text-sm md:text-base font-extrabold uppercase tracking-wide truncate"
+                  : kids
+                  ? "text-base font-black truncate"
+                  : "text-sm font-bold truncate"
+              }
+            >
+              {kids && !tween ? "📖 " : ""}
               {aula.titulo}
             </div>
             {kids ? (
               <div className="mt-1 flex items-center gap-2">
-                <div className="h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden">
+                <div
+                  className={
+                    tween
+                      ? "h-1.5 flex-1 rounded-sm bg-white/10 overflow-hidden"
+                      : "h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden"
+                  }
+                >
                   <div
-                    className="h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    className={
+                      tween
+                        ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"
+                        : "h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    }
                     style={{ width: `${progresso}%` }}
                   />
                 </div>
-                <span className="shrink-0 text-[10px] font-black text-amber-200">
+                <span
+                  className={
+                    tween
+                      ? "shrink-0 text-[10px] font-mono font-bold text-cyan-300"
+                      : "shrink-0 text-[10px] font-black text-amber-200"
+                  }
+                >
                   {idxAtivo + 1}/{MOMENTOS.length}
                 </span>
               </div>
@@ -215,6 +243,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </div>
         </div>
       </header>
+
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
