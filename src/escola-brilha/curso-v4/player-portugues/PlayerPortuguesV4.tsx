@@ -111,8 +111,15 @@ const CORES_CODEX: Record<string, string> = {
   m11: "#F59E0B",
 };
 
-export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+export function PlayerPortuguesV4({ aula: aulaRaw, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
+  // Nome real da criança (anamnese) substitui {NOME}/{INICIAL} em toda a aula.
+  const { activeChild } = useAppState();
+  const aula = useMemo(
+    () => aplicarNomeProfundo(aulaRaw, activeChild?.nome),
+    [aulaRaw, activeChild?.nome],
+  );
+
   // Skin infantil: Português do 1º e 2º ano.
   // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
   // Skin codex (cyberpunk/HUD): Português do 5º ano.
