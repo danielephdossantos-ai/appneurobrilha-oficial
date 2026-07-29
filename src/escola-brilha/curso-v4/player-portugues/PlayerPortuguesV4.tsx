@@ -154,17 +154,40 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
   return (
-    <KidsCtx.Provider value={{ kids, tween }}>
+    <KidsCtx.Provider value={{ kids, tween, cyber }}>
     <div
       className={
-        tween
+        cyber
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0B0F17_0%,#0F172A_55%,#0B0F17_100%)] text-slate-100"
+          : tween
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
           : kids
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
           : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
       }
     >
-      {tween && (
+      {cyber && (
+        <>
+          <div
+            className="pointer-events-none fixed inset-0 z-0 opacity-[0.16]"
+            aria-hidden
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(139,92,246,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,.35) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+          <div
+            className="pointer-events-none fixed inset-0 z-0"
+            aria-hidden
+            style={{
+              background:
+                "radial-gradient(60% 40% at 20% 0%, rgba(168,85,247,.22), transparent 70%), radial-gradient(50% 35% at 90% 20%, rgba(16,185,129,.14), transparent 70%)",
+            }}
+          />
+        </>
+      )}
+      {tween && !cyber && (
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
           aria-hidden
