@@ -46,8 +46,28 @@ const MOMENTOS_BASE = [
   { id: "m11", label: "🏠 Missão em Família" },
 ] as const;
 
+/** Cores por momento — usadas só no skin infantil (1º ano). */
+const CORES_KIDS: Record<string, string> = {
+  m1: "#f472b6",
+  m2: "#38bdf8",
+  m3: "#fbbf24",
+  mev: "#a78bfa",
+  m4: "#34d399",
+  m5: "#f97316",
+  m6: "#e879f9",
+  m7: "#60a5fa",
+  m8: "#facc15",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#c084fc",
+  m10: "#4ade80",
+  m11: "#fca5a5",
+};
+
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
+  // Skin infantil: só no curso de Português do 1º ano.
+  const kids = cursoSlug === "portugues-1ano";
 
   const MOMENTOS = MOMENTOS_BASE.filter(
     (m) =>
