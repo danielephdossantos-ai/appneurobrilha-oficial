@@ -614,8 +614,10 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
-  const { kids, tween } = useContext(KidsCtx);
-  const cor = (tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (tween ? "#22d3ee" : "#fbbf24");
+  const { kids, tween, codex } = useContext(KidsCtx);
+  const cor =
+    (codex ? CORES_CODEX[id] : tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ??
+    (codex ? "#A855F7" : tween ? "#22d3ee" : "#fbbf24");
   const emoji = label.trim().split(" ")[0];
   const texto = label.trim().split(" ").slice(1).join(" ");
 
