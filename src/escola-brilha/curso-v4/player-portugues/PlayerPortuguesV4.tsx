@@ -90,37 +90,13 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
-/** Paleta "teen" (5º ano+): mesma linguagem da Geografia teen — ciano sobre grafite. */
-const CORES_TEEN: Record<string, string> = {
-  m1: "#22d3ee",
-  m2: "#38bdf8",
-  m3: "#67e8f9",
-  mev: "#7dd3fc",
-  m4: "#22d3ee",
-  m5: "#06b6d4",
-  m6: "#38bdf8",
-  m7: "#22d3ee",
-  m8: "#0ea5e9",
-  mmini: "#67e8f9",
-  mlab: "#2dd4bf",
-  m9: "#38bdf8",
-  m10: "#22d3ee",
-  m11: "#7dd3fc",
-};
-
-
-
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
-  // Skin tween ("entre kids e teen"): 3º e 4º ano.
-  // Skin teen (5º ano+): mesma linguagem visual da Geografia teen —
-  // grafite quase preto, acento ciano, tipografia mono, sem fofura.
-  const teen = cursoSlug === "portugues-5ano";
-  const tween = cursoSlug === "portugues-3ano" || cursoSlug === "portugues-4ano" || teen;
+  // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
+  const tween = cursoSlug === "portugues-3ano" || cursoSlug === "portugues-4ano";
   const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
-  const CORES = teen ? CORES_TEEN : tween ? CORES_TWEEN : CORES_KIDS;
-
+  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
 
 
   const MOMENTOS = MOMENTOS_BASE.filter(
@@ -156,9 +132,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
     <KidsCtx.Provider value={{ kids, tween }}>
     <div
       className={
-        teen
-          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#020617_0%,#0f172a_55%,#020617_100%)] text-slate-100"
-          : tween
+        tween
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
           : kids
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
@@ -200,9 +174,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
       <header
         className={
-          teen
-            ? "sticky top-0 z-20 bg-slate-950/95 backdrop-blur border-b border-cyan-500/30"
-            : tween
+          tween
             ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
             : kids
             ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
