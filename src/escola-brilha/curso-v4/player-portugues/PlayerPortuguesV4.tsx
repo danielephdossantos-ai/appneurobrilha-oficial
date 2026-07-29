@@ -95,36 +95,107 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
   useEffect(() => () => stopSpeaking(), []);
 
+  const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
+  const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white">
-      <header className="sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10">
+    <KidsCtx.Provider value={kids}>
+    <div
+      className={
+        kids
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
+          : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
+      }
+    >
+      {kids && (
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+          {[
+            { t: "6%", l: "8%", s: 26, d: "0s" },
+            { t: "18%", l: "82%", s: 18, d: ".6s" },
+            { t: "38%", l: "12%", s: 16, d: "1.2s" },
+            { t: "58%", l: "88%", s: 22, d: ".3s" },
+            { t: "74%", l: "6%", s: 20, d: "1.6s" },
+            { t: "88%", l: "76%", s: 16, d: ".9s" },
+          ].map((e, i) => (
+            <span
+              key={i}
+              className="absolute animate-pulse"
+              style={{ top: e.t, left: e.l, fontSize: e.s, animationDelay: e.d }}
+            >
+              {i % 2 ? "⭐" : "✨"}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <header
+        className={
+          kids
+            ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
+            : "sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10"
+        }
+      >
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link
             to="/escola-brilha/curso/$slug"
             params={{ slug: cursoSlug }}
-            className="text-sm text-white/70 hover:text-white"
+            className={
+              kids
+                ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
+                : "text-sm text-white/70 hover:text-white"
+            }
           >
             ← Trilha
           </Link>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-bold truncate">{aula.titulo}</div>
-            <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
+            <div className={kids ? "text-base font-black truncate" : "text-sm font-bold truncate"}>
+              {kids ? "📖 " : ""}
+              {aula.titulo}
+            </div>
+            {kids ? (
+              <div className="mt-1 flex items-center gap-2">
+                <div className="h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    style={{ width: `${progresso}%` }}
+                  />
+                </div>
+                <span className="shrink-0 text-[10px] font-black text-amber-200">
+                  {idxAtivo + 1}/{MOMENTOS.length}
+                </span>
+              </div>
+            ) : (
+              <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
+            )}
           </div>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
             {MOMENTOS.map((m) => (
               <a
                 key={m.id}
                 href={`#${m.id}`}
-                className={`block text-xs px-3 py-2 rounded-lg transition ${
-                  ativo === m.id
-                    ? "bg-amber-400 text-[#1a0d3d] font-bold"
-                    : "text-white/70 hover:bg-white/10"
-                }`}
+                className={
+                  kids
+                    ? `block text-xs px-3 py-2.5 rounded-2xl font-bold transition ${
+                        ativo === m.id
+                          ? "text-[#2b1258] scale-[1.03] shadow-lg"
+                          : "text-white/75 bg-white/5 hover:bg-white/15"
+                      }`
+                    : `block text-xs px-3 py-2 rounded-lg transition ${
+                        ativo === m.id
+                          ? "bg-amber-400 text-[#1a0d3d] font-bold"
+                          : "text-white/70 hover:bg-white/10"
+                      }`
+                }
+                style={
+                  kids && ativo === m.id
+                    ? { background: CORES_KIDS[m.id] ?? "#fbbf24" }
+                    : undefined
+                }
               >
                 {m.label}
               </a>
@@ -132,7 +203,8 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </div>
         </aside>
 
-        <main className="flex-1 space-y-8 min-w-0">
+        <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
+
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
             {aula.momento01_motivacao.imagemUrl && (
