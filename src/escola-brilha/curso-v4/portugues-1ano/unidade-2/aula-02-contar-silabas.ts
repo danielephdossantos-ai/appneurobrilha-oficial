@@ -1,4 +1,5 @@
 import type { AulaPortuguesV4 } from "../../types";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
 import { url as robo } from "@/assets/neuro-treino/objetos/robo.png.asset.json";
 import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
@@ -26,6 +27,94 @@ export const aula02: AulaPortuguesV4 = {
   iconeTrilha: "👏",
   bncc: ["EF01LP05", "EF01LP06"],
   duracaoMin: 15,
+
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote: "Oi! Hoje vamos brincar de bater palma nos pedacinhos das palavras. Toca pra começar!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "sapo", imagemUrl: sapo },
+        { nome: "gato", imagemUrl: gato },
+        { nome: "banana", imagemUrl: banana },
+      ],
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma comigo: SA-PO. Quantas palmas?",
+      palavra: "SA-PO",
+      silabas: 2,
+      imagemUrl: sapo,
+      elogio: "Duas palmas! SA-PO tem dois pedacinhos.",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Agora vamos bater palma em: GA-TO. Quantas palmas?",
+      palavra: "GA-TO",
+      silabas: 2,
+      imagemUrl: gato,
+      elogio: "Isso! GA-TO também tem duas palmas.",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Vamos bater palma em: A-BE-LHA. Quantas palmas?",
+      palavra: "A-BE-LHA",
+      silabas: 3,
+      imagemUrl: abelha,
+      elogio: "Três palmas! A-BE-LHA tem três pedacinhos.",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Agora bate palma em: BA-NA-NA. Quantas palmas?",
+      palavra: "BA-NA-NA",
+      silabas: 3,
+      imagemUrl: banana,
+      elogio: "Isso! BA-NA-NA tem três palmas.",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Vamos bater palma em: PÉ. Quantas palmas?",
+      palavra: "PÉ",
+      silabas: 1,
+      imagemUrl: bola,
+      elogio: "Uma palma só! PÉ é uma palavra bem curtinha.",
+    },
+    {
+      tipo: "elkoninBoxes",
+      imagemUrl: gato,
+      palavra: "GATO",
+      fonemas: ["G", "A", "T", "O"],
+      instrucaoAudio: "Toca em cada caixinha enquanto eu falo o som.",
+      elogio: "Você tocou em todos os sons de GATO!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura tem uma palavra com TRÊS pedacinhos (sílabas)?",
+      opcoes: [
+        { nome: "banana", imagemUrl: banana, correta: true },
+        { nome: "sapo", imagemUrl: sapo, correta: false },
+        { nome: "gato", imagemUrl: gato, correta: false },
+      ],
+      feedbackAcerto: "Isso! BA-NA-NA tem três pedacinhos.",
+      feedbackErro: "Escuta de novo: bata palma em cada palavra e conta.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Bate-palma em família",
+      convite: "Escolham 3 nomes de pessoas da família e batam palma em cada pedacinho.",
+      dicaAdulto: "Fale o nome bem devagar e ajude a criança a contar as palmas.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Mestre do Bate-Palma",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Você aprendeu a contar os pedacinhos das palavras! Muito bem!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "O Jogo do Bate-Palma",

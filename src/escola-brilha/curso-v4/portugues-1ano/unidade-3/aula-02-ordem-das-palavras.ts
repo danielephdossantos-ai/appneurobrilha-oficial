@@ -5,6 +5,8 @@ import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asse
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as carro } from "@/assets/neuro-treino/objetos/carro.png.asset.json";
 import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
 
 /**
  * Aula 2 — Palavras na Ordem Certa
@@ -20,6 +22,94 @@ export const aula02: AulaPortuguesV4 = {
   iconeTrilha: "🔤",
   bncc: ["EF01LP11", "EF01LP13"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — áudio + imagem + toque.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi de novo! Hoje a gente vai descobrir que a ORDEM das palavras é muito importante. Vamos jogar?",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "cachorro", imagemUrl: cachorro },
+        { nome: "bola", imagemUrl: bola },
+        { nome: "menina", imagemUrl: menina },
+      ],
+    },
+    {
+      tipo: "leituraFrase",
+      imagemUrl: cachorro,
+      frase: "O cachorro brinca com a bola.",
+      instrucaoAudio: "Escuta essa frase. Ela está na ordem certa e faz sentido.",
+      elogio: "Isso! Quem faz vem primeiro, depois a ação, depois o quê.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Escuta as duas frases. Qual delas faz sentido: 'O cachorro brinca com a bola' ou 'Bola o cachorro com brinca'?",
+      opcoes: [
+        { texto: "O cachorro brinca com a bola.", correta: true },
+        { texto: "Bola o cachorro com brinca.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Quando as palavras estão na ordem certa, a frase faz sentido.",
+      feedbackErro: "Escuta de novo: uma frase soa certinha, a outra soa embaralhada. Qual delas você entendeu?",
+    },
+    {
+      tipo: "leituraFrase",
+      imagemUrl: menina,
+      frase: "A menina rega a flor.",
+      instrucaoAudio: "Escuta essa outra frase, bem na ordem certa.",
+      elogio: "Isso mesmo! Primeiro quem faz, depois a ação, depois o quê.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Qual dessas frases está na ordem certa e faz sentido?",
+      opcoes: [
+        { texto: "Flor a rega menina a.", correta: false },
+        { texto: "A menina rega a flor.", correta: true },
+      ],
+      feedbackAcerto: "Isso! Essa frase segue a ordem certinha: quem faz, a ação, o quê.",
+      feedbackErro: "Escuta de novo bem devagar. Uma das frases parece embaralhada.",
+    },
+    {
+      tipo: "letrasMoveis",
+      imagemUrl: carro,
+      palavra: "CARRO",
+      distratoras: ["B", "T", "S"],
+      instrucaoAudio: "Arrasta as letras pra montar a palavra CARRO.",
+      elogio: "Você montou CARRO! Cada letra no seu lugar certo.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Escuta: 'O carro anda na rua.' Qual figura combina?",
+      opcoes: [
+        { nome: "carro", imagemUrl: carro, correta: true },
+        { nome: "flor", imagemUrl: flor, correta: false },
+        { nome: "bola", imagemUrl: bola, correta: false },
+      ],
+      feedbackAcerto: "Isso! A frase fala do CARRO andando.",
+      feedbackErro: "Escuta de novo: 'O carro anda.' De quem a frase fala?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Arrume a frase em casa",
+      convite:
+        "Peça a um adulto para falar 3 palavras embaralhadas e você tenta arrumar na ordem certa, em voz alta.",
+      dicaAdulto:
+        "Use frases simples como 'bola a menino chuta o' → a criança deve dizer 'O menino chuta a bola'.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Arrumadora de Palavras",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Muito bem! Agora você sabe que a ordem das palavras muda tudo. Vamos continuar aprendendo!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "O vento bagunçou as palavras",

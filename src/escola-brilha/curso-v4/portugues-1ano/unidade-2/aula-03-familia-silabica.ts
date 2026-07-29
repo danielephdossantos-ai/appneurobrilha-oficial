@@ -1,4 +1,8 @@
 import type { AulaPortuguesV4 } from "../../types";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as leao } from "@/assets/neuro-treino/objetos/leao.png.asset.json";
+import { url as mae } from "@/assets/neuro-treino/objetos/mae.png.asset.json";
+import { url as pai } from "@/assets/neuro-treino/objetos/pai.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
 import { url as banana } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
@@ -24,6 +28,89 @@ export const aula03: AulaPortuguesV4 = {
   iconeTrilha: "🅱️",
   bncc: ["EF01LP07", "EF01LP08"],
   duracaoMin: 15,
+
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote: "Oi! Hoje vamos conhecer três famílias de sílabas novas: L, M e P. Toca pra começar!",
+    },
+    {
+      tipo: "familiaSilabica",
+      consoante: "L",
+      silabas: ["LA", "LE", "LI", "LO", "LU"],
+      instrucaoAudio: "Toca em cada sílaba da família do L e escuta o som dela.",
+      elogio: "Você conheceu a família toda do L!",
+    },
+    {
+      tipo: "familiaSilabica",
+      consoante: "M",
+      silabas: ["MA", "ME", "MI", "MO", "MU"],
+      instrucaoAudio: "Agora toca em cada sílaba da família do M.",
+      elogio: "Muito bem! Você conheceu a família do M.",
+    },
+    {
+      tipo: "familiaSilabica",
+      consoante: "P",
+      silabas: ["PA", "PE", "PI", "PO", "PU"],
+      instrucaoAudio: "Agora toca em cada sílaba da família do P.",
+      elogio: "Isso! Você conheceu a família do P.",
+    },
+    {
+      tipo: "pareamentoLetraSom",
+      instrucaoAudio: "Liga cada letra com a figura que começa com o som dela.",
+      pares: [
+        { letra: "L", nome: "leão", imagemUrl: leao },
+        { letra: "M", nome: "mãe", imagemUrl: mae },
+        { letra: "P", nome: "pai", imagemUrl: pai },
+      ],
+      elogio: "Perfeito! Cada letra tem o seu som.",
+    },
+    {
+      tipo: "juntarSilabas",
+      imagemUrl: leao,
+      silabas: ["LE", "ÃO"],
+      palavra: "LEÃO",
+      instrucaoAudio: "Toca em LE, depois em ÃO.",
+      elogio: "Isso! LE + ÃO faz LEÃO.",
+    },
+    {
+      tipo: "juntarSilabas",
+      imagemUrl: bolo,
+      silabas: ["BO", "LO"],
+      palavra: "BOLO",
+      instrucaoAudio: "Toca em BO, depois em LO.",
+      elogio: "Muito bem! BO + LO faz BOLO.",
+    },
+    {
+      tipo: "juntarSilabas",
+      imagemUrl: balao,
+      silabas: ["BA", "LÃO"],
+      palavra: "BALÃO",
+      instrucaoAudio: "Toca em BA, depois em LÃO.",
+      elogio: "Isso! BA + LÃO faz BALÃO.",
+    },
+    {
+      tipo: "leituraSilabica",
+      imagemUrl: bola,
+      palavra: "BOLA",
+      silabas: ["BO", "LA"],
+      instrucaoAudio: "Vamos ouvir a palavra devagar e depois inteira.",
+      elogio: "Você leu BOLA! BO-LA junto forma BOLA.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Caça-palavras das famílias L, M e P",
+      convite: "Procurem juntos 3 objetos que comecem com L, M ou P.",
+      dicaAdulto: "Fale o som da sílaba inicial, não a letra sozinha.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Guardião das Famílias Silábicas",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Você conheceu as famílias do L, do M e do P! Muito bem!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "A Família que Mora na Letra B",
