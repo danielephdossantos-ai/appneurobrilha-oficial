@@ -626,6 +626,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               Sair para a trilha
             </Link>
           </div>
+          </Palco>
         </main>
       </div>
     </div>
