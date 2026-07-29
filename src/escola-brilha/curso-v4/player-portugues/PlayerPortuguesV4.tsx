@@ -6,8 +6,8 @@ import { createContext, useContext, useEffect, useState } from "react";
  *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
  *            cartões mais retos, tipografia mais firme, menos fofura)
  */
-type SkinPT = { kids: boolean; tween: boolean };
-const KidsCtx = createContext<SkinPT>({ kids: false, tween: false });
+type SkinPT = { kids: boolean; tween: boolean; cyber: boolean };
+const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, cyber: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
