@@ -73,10 +73,32 @@ const CORES_KIDS: Record<string, string> = {
   m11: "#fca5a5",
 };
 
+/** Paleta "tween" (3º ano+): neon sobre grafite, mais sóbria que a infantil. */
+const CORES_TWEEN: Record<string, string> = {
+  m1: "#22d3ee",
+  m2: "#818cf8",
+  m3: "#f59e0b",
+  mev: "#a78bfa",
+  m4: "#10b981",
+  m5: "#f43f5e",
+  m6: "#e879f9",
+  m7: "#38bdf8",
+  m8: "#eab308",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#8b5cf6",
+  m10: "#22c55e",
+  m11: "#fb923c",
+};
+
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
-  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
+  // Skin tween ("entre kids e teen"): Português do 3º ano.
+  const tween = cursoSlug === "portugues-3ano";
+  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
+  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+
 
   const MOMENTOS = MOMENTOS_BASE.filter(
     (m) =>
