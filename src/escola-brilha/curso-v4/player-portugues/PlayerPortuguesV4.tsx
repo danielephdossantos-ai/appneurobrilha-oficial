@@ -732,8 +732,19 @@ function Secao({
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  const { kids, tween } = useContext(KidsCtx);
+  const { kids, tween, codex } = useContext(KidsCtx);
   if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  if (codex) {
+    return (
+      <div
+        className="flex items-start gap-2 rounded-md border-l-[3px] border-violet-400 bg-[#1E293B]/80 px-4 py-3"
+        style={{ boxShadow: "0 0 22px -14px rgba(168,85,247,.9)" }}
+      >
+        <span className="text-violet-300 font-mono text-sm leading-6">&gt;_</span>
+        <p className="min-w-0 text-[0.95rem] font-semibold text-slate-100">{children}</p>
+      </div>
+    );
+  }
   if (tween) {
     return (
       <div className="flex items-start gap-2 rounded-lg border-l-4 border-cyan-400 bg-white/[.06] px-4 py-3">
