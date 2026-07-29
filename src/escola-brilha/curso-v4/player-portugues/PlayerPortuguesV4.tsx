@@ -1,7 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-/** Ativa o visual infantil (1º ano) nos blocos internos do player. */
-const KidsCtx = createContext(false);
+/**
+ * Skin dos blocos internos:
+ *  - kids  → 1º/2º ano (roxo/doce, mascote, estrelinhas)
+ *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
+ *            cartões mais retos, tipografia mais firme, menos fofura)
+ */
+type SkinPT = { kids: boolean; tween: boolean };
+const KidsCtx = createContext<SkinPT>({ kids: false, tween: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
