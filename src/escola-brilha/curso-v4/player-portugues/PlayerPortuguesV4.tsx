@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+/** Ativa o visual infantil (1º ano) nos blocos internos do player. */
+const KidsCtx = createContext(false);
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
