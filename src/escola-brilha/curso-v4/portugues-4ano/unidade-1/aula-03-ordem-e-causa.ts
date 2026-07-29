@@ -158,7 +158,6 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto:
           "⛓️ Muito bem! Você entendeu a corrente de causa: sem a seca, o mato não pegaria fogo tão facilmente — é assim que uma causa muda toda a consequência seguinte.",
-          
         feedbackErro:
           "O texto liga a seca ao mato fácil de pegar fogo. Se a causa (seca) fosse diferente, a consequência (fogo se espalhando rápido) também mudaria.",
       },
