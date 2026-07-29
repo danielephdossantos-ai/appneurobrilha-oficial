@@ -528,8 +528,8 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
-  const kids = useContext(KidsCtx);
-  const cor = CORES_KIDS[id] ?? "#fbbf24";
+  const { kids, tween } = useContext(KidsCtx);
+  const cor = (tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (tween ? "#22d3ee" : "#fbbf24");
   const emoji = label.trim().split(" ")[0];
   const texto = label.trim().split(" ").slice(1).join(" ");
 
@@ -543,6 +543,33 @@ function Secao({
           {label}
         </div>
         <div className="space-y-3">{children}</div>
+      </section>
+    );
+  }
+
+  if (tween) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-2xl overflow-hidden border border-white/10 bg-white/[.05] backdrop-blur-sm"
+        style={{ boxShadow: `0 0 0 1px ${cor}33, 0 14px 34px -20px ${cor}` }}
+      >
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-lg"
+            style={{ background: `${cor}22`, border: `1px solid ${cor}66` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-sm md:text-base font-extrabold uppercase tracking-wider"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <span className="ml-auto shrink-0 h-1.5 w-10 rounded-full" style={{ background: cor }} />
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[1rem] leading-relaxed">{children}</div>
       </section>
     );
   }
@@ -572,8 +599,16 @@ function Secao({
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  const kids = useContext(KidsCtx);
+  const { kids, tween } = useContext(KidsCtx);
   if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  if (tween) {
+    return (
+      <div className="flex items-start gap-2 rounded-lg border-l-4 border-cyan-400 bg-white/[.06] px-4 py-3">
+        <span className="text-cyan-300 font-mono text-sm leading-6">▶</span>
+        <p className="min-w-0 text-[0.95rem] font-semibold text-white/95">{children}</p>
+      </div>
+    );
+  }
   return (
     <div className="flex items-start gap-2 rounded-2xl bg-white/12 border-2 border-white/20 px-4 py-3">
       <span className="text-xl leading-none">🗣️</span>
@@ -581,4 +616,5 @@ function Instrucao({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
 
