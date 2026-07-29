@@ -391,7 +391,8 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
           <Palco
-            codex={codex}
+            /* Aula em tela rolável (sem "Continuar"), igual às demais unidades */
+            codex={false}
             passo={passo}
             setPasso={setPasso}
             rotulos={MOMENTOS.map((m) => m.label)}
@@ -829,6 +830,8 @@ function Palco({
       </>
     );
   }
+
+
 
   const total = cenas.length;
   const i = Math.min(Math.max(passo, 0), total - 1);
