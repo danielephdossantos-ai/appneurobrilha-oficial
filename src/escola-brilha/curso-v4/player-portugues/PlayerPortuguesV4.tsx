@@ -90,16 +90,39 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
+/**
+ * Paleta "codex" (5º ano — Mestres da Palavra): cyberpunk / neo-brutalista.
+ * Obsidiana + violeta elétrico + esmeralda neon + âmbar cyber.
+ */
+const CORES_CODEX: Record<string, string> = {
+  m1: "#A855F7",
+  m2: "#8B5CF6",
+  m3: "#F59E0B",
+  mev: "#A855F7",
+  m4: "#10B981",
+  m5: "#F43F5E",
+  m6: "#E879F9",
+  m7: "#38BDF8",
+  m8: "#F59E0B",
+  mmini: "#A855F7",
+  mlab: "#10B981",
+  m9: "#8B5CF6",
+  m10: "#10B981",
+  m11: "#F59E0B",
+};
+
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
   // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
+  // Skin codex (cyberpunk/HUD): Português do 5º ano.
+  const codex = cursoSlug === "portugues-5ano";
   const tween =
     cursoSlug === "portugues-3ano" ||
     cursoSlug === "portugues-4ano" ||
-    cursoSlug === "portugues-5ano";
+    codex;
   const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
-  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+  const CORES = codex ? CORES_CODEX : tween ? CORES_TWEEN : CORES_KIDS;
 
 
   const MOMENTOS = MOMENTOS_BASE.filter(
