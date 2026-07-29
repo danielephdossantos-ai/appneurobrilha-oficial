@@ -332,18 +332,33 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
-            {MOMENTOS.map((m) => (
+            {MOMENTOS.map((m, i) =>
+              codex ? (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setPasso(i)}
+                  className={`block w-full text-left text-[10px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-widest border transition-all duration-200 ${
+                    passo === i
+                      ? "text-[#0B0F17] border-transparent shadow-[0_0_16px_-2px_rgba(168,85,247,.8)]"
+                      : i < passo
+                      ? "text-emerald-300 border-emerald-500/40 bg-[#0F172A]"
+                      : "text-slate-400 border-slate-700 bg-[#1E293B] hover:border-violet-400/60 hover:text-violet-200"
+                  }`}
+                  style={passo === i ? { background: CORES[m.id] ?? "#A855F7" } : undefined}
+                >
+                  <span className="opacity-60 mr-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {m.label}
+                  {i < passo && <span className="ml-1">✓</span>}
+                </button>
+              ) : (
               <a
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  codex
-                    ? `block text-[10px] px-3 py-2 rounded-md font-mono font-bold uppercase tracking-widest border transition-all duration-200 ${
-                        ativo === m.id
-                          ? "text-[#0B0F17] border-transparent shadow-[0_0_16px_-2px_rgba(168,85,247,.8)]"
-                          : "text-slate-300 border-slate-700 bg-[#1E293B] hover:border-violet-400/60 hover:text-violet-200"
-                      }`
-                    : tween
+                  tween
                     ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
                         ativo === m.id
                           ? "text-[#0b1020] border-transparent"
@@ -369,7 +384,8 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               >
                 {m.label}
               </a>
-            ))}
+              ),
+            )}
           </div>
         </aside>
 
