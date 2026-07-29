@@ -398,7 +398,11 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           <div className="pt-6 flex flex-col items-center gap-3">
             <button
               onClick={() => onConcluir?.()}
-              className="px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
+              className={
+                kids
+                  ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
+                  : "px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
+              }
             >
               🎉 Concluir aula
             </button>
@@ -410,6 +414,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       </div>
       <BotaoOuvirCena selector={`#${ativo}`} />
     </div>
+    </KidsCtx.Provider>
   );
 }
 
@@ -422,19 +427,57 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
+  const kids = useContext(KidsCtx);
+  const cor = CORES_KIDS[id] ?? "#fbbf24";
+  const emoji = label.trim().split(" ")[0];
+  const texto = label.trim().split(" ").slice(1).join(" ");
+
+  if (!kids) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-24 rounded-3xl bg-white/5 border border-white/10 p-5 md:p-6"
+      >
+        <div className="text-[11px] uppercase tracking-widest text-amber-300 mb-3">
+          {label}
+        </div>
+        <div className="space-y-3">{children}</div>
+      </section>
+    );
+  }
+
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-3xl bg-white/5 border border-white/10 p-5 md:p-6"
+      className="scroll-mt-28 rounded-[2rem] overflow-hidden border-4 shadow-[0_10px_0_rgba(0,0,0,.22)]"
+      style={{ borderColor: cor, background: "rgba(255,255,255,0.07)" }}
     >
-      <div className="text-[11px] uppercase tracking-widest text-amber-300 mb-3">
-        {label}
+      <div
+        className="flex items-center gap-3 px-4 py-3"
+        style={{ background: cor }}
+      >
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/90 text-2xl shadow-inner">
+          {emoji}
+        </span>
+        <span className="min-w-0 truncate text-lg font-black text-[#2b1258] drop-shadow-sm">
+          {texto}
+        </span>
       </div>
-      <div className="space-y-3">{children}</div>
+      <div className="space-y-4 p-4 md:p-6 text-[1.05rem] leading-relaxed">
+        {children}
+      </div>
     </section>
   );
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm text-white/80 italic">{children}</p>;
+  const kids = useContext(KidsCtx);
+  if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  return (
+    <div className="flex items-start gap-2 rounded-2xl bg-white/12 border-2 border-white/20 px-4 py-3">
+      <span className="text-xl leading-none">🗣️</span>
+      <p className="min-w-0 text-base font-bold text-white">{children}</p>
+    </div>
+  );
 }
+
