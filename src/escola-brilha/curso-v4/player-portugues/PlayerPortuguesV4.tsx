@@ -390,6 +390,13 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
         </aside>
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
+          <Palco
+            codex={codex}
+            passo={passo}
+            setPasso={setPasso}
+            rotulos={MOMENTOS.map((m) => m.label)}
+            cores={MOMENTOS.map((m) => CORES[m.id] ?? "#A855F7")}
+          >
 
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
