@@ -130,15 +130,28 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
   return (
-    <KidsCtx.Provider value={kids}>
+    <KidsCtx.Provider value={{ kids, tween }}>
     <div
       className={
-        kids
+        tween
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
+          : kids
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
           : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
       }
     >
-      {kids && (
+      {tween && (
+        <div
+          className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
+            backgroundSize: "42px 42px",
+          }}
+        />
+      )}
+      {kids && !tween && (
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
           {[
             { t: "6%", l: "8%", s: 26, d: "0s" },
@@ -158,6 +171,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           ))}
         </div>
       )}
+
 
       <header
         className={
