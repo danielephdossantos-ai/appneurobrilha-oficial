@@ -1,4 +1,7 @@
-import { Children, createContext, useContext, useEffect, useState } from "react";
+import { Children, createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useAppState } from "@/core/store";
+import { aplicarNomeProfundo } from "./aplicar-nome";
+
 
 /**
  * Skin dos blocos internos:
