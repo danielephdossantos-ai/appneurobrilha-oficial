@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O mural da escola",
     historia:
-      "— Pip, os alunos querem mais tempo de recreio, mas a diretoria disse que 'querer não basta'. — E está certa, Pipa! Para convencer alguém de verdade, não basta gritar mais alto: é preciso defender uma tese com argumentos. Hoje você aprende a montar um texto de opinião tão bem construído que ninguém consegue ignorar.",
+      "— {NOME}, os alunos querem mais tempo de recreio, mas a diretoria disse que 'querer não basta'. E está certa! Para convencer alguém de verdade, não basta gritar mais alto: é preciso defender uma tese com argumentos. Hoje você aprende a montar um texto de opinião tão bem construído que ninguém consegue ignorar.",
     imagemUrl: brilha,
   },
 

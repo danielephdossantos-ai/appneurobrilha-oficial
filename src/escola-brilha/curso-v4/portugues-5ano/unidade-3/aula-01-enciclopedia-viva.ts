@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "A enciclopédia sem páginas",
     historia:
-      "— Pip, a Enciclopédia do Códice perdeu vários verbetes! Sem eles, ninguém consegue pesquisar nada. — Então nós vamos escrevê-los, Pipa. Um verbete não é uma história: é informação organizada, direta e impessoal. Quem escreve verbete não diz 'eu acho' — diz o que a coisa é. Vamos aprender a estrutura e reconstruir a enciclopédia.",
+      "— {NOME}, a Enciclopédia do Códice perdeu vários verbetes! Sem eles, ninguém consegue pesquisar nada. Então nós vamos escrevê-los. Um verbete não é uma história: é informação organizada, direta e impessoal. Quem escreve verbete não diz 'eu acho' — diz o que a coisa é. Vamos aprender a estrutura e reconstruir a enciclopédia.",
     imagemUrl: brilha,
   },
 
