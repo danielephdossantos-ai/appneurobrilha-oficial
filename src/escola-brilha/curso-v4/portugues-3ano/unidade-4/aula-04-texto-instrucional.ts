@@ -1,7 +1,7 @@
 import type { AulaPortuguesV4 } from "../../types";
 import { url as bolo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
 import { url as receita } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
-import { url as ovo } from "@/assets/neuro-treino/objetos/ovo.png.asset.json";
+import { url as ovo } from "@/assets/neuro-treino/objetos/bolo.png.asset.json";
 import { url as leite } from "@/assets/neuro-treino/objetos/mamadeira.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as dado } from "@/assets/neuro-treino/objetos/dado.png.asset.json";
