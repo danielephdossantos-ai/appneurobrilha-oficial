@@ -7,6 +7,7 @@ import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asse
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 
 /**
  * Aula 4 — Leio e Entendo a Frase
@@ -22,6 +23,90 @@ export const aula04: AulaPortuguesV4 = {
   iconeTrilha: "🧩",
   bncc: ["EF01LP11", "EF01LP13", "EF12LP04"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — áudio + imagem + toque. Fecha a unidade com leitura
+  // eco de 4 linhas, um textinho curto e compreensão.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Hoje é o nosso último jogo da unidade das frases. Você vai mostrar tudo o que aprendeu. Vamos lá!",
+    },
+    {
+      tipo: "leituraEco",
+      titulo: "Fala igualzinho a Aurora",
+      imagemUrl: sol,
+      imagensLinhas: [sol, cachorro, menina, gato],
+      linhas: [
+        "O sol brilha no céu.",
+        "O cachorro late alto.",
+        "A menina rega a flor.",
+        "O gato dorme no sofá.",
+      ],
+      instrucaoAudio: "Aurora vai falar cada frase, uma de cada vez. Repete igualzinho depois dela.",
+      elogio: "Uau! Você repetiu as quatro frases certinho!",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Escuta: 'O sol brilha no céu.' Qual figura combina com essa frase?",
+      opcoes: [
+        { nome: "sol", imagemUrl: sol, correta: true },
+        { nome: "gato", imagemUrl: gato, correta: false },
+        { nome: "cachorro", imagemUrl: cachorro, correta: false },
+      ],
+      feedbackAcerto: "Isso! A frase fala do SOL, então a figura certa é o sol.",
+      feedbackErro: "Escuta de novo: 'O sol brilha.' De quem a frase está falando?",
+    },
+    {
+      tipo: "leituraTexto",
+      titulo: "Um dia no jardim",
+      imagemUrl: flor,
+      frases: [
+        "Duda vai ao jardim.",
+        "Ela rega as flores.",
+        "O gato dorme ao sol.",
+      ],
+      instrucaoAudio: "Aurora vai ler essa historinha bem pausada. Escuta com atenção.",
+      elogio: "Você ouviu a historinha toda! Cada frase contou uma parte do dia da Duda.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Na historinha, o que a Duda faz com as flores?",
+      opcoes: [
+        { texto: "Ela rega as flores.", correta: true },
+        { texto: "Ela corta as flores.", correta: false },
+      ],
+      feedbackAcerto: "Isso! Duda rega as flores com cuidado.",
+      feedbackErro: "Escuta de novo a historinha: o que Duda faz com as flores?",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "E onde o gato dorme, na historinha?",
+      opcoes: [
+        { texto: "Perto das flores, ao sol.", correta: true },
+        { texto: "Dentro da caixa.", correta: false },
+      ],
+      feedbackAcerto: "Isso! O gato dorme perto das flores, tomando sol.",
+      feedbackErro: "Escuta de novo: onde o gato ficou dormindo?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Frase e desenho",
+      convite:
+        "Peça a um adulto pra falar uma frase, como 'O gato dorme no sofá', e desenhe o que você entendeu dela.",
+      dicaAdulto:
+        "Fale a frase devagar duas vezes antes de a criança desenhar. O importante é ela entender a ideia, não escrever.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Construtor de Frases",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Parabéns! Você terminou a unidade das frases e já entende o que elas contam. Você é demais!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "O jogo das frases certas",

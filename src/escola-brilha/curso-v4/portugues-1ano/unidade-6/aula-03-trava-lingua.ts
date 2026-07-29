@@ -22,6 +22,76 @@ export const aula03: AulaPortuguesV4 = {
   bncc: ["EF01LP09", "EF01LP10", "EF12LP18"],
   duracaoMin: 15,
 
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote: "Oi! Hoje eu vou tentar falar uma coisa bem rápido e vou enrolar a língua todinha! Vamos treinar juntos?",
+    },
+    {
+      tipo: "escutaRitmada",
+      imagemUrl: sapo,
+      versos: [
+        "O sapo dentro do saco,",
+        "o saco com o sapo dentro.",
+      ],
+      legenda: "Escute bem devagar primeiro.",
+    },
+    {
+      tipo: "leituraEco",
+      titulo: "O Sapo Dentro do Saco",
+      imagemUrl: sapo,
+      linhas: [
+        "O sapo dentro do saco,",
+        "o saco com o sapo dentro,",
+        "o sapo dentro do saco,",
+        "o saco com o sapo dentro!",
+      ],
+      instrucaoAudio: "Repita comigo, e cada vez mais rápido!",
+      elogio: "Uau, sua língua já está treinada!",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma junto comigo: SA-PO. Quantas palmas?",
+      palavra: "SA-PO",
+      silabas: 2,
+      imagemUrl: sapo,
+      elogio: "Duas palmas certinhas!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "sapo", imagemUrl: sapo },
+        { nome: "saco", imagemUrl: caixa },
+        { nome: "pato", imagemUrl: pato },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura começa com o mesmo som de SAPO?",
+      opcoes: [
+        { nome: "saco", imagemUrl: caixa, correta: true },
+        { nome: "pato", imagemUrl: pato, correta: false },
+        { nome: "estrela", imagemUrl: estrela, correta: false },
+      ],
+      feedbackAcerto: "Isso! SAPO e SACO começam com o mesmo som: SA.",
+      feedbackErro: "Escute de novo: SA-po... SA-co... o começo é igual?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Desafio do Trava-Língua",
+      convite: "Treine devagar e depois fale bem rápido pra sua família, três vezes sem errar!",
+      dicaAdulto: "Deixe a criança treinar devagar antes de tentar rápido. Rir junto faz parte da diversão!",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Campeã da Língua Rápida",
+      mascoteUrl: brilha,
+      falaFinal: "Uhuul! Você treinou o trava-língua e ficou craque! Que risada gostosa a gente deu.",
+    },
+  ],
+
   momento01_motivacao: {
     titulo: "Brilha tenta falar rápido e enrola a língua",
     historia:

@@ -7,6 +7,7 @@ import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.json";
 
 /**
  * Aula 1 — Palavras que Rimam
@@ -23,6 +24,71 @@ export const aula01: AulaPortuguesV4 = {
   iconeTrilha: "🎵",
   bncc: ["EF01LP09", "EF01LP10"],
   duracaoMin: 15,
+
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote: "Oi! Eu sou a Aurora. Hoje a gente vai brincar de encontrar palavras que terminam com o MESMO SOM. Toca pra começar!",
+    },
+    {
+      tipo: "escutaRitmada",
+      imagemUrl: gato,
+      versos: ["Gato...", "Pato...", "Rato...", "Todos terminam igual!"],
+      legenda: "Escute o som do final de cada palavra.",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "gato", imagemUrl: gato },
+        { nome: "pato", imagemUrl: pato },
+        { nome: "rato", imagemUrl: rato },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura RIMA com PATO?",
+      opcoes: [
+        { nome: "rato", imagemUrl: rato, correta: true },
+        { nome: "sol", imagemUrl: sol, correta: false },
+        { nome: "flor", imagemUrl: flor, correta: false },
+      ],
+      feedbackAcerto: "Isso! PATO e RATO terminam com o mesmo som: ATO.",
+      feedbackErro: "Escute de novo: PA-TO... RA-TO... o final é igual?",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura RIMA com SOL?",
+      opcoes: [
+        { nome: "flor", imagemUrl: flor, correta: true },
+        { nome: "gato", imagemUrl: gato, correta: false },
+        { nome: "rato", imagemUrl: rato, correta: false },
+      ],
+      feedbackAcerto: "Isso! SOL e FLOR terminam com um som bem parecido.",
+      feedbackErro: "Escute o final: SO-L... FLO-R... parece?",
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma junto comigo: GA-TO. Quantas palmas?",
+      palavra: "GA-TO",
+      silabas: 2,
+      imagemUrl: gato,
+      elogio: "Duas palmas! Muito bem.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Caça-Rimas em Casa",
+      convite: "Escolha uma palavra com um adulto e pensem juntos em outra palavra que rima com ela.",
+      dicaAdulto: "Diga a palavra bem devagar e preste atenção só no finalzinho do som.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Caçadora de Rimas",
+      mascoteUrl: brilha,
+      falaFinal: "Você descobriu palavras que rimam! Seu ouvido está cada vez mais esperto.",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "Brilha descobre o Jardim das Rimas",

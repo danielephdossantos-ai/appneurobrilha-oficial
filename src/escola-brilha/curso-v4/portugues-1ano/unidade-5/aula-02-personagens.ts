@@ -9,6 +9,7 @@ import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json
 import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 /**
  * Aula 2 — Quem é Quem na História
  * -------------------------------------------------------------
@@ -25,6 +26,106 @@ export const aula02: AulaPortuguesV4 = {
   iconeTrilha: "🐇",
   bncc: ["EF01LP26", "EF12LP19", "EF15LP02", "EF15LP03"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — audio-first, imagem, toque (criança de 6 anos).
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Hoje vamos conhecer o Tiago e seu cachorro Bolinha. Toca pra começar a história!",
+    },
+    {
+      tipo: "historiaIlustrada",
+      titulo: "Tiago e seu Cachorro Bolinha",
+      cenas: [
+        { imagemUrl: menino, narracao: "Tiago adorava brincar no quintal com seu cachorro Bolinha." },
+        { imagemUrl: cachorro, narracao: "A bola de Tiago caiu num buraco. Bolinha latiu perto do buraco pra avisar." },
+        { imagemUrl: flor, narracao: "Tiago cavou, achou a bola e fez carinho em Bolinha, agradecido." },
+      ],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Quem é o PERSONAGEM PRINCIPAL dessa história?",
+      opcoes: [
+        { nome: "Tiago", imagemUrl: menino, correta: true },
+        { nome: "Bolinha", imagemUrl: cachorro, correta: false },
+        { nome: "a princesa", imagemUrl: princesa, correta: false },
+      ],
+      feedbackAcerto: "Isso! O Tiago aparece do começo ao fim — ele é o principal.",
+      feedbackErro: "Pensa: quem está em TODAS as partes da história? É o Tiago.",
+    },
+    {
+      tipo: "campoSemantico",
+      categoria: "AMIGOS QUE AJUDAM",
+      categoriaEmoji: "🐾",
+      pergunta: "Qual desses é um personagem SECUNDÁRIO, que ajuda o Tiago?",
+      opcoes: [
+        { nome: "Bolinha", imagemUrl: cachorro, correta: true },
+        { nome: "a coroa da princesa", imagemUrl: princesa, correta: false },
+        { nome: "um livro fechado", imagemUrl: livro, correta: false },
+      ],
+      instrucaoAudio: "Toca em quem ajuda o Tiago na história.",
+      elogio: "Isso! O Bolinha ajuda o Tiago — ele é secundário.",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir quem mora nas histórias.",
+      itens: [
+        { nome: "menino", imagemUrl: menino },
+        { nome: "cachorro", imagemUrl: cachorro },
+        { nome: "gato", imagemUrl: gato },
+      ],
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma junto comigo: TI-A-GO. Quantas palmas?",
+      palavra: "TI-A-GO",
+      silabas: 3,
+      imagemUrl: menino,
+      elogio: "Três palmas! Ti-a-go tem três pedacinhos.",
+    },
+    {
+      tipo: "fazDeConta",
+      imagemUrl: cachorro,
+      convite: "Faz de conta que você é o Bolinha! Late bem alto pra avisar onde está a bola escondida.",
+      dica: "Pode latir 'au au' bem animado!",
+    },
+    {
+      tipo: "rodaConversa",
+      imagemUrl: menino,
+      pergunta: "Você tem um amigo ou bichinho que te ajuda quando você precisa? Conta pra gente!",
+      exemplos: ["Meu cachorro me ajuda", "Meu irmão me ajuda", "Meu amigo da escola"],
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Onde acontece essa história?",
+      opcoes: [
+        { nome: "no quintal de casa", imagemUrl: casa, correta: true },
+        { nome: "numa floresta", imagemUrl: coelho, correta: false },
+        { nome: "num castelo", imagemUrl: princesa, correta: false },
+      ],
+      feedbackAcerto: "Isso! Tudo acontece no quintal da casa do Tiago.",
+      feedbackErro: "Lembra da primeira cena: onde Tiago brincava com Bolinha?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Quem é quem na sua história favorita?",
+      convite:
+        "Assistam ou leiam uma história curta e descubram juntos: quem é o personagem principal e quem ajuda ele?",
+      dicaAdulto:
+        "Peça pra criança desenhar o principal maior no meio e os ajudantes menores ao redor.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Detetive de Personagens",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Muito bem! Agora você sabe descobrir quem é o personagem principal de qualquer história!",
+    },
+  ],
+
 
   momento01_motivacao: {
     titulo: "Brilha conhece os moradores das histórias",

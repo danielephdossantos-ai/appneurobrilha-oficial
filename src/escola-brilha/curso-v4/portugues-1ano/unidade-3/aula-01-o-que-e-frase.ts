@@ -5,6 +5,10 @@ import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as lapis } from "@/assets/neuro-treino/objetos/lapis.png.asset.json";
 import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
+import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
  * Aula 1 — O que é uma FRASE?
@@ -21,6 +25,102 @@ export const aula01: AulaPortuguesV4 = {
   iconeTrilha: "✏️",
   bncc: ["EF01LP11", "EF01LP12"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — áudio + imagem + toque. Criança de 6 anos ainda não
+  // lê sozinha: Aurora narra tudo.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Eu sou a Aurora. Hoje a gente vai descobrir o que é uma FRASE. Toca no botão pra começar!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "gato", imagemUrl: gato },
+        { nome: "bola", imagemUrl: bola },
+        { nome: "casa", imagemUrl: casa },
+      ],
+    },
+    {
+      tipo: "ritmoCorpo",
+      instrucaoAudio: "Bate palma comigo: GA-TO. Quantas palmas?",
+      palavra: "GA-TO",
+      silabas: 2,
+      imagemUrl: gato,
+      elogio: "Duas palmas! GA-TO tem dois pedacinhos.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Escuta: 'O gato dorme.' Qual figura combina com essa ideia?",
+      opcoes: [
+        { nome: "gato", imagemUrl: gato, correta: true },
+        { nome: "bola", imagemUrl: bola, correta: false },
+        { nome: "casa", imagemUrl: casa, correta: false },
+      ],
+      feedbackAcerto: "Isso! A frase fala do GATO, por isso a figura certa é o gato.",
+      feedbackErro: "Escuta de novo: 'O gato dorme.' De quem a frase está falando?",
+    },
+    {
+      tipo: "juntarSilabas",
+      imagemUrl: gato,
+      silabas: ["GA", "TO"],
+      palavra: "GATO",
+      instrucaoAudio: "Toca nas sílabas em ordem e vamos juntar a palavra GATO.",
+      elogio: "Isso! GA + TO forma GATO.",
+    },
+    {
+      tipo: "letrasMoveis",
+      imagemUrl: bola,
+      palavra: "BOLA",
+      distratoras: ["S", "T", "M"],
+      instrucaoAudio: "Arrasta as letras pra montar a palavra BOLA.",
+      elogio: "Você montou BOLA! Palavras juntas formam frases.",
+    },
+    {
+      tipo: "leituraFrase",
+      imagemUrl: gato,
+      frase: "O gato dorme.",
+      instrucaoAudio: "Escuta essa frase inteirinha. Aurora vai ler devagar.",
+      elogio: "Isso é uma frase! Ela conta uma ideia completa sobre o gato.",
+    },
+    {
+      tipo: "leituraFrase",
+      imagemUrl: sol,
+      frase: "O sol brilha.",
+      instrucaoAudio: "Escuta mais uma frase. Depois toca em 'Eu ouvi!'",
+      elogio: "Isso! 'O sol brilha' também é uma frase completa.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Qual figura combina com a frase 'O pato nada na água'?",
+      opcoes: [
+        { nome: "pato", imagemUrl: pato, correta: true },
+        { nome: "estrela", imagemUrl: estrela, correta: false },
+        { nome: "casa", imagemUrl: casa, correta: false },
+      ],
+      feedbackAcerto: "Isso! A frase fala do PATO, então a figura certa é o pato.",
+      feedbackErro: "Escuta de novo: 'O pato nada.' Quem está nadando?",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Caça-frases em casa",
+      convite:
+        "Com um adulto, invente 2 frases sobre coisas da sua casa e conte pra ele em voz alta.",
+      dicaAdulto:
+        "Ajude a criança a falar uma ideia completa, como 'O cachorro late' — não precisa escrever ainda.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Descobridor de Frases",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Muito bem! Você já sabe o que é uma frase. Amanhã vamos brincar de arrumar as palavras!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "Brilha brinca de montar palavras",

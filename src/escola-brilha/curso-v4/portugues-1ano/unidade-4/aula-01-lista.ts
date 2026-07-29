@@ -23,6 +23,99 @@ export const aula01: AulaPortuguesV4 = {
   bncc: ["EF01LP16", "EF01LP17", "EF01LP19"],
   duracaoMin: 15,
 
+  // ============================================================
+  // MODO JOGO — audio-first, imagem e toque. A criança de 6 anos
+  // ainda não lê texto sozinha.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote:
+        "Oi! Eu sou o Brilha! Hoje eu vou te ajudar a fazer uma lista de compras. Toca no botão pra começar!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela. Essas coisas vão pra nossa lista!",
+      itens: [
+        { nome: "maçã", imagemUrl: maca },
+        { nome: "banana", imagemUrl: banana },
+        { nome: "lápis", imagemUrl: lapis },
+        { nome: "mochila", imagemUrl: mochila },
+      ],
+    },
+    {
+      tipo: "leituraSilabica",
+      imagemUrl: maca,
+      palavra: "MAÇÃ",
+      silabas: ["MA", "ÇÃ"],
+      instrucaoAudio: "Vamos ler devagarinho essa palavra da lista.",
+      elogio: "Isso! MA-ÇÃ. Você leu a primeira palavra da lista!",
+    },
+    {
+      tipo: "leituraSilabica",
+      imagemUrl: banana,
+      palavra: "BANANA",
+      silabas: ["BA", "NA", "NA"],
+      instrucaoAudio: "Agora essa outra palavra da lista.",
+      elogio: "Muito bem! BA-NA-NA.",
+    },
+    {
+      tipo: "letrasMoveis",
+      imagemUrl: lapis,
+      palavra: "LAPIS",
+      distratoras: ["O", "M", "B"],
+      instrucaoAudio: "Arrasta as letras pra montar a palavra LÁPIS, outro item da lista.",
+      elogio: "Isso! Você montou LÁPIS.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "A lista já tem maçã, banana e lápis. Olha as figuras: qual delas ainda está faltando na nossa lista?",
+      opcoes: [
+        { nome: "mochila", imagemUrl: mochila, correta: true },
+        { nome: "mãe", imagemUrl: mae, correta: false },
+        { nome: "mercado", imagemUrl: mercado, correta: false },
+      ],
+      feedbackAcerto: "Isso! A mochila também estava na nossa lista e faltava marcar ela.",
+      feedbackErro: "Pensa de novo: das figuras, qual é um item que a gente guarda numa lista de coisas pra levar?",
+    },
+    {
+      tipo: "leituraTexto",
+      titulo: "A Lista do Brilha",
+      imagemUrl: mercado,
+      frases: [
+        "O Brilha fez uma lista.",
+        "Ele escreveu maçã, banana e lápis.",
+        "Cada item ficou numa linha.",
+      ],
+      instrucaoAudio: "Vamos ouvir a historinha da lista do Brilha.",
+      elogio: "Você ouviu a lista inteira! Muito bem.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Na historinha, quantos itens o Brilha escreveu na lista?",
+      opcoes: [
+        { texto: "Dois", correta: false },
+        { texto: "Três", correta: true },
+        { texto: "Cinco", correta: false },
+      ],
+      feedbackAcerto: "Isso! Maçã, banana e lápis. Três itens.",
+      feedbackErro: "Escuta de novo: maçã, banana e lápis. Conta com os dedinhos.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Nossa lista de casa",
+      convite: "Com um adulto, faça uma lista de 3 coisas que vocês precisam comprar ou levar amanhã.",
+      dicaAdulto: "Deixe a criança escolher os itens e desenhar cada um, mesmo que ela ainda não escreva palavras inteiras.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Fazedor de Listas",
+      mascoteUrl: brilha,
+      falaFinal: "Você aprendeu a fazer uma lista! Agora você nunca mais vai esquecer nada.",
+    },
+  ],
+
   momento01_motivacao: {
     titulo: "Brilha vai ao mercado com a mamãe",
     historia:
