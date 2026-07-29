@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import type { EnsinoVisualBloco } from "../../types";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Licao = Extract<EnsinoVisualBloco, { tipo: "licaoLousa" }>;
 
@@ -17,6 +19,9 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
   const total = bloco.passos.length;
   const [revelados, setRevelados] = useState(1);
   const fim = revelados >= total;
+  const { kids, tween } = useContext(KidsCtx);
+  /** 1º e 2º ano: mesma lousa, letra maior e com áudio. */
+  const inf = kids && !tween;
 
   return (
     <div className="rounded-lg border border-slate-700 bg-[#0B0F17] overflow-hidden">
@@ -25,11 +30,15 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
         <div className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-violet-400">
           Regra
         </div>
-        <p className="mt-1 text-[15px] font-semibold leading-relaxed text-slate-100">
+        <p
+          className={`mt-1 font-semibold leading-relaxed text-slate-100 ${
+            inf ? "text-[17px]" : "text-[15px]"
+          }`}
+        >
           {bloco.regra}
         </p>
         {bloco.comoIdentificar && (
-          <p className="mt-2 rounded-md border-l-2 border-amber-400 bg-amber-400/10 px-3 py-2 text-[13px] leading-relaxed text-amber-100">
+          <p className={`mt-2 rounded-md border-l-2 border-amber-400 bg-amber-400/10 px-3 py-2 leading-relaxed text-amber-100 ${inf ? "text-[15px]" : "text-[13px]"}`}>
             <b className="text-amber-300">Como identificar:</b> {bloco.comoIdentificar}
           </p>
         )}
@@ -50,13 +59,30 @@ export function LicaoLousa({ bloco }: { bloco: Licao }) {
 
             {/* A frase na lousa */}
             <div className="overflow-x-auto rounded-md border border-slate-700 bg-[#0F172A] px-3 py-3">
-              <p className="whitespace-pre-wrap text-[17px] font-bold leading-relaxed text-slate-100">
+              <p
+                className={`whitespace-pre-wrap font-bold leading-relaxed text-slate-100 ${
+                  inf ? "text-[22px]" : "text-[17px]"
+                }`}
+              >
                 {realcar(p.frase, p.destaque)}
               </p>
             </div>
 
+            {inf && (
+              <button
+                type="button"
+                onClick={() => {
+                  stopSpeaking();
+                  speakChunked(`${p.frase}. ${p.analise}`);
+                }}
+                className="mt-2 rounded-full bg-amber-400 px-4 py-1.5 text-[13px] font-black text-[#0B0F17]"
+              >
+                🔊 Ouvir
+              </button>
+            )}
+
             {/* Análise */}
-            <p className="mt-3 text-[14px] leading-relaxed text-slate-300">
+            <p className={`mt-3 leading-relaxed text-slate-300 ${inf ? "text-[16px]" : "text-[14px]"}`}>
               <b className="text-emerald-300">Por quê:</b> {p.analise}
             </p>
             {p.nota && (

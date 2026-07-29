@@ -61,6 +61,59 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   // ------------------------------------------------------------
+  // ENSINO VISUAL · Lousa do professor
+  // ------------------------------------------------------------
+  momento_ensinoVisual: {
+    titulo: "Lousa do professor · As 5 vogais",
+    instrucao:
+      "Antes de você responder, o professor resolve na lousa. Toque em 🔊 para ouvir e vá avançando passo a passo.",
+    blocos: [
+      {
+        tipo: "licaoLousa",
+        regra:
+          "As vogais são 5: A, E, I, O, U. Toda sílaba (todo pedacinho de palavra) tem pelo menos uma vogal dentro.",
+        comoIdentificar:
+          "Fale a palavra devagar e bata palma em cada pedacinho. Dentro de cada palma sempre mora uma vogal.",
+        passos: [
+          {
+            frase: "A · E · I · O · U",
+            destaque: ["A", "E", "I", "O", "U"],
+            analise:
+              "São só essas cinco. Todas as outras 21 letras do alfabeto são consoantes.",
+          },
+          {
+            frase: "BO-LA",
+            destaque: ["O", "A"],
+            analise:
+              "Duas palmas: BO e LA. Em BO a vogal é o O. Em LA a vogal é o A. Nenhum pedacinho ficou sem vogal.",
+          },
+          {
+            frase: "A-BE-LHA",
+            destaque: ["A", "E", "A"],
+            analise:
+              "Três palmas. Repare que o primeiro pedacinho é só a vogal A: a vogal pode formar sílaba sozinha.",
+            nota: "Consoante sozinha nunca forma sílaba; vogal sozinha pode.",
+          },
+        ],
+        comparacao: {
+          errado: "As vogais são A, E, I, O, U e Y.",
+          certo: "As vogais são A, E, I, O, U.",
+          porque:
+            "Em português o Y quase não aparece; ele só é usado em nomes e palavras vindas de outras línguas.",
+        },
+        curiosidade:
+          "A palavra vogal vem do latim vox, que quer dizer voz — porque a vogal sai da boca livre, sem travar o ar.",
+        resumo: [
+          "As vogais são 5: A, E, I, O, U.",
+          "Toda sílaba tem pelo menos uma vogal.",
+          "A vogal pode ficar sozinha na sílaba; a consoante não.",
+        ],
+      },
+    ],
+  },
+
+
+  // ------------------------------------------------------------
   // 3 · VOCABULÁRIO
   // ------------------------------------------------------------
   momento03_vocabulario: {

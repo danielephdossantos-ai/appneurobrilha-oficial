@@ -7,7 +7,7 @@ import { Children, createContext, useContext, useEffect, useState } from "react"
  *            cartões mais retos, tipografia mais firme, menos fofura)
  */
 type SkinPT = { kids: boolean; tween: boolean; codex: boolean };
-const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, codex: false });
+export const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, codex: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
@@ -164,7 +164,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
     <div
       className={
         codex
-          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0B0F17_0%,#0F172A_55%,#0B0F17_100%)] text-slate-100"
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0B0F17_0%,#0F172A_55%,#0B0F17_100%)] text-slate-100 [&_section_img]:hidden"
           : tween
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
           : kids

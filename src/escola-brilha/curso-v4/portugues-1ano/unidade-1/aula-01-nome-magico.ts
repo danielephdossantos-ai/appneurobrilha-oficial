@@ -97,6 +97,46 @@ export const aula01: AulaPortuguesV4 = {
       "Toda letra tem duas formas: MAIÚSCULA (grande) e minúscula (pequena). O nome sempre começa com letra maiúscula!",
     blocos: [
       {
+        tipo: "licaoLousa",
+        regra:
+          "Nome de gente sempre começa com letra MAIÚSCULA (letra grande). O resto do nome vai com letra minúscula (letra pequena).",
+        comoIdentificar:
+          "Pergunte: é nome de uma pessoa, de um bichinho ou de uma cidade? Se for, a primeira letra é GRANDE.",
+        passos: [
+          {
+            frase: "Ana pegou o lápis.",
+            destaque: ["Ana"],
+            analise:
+              "Ana é nome de pessoa. Por isso o A é grande. As outras letras do nome (n, a) são pequenas.",
+          },
+          {
+            frase: "O gato do Lucas dorme.",
+            destaque: ["Lucas"],
+            analise:
+              "gato é só um bichinho qualquer, então vai com letra pequena. Lucas é o NOME de uma pessoa, então começa com L grande.",
+            nota: "Se o gato tivesse nome, também ficaria grande: o gato Mel dorme.",
+          },
+          {
+            frase: "Bia mora em Recife.",
+            destaque: ["Bia", "Recife"],
+            analise:
+              "Duas letras grandes: Bia é nome de pessoa e Recife é nome de cidade. Nome de lugar também é nome próprio.",
+          },
+        ],
+        comparacao: {
+          errado: "ana brincou com bia.",
+          certo: "Ana brincou com Bia.",
+          porque: "Os dois são nomes de pessoas: precisam começar com letra MAIÚSCULA.",
+        },
+        curiosidade:
+          "A letra grande existe há mais de 2000 anos: os romanos escreviam TUDO em maiúscula. A letra pequena foi inventada muito depois, para escrever mais rápido.",
+        resumo: [
+          "Nome de pessoa, bicho de estimação e lugar começa com letra GRANDE.",
+          "As outras letras do nome ficam pequenas.",
+          "A frase também começa com letra grande.",
+        ],
+      },
+      {
         tipo: "maiusculaMinuscula",
         pares: [
           { maiuscula: "A", minuscula: "a", exemplo: "ANA / ana" },
