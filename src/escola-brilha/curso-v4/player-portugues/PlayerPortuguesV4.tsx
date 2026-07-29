@@ -310,7 +310,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               🔥 Streak
             </span>
             <span className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-[.12em] text-emerald-300">
-              {aula.codigoBncc ?? "5º ANO"}
+              {aula.bncc?.[0] ?? "5º ANO"}
             </span>
           </div>
         )}
