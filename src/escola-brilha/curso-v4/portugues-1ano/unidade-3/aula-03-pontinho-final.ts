@@ -5,6 +5,8 @@ import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.js
 import { url as robo } from "@/assets/neuro-treino/objetos/robo.png.asset.json";
 import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
+import { url as esquiloBrilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as estrelaSimples } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 
 /**
  * Aula 3 — Ponto, Interrogação e Exclamação
@@ -20,6 +22,88 @@ export const aula03: AulaPortuguesV4 = {
   iconeTrilha: "❗",
   bncc: ["EF01LP12", "EF12LP04"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — áudio + imagem + toque. Foco em maiúscula e ponto
+  // final (sem interrogação/exclamação para não confundir com texto).
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: esquiloBrilha,
+      falaMascote:
+        "Oi! Hoje vamos aprender sobre a letra MAIÚSCULA do começo e o PONTINHO do final da frase. Bora jogar?",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "gato", imagemUrl: gato },
+        { nome: "menina", imagemUrl: menina },
+        { nome: "estrela", imagemUrl: estrelaSimples },
+      ],
+    },
+    {
+      tipo: "leituraFrase",
+      imagemUrl: gato,
+      frase: "O gato subiu no telhado.",
+      instrucaoAudio: "Escuta essa frase. Ela começa com letra grande e termina com pontinho.",
+      elogio: "Isso! A frase começa com maiúscula e termina com ponto final.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Qual dessas frases está certa, com maiúscula no começo e ponto no final?",
+      opcoes: [
+        { texto: "o gato subiu no telhado", correta: false },
+        { texto: "O gato subiu no telhado.", correta: true },
+      ],
+      feedbackAcerto: "Isso! Essa frase começa com letra grande e termina com pontinho.",
+      feedbackErro: "Escuta de novo: uma frase não tem letra grande no começo nem pontinho no final.",
+    },
+    {
+      tipo: "leituraEco",
+      titulo: "Fala igualzinho a Aurora",
+      imagemUrl: menina,
+      linhas: ["A menina brinca.", "O sol brilha.", "O gato dorme."],
+      instrucaoAudio: "Aurora vai falar cada frase. Repete igualzinho depois dela.",
+      elogio: "Show! Você falou as frases com o jeitinho certo, começo e fim.",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "Escuta: 'A estrela brilha no céu.' Qual figura combina?",
+      opcoes: [
+        { nome: "estrela", imagemUrl: estrelaSimples, correta: true },
+        { nome: "gato", imagemUrl: gato, correta: false },
+        { nome: "menino", imagemUrl: menino, correta: false },
+      ],
+      feedbackAcerto: "Isso! A frase fala da ESTRELA brilhando.",
+      feedbackErro: "Escuta de novo: 'A estrela brilha.' De quem a frase está falando?",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Toda frase escrita termina com o quê?",
+      opcoes: [
+        { texto: "Com um pontinho", correta: true },
+        { texto: "Sem nada", correta: false },
+      ],
+      feedbackAcerto: "Isso! O pontinho mostra que a frase terminou.",
+      feedbackErro: "Pensa nas frases que você ouviu: todas terminavam com um sinalzinho no final.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Caça-frases em casa",
+      convite:
+        "Peça a um adulto pra ler uma frase de um livro ou revista, bem devagar, e você repete igualzinho.",
+      dicaAdulto:
+        "Aponte o começo (maiúscula) e o final (ponto) da frase enquanto lê para a criança.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Guardiã do Pontinho",
+      mascoteUrl: esquiloBrilha,
+      falaFinal: "Muito bem! Agora você sabe onde a frase começa e onde ela termina!",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "O robô das três vozes",
