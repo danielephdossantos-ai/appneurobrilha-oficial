@@ -4,7 +4,6 @@ import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 import { url as lupaImg } from "@/assets/geografia-3ano/lupa.png.asset.json";
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
-import { BotaoOuvirCena } from "@/escola-brilha/curso-v4/shared/BotaoOuvirCena";
 
 /** Modo TEEN (6º ano+) — desliga mascote infantil e cores kawaii. */
 const TeenContext = createContext(false);
@@ -140,7 +139,6 @@ export function PlayerGeoV1({
         ))}
         <div className="h-24" />
       </main>
-      <BotaoOuvirCena ativoIdx={ativo} />
     </div>
     </ScrollLivreContext.Provider>
     </TeenContext.Provider>
