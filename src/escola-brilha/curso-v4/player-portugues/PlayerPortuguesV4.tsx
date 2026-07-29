@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { Children, createContext, useContext, useEffect, useState } from "react";
 
 /**
  * Skin dos blocos internos:
@@ -791,3 +791,109 @@ function Instrucao({ children }: { children: React.ReactNode }) {
 }
 
 
+
+/**
+ * Palco — no skin "codex" (5º ano) a aula deixa de ser uma apostila rolável
+ * e vira um fluxo cena-a-cena: 1 momento por tela, com HUD de etapa,
+ * navegação "Voltar / Continuar" e tela final de conclusão.
+ * Nos outros skins mantém o scroll contínuo de sempre.
+ */
+function Palco({
+  codex,
+  passo,
+  setPasso,
+  rotulos,
+  cores,
+  children,
+}: {
+  codex: boolean;
+  passo: number;
+  setPasso: (n: number) => void;
+  rotulos: string[];
+  cores: string[];
+  children: React.ReactNode;
+}) {
+  const itens = Children.toArray(children).filter(Boolean);
+  const rodape = itens[itens.length - 1];
+  const cenas = itens.slice(0, -1);
+
+  useEffect(() => {
+    if (codex) window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [passo, codex]);
+
+  if (!codex) {
+    return (
+      <>
+        {cenas}
+        {rodape}
+      </>
+    );
+  }
+
+  const total = cenas.length;
+  const i = Math.min(Math.max(passo, 0), total - 1);
+  const fim = i === total - 1;
+  const cor = cores[i] ?? "#A855F7";
+
+  return (
+    <div className="space-y-5">
+      {/* HUD de etapas */}
+      <div className="flex items-center gap-2">
+        <div className="flex-1 flex items-center gap-1">
+          {cenas.map((_, k) => (
+            <button
+              key={k}
+              type="button"
+              aria-label={`Etapa ${k + 1}`}
+              onClick={() => setPasso(k)}
+              className="h-1.5 flex-1 rounded-full transition-all duration-300"
+              style={{
+                background:
+                  k < i ? "#10B981" : k === i ? cor : "rgba(148,163,184,.25)",
+                boxShadow: k === i ? `0 0 12px ${cor}` : undefined,
+              }}
+            />
+          ))}
+        </div>
+        <span
+          className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-widest"
+          style={{ color: cor }}
+        >
+          {String(i + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-400">
+        {rotulos[i]}
+      </div>
+
+      <div key={i} className="animate-[fadeIn_.35s_ease-out]">
+        {cenas[i]}
+      </div>
+
+      {/* Navegação */}
+      <div className="flex items-center gap-3 pt-2">
+        <button
+          type="button"
+          disabled={i === 0}
+          onClick={() => setPasso(i - 1)}
+          className="h-12 px-4 rounded-lg border border-slate-700 bg-[#1E293B] text-slate-300 font-mono text-[11px] font-bold uppercase tracking-widest disabled:opacity-30 active:scale-95 transition"
+        >
+          ◂ Voltar
+        </button>
+        {!fim && (
+          <button
+            type="button"
+            onClick={() => setPasso(i + 1)}
+            className="flex-1 h-12 rounded-lg font-extrabold uppercase tracking-[0.15em] text-sm text-[#0B0F17] active:scale-95 transition-all duration-200"
+            style={{ background: cor, boxShadow: `0 0 30px -6px ${cor}` }}
+          >
+            Continuar ▸
+          </button>
+        )}
+      </div>
+
+      {fim && <div className="pt-2">{rodape}</div>}
+    </div>
+  );
+}
