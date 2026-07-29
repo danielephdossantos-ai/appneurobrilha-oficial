@@ -1,7 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-/** Ativa o visual infantil (1º ano) nos blocos internos do player. */
-const KidsCtx = createContext(false);
+/**
+ * Skin dos blocos internos:
+ *  - kids  → 1º/2º ano (roxo/doce, mascote, estrelinhas)
+ *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
+ *            cartões mais retos, tipografia mais firme, menos fofura)
+ */
+type SkinPT = { kids: boolean; tween: boolean };
+const KidsCtx = createContext<SkinPT>({ kids: false, tween: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
@@ -67,10 +73,32 @@ const CORES_KIDS: Record<string, string> = {
   m11: "#fca5a5",
 };
 
+/** Paleta "tween" (3º ano+): neon sobre grafite, mais sóbria que a infantil. */
+const CORES_TWEEN: Record<string, string> = {
+  m1: "#22d3ee",
+  m2: "#818cf8",
+  m3: "#f59e0b",
+  mev: "#a78bfa",
+  m4: "#10b981",
+  m5: "#f43f5e",
+  m6: "#e879f9",
+  m7: "#38bdf8",
+  m8: "#eab308",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#8b5cf6",
+  m10: "#22c55e",
+  m11: "#fb923c",
+};
+
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
-  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
+  // Skin tween ("entre kids e teen"): Português do 3º ano.
+  const tween = cursoSlug === "portugues-3ano";
+  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
+  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+
 
   const MOMENTOS = MOMENTOS_BASE.filter(
     (m) =>
@@ -102,15 +130,28 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
   return (
-    <KidsCtx.Provider value={kids}>
+    <KidsCtx.Provider value={{ kids, tween }}>
     <div
       className={
-        kids
+        tween
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
+          : kids
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
           : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
       }
     >
-      {kids && (
+      {tween && (
+        <div
+          className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
+            backgroundSize: "42px 42px",
+          }}
+        />
+      )}
+      {kids && !tween && (
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
           {[
             { t: "6%", l: "8%", s: 26, d: "0s" },
@@ -131,9 +172,12 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
         </div>
       )}
 
+
       <header
         className={
-          kids
+          tween
+            ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
+            : kids
             ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
             : "sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10"
         }
@@ -143,7 +187,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             to="/escola-brilha/curso/$slug"
             params={{ slug: cursoSlug }}
             className={
-              kids
+              tween
+                ? "shrink-0 h-9 px-3 grid place-items-center rounded-lg border border-cyan-400/60 text-cyan-200 text-xs font-bold uppercase tracking-wider hover:bg-cyan-400/10 active:scale-95 transition"
+                : kids
                 ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
                 : "text-sm text-white/70 hover:text-white"
             }
@@ -151,19 +197,43 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             ← Trilha
           </Link>
           <div className="flex-1 min-w-0">
-            <div className={kids ? "text-base font-black truncate" : "text-sm font-bold truncate"}>
-              {kids ? "📖 " : ""}
+            <div
+              className={
+                tween
+                  ? "text-sm md:text-base font-extrabold uppercase tracking-wide truncate"
+                  : kids
+                  ? "text-base font-black truncate"
+                  : "text-sm font-bold truncate"
+              }
+            >
+              {kids && !tween ? "📖 " : ""}
               {aula.titulo}
             </div>
             {kids ? (
               <div className="mt-1 flex items-center gap-2">
-                <div className="h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden">
+                <div
+                  className={
+                    tween
+                      ? "h-1.5 flex-1 rounded-sm bg-white/10 overflow-hidden"
+                      : "h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden"
+                  }
+                >
                   <div
-                    className="h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    className={
+                      tween
+                        ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"
+                        : "h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    }
                     style={{ width: `${progresso}%` }}
                   />
                 </div>
-                <span className="shrink-0 text-[10px] font-black text-amber-200">
+                <span
+                  className={
+                    tween
+                      ? "shrink-0 text-[10px] font-mono font-bold text-cyan-300"
+                      : "shrink-0 text-[10px] font-black text-amber-200"
+                  }
+                >
                   {idxAtivo + 1}/{MOMENTOS.length}
                 </span>
               </div>
@@ -174,6 +244,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
         </div>
       </header>
 
+
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
@@ -182,7 +253,13 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 key={m.id}
                 href={`#${m.id}`}
                 className={
-                  kids
+                  tween
+                    ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
+                        ativo === m.id
+                          ? "text-[#0b1020] border-transparent"
+                          : "text-white/70 border-white/10 bg-white/[.04] hover:bg-white/10"
+                      }`
+                    : kids
                     ? `block text-xs px-3 py-2.5 rounded-2xl font-bold transition ${
                         ativo === m.id
                           ? "text-[#2b1258] scale-[1.03] shadow-lg"
@@ -196,7 +273,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 }
                 style={
                   kids && ativo === m.id
-                    ? { background: CORES_KIDS[m.id] ?? "#fbbf24" }
+                    ? { background: CORES[m.id] ?? (tween ? "#22d3ee" : "#fbbf24") }
                     : undefined
                 }
               >
@@ -421,12 +498,14 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             <button
               onClick={() => onConcluir?.()}
               className={
-                kids
+                tween
+                  ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
+                  : kids
                   ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
                   : "px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
               }
             >
-              🎉 Concluir aula
+              {tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
             </button>
             <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
               Sair para a trilha
@@ -449,8 +528,8 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
-  const kids = useContext(KidsCtx);
-  const cor = CORES_KIDS[id] ?? "#fbbf24";
+  const { kids, tween } = useContext(KidsCtx);
+  const cor = (tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (tween ? "#22d3ee" : "#fbbf24");
   const emoji = label.trim().split(" ")[0];
   const texto = label.trim().split(" ").slice(1).join(" ");
 
@@ -464,6 +543,33 @@ function Secao({
           {label}
         </div>
         <div className="space-y-3">{children}</div>
+      </section>
+    );
+  }
+
+  if (tween) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-2xl overflow-hidden border border-white/10 bg-white/[.05] backdrop-blur-sm"
+        style={{ boxShadow: `0 0 0 1px ${cor}33, 0 14px 34px -20px ${cor}` }}
+      >
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-lg"
+            style={{ background: `${cor}22`, border: `1px solid ${cor}66` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-sm md:text-base font-extrabold uppercase tracking-wider"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <span className="ml-auto shrink-0 h-1.5 w-10 rounded-full" style={{ background: cor }} />
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[1rem] leading-relaxed">{children}</div>
       </section>
     );
   }
@@ -493,8 +599,16 @@ function Secao({
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  const kids = useContext(KidsCtx);
+  const { kids, tween } = useContext(KidsCtx);
   if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  if (tween) {
+    return (
+      <div className="flex items-start gap-2 rounded-lg border-l-4 border-cyan-400 bg-white/[.06] px-4 py-3">
+        <span className="text-cyan-300 font-mono text-sm leading-6">▶</span>
+        <p className="min-w-0 text-[0.95rem] font-semibold text-white/95">{children}</p>
+      </div>
+    );
+  }
   return (
     <div className="flex items-start gap-2 rounded-2xl bg-white/12 border-2 border-white/20 px-4 py-3">
       <span className="text-xl leading-none">🗣️</span>
@@ -502,4 +616,5 @@ function Instrucao({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
 
