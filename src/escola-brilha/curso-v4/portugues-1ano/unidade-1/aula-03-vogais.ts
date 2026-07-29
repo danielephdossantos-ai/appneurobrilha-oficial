@@ -6,8 +6,6 @@ import { url as ioio } from "@/assets/neuro-treino/objetos/ioio.png.asset.json";
 import { url as ovelha } from "@/assets/neuro-treino/objetos/ovelha.png.asset.json";
 import { url as ursinho } from "@/assets/neuro-treino/objetos/ursinho.png.asset.json";
 import { url as escola } from "@/assets/neuro-treino/objetos/escola.png.asset.json";
-import { url as ovo } from "@/assets/neuro-treino/objetos/ovo.png.asset.json";
-import { url as uva } from "@/assets/neuro-treino/objetos/uva.png.asset.json";
 import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
@@ -50,22 +48,21 @@ export const aula03: AulaPortuguesV4 = {
       elogio: "Iii! Sorrindo até a orelha." },
     { tipo: "somDaLetra", letra: "O", som: "ó",
       instrucaoAudio: "O faz a boca redondinha: ooo.",
-      exemplos: [{ nome: "ovo", imagemUrl: ovo }, { nome: "ovelha", imagemUrl: ovelha }],
+      exemplos: [{ nome: "ovelha", imagemUrl: ovelha }],
       elogio: "Ooo! Boca de bolinha." },
     { tipo: "somDaLetra", letra: "U", som: "u",
       instrucaoAudio: "U faz biquinho: uuu.",
-      exemplos: [{ nome: "uva", imagemUrl: uva }, { nome: "urso", imagemUrl: ursinho }],
+      exemplos: [{ nome: "urso", imagemUrl: ursinho }],
       elogio: "Uuu! Biquinho perfeito." },
     { tipo: "cacaAoSom", somAlvo: "O", exemploFala: "ovo",
-      instrucaoAudio: "Toca em tudo que começa com ooo, como em ovo.",
+      instrucaoAudio: "Toca em tudo que começa com ooo, como em ovelha.",
       opcoes: [
-        { nome: "ovo", imagemUrl: ovo, correta: true },
-        { nome: "bola", imagemUrl: bola, correta: false },
         { nome: "ovelha", imagemUrl: ovelha, correta: true },
-        { nome: "gato", imagemUrl: gato, correta: false },
+        { nome: "bola", imagemUrl: bola, correta: false },
+        { nome: "onça", imagemUrl: gato, correta: false },
       ],
-      elogio: "Ovo e ovelha! Os dois começam com O.",
-      feedbackErro: "Escuta: o-o-ovo. É esse som que a gente procura." },
+      elogio: "Ovelha começa com O.",
+      feedbackErro: "Escuta: o-o-ovelha. É esse som que a gente procura." },
     { tipo: "tracadoLetra", letra: "O",
       instrucaoAudio: "Faz uma bolinha com o dedo: essa é a letra O.",
       elogio: "Que O redondinho!" },
@@ -75,12 +72,12 @@ export const aula03: AulaPortuguesV4 = {
     { tipo: "compreensaoImagem",
       perguntaAudio: "Qual figura começa com o som uuu?",
       opcoes: [
-        { nome: "uva", imagemUrl: uva, correta: true },
+        { nome: "urso", imagemUrl: ursinho, correta: true },
         { nome: "lua", imagemUrl: lua, correta: false },
         { nome: "pato", imagemUrl: pato, correta: false },
       ],
-      feedbackAcerto: "Isso! U-u-uva.",
-      feedbackErro: "Lua tem U no meio, mas não começa com U. Escuta: uuu-va." },
+      feedbackAcerto: "Isso! U-u-urso.",
+      feedbackErro: "Lua tem U no meio, mas não começa com U. Escuta: uuu-rso." },
     { tipo: "missaoFamilia", titulo: "Caça-vogais",
       convite: "Diga o nome de cada pessoa da sua casa e descubra com qual vogal ele começa ou termina.",
       dicaAdulto: "Alongue a vogal ao falar: A-NA, JO-Ã-O." },
