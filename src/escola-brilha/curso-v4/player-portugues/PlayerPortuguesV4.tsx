@@ -651,6 +651,38 @@ function Secao({
     );
   }
 
+  if (cyber) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-lg overflow-hidden border border-slate-700 bg-[#1E293B]/70 backdrop-blur-md transition duration-200 ease-in-out hover:border-violet-500/60"
+        style={{ boxShadow: `0 0 25px -10px ${cor}` }}
+      >
+        <div className="flex items-center gap-3 border-b border-slate-700 px-4 py-3">
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-md text-lg"
+            style={{ background: `${cor}1f`, border: `1px solid ${cor}66` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate font-mono text-xs md:text-sm font-bold uppercase tracking-[.16em]"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <span
+            className="ml-auto shrink-0 h-1 w-10 rounded-full"
+            style={{ background: cor, boxShadow: `0 0 10px ${cor}` }}
+          />
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[1rem] leading-relaxed text-slate-200">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
   if (tween) {
     return (
       <section
