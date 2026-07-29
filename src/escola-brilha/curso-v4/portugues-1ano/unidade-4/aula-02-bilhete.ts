@@ -4,6 +4,8 @@ import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.js
 import { url as familiaMaeFilho } from "@/assets/neuro-treino/objetos/familia-mae-filho.png.asset.json";
 import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
 import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as padaria } from "@/assets/neuro-treino/objetos/padaria.png.asset.json";
 
 /**
  * Aula 2 — O Bilhete da Mamãe
@@ -19,6 +21,97 @@ export const aula02: AulaPortuguesV4 = {
   iconeTrilha: "📩",
   bncc: ["EF01LP16", "EF01LP17", "EF01LP20"],
   duracaoMin: 15,
+
+  // ============================================================
+  // MODO JOGO — audio-first, imagem e toque.
+  // ============================================================
+  momentosJogo: [
+    {
+      tipo: "boasVindas",
+      mascoteUrl: brilha,
+      falaMascote:
+        "Oi! Eu sou o Brilha! Hoje vamos descobrir o que é um bilhete. Toca no botão pra começar!",
+    },
+    {
+      tipo: "vocabularioVisual",
+      instrucaoAudio: "Toca em cada figura pra ouvir o nome dela.",
+      itens: [
+        { nome: "mãe", imagemUrl: mae },
+        { nome: "menina", imagemUrl: menina },
+        { nome: "relógio", imagemUrl: relogio },
+      ],
+    },
+    {
+      tipo: "leituraEco",
+      titulo: "Bilhete da Mamãe",
+      imagemUrl: familiaMaeFilho,
+      linhas: ["Clara,", "Fui à padaria.", "Volto às 10h.", "Beijo, Mamãe."],
+      instrucaoAudio: "Escuta cada linha do bilhete e repete depois de mim.",
+      elogio: "Muito bem! Você leu o bilhete inteiro comigo.",
+    },
+    {
+      tipo: "leituraEco",
+      titulo: "Bilhete do Papai",
+      imagemUrl: relogio,
+      linhas: ["Ana,", "Fui te buscar mais cedo hoje.", "Te espero no parquinho às 16h.", "Beijo, Papai."],
+      instrucaoAudio: "Agora repete esse outro bilhete comigo.",
+      elogio: "Isso! Você já sabe ler bilhetes.",
+    },
+    {
+      tipo: "palavraNaFrase",
+      imagemUrl: padaria,
+      frase: "A mamãe foi para a ___.",
+      palavraCorreta: "PADARIA",
+      distratores: ["ESCOLA", "PRAÇA"],
+      instrucaoAudio: "Escuta a frase e escolhe a palavra que combina com o bilhete.",
+      elogio: "Isso! A mamãe foi à padaria, igual dizia o bilhete.",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "No bilhete da geladeira, quem escreveu o recado?",
+      opcoes: [
+        { texto: "A Clara", correta: false },
+        { texto: "A mamãe", correta: true },
+        { texto: "A padaria", correta: false },
+      ],
+      feedbackAcerto: "Isso! No final do bilhete estava escrito 'Beijo, Mamãe'.",
+      feedbackErro: "Pensa: quem assina no final do bilhete, com 'Beijo,...'?",
+    },
+    {
+      tipo: "compreensaoLeitura",
+      perguntaAudio: "Esse bilhete começa chamando o nome de alguém. Pra quem é o bilhete?",
+      opcoes: [
+        { texto: "Para a Clara", correta: true },
+        { texto: "Para o papai", correta: false },
+        { texto: "Para a vizinha", correta: false },
+      ],
+      feedbackAcerto: "Isso! O bilhete começa com 'Clara,' — é pra ela.",
+      feedbackErro: "Escuta de novo: o bilhete começa chamando um nome. Qual nome é esse?",
+    },
+    {
+      tipo: "compreensaoImagem",
+      perguntaAudio: "No bilhete do papai, onde ele vai esperar a Ana?",
+      opcoes: [
+        { nome: "parquinho", imagemUrl: relogio, correta: true },
+        { nome: "escola", imagemUrl: menina, correta: false },
+        { nome: "padaria", imagemUrl: padaria, correta: false },
+      ],
+      feedbackAcerto: "Isso! O papai disse que ia esperar no parquinho.",
+      feedbackErro: "Escuta de novo o bilhete do papai: 'Te espero no...'.",
+    },
+    {
+      tipo: "missaoFamilia",
+      titulo: "Nosso bilhete em casa",
+      convite: "Com um adulto, escreva um bilhete curto pra alguém da família e cole num lugar visível.",
+      dicaAdulto: "Deixe a criança escolher pra quem é o bilhete e o que ela quer avisar. Ela pode desenhar se ainda não escrever sozinha.",
+    },
+    {
+      tipo: "celebracao",
+      medalha: "Escritor de Bilhetes",
+      mascoteUrl: brilha,
+      falaFinal: "Você aprendeu a ler e entender um bilhete! Que aviso rápido e esperto.",
+    },
+  ],
 
   momento01_motivacao: {
     titulo: "Um papel na geladeira",
