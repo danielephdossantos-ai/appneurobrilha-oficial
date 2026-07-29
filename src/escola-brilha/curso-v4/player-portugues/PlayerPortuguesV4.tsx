@@ -20,6 +20,7 @@ import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
+import { LousaPT } from "./blocos/LousaPT";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
@@ -42,6 +43,8 @@ const MOMENTOS_BASE = [
   { id: "m2", label: "🔮 Previsão" },
   { id: "m3", label: "📚 Vocabulário" },
   { id: "mev", label: "🧠 Ensino visual", opcional: true },
+  { id: "mlousa", label: "✍️ Lousa da Língua", opcional: true },
+
   { id: "m4", label: "📖 Leitura guiada" },
   { id: "m5", label: "🧠 Compreensão" },
   { id: "m6", label: "🎭 Personagens & lugar" },
@@ -60,6 +63,7 @@ const CORES_KIDS: Record<string, string> = {
   m2: "#38bdf8",
   m3: "#fbbf24",
   mev: "#a78bfa",
+  mlousa: "#f472b6",
   m4: "#34d399",
   m5: "#f97316",
   m6: "#e879f9",
@@ -78,6 +82,7 @@ const CORES_TWEEN: Record<string, string> = {
   m2: "#818cf8",
   m3: "#f59e0b",
   mev: "#a78bfa",
+  mlousa: "#f472b6",
   m4: "#10b981",
   m5: "#f43f5e",
   m6: "#e879f9",
@@ -96,6 +101,7 @@ const CORES_CYBER: Record<string, string> = {
   m2: "#8B5CF6",
   m3: "#F59E0B",
   mev: "#A855F7",
+  mlousa: "#F472B6",
   m4: "#10B981",
   m5: "#F43F5E",
   m6: "#E879F9",
@@ -129,7 +135,8 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
       (m.id === "mlab" && !!aula.momento_laboratorio) ||
-      (m.id === "mev" && !!aula.momento_ensinoVisual),
+      (m.id === "mev" && !!aula.momento_ensinoVisual) ||
+      (m.id === "mlousa" && !!aula.momento_lousa),
   );
 
   useEffect(() => {
@@ -422,6 +429,18 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <div className="space-y-5">
                 {aula.momento_ensinoVisual.blocos.map((b, i) => (
                   <EnsinoVisual key={i} bloco={b} />
+                ))}
+              </div>
+            </Secao>
+          )}
+
+          {/* LOUSA DA LÍNGUA (opcional) — o professor demonstra passo a passo. */}
+          {aula.momento_lousa && (
+            <Secao id="mlousa" label={`✍️ ${aula.momento_lousa.titulo}`}>
+              <Instrucao>{aula.momento_lousa.instrucao}</Instrucao>
+              <div className="space-y-5">
+                {aula.momento_lousa.blocos.map((b, i) => (
+                  <LousaPT key={i} bloco={b} />
                 ))}
               </div>
             </Secao>
