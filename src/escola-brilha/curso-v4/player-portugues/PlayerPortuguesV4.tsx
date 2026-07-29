@@ -90,13 +90,38 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
+/** Paleta "cyber" (5º ano+): neo-brutalist dark, violeta elétrico + esmeralda neon. */
+const CORES_CYBER: Record<string, string> = {
+  m1: "#A855F7",
+  m2: "#8B5CF6",
+  m3: "#F59E0B",
+  mev: "#A855F7",
+  m4: "#10B981",
+  m5: "#F43F5E",
+  m6: "#E879F9",
+  m7: "#38BDF8",
+  m8: "#F59E0B",
+  mmini: "#A855F7",
+  mlab: "#10B981",
+  m9: "#8B5CF6",
+  m10: "#10B981",
+  m11: "#F59E0B",
+};
+
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
-  // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
-  const tween = cursoSlug === "portugues-3ano" || cursoSlug === "portugues-4ano";
+  // Skin tween ("entre kids e teen"): 3º e 4º ano.
+  // Skin cyber (teen / neo-brutalist dark): 5º ano em diante.
+  const cyber =
+    cursoSlug === "portugues-5ano" ||
+    cursoSlug === "portugues-6ano" ||
+    cursoSlug === "portugues-7ano" ||
+    cursoSlug === "portugues-8ano" ||
+    cursoSlug === "portugues-9ano";
+  const tween = cursoSlug === "portugues-3ano" || cursoSlug === "portugues-4ano" || cyber;
   const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
-  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+  const CORES = cyber ? CORES_CYBER : tween ? CORES_TWEEN : CORES_KIDS;
 
 
   const MOMENTOS = MOMENTOS_BASE.filter(
