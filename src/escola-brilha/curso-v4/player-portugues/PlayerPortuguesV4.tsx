@@ -735,8 +735,16 @@ function Secao({
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  const { kids, tween } = useContext(KidsCtx);
+  const { kids, tween, cyber } = useContext(KidsCtx);
   if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  if (cyber) {
+    return (
+      <div className="flex items-start gap-2 rounded-md border border-slate-700 border-l-2 border-l-violet-500 bg-slate-900/60 px-4 py-3 backdrop-blur-md">
+        <span className="font-mono text-sm leading-6 text-violet-400">&gt;_</span>
+        <p className="min-w-0 text-[0.95rem] font-medium text-slate-200">{children}</p>
+      </div>
+    );
+  }
   if (tween) {
     return (
       <div className="flex items-start gap-2 rounded-lg border-l-4 border-cyan-400 bg-white/[.06] px-4 py-3">
