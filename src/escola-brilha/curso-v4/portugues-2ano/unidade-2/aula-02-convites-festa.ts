@@ -71,6 +71,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! Convite serve pra INFORMAR quando, onde e por quê.",
       feedbackErro:
         "Sem QUANDO, ONDE e POR QUE, ninguém sabe se pode ir. É pra isso que serve o convite.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -134,6 +135,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Sábado, 20 de setembro.",
         feedbackErro:
           "Procure a linha do 📅. A DATA está lá.",
+        dica: "Volte no texto e procure a parte que fala de 'festa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Procure a linha do 📅. A DATA está lá. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "📅 Data: sábado, 20 de setembro",
       },
       {
@@ -143,6 +146,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 15h!",
         feedbackErro:
           "Olhe a linha do 🕒. Fala 'das … às …'. A festa começa na primeira hora.",
+        dica: "Volte no texto e procure a parte que fala de 'começa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olhe a linha do 🕒. Fala 'das … às …'. A festa começa na primeira hora. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "🕒 Horário: das 15h às 18h",
       },
       {
@@ -151,6 +156,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Na BIBLIOTECA da Aurora.",
         feedbackErro: "A linha do 📍 mostra o LOCAL.",
+        dica: "Volte no texto e procure a parte que fala de 'festa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A linha do 📍 mostra o LOCAL. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "📍 Local: Biblioteca da Aurora",
       },
       {
@@ -163,6 +170,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! É o MOTIVO da festa.",
         feedbackErro: "A linha do 🎉 mostra o MOTIVO da festa.",
+        dica: "Volte no texto e procure a parte que fala de 'festa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A linha do 🎉 mostra o MOTIVO da festa. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "🎉 Motivo: Festa dos Livros Despertados",
       },
     ],
@@ -178,6 +187,7 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 AURORA — o nome dela está no fim, assinando.",
         feedbackErro:
           "No fim do convite tem '— Aurora'. O nome depois do travessão é de quem convida.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "O que a Aurora pediu pra levar?",
@@ -187,6 +197,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Um LIVRO! 'Traga um livro pra ler junto'.",
         feedbackErro:
           "Antes da assinatura tem um pedido: 'Traga um … pra ler junto'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -229,6 +240,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 8 anos!",
         feedbackErro: "Está no MOTIVO: '… anos do Léo'.",
+        dica: "Volte no texto e procure a parte que fala de 'quantos'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está no MOTIVO: '… anos do Léo'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "🎉 Motivo: 8 anos do Léo!",
       },
       {
@@ -238,6 +251,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 16h.",
         feedbackErro:
           "Horário: 'das … às …'. A festa começa na primeira hora.",
+        dica: "Volte no texto e procure a parte que fala de 'começa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Horário: 'das … às …'. A festa começa na primeira hora. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "🕒 Horário: das 16h às 19h",
       },
     ],
@@ -306,6 +321,8 @@ export const aula02: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 O LOCAL — sem ele, ninguém sabe pra onde ir.",
       feedbackErro:
         "'Onde' é o LOCAL. Data é 'quando', motivo é 'por quê'.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Onde' é o LOCAL. Data é 'quando', motivo é 'por quê'. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -321,6 +338,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Convite CHAMA alguém pra ir num evento (festa, aniversário, encontro).",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Convite CHAMA alguém pra ir num evento (festa, aniversário, encontro). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 'Sábado, 20 de setembro' é a…",
@@ -328,6 +347,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 DATA (o dia).",
         feedbackErro: "Dia do mês = DATA. Que horas = HORÁRIO. Lugar = LOCAL.",
+        dica: "Pista: a resposta certa começa com a letra 'H'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Dia do mês = DATA. Que horas = HORÁRIO. Lugar = LOCAL. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 'Das 15h às 18h' é o…",
@@ -335,6 +356,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 HORÁRIO!",
         feedbackErro: "Que HORAS = horário.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Que HORAS = horário. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 'Biblioteca da Aurora' é o…",
@@ -342,6 +365,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 LOCAL — o LUGAR.",
         feedbackErro: "Lugar onde é a festa = LOCAL.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Lugar onde é a festa = LOCAL. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — 'Festa dos Livros' é o…",
@@ -349,6 +374,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 MOTIVO — o POR QUÊ da festa. 🎉",
         feedbackErro: "O QUE está sendo comemorado = MOTIVO.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O QUE está sendo comemorado = MOTIVO. Agora leia de novo e escolha com calma.",
       },
     ],
   },

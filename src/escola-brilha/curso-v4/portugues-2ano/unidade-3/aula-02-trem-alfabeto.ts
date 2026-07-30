@@ -65,6 +65,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! Ordem alfabética ajuda a ENCONTRAR palavras rapidinho.",
       feedbackErro:
         "Se as palavras estão em ordem, você abre no meio, vê a letra e sabe pra que lado ir. Serve pra ACHAR rápido.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -131,6 +132,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 B vem antes de M e T.",
         feedbackErro: "Alfabeto: A, B, C… M vem lá pro meio. B é a segunda letra.",
+        dica: "Volte no texto e procure a parte que fala de 'primeiro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Alfabeto: A, B, C… M vem lá pro meio. B é a segunda letra. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Entre CASA e ABELHA, qual vem PRIMEIRO?",
@@ -138,6 +141,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 ABELHA — A vem antes de C.",
         feedbackErro: "A é a 1ª letra. C é a 3ª. Quem começa com A vem antes.",
+        dica: "Volte no texto e procure a parte que fala de 'primeiro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A é a 1ª letra. C é a 3ª. Quem começa com A vem antes. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "E entre GATO e DADO?",
@@ -145,6 +150,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 DADO — D vem antes de G.",
         feedbackErro: "D vem antes de G no alfabeto. DADO primeiro.",
+        dica: "Volte no texto e procure a parte que fala de 'entre'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: D vem antes de G no alfabeto. DADO primeiro. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -158,6 +165,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 ABELHA — A é a primeira letra do alfabeto.",
         feedbackErro: "Ordem: A antes de C antes de G. ABELHA vem primeiro.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "E qual vem POR ÚLTIMO?",
@@ -165,6 +173,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 GATO — G vem depois de A e C.",
         feedbackErro: "A < C < G. Quem começa com G vem por último.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -207,6 +216,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 F vem depois de E. Fica DEPOIS de ESTRELA.",
         feedbackErro:
           "F vem DEPOIS de E no alfabeto. FLOR entra depois de ESTRELA.",
+        dica: "Volte no texto e procure a parte que fala de 'chegar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: F vem DEPOIS de E no alfabeto. FLOR entra depois de ESTRELA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Entre BALEIA e CAVALO, qual palavra caberia?",
@@ -216,6 +227,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 BONECA — começa com B, vem depois de BALEIA (BA < BO) e antes de CAVALO.",
         feedbackErro:
           "BALEIA (B) e CAVALO (C). Precisa de algo entre BA e C. BONECA (BO) cabe.",
+        dica: "Volte no texto e procure a parte que fala de 'caberia'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: BALEIA (B) e CAVALO (C). Precisa de algo entre BA e C. BONECA (BO) cabe. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -259,6 +272,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 DADO — A < D < G, então DADO fica no meio.",
       feedbackErro: "Ordem A, D, G. Quem tá no meio começa com D.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Ordem A, D, G. Quem tá no meio começa com D. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -270,6 +285,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A!",
         feedbackErro: "A é a PRIMEIRA letra do alfabeto.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A é a PRIMEIRA letra do alfabeto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Entre BOLA e ABELHA, qual vem primeiro?",
@@ -277,6 +294,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 ABELHA (A antes de B).",
         feedbackErro: "A vem antes de B. ABELHA primeiro.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A vem antes de B. ABELHA primeiro. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — CASA, DADO, ABELHA em ordem alfabética:",
@@ -288,6 +307,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A · C · D.",
         feedbackErro: "Olhe a primeira letra: A, C, D. Essa é a ordem.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Olhe a primeira letra: A, C, D. Essa é a ordem. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Um livro 'CACHORRO' na estante com BALEIA e CAVALO fica…",
@@ -300,6 +321,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! BA < CA < CAV.",
         feedbackErro:
           "BALEIA começa BA. CACHORRO começa CA. CAVALO começa CA-V. Ordem: BA, CA, CAV. CACHORRO fica no meio.",
+        dica: "Pista: a resposta certa começa com a letra 'E'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: BALEIA começa BA. CACHORRO começa CA. CAVALO começa CA-V. Ordem: BA, CA, CAV. CACHORRO fica no meio. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Pra que serve ordem alfabética?",
@@ -311,6 +334,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Achar rápido!",
         feedbackErro: "Serve pra ENCONTRAR palavras rápido em listas.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Serve pra ENCONTRAR palavras rápido em listas. Agora leia de novo e escolha com calma.",
       },
     ],
   },

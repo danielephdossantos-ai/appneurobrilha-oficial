@@ -471,6 +471,8 @@ export type PrevisaoTituloData = {
   respostaCerta: number;                             // índice da hipótese "esperada"
   feedbackAcerto: string;
   feedbackErro: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 /** Bloco de ordenar sequência (páginas embaralhadas → ordem correta). */
@@ -481,6 +483,8 @@ export type OrdenarSequenciaData = {
   ordemCerta: string[];
   feedbackAcerto: string;
   feedbackErro: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 /** Quiz de compreensão textual (opções em texto, sem imagem obrigatória). */
@@ -588,6 +592,8 @@ export type ArrastarParaAlvoData = {
   alvos: Array<{ id: string; nome: string; imagemUrl?: string; descricao?: string }>;
   feedbackAcerto: string;
   feedbackErro: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 /** Selecionar (marcar) apenas os itens pedidos entre várias opções. */
@@ -597,6 +603,8 @@ export type SelecionarItensData = {
   opcoes: Array<{ id: string; texto: string; imagemUrl?: string; correto: boolean }>;
   feedbackAcerto: string;
   feedbackErro: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 /**
@@ -619,6 +627,8 @@ export type MontarPalavraData = {
   }>;
   feedbackAcerto: string;
   feedbackErro: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 /**
@@ -683,6 +693,8 @@ export type ArquitetoLugarData = {
     feedbackErro: string;
   }>;
   feedbackFinal: string;
+  /** Fase 1 do motor adaptativo: pista mostrada junto do feedback de erro. */
+  dica?: string;
 };
 
 export type MinijogoPT =

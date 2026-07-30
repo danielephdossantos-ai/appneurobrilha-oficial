@@ -53,6 +53,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 CASA! Só 4 letras: C-A-S-A. CASZA tem uma letra a MAIS.",
       feedbackErro:
         "Fala em voz alta: CA-SA. Duas sílabas: CA e SA. A escrita certa é CASA. CASZA tem letra a mais.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -148,6 +149,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 BOLA — BO + LA, 4 letras.",
         feedbackErro:
           "Fala: BO-LA. Duas sílabas. Só 4 letras: B-O-L-A. BOLA.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Fala: BO-LA. Duas sílabas. Só 4 letras: B-O-L-A. BOLA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual está CERTA?",
@@ -155,6 +158,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 LIVRO!",
         feedbackErro: "LI-VRO. Duas sílabas. 5 letras: L-I-V-R-O.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: LI-VRO. Duas sílabas. 5 letras: L-I-V-R-O. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual está CERTA?",
@@ -162,6 +167,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 ESCOLA!",
         feedbackErro: "ES-CO-LA. Três sílabas. 6 letras: E-S-C-O-L-A.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: ES-CO-LA. Três sílabas. 6 letras: E-S-C-O-L-A. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -181,6 +188,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 LÊ com atenção pra achar o erro.",
         feedbackErro:
           "Primeiro passo do detetive: LER de novo, devagar, olhando cada letra.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Se achar um erro, o detetive…",
@@ -192,6 +200,7 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Apaga e escreve certo. Isso é REVISAR.",
         feedbackErro: "Detetive REVISA: apaga o errado e escreve certo.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -249,6 +258,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 GATO — sobrou um A.",
         feedbackErro: "GA-TO. Duas sílabas. Só um A: GATO.",
+        dica: "Volte no texto e procure a parte que fala de 'escreve'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: GA-TO. Duas sílabas. Só um A: GATO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Meu GAATO",
       },
       {
@@ -257,6 +268,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 BOLA — sobrou um L.",
         feedbackErro: "BO-LA. Só um L: BOLA.",
+        dica: "Volte no texto e procure a parte que fala de 'escreve'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: BO-LA. Só um L: BOLA. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "a BOLLA",
       },
     ],
@@ -288,6 +301,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Missão detetive completa! Você achou todas as escritas corretas.",
         feedbackErro:
           "Fala CADA palavra em voz alta separando as sílabas. Se sobrar letra ou faltar letra, está errada.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'palavras'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -305,6 +319,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 BANANA — BA-NA-NA, três sílabas, 6 letras.",
       feedbackErro: "Fala BA-NA-NA. Cada NA é 2 letras. Total 6 letras: BANANA.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Fala BA-NA-NA. Cada NA é 2 letras. Total 6 letras: BANANA. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -316,6 +332,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 CASA.",
         feedbackErro: "CA-SA = 4 letras. CASA.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: CA-SA = 4 letras. CASA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Qual está CERTA?",
@@ -323,6 +341,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 GATO.",
         feedbackErro: "GA-TO = só um A. GATO.",
+        dica: "Pista: a resposta certa começa com a letra 'G'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: GA-TO = só um A. GATO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Qual está CERTA?",
@@ -330,6 +350,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 BOLA.",
         feedbackErro: "BO-LA = 4 letras. Só um L. BOLA.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: BO-LA = 4 letras. Só um L. BOLA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — O que um bom escritor faz depois de escrever?",
@@ -341,6 +363,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 REVISA!",
         feedbackErro: "Sempre revisar. Ler de novo e conferir cada letra.",
+        dica: "Pista: a resposta certa começa com a letra 'R'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sempre revisar. Ler de novo e conferir cada letra. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Achou o erro. O que faz?",
@@ -352,6 +376,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Apaga e escreve certo. Detetive de verdade!",
         feedbackErro: "Achou o erro? APAGA e escreve do jeito certo.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Achou o erro? APAGA e escreve do jeito certo. Agora leia de novo e escolha com calma.",
       },
     ],
   },

@@ -52,6 +52,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 FELIZ! 'Pulou de alegria' e 'brinquedo que queria há muito tempo' mostram alegria.",
       feedbackErro:
         "Ela PULOU DE ALEGRIA e ganhou um brinquedo desejado. Isso é medo ou felicidade?",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -99,6 +100,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Pedro! É sobre ele que a história fala.",
         feedbackErro: "O texto todo fala do PEDRO. Ele é o personagem principal.",
+        dica: "Volte no texto e procure a parte que fala de 'personagem'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto todo fala do PEDRO. Ele é o personagem principal. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Pedro mordia o lápis...",
       },
       {
@@ -109,6 +112,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Nervoso! Suar, morder o lápis e mãos tremendo são pistas de nervosismo.",
         feedbackErro:
           "Pistas: suava, mordia o lápis, mãos tremendo. Isso é sinal de NERVOSISMO.",
+        dica: "Volte no texto e procure a parte que fala de 'sentindo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pistas: suava, mordia o lápis, mãos tremendo. Isso é sinal de NERVOSISMO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Como a gente DESCOBRE o que o personagem sente?",
@@ -122,6 +127,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 As ações e as falas mostram como o personagem se sente.",
         feedbackErro:
           "A gente descobre pelas AÇÕES (o que faz) e FALAS (o que diz) do personagem.",
+        dica: "Volte no texto e procure a parte que fala de 'personagem'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A gente descobre pelas AÇÕES (o que faz) e FALAS (o que diz) do personagem. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -136,6 +143,7 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 SAUDADE! O texto até fala 'de saudade'.",
         feedbackErro: "O texto diz claramente: 'chorando de SAUDADE'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta:
@@ -146,6 +154,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 BRAVO! Cruzar braços, franzir testa e bater o pé são pistas de raiva.",
         feedbackErro:
           "Braços cruzados + testa franzida + bater o pé = está BRAVO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -190,6 +199,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Muito feliz! Gargalhar, abraçar forte e pular são pistas de ALEGRIA.",
         feedbackErro:
           "Pistas: gargalhava, abraçou forte, pulou 3x. Isso é alegria!",
+        dica: "Volte no texto e procure a parte que fala de 'sentindo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pistas: gargalhava, abraçou forte, pulou 3x. Isso é alegria! Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "gargalhava alto... abraçou a amiga... pulou",
       },
       {
@@ -198,6 +209,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Cléo!",
         feedbackErro: "O texto fala sobre a CLÉO — ela é a personagem principal.",
+        dica: "Volte no texto e procure a parte que fala de 'personagem'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto fala sobre a CLÉO — ela é a personagem principal. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Cléo gargalhava alto",
       },
     ],
@@ -260,6 +273,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 SONO! Bocejar + esfregar os olhos = sono.",
       feedbackErro: "Bocejar e esfregar os olhos são pistas de SONO.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Bocejar e esfregar os olhos são pistas de SONO. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -272,6 +287,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Alegria!",
         feedbackErro: "Sorriso 'de orelha a orelha' = ALEGRIA grande.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sorriso 'de orelha a orelha' = ALEGRIA grande. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -280,6 +297,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Carinho e saudade!",
         feedbackErro: "Apertar contra o peito + chorar = carinho / saudade.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Apertar contra o peito + chorar = carinho / saudade. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -288,6 +307,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Assustado!",
         feedbackErro: "Correr gritando pela mãe é pista de MEDO / SUSTO.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Correr gritando pela mãe é pista de MEDO / SUSTO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Pra descobrir o que o personagem sente, a gente olha as…",
@@ -295,6 +316,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Ações e falas!",
         feedbackErro: "AÇÕES e FALAS do personagem mostram o sentimento.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: AÇÕES e FALAS do personagem mostram o sentimento. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -304,6 +327,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Feliz!",
         feedbackErro:
           "Abanar o rabo e latir baixinho ao ver o dono = FELIZ com a chegada.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Abanar o rabo e latir baixinho ao ver o dono = FELIZ com a chegada. Agora leia de novo e escolha com calma.",
       },
     ],
   },

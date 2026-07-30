@@ -50,6 +50,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! 'O cachorro CORREU no parque' — sujeito + AÇÃO + lugar = frase completa.",
       feedbackErro:
         "'O cachorro...' não termina a ideia. Falta uma AÇÃO (o que ele fez) e um lugar/tempo.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -99,6 +100,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Ação! Ex.: 'A menina PULOU corda.'",
         feedbackErro:
           "Falta AÇÃO. 'A menina PULOU corda.' fica completa.",
+        dica: "Volte no texto e procure a parte que fala de 'completa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Falta AÇÃO. 'A menina PULOU corda.' fica completa. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual é frase COMPLETA?",
@@ -111,6 +114,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Tem QUEM + AÇÃO + ONDE. Completa!",
         feedbackErro:
           "'O cachorro correu no parque.' tem QUEM (cachorro) + AÇÃO (correu) + ONDE (parque).",
+        dica: "Volte no texto e procure a parte que fala de 'completa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O cachorro correu no parque.' tem QUEM (cachorro) + AÇÃO (correu) + ONDE (parque). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Toda frase termina com…",
@@ -123,6 +128,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Ponto, exclamação ou interrogação!",
         feedbackErro:
           "Toda frase termina com um sinal: PONTO . / EXCLAMAÇÃO ! / INTERROGAÇÃO ?",
+        dica: "Volte no texto e procure a parte que fala de 'termina'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Toda frase termina com um sinal: PONTO . / EXCLAMAÇÃO ! / INTERROGAÇÃO ? Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -136,6 +143,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 COMEU é a ação!",
         feedbackErro: "O que a Ana FEZ? Ela COMEU. Essa é a ação.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Na frase 'O gato PULOU no muro', quem é o QUEM?",
@@ -144,6 +152,7 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O gato!",
         feedbackErro:
           "QUEM fez a ação de pular? O GATO — ele é o QUEM da frase.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -191,6 +200,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 A terceira! Tem QUEM (a bola) + AÇÃO (rolou) + ONDE (no jardim).",
         feedbackErro:
           "A terceira tem QUEM + AÇÃO + ONDE — é a mais completa.",
+        dica: "Volte no texto e procure a parte que fala de 'completa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A terceira tem QUEM + AÇÃO + ONDE — é a mais completa. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'A bola.' está completa?",
@@ -202,6 +213,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Falta ação!",
         feedbackErro: "'A bola.' só diz QUEM. Falta a AÇÃO (o que a bola fez).",
+        dica: "Volte no texto e procure a parte que fala de 'completa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A bola.' só diz QUEM. Falta a AÇÃO (o que a bola fez). Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -251,6 +264,8 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 'O menino chutou a bola.' tem QUEM + AÇÃO + o que — completa!",
       feedbackErro:
         "As outras não passam ideia inteira. 'O menino chutou a bola.' é a completa.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: As outras não passam ideia inteira. 'O menino chutou a bola.' é a completa. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -262,6 +277,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 LEU!",
         feedbackErro: "O que a Bia FEZ? Ela LEU. A ação é LEU.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O que a Bia FEZ? Ela LEU. A ação é LEU. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Toda frase começa com…",
@@ -273,6 +290,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Maiúscula!",
         feedbackErro: "Toda frase começa com letra MAIÚSCULA.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Toda frase começa com letra MAIÚSCULA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Qual é frase COMPLETA?",
@@ -285,6 +304,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 A segunda!",
         feedbackErro:
           "'O cachorro correu no parque.' tem QUEM + AÇÃO + ONDE.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O cachorro correu no parque.' tem QUEM + AÇÃO + ONDE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Toda frase termina com…",
@@ -296,6 +317,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 . ! ou ?",
         feedbackErro: "Toda frase termina com . / ! / ?",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Toda frase termina com . / ! / ? Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — 'A menina' — a frase está…",
@@ -303,6 +326,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Falta a ação!",
         feedbackErro: "'A menina' só diz QUEM. Falta AÇÃO.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A menina' só diz QUEM. Falta AÇÃO. Agora leia de novo e escolha com calma.",
       },
     ],
   },

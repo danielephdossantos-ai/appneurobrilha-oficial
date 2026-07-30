@@ -41,6 +41,7 @@ export function MontarPalavra({ data }: { data: MontarPalavraData }) {
         frase={atual.frase}
         feedbackAcerto={data.feedbackAcerto}
         feedbackErro={data.feedbackErro}
+        dica={data.dica}
         temProxima={idx < total - 1}
         onProxima={() => setIdx((i) => Math.min(i + 1, total - 1))}
       />
@@ -55,6 +56,7 @@ function MontarUma({
   frase,
   feedbackAcerto,
   feedbackErro,
+  dica,
   temProxima,
   onProxima,
 }: {
@@ -64,6 +66,7 @@ function MontarUma({
   frase?: string;
   feedbackAcerto: string;
   feedbackErro: string;
+  dica?: string;
   temProxima: boolean;
   onProxima: () => void;
 }) {
@@ -224,6 +227,9 @@ function MontarUma({
                 </span>
               </div>
               <div className="text-center">{feedbackErro}</div>
+              {dica && (
+                <div className="text-center text-xs opacity-90">💡 {dica}</div>
+              )}
             </>
           )}
         </div>

@@ -52,6 +52,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 O CORAÇÃO da história é a VISITA AO ZOOLÓGICO. Os animais são só detalhes do passeio.",
       feedbackErro:
         "A cor dos pássaros e a comida são só DETALHES. O assunto principal é a visita ao ZOOLÓGICO.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -108,6 +109,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 A ideia principal é a BICICLETA NOVA. Cor, cesta e buzina são detalhes.",
         feedbackErro:
           "Cor, cesta e buzina são só DETALHES. O assunto é a BICICLETA NOVA.",
+        dica: "Volte no texto e procure a parte que fala de 'bicicleta'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Cor, cesta e buzina são só DETALHES. O assunto é a BICICLETA NOVA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Ideia principal é…",
@@ -119,6 +122,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 O assunto mais importante!",
         feedbackErro: "Ideia principal = ASSUNTO mais importante, o coração da história.",
+        dica: "Volte no texto e procure a parte que fala de 'principal'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ideia principal = ASSUNTO mais importante, o coração da história. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -132,6 +137,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O rugido do leão é o coração!",
         feedbackErro:
           "O texto fala do LEÃO RUGINDO no zoológico. Isso é o assunto principal.",
+        dica: "Volte no texto e procure a parte que fala de 'zoológico'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto fala do LEÃO RUGINDO no zoológico. Isso é o assunto principal. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -148,6 +155,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 É DETALHE! Os animais fazem parte da visita, mas o assunto principal é a VISITA.",
         feedbackErro:
           "A visita ao zoológico é a IDEIA PRINCIPAL. Os animais são DETALHES da visita.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Como saber qual é a ideia principal?",
@@ -161,6 +169,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 A ideia principal é o assunto que atravessa o texto do começo ao fim.",
         feedbackErro:
           "Ideia principal = o ASSUNTO que aparece do começo ao fim do texto.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -207,6 +216,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O ASSUNTO é o aniversário com o bolo da mamãe.",
         feedbackErro:
           "Cor do granulado e nº de velinhas são DETALHES. O assunto é o aniversário com o BOLO.",
+        dica: "Volte no texto e procure a parte que fala de 'principal'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Cor do granulado e nº de velinhas são DETALHES. O assunto é o aniversário com o BOLO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "bolo especial para o aniversário do irmão",
       },
       {
@@ -215,6 +226,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 É um DETALHE do bolo.",
         feedbackErro: "As 7 velinhas são um DETALHE do bolo, não o assunto principal.",
+        dica: "Volte no texto e procure a parte que fala de 'velinhas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: As 7 velinhas são um DETALHE do bolo, não o assunto principal. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Tinha 7 velinhas em cima",
       },
     ],
@@ -245,6 +258,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Coração da história: a ESCOLA MONTOU UMA FESTA JUNINA. Quadrilha, comida e fogueira são detalhes.",
         feedbackErro:
           "Quadrilha, comida e fogueira são DETALHES da festa. A ideia principal é: a ESCOLA MONTOU UMA FESTA JUNINA.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'principal'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -267,6 +281,8 @@ export const aula02: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Meu gato adora dormir!",
       feedbackErro:
         "Cama, sofá e colo são só LUGARES onde ele dorme. O assunto é: MEU GATO ADORA DORMIR.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Cama, sofá e colo são só LUGARES onde ele dorme. O assunto é: MEU GATO ADORA DORMIR. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -283,6 +299,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "O ASSUNTO é o Brasil ganhar a copa. O resto é detalhe.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O ASSUNTO é o Brasil ganhar a copa. O resto é detalhe. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Ideia principal é o…",
@@ -290,6 +308,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Coração!",
         feedbackErro: "Ideia principal = CORAÇÃO / assunto principal.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Ideia principal = CORAÇÃO / assunto principal. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -303,6 +323,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 A gata teve 4 filhotes!",
         feedbackErro:
           "Cores são DETALHES. O assunto é: A GATA TEVE 4 FILHOTES.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cores são DETALHES. O assunto é: A GATA TEVE 4 FILHOTES. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -316,6 +338,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O piquenique!",
         feedbackErro:
           "Suco e frutas são DETALHES. O assunto é: O PIQUENIQUE NO PARQUE.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Suco e frutas são DETALHES. O assunto é: O PIQUENIQUE NO PARQUE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -328,6 +352,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Sobre o quê ele fala!",
         feedbackErro: "Pergunte: 'sobre O QUE esse texto fala?'",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Pergunte: 'sobre O QUE esse texto fala?' Agora leia de novo e escolha com calma.",
       },
     ],
   },

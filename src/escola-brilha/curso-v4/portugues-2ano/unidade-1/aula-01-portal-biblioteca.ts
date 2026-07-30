@@ -77,6 +77,7 @@ export const aula01: AulaPortuguesV4 = {
         "🎉 Muito bem! Bom leitor usa TÍTULO e IMAGEM da capa pra imaginar a história.",
       feedbackErro:
         "Olha o título de novo: 'O Passarinho da Janela'. As pistas na capa são um passarinho e uma árvore — a história combina com a primeira opção.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -134,6 +135,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Está escrito 'passarinho AZUL'.",
         feedbackErro: "Procure no primeiro parágrafo — a cor está antes da palavra 'pousa'.",
+        dica: "Volte no texto e procure a parte que fala de 'passarinho'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Procure no primeiro parágrafo — a cor está antes da palavra 'pousa'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…um passarinho azul pousa na janela…",
       },
       {
@@ -142,6 +145,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Boa! 'Todo dia de MANHÃ'.",
         feedbackErro: "A primeira frase começa com 'Todo dia de …'. Olhe lá.",
+        dica: "Volte no texto e procure a parte que fala de 'passarinho'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase começa com 'Todo dia de …'. Olhe lá. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Todo dia de manhã, um passarinho azul pousa…",
       },
       {
@@ -150,6 +155,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito bem! Está escrito 'pouquinho de FRUTA'.",
         feedbackErro: "A resposta está no último parágrafo, logo depois de 'coloca'.",
+        dica: "Volte no texto e procure a parte que fala de 'passarinho'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A resposta está no último parágrafo, logo depois de 'coloca'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…coloca um pouquinho de fruta e sorri.",
       },
     ],
@@ -173,6 +180,7 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Isso! No texto aparecem AURORA e o PASSARINHO. Brilha está na história MAIOR, mas não nessa página.",
         feedbackErro:
           "Volte no texto: quem aparece agindo? Aurora abre a janela; o passarinho pousa. São dois personagens.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Onde acontece a história do passarinho?",
@@ -186,6 +194,7 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Certo! O passarinho pousa na JANELA de Aurora — é onde a história acontece.",
         feedbackErro:
           "A palavra que aparece TRÊS vezes no texto é 'janela'. É onde acontece.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -242,6 +251,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! O nome é PIU.",
         feedbackErro: "Está na primeira frase: 'Ele se chama …'.",
+        dica: "Volte no texto e procure a parte que fala de 'passarinho'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está na primeira frase: 'Ele se chama …'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Ele se chama Piu.",
       },
       {
@@ -250,6 +261,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Boa! Da BIBLIOTECA.",
         feedbackErro: "Está na segunda frase: 'primeiro amigo da …'.",
+        dica: "Volte no texto e procure a parte que fala de 'primeiro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está na segunda frase: 'primeiro amigo da …'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Piu é o primeiro amigo da biblioteca.",
       },
     ],
@@ -275,6 +288,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Bom leitor VOLTA no texto pra procurar.",
       feedbackErro: "Adivinhar não é ler. Bom leitor sempre VOLTA no texto.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Adivinhar não é ler. Bom leitor sempre VOLTA no texto. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -293,6 +308,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 TÍTULO + CAPA.",
         feedbackErro: "A gente olha TÍTULO e CAPA primeiro pra imaginar a história.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A gente olha TÍTULO e CAPA primeiro pra imaginar a história. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — De que cor era o passarinho da Aurora?",
@@ -300,6 +317,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Azul!",
         feedbackErro: "O texto diz 'passarinho AZUL'.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O texto diz 'passarinho AZUL'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — O que quer dizer POLEIRO?",
@@ -311,6 +330,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Poleiro é onde o passarinho POUSA.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Poleiro é onde o passarinho POUSA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Aurora é a…",
@@ -318,6 +339,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Bibliotecária!",
         feedbackErro: "Aurora cuida dos LIVROS — ela é bibliotecária.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Aurora cuida dos LIVROS — ela é bibliotecária. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Qual o nome do passarinho?",
@@ -325,6 +348,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 PIU! Livro despertado! 🌟",
         feedbackErro: "O texto do 'nome do passarinho' diz: 'Ele se chama PIU'.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O texto do 'nome do passarinho' diz: 'Ele se chama PIU'. Agora leia de novo e escolha com calma.",
       },
     ],
   },

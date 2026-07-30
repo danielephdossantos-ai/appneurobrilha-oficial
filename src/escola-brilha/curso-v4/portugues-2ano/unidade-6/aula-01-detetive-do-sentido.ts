@@ -61,6 +61,7 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Detetive! As pistas dizem que ele ficou na chuva.",
       feedbackErro:
         "As pistas (chuva + molhado) dizem que ele PEGOU CHUVA — mesmo sem o texto falar.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -106,6 +107,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! As pistas mostram.",
         feedbackErro:
           "A palavra 'chuva' não aparece — mas 'nuvens escuras' e 'encharcada' são PISTAS.",
+        dica: "Volte no texto e procure a parte que fala de 'choveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A palavra 'chuva' não aparece — mas 'nuvens escuras' e 'encharcada' são PISTAS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual é a maior PISTA de que choveu?",
@@ -113,6 +116,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Encharcada!",
         feedbackErro: "Encharcada = molhada até os ossos → pista forte de chuva.",
+        dica: "Volte no texto e procure a parte que fala de 'choveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Encharcada = molhada até os ossos → pista forte de chuva. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Por que Ana esqueceu o guarda-chuva?",
@@ -124,6 +129,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "O texto diz que ela saiu CORRENDO — apressada, esqueceu.",
+        dica: "Volte no texto e procure a parte que fala de 'esqueceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto diz que ela saiu CORRENDO — apressada, esqueceu. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -142,6 +149,7 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Aniversário!",
         feedbackErro: "Velinhas apagadas = pista de FESTA DE ANIVERSÁRIO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta:
@@ -150,6 +158,7 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Feliz!",
         feedbackErro: "Abanar o rabo sem parar é PISTA de alegria.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -189,6 +198,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Fugiu!",
         feedbackErro: "Porta aberta + coleira caída + correndo = FUGIU.",
+        dica: "Volte no texto e procure a parte que fala de 'aconteceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Porta aberta + coleira caída + correndo = FUGIU. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "porta aberta / coleira caída / correndo pro parque",
       },
       {
@@ -197,6 +208,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Pro parque!",
         feedbackErro: "'Ia correndo pro PARQUE' — pista direta.",
+        dica: "Volte no texto e procure a parte que fala de 'cachorro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ia correndo pro PARQUE' — pista direta. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "correndo pro parque",
       },
     ],
@@ -238,6 +251,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Emocionada!",
       feedbackErro: "Uma lágrima é PISTA de emoção.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Uma lágrima é PISTA de emoção. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -249,6 +264,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Dica!",
         feedbackErro: "Pista é dica que ajuda a DESCOBRIR.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Pista é dica que ajuda a DESCOBRIR. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Se o texto diz 'chegou tremendo de frio', pista de quê?",
@@ -256,6 +273,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito frio!",
         feedbackErro: "Tremendo é pista de FRIO.",
+        dica: "Pista: a resposta certa começa com a letra 'E'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Tremendo é pista de FRIO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 'O menino sorriu de orelha a orelha.' Como ele está?",
@@ -263,6 +282,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito feliz!",
         feedbackErro: "Sorriso enorme = pista de alegria.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sorriso enorme = pista de alegria. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Ser leitor DETETIVE é…",
@@ -274,6 +295,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Achar pistas!",
         feedbackErro: "Detetive JUNTA pistas pra descobrir.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Detetive JUNTA pistas pra descobrir. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — 'A mesa cheia de embrulhos coloridos.' Pista de quê?",
@@ -281,6 +304,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Festa!",
         feedbackErro: "Embrulhos coloridos = pista de FESTA (presentes).",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Embrulhos coloridos = pista de FESTA (presentes). Agora leia de novo e escolha com calma.",
       },
     ],
   },

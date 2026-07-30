@@ -141,6 +141,9 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
           }`}
         >
           {acertou ? data.feedbackAcerto : data.feedbackErro}
+          {!acertou && data.dica && (
+            <div className="mt-2 text-xs opacity-90">💡 {data.dica}</div>
+          )}
         </div>
       )}
     </div>

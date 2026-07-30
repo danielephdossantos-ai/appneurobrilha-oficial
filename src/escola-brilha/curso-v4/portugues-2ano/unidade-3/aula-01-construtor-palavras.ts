@@ -54,6 +54,7 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto:
         "🎉 CASA! CA + SA = CASA. Cada pedacinho desses é uma SÍLABA.",
       feedbackErro: "Fala em voz alta: CA-SA. Repare: junta CA com SA. Que palavra fica?",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -103,6 +104,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 2 sílabas: CA e SA.",
         feedbackErro: "Fala devagar: CA (1) - SA (2). São 2 sílabas.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Fala devagar: CA (1) - SA (2). São 2 sílabas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Quantas sílabas tem BA-NA-NA?",
@@ -110,6 +113,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 3 sílabas: BA - NA - NA.",
         feedbackErro: "BA (1) - NA (2) - NA (3). Três palmas.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: BA (1) - NA (2) - NA (3). Três palmas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "JA + NE + LA forma qual palavra?",
@@ -117,6 +122,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 JANELA! Sílabas na ordem certa.",
         feedbackErro: "Junte na ORDEM: JA + NE + LA = JANELA.",
+        dica: "Volte no texto e procure a parte que fala de 'forma'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Junte na ORDEM: JA + NE + LA = JANELA. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -135,6 +142,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! CASA ≠ SACA. Ordem importa.",
         feedbackErro:
           "CA-SA e SA-CA usam as mesmas sílabas mas em ordens diferentes — viram palavras diferentes.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Como a gente descobre quantas sílabas uma palavra tem?",
@@ -147,6 +155,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Palmas! Cada palma = 1 sílaba.",
         feedbackErro:
           "Falar batendo PALMA em cada pedaço ajuda a contar as sílabas.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -187,6 +196,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 3 sílabas!",
         feedbackErro: "Conte os risquinhos + 1: ES-CO-LA → 3 pedaços.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Conte os risquinhos + 1: ES-CO-LA → 3 pedaços. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "ES-CO-LA",
       },
       {
@@ -195,6 +206,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 2 sílabas: LI e VRO.",
         feedbackErro: "LI (1) - VRO (2). Dois pedaços.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: LI (1) - VRO (2). Dois pedaços. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "LI-VRO",
       },
     ],
@@ -266,6 +279,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 GATO! GA + TO = GATO. 🐱",
       feedbackErro: "Ordem: GA vem primeiro, depois TO. Junte: GA-TO.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Ordem: GA vem primeiro, depois TO. Junte: GA-TO. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -277,6 +292,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 2.",
         feedbackErro: "CA (1) SA (2) = 2 sílabas.",
+        dica: "Pista: a resposta certa começa com a letra '2'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: CA (1) SA (2) = 2 sílabas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Quantas sílabas em BA-NA-NA?",
@@ -284,6 +301,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 3.",
         feedbackErro: "BA-NA-NA = 3 palmas.",
+        dica: "Pista: a resposta certa começa com a letra '3'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: BA-NA-NA = 3 palmas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — SA + PA + TO forma…",
@@ -291,6 +310,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 SAPATO!",
         feedbackErro: "Junta na ORDEM: SA + PA + TO = SAPATO.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Junta na ORDEM: SA + PA + TO = SAPATO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — GA + TO forma…",
@@ -298,6 +319,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 GATO 🐱",
         feedbackErro: "GA vem antes de TO. GATO.",
+        dica: "Pista: a resposta certa começa com a letra 'T'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: GA vem antes de TO. GATO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Palavra é feita de…",
@@ -305,6 +328,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Sílabas em ordem!",
         feedbackErro: "Palavra = SÍLABAS juntadas na ordem certa.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Palavra = SÍLABAS juntadas na ordem certa. Agora leia de novo e escolha com calma.",
       },
     ],
   },

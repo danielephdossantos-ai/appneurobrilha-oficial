@@ -58,6 +58,7 @@ export const aula03: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Chuva → guarda-chuva. Faz sentido!",
       feedbackErro:
         "PORQUE choveu → ENTÃO usaram guarda-chuva. É a resposta que se LIGA.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -106,6 +107,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Chuva → lama → cancelou.",
         feedbackErro: "A CAUSA foi a chuva. O resultado foi cancelar.",
+        dica: "Volte no texto e procure a parte que fala de 'cancelada'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A CAUSA foi a chuva. O resultado foi cancelar. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual palavra mostra o RESULTADO?",
@@ -113,6 +116,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 ENTÃO!",
         feedbackErro: "ENTÃO mostra o que ACONTECEU DEPOIS.",
+        dica: "Volte no texto e procure a parte que fala de 'resultado'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: ENTÃO mostra o que ACONTECEU DEPOIS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual palavra mostra a CAUSA?",
@@ -120,6 +125,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 PORQUE!",
         feedbackErro: "PORQUE mostra o MOTIVO.",
+        dica: "Volte no texto e procure a parte que fala de 'mostra'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: PORQUE mostra o MOTIVO. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -137,6 +144,7 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Comeu!",
         feedbackErro: "Fome → comer. É o resultado que faz sentido.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "'A menina caiu PORQUE…'",
@@ -148,6 +156,7 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Tropeçou!",
         feedbackErro: "PORQUE = motivo. Tropeçar É motivo de cair.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -190,6 +199,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Pulou na poça!",
         feedbackErro: "A CAUSA foi pular na poça.",
+        dica: "Volte no texto e procure a parte que fala de 'molhado'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A CAUSA foi pular na poça. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "PORQUE ele pulou na poça",
       },
       {
@@ -202,6 +213,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Foi pro banho!",
         feedbackErro: "ENTÃO Ana levou Pipoca pro BANHO.",
+        dica: "Volte no texto e procure a parte que fala de 'aconteceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: ENTÃO Ana levou Pipoca pro BANHO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "ENTÃO Ana levou Pipoca pro banho",
       },
     ],
@@ -247,6 +260,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Ninguém regou!",
       feedbackErro: "A planta seca PORQUE não é regada.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: A planta seca PORQUE não é regada. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -258,6 +273,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 A causa!",
         feedbackErro: "PORQUE = motivo, CAUSA.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: PORQUE = motivo, CAUSA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 'ENTÃO' serve pra mostrar…",
@@ -265,6 +282,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 O resultado!",
         feedbackErro: "ENTÃO = o que aconteceu DEPOIS.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: ENTÃO = o que aconteceu DEPOIS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 'Estava com sede, ENTÃO ele…'",
@@ -272,6 +291,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Bebeu água!",
         feedbackErro: "Sede → beber água. Faz sentido.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sede → beber água. Faz sentido. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 'A rua ficou molhada PORQUE…'",
@@ -279,6 +300,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Choveu!",
         feedbackErro: "Chuva é a CAUSA de rua molhada.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Chuva é a CAUSA de rua molhada. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Leitor bom LIGA…",
@@ -290,6 +313,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Causa e resultado!",
         feedbackErro: "Bom leitor liga PORQUE ↔ ENTÃO.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bom leitor liga PORQUE ↔ ENTÃO. Agora leia de novo e escolha com calma.",
       },
     ],
   },

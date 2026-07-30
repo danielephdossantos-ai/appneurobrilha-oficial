@@ -62,6 +62,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Isso! Cartaz é GRANDE e fica exposto pra VÁRIAS pessoas verem.",
       feedbackErro:
         "Bilhete é pra uma pessoa só. Cartaz é pra MUITA gente ver ao mesmo tempo.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -114,6 +115,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! SILÊNCIO e falar BAIXINHO.",
         feedbackErro:
           "A palavra GRANDE do cartaz é 'SILÊNCIO'. E depois diz pra falar como?",
+        dica: "Volte no texto e procure a parte que fala de 'cartaz'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A palavra GRANDE do cartaz é 'SILÊNCIO'. E depois diz pra falar como? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "SILÊNCIO … Fale baixinho ao entrar.",
       },
       {
@@ -126,6 +129,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Certo! 'Pessoas lendo'.",
         feedbackErro: "O cartaz explica: 'Pessoas …'. O que elas estão fazendo?",
+        dica: "Volte no texto e procure a parte que fala de 'silêncio'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O cartaz explica: 'Pessoas …'. O que elas estão fazendo? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Pessoas lendo.",
       },
     ],
@@ -146,6 +151,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Isso! Fica em lugar público, letras grandes, todo mundo vê.",
         feedbackErro:
           "Cartaz fica na PAREDE, em lugar que MUITA gente passa. É pra todo mundo ler.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Bilhete é pra…",
@@ -158,6 +164,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 UMA pessoa (o destinatário).",
         feedbackErro:
           "Bilhete tem DESTINATÁRIO — é pra UMA pessoa. Cartaz é pra muitas.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Como são as letras de um cartaz?",
@@ -167,6 +174,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 GRANDES! Pra ser lido de longe, sem precisar chegar perto.",
         feedbackErro:
           "Cartaz precisa ser LIDO DE LONGE. Letras GRANDES ajudam.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -228,6 +236,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Lavar E depois enxugar.",
         feedbackErro:
           "O cartaz tem DOIS passos: 'Lave …' e 'Depois enxugue …'.",
+        dica: "Volte no texto e procure a parte que fala de 'orienta'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O cartaz tem DOIS passos: 'Lave …' e 'Depois enxugue …'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Esse tipo de cartaz é pra…",
@@ -240,6 +250,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 ORIENTAR!",
         feedbackErro:
           "Ele ENSINA o passo a passo. Isso é ORIENTAR.",
+        dica: "Volte no texto e procure a parte que fala de 'cartaz'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ele ENSINA o passo a passo. Isso é ORIENTAR. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -311,6 +323,8 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 ORIENTANDO — ensinando o que fazer.",
       feedbackErro:
         "'Lave as mãos' ENSINA o que fazer. Isso é ORIENTAR.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Lave as mãos' ENSINA o que fazer. Isso é ORIENTAR. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -326,6 +340,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muitas pessoas!",
         feedbackErro: "Cartaz é PÚBLICO — muita gente vê.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cartaz é PÚBLICO — muita gente vê. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Como são as letras de um cartaz?",
@@ -333,6 +349,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 GRANDES pra ler de longe.",
         feedbackErro: "Cartaz precisa ser LIDO DE LONGE. Letras GRANDES.",
+        dica: "Pista: a resposta certa começa com a letra 'G'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cartaz precisa ser LIDO DE LONGE. Letras GRANDES. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 'Lave as mãos com sabão' é um cartaz que…",
@@ -340,6 +358,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 ORIENTA (ensina o que fazer).",
         feedbackErro: "Ensina o que fazer = ORIENTA.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Ensina o que fazer = ORIENTA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Onde combina o cartaz 'SILÊNCIO. Pessoas lendo'?",
@@ -347,6 +367,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Na BIBLIOTECA!",
         feedbackErro: "Onde as pessoas LEEM? Na biblioteca.",
+        dica: "Pista: a resposta certa começa com a letra 'N'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Onde as pessoas LEEM? Na biblioteca. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Qual é a diferença entre BILHETE e CARTAZ?",
@@ -359,6 +381,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! É a principal diferença.",
         feedbackErro:
           "Bilhete = UMA pessoa (destinatário). Cartaz = MUITAS pessoas.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bilhete = UMA pessoa (destinatário). Cartaz = MUITAS pessoas. Agora leia de novo e escolha com calma.",
       },
     ],
   },

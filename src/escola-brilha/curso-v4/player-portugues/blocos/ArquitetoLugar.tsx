@@ -198,6 +198,9 @@ export function ArquitetoLugar({ data }: { data: ArquitetoLugarData }) {
             }`}
           >
             {acertou ? rodada.feedbackAcerto : rodada.feedbackErro}
+          {!acertou && data.dica && (
+            <div className="mt-2 text-xs opacity-90">💡 {data.dica}</div>
+          )}
             {!acertou && (
               <div className="mt-2 text-white/85">
                 A resposta certa era:{" "}

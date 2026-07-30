@@ -73,6 +73,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Isso! Lista serve pra ORGANIZAR e não esquecer nada.",
       feedbackErro:
         "Lista NÃO conta história. Serve pra organizar coisas em ORDEM, uma embaixo da outra.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -121,6 +122,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 QUATRO itens (livros, lápis, papel, giz).",
         feedbackErro: "Conte quantas LINHAS a lista tem. Cada linha = 1 item.",
+        dica: "Volte no texto e procure a parte que fala de 'quantos'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Conte quantas LINHAS a lista tem. Cada linha = 1 item. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual desses NÃO está na lista?",
@@ -130,6 +133,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Isso! CADERNOS não está — a Aurora esqueceu ou não precisava.",
         feedbackErro:
           "Volte na lista e leia item por item. O que NÃO aparece?",
+        dica: "Volte no texto e procure a parte que fala de 'desses'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Volte na lista e leia item por item. O que NÃO aparece? Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual é o PRIMEIRO item da lista?",
@@ -137,6 +142,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 LIVROS!",
         feedbackErro: "O item de CIMA é o primeiro. Qual é?",
+        dica: "Volte no texto e procure a parte que fala de 'primeiro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O item de CIMA é o primeiro. Qual é? Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -156,6 +163,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Isso! Lista = ITENS um EMBAIXO do outro.",
         feedbackErro:
           "Lista NÃO tem personagem, NÃO conta história. Tem ITENS empilhados.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Qual desses TAMBÉM é um tipo de lista?",
@@ -169,6 +177,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Certo! Lista de brinquedos favoritos, lista de compras, lista de tarefas… tudo lista.",
         feedbackErro:
           "Bilhete e convite são OUTROS gêneros. Lista é uma sequência de itens.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -222,6 +231,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 4 itens.",
         feedbackErro: "Conte as LINHAS. Cada linha é um item.",
+        dica: "Volte no texto e procure a parte que fala de 'quantos'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Conte as LINHAS. Cada linha é um item. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual é o ÚLTIMO item da lista?",
@@ -229,6 +240,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 O LANCHE — última linha.",
         feedbackErro: "Último = o de BAIXO. Qual é?",
+        dica: "Volte no texto e procure a parte que fala de 'último'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Último = o de BAIXO. Qual é? Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -257,6 +270,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Lista perfeita! Banana, bolo, papel toalha e livro — piquenique organizado.",
         feedbackErro:
           "Pense: o que a gente COME e USA num piquenique? Boneca, bicicleta, balão e escola não entram nessa lista.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'piquenique'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -279,6 +293,8 @@ export const aula03: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Um item em cada LINHA. Fica fácil de ler.",
       feedbackErro:
         "Lista NÃO é frase corrida. É um item por linha — pra não esquecer nada.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Lista NÃO é frase corrida. É um item por linha — pra não esquecer nada. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -294,6 +310,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Lista = organização item por item.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Lista = organização item por item. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Como se escreve uma lista?",
@@ -305,6 +323,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Um item por LINHA.",
         feedbackErro: "Cada item vai em UMA linha — assim ninguém esquece nada.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cada item vai em UMA linha — assim ninguém esquece nada. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 'Item' quer dizer…",
@@ -312,6 +332,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Item = CADA coisa que está na lista.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Item = CADA coisa que está na lista. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Uma lista de piquenique NÃO teria…",
@@ -319,6 +341,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 A escola não cabe no piquenique!",
         feedbackErro: "Piquenique é comer no parque. A escola não vai junto.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Piquenique é comer no parque. A escola não vai junto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Se a lista tem 4 itens, quantas linhas ela tem?",
@@ -327,6 +351,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 4 linhas — uma por item.",
         feedbackErro:
           "Cada item = 1 linha. 4 itens = 4 linhas.",
+        dica: "Pista: a resposta certa começa com a letra '1'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cada item = 1 linha. 4 itens = 4 linhas. Agora leia de novo e escolha com calma.",
       },
     ],
   },

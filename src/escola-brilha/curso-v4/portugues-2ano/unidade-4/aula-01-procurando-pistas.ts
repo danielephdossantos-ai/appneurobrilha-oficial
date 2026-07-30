@@ -53,6 +53,7 @@ export const aula01: AulaPortuguesV4 = {
         "🎉 Isso! O texto NÃO disse 'estava chovendo', mas as pistas (capa de chuva + botas + céu escuro + nuvens) mostram que era um dia de chuva.",
       feedbackErro:
         "Volta pras pistas: CAPA DE CHUVA, BOTAS, CÉU ESCURO, NUVENS. Isso é dia de sol? Ou dia de chuva?",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -105,6 +106,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Sorvete não avisa nada sobre o tempo!",
         feedbackErro:
           "Capa e céu escuro são coisas ligadas à chuva. Sorvete não tem nada a ver com o tempo.",
+        dica: "Volte no texto e procure a parte que fala de 'dessas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Capa e céu escuro são coisas ligadas à chuva. Sorvete não tem nada a ver com o tempo. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Pra que serve olhar as pistas do texto?",
@@ -118,6 +121,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Isso! Pistas ajudam a DESCOBRIR o que o autor não escreveu com todas as letras.",
         feedbackErro:
           "As pistas ajudam a DESCOBRIR informações escondidas — não são pra decorar nem pra pular.",
+        dica: "Volte no texto e procure a parte que fala de 'pistas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: As pistas ajudam a DESCOBRIR informações escondidas — não são pra decorar nem pra pular. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Se um texto diz 'Ana pegou o casaco grosso e um cachecol', o tempo estava…",
@@ -127,6 +132,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Frio! Casaco grosso + cachecol são pistas de FRIO.",
         feedbackErro:
           "Pense: quando a gente usa casaco grosso e cachecol? No frio.",
+        dica: "Volte no texto e procure a parte que fala de 'cachecol'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pense: quando a gente usa casaco grosso e cachecol? No frio. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -141,6 +148,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Diz 'Pedro SAIU DE CASA'.",
         feedbackErro:
           "Volte na primeira linha: 'Pedro saiu de CASA'. Ele estava em casa.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
         ondeEstaNoTexto: "Pedro saiu de casa",
       },
       {
@@ -150,6 +158,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Guarda-chuva — outra pista de chuva!",
         feedbackErro:
           "O texto disse: 'pegou um GUARDA-CHUVA antes de fechar a porta'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
         ondeEstaNoTexto: "pegou um guarda-chuva antes de fechar a porta",
       },
     ],
@@ -193,6 +202,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Chovendo! Mochila molhada + cabelo pingando = chuva.",
         feedbackErro:
           "Pistas: mochila MOLHADA, guarda-chuva, cabelo PINGANDO. Isso é dia de sol ou de chuva?",
+        dica: "Volte no texto e procure a parte que fala de 'provavelmente'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pistas: mochila MOLHADA, guarda-chuva, cabelo PINGANDO. Isso é dia de sol ou de chuva? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "mochila TODA MOLHADA... cabelo estava PINGANDO",
       },
       {
@@ -201,6 +212,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 QUEBRADO! Por isso a mochila e o cabelo molharam.",
         feedbackErro: "O texto diz: 'guarda-chuva QUEBRADO'.",
+        dica: "Volte no texto e procure a parte que fala de 'protegeu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto diz: 'guarda-chuva QUEBRADO'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "guarda-chuva QUEBRADO",
       },
     ],
@@ -228,6 +241,7 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Detetive! As pistas de FRIO são: casaco grosso, cachecol e luva. Maçã e João não dizem nada sobre o tempo.",
         feedbackErro:
           "Pense: o que a gente usa quando faz frio? Casaco, cachecol, luva. Maçã é comida — não é pista de tempo.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'palavras'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -250,6 +264,8 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Cabelo bagunçado + bocejar = acabou de acordar.",
       feedbackErro:
         "Bocejar e cabelo bagunçado são pistas de quem ACABOU DE ACORDAR.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Bocejar e cabelo bagunçado são pistas de quem ACABOU DE ACORDAR. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -262,6 +278,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Protetor + chapéu = SOL.",
         feedbackErro: "Protetor solar e chapéu são pistas de SOL forte.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Protetor solar e chapéu são pistas de SOL forte. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -270,6 +288,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Cereal + leite = café da manhã.",
         feedbackErro: "Cereal com leite é comida típica do CAFÉ DA MANHÃ.",
+        dica: "Pista: a resposta certa começa com a letra 'T'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cereal com leite é comida típica do CAFÉ DA MANHÃ. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Uma pista serve pra…",
@@ -281,6 +301,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Ajuda a descobrir!",
         feedbackErro: "Pista ajuda a DESCOBRIR informações que não estão escritas direto.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Pista ajuda a DESCOBRIR informações que não estão escritas direto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -293,6 +315,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Velinhas + parabéns = aniversário!",
         feedbackErro: "Bolo com velinhas e 'parabéns' = FESTA DE ANIVERSÁRIO.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bolo com velinhas e 'parabéns' = FESTA DE ANIVERSÁRIO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Um bom DETETIVE da leitura…",
@@ -305,6 +329,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Junta as pistas!",
         feedbackErro:
           "Detetive da leitura JUNTA as pistas do texto pra descobrir a resposta.",
+        dica: "Pista: a resposta certa começa com a letra 'J'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Detetive da leitura JUNTA as pistas do texto pra descobrir a resposta. Agora leia de novo e escolha com calma.",
       },
     ],
   },

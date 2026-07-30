@@ -60,6 +60,7 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Palpite com MOTIVO do texto!",
       feedbackErro:
         "Leitor de verdade diz PORQUE gostou (ou não), usando algo que aconteceu na história.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -104,6 +105,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Feliz!",
         feedbackErro: "O dono achou Pipoca → final FELIZ.",
+        dica: "Volte no texto e procure a parte que fala de 'triste'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O dono achou Pipoca → final FELIZ. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual é um bom motivo pra dizer 'gostei'?",
@@ -115,6 +118,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Com motivo do texto!",
         feedbackErro: "Bom motivo usa algo que ACONTECEU na história.",
+        dica: "Volte no texto e procure a parte que fala de 'motivo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Bom motivo usa algo que ACONTECEU na história. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'A menina foi legal.' Qual é a pista?",
@@ -126,6 +131,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Encontrou e ajudou!",
         feedbackErro: "Ajudar Pipoca é a PISTA de que ela foi legal.",
+        dica: "Volte no texto e procure a parte que fala de 'menina'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ajudar Pipoca é a PISTA de que ela foi legal. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -143,6 +150,7 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Palpite com motivo!",
         feedbackErro: "Palpite bom tem PORQUÊ ligado ao texto.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Palpite com motivo = ?",
@@ -154,6 +162,7 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Opinião + porquê!",
         feedbackErro: "Palpite bom = OPINIÃO + PORQUÊ tirado do texto.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -193,6 +202,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Feliz!",
         feedbackErro: "Léo ganhou amiga (Bia) → ficou FELIZ.",
+        dica: "Volte no texto e procure a parte que fala de 'sentiu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Léo ganhou amiga (Bia) → ficou FELIZ. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "brincaram juntos até o sinal tocar",
       },
       {
@@ -205,6 +216,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Palpite com motivo!",
         feedbackErro: "Motivo bom vem do texto: Bia CONVIDOU Léo.",
+        dica: "Volte no texto e procure a parte que fala de 'palpite'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Motivo bom vem do texto: Bia CONVIDOU Léo. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Bia CONVIDOU Léo pra brincar",
       },
     ],
@@ -270,6 +283,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Com motivo!",
       feedbackErro: "Palpite tem PORQUÊ ligado ao texto.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Palpite tem PORQUÊ ligado ao texto. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -281,6 +296,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 O que você acha!",
         feedbackErro: "Opinião = SEU pensamento sobre a história.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Opinião = SEU pensamento sobre a história. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — MOTIVO no palpite vem de…",
@@ -288,6 +305,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Do texto!",
         feedbackErro: "Motivo bom vem de uma PISTA do texto.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Motivo bom vem de uma PISTA do texto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Palpite MELHOR:",
@@ -299,6 +318,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Com PORQUÊ!",
         feedbackErro: "Sempre acrescente PORQUE + pista.",
+        dica: "Pista: a resposta certa começa com a letra 'G'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sempre acrescente PORQUE + pista. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Chute é palpite…",
@@ -306,6 +327,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Sem motivo!",
         feedbackErro: "Chute = sem motivo. Palpite = com motivo.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Chute = sem motivo. Palpite = com motivo. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Bom leitor sempre…",
@@ -317,6 +340,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Explica o porquê!",
         feedbackErro: "Bom leitor forma OPINIÃO + PORQUÊ.",
+        dica: "Pista: a resposta certa começa com a letra 'E'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bom leitor forma OPINIÃO + PORQUÊ. Agora leia de novo e escolha com calma.",
       },
     ],
   },

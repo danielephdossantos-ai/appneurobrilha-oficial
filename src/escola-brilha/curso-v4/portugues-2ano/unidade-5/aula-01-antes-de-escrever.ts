@@ -63,6 +63,7 @@ export const aula01: AulaPortuguesV4 = {
         "🎉 Boa! Uma história usa as pistas de um jeito que FAZ SENTIDO.",
       feedbackErro:
         "A ideia da história precisa fazer SENTIDO com as pistas. Um passarinho na mochila embaixo da árvore combina.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -117,6 +118,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Quem + Onde + O que aconteceu!",
         feedbackErro:
           "Escritor pergunta: QUEM participa, ONDE acontece e O QUE aconteceu.",
+        dica: "Volte no texto e procure a parte que fala de 'planejamento'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Escritor pergunta: QUEM participa, ONDE acontece e O QUE aconteceu. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'Ana' no plano é o…",
@@ -124,6 +127,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Personagem!",
         feedbackErro: "Ana é a pessoa da história — o PERSONAGEM (QUEM).",
+        dica: "Volte no texto e procure a parte que fala de 'plano'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ana é a pessoa da história — o PERSONAGEM (QUEM). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'No parque' no plano é o…",
@@ -131,6 +136,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Lugar!",
         feedbackErro: "No parque = LUGAR da história (ONDE).",
+        dica: "Volte no texto e procure a parte que fala de 'parque'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: No parque = LUGAR da história (ONDE). Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -150,6 +157,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O plano vira frase.",
         feedbackErro:
           "Junte as 3 peças do plano numa frase: Léo (QUEM) + escola (ONDE) + perdeu a mochila (O QUE).",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Por que planejar antes de escrever?",
@@ -162,6 +170,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Fica mais organizada!",
         feedbackErro:
           "Planejar ajuda a organizar a história antes de escrever.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -203,6 +212,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A praia!",
         feedbackErro: "O plano diz 'ONDE: na PRAIA'.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O plano diz 'ONDE: na PRAIA'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "ONDE: na praia",
       },
       {
@@ -216,6 +227,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "O plano diz: 'O QUE ACONTECEU: Bia achou uma ESTRELA DO MAR'.",
+        dica: "Volte no texto e procure a parte que fala de 'aconteceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O plano diz: 'O QUE ACONTECEU: Bia achou uma ESTRELA DO MAR'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Bia achou uma estrela do mar bonita",
       },
     ],
@@ -271,6 +284,8 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Tico viu uma coruja na floresta!",
       feedbackErro:
         "Junte QUEM (Tico) + O QUE (viu uma coruja) + ONDE (na floresta).",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Junte QUEM (Tico) + O QUE (viu uma coruja) + ONDE (na floresta). Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -282,6 +297,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Personagem!",
         feedbackErro: "João é uma pessoa → PERSONAGEM (QUEM).",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: João é uma pessoa → PERSONAGEM (QUEM). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 'Na escola' num plano é…",
@@ -289,6 +306,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 ONDE!",
         feedbackErro: "Escola é lugar → ONDE.",
+        dica: "Pista: a resposta certa começa com a letra 'Q'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Escola é lugar → ONDE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Planejar antes de escrever ajuda a…",
@@ -300,6 +319,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Organizar!",
         feedbackErro: "Planejar ORGANIZA as ideias antes de escrever.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Planejar ORGANIZA as ideias antes de escrever. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -312,6 +333,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Junte: Lia + plantou uma flor + no quintal.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Junte: Lia + plantou uma flor + no quintal. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — As 3 perguntas do escritor são:",
@@ -323,6 +346,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Quem / Onde / O que!",
         feedbackErro: "Sempre: QUEM, ONDE, O QUE aconteceu.",
+        dica: "Pista: a resposta certa começa com a letra 'Q'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sempre: QUEM, ONDE, O QUE aconteceu. Agora leia de novo e escolha com calma.",
       },
     ],
   },

@@ -80,6 +80,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Muito bem! TÍTULO + PISTAS = a história vai falar de uma semente que quer crescer.",
       feedbackErro:
         "Olhe de novo: o título é 'A Semente CURIOSA' e nas pistas aparecem semente, sol e chuva. Combina com a primeira opção.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -146,6 +147,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'No JARDIM de Aurora'.",
         feedbackErro:
           "A primeira frase começa com 'No jardim de …'. Volte lá pra ver.",
+        dica: "Volte no texto e procure a parte que fala de 'semente'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase começa com 'No jardim de …'. Volte lá pra ver. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "No jardim de Aurora morava uma semente…",
       },
       {
@@ -160,6 +163,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Boa! Ela perguntava 'quando vou BROTAR? quando vou ver o SOL?'.",
         feedbackErro:
           "Está no segundo parágrafo. A semente pergunta DUAS coisas — as duas começam com 'Quando eu vou…'.",
+        dica: "Volte no texto e procure a parte que fala de 'perguntando'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está no segundo parágrafo. A semente pergunta DUAS coisas — as duas começam com 'Quando eu vou…'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Quando eu vou brotar? Quando eu vou ver o sol?",
       },
       {
@@ -169,6 +174,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Um GIRASSOL enorme.",
         feedbackErro:
           "Olha o último parágrafo. Ela virou uma flor grande e amarela — o nome dela está lá.",
+        dica: "Volte no texto e procure a parte que fala de 'semente'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olha o último parágrafo. Ela virou uma flor grande e amarela — o nome dela está lá. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Ela virou um girassol enorme…",
       },
     ],
@@ -193,6 +200,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Certo! Está escrito 'uma semente PEQUENINA e muito CURIOSA'. Essas são as características dela.",
         feedbackErro:
           "Procure no PRIMEIRO parágrafo, logo depois da palavra 'semente'. Aparecem DUAS palavras que descrevem ela.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
         ondeEstaNoTexto: "…morava uma semente pequenina e muito curiosa.",
       },
       {
@@ -201,6 +209,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! No JARDIM de Aurora.",
         feedbackErro: "A primeira palavra do texto é o lugar: 'No JARDIM…'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Quem CONVERSA com a semente no texto?",
@@ -210,6 +219,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Boa! A TERRA responde bem baixinho. Piu não aparece nesse livro.",
         feedbackErro:
           "Procure no terceiro parágrafo — quem 'respondia bem baixinho' pra semente?",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
         ondeEstaNoTexto: "A terra respondia bem baixinho…",
       },
     ],
@@ -269,6 +279,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! TRÊS amigos.",
         feedbackErro:
           "Está na primeira frase: 'tem … amigos'. O número está escrito lá.",
+        dica: "Volte no texto e procure a parte que fala de 'quantos'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está na primeira frase: 'tem … amigos'. O número está escrito lá. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "No jardim de Aurora tem três amigos…",
       },
       {
@@ -278,6 +290,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Boa! Num VASO de barro.",
         feedbackErro:
           "Está na segunda frase, logo depois de 'todo dia'. Onde ela rega?",
+        dica: "Volte no texto e procure a parte que fala de 'aurora'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está na segunda frase, logo depois de 'todo dia'. Onde ela rega? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Aurora rega os três todo dia, num vaso de barro.",
       },
     ],
@@ -305,6 +319,8 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! São CARACTERÍSTICAS — palavras que descrevem como o personagem é.",
       feedbackErro:
         "Pense: 'pequenina' fala do tamanho, 'curiosa' fala do jeito. Essas palavras dizem COMO a semente é.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Pense: 'pequenina' fala do tamanho, 'curiosa' fala do jeito. Essas palavras dizem COMO a semente é. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -319,6 +335,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Certo!",
         feedbackErro: "A primeira frase do texto começa com 'No JARDIM de Aurora…'.",
+        dica: "Pista: a resposta certa começa com a letra 'N'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A primeira frase do texto começa com 'No JARDIM de Aurora…'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Como era a semente?",
@@ -331,6 +349,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Pequenina e CURIOSA!",
         feedbackErro:
           "O texto diz 'uma semente pequenina e muito CURIOSA'. Essas são as características.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O texto diz 'uma semente pequenina e muito CURIOSA'. Essas são as características. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — O que quer dizer BROTAR?",
@@ -342,6 +362,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Brotar é quando a planta NASCE, sai pela primeira vez da terra.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Brotar é quando a planta NASCE, sai pela primeira vez da terra. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Quem conversava com a semente?",
@@ -349,6 +371,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A TERRA respondia bem baixinho.",
         feedbackErro: "No terceiro parágrafo: 'A TERRA respondia bem baixinho…'.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: No terceiro parágrafo: 'A TERRA respondia bem baixinho…'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — No final, a semente virou…",
@@ -356,6 +380,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 GIRASSOL! Mais um livro despertado! 🌟",
         feedbackErro: "Último parágrafo: 'Ela virou um GIRASSOL enorme…'.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Último parágrafo: 'Ela virou um GIRASSOL enorme…'. Agora leia de novo e escolha com calma.",
       },
     ],
   },

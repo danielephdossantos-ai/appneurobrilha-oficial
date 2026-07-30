@@ -58,6 +58,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Isso! Pelo TÍTULO e pelas PISTAS, a história é sobre o coelho e a lua conversando.",
       feedbackErro:
         "O título é 'O Coelho e a Lua'. As pistas são coelho, lua e noite. Combina com a primeira opção.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -105,6 +106,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! A primeira palavra do texto é 'Era NOITE'.",
         feedbackErro: "Olhe a primeira frase. Começa com 'Era …'.",
+        dica: "Volte no texto e procure a parte que fala de 'acontece'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olhe a primeira frase. Começa com 'Era …'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Era noite.",
       },
       {
@@ -115,6 +118,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Certo! Depois da fala aparece 'perguntou o COELHO'. Isso mostra quem falou.",
         feedbackErro:
           "Olhe DEPOIS da fala com travessão. Está escrito 'perguntou o …' — quem foi?",
+        dica: "Volte no texto e procure a parte que fala de 'pergunta'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olhe DEPOIS da fala com travessão. Está escrito 'perguntou o …' — quem foi? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "— Oi, lua! … perguntou o coelho.",
       },
       {
@@ -128,6 +133,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Boa! 'Pra você não ter medo do escuro'.",
         feedbackErro:
           "Está na fala da LUA (o segundo travessão). Ela diz pra que serve o brilho dela.",
+        dica: "Volte no texto e procure a parte que fala de 'segundo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Está na fala da LUA (o segundo travessão). Ela diz pra que serve o brilho dela. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "— Eu brilho pra você não ter medo do escuro…",
       },
     ],
@@ -145,6 +152,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Isso! Logo depois da fala aparece 'perguntou o COELHO'.",
         feedbackErro:
           "Depois da fala, o texto diz 'perguntou o …'. Essa palavra revela quem falou.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Quem disse: '— Eu brilho pra você não ter medo do escuro'?",
@@ -153,6 +161,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! 'Respondeu a LUA'.",
         feedbackErro:
           "Depois da fala está escrito 'respondeu a …'. Quem foi?",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Onde acontece essa história?",
@@ -161,6 +170,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Boa! Ele deita na GRAMA e olha o CÉU.",
         feedbackErro:
           "No último parágrafo o coelho 'deitou na GRAMA' e ficou olhando a LUA. É lá fora.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -201,6 +211,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A ESTRELA falou primeiro.",
         feedbackErro:
           "A primeira fala termina com 'disse a …'. Quem foi?",
+        dica: "Volte no texto e procure a parte que fala de 'conversa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira fala termina com 'disse a …'. Quem foi? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "— Oi, coelho! … disse a estrela.",
       },
       {
@@ -209,6 +221,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 DUAS: a lua e a estrela!",
         feedbackErro: "A última fala do coelho diz o número: 'tenho … amigas'.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A última fala do coelho diz o número: 'tenho … amigas'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Agora tenho duas amigas no céu…",
       },
     ],
@@ -233,6 +247,8 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Certo! A palavra depois do 'disse' ou 'respondeu' mostra quem falou.",
       feedbackErro:
         "Adivinhar dá errado. A gente OLHA depois da fala pra achar 'disse o …'.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Adivinhar dá errado. A gente OLHA depois da fala pra achar 'disse o …'. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -248,6 +264,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "O travessão aparece antes de uma FALA de personagem.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O travessão aparece antes de uma FALA de personagem. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Em que hora acontecia a história do coelho e da lua?",
@@ -255,6 +273,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 De NOITE!",
         feedbackErro: "A primeira frase é 'Era NOITE'.",
+        dica: "Pista: a resposta certa começa com a letra 'À'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A primeira frase é 'Era NOITE'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Por que a lua brilha, segundo ela?",
@@ -266,6 +286,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Boa!",
         feedbackErro: "A lua diz: 'Eu brilho pra você não ter medo do escuro'.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A lua diz: 'Eu brilho pra você não ter medo do escuro'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Quem disse '— Oi, coelho! Eu também brilho pra você'?",
@@ -273,6 +295,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A ESTRELA!",
         feedbackErro: "Depois da fala: 'disse a ESTRELA'. É a dica de quem falou.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Depois da fala: 'disse a ESTRELA'. É a dica de quem falou. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — 'Brilhar' quer dizer…",
@@ -280,6 +304,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Livro despertado! 🌙",
         feedbackErro: "Brilhar = soltar LUZ. A lua brilha, a estrela brilha.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Brilhar = soltar LUZ. A lua brilha, a estrela brilha. Agora leia de novo e escolha com calma.",
       },
     ],
   },

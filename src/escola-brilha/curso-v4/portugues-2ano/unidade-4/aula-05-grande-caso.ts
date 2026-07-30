@@ -64,6 +64,7 @@ export const aula05: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 INFERÊNCIA = ler nas ENTRELINHAS. Bora provar!",
       feedbackErro:
         "Inferência é DESCOBRIR o que o texto não disse direto — o superpoder das ENTRELINHAS.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -123,6 +124,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Biblioteca — o texto disse direto.",
         feedbackErro: "O texto disse: 'Bruno entrou na BIBLIOTECA'.",
+        dica: "Volte no texto e procure a parte que fala de 'aconteceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto disse: 'Bruno entrou na BIBLIOTECA'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Bruno entrou na biblioteca",
       },
       {
@@ -132,6 +135,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Bruno é o personagem principal.",
         feedbackErro:
           "A história é sobre o BRUNO. Aurora só aparece no final.",
+        dica: "Volte no texto e procure a parte que fala de 'personagem'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A história é sobre o BRUNO. Aurora só aparece no final. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Bruno entrou na biblioteca em silêncio",
       },
       {
@@ -146,6 +151,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Chovendo! Capa de chuva MOLHADA + manhã cinzenta = chuva.",
         feedbackErro:
           "PISTA: 'capa de chuva MOLHADA' + 'manhã CINZENTA' = estava CHOVENDO.",
+        dica: "Volte no texto e procure a parte que fala de 'justifique'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: PISTA: 'capa de chuva MOLHADA' + 'manhã CINZENTA' = estava CHOVENDO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "capa de chuva molhada",
       },
     ],
@@ -162,6 +169,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Triste! Chorar baixinho no cantinho é pista de tristeza.",
         feedbackErro:
           "Ele CHOROU baixinho no cantinho. Isso é pista de TRISTEZA.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
         ondeEstaNoTexto: "chorou baixinho no cantinho",
       },
       {
@@ -176,6 +184,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Ideia principal: o bilhete da avó falando da mudança.",
         feedbackErro:
           "Capa de chuva e botas são DETALHES. A ideia principal é o BILHETE da avó.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -223,6 +232,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Pra acolher! Às vezes um bom amigo só senta perto e escuta.",
         feedbackErro:
           "Bruno estava triste chorando no cantinho. Aurora sentou perto pra ACOLHER, sem invadir.",
+        dica: "Volte no texto e procure a parte que fala de 'aurora'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Bruno estava triste chorando no cantinho. Aurora sentou perto pra ACOLHER, sem invadir. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Aurora se aproximou devagar e sentou ao lado dele",
       },
       {
@@ -238,6 +249,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Inferência! A palavra 'saudade' não aparece, mas o bilhete da avó + o choro são pistas.",
         feedbackErro:
           "A palavra SAUDADE não aparece escrita — a gente DESCOBRE pelas pistas.",
+        dica: "Volte no texto e procure a parte que fala de 'saudade'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A palavra SAUDADE não aparece escrita — a gente DESCOBRE pelas pistas. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -286,6 +299,8 @@ export const aula05: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Detetive NUNCA adivinha sem pista.",
       feedbackErro: "Detetive de verdade usa PISTAS — não adivinha.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Detetive de verdade usa PISTAS — não adivinha. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -297,6 +312,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Biblioteca!",
         feedbackErro: "O texto disse direto: BIBLIOTECA.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O texto disse direto: BIBLIOTECA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Qual era a IDEIA PRINCIPAL?",
@@ -309,6 +326,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O bilhete da mudança!",
         feedbackErro:
           "O coração da história é o BILHETE da avó falando da mudança.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O coração da história é o BILHETE da avó falando da mudança. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -321,6 +340,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Triste!",
         feedbackErro: "Chorar baixinho no cantinho é pista de TRISTEZA.",
+        dica: "Pista: a resposta certa começa com a letra 'Q'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Chorar baixinho no cantinho é pista de TRISTEZA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — INFERÊNCIA é…",
@@ -333,6 +354,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Nas entrelinhas!",
         feedbackErro:
           "Inferência = descobrir o que o texto não disse direto (nas ENTRELINHAS).",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Inferência = descobrir o que o texto não disse direto (nas ENTRELINHAS). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Ao responder, um bom detetive sempre…",
@@ -345,6 +368,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Justifica com pista!",
         feedbackErro:
           "Sempre JUSTIFIQUE mostrando a PISTA do texto que provou sua resposta.",
+        dica: "Pista: a resposta certa começa com a letra 'J'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Sempre JUSTIFIQUE mostrando a PISTA do texto que provou sua resposta. Agora leia de novo e escolha com calma.",
       },
     ],
   },
