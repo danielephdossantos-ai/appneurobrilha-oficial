@@ -3,6 +3,7 @@ import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
 import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
 import { PalavraRelampago } from "./PalavraRelampago";
+import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
