@@ -5,6 +5,7 @@ import { unidade3 } from "./unidade-3";
 import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
 import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Língua Portuguesa 2º Ano — "A Biblioteca Encantada"
