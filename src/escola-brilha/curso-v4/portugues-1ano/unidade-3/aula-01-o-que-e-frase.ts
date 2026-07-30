@@ -213,7 +213,7 @@ export const aula01: AulaPortuguesV4 = {
         tipo: "ditadoSilabas",
         palavras: [
           { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["PA", "MI"], dica: "Ana desenhou um GATO." },
-          { palavra: "LAPIS", silabas: ["LA", "PIS"], distratores: ["TO", "CA"], dica: "O que Ana pegou para escrever." },
+          { palavra: "LÁPIS", silabas: ["LÁ", "PIS"], distratores: ["TO", "CA"], dica: "O que Ana pegou para escrever." },
         ],
       },
       {
