@@ -38,7 +38,7 @@ Skin: **tween** no `PlayerPortuguesV4.tsx`.
 ## Status
 - [x] Fase 1 — arquitetura
 - [x] Fase 1 — U1 e U2
-- [ ] Fase 2
+- [x] Fase 2 — U3 "A Engrenagem da Frase" + U4 "Território dos Gêneros"
 - [ ] Fase 3
 - [ ] Fase 4
 - [ ] Fase 5
