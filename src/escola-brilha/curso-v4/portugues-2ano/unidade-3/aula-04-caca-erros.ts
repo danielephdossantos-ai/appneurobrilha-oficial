@@ -306,7 +306,22 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: A frase do Miguel",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Miguel escreveu no caderno:",
+      "'Meu GAATO adora a BOLLA'.",
+      "Aurora leu e riu: — Duas palavras estão ERRADAS!",
+    ],
+    metaSegundos: 20,
+  },
+
+momento09_revisao: {
     pontos: [
       "REVISAR = ler de novo procurando ERROS.",
       "Bom escritor SEMPRE revisa antes de entregar.",

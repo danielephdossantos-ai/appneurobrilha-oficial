@@ -271,6 +271,21 @@ export const aula01: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO — o que aprendemos
   // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O nome do passarinho",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Aurora deu um nome para o passarinho.",
+      "Ele se chama Piu.",
+      "Piu é o primeiro amigo da biblioteca.",
+    ],
+    metaSegundos: 20,
+  },
+
+  // ------------------------------------------------------------
   momento09_revisao: {
     pontos: [
       "Antes de ler, olhamos TÍTULO e IMAGEM da capa pra imaginar a história.",

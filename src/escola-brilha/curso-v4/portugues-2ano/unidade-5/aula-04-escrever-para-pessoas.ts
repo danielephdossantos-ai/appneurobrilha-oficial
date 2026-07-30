@@ -264,7 +264,22 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: 3 pedaços de texto",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "A) 'Muito OBRIGADO pela bola nova.",
+      "Beijo, João.'",
+      "B) 'Você está CONVIDADO pra minha festa domingo, às 16h.'",
+    ],
+    metaSegundos: 20,
+  },
+
+momento09_revisao: {
     pontos: [
       "Cada SITUAÇÃO pede um GÊNERO TEXTUAL diferente.",
       "Convite = chamar. Bilhete = recado curto. Descrição = como é. História = o que aconteceu.",

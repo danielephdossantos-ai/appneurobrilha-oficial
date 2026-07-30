@@ -300,6 +300,21 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O jardim de Aurora",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "No jardim de Aurora tem três amigos: o girassol, o cravo vermelho e a margaridinha branca.",
+      "Aurora rega os três todo dia, num vaso de barro.",
+      "Ela conversa com as flores como se elas fossem gente.",
+    ],
+    metaSegundos: 35,
+  },
+
+  // ------------------------------------------------------------
   momento09_revisao: {
     pontos: [
       "Antes de ler, a gente OLHA o título e as pistas da capa e IMAGINA o que vai vir.",

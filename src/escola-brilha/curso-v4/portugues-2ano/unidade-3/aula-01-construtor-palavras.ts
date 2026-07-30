@@ -266,7 +266,22 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: Contando sílabas",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Brilha treina em três palavras da biblioteca:",
+      "ES-CO-LA · LI-VRO · BA-NA-NA.",
+      "Cada risquinho separa uma sílaba.",
+    ],
+    metaSegundos: 15,
+  },
+
+momento09_revisao: {
     pontos: [
       "PALAVRAS são feitas de pedacinhos chamados SÍLABAS.",
       "A gente descobre quantas sílabas tem BATENDO PALMA em cada pedaço.",

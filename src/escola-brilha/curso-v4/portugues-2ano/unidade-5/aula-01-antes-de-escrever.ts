@@ -266,7 +266,22 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O plano da Bia",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "QUEM: Bia.",
+      "ONDE: na praia.",
+      "O QUE ACONTECEU: Bia achou uma estrela do mar bonita.",
+    ],
+    metaSegundos: 15,
+  },
+
+momento09_revisao: {
     pontos: [
       "PLANEJAR = pensar antes de escrever.",
       "Toda história responde 3 perguntas: QUEM, ONDE, O QUE aconteceu.",

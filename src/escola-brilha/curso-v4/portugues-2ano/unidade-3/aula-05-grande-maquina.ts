@@ -310,7 +310,21 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: A palavra que liga a máquina",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "A Máquina só liga se você formar a palavra: LI + VRO.",
+      "Fala em voz alta as sílabas e conte quantas são.",
+    ],
+    metaSegundos: 20,
+  },
+
+momento09_revisao: {
     pontos: [
       "🧩 SÍLABAS — pedacinhos que formam a palavra.",
       "🚂 ALFABETO — as 26 letras em ordem fixa; ajuda a achar rápido.",

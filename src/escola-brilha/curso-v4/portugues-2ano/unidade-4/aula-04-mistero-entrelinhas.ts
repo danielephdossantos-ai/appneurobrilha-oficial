@@ -268,7 +268,22 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O quarto do Théo",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "A mãe entrou no quarto do Théo.",
+      "Havia BRINQUEDOS espalhados no chão.",
+      "O cobertor estava jogado no CHÃO.",
+    ],
+    metaSegundos: 20,
+  },
+
+momento09_revisao: {
     pontos: [
       "ENTRELINHAS = coisas escondidas que o texto não disse direto.",
       "INFERÊNCIA = descobrir usando PISTAS do texto + o que eu SEI.",

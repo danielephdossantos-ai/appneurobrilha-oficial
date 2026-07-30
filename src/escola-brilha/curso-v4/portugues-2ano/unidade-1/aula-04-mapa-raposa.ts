@@ -249,7 +249,22 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O que tinha na estrela",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Dentro da estrela do baú tinha um bilhete pequeno.",
+      "O bilhete dizia: 'Parabéns!",
+      "Você seguiu o mapa até o fim.",
+    ],
+    metaSegundos: 20,
+  },
+
+momento09_revisao: {
     pontos: [
       "Palavras de LUGAR (atrás, depois, embaixo, dentro, do lado) mostram ONDE as coisas estão.",
       "Bom leitor REPARA nessas palavras — elas ajudam a imaginar a cena.",

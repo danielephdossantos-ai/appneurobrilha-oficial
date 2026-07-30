@@ -239,7 +239,22 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O cachorro sumido",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Tico voltou pra casa e viu a PORTA ABERTA.",
+      "A COLEIRA do cachorro estava caída no chão.",
+      "Lá longe, um cachorrinho ia CORRENDO pro parque.",
+    ],
+    metaSegundos: 25,
+  },
+
+momento09_revisao: {
     pontos: [
       "PISTA = dica que a história dá.",
       "O leitor detetive JUNTA pistas e DESCOBRE o que o texto não falou.",
