@@ -23,6 +23,8 @@ import { EnsinoVisual } from "./blocos/EnsinoVisual";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
+import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
