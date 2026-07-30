@@ -391,7 +391,20 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <LeituraIlustrada data={aula.momento04_leituraGuiada.leitura} />
           </Secao>
 
+          {sessoes && sessao === "A" && (
+            <IntervaloSessao
+              onContinuar={() => irParaSessao("B")}
+              voltarPara={voltarPara}
+            />
+          )}
+          </>
+          )}
+
+          {(!sessoes || sessao === "B") && (
+          <>
+
           {/* M5 · Compreensão */}
+
           <Secao id="m5" label="🧠 Entendi?">
             <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
             <div className="space-y-3">
