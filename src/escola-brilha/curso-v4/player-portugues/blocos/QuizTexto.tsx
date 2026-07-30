@@ -367,6 +367,12 @@ export function QuizTexto({
               <div className="mt-1 text-[#0d1f55]">
                 A resposta certa é <strong>{quiz.opcoes[quiz.correta]}</strong>. {reensino}
               </div>
+              <a
+                href="#m4"
+                className="mt-3 inline-flex items-center justify-center w-full h-11 rounded-2xl bg-[#0d1f55] text-white font-black text-sm active:scale-95"
+              >
+                📖 Reler a explicação
+              </a>
             </div>
           )}
         </div>
