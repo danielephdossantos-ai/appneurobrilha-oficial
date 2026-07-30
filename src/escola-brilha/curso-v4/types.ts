@@ -499,7 +499,19 @@ export type QuizTextoData = {
    * Ausente: mantém as bolinhas coloridas de sempre.
    */
   opcoesImagens?: string[];
+  /**
+   * Fase 1 do motor adaptativo: pista mostrada na 2ª tentativa,
+   * ANTES de revelar a resposta. Se ausente, o player gera uma pista
+   * genérica a partir de `ondeEstaNoTexto`.
+   */
+  dica?: string;
+  /**
+   * Texto curto de reensino, mostrado quando a criança erra duas vezes.
+   * Se ausente, o player usa `feedbackAcerto` como explicação do raciocínio.
+   */
+  reensino?: string;
 };
+
 
 // ---------- 11 momentos de Português ---------------------------------
 
