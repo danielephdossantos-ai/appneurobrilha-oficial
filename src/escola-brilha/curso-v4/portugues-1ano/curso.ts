@@ -25,7 +25,7 @@ const curso: CursoPortugues = {
   corSecundaria: "#1a1033",
   tipoAula: "portugues",
   // Fase 6 — consciência fonêmica ABRE o curso (pré-requisito da decodificação).
-  unidades: [unidade7, unidade1, unidade2, unidade3, unidade4, unidade5, unidade6],
+  unidades: [unidade7, unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade8, unidade9],
 };
 
 export default curso;
