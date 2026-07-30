@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { MontarPalavraData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Bloco "Montar Palavra" — a criança recebe SÍLABAS embaralhadas e
@@ -19,8 +20,14 @@ export function MontarPalavra({ data }: { data: MontarPalavraData }) {
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <div className="text-sm font-bold text-white">🔤 {data.instrucao}</div>
-        <div className="text-[11px] text-white/60">
-          Palavra {idx + 1} de {total}
+        <div className="flex items-center gap-2">
+          <BotaoOuvirEnunciado
+            texto={[data.instrucao, atual?.frase]}
+            rotulo="Repetir"
+          />
+          <div className="text-[11px] text-white/60">
+            {idx + 1}/{total}
+          </div>
         </div>
       </div>
 

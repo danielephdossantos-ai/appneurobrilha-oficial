@@ -1,4 +1,5 @@
 import type { CardVocabularioData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Card de vocabulário — palavra + explicação simples + exemplo.
@@ -16,8 +17,18 @@ export function CardVocabulario({ card }: { card: CardVocabularioData }) {
           />
         )}
         <div className="flex-1 min-w-0">
-          <div className="text-[10px] uppercase tracking-widest text-amber-300">
-            📚 Palavra nova
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-[10px] uppercase tracking-widest text-amber-300">
+              📚 Palavra nova
+            </div>
+            <BotaoOuvirEnunciado
+              texto={[
+                card.palavra,
+                `O que quer dizer: ${card.explicacao}`,
+                `Exemplo: ${card.exemplo}`,
+              ]}
+              rotulo="Ouvir"
+            />
           </div>
           <div className="text-2xl font-black text-amber-200">{card.palavra}</div>
           <div className="text-sm text-white/90 mt-2 leading-relaxed">
