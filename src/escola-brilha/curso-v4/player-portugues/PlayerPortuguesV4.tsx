@@ -49,6 +49,7 @@ const MOMENTOS_BASE = [
   { id: "m6", label: "🎭 Personagens & lugar" },
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
+  { id: "mesc", label: "✍️ Você escreve", opcional: true },
   { id: "mmini", label: "🎮 Minijogo", opcional: true },
   { id: "mlab", label: "🔬 Laboratório", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
