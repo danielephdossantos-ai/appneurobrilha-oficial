@@ -769,6 +769,59 @@ export type MomentoEnsinoVisual = {
   blocos: EnsinoVisualBloco[];
 };
 
+// ---------------------------------------------------------------
+// BLOCO DE ESCRITA (1º ano · Fase 3)
+// A criança escreve DE VERDADE: traça a letra com o dedo, monta a
+// palavra ditada com sílabas móveis e produz um texto real
+// (lista / bilhete) que o app guarda.
+// ---------------------------------------------------------------
+export type EscritaBloco =
+  | {
+      tipo: "tracadoLetra";
+      /** Letras traçadas com o dedo, uma de cada vez. */
+      letras: Array<{
+        letra: string;
+        /** Palavra-chave falada quando a criança termina: "A de ABELHA". */
+        exemplo?: string;
+        /** Dica de movimento falada antes: "desce, sobe e faz o chapéu". */
+        dicaTracado?: string;
+      }>;
+    }
+  | {
+      tipo: "ditadoSilabas";
+      /** O app FALA a palavra; a criança monta com sílabas móveis. */
+      palavras: Array<{
+        palavra: string;
+        silabas: string[];
+        /** Sílabas extras que entram embaralhadas como distratores. */
+        distratores?: string[];
+        imagemUrl?: string;
+        dica?: string;
+      }>;
+    }
+  | {
+      tipo: "escritaReal";
+      /** "lista" → linhas numeradas · "bilhete" → campos do bilhete. */
+      formato: "lista" | "bilhete";
+      titulo: string;
+      /** Comando de produção: "Escreva a lista do seu lanche". */
+      comando: string;
+      /** Quantas linhas a lista pede (só formato "lista"). */
+      linhas?: number;
+      /** Campos do bilhete (só formato "bilhete"). */
+      campos?: Array<{ rotulo: string; placeholder: string; minLetras?: number }>;
+      /** Modelo pronto que a criança pode espiar. */
+      modelo?: string[];
+      /** Checklist de revisão do próprio texto. */
+      checklist?: string[];
+    };
+
+export type MomentoEscrita = {
+  titulo: string;
+  instrucao: string;
+  blocos: EscritaBloco[];
+};
+
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
