@@ -1,4 +1,5 @@
 import type { CardVocabularioData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Card de vocabulário — palavra + explicação simples + exemplo.
