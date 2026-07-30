@@ -15,6 +15,7 @@ import type { EscritaBloco } from "../../types";
 export function Escrita({ bloco, aulaSlug }: { bloco: EscritaBloco; aulaSlug: string }) {
   if (bloco.tipo === "tracadoLetra") return <TracadoLetra bloco={bloco} />;
   if (bloco.tipo === "ditadoSilabas") return <DitadoSilabas bloco={bloco} />;
+  if (bloco.tipo === "ditadoFrase") return <DitadoFrase bloco={bloco} />;
   return <EscritaReal bloco={bloco} aulaSlug={aulaSlug} />;
 }
 
