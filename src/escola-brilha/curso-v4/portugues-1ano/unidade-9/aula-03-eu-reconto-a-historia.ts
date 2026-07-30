@@ -357,6 +357,18 @@ export const aula03: AulaPortuguesV4 = {
     registro: "📸 Uma foto do reconto escrito pela família.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler o reconto três vezes",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O PATO SAIU DE CASA.",
+      "O PATO ACHOU O CAMINHO.",
+      "O PATO VOLTOU FELIZ.",
+    ],
+    metaSegundos: 22,
+  },
+
   recompensa: {
     xp: 160,
     moedas: 95,

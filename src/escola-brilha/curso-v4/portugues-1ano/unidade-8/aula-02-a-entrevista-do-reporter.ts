@@ -334,6 +334,18 @@ export const aula02: AulaPortuguesV4 = {
     registro: "📸 Uma foto da criança entrevistando alguém da família.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler as perguntas com voz de repórter",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O QUE VOCÊ FAZ?",
+      "ONDE VOCÊ MORA?",
+      "DO QUE VOCÊ GOSTA?",
+    ],
+    metaSegundos: 22,
+  },
+
   recompensa: {
     xp: 140,
     moedas: 80,

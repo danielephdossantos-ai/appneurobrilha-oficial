@@ -354,6 +354,18 @@ export const aula02: AulaPortuguesV4 = {
     registro: "🎙️ Grave um áudio cantando o alfabeto ou desenhe 3 letras com suas palavras.",
   },
 
+  momento_fluencia: {
+    titulo: "Canto de letras, cada vez mais rápido",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A B C D E F",
+      "G H I J K L",
+      "M N O P Q R",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 120,
     moedas: 70,

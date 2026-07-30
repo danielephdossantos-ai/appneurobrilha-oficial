@@ -319,6 +319,18 @@ export const aula01: AulaPortuguesV4 = {
     registro: "📸 Uma foto do papel com o nome pintado, ou um desenho dos objetos encontrados.",
   },
 
+  momento_fluencia: {
+    titulo: "Leio meu jeito de ser",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "EU SOU EU.",
+      "O NOME É MEU.",
+      "EU AMO MEU NOME.",
+    ],
+    metaSegundos: 15,
+  },
+
   recompensa: {
     xp: 100,
     moedas: 60,

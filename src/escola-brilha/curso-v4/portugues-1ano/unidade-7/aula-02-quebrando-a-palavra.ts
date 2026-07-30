@@ -286,5 +286,17 @@ export const aula02: AulaPortuguesV4 = {
     registro: "📸 Um vídeo curto ou foto batendo palmas com a família.",
   },
 
+  momento_fluencia: {
+    titulo: "Quebrar e ler de novo",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "PA-TO",
+      "BO-LA",
+      "SO-PA",
+    ],
+    metaSegundos: 15,
+  },
+
   recompensa: { xp: 110, moedas: 65 },
 };

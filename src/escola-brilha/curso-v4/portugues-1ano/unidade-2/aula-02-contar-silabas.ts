@@ -316,6 +316,19 @@ export const aula02: AulaPortuguesV4 = {
     registro: "🗣️ Grave um vídeo curto batendo palma nos nomes da família.",
   },
 
+  momento_fluencia: {
+    titulo: "Bater e ler outra vez",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "BO-LA",
+      "PA-TO",
+      "SA-PO",
+      "CA-MA",
+    ],
+    metaSegundos: 18,
+  },
+
   recompensa: {
     xp: 100,
     moedas: 60,
