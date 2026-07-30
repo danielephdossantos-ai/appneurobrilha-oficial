@@ -245,6 +245,14 @@ function PraticasCurricularesCards({
                 </li>
               ))}
             </ul>
+            {p.titulo.toLowerCase().includes("escrita") && (
+              <Link
+                to="/rotina-escrita"
+                className="mt-4 block text-center rounded-xl px-4 py-3 font-black text-[#0d1f55] bg-amber-300 hover:bg-amber-200 transition-colors"
+              >
+                ⏰ Criar rotina diária com lembrete no celular
+              </Link>
+            )}
           </div>
         ))}
       </div>

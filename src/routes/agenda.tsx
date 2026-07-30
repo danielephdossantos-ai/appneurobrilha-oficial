@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { Plus } from "lucide-react";
 
@@ -31,6 +31,17 @@ function Agenda() {
   return (
     <Shell>
       <PageHeader emoji="📅" title="Agenda" subtitle="Terapias, consultas, remédios e tarefas" />
+
+      <Link
+        to="/rotina-escrita"
+        className="block rounded-2xl bg-primary text-primary-foreground p-4 mb-4 shadow-soft"
+      >
+        <div className="text-xs font-black uppercase tracking-wider opacity-80">Todo dia</div>
+        <div className="text-lg font-black">✏️ Rotina de Escrita Diária</div>
+        <div className="text-sm opacity-90">
+          Caderno, lousa e ditado — 15 min. Horário editável e lembrete no celular.
+        </div>
+      </Link>
 
       <div className="flex justify-end mb-4">
         <button className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 py-2 font-bold flex items-center gap-1.5">
