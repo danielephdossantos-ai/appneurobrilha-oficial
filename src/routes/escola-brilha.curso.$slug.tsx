@@ -193,6 +193,9 @@ function TrilhaCurso() {
             </div>
           </section>
         ))}
+        {ehPortugues && curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
+          <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} />
+        )}
 
         {/* Atlas Final — destravado só quando todas as aulas estão concluídas */}
         <AtlasFinalCard
@@ -205,6 +208,48 @@ function TrilhaCurso() {
     </div>
   );
 
+}
+
+function PraticasCurricularesCards({
+  praticas,
+  corPrimaria,
+}: {
+  praticas: { emoji?: string; titulo: string; descricao: string; itens: string[] }[];
+  corPrimaria: string;
+}) {
+  return (
+    <section className="space-y-4">
+      <div className="text-center">
+        <div className="text-xs uppercase tracking-widest text-white/50">Currículo estudantil anual</div>
+        <h2 className="text-xl font-bold mt-1">Práticas complementares</h2>
+        <p className="text-sm text-white/60 mt-1">Atividades que acontecem em sala, fora do app.</p>
+      </div>
+      <div className="grid gap-4">
+        {praticas.map((p) => (
+          <div
+            key={p.titulo}
+            className="rounded-2xl p-5 border border-white/10 bg-white/5"
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl">{p.emoji || "📚"}</span>
+              <h3 className="font-bold text-lg" style={{ color: corPrimaria }}>
+                {p.titulo}
+              </h3>
+            </div>
+            <p className="text-sm text-white/70 mb-3">{p.descricao}</p>
+            <ul className="space-y-2">
+              {p.itens.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-white/80">
+                  <span className="text-amber-300">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function AtlasFinalCard({
