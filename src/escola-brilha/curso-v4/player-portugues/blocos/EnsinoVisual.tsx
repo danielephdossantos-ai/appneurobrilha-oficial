@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
+import { ConscienciaFonemica } from "./ConscienciaFonemica";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -17,7 +18,7 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
   if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
-  return null;
+  return <ConscienciaFonemica bloco={bloco} />;
 }
 
 // ---------- Alfabeto completo (26 letras clicáveis) ------------------

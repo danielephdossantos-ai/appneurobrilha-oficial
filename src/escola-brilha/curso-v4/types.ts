@@ -728,7 +728,40 @@ export type EnsinoVisualBloco =
       tipo: "alfabetoCompleto";
       /** Palavra-exemplo opcional pra cada letra (A→ABELHA, B→BOLA…). */
       exemplos?: Partial<Record<string, string>>;
+    }
+  // ---------------------------------------------------------------
+  // CONSCIÊNCIA FONÊMICA (1º ano · Unidade 7 — O Ouvido Mágico)
+  // Estímulo é SOM, não escrita. Toda peça fala em voz alta.
+  // ---------------------------------------------------------------
+  | {
+      tipo: "somInicial";
+      /** Cada item toca a palavra e isola o primeiro fonema. */
+      itens: Array<{ palavra: string; fonema: string; imagemUrl?: string }>;
+    }
+  | {
+      tipo: "segmentarFonemas";
+      /** Bate-palma por fonema: CASA → /c/ /a/ /s/ /a/. */
+      itens: Array<{ palavra: string; fonemas: string[]; imagemUrl?: string }>;
+    }
+  | {
+      tipo: "sintetizarFonemas";
+      /** Junta os sons soltos até virar palavra: /s/ /o/ /l/ → SOL. */
+      itens: Array<{ fonemas: string[]; palavra: string; imagemUrl?: string }>;
+    }
+  | {
+      tipo: "trocarFonema";
+      /** Troca um som e vira outra palavra: MALA → (m→b) → BALA. */
+      itens: Array<{
+        palavra: string;
+        de: string;
+        para: string;
+        resultado: string;
+        posicao?: "inicio" | "meio" | "fim";
+        imagemUrl?: string;
+        imagemResultadoUrl?: string;
+      }>;
     };
+
 
 export type MomentoEnsinoVisual = {
   titulo: string;
