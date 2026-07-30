@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { QuizTextoData } from "../../types";
+import { useAdaptativo } from "../adaptativo";
+
 
 /**
  * Quiz VISUAL — não é mais questionário de texto.
