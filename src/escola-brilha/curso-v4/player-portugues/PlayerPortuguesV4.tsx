@@ -139,8 +139,17 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
   useEffect(() => () => stopSpeaking(), []);
 
+  // ---- Motor adaptativo (Fase 1 do contrato do 1º ano) ----------------
+  const adaptativo = useAdaptativo();
+  const gateAtivo = cursoSlug === "portugues-1ano";
+  const totalAvaliacao = aula.momento10_avaliacao.perguntas.length;
+  useEffect(() => {
+    adaptativo?.declararAvaliacao(totalAvaliacao);
+  }, [adaptativo, totalAvaliacao]);
+
   const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+
 
   return (
     <KidsCtx.Provider value={{ kids, tween }}>
