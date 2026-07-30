@@ -5,6 +5,7 @@ import { unidade3 } from "./unidade-3";
 import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
 import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Língua Portuguesa 1º Ano — "As Chaves da Leitura"
@@ -21,7 +22,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#f59e0b",
   corSecundaria: "#1a1033",
   tipoAula: "portugues",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
