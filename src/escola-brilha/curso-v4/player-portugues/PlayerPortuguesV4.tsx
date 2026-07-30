@@ -90,8 +90,17 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
-export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+export function PlayerPortuguesV4(props: Props) {
+  return (
+    <AdaptativoProvider aulaSlug={`${props.cursoSlug}:${props.aula.slug}`}>
+      <PlayerPortuguesV4Inner {...props} />
+    </AdaptativoProvider>
+  );
+}
+
+function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
+
   // Skin infantil: Português do 1º e 2º ano.
   // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
   const tween =
