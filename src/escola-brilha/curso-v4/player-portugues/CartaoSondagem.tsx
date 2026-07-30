@@ -149,7 +149,7 @@ function QuizSondagem({
     <section className="rounded-2xl border border-amber-300/40 bg-black/30 p-5">
       <div className="flex items-center justify-between text-xs text-white/60">
         <span>
-          Sondagem · {idx + 1}/{ITENS_SONDAGEM.length}
+          Sondagem · {idx + 1}/{itens.length}
         </span>
         <button onClick={() => { stopSpeaking(); onFechar(); }} className="hover:text-white">
           sair
@@ -159,7 +159,7 @@ function QuizSondagem({
       <div className="h-2 rounded-full bg-white/10 mt-2 overflow-hidden">
         <div
           className="h-full bg-amber-400 transition-all"
-          style={{ width: `${((idx + 1) / ITENS_SONDAGEM.length) * 100}%` }}
+          style={{ width: `${((idx + 1) / itens.length) * 100}%` }}
         />
       </div>
 
