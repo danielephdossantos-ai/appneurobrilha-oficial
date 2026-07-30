@@ -905,6 +905,13 @@ export type UnidadePortugues = {
   aulas: AulaPortuguesV4[];
 };
 
+export type PraticaCurricular = {
+  titulo: string;
+  descricao: string;
+  itens: string[];
+  emoji?: string;
+};
+
 export type CursoPortugues = {
   slug: string;
   disciplina: string;
@@ -916,6 +923,8 @@ export type CursoPortugues = {
   corSecundaria: string;
   tipoAula: "portugues";
   unidades: UnidadePortugues[];
+  /** Práticas curriculares complementares que não acontecem dentro do app (ex.: escrita diária, oralidade). */
+  praticasCurriculares?: PraticaCurricular[];
 };
 
 // =====================================================================
