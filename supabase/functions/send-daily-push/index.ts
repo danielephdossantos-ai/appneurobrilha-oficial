@@ -126,13 +126,33 @@ Deno.serve(async (req) => {
       }
     }
 
-    if (estudosHoje === 0 && trabalhos === 0 && auroraCount === 0 && !aulaApoioAgora) { skipped++; continue; }
+    // === Rotina de Escrita Diária (caderno, lousa e ditado) ===
+    const { data: escritaRow } = await supabase
+      .from("study_agenda")
+      .select("time_of_day, weekdays")
+      .eq("child_id", s.child_id)
+      .eq("category", "escrita_diaria")
+      .maybeSingle();
+
+    let escritaAgora = false;
+    if (escritaRow) {
+      const dias: number[] = Array.isArray((escritaRow as any).weekdays)
+        ? ((escritaRow as any).weekdays as number[])
+        : [1, 2, 3, 4, 5];
+      const hora = (escritaRow.time_of_day as string | null) ?? "17:30";
+      if (dias.includes(weekdayHoje) && hora <= hhmmNow) {
+        if (hora.slice(0, 2) === hhmmNow.slice(0, 2)) escritaAgora = true;
+      }
+    }
+
+    if (estudosHoje === 0 && trabalhos === 0 && auroraCount === 0 && !aulaApoioAgora && !escritaAgora) { skipped++; continue; }
 
 
     const primeiraAurora = auroraPendentes[0];
     const auroraAtrasada = primeiraAurora && primeiraAurora.exam_date < hoje;
 
     const body = [
+      escritaAgora ? `✏️ Hora da escrita: caderno, lousa e ditado (15 min)` : null,
       aulaApoioAgora ? `🌟 Hora das Aulas de Apoio!` : null,
       auroraCount > 0
         ? (auroraAtrasada
@@ -144,13 +164,17 @@ Deno.serve(async (req) => {
     ].filter(Boolean).join(" • ");
 
     const payload = JSON.stringify({
-      title: aulaApoioAgora
-        ? "Hora de estudar com o Pip 🌟"
-        : auroraCount > 0
-          ? "Aurora está te esperando 🌟"
-          : "Neuro Brilha — hoje tem missão! ✨",
+      title: escritaAgora
+        ? "Pega o caderno e o lápis ✏️"
+        : aulaApoioAgora
+          ? "Hora de estudar com o Pip 🌟"
+          : auroraCount > 0
+            ? "Aurora está te esperando 🌟"
+            : "Neuro Brilha — hoje tem missão! ✨",
       body,
-      url: aulaApoioAgora ? "/aulas-apoio" : auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
+      url: escritaAgora
+        ? "/rotina-escrita"
+        : aulaApoioAgora ? "/aulas-apoio" : auroraCount > 0 ? "/escola-brilha/ler-com-aurora" : "/reforco-brilha",
       // tag muda a cada hora pra permitir múltiplos lembretes ao longo do dia
       tag: `nb-${s.child_id}-${hoje}-${hhmmNow.slice(0, 2)}`,
     });
