@@ -382,7 +382,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento05_compreensao.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={`m5-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m5" qid={`m5-${i}`} />
               ))}
             </div>
           </Secao>
@@ -392,7 +392,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <Instrucao>{aula.momento06_personagensCenario.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento06_personagensCenario.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={`m6-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m6" qid={`m6-${i}`} />
               ))}
             </div>
           </Secao>
@@ -410,7 +410,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               <LeituraIlustrada data={aula.momento08_leituraIndependente.leitura} />
               <div className="space-y-3">
                 {aula.momento08_leituraIndependente.perguntas.map((q, i) => (
-                  <QuizTexto key={i} quiz={q} />
+                  <QuizTexto key={`m8-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m8" qid={`m8-${i}`} />
                 ))}
               </div>
             </div>
@@ -468,7 +468,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             </ul>
             {aula.momento09_revisao.miniDesafio && (
               <div className="mt-4">
-                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} />
+                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} momento="m9" qid="m9-desafio" />
               </div>
             )}
           </Secao>
@@ -477,7 +477,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
           <Secao id="m10" label="✅ Avaliação">
             <div className="space-y-3">
               {aula.momento10_avaliacao.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={`m10-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m10" qid={`m10-${i}`} />
               ))}
             </div>
           </Secao>
