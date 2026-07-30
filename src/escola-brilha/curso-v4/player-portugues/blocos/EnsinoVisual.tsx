@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
+import { ConscienciaFonemica } from "./ConscienciaFonemica";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
