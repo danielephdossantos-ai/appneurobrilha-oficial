@@ -25,7 +25,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-alfabeto-completo",
   titulo: "A Trilha do Alfabeto",
   iconeTrilha: "🔤",
-  bncc: ["EF01LP04", "EF01LP10", "EF12LP01"],
+  bncc: ["EF01LP04", "EF01LP10", "EF01LP11", "EF12LP01"],
   duracaoMin: 15,
 
   // ------------------------------------------------------------
