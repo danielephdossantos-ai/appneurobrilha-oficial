@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
+import { Route as RotinaEscritaRouteImport } from './routes/rotina-escrita'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
@@ -102,6 +103,11 @@ const TermosRoute = TermosRouteImport.update({
 const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
   id: '/terapeuta-brilha',
   path: '/terapeuta-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RotinaEscritaRoute = RotinaEscritaRouteImport.update({
+  id: '/rotina-escrita',
+  path: '/rotina-escrita',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RotinaRoute = RotinaRouteImport.update({
@@ -552,6 +558,7 @@ export interface FileRoutesByFullPath {
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
+  '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -632,6 +639,7 @@ export interface FileRoutesByTo {
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
+  '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -714,6 +722,7 @@ export interface FileRoutesById {
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
+  '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -797,6 +806,7 @@ export interface FileRouteTypes {
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
+    | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -877,6 +887,7 @@ export interface FileRouteTypes {
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
+    | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -958,6 +969,7 @@ export interface FileRouteTypes {
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
+    | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -1040,6 +1052,7 @@ export interface RootRouteChildren {
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
   RotinaRoute: typeof RotinaRoute
+  RotinaEscritaRoute: typeof RotinaEscritaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
   TrilhasRoute: typeof TrilhasRoute
@@ -1101,6 +1114,13 @@ declare module '@tanstack/react-router' {
       path: '/terapeuta-brilha'
       fullPath: '/terapeuta-brilha'
       preLoaderRoute: typeof TerapeutaBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rotina-escrita': {
+      id: '/rotina-escrita'
+      path: '/rotina-escrita'
+      fullPath: '/rotina-escrita'
+      preLoaderRoute: typeof RotinaEscritaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rotina': {
@@ -1718,6 +1738,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
   RotinaRoute: RotinaRoute,
+  RotinaEscritaRoute: RotinaEscritaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
   TrilhasRoute: TrilhasRoute,
