@@ -117,7 +117,7 @@ export const aula02: AulaPortuguesV4 = {
       paragrafos: [
         "O alfabeto tem 26 letras. Elas andam sempre na mesma ordem.",
         "A primeira parada é o A, de ABELHA. A última parada é o Z, de ZEBRA.",
-        "Quando sabemos a ordem das letras, fica mais fácil achar palavras no dicionário.",
+        "Quando sabemos a ordem das letras, fica fácil achar uma palavra na lista.",
       ],
     },
   },
@@ -163,7 +163,7 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "Por que saber a ordem das letras ajuda?",
         opcoes: [
-          "Para achar palavras no dicionário mais fácil",
+          "Para achar uma palavra na lista",
           "Para pintar desenhos",
           "Para correr mais rápido",
         ],

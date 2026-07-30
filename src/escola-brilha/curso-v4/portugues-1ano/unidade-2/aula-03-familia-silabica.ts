@@ -86,7 +86,7 @@ export const aula03: AulaPortuguesV4 = {
         frases: [
           { texto: "BA de BAnana", explicacao: "BA + NANA = BANANA." },
           { texto: "BE de BEbê", explicacao: "BE + BÊ = BEBÊ." },
-          { texto: "BI de BIcicleta", explicacao: "BI começa a palavra BICICLETA." },
+          { texto: "BI de BIco", explicacao: "BI começa a palavra BICO." },
           { texto: "BO de BOla e BOlo", explicacao: "BO começa BOLA e BOLO." },
           { texto: "BU de BUraco", explicacao: "BU começa a palavra BURACO." },
         ],
@@ -103,7 +103,7 @@ export const aula03: AulaPortuguesV4 = {
       destacar: ["BA", "BE", "BI", "BO", "BU"],
       paragrafos: [
         "A família do B tem cinco sílabas: BA, BE, BI, BO, BU.",
-        "BA começa BANANA. BE começa BEBÊ. BI começa BICICLETA.",
+        "BA começa BANANA. BE começa BEBÊ. BI começa BICO.",
         "BO começa BOLA e BOLO. BU começa BURACO. Cinco irmãs, cinco sons diferentes!",
       ],
     },
@@ -121,16 +121,16 @@ export const aula03: AulaPortuguesV4 = {
         ondeEstaNoTexto: "A família do B tem cinco sílabas: BA, BE, BI, BO, BU.",
       },
       {
-        pergunta: "Qual sílaba começa a palavra BICICLETA?",
+        pergunta: "Qual sílaba começa a palavra BICO?",
         opcoes: ["BA", "BI", "BU"],
         correta: 1,
-        feedbackAcerto: "🎉 Boa! 'BI começa BICICLETA'.",
-        feedbackErro: "Está no segundo parágrafo: 'BI começa BICICLETA'.",
-        ondeEstaNoTexto: "BI começa BICICLETA.",
+        feedbackAcerto: "🎉 Boa! 'BI começa BICO'.",
+        feedbackErro: "Está no segundo parágrafo: 'BI começa BICO'.",
+        ondeEstaNoTexto: "BI começa BICO.",
       },
       {
         pergunta: "Quais palavras começam com BO?",
-        opcoes: ["BANANA e BEBÊ", "BOLA e BOLO", "BURACO e BICICLETA"],
+        opcoes: ["BANANA e BEBÊ", "BOLA e BOLO", "BURACO e BICO"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'BO começa BOLA e BOLO'.",
         feedbackErro: "Está no último parágrafo: 'BO começa BOLA e BOLO'.",
@@ -183,8 +183,8 @@ export const aula03: AulaPortuguesV4 = {
       imagemUrl: balao,
       destacar: ["BU", "BE", "balão", "bebê"],
       paragrafos: [
-        "O bebê ganhou um balão amarelo. O balão tem a sílaba BA no começo: BA-LÃO.",
-        "O bebê também começa com uma sílaba da família: BE-BÊ. Os dois brincam juntos no jardim.",
+        "O bebê ganhou um balão. O balão tem a sílaba BA no começo: BA-LÃO.",
+        "O bebê também começa com uma sílaba da família: BE-BÊ. Os dois brincam juntos na sala.",
       ],
     },
     perguntas: [
@@ -265,7 +265,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "A vogal que se ouve no começo é o A: BA-na-na.",
       },
       {
-        pergunta: "4/5 — Qual sílaba começa BICICLETA?",
+        pergunta: "4/5 — Qual sílaba começa BICO?",
         opcoes: ["BU", "BO", "BI", "BE"],
         correta: 2,
         feedbackAcerto: "🎉 BI!",

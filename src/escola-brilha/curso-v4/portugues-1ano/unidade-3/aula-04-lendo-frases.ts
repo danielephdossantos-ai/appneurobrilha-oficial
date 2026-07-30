@@ -81,7 +81,7 @@ export const aula04: AulaPortuguesV4 = {
       legendaImagem: "O jardim de Duda",
       destacar: ["jardim", "flor", "gato"],
       paragrafos: [
-        "Duda vai ao jardim toda manhã. Ela rega as flores com cuidado.",
+        "Duda vai ao jardim todo dia. Ela rega as flores com cuidado.",
         "O gato de Duda dorme perto das flores, tomando sol.",
       ],
     },
@@ -172,25 +172,25 @@ export const aula04: AulaPortuguesV4 = {
   momento08_leituraIndependente: {
     instrucao: "Agora leia sozinho e responda.",
     leitura: {
-      titulo: "O passeio de Théo",
+      titulo: "O passeio de Téo",
       imagemUrl: menino,
-      destacar: ["Théo", "lua"],
+      destacar: ["Téo", "lua"],
       paragrafos: [
-        "À noite, Théo olha pela janela e vê a lua brilhando.",
+        "À noite, Téo olha pela janela e vê a lua no céu.",
         "Ele sorri e pensa: a lua é linda.",
       ],
     },
     perguntas: [
       {
-        pergunta: "Quando Théo olha pela janela?",
+        pergunta: "Quando Téo olha pela janela?",
         opcoes: ["De manhã", "À tarde", "À noite"],
         correta: 2,
         feedbackAcerto: "🎉 Isso! É de noite.",
-        feedbackErro: "Releia a primeira frase: 'À noite, Théo olha pela janela...'",
-        ondeEstaNoTexto: "À noite, Théo olha pela janela e vê a lua brilhando.",
+        feedbackErro: "Releia a primeira frase: 'À noite, Téo olha pela janela...'",
+        ondeEstaNoTexto: "À noite, Téo olha pela janela e vê a lua no céu.",
       },
       {
-        pergunta: "O que Théo pensa sobre a lua?",
+        pergunta: "O que Téo pensa sobre a lua?",
         opcoes: ["Que ela é fria", "Que ela é linda", "Que ela é pequena"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Ele pensa que 'a lua é linda'.",
@@ -243,11 +243,11 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Não basta aparecer um cachorro: na frase ele está LATINDO, não dormindo.",
       },
       {
-        pergunta: "3/5 — Quando Théo viu a lua?",
+        pergunta: "3/5 — Quando Téo viu a lua?",
         opcoes: ["De manhã", "À noite", "De tarde", "Ao meio-dia"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! À noite.",
-        feedbackErro: "No texto: 'À noite, Théo olha pela janela...'",
+        feedbackErro: "No texto: 'À noite, Téo olha pela janela...'",
       },
       {
         pergunta: "4/5 — O que Duda faz com as flores?",

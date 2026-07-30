@@ -92,7 +92,7 @@ export const aula02: AulaPortuguesV4 = {
       legendaImagem: "Léo e seu cachorro",
       destacar: ["Léo", "cachorro", "bola"],
       paragrafos: [
-        "Léo pega a bola. O cachorro late de alegria.",
+        "Léo pega a bola. O cachorro late feliz.",
         "Léo joga a bola longe. O cachorro corre atrás dela.",
       ],
     },
@@ -187,7 +187,7 @@ export const aula02: AulaPortuguesV4 = {
       destacar: ["Rafa", "carrinho"],
       paragrafos: [
         "Rafa empurra o carrinho pela rua.",
-        "O carrinho vermelho corre bem rápido.",
+        "O carrinho azul corre bem rápido.",
       ],
     },
     perguntas: [
@@ -201,11 +201,11 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "De que cor é o carrinho?",
-        opcoes: ["Azul", "Verde", "Vermelho"],
+        opcoes: ["Azul", "Verde", "Rosa"],
         correta: 2,
-        feedbackAcerto: "🎉 Isso! O carrinho é vermelho.",
-        feedbackErro: "Está na segunda frase: 'O carrinho vermelho corre bem rápido.'",
-        ondeEstaNoTexto: "O carrinho vermelho corre bem rápido.",
+        feedbackAcerto: "🎉 Isso! O carrinho é azul.",
+        feedbackErro: "Está na segunda frase: 'O carrinho azul corre bem rápido.'",
+        ondeEstaNoTexto: "O carrinho azul corre bem rápido.",
       },
     ],
   },
@@ -261,10 +261,10 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — De que cor era o carrinho de Rafa?",
-        opcoes: ["Vermelho", "Azul", "Amarelo", "Verde"],
+        opcoes: ["Azul", "Verde", "Amarelo", "Rosa"],
         correta: 0,
-        feedbackAcerto: "🎉 Vermelho!",
-        feedbackErro: "No texto: 'O carrinho vermelho corre bem rápido.'",
+        feedbackAcerto: "🎉 Azul!",
+        feedbackErro: "No texto: 'O carrinho azul corre bem rápido.'",
       },
       {
         pergunta: "5/5 — Geralmente, o que vem primeiro numa frase?",

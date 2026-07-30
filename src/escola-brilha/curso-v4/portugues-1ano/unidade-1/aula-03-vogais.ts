@@ -88,7 +88,7 @@ export const aula03: AulaPortuguesV4 = {
       paragrafos: [
         "As vogais são cinco letras: A, E, I, O, U.",
         "A abelha começa com A. O ioiô começa com I. A ovelha começa com O.",
-        "Toda palavra do nosso idioma tem pelo menos uma vogal escondida nela.",
+        "Toda palavra tem pelo menos uma vogal escondida nela.",
       ],
     },
   },
@@ -132,7 +132,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "O texto fala o tempo todo sobre letras — quais?",
       },
       {
-        pergunta: "O que toda palavra do nosso idioma tem, segundo o texto?",
+        pergunta: "O que toda palavra tem, segundo o texto?",
         opcoes: ["Uma vogal escondida", "Um desenho", "Um número"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Está na última frase do texto.",
@@ -171,7 +171,7 @@ export const aula03: AulaPortuguesV4 = {
       imagemUrl: ursinho,
       destacar: ["ursinho", "U"],
       paragrafos: [
-        "O ursinho de pelúcia da Bea começa com a letra U.",
+        "O URSINHO da Bia começa com a letra U.",
         "URSINHO é uma palavra que começa com a última vogal: U.",
       ],
     },
@@ -263,7 +263,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "Ouça: O-VE-LHA. O V só aparece depois do O.",
       },
       {
-        pergunta: "5/5 — Toda palavra do nosso idioma tem...",
+        pergunta: "5/5 — Toda palavra tem...",
         opcoes: [
           "Pelo menos uma vogal",
           "Só consoantes",

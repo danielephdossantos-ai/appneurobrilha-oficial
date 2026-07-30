@@ -172,10 +172,10 @@ export const aula04: AulaPortuguesV4 = {
     leitura: {
       titulo: "A Bicicleta da Abelha",
       imagemUrl: bicicletaModerna,
-      destacar: ["BI-CI-CLE-TA", "A-BE-LHA"],
+      destacar: ["PA-TI-NE-TE", "A-BE-LHA"],
       paragrafos: [
         "A ABELHA tem três sílabas: A-BE-LHA.",
-        "Já a palavra BICICLETA tem quatro sílabas: BI-CI-CLE-TA. É uma palavra ainda mais comprida!",
+        "Já a palavra PATINETE tem quatro sílabas: PA-TI-NE-TE. É uma palavra ainda mais comprida!",
       ],
     },
     perguntas: [
@@ -188,12 +188,12 @@ export const aula04: AulaPortuguesV4 = {
         ondeEstaNoTexto: "A ABELHA tem três sílabas: A-BE-LHA.",
       },
       {
-        pergunta: "Quantas sílabas tem a palavra BICICLETA?",
+        pergunta: "Quantas sílabas tem a palavra PATINETE?",
         opcoes: ["Três", "Quatro", "Cinco"],
         correta: 1,
-        feedbackAcerto: "🎉 Boa! 'BICICLETA tem quatro sílabas: BI-CI-CLE-TA'.",
+        feedbackAcerto: "🎉 Boa! 'PATINETE tem quatro sílabas: PA-TI-NE-TE'.",
         feedbackErro: "Está na segunda frase: 'tem quatro sílabas'.",
-        ondeEstaNoTexto: "a palavra BICICLETA tem quatro sílabas: BI-CI-CLE-TA.",
+        ondeEstaNoTexto: "a palavra PATINETE tem quatro sílabas: PA-TI-NE-TE.",
       },
     ],
   },
