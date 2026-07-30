@@ -403,8 +403,155 @@ function DitadoSilabas({
 }
 
 // =====================================================================
-// 3) ESCRITA REAL (lista / bilhete) — guardada no aparelho
+// 2b) DITADO DE FRASE COM PALAVRAS MÓVEIS (2º ano · Fase 3)
 // =====================================================================
+
+function DitadoFrase({
+  bloco,
+}: {
+  bloco: Extract<EscritaBloco, { tipo: "ditadoFrase" }>;
+}) {
+  const [i, setI] = useState(0);
+  const item = bloco.frases[i];
+  const [montado, setMontado] = useState<number[]>([]);
+  const [erro, setErro] = useState(false);
+  const [acertou, setAcertou] = useState(false);
+
+  const banco = useMemo(
+    () => embaralhar([...item.palavras, ...(item.distratores ?? [])]),
+    [item],
+  );
+
+  useEffect(() => {
+    setMontado([]);
+    setErro(false);
+    setAcertou(false);
+  }, [i]);
+
+  const falarFrase = () => {
+    stopSpeaking();
+    speakChunked(item.frase, { rate: 0.68 });
+  };
+
+  useEffect(() => {
+    const t = setTimeout(falarFrase, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i]);
+
+  const tocar = (idx: number) => {
+    if (acertou || montado.includes(idx)) return;
+    stopSpeaking();
+    speakChunked(banco[idx], { rate: 0.66 });
+    const novo = [...montado, idx];
+    const texto = novo.map((k) => banco[k]).join(" ");
+    const alvo = item.palavras.join(" ");
+    if (!alvo.startsWith(texto)) {
+      setErro(true);
+      return;
+    }
+    setMontado(novo);
+    setErro(false);
+    if (texto === alvo) {
+      setAcertou(true);
+      setTimeout(() => speakChunked(`Isso! ${item.frase}`, { rate: 0.72 }), 600);
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-white/15 bg-white/5 p-4 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="text-white font-bold">🔊 Ouça a frase e escreva com as palavras</div>
+        <div className="text-xs text-white/60">
+          {i + 1} / {bloco.frases.length}
+        </div>
+      </div>
+
+      <button
+        onClick={falarFrase}
+        className="rounded-xl bg-sky-400 px-4 py-2 text-sm font-bold text-slate-900"
+      >
+        🔊 Ouvir a frase de novo
+      </button>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-xl bg-slate-900/70 border-2 border-dashed border-white/25 p-3 min-h-[64px]">
+        {montado.length === 0 && (
+          <span className="text-white/40 text-sm">Toque nas palavras na ordem da frase…</span>
+        )}
+        {montado.map((idx, k) => (
+          <span
+            key={k}
+            className="rounded-lg bg-amber-400 px-3 py-2 text-base font-black text-slate-900"
+          >
+            {banco[idx]}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {banco.map((p, idx) => (
+          <button
+            key={idx}
+            onClick={() => tocar(idx)}
+            disabled={montado.includes(idx) || acertou}
+            className="rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-base font-black text-white disabled:opacity-25"
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+
+      {erro && !acertou && (
+        <div className="rounded-xl bg-amber-500/15 border border-amber-400/30 p-3 text-sm text-amber-100">
+          Essa não é a próxima palavra. {item.dica ?? "Ouça a frase de novo e comece pela primeira palavra."}
+        </div>
+      )}
+
+      {acertou && (
+        <div className="rounded-xl bg-emerald-500/15 border border-emerald-400/30 p-3 text-sm text-emerald-100">
+          🎉 Você escreveu a frase inteira: <b>{item.frase}</b> — com letra maiúscula no começo e
+          ponto no fim!
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => {
+            setMontado(montado.slice(0, -1));
+            setErro(false);
+          }}
+          disabled={!montado.length || acertou}
+          className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white disabled:opacity-40"
+        >
+          ⬅ Apagar palavra
+        </button>
+        {acertou && i < bloco.frases.length - 1 && (
+          <button
+            onClick={() => setI(i + 1)}
+            className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
+          >
+            Próxima frase →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// 3) ESCRITA REAL (lista / bilhete / convite / legenda / cartaz / texto)
+//    Ciclo rascunho → revisão → versão final, guardado no aparelho.
+// =====================================================================
+
+const ICONE_FORMATO: Record<string, string> = {
+  lista: "📝",
+  bilhete: "✉️",
+  convite: "💌",
+  legenda: "🖼️",
+  cartaz: "📣",
+  texto: "📖",
+};
+
 
 function EscritaReal({
   bloco,
