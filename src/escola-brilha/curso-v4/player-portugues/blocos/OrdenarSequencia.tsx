@@ -40,7 +40,7 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <div className="text-sm font-bold text-white">🧩 {data.instrucao}</div>
-        <BotaoOuvirEnunciado texto={data.instrucao} rotulo="Repetir" />
+        <BotaoOuvirEnunciado texto={data.instrucao} rotulo="Repetir" auto />
       </div>
 
       <div className="rounded-xl bg-amber-400/15 border border-amber-300/40 p-2 text-center text-xs text-amber-100 font-semibold">
