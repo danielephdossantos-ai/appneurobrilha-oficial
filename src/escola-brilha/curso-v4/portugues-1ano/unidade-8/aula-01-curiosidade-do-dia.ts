@@ -329,6 +329,17 @@ export const aula01: AulaPortuguesV4 = {
     registro: "📸 Uma foto da curiosidade escrita pela criança.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler a curiosidade três vezes",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O TATU CAVA A TERRA.",
+      "O TATU COME FORMIGA.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 140,
     moedas: 80,

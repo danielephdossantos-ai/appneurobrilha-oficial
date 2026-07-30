@@ -332,6 +332,18 @@ export const aula03: AulaPortuguesV4 = {
     registro: "📸 Uma foto do diagrama que a família montou.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler o caminho da planta",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A SEMENTE VIRA PLANTA.",
+      "A PLANTA DÁ FLOR.",
+      "A FLOR VIRA FRUTO.",
+    ],
+    metaSegundos: 22,
+  },
+
   recompensa: {
     xp: 150,
     moedas: 85,

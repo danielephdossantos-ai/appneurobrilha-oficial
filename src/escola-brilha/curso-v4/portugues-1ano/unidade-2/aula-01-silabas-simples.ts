@@ -355,6 +355,18 @@ export const aula01: AulaPortuguesV4 = {
     registro: "🗣️ Grave um áudio ou desenhe os 3 objetos com o número de palmas de cada um.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A MALA.",
+      "O DADO.",
+      "A BOTA.",
+    ],
+    metaSegundos: 18,
+  },
+
   recompensa: {
     xp: 110,
     moedas: 65,

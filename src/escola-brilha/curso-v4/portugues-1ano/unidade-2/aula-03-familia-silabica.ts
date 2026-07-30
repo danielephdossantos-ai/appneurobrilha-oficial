@@ -317,6 +317,17 @@ export const aula03: AulaPortuguesV4 = {
     registro: "🖍️ Desenho com os 3 objetos e a sílaba inicial de cada palavra.",
   },
 
+  momento_fluencia: {
+    titulo: "A família do M, três vezes",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "MA ME MI MO MU",
+      "MALA MEL MOLA MULA",
+    ],
+    metaSegundos: 18,
+  },
+
   recompensa: {
     xp: 120,
     moedas: 70,

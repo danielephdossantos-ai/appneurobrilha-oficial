@@ -331,6 +331,17 @@ export const aula02: AulaPortuguesV4 = {
     registro: "📸 Uma foto da parlenda da família registrada no papel.",
   },
 
+  momento_fluencia: {
+    titulo: "Dizer a parlenda cada vez melhor",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "UM, DOIS, FEIJÃO COM ARROZ.",
+      "TRÊS, QUATRO, FEIJÃO NO PRATO.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 140,
     moedas: 80,

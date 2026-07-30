@@ -1,6 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
+import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";
+
 
 /**
  * Trilha do Curso v4.1 — estilo Duolingo.
@@ -95,8 +97,24 @@ function TrilhaCurso() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-10">
+        {slug === "portugues-1ano" && (
+          <CartaoSondagem
+            cursoSlug={slug}
+            onIrParaUnidade={(unidadeSlug) => {
+              const alvo = curso.unidades.find((u) => u.slug === unidadeSlug);
+              const primeira = alvo?.aulas[0];
+              if (primeira) {
+                navigate({
+                  to: "/escola-brilha/aula-pt-v4/$curso/$aula",
+                  params: { curso: slug, aula: primeira.slug },
+                });
+              }
+            }}
+          />
+        )}
         {curso.unidades.map((u) => (
           <section key={u.slug}>
+
             <div className="text-center mb-6">
               <div className="text-xs uppercase text-white/50">Unidade {u.numero}</div>
               <h2 className="text-2xl font-bold" style={{ color: u.corTema }}>

@@ -288,5 +288,16 @@ export const aula01: AulaPortuguesV4 = {
     registro: "📸 Uma foto dos objetos encontrados juntos na mesa.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler ouvindo o som do começo",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "SAPO SOL SUCO",
+      "MALA MEL MIL",
+    ],
+    metaSegundos: 18,
+  },
+
   recompensa: { xp: 110, moedas: 65 },
 };

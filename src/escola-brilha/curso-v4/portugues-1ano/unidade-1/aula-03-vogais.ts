@@ -319,6 +319,18 @@ export const aula03: AulaPortuguesV4 = {
     registro: "🗣️ Grave um áudio falando os 5 objetos e as vogais deles.",
   },
 
+  momento_fluencia: {
+    titulo: "As cinco amigas, três vezes",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A E I O U",
+      "A E I O U",
+      "EU VI O A E O U.",
+    ],
+    metaSegundos: 15,
+  },
+
   recompensa: {
     xp: 130,
     moedas: 80,

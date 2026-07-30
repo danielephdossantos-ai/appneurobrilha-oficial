@@ -317,5 +317,17 @@ export const aula04: AulaPortuguesV4 = {
     registro: "📸 Uma foto da lista ou dos desenhos das duplas de palavras.",
   },
 
+  momento_fluencia: {
+    titulo: "Pares que mudam um som",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "MALA — BALA",
+      "PATO — GATO",
+      "FACA — VACA",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: { xp: 130, moedas: 80, medalha: "🦉 Ouvido Mágico" },
 };

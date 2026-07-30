@@ -394,6 +394,18 @@ export const aula04: AulaPortuguesV4 = {
     registro: "📸 Uma foto das palavras que você montou com os papeizinhos.",
   },
 
+  momento_fluencia: {
+    titulo: "Sílabas em fila",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "BA BE BI BO BU",
+      "MA ME MI MO MU",
+      "LA LE LI LO LU",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 150,
     moedas: 90,

@@ -333,6 +333,18 @@ export const aula01: AulaPortuguesV4 = {
     registro: "📸 Uma foto do cartaz de combinados da família.",
   },
 
+  momento_fluencia: {
+    titulo: "Ler nossos combinados",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho no cronômetro e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "EU LEVANTO A MÃO.",
+      "EU ESPERO A MINHA VEZ.",
+      "EU CUIDO DA SALA.",
+    ],
+    metaSegundos: 22,
+  },
+
   recompensa: {
     xp: 140,
     moedas: 80,
