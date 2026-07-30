@@ -94,7 +94,10 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   const [ativo, setAtivo] = useState<string>("m1");
   // Skin infantil: Português do 1º e 2º ano.
   // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
-  const tween = cursoSlug === "portugues-3ano" || cursoSlug === "portugues-4ano";
+  const tween =
+    cursoSlug === "portugues-3ano" ||
+    cursoSlug === "portugues-4ano" ||
+    cursoSlug === "portugues-5ano";
   const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
   const CORES = tween ? CORES_TWEEN : CORES_KIDS;
 
