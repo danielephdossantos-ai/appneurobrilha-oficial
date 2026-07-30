@@ -563,12 +563,17 @@ function EscritaReal({
   const chave = `escola-brilha:escrita:${aulaSlug}:${bloco.formato}:${bloco.titulo}`;
   const qtdLinhas = bloco.linhas ?? 4;
   const campos = bloco.campos ?? [];
-  const vazio = bloco.formato === "lista" ? Array(qtdLinhas).fill("") : campos.map(() => "");
+  const usaLinhas = campos.length === 0;
+  const vazio = usaLinhas ? Array(qtdLinhas).fill("") : campos.map(() => "");
+  const checklist = bloco.checklist ?? [];
+  const ciclo = !!bloco.cicloRevisao && checklist.length > 0;
 
   const [valores, setValores] = useState<string[]>(vazio);
   const [salvo, setSalvo] = useState(false);
   const [verModelo, setVerModelo] = useState(false);
   const [conferido, setConferido] = useState<string[] | null>(null);
+  const [etapa, setEtapa] = useState<"rascunho" | "revisao" | "final">("rascunho");
+  const [marcados, setMarcados] = useState<boolean[]>(() => checklist.map(() => false));
 
   useEffect(() => {
     try {
@@ -596,10 +601,11 @@ function EscritaReal({
 
   const conferir = () => {
     const problemas: string[] = [];
-    if (bloco.formato === "lista") {
+    if (usaLinhas) {
+      const minimo = Math.min(bloco.formato === "texto" ? 2 : 3, qtdLinhas);
       const preenchidas = valores.filter((v) => v.trim().length >= 2).length;
-      if (preenchidas < Math.min(3, qtdLinhas)) {
-        problemas.push(`Escreva pelo menos ${Math.min(3, qtdLinhas)} itens, um em cada linha.`);
+      if (preenchidas < minimo) {
+        problemas.push(`Escreva pelo menos ${minimo} linhas.`);
       }
     } else {
       campos.forEach((c, i) => {
@@ -610,8 +616,15 @@ function EscritaReal({
       });
     }
     setConferido(problemas);
-    if (!problemas.length) salvar();
+    if (problemas.length) return;
+    if (ciclo && etapa === "rascunho") {
+      setEtapa("revisao");
+      return;
+    }
+    salvar();
+    if (ciclo) setEtapa("final");
   };
+
 
   const salvar = () => {
     try {
