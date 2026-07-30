@@ -124,7 +124,7 @@ export function avaliarSondagem(
     return {
       acertos,
       total: ITENS_SONDAGEM.length,
-      unidadeSugerida: "unidade-1-chaves-do-alfabeto",
+      unidadeSugerida: "unidade-1-alfabeto-magico",
       tituloUnidade: "Unidade 2 — As chaves do alfabeto",
       mensagem:
         "Você já ouve os sons! Agora vamos casar cada som com a letra dele.",
@@ -135,7 +135,7 @@ export function avaliarSondagem(
     return {
       acertos,
       total: ITENS_SONDAGEM.length,
-      unidadeSugerida: "unidade-2-silabas",
+      unidadeSugerida: "unidade-2-fabrica-de-silabas",
       tituloUnidade: "Unidade 3 — Sílabas",
       mensagem:
         "Você já conhece as letras. Bora juntar em sílabas e formar palavras!",
