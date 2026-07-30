@@ -837,20 +837,36 @@ export type EscritaBloco =
       }>;
     }
   | {
+      /** 2º ano · Fase 3 — ditado de FRASE com palavras móveis. */
+      tipo: "ditadoFrase";
+      frases: Array<{
+        frase: string;
+        /** Palavras na ordem certa (com pontuação final na última). */
+        palavras: string[];
+        distratores?: string[];
+        dica?: string;
+      }>;
+    }
+  | {
       tipo: "escritaReal";
-      /** "lista" → linhas numeradas · "bilhete" → campos do bilhete. */
-      formato: "lista" | "bilhete";
+      /** Gênero da produção. */
+      formato: "lista" | "bilhete" | "convite" | "legenda" | "cartaz" | "texto";
       titulo: string;
       /** Comando de produção: "Escreva a lista do seu lanche". */
       comando: string;
       /** Quantas linhas a lista pede (só formato "lista"). */
       linhas?: number;
-      /** Campos do bilhete (só formato "bilhete"). */
+      /** Campos do bilhete/convite/cartaz/legenda. */
       campos?: Array<{ rotulo: string; placeholder: string; minLetras?: number }>;
       /** Modelo pronto que a criança pode espiar. */
       modelo?: string[];
       /** Checklist de revisão do próprio texto. */
       checklist?: string[];
+      /**
+       * 2º ano · Fase 3 — ativa o ciclo RASCUNHO → REVISÃO → VERSÃO FINAL.
+       * Na revisão a criança marca cada item do checklist antes de publicar.
+       */
+      cicloRevisao?: boolean;
     };
 
 export type MomentoEscrita = {
