@@ -443,6 +443,24 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             </Secao>
           )}
 
+          {/* FLUÊNCIA (opcional) — releitura do mesmo texto 3 vezes (Fase 9). */}
+          {aula.momento_fluencia && (
+            <Secao id="mflu" label={`🏃 ${aula.momento_fluencia.titulo}`}>
+              <div className="flex items-start gap-2">
+                <div className="flex-1 min-w-0">
+                  <Instrucao>{aula.momento_fluencia.instrucao}</Instrucao>
+                </div>
+                <BotaoOuvirEnunciado texto={aula.momento_fluencia.instrucao} auto />
+              </div>
+              <LeituraFluente
+                data={aula.momento_fluencia}
+                aulaSlug={`${cursoSlug}:${aula.slug}`}
+              />
+            </Secao>
+          )}
+
+
+
           {/* Minijogo (opcional) */}
           {aula.momento_minijogo &&
             (() => {
