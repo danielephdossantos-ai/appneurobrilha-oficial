@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { MontarPalavraData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Bloco "Montar Palavra" — a criança recebe SÍLABAS embaralhadas e
