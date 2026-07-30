@@ -12,7 +12,7 @@ import { aula04 } from "./aula-04-consoantes-encontro";
  */
 export const unidade1: UnidadePortugues = {
   slug: "unidade-1-alfabeto-magico",
-  numero: 1,
+  numero: 2,
   titulo: "O Alfabeto Mágico",
   subtitulo: "Do meu nome até as primeiras sílabas",
   descricao:

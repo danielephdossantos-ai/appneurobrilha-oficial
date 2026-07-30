@@ -12,7 +12,7 @@ import { aula04 } from "./aula-04-trocando-um-som";
  */
 export const unidade7: UnidadePortugues = {
   slug: "unidade-7-ouvido-magico",
-  numero: 7,
+  numero: 1,
   titulo: "O Ouvido Mágico",
   subtitulo: "Escutar os sons das palavras",
   descricao:

@@ -10,7 +10,7 @@ import { aula04 } from "./aula-04-cartaz";
  */
 export const unidade4: UnidadePortugues = {
   slug: "unidade-4-textos-do-dia-a-dia",
-  numero: 4,
+  numero: 5,
   titulo: "Textos do Dia a Dia",
   subtitulo: "Bilhete, lista, convite e cartaz",
   descricao:
