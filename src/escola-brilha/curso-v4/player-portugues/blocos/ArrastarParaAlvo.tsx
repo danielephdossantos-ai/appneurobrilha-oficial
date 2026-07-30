@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ArrastarParaAlvoData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Minijogo "Arrastar para o alvo".
