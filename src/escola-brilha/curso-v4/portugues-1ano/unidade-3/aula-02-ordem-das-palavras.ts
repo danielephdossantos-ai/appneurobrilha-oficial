@@ -202,7 +202,7 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "De que cor é o carrinho?",
         opcoes: ["Azul", "Verde", "Rosa"],
-        correta: 2,
+        correta: 0,
         feedbackAcerto: "🎉 Isso! O carrinho é azul.",
         feedbackErro: "Está na segunda frase: 'O carrinho azul corre bem rápido.'",
         ondeEstaNoTexto: "O carrinho azul corre bem rápido.",
