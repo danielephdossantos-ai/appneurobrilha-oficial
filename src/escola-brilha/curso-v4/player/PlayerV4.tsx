@@ -7,6 +7,7 @@ import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 
 import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
 import { useAppState } from "@/core/store";
