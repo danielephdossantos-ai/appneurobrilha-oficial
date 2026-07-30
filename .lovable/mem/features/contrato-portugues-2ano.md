@@ -25,12 +25,14 @@ Língua Portuguesa é iniciada antes da Fase 7.
 | Práticas curriculares | sim | não |
 | Ensino visual | 29/40 aulas | 2/30 |
 
-## Fase 1 — Motor adaptativo nas 30 aulas
-- Adicionar `dica` em todo item de quiz/minijogo (pista, nunca a resposta).
-- Adicionar `reensino` nos blocos-chave (volta à explicação + item equivalente).
-- Gate de **≥70%** na avaliação para concluir a aula.
-- Reaproveitar `adaptativo.tsx`, `useMetricasAula` e `promptingEngine` — sem
-  motor novo.
+## Fase 1 — Motor adaptativo nas 30 aulas ✅ CONCLUÍDA
+- `dica` em todo item de quiz/minijogo (pista, nunca a resposta) — 440 itens.
+- `reensino` nos blocos-chave (compreensão, leitura independente, revisão e
+  avaliação) — 335 itens.
+- Gate de **≥70%** na avaliação já ativo pelo player compartilhado.
+- Blocos de minijogo (previsão, ordenar, arrastar, selecionar, montar palavra,
+  arquiteto) agora aceitam e exibem `dica` no feedback de erro.
+
 
 ## Fase 2 — Avaliações com 4 alternativas
 - Reescrever os 150 itens de `momento10_avaliacao` para **4 opções** com
