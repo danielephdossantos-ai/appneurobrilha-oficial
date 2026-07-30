@@ -660,3 +660,77 @@ function Instrucao({ children }: { children: React.ReactNode }) {
 }
 
 
+
+/**
+ * Painel de desempenho da avaliação (Fase 1 — 1º ano).
+ * Mostra acertos, nota e libera/bloqueia a conclusão da aula.
+ */
+function PainelNota({
+  respondidas,
+  total,
+  acertos,
+  nota,
+  aprovado,
+  onRefazer,
+}: {
+  respondidas: number;
+  total: number;
+  acertos: number;
+  nota: number;
+  aprovado: boolean;
+  onRefazer: () => void;
+}) {
+  const completou = respondidas >= total && total > 0;
+  const pct = Math.round(nota * 100);
+
+  return (
+    <div
+      className={`mt-4 rounded-2xl border-2 p-4 ${
+        aprovado
+          ? "bg-emerald-500/15 border-emerald-400/60"
+          : completou
+            ? "bg-rose-500/15 border-rose-400/60"
+            : "bg-white/10 border-white/20"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-3 text-sm font-black">
+        <span>📊 Respondidas: {respondidas}/{total}</span>
+        <span>
+          ✅ Acertos: {acertos} ({pct}%)
+        </span>
+      </div>
+      <div className="mt-2 h-3 rounded-full bg-black/30 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${
+            aprovado ? "bg-emerald-400" : "bg-amber-400"
+          }`}
+          style={{ width: `${Math.min(100, pct)}%` }}
+        />
+      </div>
+      {!completou && (
+        <p className="mt-2 text-xs text-white/80">
+          Meta: acertar pelo menos {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+        </p>
+      )}
+      {completou && aprovado && (
+        <p className="mt-2 text-sm font-bold text-emerald-200">
+          🌟 Muito bem! Você alcançou a meta e pode concluir a aula.
+        </p>
+      )}
+      {completou && !aprovado && (
+        <div className="mt-3">
+          <p className="text-sm font-bold text-rose-100">
+            Ainda não chegou em {Math.round(NOTA_MINIMA * 100)}%. Volte na leitura guiada
+            e na revisão, depois refaça a avaliação — você consegue!
+          </p>
+          <button
+            onClick={onRefazer}
+            className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#2b1258] font-black text-base active:scale-95 shadow"
+          >
+            🔄 Refazer a avaliação
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
