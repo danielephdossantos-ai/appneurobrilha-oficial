@@ -877,6 +877,9 @@ export type AulaPortuguesV4 = {
   momento08_leituraIndependente: MomentoLeituraIndependente;
   /** Opcional — bloco de ESCRITA (traçado, ditado com sílabas, escrita real). */
   momento_escrita?: MomentoEscrita;
+  /** Opcional — releitura para FLUÊNCIA (3 leituras do mesmo texto). */
+  momento_fluencia?: MomentoFluencia;
+
   /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
   momento_minijogo?: MomentoMinijogo;
   /** Opcional — laboratório interativo (Geografia/Ciências). Aparece depois do minijogo. */
