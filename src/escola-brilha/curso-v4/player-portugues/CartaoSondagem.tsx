@@ -111,16 +111,19 @@ export function CartaoSondagem({
 }
 
 function QuizSondagem({
+  conjunto,
   onConcluir,
   onFechar,
 }: {
+  conjunto: ConjuntoSondagem;
   onConcluir: (r: ResultadoSondagem) => void;
   onFechar: () => void;
 }) {
+  const itens = conjunto.itens;
   const [idx, setIdx] = useState(0);
   const [respostas, setRespostas] = useState<number[]>([]);
   const jaFalou = useRef<number | null>(null);
-  const item = ITENS_SONDAGEM[idx];
+  const item = itens[idx];
 
   useEffect(() => {
     if (jaFalou.current === idx) return;
@@ -131,9 +134,10 @@ function QuizSondagem({
 
   function responder(op: number) {
     const novas = [...respostas, op];
-    if (idx + 1 >= ITENS_SONDAGEM.length) {
+    if (idx + 1 >= itens.length) {
       stopSpeaking();
-      const r = avaliarSondagem(novas);
+      const r = conjunto.avaliar(novas);
+
       onConcluir({ ...r, feitoEm: new Date().toISOString() });
       return;
     }
