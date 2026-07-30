@@ -52,12 +52,21 @@ const MOMENTOS_BASE = [
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
   { id: "mesc", label: "✍️ Você escreve", opcional: true },
+  { id: "mflu", label: "🏃 Ler de novo", opcional: true },
   { id: "mmini", label: "🎮 Minijogo", opcional: true },
   { id: "mlab", label: "🔬 Laboratório", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
   { id: "m10", label: "✅ Avaliação" },
   { id: "m11", label: "🏠 Missão em Família" },
 ] as const;
+
+/**
+ * Fase 9 — sessão A ("aprender") vs sessão B ("praticar").
+ * Sessão A tem ~10 min: aquecimento, história, previsão, palavras novas,
+ * ensino visual e leitura guiada. Tudo o que sobra fica na sessão B.
+ */
+const MOMENTOS_SESSAO_A: readonly string[] = ["m1", "m2", "m3", "mev", "m4"];
+
 
 /** Cores por momento — usadas só no skin infantil (1º ano). */
 const CORES_KIDS: Record<string, string> = {
