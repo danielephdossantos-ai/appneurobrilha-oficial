@@ -28,10 +28,10 @@ import {
   DIAS_LONGOS,
   SEMANAS_ESCRITA,
   semanaAtual,
-  conteudoDaSemana,
   fraseDoDia,
 } from "@/lib/rotina-escrita";
 import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
+import { SEMANAS_ESCRITA_2ANO } from "@/lib/rotina-escrita-2ano";
 
 export const Route = createFileRoute("/rotina-escrita")({
   head: () => ({
@@ -51,6 +51,9 @@ export const Route = createFileRoute("/rotina-escrita")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    serie: search.serie === "2" ? ("2" as const) : ("1" as const),
+  }),
   component: RotinaEscrita,
 });
 
@@ -66,6 +69,8 @@ function hojeISO() {
 }
 
 function RotinaEscrita() {
+  const { serie } = Route.useSearch();
+  const semanas = serie === "2" ? SEMANAS_ESCRITA_2ANO : SEMANAS_ESCRITA;
   const { activeChild } = useAppState();
   const push = usePushNotifications(activeChild?.id ?? null);
   const [rotina, setRotina] = useState<Rotina>({
@@ -132,8 +137,11 @@ function RotinaEscrita() {
   }
 
   const nSemana =
-    semanaManual ?? semanaAtual(new Date(`${rotina.inicio}T00:00:00`));
-  const sem = useMemo(() => conteudoDaSemana(nSemana), [nSemana]);
+    semanaManual ?? Math.min(semanas.length, semanaAtual(new Date(`${rotina.inicio}T00:00:00`)));
+  const sem = useMemo(
+    () => semanas[Math.min(semanas.length, Math.max(1, nSemana)) - 1],
+    [semanas, nSemana],
+  );
   const frase = fraseDoDia(sem);
 
   async function salvarRotina(next: Rotina) {
@@ -195,9 +203,24 @@ function RotinaEscrita() {
     <Shell>
       <PageHeader
         emoji="✏️"
-        title="Rotina de Escrita Diária"
-        subtitle={`${activeChild.nome} · Semana ${nSemana} de ${SEMANAS_ESCRITA.length} · ${sem.foco}`}
+        title={`Rotina de Escrita Diária · ${serie}º ano`}
+        subtitle={`${activeChild.nome} · Semana ${nSemana} de ${semanas.length} · ${sem.foco}`}
       />
+
+      <div className="flex gap-2 mb-4">
+        {(["1", "2"] as const).map((s2) => (
+          <Link
+            key={s2}
+            to="/rotina-escrita"
+            search={{ serie: s2 }}
+            className={`btn-tap rounded-xl px-3 py-2 text-sm font-black ${
+              serie === s2 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {s2}º ano
+          </Link>
+        ))}
+      </div>
 
       {/* Horário + notificação */}
       <div className="rounded-3xl bg-gradient-to-br from-[#0d1f55] to-[#1a3a8c] text-white p-5 shadow-xl mb-6">
@@ -330,10 +353,10 @@ function RotinaEscrita() {
           Semana {nSemana}
         </div>
         <button
-          onClick={() => setSemanaManual(Math.min(SEMANAS_ESCRITA.length, nSemana + 1))}
+          onClick={() => setSemanaManual(Math.min(semanas.length, nSemana + 1))}
           className="btn-tap rounded-xl bg-muted px-3 py-2 font-bold text-sm"
         >
-          Semana {Math.min(SEMANAS_ESCRITA.length, nSemana + 1)} →
+          Semana {Math.min(semanas.length, nSemana + 1)} →
         </button>
       </div>
 
