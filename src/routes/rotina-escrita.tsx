@@ -16,6 +16,7 @@ import {
   NotebookPen,
   PenLine,
   Mic,
+  MessageCircle,
   Check,
 } from "lucide-react";
 import {
@@ -413,7 +414,7 @@ function RotinaEscrita() {
         feito={!!feitos.oralidade}
         onMarcar={() => marcar("oralidade")}
       >
-        <Oralidade semana={numSemana} />
+        <Oralidade semana={nSemana} />
       </BlocoCard>
 
       <div className="rounded-2xl bg-muted p-4 text-sm text-muted-foreground mt-6 mb-8">
