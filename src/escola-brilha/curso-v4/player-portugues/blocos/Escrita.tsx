@@ -640,11 +640,13 @@ function EscritaReal({
     speakChunked(bloco.comando, { rate: 0.72 });
   };
 
+  const todosMarcados = marcados.every(Boolean);
+
   return (
     <div className="rounded-2xl border border-white/15 bg-white/5 p-4 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="text-white font-bold">
-          {bloco.formato === "lista" ? "📝" : "✉️"} {bloco.titulo}
+          {ICONE_FORMATO[bloco.formato] ?? "📝"} {bloco.titulo}
         </div>
         <button
           onClick={ouvirComando}
@@ -654,22 +656,52 @@ function EscritaReal({
         </button>
       </div>
 
+      {ciclo && (
+        <div className="flex items-center gap-1 text-[11px] font-bold">
+          {(["rascunho", "revisao", "final"] as const).map((e, i) => (
+            <span
+              key={e}
+              className={`rounded-full px-2.5 py-1 ${
+                etapa === e
+                  ? "bg-amber-400 text-slate-900"
+                  : "bg-white/10 text-white/60 border border-white/15"
+              }`}
+            >
+              {i + 1}. {e === "rascunho" ? "Rascunho" : e === "revisao" ? "Revisão" : "Versão final"}
+            </span>
+          ))}
+        </div>
+      )}
+
       <p className="text-sm text-white/80">{bloco.comando}</p>
 
       {/* papel */}
       <div className="rounded-xl bg-amber-50 p-4 space-y-2 shadow-inner">
-        {bloco.formato === "lista"
-          ? valores.map((v, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span className="w-5 text-right text-slate-500 font-bold">{i + 1}.</span>
-                <input
+        {usaLinhas
+          ? valores.map((v, i) =>
+              bloco.formato === "texto" ? (
+                <textarea
+                  key={i}
                   value={v}
                   onChange={(e) => editar(i, e.target.value)}
-                  placeholder={`item ${i + 1}`}
-                  className="flex-1 min-w-0 bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500"
+                  disabled={etapa === "final"}
+                  placeholder={`parágrafo ${i + 1}`}
+                  rows={3}
+                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-base text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
                 />
-              </div>
-            ))
+              ) : (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 text-right text-slate-500 font-bold">{i + 1}.</span>
+                  <input
+                    value={v}
+                    onChange={(e) => editar(i, e.target.value)}
+                    disabled={etapa === "final"}
+                    placeholder={`item ${i + 1}`}
+                    className="flex-1 min-w-0 bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
+                  />
+                </div>
+              ),
+            )
           : campos.map((c, i) => (
               <div key={i} className="space-y-1">
                 <div className="text-xs font-bold uppercase tracking-wide text-slate-500">
@@ -678,15 +710,16 @@ function EscritaReal({
                 <textarea
                   value={valores[i] ?? ""}
                   onChange={(e) => editar(i, e.target.value)}
+                  disabled={etapa === "final"}
                   placeholder={c.placeholder}
-                  rows={c.rotulo.toLowerCase().includes("recado") || c.rotulo.toLowerCase().includes("mensagem") ? 3 : 1}
-                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500"
+                  rows={(c.minLetras ?? 2) > 12 ? 3 : 1}
+                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
                 />
               </div>
             ))}
       </div>
 
-      {bloco.modelo && (
+      {bloco.modelo && etapa !== "final" && (
         <div>
           <button
             onClick={() => setVerModelo((v) => !v)}
@@ -704,12 +737,37 @@ function EscritaReal({
         </div>
       )}
 
-      {bloco.checklist && (
-        <ul className="space-y-1 text-sm text-white/75">
-          {bloco.checklist.map((c, i) => (
-            <li key={i}>☑ {c}</li>
-          ))}
-        </ul>
+      {/* checklist: só leitura no rascunho, marcável na revisão */}
+      {checklist.length > 0 && (
+        <div className="space-y-1">
+          {ciclo && etapa === "revisao" && (
+            <div className="text-xs uppercase tracking-wide text-amber-200 font-bold">
+              🔍 Releia seu texto e marque tudo que já está certo
+            </div>
+          )}
+          <ul className="space-y-1 text-sm text-white/75">
+            {checklist.map((c, i) =>
+              ciclo && etapa === "revisao" ? (
+                <li key={i}>
+                  <button
+                    onClick={() =>
+                      setMarcados((m) => m.map((v, k) => (k === i ? !v : v)))
+                    }
+                    className={`w-full text-left rounded-xl px-3 py-2 border ${
+                      marcados[i]
+                        ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-100"
+                        : "bg-white/5 border-white/15 text-white/80"
+                    }`}
+                  >
+                    {marcados[i] ? "☑" : "☐"} {c}
+                  </button>
+                </li>
+              ) : (
+                <li key={i}>☑ {c}</li>
+              ),
+            )}
+          </ul>
+        </div>
       )}
 
       {conferido && conferido.length > 0 && (
@@ -720,19 +778,49 @@ function EscritaReal({
         </div>
       )}
 
-      {conferido && conferido.length === 0 && (
+      {salvo && (!ciclo || etapa === "final") && (
         <div className="rounded-xl bg-emerald-500/15 border border-emerald-400/30 p-3 text-sm text-emerald-100">
-          🎉 Escrita guardada! Mostre pra sua família o que você escreveu.
+          🎉 Versão final guardada! Mostre pra sua família o que você escreveu.
         </div>
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={conferir}
-          className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
-        >
-          ✅ Conferir e guardar
-        </button>
+        {(!ciclo || etapa === "rascunho") && (
+          <button
+            onClick={conferir}
+            className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
+          >
+            {ciclo ? "➡️ Ir para a revisão" : "✅ Conferir e guardar"}
+          </button>
+        )}
+        {ciclo && etapa === "revisao" && (
+          <>
+            <button
+              onClick={() => setEtapa("rascunho")}
+              className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white"
+            >
+              ⬅ Voltar e arrumar
+            </button>
+            <button
+              onClick={conferir}
+              disabled={!todosMarcados}
+              className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900 disabled:opacity-40"
+            >
+              ✅ Publicar versão final
+            </button>
+          </>
+        )}
+        {ciclo && etapa === "final" && (
+          <button
+            onClick={() => {
+              setEtapa("rascunho");
+              setConferido(null);
+            }}
+            className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white"
+          >
+            ✏️ Editar de novo
+          </button>
+        )}
         {salvo && <span className="text-xs text-emerald-200">Guardado no aparelho ✓</span>}
       </div>
     </div>
