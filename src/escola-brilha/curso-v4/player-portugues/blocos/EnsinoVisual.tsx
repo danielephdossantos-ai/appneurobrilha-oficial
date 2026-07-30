@@ -3,6 +3,7 @@ import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
 import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
 import { PalavraRelampago } from "./PalavraRelampago";
+import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -21,6 +22,9 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
   if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
   if (bloco.tipo === "palavraRelampago") return <PalavraRelampago bloco={bloco} />;
+  if (bloco.tipo === "silabaTonica") return <SilabaTonica bloco={bloco} />;
+  if (bloco.tipo === "rimas") return <Rimas bloco={bloco} />;
+  if (bloco.tipo === "regraOrtografica") return <RegraOrtografica bloco={bloco} />;
   return <ConscienciaFonemica bloco={bloco} />;
 }
 

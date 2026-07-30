@@ -63,11 +63,16 @@ Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicia
   isoladas).
 - Registrar palavras/minuto para o relatório.
 
-## Fase 5 — Consciência fonológica avançada e palavras teimosas
-- Nova unidade curta (3–4 aulas): sílaba tônica, rimas, segmentação e
-  manipulação de fonemas em palavras maiores.
-- `palavraRelampago` com o corpus de alta frequência do 2º ano.
-- Ortografia-alvo do ano: R/RR, S/SS, M antes de P/B, Ç, LH/NH/CH, AM/ÃO.
+## Fase 5 — Consciência fonológica avançada e palavras teimosas ✅ CONCLUÍDA
+- Entregue: **Unidade 7 — A Oficina dos Sons** com 4 aulas (batida forte/sílaba
+  tônica + M antes de P/B; rimas + R/RR; troca e segmentação de fonemas + S/SS/Ç;
+  palavras teimosas + LH/NH/CH e AM/ÃO).
+- Novos blocos em `types.ts`: `silabaTonica`, `rimas`, `regraOrtografica`,
+  renderizados por `FonologiaAvancada.tsx`; `palavraRelampago` reaproveitado com
+  o corpus de alta frequência do 2º ano.
+- Todas as 4 aulas seguem o esqueleto de 11 momentos + escrita + fluência,
+  com dica/reensino e avaliação de 4 alternativas.
+
 
 ## Fase 6 — Variedade de interação e ensino visual
 - Ensino visual (`momento_ensinoVisual`) em pelo menos 24 das 30 aulas.
