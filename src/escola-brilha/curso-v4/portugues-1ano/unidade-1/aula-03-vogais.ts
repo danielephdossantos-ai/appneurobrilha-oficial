@@ -16,13 +16,13 @@ import { url as ursinho } from "@/assets/neuro-treino/objetos/ursinho.png.asset.
  *  - Reconhecer as 5 vogais e seus sons.
  *  - Identificar palavras que começam com cada vogal.
  *
- * BNCC: EF01LP02 · EF12LP01
+ * BNCC: EF01LP02 · EF01LP05 · EF01LP07 · EF12LP01
  */
 export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-vogais",
   titulo: "As Cinco Irmãs Vogais",
   iconeTrilha: "🅰️",
-  bncc: ["EF01LP02", "EF12LP01"],
+  bncc: ["EF01LP02", "EF01LP05", "EF01LP07", "EF12LP01"],
   duracaoMin: 15,
 
   // ------------------------------------------------------------

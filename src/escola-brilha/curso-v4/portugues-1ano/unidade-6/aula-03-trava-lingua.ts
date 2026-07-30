@@ -13,13 +13,13 @@ import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json
  * Foco: reconhecer a ALITERAÇÃO — sons repetidos no início das
  * palavras que deixam o texto "difícil de falar rápido".
  *
- * BNCC: EF01LP09 · EF01LP10 · EF12LP18
+ * BNCC: EF01LP16 · EF01LP19 · EF12LP18
  */
 export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-trava-lingua",
   titulo: "Trava-Língua",
   iconeTrilha: "😝",
-  bncc: ["EF01LP09", "EF01LP10", "EF12LP18"],
+  bncc: ["EF01LP16", "EF01LP19", "EF12LP18"],
   duracaoMin: 15,
 
   momento01_motivacao: {

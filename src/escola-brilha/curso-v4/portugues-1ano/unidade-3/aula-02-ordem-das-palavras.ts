@@ -12,13 +12,13 @@ import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
  * A criança pratica organizar palavras embaralhadas para formar
  * uma frase com sentido, usando o minijogo ordenarSequencia.
  *
- * BNCC: EF01LP11, EF01LP13
+ * BNCC: EF01LP12, EF12LP04
  */
 export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-ordem-das-palavras",
   titulo: "Palavras na Ordem Certa",
   iconeTrilha: "🔤",
-  bncc: ["EF01LP11", "EF01LP13"],
+  bncc: ["EF01LP12", "EF12LP04"],
   duracaoMin: 15,
 
   momento01_motivacao: {

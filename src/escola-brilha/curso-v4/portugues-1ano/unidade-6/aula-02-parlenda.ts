@@ -14,13 +14,13 @@ import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json
  * Foco: memorizar um texto curto de tradição oral (parlenda/cantiga)
  * e acompanhar o texto escrito enquanto se ouve/recita.
  *
- * BNCC: EF01LP10 · EF12LP18 · EF15LP16
+ * BNCC: EF01LP16 · EF01LP19 · EF12LP18 · EF15LP16
  */
 export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-parlenda",
   titulo: "Parlenda e Cantiga",
   iconeTrilha: "🎶",
-  bncc: ["EF01LP10", "EF12LP18", "EF15LP16"],
+  bncc: ["EF01LP16", "EF01LP19", "EF12LP18", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

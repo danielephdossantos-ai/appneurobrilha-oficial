@@ -19,13 +19,13 @@ import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.
  *  - Perceber que a ordem alfabética ajuda a organizar (dicionário,
  *    lista de chamada).
  *
- * BNCC: EF01LP01 · EF12LP01
+ * BNCC: EF01LP04 · EF01LP10 · EF12LP01
  */
 export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-alfabeto-completo",
   titulo: "A Trilha do Alfabeto",
   iconeTrilha: "🔤",
-  bncc: ["EF01LP01", "EF12LP01"],
+  bncc: ["EF01LP04", "EF01LP10", "EF12LP01"],
   duracaoMin: 15,
 
   // ------------------------------------------------------------

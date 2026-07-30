@@ -13,13 +13,13 @@ import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
  * juntar palavras soltas com sentido, começando com letra MAIÚSCULA
  * e terminando com PONTO, forma uma frase.
  *
- * BNCC: EF01LP11, EF01LP12
+ * BNCC: EF01LP12, EF12LP04
  */
 export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-o-que-e-frase",
   titulo: "O que é uma FRASE?",
   iconeTrilha: "✏️",
-  bncc: ["EF01LP11", "EF01LP12"],
+  bncc: ["EF01LP12", "EF12LP04"],
   duracaoMin: 15,
 
   momento01_motivacao: {

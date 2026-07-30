@@ -14,13 +14,13 @@ import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
  * Fecha a Unidade 3. A criança lê uma frase e escolhe a imagem ou
  * ideia que combina com ela — consolidando leitura com compreensão.
  *
- * BNCC: EF01LP11, EF01LP13, EF12LP04
+ * BNCC: EF01LP09, EF01LP14, EF12LP04
  */
 export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-lendo-frases",
   titulo: "Leio e Entendo a Frase",
   iconeTrilha: "🧩",
-  bncc: ["EF01LP11", "EF01LP13", "EF12LP04"],
+  bncc: ["EF01LP09", "EF01LP14", "EF12LP04"],
   duracaoMin: 15,
 
   momento01_motivacao: {
