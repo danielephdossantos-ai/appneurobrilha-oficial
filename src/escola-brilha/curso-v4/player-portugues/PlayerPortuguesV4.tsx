@@ -23,6 +23,8 @@ import { EnsinoVisual } from "./blocos/EnsinoVisual";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
+import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -90,8 +92,17 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
-export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+export function PlayerPortuguesV4(props: Props) {
+  return (
+    <AdaptativoProvider aulaSlug={`${props.cursoSlug}:${props.aula.slug}`}>
+      <PlayerPortuguesV4Inner {...props} />
+    </AdaptativoProvider>
+  );
+}
+
+function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
+
   // Skin infantil: Português do 1º e 2º ano.
   // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
   const tween =
@@ -128,8 +139,17 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
 
   useEffect(() => () => stopSpeaking(), []);
 
+  // ---- Motor adaptativo (Fase 1 do contrato do 1º ano) ----------------
+  const adaptativo = useAdaptativo();
+  const gateAtivo = cursoSlug === "portugues-1ano";
+  const totalAvaliacao = aula.momento10_avaliacao.perguntas.length;
+  useEffect(() => {
+    adaptativo?.declararAvaliacao(totalAvaliacao);
+  }, [adaptativo, totalAvaliacao]);
+
   const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+
 
   return (
     <KidsCtx.Provider value={{ kids, tween }}>
@@ -362,7 +382,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento05_compreensao.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={i} quiz={q} momento="m5" qid={`m5-${i}`} />
               ))}
             </div>
           </Secao>
@@ -372,7 +392,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             <Instrucao>{aula.momento06_personagensCenario.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento06_personagensCenario.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={i} quiz={q} momento="m6" qid={`m6-${i}`} />
               ))}
             </div>
           </Secao>
@@ -390,7 +410,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <LeituraIlustrada data={aula.momento08_leituraIndependente.leitura} />
               <div className="space-y-3">
                 {aula.momento08_leituraIndependente.perguntas.map((q, i) => (
-                  <QuizTexto key={i} quiz={q} />
+                  <QuizTexto key={i} quiz={q} momento="m8" qid={`m8-${i}`} />
                 ))}
               </div>
             </div>
@@ -448,7 +468,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </ul>
             {aula.momento09_revisao.miniDesafio && (
               <div className="mt-4">
-                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} />
+                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} momento="m9" qid="m9-desafio" />
               </div>
             )}
           </Secao>
@@ -457,10 +477,21 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           <Secao id="m10" label="✅ Avaliação">
             <div className="space-y-3">
               {aula.momento10_avaliacao.perguntas.map((q, i) => (
-                <QuizTexto key={i} quiz={q} />
+                <QuizTexto key={`m10-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m10" qid={`m10-${i}`} />
               ))}
             </div>
+            {adaptativo && gateAtivo && (
+              <PainelNota
+                respondidas={adaptativo.respondidasAvaliacao}
+                total={totalAvaliacao}
+                acertos={adaptativo.acertosAvaliacao}
+                nota={adaptativo.notaAvaliacao}
+                aprovado={adaptativo.aprovado}
+                onRefazer={adaptativo.reiniciarAvaliacao}
+              />
+            )}
           </Secao>
+
 
           {/* M11 · Missão em família */}
           <Secao id="m11" label="🏠 Missão em Família">
@@ -497,10 +528,19 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </Secao>
 
           <div className="pt-6 flex flex-col items-center gap-3">
+            {gateAtivo && adaptativo && !adaptativo.aprovado && (
+              <p className="text-center text-sm font-bold text-amber-200 max-w-md">
+                🔒 Responda a avaliação e acerte pelo menos{" "}
+                {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+              </p>
+            )}
             <button
               onClick={() => onConcluir?.()}
+              disabled={gateAtivo && !!adaptativo && !adaptativo.aprovado}
               className={
-                tween
+                gateAtivo && !!adaptativo && !adaptativo.aprovado
+                  ? "px-10 py-5 rounded-full bg-white/15 text-white/50 font-black text-xl cursor-not-allowed"
+                  : tween
                   ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
                   : kids
                   ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
@@ -513,6 +553,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               Sair para a trilha
             </Link>
           </div>
+
         </main>
       </div>
     </div>
@@ -619,3 +660,77 @@ function Instrucao({ children }: { children: React.ReactNode }) {
 }
 
 
+
+/**
+ * Painel de desempenho da avaliação (Fase 1 — 1º ano).
+ * Mostra acertos, nota e libera/bloqueia a conclusão da aula.
+ */
+function PainelNota({
+  respondidas,
+  total,
+  acertos,
+  nota,
+  aprovado,
+  onRefazer,
+}: {
+  respondidas: number;
+  total: number;
+  acertos: number;
+  nota: number;
+  aprovado: boolean;
+  onRefazer: () => void;
+}) {
+  const completou = respondidas >= total && total > 0;
+  const pct = Math.round(nota * 100);
+
+  return (
+    <div
+      className={`mt-4 rounded-2xl border-2 p-4 ${
+        aprovado
+          ? "bg-emerald-500/15 border-emerald-400/60"
+          : completou
+            ? "bg-rose-500/15 border-rose-400/60"
+            : "bg-white/10 border-white/20"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-3 text-sm font-black">
+        <span>📊 Respondidas: {respondidas}/{total}</span>
+        <span>
+          ✅ Acertos: {acertos} ({pct}%)
+        </span>
+      </div>
+      <div className="mt-2 h-3 rounded-full bg-black/30 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${
+            aprovado ? "bg-emerald-400" : "bg-amber-400"
+          }`}
+          style={{ width: `${Math.min(100, pct)}%` }}
+        />
+      </div>
+      {!completou && (
+        <p className="mt-2 text-xs text-white/80">
+          Meta: acertar pelo menos {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+        </p>
+      )}
+      {completou && aprovado && (
+        <p className="mt-2 text-sm font-bold text-emerald-200">
+          🌟 Muito bem! Você alcançou a meta e pode concluir a aula.
+        </p>
+      )}
+      {completou && !aprovado && (
+        <div className="mt-3">
+          <p className="text-sm font-bold text-rose-100">
+            Ainda não chegou em {Math.round(NOTA_MINIMA * 100)}%. Volte na leitura guiada
+            e na revisão, depois refaça a avaliação — você consegue!
+          </p>
+          <button
+            onClick={onRefazer}
+            className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#2b1258] font-black text-base active:scale-95 shadow"
+          >
+            🔄 Refazer a avaliação
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
