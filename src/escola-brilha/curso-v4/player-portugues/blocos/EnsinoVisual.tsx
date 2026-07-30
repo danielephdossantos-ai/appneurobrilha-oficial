@@ -17,7 +17,7 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
   if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
-  return null;
+  return <ConscienciaFonemica bloco={bloco} />;
 }
 
 // ---------- Alfabeto completo (26 letras clicáveis) ------------------
