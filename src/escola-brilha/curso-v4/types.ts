@@ -839,6 +839,8 @@ export type AulaPortuguesV4 = {
   momento06_personagensCenario: MomentoPersonagensCenario;
   momento07_sequencia: MomentoSequencia;
   momento08_leituraIndependente: MomentoLeituraIndependente;
+  /** Opcional — bloco de ESCRITA (traçado, ditado com sílabas, escrita real). */
+  momento_escrita?: MomentoEscrita;
   /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
   momento_minijogo?: MomentoMinijogo;
   /** Opcional — laboratório interativo (Geografia/Ciências). Aparece depois do minijogo. */
