@@ -40,7 +40,11 @@ export function ArrastarParaAlvo({ data }: { data: ArrastarParaAlvoData }) {
 
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-4">
-      <div className="text-sm font-bold text-white">🎯 {data.instrucao}</div>
+      <div className="flex items-center justify-between gap-2">
+        <div className="text-sm font-bold text-white">🎯 {data.instrucao}</div>
+        <BotaoOuvirEnunciado texto={data.instrucao} rotulo="Repetir" />
+      </div>
+
 
       {/* Itens soltos */}
       {itensSoltos.length > 0 && (
