@@ -28,8 +28,12 @@ export function SelecionarItens({ data }: { data: SelecionarItensData }) {
 
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
-      <div className="text-sm font-bold text-white">🛒 {data.instrucao}</div>
+      <div className="flex items-center justify-between gap-2">
+        <div className="text-sm font-bold text-white">🛒 {data.instrucao}</div>
+        <BotaoOuvirEnunciado texto={[data.instrucao, data.pergunta]} rotulo="Repetir" />
+      </div>
       <div className="text-base text-white">{data.pergunta}</div>
+
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
         {data.opcoes.map((o) => {
