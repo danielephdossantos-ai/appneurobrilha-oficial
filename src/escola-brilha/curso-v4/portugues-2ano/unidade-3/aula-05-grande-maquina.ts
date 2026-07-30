@@ -76,6 +76,7 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 Isso! Tudo isso te ajuda a LER e ESCREVER melhor.",
       feedbackErro:
         "A unidade teve 4 aulas: sílabas, alfabeto, palavras amigas/opostas e revisão da escrita.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -127,6 +128,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 CASA (aula das sílabas).",
         feedbackErro: "Junta na ORDEM: CA + SA = CASA.",
+        dica: "Volte no texto e procure a parte que fala de 'forma'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Junta na ORDEM: CA + SA = CASA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Entre ABELHA, CASA e BOLA, qual vem PRIMEIRO em ordem alfabética?",
@@ -134,6 +137,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 ABELHA (A antes de B e C).",
         feedbackErro: "A < B < C. ABELHA vem primeiro.",
+        dica: "Volte no texto e procure a parte que fala de 'alfabética'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A < B < C. ABELHA vem primeiro. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "GRANDE e ENORME são…",
@@ -142,6 +147,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Amigas.",
         feedbackErro:
           "Dá pra trocar 'GRANDE' por 'ENORME' sem mudar sentido. Amigas.",
+        dica: "Volte no texto e procure a parte que fala de 'grande'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Dá pra trocar 'GRANDE' por 'ENORME' sem mudar sentido. Amigas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Qual está CERTA?",
@@ -149,6 +156,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 CASA.",
         feedbackErro: "CA-SA = 4 letras. CASA.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: CA-SA = 4 letras. CASA. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -162,6 +171,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Sílabas.",
         feedbackErro: "SÍLABAS são os pedacinhos que formam a palavra.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Qual engrenagem ajuda a ORGANIZAR palavras?",
@@ -169,6 +179,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Alfabeto (ordem alfabética).",
         feedbackErro: "ALFABETO ajuda a organizar (A antes de B).",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Qual engrenagem ajuda a ESCREVER SEM ERRO?",
@@ -176,6 +187,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Revisar!",
         feedbackErro: "REVISAR = ler de novo pra achar erros.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -215,6 +227,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 LIVRO! ⚙️ A Máquina LIGOU!",
         feedbackErro: "Junte na ORDEM: LI + VRO = LIVRO.",
+        dica: "Volte no texto e procure a parte que fala de 'forma'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Junte na ORDEM: LI + VRO = LIVRO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Quantas sílabas tem LI-VRO?",
@@ -222,6 +236,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 2 sílabas.",
         feedbackErro: "LI (1) - VRO (2) = 2 palmas.",
+        dica: "Volte no texto e procure a parte que fala de 'quantas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: LI (1) - VRO (2) = 2 palmas. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -311,6 +327,8 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 ENORME — amiga de GRANDE. PEQUENO seria a OPOSTA.",
       feedbackErro:
         "GRANDE ≈ ENORME (amigas). PEQUENO é o OPOSTO.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: GRANDE ≈ ENORME (amigas). PEQUENO é o OPOSTO. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -322,6 +340,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 SAPATO.",
         feedbackErro: "Na ordem: SA + PA + TO = SAPATO.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Na ordem: SA + PA + TO = SAPATO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — DADO, ABELHA e GATO em ordem alfabética:",
@@ -333,6 +353,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 A · D · G.",
         feedbackErro: "Primeira letra: A, D, G. Essa é a ordem.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Primeira letra: A, D, G. Essa é a ordem. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Qual PAR é AMIGAS?",
@@ -341,6 +363,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Amigas!",
         feedbackErro:
           "Amigas = sentido parecido. BONITO ≈ LINDO. Os outros são opostos.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Amigas = sentido parecido. BONITO ≈ LINDO. Os outros são opostos. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Qual PAR é OPOSTAS?",
@@ -348,6 +372,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Opostas.",
         feedbackErro: "Opostas = contrárias. QUENTE ↔ FRIO.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Opostas = contrárias. QUENTE ↔ FRIO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Qual está escrita CERTA?",
@@ -357,6 +383,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 BANANA. 🏅 Você é CONSTRUTOR DAS PALAVRAS!",
         feedbackErro:
           "BA-NA-NA = 6 letras. BANANA (sem N dobrado).",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: BA-NA-NA = 6 letras. BANANA (sem N dobrado). Agora leia de novo e escolha com calma.",
       },
     ],
   },

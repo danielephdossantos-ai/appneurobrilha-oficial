@@ -53,6 +53,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Isso! O texto NÃO escreveu 'estava chovendo'. Mas mochila MOLHADA + entrou CORRENDO = provavelmente chovendo. Isso é INFERÊNCIA — descobrir nas entrelinhas.",
       feedbackErro:
         "Volte a ler: 'chovendo' NÃO aparece escrito. A gente DESCOBRE pela mochila molhada.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -110,6 +111,8 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Chegando das compras! Sacolas cheias nos dois braços = compras.",
         feedbackErro:
           "Sacolas cheias nos DOIS braços é pista de quem voltou das COMPRAS.",
+        dica: "Volte no texto e procure a parte que fala de 'dificuldade'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Sacolas cheias nos DOIS braços é pista de quem voltou das COMPRAS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -124,6 +127,8 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Sair! Correr em círculos ao lado da porta abanando o rabo = quer sair.",
         feedbackErro:
           "Perto da porta, agitado e abanando o rabo? O cachorro quer SAIR.",
+        dica: "Volte no texto e procure a parte que fala de 'cachorro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Perto da porta, agitado e abanando o rabo? O cachorro quer SAIR. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Inferência é…",
@@ -136,6 +141,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Descobrir!",
         feedbackErro:
           "Inferência = DESCOBRIR nas entrelinhas usando as pistas do texto.",
+        dica: "Volte no texto e procure a parte que fala de 'inferência'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Inferência = DESCOBRIR nas entrelinhas usando as pistas do texto. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -155,6 +162,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Aniversário!",
         feedbackErro:
           "Bolo com velinhas + todos cantando = FESTA DE ANIVERSÁRIO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Pra fazer INFERÊNCIA, a gente precisa…",
@@ -168,6 +176,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Pista do texto + o que você sabe do mundo = inferência.",
         feedbackErro:
           "É preciso JUNTAR as pistas do texto com o que a gente já sabe da vida.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -211,6 +220,8 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Bagunçado! Brinquedos espalhados + cobertor no chão = BAGUNÇA.",
         feedbackErro:
           "Brinquedos espalhados e cobertor no chão são pistas de BAGUNÇA.",
+        dica: "Volte no texto e procure a parte que fala de 'quarto'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Brinquedos espalhados e cobertor no chão são pistas de BAGUNÇA. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "BRINQUEDOS espalhados... cobertor... no CHÃO",
       },
       {
@@ -224,6 +235,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Cansada da bagunça!",
         feedbackErro:
           "O próprio texto diz 'cansada'. Somado à bagunça, ela suspirou por causa disso.",
+        dica: "Volte no texto e procure a parte que fala de 'suspirou'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O próprio texto diz 'cansada'. Somado à bagunça, ela suspirou por causa disso. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Ela suspirou, cansada.",
       },
     ],
@@ -250,6 +263,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Detetive! Pijama + escovar dentes + apagar luz + deitar = vai DORMIR.",
         feedbackErro:
           "Todas essas AÇÕES juntas mostram uma rotina de DORMIR. As outras opções não combinam.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'conclusão'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -272,6 +286,8 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Comeram muito!",
       feedbackErro:
         "Pratos vazios + barrigas estufadas = todo mundo COMEU muito.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Pratos vazios + barrigas estufadas = todo mundo COMEU muito. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -285,6 +301,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Atrasada!",
         feedbackErro:
           "Olhou o relógio e CORREU. Isso é pista de que estava ATRASADA.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Olhou o relógio e CORREU. Isso é pista de que estava ATRASADA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -294,6 +312,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Vai chover!",
         feedbackErro:
           "Céu escuro + vento forte + folhas voando = provavelmente vai CHOVER.",
+        dica: "Pista: a resposta certa começa com a letra 'V'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Céu escuro + vento forte + folhas voando = provavelmente vai CHOVER. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -303,6 +323,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O gato — o texto disse direto.",
         feedbackErro:
           "Essa não é entrelinha — o texto disse: 'O GATO comeu o peixe'.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Essa não é entrelinha — o texto disse: 'O GATO comeu o peixe'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -316,6 +338,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Aniversário!",
         feedbackErro:
           "Bolo + velinhas + presentes = FESTA DE ANIVERSÁRIO.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bolo + velinhas + presentes = FESTA DE ANIVERSÁRIO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Pra fazer INFERÊNCIA, sempre lembre de…",
@@ -328,6 +352,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Pista + o que eu sei!",
         feedbackErro:
           "Inferência = PISTA do texto + o que eu já SEI da vida.",
+        dica: "Pista: a resposta certa começa com a letra 'J'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Inferência = PISTA do texto + o que eu já SEI da vida. Agora leia de novo e escolha com calma.",
       },
     ],
   },

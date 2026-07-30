@@ -54,6 +54,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Muito bem! Mapa + baú + raposa = história de aventura pra achar tesouro.",
       feedbackErro:
         "Título: 'O Mapa da Raposa'. Pistas: raposa, mapa e baú. Combina com a primeira opção.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -110,6 +111,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Certo! 'DEBAIXO da folha seca'.",
         feedbackErro: "A primeira frase termina com 'debaixo da …'. Olhe lá.",
+        dica: "Volte no texto e procure a parte que fala de 'raposinha'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase termina com 'debaixo da …'. Olhe lá. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…achou um mapa antigo debaixo da folha seca.",
       },
       {
@@ -119,6 +122,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Boa! 'Atrás da ÁRVORE grande'.",
         feedbackErro:
           "O mapa diz 'siga a trilha, ATRÁS da …'. Qual coisa é essa?",
+        dica: "Volte no texto e procure a parte que fala de 'trilha'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O mapa diz 'siga a trilha, ATRÁS da …'. Qual coisa é essa? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…siga a trilha, atrás da árvore grande.",
       },
       {
@@ -128,6 +133,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Uma PONTE de madeira.",
         feedbackErro:
           "No terceiro parágrafo: 'depois da árvore, atravesse a …'. Onde?",
+        dica: "Volte no texto e procure a parte que fala de 'raposinha'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: No terceiro parágrafo: 'depois da árvore, atravesse a …'. Onde? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Depois da árvore, atravesse a ponte de madeira.",
       },
       {
@@ -137,6 +144,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Uma ESTRELA!",
         feedbackErro:
           "O texto fala 'um baú com uma … dentro'. O que estava dentro?",
+        dica: "Volte no texto e procure a parte que fala de 'dentro'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O texto fala 'um baú com uma … dentro'. O que estava dentro? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…um baú com uma estrela dentro.",
       },
     ],
@@ -153,6 +162,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 A RAPOSA — é ela quem age em todas as frases.",
         feedbackErro:
           "Quem AGE em toda a história? Quem acha o mapa e segue o caminho?",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Em qual ORDEM aparecem os lugares?",
@@ -166,6 +176,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Certo! Primeiro ÁRVORE, depois PONTE, depois PEDRA (com o baú).",
         feedbackErro:
           "Volte no mapa: 'atrás da ÁRVORE' → 'atravesse a PONTE' → 'embaixo da PEDRA'. Essa é a ordem.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "'Embaixo da pedra brilhante' — o que essas palavras mostram?",
@@ -179,6 +190,7 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Isso! 'Embaixo de' mostra um LUGAR. Bom leitor repara nessas palavras.",
         feedbackErro:
           "'Embaixo de' fala de POSIÇÃO — em cima, embaixo, atrás, dentro. É lugar.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -219,6 +231,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Um BILHETE.",
         feedbackErro:
           "A primeira frase diz 'tinha um … pequeno'. O que era?",
+        dica: "Volte no texto e procure a parte que fala de 'estrela'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase diz 'tinha um … pequeno'. O que era? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "…tinha um bilhete pequeno.",
       },
       {
@@ -228,6 +242,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 AURORA! O nome dela aparece depois do travessão.",
         feedbackErro:
           "No fim do bilhete tem um travessão e um nome. Esse é quem escreveu.",
+        dica: "Volte no texto e procure a parte que fala de 'escreveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: No fim do bilhete tem um travessão e um nome. Esse é quem escreveu. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "'… — Aurora'.",
       },
     ],
@@ -247,6 +263,8 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 LUGAR — embaixo, em cima, atrás, dentro.",
       feedbackErro:
         "'Embaixo de' mostra POSIÇÃO — é um LUGAR onde algo está.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Embaixo de' mostra POSIÇÃO — é um LUGAR onde algo está. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -258,6 +276,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Um MAPA!",
         feedbackErro: "A primeira frase: '…achou um MAPA antigo debaixo da folha seca.'",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A primeira frase: '…achou um MAPA antigo debaixo da folha seca.' Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Qual foi o PRIMEIRO lugar do caminho?",
@@ -266,6 +286,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Atrás da ÁRVORE.",
         feedbackErro:
           "Ordem: ÁRVORE → PONTE → PEDRA. Qual foi o primeiro?",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Ordem: ÁRVORE → PONTE → PEDRA. Qual foi o primeiro? Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — O que quer dizer 'depois da árvore'?",
@@ -278,6 +300,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "'DEPOIS de' = a gente passa pela primeira coisa e chega na próxima.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: DEPOIS de' = a gente passa pela primeira coisa e chega na próxima. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — O que tinha dentro do baú?",
@@ -286,6 +310,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Uma ESTRELA (e um bilhete dentro dela).",
         feedbackErro:
           "O texto diz: 'um baú com uma ESTRELA dentro'.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O texto diz: 'um baú com uma ESTRELA dentro'. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Quem escreveu o bilhete pra raposa?",
@@ -294,6 +320,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 AURORA! Livro despertado! 🗺️",
         feedbackErro:
           "No fim do bilhete: '— Aurora'. O nome depois do travessão é de quem escreveu.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: No fim do bilhete: '— Aurora'. O nome depois do travessão é de quem escreveu. Agora leia de novo e escolha com calma.",
       },
     ],
   },

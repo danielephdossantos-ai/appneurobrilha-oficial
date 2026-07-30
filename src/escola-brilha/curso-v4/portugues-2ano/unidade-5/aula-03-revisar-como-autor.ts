@@ -51,6 +51,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 SIM! Falta letra maiúscula em 'maria' e PONTOS separando as frases.",
       feedbackErro:
         "Olhe de novo: 'maria' com m minúsculo e SEM pontos separando o que ela fez. Precisa revisar.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -106,6 +107,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Falta MAIÚSCULA e PONTO: 'Ana foi à escola.'",
         feedbackErro:
           "'ana' com m minúsculo e SEM ponto no fim. Correto: 'Ana foi à escola.'",
+        dica: "Volte no texto e procure a parte que fala de 'checklist'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: ana' com m minúsculo e SEM ponto no fim. Correto: 'Ana foi à escola.' Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -120,6 +123,8 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 REPETIR palavra atoa deixa o texto ruim. Melhor: 'O menino correu muito.'",
         feedbackErro:
           "Palavra REPETIDA sem sentido atrapalha a leitura. Melhor: 'O menino correu muito.'",
+        dica: "Volte no texto e procure a parte que fala de 'menino'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Palavra REPETIDA sem sentido atrapalha a leitura. Melhor: 'O menino correu muito.' Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Pra que serve REVISAR?",
@@ -132,6 +137,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Pra MELHORAR!",
         feedbackErro:
           "Revisar = MELHORAR o texto pra ficar mais claro pra quem lê.",
+        dica: "Volte no texto e procure a parte que fala de 'revisar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Revisar = MELHORAR o texto pra ficar mais claro pra quem lê. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -150,6 +157,7 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Falta o PONTO: 'A bola rolou no jardim.'",
         feedbackErro: "Falta o PONTO no fim.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta:
@@ -159,6 +167,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 É uma PERGUNTA → 'Você vem comigo?'",
         feedbackErro:
           "É uma pergunta! Termina com INTERROGAÇÃO: 'Você vem comigo?'",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -204,6 +213,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Maiúscula em Lia e ponto no fim!",
         feedbackErro:
           "1) 'lia' → 'Lia' (maiúscula). 2) Falta PONTO no fim.",
+        dica: "Volte no texto e procure a parte que fala de 'problemas'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: 1) 'lia' → 'Lia' (maiúscula). 2) Falta PONTO no fim. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "lia comprou pão de manhã",
       },
       {
@@ -217,6 +228,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Ler de novo pra conferir!",
         feedbackErro:
           "Depois de consertar, o autor sempre LÊ DE NOVO pra ver se ficou bom.",
+        dica: "Volte no texto e procure a parte que fala de 'revisar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Depois de consertar, o autor sempre LÊ DE NOVO pra ver se ficou bom. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -243,6 +256,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Revisor de verdade! As certas começam com MAIÚSCULA e têm . ! ?",
         feedbackErro:
           "Confira cada frase: começa com maiúscula? Termina com . ! ou ? As duas frases sem maiúscula e sem ponto estão erradas.",
+        dica: "Leia a pergunta devagar e procure a parte que fala de 'dessas'. Elimine as opções que não combinam.",
       },
     },
   },
@@ -264,6 +278,8 @@ export const aula03: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Maiúscula + ponto = certa!",
       feedbackErro:
         "A frase precisa de MAIÚSCULA em Gustavo E de PONTO no fim.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: A frase precisa de MAIÚSCULA em Gustavo E de PONTO no fim. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -275,6 +291,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Maiúscula!",
         feedbackErro: "Toda frase começa com letra MAIÚSCULA.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Toda frase começa com letra MAIÚSCULA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 'Quero um doce' — qual pontuação combina?",
@@ -283,6 +301,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exclamação → 'Quero um doce!'",
         feedbackErro:
           "É um DESEJO com emoção → EXCLAMAÇÃO: 'Quero um doce!'",
+        dica: "Pista: a resposta certa começa com a letra 'E'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: É um DESEJO com emoção → EXCLAMAÇÃO: 'Quero um doce!' Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Revisar quer dizer…",
@@ -290,6 +310,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Ler de novo pra melhorar!",
         feedbackErro: "REVISAR = ler de novo pra MELHORAR o texto.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: REVISAR = ler de novo pra MELHORAR o texto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 'Cadê a chave' — qual pontuação combina?",
@@ -298,6 +320,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 É pergunta!",
         feedbackErro:
           "'Cadê a chave' é PERGUNTA → INTERROGAÇÃO (?).",
+        dica: "Pista: a resposta certa começa com a letra 'I'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cadê a chave' é PERGUNTA → INTERROGAÇÃO (?). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Qual está CERTA?",
@@ -310,6 +334,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Maiúscula no começo + ponto no fim!",
         feedbackErro:
           "Certa: 'O gato dormiu.' (maiúscula só em 'O' e PONTO no fim).",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Certa: 'O gato dormiu.' (maiúscula só em 'O' e PONTO no fim). Agora leia de novo e escolha com calma.",
       },
     ],
   },

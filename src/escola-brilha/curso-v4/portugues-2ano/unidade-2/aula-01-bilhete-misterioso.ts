@@ -64,6 +64,7 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso! Papel curto na porta = RECADO. Isso é um BILHETE.",
       feedbackErro:
         "História precisa de muitas páginas. Papelzinho pequeno serve pra deixar RECADO.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -118,6 +119,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 AURORA — o nome dela está no FINAL, é a assinatura.",
         feedbackErro:
           "A ASSINATURA está no fim do bilhete. Qual nome aparece lá?",
+        dica: "Volte no texto e procure a parte que fala de 'escreveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A ASSINATURA está no fim do bilhete. Qual nome aparece lá? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Aurora.",
       },
       {
@@ -128,6 +131,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Pra BRILHA — o nome está no COMEÇO, é o destinatário.",
         feedbackErro:
           "O DESTINATÁRIO fica no comecinho, seguido de vírgula. Qual nome está lá?",
+        dica: "Volte no texto e procure a parte que fala de 'bilhete'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O DESTINATÁRIO fica no comecinho, seguido de vírgula. Qual nome está lá? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Brilha,",
       },
       {
@@ -141,6 +146,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A mensagem é o RECADO do meio.",
         feedbackErro:
           "A mensagem é a FRASE do meio — entre o nome de quem recebe e a assinatura.",
+        dica: "Volte no texto e procure a parte que fala de 'mensagem'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A mensagem é a FRASE do meio — entre o nome de quem recebe e a assinatura. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Fui buscar novos livros na sala ao lado. Espere por mim.",
       },
     ],
@@ -161,6 +168,7 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Isso! DESTINATÁRIO (pra quem) + MENSAGEM (recado) + ASSINATURA (quem escreveu).",
         feedbackErro:
           "Bilhete tem 3 partes: quem RECEBE, o RECADO, e quem ESCREVEU (assinatura).",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Pra que serve um bilhete no dia a dia?",
@@ -173,6 +181,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! Bilhete = recado rápido.",
         feedbackErro:
           "Bilhete é CURTO. Serve pra avisar rápido: 'já volto', 'estou na escola', 'não me espere'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -224,6 +233,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 MAMÃE (é a assinatura, no final).",
         feedbackErro: "Olhe a ÚLTIMA linha — a assinatura.",
+        dica: "Volte no texto e procure a parte que fala de 'escreveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olhe a ÚLTIMA linha — a assinatura. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Mamãe.",
       },
       {
@@ -233,6 +244,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 A LIÇÃO. Só depois pode brincar.",
         feedbackErro:
           "O bilhete diz 'DEPOIS da lição, pode brincar'. Antes de brincar, o que ele faz?",
+        dica: "Volte no texto e procure a parte que fala de 'brincar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O bilhete diz 'DEPOIS da lição, pode brincar'. Antes de brincar, o que ele faz? Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Depois da lição, pode brincar no quintal.",
       },
     ],
@@ -301,6 +314,8 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 No FIM — chama-se assinatura.",
       feedbackErro:
         "Quem escreveu SEMPRE assina no FIM. É a assinatura.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Quem escreveu SEMPRE assina no FIM. É a assinatura. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -316,6 +331,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Recado rápido!",
         feedbackErro: "Bilhete é curto — serve pra RECADO.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bilhete é curto — serve pra RECADO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Em 'Brilha, fui buscar livros. Aurora.' — quem é o destinatário?",
@@ -324,6 +341,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 BRILHA — nome antes da vírgula, no começo.",
         feedbackErro:
           "Destinatário = quem RECEBE. Fica no começo, antes da vírgula.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Destinatário = quem RECEBE. Fica no começo, antes da vírgula. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — E quem é a assinatura?",
@@ -331,6 +350,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 AURORA — nome do final = assinatura.",
         feedbackErro: "Assinatura = nome de quem ESCREVEU. Fica no FINAL.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Assinatura = nome de quem ESCREVEU. Fica no FINAL. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Qual dessas é uma MENSAGEM de bilhete?",
@@ -343,6 +364,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Mensagem é o RECADO do meio.",
         feedbackErro:
           "Mensagem é o RECADO — a frase do meio, entre o destinatário e a assinatura.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Mensagem é o RECADO — a frase do meio, entre o destinatário e a assinatura. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Um bilhete que só tem 'Aurora.' está…",
@@ -356,6 +379,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Certo! Só a assinatura não é bilhete — falta destinatário e mensagem.",
         feedbackErro:
           "Bilhete precisa das 3 partes: destinatário, mensagem E assinatura.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Bilhete precisa das 3 partes: destinatário, mensagem E assinatura. Agora leia de novo e escolha com calma.",
       },
     ],
   },

@@ -56,6 +56,7 @@ export const aula02: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 A exclamação (!) mostra emoção forte, animada!",
       feedbackErro:
         "O ponto de EXCLAMAÇÃO (!) dá voz ANIMADA. Reticências (…) dão voz triste.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -101,6 +102,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Animada!",
         feedbackErro: "'!' mostra ANIMAÇÃO.",
+        dica: "Volte no texto e procure a parte que fala de 'brincar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: mostra ANIMAÇÃO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'Cadê o meu urso?' — qual voz?",
@@ -108,6 +111,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Pergunta!",
         feedbackErro: "'?' mostra que está PERGUNTANDO.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: mostra que está PERGUNTANDO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'Sumiu…' — qual voz?",
@@ -115,6 +120,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Triste!",
         feedbackErro: "'…' dá tom de tristeza ou pensamento.",
+        dica: "Volte no texto e procure a parte que fala de 'sumiu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: dá tom de tristeza ou pensamento. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -128,6 +135,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Dor ou susto!",
         feedbackErro: "'AI!' é grito de DOR ou SUSTO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "'Hummm…' é palavra de…",
@@ -135,6 +143,7 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Pensando!",
         feedbackErro: "'Hummm…' é a voz de quem está PENSANDO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -173,6 +182,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Carinhoso!",
         feedbackErro: "'!' com 'querido' mostra CARINHO forte.",
+        dica: "Volte no texto e procure a parte que fala de 'netinho'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: com 'querido' mostra CARINHO forte. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Netinho querido!",
       },
       {
@@ -181,6 +192,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Saudade!",
         feedbackErro: "'…' junto com 'saudade' dá tom TRISTE de quem sente falta.",
+        dica: "Volte no texto e procure a parte que fala de 'saudade'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: junto com 'saudade' dá tom TRISTE de quem sente falta. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Saudade de você…",
       },
     ],
@@ -222,6 +235,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Animado!",
       feedbackErro: "'!' + ganhar presente = ANIMAÇÃO.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: ganhar presente = ANIMAÇÃO. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -233,6 +248,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Animação!",
         feedbackErro: "'!' mostra emoção FORTE.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: mostra emoção FORTE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — O sinal '?' dá tom de…",
@@ -240,6 +257,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Pergunta!",
         feedbackErro: "'?' é sempre PERGUNTA.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: é sempre PERGUNTA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — '…' dá tom de…",
@@ -247,6 +266,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Triste ou pensando!",
         feedbackErro: "'…' é usado pra tristeza ou pausa pensando.",
+        dica: "Pista: a resposta certa começa com a letra 'G'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: é usado pra tristeza ou pausa pensando. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 'Ai!' e 'Ai…' têm o mesmo tom?",
@@ -254,6 +275,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Não! O sinal muda tudo.",
         feedbackErro: "As palavras iguais mudam o tom por causa do SINAL.",
+        dica: "Pista: a resposta certa começa com a letra 'N'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: As palavras iguais mudam o tom por causa do SINAL. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — 'Que dia lindo!' — tom?",
@@ -261,6 +284,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Alegre!",
         feedbackErro: "'dia lindo' + '!' = tom ALEGRE.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: dia lindo' + '!' = tom ALEGRE. Agora leia de novo e escolha com calma.",
       },
     ],
   },

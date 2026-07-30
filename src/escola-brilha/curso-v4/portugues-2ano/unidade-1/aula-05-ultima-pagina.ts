@@ -70,6 +70,7 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 Isso! A capa mostra TODOS os personagens antigos — o livro junta eles.",
       feedbackErro:
         "Olhe as pistas: aparece Piu, o girassol, o coelho e a raposa — os personagens das aulas antes.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -117,6 +118,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 De NOITE, com a lua brilhando.",
         feedbackErro: "A primeira frase começa com 'De …, com a lua brilhando…'.",
+        dica: "Volte no texto e procure a parte que fala de 'reuniram'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase começa com 'De …, com a lua brilhando…'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "De noite, com a lua brilhando na janela…",
       },
       {
@@ -126,6 +129,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O MAPA! Lembra da aventura dela?",
         feedbackErro:
           "Cada personagem trouxe UMA coisa. Procure 'A raposa apareceu com …'.",
+        dica: "Volte no texto e procure a parte que fala de 'raposa'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Cada personagem trouxe UMA coisa. Procure 'A raposa apareceu com …'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "A raposa apareceu com o mapa dobradinho.",
       },
       {
@@ -139,6 +144,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 BRILHARAM juntos!",
         feedbackErro:
           "Olhe o último parágrafo: 'os livros da estante começaram a …'.",
+        dica: "Volte no texto e procure a parte que fala de 'aconteceu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Olhe o último parágrafo: 'os livros da estante começaram a …'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Todos os livros da estante começaram a brilhar juntos.",
       },
     ],
@@ -160,6 +167,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Certo! Piu apareceu na primeira aula, na JANELA de Aurora.",
         feedbackErro:
           "Piu é o passarinho AZUL que pousava no poleiro da janela.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "De qual história veio o GIRASSOL?",
@@ -173,6 +181,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Boa! A SEMENTE curiosa virou girassol.",
         feedbackErro:
           "Lembra da semente pequenina e curiosa? Ela cresceu e virou um GIRASSOL.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Onde acontece a reunião?",
@@ -185,6 +194,7 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Na BIBLIOTECA! É onde a gente esteve o tempo todo.",
         feedbackErro:
           "A primeira frase termina com 'se reuniram na … de Aurora'.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -234,6 +244,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Que final lindo! Você é oficialmente uma boa leitora / bom leitor.",
         feedbackErro:
           "Aqui não tem resposta errada — todas são bonitas! Escolha a primeira e continue.",
+        dica: "Volte no texto e procure a parte que fala de 'biblioteca'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Aqui não tem resposta errada — todas são bonitas! Escolha a primeira e continue. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Quem entregou a pena dourada?",
@@ -242,6 +254,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 AURORA, a bibliotecária.",
         feedbackErro:
           "A primeira frase diz 'AURORA entregou uma pena dourada…'.",
+        dica: "Volte no texto e procure a parte que fala de 'entregou'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A primeira frase diz 'AURORA entregou uma pena dourada…'. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Aurora entregou uma pena dourada pra criança…",
       },
     ],
@@ -267,6 +281,8 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 Isso! Olhar, ler com calma e VOLTAR no texto — esse é o segredo.",
       feedbackErro:
         "Bom leitor NÃO adivinha. Ele lê com calma e volta no texto pra confirmar.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Bom leitor NÃO adivinha. Ele lê com calma e volta no texto pra confirmar. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -278,6 +294,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Passarinho!",
         feedbackErro: "Piu é o PASSARINHO azul da janela de Aurora.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Piu é o PASSARINHO azul da janela de Aurora. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — A semente curiosa virou o quê?",
@@ -285,6 +303,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 GIRASSOL!",
         feedbackErro: "A semente pequenina e curiosa brotou e virou um GIRASSOL.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: A semente pequenina e curiosa brotou e virou um GIRASSOL. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — O travessão (—) serve pra…",
@@ -297,6 +317,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "O travessão aparece antes das FALAS dos personagens.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O travessão aparece antes das FALAS dos personagens. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 'Atrás da árvore' é uma palavra de…",
@@ -304,6 +326,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 LUGAR!",
         feedbackErro: "'Atrás de' mostra POSIÇÃO — é um LUGAR.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Atrás de' mostra POSIÇÃO — é um LUGAR. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Onde acontecem TODAS as histórias dessa unidade?",
@@ -317,6 +341,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Na BIBLIOTECA ENCANTADA! Você virou Guardião da Primeira Página! 🏅",
         feedbackErro:
           "Todas as histórias saíram dos LIVROS da biblioteca de Aurora.",
+        dica: "Pista: a resposta certa começa com a letra 'N'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Todas as histórias saíram dos LIVROS da biblioteca de Aurora. Agora leia de novo e escolha com calma.",
       },
     ],
   },

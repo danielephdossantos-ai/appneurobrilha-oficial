@@ -68,6 +68,7 @@ export const aula05: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Planejar sempre vem primeiro!",
       feedbackErro:
         "Autor sempre começa PLANEJANDO — pensando na história antes de escrever.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -123,6 +124,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Planejar!",
         feedbackErro: "O passo 1 é sempre PLANEJAR (quem, onde, o quê).",
+        dica: "Volte no texto e procure a parte que fala de 'passo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O passo 1 é sempre PLANEJAR (quem, onde, o quê). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "Ilustrar quer dizer…",
@@ -130,6 +133,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Desenhar pra ajudar o texto!",
         feedbackErro: "Ilustrar = fazer o DESENHO que combina com o texto.",
+        dica: "Volte no texto e procure a parte que fala de 'ilustrar'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Ilustrar = fazer o DESENHO que combina com o texto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "O último passo é…",
@@ -138,6 +143,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Publicar!",
         feedbackErro:
           "Publicar (compartilhar) é o ÚLTIMO passo — depois de tudo pronto.",
+        dica: "Volte no texto e procure a parte que fala de 'último'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Publicar (compartilhar) é o ÚLTIMO passo — depois de tudo pronto. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -158,6 +165,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 Título, personagens, cenário, problema e solução!",
         feedbackErro:
           "Uma boa história tem: TÍTULO + PERSONAGENS + CENÁRIO + PROBLEMA + SOLUÇÃO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "'Problema' na história é…",
@@ -171,6 +179,7 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 O problema é o que ACONTECE e move a história.",
         feedbackErro:
           "Problema da história = algo que ACONTECE com o personagem e precisa ser resolvido.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -220,6 +229,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 O livro trancado!",
         feedbackErro:
           "O problema era o LIVRO TRANCADO por cadeado mágico.",
+        dica: "Volte no texto e procure a parte que fala de 'problema'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: O problema era o LIVRO TRANCADO por cadeado mágico. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "livro estava trancado por um cadeado mágico",
       },
       {
@@ -233,6 +244,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Escrevendo a história com a pena dourada!",
         feedbackErro:
           "A solução foi USAR A PENA DOURADA e escrever a história que faltava.",
+        dica: "Volte no texto e procure a parte que fala de 'resolveu'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: A solução foi USAR A PENA DOURADA e escrever a história que faltava. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto:
           "Brilha usou a PENA DOURADA e escreveu a história que faltava",
       },
@@ -279,6 +292,8 @@ export const aula05: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Ilustrar!",
       feedbackErro: "Depois de REVISAR, o autor ILUSTRA e depois PUBLICA.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Depois de REVISAR, o autor ILUSTRA e depois PUBLICA. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -290,6 +305,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Planejar!",
         feedbackErro: "O primeiro passo é PLANEJAR (quem, onde, o quê).",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: O primeiro passo é PLANEJAR (quem, onde, o quê). Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Ilustração é…",
@@ -301,6 +318,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Desenho que acompanha!",
         feedbackErro: "Ilustração = DESENHO que acompanha o texto.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Ilustração = DESENHO que acompanha o texto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Toda história do livro tem…",
@@ -313,6 +332,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "Uma boa história tem: título + personagens + cenário + PROBLEMA + SOLUÇÃO.",
+        dica: "Pista: a resposta certa começa com a letra 'T'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Uma boa história tem: título + personagens + cenário + PROBLEMA + SOLUÇÃO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Publicar quer dizer…",
@@ -325,6 +346,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Deixar pronto pra outros lerem!",
         feedbackErro:
           "Publicar = deixar o texto PRONTO no portfólio pra outras pessoas lerem.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Publicar = deixar o texto PRONTO no portfólio pra outras pessoas lerem. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Antes de PUBLICAR o livro, o autor sempre…",
@@ -332,6 +355,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Revisa!",
         feedbackErro: "Antes de publicar, o autor SEMPRE revisa.",
+        dica: "Pista: a resposta certa começa com a letra 'E'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Antes de publicar, o autor SEMPRE revisa. Agora leia de novo e escolha com calma.",
       },
     ],
   },

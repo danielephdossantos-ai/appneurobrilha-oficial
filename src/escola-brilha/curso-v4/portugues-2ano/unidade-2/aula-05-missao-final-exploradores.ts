@@ -71,6 +71,7 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 Isso! Bilhete tem destinatário e assinatura, convite tem data e local, lista tem itens em linha, cartaz tem letras GRANDES.",
       feedbackErro:
         "Não é a cor nem a caneta. É o FORMATO: cada gênero tem um jeito próprio.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -122,6 +123,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 BILHETE — tem destinatário (Brilha,), mensagem e assinatura (Aurora).",
         feedbackErro:
           "Tem NOME no começo com vírgula e ASSINATURA no fim. É bilhete.",
+        dica: "Volte no texto e procure a parte que fala de 'brilha'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Tem NOME no começo com vírgula e ASSINATURA no fim. É bilhete. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'Festa dos Livros. Sábado, 15h, na biblioteca.' — o que é?",
@@ -130,6 +133,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 CONVITE — tem motivo, data, hora e local.",
         feedbackErro:
           "Fala QUANDO, ONDE e POR QUÊ tem um evento. Isso é CONVITE.",
+        dica: "Volte no texto e procure a parte que fala de 'biblioteca'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Fala QUANDO, ONDE e POR QUÊ tem um evento. Isso é CONVITE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'• Livros • Lápis • Papel • Giz' — o que é?",
@@ -138,6 +143,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 LISTA — vários itens, cada um marcado.",
         feedbackErro:
           "Vários ITENS, um do lado do outro (ou um por linha). É uma LISTA.",
+        dica: "Volte no texto e procure a parte que fala de 'livros'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Vários ITENS, um do lado do outro (ou um por linha). É uma LISTA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "'SILÊNCIO. Pessoas lendo.' — pra que serve?",
@@ -149,6 +156,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! CARTAZ avisa MUITAS pessoas.",
         feedbackErro: "Frase curta e forte, pra MUITA gente ler. É cartaz/aviso.",
+        dica: "Volte no texto e procure a parte que fala de 'silêncio'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Frase curta e forte, pra MUITA gente ler. É cartaz/aviso. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -166,6 +175,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Bilhete = RECADO curto. Convite = evento. Lista = organizar.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "A finalidade do CONVITE é…",
@@ -177,6 +187,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Convite CHAMA pra um evento (festa, jantar, encontro).",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "A finalidade da LISTA é…",
@@ -188,6 +199,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Lista ORGANIZA — itens um por linha.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "A finalidade do CARTAZ é…",
@@ -199,6 +211,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Cartaz é PÚBLICO. Muita gente vê.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -238,6 +251,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 LISTA — vários itens marcados.",
         feedbackErro: "Vários itens com • na frente = LISTA.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Vários itens com • na frente = LISTA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "O TEXTO B é…",
@@ -245,6 +260,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 CONVITE — tem motivo (aniversário), data, hora, local.",
         feedbackErro: "Fala do evento, quando e onde. É CONVITE.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Fala do evento, quando e onde. É CONVITE. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -330,6 +347,8 @@ export const aula05: AulaPortuguesV4 = {
         "🎉 Isso! Formato + finalidade = a gente reconhece o gênero.",
       feedbackErro:
         "O FORMATO (como está escrito) e a FINALIDADE (pra que serve) dizem que gênero é.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: O FORMATO (como está escrito) e a FINALIDADE (pra que serve) dizem que gênero é. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -341,6 +360,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 BILHETE (destinatário + mensagem + assinatura).",
         feedbackErro: "Nome no começo, recado, nome no fim = BILHETE.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Nome no começo, recado, nome no fim = BILHETE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 'Festa. Domingo, 15h, na praça.' é…",
@@ -348,6 +369,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 CONVITE!",
         feedbackErro: "Diz o QUANDO e o ONDE do evento = CONVITE.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Diz o QUANDO e o ONDE do evento = CONVITE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — '• Bola • Boneca • Pião' é…",
@@ -355,6 +378,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 LISTA!",
         feedbackErro: "Itens com • cada um = LISTA.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Itens com • cada um = LISTA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Um papel gigante na parede com 'CUIDADO! CHÃO MOLHADO' é…",
@@ -363,6 +388,8 @@ export const aula05: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 CARTAZ/AVISO!",
         feedbackErro:
           "Papel GIGANTE na PAREDE pra muita gente ver = CARTAZ.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Papel GIGANTE na PAREDE pra muita gente ver = CARTAZ. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Qual gênero é pra UMA pessoa só?",
@@ -372,6 +399,8 @@ export const aula05: AulaPortuguesV4 = {
           "🎉 BILHETE — só pra o destinatário. 🏅 Explorador dos Textos!",
         feedbackErro:
           "Cartaz é pra MUITAS. Lista é pra a família toda. BILHETE é pra UMA pessoa.",
+        dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Cartaz é pra MUITAS. Lista é pra a família toda. BILHETE é pra UMA pessoa. Agora leia de novo e escolha com calma.",
       },
     ],
   },

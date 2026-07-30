@@ -64,6 +64,7 @@ export const aula05: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 As 4 medalhas juntas!",
       feedbackErro: "Grande leitor usa TUDO: pistas + tom + causa/resultado + palpite.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -112,6 +113,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 As pistas mostram: secou, cuidou.",
         feedbackErro: "Pistas: 'secou', 'cuidou' → AJUDOU.",
+        dica: "Volte no texto e procure a parte que fala de 'palavras'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pistas: 'secou', 'cuidou' → AJUDOU. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "🎭 'Que dia lindo!' — tom da Bia é…",
@@ -119,6 +122,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Animado!",
         feedbackErro: "'!' + 'lindo' = tom ANIMADO.",
+        dica: "Volte no texto e procure a parte que fala de 'lindo'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: lindo' = tom ANIMADO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "🧩 Por que a festa foi cancelada?",
@@ -130,6 +135,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Chuva → cancelou.",
         feedbackErro: "PORQUE ia chover, a festa foi cancelada.",
+        dica: "Volte no texto e procure a parte que fala de 'cancelada'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: PORQUE ia chover, a festa foi cancelada. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -147,6 +154,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Palpite com motivo do texto!",
         feedbackErro: "Bom palpite tem PORQUÊ ligado a algo que aconteceu.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "O dia ficou LINDO pra Bia PORQUE…",
@@ -158,6 +166,7 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Ajudou e viu o abraço!",
         feedbackErro: "A pista do 'dia lindo' é a AJUDA e o ABRAÇO no final.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -199,6 +208,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Estava sozinho!",
         feedbackErro: "'sozinho' é PISTA de que não estava bem.",
+        dica: "Volte no texto e procure a parte que fala de 'sentia'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: sozinho' é PISTA de que não estava bem. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Léo era novo… ficou SOZINHO no recreio",
       },
       {
@@ -211,6 +222,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Foi aceito e fez gol!",
         feedbackErro: "Foi aceito (Ana chamou) + fez gol → riu.",
+        dica: "Volte no texto e procure a parte que fala de 'final'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Foi aceito (Ana chamou) + fez gol → riu. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "chamou Léo pro time / fez um gol / abraçaram",
       },
       {
@@ -223,6 +236,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Palpite com motivo do texto!",
         feedbackErro: "Motivo do texto: Ana CHAMOU Léo pro time.",
+        dica: "Volte no texto e procure a parte que fala de 'palpite'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Motivo do texto: Ana CHAMOU Léo pro time. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "Ana viu e CHAMOU Léo",
       },
     ],
@@ -292,6 +307,8 @@ export const aula05: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 As 4 medalhas juntas!",
       feedbackErro: "Grande leitor usa as 4: pistas, tom, causa/resultado, palpite.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Grande leitor usa as 4: pistas, tom, causa/resultado, palpite. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -303,6 +320,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Descobrir!",
         feedbackErro: "Pistas = dicas pra DESCOBRIR.",
+        dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Pistas = dicas pra DESCOBRIR. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — 🎭 '!' dá tom de…",
@@ -310,6 +329,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Animação!",
         feedbackErro: "'!' = animação, emoção forte.",
+        dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: animação, emoção forte. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — 🧩 'PORQUE' mostra…",
@@ -317,6 +338,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 A causa!",
         feedbackErro: "PORQUE = motivo, CAUSA.",
+        dica: "Pista: a resposta certa começa com a letra 'O'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: PORQUE = motivo, CAUSA. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — 💭 Palpite bom tem…",
@@ -324,6 +347,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Motivo do texto!",
         feedbackErro: "Palpite bom = OPINIÃO + PORQUÊ do texto.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Palpite bom = OPINIÃO + PORQUÊ do texto. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Um GRANDE LEITOR usa…",
@@ -335,6 +360,8 @@ export const aula05: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 As 4 juntas!",
         feedbackErro: "Grande leitor usa PISTAS + TOM + CAUSA/RESULTADO + PALPITE.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Grande leitor usa PISTAS + TOM + CAUSA/RESULTADO + PALPITE. Agora leia de novo e escolha com calma.",
       },
     ],
   },

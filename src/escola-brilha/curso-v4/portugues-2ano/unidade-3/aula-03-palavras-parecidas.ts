@@ -61,6 +61,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Isso! FELIZ e ALEGRE são AMIGAS — significam quase a mesma coisa.",
       feedbackErro:
         "Pensa: 'Estou FELIZ' ≈ 'Estou ALEGRE'. Dá pra trocar uma pela outra. Elas são AMIGAS.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -109,6 +110,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Amigas — querem dizer quase o mesmo.",
         feedbackErro:
           "'Um GRANDE elefante' ≈ 'Um ENORME elefante'. Trocáveis. Amigas.",
+        dica: "Volte no texto e procure a parte que fala de 'grande'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Um GRANDE elefante' ≈ 'Um ENORME elefante'. Trocáveis. Amigas. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "DIA e NOITE são…",
@@ -116,6 +119,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 OPOSTAS — uma é o contrário da outra.",
         feedbackErro: "DIA tem sol ☀️, NOITE tem lua 🌙. São OPOSTAS.",
+        dica: "Volte no texto e procure a parte que fala de 'noite'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: DIA tem sol ☀️, NOITE tem lua 🌙. São OPOSTAS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "TRISTE é o CONTRÁRIO de qual palavra?",
@@ -123,6 +128,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 ALEGRE — oposta de TRISTE.",
         feedbackErro: "Quem está TRISTE não está ALEGRE. Opostas.",
+        dica: "Volte no texto e procure a parte que fala de 'contrário'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Quem está TRISTE não está ALEGRE. Opostas. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -136,6 +143,7 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Opostas — temperaturas contrárias.",
         feedbackErro: "Sopa QUENTE ≠ sorvete FRIO. São OPOSTAS.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "BONITO e LINDO são…",
@@ -144,6 +152,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Amigas — significados parecidos.",
         feedbackErro:
           "'Um dia BONITO' ≈ 'Um dia LINDO'. Dá pra trocar. Amigas.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta: "Qual PAR é de OPOSTAS?",
@@ -152,6 +161,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 ALTO ↔ BAIXO — opostas.",
         feedbackErro:
           "Alegre/feliz e grande/enorme são AMIGAS. ALTO e BAIXO são OPOSTAS.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -192,6 +202,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 QUENTE — combina com sol.",
         feedbackErro: "Sol esquenta. Fica QUENTE.",
+        dica: "Volte no texto e procure a parte que fala de 'muito'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Sol esquenta. Fica QUENTE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2) O elefante é ______.",
@@ -199,6 +211,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 GRANDE — ou poderia usar a amiga ENORME.",
         feedbackErro: "Elefante é ANIMAL BEM GRANDE. Ou ENORME.",
+        dica: "Volte no texto e procure a parte que fala de 'elefante'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Elefante é ANIMAL BEM GRANDE. Ou ENORME. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3) No inverno faz muito ______.",
@@ -206,6 +220,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 FRIO — oposto de quente.",
         feedbackErro: "Inverno = tempo FRIO.",
+        dica: "Volte no texto e procure a parte que fala de 'inverno'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Inverno = tempo FRIO. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -255,6 +271,8 @@ export const aula03: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 BAIXO — oposto de ALTO.",
       feedbackErro:
         "Torre é ALTA. Bebê é BAIXO. Opostos.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Torre é ALTA. Bebê é BAIXO. Opostos. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -266,6 +284,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Amigas!",
         feedbackErro: "Significados parecidos = AMIGAS.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Significados parecidos = AMIGAS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — DIA e NOITE são…",
@@ -273,6 +293,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Opostas.",
         feedbackErro: "Contrários = OPOSTAS.",
+        dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Contrários = OPOSTAS. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Uma AMIGA de RÁPIDO é…",
@@ -281,6 +303,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 VELOZ.",
         feedbackErro:
           "RÁPIDO ≈ VELOZ. DEVAGAR e PARADO são OPOSTAS de rápido.",
+        dica: "Pista: a resposta certa começa com a letra 'V'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: RÁPIDO ≈ VELOZ. DEVAGAR e PARADO são OPOSTAS de rápido. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "4/5 — Uma OPOSTA de QUENTE é…",
@@ -288,6 +312,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 FRIO.",
         feedbackErro: "Contrário de QUENTE = FRIO.",
+        dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Contrário de QUENTE = FRIO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Trocar palavras por AMIGAS deixa o texto…",
@@ -300,6 +326,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Mais rico!",
         feedbackErro:
           "Trocando por AMIGAS a gente evita repetição e escreve mais bonito.",
+        dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Trocando por AMIGAS a gente evita repetição e escreve mais bonito. Agora leia de novo e escolha com calma.",
       },
     ],
   },

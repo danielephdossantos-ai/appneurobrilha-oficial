@@ -56,6 +56,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Bilhete de agradecimento! Cada situação pede um tipo diferente.",
       feedbackErro:
         "Convite é pra festa, descrição é pra descrever. Pra AGRADECER, o texto certo é um BILHETE.",
+      dica: "Olhe de novo o TÍTULO e as imagens da capa. A previsão precisa combinar com as pistas que você vê.",
     },
   },
 
@@ -106,6 +107,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 CONVITE!",
         feedbackErro:
           "Pra CHAMAR alguém pra festa, o texto certo é um CONVITE.",
+        dica: "Volte no texto e procure a parte que fala de 'aniversário'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pra CHAMAR alguém pra festa, o texto certo é um CONVITE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -115,6 +118,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Descrição!",
         feedbackErro:
           "Pra dizer COMO ele é (cor, tamanho, pelo), escrevemos uma DESCRIÇÃO.",
+        dica: "Volte no texto e procure a parte que fala de 'descrever'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pra dizer COMO ele é (cor, tamanho, pelo), escrevemos uma DESCRIÇÃO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -124,6 +129,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Bilhete!",
         feedbackErro:
           "Pra avisar UMA pessoa rapidinho, o certo é um BILHETE.",
+        dica: "Volte no texto e procure a parte que fala de 'vizinha'. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Pra avisar UMA pessoa rapidinho, o certo é um BILHETE. Agora leia de novo e escolha com calma.",
       },
     ],
   },
@@ -139,6 +146,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Convite!",
         feedbackErro:
           "Diz o QUANDO, ONDE e O QUE vai ter = CONVITE de festa.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
       {
         pergunta:
@@ -147,6 +155,7 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Agradecimento!",
         feedbackErro: "'Obrigada' é palavra de AGRADECIMENTO.",
+        dica: "Lembre: PERSONAGEM é quem faz as ações; CENÁRIO é onde a cena acontece. Releia procurando isso.",
       },
     ],
   },
@@ -188,6 +197,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Bilhete de agradecimento!",
         feedbackErro: "'Muito obrigado pela bola' → AGRADECIMENTO.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Muito obrigado pela bola' → AGRADECIMENTO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "OBRIGADO pela bola nova",
       },
       {
@@ -197,6 +208,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Descrição — diz COMO o gato é.",
         feedbackErro:
           "Fala do TIPO de olhos, pelo e rabo do gato = DESCRIÇÃO.",
+        dica: "Volte no texto e procure a parte que responde a pergunta. A resposta está escrita lá.",
+        reensino: "Vamos entender juntos: Fala do TIPO de olhos, pelo e rabo do gato = DESCRIÇÃO. Agora leia de novo e escolha com calma.",
         ondeEstaNoTexto: "OLHOS VERDES, pelo cinza",
       },
     ],
@@ -264,6 +277,8 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Bilhete / cartinha pra vovó!",
       feedbackErro:
         "Pra contar do seu dia PRA UMA pessoa querida, escreve um BILHETE / CARTINHA.",
+      dica: "Pense no que você aprendeu hoje e vá eliminando as opções que não combinam.",
+      reensino: "Vamos entender juntos: Pra contar do seu dia PRA UMA pessoa querida, escreve um BILHETE / CARTINHA. Agora leia de novo e escolha com calma.",
     },
   },
 
@@ -275,6 +290,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Convite!",
         feedbackErro: "Chamar pra festa = CONVITE.",
+        dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Chamar pra festa = CONVITE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "2/5 — Você achou um cachorro e quer fazer um cartaz. Escreve uma…",
@@ -282,6 +299,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Descrição!",
         feedbackErro: "Contar como o cachorro é = DESCRIÇÃO.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Contar como o cachorro é = DESCRIÇÃO. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "3/5 — Você quer avisar a mãe que foi na vizinha. Escreve…",
@@ -289,6 +308,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Bilhete!",
         feedbackErro: "Aviso curto pra UMA pessoa = BILHETE.",
+        dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Aviso curto pra UMA pessoa = BILHETE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta:
@@ -297,6 +318,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Convite!",
         feedbackErro: "Diz QUANDO, ONDE e O QUE = CONVITE.",
+        dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Diz QUANDO, ONDE e O QUE = CONVITE. Agora leia de novo e escolha com calma.",
       },
       {
         pergunta: "5/5 — Antes de escrever a gente sempre pensa em…",
@@ -309,6 +332,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Pra quem e pra quê!",
         feedbackErro:
           "Autor sempre pensa: PRA QUEM eu vou escrever e PRA QUÊ.",
+        dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
+        reensino: "Vamos entender juntos: Autor sempre pensa: PRA QUEM eu vou escrever e PRA QUÊ. Agora leia de novo e escolha com calma.",
       },
     ],
   },
