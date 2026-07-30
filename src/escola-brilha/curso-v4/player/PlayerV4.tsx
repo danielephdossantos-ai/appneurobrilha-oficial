@@ -7,6 +7,7 @@ import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 
 import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
 import { useAppState } from "@/core/store";
@@ -107,6 +108,7 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
         </aside>
 
         <main className="flex-1 space-y-8 min-w-0">
+          <AquecimentoRevisao cursoSlug={cursoSlug} aulaSlug={aula.slug} />
           <Secao id="m1" label="🎬 Motivação"><Motivacao m={aula.momento01_motivacao} /></Secao>
           <Secao id="m2" label="👀 Exploração"><Exploracao m={aula.momento02_exploracao} /></Secao>
           <Secao id="m3" label="💡 Descoberta"><Descoberta m={aula.momento03_descoberta} /></Secao>

@@ -24,6 +24,7 @@ import { Escrita } from "./blocos/Escrita";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
 
 
@@ -311,6 +312,14 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
         </aside>
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
+
+          {/* M0 · Aquecimento — revisão espaçada (3 itens de aulas anteriores) */}
+          <AquecimentoRevisao
+            cursoSlug={cursoSlug}
+            aulaSlug={aula.slug}
+            kids={kids}
+            tween={tween}
+          />
 
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
