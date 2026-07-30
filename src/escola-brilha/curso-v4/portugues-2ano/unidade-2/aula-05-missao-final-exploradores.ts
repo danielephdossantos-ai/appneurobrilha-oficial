@@ -356,8 +356,16 @@ export const aula05: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — 'Aurora, cheguei em casa. Brilha.' é…",
-        opcoes: ["Bilhete", "Cartaz", "Lista"],
+        opcoes: ["Bilhete", "Cartaz", "Lista",
+          "Um bilhete",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Cartaz» não é a resposta. A certa é «Bilhete».",
+          "«Lista» não é a resposta. A certa é «Bilhete».",
+          "«Um bilhete» não é a resposta. A certa é «Bilhete».",
+        ],
         feedbackAcerto: "🎉 BILHETE (destinatário + mensagem + assinatura).",
         feedbackErro: "Nome no começo, recado, nome no fim = BILHETE.",
         dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
@@ -365,8 +373,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — 'Festa. Domingo, 15h, na praça.' é…",
-        opcoes: ["Lista", "Convite", "Cartaz"],
+        opcoes: ["Lista", "Convite", "Cartaz",
+          "Uma lista",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Lista» não é a resposta. A certa é «Convite».",
+          null,
+          "«Cartaz» não é a resposta. A certa é «Convite».",
+          "«Uma lista» não é a resposta. A certa é «Convite».",
+        ],
         feedbackAcerto: "🎉 CONVITE!",
         feedbackErro: "Diz o QUANDO e o ONDE do evento = CONVITE.",
         dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
@@ -374,8 +390,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — '• Bola • Boneca • Pião' é…",
-        opcoes: ["Lista", "Bilhete", "Cartaz"],
+        opcoes: ["Lista", "Bilhete", "Cartaz",
+          "Uma lista",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Bilhete» não é a resposta. A certa é «Lista».",
+          "«Cartaz» não é a resposta. A certa é «Lista».",
+          "«Uma lista» não é a resposta. A certa é «Lista».",
+        ],
         feedbackAcerto: "🎉 LISTA!",
         feedbackErro: "Itens com • cada um = LISTA.",
         dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
@@ -383,8 +407,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Um papel gigante na parede com 'CUIDADO! CHÃO MOLHADO' é…",
-        opcoes: ["Bilhete", "Convite", "Cartaz/aviso"],
+        opcoes: ["Bilhete", "Convite", "Cartaz/aviso",
+          "Um bilhete",
+        ],
         correta: 2,
+        feedbackOpcoes: [
+          "«Bilhete» não é a resposta. A certa é «Cartaz/aviso».",
+          "«Convite» não é a resposta. A certa é «Cartaz/aviso».",
+          null,
+          "«Um bilhete» não é a resposta. A certa é «Cartaz/aviso».",
+        ],
         feedbackAcerto: "🎉 CARTAZ/AVISO!",
         feedbackErro:
           "Papel GIGANTE na PAREDE pra muita gente ver = CARTAZ.",
@@ -393,8 +425,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Qual gênero é pra UMA pessoa só?",
-        opcoes: ["Cartaz", "Bilhete", "Lista de compras da família"],
+        opcoes: ["Cartaz", "Bilhete", "Lista de compras da família",
+          "Um convite",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Cartaz» não é a resposta. A certa é «Bilhete».",
+          null,
+          "«Lista de compras da família» não é a resposta. A certa é «Bilhete».",
+          "«Um convite» não é a resposta. A certa é «Bilhete».",
+        ],
         feedbackAcerto:
           "🎉 BILHETE — só pra o destinatário. 🏅 Explorador dos Textos!",
         feedbackErro:

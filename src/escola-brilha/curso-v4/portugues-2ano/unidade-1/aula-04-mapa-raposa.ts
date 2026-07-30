@@ -272,8 +272,16 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que a raposa achou debaixo da folha seca?",
-        opcoes: ["Um baú", "Um mapa", "Uma estrela"],
+        opcoes: ["Um baú", "Um mapa", "Uma estrela",
+          "O coelho",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Um baú» não é a resposta. A certa é «Um mapa».",
+          null,
+          "«Uma estrela» não é a resposta. A certa é «Um mapa».",
+          "«O coelho» não é a resposta. A certa é «Um mapa».",
+        ],
         feedbackAcerto: "🎉 Um MAPA!",
         feedbackErro: "A primeira frase: '…achou um MAPA antigo debaixo da folha seca.'",
         dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
@@ -281,8 +289,16 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual foi o PRIMEIRO lugar do caminho?",
-        opcoes: ["A ponte", "Atrás da árvore grande", "Embaixo da pedra"],
+        opcoes: ["A ponte", "Atrás da árvore grande", "Embaixo da pedra",
+          "Pedra → árvore → ponte",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«A ponte» não é a resposta. A certa é «Atrás da árvore grande».",
+          null,
+          "«Embaixo da pedra» não é a resposta. A certa é «Atrás da árvore grande».",
+          "«Pedra → árvore → ponte» não é a resposta. A certa é «Atrás da árvore grande».",
+        ],
         feedbackAcerto: "🎉 Atrás da ÁRVORE.",
         feedbackErro:
           "Ordem: ÁRVORE → PONTE → PEDRA. Qual foi o primeiro?",
@@ -295,8 +311,15 @@ export const aula04: AulaPortuguesV4 = {
           "Antes de chegar na árvore",
           "Passando pela árvore, chegando no próximo lugar",
           "Dentro da árvore",
+          "Dentro do rio",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Antes de chegar na árvore» não é a resposta. A certa é «Passando pela árvore, chegando no próximo lugar».",
+          null,
+          "«Dentro da árvore» não é a resposta. A certa é «Passando pela árvore, chegando no próximo lugar».",
+          "«Dentro do rio» não é a resposta. A certa é «Passando pela árvore, chegando no próximo lugar».",
+        ],
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "'DEPOIS de' = a gente passa pela primeira coisa e chega na próxima.",
@@ -305,8 +328,16 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — O que tinha dentro do baú?",
-        opcoes: ["Uma estrela", "Um livro", "Um coelho"],
+        opcoes: ["Uma estrela", "Um livro", "Um coelho",
+          "Uma moeda",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Um livro» não é a resposta. A certa é «Uma estrela».",
+          "«Um coelho» não é a resposta. A certa é «Uma estrela».",
+          "«Uma moeda» não é a resposta. A certa é «Uma estrela».",
+        ],
         feedbackAcerto: "🎉 Uma ESTRELA (e um bilhete dentro dela).",
         feedbackErro:
           "O texto diz: 'um baú com uma ESTRELA dentro'.",
@@ -315,8 +346,16 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Quem escreveu o bilhete pra raposa?",
-        opcoes: ["A raposa", "A lua", "Aurora"],
+        opcoes: ["A raposa", "A lua", "Aurora",
+          "Um livro",
+        ],
         correta: 2,
+        feedbackOpcoes: [
+          "«A raposa» não é a resposta. A certa é «Aurora».",
+          "«A lua» não é a resposta. A certa é «Aurora».",
+          null,
+          "«Um livro» não é a resposta. A certa é «Aurora».",
+        ],
         feedbackAcerto: "🎉 AURORA! Livro despertado! 🗺️",
         feedbackErro:
           "No fim do bilhete: '— Aurora'. O nome depois do travessão é de quem escreveu.",

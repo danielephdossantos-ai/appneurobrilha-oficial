@@ -286,8 +286,16 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Você quer chamar a turma pra sua festa. Escreve…",
-        opcoes: ["Convite", "Bilhete de agradecimento", "Descrição"],
+        opcoes: ["Convite", "Bilhete de agradecimento", "Descrição",
+          "Bilhete",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Bilhete de agradecimento» não é a resposta. A certa é «Convite».",
+          "«Descrição» não é a resposta. A certa é «Convite».",
+          "«Bilhete» não é a resposta. A certa é «Convite».",
+        ],
         feedbackAcerto: "🎉 Convite!",
         feedbackErro: "Chamar pra festa = CONVITE.",
         dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
@@ -295,8 +303,16 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Você achou um cachorro e quer fazer um cartaz. Escreve uma…",
-        opcoes: ["Piada", "Descrição do cachorro", "Convite"],
+        opcoes: ["Piada", "Descrição do cachorro", "Convite",
+          "DESCRIÇÃO",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Piada» não é a resposta. A certa é «Descrição do cachorro».",
+          null,
+          "«Convite» não é a resposta. A certa é «Descrição do cachorro».",
+          "«DESCRIÇÃO» não é a resposta. A certa é «Descrição do cachorro».",
+        ],
         feedbackAcerto: "🎉 Descrição!",
         feedbackErro: "Contar como o cachorro é = DESCRIÇÃO.",
         dica: "Pista: a resposta certa começa com a letra 'P'. Leia as opções de novo com calma.",
@@ -304,8 +320,16 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Você quer avisar a mãe que foi na vizinha. Escreve…",
-        opcoes: ["Um bilhete curto", "Um convite de festa", "Uma história longa"],
+        opcoes: ["Um bilhete curto", "Um convite de festa", "Uma história longa",
+          "Descrição",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Um convite de festa» não é a resposta. A certa é «Um bilhete curto».",
+          "«Uma história longa» não é a resposta. A certa é «Um bilhete curto».",
+          "«Descrição» não é a resposta. A certa é «Um bilhete curto».",
+        ],
         feedbackAcerto: "🎉 Bilhete!",
         feedbackErro: "Aviso curto pra UMA pessoa = BILHETE.",
         dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
@@ -314,8 +338,16 @@ export const aula04: AulaPortuguesV4 = {
       {
         pergunta:
           "4/5 — 'Sábado às 16h, aqui em casa. Traga o presente!' é um…",
-        opcoes: ["Bilhete de agradecimento", "Convite", "Descrição"],
+        opcoes: ["Bilhete de agradecimento", "Convite", "Descrição",
+          "Só na cor da capa",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Bilhete de agradecimento» não é a resposta. A certa é «Convite».",
+          null,
+          "«Descrição» não é a resposta. A certa é «Convite».",
+          "«Só na cor da capa» não é a resposta. A certa é «Convite».",
+        ],
         feedbackAcerto: "🎉 Convite!",
         feedbackErro: "Diz QUANDO, ONDE e O QUE = CONVITE.",
         dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
@@ -327,8 +359,15 @@ export const aula04: AulaPortuguesV4 = {
           "Só na cor da capa",
           "PRA QUEM e PRA QUÊ",
           "Quantas letras usar",
+          "Um bilhete curto",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Só na cor da capa» não é a resposta. A certa é «PRA QUEM e PRA QUÊ».",
+          null,
+          "«Quantas letras usar» não é a resposta. A certa é «PRA QUEM e PRA QUÊ».",
+          "«Um bilhete curto» não é a resposta. A certa é «PRA QUEM e PRA QUÊ».",
+        ],
         feedbackAcerto: "🎉 Pra quem e pra quê!",
         feedbackErro:
           "Autor sempre pensa: PRA QUEM eu vou escrever e PRA QUÊ.",

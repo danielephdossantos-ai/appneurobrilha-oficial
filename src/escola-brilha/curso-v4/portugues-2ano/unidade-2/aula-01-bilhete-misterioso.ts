@@ -327,8 +327,15 @@ export const aula01: AulaPortuguesV4 = {
           "Contar uma história longa",
           "Deixar um recado rápido",
           "Fazer contas",
+          "Fui na padaria, já volto",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Contar uma história longa» não é a resposta. A certa é «Deixar um recado rápido».",
+          null,
+          "«Fazer contas» não é a resposta. A certa é «Deixar um recado rápido».",
+          "«Fui na padaria, já volto» não é a resposta. A certa é «Deixar um recado rápido».",
+        ],
         feedbackAcerto: "🎉 Recado rápido!",
         feedbackErro: "Bilhete é curto — serve pra RECADO.",
         dica: "Pista: a resposta certa começa com a letra 'D'. Leia as opções de novo com calma.",
@@ -336,8 +343,16 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Em 'Brilha, fui buscar livros. Aurora.' — quem é o destinatário?",
-        opcoes: ["Aurora", "Brilha", "Os livros"],
+        opcoes: ["Aurora", "Brilha", "Os livros",
+          "A lição",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Aurora» não é a resposta. A certa é «Brilha».",
+          null,
+          "«Os livros» não é a resposta. A certa é «Brilha».",
+          "«A lição» não é a resposta. A certa é «Brilha».",
+        ],
         feedbackAcerto: "🎉 BRILHA — nome antes da vírgula, no começo.",
         feedbackErro:
           "Destinatário = quem RECEBE. Fica no começo, antes da vírgula.",
@@ -346,8 +361,16 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — E quem é a assinatura?",
-        opcoes: ["Aurora", "Brilha", "Ninguém"],
+        opcoes: ["Aurora", "Brilha", "Ninguém",
+          "Miguel",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Brilha» não é a resposta. A certa é «Aurora».",
+          "«Ninguém» não é a resposta. A certa é «Aurora».",
+          "«Miguel» não é a resposta. A certa é «Aurora».",
+        ],
         feedbackAcerto: "🎉 AURORA — nome do final = assinatura.",
         feedbackErro: "Assinatura = nome de quem ESCREVEU. Fica no FINAL.",
         dica: "Pista: a resposta certa começa com a letra 'B'. Leia as opções de novo com calma.",
@@ -359,8 +382,15 @@ export const aula01: AulaPortuguesV4 = {
           "Fui na padaria, já volto",
           "Aurora.",
           "Brilha,",
+          "No meio",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Aurora.» não é a resposta. A certa é «Fui na padaria, já volto».",
+          "«Brilha,» não é a resposta. A certa é «Fui na padaria, já volto».",
+          "«No meio» não é a resposta. A certa é «Fui na padaria, já volto».",
+        ],
         feedbackAcerto: "🎉 Isso! Mensagem é o RECADO do meio.",
         feedbackErro:
           "Mensagem é o RECADO — a frase do meio, entre o destinatário e a assinatura.",
@@ -373,8 +403,15 @@ export const aula01: AulaPortuguesV4 = {
           "Completo",
           "Faltando destinatário e mensagem",
           "Faltando só a data",
+          "Pra Brilha",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Completo» não é a resposta. A certa é «Faltando destinatário e mensagem».",
+          null,
+          "«Faltando só a data» não é a resposta. A certa é «Faltando destinatário e mensagem».",
+          "«Pra Brilha» não é a resposta. A certa é «Faltando destinatário e mensagem».",
+        ],
         feedbackAcerto:
           "🎉 Certo! Só a assinatura não é bilhete — falta destinatário e mensagem.",
         feedbackErro:

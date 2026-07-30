@@ -290,8 +290,16 @@ export const aula05: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Piu é…",
-        opcoes: ["Um coelho", "Um passarinho", "Uma raposa"],
+        opcoes: ["Um coelho", "Um passarinho", "Uma raposa",
+          "Da história da lua",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Um coelho» não é a resposta. A certa é «Um passarinho».",
+          null,
+          "«Uma raposa» não é a resposta. A certa é «Um passarinho».",
+          "«Da história da lua» não é a resposta. A certa é «Um passarinho».",
+        ],
         feedbackAcerto: "🎉 Passarinho!",
         feedbackErro: "Piu é o PASSARINHO azul da janela de Aurora.",
         dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
@@ -299,8 +307,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — A semente curiosa virou o quê?",
-        opcoes: ["Um cacto", "Um girassol", "Uma árvore"],
+        opcoes: ["Um cacto", "Um girassol", "Uma árvore",
+          "Um passarinho",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Um cacto» não é a resposta. A certa é «Um girassol».",
+          null,
+          "«Uma árvore» não é a resposta. A certa é «Um girassol».",
+          "«Um passarinho» não é a resposta. A certa é «Um girassol».",
+        ],
         feedbackAcerto: "🎉 GIRASSOL!",
         feedbackErro: "A semente pequenina e curiosa brotou e virou um GIRASSOL.",
         dica: "Pista: a resposta certa começa com a letra 'U'. Leia as opções de novo com calma.",
@@ -312,8 +328,15 @@ export const aula05: AulaPortuguesV4 = {
           "Mostrar quem está FALANDO",
           "Marcar o fim do livro",
           "Contar quantas páginas tem",
+          "Adivinha a resposta rapidinho",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Marcar o fim do livro» não é a resposta. A certa é «Mostrar quem está FALANDO».",
+          "«Contar quantas páginas tem» não é a resposta. A certa é «Mostrar quem está FALANDO».",
+          "«Adivinha a resposta rapidinho» não é a resposta. A certa é «Mostrar quem está FALANDO».",
+        ],
         feedbackAcerto: "🎉 Isso!",
         feedbackErro:
           "O travessão aparece antes das FALAS dos personagens.",
@@ -322,8 +345,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — 'Atrás da árvore' é uma palavra de…",
-        opcoes: ["Sentimento", "Lugar", "Cor"],
+        opcoes: ["Sentimento", "Lugar", "Cor",
+          "Piu",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Sentimento» não é a resposta. A certa é «Lugar».",
+          null,
+          "«Cor» não é a resposta. A certa é «Lugar».",
+          "«Piu» não é a resposta. A certa é «Lugar».",
+        ],
         feedbackAcerto: "🎉 LUGAR!",
         feedbackErro: "'Atrás de' mostra POSIÇÃO — é um LUGAR.",
         dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
@@ -335,8 +366,15 @@ export const aula05: AulaPortuguesV4 = {
           "Na escola",
           "Na Biblioteca Encantada de Aurora",
           "Numa floresta",
+          "Contar quantas páginas tem",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Na escola» não é a resposta. A certa é «Na Biblioteca Encantada de Aurora».",
+          null,
+          "«Numa floresta» não é a resposta. A certa é «Na Biblioteca Encantada de Aurora».",
+          "«Contar quantas páginas tem» não é a resposta. A certa é «Na Biblioteca Encantada de Aurora».",
+        ],
         feedbackAcerto:
           "🎉 Na BIBLIOTECA ENCANTADA! Você virou Guardião da Primeira Página! 🏅",
         feedbackErro:
