@@ -264,6 +264,19 @@ export const aula04: AulaPortuguesV4 = {
     registro: "📸 Foto do poeminha escrito e ilustrado pela criança.",
   },
 
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A LUA É UMA BOLA.",
+      "O SOL É UM PÃO.",
+      "E EU SOU O POETA DA MANHÃ.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 150,
     moedas: 100,
