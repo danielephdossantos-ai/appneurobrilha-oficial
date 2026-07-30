@@ -94,25 +94,77 @@ function SilabasParaTocar({ silabas }: { silabas: string[] }) {
 }
 
 
-export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
+export function QuizTexto({
+  quiz,
+  momento,
+  qid,
+}: {
+  quiz: QuizTextoData;
+  /** Momento da aula (m5, m8, m10...) — habilita o motor adaptativo. */
+  momento?: string;
+  /** Identificador estável da questão dentro da aula. */
+  qid?: string;
+}) {
+  const adaptativo = useAdaptativo();
   const [escolha, setEscolha] = useState<number | null>(null);
+  const [tentativas, setTentativas] = useState(0);
+  const [fase, setFase] = useState<"responder" | "dica" | "final">("responder");
+  const inicioRef = useRef<number>(Date.now());
+  const registradoRef = useRef(false);
+
   const acertou = escolha !== null && escolha === quiz.correta;
+  const revelou = fase === "final";
+  const dica =
+    quiz.dica ??
+    (quiz.ondeEstaNoTexto
+      ? `Volte nesta parte: "${quiz.ondeEstaNoTexto}"`
+      : "Leia a pergunta de novo devagar e elimine a opção que não combina.");
+  const reensino = quiz.reensino ?? quiz.feedbackAcerto;
 
   function ouvirPergunta() {
     stopSpeaking();
     speakChunked(quiz.pergunta);
   }
 
-  function tocar(i: number) {
-    if (escolha !== null) return;
-    stopSpeaking();
-    setEscolha(i);
+  function concluir(indice: number, correta: boolean, tent: number) {
+    setEscolha(indice);
+    setFase("final");
+    if (!registradoRef.current && momento && adaptativo) {
+      registradoRef.current = true;
+      adaptativo.registrar({
+        id: qid ?? quiz.pergunta,
+        momento,
+        correta,
+        tempoMs: Date.now() - inicioRef.current,
+        tentativas: tent,
+      });
+    }
   }
 
+  function tocar(i: number) {
+    if (escolha !== null || revelou) return;
+    stopSpeaking();
+    const n = tentativas + 1;
+    setTentativas(n);
+
+    if (i === quiz.correta) {
+      concluir(i, true, n);
+      return;
+    }
+    if (n === 1) {
+      // 1ª tentativa errada → PISTA, sem mostrar a resposta.
+      setEscolha(i);
+      setFase("dica");
+      return;
+    }
+    // 2ª tentativa errada → revela + reensino automático.
+    concluir(i, false, n);
+  }
 
   function tentarDeNovo() {
     stopSpeaking();
     setEscolha(null);
+    setFase("responder");
   }
 
   // Detecta palavra silabada tipo CA-SA, BA-NA-NA, JA-NE-LA na pergunta,
@@ -155,18 +207,18 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           {quiz.opcoes.map((op, i) => {
             const marcada = escolha === i;
             const certa = i === quiz.correta;
-            const revelou = escolha !== null;
+            const travado = escolha !== null;
 
             let borda = "border-4 border-transparent bg-white hover:scale-105 active:scale-95";
             if (revelou && marcada && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-8 ring-emerald-200 scale-105";
-            else if (revelou && marcada && !certa) borda = "border-4 border-rose-500 bg-rose-50 ring-8 ring-rose-200 animate-pulse";
+            else if (marcada && !certa) borda = "border-4 border-rose-500 bg-rose-50 ring-8 ring-rose-200 animate-pulse";
             else if (revelou && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-4 ring-emerald-200";
-            else if (revelou) borda = "border-4 border-transparent bg-slate-100 opacity-60";
+            else if (travado) borda = "border-4 border-transparent bg-slate-100 opacity-60";
 
             return (
               <button
                 key={i}
-                disabled={revelou}
+                disabled={travado}
                 onClick={() => tocar(i)}
                 className={`relative flex flex-col items-stretch rounded-3xl shadow-xl overflow-hidden transition-all duration-200 ${borda}`}
               >
@@ -188,7 +240,7 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
                 {revelou && marcada && certa && (
                   <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
                 )}
-                {revelou && marcada && !certa && (
+                {marcada && !certa && (
                   <span className="absolute -top-2 -right-2 text-3xl">💭</span>
                 )}
                 {revelou && !marcada && certa && (
@@ -212,16 +264,16 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
             const cor = CORES[i % CORES.length];
             const marcada = escolha === i;
             const certa = i === quiz.correta;
-            const revelou = escolha !== null;
+            const travado = escolha !== null;
 
             let estado = "";
-            if (!revelou) {
+            if (!travado) {
               estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
             } else if (marcada && certa) {
               estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
             } else if (marcada && !certa) {
               estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
-            } else if (certa) {
+            } else if (revelou && certa) {
               estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
             } else {
               estado = "bg-slate-200 text-slate-400";
@@ -245,7 +297,7 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
             return (
               <button
                 key={i}
-                disabled={revelou}
+                disabled={travado}
                 onClick={() => tocar(i)}
                 className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
               >
@@ -253,7 +305,7 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
                 {revelou && marcada && certa && (
                   <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
                 )}
-                {revelou && marcada && !certa && (
+                {marcada && !certa && (
                   <span className="absolute -top-2 -right-2 text-3xl">💭</span>
                 )}
                 {revelou && !marcada && certa && (
@@ -265,8 +317,27 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
         </div>
       )}
 
-      {/* Feedback do professor */}
-      {escolha !== null && (
+      {/* 1ª tentativa errada — PISTA, sem entregar a resposta */}
+      {fase === "dica" && (
+        <div className="mt-4 p-4 rounded-2xl bg-sky-100 text-sky-950 border-2 border-sky-300 text-base font-bold leading-snug">
+          <div className="flex items-start gap-2">
+            <span className="text-2xl">🔎</span>
+            <div className="flex-1">
+              <div className="text-sm uppercase tracking-wide text-sky-700">Dica do professor</div>
+              <div className="mt-1">{dica}</div>
+            </div>
+          </div>
+          <button
+            onClick={tentarDeNovo}
+            className="mt-3 w-full h-12 rounded-2xl bg-sky-500 text-white font-black text-lg active:scale-95 shadow"
+          >
+            🔄 Tentar com a dica
+          </button>
+        </div>
+      )}
+
+      {/* Resultado final */}
+      {revelou && (
         <div
           className={`mt-4 p-4 rounded-2xl text-base font-bold leading-snug ${
             acertou
@@ -287,15 +358,18 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           </div>
 
           {!acertou && (
-            <button
-              onClick={tentarDeNovo}
-              className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#0d1f55] font-black text-lg active:scale-95 shadow"
-            >
-              🔄 Tentar de novo
-            </button>
+            <div className="mt-3 rounded-2xl bg-white/70 border-2 border-amber-300 p-3">
+              <div className="text-sm uppercase tracking-wide text-amber-700">
+                👩‍🏫 Vamos aprender junto
+              </div>
+              <div className="mt-1 text-[#0d1f55]">
+                A resposta certa é <strong>{quiz.opcoes[quiz.correta]}</strong>. {reensino}
+              </div>
+            </div>
           )}
         </div>
       )}
     </div>
   );
 }
+
