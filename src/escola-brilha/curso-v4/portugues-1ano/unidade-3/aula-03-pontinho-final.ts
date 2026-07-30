@@ -12,13 +12,13 @@ import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.
  * A criança reconhece os 3 sinais de pontuação final mais usados
  * e o efeito de cada um: contar (.), perguntar (?) e exclamar (!).
  *
- * BNCC: EF01LP12, EF12LP04
+ * BNCC: EF01LP14, EF12LP04
  */
 export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-pontinho-final",
   titulo: "Ponto, Interrogação e Exclamação",
   iconeTrilha: "❗",
-  bncc: ["EF01LP12", "EF12LP04"],
+  bncc: ["EF01LP14", "EF12LP04"],
   duracaoMin: 15,
 
   momento01_motivacao: {

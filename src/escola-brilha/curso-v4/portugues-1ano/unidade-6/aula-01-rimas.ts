@@ -15,13 +15,13 @@ import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json
  * Foco: reconhecer que duas palavras RIMAM quando terminam com
  * o mesmo som (PÃO/MÃO, GATO/PATO/RATO).
  *
- * BNCC: EF01LP09 · EF01LP10
+ * BNCC: EF01LP16 · EF01LP19
  */
 export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-rimas",
   titulo: "Palavras que Rimam",
   iconeTrilha: "🎵",
-  bncc: ["EF01LP09", "EF01LP10"],
+  bncc: ["EF01LP13", "EF01LP16", "EF01LP19"],
   duracaoMin: 15,
 
   momento01_motivacao: {

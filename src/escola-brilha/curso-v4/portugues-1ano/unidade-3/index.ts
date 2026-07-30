@@ -3,6 +3,7 @@ import { aula01 } from "./aula-01-o-que-e-frase";
 import { aula02 } from "./aula-02-ordem-das-palavras";
 import { aula03 } from "./aula-03-pontinho-final";
 import { aula04 } from "./aula-04-lendo-frases";
+import { aula05 } from "./aula-05-a-voz-da-frase";
 
 /**
  * Unidade 3 — Palavras Viram Frases
@@ -16,5 +17,5 @@ export const unidade3: UnidadePortugues = {
   descricao:
     "A criança descobre que palavras soltas viram FRASE quando têm ordem e sentido, aprende ponto, interrogação e exclamação, e lê frases inteiras entendendo o que dizem.",
   corTema: "#3b82f6",
-  aulas: [aula01, aula02, aula03, aula04],
+  aulas: [aula01, aula02, aula03, aula04, aula05],
 };

@@ -3,6 +3,7 @@ import { aula01 } from "./aula-01-silabas-simples";
 import { aula02 } from "./aula-02-contar-silabas";
 import { aula03 } from "./aula-03-familia-silabica";
 import { aula04 } from "./aula-04-palavras-tres-silabas";
+import { aula05 } from "./aula-05-minha-escrita-e-a-certa";
 
 /**
  * Unidade 2 — A Fábrica de Sílabas
@@ -16,5 +17,5 @@ export const unidade2: UnidadePortugues = {
   descricao:
     "Na Fábrica de Sílabas, a criança junta consoante + vogal, bate palma para contar sílabas, conhece a família silábica e monta palavras compridas de três sílabas.",
   corTema: "#22c55e",
-  aulas: [aula01, aula02, aula03, aula04],
+  aulas: [aula01, aula02, aula03, aula04, aula05],
 };

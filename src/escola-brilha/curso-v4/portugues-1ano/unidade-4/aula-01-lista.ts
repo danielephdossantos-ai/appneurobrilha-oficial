@@ -20,7 +20,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-lista",
   titulo: "Minha Lista de Compras",
   iconeTrilha: "📝",
-  bncc: ["EF01LP16", "EF01LP17", "EF01LP19"],
+  bncc: ["EF01LP01", "EF01LP16", "EF01LP17", "EF01LP19"],
   duracaoMin: 15,
 
   momento01_motivacao: {

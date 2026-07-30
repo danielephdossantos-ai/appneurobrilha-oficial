@@ -20,13 +20,13 @@ import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json
  *  - Ler as primeiras sílabas simples (BA, CA, LA, PA, SA...).
  *  - Ler as primeiras palavras de duas sílabas (BOLA, CASA, PATO).
  *
- * BNCC: EF01LP02 · EF01LP04 · EF01LP05 · EF12LP01
+ * BNCC: EF01LP02 · EF01LP04 · EF01LP05 · EF01LP08 · EF12LP01
  */
 export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-consoantes-encontro",
   titulo: "Consoante encontra Vogal",
   iconeTrilha: "🔑",
-  bncc: ["EF01LP02", "EF01LP04", "EF01LP05", "EF12LP01"],
+  bncc: ["EF01LP02", "EF01LP04", "EF01LP05", "EF01LP08", "EF12LP01"],
   duracaoMin: 16,
 
   // ------------------------------------------------------------

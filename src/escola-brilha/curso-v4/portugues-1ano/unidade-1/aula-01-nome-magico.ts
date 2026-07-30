@@ -20,13 +20,13 @@ import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.
  *  - Diferenciar letra MAIÚSCULA (nome próprio, início de frase) de
  *    letra minúscula.
  *
- * BNCC: EF01LP01 · EF12LP01
+ * BNCC: EF01LP02 · EF01LP04 · EF12LP01
  */
 export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-nome-magico",
   titulo: "O Nome Mágico",
   iconeTrilha: "✨",
-  bncc: ["EF01LP01", "EF12LP01"],
+  bncc: ["EF01LP02", "EF01LP04", "EF12LP01"],
   duracaoMin: 15,
 
   // ------------------------------------------------------------

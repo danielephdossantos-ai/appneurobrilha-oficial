@@ -15,13 +15,13 @@ import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.
  * (letra → sílaba → palavra → frase → rima) para produzir
  * um poeminha de dois versos que rimam.
  *
- * BNCC: EF01LP09 · EF01LP10 · EF12LP18 · EF15LP05
+ * BNCC: EF01LP18 · EF01LP19 · EF12LP18 · EF15LP05
  */
 export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-meu-poeminha",
   titulo: "Meu Poeminha",
   iconeTrilha: "🪶",
-  bncc: ["EF01LP09", "EF01LP10", "EF12LP18", "EF15LP05"],
+  bncc: ["EF01LP18", "EF01LP19", "EF12LP18", "EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {
