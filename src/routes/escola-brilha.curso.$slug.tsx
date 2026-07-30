@@ -193,6 +193,9 @@ function TrilhaCurso() {
             </div>
           </section>
         ))}
+        {curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
+          <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} />
+        )}
 
         {/* Atlas Final — destravado só quando todas as aulas estão concluídas */}
         <AtlasFinalCard
