@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import {
-  ITENS_SONDAGEM,
-  avaliarSondagem,
   lerSondagem,
   limparSondagem,
   salvarSondagem,
   type ResultadoSondagem,
 } from "./sondagem-inicial";
+import { getSondagem, type ConjuntoSondagem } from "./sondagens";
 
 /**
  * Cartão de Sondagem Inicial na trilha do curso.
@@ -26,17 +25,19 @@ export function CartaoSondagem({
   const [resultado, setResultado] = useState<ResultadoSondagem | null>(null);
   const [aberto, setAberto] = useState(false);
   const [carregou, setCarregou] = useState(false);
+  const conjunto = getSondagem(cursoSlug);
 
   useEffect(() => {
     setResultado(lerSondagem(cursoSlug));
     setCarregou(true);
   }, [cursoSlug]);
 
-  if (!carregou) return null;
+  if (!carregou || !conjunto) return null;
 
   if (aberto) {
     return (
       <QuizSondagem
+        conjunto={conjunto}
         onFechar={() => setAberto(false)}
         onConcluir={(r) => {
           salvarSondagem(cursoSlug, r);
@@ -46,6 +47,7 @@ export function CartaoSondagem({
       />
     );
   }
+
 
   if (resultado) {
     return (
