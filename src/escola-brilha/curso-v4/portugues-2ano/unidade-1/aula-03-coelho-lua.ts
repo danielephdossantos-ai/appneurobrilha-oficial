@@ -252,6 +252,62 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "COELHO",
+          silabas: ["CO", "E", "LHO"],
+          distratores: ["LU", "A"],
+          dica: "Bata palmas na palavra COELHO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "LUA",
+          silabas: ["LU", "A"],
+          distratores: ["CO", "E"],
+          dica: "Bata palmas na palavra LUA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "NOITE",
+          silabas: ["NOI", "TE"],
+          distratores: ["CO", "E"],
+          dica: "Bata palmas na palavra NOITE: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O coelho olhou para a lua.",
+          palavras: ["O", "coelho", "olhou", "para", "a", "lua."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista: coisas que eu vejo à noite",
+        comando: "Escreva 4 coisas que a gente vê no céu ou na rua à noite.",
+        linhas: 4,
+        checklist: [
+          "Escrevi uma coisa em cada linha.",
+          "Reli para ver se não faltou letra.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

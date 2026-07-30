@@ -332,6 +332,66 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "MÁQUINA",
+          silabas: ["MÁ", "QUI", "NA"],
+          distratores: ["FÁ", "BRI"],
+          dica: "Bata palmas na palavra MÁQUINA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "FÁBRICA",
+          silabas: ["FÁ", "BRI", "CA"],
+          distratores: ["MÁ", "QUI"],
+          dica: "Bata palmas na palavra FÁBRICA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "PALAVRA",
+          silabas: ["PA", "LA", "VRA"],
+          distratores: ["MÁ", "QUI"],
+          dica: "Bata palmas na palavra PALAVRA: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A máquina fabrica palavras novas.",
+          palavras: ["A", "máquina", "fabrica", "palavras", "novas."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "cartaz",
+        titulo: "Cartaz da Máquina das Palavras",
+        comando: "Faça o cartaz que explica como funciona a máquina das palavras.",
+        campos: [
+          { rotulo: "Título GRANDE", placeholder: "A MÁQUINA DAS PALAVRAS", minLetras: 5 },
+          { rotulo: "Como funciona", placeholder: "Ela junta pedacinhos e forma…", minLetras: 16 },
+        ],
+        checklist: [
+          "O título é curto.",
+          "Expliquei com as minhas palavras.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

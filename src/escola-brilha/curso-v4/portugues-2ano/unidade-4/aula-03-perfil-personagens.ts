@@ -278,6 +278,61 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "PERSONAGEM",
+          silabas: ["PER", "SO", "NA", "GEM"],
+          distratores: ["JEI", "TO"],
+          dica: "Bata palmas na palavra PERSONAGEM: são 4 pedacinhos.",
+        },
+        {
+          palavra: "JEITO",
+          silabas: ["JEI", "TO"],
+          distratores: ["PER", "SO"],
+          dica: "Bata palmas na palavra JEITO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "AMIGO",
+          silabas: ["A", "MI", "GO"],
+          distratores: ["PER", "SO"],
+          dica: "Bata palmas na palavra AMIGO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O personagem é muito corajoso.",
+          palavras: ["O", "personagem", "é", "muito", "corajoso."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Ficha do personagem",
+        comando: "Escreva 4 características do personagem principal.",
+        linhas: 4,
+        checklist: [
+          "Cada linha fala de um jeito do personagem.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

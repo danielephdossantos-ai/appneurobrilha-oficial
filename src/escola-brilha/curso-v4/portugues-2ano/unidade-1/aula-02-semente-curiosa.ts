@@ -324,6 +324,67 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "SEMENTE",
+          silabas: ["SE", "MEN", "TE"],
+          distratores: ["TER", "RA"],
+          dica: "Bata palmas na palavra SEMENTE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "TERRA",
+          silabas: ["TER", "RA"],
+          distratores: ["SE", "MEN"],
+          dica: "Bata palmas na palavra TERRA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "FLOR",
+          silabas: ["FLOR"],
+          distratores: ["SE", "MEN"],
+          dica: "Bata palmas na palavra FLOR: são 1 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A semente virou uma flor.",
+          palavras: ["A", "semente", "virou", "uma", "flor."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "legenda",
+        titulo: "Legenda da cena da semente",
+        comando: "Escreva a legenda do desenho da semente que virou flor.",
+        campos: [
+          { rotulo: "O que aparece no desenho", placeholder: "uma semente na terra…", minLetras: 10 },
+          { rotulo: "O que está acontecendo", placeholder: "ela está crescendo porque…", minLetras: 14 },
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   // ------------------------------------------------------------
   // 10 · AVALIAÇÃO
   // ------------------------------------------------------------

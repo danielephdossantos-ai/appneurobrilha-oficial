@@ -268,6 +268,67 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "MAPA",
+          silabas: ["MA", "PA"],
+          distratores: ["RA", "PO"],
+          dica: "Bata palmas na palavra MAPA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "RAPOSA",
+          silabas: ["RA", "PO", "SA"],
+          distratores: ["MA", "PA"],
+          dica: "Bata palmas na palavra RAPOSA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "TRILHA",
+          silabas: ["TRI", "LHA"],
+          distratores: ["MA", "PA"],
+          dica: "Bata palmas na palavra TRILHA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A raposa guardou o mapa.",
+          palavras: ["A", "raposa", "guardou", "o", "mapa."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "legenda",
+        titulo: "Legenda do mapa da raposa",
+        comando: "Escreva a legenda do mapa: o que ele mostra e para onde leva.",
+        campos: [
+          { rotulo: "O que o mapa mostra", placeholder: "o caminho da floresta…", minLetras: 10 },
+          { rotulo: "Para onde ele leva", placeholder: "leva até…", minLetras: 8 },
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

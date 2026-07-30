@@ -276,6 +276,65 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "CASA",
+          silabas: ["CA", "SA"],
+          distratores: ["A", "FA"],
+          dica: "Bata palmas na palavra CASA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "ASA",
+          silabas: ["A", "SA"],
+          distratores: ["CA", "FA"],
+          dica: "Bata palmas na palavra ASA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "FACA",
+          silabas: ["FA", "CA"],
+          distratores: ["SA", "A"],
+          dica: "Bata palmas na palavra FACA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A casa tem uma porta azul.",
+          palavras: ["A", "casa", "tem", "uma", "porta", "azul."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "legenda",
+        titulo: "Legenda das palavras parecidas",
+        comando: "Escolha duas palavras parecidas e escreva a legenda de cada uma.",
+        campos: [
+          { rotulo: "Palavra 1 e o que é", placeholder: "CASA — lugar onde a gente mora", minLetras: 10 },
+          { rotulo: "Palavra 2 e o que é", placeholder: "ASA — o que o passarinho usa para voar", minLetras: 10 },
+        ],
+        checklist: [
+          "As duas palavras são parecidas mas têm sentidos diferentes.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

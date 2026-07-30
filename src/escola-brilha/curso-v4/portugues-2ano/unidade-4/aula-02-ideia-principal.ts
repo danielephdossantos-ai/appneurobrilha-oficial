@@ -286,6 +286,65 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "IDEIA",
+          silabas: ["I", "DEI", "A"],
+          distratores: ["TÍ", "TU"],
+          dica: "Bata palmas na palavra IDEIA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "TÍTULO",
+          silabas: ["TÍ", "TU", "LO"],
+          distratores: ["I", "DEI"],
+          dica: "Bata palmas na palavra TÍTULO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "ASSUNTO",
+          silabas: ["AS", "SUN", "TO"],
+          distratores: ["I", "DEI"],
+          dica: "Bata palmas na palavra ASSUNTO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O título mostra o assunto.",
+          palavras: ["O", "título", "mostra", "o", "assunto."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Resumo em 2 frases",
+        comando: "Escreva em 2 frases sobre o que o texto de hoje fala.",
+        linhas: 2,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Escrevi a ideia principal, não os detalhes.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

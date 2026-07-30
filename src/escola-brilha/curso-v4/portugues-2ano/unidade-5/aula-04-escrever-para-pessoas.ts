@@ -282,6 +282,67 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "LEITOR",
+          silabas: ["LEI", "TOR"],
+          distratores: ["CAR", "TA"],
+          dica: "Bata palmas na palavra LEITOR: são 2 pedacinhos.",
+        },
+        {
+          palavra: "CARTA",
+          silabas: ["CAR", "TA"],
+          distratores: ["LEI", "TOR"],
+          dica: "Bata palmas na palavra CARTA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "VOVÓ",
+          silabas: ["VO", "VÓ"],
+          distratores: ["LEI", "TOR"],
+          dica: "Bata palmas na palavra VOVÓ: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Escrevi uma carta para a vovó.",
+          palavras: ["Escrevi", "uma", "carta", "para", "a", "vovó."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Carta para alguém especial",
+        comando: "Escreva uma carta curta para alguém da sua família.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Querida vovó,", minLetras: 4 },
+          { rotulo: "Mensagem", placeholder: "Eu queria te contar que…", minLetras: 20 },
+          { rotulo: "De quem", placeholder: "seu nome", minLetras: 3 },
+        ],
+        checklist: [
+          "Escrevi pensando em QUEM vai ler.",
+          "Usei palavras carinhosas.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

@@ -283,6 +283,65 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "AUTOR",
+          silabas: ["AU", "TOR"],
+          distratores: ["RE", "VI"],
+          dica: "Bata palmas na palavra AUTOR: são 2 pedacinhos.",
+        },
+        {
+          palavra: "REVISÃO",
+          silabas: ["RE", "VI", "SÃO"],
+          distratores: ["AU", "TOR"],
+          dica: "Bata palmas na palavra REVISÃO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "TROCA",
+          silabas: ["TRO", "CA"],
+          distratores: ["AU", "TOR"],
+          dica: "Bata palmas na palavra TROCA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O autor revisa o próprio texto.",
+          palavras: ["O", "autor", "revisa", "o", "próprio", "texto."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Texto para revisar como autor",
+        comando: "Escreva 3 linhas sobre um passeio e depois revise como um autor de verdade.",
+        linhas: 3,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Troquei uma palavra repetida por outra melhor.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

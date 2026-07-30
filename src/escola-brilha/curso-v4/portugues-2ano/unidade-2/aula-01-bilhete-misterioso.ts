@@ -319,6 +319,68 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "BILHETE",
+          silabas: ["BI", "LHE", "TE"],
+          distratores: ["RE", "CA"],
+          dica: "Bata palmas na palavra BILHETE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "RECADO",
+          silabas: ["RE", "CA", "DO"],
+          distratores: ["BI", "LHE"],
+          dica: "Bata palmas na palavra RECADO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "AVISO",
+          silabas: ["A", "VI", "SO"],
+          distratores: ["BI", "LHE"],
+          dica: "Bata palmas na palavra AVISO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Deixei um bilhete na mesa.",
+          palavras: ["Deixei", "um", "bilhete", "na", "mesa."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Meu bilhete de verdade",
+        comando: "Escreva um bilhete para alguém da sua casa.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Para a mamãe", minLetras: 4 },
+          { rotulo: "Recado", placeholder: "Fui brincar no quintal…", minLetras: 14 },
+          { rotulo: "De quem", placeholder: "seu nome", minLetras: 3 },
+        ],
+        checklist: [
+          "O bilhete diz PARA QUEM é.",
+          "O recado está claro e curto.",
+          "Assinei com o meu nome.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

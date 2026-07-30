@@ -265,6 +265,61 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "LIGAR",
+          silabas: ["LI", "GAR"],
+          distratores: ["PON", "TO"],
+          dica: "Bata palmas na palavra LIGAR: são 2 pedacinhos.",
+        },
+        {
+          palavra: "PONTO",
+          silabas: ["PON", "TO"],
+          distratores: ["LI", "GAR"],
+          dica: "Bata palmas na palavra PONTO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "PORQUE",
+          silabas: ["POR", "QUE"],
+          distratores: ["LI", "GAR"],
+          dica: "Bata palmas na palavra PORQUE: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Eu liguei uma parte na outra.",
+          palavras: ["Eu", "liguei", "uma", "parte", "na", "outra."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista de ligações do texto",
+        comando: "Escreva 4 ligações que você achou: o que aconteceu e por quê.",
+        linhas: 4,
+        checklist: [
+          "Cada linha tem uma causa e um efeito.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

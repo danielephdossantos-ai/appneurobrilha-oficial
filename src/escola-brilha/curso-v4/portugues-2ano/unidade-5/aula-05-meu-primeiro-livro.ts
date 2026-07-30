@@ -297,6 +297,72 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "LIVRO",
+          silabas: ["LI", "VRO"],
+          distratores: ["CA", "PA"],
+          dica: "Bata palmas na palavra LIVRO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "CAPA",
+          silabas: ["CA", "PA"],
+          distratores: ["LI", "VRO"],
+          dica: "Bata palmas na palavra CAPA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "AUTOR",
+          silabas: ["AU", "TOR"],
+          distratores: ["LI", "VRO"],
+          dica: "Bata palmas na palavra AUTOR: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Eu sou o autor do meu livro.",
+          palavras: ["Eu", "sou", "o", "autor", "do", "meu", "livro."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        {
+          frase: "O meu livro tem título e capa.",
+          palavras: ["O", "meu", "livro", "tem", "título", "e", "capa."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Meu primeiro livro",
+        comando: "Escreva o seu livro em 5 partes: começo, meio e fim. Depois revise e publique.",
+        linhas: 5,
+        checklist: [
+          "Meu livro tem TÍTULO.",
+          "Tem começo, meio e fim.",
+          "Cada frase começa com maiúscula e termina com ponto.",
+          "Li em voz alta e arrumei o que estava estranho.",
+          "Escrevi o meu nome como AUTOR.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

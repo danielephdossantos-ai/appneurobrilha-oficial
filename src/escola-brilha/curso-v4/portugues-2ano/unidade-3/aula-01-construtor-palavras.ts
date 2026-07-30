@@ -284,6 +284,62 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "SÍLABA",
+          silabas: ["SÍ", "LA", "BA"],
+          distratores: ["PA", "VRA"],
+          dica: "Bata palmas na palavra SÍLABA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "PALAVRA",
+          silabas: ["PA", "LA", "VRA"],
+          distratores: ["SÍ", "BA"],
+          dica: "Bata palmas na palavra PALAVRA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "JANELA",
+          silabas: ["JA", "NE", "LA"],
+          distratores: ["SÍ", "BA"],
+          dica: "Bata palmas na palavra JANELA: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Cada palavra tem pedacinhos.",
+          palavras: ["Cada", "palavra", "tem", "pedacinhos."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista de palavras que eu construí",
+        comando: "Escreva 4 palavras novas que você montou hoje.",
+        linhas: 4,
+        checklist: [
+          "Separei os pedacinhos antes de escrever.",
+          "Conferi se não faltou sílaba.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

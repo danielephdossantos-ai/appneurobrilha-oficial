@@ -286,6 +286,65 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "PÁGINA",
+          silabas: ["PÁ", "GI", "NA"],
+          distratores: ["FI", "NAL"],
+          dica: "Bata palmas na palavra PÁGINA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "FINAL",
+          silabas: ["FI", "NAL"],
+          distratores: ["PÁ", "GI"],
+          dica: "Bata palmas na palavra FINAL: são 2 pedacinhos.",
+        },
+        {
+          palavra: "HISTÓRIA",
+          silabas: ["HIS", "TÓ", "RIA"],
+          distratores: ["PÁ", "GI"],
+          dica: "Bata palmas na palavra HISTÓRIA: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A história teve um final feliz.",
+          palavras: ["A", "história", "teve", "um", "final", "feliz."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Meu final diferente",
+        comando: "Escreva em 3 linhas um final DIFERENTE para a história que você leu.",
+        linhas: 3,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Meu final combina com a história.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {
