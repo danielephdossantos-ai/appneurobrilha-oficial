@@ -26,6 +26,10 @@ import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+import { LeituraFluente } from "./blocos/LeituraFluente";
+import { BotaoOuvirEnunciado } from "./blocos/BotaoOuvirEnunciado";
+import { useFalaAutomatica } from "./audio-prefs";
+
 
 
 /**
