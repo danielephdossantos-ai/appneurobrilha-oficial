@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
-import { ConscienciaFonemica } from "./ConscienciaFonemica";
+import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -39,23 +39,27 @@ function AlfabetoCompleto({
 }) {
   const [ativo, setAtivo] = useState<string | null>(null);
 
+  // Fase 6 — toda letra ensina o SOM, não só o nome.
   const falar = (letra: string) => {
     stopSpeaking();
     setAtivo(letra);
     const nome = nomeDaLetra(letra);
     const exemplo = bloco.exemplos?.[letra] ?? EXEMPLOS_PADRAO[letra];
-    const texto = exemplo
-      ? `${nome}. ${nome} de ${exemplo}.`
-      : `${nome}.`;
-    speakChunked(texto);
-    setTimeout(() => setAtivo(null), 2000);
+    const som = somDoFonema(letra);
+    // 1) nome da letra → 2) som da letra (lento) → 3) palavra-exemplo
+    speakChunked(`${nome}.`, { rate: 0.85 })
+      .then(() => speakChunked(`o som é ${som}`, { rate: 0.6 }))
+      .then(() => (exemplo ? speakChunked(`${som}, de ${exemplo}.`, { rate: 0.72 }) : undefined))
+      .catch(() => {});
+    setTimeout(() => setAtivo(null), 3200);
   };
 
   return (
     <div className="space-y-3">
       <div className="rounded-xl bg-amber-500/10 border border-amber-300/30 p-3 text-sm text-amber-100">
-        🔤 <b>Toque em cada letra</b> pra ouvir o nome dela. O alfabeto tem <b>26 letras</b> na
-        ordem: <b>A → Z</b>. Essa ordem NUNCA muda.
+        🔤 <b>Toque em cada letra</b> pra ouvir o <b>nome</b> dela e, logo depois, o{" "}
+        <b>som</b> que ela faz. O alfabeto tem <b>26 letras</b> na ordem: <b>A → Z</b>. Essa
+        ordem NUNCA muda.
       </div>
 
       <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-2">
@@ -79,9 +83,17 @@ function AlfabetoCompleto({
               <div className="text-lg md:text-xl font-black text-sky-300 leading-none mt-0.5">
                 {L.toLowerCase()}
               </div>
+              <div className="text-[9px] md:text-[10px] font-bold text-fuchsia-300 leading-none mt-1">
+                /{L.toLowerCase()}/
+              </div>
             </button>
           );
         })}
+      </div>
+
+      <div className="rounded-xl bg-fuchsia-500/10 border border-fuchsia-400/30 p-3 text-xs text-fuchsia-100">
+        🔊 A letra tem <b>nome</b> e tem <b>som</b>. O nome do <b>M</b> é "eme", mas o som dele é{" "}
+        <b>/mmm/</b>, como no começo de <b>MÃO</b>. Pra ler, o que vale é o <b>SOM</b>.
       </div>
 
       <div className="rounded-xl bg-emerald-500/10 border border-emerald-400/30 p-3 text-xs text-emerald-100">
@@ -91,6 +103,7 @@ function AlfabetoCompleto({
     </div>
   );
 }
+
 
 
 // ---------- Maiúscula × Minúscula ------------------------------------

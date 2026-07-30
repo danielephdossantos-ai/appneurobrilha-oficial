@@ -10,7 +10,7 @@ import { aula04 } from "./aula-04-palavras-tres-silabas";
  */
 export const unidade2: UnidadePortugues = {
   slug: "unidade-2-fabrica-de-silabas",
-  numero: 2,
+  numero: 3,
   titulo: "A Fábrica de Sílabas",
   subtitulo: "Juntando pedacinhos para formar palavras",
   descricao:

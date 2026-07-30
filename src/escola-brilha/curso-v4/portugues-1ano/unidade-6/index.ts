@@ -10,7 +10,7 @@ import { aula04 } from "./aula-04-meu-poeminha";
  */
 export const unidade6: UnidadePortugues = {
   slug: "unidade-6-poesia-cantiga-trava-lingua",
-  numero: 6,
+  numero: 7,
   titulo: "Poesia, Cantiga e Trava-Língua",
   subtitulo: "Brincando com o som das palavras",
   descricao:

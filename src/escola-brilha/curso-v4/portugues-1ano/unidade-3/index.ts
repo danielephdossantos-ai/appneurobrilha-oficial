@@ -10,7 +10,7 @@ import { aula04 } from "./aula-04-lendo-frases";
  */
 export const unidade3: UnidadePortugues = {
   slug: "unidade-3-palavras-viram-frases",
-  numero: 3,
+  numero: 4,
   titulo: "Palavras Viram Frases",
   subtitulo: "Escrevendo minhas primeiras frases",
   descricao:

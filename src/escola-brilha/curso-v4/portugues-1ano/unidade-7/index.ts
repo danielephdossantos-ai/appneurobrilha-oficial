@@ -5,14 +5,14 @@ import { aula03 } from "./aula-03-juntando-os-sons";
 import { aula04 } from "./aula-04-trocando-um-som";
 
 /**
- * Unidade 7 — O Ouvido Mágico (Consciência Fonêmica)
+ * Unidade 1 — O Ouvido Mágico (Consciência Fonêmica) · abre o curso
  * Fase 2 do contrato de edição do 1º ano de Língua Portuguesa.
  * Estímulo é SOM, não escrita: som inicial → segmentar → sintetizar
  * → trocar fonema. Todos os blocos falam em voz alta (TTS lento).
  */
 export const unidade7: UnidadePortugues = {
   slug: "unidade-7-ouvido-magico",
-  numero: 7,
+  numero: 1,
   titulo: "O Ouvido Mágico",
   subtitulo: "Escutar os sons das palavras",
   descricao:

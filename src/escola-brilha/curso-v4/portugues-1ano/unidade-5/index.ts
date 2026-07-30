@@ -10,7 +10,7 @@ import { aula04 } from "./aula-04-recontar";
  */
 export const unidade5: UnidadePortugues = {
   slug: "unidade-5-era-uma-vez",
-  numero: 5,
+  numero: 6,
   titulo: "Era Uma Vez",
   subtitulo: "Histórias com começo, meio e fim",
   descricao:
