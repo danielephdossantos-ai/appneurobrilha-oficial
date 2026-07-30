@@ -98,10 +98,8 @@ export function CartaoSondagem({
     <section className="rounded-2xl border border-amber-300/40 bg-amber-400/10 p-5 text-center">
       <div className="text-4xl">🎧</div>
       <h3 className="text-xl font-black mt-1">Vamos ver por onde começar?</h3>
-      <p className="text-sm text-white/80 mt-1">
-        São 8 perguntinhas faladas, de 2 minutinhos. Ninguém reprova — é só
-        para a Aurora saber qual é o melhor ponto de partida.
-      </p>
+      <p className="text-sm text-white/80 mt-1">{conjunto.chamada}</p>
+
       <button
         onClick={() => setAberto(true)}
         className="mt-4 px-6 py-3 rounded-full bg-amber-400 text-[#0d1f55] font-black"
