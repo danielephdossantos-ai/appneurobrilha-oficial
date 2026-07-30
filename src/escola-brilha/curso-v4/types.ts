@@ -841,6 +841,23 @@ export type MomentoEscrita = {
   blocos: EscritaBloco[];
 };
 
+// ---------------------------------------------------------------
+// FLUÊNCIA POR RELEITURA (1º ano · Fase 9)
+// A criança lê o MESMO texto curto 3 vezes: em eco (com o áudio),
+// sozinha cronometrada e sozinha de novo, comparando o tempo.
+// É o passo que automatiza a decodificação.
+// ---------------------------------------------------------------
+export type MomentoFluencia = {
+  titulo: string;
+  instrucao: string;
+  /** Texto curto — 1 a 3 frases já decodificáveis. */
+  texto: string[];
+  imagemUrl?: string;
+  /** Meta amigável de tempo (segundos) da 2ª/3ª leitura. */
+  metaSegundos?: number;
+};
+
+
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
