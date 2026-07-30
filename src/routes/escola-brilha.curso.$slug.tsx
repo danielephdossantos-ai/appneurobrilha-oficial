@@ -1,6 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
+import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";
+
 
 /**
  * Trilha do Curso v4.1 — estilo Duolingo.
