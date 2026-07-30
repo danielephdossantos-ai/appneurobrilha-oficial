@@ -117,7 +117,7 @@ export const aula02: AulaPortuguesV4 = {
       paragrafos: [
         "O alfabeto tem 26 letras. Elas andam sempre na mesma ordem.",
         "A primeira parada é o A, de ABELHA. A última parada é o Z, de ZEBRA.",
-        "Quando sabemos a ordem das letras, fica mais fácil achar palavras no dicionário.",
+        "Quando sabemos a ordem das letras, fica fácil achar uma palavra na lista.",
       ],
     },
   },
@@ -163,7 +163,7 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "Por que saber a ordem das letras ajuda?",
         opcoes: [
-          "Para achar palavras no dicionário mais fácil",
+          "Para achar uma palavra na lista",
           "Para pintar desenhos",
           "Para correr mais rápido",
         ],
@@ -251,6 +251,31 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Trace as primeiras letras do alfabeto",
+    instrucao: "O alfabeto começa aqui. Trace com o dedo e depois escreva as palavras.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "B", exemplo: "B de BOLA", dicaTracado: "desce e faz duas barrigas" },
+          { letra: "C", exemplo: "C de CASA", dicaTracado: "faz uma meia-lua aberta" },
+          { letra: "D", exemplo: "D de DADO", dicaTracado: "desce e faz uma barriga grande" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "DADO", silabas: ["DA", "DO"], distratores: ["PI", "LU"], dica: "Começa com D." },
+          { palavra: "BOLO", silabas: ["BO", "LO"], distratores: ["CA", "TE"], dica: "Começa com B." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "O alfabeto tem 26 letras, sempre na mesma ORDEM.",

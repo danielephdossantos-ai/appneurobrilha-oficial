@@ -257,6 +257,31 @@ export const aula01: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escreva as palavras da fábrica",
+    instrucao: "O robô montou. Agora é você quem monta e escreve.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "B", exemplo: "B de BOLA", dicaTracado: "desce e faz duas barrigas" },
+          { letra: "C", exemplo: "C de CASA", dicaTracado: "faz uma meia-lua aberta" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "BOLA", silabas: ["BO", "LA"], distratores: ["CA", "TO"], dica: "BO + LA." },
+          { palavra: "CASA", silabas: ["CA", "SA"], distratores: ["PA", "LO"], dica: "CA + SA." },
+          { palavra: "PATO", silabas: ["PA", "TO"], distratores: ["SA", "BE"], dica: "PA + TO." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Palavras são formadas por pedacinhos de som chamados SÍLABAS.",

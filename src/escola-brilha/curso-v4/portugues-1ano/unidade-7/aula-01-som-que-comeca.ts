@@ -186,6 +186,30 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Agora escreva o som que você ouviu",
+    instrucao: "A Coruja escutou o som. Agora sua mão desenha a letra desse som.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "S", exemplo: "S de SOL, som /ssss/", dicaTracado: "desce fazendo uma cobrinha" },
+          { letra: "M", exemplo: "M de MALA, som /mmm/", dicaTracado: "desce, sobe, desce, sobe" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "SAPO", silabas: ["SA", "PO"], distratores: ["LO", "TE"], dica: "Começa com o som /s/." },
+          { palavra: "MALA", silabas: ["MA", "LA"], distratores: ["BO", "TI"], dica: "Começa com o som /m/." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "SOM é o que a gente escuta, não o que a gente vê.",

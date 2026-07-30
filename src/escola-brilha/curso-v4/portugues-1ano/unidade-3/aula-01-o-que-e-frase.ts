@@ -195,6 +195,39 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Minhas primeiras frases escritas",
+    instrucao: "Frase começa com letra maiúscula e termina com ponto. Escreva as suas.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "A", exemplo: "A de ANA, letra que começa a frase", dicaTracado: "dois riscos e uma pontinha no meio" },
+          { letra: "E", exemplo: "E de ELA", dicaTracado: "desce e faz três riscos deitados" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["PA", "MI"], dica: "Ana desenhou um GATO." },
+          { palavra: "LÁPIS", silabas: ["LÁ", "PIS"], distratores: ["TO", "CA"], dica: "O que Ana pegou para escrever." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Minhas frases",
+        comando: "Escreva 3 frases sobre o seu dia. Uma ideia em cada linha.",
+        linhas: 3,
+        modelo: ["Eu acordei cedo.", "Eu tomei leite.", "Eu fui à escola."],
+        checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Uma FRASE é um grupo de palavras com sentido completo.",

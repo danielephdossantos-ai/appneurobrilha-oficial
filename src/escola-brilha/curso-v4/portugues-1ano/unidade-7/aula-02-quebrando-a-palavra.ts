@@ -185,6 +185,30 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Quebrar o som e escrever",
+    instrucao: "Bata o tambor, conte os sons e depois escreva a palavra.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "P", exemplo: "P de PATO, som /p/", dicaTracado: "desce a perninha e faz a barriga" },
+          { letra: "T", exemplo: "T de TATU, som /t/", dicaTracado: "desce e põe o chapéu em cima" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "PATO", silabas: ["PA", "TO"], distratores: ["MI", "LU"], dica: "Tem 2 pedacinhos: PA e TO." },
+          { palavra: "TATU", silabas: ["TA", "TU"], distratores: ["SO", "RE"], dica: "Tem 2 pedacinhos: TA e TU." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Toda palavra é feita de sons colados.",

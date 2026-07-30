@@ -92,7 +92,7 @@ export const aula02: AulaPortuguesV4 = {
       legendaImagem: "Léo e seu cachorro",
       destacar: ["Léo", "cachorro", "bola"],
       paragrafos: [
-        "Léo pega a bola. O cachorro late de alegria.",
+        "Léo pega a bola. O cachorro late feliz.",
         "Léo joga a bola longe. O cachorro corre atrás dela.",
       ],
     },
@@ -187,7 +187,7 @@ export const aula02: AulaPortuguesV4 = {
       destacar: ["Rafa", "carrinho"],
       paragrafos: [
         "Rafa empurra o carrinho pela rua.",
-        "O carrinho vermelho corre bem rápido.",
+        "O carrinho azul corre bem rápido.",
       ],
     },
     perguntas: [
@@ -201,11 +201,44 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "De que cor é o carrinho?",
-        opcoes: ["Azul", "Verde", "Vermelho"],
-        correta: 2,
-        feedbackAcerto: "🎉 Isso! O carrinho é vermelho.",
-        feedbackErro: "Está na segunda frase: 'O carrinho vermelho corre bem rápido.'",
-        ondeEstaNoTexto: "O carrinho vermelho corre bem rápido.",
+        opcoes: ["Azul", "Verde", "Rosa"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! O carrinho é azul.",
+        feedbackErro: "Está na segunda frase: 'O carrinho azul corre bem rápido.'",
+        ondeEstaNoTexto: "O carrinho azul corre bem rápido.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escrever na ordem certa",
+    instrucao: "Primeiro quem faz, depois o que faz. Escreva frases na ordem certa.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "L", exemplo: "L de LÉO", dicaTracado: "desce reto e vira para o lado" },
+          { letra: "R", exemplo: "R de RAFA", dicaTracado: "desce, faz a barriga e puxa a perninha" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "BOLA", silabas: ["BO", "LA"], distratores: ["CA", "TO"], dica: "O que Léo pega." },
+          { palavra: "RUA", silabas: ["RU", "A"], distratores: ["MI", "PO"], dica: "Onde Rafa empurra o carrinho." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Frases na ordem",
+        comando: "Escreva 3 frases começando por quem faz a ação.",
+        linhas: 3,
+        modelo: ["Léo pega a bola.", "O cachorro corre.", "Rafa empurra o carrinho."],
+        checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
       },
     ],
   },
@@ -261,10 +294,10 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — De que cor era o carrinho de Rafa?",
-        opcoes: ["Vermelho", "Azul", "Amarelo", "Verde"],
+        opcoes: ["Azul", "Verde", "Amarelo", "Rosa"],
         correta: 0,
-        feedbackAcerto: "🎉 Vermelho!",
-        feedbackErro: "No texto: 'O carrinho vermelho corre bem rápido.'",
+        feedbackAcerto: "🎉 Azul!",
+        feedbackErro: "No texto: 'O carrinho azul corre bem rápido.'",
       },
       {
         pergunta: "5/5 — Geralmente, o que vem primeiro numa frase?",

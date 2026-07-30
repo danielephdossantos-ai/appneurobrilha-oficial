@@ -55,3 +55,18 @@ como estímulo principal):
 - [x] Fase 4 — avaliações revisadas item a item: todas as 28 aulas com 4 alternativas e distratores plausíveis (erros típicos de 6 anos: letra seguinte da palavra, contar letras em vez de sílabas, aliteração no lugar de rima, frase sem ponto ou sem maiúscula, troca de gênero textual), com feedback de erro explicando o porquê
 - [x] Fase 5 — revisão espaçada: bloco "🔁 Aquecimento — Você lembra?" abre toda aula de Matemática e de Língua Portuguesa (`AquecimentoRevisao.tsx` + `motor/aquecimento-revisao.ts`), com 3 itens vindos das aulas anteriores (offsets 1, 3 e 7), prioridade para itens errados (fila de reensino até 2 acertos), feedback que explica o raciocínio e TTS. Contrato do 1º ano CONCLUÍDO — outras séries de LP liberadas.
 - [x] Fase 6 — ordem fonêmica primeiro: "O Ouvido Mágico" virou **Unidade 1** do curso (as demais desceram para 2–7) e o bloco `alfabetoCompleto` agora ensina **nome + SOM** de cada letra ("M é eme, mas o som é /mmm/, como em MÃO") com TTS em 3 tempos (nome 0.85 → fonema 0.6 → palavra 0.72) e badge do fonema em cada letra.
+
+## Fase 7 — TTS obrigatório (CONCLUÍDA)
+Todo bloco de Português tem áudio. `BotaoOuvirEnunciado` (inline, nunca flutuante)
+foi adicionado a CardVocabulario, MontarPalavra, OrdenarSequencia, SelecionarItens
+e ArrastarParaAlvo, com botão de REPETIR o enunciado.
+
+## Fase 8 — Escrita e texto decodável (CONCLUÍDA)
+- `momento_escrita` (traçado de letra + ditado com sílabas móveis, e escrita real
+  na U de frases) presente nas 16 aulas das unidades: Ouvido Mágico, Alfabeto
+  Mágico, Fábrica de Sílabas e Palavras Viram Frases.
+- Textos de leitura reescritos em vocabulário decodável: fora palavras com
+  encontros consonantais/dígrafos ainda não ensinados (dicionário, idioma,
+  pelúcia, bicicleta, vermelho, alegria, brilhando, Encontrei).
+- Regra permanente: em aula do 1º ano, texto de leitura só usa sílabas já
+  ensinadas; palavra nova entra primeiro no card de vocabulário com áudio.

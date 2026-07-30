@@ -289,6 +289,30 @@ export const aula04: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Consoante + vogal na ponta do lápis",
+    instrucao: "Trace a consoante, junte com a vogal e escreva a palavra.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "P", exemplo: "P de PATO", dicaTracado: "desce a perninha e faz a barriga" },
+          { letra: "F", exemplo: "F de FACA", dicaTracado: "desce e faz dois riscos deitados" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "FACA", silabas: ["FA", "CA"], distratores: ["TO", "MI"], dica: "FA + CA." },
+          { palavra: "PIPA", silabas: ["PI", "PA"], distratores: ["LU", "SO"], dica: "PI + PA." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Consoante é toda letra que não é vogal.",

@@ -180,6 +180,30 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Junte os sons e escreva",
+    instrucao: "Ouça os sons soltos, junte na cabeça e escreva a palavra inteira.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "L", exemplo: "L de LUA, som /l/", dicaTracado: "desce e faz o pezinho" },
+          { letra: "B", exemplo: "B de BOLA, som /b/", dicaTracado: "desce e faz duas barrigas" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "LUA", silabas: ["LU", "A"], distratores: ["MI", "PO"], dica: "/l/ /u/ /a/ = LUA." },
+          { palavra: "BOLA", silabas: ["BO", "LA"], distratores: ["CA", "TE"], dica: "/b/ /o/ /l/ /a/ = BOLA." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Juntar sons é o segredo da leitura.",

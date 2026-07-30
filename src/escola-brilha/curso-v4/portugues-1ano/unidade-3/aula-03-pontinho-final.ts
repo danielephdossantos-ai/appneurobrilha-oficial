@@ -101,7 +101,7 @@ export const aula03: AulaPortuguesV4 = {
       destacar: ["ponto", "pergunta", "exclamação"],
       paragrafos: [
         "O robô de Brilha adora perguntar coisas. Ele pergunta: Onde está a lua?",
-        "Quando encontra a resposta, ele fica muito feliz e grita: Encontrei!",
+        "Quando acha a resposta, ele fica muito feliz e grita: Achei!",
         "Depois, ele conta tudo com calma, terminando com ponto.",
       ],
     },
@@ -119,12 +119,12 @@ export const aula03: AulaPortuguesV4 = {
         ondeEstaNoTexto: "O robô de Brilha adora perguntar coisas.",
       },
       {
-        pergunta: "O que ele grita quando encontra a resposta?",
-        opcoes: ["'Encontrei!'", "'Tchau!'", "'Onde está?'"],
+        pergunta: "O que ele grita quando acha a resposta?",
+        opcoes: ["'Achei!'", "'Tchau!'", "'Onde está?'"],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Ele grita 'Encontrei!' com exclamação.",
-        feedbackErro: "Está no segundo parágrafo: 'ele fica muito feliz e grita: Encontrei!'",
-        ondeEstaNoTexto: "ele fica muito feliz e grita: Encontrei!",
+        feedbackAcerto: "🎉 Isso! Ele grita 'Achei!' com exclamação.",
+        feedbackErro: "Está no segundo parágrafo: 'ele fica muito feliz e grita: Achei!'",
+        ondeEstaNoTexto: "ele fica muito feliz e grita: Achei!",
       },
     ],
   },
@@ -155,7 +155,7 @@ export const aula03: AulaPortuguesV4 = {
       instrucao: "Começo → meio → fim.",
       itens: [
         { id: "s1", texto: "Onde está a lua?", imagemUrl: robo },
-        { id: "s2", texto: "Encontrei!", imagemUrl: estrela },
+        { id: "s2", texto: "Achei!", imagemUrl: estrela },
         { id: "s3", texto: "A lua está no céu.", imagemUrl: robo },
       ],
       ordemCerta: ["s1", "s2", "s3"],
@@ -216,6 +216,39 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escrever com ponto, ? e !",
+    instrucao: "Cada frase pede um sinal no final. Escreva uma de cada.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "O", exemplo: "O de ONDE, começo da pergunta", dicaTracado: "uma roda inteira" },
+          { letra: "A", exemplo: "A de ACHEI", dicaTracado: "dois riscos e uma pontinha no meio" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "LUA", silabas: ["LU", "A"], distratores: ["SO", "MI"], dica: "O robô procurou a ... no céu." },
+          { palavra: "MALA", silabas: ["MA", "LA"], distratores: ["BO", "TE"], dica: "Mia procurou o lápis dentro da ..." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Três frases, três sinais",
+        comando: "Escreva 3 frases: a 1ª com ponto ( . ), a 2ª com interrogação ( ? ) e a 3ª com exclamação ( ! ).",
+        linhas: 3,
+        modelo: ["Eu tenho um gato.", "Cadê meu lápis?", "Achei!"],
+        checklist: ["Comecei com letra maiúscula?", "A frase 2 termina com ? ", "A frase 3 termina com ! "],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Ponto final ( . ) fecha frases que contam algo, com calma.",
@@ -256,7 +289,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "No texto: 'Mia perguntou: Cadê meu lápis?'",
       },
       {
-        pergunta: "4/5 — O robô grita 'Encontrei!' usando qual sinal?",
+        pergunta: "4/5 — O robô grita 'Achei!' usando qual sinal?",
         opcoes: ["Ponto final ( . )", "Interrogação ( ? )", "Exclamação ( ! )", "Vírgula ( , )"],
         correta: 2,
         feedbackAcerto: "🎉 Isso! Exclamação, pois mostra alegria.",

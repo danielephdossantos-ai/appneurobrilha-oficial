@@ -220,6 +220,32 @@ export const aula01: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escrevendo o meu nome",
+    instrucao: "A palavra mais importante do mundo é o seu nome. Trace as letras e escreva.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "A", exemplo: "A de ANA", dicaTracado: "dois riscos que se encontram e uma pontinha no meio" },
+          { letra: "L", exemplo: "L de LUCAS", dicaTracado: "desce reto e vira para o lado" },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Minha lista de nomes",
+        comando: "Escreva o seu nome e o nome de 3 pessoas da sua casa.",
+        linhas: 4,
+        modelo: ["ANA", "MAMÃE", "PAPAI", "VOVÓ"],
+        checklist: ["Escrevi meu nome com letra maiúscula?", "Escrevi todas as letras do nome?", "Deixei espaço entre um nome e outro?"],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Todo nome é feito de LETRAS.",
