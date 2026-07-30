@@ -289,6 +289,61 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "PLANO",
+          silabas: ["PLA", "NO"],
+          distratores: ["I", "DEI"],
+          dica: "Bata palmas na palavra PLANO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "IDEIA",
+          silabas: ["I", "DEI", "A"],
+          distratores: ["PLA", "NO"],
+          dica: "Bata palmas na palavra IDEIA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "ASSUNTO",
+          silabas: ["AS", "SUN", "TO"],
+          distratores: ["PLA", "NO"],
+          dica: "Bata palmas na palavra ASSUNTO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Antes de escrever eu penso no plano.",
+          palavras: ["Antes", "de", "escrever", "eu", "penso", "no", "plano."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Meu plano de escrita",
+        comando: "Escreva 4 ideias que você quer colocar no seu texto.",
+        linhas: 4,
+        checklist: [
+          "Todas as ideias falam do mesmo assunto.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

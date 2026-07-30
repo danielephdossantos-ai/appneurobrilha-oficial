@@ -312,6 +312,66 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "FORMATURA",
+          silabas: ["FOR", "MA", "TU", "RA"],
+          distratores: ["DI", "PLO"],
+          dica: "Bata palmas na palavra FORMATURA: são 4 pedacinhos.",
+        },
+        {
+          palavra: "DIPLOMA",
+          silabas: ["DI", "PLO", "MA"],
+          distratores: ["FOR", "TU"],
+          dica: "Bata palmas na palavra DIPLOMA: são 3 pedacinhos.",
+        },
+        {
+          palavra: "ORGULHO",
+          silabas: ["OR", "GU", "LHO"],
+          distratores: ["FOR", "MA"],
+          dica: "Bata palmas na palavra ORGULHO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Eu ganhei o meu diploma de leitor.",
+          palavras: ["Eu", "ganhei", "o", "meu", "diploma", "de", "leitor."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "cartaz",
+        titulo: "Cartaz da minha formatura",
+        comando: "Faça o cartaz da sua formatura de leitor do 2º ano.",
+        campos: [
+          { rotulo: "Título GRANDE", placeholder: "EU SOU LEITOR!", minLetras: 5 },
+          { rotulo: "O que eu aprendi", placeholder: "Neste ano eu aprendi a…", minLetras: 18 },
+        ],
+        checklist: [
+          "Contei pelo menos duas coisas que aprendi.",
+          "Escrevi o meu nome.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

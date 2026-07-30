@@ -304,6 +304,65 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "CASO",
+          silabas: ["CA", "SO"],
+          distratores: ["PRO", "VA"],
+          dica: "Bata palmas na palavra CASO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "PROVA",
+          silabas: ["PRO", "VA"],
+          distratores: ["CA", "SO"],
+          dica: "Bata palmas na palavra PROVA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "SOLUÇÃO",
+          silabas: ["SO", "LU", "ÇÃO"],
+          distratores: ["CA", "PRO"],
+          dica: "Bata palmas na palavra SOLUÇÃO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Nós resolvemos o grande caso.",
+          palavras: ["Nós", "resolvemos", "o", "grande", "caso."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "cartaz",
+        titulo: "Cartaz: caso resolvido!",
+        comando: "Faça o cartaz que anuncia a solução do grande caso da biblioteca.",
+        campos: [
+          { rotulo: "Título GRANDE", placeholder: "CASO RESOLVIDO!", minLetras: 5 },
+          { rotulo: "A solução", placeholder: "Descobrimos que…", minLetras: 16 },
+        ],
+        checklist: [
+          "Contei a solução e a prova.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

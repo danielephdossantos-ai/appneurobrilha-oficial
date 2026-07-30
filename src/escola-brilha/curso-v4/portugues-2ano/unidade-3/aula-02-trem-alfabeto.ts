@@ -277,6 +277,62 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "ALFABETO",
+          silabas: ["AL", "FA", "BE", "TO"],
+          distratores: ["LE", "TRA"],
+          dica: "Bata palmas na palavra ALFABETO: são 4 pedacinhos.",
+        },
+        {
+          palavra: "LETRA",
+          silabas: ["LE", "TRA"],
+          distratores: ["AL", "FA"],
+          dica: "Bata palmas na palavra LETRA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "VAGÃO",
+          silabas: ["VA", "GÃO"],
+          distratores: ["AL", "FA"],
+          dica: "Bata palmas na palavra VAGÃO: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O trem leva as letras.",
+          palavras: ["O", "trem", "leva", "as", "letras."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista em ordem alfabética",
+        comando: "Escreva 5 palavras em ordem alfabética (começando pelo A).",
+        linhas: 5,
+        checklist: [
+          "Coloquei em ordem do alfabeto.",
+          "Conferi a primeira letra de cada palavra.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

@@ -269,6 +269,61 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "PISTA",
+          silabas: ["PIS", "TA"],
+          distratores: ["DE", "TE"],
+          dica: "Bata palmas na palavra PISTA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "DETETIVE",
+          silabas: ["DE", "TE", "TI", "VE"],
+          distratores: ["PIS", "TA"],
+          dica: "Bata palmas na palavra DETETIVE: são 4 pedacinhos.",
+        },
+        {
+          palavra: "TEXTO",
+          silabas: ["TEX", "TO"],
+          distratores: ["PIS", "TA"],
+          dica: "Bata palmas na palavra TEXTO: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O detetive achou a pista no texto.",
+          palavras: ["O", "detetive", "achou", "a", "pista", "no", "texto."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista de pistas que eu achei",
+        comando: "Escreva 4 pistas que você encontrou no texto de hoje.",
+        linhas: 4,
+        checklist: [
+          "Cada pista está mesmo no texto.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

@@ -288,6 +288,65 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "PALPITE",
+          silabas: ["PAL", "PI", "TE"],
+          distratores: ["LEI", "TOR"],
+          dica: "Bata palmas na palavra PALPITE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "LEITOR",
+          silabas: ["LEI", "TOR"],
+          distratores: ["PAL", "PI"],
+          dica: "Bata palmas na palavra LEITOR: são 2 pedacinhos.",
+        },
+        {
+          palavra: "FINAL",
+          silabas: ["FI", "NAL"],
+          distratores: ["PAL", "PI"],
+          dica: "Bata palmas na palavra FINAL: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Meu palpite sobre o final está aqui.",
+          palavras: ["Meu", "palpite", "sobre", "o", "final", "está", "aqui."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Meu palpite escrito",
+        comando: "Escreva 3 linhas com o seu palpite sobre o final da história e a pista que te ajudou.",
+        linhas: 3,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Contei a PISTA que me deu o palpite.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

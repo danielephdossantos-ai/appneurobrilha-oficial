@@ -328,6 +328,67 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "CARTAZ",
+          silabas: ["CAR", "TAZ"],
+          distratores: ["A", "VI"],
+          dica: "Bata palmas na palavra CARTAZ: são 2 pedacinhos.",
+        },
+        {
+          palavra: "AVISO",
+          silabas: ["A", "VI", "SO"],
+          distratores: ["CAR", "TAZ"],
+          dica: "Bata palmas na palavra AVISO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "SILÊNCIO",
+          silabas: ["SI", "LÊN", "CIO"],
+          distratores: ["CAR", "TAZ"],
+          dica: "Bata palmas na palavra SILÊNCIO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O cartaz avisa todo mundo.",
+          palavras: ["O", "cartaz", "avisa", "todo", "mundo."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "cartaz",
+        titulo: "Cartaz da biblioteca",
+        comando: "Faça um cartaz de aviso para a biblioteca da escola.",
+        campos: [
+          { rotulo: "Título GRANDE", placeholder: "SILÊNCIO, POR FAVOR!", minLetras: 5 },
+          { rotulo: "O aviso", placeholder: "Aqui a gente fala baixinho para todos lerem.", minLetras: 14 },
+          { rotulo: "Onde e quando", placeholder: "Na biblioteca, todos os dias", minLetras: 6 },
+        ],
+        checklist: [
+          "O título é curto e chama atenção.",
+          "O aviso explica o que fazer.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

@@ -256,6 +256,65 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "SENTIDO",
+          silabas: ["SEN", "TI", "DO"],
+          distratores: ["FRA", "SE"],
+          dica: "Bata palmas na palavra SENTIDO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "FRASE",
+          silabas: ["FRA", "SE"],
+          distratores: ["SEN", "TI"],
+          dica: "Bata palmas na palavra FRASE: são 2 pedacinhos.",
+        },
+        {
+          palavra: "DICA",
+          silabas: ["DI", "CA"],
+          distratores: ["SEN", "TI"],
+          dica: "Bata palmas na palavra DICA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A frase tem mais de um sentido.",
+          palavras: ["A", "frase", "tem", "mais", "de", "um", "sentido."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "legenda",
+        titulo: "Legenda do sentido escondido",
+        comando: "Escolha uma frase da aula e explique o sentido dela.",
+        campos: [
+          { rotulo: "A frase", placeholder: "copie a frase aqui", minLetras: 10 },
+          { rotulo: "O que ela quer dizer", placeholder: "ela quer dizer que…", minLetras: 14 },
+        ],
+        checklist: [
+          "Expliquei com as minhas palavras.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

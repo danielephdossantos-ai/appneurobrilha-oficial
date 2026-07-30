@@ -298,6 +298,62 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "LISTA",
+          silabas: ["LIS", "TA"],
+          distratores: ["COM", "PRA"],
+          dica: "Bata palmas na palavra LISTA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "COMPRA",
+          silabas: ["COM", "PRA"],
+          distratores: ["LIS", "TA"],
+          dica: "Bata palmas na palavra COMPRA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "ORDEM",
+          silabas: ["OR", "DEM"],
+          distratores: ["LIS", "TA"],
+          dica: "Bata palmas na palavra ORDEM: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Fiz a lista antes de sair.",
+          palavras: ["Fiz", "a", "lista", "antes", "de", "sair."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista do meu lanche da semana",
+        comando: "Escreva 5 coisas do seu lanche, uma em cada linha.",
+        linhas: 5,
+        checklist: [
+          "Uma coisa por linha.",
+          "Nada repetido na lista.",
+        ],
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

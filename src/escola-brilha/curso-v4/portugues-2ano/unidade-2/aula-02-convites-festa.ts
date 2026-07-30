@@ -326,6 +326,68 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "CONVITE",
+          silabas: ["CON", "VI", "TE"],
+          distratores: ["FES", "TA"],
+          dica: "Bata palmas na palavra CONVITE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "FESTA",
+          silabas: ["FES", "TA"],
+          distratores: ["CON", "VI"],
+          dica: "Bata palmas na palavra FESTA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "HORA",
+          silabas: ["HO", "RA"],
+          distratores: ["CON", "VI"],
+          dica: "Bata palmas na palavra HORA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A festa começa às três horas.",
+          palavras: ["A", "festa", "começa", "às", "três", "horas."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "convite",
+        titulo: "Convite da Festa dos Livros",
+        comando: "Escreva o convite da Festa dos Livros da sua turma.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Para a turma do 2º ano", minLetras: 5 },
+          { rotulo: "O que vai ter", placeholder: "Festa dos Livros com contação de história", minLetras: 12 },
+          { rotulo: "Dia e hora", placeholder: "sexta-feira, às 14 horas", minLetras: 6 },
+          { rotulo: "Onde", placeholder: "na biblioteca da escola", minLetras: 5 },
+        ],
+        checklist: [
+          "Meu convite diz O QUE, QUANDO e ONDE.",
+          "Escrevi o nome de quem convida.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

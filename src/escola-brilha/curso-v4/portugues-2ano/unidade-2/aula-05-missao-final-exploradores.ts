@@ -352,6 +352,67 @@ export const aula05: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "MISSÃO",
+          silabas: ["MIS", "SÃO"],
+          distratores: ["E", "QUI"],
+          dica: "Bata palmas na palavra MISSÃO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "EQUIPE",
+          silabas: ["E", "QUI", "PE"],
+          distratores: ["MIS", "SÃO"],
+          dica: "Bata palmas na palavra EQUIPE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "MAPA",
+          silabas: ["MA", "PA"],
+          distratores: ["MIS", "SÃO"],
+          dica: "Bata palmas na palavra MAPA: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Nossa equipe cumpriu a missão.",
+          palavras: ["Nossa", "equipe", "cumpriu", "a", "missão."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Bilhete para a próxima equipe",
+        comando: "Escreva um bilhete contando como a sua equipe venceu a missão.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Para a próxima equipe", minLetras: 5 },
+          { rotulo: "Recado", placeholder: "A gente conseguiu porque…", minLetras: 16 },
+          { rotulo: "De quem", placeholder: "seu nome", minLetras: 3 },
+        ],
+        checklist: [
+          "Contei COMO vencemos.",
+          "Assinei o bilhete.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

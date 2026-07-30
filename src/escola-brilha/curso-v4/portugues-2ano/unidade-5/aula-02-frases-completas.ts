@@ -269,6 +269,65 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "FRASE",
+          silabas: ["FRA", "SE"],
+          distratores: ["PON", "TO"],
+          dica: "Bata palmas na palavra FRASE: são 2 pedacinhos.",
+        },
+        {
+          palavra: "PONTO",
+          silabas: ["PON", "TO"],
+          distratores: ["FRA", "SE"],
+          dica: "Bata palmas na palavra PONTO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "MAIÚSCULA",
+          silabas: ["MA", "IÚS", "CU", "LA"],
+          distratores: ["FRA", "SE"],
+          dica: "Bata palmas na palavra MAIÚSCULA: são 4 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Toda frase começa com letra maiúscula.",
+          palavras: ["Toda", "frase", "começa", "com", "letra", "maiúscula."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Três frases completas",
+        comando: "Escreva 3 frases completas sobre a sua semana.",
+        linhas: 3,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Cada frase tem quem faz e o que faz.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

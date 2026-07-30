@@ -41,12 +41,16 @@ Língua Portuguesa é iniciada antes da Fase 7.
 - Feedback explicativo em cada alternativa errada.
 - Eliminar todos os itens de 2 e 3 opções.
 
-## Fase 3 — Bloco de escrita real (`momento_escrita`)
+## Fase 3 — Bloco de escrita real (`momento_escrita`) ✅ CONCLUÍDA
 Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicial):
 - **Ditado de palavra e frase** com sílabas móveis (foco ortográfico da aula).
 - **Escrita funcional**: bilhete, convite, lista, legenda, cartaz — rascunho →
   revisão → versão final salva.
 - U5 recebe a produção mais longa (livro próprio) com checklist de revisão.
+- Entregue: 30/30 aulas com `momento_escrita` (ditado de sílabas + ditado de
+  frase com palavras móveis + produção real). Novos formatos: convite, legenda,
+  cartaz e texto. Ciclo rascunho → revisão (checklist marcável) → versão final
+  salva no aparelho, via `cicloRevisao`.
 
 ## Fase 4 — Fluência por releitura (`momento_fluencia`)
 - Bloco de 3 etapas em todas as 30 aulas: **eco → cronometrada 1 → cronometrada

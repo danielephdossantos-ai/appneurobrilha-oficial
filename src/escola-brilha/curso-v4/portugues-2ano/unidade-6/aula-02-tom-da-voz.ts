@@ -240,6 +240,65 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "TOM",
+          silabas: ["TOM"],
+          distratores: ["VOZ", "A"],
+          dica: "Bata palmas na palavra TOM: são 1 pedacinhos.",
+        },
+        {
+          palavra: "VOZ",
+          silabas: ["VOZ"],
+          distratores: ["TOM", "A"],
+          dica: "Bata palmas na palavra VOZ: são 1 pedacinhos.",
+        },
+        {
+          palavra: "ALEGRE",
+          silabas: ["A", "LE", "GRE"],
+          distratores: ["TOM", "VOZ"],
+          dica: "Bata palmas na palavra ALEGRE: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "A voz do texto está alegre.",
+          palavras: ["A", "voz", "do", "texto", "está", "alegre."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escrevendo com tom",
+        comando: "Escreva 2 frases alegres e depois 1 frase triste sobre o mesmo assunto.",
+        linhas: 3,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Dá para sentir o tom em cada frase.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

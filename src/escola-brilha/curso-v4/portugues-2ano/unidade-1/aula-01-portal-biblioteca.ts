@@ -293,6 +293,62 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "LIVRO",
+          silabas: ["LI", "VRO"],
+          distratores: ["CA", "PA"],
+          dica: "Bata palmas na palavra LIVRO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "CAPA",
+          silabas: ["CA", "PA"],
+          distratores: ["LI", "VRO"],
+          dica: "Bata palmas na palavra CAPA: são 2 pedacinhos.",
+        },
+        {
+          palavra: "PORTAL",
+          silabas: ["POR", "TAL"],
+          distratores: ["LI", "VRO"],
+          dica: "Bata palmas na palavra PORTAL: são 2 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "O livro tem uma capa bonita.",
+          palavras: ["O", "livro", "tem", "uma", "capa", "bonita."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Lista dos livros que eu quero ler",
+        comando: "Escreva 4 livros ou histórias que você quer ler neste ano.",
+        linhas: 4,
+        checklist: [
+          "Escrevi um livro em cada linha.",
+          "Comecei cada nome com letra maiúscula.",
+        ],
+      },
+    ],
+  },
+
   // ------------------------------------------------------------
   // 10 · AVALIAÇÃO — 5 perguntas mistas registrando desempenho
   // ------------------------------------------------------------

@@ -324,6 +324,65 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "ERRO",
+          silabas: ["ER", "RO"],
+          distratores: ["CER", "TO"],
+          dica: "Bata palmas na palavra ERRO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "CERTO",
+          silabas: ["CER", "TO"],
+          distratores: ["ER", "RO"],
+          dica: "Bata palmas na palavra CERTO: são 2 pedacinhos.",
+        },
+        {
+          palavra: "REVISAR",
+          silabas: ["RE", "VI", "SAR"],
+          distratores: ["ER", "RO"],
+          dica: "Bata palmas na palavra REVISAR: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Eu revisei e achei o erro.",
+          palavras: ["Eu", "revisei", "e", "achei", "o", "erro."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Meu texto sem erros",
+        comando: "Escreva 2 frases sobre o seu dia e depois cace os erros na revisão.",
+        linhas: 2,
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Coloquei PONTO no fim de cada frase.",
+          "Li em voz alta e entendi tudo.",
+          "Procurei letra trocada em cada palavra.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

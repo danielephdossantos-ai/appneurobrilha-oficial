@@ -291,6 +291,66 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+
+  // ------------------------------------------------------------
+  // ESCRITA (Fase 3) — ditado de palavra e frase + produção real
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Escrita",
+    instrucao: "Agora é você quem escreve! Ouça, monte com as peças e depois escreva de verdade.",
+    blocos: [
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+        {
+          palavra: "MISTÉRIO",
+          silabas: ["MIS", "TÉ", "RIO"],
+          distratores: ["PAL", "PI"],
+          dica: "Bata palmas na palavra MISTÉRIO: são 3 pedacinhos.",
+        },
+        {
+          palavra: "PALPITE",
+          silabas: ["PAL", "PI", "TE"],
+          distratores: ["MIS", "TÉ"],
+          dica: "Bata palmas na palavra PALPITE: são 3 pedacinhos.",
+        },
+        {
+          palavra: "SEGREDO",
+          silabas: ["SE", "GRE", "DO"],
+          distratores: ["MIS", "TÉ"],
+          dica: "Bata palmas na palavra SEGREDO: são 3 pedacinhos.",
+        },
+        ],
+      },
+      {
+        tipo: "ditadoFrase",
+        frases: [
+        {
+          frase: "Meu palpite é sobre o segredo.",
+          palavras: ["Meu", "palpite", "é", "sobre", "o", "segredo."],
+          distratores: ["não", "depois"],
+          dica: "A primeira palavra começa com letra MAIÚSCULA e a última tem o ponto final.",
+        },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Bilhete secreto para o personagem",
+        comando: "Escreva um bilhete contando ao personagem o que você descobriu.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Para o personagem", minLetras: 4 },
+          { rotulo: "Recado", placeholder: "Eu descobri que…", minLetras: 16 },
+          { rotulo: "De quem", placeholder: "seu nome", minLetras: 3 },
+        ],
+        checklist: [
+          "Expliquei a pista que me ajudou.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento10_avaliacao: {
     perguntas: [
       {

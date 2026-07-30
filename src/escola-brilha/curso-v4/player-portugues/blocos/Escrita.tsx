@@ -15,6 +15,7 @@ import type { EscritaBloco } from "../../types";
 export function Escrita({ bloco, aulaSlug }: { bloco: EscritaBloco; aulaSlug: string }) {
   if (bloco.tipo === "tracadoLetra") return <TracadoLetra bloco={bloco} />;
   if (bloco.tipo === "ditadoSilabas") return <DitadoSilabas bloco={bloco} />;
+  if (bloco.tipo === "ditadoFrase") return <DitadoFrase bloco={bloco} />;
   return <EscritaReal bloco={bloco} aulaSlug={aulaSlug} />;
 }
 
@@ -402,8 +403,155 @@ function DitadoSilabas({
 }
 
 // =====================================================================
-// 3) ESCRITA REAL (lista / bilhete) — guardada no aparelho
+// 2b) DITADO DE FRASE COM PALAVRAS MÓVEIS (2º ano · Fase 3)
 // =====================================================================
+
+function DitadoFrase({
+  bloco,
+}: {
+  bloco: Extract<EscritaBloco, { tipo: "ditadoFrase" }>;
+}) {
+  const [i, setI] = useState(0);
+  const item = bloco.frases[i];
+  const [montado, setMontado] = useState<number[]>([]);
+  const [erro, setErro] = useState(false);
+  const [acertou, setAcertou] = useState(false);
+
+  const banco = useMemo(
+    () => embaralhar([...item.palavras, ...(item.distratores ?? [])]),
+    [item],
+  );
+
+  useEffect(() => {
+    setMontado([]);
+    setErro(false);
+    setAcertou(false);
+  }, [i]);
+
+  const falarFrase = () => {
+    stopSpeaking();
+    speakChunked(item.frase, { rate: 0.68 });
+  };
+
+  useEffect(() => {
+    const t = setTimeout(falarFrase, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i]);
+
+  const tocar = (idx: number) => {
+    if (acertou || montado.includes(idx)) return;
+    stopSpeaking();
+    speakChunked(banco[idx], { rate: 0.66 });
+    const novo = [...montado, idx];
+    const texto = novo.map((k) => banco[k]).join(" ");
+    const alvo = item.palavras.join(" ");
+    if (!alvo.startsWith(texto)) {
+      setErro(true);
+      return;
+    }
+    setMontado(novo);
+    setErro(false);
+    if (texto === alvo) {
+      setAcertou(true);
+      setTimeout(() => speakChunked(`Isso! ${item.frase}`, { rate: 0.72 }), 600);
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-white/15 bg-white/5 p-4 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="text-white font-bold">🔊 Ouça a frase e escreva com as palavras</div>
+        <div className="text-xs text-white/60">
+          {i + 1} / {bloco.frases.length}
+        </div>
+      </div>
+
+      <button
+        onClick={falarFrase}
+        className="rounded-xl bg-sky-400 px-4 py-2 text-sm font-bold text-slate-900"
+      >
+        🔊 Ouvir a frase de novo
+      </button>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-xl bg-slate-900/70 border-2 border-dashed border-white/25 p-3 min-h-[64px]">
+        {montado.length === 0 && (
+          <span className="text-white/40 text-sm">Toque nas palavras na ordem da frase…</span>
+        )}
+        {montado.map((idx, k) => (
+          <span
+            key={k}
+            className="rounded-lg bg-amber-400 px-3 py-2 text-base font-black text-slate-900"
+          >
+            {banco[idx]}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {banco.map((p, idx) => (
+          <button
+            key={idx}
+            onClick={() => tocar(idx)}
+            disabled={montado.includes(idx) || acertou}
+            className="rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-base font-black text-white disabled:opacity-25"
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+
+      {erro && !acertou && (
+        <div className="rounded-xl bg-amber-500/15 border border-amber-400/30 p-3 text-sm text-amber-100">
+          Essa não é a próxima palavra. {item.dica ?? "Ouça a frase de novo e comece pela primeira palavra."}
+        </div>
+      )}
+
+      {acertou && (
+        <div className="rounded-xl bg-emerald-500/15 border border-emerald-400/30 p-3 text-sm text-emerald-100">
+          🎉 Você escreveu a frase inteira: <b>{item.frase}</b> — com letra maiúscula no começo e
+          ponto no fim!
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => {
+            setMontado(montado.slice(0, -1));
+            setErro(false);
+          }}
+          disabled={!montado.length || acertou}
+          className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white disabled:opacity-40"
+        >
+          ⬅ Apagar palavra
+        </button>
+        {acertou && i < bloco.frases.length - 1 && (
+          <button
+            onClick={() => setI(i + 1)}
+            className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
+          >
+            Próxima frase →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// 3) ESCRITA REAL (lista / bilhete / convite / legenda / cartaz / texto)
+//    Ciclo rascunho → revisão → versão final, guardado no aparelho.
+// =====================================================================
+
+const ICONE_FORMATO: Record<string, string> = {
+  lista: "📝",
+  bilhete: "✉️",
+  convite: "💌",
+  legenda: "🖼️",
+  cartaz: "📣",
+  texto: "📖",
+};
+
 
 function EscritaReal({
   bloco,
@@ -415,12 +563,17 @@ function EscritaReal({
   const chave = `escola-brilha:escrita:${aulaSlug}:${bloco.formato}:${bloco.titulo}`;
   const qtdLinhas = bloco.linhas ?? 4;
   const campos = bloco.campos ?? [];
-  const vazio = bloco.formato === "lista" ? Array(qtdLinhas).fill("") : campos.map(() => "");
+  const usaLinhas = campos.length === 0;
+  const vazio = usaLinhas ? Array(qtdLinhas).fill("") : campos.map(() => "");
+  const checklist = bloco.checklist ?? [];
+  const ciclo = !!bloco.cicloRevisao && checklist.length > 0;
 
   const [valores, setValores] = useState<string[]>(vazio);
   const [salvo, setSalvo] = useState(false);
   const [verModelo, setVerModelo] = useState(false);
   const [conferido, setConferido] = useState<string[] | null>(null);
+  const [etapa, setEtapa] = useState<"rascunho" | "revisao" | "final">("rascunho");
+  const [marcados, setMarcados] = useState<boolean[]>(() => checklist.map(() => false));
 
   useEffect(() => {
     try {
@@ -448,10 +601,11 @@ function EscritaReal({
 
   const conferir = () => {
     const problemas: string[] = [];
-    if (bloco.formato === "lista") {
+    if (usaLinhas) {
+      const minimo = Math.min(bloco.formato === "texto" ? 2 : 3, qtdLinhas);
       const preenchidas = valores.filter((v) => v.trim().length >= 2).length;
-      if (preenchidas < Math.min(3, qtdLinhas)) {
-        problemas.push(`Escreva pelo menos ${Math.min(3, qtdLinhas)} itens, um em cada linha.`);
+      if (preenchidas < minimo) {
+        problemas.push(`Escreva pelo menos ${minimo} linhas.`);
       }
     } else {
       campos.forEach((c, i) => {
@@ -462,8 +616,15 @@ function EscritaReal({
       });
     }
     setConferido(problemas);
-    if (!problemas.length) salvar();
+    if (problemas.length) return;
+    if (ciclo && etapa === "rascunho") {
+      setEtapa("revisao");
+      return;
+    }
+    salvar();
+    if (ciclo) setEtapa("final");
   };
+
 
   const salvar = () => {
     try {
@@ -479,11 +640,13 @@ function EscritaReal({
     speakChunked(bloco.comando, { rate: 0.72 });
   };
 
+  const todosMarcados = marcados.every(Boolean);
+
   return (
     <div className="rounded-2xl border border-white/15 bg-white/5 p-4 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="text-white font-bold">
-          {bloco.formato === "lista" ? "📝" : "✉️"} {bloco.titulo}
+          {ICONE_FORMATO[bloco.formato] ?? "📝"} {bloco.titulo}
         </div>
         <button
           onClick={ouvirComando}
@@ -493,22 +656,52 @@ function EscritaReal({
         </button>
       </div>
 
+      {ciclo && (
+        <div className="flex items-center gap-1 text-[11px] font-bold">
+          {(["rascunho", "revisao", "final"] as const).map((e, i) => (
+            <span
+              key={e}
+              className={`rounded-full px-2.5 py-1 ${
+                etapa === e
+                  ? "bg-amber-400 text-slate-900"
+                  : "bg-white/10 text-white/60 border border-white/15"
+              }`}
+            >
+              {i + 1}. {e === "rascunho" ? "Rascunho" : e === "revisao" ? "Revisão" : "Versão final"}
+            </span>
+          ))}
+        </div>
+      )}
+
       <p className="text-sm text-white/80">{bloco.comando}</p>
 
       {/* papel */}
       <div className="rounded-xl bg-amber-50 p-4 space-y-2 shadow-inner">
-        {bloco.formato === "lista"
-          ? valores.map((v, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span className="w-5 text-right text-slate-500 font-bold">{i + 1}.</span>
-                <input
+        {usaLinhas
+          ? valores.map((v, i) =>
+              bloco.formato === "texto" ? (
+                <textarea
+                  key={i}
                   value={v}
                   onChange={(e) => editar(i, e.target.value)}
-                  placeholder={`item ${i + 1}`}
-                  className="flex-1 min-w-0 bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500"
+                  disabled={etapa === "final"}
+                  placeholder={`parágrafo ${i + 1}`}
+                  rows={3}
+                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-base text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
                 />
-              </div>
-            ))
+              ) : (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 text-right text-slate-500 font-bold">{i + 1}.</span>
+                  <input
+                    value={v}
+                    onChange={(e) => editar(i, e.target.value)}
+                    disabled={etapa === "final"}
+                    placeholder={`item ${i + 1}`}
+                    className="flex-1 min-w-0 bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
+                  />
+                </div>
+              ),
+            )
           : campos.map((c, i) => (
               <div key={i} className="space-y-1">
                 <div className="text-xs font-bold uppercase tracking-wide text-slate-500">
@@ -517,15 +710,16 @@ function EscritaReal({
                 <textarea
                   value={valores[i] ?? ""}
                   onChange={(e) => editar(i, e.target.value)}
+                  disabled={etapa === "final"}
                   placeholder={c.placeholder}
-                  rows={c.rotulo.toLowerCase().includes("recado") || c.rotulo.toLowerCase().includes("mensagem") ? 3 : 1}
-                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500"
+                  rows={(c.minLetras ?? 2) > 12 ? 3 : 1}
+                  className="w-full resize-none bg-transparent border-b-2 border-dashed border-slate-300 py-1 text-lg text-slate-800 placeholder:text-slate-400 outline-none focus:border-amber-500 disabled:opacity-80"
                 />
               </div>
             ))}
       </div>
 
-      {bloco.modelo && (
+      {bloco.modelo && etapa !== "final" && (
         <div>
           <button
             onClick={() => setVerModelo((v) => !v)}
@@ -543,12 +737,37 @@ function EscritaReal({
         </div>
       )}
 
-      {bloco.checklist && (
-        <ul className="space-y-1 text-sm text-white/75">
-          {bloco.checklist.map((c, i) => (
-            <li key={i}>☑ {c}</li>
-          ))}
-        </ul>
+      {/* checklist: só leitura no rascunho, marcável na revisão */}
+      {checklist.length > 0 && (
+        <div className="space-y-1">
+          {ciclo && etapa === "revisao" && (
+            <div className="text-xs uppercase tracking-wide text-amber-200 font-bold">
+              🔍 Releia seu texto e marque tudo que já está certo
+            </div>
+          )}
+          <ul className="space-y-1 text-sm text-white/75">
+            {checklist.map((c, i) =>
+              ciclo && etapa === "revisao" ? (
+                <li key={i}>
+                  <button
+                    onClick={() =>
+                      setMarcados((m) => m.map((v, k) => (k === i ? !v : v)))
+                    }
+                    className={`w-full text-left rounded-xl px-3 py-2 border ${
+                      marcados[i]
+                        ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-100"
+                        : "bg-white/5 border-white/15 text-white/80"
+                    }`}
+                  >
+                    {marcados[i] ? "☑" : "☐"} {c}
+                  </button>
+                </li>
+              ) : (
+                <li key={i}>☑ {c}</li>
+              ),
+            )}
+          </ul>
+        </div>
       )}
 
       {conferido && conferido.length > 0 && (
@@ -559,19 +778,49 @@ function EscritaReal({
         </div>
       )}
 
-      {conferido && conferido.length === 0 && (
+      {salvo && (!ciclo || etapa === "final") && (
         <div className="rounded-xl bg-emerald-500/15 border border-emerald-400/30 p-3 text-sm text-emerald-100">
-          🎉 Escrita guardada! Mostre pra sua família o que você escreveu.
+          🎉 Versão final guardada! Mostre pra sua família o que você escreveu.
         </div>
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={conferir}
-          className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
-        >
-          ✅ Conferir e guardar
-        </button>
+        {(!ciclo || etapa === "rascunho") && (
+          <button
+            onClick={conferir}
+            className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900"
+          >
+            {ciclo ? "➡️ Ir para a revisão" : "✅ Conferir e guardar"}
+          </button>
+        )}
+        {ciclo && etapa === "revisao" && (
+          <>
+            <button
+              onClick={() => setEtapa("rascunho")}
+              className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white"
+            >
+              ⬅ Voltar e arrumar
+            </button>
+            <button
+              onClick={conferir}
+              disabled={!todosMarcados}
+              className="rounded-xl bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-900 disabled:opacity-40"
+            >
+              ✅ Publicar versão final
+            </button>
+          </>
+        )}
+        {ciclo && etapa === "final" && (
+          <button
+            onClick={() => {
+              setEtapa("rascunho");
+              setConferido(null);
+            }}
+            className="rounded-xl bg-white/10 border border-white/20 px-3 py-2 text-sm text-white"
+          >
+            ✏️ Editar de novo
+          </button>
+        )}
         {salvo && <span className="text-xs text-emerald-200">Guardado no aparelho ✓</span>}
       </div>
     </div>
