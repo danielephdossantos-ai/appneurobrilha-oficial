@@ -216,6 +216,39 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escrever com ponto, ? e !",
+    instrucao: "Cada frase pede um sinal no final. Escreva uma de cada.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "O", exemplo: "O de ONDE, começo da pergunta", dicaTracado: "uma roda inteira" },
+          { letra: "A", exemplo: "A de ACHEI", dicaTracado: "dois riscos e uma pontinha no meio" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "LUA", silabas: ["LU", "A"], distratores: ["SO", "MI"], dica: "O robô procurou a ... no céu." },
+          { palavra: "MALA", silabas: ["MA", "LA"], distratores: ["BO", "TE"], dica: "Mia procurou o lápis dentro da ..." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Três frases, três sinais",
+        comando: "Escreva 3 frases: a 1ª com ponto ( . ), a 2ª com interrogação ( ? ) e a 3ª com exclamação ( ! ).",
+        linhas: 3,
+        modelo: ["Eu tenho um gato.", "Cadê meu lápis?", "Achei!"],
+        checklist: ["Comecei com letra maiúscula?", "A frase 2 termina com ? ", "A frase 3 termina com ! "],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Ponto final ( . ) fecha frases que contam algo, com calma.",

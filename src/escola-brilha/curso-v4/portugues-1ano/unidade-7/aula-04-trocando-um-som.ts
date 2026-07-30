@@ -211,6 +211,30 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Troque o som e escreva a nova palavra",
+    instrucao: "Quando um som muda, a escrita muda também. Escreva as duas palavras.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "G", exemplo: "G de GATO, som /g/", dicaTracado: "faz a barriga e puxa o rabinho" },
+          { letra: "B", exemplo: "B de BALA, som /b/", dicaTracado: "desce e faz duas barrigas" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["PA", "MI"], dica: "É o PATO com o som /g/ no começo." },
+          { palavra: "BALA", silabas: ["BA", "LA"], distratores: ["MA", "SO"], dica: "É a MALA com o som /b/ no começo." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Trocar UM som muda a palavra inteira.",

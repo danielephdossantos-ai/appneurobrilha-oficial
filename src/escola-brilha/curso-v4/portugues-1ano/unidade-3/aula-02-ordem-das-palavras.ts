@@ -210,6 +210,39 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escrever na ordem certa",
+    instrucao: "Primeiro quem faz, depois o que faz. Escreva frases na ordem certa.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "L", exemplo: "L de LÉO", dicaTracado: "desce reto e vira para o lado" },
+          { letra: "R", exemplo: "R de RAFA", dicaTracado: "desce, faz a barriga e puxa a perninha" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "BOLA", silabas: ["BO", "LA"], distratores: ["CA", "TO"], dica: "O que Léo pega." },
+          { palavra: "RUA", silabas: ["RU", "A"], distratores: ["MI", "PO"], dica: "Onde Rafa empurra o carrinho." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Frases na ordem",
+        comando: "Escreva 3 frases começando por quem faz a ação.",
+        linhas: 3,
+        modelo: ["Léo pega a bola.", "O cachorro corre.", "Rafa empurra o carrinho."],
+        checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "As palavras precisam estar na ORDEM certa para formar sentido.",

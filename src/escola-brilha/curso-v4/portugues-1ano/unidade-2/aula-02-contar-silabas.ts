@@ -220,6 +220,30 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Bata palma e escreva",
+    instrucao: "Bata palma em cada pedacinho e depois escreva a palavra com as sílabas.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "S", exemplo: "S de SAPO", dicaTracado: "desce fazendo uma cobrinha" },
+          { letra: "G", exemplo: "G de GATO", dicaTracado: "faz a barriga e puxa o rabinho" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "SAPO", silabas: ["SA", "PO"], distratores: ["MI", "LU"], dica: "Duas palmas: SA-PO." },
+          { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["BE", "RA"], dica: "Duas palmas: GA-TO." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Cada sílaba de uma palavra ganha uma palma quando falamos devagar.",

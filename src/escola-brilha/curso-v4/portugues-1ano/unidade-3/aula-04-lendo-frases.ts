@@ -200,6 +200,39 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Ler e escrever frases inteiras",
+    instrucao: "Você já lê frases. Agora escreva as suas com começo, meio e fim.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "D", exemplo: "D de DUDA", dicaTracado: "desce e faz uma barriga grande" },
+          { letra: "T", exemplo: "T de TÉO", dicaTracado: "desce e põe o chapéu em cima" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "FLOR", silabas: ["FLOR"], distratores: ["CA", "MI"], dica: "O que Duda rega no jardim." },
+          { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["PA", "LU"], dica: "Quem dorme perto das flores." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "O meu dia em frases",
+        comando: "Escreva 4 frases contando o que você fez hoje.",
+        linhas: 4,
+        modelo: ["De manhã eu acordei.", "Eu comi pão.", "Eu brinquei na rua.", "À noite eu dormi."],
+        checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Entender uma frase é saber o que ela quer dizer, não só ler as letras.",

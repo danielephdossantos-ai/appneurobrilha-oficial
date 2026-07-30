@@ -226,6 +226,30 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "A família do B na minha escrita",
+    instrucao: "Trace o B e escreva palavras da família BA, BE, BI, BO, BU.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "B", exemplo: "B de BANANA", dicaTracado: "desce e faz duas barrigas" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "BEBÊ", silabas: ["BE", "BÊ"], distratores: ["BA", "BO"], dica: "Duas sílabas da família do B." },
+          { palavra: "BOLO", silabas: ["BO", "LO"], distratores: ["BI", "BU"], dica: "Começa com BO." },
+          { palavra: "BICO", silabas: ["BI", "CO"], distratores: ["BA", "BE"], dica: "Começa com BI." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "A família do B tem cinco sílabas: BA, BE, BI, BO, BU.",

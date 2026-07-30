@@ -251,6 +251,31 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Trace as primeiras letras do alfabeto",
+    instrucao: "O alfabeto começa aqui. Trace com o dedo e depois escreva as palavras.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "B", exemplo: "B de BOLA", dicaTracado: "desce e faz duas barrigas" },
+          { letra: "C", exemplo: "C de CASA", dicaTracado: "faz uma meia-lua aberta" },
+          { letra: "D", exemplo: "D de DADO", dicaTracado: "desce e faz uma barriga grande" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "DADO", silabas: ["DA", "DO"], distratores: ["PI", "LU"], dica: "Começa com D." },
+          { palavra: "BOLO", silabas: ["BO", "LO"], distratores: ["CA", "TE"], dica: "Começa com B." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "O alfabeto tem 26 letras, sempre na mesma ORDEM.",

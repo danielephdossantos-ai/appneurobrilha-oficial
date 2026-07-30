@@ -219,6 +219,31 @@ export const aula04: AulaPortuguesV4 = {
 
   momento_laboratorio: undefined,
 
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Palavras compridas, três pedacinhos",
+    instrucao: "Agora as palavras têm TRÊS sílabas. Escute e monte cada uma.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "N", exemplo: "N de BONECA", dicaTracado: "desce, sobe e desce de novo" },
+          { letra: "P", exemplo: "P de SAPATO", dicaTracado: "desce a perninha e faz a barriga" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "BONECA", silabas: ["BO", "NE", "CA"], distratores: ["TO", "MI"], dica: "Três palmas: BO-NE-CA." },
+          { palavra: "SAPATO", silabas: ["SA", "PA", "TO"], distratores: ["LU", "BE"], dica: "Três palmas: SA-PA-TO." },
+          { palavra: "PANELA", silabas: ["PA", "NE", "LA"], distratores: ["CO", "RI"], dica: "Três palmas: PA-NE-LA." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Palavras compridas têm três (ou mais) sílabas.",

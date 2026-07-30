@@ -214,6 +214,33 @@ export const aula03: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 9 · REVISÃO
   // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "As cinco vogais na minha mão",
+    instrucao: "Trace cada vogal e depois escreva palavras que começam com vogal.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "A", exemplo: "A de ABELHA", dicaTracado: "dois riscos e uma pontinha no meio" },
+          { letra: "E", exemplo: "E de ELEFANTE", dicaTracado: "desce e faz três riscos deitados" },
+          { letra: "I", exemplo: "I de IOIÔ", dicaTracado: "um risco reto de cima para baixo" },
+          { letra: "O", exemplo: "O de OVO", dicaTracado: "uma roda inteira" },
+          { letra: "U", exemplo: "U de UVA", dicaTracado: "desce, faz a curva e sobe" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "UVA", silabas: ["U", "VA"], distratores: ["MI", "LO"], dica: "Começa com a vogal U." },
+          { palavra: "OVO", silabas: ["O", "VO"], distratores: ["PA", "SE"], dica: "Começa com a vogal O." },
+        ],
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "As 5 vogais são A, E, I, O, U.",
