@@ -581,7 +581,11 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             </Link>
           </div>
 
+          </>
+          )}
+
         </main>
+
       </div>
     </div>
     </KidsCtx.Provider>
