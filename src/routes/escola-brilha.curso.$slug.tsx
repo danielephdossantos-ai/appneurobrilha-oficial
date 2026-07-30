@@ -193,7 +193,7 @@ function TrilhaCurso() {
             </div>
           </section>
         ))}
-        {curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
+        {ehPortugues && curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
           <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} />
         )}
 
