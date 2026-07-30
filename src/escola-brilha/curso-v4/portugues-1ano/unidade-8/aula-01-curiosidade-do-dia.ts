@@ -6,8 +6,6 @@ import { url as joaninha } from "@/assets/neuro-treino/objetos/joaninha.png.asse
 import { url as borboleta } from "@/assets/neuro-treino/objetos/borboleta.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
-import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
-import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
 
 /**
  * Unidade 8 — Aula 1: Curiosidade do Dia
@@ -337,5 +335,3 @@ export const aula01: AulaPortuguesV4 = {
     medalha: "🔎 Repórter Iniciante",
   },
 };
-
-export const _capa = [menina, menino];
