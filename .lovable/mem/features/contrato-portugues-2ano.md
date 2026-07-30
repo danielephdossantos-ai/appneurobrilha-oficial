@@ -86,9 +86,16 @@ Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicia
   SelecionarItens, MontarPalavra, OrdenarSequencia, CardVocabulario).
 
 
-## Fase 7 — Sondagem inicial, práticas curriculares e BNCC
-- Sondagem de 8 itens falados calibrada ao 2º ano, sugerindo unidade de entrada.
-- `praticasCurriculares`: escrita diária (caderno/lousa/ditado) e oralidade
-  (roda de conversa, reconto, entrevista, apresentação).
-- Fechar cobertura BNCC: incluir **EF02LP02** e **EF02LP05**, hoje ausentes.
-- Auditoria final aula a aula antes de declarar o 2º ano pronto.
+## Fase 7 — Sondagem inicial, práticas curriculares e BNCC ✅ CONCLUÍDA
+- Entregue: sondagem própria do 2º ano (`player-portugues/sondagem-2ano.ts`) com
+  8 itens falados — leitura de palavra, sílaba tônica, rimas, M antes de P/B,
+  R/RR, palavra teimosa, pontuação e causa/efeito — sugerindo unidade de entrada
+  (U7 → U3 → U4 → U6). Registro de sondagens por curso em `sondagens.ts`;
+  `CartaoSondagem` agora é genérico e aparece no 1º e no 2º ano.
+- `praticasCurriculares` do 2º ano: escrita diária, oralidade e leitura em voz
+  alta diária (fluência por releitura).
+- Cobertura BNCC fechada: EF02LP01–EF02LP28, incluindo EF02LP02 e EF02LP05
+  (atendidos pela Unidade 7 — A Oficina dos Sons).
+
+**Contrato concluído — o 2º ano está nivelado ao padrão do 1º ano.**
+

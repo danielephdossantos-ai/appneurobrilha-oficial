@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import {
-  ITENS_SONDAGEM,
-  avaliarSondagem,
   lerSondagem,
   limparSondagem,
   salvarSondagem,
   type ResultadoSondagem,
 } from "./sondagem-inicial";
+import { getSondagem, type ConjuntoSondagem } from "./sondagens";
 
 /**
  * Cartão de Sondagem Inicial na trilha do curso.
@@ -26,17 +25,19 @@ export function CartaoSondagem({
   const [resultado, setResultado] = useState<ResultadoSondagem | null>(null);
   const [aberto, setAberto] = useState(false);
   const [carregou, setCarregou] = useState(false);
+  const conjunto = getSondagem(cursoSlug);
 
   useEffect(() => {
     setResultado(lerSondagem(cursoSlug));
     setCarregou(true);
   }, [cursoSlug]);
 
-  if (!carregou) return null;
+  if (!carregou || !conjunto) return null;
 
   if (aberto) {
     return (
       <QuizSondagem
+        conjunto={conjunto}
         onFechar={() => setAberto(false)}
         onConcluir={(r) => {
           salvarSondagem(cursoSlug, r);
@@ -46,6 +47,7 @@ export function CartaoSondagem({
       />
     );
   }
+
 
   if (resultado) {
     return (
@@ -96,10 +98,8 @@ export function CartaoSondagem({
     <section className="rounded-2xl border border-amber-300/40 bg-amber-400/10 p-5 text-center">
       <div className="text-4xl">🎧</div>
       <h3 className="text-xl font-black mt-1">Vamos ver por onde começar?</h3>
-      <p className="text-sm text-white/80 mt-1">
-        São 8 perguntinhas faladas, de 2 minutinhos. Ninguém reprova — é só
-        para a Aurora saber qual é o melhor ponto de partida.
-      </p>
+      <p className="text-sm text-white/80 mt-1">{conjunto.chamada}</p>
+
       <button
         onClick={() => setAberto(true)}
         className="mt-4 px-6 py-3 rounded-full bg-amber-400 text-[#0d1f55] font-black"
@@ -111,16 +111,19 @@ export function CartaoSondagem({
 }
 
 function QuizSondagem({
+  conjunto,
   onConcluir,
   onFechar,
 }: {
+  conjunto: ConjuntoSondagem;
   onConcluir: (r: ResultadoSondagem) => void;
   onFechar: () => void;
 }) {
+  const itens = conjunto.itens;
   const [idx, setIdx] = useState(0);
   const [respostas, setRespostas] = useState<number[]>([]);
   const jaFalou = useRef<number | null>(null);
-  const item = ITENS_SONDAGEM[idx];
+  const item = itens[idx];
 
   useEffect(() => {
     if (jaFalou.current === idx) return;
@@ -131,9 +134,10 @@ function QuizSondagem({
 
   function responder(op: number) {
     const novas = [...respostas, op];
-    if (idx + 1 >= ITENS_SONDAGEM.length) {
+    if (idx + 1 >= itens.length) {
       stopSpeaking();
-      const r = avaliarSondagem(novas);
+      const r = conjunto.avaliar(novas);
+
       onConcluir({ ...r, feitoEm: new Date().toISOString() });
       return;
     }
@@ -145,7 +149,7 @@ function QuizSondagem({
     <section className="rounded-2xl border border-amber-300/40 bg-black/30 p-5">
       <div className="flex items-center justify-between text-xs text-white/60">
         <span>
-          Sondagem · {idx + 1}/{ITENS_SONDAGEM.length}
+          Sondagem · {idx + 1}/{itens.length}
         </span>
         <button onClick={() => { stopSpeaking(); onFechar(); }} className="hover:text-white">
           sair
@@ -155,7 +159,7 @@ function QuizSondagem({
       <div className="h-2 rounded-full bg-white/10 mt-2 overflow-hidden">
         <div
           className="h-full bg-amber-400 transition-all"
-          style={{ width: `${((idx + 1) / ITENS_SONDAGEM.length) * 100}%` }}
+          style={{ width: `${((idx + 1) / itens.length) * 100}%` }}
         />
       </div>
 
