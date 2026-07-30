@@ -724,82 +724,6 @@ export type MomentoEnsinoVisual = {
   blocos: EnsinoVisualBloco[];
 };
 
-// ---------------------------------------------------------------------
-// LOUSA DA LÍNGUA — o equivalente EXATO da "conta armada" da Matemática.
-// Português também tem passo a passo: a frase/texto é ARMADO na lousa,
-// dissecado token a token, com numeração colorida, erro comum e checagem.
-// Nunca é parágrafo de apostila: é demonstração ("o professor faz").
-// ---------------------------------------------------------------------
-export type LousaPTBloco =
-  /** Frase armada na lousa: cada pedaço ganha cor, rótulo e explicação, revelado passo a passo. */
-  | {
-      tipo: "fraseAnatomia";
-      titulo: string;
-      /** Frase inteira, exibida no alto da lousa. */
-      frase: string;
-      /** Pedaços na ORDEM em que aparecem na frase. */
-      partes: Array<{
-        texto: string;
-        /** Rótulo curto: "FATO", "OPINIÃO", "sujeito", "marca de opinião"… */
-        rotulo?: string;
-        cor?: "verde" | "vermelho" | "azul" | "amarelo" | "roxo" | "neutro";
-        /** O que o professor fala ao destacar esse pedaço. */
-        explicacao?: string;
-      }>;
-      /** Conclusão que fecha a demonstração. */
-      conclusao: string;
-    }
-  /** Passo a passo numerado com o exemplo sendo CONSTRUÍDO a cada passo. */
-  | {
-      tipo: "passoAPasso";
-      titulo: string;
-      /** Enunciado do que vamos resolver. */
-      enunciado: string;
-      passos: Array<{
-        /** Pergunta que o leitor se faz nesse passo. */
-        pergunta: string;
-        /** Ação/resposta do passo — vira a linha da lousa. */
-        resultado: string;
-        /** Por que isso funciona. */
-        porque?: string;
-      }>;
-      resposta: string;
-    }
-  /** Duas colunas contrastando dois conceitos, com marcas típicas de cada um. */
-  | {
-      tipo: "duasColunas";
-      titulo: string;
-      esquerda: { rotulo: string; cor?: string; itens: string[]; marcas?: string[] };
-      direita: { rotulo: string; cor?: string; itens: string[]; marcas?: string[] };
-      dica?: string;
-    }
-  /** Interativo: o aluno toca nas palavras que são "marcas" dentro da frase. */
-  | {
-      tipo: "cacaMarcas";
-      titulo: string;
-      instrucao: string;
-      frase: string;
-      /** Palavras (exatas) que devem ser tocadas. */
-      alvos: string[];
-      explicacao: string;
-    }
-  /** Erro comum × jeito certo, lado a lado. */
-  | {
-      tipo: "erroComum";
-      titulo: string;
-      errado: string;
-      porqueErrado: string;
-      certo: string;
-      porqueCerto: string;
-    };
-
-export type MomentoLousaPT = {
-  titulo: string;
-  instrucao: string;
-  blocos: LousaPTBloco[];
-};
-
-
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
@@ -812,9 +736,6 @@ export type AulaPortuguesV4 = {
   momento03_vocabulario: MomentoVocabulario;
   /** Opcional — ensino visual do pré-requisito. Aparece antes da leitura guiada. */
   momento_ensinoVisual?: MomentoEnsinoVisual;
-  /** Opcional — LOUSA DA LÍNGUA: demonstração passo a passo (o professor faz). */
-  momento_lousa?: MomentoLousaPT;
-
   momento04_leituraGuiada: MomentoLeituraGuiada;
   momento05_compreensao: MomentoCompreensao;
   momento06_personagensCenario: MomentoPersonagensCenario;
