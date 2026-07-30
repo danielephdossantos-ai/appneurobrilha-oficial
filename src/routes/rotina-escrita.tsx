@@ -31,6 +31,7 @@ import {
   conteudoDaSemana,
   fraseDoDia,
 } from "@/lib/rotina-escrita";
+import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
 
 export const Route = createFileRoute("/rotina-escrita")({
   head: () => ({
@@ -550,5 +551,70 @@ function BlocoCard({
       </div>
       {children}
     </section>
+  );
+}
+
+function Oralidade({ semana }: { semana: number }) {
+  const o = oralidadeDaSemana(semana);
+  const itens: { emoji: string; titulo: string; texto: string; falar: string }[] = [
+    {
+      emoji: "🗣️",
+      titulo: "Roda de conversa",
+      texto: o.perguntaRoda,
+      falar: o.perguntaRoda,
+    },
+    {
+      emoji: "📖",
+      titulo: "Reconto",
+      texto: o.reconto,
+      falar: o.reconto,
+    },
+    {
+      emoji: "🎤",
+      titulo: "Entrevista",
+      texto: o.entrevista.join("  •  "),
+      falar: o.entrevista.join(". "),
+    },
+    {
+      emoji: "🖼️",
+      titulo: "Apresentação",
+      texto: o.apresentacao,
+      falar: o.apresentacao,
+    },
+  ];
+
+  return (
+    <div>
+      <p className="text-sm text-muted-foreground mb-3">
+        A oralidade é a base da alfabetização. Antes de escrever, a criança precisa ouvir,
+        argumentar, recontar e montar a frase falando. Faça um item por dia, sentado junto —
+        exija <strong className="text-foreground">frases completas</strong>, não só “sim” e “não”.
+      </p>
+      <div className="rounded-2xl bg-background/70 px-4 py-3 mb-3">
+        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">
+          Tema da semana
+        </div>
+        <div className="font-black text-lg">{o.tema}</div>
+      </div>
+      <div className="space-y-2">
+        {itens.map((it) => (
+          <button
+            key={it.titulo}
+            onClick={() => {
+              stopSpeaking();
+              speakChunked(it.falar, { rate: 0.78 });
+            }}
+            className="w-full text-left rounded-2xl bg-background border-2 border-primary/20 px-4 py-3 flex items-start gap-3"
+          >
+            <span className="text-2xl shrink-0">{it.emoji}</span>
+            <span className="flex-1">
+              <span className="block font-extrabold">{it.titulo}</span>
+              <span className="block text-sm text-muted-foreground">{it.texto}</span>
+            </span>
+            <Volume2 className="h-4 w-4 shrink-0 mt-1 text-primary" />
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
