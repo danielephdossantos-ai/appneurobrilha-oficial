@@ -77,6 +77,79 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A frase que segura o texto",
+    instrucao: "Escute as frases e veja qual delas carrega a ideia principal.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "A biblioteca guarda histórias de todo o mundo.",
+                            "explicacao": "Ideia principal: fala do texto todo."
+                      },
+                      {
+                            "texto": "A estante três range um pouco.",
+                            "explicacao": "Detalhe: fala de uma coisinha só."
+                      },
+                      {
+                            "texto": "O tapete é vermelho.",
+                            "explicacao": "Detalhe: não segura o texto inteiro."
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "S, SS e Ç",
+                "explicacao": "No começo da palavra o som /sss/ é S (SAPO). Entre duas vogais, um S só soa /z/ (CASA), então usamos SS para manter o som forte (PASSO). Antes de A, O e U também pode ser Ç (CAÇA, AÇÚCAR).",
+                "exemplos": [
+                      {
+                            "palavra": "sapo",
+                            "destaque": "s",
+                            "motivo": "Começo de palavra: S."
+                      },
+                      {
+                            "palavra": "passo",
+                            "destaque": "ss",
+                            "motivo": "Som /sss/ entre vogais: SS."
+                      },
+                      {
+                            "palavra": "casa",
+                            "destaque": "s",
+                            "motivo": "Um S entre vogais soa /z/."
+                      },
+                      {
+                            "palavra": "caça",
+                            "destaque": "ç",
+                            "motivo": "Antes de A pode ser Ç."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "hi_tória",
+                            "opcoes": [
+                                  "s",
+                                  "ss"
+                            ],
+                            "correta": 0,
+                            "frase": "A HISTÓRIA começou.",
+                            "feedbackErro": "Aqui o S vem depois de vogal e antes de consoante: um S só."
+                      },
+                      {
+                            "molde": "pa_agem",
+                            "opcoes": [
+                                  "ss",
+                                  "s"
+                            ],
+                            "correta": 0,
+                            "frase": "A PASSAGEM do texto é bonita.",
+                            "feedbackErro": "Som /sss/ entre vogais pede SS: PASSAGEM."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia junto e pense: qual é o ASSUNTO principal?",
     leitura: {

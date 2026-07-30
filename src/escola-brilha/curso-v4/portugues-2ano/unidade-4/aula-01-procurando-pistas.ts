@@ -79,6 +79,60 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Ler a frase inteira para achar a pista",
+    instrucao: "Cada frase guarda uma informação. Ouça e veja onde ela começa e termina.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "O livro azul estava na terceira estante.",
+                            "explicacao": "A pista é ONDE: terceira estante."
+                      },
+                      {
+                            "texto": "Aurora chegou às sete horas.",
+                            "explicacao": "A pista é QUANDO: sete horas."
+                      },
+                      {
+                            "texto": "Quem escondeu a chave?",
+                            "explicacao": "A pergunta pede QUEM."
+                      }
+                ]
+          },
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "quando",
+                            "frase": "Quando ele leu, tudo brilhou.",
+                            "distratores": [
+                                  "cuando",
+                                  "quanto"
+                            ]
+                      },
+                      {
+                            "palavra": "depois",
+                            "frase": "Depois eles voltaram para casa.",
+                            "distratores": [
+                                  "depoiz",
+                                  "dipois"
+                            ]
+                      },
+                      {
+                            "palavra": "está",
+                            "frase": "O livro está na mesa.",
+                            "distratores": [
+                                  "esta",
+                                  "istá"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia junto com Brilha. As palavras em amarelo são as PISTAS. Toque nelas!",

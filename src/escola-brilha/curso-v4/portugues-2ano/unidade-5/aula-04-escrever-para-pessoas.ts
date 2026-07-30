@@ -82,6 +82,60 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Falar com quem vai ler",
+    instrucao: "Para cada leitor, um jeito de escrever — e um ponto diferente.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Vovó, venha na minha festa!",
+                            "explicacao": "Convite carinhoso: exclamação."
+                      },
+                      {
+                            "texto": "Professora, posso levar o livro para casa?",
+                            "explicacao": "Pedido educado: pergunta."
+                      },
+                      {
+                            "texto": "Mãe, cheguei da escola.",
+                            "explicacao": "Aviso simples: ponto final."
+                      }
+                ]
+          },
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "também",
+                            "frase": "Brilha também quis ler.",
+                            "distratores": [
+                                  "tambem",
+                                  "tanbém"
+                            ]
+                      },
+                      {
+                            "palavra": "porque",
+                            "frase": "Ela riu porque a história era boa.",
+                            "distratores": [
+                                  "por que",
+                                  "porquê"
+                            ]
+                      },
+                      {
+                            "palavra": "então",
+                            "frase": "Então a porta se abriu.",
+                            "distratores": [
+                                  "entao",
+                                  "intão"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha mostra 3 exemplos rapidinhos.",
     leitura: {

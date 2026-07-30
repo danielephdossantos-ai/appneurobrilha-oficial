@@ -76,6 +76,82 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Nome de personagem é nome próprio",
+    instrucao: "Todo nome de pessoa, bicho ou lugar começa com letra maiúscula.",
+    blocos: [
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "B",
+                            "minuscula": "b",
+                            "exemplo": "Brilha / bichinho"
+                      },
+                      {
+                            "maiuscula": "A",
+                            "minuscula": "a",
+                            "exemplo": "Aurora / amiga"
+                      },
+                      {
+                            "maiuscula": "P",
+                            "minuscula": "p",
+                            "exemplo": "Piu / passarinho"
+                      },
+                      {
+                            "maiuscula": "F",
+                            "minuscula": "f",
+                            "exemplo": "Floresta Azul / floresta"
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "LH, NH e CH: duas letras, um som só",
+                "explicacao": "Algumas duplas trabalham juntas e fazem UM som só: LH em FILHO, NH em CAMINHO e CH em CHUVA. Não dá para separar as duas letras.",
+                "exemplos": [
+                      {
+                            "palavra": "filho",
+                            "destaque": "lh",
+                            "motivo": "LH: um som só."
+                      },
+                      {
+                            "palavra": "caminho",
+                            "destaque": "nh",
+                            "motivo": "NH: um som só."
+                      },
+                      {
+                            "palavra": "chave",
+                            "destaque": "ch",
+                            "motivo": "CH tem som de /xis/."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "orgu_oso",
+                            "opcoes": [
+                                  "lh",
+                                  "li"
+                            ],
+                            "correta": 0,
+                            "frase": "O personagem era ORGULHOSO.",
+                            "feedbackErro": "LH faz um som só: ORGULHOSO."
+                      },
+                      {
+                            "molde": "cari_oso",
+                            "opcoes": [
+                                  "nh",
+                                  "ni"
+                            ],
+                            "correta": 0,
+                            "frase": "Aurora é CARINHOSA com todos.",
+                            "feedbackErro": "NH faz um som só: CARINHOSA."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia junto e observe as AÇÕES e as FALAS.",
     leitura: {

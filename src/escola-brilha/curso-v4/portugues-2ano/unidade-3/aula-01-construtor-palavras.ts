@@ -78,6 +78,85 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Montando palavras som por som",
+    instrucao: "Escute os sons soltos e junte tudo até virar palavra.",
+    blocos: [
+          {
+                "tipo": "sintetizarFonemas",
+                "itens": [
+                      {
+                            "fonemas": [
+                                  "p",
+                                  "o",
+                                  "r",
+                                  "t",
+                                  "a"
+                            ],
+                            "palavra": "PORTA"
+                      },
+                      {
+                            "fonemas": [
+                                  "c",
+                                  "h",
+                                  "a",
+                                  "v",
+                                  "e"
+                            ],
+                            "palavra": "CHAVE"
+                      },
+                      {
+                            "fonemas": [
+                                  "e",
+                                  "s",
+                                  "t",
+                                  "a",
+                                  "n",
+                                  "t",
+                                  "e"
+                            ],
+                            "palavra": "ESTANTE"
+                      }
+                ]
+          },
+          {
+                "tipo": "silabaTonica",
+                "itens": [
+                      {
+                            "palavra": "PALAVRA",
+                            "silabas": [
+                                  "PA",
+                                  "LA",
+                                  "VRA"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força cai em LA."
+                      },
+                      {
+                            "palavra": "MARTELO",
+                            "silabas": [
+                                  "MAR",
+                                  "TE",
+                                  "LO"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força cai em TE."
+                      },
+                      {
+                            "palavra": "CONSTRUTOR",
+                            "silabas": [
+                                  "CONS",
+                                  "TRU",
+                                  "TOR"
+                            ],
+                            "tonica": 2,
+                            "explicacao": "A força cai no fim: TOR."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Brilha explica bem devagar. Leia junto e bata palma em cada sílaba.",

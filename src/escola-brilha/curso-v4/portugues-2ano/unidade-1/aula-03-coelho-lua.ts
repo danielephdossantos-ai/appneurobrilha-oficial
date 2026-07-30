@@ -81,6 +81,116 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Palavras que terminam igual",
+    instrucao: "Escute o finalzinho de cada palavra e escolha quem rima.",
+    blocos: [
+          {
+                "tipo": "rimas",
+                "itens": [
+                      {
+                            "palavraBase": "LUA",
+                            "terminacao": "-UA",
+                            "opcoes": [
+                                  {
+                                        "palavra": "RUA",
+                                        "rima": true
+                                  },
+                                  {
+                                        "palavra": "CASA",
+                                        "rima": false
+                                  },
+                                  {
+                                        "palavra": "SOL",
+                                        "rima": false
+                                  }
+                            ]
+                      },
+                      {
+                            "palavraBase": "COELHO",
+                            "terminacao": "-ELHO",
+                            "opcoes": [
+                                  {
+                                        "palavra": "JOELHO",
+                                        "rima": true
+                                  },
+                                  {
+                                        "palavra": "COLAR",
+                                        "rima": false
+                                  },
+                                  {
+                                        "palavra": "CAMPO",
+                                        "rima": false
+                                  }
+                            ]
+                      },
+                      {
+                            "palavraBase": "ESTRELA",
+                            "terminacao": "-ELA",
+                            "opcoes": [
+                                  {
+                                        "palavra": "PANELA",
+                                        "rima": true
+                                  },
+                                  {
+                                        "palavra": "ESTRADA",
+                                        "rima": false
+                                  },
+                                  {
+                                        "palavra": "NOITE",
+                                        "rima": false
+                                  }
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "LH, NH e CH: duas letras, um som só",
+                "explicacao": "Algumas duplas trabalham juntas e fazem UM som só: LH em FILHO, NH em CAMINHO e CH em CHUVA. Não dá para separar as duas letras.",
+                "exemplos": [
+                      {
+                            "palavra": "filho",
+                            "destaque": "lh",
+                            "motivo": "LH: um som só."
+                      },
+                      {
+                            "palavra": "caminho",
+                            "destaque": "nh",
+                            "motivo": "NH: um som só."
+                      },
+                      {
+                            "palavra": "chave",
+                            "destaque": "ch",
+                            "motivo": "CH tem som de /xis/."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "coe_o",
+                            "opcoes": [
+                                  "lh",
+                                  "li"
+                            ],
+                            "correta": 0,
+                            "frase": "O COELHO olhou para a lua.",
+                            "feedbackErro": "O som do meio vem do par LH: COELHO."
+                      },
+                      {
+                            "molde": "so_o",
+                            "opcoes": [
+                                  "nh",
+                                  "ni"
+                            ],
+                            "correta": 0,
+                            "frase": "Ele teve um SONHO bonito.",
+                            "feedbackErro": "NH faz um som só: SONHO."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Preste atenção nos TRAVESSÕES (—). Cada travessão mostra alguém FALANDO.",
     leitura: {

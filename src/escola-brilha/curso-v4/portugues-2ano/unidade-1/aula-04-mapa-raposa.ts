@@ -84,6 +84,93 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O R forte e o R fraquinho",
+    instrucao: "Escute e escolha como se escreve o som do R em cada palavra.",
+    blocos: [
+          {
+                "tipo": "regraOrtografica",
+                "regra": "R no começo, RR no meio",
+                "explicacao": "O som forte de R se escreve com um R só no COMEÇO da palavra (RATO) e com RR quando fica no MEIO, entre duas vogais (CARRO). Entre vogais, um R só fica fraquinho: CARO.",
+                "exemplos": [
+                      {
+                            "palavra": "rato",
+                            "destaque": "r",
+                            "motivo": "Começo de palavra: um R."
+                      },
+                      {
+                            "palavra": "carro",
+                            "destaque": "rr",
+                            "motivo": "Som forte no meio: RR."
+                      },
+                      {
+                            "palavra": "caro",
+                            "destaque": "r",
+                            "motivo": "Som fraquinho entre vogais: um R."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "_aposa",
+                            "opcoes": [
+                                  "rr",
+                                  "r"
+                            ],
+                            "correta": 1,
+                            "frase": "A RAPOSA guardou o mapa.",
+                            "feedbackErro": "Nenhuma palavra começa com RR. No começo é um R só."
+                      },
+                      {
+                            "molde": "ca_o",
+                            "opcoes": [
+                                  "rr",
+                                  "r"
+                            ],
+                            "correta": 0,
+                            "frase": "O CARRO parou na trilha.",
+                            "feedbackErro": "Som forte entre vogais pede RR: CARRO."
+                      },
+                      {
+                            "molde": "flo_esta",
+                            "opcoes": [
+                                  "r",
+                                  "rr"
+                            ],
+                            "correta": 1,
+                            "frase": "A FLORRESTA... não! O certo é FLORESTA.",
+                            "feedbackErro": "Aqui o R vem depois de consoante e fica sozinho: FLORESTA."
+                      }
+                ]
+          },
+          {
+                "tipo": "trocarFonema",
+                "itens": [
+                      {
+                            "palavra": "MAPA",
+                            "de": "m",
+                            "para": "c",
+                            "resultado": "CAPA",
+                            "posicao": "inicio"
+                      },
+                      {
+                            "palavra": "MATO",
+                            "de": "m",
+                            "para": "g",
+                            "resultado": "GATO",
+                            "posicao": "inicio"
+                      },
+                      {
+                            "palavra": "TRILHA",
+                            "de": "t",
+                            "para": "b",
+                            "resultado": "BRILHA",
+                            "posicao": "inicio"
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia com atenção as palavras de LUGAR (atrás, depois, embaixo…). Elas mostram o caminho.",

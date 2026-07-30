@@ -97,6 +97,85 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Palavras da lista, som por som",
+    instrucao: "Escute cada palavra da lista separada em sons e depois junta tudo.",
+    blocos: [
+          {
+                "tipo": "segmentarFonemas",
+                "itens": [
+                      {
+                            "palavra": "PAPEL",
+                            "fonemas": [
+                                  "p",
+                                  "a",
+                                  "p",
+                                  "e",
+                                  "l"
+                            ]
+                      },
+                      {
+                            "palavra": "LÁPIS",
+                            "fonemas": [
+                                  "l",
+                                  "á",
+                                  "p",
+                                  "i",
+                                  "s"
+                            ]
+                      },
+                      {
+                            "palavra": "COLA",
+                            "fonemas": [
+                                  "c",
+                                  "o",
+                                  "l",
+                                  "a"
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "sintetizarFonemas",
+                "itens": [
+                      {
+                            "fonemas": [
+                                  "l",
+                                  "i",
+                                  "v",
+                                  "r",
+                                  "o"
+                            ],
+                            "palavra": "LIVRO"
+                      },
+                      {
+                            "fonemas": [
+                                  "m",
+                                  "o",
+                                  "ch",
+                                  "i",
+                                  "l",
+                                  "a"
+                            ],
+                            "palavra": "MOCHILA"
+                      },
+                      {
+                            "fonemas": [
+                                  "t",
+                                  "e",
+                                  "s",
+                                  "o",
+                                  "u",
+                                  "r",
+                                  "a"
+                            ],
+                            "palavra": "TESOURA"
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia a lista da Aurora. Cada linha é UM item.",
     leitura: {

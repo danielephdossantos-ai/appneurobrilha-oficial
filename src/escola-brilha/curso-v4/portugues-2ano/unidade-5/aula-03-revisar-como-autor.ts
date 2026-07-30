@@ -75,6 +75,82 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O olho do revisor",
+    instrucao: "Antes de publicar, o autor confere maiúscula, ponto e ortografia.",
+    blocos: [
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "E",
+                            "minuscula": "e",
+                            "exemplo": "Eu / escrevi"
+                      },
+                      {
+                            "maiuscula": "R",
+                            "minuscula": "r",
+                            "exemplo": "Rio Azul / rio"
+                      },
+                      {
+                            "maiuscula": "J",
+                            "minuscula": "j",
+                            "exemplo": "João / janela"
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "S, SS e Ç",
+                "explicacao": "No começo da palavra o som /sss/ é S (SAPO). Entre duas vogais, um S só soa /z/ (CASA), então usamos SS para manter o som forte (PASSO). Antes de A, O e U também pode ser Ç (CAÇA, AÇÚCAR).",
+                "exemplos": [
+                      {
+                            "palavra": "sapo",
+                            "destaque": "s",
+                            "motivo": "Começo de palavra: S."
+                      },
+                      {
+                            "palavra": "passo",
+                            "destaque": "ss",
+                            "motivo": "Som /sss/ entre vogais: SS."
+                      },
+                      {
+                            "palavra": "casa",
+                            "destaque": "s",
+                            "motivo": "Um S entre vogais soa /z/."
+                      },
+                      {
+                            "palavra": "caça",
+                            "destaque": "ç",
+                            "motivo": "Antes de A pode ser Ç."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "revi_ão",
+                            "opcoes": [
+                                  "s",
+                                  "ss"
+                            ],
+                            "correta": 0,
+                            "frase": "Fiz a REVISÃO do meu texto.",
+                            "feedbackErro": "Aqui o som é /z/, com um S só: REVISÃO."
+                      },
+                      {
+                            "molde": "corre_ão",
+                            "opcoes": [
+                                  "ç",
+                                  "ss"
+                            ],
+                            "correta": 0,
+                            "frase": "Fiz a CORREÇÃO da frase.",
+                            "feedbackErro": "Antes de Ã usamos Ç: CORREÇÃO."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha revisa em voz alta. Leia junto.",
     leitura: {

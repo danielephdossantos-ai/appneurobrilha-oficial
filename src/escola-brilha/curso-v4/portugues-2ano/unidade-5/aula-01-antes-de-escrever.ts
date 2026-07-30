@@ -88,6 +88,50 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Como abrir e fechar uma frase",
+    instrucao: "Antes de escrever, veja o começo maiúsculo e o fim com ponto.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Meu dia começou cedo.",
+                            "explicacao": "Maiúscula no começo, ponto no fim."
+                      },
+                      {
+                            "texto": "Depois eu li um livro.",
+                            "explicacao": "Cada ideia nova, uma frase nova."
+                      },
+                      {
+                            "texto": "À noite eu contei tudo para a minha mãe.",
+                            "explicacao": "Frase mais longa, mas com um ponto só no fim."
+                      }
+                ]
+          },
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "M",
+                            "minuscula": "m",
+                            "exemplo": "Meu / minha"
+                      },
+                      {
+                            "maiuscula": "D",
+                            "minuscula": "d",
+                            "exemplo": "Depois / dia"
+                      },
+                      {
+                            "maiuscula": "N",
+                            "minuscula": "n",
+                            "exemplo": "Noite / nós"
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha planeja em voz alta. Leia junto.",
     leitura: {

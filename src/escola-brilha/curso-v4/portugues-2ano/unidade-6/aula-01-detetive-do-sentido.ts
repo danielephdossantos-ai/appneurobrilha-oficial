@@ -83,6 +83,56 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Ler rápido para pensar melhor",
+    instrucao: "Quem reconhece as palavras comuns num relance sobra tempo para pensar no sentido.",
+    blocos: [
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "quando",
+                            "frase": "Quando ele leu, tudo brilhou.",
+                            "distratores": [
+                                  "cuando",
+                                  "quanto"
+                            ]
+                      },
+                      {
+                            "palavra": "depois",
+                            "frase": "Depois eles voltaram para casa.",
+                            "distratores": [
+                                  "depoiz",
+                                  "dipois"
+                            ]
+                      },
+                      {
+                            "palavra": "está",
+                            "frase": "O livro está na mesa.",
+                            "distratores": [
+                                  "esta",
+                                  "istá"
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "O prato estava vazio e o gato lambia os bigodes.",
+                            "explicacao": "O texto não diz quem comeu — mas dá a pista."
+                      },
+                      {
+                            "texto": "Quem comeu a comida?",
+                            "explicacao": "A pergunta que o detetive faz."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia a mini-história com Brilha.",
     leitura: {

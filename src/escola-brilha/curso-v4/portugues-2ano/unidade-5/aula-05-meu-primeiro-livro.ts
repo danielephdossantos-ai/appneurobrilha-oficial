@@ -93,6 +93,75 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O tempo da minha história",
+    instrucao: "No fim do livro o autor escolhe: já aconteceu ou ainda vai acontecer?",
+    blocos: [
+          {
+                "tipo": "regraOrtografica",
+                "regra": "AM ou ÃO no fim do verbo",
+                "explicacao": "Quando a ação JÁ aconteceu, o verbo termina em AM: eles falARAM. Quando a ação AINDA vai acontecer, termina em ÃO: eles falARÃO.",
+                "exemplos": [
+                      {
+                            "palavra": "leram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "lerão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      },
+                      {
+                            "palavra": "brincaram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "brincarão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "Os amigos voltar_ ontem",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 0,
+                            "frase": "Os amigos VOLTARAM ontem.",
+                            "feedbackErro": "ONTEM é passado: AM."
+                      },
+                      {
+                            "molde": "Os amigos voltar_ amanhã",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 1,
+                            "frase": "Os amigos VOLTARÃO amanhã.",
+                            "feedbackErro": "AMANHÃ é futuro: ÃO."
+                      }
+                ]
+          },
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Este é o meu primeiro livro.",
+                            "explicacao": "Abertura: apresento a obra."
+                      },
+                      {
+                            "texto": "Espero que você goste!",
+                            "explicacao": "Fechamento animado: exclamação."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha mostra o caminho completo do autor.",
     leitura: {

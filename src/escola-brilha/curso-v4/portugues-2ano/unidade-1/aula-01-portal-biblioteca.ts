@@ -106,6 +106,50 @@ export const aula01: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 4 · LEITURA GUIADA — texto curto (nível 2º ano começo)
   // ------------------------------------------------------------
+  momento_ensinoVisual: {
+    titulo: "Como uma frase fica em pé",
+    instrucao: "Toque em cada frase para ouvir. Veja a letra maiúscula abrindo e o ponto fechando.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "A porta da biblioteca abriu.",
+                            "explicacao": "Começa com A maiúsculo e fecha com ponto final."
+                      },
+                      {
+                            "texto": "Brilha entrou devagar.",
+                            "explicacao": "Nome de pessoa também pede letra maiúscula."
+                      },
+                      {
+                            "texto": "Quantos livros havia ali?",
+                            "explicacao": "Quando a frase pergunta, ela fecha com ponto de interrogação."
+                      }
+                ]
+          },
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "B",
+                            "minuscula": "b",
+                            "exemplo": "Brilha / biblioteca"
+                      },
+                      {
+                            "maiuscula": "A",
+                            "minuscula": "a",
+                            "exemplo": "Aurora / abriu"
+                      },
+                      {
+                            "maiuscula": "L",
+                            "minuscula": "l",
+                            "exemplo": "Lua / livro"
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Aurora leu a primeira vez pra você. Agora leia junto — pode apertar 🔊 pra ouvir se quiser.",

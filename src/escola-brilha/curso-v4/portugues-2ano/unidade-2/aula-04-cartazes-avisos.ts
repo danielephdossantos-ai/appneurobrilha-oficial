@@ -86,6 +86,50 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Letra grande e ponto forte no cartaz",
+    instrucao: "O cartaz fala de longe. Veja as letras maiúsculas e a pontuação.",
+    blocos: [
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "S",
+                            "minuscula": "s",
+                            "exemplo": "SILÊNCIO / silêncio"
+                      },
+                      {
+                            "maiuscula": "C",
+                            "minuscula": "c",
+                            "exemplo": "CUIDADO / cuidado"
+                      },
+                      {
+                            "maiuscula": "E",
+                            "minuscula": "e",
+                            "exemplo": "ENTRADA / entrada"
+                      }
+                ]
+          },
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Silêncio na sala de leitura!",
+                            "explicacao": "Aviso forte: exclamação."
+                      },
+                      {
+                            "texto": "Devolva o livro até sexta.",
+                            "explicacao": "Instrução calma: ponto final."
+                      },
+                      {
+                            "texto": "Você já se inscreveu?",
+                            "explicacao": "Chamada em forma de pergunta."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia o cartaz. Repare: LETRAS GRANDES e frase CURTA.",
     leitura: {

@@ -79,6 +79,60 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "As pistas que a pontuação dá",
+    instrucao: "O ponto no fim conta se o texto afirma, pergunta ou se emociona.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "A porta estava aberta.",
+                            "explicacao": "Afirma: alguém entrou antes."
+                      },
+                      {
+                            "texto": "A porta estava aberta?",
+                            "explicacao": "Pergunta: o narrador tem dúvida."
+                      },
+                      {
+                            "texto": "A porta estava aberta!",
+                            "explicacao": "Espanto: isso não era esperado."
+                      }
+                ]
+          },
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "eles",
+                            "frase": "Eles leram juntos.",
+                            "distratores": [
+                                  "elis",
+                                  "êles"
+                            ]
+                      },
+                      {
+                            "palavra": "quem",
+                            "frase": "Quem escreveu o bilhete?",
+                            "distratores": [
+                                  "kem",
+                                  "quen"
+                            ]
+                      },
+                      {
+                            "palavra": "isso",
+                            "frase": "Isso foi uma surpresa.",
+                            "distratores": [
+                                  "iso",
+                                  "içó"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha investiga. Leia junto.",
     leitura: {

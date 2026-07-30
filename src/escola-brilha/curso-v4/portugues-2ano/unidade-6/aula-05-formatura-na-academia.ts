@@ -88,6 +88,93 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Tudo o que aprendi neste ano",
+    instrucao: "Revisão relâmpago: batida forte, rima e ortografia.",
+    blocos: [
+          {
+                "tipo": "silabaTonica",
+                "itens": [
+                      {
+                            "palavra": "BIBLIOTECA",
+                            "silabas": [
+                                  "BI",
+                                  "BLI",
+                                  "O",
+                                  "TE",
+                                  "CA"
+                            ],
+                            "tonica": 3,
+                            "explicacao": "A força cai em TE."
+                      },
+                      {
+                            "palavra": "LEITOR",
+                            "silabas": [
+                                  "LEI",
+                                  "TOR"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força cai no fim: TOR."
+                      },
+                      {
+                            "palavra": "DIPLOMA",
+                            "silabas": [
+                                  "DI",
+                                  "PLO",
+                                  "MA"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força cai em PLO."
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "R no começo, RR no meio",
+                "explicacao": "O som forte de R se escreve com um R só no COMEÇO da palavra (RATO) e com RR quando fica no MEIO, entre duas vogais (CARRO). Entre vogais, um R só fica fraquinho: CARO.",
+                "exemplos": [
+                      {
+                            "palavra": "rato",
+                            "destaque": "r",
+                            "motivo": "Começo de palavra: um R."
+                      },
+                      {
+                            "palavra": "carro",
+                            "destaque": "rr",
+                            "motivo": "Som forte no meio: RR."
+                      },
+                      {
+                            "palavra": "caro",
+                            "destaque": "r",
+                            "motivo": "Som fraquinho entre vogais: um R."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "co_er",
+                            "opcoes": [
+                                  "rr",
+                                  "r"
+                            ],
+                            "correta": 0,
+                            "frase": "Vamos CORRER para a formatura!",
+                            "feedbackErro": "Som forte entre vogais pede RR: CORRER."
+                      },
+                      {
+                            "molde": "leito_a",
+                            "opcoes": [
+                                  "r",
+                                  "rr"
+                            ],
+                            "correta": 0,
+                            "frase": "Ela virou uma grande LEITORA.",
+                            "feedbackErro": "O som é fraquinho aqui: um R só."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia junto com Brilha a história da FORMATURA.",
     leitura: {

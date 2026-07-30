@@ -79,6 +79,65 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O ponto manda no tom",
+    instrucao: "Ouça a mesma frase com pontos diferentes e sinta a voz mudar.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Você veio.",
+                            "explicacao": "Voz calma: eu só constato."
+                      },
+                      {
+                            "texto": "Você veio?",
+                            "explicacao": "Voz sobe no fim: eu duvido."
+                      },
+                      {
+                            "texto": "Você veio!",
+                            "explicacao": "Voz forte: eu me alegro ou me espanto."
+                      }
+                ]
+          },
+          {
+                "tipo": "silabaTonica",
+                "itens": [
+                      {
+                            "palavra": "ALEGRIA",
+                            "silabas": [
+                                  "A",
+                                  "LE",
+                                  "GRI",
+                                  "A"
+                            ],
+                            "tonica": 2,
+                            "explicacao": "A força cai em GRI."
+                      },
+                      {
+                            "palavra": "SUSTO",
+                            "silabas": [
+                                  "SUS",
+                                  "TO"
+                            ],
+                            "tonica": 0,
+                            "explicacao": "A força cai em SUS."
+                      },
+                      {
+                            "palavra": "SAUDADE",
+                            "silabas": [
+                                  "SAU",
+                                  "DA",
+                                  "DE"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força cai em DA."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Escuta o tom com Brilha (na cabeça).",
     leitura: {
