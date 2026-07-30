@@ -184,6 +184,42 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Você escreve a lista",
+    instrucao:
+      "Agora é você que escreve. Primeiro trace a letra, depois escreva a palavra ditada com as sílabas e no fim faça a SUA lista de verdade.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "L", exemplo: "LISTA", dicaTracado: "Desce reto e depois faz o pezinho pra direita." },
+          { letra: "P", exemplo: "PÃO", dicaTracado: "Desce reto e faz a barriguinha em cima." },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "LEITE", silabas: ["LEI", "TE"], distratores: ["LA"], dica: "Comece pelo som LEI." },
+          { palavra: "PÃO", silabas: ["PÃO"], distratores: ["PA", "TO"], dica: "É uma palavra de um pedacinho só." },
+          { palavra: "MAÇÃ", silabas: ["MA", "ÇÃ"], distratores: ["CA"], dica: "MA + ÇÃ." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Minha lista de compras",
+        comando: "Escreva a lista das compras da SUA casa. Um item em cada linha.",
+        linhas: 4,
+        modelo: ["LISTA DE COMPRAS", "1. LEITE", "2. PÃO", "3. MAÇÃ", "4. OVOS"],
+        checklist: [
+          "Escrevi um item em cada linha.",
+          "Escrevi pelo menos 3 itens.",
+          "Usei letras MAIÚSCULAS.",
+        ],
+      },
+    ],
+  },
+
   momento_minijogo: {
     titulo: "Monte a Lista Certa",
     instrucao: "Marque só os itens que combinam com uma lista de FRUTAS.",
