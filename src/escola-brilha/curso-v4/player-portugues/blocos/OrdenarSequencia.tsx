@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { OrdenarSequenciaData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Bloco de ordenar sequência — a criança usa botões ↑ ↓ pra colocar
