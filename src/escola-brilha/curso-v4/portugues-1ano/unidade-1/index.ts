@@ -5,7 +5,7 @@ import { aula03 } from "./aula-03-vogais";
 import { aula04 } from "./aula-04-consoantes-encontro";
 
 /**
- * Unidade 1 — O Alfabeto Mágico
+ * Unidade 2 — O Alfabeto Mágico
  * Aurora, a Guardiã das Letras, apresenta o alfabeto: do nome próprio
  * (a palavra mais importante do mundo para a criança) até a descoberta
  * de que consoante + vogal formam sílabas legíveis.
