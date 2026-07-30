@@ -178,6 +178,46 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Você escreve o convite",
+    instrucao:
+      "Trace a letra, escreva as palavras ditadas com as sílabas e depois faça o SEU convite de verdade.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "C", exemplo: "CONVITE", dicaTracado: "Faz uma barriguinha aberta, como uma lua." },
+          { letra: "F", exemplo: "FESTA", dicaTracado: "Desce reto e faz dois bracinhos pra direita." },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "FESTA", silabas: ["FES", "TA"], distratores: ["FA"], dica: "FES + TA." },
+          { palavra: "BOLO", silabas: ["BO", "LO"], distratores: ["LA"], dica: "BO + LO." },
+          { palavra: "CONVITE", silabas: ["CON", "VI", "TE"], distratores: ["TA"], dica: "São três pedacinhos." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Meu convite",
+        comando: "Escreva um convite de verdade: quem está convidando, pra quê, que dia e onde.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Ex.: MEUS AMIGOS", minLetras: 2 },
+          { rotulo: "Mensagem", placeholder: "Ex.: VENHA À MINHA FESTA!", minLetras: 6 },
+          { rotulo: "Dia e lugar", placeholder: "Ex.: SÁBADO, NA MINHA CASA", minLetras: 4 },
+        ],
+        modelo: ["PARA: MEUS AMIGOS", "VENHA À MINHA FESTA DE ANIVERSÁRIO!", "SÁBADO, ÀS 4, NA MINHA CASA."],
+        checklist: [
+          "Disse pra quem é o convite.",
+          "Disse o que vai acontecer.",
+          "Disse o dia e o lugar.",
+        ],
+      },
+    ],
+  },
+
   momento_minijogo: {
     titulo: "Complete o Convite",
     instrucao: "Marque só as informações que não podem faltar num convite.",

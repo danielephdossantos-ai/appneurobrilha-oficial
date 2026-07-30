@@ -20,6 +20,7 @@ import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
+import { Escrita } from "./blocos/Escrita";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
@@ -49,6 +50,7 @@ const MOMENTOS_BASE = [
   { id: "m6", label: "🎭 Personagens & lugar" },
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
+  { id: "mesc", label: "✍️ Você escreve", opcional: true },
   { id: "mmini", label: "🎮 Minijogo", opcional: true },
   { id: "mlab", label: "🔬 Laboratório", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
@@ -67,6 +69,7 @@ const CORES_KIDS: Record<string, string> = {
   m6: "#e879f9",
   m7: "#60a5fa",
   m8: "#facc15",
+  mesc: "#fb923c",
   mmini: "#fb7185",
   mlab: "#2dd4bf",
   m9: "#c084fc",
@@ -85,6 +88,7 @@ const CORES_TWEEN: Record<string, string> = {
   m6: "#e879f9",
   m7: "#38bdf8",
   m8: "#eab308",
+  mesc: "#f472b6",
   mmini: "#fb7185",
   mlab: "#2dd4bf",
   m9: "#8b5cf6",
@@ -118,7 +122,8 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
       (m.id === "mlab" && !!aula.momento_laboratorio) ||
-      (m.id === "mev" && !!aula.momento_ensinoVisual),
+      (m.id === "mev" && !!aula.momento_ensinoVisual) ||
+      (m.id === "mesc" && !!aula.momento_escrita),
   );
 
   useEffect(() => {
@@ -415,6 +420,19 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               </div>
             </div>
           </Secao>
+
+          {/* BLOCO DE ESCRITA (opcional) — traçado, ditado com sílabas móveis
+              e produção de texto real (lista/bilhete). */}
+          {aula.momento_escrita && (
+            <Secao id="mesc" label={`✍️ ${aula.momento_escrita.titulo}`}>
+              <Instrucao>{aula.momento_escrita.instrucao}</Instrucao>
+              <div className="space-y-5">
+                {aula.momento_escrita.blocos.map((b, i) => (
+                  <Escrita key={i} bloco={b} aulaSlug={`${cursoSlug}:${aula.slug}`} />
+                ))}
+              </div>
+            </Secao>
+          )}
 
           {/* Minijogo (opcional) */}
           {aula.momento_minijogo &&

@@ -181,6 +181,42 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Você escreve o cartaz",
+    instrucao:
+      "Trace a letra, escreva as palavras ditadas com as sílabas e depois escreva o SEU cartaz com poucas palavras bem grandes.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "A", exemplo: "AVISO", dicaTracado: "Sobe, desce e faz o cintinho no meio." },
+          { letra: "S", exemplo: "SILÊNCIO", dicaTracado: "Faz a cobrinha: uma curva pra um lado e outra pro outro." },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "AVISO", silabas: ["A", "VI", "SO"], distratores: ["SA"], dica: "A + VI + SO." },
+          { palavra: "CARTAZ", silabas: ["CAR", "TAZ"], distratores: ["TA"], dica: "CAR + TAZ." },
+          { palavra: "FILA", silabas: ["FI", "LA"], distratores: ["LO"], dica: "FI + LA." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "Meu cartaz da sala",
+        comando: "Escreva um cartaz de aviso pra sua sala ou pra sua casa. Poucas palavras, uma em cada linha.",
+        linhas: 3,
+        modelo: ["ATENÇÃO", "LAVE AS MÃOS", "ANTES DO LANCHE"],
+        checklist: [
+          "Usei poucas palavras.",
+          "Escrevi em letra MAIÚSCULA.",
+          "Qualquer pessoa entende meu aviso de longe.",
+        ],
+      },
+    ],
+  },
+
   momento_minijogo: {
     titulo: "Cartaz ou Não?",
     instrucao: "Marque só as frases que combinam com um cartaz de aviso.",

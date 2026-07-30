@@ -176,6 +176,46 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Você escreve o bilhete",
+    instrucao:
+      "Trace a letra, escreva a palavra ditada com as sílabas e depois escreva um bilhete DE VERDADE pra alguém da sua casa.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "B", exemplo: "BILHETE", dicaTracado: "Desce reto e faz duas barriguinhas." },
+          { letra: "M", exemplo: "MAMÃE", dicaTracado: "Sobe, desce, sobe e desce: são quatro perninhas." },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "MAMÃE", silabas: ["MA", "MÃE"], distratores: ["ME"], dica: "MA + MÃE." },
+          { palavra: "BILHETE", silabas: ["BI", "LHE", "TE"], distratores: ["TA"], dica: "São três pedacinhos." },
+          { palavra: "BEIJO", silabas: ["BEI", "JO"], distratores: ["JA"], dica: "BEI + JO." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Meu bilhete",
+        comando: "Escreva um bilhete de verdade pra alguém da sua casa: diga PRA QUEM é, O QUE você quer avisar e assine seu nome.",
+        campos: [
+          { rotulo: "Para quem", placeholder: "Ex.: MAMÃE", minLetras: 2 },
+          { rotulo: "Recado", placeholder: "Ex.: FUI BRINCAR NA CASA DA ANA.", minLetras: 6 },
+          { rotulo: "Assinatura", placeholder: "Seu nome", minLetras: 2 },
+        ],
+        modelo: ["PARA: MAMÃE", "FUI BRINCAR NA CASA DA ANA. VOLTO ÀS 5.", "BEIJO, CLARA"],
+        checklist: [
+          "Escrevi PRA QUEM é o bilhete.",
+          "Escrevi O QUE quero avisar.",
+          "Assinei com o meu nome.",
+        ],
+      },
+    ],
+  },
+
   momento_minijogo: {
     titulo: "Quem é Quem no Bilhete",
     instrucao: "Arraste cada parte do bilhete para o lugar certo.",
