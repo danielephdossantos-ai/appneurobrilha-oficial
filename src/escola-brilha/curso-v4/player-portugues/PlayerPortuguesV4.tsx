@@ -382,7 +382,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento05_compreensao.perguntas.map((q, i) => (
-                <QuizTexto key={`m5-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m5" qid={`m5-${i}`} />
+                <QuizTexto key={i} quiz={q} momento="m5" qid={`m5-${i}`} />
               ))}
             </div>
           </Secao>
@@ -392,7 +392,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <Instrucao>{aula.momento06_personagensCenario.instrucao}</Instrucao>
             <div className="space-y-3">
               {aula.momento06_personagensCenario.perguntas.map((q, i) => (
-                <QuizTexto key={`m6-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m6" qid={`m6-${i}`} />
+                <QuizTexto key={i} quiz={q} momento="m6" qid={`m6-${i}`} />
               ))}
             </div>
           </Secao>
@@ -410,7 +410,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               <LeituraIlustrada data={aula.momento08_leituraIndependente.leitura} />
               <div className="space-y-3">
                 {aula.momento08_leituraIndependente.perguntas.map((q, i) => (
-                  <QuizTexto key={`m8-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m8" qid={`m8-${i}`} />
+                  <QuizTexto key={i} quiz={q} momento="m8" qid={`m8-${i}`} />
                 ))}
               </div>
             </div>
