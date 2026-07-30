@@ -296,8 +296,16 @@ export const aula04: AulaPortuguesV4 = {
       {
         pergunta:
           "1/5 — 'Ana olhou pro relógio e correu pra pegar o ônibus.' Ela estava…",
-        opcoes: ["Adiantada", "ATRASADA", "Descansando"],
+        opcoes: ["Adiantada", "ATRASADA", "Descansando",
+          "o4",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Adiantada» não é a resposta. A certa é «ATRASADA».",
+          null,
+          "«Descansando» não é a resposta. A certa é «ATRASADA».",
+          "«o4» não é a resposta. A certa é «ATRASADA».",
+        ],
         feedbackAcerto: "🎉 Atrasada!",
         feedbackErro:
           "Olhou o relógio e CORREU. Isso é pista de que estava ATRASADA.",
@@ -307,8 +315,16 @@ export const aula04: AulaPortuguesV4 = {
       {
         pergunta:
           "2/5 — 'O céu ficou escuro, ventou forte e as folhas voaram.' O que provavelmente vai acontecer?",
-        opcoes: ["Vai chover", "Vai fazer muito sol", "Vai nevar quente"],
+        opcoes: ["Vai chover", "Vai fazer muito sol", "Vai nevar quente",
+          "BAGUNÇADO",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Vai fazer muito sol» não é a resposta. A certa é «Vai chover».",
+          "«Vai nevar quente» não é a resposta. A certa é «Vai chover».",
+          "«BAGUNÇADO» não é a resposta. A certa é «Vai chover».",
+        ],
         feedbackAcerto: "🎉 Vai chover!",
         feedbackErro:
           "Céu escuro + vento forte + folhas voando = provavelmente vai CHOVER.",
@@ -318,8 +334,16 @@ export const aula04: AulaPortuguesV4 = {
       {
         pergunta:
           "3/5 — 'O gato do vizinho comeu o peixe da tigela e sumiu pela janela.' Quem comeu o peixe?",
-        opcoes: ["O vizinho", "O GATO", "Ninguém"],
+        opcoes: ["O vizinho", "O GATO", "Ninguém",
+          "Ninguém comeu",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«O vizinho» não é a resposta. A certa é «O GATO».",
+          null,
+          "«Ninguém» não é a resposta. A certa é «O GATO».",
+          "«Ninguém comeu» não é a resposta. A certa é «O GATO».",
+        ],
         feedbackAcerto: "🎉 O gato — o texto disse direto.",
         feedbackErro:
           "Essa não é entrelinha — o texto disse: 'O GATO comeu o peixe'.",
@@ -333,8 +357,15 @@ export const aula04: AulaPortuguesV4 = {
           "Uma festa de ANIVERSÁRIO",
           "Uma reunião de trabalho",
           "Um jogo de futebol",
+          "Indo dormir",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Uma reunião de trabalho» não é a resposta. A certa é «Uma festa de ANIVERSÁRIO».",
+          "«Um jogo de futebol» não é a resposta. A certa é «Uma festa de ANIVERSÁRIO».",
+          "«Indo dormir» não é a resposta. A certa é «Uma festa de ANIVERSÁRIO».",
+        ],
         feedbackAcerto: "🎉 Aniversário!",
         feedbackErro:
           "Bolo + velinhas + presentes = FESTA DE ANIVERSÁRIO.",
@@ -347,8 +378,15 @@ export const aula04: AulaPortuguesV4 = {
           "Adivinhar sem pista",
           "Juntar PISTA do texto + o que eu SEI",
           "Ler só a última linha",
+          "Diego vai comer bolo.",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Adivinhar sem pista» não é a resposta. A certa é «Juntar PISTA do texto + o que eu SEI».",
+          null,
+          "«Ler só a última linha» não é a resposta. A certa é «Juntar PISTA do texto + o que eu SEI».",
+          "«Diego vai comer bolo.» não é a resposta. A certa é «Juntar PISTA do texto + o que eu SEI».",
+        ],
         feedbackAcerto: "🎉 Pista + o que eu sei!",
         feedbackErro:
           "Inferência = PISTA do texto + o que eu já SEI da vida.",

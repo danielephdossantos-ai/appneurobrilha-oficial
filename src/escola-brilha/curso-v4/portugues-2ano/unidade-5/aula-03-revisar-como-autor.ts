@@ -287,8 +287,16 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Toda frase começa com…",
-        opcoes: ["Minúscula", "MAIÚSCULA", "Um número"],
+        opcoes: ["Minúscula", "MAIÚSCULA", "Um número",
+          "Sair correndo",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Minúscula» não é a resposta. A certa é «MAIÚSCULA».",
+          null,
+          "«Um número» não é a resposta. A certa é «MAIÚSCULA».",
+          "«Sair correndo» não é a resposta. A certa é «MAIÚSCULA».",
+        ],
         feedbackAcerto: "🎉 Maiúscula!",
         feedbackErro: "Toda frase começa com letra MAIÚSCULA.",
         dica: "Pista: a resposta certa começa com a letra 'M'. Leia as opções de novo com calma.",
@@ -296,8 +304,16 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — 'Quero um doce' — qual pontuação combina?",
-        opcoes: ["Vírgula (,)", "Exclamação (!)", "Nenhuma"],
+        opcoes: ["Vírgula (,)", "Exclamação (!)", "Nenhuma",
+          "Um número no meio",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Vírgula (,)» não é a resposta. A certa é «Exclamação (!)».",
+          null,
+          "«Nenhuma» não é a resposta. A certa é «Exclamação (!)».",
+          "«Um número no meio» não é a resposta. A certa é «Exclamação (!)».",
+        ],
         feedbackAcerto: "🎉 Exclamação → 'Quero um doce!'",
         feedbackErro:
           "É um DESEJO com emoção → EXCLAMAÇÃO: 'Quero um doce!'",
@@ -306,8 +322,16 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Revisar quer dizer…",
-        opcoes: ["APAGAR tudo", "LER de novo pra melhorar", "Copiar do amigo"],
+        opcoes: ["APAGAR tudo", "LER de novo pra melhorar", "Copiar do amigo",
+          "Ponto (.)",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«APAGAR tudo» não é a resposta. A certa é «LER de novo pra melhorar».",
+          null,
+          "«Copiar do amigo» não é a resposta. A certa é «LER de novo pra melhorar».",
+          "«Ponto (.)» não é a resposta. A certa é «LER de novo pra melhorar».",
+        ],
         feedbackAcerto: "🎉 Ler de novo pra melhorar!",
         feedbackErro: "REVISAR = ler de novo pra MELHORAR o texto.",
         dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
@@ -315,8 +339,16 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — 'Cadê a chave' — qual pontuação combina?",
-        opcoes: ["Ponto (.)", "Interrogação (?)", "Vírgula (,)"],
+        opcoes: ["Ponto (.)", "Interrogação (?)", "Vírgula (,)",
+          "Você vem comigo?",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Ponto (.)» não é a resposta. A certa é «Interrogação (?)».",
+          null,
+          "«Vírgula (,)» não é a resposta. A certa é «Interrogação (?)».",
+          "«Você vem comigo?» não é a resposta. A certa é «Interrogação (?)».",
+        ],
         feedbackAcerto: "🎉 É pergunta!",
         feedbackErro:
           "'Cadê a chave' é PERGUNTA → INTERROGAÇÃO (?).",
@@ -329,8 +361,15 @@ export const aula03: AulaPortuguesV4 = {
           "o gato dormiu",
           "O gato dormiu.",
           "O Gato Dormiu ,",
+          "O sol brilhou no céu.",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«o gato dormiu» não é a resposta. A certa é «O gato dormiu.».",
+          null,
+          "«O Gato Dormiu ,» não é a resposta. A certa é «O gato dormiu.».",
+          "«O sol brilhou no céu.» não é a resposta. A certa é «O gato dormiu.».",
+        ],
         feedbackAcerto: "🎉 Maiúscula no começo + ponto no fim!",
         feedbackErro:
           "Certa: 'O gato dormiu.' (maiúscula só em 'O' e PONTO no fim).",

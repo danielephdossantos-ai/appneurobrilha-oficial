@@ -336,8 +336,16 @@ export const aula05: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — SA + PA + TO forma…",
-        opcoes: ["PATOSA", "SAPATO", "TAPOSA"],
+        opcoes: ["PATOSA", "SAPATO", "TAPOSA",
+          "3",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«PATOSA» não é a resposta. A certa é «SAPATO».",
+          null,
+          "«TAPOSA» não é a resposta. A certa é «SAPATO».",
+          "«3» não é a resposta. A certa é «SAPATO».",
+        ],
         feedbackAcerto: "🎉 SAPATO.",
         feedbackErro: "Na ordem: SA + PA + TO = SAPATO.",
         dica: "Pista: a resposta certa começa com a letra 'S'. Leia as opções de novo com calma.",
@@ -349,8 +357,15 @@ export const aula05: AulaPortuguesV4 = {
           "DADO · ABELHA · GATO",
           "ABELHA · DADO · GATO",
           "GATO · DADO · ABELHA",
+          "DIA ↔ NOITE",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "«DADO · ABELHA · GATO» não é a resposta. A certa é «ABELHA · DADO · GATO».",
+          null,
+          "«GATO · DADO · ABELHA» não é a resposta. A certa é «ABELHA · DADO · GATO».",
+          "«DIA ↔ NOITE» não é a resposta. A certa é «ABELHA · DADO · GATO».",
+        ],
         feedbackAcerto: "🎉 A · D · G.",
         feedbackErro: "Primeira letra: A, D, G. Essa é a ordem.",
         dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
@@ -358,8 +373,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual PAR é AMIGAS?",
-        opcoes: ["BONITO ≈ LINDO", "DIA ↔ NOITE", "ALTO ↔ BAIXO"],
+        opcoes: ["BONITO ≈ LINDO", "DIA ↔ NOITE", "ALTO ↔ BAIXO",
+          "Alfabeto",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«DIA ↔ NOITE» não é a resposta. A certa é «BONITO ≈ LINDO».",
+          "«ALTO ↔ BAIXO» não é a resposta. A certa é «BONITO ≈ LINDO».",
+          "«Alfabeto» não é a resposta. A certa é «BONITO ≈ LINDO».",
+        ],
         feedbackAcerto: "🎉 Amigas!",
         feedbackErro:
           "Amigas = sentido parecido. BONITO ≈ LINDO. Os outros são opostos.",
@@ -368,8 +391,16 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Qual PAR é OPOSTAS?",
-        opcoes: ["FELIZ ≈ ALEGRE", "QUENTE ↔ FRIO", "GRANDE ≈ ENORME"],
+        opcoes: ["FELIZ ≈ ALEGRE", "QUENTE ↔ FRIO", "GRANDE ≈ ENORME",
+          "Alfabeto",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«FELIZ ≈ ALEGRE» não é a resposta. A certa é «QUENTE ↔ FRIO».",
+          null,
+          "«GRANDE ≈ ENORME» não é a resposta. A certa é «QUENTE ↔ FRIO».",
+          "«Alfabeto» não é a resposta. A certa é «QUENTE ↔ FRIO».",
+        ],
         feedbackAcerto: "🎉 Opostas.",
         feedbackErro: "Opostas = contrárias. QUENTE ↔ FRIO.",
         dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
@@ -377,8 +408,17 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Qual está escrita CERTA?",
-        opcoes: ["BANANA", "BANNANA"],
+        opcoes: ["BANANA", "BANNANA",
+          "VROLIVI",
+          "Sílabas",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«BANNANA» não é a resposta. A certa é «BANANA».",
+          "«VROLIVI» não é a resposta. A certa é «BANANA».",
+          "«Sílabas» não é a resposta. A certa é «BANANA».",
+        ],
         feedbackAcerto:
           "🎉 BANANA. 🏅 Você é CONSTRUTOR DAS PALAVRAS!",
         feedbackErro:

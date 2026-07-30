@@ -283,8 +283,16 @@ export const aula03: AulaPortuguesV4 = {
       {
         pergunta:
           "1/5 — 'Bia sorriu de orelha a orelha.' Ela sente…",
-        opcoes: ["Tristeza", "Alegria", "Raiva"],
+        opcoes: ["Tristeza", "Alegria", "Raiva",
+          "Triste",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Tristeza» não é a resposta. A certa é «Alegria».",
+          null,
+          "«Raiva» não é a resposta. A certa é «Alegria».",
+          "«Triste» não é a resposta. A certa é «Alegria».",
+        ],
         feedbackAcerto: "🎉 Alegria!",
         feedbackErro: "Sorriso 'de orelha a orelha' = ALEGRIA grande.",
         dica: "Pista: a resposta certa começa com a letra 'A'. Leia as opções de novo com calma.",
@@ -293,8 +301,16 @@ export const aula03: AulaPortuguesV4 = {
       {
         pergunta:
           "2/5 — 'Tico apertou o coelho contra o peito e chorou.' Ele sente…",
-        opcoes: ["Carinho / saudade", "Fome", "Cansaço"],
+        opcoes: ["Carinho / saudade", "Fome", "Cansaço",
+          "Assustado",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«Fome» não é a resposta. A certa é «Carinho / saudade».",
+          "«Cansaço» não é a resposta. A certa é «Carinho / saudade».",
+          "«Assustado» não é a resposta. A certa é «Carinho / saudade».",
+        ],
         feedbackAcerto: "🎉 Carinho e saudade!",
         feedbackErro: "Apertar contra o peito + chorar = carinho / saudade.",
         dica: "Pista: a resposta certa começa com a letra 'F'. Leia as opções de novo com calma.",
@@ -303,8 +319,16 @@ export const aula03: AulaPortuguesV4 = {
       {
         pergunta:
           "3/5 — 'Léo saiu correndo, gritando pela mãe.' Ele estava…",
-        opcoes: ["Calmo", "Assustado", "Dormindo"],
+        opcoes: ["Calmo", "Assustado", "Dormindo",
+          "MEDO",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Calmo» não é a resposta. A certa é «Assustado».",
+          null,
+          "«Dormindo» não é a resposta. A certa é «Assustado».",
+          "«MEDO» não é a resposta. A certa é «Assustado».",
+        ],
         feedbackAcerto: "🎉 Assustado!",
         feedbackErro: "Correr gritando pela mãe é pista de MEDO / SUSTO.",
         dica: "Pista: a resposta certa começa com a letra 'C'. Leia as opções de novo com calma.",
@@ -312,8 +336,16 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Pra descobrir o que o personagem sente, a gente olha as…",
-        opcoes: ["AÇÕES e FALAS dele", "letras maiúsculas", "cores da capa"],
+        opcoes: ["AÇÕES e FALAS dele", "letras maiúsculas", "cores da capa",
+          "Contando as palavras",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "«letras maiúsculas» não é a resposta. A certa é «AÇÕES e FALAS dele».",
+          "«cores da capa» não é a resposta. A certa é «AÇÕES e FALAS dele».",
+          "«Contando as palavras» não é a resposta. A certa é «AÇÕES e FALAS dele».",
+        ],
         feedbackAcerto: "🎉 Ações e falas!",
         feedbackErro: "AÇÕES e FALAS do personagem mostram o sentimento.",
         dica: "Pista: a resposta certa começa com a letra 'L'. Leia as opções de novo com calma.",
@@ -322,8 +354,16 @@ export const aula03: AulaPortuguesV4 = {
       {
         pergunta:
           "5/5 — 'A cachorrinha abanava o rabo e latia baixinho quando o dono chegou.' Ela estava…",
-        opcoes: ["Brava", "FELIZ com a chegada", "Com fome"],
+        opcoes: ["Brava", "FELIZ com a chegada", "Com fome",
+          "Raiva",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "«Brava» não é a resposta. A certa é «FELIZ com a chegada».",
+          null,
+          "«Com fome» não é a resposta. A certa é «FELIZ com a chegada».",
+          "«Raiva» não é a resposta. A certa é «FELIZ com a chegada».",
+        ],
         feedbackAcerto: "🎉 Feliz!",
         feedbackErro:
           "Abanar o rabo e latir baixinho ao ver o dono = FELIZ com a chegada.",

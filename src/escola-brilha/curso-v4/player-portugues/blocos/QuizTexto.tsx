@@ -350,7 +350,11 @@ export function QuizTexto({
           <div className="flex items-start gap-2">
             <span className="text-2xl">{acertou ? "🌟" : "🤔"}</span>
             <div className="flex-1">
-              <div>{acertou ? quiz.feedbackAcerto : quiz.feedbackErro}</div>
+              <div>
+                {acertou
+                  ? quiz.feedbackAcerto
+                  : (escolha !== null && quiz.feedbackOpcoes?.[escolha]) || quiz.feedbackErro}
+              </div>
               {quiz.ondeEstaNoTexto && (
                 <div className="mt-2 text-xs italic text-[#0d1f55]/70">
                   📖 No texto: "{quiz.ondeEstaNoTexto}"
