@@ -3,7 +3,6 @@ import { url as coelho } from "@/assets/neuro-treino/objetos/coelho.png.asset.js
 import { url as raposa } from "@/assets/neuro-treino/objetos/raposa.png.asset.json";
 import { url as jardim } from "@/assets/neuro-treino/objetos/jardim.png.asset.json";
 import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
-import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
 import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
 import { url as professora } from "@/assets/neuro-treino/objetos/professora.png.asset.json";
@@ -364,5 +363,3 @@ export const aula03: AulaPortuguesV4 = {
     medalha: "📖 Contador de Histórias",
   },
 };
-
-export const _lua = lua;
