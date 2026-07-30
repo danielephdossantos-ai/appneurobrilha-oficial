@@ -316,35 +316,53 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "Amigos das Palavras",
+    titulo: "🤝 Monte a Palavra Amiga",
     instrucao:
-      "Cada palavra da lista tem uma AMIGA (significado parecido). Encaixe cada uma no par certo.",
+      "Cada palavra da lista tem uma AMIGA de significado parecido. Monte a amiga com as sílabas.",
     jogo: {
-      tipo: "arrastarParaAlvo",
-      titulo: "🤝 Amigos das Palavras",
+      tipo: "montarPalavra",
+      titulo: "🤝 Monte a Palavra Amiga",
       bloco: {
-        instrucao: "Toque na palavra e depois na AMIGA dela.",
-        itens: [
-          { id: "i1", texto: "FELIZ", alvoId: "alegre" },
-          { id: "i2", texto: "GRANDE", alvoId: "enorme" },
-          { id: "i3", texto: "BONITO", alvoId: "lindo" },
-          { id: "i4", texto: "RÁPIDO", alvoId: "veloz" },
-          { id: "i5", texto: "CASA", alvoId: "lar" },
-        ],
-        alvos: [
-          { id: "alegre", nome: "ALEGRE", imagemUrl: estrela },
-          { id: "enorme", nome: "ENORME", imagemUrl: arvore },
-          { id: "lindo", nome: "LINDO", imagemUrl: flor },
-          { id: "veloz", nome: "VELOZ", imagemUrl: lua },
-          { id: "lar", nome: "LAR", imagemUrl: casa },
+        instrucao: "Ouça a palavra, pense na amiga dela e monte com as sílabas.",
+        palavras: [
+          {
+            id: "p1",
+            palavraCerta: "ALEGRE",
+            silabas: ["A", "LE", "GRE"],
+            imagemUrl: estrela,
+            frase: "FELIZ é o mesmo que ALEGRE.",
+          },
+          {
+            id: "p2",
+            palavraCerta: "ENORME",
+            silabas: ["E", "NOR", "ME"],
+            imagemUrl: arvore,
+            frase: "GRANDE é o mesmo que ENORME.",
+          },
+          {
+            id: "p3",
+            palavraCerta: "LINDO",
+            silabas: ["LIN", "DO"],
+            imagemUrl: flor,
+            frase: "BONITO é o mesmo que LINDO.",
+          },
+          {
+            id: "p4",
+            palavraCerta: "VELOZ",
+            silabas: ["VE", "LOZ"],
+            imagemUrl: lua,
+            frase: "RÁPIDO é o mesmo que VELOZ.",
+          },
         ],
         feedbackAcerto:
-          "🎉 Todos os pares de AMIGAS encaixados! Você deixou o vocabulário mais rico.",
+          "🎉 Palavras amigas montadas! Seu vocabulário ficou mais rico.",
         feedbackErro:
-          "Pense em CADA palavra: qual outra quer dizer QUASE a mesma coisa? FELIZ↔ALEGRE, GRANDE↔ENORME, RÁPIDO↔VELOZ, CASA↔LAR, BONITO↔LINDO.",
+          "Junte as sílabas na ordem e leia em voz alta: a palavra tem que soar como a amiga.",
+        dica: "Comece pela sílaba que abre a palavra.",
       },
     },
   },
+
 
     // ------------------------------------------------------------
   // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
