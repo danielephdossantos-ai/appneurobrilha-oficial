@@ -760,7 +760,26 @@ export type EnsinoVisualBloco =
         imagemUrl?: string;
         imagemResultadoUrl?: string;
       }>;
+    }
+  // ---------------------------------------------------------------
+  // PALAVRAS TEIMOSAS (1º ano · Unidade 10 — Fase 9)
+  // Palavras de alta frequência que NÃO se decodificam (é, as, os,
+  // um, muito, hoje…). Precisam de reconhecimento lexical direto:
+  // a palavra pisca por poucos segundos e some.
+  // ---------------------------------------------------------------
+  | {
+      tipo: "palavraRelampago";
+      /** Segundos que a palavra fica visível antes de sumir. */
+      segundos?: number;
+      palavras: Array<{
+        palavra: string;
+        /** Frase curta em que a palavra aparece de verdade. */
+        frase?: string;
+        /** Palavras parecidas que entram como alternativas erradas. */
+        distratores: string[];
+      }>;
     };
+
 
 
 export type MomentoEnsinoVisual = {
