@@ -796,7 +796,55 @@ export type EnsinoVisualBloco =
         /** Palavras parecidas que entram como alternativas erradas. */
         distratores: string[];
       }>;
+    }
+  // ---------------------------------------------------------------
+  // FONOLOGIA AVANÇADA (2º ano · Fase 5 — O Laboratório dos Sons)
+  // Sílaba tônica, rimas e regras ortográficas do ano.
+  // ---------------------------------------------------------------
+  | {
+      /** Bate a palavra em sílabas e mostra qual é a mais FORTE. */
+      tipo: "silabaTonica";
+      itens: Array<{
+        palavra: string;
+        /** Sílabas na ordem: ["BO","NE","CA"]. */
+        silabas: string[];
+        /** Índice da sílaba tônica dentro de `silabas`. */
+        tonica: number;
+        imagemUrl?: string;
+        explicacao?: string;
+      }>;
+    }
+  | {
+      /** Ouvir o fim das palavras e dizer se rimam. */
+      tipo: "rimas";
+      itens: Array<{
+        palavraBase: string;
+        /** Opções; uma (ou mais) rima com a base. */
+        opcoes: Array<{ palavra: string; rima: boolean }>;
+        /** Terminação que faz a rima: "-ATO". */
+        terminacao?: string;
+        imagemUrl?: string;
+      }>;
+    }
+  | {
+      /**
+       * Regra ortográfica do 2º ano (R/RR, S/SS, M antes de P/B, Ç,
+       * LH/NH/CH, AM/ÃO): explica, mostra exemplos e pede a escolha.
+       */
+      tipo: "regraOrtografica";
+      regra: string;
+      explicacao: string;
+      exemplos: Array<{ palavra: string; destaque: string; motivo?: string }>;
+      desafios: Array<{
+        /** Palavra com lacuna marcada por "_": "ca__o" */
+        molde: string;
+        opcoes: string[];
+        correta: number;
+        frase?: string;
+        feedbackErro?: string;
+      }>;
     };
+
 
 
 
