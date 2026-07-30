@@ -293,31 +293,28 @@ export const aula02: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "✍️ Complete a Frase",
+    titulo: "✍️ Monte a Frase na Ordem",
     instrucao:
-      "Escolha os cartões certos pra formar UMA frase completa (QUEM + AÇÃO + ONDE).",
+      "As peças da frase embaralharam. Coloque na ordem QUEM → AÇÃO → ONDE e leia em voz alta.",
     jogo: {
-      tipo: "arrastarParaAlvo",
-      titulo: "✍️ Complete a Frase",
+      tipo: "ordenarSequencia",
+      titulo: "✍️ Monte a Frase na Ordem",
       bloco: {
-        instrucao: "Cada peça vai no alvo certo. Depois lê tudo junto.",
+        instrucao: "Toque nas peças na ordem certa para formar a frase completa.",
         itens: [
-          { id: "i1", texto: "O gato", alvoId: "quem", imagemUrl: gato },
-          { id: "i2", texto: "pulou", alvoId: "acao", imagemUrl: brilha },
-          { id: "i3", texto: "no muro", alvoId: "onde", imagemUrl: parque },
+          { id: "i1", texto: "O gato", imagemUrl: gato },
+          { id: "i2", texto: "pulou", imagemUrl: brilha },
+          { id: "i3", texto: "no muro", imagemUrl: parque },
         ],
-        alvos: [
-          { id: "quem", nome: "👤 QUEM", descricao: "Quem faz a ação" },
-          { id: "acao", nome: "⚡ AÇÃO", descricao: "O que faz" },
-          { id: "onde", nome: "📍 ONDE", descricao: "Lugar da ação" },
-        ],
-        feedbackAcerto:
-          "🎉 Frase completa: 'O gato pulou no muro.'",
+        ordemCerta: ["i1", "i2", "i3"],
+        feedbackAcerto: "🎉 Frase completa: 'O gato pulou no muro.'",
         feedbackErro:
-          "QUEM = O gato. AÇÃO = pulou (o que ele FEZ). ONDE = no muro (lugar).",
+          "Primeiro vem QUEM (O gato), depois a AÇÃO (pulou) e por último ONDE (no muro).",
+        dica: "Comece pela peça que responde QUEM faz a ação.",
       },
     },
   },
+
 
     // ------------------------------------------------------------
   // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
