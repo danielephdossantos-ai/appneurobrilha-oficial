@@ -118,14 +118,51 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
   const CORES = tween ? CORES_TWEEN : CORES_KIDS;
 
 
-  const MOMENTOS = MOMENTOS_BASE.filter(
+  const MOMENTOS_ATIVOS = MOMENTOS_BASE.filter(
     (m) =>
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
       (m.id === "mlab" && !!aula.momento_laboratorio) ||
       (m.id === "mev" && !!aula.momento_ensinoVisual) ||
-      (m.id === "mesc" && !!aula.momento_escrita),
+      (m.id === "mesc" && !!aula.momento_escrita) ||
+      (m.id === "mflu" && !!aula.momento_fluencia),
   );
+
+  // ---- Fase 9 · sessões curtas (A e B) --------------------------------
+  // Aos 6 anos a atenção sustentada é de ~10-15 min. A aula é quebrada
+  // em duas sessões com um descanso no meio; o ponto fica salvo.
+  const sessoes = cursoSlug === "portugues-1ano";
+  const chaveSessao = `brilha:sessao:${cursoSlug}:${aula.slug}`;
+  const [sessao, setSessao] = useState<"A" | "B">("A");
+
+  useEffect(() => {
+    if (!sessoes) return;
+    try {
+      const salvo = window.localStorage.getItem(chaveSessao);
+      setSessao(salvo === "B" ? "B" : "A");
+    } catch {
+      setSessao("A");
+    }
+  }, [chaveSessao, sessoes]);
+
+  const irParaSessao = (s: "A" | "B") => {
+    stopSpeaking();
+    setSessao(s);
+    try {
+      window.localStorage.setItem(chaveSessao, s);
+    } catch {
+      /* modo privado */
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const MOMENTOS = sessoes
+    ? MOMENTOS_ATIVOS.filter((m) =>
+        sessao === "A" ? MOMENTOS_SESSAO_A.includes(m.id) : !MOMENTOS_SESSAO_A.includes(m.id),
+      )
+    : MOMENTOS_ATIVOS;
+
+  const [falaAuto, setFalaAuto] = useFalaAutomatica();
 
   useEffect(() => {
     const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
@@ -141,7 +178,8 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, [aula.slug]);
+  }, [aula.slug, sessao]);
+
 
   useEffect(() => () => stopSpeaking(), []);
 
