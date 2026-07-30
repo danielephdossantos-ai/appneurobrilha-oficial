@@ -50,7 +50,7 @@ como estímulo principal):
 
 ## Status
 - [x] Fase 1 — motor adaptativo (registro por momento, dica na 1ª falha, reensino na 2ª, gate de 70% na avaliação)
-- [ ] Fase 2 — consciência fonêmica
+- [x] Fase 2 — consciência fonêmica (Unidade 7 "O Ouvido Mágico": som inicial, segmentar, sintetizar, trocar fonema — blocos com TTS)
 - [ ] Fase 3 — bloco de escrita
 - [ ] Fase 4 — distratores e 4 alternativas
 - [ ] Fase 5 — revisão espaçada
