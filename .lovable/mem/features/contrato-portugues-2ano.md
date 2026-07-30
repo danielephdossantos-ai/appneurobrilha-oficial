@@ -74,11 +74,17 @@ Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicia
   com dica/reensino e avaliação de 4 alternativas.
 
 
-## Fase 6 — Variedade de interação e ensino visual
-- Ensino visual (`momento_ensinoVisual`) em pelo menos 24 das 30 aulas.
-- Quebrar a monotonia dos 15 "arrastarParaAlvo": distribuir `montarPalavra`,
-  `ordenarSequencia`, `selecionarItens`, `fraseComPonto`, `maiusculaMinuscula`.
-- Todo enunciado com `BotaoOuvirEnunciado` + fala automática.
+## Fase 6 — Variedade de interação e ensino visual ✅ CONCLUÍDA
+- Entregue: `momento_ensinoVisual` em **34/34 aulas** (28 injetadas nas U1–U6),
+  cada uma calibrada ao foco da aula — pontuação, maiúsculas, sílaba tônica,
+  rimas, segmentar/sintetizar/trocar fonemas, palavras teimosas e as regras
+  ortográficas do ano (M antes de P/B, R/RR, S/SS/Ç, LH/NH/CH, AM/ÃO).
+- Monotonia dos "arrastarParaAlvo" quebrada: U3A03 virou `montarPalavra`,
+  U5A02 virou `ordenarSequencia` e U6A04 virou `selecionarItens`. Os
+  arrastar restantes ficaram só onde a tarefa é mesmo de emparelhar.
+- `BotaoOuvirEnunciado` já está nos blocos compartilhados (ArrastarParaAlvo,
+  SelecionarItens, MontarPalavra, OrdenarSequencia, CardVocabulario).
+
 
 ## Fase 7 — Sondagem inicial, práticas curriculares e BNCC
 - Sondagem de 8 itens falados calibrada ao 2º ano, sugerindo unidade de entrada.
