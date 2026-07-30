@@ -34,6 +34,7 @@ function Agenda() {
 
       <Link
         to="/rotina-escrita"
+        search={{ serie: "1" as const }}
         className="block rounded-2xl bg-primary text-primary-foreground p-4 mb-4 shadow-soft"
       >
         <div className="text-xs font-black uppercase tracking-wider opacity-80">Todo dia</div>

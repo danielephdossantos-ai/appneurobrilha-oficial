@@ -194,7 +194,7 @@ function TrilhaCurso() {
           </section>
         ))}
         {ehPortugues && curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
-          <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} />
+          <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} cursoSlug={slug} />
         )}
 
         {/* Atlas Final — destravado só quando todas as aulas estão concluídas */}
@@ -213,10 +213,14 @@ function TrilhaCurso() {
 function PraticasCurricularesCards({
   praticas,
   corPrimaria,
+  cursoSlug,
 }: {
   praticas: { emoji?: string; titulo: string; descricao: string; itens: string[] }[];
   corPrimaria: string;
+  cursoSlug: string;
 }) {
+  const serieRotina = cursoSlug === "portugues-2ano" ? ("2" as const) : ("1" as const);
+  const temRotina = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
   return (
     <section className="space-y-4">
       <div className="text-center">
@@ -245,9 +249,10 @@ function PraticasCurricularesCards({
                 </li>
               ))}
             </ul>
-            {p.titulo.toLowerCase().includes("escrita") && (
+            {temRotina && p.titulo.toLowerCase().includes("escrita") && (
               <Link
                 to="/rotina-escrita"
+                search={{ serie: serieRotina }}
                 className="mt-4 block text-center rounded-xl px-4 py-3 font-black text-[#0d1f55] bg-amber-300 hover:bg-amber-200 transition-colors"
               >
                 ⏰ Criar rotina diária com lembrete no celular

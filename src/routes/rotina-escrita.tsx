@@ -28,7 +28,6 @@ import {
   DIAS_LONGOS,
   SEMANAS_ESCRITA,
   semanaAtual,
-  conteudoDaSemana,
   fraseDoDia,
 } from "@/lib/rotina-escrita";
 import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
