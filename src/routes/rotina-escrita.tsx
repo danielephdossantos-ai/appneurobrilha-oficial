@@ -405,10 +405,23 @@ function RotinaEscrita() {
         </p>
       </BlocoCard>
 
+      {/* 5. Conversa e oralidade */}
+      <BlocoCard
+        icone={<MessageCircle className="h-5 w-5" />}
+        titulo="5. Conversa e oralidade — falar antes de escrever"
+        cor="bg-petal/25"
+        feito={!!feitos.oralidade}
+        onMarcar={() => marcar("oralidade")}
+      >
+        <Oralidade semana={numSemana} />
+      </BlocoCard>
+
       <div className="rounded-2xl bg-muted p-4 text-sm text-muted-foreground mt-6 mb-8">
         <strong className="text-foreground">Para a família:</strong> são 15 minutos por dia, com
-        papel e lápis de verdade. O app avisa na hora combinada — é só sentar junto e acompanhar.
+        papel e lápis de verdade, mais 5 minutos de conversa. O app avisa na hora combinada — é só
+        sentar junto e acompanhar.
       </div>
+
     </Shell>
   );
 }
