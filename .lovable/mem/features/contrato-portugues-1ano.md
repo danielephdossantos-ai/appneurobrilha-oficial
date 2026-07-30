@@ -70,3 +70,17 @@ e ArrastarParaAlvo, com botão de REPETIR o enunciado.
   pelúcia, bicicleta, vermelho, alegria, brilhando, Encontrei).
 - Regra permanente: em aula do 1º ano, texto de leitura só usa sílabas já
   ensinadas; palavra nova entra primeiro no card de vocabulário com áudio.
+
+## Fases A–D — cobertura BNCC completa (CONCLUÍDAS)
+- Fase A: remapeamento dos códigos (LP10/LP11 alfabeto, LP12 frase, LP14
+  pontuação/entonação, LP16/LP18/LP19 poesia, LP01 lista, LP13 rimas).
+- Fase B: 3 aulas novas — "Minha Escrita e a Escrita Certa" (LP03),
+  "A Voz da Frase" (LP14+LP09), "Palavras Parecidas e Opostas" (LP15).
+- Fase C: **Unidade 8 — Repórter Brilha** (campo investigativo):
+  Curiosidade do Dia (LP22/LP24), A Entrevista do Repórter (LP23/LP22/LP09),
+  O Diagrama que Explica (LP24/LP22).
+- Fase D: **Unidade 9 — Combinados e Histórias**:
+  Nossos Combinados da Turma (LP21/LP01), Guardando a Parlenda (LP18/LP13),
+  Eu Reconto a História (LP25/LP26).
+- Resultado: **26/26 habilidades EF01LP cobertas**. Curso de LP do 1º ano
+  fechado — qualquer aula nova deve manter os 11 momentos + momento_escrita.
