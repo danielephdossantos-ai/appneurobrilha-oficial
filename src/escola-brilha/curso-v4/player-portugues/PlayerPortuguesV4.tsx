@@ -480,7 +480,18 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
                 <QuizTexto key={`m10-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m10" qid={`m10-${i}`} />
               ))}
             </div>
+            {adaptativo && gateAtivo && (
+              <PainelNota
+                respondidas={adaptativo.respondidasAvaliacao}
+                total={totalAvaliacao}
+                acertos={adaptativo.acertosAvaliacao}
+                nota={adaptativo.notaAvaliacao}
+                aprovado={adaptativo.aprovado}
+                onRefazer={adaptativo.reiniciarAvaliacao}
+              />
+            )}
           </Secao>
+
 
           {/* M11 · Missão em família */}
           <Secao id="m11" label="🏠 Missão em Família">
