@@ -80,6 +80,75 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Causa, resultado e o tempo do verbo",
+    instrucao: "Ligue o que aconteceu ao que veio depois.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Choveu muito, então a rua alagou.",
+                            "explicacao": "Causa: choveu. Resultado: alagou."
+                      },
+                      {
+                            "texto": "Brilha estudou, por isso acertou tudo.",
+                            "explicacao": "Causa: estudou. Resultado: acertou."
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "AM ou ÃO no fim do verbo",
+                "explicacao": "Quando a ação JÁ aconteceu, o verbo termina em AM: eles falARAM. Quando a ação AINDA vai acontecer, termina em ÃO: eles falARÃO.",
+                "exemplos": [
+                      {
+                            "palavra": "leram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "lerão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      },
+                      {
+                            "palavra": "brincaram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "brincarão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "As crianças correr_ na chuva ontem",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 0,
+                            "frase": "As crianças CORRERAM na chuva ontem.",
+                            "feedbackErro": "ONTEM é passado: AM."
+                      },
+                      {
+                            "molde": "As crianças correr_ amanhã",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 1,
+                            "frase": "As crianças CORRERÃO amanhã.",
+                            "feedbackErro": "AMANHÃ é futuro: ÃO."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia com Brilha, pensando no PORQUÊ.",
     leitura: {

@@ -102,6 +102,95 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A máquina que separa e junta sons",
+    instrucao: "Primeiro a máquina separa; depois ela junta tudo de novo.",
+    blocos: [
+          {
+                "tipo": "segmentarFonemas",
+                "itens": [
+                      {
+                            "palavra": "MÁQUINA",
+                            "fonemas": [
+                                  "m",
+                                  "á",
+                                  "qu",
+                                  "i",
+                                  "n",
+                                  "a"
+                            ]
+                      },
+                      {
+                            "palavra": "BOTÃO",
+                            "fonemas": [
+                                  "b",
+                                  "o",
+                                  "t",
+                                  "ã",
+                                  "o"
+                            ]
+                      },
+                      {
+                            "palavra": "ENGRENAGEM",
+                            "fonemas": [
+                                  "e",
+                                  "n",
+                                  "g",
+                                  "r",
+                                  "e",
+                                  "n",
+                                  "a",
+                                  "g",
+                                  "e",
+                                  "m"
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "rimas",
+                "itens": [
+                      {
+                            "palavraBase": "BOTÃO",
+                            "terminacao": "-ÃO",
+                            "opcoes": [
+                                  {
+                                        "palavra": "MÃO",
+                                        "rima": true
+                                  },
+                                  {
+                                        "palavra": "MESA",
+                                        "rima": false
+                                  },
+                                  {
+                                        "palavra": "LIVRO",
+                                        "rima": false
+                                  }
+                            ]
+                      },
+                      {
+                            "palavraBase": "MÁQUINA",
+                            "terminacao": "-INA",
+                            "opcoes": [
+                                  {
+                                        "palavra": "MENINA",
+                                        "rima": true
+                                  },
+                                  {
+                                        "palavra": "MADEIRA",
+                                        "rima": false
+                                  },
+                                  {
+                                        "palavra": "MOTOR",
+                                        "rima": false
+                                  }
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia com Brilha o resumo da missão de hoje.",

@@ -90,6 +90,92 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Já aconteceu ou vai acontecer?",
+    instrucao: "O fim do verbo conta o tempo da história.",
+    blocos: [
+          {
+                "tipo": "regraOrtografica",
+                "regra": "AM ou ÃO no fim do verbo",
+                "explicacao": "Quando a ação JÁ aconteceu, o verbo termina em AM: eles falARAM. Quando a ação AINDA vai acontecer, termina em ÃO: eles falARÃO.",
+                "exemplos": [
+                      {
+                            "palavra": "leram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "lerão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      },
+                      {
+                            "palavra": "brincaram",
+                            "destaque": "am",
+                            "motivo": "Já aconteceu: AM."
+                      },
+                      {
+                            "palavra": "brincarão",
+                            "destaque": "ão",
+                            "motivo": "Vai acontecer: ÃO."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "Ontem eles descobrir_",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 0,
+                            "frase": "Ontem eles DESCOBRIRAM a pista.",
+                            "feedbackErro": "ONTEM é passado: termina em AM."
+                      },
+                      {
+                            "molde": "Amanhã eles descobrir_",
+                            "opcoes": [
+                                  "am",
+                                  "ão"
+                            ],
+                            "correta": 1,
+                            "frase": "Amanhã eles DESCOBRIRÃO o resto.",
+                            "feedbackErro": "AMANHÃ é futuro: termina em ÃO."
+                      }
+                ]
+          },
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "muito",
+                            "frase": "Eu gostei muito do livro.",
+                            "distratores": [
+                                  "mito",
+                                  "muinto"
+                            ]
+                      },
+                      {
+                            "palavra": "hoje",
+                            "frase": "Hoje a biblioteca abriu cedo.",
+                            "distratores": [
+                                  "oje",
+                                  "hojem"
+                            ]
+                      },
+                      {
+                            "palavra": "aqui",
+                            "frase": "O bilhete estava aqui.",
+                            "distratores": [
+                                  "aki",
+                                  "aquí"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "O grande caso. Leia com Brilha. Depois vem a investigação!",

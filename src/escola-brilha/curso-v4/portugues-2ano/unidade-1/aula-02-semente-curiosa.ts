@@ -117,6 +117,79 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   // 4 · LEITURA GUIADA
   // ------------------------------------------------------------
+  momento_ensinoVisual: {
+    titulo: "A batida forte de cada palavra",
+    instrucao: "Bata palma em cada pedaço e escute qual sai mais FORTE.",
+    blocos: [
+          {
+                "tipo": "silabaTonica",
+                "itens": [
+                      {
+                            "palavra": "SEMENTE",
+                            "silabas": [
+                                  "SE",
+                                  "MEN",
+                                  "TE"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força está em MEN."
+                      },
+                      {
+                            "palavra": "JARDIM",
+                            "silabas": [
+                                  "JAR",
+                                  "DIM"
+                            ],
+                            "tonica": 1,
+                            "explicacao": "A força está no fim: DIM."
+                      },
+                      {
+                            "palavra": "ÁGUA",
+                            "silabas": [
+                                  "Á",
+                                  "GUA"
+                            ],
+                            "tonica": 0,
+                            "explicacao": "A força está no começo: Á."
+                      }
+                ]
+          },
+          {
+                "tipo": "segmentarFonemas",
+                "itens": [
+                      {
+                            "palavra": "RAIZ",
+                            "fonemas": [
+                                  "r",
+                                  "a",
+                                  "i",
+                                  "z"
+                            ]
+                      },
+                      {
+                            "palavra": "FLOR",
+                            "fonemas": [
+                                  "f",
+                                  "l",
+                                  "o",
+                                  "r"
+                            ]
+                      },
+                      {
+                            "palavra": "BROTO",
+                            "fonemas": [
+                                  "b",
+                                  "r",
+                                  "o",
+                                  "t",
+                                  "o"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Aurora começou a leitura. Agora leia junto — pode apertar 🔊 pra ouvir.",

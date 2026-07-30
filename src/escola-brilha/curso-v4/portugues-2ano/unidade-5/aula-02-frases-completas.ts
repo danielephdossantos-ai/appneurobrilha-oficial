@@ -74,6 +74,79 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Três pontos, três intenções",
+    instrucao: "Escute a mesma ideia com pontos diferentes.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "O livro sumiu.",
+                            "explicacao": "Ponto final: eu conto um fato."
+                      },
+                      {
+                            "texto": "O livro sumiu?",
+                            "explicacao": "Interrogação: eu pergunto."
+                      },
+                      {
+                            "texto": "O livro sumiu!",
+                            "explicacao": "Exclamação: eu me assusto."
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "M antes de P e B",
+                "explicacao": "Antes das letras P e B a gente escreve M, nunca N. Por isso é caMPo, teMPo, boMBa. Antes das outras letras usamos N: caNto, poNte.",
+                "exemplos": [
+                      {
+                            "palavra": "campo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "tempo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "bomba",
+                            "destaque": "m",
+                            "motivo": "Antes do B: M."
+                      },
+                      {
+                            "palavra": "canto",
+                            "destaque": "n",
+                            "motivo": "Antes do T: N."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "co_pleta",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 0,
+                            "frase": "Escrevi uma frase COMPLETA.",
+                            "feedbackErro": "Antes de P sempre M: COMPLETA."
+                      },
+                      {
+                            "molde": "i_portante",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 0,
+                            "frase": "Essa parte é IMPORTANTE.",
+                            "feedbackErro": "Antes de P sempre M: IMPORTANTE."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Brilha mostra como completar uma frase.",
     leitura: {

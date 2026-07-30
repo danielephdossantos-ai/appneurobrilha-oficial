@@ -93,6 +93,60 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Palavras que aparecem em todo texto",
+    instrucao: "Estas palavras aparecem o tempo todo. Olhe rápido e reconheça sem soletrar.",
+    blocos: [
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "muito",
+                            "frase": "Eu gostei muito do livro.",
+                            "distratores": [
+                                  "mito",
+                                  "muinto"
+                            ]
+                      },
+                      {
+                            "palavra": "hoje",
+                            "frase": "Hoje a biblioteca abriu cedo.",
+                            "distratores": [
+                                  "oje",
+                                  "hojem"
+                            ]
+                      },
+                      {
+                            "palavra": "aqui",
+                            "frase": "O bilhete estava aqui.",
+                            "distratores": [
+                                  "aki",
+                                  "aquí"
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "A história acabou.",
+                            "explicacao": "Ponto final: a ideia terminou."
+                      },
+                      {
+                            "texto": "Que fim bonito!",
+                            "explicacao": "Ponto de exclamação: emoção, surpresa."
+                      },
+                      {
+                            "texto": "Você quer ler de novo?",
+                            "explicacao": "Ponto de interrogação: pergunta."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia com atenção: essa história junta TODOS os amigos.",
     leitura: {

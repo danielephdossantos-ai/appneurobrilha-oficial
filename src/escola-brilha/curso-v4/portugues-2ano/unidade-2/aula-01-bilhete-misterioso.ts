@@ -93,6 +93,50 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "As frases de um bilhete",
+    instrucao: "Ouça cada frase do bilhete e veja como ela começa e como termina.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Oi, Brilha!",
+                            "explicacao": "Saudação do bilhete: começa com maiúscula."
+                      },
+                      {
+                            "texto": "Encontre o livro azul.",
+                            "explicacao": "Frase que pede algo: ponto final."
+                      },
+                      {
+                            "texto": "Quem deixou este bilhete?",
+                            "explicacao": "Pergunta: ponto de interrogação."
+                      }
+                ]
+          },
+          {
+                "tipo": "maiusculaMinuscula",
+                "pares": [
+                      {
+                            "maiuscula": "B",
+                            "minuscula": "b",
+                            "exemplo": "Brilha / bilhete"
+                      },
+                      {
+                            "maiuscula": "A",
+                            "minuscula": "a",
+                            "exemplo": "Aurora / azul"
+                      },
+                      {
+                            "maiuscula": "P",
+                            "minuscula": "p",
+                            "exemplo": "Pedro / papel"
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o bilhete que estava na porta. Repare em CADA parte: destinatário, mensagem, assinatura.",

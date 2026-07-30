@@ -82,6 +82,60 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Dizer o que penso, com motivo",
+    instrucao: "O leitor dá opinião e explica por quê.",
+    blocos: [
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Eu gostei do final.",
+                            "explicacao": "Opinião."
+                      },
+                      {
+                            "texto": "Eu gostei do final porque o coelho voltou para casa.",
+                            "explicacao": "Opinião + motivo: é assim que o leitor cresce."
+                      },
+                      {
+                            "texto": "E você, o que achou?",
+                            "explicacao": "Pergunta que convida o outro leitor."
+                      }
+                ]
+          },
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "eles",
+                            "frase": "Eles leram juntos.",
+                            "distratores": [
+                                  "elis",
+                                  "êles"
+                            ]
+                      },
+                      {
+                            "palavra": "quem",
+                            "frase": "Quem escreveu o bilhete?",
+                            "distratores": [
+                                  "kem",
+                                  "quen"
+                            ]
+                      },
+                      {
+                            "palavra": "isso",
+                            "frase": "Isso foi uma surpresa.",
+                            "distratores": [
+                                  "iso",
+                                  "içó"
+                            ]
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia com Brilha e pense: gostou?",
     leitura: {

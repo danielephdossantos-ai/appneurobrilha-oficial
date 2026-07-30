@@ -85,6 +85,95 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Um som muda tudo",
+    instrucao: "Troque um som e veja a palavra virar outra completamente.",
+    blocos: [
+          {
+                "tipo": "trocarFonema",
+                "itens": [
+                      {
+                            "palavra": "FACA",
+                            "de": "f",
+                            "para": "v",
+                            "resultado": "VACA",
+                            "posicao": "inicio"
+                      },
+                      {
+                            "palavra": "PATO",
+                            "de": "p",
+                            "para": "b",
+                            "resultado": "BATO",
+                            "posicao": "inicio"
+                      },
+                      {
+                            "palavra": "DADO",
+                            "de": "d",
+                            "para": "t",
+                            "resultado": "TATO",
+                            "posicao": "inicio"
+                      },
+                      {
+                            "palavra": "CASA",
+                            "de": "c",
+                            "para": "m",
+                            "resultado": "MASA",
+                            "posicao": "inicio"
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "P e B, F e V: pares que confundem",
+                "explicacao": "Alguns sons são irmãos e mudam a palavra inteira. O P é mudinho e o B tem voz: PATO / BATO. O F é soprado e o V tem voz: FACA / VACA. Coloque a mão na garganta: se treme, é B ou V.",
+                "exemplos": [
+                      {
+                            "palavra": "pato",
+                            "destaque": "p",
+                            "motivo": "P não faz a garganta tremer."
+                      },
+                      {
+                            "palavra": "bato",
+                            "destaque": "b",
+                            "motivo": "B faz a garganta tremer."
+                      },
+                      {
+                            "palavra": "faca",
+                            "destaque": "f",
+                            "motivo": "F é só sopro."
+                      },
+                      {
+                            "palavra": "vaca",
+                            "destaque": "v",
+                            "motivo": "V tem voz."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "_aca",
+                            "opcoes": [
+                                  "f",
+                                  "v"
+                            ],
+                            "correta": 0,
+                            "frase": "A FACA está na gaveta.",
+                            "feedbackErro": "Se é a de cortar, escrevemos com F: FACA."
+                      },
+                      {
+                            "molde": "_ola",
+                            "opcoes": [
+                                  "b",
+                                  "p"
+                            ],
+                            "correta": 0,
+                            "frase": "A BOLA rolou pela sala.",
+                            "feedbackErro": "Coloque a mão na garganta: BOLA treme, é B."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia junto e pense se dá pra TROCAR uma palavra pela outra.",
     leitura: {

@@ -106,6 +106,85 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "M antes de P e B no convite",
+    instrucao: "Escute as palavras do convite e escolha a letra certa.",
+    blocos: [
+          {
+                "tipo": "regraOrtografica",
+                "regra": "M antes de P e B",
+                "explicacao": "Antes das letras P e B a gente escreve M, nunca N. Por isso é caMPo, teMPo, boMBa. Antes das outras letras usamos N: caNto, poNte.",
+                "exemplos": [
+                      {
+                            "palavra": "campo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "tempo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "bomba",
+                            "destaque": "m",
+                            "motivo": "Antes do B: M."
+                      },
+                      {
+                            "palavra": "canto",
+                            "destaque": "n",
+                            "motivo": "Antes do T: N."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "te_po",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 0,
+                            "frase": "Chegou o TEMPO da festa!",
+                            "feedbackErro": "Antes de P sempre M: TEMPO."
+                      },
+                      {
+                            "molde": "co_vite",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 1,
+                            "frase": "O CONVITE chegou hoje.",
+                            "feedbackErro": "Antes de V usamos N: CONVITE."
+                      },
+                      {
+                            "molde": "ta_bém",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 0,
+                            "frase": "Você TAMBÉM está convidado.",
+                            "feedbackErro": "Antes de B sempre M: TAMBÉM."
+                      }
+                ]
+          },
+          {
+                "tipo": "fraseComPonto",
+                "frases": [
+                      {
+                            "texto": "Venha para a Festa dos Livros!",
+                            "explicacao": "Convite animado: exclamação."
+                      },
+                      {
+                            "texto": "Será no sábado, às três horas.",
+                            "explicacao": "Informação: ponto final."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o convite com atenção. Cada linha tem UMA informação importante.",

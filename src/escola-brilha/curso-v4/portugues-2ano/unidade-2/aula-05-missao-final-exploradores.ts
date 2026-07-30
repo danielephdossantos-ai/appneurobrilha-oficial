@@ -95,6 +95,92 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Revisão relâmpago dos exploradores",
+    instrucao: "Palavras que aparecem em todo bilhete, convite e cartaz.",
+    blocos: [
+          {
+                "tipo": "palavraRelampago",
+                "segundos": 2,
+                "palavras": [
+                      {
+                            "palavra": "também",
+                            "frase": "Brilha também quis ler.",
+                            "distratores": [
+                                  "tambem",
+                                  "tanbém"
+                            ]
+                      },
+                      {
+                            "palavra": "porque",
+                            "frase": "Ela riu porque a história era boa.",
+                            "distratores": [
+                                  "por que",
+                                  "porquê"
+                            ]
+                      },
+                      {
+                            "palavra": "então",
+                            "frase": "Então a porta se abriu.",
+                            "distratores": [
+                                  "entao",
+                                  "intão"
+                            ]
+                      }
+                ]
+          },
+          {
+                "tipo": "regraOrtografica",
+                "regra": "M antes de P e B",
+                "explicacao": "Antes das letras P e B a gente escreve M, nunca N. Por isso é caMPo, teMPo, boMBa. Antes das outras letras usamos N: caNto, poNte.",
+                "exemplos": [
+                      {
+                            "palavra": "campo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "tempo",
+                            "destaque": "m",
+                            "motivo": "Antes do P: M."
+                      },
+                      {
+                            "palavra": "bomba",
+                            "destaque": "m",
+                            "motivo": "Antes do B: M."
+                      },
+                      {
+                            "palavra": "canto",
+                            "destaque": "n",
+                            "motivo": "Antes do T: N."
+                      }
+                ],
+                "desafios": [
+                      {
+                            "molde": "ca_po",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 0,
+                            "frase": "O CAMPO estava cheio de flores.",
+                            "feedbackErro": "Antes de P: M."
+                      },
+                      {
+                            "molde": "po_te",
+                            "opcoes": [
+                                  "m",
+                                  "n"
+                            ],
+                            "correta": 1,
+                            "frase": "A PONTE liga os dois lados.",
+                            "feedbackErro": "Antes de T usamos N: PONTE."
+                      }
+                ]
+          }
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Vamos LER quatro textos, um de cada tipo. Preste atenção no JEITO de cada um.",
