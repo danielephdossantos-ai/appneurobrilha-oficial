@@ -160,6 +160,9 @@ export function ArrastarParaAlvo({ data }: { data: ArrastarParaAlvoData }) {
             {acertos} de {data.itens.length} no lugar certo.
           </div>
           {acertouTudo ? data.feedbackAcerto : data.feedbackErro}
+          {!acertouTudo && data.dica && (
+            <div className="mt-2 text-xs opacity-90">💡 {data.dica}</div>
+          )}
         </div>
       )}
     </div>

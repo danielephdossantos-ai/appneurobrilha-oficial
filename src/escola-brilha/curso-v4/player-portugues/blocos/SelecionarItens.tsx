@@ -96,6 +96,9 @@ export function SelecionarItens({ data }: { data: SelecionarItensData }) {
             {errosMarcados > 0 ? ` e ${errosMarcados} errado(s)` : ""}.
           </div>
           {acertouTudo ? data.feedbackAcerto : data.feedbackErro}
+          {!acertouTudo && data.dica && (
+            <div className="mt-2 text-xs opacity-90">💡 {data.dica}</div>
+          )}
         </div>
       )}
     </div>
