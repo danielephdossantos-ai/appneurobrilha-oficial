@@ -528,10 +528,19 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
           </Secao>
 
           <div className="pt-6 flex flex-col items-center gap-3">
+            {gateAtivo && adaptativo && !adaptativo.aprovado && (
+              <p className="text-center text-sm font-bold text-amber-200 max-w-md">
+                🔒 Responda a avaliação e acerte pelo menos{" "}
+                {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+              </p>
+            )}
             <button
               onClick={() => onConcluir?.()}
+              disabled={gateAtivo && !!adaptativo && !adaptativo.aprovado}
               className={
-                tween
+                gateAtivo && !!adaptativo && !adaptativo.aprovado
+                  ? "px-10 py-5 rounded-full bg-white/15 text-white/50 font-black text-xl cursor-not-allowed"
+                  : tween
                   ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
                   : kids
                   ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
@@ -544,6 +553,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               Sair para a trilha
             </Link>
           </div>
+
         </main>
       </div>
     </div>
