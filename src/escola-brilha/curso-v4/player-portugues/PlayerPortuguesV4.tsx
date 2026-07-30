@@ -269,7 +269,28 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
             )}
           </div>
+          {/* Fase 9 — liga/desliga a fala automática dos enunciados. */}
+          <button
+            type="button"
+            onClick={() => setFalaAuto(!falaAuto)}
+            aria-label={
+              falaAuto ? "Desligar a fala automática" : "Ligar a fala automática"
+            }
+            title={
+              falaAuto
+                ? "Fala automática ligada — os enunciados são lidos sozinhos"
+                : "Fala automática desligada"
+            }
+            className={`shrink-0 h-9 w-9 grid place-items-center rounded-full border-2 text-base transition active:scale-95 ${
+              falaAuto
+                ? "bg-emerald-400/90 border-emerald-200 text-[#0b1020]"
+                : "bg-white/10 border-white/25 text-white/60"
+            }`}
+          >
+            {falaAuto ? "🔊" : "🔇"}
+          </button>
         </div>
+
       </header>
 
 
