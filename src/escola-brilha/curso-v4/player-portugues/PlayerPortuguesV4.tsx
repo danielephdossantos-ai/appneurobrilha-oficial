@@ -313,7 +313,18 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
 
+          {sessoes && (
+            <TrilhoSessao
+              sessao={sessao}
+              onIr={irParaSessao}
+            />
+          )}
+
+          {(!sessoes || sessao === "A") && (
+          <>
+
           {/* M0 · Aquecimento — revisão espaçada (3 itens de aulas anteriores) */}
+
           <AquecimentoRevisao
             cursoSlug={cursoSlug}
             aulaSlug={aula.slug}
