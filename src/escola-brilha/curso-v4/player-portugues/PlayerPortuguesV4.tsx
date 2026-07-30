@@ -24,6 +24,7 @@ import { Escrita } from "./blocos/Escrita";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
 
 
