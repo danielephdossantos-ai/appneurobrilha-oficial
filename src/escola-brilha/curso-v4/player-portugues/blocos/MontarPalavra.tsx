@@ -24,7 +24,9 @@ export function MontarPalavra({ data }: { data: MontarPalavraData }) {
           <BotaoOuvirEnunciado
             texto={[data.instrucao, atual?.frase]}
             rotulo="Repetir"
+            auto
           />
+
           <div className="text-[11px] text-white/60">
             {idx + 1}/{total}
           </div>
