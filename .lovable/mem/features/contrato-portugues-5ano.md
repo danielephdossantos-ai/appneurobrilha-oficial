@@ -37,7 +37,7 @@ Skin: **tween** no `PlayerPortuguesV4.tsx`.
 
 ## Status
 - [x] Fase 1 — arquitetura
-- [ ] Fase 1 — U1 e U2
+- [x] Fase 1 — U1 e U2
 - [ ] Fase 2
 - [ ] Fase 3
 - [ ] Fase 4
