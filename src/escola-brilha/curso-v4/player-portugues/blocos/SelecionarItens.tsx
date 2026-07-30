@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { SelecionarItensData } from "../../types";
+import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
 
 /**
  * Minijogo "Selecionar apenas os itens pedidos".
