@@ -259,7 +259,22 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: A estante da Aurora",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Aurora organizou os livros em ordem ALFABÉTICA:",
+      "AVENTURA · BALEIA · CAVALO · DINOSSAURO · ESTRELA.",
+      "Se um livro novo chegar chamado 'CACHORRO', ele fica entre BALEIA e CAVALO.",
+    ],
+    metaSegundos: 30,
+  },
+
+momento09_revisao: {
     pontos: [
       "ALFABETO = as 26 letras numa ordem fixa (A até Z).",
       "ORDEM ALFABÉTICA olha a PRIMEIRA letra de cada palavra.",

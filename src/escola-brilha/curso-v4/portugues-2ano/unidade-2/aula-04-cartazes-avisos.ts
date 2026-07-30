@@ -305,7 +305,21 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: Cartaz do banheiro da escola",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "🧼 Lave as mãos com água e sabão.",
+      "Depois enxugue com o papel.",
+    ],
+    metaSegundos: 15,
+  },
+
+momento09_revisao: {
     pontos: [
       "CARTAZES e AVISOS servem pra COMUNICAR ALGO A MUITAS PESSOAS.",
       "Letras GRANDES, frases CURTAS, ficam em lugar que todo mundo passa.",

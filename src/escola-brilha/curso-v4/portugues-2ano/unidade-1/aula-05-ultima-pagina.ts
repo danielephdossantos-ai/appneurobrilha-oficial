@@ -261,7 +261,22 @@ export const aula05: AulaPortuguesV4 = {
     ],
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: O último pedacinho",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Aurora entregou uma pena dourada pra criança e disse:",
+      "— Cada bom leitor escolhe UM final pra história que amou.",
+      "Qual você escolhe pra Biblioteca Encantada?",
+    ],
+    metaSegundos: 25,
+  },
+
+momento09_revisao: {
     pontos: [
       "AULA 1: Piu, o passarinho da janela — a gente aprendeu a olhar TÍTULO e CAPA antes de ler.",
       "AULA 2: A semente curiosa — a gente aprendeu CARACTERÍSTICAS do personagem (curiosa, pequenina).",

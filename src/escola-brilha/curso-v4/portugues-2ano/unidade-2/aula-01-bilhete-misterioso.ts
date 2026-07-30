@@ -300,7 +300,21 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-  momento09_revisao: {
+    // ------------------------------------------------------------
+  // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Ler três vezes: Bilhete pra Miguel",
+    instrucao:
+      "Agora a gente lê o MESMO trechinho três vezes: a primeira comigo em eco, a segunda sozinho no cronômetro e a terceira de novo. Não é corrida — é para a leitura ficar solta e sem tropeço.",
+    texto: [
+      "Já dei água pro cachorro.",
+      "Depois da lição, pode brincar no quintal.",
+    ],
+    metaSegundos: 10,
+  },
+
+momento09_revisao: {
     pontos: [
       "BILHETE é um texto CURTO pra deixar RECADO.",
       "Tem 3 partes: DESTINATÁRIO (pra quem) · MENSAGEM (recado) · ASSINATURA (quem escreveu).",

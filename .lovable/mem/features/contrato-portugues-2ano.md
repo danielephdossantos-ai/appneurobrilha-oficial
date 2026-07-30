@@ -52,7 +52,11 @@ Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicia
   cartaz e texto. Ciclo rascunho → revisão (checklist marcável) → versão final
   salva no aparelho, via `cicloRevisao`.
 
-## Fase 4 — Fluência por releitura (`momento_fluencia`)
+## Fase 4 — Fluência por releitura (`momento_fluencia`) ✅ CONCLUÍDA
+
+- Entregue: `momento_fluencia` nas 30 aulas — releitura do mesmo trecho 3x
+  (eco → cronômetro → repetição), texto tirado da leitura independente da
+  própria aula e meta de tempo calibrada em ~60 palavras/minuto.
 - Bloco de 3 etapas em todas as 30 aulas: **eco → cronometrada 1 → cronometrada
   2 com comparação**.
 - Textos decodáveis próprios do 2º ano (frases e parágrafos curtos, não palavras
