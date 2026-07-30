@@ -97,7 +97,7 @@ function TrilhaCurso() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-10">
-        {slug === "portugues-1ano" && (
+        {(slug === "portugues-1ano" || slug === "portugues-2ano") && (
           <CartaoSondagem
             cursoSlug={slug}
             onIrParaUnidade={(unidadeSlug) => {
