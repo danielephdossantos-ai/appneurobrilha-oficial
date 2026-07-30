@@ -278,48 +278,39 @@ export const aula04: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "💭 Palpite ou Chute?",
-    instrucao: "Arraste cada fala pra 'PALPITE' ou 'CHUTE'.",
+    titulo: "💭 Marque só os PALPITES",
+    instrucao:
+      "Palpite de leitor tem MOTIVO tirado do texto. Chute é opinião sem explicação.",
     jogo: {
-      tipo: "arrastarParaAlvo",
-      titulo: "💭 Palpite ou Chute?",
+      tipo: "selecionarItens",
+      titulo: "💭 Marque só os PALPITES",
       bloco: {
-        instrucao: "Palpite tem PORQUÊ. Chute não tem motivo.",
-        itens: [
+        instrucao: "Toque em todas as falas que são palpite de leitor de verdade.",
+        pergunta: "Quais falas têm opinião COM motivo?",
+        opcoes: [
           {
             id: "o1",
             texto: "Gostei PORQUE Pipoca foi salvo.",
-            alvoId: "palpite",
             imagemUrl: coracao,
+            correto: true,
           },
-          {
-            id: "o2",
-            texto: "Não gostei porque sim.",
-            alvoId: "chute",
-            imagemUrl: balao,
-          },
+          { id: "o2", texto: "Não gostei porque sim.", imagemUrl: balao, correto: false },
           {
             id: "o3",
             texto: "A Bia é legal PORQUE ajudou Léo.",
-            alvoId: "palpite",
             imagemUrl: menina,
+            correto: true,
           },
-          {
-            id: "o4",
-            texto: "Sei lá.",
-            alvoId: "chute",
-            imagemUrl: livro,
-          },
-        ],
-        alvos: [
-          { id: "palpite", nome: "💭 PALPITE (com motivo)", descricao: "Tem PORQUÊ do texto" },
-          { id: "chute", nome: "🎲 CHUTE", descricao: "Sem motivo" },
+          { id: "o4", texto: "Sei lá.", imagemUrl: livro, correto: false },
         ],
         feedbackAcerto: "🎉 Você separou palpite de chute!",
-        feedbackErro: "Se tem PORQUÊ do texto = palpite. Se não tem motivo = chute.",
+        feedbackErro:
+          "Procure o motivo: se a fala explica POR QUE, usando algo do texto, é palpite. Sem motivo, é chute.",
+        dica: "Leia cada fala e pergunte: ela diz POR QUÊ?",
       },
     },
   },
+
 
     // ------------------------------------------------------------
   // FLUÊNCIA · releitura do mesmo texto (Fase 4 · 2º ano)
