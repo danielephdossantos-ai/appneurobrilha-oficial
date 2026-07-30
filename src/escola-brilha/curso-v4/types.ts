@@ -760,7 +760,26 @@ export type EnsinoVisualBloco =
         imagemUrl?: string;
         imagemResultadoUrl?: string;
       }>;
+    }
+  // ---------------------------------------------------------------
+  // PALAVRAS TEIMOSAS (1º ano · Unidade 10 — Fase 9)
+  // Palavras de alta frequência que NÃO se decodificam (é, as, os,
+  // um, muito, hoje…). Precisam de reconhecimento lexical direto:
+  // a palavra pisca por poucos segundos e some.
+  // ---------------------------------------------------------------
+  | {
+      tipo: "palavraRelampago";
+      /** Segundos que a palavra fica visível antes de sumir. */
+      segundos?: number;
+      palavras: Array<{
+        palavra: string;
+        /** Frase curta em que a palavra aparece de verdade. */
+        frase?: string;
+        /** Palavras parecidas que entram como alternativas erradas. */
+        distratores: string[];
+      }>;
     };
+
 
 
 export type MomentoEnsinoVisual = {
@@ -822,6 +841,23 @@ export type MomentoEscrita = {
   blocos: EscritaBloco[];
 };
 
+// ---------------------------------------------------------------
+// FLUÊNCIA POR RELEITURA (1º ano · Fase 9)
+// A criança lê o MESMO texto curto 3 vezes: em eco (com o áudio),
+// sozinha cronometrada e sozinha de novo, comparando o tempo.
+// É o passo que automatiza a decodificação.
+// ---------------------------------------------------------------
+export type MomentoFluencia = {
+  titulo: string;
+  instrucao: string;
+  /** Texto curto — 1 a 3 frases já decodificáveis. */
+  texto: string[];
+  imagemUrl?: string;
+  /** Meta amigável de tempo (segundos) da 2ª/3ª leitura. */
+  metaSegundos?: number;
+};
+
+
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
@@ -841,6 +877,9 @@ export type AulaPortuguesV4 = {
   momento08_leituraIndependente: MomentoLeituraIndependente;
   /** Opcional — bloco de ESCRITA (traçado, ditado com sílabas, escrita real). */
   momento_escrita?: MomentoEscrita;
+  /** Opcional — releitura para FLUÊNCIA (3 leituras do mesmo texto). */
+  momento_fluencia?: MomentoFluencia;
+
   /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
   momento_minijogo?: MomentoMinijogo;
   /** Opcional — laboratório interativo (Geografia/Ciências). Aparece depois do minijogo. */

@@ -316,6 +316,19 @@ export const aula04: AulaPortuguesV4 = {
     registro: "📷 Uma foto do cartaz colado em casa.",
   },
 
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O CARTAZ PEDE: CUIDE DA ÁGUA.",
+      "FECHE A TORNEIRA.",
+      "A ÁGUA É DA VIDA.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 150,
     moedas: 90,

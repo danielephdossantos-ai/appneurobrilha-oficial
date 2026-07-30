@@ -267,6 +267,19 @@ export const aula03: AulaPortuguesV4 = {
     registro: "🗣️ Grave ou fale pra alguém o trava-língua três vezes rápido, sem errar.",
   },
 
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O RATO ROEU A ROUPA.",
+      "A ROUPA DO REI.",
+      "ROU, ROU, ROU.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 120,
     moedas: 75,

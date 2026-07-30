@@ -2,6 +2,7 @@ import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
 import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
+import { PalavraRelampago } from "./PalavraRelampago";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -13,13 +14,16 @@ import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
  *   - fraseComPonto      → mostra frase com a 1ª letra MAIÚSCULA em
  *                          verde e o ponto/interrogação/exclamação em
  *                          vermelho, com animação e áudio.
+ *   - palavraRelampago   → palavras teimosas (reconhecimento lexical)
  */
 export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
   if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
+  if (bloco.tipo === "palavraRelampago") return <PalavraRelampago bloco={bloco} />;
   return <ConscienciaFonemica bloco={bloco} />;
 }
+
 
 // ---------- Alfabeto completo (26 letras clicáveis) ------------------
 

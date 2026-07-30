@@ -26,6 +26,10 @@ import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+import { LeituraFluente } from "./blocos/LeituraFluente";
+import { BotaoOuvirEnunciado } from "./blocos/BotaoOuvirEnunciado";
+import { useFalaAutomatica } from "./audio-prefs";
+
 
 
 /**
@@ -52,12 +56,21 @@ const MOMENTOS_BASE = [
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
   { id: "mesc", label: "✍️ Você escreve", opcional: true },
+  { id: "mflu", label: "🏃 Ler de novo", opcional: true },
   { id: "mmini", label: "🎮 Minijogo", opcional: true },
   { id: "mlab", label: "🔬 Laboratório", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
   { id: "m10", label: "✅ Avaliação" },
   { id: "m11", label: "🏠 Missão em Família" },
 ] as const;
+
+/**
+ * Fase 9 — sessão A ("aprender") vs sessão B ("praticar").
+ * Sessão A tem ~10 min: aquecimento, história, previsão, palavras novas,
+ * ensino visual e leitura guiada. Tudo o que sobra fica na sessão B.
+ */
+const MOMENTOS_SESSAO_A: readonly string[] = ["m1", "m2", "m3", "mev", "m4"];
+
 
 /** Cores por momento — usadas só no skin infantil (1º ano). */
 const CORES_KIDS: Record<string, string> = {
@@ -71,6 +84,7 @@ const CORES_KIDS: Record<string, string> = {
   m7: "#60a5fa",
   m8: "#facc15",
   mesc: "#fb923c",
+  mflu: "#4ade80",
   mmini: "#fb7185",
   mlab: "#2dd4bf",
   m9: "#c084fc",
@@ -90,6 +104,7 @@ const CORES_TWEEN: Record<string, string> = {
   m7: "#38bdf8",
   m8: "#eab308",
   mesc: "#f472b6",
+  mflu: "#34d399",
   mmini: "#fb7185",
   mlab: "#2dd4bf",
   m9: "#8b5cf6",
@@ -118,14 +133,51 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
   const CORES = tween ? CORES_TWEEN : CORES_KIDS;
 
 
-  const MOMENTOS = MOMENTOS_BASE.filter(
+  const MOMENTOS_ATIVOS = MOMENTOS_BASE.filter(
     (m) =>
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
       (m.id === "mlab" && !!aula.momento_laboratorio) ||
       (m.id === "mev" && !!aula.momento_ensinoVisual) ||
-      (m.id === "mesc" && !!aula.momento_escrita),
+      (m.id === "mesc" && !!aula.momento_escrita) ||
+      (m.id === "mflu" && !!aula.momento_fluencia),
   );
+
+  // ---- Fase 9 · sessões curtas (A e B) --------------------------------
+  // Aos 6 anos a atenção sustentada é de ~10-15 min. A aula é quebrada
+  // em duas sessões com um descanso no meio; o ponto fica salvo.
+  const sessoes = cursoSlug === "portugues-1ano";
+  const chaveSessao = `brilha:sessao:${cursoSlug}:${aula.slug}`;
+  const [sessao, setSessao] = useState<"A" | "B">("A");
+
+  useEffect(() => {
+    if (!sessoes) return;
+    try {
+      const salvo = window.localStorage.getItem(chaveSessao);
+      setSessao(salvo === "B" ? "B" : "A");
+    } catch {
+      setSessao("A");
+    }
+  }, [chaveSessao, sessoes]);
+
+  const irParaSessao = (s: "A" | "B") => {
+    stopSpeaking();
+    setSessao(s);
+    try {
+      window.localStorage.setItem(chaveSessao, s);
+    } catch {
+      /* modo privado */
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const MOMENTOS = sessoes
+    ? MOMENTOS_ATIVOS.filter((m) =>
+        sessao === "A" ? MOMENTOS_SESSAO_A.includes(m.id) : !MOMENTOS_SESSAO_A.includes(m.id),
+      )
+    : MOMENTOS_ATIVOS;
+
+  const [falaAuto, setFalaAuto] = useFalaAutomatica();
 
   useEffect(() => {
     const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
@@ -141,7 +193,8 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, [aula.slug]);
+  }, [aula.slug, sessao]);
+
 
   useEffect(() => () => stopSpeaking(), []);
 
@@ -269,7 +322,28 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
             )}
           </div>
+          {/* Fase 9 — liga/desliga a fala automática dos enunciados. */}
+          <button
+            type="button"
+            onClick={() => setFalaAuto(!falaAuto)}
+            aria-label={
+              falaAuto ? "Desligar a fala automática" : "Ligar a fala automática"
+            }
+            title={
+              falaAuto
+                ? "Fala automática ligada — os enunciados são lidos sozinhos"
+                : "Fala automática desligada"
+            }
+            className={`shrink-0 h-9 w-9 grid place-items-center rounded-full border-2 text-base transition active:scale-95 ${
+              falaAuto
+                ? "bg-emerald-400/90 border-emerald-200 text-[#0b1020]"
+                : "bg-white/10 border-white/25 text-white/60"
+            }`}
+          >
+            {falaAuto ? "🔊" : "🔇"}
+          </button>
         </div>
+
       </header>
 
 
@@ -313,7 +387,18 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
         <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
 
+          {sessoes && (
+            <TrilhoSessao
+              sessao={sessao}
+              onIr={irParaSessao}
+            />
+          )}
+
+          {(!sessoes || sessao === "A") && (
+          <>
+
           {/* M0 · Aquecimento — revisão espaçada (3 itens de aulas anteriores) */}
+
           <AquecimentoRevisao
             cursoSlug={cursoSlug}
             aulaSlug={aula.slug}
@@ -391,7 +476,20 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             <LeituraIlustrada data={aula.momento04_leituraGuiada.leitura} />
           </Secao>
 
+          {sessoes && sessao === "A" && (
+            <IntervaloSessao
+              onContinuar={() => irParaSessao("B")}
+              voltarPara={voltarPara}
+            />
+          )}
+          </>
+          )}
+
+          {(!sessoes || sessao === "B") && (
+          <>
+
           {/* M5 · Compreensão */}
+
           <Secao id="m5" label="🧠 Entendi?">
             <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
             <div className="space-y-3">
@@ -442,6 +540,24 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
               </div>
             </Secao>
           )}
+
+          {/* FLUÊNCIA (opcional) — releitura do mesmo texto 3 vezes (Fase 9). */}
+          {aula.momento_fluencia && (
+            <Secao id="mflu" label={`🏃 ${aula.momento_fluencia.titulo}`}>
+              <div className="flex items-start gap-2">
+                <div className="flex-1 min-w-0">
+                  <Instrucao>{aula.momento_fluencia.instrucao}</Instrucao>
+                </div>
+                <BotaoOuvirEnunciado texto={aula.momento_fluencia.instrucao} auto />
+              </div>
+              <LeituraFluente
+                data={aula.momento_fluencia}
+                aulaSlug={`${cursoSlug}:${aula.slug}`}
+              />
+            </Secao>
+          )}
+
+
 
           {/* Minijogo (opcional) */}
           {aula.momento_minijogo &&
@@ -581,7 +697,11 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             </Link>
           </div>
 
+          </>
+          )}
+
         </main>
+
       </div>
     </div>
     </KidsCtx.Provider>
@@ -758,6 +878,89 @@ function PainelNota({
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Fase 9 — trilho das duas sessões curtas da aula.
+ * Deixa visível pra criança (e pro adulto) que a aula tem duas partes
+ * curtas, e permite voltar pra parte 1 quando quiser.
+ */
+function TrilhoSessao({
+  sessao,
+  onIr,
+}: {
+  sessao: "A" | "B";
+  onIr: (s: "A" | "B") => void;
+}) {
+  const itens: Array<{ id: "A" | "B"; titulo: string; sub: string }> = [
+    { id: "A", titulo: "Parte 1", sub: "Aprender" },
+    { id: "B", titulo: "Parte 2", sub: "Praticar" },
+  ];
+  return (
+    <div className="flex gap-2">
+      {itens.map((it) => {
+        const ativa = sessao === it.id;
+        return (
+          <button
+            key={it.id}
+            type="button"
+            onClick={() => onIr(it.id)}
+            className={`flex-1 rounded-2xl border-2 px-3 py-2 text-left transition active:scale-95 ${
+              ativa
+                ? "bg-amber-400 border-amber-200 text-[#2b1258]"
+                : "bg-white/10 border-white/20 text-white/70"
+            }`}
+          >
+            <div className="text-sm font-black">{it.titulo}</div>
+            <div className="text-[10px] font-bold uppercase tracking-widest opacity-80">
+              {it.sub}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/**
+ * Fase 9 — Descanso do Brilha.
+ * Fecha a sessão A. A criança escolhe continuar agora ou parar por hoje;
+ * ao voltar, o app retoma direto na parte 2.
+ */
+function IntervaloSessao({
+  onContinuar,
+  voltarPara,
+}: {
+  onContinuar: () => void;
+  voltarPara: string;
+}) {
+  return (
+    <div className="rounded-[2rem] border-4 border-emerald-300/70 bg-emerald-400/15 p-6 text-center space-y-3">
+      <div className="text-5xl">😌</div>
+      <h3 className="text-2xl font-black text-emerald-100">
+        Descanso do Brilha
+      </h3>
+      <p className="mx-auto max-w-md text-base font-semibold text-white/90">
+        Você já fez <b>metade da aula</b>! Respire fundo, beba água e estique o
+        corpo. Quer continuar agora ou parar por hoje? O app guarda o seu lugar.
+      </p>
+      <div className="flex flex-col items-center gap-2 pt-1">
+        <button
+          type="button"
+          onClick={onContinuar}
+          className="h-14 px-8 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-lg shadow-[0_6px_0_rgba(0,0,0,.25)] active:translate-y-1 transition"
+        >
+          ▶ Continuar a parte 2
+        </button>
+        <Link
+          to={voltarPara}
+          className="text-xs font-bold text-white/70 hover:text-white"
+        >
+          Parar por hoje — eu volto depois
+        </Link>
+      </div>
     </div>
   );
 }

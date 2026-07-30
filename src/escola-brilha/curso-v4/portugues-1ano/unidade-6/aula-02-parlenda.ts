@@ -271,6 +271,19 @@ export const aula02: AulaPortuguesV4 = {
     registro: "🗣️ Cante a cantiga inteira, de memória, para alguém da família.",
   },
 
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "UNI, DUNI, TÊ.",
+      "SALAME, MINGUÊ.",
+      "UM SORVETE COLORÊ.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 110,
     moedas: 70,

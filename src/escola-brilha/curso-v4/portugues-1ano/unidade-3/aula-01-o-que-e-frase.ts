@@ -301,6 +301,19 @@ export const aula01: AulaPortuguesV4 = {
     registro: "📝 Foto das 3 frases escritas ou desenhadas.",
   },
 
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "O GATO MIA.",
+      "A BOLA PULA.",
+      "O PATO NADA.",
+    ],
+    metaSegundos: 20,
+  },
+
   recompensa: {
     xp: 110,
     moedas: 65,
