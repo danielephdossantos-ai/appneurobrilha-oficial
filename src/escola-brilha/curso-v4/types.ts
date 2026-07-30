@@ -504,6 +504,12 @@ export type QuizTextoData = {
    */
   opcoesImagens?: string[];
   /**
+   * Fase 2 (2º ano): feedback explicativo por alternativa. Mesmo tamanho e
+   * ordem de `opcoes`; `null` na alternativa correta. Quando presente, o
+   * QuizTexto mostra a explicação da opção que a criança escolheu.
+   */
+  feedbackOpcoes?: (string | null)[];
+  /**
    * Fase 1 do motor adaptativo: pista mostrada na 2ª tentativa,
    * ANTES de revelar a resposta. Se ausente, o player gera uma pista
    * genérica a partir de `ondeEstaNoTexto`.
