@@ -55,7 +55,6 @@ export const aula3: AulaPortuguesV4 = {
       feedbackErro:
         "Pense na árvore com FELIZ no tronco e INFELIZ, FELIZMENTE nos galhos — é sobre isso que vamos aprender.",
       dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -144,7 +143,6 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "o pedaço que carrega o significado principal e se repete em todas as palavras da família",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “o pedaço que carrega o significado principal e se repete em todas as palavras da família”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “O pedaço que carrega o significado principal, repetido em toda a família”. O radical carrega o significado principal e se repete na família. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -155,7 +153,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'um pedacinho é colocado ANTES do radical, ele se chama PREFIXO'.",
         ondeEstaNoTexto: "um pedacinho é colocado ANTES do radical, ele se chama PREFIXO",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “um pedacinho é colocado ANTES do radical, ele se chama PREFIXO”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Antes do radical”. O prefixo vem antes do radical. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -171,7 +168,6 @@ export const aula3: AulaPortuguesV4 = {
           "Releia: 'o sufixo -MENTE transforma o adjetivo FELIZ num advérbio, que indica o MODO'.",
         ondeEstaNoTexto: "o sufixo -MENTE transforma o adjetivo FELIZ num advérbio",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “o sufixo -MENTE transforma o adjetivo FELIZ num advérbio”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Transforma o adjetivo num advérbio de modo”. -MENTE transforma o adjetivo em advérbio de modo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -188,7 +184,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro:
           "Releia a motivação: 'No coração da floresta, a expedição encontrou uma árvore enorme'.",
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “No coração da floresta”. A árvore estava no coração da floresta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -199,7 +194,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro:
           "Releia a introdução: 'Brilha desenhou um mapa da árvore genealógica no diário'.",
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Brilha”. Foi Brilha quem desenhou o mapa no diário. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -225,7 +219,6 @@ export const aula3: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: primeiro se identifica o radical, depois se decide o prefixo, depois o sufixo, e por fim confere o sentido.",
       dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -249,7 +242,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'PEDREIRO usa o sufixo -EIRO, que indica profissão'.",
         ondeEstaNoTexto: "PEDREIRO usa o sufixo -EIRO, que indica profissão",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “PEDREIRO usa o sufixo -EIRO, que indica profissão”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Profissão: quem trabalha com pedra”. -EIRO indica a profissão de quem trabalha com pedra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -260,7 +252,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'o radical PEDAÇO ganha o prefixo DES-'.",
         ondeEstaNoTexto: "o radical PEDAÇO ganha o prefixo DES-",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “o radical PEDAÇO ganha o prefixo DES-”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “PEDAÇO”. O radical é PEDAÇO, e DES- é o prefixo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -309,7 +300,6 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro:
           "Pense: o pedaço extra veio ANTES do radical (prefixo) ou DEPOIS (sufixo)? Ou a palavra é só o radical puro?",
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
       },
     },
   },
@@ -332,7 +322,6 @@ export const aula3: AulaPortuguesV4 = {
       feedbackErro:
         "Releia a explicação: o radical é FELIZ, IN- vem antes (prefixo) e -MENTE vem depois (sufixo).",
       dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
         "📚 Vamos rever juntos: a resposta certa é “Prefixo IN-, radical FELIZ, sufixo -MENTE”. IN- (prefixo) + FELIZ (radical) + -MENTE (sufixo). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
@@ -357,7 +346,6 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “A última letra da palavra” não é a resposta. Lembre: radical é o pedaço com o significado principal da palavra.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “O pedaço com o significado principal”. Radical carrega o significado principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -373,7 +361,6 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Um sinal de pontuação” não é a resposta. Lembre: prefixo vem ANTES do radical.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Antes”. Prefixo vem antes do radical. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -389,7 +376,6 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Depois do radical” não é a resposta. Lembre: sufixo vem DEPOIS do radical.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Depois”. Sufixo vem depois do radical. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -405,7 +391,6 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “No meio do radical” não é a resposta. Releia o exemplo: em INFELIZ, o prefixo é IN-.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “prefixo” — é o pedaço colocado ANTES do radical, mudando ou reforçando o sentido da palavra. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “IN-”. IN- é o prefixo que inverte o sentido de FELIZ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -422,7 +407,6 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Deixa a palavra no plural” não é a resposta. Pense: qual das três tem um pedaço acrescentado DEPOIS do radical? É FELIZMENTE.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “sufixo” — é o pedaço colocado DEPOIS do radical, que também muda o sentido — muitas vezes muda até a classe da palavra. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Felizmente”. Expedição concluída! -MENTE é o sufixo que cria o advérbio FELIZMENTE. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],

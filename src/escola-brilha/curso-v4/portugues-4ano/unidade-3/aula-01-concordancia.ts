@@ -77,7 +77,6 @@ export const aula01: AulaPortuguesV4 = {
       feedbackErro:
         "Releia o aviso: ele fala de TRILHAS NOVAS liberadas e GUIAS que vão acompanhar o grupo.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -165,7 +164,6 @@ export const aula01: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "De repente, os exploradores avistaram um tigre distante, entre as folhas.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “De repente, os exploradores avistaram um tigre distante, entre as folhas”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Um tigre distante”. 'Os exploradores avistaram' — sujeito no plural (exploradores) com verbo no plural (avistaram). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -177,7 +175,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "No primeiro parágrafo: 'As árvores altas cobriam o céu'.",
         ondeEstaNoTexto: "As árvores altas cobriam o céu.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “As árvores altas cobriam o céu”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Altas”. 'As árvores altas' — o adjetivo ALTAS concorda no plural e no feminino com ÁRVORES. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -189,7 +186,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "No terceiro parágrafo: 'O guia experiente explicou'.",
         ondeEstaNoTexto: "O guia experiente explicou: — Esse tigre vive protegido nesta reserva.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O guia experiente explicou: — Esse tigre vive protegido nesta reserva”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “O guia experiente”. 'O guia experiente explicou' — sujeito no singular (guia) com verbo no singular (explicou). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -212,7 +208,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro:
           "O verbo sempre combina com quem pratica a ação. 'Os exploradores' é plural, então o verbo também precisa ir para o plural.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Porque o sujeito 'os exploradores' está no plural”. O verbo concorda com o SUJEITO. Como 'os exploradores' é plural, o verbo vai para o plural: caminharam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -222,7 +217,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Sujeito singular (o explorador) pede verbo singular (caminhou).",
         feedbackErro: "Se o sujeito é UM só, o verbo fica no singular: 'O explorador caminhou'.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “O explorador caminhou”. Sujeito singular (o explorador) pede verbo singular (caminhou). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -248,7 +242,6 @@ export const aula01: AulaPortuguesV4 = {
       feedbackErro:
         "Pense na ordem dos acontecimentos: primeiro caminharam, depois notaram as árvores, e por último o guia explicou.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -273,7 +266,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "Está no primeiro parágrafo: 'perto do rio, onde a água corria calma'.",
         ondeEstaNoTexto: "Os viajantes montaram o acampamento perto do rio.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Os viajantes montaram o acampamento perto do rio”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Perto do rio”. 'Os viajantes montaram o acampamento perto do rio' — sujeito e verbo no plural, combinando. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -285,7 +277,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "A primeira frase diz: 'As tendas coloridas ficaram prontas'.",
         ondeEstaNoTexto: "As tendas coloridas ficaram prontas antes do pôr do sol.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “As tendas coloridas ficaram prontas antes do pôr do sol”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Coloridas”. 'As tendas coloridas' — o adjetivo concorda no plural e no feminino com TENDAS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -321,7 +312,6 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro:
           "Dica: confira se TODAS as palavras da frase estão no mesmo gênero e número — do artigo até o verbo.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
       },
     },
   },
@@ -345,7 +335,6 @@ export const aula01: AulaPortuguesV4 = {
       feedbackErro:
         "Confira: se o sujeito é plural (os guias), tudo precisa ir para o plural junto.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
         "📚 Vamos rever juntos: a resposta certa é “Os guias experientes chegaram.”. 'Os guias experientes chegaram' — tudo no plural, combinando. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
@@ -372,7 +361,6 @@ export const aula01: AulaPortuguesV4 = {
           "❌ “Uma ponte quebrada” não é a resposta. Concordância NOMINAL é sobre as palavras que acompanham o substantivo (artigo e adjetivo).",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Artigo e adjetivo combinando em gênero e número com o substantivo”. Concordância nominal é o encaixe entre artigo, adjetivo e substantivo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -394,7 +382,6 @@ export const aula01: AulaPortuguesV4 = {
           "❌ “Baixas e secas” não é a resposta. O verbo precisa combinar em número com o sujeito: sujeito plural pede verbo plural.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Os exploradores caminham.”. Sujeito plural (os exploradores) com verbo plural (caminham). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -410,7 +397,6 @@ export const aula01: AulaPortuguesV4 = {
           "❌ “Uma exploradora” não é a resposta. 'As mochilas' é plural, então o verbo precisa ir para o plural: estão.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “estão”. 'As mochilas estão' — sujeito plural, verbo plural. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -433,7 +419,6 @@ export const aula01: AulaPortuguesV4 = {
           "❌ “Porque a trilha é longa” não é a resposta. Observe cada palavra: 'As trilha é longas' tem 'As' (plural), 'trilha' (singular) e 'longas' (plural) — não combinam.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “As trilha é longas.”. 'As trilha é longas' mistura plural e singular — o artigo, o substantivo e o adjetivo não combinam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -451,7 +436,6 @@ export const aula01: AulaPortuguesV4 = {
           "❌ “Porque é uma regra sem motivo” não é a resposta. 'O explorador' é singular, então o verbo também fica no singular: atravessou.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “atravessou”. Sujeito singular (o explorador) pede verbo singular (atravessou). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],

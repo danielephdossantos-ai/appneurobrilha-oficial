@@ -58,7 +58,6 @@ export const aula02: AulaPortuguesV4 = {
       feedbackErro:
         "Releia as frases do cristal: elas não podem ser verdadeiras ao pé da letra. Isso é pista de um jeito diferente de usar as palavras — a linguagem figurada.",
       dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -134,7 +133,6 @@ export const aula02: AulaPortuguesV4 = {
           "Releia: o sol não é uma moeda de verdade. É uma METÁFORA para descrever seu brilho e cor.",
         ondeEstaNoTexto: "O sol era uma moeda de ouro caindo devagar atrás da montanha.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O sol era uma moeda de ouro caindo devagar atrás da montanha”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Uma metáfora para o brilho e a cor do sol”. É uma metáfora: o sol NÃO é moeda, mas a imagem mostra seu brilho dourado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -152,7 +150,6 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "os girassóis viravam o rosto para acompanhar... como se quisessem se despedir dele",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “os girassóis viravam o rosto para acompanhar... como se quisessem se despedir dele”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Eles se despedem do sol virando o rosto”. 'como se quisessem se despedir' — isso é personificação: dar sentimento de gente a uma planta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -169,7 +166,6 @@ export const aula02: AulaPortuguesV4 = {
           "Procure o exagero impossível de ser real: 'andar um século' é a hipérbole do texto.",
         ondeEstaNoTexto: "sentíamos que tínhamos andado um século até aquele campo",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “sentíamos que tínhamos andado um século até aquele campo”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “'sentíamos que tínhamos andado um século'”. Ninguém anda um século de verdade — é um exagero para mostrar o quanto a trilha pareceu longa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -191,7 +187,6 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "Repare na palavra 'como': quando ela aparece, é comparação. Quando a frase afirma que uma coisa É a outra, é metáfora.",
         dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “A comparação usa 'como'; a metáfora diz que uma coisa É a outra, sem 'como'”. 'As folhas dançavam COMO bailarinas' é comparação; 'o sol É uma moeda' é metáfora — sem o 'como'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -208,7 +203,6 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "A hipérbole não é erro nem mentira boba — ela reforça de propósito uma emoção ou ideia, com exagero.",
         dica: "🧭 Pista de explorador: lembre o que significa “hipérbole” — é um EXAGERO proposital, usado para reforçar uma emoção ou ideia. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Para reforçar, com exagero, o quanto aquilo pareceu cansativo”. O exagero da hipérbole reforça a EMOÇÃO — o cansaço parecia eterno, mesmo sem ser literalmente verdade. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -243,7 +237,6 @@ export const aula02: AulaPortuguesV4 = {
       feedbackErro:
         "Pense na ordem: primeiro notar que não é literal, depois procurar 'como'/'é', depois checar exagero ou humanização.",
       dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -273,7 +266,6 @@ export const aula02: AulaPortuguesV4 = {
           "Repare: não tem a palavra 'como', a frase afirma que o rio É uma serpente. Isso é metáfora.",
         ondeEstaNoTexto: "O rio era uma serpente prateada deslizando entre as pedras",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O rio era uma serpente prateada deslizando entre as pedras”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Metáfora”. O rio É chamado de serpente, sem 'como' — é uma metáfora. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -286,7 +278,6 @@ export const aula02: AulaPortuguesV4 = {
           "Procure a ação humana: sussurrar segredos é coisa de gente, não do vento de verdade.",
         ondeEstaNoTexto: "O vento sussurrava segredos entre as folhas",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O vento sussurrava segredos entre as folhas”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Ele sussurra segredos”. 'sussurrava segredos' é ação de gente dada ao vento — personificação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -303,7 +294,6 @@ export const aula02: AulaPortuguesV4 = {
           "Procure o exagero impossível: cair 'o mar inteiro' é a hipérbole que mostra a força da chuva.",
         ondeEstaNoTexto: "parecia que tinha caído o mar inteiro sobre o acampamento",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “parecia que tinha caído o mar inteiro sobre o acampamento”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “'parecia que tinha caído o mar inteiro sobre o acampamento'”. Um mar inteiro nunca caberia numa chuva — é um exagero para mostrar que choveu muito forte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -325,7 +315,6 @@ export const aula02: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: é possível chorar um rio inteiro de lágrimas? Não — esse exagero é uma hipérbole.",
       dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
         "📚 Vamos rever juntos: a resposta certa é “Hipérbole”. Ninguém chora um rio de verdade — é exagero para mostrar o tamanho da tristeza. Hipérbole! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
@@ -351,7 +340,6 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Uma informação real sobre dinheiro” não é a resposta. Linguagem figurada é quando as palavras dizem mais do que o sentido literal — não é erro, é recurso da literatura.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Um jeito de usar as palavras que não deve ser lido ao pé da letra”. Linguagem figurada cria sentidos além do literal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -369,7 +357,6 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Um erro de escrita” não é a resposta. Tempo não tem asas — a frase compara (sem 'como') a passagem rápida do tempo a um voo. É metáfora.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Metáfora”. Tempo não voa de verdade — é metáfora para dizer que passou rápido. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -390,7 +377,6 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Eles cantam uma música” não é a resposta. Procure a palavra 'como' — ela é a marca clássica da comparação.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “comparação” — é aproximar duas coisas usando 'como', 'tal qual' ou palavra parecida, para destacar uma semelhança. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “'Seus olhos brilhavam como estrelas.'”. A palavra 'como' marca a comparação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -413,7 +399,6 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Eles fazem um lanche” não é a resposta. Acenar é uma ação humana. Dar essa ação a uma árvore é personificação.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Personificação”. Acenar é gesto de gente — dar isso a uma árvore é personificação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -436,7 +421,6 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “'o sol era uma moeda de ouro'” não é a resposta. As figuras de linguagem existem para criar imagens fortes e emoção — não são erro, são ferramenta de escrita.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Para criar imagens fortes e emocionar o leitor”. As figuras de linguagem tornam o texto mais vivo, visual e emocionante. Cristal decifrado! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],

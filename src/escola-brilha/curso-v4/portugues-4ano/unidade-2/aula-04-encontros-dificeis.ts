@@ -57,7 +57,6 @@ export const aula04: AulaPortuguesV4 = {
       feedbackErro:
         "Pense no pântano das letras traiçoeiras: é sobre sons parecidos que se escrevem de jeitos diferentes.",
       dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -142,7 +141,6 @@ export const aula04: AulaPortuguesV4 = {
           "Releia: 'depois de ditongo (ai, ei, ou), quase sempre é X — CAIXA, FEIXE, BAIXO'.",
         ondeEstaNoTexto: "depois de ditongo (ai, ei, ou), quase sempre é X",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “depois de ditongo (ai, ei, ou), quase sempre é X”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “X”. Depois de ditongo, quase sempre é X, como em CAIXA e FEIXE. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -153,7 +151,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'palavras terminadas em -AGEM, -IGEM, -UGEM usam G'.",
         ondeEstaNoTexto: "palavras terminadas em -AGEM, -IGEM, -UGEM usam G",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “palavras terminadas em -AGEM, -IGEM, -UGEM usam G”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “G”. -AGEM, -IGEM e -UGEM usam G, como em VIAGEM e FERRUGEM. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -168,7 +165,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'O S sozinho, quando fica ENTRE DUAS VOGAIS, soa como Z'.",
         ondeEstaNoTexto: "O S sozinho, quando fica ENTRE DUAS VOGAIS, soa como Z",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O S sozinho, quando fica ENTRE DUAS VOGAIS, soa como Z”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Porque está entre duas vogais”. Entre vogais, o S sozinho soa Z. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -188,7 +184,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A expedição entrou no pântano das letras traiçoeiras.",
         feedbackErro: "Releia a motivação: a expedição entrou num pântano.",
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “No pântano das letras traiçoeiras”. A expedição entrou no pântano das letras traiçoeiras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -198,7 +193,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Tudo foi registrado no diário de bordo.",
         feedbackErro: "Releia o título: 'O Diário do Pântano das Letras'.",
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “No diário de bordo”. Tudo foi registrado no diário de bordo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -237,7 +231,6 @@ export const aula04: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: primeiro se ouve o som, depois se observa a posição, depois se lembra a regra, e só então se escreve.",
       dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
     },
   },
 
@@ -266,7 +259,6 @@ export const aula04: AulaPortuguesV4 = {
           "Releia: 'o som de SS aparece antes de A — e Ç é a letra certa nessa posição'.",
         ondeEstaNoTexto: "Ç é a letra certa nessa posição, nunca C sozinho",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Ç é a letra certa nessa posição, nunca C sozinho”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Porque o som de SS aparece antes de A, e Ç é a letra certa nessa posição”. Ç aparece antes de A, O, U para manter o som de SS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -282,7 +274,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'PASSEIO usa SS porque o som de S puro está ENTRE VOGAIS'.",
         ondeEstaNoTexto: "PASSEIO usa SS porque o som de S puro está ENTRE VOGAIS",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “PASSEIO usa SS porque o som de S puro está ENTRE VOGAIS”.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Porque o som de S puro está entre vogais”. Entre vogais, SS mantém o som de S puro; um S sozinho ali soaria Z. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
@@ -318,7 +309,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "Fale a palavra em voz alta e pense na posição da letra duvidosa antes de tentar de novo.",
         dica: "🧭 Pista de explorador: lembre o que significa “família de palavras” — grupo de palavras que vêm da mesma palavra de origem e por isso se escrevem parecido. Ajuda a memorizar a grafia certa. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
       },
     },
   },
@@ -340,7 +330,6 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso! Essa é a regra de ouro do S entre vogais.",
       feedbackErro: "Releia a explicação: S entre vogais soa Z.",
       dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino:
         "📚 Vamos rever juntos: a resposta certa é “Porque está entre duas vogais”. Essa é a regra de ouro do S entre vogais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
@@ -365,7 +354,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Porque a palavra é pequena” não é a resposta. Lembre: dígrafo é quando duas letras juntas formam um único som, como CH.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Duas letras juntas que fazem um só som”. CH, por exemplo, é um dígrafo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -381,7 +369,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Porque vem antes de A” não é a resposta. Depois de ditongo (AI, EI, OU), quase sempre usamos X.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “X”. Depois de ditongo, como em CAIXA, quase sempre é X. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -397,7 +384,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Numa praia deserta” não é a resposta. Lembre da família -AGEM/-IGEM/-UGEM: todas usam G.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “G”. -AGEM usa G. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -413,7 +399,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “No topo de uma montanha” não é a resposta. Lembre: S entre vogais soa como Z.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Z”. Entre vogais, o S soa Z. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
@@ -429,7 +414,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Numa placa de madeira” não é a resposta. Lembre: Ç aparece antes de A, O, U, como em AÇÚCAR e CABEÇA.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino:
           "📚 Vamos rever juntos: a resposta certa é “Ç”. Expedição concluída! Ç é usado antes de A, O, U para o som de SS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
