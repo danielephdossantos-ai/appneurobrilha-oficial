@@ -488,3 +488,94 @@
 }
 
 
+
+/* ============================================================
+ * Skin "pt-expedicao" — Língua Portuguesa 3º ano
+ * Usa a mesma linguagem visual das expedições (Geografia/História/
+ * Ciências): painéis de vidro escuro, borda ciano, tipografia mono nos
+ * rótulos. Aqui só a APARÊNCIA dos blocos compartilhados muda —
+ * conteúdo, dicas, escrita e avaliações continuam iguais.
+ * ============================================================ */
+[data-skin="pt-expedicao"] .bg-white,
+[data-skin="pt-expedicao"] .bg-white\/95,
+[data-skin="pt-expedicao"] .bg-white\/90 {
+  background-color: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(34, 211, 238, 0.22) !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 40px -24px rgba(34, 211, 238, 0.6) !important;
+}
+
+[data-skin="pt-expedicao"] .text-\[\#0d1f55\],
+[data-skin="pt-expedicao"] .text-\[\#2b1258\],
+[data-skin="pt-expedicao"] .text-\[\#1a0d3d\],
+[data-skin="pt-expedicao"] .text-slate-400,
+[data-skin="pt-expedicao"] .text-slate-950 {
+  color: #e2e8f0 !important;
+}
+
+/* Cartões de opção com gradiente colorido → vidro escuro com borda ciano */
+[data-skin="pt-expedicao"] [class*="bg-gradient-to-br"] {
+  background-image: none !important;
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Estados de acerto/erro continuam legíveis, mas em tom de expedição */
+[data-skin="pt-expedicao"] [class*="from-emerald"] {
+  background-color: rgba(5, 150, 105, 0.32) !important;
+  box-shadow: inset 0 0 0 2px rgba(52, 211, 153, 0.7) !important;
+}
+[data-skin="pt-expedicao"] [class*="from-rose-400"][class*="to-red-600"] {
+  background-color: rgba(190, 18, 60, 0.32) !important;
+  box-shadow: inset 0 0 0 2px rgba(251, 113, 133, 0.7) !important;
+}
+[data-skin="pt-expedicao"] .bg-slate-200,
+[data-skin="pt-expedicao"] .bg-slate-100,
+[data-skin="pt-expedicao"] .bg-slate-50 {
+  background-color: rgba(15, 23, 42, 0.55) !important;
+  color: rgba(226, 232, 240, 0.55) !important;
+}
+
+/* Caixas de feedback / dica / reensino */
+[data-skin="pt-expedicao"] .bg-emerald-100 {
+  background-color: rgba(5, 150, 105, 0.22) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .bg-amber-100,
+[data-skin="pt-expedicao"] .bg-amber-100\/95,
+[data-skin="pt-expedicao"] .bg-amber-50 {
+  background-color: rgba(180, 83, 9, 0.22) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .bg-sky-100 {
+  background-color: rgba(3, 105, 161, 0.22) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .text-emerald-900,
+[data-skin="pt-expedicao"] .text-amber-900,
+[data-skin="pt-expedicao"] .text-sky-950,
+[data-skin="pt-expedicao"] .text-\[\#3a2410\] {
+  color: #e2e8f0 !important;
+}
+
+/* Anéis grossos e pulsos infantis → contorno fino de instrumento */
+[data-skin="pt-expedicao"] [class*="ring-8"] {
+  --tw-ring-offset-width: 0px;
+  box-shadow: inset 0 0 0 2px rgba(34, 211, 238, 0.55) !important;
+}
+[data-skin="pt-expedicao"] .animate-pulse {
+  animation: none !important;
+}
+
+/* Rótulos em mono maiúsculo, como nas expedições */
+[data-skin="pt-expedicao"] .uppercase.tracking-widest,
+[data-skin="pt-expedicao"] [class*="tracking-\[0\.2em\]"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Botões âmbar mantêm texto escuro para contraste */
+[data-skin="pt-expedicao"] .bg-amber-400,
+[data-skin="pt-expedicao"] .bg-amber-300 {
+  color: #0f172a !important;
+}

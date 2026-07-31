@@ -34,6 +34,7 @@ import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
 import { LeituraFluente } from "./blocos/LeituraFluente";
+import { LenteLeitura } from "./blocos/LenteLeitura";
 import { BotaoOuvirEnunciado } from "./blocos/BotaoOuvirEnunciado";
 import { useFalaAutomatica } from "./audio-prefs";
 
@@ -228,6 +229,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
   return (
     <KidsCtx.Provider value={{ kids, tween, geo, ordem: ordemMomentos }}>
     <div
+      data-skin={geo ? "pt-expedicao" : undefined}
       className={
         geo
           ? "min-h-screen relative overflow-x-hidden bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55] text-white"
@@ -471,6 +473,13 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
           {/* M1 · Motivação */}
           <Secao id="m1" label="🎬 Motivação">
+            {geo ? (
+              <LenteLeitura
+                titulo={aula.momento01_motivacao.titulo}
+                historia={aula.momento01_motivacao.historia}
+                imagemUrl={aula.momento01_motivacao.imagemUrl}
+              />
+            ) : (
             <div className={kids ? "flex flex-col items-center gap-3" : undefined}>
               {aula.momento01_motivacao.imagemUrl && (
                 <img
@@ -502,7 +511,9 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
                 {aula.momento01_motivacao.historia}
               </p>
             </div>
+            )}
           </Secao>
+
 
 
           {/* M2 · Previsão */}
