@@ -55,6 +55,7 @@ export const aula03: AulaPortuguesV4 = {
         "🔍 Isso! Título com dois bichos e a palavra 'esperta' são pistas clássicas de fábula em cordel: uma disputa de esperteza.",
       feedbackErro:
         "Repare: o título tem DOIS personagens-bicho e a palavra 'esperta' — isso é pista de uma disputa entre eles.",
+      dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -108,6 +109,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! 'era o primeiro cantor' se refere ao galo.",
         feedbackErro: "Releia a primeira sextilha: quem é o 'cantador' desde o começo?",
         ondeEstaNoTexto: "de um galo muito cantador, … era o primeiro cantor.",
+        dica: "🔎 Pista: releia no texto o trecho “de um galo muito cantador, … era o primeiro cantor.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “Quem era o primeiro a cantar de manhã no sítio?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que a raposa disse que estava acontecendo na clareira?",
@@ -116,6 +119,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! 'as galinhas fazem festa na clareira'.",
         feedbackErro: "Releia a segunda sextilha — a raposa fala de uma festa de quem?",
         ondeEstaNoTexto: "as galinhas fazem festa / na clareira, sem parar.",
+        dica: "🔎 Pista: releia no texto o trecho “as galinhas fazem festa / na clareira, sem parar.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “O que a raposa disse que estava acontecendo na clareira?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que o galo ameaçou fazer para escapar da raposa?",
@@ -124,6 +129,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Exato! 'Vou primeiro avisar todos dos cachorros do casarão!'",
         feedbackErro: "Releia a última sextilha — o galo grita algo sobre os cachorros.",
         ondeEstaNoTexto: "\"Vou primeiro avisar todos / dos cachorros do casarão!\"",
+        dica: "🔎 Pista: releia no texto o trecho “\"Vou primeiro avisar todos / dos cachorros do casarão!\"”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “O que o galo ameaçou fazer para escapar da raposa?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -137,6 +144,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! São três blocos de seis versos — três sextilhas.",
         feedbackErro: "Conte os blocos separados: são três grupos de seis versos cada.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “Quantas sextilhas (estrofes de 6 versos) tem o cordel do galo e da ra…” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quem foi mais esperto no final da história?",
@@ -146,6 +155,8 @@ export const aula03: AulaPortuguesV4 = {
           "🔍 Isso! O galo percebeu a armadilha e usou a ameaça dos cachorros para se livrar da raposa — típico final de fábula em cordel.",
         feedbackErro:
           "Releia o final: quem inventou uma saída esperta e assustou o outro? Foi o galo.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “Quem foi mais esperto no final da história?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -162,6 +173,7 @@ export const aula03: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🔍 Perfeito! Assim como num folheto de feira: começo, armadilha e desfecho esperto.",
       feedbackErro: "Pense na lógica da fábula: primeiro a rotina, depois a armadilha da raposa, e por fim a fuga.",
+      dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -184,6 +196,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! 'ele vendia seus versos rimando'.",
         feedbackErro: "Releia a primeira sextilha — o que ele vendia na banca?",
         ondeEstaNoTexto: "ele vendia seus versos / rimando, sem esquecer,",
+        dica: "🔎 Pista: releia no texto o trecho “ele vendia seus versos / rimando, sem esquecer,”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “O que Compadre Zeca vendia na feira?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Segundo Zeca, como eram as histórias que ele contava?",
@@ -192,6 +206,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! 'Metade é fantasia, metade é realidade'.",
         feedbackErro: "Releia a resposta de Zeca ao menino — ele explica a mistura das histórias.",
         ondeEstaNoTexto: "\"Metade é fantasia, metade é realidade.\"",
+        dica: "🔎 Pista: releia no texto o trecho “\"Metade é fantasia, metade é realidade.\"”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “Segundo Zeca, como eram as histórias que ele contava?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -209,6 +225,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🔍 Isso! 'Sextilha' vem de 'seis' — seis versos.",
       feedbackErro: "O nome já ajuda: sextilha vem de 'seis' — são seis versos por estrofe.",
+      dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “Uma sextilha tem quantos versos?” com essa ideia na cabeça.",
     },
   },
 
@@ -224,6 +242,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Isso! Cordel é poesia popular de feira.",
         feedbackErro: "Cordel é a poesia popular pendurada em BARBANTE nas feiras, geralmente do Nordeste.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “1/5 — O que é literatura de cordel?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Quantos versos tem uma sextilha?",
@@ -231,6 +251,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Correto! Seis versos.",
         feedbackErro: "Sextilha tem SEIS versos — o nome já dá a pista.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “2/5 — Quantos versos tem uma sextilha?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — No cordel do galo e da raposa, quem venceu a disputa de esperteza?",
@@ -238,6 +260,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! O galo foi mais esperto e assustou a raposa.",
         feedbackErro: "Releia o final: quem inventou a ameaça dos cachorros para escapar? Foi o galo.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “3/5 — No cordel do galo e da raposa, quem venceu a disputa de esperte…” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — O que é um repentista?",
@@ -249,6 +273,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Isso! Repentista cria versos NA HORA.",
         feedbackErro: "Repentista é quem inventa versos DE IMPROVISO, muitas vezes cantando.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “4/5 — O que é um repentista?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Segundo Compadre Zeca, as histórias de cordel geralmente misturam...",
@@ -256,6 +282,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! 'Metade é fantasia, metade é realidade.' Caso do cordel resolvido! 🌟",
         feedbackErro: "Zeca explicou: as histórias misturam fantasia E realidade.",
+        dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: cordel — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas feiras nordestinas. Exemplo: O folheto de cordel 'A Chegada da Lua' era vendido na feira por uma moedinha. Agora volte à pergunta “5/5 — Segundo Compadre Zeca, as histórias de cordel geralmente mistur…” com essa ideia na cabeça.",
       },
     ],
   },

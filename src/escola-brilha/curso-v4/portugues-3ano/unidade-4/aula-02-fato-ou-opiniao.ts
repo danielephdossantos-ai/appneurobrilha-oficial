@@ -66,6 +66,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! No cartaz, o placar '3 a 1' é um FATO — pode ser checado. Já 'o mais emocionante' é OPINIÃO de quem escreveu.",
       feedbackErro:
         "Repare: uma frase dá um número (placar) que pode ser conferido. A outra usa uma palavra de opinião ('mais emocionante'). Vamos aprender a separar isso.",
+      dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -114,6 +115,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O placar é um número real — dá pra conferir. É um FATO.",
         feedbackErro: "Releia a primeira frase: '3 a 1' é uma informação que pode ser comprovada. É FATO.",
         ondeEstaNoTexto: "…venceu o time do bairro vizinho por 3 a 1.",
+        dica: "🔎 Pista: releia no texto o trecho “…venceu o time do bairro vizinho por 3 a 1.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Qual foi o placar do jogo? (Isso é um fato ou opinião?)” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual frase mostra a OPINIÃO de Bia?",
@@ -127,6 +130,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Exato! 'Eu acho' é uma marca linguística de opinião — mostra o que Bia PENSA, não um fato checável.",
         feedbackErro: "Procure a frase que começa com 'Eu acho' — essa expressão sempre indica opinião.",
         ondeEstaNoTexto: "Eu acho que esse foi o melhor jogo do ano…",
+        dica: "🔎 Pista: releia no texto o trecho “Eu acho que esse foi o melhor jogo do ano…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Qual frase mostra a OPINIÃO de Bia?” com essa ideia na cabeça.",
       },
       {
         pergunta: "A hora que o jogo terminou (16h30) é fato ou opinião?",
@@ -135,6 +140,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Horário é informação checável — FATO.",
         feedbackErro: "Um horário é algo que aconteceu de verdade e pode ser comprovado. É FATO.",
         ondeEstaNoTexto: "O jogo terminou às 16h30…",
+        dica: "🔎 Pista: releia no texto o trecho “O jogo terminou às 16h30…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “A hora que o jogo terminou (16h30) é fato ou opinião?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -148,6 +155,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O depoimento é de BIA, a torcedora.",
         feedbackErro: "O título do texto já diz: 'Depoimento de Bia'.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Quem é a autora do depoimento?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde aconteceu o jogo?",
@@ -155,6 +164,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Certo! O texto fala do 'time da NOSSA ESCOLA'.",
         feedbackErro: "Releia a primeira frase — o time que jogou é o 'da nossa escola'.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Onde aconteceu o jogo?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -172,6 +183,7 @@ export const aula02: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Muito bem! Você seguiu a ordem certa do relato de Bia.",
       feedbackErro:
         "Pense: primeiro vem o resultado do jogo, depois a opinião sobre ele, e por último o detalhe do pênalti no final.",
+      dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -194,6 +206,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Duração de tempo é informação checável — FATO.",
         feedbackErro: "20 minutos é uma medida — pode ser comprovada. É FATO.",
         ondeEstaNoTexto: "Ontem choveu forte por 20 minutos…",
+        dica: "🔎 Pista: releia no texto o trecho “Ontem choveu forte por 20 minutos…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “'Choveu forte por 20 minutos' é...” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual expressão do texto mostra que é uma opinião?",
@@ -202,6 +216,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'NA MINHA OPINIÃO' é a marca clássica de opinião.",
         feedbackErro: "Procure a expressão que já tem a palavra 'opinião' dentro dela.",
         ondeEstaNoTexto: "Na minha opinião, foi a chuva mais chata do mês…",
+        dica: "🔎 Pista: releia no texto o trecho “Na minha opinião, foi a chuva mais chata do mês…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Qual expressão do texto mostra que é uma opinião?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -223,6 +239,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! 'O melhor' é julgamento pessoal — OPINIÃO.",
       feedbackErro: "As outras duas trazem números checáveis (fatos). A frase com 'melhor' é opinião.",
+      dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “Qual frase é uma OPINIÃO?” com essa ideia na cabeça.",
     },
   },
 
@@ -238,6 +256,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Fato é comprovável.",
         feedbackErro: "Fato é o que realmente aconteceu e pode ser checado.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “1/5 — O que é um FATO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — 'Eu acho que...' é uma marca de:",
@@ -245,6 +265,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Eu acho' sempre indica opinião.",
         feedbackErro: "Essa expressão mostra o que a pessoa PENSA — é opinião.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “2/5 — 'Eu acho que...' é uma marca de:” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — 'O jogo terminou às 16h30' é:",
@@ -252,6 +274,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Horário é checável — FATO.",
         feedbackErro: "Horário pode ser comprovado no relógio — é FATO.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “3/5 — 'O jogo terminou às 16h30' é:” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Qual frase é uma OPINIÃO?",
@@ -263,6 +287,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'O pior' é julgamento pessoal.",
         feedbackErro: "As outras trazem dados checáveis. A com 'pior' é opinião.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “4/5 — Qual frase é uma OPINIÃO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Por que é importante saber diferenciar fato de opinião?",
@@ -274,6 +300,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exatamente! Isso ajuda a entender melhor notícias e depoimentos.",
         feedbackErro: "Saber separar fato de opinião ajuda a não confundir verdade com achismo.",
+        dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: fato — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Exemplo: 'O jogo começou às 15h.' — isso é um fato, dá pra checar no relógio. Agora volte à pergunta “5/5 — Por que é importante saber diferenciar fato de opinião?” com essa ideia na cabeça.",
       },
     ],
   },

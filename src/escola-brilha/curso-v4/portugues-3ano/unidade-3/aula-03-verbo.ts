@@ -66,6 +66,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Isso! O bilhete usa verbos em três tempos: ENTROU (passado), INVESTIGA (presente) e DESCOBRIREMOS (futuro).",
       feedbackErro:
         "Releia as três linhas: elas falam de ONTEM, AGORA e AMANHÃ — os três tempos da mesma investigação.",
+      dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -138,6 +139,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Sumiu' está no passado: aconteceu ONTEM à noite.",
         feedbackErro: "A primeira frase começa com 'Ontem à noite, a bicicleta… sumiu'.",
         ondeEstaNoTexto: "Ontem à noite, a bicicleta de Pedro sumiu da garagem.",
+        dica: "🔎 Pista: releia no texto o trecho “Ontem à noite, a bicicleta de Pedro sumiu da garagem.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Quando a bicicleta sumiu?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que o Clube está fazendo hoje?",
@@ -146,6 +149,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! 'Procura' é o verbo no presente: acontece HOJE.",
         feedbackErro: "O segundo parágrafo diz: 'Hoje, o Clube… PROCURA pistas'.",
         ondeEstaNoTexto: "Hoje, o Clube dos Detetives procura pistas pela vizinhança inteira.",
+        dica: "🔎 Pista: releia no texto o trecho “Hoje, o Clube dos Detetives procura pistas pela vizinhança inteira.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “O que o Clube está fazendo hoje?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que deve acontecer amanhã, segundo o relato?",
@@ -154,6 +159,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Encontrará' está no futuro — ainda vai acontecer.",
         feedbackErro: "O último parágrafo diz: 'Amanhã… o Clube ENCONTRARÁ a bicicleta'.",
         ondeEstaNoTexto: "Amanhã, se tudo der certo, o Clube encontrará a bicicleta.",
+        dica: "🔎 Pista: releia no texto o trecho “Amanhã, se tudo der certo, o Clube encontrará a bicicleta.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “O que deve acontecer amanhã, segundo o relato?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -167,6 +174,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! É o CLUBE quem procura as pistas — o sujeito da ação.",
         feedbackErro: "Releia: 'Hoje, o Clube dos Detetives procura pistas…'.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Quem faz a ação de 'procura pistas' no relato?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde a bicicleta estava guardada antes de sumir?",
@@ -174,6 +183,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Certo! Ela sumiu 'da garagem', o cenário inicial do caso.",
         feedbackErro: "O texto diz: 'a bicicleta de Pedro sumiu DA GARAGEM'.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Onde a bicicleta estava guardada antes de sumir?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -190,6 +201,7 @@ export const aula03: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🎉 Perfeito! Você seguiu a linha do tempo dos verbos: passado, presente e futuro.",
       feedbackErro: "Pense nos tempos verbais: SUMIU é passado, PROCURA é presente, ENCONTRARÁ é futuro.",
+      dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -213,6 +225,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Quebrou' mostra uma ação que já aconteceu ontem.",
         feedbackErro: "Passado é o que já aconteceu. 'Ontem, alguém QUEBROU o vaso'.",
         ondeEstaNoTexto: "Ontem, alguém quebrou o vaso da sala sem avisar ninguém.",
+        dica: "🔎 Pista: releia no texto o trecho “Ontem, alguém quebrou o vaso da sala sem avisar ninguém.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Qual verbo está no PASSADO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual verbo está no FUTURO?",
@@ -221,6 +235,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Contará' é uma ação que ainda vai acontecer.",
         feedbackErro: "Futuro é o que ainda vai acontecer: 'ela CONTARÁ tudo pros pais'.",
         ondeEstaNoTexto: "Mais tarde, ela contará tudo pros pais, com calma.",
+        dica: "🔎 Pista: releia no texto o trecho “Mais tarde, ela contará tudo pros pais, com calma.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Qual verbo está no FUTURO?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -250,6 +266,7 @@ export const aula03: AulaPortuguesV4 = {
           "🎉 Excelente! Você organizou os verbos certinho na linha do tempo.",
         feedbackErro:
           "Dica: verbos no futuro costumam terminar em -RÁ ou -RÃO; no passado, geralmente em -OU ou -EU.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -267,6 +284,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Isso! 'Resolveremos' é futuro — a ação ainda vai acontecer.",
       feedbackErro: "A palavra 'amanhã' já é uma pista de futuro, e o verbo termina em -EMOS + -REMOS.",
+      dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “Na frase 'Amanhã, resolveremos o caso', o verbo está no...” com essa ideia na cabeça.",
     },
   },
 
@@ -282,6 +301,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Verbo indica AÇÃO ou ESTADO.",
         feedbackErro: "Verbo é a palavra da AÇÃO: correr, investigar, ser, estar.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “1/5 — O que é um verbo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — 'O detetive investigou o caso' está em que tempo?",
@@ -289,6 +310,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'Investigou' mostra ação já concluída — passado.",
         feedbackErro: "'Investigou' terminando em -OU é sinal de passado.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “2/5 — 'O detetive investigou o caso' está em que tempo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — 'Ela investigará o caso amanhã' está em que tempo?",
@@ -296,6 +319,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! 'Investigará' + 'amanhã' indicam futuro.",
         feedbackErro: "Verbos terminados em -RÁ geralmente indicam futuro.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “3/5 — 'Ela investigará o caso amanhã' está em que tempo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Qual verbo está no PRESENTE?",
@@ -303,6 +328,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Corre' mostra a ação acontecendo agora.",
         feedbackErro: "Presente é o que acontece AGORA — 'corre', sem terminação de passado ou futuro.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “4/5 — Qual verbo está no PRESENTE?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Por que é importante usar o tempo verbal certo num relato?",
@@ -314,6 +341,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exatamente! O tempo verbal organiza a história pra quem lê entender a ordem dos fatos.",
         feedbackErro: "Sem o tempo verbal certo, fica difícil saber se algo já aconteceu, acontece agora ou vai acontecer.",
+        dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verbo — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Exemplo: Em 'Brilha investiga o caso', INVESTIGA é o verbo. Agora volte à pergunta “5/5 — Por que é importante usar o tempo verbal certo num relato?” com essa ideia na cabeça.",
       },
     ],
   },

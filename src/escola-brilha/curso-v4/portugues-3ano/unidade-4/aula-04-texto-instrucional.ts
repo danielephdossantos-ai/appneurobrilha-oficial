@@ -63,6 +63,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Isso! Uma receita é um TEXTO INSTRUCIONAL: tem lista de ingredientes e passos numerados pra ensinar a fazer algo.",
       feedbackErro:
         "Repare: aparecem 'ingredientes' e 'passo 1' — isso é sinal de texto instrucional, que ENSINA a fazer algo.",
+      dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -110,6 +111,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Os materiais estão logo no início: 'um dado e peões'.",
         feedbackErro: "A lista de materiais sempre vem antes dos passos — releia a primeira linha.",
         ondeEstaNoTexto: "Materiais: um dado e peões…",
+        dica: "🔎 Pista: releia no texto o trecho “Materiais: um dado e peões…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Quais são os materiais do jogo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que o jogador deve fazer no Passo 2?",
@@ -118,6 +121,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! O verbo de comando é 'role' — role o dado e avance.",
         feedbackErro: "Releia o Passo 2: o verbo de comando aparece logo no início da frase.",
         ondeEstaNoTexto: "Passo 2: na sua vez, role o dado e avance seu peão…",
+        dica: "🔎 Pista: releia no texto o trecho “Passo 2: na sua vez, role o dado e avance seu peão…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “O que o jogador deve fazer no Passo 2?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quem vence o jogo?",
@@ -130,6 +135,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Está no Passo 3: 'vence quem chegar primeiro'.",
         feedbackErro: "A regra de vitória está no último passo do texto.",
         ondeEstaNoTexto: "Passo 3: vence quem chegar primeiro na casa final do tabuleiro.",
+        dica: "🔎 Pista: releia no texto o trecho “Passo 3: vence quem chegar primeiro na casa final do tabuleiro.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Quem vence o jogo?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -143,6 +150,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Texto instrucional é escrito para QUALQUER pessoa conseguir seguir.",
         feedbackErro: "O objetivo do texto instrucional é ser claro pra QUALQUER PESSOA que quiser jogar.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Quem deve seguir essas instruções?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde a lista de materiais deve aparecer no texto?",
@@ -150,6 +159,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Certo! A lista de materiais vem ANTES, pra já separar tudo.",
         feedbackErro: "Releia a regra do jogo: 'Materiais' aparece logo no começo, antes do Passo 1.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Onde a lista de materiais deve aparecer no texto?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -167,6 +178,7 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso mesmo! Você seguiu a ordem certa — em texto instrucional, pular um passo estraga tudo.",
       feedbackErro:
         "Pense na lógica: primeiro CORTA, depois BATE no liquidificador, e só no fim COA e serve.",
+      dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -191,6 +203,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Estão listados no início: banana, leite e açúcar.",
         feedbackErro: "Releia a linha 'Materiais:' no começo do texto.",
         ondeEstaNoTexto: "Materiais: 1 banana, 1 copo de leite e 1 colher de açúcar…",
+        dica: "🔎 Pista: releia no texto o trecho “Materiais: 1 banana, 1 copo de leite e 1 colher de açúcar…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Quais são os materiais dessa receita?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual verbo de comando aparece no Passo 2?",
@@ -199,6 +213,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! 'Bata' é o verbo imperativo do Passo 2.",
         feedbackErro: "Releia o Passo 2 — o verbo de comando vem depois de 'coloque... e'.",
         ondeEstaNoTexto: "…coloque a banana, o leite e o açúcar no liquidificador e bata por 1 minuto.",
+        dica: "🔎 Pista: releia no texto o trecho “…coloque a banana, o leite e o açúcar no liquidificador e bata por 1 minuto.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Qual verbo de comando aparece no Passo 2?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -216,6 +232,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! 'Misture' é um verbo de comando — imperativo.",
       feedbackErro: "Procure a palavra que dá uma ORDEM, um comando de ação: 'misture'.",
+      dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “Qual desses é um verbo no imperativo, típico de texto instrucional?” com essa ideia na cabeça.",
     },
   },
 
@@ -227,6 +245,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Ele ensina a FAZER algo.",
         feedbackErro: "Texto instrucional ENSINA, não conta história nem dá opinião.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “1/5 — Para que serve um texto instrucional?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Qual desses verbos está no imperativo (comando)?",
@@ -234,6 +254,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Role' é um comando — imperativo.",
         feedbackErro: "Imperativo dá ORDEM. 'Role o dado' é um comando direto.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “2/5 — Qual desses verbos está no imperativo (comando)?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Onde deve ficar a lista de materiais?",
@@ -241,6 +263,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! A lista de materiais vem ANTES, pra já separar tudo.",
         feedbackErro: "Sempre organizamos os materiais/ingredientes ANTES de começar os passos.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “3/5 — Onde deve ficar a lista de materiais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que os passos precisam ser numerados e em ordem?",
@@ -252,6 +276,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! A ordem dos passos é essencial pro resultado dar certo.",
         feedbackErro: "Se trocar a ordem dos passos (ex.: assar antes de misturar), o resultado pode dar errado.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “4/5 — Por que os passos precisam ser numerados e em ordem?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — 'Corte a banana em pedaços' é um exemplo de:",
@@ -259,6 +285,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Corte' é um comando — texto instrucional.",
         feedbackErro: "'Corte' é um verbo de comando (imperativo), típico de receitas e regras.",
+        dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: texto instrucional — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Exemplo: Uma receita de bolo e a regra de um jogo são exemplos de texto instrucional. Agora volte à pergunta “5/5 — 'Corte a banana em pedaços' é um exemplo de:” com essa ideia na cabeça.",
       },
     ],
   },

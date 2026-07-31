@@ -63,6 +63,7 @@ export const aula03: AulaPortuguesV4 = {
         "🎉 Isso! Quando alguém escreve 'eu fui', 'eu vivi', está fazendo um RELATO PESSOAL — contando a própria experiência.",
       feedbackErro:
         "Repare na palavra 'EU' no início: 'eu fui à praia'. Isso é sinal de relato pessoal, contando o que a própria Lia viveu.",
+      dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -109,6 +110,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Lia usa 'EU' o tempo todo — é ela quem conta, em primeira pessoa.",
         feedbackErro: "Repare nas palavras 'eu fui', 'eu ri' — quem fala assim é a própria autora.",
         ondeEstaNoTexto: "No sábado, eu fui à praia com minha família.",
+        dica: "🔎 Pista: releia no texto o trecho “No sábado, eu fui à praia com minha família.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “Quem conta essa história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que Lia e o irmão fizeram PRIMEIRO?",
@@ -117,6 +120,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! A palavra 'PRIMEIRO' já indica a primeira ação: construir o castelo.",
         feedbackErro: "A palavra 'primeiro' está no começo do texto — o que vem logo depois dela?",
         ondeEstaNoTexto: "Primeiro, eu e meu irmão construímos um castelo de areia bem grande.",
+        dica: "🔎 Pista: releia no texto o trecho “Primeiro, eu e meu irmão construímos um castelo de areia bem grande.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “O que Lia e o irmão fizeram PRIMEIRO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que aconteceu NO FIM DA TARDE?",
@@ -125,6 +130,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'No fim da tarde' marca o momento do sorvete.",
         feedbackErro: "Procure a expressão 'no fim da tarde' — o que vem logo depois dela no texto?",
         ondeEstaNoTexto: "No fim da tarde, minha mãe comprou sorvete pra todo mundo.",
+        dica: "🔎 Pista: releia no texto o trecho “No fim da tarde, minha mãe comprou sorvete pra todo mundo.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “O que aconteceu NO FIM DA TARDE?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -138,6 +145,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Aparecem LIA, o IRMÃO e a MÃE.",
         feedbackErro: "Releia o texto todo — quem mais participa além de Lia?",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “Quem aparece no relato de Lia?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde acontece o relato?",
@@ -145,6 +154,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Certo! O título já diz: 'Meu dia na PRAIA'.",
         feedbackErro: "O próprio título do relato já dá essa resposta.",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “Onde acontece o relato?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -162,6 +173,7 @@ export const aula03: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Perfeito! Você usou os marcadores de tempo pra montar a ordem certa.",
       feedbackErro:
         "Repare nas palavras 'primeiro', 'depois' e 'no fim da tarde' no texto — elas mostram a ordem certa.",
+      dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -184,6 +196,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O texto usa 'eu fiquei', 'eu consegui' — é a própria criança contando.",
         feedbackErro: "Procure as palavras 'eu' no texto — quem fala assim é quem viveu a experiência.",
         ondeEstaNoTexto: "Primeiro, eu fiquei com medo de cair.",
+        dica: "🔎 Pista: releia no texto o trecho “Primeiro, eu fiquei com medo de cair.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “Quem conta essa experiência?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que aconteceu PRIMEIRO nesse relato?",
@@ -192,6 +206,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A palavra 'primeiro' vem antes de 'eu fiquei com medo'.",
         feedbackErro: "Ache a palavra 'primeiro' no texto e veja o que vem logo depois dela.",
         ondeEstaNoTexto: "Primeiro, eu fiquei com medo de cair.",
+        dica: "🔎 Pista: releia no texto o trecho “Primeiro, eu fiquei com medo de cair.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “O que aconteceu PRIMEIRO nesse relato?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -209,6 +225,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! 'EU fui' é a marca de primeira pessoa.",
       feedbackErro: "Procure a frase que usa 'EU' — essa é a marca de relato pessoal.",
+      dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “Qual dessas frases está em primeira pessoa, marca de relato pessoal?” com essa ideia na cabeça.",
     },
   },
 
@@ -224,6 +242,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Relato pessoal conta uma vivência própria.",
         feedbackErro: "Relato pessoal conta algo que ACONTECEU com quem escreve.",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “1/5 — O que é um relato pessoal?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Relato pessoal é escrito em qual pessoa?",
@@ -231,6 +251,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! É sempre em primeira pessoa.",
         feedbackErro: "Quem conta a própria vida usa 'EU' e 'NÓS' — primeira pessoa.",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “2/5 — Relato pessoal é escrito em qual pessoa?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Qual dessas é um marcador de tempo?",
@@ -238,6 +260,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'Depois' indica ordem no tempo.",
         feedbackErro: "Marcador de tempo indica ORDEM, como 'depois', 'primeiro', 'em seguida'.",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “3/5 — Qual dessas é um marcador de tempo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — No relato da praia, o que Lia fez no fim da tarde?",
@@ -245,6 +269,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso mesmo, no fim da tarde a mãe comprou sorvete.",
         feedbackErro: "Releia: 'No fim da tarde, minha mãe comprou...'",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “4/5 — No relato da praia, o que Lia fez no fim da tarde?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Por que marcadores de tempo são importantes no relato?",
@@ -256,6 +282,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Eles organizam a ordem dos acontecimentos.",
         feedbackErro: "Marcadores de tempo ajudam quem lê a entender O QUE aconteceu primeiro, depois e por último.",
+        dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: relato pessoal — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Exemplo: 'Eu fui ao aniversário do meu primo e me diverti muito.' Agora volte à pergunta “5/5 — Por que marcadores de tempo são importantes no relato?” com essa ideia na cabeça.",
       },
     ],
   },

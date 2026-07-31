@@ -60,6 +60,7 @@ export const aula04: AulaPortuguesV4 = {
         "😂 Isso! O relógio tem 'coroa' (a peça de dar corda, no alto) e 'anda' (o tempo passa) sem ter pés. A adivinha brinca com PALAVRAS QUE TÊM MAIS DE UM SENTIDO.",
       feedbackErro:
         "Pense em objetos que 'andam' sem pernas e têm uma parte chamada 'coroa'. Relógios antigos têm uma peça no topo chamada coroa!",
+      dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -113,6 +114,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "😂 Isso! 'O sapo dentro do saco'.",
         feedbackErro: "Releia a primeira frase — o bicho dentro do saco é dito logo no início.",
         ondeEstaNoTexto: "O sapo dentro do saco, o saco com o sapo dentro.",
+        dica: "🔎 Pista: releia no texto o trecho “O sapo dentro do saco, o saco com o sapo dentro.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “No primeiro trava-língua, o que está dentro do saco?” com essa ideia na cabeça.",
       },
       {
         pergunta: "No segundo trava-língua, o que um pato fez com o outro?",
@@ -121,6 +124,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "😂 Boa! 'Um pato pisou na pata do outro pato'.",
         feedbackErro: "A primeira frase do segundo trava-língua conta exatamente o que aconteceu.",
         ondeEstaNoTexto: "Um pato pisou na pata do outro pato.",
+        dica: "🔎 Pista: releia no texto o trecho “Um pato pisou na pata do outro pato.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “No segundo trava-língua, o que um pato fez com o outro?” com essa ideia na cabeça.",
       },
       {
         pergunta: "No terceiro trava-língua, o que o rato roeu?",
@@ -129,6 +134,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "😂 Exato! 'O rato roeu a rolha da garrafa do rei'.",
         feedbackErro: "Releia o começo — a coisa roída aparece logo depois de 'roeu'.",
         ondeEstaNoTexto: "O rato roeu a rolha da garrafa do rei.",
+        dica: "🔎 Pista: releia no texto o trecho “O rato roeu a rolha da garrafa do rei.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “No terceiro trava-língua, o que o rato roeu?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -148,6 +155,8 @@ export const aula04: AulaPortuguesV4 = {
           "😂 Isso! A repetição de sons parecidos (como 'r' e 'ro' em 'rato roeu a rolha') confunde a boca — essa é a graça do trava-língua.",
         feedbackErro:
           "Pense no som: sons parecidos repetidos (pato/pata, rato/rolha) fazem a boca se embolar — é isso que torna difícil.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “O que torna um trava-língua difícil de falar rápido?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Na adivinha do relógio, qual é o duplo sentido da palavra 'coroa'?",
@@ -159,6 +168,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "😂 Isso! A graça está em pensar em 'coroa de rei' primeiro, quando na verdade é a peça do relógio.",
         feedbackErro: "A adivinha engana usando 'coroa' pensando em rei — mas a resposta usa outro significado da palavra.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “Na adivinha do relógio, qual é o duplo sentido da palavra 'coroa'?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -175,6 +186,7 @@ export const aula04: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "😂 Perfeito! Esse é o método detetive pra resolver charadas: ler, pensar em duplo sentido, testar.",
       feedbackErro: "Pense: primeiro LEMOS, depois pensamos em outros SIGNIFICADOS, só então TESTAMOS qual combina.",
+      dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -202,6 +214,8 @@ export const aula04: AulaPortuguesV4 = {
           "😂 Isso! A graça está em comparar o canto de manhã cedo do galo com a função de um despertador — ele 'já vem' com essa função.",
         feedbackErro:
           "Pense: o que um despertador faz? Acorda a gente de manhã. O galo faz a mesma coisa cantando — daí a graça.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “Por que a piada do galo é engraçada?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Na adivinha \"Tenho manga, mas não sou camisa\", qual é o duplo sentido da palavra 'manga'?",
@@ -215,6 +229,8 @@ export const aula04: AulaPortuguesV4 = {
           "😂 Isso! A frase engana pensando em 'manga de camisa', mas a resposta é a fruta manga, que também tem esse nome.",
         feedbackErro:
           "Pense em outra coisa que se chama 'manga' além da parte da roupa — uma fruta bem comum no Brasil!",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “Na adivinha \"Tenho manga, mas não sou camisa\", qual é o duplo sentido…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -236,6 +252,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "😂 Isso! O segredo é justamente brincar com os DOIS sentidos possíveis de uma palavra.",
       feedbackErro: "O truque da adivinha está em usar palavras com DUPLO SENTIDO para confundir antes da resposta.",
+      dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “Qual é o segredo de uma boa adivinha?” com essa ideia na cabeça.",
     },
   },
 
@@ -251,6 +269,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "😂 Isso! Duplo sentido é ter dois significados possíveis.",
         feedbackErro: "Duplo sentido é quando a MESMA palavra pode significar duas coisas diferentes.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “1/5 — O que é 'duplo sentido'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — O que faz um trava-língua ser difícil de falar?",
@@ -258,6 +278,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "😂 Correto! Sons parecidos repetidos embolam a fala.",
         feedbackErro: "O trava-língua repete SONS PARECIDOS de propósito, para embolar a boca.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “2/5 — O que faz um trava-língua ser difícil de falar?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Na adivinha do relógio, o que representava 'coroa'?",
@@ -265,6 +287,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "😂 Isso! A resposta usava o outro sentido da palavra 'coroa'.",
         feedbackErro: "A resposta certa era o relógio — 'coroa' ali é a peça de dar corda, não a de rei.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “3/5 — Na adivinha do relógio, o que representava 'coroa'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que ler em voz alta ajuda a apreciar piadas e trava-línguas?",
@@ -276,6 +300,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "😂 Exato! O humor sonoro só aparece de verdade quando lemos em voz alta.",
         feedbackErro: "Ler em voz alta REVELA o jogo de sons — é assim que a graça aparece de verdade.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “4/5 — Por que ler em voz alta ajuda a apreciar piadas e trava-línguas?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Um Detetive-Mestre da Palavra sabe que humor e poesia têm em comum...",
@@ -289,6 +315,8 @@ export const aula04: AulaPortuguesV4 = {
           "😂🔍 Isso mesmo! Poema, cordel, piada, trava-língua e adivinha todos brincam com SOM e SENTIDO. Último caso do clube resolvido — parabéns, Detetive-Mestre da Palavra! 👑🌟",
         feedbackErro:
           "Pense em tudo que estudamos na unidade: rima, sentido figurado, cordel, humor — todos brincam com SOM e SENTIDO das palavras.",
+        dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: duplo sentido — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Exemplo: 'Coroa' pode ser de rei OU a peça de dar corda no relógio. Agora volte à pergunta “5/5 — Um Detetive-Mestre da Palavra sabe que humor e poesia têm em co…” com essa ideia na cabeça.",
       },
     ],
   },

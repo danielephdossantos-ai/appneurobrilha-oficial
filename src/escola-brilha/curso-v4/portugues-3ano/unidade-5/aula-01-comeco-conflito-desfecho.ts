@@ -54,6 +54,7 @@ export const aula01: AulaPortuguesV4 = {
         "🧩 Isso! O título já entrega: 'sumiço' é a palavra do CONFLITO — algo que quebra a rotina e precisa ser resolvido.",
       feedbackErro:
         "Releia o título: 'O Sumiço de Café'. A palavra 'sumiço' avisa que vai faltar alguma coisa — esse é o problema da história.",
+      dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -128,6 +129,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧩 Isso! Ele 'esqueceu de fechar' o portão — foi esse esquecimento que causou o problema.",
         feedbackErro: "Releia o segundo parágrafo: o que Théo fez (ou deixou de fazer) antes de Café sumir?",
         ondeEstaNoTexto: "Théo abriu o portão do quintal para pegar a bola e esqueceu de fechar.",
+        dica: "🔎 Pista: releia no texto o trecho “Théo abriu o portão do quintal para pegar a bola e esqueceu de fechar.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “O que Théo esqueceu de fazer?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde Café estava escondido?",
@@ -136,6 +139,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧩 Exato! 'Café estava escondido lá' (debaixo da varanda).",
         feedbackErro: "A resposta está no último parágrafo, logo no começo.",
         ondeEstaNoTexto: "Um farejar debaixo da varanda chamou atenção. Café estava escondido lá…",
+        dica: "🔎 Pista: releia no texto o trecho “Um farejar debaixo da varanda chamou atenção. Café estava escondido lá…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Onde Café estava escondido?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Por que Café estava assustado?",
@@ -144,6 +149,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧩 Boa! Ele estava 'assustado com o barulho de um trovão'.",
         feedbackErro: "A explicação vem logo depois de dizer onde ele estava escondido.",
         ondeEstaNoTexto: "…assustado com o barulho de um trovão.",
+        dica: "🔎 Pista: releia no texto o trecho “…assustado com o barulho de um trovão.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Por que Café estava assustado?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -163,6 +170,8 @@ export const aula01: AulaPortuguesV4 = {
           "🧩 Isso! O começo mostra a rotina calma, ANTES do problema aparecer.",
         feedbackErro:
           "O começo é a parte que mostra como as coisas eram normalmente, antes de qualquer problema.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Qual trecho é o COMEÇO da história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual é o CONFLITO (problema) da história?",
@@ -174,6 +183,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧩 Certo! O sumiço de Café é o problema que muda tudo.",
         feedbackErro: "O conflito é o que dá ERRADO — nesse caso, o cachorro desaparecer.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Qual é o CONFLITO (problema) da história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual é o DESFECHO da história?",
@@ -186,6 +197,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto:
           "🧩 Isso! O desfecho é o final: encontraram Café e o problema foi resolvido.",
         feedbackErro: "O desfecho é a ÚLTIMA parte — como o problema termina, para o bem ou para o mal.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Qual é o DESFECHO da história?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -202,6 +215,7 @@ export const aula01: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🧩 Perfeito! Você reconheceu a estrutura completa da história.",
       feedbackErro: "Pense: primeiro vem a calmaria, depois o problema, e por último a solução.",
+      dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -229,6 +243,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧩 Isso! O problema é ele ter esquecido a folha.",
         feedbackErro: "O conflito é o que deu ERRADO — releia o segundo parágrafo.",
         ondeEstaNoTexto: "…esqueceu de guardar a folha da prova de matemática.",
+        dica: "🔎 Pista: releia no texto o trecho “…esqueceu de guardar a folha da prova de matemática.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Qual é o conflito dessa história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual é o desfecho?",
@@ -241,6 +257,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧩 Exato! É assim que o problema se resolve, no último parágrafo.",
         feedbackErro: "O desfecho fica no último parágrafo — como tudo terminou.",
         ondeEstaNoTexto: "…a professora deixou Bento fazer a prova numa folha avulsa…",
+        dica: "🔎 Pista: releia no texto o trecho “…a professora deixou Bento fazer a prova numa folha avulsa…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Qual é o desfecho?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -262,6 +280,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🧩 Isso! Um problema real (o bolo cair) dá o conflito que toda história precisa.",
       feedbackErro: "Pense em algo que dê ERRADO e precise ser resolvido — isso é um conflito.",
+      dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “Você vai escrever uma história sobre um bolo de aniversário. Qual ser…” com essa ideia na cabeça.",
     },
   },
 
@@ -273,6 +293,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧩 Isso! Conflito é o problema.",
         feedbackErro: "Conflito é sempre o PROBLEMA que aparece na história.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “1/5 — O que é o 'conflito' de uma história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — O que aparece no 'começo' de uma história?",
@@ -280,6 +302,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧩 Correto! O começo apresenta quem são os personagens e como era antes do problema.",
         feedbackErro: "O começo mostra a calmaria ANTES do conflito.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “2/5 — O que aparece no 'começo' de uma história?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Em 'O Sumiço de Café', qual foi o conflito?",
@@ -287,6 +311,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧩 Isso mesmo!",
         feedbackErro: "O portão ficou aberto e Café sumiu — esse é o problema.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “3/5 — Em 'O Sumiço de Café', qual foi o conflito?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — O que é o 'desfecho'?",
@@ -294,6 +320,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧩 Isso! Desfecho é o final da história.",
         feedbackErro: "Desfecho é como o problema TERMINA.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “4/5 — O que é o 'desfecho'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Por que uma história precisa de conflito?",
@@ -305,6 +333,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧩 Exato! O conflito é o que prende o leitor. Missão cumprida! 🌟",
         feedbackErro: "Sem conflito, a história é só um dia qualquer, sem nada interessante para contar.",
+        dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: conflito — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a história valer a pena. Exemplo: O conflito de 'O Sumiço de Café' é o cachorro ter desaparecido do quintal. Agora volte à pergunta “5/5 — Por que uma história precisa de conflito?” com essa ideia na cabeça.",
       },
     ],
   },

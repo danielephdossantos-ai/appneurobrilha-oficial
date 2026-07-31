@@ -50,6 +50,7 @@ export const aula2: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso! O caso é sobre as quatro formas de escrever o som /s/.",
       feedbackErro:
         "Releia a pista: 'CASA, PASSO, MOÇA e CEDO — todas têm o som de /s/'. O mistério é sobre as letras, não sobre ninhos ou cômodos.",
+      dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -108,6 +109,8 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'o S sozinho entre vogais na verdade soa como Z'.",
         feedbackErro: "Releia o primeiro parágrafo: 'o S sozinho entre vogais... soa como Z'.",
         ondeEstaNoTexto: "o S sozinho entre vogais na verdade soa como Z, igual em CASA e VASO.",
+        dica: "🔎 Pista: releia no texto o trecho “o S sozinho entre vogais na verdade soa como Z, igual em CASA e VASO.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Segundo o texto, que som tem o S sozinho entre vogais, como em CASA?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quando usamos o SS dobrado entre vogais?",
@@ -120,6 +123,8 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! SS dá o som de S de verdade entre vogais.",
         feedbackErro: "O texto diz: 'quando queremos o som de S de verdade entre vogais, dobramos: SS'.",
         ondeEstaNoTexto: "quando queremos o som de S de verdade entre vogais, dobramos: SS, como em PASSO.",
+        dica: "🔎 Pista: releia no texto o trecho “quando queremos o som de S de verdade entre vogais, dobramos: SS, como em PASSO.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Quando usamos o SS dobrado entre vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Antes de quais letras aparece o Ç?",
@@ -128,6 +133,8 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'o Ç só aparece antes de A, O ou U'.",
         feedbackErro: "Releia: 'o Ç só aparece antes de A, O ou U, como em MOÇA'.",
         ondeEstaNoTexto: "o Ç só aparece antes de A, O ou U, como em MOÇA, LAÇO e AÇÚCAR.",
+        dica: "🔎 Pista: releia no texto o trecho “o Ç só aparece antes de A, O ou U, como em MOÇA, LAÇO e AÇÚCAR.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Antes de quais letras aparece o Ç?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -141,6 +148,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Foi Aurora quem explicou o mapa sonoro.",
         feedbackErro: "Releia: 'Aurora explicou ao clube...'",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Quem explicou os quatro disfarces do som /s/?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que Brilha fez para não esquecer a regra?",
@@ -152,6 +161,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Brilha desenhou uma tabela no caderno.",
         feedbackErro: "A última frase do texto diz: 'Brilha desenhou uma tabela no caderno para não esquecer'.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “O que Brilha fez para não esquecer a regra?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -168,6 +179,7 @@ export const aula2: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🎉 Perfeito! Você reconstruiu o caso na ordem certa.",
       feedbackErro: "Pense: primeiro vem a PISTA das quatro palavras, depois a EXPLICAÇÃO, e por último o REGISTRO.",
+      dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -194,6 +206,8 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Ç aparece antes de A, O ou U — como em AÇÚCAR.",
         feedbackErro: "Releia: 'em AÇÚCAR, o Ç vem antes do U, e soa S'.",
         ondeEstaNoTexto: "em AÇÚCAR, o Ç vem antes do U, e soa S.",
+        dica: "🔎 Pista: releia no texto o trecho “em AÇÚCAR, o Ç vem antes do U, e soa S.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Por que AÇÚCAR usa Ç e não apenas C?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Por que CINEMA usa C e não Ç?",
@@ -206,6 +220,8 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Antes de E ou I, o C já soa S, sem cedilha.",
         feedbackErro: "O texto diz: 'em CINEMA, o C vem antes do I e já soa S, sem precisar de cedilha'.",
         ondeEstaNoTexto: "em CINEMA, o C vem antes do I e já soa S, sem precisar de cedilha.",
+        dica: "🔎 Pista: releia no texto o trecho “em CINEMA, o C vem antes do I e já soa S, sem precisar de cedilha.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Por que CINEMA usa C e não Ç?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -235,6 +251,7 @@ export const aula2: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Caso resolvido! Você identificou os três disfarces do som /s/.",
         feedbackErro: "Pense de novo: SS entre vogais, Ç antes de A/O/U, C antes de E/I — todos soam /s/.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -251,6 +268,8 @@ export const aula2: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! C antes de E ou I já tem som de S.",
       feedbackErro: "Releia a explicação: C antes de E ou I não precisa de cedilha porque já soa S.",
+      dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “Antes de quais letras o C sozinho já soa como S?” com essa ideia na cabeça.",
     },
   },
 
@@ -262,6 +281,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! S sozinho entre vogais soa Z.",
         feedbackErro: "Lembre: entre vogais, S sozinho soa como Z.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “1/5 — Que som tem o S sozinho entre vogais, como em CASA?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Que letras usamos para o som de S de verdade entre vogais?",
@@ -269,6 +290,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! SS dobrado dá o som de S de verdade.",
         feedbackErro: "Entre vogais, o som de S de verdade precisa do SS dobrado.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “2/5 — Que letras usamos para o som de S de verdade entre vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Antes de quais letras aparece o Ç?",
@@ -276,6 +299,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Ç só aparece antes de A, O ou U.",
         feedbackErro: "Lembre: o Ç combina só com A, O e U.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “3/5 — Antes de quais letras aparece o Ç?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que CEDO se escreve com C e não com Ç?",
@@ -287,6 +312,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! C antes de E ou I já soa S, sem cedilha.",
         feedbackErro: "Lembre: antes de E ou I, o C já soa S sozinho.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “4/5 — Por que CEDO se escreve com C e não com Ç?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Qual palavra usa SS corretamente para dar o som de S entre vogais?",
@@ -294,6 +321,8 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Caso encerrado! PASSO usa SS porque o som de S está entre vogais.",
         feedbackErro: "Pense em qual palavra precisa do S dobrado para soar S entre vogais.",
+        dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: casa — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Exemplo: Brilha mora numa casa perto da floresta. Agora volte à pergunta “5/5 — Qual palavra usa SS corretamente para dar o som de S entre voga…” com essa ideia na cabeça.",
       },
     ],
   },
