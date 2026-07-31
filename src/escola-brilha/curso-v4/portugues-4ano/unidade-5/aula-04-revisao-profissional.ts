@@ -138,7 +138,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia o parágrafo do checklist: qual palavra estava escrita errado?",
         ondeEstaNoTexto: "'nois' era um erro de ortografia (o certo é 'nós')",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “'nois' era um erro de ortografia (o certo é 'nós')”.",
-          "📚 Vamos rever juntos: a resposta certa é “'nois' (o certo é 'nós')”. 'Nois' é um erro de ortografia — a forma certa é 'nós'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual era o problema de concordância no texto original?",
@@ -148,7 +147,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "O problema de concordância está na expressão 'meus amigo' — falta o plural.",
         ondeEstaNoTexto: "'meus amigo' estava sem concordância",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “'meus amigo' estava sem concordância”.",
-          "📚 Vamos rever juntos: a resposta certa é “'meus amigo' (faltava o 's')”. O certo é 'meus amigos', no plural, combinando com 'meus'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que aconteceu com a repetição de 'brincou de bola' na versão revisada?",
@@ -164,7 +162,6 @@ export const aula04: AulaPortuguesV4 = {
           "Compare o 'antes' e o 'depois': o que mudou na segunda menção à brincadeira?",
         ondeEstaNoTexto: "Nós brincamos de bola e, depois, jogamos futebol.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Nós brincamos de bola e, depois, jogamos futebol”.",
-          "📚 Vamos rever juntos: a resposta certa é “Uma das partes virou 'jogamos futebol', variando a ideia”. Pedro trocou a repetição por uma ideia nova (futebol), deixando o texto mais interessante. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -186,7 +183,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "Pense: sem um checklist, é fácil esquecer de checar um dos pontos, como a pontuação ou a concordância.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Porque o checklist ajuda a não esquecer nenhum tipo de erro”. O checklist garante que você confira ortografia, concordância, pontuação, repetição E clareza — um de cada vez. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O texto 'depois' de Pedro está melhor porque…",
@@ -201,7 +197,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "O que realmente melhorou no texto 'depois' foi a correção, a variedade e a clareza — não o tamanho.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Está correto, sem repetições e mais fácil de entender”. Certo! Um bom texto não precisa ser longo — precisa estar correto e claro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -263,7 +258,6 @@ export const aula04: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Beatriz percebeu que faltava pontuação (o texto era uma frase só, sem parar)",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Beatriz percebeu que faltava pontuação (o texto era uma frase só, sem parar)”.",
-          "📚 Vamos rever juntos: a resposta certa é “Faltavam pontos para separar as ideias”. O texto original era uma única frase corrida, sem pontos para separar as ideias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Como Beatriz resolveu a repetição da palavra 'bolo'?",
@@ -279,7 +273,6 @@ export const aula04: AulaPortuguesV4 = {
           "Compare o 'antes' e o 'depois': o que substituiu uma das repetições de 'bolo'?",
         ondeEstaNoTexto: "colocou muito chocolate nele",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “colocou muito chocolate nele”.",
-          "📚 Vamos rever juntos: a resposta certa é “Usando o pronome 'nele' e cortando repetições desnecessárias”. Ela usou 'nele' no lugar de repetir 'bolo', deixando o texto mais fluido. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -303,7 +296,6 @@ export const aula04: AulaPortuguesV4 = {
       feedbackErro:
         "Repare: 'as' e 'menina' precisam concordar em plural — o certo é 'as meninas brincaram'.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-        "📚 Vamos rever juntos: a resposta certa é “Falta concordância: o certo é 'as meninas brincaram'”. 'As meninas brincaram' concorda corretamente no plural. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -328,7 +320,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Continuou repetida do mesmo jeito” não é a resposta. O checklist tem cinco pontos: ortografia, concordância, pontuação, repetição e clareza.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Ortografia, concordância, pontuação, repetição e clareza”. Esses são os cinco pontos essenciais da revisão profissional. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é concordância?",
@@ -348,7 +339,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Foi apagada sem deixar nada no lugar” não é a resposta. Concordância é fazer as palavras 'combinarem' em número e gênero.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Combinar singular/plural e masculino/feminino nas palavras da frase”. Concordância é combinar as palavras corretamente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Por que a pontuação é importante num texto?",
@@ -369,7 +359,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Porque checklist deixa o texto mais bonito visualmente, só isso” não é a resposta. A pontuação separa as ideias, ajudando o leitor a entender onde cada uma começa e termina.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Porque organiza onde uma ideia termina e a próxima começa”. Sem pontuação, o texto vira uma frase só, confusa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual destas frases tem problema de ortografia?",
@@ -390,7 +379,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Não faz diferença nenhuma” não é a resposta. Procure a palavra escrita de forma diferente do jeito correto: 'nois' em vez de 'nós'.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “'Nois foi ao parque.'”. 'Nois' está escrito errado — o certo é 'nós'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Qual é a última etapa depois de encontrar os erros com o checklist?",
@@ -412,7 +400,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Ficou mais longo” não é a resposta. Depois de encontrar os erros, o passo final é reescrever o parágrafo, corrigindo tudo.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Reescrever o parágrafo, corrigindo o que foi encontrado”. Reescrever é o passo final — é aí que o texto vira uma versão de verdade, revisada e pronta. Missão cumprida, explorador! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

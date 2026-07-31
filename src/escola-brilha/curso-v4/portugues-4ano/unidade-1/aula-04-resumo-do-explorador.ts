@@ -120,7 +120,6 @@ export const aula04: AulaPortuguesV4 = {
           "Releia o segundo parágrafo — o tempo de caminhada aparece logo no início dele.",
         ondeEstaNoTexto: "Depois de caminhar por quase três horas em corredores apertados...",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Depois de caminhar por quase três horas em corredores apertados”.",
-          "📚 Vamos rever juntos: a resposta certa é “Cerca de três horas”. O texto diz: 'Depois de caminhar por quase três horas em corredores apertados'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a equipe encontrou na saída da caverna?",
@@ -132,7 +131,6 @@ export const aula04: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Na saída, encontraram um pequeno rio subterrâneo que precisaram atravessar sobre pedras.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Na saída, encontraram um pequeno rio subterrâneo que precisaram atravessar sobre pedras”.",
-          "📚 Vamos rever juntos: a resposta certa é “Um pequeno rio subterrâneo”. 'Na saída, encontraram um pequeno rio subterrâneo que precisaram atravessar.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -154,7 +152,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "As outras opções são apenas DETALHES de uma parte do texto. Um bom resumo precisa juntar a ideia central de TODAS as partes da história.",
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Uma equipe explorou uma caverna cheia de cristais por três horas e voltou atravessando um rio subterrâneo”. Essa frase junta a ideia principal de cada parte da história: a exploração, os cristais e a volta pelo rio — sem copiar detalhes soltos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que copiar uma frase inteira do texto NÃO é a mesma coisa que resumir?",
@@ -169,7 +166,6 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "Copiar uma frase mostra só UMA parte do texto e não usa suas próprias palavras. Resumir é diferente: exige escolher e reformular.",
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Porque resumir exige escolher as ideias principais e recontar com palavras próprias, não só copiar um trecho”. Muito bem! Resumir é um trabalho de seleção e reformulação — não basta pegar um pedaço pronto do texto, é preciso pensar e recontar com suas próprias palavras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -229,7 +225,6 @@ export const aula04: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Uma equipe de cientistas passou quatro dias... encontraram duas espécies novas... organizaram um relatório com as descobertas.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Uma equipe de cientistas passou quatro dias... encontraram duas espécies novas... organizaram um relatório com as descobertas”.",
-          "📚 Vamos rever juntos: a resposta certa é “Cientistas passaram quatro dias numa ilha e descobriram duas novas espécies de pássaros, que depois relataram ao mundo”. Essa frase junta as três partes principais da história — a pesquisa, a descoberta e o relato — usando palavras próprias, sem copiar um trecho específico. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -254,7 +249,6 @@ export const aula04: AulaPortuguesV4 = {
       feedbackErro:
         "Copiar um trecho, mesmo pequeno, não é resumir. Resumir exige reformulação com palavras próprias.",
       dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-        "📚 Vamos rever juntos: a resposta certa é “Uma frase reformulada com as próprias palavras, juntando as ideias principais”. Resumir é reformular com suas próprias palavras, juntando o essencial — nunca copiar um trecho pronto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -280,7 +274,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Cerca de dez minutos” não é a resposta. Um resumo é sempre mais curto e feito com palavras próprias — nunca uma cópia ou um texto maior.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Um texto curto com as ideias mais importantes, escrito com palavras próprias”. Resumo é síntese com palavras próprias, não cópia nem ampliação do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Por que não devemos copiar frases inteiras ao resumir?",
@@ -302,7 +295,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Um dia inteiro” não é a resposta. Copiar não mostra que você compreendeu o texto. Resumir exige pensar e reformular com suas palavras.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Porque resumir exige entender o texto e recontar com as próprias palavras”. Resumir mostra que você entendeu o texto — copiar não prova isso. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual é a primeira etapa para fazer um bom resumo?",
@@ -324,7 +316,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Outra sala de cristais” não é a resposta. Sem ler o texto inteiro primeiro, fica impossível saber quais são as ideias mais importantes.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Ler o texto todo com atenção”. Antes de selecionar ou reformular, é preciso ler o texto todo com atenção. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Como deve ser o tamanho de um bom resumo?",
@@ -346,7 +337,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Uma segunda entrada” não é a resposta. Um resumo muito longo ou igual ao original deixa de ser resumo. Ele precisa ser bem menor, mas com o essencial.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “Proporcional ao texto original: bem menor, mas mantendo o essencial”. Muito bem! O resumo precisa ser proporcional: menor que o original, mas sem perder as ideias principais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -369,7 +359,6 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “A equipe levava lanternas, cordas e um mapa antigo desenhado décadas atrás por outros exploradores” não é a resposta. Os horários e formatos de ninho são detalhes. A ideia principal da história é a descoberta das novas espécies.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
-          "📚 Vamos rever juntos: a resposta certa é “A descoberta de duas novas espécies de pássaros durante a pesquisa”. Você já sabe separar a ideia principal dos detalhes — parabéns, explorador da leitura! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
