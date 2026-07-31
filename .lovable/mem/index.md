@@ -24,6 +24,7 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 - [Atividades formato jogo](mem://features/atividades-formato-jogo) — EI/1º/2º vira jogo.
 - [Contagem tocando](mem://features/tap-count-group) — TapCountGroup.
 - [Contas +/− animadas](mem://features/operacao-visual) — OperacaoVisual.
+- [Sondagem conectada à adaptação](mem://features/sondagem-conectada-adaptacao) — Sondagem define nível de apoio das aulas e é recalibrada pela nota.
 - [Formato por disciplina](mem://preferences/formato-por-disciplina) — Mecânica por disciplina.
 - [Geografia 2º Ano UI interativa](mem://preferences/geo-2ano-ui-interativa) — Regra de Ouro de UI + 5 movimentos pedagógicos.
 - [Blocos aditivos por disciplina](mem://preferences/blocos-aditivos) — Novos tipos de bloco/minijogo são PERMITIDOS quando aditivos ao player padrão (referência: `LaboratorioClima`).
