@@ -182,12 +182,55 @@ def termina_bem(s):
     return s if s[-1:] in ".!?…" else s + "."
 
 
-def faz_dica(feedback_erro, onde, pergunta):
+def cards_vocabulario(text):
+    """[(palavra, explicacao)] do momento03_vocabulario da aula."""
+    i = text.find("momento03_vocabulario")
+    if i < 0:
+        return []
+    abre = text.index("{", i)
+    fecha = fim_do_objeto(text, abre)
+    bloco = text[abre:fecha]
+    palavras = re.findall(r'palavra:\s*"((?:[^"\\]|\\.)*)"', bloco)
+    explic = re.findall(
+        r'explicacao:\s*((?:"(?:[^"\\]|\\.)*"\s*\+?\s*)+)', bloco
+    )
+    out = []
+    for k, pal in enumerate(palavras):
+        exp = ""
+        if k < len(explic):
+            exp = "".join(
+                p.replace('\\"', '"')
+                for p in re.findall(r'"((?:[^"\\]|\\.)*)"', explic[k])
+            )
+        out.append((pal, limpa(exp)))
+    return out
+
+
+def faz_dica(feedback_erro, onde, pergunta, cards=()):
     if onde:
         return (
             "🧭 Pista de explorador: volte ao texto e releia este trecho — “"
             + limpa(onde).strip("… .")
             + "”."
+        )
+    alvo = None
+    pq = (pergunta or "").lower()
+    for pal, exp in cards:
+        if exp and pal.lower().split()[0][:6] in pq:
+            alvo = (pal, exp)
+            break
+    if alvo is None:
+        for pal, exp in cards:
+            if exp:
+                alvo = (pal, exp)
+                break
+    if alvo:
+        return (
+            "🧭 Pista de explorador: lembre o que significa “"
+            + alvo[0]
+            + "” — "
+            + termina_bem(minuscula_inicial(alvo[1]))
+            + " Use essa ideia para eliminar as alternativas que não combinam."
         )
     base = minuscula_inicial(limpa(feedback_erro))
     return termina_bem("🧭 Pista de explorador: " + base)
@@ -261,6 +304,7 @@ def processa(caminho):
     original = open(caminho, encoding="utf-8").read()
     text = original
     av_ini, av_fim = span_avaliacao(text)
+    cards = cards_vocabulario(text)
     spans = blocos_questao(text)
 
     # banco de distratores do próprio tema da aula (opções erradas de outras questões)
@@ -354,7 +398,7 @@ def processa(caminho):
 
         # ---------- Fase 1: dica + reensino --------------------------------
         if "dica" not in ks:
-            novos.append("dica: " + q(faz_dica(fe, onde, pergunta)))
+            novos.append("dica: " + q(faz_dica(fe, onde, pergunta, cards)))
             stats["dica"] += 1
         if "reensino" not in ks and (ops or opcao_certa or fa):
             novos.append(
