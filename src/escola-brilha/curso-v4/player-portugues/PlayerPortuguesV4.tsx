@@ -6,7 +6,14 @@ import { createContext, useContext, useEffect, useState } from "react";
  *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
  *            cartões mais retos, tipografia mais firme, menos fofura)
  */
-type SkinPT = { kids: boolean; tween: boolean };
+type SkinPT = {
+  kids: boolean;
+  tween: boolean;
+  /** Skin "expedição" (visual da Geografia) — só muda a moldura da aula. */
+  geo?: boolean;
+  /** Numeração das cenas, usada pelo cabeçalho de seção do skin geo. */
+  ordem?: Record<string, number>;
+};
 const KidsCtx = createContext<SkinPT>({ kids: false, tween: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
@@ -131,6 +138,9 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
     cursoSlug === "portugues-5ano";
   const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
   const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+  // Skin "expedição" (mesma moldura visual da Geografia) — 3º ano.
+  // Só muda a aparência: fundo, cabeçalho, coluna única e cenas numeradas.
+  const geo = cursoSlug === "portugues-3ano";
 
 
   const MOMENTOS_ATIVOS = MOMENTOS_BASE.filter(
@@ -213,18 +223,22 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
   const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
 
 
+  const ordemMomentos = Object.fromEntries(MOMENTOS.map((m, i) => [m.id, i + 1]));
+
   return (
-    <KidsCtx.Provider value={{ kids, tween }}>
+    <KidsCtx.Provider value={{ kids, tween, geo, ordem: ordemMomentos }}>
     <div
       className={
-        tween
+        geo
+          ? "min-h-screen relative overflow-x-hidden bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55] text-white"
+          : tween
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
           : kids
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
           : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
       }
     >
-      {tween && (
+      {tween && !geo && (
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
           aria-hidden
@@ -256,7 +270,46 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
         </div>
       )}
 
+      {geo && (
+        <header className="sticky top-0 z-20 backdrop-blur bg-black/40 border-b border-white/10">
+          <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <Link
+              to="/escola-brilha/curso/$slug"
+              params={{ slug: cursoSlug }}
+              className="text-xs text-white/70 hover:text-white shrink-0"
+            >
+              ← Sair
+            </Link>
+            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all"
+                style={{ width: `${progresso}%` }}
+              />
+            </div>
+            <div className="text-xs text-white/60 shrink-0">
+              {idxAtivo + 1} / {MOMENTOS.length}
+            </div>
+            <button
+              type="button"
+              onClick={() => setFalaAuto(!falaAuto)}
+              aria-label={falaAuto ? "Desligar a fala automática" : "Ligar a fala automática"}
+              className={`shrink-0 h-8 w-8 grid place-items-center rounded-full border text-sm transition active:scale-95 ${
+                falaAuto
+                  ? "bg-emerald-400/90 border-emerald-200 text-[#0d1f55]"
+                  : "bg-white/10 border-white/25 text-white/60"
+              }`}
+            >
+              {falaAuto ? "🔊" : "🔇"}
+            </button>
+          </div>
+          <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
+            <span className="truncate">{MOMENTOS[idxAtivo]?.label}</span>
+            <span className="text-white/40 truncate ml-3">{aula.titulo}</span>
+          </div>
+        </header>
+      )}
 
+      {!geo && (
       <header
         className={
           tween
@@ -348,10 +401,17 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
         </div>
 
       </header>
+      )}
 
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
-        <aside className="hidden lg:block w-56 shrink-0">
+      <div
+        className={
+          geo
+            ? "relative z-10 max-w-3xl mx-auto px-4 py-6"
+            : "relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6"
+        }
+      >
+        <aside className={geo ? "hidden" : "hidden lg:block w-56 shrink-0"}>
           <div className="sticky top-24 space-y-1">
             {MOMENTOS.map((m) => (
               <a
@@ -720,10 +780,31 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
-  const { kids, tween } = useContext(KidsCtx);
+  const { kids, tween, geo, ordem } = useContext(KidsCtx);
   const cor = (tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (tween ? "#22d3ee" : "#fbbf24");
   const emoji = label.trim().split(" ")[0];
   const texto = label.trim().split(" ").slice(1).join(" ");
+
+  // Skin "expedição" (mesma moldura da Geografia): cena numerada, coluna
+  // única, sem cartão colorido — o conteúdo da aula continua o mesmo.
+  if (geo) {
+    return (
+      <section id={id} className="scroll-mt-28">
+        <div className="text-[11px] uppercase tracking-[0.2em] mb-3 flex items-center gap-2 text-amber-300/80">
+          <span className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-black bg-amber-300/20 border border-amber-300/40 text-amber-200">
+            {ordem?.[id] ?? "•"}
+          </span>
+          <span className="min-w-0 truncate">
+            {emoji} {texto}
+          </span>
+        </div>
+        <div className="space-y-4 rounded-2xl border border-white/10 bg-white/[.06] p-4 md:p-5 text-[1rem] leading-relaxed">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
 
   if (!kids) {
     return (
