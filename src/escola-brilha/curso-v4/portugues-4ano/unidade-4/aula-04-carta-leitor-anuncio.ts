@@ -132,6 +132,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia a última frase da carta de leitor.",
         ondeEstaNoTexto: "Peço à prefeitura que inclua a praça no plano de obras deste ano.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Peço à prefeitura que inclua a praça no plano de obras deste ano”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Que a prefeitura inclua a praça no plano de obras”. O pedido final da carta é a inclusão da praça no PLANO DE OBRAS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Cite um ARGUMENTO (razão) dado na carta para justificar a reforma.",
@@ -146,6 +147,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia as frases que começam com 'PORQUE' — elas são os argumentos.",
         ondeEstaNoTexto: "…é o único espaço de lazer gratuito do bairro…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “é o único espaço de lazer gratuito do bairro”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque é o único espaço de lazer gratuito do bairro”. Esse é um dos argumentos: a praça é o único espaço de lazer gratuito do bairro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que informações práticas o anúncio dá sobre o mutirão?",
@@ -160,6 +162,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia o anúncio: ele é curto, mas cheio de informações práticas.",
         ondeEstaNoTexto: "Venha com sua família no sábado, às 9h. Traga luvas…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Venha com sua família no sábado, às 9h. Traga luvas”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Dia (sábado), horário (9h) e o que levar (luvas)”. O anúncio dá DIA, HORÁRIO e o que TRAZER — informação prática e direta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -180,6 +183,7 @@ export const aula04: AulaPortuguesV4 = {
           "📣 Isso! A carta é escrita para os LEITORES do jornal e, por meio deles, pressiona a PREFEITURA.",
         feedbackErro: "Pense em quem lê o jornal e em quem toma a decisão sobre obras públicas.",
         dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “A prefeitura e os leitores do jornal”. A carta é escrita para os LEITORES do jornal e, por meio deles, pressiona a PREFEITURA. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quem é o público-alvo do anúncio do mutirão?",
@@ -194,6 +198,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro:
           "Releia o anúncio: 'Venha com sua família' — para quem esse convite é dirigido?",
         dica: "🧭 Pista de explorador: lembre o que significa “público-alvo” — é o grupo de pessoas para quem o texto é escrito. Pensar no público-alvo ajuda a escolher as palavras e os argumentos certos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Os moradores do bairro”. O anúncio convida diretamente os MORADORES do bairro para participar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -247,6 +252,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Releia a informação de dia e horário logo no início do anúncio.",
         ondeEstaNoTexto: "Toda quarta-feira, das 8h às 11h…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Toda quarta-feira, das 8h às 11h”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Toda quarta-feira, das 8h às 11h”. O anúncio informa: TODA QUARTA-FEIRA, das 8h às 11h. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual frase deste anúncio funciona como um apelo direto à ação do leitor?",
@@ -261,6 +267,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Procure a frase que fala diretamente com 'você', chamando para a ação.",
         ondeEstaNoTexto: "Um bairro mais limpo começa com você!",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Um bairro mais limpo começa com você!”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “'Um bairro mais limpo começa com você!'”. Essa frase final convoca o leitor a agir, é o apelo à ação do anúncio. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -279,6 +286,7 @@ export const aula04: AulaPortuguesV4 = {
       feedbackAcerto: "📣 Isso! É o ARGUMENTO — a razão que dá força à opinião.",
       feedbackErro: "Legenda explica imagem. A razão que sustenta uma opinião é o ARGUMENTO.",
       dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: a resposta certa é “Argumento”. É o ARGUMENTO — a razão que dá força à opinião. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -304,6 +312,7 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Que o jornal pare de publicar cartas” não é a resposta. Carta de leitor não vende produto nem inventa história — ela DEFENDE uma opinião.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Defender uma opinião com argumentos sobre um assunto público”. Ela defende uma OPINIÃO com ARGUMENTOS sobre algo de interesse público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Um bom anúncio geralmente tem...",
@@ -324,6 +333,7 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Que as crianças parem de brincar na praça” não é a resposta. Pense no anúncio do mutirão: ele tinha chamada, dia, hora e convite — direto ao ponto.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Chamada forte, informação prática e apelo à ação”. Anúncio é direto: chama atenção, informa e convida à ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Um ARGUMENTO é diferente de uma simples opinião porque...",
@@ -344,6 +354,7 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Porque a prefeita gosta de flores” não é a resposta. 'Eu acho que sim' é opinião solta. 'Eu acho que sim PORQUE...' já é argumento.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “argumento” — é a razão, o motivo que sustenta uma opinião e ajuda a convencer o leitor. Diferente de só dizer 'eu acho', o argumento EXPLICA por quê. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Ele explica o PORQUÊ da opinião, com uma razão”. O argumento traz o PORQUÊ, a razão que sustenta a opinião. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Pensar no PÚBLICO-ALVO de um texto ajuda a...",
@@ -365,6 +376,7 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Porque está bonito nas fotos” não é a resposta. Pense: escrever para a prefeitura é diferente de escrever para crianças — por isso o público-alvo importa.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “público-alvo” — é o grupo de pessoas para quem o texto é escrito. Pensar no público-alvo ajuda a escolher as palavras e os argumentos certos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Escolher as palavras e argumentos certos para convencer aquele grupo”. Muito bem! Pensar no público-alvo ajuda a escolher o tom e os argumentos certos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Na missão da praça, o que a carta de leitor e o anúncio têm em comum?",
@@ -386,6 +398,7 @@ export const aula04: AulaPortuguesV4 = {
           "❌ “Apenas o nome da praça” não é a resposta. São gêneros diferentes, mas os dois têm a mesma intenção: CONVENCER alguém a agir.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Os dois usam a palavra para convencer alguém a agir”. Ambos são textos que buscam CONVENCER — um pede mudança, o outro convoca ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

@@ -400,7 +400,14 @@ def processa(caminho):
         if "dica" not in ks:
             novos.append("dica: " + q(faz_dica(fe, onde, pergunta, cards)))
             stats["dica"] += 1
-        if "reensino" not in ks and (ops or opcao_certa or fa):
+        # reensino só existe no QuizTexto (opcoes + correta); nos outros
+        # blocos o player não renderiza esse campo.
+        if (
+            "reensino" not in ks
+            and "opcoes" in ks
+            and "correta" in ks
+            and (opcao_certa or fa)
+        ):
             novos.append(
                 "reensino: " + q(faz_reensino(pergunta, opcao_certa, fa, fe))
             )

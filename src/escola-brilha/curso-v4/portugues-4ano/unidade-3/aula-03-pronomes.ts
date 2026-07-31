@@ -162,6 +162,7 @@ export const aula03: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "O menino encontrou um binóculo na trilha. Ele guardou seu achado com cuidado na mochila.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O menino encontrou um binóculo na trilha. Ele guardou seu achado com cuidado na mochila”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “O menino”. 'Ele' substitui 'o menino', citado na frase anterior — o referente está claro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -173,6 +174,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "'Este' indica proximidade de quem fala. 'Aquele' indicaria distância.",
         ondeEstaNoTexto: "Este binóculo pode ajudar a expedição a enxergar longe!",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Este binóculo pode ajudar a expedição a enxergar longe!”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Perto de quem fala”. 'Este' é pronome demonstrativo usado para algo perto de quem está falando — o menino está com o binóculo na mão. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No trecho 'usavam seus próprios binóculos', de quem são os binóculos?",
@@ -184,6 +186,7 @@ export const aula03: AulaPortuguesV4 = {
           "A frase diz 'os exploradores usavam SEUS próprios binóculos' — 'seus' se refere a eles.",
         ondeEstaNoTexto: "os exploradores usavam seus próprios binóculos para observar os animais",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “os exploradores usavam seus próprios binóculos para observar os animais”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Dos exploradores”. 'Seus' (possessivo) indica que os binóculos pertencem aos exploradores citados na frase. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -204,6 +207,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro:
           "Pronomes existem justamente para evitar repetir o mesmo nome várias vezes — sem perder o referente.",
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque 'ele' torna o texto mais curto e menos repetitivo, sem perder o sentido”. O pronome substitui o nome para evitar repetição, mantendo claro de quem estamos falando. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -219,6 +223,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro:
           "Com dois meninos na cena, 'ele' pode se referir a qualquer um dos dois — isso é ambiguidade, um erro comum ao usar pronomes.",
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Ficaria ambíguo — não saberíamos qual dos dois meninos é 'ele'”. Quando há mais de um possível referente do mesmo gênero, o pronome pode gerar ambiguidade — é preciso dar mais pistas ou repetir o nome. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -267,6 +272,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "A frase começa com 'A exploradora carregava sua bússola' — 'sua' é dela.",
         ondeEstaNoTexto: "A exploradora carregava sua bússola desde o início da viagem.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A exploradora carregava sua bússola desde o início da viagem”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Da exploradora”. 'Sua' é possessivo e se refere à exploradora, citada logo antes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "A palavra 'aquela' (em 'aquela montanha') indica que a montanha está...",
@@ -277,6 +283,7 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "'Aquela' indica distância — diferente de 'esta', que indicaria proximidade.",
         ondeEstaNoTexto: "Aquela montanha marca o fim da trilha.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Aquela montanha marca o fim da trilha”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Distante, no horizonte”. 'Aquela' é pronome demonstrativo usado para indicar algo distante de quem fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -336,6 +343,7 @@ export const aula03: AulaPortuguesV4 = {
       feedbackErro:
         "Há duas pessoas do gênero feminino na frase (a guia e a artista), então 'ela' pode se referir a qualquer uma — isso é ambiguidade.",
       dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: a resposta certa é “Porque há duas mulheres na frase e não fica claro quem é 'ela'”. Com dois possíveis referentes femininos, 'ela' fica ambíguo — é preciso repetir o nome ou dar mais pistas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -361,10 +369,16 @@ export const aula03: AulaPortuguesV4 = {
           "❌ “Os exploradores” não é a resposta. Pronome pessoal substitui o nome de uma pessoa ou coisa que já foi citada antes.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Uma palavra que substitui o nome de uma pessoa ou coisa já citada”. Pronome pessoal (ele, ela, eles, elas) substitui um nome já mencionado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Em 'O explorador perdeu sua bússola', a quem pertence a bússola?",
-        opcoes: ["Ao explorador", "À guia", "Não é possível saber", "Longe de quem fala"],
+        opcoes: [
+          "Ao explorador",
+          "À guia",
+          "Não é possível saber",
+          "Longe de quem fala",
+        ],
         correta: 0,
         feedbackAcerto:
           "🎉 Isso! 'Sua' é possessivo e se refere ao explorador, citado na mesma frase.",
@@ -376,10 +390,16 @@ export const aula03: AulaPortuguesV4 = {
           "❌ “Longe de quem fala” não é a resposta. 'Sua' indica posse de quem foi citado antes: o explorador.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Ao explorador”. 'Sua' é possessivo e se refere ao explorador, citado na mesma frase. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual pronome indica algo BEM DISTANTE de quem fala?",
-        opcoes: ["este", "esse", "aquele", "Perdido para sempre"],
+        opcoes: [
+          "este",
+          "esse",
+          "aquele",
+          "Perdido para sempre",
+        ],
         correta: 2,
         feedbackAcerto:
           "🎉 Correto! 'Aquele' indica distância. 'Este' indica proximidade e 'esse' um meio-termo.",
@@ -391,6 +411,7 @@ export const aula03: AulaPortuguesV4 = {
           "❌ “Perdido para sempre” não é a resposta. 'Aquele' é usado para o que está longe; 'este' para o que está perto.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “aquele”. 'Aquele' indica distância. 'Este' indica proximidade e 'esse' um meio-termo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual frase é AMBÍGUA (o pronome pode se referir a mais de uma pessoa)?",
@@ -412,6 +433,7 @@ export const aula03: AulaPortuguesV4 = {
           "❌ “Porque 'o menino' está errado gramaticalmente” não é a resposta. Procure a frase com duas pessoas do MESMO gênero — aí o pronome fica confuso sobre quem ele substitui.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “A guia falou com a exploradora. Ela trouxe o mapa.”. Com duas mulheres na frase (a guia e a exploradora), 'ela' pode se referir a qualquer uma — ambiguidade. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -434,6 +456,7 @@ export const aula03: AulaPortuguesV4 = {
           "❌ “Porque o pronome muda o significado da história” não é a resposta. Como 'os exploradores' é plural, o pronome também deve ser plural: 'eles' e 'suas'.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Eles / suas”. 'Eles' substitui 'os exploradores' (plural) e 'suas' indica que as mochilas são deles. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

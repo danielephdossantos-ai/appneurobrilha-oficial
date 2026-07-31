@@ -136,6 +136,7 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "…quando o Sol brilha ao mesmo tempo em que ainda há gotas de chuva no ar.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “quando o Sol brilha ao mesmo tempo em que ainda há gotas de chuva no ar”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Sol e gotas de chuva no ar”. É preciso SOL e GOTAS DE CHUVA no ar, ao mesmo tempo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Como se chama o processo em que a luz muda de direção ao atravessar a gota?",
@@ -147,6 +148,7 @@ export const aula02: AulaPortuguesV4 = {
           "O nome do processo está entre travessões no segundo parágrafo, e também no glossário.",
         ondeEstaNoTexto: "…ele muda de direção — esse processo se chama refração —…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “ele muda de direção — esse processo se chama refração —”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Refração”. O nome do processo é REFRAÇÃO — está explicado no texto e no glossário. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quantas cores formam o arco-íris, segundo o texto?",
@@ -158,6 +160,7 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "…vermelho, laranja, amarelo, verde, azul, anil e violeta. São sete cores no total.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “vermelho, laranja, amarelo, verde, azul, anil e violeta. São sete cores no total”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Sete”. São SETE cores: vermelho, laranja, amarelo, verde, azul, anil e violeta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -178,6 +181,7 @@ export const aula02: AulaPortuguesV4 = {
           "🔬 Isso! A legenda resume, em uma frase, exatamente o que a imagem mostra: a luz se dividindo em cores.",
         feedbackErro: "Releia a legenda embaixo da imagem, logo no início do texto.",
         dica: "🧭 Pista de explorador: lembre o que significa “legenda” — é o texto curto embaixo (ou ao lado) de uma imagem, foto ou desenho, explicando o que ela mostra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Que a luz do Sol atravessa uma gota e se divide em cores”. A legenda resume, em uma frase, exatamente o que a imagem mostra: a luz se dividindo em cores. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Para que serve o GLOSSÁRIO ao final do texto?",
@@ -191,6 +195,7 @@ export const aula02: AulaPortuguesV4 = {
           "🔬 Exato! O glossário explica a palavra 'refração', que pode ser difícil para o leitor.",
         feedbackErro: "O glossário aparece no final do texto e explica um termo técnico.",
         dica: "🧭 Pista de explorador: lembre o que significa “glossário” — é uma pequena lista, ao final ou ao lado do texto, que explica palavras difíceis usadas nele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Para explicar uma palavra difícil usada no texto (refração)”. O glossário explica a palavra 'refração', que pode ser difícil para o leitor. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -242,6 +247,7 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "Releia a última frase do primeiro parágrafo — compare as duas velocidades.",
         ondeEstaNoTexto: "…a luz viaja muito mais rápido do que o som.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “a luz viaja muito mais rápido do que o som”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque a luz viaja mais rápido que o som”. A LUZ é muito mais rápida que o SOM, por isso vemos antes de ouvir. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Para que serve o glossário deste texto?",
@@ -254,6 +260,7 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🔬 Correto! O glossário explica os termos técnicos usados no texto.",
         feedbackErro: "O glossário está no final e explica palavras específicas da ciência.",
         dica: "🧭 Pista de explorador: lembre o que significa “glossário” — é uma pequena lista, ao final ou ao lado do texto, que explica palavras difíceis usadas nele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Para explicar o que são velocidade da luz e do som”. O glossário explica os termos técnicos usados no texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -272,6 +279,7 @@ export const aula02: AulaPortuguesV4 = {
       feedbackAcerto: "🔬 Isso! É a LEGENDA — explica exatamente o que a imagem mostra.",
       feedbackErro: "Glossário explica palavras. O texto embaixo da imagem é a LEGENDA.",
       dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: a resposta certa é “Legenda”. É a LEGENDA — explica exatamente o que a imagem mostra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -296,6 +304,7 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Neve e vento forte” não é a resposta. Divulgação científica não inventa história nem vende nada — ela EXPLICA um fenômeno real.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Explicar um fenômeno real com clareza”. Ele EXPLICA fenômenos reais de forma clara. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O glossário serve para...",
@@ -316,6 +325,7 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Noite escura e lua cheia” não é a resposta. Pense: o glossário é tipo um 'dicionário mini' de palavras do próprio texto.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “glossário” — é uma pequena lista, ao final ou ao lado do texto, que explica palavras difíceis usadas nele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Explicar palavras difíceis do texto”. Glossário é uma pequena lista de explicações de palavras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O arco-íris aparece porque a luz do Sol...",
@@ -336,10 +346,16 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “O nome do fotógrafo que tirou a foto” não é a resposta. Lembre do processo de REFRAÇÃO explicado no texto: a luz muda de direção nas gotas.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Se divide em cores ao atravessar gotas de água”. A luz se divide em cores (refração) ao atravessar as gotas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Quantas cores tem o arco-íris?",
-        opcoes: ["Cinco", "Sete", "Doze", "A previsão do tempo de amanhã"],
+        opcoes: [
+          "Cinco",
+          "Sete",
+          "Doze",
+          "A previsão do tempo de amanhã",
+        ],
         correta: 1,
         feedbackAcerto: "🔬 Isso mesmo, são SETE cores.",
         feedbackErro: "Releia a lista de cores do texto e conte quantas são.",
@@ -350,6 +366,7 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “A previsão do tempo de amanhã” não é a resposta. Releia a lista de cores do texto e conte quantas são.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Sete”. , são SETE cores. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — A legenda de uma imagem deve...",
@@ -369,6 +386,7 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Para contar uma história inventada” não é a resposta. Legenda não é piada nem enfeite — ela EXPLICA o que a imagem mostra.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “legenda” — é o texto curto embaixo (ou ao lado) de uma imagem, foto ou desenho, explicando o que ela mostra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Explicar exatamente o que a imagem mostra”. Muito bem! A legenda esclarece o conteúdo da imagem de forma direta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

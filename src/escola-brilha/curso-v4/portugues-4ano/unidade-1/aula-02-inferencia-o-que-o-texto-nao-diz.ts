@@ -120,6 +120,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro: "Releia o primeiro parágrafo — o som esperado aparece logo no início.",
         ondeEstaNoTexto: "…esperando o barulho costumeiro de pássaros e macacos.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “esperando o barulho costumeiro de pássaros e macacos”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “O barulho de pássaros e macacos”. O texto diz que esperavam 'o barulho costumeiro de pássaros e macacos'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Há quanto tempo a fogueira encontrada estava apagada?",
@@ -129,6 +130,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro: "A resposta está no início do segundo parágrafo, logo depois de 'fogueira'.",
         ondeEstaNoTexto: "…restos de uma fogueira apagada há dias…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “restos de uma fogueira apagada há dias”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Há dias”. O texto diz 'restos de uma fogueira apagada há dias'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Como estava a trilha para o interior da ilha?",
@@ -145,6 +147,7 @@ export const aula2: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "A trilha que levava ao interior da ilha estava coberta de folhas secas, sem nenhuma marca recente de passos.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A trilha que levava ao interior da ilha estava coberta de folhas secas, sem nenhuma marca recente de passos”.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Coberta de folhas secas, sem marcas recentes”. 'A trilha... estava coberta de folhas secas, sem nenhuma marca recente de passos.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -167,6 +170,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro:
           "Pense: se algo ou alguém tivesse passado recentemente, haveria sons de animais e marcas na trilha. A ausência de tudo isso é a pista de que o lugar ficou tempo abandonado.",
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Ninguém, nem animal, passou por ali há um bom tempo”. O silêncio, a fogueira antiga e a trilha sem marcas recentes indicam que aquele lugar ficou tempo sem visitantes ou animais — o texto nunca disse isso diretamente, mas as pistas provam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que Helena ficou 'intrigada' com o que encontrou?",
@@ -181,6 +185,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro:
           "O texto diz que ela 'ainda não sabia dizer exatamente o quê' — ou seja, as pistas intrigam porque sugerem algo sem explicar tudo.",
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque as pistas mostravam uma mudança estranha, mas a explicação ainda não estava clara”. O texto mostra pistas de mudança (silêncio, fogueira antiga) sem explicar o motivo — por isso Helena fica curiosa e o leitor também precisa inferir. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -241,6 +246,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro:
           "Pense de onde veio a carta: uma garrafa na areia, com cheiro de sal. Isso indica contato com a água do mar.",
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Água do mar, já que a carta veio dentro de uma garrafa”. A carta veio numa garrafa encontrada na areia, com cheiro de sal — tudo aponta para a água do mar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -256,6 +262,7 @@ export const aula2: AulaPortuguesV4 = {
         feedbackErro:
           "Junte as pistas: pressa na escrita + palavras cortadas + menção a tempestade indicam que quem escreveu estava vivendo um momento de perigo.",
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Escreveu correndo, durante ou logo depois de uma situação perigosa”. Muito bem! Letra apressada, palavras cortadas e a menção à tempestade são pistas de urgência e perigo — o texto nunca disse isso com todas as letras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -281,6 +288,7 @@ export const aula2: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: café fumegando esfria rápido. Isso é pista de que a pessoa esteve ali há muito pouco tempo.",
       dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: a resposta certa é “A pessoa saiu há pouco tempo, de forma repentina”. Café ainda fumegando é pista de que alguém saiu há pouquíssimo tempo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -305,6 +313,7 @@ export const aula2: AulaPortuguesV4 = {
           "❌ “Vozes de outros exploradores” não é a resposta. Inferir é USAR PISTAS reais do texto para chegar a uma conclusão que não está escrita diretamente.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Concluir algo que não está escrito, usando pistas do texto”. Inferir é usar pistas para concluir algo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — No acampamento abandonado, qual pista indicava uma saída repentina?",
@@ -326,6 +335,7 @@ export const aula2: AulaPortuguesV4 = {
           "❌ “Há poucos minutos” não é a resposta. A pista mais forte de pressa era a comida ainda quente — algo abandonado de repente.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “A comida ainda quente no fogo apagado”. Comida ainda quente indica que a saída foi muito recente e repentina. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Na ilha silenciosa, o que o silêncio total sugeria?",
@@ -347,6 +357,7 @@ export const aula2: AulaPortuguesV4 = {
           "❌ “Cheia de pegadas recentes” não é a resposta. Se houvesse movimento recente de animais ou pessoas, haveria sons. O silêncio total é pista de abandono.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Que havia muito tempo sem animais ou pessoas por ali”. Ausência de sons de animais é uma pista forte de abandono prolongado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Por que é importante voltar ao texto mesmo quando fazemos uma inferência?",
@@ -368,6 +379,7 @@ export const aula2: AulaPortuguesV4 = {
           "❌ “Recém-cortada pela equipe” não é a resposta. Mesmo inferindo, é preciso checar se as pistas usadas realmente aparecem no texto.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “Para garantir que a inferência tem apoio em pistas reais do texto”. Toda inferência precisa se apoiar em pistas reais, não em suposições soltas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Na carta da garrafa, o que indicava urgência de quem escreveu?",
@@ -388,6 +400,7 @@ export const aula2: AulaPortuguesV4 = {
           "❌ “A ilha está sendo visitada por muitos turistas atualmente” não é a resposta. A pressa aparece na letra apressada e nas palavras cortadas pela metade.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: a resposta certa é “A letra apressada e as palavras cortadas”. Você já lê nas entrelinhas como um verdadeiro explorador de textos! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
