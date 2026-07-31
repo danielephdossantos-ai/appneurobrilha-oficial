@@ -505,9 +505,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
                 titulo={aula.momento01_motivacao.titulo}
                 historia={aula.momento01_motivacao.historia}
                 imagemUrl={aula.momento01_motivacao.imagemUrl}
-                descobertas={aula.momento01_motivacao.descobertas}
               />
-
             ) : (
             <div className={kids ? "flex flex-col items-center gap-3" : undefined}>
               {aula.momento01_motivacao.imagemUrl && (
