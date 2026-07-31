@@ -259,6 +259,22 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Mistério da Joia da Vitrine",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Na noite de sexta-feira, o Museu da cidade guardava sua peça mais preciosa: um diamante antigo, trazido de um navio naufragado há duzentos anos.",
+      "Na manhã seguinte, o vigia Sr.",
+      "Osvaldo encontrou a vitrine vazia.",
+      "O relógio da sala tinha parado exatamente às 22h — provavelmente derrubado durante a confusão.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "Localizar informação explícita: a resposta está escrita, só precisamos voltar ao texto.",

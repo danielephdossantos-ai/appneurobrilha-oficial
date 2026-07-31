@@ -240,6 +240,21 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Galo e a Raposa Esperta",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Vou contar uma história\nde um galo muito cantador,\nque no sítio, de manhã cedo,\nera o primeiro cantor.",
+      "Mas apareceu a raposa,\ndizendo que era pastor.",
+      "\"Meu amigo\", disse ela,\n\"vem que eu quero te contar,\nas galinhas fazem festa\nna clareira, sem parar.\"\nMas o galo, sabendo dela,\nnão caiu nesse balançar.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "CORDEL é poesia popular, pendurada em barbante nas feiras, que conta histórias com humor.",

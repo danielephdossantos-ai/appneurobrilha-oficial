@@ -298,6 +298,21 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Relato da Bicicleta Sumida",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Ontem à noite, a bicicleta de Pedro sumiu da garagem sem deixar rastro.",
+      "Hoje, o Clube dos Detetives procura pistas pela vizinhança inteira.",
+      "Amanhã, se tudo der certo, o Clube encontrará a bicicleta e resolverá o caso.",
+    ],
+    metaSegundos: 25,
+  },
+
   momento09_revisao: {
     pontos: [
       "VERBO é a palavra que indica AÇÃO ou ESTADO.",

@@ -306,6 +306,21 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Relatório: o Suspeito do Bolo",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "A testemunha descreveu uma raposa pequena e laranja saindo pela janela da cozinha.",
+      "Segundo ela, o animal era muito esperto: abriu a caixa do bolo sem fazer barulho nenhum.",
+      "A raposa também era rápida — sumiu entre as árvores antes que alguém pudesse gritar.",
+    ],
+    metaSegundos: 29,
+  },
+
   momento09_revisao: {
     pontos: [
       "ADJETIVO é a palavra que dá uma CARACTERÍSTICA ao substantivo.",

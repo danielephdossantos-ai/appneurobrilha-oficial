@@ -257,6 +257,21 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: As Abelhas e o Jardim",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "As abelhas visitam flor após flor procurando néctar, o líquido doce que usam para fazer mel.",
+      "Enquanto voam de flor em flor, elas carregam grãozinhos de pólen grudados nas patinhas.",
+      "Esse pólen cai em outras flores e faz com que elas produzam frutas e sementes.",
+    ],
+    metaSegundos: 30,
+  },
+
   momento09_revisao: {
     pontos: [
       "A IDEIA PRINCIPAL é o assunto central — a frase que resume o texto inteiro.",

@@ -246,6 +246,22 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Regra do jogo Corrida dos Dados",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Materiais: um dado e peões (podem ser tampinhas) para cada jogador.",
+      "Passo 1: cada jogador role o dado uma vez para decidir quem começa.",
+      "Quem tirar o número maior joga primeiro.",
+      "Passo 2: na sua vez, role o dado e avance seu peão o número de casas que saiu.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "Texto instrucional ensina a FAZER algo, passo a passo.",

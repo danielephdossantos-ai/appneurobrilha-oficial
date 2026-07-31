@@ -290,6 +290,21 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Sumiço de Café",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Todos os dias, depois da escola, Théo brincava no quintal com Café, seu cachorro caramelo.",
+      "A rotina era sempre a mesma: bola, corrida e um lanche debaixo da árvore.",
+      "De repente, num sábado, Théo abriu o portão do quintal para pegar a bola e esqueceu de fechar.",
+    ],
+    metaSegundos: 31,
+  },
+
   momento09_revisao: {
     pontos: [
       "Toda boa história tem COMEÇO (apresenta), CONFLITO (o problema) e DESFECHO (a solução).",

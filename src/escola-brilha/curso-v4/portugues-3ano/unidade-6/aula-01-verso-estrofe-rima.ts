@@ -238,6 +238,22 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Segredo da Noite",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "No céu escuro mora a lua,\ncá embaixo dorme a rua.",
+      "A coruja acorda e voa,\nna árvore ela ecoa.",
+      "Quando a estrela mais aparece,\no dia inteiro se esquece.",
+      "A noite guarda um segredo:\nas coisas só têm medo do medo.",
+    ],
+    metaSegundos: 28,
+  },
+
   momento09_revisao: {
     pontos: [
       "VERSO é cada linha do poema.",

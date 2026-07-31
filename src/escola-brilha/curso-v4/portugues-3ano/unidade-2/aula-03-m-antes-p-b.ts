@@ -264,6 +264,21 @@ export const aula3: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Segredo do M e do N",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Aurora explicou: 'Toda vez que o som nasal vem ANTES de P ou de B, a regra é clara: escrevemos com M.",
+      "Por isso é CAMPO, e não CANPO; é TAMBOR, e não TANBOR.'",
+      "'Já nos demais casos — antes de outras consoantes, como T, D, C ou no fim da sílaba — usamos N.",
+    ],
+    metaSegundos: 37,
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: antes de P e B, o som nasal SEMPRE se escreve com M (campo, tambor, bomba).",

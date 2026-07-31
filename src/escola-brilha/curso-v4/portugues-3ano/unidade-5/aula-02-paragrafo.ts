@@ -194,6 +194,21 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Dia da Feira de Ciências",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "De manhã, Laura chegou cedo à escola carregando sua mochila cheia de materiais para o experimento de vulcão.",
+      "Na hora da apresentação, ela explicou como o bicarbonato e o vinagre reagiam, e todos os colegas se aproximaram para ver a espuma sair.",
+      "No fim do dia, a professora entregou um certificado para Laura, que voltou para casa orgulhosa do trabalho.",
+    ],
+    metaSegundos: 40,
+  },
+
   momento09_revisao: {
     pontos: [
       "Parágrafo é um bloco de texto com UMA ideia principal.",
