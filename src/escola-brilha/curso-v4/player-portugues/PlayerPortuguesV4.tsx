@@ -33,6 +33,7 @@ import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+import { ROTULO_APOIO } from "./perfil-apoio";
 import { LeituraFluente } from "./blocos/LeituraFluente";
 import { LenteLeitura } from "./blocos/LenteLeitura";
 import { BotaoOuvirEnunciado } from "./blocos/BotaoOuvirEnunciado";
@@ -122,7 +123,10 @@ const CORES_TWEEN: Record<string, string> = {
 
 export function PlayerPortuguesV4(props: Props) {
   return (
-    <AdaptativoProvider aulaSlug={`${props.cursoSlug}:${props.aula.slug}`}>
+    <AdaptativoProvider
+      aulaSlug={`${props.cursoSlug}:${props.aula.slug}`}
+      cursoSlug={props.cursoSlug}
+    >
       <PlayerPortuguesV4Inner {...props} />
     </AdaptativoProvider>
   );
@@ -461,6 +465,29 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
           {(!sessoes || sessao === "A") && (
           <>
+
+          {/* Sondagem → adaptação: o nível de apoio desta aula */}
+          {adaptativo && adaptativo.apoio.origem !== "padrao" && (
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
+              <div className="text-xs uppercase tracking-wider text-white/60">
+                {adaptativo.apoio.origem === "sondagem"
+                  ? "Sondagem inicial · seu modo de estudo"
+                  : "Seu modo de estudo · ajustado pelo seu desempenho"}
+              </div>
+              <div className="mt-1 text-lg font-black text-amber-200">
+                {ROTULO_APOIO[adaptativo.apoio.nivel].emoji}{" "}
+                {ROTULO_APOIO[adaptativo.apoio.nivel].titulo}
+              </div>
+              <p className="text-sm text-white/80 mt-1">
+                {ROTULO_APOIO[adaptativo.apoio.nivel].texto}
+              </p>
+              {adaptativo.apoio.habilidadesFracas.length > 0 && (
+                <p className="text-xs text-white/60 mt-2">
+                  Reforçando: {adaptativo.apoio.habilidadesFracas.slice(0, 3).join(" · ")}
+                </p>
+              )}
+            </div>
+          )}
 
           {/* M0 · Aquecimento — revisão espaçada (3 itens de aulas anteriores) */}
 

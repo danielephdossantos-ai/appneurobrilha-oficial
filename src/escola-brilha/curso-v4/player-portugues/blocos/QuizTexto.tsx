@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { QuizTextoData } from "../../types";
 import { useAdaptativo } from "../adaptativo";
@@ -108,6 +108,9 @@ export function QuizTexto({
   qid?: string;
 }) {
   const adaptativo = useAdaptativo();
+  // Apoio definido pela SONDAGEM INICIAL e recalibrado pelo desempenho.
+  const apoio = adaptativo?.apoio;
+  const limiteTentativas = apoio?.tentativasAntesDeRevelar ?? 2;
   const [escolha, setEscolha] = useState<number | null>(null);
   const [tentativas, setTentativas] = useState(0);
   const [fase, setFase] = useState<"responder" | "dica" | "final">("responder");
@@ -122,6 +125,18 @@ export function QuizTexto({
       ? `Volte nesta parte: "${quiz.ondeEstaNoTexto}"`
       : "Leia a pergunta de novo devagar e elimine a opção que não combina.");
   const reensino = quiz.reensino ?? quiz.feedbackAcerto;
+  // Apoio reforçado: a pista já aparece antes da 1ª resposta.
+  const dicaAntecipada = !!apoio?.dicaAntecipada && fase === "responder" && escolha === null;
+
+  // A pista é lida em voz alta quando o perfil pede leitura de apoio.
+  useEffect(() => {
+    if (!apoio?.lerDicaEmVozAlta) return;
+    if (fase !== "dica" && !dicaAntecipada) return;
+    stopSpeaking();
+    speakChunked(dica, { rate: apoio.velocidadeFala });
+    return () => stopSpeaking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fase, dicaAntecipada]);
 
   function ouvirPergunta() {
     stopSpeaking();
@@ -153,13 +168,13 @@ export function QuizTexto({
       concluir(i, true, n);
       return;
     }
-    if (n === 1) {
-      // 1ª tentativa errada → PISTA, sem mostrar a resposta.
+    if (n < limiteTentativas) {
+      // Ainda há tentativa → PISTA, sem mostrar a resposta.
       setEscolha(i);
       setFase("dica");
       return;
     }
-    // 2ª tentativa errada → revela + reensino automático.
+    // Última tentativa errada → revela + reensino automático.
     concluir(i, false, n);
   }
 
@@ -191,6 +206,16 @@ export function QuizTexto({
       </div>
 
       {silabas && <SilabasParaTocar silabas={silabas} />}
+
+      {/* Sondagem → adaptação: no apoio reforçado a pista vem ANTES de responder */}
+      {dicaAntecipada && (
+        <div className="mb-4 p-3 rounded-2xl bg-sky-50 text-sky-950 border-2 border-sky-200 text-sm font-bold leading-snug">
+          <div className="text-xs uppercase tracking-wide text-sky-700">
+            🤝 Pista do professor (apoio reforçado)
+          </div>
+          <div className="mt-1">{dica}</div>
+        </div>
+      )}
 
 
       {/* Se a pergunta tem opcoesImagens (mesmo tamanho de opcoes),
@@ -334,6 +359,9 @@ export function QuizTexto({
             className="mt-3 w-full h-12 rounded-2xl bg-sky-500 text-white font-black text-lg active:scale-95 shadow"
           >
             🔄 Tentar com a dica
+            {limiteTentativas - tentativas > 1
+              ? ` (${limiteTentativas - tentativas} tentativas)`
+              : ""}
           </button>
         </div>
       )}
@@ -362,6 +390,15 @@ export function QuizTexto({
               )}
             </div>
           </div>
+
+          {acertou && apoio?.reensinoSempre && (
+            <div className="mt-3 rounded-2xl bg-white/70 border-2 border-emerald-300 p-3 text-[#0d1f55]">
+              <div className="text-sm uppercase tracking-wide text-emerald-700">
+                👩‍🏫 Por que essa é a certa
+              </div>
+              <div className="mt-1">{reensino}</div>
+            </div>
+          )}
 
           {!acertou && (
             <div className="mt-3 rounded-2xl bg-white/70 border-2 border-amber-300 p-3">
