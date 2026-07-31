@@ -167,6 +167,33 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Dois parágrafos, duas ideias",
+        comando: "Escreva DOIS parágrafos sobre o mesmo assunto: no primeiro, conte o que aconteceu; no segundo, diga o que você achou. Não esqueça de pular linha.",
+        linhas: 4,
+        modelo: [
+          "No recreio começou a chover forte.",
+          "",
+          "Eu gostei, porque brincamos dentro da sala.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Parágrafo é um bloco de texto com UMA ideia principal.",
@@ -187,23 +214,78 @@ export const aula02: AulaPortuguesV4 = {
 
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "1/5 — O que é um parágrafo?", opcoes: ["Uma letra maiúscula", "Um bloco de texto com uma ideia principal", "O título do texto"], correta: 1, feedbackAcerto: "📐 Isso!", feedbackErro: "Parágrafo é um bloco de texto com UMA ideia central.",
+      { pergunta: "1/5 — O que é um parágrafo?", opcoes: [
+          "Uma letra maiúscula",
+          "Um bloco de texto com uma ideia principal",
+          "Começar cada frase nova em uma linha, sempre",
+          "O título do texto",
+        ], correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma letra maiúscula” não é a resposta. Parágrafo é um bloco de texto com UMA ideia central.",
+          null,
+          "❌ “Começar cada frase nova em uma linha, sempre” não é a resposta. Parágrafo é um bloco de texto com UMA ideia central.",
+          "❌ “O título do texto” não é a resposta. Parágrafo é um bloco de texto com UMA ideia central.",
+        ], feedbackAcerto: "📐 Isso!", feedbackErro: "Parágrafo é um bloco de texto com UMA ideia central.",
         dica: "🔎 Pista: lembre do que significa “parágrafo” — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: parágrafo — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Exemplo: Um parágrafo pode falar só sobre 'o que aconteceu de manhã' na história. Agora volte à pergunta “1/5 — O que é um parágrafo?” com essa ideia na cabeça.",
       },
-      { pergunta: "2/5 — Quando devemos começar um novo parágrafo?", opcoes: ["A cada palavra nova", "Quando muda o tempo, o lugar ou a ideia", "Nunca"], correta: 1, feedbackAcerto: "📐 Correto!", feedbackErro: "Mude de parágrafo quando algo importante mudar: tempo, lugar ou ideia.",
+      { pergunta: "2/5 — Quando devemos começar um novo parágrafo?", opcoes: [
+          "A cada palavra nova",
+          "Quando muda o tempo, o lugar ou a ideia",
+          "Começar cada frase nova em uma linha, sempre",
+          "Nunca",
+        ], correta: 1,
+        feedbackOpcoes: [
+          "❌ “A cada palavra nova” não é a resposta. Mude de parágrafo quando algo importante mudar: tempo, lugar ou ideia.",
+          null,
+          "❌ “Começar cada frase nova em uma linha, sempre” não é a resposta. Mude de parágrafo quando algo importante mudar: tempo, lugar ou ideia.",
+          "❌ “Nunca” não é a resposta. Mude de parágrafo quando algo importante mudar: tempo, lugar ou ideia.",
+        ], feedbackAcerto: "📐 Correto!", feedbackErro: "Mude de parágrafo quando algo importante mudar: tempo, lugar ou ideia.",
         dica: "🔎 Pista: lembre do que significa “parágrafo” — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: parágrafo — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Exemplo: Um parágrafo pode falar só sobre 'o que aconteceu de manhã' na história. Agora volte à pergunta “2/5 — Quando devemos começar um novo parágrafo?” com essa ideia na cabeça.",
       },
-      { pergunta: "3/5 — O que é o 'recuo' do parágrafo?", opcoes: ["Um desenho", "O espaço em branco no início da linha", "Uma cor diferente"], correta: 1, feedbackAcerto: "📐 Isso!", feedbackErro: "Recuo é o espacinho deixado no começo da primeira linha do parágrafo.",
+      { pergunta: "3/5 — O que é o 'recuo' do parágrafo?", opcoes: [
+          "Começar cada frase nova em uma linha, sempre",
+          "Um desenho",
+          "O espaço em branco no início da linha",
+          "Uma cor diferente",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Começar cada frase nova em uma linha, sempre” não é a resposta. Recuo é o espacinho deixado no começo da primeira linha do parágrafo.",
+          "❌ “Um desenho” não é a resposta. Recuo é o espacinho deixado no começo da primeira linha do parágrafo.",
+          null,
+          "❌ “Uma cor diferente” não é a resposta. Recuo é o espacinho deixado no começo da primeira linha do parágrafo.",
+        ], feedbackAcerto: "📐 Isso!", feedbackErro: "Recuo é o espacinho deixado no começo da primeira linha do parágrafo.",
         dica: "🔎 Pista: lembre do que significa “parágrafo” — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: parágrafo — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Exemplo: Um parágrafo pode falar só sobre 'o que aconteceu de manhã' na história. Agora volte à pergunta “3/5 — O que é o 'recuo' do parágrafo?” com essa ideia na cabeça.",
       },
-      { pergunta: "4/5 — Um texto sem nenhuma divisão em parágrafos fica…", opcoes: ["Mais claro", "Mais difícil de entender", "Igualzinho"], correta: 1, feedbackAcerto: "📐 Exato!", feedbackErro: "Sem parágrafos, as ideias se misturam e o texto fica confuso.",
+      { pergunta: "4/5 — Um texto sem nenhuma divisão em parágrafos fica…", opcoes: [
+          "Mais claro",
+          "Começar cada frase nova em uma linha, sempre",
+          "Mais difícil de entender",
+          "Igualzinho",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Mais claro” não é a resposta. Sem parágrafos, as ideias se misturam e o texto fica confuso.",
+          "❌ “Começar cada frase nova em uma linha, sempre” não é a resposta. Sem parágrafos, as ideias se misturam e o texto fica confuso.",
+          null,
+          "❌ “Igualzinho” não é a resposta. Sem parágrafos, as ideias se misturam e o texto fica confuso.",
+        ], feedbackAcerto: "📐 Exato!", feedbackErro: "Sem parágrafos, as ideias se misturam e o texto fica confuso.",
         dica: "🔎 Pista: lembre do que significa “parágrafo” — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: parágrafo — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Exemplo: Um parágrafo pode falar só sobre 'o que aconteceu de manhã' na história. Agora volte à pergunta “4/5 — Um texto sem nenhuma divisão em parágrafos fica…” com essa ideia na cabeça.",
       },
-      { pergunta: "5/5 — No texto 'A Mudança de Casa', por que existem três parágrafos?", opcoes: ["Porque cada um mostra um momento diferente", "Porque sim", "Porque tem três personagens"], correta: 0, feedbackAcerto: "📐 Isso mesmo! Você dominou os parágrafos. 🌟", feedbackErro: "Cada parágrafo trata de um momento diferente: antes, durante e depois da mudança.",
+      { pergunta: "5/5 — No texto 'A Mudança de Casa', por que existem três parágrafos?", opcoes: [
+          "Porque cada um mostra um momento diferente",
+          "Porque sim",
+          "Porque tem três personagens",
+          "Começar cada frase nova em uma linha, sempre",
+        ], correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque sim” não é a resposta. Cada parágrafo trata de um momento diferente: antes, durante e depois da mudança.",
+          "❌ “Porque tem três personagens” não é a resposta. Cada parágrafo trata de um momento diferente: antes, durante e depois da mudança.",
+          "❌ “Começar cada frase nova em uma linha, sempre” não é a resposta. Cada parágrafo trata de um momento diferente: antes, durante e depois da mudança.",
+        ], feedbackAcerto: "📐 Isso mesmo! Você dominou os parágrafos. 🌟", feedbackErro: "Cada parágrafo trata de um momento diferente: antes, durante e depois da mudança.",
         dica: "🔎 Pista: lembre do que significa “parágrafo” — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: parágrafo — É um bloco de texto que trata de UMA ideia principal. Começa com um espacinho (recuo) na primeira linha. Exemplo: Um parágrafo pode falar só sobre 'o que aconteceu de manhã' na história. Agora volte à pergunta “5/5 — No texto 'A Mudança de Casa', por que existem três parágrafos?” com essa ideia na cabeça.",
       },

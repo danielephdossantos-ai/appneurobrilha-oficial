@@ -263,6 +263,33 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "História em três partes",
+        comando: "Escreva uma história curtinha com COMEÇO (quem e onde), CONFLITO (o problema) e DESFECHO (como terminou).",
+        linhas: 4,
+        modelo: [
+          "Tina achou uma caixa no quintal.",
+          "A caixa estava trancada.",
+          "A chave estava embaixo do tapete.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Toda boa história tem COMEÇO (apresenta), CONFLITO (o problema) e DESFECHO (a solução).",
@@ -289,8 +316,19 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é o 'conflito' de uma história?",
-        opcoes: ["O nome do personagem principal", "O problema que precisa ser resolvido", "O título do livro"],
+        opcoes: [
+          "O nome do personagem principal",
+          "O problema que precisa ser resolvido",
+          "Contar só o final da história, sem apresentar ninguém",
+          "O título do livro",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “O nome do personagem principal” não é a resposta. Conflito é sempre o PROBLEMA que aparece na história.",
+          null,
+          "❌ “Contar só o final da história, sem apresentar ninguém” não é a resposta. Conflito é sempre o PROBLEMA que aparece na história.",
+          "❌ “O título do livro” não é a resposta. Conflito é sempre o PROBLEMA que aparece na história.",
+        ],
         feedbackAcerto: "🧩 Isso! Conflito é o problema.",
         feedbackErro: "Conflito é sempre o PROBLEMA que aparece na história.",
         dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
@@ -298,8 +336,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — O que aparece no 'começo' de uma história?",
-        opcoes: ["A resolução do problema", "A apresentação dos personagens e da rotina", "Só o título"],
+        opcoes: [
+          "A resolução do problema",
+          "A apresentação dos personagens e da rotina",
+          "Só o título",
+          "Usar Ç antes das letras E e I",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “A resolução do problema” não é a resposta. O começo mostra a calmaria ANTES do conflito.",
+          null,
+          "❌ “Só o título” não é a resposta. O começo mostra a calmaria ANTES do conflito.",
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. O começo mostra a calmaria ANTES do conflito.",
+        ],
         feedbackAcerto: "🧩 Correto! O começo apresenta quem são os personagens e como era antes do problema.",
         feedbackErro: "O começo mostra a calmaria ANTES do conflito.",
         dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
@@ -307,8 +356,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Em 'O Sumiço de Café', qual foi o conflito?",
-        opcoes: ["O cachorro sumir depois do portão aberto", "Théo brincar de bola", "A família jantar"],
-        correta: 0,
+        opcoes: [
+          "Usar Ç antes das letras E e I",
+          "O cachorro sumir depois do portão aberto",
+          "Théo brincar de bola",
+          "A família jantar",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. O portão ficou aberto e Café sumiu — esse é o problema.",
+          null,
+          "❌ “Théo brincar de bola” não é a resposta. O portão ficou aberto e Café sumiu — esse é o problema.",
+          "❌ “A família jantar” não é a resposta. O portão ficou aberto e Café sumiu — esse é o problema.",
+        ],
         feedbackAcerto: "🧩 Isso mesmo!",
         feedbackErro: "O portão ficou aberto e Café sumiu — esse é o problema.",
         dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
@@ -316,8 +376,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — O que é o 'desfecho'?",
-        opcoes: ["O meio da história", "O final, quando o problema se resolve", "A capa do livro"],
+        opcoes: [
+          "O meio da história",
+          "O final, quando o problema se resolve",
+          "Contar só o final da história, sem apresentar ninguém",
+          "A capa do livro",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “O meio da história” não é a resposta. Desfecho é como o problema TERMINA.",
+          null,
+          "❌ “Contar só o final da história, sem apresentar ninguém” não é a resposta. Desfecho é como o problema TERMINA.",
+          "❌ “A capa do livro” não é a resposta. Desfecho é como o problema TERMINA.",
+        ],
         feedbackAcerto: "🧩 Isso! Desfecho é o final da história.",
         feedbackErro: "Desfecho é como o problema TERMINA.",
         dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",
@@ -328,9 +399,16 @@ export const aula01: AulaPortuguesV4 = {
         opcoes: [
           "Porque sem problema a história fica sem graça, sem nada pra contar",
           "Porque é obrigatório ter uma vilã",
+          "Contar só o final da história, sem apresentar ninguém",
           "Porque só assim cabe ilustração",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque é obrigatório ter uma vilã” não é a resposta. Sem conflito, a história é só um dia qualquer, sem nada interessante para contar.",
+          "❌ “Contar só o final da história, sem apresentar ninguém” não é a resposta. Sem conflito, a história é só um dia qualquer, sem nada interessante para contar.",
+          "❌ “Porque só assim cabe ilustração” não é a resposta. Sem conflito, a história é só um dia qualquer, sem nada interessante para contar.",
+        ],
         feedbackAcerto: "🧩 Exato! O conflito é o que prende o leitor. Missão cumprida! 🌟",
         feedbackErro: "Sem conflito, a história é só um dia qualquer, sem nada interessante para contar.",
         dica: "🔎 Pista: lembre do que significa “conflito” — É o PROBLEMA da história — algo que dá errado, muda ou ameaça a calmaria dos personagens. É o que faz a histó… Use isso para eliminar as alternativas que não combinam.",

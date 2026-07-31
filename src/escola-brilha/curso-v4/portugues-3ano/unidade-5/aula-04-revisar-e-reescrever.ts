@@ -175,6 +175,33 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Rascunho e versão final",
+        comando: "Escreva um parágrafo sobre o seu dia. Depois releia, conserte o que faltou (letra maiúscula, ponto final, palavra repetida) e escreva a versão final.",
+        linhas: 4,
+        modelo: [
+          "Hoje eu acordei cedo e fui à escola.",
+          "Na aula, aprendi a revisar um texto.",
+          "Gostei de deixar tudo certinho.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Revisar é reler o próprio texto como um detetive, procurando o que pode melhorar.",
@@ -199,23 +226,78 @@ export const aula04: AulaPortuguesV4 = {
 
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "1/5 — O que significa 'revisar' um texto?", opcoes: ["Apagar tudo e começar de novo", "Reler procurando o que pode melhorar", "Ler só o título"], correta: 1, feedbackAcerto: "🔎 Isso!", feedbackErro: "Revisar é reler com atenção, procurando melhorias.",
+      { pergunta: "1/5 — O que significa 'revisar' um texto?", opcoes: [
+          "Pular a palavra difícil e seguir lendo sem entender",
+          "Apagar tudo e começar de novo",
+          "Reler procurando o que pode melhorar",
+          "Ler só o título",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Pular a palavra difícil e seguir lendo sem entender” não é a resposta. Revisar é reler com atenção, procurando melhorias.",
+          "❌ “Apagar tudo e começar de novo” não é a resposta. Revisar é reler com atenção, procurando melhorias.",
+          null,
+          "❌ “Ler só o título” não é a resposta. Revisar é reler com atenção, procurando melhorias.",
+        ], feedbackAcerto: "🔎 Isso!", feedbackErro: "Revisar é reler com atenção, procurando melhorias.",
         dica: "🔎 Pista: lembre do que significa “revisar” — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: revisar — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Exemplo: Depois de escrever, Rafael revisou o texto e corrigiu a pontuação. Agora volte à pergunta “1/5 — O que significa 'revisar' um texto?” com essa ideia na cabeça.",
       },
-      { pergunta: "2/5 — Qual NÃO é um item do checklist de revisão do Clube?", opcoes: ["Maiúsculas certas", "Pontuação", "Quantidade de páginas do livro"], correta: 2, feedbackAcerto: "🔎 Correto!", feedbackErro: "O checklist trata de maiúsculas, pontuação, repetição e clareza — não da quantidade de páginas.",
+      { pergunta: "2/5 — Qual NÃO é um item do checklist de revisão do Clube?", opcoes: [
+          "Maiúsculas certas",
+          "Usar N antes de P e de B",
+          "Pontuação",
+          "Quantidade de páginas do livro",
+        ], correta: 3,
+        feedbackOpcoes: [
+          "❌ “Maiúsculas certas” não é a resposta. O checklist trata de maiúsculas, pontuação, repetição e clareza — não da quantidade de páginas.",
+          "❌ “Usar N antes de P e de B” não é a resposta. O checklist trata de maiúsculas, pontuação, repetição e clareza — não da quantidade de páginas.",
+          "❌ “Pontuação” não é a resposta. O checklist trata de maiúsculas, pontuação, repetição e clareza — não da quantidade de páginas.",
+          null,
+        ], feedbackAcerto: "🔎 Correto!", feedbackErro: "O checklist trata de maiúsculas, pontuação, repetição e clareza — não da quantidade de páginas.",
         dica: "🔎 Pista: lembre do que significa “revisar” — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: revisar — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Exemplo: Depois de escrever, Rafael revisou o texto e corrigiu a pontuação. Agora volte à pergunta “2/5 — Qual NÃO é um item do checklist de revisão do Clube?” com essa ideia na cabeça.",
       },
-      { pergunta: "3/5 — Por que trocar palavras repetidas é bom?", opcoes: ["Deixa o texto mais variado e interessante", "É proibido repetir qualquer palavra", "Não muda nada"], correta: 0, feedbackAcerto: "🔎 Isso!", feedbackErro: "Variar as palavras deixa o texto mais rico para o leitor.",
+      { pergunta: "3/5 — Por que trocar palavras repetidas é bom?", opcoes: [
+          "Deixa o texto mais variado e interessante",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "É proibido repetir qualquer palavra",
+          "Não muda nada",
+        ], correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Variar as palavras deixa o texto mais rico para o leitor.",
+          "❌ “É proibido repetir qualquer palavra” não é a resposta. Variar as palavras deixa o texto mais rico para o leitor.",
+          "❌ “Não muda nada” não é a resposta. Variar as palavras deixa o texto mais rico para o leitor.",
+        ], feedbackAcerto: "🔎 Isso!", feedbackErro: "Variar as palavras deixa o texto mais rico para o leitor.",
         dica: "🔎 Pista: lembre do que significa “revisar” — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: revisar — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Exemplo: Depois de escrever, Rafael revisou o texto e corrigiu a pontuação. Agora volte à pergunta “3/5 — Por que trocar palavras repetidas é bom?” com essa ideia na cabeça.",
       },
-      { pergunta: "4/5 — O que é 'reescrever'?", opcoes: ["Escrever pela primeira vez", "Passar o texto a limpo já corrigido", "Apagar a história"], correta: 1, feedbackAcerto: "🔎 Isso mesmo!", feedbackErro: "Reescrever é passar a limpo o texto já com as correções da revisão.",
+      { pergunta: "4/5 — O que é 'reescrever'?", opcoes: [
+          "Escrever pela primeira vez",
+          "Passar o texto a limpo já corrigido",
+          "Entregar o texto do jeito que saiu na primeira vez",
+          "Apagar a história",
+        ], correta: 1,
+        feedbackOpcoes: [
+          "❌ “Escrever pela primeira vez” não é a resposta. Reescrever é passar a limpo o texto já com as correções da revisão.",
+          null,
+          "❌ “Entregar o texto do jeito que saiu na primeira vez” não é a resposta. Reescrever é passar a limpo o texto já com as correções da revisão.",
+          "❌ “Apagar a história” não é a resposta. Reescrever é passar a limpo o texto já com as correções da revisão.",
+        ], feedbackAcerto: "🔎 Isso mesmo!", feedbackErro: "Reescrever é passar a limpo o texto já com as correções da revisão.",
         dica: "🔎 Pista: lembre do que significa “revisar” — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: revisar — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Exemplo: Depois de escrever, Rafael revisou o texto e corrigiu a pontuação. Agora volte à pergunta “4/5 — O que é 'reescrever'?” com essa ideia na cabeça.",
       },
-      { pergunta: "5/5 — Depois de escrever, revisar e reescrever, o que Marina sentiu?", opcoes: ["Orgulho do resultado", "Vergonha", "Nada em especial"], correta: 0, feedbackAcerto: "🔎 Isso! Ela ficou orgulhosa. Você concluiu a Unidade 5 — Pena de Ouro conquistada! 🌟", feedbackErro: "O texto diz que ela reescreveu 'orgulhosa do resultado'.",
+      { pergunta: "5/5 — Depois de escrever, revisar e reescrever, o que Marina sentiu?", opcoes: [
+          "Orgulho do resultado",
+          "Vergonha",
+          "Nada em especial",
+          "Entregar o texto do jeito que saiu na primeira vez",
+        ], correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Vergonha” não é a resposta. O texto diz que ela reescreveu 'orgulhosa do resultado'.",
+          "❌ “Nada em especial” não é a resposta. O texto diz que ela reescreveu 'orgulhosa do resultado'.",
+          "❌ “Entregar o texto do jeito que saiu na primeira vez” não é a resposta. O texto diz que ela reescreveu 'orgulhosa do resultado'.",
+        ], feedbackAcerto: "🔎 Isso! Ela ficou orgulhosa. Você concluiu a Unidade 5 — Pena de Ouro conquistada! 🌟", feedbackErro: "O texto diz que ela reescreveu 'orgulhosa do resultado'.",
         dica: "🔎 Pista: lembre do que significa “revisar” — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: revisar — É ler de novo o próprio texto procurando erros e formas de melhorar — como um detetive procurando pistas. Exemplo: Depois de escrever, Rafael revisou o texto e corrigiu a pontuação. Agora volte à pergunta “5/5 — Depois de escrever, revisar e reescrever, o que Marina sentiu?” com essa ideia na cabeça.",
       },

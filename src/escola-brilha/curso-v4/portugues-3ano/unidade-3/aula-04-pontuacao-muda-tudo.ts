@@ -300,6 +300,33 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "A mesma frase, três pontuações",
+        comando: "Escreva a MESMA frase três vezes, mudando só a pontuação: com ponto final, com interrogação e com exclamação. Depois explique o que mudou.",
+        linhas: 4,
+        modelo: [
+          "Você chegou.",
+          "Você chegou?",
+          "Você chegou!",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "PONTO FINAL fecha uma ideia completa, de jeito calmo.",
@@ -323,8 +350,19 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Para que serve o ponto de interrogação?",
-        opcoes: ["Marcar uma pergunta", "Separar itens de uma lista", "Fechar uma ideia calma"],
-        correta: 0,
+        opcoes: [
+          "Um enfeite do texto, que não muda o sentido da frase",
+          "Marcar uma pergunta",
+          "Separar itens de uma lista",
+          "Fechar uma ideia calma",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Um enfeite do texto, que não muda o sentido da frase” não é a resposta. O ponto de interrogação (?) é usado sempre que a frase é uma pergunta.",
+          null,
+          "❌ “Separar itens de uma lista” não é a resposta. O ponto de interrogação (?) é usado sempre que a frase é uma pergunta.",
+          "❌ “Fechar uma ideia calma” não é a resposta. O ponto de interrogação (?) é usado sempre que a frase é uma pergunta.",
+        ],
         feedbackAcerto: "🎉 Isso! Toda pergunta termina com ponto de interrogação (?).",
         feedbackErro: "O ponto de interrogação (?) é usado sempre que a frase é uma pergunta.",
         dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
@@ -332,8 +370,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Em 'Comprei maçã, pera e uva.', para que serve a vírgula?",
-        opcoes: ["Para chamar alguém", "Para separar os itens da lista", "Para marcar surpresa"],
+        opcoes: [
+          "Para chamar alguém",
+          "Para separar os itens da lista",
+          "Um enfeite do texto, que não muda o sentido da frase",
+          "Para marcar surpresa",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Para chamar alguém” não é a resposta. Quando listamos vários itens seguidos, usamos vírgula entre eles (menos antes do 'e' final).",
+          null,
+          "❌ “Um enfeite do texto, que não muda o sentido da frase” não é a resposta. Quando listamos vários itens seguidos, usamos vírgula entre eles (menos antes do 'e' final).",
+          "❌ “Para marcar surpresa” não é a resposta. Quando listamos vários itens seguidos, usamos vírgula entre eles (menos antes do 'e' final).",
+        ],
         feedbackAcerto: "🎉 Correto! Nessa frase, a vírgula separa cada item da enumeração.",
         feedbackErro: "Quando listamos vários itens seguidos, usamos vírgula entre eles (menos antes do 'e' final).",
         dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
@@ -341,8 +390,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual frase usa corretamente a vírgula do vocativo?",
-        opcoes: ["Pedro, olhe essa pista!", "Pedro olhe, essa pista!", "Pedro olhe essa, pista!"],
+        opcoes: [
+          "Pedro, olhe essa pista!",
+          "Pedro olhe, essa pista!",
+          "Pedro olhe essa, pista!",
+          "Um enfeite do texto, que não muda o sentido da frase",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Pedro olhe, essa pista!” não é a resposta. O vocativo (nome de quem é chamado) precisa ficar separado por vírgula do resto da frase.",
+          "❌ “Pedro olhe essa, pista!” não é a resposta. O vocativo (nome de quem é chamado) precisa ficar separado por vírgula do resto da frase.",
+          "❌ “Um enfeite do texto, que não muda o sentido da frase” não é a resposta. O vocativo (nome de quem é chamado) precisa ficar separado por vírgula do resto da frase.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Pedro' é quem está sendo chamado, por isso vem isolado por vírgula logo no início.",
         feedbackErro: "O vocativo (nome de quem é chamado) precisa ficar separado por vírgula do resto da frase.",
         dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
@@ -352,10 +412,17 @@ export const aula04: AulaPortuguesV4 = {
         pergunta: "4/5 — 'Que descoberta incrível!' usa qual sinal e por quê?",
         opcoes: [
           "Interrogação, porque é uma pergunta",
+          "É preciso decorar o texto inteiro de cor",
           "Exclamação, porque mostra emoção forte",
           "Vírgula, porque separa uma lista",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Interrogação, porque é uma pergunta” não é a resposta. Quando a frase expressa emoção forte, surpresa ou ordem, usamos o ponto de exclamação (!).",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Quando a frase expressa emoção forte, surpresa ou ordem, usamos o ponto de exclamação (!).",
+          null,
+          "❌ “Vírgula, porque separa uma lista” não é a resposta. Quando a frase expressa emoção forte, surpresa ou ordem, usamos o ponto de exclamação (!).",
+        ],
         feedbackAcerto: "🎉 Exatamente! A exclamação (!) marca a emoção de surpresa e empolgação da frase.",
         feedbackErro: "Quando a frase expressa emoção forte, surpresa ou ordem, usamos o ponto de exclamação (!).",
         dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
@@ -367,8 +434,15 @@ export const aula04: AulaPortuguesV4 = {
           "Separar itens de uma lista",
           "Marcar o início da fala do personagem",
           "Fechar a frase de forma calma",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Separar itens de uma lista” não é a resposta. No discurso direto, o travessão (—) indica que ali começa a fala de alguém.",
+          null,
+          "❌ “Fechar a frase de forma calma” não é a resposta. No discurso direto, o travessão (—) indica que ali começa a fala de alguém.",
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. No discurso direto, o travessão (—) indica que ali começa a fala de alguém.",
+        ],
         feedbackAcerto: "🎉 Isso! O travessão marca onde começa a fala de cada personagem no diálogo.",
         feedbackErro: "No discurso direto, o travessão (—) indica que ali começa a fala de alguém.",
         dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",

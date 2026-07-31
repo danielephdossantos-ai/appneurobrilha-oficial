@@ -222,6 +222,33 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Um fato e uma opinião",
+        comando: "Escreva um parágrafo com DOIS fatos (que dá para provar) e UMA opinião sua. No fim, marque qual frase é a opinião.",
+        linhas: 4,
+        modelo: [
+          "A escola tem 12 salas.",
+          "As aulas começam às 7h.",
+          "Eu acho o recreio curto demais.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "FATO é algo que aconteceu de verdade e pode ser checado (números, datas, horários, nomes).",
@@ -250,10 +277,17 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "1/5 — O que é um FATO?",
         opcoes: [
           "Algo que aconteceu e pode ser comprovado",
+          "Tudo o que sai no jornal é sempre opinião de alguém",
           "Algo que alguém inventou",
           "Uma preferência pessoal",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Tudo o que sai no jornal é sempre opinião de alguém” não é a resposta. Fato é o que realmente aconteceu e pode ser checado.",
+          "❌ “Algo que alguém inventou” não é a resposta. Fato é o que realmente aconteceu e pode ser checado.",
+          "❌ “Uma preferência pessoal” não é a resposta. Fato é o que realmente aconteceu e pode ser checado.",
+        ],
         feedbackAcerto: "🎉 Isso! Fato é comprovável.",
         feedbackErro: "Fato é o que realmente aconteceu e pode ser checado.",
         dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
@@ -261,8 +295,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — 'Eu acho que...' é uma marca de:",
-        opcoes: ["Fato", "Opinião", "Título"],
-        correta: 1,
+        opcoes: [
+          "Fato",
+          "É preciso decorar o texto inteiro de cor",
+          "Opinião",
+          "Título",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Fato” não é a resposta. Essa expressão mostra o que a pessoa PENSA — é opinião.",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Essa expressão mostra o que a pessoa PENSA — é opinião.",
+          null,
+          "❌ “Título” não é a resposta. Essa expressão mostra o que a pessoa PENSA — é opinião.",
+        ],
         feedbackAcerto: "🎉 Correto! 'Eu acho' sempre indica opinião.",
         feedbackErro: "Essa expressão mostra o que a pessoa PENSA — é opinião.",
         dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
@@ -270,8 +315,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — 'O jogo terminou às 16h30' é:",
-        opcoes: ["Fato", "Opinião", "Nem um nem outro"],
+        opcoes: [
+          "Fato",
+          "Opinião",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Nem um nem outro",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Opinião” não é a resposta. Horário pode ser comprovado no relógio — é FATO.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Horário pode ser comprovado no relógio — é FATO.",
+          "❌ “Nem um nem outro” não é a resposta. Horário pode ser comprovado no relógio — é FATO.",
+        ],
         feedbackAcerto: "🎉 Isso! Horário é checável — FATO.",
         feedbackErro: "Horário pode ser comprovado no relógio — é FATO.",
         dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
@@ -282,9 +338,16 @@ export const aula02: AulaPortuguesV4 = {
         opcoes: [
           "'A escola fica na rua das Flores.'",
           "'Esse foi o pior filme que eu já vi.'",
+          "Tudo o que sai no jornal é sempre opinião de alguém",
           "'A turma tem 25 alunos.'",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “'A escola fica na rua das Flores.'” não é a resposta. As outras trazem dados checáveis. A com 'pior' é opinião.",
+          null,
+          "❌ “Tudo o que sai no jornal é sempre opinião de alguém” não é a resposta. As outras trazem dados checáveis. A com 'pior' é opinião.",
+          "❌ “'A turma tem 25 alunos.'” não é a resposta. As outras trazem dados checáveis. A com 'pior' é opinião.",
+        ],
         feedbackAcerto: "🎉 Isso! 'O pior' é julgamento pessoal.",
         feedbackErro: "As outras trazem dados checáveis. A com 'pior' é opinião.",
         dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",
@@ -293,11 +356,18 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "5/5 — Por que é importante saber diferenciar fato de opinião?",
         opcoes: [
+          "Tudo o que sai no jornal é sempre opinião de alguém",
           "Para não confundir o que é verdade com o que é só a ideia de alguém",
           "Para escrever textos mais longos",
           "Não é importante",
         ],
-        correta: 0,
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Tudo o que sai no jornal é sempre opinião de alguém” não é a resposta. Saber separar fato de opinião ajuda a não confundir verdade com achismo.",
+          null,
+          "❌ “Para escrever textos mais longos” não é a resposta. Saber separar fato de opinião ajuda a não confundir verdade com achismo.",
+          "❌ “Não é importante” não é a resposta. Saber separar fato de opinião ajuda a não confundir verdade com achismo.",
+        ],
         feedbackAcerto: "🎉 Exatamente! Isso ajuda a entender melhor notícias e depoimentos.",
         feedbackErro: "Saber separar fato de opinião ajuda a não confundir verdade com achismo.",
         dica: "🔎 Pista: lembre do que significa “fato” — É algo que realmente aconteceu e pode ser comprovado. Não muda dependendo de quem fala. Use isso para eliminar as alternativas que não combinam.",

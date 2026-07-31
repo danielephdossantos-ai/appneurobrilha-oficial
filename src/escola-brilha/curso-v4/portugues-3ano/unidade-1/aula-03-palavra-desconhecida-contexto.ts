@@ -223,6 +223,33 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Esconda uma palavra difícil no texto",
+        comando: "Escreva um parágrafo curto usando UMA palavra difícil. Nas frases ao redor, deixe pistas para o leitor descobrir o que ela significa.",
+        linhas: 4,
+        modelo: [
+          "O cachorro estava esbaforido depois da corrida.",
+          "Ele ofegava, com a língua para fora.",
+          "Só sossegou quando bebeu água.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Antes de correr para o dicionário, tente usar o CONTEXTO — as pistas ao redor da palavra.",
@@ -252,9 +279,16 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: [
           "Ignorar a palavra e pular",
           "Usar as pistas das frases ao redor para deduzir o significado",
+          "Pular a palavra difícil e seguir lendo sem entender",
           "Perguntar para outra pessoa sempre",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Ignorar a palavra e pular” não é a resposta. Usar o contexto é observar as frases ao redor da palavra para descobrir o significado.",
+          null,
+          "❌ “Pular a palavra difícil e seguir lendo sem entender” não é a resposta. Usar o contexto é observar as frases ao redor da palavra para descobrir o significado.",
+          "❌ “Perguntar para outra pessoa sempre” não é a resposta. Usar o contexto é observar as frases ao redor da palavra para descobrir o significado.",
+        ],
         feedbackAcerto: "🔎 Isso!",
         feedbackErro: "Usar o contexto é observar as frases ao redor da palavra para descobrir o significado.",
         dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
@@ -262,8 +296,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — No texto da raposa, qual pista ajudou a entender 'astuta'?",
-        opcoes: ["'plano cheio de esperteza'", "'no fundo do quintal'", "'pegadas estranhas'"],
+        opcoes: [
+          "'plano cheio de esperteza'",
+          "'no fundo do quintal'",
+          "'pegadas estranhas'",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “'no fundo do quintal'” não é a resposta. A pista mais direta foi 'plano cheio de esperteza', ligada à ideia de astúcia.",
+          "❌ “'pegadas estranhas'” não é a resposta. A pista mais direta foi 'plano cheio de esperteza', ligada à ideia de astúcia.",
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. A pista mais direta foi 'plano cheio de esperteza', ligada à ideia de astúcia.",
+        ],
         feedbackAcerto: "🔎 Correto!",
         feedbackErro: "A pista mais direta foi 'plano cheio de esperteza', ligada à ideia de astúcia.",
         dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
@@ -271,8 +316,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual é um sinônimo de 'astuta' usado no próprio texto?",
-        opcoes: ["Esperteza", "Preguiça", "Fraqueza"],
+        opcoes: [
+          "Esperteza",
+          "Preguiça",
+          "Fraqueza",
+          "Nenhuma dessas ideias combina com o que o texto mostra",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Preguiça” não é a resposta. O texto usa 'esperteza' para descrever a mesma qualidade de 'astuta'.",
+          "❌ “Fraqueza” não é a resposta. O texto usa 'esperteza' para descrever a mesma qualidade de 'astuta'.",
+          "❌ “Nenhuma dessas ideias combina com o que o texto mostra” não é a resposta. O texto usa 'esperteza' para descrever a mesma qualidade de 'astuta'.",
+        ],
         feedbackAcerto: "🔎 Isso mesmo!",
         feedbackErro: "O texto usa 'esperteza' para descrever a mesma qualidade de 'astuta'.",
         dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
@@ -280,8 +336,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — No texto do mapa, o que significa 'ENIGMÁTICO' pelo contexto?",
-        opcoes: ["Misterioso e difícil de entender", "Colorido e alegre", "Rápido e leve"],
+        opcoes: [
+          "Misterioso e difícil de entender",
+          "Colorido e alegre",
+          "Pular a palavra difícil e seguir lendo sem entender",
+          "Rápido e leve",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Colorido e alegre” não é a resposta. As pistas do texto (símbolos estranhos, setas confusas) mostram que é algo misterioso.",
+          "❌ “Pular a palavra difícil e seguir lendo sem entender” não é a resposta. As pistas do texto (símbolos estranhos, setas confusas) mostram que é algo misterioso.",
+          "❌ “Rápido e leve” não é a resposta. As pistas do texto (símbolos estranhos, setas confusas) mostram que é algo misterioso.",
+        ],
         feedbackAcerto: "🔎 Isso!",
         feedbackErro: "As pistas do texto (símbolos estranhos, setas confusas) mostram que é algo misterioso.",
         dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
@@ -292,9 +359,16 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: [
           "Reler as frases ao redor da palavra",
           "Fechar o livro",
+          "Pular a palavra difícil e seguir lendo sem entender",
           "Trocar de assunto",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Fechar o livro” não é a resposta. É preciso reler as frases ao redor para juntar pistas antes de arriscar um significado.",
+          "❌ “Pular a palavra difícil e seguir lendo sem entender” não é a resposta. É preciso reler as frases ao redor para juntar pistas antes de arriscar um significado.",
+          "❌ “Trocar de assunto” não é a resposta. É preciso reler as frases ao redor para juntar pistas antes de arriscar um significado.",
+        ],
         feedbackAcerto: "🔎 Isso! Terceira pista do clube resolvida! 🌟",
         feedbackErro: "É preciso reler as frases ao redor para juntar pistas antes de arriscar um significado.",
         dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",

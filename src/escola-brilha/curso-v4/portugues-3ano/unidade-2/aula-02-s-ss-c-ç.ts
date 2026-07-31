@@ -256,6 +256,33 @@ export const aula2: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo com o mesmo som",
+        comando: "Escreva um parágrafo usando quatro palavras com o som /s/ escritas de jeitos diferentes: com S, SS, C e Ç.",
+        linhas: 4,
+        modelo: [
+          "No almoço tem sopa.",
+          "A massa ficou pronta cedo.",
+          "Sobrou espaço na mesa.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: entre vogais, S sozinho soa Z (casa); SS dobrado soa S (passo).",
@@ -277,8 +304,19 @@ export const aula2: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Que som tem o S sozinho entre vogais, como em CASA?",
-        opcoes: ["Som de Z", "Som de S", "Som de J"],
-        correta: 0,
+        opcoes: [
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "Som de Z",
+          "Som de S",
+          "Som de J",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Lembre: entre vogais, S sozinho soa como Z.",
+          null,
+          "❌ “Som de S” não é a resposta. Lembre: entre vogais, S sozinho soa como Z.",
+          "❌ “Som de J” não é a resposta. Lembre: entre vogais, S sozinho soa como Z.",
+        ],
         feedbackAcerto: "🎉 Isso! S sozinho entre vogais soa Z.",
         feedbackErro: "Lembre: entre vogais, S sozinho soa como Z.",
         dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
@@ -286,8 +324,19 @@ export const aula2: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Que letras usamos para o som de S de verdade entre vogais?",
-        opcoes: ["S sozinho", "SS dobrado", "Ç"],
+        opcoes: [
+          "S sozinho",
+          "SS dobrado",
+          "Ç",
+          "É preciso decorar o texto inteiro de cor",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “S sozinho” não é a resposta. Entre vogais, o som de S de verdade precisa do SS dobrado.",
+          null,
+          "❌ “Ç” não é a resposta. Entre vogais, o som de S de verdade precisa do SS dobrado.",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Entre vogais, o som de S de verdade precisa do SS dobrado.",
+        ],
         feedbackAcerto: "🎉 Correto! SS dobrado dá o som de S de verdade.",
         feedbackErro: "Entre vogais, o som de S de verdade precisa do SS dobrado.",
         dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
@@ -295,8 +344,19 @@ export const aula2: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Antes de quais letras aparece o Ç?",
-        opcoes: ["E ou I", "A, O ou U", "Qualquer vogal"],
+        opcoes: [
+          "E ou I",
+          "A, O ou U",
+          "Qualquer vogal",
+          "Usar Ç antes das letras E e I",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “E ou I” não é a resposta. Lembre: o Ç combina só com A, O e U.",
+          null,
+          "❌ “Qualquer vogal” não é a resposta. Lembre: o Ç combina só com A, O e U.",
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. Lembre: o Ç combina só com A, O e U.",
+        ],
         feedbackAcerto: "🎉 Isso! Ç só aparece antes de A, O ou U.",
         feedbackErro: "Lembre: o Ç combina só com A, O e U.",
         dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
@@ -308,8 +368,15 @@ export const aula2: AulaPortuguesV4 = {
           "Porque o C antes de E já soa S",
           "Porque a palavra é curta",
           "Porque não tem regra",
+          "Usar Ç antes das letras E e I",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque a palavra é curta” não é a resposta. Lembre: antes de E ou I, o C já soa S sozinho.",
+          "❌ “Porque não tem regra” não é a resposta. Lembre: antes de E ou I, o C já soa S sozinho.",
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. Lembre: antes de E ou I, o C já soa S sozinho.",
+        ],
         feedbackAcerto: "🎉 Isso! C antes de E ou I já soa S, sem cedilha.",
         feedbackErro: "Lembre: antes de E ou I, o C já soa S sozinho.",
         dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",
@@ -317,8 +384,19 @@ export const aula2: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Qual palavra usa SS corretamente para dar o som de S entre vogais?",
-        opcoes: ["Passo", "Casa", "Moça"],
+        opcoes: [
+          "Passo",
+          "Casa",
+          "Moça",
+          "Usar Ç antes das letras E e I",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Casa” não é a resposta. Pense em qual palavra precisa do S dobrado para soar S entre vogais.",
+          "❌ “Moça” não é a resposta. Pense em qual palavra precisa do S dobrado para soar S entre vogais.",
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. Pense em qual palavra precisa do S dobrado para soar S entre vogais.",
+        ],
         feedbackAcerto: "🎉 Caso encerrado! PASSO usa SS porque o som de S está entre vogais.",
         feedbackErro: "Pense em qual palavra precisa do S dobrado para soar S entre vogais.",
         dica: "🔎 Pista: lembre do que significa “casa” — Quando o S está SOZINHO entre duas vogais, ele soa como Z, não como S. Use isso para eliminar as alternativas que não combinam.",

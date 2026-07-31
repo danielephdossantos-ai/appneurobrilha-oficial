@@ -232,6 +232,33 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "O relatório do detetive",
+        comando: "Escreva a conclusão de um caso: diga O QUE você descobriu e explique com DUAS pistas que provam a sua conclusão.",
+        linhas: 4,
+        modelo: [
+          "Eu concluí que foi o meu irmão quem comeu o bolo.",
+          "A primeira pista foi o prato na pia.",
+          "A segunda pista foi a migalha na camiseta dele.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Localizar informação explícita: a resposta está escrita, só precisamos voltar ao texto.",
@@ -259,8 +286,19 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Qual pista fez Aurora suspeitar de um funcionário da limpeza?",
-        opcoes: ["O tecido azul preso na farpa da janela", "O tamanho do museu", "A cor da vitrine"],
+        opcoes: [
+          "O tecido azul preso na farpa da janela",
+          "O tamanho do museu",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
+          "A cor da vitrine",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “O tamanho do museu” não é a resposta. A pista era o pedacinho de tecido azul, ligado ao uniforme da limpeza.",
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. A pista era o pedacinho de tecido azul, ligado ao uniforme da limpeza.",
+          "❌ “A cor da vitrine” não é a resposta. A pista era o pedacinho de tecido azul, ligado ao uniforme da limpeza.",
+        ],
         feedbackAcerto: "🏆 Isso! O tecido azul era do uniforme dos funcionários da limpeza.",
         feedbackErro: "A pista era o pedacinho de tecido azul, ligado ao uniforme da limpeza.",
         dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
@@ -269,11 +307,18 @@ export const aula04: AulaPortuguesV4 = {
       {
         pergunta: "2/5 — Qual é a ideia principal do relatório inicial do museu?",
         opcoes: [
+          "Um detalhe pequeno que aparece só uma vez no texto",
           "As pistas indicam que alguém entrou de noite e levou o diamante",
           "O relógio da sala é antigo",
           "O museu foi pintado recentemente",
         ],
-        correta: 0,
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. A ideia central junta as pistas para explicar o sumiço do diamante durante a noite.",
+          null,
+          "❌ “O relógio da sala é antigo” não é a resposta. A ideia central junta as pistas para explicar o sumiço do diamante durante a noite.",
+          "❌ “O museu foi pintado recentemente” não é a resposta. A ideia central junta as pistas para explicar o sumiço do diamante durante a noite.",
+        ],
         feedbackAcerto: "🏆 Correto!",
         feedbackErro: "A ideia central junta as pistas para explicar o sumiço do diamante durante a noite.",
         dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
@@ -281,8 +326,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — O que significa a palavra 'vestígio', usada no relatório?",
-        opcoes: ["Um sinal ou marca que ajuda a reconstruir o que aconteceu", "Um tipo de joia", "Um horário exato"],
+        opcoes: [
+          "Um sinal ou marca que ajuda a reconstruir o que aconteceu",
+          "Um tipo de joia",
+          "Pular a palavra difícil e seguir lendo sem entender",
+          "Um horário exato",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Um tipo de joia” não é a resposta. Vestígio é um sinal deixado por alguém, que ajuda a entender o que aconteceu — como o pedaço de tecido.",
+          "❌ “Pular a palavra difícil e seguir lendo sem entender” não é a resposta. Vestígio é um sinal deixado por alguém, que ajuda a entender o que aconteceu — como o pedaço de tecido.",
+          "❌ “Um horário exato” não é a resposta. Vestígio é um sinal deixado por alguém, que ajuda a entender o que aconteceu — como o pedaço de tecido.",
+        ],
         feedbackAcerto: "🏆 Isso!",
         feedbackErro: "Vestígio é um sinal deixado por alguém, que ajuda a entender o que aconteceu — como o pedaço de tecido.",
         dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
@@ -293,9 +349,16 @@ export const aula04: AulaPortuguesV4 = {
         opcoes: [
           "Porque o texto não afirma isso com todas as letras, é uma conclusão baseada em pistas",
           "Porque ela adivinhou sem nenhuma pista",
-          "Porque não havia pistas nenhuma"
+          "Porque não havia pistas nenhuma",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque ela adivinhou sem nenhuma pista” não é a resposta. Inferir é concluir com base em pistas, mesmo sem o texto afirmar isso diretamente — por isso não é uma 'prova', é uma dedução.",
+          "❌ “Porque não havia pistas nenhuma” não é a resposta. Inferir é concluir com base em pistas, mesmo sem o texto afirmar isso diretamente — por isso não é uma 'prova', é uma dedução.",
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. Inferir é concluir com base em pistas, mesmo sem o texto afirmar isso diretamente — por isso não é uma 'prova', é uma dedução.",
+        ],
         feedbackAcerto: "🏆 Exatamente! Inferir é diferente de ter certeza absoluta — é uma conclusão bem fundamentada em pistas.",
         feedbackErro: "Inferir é concluir com base em pistas, mesmo sem o texto afirmar isso diretamente — por isso não é uma 'prova', é uma dedução.",
         dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
@@ -303,8 +366,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Quem confessou ter levado o diamante?",
-        opcoes: ["Caio, um funcionário novo da limpeza", "O Sr. Osvaldo, o vigia", "Aurora"],
+        opcoes: [
+          "Caio, um funcionário novo da limpeza",
+          "O Sr. Osvaldo, o vigia",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Aurora",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “O Sr. Osvaldo, o vigia” não é a resposta. O texto diz claramente: 'ele tinha visto o diamante... e acabou fugindo com a peça' — o funcionário era Caio.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. O texto diz claramente: 'ele tinha visto o diamante... e acabou fugindo com a peça' — o funcionário era Caio.",
+          "❌ “Aurora” não é a resposta. O texto diz claramente: 'ele tinha visto o diamante... e acabou fugindo com a peça' — o funcionário era Caio.",
+        ],
         feedbackAcerto: "🏆 Isso! Caso resolvido — você agora é um Detetive Iniciante da Palavra! 🌟",
         feedbackErro: "O texto diz claramente: 'ele tinha visto o diamante... e acabou fugindo com a peça' — o funcionário era Caio.",
         dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",

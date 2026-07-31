@@ -237,6 +237,33 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva a sua notícia",
+        comando: "Escreva uma notícia curta sobre algo que aconteceu na sua escola. Responda: QUEM, O QUÊ, QUANDO e ONDE.",
+        linhas: 4,
+        modelo: [
+          "Alunos do 3º ano criaram uma horta.",
+          "Aconteceu na quarta-feira.",
+          "Foi no pátio da escola.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "MANCHETE é o título que resume o fato e chama atenção.",
@@ -259,8 +286,19 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Para que serve uma notícia?",
-        opcoes: ["Para contar uma fábula", "Para informar um fato real", "Para ensinar uma receita"],
-        correta: 1,
+        opcoes: [
+          "A opinião pessoal do repórter sobre o que aconteceu",
+          "Para contar uma fábula",
+          "Para informar um fato real",
+          "Para ensinar uma receita",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “A opinião pessoal do repórter sobre o que aconteceu” não é a resposta. Notícia não inventa história — ela INFORMA o que aconteceu de verdade.",
+          "❌ “Para contar uma fábula” não é a resposta. Notícia não inventa história — ela INFORMA o que aconteceu de verdade.",
+          null,
+          "❌ “Para ensinar uma receita” não é a resposta. Notícia não inventa história — ela INFORMA o que aconteceu de verdade.",
+        ],
         feedbackAcerto: "🎉 Isso! Notícia serve para INFORMAR fatos reais.",
         feedbackErro: "Notícia não inventa história — ela INFORMA o que aconteceu de verdade.",
         dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
@@ -268,8 +306,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — A manchete é...",
-        opcoes: ["O título que resume o fato", "O nome do jornal", "A última frase do texto"],
-        correta: 0,
+        opcoes: [
+          "A opinião pessoal do repórter sobre o que aconteceu",
+          "O título que resume o fato",
+          "O nome do jornal",
+          "A última frase do texto",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “A opinião pessoal do repórter sobre o que aconteceu” não é a resposta. Pense no que vem primeiro, em letras grandes, no topo da notícia: a manchete.",
+          null,
+          "❌ “O nome do jornal” não é a resposta. Pense no que vem primeiro, em letras grandes, no topo da notícia: a manchete.",
+          "❌ “A última frase do texto” não é a resposta. Pense no que vem primeiro, em letras grandes, no topo da notícia: a manchete.",
+        ],
         feedbackAcerto: "🎉 Correto! Manchete é o título que resume e chama atenção.",
         feedbackErro: "Pense no que vem primeiro, em letras grandes, no topo da notícia: a manchete.",
         dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
@@ -277,8 +326,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — O lide responde a quantas perguntas principais?",
-        opcoes: ["Duas", "Cinco (quem, o quê, quando, onde, por quê)", "Nenhuma"],
-        correta: 1,
+        opcoes: [
+          "A opinião pessoal do repórter sobre o que aconteceu",
+          "Duas",
+          "Cinco (quem, o quê, quando, onde, por quê)",
+          "Nenhuma",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “A opinião pessoal do repórter sobre o que aconteceu” não é a resposta. Conte: quem, o quê, quando, onde, por quê — são cinco.",
+          "❌ “Duas” não é a resposta. Conte: quem, o quê, quando, onde, por quê — são cinco.",
+          null,
+          "❌ “Nenhuma” não é a resposta. Conte: quem, o quê, quando, onde, por quê — são cinco.",
+        ],
         feedbackAcerto: "🎉 Isso! São CINCO perguntas no lide.",
         feedbackErro: "Conte: quem, o quê, quando, onde, por quê — são cinco.",
         dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
@@ -286,8 +346,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — No caso do gato, QUEM resgatou o animal?",
-        opcoes: ["A repórter Ana", "O bombeiro Marcos", "Dona Célia"],
-        correta: 1,
+        opcoes: [
+          "A repórter Ana",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "O bombeiro Marcos",
+          "Dona Célia",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “A repórter Ana” não é a resposta. Releia: quem subiu na escada com cuidado?",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Releia: quem subiu na escada com cuidado?",
+          null,
+          "❌ “Dona Célia” não é a resposta. Releia: quem subiu na escada com cuidado?",
+        ],
         feedbackAcerto: "🎉 Isso mesmo, o bombeiro Marcos subiu na escada e resgatou.",
         feedbackErro: "Releia: quem subiu na escada com cuidado?",
         dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
@@ -295,8 +366,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Uma boa notícia deve contar...",
-        opcoes: ["Só o que o repórter imaginou", "Fatos verdadeiros e checados", "Segredos de outras pessoas"],
+        opcoes: [
+          "Só o que o repórter imaginou",
+          "Fatos verdadeiros e checados",
+          "Segredos de outras pessoas",
+          "A opinião pessoal do repórter sobre o que aconteceu",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Só o que o repórter imaginou” não é a resposta. Notícia não é invenção — precisa ser um FATO verdadeiro.",
+          null,
+          "❌ “Segredos de outras pessoas” não é a resposta. Notícia não é invenção — precisa ser um FATO verdadeiro.",
+          "❌ “A opinião pessoal do repórter sobre o que aconteceu” não é a resposta. Notícia não é invenção — precisa ser um FATO verdadeiro.",
+        ],
         feedbackAcerto: "🎉 Muito bem! Notícia de verdade conta FATOS reais e conferidos.",
         feedbackErro: "Notícia não é invenção — precisa ser um FATO verdadeiro.",
         dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",

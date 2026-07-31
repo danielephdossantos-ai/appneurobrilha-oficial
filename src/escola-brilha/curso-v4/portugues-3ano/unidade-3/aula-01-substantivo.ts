@@ -286,6 +286,33 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo cheio de substantivos",
+        comando: "Descreva a sua sala em um parágrafo. Depois, sublinhe (ou escreva no fim) três SUBSTANTIVOS que você usou.",
+        linhas: 4,
+        modelo: [
+          "Na minha sala tem uma mesa grande.",
+          "Em cima dela fica o caderno.",
+          "A janela mostra a rua.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "SUBSTANTIVO é a palavra que nomeia pessoas, animais, lugares e objetos.",
@@ -309,11 +336,18 @@ export const aula01: AulaPortuguesV4 = {
       {
         pergunta: "1/5 — O que é um substantivo?",
         opcoes: [
+          "Uma palavra que indica ação, como correr e pular",
           "Uma palavra que nomeia pessoas, lugares, animais ou coisas",
           "Uma palavra que só serve pra contar números",
           "Um sinal de pontuação",
         ],
-        correta: 0,
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que indica ação, como correr e pular” não é a resposta. Substantivo NOMEIA seres, lugares e coisas — é a base de toda frase.",
+          null,
+          "❌ “Uma palavra que só serve pra contar números” não é a resposta. Substantivo NOMEIA seres, lugares e coisas — é a base de toda frase.",
+          "❌ “Um sinal de pontuação” não é a resposta. Substantivo NOMEIA seres, lugares e coisas — é a base de toda frase.",
+        ],
         feedbackAcerto: "🎉 Isso! Substantivo é a palavra que NOMEIA.",
         feedbackErro: "Substantivo NOMEIA seres, lugares e coisas — é a base de toda frase.",
         dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
@@ -321,8 +355,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual é um substantivo PRÓPRIO?",
-        opcoes: ["cidade", "São Paulo", "rua"],
+        opcoes: [
+          "cidade",
+          "São Paulo",
+          "rua",
+          "Uma palavra que indica ação, como correr e pular",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “cidade” não é a resposta. Próprio = nome específico com maiúscula. 'São Paulo' nomeia UMA cidade só.",
+          null,
+          "❌ “rua” não é a resposta. Próprio = nome específico com maiúscula. 'São Paulo' nomeia UMA cidade só.",
+          "❌ “Uma palavra que indica ação, como correr e pular” não é a resposta. Próprio = nome específico com maiúscula. 'São Paulo' nomeia UMA cidade só.",
+        ],
         feedbackAcerto: "🎉 São Paulo é o nome específico de uma cidade!",
         feedbackErro: "Próprio = nome específico com maiúscula. 'São Paulo' nomeia UMA cidade só.",
         dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
@@ -330,8 +375,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual frase está no PLURAL?",
-        opcoes: ["O gato dorme.", "Os gatos dormem.", "A gata dorme."],
+        opcoes: [
+          "O gato dorme.",
+          "Os gatos dormem.",
+          "A gata dorme.",
+          "É preciso decorar o texto inteiro de cor",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “O gato dorme.” não é a resposta. Plural é mais de um. Procure a palavra com 'S' no final: gatoS.",
+          null,
+          "❌ “A gata dorme.” não é a resposta. Plural é mais de um. Procure a palavra com 'S' no final: gatoS.",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Plural é mais de um. Procure a palavra com 'S' no final: gatoS.",
+        ],
         feedbackAcerto: "🎉 'Gatos' com S indica mais de um gato — plural!",
         feedbackErro: "Plural é mais de um. Procure a palavra com 'S' no final: gatoS.",
         dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
@@ -339,8 +395,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — No relatório do Caso do Cachorro, qual é o substantivo comum?",
-        opcoes: ["Rex", "Ana", "praça"],
-        correta: 2,
+        opcoes: [
+          "Rex",
+          "Ana",
+          "Uma palavra que indica ação, como correr e pular",
+          "praça",
+        ],
+        correta: 3,
+        feedbackOpcoes: [
+          "❌ “Rex” não é a resposta. Rex e Ana são nomes específicos (próprios). 'Praça' serve pra qualquer praça — é comum.",
+          "❌ “Ana” não é a resposta. Rex e Ana são nomes específicos (próprios). 'Praça' serve pra qualquer praça — é comum.",
+          "❌ “Uma palavra que indica ação, como correr e pular” não é a resposta. Rex e Ana são nomes específicos (próprios). 'Praça' serve pra qualquer praça — é comum.",
+          null,
+        ],
         feedbackAcerto: "🎉 'Praça' é substantivo comum — nomeia um tipo de lugar, não um lugar específico com nome próprio.",
         feedbackErro: "Rex e Ana são nomes específicos (próprios). 'Praça' serve pra qualquer praça — é comum.",
         dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
@@ -351,9 +418,16 @@ export const aula01: AulaPortuguesV4 = {
         opcoes: [
           "Só pessoas",
           "Pessoas, animais, lugares, objetos e sentimentos",
+          "Uma palavra que indica ação, como correr e pular",
           "Só ações",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Só pessoas” não é a resposta. Substantivo nomeia bem mais que pessoas: animais, lugares, objetos e até sentimentos (alegria, medo).",
+          null,
+          "❌ “Uma palavra que indica ação, como correr e pular” não é a resposta. Substantivo nomeia bem mais que pessoas: animais, lugares, objetos e até sentimentos (alegria, medo).",
+          "❌ “Só ações” não é a resposta. Substantivo nomeia bem mais que pessoas: animais, lugares, objetos e até sentimentos (alegria, medo).",
+        ],
         feedbackAcerto: "🎉 Isso! Substantivo é a classe de palavra mais ampla — nomeia quase tudo que existe.",
         feedbackErro: "Substantivo nomeia bem mais que pessoas: animais, lugares, objetos e até sentimentos (alegria, medo).",
         dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",

@@ -271,6 +271,33 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo de ação",
+        comando: "Escreva um parágrafo contando o que você fez ontem. Use pelo menos quatro VERBOS no passado.",
+        linhas: 4,
+        modelo: [
+          "Ontem eu acordei cedo.",
+          "Tomei café e estudei.",
+          "Depois joguei bola na rua.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "VERBO é a palavra que indica AÇÃO ou ESTADO.",
@@ -296,9 +323,16 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: [
           "Uma palavra que nomeia algo",
           "Uma palavra que indica ação ou estado",
+          "Uma palavra que só descreve como a pessoa ou a coisa é",
           "Uma palavra que descreve características",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que nomeia algo” não é a resposta. Verbo é a palavra da AÇÃO: correr, investigar, ser, estar.",
+          null,
+          "❌ “Uma palavra que só descreve como a pessoa ou a coisa é” não é a resposta. Verbo é a palavra da AÇÃO: correr, investigar, ser, estar.",
+          "❌ “Uma palavra que descreve características” não é a resposta. Verbo é a palavra da AÇÃO: correr, investigar, ser, estar.",
+        ],
         feedbackAcerto: "🎉 Isso! Verbo indica AÇÃO ou ESTADO.",
         feedbackErro: "Verbo é a palavra da AÇÃO: correr, investigar, ser, estar.",
         dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
@@ -306,8 +340,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — 'O detetive investigou o caso' está em que tempo?",
-        opcoes: ["Passado", "Presente", "Futuro"],
+        opcoes: [
+          "Passado",
+          "Presente",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Futuro",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Presente” não é a resposta. 'Investigou' terminando em -OU é sinal de passado.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. 'Investigou' terminando em -OU é sinal de passado.",
+          "❌ “Futuro” não é a resposta. 'Investigou' terminando em -OU é sinal de passado.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Investigou' mostra ação já concluída — passado.",
         feedbackErro: "'Investigou' terminando em -OU é sinal de passado.",
         dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
@@ -315,8 +360,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — 'Ela investigará o caso amanhã' está em que tempo?",
-        opcoes: ["Passado", "Presente", "Futuro"],
+        opcoes: [
+          "Passado",
+          "Presente",
+          "Futuro",
+          "Nenhuma dessas ideias combina com o que o texto mostra",
+        ],
         correta: 2,
+        feedbackOpcoes: [
+          "❌ “Passado” não é a resposta. Verbos terminados em -RÁ geralmente indicam futuro.",
+          "❌ “Presente” não é a resposta. Verbos terminados em -RÁ geralmente indicam futuro.",
+          null,
+          "❌ “Nenhuma dessas ideias combina com o que o texto mostra” não é a resposta. Verbos terminados em -RÁ geralmente indicam futuro.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Investigará' + 'amanhã' indicam futuro.",
         feedbackErro: "Verbos terminados em -RÁ geralmente indicam futuro.",
         dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
@@ -324,8 +380,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Qual verbo está no PRESENTE?",
-        opcoes: ["correu", "corre", "correrá"],
-        correta: 1,
+        opcoes: [
+          "correu",
+          "Uma palavra que só descreve como a pessoa ou a coisa é",
+          "corre",
+          "correrá",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “correu” não é a resposta. Presente é o que acontece AGORA — 'corre', sem terminação de passado ou futuro.",
+          "❌ “Uma palavra que só descreve como a pessoa ou a coisa é” não é a resposta. Presente é o que acontece AGORA — 'corre', sem terminação de passado ou futuro.",
+          null,
+          "❌ “correrá” não é a resposta. Presente é o que acontece AGORA — 'corre', sem terminação de passado ou futuro.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Corre' mostra a ação acontecendo agora.",
         feedbackErro: "Presente é o que acontece AGORA — 'corre', sem terminação de passado ou futuro.",
         dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",
@@ -337,8 +404,15 @@ export const aula03: AulaPortuguesV4 = {
           "Não é importante",
           "Ajuda quem lê a entender quando cada fato aconteceu",
           "Serve só pra enfeitar o texto",
+          "Um texto inventado, com personagens mágicos",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Não é importante” não é a resposta. Sem o tempo verbal certo, fica difícil saber se algo já aconteceu, acontece agora ou vai acontecer.",
+          null,
+          "❌ “Serve só pra enfeitar o texto” não é a resposta. Sem o tempo verbal certo, fica difícil saber se algo já aconteceu, acontece agora ou vai acontecer.",
+          "❌ “Um texto inventado, com personagens mágicos” não é a resposta. Sem o tempo verbal certo, fica difícil saber se algo já aconteceu, acontece agora ou vai acontecer.",
+        ],
         feedbackAcerto: "🎉 Exatamente! O tempo verbal organiza a história pra quem lê entender a ordem dos fatos.",
         feedbackErro: "Sem o tempo verbal certo, fica difícil saber se algo já aconteceu, acontece agora ou vai acontecer.",
         dica: "🔎 Pista: lembre do que significa “verbo” — É a palavra que indica AÇÃO (correr, investigar) ou ESTADO (estar, ser). Toda frase de ação tem um verbo. Use isso para eliminar as alternativas que não combinam.",

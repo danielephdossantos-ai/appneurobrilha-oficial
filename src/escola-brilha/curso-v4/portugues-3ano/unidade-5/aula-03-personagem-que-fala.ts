@@ -170,6 +170,32 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Diálogo com travessão",
+        comando: "Escreva uma cena com duas falas, usando TRAVESSÃO em cada fala e dizendo quem falou.",
+        linhas: 4,
+        modelo: [
+          "— Achei a pista! — gritou Brilha.",
+          "— Onde estava? — perguntou Aurora.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "O travessão (—) marca a fala direta de um personagem.",
@@ -190,23 +216,78 @@ export const aula03: AulaPortuguesV4 = {
 
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "1/5 — Qual sinal marca a fala direta de um personagem?", opcoes: ["Ponto de interrogação", "Travessão (—)", "Vírgula"], correta: 1, feedbackAcerto: "💬 Isso!", feedbackErro: "O sinal é o TRAVESSÃO (—).",
+      { pergunta: "1/5 — Qual sinal marca a fala direta de um personagem?", opcoes: [
+          "Ponto de interrogação",
+          "É preciso decorar o texto inteiro de cor",
+          "Travessão (—)",
+          "Vírgula",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Ponto de interrogação” não é a resposta. O sinal é o TRAVESSÃO (—).",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. O sinal é o TRAVESSÃO (—).",
+          null,
+          "❌ “Vírgula” não é a resposta. O sinal é o TRAVESSÃO (—).",
+        ], feedbackAcerto: "💬 Isso!", feedbackErro: "O sinal é o TRAVESSÃO (—).",
         dica: "🔎 Pista: lembre do que significa “discurso direto” — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: discurso direto — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Exemplo: — Estou com fome! — disse o menino. Agora volte à pergunta “1/5 — Qual sinal marca a fala direta de um personagem?” com essa ideia na cabeça.",
       },
-      { pergunta: "2/5 — O que é um 'verbo de dizer'?", opcoes: ["Um verbo de movimento", "Uma palavra que mostra como o personagem falou", "O nome do personagem"], correta: 1, feedbackAcerto: "💬 Correto!", feedbackErro: "É a palavra que mostra COMO alguém falou: gritou, sussurrou, perguntou…",
+      { pergunta: "2/5 — O que é um 'verbo de dizer'?", opcoes: [
+          "Um verbo de movimento",
+          "Uma palavra que só descreve como a pessoa ou a coisa é",
+          "Uma palavra que mostra como o personagem falou",
+          "O nome do personagem",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Um verbo de movimento” não é a resposta. É a palavra que mostra COMO alguém falou: gritou, sussurrou, perguntou…",
+          "❌ “Uma palavra que só descreve como a pessoa ou a coisa é” não é a resposta. É a palavra que mostra COMO alguém falou: gritou, sussurrou, perguntou…",
+          null,
+          "❌ “O nome do personagem” não é a resposta. É a palavra que mostra COMO alguém falou: gritou, sussurrou, perguntou…",
+        ], feedbackAcerto: "💬 Correto!", feedbackErro: "É a palavra que mostra COMO alguém falou: gritou, sussurrou, perguntou…",
         dica: "🔎 Pista: lembre do que significa “discurso direto” — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: discurso direto — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Exemplo: — Estou com fome! — disse o menino. Agora volte à pergunta “2/5 — O que é um 'verbo de dizer'?” com essa ideia na cabeça.",
       },
-      { pergunta: "3/5 — Por que variar os verbos de fala em vez de usar sempre 'disse'?", opcoes: ["Deixa o texto mais rico e expressivo", "Não faz diferença", "É proibido usar 'disse'"], correta: 0, feedbackAcerto: "💬 Isso!", feedbackErro: "Variar os verbos deixa a leitura mais interessante e mostra emoção.",
+      { pergunta: "3/5 — Por que variar os verbos de fala em vez de usar sempre 'disse'?", opcoes: [
+          "Uma palavra que só descreve como a pessoa ou a coisa é",
+          "Deixa o texto mais rico e expressivo",
+          "Não faz diferença",
+          "É proibido usar 'disse'",
+        ], correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que só descreve como a pessoa ou a coisa é” não é a resposta. Variar os verbos deixa a leitura mais interessante e mostra emoção.",
+          null,
+          "❌ “Não faz diferença” não é a resposta. Variar os verbos deixa a leitura mais interessante e mostra emoção.",
+          "❌ “É proibido usar 'disse'” não é a resposta. Variar os verbos deixa a leitura mais interessante e mostra emoção.",
+        ], feedbackAcerto: "💬 Isso!", feedbackErro: "Variar os verbos deixa a leitura mais interessante e mostra emoção.",
         dica: "🔎 Pista: lembre do que significa “discurso direto” — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: discurso direto — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Exemplo: — Estou com fome! — disse o menino. Agora volte à pergunta “3/5 — Por que variar os verbos de fala em vez de usar sempre 'disse'?” com essa ideia na cabeça.",
       },
-      { pergunta: "4/5 — Em '— Socorro! — gritou o menino', o que 'gritou' revela?", opcoes: ["Calma", "Susto ou urgência", "Sono"], correta: 1, feedbackAcerto: "💬 Isso mesmo!", feedbackErro: "'Gritou' mostra uma emoção forte, como susto ou urgência.",
+      { pergunta: "4/5 — Em '— Socorro! — gritou o menino', o que 'gritou' revela?", opcoes: [
+          "Calma",
+          "Susto ou urgência",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "Sono",
+        ], correta: 1,
+        feedbackOpcoes: [
+          "❌ “Calma” não é a resposta. 'Gritou' mostra uma emoção forte, como susto ou urgência.",
+          null,
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. 'Gritou' mostra uma emoção forte, como susto ou urgência.",
+          "❌ “Sono” não é a resposta. 'Gritou' mostra uma emoção forte, como susto ou urgência.",
+        ], feedbackAcerto: "💬 Isso mesmo!", feedbackErro: "'Gritou' mostra uma emoção forte, como susto ou urgência.",
         dica: "🔎 Pista: lembre do que significa “discurso direto” — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: discurso direto — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Exemplo: — Estou com fome! — disse o menino. Agora volte à pergunta “4/5 — Em '— Socorro! — gritou o menino', o que 'gritou' revela?” com essa ideia na cabeça.",
       },
-      { pergunta: "5/5 — Qual frase está no discurso direto correto?", opcoes: ["Rico disse que ia passear", "— Vou passear! — disse Rico", "Rico foi passear"], correta: 1, feedbackAcerto: "💬 Isso! Só a que tem travessão é discurso direto. Você virou expert em falas! 🌟", feedbackErro: "Discurso direto precisa do travessão (—) marcando exatamente as palavras do personagem.",
+      { pergunta: "5/5 — Qual frase está no discurso direto correto?", opcoes: [
+          "Escrever a fala misturada no texto, sem nenhuma marca",
+          "Rico disse que ia passear",
+          "— Vou passear! — disse Rico",
+          "Rico foi passear",
+        ], correta: 2,
+        feedbackOpcoes: [
+          "❌ “Escrever a fala misturada no texto, sem nenhuma marca” não é a resposta. Discurso direto precisa do travessão (—) marcando exatamente as palavras do personagem.",
+          "❌ “Rico disse que ia passear” não é a resposta. Discurso direto precisa do travessão (—) marcando exatamente as palavras do personagem.",
+          null,
+          "❌ “Rico foi passear” não é a resposta. Discurso direto precisa do travessão (—) marcando exatamente as palavras do personagem.",
+        ], feedbackAcerto: "💬 Isso! Só a que tem travessão é discurso direto. Você virou expert em falas! 🌟", feedbackErro: "Discurso direto precisa do travessão (—) marcando exatamente as palavras do personagem.",
         dica: "🔎 Pista: lembre do que significa “discurso direto” — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Use isso para eliminar as alternativas que não combinam.",
         reensino: "📚 Vamos rever juntos: discurso direto — É quando o personagem fala EXATAMENTE com suas próprias palavras, marcado com travessão. Exemplo: — Estou com fome! — disse o menino. Agora volte à pergunta “5/5 — Qual frase está no discurso direto correto?” com essa ideia na cabeça.",
       },
