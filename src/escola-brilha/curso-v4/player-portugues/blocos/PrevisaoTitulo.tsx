@@ -153,10 +153,10 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
             <div className="flex items-start gap-2">
               <span className="text-2xl">{acertou ? "🌟" : "🤔"}</span>
               <div className="flex-1">{acertou ? data.feedbackAcerto : data.feedbackErro}</div>
-          {!acertou && data.dica && (
-            <div className="mt-2 text-xs opacity-90">💡 {data.dica}</div>
-          )}
             </div>
+            {!acertou && data.dica && (
+              <div className="mt-2 text-sm font-semibold opacity-90">💡 {data.dica}</div>
+            )}
             {!acertou && (
               <button
                 onClick={tentarDeNovo}
