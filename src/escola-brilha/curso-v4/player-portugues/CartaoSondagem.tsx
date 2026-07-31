@@ -7,6 +7,7 @@ import {
   type ResultadoSondagem,
 } from "./sondagem-inicial";
 import { getSondagem, type ConjuntoSondagem } from "./sondagens";
+import { lerApoio, limparApoio, ROTULO_APOIO, type AjustesApoio } from "./perfil-apoio";
 
 /**
  * Cartão de Sondagem Inicial na trilha do curso.
@@ -25,10 +26,12 @@ export function CartaoSondagem({
   const [resultado, setResultado] = useState<ResultadoSondagem | null>(null);
   const [aberto, setAberto] = useState(false);
   const [carregou, setCarregou] = useState(false);
+  const [apoio, setApoio] = useState<AjustesApoio | null>(null);
   const conjunto = getSondagem(cursoSlug);
 
   useEffect(() => {
     setResultado(lerSondagem(cursoSlug));
+    setApoio(lerApoio(cursoSlug));
     setCarregou(true);
   }, [cursoSlug]);
 
@@ -41,7 +44,11 @@ export function CartaoSondagem({
         onFechar={() => setAberto(false)}
         onConcluir={(r) => {
           salvarSondagem(cursoSlug, r);
+          // A sondagem passa a comandar o nível de apoio das aulas:
+          // apaga a recalibração antiga por desempenho.
+          limparApoio(cursoSlug);
           setResultado(r);
+          setApoio(lerApoio(cursoSlug));
           setAberto(false);
         }}
       />
@@ -70,6 +77,19 @@ export function CartaoSondagem({
             </div>
           )}
         </div>
+        {apoio && (
+          <div className="mt-3 rounded-xl bg-black/25 p-3">
+            <div className="text-xs text-white/60">
+              {apoio.origem === "desempenho"
+                ? "Modo de estudo nas aulas · ajustado pelo desempenho"
+                : "Modo de estudo nas aulas"}
+            </div>
+            <div className="font-bold text-sky-300">
+              {ROTULO_APOIO[apoio.nivel].emoji} {ROTULO_APOIO[apoio.nivel].titulo}
+            </div>
+            <div className="text-xs text-white/70 mt-1">{ROTULO_APOIO[apoio.nivel].texto}</div>
+          </div>
+        )}
         <div className="flex flex-wrap gap-2 mt-4">
           {onIrParaUnidade && (
             <button
@@ -82,6 +102,8 @@ export function CartaoSondagem({
           <button
             onClick={() => {
               limparSondagem(cursoSlug);
+              limparApoio(cursoSlug);
+              setApoio(null);
               setResultado(null);
               setAberto(true);
             }}

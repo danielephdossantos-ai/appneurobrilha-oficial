@@ -10,8 +10,13 @@
  *
  * O componente que responde (QuizTexto) só chama `registrar(...)`.
  */
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useMetricasAula, precisaIntervir } from "@/escola-brilha/player/personalizacao";
+import {
+  lerApoio,
+  registrarDesempenhoAvaliacao,
+  type AjustesApoio,
+} from "./perfil-apoio";
 
 export const NOTA_MINIMA = 0.7;
 
@@ -41,6 +46,11 @@ type Ctx = {
   reiniciarAvaliacao: () => void;
   /** Muda a cada reset — usado como `key` para remontar os quizzes. */
   tentativaAvaliacao: number;
+  /**
+   * Nível de apoio vindo da SONDAGEM INICIAL (e recalibrado pelo desempenho).
+   * Define pista antecipada, leitura em voz alta e nº de tentativas.
+   */
+  apoio: AjustesApoio;
 };
 
 const AdaptativoCtx = createContext<Ctx | null>(null);
@@ -51,10 +61,13 @@ export function useAdaptativo() {
 
 export function AdaptativoProvider({
   aulaSlug,
+  cursoSlug,
   childId,
   children,
 }: {
   aulaSlug: string;
+  /** Curso a que a aula pertence — chave da sondagem/perfil de apoio. */
+  cursoSlug?: string;
   childId?: string;
   children: React.ReactNode;
 }) {
@@ -62,6 +75,14 @@ export function AdaptativoProvider({
   const [registros, setRegistros] = useState<Record<string, RegistroQuestao>>({});
   const [totalAvaliacao, setTotalAvaliacao] = useState(0);
   const [tentativaAvaliacao, setTentativaAvaliacao] = useState(0);
+
+  // --- Ponte sondagem → adaptação -------------------------------------
+  // O perfil é lido no cliente (localStorage), depois da hidratação.
+  const [apoio, setApoio] = useState<AjustesApoio>(() => lerApoio(cursoSlug ?? ""));
+  useEffect(() => {
+    if (!cursoSlug) return;
+    setApoio(lerApoio(cursoSlug));
+  }, [cursoSlug]);
 
   const declararAvaliacao = useCallback((total: number) => {
     setTotalAvaliacao((prev) => (prev === total ? prev : total));
@@ -90,6 +111,22 @@ export function AdaptativoProvider({
     setTentativaAvaliacao((n) => n + 1);
   }, [motor]);
 
+  const daAvaliacaoAtual = Object.values(registros).filter((r) => r.momento === "m10");
+  const fechouAvaliacao =
+    totalAvaliacao > 0 && daAvaliacaoAtual.length >= totalAvaliacao;
+  const notaAtual =
+    daAvaliacaoAtual.length > 0
+      ? daAvaliacaoAtual.filter((r) => r.correta).length / Math.max(totalAvaliacao, 1)
+      : 0;
+
+  // Ao fechar a avaliação, o desempenho RECALIBRA o nível de apoio:
+  // nota baixa sobe o apoio, duas notas altas seguidas o reduzem.
+  useEffect(() => {
+    if (!cursoSlug || !fechouAvaliacao) return;
+    setApoio(registrarDesempenhoAvaliacao(cursoSlug, notaAtual));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursoSlug, fechouAvaliacao, tentativaAvaliacao]);
+
   const value = useMemo<Ctx>(() => {
     const daAvaliacao = Object.values(registros).filter((r) => r.momento === "m10");
     const acertos = daAvaliacao.filter((r) => r.correta).length;
@@ -110,8 +147,10 @@ export function AdaptativoProvider({
       motivoIntervencao: sinal.motivo,
       reiniciarAvaliacao,
       tentativaAvaliacao,
+      apoio,
     };
   }, [
+    apoio,
     registros,
     totalAvaliacao,
     registrar,
