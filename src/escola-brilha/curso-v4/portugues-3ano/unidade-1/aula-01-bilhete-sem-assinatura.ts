@@ -228,6 +228,33 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um bilhete cheio de pistas",
+        comando: "Escreva um bilhete curto SEM assinar, deixando 3 pistas de quem você é (algo que você gosta, um jeito seu de falar e um lugar da sua casa).",
+        linhas: 4,
+        modelo: [
+          "Passei aqui e deixei uma surpresa.",
+          "Está do lado do meu tênis azul.",
+          "Volto depois do treino, como sempre!",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "INFERIR é concluir algo que o texto não diz com todas as letras, juntando pistas + o que já sabemos.",
@@ -255,11 +282,18 @@ export const aula01: AulaPortuguesV4 = {
       {
         pergunta: "1/5 — O que significa 'inferir' um texto?",
         opcoes: [
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
           "Copiar o texto certinho",
           "Concluir algo que não está escrito, usando pistas",
           "Ler bem alto e rápido",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. Inferir é USAR PISTAS para descobrir algo que o texto não disse diretamente.",
+          "❌ “Copiar o texto certinho” não é a resposta. Inferir é USAR PISTAS para descobrir algo que o texto não disse diretamente.",
+          null,
+          "❌ “Ler bem alto e rápido” não é a resposta. Inferir é USAR PISTAS para descobrir algo que o texto não disse diretamente.",
+        ],
         feedbackAcerto: "🔍 Isso! Inferir é concluir com pistas.",
         feedbackErro: "Inferir é USAR PISTAS para descobrir algo que o texto não disse diretamente.",
         dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
@@ -267,8 +301,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — No bilhete da caixa de sapato, qual NÃO era uma pista sobre a avó?",
-        opcoes: ["Letra tremida", "Marca de óculos", "A cor do papel"],
+        opcoes: [
+          "Letra tremida",
+          "Marca de óculos",
+          "A cor do papel",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
+        ],
         correta: 2,
+        feedbackOpcoes: [
+          "❌ “Letra tremida” não é a resposta. As pistas fortes eram letra tremida, marca de óculos e a palavra 'netinha' — não a cor do papel.",
+          "❌ “Marca de óculos” não é a resposta. As pistas fortes eram letra tremida, marca de óculos e a palavra 'netinha' — não a cor do papel.",
+          null,
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. As pistas fortes eram letra tremida, marca de óculos e a palavra 'netinha' — não a cor do papel.",
+        ],
         feedbackAcerto: "🔍 Correto! A cor do papel não indicava quem escreveu.",
         feedbackErro: "As pistas fortes eram letra tremida, marca de óculos e a palavra 'netinha' — não a cor do papel.",
         dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
@@ -277,11 +322,18 @@ export const aula01: AulaPortuguesV4 = {
       {
         pergunta: "3/5 — Se um bilhete cheira a perfume floral e tem letra bem caprichada, o que é razoável inferir?",
         opcoes: [
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
           "Foi escrito por alguém que gosta de capricho e perfume",
           "Foi escrito por um cachorro",
           "Não é possível pensar em nada",
         ],
-        correta: 0,
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. Junte as pistas: perfume + letra caprichada sugerem alguém cuidadoso com os detalhes.",
+          null,
+          "❌ “Foi escrito por um cachorro” não é a resposta. Junte as pistas: perfume + letra caprichada sugerem alguém cuidadoso com os detalhes.",
+          "❌ “Não é possível pensar em nada” não é a resposta. Junte as pistas: perfume + letra caprichada sugerem alguém cuidadoso com os detalhes.",
+        ],
         feedbackAcerto: "🔍 Boa dedução! As pistas de cheiro e capricho apontam nessa direção.",
         feedbackErro: "Junte as pistas: perfume + letra caprichada sugerem alguém cuidadoso com os detalhes.",
         dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
@@ -292,9 +344,16 @@ export const aula01: AulaPortuguesV4 = {
         opcoes: [
           "Para confirmar que a inferência tem apoio nas pistas do texto",
           "Porque toda pergunta tem resposta explícita",
+          "Adivinhar qualquer coisa, sem usar nenhuma pista do texto",
           "Não é importante voltar",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque toda pergunta tem resposta explícita” não é a resposta. Mesmo inferindo, a criança precisa checar se as pistas usadas realmente estão no texto.",
+          "❌ “Adivinhar qualquer coisa, sem usar nenhuma pista do texto” não é a resposta. Mesmo inferindo, a criança precisa checar se as pistas usadas realmente estão no texto.",
+          "❌ “Não é importante voltar” não é a resposta. Mesmo inferindo, a criança precisa checar se as pistas usadas realmente estão no texto.",
+        ],
         feedbackAcerto: "🔍 Exatamente! Toda inferência precisa se apoiar em pistas reais do texto.",
         feedbackErro: "Mesmo inferindo, a criança precisa checar se as pistas usadas realmente estão no texto.",
         dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
@@ -302,8 +361,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — No caso do bolo, o que fez o clube concluir que era uma criança?",
-        opcoes: ["A letra bagunçada, o coraçãozinho e o cofrinho", "A hora em que o bilhete foi deixado", "O tamanho do bolo"],
+        opcoes: [
+          "A letra bagunçada, o coraçãozinho e o cofrinho",
+          "Usar Ç antes das letras E e I",
+          "A hora em que o bilhete foi deixado",
+          "O tamanho do bolo",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. As pistas eram letra bagunçada, coraçãozinho desenhado e a menção ao cofrinho.",
+          "❌ “A hora em que o bilhete foi deixado” não é a resposta. As pistas eram letra bagunçada, coraçãozinho desenhado e a menção ao cofrinho.",
+          "❌ “O tamanho do bolo” não é a resposta. As pistas eram letra bagunçada, coraçãozinho desenhado e a menção ao cofrinho.",
+        ],
         feedbackAcerto: "🔍 Isso! Três pistas combinadas resolveram o caso. Primeira pista do clube resolvida! 🌟",
         feedbackErro: "As pistas eram letra bagunçada, coraçãozinho desenhado e a menção ao cofrinho.",
         dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",

@@ -230,6 +230,33 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Um parágrafo com ideia principal",
+        comando: "Escreva um parágrafo sobre um lugar de que você gosta. A PRIMEIRA frase deve dizer a ideia principal; as outras duas dão detalhes.",
+        linhas: 4,
+        modelo: [
+          "O parque perto de casa é o meu lugar preferido.",
+          "Lá tem um balanço alto e sombra de árvore.",
+          "Toda tarde eu encontro meus amigos por lá.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "A IDEIA PRINCIPAL é o assunto central — a frase que resume o texto inteiro.",
@@ -256,8 +283,19 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é a 'ideia principal' de um texto?",
-        opcoes: ["Um detalhe engraçado", "O assunto central que resume o texto", "A última frase do texto sempre"],
-        correta: 1,
+        opcoes: [
+          "Um detalhe engraçado",
+          "Um detalhe pequeno que aparece só uma vez no texto",
+          "O assunto central que resume o texto",
+          "A última frase do texto sempre",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Um detalhe engraçado” não é a resposta. A ideia principal é o assunto que resume o texto — não é sempre a última frase.",
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. A ideia principal é o assunto que resume o texto — não é sempre a última frase.",
+          null,
+          "❌ “A última frase do texto sempre” não é a resposta. A ideia principal é o assunto que resume o texto — não é sempre a última frase.",
+        ],
         feedbackAcerto: "🧭 Isso! É o assunto central.",
         feedbackErro: "A ideia principal é o assunto que resume o texto — não é sempre a última frase.",
         dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
@@ -269,8 +307,15 @@ export const aula02: AulaPortuguesV4 = {
           "A ideia principal resume tudo; o detalhe só completa uma parte",
           "Detalhe é sempre maior que a ideia principal",
           "Não existe diferença",
+          "Um detalhe pequeno que aparece só uma vez no texto",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Detalhe é sempre maior que a ideia principal” não é a resposta. A ideia principal é mais ampla e resume o texto; o detalhe é uma parte específica.",
+          "❌ “Não existe diferença” não é a resposta. A ideia principal é mais ampla e resume o texto; o detalhe é uma parte específica.",
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. A ideia principal é mais ampla e resume o texto; o detalhe é uma parte específica.",
+        ],
         feedbackAcerto: "🧭 Exato!",
         feedbackErro: "A ideia principal é mais ampla e resume o texto; o detalhe é uma parte específica.",
         dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
@@ -279,11 +324,18 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "3/5 — No texto das abelhas, qual é a ideia principal?",
         opcoes: [
+          "Um detalhe pequeno que aparece só uma vez no texto",
           "As abelhas são fundamentais para a polinização e as frutas",
           "As abelhas voam de flor em flor",
           "O néctar é doce",
         ],
-        correta: 0,
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. As outras frases são detalhes que explicam a importância das abelhas — a ideia central fala da IMPORTÂNCIA delas.",
+          null,
+          "❌ “As abelhas voam de flor em flor” não é a resposta. As outras frases são detalhes que explicam a importância das abelhas — a ideia central fala da IMPORTÂNCIA delas.",
+          "❌ “O néctar é doce” não é a resposta. As outras frases são detalhes que explicam a importância das abelhas — a ideia central fala da IMPORTÂNCIA delas.",
+        ],
         feedbackAcerto: "🧭 Isso mesmo!",
         feedbackErro: "As outras frases são detalhes que explicam a importância das abelhas — a ideia central fala da IMPORTÂNCIA delas.",
         dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
@@ -294,9 +346,16 @@ export const aula02: AulaPortuguesV4 = {
         opcoes: [
           "Bolinha salvou a família Ferreira do incêndio",
           "Bolinha é um vira-lata caramelo",
+          "Um detalhe pequeno que aparece só uma vez no texto",
           "O bairro todo conhece Bolinha como herói",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Bolinha salvou a família Ferreira do incêndio” não é a resposta. Ser 'vira-lata caramelo' é um detalhe sobre a aparência — não sobre o feito heroico.",
+          null,
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. Ser 'vira-lata caramelo' é um detalhe sobre a aparência — não sobre o feito heroico.",
+          "❌ “O bairro todo conhece Bolinha como herói” não é a resposta. Ser 'vira-lata caramelo' é um detalhe sobre a aparência — não sobre o feito heroico.",
+        ],
         feedbackAcerto: "🧭 Correto! A cor e a raça são detalhes sobre o cachorro.",
         feedbackErro: "Ser 'vira-lata caramelo' é um detalhe sobre a aparência — não sobre o feito heroico.",
         dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
@@ -306,10 +365,17 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "5/5 — Qual pergunta ajuda a encontrar a ideia principal de qualquer texto?",
         opcoes: [
           "'Quantas palavras tem o texto?'",
+          "Um detalhe pequeno que aparece só uma vez no texto",
           "'Do que esse texto trata, no geral?'",
           "'Qual a cor da capa?'",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “'Quantas palavras tem o texto?'” não é a resposta. A pergunta certa é sempre: 'do que esse texto trata, no geral?'",
+          "❌ “Um detalhe pequeno que aparece só uma vez no texto” não é a resposta. A pergunta certa é sempre: 'do que esse texto trata, no geral?'",
+          null,
+          "❌ “'Qual a cor da capa?'” não é a resposta. A pergunta certa é sempre: 'do que esse texto trata, no geral?'",
+        ],
         feedbackAcerto: "🧭 Isso! Segunda pista do clube resolvida! 🌟",
         feedbackErro: "A pergunta certa é sempre: 'do que esse texto trata, no geral?'",
         dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",

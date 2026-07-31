@@ -203,6 +203,32 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Frase no figurado e no próprio",
+        comando: "Escolha uma expressão (por exemplo, 'está chovendo canivete'). Escreva uma frase usando o sentido FIGURADO e, depois, explique o que ela quer dizer de verdade.",
+        linhas: 4,
+        modelo: [
+          "Meu irmão é uma tartaruga de manhã.",
+          "Quer dizer que ele é bem devagar para acordar.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "SENTIDO FIGURADO é quando a frase não pode ser lida ao pé da letra.",
@@ -228,9 +254,16 @@ export const aula02: AulaPortuguesV4 = {
         opcoes: [
           "Quando a frase deve ser lida ao pé da letra",
           "Quando a frase não pode ser levada ao pé da letra",
+          "O significado exato do dicionário, palavra por palavra",
           "Quando a frase está errada",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Quando a frase deve ser lida ao pé da letra” não é a resposta. Sentido figurado é quando a frase NÃO pode ser entendida ao pé da letra.",
+          null,
+          "❌ “O significado exato do dicionário, palavra por palavra” não é a resposta. Sentido figurado é quando a frase NÃO pode ser entendida ao pé da letra.",
+          "❌ “Quando a frase está errada” não é a resposta. Sentido figurado é quando a frase NÃO pode ser entendida ao pé da letra.",
+        ],
         feedbackAcerto: "🔍 Isso! Sentido figurado foge do literal.",
         feedbackErro: "Sentido figurado é quando a frase NÃO pode ser entendida ao pé da letra.",
         dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
@@ -238,8 +271,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual frase é uma comparação (usa 'como')?",
-        opcoes: ["Ela é uma estrela", "Ela brilha como uma estrela", "Ela apagou a luz"],
+        opcoes: [
+          "Ela é uma estrela",
+          "Ela brilha como uma estrela",
+          "Usar Ç antes das letras E e I",
+          "Ela apagou a luz",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Ela é uma estrela” não é a resposta. Procure a frase que tem a palavra 'como' — essa é a comparação.",
+          null,
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. Procure a frase que tem a palavra 'como' — essa é a comparação.",
+          "❌ “Ela apagou a luz” não é a resposta. Procure a frase que tem a palavra 'como' — essa é a comparação.",
+        ],
         feedbackAcerto: "🔍 Correto! A palavra 'como' marca a comparação.",
         feedbackErro: "Procure a frase que tem a palavra 'como' — essa é a comparação.",
         dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
@@ -247,8 +291,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — 'O tempo voou' é um exemplo de...",
-        opcoes: ["Sentido literal", "Sentido figurado", "Não é uma frase válida"],
+        opcoes: [
+          "Sentido literal",
+          "Sentido figurado",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Não é uma frase válida",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Sentido literal” não é a resposta. Tempo não voa de verdade. A frase quer dizer que o tempo passou rápido — é figurado.",
+          null,
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Tempo não voa de verdade. A frase quer dizer que o tempo passou rápido — é figurado.",
+          "❌ “Não é uma frase válida” não é a resposta. Tempo não voa de verdade. A frase quer dizer que o tempo passou rápido — é figurado.",
+        ],
         feedbackAcerto: "🔍 Isso! Tempo não tem asas — a frase quer dizer que o tempo passou rápido.",
         feedbackErro: "Tempo não voa de verdade. A frase quer dizer que o tempo passou rápido — é figurado.",
         dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
@@ -258,10 +313,17 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "4/5 — 'O vento cochichou um segredo' quer dizer que...",
         opcoes: [
           "O vento realmente falou uma frase",
+          "Nenhuma dessas ideias combina com o que o texto mostra",
           "O vento soprou baixinho, como um sussurro",
           "Não havia vento naquele dia",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “O vento realmente falou uma frase” não é a resposta. Vento não fala. A frase usa a imagem do cochicho pra mostrar que o vento soprou baixinho.",
+          "❌ “Nenhuma dessas ideias combina com o que o texto mostra” não é a resposta. Vento não fala. A frase usa a imagem do cochicho pra mostrar que o vento soprou baixinho.",
+          null,
+          "❌ “Não havia vento naquele dia” não é a resposta. Vento não fala. A frase usa a imagem do cochicho pra mostrar que o vento soprou baixinho.",
+        ],
         feedbackAcerto: "🔍 Isso! A frase compara o som fraco do vento a um cochicho.",
         feedbackErro: "Vento não fala. A frase usa a imagem do cochicho pra mostrar que o vento soprou baixinho.",
         dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
@@ -269,8 +331,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — 'Meu avô é uma enciclopédia' é uma...",
-        opcoes: ["Comparação, com 'como'", "Metáfora, sem 'como'", "Frase literal"],
+        opcoes: [
+          "Comparação, com 'como'",
+          "Metáfora, sem 'como'",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "Frase literal",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Comparação, com 'como'” não é a resposta. Não tem a palavra 'como' — a frase diz direto 'é uma enciclopédia', então é metáfora.",
+          null,
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Não tem a palavra 'como' — a frase diz direto 'é uma enciclopédia', então é metáfora.",
+          "❌ “Frase literal” não é a resposta. Não tem a palavra 'como' — a frase diz direto 'é uma enciclopédia', então é metáfora.",
+        ],
         feedbackAcerto: "🔍 Isso! Sem a palavra 'como', a frase afirma direto — é metáfora. Caso resolvido! 🌟",
         feedbackErro: "Não tem a palavra 'como' — a frase diz direto 'é uma enciclopédia', então é metáfora.",
         dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",

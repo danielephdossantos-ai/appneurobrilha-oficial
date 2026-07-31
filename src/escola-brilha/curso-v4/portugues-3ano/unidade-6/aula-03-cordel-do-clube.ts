@@ -212,6 +212,34 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Cordel do seu caso",
+        comando: "Escreva 4 versos de cordel contando um caso resolvido pelo clube. Mantenha as rimas.",
+        linhas: 4,
+        modelo: [
+          "Sumiu o lápis da Ana,",
+          "ninguém sabia contar.",
+          "Achamos dentro da lata,",
+          "na hora de arrumar.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "CORDEL é poesia popular, pendurada em barbante nas feiras, que conta histórias com humor.",
@@ -237,9 +265,16 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: [
           "Poesia popular pendurada em barbante nas feiras",
           "Um tipo de romance longo sem rima",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
           "Um gênero só de notícias de jornal",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Um tipo de romance longo sem rima” não é a resposta. Cordel é a poesia popular pendurada em BARBANTE nas feiras, geralmente do Nordeste.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Cordel é a poesia popular pendurada em BARBANTE nas feiras, geralmente do Nordeste.",
+          "❌ “Um gênero só de notícias de jornal” não é a resposta. Cordel é a poesia popular pendurada em BARBANTE nas feiras, geralmente do Nordeste.",
+        ],
         feedbackAcerto: "🔍 Isso! Cordel é poesia popular de feira.",
         feedbackErro: "Cordel é a poesia popular pendurada em BARBANTE nas feiras, geralmente do Nordeste.",
         dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
@@ -247,8 +282,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Quantos versos tem uma sextilha?",
-        opcoes: ["Quatro", "Seis", "Dez"],
-        correta: 1,
+        opcoes: [
+          "Quatro",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+          "Seis",
+          "Dez",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Quatro” não é a resposta. Sextilha tem SEIS versos — o nome já dá a pista.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Sextilha tem SEIS versos — o nome já dá a pista.",
+          null,
+          "❌ “Dez” não é a resposta. Sextilha tem SEIS versos — o nome já dá a pista.",
+        ],
         feedbackAcerto: "🔍 Correto! Seis versos.",
         feedbackErro: "Sextilha tem SEIS versos — o nome já dá a pista.",
         dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
@@ -256,8 +302,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — No cordel do galo e da raposa, quem venceu a disputa de esperteza?",
-        opcoes: ["A raposa", "O galo", "Os cachorros"],
+        opcoes: [
+          "A raposa",
+          "O galo",
+          "Os cachorros",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “A raposa” não é a resposta. Releia o final: quem inventou a ameaça dos cachorros para escapar? Foi o galo.",
+          null,
+          "❌ “Os cachorros” não é a resposta. Releia o final: quem inventou a ameaça dos cachorros para escapar? Foi o galo.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Releia o final: quem inventou a ameaça dos cachorros para escapar? Foi o galo.",
+        ],
         feedbackAcerto: "🔍 Isso! O galo foi mais esperto e assustou a raposa.",
         feedbackErro: "Releia o final: quem inventou a ameaça dos cachorros para escapar? Foi o galo.",
         dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
@@ -269,8 +326,15 @@ export const aula03: AulaPortuguesV4 = {
           "Um poeta que cria versos de improviso",
           "Um vendedor de frutas",
           "Um tipo de instrumento musical",
+          "Depende só do gosto de quem lê, sem olhar o texto",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Um vendedor de frutas” não é a resposta. Repentista é quem inventa versos DE IMPROVISO, muitas vezes cantando.",
+          "❌ “Um tipo de instrumento musical” não é a resposta. Repentista é quem inventa versos DE IMPROVISO, muitas vezes cantando.",
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Repentista é quem inventa versos DE IMPROVISO, muitas vezes cantando.",
+        ],
         feedbackAcerto: "🔍 Isso! Repentista cria versos NA HORA.",
         feedbackErro: "Repentista é quem inventa versos DE IMPROVISO, muitas vezes cantando.",
         dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",
@@ -278,8 +342,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Segundo Compadre Zeca, as histórias de cordel geralmente misturam...",
-        opcoes: ["Só verdades", "Fantasia e realidade", "Só números"],
-        correta: 1,
+        opcoes: [
+          "Só verdades",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+          "Fantasia e realidade",
+          "Só números",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Só verdades” não é a resposta. Zeca explicou: as histórias misturam fantasia E realidade.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Zeca explicou: as histórias misturam fantasia E realidade.",
+          null,
+          "❌ “Só números” não é a resposta. Zeca explicou: as histórias misturam fantasia E realidade.",
+        ],
         feedbackAcerto: "🔍 Isso! 'Metade é fantasia, metade é realidade.' Caso do cordel resolvido! 🌟",
         feedbackErro: "Zeca explicou: as histórias misturam fantasia E realidade.",
         dica: "🔎 Pista: lembre do que significa “cordel” — É um tipo de poema popular, geralmente contando uma história com humor, pendurado em barbante (cordão) nas fe… Use isso para eliminar as alternativas que não combinam.",

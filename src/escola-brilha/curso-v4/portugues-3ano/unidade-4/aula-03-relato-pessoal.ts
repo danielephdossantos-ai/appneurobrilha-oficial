@@ -212,6 +212,33 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "O seu relato de verdade",
+        comando: "Escreva um relato pessoal: conte algo que ACONTECEU com você, na ordem certa, e diga como você se sentiu.",
+        linhas: 4,
+        modelo: [
+          "No sábado eu fui à casa da vovó.",
+          "Nós fizemos bolo juntos.",
+          "Eu fiquei muito feliz.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Relato pessoal conta uma experiência que a própria pessoa viveu.",
@@ -238,8 +265,15 @@ export const aula03: AulaPortuguesV4 = {
           "Um texto que conta uma experiência que a própria pessoa viveu",
           "Uma lista de compras",
           "Uma receita de bolo",
+          "Um texto inventado, com personagens mágicos",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Uma lista de compras” não é a resposta. Relato pessoal conta algo que ACONTECEU com quem escreve.",
+          "❌ “Uma receita de bolo” não é a resposta. Relato pessoal conta algo que ACONTECEU com quem escreve.",
+          "❌ “Um texto inventado, com personagens mágicos” não é a resposta. Relato pessoal conta algo que ACONTECEU com quem escreve.",
+        ],
         feedbackAcerto: "🎉 Isso! Relato pessoal conta uma vivência própria.",
         feedbackErro: "Relato pessoal conta algo que ACONTECEU com quem escreve.",
         dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
@@ -247,8 +281,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Relato pessoal é escrito em qual pessoa?",
-        opcoes: ["Terceira pessoa (ele/ela)", "Primeira pessoa (eu/nós)", "Não importa"],
-        correta: 1,
+        opcoes: [
+          "Terceira pessoa (ele/ela)",
+          "Um texto inventado, com personagens mágicos",
+          "Primeira pessoa (eu/nós)",
+          "Não importa",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Terceira pessoa (ele/ela)” não é a resposta. Quem conta a própria vida usa 'EU' e 'NÓS' — primeira pessoa.",
+          "❌ “Um texto inventado, com personagens mágicos” não é a resposta. Quem conta a própria vida usa 'EU' e 'NÓS' — primeira pessoa.",
+          null,
+          "❌ “Não importa” não é a resposta. Quem conta a própria vida usa 'EU' e 'NÓS' — primeira pessoa.",
+        ],
         feedbackAcerto: "🎉 Correto! É sempre em primeira pessoa.",
         feedbackErro: "Quem conta a própria vida usa 'EU' e 'NÓS' — primeira pessoa.",
         dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
@@ -256,8 +301,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual dessas é um marcador de tempo?",
-        opcoes: ["'Depois'", "'Bonito'", "'Cachorro'"],
-        correta: 0,
+        opcoes: [
+          "Nenhuma dessas ideias combina com o que o texto mostra",
+          "'Depois'",
+          "'Bonito'",
+          "'Cachorro'",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Nenhuma dessas ideias combina com o que o texto mostra” não é a resposta. Marcador de tempo indica ORDEM, como 'depois', 'primeiro', 'em seguida'.",
+          null,
+          "❌ “'Bonito'” não é a resposta. Marcador de tempo indica ORDEM, como 'depois', 'primeiro', 'em seguida'.",
+          "❌ “'Cachorro'” não é a resposta. Marcador de tempo indica ORDEM, como 'depois', 'primeiro', 'em seguida'.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Depois' indica ordem no tempo.",
         feedbackErro: "Marcador de tempo indica ORDEM, como 'depois', 'primeiro', 'em seguida'.",
         dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
@@ -265,8 +321,19 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — No relato da praia, o que Lia fez no fim da tarde?",
-        opcoes: ["Construiu castelo", "Comeu sorvete", "Foi dormir"],
+        opcoes: [
+          "Construiu castelo",
+          "Comeu sorvete",
+          "Foi dormir",
+          "Um texto inventado, com personagens mágicos",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Construiu castelo” não é a resposta. Releia: 'No fim da tarde, minha mãe comprou...'",
+          null,
+          "❌ “Foi dormir” não é a resposta. Releia: 'No fim da tarde, minha mãe comprou...'",
+          "❌ “Um texto inventado, com personagens mágicos” não é a resposta. Releia: 'No fim da tarde, minha mãe comprou...'",
+        ],
         feedbackAcerto: "🎉 Isso mesmo, no fim da tarde a mãe comprou sorvete.",
         feedbackErro: "Releia: 'No fim da tarde, minha mãe comprou...'",
         dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",
@@ -278,8 +345,15 @@ export const aula03: AulaPortuguesV4 = {
           "Deixam o texto mais bonito só de enfeite",
           "Ajudam a mostrar a ordem certa dos fatos",
           "Não servem pra nada",
+          "Um texto inventado, com personagens mágicos",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Deixam o texto mais bonito só de enfeite” não é a resposta. Marcadores de tempo ajudam quem lê a entender O QUE aconteceu primeiro, depois e por último.",
+          null,
+          "❌ “Não servem pra nada” não é a resposta. Marcadores de tempo ajudam quem lê a entender O QUE aconteceu primeiro, depois e por último.",
+          "❌ “Um texto inventado, com personagens mágicos” não é a resposta. Marcadores de tempo ajudam quem lê a entender O QUE aconteceu primeiro, depois e por último.",
+        ],
         feedbackAcerto: "🎉 Exato! Eles organizam a ordem dos acontecimentos.",
         feedbackErro: "Marcadores de tempo ajudam quem lê a entender O QUE aconteceu primeiro, depois e por último.",
         dica: "🔎 Pista: lembre do que significa “relato pessoal” — É um texto que conta algo que a própria pessoa viveu, sempre em primeira pessoa (eu, nós). Use isso para eliminar as alternativas que não combinam.",

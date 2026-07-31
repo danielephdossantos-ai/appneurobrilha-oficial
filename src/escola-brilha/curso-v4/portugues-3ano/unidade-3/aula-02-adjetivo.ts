@@ -279,6 +279,33 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Retrato com adjetivos",
+        comando: "Escreva um parágrafo descrevendo um personagem usando pelo menos três ADJETIVOS (características).",
+        linhas: 4,
+        modelo: [
+          "O detetive era alto e calmo.",
+          "Usava um casaco velho.",
+          "Tinha um olhar curioso.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "ADJETIVO é a palavra que dá uma CARACTERÍSTICA ao substantivo.",
@@ -303,10 +330,17 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "1/5 — O que é um adjetivo?",
         opcoes: [
           "Uma palavra que nomeia algo",
+          "Uma palavra que serve só para nomear pessoas, lugares e coisas",
           "Uma palavra que descreve uma característica",
           "Uma palavra que indica ação",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que nomeia algo” não é a resposta. Adjetivo dá uma característica: cor, tamanho, jeito de ser.",
+          "❌ “Uma palavra que serve só para nomear pessoas, lugares e coisas” não é a resposta. Adjetivo dá uma característica: cor, tamanho, jeito de ser.",
+          null,
+          "❌ “Uma palavra que indica ação” não é a resposta. Adjetivo dá uma característica: cor, tamanho, jeito de ser.",
+        ],
         feedbackAcerto: "🎉 Isso! Adjetivo descreve COMO algo ou alguém é.",
         feedbackErro: "Adjetivo dá uma característica: cor, tamanho, jeito de ser.",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
@@ -314,8 +348,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Na frase 'A raposa esperta fugiu', qual é o adjetivo?",
-        opcoes: ["raposa", "esperta", "fugiu"],
+        opcoes: [
+          "raposa",
+          "esperta",
+          "Uma palavra que serve só para nomear pessoas, lugares e coisas",
+          "fugiu",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “raposa” não é a resposta. 'Raposa' é substantivo, 'fugiu' é verbo. O adjetivo é ESPERTA.",
+          null,
+          "❌ “Uma palavra que serve só para nomear pessoas, lugares e coisas” não é a resposta. 'Raposa' é substantivo, 'fugiu' é verbo. O adjetivo é ESPERTA.",
+          "❌ “fugiu” não é a resposta. 'Raposa' é substantivo, 'fugiu' é verbo. O adjetivo é ESPERTA.",
+        ],
         feedbackAcerto: "🎉 'Esperta' descreve a raposa!",
         feedbackErro: "'Raposa' é substantivo, 'fugiu' é verbo. O adjetivo é ESPERTA.",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
@@ -323,8 +368,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Trocar 'cachorro calmo' por 'cachorro bravo' muda...",
-        opcoes: ["Só a pontuação", "A informação sobre o cachorro", "Nada"],
-        correta: 1,
+        opcoes: [
+          "Só a pontuação",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "A informação sobre o cachorro",
+          "Nada",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Só a pontuação” não é a resposta. Trocar o adjetivo muda a característica que estamos informando sobre o cachorro.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Trocar o adjetivo muda a característica que estamos informando sobre o cachorro.",
+          null,
+          "❌ “Nada” não é a resposta. Trocar o adjetivo muda a característica que estamos informando sobre o cachorro.",
+        ],
         feedbackAcerto: "🎉 Isso! O adjetivo muda totalmente o sentido da descrição.",
         feedbackErro: "Trocar o adjetivo muda a característica que estamos informando sobre o cachorro.",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
@@ -332,8 +388,19 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Qual conjunto tem SÓ adjetivos?",
-        opcoes: ["pequeno, esperto, rápido", "raposa, janela, bolo", "correu, abriu, fugiu"],
-        correta: 0,
+        opcoes: [
+          "Uma palavra que serve só para nomear pessoas, lugares e coisas",
+          "pequeno, esperto, rápido",
+          "raposa, janela, bolo",
+          "correu, abriu, fugiu",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que serve só para nomear pessoas, lugares e coisas” não é a resposta. A segunda lista tem substantivos, a terceira tem verbos (ações). Adjetivos descrevem características.",
+          null,
+          "❌ “raposa, janela, bolo” não é a resposta. A segunda lista tem substantivos, a terceira tem verbos (ações). Adjetivos descrevem características.",
+          "❌ “correu, abriu, fugiu” não é a resposta. A segunda lista tem substantivos, a terceira tem verbos (ações). Adjetivos descrevem características.",
+        ],
         feedbackAcerto: "🎉 Isso! Todas descrevem características.",
         feedbackErro: "A segunda lista tem substantivos, a terceira tem verbos (ações). Adjetivos descrevem características.",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
@@ -342,11 +409,18 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "5/5 — Por que o adjetivo é importante numa descrição?",
         opcoes: [
+          "Uma palavra que serve só para nomear pessoas, lugares e coisas",
           "Porque enfeita sem função",
           "Porque ajuda a identificar com precisão quem/o que estamos descrevendo",
           "Porque substitui o substantivo",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Uma palavra que serve só para nomear pessoas, lugares e coisas” não é a resposta. O adjetivo dá detalhes que ajudam a identificar exatamente quem ou o que estamos falando.",
+          "❌ “Porque enfeita sem função” não é a resposta. O adjetivo dá detalhes que ajudam a identificar exatamente quem ou o que estamos falando.",
+          null,
+          "❌ “Porque substitui o substantivo” não é a resposta. O adjetivo dá detalhes que ajudam a identificar exatamente quem ou o que estamos falando.",
+        ],
         feedbackAcerto: "🎉 Exatamente! Um bom detetive usa adjetivos precisos pra não confundir os suspeitos.",
         feedbackErro: "O adjetivo dá detalhes que ajudam a identificar exatamente quem ou o que estamos falando.",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",

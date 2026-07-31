@@ -219,6 +219,33 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "O manual do seu jogo",
+        comando: "Escreva as instruções de um jogo que você conhece: comece pelos materiais e depois escreva os passos numerados, com verbos de comando.",
+        linhas: 4,
+        modelo: [
+          "Materiais: uma bola e giz.",
+          "1) Desenhe o círculo no chão.",
+          "2) Jogue a bola dentro dele.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "Texto instrucional ensina a FAZER algo, passo a passo.",
@@ -241,8 +268,19 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Para que serve um texto instrucional?",
-        opcoes: ["Para contar uma história inventada", "Para ensinar a fazer algo, passo a passo", "Para dar uma opinião"],
+        opcoes: [
+          "Para contar uma história inventada",
+          "Para ensinar a fazer algo, passo a passo",
+          "Contar uma história com começo, meio e fim",
+          "Para dar uma opinião",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Para contar uma história inventada” não é a resposta. Texto instrucional ENSINA, não conta história nem dá opinião.",
+          null,
+          "❌ “Contar uma história com começo, meio e fim” não é a resposta. Texto instrucional ENSINA, não conta história nem dá opinião.",
+          "❌ “Para dar uma opinião” não é a resposta. Texto instrucional ENSINA, não conta história nem dá opinião.",
+        ],
         feedbackAcerto: "🎉 Isso! Ele ensina a FAZER algo.",
         feedbackErro: "Texto instrucional ENSINA, não conta história nem dá opinião.",
         dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
@@ -250,8 +288,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual desses verbos está no imperativo (comando)?",
-        opcoes: ["'Correu'", "'Role'", "'Correndo'"],
-        correta: 1,
+        opcoes: [
+          "'Correu'",
+          "Uma palavra que só descreve como a pessoa ou a coisa é",
+          "'Role'",
+          "'Correndo'",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “'Correu'” não é a resposta. Imperativo dá ORDEM. 'Role o dado' é um comando direto.",
+          "❌ “Uma palavra que só descreve como a pessoa ou a coisa é” não é a resposta. Imperativo dá ORDEM. 'Role o dado' é um comando direto.",
+          null,
+          "❌ “'Correndo'” não é a resposta. Imperativo dá ORDEM. 'Role o dado' é um comando direto.",
+        ],
         feedbackAcerto: "🎉 Correto! 'Role' é um comando — imperativo.",
         feedbackErro: "Imperativo dá ORDEM. 'Role o dado' é um comando direto.",
         dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
@@ -259,8 +308,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Onde deve ficar a lista de materiais?",
-        opcoes: ["Antes dos passos", "Depois dos passos", "Não é necessária"],
+        opcoes: [
+          "Antes dos passos",
+          "Depois dos passos",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "Não é necessária",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Depois dos passos” não é a resposta. Sempre organizamos os materiais/ingredientes ANTES de começar os passos.",
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Sempre organizamos os materiais/ingredientes ANTES de começar os passos.",
+          "❌ “Não é necessária” não é a resposta. Sempre organizamos os materiais/ingredientes ANTES de começar os passos.",
+        ],
         feedbackAcerto: "🎉 Isso! A lista de materiais vem ANTES, pra já separar tudo.",
         feedbackErro: "Sempre organizamos os materiais/ingredientes ANTES de começar os passos.",
         dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
@@ -270,10 +330,17 @@ export const aula04: AulaPortuguesV4 = {
         pergunta: "4/5 — Por que os passos precisam ser numerados e em ordem?",
         opcoes: [
           "Só para enfeitar o texto",
+          "É preciso decorar o texto inteiro de cor",
           "Porque pular ou trocar a ordem pode estragar o resultado",
           "Não faz diferença numerar",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Só para enfeitar o texto” não é a resposta. Se trocar a ordem dos passos (ex.: assar antes de misturar), o resultado pode dar errado.",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Se trocar a ordem dos passos (ex.: assar antes de misturar), o resultado pode dar errado.",
+          null,
+          "❌ “Não faz diferença numerar” não é a resposta. Se trocar a ordem dos passos (ex.: assar antes de misturar), o resultado pode dar errado.",
+        ],
         feedbackAcerto: "🎉 Exato! A ordem dos passos é essencial pro resultado dar certo.",
         feedbackErro: "Se trocar a ordem dos passos (ex.: assar antes de misturar), o resultado pode dar errado.",
         dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",
@@ -281,8 +348,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — 'Corte a banana em pedaços' é um exemplo de:",
-        opcoes: ["Opinião", "Verbo no imperativo dando instrução", "Fato de uma notícia"],
-        correta: 1,
+        opcoes: [
+          "Opinião",
+          "Usar Ç antes das letras E e I",
+          "Verbo no imperativo dando instrução",
+          "Fato de uma notícia",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Opinião” não é a resposta. 'Corte' é um verbo de comando (imperativo), típico de receitas e regras.",
+          "❌ “Usar Ç antes das letras E e I” não é a resposta. 'Corte' é um verbo de comando (imperativo), típico de receitas e regras.",
+          null,
+          "❌ “Fato de uma notícia” não é a resposta. 'Corte' é um verbo de comando (imperativo), típico de receitas e regras.",
+        ],
         feedbackAcerto: "🎉 Isso! 'Corte' é um comando — texto instrucional.",
         feedbackErro: "'Corte' é um verbo de comando (imperativo), típico de receitas e regras.",
         dica: "🔎 Pista: lembre do que significa “texto instrucional” — É um texto que ensina a fazer algo, com lista de materiais e passos numerados, na ordem certa. Use isso para eliminar as alternativas que não combinam.",

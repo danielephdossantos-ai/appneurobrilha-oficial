@@ -235,6 +235,32 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva a sua adivinha",
+        comando: "Escreva uma adivinha com duas pistas e a resposta embaixo. Depois, escreva um trava-língua curto de sua invenção.",
+        linhas: 4,
+        modelo: [
+          "O que é, o que é: tem folhas e não é árvore?",
+          "Resposta: o livro.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "DUPLO SENTIDO é quando uma palavra pode ser entendida de duas formas — é a base do humor verbal.",
@@ -263,10 +289,17 @@ export const aula04: AulaPortuguesV4 = {
         pergunta: "1/5 — O que é 'duplo sentido'?",
         opcoes: [
           "Quando uma palavra só tem um significado",
+          "Basta olhar as figuras e ignorar o que está escrito",
           "Quando uma palavra pode ser entendida de duas formas",
           "Quando a frase está escrita errado",
         ],
-        correta: 1,
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Quando uma palavra só tem um significado” não é a resposta. Duplo sentido é quando a MESMA palavra pode significar duas coisas diferentes.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Duplo sentido é quando a MESMA palavra pode significar duas coisas diferentes.",
+          null,
+          "❌ “Quando a frase está escrita errado” não é a resposta. Duplo sentido é quando a MESMA palavra pode significar duas coisas diferentes.",
+        ],
         feedbackAcerto: "😂 Isso! Duplo sentido é ter dois significados possíveis.",
         feedbackErro: "Duplo sentido é quando a MESMA palavra pode significar duas coisas diferentes.",
         dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
@@ -274,8 +307,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — O que faz um trava-língua ser difícil de falar?",
-        opcoes: ["Sons parecidos repetidos", "Frases muito curtas", "Palavras em outro idioma"],
-        correta: 0,
+        opcoes: [
+          "Um texto sério, feito só para informar",
+          "Sons parecidos repetidos",
+          "Frases muito curtas",
+          "Palavras em outro idioma",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Um texto sério, feito só para informar” não é a resposta. O trava-língua repete SONS PARECIDOS de propósito, para embolar a boca.",
+          null,
+          "❌ “Frases muito curtas” não é a resposta. O trava-língua repete SONS PARECIDOS de propósito, para embolar a boca.",
+          "❌ “Palavras em outro idioma” não é a resposta. O trava-língua repete SONS PARECIDOS de propósito, para embolar a boca.",
+        ],
         feedbackAcerto: "😂 Correto! Sons parecidos repetidos embolam a fala.",
         feedbackErro: "O trava-língua repete SONS PARECIDOS de propósito, para embolar a boca.",
         dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
@@ -283,8 +327,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Na adivinha do relógio, o que representava 'coroa'?",
-        opcoes: ["Coroa de rei", "A peça de dar corda no relógio", "Um chapéu"],
-        correta: 1,
+        opcoes: [
+          "Um texto sério, feito só para informar",
+          "Coroa de rei",
+          "A peça de dar corda no relógio",
+          "Um chapéu",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Um texto sério, feito só para informar” não é a resposta. A resposta certa era o relógio — 'coroa' ali é a peça de dar corda, não a de rei.",
+          "❌ “Coroa de rei” não é a resposta. A resposta certa era o relógio — 'coroa' ali é a peça de dar corda, não a de rei.",
+          null,
+          "❌ “Um chapéu” não é a resposta. A resposta certa era o relógio — 'coroa' ali é a peça de dar corda, não a de rei.",
+        ],
         feedbackAcerto: "😂 Isso! A resposta usava o outro sentido da palavra 'coroa'.",
         feedbackErro: "A resposta certa era o relógio — 'coroa' ali é a peça de dar corda, não a de rei.",
         dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
@@ -294,10 +349,17 @@ export const aula04: AulaPortuguesV4 = {
         pergunta: "4/5 — Por que ler em voz alta ajuda a apreciar piadas e trava-línguas?",
         opcoes: [
           "Porque revela o ritmo e a graça sonora do texto",
+          "Um texto sério, feito só para informar",
           "Porque não faz diferença nenhuma",
           "Porque só funciona lendo baixinho",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Um texto sério, feito só para informar” não é a resposta. Ler em voz alta REVELA o jogo de sons — é assim que a graça aparece de verdade.",
+          "❌ “Porque não faz diferença nenhuma” não é a resposta. Ler em voz alta REVELA o jogo de sons — é assim que a graça aparece de verdade.",
+          "❌ “Porque só funciona lendo baixinho” não é a resposta. Ler em voz alta REVELA o jogo de sons — é assim que a graça aparece de verdade.",
+        ],
         feedbackAcerto: "😂 Exato! O humor sonoro só aparece de verdade quando lemos em voz alta.",
         feedbackErro: "Ler em voz alta REVELA o jogo de sons — é assim que a graça aparece de verdade.",
         dica: "🔎 Pista: lembre do que significa “duplo sentido” — É quando uma palavra ou frase pode ser entendida de DUAS maneiras diferentes — e é aí que mora a graça. Use isso para eliminar as alternativas que não combinam.",
@@ -308,9 +370,16 @@ export const aula04: AulaPortuguesV4 = {
         opcoes: [
           "Não têm nada em comum",
           "O jogo com o SOM e o SENTIDO das palavras",
+          "Um texto sério, feito só para informar",
           "Só servem para decorar de cor",
         ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Não têm nada em comum” não é a resposta. Pense em tudo que estudamos na unidade: rima, sentido figurado, cordel, humor — todos brincam com SOM e SENTIDO das palavras.",
+          null,
+          "❌ “Um texto sério, feito só para informar” não é a resposta. Pense em tudo que estudamos na unidade: rima, sentido figurado, cordel, humor — todos brincam com SOM e SENTIDO das palavras.",
+          "❌ “Só servem para decorar de cor” não é a resposta. Pense em tudo que estudamos na unidade: rima, sentido figurado, cordel, humor — todos brincam com SOM e SENTIDO das palavras.",
+        ],
         feedbackAcerto:
           "😂🔍 Isso mesmo! Poema, cordel, piada, trava-língua e adivinha todos brincam com SOM e SENTIDO. Último caso do clube resolvido — parabéns, Detetive-Mestre da Palavra! 👑🌟",
         feedbackErro:

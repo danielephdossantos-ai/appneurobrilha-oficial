@@ -231,6 +231,33 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo com sons do nariz",
+        comando: "Escreva um parágrafo usando palavras com Ã, ÃO e AM (irmã, pão, mão, cantam).",
+        linhas: 4,
+        modelo: [
+          "Minha irmã comprou pão.",
+          "Os passarinhos cantam cedo.",
+          "Lavei a mão antes.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: o til (~) marca som nasal, como em MAÇÃ, IRMÃ e BALÃO.",
@@ -256,8 +283,19 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Para que serve o til (~)?",
-        opcoes: ["Marcar som nasal", "Deixar a letra maiúscula", "Separar sílabas"],
+        opcoes: [
+          "Marcar som nasal",
+          "Deixar a letra maiúscula",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Separar sílabas",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Deixar a letra maiúscula” não é a resposta. Lembre: o til avisa que o som passa pelo nariz.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. Lembre: o til avisa que o som passa pelo nariz.",
+          "❌ “Separar sílabas” não é a resposta. Lembre: o til avisa que o som passa pelo nariz.",
+        ],
         feedbackAcerto: "🎉 Isso! O til marca o som nasal.",
         feedbackErro: "Lembre: o til avisa que o som passa pelo nariz.",
         dica: "🔎 Pista: lembre do que significa “balão” — O til (~) em cima do A avisa: esse som sai pelo nariz. No plural, BALÃO vira BALÕES. Use isso para eliminar as alternativas que não combinam.",
@@ -265,8 +303,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual é o plural de BALÃO?",
-        opcoes: ["BALÃOS", "BALÕES", "BALÃES"],
+        opcoes: [
+          "BALÃOS",
+          "BALÕES",
+          "Usar N antes de P e de B",
+          "BALÃES",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “BALÃOS” não é a resposta. BALÃO segue o padrão mais comum: troca -ÃO por -ÕES.",
+          null,
+          "❌ “Usar N antes de P e de B” não é a resposta. BALÃO segue o padrão mais comum: troca -ÃO por -ÕES.",
+          "❌ “BALÃES” não é a resposta. BALÃO segue o padrão mais comum: troca -ÃO por -ÕES.",
+        ],
         feedbackAcerto: "🎉 Correto! BALÃO vira BALÕES.",
         feedbackErro: "BALÃO segue o padrão mais comum: troca -ÃO por -ÕES.",
         dica: "🔎 Pista: lembre do que significa “balão” — O til (~) em cima do A avisa: esse som sai pelo nariz. No plural, BALÃO vira BALÕES. Use isso para eliminar as alternativas que não combinam.",
@@ -274,8 +323,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — 'Eles cantarAM ontem' fala de quê?",
-        opcoes: ["Passado", "Futuro", "Presente"],
+        opcoes: [
+          "Passado",
+          "Futuro",
+          "Presente",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Futuro” não é a resposta. Lembre a regra: -AM no final do verbo é passado.",
+          "❌ “Presente” não é a resposta. Lembre a regra: -AM no final do verbo é passado.",
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Lembre a regra: -AM no final do verbo é passado.",
+        ],
         feedbackAcerto: "🎉 Isso! -AM indica que já aconteceu.",
         feedbackErro: "Lembre a regra: -AM no final do verbo é passado.",
         dica: "🔎 Pista: lembre do que significa “balão” — O til (~) em cima do A avisa: esse som sai pelo nariz. No plural, BALÃO vira BALÕES. Use isso para eliminar as alternativas que não combinam.",
@@ -283,8 +343,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — 'Eles cantarÃO amanhã' fala de quê?",
-        opcoes: ["Passado", "Futuro", "Presente"],
-        correta: 1,
+        opcoes: [
+          "Usar N antes de P e de B",
+          "Passado",
+          "Futuro",
+          "Presente",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Usar N antes de P e de B” não é a resposta. Lembre a regra: -ÃO no final do verbo é futuro.",
+          "❌ “Passado” não é a resposta. Lembre a regra: -ÃO no final do verbo é futuro.",
+          null,
+          "❌ “Presente” não é a resposta. Lembre a regra: -ÃO no final do verbo é futuro.",
+        ],
         feedbackAcerto: "🎉 Isso! -ÃO indica que ainda vai acontecer.",
         feedbackErro: "Lembre a regra: -ÃO no final do verbo é futuro.",
         dica: "🔎 Pista: lembre do que significa “balão” — O til (~) em cima do A avisa: esse som sai pelo nariz. No plural, BALÃO vira BALÕES. Use isso para eliminar as alternativas que não combinam.",
@@ -292,8 +363,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Qual é o plural de MÃO?",
-        opcoes: ["MÃOS", "MÕES", "MÃES"],
-        correta: 0,
+        opcoes: [
+          "Usar N antes de P e de B",
+          "MÃOS",
+          "MÕES",
+          "MÃES",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Usar N antes de P e de B” não é a resposta. MÃO é uma exceção: no plural, só ganha S, virando MÃOS.",
+          null,
+          "❌ “MÕES” não é a resposta. MÃO é uma exceção: no plural, só ganha S, virando MÃOS.",
+          "❌ “MÃES” não é a resposta. MÃO é uma exceção: no plural, só ganha S, virando MÃOS.",
+        ],
         feedbackAcerto: "🎉 Caso encerrado! MÃO no plural fica MÃOS, só com S.",
         feedbackErro: "MÃO é uma exceção: no plural, só ganha S, virando MÃOS.",
         dica: "🔎 Pista: lembre do que significa “balão” — O til (~) em cima do A avisa: esse som sai pelo nariz. No plural, BALÃO vira BALÕES. Use isso para eliminar as alternativas que não combinam.",

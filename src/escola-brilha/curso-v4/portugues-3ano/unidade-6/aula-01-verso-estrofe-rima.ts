@@ -210,6 +210,34 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "A sua estrofe com rima",
+        comando: "Escreva uma estrofe de 4 versos em que o 2º verso rime com o 4º.",
+        linhas: 4,
+        modelo: [
+          "Meu clube é secreto,",
+          "com lupa na mão.",
+          "Se a pista aparece,",
+          "resolvo o então.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "VERSO é cada linha do poema.",
@@ -236,8 +264,19 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é um verso?",
-        opcoes: ["Uma estrofe inteira", "Cada linha de um poema", "O título do poema"],
+        opcoes: [
+          "Uma estrofe inteira",
+          "Cada linha de um poema",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+          "O título do poema",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma estrofe inteira” não é a resposta. Verso é CADA LINHA do poema, não o poema todo.",
+          null,
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Verso é CADA LINHA do poema, não o poema todo.",
+          "❌ “O título do poema” não é a resposta. Verso é CADA LINHA do poema, não o poema todo.",
+        ],
         feedbackAcerto: "🔍 Isso! Verso é cada linha.",
         feedbackErro: "Verso é CADA LINHA do poema, não o poema todo.",
         dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
@@ -245,8 +284,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — O que separa uma estrofe da outra?",
-        opcoes: ["Um espaço em branco", "Uma vírgula", "Nada, é tudo junto"],
+        opcoes: [
+          "Um espaço em branco",
+          "Uma vírgula",
+          "Nada, é tudo junto",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Uma vírgula” não é a resposta. Estrofes são separadas por um ESPAÇO em branco entre os blocos de versos.",
+          "❌ “Nada, é tudo junto” não é a resposta. Estrofes são separadas por um ESPAÇO em branco entre os blocos de versos.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Estrofes são separadas por um ESPAÇO em branco entre os blocos de versos.",
+        ],
         feedbackAcerto: "🔍 Correto! O espaço em branco separa os blocos de versos.",
         feedbackErro: "Estrofes são separadas por um ESPAÇO em branco entre os blocos de versos.",
         dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
@@ -254,8 +304,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Qual par de palavras rima?",
-        opcoes: ["flor e sol", "flor e cor", "flor e mar"],
+        opcoes: [
+          "flor e sol",
+          "flor e cor",
+          "flor e mar",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “flor e sol” não é a resposta. Escute o final: '-or' se repete em 'flor' e 'cor'.",
+          null,
+          "❌ “flor e mar” não é a resposta. Escute o final: '-or' se repete em 'flor' e 'cor'.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Escute o final: '-or' se repete em 'flor' e 'cor'.",
+        ],
         feedbackAcerto: "🔍 Isso! 'Flor' e 'cor' terminam com som parecido.",
         feedbackErro: "Escute o final: '-or' se repete em 'flor' e 'cor'.",
         dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
@@ -265,10 +326,17 @@ export const aula01: AulaPortuguesV4 = {
         pergunta: "4/5 — Por que é bom ler poema em voz alta?",
         opcoes: [
           "Para sentir o ritmo e a musicalidade das palavras",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
           "Porque poema não pode ser lido em silêncio",
           "Só por diversão, não ajuda em nada",
         ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Ler em voz alta ajuda a PERCEBER o ritmo e a sonoridade que o poema esconde.",
+          "❌ “Porque poema não pode ser lido em silêncio” não é a resposta. Ler em voz alta ajuda a PERCEBER o ritmo e a sonoridade que o poema esconde.",
+          "❌ “Só por diversão, não ajuda em nada” não é a resposta. Ler em voz alta ajuda a PERCEBER o ritmo e a sonoridade que o poema esconde.",
+        ],
         feedbackAcerto: "🔍 Exato! Ler em voz alta revela o ritmo escondido no texto.",
         feedbackErro: "Ler em voz alta ajuda a PERCEBER o ritmo e a sonoridade que o poema esconde.",
         dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
@@ -276,8 +344,19 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — No poema 'Segredo da Noite', quantas estrofes existem?",
-        opcoes: ["Uma", "Duas", "Três"],
+        opcoes: [
+          "Uma",
+          "Duas",
+          "Três",
+          "Um texto escrito em linhas corridas, sem pausa nem ritmo",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Uma” não é a resposta. Conte os blocos separados por espaço: são dois — logo, duas estrofes.",
+          null,
+          "❌ “Três” não é a resposta. Conte os blocos separados por espaço: são dois — logo, duas estrofes.",
+          "❌ “Um texto escrito em linhas corridas, sem pausa nem ritmo” não é a resposta. Conte os blocos separados por espaço: são dois — logo, duas estrofes.",
+        ],
         feedbackAcerto: "🔍 Isso! Duas estrofes de quatro versos. Pista arquitetada com sucesso! 🌟",
         feedbackErro: "Conte os blocos separados por espaço: são dois — logo, duas estrofes.",
         dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",

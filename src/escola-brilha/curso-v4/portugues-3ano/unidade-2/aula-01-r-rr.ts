@@ -239,6 +239,33 @@ export const aula1: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo com R e RR",
+        comando: "Escreva um parágrafo de 3 frases usando pelo menos duas palavras com RR (carro, terra, corre) e duas com R fraco (cara, arara).",
+        linhas: 4,
+        modelo: [
+          "O carro parou na terra.",
+          "Uma arara pousou perto.",
+          "Meu cachorro correu atrás.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: entre vogais, R sozinho tem som FRACO (caro) e RR tem som FORTE (carro).",
@@ -264,8 +291,19 @@ export const aula1: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Como se escreve o som fraco do R entre duas vogais?",
-        opcoes: ["Com R sozinho", "Com RR", "Com RH"],
-        correta: 0,
+        opcoes: [
+          "Escrever RR no começo da palavra",
+          "Com R sozinho",
+          "Com RR",
+          "Com RH",
+        ],
+        correta: 1,
+        feedbackOpcoes: [
+          "❌ “Escrever RR no começo da palavra” não é a resposta. Lembre: entre vogais, o R sozinho soa fraco (caro).",
+          null,
+          "❌ “Com RR” não é a resposta. Lembre: entre vogais, o R sozinho soa fraco (caro).",
+          "❌ “Com RH” não é a resposta. Lembre: entre vogais, o R sozinho soa fraco (caro).",
+        ],
         feedbackAcerto: "🎉 R sozinho entre vogais = som fraco.",
         feedbackErro: "Lembre: entre vogais, o R sozinho soa fraco (caro).",
         dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
@@ -273,8 +311,19 @@ export const aula1: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Como se escreve o som forte do R entre duas vogais?",
-        opcoes: ["Com R sozinho", "Com RR", "Não se escreve"],
-        correta: 1,
+        opcoes: [
+          "Escrever RR no começo da palavra",
+          "Com R sozinho",
+          "Com RR",
+          "Não se escreve",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Escrever RR no começo da palavra” não é a resposta. Entre vogais, o som forte precisa do R dobrado (carro).",
+          "❌ “Com R sozinho” não é a resposta. Entre vogais, o som forte precisa do R dobrado (carro).",
+          null,
+          "❌ “Não se escreve” não é a resposta. Entre vogais, o som forte precisa do R dobrado (carro).",
+        ],
         feedbackAcerto: "🎉 Isso! RR dobrado entre vogais = som forte.",
         feedbackErro: "Entre vogais, o som forte precisa do R dobrado (carro).",
         dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
@@ -282,8 +331,19 @@ export const aula1: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — No início da palavra, como soa o R sozinho, como em RATO?",
-        opcoes: ["Fraco", "Forte", "Sem som"],
+        opcoes: [
+          "Fraco",
+          "Forte",
+          "É preciso decorar o texto inteiro de cor",
+          "Sem som",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Fraco” não é a resposta. Lembre: no começo da palavra, R sozinho já soa forte.",
+          null,
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Lembre: no começo da palavra, R sozinho já soa forte.",
+          "❌ “Sem som” não é a resposta. Lembre: no começo da palavra, R sozinho já soa forte.",
+        ],
         feedbackAcerto: "🎉 Correto! No início, o R sozinho já é forte.",
         feedbackErro: "Lembre: no começo da palavra, R sozinho já soa forte.",
         dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
@@ -291,8 +351,19 @@ export const aula1: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Depois de uma consoante, como em HONRA, o R sozinho soa…",
-        opcoes: ["Fraco", "Forte", "Depende da cor da capa"],
-        correta: 1,
+        opcoes: [
+          "Fraco",
+          "Basta olhar as figuras e ignorar o que está escrito",
+          "Forte",
+          "Depende da cor da capa",
+        ],
+        correta: 2,
+        feedbackOpcoes: [
+          "❌ “Fraco” não é a resposta. A regra diz: depois de consoante, o R já soa forte, sem precisar dobrar.",
+          "❌ “Basta olhar as figuras e ignorar o que está escrito” não é a resposta. A regra diz: depois de consoante, o R já soa forte, sem precisar dobrar.",
+          null,
+          "❌ “Depende da cor da capa” não é a resposta. A regra diz: depois de consoante, o R já soa forte, sem precisar dobrar.",
+        ],
         feedbackAcerto: "🎉 Isso! Depois de consoante, o R sozinho já é forte.",
         feedbackErro: "A regra diz: depois de consoante, o R já soa forte, sem precisar dobrar.",
         dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
@@ -300,8 +371,19 @@ export const aula1: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Qual dessas palavras usa RR corretamente por causa do som forte entre vogais?",
-        opcoes: ["Carro", "Caro", "Rato"],
+        opcoes: [
+          "Carro",
+          "Caro",
+          "Escrever RR no começo da palavra",
+          "Rato",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Caro” não é a resposta. Pense em qual palavra tem som forte de R ENTRE vogais — só uma tem RR dobrado.",
+          "❌ “Escrever RR no começo da palavra” não é a resposta. Pense em qual palavra tem som forte de R ENTRE vogais — só uma tem RR dobrado.",
+          "❌ “Rato” não é a resposta. Pense em qual palavra tem som forte de R ENTRE vogais — só uma tem RR dobrado.",
+        ],
         feedbackAcerto: "🎉 Caso encerrado! CARRO tem RR porque o som é forte entre vogais.",
         feedbackErro: "Pense em qual palavra tem som forte de R ENTRE vogais — só uma tem RR dobrado.",
         dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",

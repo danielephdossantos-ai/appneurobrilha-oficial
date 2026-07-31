@@ -237,6 +237,33 @@ export const aula3: AulaPortuguesV4 = {
     },
   },
 
+  momento_escrita: {
+    titulo: "Oficina de Escrita do Detetive",
+    instrucao:
+      "Três passos de escritor de verdade: primeiro o RASCUNHO, depois a REVISÃO com a lista de conferência e, por último, a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo com M antes de P e B",
+        comando: "Escreva um parágrafo com pelo menos três palavras que usam M antes de P ou B (campo, tempo, bomba, sombra).",
+        linhas: 4,
+        modelo: [
+          "O tempo mudou no campo.",
+          "A sombra ficou comprida.",
+          "A lâmpada acendeu.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra MAIÚSCULA.",
+          "Usei ponto final no fim de cada frase.",
+          "Meu texto fala do tema pedido, do começo ao fim.",
+          "Reli em voz alta e consertei o que estava estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: antes de P e B, o som nasal SEMPRE se escreve com M (campo, tambor, bomba).",
@@ -262,8 +289,19 @@ export const aula3: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Antes de qual letra usamos SEMPRE o M?",
-        opcoes: ["Antes de T", "Antes de P ou B", "Antes de qualquer vogal"],
+        opcoes: [
+          "Antes de T",
+          "Antes de P ou B",
+          "Antes de qualquer vogal",
+          "É preciso decorar o texto inteiro de cor",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Antes de T” não é a resposta. Lembre: M é exclusivo antes de P e B.",
+          null,
+          "❌ “Antes de qualquer vogal” não é a resposta. Lembre: M é exclusivo antes de P e B.",
+          "❌ “É preciso decorar o texto inteiro de cor” não é a resposta. Lembre: M é exclusivo antes de P e B.",
+        ],
         feedbackAcerto: "🎉 Isso! M antes de P e B, sempre.",
         feedbackErro: "Lembre: M é exclusivo antes de P e B.",
         dica: "🔎 Pista: lembre do que significa “campo” — Antes de P, o som nasal se escreve sempre com M, nunca com N. Use isso para eliminar as alternativas que não combinam.",
@@ -271,8 +309,19 @@ export const aula3: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Como se escreve o som nasal em PONTE?",
-        opcoes: ["Com M", "Com N", "Sem letra nasal"],
+        opcoes: [
+          "Com M",
+          "Com N",
+          "Usar N antes de P e de B",
+          "Sem letra nasal",
+        ],
         correta: 1,
+        feedbackOpcoes: [
+          "❌ “Com M” não é a resposta. PONTE tem T depois do som nasal — por isso é N, não M.",
+          null,
+          "❌ “Usar N antes de P e de B” não é a resposta. PONTE tem T depois do som nasal — por isso é N, não M.",
+          "❌ “Sem letra nasal” não é a resposta. PONTE tem T depois do som nasal — por isso é N, não M.",
+        ],
         feedbackAcerto: "🎉 Correto! Antes de T usamos N.",
         feedbackErro: "PONTE tem T depois do som nasal — por isso é N, não M.",
         dica: "🔎 Pista: lembre do que significa “campo” — Antes de P, o som nasal se escreve sempre com M, nunca com N. Use isso para eliminar as alternativas que não combinam.",
@@ -280,8 +329,19 @@ export const aula3: AulaPortuguesV4 = {
       },
       {
         pergunta: "3/5 — Por que CAMPO tem M?",
-        opcoes: ["Porque vem antes de P", "Porque é uma palavra grande", "Por acaso"],
+        opcoes: [
+          "Porque vem antes de P",
+          "Nenhuma dessas ideias combina com o que o texto mostra",
+          "Porque é uma palavra grande",
+          "Por acaso",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Nenhuma dessas ideias combina com o que o texto mostra” não é a resposta. Lembre a regra: antes de P, é sempre M.",
+          "❌ “Porque é uma palavra grande” não é a resposta. Lembre a regra: antes de P, é sempre M.",
+          "❌ “Por acaso” não é a resposta. Lembre a regra: antes de P, é sempre M.",
+        ],
         feedbackAcerto: "🎉 Isso! M sempre antes de P.",
         feedbackErro: "Lembre a regra: antes de P, é sempre M.",
         dica: "🔎 Pista: lembre do que significa “campo” — Antes de P, o som nasal se escreve sempre com M, nunca com N. Use isso para eliminar as alternativas que não combinam.",
@@ -289,8 +349,19 @@ export const aula3: AulaPortuguesV4 = {
       },
       {
         pergunta: "4/5 — Qual dessas palavras usa N corretamente?",
-        opcoes: ["Dança", "Bomba", "Tambor"],
+        opcoes: [
+          "Dança",
+          "Depende só do gosto de quem lê, sem olhar o texto",
+          "Bomba",
+          "Tambor",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Depende só do gosto de quem lê, sem olhar o texto” não é a resposta. Pense: quais dessas têm P ou B depois do som nasal? Só uma não tem.",
+          "❌ “Bomba” não é a resposta. Pense: quais dessas têm P ou B depois do som nasal? Só uma não tem.",
+          "❌ “Tambor” não é a resposta. Pense: quais dessas têm P ou B depois do som nasal? Só uma não tem.",
+        ],
         feedbackAcerto: "🎉 Isso! DANÇA usa N porque vem antes de Ç.",
         feedbackErro: "Pense: quais dessas têm P ou B depois do som nasal? Só uma não tem.",
         dica: "🔎 Pista: lembre do que significa “campo” — Antes de P, o som nasal se escreve sempre com M, nunca com N. Use isso para eliminar as alternativas que não combinam.",
@@ -298,8 +369,19 @@ export const aula3: AulaPortuguesV4 = {
       },
       {
         pergunta: "5/5 — Complete a regra: 'M antes de P e B, N ___.'",
-        opcoes: ["nos demais casos", "nunca mais", "só às vezes"],
+        opcoes: [
+          "nos demais casos",
+          "Usar N antes de P e de B",
+          "nunca mais",
+          "só às vezes",
+        ],
         correta: 0,
+        feedbackOpcoes: [
+          null,
+          "❌ “Usar N antes de P e de B” não é a resposta. Essa é a frase-regra da aula: 'M antes de P e B, N nos demais casos'.",
+          "❌ “nunca mais” não é a resposta. Essa é a frase-regra da aula: 'M antes de P e B, N nos demais casos'.",
+          "❌ “só às vezes” não é a resposta. Essa é a frase-regra da aula: 'M antes de P e B, N nos demais casos'.",
+        ],
         feedbackAcerto: "🎉 Caso encerrado! M antes de P e B, N nos demais casos.",
         feedbackErro: "Essa é a frase-regra da aula: 'M antes de P e B, N nos demais casos'.",
         dica: "🔎 Pista: lembre do que significa “campo” — Antes de P, o som nasal se escreve sempre com M, nunca com N. Use isso para eliminar as alternativas que não combinam.",
