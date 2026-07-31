@@ -173,7 +173,7 @@ def limpa(s):
 def minuscula_inicial(s):
     if not s:
         return s
-    if s[:2].isupper():  # sigla/palavra em caixa alta: preserva
+    if s[:2].isalpha() and s[:2].isupper():  # sigla em caixa alta: preserva
         return s
     return s[0].lower() + s[1:]
 
@@ -184,10 +184,10 @@ def termina_bem(s):
 
 def faz_dica(feedback_erro, onde, pergunta):
     if onde:
-        return termina_bem(
+        return (
             "🧭 Pista de explorador: volte ao texto e releia este trecho — “"
-            + limpa(onde).strip("… ")
-            + "”"
+            + limpa(onde).strip("… .")
+            + "”."
         )
     base = minuscula_inicial(limpa(feedback_erro))
     return termina_bem("🧭 Pista de explorador: " + base)
@@ -280,6 +280,11 @@ def processa(caminho):
             if idx != certa and len(o) > 12:
                 banco.append(o)
 
+    # remove duplicatas preservando a ordem, para variar o distrator por questão
+    vistos = set()
+    banco = [b for b in banco if not (limpa(b) in vistos or vistos.add(limpa(b)))]
+    rodizio = {"i": 0}
+
     edicoes = []  # (posicao, texto_a_inserir) e substituições
     stats = {"dica": 0, "reensino": 0, "quarta": 0, "feedbackOpcoes": 0}
 
@@ -317,13 +322,15 @@ def processa(caminho):
         # ---------- Fase 2: 4 alternativas + feedbackOpcoes -----------------
         if na_avaliacao and ops and certa is not None:
             if len(ops) < 4:
-                extras = [
-                    b
-                    for b in banco
-                    if b not in ops and limpa(b) != limpa(opcao_certa)
-                ]
-                while len(ops) < 4 and extras:
-                    ops.append(extras.pop(0))
+                n = len(banco)
+                tentativas = 0
+                while len(ops) < 4 and n and tentativas < n * 2:
+                    cand = banco[rodizio["i"] % n]
+                    rodizio["i"] += 1
+                    tentativas += 1
+                    if cand in ops or limpa(cand) == limpa(opcao_certa):
+                        continue
+                    ops.append(cand)
                 if len(ops) == 4:
                     stats["quarta"] += 1
             if "feedbackOpcoes" not in ks:
