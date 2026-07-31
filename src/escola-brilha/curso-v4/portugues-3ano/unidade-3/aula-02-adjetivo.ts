@@ -275,7 +275,6 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "Lembre-se: adjetivo descreve COMO algo é. 'Raposa' e 'janela' são substantivos; 'correu' é uma ação (verbo).",
         dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Quais destas palavras são adjetivos?” com essa ideia na cabeça.",
       },
     },
   },
