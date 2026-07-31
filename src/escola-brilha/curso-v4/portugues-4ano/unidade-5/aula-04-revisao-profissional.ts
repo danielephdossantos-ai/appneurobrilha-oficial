@@ -55,7 +55,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense em qualquer trabalho bem feito: ele sempre passa por uma checagem final antes de ficar pronto.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Melhor, mais claro e sem erros.”. Revisar com atenção sempre melhora o texto — corrige erros e deixa as ideias mais claras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -241,7 +240,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense: primeiro escreve-se livremente, depois confere com o checklist, e só então se reescreve.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância” — é quando as palavras da frase 'combinam' em número (singular/plural) e gênero (masculino/feminino). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Escrever → revisar com checklist → reescrever. Esse é o caminho do escritor profissional. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

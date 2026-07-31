@@ -71,7 +71,6 @@ export const aula03: AulaPortuguesV4 = {
         "Releia o caderno: um texto DEFINE (verbete), o outro mostra ETAPAS com imagens (infográfico). Pense em qual organiza um processo.",
       dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “O infográfico.”. O INFOGRÁFICO organiza etapas com imagens e texto curto — perfeito para mostrar um processo como a polinização. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -223,7 +222,6 @@ export const aula03: AulaPortuguesV4 = {
         "Pense: primeiro a abelha POUSA. Depois o PÓLEN gruda nela. Só então ela leva o pólen para outra flor.",
       dica: "🧭 Pista de explorador: lembre o que significa “infográfico” — é um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você seguiu a ordem exata das etapas do infográfico. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

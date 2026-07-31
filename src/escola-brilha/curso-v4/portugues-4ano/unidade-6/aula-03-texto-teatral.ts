@@ -57,7 +57,6 @@ export const aula03: AulaPortuguesV4 = {
         "Releia o título: 'Perdido' é pista de um problema a resolver, e as máscaras mostram que é um texto com personagens falando entre si.",
       dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Um grupo de exploradores discutindo um plano depois de se perderem.”. O título 'O Acampamento Perdido' e as máscaras de personagens são pista de uma cena com um grupo discutindo um problema. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -223,7 +222,6 @@ export const aula03: AulaPortuguesV4 = {
         "Pense na ordem: primeiro escolher papéis, depois entender as instruções de cena (rubricas), e só então encenar.",
       dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro escolhemos os papéis, depois entendemos as rubricas, e só então encenamos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

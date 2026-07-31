@@ -53,7 +53,6 @@ export const aula03: AulaPortuguesV4 = {
         "Pense: repetir a mesma palavra várias vezes cansa o leitor. Um pronome no lugar certo resolve isso.",
       dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Mais fluido, porque evita repetir a mesma palavra.”. Usar 'ele' no lugar de 'o cachorro' evita repetição e deixa o texto mais fluido, sem perder o sentido. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -231,7 +230,6 @@ export const aula03: AulaPortuguesV4 = {
         "Pense na ordem: primeiro apresenta o nome, depois usa substitutos, depois liga as ideias com conectivos.",
       dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você percebeu a costura do texto: nome → substituições → conectivos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

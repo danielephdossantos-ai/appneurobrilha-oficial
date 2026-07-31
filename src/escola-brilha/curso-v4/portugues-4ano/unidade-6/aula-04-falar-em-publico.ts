@@ -63,7 +63,6 @@ export const aula04: AulaPortuguesV4 = {
         "Releia as pistas: um mural de Sarau e um grupo reunido combinam com uma apresentação em voz alta, não com receita ou jogo.",
       dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Um grupo de crianças se preparando para apresentar algo em voz alta.”. O mural do Sarau e o grupo reunido são pistas de uma apresentação oral, não de uma receita ou de um jogo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -229,7 +228,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense na ordem: primeiro organizar as ideias, depois treinar em voz alta, e só então apresentar para o público.",
       dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro planejamos, depois ensaiamos, e só então apresentamos de verdade. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

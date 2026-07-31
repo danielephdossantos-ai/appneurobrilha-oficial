@@ -72,7 +72,6 @@ export const aula04: AulaPortuguesV4 = {
         "Releia o mural: um texto PEDE reforma, o outro CONVIDA para um mutirão. Os dois querem convencer alguém a agir.",
       dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Convencer alguém a pensar ou agir de um jeito.”. Carta de leitor e anúncio são textos que querem CONVENCER — um pede uma mudança, o outro convida para uma ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -238,7 +237,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense na ordem real: primeiro existe o problema (praça abandonada), depois se PEDE a mudança, e só então se CONVOCA a ação.",
       dica: "🧭 Pista de explorador: lembre o que significa “carta de leitor” — é um texto de opinião enviado por um leitor a um jornal ou revista, defendendo um ponto de vista sobre um assunto público, com argumentos. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro o PROBLEMA, depois o PEDIDO com argumentos, e por fim o CONVITE à ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

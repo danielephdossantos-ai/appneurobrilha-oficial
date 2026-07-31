@@ -75,7 +75,6 @@ export const aula03: AulaPortuguesV4 = {
         "Releia o bilhete: ele fala de uma mochila esquecida e usa palavras como 'sua' e 'ela' para não repetir 'a guia'.",
       dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Uma mochila esquecida que precisa ser levada até a guia.”. Repare: 'sua mochila', 'ela pediu', 'até ela' — os pronomes 'sua' e 'ela' sempre se referem à guia, sem repetir a palavra 'guia' toda hora. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -256,7 +255,6 @@ export const aula03: AulaPortuguesV4 = {
         "Pense: primeiro o menino ACHA o binóculo, depois ELE guarda, depois ele fala 'ESTE binóculo'.",
       dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Linha montada! Você seguiu a ordem certa: o achado, o pronome que o substitui e a fala final. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -330,7 +328,6 @@ export const aula03: AulaPortuguesV4 = {
           "Dica: pronomes pessoais substituem QUEM age; possessivos indicam DE QUEM é; demonstrativos indicam ONDE está.",
         dica: "🧭 Pista de explorador: lembre o que significa “pronome pessoal” — substitui o nome de uma pessoa ou coisa que já foi dita antes (ele, ela, eles, elas). Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Muito bem! Você reconheceu a função de cada pronome no lugar do nome que ele substitui. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

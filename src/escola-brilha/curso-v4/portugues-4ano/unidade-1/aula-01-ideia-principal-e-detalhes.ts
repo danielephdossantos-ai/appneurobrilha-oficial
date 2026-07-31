@@ -67,7 +67,6 @@ export const aula1: AulaPortuguesV4 = {
         "Repare que todas as frases falam sobre o mesmo lugar e o mesmo momento: a chegada a uma ilha. Isso é a ideia principal — o resto (calor, água doce) são detalhes que a completam.",
       dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “A chegada da exploradora a uma ilha desconhecida”. 'Chegamos à ilha', 'encontramos água' e 'vamos explorar' giram todos em torno de UM assunto central: a chegada à ilha desconhecida. Os outros detalhes (calor, água, floresta) só completam essa ideia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -231,7 +230,6 @@ export const aula1: AulaPortuguesV4 = {
         "Pense na ordem natural de uma viagem: primeiro enfrentam o desafio, depois vivem o percurso, só então chegam ao destino.",
       dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você seguiu a trilha certa: desafio, percurso, chegada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

@@ -59,7 +59,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense: um carimbo é de quem CAMINHOU (pegada) e outro é de quem OBSERVOU de fora (luneta). Isso é pista de duas vozes contando a mesma coisa.",
       dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “A mesma travessia contada por quem viveu e por quem observou de fora.”. Os dois carimbos — pegada e luneta — são pista de dois pontos de vista sobre a MESMA travessia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -205,7 +204,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense na ordem: primeiro procuramos 'eu/nós', depois nomes ou 'ele/ela', e só no fim concluímos o tipo de narrador.",
       dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro caçamos o 'eu', depois olhamos os nomes, e só então decidimos o tipo de narrador. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

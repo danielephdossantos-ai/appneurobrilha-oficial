@@ -56,7 +56,6 @@ export const aula3: AulaPortuguesV4 = {
         "Pense na árvore com FELIZ no tronco e INFELIZ, FELIZMENTE nos galhos — é sobre isso que vamos aprender.",
       dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Como um pedaço comum (radical) gera várias palavras, com prefixos e sufixos diferentes.”. Vamos descobrir como radical, prefixo e sufixo formam famílias de palavras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -227,7 +226,6 @@ export const aula3: AulaPortuguesV4 = {
         "Pense: primeiro se identifica o radical, depois se decide o prefixo, depois o sufixo, e por fim confere o sentido.",
       dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você reconstruiu o processo de formar uma palavra nova a partir do radical. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -312,7 +310,6 @@ export const aula3: AulaPortuguesV4 = {
           "Pense: o pedaço extra veio ANTES do radical (prefixo) ou DEPOIS (sufixo)? Ou a palavra é só o radical puro?",
         dica: "🧭 Pista de explorador: lembre o que significa “radical” — é o pedaço que carrega o SIGNIFICADO principal da palavra — o 'tronco' de onde nascem as outras. Fica igual (ou quase igual) em toda a família. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Excelente! Você organizou toda a árvore genealógica das palavras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

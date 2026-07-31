@@ -55,7 +55,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense: sem bússola, o explorador anda em círculos. Sem plano, o texto também 'anda em círculos' e se perde.",
       dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Para não se perder e saber para onde ir.”. Bússola e mapa evitam que o explorador se perca. Um esquema de escrita faz o mesmo pelo seu texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -232,7 +231,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense: primeiro vem a decisão, depois o esquema, e só no final o texto inteiro.",
       dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Pensar → organizar em tópicos → escrever. Esse é o caminho do escritor experiente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

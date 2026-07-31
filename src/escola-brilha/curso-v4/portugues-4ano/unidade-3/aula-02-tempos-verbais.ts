@@ -73,7 +73,6 @@ export const aula02: AulaPortuguesV4 = {
         "Releia a página: ela fala do que aconteceu ONTEM, o que acontece HOJE e o que vai acontecer AMANHÃ.",
       dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “A viagem da expedição em três dias diferentes.”. Repare nos três tempos: 'cruzamos' (passado), 'seguimos' (presente/passado próximo) e 'atravessaremos' (futuro) — a expedição em três momentos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -251,7 +250,6 @@ export const aula02: AulaPortuguesV4 = {
         "Pense no tempo de cada verbo: 'chegou' e 'viviam' são passado; 'atravessará' é futuro.",
       dica: "🧭 Pista de explorador: lembre o que significa “futuro” — conta algo que AINDA vai acontecer, que ainda não ocorreu. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Linha do tempo montada! Você seguiu do que já aconteceu até o que ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -325,7 +323,6 @@ export const aula02: AulaPortuguesV4 = {
           "Dica: verbos terminados em -OU/-EU/-IU costumam ser passado; -RÁ/-ERÁ/-IRÁ costumam ser futuro.",
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Muito bem! Você reconheceu os sinais de cada tempo verbal na terminação do verbo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

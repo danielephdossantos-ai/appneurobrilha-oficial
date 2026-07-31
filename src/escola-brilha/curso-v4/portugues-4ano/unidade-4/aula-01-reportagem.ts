@@ -76,7 +76,6 @@ export const aula01: AulaPortuguesV4 = {
         "Releia o mural: ele fala em FONTES (pessoas para ouvir) e DADOS (números). Junte as pistas — é sobre investigar a ponte a fundo.",
       dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Vários pontos de vista e números sobre a reconstrução da ponte.”. O mural mostra fontes e dados a apurar — é exatamente isso que separa a reportagem de uma notícia rápida. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -237,7 +236,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense: primeiro acontece o fato (ponte racha). Depois vem a INVESTIGAÇÃO (entrevistas e dados). Por último, o texto é escrito.",
       dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro o FATO, depois a APURAÇÃO com fontes e dados, e só então a REPORTAGEM pronta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

@@ -78,7 +78,6 @@ export const aula01: AulaPortuguesV4 = {
         "Releia o aviso: ele fala de TRILHAS NOVAS liberadas e GUIAS que vão acompanhar o grupo.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “A liberação de trilhas novas, acompanhadas por guias.”. O aviso fala das trilhas novas e dos guias que vão acompanhar — repare como AS TRILHAS e OS GUIAS já vêm no plural, combinando com o verbo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -250,7 +249,6 @@ export const aula01: AulaPortuguesV4 = {
         "Pense na ordem dos acontecimentos: primeiro caminharam, depois notaram as árvores, e por último o guia explicou.",
       dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Trilha em ordem! Você seguiu a sequência da expedição prestando atenção nas concordâncias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -324,7 +322,6 @@ export const aula01: AulaPortuguesV4 = {
           "Dica: confira se TODAS as palavras da frase estão no mesmo gênero e número — do artigo até o verbo.",
         dica: "🧭 Pista de explorador: lembre o que significa “concordância nominal” — é quando o artigo e o adjetivo mudam de forma para COMBINAR com o substantivo em gênero (masculino/feminino) e número (singular/plural). Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Muito bem! Você percebeu quando artigo, adjetivo e substantivo combinam, e quando o verbo bate com o sujeito. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

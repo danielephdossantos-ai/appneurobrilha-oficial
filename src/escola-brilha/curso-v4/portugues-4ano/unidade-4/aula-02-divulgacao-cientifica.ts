@@ -76,7 +76,6 @@ export const aula02: AulaPortuguesV4 = {
         "Releia o caderno de campo: ele junta SOL e CHUVA. A explicação científica usa esses dois elementos reais, sem mágica.",
       dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Sol e chuva juntos, com a luz atravessando as gotas de água.”. As pistas mostram sol E chuva juntos — divulgação científica explica com base em fenômenos reais, não em mágica. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -227,7 +226,6 @@ export const aula02: AulaPortuguesV4 = {
         "Pense na ordem real: primeiro precisa ter chovido (gotas no ar), depois o sol aparece, e só então a luz se divide.",
       dica: "🧭 Pista de explorador: lembre o que significa “divulgação científica” — é um texto que explica um fenômeno ou uma descoberta da ciência com linguagem clara, para que qualquer leitor entenda, sem inventar nem exagerar. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro a CHUVA, depois o SOL voltando, e por fim a LUZ se dividindo em cores. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

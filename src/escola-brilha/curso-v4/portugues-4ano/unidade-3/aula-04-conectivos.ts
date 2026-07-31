@@ -72,7 +72,6 @@ export const aula04: AulaPortuguesV4 = {
         "Releia as duas frases: elas usam palavras diferentes ('mas' e 'por isso') e o sentido muda completamente.",
       dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Como uma pequena palavra pode mudar o sentido de uma frase.”. Repare: 'MAS' mostra que continuaram apesar da chuva; 'POR ISSO' mostra que a chuva foi o MOTIVO de mudar de trilha. A palavrinha muda tudo! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -280,7 +279,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense: primeiro a chuva começa, depois a guia decide o atalho, e por fim o sol aparece e armam o acampamento.",
       dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Linha montada! Você seguiu a ordem certa: a chuva, o atalho e o desfecho com o sol. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -361,7 +359,6 @@ export const aula04: AulaPortuguesV4 = {
           "Dica: 'e' soma, 'mas' opõe, 'porque' explica a causa, 'por isso/então' mostram consequência e 'quando' marca o tempo.",
         dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Muito bem! Você reconheceu a relação que cada conectivo cria entre as ideias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

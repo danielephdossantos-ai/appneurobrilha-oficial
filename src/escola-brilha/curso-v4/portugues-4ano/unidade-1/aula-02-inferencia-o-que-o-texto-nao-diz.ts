@@ -64,7 +64,6 @@ export const aula2: AulaPortuguesV4 = {
         "Junte as pistas: comida ainda quente (saíram rápido), barracas caídas (algo forte aconteceu) e pegadas apressadas (correram). Tudo isso aponta para uma fuga repentina, não umas férias tranquilas.",
       dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Os exploradores fugiram às pressas de uma tempestade repentina”. Ótima dedução! Barracas caídas, comida abandonada ainda quente e pegadas apressadas indicam uma saída repentina — provavelmente por causa de uma tempestade, já que o texto nem precisou dizer isso diretamente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -224,7 +223,6 @@ export const aula2: AulaPortuguesV4 = {
         "Pense como um explorador: primeiro se chega, depois se observa o entorno, e só então se examina o caminho mais adiante.",
       dica: "🧭 Pista de explorador: lembre o que significa “inferência” — é a conclusão que tiramos juntando as pistas do texto com o que já sabemos do mundo, mesmo que essa conclusão não esteja escrita com todas as letras. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você seguiu o rastro das pistas na ordem certa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

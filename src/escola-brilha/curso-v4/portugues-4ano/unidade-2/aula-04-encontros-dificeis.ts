@@ -58,7 +58,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense no pântano das letras traiçoeiras: é sobre sons parecidos que se escrevem de jeitos diferentes.",
       dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Quais letras fazem sons parecidos e como não trocar uma pela outra na escrita.”. Vamos aprender a diferenciar letras que soam parecido, como X/CH, G/J, S/Z e SS/Ç. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -239,7 +238,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense: primeiro se ouve o som, depois se observa a posição, depois se lembra a regra, e só então se escreve.",
       dica: "🧭 Pista de explorador: lembre o que significa “dígrafo” — duas letras juntas que representam UM SÓ SOM. CH é um dígrafo: junto, faz o som de 'X' de CHUVA. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Essa é a rota certa para atravessar o pântano das letras traiçoeiras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -321,7 +319,6 @@ export const aula04: AulaPortuguesV4 = {
           "Fale a palavra em voz alta e pense na posição da letra duvidosa antes de tentar de novo.",
         dica: "🧭 Pista de explorador: lembre o que significa “família de palavras” — grupo de palavras que vêm da mesma palavra de origem e por isso se escrevem parecido. Ajuda a memorizar a grafia certa. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Excelente! Você venceu o pântano das letras traiçoeiras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

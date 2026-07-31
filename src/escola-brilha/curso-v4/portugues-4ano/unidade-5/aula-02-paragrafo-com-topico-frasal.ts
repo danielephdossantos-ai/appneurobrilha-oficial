@@ -53,7 +53,6 @@ export const aula02: AulaPortuguesV4 = {
         "Pense na caixa: a etiqueta 'LIVROS' avisa o que tem dentro antes de abrir. A primeira frase do parágrafo faz o mesmo.",
       dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Saber, desde o início, do que o parágrafo vai tratar.”. Assim como a etiqueta da caixa, a primeira frase do parágrafo avisa o conteúdo antes mesmo de ler tudo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -238,7 +237,6 @@ export const aula02: AulaPortuguesV4 = {
         "Pense: primeiro anuncia a ideia, depois explica com exemplos, e por último fecha com uma conclusão.",
       dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você organizou o parágrafo completo: anúncio, explicação e fecho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

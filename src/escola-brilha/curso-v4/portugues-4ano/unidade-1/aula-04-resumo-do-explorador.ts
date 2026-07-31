@@ -65,7 +65,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense: se Brilha só tem 3 frases, ele não pode copiar cinco páginas inteiras. Ele precisa escolher o que é mais importante e recontar do seu jeito.",
       dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Escolher as ideias mais importantes e contar com suas próprias palavras”. Resumir é selecionar as ideias principais e recontar com suas próprias palavras — sem copiar tudo e sem inventar nada de novo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -204,7 +203,6 @@ export const aula04: AulaPortuguesV4 = {
         "Pense: primeiro é preciso ler tudo, depois escolher o mais importante, e só então reescrever com suas palavras.",
       dica: "🧭 Pista de explorador: lembre o que significa “resumo” — é um texto curto que conta só as ideias mais importantes de um texto maior. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você seguiu as três etapas de um resumo bem feito: ler, selecionar e reformular. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

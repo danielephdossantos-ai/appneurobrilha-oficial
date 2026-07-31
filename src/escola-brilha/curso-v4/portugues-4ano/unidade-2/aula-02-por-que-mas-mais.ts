@@ -57,7 +57,6 @@ export const aula2: AulaPortuguesV4 = {
         "Repare que as placas têm palavras parecidas escritas de formas diferentes — é sobre isso que vamos aprender.",
       dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Quando usar cada uma das quatro formas de 'porquê' e o par 'mas/mais'.”. Vamos aprender a diferença entre os quatro porquês e entre 'mas' e 'mais'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -225,7 +224,6 @@ export const aula2: AulaPortuguesV4 = {
         "Pense: primeiro se pergunta se é pergunta, depois se é resposta, depois se é substantivo, e por último se está sozinha no fim.",
       dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Esse é o caminho certo pela encruzilhada dos porquês. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -302,7 +300,6 @@ export const aula2: AulaPortuguesV4 = {
           "Releia a frase inteira: pergunte-se se é pergunta, resposta, motivo, palavra isolada, oposição ou quantidade.",
         dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Você venceu a encruzilhada! Domina as quatro formas de porquê e o par mas/mais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

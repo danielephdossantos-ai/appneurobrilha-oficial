@@ -55,7 +55,6 @@ export const aula1: AulaPortuguesV4 = {
         "Pense na bússola: ela aponta para o som mais FORTE da palavra. É sobre isso que vamos investigar.",
       dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Qual sílaba de cada palavra soa mais forte, e quando isso pede acento.”. Vamos descobrir a sílaba tônica de cada palavra e entender quando ela ganha acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -218,7 +217,6 @@ export const aula1: AulaPortuguesV4 = {
         "Pense: primeiro se separa em sílabas, depois se ouve a força, depois se localiza a posição, e só então se decide o acento.",
       dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Essa é a rota certa para calibrar a bússola da sílaba tônica. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -311,7 +309,6 @@ export const aula1: AulaPortuguesV4 = {
           "Fale a palavra em voz alta bem devagar e sinta em qual sílaba a voz fica mais forte.",
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
         reensino:
-          "📚 Vamos rever juntos: Excelente! Você calibrou a bússola da sílaba tônica. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },

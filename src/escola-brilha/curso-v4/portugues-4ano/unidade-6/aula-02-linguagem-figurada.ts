@@ -59,7 +59,6 @@ export const aula02: AulaPortuguesV4 = {
         "Releia as frases do cristal: elas não podem ser verdadeiras ao pé da letra. Isso é pista de um jeito diferente de usar as palavras — a linguagem figurada.",
       dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “Formas diferentes de dizer as coisas na literatura, sem ser ao pé da letra.”. As frases do cristal não são literais — comparam o sol a uma moeda e dão a uma coruja a ação de 'piscar um segredo'. São pistas de linguagem figurada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -245,7 +244,6 @@ export const aula02: AulaPortuguesV4 = {
         "Pense na ordem: primeiro notar que não é literal, depois procurar 'como'/'é', depois checar exagero ou humanização.",
       dica: "🧭 Pista de explorador: lembre o que significa “metáfora” — é dizer que uma coisa É outra, sem usar 'como', para criar uma imagem forte. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Primeiro notamos o sentido figurado, depois procuramos as pistas de cada tipo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 

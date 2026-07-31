@@ -61,7 +61,6 @@ export const aula3: AulaPortuguesV4 = {
         "Pense na ordem lógica: primeiro precisa chover para o rio subir, e o rio precisa subir muito para derrubar uma ponte. A chuva é a causa inicial de toda a corrente de fatos.",
       dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: a resposta certa é “A chuva causou a subida do rio, que causou a queda da ponte”. A chuva forte é a CAUSA que fez o rio subir; o rio cheio é a CAUSA que fez a ponte ceder. É uma corrente: cada fato é consequência do anterior e causa do seguinte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -230,7 +229,6 @@ export const aula3: AulaPortuguesV4 = {
         "Pense: qual fato precisa acontecer primeiro para o seguinte ser possível? A seca vem antes do fogo, que vem antes do aviso.",
       dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
       reensino:
-        "📚 Vamos rever juntos: Você seguiu a corrente de causa e consequência do começo ao fim. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
