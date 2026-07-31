@@ -525,11 +525,27 @@ export type QuizTextoData = {
 
 // ---------- 11 momentos de Português ---------------------------------
 
+export type DescobertaLente = {
+  /** Posição do achado na imagem, em % (0–100). */
+  x: number;
+  y: number;
+  icone: string;
+  titulo: string;
+  /** Curiosidade curta que aparece quando a lupa passa por cima. */
+  texto: string;
+};
+
 export type MomentoMotivacaoPT = {
   titulo: string;
   historia: string;
   imagemUrl?: string;
+  /**
+   * Achados escondidos na cena (skin expedição). Sem mascote: a criança
+   * arrasta a lupa e vai descobrindo pistas sobre a aula.
+   */
+  descobertas?: DescobertaLente[];
 };
+
 
 export type MomentoPrevisao = {
   instrucao: string;
