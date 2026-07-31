@@ -250,6 +250,21 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: A Raposa Astuta",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "No fundo do quintal, morava uma raposa muito ASTUTA.",
+      "Ela nunca atacava o galinheiro de frente — sempre bolava um plano cheio de esperteza.",
+      "Certa noite, ela fingiu ser um cachorro perdido para distrair o cão de guarda e assim conseguiu se aproximar sem ser notada.",
+    ],
+    metaSegundos: 31,
+  },
+
   momento09_revisao: {
     pontos: [
       "Antes de correr para o dicionário, tente usar o CONTEXTO — as pistas ao redor da palavra.",

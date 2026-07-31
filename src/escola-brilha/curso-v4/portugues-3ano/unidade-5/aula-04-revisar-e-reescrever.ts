@@ -202,6 +202,25 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Antes e Depois da Revisão",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Antes: o cachorro correu correu correu no parque.",
+      "ele viu Um Gato.",
+      "o gato subiu na arvore.",
+      "Depois: O cachorro disparou pelo parque.",
+      "De repente, ele viu um gato e latiu animado.",
+      "Assustado, o gato subiu correndo na árvore.",
+      "Rafael trocou a repetição de 'correu' por 'disparou', colocou maiúsculas certas, pontos finais e deixou o texto mais claro e interessante.",
+    ],
+    metaSegundos: 40,
+  },
+
   momento09_revisao: {
     pontos: [
       "Revisar é reler o próprio texto como um detetive, procurando o que pode melhorar.",

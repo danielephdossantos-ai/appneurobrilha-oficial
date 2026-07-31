@@ -229,6 +229,21 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Girassol e o Coração",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "O girassol olha pro sol o dia inteiro, como se fosse seu melhor amigo.",
+      "Ele abre um sorriso amarelo cada manhã, contente de estar vivo.",
+      "Minha avó diz que o coração é um jardim: se a gente cuida bem, nascem flores; se esquece, cresce mato.",
+    ],
+    metaSegundos: 30,
+  },
+
   momento09_revisao: {
     pontos: [
       "SENTIDO FIGURADO é quando a frase não pode ser lida ao pé da letra.",

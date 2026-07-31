@@ -239,6 +239,23 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Meu dia na praia",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "No sábado, eu fui à praia com minha família.",
+      "Primeiro, eu e meu irmão construímos um castelo de areia bem grande.",
+      "Depois, nós entramos no mar e brincamos de pular as ondas.",
+      "Eu ri tanto que engoli um pouco de água salgada!",
+      "No fim da tarde, minha mãe comprou sorvete pra todo mundo.",
+    ],
+    metaSegundos: 35,
+  },
+
   momento09_revisao: {
     pontos: [
       "Relato pessoal conta uma experiência que a própria pessoa viveu.",

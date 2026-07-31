@@ -264,6 +264,21 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Gato é resgatado em árvore da praça",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Ontem de manhã, um gato cinza ficou preso no topo de uma árvore da Praça das Flores, no centro da cidade, depois de fugir de um cachorro assustado.",
+      "Moradores chamaram os bombeiros, que chegaram em quinze minutos com uma escada comprida.",
+      "O bombeiro Marcos subiu com cuidado e trouxe o gato são e salvo.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "MANCHETE é o título que resume o fato e chama atenção.",

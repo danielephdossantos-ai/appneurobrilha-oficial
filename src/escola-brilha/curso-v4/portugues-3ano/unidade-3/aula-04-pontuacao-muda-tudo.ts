@@ -327,6 +327,23 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Caso do Grito na Biblioteca",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Sofia, venha depressa até aqui!",
+      "— gritou Théo, apontando para a estante.",
+      "O que você encontrou?",
+      "— perguntou Sofia, curiosa.",
+      "Théo respondeu: — Encontrei um livro, um mapa e uma chave dourada.",
+    ],
+    metaSegundos: 21,
+  },
+
   momento09_revisao: {
     pontos: [
       "PONTO FINAL fecha uma ideia completa, de jeito calmo.",

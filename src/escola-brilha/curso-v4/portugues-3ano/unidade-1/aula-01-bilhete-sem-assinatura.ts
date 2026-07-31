@@ -255,6 +255,21 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Recado da Caixa de Sapato",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Marina encontrou uma caixa de sapato empoeirada no fundo do armário.",
+      "Dentro, havia um bilhete amarelado, sem assinatura, escrito com letra tremida.",
+      "O papel tinha um cheiro de hortelã e, no canto, uma marquinha redonda — do tipo que os óculos deixam quando são apoiados em cima de algo.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "INFERIR é concluir algo que o texto não diz com todas as letras, juntando pistas + o que já sabemos.",

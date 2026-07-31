@@ -266,6 +266,21 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Segredo do R",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Aurora reuniu o Clube dos Detetives e mostrou o mapa da regra.",
+      "'Quando o R está entre vogais, sozinho, ele soa fraco, como em CARO e ARARA.",
+      "Mas se o R aparece dobrado, RR, entre vogais, o som fica forte, como em CARRO e TERRA.'",
+    ],
+    metaSegundos: 30,
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: entre vogais, R sozinho tem som FRACO (caro) e RR tem som FORTE (carro).",

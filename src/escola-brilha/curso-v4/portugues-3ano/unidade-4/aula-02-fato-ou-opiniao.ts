@@ -249,6 +249,21 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Depoimento de Bia sobre o jogo",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Ontem, o time da nossa escola venceu o time do bairro vizinho por 3 a 1.",
+      "Eu acho que esse foi o melhor jogo do ano, porque todo mundo torceu muito e fez bastante barulho.",
+      "O jogo terminou às 16h30, e o goleiro Pedro defendeu um pênalti no final.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "FATO é algo que aconteceu de verdade e pode ser checado (números, datas, horários, nomes).",

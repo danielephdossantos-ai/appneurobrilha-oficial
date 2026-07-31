@@ -313,6 +313,23 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Relatório do Detetive Brilha",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Hoje de manhã, o cachorro Rex sumiu perto da escola.",
+      "Uma menina chamada Ana viu ele correndo em direção à praça.",
+      "Na praça, encontramos uma coleira vermelha perto do banco.",
+      "A coleira tinha o nome Rex escrito nela.",
+      "Ana e Brilha seguiram as pegadas até um jardim, onde Rex estava escondido atrás de uma árvore, com medo do barulho de fogos.",
+    ],
+    metaSegundos: 41,
+  },
+
   momento09_revisao: {
     pontos: [
       "SUBSTANTIVO é a palavra que nomeia pessoas, animais, lugares e objetos.",

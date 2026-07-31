@@ -283,6 +283,22 @@ export const aula2: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Quatro Jeitos, Um Só Som",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Aurora explicou ao clube: 'O som /s/ tem quatro disfarces.",
+      "Primeiro, o S sozinho entre vogais na verdade soa como Z, igual em CASA e VASO.'",
+      "'Segundo, quando queremos o som de S de verdade entre vogais, dobramos: SS, como em PASSO e ASSADO.",
+      "Terceiro, o Ç só aparece antes de A, O ou U, como em MOÇA, LAÇO e AÇÚCAR — e sempre soa S.'",
+    ],
+    metaSegundos: 44,
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: entre vogais, S sozinho soa Z (casa); SS dobrado soa S (passo).",

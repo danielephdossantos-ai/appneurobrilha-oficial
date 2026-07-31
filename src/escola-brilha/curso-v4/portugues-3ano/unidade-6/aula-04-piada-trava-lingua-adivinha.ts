@@ -261,6 +261,22 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: Trio de Trava-Línguas do Clube",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "O sapo dentro do saco, o saco com o sapo dentro.",
+      "O sapo esperneia, o saco balança, mas o sapo não sai do saco enquanto o saco estiver amarrado.",
+      "Um pato pisou na pata do outro pato.",
+      "Poucas patas puderam pisar sem que o pato gritasse pato!",
+    ],
+    metaSegundos: 31,
+  },
+
   momento09_revisao: {
     pontos: [
       "DUPLO SENTIDO é quando uma palavra pode ser entendida de duas formas — é a base do humor verbal.",

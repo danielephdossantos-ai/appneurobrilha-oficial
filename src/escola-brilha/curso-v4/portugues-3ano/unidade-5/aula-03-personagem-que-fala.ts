@@ -196,6 +196,25 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Cachorro que Falava Demais (na imaginação de Rico)",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Rico adorava imaginar o que seu cachorro Bolinha diria se pudesse falar.",
+      "— Será que ele quer passear?",
+      "— perguntou Rico, olhando para o cachorro sentado na porta.",
+      "— Au, au!",
+      "— respondeu Bolinha, abanando o rabo depressa.",
+      "— Então vamos!",
+      "— gritou Rico, animado, pegando a coleira na hora.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "O travessão (—) marca a fala direta de um personagem.",

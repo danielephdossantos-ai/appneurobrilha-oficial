@@ -258,6 +258,21 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura cronometrada (Fase 4 · 3º ano · ~90 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura de detetive: O Som que Sai Pelo Nariz",
+    instrucao:
+      "Detetive lê rápido, mas não atropela. Leia este trecho três vezes: a 1ª devagar entendendo tudo, a 2ª no cronômetro e a 3ª em voz alta com entonação — respeitando vírgula e ponto. A meta é ler sem tropeçar, não correr.",
+    texto: [
+      "Aurora explicou: 'O til (~) é um sinal que fica em cima do A ou do O e avisa: esse som passa pelo nariz, é nasal.",
+      "Por isso escrevemos MAÇÃ, IRMÃ e BALÃO, sempre com aquele tracinho tremido.'",
+      "'Quando uma palavra termina em -ÃO e vai para o plural, pode virar de três jeitos: BALÃO → BALÕES, o mais comum; PÃO → PÃES, com E; e a mão → mãos, que só ganha um S, ficando MÃOS.",
+    ],
+    metaSegundos: 51,
+  },
+
   momento09_revisao: {
     pontos: [
       "REGRA: o til (~) marca som nasal, como em MAÇÃ, IRMÃ e BALÃO.",
