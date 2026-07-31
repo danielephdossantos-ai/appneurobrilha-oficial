@@ -64,6 +64,7 @@ export const aula04: AulaPortuguesV4 = {
         "🏆 Isso! O relógio parado e a janela aberta são pistas de horário e entrada — apontam para um sumiço à noite.",
       feedbackErro:
         "Junte as pistas: relógio parado à noite + janela aberta de manhã. Isso sugere que alguém entrou durante a madrugada e levou a joia.",
+      dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -114,6 +115,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🏆 Isso! 'trazido de um navio naufragado há duzentos anos'.",
         feedbackErro: "A resposta está no primeiro parágrafo, na última parte da frase.",
         ondeEstaNoTexto: "um diamante antigo, trazido de um navio naufragado há duzentos anos",
+        dica: "🔎 Pista: releia no texto o trecho “um diamante antigo, trazido de um navio naufragado há duzentos anos”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “De onde veio o diamante guardado no museu?” com essa ideia na cabeça.",
       },
       {
         pergunta: "A que horas o relógio da sala parou?",
@@ -122,6 +125,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🏆 Boa! 'O relógio da sala tinha parado exatamente às 22h'.",
         feedbackErro: "Está no início do segundo parágrafo.",
         ondeEstaNoTexto: "O relógio da sala tinha parado exatamente às 22h…",
+        dica: "🔎 Pista: releia no texto o trecho “O relógio da sala tinha parado exatamente às 22h…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “A que horas o relógio da sala parou?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que foi encontrado preso em uma farpa de madeira na janela?",
@@ -130,6 +135,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🏆 Isso! 'um pedacinho de tecido azul, preso em uma farpa de madeira'.",
         feedbackErro: "Releia o início do terceiro parágrafo.",
         ondeEstaNoTexto: "havia um vestígio importante: um pedacinho de tecido azul…",
+        dica: "🔎 Pista: releia no texto o trecho “havia um vestígio importante: um pedacinho de tecido azul…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “O que foi encontrado preso em uma farpa de madeira na janela?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -149,6 +156,8 @@ export const aula04: AulaPortuguesV4 = {
           "🏆 Isso! Essa frase junta as pistas principais do relatório inteiro — o resto são detalhes que sustentam essa conclusão.",
         feedbackErro:
           "Pense no relatório inteiro: qual frase, sozinha, contaria toda a investigação? O vigia e o relógio são detalhes que apoiam essa ideia maior.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “Qual frase resume a IDEIA PRINCIPAL de todo o relatório?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Pelas pistas (tecido azul + uniforme só dos funcionários da limpeza), o que Aurora infere?",
@@ -162,6 +171,8 @@ export const aula04: AulaPortuguesV4 = {
           "🏆 Exatamente! O texto não afirma quem é, mas as pistas do uniforme azul sugerem envolvimento de alguém de dentro — uma inferência bem embasada.",
         feedbackErro:
           "Junte as pistas: só os funcionários da limpeza usam azul. Isso não PROVA quem é, mas permite INFERIR que pode haver alguém de dentro envolvido.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “Pelas pistas (tecido azul + uniforme só dos funcionários da limpeza),…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -178,6 +189,7 @@ export const aula04: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🏆 Perfeito! Você reconstruiu o caso na ordem certa — como um verdadeiro detetive.",
       feedbackErro: "Pense na linha do tempo: primeiro o diamante estava seguro, depois foi notado o sumiço, e só então vieram as conclusões.",
+      dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -201,6 +213,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🏆 Isso! 'um rapaz novo, chamado Caio'.",
         feedbackErro: "A resposta está no fim do primeiro parágrafo.",
         ondeEstaNoTexto: "um rapaz novo, chamado Caio",
+        dica: "🔎 Pista: releia no texto o trecho “um rapaz novo, chamado Caio”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “Quem era o funcionário que tinha trabalhado até tarde na sexta?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual é a IDEIA PRINCIPAL desse trecho final da história?",
@@ -212,6 +226,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Isso mesmo! Essa frase resume o desfecho de todo o caso.",
         feedbackErro: "Pense no que resume TODO o parágrafo final: a confissão, o arrependimento e a devolução do diamante.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “Qual é a IDEIA PRINCIPAL desse trecho final da história?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -234,6 +250,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🏆 Isso! Um detetive completo usa TODAS as ferramentas juntas.",
       feedbackErro: "A melhor estratégia é combinar TODAS as ferramentas que aprendemos na unidade — nenhuma sozinha resolve um caso completo.",
+      dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “Qual é a MELHOR estratégia quando um texto é longo e complicado, chei…” com essa ideia na cabeça.",
     },
   },
 
@@ -245,6 +263,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Isso! O tecido azul era do uniforme dos funcionários da limpeza.",
         feedbackErro: "A pista era o pedacinho de tecido azul, ligado ao uniforme da limpeza.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “1/5 — Qual pista fez Aurora suspeitar de um funcionário da limpeza?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Qual é a ideia principal do relatório inicial do museu?",
@@ -256,6 +276,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Correto!",
         feedbackErro: "A ideia central junta as pistas para explicar o sumiço do diamante durante a noite.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “2/5 — Qual é a ideia principal do relatório inicial do museu?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — O que significa a palavra 'vestígio', usada no relatório?",
@@ -263,6 +285,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Isso!",
         feedbackErro: "Vestígio é um sinal deixado por alguém, que ajuda a entender o que aconteceu — como o pedaço de tecido.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “3/5 — O que significa a palavra 'vestígio', usada no relatório?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que dizemos que Aurora 'inferiu' um possível cúmplice, e não que ela 'provou'?",
@@ -274,6 +298,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Exatamente! Inferir é diferente de ter certeza absoluta — é uma conclusão bem fundamentada em pistas.",
         feedbackErro: "Inferir é concluir com base em pistas, mesmo sem o texto afirmar isso diretamente — por isso não é uma 'prova', é uma dedução.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “4/5 — Por que dizemos que Aurora 'inferiu' um possível cúmplice, e nã…” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Quem confessou ter levado o diamante?",
@@ -281,6 +307,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🏆 Isso! Caso resolvido — você agora é um Detetive Iniciante da Palavra! 🌟",
         feedbackErro: "O texto diz claramente: 'ele tinha visto o diamante... e acabou fugindo com a peça' — o funcionário era Caio.",
+        dica: "🔎 Pista: lembre do que significa “vestígio” — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vestígio — É um sinal ou marca deixada por alguém ou algo, que ajuda a reconstruir o que aconteceu. Exemplo: As pegadas de lama eram um vestígio de que alguém tinha passado por ali. Agora volte à pergunta “5/5 — Quem confessou ter levado o diamante?” com essa ideia na cabeça.",
       },
     ],
   },

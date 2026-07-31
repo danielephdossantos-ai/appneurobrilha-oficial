@@ -60,6 +60,7 @@ export const aula02: AulaPortuguesV4 = {
         "🔍 Isso! O vento não fala de verdade — a frase compara o SOM do vento soprando fraquinho ao som de um cochicho. É sentido figurado!",
       feedbackErro:
         "Pense: vento não tem boca pra falar. A frase está COMPARANDO o barulho suave do vento com um cochicho — não é pra levar ao pé da letra.",
+      dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -107,6 +108,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! 'O girassol olha pro sol o dia inteiro'.",
         feedbackErro: "Está na primeira frase: 'O girassol olha pro...'",
         ondeEstaNoTexto: "O girassol olha pro sol o dia inteiro,",
+        dica: "🔎 Pista: releia no texto o trecho “O girassol olha pro sol o dia inteiro,”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “Para onde o girassol 'olha' o dia inteiro, segundo o texto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que a avó diz que o coração é?",
@@ -115,6 +118,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! 'O coração é um jardim'.",
         feedbackErro: "Releia a última frase — a avó compara o coração com algo que tem flores e mato.",
         ondeEstaNoTexto: "…o coração é um jardim…",
+        dica: "🔎 Pista: releia no texto o trecho “…o coração é um jardim…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “O que a avó diz que o coração é?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -128,6 +133,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Exato! A palavra 'como' avisa que é uma COMPARAÇÃO.",
         feedbackErro: "Repare que a frase usa a palavra 'como' — isso é a marca registrada da comparação.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “'O girassol olha pro sol como se fosse seu melhor amigo' é uma...” com essa ideia na cabeça.",
       },
       {
         pergunta: "'O coração é um jardim' é uma...",
@@ -137,6 +144,8 @@ export const aula02: AulaPortuguesV4 = {
           "🔍 Isso! É metáfora: o texto diz direto que o coração 'é' um jardim, sem usar 'como'. O coração não virou terra e flores de verdade!",
         feedbackErro:
           "Repare: não tem a palavra 'como'. O texto afirma direto 'o coração É um jardim' — isso é metáfora.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “'O coração é um jardim' é uma...” com essa ideia na cabeça.",
       },
     ],
   },
@@ -153,6 +162,7 @@ export const aula02: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🔍 Isso mesmo! Primeiro checamos se é possível, depois identificamos a figura, e por fim buscamos o sentido real.",
       feedbackErro: "Pense: primeiro a gente PERGUNTA se é possível, depois RECONHECE a figura, só então DESCOBRE o sentido verdadeiro.",
+      dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -178,6 +188,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! É sentido figurado: comparar a chuva caindo com um choro mostra que choveu bastante.",
         feedbackErro: "Chuva não tem sentimentos. A frase usa a imagem do choro para mostrar que choveu MUITO.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “'A chuva chorou sem parar' quer dizer que...” com essa ideia na cabeça.",
       },
       {
         pergunta: "'Foi como se alguém tivesse ligado uma lâmpada gigante no céu' é uma...",
@@ -185,6 +197,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Exato! A palavra 'como' aparece na frase — é uma comparação com o sol aparecendo forte.",
         feedbackErro: "Repare: a frase tem a palavra 'como se' — isso indica uma comparação.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “'Foi como se alguém tivesse ligado uma lâmpada gigante no céu' é uma.…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -202,6 +216,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🔍 Isso! Não tem a palavra 'como' — é metáfora.",
       feedbackErro: "Repare que não tem 'como' na frase — logo, é metáfora, não comparação.",
+      dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “'Ela tem um sorriso de sol' é...” com essa ideia na cabeça.",
     },
   },
 
@@ -217,6 +233,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Sentido figurado foge do literal.",
         feedbackErro: "Sentido figurado é quando a frase NÃO pode ser entendida ao pé da letra.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “1/5 — O que é sentido figurado?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Qual frase é uma comparação (usa 'como')?",
@@ -224,6 +242,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Correto! A palavra 'como' marca a comparação.",
         feedbackErro: "Procure a frase que tem a palavra 'como' — essa é a comparação.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “2/5 — Qual frase é uma comparação (usa 'como')?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — 'O tempo voou' é um exemplo de...",
@@ -231,6 +251,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Tempo não tem asas — a frase quer dizer que o tempo passou rápido.",
         feedbackErro: "Tempo não voa de verdade. A frase quer dizer que o tempo passou rápido — é figurado.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “3/5 — 'O tempo voou' é um exemplo de...” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — 'O vento cochichou um segredo' quer dizer que...",
@@ -242,6 +264,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! A frase compara o som fraco do vento a um cochicho.",
         feedbackErro: "Vento não fala. A frase usa a imagem do cochicho pra mostrar que o vento soprou baixinho.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “4/5 — 'O vento cochichou um segredo' quer dizer que...” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — 'Meu avô é uma enciclopédia' é uma...",
@@ -249,6 +273,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Sem a palavra 'como', a frase afirma direto — é metáfora. Caso resolvido! 🌟",
         feedbackErro: "Não tem a palavra 'como' — a frase diz direto 'é uma enciclopédia', então é metáfora.",
+        dica: "🔎 Pista: lembre do que significa “comparação” — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: comparação — É quando o texto liga duas coisas usando a palavra 'COMO', mostrando uma semelhança entre elas. Exemplo: 'O menino corria como um foguete' — ele não virou foguete, só corria muito rápido. Agora volte à pergunta “5/5 — 'Meu avô é uma enciclopédia' é uma...” com essa ideia na cabeça.",
       },
     ],
   },

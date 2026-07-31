@@ -66,6 +66,7 @@ export const aula01: AulaPortuguesV4 = {
         "🔍 Ótima dedução! 'Deixei o bolo', 'não esqueça a lição' e 'volto às 16h' são frases de quem CUIDA de alguém — típico de um responsável da família.",
       feedbackErro:
         "Repare nas pistas: falar de bolo 'favorito', cobrar lição e avisar horário de volta são atitudes de quem cuida da criança todo dia — um adulto da família.",
+      dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -116,6 +117,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! Está no primeiro parágrafo: 'caixa de sapato empoeirada'.",
         feedbackErro: "Volte ao primeiro parágrafo — o lugar aparece logo na primeira frase.",
         ondeEstaNoTexto: "Marina encontrou uma caixa de sapato empoeirada no fundo do armário.",
+        dica: "🔎 Pista: releia no texto o trecho “Marina encontrou uma caixa de sapato empoeirada no fundo do armário.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Onde Marina encontrou o bilhete?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Como estava a letra do bilhete?",
@@ -124,6 +127,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Exato! O texto diz 'escrito com letra tremida' — uma pista importante.",
         feedbackErro: "Releia o final do primeiro parágrafo: a palavra que descreve a letra vem logo depois de 'escrito com'.",
         ondeEstaNoTexto: "…um bilhete amarelado, sem assinatura, escrito com letra tremida.",
+        dica: "🔎 Pista: releia no texto o trecho “…um bilhete amarelado, sem assinatura, escrito com letra tremida.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Como estava a letra do bilhete?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Que cheiro o papel tinha?",
@@ -132,6 +137,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! 'O papel tinha um cheiro de hortelã'.",
         feedbackErro: "A resposta está no começo do segundo parágrafo.",
         ondeEstaNoTexto: "O papel tinha um cheiro de hortelã…",
+        dica: "🔎 Pista: releia no texto o trecho “O papel tinha um cheiro de hortelã…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Que cheiro o papel tinha?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -147,6 +154,8 @@ export const aula01: AulaPortuguesV4 = {
           "🔍 Isso mesmo! Letra tremida (idade), marca de óculos e a palavra 'netinha' apontam para a AVÓ — o texto nunca escreveu 'avó', mas as pistas provam.",
         feedbackErro:
           "Pense: quem usa óculos, tem letra tremida e chama alguém de 'netinha'? Junte as três pistas — elas apontam para a avó.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Juntando as pistas (letra tremida + marca de óculos + a palavra 'neti…” com essa ideia na cabeça.",
       },
       {
         pergunta: "Por que Marina 'não precisava de uma assinatura para saber' quem escreveu?",
@@ -160,6 +169,8 @@ export const aula01: AulaPortuguesV4 = {
           "🔍 Exatamente! Ela usou a INFERÊNCIA: juntou as pistas do bilhete para concluir quem tinha escrito.",
         feedbackErro:
           "O texto não mostra ninguém contando o nome pra ela — ela mesma juntou as pistas (letra, cheiro, marca, palavra 'netinha') e concluiu sozinha.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Por que Marina 'não precisava de uma assinatura para saber' quem escr…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -176,6 +187,7 @@ export const aula01: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🔍 Perfeito! Você seguiu a pista certa: primeiro o achado, depois as pistas, depois a conclusão.",
       feedbackErro: "Pense como um detetive: primeiro ACHA a pista, depois OBSERVA os detalhes, só então CONCLUI quem é.",
+      dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -199,6 +211,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! Está escrito: 'Prometo comprar outro com meu dinheiro do cofrinho.'",
         feedbackErro: "Releia a segunda frase — a promessa vem logo depois de 'Prometo'.",
         ondeEstaNoTexto: "Prometo comprar outro com meu dinheiro do cofrinho.",
+        dica: "🔎 Pista: releia no texto o trecho “Prometo comprar outro com meu dinheiro do cofrinho.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “O que a pessoa prometeu fazer?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Pelas pistas (letra bagunçada, coraçãozinho, cofrinho), quem provavelmente escreveu o bilhete?",
@@ -208,6 +222,8 @@ export const aula01: AulaPortuguesV4 = {
           "🔍 Muito bem! Cofrinho, letra grande e desenho de coração são pistas típicas de uma criança — o texto nunca disse isso com todas as letras.",
         feedbackErro:
           "Quem costuma ter cofrinho, desenhar coraçõezinhos e escrever com letras grandes e bagunçadas? Essas pistas juntas apontam para uma criança.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Pelas pistas (letra bagunçada, coraçãozinho, cofrinho), quem provavel…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -229,6 +245,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🔍 Isso! 'Ir para o trabalho' e cuidar do gato são pistas de responsabilidade adulta.",
       feedbackErro: "Pense: quem 'vai pro trabalho' e cuida da casa? Essa é uma pista de que é um adulto.",
+      dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “Um bilhete diz 'Já dei ração pro gato e fui pro trabalho'. O que dá p…” com essa ideia na cabeça.",
     },
   },
 
@@ -244,6 +262,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Inferir é concluir com pistas.",
         feedbackErro: "Inferir é USAR PISTAS para descobrir algo que o texto não disse diretamente.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “1/5 — O que significa 'inferir' um texto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — No bilhete da caixa de sapato, qual NÃO era uma pista sobre a avó?",
@@ -251,6 +271,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🔍 Correto! A cor do papel não indicava quem escreveu.",
         feedbackErro: "As pistas fortes eram letra tremida, marca de óculos e a palavra 'netinha' — não a cor do papel.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “2/5 — No bilhete da caixa de sapato, qual NÃO era uma pista sobre a a…” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Se um bilhete cheira a perfume floral e tem letra bem caprichada, o que é razoável inferir?",
@@ -262,6 +284,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Boa dedução! As pistas de cheiro e capricho apontam nessa direção.",
         feedbackErro: "Junte as pistas: perfume + letra caprichada sugerem alguém cuidadoso com os detalhes.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “3/5 — Se um bilhete cheira a perfume floral e tem letra bem caprichad…” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que é importante voltar ao texto mesmo quando fazemos uma inferência?",
@@ -273,6 +297,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Exatamente! Toda inferência precisa se apoiar em pistas reais do texto.",
         feedbackErro: "Mesmo inferindo, a criança precisa checar se as pistas usadas realmente estão no texto.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “4/5 — Por que é importante voltar ao texto mesmo quando fazemos uma i…” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — No caso do bolo, o que fez o clube concluir que era uma criança?",
@@ -280,6 +306,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Isso! Três pistas combinadas resolveram o caso. Primeira pista do clube resolvida! 🌟",
         feedbackErro: "As pistas eram letra bagunçada, coraçãozinho desenhado e a menção ao cofrinho.",
+        dica: "🔎 Pista: lembre do que significa “pista” — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: pista — É uma informação escondida no texto que ajuda a descobrir algo que não foi dito diretamente. Exemplo: A letra apertada e o cheiro de café eram pistas de que o bilhete era do avô. Agora volte à pergunta “5/5 — No caso do bolo, o que fez o clube concluir que era uma criança?” com essa ideia na cabeça.",
       },
     ],
   },

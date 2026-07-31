@@ -65,6 +65,7 @@ export const aula03: AulaPortuguesV4 = {
         "🔎 Isso mesmo! As pistas 'sem medo' e 'sozinha' ao lado do tigre mostram que DESTEMIDA quer dizer corajosa.",
       feedbackErro:
         "Releia: a frase diz 'sem medo do tigre'. Essa é a pista — DESTEMIDA tem a ver com não sentir medo, ou seja, ser corajosa.",
+      dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -115,6 +116,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔎 Isso! 'No fundo do quintal, morava uma raposa…'",
         feedbackErro: "A resposta está na primeira frase do texto.",
         ondeEstaNoTexto: "No fundo do quintal, morava uma raposa muito astuta.",
+        dica: "🔎 Pista: releia no texto o trecho “No fundo do quintal, morava uma raposa muito astuta.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “Onde a raposa morava?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que a raposa fingiu ser para enganar o cão?",
@@ -123,6 +126,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔎 Boa! 'ela fingiu ser um cachorro perdido'.",
         feedbackErro: "Releia o segundo parágrafo — logo depois de 'fingiu ser'.",
         ondeEstaNoTexto: "ela fingiu ser um cachorro perdido para distrair o cão de guarda",
+        dica: "🔎 Pista: releia no texto o trecho “ela fingiu ser um cachorro perdido para distrair o cão de guarda”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “O que a raposa fingiu ser para enganar o cão?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quando o fazendeiro descobriu o truque?",
@@ -131,6 +136,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔎 Isso! 'O fazendeiro só descobriu o truque no dia seguinte'.",
         feedbackErro: "A resposta está no início do terceiro parágrafo.",
         ondeEstaNoTexto: "O fazendeiro só descobriu o truque no dia seguinte…",
+        dica: "🔎 Pista: releia no texto o trecho “O fazendeiro só descobriu o truque no dia seguinte…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “Quando o fazendeiro descobriu o truque?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -146,6 +153,8 @@ export const aula03: AulaPortuguesV4 = {
           "🔎 Isso! As pistas 'bolava um plano cheio de esperteza' e 'enganou' mostram que astuta é sinônimo de esperta.",
         feedbackErro:
           "Repare nas pistas ao redor: 'plano cheio de esperteza' e 'enganou o cachorro'. Isso mostra que astuta = esperta, cheia de truques.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “Pelo contexto do texto, o que significa 'ASTUTA'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "A palavra 'astúcia', no último parágrafo, tem o mesmo sentido de qual palavra do texto?",
@@ -155,6 +164,8 @@ export const aula03: AulaPortuguesV4 = {
           "🔎 Exato! 'Astúcia' e 'esperteza' aparecem no texto se referindo à mesma qualidade da raposa.",
         feedbackErro:
           "No segundo parágrafo já apareceu a palavra 'esperteza' descrevendo a raposa — é o mesmo sentido de 'astúcia'.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “A palavra 'astúcia', no último parágrafo, tem o mesmo sentido de qual…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -171,6 +182,7 @@ export const aula03: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🔎 Isso! Esse é o caminho de um detetive de palavras.",
       feedbackErro: "Primeiro se acha a palavra, depois se procuram pistas ao redor, e só então se testa um significado.",
+      dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -194,6 +206,8 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔎 Isso! Está entre aspas no primeiro parágrafo.",
         feedbackErro: "Releia o primeiro parágrafo — a frase do bilhete está entre aspas.",
         ondeEstaNoTexto: "um bilhete que dizia 'só os espertos vão entender'",
+        dica: "🔎 Pista: releia no texto o trecho “um bilhete que dizia 'só os espertos vão entender'”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “O que o bilhete dentro do mapa dizia?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Pelo contexto, o que significa a palavra 'ENIGMÁTICO'?",
@@ -203,6 +217,8 @@ export const aula03: AulaPortuguesV4 = {
           "🔎 Muito bem! As pistas 'símbolos estranhos', 'setas que não levavam a lugar nenhum' e 'só os espertos vão entender' mostram que é algo misterioso.",
         feedbackErro:
           "Junte as pistas: símbolos estranhos + setas confusas + 'só os espertos entendem'. Tudo isso indica algo misterioso — enigmático.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “Pelo contexto, o que significa a palavra 'ENIGMÁTICO'?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -224,6 +240,8 @@ export const aula03: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🔎 Isso! 'Lixo e poeira' são as pistas de contexto.",
       feedbackErro: "As pistas 'cheio de lixo e poeira' mostram que imundo significa muito sujo.",
+      dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “Na frase 'O quarto estava imundo, cheio de lixo e poeira por todo lad…” com essa ideia na cabeça.",
     },
   },
 
@@ -239,6 +257,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔎 Isso!",
         feedbackErro: "Usar o contexto é observar as frases ao redor da palavra para descobrir o significado.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “1/5 — O que é 'usar o contexto' para descobrir uma palavra?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — No texto da raposa, qual pista ajudou a entender 'astuta'?",
@@ -246,6 +266,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔎 Correto!",
         feedbackErro: "A pista mais direta foi 'plano cheio de esperteza', ligada à ideia de astúcia.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “2/5 — No texto da raposa, qual pista ajudou a entender 'astuta'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Qual é um sinônimo de 'astuta' usado no próprio texto?",
@@ -253,6 +275,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔎 Isso mesmo!",
         feedbackErro: "O texto usa 'esperteza' para descrever a mesma qualidade de 'astuta'.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “3/5 — Qual é um sinônimo de 'astuta' usado no próprio texto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — No texto do mapa, o que significa 'ENIGMÁTICO' pelo contexto?",
@@ -260,6 +284,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔎 Isso!",
         feedbackErro: "As pistas do texto (símbolos estranhos, setas confusas) mostram que é algo misterioso.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “4/5 — No texto do mapa, o que significa 'ENIGMÁTICO' pelo contexto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Qual é o passo mais importante antes de 'adivinhar' o significado de uma palavra?",
@@ -271,6 +297,8 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔎 Isso! Terceira pista do clube resolvida! 🌟",
         feedbackErro: "É preciso reler as frases ao redor para juntar pistas antes de arriscar um significado.",
+        dica: "🔎 Pista: lembre do que significa “contexto” — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: contexto — São as palavras e frases ao redor de uma palavra desconhecida. Elas dão pistas do que ela quer dizer. Exemplo: Em 'o rio estava turvo, cheio de lama', dá pra inferir que 'turvo' é o contrário de transparente. Agora volte à pergunta “5/5 — Qual é o passo mais importante antes de 'adivinhar' o significa…” com essa ideia na cabeça.",
       },
     ],
   },

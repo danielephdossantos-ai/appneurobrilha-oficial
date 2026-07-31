@@ -70,6 +70,7 @@ export const aula01: AulaPortuguesV4 = {
         "🎉 Isso! O bilhete NOMEIA quem sumiu (cachorro) e ONDE (perto da escola) — essas palavras já são pistas de substantivos.",
       feedbackErro:
         "Releia o bilhete: ele fala de um CACHORRO que sumiu perto da ESCOLA. Essas duas palavras nomeiam quem e onde.",
+      dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -146,6 +147,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Rex' é um substantivo PRÓPRIO — o nome desse cachorro.",
         feedbackErro: "O nome está escrito bem no início: 'o cachorro Rex sumiu…'.",
         ondeEstaNoTexto: "…o cachorro Rex sumiu perto da escola.",
+        dica: "🔎 Pista: releia no texto o trecho “…o cachorro Rex sumiu perto da escola.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Qual é o nome do cachorro sumido?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde a coleira foi encontrada?",
@@ -154,6 +157,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso mesmo! 'Praça' é o lugar — um substantivo comum.",
         feedbackErro: "Releia o segundo parágrafo: 'Na praça, encontramos uma coleira…'.",
         ondeEstaNoTexto: "Na praça, encontramos uma coleira vermelha perto do banco.",
+        dica: "🔎 Pista: releia no texto o trecho “Na praça, encontramos uma coleira vermelha perto do banco.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Onde a coleira foi encontrada?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quem viu Rex correndo primeiro?",
@@ -162,6 +167,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Ana' é um substantivo próprio — o nome da menina.",
         feedbackErro: "No primeiro parágrafo diz: 'Uma menina chamada Ana viu ele correndo'.",
         ondeEstaNoTexto: "Uma menina chamada Ana viu ele correndo em direção à praça.",
+        dica: "🔎 Pista: releia no texto o trecho “Uma menina chamada Ana viu ele correndo em direção à praça.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Quem viu Rex correndo primeiro?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -177,6 +184,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Isso! REX e ANA são nomes específicos — por isso são substantivos PRÓPRIOS, com maiúscula.",
         feedbackErro:
           "Substantivo próprio é o NOME de alguém específico. No texto, aparecem Rex (o cachorro) e Ana (a menina).",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Quais substantivos próprios aparecem no relatório?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quais lugares aparecem na investigação?",
@@ -190,6 +199,8 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Certo! Escola, praça e jardim são substantivos comuns que nomeiam os lugares do caso.",
         feedbackErro:
           "Percorra o texto procurando lugares: a busca passa pela ESCOLA, pela PRAÇA e termina no JARDIM.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Quais lugares aparecem na investigação?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -207,6 +218,7 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Caso montado! Você seguiu a pista dos substantivos de lugar.",
       feedbackErro:
         "Pense na ordem dos LUGARES citados: primeiro a escola, depois a praça, por último o jardim.",
+      dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -229,6 +241,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Sala de aula' é o substantivo de lugar do caso.",
         feedbackErro: "A primeira frase diz: 'Na sala de aula, Pedro pegou…'.",
         ondeEstaNoTexto: "Na sala de aula, Pedro pegou a mochila errada.",
+        dica: "🔎 Pista: releia no texto o trecho “Na sala de aula, Pedro pegou a mochila errada.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Onde aconteceu a troca de mochilas?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que havia dentro da mochila trocada?",
@@ -237,6 +251,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! CADERNO e LÁPIS são substantivos comuns — nomeiam objetos.",
         feedbackErro: "Está no segundo parágrafo: 'havia um caderno e um lápis…'.",
         ondeEstaNoTexto: "Dentro da mochila, havia um caderno e um lápis que não eram dele.",
+        dica: "🔎 Pista: releia no texto o trecho “Dentro da mochila, havia um caderno e um lápis que não eram dele.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “O que havia dentro da mochila trocada?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -265,6 +281,7 @@ export const aula01: AulaPortuguesV4 = {
           "🎉 Ótimo trabalho, detetive! Você separou certo os nomes gerais dos nomes específicos.",
         feedbackErro:
           "Dica: se a palavra começa com maiúscula e é o nome de UM só, é PRÓPRIO. Se serve pra qualquer um, é COMUM.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -282,6 +299,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! 'Marte' é o nome específico de um planeta — por isso é maiúscula.",
       feedbackErro: "Substantivo próprio é NOME específico, com maiúscula. 'Gato' e 'cidade' servem pra qualquer um.",
+      dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “Qual das palavras é um substantivo PRÓPRIO?” com essa ideia na cabeça.",
     },
   },
 
@@ -297,6 +316,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Substantivo é a palavra que NOMEIA.",
         feedbackErro: "Substantivo NOMEIA seres, lugares e coisas — é a base de toda frase.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “1/5 — O que é um substantivo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Qual é um substantivo PRÓPRIO?",
@@ -304,6 +325,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 São Paulo é o nome específico de uma cidade!",
         feedbackErro: "Próprio = nome específico com maiúscula. 'São Paulo' nomeia UMA cidade só.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “2/5 — Qual é um substantivo PRÓPRIO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Qual frase está no PLURAL?",
@@ -311,6 +334,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 'Gatos' com S indica mais de um gato — plural!",
         feedbackErro: "Plural é mais de um. Procure a palavra com 'S' no final: gatoS.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “3/5 — Qual frase está no PLURAL?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — No relatório do Caso do Cachorro, qual é o substantivo comum?",
@@ -318,6 +343,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 'Praça' é substantivo comum — nomeia um tipo de lugar, não um lugar específico com nome próprio.",
         feedbackErro: "Rex e Ana são nomes específicos (próprios). 'Praça' serve pra qualquer praça — é comum.",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “4/5 — No relatório do Caso do Cachorro, qual é o substantivo comum?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Complete: substantivos nomeiam...",
@@ -329,6 +356,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Substantivo é a classe de palavra mais ampla — nomeia quase tudo que existe.",
         feedbackErro: "Substantivo nomeia bem mais que pessoas: animais, lugares, objetos e até sentimentos (alegria, medo).",
+        dica: "🔎 Pista: lembre do que significa “substantivo” — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do… Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: substantivo — É a palavra que dá NOME a pessoas, animais, lugares, objetos ou sentimentos. Sem substantivo, ninguém sabe do que estamos falando. Exemplo: Em 'O cachorro correu no parque', CACHORRO e PARQUE são substantivos. Agora volte à pergunta “5/5 — Complete: substantivos nomeiam...” com essa ideia na cabeça.",
       },
     ],
   },

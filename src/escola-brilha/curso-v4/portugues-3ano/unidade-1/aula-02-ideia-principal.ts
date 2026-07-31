@@ -66,6 +66,7 @@ export const aula02: AulaPortuguesV4 = {
         "🧭 Isso mesmo! O título em letras grandes já entrega a ideia principal: o MUTIRÃO DE LIMPEZA. O suco e as luvas são só detalhes.",
       feedbackErro:
         "Repare no que está em letra GRANDE, no topo — 'MUTIRÃO DE LIMPEZA'. O suco e as luvas são detalhes que ajudam, mas não são o assunto central.",
+      dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -116,6 +117,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🧭 Isso! 'procurando néctar' está na primeira frase.",
         feedbackErro: "Releia a primeira frase: logo depois de 'procurando' está a resposta.",
         ondeEstaNoTexto: "As abelhas visitam flor após flor procurando néctar…",
+        dica: "🔎 Pista: releia no texto o trecho “As abelhas visitam flor após flor procurando néctar…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “O que as abelhas procuram nas flores?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Como se chama o processo de o pólen passar de uma flor para outra?",
@@ -124,6 +127,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🧭 Exato! O texto diz 'Esse processo se chama polinização'.",
         feedbackErro: "A resposta está na última frase do segundo parágrafo.",
         ondeEstaNoTexto: "Esse processo se chama polinização.",
+        dica: "🔎 Pista: releia no texto o trecho “Esse processo se chama polinização.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “Como se chama o processo de o pólen passar de uma flor para outra?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Cite duas frutas mencionadas no texto que dependem da polinização.",
@@ -132,6 +137,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🧭 Boa! O texto cita 'maçã, morango e abóbora'.",
         feedbackErro: "Volte ao terceiro parágrafo — as frutas aparecem depois de 'como'.",
         ondeEstaNoTexto: "…frutas como maçã, morango e abóbora dependem…",
+        dica: "🔎 Pista: releia no texto o trecho “…frutas como maçã, morango e abóbora dependem…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “Cite duas frutas mencionadas no texto que dependem da polinização.” com essa ideia na cabeça.",
       },
     ],
   },
@@ -151,6 +158,8 @@ export const aula02: AulaPortuguesV4 = {
           "🧭 Isso! Essa frase resume TODO o texto — as outras são detalhes que só explicam ou reforçam essa ideia central.",
         feedbackErro:
           "Pense: qual frase, sozinha, já contaria do que o texto inteiro trata? As patinhas com pólen são só um detalhe do processo.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “Qual frase resume melhor a IDEIA PRINCIPAL do texto todo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "'Carregam grãozinhos de pólen grudados nas patinhas' é a ideia principal ou um detalhe?",
@@ -160,6 +169,8 @@ export const aula02: AulaPortuguesV4 = {
           "🧭 Correto! É um detalhe — explica COMO o pólen viaja, mas sozinho não conta a importância das abelhas.",
         feedbackErro:
           "Essa frase só explica uma parte do processo. A ideia principal é maior: fala da IMPORTÂNCIA das abelhas para os jardins.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “'Carregam grãozinhos de pólen grudados nas patinhas' é a ideia princi…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -176,6 +187,7 @@ export const aula02: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🧭 Isso! Esse é o caminho certo para caçar a ideia principal.",
       feedbackErro: "Primeiro se lê tudo, depois se pergunta o assunto geral, e só então se escolhe a frase-resumo.",
+      dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -203,6 +215,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Isso! Toda a história gira em torno desse fato central.",
         feedbackErro: "Onde dormir é um detalhe. A ideia principal é o que o cachorro FEZ de mais importante na história.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “Qual é a ideia principal desse texto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "'Ele adora dormir no sofá da varanda' é ideia principal ou detalhe?",
@@ -210,6 +224,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Exato! É só uma informação extra sobre o Bolinha, não o assunto central do texto.",
         feedbackErro: "Pense: essa frase sozinha contaria a história do 'herói'? Não — por isso é um detalhe.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “'Ele adora dormir no sofá da varanda' é ideia principal ou detalhe?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -231,6 +247,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🧭 Isso! A cor é um detalhe; o 'como fazer' é a ideia principal.",
       feedbackErro: "A cor da escova é só um detalhe — o texto todo gira em torno de ENSINAR a escovar direito.",
+      dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “Num texto que fala sobre 'como escovar os dentes corretamente' e cita…” com essa ideia na cabeça.",
     },
   },
 
@@ -242,6 +260,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Isso! É o assunto central.",
         feedbackErro: "A ideia principal é o assunto que resume o texto — não é sempre a última frase.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “1/5 — O que é a 'ideia principal' de um texto?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Como diferenciamos ideia principal de detalhe?",
@@ -253,6 +273,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧭 Exato!",
         feedbackErro: "A ideia principal é mais ampla e resume o texto; o detalhe é uma parte específica.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “2/5 — Como diferenciamos ideia principal de detalhe?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — No texto das abelhas, qual é a ideia principal?",
@@ -264,6 +286,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧭 Isso mesmo!",
         feedbackErro: "As outras frases são detalhes que explicam a importância das abelhas — a ideia central fala da IMPORTÂNCIA delas.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “3/5 — No texto das abelhas, qual é a ideia principal?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — No texto do Bolinha, qual frase é um DETALHE (não a ideia principal)?",
@@ -275,6 +299,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Correto! A cor e a raça são detalhes sobre o cachorro.",
         feedbackErro: "Ser 'vira-lata caramelo' é um detalhe sobre a aparência — não sobre o feito heroico.",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “4/5 — No texto do Bolinha, qual frase é um DETALHE (não a ideia princ…” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Qual pergunta ajuda a encontrar a ideia principal de qualquer texto?",
@@ -286,6 +312,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Isso! Segunda pista do clube resolvida! 🌟",
         feedbackErro: "A pergunta certa é sempre: 'do que esse texto trata, no geral?'",
+        dica: "🔎 Pista: lembre do que significa “ideia principal” — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: ideia principal — É o assunto mais importante do texto — aquilo que ele quer contar ou explicar em uma frase. Exemplo: Num texto sobre abelhas, a ideia principal pode ser 'as abelhas ajudam as flores a crescer'. Agora volte à pergunta “5/5 — Qual pergunta ajuda a encontrar a ideia principal de qualquer t…” com essa ideia na cabeça.",
       },
     ],
   },

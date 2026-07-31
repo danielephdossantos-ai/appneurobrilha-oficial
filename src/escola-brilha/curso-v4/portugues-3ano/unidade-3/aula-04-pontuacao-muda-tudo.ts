@@ -64,6 +64,7 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Isso mesmo! Com vírgula, chamamos a vovó pra comer. Sem vírgula, parece que vamos comer... a vovó! A vírgula do vocativo salva o sentido da frase.",
       feedbackErro:
         "Leia com calma: em uma frase há uma vírgula antes de 'vovó', na outra não. Essa vírgula muda quem está sendo chamado.",
+      dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -160,6 +161,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Sofia é chamada por Théo, então o nome vira vocativo e fica isolado por vírgula.",
         feedbackErro: "Repare: Théo está chamando alguém. Esse nome chamado é o vocativo, e sempre vem separado por vírgula.",
         ondeEstaNoTexto: "Sofia, venha depressa até aqui!",
+        dica: "🔎 Pista: releia no texto o trecho “Sofia, venha depressa até aqui!”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Por que a frase 'Sofia, venha depressa até aqui!' tem vírgula depois…” com essa ideia na cabeça.",
       },
       {
         pergunta: "Que sinal marca a pergunta de Sofia?",
@@ -168,6 +171,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! 'O que você encontrou?' termina com interrogação, pois é uma pergunta.",
         feedbackErro: "Toda pergunta termina com o ponto de interrogação (?).",
         ondeEstaNoTexto: "O que você encontrou? — perguntou Sofia, curiosa.",
+        dica: "🔎 Pista: releia no texto o trecho “O que você encontrou? — perguntou Sofia, curiosa.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Que sinal marca a pergunta de Sofia?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que Théo encontrou, segundo a enumeração com vírgulas?",
@@ -180,6 +185,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! As vírgulas separam os três itens da lista: livro, mapa e chave.",
         feedbackErro: "Releia a última fala de Théo — ele lista três objetos separados por vírgula.",
         ondeEstaNoTexto: "Encontrei um livro, um mapa e uma chave dourada.",
+        dica: "🔎 Pista: releia no texto o trecho “Encontrei um livro, um mapa e uma chave dourada.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “O que Théo encontrou, segundo a enumeração com vírgulas?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -197,6 +204,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! O travessão marca a fala direta de um personagem no diálogo.",
         feedbackErro: "No discurso direto, o travessão aparece para introduzir ou marcar a fala de quem conversa.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “O que o travessão (—) indica antes de 'gritou Théo'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde essa cena acontece?",
@@ -204,6 +213,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! O título já entrega a pista: 'O Caso do Grito na Biblioteca'.",
         feedbackErro: "O título do caso conta o cenário: biblioteca.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Onde essa cena acontece?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -220,6 +231,7 @@ export const aula04: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🎉 Perfeito! Primeiro o chamado (vocativo), depois a pergunta, depois a resposta com a enumeração.",
       feedbackErro: "Pense na lógica da conversa: primeiro alguém chama, depois pergunta, depois responde.",
+      dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -243,6 +255,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Marcos' é quem está sendo chamado pela professora — o vocativo.",
         feedbackErro: "O vocativo é o nome de quem é chamado, isolado por vírgula: 'Marcos, feche o portão...'.",
         ondeEstaNoTexto: "Marcos, feche o portão com cuidado!",
+        dica: "🔎 Pista: releia no texto o trecho “Marcos, feche o portão com cuidado!”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Qual palavra é o vocativo na primeira fala?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quantos animais aparecem na enumeração da professora?",
@@ -251,6 +265,8 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Cachorro, gato e galinhas — três itens separados por vírgula.",
         feedbackErro: "Releia contando as vírgulas: 'o cachorro..., o gato... e as galinhas...' são três itens.",
         ondeEstaNoTexto: "o cachorro do vizinho, o gato da escola e as galinhas do pátio podem fugir",
+        dica: "🔎 Pista: releia no texto o trecho “o cachorro do vizinho, o gato da escola e as galinhas do pátio podem fugir”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Quantos animais aparecem na enumeração da professora?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -279,6 +295,7 @@ export const aula04: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Excelente! Você identificou o sinal certo pra cada situação.",
         feedbackErro: "Dica: pergunta pede '?', susto pede '!', lista ou chamado pede ',', afirmação calma pede '.'.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -297,6 +314,8 @@ export const aula04: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! A vírgula antes de 'avó' isola o vocativo e evita a confusão de sentido.",
       feedbackErro: "Sem a vírgula certa antes do nome chamado, a frase pode até parecer que vamos comer a pessoa!",
+      dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “Qual frase está certa para CHAMAR a avó para o jantar?” com essa ideia na cabeça.",
     },
   },
 
@@ -308,6 +327,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Toda pergunta termina com ponto de interrogação (?).",
         feedbackErro: "O ponto de interrogação (?) é usado sempre que a frase é uma pergunta.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “1/5 — Para que serve o ponto de interrogação?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Em 'Comprei maçã, pera e uva.', para que serve a vírgula?",
@@ -315,6 +336,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Nessa frase, a vírgula separa cada item da enumeração.",
         feedbackErro: "Quando listamos vários itens seguidos, usamos vírgula entre eles (menos antes do 'e' final).",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “2/5 — Em 'Comprei maçã, pera e uva.', para que serve a vírgula?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Qual frase usa corretamente a vírgula do vocativo?",
@@ -322,6 +345,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'Pedro' é quem está sendo chamado, por isso vem isolado por vírgula logo no início.",
         feedbackErro: "O vocativo (nome de quem é chamado) precisa ficar separado por vírgula do resto da frase.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “3/5 — Qual frase usa corretamente a vírgula do vocativo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — 'Que descoberta incrível!' usa qual sinal e por quê?",
@@ -333,6 +358,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exatamente! A exclamação (!) marca a emoção de surpresa e empolgação da frase.",
         feedbackErro: "Quando a frase expressa emoção forte, surpresa ou ordem, usamos o ponto de exclamação (!).",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “4/5 — 'Que descoberta incrível!' usa qual sinal e por quê?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — No diálogo 'Théo disse:\\n— Encontrei a pista!', o travessão serve para...",
@@ -344,6 +371,8 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O travessão marca onde começa a fala de cada personagem no diálogo.",
         feedbackErro: "No discurso direto, o travessão (—) indica que ali começa a fala de alguém.",
+        dica: "🔎 Pista: lembre do que significa “vocativo” — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: vocativo — É a palavra usada para CHAMAR alguém na frase. Ele sempre fica separado por vírgula. Exemplo: Em 'Vamos comer, vovó!', VOVÓ é o vocativo — é quem está sendo chamado. Agora volte à pergunta “5/5 — No diálogo 'Théo disse:\\n— Encontrei a pista!', o travessão ser…” com essa ideia na cabeça.",
       },
     ],
   },

@@ -70,6 +70,7 @@ export const aula01: AulaPortuguesV4 = {
         "🎉 Isso! O cartaz já é quase uma notícia: ele avisa o fato principal antes de qualquer detalhe.",
       feedbackErro:
         "Releia o cartaz: ele fala de um GATO, uma ÁRVORE e BOMBEIROS. Junte as pistas — é sobre um resgate de gato.",
+      dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -125,6 +126,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Um GATO CINZA ficou preso...' — essa é a resposta de QUEM.",
         feedbackErro: "Releia o primeiro parágrafo: quem 'ficou preso no topo da árvore'?",
         ondeEstaNoTexto: "…um gato cinza ficou preso no topo de uma árvore…",
+        dica: "🔎 Pista: releia no texto o trecho “…um gato cinza ficou preso no topo de uma árvore…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “QUEM ficou preso na árvore?” com essa ideia na cabeça.",
       },
       {
         pergunta: "ONDE aconteceu o caso?",
@@ -133,6 +136,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! O lide diz claramente o lugar: PRAÇA DAS FLORES.",
         feedbackErro: "O nome do lugar aparece logo depois de 'árvore de uma'.",
         ondeEstaNoTexto: "…uma árvore da Praça das Flores, no centro da cidade…",
+        dica: "🔎 Pista: releia no texto o trecho “…uma árvore da Praça das Flores, no centro da cidade…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “ONDE aconteceu o caso?” com essa ideia na cabeça.",
       },
       {
         pergunta: "POR QUE o gato subiu na árvore?",
@@ -145,6 +150,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Boa! O POR QUÊ está no final da primeira frase.",
         feedbackErro: "A frase termina explicando o motivo — procure a palavra 'depois de'.",
         ondeEstaNoTexto: "…depois de fugir de um cachorro assustado.",
+        dica: "🔎 Pista: releia no texto o trecho “…depois de fugir de um cachorro assustado.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “POR QUE o gato subiu na árvore?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -163,6 +170,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto:
           "🎉 Isso! O bombeiro MARCOS resgatou o gato, e DONA CÉLIA é a dona dele.",
         feedbackErro: "Releia o segundo e o terceiro parágrafo — procure os nomes próprios.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “Quem são as pessoas que aparecem ajudando no caso?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Em quanto tempo os bombeiros chegaram?",
@@ -170,6 +179,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! O texto diz 'chegaram em QUINZE MINUTOS'.",
         feedbackErro: "A informação de tempo está no segundo parágrafo, logo depois de 'bombeiros'.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “Em quanto tempo os bombeiros chegaram?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -187,6 +198,7 @@ export const aula01: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso mesmo! Você reconstruiu o caso na ordem certa dos fatos.",
       feedbackErro:
         "Pense: primeiro o gato SOBE (fuga). Depois os moradores PEDEM ajuda. Por último, o bombeiro RESGATA.",
+      dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -209,6 +221,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Na SEXTA-FEIRA...' abre a notícia.",
         feedbackErro: "A palavra de tempo é a primeira da notícia.",
         ondeEstaNoTexto: "Na sexta-feira, a Escola Municipal Aurora inaugurou…",
+        dica: "🔎 Pista: releia no texto o trecho “Na sexta-feira, a Escola Municipal Aurora inaugurou…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “QUANDO a biblioteca foi inaugurada?” com essa ideia na cabeça.",
       },
       {
         pergunta: "QUEM cortou a fita de inauguração?",
@@ -217,6 +231,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! A DIRETORA SANDRA cortou a fita.",
         feedbackErro: "O nome próprio aparece no segundo parágrafo.",
         ondeEstaNoTexto: "A diretora Sandra cortou a fita de inauguração…",
+        dica: "🔎 Pista: releia no texto o trecho “A diretora Sandra cortou a fita de inauguração…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “QUEM cortou a fita de inauguração?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -234,6 +250,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! É o LIDE — o resumo completo logo no início.",
       feedbackErro: "A manchete é só o título. O parágrafo com QUEM/O QUÊ/QUANDO/ONDE/POR QUÊ é o LIDE.",
+      dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “O primeiro parágrafo de uma notícia, que já traz as informações princ…” com essa ideia na cabeça.",
     },
   },
 
@@ -245,6 +263,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Notícia serve para INFORMAR fatos reais.",
         feedbackErro: "Notícia não inventa história — ela INFORMA o que aconteceu de verdade.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “1/5 — Para que serve uma notícia?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — A manchete é...",
@@ -252,6 +272,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Manchete é o título que resume e chama atenção.",
         feedbackErro: "Pense no que vem primeiro, em letras grandes, no topo da notícia: a manchete.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “2/5 — A manchete é...” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — O lide responde a quantas perguntas principais?",
@@ -259,6 +281,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! São CINCO perguntas no lide.",
         feedbackErro: "Conte: quem, o quê, quando, onde, por quê — são cinco.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “3/5 — O lide responde a quantas perguntas principais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — No caso do gato, QUEM resgatou o animal?",
@@ -266,6 +290,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso mesmo, o bombeiro Marcos subiu na escada e resgatou.",
         feedbackErro: "Releia: quem subiu na escada com cuidado?",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “4/5 — No caso do gato, QUEM resgatou o animal?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Uma boa notícia deve contar...",
@@ -273,6 +299,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito bem! Notícia de verdade conta FATOS reais e conferidos.",
         feedbackErro: "Notícia não é invenção — precisa ser um FATO verdadeiro.",
+        dica: "🔎 Pista: lembre do que significa “manchete” — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: manchete — É o título grande da notícia. Resume o fato em poucas palavras pra chamar a atenção de quem lê. Exemplo: Manchete: 'Gato é resgatado em árvore da praça!' Agora volte à pergunta “5/5 — Uma boa notícia deve contar...” com essa ideia na cabeça.",
       },
     ],
   },

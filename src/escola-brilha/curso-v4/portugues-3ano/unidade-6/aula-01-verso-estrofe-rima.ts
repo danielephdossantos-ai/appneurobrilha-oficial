@@ -54,6 +54,7 @@ export const aula01: AulaPortuguesV4 = {
         "🔍 Isso! O título 'Segredo da Noite' e as imagens de lua, estrela e coruja são pistas fortes de um poema sobre a noite.",
       feedbackErro:
         "Olhe de novo: o título fala de 'Noite', e as pistas são lua, estrela e coruja — bicho que só aparece à noite.",
+      dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -106,6 +107,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! 'No céu escuro mora a lua'.",
         feedbackErro: "Releia o primeiro verso — o lugar vem logo depois de 'No céu'.",
         ondeEstaNoTexto: "No céu escuro mora a lua,",
+        dica: "🔎 Pista: releia no texto o trecho “No céu escuro mora a lua,”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “No poema, onde mora a lua?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que a coruja faz quando acorda?",
@@ -114,6 +117,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! 'A coruja acorda e voa'.",
         feedbackErro: "O verso diz: 'A coruja acorda e ...' — o que vem depois?",
         ondeEstaNoTexto: "A coruja acorda e voa,",
+        dica: "🔎 Pista: releia no texto o trecho “A coruja acorda e voa,”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “O que a coruja faz quando acorda?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Segundo o poema, o que a noite guarda?",
@@ -122,6 +127,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Exato! 'A noite guarda um segredo'.",
         feedbackErro: "Releia o começo da segunda estrofe — a última linha do poema conta o que a noite guarda.",
         ondeEstaNoTexto: "A noite guarda um segredo:",
+        dica: "🔎 Pista: releia no texto o trecho “A noite guarda um segredo:”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “Segundo o poema, o que a noite guarda?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -137,6 +144,8 @@ export const aula01: AulaPortuguesV4 = {
           "🔍 Isso! O poema tem DUAS estrofes — dois blocos de versos separados por um espaço.",
         feedbackErro:
           "Conte os blocos separados por espaço em branco: são dois grupos de 4 versos cada — logo, duas estrofes.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “Quantas estrofes tem o poema 'Segredo da Noite'?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quais palavras rimam no primeiro verso e no segundo verso da primeira estrofe?",
@@ -146,6 +155,8 @@ export const aula01: AulaPortuguesV4 = {
           "🔍 Perfeito! 'Lua' e 'rua' terminam com o mesmo som — por isso rimam.",
         feedbackErro:
           "Escute o final dos dois primeiros versos: '...mora a LUA' e '...dorme a RUA'. O som final é igual.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “Quais palavras rimam no primeiro verso e no segundo verso da primeira…” com essa ideia na cabeça.",
       },
     ],
   },
@@ -162,6 +173,7 @@ export const aula01: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🔍 Isso mesmo! Primeiro sentimos o ritmo, depois contamos, só então caçamos as rimas.",
       feedbackErro: "Pense: primeiro a gente OUVE o poema, depois CONTA as partes, e só no fim CAÇA as rimas.",
+      dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -183,6 +195,8 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! São quatro linhas, ou seja, quatro versos.",
         feedbackErro: "Conte as linhas do poema uma a uma: são quatro.",
         ondeEstaNoTexto: "A árvore é velha e contadora, / seus galhos balançam hora a hora. / O vento passa e conta um segredo, / ela ouve tudo, nunca tem medo.",
+        dica: "🔎 Pista: releia no texto o trecho “A árvore é velha e contadora, / seus galhos balançam hora a hora. / O vento passa e conta…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “Quantos versos tem esse poema?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Quais palavras rimam no final do 3º e 4º verso?",
@@ -190,6 +204,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Exato! 'Segredo' e 'medo' terminam com o mesmo som.",
         feedbackErro: "Escute o final dos versos 3 e 4: '...conta um SEGREDO' e '...nunca tem MEDO'.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “Quais palavras rimam no final do 3º e 4º verso?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -211,6 +227,8 @@ export const aula01: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🔍 Isso! Rima é sobre o SOM final, não a quantidade de letras.",
       feedbackErro: "Rima acontece quando o FINAL das palavras soa parecido — como '-asa' em 'casa' e 'brasa'.",
+      dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “'Casa' e 'brasa' rimam porque…” com essa ideia na cabeça.",
     },
   },
 
@@ -222,6 +240,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Verso é cada linha.",
         feedbackErro: "Verso é CADA LINHA do poema, não o poema todo.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “1/5 — O que é um verso?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — O que separa uma estrofe da outra?",
@@ -229,6 +249,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Correto! O espaço em branco separa os blocos de versos.",
         feedbackErro: "Estrofes são separadas por um ESPAÇO em branco entre os blocos de versos.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “2/5 — O que separa uma estrofe da outra?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Qual par de palavras rima?",
@@ -236,6 +258,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! 'Flor' e 'cor' terminam com som parecido.",
         feedbackErro: "Escute o final: '-or' se repete em 'flor' e 'cor'.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “3/5 — Qual par de palavras rima?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que é bom ler poema em voz alta?",
@@ -247,6 +271,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🔍 Exato! Ler em voz alta revela o ritmo escondido no texto.",
         feedbackErro: "Ler em voz alta ajuda a PERCEBER o ritmo e a sonoridade que o poema esconde.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “4/5 — Por que é bom ler poema em voz alta?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — No poema 'Segredo da Noite', quantas estrofes existem?",
@@ -254,6 +280,8 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Duas estrofes de quatro versos. Pista arquitetada com sucesso! 🌟",
         feedbackErro: "Conte os blocos separados por espaço: são dois — logo, duas estrofes.",
+        dica: "🔎 Pista: lembre do que significa “verso” — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: verso — É cada LINHA de um poema. Um poema pode ter vários versos, um embaixo do outro. Exemplo: 'A lua subiu no céu' é um verso sozinho. Agora volte à pergunta “5/5 — No poema 'Segredo da Noite', quantas estrofes existem?” com essa ideia na cabeça.",
       },
     ],
   },

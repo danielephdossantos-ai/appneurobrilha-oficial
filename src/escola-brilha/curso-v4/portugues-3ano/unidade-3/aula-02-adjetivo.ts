@@ -67,6 +67,7 @@ export const aula02: AulaPortuguesV4 = {
         "🎉 Isso! As CARACTERÍSTICAS (pequeno, esperto, laranja) combinam com a raposa — são os adjetivos que ajudam a identificar.",
       feedbackErro:
         "Releia a ficha: pequeno, esperto e laranja. Só uma opção tem essas três características ao mesmo tempo.",
+      dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -141,6 +142,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Laranja' é o adjetivo que descreve a cor da raposa.",
         feedbackErro: "No primeiro parágrafo: 'uma raposa pequena e LARANJA'.",
         ondeEstaNoTexto: "…uma raposa pequena e laranja saindo pela janela da cozinha.",
+        dica: "🔎 Pista: releia no texto o trecho “…uma raposa pequena e laranja saindo pela janela da cozinha.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “De que cor era a raposa suspeita?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Por que a raposa conseguiu pegar o bolo sem ser notada?",
@@ -149,6 +152,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Certo! O adjetivo 'esperta' explica como ela agiu.",
         feedbackErro: "O segundo parágrafo diz: 'o animal era muito ESPERTO: abriu a caixa sem fazer barulho'.",
         ondeEstaNoTexto: "…o animal era muito esperto: abriu a caixa do bolo sem fazer barulho nenhum.",
+        dica: "🔎 Pista: releia no texto o trecho “…o animal era muito esperto: abriu a caixa do bolo sem fazer barulho nenhum.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Por que a raposa conseguiu pegar o bolo sem ser notada?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Como a raposa fugiu?",
@@ -157,6 +162,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Rápida' é o adjetivo que mostra como ela fugiu.",
         feedbackErro: "O último parágrafo diz: 'a raposa também era RÁPIDA — sumiu entre as árvores'.",
         ondeEstaNoTexto: "…era rápida — sumiu entre as árvores antes que alguém pudesse gritar.",
+        dica: "🔎 Pista: releia no texto o trecho “…era rápida — sumiu entre as árvores antes que alguém pudesse gritar.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Como a raposa fugiu?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -176,6 +183,8 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Exatamente! Esses quatro adjetivos formam o retrato falado da suspeita.",
         feedbackErro:
           "Reúna todos os adjetivos do texto: tamanho (pequena), cor (laranja), jeito (esperta) e velocidade (rápida).",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Quais adjetivos descrevem a raposa no relatório?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde a raposa entrou na casa?",
@@ -183,6 +192,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Ela entrou pela janela da cozinha — o cenário do crime.",
         feedbackErro: "O texto diz que ela saía 'pela janela da cozinha'.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Onde a raposa entrou na casa?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -199,6 +210,7 @@ export const aula02: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🎉 Investigação encerrada! Você seguiu certinho a sequência dos adjetivos e ações.",
       feedbackErro: "Pense: primeiro ela é VISTA, depois ABRE a caixa, e só no final FOGE.",
+      dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -221,6 +233,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! PRETO e PELUDO descrevem a aparência do gato.",
         feedbackErro: "A primeira frase diz: 'um gato PRETO e PELUDO'.",
         ondeEstaNoTexto: "…viu um gato preto e peludo derrubando latas de lixo.",
+        dica: "🔎 Pista: releia no texto o trecho “…viu um gato preto e peludo derrubando latas de lixo.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Quais adjetivos descrevem o gato?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Por que o gato foi chamado de suspeito?",
@@ -233,6 +247,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O adjetivo 'barulhento' explica o comportamento suspeito.",
         feedbackErro: "O texto explica: 'o gato era muito BARULHENTO: miava alto e corria pelo telhado'.",
         ondeEstaNoTexto: "O gato era muito barulhento: miava alto e corria pelo telhado.",
+        dica: "🔎 Pista: releia no texto o trecho “O gato era muito barulhento: miava alto e corria pelo telhado.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Por que o gato foi chamado de suspeito?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -258,6 +274,7 @@ export const aula02: AulaPortuguesV4 = {
           "🎉 Muito bem, detetive! Esperto, pequeno e barulhento descrevem características — são adjetivos.",
         feedbackErro:
           "Lembre-se: adjetivo descreve COMO algo é. 'Raposa' e 'janela' são substantivos; 'correu' é uma ação (verbo).",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -275,6 +292,8 @@ export const aula02: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! 'Preto' descreve a característica do gato.",
       feedbackErro: "'Gato' é substantivo, 'miou' é ação (verbo). O adjetivo é a característica: PRETO.",
+      dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “Na frase 'O gato preto miou alto', qual é o adjetivo?” com essa ideia na cabeça.",
     },
   },
 
@@ -290,6 +309,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Adjetivo descreve COMO algo ou alguém é.",
         feedbackErro: "Adjetivo dá uma característica: cor, tamanho, jeito de ser.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “1/5 — O que é um adjetivo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Na frase 'A raposa esperta fugiu', qual é o adjetivo?",
@@ -297,6 +318,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 'Esperta' descreve a raposa!",
         feedbackErro: "'Raposa' é substantivo, 'fugiu' é verbo. O adjetivo é ESPERTA.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “2/5 — Na frase 'A raposa esperta fugiu', qual é o adjetivo?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Trocar 'cachorro calmo' por 'cachorro bravo' muda...",
@@ -304,6 +327,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O adjetivo muda totalmente o sentido da descrição.",
         feedbackErro: "Trocar o adjetivo muda a característica que estamos informando sobre o cachorro.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “3/5 — Trocar 'cachorro calmo' por 'cachorro bravo' muda...” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Qual conjunto tem SÓ adjetivos?",
@@ -311,6 +336,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Todas descrevem características.",
         feedbackErro: "A segunda lista tem substantivos, a terceira tem verbos (ações). Adjetivos descrevem características.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “4/5 — Qual conjunto tem SÓ adjetivos?” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Por que o adjetivo é importante numa descrição?",
@@ -322,6 +349,8 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exatamente! Um bom detetive usa adjetivos precisos pra não confundir os suspeitos.",
         feedbackErro: "O adjetivo dá detalhes que ajudam a identificar exatamente quem ou o que estamos falando.",
+        dica: "🔎 Pista: lembre do que significa “adjetivo” — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: adjetivo — É a palavra que dá uma CARACTERÍSTICA ao substantivo: como ele é (cor, tamanho, jeito, sentimento). Exemplo: Em 'a raposa esperta', ESPERTA é o adjetivo que descreve a raposa. Agora volte à pergunta “5/5 — Por que o adjetivo é importante numa descrição?” com essa ideia na cabeça.",
       },
     ],
   },

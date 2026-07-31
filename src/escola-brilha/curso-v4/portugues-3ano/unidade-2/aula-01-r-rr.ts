@@ -51,6 +51,7 @@ export const aula1: AulaPortuguesV4 = {
         "🎉 Isso mesmo! O caso é sobre o R e o RR — a mesma letra que muda de som conforme a posição na palavra.",
       feedbackErro:
         "Repare: a pista é 'CARO' virando 'CARRO'. O mistério é sobre uma letra que dobra e muda o som — não sobre rodas nem queijo.",
+      dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -99,6 +100,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O texto diz: 'R sozinho entre vogais = fraco'.",
         feedbackErro: "Volte no segundo parágrafo: 'ele soa fraco, como em CARO'.",
         ondeEstaNoTexto: "Quando o R está entre vogais, sozinho, ele soa fraco…",
+        dica: "🔎 Pista: releia no texto o trecho “Quando o R está entre vogais, sozinho, ele soa fraco…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Segundo o texto, como soa o R sozinho entre vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Como soa o RR dobrado entre vogais?",
@@ -107,6 +110,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! 'RR entre vogais = forte', como em CARRO.",
         feedbackErro: "O texto diz: 'se o R aparece dobrado... o som fica forte, como em CARRO'.",
         ondeEstaNoTexto: "…o R aparece dobrado, RR, entre vogais, o som fica forte…",
+        dica: "🔎 Pista: releia no texto o trecho “…o R aparece dobrado, RR, entre vogais, o som fica forte…”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Como soa o RR dobrado entre vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "O que acontece com o R sozinho no COMEÇO da palavra, como em RATO?",
@@ -115,6 +120,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! No começo da palavra, R sozinho já soa forte.",
         feedbackErro: "Releia o terceiro parágrafo: 'No começo da palavra, o R sozinho já soa forte, como em RATO'.",
         ondeEstaNoTexto: "No começo da palavra, o R sozinho já soa forte, como em RATO e ROBÔ.",
+        dica: "🔎 Pista: releia no texto o trecho “No começo da palavra, o R sozinho já soa forte, como em RATO e ROBÔ.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “O que acontece com o R sozinho no COMEÇO da palavra, como em RATO?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -128,6 +135,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Foi Aurora quem mostrou o mapa da regra.",
         feedbackErro: "Releia a primeira frase: quem 'reuniu o Clube' e 'mostrou o mapa'?",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Quem reuniu o clube para explicar a regra do R?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Onde a explicação da regra aconteceu?",
@@ -139,6 +148,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Foi na reunião do clube, com o mapa da regra.",
         feedbackErro: "O texto diz 'Aurora reuniu o Clube dos Detetives e mostrou o mapa'.",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Onde a explicação da regra aconteceu?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -156,6 +167,7 @@ export const aula1: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Perfeito! Você reconstruiu a investigação na ordem certa.",
       feedbackErro:
         "Pense: primeiro chega a PISTA (o bilhete). Depois vem a EXPLICAÇÃO (o mapa da Aurora). Por último, o REGISTRO (a anotação de Brilha).",
+      dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -182,6 +194,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Depois de consoante, o R sozinho já soa forte.",
         feedbackErro: "Releia: 'o R vem depois da consoante N... a regra diz que depois de consoante o R já é forte'.",
         ondeEstaNoTexto: "…depois de consoante o R já é forte, sem precisar dobrar.",
+        dica: "🔎 Pista: releia no texto o trecho “…depois de consoante o R já é forte, sem precisar dobrar.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Por que o R de HONRA soa forte mesmo estando sozinho?” com essa ideia na cabeça.",
       },
       {
         pergunta: "Em TERRA, por que o som do RR é forte?",
@@ -190,6 +204,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! RR entre vogais é sempre forte.",
         feedbackErro: "O texto diz: 'em TERRA, o RR está entre vogais, então o som é forte'.",
         ondeEstaNoTexto: "Em TERRA, o RR está entre vogais, então o som é forte.",
+        dica: "🔎 Pista: releia no texto o trecho “Em TERRA, o RR está entre vogais, então o som é forte.”. A resposta está escondida ali.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Em TERRA, por que o som do RR é forte?” com essa ideia na cabeça.",
       },
     ],
   },
@@ -218,6 +234,7 @@ export const aula1: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Caso resolvido! Você domina a regra do R e do RR.",
         feedbackErro: "Pense de novo: R sozinho entre vogais é fraco; RR, ou R no início/depois de consoante, é forte.",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -238,6 +255,8 @@ export const aula1: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! Essa é a regra-chave da aula de hoje.",
       feedbackErro: "Releia a explicação da Aurora: o segredo está em estar SOZINHO ou DOBRADO entre vogais.",
+      dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+      reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “Qual é a regra que explica a diferença entre CARO e CARRO?” com essa ideia na cabeça.",
     },
   },
 
@@ -249,6 +268,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 R sozinho entre vogais = som fraco.",
         feedbackErro: "Lembre: entre vogais, o R sozinho soa fraco (caro).",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “1/5 — Como se escreve o som fraco do R entre duas vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — Como se escreve o som forte do R entre duas vogais?",
@@ -256,6 +277,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! RR dobrado entre vogais = som forte.",
         feedbackErro: "Entre vogais, o som forte precisa do R dobrado (carro).",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “2/5 — Como se escreve o som forte do R entre duas vogais?” com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — No início da palavra, como soa o R sozinho, como em RATO?",
@@ -263,6 +286,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! No início, o R sozinho já é forte.",
         feedbackErro: "Lembre: no começo da palavra, R sozinho já soa forte.",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “3/5 — No início da palavra, como soa o R sozinho, como em RATO?” com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Depois de uma consoante, como em HONRA, o R sozinho soa…",
@@ -270,6 +295,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Depois de consoante, o R sozinho já é forte.",
         feedbackErro: "A regra diz: depois de consoante, o R já soa forte, sem precisar dobrar.",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “4/5 — Depois de uma consoante, como em HONRA, o R sozinho soa…” com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Qual dessas palavras usa RR corretamente por causa do som forte entre vogais?",
@@ -277,6 +304,8 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Caso encerrado! CARRO tem RR porque o som é forte entre vogais.",
         feedbackErro: "Pense em qual palavra tem som forte de R ENTRE vogais — só uma tem RR dobrado.",
+        dica: "🔎 Pista: lembre do que significa “caro” — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Use isso para eliminar as alternativas que não combinam.",
+        reensino: "📚 Vamos rever juntos: caro — Quando o R aparece SOZINHO entre duas vogais, ele tem som FRACO, macio — quase um 'r' que desliza. Exemplo: Aquele brinquedo é muito caro. Agora volte à pergunta “5/5 — Qual dessas palavras usa RR corretamente por causa do som forte…” com essa ideia na cabeça.",
       },
     ],
   },

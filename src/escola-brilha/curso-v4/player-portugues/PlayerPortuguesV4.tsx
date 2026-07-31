@@ -200,7 +200,10 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
 
   // ---- Motor adaptativo (Fase 1 do contrato do 1º ano) ----------------
   const adaptativo = useAdaptativo();
-  const gateAtivo = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
+  const gateAtivo =
+    cursoSlug === "portugues-1ano" ||
+    cursoSlug === "portugues-2ano" ||
+    cursoSlug === "portugues-3ano";
   const totalAvaliacao = aula.momento10_avaliacao.perguntas.length;
   useEffect(() => {
     adaptativo?.declararAvaliacao(totalAvaliacao);
