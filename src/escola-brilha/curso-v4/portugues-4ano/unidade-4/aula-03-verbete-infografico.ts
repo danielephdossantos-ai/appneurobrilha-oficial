@@ -57,7 +57,8 @@ export const aula03: AulaPortuguesV4 = {
         ],
         estilo: "papel",
       },
-      pergunta: "Qual gênero organiza a informação em ETAPAS, usando imagem e texto curto lado a lado?",
+      pergunta:
+        "Qual gênero organiza a informação em ETAPAS, usando imagem e texto curto lado a lado?",
       hipoteses: [
         { texto: "O infográfico.", imagemUrl: mapa },
         { texto: "Uma carta de amor.", imagemUrl: livro },
@@ -68,6 +69,9 @@ export const aula03: AulaPortuguesV4 = {
         "📋 Isso! O INFOGRÁFICO organiza etapas com imagens e texto curto — perfeito para mostrar um processo como a polinização.",
       feedbackErro:
         "Releia o caderno: um texto DEFINE (verbete), o outro mostra ETAPAS com imagens (infográfico). Pense em qual organiza um processo.",
+      dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “O infográfico.”. O INFOGRÁFICO organiza etapas com imagens e texto curto — perfeito para mostrar um processo como a polinização. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -85,7 +89,8 @@ export const aula03: AulaPortuguesV4 = {
         palavra: "infográfico",
         explicacao:
           "É um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas.",
-        exemplo: "O infográfico mostrou, em 4 etapas com desenhos, como a abelha poliniza uma flor.",
+        exemplo:
+          "O infográfico mostrou, em 4 etapas com desenhos, como a abelha poliniza uma flor.",
         imagemUrl: mapa,
       },
       {
@@ -120,9 +125,14 @@ export const aula03: AulaPortuguesV4 = {
         pergunta: "Segundo o verbete, onde as abelhas vivem em grupo?",
         opcoes: ["Em ninhos de pássaro", "Em colmeias", "Em tocas subterrâneas"],
         correta: 1,
-        feedbackAcerto: "📋 Isso! O verbete diz que elas vivem em grupos organizados chamados COLMEIAS.",
-        feedbackErro: "Releia o verbete: a palavra do lugar onde elas vivem em grupo está destacada.",
+        feedbackAcerto:
+          "📋 Isso! O verbete diz que elas vivem em grupos organizados chamados COLMEIAS.",
+        feedbackErro:
+          "Releia o verbete: a palavra do lugar onde elas vivem em grupo está destacada.",
         ondeEstaNoTexto: "…vive em grupos organizados chamados colmeias.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “vive em grupos organizados chamados colmeias”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Em colmeias”. O verbete diz que elas vivem em grupos organizados chamados COLMEIAS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é a etapa 1 do infográfico da polinização?",
@@ -132,9 +142,13 @@ export const aula03: AulaPortuguesV4 = {
           "A flor produz frutos",
         ],
         correta: 1,
-        feedbackAcerto: "📋 Correto! A primeira etapa é a abelha pousar na flor para coletar néctar.",
+        feedbackAcerto:
+          "📋 Correto! A primeira etapa é a abelha pousar na flor para coletar néctar.",
         feedbackErro: "Releia a etapa numerada com o número 1 no infográfico.",
         ondeEstaNoTexto: "1) A abelha pousa em uma flor para coletar néctar.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “1) A abelha pousa em uma flor para coletar néctar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A abelha pousa na flor para coletar néctar”. A primeira etapa é a abelha pousar na flor para coletar néctar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é a diferença entre o verbete e o infográfico, segundo o texto?",
@@ -147,27 +161,45 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto:
           "📋 Isso! O verbete DEFINE de forma direta; o infográfico mostra ETAPAS de um processo, numeradas.",
         feedbackErro: "Releia a última frase do texto — ela compara os dois gêneros diretamente.",
-        ondeEstaNoTexto: "…o verbete DEFINE a abelha… o infográfico ORGANIZA o processo… em etapas numeradas…",
+        ondeEstaNoTexto:
+          "…o verbete DEFINE a abelha… o infográfico ORGANIZA o processo… em etapas numeradas…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “o verbete DEFINE a abelha… o infográfico ORGANIZA o processo… em etapas numeradas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O verbete define em um parágrafo; o infográfico organiza um processo em etapas”. O verbete DEFINE de forma direta; o infográfico mostra ETAPAS de um processo, numeradas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
   momento06_personagensCenario: {
-    instrucao: "Verbete e infográfico não têm 'personagens' como uma história — eles organizam SERES e PROCESSOS. Vamos identificar.",
+    instrucao:
+      "Verbete e infográfico não têm 'personagens' como uma história — eles organizam SERES e PROCESSOS. Vamos identificar.",
     perguntas: [
       {
         pergunta: "Qual é o 'assunto' (não personagem) que o verbete define?",
         opcoes: ["A abelha", "Uma menina exploradora", "Um dragão"],
         correta: 0,
-        feedbackAcerto: "📋 Isso! O verbete define o assunto A ABELHA, com suas características reais.",
-        feedbackErro: "O verbete não conta história com personagens — ele define um SER real: qual?",
+        feedbackAcerto:
+          "📋 Isso! O verbete define o assunto A ABELHA, com suas características reais.",
+        feedbackErro:
+          "O verbete não conta história com personagens — ele define um SER real: qual?",
+        dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A abelha”. O verbete define o assunto A ABELHA, com suas características reais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual processo da natureza o infográfico organiza em etapas?",
-        opcoes: ["A fabricação de um carro", "A polinização das flores pelas abelhas", "A construção de uma ponte"],
+        opcoes: [
+          "A fabricação de um carro",
+          "A polinização das flores pelas abelhas",
+          "A construção de uma ponte",
+        ],
         correta: 1,
         feedbackAcerto: "📋 Exato! O infográfico organiza o processo de POLINIZAÇÃO.",
-        feedbackErro: "Releia o título do infográfico: qual processo da natureza está sendo explicado em etapas?",
+        feedbackErro:
+          "Releia o título do infográfico: qual processo da natureza está sendo explicado em etapas?",
+        dica: "🧭 Pista de explorador: lembre o que significa “infográfico” — é um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A polinização das flores pelas abelhas”. O infográfico organiza o processo de POLINIZAÇÃO. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -179,12 +211,19 @@ export const aula03: AulaPortuguesV4 = {
       itens: [
         { id: "s1", texto: "A abelha pousa na flor para coletar néctar.", imagemUrl: flor },
         { id: "s2", texto: "O pólen gruda no corpo peludo da abelha.", imagemUrl: abelha },
-        { id: "s3", texto: "A abelha voa até outra flor e o pólen se solta, gerando sementes.", imagemUrl: girassol },
+        {
+          id: "s3",
+          texto: "A abelha voa até outra flor e o pólen se solta, gerando sementes.",
+          imagemUrl: girassol,
+        },
       ],
       ordemCerta: ["s1", "s2", "s3"],
       feedbackAcerto: "📋 Isso mesmo! Você seguiu a ordem exata das etapas do infográfico.",
       feedbackErro:
         "Pense: primeiro a abelha POUSA. Depois o PÓLEN gruda nela. Só então ela leva o pólen para outra flor.",
+      dica: "🧭 Pista de explorador: lembre o que significa “infográfico” — é um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Você seguiu a ordem exata das etapas do infográfico. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -206,7 +245,11 @@ export const aula03: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "📋 Isso! O verbete chama esse processo de METAMORFOSE.",
         feedbackErro: "A palavra está destacada no próprio verbete.",
-        ondeEstaNoTexto: "…passa por grandes transformações durante a vida, chamadas de metamorfose.",
+        ondeEstaNoTexto:
+          "…passa por grandes transformações durante a vida, chamadas de metamorfose.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “passa por grandes transformações durante a vida, chamadas de metamorfose”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Metamorfose”. O verbete chama esse processo de METAMORFOSE. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que acontece na etapa 3 do infográfico?",
@@ -219,6 +262,9 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "📋 Correto! Na etapa 3, a lagarta forma o CASULO.",
         feedbackErro: "Releia a etapa numerada com o número 3.",
         ondeEstaNoTexto: "3) A lagarta forma um casulo ao redor do corpo.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “3) A lagarta forma um casulo ao redor do corpo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A lagarta forma um casulo ao redor do corpo”. Na etapa 3, a lagarta forma o CASULO. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -236,6 +282,9 @@ export const aula03: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "📋 Isso! É o INFOGRÁFICO — combina imagem e texto curto em etapas.",
       feedbackErro: "Verbete define uma palavra. O texto de etapas com imagem é o INFOGRÁFICO.",
+      dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Infográfico”. É o INFOGRÁFICO — combina imagem e texto curto em etapas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -247,10 +296,20 @@ export const aula03: AulaPortuguesV4 = {
           "Um texto que define uma palavra de forma objetiva",
           "Uma carta pessoal",
           "Um anúncio publicitário",
+          "Em ninhos de pássaro",
         ],
         correta: 0,
         feedbackAcerto: "📋 Isso! Verbete DEFINE uma palavra, com clareza e objetividade.",
         feedbackErro: "Verbete não é carta nem anúncio — ele DEFINE algo, como num dicionário.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Uma carta pessoal” não é a resposta. Verbete não é carta nem anúncio — ele DEFINE algo, como num dicionário.",
+          "❌ “Um anúncio publicitário” não é a resposta. Verbete não é carta nem anúncio — ele DEFINE algo, como num dicionário.",
+          "❌ “Em ninhos de pássaro” não é a resposta. Verbete não é carta nem anúncio — ele DEFINE algo, como num dicionário.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um texto que define uma palavra de forma objetiva”. Verbete DEFINE uma palavra, com clareza e objetividade. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O infográfico combina, principalmente,...",
@@ -258,10 +317,20 @@ export const aula03: AulaPortuguesV4 = {
           "Imagem e texto curto organizados em etapas",
           "Apenas números, sem nenhuma imagem",
           "Apenas desenhos, sem nenhum texto",
+          "Em tocas subterrâneas",
         ],
         correta: 0,
         feedbackAcerto: "📋 Correto! Infográfico une IMAGEM e TEXTO CURTO, geralmente em etapas.",
         feedbackErro: "Pense no que aparece junto no infográfico: imagens E frases curtas.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Apenas números, sem nenhuma imagem” não é a resposta. Pense no que aparece junto no infográfico: imagens E frases curtas.",
+          "❌ “Apenas desenhos, sem nenhum texto” não é a resposta. Pense no que aparece junto no infográfico: imagens E frases curtas.",
+          "❌ “Em tocas subterrâneas” não é a resposta. Pense no que aparece junto no infográfico: imagens E frases curtas.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “infográfico” — é um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Imagem e texto curto organizados em etapas”. Infográfico une IMAGEM e TEXTO CURTO, geralmente em etapas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é polinização?",
@@ -269,17 +338,43 @@ export const aula03: AulaPortuguesV4 = {
           "Quando o pólen de uma flor é levado a outra, ajudando a gerar sementes e frutos",
           "Quando a abelha dorme dentro da colmeia",
           "Quando uma flor muda de cor",
+          "A abelha voa até outra flor",
         ],
         correta: 0,
-        feedbackAcerto: "📋 Isso! Polinização é o transporte do pólen entre flores, gerando sementes e frutos.",
-        feedbackErro: "Releia o verbete de 'polinização' no momento 3 — o que acontece com o pólen?",
+        feedbackAcerto:
+          "📋 Isso! Polinização é o transporte do pólen entre flores, gerando sementes e frutos.",
+        feedbackErro:
+          "Releia o verbete de 'polinização' no momento 3 — o que acontece com o pólen?",
+        feedbackOpcoes: [
+          null,
+          "❌ “Quando a abelha dorme dentro da colmeia” não é a resposta. Releia o verbete de 'polinização' no momento 3 — o que acontece com o pólen?",
+          "❌ “Quando uma flor muda de cor” não é a resposta. Releia o verbete de 'polinização' no momento 3 — o que acontece com o pólen?",
+          "❌ “A abelha voa até outra flor” não é a resposta. Releia o verbete de 'polinização' no momento 3 — o que acontece com o pólen?",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “polinização” — é o processo em que o pólen de uma flor é levado até outra, ajudando as plantas a produzir sementes e frutos. As abelhas são grandes polinizadoras. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Quando o pólen de uma flor é levado a outra, ajudando a gerar sementes e frutos”. Polinização é o transporte do pólen entre flores, gerando sementes e frutos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — No infográfico da borboleta, o que vem logo depois do ovo?",
-        opcoes: ["A lagarta nasce", "A borboleta já nasce adulta", "O casulo se forma primeiro"],
+        opcoes: [
+          "A lagarta nasce",
+          "A borboleta já nasce adulta",
+          "O casulo se forma primeiro",
+          "A flor produz frutos",
+        ],
         correta: 0,
         feedbackAcerto: "📋 Isso mesmo, depois do ovo nasce a LAGARTA.",
         feedbackErro: "Releia a ordem das etapas: o que vem na etapa 2, logo depois do ovo?",
+        feedbackOpcoes: [
+          null,
+          "❌ “A borboleta já nasce adulta” não é a resposta. Releia a ordem das etapas: o que vem na etapa 2, logo depois do ovo?",
+          "❌ “O casulo se forma primeiro” não é a resposta. Releia a ordem das etapas: o que vem na etapa 2, logo depois do ovo?",
+          "❌ “A flor produz frutos” não é a resposta. Releia a ordem das etapas: o que vem na etapa 2, logo depois do ovo?",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “infográfico” — é um texto que organiza informação misturando imagens, números e frases curtas, geralmente em etapas numeradas ou ligadas por setas. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A lagarta nasce”. , depois do ovo nasce a LAGARTA. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Verbete e infográfico são parecidos porque os dois...",
@@ -287,10 +382,21 @@ export const aula03: AulaPortuguesV4 = {
           "Organizam informação real, sem inventar histórias",
           "Sempre têm rima",
           "Sempre contam uma opinião pessoal",
+          "Os dois são exatamente iguais",
         ],
         correta: 0,
         feedbackAcerto: "📋 Muito bem! Ambos organizam informação REAL, de jeitos diferentes.",
-        feedbackErro: "Nenhum dos dois inventa história nem rima — os dois ORGANIZAM informação real.",
+        feedbackErro:
+          "Nenhum dos dois inventa história nem rima — os dois ORGANIZAM informação real.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Sempre têm rima” não é a resposta. Nenhum dos dois inventa história nem rima — os dois ORGANIZAM informação real.",
+          "❌ “Sempre contam uma opinião pessoal” não é a resposta. Nenhum dos dois inventa história nem rima — os dois ORGANIZAM informação real.",
+          "❌ “Os dois são exatamente iguais” não é a resposta. Nenhum dos dois inventa história nem rima — os dois ORGANIZAM informação real.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “verbete” — é o texto de um dicionário ou enciclopédia que define uma palavra: o que ela é, suas características, de forma objetiva e sem opinião. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Organizam informação real, sem inventar histórias”. Muito bem! Ambos organizam informação REAL, de jeitos diferentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -304,7 +410,8 @@ export const aula03: AulaPortuguesV4 = {
       "3) Escolha um processo desse animal ou planta (como ele nasce, cresce ou se alimenta) e organize em um INFOGRÁFICO de 3 ou 4 etapas numeradas, com desenhos simples.",
       "4) Compare: o que o verbete conta que o infográfico não conta, e vice-versa?",
     ],
-    registro: "📝 O verbete e o infográfico feitos à mão (ou digitados), para trazer na próxima aula.",
+    registro:
+      "📝 O verbete e o infográfico feitos à mão (ou digitados), para trazer na próxima aula.",
   },
 
   recompensa: {

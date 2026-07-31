@@ -49,7 +49,10 @@ export const aula04: AulaPortuguesV4 = {
       ],
       pergunta: "Sobre o que essa cena provavelmente vai tratar?",
       hipoteses: [
-        { texto: "Um grupo de crianças se preparando para apresentar algo em voz alta.", imagemUrl: criancasGrupo },
+        {
+          texto: "Um grupo de crianças se preparando para apresentar algo em voz alta.",
+          imagemUrl: criancasGrupo,
+        },
         { texto: "Uma receita de suco de laranja.", imagemUrl: papel },
         { texto: "Um jogo de futebol no recreio.", imagemUrl: lapis },
       ],
@@ -58,6 +61,9 @@ export const aula04: AulaPortuguesV4 = {
         "🔍 Isso! O mural do Sarau e o grupo reunido são pistas de uma apresentação oral, não de uma receita ou de um jogo.",
       feedbackErro:
         "Releia as pistas: um mural de Sarau e um grupo reunido combinam com uma apresentação em voz alta, não com receita ou jogo.",
+      dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Um grupo de crianças se preparando para apresentar algo em voz alta.”. O mural do Sarau e o grupo reunido são pistas de uma apresentação oral, não de uma receita ou de um jogo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -66,31 +72,37 @@ export const aula04: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "planejamento",
-        explicacao: "É organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora.",
+        explicacao:
+          "É organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora.",
         exemplo: "Zeca escreveu num papel os três pontos que queria contar sobre a trilha.",
         imagemUrl: papel,
       },
       {
         palavra: "ritmo",
-        explicacao: "É a velocidade da fala — nem rápido demais (ninguém entende), nem devagar demais (todo mundo se distrai).",
+        explicacao:
+          "É a velocidade da fala — nem rápido demais (ninguém entende), nem devagar demais (todo mundo se distrai).",
         exemplo: "Aurora falou com calma, uma palavra de cada vez, para todos entenderem.",
         imagemUrl: relogio,
       },
       {
         palavra: "pausa",
-        explicacao: "É parar um instante entre as ideias — ajuda quem escuta a organizar o que já ouviu.",
-        exemplo: "Mira fez uma pausa depois de contar a primeira parte da história, antes de continuar.",
+        explicacao:
+          "É parar um instante entre as ideias — ajuda quem escuta a organizar o que já ouviu.",
+        exemplo:
+          "Mira fez uma pausa depois de contar a primeira parte da história, antes de continuar.",
         imagemUrl: sino,
       },
       {
         palavra: "contato visual",
-        explicacao: "É olhar para as pessoas que estão ouvindo, e não só para o papel ou para o chão.",
+        explicacao:
+          "É olhar para as pessoas que estão ouvindo, e não só para o papel ou para o chão.",
         exemplo: "Zeca ergueu os olhos do papel e olhou para os colegas ao contar sua parte.",
         imagemUrl: criancasGrupo,
       },
       {
         palavra: "apoio visual",
-        explicacao: "É um cartaz, desenho ou objeto que ajuda a explicar a fala e prende a atenção de quem escuta.",
+        explicacao:
+          "É um cartaz, desenho ou objeto que ajuda a explicar a fala e prende a atenção de quem escuta.",
         exemplo: "Aurora mostrou um mapa desenhado enquanto contava o caminho da travessia.",
         imagemUrl: livro,
       },
@@ -124,7 +136,11 @@ export const aula04: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🔍 Isso! Ele dividiu em: como começou, o que encontrou e o que aprendeu.",
         feedbackErro: "Releia o texto: Zeca organizou a fala em começo, meio e fim — três partes.",
-        ondeEstaNoTexto: "Zeca planejou sua fala em três partes: como começou a trilha, o que encontrou no caminho e o que aprendeu.",
+        ondeEstaNoTexto:
+          "Zeca planejou sua fala em três partes: como começou a trilha, o que encontrou no caminho e o que aprendeu.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Zeca planejou sua fala em três partes: como começou a trilha, o que encontrou no caminho e o que aprendeu”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Três”. Ele dividiu em: como começou, o que encontrou e o que aprendeu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que Aurora treinou fazer entre as ideias?",
@@ -133,14 +149,22 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Boa! Ela fez pausas para dar tempo de todo mundo entender.",
         feedbackErro: "Releia a fala sobre Aurora — o que ela treinou fazer depois de cada ideia?",
         ondeEstaNoTexto: "Aurora treinou fazer pausas depois de cada ideia importante.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Aurora treinou fazer pausas depois de cada ideia importante”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Fazer pausas”. Ela fez pausas para dar tempo de todo mundo entender. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que apoio visual Zeca preparou?",
         opcoes: ["Um cartaz com um mapa da travessia", "Uma música gravada", "Um jogo de cartas"],
         correta: 0,
-        feedbackAcerto: "🔍 Exato! Zeca desenhou um cartaz com um mapa para mostrar enquanto falava.",
+        feedbackAcerto:
+          "🔍 Exato! Zeca desenhou um cartaz com um mapa para mostrar enquanto falava.",
         feedbackErro: "Releia a última fala da professora e o que Zeca fez em seguida.",
-        ondeEstaNoTexto: "Zeca desenhou um cartaz com um mapa da travessia para mostrar enquanto falava.",
+        ondeEstaNoTexto:
+          "Zeca desenhou um cartaz com um mapa da travessia para mostrar enquanto falava.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Zeca desenhou um cartaz com um mapa da travessia para mostrar enquanto falava”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um cartaz com um mapa da travessia”. Zeca desenhou um cartaz com um mapa para mostrar enquanto falava. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -150,17 +174,33 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que Mira praticou para melhorar sua apresentação?",
-        opcoes: ["Olhar para os colegas em vez de ficar só no papel", "Decorar palavras difíceis", "Falar bem baixinho"],
+        opcoes: [
+          "Olhar para os colegas em vez de ficar só no papel",
+          "Decorar palavras difíceis",
+          "Falar bem baixinho",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! Mira treinou o contato visual com quem estava escutando.",
         feedbackErro: "Releia o parágrafo sobre Mira — ela mudou o que fazia com os olhos.",
+        dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Olhar para os colegas em vez de ficar só no papel”. Mira treinou o contato visual com quem estava escutando. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Como os outros exploradores agiram enquanto um colega falava?",
-        opcoes: ["Ficaram em silêncio, escutando com atenção", "Conversaram entre si", "Saíram do pátio"],
+        opcoes: [
+          "Ficaram em silêncio, escutando com atenção",
+          "Conversaram entre si",
+          "Saíram do pátio",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! Escutar com atenção também faz parte de uma boa apresentação — para quem fala e para quem ouve.",
-        feedbackErro: "Releia o final do texto: o que o grupo fazia enquanto esperava a vez de cada um?",
+        feedbackAcerto:
+          "🔍 Isso! Escutar com atenção também faz parte de uma boa apresentação — para quem fala e para quem ouve.",
+        feedbackErro:
+          "Releia o final do texto: o que o grupo fazia enquanto esperava a vez de cada um?",
+        dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ficaram em silêncio, escutando com atenção”. Escutar com atenção também faz parte de uma boa apresentação — para quem fala e para quem ouve. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -171,12 +211,25 @@ export const aula04: AulaPortuguesV4 = {
       instrucao: "Do primeiro passo ao último.",
       itens: [
         { id: "p1", texto: "Planejar o que vai dizer, em começo, meio e fim.", imagemUrl: papel },
-        { id: "p2", texto: "Ensaiar em voz alta, cuidando do ritmo e das pausas.", imagemUrl: relogio },
-        { id: "p3", texto: "Apresentar olhando para quem escuta, com apoio visual se precisar.", imagemUrl: criancasGrupo },
+        {
+          id: "p2",
+          texto: "Ensaiar em voz alta, cuidando do ritmo e das pausas.",
+          imagemUrl: relogio,
+        },
+        {
+          id: "p3",
+          texto: "Apresentar olhando para quem escuta, com apoio visual se precisar.",
+          imagemUrl: criancasGrupo,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🔍 Isso mesmo! Primeiro planejamos, depois ensaiamos, e só então apresentamos de verdade.",
-      feedbackErro: "Pense na ordem: primeiro organizar as ideias, depois treinar em voz alta, e só então apresentar para o público.",
+      feedbackAcerto:
+        "🔍 Isso mesmo! Primeiro planejamos, depois ensaiamos, e só então apresentamos de verdade.",
+      feedbackErro:
+        "Pense na ordem: primeiro organizar as ideias, depois treinar em voz alta, e só então apresentar para o público.",
+      dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Primeiro planejamos, depois ensaiamos, e só então apresentamos de verdade. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -201,14 +254,24 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! Ele falou com 'voz firme', num ritmo equilibrado.",
         feedbackErro: "Releia a primeira frase — ela descreve como era a voz de Zeca.",
         ondeEstaNoTexto: "começou a falar com voz firme, nem rápida nem devagar demais",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “começou a falar com voz firme, nem rápida nem devagar demais”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Firme, nem rápida nem devagar demais”. Ele falou com 'voz firme', num ritmo equilibrado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que Zeca fez uma pausa no meio da fala?",
-        opcoes: ["Para mostrar o cartaz e apontar o caminho", "Porque esqueceu tudo", "Porque estava com sono"],
+        opcoes: [
+          "Para mostrar o cartaz e apontar o caminho",
+          "Porque esqueceu tudo",
+          "Porque estava com sono",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Exato! Ele pausou para usar o apoio visual — o cartaz com o mapa.",
         feedbackErro: "Releia o segundo parágrafo: o que ele fez durante a pausa?",
         ondeEstaNoTexto: "fez uma pausa para mostrar o cartaz e apontar o caminho da trilha",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “fez uma pausa para mostrar o cartaz e apontar o caminho da trilha”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para mostrar o cartaz e apontar o caminho”. Ele pausou para usar o apoio visual — o cartaz com o mapa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -226,7 +289,11 @@ export const aula04: AulaPortuguesV4 = {
       opcoes: ["O ritmo da fala", "A cor da roupa", "O tamanho da sala"],
       correta: 0,
       feedbackAcerto: "🔍 Isso! Ajustar o ritmo é o que ajuda a plateia a acompanhar a fala.",
-      feedbackErro: "Pense: o problema é a velocidade da fala, então o que precisa ser ajustado é o RITMO.",
+      feedbackErro:
+        "Pense: o problema é a velocidade da fala, então o que precisa ser ajustado é o RITMO.",
+      dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “O ritmo da fala”. Ajustar o ritmo é o que ajuda a plateia a acompanhar a fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -234,31 +301,93 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que significa planejar uma apresentação oral?",
-        opcoes: ["Organizar o que vai dizer, do começo ao fim, antes de falar", "Decorar tudo palavra por palavra", "Falar sem pensar antes"],
+        opcoes: [
+          "Organizar o que vai dizer, do começo ao fim, antes de falar",
+          "Decorar tudo palavra por palavra",
+          "Falar sem pensar antes",
+          "Falar bem rápido",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! Planejar é pensar na ordem das ideias antes de apresentar.",
-        feedbackErro: "Planejar é ORGANIZAR o que vai ser dito antes — não é decorar tudo nem falar sem pensar.",
+        feedbackErro:
+          "Planejar é ORGANIZAR o que vai ser dito antes — não é decorar tudo nem falar sem pensar.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Decorar tudo palavra por palavra” não é a resposta. Planejar é ORGANIZAR o que vai ser dito antes — não é decorar tudo nem falar sem pensar.",
+          "❌ “Falar sem pensar antes” não é a resposta. Planejar é ORGANIZAR o que vai ser dito antes — não é decorar tudo nem falar sem pensar.",
+          "❌ “Falar bem rápido” não é a resposta. Planejar é ORGANIZAR o que vai ser dito antes — não é decorar tudo nem falar sem pensar.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Organizar o que vai dizer, do começo ao fim, antes de falar”. Planejar é pensar na ordem das ideias antes de apresentar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Para que servem as pausas ao falar em público?",
-        opcoes: ["Para dar tempo de quem escuta entender cada ideia", "Para esquecer o assunto", "Para a apresentação durar mais tempo"],
+        opcoes: [
+          "Para dar tempo de quem escuta entender cada ideia",
+          "Para esquecer o assunto",
+          "Para a apresentação durar mais tempo",
+          "Gritar mais alto",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Correto! As pausas ajudam a organizar as ideias na cabeça de quem ouve.",
-        feedbackErro: "As pausas ajudam quem ESCUTA a acompanhar as ideias, não servem para enrolar a apresentação.",
+        feedbackAcerto:
+          "🔍 Correto! As pausas ajudam a organizar as ideias na cabeça de quem ouve.",
+        feedbackErro:
+          "As pausas ajudam quem ESCUTA a acompanhar as ideias, não servem para enrolar a apresentação.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Para esquecer o assunto” não é a resposta. As pausas ajudam quem ESCUTA a acompanhar as ideias, não servem para enrolar a apresentação.",
+          "❌ “Para a apresentação durar mais tempo” não é a resposta. As pausas ajudam quem ESCUTA a acompanhar as ideias, não servem para enrolar a apresentação.",
+          "❌ “Gritar mais alto” não é a resposta. As pausas ajudam quem ESCUTA a acompanhar as ideias, não servem para enrolar a apresentação.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “pausa” — é parar um instante entre as ideias — ajuda quem escuta a organizar o que já ouviu. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para dar tempo de quem escuta entender cada ideia”. As pausas ajudam a organizar as ideias na cabeça de quem ouve. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é 'contato visual' numa apresentação?",
-        opcoes: ["Olhar para quem está escutando", "Usar óculos escuros", "Fechar os olhos ao falar"],
+        opcoes: [
+          "Olhar para quem está escutando",
+          "Usar óculos escuros",
+          "Fechar os olhos ao falar",
+          "Uma música gravada",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! Contato visual é olhar para o público enquanto fala.",
-        feedbackErro: "Contato visual é OLHAR para as pessoas que estão ouvindo, criando conexão com elas.",
+        feedbackErro:
+          "Contato visual é OLHAR para as pessoas que estão ouvindo, criando conexão com elas.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Usar óculos escuros” não é a resposta. Contato visual é OLHAR para as pessoas que estão ouvindo, criando conexão com elas.",
+          "❌ “Fechar os olhos ao falar” não é a resposta. Contato visual é OLHAR para as pessoas que estão ouvindo, criando conexão com elas.",
+          "❌ “Uma música gravada” não é a resposta. Contato visual é OLHAR para as pessoas que estão ouvindo, criando conexão com elas.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “contato visual” — é olhar para as pessoas que estão ouvindo, e não só para o papel ou para o chão. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Olhar para quem está escutando”. Contato visual é olhar para o público enquanto fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual é um exemplo de apoio visual?",
-        opcoes: ["Um cartaz com desenho que ajuda a explicar a fala", "Um lápis qualquer", "Um sapato novo"],
+        opcoes: [
+          "Um cartaz com desenho que ajuda a explicar a fala",
+          "Um lápis qualquer",
+          "Um sapato novo",
+          "Um jogo de cartas",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Exato! Cartazes, desenhos ou objetos que ilustram a fala são apoios visuais.",
-        feedbackErro: "Apoio visual é algo que AJUDA a mostrar o que está sendo dito, como um cartaz ou desenho.",
+        feedbackAcerto:
+          "🔍 Exato! Cartazes, desenhos ou objetos que ilustram a fala são apoios visuais.",
+        feedbackErro:
+          "Apoio visual é algo que AJUDA a mostrar o que está sendo dito, como um cartaz ou desenho.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Um lápis qualquer” não é a resposta. Apoio visual é algo que AJUDA a mostrar o que está sendo dito, como um cartaz ou desenho.",
+          "❌ “Um sapato novo” não é a resposta. Apoio visual é algo que AJUDA a mostrar o que está sendo dito, como um cartaz ou desenho.",
+          "❌ “Um jogo de cartas” não é a resposta. Apoio visual é algo que AJUDA a mostrar o que está sendo dito, como um cartaz ou desenho.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “apoio visual” — é um cartaz, desenho ou objeto que ajuda a explicar a fala e prende a atenção de quem escuta. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um cartaz com desenho que ajuda a explicar a fala”. Cartazes, desenhos ou objetos que ilustram a fala são apoios visuais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que Zeca conseguiu apresentar bem no Sarau?",
@@ -266,17 +395,32 @@ export const aula04: AulaPortuguesV4 = {
           "Porque planejou, ensaiou o ritmo e as pausas, e usou um apoio visual",
           "Porque decorou tudo na última hora",
           "Porque falou muito rápido para terminar logo",
+          "Decorar palavras difíceis",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! Planejamento, ritmo, pausas e apoio visual fizeram toda a diferença. Apresentação concluída! 🌟",
-        feedbackErro: "Releia a história: Zeca planejou antes, cuidou do ritmo e das pausas, e usou um cartaz como apoio visual.",
+        feedbackAcerto:
+          "🔍 Isso! Planejamento, ritmo, pausas e apoio visual fizeram toda a diferença. Apresentação concluída! 🌟",
+        feedbackErro:
+          "Releia a história: Zeca planejou antes, cuidou do ritmo e das pausas, e usou um cartaz como apoio visual.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque decorou tudo na última hora” não é a resposta. Releia a história: Zeca planejou antes, cuidou do ritmo e das pausas, e usou um cartaz como apoio visual.",
+          "❌ “Porque falou muito rápido para terminar logo” não é a resposta. Releia a história: Zeca planejou antes, cuidou do ritmo e das pausas, e usou um cartaz como apoio visual.",
+          "❌ “Decorar palavras difíceis” não é a resposta. Releia a história: Zeca planejou antes, cuidou do ritmo e das pausas, e usou um cartaz como apoio visual.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “planejamento” — é organizar antes o que vai falar: o começo, o meio e o fim da fala, para não se perder na hora. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque planejou, ensaiou o ritmo e as pausas, e usou um apoio visual”. Planejamento, ritmo, pausas e apoio visual fizeram toda a diferença. Apresentação concluída! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
   momento11_missaoFamilia: {
     titulo: "🏠 Missão: meu mini-sarau em casa",
-    materiais: ["Um assunto que você goste (um livro, um passeio, um hobby)", "Papel e lápis para um cartaz simples"],
+    materiais: [
+      "Um assunto que você goste (um livro, um passeio, um hobby)",
+      "Papel e lápis para um cartaz simples",
+    ],
     passos: [
       "1) Planeje sua fala em três partes: começo, meio e fim.",
       "2) Ensaie em voz alta na frente de um familiar, cuidando do ritmo e fazendo pausas.",

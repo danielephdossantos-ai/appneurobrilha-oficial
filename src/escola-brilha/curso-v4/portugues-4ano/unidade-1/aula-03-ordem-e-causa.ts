@@ -59,6 +59,9 @@ export const aula3: AulaPortuguesV4 = {
         "⛓️ Isso mesmo! A chuva forte é a CAUSA que fez o rio subir; o rio cheio é a CAUSA que fez a ponte ceder. É uma corrente: cada fato é consequência do anterior e causa do seguinte.",
       feedbackErro:
         "Pense na ordem lógica: primeiro precisa chover para o rio subir, e o rio precisa subir muito para derrubar uma ponte. A chuva é a causa inicial de toda a corrente de fatos.",
+      dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “A chuva causou a subida do rio, que causou a queda da ponte”. A chuva forte é a CAUSA que fez o rio subir; o rio cheio é a CAUSA que fez a ponte ceder. É uma corrente: cada fato é consequência do anterior e causa do seguinte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -88,7 +91,8 @@ export const aula3: AulaPortuguesV4 = {
   },
 
   momento04_leituraGuiada: {
-    instrucao: "Leia procurando os conectivos que ligam um fato ao outro: eles são os elos da corrente.",
+    instrucao:
+      "Leia procurando os conectivos que ligam um fato ao outro: eles são os elos da corrente.",
     leitura: {
       titulo: "O Incêndio na Trilha Seca",
       imagemUrl: fogo,
@@ -107,27 +111,54 @@ export const aula3: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Por que a trilha estava seca?",
-        opcoes: ["Porque não chovia desde o início do mês", "Porque fazia muito frio", "Porque ninguém cuidava dela"],
+        opcoes: [
+          "Porque não chovia desde o início do mês",
+          "Porque fazia muito frio",
+          "Porque ninguém cuidava dela",
+        ],
         correta: 0,
-        feedbackAcerto: "⛓️ Isso! O texto explica: 'porque não chovia na região desde o início do mês'.",
+        feedbackAcerto:
+          "⛓️ Isso! O texto explica: 'porque não chovia na região desde o início do mês'.",
         feedbackErro: "A explicação vem logo depois da palavra 'porque', no primeiro parágrafo.",
-        ondeEstaNoTexto: "A trilha estava seca há semanas porque não chovia na região desde o início do mês.",
+        ondeEstaNoTexto:
+          "A trilha estava seca há semanas porque não chovia na região desde o início do mês.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A trilha estava seca há semanas porque não chovia na região desde o início do mês”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque não chovia desde o início do mês”. O texto explica: 'porque não chovia na região desde o início do mês'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que causou o início do incêndio?",
-        opcoes: ["Uma fogueira dos exploradores", "Um raio que caiu numa árvore isolada", "Um cigarro jogado no mato"],
+        opcoes: [
+          "Uma fogueira dos exploradores",
+          "Um raio que caiu numa árvore isolada",
+          "Um cigarro jogado no mato",
+        ],
         correta: 1,
-        feedbackAcerto: "⛓️ Exato! 'Um raio caiu sobre uma árvore isolada... Por isso, começou um pequeno incêndio.'",
-        feedbackErro: "Releia o segundo parágrafo — a causa do fogo aparece antes da expressão 'por isso'.",
-        ondeEstaNoTexto: "Um raio caiu sobre uma árvore isolada… Por isso, começou um pequeno incêndio…",
+        feedbackAcerto:
+          "⛓️ Exato! 'Um raio caiu sobre uma árvore isolada... Por isso, começou um pequeno incêndio.'",
+        feedbackErro:
+          "Releia o segundo parágrafo — a causa do fogo aparece antes da expressão 'por isso'.",
+        ondeEstaNoTexto:
+          "Um raio caiu sobre uma árvore isolada… Por isso, começou um pequeno incêndio…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Um raio caiu sobre uma árvore isolada… Por isso, começou um pequeno incêndio”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um raio que caiu numa árvore isolada”. 'Um raio caiu sobre uma árvore isolada... Por isso, começou um pequeno incêndio.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a equipe fez ao ver a fumaça?",
-        opcoes: ["Foram embora com medo", "Avisaram os guardas florestais", "Tentaram apagar o fogo sozinhos"],
+        opcoes: [
+          "Foram embora com medo",
+          "Avisaram os guardas florestais",
+          "Tentaram apagar o fogo sozinhos",
+        ],
         correta: 1,
         feedbackAcerto: "⛓️ Isso! O texto diz que 'então, avisou os guardas florestais da região'.",
         feedbackErro: "A ação da equipe vem logo depois de 'e, então' no terceiro parágrafo.",
-        ondeEstaNoTexto: "A equipe de exploradores avistou a fumaça de longe e, então, avisou os guardas florestais da região.",
+        ondeEstaNoTexto:
+          "A equipe de exploradores avistou a fumaça de longe e, então, avisou os guardas florestais da região.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A equipe de exploradores avistou a fumaça de longe e, então, avisou os guardas florestais da região”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Avisaram os guardas florestais”. O texto diz que 'então, avisou os guardas florestais da região'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -147,9 +178,13 @@ export const aula3: AulaPortuguesV4 = {
           "⛓️ Isso mesmo! Essa é a ordem lógica: a falta de chuva causou o mato seco, que facilitou o incêndio provocado pelo raio, e isso levou a equipe a avisar os guardas.",
         feedbackErro:
           "Pense na ordem natural dos fatos: primeiro falta a chuva, depois o mato fica seco, depois o raio provoca o fogo, e só então a equipe reage avisando os guardas.",
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Falta de chuva → mato seco → raio provoca incêndio → equipe avisa guardas”. Essa é a ordem lógica: a falta de chuva causou o mato seco, que facilitou o incêndio provocado pelo raio, e isso levou a equipe a avisar os guardas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "Se não tivesse chovido tão pouco naquele mês, o que provavelmente teria sido diferente?",
+        pergunta:
+          "Se não tivesse chovido tão pouco naquele mês, o que provavelmente teria sido diferente?",
         opcoes: [
           "Nada mudaria, o incêndio aconteceria do mesmo jeito",
           "O mato estaria mais úmido e o fogo teria menos chance de se espalhar",
@@ -160,6 +195,9 @@ export const aula3: AulaPortuguesV4 = {
           "⛓️ Muito bem! Você entendeu a corrente de causa: sem a seca, o mato não pegaria fogo tão facilmente — é assim que uma causa muda toda a consequência seguinte.",
         feedbackErro:
           "O texto liga a seca ao mato fácil de pegar fogo. Se a causa (seca) fosse diferente, a consequência (fogo se espalhando rápido) também mudaria.",
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O mato estaria mais úmido e o fogo teria menos chance de se espalhar”. Muito bem! Você entendeu a corrente de causa: sem a seca, o mato não pegaria fogo tão facilmente — é assim que uma causa muda toda a consequência seguinte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -169,18 +207,36 @@ export const aula3: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Da causa mais distante até a consequência final.",
       itens: [
-        { id: "p1", texto: "A região passa semanas sem chuva e o mato fica seco.", imagemUrl: chuva },
-        { id: "p2", texto: "Um raio cai sobre uma árvore isolada e provoca um princípio de incêndio.", imagemUrl: fogo },
-        { id: "p3", texto: "A equipe avista a fumaça e avisa os guardas florestais.", imagemUrl: mapa },
+        {
+          id: "p1",
+          texto: "A região passa semanas sem chuva e o mato fica seco.",
+          imagemUrl: chuva,
+        },
+        {
+          id: "p2",
+          texto: "Um raio cai sobre uma árvore isolada e provoca um princípio de incêndio.",
+          imagemUrl: fogo,
+        },
+        {
+          id: "p3",
+          texto: "A equipe avista a fumaça e avisa os guardas florestais.",
+          imagemUrl: mapa,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "⛓️ Perfeito! Você seguiu a corrente de causa e consequência do começo ao fim.",
-      feedbackErro: "Pense: qual fato precisa acontecer primeiro para o seguinte ser possível? A seca vem antes do fogo, que vem antes do aviso.",
+      feedbackAcerto:
+        "⛓️ Perfeito! Você seguiu a corrente de causa e consequência do começo ao fim.",
+      feedbackErro:
+        "Pense: qual fato precisa acontecer primeiro para o seguinte ser possível? A seca vem antes do fogo, que vem antes do aviso.",
+      dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Você seguiu a corrente de causa e consequência do começo ao fim. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
   momento08_leituraIndependente: {
-    instrucao: "Novo relato! Leia sozinho e identifique as causas e consequências escondidas nos conectivos.",
+    instrucao:
+      "Novo relato! Leia sozinho e identifique as causas e consequências escondidas nos conectivos.",
     leitura: {
       titulo: "A Ponte Improvisada",
       imagemUrl: ponte,
@@ -200,9 +256,14 @@ export const aula3: AulaPortuguesV4 = {
           "Porque era feita de metal enferrujado",
         ],
         correta: 0,
-        feedbackAcerto: "⛓️ Isso! O texto explica claramente essa causa logo após a palavra 'porque'.",
+        feedbackAcerto:
+          "⛓️ Isso! O texto explica claramente essa causa logo após a palavra 'porque'.",
         feedbackErro: "Releia o primeiro parágrafo — a explicação vem logo depois de 'porque'.",
-        ondeEstaNoTexto: "…porque a correnteza havia arrancado suas bases de madeira já enfraquecidas pelo tempo.",
+        ondeEstaNoTexto:
+          "…porque a correnteza havia arrancado suas bases de madeira já enfraquecidas pelo tempo.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “porque a correnteza havia arrancado suas bases de madeira já enfraquecidas pelo tempo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque a correnteza arrancou suas bases já enfraquecidas”. O texto explica claramente essa causa logo após a palavra 'porque'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual foi a consequência de a equipe não conseguir atravessar o rio?",
@@ -212,9 +273,14 @@ export const aula3: AulaPortuguesV4 = {
           "Eles nadaram até o outro lado",
         ],
         correta: 1,
-        feedbackAcerto: "⛓️ Exato! 'Por isso, decidiram construir uma ponte improvisada usando cordas e troncos.'",
+        feedbackAcerto:
+          "⛓️ Exato! 'Por isso, decidiram construir uma ponte improvisada usando cordas e troncos.'",
         feedbackErro: "A consequência aparece logo depois de 'Por isso' no segundo parágrafo.",
-        ondeEstaNoTexto: "Por isso, decidiram construir uma ponte improvisada usando cordas e troncos encontrados na mata.",
+        ondeEstaNoTexto:
+          "Por isso, decidiram construir uma ponte improvisada usando cordas e troncos encontrados na mata.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Por isso, decidiram construir uma ponte improvisada usando cordas e troncos encontrados na mata”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Eles construíram uma ponte improvisada com cordas e troncos”. 'Por isso, decidiram construir uma ponte improvisada usando cordas e troncos.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -227,11 +293,17 @@ export const aula3: AulaPortuguesV4 = {
       "Para entender bem um texto, é importante identificar essa corrente de causas e consequências, não só os fatos soltos.",
     ],
     miniDesafio: {
-      pergunta: "'O sol ficou muito forte durante dias, por isso o riacho secou.' Qual é a causa nessa frase?",
+      pergunta:
+        "'O sol ficou muito forte durante dias, por isso o riacho secou.' Qual é a causa nessa frase?",
       opcoes: ["O riacho secar", "O sol forte durante dias", "Não há causa nessa frase"],
       correta: 1,
-      feedbackAcerto: "⛓️ Isso! O sol forte é a causa; o riacho secar é a consequência, ligada pelo 'por isso'.",
-      feedbackErro: "Pense: o que aconteceu PRIMEIRO e fez o riacho secar? O sol forte durante dias é a causa.",
+      feedbackAcerto:
+        "⛓️ Isso! O sol forte é a causa; o riacho secar é a consequência, ligada pelo 'por isso'.",
+      feedbackErro:
+        "Pense: o que aconteceu PRIMEIRO e fez o riacho secar? O sol forte durante dias é a causa.",
+      dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “O sol forte durante dias”. O sol forte é a causa; o riacho secar é a consequência, ligada pelo 'por isso'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -243,35 +315,85 @@ export const aula3: AulaPortuguesV4 = {
           "O resultado de um fato",
           "O motivo que faz outro fato acontecer",
           "Uma palavra sem sentido no texto",
+          "Porque fazia muito frio",
         ],
         correta: 1,
         feedbackAcerto: "⛓️ Isso! A causa é o motivo por trás de um acontecimento.",
         feedbackErro: "A causa é o que FAZ algo acontecer — o motivo, não o resultado.",
+        feedbackOpcoes: [
+          "❌ “O resultado de um fato” não é a resposta. A causa é o que FAZ algo acontecer — o motivo, não o resultado.",
+          null,
+          "❌ “Uma palavra sem sentido no texto” não é a resposta. A causa é o que FAZ algo acontecer — o motivo, não o resultado.",
+          "❌ “Porque fazia muito frio” não é a resposta. A causa é o que FAZ algo acontecer — o motivo, não o resultado.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O motivo que faz outro fato acontecer”. A causa é o motivo por trás de um acontecimento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual dessas palavras costuma ligar causa e consequência?",
-        opcoes: ["Por isso", "Amanhã", "Também"],
+        opcoes: ["Por isso", "Amanhã", "Também", "Porque ninguém cuidava dela"],
         correta: 0,
         feedbackAcerto: "⛓️ Correto! 'Por isso' é um conectivo clássico de consequência.",
-        feedbackErro: "'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
+        feedbackErro:
+          "'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Amanhã” não é a resposta. 'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
+          "❌ “Também” não é a resposta. 'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
+          "❌ “Porque ninguém cuidava dela” não é a resposta. 'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Por isso”. 'Por isso' é um conectivo clássico de consequência. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "3/5 — No relato do incêndio, qual foi a causa inicial de toda a corrente de fatos?",
-        opcoes: ["A falta de chuva por semanas", "O aviso aos guardas florestais", "A fumaça vista de longe"],
+        pergunta:
+          "3/5 — No relato do incêndio, qual foi a causa inicial de toda a corrente de fatos?",
+        opcoes: [
+          "A falta de chuva por semanas",
+          "O aviso aos guardas florestais",
+          "A fumaça vista de longe",
+          "Uma fogueira dos exploradores",
+        ],
         correta: 0,
-        feedbackAcerto: "⛓️ Isso! A seca foi o primeiro elo que deu início à corrente de acontecimentos.",
-        feedbackErro: "O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
+        feedbackAcerto:
+          "⛓️ Isso! A seca foi o primeiro elo que deu início à corrente de acontecimentos.",
+        feedbackErro:
+          "O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O aviso aos guardas florestais” não é a resposta. O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
+          "❌ “A fumaça vista de longe” não é a resposta. O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
+          "❌ “Uma fogueira dos exploradores” não é a resposta. O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A falta de chuva por semanas”. A seca foi o primeiro elo que deu início à corrente de acontecimentos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "4/5 — Por que é útil identificar a corrente de causas e consequências num texto?",
+        pergunta:
+          "4/5 — Por que é útil identificar a corrente de causas e consequências num texto?",
         opcoes: [
           "Para decorar o texto palavra por palavra",
           "Para entender por que os fatos aconteceram na ordem em que aconteceram",
           "Não serve para nada na leitura",
+          "Um cigarro jogado no mato",
         ],
         correta: 1,
-        feedbackAcerto: "⛓️ Exatamente! Isso ajuda a entender a lógica interna do texto, não só os fatos soltos.",
-        feedbackErro: "Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
+        feedbackAcerto:
+          "⛓️ Exatamente! Isso ajuda a entender a lógica interna do texto, não só os fatos soltos.",
+        feedbackErro:
+          "Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
+        feedbackOpcoes: [
+          "❌ “Para decorar o texto palavra por palavra” não é a resposta. Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
+          null,
+          "❌ “Não serve para nada na leitura” não é a resposta. Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
+          "❌ “Um cigarro jogado no mato” não é a resposta. Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para entender por que os fatos aconteceram na ordem em que aconteceram”. Isso ajuda a entender a lógica interna do texto, não só os fatos soltos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Na ponte improvisada, o que motivou a equipe a construir uma nova ponte?",
@@ -279,10 +401,22 @@ export const aula3: AulaPortuguesV4 = {
           "A ponte original havia caído e eles precisavam atravessar o rio",
           "Eles queriam apenas se divertir construindo",
           "Um guarda florestal pediu para eles construírem",
+          "Foram embora com medo",
         ],
         correta: 0,
-        feedbackAcerto: "⛓️ Isso! Você já enxerga as correntes de causa e consequência como um verdadeiro explorador de textos! 🌟",
-        feedbackErro: "A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
+        feedbackAcerto:
+          "⛓️ Isso! Você já enxerga as correntes de causa e consequência como um verdadeiro explorador de textos! 🌟",
+        feedbackErro:
+          "A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Eles queriam apenas se divertir construindo” não é a resposta. A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
+          "❌ “Um guarda florestal pediu para eles construírem” não é a resposta. A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
+          "❌ “Foram embora com medo” não é a resposta. A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A ponte original havia caído e eles precisavam atravessar o rio”. Você já enxerga as correntes de causa e consequência como um verdadeiro explorador de textos! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -296,7 +430,8 @@ export const aula3: AulaPortuguesV4 = {
       "3) Desenhem ou escrevam essa corrente como elos ligados.",
       "4) Conversem: qual foi a causa mais distante da corrente do dia?",
     ],
-    registro: "🗣️ Registre por escrito ou em áudio a corrente montada, usando os conectivos 'porque', 'por isso' e 'então'.",
+    registro:
+      "🗣️ Registre por escrito ou em áudio a corrente montada, usando os conectivos 'porque', 'por isso' e 'então'.",
   },
 
   recompensa: {

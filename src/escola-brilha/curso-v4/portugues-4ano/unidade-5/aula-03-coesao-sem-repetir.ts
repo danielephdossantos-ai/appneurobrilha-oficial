@@ -31,7 +31,8 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao: "Observe esta frase repetitiva: 'O cachorro correu. O cachorro latiu. O cachorro pulou.' O que você imagina que podemos fazer para melhorar?",
+    instrucao:
+      "Observe esta frase repetitiva: 'O cachorro correu. O cachorro latiu. O cachorro pulou.' O que você imagina que podemos fazer para melhorar?",
     bloco: {
       titulo: "O Texto que Se Repete",
       capaImagemUrl: cachorro,
@@ -46,8 +47,13 @@ export const aula03: AulaPortuguesV4 = {
         { texto: "Impossível de entender." },
       ],
       respostaCerta: 1,
-      feedbackAcerto: "🧵 Isso! Usar 'ele' no lugar de 'o cachorro' evita repetição e deixa o texto mais fluido, sem perder o sentido.",
-      feedbackErro: "Pense: repetir a mesma palavra várias vezes cansa o leitor. Um pronome no lugar certo resolve isso.",
+      feedbackAcerto:
+        "🧵 Isso! Usar 'ele' no lugar de 'o cachorro' evita repetição e deixa o texto mais fluido, sem perder o sentido.",
+      feedbackErro:
+        "Pense: repetir a mesma palavra várias vezes cansa o leitor. Um pronome no lugar certo resolve isso.",
+      dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Mais fluido, porque evita repetir a mesma palavra.”. Usar 'ele' no lugar de 'o cachorro' evita repetição e deixa o texto mais fluido, sem perder o sentido. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -56,20 +62,25 @@ export const aula03: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "pronome",
-        explicacao: "É uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele.",
+        explicacao:
+          "É uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele.",
         exemplo: "'A menina correu. Ela estava atrasada.' — 'ela' substitui 'a menina'.",
         imagemUrl: menina,
       },
       {
         palavra: "sinônimo",
-        explicacao: "É uma palavra diferente que tem significado parecido com outra, usada para não repetir o mesmo termo.",
-        exemplo: "'O cão latiu. O animal parecia assustado.' — 'animal' é um sinônimo de 'cão' nesse contexto.",
+        explicacao:
+          "É uma palavra diferente que tem significado parecido com outra, usada para não repetir o mesmo termo.",
+        exemplo:
+          "'O cão latiu. O animal parecia assustado.' — 'animal' é um sinônimo de 'cão' nesse contexto.",
         imagemUrl: cachorro,
       },
       {
         palavra: "conectivo",
-        explicacao: "É uma palavra que liga ideias, mostrando a relação entre elas: tempo, causa, oposição, adição.",
-        exemplo: "'Estudei bastante, por isso fui bem na prova.' — 'por isso' liga causa e consequência.",
+        explicacao:
+          "É uma palavra que liga ideias, mostrando a relação entre elas: tempo, causa, oposição, adição.",
+        exemplo:
+          "'Estudei bastante, por isso fui bem na prova.' — 'por isso' liga causa e consequência.",
         imagemUrl: lapis,
       },
     ],
@@ -92,7 +103,8 @@ export const aula03: AulaPortuguesV4 = {
           },
           {
             texto: "Use conectivos para ligar as ideias (por isso, mas, então, além disso).",
-            explicacao: "Os conectivos mostram COMO as ideias se relacionam, evitando frases soltas.",
+            explicacao:
+              "Os conectivos mostram COMO as ideias se relacionam, evitando frases soltas.",
           },
         ],
       },
@@ -100,7 +112,8 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento04_leituraGuiada: {
-    instrucao: "Leia e observe como o texto evita repetições usando pronomes, sinônimos e conectivos.",
+    instrucao:
+      "Leia e observe como o texto evita repetições usando pronomes, sinônimos e conectivos.",
     leitura: {
       titulo: "A Expedição de Marina",
       imagemUrl: livro,
@@ -120,11 +133,19 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que Marina fez para planejar a trilha?",
-        opcoes: ["Pediu ajuda ao pai e fez um mapa", "Não planejou nada", "Convidou a turma inteira"],
+        opcoes: [
+          "Pediu ajuda ao pai e fez um mapa",
+          "Não planejou nada",
+          "Convidou a turma inteira",
+        ],
         correta: 0,
         feedbackAcerto: "🧵 Isso! Ela pediu ajuda ao pai e organizou um mapa simples.",
         feedbackErro: "Releia o primeiro parágrafo.",
-        ondeEstaNoTexto: "Ela pediu ajuda ao pai para planejar a trilha e organizou tudo em um mapa simples.",
+        ondeEstaNoTexto:
+          "Ela pediu ajuda ao pai para planejar a trilha e organizou tudo em um mapa simples.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Ela pediu ajuda ao pai para planejar a trilha e organizou tudo em um mapa simples”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Pediu ajuda ao pai e fez um mapa”. Ela pediu ajuda ao pai e organizou um mapa simples. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que Marina encontrou no meio do caminho, que não estava no mapa?",
@@ -133,6 +154,9 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🧵 Exato! Um riacho surpresa a fez mudar de rota.",
         feedbackErro: "Está no terceiro parágrafo.",
         ondeEstaNoTexto: "Marina encontrou um riacho que não estava no mapa.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Marina encontrou um riacho que não estava no mapa”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um riacho”. Um riacho surpresa a fez mudar de rota. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -144,38 +168,70 @@ export const aula03: AulaPortuguesV4 = {
         pergunta: "No segundo parágrafo, a expressão 'a exploradora' substitui qual palavra?",
         opcoes: ["Pai", "Marina", "Mochila"],
         correta: 1,
-        feedbackAcerto: "🧵 Isso! 'A exploradora' é um sinônimo usado no lugar de repetir 'Marina'.",
-        feedbackErro: "Pense: quem é a pessoa que fez a expedição? Essa é quem 'a exploradora' substitui.",
+        feedbackAcerto:
+          "🧵 Isso! 'A exploradora' é um sinônimo usado no lugar de repetir 'Marina'.",
+        feedbackErro:
+          "Pense: quem é a pessoa que fez a expedição? Essa é quem 'a exploradora' substitui.",
+        dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Marina”. 'A exploradora' é um sinônimo usado no lugar de repetir 'Marina'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No terceiro parágrafo, a palavra 'ela' substitui quem?",
         opcoes: ["O riacho", "Marina", "O mapa"],
         correta: 1,
         feedbackAcerto: "🧵 Correto! 'Ela' é o pronome que evita repetir 'Marina' de novo.",
-        feedbackErro: "Releia a frase: 'Por isso, ela precisou pensar rápido' — quem precisou pensar rápido?",
+        feedbackErro:
+          "Releia a frase: 'Por isso, ela precisou pensar rápido' — quem precisou pensar rápido?",
+        dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Marina”. 'Ela' é o pronome que evita repetir 'Marina' de novo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual conectivo liga 'encontrar o riacho' com 'precisar escolher outro caminho'?",
         opcoes: ["Além disso", "Por isso", "Ontem"],
         correta: 1,
-        feedbackAcerto: "🧵 Isso! 'Por isso' mostra a relação de causa e consequência entre os dois fatos.",
-        feedbackErro: "Procure a palavra que liga o problema (riacho) com a solução (mudar de caminho).",
+        feedbackAcerto:
+          "🧵 Isso! 'Por isso' mostra a relação de causa e consequência entre os dois fatos.",
+        feedbackErro:
+          "Procure a palavra que liga o problema (riacho) com a solução (mudar de caminho).",
+        dica: "🧭 Pista de explorador: lembre o que significa “conectivo” — é uma palavra que liga ideias, mostrando a relação entre elas: tempo, causa, oposição, adição. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Por isso”. 'Por isso' mostra a relação de causa e consequência entre os dois fatos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao: "Organize a evolução das palavras usadas para se referir a Marina, na ordem em que aparecem no texto.",
+    instrucao:
+      "Organize a evolução das palavras usadas para se referir a Marina, na ordem em que aparecem no texto.",
     bloco: {
       instrucao: "Do nome próprio às substituições.",
       itens: [
-        { id: "p1", texto: "'Marina' — o nome próprio é usado pela primeira vez.", imagemUrl: menina },
-        { id: "p2", texto: "'Ela' e 'a exploradora' — substituem o nome para evitar repetição.", imagemUrl: bussola },
-        { id: "p3", texto: "'Por isso' — conecta um fato ao seguinte, mostrando a relação entre eles.", imagemUrl: lapis },
+        {
+          id: "p1",
+          texto: "'Marina' — o nome próprio é usado pela primeira vez.",
+          imagemUrl: menina,
+        },
+        {
+          id: "p2",
+          texto: "'Ela' e 'a exploradora' — substituem o nome para evitar repetição.",
+          imagemUrl: bussola,
+        },
+        {
+          id: "p3",
+          texto: "'Por isso' — conecta um fato ao seguinte, mostrando a relação entre eles.",
+          imagemUrl: lapis,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🧵 Perfeito! Você percebeu a costura do texto: nome → substituições → conectivos.",
-      feedbackErro: "Pense na ordem: primeiro apresenta o nome, depois usa substitutos, depois liga as ideias com conectivos.",
+      feedbackAcerto:
+        "🧵 Perfeito! Você percebeu a costura do texto: nome → substituições → conectivos.",
+      feedbackErro:
+        "Pense na ordem: primeiro apresenta o nome, depois usa substitutos, depois liga as ideias com conectivos.",
+      dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Você percebeu a costura do texto: nome → substituições → conectivos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -199,6 +255,9 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🧵 Isso! 'O menino' é um sinônimo para não repetir 'Davi'.",
         feedbackErro: "Pense: quem construiu a maquete? Essa é a pessoa que 'o menino' substitui.",
         ondeEstaNoTexto: "O menino pesquisou o tamanho de cada planeta antes de começar.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “O menino pesquisou o tamanho de cada planeta antes de começar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Davi”. 'O menino' é um sinônimo para não repetir 'Davi'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o conectivo 'Além disso' está fazendo no segundo parágrafo?",
@@ -210,6 +269,9 @@ export const aula03: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧵 Exato! 'Além disso' soma uma nova informação à que já foi dita.",
         feedbackErro: "'Além disso' costuma introduzir mais uma informação, somando ideias.",
+        dica: "🧭 Pista de explorador: lembre o que significa “conectivo” — é uma palavra que liga ideias, mostrando a relação entre elas: tempo, causa, oposição, adição. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mostrando uma informação a mais, somada à anterior”. 'Além disso' soma uma nova informação à que já foi dita. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -222,7 +284,8 @@ export const aula03: AulaPortuguesV4 = {
       "Um texto bem costurado é mais fácil e mais agradável de ler.",
     ],
     miniDesafio: {
-      pergunta: "Na frase 'A menina correu. A menina caiu. A menina levantou.', o que podemos fazer para melhorar?",
+      pergunta:
+        "Na frase 'A menina correu. A menina caiu. A menina levantou.', o que podemos fazer para melhorar?",
       opcoes: [
         "Nada, está perfeito assim",
         "Trocar 'a menina' por 'ela' nas frases seguintes",
@@ -231,6 +294,9 @@ export const aula03: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🧵 Isso! Substituir por 'ela' evita a repetição cansativa.",
       feedbackErro: "Lembre-se: depois de citar o nome uma vez, um pronome já resolve.",
+      dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Trocar 'a menina' por 'ela' nas frases seguintes”. Substituir por 'ela' evita a repetição cansativa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -238,21 +304,46 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é um pronome, na função de coesão?",
-        opcoes: ["Uma palavra que substitui um nome já citado", "O título do texto", "Um sinal de pontuação"],
+        opcoes: [
+          "Uma palavra que substitui um nome já citado",
+          "O título do texto",
+          "Um sinal de pontuação",
+          "Não planejou nada",
+        ],
         correta: 0,
         feedbackAcerto: "🧵 Isso!",
         feedbackErro: "Pronome é a palavra (ele, ela, isso) que substitui um nome já dito antes.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O título do texto” não é a resposta. Pronome é a palavra (ele, ela, isso) que substitui um nome já dito antes.",
+          "❌ “Um sinal de pontuação” não é a resposta. Pronome é a palavra (ele, ela, isso) que substitui um nome já dito antes.",
+          "❌ “Não planejou nada” não é a resposta. Pronome é a palavra (ele, ela, isso) que substitui um nome já dito antes.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma palavra que substitui um nome já citado”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é um sinônimo?",
         opcoes: [
           "Uma palavra com significado parecido, usada para evitar repetição",
           "Uma palavra que significa o oposto",
-          "Um tipo de pontuação"
+          "Um tipo de pontuação",
+          "Convidou a turma inteira",
         ],
         correta: 0,
         feedbackAcerto: "🧵 Correto! Sinônimo é uma palavra parecida em significado.",
-        feedbackErro: "Sinônimo é uma palavra diferente, mas com sentido parecido, usada para variar o texto.",
+        feedbackErro:
+          "Sinônimo é uma palavra diferente, mas com sentido parecido, usada para variar o texto.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Uma palavra que significa o oposto” não é a resposta. Sinônimo é uma palavra diferente, mas com sentido parecido, usada para variar o texto.",
+          "❌ “Um tipo de pontuação” não é a resposta. Sinônimo é uma palavra diferente, mas com sentido parecido, usada para variar o texto.",
+          "❌ “Convidou a turma inteira” não é a resposta. Sinônimo é uma palavra diferente, mas com sentido parecido, usada para variar o texto.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “sinônimo” — é uma palavra diferente que tem significado parecido com outra, usada para não repetir o mesmo termo. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma palavra com significado parecido, usada para evitar repetição”. Sinônimo é uma palavra parecida em significado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Para que servem os conectivos?",
@@ -260,28 +351,66 @@ export const aula03: AulaPortuguesV4 = {
           "Para ligar ideias, mostrando a relação entre elas",
           "Para separar parágrafos",
           "Para decorar o texto",
+          "O sistema solar",
         ],
         correta: 0,
         feedbackAcerto: "🧵 Isso mesmo! Conectivos mostram como as ideias se relacionam.",
-        feedbackErro: "Conectivos (por isso, mas, além disso) ligam as ideias e mostram a relação entre elas.",
+        feedbackErro:
+          "Conectivos (por isso, mas, além disso) ligam as ideias e mostram a relação entre elas.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Para separar parágrafos” não é a resposta. Conectivos (por isso, mas, além disso) ligam as ideias e mostram a relação entre elas.",
+          "❌ “Para decorar o texto” não é a resposta. Conectivos (por isso, mas, além disso) ligam as ideias e mostram a relação entre elas.",
+          "❌ “O sistema solar” não é a resposta. Conectivos (por isso, mas, além disso) ligam as ideias e mostram a relação entre elas.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “conectivo” — é uma palavra que liga ideias, mostrando a relação entre elas: tempo, causa, oposição, adição. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para ligar ideias, mostrando a relação entre elas”. Conectivos mostram como as ideias se relacionam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Um texto que repete a mesma palavra o tempo todo fica…",
-        opcoes: ["Mais interessante", "Cansativo de ler", "Mais curto"],
+        opcoes: [
+          "Mais interessante",
+          "Cansativo de ler",
+          "Mais curto",
+          "Mostrando uma contradição",
+        ],
         correta: 1,
         feedbackAcerto: "🧵 Exato! Repetição em excesso cansa o leitor.",
         feedbackErro: "Repetir demais a mesma palavra torna a leitura cansativa e menos agradável.",
+        feedbackOpcoes: [
+          "❌ “Mais interessante” não é a resposta. Repetir demais a mesma palavra torna a leitura cansativa e menos agradável.",
+          null,
+          "❌ “Mais curto” não é a resposta. Repetir demais a mesma palavra torna a leitura cansativa e menos agradável.",
+          "❌ “Mostrando uma contradição” não é a resposta. Repetir demais a mesma palavra torna a leitura cansativa e menos agradável.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Cansativo de ler”. Repetição em excesso cansa o leitor. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "5/5 — Qual das opções melhora a frase 'O gato subiu na árvore. O gato desceu rápido.'?",
+        pergunta:
+          "5/5 — Qual das opções melhora a frase 'O gato subiu na árvore. O gato desceu rápido.'?",
         opcoes: [
           "O gato subiu na árvore. Ele desceu rápido.",
           "O gato subiu na árvore. O gato subiu na árvore.",
           "Nenhuma mudança é necessária",
+          "Encerrando o texto",
         ],
         correta: 0,
-        feedbackAcerto: "🧵 Isso! Trocar por 'ele' evita a repetição e deixa o texto mais fluido. Você já costura textos como um explorador! 🌟",
-        feedbackErro: "Substituir 'o gato' por 'ele' na segunda frase evita a repetição desnecessária.",
+        feedbackAcerto:
+          "🧵 Isso! Trocar por 'ele' evita a repetição e deixa o texto mais fluido. Você já costura textos como um explorador! 🌟",
+        feedbackErro:
+          "Substituir 'o gato' por 'ele' na segunda frase evita a repetição desnecessária.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O gato subiu na árvore. O gato subiu na árvore.” não é a resposta. Substituir 'o gato' por 'ele' na segunda frase evita a repetição desnecessária.",
+          "❌ “Nenhuma mudança é necessária” não é a resposta. Substituir 'o gato' por 'ele' na segunda frase evita a repetição desnecessária.",
+          "❌ “Encerrando o texto” não é a resposta. Substituir 'o gato' por 'ele' na segunda frase evita a repetição desnecessária.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “pronome” — é uma palavra que substitui um nome já citado, evitando repetição. Ex.: ele, ela, isso, aquele. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O gato subiu na árvore. Ele desceu rápido.”. Trocar por 'ele' evita a repetição e deixa o texto mais fluido. Você já costura textos como um explorador! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

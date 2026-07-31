@@ -45,7 +45,10 @@ export const aula01: AulaPortuguesV4 = {
       ],
       pergunta: "Sobre o que esses dois relatos provavelmente tratam?",
       hipoteses: [
-        { texto: "A mesma travessia contada por quem viveu e por quem observou de fora.", imagemUrl: mapa },
+        {
+          texto: "A mesma travessia contada por quem viveu e por quem observou de fora.",
+          imagemUrl: mapa,
+        },
         { texto: "Uma receita de comida de acampamento.", imagemUrl: papel },
         { texto: "Uma lista de compras do mercado.", imagemUrl: lapis },
       ],
@@ -54,6 +57,9 @@ export const aula01: AulaPortuguesV4 = {
         "🔍 Isso! Os dois carimbos — pegada e luneta — são pista de dois pontos de vista sobre a MESMA travessia.",
       feedbackErro:
         "Pense: um carimbo é de quem CAMINHOU (pegada) e outro é de quem OBSERVOU de fora (luneta). Isso é pista de duas vozes contando a mesma coisa.",
+      dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “A mesma travessia contada por quem viveu e por quem observou de fora.”. Os dois carimbos — pegada e luneta — são pista de dois pontos de vista sobre a MESMA travessia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -62,19 +68,23 @@ export const aula01: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "narrador",
-        explicacao: "É a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra.",
-        exemplo: "O narrador escolhe o que contar e como contar — por isso a mesma cena pode virar dois textos diferentes.",
+        explicacao:
+          "É a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra.",
+        exemplo:
+          "O narrador escolhe o que contar e como contar — por isso a mesma cena pode virar dois textos diferentes.",
         imagemUrl: livro,
       },
       {
         palavra: "1ª pessoa",
-        explicacao: "É quando o narrador é PERSONAGEM da história e fala 'eu', 'nós'. Ele conta só o que viveu e sentiu de dentro da cena.",
+        explicacao:
+          "É quando o narrador é PERSONAGEM da história e fala 'eu', 'nós'. Ele conta só o que viveu e sentiu de dentro da cena.",
         exemplo: "'Eu atravessei o desfiladeiro com o coração disparado.'",
         imagemUrl: criancasGrupo,
       },
       {
         palavra: "3ª pessoa",
-        explicacao: "É quando o narrador está DE FORA da história e fala 'ele', 'ela', 'eles'. Ele pode contar o que vários personagens pensam.",
+        explicacao:
+          "É quando o narrador está DE FORA da história e fala 'ele', 'ela', 'eles'. Ele pode contar o que vários personagens pensam.",
         exemplo: "'Aurora atravessou o desfiladeiro com o coração disparado.'",
         imagemUrl: binoculo,
       },
@@ -97,23 +107,37 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento05_compreensao: {
-    instrucao: "Volte ao relato sempre que precisar. As pistas do narrador estão nas palavras usadas.",
+    instrucao:
+      "Volte ao relato sempre que precisar. As pistas do narrador estão nas palavras usadas.",
     perguntas: [
       {
         pergunta: "Quem conta o Relato 1?",
-        opcoes: ["Um personagem que viveu a cena, em 1ª pessoa", "Alguém de fora observando de longe", "Um narrador que não aparece no texto"],
+        opcoes: [
+          "Um personagem que viveu a cena, em 1ª pessoa",
+          "Alguém de fora observando de longe",
+          "Um narrador que não aparece no texto",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! O uso de 'eu' e 'meu coração' mostra que quem narra é o próprio personagem.",
-        feedbackErro: "Releia: o texto usa 'eu', 'meu coração', 'eu senti' — isso é marca de narrador-personagem, em 1ª pessoa.",
+        feedbackAcerto:
+          "🔍 Isso! O uso de 'eu' e 'meu coração' mostra que quem narra é o próprio personagem.",
+        feedbackErro:
+          "Releia: o texto usa 'eu', 'meu coração', 'eu senti' — isso é marca de narrador-personagem, em 1ª pessoa.",
         ondeEstaNoTexto: "Eu segurei a corda... Meu coração batia forte... eu senti medo",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Eu segurei a corda... Meu coração batia forte... eu senti medo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um personagem que viveu a cena, em 1ª pessoa”. O uso de 'eu' e 'meu coração' mostra que quem narra é o próprio personagem. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o narrador sentiu ao atravessar a ponte?",
         opcoes: ["Tédio", "Medo, mas atravessou mesmo assim", "Raiva"],
         correta: 1,
         feedbackAcerto: "🔍 Boa! 'eu senti medo, mas dei o primeiro passo mesmo assim'.",
-        feedbackErro: "Releia o primeiro parágrafo — o narrador conta exatamente o que sentiu por dentro.",
+        feedbackErro:
+          "Releia o primeiro parágrafo — o narrador conta exatamente o que sentiu por dentro.",
         ondeEstaNoTexto: "eu senti medo, mas dei o primeiro passo mesmo assim",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “eu senti medo, mas dei o primeiro passo mesmo assim”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Medo, mas atravessou mesmo assim”. 'eu senti medo, mas dei o primeiro passo mesmo assim'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -122,15 +146,21 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "Agora compare com o segundo relato, escrito de fora da cena.",
     perguntas: [
       {
-        pergunta: "Se um narrador de FORA contasse essa mesma cena, como ele escreveria a primeira frase?",
+        pergunta:
+          "Se um narrador de FORA contasse essa mesma cena, como ele escreveria a primeira frase?",
         opcoes: [
           "'Aurora segurou a corda com as duas mãos e olhou para baixo.'",
           "'Eu segurei a corda com as duas mãos.'",
           "'Nós seguramos a corda com as duas mãos.'",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! O narrador de fora usa o nome do personagem ou 'ela' — nunca 'eu' — porque ele não é quem viveu a cena.",
-        feedbackErro: "Um narrador de fora (3ª pessoa) nomeia o personagem ou usa 'ela/ele', nunca fala como se fosse a própria pessoa.",
+        feedbackAcerto:
+          "🔍 Isso! O narrador de fora usa o nome do personagem ou 'ela' — nunca 'eu' — porque ele não é quem viveu a cena.",
+        feedbackErro:
+          "Um narrador de fora (3ª pessoa) nomeia o personagem ou usa 'ela/ele', nunca fala como se fosse a própria pessoa.",
+        dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'Aurora segurou a corda com as duas mãos e olhou para baixo.'”. O narrador de fora usa o nome do personagem ou 'ela' — nunca 'eu' — porque ele não é quem viveu a cena. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é a maior diferença entre 1ª e 3ª pessoa?",
@@ -140,8 +170,13 @@ export const aula01: AulaPortuguesV4 = {
           "1ª pessoa só serve para poemas.",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Exato! O narrador em 1ª pessoa é limitado ao que ele viveu; o de 3ª pessoa pode observar a cena inteira, às vezes até vários personagens.",
-        feedbackErro: "Pense no ponto de vista: quem está DENTRO da cena (1ª pessoa) só sabe o que sentiu; quem está DE FORA (3ª pessoa) pode contar mais.",
+        feedbackAcerto:
+          "🔍 Exato! O narrador em 1ª pessoa é limitado ao que ele viveu; o de 3ª pessoa pode observar a cena inteira, às vezes até vários personagens.",
+        feedbackErro:
+          "Pense no ponto de vista: quem está DENTRO da cena (1ª pessoa) só sabe o que sentiu; quem está DE FORA (3ª pessoa) pode contar mais.",
+        dica: "🧭 Pista de explorador: lembre o que significa “1ª pessoa” — é quando o narrador é PERSONAGEM da história e fala 'eu', 'nós'. Ele conta só o que viveu e sentiu de dentro da cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Em 1ª pessoa só sabemos o que o narrador-personagem sente; em 3ª pessoa, o narrador pode contar mais coisas de fora.”. O narrador em 1ª pessoa é limitado ao que ele viveu; o de 3ª pessoa pode observar a cena inteira, às vezes até vários personagens. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -152,12 +187,25 @@ export const aula01: AulaPortuguesV4 = {
       instrucao: "Do primeiro passo ao último.",
       itens: [
         { id: "p1", texto: "Procurar se aparece 'eu' ou 'nós' no texto.", imagemUrl: lapis },
-        { id: "p2", texto: "Se não aparece 'eu', ver se o texto usa nomes ou 'ele/ela'.", imagemUrl: papel },
-        { id: "p3", texto: "Decidir: narrador-personagem (1ª pessoa) ou narrador de fora (3ª pessoa).", imagemUrl: livro },
+        {
+          id: "p2",
+          texto: "Se não aparece 'eu', ver se o texto usa nomes ou 'ele/ela'.",
+          imagemUrl: papel,
+        },
+        {
+          id: "p3",
+          texto: "Decidir: narrador-personagem (1ª pessoa) ou narrador de fora (3ª pessoa).",
+          imagemUrl: livro,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🔍 Isso mesmo! Primeiro caçamos o 'eu', depois olhamos os nomes, e só então decidimos o tipo de narrador.",
-      feedbackErro: "Pense na ordem: primeiro procuramos 'eu/nós', depois nomes ou 'ele/ela', e só no fim concluímos o tipo de narrador.",
+      feedbackAcerto:
+        "🔍 Isso mesmo! Primeiro caçamos o 'eu', depois olhamos os nomes, e só então decidimos o tipo de narrador.",
+      feedbackErro:
+        "Pense na ordem: primeiro procuramos 'eu/nós', depois nomes ou 'ele/ela', e só no fim concluímos o tipo de narrador.",
+      dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Primeiro caçamos o 'eu', depois olhamos os nomes, e só então decidimos o tipo de narrador. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -178,19 +226,29 @@ export const aula01: AulaPortuguesV4 = {
         opcoes: ["1ª pessoa", "3ª pessoa", "Não dá para saber"],
         correta: 1,
         feedbackAcerto: "🔍 Isso! O texto usa 'Aurora' e 'ela' — narrador de fora, em 3ª pessoa.",
-        feedbackErro: "Repare que o texto nunca usa 'eu' — ele usa o nome 'Aurora' e 'ela'. Isso é 3ª pessoa.",
+        feedbackErro:
+          "Repare que o texto nunca usa 'eu' — ele usa o nome 'Aurora' e 'ela'. Isso é 3ª pessoa.",
         ondeEstaNoTexto: "Aurora segurou a corda... ela sentiu medo",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Aurora segurou a corda... ela sentiu medo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “3ª pessoa”. O texto usa 'Aurora' e 'ela' — narrador de fora, em 3ª pessoa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "O que o narrador de fora consegue contar que o narrador em 1ª pessoa do Relato 1 não contou?",
+        pergunta:
+          "O que o narrador de fora consegue contar que o narrador em 1ª pessoa do Relato 1 não contou?",
         opcoes: [
           "Que os outros exploradores aplaudiram de longe",
           "Que a corda era de madeira",
           "Que havia vento",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Exato! O narrador de fora vê a cena inteira, inclusive o que os outros exploradores fizeram — algo que Aurora, contando em 1ª pessoa, não poderia ver de si mesma de fora.",
-        feedbackErro: "Releia o final: o narrador de fora conta algo que só quem observa de longe conseguiria ver.",
+        feedbackAcerto:
+          "🔍 Exato! O narrador de fora vê a cena inteira, inclusive o que os outros exploradores fizeram — algo que Aurora, contando em 1ª pessoa, não poderia ver de si mesma de fora.",
+        feedbackErro:
+          "Releia o final: o narrador de fora conta algo que só quem observa de longe conseguiria ver.",
+        dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que os outros exploradores aplaudiram de longe”. O narrador de fora vê a cena inteira, inclusive o que os outros exploradores fizeram — algo que Aurora, contando em 1ª pessoa, não poderia ver de si mesma de fora. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -207,7 +265,11 @@ export const aula01: AulaPortuguesV4 = {
       opcoes: ["1ª pessoa", "3ª pessoa", "Nenhuma das duas"],
       correta: 1,
       feedbackAcerto: "🔍 Isso! O uso de 'ele' mostra narrador de fora, em 3ª pessoa.",
-      feedbackErro: "A palavra 'ele' indica que quem narra está de FORA da cena — isso é 3ª pessoa.",
+      feedbackErro:
+        "A palavra 'ele' indica que quem narra está de FORA da cena — isso é 3ª pessoa.",
+      dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “3ª pessoa”. O uso de 'ele' mostra narrador de fora, em 3ª pessoa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -215,24 +277,67 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é o narrador de um texto?",
-        opcoes: ["O autor do livro sempre", "A voz que conta a história", "O personagem mais forte"],
+        opcoes: [
+          "O autor do livro sempre",
+          "A voz que conta a história",
+          "O personagem mais forte",
+          "Alguém de fora observando de longe",
+        ],
         correta: 1,
         feedbackAcerto: "🔍 Isso! Narrador é a voz que conta.",
-        feedbackErro: "Narrador é a VOZ que conta a história — pode ou não ser o autor real do livro.",
+        feedbackErro:
+          "Narrador é a VOZ que conta a história — pode ou não ser o autor real do livro.",
+        feedbackOpcoes: [
+          "❌ “O autor do livro sempre” não é a resposta. Narrador é a VOZ que conta a história — pode ou não ser o autor real do livro.",
+          null,
+          "❌ “O personagem mais forte” não é a resposta. Narrador é a VOZ que conta a história — pode ou não ser o autor real do livro.",
+          "❌ “Alguém de fora observando de longe” não é a resposta. Narrador é a VOZ que conta a história — pode ou não ser o autor real do livro.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A voz que conta a história”. Narrador é a voz que conta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual frase está em 1ª pessoa?",
-        opcoes: ["'Eu cruzei o rio correndo.'", "'Ela cruzou o rio correndo.'", "'O menino cruzou o rio correndo.'"],
+        opcoes: [
+          "'Eu cruzei o rio correndo.'",
+          "'Ela cruzou o rio correndo.'",
+          "'O menino cruzou o rio correndo.'",
+          "Um narrador que não aparece no texto",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Correto! O 'eu' marca narrador-personagem, em 1ª pessoa.",
         feedbackErro: "1ª pessoa usa 'eu/nós' — só a primeira frase tem essa marca.",
+        feedbackOpcoes: [
+          null,
+          "❌ “'Ela cruzou o rio correndo.'” não é a resposta. 1ª pessoa usa 'eu/nós' — só a primeira frase tem essa marca.",
+          "❌ “'O menino cruzou o rio correndo.'” não é a resposta. 1ª pessoa usa 'eu/nós' — só a primeira frase tem essa marca.",
+          "❌ “Um narrador que não aparece no texto” não é a resposta. 1ª pessoa usa 'eu/nós' — só a primeira frase tem essa marca.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “1ª pessoa” — é quando o narrador é PERSONAGEM da história e fala 'eu', 'nós'. Ele conta só o que viveu e sentiu de dentro da cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'Eu cruzei o rio correndo.'”. O 'eu' marca narrador-personagem, em 1ª pessoa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual frase está em 3ª pessoa?",
-        opcoes: ["'Eu tremia de frio.'", "'Nós tremíamos de frio.'", "'Pedro tremia de frio.'"],
+        opcoes: [
+          "'Eu tremia de frio.'",
+          "'Nós tremíamos de frio.'",
+          "'Pedro tremia de frio.'",
+          "'Eu segurei a corda com as duas mãos.'",
+        ],
         correta: 2,
         feedbackAcerto: "🔍 Isso! O nome 'Pedro' mostra narrador de fora, em 3ª pessoa.",
         feedbackErro: "3ª pessoa usa nomes ou 'ele/ela' — repare em qual frase isso acontece.",
+        feedbackOpcoes: [
+          "❌ “'Eu tremia de frio.'” não é a resposta. 3ª pessoa usa nomes ou 'ele/ela' — repare em qual frase isso acontece.",
+          "❌ “'Nós tremíamos de frio.'” não é a resposta. 3ª pessoa usa nomes ou 'ele/ela' — repare em qual frase isso acontece.",
+          null,
+          "❌ “'Eu segurei a corda com as duas mãos.'” não é a resposta. 3ª pessoa usa nomes ou 'ele/ela' — repare em qual frase isso acontece.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “3ª pessoa” — é quando o narrador está DE FORA da história e fala 'ele', 'ela', 'eles'. Ele pode contar o que vários personagens pensam. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'Pedro tremia de frio.'”. O nome 'Pedro' mostra narrador de fora, em 3ª pessoa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Por que o narrador de fora (3ª pessoa) pode contar mais da cena?",
@@ -240,10 +345,21 @@ export const aula01: AulaPortuguesV4 = {
           "Porque ele observa de fora, sem estar limitado ao que só um personagem sentiu",
           "Porque ele mente mais",
           "Porque ele nunca aparece no texto",
+          "'Nós seguramos a corda com as duas mãos.'",
         ],
         correta: 0,
         feedbackAcerto: "🔍 Exato! Estar de fora dá ao narrador uma visão mais ampla da cena.",
-        feedbackErro: "O narrador de fora não está preso ao ponto de vista de um só personagem — por isso enxerga mais.",
+        feedbackErro:
+          "O narrador de fora não está preso ao ponto de vista de um só personagem — por isso enxerga mais.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque ele mente mais” não é a resposta. O narrador de fora não está preso ao ponto de vista de um só personagem — por isso enxerga mais.",
+          "❌ “Porque ele nunca aparece no texto” não é a resposta. O narrador de fora não está preso ao ponto de vista de um só personagem — por isso enxerga mais.",
+          "❌ “'Nós seguramos a corda com as duas mãos.'” não é a resposta. O narrador de fora não está preso ao ponto de vista de um só personagem — por isso enxerga mais.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque ele observa de fora, sem estar limitado ao que só um personagem sentiu”. Estar de fora dá ao narrador uma visão mais ampla da cena. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Nos dois relatos da travessia, o que MUDOU de um para o outro?",
@@ -251,10 +367,22 @@ export const aula01: AulaPortuguesV4 = {
           "Os fatos da história",
           "Só a voz que conta — o narrador — e o que ela consegue enxergar",
           "Nada mudou",
+          "Não existe diferença nenhuma entre elas.",
         ],
         correta: 1,
-        feedbackAcerto: "🔍 Isso! Os fatos são os mesmos, mas o NARRADOR muda o ponto de vista. Mistério do baú resolvido! 🌟",
-        feedbackErro: "Os fatos da travessia são iguais — o que muda é quem conta e o que essa voz consegue ver.",
+        feedbackAcerto:
+          "🔍 Isso! Os fatos são os mesmos, mas o NARRADOR muda o ponto de vista. Mistério do baú resolvido! 🌟",
+        feedbackErro:
+          "Os fatos da travessia são iguais — o que muda é quem conta e o que essa voz consegue ver.",
+        feedbackOpcoes: [
+          "❌ “Os fatos da história” não é a resposta. Os fatos da travessia são iguais — o que muda é quem conta e o que essa voz consegue ver.",
+          null,
+          "❌ “Nada mudou” não é a resposta. Os fatos da travessia são iguais — o que muda é quem conta e o que essa voz consegue ver.",
+          "❌ “Não existe diferença nenhuma entre elas.” não é a resposta. Os fatos da travessia são iguais — o que muda é quem conta e o que essa voz consegue ver.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “narrador” — é a VOZ que conta a história. Pode ser um personagem que viveu os fatos ou alguém de fora que só observa e narra. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Só a voz que conta — o narrador — e o que ela consegue enxergar”. Os fatos são os mesmos, mas o NARRADOR muda o ponto de vista. Mistério do baú resolvido! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

@@ -74,6 +74,9 @@ export const aula01: AulaPortuguesV4 = {
         "🎯 Isso! O mural mostra fontes e dados a apurar — é exatamente isso que separa a reportagem de uma notícia rápida.",
       feedbackErro:
         "Releia o mural: ele fala em FONTES (pessoas para ouvir) e DADOS (números). Junte as pistas — é sobre investigar a ponte a fundo.",
+      dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Vários pontos de vista e números sobre a reconstrução da ponte.”. O mural mostra fontes e dados a apurar — é exatamente isso que separa a reportagem de uma notícia rápida. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -84,14 +87,16 @@ export const aula01: AulaPortuguesV4 = {
         palavra: "reportagem",
         explicacao:
           "É um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente.",
-        exemplo: "A reportagem sobre a ponte trouxe entrevistas, fotos antigas e números de trânsito.",
+        exemplo:
+          "A reportagem sobre a ponte trouxe entrevistas, fotos antigas e números de trânsito.",
         imagemUrl: quadrinhos,
       },
       {
         palavra: "fonte",
         explicacao:
           "É a pessoa (ou documento) que fornece informação confiável ao repórter. Uma boa reportagem sempre ouve mais de uma fonte.",
-        exemplo: "A engenheira Paula foi uma fonte importante: ela explicou por que a ponte precisava ser refeita.",
+        exemplo:
+          "A engenheira Paula foi uma fonte importante: ela explicou por que a ponte precisava ser refeita.",
         imagemUrl: heroi,
       },
       {
@@ -135,8 +140,10 @@ export const aula01: AulaPortuguesV4 = {
           "🎯 Isso! A engenheira explicou que a ponte foi feita para bem menos carros do que o volume atual de trânsito.",
         feedbackErro:
           "Releia a fala da engenheira Paula no segundo parágrafo: o problema tem a ver com a QUANTIDADE de carros de hoje.",
-        ondeEstaNoTexto:
-          "…a ponte foi projetada para bem menos carros do que passam hoje…",
+        ondeEstaNoTexto: "…a ponte foi projetada para bem menos carros do que passam hoje…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “a ponte foi projetada para bem menos carros do que passam hoje”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque foi projetada para bem menos carros do que passam hoje”. A engenheira explicou que a ponte foi feita para bem menos carros do que o volume atual de trânsito. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quantos carros cruzam a ponte por dia, segundo o dado apurado?",
@@ -145,6 +152,9 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎯 Exato! O dado apurado foi de cerca de 3 MIL carros por dia.",
         feedbackErro: "O número está logo depois de 'um levantamento mostrou que cerca de'.",
         ondeEstaNoTexto: "…cerca de 3 mil carros cruzam o local todos os dias…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “cerca de 3 mil carros cruzam o local todos os dias”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “3 mil carros”. O dado apurado foi de cerca de 3 MIL carros por dia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quais são as DUAS fontes moradoras ouvidas pela reportagem?",
@@ -158,6 +168,9 @@ export const aula01: AulaPortuguesV4 = {
           "🎯 Isso! JOAQUIM (comerciante) e BIA (estudante) são as duas vozes de moradores na reportagem.",
         feedbackErro: "Releia o terceiro parágrafo: procure os dois nomes próprios de moradores.",
         ondeEstaNoTexto: "…comerciante Joaquim Alves… A estudante Bia Ramos…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “comerciante Joaquim Alves… A estudante Bia Ramos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O comerciante Joaquim e a estudante Bia”. JOAQUIM (comerciante) e BIA (estudante) são as duas vozes de moradores na reportagem. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -171,14 +184,27 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto:
           "🎯 Correto! A engenheira é a fonte técnica — ela entende de estrutura e explica o motivo do problema.",
-        feedbackErro: "Pense em quem tem o conhecimento técnico da obra: é a profissional da engenharia.",
+        feedbackErro:
+          "Pense em quem tem o conhecimento técnico da obra: é a profissional da engenharia.",
+        dica: "🧭 Pista de explorador: lembre o que significa “fonte” — é a pessoa (ou documento) que fornece informação confiável ao repórter. Uma boa reportagem sempre ouve mais de uma fonte. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A engenheira Paula”. A engenheira é a fonte técnica — ela entende de estrutura e explica o motivo do problema. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é o cenário principal onde a reportagem investiga o fato?",
-        opcoes: ["Uma escola de música", "A Ponte da Alegria e seus arredores", "Um estádio de futebol"],
+        opcoes: [
+          "Uma escola de música",
+          "A Ponte da Alegria e seus arredores",
+          "Um estádio de futebol",
+        ],
         correta: 1,
-        feedbackAcerto: "🎯 Isso! Toda a apuração acontece em torno da PONTE DA ALEGRIA, seu fechamento e reforma.",
-        feedbackErro: "Releia o título e o primeiro parágrafo — qual é o lugar central da reportagem?",
+        feedbackAcerto:
+          "🎯 Isso! Toda a apuração acontece em torno da PONTE DA ALEGRIA, seu fechamento e reforma.",
+        feedbackErro:
+          "Releia o título e o primeiro parágrafo — qual é o lugar central da reportagem?",
+        dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A Ponte da Alegria e seus arredores”. Toda a apuração acontece em torno da PONTE DA ALEGRIA, seu fechamento e reforma. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -188,7 +214,11 @@ export const aula01: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Do fato inicial até a publicação.",
       itens: [
-        { id: "s1", texto: "A ponte racha e é fechada — sai a notícia rápida do fato.", imagemUrl: ponte },
+        {
+          id: "s1",
+          texto: "A ponte racha e é fechada — sai a notícia rápida do fato.",
+          imagemUrl: ponte,
+        },
         {
           id: "s2",
           texto: "A equipe entrevista a engenheira e os moradores, e apura o dado dos carros.",
@@ -201,9 +231,13 @@ export const aula01: AulaPortuguesV4 = {
         },
       ],
       ordemCerta: ["s1", "s2", "s3"],
-      feedbackAcerto: "🎯 Isso mesmo! Primeiro o FATO, depois a APURAÇÃO com fontes e dados, e só então a REPORTAGEM pronta.",
+      feedbackAcerto:
+        "🎯 Isso mesmo! Primeiro o FATO, depois a APURAÇÃO com fontes e dados, e só então a REPORTAGEM pronta.",
       feedbackErro:
         "Pense: primeiro acontece o fato (ponte racha). Depois vem a INVESTIGAÇÃO (entrevistas e dados). Por último, o texto é escrito.",
+      dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Primeiro o FATO, depois a APURAÇÃO com fontes e dados, e só então a REPORTAGEM pronta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -226,6 +260,9 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🎯 Isso! A feira completa 30 ANOS.",
         feedbackErro: "O número aparece logo no título e na primeira frase.",
         ondeEstaNoTexto: "…completa 30 anos neste mês.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “completa 30 anos neste mês”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “30 anos”. A feira completa 30 ANOS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que mostra que essa é uma REPORTAGEM, e não só uma notícia curta?",
@@ -237,8 +274,12 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto:
           "🎯 Exato! Ouvir várias fontes (feirantes e visitantes) é característica de reportagem, que investiga mais fundo.",
-        feedbackErro: "Pense no que a reportagem FEZ A MAIS do que só contar o fato: ela foi ouvir pessoas.",
+        feedbackErro:
+          "Pense no que a reportagem FEZ A MAIS do que só contar o fato: ela foi ouvir pessoas.",
         ondeEstaNoTexto: "A reportagem ouviu feirantes antigos e visitantes de cidades vizinhas…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A reportagem ouviu feirantes antigos e visitantes de cidades vizinhas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ela ouviu feirantes antigos e visitantes de outras cidades”. Ouvir várias fontes (feirantes e visitantes) é característica de reportagem, que investiga mais fundo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -251,11 +292,15 @@ export const aula01: AulaPortuguesV4 = {
       "DADO é uma informação em número que dá credibilidade ao texto.",
     ],
     miniDesafio: {
-      pergunta: "O texto jornalístico que ouve várias fontes e reúne dados para investigar um fato a fundo é a…",
+      pergunta:
+        "O texto jornalístico que ouve várias fontes e reúne dados para investigar um fato a fundo é a…",
       opcoes: ["Notícia curta", "Reportagem", "Lista de compras"],
       correta: 1,
       feedbackAcerto: "🎯 Isso! É a REPORTAGEM — mais longa, investigativa e com várias vozes.",
       feedbackErro: "A notícia é rápida. O texto que investiga com fontes e dados é a REPORTAGEM.",
+      dica: "🧭 Pista de explorador: lembre o que significa “fonte” — é a pessoa (ou documento) que fornece informação confiável ao repórter. Uma boa reportagem sempre ouve mais de uma fonte. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Reportagem”. É a REPORTAGEM — mais longa, investigativa e com várias vozes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -267,10 +312,21 @@ export const aula01: AulaPortuguesV4 = {
           "A reportagem investiga mais fundo, com fontes e dados",
           "A reportagem é sempre mais curta",
           "A reportagem não pode ter título",
+          "Porque nunca foi usada",
         ],
         correta: 0,
         feedbackAcerto: "🎯 Isso! Reportagem aprofunda o fato com várias fontes e dados.",
-        feedbackErro: "Pense no tamanho e na profundidade: a reportagem vai muito além do fato rápido.",
+        feedbackErro:
+          "Pense no tamanho e na profundidade: a reportagem vai muito além do fato rápido.",
+        feedbackOpcoes: [
+          null,
+          "❌ “A reportagem é sempre mais curta” não é a resposta. Pense no tamanho e na profundidade: a reportagem vai muito além do fato rápido.",
+          "❌ “A reportagem não pode ter título” não é a resposta. Pense no tamanho e na profundidade: a reportagem vai muito além do fato rápido.",
+          "❌ “Porque nunca foi usada” não é a resposta. Pense no tamanho e na profundidade: a reportagem vai muito além do fato rápido.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A reportagem investiga mais fundo, com fontes e dados”. Reportagem aprofunda o fato com várias fontes e dados. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Uma FONTE, no jornalismo, é...",
@@ -278,10 +334,20 @@ export const aula01: AulaPortuguesV4 = {
           "Uma pessoa ou documento que fornece informação confiável",
           "O título da matéria",
           "A data de publicação",
+          "Porque choveu demais em um único dia",
         ],
         correta: 0,
         feedbackAcerto: "🎯 Correto! Fonte é quem (ou o que) fornece a informação apurada.",
         feedbackErro: "Fonte não é o título nem a data — é quem CONTA a informação ao repórter.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O título da matéria” não é a resposta. Fonte não é o título nem a data — é quem CONTA a informação ao repórter.",
+          "❌ “A data de publicação” não é a resposta. Fonte não é o título nem a data — é quem CONTA a informação ao repórter.",
+          "❌ “Porque choveu demais em um único dia” não é a resposta. Fonte não é o título nem a data — é quem CONTA a informação ao repórter.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “fonte” — é a pessoa (ou documento) que fornece informação confiável ao repórter. Uma boa reportagem sempre ouve mais de uma fonte. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma pessoa ou documento que fornece informação confiável”. Fonte é quem (ou o que) fornece a informação apurada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Por que os DADOS são importantes numa reportagem?",
@@ -289,17 +355,42 @@ export const aula01: AulaPortuguesV4 = {
           "Porque enfeitam o texto",
           "Porque dão credibilidade, mostrando números apurados de verdade",
           "Porque substituem as entrevistas",
+          "30 mil carros",
         ],
         correta: 1,
         feedbackAcerto: "🎯 Isso! Dados (números reais) tornam o texto mais confiável.",
-        feedbackErro: "Pense no motivo de citar '3 mil carros por dia' — isso PROVA a informação com número real.",
+        feedbackErro:
+          "Pense no motivo de citar '3 mil carros por dia' — isso PROVA a informação com número real.",
+        feedbackOpcoes: [
+          "❌ “Porque enfeitam o texto” não é a resposta. Pense no motivo de citar '3 mil carros por dia' — isso PROVA a informação com número real.",
+          null,
+          "❌ “Porque substituem as entrevistas” não é a resposta. Pense no motivo de citar '3 mil carros por dia' — isso PROVA a informação com número real.",
+          "❌ “30 mil carros” não é a resposta. Pense no motivo de citar '3 mil carros por dia' — isso PROVA a informação com número real.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque dão credibilidade, mostrando números apurados de verdade”. Dados (números reais) tornam o texto mais confiável. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Na reportagem da ponte, quem foi a fonte técnica ouvida?",
-        opcoes: ["A estudante Bia", "A engenheira Paula", "O comerciante Joaquim"],
+        opcoes: [
+          "A estudante Bia",
+          "A engenheira Paula",
+          "O comerciante Joaquim",
+          "A engenheira Paula e a prefeitura",
+        ],
         correta: 1,
         feedbackAcerto: "🎯 Isso mesmo, a engenheira Paula explicou a causa técnica do problema.",
         feedbackErro: "Releia: quem tem formação técnica para explicar rachaduras na ponte?",
+        feedbackOpcoes: [
+          "❌ “A estudante Bia” não é a resposta. Releia: quem tem formação técnica para explicar rachaduras na ponte?",
+          null,
+          "❌ “O comerciante Joaquim” não é a resposta. Releia: quem tem formação técnica para explicar rachaduras na ponte?",
+          "❌ “A engenheira Paula e a prefeitura” não é a resposta. Releia: quem tem formação técnica para explicar rachaduras na ponte?",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A engenheira Paula”. , a engenheira Paula explicou a causa técnica do problema. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Uma boa reportagem deve...",
@@ -307,10 +398,21 @@ export const aula01: AulaPortuguesV4 = {
           "Ouvir só uma pessoa e não checar números",
           "Ouvir vozes diferentes e apurar dados antes de escrever",
           "Inventar dados para o texto ficar mais interessante",
+          "Um bombeiro e uma médica",
         ],
         correta: 1,
-        feedbackAcerto: "🎯 Muito bem! Reportagem de verdade escuta vozes DIFERENTES e apura dados reais.",
+        feedbackAcerto:
+          "🎯 Muito bem! Reportagem de verdade escuta vozes DIFERENTES e apura dados reais.",
         feedbackErro: "Reportagem não inventa nada — ela ouve várias fontes e confirma números.",
+        feedbackOpcoes: [
+          "❌ “Ouvir só uma pessoa e não checar números” não é a resposta. Reportagem não inventa nada — ela ouve várias fontes e confirma números.",
+          null,
+          "❌ “Inventar dados para o texto ficar mais interessante” não é a resposta. Reportagem não inventa nada — ela ouve várias fontes e confirma números.",
+          "❌ “Um bombeiro e uma médica” não é a resposta. Reportagem não inventa nada — ela ouve várias fontes e confirma números.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “reportagem” — é um texto jornalístico mais longo e aprofundado que a notícia. Investiga um fato ouvindo várias fontes e reunindo dados, não só informa rapidamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ouvir vozes diferentes e apurar dados antes de escrever”. Muito bem! Reportagem de verdade escuta vozes DIFERENTES e apura dados reais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -324,7 +426,8 @@ export const aula01: AulaPortuguesV4 = {
       "3) Anote um DADO em número relacionado ao fato (quantas vezes acontece, há quanto tempo, quantas pessoas afeta).",
       "4) Escreva um parágrafo curto de reportagem juntando as falas e o dado apurado.",
     ],
-    registro: "📝 O parágrafo de reportagem com as falas das fontes e o dado apurado, para trazer na próxima aula.",
+    registro:
+      "📝 O parágrafo de reportagem com as falas das fontes e o dado apurado, para trazer na próxima aula.",
   },
 
   recompensa: {

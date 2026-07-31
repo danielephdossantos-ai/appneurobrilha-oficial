@@ -70,6 +70,9 @@ export const aula04: AulaPortuguesV4 = {
         "🎉 Isso! Repare: 'MAS' mostra que continuaram apesar da chuva; 'POR ISSO' mostra que a chuva foi o MOTIVO de mudar de trilha. A palavrinha muda tudo!",
       feedbackErro:
         "Releia as duas frases: elas usam palavras diferentes ('mas' e 'por isso') e o sentido muda completamente.",
+      dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Como uma pequena palavra pode mudar o sentido de uma frase.”. Repare: 'MAS' mostra que continuaram apesar da chuva; 'POR ISSO' mostra que a chuva foi o MOTIVO de mudar de trilha. A palavrinha muda tudo! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -124,7 +127,8 @@ export const aula04: AulaPortuguesV4 = {
         frases: [
           {
             texto: "O menino estava cansado, MAS continuou andando.",
-            explicacao: "OPOSIÇÃO: 'mas' mostra que ele andou APESAR do cansaço — uma ideia contrária à outra.",
+            explicacao:
+              "OPOSIÇÃO: 'mas' mostra que ele andou APESAR do cansaço — uma ideia contrária à outra.",
           },
           {
             texto: "O menino estava cansado, PORQUE andou o dia todo.",
@@ -132,7 +136,8 @@ export const aula04: AulaPortuguesV4 = {
           },
           {
             texto: "O menino estava cansado, POR ISSO parou para descansar.",
-            explicacao: "CONSEQUÊNCIA: 'por isso' mostra o que aconteceu DEPOIS, como resultado do cansaço.",
+            explicacao:
+              "CONSEQUÊNCIA: 'por isso' mostra o que aconteceu DEPOIS, como resultado do cansaço.",
           },
           {
             texto: "QUANDO o menino descansou, sentiu-se melhor.",
@@ -163,28 +168,55 @@ export const aula04: AulaPortuguesV4 = {
     instrucao: "Volte no relato se precisar. Toda resposta está escrita.",
     perguntas: [
       {
-        pergunta: "No trecho 'a chuva começou forte, MAS a expedição não parou', o que 'mas' indica?",
-        opcoes: ["Que a chuva foi a causa de pararem", "Um contraste: apesar da chuva, continuaram", "Que a chuva aconteceu depois"],
+        pergunta:
+          "No trecho 'a chuva começou forte, MAS a expedição não parou', o que 'mas' indica?",
+        opcoes: [
+          "Que a chuva foi a causa de pararem",
+          "Um contraste: apesar da chuva, continuaram",
+          "Que a chuva aconteceu depois",
+        ],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! 'Mas' liga duas ideias opostas: chovia forte, e mesmo assim eles continuaram.",
-        feedbackErro: "Releia: 'a chuva começou forte, MAS a expedição não parou' — 'mas' mostra oposição, não causa.",
+        feedbackAcerto:
+          "🎉 Isso! 'Mas' liga duas ideias opostas: chovia forte, e mesmo assim eles continuaram.",
+        feedbackErro:
+          "Releia: 'a chuva começou forte, MAS a expedição não parou' — 'mas' mostra oposição, não causa.",
         ondeEstaNoTexto: "A chuva começou forte, MAS a expedição não parou de andar.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A chuva começou forte, MAS a expedição não parou de andar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um contraste: apesar da chuva, continuaram”. 'Mas' liga duas ideias opostas: chovia forte, e mesmo assim eles continuaram. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que a guia seguiu pelo atalho, segundo o trecho com 'porque'?",
-        opcoes: ["Porque a trilha principal estava alagada", "Porque estava com sono", "Porque o atalho era mais bonito"],
+        opcoes: [
+          "Porque a trilha principal estava alagada",
+          "Porque estava com sono",
+          "Porque o atalho era mais bonito",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 Correto! 'Porque' introduz a causa: a trilha principal alagada.",
-        feedbackErro: "O texto diz: 'seguir por um atalho PORQUE a trilha principal estava alagada' — essa é a causa.",
-        ondeEstaNoTexto: "A guia decidiu seguir por um atalho porque a trilha principal estava alagada.",
+        feedbackErro:
+          "O texto diz: 'seguir por um atalho PORQUE a trilha principal estava alagada' — essa é a causa.",
+        ondeEstaNoTexto:
+          "A guia decidiu seguir por um atalho porque a trilha principal estava alagada.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A guia decidiu seguir por um atalho porque a trilha principal estava alagada”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque a trilha principal estava alagada”. 'Porque' introduz a causa: a trilha principal alagada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a expedição fez logo depois de o sol aparecer (ligado por 'então')?",
-        opcoes: ["Voltaram para casa", "Armaram o acampamento ali mesmo", "Continuaram andando sob chuva"],
+        opcoes: [
+          "Voltaram para casa",
+          "Armaram o acampamento ali mesmo",
+          "Continuaram andando sob chuva",
+        ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Então' liga o sol aparecer à consequência: armar o acampamento.",
         feedbackErro: "Releia o fim: '...ENTÃO decidiram armar o acampamento ali mesmo'.",
-        ondeEstaNoTexto: "Quando o sol voltou a aparecer, todos sorriram de alívio; então decidiram armar o acampamento ali mesmo.",
+        ondeEstaNoTexto:
+          "Quando o sol voltou a aparecer, todos sorriram de alívio; então decidiram armar o acampamento ali mesmo.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Quando o sol voltou a aparecer, todos sorriram de alívio; então decidiram armar o acampamento ali mesmo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Armaram o acampamento ali mesmo”. 'Então' liga o sol aparecer à consequência: armar o acampamento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -193,7 +225,8 @@ export const aula04: AulaPortuguesV4 = {
     instrucao: "Pense sobre o efeito de cada conectivo na história.",
     perguntas: [
       {
-        pergunta: "Se trocássemos 'MAS a expedição não parou' por 'PORQUE a expedição não parou', o sentido da frase...",
+        pergunta:
+          "Se trocássemos 'MAS a expedição não parou' por 'PORQUE a expedição não parou', o sentido da frase...",
         opcoes: [
           "Mudaria completamente: deixaria de ser oposição e passaria a soar como explicação de causa",
           "Continuaria exatamente igual",
@@ -204,6 +237,9 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Isso mesmo! Trocar o conectivo muda a relação entre as ideias — de oposição para (estranha) explicação de causa.",
         feedbackErro:
           "Cada conectivo cria uma relação diferente entre as ideias: 'mas' opõe, 'porque' explica a causa. Trocar um pelo outro muda o sentido.",
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mudaria completamente: deixaria de ser oposição e passaria a soar como explicação de causa”. Trocar o conectivo muda a relação entre as ideias — de oposição para (estranha) explicação de causa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que é importante escolher o conectivo certo ao escrever uma frase?",
@@ -217,6 +253,9 @@ export const aula04: AulaPortuguesV4 = {
           "🎉 Isso! O conectivo é a 'engrenagem' que mostra COMO as ideias se relacionam — errar ele pode mudar todo o sentido do texto.",
         feedbackErro:
           "Conectivos mostram a relação entre ideias (causa, oposição, tempo, consequência). Escolher errado confunde o leitor.",
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque o conectivo errado pode confundir o leitor sobre a relação entre as ideias”. O conectivo é a 'engrenagem' que mostra COMO as ideias se relacionam — errar ele pode mudar todo o sentido do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -227,12 +266,21 @@ export const aula04: AulaPortuguesV4 = {
       instrucao: "Siga a ordem em que os fatos e conectivos aparecem no relato.",
       itens: [
         { id: "p1", texto: "A chuva começou forte, mas a expedição não parou.", imagemUrl: mapa },
-        { id: "p2", texto: "A guia seguiu por um atalho porque a trilha estava alagada.", imagemUrl: bussola },
+        {
+          id: "p2",
+          texto: "A guia seguiu por um atalho porque a trilha estava alagada.",
+          imagemUrl: bussola,
+        },
         { id: "p3", texto: "Quando o sol voltou, então armaram o acampamento.", imagemUrl: arvore },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🎉 Linha montada! Você seguiu a ordem certa: a chuva, o atalho e o desfecho com o sol.",
-      feedbackErro: "Pense: primeiro a chuva começa, depois a guia decide o atalho, e por fim o sol aparece e armam o acampamento.",
+      feedbackAcerto:
+        "🎉 Linha montada! Você seguiu a ordem certa: a chuva, o atalho e o desfecho com o sol.",
+      feedbackErro:
+        "Pense: primeiro a chuva começa, depois a guia decide o atalho, e por fim o sol aparece e armam o acampamento.",
+      dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: Linha montada! Você seguiu a ordem certa: a chuva, o atalho e o desfecho com o sol. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -256,14 +304,26 @@ export const aula04: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Quando' marca o momento: ao chegar, encontraram a água alta.",
         feedbackErro: "Releia: 'Quando a expedição chegou ao rio, encontrou a água muito alta.'",
         ondeEstaNoTexto: "Quando a expedição chegou ao rio, encontrou a água muito alta.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Quando a expedição chegou ao rio, encontrou a água muito alta”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A água muito alta”. 'Quando' marca o momento: ao chegar, encontraram a água alta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que tiveram que procurar outro caminho (ligado por 'por isso')?",
-        opcoes: ["Porque a ponte estava quebrada", "Porque estava chovendo", "Porque a canoa era pequena"],
+        opcoes: [
+          "Porque a ponte estava quebrada",
+          "Porque estava chovendo",
+          "Porque a canoa era pequena",
+        ],
         correta: 0,
-        feedbackAcerto: "🎉 Correto! 'Por isso' liga a consequência (procurar outro caminho) à causa (ponte quebrada).",
-        feedbackErro: "O texto diz: 'A ponte estava quebrada, POR ISSO tiveram que procurar outro caminho.'",
+        feedbackAcerto:
+          "🎉 Correto! 'Por isso' liga a consequência (procurar outro caminho) à causa (ponte quebrada).",
+        feedbackErro:
+          "O texto diz: 'A ponte estava quebrada, POR ISSO tiveram que procurar outro caminho.'",
         ondeEstaNoTexto: "A ponte estava quebrada, por isso tiveram que procurar outro caminho.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A ponte estava quebrada, por isso tiveram que procurar outro caminho”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque a ponte estava quebrada”. 'Por isso' liga a consequência (procurar outro caminho) à causa (ponte quebrada). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -288,12 +348,20 @@ export const aula04: AulaPortuguesV4 = {
           { id: "soma", nome: "Soma", descricao: "Junta duas ideias (e)" },
           { id: "oposicao", nome: "Oposição", descricao: "Ideias contrárias (mas)" },
           { id: "causa", nome: "Causa", descricao: "Explica o motivo (porque)" },
-          { id: "consequencia", nome: "Consequência", descricao: "O que resultou (por isso, então)" },
+          {
+            id: "consequencia",
+            nome: "Consequência",
+            descricao: "O que resultou (por isso, então)",
+          },
           { id: "tempo", nome: "Tempo", descricao: "Indica o momento (quando)" },
         ],
-        feedbackAcerto: "🎉 Muito bem! Você reconheceu a relação que cada conectivo cria entre as ideias.",
+        feedbackAcerto:
+          "🎉 Muito bem! Você reconheceu a relação que cada conectivo cria entre as ideias.",
         feedbackErro:
           "Dica: 'e' soma, 'mas' opõe, 'porque' explica a causa, 'por isso/então' mostram consequência e 'quando' marca o tempo.",
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: Muito bem! Você reconheceu a relação que cada conectivo cria entre as ideias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     },
   },
@@ -307,11 +375,16 @@ export const aula04: AulaPortuguesV4 = {
       "Trocar o conectivo pode mudar totalmente o sentido da frase — por isso é preciso escolher com cuidado.",
     ],
     miniDesafio: {
-      pergunta: "Na frase 'Choveu, ___ a expedição continuou', qual conectivo mostra que eles continuaram APESAR da chuva?",
+      pergunta:
+        "Na frase 'Choveu, ___ a expedição continuou', qual conectivo mostra que eles continuaram APESAR da chuva?",
       opcoes: ["mas", "porque", "quando"],
       correta: 0,
       feedbackAcerto: "🎉 Isso! 'Mas' cria a relação de oposição: apesar de chover, continuaram.",
-      feedbackErro: "'Mas' é o conectivo de oposição/contraste. 'Porque' explicaria a causa; 'quando' marcaria o tempo.",
+      feedbackErro:
+        "'Mas' é o conectivo de oposição/contraste. 'Porque' explicaria a causa; 'quando' marcaria o tempo.",
+      dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “mas”. 'Mas' cria a relação de oposição: apesar de chover, continuaram. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -323,24 +396,60 @@ export const aula04: AulaPortuguesV4 = {
           "Liga duas ideias e mostra a relação entre elas",
           "Sempre indica o final da frase",
           "Substitui o sujeito da frase",
+          "Que a chuva foi a causa de pararem",
         ],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! O conectivo mostra COMO duas ideias se relacionam (soma, causa, oposição, tempo...).",
+        feedbackAcerto:
+          "🎉 Isso! O conectivo mostra COMO duas ideias se relacionam (soma, causa, oposição, tempo...).",
         feedbackErro: "Conectivos são palavras que ligam ideias e revelam a relação entre elas.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Sempre indica o final da frase” não é a resposta. Conectivos são palavras que ligam ideias e revelam a relação entre elas.",
+          "❌ “Substitui o sujeito da frase” não é a resposta. Conectivos são palavras que ligam ideias e revelam a relação entre elas.",
+          "❌ “Que a chuva foi a causa de pararem” não é a resposta. Conectivos são palavras que ligam ideias e revelam a relação entre elas.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Liga duas ideias e mostra a relação entre elas”. O conectivo mostra COMO duas ideias se relacionam (soma, causa, oposição, tempo...). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual conectivo indica CAUSA (o motivo de algo)?",
-        opcoes: ["mas", "porque", "e"],
+        opcoes: ["mas", "porque", "e", "Que a chuva aconteceu depois"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Porque' explica o motivo, a causa de um fato.",
         feedbackErro: "'Porque' é usado para explicar a causa. 'Mas' opõe ideias; 'e' soma.",
+        feedbackOpcoes: [
+          "❌ “mas” não é a resposta. 'Porque' é usado para explicar a causa. 'Mas' opõe ideias; 'e' soma.",
+          null,
+          "❌ “e” não é a resposta. 'Porque' é usado para explicar a causa. 'Mas' opõe ideias; 'e' soma.",
+          "❌ “Que a chuva aconteceu depois” não é a resposta. 'Porque' é usado para explicar a causa. 'Mas' opõe ideias; 'e' soma.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “porque”. 'Porque' explica o motivo, a causa de um fato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "3/5 — Em 'Estudou bastante, POR ISSO tirou uma boa nota', o que 'por isso' indica?",
-        opcoes: ["A consequência de ter estudado", "A causa da nota boa", "O momento em que estudou"],
+        pergunta:
+          "3/5 — Em 'Estudou bastante, POR ISSO tirou uma boa nota', o que 'por isso' indica?",
+        opcoes: [
+          "A consequência de ter estudado",
+          "A causa da nota boa",
+          "O momento em que estudou",
+          "Porque estava com sono",
+        ],
         correta: 0,
-        feedbackAcerto: "🎉 Correto! 'Por isso' mostra a consequência: a nota boa resultou de ter estudado.",
+        feedbackAcerto:
+          "🎉 Correto! 'Por isso' mostra a consequência: a nota boa resultou de ter estudado.",
         feedbackErro: "'Por isso' indica consequência — o que aconteceu como resultado de algo.",
+        feedbackOpcoes: [
+          null,
+          "❌ “A causa da nota boa” não é a resposta. 'Por isso' indica consequência — o que aconteceu como resultado de algo.",
+          "❌ “O momento em que estudou” não é a resposta. 'Por isso' indica consequência — o que aconteceu como resultado de algo.",
+          "❌ “Porque estava com sono” não é a resposta. 'Por isso' indica consequência — o que aconteceu como resultado de algo.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A consequência de ter estudado”. 'Por isso' mostra a consequência: a nota boa resultou de ter estudado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual frase usa o conectivo de TEMPO corretamente?",
@@ -348,23 +457,45 @@ export const aula04: AulaPortuguesV4 = {
           "QUANDO a chuva parou, saímos para brincar.",
           "MAS a chuva parou, saímos para brincar.",
           "PORQUE a chuva parou, saímos para brincar.",
+          "Porque o atalho era mais bonito",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'Quando' marca o momento em que a segunda ação acontece.",
-        feedbackErro: "'Quando' é o conectivo que indica tempo/momento. As outras opções indicam oposição ou causa.",
+        feedbackErro:
+          "'Quando' é o conectivo que indica tempo/momento. As outras opções indicam oposição ou causa.",
+        feedbackOpcoes: [
+          null,
+          "❌ “MAS a chuva parou, saímos para brincar.” não é a resposta. 'Quando' é o conectivo que indica tempo/momento. As outras opções indicam oposição ou causa.",
+          "❌ “PORQUE a chuva parou, saímos para brincar.” não é a resposta. 'Quando' é o conectivo que indica tempo/momento. As outras opções indicam oposição ou causa.",
+          "❌ “Porque o atalho era mais bonito” não é a resposta. 'Quando' é o conectivo que indica tempo/momento. As outras opções indicam oposição ou causa.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “QUANDO a chuva parou, saímos para brincar.”. 'Quando' marca o momento em que a segunda ação acontece. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "5/5 — Trocar 'MAS' por 'PORQUE' na frase 'Estava cansado, MAS continuou andando' deixaria a frase...",
+        pergunta:
+          "5/5 — Trocar 'MAS' por 'PORQUE' na frase 'Estava cansado, MAS continuou andando' deixaria a frase...",
         opcoes: [
           "Com sentido diferente e confuso, pois 'porque' pede uma explicação, não uma oposição",
           "Exatamente igual em sentido",
           "Mais correta gramaticalmente",
+          "Voltaram para casa",
         ],
         correta: 0,
         feedbackAcerto:
           "🎉 Isso! Cada conectivo cria uma relação própria — trocar um pelo outro muda (e pode confundir) o sentido da frase.",
         feedbackErro:
           "'Mas' indica oposição; 'porque' pede uma causa. Trocar um pelo outro deixa a frase sem sentido claro.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Exatamente igual em sentido” não é a resposta. 'Mas' indica oposição; 'porque' pede uma causa. Trocar um pelo outro deixa a frase sem sentido claro.",
+          "❌ “Mais correta gramaticalmente” não é a resposta. 'Mas' indica oposição; 'porque' pede uma causa. Trocar um pelo outro deixa a frase sem sentido claro.",
+          "❌ “Voltaram para casa” não é a resposta. 'Mas' indica oposição; 'porque' pede uma causa. Trocar um pelo outro deixa a frase sem sentido claro.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “e” — liga duas ideias que acontecem juntas, somando informações. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com sentido diferente e confuso, pois 'porque' pede uma explicação, não uma oposição”. Cada conectivo cria uma relação própria — trocar um pelo outro muda (e pode confundir) o sentido da frase. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -378,7 +509,8 @@ export const aula04: AulaPortuguesV4 = {
       "3) Escolha uma frase do texto e troque o conectivo por outro, criando um novo sentido (às vezes engraçado!).",
       "4) Leia as descobertas para alguém da família.",
     ],
-    registro: "📝 A lista de conectivos encontrados com suas relações, mais a frase transformada com o conectivo trocado.",
+    registro:
+      "📝 A lista de conectivos encontrados com suas relações, mais a frase transformada com o conectivo trocado.",
   },
 
   recompensa: {
