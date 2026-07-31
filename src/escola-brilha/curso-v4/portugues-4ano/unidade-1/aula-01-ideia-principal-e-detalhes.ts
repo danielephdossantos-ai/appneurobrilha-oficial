@@ -125,7 +125,8 @@ export const aula1: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "A equipe de exploradores enfrentou o rio mais perigoso da região para alcançar as ruínas escondidas na margem oposta.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A equipe de exploradores enfrentou o rio mais perigoso da região para alcançar as ruínas escondidas na margem oposta”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Atravessar o rio para chegar às ruínas na margem oposta”. O primeiro parágrafo já revela: 'enfrentou o rio... para alcançar as ruínas escondidas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Atravessar o rio para chegar às ruínas na margem oposta”. O primeiro parágrafo já revela: 'enfrentou o rio... para alcançar as ruínas escondidas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quanto tempo durou a travessia?",
@@ -136,7 +137,8 @@ export const aula1: AulaPortuguesV4 = {
           "A duração aparece no começo do segundo parágrafo, logo depois de 'travessia'.",
         ondeEstaNoTexto: "Durante a travessia, que durou três dias...",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Durante a travessia, que durou três dias”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Três dias”. O segundo parágrafo diz 'que durou três dias'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Três dias”. O segundo parágrafo diz 'que durou três dias'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "As aves raras e as árvores centenárias são...",
@@ -153,7 +155,8 @@ export const aula1: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "…detalhes que renderam boas anotações no diário, mas que não eram o motivo da viagem.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “detalhes que renderam boas anotações no diário, mas que não eram o motivo da viagem”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Detalhes que enriquecem o relato, mas não são o motivo da viagem”. O próprio texto diz: eram 'detalhes' que 'não eram o motivo da viagem'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhes que enriquecem o relato, mas não são o motivo da viagem”. O próprio texto diz: eram 'detalhes' que 'não eram o motivo da viagem'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -176,7 +179,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackErro:
           "Pense: qual frase, sozinha, já conta o essencial da história, do começo ao fim? As aves e o balanço do barco são só detalhes do percurso.",
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A expedição atravessou um rio perigoso e chegou às ruínas na margem oposta”. Essa frase resume a IDEIA PRINCIPAL — o desafio (rio perigoso) e o resultado (chegar às ruínas). As outras opções são detalhes do caminho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A expedição atravessou um rio perigoso e chegou às ruínas na margem oposta”. Essa frase resume a IDEIA PRINCIPAL — o desafio (rio perigoso) e o resultado (chegar às ruínas). As outras opções são detalhes do caminho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que o texto menciona a correnteza forte e o guia gritando instruções?",
@@ -191,7 +195,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackErro:
           "Esses elementos não mudam o assunto do texto; eles só ajudam a entender melhor o desafio da travessia, que é a ideia principal.",
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Para dar detalhes que mostram o tamanho do desafio enfrentado”. São detalhes que reforçam e dão cor à ideia principal — mostram o quão difícil foi a travessia, mas não substituem a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para dar detalhes que mostram o tamanho do desafio enfrentado”. São detalhes que reforçam e dão cor à ideia principal — mostram o quão difícil foi a travessia, mas não substituem a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -255,7 +260,8 @@ export const aula1: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "…as paredes estavam cobertas de pinturas antigas, feitas há milhares de anos…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “as paredes estavam cobertas de pinturas antigas, feitas há milhares de anos”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A descoberta de pinturas antigas que contam a história de um povo perdido”. Toda a página do diário gira em torno da descoberta das pinturas e do que elas revelam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A descoberta de pinturas antigas que contam a história de um povo perdido”. Toda a página do diário gira em torno da descoberta das pinturas e do que elas revelam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O fato de os morcegos assustarem a equipe é um exemplo de:",
@@ -266,7 +272,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackErro:
           "Pense: se tirássemos essa informação, o relato ainda faria sentido? Sim — por isso é um detalhe, não a ideia principal.",
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Detalhe”. É apenas um detalhe do ambiente da caverna, não o foco central do relato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhe”. É apenas um detalhe do ambiente da caverna, não o foco central do relato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -292,7 +299,8 @@ export const aula1: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: qual frase resume todo o parágrafo? As outras duas são exemplos que comprovam essa ideia central.",
       dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino: "📚 Vamos rever juntos: a resposta certa é “Os golfinhos são mamíferos inteligentes”. As outras frases são detalhes que explicam por que os golfinhos são considerados inteligentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Os golfinhos são mamíferos inteligentes”. As outras frases são detalhes que explicam por que os golfinhos são considerados inteligentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -317,7 +325,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Observar aves raras nas margens do rio” não é a resposta. A ideia principal é a informação mais importante — o texto gira em torno dela.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “O assunto mais importante, sem o qual o texto perde o sentido”. A ideia principal é o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O assunto mais importante, sem o qual o texto perde o sentido”. A ideia principal é o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que caracteriza um 'detalhe'?",
@@ -338,7 +347,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Testar a resistência do barco na correnteza” não é a resposta. Um detalhe completa a ideia principal, mas o texto continua fazendo sentido sem ele.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “detalhe” — é uma informação que completa, explica ou enriquece a ideia principal, mas não é o centro do texto — se tirada, o texto continua fazendo sentido, só fica menos rico. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “É uma informação que complementa a ideia principal, mas pode ser retirada”. Detalhes enriquecem, mas não são o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É uma informação que complementa a ideia principal, mas pode ser retirada”. Detalhes enriquecem, mas não são o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No relato da travessia do rio, qual era a ideia principal?",
@@ -359,7 +369,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “A ideia principal do texto” não é a resposta. As aves e o balanço do barco são detalhes; o objetivo e o resultado da travessia é a ideia principal.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A equipe atravessou um rio perigoso para chegar às ruínas”. Esse é o fio condutor de todo o texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A equipe atravessou um rio perigoso para chegar às ruínas”. Esse é o fio condutor de todo o texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Um bom truque para achar a ideia principal é:",
@@ -380,7 +391,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Informações que não aparecem no texto” não é a resposta. Resumir o texto numa frase ajuda a filtrar o que é essencial do que é apenas detalhe.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Tentar resumir o texto em uma única frase”. O que sobra nesse resumo costuma ser a ideia principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Tentar resumir o texto em uma única frase”. O que sobra nesse resumo costuma ser a ideia principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — No relato da caverna, os morcegos e o ar úmido eram:",
@@ -402,7 +414,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “A expedição avistou aves raras durante três dias de viagem” não é a resposta. O foco central era a descoberta das pinturas; morcegos e ar úmido eram apenas detalhes do cenário.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Detalhes do ambiente, e não o foco central”. Você já está lendo como um verdadeiro explorador de textos. Primeira etapa do mapa concluída! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhes do ambiente, e não o foco central”. Você já está lendo como um verdadeiro explorador de textos. Primeira etapa do mapa concluída! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

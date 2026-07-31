@@ -121,7 +121,8 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "A trilha estava seca há semanas porque não chovia na região desde o início do mês.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A trilha estava seca há semanas porque não chovia na região desde o início do mês”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque não chovia desde o início do mês”. O texto explica: 'porque não chovia na região desde o início do mês'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque não chovia desde o início do mês”. O texto explica: 'porque não chovia na região desde o início do mês'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que causou o início do incêndio?",
@@ -138,7 +139,8 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Um raio caiu sobre uma árvore isolada… Por isso, começou um pequeno incêndio…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Um raio caiu sobre uma árvore isolada… Por isso, começou um pequeno incêndio”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Um raio que caiu numa árvore isolada”. 'Um raio caiu sobre uma árvore isolada... Por isso, começou um pequeno incêndio.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um raio que caiu numa árvore isolada”. 'Um raio caiu sobre uma árvore isolada... Por isso, começou um pequeno incêndio.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a equipe fez ao ver a fumaça?",
@@ -153,7 +155,8 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "A equipe de exploradores avistou a fumaça de longe e, então, avisou os guardas florestais da região.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A equipe de exploradores avistou a fumaça de longe e, então, avisou os guardas florestais da região”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Avisaram os guardas florestais”. O texto diz que 'então, avisou os guardas florestais da região'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Avisaram os guardas florestais”. O texto diz que 'então, avisou os guardas florestais da região'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -174,7 +177,8 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro:
           "Pense na ordem natural dos fatos: primeiro falta a chuva, depois o mato fica seco, depois o raio provoca o fogo, e só então a equipe reage avisando os guardas.",
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Falta de chuva → mato seco → raio provoca incêndio → equipe avisa guardas”. Essa é a ordem lógica: a falta de chuva causou o mato seco, que facilitou o incêndio provocado pelo raio, e isso levou a equipe a avisar os guardas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Falta de chuva → mato seco → raio provoca incêndio → equipe avisa guardas”. Essa é a ordem lógica: a falta de chuva causou o mato seco, que facilitou o incêndio provocado pelo raio, e isso levou a equipe a avisar os guardas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -190,7 +194,8 @@ export const aula3: AulaPortuguesV4 = {
         feedbackErro:
           "O texto liga a seca ao mato fácil de pegar fogo. Se a causa (seca) fosse diferente, a consequência (fogo se espalhando rápido) também mudaria.",
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “O mato estaria mais úmido e o fogo teria menos chance de se espalhar”. Muito bem! Você entendeu a corrente de causa: sem a seca, o mato não pegaria fogo tão facilmente — é assim que uma causa muda toda a consequência seguinte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O mato estaria mais úmido e o fogo teria menos chance de se espalhar”. Muito bem! Você entendeu a corrente de causa: sem a seca, o mato não pegaria fogo tão facilmente — é assim que uma causa muda toda a consequência seguinte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -253,7 +258,8 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "…porque a correnteza havia arrancado suas bases de madeira já enfraquecidas pelo tempo.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “porque a correnteza havia arrancado suas bases de madeira já enfraquecidas pelo tempo”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque a correnteza arrancou suas bases já enfraquecidas”. O texto explica claramente essa causa logo após a palavra 'porque'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque a correnteza arrancou suas bases já enfraquecidas”. O texto explica claramente essa causa logo após a palavra 'porque'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual foi a consequência de a equipe não conseguir atravessar o rio?",
@@ -269,7 +275,8 @@ export const aula3: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Por isso, decidiram construir uma ponte improvisada usando cordas e troncos encontrados na mata.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Por isso, decidiram construir uma ponte improvisada usando cordas e troncos encontrados na mata”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Eles construíram uma ponte improvisada com cordas e troncos”. 'Por isso, decidiram construir uma ponte improvisada usando cordas e troncos.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Eles construíram uma ponte improvisada com cordas e troncos”. 'Por isso, decidiram construir uma ponte improvisada usando cordas e troncos.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -291,7 +298,8 @@ export const aula3: AulaPortuguesV4 = {
       feedbackErro:
         "Pense: o que aconteceu PRIMEIRO e fez o riacho secar? O sol forte durante dias é a causa.",
       dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino: "📚 Vamos rever juntos: a resposta certa é “O sol forte durante dias”. O sol forte é a causa; o riacho secar é a consequência, ligada pelo 'por isso'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “O sol forte durante dias”. O sol forte é a causa; o riacho secar é a consequência, ligada pelo 'por isso'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -315,16 +323,12 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Porque fazia muito frio” não é a resposta. A causa é o que FAZ algo acontecer — o motivo, não o resultado.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “O motivo que faz outro fato acontecer”. A causa é o motivo por trás de um acontecimento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O motivo que faz outro fato acontecer”. A causa é o motivo por trás de um acontecimento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual dessas palavras costuma ligar causa e consequência?",
-        opcoes: [
-          "Por isso",
-          "Amanhã",
-          "Também",
-          "Porque ninguém cuidava dela",
-        ],
+        opcoes: ["Por isso", "Amanhã", "Também", "Porque ninguém cuidava dela"],
         correta: 0,
         feedbackAcerto: "⛓️ Correto! 'Por isso' é um conectivo clássico de consequência.",
         feedbackErro:
@@ -336,7 +340,8 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Porque ninguém cuidava dela” não é a resposta. 'Por isso' liga um motivo ao seu resultado. As outras palavras não indicam causa e consequência.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Por isso”. 'Por isso' é um conectivo clássico de consequência. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Por isso”. 'Por isso' é um conectivo clássico de consequência. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -359,7 +364,8 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Uma fogueira dos exploradores” não é a resposta. O aviso aos guardas e a fumaça são consequências mais tardias; a causa inicial foi a falta de chuva.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A falta de chuva por semanas”. A seca foi o primeiro elo que deu início à corrente de acontecimentos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A falta de chuva por semanas”. A seca foi o primeiro elo que deu início à corrente de acontecimentos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -382,7 +388,8 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Um cigarro jogado no mato” não é a resposta. Entender causa e consequência ajuda a explicar POR QUE os fatos aconteceram naquela ordem.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Para entender por que os fatos aconteceram na ordem em que aconteceram”. Isso ajuda a entender a lógica interna do texto, não só os fatos soltos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para entender por que os fatos aconteceram na ordem em que aconteceram”. Isso ajuda a entender a lógica interna do texto, não só os fatos soltos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Na ponte improvisada, o que motivou a equipe a construir uma nova ponte?",
@@ -404,7 +411,8 @@ export const aula3: AulaPortuguesV4 = {
           "❌ “Foram embora com medo” não é a resposta. A ponte original caiu e, sem ela, não dava para atravessar — essa foi a causa da construção da nova ponte.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “causa” — é o motivo, o fato que faz outra coisa acontecer. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A ponte original havia caído e eles precisavam atravessar o rio”. Você já enxerga as correntes de causa e consequência como um verdadeiro explorador de textos! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A ponte original havia caído e eles precisavam atravessar o rio”. Você já enxerga as correntes de causa e consequência como um verdadeiro explorador de textos! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

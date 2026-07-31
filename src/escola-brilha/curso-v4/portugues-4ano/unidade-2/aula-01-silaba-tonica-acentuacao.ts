@@ -132,7 +132,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA'.",
         ondeEstaNoTexto: "Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA, como em CAFÉ",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA, como em CAFÉ”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Oxítona”. Oxítona = força na última sílaba, como em CAFÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Oxítona”. Oxítona = força na última sílaba, como em CAFÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual regra vale para TODA proparoxítona, sem exceção?",
@@ -143,7 +144,8 @@ export const aula1: AulaPortuguesV4 = {
           "Releia o parágrafo 3: 'TODA proparoxítona recebe acento, sem exceção nenhuma!'",
         ondeEstaNoTexto: "TODA proparoxítona recebe acento, sem exceção nenhuma!",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “TODA proparoxítona recebe acento, sem exceção nenhuma!”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Sempre leva acento”. Toda proparoxítona é acentuada, sem exceção. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Sempre leva acento”. Toda proparoxítona é acentuada, sem exceção. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual tipo de palavra é a maioria no português, segundo o texto?",
@@ -154,7 +156,8 @@ export const aula1: AulaPortuguesV4 = {
           "Releia: 'a maioria das palavras do português é assim' — refere-se à paroxítona.",
         ondeEstaNoTexto: "a maioria das palavras do português é assim",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “a maioria das palavras do português é assim”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. O texto diz que a paroxítona é o tipo mais comum. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. O texto diz que a paroxítona é o tipo mais comum. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -169,7 +172,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A descoberta foi registrada no diário de bordo.",
         feedbackErro: "Releia o título: 'O Diário da Sílaba Forte' — é onde tudo foi anotado.",
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “No diário de bordo da expedição”. A descoberta foi registrada no diário de bordo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No diário de bordo da expedição”. A descoberta foi registrada no diário de bordo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual ferramenta da expedição ajudou a explicar a ideia de sílaba tônica?",
@@ -178,7 +182,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! A bússola aponta a sílaba mais forte da palavra.",
         feedbackErro: "Volte à motivação: Brilha ergueu a bússola da Oficina da Palavra.",
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A bússola”. A bússola aponta a sílaba mais forte da palavra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A bússola”. A bússola aponta a sílaba mais forte da palavra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -237,7 +242,8 @@ export const aula1: AulaPortuguesV4 = {
         feedbackErro: "Releia: 'É proparoxítona, por isso o acento é obrigatório.'",
         ondeEstaNoTexto: "É proparoxítona, por isso o acento é obrigatório.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “É proparoxítona, por isso o acento é obrigatório”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque é proparoxítona, e toda proparoxítona é acentuada”. Proparoxítona sempre leva acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque é proparoxítona, e toda proparoxítona é acentuada”. Proparoxítona sempre leva acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que FÁCIL e AÇÚCAR têm em comum, segundo o texto?",
@@ -252,7 +258,8 @@ export const aula1: AulaPortuguesV4 = {
           "Releia: 'ambas terminam em L e R. Essas terminações pedem acento nas paroxítonas.'",
         ondeEstaNoTexto: "Essas terminações pedem acento nas paroxítonas.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Essas terminações pedem acento nas paroxítonas”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “São paroxítonas terminadas em L e R, o que pede acento”. Paroxítonas terminadas em L, R (entre outras) recebem acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “São paroxítonas terminadas em L e R, o que pede acento”. Paroxítonas terminadas em L, R (entre outras) recebem acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -320,7 +327,8 @@ export const aula1: AulaPortuguesV4 = {
       feedbackAcerto: "🎉 Isso! Essa é a regra de ouro da aula de hoje.",
       feedbackErro: "Releia a explicação: toda proparoxítona recebe acento, sem exceção.",
       dica: "🧭 Pista de explorador: lembre o que significa “oxítona” — palavra cuja sílaba tônica é a ÚLTIMA. Ex.: café, jacaré, paletó. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino: "📚 Vamos rever juntos: a resposta certa é “Sempre tem acento, porque toda proparoxítona é acentuada”. Essa é a regra de ouro da aula de hoje. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Sempre tem acento, porque toda proparoxítona é acentuada”. Essa é a regra de ouro da aula de hoje. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -344,16 +352,12 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Proparoxítona” não é a resposta. Lembre: tônica é a sílaba que soa com mais força.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A sílaba pronunciada com mais força”. Tônica é a sílaba mais forte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A sílaba pronunciada com mais força”. Tônica é a sílaba mais forte. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — CAFÉ é um exemplo de palavra...",
-        opcoes: [
-          "Oxítona",
-          "Paroxítona",
-          "Proparoxítona",
-          "Nunca leva acento",
-        ],
+        opcoes: ["Oxítona", "Paroxítona", "Proparoxítona", "Nunca leva acento"],
         correta: 0,
         feedbackAcerto: "🎉 Correto! A força cai na última sílaba: ca-FÉ.",
         feedbackErro: "Em CAFÉ, a força cai na última sílaba: é oxítona.",
@@ -364,16 +368,12 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Nunca leva acento” não é a resposta. Em CAFÉ, a força cai na última sílaba: é oxítona.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Oxítona”. A força cai na última sílaba: ca-FÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Oxítona”. A força cai na última sílaba: ca-FÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — ÁRVORE é um exemplo de palavra...",
-        opcoes: [
-          "Oxítona",
-          "Paroxítona",
-          "Proparoxítona",
-          "Só leva acento às vezes",
-        ],
+        opcoes: ["Oxítona", "Paroxítona", "Proparoxítona", "Só leva acento às vezes"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! A força cai na penúltima sílaba: ÁR-vo-re.",
         feedbackErro: "Em ÁRVORE, a força está na penúltima sílaba: é paroxítona.",
@@ -384,7 +384,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Só leva acento às vezes” não é a resposta. Em ÁRVORE, a força está na penúltima sílaba: é paroxítona.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. A força cai na penúltima sílaba: ÁR-vo-re. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. A força cai na penúltima sílaba: ÁR-vo-re. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Toda palavra proparoxítona...",
@@ -404,16 +405,12 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Numa placa da estrada” não é a resposta. Lembre da regra de ouro: toda proparoxítona é acentuada, sempre.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “oxítona” — palavra cuja sílaba tônica é a ÚLTIMA. Ex.: café, jacaré, paletó. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Leva acento sempre”. Regra sem exceção: toda proparoxítona é acentuada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Leva acento sempre”. Regra sem exceção: toda proparoxítona é acentuada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — LÂMPADA tem a sílaba tônica em qual posição?",
-        opcoes: [
-          "Última",
-          "Penúltima",
-          "Antepenúltima",
-          "Num bilhete perdido",
-        ],
+        opcoes: ["Última", "Penúltima", "Antepenúltima", "Num bilhete perdido"],
         correta: 2,
         feedbackAcerto: "🎉 Expedição concluída! LÂM-pa-da: a força está na antepenúltima sílaba.",
         feedbackErro: "Separe: LÂM-pa-da. A força está na primeira sílaba, que é a antepenúltima.",
@@ -424,7 +421,8 @@ export const aula1: AulaPortuguesV4 = {
           "❌ “Num bilhete perdido” não é a resposta. Separe: LÂM-pa-da. A força está na primeira sílaba, que é a antepenúltima.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “sílaba tônica” — é a sílaba pronunciada com MAIS FORÇA dentro da palavra. Em 'CA-FÉ', o pedaço 'FÉ' é mais forte. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Antepenúltima”. Expedição concluída! LÂM-pa-da: a força está na antepenúltima sílaba. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Antepenúltima”. Expedição concluída! LÂM-pa-da: a força está na antepenúltima sílaba. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

@@ -153,7 +153,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "A primeira frase diz: 'A expedição chegou à ilha ao amanhecer'.",
         ondeEstaNoTexto: "A expedição chegou à ilha ao amanhecer.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A expedição chegou à ilha ao amanhecer”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Ao amanhecer”. 'A expedição chegou à ilha ao amanhecer' — verbo no pretérito perfeito, ação já concluída. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ao amanhecer”. 'A expedição chegou à ilha ao amanhecer' — verbo no pretérito perfeito, ação já concluída. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que os macacos faziam entre as árvores?",
@@ -170,7 +171,8 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "dezenas de macacos viviam entre as árvores altas, e brincavam pulando de galho em galho.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “dezenas de macacos viviam entre as árvores altas, e brincavam pulando de galho em galho”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Viviam e brincavam pulando de galho em galho”. 'Viviam' e 'brincavam' estão no pretérito imperfeito — uma ação repetida, de costume dos macacos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Viviam e brincavam pulando de galho em galho”. 'Viviam' e 'brincavam' estão no pretérito imperfeito — uma ação repetida, de costume dos macacos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o grupo vai fazer amanhã?",
@@ -185,7 +187,8 @@ export const aula02: AulaPortuguesV4 = {
           "No último parágrafo: 'o grupo atravessará a ponte de corda até a próxima ilha'.",
         ondeEstaNoTexto: "Amanhã, o grupo atravessará a ponte de corda até a próxima ilha.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Amanhã, o grupo atravessará a ponte de corda até a próxima ilha”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Atravessar a ponte de corda até a próxima ilha”. 'Atravessará' está no futuro — a ação ainda não aconteceu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Atravessar a ponte de corda até a próxima ilha”. 'Atravessará' está no futuro — a ação ainda não aconteceu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -206,7 +209,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "Pretérito perfeito = ação que JÁ terminou. A chegada da expedição já aconteceu, por isso 'chegou'.",
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque a chegada já aconteceu e terminou”. O pretérito perfeito conta ações já concluídas — a expedição já chegou. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque a chegada já aconteceu e terminou”. O pretérito perfeito conta ações já concluídas — a expedição já chegou. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -222,7 +226,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "O imperfeito serve para contar algo que acontecia repetidamente, como um costume — por isso 'viviam' e 'brincavam'.",
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque descrevem um costume repetido dos macacos, sem hora de terminar”. O imperfeito descreve costumes e ações contínuas no passado — os macacos SEMPRE viviam e brincavam ali. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque descrevem um costume repetido dos macacos, sem hora de terminar”. O imperfeito descreve costumes e ações contínuas no passado — os macacos SEMPRE viviam e brincavam ali. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -267,7 +272,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "A primeira frase diz: 'um pássaro colorido voava sobre o acampamento'.",
         ondeEstaNoTexto: "Todos os dias, um pássaro colorido voava sobre o acampamento.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Todos os dias, um pássaro colorido voava sobre o acampamento”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Voava sobre o acampamento”. 'Voava' está no imperfeito — um hábito repetido do pássaro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Voava sobre o acampamento”. 'Voava' está no imperfeito — um hábito repetido do pássaro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a expedição fará amanhã?",
@@ -282,7 +288,8 @@ export const aula02: AulaPortuguesV4 = {
           "No último parágrafo: 'o grupo seguirá o pássaro até uma nova parte da floresta'.",
         ondeEstaNoTexto: "Amanhã, o grupo seguirá o pássaro até uma nova parte da floresta.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Amanhã, o grupo seguirá o pássaro até uma nova parte da floresta”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Seguirá o pássaro até uma nova parte da floresta”. 'Seguirá' está no futuro — ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Seguirá o pássaro até uma nova parte da floresta”. 'Seguirá' está no futuro — ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -333,7 +340,8 @@ export const aula02: AulaPortuguesV4 = {
       feedbackErro:
         "Pretérito imperfeito descreve costume/repetição no passado. 'Chegou' é perfeito e 'atravessará' é futuro.",
       dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino: "📚 Vamos rever juntos: a resposta certa é “vivia”. 'Vivia' descreve um costume no passado, sem hora certa de terminar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “vivia”. 'Vivia' descreve um costume no passado, sem hora certa de terminar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -357,7 +365,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Dormiam o dia todo” não é a resposta. Pretérito perfeito = ação já terminada no passado.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Uma ação que já terminou”. O pretérito perfeito conta ações já concluídas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma ação que já terminou”. O pretérito perfeito conta ações já concluídas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual frase está no futuro?",
@@ -377,16 +386,12 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Construíam casas” não é a resposta. Futuro tem terminação -RÁ. 'Cruzará' é a única no futuro.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “futuro” — conta algo que AINDA vai acontecer, que ainda não ocorreu. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A expedição cruzará o rio.”. 'Cruzará' indica uma ação que ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A expedição cruzará o rio.”. 'Cruzará' indica uma ação que ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual verbo indica um costume repetido no passado?",
-        opcoes: [
-          "viverá",
-          "vivia",
-          "vive",
-          "Voltar para casa",
-        ],
+        opcoes: ["viverá", "vivia", "vive", "Voltar para casa"],
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Vivia' é pretérito imperfeito — costume no passado.",
         feedbackErro:
@@ -398,7 +403,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Voltar para casa” não é a resposta. O imperfeito descreve repetição no passado, como 'vivia', 'brincava', 'voava'.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “vivia”. 'Vivia' é pretérito imperfeito — costume no passado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “vivia”. 'Vivia' é pretérito imperfeito — costume no passado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual frase está INCOERENTE (mistura tempos sem motivo)?",
@@ -420,16 +426,12 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Dormir na ilha para sempre” não é a resposta. Observe as pistas de tempo: 'ontem' pede passado, não presente. A frase 2 mistura tudo errado.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A expedição chega ontem e explorará a ilha.”. 'Chega ontem' mistura presente com uma palavra de passado ('ontem'), e depois pula pro futuro — incoerente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A expedição chega ontem e explorará a ilha.”. 'Chega ontem' mistura presente com uma palavra de passado ('ontem'), e depois pula pro futuro — incoerente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Complete mantendo a coerência: 'Ontem, os macacos ___ na árvore.'",
-        opcoes: [
-          "brincam",
-          "brincarão",
-          "brincaram",
-          "Porque a chegada ainda vai acontecer",
-        ],
+        opcoes: ["brincam", "brincarão", "brincaram", "Porque a chegada ainda vai acontecer"],
         correta: 2,
         feedbackAcerto: "🎉 Isso! 'Ontem' pede passado — 'brincaram' está correto e coerente.",
         feedbackErro:
@@ -441,7 +443,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Porque a chegada ainda vai acontecer” não é a resposta. A palavra 'ontem' já indica passado, então o verbo precisa concordar: brincaram.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “pretérito perfeito” — conta algo que JÁ terminou de acontecer, uma ação completa no passado. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “brincaram”. 'Ontem' pede passado — 'brincaram' está correto e coerente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “brincaram”. 'Ontem' pede passado — 'brincaram' está correto e coerente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

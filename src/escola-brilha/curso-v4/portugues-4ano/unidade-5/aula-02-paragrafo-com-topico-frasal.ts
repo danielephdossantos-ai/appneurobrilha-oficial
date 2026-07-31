@@ -131,7 +131,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "O tópico frasal é sempre a PRIMEIRA frase do parágrafo.",
         ondeEstaNoTexto: "Os golfinhos são animais muito inteligentes.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Os golfinhos são animais muito inteligentes”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Os golfinhos são animais muito inteligentes.”. É a primeira frase, que já anuncia a ideia principal: golfinhos são inteligentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Os golfinhos são animais muito inteligentes.”. É a primeira frase, que já anuncia a ideia principal: golfinhos são inteligentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual exemplo aparece no desenvolvimento do parágrafo?",
@@ -147,7 +148,8 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Eles se comunicam por meio de assobios diferentes… e conseguem resolver problemas em grupo para caçar.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Eles se comunicam por meio de assobios diferentes… e conseguem resolver problemas em grupo para caçar”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Eles se comunicam por assobios e resolvem problemas em grupo”. São os exemplos que provam a ideia do tópico frasal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Eles se comunicam por assobios e resolvem problemas em grupo”. São os exemplos que provam a ideia do tópico frasal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é o fecho do parágrafo?",
@@ -163,7 +165,8 @@ export const aula02: AulaPortuguesV4 = {
         ondeEstaNoTexto:
           "Por isso, muitos pesquisadores consideram os golfinhos entre os animais mais espertos do planeta.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Por isso, muitos pesquisadores consideram os golfinhos entre os animais mais espertos do planeta”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Por isso, muitos pesquisadores consideram os golfinhos entre os animais mais espertos do planeta.”. É a última frase, que arremata a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Por isso, muitos pesquisadores consideram os golfinhos entre os animais mais espertos do planeta.”. É a última frase, que arremata a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -185,7 +188,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "Pense na etiqueta da caixa: se a etiqueta diz 'LIVROS' mas dentro tem roupas, o leitor fica confuso.",
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque o parágrafo perderia a ideia principal e confundiria o leitor”. O desenvolvimento precisa 'provar' ou explicar exatamente o que o tópico frasal anunciou. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque o parágrafo perderia a ideia principal e confundiria o leitor”. O desenvolvimento precisa 'provar' ou explicar exatamente o que o tópico frasal anunciou. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta:
@@ -201,7 +205,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro:
           "O tópico frasal precisa anunciar exatamente o assunto do parágrafo — nesse caso, abelhas e mel.",
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “As abelhas são insetos fascinantes que produzem um dos alimentos mais antigos do mundo.”. Certo! Essa frase já anuncia o assunto (abelhas e mel) e prepara o leitor para o desenvolvimento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As abelhas são insetos fascinantes que produzem um dos alimentos mais antigos do mundo.”. Certo! Essa frase já anuncia o assunto (abelhas e mel) e prepara o leitor para o desenvolvimento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -256,7 +261,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "O tópico frasal é sempre a primeira frase do parágrafo.",
         ondeEstaNoTexto: "Dormir bem é essencial para o corpo e a mente.",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Dormir bem é essencial para o corpo e a mente”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Dormir bem é essencial para o corpo e a mente.”. É a primeira frase, anunciando a ideia principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dormir bem é essencial para o corpo e a mente.”. É a primeira frase, anunciando a ideia principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual palavra sinaliza o início do fecho?",
@@ -267,7 +273,8 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "Procure a palavra que dá ideia de conclusão, próxima ao final do parágrafo.",
         ondeEstaNoTexto: "Portanto, uma boa noite de sono ajuda tanto no aprendizado…",
         dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Portanto, uma boa noite de sono ajuda tanto no aprendizado”.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Portanto”. 'Portanto' é uma palavra típica de conclusão, que anuncia o fecho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Portanto”. 'Portanto' é uma palavra típica de conclusão, que anuncia o fecho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -292,7 +299,8 @@ export const aula02: AulaPortuguesV4 = {
       feedbackErro:
         "O tópico frasal precisa anunciar o assunto exato do parágrafo — nesse caso, reciclagem.",
       dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-      reensino: "📚 Vamos rever juntos: a resposta certa é “Reciclar o lixo ajuda a proteger o meio ambiente.”. Essa frase já anuncia claramente o assunto do parágrafo: reciclagem e meio ambiente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Reciclar o lixo ajuda a proteger o meio ambiente.”. Essa frase já anuncia claramente o assunto do parágrafo: reciclagem e meio ambiente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -316,7 +324,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Alguns cientistas até os comparam com chimpanzés.” não é a resposta. Tópico frasal é sempre a PRIMEIRA frase do parágrafo.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “A primeira frase, que anuncia a ideia principal”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A primeira frase, que anuncia a ideia principal”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Para que serve o desenvolvimento?",
@@ -336,16 +345,12 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Por isso, muitos pesquisadores consideram…” não é a resposta. O desenvolvimento precisa ficar ligado ao que o tópico frasal anunciou.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “desenvolvimento” — é a parte do parágrafo que vem depois do tópico frasal: explica, dá exemplos ou detalhes sobre a ideia anunciada. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Para explicar ou exemplificar a ideia do tópico frasal”. O desenvolvimento prova ou detalha a ideia anunciada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para explicar ou exemplificar a ideia do tópico frasal”. O desenvolvimento prova ou detalha a ideia anunciada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual destas é uma palavra típica de fecho?",
-        opcoes: [
-          "Portanto",
-          "Ontem",
-          "Amanhã",
-          "Golfinhos vivem só em cativeiro",
-        ],
+        opcoes: ["Portanto", "Ontem", "Amanhã", "Golfinhos vivem só em cativeiro"],
         correta: 0,
         feedbackAcerto: "📦 Isso mesmo! 'Portanto' costuma anunciar uma conclusão.",
         feedbackErro: "Palavras como 'portanto', 'por isso' e 'assim' costumam abrir o fecho.",
@@ -356,7 +361,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Golfinhos vivem só em cativeiro” não é a resposta. Palavras como 'portanto', 'por isso' e 'assim' costumam abrir o fecho.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Portanto”. 'Portanto' costuma anunciar uma conclusão. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Portanto”. 'Portanto' costuma anunciar uma conclusão. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Por que a 'etiqueta da caixa' é uma boa comparação para o tópico frasal?",
@@ -377,7 +383,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Golfinhos são peixes” não é a resposta. Pense: a etiqueta avisa o que tem na caixa, o tópico frasal avisa do que trata o parágrafo.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Porque as duas anunciam o conteúdo antes de vermos tudo”. Ambas avisam o conteúdo antes de a gente 'abrir' (ler tudo). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque as duas anunciam o conteúdo antes de vermos tudo”. Ambas avisam o conteúdo antes de a gente 'abrir' (ler tudo). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Um parágrafo sem tópico frasal costuma ficar…",
@@ -398,7 +405,8 @@ export const aula02: AulaPortuguesV4 = {
           "❌ “Os golfinhos são animais muito inteligentes.” não é a resposta. Sem o tópico frasal, o leitor demora mais para entender qual é a ideia central do parágrafo.",
         ],
         dica: "🧭 Pista de explorador: lembre o que significa “tópico frasal” — é a primeira frase do parágrafo — ela anuncia a ideia principal que vai ser desenvolvida a seguir. Use essa ideia para eliminar as alternativas que não combinam.",
-        reensino: "📚 Vamos rever juntos: a resposta certa é “Confuso, porque o leitor não sabe logo de cara qual é a ideia principal”. Você já sabe montar um parágrafo redondo. 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Confuso, porque o leitor não sabe logo de cara qual é a ideia principal”. Você já sabe montar um parágrafo redondo. 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
