@@ -71,6 +71,27 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Ã, ÃO e AM: quando cada um aparece",
+    instrucao: "O som é parecido, mas o lugar na palavra e o tipo de palavra decidem a escrita.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "ÃO no fim de substantivos e no futuro; AM só em verbos no passado",
+        explicacao: "Escrevemos ÃO no fim de palavras como MÃO, PÃO, CORAÇÃO e nos verbos do futuro: VÃO, FARÃO, CANTARÃO. Escrevemos AM no fim de verbos que já aconteceram: CANTARAM, BRINCARAM, COMERAM. Dica: se a ação já passou, é AM (sem acento).",
+        exemplos: [{"palavra":"pão","destaque":"ão","motivo":"Substantivo terminado em ÃO."},{"palavra":"cantaram","destaque":"am","motivo":"Verbo no passado: AM."},{"palavra":"cantarão","destaque":"ão","motivo":"Verbo no futuro: ÃO."}],
+        desafios: [{"molde":"brincar__","opcoes":["am","ão"],"correta":0,"frase":"Ontem as crianças brincaram na praça.","feedbackErro":"A ação já passou (ontem): termina em AM."},{"molde":"cora__","opcoes":["ção","são"],"correta":0,"frase":"Meu coração é grande.","feedbackErro":"O som /s/ antes de Ã pede Ç: CORAÇÃO."}],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "O til (~) mostra o som do nariz no meio da palavra",
+        explicacao: "O til marca o som nasal sem precisar de M ou N: MAÇÃ, IRMÃ, MANHÃ, CRISTÃO. Sem o til, a palavra muda de som e de sentido: MA-ÇÃ é diferente de MA-CA.",
+        exemplos: [{"palavra":"maçã","destaque":"ã","motivo":"Til marca o som do nariz no fim."},{"palavra":"irmã","destaque":"ã","motivo":"Feminino com til; o masculino é IRMÃO."},{"palavra":"manhã","destaque":"ã","motivo":"Til no fim + dígrafo NH no meio."}],
+        desafios: [{"molde":"irm__","opcoes":["ã","an","am"],"correta":0,"frase":"Minha irmã chegou.","feedbackErro":"No fim da palavra, o som nasal do feminino vem com til: IRMÃ."},{"molde":"m__hã","opcoes":["an","ã","am"],"correta":0,"frase":"Amanhã de manhã tem clube.","feedbackErro":"Antes de NH usamos AN: MANHÃ."}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Aurora explicou o segredo do til para o clube. Leia com atenção.",
     leitura: {

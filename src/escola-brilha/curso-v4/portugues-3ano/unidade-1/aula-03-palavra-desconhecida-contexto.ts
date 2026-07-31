@@ -89,6 +89,30 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Como a vizinhança da palavra entrega o sentido",
+    instrucao: "Em cada frase, a palavra difícil está cercada de pistas. Leia o que vem ANTES e DEPOIS dela.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "A raposa astuta enganou o galo com uma conversa esperta.",
+            explicacao: "Não sei o que é ASTUTA? A frase entrega: quem engana com conversa esperta é... esperta, malandra. Pista = 'enganou' + 'esperta'.",
+          },
+          {
+            texto: "O caminho era íngreme: subir aquele morro cansou todo mundo.",
+            explicacao: "Depois dos dois-pontos vem a explicação: ÍNGREME é muito inclinado, de subida difícil.",
+          },
+          {
+            texto: "Ele falou num tom brando, quase um sussurro, para não acordar o bebê.",
+            explicacao: "A vírgula trouxe a pista 'quase um sussurro': BRANDO aqui é suave, baixinho.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia devagar. Quando encontrar a palavra destacada, pare e pense: o que as frases ao redor dizem sobre ela?",

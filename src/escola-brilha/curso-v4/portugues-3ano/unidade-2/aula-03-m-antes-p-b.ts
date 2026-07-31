@@ -70,6 +70,20 @@ export const aula3: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A regra do M antes de P e B",
+    instrucao: "Escute o som do nariz e veja qual letra segura esse som em cada caso.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Antes de P e B, escreve-se M",
+        explicacao: "Quando o som sai pelo nariz e a letra seguinte é P ou B, escrevemos M: CAMPO, BOMBA, TAMBÉM, SIMPLES. Antes de qualquer outra consoante, usamos N: CANTO, ONDE, MUNDO, TINTA.",
+        exemplos: [{"palavra":"campo","destaque":"m","motivo":"Vem P depois: M."},{"palavra":"bomba","destaque":"m","motivo":"Vem B depois: M."},{"palavra":"canto","destaque":"n","motivo":"Vem T depois: N."}],
+        desafios: [{"molde":"ta__bém","opcoes":["m","n"],"correta":0,"frase":"Eu também vou ao clube.","feedbackErro":"Antes de B é sempre M."},{"molde":"mu__do","opcoes":["n","m"],"correta":0,"frase":"O mundo é grande.","feedbackErro":"Antes de D usamos N, não M."}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Aurora reconstruiu a regra com o clube. Leia com atenção.",
     leitura: {

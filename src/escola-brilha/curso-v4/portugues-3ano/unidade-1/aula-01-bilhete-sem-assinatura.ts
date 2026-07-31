@@ -90,6 +90,30 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Pista escrita → conclusão de detetive",
+    instrucao: "Leia cada frase e veja como o detetive tira uma conclusão que NÃO está escrita com todas as letras.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "A mochila de Marina estava pingando no corredor.",
+            explicacao: "O texto não diz 'choveu'. Mas se a mochila pinga, a pista leva à conclusão: ela veio da chuva. Isso é INFERIR.",
+          },
+          {
+            texto: "Theo bocejou três vezes durante a reunião do clube.",
+            explicacao: "Ninguém escreveu 'Theo está com sono'. O bocejo é a pista; o sono é a conclusão.",
+          },
+          {
+            texto: "O prato estava vazio e o gato lambia os bigodes.",
+            explicacao: "Duas pistas juntas (prato vazio + bigodes lambidos) apontam para uma só conclusão: o gato comeu.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia com atenção de detetive. Repare em cada detalhe: eles são as pistas que vão te ajudar a resolver o mistério.",

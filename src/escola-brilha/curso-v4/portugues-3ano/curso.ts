@@ -32,6 +32,44 @@ const curso: CursoPortugues = {
   corSecundaria: "#0b1020",
   tipoAula: "portugues",
   unidades,
+  praticasCurriculares: [
+    {
+      emoji: "✏️",
+      titulo: "Prática de escrita diária",
+      descricao:
+        "Aos 8 anos a criança já escreve frases: agora precisa escrever TODO DIA em papel para virar autora de parágrafos e de textos com gênero definido.",
+      itens: [
+        "Caderno: escrever 3 frases próprias sobre o dia e juntá-las em um parágrafo.",
+        "Ditado: 6 palavras da regra da semana (S/SS/Ç, R/RR, acento) + 1 frase com travessão.",
+        "Um gênero de verdade por semana: bilhete, carta, receita, anúncio ou relato.",
+        "Revisão obrigatória: reler, conferir maiúscula, ponto, acento e passar a limpo.",
+      ],
+    },
+    {
+      emoji: "🗣️",
+      titulo: "Conversa e oralidade em sala",
+      descricao:
+        "O 3º ano precisa aprender a defender ideia com argumento e a apresentar trabalho para a turma — é a base da produção de texto escrita.",
+      itens: [
+        "Roda de conversa: dar opinião e sustentar com um porquê.",
+        "Reconto: recontar a leitura na ordem, com personagem, conflito e desfecho.",
+        "Entrevista: preparar 4 perguntas, entrevistar alguém da família e anotar.",
+        "Apresentação: expor uma pesquisa curta para a turma e ouvir a dos colegas.",
+      ],
+    },
+    {
+      emoji: "📖",
+      titulo: "Leitura em voz alta todo dia",
+      descricao:
+        "A meta do 3º ano é ~90 palavras por minuto com entonação. Isso se conquista relendo o mesmo trecho, não lendo textos novos toda hora.",
+      itens: [
+        "Reler 3 vezes o mesmo trecho e comparar o tempo, respeitando vírgula e ponto.",
+        "Ler diálogo em voz alta fazendo a voz de cada personagem.",
+        "Biblioteca: um livro por semana, com ficha de 3 linhas sobre o que achou.",
+        "Ler notícia curta do dia e dizer se cada frase é fato ou opinião.",
+      ],
+    },
+  ],
 };
 
 export default curso;

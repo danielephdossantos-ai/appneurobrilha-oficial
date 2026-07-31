@@ -84,6 +84,27 @@ export const aula2: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Quatro letras para um som só",
+    instrucao: "A posição na palavra é que decide a letra. Leia, observe os exemplos e resolva os desafios.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Entre vogais: SS faz /s/ e S faz /z/",
+        explicacao: "Entre duas vogais, um S sozinho vira som de /z/ (CASA, ROSA). Para manter o som /s/ entre vogais, dobramos: PÁSSARO, PASSEIO, PROFESSORA.",
+        exemplos: [{"palavra":"passeio","destaque":"ss","motivo":"Som /s/ entre vogais: SS."},{"palavra":"casa","destaque":"s","motivo":"Um S entre vogais soa /z/."},{"palavra":"pássaro","destaque":"ss","motivo":"Som /s/ entre A e A: SS."}],
+        desafios: [{"molde":"profe__ora","opcoes":["ss","s","ç"],"correta":0,"frase":"A professora leu o bilhete.","feedbackErro":"Som /s/ entre vogais: dois S."},{"molde":"ca__a","opcoes":["s","ss"],"correta":0,"frase":"A casa do detetive é azul.","feedbackErro":"Aqui o som é /z/: um S só."}],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Ç com A, O, U — C com E, I",
+        explicacao: "O cedilha (Ç) só aparece antes de A, O e U: CAÇA, AÇÚCAR, CORAÇÃO. Antes de E e I, quem faz o som /s/ é o C: CEBOLA, CIDADE, CINEMA. Não existe ÇE nem ÇI em português.",
+        exemplos: [{"palavra":"caça","destaque":"ç","motivo":"Antes de A: Ç."},{"palavra":"açúcar","destaque":"ç","motivo":"Antes de U: Ç."},{"palavra":"cidade","destaque":"c","motivo":"Antes de I: C, nunca Ç."}],
+        desafios: [{"molde":"cora__ão","opcoes":["ç","ss","s"],"correta":0,"frase":"O coração bateu forte.","feedbackErro":"Som /s/ antes de Ã/O: usamos Ç."},{"molde":"__inema","opcoes":["c","ç","ss"],"correta":0,"frase":"Fomos ao cinema no sábado.","feedbackErro":"Antes de I nunca é Ç: é C."}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Aurora reuniu as provas do caso num mapa sonoro. Leia com atenção.",
     leitura: {

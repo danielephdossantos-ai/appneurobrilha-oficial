@@ -9,6 +9,7 @@ import {
   type ResultadoSondagem,
 } from "./sondagem-inicial";
 import { ITENS_SONDAGEM_2ANO, avaliarSondagem2ano } from "./sondagem-2ano";
+import { ITENS_SONDAGEM_3ANO, avaliarSondagem3ano } from "./sondagem-3ano";
 
 export type ConjuntoSondagem = {
   itens: ItemSondagem[];
@@ -28,6 +29,12 @@ export const SONDAGENS: Record<string, ConjuntoSondagem> = {
     avaliar: avaliarSondagem2ano,
     chamada:
       "São 8 perguntas faladas, de uns 3 minutinhos. Ninguém reprova — é só para saber em qual ala da Biblioteca você começa.",
+  },
+  "portugues-3ano": {
+    itens: ITENS_SONDAGEM_3ANO,
+    avaliar: avaliarSondagem3ano,
+    chamada:
+      "São 8 perguntas faladas, de uns 3 minutos. Ninguém reprova — é só para o clube saber por qual caso você começa a investigar.",
   },
 };
 

@@ -88,6 +88,17 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A batida da palavra no trava-língua",
+    instrucao: "Bata palma em cada sílaba e veja onde está a sílaba FORTE. É essa batida que faz o trava-língua embolar.",
+    blocos: [
+      {
+        tipo: "silabaTonica",
+        itens: [{"palavra":"PRATO","silabas":["PRA","TO"],"tonica":0,"explicacao":"Batida forte na primeira: PRA-to. Duas sílabas com encontro consonantal PR."},{"palavra":"TRIGO","silabas":["TRI","GO"],"tonica":0,"explicacao":"TRI-go: forte na primeira. Repare que TR e PR se parecem — é aí que a língua trava."},{"palavra":"PARALELEPÍPEDO","silabas":["PA","RA","LE","LE","PÍ","PE","DO"],"tonica":4,"explicacao":"Sete sílabas! A forte é PÍ, marcada pelo acento. Ler devagar antes de acelerar."}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia em voz alta, bem devagar primeiro, depois tentando ficar mais rápido — sem embolar a língua!",

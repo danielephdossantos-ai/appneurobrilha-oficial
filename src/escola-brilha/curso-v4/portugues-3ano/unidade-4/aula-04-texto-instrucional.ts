@@ -85,6 +85,30 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "As duas partes de um texto que ensina",
+    instrucao: "Todo texto instrucional tem o que se usa e o que se faz — nessa ordem.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "Ingredientes: 2 ovos, 1 xícara de fubá, 1 xícara de leite.",
+            explicacao: "MATERIAIS/INGREDIENTES: lista com quantidade certa. Vem sempre antes do modo de fazer.",
+          },
+          {
+            texto: "Misture o fubá com o leite e depois acrescente os ovos.",
+            explicacao: "MODO DE FAZER, passo 1: verbo de ordem no começo ('misture') e ordem clara com 'depois'.",
+          },
+          {
+            texto: "Leve ao forno por 30 minutos e sirva morno.",
+            explicacao: "MODO DE FAZER, último passo: continua com verbos de ordem e diz o tempo exato.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Vamos ler a regra do jogo 'Corrida dos Dados', escrita pelo Clube.",
     leitura: {

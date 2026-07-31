@@ -82,6 +82,30 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Sentido próprio × sentido figurado",
+    instrucao: "A mesma palavra pode dizer o que é de verdade ou criar uma imagem na cabeça do leitor.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "O vento cochichou um segredo na janela.",
+            explicacao: "SENTIDO FIGURADO: vento não fala. O poeta usa 'cochichou' para dar a ideia de som baixinho.",
+          },
+          {
+            texto: "A minha avó cochichou um segredo no meu ouvido.",
+            explicacao: "SENTIDO PRÓPRIO: aqui alguém realmente falou baixinho. É o sentido comum da palavra.",
+          },
+          {
+            texto: "Meu coração é um girassol atrás do sol.",
+            explicacao: "SENTIDO FIGURADO por comparação: o coração não é flor — a imagem mostra alguém que procura alegria.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o poema prestando atenção nas frases que não podem ser lidas ao pé da letra.",

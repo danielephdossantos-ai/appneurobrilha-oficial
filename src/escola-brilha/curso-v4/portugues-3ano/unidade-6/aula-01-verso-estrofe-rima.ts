@@ -82,6 +82,17 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O ouvido do poeta: achar a rima",
+    instrucao: "Escute o FIM de cada palavra. Toque na que termina com o mesmo som da palavra-base.",
+    blocos: [
+      {
+        tipo: "rimas",
+        itens: [{"palavraBase":"noite","opcoes":[{"palavra":"açoite","rima":true},{"palavra":"noiva","rima":false},{"palavra":"nota","rima":false}],"terminacao":"-OITE"},{"palavraBase":"estrela","opcoes":[{"palavra":"janela","rima":true},{"palavra":"estrada","rima":false},{"palavra":"estilo","rima":false}],"terminacao":"-ELA"},{"palavraBase":"luar","opcoes":[{"palavra":"cantar","rima":true},{"palavra":"lugar","rima":true},{"palavra":"lua","rima":false}],"terminacao":"-AR"}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o poema em voz alta, marcando o ritmo com a mão. Repare onde termina cada verso e onde os sons se repetem.",

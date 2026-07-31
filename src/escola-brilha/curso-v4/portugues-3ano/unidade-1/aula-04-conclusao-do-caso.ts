@@ -88,6 +88,30 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Juntar pistas até fechar o caso",
+    instrucao: "Um detetive só conclui quando tem pistas suficientes. Veja a diferença entre chute, pista e conclusão.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "A vitrine estava vazia e a porta, aberta.",
+            explicacao: "PISTAS. Duas informações que estão escritas no texto, sem opinião nenhuma.",
+          },
+          {
+            texto: "Alguém entrou e levou a joia da vitrine.",
+            explicacao: "CONCLUSÃO: nasce das pistas juntas (vitrine vazia + porta aberta). O texto não diz, mas autoriza.",
+          },
+          {
+            texto: "O ladrão devia ser um homem muito alto.",
+            explicacao: "CHUTE. Nenhuma pista do texto fala de altura — conclusão sem prova não vale no clube.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Este é o relatório completo do caso. Leia com toda a atenção de detetive: você vai precisar de CADA pista.",

@@ -90,6 +90,30 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Fato, opinião e as palavras que entregam",
+    instrucao: "Leia cada frase e repare nas palavras que mostram se é fato ou opinião.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "O jogo terminou 3 a 1 no domingo.",
+            explicacao: "FATO: pode ser conferido por qualquer pessoa. Tem número, dia, resultado.",
+          },
+          {
+            texto: "Eu acho que aquele foi o jogo mais bonito do ano.",
+            explicacao: "OPINIÃO: 'eu acho' e 'mais bonito' são marcas de quem avalia. Outra pessoa pode discordar.",
+          },
+          {
+            texto: "O time treinou muito e, na minha opinião, mereceu ganhar.",
+            explicacao: "FRASE MISTURADA: a primeira parte é fato ('treinou'), a segunda é opinião ('na minha opinião... mereceu').",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Vamos ler o depoimento completo da torcedora Bia sobre o jogo.",
     leitura: {

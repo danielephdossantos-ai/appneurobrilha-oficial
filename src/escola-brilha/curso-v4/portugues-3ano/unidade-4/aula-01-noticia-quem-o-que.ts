@@ -101,6 +101,30 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Manchete, lide e corpo da notícia",
+    instrucao: "Compare as três partes: cada uma tem uma função diferente na notícia.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "Gato é resgatado em árvore da praça.",
+            explicacao: "MANCHETE: uma frase curta que resume o fato mais importante. Verbo no presente e nada de opinião.",
+          },
+          {
+            texto: "Na tarde de sábado, bombeiros retiraram um gato de uma árvore na Praça Central, a pedido de vizinhos.",
+            explicacao: "LIDE: responde de uma vez QUEM, O QUE, QUANDO e ONDE. É o primeiro parágrafo da notícia.",
+          },
+          {
+            texto: "Segundo os vizinhos, o gato subiu fugindo de um cachorro e ficou preso por duas horas.",
+            explicacao: "CORPO: acrescenta detalhes e explica COMO e POR QUE, ouvindo quem estava lá.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Vamos ler a notícia que a repórter Ana escreveu sobre o caso do gato.",
     leitura: {
