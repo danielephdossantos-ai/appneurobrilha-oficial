@@ -43,7 +43,10 @@ export const aula03: AulaPortuguesV4 = {
       ],
       pergunta: "Sobre o que essa cena de teatro provavelmente vai tratar?",
       hipoteses: [
-        { texto: "Um grupo de exploradores discutindo um plano depois de se perderem.", imagemUrl: criancasGrupo },
+        {
+          texto: "Um grupo de exploradores discutindo um plano depois de se perderem.",
+          imagemUrl: criancasGrupo,
+        },
         { texto: "Uma receita de bolo de aniversário.", imagemUrl: papel },
         { texto: "Uma lista de números da tabuada.", imagemUrl: lapis },
       ],
@@ -52,6 +55,7 @@ export const aula03: AulaPortuguesV4 = {
         "🔍 Isso! O título 'O Acampamento Perdido' e as máscaras de personagens são pista de uma cena com um grupo discutindo um problema.",
       feedbackErro:
         "Releia o título: 'Perdido' é pista de um problema a resolver, e as máscaras mostram que é um texto com personagens falando entre si.",
+      dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -60,25 +64,29 @@ export const aula03: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "cena",
-        explicacao: "É uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena.",
+        explicacao:
+          "É uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena.",
         exemplo: "'Cena 1 — Dentro da tenda, ao entardecer.'",
         imagemUrl: bau,
       },
       {
         palavra: "rubrica",
-        explicacao: "É a instrução escrita ENTRE PARÊNTESES (ou em itálico) que diz como o personagem age, se move ou sente — não é fala.",
+        explicacao:
+          "É a instrução escrita ENTRE PARÊNTESES (ou em itálico) que diz como o personagem age, se move ou sente — não é fala.",
         exemplo: "'ZECA: (olhando o mapa, preocupado) Estamos perdidos.'",
         imagemUrl: papel,
       },
       {
         palavra: "personagem",
-        explicacao: "É quem vive a história dentro da peça. No texto teatral, o nome do personagem vem antes de cada fala, geralmente em letra maiúscula.",
+        explicacao:
+          "É quem vive a história dentro da peça. No texto teatral, o nome do personagem vem antes de cada fala, geralmente em letra maiúscula.",
         exemplo: "'AURORA: Calma, eu tenho uma ideia.'",
         imagemUrl: criancasGrupo,
       },
       {
         palavra: "diálogo",
-        explicacao: "É a conversa entre os personagens — no teatro, quase todo o texto é feito de diálogo, sem narrador contando por fora.",
+        explicacao:
+          "É a conversa entre os personagens — no teatro, quase todo o texto é feito de diálogo, sem narrador contando por fora.",
         exemplo: "As falas de ZECA e AURORA, uma respondendo a outra, formam o diálogo da cena.",
         imagemUrl: livro,
       },
@@ -113,22 +121,41 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! A indicação de cena diz: 'Dentro da tenda, ao entardecer'.",
         feedbackErro: "Releia a primeira linha da cena — ela indica o lugar e o momento do dia.",
         ondeEstaNoTexto: "CENA 1 — Dentro da tenda, ao entardecer.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “CENA 1 — Dentro da tenda, ao entardecer”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dentro da tenda, ao entardecer”. A indicação de cena diz: 'Dentro da tenda, ao entardecer'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a rubrica '(olhando o mapa, preocupado)' indica sobre Zeca?",
-        opcoes: ["Como ele deve agir e se sentir ao falar", "O que ele vai comer depois", "Quantos anos ele tem"],
+        opcoes: [
+          "Como ele deve agir e se sentir ao falar",
+          "O que ele vai comer depois",
+          "Quantos anos ele tem",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Boa! Rubricas indicam gesto e emoção do personagem — aqui, Zeca está preocupado, olhando o mapa.",
-        feedbackErro: "Rubrica é instrução de cena: ela diz COMO o personagem age ou se sente, não é fala dele.",
+        feedbackAcerto:
+          "🔍 Boa! Rubricas indicam gesto e emoção do personagem — aqui, Zeca está preocupado, olhando o mapa.",
+        feedbackErro:
+          "Rubrica é instrução de cena: ela diz COMO o personagem age ou se sente, não é fala dele.",
         ondeEstaNoTexto: "ZECA: (olhando o mapa, preocupado)",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “ZECA: (olhando o mapa, preocupado)”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Como ele deve agir e se sentir ao falar”. Rubricas indicam gesto e emoção do personagem — aqui, Zeca está preocupado, olhando o mapa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que Aurora não estava preocupada como Zeca?",
-        opcoes: ["Porque ela marcou o caminho com pedrinhas", "Porque ela tinha um mapa novo", "Porque ela não sabia que estavam perdidos"],
+        opcoes: [
+          "Porque ela marcou o caminho com pedrinhas",
+          "Porque ela tinha um mapa novo",
+          "Porque ela não sabia que estavam perdidos",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Exato! 'Eu marquei o caminho com pedrinhas quando saímos da fonte.'",
         feedbackErro: "Releia a fala de Aurora — ela explica o motivo de estar tranquila.",
         ondeEstaNoTexto: "Eu marquei o caminho com pedrinhas quando saímos da fonte.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Eu marquei o caminho com pedrinhas quando saímos da fonte”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque ela marcou o caminho com pedrinhas”. 'Eu marquei o caminho com pedrinhas quando saímos da fonte.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -141,7 +168,11 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: ["Um", "Dois", "Quatro"],
         correta: 1,
         feedbackAcerto: "🔍 Isso! Apenas Zeca e Aurora falam — dois personagens.",
-        feedbackErro: "Conte os nomes que aparecem antes de cada fala: apenas dois nomes diferentes.",
+        feedbackErro:
+          "Conte os nomes que aparecem antes de cada fala: apenas dois nomes diferentes.",
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dois”. Apenas Zeca e Aurora falam — dois personagens. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que diferencia o texto teatral de um conto contado por narrador?",
@@ -151,8 +182,13 @@ export const aula03: AulaPortuguesV4 = {
           "O texto teatral é sempre em forma de poema com rima",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! No teatro, quem 'conta' é a própria fala dos personagens, apoiada pelas rubricas — não existe narrador contando por fora.",
-        feedbackErro: "Pense: no conto, um narrador conta o que acontece; no teatro, os PRÓPRIOS personagens falam, e as rubricas orientam gestos.",
+        feedbackAcerto:
+          "🔍 Isso! No teatro, quem 'conta' é a própria fala dos personagens, apoiada pelas rubricas — não existe narrador contando por fora.",
+        feedbackErro:
+          "Pense: no conto, um narrador conta o que acontece; no teatro, os PRÓPRIOS personagens falam, e as rubricas orientam gestos.",
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No teatro, os personagens falam direto, sem narrador contando por fora, e as rubricas guiam a ação”. No teatro, quem 'conta' é a própria fala dos personagens, apoiada pelas rubricas — não existe narrador contando por fora. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -162,13 +198,28 @@ export const aula03: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Do primeiro passo ao último.",
       itens: [
-        { id: "p1", texto: "Ler a cena silenciosamente e escolher quem faz cada personagem.", imagemUrl: livro },
-        { id: "p2", texto: "Ler as rubricas para entender como cada personagem deve agir.", imagemUrl: papel },
-        { id: "p3", texto: "Encenar o diálogo em voz alta, seguindo as rubricas combinadas.", imagemUrl: professora },
+        {
+          id: "p1",
+          texto: "Ler a cena silenciosamente e escolher quem faz cada personagem.",
+          imagemUrl: livro,
+        },
+        {
+          id: "p2",
+          texto: "Ler as rubricas para entender como cada personagem deve agir.",
+          imagemUrl: papel,
+        },
+        {
+          id: "p3",
+          texto: "Encenar o diálogo em voz alta, seguindo as rubricas combinadas.",
+          imagemUrl: professora,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🔍 Isso mesmo! Primeiro escolhemos os papéis, depois entendemos as rubricas, e só então encenamos.",
-      feedbackErro: "Pense na ordem: primeiro escolher papéis, depois entender as instruções de cena (rubricas), e só então encenar.",
+      feedbackAcerto:
+        "🔍 Isso mesmo! Primeiro escolhemos os papéis, depois entendemos as rubricas, e só então encenamos.",
+      feedbackErro:
+        "Pense na ordem: primeiro escolher papéis, depois entender as instruções de cena (rubricas), e só então encenar.",
+      dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -193,14 +244,25 @@ export const aula03: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! 'Na trilha, sob as primeiras estrelas.'",
         feedbackErro: "Releia a primeira linha da cena — ela indica onde e quando a cena acontece.",
         ondeEstaNoTexto: "CENA 2 — Na trilha, sob as primeiras estrelas.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “CENA 2 — Na trilha, sob as primeiras estrelas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Na trilha, sob as primeiras estrelas”. 'Na trilha, sob as primeiras estrelas.'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Como Mira ajuda o grupo a se orientar?",
-        opcoes: ["Usando uma estrela como referência no céu", "Usando um celular", "Perguntando a um morador"],
+        opcoes: [
+          "Usando uma estrela como referência no céu",
+          "Usando um celular",
+          "Perguntando a um morador",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Boa! Mira aponta a estrela mais brilhante perto do acampamento base.",
         feedbackErro: "Releia a fala de Mira — ela indica algo no céu para se orientar.",
-        ondeEstaNoTexto: "Vejam! Aquela estrela mais brilhante sempre aparece perto do acampamento base.",
+        ondeEstaNoTexto:
+          "Vejam! Aquela estrela mais brilhante sempre aparece perto do acampamento base.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Vejam! Aquela estrela mais brilhante sempre aparece perto do acampamento base”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Usando uma estrela como referência no céu”. Mira aponta a estrela mais brilhante perto do acampamento base. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -217,7 +279,11 @@ export const aula03: AulaPortuguesV4 = {
       opcoes: ["Fala de personagem", "Rubrica", "Título de cena"],
       correta: 1,
       feedbackAcerto: "🔍 Isso! Instruções entre parênteses são rubricas, não falas.",
-      feedbackErro: "O que vem entre parênteses e indica gesto ou emoção é RUBRICA, não a fala do personagem.",
+      feedbackErro:
+        "O que vem entre parênteses e indica gesto ou emoção é RUBRICA, não a fala do personagem.",
+      dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Rubrica”. Instruções entre parênteses são rubricas, não falas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -225,24 +291,69 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é uma rubrica no texto teatral?",
-        opcoes: ["A fala principal da peça", "A instrução de gesto ou emoção entre parênteses", "O nome da peça"],
+        opcoes: [
+          "A fala principal da peça",
+          "A instrução de gesto ou emoção entre parênteses",
+          "O nome da peça",
+          "Na cidade, de manhã",
+        ],
         correta: 1,
         feedbackAcerto: "🔍 Isso! Rubrica orienta a atuação, não é fala.",
-        feedbackErro: "Rubrica é a instrução ENTRE PARÊNTESES que diz como agir — não é o que o personagem fala.",
+        feedbackErro:
+          "Rubrica é a instrução ENTRE PARÊNTESES que diz como agir — não é o que o personagem fala.",
+        feedbackOpcoes: [
+          "❌ “A fala principal da peça” não é a resposta. Rubrica é a instrução ENTRE PARÊNTESES que diz como agir — não é o que o personagem fala.",
+          null,
+          "❌ “O nome da peça” não é a resposta. Rubrica é a instrução ENTRE PARÊNTESES que diz como agir — não é o que o personagem fala.",
+          "❌ “Na cidade, de manhã” não é a resposta. Rubrica é a instrução ENTRE PARÊNTESES que diz como agir — não é o que o personagem fala.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “rubrica” — é a instrução escrita ENTRE PARÊNTESES (ou em itálico) que diz como o personagem age, se move ou sente — não é fala. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A instrução de gesto ou emoção entre parênteses”. Rubrica orienta a atuação, não é fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Como sabemos quem está falando no texto teatral?",
-        opcoes: ["Pelo nome do personagem escrito antes da fala", "Pela cor da letra", "Não é possível saber"],
+        opcoes: [
+          "Pelo nome do personagem escrito antes da fala",
+          "Pela cor da letra",
+          "Não é possível saber",
+          "No rio, à noite",
+        ],
         correta: 0,
         feedbackAcerto: "🔍 Correto! O nome do personagem vem antes de cada fala.",
         feedbackErro: "No texto teatral, o NOME do personagem aparece antes de cada fala dele.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Pela cor da letra” não é a resposta. No texto teatral, o NOME do personagem aparece antes de cada fala dele.",
+          "❌ “Não é possível saber” não é a resposta. No texto teatral, o NOME do personagem aparece antes de cada fala dele.",
+          "❌ “No rio, à noite” não é a resposta. No texto teatral, o NOME do personagem aparece antes de cada fala dele.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Pelo nome do personagem escrito antes da fala”. O nome do personagem vem antes de cada fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que geralmente indica o início de uma nova cena?",
-        opcoes: ["Mudança de lugar, tempo ou personagens presentes", "Uma nova capa de livro", "O fim da peça"],
+        opcoes: [
+          "Mudança de lugar, tempo ou personagens presentes",
+          "Uma nova capa de livro",
+          "O fim da peça",
+          "O que ele vai comer depois",
+        ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! Cena nova costuma indicar mudança de lugar, tempo ou quem está presente.",
-        feedbackErro: "Uma nova cena aparece quando muda o lugar, o tempo, ou os personagens envolvidos.",
+        feedbackAcerto:
+          "🔍 Isso! Cena nova costuma indicar mudança de lugar, tempo ou quem está presente.",
+        feedbackErro:
+          "Uma nova cena aparece quando muda o lugar, o tempo, ou os personagens envolvidos.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Uma nova capa de livro” não é a resposta. Uma nova cena aparece quando muda o lugar, o tempo, ou os personagens envolvidos.",
+          "❌ “O fim da peça” não é a resposta. Uma nova cena aparece quando muda o lugar, o tempo, ou os personagens envolvidos.",
+          "❌ “O que ele vai comer depois” não é a resposta. Uma nova cena aparece quando muda o lugar, o tempo, ou os personagens envolvidos.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mudança de lugar, tempo ou personagens presentes”. Cena nova costuma indicar mudança de lugar, tempo ou quem está presente. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual a principal diferença entre teatro e conto?",
@@ -250,10 +361,22 @@ export const aula03: AulaPortuguesV4 = {
           "No teatro os personagens falam direto, sem narrador contando por fora",
           "O teatro não tem personagens",
           "O conto só pode ser lido em voz alta",
+          "Quantos anos ele tem",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Exato! No teatro, a história avança pelas falas e rubricas dos próprios personagens.",
-        feedbackErro: "No teatro não existe narrador contando por fora — quem 'conta' é o diálogo dos personagens.",
+        feedbackAcerto:
+          "🔍 Exato! No teatro, a história avança pelas falas e rubricas dos próprios personagens.",
+        feedbackErro:
+          "No teatro não existe narrador contando por fora — quem 'conta' é o diálogo dos personagens.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O teatro não tem personagens” não é a resposta. No teatro não existe narrador contando por fora — quem 'conta' é o diálogo dos personagens.",
+          "❌ “O conto só pode ser lido em voz alta” não é a resposta. No teatro não existe narrador contando por fora — quem 'conta' é o diálogo dos personagens.",
+          "❌ “Quantos anos ele tem” não é a resposta. No teatro não existe narrador contando por fora — quem 'conta' é o diálogo dos personagens.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No teatro os personagens falam direto, sem narrador contando por fora”. No teatro, a história avança pelas falas e rubricas dos próprios personagens. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Em 'O Acampamento Perdido', o que ajudou o grupo a não se perder de vez?",
@@ -261,17 +384,32 @@ export const aula03: AulaPortuguesV4 = {
           "As pedrinhas marcadas por Aurora e a estrela apontada por Mira",
           "Um mapa comprado na cidade",
           "Um aplicativo de celular",
+          "Porque ela tinha um mapa novo",
         ],
         correta: 0,
-        feedbackAcerto: "🔍 Isso! Observação e planejamento dos próprios exploradores resolveram o problema. Cena decifrada! 🌟",
-        feedbackErro: "Releia as duas cenas: foram as pedrinhas de Aurora e a estrela apontada por Mira que ajudaram o grupo.",
+        feedbackAcerto:
+          "🔍 Isso! Observação e planejamento dos próprios exploradores resolveram o problema. Cena decifrada! 🌟",
+        feedbackErro:
+          "Releia as duas cenas: foram as pedrinhas de Aurora e a estrela apontada por Mira que ajudaram o grupo.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Um mapa comprado na cidade” não é a resposta. Releia as duas cenas: foram as pedrinhas de Aurora e a estrela apontada por Mira que ajudaram o grupo.",
+          "❌ “Um aplicativo de celular” não é a resposta. Releia as duas cenas: foram as pedrinhas de Aurora e a estrela apontada por Mira que ajudaram o grupo.",
+          "❌ “Porque ela tinha um mapa novo” não é a resposta. Releia as duas cenas: foram as pedrinhas de Aurora e a estrela apontada por Mira que ajudaram o grupo.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “cena” — é uma parte da peça de teatro, geralmente marcada por uma mudança de lugar, tempo ou personagens em cena. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As pedrinhas marcadas por Aurora e a estrela apontada por Mira”. Observação e planejamento dos próprios exploradores resolveram o problema. Cena decifrada! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
   momento11_missaoFamilia: {
     titulo: "🏠 Missão: encenando em casa",
-    materiais: ["O texto da cena 'O Acampamento Perdido'", "Objetos da casa para fazer de cenário (opcional)"],
+    materiais: [
+      "O texto da cena 'O Acampamento Perdido'",
+      "Objetos da casa para fazer de cenário (opcional)",
+    ],
     passos: [
       "1) Escolham quem faz cada personagem: Zeca, Aurora e Mira.",
       "2) Leiam as rubricas juntos antes de começar, combinando os gestos.",

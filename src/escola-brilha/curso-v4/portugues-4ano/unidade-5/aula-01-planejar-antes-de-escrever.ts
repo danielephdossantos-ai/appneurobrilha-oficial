@@ -53,6 +53,7 @@ export const aula01: AulaPortuguesV4 = {
         "🧭 Isso! Bússola e mapa evitam que o explorador se perca. Um esquema de escrita faz o mesmo pelo seu texto.",
       feedbackErro:
         "Pense: sem bússola, o explorador anda em círculos. Sem plano, o texto também 'anda em círculos' e se perde.",
+      dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -63,14 +64,16 @@ export const aula01: AulaPortuguesV4 = {
         palavra: "esquema",
         explicacao:
           "É um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder.",
-        exemplo: "Um esquema pode ter só 3 linhas: 'início: apresentar o problema / meio: explicar como resolvi / fim: o resultado'.",
+        exemplo:
+          "Um esquema pode ter só 3 linhas: 'início: apresentar o problema / meio: explicar como resolvi / fim: o resultado'.",
         imagemUrl: papel,
       },
       {
         palavra: "leitor",
         explicacao:
           "É a pessoa para quem você escreve. Pensar nela muda o texto: um bilhete para o colega é diferente de um relatório para a diretora.",
-        exemplo: "Se o leitor é uma criança pequena, uso palavras simples; se é um adulto, posso usar palavras mais técnicas.",
+        exemplo:
+          "Se o leitor é uma criança pequena, uso palavras simples; se é um adulto, posso usar palavras mais técnicas.",
         imagemUrl: menina,
       },
     ],
@@ -85,7 +88,8 @@ export const aula01: AulaPortuguesV4 = {
         frases: [
           {
             texto: "Para quem escrevo? (o leitor)",
-            explicacao: "Um colega, a família, a turma inteira, um jornal da escola — cada leitor pede um jeito de escrever.",
+            explicacao:
+              "Um colega, a família, a turma inteira, um jornal da escola — cada leitor pede um jeito de escrever.",
           },
           {
             texto: "O que quero dizer? (a ideia principal)",
@@ -126,6 +130,9 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧭 Isso! Ele pensou no leitor: o mural da escola.",
         feedbackErro: "Releia o primeiro tópico do esquema: 'Para quem'.",
         ondeEstaNoTexto: "Para quem: vou escrever um texto para o mural da escola…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Para quem: vou escrever um texto para o mural da escola”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para o mural da escola”. Ele pensou no leitor: o mural da escola. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é a ideia principal do texto de Rafael?",
@@ -138,6 +145,9 @@ export const aula01: AulaPortuguesV4 = {
         feedbackAcerto: "🧭 Exato! A ideia principal está no segundo tópico.",
         feedbackErro: "Veja o que ele escreveu em 'Ideia principal'.",
         ondeEstaNoTexto: "…tirar leite de vaca pela primeira vez, na fazenda do meu avô.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “tirar leite de vaca pela primeira vez, na fazenda do meu avô”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Tirar leite de vaca pela primeira vez”. A ideia principal está no segundo tópico. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quantas partes tem a ordem que Rafael planejou?",
@@ -145,7 +155,11 @@ export const aula01: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🧭 Isso! Ele numerou de 1 a 4 na 'Ordem'.",
         feedbackErro: "Conte os itens numerados no terceiro tópico do esquema.",
-        ondeEstaNoTexto: "Ordem: 1) chegada… 2) o avô ensinando… 3) minha primeira tentativa… 4) o gosto do leite.",
+        ondeEstaNoTexto:
+          "Ordem: 1) chegada… 2) o avô ensinando… 3) minha primeira tentativa… 4) o gosto do leite.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Ordem: 1) chegada… 2) o avô ensinando… 3) minha primeira tentativa… 4) o gosto do leite”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Quatro”. Ele numerou de 1 a 4 na 'Ordem'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -161,8 +175,13 @@ export const aula01: AulaPortuguesV4 = {
           "Porque não pensou em nada antes",
         ],
         correta: 0,
-        feedbackAcerto: "🧭 Isso! O esquema é o mapa: quando ele já existe, escrever fica muito mais rápido e claro.",
-        feedbackErro: "Releia a última frase do texto: o que o esquema já tinha resolvido antes de ele escrever?",
+        feedbackAcerto:
+          "🧭 Isso! O esquema é o mapa: quando ele já existe, escrever fica muito mais rápido e claro.",
+        feedbackErro:
+          "Releia a última frase do texto: o que o esquema já tinha resolvido antes de ele escrever?",
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque já sabia o que ia dizer e em que ordem”. O esquema é o mapa: quando ele já existe, escrever fica muito mais rápido e claro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que mudaria no texto se o leitor fosse só o avô, e não a escola inteira?",
@@ -173,23 +192,43 @@ export const aula01: AulaPortuguesV4 = {
         ],
         correta: 1,
         feedbackAcerto: "🧭 Certo! Pensar no leitor muda o que precisa (ou não) ser explicado.",
-        feedbackErro: "Pense: para um estranho, é preciso explicar mais coisas do que para alguém que já conhece a história.",
+        feedbackErro:
+          "Pense: para um estranho, é preciso explicar mais coisas do que para alguém que já conhece a história.",
+        dica: "🧭 Pista de explorador: lembre o que significa “leitor” — é a pessoa para quem você escreve. Pensar nela muda o texto: um bilhete para o colega é diferente de um relatório para a diretora. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Rafael poderia usar detalhes mais íntimos, sem precisar explicar quem é o avô”. Certo! Pensar no leitor muda o que precisa (ou não) ser explicado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao: "Organize as etapas do planejamento de um texto, na ordem certa de um escritor experiente.",
+    instrucao:
+      "Organize as etapas do planejamento de um texto, na ordem certa de um escritor experiente.",
     bloco: {
       instrucao: "Primeiro se pensa, depois se organiza, só então se escreve.",
       itens: [
-        { id: "p1", texto: "Decidir para quem vou escrever e qual é a ideia principal.", imagemUrl: bussola },
-        { id: "p2", texto: "Fazer um esquema em tópicos, colocando as partes em ordem.", imagemUrl: papel },
-        { id: "p3", texto: "Escrever o texto completo, seguindo o esquema como guia.", imagemUrl: lapis },
+        {
+          id: "p1",
+          texto: "Decidir para quem vou escrever e qual é a ideia principal.",
+          imagemUrl: bussola,
+        },
+        {
+          id: "p2",
+          texto: "Fazer um esquema em tópicos, colocando as partes em ordem.",
+          imagemUrl: papel,
+        },
+        {
+          id: "p3",
+          texto: "Escrever o texto completo, seguindo o esquema como guia.",
+          imagemUrl: lapis,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3"],
-      feedbackAcerto: "🧭 Perfeito! Pensar → organizar em tópicos → escrever. Esse é o caminho do escritor experiente.",
-      feedbackErro: "Pense: primeiro vem a decisão, depois o esquema, e só no final o texto inteiro.",
+      feedbackAcerto:
+        "🧭 Perfeito! Pensar → organizar em tópicos → escrever. Esse é o caminho do escritor experiente.",
+      feedbackErro:
+        "Pense: primeiro vem a decisão, depois o esquema, e só no final o texto inteiro.",
+      dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -216,7 +255,11 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🧭 Isso! É exatamente o que está no segundo tópico do esquema.",
         feedbackErro: "Releia 'Ideia principal' no esquema de Sofia.",
-        ondeEstaNoTexto: "Ideia principal: explicar o motivo da falta… e pedir os deveres da semana.",
+        ondeEstaNoTexto:
+          "Ideia principal: explicar o motivo da falta… e pedir os deveres da semana.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Ideia principal: explicar o motivo da falta… e pedir os deveres da semana”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Explicar a falta e pedir os deveres”. É exatamente o que está no segundo tópico do esquema. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que faz sentido Sofia terminar com uma 'despedida educada'?",
@@ -228,6 +271,9 @@ export const aula01: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🧭 Exato! Ela mesma organizou essa ordem no esquema — e seguiu até o fim.",
         feedbackErro: "Olhe a lista numerada em 'Ordem': o que vem por último?",
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque é a última etapa da ordem que ela mesma planejou”. Ela mesma organizou essa ordem no esquema — e seguiu até o fim. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -240,15 +286,21 @@ export const aula01: AulaPortuguesV4 = {
       "Quem planeja escreve mais rápido e se perde menos.",
     ],
     miniDesafio: {
-      pergunta: "Você vai escrever sobre 'meu animal de estimação' para um amigo. Qual seria um bom primeiro passo?",
+      pergunta:
+        "Você vai escrever sobre 'meu animal de estimação' para um amigo. Qual seria um bom primeiro passo?",
       opcoes: [
         "Começar a escrever frases soltas sem pensar em nada",
         "Fazer um esquema: para quem, ideia principal e ordem das partes",
         "Copiar o texto de outra pessoa",
       ],
       correta: 1,
-      feedbackAcerto: "🧭 Isso! Todo bom texto começa com um plano — mesmo que rápido e em tópicos.",
-      feedbackErro: "Lembre-se do caminho do escritor: pensar e organizar ANTES de escrever a frase completa.",
+      feedbackAcerto:
+        "🧭 Isso! Todo bom texto começa com um plano — mesmo que rápido e em tópicos.",
+      feedbackErro:
+        "Lembre-se do caminho do escritor: pensar e organizar ANTES de escrever a frase completa.",
+      dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Fazer um esquema: para quem, ideia principal e ordem das partes”. Todo bom texto começa com um plano — mesmo que rápido e em tópicos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -256,10 +308,24 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O que é um esquema de escrita?",
-        opcoes: ["O título do texto", "Um plano em tópicos, feito antes de escrever", "A última revisão do texto"],
+        opcoes: [
+          "O título do texto",
+          "Um plano em tópicos, feito antes de escrever",
+          "A última revisão do texto",
+          "Só para o avô",
+        ],
         correta: 1,
         feedbackAcerto: "🧭 Isso! O esquema vem ANTES, como um mapa.",
         feedbackErro: "Esquema é o plano em tópicos que organiza as ideias antes de escrever.",
+        feedbackOpcoes: [
+          "❌ “O título do texto” não é a resposta. Esquema é o plano em tópicos que organiza as ideias antes de escrever.",
+          null,
+          "❌ “A última revisão do texto” não é a resposta. Esquema é o plano em tópicos que organiza as ideias antes de escrever.",
+          "❌ “Só para o avô” não é a resposta. Esquema é o plano em tópicos que organiza as ideias antes de escrever.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um plano em tópicos, feito antes de escrever”. O esquema vem ANTES, como um mapa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Por que é importante pensar 'para quem escrevo'?",
@@ -267,10 +333,21 @@ export const aula01: AulaPortuguesV4 = {
           "Porque não faz diferença nenhuma",
           "Porque o leitor muda as palavras e os detalhes do texto",
           "Porque só serve para textos de escola",
+          "A rotina da escola",
         ],
         correta: 1,
         feedbackAcerto: "🧭 Correto! O leitor influencia como você escreve.",
-        feedbackErro: "Pensar no leitor ajuda a escolher palavras e detalhes certos para quem vai ler.",
+        feedbackErro:
+          "Pensar no leitor ajuda a escolher palavras e detalhes certos para quem vai ler.",
+        feedbackOpcoes: [
+          "❌ “Porque não faz diferença nenhuma” não é a resposta. Pensar no leitor ajuda a escolher palavras e detalhes certos para quem vai ler.",
+          null,
+          "❌ “Porque só serve para textos de escola” não é a resposta. Pensar no leitor ajuda a escolher palavras e detalhes certos para quem vai ler.",
+          "❌ “A rotina da escola” não é a resposta. Pensar no leitor ajuda a escolher palavras e detalhes certos para quem vai ler.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque o leitor muda as palavras e os detalhes do texto”. O leitor influencia como você escreve. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No esquema de Rafael, o que veio na parte 'Ordem'?",
@@ -278,10 +355,20 @@ export const aula01: AulaPortuguesV4 = {
           "Uma lista numerada das partes da história",
           "O nome da escola",
           "Um desenho da vaca",
+          "Uma receita de bolo",
         ],
         correta: 0,
         feedbackAcerto: "🧭 Isso mesmo!",
         feedbackErro: "'Ordem' é onde ele numerou as partes da história, do começo ao fim.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O nome da escola” não é a resposta. 'Ordem' é onde ele numerou as partes da história, do começo ao fim.",
+          "❌ “Um desenho da vaca” não é a resposta. 'Ordem' é onde ele numerou as partes da história, do começo ao fim.",
+          "❌ “Uma receita de bolo” não é a resposta. 'Ordem' é onde ele numerou as partes da história, do começo ao fim.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma lista numerada das partes da história”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual é a vantagem de planejar antes de escrever?",
@@ -289,10 +376,21 @@ export const aula01: AulaPortuguesV4 = {
           "Escrever mais rápido e se perder menos",
           "Deixar o texto mais longo sem motivo",
           "Não precisar mais revisar depois",
+          "Porque copiou de um livro",
         ],
         correta: 0,
         feedbackAcerto: "🧭 Isso! Planejar economiza tempo e evita bagunça nas ideias.",
-        feedbackErro: "Quem planeja sabe o que vai dizer — por isso escreve mais rápido e organizado.",
+        feedbackErro:
+          "Quem planeja sabe o que vai dizer — por isso escreve mais rápido e organizado.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Deixar o texto mais longo sem motivo” não é a resposta. Quem planeja sabe o que vai dizer — por isso escreve mais rápido e organizado.",
+          "❌ “Não precisar mais revisar depois” não é a resposta. Quem planeja sabe o que vai dizer — por isso escreve mais rápido e organizado.",
+          "❌ “Porque copiou de um livro” não é a resposta. Quem planeja sabe o que vai dizer — por isso escreve mais rápido e organizado.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Escrever mais rápido e se perder menos”. Planejar economiza tempo e evita bagunça nas ideias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Quais são as três perguntas do planejamento?",
@@ -300,10 +398,21 @@ export const aula01: AulaPortuguesV4 = {
           "Para quem? O quê? Em que ordem?",
           "Quando? Onde? Com quem?",
           "Por quê? Quanto? Como?",
+          "Porque não pensou em nada antes",
         ],
         correta: 0,
         feedbackAcerto: "🧭 Exato! Você já pensa como um explorador de textos. 🌟",
-        feedbackErro: "As três perguntas são: para quem escrevo, o que quero dizer e em que ordem vou contar.",
+        feedbackErro:
+          "As três perguntas são: para quem escrevo, o que quero dizer e em que ordem vou contar.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Quando? Onde? Com quem?” não é a resposta. As três perguntas são: para quem escrevo, o que quero dizer e em que ordem vou contar.",
+          "❌ “Por quê? Quanto? Como?” não é a resposta. As três perguntas são: para quem escrevo, o que quero dizer e em que ordem vou contar.",
+          "❌ “Porque não pensou em nada antes” não é a resposta. As três perguntas são: para quem escrevo, o que quero dizer e em que ordem vou contar.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “esquema” — é um plano rápido, em tópicos, com as ideias principais do texto ANTES de escrever as frases completas. Serve de mapa para não se perder. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para quem? O quê? Em que ordem?”. Você já pensa como um explorador de textos. 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -317,7 +426,8 @@ export const aula01: AulaPortuguesV4 = {
       "3) Registrem as respostas em tópicos numerados, como um esquema de verdade.",
       "4) Guardem esse esquema — ele será usado na próxima aula para escrever o texto completo!",
     ],
-    registro: "🗣️ Fotografem ou registrem o esquema em tópicos (para quem, ideia principal, ordem).",
+    registro:
+      "🗣️ Fotografem ou registrem o esquema em tópicos (para quem, ideia principal, ordem).",
   },
 
   recompensa: {

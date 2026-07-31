@@ -30,9 +30,11 @@ EF35LP01, 02, 11, 13, 16, 18–24, 29, 30; quase todo o EF15LP.
 
 # Fases obrigatórias
 
-1. **Fase 1 — Motor adaptativo**: injetar `dica` + `reensino` em todas as questões
+1. ✅ **Fase 1 — Motor adaptativo (CONCLUÍDA)** — 366 `dica` + 310 `reensino` injetados nas 24 aulas; gate de ≥70% ativo.
+1b. ~~Fase 1 original~~: **Fase 1 — Motor adaptativo**: injetar `dica` + `reensino` em todas as questões
    das 24 aulas; ativar o gate de ≥70% na avaliação.
-2. **Fase 2 — Qualidade da avaliação**: 4 alternativas com distratores plausíveis
+2. ✅ **Fase 2 — Qualidade da avaliação (CONCLUÍDA)** — 120/120 questões com 4 alternativas + `feedbackOpcoes` explicativo por alternativa.
+2b. ~~Fase 2 original~~: **Fase 2 — Qualidade da avaliação**: 4 alternativas com distratores plausíveis
    + feedback que explica o erro (120 questões).
 3. **Fase 3 — Bloco de escrita**: `momento_escrita` em todas as aulas, ciclo
    Rascunho → Revisão → Versão final (foco em texto longo e coesão, idade 9 anos).

@@ -43,7 +43,10 @@ export const aula2: AulaPortuguesV4 = {
       },
       pergunta: "Sobre o que essa parte da expedição vai tratar?",
       hipoteses: [
-        { texto: "Quando usar cada uma das quatro formas de 'porquê' e o par 'mas/mais'.", imagemUrl: livro },
+        {
+          texto: "Quando usar cada uma das quatro formas de 'porquê' e o par 'mas/mais'.",
+          imagemUrl: livro,
+        },
         { texto: "Como construir uma placa de madeira.", imagemUrl: mapa },
         { texto: "Qual caminho é mais curto até o rio.", imagemUrl: bussola },
       ],
@@ -52,6 +55,7 @@ export const aula2: AulaPortuguesV4 = {
         "🎉 Isso mesmo! Vamos aprender a diferença entre os quatro porquês e entre 'mas' e 'mais'.",
       feedbackErro:
         "Repare que as placas têm palavras parecidas escritas de formas diferentes — é sobre isso que vamos aprender.",
+      dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -96,8 +100,14 @@ export const aula2: AulaPortuguesV4 = {
       {
         tipo: "fraseComPonto",
         frases: [
-          { texto: "Eu queria ir, MAS choveu.", explicacao: "MAS = oposição, contradição. Pode trocar por 'porém'." },
-          { texto: "Quero MAIS suco, por favor.", explicacao: "MAIS = quantidade, o contrário de 'menos'." },
+          {
+            texto: "Eu queria ir, MAS choveu.",
+            explicacao: "MAS = oposição, contradição. Pode trocar por 'porém'.",
+          },
+          {
+            texto: "Quero MAIS suco, por favor.",
+            explicacao: "MAIS = quantidade, o contrário de 'menos'.",
+          },
         ],
       },
     ],
@@ -128,23 +138,33 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'Por que' aparece em perguntas.",
         feedbackErro: "Releia: '\"POR QUE\", separado e sem acento, aparece em PERGUNTAS'.",
-        ondeEstaNoTexto: "\"POR QUE\", separado e sem acento, aparece em PERGUNTAS",
+        ondeEstaNoTexto: '"POR QUE", separado e sem acento, aparece em PERGUNTAS',
+        dica: '🧭 Pista de explorador: volte ao texto e releia este trecho — “"POR QUE", separado e sem acento, aparece em PERGUNTAS”.',
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Em perguntas”. 'Por que' aparece em perguntas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "'Porquê', junto e com acento, funciona como qual classe de palavra?",
         opcoes: ["Verbo", "Substantivo", "Pronome"],
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Porquê' é um substantivo que significa motivo.",
-        feedbackErro: "Releia: '\"PORQUÊ\", junto e com acento, é um substantivo que significa MOTIVO'.",
+        feedbackErro:
+          "Releia: '\"PORQUÊ\", junto e com acento, é um substantivo que significa MOTIVO'.",
         ondeEstaNoTexto: "é um substantivo que significa MOTIVO",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “é um substantivo que significa MOTIVO”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Substantivo”. 'Porquê' é um substantivo que significa motivo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual das duas palavras indica OPOSIÇÃO, segundo o texto: 'mas' ou 'mais'?",
         opcoes: ["Mas", "Mais", "As duas"],
         correta: 0,
         feedbackAcerto: "🎉 Exato! 'Mas' indica oposição, como 'porém'.",
-        feedbackErro: "Releia: '\"MAS\" indica OPOSIÇÃO... pode-se trocar por \"porém\"'.",
-        ondeEstaNoTexto: "\"MAS\" indica OPOSIÇÃO, uma ideia que contraria a anterior",
+        feedbackErro: 'Releia: \'"MAS" indica OPOSIÇÃO... pode-se trocar por "porém"\'.',
+        ondeEstaNoTexto: '"MAS" indica OPOSIÇÃO, uma ideia que contraria a anterior',
+        dica: '🧭 Pista de explorador: volte ao texto e releia este trecho — “"MAS" indica OPOSIÇÃO, uma ideia que contraria a anterior”.',
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mas”. 'Mas' indica oposição, como 'porém'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -158,6 +178,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Foi Brilha quem escreveu o guia.",
         feedbackErro: "Releia a introdução: 'Brilha escreveu o guia da encruzilhada'.",
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Brilha”. Foi Brilha quem escreveu o guia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde a expedição encontrou as quatro placas confusas?",
@@ -165,6 +188,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! A trilha chegou a uma encruzilhada com as quatro placas.",
         feedbackErro: "Releia a motivação: 'A trilha chegou a uma encruzilhada com quatro placas'.",
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Numa encruzilhada”. A trilha chegou a uma encruzilhada com as quatro placas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -175,13 +201,27 @@ export const aula2: AulaPortuguesV4 = {
       instrucao: "Do primeiro passo ao último.",
       itens: [
         { id: "p1", texto: "Verifique se a frase é uma pergunta.", imagemUrl: bussola },
-        { id: "p2", texto: "Se não for pergunta, veja se dá uma resposta com causa.", imagemUrl: livro },
-        { id: "p3", texto: "Se funcionar como substantivo (com artigo), é 'porquê' com acento.", imagemUrl: estrela },
-        { id: "p4", texto: "Se estiver isolada no fim da frase, use 'por quê' com acento.", imagemUrl: setaCima },
+        {
+          id: "p2",
+          texto: "Se não for pergunta, veja se dá uma resposta com causa.",
+          imagemUrl: livro,
+        },
+        {
+          id: "p3",
+          texto: "Se funcionar como substantivo (com artigo), é 'porquê' com acento.",
+          imagemUrl: estrela,
+        },
+        {
+          id: "p4",
+          texto: "Se estiver isolada no fim da frase, use 'por quê' com acento.",
+          imagemUrl: setaCima,
+        },
       ],
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo pela encruzilhada dos porquês.",
-      feedbackErro: "Pense: primeiro se pergunta se é pergunta, depois se é resposta, depois se é substantivo, e por último se está sozinha no fim.",
+      feedbackErro:
+        "Pense: primeiro se pergunta se é pergunta, depois se é resposta, depois se é substantivo, e por último se está sozinha no fim.",
+      dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -204,6 +244,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Mais' indica quantidade nas duas ocorrências.",
         feedbackErro: "Releia: 'esse bilhete usa MAIS duas vezes, com sentido de quantidade'.",
         ondeEstaNoTexto: "esse bilhete usa MAIS duas vezes, com sentido de quantidade",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “esse bilhete usa MAIS duas vezes, com sentido de quantidade”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mais”. 'Mais' indica quantidade nas duas ocorrências. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que a palavra 'mas' aparece no bilhete, segundo Aurora?",
@@ -214,8 +257,12 @@ export const aula2: AulaPortuguesV4 = {
         ],
         correta: 0,
         feedbackAcerto: "🎉 Exato! 'Mas' liga o rápido ao cansativo, ideias opostas.",
-        feedbackErro: "Releia: 'MAS uma vez, com sentido de oposição — o caminho é rápido, mas também é cansativo'.",
+        feedbackErro:
+          "Releia: 'MAS uma vez, com sentido de oposição — o caminho é rápido, mas também é cansativo'.",
         ondeEstaNoTexto: "com sentido de oposição",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “com sentido de oposição”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque liga duas ideias que se contradizem (rápido x cansativo)”. 'Mas' liga o rápido ao cansativo, ideias opostas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -227,7 +274,8 @@ export const aula2: AulaPortuguesV4 = {
       tipo: "arrastarParaAlvo",
       titulo: "Os Baús da Encruzilhada",
       bloco: {
-        instrucao: "Leia a frase inteira antes de decidir: é pergunta, resposta, motivo, isolada, oposição ou quantidade?",
+        instrucao:
+          "Leia a frase inteira antes de decidir: é pergunta, resposta, motivo, isolada, oposição ou quantidade?",
         itens: [
           { id: "i1", texto: "___ você não veio? (pergunta)", alvoId: "porque-pergunta" },
           { id: "i2", texto: "Não vim ___ estava doente. (resposta)", alvoId: "porque-resposta" },
@@ -244,8 +292,11 @@ export const aula2: AulaPortuguesV4 = {
           { id: "mas", nome: "Mas (oposição)", imagemUrl: mapa },
           { id: "mais", nome: "Mais (quantidade)", imagemUrl: balanca },
         ],
-        feedbackAcerto: "🎉 Você venceu a encruzilhada! Domina as quatro formas de porquê e o par mas/mais.",
-        feedbackErro: "Releia a frase inteira: pergunte-se se é pergunta, resposta, motivo, palavra isolada, oposição ou quantidade.",
+        feedbackAcerto:
+          "🎉 Você venceu a encruzilhada! Domina as quatro formas de porquê e o par mas/mais.",
+        feedbackErro:
+          "Releia a frase inteira: pergunte-se se é pergunta, resposta, motivo, palavra isolada, oposição ou quantidade.",
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
       },
     },
   },
@@ -257,11 +308,17 @@ export const aula2: AulaPortuguesV4 = {
       "O truque é sempre perguntar: é pergunta, resposta, motivo ou está sozinha? É oposição ou quantidade?",
     ],
     miniDesafio: {
-      pergunta: "Na frase 'Ele estudou muito, ___ foi mal na prova', qual palavra completa corretamente?",
+      pergunta:
+        "Na frase 'Ele estudou muito, ___ foi mal na prova', qual palavra completa corretamente?",
       opcoes: ["Mas", "Mais", "Porque"],
       correta: 0,
-      feedbackAcerto: "🎉 Isso! A frase mostra uma ideia contrária (estudou muito x foi mal): é oposição, 'mas'.",
-      feedbackErro: "Pense: estudar muito e ir mal são ideias contrárias — isso pede 'mas', de oposição.",
+      feedbackAcerto:
+        "🎉 Isso! A frase mostra uma ideia contrária (estudou muito x foi mal): é oposição, 'mas'.",
+      feedbackErro:
+        "Pense: estudar muito e ir mal são ideias contrárias — isso pede 'mas', de oposição.",
+      dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Mas”. A frase mostra uma ideia contrária (estudou muito x foi mal): é oposição, 'mas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -269,38 +326,89 @@ export const aula2: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — 'Não sei ___ ele chorou' (pergunta indireta). Qual forma usar?",
-        opcoes: ["por que", "porque", "porquê"],
+        opcoes: ["por que", "porque", "porquê", "Em respostas com causa"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! É uma pergunta indireta: usa-se 'por que' separado, sem acento.",
         feedbackErro: "Lembre: perguntas (mesmo indiretas) usam 'por que' separado, sem acento.",
+        feedbackOpcoes: [
+          null,
+          "❌ “porque” não é a resposta. Lembre: perguntas (mesmo indiretas) usam 'por que' separado, sem acento.",
+          "❌ “porquê” não é a resposta. Lembre: perguntas (mesmo indiretas) usam 'por que' separado, sem acento.",
+          "❌ “Em respostas com causa” não é a resposta. Lembre: perguntas (mesmo indiretas) usam 'por que' separado, sem acento.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “por que”. É uma pergunta indireta: usa-se 'por que' separado, sem acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — 'Cheguei tarde ___ o trânsito estava pesado.' Qual forma usar?",
-        opcoes: ["por que", "porque", "por quê"],
+        opcoes: ["por que", "porque", "por quê", "Como substantivo"],
         correta: 1,
         feedbackAcerto: "🎉 Correto! Resposta com causa usa 'porque' junto, sem acento.",
         feedbackErro: "Lembre: respostas que explicam uma causa usam 'porque' junto, sem acento.",
+        feedbackOpcoes: [
+          "❌ “por que” não é a resposta. Lembre: respostas que explicam uma causa usam 'porque' junto, sem acento.",
+          null,
+          "❌ “por quê” não é a resposta. Lembre: respostas que explicam uma causa usam 'porque' junto, sem acento.",
+          "❌ “Como substantivo” não é a resposta. Lembre: respostas que explicam uma causa usam 'porque' junto, sem acento.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “porque”. Resposta com causa usa 'porque' junto, sem acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — 'Ele nunca explicou o ___ da decisão.' Qual forma usar?",
-        opcoes: ["porque", "porquê", "por quê"],
+        opcoes: ["porque", "porquê", "por quê", "Um viajante desconhecido"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! Aqui 'porquê' funciona como substantivo (motivo), por isso tem acento e vem com artigo.",
-        feedbackErro: "Repare no artigo 'o' antes: isso indica substantivo, então é 'porquê' com acento.",
+        feedbackAcerto:
+          "🎉 Isso! Aqui 'porquê' funciona como substantivo (motivo), por isso tem acento e vem com artigo.",
+        feedbackErro:
+          "Repare no artigo 'o' antes: isso indica substantivo, então é 'porquê' com acento.",
+        feedbackOpcoes: [
+          "❌ “porque” não é a resposta. Repare no artigo 'o' antes: isso indica substantivo, então é 'porquê' com acento.",
+          null,
+          "❌ “por quê” não é a resposta. Repare no artigo 'o' antes: isso indica substantivo, então é 'porquê' com acento.",
+          "❌ “Um viajante desconhecido” não é a resposta. Repare no artigo 'o' antes: isso indica substantivo, então é 'porquê' com acento.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “porquê”. Aqui 'porquê' funciona como substantivo (motivo), por isso tem acento e vem com artigo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — 'Ela se recusou a ir. ___?' Qual forma usar no final, isolada?",
-        opcoes: ["porque", "porquê", "por quê"],
+        opcoes: ["porque", "porquê", "por quê", "Dentro de uma caverna"],
         correta: 2,
-        feedbackAcerto: "🎉 Exato! Isolada, no fim da frase, usa-se 'por quê' separado e com acento.",
+        feedbackAcerto:
+          "🎉 Exato! Isolada, no fim da frase, usa-se 'por quê' separado e com acento.",
         feedbackErro: "Lembre: sozinha, no final da frase, a forma correta é 'por quê' com acento.",
+        feedbackOpcoes: [
+          "❌ “porque” não é a resposta. Lembre: sozinha, no final da frase, a forma correta é 'por quê' com acento.",
+          "❌ “porquê” não é a resposta. Lembre: sozinha, no final da frase, a forma correta é 'por quê' com acento.",
+          null,
+          "❌ “Dentro de uma caverna” não é a resposta. Lembre: sozinha, no final da frase, a forma correta é 'por quê' com acento.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “por quê”. Isolada, no fim da frase, usa-se 'por quê' separado e com acento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
-        pergunta: "5/5 — 'Quero ___ tempo para terminar, ___ já estou quase lá.' Complete na ordem.",
-        opcoes: ["mais / mas", "mas / mais", "mais / mais"],
+        pergunta:
+          "5/5 — 'Quero ___ tempo para terminar, ___ já estou quase lá.' Complete na ordem.",
+        opcoes: ["mais / mas", "mas / mais", "mais / mais", "No topo de uma montanha"],
         correta: 0,
-        feedbackAcerto: "🎉 Expedição concluída! Primeiro é quantidade (mais tempo), depois oposição (mas já estou quase lá).",
-        feedbackErro: "Pense: a primeira lacuna pede quantidade (mais) e a segunda pede oposição (mas).",
+        feedbackAcerto:
+          "🎉 Expedição concluída! Primeiro é quantidade (mais tempo), depois oposição (mas já estou quase lá).",
+        feedbackErro:
+          "Pense: a primeira lacuna pede quantidade (mais) e a segunda pede oposição (mas).",
+        feedbackOpcoes: [
+          null,
+          "❌ “mas / mais” não é a resposta. Pense: a primeira lacuna pede quantidade (mais) e a segunda pede oposição (mas).",
+          "❌ “mais / mais” não é a resposta. Pense: a primeira lacuna pede quantidade (mais) e a segunda pede oposição (mas).",
+          "❌ “No topo de uma montanha” não é a resposta. Pense: a primeira lacuna pede quantidade (mais) e a segunda pede oposição (mas).",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “por que (separado, sem acento)” — usado em PERGUNTAS (diretas ou indiretas) e antes de um motivo ainda por vir. Pode ser trocado por 'por qual motivo'. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “mais / mas”. Expedição concluída! Primeiro é quantidade (mais tempo), depois oposição (mas já estou quase lá). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
