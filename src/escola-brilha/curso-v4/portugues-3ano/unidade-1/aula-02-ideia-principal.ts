@@ -90,6 +90,30 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Assunto, ideia principal e detalhe",
+    instrucao: "Compare as três frases: uma diz o ASSUNTO, uma diz a IDEIA PRINCIPAL e uma é só DETALHE.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "As abelhas.",
+            explicacao: "Isso é só o ASSUNTO: de quem o texto fala. Ainda não diz nada sobre elas.",
+          },
+          {
+            texto: "As abelhas ajudam as plantas a nascer.",
+            explicacao: "Esta é a IDEIA PRINCIPAL: o assunto + o que o texto quer dizer sobre ele.",
+          },
+          {
+            texto: "A abelha da história tinha listras bem amarelas.",
+            explicacao: "Este é um DETALHE: enfeita o texto, mas se apagarmos, a ideia principal continua de pé.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o texto com atenção. No final, você vai precisar escolher UMA frase que resume tudo — a ideia principal.",

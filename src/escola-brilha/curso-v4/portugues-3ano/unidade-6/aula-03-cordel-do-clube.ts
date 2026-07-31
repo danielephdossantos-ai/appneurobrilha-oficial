@@ -83,6 +83,17 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A rima do cordel",
+    instrucao: "No cordel a rima cai no fim dos versos e marca o ritmo. Toque nas palavras que rimam com a base.",
+    blocos: [
+      {
+        tipo: "rimas",
+        itens: [{"palavraBase":"esperto","opcoes":[{"palavra":"certo","rima":true},{"palavra":"aberto","rima":true},{"palavra":"espeto","rima":false}],"terminacao":"-ERTO"},{"palavraBase":"feira","opcoes":[{"palavra":"bandeira","rima":true},{"palavra":"ferida","rima":false},{"palavra":"fera","rima":false}],"terminacao":"-EIRA"},{"palavraBase":"galo","opcoes":[{"palavra":"abalo","rima":true},{"palavra":"gato","rima":false},{"palavra":"galho","rima":false}],"terminacao":"-ALO"}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o cordel em voz alta, com ritmo de contação de história de feira. Marque o compasso com a mão.",

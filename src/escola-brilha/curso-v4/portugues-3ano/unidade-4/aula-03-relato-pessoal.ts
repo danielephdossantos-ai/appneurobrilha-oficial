@@ -85,6 +85,30 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Como se reconhece um relato pessoal",
+    instrucao: "Três frases sobre o mesmo dia, escritas de jeitos diferentes. Veja qual é relato.",
+    blocos: [
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "Ontem eu fui à praia com a minha avó e senti um medo gostoso da onda grande.",
+            explicacao: "RELATO PESSOAL: verbo no passado, EU quem conta e uma emoção ('medo gostoso').",
+          },
+          {
+            texto: "Moradores aproveitaram o dia de sol na praia da cidade.",
+            explicacao: "NOTÍCIA: alguém de fora conta o fato, sem 'eu' e sem sentimento.",
+          },
+          {
+            texto: "Leve chapéu, água e protetor solar antes de ir à praia.",
+            explicacao: "TEXTO INSTRUCIONAL: verbos de ordem ('leve') ensinando o que fazer.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Vamos ler o relato completo de Lia sobre o dia na praia.",
     leitura: {

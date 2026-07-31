@@ -75,6 +75,27 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A regra do R e do RR",
+    instrucao: "Leia a explicação, veja os exemplos com a letra destacada e complete os desafios.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "RR só entre vogais, quando o som é forte",
+        explicacao: "O som forte de R (o R vibrado de RATO) aparece com RR quando está ENTRE DUAS VOGAIS: CARRO, TERRA, JARRA. Um R sozinho entre vogais faz o som fraco: CARO, CARA, ARARA. Ou seja: entre vogais, RR = som forte, R = som fraco.",
+        exemplos: [{"palavra":"carro","destaque":"rr","motivo":"Entre A e O com som forte: RR."},{"palavra":"caro","destaque":"r","motivo":"Um R entre vogais: som fraco."},{"palavra":"terra","destaque":"rr","motivo":"Entre E e A com som forte: RR."}],
+        desafios: [{"molde":"se__a","opcoes":["rr","r"],"correta":0,"frase":"A serra da máquina cortou a madeira.","feedbackErro":"Som forte entre vogais pede RR: SERRA."},{"molde":"ca__eta","opcoes":["rr","r"],"correta":1,"frase":"A careta do Theo fez todos rirem.","feedbackErro":"Aqui o som é fraco (ca-RE-ta): um R só."}],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "No começo da palavra e depois de N, L, S: R sozinho já é forte",
+        explicacao: "No INÍCIO da palavra o R já tem som forte sem precisar dobrar: RATO, RUA, RIO. Depois de N, L ou S também: HONRA, MELRO, ISRAEL. Nunca se escreve RR no começo da palavra.",
+        exemplos: [{"palavra":"rato","destaque":"r","motivo":"Começo de palavra: R sozinho já é forte."},{"palavra":"rua","destaque":"r","motivo":"Começo de palavra: nunca RR."},{"palavra":"honra","destaque":"r","motivo":"Depois de N: R sozinho com som forte."}],
+        desafios: [{"molde":"__oupa","opcoes":["r","rr"],"correta":0,"frase":"A roupa secou no sol.","feedbackErro":"Em começo de palavra nunca se escreve RR."},{"molde":"ba__iga","opcoes":["rr","r"],"correta":0,"frase":"A barriga do gato estava cheia.","feedbackErro":"Som forte entre vogais: BARRIGA, com RR."}],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Aurora explicou o segredo do R para o clube inteiro. Leia com atenção.",
     leitura: {

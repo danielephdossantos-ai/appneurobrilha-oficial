@@ -32,6 +32,7 @@ import {
 } from "@/lib/rotina-escrita";
 import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
 import { SEMANAS_ESCRITA_2ANO } from "@/lib/rotina-escrita-2ano";
+import { SEMANAS_ESCRITA_3ANO } from "@/lib/rotina-escrita-3ano";
 
 export const Route = createFileRoute("/rotina-escrita")({
   head: () => ({
@@ -52,7 +53,12 @@ export const Route = createFileRoute("/rotina-escrita")({
     ],
   }),
   validateSearch: (search: Record<string, unknown>) => ({
-    serie: search.serie === "2" ? ("2" as const) : ("1" as const),
+    serie:
+      search.serie === "3"
+        ? ("3" as const)
+        : search.serie === "2"
+          ? ("2" as const)
+          : ("1" as const),
   }),
   component: RotinaEscrita,
 });
@@ -70,7 +76,12 @@ function hojeISO() {
 
 function RotinaEscrita() {
   const { serie } = Route.useSearch();
-  const semanas = serie === "2" ? SEMANAS_ESCRITA_2ANO : SEMANAS_ESCRITA;
+  const semanas =
+    serie === "3"
+      ? SEMANAS_ESCRITA_3ANO
+      : serie === "2"
+        ? SEMANAS_ESCRITA_2ANO
+        : SEMANAS_ESCRITA;
   const { activeChild } = useAppState();
   const push = usePushNotifications(activeChild?.id ?? null);
   const [rotina, setRotina] = useState<Rotina>({
@@ -208,7 +219,7 @@ function RotinaEscrita() {
       />
 
       <div className="flex gap-2 mb-4">
-        {(["1", "2"] as const).map((s2) => (
+        {(["1", "2", "3"] as const).map((s2) => (
           <Link
             key={s2}
             to="/rotina-escrita"
