@@ -18,8 +18,16 @@ Curso: `src/escola-brilha/curso-v4/portugues-3ano` (24 aulas, 6 unidades, skin t
 - **Fase 3 — Bloco de escrita** ✅ concluída
   `momento_escrita` (escritaReal, `cicloRevisao: true`) nas 24 aulas, com
   comando próprio da aula, modelo e checklist de revisão.
-- **Fase 4 — Fluência** (~90 palavras/min, meta do 3º ano).
-- **Fase 5 — Ortografia sistemática + palavras teimosas** (nova unidade "Oficina da Escrita Certa").
+- **Fase 4 — Fluência** ✅ concluída
+  `momento_fluencia` nas 24 aulas: trecho de 2–3 frases tirado da leitura guiada da
+  própria aula, 3 releituras (compreensão → cronômetro → entonação) e `metaSegundos`
+  calculado em ~90 palavras/min (meta do 3º ano).
+- **Fase 5 — Ortografia sistemática + palavras teimosas** ✅ concluída
+  Nova **Unidade 7 · A Oficina da Escrita Certa** (4 aulas, esqueleto completo com
+  dica/reensino, escrita com ciclo de revisão, fluência e avaliação de 4 alternativas):
+  S/SS/C/Ç (EF03LP01), LH/NH/CH + G/GU + R/RR (EF03LP03), sílabas/sílaba tônica/acento
+  agudo e circunflexo (EF03LP05, EF03LP06, EF03LP04) e palavras irregulares de alta
+  frequência + pares mas/mais e mal/mau (palavraRelampago).
 - **Fase 6 — Ensino visual** nas 16 aulas que ainda não têm.
 - **Fase 7 — Sondagem inicial + cobertura BNCC** (unidades 7 e 8), práticas
   curriculares e rotina de escrita/oralidade do 3º ano.
