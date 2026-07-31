@@ -1,4 +1,5 @@
 import type { AulaPortuguesV4 } from "../../types";
+import cenaDetetives from "@/assets/portugues-3ano/cena-clube-detetives.jpg";
 import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
 import { url as papel } from "@/assets/neuro-treino/objetos/papel.png.asset.json";
 import { url as lupa } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
@@ -32,7 +33,49 @@ export const aula01: AulaPortuguesV4 = {
     titulo: "Bem-vindo ao Clube dos Detetives da Palavra",
     historia:
       "Brilha bateu na porta secreta da árvore-sede e sussurrou a senha: 'toda pista importa'. Lá dentro, Aurora, a mentora do clube, segurava um bilhete estranho encontrado embaixo da porta. — Alguém deixou isso aqui, mas esqueceu de assinar. Um bom detetive não precisa de nome escrito para descobrir QUEM escreveu. Ele lê nas entrelinhas. Vamos treinar seu olho investigativo?",
-    imagemUrl: brilha,
+    imagemUrl: cenaDetetives,
+    descobertas: [
+      {
+        x: 28,
+        y: 62,
+        icone: "📝",
+        titulo: "O bilhete sem assinatura",
+        texto:
+          "Alguém escreveu e foi embora sem colocar o nome. Nesta aula você vai descobrir QUEM escreveu usando só as pistas do texto.",
+      },
+      {
+        x: 84,
+        y: 17,
+        icone: "🕓",
+        titulo: "O relógio marca 4 horas",
+        texto:
+          "O bilhete diz 'volto às 16h'. Quem escreveu sabia a hora de voltar — então mora ou trabalha aqui. Pista de tempo!",
+      },
+      {
+        x: 55,
+        y: 74,
+        icone: "🍰",
+        titulo: "Bolo cortado e migalhas",
+        texto:
+          "Quem deixou o bolo conhecia o sabor favorito de alguém. Detetive esperto pergunta: quem sabe do seu gosto?",
+      },
+      {
+        x: 47,
+        y: 40,
+        icone: "👟",
+        titulo: "Pegadas pequenas de lama",
+        texto:
+          "Pé pequeno, lama fresca... alguém entrou correndo do quintal. Pistas contam histórias sem escrever nada.",
+      },
+      {
+        x: 12,
+        y: 20,
+        icone: "🎒",
+        titulo: "A mochila do clube",
+        texto:
+          "É a mochila oficial do Clube dos Detetives da Palavra. A partir de hoje ela é sua: você entrou no clube!",
+      },
+    ],
   },
 
   momento02_previsao: {
