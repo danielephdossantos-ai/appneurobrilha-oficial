@@ -40,7 +40,7 @@ export function LenteLeitura({
   const descoberto = !imagemUrl
     ? true
     : temCaca
-      ? achados.length >= total
+      ? achados.length >= total || movimentos > 160
       : movimentos > 28;
 
   const R = 76;
