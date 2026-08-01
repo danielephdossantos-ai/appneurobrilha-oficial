@@ -36,10 +36,13 @@ EF35LP01, 02, 11, 13, 16, 18–24, 29, 30; quase todo o EF15LP.
 2. ✅ **Fase 2 — Qualidade da avaliação (CONCLUÍDA)** — 120/120 questões com 4 alternativas + `feedbackOpcoes` explicativo por alternativa.
 2b. ~~Fase 2 original~~: **Fase 2 — Qualidade da avaliação**: 4 alternativas com distratores plausíveis
    + feedback que explica o erro (120 questões).
-3. **Fase 3 — Bloco de escrita**: `momento_escrita` em todas as aulas, ciclo
-   Rascunho → Revisão → Versão final (foco em texto longo e coesão, idade 9 anos).
-4. **Fase 4 — Fluência**: `momento_fluencia` em todas as aulas, calibrado a
-   ~110 palavras/minuto (leitura expressiva, não só velocidade).
+3. ✅ **Fase 3 — Bloco de escrita (CONCLUÍDA)** — `momento_escrita` nas 24 aulas,
+   `escritaReal` formato texto com `cicloRevisao: true` (Rascunho → Revisão → Versão final),
+   modelo + checklist de coesão/pontuação por aula.
+4. ✅ **Fase 4 — Fluência (CONCLUÍDA)** — `momento_fluencia` nas 24 aulas, texto
+   próprio do tema, 3 leituras (compreensão → cronômetro → entonação),
+   `metaSegundos` calculado a ~110 palavras/minuto.
+
 5. **Fase 5 — Ortografia/gramática em uso**: nova unidade de oficina cobrindo os
    códigos EF04LP de morfologia/ortografia faltantes.
 6. **Fase 6 — Ensino visual**: `ensinoVisual` nas 12 aulas sem ele (U1, U4, U6).
