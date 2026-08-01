@@ -43,9 +43,21 @@ EF35LP01, 02, 11, 13, 16, 18–24, 29, 30; quase todo o EF15LP.
    próprio do tema, 3 leituras (compreensão → cronômetro → entonação),
    `metaSegundos` calculado a ~110 palavras/minuto.
 
-5. **Fase 5 — Ortografia/gramática em uso**: nova unidade de oficina cobrindo os
-   códigos EF04LP de morfologia/ortografia faltantes.
-6. **Fase 6 — Ensino visual**: `ensinoVisual` nas 12 aulas sem ele (U1, U4, U6).
-7. **Fase 7 — Sondagem + BNCC 100%**: `sondagem-4ano.ts`, registro em
-   `sondagens.ts`, `rotina-escrita-4ano.ts`, `praticasCurriculares` no `curso.ts`
-   e novas unidades para fechar 100% dos códigos.
+5. ✅ **Fase 5 — CONCLUÍDA** — Unidade 7 "Oficina da Língua em Uso" (4 aulas:
+   prefixos/sufixos, adjetivos/advérbios, discurso direto e indireto, acentuação
+   de ditongo/hiato) + `unidade-7/index.ts` registrado no curso.
+6. ✅ **Fase 6 — CONCLUÍDA** — `momento_ensinoVisual` em 28/28 aulas.
+7. 🟡 **Fase 7 — PARCIAL** — `sondagem-4ano.ts` + registro em `sondagens.ts` ✅,
+   `rotina-escrita-4ano.ts` ligada em `/rotina-escrita` ✅,
+   `praticasCurriculares` no `curso.ts` ✅.
+   **PENDENTE:** cobertura BNCC — hoje 42 códigos. Faltam EF04LP22, 23, 25, 26,
+   27; EF35LP01, 02, 11, 13, 16, 18–24, 29, 30 e a maior parte de EF15LP
+   (pesquisa, revisão colaborativa, leitura de imagem, edição/publicação).
+
+# Estado validado (auditoria em app rodando)
+
+28 aulas (7 unidades × 4). Em 28/28: `momento_ensinoVisual`, `momento_escrita`
+com `cicloRevisao`, `momento_fluencia` com `metaSegundos`, `dica` + `reensino`,
+avaliação com 4 alternativas e `feedbackOpcoes`. Verificado no navegador:
+curso lista as 7 unidades, aula da U7 renderiza motivação, previsão, palavras
+novas, ensino visual, escrita, fluência e avaliação, sem erro de console.
