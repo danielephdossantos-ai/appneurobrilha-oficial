@@ -65,6 +65,7 @@ export const aula1: AulaPortuguesV4 = {
         "🕵️ Boa investigação! O cartaz fala sobre TELAS (o tema) e defende que é preciso controlar esse uso, porque atrapalha o sono (a ideia central).",
       feedbackErro:
         "Releia o cartaz: as três linhas falam sobre celular, tempo de tela e sono — esse é o assunto. E o cartaz avisa que é preciso ter cuidado com isso — essa é a defesa dele.",
+      dica: "🕵️ Pista de detetive: lembre que o TEMA é só o assunto, em poucas palavras; a IDEIA CENTRAL é o que o texto quer defender ou provar sobre esse assunto. Releia o cartaz procurando essas duas coisas separadamente.",
     },
   },
 
@@ -84,6 +85,76 @@ export const aula1: AulaPortuguesV4 = {
           "É o que o texto afirma, defende ou quer provar sobre o tema. Não é só o assunto — é a mensagem principal que o autor quer deixar. Responde à pergunta 'o que o texto quer dizer sobre esse assunto?'.",
         exemplo: "Sobre o tema 'reciclagem', a ideia central pode ser 'reciclar é essencial para reduzir o lixo nas cidades'.",
         imagemUrl: lupa,
+      },
+    ],
+  },
+
+  momento_ensinoVisual: {
+    titulo: "Separando o assunto da defesa do texto",
+    instrucao:
+      "Observe cada mini-texto: primeiro nomeie o TEMA em poucas palavras, depois procure a frase que mostra a IDEIA CENTRAL — o que o texto realmente defende.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Tema x Ideia Central: como não confundir",
+        explicacao:
+          "O TEMA é um rótulo curto — pode ser dito em uma ou duas palavras, como 'mochilas pesadas' ou 'reciclagem'. Já a IDEIA CENTRAL é uma frase completa, que afirma, defende ou recomenda algo sobre esse tema. Truque de detetive: se a resposta cabe num rótulo curto, é tema; se é uma frase que defende uma opinião, é ideia central.",
+        exemplos: [
+          {
+            palavra: "Reciclagem de lixo",
+            destaque: "Reciclagem de lixo",
+            motivo: "É só um rótulo, em poucas palavras: isso é o TEMA.",
+          },
+          {
+            palavra: "É essencial reciclar para reduzir o lixo nas cidades.",
+            destaque: "é essencial reciclar",
+            motivo: "É uma frase completa que defende uma ação: isso é a IDEIA CENTRAL.",
+          },
+          {
+            palavra: "As cidades precisam investir mais em coleta seletiva.",
+            destaque: "precisam investir mais",
+            motivo: "Também defende algo sobre o tema — outra forma de expressar a ideia central.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'Alimentação escolar' — isso é o tema ou a ideia central do texto? _",
+            opcoes: [
+              "É o tema, porque é só um rótulo do assunto",
+              "É a ideia central, porque defende uma opinião",
+              "É as duas coisas ao mesmo tempo",
+            ],
+            correta: 0,
+            frase: "Alimentação escolar",
+            feedbackErro:
+              "'Alimentação escolar' não afirma nem defende nada — é só o rótulo do assunto. Isso é o tema.",
+          },
+          {
+            molde:
+              "'É preciso investir mais em merendas nutritivas nas escolas públicas.' Isso é tema ou ideia central? _",
+            opcoes: [
+              "É a ideia central, porque defende uma ação sobre o tema",
+              "É o tema, porque cabe em poucas palavras",
+              "Não é nem tema nem ideia central",
+            ],
+            correta: 0,
+            frase: "É preciso investir mais em merendas nutritivas nas escolas públicas.",
+            feedbackErro:
+              "Essa frase completa DEFENDE uma ação (investir mais). Por isso é a ideia central, não apenas o tema.",
+          },
+          {
+            molde: "'Mais ciclovias tornariam as cidades mais seguras para quem pedala.' Tema ou ideia central? _",
+            opcoes: [
+              "Ideia central, pois afirma algo sobre o tema 'uso de bicicletas'",
+              "Tema, pois é um rótulo curto",
+              "Nenhum dos dois: é só um detalhe",
+            ],
+            correta: 0,
+            frase: "Mais ciclovias tornariam as cidades mais seguras para quem pedala.",
+            feedbackErro:
+              "O tema seria só 'uso de bicicletas na cidade'. Essa frase completa, que afirma algo, é a ideia central.",
+          },
+        ],
       },
     ],
   },
@@ -113,6 +184,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🕵️ Isso! Do início ao fim, o texto fala sobre o peso das mochilas.",
         feedbackErro: "Releia o primeiro parágrafo: o assunto que se repete é o peso das mochilas.",
         ondeEstaNoTexto: "…muitos estudantes carregam mochilas muito pesadas para a escola…",
+        dica: "🕵️ Pista de detetive: volte ao texto e releia este trecho — “muitos estudantes carregam mochilas muito pesadas para a escola”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O peso das mochilas escolares”. Do início ao fim, o texto fala sobre o peso das mochilas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que problema de saúde é citado como consequência das mochilas pesadas?",
@@ -121,6 +195,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🕵️ Exato! O texto cita 'dores nas costas e problemas de postura'.",
         feedbackErro: "A resposta aparece no fim do primeiro parágrafo, logo depois de 'alertam que'.",
         ondeEstaNoTexto: "Médicos alertam que esse hábito pode causar dores nas costas e problemas de postura ainda na infância.",
+        dica: "🕵️ Pista de detetive: volte ao texto e releia este trecho — “Médicos alertam que esse hábito pode causar dores nas costas e problemas de postura”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dores nas costas e problemas de postura”. O texto cita exatamente essas palavras logo depois de 'alertam que'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que soluções o texto menciona para o problema?",
@@ -133,6 +210,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🕵️ Isso mesmo! O segundo e o terceiro parágrafos citam armários e materiais digitais.",
         feedbackErro: "Releia o segundo e o terceiro parágrafo — as soluções envolvem armários e materiais digitais.",
         ondeEstaNoTexto: "Algumas escolas já adotaram armários individuais… uso de materiais digitais que substituam parte dos livros impressos.",
+        dica: "🕵️ Pista de detetive: volte ao texto e releia este trecho — “armários individuais… uso de materiais digitais”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Armários individuais e materiais digitais”. O segundo e o terceiro parágrafos citam essas soluções. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -152,6 +232,9 @@ export const aula1: AulaPortuguesV4 = {
           "🕵️ Isso mesmo! Essa frase não apenas nomeia o assunto (mochilas), ela conta o que o texto DEFENDE: que é preciso reduzir o peso por causa dos riscos à saúde.",
         feedbackErro:
           "Pense: o tema (mochilas) aparece em todas as opções, mas só uma delas mostra o que o texto quer PROVAR sobre isso — que o peso deve ser reduzido.",
+        dica: "🕵️ Pista de detetive: lembre que a ideia central é uma frase completa que defende algo sobre o tema — não é só o rótulo do assunto.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mochilas pesadas prejudicam a saúde dos alunos, por isso é urgente reduzir esse peso”. Essa frase mostra o que o texto DEFENDE, não só o assunto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Se alguém dissesse que 'o tema e a ideia central são sempre a mesma coisa', você diria que...",
@@ -165,6 +248,9 @@ export const aula1: AulaPortuguesV4 = {
           "🕵️ Correto! O tema é o rótulo do assunto (mochilas pesadas); a ideia central é a mensagem completa que o texto quer deixar sobre ele.",
         feedbackErro:
           "O tema pode ser dito em uma ou duas palavras (mochilas pesadas). Já a ideia central é uma frase completa, que mostra o que o texto defende sobre o tema.",
+        dica: "🕵️ Pista de detetive: pense em como o tema cabe num rótulo curto, e a ideia central precisa de uma frase completa que defenda algo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Está errado: o tema é só o assunto; a ideia central é o que o texto defende sobre esse assunto”. O tema é o rótulo; a ideia central é a mensagem completa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -181,6 +267,7 @@ export const aula1: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🕵️ Perfeito! Você seguiu a trilha certa: o problema, as tentativas de solução, e a defesa final.",
       feedbackErro: "Pense na lógica de um texto defensivo: primeiro se apresenta o problema, depois exemplos de solução, e por último a defesa da mudança.",
+      dica: "🕵️ Pista de detetive: todo texto que defende uma ideia costuma seguir esta ordem: primeiro o problema, depois as tentativas de solução, e por último a defesa final.",
     },
   },
 
@@ -204,6 +291,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🕵️ Isso! O assunto que percorre todo o texto é a frequência (cada vez menor) de crianças nas bibliotecas.",
         feedbackErro: "Releia o primeiro parágrafo: o assunto central é quantas crianças frequentam bibliotecas.",
         ondeEstaNoTexto: "…cada vez menos crianças frequentam bibliotecas públicas.",
+        dica: "🕵️ Pista de detetive: volte ao texto e releia este trecho — “cada vez menos crianças frequentam bibliotecas públicas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A frequência de crianças em bibliotecas”. O assunto que percorre todo o texto é essa frequência cada vez menor. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual frase resume melhor a IDEIA CENTRAL do texto?",
@@ -216,34 +306,61 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🕵️ Exato! Essa é a defesa final do texto: tornar as bibliotecas mais atrativas.",
         feedbackErro: "O texto não só descreve o problema — ele defende uma solução no último parágrafo. Releia a conclusão.",
         ondeEstaNoTexto: "…é preciso tornar as bibliotecas mais atrativas e conectadas à vida digital das crianças…",
+        dica: "🕵️ Pista de detetive: volte ao texto e releia este trecho — “é preciso tornar as bibliotecas mais atrativas e conectadas à vida digital das crianças”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É preciso tornar as bibliotecas mais atrativas para reconquistar as crianças”. Essa é a defesa final do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
 
-  momento_minijogo: {
-    titulo: "Caça ao Tema ou à Ideia Central",
-    instrucao: "Cada frase abaixo é uma pista de investigação. Arraste cada uma para o alvo certo: TEMA (o assunto) ou IDEIA CENTRAL (o que se defende).",
-    jogo: {
-      tipo: "arrastarParaAlvo",
-      titulo: "Tema ou Ideia Central?",
-      bloco: {
-        instrucao: "Leia cada frase e decida: ela só nomeia um assunto, ou ela defende algo sobre esse assunto?",
-        itens: [
-          { id: "i1", texto: "Alimentação escolar", alvoId: "tema" },
-          { id: "i2", texto: "É preciso investir mais em merendas nutritivas nas escolas públicas", alvoId: "ideia" },
-          { id: "i3", texto: "Poluição dos rios", alvoId: "tema" },
-          { id: "i4", texto: "As indústrias devem tratar seus resíduos antes de despejá-los nos rios", alvoId: "ideia" },
-          { id: "i5", texto: "Uso de bicicletas na cidade", alvoId: "tema" },
-          { id: "i6", texto: "Mais ciclovias tornariam as cidades mais seguras para quem pedala", alvoId: "ideia" },
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Relatório do Detetive de Textos",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo declarando o tema e a ideia central",
+        comando:
+          "Escolha um assunto que você conhece bem (um esporte, um animal, uma tecnologia). Escreva UM parágrafo em que a primeira frase diga o TEMA e a segunda frase declare a IDEIA CENTRAL — o que você defende ou afirma sobre esse tema.",
+        linhas: 5,
+        modelo: [
+          "O tema deste texto é o uso excessivo de celular por crianças.",
+          "Defendo que é preciso limitar o tempo de tela para proteger o sono e a atenção.",
+          "Isso porque especialistas mostram que dormir mal atrapalha o aprendizado na escola.",
+          "Por isso, cada família deveria combinar horários claros para o uso das telas.",
         ],
-        alvos: [
-          { id: "tema", nome: "TEMA (o assunto)" },
-          { id: "ideia", nome: "IDEIA CENTRAL (o que se defende)" },
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "A primeira frase do meu parágrafo diz claramente o TEMA.",
+          "A segunda frase declara a IDEIA CENTRAL — o que eu defendo sobre esse tema.",
         ],
-        feedbackAcerto: "🕵️ Isso! Você já distingue com precisão o assunto geral da mensagem que o texto defende.",
-        feedbackErro: "Pense: se a frase só nomeia um assunto em poucas palavras, é TEMA. Se ela afirma algo, defende ou recomenda uma ação, é IDEIA CENTRAL.",
+        cicloRevisao: true,
       },
-    },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Como o Cérebro Encontra o Assunto",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você já parou para pensar como um bom leitor descobre, em segundos, do que um texto está falando? Ele não lê palavra por palavra tentando decorar tudo. Em vez disso, procura pistas: o título, as primeiras frases e as palavras que se repetem várias vezes ao longo do texto.",
+      "Essas pistas revelam o tema, ou seja, o assunto geral que liga todas as partes do texto. Mas um leitor atento vai além: ele também busca a ideia central, que é a mensagem que o autor quer defender sobre aquele assunto. Encontrar as duas coisas exige treino e paciência.",
+      "Com a prática, essa busca se torna quase automática. O cérebro aprende a separar o que é essencial do que é apenas detalhe, e a leitura passa a ser mais rápida e mais compreensível. Por isso, treinar esse olhar todos os dias transforma qualquer criança em uma leitora ou leitor mais seguro.",
+    ],
+    metaSegundos: 69,
   },
 
   momento09_revisao: {
@@ -263,6 +380,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🕵️ Isso! 'Praças públicas' é só o tema; a frase completa que defende uma ação é a ideia central.",
       feedbackErro: "As opções 'praças públicas' e 'bairros periféricos' são só partes do assunto (tema). A ideia central é a frase que defende algo.",
+      dica: "🕵️ Pista de detetive: lembre que o tema cabe num rótulo curto; a ideia central é a frase completa que defende uma ação sobre esse rótulo.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “É preciso mais praças arborizadas nos bairros periféricos”. 'Praças públicas' é só o tema; a frase completa que defende uma ação é a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -274,10 +394,14 @@ export const aula1: AulaPortuguesV4 = {
           "A frase que resume o que o texto defende",
           "O assunto geral do texto, dito em poucas palavras",
           "Sempre o título exato do texto",
+          "A opinião pessoal de quem está lendo",
         ],
         correta: 1,
         feedbackAcerto: "🕵️ Isso! O tema é o rótulo do assunto.",
         feedbackErro: "O tema é apenas o assunto geral, como um rótulo — não é a mensagem completa do texto.",
+        dica: "🕵️ Pista de detetive: lembre que o tema é só o assunto, em poucas palavras — como um rótulo, sem defender nada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O assunto geral do texto, dito em poucas palavras”. O tema é o rótulo do assunto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é a 'ideia central' de um texto?",
@@ -285,10 +409,14 @@ export const aula1: AulaPortuguesV4 = {
           "O mesmo que o tema",
           "O que o texto afirma ou defende sobre o tema",
           "A última palavra do texto",
+          "O nome do autor do texto",
         ],
         correta: 1,
         feedbackAcerto: "🕵️ Correto! A ideia central é a mensagem que o texto quer deixar sobre o assunto.",
         feedbackErro: "A ideia central vai além do assunto: ela mostra o que o texto quer provar ou defender.",
+        dica: "🕵️ Pista de detetive: lembre que a ideia central é a frase completa que mostra o que o texto quer PROVAR sobre o tema.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O que o texto afirma ou defende sobre o tema”. A ideia central é a mensagem que o texto quer deixar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No texto sobre mochilas, qual era a ideia central?",
@@ -296,10 +424,14 @@ export const aula1: AulaPortuguesV4 = {
           "É urgente reduzir o peso das mochilas por causa dos riscos à saúde",
           "Mochilas escolares",
           "Algumas escolas têm armários",
+          "Os alunos gostam de mochilas coloridas",
         ],
         correta: 0,
         feedbackAcerto: "🕵️ Isso! Essa frase mostra o que o texto defendia, não só o assunto.",
         feedbackErro: "'Mochilas escolares' é só o tema. A ideia central defende que o peso precisa ser reduzido.",
+        dica: "🕵️ Pista de detetive: lembre que a ideia central é a frase completa que mostra o que o texto quer PROVAR sobre o tema.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É urgente reduzir o peso das mochilas por causa dos riscos à saúde”. Essa frase mostra o que o texto defendia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual dessas opções é um exemplo de TEMA, e não de ideia central?",
@@ -307,10 +439,14 @@ export const aula1: AulaPortuguesV4 = {
           "Reciclagem de lixo",
           "É essencial reciclar para reduzir o lixo nas cidades",
           "As cidades precisam investir mais em coleta seletiva",
+          "É urgente que todos separem o lixo em casa",
         ],
         correta: 0,
         feedbackAcerto: "🕵️ Exatamente! 'Reciclagem de lixo' é só o assunto, sem defender nada.",
         feedbackErro: "As outras opções defendem algo sobre a reciclagem — por isso são ideias centrais, não temas.",
+        dica: "🕵️ Pista de detetive: lembre que o tema é só o assunto, em poucas palavras — como um rótulo, sem defender nada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Reciclagem de lixo”. É só o assunto, sem defender nada — as outras opções defendem algo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — No texto sobre bibliotecas, qual era a ideia central defendida no fim?",
@@ -318,10 +454,14 @@ export const aula1: AulaPortuguesV4 = {
           "É preciso tornar as bibliotecas mais atrativas para reconquistar as crianças",
           "A frequência de crianças em bibliotecas",
           "Os jogos eletrônicos são mais populares que livros",
+          "As bibliotecas deveriam fechar mais cedo",
         ],
         correta: 0,
         feedbackAcerto: "🕵️ Isso! Você já é capaz de separar o assunto da defesa de um texto. Caso encerrado! 🌟",
         feedbackErro: "'A frequência de crianças em bibliotecas' é o tema. A defesa da solução no fim do texto é a ideia central.",
+        dica: "🕵️ Pista de detetive: lembre que a ideia central é a frase completa que mostra o que o texto quer PROVAR sobre o tema.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É preciso tornar as bibliotecas mais atrativas para reconquistar as crianças”. Essa é a defesa final do texto. Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
