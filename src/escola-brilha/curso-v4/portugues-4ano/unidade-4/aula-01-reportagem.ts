@@ -298,7 +298,7 @@ export const aula01: AulaPortuguesV4 = {
         modelo: [
           "PONTE VELHA GANHA CORRIMÃO NOVO",
           "A ponte de madeira que liga os dois lados do bairro recebeu corrimão na semana passada.",
-          "\"A gente pedia isso há dois anos\", contou dona Célia, moradora da rua de cima.",
+          '"A gente pedia isso há dois anos", contou dona Célia, moradora da rua de cima.',
           "A obra durou três dias e foi feita em mutirão pelos vizinhos.",
         ],
         checklist: [
