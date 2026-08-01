@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
+import { getPerfilPedagogico } from "@/escola-brilha/curso-v4/pedagogia";
 import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";
 
 
@@ -35,6 +36,7 @@ function TrilhaCurso() {
   const navigate = useNavigate();
   const curso = getCursoAny(slug);
   const aulas = listAulasFlat(slug);
+  const perfilPedagogico = curso ? getPerfilPedagogico(curso) : undefined;
   const ehPortugues = curso?.tipoAula === "portugues";
   const ehGeoV1 = curso?.tipoAula === "geo-v1";
   const ehArteV1 = curso?.tipoAula === "arte-v1";
@@ -88,6 +90,20 @@ function TrilhaCurso() {
           </div>
           <h1 className="text-3xl font-black">{curso.titulo}</h1>
           <p className="text-sm text-white/70 mt-1">{curso.descricao}</p>
+          {perfilPedagogico && (
+            <div className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-4 text-sm text-white/90">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-amber-300">Padrão pedagógico</div>
+              <div className="font-bold text-base mt-1">{perfilPedagogico.titulo}</div>
+              <p className="text-white/70 mt-1">{perfilPedagogico.descricao}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {perfilPedagogico.pilares.map((p) => (
+                  <span key={p.titulo} className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                    {p.icone} {p.titulo}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
           {modoLivre && (
             <div className="mt-3 inline-block bg-amber-400 text-[#0d1f55] text-xs font-bold px-3 py-1 rounded-full">
               🔓 Modo admin — todas as aulas destravadas (use ?aluno=1 pra simular aluno)
