@@ -102,6 +102,128 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Carta de leitor e anúncio: textos que convencem",
+    instrucao:
+      "Veja como argumentos sustentam uma opinião na carta de leitor e como o anúncio convida à ação.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Carta de leitor e argumento",
+        explicacao:
+          "A carta de leitor é um texto de opinião enviado a um jornal, defendendo um ponto de vista sobre um assunto público, sempre com ARGUMENTOS — razões que explicam POR QUE o autor pensa assim. Só dizer 'eu acho' não é argumento; é preciso explicar o motivo.",
+        exemplos: [
+          {
+            palavra:
+              "'A praça precisa de reforma porque as crianças não têm onde brincar em segurança.'",
+            destaque: "porque",
+            motivo: "É um argumento: dá o motivo da opinião.",
+          },
+          {
+            palavra: "'Eu acho a praça feia.'",
+            destaque: "eu acho",
+            motivo: "É só opinião solta, sem argumento que a sustente.",
+          },
+          {
+            palavra: "'A reforma vai valorizar os imóveis da região.'",
+            destaque: "vai valorizar",
+            motivo: "Argumento que mostra um benefício concreto.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Qual frase é um ARGUMENTO, e não apenas opinião solta? _",
+            opcoes: [
+              "A praça precisa de reforma porque os bancos estão quebrados e há risco de acidentes",
+              "Eu acho a praça horrível",
+              "A praça é chata",
+            ],
+            correta: 0,
+            feedbackErro: "Argumento explica o PORQUÊ da opinião com um motivo concreto.",
+          },
+          {
+            molde: "Uma carta de leitor deve ser enviada para: _",
+            opcoes: [
+              "Um jornal ou revista, defendendo um ponto de vista sobre um assunto público",
+              "Um amigo, contando uma novidade pessoal",
+              "Um personagem de ficção",
+            ],
+            correta: 0,
+            feedbackErro:
+              "A carta de leitor tem como destino um veículo de comunicação, sobre um assunto de interesse público.",
+          },
+          {
+            molde: "'A praça precisa de reforma.' Para virar argumento, essa frase precisa: _",
+            opcoes: [
+              "Ganhar um motivo, como 'porque as crianças não têm onde brincar'",
+              "Ficar mais curta",
+              "Virar uma pergunta",
+            ],
+            correta: 0,
+            frase: "A praça precisa de reforma.",
+            feedbackErro: "Um argumento sempre traz o motivo que sustenta a opinião.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Anúncio: chamada e apelo à ação",
+        explicacao:
+          "O anúncio é um texto persuasivo e direto, com uma CHAMADA que atrai atenção, informação prática (data, hora, local) e um APELO À AÇÃO, convidando o leitor a fazer algo — como participar de um mutirão.",
+        exemplos: [
+          {
+            palavra: "'MUTIRÃO NESTE SÁBADO! Venha ajudar a limpar nossa praça.'",
+            destaque: "chamada + apelo",
+            motivo: "Chama atenção e convida a agir.",
+          },
+          {
+            palavra: "'Sábado, dia 12, às 9h, na Praça da Alegria.'",
+            destaque: "data, hora, local",
+            motivo: "Informação prática essencial de um anúncio.",
+          },
+          {
+            palavra: "'Traga sua luva e sua vontade de ajudar!'",
+            destaque: "apelo à ação",
+            motivo: "Convida diretamente o leitor a participar.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "O que NÃO pode faltar num bom anúncio de mutirão? _",
+            opcoes: [
+              "Data, hora e local do evento",
+              "Uma longa explicação científica",
+              "Uma definição de dicionário",
+            ],
+            correta: 0,
+            feedbackErro:
+              "Informação prática (quando e onde) é essencial para quem quiser participar.",
+          },
+          {
+            molde: "Qual frase é um bom APELO À AÇÃO? _",
+            opcoes: [
+              "Venha ajudar no mutirão neste sábado!",
+              "A praça foi construída em 1980.",
+              "Nossa cidade tem 5 praças.",
+            ],
+            correta: 0,
+            feedbackErro:
+              "O apelo à ação convida o leitor a fazer algo, usando verbos como 'venha' e 'participe'.",
+          },
+          {
+            molde: "A CHAMADA de um anúncio serve para: _",
+            opcoes: [
+              "Atrair a atenção do leitor logo de início",
+              "Explicar detalhes técnicos do assunto",
+              "Contar uma longa história",
+            ],
+            correta: 0,
+            feedbackErro: "A chamada é a primeira frase, forte e curta, que chama a atenção.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao: "Vamos ler juntos a carta de leitor e o anúncio escritos pelo time de exploradores.",
     leitura: {

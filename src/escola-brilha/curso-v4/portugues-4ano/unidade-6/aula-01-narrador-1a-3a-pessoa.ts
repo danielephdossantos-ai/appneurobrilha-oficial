@@ -89,6 +89,113 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Caçando as pistas do narrador",
+    instrucao:
+      "Observe cada trecho e descubra se o narrador está DENTRO da cena (1ª pessoa) ou DE FORA dela (3ª pessoa).",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Narrador em 1ª pessoa",
+        explicacao:
+          "Na 1ª pessoa, o narrador é um personagem da história e usa 'eu' ou 'nós'. Ele só sabe contar o que viveu, sentiu e viu de dentro da cena — nunca o que se passa na cabeça dos outros.",
+        exemplos: [
+          {
+            palavra: "Eu abri a mochila e senti o cheiro de terra molhada.",
+            destaque: "Eu ... senti",
+            motivo: "O verbo em 1ª pessoa mostra que quem narra viveu a cena por dentro.",
+          },
+          {
+            palavra: "Nós corremos até a fonte antes que a chuva começasse.",
+            destaque: "Nós corremos",
+            motivo: "'Nós' indica narrador-personagem, participando junto de outros.",
+          },
+          {
+            palavra: "Meu coração disparou quando ouvi o trovão.",
+            destaque: "Meu coração",
+            motivo: "O pronome possessivo 'meu' também é marca de narrador em 1ª pessoa.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Eu olhei para trás e vi a trilha desaparecendo na neblina.' Esse narrador está em: _",
+            opcoes: ["1ª pessoa", "3ª pessoa", "Não é possível saber"],
+            correta: 0,
+            frase: "Eu olhei para trás e vi a trilha desaparecendo na neblina.",
+            feedbackErro: "O uso de 'eu' mostra que o narrador é personagem da cena: 1ª pessoa.",
+          },
+          {
+            molde: "'Eu e meu irmão dividimos a última fruta da mochila.' Esse narrador está em: _",
+            opcoes: ["1ª pessoa", "3ª pessoa", "Nenhuma das duas"],
+            correta: 0,
+            frase: "Eu e meu irmão dividimos a última fruta da mochila.",
+            feedbackErro:
+              "'Eu' aparece logo no início: o narrador participa da cena, em 1ª pessoa.",
+          },
+          {
+            molde:
+              "'Só eu sei o que senti ao ver a cachoeira pela primeira vez.' Esse narrador está em: _",
+            opcoes: ["1ª pessoa", "3ª pessoa", "As duas ao mesmo tempo"],
+            correta: 0,
+            frase: "Só eu sei o que senti ao ver a cachoeira pela primeira vez.",
+            feedbackErro:
+              "'Eu sei' e 'senti' mostram narrador-personagem contando algo vivido por dentro.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Narrador em 3ª pessoa",
+        explicacao:
+          "Na 3ª pessoa, o narrador está de fora da história e usa nomes ou 'ele/ela/eles'. Esse narrador pode observar a cena inteira e até contar o que vários personagens fazem ou sentem ao mesmo tempo.",
+        exemplos: [
+          {
+            palavra: "Zeca abriu a mochila e sentiu o cheiro de terra molhada.",
+            destaque: "Zeca ... sentiu",
+            motivo: "O nome do personagem no lugar de 'eu' indica narrador de fora, em 3ª pessoa.",
+          },
+          {
+            palavra: "Eles correram até a fonte antes que a chuva começasse.",
+            destaque: "Eles correram",
+            motivo: "'Eles' mostra que quem narra observa o grupo de fora da cena.",
+          },
+          {
+            palavra: "O coração dele disparou quando ouviu o trovão.",
+            destaque: "O coração dele",
+            motivo: "O pronome 'dele' no lugar de 'meu' é marca de narrador em 3ª pessoa.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Aurora olhou para trás e viu a trilha desaparecendo na neblina.' Esse narrador está em: _",
+            opcoes: ["3ª pessoa", "1ª pessoa", "Não é possível saber"],
+            correta: 0,
+            frase: "Aurora olhou para trás e viu a trilha desaparecendo na neblina.",
+            feedbackErro: "O nome 'Aurora' no lugar de 'eu' mostra narrador de fora: 3ª pessoa.",
+          },
+          {
+            molde: "'Os irmãos dividiram a última fruta da mochila.' Esse narrador está em: _",
+            opcoes: ["3ª pessoa", "1ª pessoa", "Nenhuma das duas"],
+            correta: 0,
+            frase: "Os irmãos dividiram a última fruta da mochila.",
+            feedbackErro: "'Os irmãos' é uma forma de 3ª pessoa: narrador observando de fora.",
+          },
+          {
+            molde:
+              "'Ninguém sabia o que ela sentiu ao ver a cachoeira pela primeira vez.' Esse narrador está em: _",
+            opcoes: ["3ª pessoa", "1ª pessoa", "As duas ao mesmo tempo"],
+            correta: 0,
+            frase: "Ninguém sabia o que ela sentiu ao ver a cachoeira pela primeira vez.",
+            feedbackErro:
+              "'Ela sentiu' mostra que o narrador está de fora, contando sobre outra pessoa: 3ª pessoa.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o primeiro relato do baú. Repare em quem fala e como a voz do narrador aparece nas palavras.",

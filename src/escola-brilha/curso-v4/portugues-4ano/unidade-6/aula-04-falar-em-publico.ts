@@ -107,6 +107,110 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Preparando a apresentação do Sarau",
+    instrucao:
+      "Observe cada situação e descubra qual atitude de quem fala em público está sendo mostrada.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Planejamento e ritmo",
+        explicacao:
+          "Planejamento é organizar antes o que vai falar — começo, meio e fim — para não se perder na hora. Ritmo é a velocidade da fala: nem rápido demais (ninguém entende), nem devagar demais (todo mundo se distrai).",
+        exemplos: [
+          {
+            palavra: "Mira escreveu num papel os três pontos que queria contar sobre a viagem.",
+            destaque: "escreveu ... os três pontos",
+            motivo: "Organizar as ideias antes de falar é planejamento.",
+          },
+          {
+            palavra: "Zeca falou devagar, uma ideia de cada vez, para todos entenderem.",
+            destaque: "falou devagar",
+            motivo: "Controlar a velocidade da fala para ser compreendido é cuidar do ritmo.",
+          },
+          {
+            palavra: "Aurora treinou sua fala em casa antes de ir para o Sarau.",
+            destaque: "treinou sua fala",
+            motivo: "Ensaiar antes também faz parte do planejamento da apresentação.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Antes de falar, Léo anotou o começo, o meio e o fim da sua história.' Isso mostra: _",
+            opcoes: ["Planejamento", "Ritmo", "Pausa"],
+            correta: 0,
+            frase: "Antes de falar, Léo anotou o começo, o meio e o fim da sua história.",
+            feedbackErro: "Organizar as ideias antes de apresentar é planejamento.",
+          },
+          {
+            molde:
+              "'Mira falou tão rápido que ninguém entendeu o final da história.' O problema foi de: _",
+            opcoes: ["Ritmo", "Planejamento", "Contato visual"],
+            correta: 0,
+            frase: "Mira falou tão rápido que ninguém entendeu o final da história.",
+            feedbackErro: "Falar rápido demais é um problema de ritmo, não de planejamento.",
+          },
+          {
+            molde:
+              "'Zeca fez uma lista com os tópicos que queria contar sobre a trilha.' Isso é: _",
+            opcoes: ["Planejamento", "Pausa", "Apoio visual"],
+            correta: 0,
+            frase: "Zeca fez uma lista com os tópicos que queria contar sobre a trilha.",
+            feedbackErro: "Fazer uma lista de tópicos antes de falar é organizar-se: planejamento.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Pausa, contato visual e apoio visual",
+        explicacao:
+          "Pausa é parar um instante entre as ideias para quem escuta organizar o que já ouviu. Contato visual é olhar para quem está ouvindo, não só para o papel. Apoio visual é um cartaz, desenho ou objeto que ajuda a explicar a fala.",
+        exemplos: [
+          {
+            palavra: "Aurora fez uma pausa depois de contar a primeira parte da aventura.",
+            destaque: "fez uma pausa",
+            motivo: "Parar um instante entre as ideias ajuda quem escuta a acompanhar.",
+          },
+          {
+            palavra: "Zeca ergueu os olhos do papel e olhou para os colegas ao falar.",
+            destaque: "olhou para os colegas",
+            motivo: "Olhar para quem escuta, e não só para o papel, é contato visual.",
+          },
+          {
+            palavra: "Mira mostrou um mapa desenhado enquanto contava sua descoberta.",
+            destaque: "mostrou um mapa desenhado",
+            motivo: "Usar um desenho para ajudar a explicar a fala é apoio visual.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Léo parou um instante depois de contar a primeira parte, antes de continuar.' Isso é: _",
+            opcoes: ["Pausa", "Apoio visual", "Ritmo"],
+            correta: 0,
+            frase: "Léo parou um instante depois de contar a primeira parte, antes de continuar.",
+            feedbackErro: "Parar um instante entre as ideias é fazer uma pausa.",
+          },
+          {
+            molde: "'Aurora olhou para a turma inteira enquanto contava sua história.' Isso é: _",
+            opcoes: ["Contato visual", "Apoio visual", "Planejamento"],
+            correta: 0,
+            frase: "Aurora olhou para a turma inteira enquanto contava sua história.",
+            feedbackErro: "Olhar para quem escuta, e não só para o papel, é contato visual.",
+          },
+          {
+            molde: "'Zeca levou um cartaz com desenhos para explicar sua apresentação.' Isso é: _",
+            opcoes: ["Apoio visual", "Pausa", "Contato visual"],
+            correta: 0,
+            frase: "Zeca levou um cartaz com desenhos para explicar sua apresentação.",
+            feedbackErro: "Um cartaz ou desenho que ajuda a explicar a fala é apoio visual.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia em voz alta, prestando atenção em como cada explorador se preparou para falar no Sarau.",

@@ -107,6 +107,125 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Reportagem: fontes e dados de verdade",
+    instrucao:
+      "Veja como a reportagem usa fontes e dados para investigar mais fundo que uma notícia.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Reportagem x notícia",
+        explicacao:
+          "A notícia é curta e conta um fato rapidamente. A reportagem é mais longa e investiga: ouve várias FONTES (pessoas ou documentos confiáveis) e reúne DADOS (números, datas) para explicar o fato a fundo.",
+        exemplos: [
+          {
+            palavra: "Notícia: 'Ponte é reconstruída no bairro.'",
+            destaque: "curta",
+            motivo: "Informa o fato rapidamente, sem investigar.",
+          },
+          {
+            palavra: "Reportagem com entrevista da engenheira e do morador.",
+            destaque: "fontes",
+            motivo: "Ouve vozes diferentes para aprofundar o assunto.",
+          },
+          {
+            palavra: "'Passam 500 carros por dia pela ponte.'",
+            destaque: "dado",
+            motivo: "Número que dá credibilidade à reportagem.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Qual texto é uma REPORTAGEM? _",
+            opcoes: [
+              "O que traz entrevistas e dados sobre o fato",
+              "O que só informa o fato em uma frase",
+              "O que é sempre inventado",
+            ],
+            correta: 0,
+            feedbackErro:
+              "Reportagem investiga com fontes e dados; notícia só informa rapidamente.",
+          },
+          {
+            molde:
+              "'A engenheira Ana Paula afirmou que a obra termina em 60 dias.' Isso é um exemplo de: _",
+            opcoes: ["Uma fonte sendo ouvida", "Um dado sem fonte", "Uma opinião do repórter"],
+            correta: 0,
+            frase: "A engenheira Ana Paula afirmou que a obra termina em 60 dias.",
+            feedbackErro: "A engenheira é a FONTE que forneceu a informação ao repórter.",
+          },
+          {
+            molde: "Por que a reportagem ouve MAIS de uma fonte? _",
+            opcoes: [
+              "Para mostrar pontos de vista diferentes e ser mais confiável",
+              "Porque é obrigatório ter três pessoas",
+              "Porque uma só fonte sempre mente",
+            ],
+            correta: 0,
+            feedbackErro:
+              "Ouvir várias fontes garante uma visão mais completa e confiável do fato.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Dados: números que dão credibilidade",
+        explicacao:
+          "Dados são números, datas ou estatísticas que comprovam uma informação da reportagem. Eles ajudam o leitor a confiar no texto, porque mostram que a informação foi apurada, não inventada.",
+        exemplos: [
+          {
+            palavra: "'A obra começou em março de 2023.'",
+            destaque: "março de 2023",
+            motivo: "Data precisa que comprova o início da obra.",
+          },
+          {
+            palavra: "'Passam 500 carros por dia pela ponte.'",
+            destaque: "500 carros",
+            motivo: "Número que mostra a importância da ponte.",
+          },
+          {
+            palavra: "'A reforma custou 2 milhões de reais.'",
+            destaque: "2 milhões",
+            motivo: "Dado financeiro que dá dimensão ao fato.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Qual frase traz um DADO? _",
+            opcoes: [
+              "A ponte tem 40 metros de comprimento",
+              "A ponte é muito bonita",
+              "Todos gostam da nova ponte",
+            ],
+            correta: 0,
+            feedbackErro: "Dado é uma informação numérica precisa, como '40 metros'.",
+          },
+          {
+            molde: "Por que dados tornam a reportagem mais confiável? _",
+            opcoes: [
+              "Porque mostram que a informação foi apurada com precisão",
+              "Porque deixam o texto mais bonito",
+              "Porque substituem as fontes",
+            ],
+            correta: 0,
+            feedbackErro: "Números precisos mostram apuração séria, não inventada.",
+          },
+          {
+            molde: "'Segundo dados da prefeitura, 500 carros passam pela ponte por dia.' Isso é: _",
+            opcoes: [
+              "Um dado com fonte identificada",
+              "Uma opinião pessoal",
+              "Um exagero sem prova",
+            ],
+            correta: 0,
+            frase: "Segundo dados da prefeitura, 500 carros passam pela ponte por dia.",
+            feedbackErro:
+              "O número vem de uma fonte (a prefeitura), o que reforça a credibilidade.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao: "Vamos ler juntos a reportagem que a equipe escreveu sobre a Ponte da Alegria.",
     leitura: {

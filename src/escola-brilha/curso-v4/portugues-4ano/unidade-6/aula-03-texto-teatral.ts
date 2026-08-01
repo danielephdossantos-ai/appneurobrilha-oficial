@@ -93,6 +93,111 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Montando as peças do texto teatral",
+    instrucao:
+      "Observe cada trecho de peça e identifique o elemento do texto teatral que aparece nele.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Cena e rubrica",
+        explicacao:
+          "A cena é uma parte da peça, marcada por uma mudança de lugar, tempo ou personagens. A rubrica é a instrução entre parênteses (ou em itálico) que diz como o personagem age ou se sente — ela nunca é fala.",
+        exemplos: [
+          {
+            palavra: "CENA 2 — À beira do rio, ao amanhecer.",
+            destaque: "CENA 2",
+            motivo: "Marca uma nova parte da peça, com mudança de lugar e tempo.",
+          },
+          {
+            palavra: "MIRA: (correndo, ofegante) Esperem por mim!",
+            destaque: "(correndo, ofegante)",
+            motivo: "Rubrica entre parênteses: diz como Mira está agindo, não é fala dela.",
+          },
+          {
+            palavra: "ZECA: (sussurrando) Silêncio, alguém está vindo.",
+            destaque: "(sussurrando)",
+            motivo: "Instrução de como a fala deve ser dita: é uma rubrica.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'CENA 3 — Dentro da caverna, à noite.' Isso é: _",
+            opcoes: ["Uma cena", "Uma rubrica", "Um diálogo"],
+            correta: 0,
+            frase: "CENA 3 — Dentro da caverna, à noite.",
+            feedbackErro: "Indica mudança de lugar e tempo dentro da peça: é uma cena.",
+          },
+          {
+            molde:
+              "'AURORA: (olhando para o céu, preocupada) Vem chuva por aí.' O trecho entre parênteses é: _",
+            opcoes: ["Uma rubrica", "Uma cena", "O nome do personagem"],
+            correta: 0,
+            frase: "AURORA: (olhando para o céu, preocupada) Vem chuva por aí.",
+            feedbackErro:
+              "O que vem entre parênteses são instruções de ação/sentimento: é rubrica.",
+          },
+          {
+            molde: "'CENA 1 — Na trilha, sob o sol forte.' Isso é: _",
+            opcoes: ["Uma cena", "Uma fala", "Uma rubrica"],
+            correta: 0,
+            frase: "CENA 1 — Na trilha, sob o sol forte.",
+            feedbackErro:
+              "Marca o início de uma parte da peça, com lugar e momento definidos: é cena.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Personagem e diálogo",
+        explicacao:
+          "O personagem é quem vive a história dentro da peça — seu nome aparece antes de cada fala, geralmente em maiúsculas. O diálogo é a conversa entre os personagens, base do texto teatral, sem narrador contando por fora.",
+        exemplos: [
+          {
+            palavra: "ZECA: Vamos seguir pela esquerda, o mapa indica isso.",
+            destaque: "ZECA:",
+            motivo: "O nome antes dos dois-pontos identifica o personagem que fala.",
+          },
+          {
+            palavra: "AURORA: Tem certeza? Eu acho melhor pela direita.",
+            destaque: "AURORA:",
+            motivo: "Outra personagem responde, formando um diálogo entre os dois.",
+          },
+          {
+            palavra: "ZECA: Está bem, vamos pela direita então.",
+            destaque: "vamos pela direita então",
+            motivo: "A troca de falas entre ZECA e AURORA constitui o diálogo da cena.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'MIRA: Encontrei água fresca aqui perto!' O nome 'MIRA' indica: _",
+            opcoes: ["Um personagem", "Uma rubrica", "Uma cena"],
+            correta: 0,
+            frase: "MIRA: Encontrei água fresca aqui perto!",
+            feedbackErro: "O nome antes da fala identifica quem está falando: é o personagem.",
+          },
+          {
+            molde:
+              "'ZECA: Que bom! ' / 'MIRA: Vamos encher as garrafas.' Essa troca de falas é chamada de: _",
+            opcoes: ["Diálogo", "Rubrica", "Cena"],
+            correta: 0,
+            frase: "ZECA: Que bom! MIRA: Vamos encher as garrafas.",
+            feedbackErro: "A conversa entre os dois personagens é o diálogo da peça.",
+          },
+          {
+            molde: "'AURORA: Precisamos continuar antes de escurecer.' O nome 'AURORA' indica: _",
+            opcoes: ["Um personagem", "Uma cena", "Uma rubrica"],
+            correta: 0,
+            frase: "AURORA: Precisamos continuar antes de escurecer.",
+            feedbackErro:
+              "Sempre que um nome vem antes dos dois-pontos, ele identifica o personagem que fala.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia a cena em voz alta, com um colega ou familiar fazendo cada personagem. Preste atenção nas rubricas entre parênteses.",

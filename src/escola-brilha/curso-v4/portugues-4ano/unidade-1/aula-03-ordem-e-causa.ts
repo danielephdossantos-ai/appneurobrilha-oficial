@@ -88,6 +88,107 @@ export const aula3: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Montando a corrente de causa e consequência",
+    instrucao: "Observe cada elo da corrente: qual fato é a CAUSA e qual é a CONSEQUÊNCIA.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Causa e consequência: a corrente dos fatos",
+        explicacao:
+          "A causa é o motivo, o fato que faz outra coisa acontecer. A consequência é o resultado, o que acontece POR CAUSA da causa. Muitos textos formam uma corrente: um fato é consequência do fato anterior e causa do fato seguinte. Palavras como 'porque', 'por isso' e 'então' são os elos que ligam causa e consequência.",
+        exemplos: [
+          {
+            palavra: "Choveu muito, por isso o rio transbordou.",
+            destaque: "por isso",
+            motivo: "'Choveu muito' é a causa; 'o rio transbordou' é a consequência.",
+          },
+          {
+            palavra: "A ponte cedeu porque o rio estava muito cheio.",
+            destaque: "porque",
+            motivo: "'Porque' liga o efeito (ponte cedeu) à sua causa (rio cheio).",
+          },
+          {
+            palavra: "O menino não estudou, então foi mal na prova.",
+            destaque: "então",
+            motivo: "'Então' introduz a consequência de não ter estudado.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'A estrada ficou escorregadia _ tinha chovido a noite toda.'",
+            opcoes: ["porque", "mas", "apesar de"],
+            correta: 0,
+            frase: "A estrada ficou escorregadia porque tinha chovido a noite toda.",
+            feedbackErro:
+              "O conectivo precisa introduzir a CAUSA (a chuva); 'porque' faz esse papel.",
+          },
+          {
+            molde: "'O time treinou muito a semana toda, _ venceu o campeonato.'",
+            opcoes: ["por isso", "porque", "quando"],
+            correta: 0,
+            frase: "O time treinou muito a semana toda, por isso venceu o campeonato.",
+            feedbackErro:
+              "Aqui a causa (treinar muito) já foi dita antes; 'por isso' introduz a consequência.",
+          },
+          {
+            molde: "'Aponte a CAUSA da frase: A luz apagou porque a energia da rua faltou.' _",
+            opcoes: ["A energia da rua faltou", "A luz apagou", "Não há causa nessa frase"],
+            correta: 0,
+            frase: "A luz apagou porque a energia da rua faltou.",
+            feedbackErro: "O que vem depois de 'porque' é sempre a causa: a falta de energia.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Conectivos: os elos que ligam causa e efeito",
+        explicacao:
+          "Conectivos são palavras que ligam ideias dentro de um texto. Nos textos de causa e consequência, os mais comuns são: PORQUE (explica a causa, geralmente depois da consequência), POR ISSO e ENTÃO (introduzem a consequência, depois de a causa já ter sido dita). Escolher o conectivo certo ajuda o leitor a entender qual fato aconteceu primeiro e qual foi o resultado.",
+        exemplos: [
+          {
+            palavra: "Ficou tarde, então acendemos as lanternas.",
+            destaque: "então",
+            motivo: "A consequência (acender lanternas) vem depois da causa (ficar tarde).",
+          },
+          {
+            palavra: "Acendemos as lanternas porque ficou tarde.",
+            destaque: "porque",
+            motivo: "Aqui a ordem inverte: consequência primeiro, causa depois de 'porque'.",
+          },
+          {
+            palavra: "Estava com muita sede, por isso bebeu água rapidamente.",
+            destaque: "por isso",
+            motivo: "'Por isso' também introduz a consequência, como 'então'.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'O fogo se espalhou rápido _ o mato estava muito seco.'",
+            opcoes: ["porque", "por isso", "mas"],
+            correta: 0,
+            frase: "O fogo se espalhou rápido porque o mato estava muito seco.",
+            feedbackErro: "A causa (mato seco) vem depois; use 'porque' para introduzi-la.",
+          },
+          {
+            molde: "'O mato estava muito seco, _ o fogo se espalhou rápido.'",
+            opcoes: ["por isso", "porque", "quando"],
+            correta: 0,
+            frase: "O mato estava muito seco, por isso o fogo se espalhou rápido.",
+            feedbackErro: "Aqui a causa já foi dita primeiro; 'por isso' introduz a consequência.",
+          },
+          {
+            molde: "'Não tinha comido nada de manhã, _ sentiu fraqueza no meio da trilha.'",
+            opcoes: ["então", "porque", "apesar de"],
+            correta: 0,
+            frase: "Não tinha comido nada de manhã, então sentiu fraqueza no meio da trilha.",
+            feedbackErro:
+              "A causa (não comer) veio primeiro; 'então' liga à consequência (fraqueza).",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao:
       "Leia procurando os conectivos que ligam um fato ao outro: eles são os elos da corrente.",
