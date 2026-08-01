@@ -291,6 +291,55 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Revisão de verdade",
+        comando:
+          "Pegue um texto que você já escreveu nesta unidade e reescreva-o inteiro aplicando o checklist profissional: corte o que sobra, troque repetições, conserte pontuação e melhore a frase final.",
+        linhas: 8,
+        modelo: [
+          "Versão antiga: A praça é boa. A praça tem banco. A praça tem árvore.",
+          "Versão revisada: A praça do bairro é o melhor lugar da vizinhança: tem bancos à sombra e árvores altas que seguram o sol da tarde.",
+          "Fechei o texto com uma frase que dá vontade de visitar o lugar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Cortei palavras e frases que não faziam falta.",
+          "Melhorei a frase final do texto.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Olhar do Revisor",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Revisar não é procurar erros para se envergonhar: é dar ao texto a segunda chance que todo escritor precisa.",
+      "O revisor lê devagar, em voz alta, e desconfia de tudo — da vírgula solta, da palavra repetida, da frase que promete e não entrega.",
+      "Ao terminar, ele deixa o texto descansar um pouco e lê de novo, porque quase sempre aparece mais uma coisa para melhorar.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "Todo escritor revisa: ortografia, concordância, pontuação, repetição e clareza.",

@@ -320,6 +320,55 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Texto sem tropeço ortográfico",
+        comando:
+          "Escreva um parágrafo contando um passeio, usando pelo menos 6 palavras com os encontros difíceis: X ou CH, G ou J, S ou Z, SS ou Ç.",
+        linhas: 6,
+        modelo: [
+          "No sábado fomos até a cachoeira, e eu levei minha mochila laranja.",
+          "A viagem foi comprida, mas a paisagem valeu a passagem.",
+          "Almoçamos peixe assado com açaí de sobremesa.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei pelo menos 6 palavras com encontros difíceis.",
+          "Consultei a família da palavra quando fiquei em dúvida.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Travessia",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A viagem até a cachoeira exigia paciência: primeiro a estrada de chão, depois a passagem estreita entre as pedras.",
+      "No caminho, o guia mostrava as folhas grandes, explicava o barulho dos bichos e pedia silêncio quando algum pássaro aparecia.",
+      "Ao chegar, ninguém falou nada por um instante — só se ouvia a água caindo, gelada e barulhenta, no poço de pedra.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "X e CH podem soar igual; depois de ditongo costuma ser X, e depois de EN- costuma ser CH.",

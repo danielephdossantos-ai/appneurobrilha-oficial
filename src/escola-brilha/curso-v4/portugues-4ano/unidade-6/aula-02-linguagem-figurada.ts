@@ -307,6 +307,55 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Texto com imagens de linguagem",
+        comando:
+          "Descreva um lugar usando pelo menos três recursos de linguagem figurada: uma comparação (como...), uma metáfora e uma personificação.",
+        linhas: 6,
+        modelo: [
+          "O mar estava liso como um espelho recém-limpo.",
+          "A noite era um manto que cobria as casas devagar.",
+          "O vento assobiava entre as telhas, sem pedir licença.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei comparação, metáfora e personificação.",
+          "As imagens combinam com o clima do texto.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Mar de Espelho",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A poesia não descreve o mundo do jeito mais direto: ela procura um caminho torto que faça o leitor enxergar melhor.",
+      "Dizer que o mar é um espelho, que a noite tem manto e que o vento assobia é entregar a cena ao leitor pelos sentidos, não pela explicação.",
+      "Por isso a linguagem figurada exige leitura lenta: cada imagem pede um instante de silêncio para se abrir dentro da cabeça de quem lê.",
+    ],
+    metaSegundos: 40,
+  },
+
   momento09_revisao: {
     pontos: [
       "METÁFORA diz que uma coisa É outra, sem 'como', para criar uma imagem forte.",

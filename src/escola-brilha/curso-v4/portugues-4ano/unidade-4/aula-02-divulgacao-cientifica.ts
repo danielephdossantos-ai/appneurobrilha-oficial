@@ -272,6 +272,55 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Explique um fenômeno",
+        comando:
+          "Escolha um fenômeno da natureza (arco-íris, trovão, maré, arco de neblina) e escreva um texto curto explicando como ele acontece, para alguém mais novo. Inclua um glossário com 2 palavras difíceis.",
+        linhas: 7,
+        modelo: [
+          "O arco-íris aparece quando a luz do Sol atravessa gotas de chuva ainda no ar.",
+          "Cada gota funciona como um pequeno prisma: ela separa a luz branca nas sete cores.",
+          "Glossário — prisma: objeto transparente que separa a luz; refração: mudança de caminho da luz ao entrar na água.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Expliquei o fenômeno em ordem: causa, o que acontece, resultado.",
+          "Incluí um glossário explicando as palavras difíceis.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Fenômeno do Arco-Íris",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Depois da chuva, milhões de gotas continuam suspensas no ar, quase invisíveis, esperando o Sol reaparecer.",
+      "Quando a luz entra em cada gota, ela muda de direção, se separa em cores e volta na direção dos nossos olhos.",
+      "O arco que enxergamos não está preso no céu: ele depende de onde estamos, e por isso duas pessoas nunca veem exatamente o mesmo arco-íris.",
+    ],
+    metaSegundos: 34,
+  },
+
   momento09_revisao: {
     pontos: [
       "DIVULGAÇÃO CIENTÍFICA explica um fenômeno real com linguagem clara.",

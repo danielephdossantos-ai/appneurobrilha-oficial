@@ -239,6 +239,56 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Resumo com suas próprias palavras",
+        comando:
+          "Pense em um filme, livro ou episódio que você gostou. Escreva um resumo de 4 a 6 linhas contando SÓ o essencial: quem, onde, qual foi o problema e como terminou. Nada de copiar frases prontas.",
+        linhas: 6,
+        modelo: [
+          "A história acontece numa vila pequena, perto do mar.",
+          "Uma menina descobre que os barcos estão sumindo toda madrugada.",
+          "Ela decide vigiar o porto e encontra a explicação escondida na maré.",
+          "No fim, a vila aprende a prender os barcos de um jeito novo.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu resumo tem só o ESSENCIAL — cortei os detalhes pequenos.",
+          "Escrevi com MINHAS palavras, sem copiar o texto original.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Caderno do Explorador",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Todo explorador carrega um caderno pequeno, com a capa gasta pelo uso e as páginas cheias de anotações rápidas.",
+      "Nele não cabem histórias inteiras: cabe o essencial, aquilo que precisa ser lembrado quando a memória cansar.",
+      "Por isso, resumir é uma arte — é escolher, entre tudo o que aconteceu, as poucas frases que seguram a história em pé.",
+    ],
+    metaSegundos: 32,
+  },
+
   momento09_revisao: {
     pontos: [
       "RESUMIR é contar as ideias principais de um texto usando poucas palavras.",

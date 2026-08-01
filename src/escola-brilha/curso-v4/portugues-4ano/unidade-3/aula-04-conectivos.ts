@@ -360,6 +360,56 @@ export const aula04: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo costurado com conectivos",
+        comando:
+          "Escreva um parágrafo defendendo uma opinião (por exemplo: o recreio deveria ser maior). Use pelo menos quatro conectivos diferentes: porque, mas, além disso, portanto.",
+        linhas: 6,
+        modelo: [
+          "Eu acho que o recreio deveria durar mais dez minutos.",
+          "Isso ajudaria porque a gente volta mais concentrado para a sala.",
+          "Além disso, dá tempo de comer sem pressa.",
+          "Alguns dirão que atrasa a aula, mas o tempo perdido é pequeno; portanto, vale a pena testar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei pelo menos 4 conectivos diferentes.",
+          "Cada conectivo mostra a relação certa entre as ideias.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: As Palavras que Costuram",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Conectivos são as costuras invisíveis de um texto: eles avisam se a próxima ideia soma, se contraria ou se conclui.",
+      "Troque um porque por um mas e a frase inteira muda de lado, mesmo que todas as outras palavras continuem iguais.",
+      "Por isso, escolher o conectivo certo não é enfeite — é decidir qual caminho o pensamento do leitor vai seguir.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "CONECTIVOS são palavras que ligam duas ideias e mostram como elas se relacionam.",

@@ -281,6 +281,56 @@ export const aula3: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva a corrente de causas",
+        comando:
+          "Conte, em um parágrafo, algo que aconteceu com você e explique a CORRENTE: o que aconteceu primeiro, o que isso causou e qual foi a consequência final. Use conectivos como porque, então, por isso.",
+        linhas: 5,
+        modelo: [
+          "Na terça choveu forte a manhã inteira.",
+          "Por isso, o recreio aconteceu dentro da sala.",
+          "Como ninguém pôde correr no pátio, a professora inventou um campeonato de adivinhas.",
+          "No fim, todo mundo saiu rindo — a chuva acabou virando a melhor aula da semana.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu texto mostra CAUSA e CONSEQUÊNCIA, não só uma lista de fatos.",
+          "Usei conectivos de causa (porque, por isso, então).",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Dia em que o Rio Subiu",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Choveu sem parar durante três dias, e o rio que corta a cidade foi subindo devagar, centímetro por centímetro.",
+      "Como o bueiro da rua estava entupido de folhas, a água não teve para onde escorrer e invadiu as calçadas.",
+      "Depois disso, os moradores se organizaram em mutirão: limparam os bueiros, plantaram árvores na margem e combinaram um aviso por mensagem sempre que o nível começasse a subir de novo.",
+    ],
+    metaSegundos: 38,
+  },
+
   momento09_revisao: {
     pontos: [
       "CAUSA é o motivo de algo acontecer; CONSEQUÊNCIA é o resultado desse motivo.",

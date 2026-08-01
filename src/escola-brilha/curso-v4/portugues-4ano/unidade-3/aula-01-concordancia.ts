@@ -323,6 +323,55 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo que concorda",
+        comando:
+          "Descreva a sua sala de aula em um parágrafo, usando pelo menos três frases no PLURAL. Confira se o verbo e os adjetivos acompanharam o plural.",
+        linhas: 5,
+        modelo: [
+          "As carteiras novas ficam viradas para o quadro.",
+          "Os cartazes coloridos cobrem a parede do fundo.",
+          "Meus colegas chegam cedo e organizam os materiais antes da aula.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Todos os verbos concordam com o sujeito (singular ou plural).",
+          "Os adjetivos concordam com o substantivo em gênero e número.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Engrenagem Certa",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Uma frase funciona como uma engrenagem: se uma peça está fora de lugar, o mecanismo inteiro range.",
+      "Quando o sujeito está no plural, o verbo precisa acompanhar; quando o substantivo é feminino, o adjetivo também muda.",
+      "É por isso que ler o próprio texto em voz alta ajuda tanto: o ouvido percebe o desencaixe antes mesmo de a gente entender a regra.",
+    ],
+    metaSegundos: 34,
+  },
+
   momento09_revisao: {
     pontos: [
       "CONCORDÂNCIA NOMINAL: artigo e adjetivo combinam em gênero e número com o substantivo.",

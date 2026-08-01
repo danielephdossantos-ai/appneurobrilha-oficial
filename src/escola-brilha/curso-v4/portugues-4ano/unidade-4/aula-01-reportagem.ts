@@ -280,6 +280,56 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Sua mini-reportagem",
+        comando:
+          "Escolha um assunto da sua escola ou do seu bairro e escreva uma mini-reportagem com título, uma frase de abertura respondendo o que aconteceu, e pelo menos uma FALA de alguém entre aspas.",
+        linhas: 7,
+        modelo: [
+          "PONTE VELHA GANHA CORRIMÃO NOVO",
+          "A ponte de madeira que liga os dois lados do bairro recebeu corrimão na semana passada.",
+          "\"A gente pedia isso há dois anos\", contou dona Célia, moradora da rua de cima.",
+          "A obra durou três dias e foi feita em mutirão pelos vizinhos.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu texto responde: o quê, quem, quando e onde.",
+          "Incluí pelo menos uma fala entre aspas, dizendo quem falou.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Reportagem da Ponte",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A reportagem não se contenta em avisar que a ponte quebrou: ela vai até o lugar, conversa com quem atravessa todo dia e mede quanto tempo o conserto levou.",
+      "O repórter ouve mais de uma versão, confere os números com quem fez a obra e só então escreve.",
+      "É essa apuração — perguntar, checar, voltar a perguntar — que separa uma notícia curta de uma reportagem de verdade.",
+    ],
+    metaSegundos: 37,
+  },
+
   momento09_revisao: {
     pontos: [
       "NOTÍCIA conta um fato de forma rápida e direta.",

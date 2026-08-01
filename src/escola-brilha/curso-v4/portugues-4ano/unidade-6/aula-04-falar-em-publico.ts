@@ -272,6 +272,55 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Roteiro da sua apresentação",
+        comando:
+          "Escreva o roteiro de uma apresentação de 1 minuto sobre um assunto que você domina: abertura que prende a atenção, três pontos principais e uma frase de encerramento.",
+        linhas: 8,
+        modelo: [
+          "Abertura: Vocês sabiam que a nossa escola joga fora mais de dez sacos de papel por semana?",
+          "Ponto 1: de onde vem esse papel. Ponto 2: o que dá para reaproveitar. Ponto 3: como montar o ponto de coleta.",
+          "Encerramento: Se cada sala separar o papel, em um mês a gente enche a primeira caixa. Topam começar amanhã?",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Minha abertura prende a atenção logo na primeira frase.",
+          "Marquei onde vou fazer pausa e mudar o tom da voz.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Voz que Alcança o Fundo da Sala",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Falar em público não é falar alto: é falar com clareza, no ritmo certo, olhando para quem está ouvindo.",
+      "Uma pausa bem colocada vale mais do que uma frase apressada, porque dá tempo de a ideia chegar ao fundo da sala.",
+      "Quem ensaia em voz alta descobre onde a língua tropeça, onde falta ar e qual palavra precisa ser trocada por outra mais simples.",
+    ],
+    metaSegundos: 35,
+  },
+
   momento09_revisao: {
     pontos: [
       "PLANEJAR é organizar a fala em começo, meio e fim antes de apresentar.",

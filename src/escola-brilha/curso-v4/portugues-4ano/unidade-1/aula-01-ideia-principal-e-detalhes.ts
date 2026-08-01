@@ -278,6 +278,56 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo com ideia principal",
+        comando:
+          "Escolha um lugar que você conhece bem (sua rua, sua escola, um parque). Escreva UM parágrafo em que a primeira frase diga a ideia principal e as outras três tragam detalhes que provam essa ideia.",
+        linhas: 5,
+        modelo: [
+          "A praça do meu bairro é o melhor lugar para brincar de tarde.",
+          "Ela tem uma quadra grande, com cesta e traves.",
+          "Debaixo das árvores fica sempre fresco, mesmo no sol forte.",
+          "Por isso, quase toda criança da rua aparece por lá depois da aula.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "A primeira frase do meu parágrafo diz a IDEIA PRINCIPAL.",
+          "Cada detalhe que escrevi comprova essa ideia.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Trilha das Pistas",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A trilha começava atrás da escola e subia devagar até o alto do morro, onde o vento não parava nunca.",
+      "Ao longo do caminho, placas de madeira contavam a história do lugar: aqui existiu um engenho, ali passava um riacho que hoje corre por baixo da rua.",
+      "Quem lê as placas com atenção descobre que a cidade inteira já foi um grande campo — e que cada nome de rua guarda um pedaço dessa memória.",
+    ],
+    metaSegundos: 41,
+  },
+
   momento09_revisao: {
     pontos: [
       "A IDEIA PRINCIPAL é o assunto mais importante de um texto — sem ela, o texto perde o sentido.",

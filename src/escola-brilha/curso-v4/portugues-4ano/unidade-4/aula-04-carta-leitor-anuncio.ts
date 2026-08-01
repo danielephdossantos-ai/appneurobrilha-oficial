@@ -279,6 +279,56 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Carta que convence",
+        comando:
+          "Escreva uma carta de leitor pedindo uma melhoria no seu bairro. Comece dizendo qual é o problema, dê dois argumentos e termine com um pedido claro.",
+        linhas: 7,
+        modelo: [
+          "Escrevo para falar da praça da minha rua, que está sem iluminação há meses.",
+          "Sem luz, as famílias deixam de usar o espaço à noite e o lugar fica abandonado.",
+          "Além disso, as crianças perdem o único ponto de encontro seguro do bairro.",
+          "Peço que as lâmpadas sejam trocadas ainda neste mês.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu texto tem problema, argumentos e pedido claro.",
+          "Pensei em quem vai ler e escolhi palavras adequadas.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Praça que Precisa de Voz",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A praça continua ali, com os bancos tortos e o escorregador enferrujado, esperando alguém que fale por ela.",
+      "Escrever uma carta de leitor é justamente isso: transformar uma reclamação de calçada em um argumento que chega a quem decide.",
+      "Quem escreve bem não grita mais alto — apresenta o problema, mostra as consequências e faz um pedido tão claro que fica difícil ignorar.",
+    ],
+    metaSegundos: 34,
+  },
+
   momento09_revisao: {
     pontos: [
       "CARTA DE LEITOR defende uma opinião com ARGUMENTOS, pensando no público-alvo (leitores e autoridades).",

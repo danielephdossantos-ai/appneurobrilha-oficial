@@ -301,6 +301,56 @@ export const aula2: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Bilhete com os quatro porquês",
+        comando:
+          "Escreva um bilhete para um colega explicando por que você faltou em um combinado. Use pelo menos uma vez 'por que' (pergunta), 'porque' (resposta) e o par 'mas' / 'mais'.",
+        linhas: 6,
+        modelo: [
+          "Você deve estar se perguntando por que eu não apareci ontem.",
+          "Não fui porque minha irmã ficou doente e precisei ficar com ela.",
+          "Queria muito ter ido, mas não deu.",
+          "Na próxima vez eu aviso com mais antecedência.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei 'por que' em pergunta e 'porque' em resposta.",
+          "Conferi cada 'mas' (oposição) e cada 'mais' (quantidade).",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Enigma dos Porquês",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Por que tanta gente confunde as quatro formas se cada uma tem um lugar próprio na frase?",
+      "A resposta é simples: elas soam iguais, mas fazem trabalhos diferentes — uma pergunta, outra responde, uma fecha a frase e a última é substantivo.",
+      "Quem lê com atenção percebe a diferença no sentido, e não apenas no som, e escreve com muito mais segurança.",
+    ],
+    metaSegundos: 34,
+  },
+
   momento09_revisao: {
     pontos: [
       "POR QUE (pergunta) / PORQUE (resposta, causa) / PORQUÊ (substantivo = motivo) / POR QUÊ (isolado, no fim da frase).",

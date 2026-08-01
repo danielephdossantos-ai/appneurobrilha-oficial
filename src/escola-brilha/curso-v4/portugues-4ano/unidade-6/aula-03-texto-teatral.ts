@@ -267,6 +267,56 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva uma cena de teatro",
+        comando:
+          "Escreva uma cena curta de teatro com dois personagens. Use o formato: NOME DO PERSONAGEM, dois-pontos e a fala; e coloque pelo menos duas rubricas entre parênteses.",
+        linhas: 8,
+        modelo: [
+          "CENA 1 — Uma cozinha à noite.",
+          "JOANA (abrindo a geladeira): Alguém comeu o último pedaço de bolo.",
+          "TIÃO (sem levantar os olhos do livro): Deve ter sido o gato.",
+          "JOANA (cruzando os braços): O gato não usa garfo, Tião.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei o formato NOME: fala em todas as falas.",
+          "Coloquei pelo menos duas rubricas entre parênteses.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Cena Escrita",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "No texto teatral quase tudo acontece pela fala: não existe narrador para explicar o que os personagens sentem.",
+      "O que sobra fica nas rubricas, aquelas indicações entre parênteses que dizem como entrar, como falar e para onde olhar.",
+      "Ler uma peça em voz alta é o único jeito de descobrir se os diálogos soam como gente conversando de verdade.",
+    ],
+    metaSegundos: 32,
+  },
+
   momento09_revisao: {
     pontos: [
       "CENA é uma parte da peça, marcada por lugar, tempo ou personagens presentes.",

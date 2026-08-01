@@ -311,6 +311,55 @@ export const aula3: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo da mesma família",
+        comando:
+          "Escolha um radical (por exemplo: terra, flor, pedra, livro) e escreva um parágrafo usando pelo menos 4 palavras da mesma família (terreno, aterrar, enterrado, terrestre).",
+        linhas: 5,
+        modelo: [
+          "O terreno atrás da escola estava cheio de mato.",
+          "A turma resolveu desenterrar as pedras e aterrar os buracos.",
+          "Hoje, aquele pedaço de terra virou uma horta.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei pelo menos 4 palavras do mesmo radical.",
+          "As palavras que escolhi realmente combinam com o sentido do texto.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Árvore das Palavras",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Toda palavra nasce de uma raiz, e dessa raiz brotam galhos que carregam o mesmo sentido de origem.",
+      "De flor vêm floreira, florido, florescer e floricultura; de pedra vêm pedreiro, pedregulho e empedrado.",
+      "Quando você reconhece a raiz, descobre de uma vez a grafia e o significado de dezenas de palavras que ainda nem aprendeu.",
+    ],
+    metaSegundos: 30,
+  },
+
   momento09_revisao: {
     pontos: [
       "RADICAL é o pedaço com o significado principal, que se repete na família de palavras.",

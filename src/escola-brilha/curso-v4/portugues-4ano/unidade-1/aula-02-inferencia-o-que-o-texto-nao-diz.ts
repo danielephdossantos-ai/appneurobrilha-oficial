@@ -274,6 +274,55 @@ export const aula2: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva uma cena cheia de pistas",
+        comando:
+          "Escreva um parágrafo descrevendo uma pessoa chegando em casa — SEM dizer como ela está se sentindo. Deixe 3 pistas (o que ela faz, o que ela carrega, o som que faz) para o leitor inferir a emoção.",
+        linhas: 5,
+        modelo: [
+          "Ana empurrou o portão com o ombro e deixou a mochila cair no chão da sala.",
+          "Ela nem tirou o tênis molhado antes de se jogar no sofá.",
+          "O celular tocou três vezes e ela virou a tela para baixo.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Deixei pistas em vez de contar tudo com todas as letras.",
+          "Um colega consegue INFERIR a emoção lendo meu texto.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Porta Entreaberta",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A luz da cozinha estava acesa, mas ninguém respondeu quando Téo chamou pelo nome da avó.",
+      "Sobre a mesa havia duas xícaras ainda mornas, um pano dobrado às pressas e a porta dos fundos entreaberta, batendo com o vento.",
+      "Téo respirou fundo, guardou o susto no bolso e resolveu seguir as marcas de terra que atravessavam o corredor até o quintal.",
+    ],
+    metaSegundos: 33,
+  },
+
   momento09_revisao: {
     pontos: [
       "INFERIR é concluir algo que o texto não diz com todas as letras, juntando pistas + o que já sabemos.",
