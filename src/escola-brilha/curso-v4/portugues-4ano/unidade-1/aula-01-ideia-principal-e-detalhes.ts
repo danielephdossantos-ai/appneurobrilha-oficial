@@ -120,31 +120,36 @@ export const aula1: AulaPortuguesV4 = {
         ],
         desafios: [
           {
-            molde: "Time: 'O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.' _",
+            molde:
+              "Time: 'O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.' _",
             opcoes: [
               "Ideia principal: o cachorro adora correr no parque",
               "Ideia principal: o pelo é preto",
               "Ideia principal: o dono se chama Marcos",
             ],
             correta: 0,
-            frase: "O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.",
+            frase:
+              "O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.",
             feedbackErro:
               "Pergunte: sem 'adora correr no parque', o texto perde o sentido? Sim! Cor do pelo e nome do dono são detalhes.",
           },
           {
-            molde: "Time: 'A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.' _",
+            molde:
+              "Time: 'A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.' _",
             opcoes: [
               "Ideia principal: a escola organizou uma feira de ciências",
               "Ideia principal: os experimentos eram coloridos",
               "Ideia principal: muitos alunos participaram",
             ],
             correta: 0,
-            frase: "A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.",
+            frase:
+              "A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.",
             feedbackErro:
               "A cor dos experimentos é detalhe. O assunto central das duas frases é a feira de ciências.",
           },
           {
-            molde: "Time: 'Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.' _",
+            molde:
+              "Time: 'Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.' _",
             opcoes: [
               "Ideia principal: choveu muito e a rua alagou",
               "Ideia principal: os carros eram lentos",
@@ -181,29 +186,36 @@ export const aula1: AulaPortuguesV4 = {
         ],
         desafios: [
           {
-            molde: "'Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.' Qual frase é DETALHE? _",
+            molde:
+              "'Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.' Qual frase é DETALHE? _",
             opcoes: [
               "O ar era úmido e havia morcegos no teto",
               "Helena encontrou pinturas antigas na caverna",
               "As duas são ideia principal",
             ],
             correta: 0,
-            frase: "Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.",
-            feedbackErro: "O achado das pinturas é o centro do relato; o ar úmido é só detalhe do ambiente.",
+            frase:
+              "Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.",
+            feedbackErro:
+              "O achado das pinturas é o centro do relato; o ar úmido é só detalhe do ambiente.",
           },
           {
-            molde: "'A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.' Qual é DETALHE? _",
+            molde:
+              "'A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.' Qual é DETALHE? _",
             opcoes: [
               "A correnteza era forte e o barco balançava",
               "A equipe atravessou o rio perigoso",
               "Nenhuma delas",
             ],
             correta: 0,
-            frase: "A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.",
-            feedbackErro: "A travessia é a ideia principal; a força da correnteza é um detalhe que mostra o desafio.",
+            frase:
+              "A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.",
+            feedbackErro:
+              "A travessia é a ideia principal; a força da correnteza é um detalhe que mostra o desafio.",
           },
           {
-            molde: "'Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.' Qual é DETALHE? _",
+            molde:
+              "'Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.' Qual é DETALHE? _",
             opcoes: [
               "O livro tem capa azul e 200 páginas",
               "Ana adora ler",
@@ -211,7 +223,8 @@ export const aula1: AulaPortuguesV4 = {
             ],
             correta: 0,
             frase: "Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.",
-            feedbackErro: "Cor da capa e número de páginas são detalhes; o gosto de Ana pela leitura é a ideia central.",
+            feedbackErro:
+              "Cor da capa e número de páginas são detalhes; o gosto de Ana pela leitura é a ideia central.",
           },
         ],
       },

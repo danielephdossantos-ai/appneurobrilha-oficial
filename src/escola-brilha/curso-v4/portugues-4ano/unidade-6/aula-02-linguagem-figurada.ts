@@ -96,6 +96,107 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Decifrando o cristal das quatro vozes",
+    instrucao:
+      "Observe cada frase e descubra qual ferramenta da linguagem figurada está sendo usada.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Metáfora e personificação",
+        explicacao:
+          "A metáfora diz que uma coisa É outra, sem usar 'como', criando uma imagem forte. A personificação dá características humanas (sentir, pensar, falar) a coisas ou animais que não têm essas capacidades de verdade.",
+        exemplos: [
+          {
+            palavra: "A lua é uma lanterna pendurada no céu.",
+            destaque: "é uma lanterna",
+            motivo: "Metáfora: diz que a lua É a lanterna, sem usar 'como'.",
+          },
+          {
+            palavra: "O vento sussurrou segredos entre as árvores.",
+            destaque: "sussurrou segredos",
+            motivo: "Personificação: o vento ganha uma ação humana, a de sussurrar.",
+          },
+          {
+            palavra: "Seus olhos eram duas estrelas brilhando de alegria.",
+            destaque: "eram duas estrelas",
+            motivo: "Metáfora: os olhos SÃO comparados a estrelas sem usar 'como'.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'A montanha dormia sob o manto de neblina.' Essa frase usa: _",
+            opcoes: ["Personificação", "Comparação", "Hipérbole"],
+            correta: 0,
+            frase: "A montanha dormia sob o manto de neblina.",
+            feedbackErro: "'A montanha dormia' dá uma ação humana à montanha: é personificação.",
+          },
+          {
+            molde: "'O rio é uma serpente prateada cortando o vale.' Essa frase usa: _",
+            opcoes: ["Metáfora", "Personificação", "Hipérbole"],
+            correta: 0,
+            frase: "O rio é uma serpente prateada cortando o vale.",
+            feedbackErro: "'É uma serpente' diz que o rio É a serpente, sem 'como': é metáfora.",
+          },
+          {
+            molde: "'As estrelas piscavam para os exploradores lá embaixo.' Essa frase usa: _",
+            opcoes: ["Personificação", "Metáfora", "Comparação"],
+            correta: 0,
+            frase: "As estrelas piscavam para os exploradores lá embaixo.",
+            feedbackErro: "'Piscavam para' dá uma ação humana às estrelas: é personificação.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Comparação e hipérbole",
+        explicacao:
+          "A comparação aproxima duas coisas usando 'como' ou palavra parecida, para destacar uma semelhança. A hipérbole é um exagero proposital, usado para reforçar uma emoção ou ideia.",
+        exemplos: [
+          {
+            palavra: "O menino corria como um raio pela trilha.",
+            destaque: "como um raio",
+            motivo: "Comparação: usa 'como' para aproximar a velocidade do menino à do raio.",
+          },
+          {
+            palavra: "Eu já disse isso um milhão de vezes!",
+            destaque: "um milhão de vezes",
+            motivo: "Hipérbole: exagero proposital para reforçar a frustração de repetir algo.",
+          },
+          {
+            palavra: "Suas pernas tremiam tal qual folhas ao vento.",
+            destaque: "tal qual folhas",
+            motivo: "Comparação: 'tal qual' aproxima o tremor das pernas ao das folhas.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'Estou morrendo de fome, comeria um boi inteiro!' Essa frase usa: _",
+            opcoes: ["Hipérbole", "Comparação", "Personificação"],
+            correta: 0,
+            frase: "Estou morrendo de fome, comeria um boi inteiro!",
+            feedbackErro: "'Comeria um boi inteiro' é um exagero proposital: é hipérbole.",
+          },
+          {
+            molde: "'Ela é rápida como o vento nas trilhas da floresta.' Essa frase usa: _",
+            opcoes: ["Comparação", "Hipérbole", "Personificação"],
+            correta: 0,
+            frase: "Ela é rápida como o vento nas trilhas da floresta.",
+            feedbackErro: "O 'como' liga as duas ideias, destacando semelhança: é comparação.",
+          },
+          {
+            molde: "'Chorei um rio de lágrimas quando me perdi do grupo.' Essa frase usa: _",
+            opcoes: ["Hipérbole", "Comparação", "Personificação"],
+            correta: 0,
+            frase: "Chorei um rio de lágrimas quando me perdi do grupo.",
+            feedbackErro:
+              "'Um rio de lágrimas' é um exagero para mostrar o tamanho do choro: hipérbole.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia o texto em voz alta e repare nas imagens que as palavras criam — nenhuma delas deve ser lida ao pé da letra.",

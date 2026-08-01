@@ -120,22 +120,20 @@ export const aula3: AulaPortuguesV4 = {
             opcoes: ["porque", "mas", "apesar de"],
             correta: 0,
             frase: "A estrada ficou escorregadia porque tinha chovido a noite toda.",
-            feedbackErro: "O conectivo precisa introduzir a CAUSA (a chuva); 'porque' faz esse papel.",
+            feedbackErro:
+              "O conectivo precisa introduzir a CAUSA (a chuva); 'porque' faz esse papel.",
           },
           {
             molde: "'O time treinou muito a semana toda, _ venceu o campeonato.'",
             opcoes: ["por isso", "porque", "quando"],
             correta: 0,
             frase: "O time treinou muito a semana toda, por isso venceu o campeonato.",
-            feedbackErro: "Aqui a causa (treinar muito) já foi dita antes; 'por isso' introduz a consequência.",
+            feedbackErro:
+              "Aqui a causa (treinar muito) já foi dita antes; 'por isso' introduz a consequência.",
           },
           {
             molde: "'Aponte a CAUSA da frase: A luz apagou porque a energia da rua faltou.' _",
-            opcoes: [
-              "A energia da rua faltou",
-              "A luz apagou",
-              "Não há causa nessa frase",
-            ],
+            opcoes: ["A energia da rua faltou", "A luz apagou", "Não há causa nessa frase"],
             correta: 0,
             frase: "A luz apagou porque a energia da rua faltou.",
             feedbackErro: "O que vem depois de 'porque' é sempre a causa: a falta de energia.",
@@ -184,7 +182,8 @@ export const aula3: AulaPortuguesV4 = {
             opcoes: ["então", "porque", "apesar de"],
             correta: 0,
             frase: "Não tinha comido nada de manhã, então sentiu fraqueza no meio da trilha.",
-            feedbackErro: "A causa (não comer) veio primeiro; 'então' liga à consequência (fraqueza).",
+            feedbackErro:
+              "A causa (não comer) veio primeiro; 'então' liga à consequência (fraqueza).",
           },
         ],
       },

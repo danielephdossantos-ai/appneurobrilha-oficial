@@ -90,8 +90,7 @@ export const aula2: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Juntando pistas para inferir",
-    instrucao:
-      "Veja as pistas de cada cena e descubra o que o texto SUGERE sem dizer diretamente.",
+    instrucao: "Veja as pistas de cada cena e descubra o que o texto SUGERE sem dizer diretamente.",
     blocos: [
       {
         tipo: "regraOrtografica",
@@ -117,7 +116,8 @@ export const aula2: AulaPortuguesV4 = {
         ],
         desafios: [
           {
-            molde: "'Marina chegou em casa toda molhada e sacudiu o guarda-chuva na entrada.' O que podemos inferir? _",
+            molde:
+              "'Marina chegou em casa toda molhada e sacudiu o guarda-chuva na entrada.' O que podemos inferir? _",
             opcoes: [
               "Estava chovendo lá fora",
               "Marina tinha acabado de tomar banho",
@@ -125,10 +125,12 @@ export const aula2: AulaPortuguesV4 = {
             ],
             correta: 0,
             frase: "Marina chegou em casa toda molhada e sacudiu o guarda-chuva na entrada.",
-            feedbackErro: "Molhada + guarda-chuva são pistas claras de chuva lá fora, mesmo sem o texto dizer 'chovia'.",
+            feedbackErro:
+              "Molhada + guarda-chuva são pistas claras de chuva lá fora, mesmo sem o texto dizer 'chovia'.",
           },
           {
-            molde: "'O prato estava intacto e o menino cruzou os braços, encarando a sopa.' O que podemos inferir? _",
+            molde:
+              "'O prato estava intacto e o menino cruzou os braços, encarando a sopa.' O que podemos inferir? _",
             opcoes: [
               "Ele não queria comer aquela sopa",
               "Ele já tinha comido tudo",
@@ -136,10 +138,12 @@ export const aula2: AulaPortuguesV4 = {
             ],
             correta: 0,
             frase: "O prato estava intacto e o menino cruzou os braços, encarando a sopa.",
-            feedbackErro: "Prato intacto + braços cruzados são pistas de recusa, não de satisfação.",
+            feedbackErro:
+              "Prato intacto + braços cruzados são pistas de recusa, não de satisfação.",
           },
           {
-            molde: "'As luzes da casa estavam apagadas e não havia carro na garagem.' O que podemos inferir? _",
+            molde:
+              "'As luzes da casa estavam apagadas e não havia carro na garagem.' O que podemos inferir? _",
             opcoes: [
               "Não havia ninguém em casa",
               "A família estava dormindo",
@@ -147,7 +151,8 @@ export const aula2: AulaPortuguesV4 = {
             ],
             correta: 0,
             frase: "As luzes da casa estavam apagadas e não havia carro na garagem.",
-            feedbackErro: "Sem carro na garagem é forte pista de que a família saiu, não que está dormindo.",
+            feedbackErro:
+              "Sem carro na garagem é forte pista de que a família saiu, não que está dormindo.",
           },
         ],
       },
@@ -175,7 +180,8 @@ export const aula2: AulaPortuguesV4 = {
         ],
         desafios: [
           {
-            molde: "'Pedro mordeu o lábio e apertou o lápis com força durante a prova.' O que isso sugere? _",
+            molde:
+              "'Pedro mordeu o lábio e apertou o lápis com força durante a prova.' O que isso sugere? _",
             opcoes: [
               "Que ele estava nervoso ou tenso",
               "Que ele estava com sono",
@@ -183,10 +189,12 @@ export const aula2: AulaPortuguesV4 = {
             ],
             correta: 0,
             frase: "Pedro mordeu o lábio e apertou o lápis com força durante a prova.",
-            feedbackErro: "Morder o lábio e apertar o lápis são sinais físicos comuns de nervosismo, não de sono ou fome.",
+            feedbackErro:
+              "Morder o lábio e apertar o lápis são sinais físicos comuns de nervosismo, não de sono ou fome.",
           },
           {
-            molde: "'A vovó guardou o bilhete no bolso do avental e sorriu sozinha a tarde toda.' O que isso sugere? _",
+            molde:
+              "'A vovó guardou o bilhete no bolso do avental e sorriu sozinha a tarde toda.' O que isso sugere? _",
             opcoes: [
               "Que o bilhete trouxe uma notícia boa",
               "Que o bilhete era uma conta para pagar",
@@ -197,15 +205,18 @@ export const aula2: AulaPortuguesV4 = {
             feedbackErro: "Sorrir sozinha a tarde toda é pista de alegria, não de uma má notícia.",
           },
           {
-            molde: "'O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.' O que isso sugere? _",
+            molde:
+              "'O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.' O que isso sugere? _",
             opcoes: [
               "Que ele está esperando por alguém que saiu",
               "Que ele acabou de comer muito",
               "Que ele está com muito frio",
             ],
             correta: 0,
-            frase: "O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.",
-            feedbackErro: "Ficar na porta olhando a rua e recusar a comida é pista de espera por alguém, não de fome saciada.",
+            frase:
+              "O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.",
+            feedbackErro:
+              "Ficar na porta olhando a rua e recusar a comida é pista de espera por alguém, não de fome saciada.",
           },
         ],
       },

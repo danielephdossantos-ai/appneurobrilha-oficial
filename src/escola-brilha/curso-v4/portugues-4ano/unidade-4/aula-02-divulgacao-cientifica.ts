@@ -109,7 +109,8 @@ export const aula02: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Divulgação científica: explicar com clareza",
-    instrucao: "Veja como glossário e legenda ajudam a explicar um fenômeno científico para qualquer leitor.",
+    instrucao:
+      "Veja como glossário e legenda ajudam a explicar um fenômeno científico para qualquer leitor.",
     blocos: [
       {
         tipo: "regraOrtografica",
@@ -117,22 +118,43 @@ export const aula02: AulaPortuguesV4 = {
         explicacao:
           "É um texto que explica um fenômeno ou descoberta da ciência com linguagem clara, sem inventar nem exagerar. Ele usa fatos reais, mas conta de um jeito que qualquer leitor consiga entender, mesmo sem ser cientista.",
         exemplos: [
-          { palavra: "'O arco-íris surge quando a luz do sol atravessa gotas de chuva.'", destaque: "atravessa gotas", motivo: "Explica o fenômeno real com linguagem simples." },
-          { palavra: "'Isso não é mágica, é física da luz.'", destaque: "física da luz", motivo: "Reforça que a explicação é científica, não fantasiosa." },
-          { palavra: "Texto com desenho do sol, da chuva e das cores separadas.", destaque: "desenho explicativo", motivo: "Imagens ajudam a visualizar o fenômeno." },
+          {
+            palavra: "'O arco-íris surge quando a luz do sol atravessa gotas de chuva.'",
+            destaque: "atravessa gotas",
+            motivo: "Explica o fenômeno real com linguagem simples.",
+          },
+          {
+            palavra: "'Isso não é mágica, é física da luz.'",
+            destaque: "física da luz",
+            motivo: "Reforça que a explicação é científica, não fantasiosa.",
+          },
+          {
+            palavra: "Texto com desenho do sol, da chuva e das cores separadas.",
+            destaque: "desenho explicativo",
+            motivo: "Imagens ajudam a visualizar o fenômeno.",
+          },
         ],
         desafios: [
           {
             molde: "Qual texto é DIVULGAÇÃO CIENTÍFICA? _",
-            opcoes: ["O que explica um fenômeno real com linguagem clara", "O que conta uma lenda sobre o pote de ouro", "O que dá opinião sem provas"],
+            opcoes: [
+              "O que explica um fenômeno real com linguagem clara",
+              "O que conta uma lenda sobre o pote de ouro",
+              "O que dá opinião sem provas",
+            ],
             correta: 0,
             feedbackErro: "Divulgação científica explica fatos reais, sem inventar.",
           },
           {
             molde: "Por que a divulgação científica NÃO pode inventar nem exagerar? _",
-            opcoes: ["Porque compromete a informação verdadeira que o leitor precisa", "Porque é proibido por lei", "Porque deixa o texto mais curto"],
+            opcoes: [
+              "Porque compromete a informação verdadeira que o leitor precisa",
+              "Porque é proibido por lei",
+              "Porque deixa o texto mais curto",
+            ],
             correta: 0,
-            feedbackErro: "O objetivo do texto é informar com precisão, não entreter com invenções.",
+            feedbackErro:
+              "O objetivo do texto é informar com precisão, não entreter com invenções.",
           },
           {
             molde: "'A Terra gira em torno do Sol.' Esse tipo de frase é típica de: _",
@@ -149,25 +171,47 @@ export const aula02: AulaPortuguesV4 = {
         explicacao:
           "O GLOSSÁRIO é uma lista, no final ou ao lado do texto, que explica palavras difíceis usadas nele. A LEGENDA é um texto curto ao lado de uma imagem, explicando o que ela mostra. Os dois ajudam o leitor a entender melhor a divulgação científica.",
         exemplos: [
-          { palavra: "Glossário: 'refração: mudança de direção da luz ao passar de um meio para outro.'", destaque: "refração", motivo: "Explica um termo difícil usado no texto." },
-          { palavra: "Legenda: 'A luz do sol atravessa a gota de chuva e se separa em cores.'", destaque: "legenda da imagem", motivo: "Explica o que a imagem do arco-íris mostra." },
-          { palavra: "Glossário: 'espectro: conjunto de todas as cores da luz.'", destaque: "espectro", motivo: "Explica outro termo técnico do texto." },
+          {
+            palavra:
+              "Glossário: 'refração: mudança de direção da luz ao passar de um meio para outro.'",
+            destaque: "refração",
+            motivo: "Explica um termo difícil usado no texto.",
+          },
+          {
+            palavra: "Legenda: 'A luz do sol atravessa a gota de chuva e se separa em cores.'",
+            destaque: "legenda da imagem",
+            motivo: "Explica o que a imagem do arco-íris mostra.",
+          },
+          {
+            palavra: "Glossário: 'espectro: conjunto de todas as cores da luz.'",
+            destaque: "espectro",
+            motivo: "Explica outro termo técnico do texto.",
+          },
         ],
         desafios: [
           {
             molde: "Para que serve o GLOSSÁRIO? _",
-            opcoes: ["Explicar palavras difíceis do texto", "Substituir o texto inteiro", "Contar uma história paralela"],
+            opcoes: [
+              "Explicar palavras difíceis do texto",
+              "Substituir o texto inteiro",
+              "Contar uma história paralela",
+            ],
             correta: 0,
             feedbackErro: "O glossário é uma lista de explicações de termos difíceis.",
           },
           {
             molde: "Para que serve a LEGENDA de uma imagem? _",
-            opcoes: ["Explicar o que a imagem mostra", "Decorar a página sem função", "Substituir o glossário"],
+            opcoes: [
+              "Explicar o que a imagem mostra",
+              "Decorar a página sem função",
+              "Substituir o glossário",
+            ],
             correta: 0,
             feedbackErro: "A legenda explica o conteúdo da imagem ao lado dela.",
           },
           {
-            molde: "'Fotossíntese: processo em que as plantas produzem seu alimento usando luz.' Isso é um exemplo de: _",
+            molde:
+              "'Fotossíntese: processo em que as plantas produzem seu alimento usando luz.' Isso é um exemplo de: _",
             opcoes: ["Item de glossário", "Legenda de imagem", "Título do texto"],
             correta: 0,
             frase: "Fotossíntese: processo em que as plantas produzem seu alimento usando luz.",
