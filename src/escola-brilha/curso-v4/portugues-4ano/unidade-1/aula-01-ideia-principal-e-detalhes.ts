@@ -91,6 +91,132 @@ export const aula1: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Achando a trilha principal do texto",
+    instrucao:
+      "Observe cada mini-texto, veja qual frase carrega a IDEIA PRINCIPAL e qual só é um DETALHE que a enriquece.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Como achar a ideia principal",
+        explicacao:
+          "Todo parágrafo tem um assunto central — a ideia principal — e frases que só completam essa ideia, os detalhes. Para achar a ideia principal, pergunte: 'Se eu tirasse essa frase, o texto perderia o sentido?'. Se a resposta for SIM, é a ideia principal. Se for NÃO (o texto continua fazendo sentido, só fica menos rico), é detalhe.",
+        exemplos: [
+          {
+            palavra: "A floresta amazônica abriga milhares de espécies de animais.",
+            destaque: "abriga milhares de espécies",
+            motivo: "Sem essa frase, o parágrafo perde o assunto: é a ideia principal.",
+          },
+          {
+            palavra: "Algumas árvores da floresta chegam a 40 metros de altura.",
+            destaque: "40 metros de altura",
+            motivo: "É um detalhe: enriquece o texto, mas o assunto continua sendo a floresta.",
+          },
+          {
+            palavra: "O Rio Sombrio foi atravessado pela equipe em três dias.",
+            destaque: "atravessado... em três dias",
+            motivo: "A travessia é o assunto central; 'três dias' é um detalhe de tempo.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Time: 'O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.' _",
+            opcoes: [
+              "Ideia principal: o cachorro adora correr no parque",
+              "Ideia principal: o pelo é preto",
+              "Ideia principal: o dono se chama Marcos",
+            ],
+            correta: 0,
+            frase: "O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.",
+            feedbackErro:
+              "Pergunte: sem 'adora correr no parque', o texto perde o sentido? Sim! Cor do pelo e nome do dono são detalhes.",
+          },
+          {
+            molde: "Time: 'A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.' _",
+            opcoes: [
+              "Ideia principal: a escola organizou uma feira de ciências",
+              "Ideia principal: os experimentos eram coloridos",
+              "Ideia principal: muitos alunos participaram",
+            ],
+            correta: 0,
+            frase: "A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.",
+            feedbackErro:
+              "A cor dos experimentos é detalhe. O assunto central das duas frases é a feira de ciências.",
+          },
+          {
+            molde: "Time: 'Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.' _",
+            opcoes: [
+              "Ideia principal: choveu muito e a rua alagou",
+              "Ideia principal: os carros eram lentos",
+              "Ideia principal: era tarde",
+            ],
+            correta: 0,
+            frase: "Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.",
+            feedbackErro:
+              "'Andavam devagar' é consequência/detalhe. O centro do texto é a chuva forte que alagou a rua.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Detalhe: o que completa sem ser o centro",
+        explicacao:
+          "O detalhe é uma informação real do texto, mas não é o motivo dele existir. Detalhes respondem perguntas como 'quando?', 'como era?', 'de que cor?' — eles decoram e explicam a ideia principal, mas se forem removidos, a história continua de pé.",
+        exemplos: [
+          {
+            palavra: "A viagem durou três dias.",
+            destaque: "três dias",
+            motivo: "Detalhe de tempo: enriquece, mas a viagem continua sendo o assunto principal.",
+          },
+          {
+            palavra: "A caverna tinha morcegos dormindo no teto.",
+            destaque: "morcegos dormindo",
+            motivo: "Detalhe do ambiente, não o motivo central do relato (as pinturas antigas).",
+          },
+          {
+            palavra: "O barco balançava a cada remada.",
+            destaque: "a cada remada",
+            motivo: "Detalhe que mostra o desafio, mas não substitui a ideia central da travessia.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.' Qual frase é DETALHE? _",
+            opcoes: [
+              "O ar era úmido e havia morcegos no teto",
+              "Helena encontrou pinturas antigas na caverna",
+              "As duas são ideia principal",
+            ],
+            correta: 0,
+            frase: "Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.",
+            feedbackErro: "O achado das pinturas é o centro do relato; o ar úmido é só detalhe do ambiente.",
+          },
+          {
+            molde: "'A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.' Qual é DETALHE? _",
+            opcoes: [
+              "A correnteza era forte e o barco balançava",
+              "A equipe atravessou o rio perigoso",
+              "Nenhuma delas",
+            ],
+            correta: 0,
+            frase: "A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.",
+            feedbackErro: "A travessia é a ideia principal; a força da correnteza é um detalhe que mostra o desafio.",
+          },
+          {
+            molde: "'Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.' Qual é DETALHE? _",
+            opcoes: [
+              "O livro tem capa azul e 200 páginas",
+              "Ana adora ler",
+              "Ambas são ideia principal",
+            ],
+            correta: 0,
+            frase: "Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.",
+            feedbackErro: "Cor da capa e número de páginas são detalhes; o gosto de Ana pela leitura é a ideia central.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao:
       "Leia como um explorador atento ao mapa: procure a trilha principal do texto e observe os desvios (detalhes) que a acompanham.",

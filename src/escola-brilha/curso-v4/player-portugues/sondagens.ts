@@ -10,6 +10,7 @@ import {
 } from "./sondagem-inicial";
 import { ITENS_SONDAGEM_2ANO, avaliarSondagem2ano } from "./sondagem-2ano";
 import { ITENS_SONDAGEM_3ANO, avaliarSondagem3ano } from "./sondagem-3ano";
+import { ITENS_SONDAGEM_4ANO, avaliarSondagem4ano } from "./sondagem-4ano";
 
 export type ConjuntoSondagem = {
   itens: ItemSondagem[];
@@ -35,6 +36,12 @@ export const SONDAGENS: Record<string, ConjuntoSondagem> = {
     avaliar: avaliarSondagem3ano,
     chamada:
       "São 8 perguntas faladas, de uns 3 minutos. Ninguém reprova — é só para o clube saber por qual caso você começa a investigar.",
+  },
+  "portugues-4ano": {
+    itens: ITENS_SONDAGEM_4ANO,
+    avaliar: avaliarSondagem4ano,
+    chamada:
+      "São 8 perguntas faladas, de uns 3 minutos. Ninguém reprova — é só para a expedição saber em qual território você embarca primeiro.",
   },
 };
 

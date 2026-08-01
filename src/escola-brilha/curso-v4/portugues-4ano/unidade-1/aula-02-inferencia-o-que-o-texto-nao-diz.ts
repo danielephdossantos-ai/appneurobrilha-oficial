@@ -88,6 +88,129 @@ export const aula2: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Juntando pistas para inferir",
+    instrucao:
+      "Veja as pistas de cada cena e descubra o que o texto SUGERE sem dizer diretamente.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Como fazer uma inferência",
+        explicacao:
+          "Inferir é juntar as pistas que o texto dá com o que já sabemos do mundo, para chegar a uma conclusão que não está escrita com todas as letras. O texto NUNCA diz 'estava chovendo', mas se fala em 'guarda-chuvas abertos' e 'poças na rua', você já sabe: choveu. É um trabalho de detetive: observar pistas, ligar uma à outra e concluir.",
+        exemplos: [
+          {
+            palavra: "As pessoas saíram com guarda-chuvas abertos e as ruas tinham poças.",
+            destaque: "guarda-chuvas... poças",
+            motivo: "As pistas levam à conclusão: estava chovendo, mesmo sem o texto dizer isso.",
+          },
+          {
+            palavra: "A comida ainda estava quente no fogo apagado.",
+            destaque: "quente... apagado",
+            motivo: "Alguém saiu rápido, há pouco tempo — por isso a comida não esfriou.",
+          },
+          {
+            palavra: "O menino suspirou e olhou pela janela por horas.",
+            destaque: "suspirou... por horas",
+            motivo: "As atitudes sugerem tristeza ou saudade, mesmo sem o texto dizer a palavra.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'Marina chegou em casa toda molhada e sacudiu o guarda-chuva na entrada.' O que podemos inferir? _",
+            opcoes: [
+              "Estava chovendo lá fora",
+              "Marina tinha acabado de tomar banho",
+              "A casa estava pegando fogo",
+            ],
+            correta: 0,
+            frase: "Marina chegou em casa toda molhada e sacudiu o guarda-chuva na entrada.",
+            feedbackErro: "Molhada + guarda-chuva são pistas claras de chuva lá fora, mesmo sem o texto dizer 'chovia'.",
+          },
+          {
+            molde: "'O prato estava intacto e o menino cruzou os braços, encarando a sopa.' O que podemos inferir? _",
+            opcoes: [
+              "Ele não queria comer aquela sopa",
+              "Ele já tinha comido tudo",
+              "Ele adorava a sopa",
+            ],
+            correta: 0,
+            frase: "O prato estava intacto e o menino cruzou os braços, encarando a sopa.",
+            feedbackErro: "Prato intacto + braços cruzados são pistas de recusa, não de satisfação.",
+          },
+          {
+            molde: "'As luzes da casa estavam apagadas e não havia carro na garagem.' O que podemos inferir? _",
+            opcoes: [
+              "Não havia ninguém em casa",
+              "A família estava dormindo",
+              "Estava faltando energia elétrica",
+            ],
+            correta: 0,
+            frase: "As luzes da casa estavam apagadas e não havia carro na garagem.",
+            feedbackErro: "Sem carro na garagem é forte pista de que a família saiu, não que está dormindo.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Entrelinhas: o que o texto sugere sem dizer",
+        explicacao:
+          "As entrelinhas são a mensagem escondida entre as frases: o texto dá pistas de sentimentos, causas ou fatos sem afirmá-los diretamente. Um bom leitor presta atenção nas AÇÕES e nos DETALHES dos personagens, porque eles revelam mais do que as palavras ditas.",
+        exemplos: [
+          {
+            palavra: "Ele bateu a porta com força e não respondeu ninguém.",
+            destaque: "bateu a porta... não respondeu",
+            motivo: "Sugere raiva ou frustração, sem o texto dizer 'ele estava bravo'.",
+          },
+          {
+            palavra: "Ela sorriu o dia inteiro e cantarolava enquanto arrumava o quarto.",
+            destaque: "sorriu... cantarolava",
+            motivo: "Sugere alegria, mesmo sem a palavra 'feliz' aparecer.",
+          },
+          {
+            palavra: "A mochila ficou pronta na porta desde a noite anterior.",
+            destaque: "pronta... desde a noite anterior",
+            motivo: "Sugere ansiedade ou empolgação para o dia seguinte.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'Pedro mordeu o lábio e apertou o lápis com força durante a prova.' O que isso sugere? _",
+            opcoes: [
+              "Que ele estava nervoso ou tenso",
+              "Que ele estava com sono",
+              "Que ele estava com fome",
+            ],
+            correta: 0,
+            frase: "Pedro mordeu o lábio e apertou o lápis com força durante a prova.",
+            feedbackErro: "Morder o lábio e apertar o lápis são sinais físicos comuns de nervosismo, não de sono ou fome.",
+          },
+          {
+            molde: "'A vovó guardou o bilhete no bolso do avental e sorriu sozinha a tarde toda.' O que isso sugere? _",
+            opcoes: [
+              "Que o bilhete trouxe uma notícia boa",
+              "Que o bilhete era uma conta para pagar",
+              "Que a vovó não leu o bilhete",
+            ],
+            correta: 0,
+            frase: "A vovó guardou o bilhete no bolso do avental e sorriu sozinha a tarde toda.",
+            feedbackErro: "Sorrir sozinha a tarde toda é pista de alegria, não de uma má notícia.",
+          },
+          {
+            molde: "'O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.' O que isso sugere? _",
+            opcoes: [
+              "Que ele está esperando por alguém que saiu",
+              "Que ele acabou de comer muito",
+              "Que ele está com muito frio",
+            ],
+            correta: 0,
+            frase: "O cachorro ficou deitado perto da porta, olhando para a rua, sem tocar na ração.",
+            feedbackErro: "Ficar na porta olhando a rua e recusar a comida é pista de espera por alguém, não de fome saciada.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao:
       "Leia com atenção redobrada: nem tudo o que a história quer dizer está escrito diretamente.",

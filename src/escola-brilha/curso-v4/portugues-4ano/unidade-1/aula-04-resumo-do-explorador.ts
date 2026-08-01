@@ -91,6 +91,126 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Selecionando e reformulando para resumir",
+    instrucao: "Veja como transformar um texto grande em um resumo curto, sem copiar frase por frase.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Resumo: selecionar o que importa",
+        explicacao:
+          "Resumir é escolher (selecionar) apenas as ideias mais importantes de um texto e deixar de fora os detalhes menores. Um bom resumo é bem menor que o texto original, mas ainda permite entender do que se trata. Ele NÃO copia frases inteiras — conta a mesma informação com outras palavras.",
+        exemplos: [
+          {
+            palavra: "Texto original de 5 linhas sobre uma trilha até uma caverna.",
+            destaque: "5 linhas → 1 frase",
+            motivo: "O resumo escolhe só o fato principal: 'A equipe encontrou pinturas antigas numa caverna'.",
+          },
+          {
+            palavra: "Relatório completo com data, hora, nomes e clima do dia.",
+            destaque: "data, hora, clima",
+            motivo: "São detalhes que, no resumo, geralmente ficam de fora.",
+          },
+          {
+            palavra: "Notícia de um jornal sobre uma nova ponte.",
+            destaque: "resumo: 'Uma nova ponte foi construída na cidade'",
+            motivo: "O resumo mantém só o fato central, sem todos os detalhes da obra.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Texto: 'Ontem, às 15h, sob sol forte, a turma do 4º ano visitou o museu de história e viu fósseis, moedas antigas e um esqueleto de dinossauro.' Melhor resumo: _",
+            opcoes: [
+              "A turma do 4º ano visitou o museu de história",
+              "Ontem, às 15h, sob sol forte, a turma visitou o museu",
+              "Um esqueleto de dinossauro estava no museu",
+            ],
+            correta: 0,
+            frase: "Ontem, às 15h, sob sol forte, a turma do 4º ano visitou o museu de história e viu fósseis, moedas antigas e um esqueleto de dinossauro.",
+            feedbackErro: "Horário e clima são detalhes; o resumo deve trazer só o fato central: a visita ao museu.",
+          },
+          {
+            molde: "Texto: 'A equipe de exploradores acampou perto do rio, cozinhou peixe e contou histórias à luz da fogueira antes de dormir.' Melhor resumo: _",
+            opcoes: [
+              "A equipe acampou perto do rio e passou a noite ali",
+              "A equipe cozinhou peixe à luz da fogueira",
+              "A equipe contou histórias antes de dormir",
+            ],
+            correta: 0,
+            frase: "A equipe de exploradores acampou perto do rio, cozinhou peixe e contou histórias à luz da fogueira antes de dormir.",
+            feedbackErro: "Cozinhar e contar histórias são detalhes do acampamento; o fato central é que acamparam perto do rio.",
+          },
+          {
+            molde: "Qual destas opções é um RESUMO, e não uma cópia do texto? _",
+            opcoes: [
+              "Contar a mesma ideia com outras palavras, de forma mais curta",
+              "Copiar as frases exatamente como estão no texto",
+              "Inventar fatos novos que não estavam no texto",
+            ],
+            correta: 0,
+            feedbackErro: "Resumo é reformular com suas próprias palavras — nunca copiar nem inventar.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Reformular: contar com outras palavras",
+        explicacao:
+          "Reformular é dizer a mesma ideia usando palavras diferentes das do texto original. É o que separa um RESUMO de verdade de uma simples cópia. Para reformular bem: leia o trecho, feche o livro (ou vire a folha) e tente contar o que entendeu com suas próprias palavras.",
+        exemplos: [
+          {
+            palavra: "Original: 'O menino correu apressadamente até a escola.'",
+            destaque: "correu apressadamente",
+            motivo: "Reformulado: 'O menino foi correndo para a escola' — mesma ideia, palavras diferentes.",
+          },
+          {
+            palavra: "Original: 'A chuva forte impediu a realização do passeio.'",
+            destaque: "impediu a realização",
+            motivo: "Reformulado: 'Não deu para passear por causa da chuva forte'.",
+          },
+          {
+            palavra: "Original: 'Os exploradores descobriram vestígios de uma civilização antiga.'",
+            destaque: "descobriram vestígios",
+            motivo: "Reformulado: 'Os exploradores acharam sinais de um povo muito antigo'.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "Qual frase REFORMULA 'A menina ficou muito feliz com o presente' sem copiar as mesmas palavras? _",
+            opcoes: [
+              "A menina adorou o presente que ganhou",
+              "A menina ficou muito feliz com o presente",
+              "A menina ganhou um presente muito feliz",
+            ],
+            correta: 0,
+            frase: "A menina ficou muito feliz com o presente.",
+            feedbackErro: "Reformular é usar outras palavras para a mesma ideia, sem repetir a frase original.",
+          },
+          {
+            molde: "Qual frase REFORMULA 'O cão latiu bastante durante a noite'? _",
+            opcoes: [
+              "O cachorro passou a noite latindo bastante",
+              "O cão latiu bastante durante a noite",
+              "A noite estava calma e sem barulho",
+            ],
+            correta: 0,
+            frase: "O cão latiu bastante durante a noite.",
+            feedbackErro: "A opção certa mantém o sentido, trocando palavras. A última opção muda o sentido, não reformula.",
+          },
+          {
+            molde: "Qual é a diferença entre COPIAR e REFORMULAR? _",
+            opcoes: [
+              "Reformular usa outras palavras; copiar repete o texto original",
+              "São exatamente a mesma coisa",
+              "Reformular é sempre maior que o texto original",
+            ],
+            correta: 0,
+            feedbackErro: "Copiar mantém as mesmas palavras do texto; reformular conta a mesma ideia de outro jeito.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao:
       "Leia o relato completo. Depois, você vai aprender a transformá-lo num resumo curto.",

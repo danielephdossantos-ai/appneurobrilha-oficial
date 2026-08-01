@@ -33,6 +33,7 @@ import {
 import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
 import { SEMANAS_ESCRITA_2ANO } from "@/lib/rotina-escrita-2ano";
 import { SEMANAS_ESCRITA_3ANO } from "@/lib/rotina-escrita-3ano";
+import { SEMANAS_ESCRITA_4ANO } from "@/lib/rotina-escrita-4ano";
 
 export const Route = createFileRoute("/rotina-escrita")({
   head: () => ({
@@ -54,11 +55,13 @@ export const Route = createFileRoute("/rotina-escrita")({
   }),
   validateSearch: (search: Record<string, unknown>) => ({
     serie:
-      search.serie === "3"
-        ? ("3" as const)
-        : search.serie === "2"
-          ? ("2" as const)
-          : ("1" as const),
+      search.serie === "4"
+        ? ("4" as const)
+        : search.serie === "3"
+          ? ("3" as const)
+          : search.serie === "2"
+            ? ("2" as const)
+            : ("1" as const),
   }),
   component: RotinaEscrita,
 });
@@ -77,11 +80,13 @@ function hojeISO() {
 function RotinaEscrita() {
   const { serie } = Route.useSearch();
   const semanas =
-    serie === "3"
-      ? SEMANAS_ESCRITA_3ANO
-      : serie === "2"
-        ? SEMANAS_ESCRITA_2ANO
-        : SEMANAS_ESCRITA;
+    serie === "4"
+      ? SEMANAS_ESCRITA_4ANO
+      : serie === "3"
+        ? SEMANAS_ESCRITA_3ANO
+        : serie === "2"
+          ? SEMANAS_ESCRITA_2ANO
+          : SEMANAS_ESCRITA;
   const { activeChild } = useAppState();
   const push = usePushNotifications(activeChild?.id ?? null);
   const [rotina, setRotina] = useState<Rotina>({
@@ -195,11 +200,7 @@ function RotinaEscrita() {
   if (!activeChild) {
     return (
       <Shell>
-        <PageHeader
-          emoji="✏️"
-          title="Rotina de Escrita"
-          subtitle="Escolha uma criança primeiro"
-        />
+        <PageHeader emoji="✏️" title="Rotina de Escrita" subtitle="Escolha uma criança primeiro" />
         <Link
           to="/"
           className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 py-2 font-bold inline-block"
@@ -219,7 +220,7 @@ function RotinaEscrita() {
       />
 
       <div className="flex gap-2 mb-4">
-        {(["1", "2", "3"] as const).map((s2) => (
+        {(["1", "2", "3", "4"] as const).map((s2) => (
           <Link
             key={s2}
             to="/rotina-escrita"
@@ -457,7 +458,6 @@ function RotinaEscrita() {
         papel e lápis de verdade, mais 5 minutos de conversa. O app avisa na hora combinada — é só
         sentar junto e acompanhar.
       </div>
-
     </Shell>
   );
 }
@@ -470,7 +470,9 @@ function FraseGrande({ texto, destaque }: { texto: string; destaque?: boolean })
         speakChunked(texto, { rate: 0.72 });
       }}
       className={`w-full text-left rounded-2xl px-4 py-4 font-black text-2xl leading-snug flex items-start gap-3 ${
-        destaque ? "bg-primary text-primary-foreground" : "bg-background border-2 border-dashed border-primary/40"
+        destaque
+          ? "bg-primary text-primary-foreground"
+          : "bg-background border-2 border-dashed border-primary/40"
       }`}
     >
       <Volume2 className="h-6 w-6 shrink-0 mt-1 opacity-80" />
@@ -621,8 +623,8 @@ function Oralidade({ semana }: { semana: number }) {
     <div>
       <p className="text-sm text-muted-foreground mb-3">
         A oralidade é a base da alfabetização. Antes de escrever, a criança precisa ouvir,
-        argumentar, recontar e montar a frase falando. Faça um item por dia, sentado junto —
-        exija <strong className="text-foreground">frases completas</strong>, não só “sim” e “não”.
+        argumentar, recontar e montar a frase falando. Faça um item por dia, sentado junto — exija{" "}
+        <strong className="text-foreground">frases completas</strong>, não só “sim” e “não”.
       </p>
       <div className="rounded-2xl bg-background/70 px-4 py-3 mb-3">
         <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">

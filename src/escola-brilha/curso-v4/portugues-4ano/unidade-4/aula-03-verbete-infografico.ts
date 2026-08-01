@@ -101,6 +101,75 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "Verbete e infográfico: duas formas de organizar informação",
+    instrucao: "Compare como o verbete define e como o infográfico mostra etapas de um processo.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Verbete: definição objetiva",
+        explicacao:
+          "O verbete é o texto de um dicionário ou enciclopédia que define uma palavra: diz o que ela é e quais são suas características, de forma objetiva, sem opinião pessoal.",
+        exemplos: [
+          { palavra: "'Abelha: inseto que vive em colmeias, produz mel e poliniza flores.'", destaque: "definição objetiva", motivo: "Diz o que a abelha é, sem opinar se é boa ou ruim." },
+          { palavra: "'Rio: curso de água natural que corre até o mar, lago ou outro rio.'", destaque: "curso de água", motivo: "Define o termo com características claras." },
+          { palavra: "'Vulcão: montanha com abertura por onde sai magma do interior da Terra.'", destaque: "montanha... magma", motivo: "Explica o que é, sem contar uma história." },
+        ],
+        desafios: [
+          {
+            molde: "Qual frase é um VERBETE? _",
+            opcoes: ["'Borboleta: inseto com asas coloridas, que passa por metamorfose.'", "'Nossa, que borboleta linda voou aqui!'", "'Era uma vez uma borboleta muito curiosa...'"],
+            correta: 0,
+            feedbackErro: "O verbete define objetivamente, sem opinião nem narrativa.",
+          },
+          {
+            molde: "O verbete deve ser escrito: _",
+            opcoes: ["De forma objetiva, sem opinião pessoal", "Com muita opinião do autor", "Como uma história de aventura"],
+            correta: 0,
+            feedbackErro: "Verbete é definição objetiva, não narrativa ou opinião.",
+          },
+          {
+            molde: "'A abelha é um inseto maravilhoso que eu adoro.' Essa frase NÃO é um bom verbete porque: _",
+            opcoes: ["Traz opinião pessoal ('eu adoro')", "É curta demais", "Usa a palavra 'inseto'"],
+            correta: 0,
+            frase: "A abelha é um inseto maravilhoso que eu adoro.",
+            feedbackErro: "O verbete deve ser objetivo; 'eu adoro' é opinião, não definição.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Infográfico: etapas com imagem e texto",
+        explicacao:
+          "O infográfico organiza a informação misturando imagens, números e frases curtas, geralmente numeradas ou ligadas por setas, mostrando um PROCESSO passo a passo.",
+        exemplos: [
+          { palavra: "1) Abelha pousa na flor. 2) Pólen gruda nas patas. 3) Abelha voa para outra flor.", destaque: "etapas numeradas", motivo: "Mostra o processo de polinização passo a passo." },
+          { palavra: "Setas ligando desenho do sol → nuvem → chuva.", destaque: "setas", motivo: "Indica a ordem das etapas do ciclo da água." },
+          { palavra: "Ícones pequenos ao lado de cada frase curta.", destaque: "ícones + texto curto", motivo: "Combina imagem e texto para facilitar o entendimento." },
+        ],
+        desafios: [
+          {
+            molde: "O infográfico é ideal para mostrar: _",
+            opcoes: ["Um processo em etapas, com imagens e texto curto", "Uma definição objetiva de uma palavra", "Uma carta de opinião"],
+            correta: 0,
+            feedbackErro: "Infográfico organiza etapas com apoio visual — diferente do verbete, que define uma palavra.",
+          },
+          {
+            molde: "O que geralmente liga as etapas de um infográfico? _",
+            opcoes: ["Números ou setas", "Parênteses", "Aspas"],
+            correta: 0,
+            feedbackErro: "Setas e números indicam a ordem das etapas no infográfico.",
+          },
+          {
+            molde: "Qual gênero usa MAIS imagem combinada a texto curto para mostrar um processo? _",
+            opcoes: ["Infográfico", "Verbete", "Carta de leitor"],
+            correta: 0,
+            feedbackErro: "O infográfico é o gênero que mais combina imagem e texto curto em etapas.",
+          },
+        ],
+      },
+    ],
+  },
   momento04_leituraGuiada: {
     instrucao: "Vamos ler juntos o verbete e o infográfico que o time organizou sobre a abelha.",
     leitura: {
