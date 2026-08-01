@@ -329,6 +329,55 @@ export const aula03: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Texto sem repetição",
+        comando:
+          "Escreva um parágrafo sobre um animal ou um objeto, citando o nome dele apenas UMA vez. Nas outras frases, use pronomes (ele, ela, o, a) ou expressões que substituam o nome.",
+        linhas: 5,
+        modelo: [
+          "O cachorro da vizinha chegou no mês passado.",
+          "Ele late toda vez que o portão range.",
+          "Mesmo assim, todo mundo na rua já gosta do bichinho.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Citei o nome principal só uma vez.",
+          "Usei pronomes e sinônimos e ainda assim o texto ficou claro.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Truque do Pronome",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Repetir o mesmo nome em todas as frases deixa o texto pesado, como um passo arrastado.",
+      "Os pronomes resolvem isso: eles seguram o sentido no lugar sem obrigar o leitor a ouvir a mesma palavra o tempo todo.",
+      "O cuidado é um só — o leitor precisa saber exatamente a quem cada ele, ela ou aquele se refere, senão a clareza escorre pelos dedos.",
+    ],
+    metaSegundos: 35,
+  },
+
   momento09_revisao: {
     pontos: [
       "PRONOME PESSOAL substitui o nome de uma pessoa já citada (ele, ela, eles, elas).",

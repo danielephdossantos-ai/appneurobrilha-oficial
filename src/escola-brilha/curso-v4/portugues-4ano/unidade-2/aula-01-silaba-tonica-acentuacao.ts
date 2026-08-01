@@ -310,6 +310,55 @@ export const aula1: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Texto com caça ao acento",
+        comando:
+          "Escreva um parágrafo sobre o seu lanche favorito usando pelo menos 5 palavras acentuadas (por exemplo: café, você, açúcar, também, pão). Depois circule mentalmente a sílaba tônica de cada uma.",
+        linhas: 5,
+        modelo: [
+          "No sábado de manhã, a minha avó faz pão de queijo.",
+          "Ela também prepara um café com pouco açúcar.",
+          "Eu ajudo a pôr a mesa e escolho a geleia que vamos usar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei pelo menos 5 palavras com acento.",
+          "Conferi se cada acento está na sílaba tônica certa.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Oficina dos Acentos",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Na oficina das palavras, cada acento é uma ferramenta pequena que muda tudo de lugar.",
+      "Sem ele, sabia vira sabiá, secretaria vira secretária e o sentido escorrega da frase inteira.",
+      "Por isso o escritor cuidadoso lê em voz alta antes de entregar o texto: é o próprio ouvido que aponta onde a força da voz caiu.",
+    ],
+    metaSegundos: 31,
+  },
+
   momento09_revisao: {
     pontos: [
       "Sílaba TÔNICA é a mais forte da palavra.",

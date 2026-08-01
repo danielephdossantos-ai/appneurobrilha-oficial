@@ -324,6 +324,55 @@ export const aula02: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Mesma história, três tempos",
+        comando:
+          "Escreva um pequeno relato de algo que aconteceu com você. Depois reescreva a primeira frase no PRESENTE e a última no FUTURO, mostrando que você controla o tempo do verbo.",
+        linhas: 6,
+        modelo: [
+          "Ontem eu perdi o horário do ônibus e cheguei atrasado.",
+          "Hoje eu acordo mais cedo e deixo a mochila pronta na véspera.",
+          "Amanhã eu chegarei antes do sinal tocar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Mantive o mesmo tempo verbal dentro de cada trecho.",
+          "Marquei bem o passado, o presente e o futuro.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Linha do Tempo",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "O verbo é o relógio da frase: ele avisa se a cena já aconteceu, se está acontecendo agora ou se ainda vai acontecer.",
+      "Numa narrativa bem escrita, o narrador escolhe um tempo e se mantém nele, mudando só quando quer marcar uma lembrança ou uma promessa.",
+      "Quando os tempos se misturam sem motivo, o leitor se perde e precisa voltar atrás para entender em que momento da história ele está.",
+    ],
+    metaSegundos: 38,
+  },
+
   momento09_revisao: {
     pontos: [
       "PRETÉRITO PERFEITO conta uma ação que JÁ terminou (cruzou, chegou, avistou).",

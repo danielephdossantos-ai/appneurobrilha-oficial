@@ -272,6 +272,55 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Reescreva sem repetir",
+        comando:
+          "Escreva um parágrafo sobre um objeto que você usa todo dia. Regra: você não pode repetir nenhuma palavra importante mais de uma vez — troque por pronomes, sinônimos e conectivos.",
+        linhas: 6,
+        modelo: [
+          "Minha bicicleta azul foi presente do meu tio.",
+          "Ela tem uma buzina que quase ninguém escuta, mas eu adoro.",
+          "Uso esse transporte todos os dias para ir à escola; por isso, cuido dos pneus com atenção.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Não repeti nenhuma palavra importante.",
+          "Mesmo trocando as palavras, o texto continuou claro.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Costura Invisível",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Um texto coeso parece fácil de ler, mas por trás dessa facilidade existe uma costura cuidadosa entre as frases.",
+      "Pronomes, sinônimos e conectivos ligam cada ideia à anterior, de modo que o leitor nunca precisa voltar para entender de quem se está falando.",
+      "Quando essa costura falha, o texto vira uma pilha de frases soltas — todas corretas, mas sem nenhum fio que as segure juntas.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "Pronomes (ele, ela, isso) evitam repetir o mesmo nome várias vezes.",

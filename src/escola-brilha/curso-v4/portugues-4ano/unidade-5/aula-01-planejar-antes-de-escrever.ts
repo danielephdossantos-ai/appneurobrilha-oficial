@@ -278,6 +278,55 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Do plano ao parágrafo",
+        comando:
+          "Antes de escrever, faça o plano em três linhas: assunto, para quem e as 3 ideias principais. Depois transforme esse plano em um parágrafo completo.",
+        linhas: 7,
+        modelo: [
+          "Plano — Assunto: por que ler antes de dormir faz bem. Para quem: colegas da turma.",
+          "Ideias: acalma, aumenta o vocabulário, ajuda a dormir melhor.",
+          "Ler antes de dormir é um hábito que vale a pena. A leitura acalma depois de um dia agitado, aumenta o vocabulário sem esforço e prepara o corpo para o sono.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Escrevi o PLANO antes do texto.",
+          "Todas as ideias do plano apareceram no parágrafo final.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Diário de Bordo",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Nenhum navegador levanta âncora sem antes traçar a rota no mapa e conferir o tempo previsto para a semana.",
+      "Com o texto acontece o mesmo: quem planeja o assunto, o leitor e as ideias principais escreve mais rápido e se perde muito menos.",
+      "O plano não engessa a escrita — ele é o corrimão que segura o autor quando a página em branco começa a assustar.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "Antes de escrever, responda: para quem? o quê? em que ordem?",

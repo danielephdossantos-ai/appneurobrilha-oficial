@@ -279,6 +279,54 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Parágrafo com tópico frasal",
+        comando:
+          "Escreva DOIS parágrafos sobre o mesmo assunto. Cada um deve começar com um tópico frasal (a frase que anuncia a ideia) seguido de duas frases que desenvolvem essa ideia.",
+        linhas: 8,
+        modelo: [
+          "O recreio é o momento mais importante do dia para a turma. É nele que resolvemos brigas, combinamos jogos e conversamos sem pressa.",
+          "Mesmo assim, o tempo é curto demais. Quinze minutos mal dão para comer o lanche e organizar o time.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Cada parágrafo começa com um tópico frasal.",
+          "As frases seguintes desenvolvem a ideia anunciada — não mudam de assunto.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Primeira Frase",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "O tópico frasal é a placa na entrada do parágrafo: ele avisa ao leitor sobre o que se vai falar ali dentro.",
+      "Depois da placa, as frases seguintes precisam cumprir a promessa, trazendo explicações, exemplos ou dados que sustentem a ideia.",
+      "Quando o parágrafo muda de assunto no meio do caminho, o leitor sente o tranco e precisa reler para descobrir onde a rota se perdeu.",
+    ],
+    metaSegundos: 36,
+  },
+
   momento09_revisao: {
     pontos: [
       "Todo parágrafo bem construído tem tópico frasal, desenvolvimento e fecho.",

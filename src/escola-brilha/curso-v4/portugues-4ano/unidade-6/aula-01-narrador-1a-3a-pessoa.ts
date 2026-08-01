@@ -249,6 +249,55 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "A mesma cena, duas vozes",
+        comando:
+          "Escreva uma cena curta em 1ª pessoa (usando eu). Depois reescreva a MESMA cena em 3ª pessoa (ele/ela), mostrando como a voz do narrador muda o texto.",
+        linhas: 8,
+        modelo: [
+          "1ª pessoa: Eu abri a janela e senti o cheiro de chuva antes mesmo de ver as nuvens.",
+          "3ª pessoa: Ele abriu a janela e sentiu o cheiro de chuva antes mesmo de ver as nuvens.",
+          "Na primeira versão sabemos o que ele pensa; na segunda, só o que dá para ver de fora.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Mantive a mesma pessoa do verbo dentro de cada versão.",
+          "Mostrei a diferença entre contar de dentro e contar de fora.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Quem Conta a História",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Quando o narrador diz eu, o leitor entra na cabeça do personagem e só enxerga o que ele enxerga.",
+      "Quando o narrador diz ele ou ela, a câmera se afasta e passa a mostrar o que acontece com todos, inclusive o que o protagonista não percebeu.",
+      "Escolher a voz que conta a história é escolher o que o leitor vai saber — e, principalmente, o que vai continuar escondido até o fim.",
+    ],
+    metaSegundos: 39,
+  },
+
   momento09_revisao: {
     pontos: [
       "NARRADOR é a voz que conta a história — e essa escolha muda o que a gente enxerga.",

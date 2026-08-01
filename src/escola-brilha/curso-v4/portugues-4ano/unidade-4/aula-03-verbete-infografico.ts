@@ -265,6 +265,55 @@ export const aula03: AulaPortuguesV4 = {
     ],
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Verbete de um animal",
+        comando:
+          "Escreva o verbete de um animal que você conhece: nome, uma definição curta, onde vive, o que come e uma curiosidade. Depois liste em 3 passos numerados algo que esse animal faz (como um infográfico).",
+        linhas: 7,
+        modelo: [
+          "Abelha: inseto voador que vive em colmeias organizadas.",
+          "Onde vive: em ocos de árvores, caixas de criação e frestas protegidas.",
+          "Como faz o mel — 1) suga o néctar da flor; 2) leva na bolsa do papo até a colmeia; 3) desidrata o néctar dentro do favo.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu verbete começa com uma definição, não com uma história.",
+          "Meus passos numerados estão na ordem certa do processo.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Cidade das Abelhas",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "Uma colmeia funciona como uma cidade minúscula, com tarefas distribuídas e horários que quase não falham.",
+      "Umas abelhas saem para buscar néctar, outras ventilam o favo batendo as asas e algumas cuidam apenas das larvas.",
+      "Sem esse trabalho repartido, o mel não amadureceria e boa parte das flores que conhecemos deixaria de ser polinizada.",
+    ],
+    metaSegundos: 29,
+  },
+
   momento09_revisao: {
     pontos: [
       "VERBETE define uma palavra ou ser de forma objetiva, em um parágrafo direto.",
