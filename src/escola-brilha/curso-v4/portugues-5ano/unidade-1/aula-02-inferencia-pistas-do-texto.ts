@@ -63,6 +63,7 @@ export const aula2: AulaPortuguesV4 = {
         "🔍 Ótima dedução! O bilhete não diz 'eu estava atrasada e com pressa' com essas palavras exatas em tudo, mas as pistas — 'saí correndo', 'atrasada de novo', 'não deu tempo' — apontam para isso.",
       feedbackErro:
         "Releia o bilhete: as palavras 'saí correndo' e 'não deu tempo' são pistas de pressa e atraso, não de viagem ou esquecimento total.",
+      dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
     },
   },
 
@@ -82,6 +83,78 @@ export const aula2: AulaPortuguesV4 = {
           "É um detalhe do texto — uma palavra, uma ação, uma descrição — que ajuda o leitor a deduzir algo que não foi dito diretamente.",
         exemplo: "A frase 'ele guardou o guarda-chuva sem usar' é uma pista de que não choveu.",
         imagemUrl: bussola,
+      },
+    ],
+  },
+
+  momento_ensinoVisual: {
+    titulo: "Lendo nas entrelinhas",
+    instrucao:
+      "Observe como um bom leitor junta pistas espalhadas no texto para DEDUZIR algo que não está escrito com todas as letras.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Inferência: ler entre as linhas usando pistas",
+        explicacao:
+          "Inferir é deduzir uma informação que o texto sugere, mas não afirma diretamente. Para inferir, o leitor junta as PISTAS espalhadas no texto (palavras, ações, detalhes do cenário) com o que já sabe sobre o mundo. Pergunte sempre: 'O que essas pistas, juntas, indicam?'",
+        exemplos: [
+          {
+            palavra: "Ele tremia e batia os dentes, mesmo com o casaco vestido.",
+            destaque: "tremia... batia os dentes",
+            motivo: "A palavra 'frio' nunca aparece, mas essas pistas indicam que ele estava com muito frio.",
+          },
+          {
+            palavra: "A sala estava toda decorada com balões e uma faixa de 'Parabéns'.",
+            destaque: "balões... 'Parabéns'",
+            motivo: "As pistas indicam uma festa de aniversário, mesmo sem o texto dizer isso diretamente.",
+          },
+          {
+            palavra: "O prato estava vazio e o cachorro lambia os beiços perto da tigela.",
+            destaque: "prato vazio... lambia os beiços",
+            motivo: "Essas pistas mostram que o cachorro tinha acabado de comer, sem o texto afirmar isso.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Ana entrou em casa pingando, torceu o cabelo e trocou de roupa correndo.' O que podemos inferir? _",
+            opcoes: [
+              "Ana chegou em casa depois de se molhar de alguma forma",
+              "Ana estava com muito sono",
+              "Ana tinha acabado de acordar",
+            ],
+            correta: 0,
+            frase: "Ana entrou em casa pingando, torceu o cabelo e trocou de roupa correndo.",
+            feedbackErro:
+              "As palavras 'pingando' e 'torceu o cabelo' são pistas de água, não de sono ou de ter acabado de acordar.",
+          },
+          {
+            molde:
+              "'O menino chegou com a camisa do time e o rosto pintado.' O que podemos inferir? _",
+            opcoes: [
+              "Ele provavelmente foi assistir a um jogo do time",
+              "Ele acabou de sair da cama",
+              "Ele estava estudando para uma prova",
+            ],
+            correta: 0,
+            frase: "O menino chegou com a camisa do time e o rosto pintado.",
+            feedbackErro:
+              "Camisa do time e rosto pintado são pistas típicas de torcedores indo a um jogo, não de sono ou estudo.",
+          },
+          {
+            molde:
+              "'As folhas das plantas estavam murchas e a terra do vaso, rachada.' O que podemos inferir? _",
+            opcoes: [
+              "A planta está precisando de água há muito tempo",
+              "A planta acabou de ser regada",
+              "A planta é de plástico",
+            ],
+            correta: 0,
+            frase: "As folhas das plantas estavam murchas e a terra do vaso, rachada.",
+            feedbackErro:
+              "Folhas murchas e terra rachada são pistas de falta de água, não de rega recente.",
+          },
+        ],
       },
     ],
   },
@@ -115,6 +188,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! O primeiro parágrafo descreve exatamente essa cena.",
         feedbackErro: "Releia o primeiro parágrafo: ele descreve luzes, cartaz e caixas.",
         ondeEstaNoTexto: "…as luzes estavam apagadas, um cartaz de 'fechado' estava pendurado na porta e várias caixas de papelão vazias se empilhavam na calçada.",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “as luzes estavam apagadas, um cartaz de 'fechado' estava pendurado na porta e várias caixas de papelão vazias se empilhavam na calçada”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Luzes apagadas, cartaz de fechado e caixas vazias na calçada”. O primeiro parágrafo descreve exatamente essa cena. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que estava anunciado no papel do poste?",
@@ -127,6 +203,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Exato! O segundo parágrafo cita esse anúncio.",
         feedbackErro: "Releia o segundo parágrafo: o papel fala sobre aluguel do imóvel.",
         ondeEstaNoTexto: "…um papel novo anunciava um número de telefone para 'informações sobre o aluguel do imóvel'.",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “um papel novo anunciava um número de telefone para 'informações sobre o aluguel do imóvel'”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um número para informações sobre o aluguel do imóvel”. O segundo parágrafo cita esse anúncio. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -202,6 +281,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Isso! Essas são exatamente as pistas descritas nos dois primeiros parágrafos.",
         feedbackErro: "Releia os dois primeiros parágrafos: eles descrevem casaco, guarda-chuva e botas.",
         ondeEstaNoTexto: "…encontrou um casaco molhado… um guarda-chuva estava aberto, secando…",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “encontrou um casaco molhado… um guarda-chuva estava aberto, secando”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um casaco molhado, um guarda-chuva secando e botas com barro”. Essas são exatamente as pistas descritas nos dois primeiros parágrafos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Juntando as pistas, o que provavelmente aconteceu com o irmão de Pedro?",
@@ -214,8 +296,61 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🔍 Exato! Casaco molhado + guarda-chuva usado + botas com barro apontam para uma caminhada na chuva.",
         feedbackErro: "Pense: ficar em casa não explicaria roupas molhadas nem barro nas botas. As pistas indicam uma saída na chuva.",
         ondeEstaNoTexto: "Pedro sorriu, pensando na trilha que o irmão adorava fazer nos fins de semana…",
+        dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ele saiu na chuva, provavelmente para uma trilha, e voltou molhado e enlameado”. Casaco molhado + guarda-chuva usado + botas com barro apontam para uma caminhada na chuva. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Deixe uma Pista para o Leitor",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo com uma informação implícita",
+        comando:
+          "Escreva UM parágrafo contando uma pequena cena (chegando em casa, num passeio, num dia de escola) sem dizer diretamente uma informação importante — deixe PISTAS (ações, objetos, sensações) para que o leitor DEDUZA sozinho o que aconteceu.",
+        linhas: 5,
+        modelo: [
+          "João entrou em casa com os cabelos grudados na testa e a camisa toda suada.",
+          "Ele deixou a mochila caída perto da porta e foi direto tomar um copo de água gelada.",
+          "As pernas ainda tremiam um pouco quando ele se sentou no sofá.",
+          "Só depois de descansar é que conseguiu tirar os tênis empoeirados.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Não escrevi diretamente a informação principal — deixei apenas PISTAS.",
+          "Um colega conseguiria deduzir a informação implícita só lendo as pistas.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Caso do Bolo Sumido",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem investiga.",
+    texto: [
+      "Lucas chegou da escola e notou a mesa da cozinha posta com dois pratos, mas apenas um garfo sujo ao lado da pia. O bolo de chocolate, que estava inteiro pela manhã, agora tinha um pedaço a menos, cortado bem no meio.",
+      "No sofá da sala, uma almofada estava amassada e o controle da televisão continuava ligado, piscando a luz vermelha. Perto da porta, os tênis da irmã mais velha, que sempre ficavam arrumados no corredor, estavam jogados de qualquer jeito.",
+      "Lucas sorriu e guardou aquelas pistas na cabeça, como um verdadeiro detetive treinado. Ele já sabia exatamente o que tinha acontecido enquanto sua mãe ainda estava no trabalho, mas decidiu esperar a hora do jantar para contar sua descoberta.",
+    ],
+    metaSegundos: 55,
   },
 
   momento_minijogo: {
@@ -261,6 +396,9 @@ export const aula2: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🔍 Isso! 'Pingando' e 'torceu o cabelo' são pistas fortes de que ela se molhou.",
       feedbackErro: "Pense nas palavras 'pingando' e 'torceu o cabelo' — elas indicam água, não fome ou sono.",
+      dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Ana chegou em casa depois de pegar chuva ou se molhar de alguma forma”. 'Pingando' e 'torceu o cabelo' são pistas fortes de que ela se molhou. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -272,10 +410,14 @@ export const aula2: AulaPortuguesV4 = {
           "Copiar uma frase exata do texto",
           "Deduzir algo que o texto não diz diretamente, a partir de pistas",
           "Ler o texto em voz alta",
+          "Contar quantos parágrafos o texto tem",
         ],
         correta: 1,
         feedbackAcerto: "🔍 Isso! Inferência é dedução baseada em pistas.",
-        feedbackErro: "Inferência não é copiar nem ler alto — é deduzir o que está implícito.",
+        feedbackErro: "Inferência não é copiar, ler alto ou contar parágrafos — é deduzir o que está implícito.",
+        dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Deduzir algo que o texto não diz diretamente, a partir de pistas”. Inferência é dedução baseada em pistas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é uma 'pista textual'?",
@@ -283,10 +425,14 @@ export const aula2: AulaPortuguesV4 = {
           "Um detalhe do texto que ajuda a deduzir algo não dito diretamente",
           "O título do texto",
           "A última frase do texto, sempre",
+          "Uma palavra difícil que precisa de dicionário",
         ],
         correta: 0,
         feedbackAcerto: "🔍 Correto! A pista é qualquer detalhe que sugere algo além do que está escrito.",
-        feedbackErro: "A pista pode estar em qualquer parte do texto, não só no título ou na última frase.",
+        feedbackErro: "A pista pode estar em qualquer parte do texto, não só no título, na última frase ou em palavras difíceis.",
+        dica: "🔍 Pista de detetive: lembre o que significa “pista textual” — é um detalhe do texto que ajuda o leitor a deduzir algo que não foi dito diretamente. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um detalhe do texto que ajuda a deduzir algo não dito diretamente”. A pista é qualquer detalhe que sugere algo além do que está escrito. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No texto da padaria, qual pista sugeria que o fechamento era definitivo?",
@@ -294,10 +440,14 @@ export const aula2: AulaPortuguesV4 = {
           "O anúncio de aluguel do imóvel no poste",
           "A cor da porta da padaria",
           "O horário em que Marina passou de bicicleta",
+          "O tamanho da calçada em frente à padaria",
         ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! O anúncio de aluguel é a pista mais forte de fechamento definitivo.",
         feedbackErro: "Releia: a pista decisiva era o anúncio de 'informações sobre o aluguel do imóvel'.",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “um papel novo anunciava um número de telefone para 'informações sobre o aluguel do imóvel'”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O anúncio de aluguel do imóvel no poste”. O anúncio de aluguel é a pista mais forte de fechamento definitivo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — 'O menino chegou com a camisa do time e o rosto pintado.' O que podemos inferir?",
@@ -305,10 +455,14 @@ export const aula2: AulaPortuguesV4 = {
           "Ele provavelmente foi assistir a um jogo do time",
           "Ele acabou de sair da cama",
           "Ele estava estudando para uma prova",
+          "Ele tinha acabado de tomar banho",
         ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! Camisa do time + rosto pintado são pistas fortes de que ele foi a um jogo.",
-        feedbackErro: "Pense: essas pistas (camisa e pintura) são típicas de torcedores indo a um jogo.",
+        feedbackErro: "Pense: essas pistas (camisa e pintura) são típicas de torcedores indo a um jogo, não de sono, estudo ou banho.",
+        dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ele provavelmente foi assistir a um jogo do time”. Camisa do time + rosto pintado são pistas fortes de que ele foi a um jogo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que juntar VÁRIAS pistas torna uma inferência mais segura?",
@@ -316,10 +470,14 @@ export const aula2: AulaPortuguesV4 = {
           "Porque quanto mais pistas apontam na mesma direção, menor a chance de a dedução estar errada",
           "Porque o texto fica mais longo",
           "Porque isso não muda nada na segurança da dedução",
+          "Porque o leitor precisa ler mais devagar",
         ],
         correta: 0,
         feedbackAcerto: "🔍 Isso! Você concluiu a investigação com faro afiado. Caso encerrado! 🌟",
         feedbackErro: "Uma única pista pode ser coincidência; várias pistas na mesma direção tornam a dedução mais confiável.",
+        dica: "🔍 Pista de detetive: lembre o que significa “inferência” — é a dedução que fazemos juntando pistas do texto com o que já sabemos do mundo. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque quanto mais pistas apontam na mesma direção, menor a chance de a dedução estar errada”. Você concluiu a investigação com faro afiado. Caso encerrado! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

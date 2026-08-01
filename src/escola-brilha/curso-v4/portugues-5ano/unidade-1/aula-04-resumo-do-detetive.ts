@@ -97,6 +97,86 @@ export const aula4: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "A técnica do detetive para fechar um resumo",
+    instrucao:
+      "Todo bom resumo segue três passos: cortar o que se repete, guardar só a ideia central e recontar tudo com as próprias palavras.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Como resumir um texto: corte, guarde e reescreva",
+        explicacao:
+          "Para resumir bem, siga três passos. 1) CORTAR: apague frases que repetem a mesma ideia com outras palavras ou que só decoram o texto (cor, hora exata, nome de rua). 2) MANTER A IDEIA CENTRAL: guarde apenas o que muda o rumo da história — o problema, a ação principal e o resultado. 3) USAR PALAVRAS PRÓPRIAS: nunca copie frases inteiras do texto original; reconte o que entendeu, com o seu jeito de falar.",
+        exemplos: [
+          {
+            palavra:
+              "Original: 'Na terça, às 14h, choveu muito forte e o time de futebol, que treinava havia meses, cancelou o treino no campo da escola.'",
+            destaque: "cancelou o treino por causa da chuva",
+            motivo:
+              "CORTAR: o dia, a hora exata e 'que treinava havia meses' são detalhes que não mudam o fato central — o treino foi cancelado por causa da chuva.",
+          },
+          {
+            palavra:
+              "Original: 'Marina gosta de ler. Marina lê todo dia. Marina tem uma estante cheia de livros em casa.'",
+            destaque: "Marina adora ler e tem muitos livros em casa",
+            motivo:
+              "MANTER A IDEIA CENTRAL: as três frases repetem a mesma ideia (Marina e a leitura); um bom resumo agrupa tudo numa única frase central.",
+          },
+          {
+            palavra:
+              "Original: 'O menino correu até a padaria mais próxima de sua residência para adquirir pão fresquinho.'",
+            destaque: "O menino foi correndo comprar pão na padaria",
+            motivo:
+              "USAR PALAVRAS PRÓPRIAS: a mesma ideia foi recontada com palavras mais simples, sem copiar 'adquirir' nem 'residência' do texto original.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Ontem de manhã, bem cedinho, o cachorro do vizinho, um vira-lata simpático, latiu muito alto e acordou toda a rua.' Qual é o melhor resumo? _",
+            opcoes: [
+              "O cachorro do vizinho latiu alto e acordou a rua",
+              "Ontem de manhã, bem cedinho, o cachorro do vizinho, um vira-lata simpático, latiu muito alto e acordou toda a rua",
+              "O vizinho tem um cachorro muito simpático",
+            ],
+            correta: 0,
+            frase:
+              "Ontem de manhã, bem cedinho, o cachorro do vizinho, um vira-lata simpático, latiu muito alto e acordou toda a rua.",
+            feedbackErro:
+              "A segunda opção copia o texto inteiro; a terceira esquece o fato principal (o latido e o barulho). Corte os detalhes de hora e raça, guarde o essencial.",
+          },
+          {
+            molde:
+              "'Pedro comprou uma bola nova. Pedro também comprou um boné novo. Pedro comprou tudo na mesma loja.' Qual frase agrupa melhor essas ideias? _",
+            opcoes: [
+              "Pedro comprou uma bola e um boné novos na mesma loja",
+              "Pedro comprou uma bola nova",
+              "Pedro foi a uma loja qualquer",
+            ],
+            correta: 0,
+            frase: "Pedro comprou uma bola nova. Pedro também comprou um boné novo. Pedro comprou tudo na mesma loja.",
+            feedbackErro:
+              "As três frases falam da mesma compra; agrupe as informações parecidas numa única frase, sem deixar nada de fora nem repetir 'Pedro comprou' três vezes.",
+          },
+          {
+            molde:
+              "'A professora avisou que a prova de matemática, que ia acontecer na sexta-feira, foi remarcada para a segunda-feira seguinte por causa de um problema na escola.' Qual resumo usa palavras próprias, sem copiar o texto? _",
+            opcoes: [
+              "A prova de matemática mudou de dia por um problema na escola",
+              "A professora avisou que a prova de matemática, que ia acontecer na sexta-feira, foi remarcada para a segunda-feira",
+              "Vai ter prova de matemática",
+            ],
+            correta: 0,
+            frase:
+              "A professora avisou que a prova de matemática, que ia acontecer na sexta-feira, foi remarcada para a segunda-feira seguinte por causa de um problema na escola.",
+            feedbackErro:
+              "A segunda opção repete quase a frase inteira do texto; a terceira perde a ideia central (a mudança de data). Reconte com suas próprias palavras, guardando o essencial.",
+          },
+        ],
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao: "Leia com atenção: depois vamos treinar a apagar detalhes, agrupar ideias e reescrever tudo com nossas palavras.",
     leitura: {
@@ -123,6 +203,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "📝 Isso! O texto diz que 'o troféu de leitura da escola... desapareceu do mural'.",
         feedbackErro: "Releia o primeiro parágrafo: ele diz exatamente o que sumiu do mural.",
         ondeEstaNoTexto: "…o troféu de leitura da escola… desapareceu do mural da entrada.",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “o troféu de leitura da escola… desapareceu do mural da entrada”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O troféu de leitura”. O texto diz que 'o troféu de leitura da escola... desapareceu do mural'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde o troféu foi encontrado?",
@@ -135,6 +218,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "📝 Exato! O texto explica onde os alunos encontraram o troféu.",
         feedbackErro: "Releia o terceiro parágrafo: ele diz onde estava o troféu escondido.",
         ondeEstaNoTexto: "…encontraram o troféu escondido dentro do armário de materiais de limpeza…",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “encontraram o troféu escondido dentro do armário de materiais de limpeza”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dentro do armário de materiais de limpeza”. O texto explica onde os alunos encontraram o troféu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -208,6 +294,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "📝 Isso! O texto conta que a turma plantou uma horta comunitária.",
         feedbackErro: "Releia o primeiro parágrafo: ele diz o que foi plantado no fundo da escola.",
         ondeEstaNoTexto: "…a turma do 5º ano plantou uma horta comunitária no fundo da escola…",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “a turma do 5º ano plantou uma horta comunitária no fundo da escola”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma horta comunitária”. O texto conta que a turma plantou uma horta comunitária. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual dessas frases resumiria melhor a história, sem copiar o texto e sem perder a ideia central?",
@@ -220,8 +309,54 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "📝 Exato! Essa frase junta o problema (crescimento excessivo), a causa (excesso de adubo) e o aprendizado, sem copiar o texto original.",
         feedbackErro: "Pense: um bom resumo precisa contar o problema, a causa e o aprendizado — não apenas repetir um detalhe do texto.",
         ondeEstaNoTexto: "…ela descobriu que ele tinha colocado adubo natural em excesso… A turma aprendeu, na prática, que até uma coisa boa… precisa ser usada na quantidade certa.",
+        dica: "🔍 Pista de detetive: volte ao texto e releia este trecho — “ela descobriu que ele tinha colocado adubo natural em excesso… a turma aprendeu... que precisa ser usada na quantidade certa”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A horta cresceu rápido demais por causa de excesso de adubo, e a turma aprendeu a usar a quantidade certa.”. Essa frase junta o problema, a causa e o aprendizado, sem copiar o texto original. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  momento_escrita: {
+    titulo: "O resumo em três frases do detetive",
+    instrucao:
+      "Todo bom resumo passa por três etapas: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Resuma o caso do troféu em 3 frases",
+        comando:
+          "Volte à história 'O Sumiço do Troféu', lida nesta aula. Escreva um resumo com EXATAMENTE 3 frases, usando suas próprias palavras: a 1ª frase conta o problema, a 2ª conta o que aconteceu no meio da história, e a 3ª conta como o caso terminou.",
+        linhas: 3,
+        modelo: [
+          "O troféu de leitura sumiu do mural da escola e ninguém sabia o que tinha acontecido.",
+          "Dois alunos investigaram e descobriram o troféu escondido no armário de limpeza.",
+          "O troféu voltou ao mural, e a diretora agradeceu aos alunos por não terem desistido.",
+        ],
+        checklist: [
+          "Meu resumo tem exatamente 3 frases, nem mais, nem menos.",
+          "A 1ª frase conta o problema; a 2ª, o meio; a 3ª, o final da história.",
+          "Não copiei nenhuma frase inteira do texto original — escrevi com minhas próprias palavras.",
+          "Cortei detalhes que não mudam o sentido da história (dia da semana, hora exata, nomes de objetos pequenos).",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Li em voz alta e verifiquei se, sozinho, meu resumo já conta a história inteira.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Método do Detetive",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e dois-pontos. A meta não é correr: é ler como quem conta um caso.",
+    texto: [
+      "O detetive mais famoso da cidade sempre carregava um caderninho pequeno, uma lupa de aumento e um lápis bem apontado. Ele dizia que um bom resumo nasce de uma boa investigação: primeiro observa tudo com calma, depois separa o que realmente importa. Sem pressa, ele lia cada pista duas vezes antes de decidir o que valia guardar no caderno.",
+      "Certa vez, um vizinho contou uma história cheia de detalhes sobre um portão que rangia, um gato preto que passou correndo e uma luz que piscou lá dentro da casa vazia. O detetive ouviu tudo com atenção, mas sabia que nem todo detalhe merece entrar no resumo final do caso.",
+      "No fim, ele escreveu apenas três frases no caderno, contando o essencial da história com suas próprias palavras. Assim, qualquer pessoa que lesse aquele resumo entenderia o caso inteiro, sem perder tempo com informações que não mudavam nada na solução do mistério.",
+    ],
+    metaSegundos: 70,
   },
 
   momento_minijogo: {
@@ -267,6 +402,9 @@ export const aula4: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "📝 Isso! Essa frase mantém a ideia central (chuva → recreio mudou de lugar) com poucas palavras próprias.",
       feedbackErro: "A segunda opção só copia a frase original; a terceira inventa uma opinião que o texto não afirma. A ideal resume com outras palavras.",
+      dica: "🔍 Pista de detetive: lembre o que significa “resumir” — é contar uma história ou um texto usando bem menos palavras, guardando só a ideia central. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “'Por causa da chuva, o recreio foi na sala de aula.'”. Essa frase mantém a ideia central (chuva → recreio mudou de lugar) com poucas palavras próprias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -278,10 +416,14 @@ export const aula4: AulaPortuguesV4 = {
           "Contar a ideia central usando bem menos palavras, com as próprias palavras",
           "Copiar o texto inteiro, palavra por palavra",
           "Escrever um texto totalmente diferente do original",
+          "Apagar o texto inteiro sem deixar nenhuma informação",
         ],
         correta: 0,
         feedbackAcerto: "📝 Isso! Resumir é reduzir mantendo a ideia central, sem copiar nem inventar.",
-        feedbackErro: "Resumir não é copiar tudo, nem inventar uma história nova — é manter o essencial, com poucas palavras próprias.",
+        feedbackErro: "Resumir não é copiar tudo, nem inventar uma história nova, nem apagar tudo — é manter o essencial, com poucas palavras próprias.",
+        dica: "🔍 Pista de detetive: lembre o que significa “resumir” — é contar uma história ou um texto usando bem menos palavras, guardando só a ideia central e o que é mais importante. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Contar a ideia central usando bem menos palavras, com as próprias palavras”. Resumir é reduzir mantendo a ideia central, sem copiar nem inventar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é um 'detalhe', num texto?",
@@ -289,10 +431,14 @@ export const aula4: AulaPortuguesV4 = {
           "Uma informação pequena que pode ser deixada de fora de um resumo",
           "A parte mais importante da história",
           "O título do texto",
+          "A frase final que sempre resolve o caso",
         ],
         correta: 0,
         feedbackAcerto: "📝 Correto! Detalhes enriquecem o texto, mas geralmente não são indispensáveis num resumo.",
-        feedbackErro: "Detalhe não é a parte mais importante — é justamente o que pode ser apagado sem perder o sentido geral.",
+        feedbackErro: "Detalhe não é a parte mais importante, nem o título, nem a solução do caso — é justamente o que pode ser apagado sem perder o sentido geral.",
+        dica: "🔍 Pista de detetive: lembre o que significa “detalhe” — é uma informação pequena, que enriquece o texto, mas que pode ser deixada de fora de um resumo sem mudar a ideia principal. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma informação pequena que pode ser deixada de fora de um resumo”. Detalhes enriquecem o texto, mas geralmente não são indispensáveis num resumo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No caso do troféu sumido, qual seria um bom resumo?",
@@ -300,10 +446,14 @@ export const aula4: AulaPortuguesV4 = {
           "O troféu sumiu do mural, os alunos investigaram e o encontraram no armário de limpeza.",
           "Na sexta-feira de manhã, o troféu de leitura da escola, entregue todo mês à turma que mais lia, desapareceu do mural da entrada.",
           "A escola tem um troféu de leitura muito bonito.",
+          "O zelador da escola faz a faxina todas as manhãs.",
         ],
         correta: 0,
         feedbackAcerto: "📝 Isso! Essa frase junta o problema, a ação e a solução, sem copiar o texto original.",
-        feedbackErro: "A segunda opção copia o texto original palavra por palavra; a terceira ignora a história e só descreve o objeto.",
+        feedbackErro: "A segunda opção copia o texto original palavra por palavra; a terceira e a quarta ignoram a história e só descrevem detalhes soltos.",
+        dica: "🔍 Pista de detetive: lembre o que significa “resumir” — é contar a história com bem menos palavras, guardando o problema, a ação principal e o resultado. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O troféu sumiu do mural, os alunos investigaram e o encontraram no armário de limpeza.”. Essa frase junta o problema, a ação e a solução, sem copiar o texto original. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Por que agrupar informações parecidas ajuda a resumir?",
@@ -311,10 +461,14 @@ export const aula4: AulaPortuguesV4 = {
           "Porque evita repetir várias frases sobre a mesma ideia, deixando o texto mais curto",
           "Porque torna o resumo mais comprido que o original",
           "Porque esconde a ideia central do texto",
+          "Porque troca a ideia principal por um detalhe qualquer",
         ],
         correta: 0,
         feedbackAcerto: "📝 Exato! Agrupar deixa o resumo mais enxuto sem perder informação importante.",
-        feedbackErro: "Agrupar serve justamente para deixar o resumo mais curto, sem esconder nem repetir a ideia central.",
+        feedbackErro: "Agrupar serve justamente para deixar o resumo mais curto, sem esconder, sem alongar e sem trocar a ideia central por um detalhe.",
+        dica: "🔍 Pista de detetive: lembre o que significa “agrupar” — é juntar informações parecidas numa única frase, em vez de repetir uma frase para cada uma delas. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque evita repetir várias frases sobre a mesma ideia, deixando o texto mais curto”. Agrupar deixa o resumo mais enxuto sem perder informação importante. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que um bom resumo deve ser escrito com as PRÓPRIAS palavras?",
@@ -322,10 +476,14 @@ export const aula4: AulaPortuguesV4 = {
           "Porque isso mostra que o leitor realmente entendeu o texto, e não só copiou frases",
           "Porque copiar frases é sempre mais rápido e mais correto",
           "Porque um resumo não pode ter nenhuma palavra do texto original",
+          "Porque só assim o resumo fica mais comprido que o texto original",
         ],
         correta: 0,
         feedbackAcerto: "📝 Isso! Você já sabe fechar um caso com um resumo de verdadeiro detetive. Caso encerrado! 🌟",
-        feedbackErro: "Usar as próprias palavras (mesmo repetindo alguma palavra-chave do texto) mostra compreensão de verdade, não só cópia.",
+        feedbackErro: "Usar as próprias palavras (mesmo repetindo alguma palavra-chave do texto) mostra compreensão de verdade, não só cópia — e um bom resumo é sempre mais curto, não mais comprido.",
+        dica: "🔍 Pista de detetive: lembre o que significa “resumir” com as próprias palavras — é reescrever o que entendeu, mostrando que compreendeu a história, e não só copiar. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque isso mostra que o leitor realmente entendeu o texto, e não só copiou frases”. Você já sabe fechar um caso com um resumo de verdadeiro detetive. Caso encerrado! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

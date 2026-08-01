@@ -62,6 +62,7 @@ export const aula3: AulaPortuguesV4 = {
         "⚖️ Isso mesmo! A manchete descreve algo que pode ser verificado (a ciclovia existe, tem 5 km). Já o comentário expressa um sentimento pessoal ('ótima notícia', 'exatamente disso que precisava').",
       feedbackErro:
         "Pense: dá para checar se a ciclovia tem 5 km (isso é fato). Mas 'ótima notícia' é uma avaliação pessoal, que pode variar de pessoa para pessoa — isso é opinião.",
+      dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
     },
   },
 
@@ -81,6 +82,63 @@ export const aula3: AulaPortuguesV4 = {
           "É uma avaliação, um sentimento ou um julgamento pessoal sobre algo. Pode variar de uma pessoa para outra, mesmo diante do mesmo fato.",
         exemplo: "'Essa é a melhor escola da cidade' é uma opinião: outra pessoa pode discordar.",
         imagemUrl: bussola,
+      },
+    ],
+  },
+
+  momento_ensinoVisual: {
+    titulo: "Os marcadores que denunciam uma opinião",
+    instrucao:
+      "Observe as frases e perceba: algumas palavras são pistas quase certas de que ali começa uma OPINIÃO, e não um fato.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Palavras que denunciam a opinião",
+        explicacao:
+          "Algumas palavras avisam que quem escreve está dando sua avaliação pessoal, e não apenas contando o que aconteceu. Palavras como 'acho', 'acredito', 'melhor', 'pior', 'deveria', 'com certeza' e 'sem dúvida' costumam sinalizar OPINIÃO. Já frases com números, datas, nomes e coisas que podem ser medidas ou conferidas costumam ser FATOS.",
+        exemplos: [
+          {
+            palavra: "Acho que essa é a melhor escola da cidade.",
+            destaque: "Acho que... melhor",
+            motivo: "'Acho que' e 'melhor' revelam um julgamento pessoal: é opinião.",
+          },
+          {
+            palavra: "A escola foi fundada em 1998 e tem 300 alunos.",
+            destaque: "fundada em 1998... 300 alunos",
+            motivo: "Datas e números podem ser conferidos: é fato.",
+          },
+          {
+            palavra: "O prefeito deveria investir mais em praças públicas.",
+            destaque: "deveria",
+            motivo: "'Deveria' expressa uma opinião sobre o que seria certo fazer.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'A prova tinha 10 questões de matemática.' Essa frase é: _",
+            opcoes: ["Fato, porque traz um número que pode ser conferido", "Opinião, porque usa a palavra 'acho'", "Nenhuma das duas coisas"],
+            correta: 0,
+            frase: "A prova tinha 10 questões de matemática.",
+            feedbackErro:
+              "Não há palavras como 'acho' ou 'melhor' aqui — apenas um número checável. Isso é fato.",
+          },
+          {
+            molde: "'Eu acredito que essa prova estava fácil demais.' Essa frase é: _",
+            opcoes: ["Opinião, porque traz 'eu acredito' e um julgamento pessoal", "Fato, porque fala sobre uma prova real", "Nenhuma das duas coisas"],
+            correta: 0,
+            frase: "Eu acredito que essa prova estava fácil demais.",
+            feedbackErro:
+              "'Eu acredito' e 'fácil demais' são marcas de julgamento pessoal — isso é opinião, mesmo falando de algo real.",
+          },
+          {
+            molde: "'O time deveria ter treinado mais antes do jogo.' Essa frase é: _",
+            opcoes: ["Opinião, porque usa 'deveria' para dizer o que seria certo", "Fato, porque cita um time de verdade", "Nenhuma das duas coisas"],
+            correta: 0,
+            frase: "O time deveria ter treinado mais antes do jogo.",
+            feedbackErro:
+              "'Deveria' é um marcador clássico de opinião: quem escreve está avaliando o que achava que devia acontecer.",
+          },
+        ],
       },
     ],
   },
@@ -110,6 +168,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "⚖️ Isso! O texto informa 'reformada em três meses'.",
         feedbackErro: "Releia o primeiro parágrafo: ele cita o tempo exato da reforma.",
         ondeEstaNoTexto: "A Praça das Flores foi reformada em três meses…",
+        dica: "⚖️ Pista de detetive: volte ao texto e releia este trecho — “A Praça das Flores foi reformada em três meses”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Três meses”. O texto informa 'reformada em três meses'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a prefeitura investiu na reforma?",
@@ -122,6 +183,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "⚖️ Exato! O texto cita brinquedos, bancos e quadra.",
         feedbackErro: "Releia o primeiro parágrafo: ele lista os itens da reforma.",
         ondeEstaNoTexto: "…a prefeitura investiu em novos brinquedos, bancos e uma quadra poliesportiva.",
+        dica: "⚖️ Pista de detetive: volte ao texto e releia este trecho — “a prefeitura investiu em novos brinquedos, bancos e uma quadra poliesportiva”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Novos brinquedos, bancos e uma quadra poliesportiva”. O texto cita brinquedos, bancos e quadra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -141,6 +205,9 @@ export const aula3: AulaPortuguesV4 = {
           "⚖️ Isso mesmo! Essa frase descreve algo que pode ser conferido de verdade (o que foi instalado na praça). As outras duas expressam avaliações pessoais.",
         feedbackErro:
           "Pense: 'a melhor do bairro' e 'linda demais' são julgamentos pessoais, que variam de pessoa para pessoa — isso é opinião, não fato.",
+        dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'A prefeitura investiu em novos brinquedos, bancos e uma quadra poliesportiva.'”. Essa frase descreve algo que pode ser conferido de verdade; as outras duas expressam avaliações pessoais. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que a frase 'a praça é, sem dúvida, a melhor do bairro agora' é uma OPINIÃO?",
@@ -154,6 +221,9 @@ export const aula3: AulaPortuguesV4 = {
           "⚖️ Correto! 'A melhor' é uma avaliação — depende do gosto e do critério de quem fala, não de algo que se possa medir com exatidão.",
         feedbackErro:
           "Repare: não existe uma forma objetiva de medir 'a melhor praça'. Isso é sempre uma questão de opinião, mesmo quando parece uma afirmação forte.",
+        dica: "⚖️ Pista de detetive: palavras como 'melhor', 'sem dúvida' e 'com certeza' costumam indicar opinião, não fato.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque é um julgamento de valor, que outra pessoa pode discordar”. 'A melhor' é uma avaliação que depende do gosto de quem fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -170,6 +240,7 @@ export const aula3: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "⚖️ Perfeito! Você seguiu a ordem certa: o fato da reforma, o número de visitantes, e a opinião dos moradores por último.",
       feedbackErro: "Pense na lógica da notícia: primeiro se conta o que aconteceu, depois um número, e por último uma opinião sobre o resultado.",
+      dica: "⚖️ Pista de detetive: a notícia costuma seguir a ordem: fato principal, dado numérico e, por último, a opinião de alguém.",
     },
   },
 
@@ -193,6 +264,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "⚖️ Isso! O texto informa claramente a data de lançamento.",
         feedbackErro: "Releia o primeiro parágrafo: ele cita o dia do lançamento.",
         ondeEstaNoTexto: "A escola lançou nesta segunda-feira um novo aplicativo…",
+        dica: "⚖️ Pista de detetive: volte ao texto e releia este trecho — “A escola lançou nesta segunda-feira um novo aplicativo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Nesta segunda-feira”. O texto informa claramente a data de lançamento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual das frases do texto é uma OPINIÃO, e não um fato?",
@@ -205,8 +279,61 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "⚖️ Exato! 'Muito mais prático' é um julgamento pessoal — outra pessoa pode achar diferente.",
         feedbackErro: "Releia: as outras duas frases trazem números e funções que podem ser conferidos. Só uma expressa uma avaliação pessoal.",
         ondeEstaNoTexto: "Para muitos pais, o novo sistema é, com certeza, muito mais prático que o antigo mural de avisos…",
+        dica: "⚖️ Pista de detetive: palavras como 'com certeza' e 'mais prático' costumam indicar opinião, não fato.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'O novo sistema é, com certeza, muito mais prático que o antigo mural.'”. 'Muito mais prático' é um julgamento pessoal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Relatório do Detetive",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo com fatos e opinião",
+        comando:
+          "Escolha um acontecimento recente da sua escola, do seu bairro ou de um jogo que você assistiu. Escreva UM parágrafo com DOIS fatos (informações que podem ser checadas) e UMA opinião claramente marcada por uma palavra como 'acho', 'melhor' ou 'com certeza'.",
+        linhas: 5,
+        modelo: [
+          "No sábado, o time do meu bairro venceu o jogo por 2 a 1.",
+          "A partida aconteceu no campo perto da praça e durou uma hora.",
+          "Eu acho que esse foi o jogo mais emocionante do ano.",
+          "Por isso, quero assistir ao próximo jogo do time.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu parágrafo tem DOIS fatos que podem ser checados (números, datas, nomes).",
+          "Marquei claramente minha OPINIÃO com uma palavra como 'acho', 'melhor' ou 'com certeza'.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Caso dos Marcadores",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula e ponto. A meta não é correr: é ler como quem investiga.",
+    texto: [
+      "O detetive Brilha adora investigar notícias e descobrir o que é fato e o que é opinião escondida em cada texto que lê todos os dias.",
+      "Ele sabe que um bom repórter conta os acontecimentos com números, datas e nomes que qualquer pessoa pode conferir, sem misturar seus próprios sentimentos na reportagem.",
+      "Mas quando alguém diz que algo é o melhor, o mais bonito ou o mais emocionante, Brilha liga o alarme, porque ali começa uma opinião, e não mais um fato comprovado.",
+    ],
+    metaSegundos: 38,
   },
 
   momento_minijogo: {
@@ -231,6 +358,7 @@ export const aula3: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "⚖️ Isso! Você já sabe pesar as informações com precisão de detetive.",
         feedbackErro: "Pense: se dá para medir, contar ou comprovar, é FATO. Se depende do gosto ou julgamento de quem fala, é OPINIÃO.",
+        dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
       },
     },
   },
@@ -239,7 +367,7 @@ export const aula3: AulaPortuguesV4 = {
     pontos: [
       "FATO é uma informação que aconteceu de verdade e pode ser checada, contada ou comprovada.",
       "OPINIÃO é uma avaliação pessoal, um sentimento ou julgamento — pode variar de pessoa para pessoa.",
-      "Palavras como 'melhor', 'pior', 'lindo', 'incrível', 'com certeza' costumam sinalizar uma opinião.",
+      "Palavras como 'melhor', 'pior', 'lindo', 'incrível', 'com certeza', 'acho' e 'deveria' costumam sinalizar uma opinião.",
       "Notícias costumam misturar fatos (o que aconteceu) com opiniões (comentários de pessoas envolvidas) — o bom leitor separa os dois.",
     ],
     miniDesafio: {
@@ -252,6 +380,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "⚖️ Isso! 'Chato demais' é um julgamento que varia de pessoa para pessoa — isso é opinião.",
       feedbackErro: "A duração em minutos pode ser conferida (fato). Mas 'chato demais' depende do gosto de quem assiste (opinião).",
+      dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “'O filme é chato demais', porque é um julgamento pessoal”. 'Chato demais' é um julgamento que varia de pessoa para pessoa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -263,10 +394,20 @@ export const aula3: AulaPortuguesV4 = {
           "Uma informação que aconteceu de verdade e pode ser checada",
           "Um sentimento pessoal sobre algo",
           "Sempre a última frase de uma notícia",
+          "Uma palavra como 'melhor' ou 'pior'",
         ],
         correta: 0,
         feedbackAcerto: "⚖️ Isso! Fato é algo comprovável.",
         feedbackErro: "Fato não é sentimento — é algo que pode ser conferido ou comprovado.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Um sentimento pessoal sobre algo” não é a resposta. Fato não é sentimento — é algo que pode ser conferido ou comprovado.",
+          "❌ “Sempre a última frase de uma notícia” não é a resposta. Fato não é sentimento — é algo que pode ser conferido ou comprovado.",
+          "❌ “Uma palavra como 'melhor' ou 'pior'” não é a resposta. Fato não é sentimento — é algo que pode ser conferido ou comprovado.",
+        ],
+        dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma informação que aconteceu de verdade e pode ser checada”. Fato é algo comprovável. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é uma 'opinião'?",
@@ -274,10 +415,20 @@ export const aula3: AulaPortuguesV4 = {
           "Uma avaliação ou julgamento pessoal, que pode variar de pessoa para pessoa",
           "O mesmo que um fato",
           "Uma informação sempre falsa",
+          "A data em que algo aconteceu",
         ],
         correta: 0,
         feedbackAcerto: "⚖️ Correto! Opinião é julgamento pessoal, não necessariamente falsa, mas subjetiva.",
         feedbackErro: "Opinião não é sinônimo de mentira — é uma avaliação pessoal, que pode até ser sincera, mas é subjetiva.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O mesmo que um fato” não é a resposta. Opinião é uma avaliação pessoal, diferente de um fato checável.",
+          "❌ “Uma informação sempre falsa” não é a resposta. Opinião não é sinônimo de mentira — é uma avaliação pessoal, que pode até ser sincera, mas é subjetiva.",
+          "❌ “A data em que algo aconteceu” não é a resposta. Isso seria um fato, não uma opinião.",
+        ],
+        dica: "⚖️ Pista de detetive: opinião depende do gosto e do critério de quem fala, não de algo que se possa medir com exatidão.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma avaliação ou julgamento pessoal, que pode variar de pessoa para pessoa”. Opinião é julgamento pessoal, não necessariamente falsa, mas subjetiva. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — No texto da praça, qual frase era um FATO?",
@@ -285,10 +436,20 @@ export const aula3: AulaPortuguesV4 = {
           "A prefeitura investiu em novos brinquedos, bancos e uma quadra poliesportiva",
           "A praça é, sem dúvida, a melhor do bairro",
           "A praça ficou linda demais",
+          "A praça é, com certeza, a mais bonita da cidade",
         ],
         correta: 0,
         feedbackAcerto: "⚖️ Isso! Essa informação pode ser checada; as outras são julgamentos.",
-        feedbackErro: "'Melhor' e 'linda demais' são opiniões. Só a frase sobre os investimentos é checável.",
+        feedbackErro: "'Melhor', 'linda demais' e 'com certeza a mais bonita' são opiniões. Só a frase sobre os investimentos é checável.",
+        feedbackOpcoes: [
+          null,
+          "❌ “A praça é, sem dúvida, a melhor do bairro” não é a resposta. Isso é uma opinião, não um fato checável.",
+          "❌ “A praça ficou linda demais” não é a resposta. Isso é uma opinião, não um fato checável.",
+          "❌ “A praça é, com certeza, a mais bonita da cidade” não é a resposta. Isso é uma opinião, não um fato checável.",
+        ],
+        dica: "⚖️ Pista de detetive: fato é o que pode ser checado ou medido; opinião é uma avaliação pessoal que pode variar de pessoa para pessoa.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A prefeitura investiu em novos brinquedos, bancos e uma quadra poliesportiva”. Essa informação pode ser checada; as outras são julgamentos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual dessas frases é uma OPINIÃO?",
@@ -296,10 +457,20 @@ export const aula3: AulaPortuguesV4 = {
           "Esse é o melhor jogador do time",
           "O jogo terminou 2 a 0",
           "O jogo começou às 16h",
+          "O time tem 15 jogadores no elenco",
         ],
         correta: 0,
         feedbackAcerto: "⚖️ Exatamente! 'O melhor jogador' é um julgamento pessoal.",
-        feedbackErro: "As outras duas trazem números e horários checáveis — só uma expressa um julgamento pessoal.",
+        feedbackErro: "As outras trazem números e horários checáveis — só uma expressa um julgamento pessoal.",
+        feedbackOpcoes: [
+          null,
+          "❌ “O jogo terminou 2 a 0” não é a resposta. Isso é um fato: pode ser conferido pelo placar.",
+          "❌ “O jogo começou às 16h” não é a resposta. Isso é um fato: um horário checável.",
+          "❌ “O time tem 15 jogadores no elenco” não é a resposta. Isso é um fato: um número checável.",
+        ],
+        dica: "⚖️ Pista de detetive: palavras como 'melhor', 'pior' e 'deveria' costumam indicar opinião, não fato.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Esse é o melhor jogador do time”. 'O melhor jogador' é um julgamento pessoal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que é importante separar fato de opinião ao ler uma notícia?",
@@ -307,10 +478,20 @@ export const aula3: AulaPortuguesV4 = {
           "Para não confundir uma avaliação pessoal com uma verdade comprovada",
           "Porque opiniões não podem aparecer em notícias",
           "Porque fatos são sempre mais longos que opiniões",
+          "Porque opiniões são sempre mentiras",
         ],
         correta: 0,
         feedbackAcerto: "⚖️ Isso! Você já sabe pesar as informações como um verdadeiro detetive. Caso encerrado! 🌟",
         feedbackErro: "Notícias podem trazer opiniões de pessoas entrevistadas — o importante é o leitor saber identificar qual é qual.",
+        feedbackOpcoes: [
+          null,
+          "❌ “Porque opiniões não podem aparecer em notícias” não é a resposta. Notícias podem trazer opiniões de pessoas entrevistadas — o importante é o leitor saber identificar qual é qual.",
+          "❌ “Porque fatos são sempre mais longos que opiniões” não é a resposta. O tamanho da frase não define se é fato ou opinião.",
+          "❌ “Porque opiniões são sempre mentiras” não é a resposta. Opinião não é sinônimo de mentira, é uma avaliação pessoal, que pode ser sincera.",
+        ],
+        dica: "⚖️ Pista de detetive: separar fato de opinião evita acreditar que um julgamento pessoal é uma verdade comprovada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para não confundir uma avaliação pessoal com uma verdade comprovada”. Você já sabe pesar as informações como um verdadeiro detetive. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
