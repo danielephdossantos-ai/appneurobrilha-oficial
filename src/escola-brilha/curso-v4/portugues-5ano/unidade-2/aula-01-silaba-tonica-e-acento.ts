@@ -50,6 +50,7 @@ export const aula1: AulaPortuguesV4 = {
         "🎉 Isso mesmo! Vamos aprender a encontrar a sílaba tônica e saber quando ela ganha acento.",
       feedbackErro:
         "Pense na bússola: ela aponta pro som mais FORTE da palavra. É esse o assunto de hoje.",
+      dica: "🧭 Pista da oficina: a bússola aponta para a sílaba mais forte — é sobre isso que a aula vai falar, e sobre quando essa força vira acento.",
     },
   },
 
@@ -88,14 +89,59 @@ export const aula1: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Ouvindo onde bate a força",
-    instrucao: "Ouça o Brilha separando as sílabas e batendo mais forte na tônica.",
+    instrucao: "Toque em cada palavra, escute o Brilha separando as sílabas e veja qual delas bate mais forte.",
     blocos: [
       {
-        tipo: "fraseComPonto",
-        frases: [
-          { texto: "ja-ca-RÉ", explicacao: "Última sílaba forte → OXÍTONA." },
-          { texto: "ÁR-vo-re", explicacao: "Penúltima sílaba forte → PAROXÍTONA." },
-          { texto: "MÁ-qui-na", explicacao: "Antepenúltima sílaba forte → PROPAROXÍTONA." },
+        tipo: "silabaTonica",
+        itens: [
+          {
+            palavra: "jacaré",
+            silabas: ["ja", "ca", "ré"],
+            tonica: 2,
+            imagemUrl: bussola,
+            explicacao: "A força bate na ÚLTIMA sílaba: 'RÉ'. Por isso, JACARÉ é uma palavra OXÍTONA.",
+          },
+          {
+            palavra: "árvore",
+            silabas: ["ár", "vo", "re"],
+            tonica: 0,
+            imagemUrl: arvore,
+            explicacao: "A força bate na PENÚLTIMA sílaba: 'ÁR'. Por isso, ÁRVORE é uma palavra PAROXÍTONA.",
+          },
+          {
+            palavra: "máquina",
+            silabas: ["má", "qui", "na"],
+            tonica: 0,
+            imagemUrl: lapis,
+            explicacao: "A força bate na ANTEPENÚLTIMA sílaba: 'MÁ'. Por isso, MÁQUINA é uma palavra PROPAROXÍTONA — e toda proparoxítona tem acento.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Quando a sílaba forte pede acento gráfico",
+        explicacao:
+          "Nem toda sílaba tônica ganha acento — depende da posição e da terminação da palavra. Proparoxítonas SEMPRE têm acento. Oxítonas ganham acento quando terminam em A, E, O, EM (café, você, cipó). Paroxítonas ganham acento quando terminam em L, R, N, X, I, ÃO, UM, US, PS (fácil, açúcar, hífen).",
+        exemplos: [
+          { palavra: "café", destaque: "é", motivo: "Oxítona terminada em E: recebe acento." },
+          { palavra: "fácil", destaque: "á", motivo: "Paroxítona terminada em L: recebe acento." },
+          { palavra: "lâmpada", destaque: "lâm", motivo: "Proparoxítona: recebe acento sempre." },
+        ],
+        desafios: [
+          {
+            molde: "CAF_ terminada em E, com força na última sílaba. Precisa de acento?",
+            opcoes: ["Sim, porque é oxítona terminada em E", "Não, porque é paroxítona", "Só se for nome próprio", "Nunca leva acento"],
+            correta: 0,
+            frase: "café",
+            feedbackErro: "CAFÉ é oxítona (força na última sílaba) e termina em E — por isso recebe acento.",
+          },
+          {
+            molde: "AÇÚCAR tem força na penúltima sílaba e termina em R. Precisa de acento?",
+            opcoes: ["Sim, porque é paroxítona terminada em R", "Não, porque toda paroxítona não tem acento", "Só em frases", "Depende do tamanho da palavra"],
+            correta: 0,
+            frase: "açúcar",
+            feedbackErro: "AÇÚCAR é paroxítona e termina em R — essa terminação pede acento nas paroxítonas.",
+          },
         ],
       },
     ],
@@ -127,6 +173,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Oxítona = força na última sílaba, como em CAFÉ.",
         feedbackErro: "Releia: 'Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA'.",
         ondeEstaNoTexto: "Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA, como em CAFÉ",
+        dica: "🧭 Pista da oficina: volte ao diário e releia este trecho — “Se essa força cai na ÚLTIMA sílaba, a palavra é OXÍTONA”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Oxítona”. É o nome da palavra cuja força cai na última sílaba, como em CAFÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual regra vale para TODA proparoxítona, sem exceção?",
@@ -135,6 +184,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Toda proparoxítona é acentuada, sem exceção.",
         feedbackErro: "Releia o parágrafo 3: 'TODA proparoxítona recebe acento, sem exceção.'",
         ondeEstaNoTexto: "TODA proparoxítona recebe acento, sem exceção.",
+        dica: "🧭 Pista da oficina: volte ao diário e releia este trecho — “TODA proparoxítona recebe acento, sem exceção”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Sempre leva acento”. Essa é a regra de ouro: toda proparoxítona é acentuada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual tipo de palavra é a maioria no português, segundo o texto?",
@@ -143,6 +195,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O texto diz que a paroxítona é o tipo mais comum.",
         feedbackErro: "Releia: 'a maioria das palavras do português é assim' — refere-se à paroxítona.",
         ondeEstaNoTexto: "a maioria das palavras do português é assim",
+        dica: "🧭 Pista da oficina: volte ao diário e releia este trecho — “a maioria das palavras do português é assim”, logo depois de falar da paroxítona.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. O texto afirma que é o tipo mais comum de palavra do português. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -156,6 +211,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! A descoberta foi registrada no diário da oficina.",
         feedbackErro: "Releia o título: 'O Diário da Bancada' — é onde tudo foi anotado.",
+        dica: "🧭 Pista da oficina: releia o título do texto — 'O Diário da Bancada'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No diário da oficina”. É lá que Brilha anotou a descoberta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual ferramenta ajudou a explicar a ideia de sílaba tônica?",
@@ -163,6 +221,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! A bússola aponta a sílaba mais forte da palavra.",
         feedbackErro: "Volte à motivação: Brilha carregava uma bússola especial.",
+        dica: "🧭 Pista da oficina: releia a motivação — Brilha entrou carregando uma ferramenta especial.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A bússola”. Ela representa a busca pela sílaba mais forte da palavra. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -180,6 +241,7 @@ export const aula1: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Essa é a rota certa para calibrar a bússola da sílaba tônica.",
       feedbackErro: "Pense: primeiro se separa em sílabas, depois se ouve a força, depois se localiza a posição, e só então se decide o acento.",
+      dica: "🧭 Pista da oficina: primeiro separe em sílabas, depois ouça a força, depois ache a posição e só então decida o acento.",
     },
   },
 
@@ -207,6 +269,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Proparoxítona sempre leva acento.",
         feedbackErro: "Releia: 'É proparoxítona, por isso o acento é obrigatório.'",
         ondeEstaNoTexto: "É proparoxítona, por isso o acento é obrigatório.",
+        dica: "🧭 Pista da oficina: volte ao texto e releia este trecho — “É proparoxítona, por isso o acento é obrigatório”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque é proparoxítona, e toda proparoxítona é acentuada”. Essa é a regra de ouro da aula. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que FÁCIL e AÇÚCAR têm em comum, segundo o texto?",
@@ -220,6 +285,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Paroxítonas terminadas em L, R (entre outras) recebem acento.",
         feedbackErro: "Releia: 'ambas terminam em L e R. Essas terminações pedem acento nas paroxítonas.'",
         ondeEstaNoTexto: "Essas terminações pedem acento nas paroxítonas.",
+        dica: "🧭 Pista da oficina: volte ao texto e releia este trecho — “Essas terminações pedem acento nas paroxítonas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “São paroxítonas terminadas em L e R, o que pede acento”. Essa é a característica que as duas palavras compartilham. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -249,15 +317,67 @@ export const aula1: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Excelente! Você calibrou a bússola da sílaba tônica.",
         feedbackErro: "Fale a palavra em voz alta bem devagar e sinta em qual sílaba a voz fica mais forte.",
+        dica: "🧭 Pista da oficina: fale a palavra bem devagar, sílaba por sílaba, e sinta em qual delas sua voz fica mais forte — última, penúltima ou antepenúltima.",
       },
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Caderno de Palavras Classificadas",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um pequeno texto classificando palavras",
+        comando:
+          "Escolha 3 palavras diferentes (podem vir de rótulos, livros ou nomes de amigos). Para cada uma, escreva uma frase dizendo qual é a sílaba tônica, se ela é oxítona, paroxítona ou proparoxítona, e se ela tem acento.",
+        linhas: 5,
+        modelo: [
+          "A palavra 'sofá' é oxítona, porque a força cai na última sílaba: so-FÁ.",
+          "Por isso, ela recebe acento gráfico.",
+          "Já a palavra 'árvore' é paroxítona, com a força na penúltima sílaba: ÁR-vo-re.",
+          "A palavra 'lâmpada' é proparoxítona, e por isso sempre tem acento: LÂM-pa-da.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Escolhi 3 palavras diferentes, sem repetir.",
+          "Para cada palavra, disse claramente onde está a sílaba tônica.",
+          "Classifiquei corretamente cada palavra: oxítona, paroxítona ou proparoxítona.",
+          "Expliquei se a palavra tem acento e por quê.",
+          "Li em voz alta e consertei o que ficou estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Força Escondida nas Palavras",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você já reparou que, ao falar qualquer palavra em voz alta, uma das sílabas sempre soa mais forte do que as outras? Essa força tem nome: sílaba tônica. Ela existe em toda palavra com mais de uma sílaba, mesmo quando não aparece nenhum acento escrito.",
+      "Quando a força cai na última sílaba, chamamos a palavra de oxítona. Quando cai na penúltima, ela é paroxítona — e esse é o tipo mais comum do nosso idioma. Já quando a força cai lá atrás, na antepenúltima sílaba, a palavra é proparoxítona, e recebe acento sempre, sem exceção.",
+      "Aprender a ouvir essa força ajuda muito na hora de escrever. Antes de decidir se uma palavra leva acento, basta falar em voz alta, sentir onde a voz pesa mais e depois checar a regra certa. Com prática, esse processo vira automático, e os erros de acentuação vão diminuindo cada vez mais.",
+    ],
+    metaSegundos: 72,
+  },
+
   momento09_revisao: {
     pontos: [
-      "Sílaba TÔNICA é a mais forte da palavra.",
+      "A sílaba TÔNICA é a mais forte de uma palavra ao ser pronunciada.",
       "OXÍTONA: força na última sílaba. PAROXÍTONA: força na penúltima. PROPAROXÍTONA: força na antepenúltima.",
-      "Toda proparoxítona é acentuada, sem exceção. Oxítonas e paroxítonas dependem da terminação.",
+      "Toda proparoxítona é acentuada, sem exceção. Oxítonas e paroxítonas dependem da terminação da palavra.",
+      "Um bom truque: fale a palavra bem devagar em voz alta e sinta onde a voz 'pesa' mais.",
     ],
     miniDesafio: {
       pergunta: "MÁQUINA é proparoxítona. Isso significa que ela...",
@@ -270,6 +390,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! Essa é a regra de ouro da aula de hoje.",
       feedbackErro: "Releia a explicação: toda proparoxítona recebe acento, sem exceção.",
+      dica: "🧭 Pista da oficina: lembre da regra de ouro — toda palavra proparoxítona recebe acento, sem exceção nenhuma.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Sempre tem acento, porque toda proparoxítona é acentuada”. Essa é a regra de ouro da aula de hoje. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -281,6 +404,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Tônica é a sílaba mais forte.",
         feedbackErro: "Lembre: tônica é a sílaba que soa com mais força.",
+        dica: "🧭 Pista da oficina: fale a palavra em voz alta e sinta onde a voz fica mais forte — essa é a sílaba tônica.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A sílaba pronunciada com mais força”. É essa a definição de sílaba tônica. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — CAFÉ é um exemplo de palavra...",
@@ -288,6 +414,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! A força cai na última sílaba: ca-FÉ.",
         feedbackErro: "Em CAFÉ, a força cai na última sílaba: é oxítona.",
+        dica: "🧭 Pista da oficina: separe em sílabas — ca-FÉ — e veja onde a voz fica mais forte.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Oxítona”. Em CAFÉ, a força cai na última sílaba: ca-FÉ. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — ÁRVORE é um exemplo de palavra...",
@@ -295,6 +424,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! A força cai na penúltima sílaba: ÁR-vo-re.",
         feedbackErro: "Em ÁRVORE, a força está na penúltima sílaba: é paroxítona.",
+        dica: "🧭 Pista da oficina: separe em sílabas — ÁR-vo-re — e veja onde a voz fica mais forte.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Paroxítona”. Em ÁRVORE, a força está na penúltima sílaba. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Toda palavra proparoxítona...",
@@ -302,6 +434,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Regra sem exceção: toda proparoxítona é acentuada.",
         feedbackErro: "Lembre da regra de ouro: toda proparoxítona é acentuada, sempre.",
+        dica: "🧭 Pista da oficina: essa é a regra de ouro da aula — sem exceções.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Leva acento sempre”. Essa é a regra de ouro: toda proparoxítona é acentuada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — MÁQUINA tem a sílaba tônica em qual posição?",
@@ -309,6 +444,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Oficina dominada! MÁ-qui-na: a força está na antepenúltima sílaba.",
         feedbackErro: "Separe: MÁ-qui-na. A força está na primeira sílaba, que é a antepenúltima.",
+        dica: "🧭 Pista da oficina: separe em sílabas — MÁ-qui-na — e conte a partir do fim: última, penúltima, antepenúltima.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Antepenúltima”. Em MÁ-qui-na, a força está na primeira sílaba, que é a antepenúltima. Oficina dominada! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -326,7 +464,8 @@ export const aula1: AulaPortuguesV4 = {
   },
 
   recompensa: {
-    xp: 130,
-    moedas: 75,
+    xp: 140,
+    moedas: 80,
+    medalha: "Bússola de Bronze",
   },
 };

@@ -48,6 +48,7 @@ export const aula1: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a fazer as palavras da frase combinarem, como peças de uma engrenagem.",
       feedbackErro: "Pense na engrenagem emperrada: é sobre peças que precisam se encaixar. Assim são as palavras da frase.",
+      dica: "⚙️ Pista: pense no que travava a engrenagem — peças de tamanhos diferentes. Na frase, isso vira palavras que não combinam entre si.",
     },
   },
 
@@ -86,12 +87,54 @@ export const aula1: AulaPortuguesV4 = {
     instrucao: "Ouça o Brilha girando cada engrenagem da frase.",
     blocos: [
       {
-        tipo: "fraseComPonto",
-        frases: [
-          { texto: "As meninas alegres cantaram.", explicacao: "AS, meninas e alegres estão todas no feminino plural — a engrenagem encaixa." },
-          { texto: "O menino esperto correu.", explicacao: "O, menino e esperto estão todos no masculino singular." },
-          { texto: "Nós estudamos todos os dias.", explicacao: "O verbo ESTUDAR vai para a forma NÓS ESTUDAMOS, combinando com o sujeito NÓS." },
-          { texto: "Os alunos chegaram cedo.", explicacao: "OS, alunos e o verbo CHEGARAM estão todos no plural, encaixados com o sujeito." },
+        tipo: "regraOrtografica",
+        regra: "Concordância nominal e verbal: como não travar a engrenagem",
+        explicacao:
+          "Na CONCORDÂNCIA NOMINAL, artigo, substantivo e adjetivo precisam ter o mesmo gênero e número. Na CONCORDÂNCIA VERBAL, o verbo muda de forma para combinar com o sujeito. Truque de oficina: ache o substantivo (ou o sujeito) e verifique se as outras peças 'giram junto' com ele.",
+        exemplos: [
+          {
+            palavra: "As meninas alegres cantaram.",
+            destaque: "As meninas alegres",
+            motivo: "AS, meninas e alegres estão todas no feminino plural — a engrenagem encaixa.",
+          },
+          {
+            palavra: "O menino esperto correu.",
+            destaque: "O menino esperto",
+            motivo: "O, menino e esperto estão todos no masculino singular.",
+          },
+          {
+            palavra: "Nós estudamos todos os dias.",
+            destaque: "Nós estudamos",
+            motivo: "O verbo ESTUDAR vai para a forma NÓS ESTUDAMOS, combinando com o sujeito NÓS.",
+          },
+          {
+            palavra: "Os alunos chegaram cedo.",
+            destaque: "Os alunos chegaram",
+            motivo: "OS, alunos e o verbo CHEGARAM estão todos no plural, encaixados com o sujeito.",
+          },
+        ],
+        desafios: [
+          {
+            molde: "'As flores ___ (bonito/bonitas) enfeitam o jardim.' Qual peça encaixa?",
+            opcoes: ["bonitas", "bonito", "bonitinho"],
+            correta: 0,
+            frase: "As flores bonitas enfeitam o jardim.",
+            feedbackErro: "'As flores' está no feminino plural, então o adjetivo também precisa estar: BONITAS.",
+          },
+          {
+            molde: "'Os cachorros ___ (latiu/latiram) a noite toda.' Qual verbo encaixa com o sujeito?",
+            opcoes: ["latiram", "latiu", "latia"],
+            correta: 0,
+            frase: "Os cachorros latiram a noite toda.",
+            feedbackErro: "'Os cachorros' é sujeito plural, então o verbo também precisa ir para o plural: LATIRAM.",
+          },
+          {
+            molde: "'Nós ___ (fazemos/faz) o dever juntos.' Qual verbo combina com NÓS?",
+            opcoes: ["fazemos", "faz", "fazem"],
+            correta: 0,
+            frase: "Nós fazemos o dever juntos.",
+            feedbackErro: "O sujeito NÓS sempre pede a forma verbal terminada em -MOS: FAZEMOS.",
+          },
         ],
       },
     ],
@@ -128,6 +171,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A concordância nominal encaixa artigo, substantivo e adjetivo.",
         feedbackErro: "Releia: 'A CONCORDÂNCIA NOMINAL é o encaixe entre o artigo, o substantivo e o adjetivo'.",
         ondeEstaNoTexto: "A CONCORDÂNCIA NOMINAL é o encaixe entre o artigo, o substantivo e o adjetivo",
+        dica: "⚙️ Pista de oficina: volte ao texto e releia este trecho — “A CONCORDÂNCIA NOMINAL é o encaixe entre o artigo, o substantivo e o adjetivo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O encaixe entre artigo, substantivo e adjetivo”. A concordância NOMINAL cuida das palavras que giram junto com o nome (substantivo). Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Segundo o texto, o que muda no verbo na concordância verbal?",
@@ -141,6 +187,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O verbo muda de forma conforme a pessoa e o número do sujeito.",
         feedbackErro: "Releia: 'o verbo muda de forma conforme a pessoa e o número do sujeito'.",
         ondeEstaNoTexto: "o verbo muda de forma conforme a pessoa e o número do sujeito",
+        dica: "⚙️ Pista de oficina: volte ao texto e releia este trecho — “o verbo muda de forma conforme a pessoa e o número do sujeito”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A forma, conforme a pessoa e o número do sujeito”. É isso que faz o verbo 'girar' junto com quem pratica a ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que acontece quando as concordâncias estão bem feitas, segundo o último parágrafo?",
@@ -154,6 +203,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O texto soa redondo, sem tropeços, quando a concordância está correta.",
         feedbackErro: "Releia: 'é o que faz um texto soar redondo, sem tropeços'.",
         ondeEstaNoTexto: "é o que faz um texto soar \"redondo\", sem tropeços",
+        dica: "⚙️ Pista de oficina: volte ao texto e releia este trecho — “é o que faz um texto soar redondo, sem tropeços”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O texto soa 'redondo', sem tropeços”. Quando as peças encaixam, a leitura flui sem estranhamento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -172,6 +224,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Foi uma engrenagem enferrujada, com peças que não se encaixavam.",
         feedbackErro: "Releia a motivação: Brilha mostrou uma engrenagem enferrujada.",
+        dica: "⚙️ Pista de oficina: pense no objeto que dá nome à unidade — 'A Engrenagem da Frase'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma engrenagem enferrujada com peças de tamanhos diferentes”. Foi esse objeto que abriu a aula. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as descobertas sobre concordância foram registradas?",
@@ -184,6 +239,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou registrado no Manual da Engrenagem da Frase.",
         feedbackErro: "Releia o título: 'O Manual da Engrenagem da Frase'.",
+        dica: "⚙️ Pista de oficina: relembre o título da leitura guiada de hoje.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No manual da oficina”. O texto que lemos se chamava 'O Manual da Engrenagem da Frase'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -201,6 +259,7 @@ export const aula1: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para deixar a frase bem encaixada.",
       feedbackErro: "Pense: primeiro se acha o substantivo, depois se ajustam artigo e adjetivo, por fim o verbo.",
+      dica: "⚙️ Pista de oficina: primeiro se encontra a peça principal (o substantivo/sujeito), depois se ajustam as peças ao redor dela.",
     },
   },
 
@@ -228,6 +287,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O artigo combina em gênero e número com o substantivo.",
         feedbackErro: "Releia: 'o substantivo MENINOS está no masculino plural, então o artigo OS também está no plural'.",
         ondeEstaNoTexto: "o substantivo MENINOS está no masculino plural, então o artigo OS também está no plural",
+        dica: "⚙️ Pista de oficina: volte ao texto e releia este trecho — “o substantivo MENINOS está no masculino plural, então o artigo OS também está no plural”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque MENINOS está no masculino plural, e o artigo precisa combinar”. O artigo sempre acompanha gênero e número do substantivo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Com que o verbo EXPLICOU combina na segunda frase?",
@@ -241,6 +303,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O verbo combina com o sujeito da frase, no caso, a professora.",
         feedbackErro: "Releia: 'o verbo EXPLICOU está na forma de singular, combinando com o sujeito ELA (a professora)'.",
         ondeEstaNoTexto: "o verbo EXPLICOU está na forma de singular, combinando com o sujeito ELA (a professora)",
+        dica: "⚙️ Pista de oficina: volte ao texto e releia este trecho — “o verbo EXPLICOU está na forma de singular, combinando com o sujeito ELA (a professora)”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com o sujeito ELA (a professora)”. O verbo sempre combina com quem pratica a ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -267,8 +332,58 @@ export const aula1: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Peça encaixada! A engrenagem gira lisinha.",
         feedbackErro: "Pense no gênero, no número e em quem é o sujeito antes de encaixar a peça.",
+        dica: "⚙️ Pista de oficina: leia o começo do alvo (ex.: 'As flores') e veja se a peça combina em gênero e número, ou se é o verbo certo para o sujeito.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Manual de Manutenção da Sua Própria Frase",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo sobre um dia na escola",
+        comando:
+          "Escreva um parágrafo curto (de 3 a 5 frases) contando algo que aconteceu na sua escola. Preste muita atenção para o artigo, o substantivo e o adjetivo combinarem, e para o verbo combinar com o sujeito de cada frase.",
+        linhas: 5,
+        modelo: [
+          "Os alunos chegaram animados à escola.",
+          "A professora explicou uma atividade nova sobre plantas.",
+          "As crianças curiosas fizeram perguntas o tempo todo.",
+          "No fim, todos saíram satisfeitos com a aula.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Conferi se cada artigo combina em gênero e número com o substantivo.",
+          "Conferi se cada adjetivo combina em gênero e número com o substantivo que ele descreve.",
+          "Conferi se cada verbo combina com o sujeito da frase.",
+          "Li em voz alta e consertei o que soou torto ou 'emperrado'.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Engrenagem que Nunca Trava",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Imagine uma oficina cheia de engrenagens, cada uma com dentes de um tamanho diferente. Se as peças forem encaixadas com cuidado, a máquina inteira gira sem esforço. Mas basta uma peça errada para tudo travar. Com as frases da língua portuguesa acontece exatamente a mesma coisa.",
+      "Quando o artigo, o substantivo e o adjetivo combinam em gênero e número, dizemos que existe concordância nominal, e a frase gira lisa, sem estranhamentos. Quando o verbo combina com o sujeito, existe concordância verbal, e a ação soa natural, como se fosse contada por alguém que domina bem o idioma.",
+      "Por isso, todo bom escritor revisa seu texto como um mecânico revisa uma engrenagem: procura a peça que não encaixa, troca por outra do tamanho certo e só então deixa a máquina — ou a frase — funcionar de verdade, sem nenhum tropeço.",
+    ],
+    metaSegundos: 72,
   },
 
   momento09_revisao: {
@@ -288,6 +403,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Isso! 'As casas são grandes' tem todas as peças encaixadas no plural feminino.",
       feedbackErro: "Releia as opções: procure aquela em que todas as palavras combinam em gênero e número.",
+      dica: "⚙️ Pista de oficina: confira se artigo, substantivo, adjetivo e verbo estão todos no mesmo gênero e número.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “As casas são grandes”. Todas as peças (artigo, substantivo, verbo e adjetivo) estão no plural feminino, encaixadas. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -299,6 +417,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Concordância nominal encaixa artigo, substantivo e adjetivo.",
         feedbackErro: "Lembre: nominal fala das palavras que acompanham o nome (substantivo).",
+        dica: "⚙️ Pista de oficina: 'nominal' vem de 'nome' — pense nas palavras que giram junto com o substantivo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Artigo, substantivo e adjetivo”. Nominal é o encaixe das palavras ao redor do nome. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Complete: 'AS meninas ___ chegaram cedo.'",
@@ -306,6 +427,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Alegres', no feminino plural, combina com AS meninas.",
         feedbackErro: "Pense: AS meninas está no feminino plural, então o adjetivo também precisa estar.",
+        dica: "⚙️ Pista de oficina: veja o gênero e o número de 'meninas' antes de escolher o adjetivo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “alegres”. O adjetivo precisa ir para o feminino plural, como o substantivo 'meninas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Complete: 'NÓS ___ o dever de casa juntos.'",
@@ -313,6 +437,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! NÓS pede a forma FAZEMOS.",
         feedbackErro: "Lembre: o sujeito NÓS sempre combina com a forma verbal terminada em -MOS.",
+        dica: "⚙️ Pista de oficina: o sujeito NÓS quase sempre pede um verbo terminado em -MOS.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “fazemos”. O sujeito NÓS sempre combina com a forma terminada em -MOS. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual frase tem a concordância verbal correta?",
@@ -320,6 +447,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Exato! 'Os alunos estudam' combina sujeito plural com verbo no plural.",
         feedbackErro: "Confira se o sujeito e o verbo estão os dois no plural ou os dois no singular.",
+        dica: "⚙️ Pista de oficina: veja se o sujeito é singular ou plural, e escolha a frase em que o verbo combina com ele.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Os alunos estudam muito”. Sujeito plural pede verbo plural. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Em 'UM prédio alto', o adjetivo ALTO está no...",
@@ -327,6 +457,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 3,
         feedbackAcerto: "🎉 Aula concluída! ALTO combina em masculino singular com PRÉDIO.",
         feedbackErro: "PRÉDIO é masculino e singular, então o adjetivo também precisa ser.",
+        dica: "⚙️ Pista de oficina: veja o gênero e o número da palavra PRÉDIO antes de responder.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Masculino singular”. PRÉDIO é masculino singular, e o adjetivo ALTO combina com ele. Aula concluída! ⚙️ Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -344,7 +477,8 @@ export const aula1: AulaPortuguesV4 = {
   },
 
   recompensa: {
-    xp: 130,
-    moedas: 75,
+    xp: 140,
+    moedas: 80,
+    medalha: "Engrenagem de Bronze",
   },
 };

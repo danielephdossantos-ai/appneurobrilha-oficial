@@ -48,6 +48,7 @@ export const aula3: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos treinar o olho para escolher a letra certa entre sons parecidos.",
       feedbackErro: "Pense nas 'letras gêmeas' que a coruja mostrou: S/SS, Ç/C, X/CH, G/J, RR/R.",
+      dica: "🦉 Pista da coruja: olhe de novo para o quebra-cabeça — as peças têm letras diferentes, mas o mesmo som.",
     },
   },
 
@@ -128,6 +129,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Ç só aparece antes de A, O, U — nunca antes de E ou I.",
         feedbackErro: "Releia: 'o Ç só aparece antes de A, O, U, nunca antes de E ou I'.",
         ondeEstaNoTexto: "o Ç só aparece antes de A, O, U, nunca antes de E ou I",
+        dica: "🦉 Pista da coruja: volte ao texto e releia este trecho — “o Ç só aparece antes de A, O, U”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “E e I”. O Ç nunca aparece antes dessas duas letras, porque o C sozinho já faz esse som ali. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Segundo o texto, quando X e CH não têm regra fixa, o que resolve a dúvida?",
@@ -136,6 +140,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Ler, prestar atenção e checar no dicionário ajudam quando não há regra.",
         feedbackErro: "Releia: 'o segredo é: ler bastante, prestar atenção... e, na dúvida, checar no dicionário'.",
         ondeEstaNoTexto: "ler bastante, prestar atenção na palavra escrita e, na dúvida, checar no dicionário",
+        dica: "🦉 Pista da coruja: volte ao texto e releia este trecho — “ler bastante, prestar atenção... e, na dúvida, checar no dicionário”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Leitura, atenção e dicionário”. Quando não há regra fixa, esse é o caminho que o texto ensina. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que CARRO se escreve com RR?",
@@ -149,6 +156,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Som forte de R entre vogais pede RR.",
         feedbackErro: "Releia: 'entre duas vogais, o som forte do R se escreve RR'.",
         ondeEstaNoTexto: "entre duas vogais, o som forte do R se escreve RR",
+        dica: "🦉 Pista da coruja: volte ao texto e releia este trecho — “entre duas vogais, o som forte do R se escreve RR”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque o R está entre duas vogais com som forte”. Essa é a regra do RR. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -162,6 +172,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! A coruja pousou na bancada com o desafio.",
         feedbackErro: "Releia a motivação: quem pousou na bancada foi a coruja sábia.",
+        dica: "🦉 Pista da coruja: releia a motivação — quem pousou na bancada com o quebra-cabeça?",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A coruja sábia”. Foi ela quem trouxe o desafio até a bancada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as pistas sobre as letras gêmeas foram anotadas?",
@@ -169,6 +182,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou registrado no diário das letras gêmeas.",
         feedbackErro: "Releia o título: 'O Diário das Letras Gêmeas'.",
+        dica: "🦉 Pista da coruja: releia o título da leitura guiada — onde ficaram as pistas anotadas?",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No diário da oficina”. O título do texto já dá essa pista: 'O Diário das Letras Gêmeas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -186,6 +202,7 @@ export const aula3: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para resolver dúvidas ortográficas.",
       feedbackErro: "Pense: primeiro se busca a regra, e só quando não há regra é que se usa memória e dicionário.",
+      dica: "🦉 Pista da coruja: primeiro procure uma regra; só depois, se não houver regra, use memória e dicionário.",
     },
   },
 
@@ -213,6 +230,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Som forte entre vogais pede SS.",
         feedbackErro: "Releia: 'O som de SS entre vogais aparece porque o som é forte'.",
         ondeEstaNoTexto: "O som de SS entre vogais aparece porque o som é forte",
+        dica: "🦉 Pista da coruja: volte ao texto e releia este trecho — “o som de SS entre vogais aparece porque o som é forte”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque o som entre as vogais é forte”. É essa a explicação dada no texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que TESOURA mostra sobre o uso do S, segundo o texto?",
@@ -226,8 +246,60 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! É preciso conhecer a palavra, não só o som.",
         feedbackErro: "Releia: 'escrita com S mesmo fazendo som de Z entre vogais — mais uma prova de que é preciso conhecer a palavra'.",
         ondeEstaNoTexto: "escrita com S mesmo fazendo som de Z entre vogais",
+        dica: "🦉 Pista da coruja: volte ao texto e releia este trecho — “escrita com S mesmo fazendo som de Z entre vogais”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que o S pode fazer som de Z entre vogais e mesmo assim continuar sendo S”. TESOURA prova que é preciso conhecer a palavra, não só o som. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Caderno de Palavras Difíceis",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um mini-texto usando palavras com letras gêmeas",
+        comando:
+          "Escreva um pequeno parágrafo (3 a 4 frases) contando um passeio ou uma aventura. Use pelo menos UMA palavra com Ç, UMA com X ou CH, e UMA com RR ou R.",
+        linhas: 4,
+        modelo: [
+          "No passeio, a criança viu uma girafa enorme no zoológico.",
+          "Depois, foi de carro até a mochila esquecida na entrada.",
+          "Comprou açúcar cristalizado para levar de lanche.",
+          "No fim do dia, todos voltaram cansados, mas felizes.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Usei pelo menos uma palavra com Ç.",
+          "Usei pelo menos uma palavra com X ou CH.",
+          "Usei pelo menos uma palavra com RR ou R.",
+          "Li em voz alta e confirmei se as letras gêmeas estão certas.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Olho da Coruja",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler com clareza.",
+    texto: [
+      "Escrever bem não é só saber os sons das letras: é também conhecer quando duas letras diferentes fazem o mesmo barulho. O Ç e o C, por exemplo, seguem uma regra simples — o Ç só aparece antes de A, O e U, nunca antes de E ou I.",
+      "Já o X e o CH costumam confundir até os adultos, porque não existe uma regra fixa para escolher entre eles. Palavras como XÍCARA e MOCHILA soam parecido, mas só a leitura frequente e a atenção ensinam qual delas usa qual letra.",
+      "Por isso, quem lê bastante acaba memorizando a grafia certa quase sem perceber. É como treinar o olhar de uma coruja: quanto mais se pratica, mais rápido se enxerga a diferença entre as letras gêmeas.",
+    ],
+    metaSegundos: 67,
   },
 
   momento_minijogo: {
@@ -251,6 +323,7 @@ export const aula3: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Muito bem! Seu olho de coruja está afiado.",
         feedbackErro: "Reveja as regras: Ç antes de A/O/U, RR entre vogais com som forte, e memorize X/CH e G/J.",
+        dica: "🦉 Pista da coruja: lembre-se de Ç antes de A/O/U, RR com som forte entre vogais, e que X/CH exigem memória.",
       },
     },
   },
@@ -272,6 +345,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! Ç aparece antes de A, O, U.",
       feedbackErro: "Releia a regra: Ç só aparece antes de A, O, U.",
+      dica: "🦉 Pista da coruja: lembre que o Ç só aparece antes de A, O, U — nunca antes de E ou I.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Porque o Ç vem antes de A, seguindo a regra”. CRIANÇA tem Ç porque ele vem antes de A. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -283,6 +359,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Ç aparece antes de A, O, U.",
         feedbackErro: "Lembre: Ç nunca vem antes de E ou I.",
+        dica: "🦉 Pista da coruja: o Ç aparece antes de A, O ou U — nunca antes de E ou I.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A”. O Ç só aparece antes de A, O, U. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual dessas palavras usa CH e não X, e precisa ser memorizada?",
@@ -290,6 +369,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! MOCHILA usa CH.",
         feedbackErro: "MOCHILA é escrita com CH — não há regra, é memória.",
+        dica: "🦉 Pista da coruja: pense na palavra que guarda os cadernos e livros da criança na escola.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Mochila”. Ela é escrita com CH e precisa ser memorizada, pois não há regra fixa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Entre duas vogais, o som forte do R se escreve...",
@@ -297,6 +379,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! CARRO, TERRA — som forte entre vogais é RR.",
         feedbackErro: "Lembre da regra: som forte de R entre vogais é RR.",
+        dica: "🦉 Pista da coruja: pense em CARRO e TERRA — o som forte de R entre vogais dobra a letra.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “RR”. Entre vogais, o som forte do R se escreve com duas letras. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — CASA é escrita com S mesmo o som sendo de Z porque...",
@@ -309,6 +394,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exato! Nem sempre o som corresponde exatamente à letra — é preciso conhecer a palavra.",
         feedbackErro: "CASA tem som de Z mas é escrita corretamente com S — é uma questão de grafia da palavra.",
+        dica: "🦉 Pista da coruja: lembre que nem sempre o som da letra bate exatamente com sua grafia correta.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É a grafia correta da palavra, mesmo com som de Z”. É preciso conhecer a palavra, não só o som. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Quando a regra não resolve uma dúvida ortográfica (como X/CH), o melhor caminho é...",
@@ -321,6 +409,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Oficina dominada! Leitura, memória e dicionário resolvem o que a regra não resolve.",
         feedbackErro: "Releia: ler bastante e, na dúvida, checar no dicionário.",
+        dica: "🦉 Pista da coruja: quando não há regra, a leitura frequente e o dicionário são os melhores amigos.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ler bastante e checar no dicionário”. Esse é o caminho certo quando a regra não resolve. Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

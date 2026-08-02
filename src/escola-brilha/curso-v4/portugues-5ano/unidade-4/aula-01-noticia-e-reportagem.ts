@@ -129,6 +129,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O lide é o parágrafo inicial que resume o quê, quem, quando, onde, como e por quê.",
         feedbackErro: "Releia: 'ela... começa pelo LIDE, o parágrafo que responde às perguntas essenciais'.",
         ondeEstaNoTexto: "começa pelo LIDE, o parágrafo que responde às perguntas essenciais: o quê, quem, quando, onde, como e por quê aconteceu",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “começa pelo LIDE, o parágrafo que responde às perguntas essenciais”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O parágrafo inicial que responde às perguntas essenciais do fato”. O lide sempre abre a notícia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que diferencia a reportagem de uma notícia simples?",
@@ -142,6 +145,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! A reportagem aprofunda o fato com investigação e entrevistas.",
         feedbackErro: "Releia: 'a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas'.",
         ondeEstaNoTexto: "a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas e mostra diferentes pontos de vista",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A reportagem investiga a fundo, com entrevistas e vários pontos de vista”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que os repórteres costumam usar frases entre aspas de pessoas entrevistadas?",
@@ -155,6 +161,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! As aspas separam a fala de quem foi entrevistado da opinião do repórter.",
         feedbackErro: "Releia: 'costumam usar frases de pessoas entrevistadas, entre aspas, para mostrar diferentes visões... sem misturar a opinião do jornalista com o fato relatado'.",
         ondeEstaNoTexto: "costumam usar frases de pessoas entrevistadas, entre aspas, para mostrar diferentes visões sobre o acontecimento sem misturar a opinião do jornalista com o fato relatado",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “para mostrar diferentes visões... sem misturar a opinião do jornalista com o fato relatado”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para mostrar diferentes visões sem misturar com a opinião do jornalista”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

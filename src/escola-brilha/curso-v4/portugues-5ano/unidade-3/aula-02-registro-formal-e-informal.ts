@@ -48,6 +48,7 @@ export const aula2: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a escolher entre linguagem formal e informal.",
       feedbackErro: "Pense nos dois aparelhos: um mais elegante, outro mais solto. É sobre isso que vamos falar.",
+      dica: "🎩 Pista: um aparelho é elegante (formal), o outro é descontraído (informal). A aula compara esses dois jeitos de falar.",
     },
   },
 
@@ -128,6 +129,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A escolha depende da situação de comunicação.",
         feedbackErro: "Releia: 'Esse jeito muda conforme a SITUAÇÃO DE COMUNICAÇÃO: quem fala, para quem fala, onde e por quê'.",
         ondeEstaNoTexto: "Esse jeito muda conforme a SITUAÇÃO DE COMUNICAÇÃO: quem fala, para quem fala, onde e por quê",
+        dica: "🎩 Pista de detetive: volte ao texto e releia este trecho — “muda conforme a situação de comunicação: quem fala, para quem fala, onde e por quê”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Da situação de comunicação: quem fala, para quem, onde e por quê”. É essa situação que define o registro usado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Em que situações o registro formal costuma ser usado?",
@@ -141,6 +145,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O registro formal aparece em cartas, requerimentos e entrevistas.",
         feedbackErro: "Releia: 'usado em situações que pedem mais cuidado: uma carta para a diretora, um requerimento, uma entrevista de emprego'.",
         ondeEstaNoTexto: "usado em situações que pedem mais cuidado: uma carta para a diretora, um requerimento, uma entrevista de emprego",
+        dica: "🎩 Pista de detetive: volte ao texto e releia este trecho — “usado em situações que pedem mais cuidado: uma carta para a diretora, um requerimento, uma entrevista de emprego”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Em cartas para a diretora, requerimentos e entrevistas”. Essas são situações que pedem mais cuidado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que caracteriza o bom comunicador, segundo o último parágrafo?",
@@ -154,6 +161,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O bom comunicador adapta a linguagem à pessoa com quem fala.",
         feedbackErro: "Releia: 'O bom comunicador é aquele que adapta a linguagem ao INTERLOCUTOR'.",
         ondeEstaNoTexto: "O bom comunicador é aquele que adapta a linguagem ao INTERLOCUTOR",
+        dica: "🎩 Pista de detetive: volte ao texto e releia este trecho — “o bom comunicador é aquele que adapta a linguagem ao interlocutor”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Adaptar a linguagem ao interlocutor”. É isso que faz um bom comunicador. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -172,6 +182,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Foram um telefone antigo, elegante, e um celular cheio de figurinhas.",
         feedbackErro: "Releia a motivação: os dois aparelhos foram o telefone antigo e o celular.",
+        dica: "🎩 Pista de detetive: pense nos dois objetos usados para comparar os registros: um elegante, outro moderno e cheio de figurinhas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um telefone antigo e um celular”. Foram esses dois aparelhos usados na motivação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as regras dos dois registros foram anotadas?",
@@ -184,6 +197,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou registrado no Caderno dos Dois Jeitos de Falar.",
         feedbackErro: "Releia o título: 'O Caderno dos Dois Jeitos de Falar'.",
+        dica: "🎩 Pista de detetive: lembre do título da leitura guiada de hoje: 'O Caderno dos Dois Jeitos de Falar'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No caderno da oficina”. O título da leitura era 'O Caderno dos Dois Jeitos de Falar'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -201,6 +217,7 @@ export const aula2: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para escolher o registro certo.",
       feedbackErro: "Pense: primeiro se pensa no interlocutor, depois na situação, depois se escolhe o registro.",
+      dica: "🎩 Pista de detetive: primeiro pense em QUEM vai ler ou ouvir, depois na SITUAÇÃO, só então escolha o registro e mantenha-o até o fim.",
     },
   },
 
@@ -228,6 +245,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O tratamento respeitoso e as frases completas indicam o registro formal.",
         feedbackErro: "Releia: 'Esse é um exemplo claro de registro formal, com tratamento respeitoso e frases completas.'",
         ondeEstaNoTexto: "Esse é um exemplo claro de registro formal, com tratamento respeitoso e frases completas.",
+        dica: "🎩 Pista de detetive: volte ao texto e releia este trecho — “registro formal, com tratamento respeitoso e frases completas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque tem tratamento respeitoso e frases completas”. É isso que caracteriza o registro formal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que torna o segundo bilhete informal?",
@@ -241,6 +261,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! A gíria 'mano' e a frase curta mostram o registro informal.",
         feedbackErro: "Releia: 'Esse é um exemplo de registro informal, com gíria e frase mais curta'.",
         ondeEstaNoTexto: "Esse é um exemplo de registro informal, com gíria e frase mais curta",
+        dica: "🎩 Pista de detetive: volte ao texto e releia este trecho — “registro informal, com gíria e frase mais curta”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O uso de gíria e frase mais curta”. É isso que mostra o registro informal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -262,8 +285,52 @@ export const aula2: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Muito bem! Você reconheceu o tom respeitoso e as frases completas do registro formal.",
         feedbackErro: "Procure as frases com tratamento respeitoso e sem gírias — essas são as formais.",
+        dica: "🎩 Pista: as frases formais começam com tratamento respeitoso ('Prezada', 'Venho por meio deste') e não usam gírias.",
       },
     },
+  },
+
+  momento_escrita: {
+    titulo: "Dois bilhetes, dois registros",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "bilhete",
+        titulo: "Escreva um bilhete formal para a diretora",
+        comando:
+          "Imagine que sua turma quer pedir autorização para um passeio. Escreva um bilhete formal para a diretora, com tratamento respeitoso, pedindo essa autorização.",
+        linhas: 4,
+        modelo: [
+          "Prezada diretora,",
+          "Venho, em nome da turma, solicitar autorização para um passeio à biblioteca municipal.",
+          "Agradecemos desde já a atenção.",
+          "Atenciosamente, a turma do 5º ano.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Usei tratamento respeitoso (Prezada, solicito, agradeço).",
+          "Não usei nenhuma gíria neste bilhete formal.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "O pedido ficou claro para quem vai ler.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Jeito Certo de Falar",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você já reparou que fala de um jeito com os amigos e de outro jeito com a diretora da escola? Isso não é errado: é uma escolha inteligente. Cada situação pede um tom diferente de conversa.",
+      "Quando escrevemos uma carta séria, um requerimento ou falamos com uma autoridade, usamos o registro formal, cheio de cuidado e respeito. Já entre amigos e familiares, vale usar gírias, abreviações e um tom bem mais solto.",
+      "Saber escolher o registro certo mostra que você entende a situação de comunicação. Por isso, antes de falar ou escrever, pense sempre: quem é meu interlocutor, e qual é o momento?",
+    ],
+    metaSegundos: 66,
   },
 
   momento09_revisao: {
@@ -283,6 +350,9 @@ export const aula2: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! A frase respeitosa e completa é a adequada para a diretora.",
       feedbackErro: "Pense em qual frase mostra respeito e cuidado — essa é a formal.",
+      dica: "🎩 Pista de detetive: procure a frase com tratamento respeitoso ('Prezada') e sem gírias.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Prezada diretora, venho solicitar sua orientação sobre o evento”. Ela mostra respeito e cuidado, por isso é a formal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -294,6 +364,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Formal é para situações mais sérias.",
         feedbackErro: "Lembre: registro formal combina com situações que pedem cuidado.",
+        dica: "🎩 Pista de detetive: pense em documentos, cartas e entrevistas — situações que pedem mais cuidado.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Situações que pedem mais cuidado, como cartas e entrevistas”. É nesses momentos que usamos o registro formal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O registro informal costuma aparecer em...",
@@ -301,6 +374,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Informal é o registro do dia a dia com pessoas próximas.",
         feedbackErro: "Pense em quem você trata com mais informalidade: os amigos e a família.",
+        dica: "🎩 Pista de detetive: pense nas pessoas mais próximas de você — com elas usamos o registro informal.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Conversas com amigos e familiares”. É nesses momentos que usamos o registro informal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual frase está em registro informal?",
@@ -308,6 +384,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! 'E aí, beleza?' é uma expressão informal, típica de conversa entre amigos.",
         feedbackErro: "Procure a frase mais solta, com gíria — essa é a informal.",
+        dica: "🎩 Pista de detetive: procure a frase mais solta e curta, com gíria — essa é a informal.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “E aí, beleza? Bora estudar depois?”. Essa é a frase solta e com gíria, típica do registro informal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — A pessoa com quem falamos ou escrevemos é chamada de...",
@@ -315,6 +394,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exato! Interlocutor é quem recebe nossa fala ou escrita.",
         feedbackErro: "Releia o vocabulário: a pessoa com quem falamos é o interlocutor.",
+        dica: "🎩 Pista de detetive: lembre do vocabulário de hoje — a pessoa que recebe nossa fala tem um nome especial.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Interlocutor”. É o nome que damos à pessoa com quem falamos ou escrevemos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que é importante saber escolher entre formal e informal?",
@@ -327,6 +409,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Aula concluída! Saber adaptar a linguagem é essencial para se comunicar bem.",
         feedbackErro: "Releia a conclusão: o importante é adaptar a linguagem a cada situação.",
+        dica: "🎩 Pista de detetive: lembre que não existe um único jeito certo — o importante é a ADEQUAÇÃO à situação.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para adaptar a linguagem à situação e ao interlocutor”. Isso é o que torna alguém um bom comunicador. Aula concluída! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -344,7 +429,8 @@ export const aula2: AulaPortuguesV4 = {
   },
 
   recompensa: {
-    xp: 130,
-    moedas: 75,
+    xp: 140,
+    moedas: 80,
+    medalha: "Chapéu do Bom Comunicador",
   },
 };

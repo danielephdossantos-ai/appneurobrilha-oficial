@@ -48,6 +48,7 @@ export const aula3: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a usar pronomes para evitar repetição.",
       feedbackErro: "Pense no texto travado, repetindo os mesmos nomes. É sobre como resolver isso que vamos falar.",
+      dica: "🔁 Pista: repare que o texto de Brilha repete 'Marina' e 'livro' o tempo todo. A aula ensina a peça que resolve isso.",
     },
   },
 
@@ -128,6 +129,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Pronomes substituem substantivos, evitando repetição.",
         feedbackErro: "Releia: 'palavras que SUBSTITUEM um substantivo já mencionado, evitando repeti-lo'.",
         ondeEstaNoTexto: "palavras que SUBSTITUEM um substantivo já mencionado, evitando repeti-lo",
+        dica: "🔁 Pista: volte ao texto e releia este trecho — “palavras que SUBSTITUEM um substantivo já mencionado, evitando repeti-lo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Substituem um substantivo já mencionado, evitando repeti-lo”. Os pronomes existem justamente para isso. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que os pronomes possessivos indicam?",
@@ -141,6 +145,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Pronomes possessivos mostram a quem algo pertence.",
         feedbackErro: "Releia: 'substituem a expressão de + nome, mostrando a quem pertence algo'.",
         ondeEstaNoTexto: "substituem a expressão \"de + nome\", mostrando a quem pertence algo",
+        dica: "🔁 Pista: volte ao texto e releia este trecho — “substituem a expressão 'de + nome', mostrando a quem pertence algo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A quem pertence algo”. Pronomes possessivos como SEU e DELA mostram posse. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é o cuidado necessário ao usar pronomes, segundo o último parágrafo?",
@@ -154,6 +161,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! É preciso deixar claro a quem o pronome se refere.",
         feedbackErro: "Releia: 'o pronome só funciona bem se ficar claro a quem ou a que ele se refere'.",
         ondeEstaNoTexto: "o pronome só funciona bem se ficar claro a quem ou a que ele se refere",
+        dica: "🔁 Pista: volte ao texto e releia este trecho — “o pronome só funciona bem se ficar claro a quem ou a que ele se refere”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Deixar claro a quem ou a que o pronome se refere”. Senão o leitor se perde. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -167,6 +177,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! O nome MARINA se repetia sem parar.",
         feedbackErro: "Releia a motivação: o nome repetido era Marina.",
+        dica: "🔁 Pista: volte à motivação — Brilha leu um texto em que um nome de menina aparecia várias vezes seguidas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Marina”. Era o nome que se repetia sem parar no texto travado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as regras dos pronomes foram anotadas?",
@@ -179,6 +192,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou no Caderno das Peças que Substituem.",
         feedbackErro: "Releia o título: 'O Caderno das Peças que Substituem'.",
+        dica: "🔁 Pista: releia o título da leitura guiada — ele já revela onde as regras foram anotadas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No caderno da oficina”. O título é 'O Caderno das Peças que Substituem'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -196,6 +212,7 @@ export const aula3: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para destravar um texto repetitivo.",
       feedbackErro: "Pense: primeiro se acha a palavra repetida, depois se escolhe o pronome certo.",
+      dica: "🔁 Pista: primeiro se encontra a palavra repetida, por último se faz a troca — os passos do meio decidem QUAL pronome usar.",
     },
   },
 
@@ -218,6 +235,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! ELE substitui Lucas, evitando repetir o nome.",
         feedbackErro: "Releia: 'Lucas ganhou uma bicicleta nova. ELE ficou muito feliz'.",
         ondeEstaNoTexto: "Lucas ganhou uma bicicleta nova. ELE ficou muito feliz",
+        dica: "🔁 Pista: volte ao texto e releia este trecho — “Lucas ganhou uma bicicleta nova. ELE ficou muito feliz”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Lucas”. ELE substitui o nome do menino para não repeti-lo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual pronome relativo liga as duas ideias no segundo parágrafo?",
@@ -226,6 +246,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! QUE liga 'um amigo' a 'também tinha uma bicicleta nova'.",
         feedbackErro: "Releia: 'Lucas encontrou um amigo QUE também tinha uma bicicleta nova'.",
         ondeEstaNoTexto: "Lucas encontrou um amigo QUE também tinha uma bicicleta nova",
+        dica: "🔁 Pista: volte ao texto e releia este trecho — “Lucas encontrou um amigo QUE também tinha uma bicicleta nova”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “QUE”. Esse pronome relativo liga as duas ideias sem repetir 'amigo'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -249,8 +272,58 @@ export const aula3: AulaPortuguesV4 = {
         ordemCerta: ["w1", "w2", "w3", "w4", "w5", "w6"],
         feedbackAcerto: "🎉 Isso! 'Marina pegou o livro e ela o leu' — sem repetir os nomes.",
         feedbackErro: "Pense: primeiro quem fez a ação, depois o objeto, e por fim o pronome que substitui o nome.",
+        dica: "🔁 Pista: comece por quem faz a ação (Marina), depois o que ela pegou, e só no fim entra o pronome que a substitui.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Oficina de Textos sem Repetição",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um mini-texto usando pronomes",
+        comando:
+          "Escolha uma pessoa ou um animal (pode ser você mesmo, um amigo ou seu bichinho de estimação). Escreva um pequeno texto de 3 a 4 frases contando algo que essa pessoa ou animal fez, usando pelo menos um pronome pessoal (ele/ela), um possessivo (seu/dela) e um relativo (que) para não repetir o nome o tempo todo.",
+        linhas: 4,
+        modelo: [
+          "Meu cachorro se chama Bidu. Ele adora correr no quintal.",
+          "Certo dia, Bidu encontrou uma bola que estava escondida na grama.",
+          "Ele levou a bola até mim, balançando o rabo de alegria.",
+          "Agora, sempre que pego a bola dele, Bidu já sabe que é hora de brincar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Usei pelo menos um pronome pessoal (ele/ela) no lugar do nome repetido.",
+          "Usei pelo menos um pronome possessivo (seu/dela) para indicar posse.",
+          "Usei o pronome relativo QUE para ligar duas ideias sem repetir a palavra.",
+          "Li em voz alta e verifiquei se ficou claro a quem cada pronome se refere.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: As Peças que Destravam o Texto",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula e ponto. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você já reparou como um texto fica cansativo quando repete o mesmo nome várias vezes seguidas? É como uma engrenagem que trava, girando sempre no mesmo lugar, sem avançar de verdade.",
+      "Para resolver esse problema, usamos os pronomes: pequenas palavras que substituem um nome já mencionado, como ELE, ELA, SEU, DELA e QUE. Elas deixam o texto mais leve, mais fluido e muito mais agradável de ler.",
+      "Mas existe um cuidado importante: o pronome só funciona bem quando fica claro a quem ele se refere. Por isso, um bom escritor sempre relê o próprio texto, imaginando se um leitor de fora entenderia cada pronome usado.",
+    ],
+    metaSegundos: 72,
   },
 
   momento09_revisao: {
@@ -270,6 +343,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! SEU substitui 'de Ana', mostrando que o caderno é dela.",
       feedbackErro: "Releia a explicação: pronomes possessivos indicam a quem pertence algo.",
+      dica: "🔁 Pista: pense em quem é a dona do caderno na frase — é o mesmo nome que apareceu antes do SEU.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “'de Ana'”. SEU é um pronome possessivo e substitui 'de Ana'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -281,6 +357,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Pronomes evitam repetição de substantivos.",
         feedbackErro: "Lembre: pronomes substituem palavras já ditas.",
+        dica: "🔁 Pista: pense na engrenagem travada da motivação — os pronomes são a peça que resolve a repetição.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para substituir substantivos e evitar repetição”. É essa a função dos pronomes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual pronome substitui corretamente 'João' na frase 'João chegou. ___ estava cansado'?",
@@ -288,6 +367,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Correto! ELE substitui João, pessoa do sexo masculino, singular.",
         feedbackErro: "Pense: João é uma pessoa, masculino e singular — o pronome precisa combinar.",
+        dica: "🔁 Pista: João é um nome masculino e é uma só pessoa — o pronome precisa combinar em gênero e número.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ele”. É o pronome pessoal que combina com João, masculino e singular. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual frase usa corretamente um pronome possessivo?",
@@ -300,6 +382,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Dela' indica posse, substituindo 'de + nome de uma menina'.",
         feedbackErro: "Procure a frase em que o pronome mostra a quem pertence algo.",
+        dica: "🔁 Pista: procure a frase em que a palavra destacada mostra DE QUEM é alguma coisa.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A bicicleta é dela.”. DELA é o pronome possessivo, indicando posse. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual palavra é um pronome relativo comum, usado para ligar ideias?",
@@ -307,6 +392,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exato! QUE é o pronome relativo mais usado para ligar frases.",
         feedbackErro: "Lembre: o pronome relativo mais comum é QUE.",
+        dica: "🔁 Pista: pense na frase 'Comprei um livro QUE é interessante' — qual palavra liga as duas ideias?",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que”. É o pronome relativo mais usado para ligar duas ideias sem repetir o substantivo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que é preciso cuidado ao usar pronomes, segundo a aula?",
@@ -319,6 +407,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Aula concluída! O pronome precisa deixar claro a quem se refere.",
         feedbackErro: "Releia a conclusão: é preciso clareza sobre a quem o pronome se refere.",
+        dica: "🔁 Pista: pense no que acontece quando o leitor não sabe a quem o pronome se refere — ele se perde na leitura.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque é preciso ficar claro a quem o pronome se refere”. Senão o leitor se perde. Aula concluída! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
