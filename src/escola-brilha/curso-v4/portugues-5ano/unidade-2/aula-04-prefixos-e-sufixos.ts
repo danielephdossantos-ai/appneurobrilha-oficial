@@ -48,6 +48,7 @@ export const aula4: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender como prefixos e sufixos formam novas palavras.",
       feedbackErro: "Pense nas duas caixas: uma de peças do começo, outra do fim da palavra. É sobre isso que vamos falar.",
+      dica: "🔧 Pista de montador: pense em duas caixas separadas — uma de peças que ficam ANTES da palavra e outra de peças que ficam DEPOIS.",
     },
   },
 
@@ -123,6 +124,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! IN-/IM- dá ideia de negação, como em INFELIZ e IMPOSSÍVEL.",
         feedbackErro: "Releia: 'O prefixo IN- (ou IM-) dá ideia de negação'.",
         ondeEstaNoTexto: "O prefixo IN- (ou IM-) dá ideia de negação",
+        dica: "🔧 Pista de montador: volte ao diário e releia o trecho — “O prefixo IN- (ou IM-) dá ideia de negação”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Negação”. O prefixo IN-/IM- dá ideia de negação, como em INFELIZ e IMPOSSÍVEL. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que classe de palavra o sufixo -MENTE costuma formar?",
@@ -131,6 +135,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! -MENTE transforma adjetivo em advérbio de modo.",
         feedbackErro: "Releia: 'O sufixo -MENTE transforma um adjetivo em advérbio de modo'.",
         ondeEstaNoTexto: "O sufixo -MENTE transforma um adjetivo em advérbio de modo",
+        dica: "🔧 Pista de montador: volte ao diário e releia o trecho — “o sufixo -MENTE transforma um adjetivo em advérbio de modo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Advérbio de modo”. O sufixo -MENTE transforma adjetivo em advérbio de modo, como em RAPIDAMENTE. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o sufixo -ÇÃO costuma formar a partir de um verbo?",
@@ -139,6 +146,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! -ÇÃO transforma verbo em substantivo, como EDUCAR → EDUCAÇÃO.",
         feedbackErro: "Releia: 'o sufixo -ÇÃO transforma um verbo em substantivo, indicando ação ou resultado'.",
         ondeEstaNoTexto: "o sufixo -ÇÃO transforma um verbo em substantivo, indicando ação ou resultado",
+        dica: "🔧 Pista de montador: volte ao diário e releia o trecho — “o sufixo -ÇÃO transforma um verbo em substantivo, indicando ação ou resultado”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um substantivo de ação ou resultado”. -ÇÃO transforma verbo em substantivo, como EDUCAR → EDUCAÇÃO. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -152,6 +162,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Foi o robô montador quem trouxe as caixas.",
         feedbackErro: "Releia a motivação: quem apareceu com as caixas foi o robô montador.",
+        dica: "🔧 Pista de montador: releia a motivação e veja quem trouxe as duas caixas de peças.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O robô montador”. Ele apareceu carregando as duas caixas de peças. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as descobertas sobre prefixos e sufixos foram anotadas?",
@@ -159,6 +172,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou no diário das peças que grudam.",
         feedbackErro: "Releia o título: 'O Diário das Peças que Grudam'.",
+        dica: "🔧 Pista de montador: lembre o título da leitura guiada — “O Diário das Peças que Grudam”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No diário da oficina”. As descobertas ficaram registradas nesse diário. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -176,6 +192,7 @@ export const aula4: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para desmontar uma palavra derivada.",
       feedbackErro: "Pense: primeiro se acha o radical, depois se procura peça antes (prefixo) e depois (sufixo).",
+      dica: "🔧 Pista de montador: primeiro se encontra o radical; depois se olha antes dele (prefixo); depois, depois dele (sufixo); por último, pensa-se no sentido.",
     },
   },
 
@@ -203,6 +220,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! DES- + LIGAR = o contrário de ligar.",
         feedbackErro: "Releia: 'O radical é LIGAR, e o prefixo DES- indica o contrário da ação de ligar.'",
         ondeEstaNoTexto: "O radical é LIGAR, e o prefixo DES- indica o contrário da ação de ligar.",
+        dica: "🔧 Pista de montador: volte ao texto e releia — “O radical é LIGAR, e o prefixo DES- indica o contrário da ação de ligar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O radical é LIGAR; DES- indica o contrário da ação”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o sufixo -EIRO indica em SAPATEIRO, segundo o texto?",
@@ -216,6 +236,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! -EIRO indica profissão relacionada ao radical.",
         feedbackErro: "Releia: 'indica a profissão de quem faz ou conserta sapatos'.",
         ondeEstaNoTexto: "indica a profissão de quem faz ou conserta sapatos",
+        dica: "🔧 Pista de montador: volte ao texto e releia — “indica a profissão de quem faz ou conserta sapatos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A profissão de quem faz ou conserta sapatos”. -EIRO indica profissão relacionada ao radical. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -237,8 +260,57 @@ export const aula4: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Você montou a palavra com a peça certa!",
         feedbackErro: "Pense no radical primeiro e depois na peça que muda o sentido, antes ou depois dele.",
+        dica: "🔧 Pista de montador: primeiro identifique o radical (a palavra base) e depois pense se falta uma peça antes ou depois dele.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Fábrica de Palavras Novas",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo usando palavras derivadas",
+        comando:
+          "Escolha três palavras do dia a dia e acrescente um prefixo ou sufixo a cada uma, formando palavras novas (ex.: FELIZ → INFELIZ, RÁPIDO → RAPIDAMENTE). Depois escreva um parágrafo curto usando essas três palavras derivadas.",
+        linhas: 5,
+        modelo: [
+          "Hoje eu estava infeliz porque choveu no dia do passeio.",
+          "Precisei refazer meus planos rapidamente.",
+          "Felizmente, meu pai é padeiro e trouxe pão quentinho para me animar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Usei pelo menos três palavras formadas com prefixo ou sufixo.",
+          "Sublinhei (ou destaquei) o prefixo ou sufixo de cada palavra derivada.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: As Peças que Mudam o Sentido",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você sabia que muitas palavras nascem de outras palavras menores? Basta grudar uma peça no começo ou no fim de uma palavra para que ela ganhe um sentido totalmente diferente. Essa peça pequena, mas poderosa, chama-se prefixo quando vem antes, e sufixo quando vem depois.",
+      "Pense em FELIZ. Se colocarmos o prefixo IN- antes dela, a palavra vira INFELIZ, com sentido contrário. Se colocarmos o sufixo -MENTE depois de RÁPIDO, a palavra vira RAPIDAMENTE, mudando de adjetivo para advérbio de modo. Cada peça carrega uma função própria.",
+      "Aprender essas peças ajuda a entender palavras novas sem precisar decorar cada uma delas. Quando você reconhece um prefixo ou um sufixo, consegue imaginar o significado de uma palavra desconhecida só de olhar as partes que a formam.",
+    ],
+    metaSegundos: 69,
   },
 
   momento09_revisao: {
@@ -258,6 +330,9 @@ export const aula4: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! RE- indica repetição.",
       feedbackErro: "Releia a explicação: o prefixo RE- indica repetição.",
+      dica: "🔧 Pista de montador: lembre que RE- é a peça usada quando algo é feito de novo.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Repetição da ação de escrever”. O prefixo RE- indica repetição, como em REFAZER. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -269,6 +344,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Prefixo vem antes do radical.",
         feedbackErro: "Lembre: prefixo = antes; sufixo = depois.",
+        dica: "🔧 Pista de montador: pense na palavra PRÉ-fixo — 'pré' já dá a pista de que vem antes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Antes do radical”. Prefixo é a peça que vem antes; sufixo vem depois. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual prefixo indica repetição de uma ação?",
@@ -276,6 +354,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! RE- indica repetição, como em REFAZER.",
         feedbackErro: "RE- é o prefixo de repetição.",
+        dica: "🔧 Pista de montador: pense em REFAZER e REESCREVER — os dois têm o mesmo prefixo de repetição.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “RE-”. Esse prefixo indica repetição, como em REFAZER. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual sufixo transforma um adjetivo em advérbio de modo?",
@@ -283,6 +364,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! -MENTE forma advérbios de modo, como RAPIDAMENTE.",
         feedbackErro: "Lembre: -MENTE é o sufixo dos advérbios de modo.",
+        dica: "🔧 Pista de montador: pense em RAPIDAMENTE e FELIZMENTE — os dois terminam com esse sufixo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “-MENTE”. Esse sufixo transforma um adjetivo em advérbio de modo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual sufixo costuma indicar profissão ou lugar?",
@@ -290,6 +374,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exato! -EIRO indica profissão, como em PADEIRO e SAPATEIRO.",
         feedbackErro: "-EIRO é o sufixo de profissão/lugar.",
+        dica: "🔧 Pista de montador: pense em PADEIRO e SAPATEIRO — os dois terminam com esse sufixo de profissão.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “-EIRO”. Esse sufixo indica profissão ou lugar, como em PADEIRO. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Em IMPOSSÍVEL, o prefixo IM- dá ideia de...",
@@ -297,6 +384,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Oficina concluída! IM-/IN- indicam negação.",
         feedbackErro: "IM- é uma variação de IN-, que indica negação.",
+        dica: "🔧 Pista de montador: lembre que IM- é a mesma peça que IN-, usada quando a palavra seguinte começa com P ou B.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Negação”. IM-/IN- indicam negação, como em IMPOSSÍVEL e INFELIZ. Oficina concluída! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

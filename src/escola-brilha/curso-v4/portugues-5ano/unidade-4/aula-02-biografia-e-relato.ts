@@ -49,6 +49,7 @@ export const aula2: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a contar a trajetória de uma pessoa ou um momento vivido por ela.",
       feedbackErro: "Pense no avô contando causos: ele está relembrando uma vida ou um momento vivido. É sobre isso que vamos falar.",
+      dica: "📖 Pista: pense no avô contando causos — ele está relembrando fatos que aconteceram de verdade, na vida dele.",
     },
   },
 
@@ -124,6 +125,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A biografia é escrita em terceira pessoa, contando a vida de outra pessoa.",
         feedbackErro: "Releia: 'geralmente escrita por outra pessoa, em TERCEIRA PESSOA (ele, ela)'.",
         ondeEstaNoTexto: "geralmente escrita por outra pessoa, em TERCEIRA PESSOA (ele, ela)",
+        dica: "📖 Pista: volte ao texto e releia — 'geralmente escrita por outra pessoa, em TERCEIRA PESSOA (ele, ela)'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Terceira pessoa (ele, ela)'. A biografia é escrita sobre outra pessoa, por isso usa 'ele' ou 'ela'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que o relato pessoal não precisa fazer, ao contrário da biografia?",
@@ -137,6 +141,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O relato pode falar só de um momento, sem precisar contar a vida inteira.",
         feedbackErro: "Releia: 'Ele não precisa contar a vida toda de alguém: pode falar de um único dia, uma viagem...'",
         ondeEstaNoTexto: "Ele não precisa contar a vida toda de alguém: pode falar de um único dia, uma viagem, um medo superado ou uma conquista pequena",
+        dica: "📖 Pista: volte ao texto e releia — 'não precisa contar a vida toda de alguém: pode falar de um único dia'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Contar a vida toda de alguém'. O relato pode falar só de um momento, sem precisar contar a vida inteira. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Em que ano entrou em vigor a Lei Maria da Penha, segundo o texto?",
@@ -145,6 +152,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O texto diz que a lei entrou em vigor em 2006.",
         feedbackErro: "Releia: 'Em 2006, entrou em vigor a Lei Maria da Penha'.",
         ondeEstaNoTexto: "Em 2006, entrou em vigor a Lei Maria da Penha, batizada em sua homenagem",
+        dica: "📖 Pista: volte ao texto e releia — 'Em 2006, entrou em vigor a Lei Maria da Penha'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é '2006'. O texto diz claramente que a lei entrou em vigor nesse ano. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -158,6 +168,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O texto diz que ela nasceu em Fortaleza.",
         feedbackErro: "Releia: 'Maria da Penha nasceu em Fortaleza, em 1945.'",
+        dica: "📖 Pista: volte ao texto e releia — 'Maria da Penha nasceu em Fortaleza, em 1945.'",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Fortaleza'. O texto diz isso logo no começo da biografia exemplo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Que competição o autor do relato pessoal disputou?",
@@ -165,6 +178,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Foi uma competição de natação.",
         feedbackErro: "Releia: 'participei da minha primeira competição de natação'.",
+        dica: "📖 Pista: volte ao texto e releia — 'participei da minha primeira competição de natação'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Uma competição de natação'. É isso que o relato pessoal conta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -182,6 +198,7 @@ export const aula2: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para montar uma boa biografia.",
       feedbackErro: "Pense: primeiro se pesquisa a vida, depois se organiza no tempo, depois se escreve e por fim se destaca a importância da pessoa.",
+      dica: "📖 Pista: lembre-se — primeiro pesquisa, depois organiza os fatos no tempo, depois escreve, e por fim destaca a importância da pessoa.",
     },
   },
 
@@ -209,6 +226,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Na autobiografia, a própria pessoa escreve sobre sua vida.",
         feedbackErro: "Releia: 'Quando a própria pessoa escreve sobre a sua vida, o texto é chamado de AUTOBIOGRAFIA.'",
         ondeEstaNoTexto: "Quando a própria pessoa escreve sobre a sua vida, o texto é chamado de AUTOBIOGRAFIA",
+        dica: "📖 Pista: volte ao texto e releia — 'Quando a própria pessoa escreve sobre a sua vida, o texto é chamado de AUTOBIOGRAFIA'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Um texto em que a própria pessoa conta sua vida'. É isso que significa autobiografia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que caracteriza as memórias, segundo o texto?",
@@ -222,6 +242,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! As memórias reúnem lembranças de momentos diferentes, sem ordem rígida.",
         feedbackErro: "Releia: 'costumam misturar vários relatos de momentos diferentes... unidos por lembranças que a pessoa considera importantes'.",
         ondeEstaNoTexto: "costumam misturar vários relatos de momentos diferentes da vida do autor, sem seguir estritamente a ordem cronológica",
+        dica: "📖 Pista: volte ao texto e releia — 'misturam vários relatos de momentos diferentes... unidos por lembranças que a pessoa considera importantes'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Misturam relatos de momentos diferentes, unidos por lembranças importantes'. Assim são as memórias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -246,8 +269,58 @@ export const aula2: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Você separou certinho os textos de biografia e de relato pessoal!",
         feedbackErro: "Preste atenção: biografia usa terceira pessoa (ele, ela); relato pessoal usa primeira pessoa (eu).",
+        dica: "📖 Pista: biografia fala 'ele/ela'; relato pessoal fala 'eu'.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Meu Relato Pessoal",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um pequeno relato pessoal",
+        comando:
+          "Conte, em primeira pessoa (usando 'eu'), um momento marcante que você viveu: uma conquista, um medo que superou ou um dia inesquecível. Não precisa contar sua vida inteira — só esse momento.",
+        linhas: 5,
+        modelo: [
+          "Eu nunca vou esquecer o dia em que aprendi a andar de bicicleta sem rodinhas.",
+          "No começo, tive muito medo de cair e pedi para meu pai segurar o banco.",
+          "Depois de várias tentativas, senti que estava pedalando sozinho e gritei de alegria.",
+          "Aquele dia me ensinou que, com paciência, a gente consegue superar o medo.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim.",
+          "Usei a primeira pessoa (eu, nós) do começo ao fim.",
+          "Contei um momento específico, e não a vida toda.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Incluí como eu me senti naquele momento.",
+          "Li em voz alta e consertei o que ficou estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Vida Contada em Palavras",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta uma história de verdade.",
+    texto: [
+      "Toda pessoa tem uma trajetória cheia de fatos marcantes: o dia em que nasceu, a primeira palavra que disse, as conquistas que teve ao longo da vida. Quando alguém escreve sobre essa trajetória, contando os fatos em ordem cronológica e usando a terceira pessoa, esse texto é chamado de biografia.",
+      "Mas existe outro jeito de guardar uma lembrança: contar, em primeira pessoa, apenas um momento vivido. Não é preciso falar da vida inteira, basta escolher um instante que tenha deixado uma marca, como um medo superado ou uma alegria inesquecível. Esse texto é o relato pessoal.",
+      "Tanto a biografia quanto o relato ajudam a preservar memórias importantes, seja de uma pessoa famosa, seja de alguém comum que viveu algo especial. Por isso, aprender a contar histórias de vida com clareza é uma habilidade valiosa para qualquer escritor.",
+    ],
+    metaSegundos: 70,
   },
 
   momento09_revisao: {
@@ -267,6 +340,9 @@ export const aula2: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! O uso da primeira pessoa e de uma lembrança indica relato pessoal.",
       feedbackErro: "Releia a explicação: relato pessoal usa primeira pessoa e conta uma experiência vivida.",
+      dica: "📖 Pista: repare no 'eu' e na lembrança — isso é típico do relato pessoal.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é 'Relato pessoal'. O uso da primeira pessoa e de uma lembrança indica esse tipo de texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -278,6 +354,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! Biografia usa terceira pessoa.",
         feedbackErro: "Biografia é escrita sobre outra pessoa, em terceira pessoa.",
+        dica: "📖 Pista: pense em quem fala — a biografia fala 'ele' ou 'ela', não 'eu'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Terceira pessoa'. Biografia é escrita sobre outra pessoa, usando 'ele' ou 'ela'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O relato pessoal é escrito em qual pessoa gramatical?",
@@ -285,6 +364,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Relato pessoal usa a primeira pessoa (eu).",
         feedbackErro: "Relato pessoal é contado por quem viveu, então usa 'eu'.",
+        dica: "📖 Pista: quem escreve o relato foi quem viveu o fato — por isso usa 'eu'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Primeira pessoa'. O relato é contado por quem viveu, então usa 'eu'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é ordem cronológica?",
@@ -297,6 +379,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! Ordem cronológica segue a linha do tempo, do mais antigo ao mais recente.",
         feedbackErro: "Ordem cronológica é a ordem dos fatos no tempo.",
+        dica: "📖 Pista: pense em uma linha do tempo, do mais antigo para o mais recente.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Organizar fatos na ordem em que aconteceram no tempo'. É assim que funciona a ordem cronológica. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Como se chama o texto em que a própria pessoa escreve sobre sua vida?",
@@ -304,6 +389,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Isso se chama autobiografia.",
         feedbackErro: "Quando a própria pessoa escreve sua vida, chama-se autobiografia.",
+        dica: "📖 Pista: 'auto' quer dizer 'de si mesmo' — pense nisso.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Autobiografia'. É o nome do texto em que a própria pessoa escreve sobre sua vida. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Qual das opções é um exemplo de relato pessoal?",
@@ -316,6 +404,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Vale conquistado! Essa frase usa a primeira pessoa e conta uma lembrança pessoal.",
         feedbackErro: "Relato pessoal usa 'eu' e conta uma experiência vivida por quem escreve.",
+        dica: "📖 Pista: procure a frase que usa 'eu' e fala de uma lembrança.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é 'Eu me lembro do meu primeiro dia de aula.'. Ela usa a primeira pessoa e conta uma lembrança pessoal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

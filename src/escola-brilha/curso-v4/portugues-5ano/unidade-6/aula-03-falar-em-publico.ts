@@ -128,6 +128,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Exposição oral é apresentar um assunto organizado para ouvintes.",
         feedbackErro: "Releia: 'apresenta um assunto de forma organizada para um grupo de ouvintes'.",
         ondeEstaNoTexto: "acontece quando alguém apresenta um assunto de forma organizada para um grupo de ouvintes",
+        dica: "🎤 Pista: volte ao texto e releia — “apresenta um assunto de forma organizada para um grupo de ouvintes”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma apresentação organizada de um assunto para um grupo de ouvintes”. É exatamente essa a definição de exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que é entonação, segundo o texto?",
@@ -141,6 +144,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Entonação é variar o tom da voz.",
         feedbackErro: "Releia: 'variar o tom da voz para dar emoção e destacar o que é mais importante'.",
         ondeEstaNoTexto: "variar o tom da voz ao falar, para dar emoção e destacar as partes mais importantes",
+        dica: "🎤 Pista: volte ao texto e releia — “variar o tom da voz ao falar, para dar emoção e destacar as partes mais importantes”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Variar o tom da voz para dar emoção e destacar o que é importante”. Essa é a definição de entonação no texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Na fala de Sofia, o que ela destacou usando uma voz mais forte?",
@@ -154,6 +160,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Ela destacou o número '400 anos' com voz mais forte.",
         feedbackErro: "Releia: '(voz mais forte, destacando o número) Por isso, separar o lixo...'",
         ondeEstaNoTexto: "voz mais forte, destacando o número",
+        dica: "🎤 Pista: volte ao texto e releia — “(voz mais forte, destacando o número) Por isso, separar o lixo em casa...”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O número de anos que a garrafa leva para se decompor”. Sofia usou voz mais forte para destacar esse dado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -167,6 +176,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Estamos na Roda da Fala.",
         feedbackErro: "Releia a motivação: 'Chegamos à Roda da Fala!'",
+        dica: "🎤 Pista: releia a fala inicial do Brilha — “Chegamos à Roda da Fala!”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Na Roda da Fala”. É lá que Brilha e a turma estão treinando a fala em público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Sobre qual assunto Sofia fez sua exposição oral?",
@@ -174,6 +186,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Sofia falou sobre a importância de reciclar o lixo.",
         feedbackErro: "Releia: 'eu vou falar sobre a importância de reciclar o lixo'.",
+        dica: "🎤 Pista: volte ao texto e releia — “eu vou falar sobre a importância de reciclar o lixo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Reciclagem do lixo”. Foi esse o assunto escolhido por Sofia na exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -218,6 +233,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! É normal sentir nervosismo antes de falar em público.",
         feedbackErro: "Releia: 'É normal sentir NERVOSISMO antes de falar em público'.",
         ondeEstaNoTexto: "É normal sentir NERVOSISMO antes de falar em público",
+        dica: "🎤 Pista: volte ao texto e releia — “É normal sentir NERVOSISMO antes de falar em público”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Nervosismo”. É normal sentir isso antes de falar em público, até para adultos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual dica o texto dá para controlar o nervosismo?",
@@ -231,6 +249,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Respirar fundo ajuda a acalmar antes de falar.",
         feedbackErro: "Releia: 'respirar fundo três vezes antes de começar ajuda a acalmar o coração'.",
         ondeEstaNoTexto: "respirar fundo três vezes antes de começar ajuda a acalmar o coração e organizar os pensamentos",
+        dica: "🎤 Pista: volte ao texto e releia — “respirar fundo três vezes antes de começar ajuda a acalmar o coração e organizar os pensamentos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Respirar fundo três vezes antes de começar”. Essa é a dica que o texto dá para controlar o nervosismo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -254,6 +275,55 @@ export const aula3: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Meu Roteiro de Fala",
+    instrucao:
+      "Todo bom orador escreve um roteiro antes de falar. Primeiro faça o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva o roteiro de uma exposição oral curta",
+        comando:
+          "Escolha um assunto que você conhece bem (um animal, um esporte, um livro). Escreva um pequeno roteiro com uma frase de saudação, uma frase que apresenta o tema e uma frase final de conclusão.",
+        linhas: 5,
+        modelo: [
+          "Bom dia, turma! Hoje eu vou falar sobre os golfinhos.",
+          "Os golfinhos são animais muito inteligentes e vivem em grupos.",
+          "Eles usam sons para se comunicar entre si, quase como uma linguagem.",
+          "Por isso, cuidar dos oceanos é importante para proteger esses animais.",
+        ],
+        checklist: [
+          "Meu roteiro tem começo, meio e fim.",
+          "Comecei com uma saudação para a plateia.",
+          "Apresentei claramente o assunto (tema) da minha fala.",
+          "Usei uma frase de conclusão no final.",
+          "Li em voz alta e cuidei da entonação e do volume.",
+          "Pensei em como será minha postura ao apresentar.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Falando com Confiança",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. Pratique como se estivesse falando para uma plateia.",
+    texto: [
+      "Falar em público fica mais fácil com prática. Antes de começar, respire fundo três vezes e organize suas ideias em começo, meio e fim. Isso ajuda a controlar o nervosismo e a lembrar do que você quer dizer.",
+      "Durante a fala, cuide de três coisas: a entonação, variando o tom da voz nas partes importantes; o volume, falando alto o suficiente para todos ouvirem; e a postura, ficando de frente para a plateia, com o olhar levantado.",
+      "Se você esquecer uma palavra, não se preocupe — respire, faça uma pausa e continue. A plateia está ali para aprender com você, e cada apresentação é uma chance de ficar mais confiante.",
+    ],
+    metaSegundos: 65,
+  },
+
   momento09_revisao: {
     pontos: [
       "A EXPOSIÇÃO ORAL é uma apresentação organizada de um assunto para ouvintes.",
@@ -271,6 +341,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Respirar fundo ajuda a controlar o nervosismo.",
       feedbackErro: "Releia a explicação: respirar fundo acalma o coração antes de falar.",
+      dica: "🎤 Pista: lembre que respirar fundo antes de começar ajuda a acalmar o coração e organizar os pensamentos.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Respirar fundo antes de começar”. Isso acalma o coração e ajuda a organizar as ideias antes da fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -287,6 +360,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Exposição oral é uma apresentação organizada.",
         feedbackErro: "Exposição oral é apresentar um assunto de forma organizada para ouvintes.",
+        dica: "🎤 Pista: lembre que a exposição oral é sempre organizada — tem começo, meio e fim, e é para um grupo de ouvintes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma apresentação organizada de um assunto para ouvintes”. Essa é a definição de exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é entonação?",
@@ -299,6 +375,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Entonação é variar o tom da voz.",
         feedbackErro: "Entonação é a variação do tom de voz para dar emoção e destaque.",
+        dica: "🎤 Pista: entonação tem a ver com o TOM da voz — mais alto, mais baixo, mais forte ou mais suave.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Variar o tom da voz para dar emoção e destaque”. Isso é a entonação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é o volume de voz correto ao falar em público?",
@@ -311,6 +390,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O volume deve permitir que todos ouçam, sem gritar.",
         feedbackErro: "O volume de voz correto é alto o suficiente para todos ouvirem, sem exagerar.",
+        dica: "🎤 Pista: pense no tamanho da sala — o volume precisa alcançar todo mundo, sem ser exagerado.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Falar alto o suficiente para todos ouvirem, sem gritar”. Esse é o volume de voz ideal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — O que é uma boa postura ao falar em público?",
@@ -323,6 +405,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Boa postura é ficar de frente, olhando para a plateia.",
         feedbackErro: "Boa postura é ficar de frente para a plateia, com o olhar levantado.",
+        dica: "🎤 Pista: pense em como um bom apresentador fica de pé, de frente para quem o escuta, olhando para as pessoas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ficar de frente para a plateia, com o olhar levantado”. Essa é a boa postura ao falar em público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — O que ajuda a controlar o nervosismo antes de falar?",
@@ -335,6 +420,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Roda da Fala conquistada! Respirar fundo ajuda a controlar o nervosismo.",
         feedbackErro: "Respirar fundo antes de começar ajuda a acalmar o coração.",
+        dica: "🎤 Pista: lembre da dica principal do texto: respirar fundo antes de começar acalma o coração e organiza os pensamentos.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Respirar fundo antes de começar”. Isso é o que ajuda a controlar o nervosismo. Roda da Fala conquistada! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

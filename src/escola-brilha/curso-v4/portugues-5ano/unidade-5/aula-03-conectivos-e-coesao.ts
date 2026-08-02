@@ -50,6 +50,7 @@ export const aula3: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender palavras que ligam ideias e deixam o texto mais coeso.",
       feedbackErro: "Pense na ponte ligando duas ilhas: os conectivos ligam ideias de um jeito parecido.",
+      dica: "🌉 Pista: repare nas imagens — uma ponte e um texto com frases. Os conectivos funcionam como pontes entre ideias.",
     },
   },
 
@@ -96,6 +97,33 @@ export const aula3: AulaPortuguesV4 = {
           { texto: "Ele treinou muito, porém não venceu a corrida.", explicacao: "'PORÉM' mostra uma ideia OPOSTA à anterior, uma surpresa." },
         ],
       },
+      {
+        tipo: "regraOrtografica",
+        regra: "Escolhendo o conectivo certo para cada relação",
+        explicacao:
+          "Cada conectivo serve para um tipo de relação entre ideias: MOTIVO (porque), CONSEQUÊNCIA (então, por isso), OPOSIÇÃO (porém, mas) e SOMA (além disso, também). Truque: pergunte-se 'por que isso aconteceu?' (motivo), 'o que aconteceu depois?' (consequência), 'isso é contrário ao que eu esperava?' (oposição) ou 'isso é mais uma informação parecida?' (soma).",
+        exemplos: [
+          { palavra: "Não saí de casa porque estava chovendo.", destaque: "porque", motivo: "Explica o MOTIVO de não ter saído." },
+          { palavra: "Ele estudou muito, por isso passou na prova.", destaque: "por isso", motivo: "Mostra a CONSEQUÊNCIA de ter estudado." },
+          { palavra: "Ela é caçula, porém é a mais alta da família.", destaque: "porém", motivo: "Mostra uma ideia contrária, uma OPOSIÇÃO." },
+        ],
+        desafios: [
+          {
+            molde: "Ele treinou todos os dias, __ ficou mais forte.",
+            opcoes: ["porém", "então", "mas"],
+            correta: 1,
+            frase: "Ele treinou todos os dias, então ficou mais forte.",
+            feedbackErro: "'Então' liga o treino (causa) ao resultado (ficar mais forte) — é uma consequência.",
+          },
+          {
+            molde: "Gosto de desenhar, __ prefiro pintar com tinta.",
+            opcoes: ["além disso", "porque", "por isso"],
+            correta: 0,
+            frase: "Gosto de desenhar, além disso, prefiro pintar com tinta.",
+            feedbackErro: "'Além disso' soma uma nova informação parecida com a primeira — os dois são sobre arte.",
+          },
+        ],
+      },
     ],
   },
 
@@ -130,6 +158,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Conectivos ligam ideias e mostram a relação entre elas.",
         feedbackErro: "Releia: 'Os CONECTIVOS são palavras que ligam ideias dentro de uma frase ou entre frases diferentes.'",
         ondeEstaNoTexto: "Os CONECTIVOS são palavras que ligam ideias dentro de uma frase ou entre frases diferentes",
+        dica: "🌉 Pista: releia a primeira frase do texto — ela define exatamente o que é um conectivo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Palavras que ligam ideias e mostram a relação entre elas”. É assim que o texto define conectivo, logo na primeira frase. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que é coesão, segundo o texto?",
@@ -143,6 +174,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Coesão é evitar repetições cansativas no texto.",
         feedbackErro: "Releia: 'evitar repetir sempre a mesma palavra... Isso se chama COESÃO.'",
         ondeEstaNoTexto: "existe outra técnica importante para deixar o texto mais gostoso de ler: evitar repetir sempre a mesma palavra. Isso se chama COESÃO",
+        dica: "🌉 Pista: releia o terceiro parágrafo, onde o texto explica o exemplo do cachorro.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Evitar repetir sempre a mesma palavra, usando sinônimos ou juntando ideias”. O texto mostra isso no exemplo do cachorro que corre, late e pula. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No texto sobre Ana, por que a mãe decidiu ajudá-la todas as tardes?",
@@ -156,6 +190,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O conectivo 'por isso' liga a dificuldade em matemática à decisão da mãe.",
         feedbackErro: "Releia: 'na escola, ela tem dificuldade em matemática. Por isso, sua mãe decidiu ajudá-la todas as tardes.'",
         ondeEstaNoTexto: "na escola, ela tem dificuldade em matemática. Por isso, sua mãe decidiu ajudá-la todas as tardes",
+        dica: "🌉 Pista: procure o conectivo 'por isso' no último parágrafo — ele liga o motivo à decisão da mãe.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque ela tem dificuldade em matemática”. O conectivo 'por isso' liga esse motivo à decisão da mãe de ajudá-la. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -169,6 +206,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! 'Choveu muito, por isso a festa foi cancelada.'",
         feedbackErro: "Releia: 'Choveu muito, por isso a festa foi cancelada.'",
+        dica: "🌉 Pista: procure a frase com o conectivo 'por isso' no segundo parágrafo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A festa foi cancelada”. O conectivo 'por isso' liga a chuva forte a essa consequência. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Além de ler, o que mais Ana gosta de fazer, segundo o texto?",
@@ -176,6 +216,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Ana também gosta de escrever pequenas histórias.",
         feedbackErro: "Releia: 'Além disso, ela gosta de escrever pequenas histórias.'",
+        dica: "🌉 Pista: procure o conectivo 'além disso' logo depois de falar que Ana adora ler.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Escrever pequenas histórias”. O conectivo 'além disso' soma essa nova informação sobre Ana. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -193,6 +236,7 @@ export const aula3: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para deixar um texto mais coeso.",
       feedbackErro: "Pense: primeiro se escreve, depois se percebe a repetição, depois se troca por sinônimos, e por fim se ligam as ideias com conectivos.",
+      dica: "🌉 Pista: pense como um escritor de verdade — primeiro solta as ideias, só depois refina o texto.",
     },
   },
 
@@ -215,6 +259,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! 'Quando' indica tempo, um momento específico.",
         feedbackErro: "Releia: '\"QUANDO\" indica tempo, mostrando que algo aconteceu em um momento específico.'",
         ondeEstaNoTexto: "\"QUANDO\" indica tempo, mostrando que algo aconteceu em um momento específico",
+        dica: "🌉 Pista: releia a primeira frase do texto, que explica cada conectivo novo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Tempo”. O texto explica que 'quando' mostra um momento específico. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No exemplo do robô, qual frase mostra finalidade?",
@@ -228,6 +275,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! 'Para que' mostra o objetivo da ação de estudar.",
         feedbackErro: "Releia: '\"Estudo bastante para que eu tire notas boas.\" (finalidade)'",
         ondeEstaNoTexto: "Estudo bastante para que eu tire notas boas",
+        dica: "🌉 Pista: procure a frase que tem o conectivo 'para que' — ele indica o objetivo de uma ação.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'Estudo bastante para que eu tire notas boas.'”. O conectivo 'para que' mostra a finalidade da ação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -254,8 +304,57 @@ export const aula3: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Muito bem! Você identificou certinho a relação de cada conectivo.",
         feedbackErro: "Preste atenção: 'porque' é motivo; 'porém' é oposição; 'por isso' é consequência; 'além disso' é soma.",
+        dica: "🌉 Pista: pense no que cada palavra faz — 'porque' explica, 'porém' contradiz, 'por isso' conclui, 'além disso' soma.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Construindo pontes de palavras",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo usando conectivos",
+        comando:
+          "Escreva um parágrafo curto sobre o seu dia. Use pelo menos TRÊS conectivos diferentes (por exemplo: porque, então, além disso, porém, por isso) para ligar as ideias.",
+        linhas: 5,
+        modelo: [
+          "Hoje acordei cedo porque tinha prova na escola.",
+          "Estudei bastante, então me senti mais tranquilo.",
+          "Além disso, revisei os cadernos com a ajuda da minha irmã.",
+          "Porém, na hora da prova, fiquei um pouco nervoso.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim.",
+          "Usei pelo menos três conectivos diferentes.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Li em voz alta e consertei o que ficou estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Ponte das Palavras",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Imagine um texto sem nenhum conectivo: frases soltas, uma depois da outra, sem nenhuma ligação. Ficaria estranho, não é mesmo? É como tentar atravessar um rio sem ponte, pulando de pedra em pedra sem saber onde vai pisar.",
+      "Os conectivos são as pontes que faltavam: eles explicam o motivo de algo ter acontecido, mostram a consequência de uma ação, apresentam uma ideia contrária ou somam informações parecidas. Por isso, escolher o conectivo certo muda completamente o sentido de uma frase.",
+      "Além dos conectivos, um texto bem escrito evita repetir sempre as mesmas palavras. Essa habilidade se chama coesão, e ela transforma um amontoado de frases em um texto de verdade, agradável e fácil de entender do início ao fim.",
+    ],
+    metaSegundos: 69,
   },
 
   momento09_revisao: {
@@ -270,6 +369,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Isso! 'Porém' mostra uma ideia contrária à anterior: treinou muito, mas não venceu.",
       feedbackErro: "Releia a explicação: 'porém' indica oposição, uma ideia contrária.",
+      dica: "🌉 Pista: pense se a segunda parte da frase contradiz a primeira — isso é oposição.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Oposição”. 'Porém' mostra uma ideia contrária: treinou muito, mas não venceu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -281,6 +383,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Conectivos ligam ideias.",
         feedbackErro: "Conectivos são palavras que ligam ideias e mostram a relação entre elas.",
+        dica: "🌉 Pista: pense em uma ponte ligando duas ilhas — é assim que os conectivos ligam duas ideias.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Palavras que ligam ideias e mostram sua relação”. Eles funcionam como pontes entre as ideias de um texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O conectivo 'porque' geralmente indica...",
@@ -288,6 +393,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! 'Porque' indica motivo.",
         feedbackErro: "'Porque' explica o motivo de algo ter acontecido.",
+        dica: "🌉 Pista: pergunte-se 'por que isso aconteceu?' — se a frase responde a essa pergunta, é motivo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Motivo”. 'Porque' explica a razão de algo ter acontecido. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O conectivo 'porém' geralmente indica...",
@@ -295,6 +403,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Exato! 'Porém' indica oposição, uma ideia contrária.",
         feedbackErro: "'Porém' mostra uma ideia diferente ou contrária à anterior.",
+        dica: "🌉 Pista: pense se depois de 'porém' vem algo que surpreende ou contradiz o que foi dito antes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Oposição”. 'Porém' mostra uma ideia contrária à anterior. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — O que é coesão?",
@@ -307,6 +418,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Coesão é ligar bem as ideias, evitando repetições.",
         feedbackErro: "Coesão é evitar repetir sempre a mesma palavra, deixando o texto mais fluido.",
+        dica: "🌉 Pista: lembre do exemplo do cachorro que corre, late e pula — sem repetir 'o cachorro' três vezes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Evitar repetições, usando sinônimos e conectivos”. Isso deixa o texto mais fluido e agradável. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Qual frase usa um conectivo de consequência?",
@@ -319,6 +433,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito bem! 'Por isso' liga a chuva (causa) ao adiamento da viagem (consequência).",
         feedbackErro: "'Por isso' indica consequência: uma coisa aconteceu por causa da outra.",
+        dica: "🌉 Pista: procure a frase em que a segunda parte é o RESULTADO da primeira.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “'Choveu muito, por isso a viagem foi adiada.'”. 'Por isso' liga a causa (chuva) à consequência (viagem adiada). Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -336,7 +453,8 @@ export const aula3: AulaPortuguesV4 = {
   },
 
   recompensa: {
-    xp: 130,
-    moedas: 75,
+    xp: 140,
+    moedas: 80,
+    medalha: "Ponte de Bronze",
   },
 };

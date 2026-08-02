@@ -49,6 +49,7 @@ export const aula3: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a escrever resenhas e cartas argumentativas.",
       feedbackErro: "Pense nas estrelas de avaliação e na carta: são jeitos de dar opinião e defender uma ideia. É sobre isso que vamos falar.",
+      dica: "💡 Pista: repare que as duas imagens (estrelas de avaliação e carta) têm a ver com dar opinião e convencer alguém — não com desenho ou dobradura.",
     },
   },
 
@@ -129,6 +130,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! A resenha não pode ficar só no 'gostei' ou 'não gostei', precisa justificar.",
         feedbackErro: "Releia: 'Não basta dizer gostei ou não gostei: é preciso explicar o motivo'.",
         ondeEstaNoTexto: "Não basta dizer 'gostei' ou 'não gostei': é preciso explicar o motivo, mostrando pontos fortes e fracos da obra",
+        dica: "💡 Pista: procure o trecho que começa com 'Não basta dizer...' logo no primeiro parágrafo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Dar uma opinião sem justificar com argumentos”. O texto diz que não basta dizer 'gostei' ou 'não gostei' — é preciso explicar o motivo. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "O que costuma aparecer em uma carta argumentativa, além da saudação e despedida?",
@@ -142,6 +146,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! A carta argumentativa apresenta argumentos que sustentam o pedido.",
         feedbackErro: "Releia: 'Ela costuma ter saudação, apresentação do assunto, argumentos que sustentam o pedido ou ideia, e uma despedida educada.'",
         ondeEstaNoTexto: "argumentos que sustentam o pedido ou ideia, e uma despedida educada",
+        dica: "💡 Pista: releia a frase que lista as partes da carta argumentativa, no segundo parágrafo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Argumentos que sustentam o pedido ou ideia”. A carta tem saudação, assunto, argumentos e despedida. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "Qual é o argumento usado na carta exemplo para pedir mais bebedouros?",
@@ -155,6 +162,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O argumento é que a fila longa desperdiça o tempo do recreio.",
         feedbackErro: "Releia: 'Isso causa filas longas e desperdício de tempo do intervalo.'",
         ondeEstaNoTexto: "Isso causa filas longas e desperdício de tempo do intervalo",
+        dica: "💡 Pista: releia o meio da carta exemplo, logo depois de 'sentem sede'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As filas causam desperdício de tempo do intervalo”. Esse é o argumento da carta exemplo. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -168,6 +178,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O garoto se chama Tistu.",
         feedbackErro: "Releia: 'conta a história de Tistu, um garoto que descobre ter o poder...'",
+        dica: "💡 Pista: o nome aparece logo no começo da resenha exemplo, antes de 'um garoto que descobre'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Tistu”. É o nome do garoto da resenha exemplo. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "Para quem foi dirigida a carta sobre os bebedouros?",
@@ -175,6 +188,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! A carta é dirigida ao diretor da escola.",
         feedbackErro: "Releia o início da carta: 'Prezado diretor'.",
+        dica: "💡 Pista: releia a primeira palavra da carta exemplo, logo após as aspas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para o diretor da escola”. A carta começa com 'Prezado diretor'. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -192,6 +208,7 @@ export const aula3: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para escrever uma carta argumentativa.",
       feedbackErro: "Pense: primeiro se cumprimenta, depois se apresenta o pedido, depois os argumentos e por fim a despedida.",
+      dica: "💡 Pista: pense em como você começa e termina uma carta, e onde entram os motivos do pedido.",
     },
   },
 
@@ -219,6 +236,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Mencionar o contra-argumento mostra que o autor considerou outros pontos de vista.",
         feedbackErro: "Releia: 'Isso mostra que o autor pensou no assunto de vários lados.'",
         ondeEstaNoTexto: "Isso mostra que o autor pensou no assunto de vários lados",
+        dica: "💡 Pista: releia o fim do primeiro parágrafo, depois de 'ainda assim sua opinião é a mais forte'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para mostrar que o autor pensou no assunto de vários lados”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "O que acontece quando se usa xingamentos ou grosserias em um texto argumentativo?",
@@ -232,6 +252,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Grosserias enfraquecem o argumento e afastam quem está lendo.",
         feedbackErro: "Releia: 'Xingamentos ou grosserias enfraquecem o argumento e afastam o leitor da ideia defendida.'",
         ondeEstaNoTexto: "Xingamentos ou grosserias enfraquecem o argumento e afastam o leitor da ideia defendida",
+        dica: "💡 Pista: releia a última frase do segundo parágrafo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O argumento enfraquece e afasta o leitor”. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -253,8 +276,59 @@ export const aula3: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Você escolheu os argumentos que realmente justificam a opinião!",
         feedbackErro: "Pense: um bom argumento explica O MOTIVO da opinião, não apenas repete um gosto pessoal.",
+        dica: "💡 Pista: um bom argumento sempre explica um MOTIVO (por que isso ajuda), não só um gosto pessoal.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Escreva sua própria resenha",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva uma resenha curta de um livro, filme ou jogo que você conhece",
+        comando:
+          "Escolha um livro, filme ou jogo que você já leu, assistiu ou jogou. Escreva um pequeno parágrafo contando do que se trata, dando sua opinião e explicando pelo menos um ARGUMENTO que justifique essa opinião.",
+        linhas: 5,
+        modelo: [
+          "O livro O Menino do Dedo Verde conta a história de Tistu, um garoto que faz plantas crescerem ao tocá-las.",
+          "Eu recomendo essa leitura porque a história mistura fantasia com uma crítica interessante sobre o mundo.",
+          "Além disso, os capítulos são curtos, o que ajuda quem está começando a ler livros mais longos.",
+          "Por esses motivos, considero uma ótima escolha para quem gosta de histórias de fantasia.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, além disso, mas, por isso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Minha resenha diz do que trata a obra.",
+          "Minha resenha dá uma opinião e justifica com pelo menos um argumento.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Torre das Boas Opiniões",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem quer convencer alguém.",
+    texto: [
+      "Dar uma opinião é fácil: basta dizer que gostou ou não gostou de algo. Difícil mesmo é explicar o motivo dessa opinião de um jeito que convença outras pessoas. É exatamente isso que uma boa resenha e uma boa carta argumentativa fazem.",
+      "Na resenha, contamos um pouco sobre a obra e dizemos por que ela merece, ou não, ser lida, assistida ou jogada por outras pessoas. Já na carta argumentativa, defendemos um pedido ou uma ideia diante de um destinatário, usando argumentos que sustentem esse pedido.",
+      "Em ambos os casos, o segredo é o mesmo: apresentar razões claras, manter um tom respeitoso e, se possível, considerar até o que pensa quem discorda. Assim, qualquer texto de opinião fica muito mais forte e convincente.",
+    ],
+    metaSegundos: 71,
   },
 
   momento09_revisao: {
@@ -274,6 +348,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Toda opinião de resenha precisa vir acompanhada de argumentos.",
       feedbackErro: "Releia a explicação: a opinião precisa ser justificada com argumentos.",
+      dica: "💡 Pista: lembre que só dizer 'gostei' ou 'não gostei' não é o suficiente numa resenha.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Justificar a opinião com argumentos”. Toda opinião de resenha precisa vir acompanhada de um motivo. Agora releia a pergunta com essa ideia na cabeça.",
     },
   },
 
@@ -290,6 +367,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Resenha apresenta e avalia uma obra com argumentos.",
         feedbackErro: "Resenha sempre traz uma opinião justificada sobre a obra.",
+        dica: "💡 Pista: lembre que a resenha nunca é só um resumo — ela também tem uma opinião justificada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um texto que apresenta e avalia uma obra com opinião justificada”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — A carta argumentativa é escrita para...",
@@ -297,6 +377,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! A carta é dirigida a um destinatário, buscando convencê-lo.",
         feedbackErro: "Carta argumentativa tem sempre um destinatário a convencer.",
+        dica: "💡 Pista: lembre que toda carta tem alguém específico para quem ela é escrita.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um destinatário, para convencê-lo de algo”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — O que é um argumento?",
@@ -309,6 +392,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Argumento é a razão que justifica uma opinião.",
         feedbackErro: "Argumento é o motivo usado para defender uma opinião.",
+        dica: "💡 Pista: lembre que argumento é sempre um MOTIVO, uma razão — nunca só uma opinião solta.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma razão que sustenta uma opinião”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — Por que é bom mencionar um contra-argumento no texto?",
@@ -321,6 +407,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Mostra que o autor pensou no assunto de vários ângulos.",
         feedbackErro: "O contra-argumento mostra que o autor pensou nos dois lados.",
+        dica: "💡 Pista: pense em como mencionar outro ponto de vista deixa o texto mais completo, não mais fraco.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para mostrar que o autor considerou outros pontos de vista”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — Qual dessas partes normalmente aparece em uma carta argumentativa?",
@@ -328,6 +417,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Torre conquistada! A carta tem saudação, argumentos e despedida.",
         feedbackErro: "Carta argumentativa tem saudação, argumentos e despedida educada.",
+        dica: "💡 Pista: pense na estrutura da carta exemplo que você leu: como ela começa, o que vem no meio e como termina.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Saudação, argumentos e despedida”. Torre conquistada! 🌟 Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },

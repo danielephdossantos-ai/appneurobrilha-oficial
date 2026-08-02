@@ -48,6 +48,7 @@ export const aula4: AulaPortuguesV4 = {
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender os tempos verbais: passado, presente e futuro.",
       feedbackErro: "Pense nos três ponteiros: um para trás, um parado, um para frente. É sobre o tempo da ação.",
+      dica: "⏳ Pista: os três ponteiros da engrenagem mostram QUANDO a ação acontece — antes, agora ou depois.",
     },
   },
 
@@ -128,6 +129,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Tempo verbal mostra quando a ação acontece.",
         feedbackErro: "Releia: 'Essa mudança se chama TEMPO VERBAL'.",
         ondeEstaNoTexto: "Todo verbo pode mudar de forma para mostrar QUANDO a ação acontece. Essa mudança se chama TEMPO VERBAL.",
+        dica: "⏳ Pista: volte ao texto e releia — 'Essa mudança se chama TEMPO VERBAL'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A mudança de forma do verbo para mostrar quando a ação acontece”. Essa mudança se chama tempo verbal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quais palavras costumam acompanhar verbos no pretérito?",
@@ -141,6 +145,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Ontem, antes e semana passada marcam o pretérito.",
         feedbackErro: "Releia: 'palavras como ONTEM, ANTES e SEMANA PASSADA costumam aparecer junto com verbos no pretérito'.",
         ondeEstaNoTexto: "palavras como ONTEM, ANTES e SEMANA PASSADA costumam aparecer junto com verbos no pretérito",
+        dica: "⏳ Pista: releia o trecho que fala sobre ONTEM, ANTES e SEMANA PASSADA.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ontem, antes e semana passada”. Essas palavras costumam acompanhar verbos no pretérito. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que é importante escolher e manter o tempo verbal certo num texto?",
@@ -154,6 +161,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O tempo verbal certo evita confusão sobre quando as ações acontecem.",
         feedbackErro: "Releia: 'é essencial para o leitor entender a história sem confusão'.",
         ondeEstaNoTexto: "Saber usar o tempo verbal certo é essencial para o leitor entender a história sem confusão",
+        dica: "⏳ Pista: releia o último parágrafo, sobre a confusão que pode acontecer se o tempo verbal muda sem cuidado.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para o leitor entender a história sem confusão sobre quando cada coisa aconteceu”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -172,6 +182,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Brilha encontrou uma engrenagem estranha com três ponteiros.",
         feedbackErro: "Releia a motivação: Brilha encontrou uma engrenagem com três ponteiros.",
+        dica: "⏳ Pista: releia a história do início da aula.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma engrenagem com três ponteiros”. Foi isso que Brilha encontrou no início. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Onde as descobertas sobre os tempos verbais foram anotadas?",
@@ -184,6 +197,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Ficou no Caderno da Engrenagem do Tempo.",
         feedbackErro: "Releia o título: 'O Caderno da Engrenagem do Tempo'.",
+        dica: "⏳ Pista: releia o título da leitura guiada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No caderno da oficina”. Ficou registrado no Caderno da Engrenagem do Tempo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -201,6 +217,7 @@ export const aula4: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho para descobrir o tempo verbal de uma frase.",
       feedbackErro: "Pense: primeiro se acha o verbo, depois se observam as pistas de tempo.",
+      dica: "⏳ Pista: primeiro se encontra o verbo, depois se buscam as pistas de tempo na frase.",
     },
   },
 
@@ -223,6 +240,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! BRINCOU está no pretérito, indicando ação já terminada.",
         feedbackErro: "Releia: 'Ontem, Pedro BRINCOU de bola com os amigos'.",
         ondeEstaNoTexto: "Ontem, Pedro BRINCOU de bola com os amigos no quintal",
+        dica: "⏳ Pista: a palavra ONTEM ajuda a descobrir o tempo verbal de BRINCOU.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Pretérito (passado)”. BRINCOU indica uma ação já terminada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que a palavra VIAJARÁ indica sobre a viagem de Pedro?",
@@ -236,8 +256,59 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! VIAJARÁ está no futuro, indicando ação que ainda vai ocorrer.",
         feedbackErro: "Releia: 'No fim de semana, Pedro VIAJARÁ com a família'.",
         ondeEstaNoTexto: "No fim de semana, Pedro VIAJARÁ com a família para a casa da avó",
+        dica: "⏳ Pista: repare na terminação -ARÁ, típica do futuro.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que a viagem ainda vai acontecer”. VIAJARÁ está no futuro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Meu Dia em Três Tempos",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva três frases: passado, presente e futuro",
+        comando:
+          "Escolha uma atividade que você faz (jogar bola, ler, desenhar). Escreva a primeira frase no PRETÉRITO (o que você fez ontem), a segunda no PRESENTE (o que você faz hoje) e a terceira no FUTURO (o que você fará amanhã).",
+        linhas: 3,
+        modelo: [
+          "Ontem eu LI um livro de aventuras.",
+          "Hoje eu LEIO uma história em quadrinhos.",
+          "Amanhã eu LEREI um livro novo que ganhei.",
+        ],
+        checklist: [
+          "Comecei cada frase com letra maiúscula e terminei com ponto.",
+          "A primeira frase está no PRETÉRITO (passado).",
+          "A segunda frase está no PRESENTE.",
+          "A terceira frase está no FUTURO.",
+          "Usei palavras de tempo como ONTEM, HOJE e AMANHÃ para ajudar o leitor.",
+          "Li em voz alta e consertei o que ficou estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Engrenagem que Nunca Para",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Imagine uma engrenagem gigante, girando sem parar dentro de cada frase que você fala. Ela tem três ponteiros: um aponta para o que já aconteceu, outro fica parado no agora, e o terceiro aponta para o que ainda vai chegar. Essa engrenagem é o tempo verbal.",
+      "Quando você diz 'eu joguei bola ontem', o ponteiro do passado gira. Quando diz 'eu jogo bola hoje', o ponteiro do presente para bem no meio. E quando diz 'eu jogarei bola amanhã', é o ponteiro do futuro que avança.",
+      "Um bom escritor escolhe o ponteiro certo para cada momento da história e não deixa a engrenagem travar no meio do caminho, trocando de tempo sem avisar o leitor. Assim, quem lê nunca se perde e entende exatamente quando cada coisa aconteceu.",
+    ],
+    metaSegundos: 72,
   },
 
   momento_minijogo: {
@@ -256,6 +327,7 @@ export const aula4: AulaPortuguesV4 = {
         ordemCerta: ["f1", "f2", "f3"],
         feedbackAcerto: "🎉 Isso! Você montou a linha do tempo: passado, presente e futuro.",
         feedbackErro: "Pense: o que já aconteceu vem primeiro, depois o que acontece agora, e por fim o que ainda vai acontecer.",
+        dica: "⏳ Pista: passado vem antes, presente é o agora, e futuro é o que ainda vai acontecer.",
       },
     },
   },
@@ -277,6 +349,9 @@ export const aula4: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Isso! VIAJAREMOS está no futuro, pois a ação ainda vai acontecer.",
       feedbackErro: "Releia a explicação: futuro indica ação que ainda vai acontecer.",
+      dica: "⏳ Pista: a palavra AMANHÃ costuma indicar o futuro.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Futuro”. VIAJAREMOS indica uma ação que ainda vai acontecer. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -288,6 +363,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Tempo verbal indica quando a ação acontece.",
         feedbackErro: "Lembre: tempo verbal mostra passado, presente ou futuro.",
+        dica: "⏳ Pista: pense nos três ponteiros da engrenagem do tempo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Quando a ação acontece”. Isso é o tempo verbal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Qual frase está no pretérito (passado)?",
@@ -300,6 +378,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! COMI indica uma ação que já aconteceu.",
         feedbackErro: "Procure o verbo que indica ação já terminada.",
+        dica: "⏳ Pista: o pretérito indica uma ação que já terminou.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Eu comi uma maçã.”. COMI indica ação já terminada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual palavra costuma indicar uma ação no futuro?",
@@ -307,6 +388,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! AMANHÃ costuma marcar ações no futuro.",
         feedbackErro: "Pense em qual palavra aponta para um tempo que ainda vai chegar.",
+        dica: "⏳ Pista: pense em qual palavra fala sobre um dia que ainda não chegou.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Amanhã”. Essa palavra costuma marcar o futuro. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Na frase 'Hoje eu BRINCO no parque', o verbo está em que tempo?",
@@ -314,6 +398,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! BRINCO está no presente, ação acontecendo agora.",
         feedbackErro: "Lembre: HOJE costuma marcar o presente.",
+        dica: "⏳ Pista: a palavra HOJE costuma marcar o presente.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Presente”. BRINCO indica uma ação acontecendo agora. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que é importante manter o mesmo tempo verbal ao contar uma história?",
@@ -326,6 +413,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Aula concluída! Manter o tempo verbal evita confusão para o leitor.",
         feedbackErro: "Releia a conclusão: é preciso clareza sobre quando cada ação aconteceu.",
+        dica: "⏳ Pista: pense em como o leitor pode se perder se os tempos verbais mudarem sem aviso.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para o leitor não se confundir sobre quando cada ação aconteceu”. Aula concluída! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

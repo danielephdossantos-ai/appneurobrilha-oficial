@@ -50,6 +50,7 @@ export const aula4: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a revisar o texto e deixá-lo pronto para ser compartilhado.",
       feedbackErro: "Pense na lupa: ela ajuda a enxergar detalhes pequenos, como erros no texto que precisam ser corrigidos.",
+      dica: "🔍 Pista: a lupa serve para enxergar detalhes pequenos — pense em quais detalhes de um texto precisam ser observados com cuidado antes de compartilhá-lo.",
     },
   },
 
@@ -130,6 +131,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Revisar a ortografia é conferir se as palavras estão escritas certo.",
         feedbackErro: "Releia: 'A primeira é a ORTOGRAFIA: as palavras estão escritas do jeito certo?'",
         ondeEstaNoTexto: "A primeira é a ORTOGRAFIA: as palavras estão escritas do jeito certo?",
+        dica: "🔍 Pista: volte ao texto e releia este trecho — “as palavras estão escritas do jeito certo?”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Verificar se as palavras estão escritas corretamente”. É exatamente isso que significa revisar a ortografia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que a frase 'Os livros estava na mesa' está errada?",
@@ -143,6 +147,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Falta concordância: o certo é 'Os livros estavam na mesa'.",
         feedbackErro: "Releia: 'falta concordância, porque \"livros\" está no plural e \"estava\" está no singular'.",
         ondeEstaNoTexto: "falta concordância, porque \"livros\" está no plural e \"estava\" está no singular",
+        dica: "🔍 Pista: compare o número (singular ou plural) do sujeito 'livros' com o do verbo 'estava'.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Falta concordância entre 'livros' (plural) e 'estava' (singular)”. O correto seria 'Os livros estavam na mesa'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que significa 'publicar' um texto, segundo a explicação?",
@@ -156,6 +163,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Publicar é compartilhar o texto revisado com outras pessoas.",
         feedbackErro: "Releia: 'Publicar é compartilhar o texto com outras pessoas, depois de todo o cuidado da revisão.'",
         ondeEstaNoTexto: "Publicar é compartilhar o texto com outras pessoas, depois de todo o cuidado da revisão",
+        dica: "🔍 Pista: volte ao texto e releia este trecho — “Publicar é compartilhar o texto com outras pessoas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Compartilhar o texto com outras pessoas depois da revisão”. É isso que significa publicar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -174,6 +184,10 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! São quatro coisas: ortografia, pontuação, concordância e clareza.",
         feedbackErro: "Releia: o texto cita ortografia, pontuação, concordância e clareza.",
+        ondeEstaNoTexto: "A segunda é a PONTUAÇÃO... A terceira coisa é a CONCORDÂNCIA... A quarta coisa é a CLAREZA",
+        dica: "🔍 Pista: conte quantas coisas o texto menciona depois de falar da ortografia — são três a mais.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Pontuação, concordância e clareza”. São os quatro pontos observados na revisão, junto com a ortografia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Segundo o texto, onde uma versão final pode ser publicada?",
@@ -186,6 +200,10 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! O texto cita mural, livro da turma e jornal ou blog da escola.",
         feedbackErro: "Releia: 'pode ser colada no mural da sala... guardada em um livro da turma, ou até enviada para um jornal ou blog da escola.'",
+        ondeEstaNoTexto: "pode ser colada no mural da sala, lida em voz alta para a turma, guardada em um livro da turma, ou até enviada para um jornal ou blog da escola",
+        dica: "🔍 Pista: volte ao texto e releia este trecho — “colada no mural da sala... guardada em um livro da turma... jornal ou blog da escola”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No mural da sala, em um livro da turma ou em um jornal/blog da escola”. O texto cita exatamente esses lugares. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -203,6 +221,7 @@ export const aula4: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho da revisão até a publicação.",
       feedbackErro: "Pense: primeiro se relê, depois se corrige, depois se reescreve o que estiver confuso, e por fim se compartilha.",
+      dica: "🔍 Pista: pense na ordem lógica: primeiro ENCONTRAR os erros, depois CORRIGIR, depois REESCREVER o confuso, e só no fim COMPARTILHAR.",
     },
   },
 
@@ -230,6 +249,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Ler em voz alta ajuda a perceber erros e frases estranhas.",
         feedbackErro: "Releia: 'Quando lemos em voz alta, percebemos frases estranhas, repetições e erros'.",
         ondeEstaNoTexto: "Quando lemos em voz alta, percebemos frases estranhas, repetições e erros que às vezes passam despercebidos",
+        dica: "🔍 Pista: volte ao texto e releia este trecho — “percebemos frases estranhas, repetições e erros”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque ajuda a perceber frases estranhas e erros”. Ler em voz alta revela problemas que passam despercebidos na leitura silenciosa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que é bom pedir ajuda a outra pessoa antes da versão final?",
@@ -243,8 +265,60 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Outra pessoa enxerga erros que passam despercebidos pelo próprio autor.",
         feedbackErro: "Releia: 'pode perceber erros ou partes confusas que o próprio autor... não consegue enxergar sozinho.'",
         ondeEstaNoTexto: "pode perceber erros ou partes confusas que o próprio autor, de tão acostumado com o texto, não consegue enxergar sozinho",
+        dica: "🔍 Pista: volte ao texto e releia este trecho — “o próprio autor... não consegue enxergar sozinho”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque outra pessoa pode perceber erros que o autor não vê”. É por isso que pedir ajuda é uma boa prática. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Da lupa ao mural: revise e publique seu texto",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item com a lupa) e só então a VERSÃO FINAL, pronta para ser publicada.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo e depois revise com a lupa",
+        comando:
+          "Escreva um pequeno parágrafo (4 a 6 frases) contando algo que você fez neste fim de semana. Depois, releia com muita atenção: procure erros de ortografia, de pontuação e de concordância, e veja se alguma frase ficou confusa.",
+        linhas: 6,
+        modelo: [
+          "No sábado eu fui ao parque com minha família.",
+          "Nós brincamos de bola e depois comemos um lanche gostoso.",
+          "Minha irmã caiu da bicicleta, mas não se machucou.",
+          "Foi um dia muito divertido e cheio de risadas.",
+        ],
+        checklist: [
+          "Conferi se todas as palavras estão escritas do jeito certo (ortografia).",
+          "Conferi se os pontos finais, vírgulas e interrogações estão nos lugares certos.",
+          "Conferi a concordância: o sujeito e o verbo combinam em número e gênero.",
+          "Li em voz alta e reescrevi as frases que ficaram confusas.",
+          "Meu texto tem começo, meio e fim.",
+          "Minha versão final está pronta para ser publicada (lida ou compartilhada).",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Poder da Revisão",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem quer convencer alguém.",
+    texto: [
+      "Nenhum escritor acerta tudo na primeira tentativa. O rascunho existe justamente para isso: colocar as ideias no papel sem medo de errar. O verdadeiro trabalho começa depois, na hora da revisão, quando o texto ganha ortografia correta, pontuação certa e concordância cuidadosa.",
+      "Revisar não é apenas caçar erros: é também procurar frases confusas e reescrevê-las de um jeito mais claro. Muitos escritores leem o próprio texto em voz alta, porque assim percebem repetições e trechos estranhos que passariam despercebidos em silêncio.",
+      "Só depois de toda essa atenção o texto está pronto para virar a versão final. E é essa versão, revisada com carinho, que pode ser publicada: no mural da escola, em um livro da turma ou lida em voz alta para todos ouvirem.",
+    ],
+    metaSegundos: 78,
   },
 
   momento_minijogo: {
@@ -265,6 +339,7 @@ export const aula4: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Muito bem! Você encontrou as frases com erro de concordância e ortografia.",
         feedbackErro: "Releia com atenção: procure palavras escritas errado e verbos que não combinam com o sujeito.",
+        dica: "🔍 Pista: leia cada frase em voz alta e confira se o verbo combina com o sujeito e se todas as palavras estão escritas do jeito certo.",
       },
     },
   },
@@ -286,6 +361,9 @@ export const aula4: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Ler em voz alta ajuda a notar erros e frases confusas.",
       feedbackErro: "Releia a explicação: ler em voz alta ajuda a perceber erros que passam despercebidos na leitura silenciosa.",
+      dica: "🔍 Pista: pense no que os ouvidos percebem que os olhos, sozinhos, às vezes deixam passar.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Perceber frases estranhas e erros que passam despercebidos”. Ler em voz alta ajuda o escritor a notar o que a leitura silenciosa deixa passar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -297,6 +375,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Revisar é reler procurando erros e melhorias.",
         feedbackErro: "Revisar é reler o próprio texto buscando erros e formas de melhorá-lo.",
+        dica: "🔍 Pista: pense no que a lupa do Brilha faz — ela ajuda a enxergar detalhes que precisam ser corrigidos.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Reler o texto procurando erros e formas de melhorá-lo”. É exatamente isso que significa revisar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é concordância?",
@@ -309,6 +390,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Concordância é as palavras combinarem entre si.",
         feedbackErro: "Concordância é quando as palavras da frase combinam em número (singular/plural) e gênero.",
+        dica: "🔍 Pista: pense no exemplo 'As meninas estudaram' — as palavras combinam em plural entre si.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Quando as palavras da frase combinam em número e gênero”. Isso é concordância. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual frase está com concordância correta?",
@@ -316,6 +400,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! 'As meninas foram' combina o plural do sujeito com o plural do verbo.",
         feedbackErro: "A forma correta é 'As meninas foram à escola', com plural em todas as palavras que precisam concordar.",
+        dica: "🔍 Pista: confira se o artigo, o substantivo e o verbo estão todos no mesmo número (singular ou plural).",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As meninas foram à escola.”. Todas as palavras concordam em plural. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Por que é bom pedir para outra pessoa ler nosso texto antes da versão final?",
@@ -328,6 +415,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Outra pessoa enxerga erros que passam despercebidos pelo autor.",
         feedbackErro: "Outra pessoa pode notar erros ou partes confusas que o próprio autor não percebe sozinho.",
+        dica: "🔍 Pista: pense em como fica difícil enxergar os próprios erros quando já lemos o texto várias vezes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Porque outra pessoa pode notar erros que o autor não percebe”. Um novo par de olhos ajuda muito na revisão. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — O que significa 'publicar' um texto?",
@@ -338,8 +428,11 @@ export const aula4: AulaPortuguesV4 = {
           "Escrever o texto sem nenhuma revisão",
         ],
         correta: 1,
-        feedbackAcerto: "🎉 Muito bem! Publicar é compartilhar o texto já revisado.",
+        feedbackAcerto: "🎉 Muito bem! Publicar é compartilhar o texto já revisado. Caso encerrado! 🌟",
         feedbackErro: "Publicar é compartilhar o texto com outras pessoas, depois de revisado.",
+        dica: "🔍 Pista: pense nos lugares citados na leitura — mural, livro da turma, jornal ou blog da escola.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Compartilhar o texto revisado com outras pessoas”. Isso é publicar. Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

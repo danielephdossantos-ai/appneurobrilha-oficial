@@ -49,6 +49,7 @@ export const aula1: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos descobrir como o poema brinca com as palavras.",
       feedbackErro: "Pense no livro cheio de versos: essa aula é sobre como o poema usa palavras com rima e ritmo.",
+      dica: "🌙 Pista: repare no livro entre as imagens — ele guarda versos, rimas e ritmo, os ingredientes da poesia.",
     },
   },
 
@@ -129,6 +130,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Verso é cada linha do poema.",
         feedbackErro: "Releia: 'Cada linha escrita de um poema é chamada de VERSO'.",
         ondeEstaNoTexto: "Cada linha de um poema é chamada de VERSO",
+        dica: "🌙 Pista de detetive dos versos: volte ao texto e releia — “Cada linha de um poema é chamada de VERSO”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Cada linha escrita de um poema”. O texto diz exatamente isso logo no começo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No poema 'A Lua e o Poeta', qual palavra rima com 'céu'?",
@@ -137,6 +141,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! 'Céu' rima com 'véu'.",
         feedbackErro: "Releia o poema: 'A lua subiu devagar no céu, como uma letra bordada no véu.'",
         ondeEstaNoTexto: "A lua subiu devagar no céu, como uma letra bordada no véu",
+        dica: "🌙 Pista de detetive dos versos: volte ao poema e releia os dois primeiros versos da primeira estrofe.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Véu”. No poema, 'céu' e 'véu' terminam com o mesmo som. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que significa dizer que uma frase está em 'sentido figurado'?",
@@ -150,6 +157,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Sentido figurado é quando a frase não deve ser entendida literalmente.",
         feedbackErro: "Releia: 'quando uma palavra ou frase não deve ser entendida ao pé da letra, mas de um jeito criativo'.",
         ondeEstaNoTexto: "não deve ser entendida ao pé da letra, mas de um jeito criativo e imaginativo",
+        dica: "🌙 Pista de detetive dos versos: volte ao texto e releia — “não deve ser entendida ao pé da letra, mas de um jeito criativo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que a frase deve ser entendida de um jeito criativo, não ao pé da letra”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -163,6 +173,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Estamos na Noite dos Versos.",
         feedbackErro: "Releia a motivação: 'Brilha chegou embaixo de um céu cheio de estrelas' — a Noite dos Versos.",
+        dica: "🌙 Pista de detetive dos versos: releia o início da aula, onde Brilha descreve o céu cheio de estrelas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Na Noite dos Versos”. É lá que Brilha chega no começo da aula. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quantas estrofes tem o poema 'A Lua e o Poeta'?",
@@ -170,6 +183,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! O poema tem duas estrofes de quatro versos.",
         feedbackErro: "Releia: 'há duas estrofes de quatro versos cada'.",
+        dica: "🌙 Pista de detetive dos versos: conte os grupos de versos separados por espaço em branco no poema.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Duas”. O poema tem duas estrofes de quatro versos cada. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -187,6 +203,7 @@ export const aula1: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para explorar um poema.",
       feedbackErro: "Pense: primeiro se lê em voz alta, depois se separam versos/estrofes, depois se acham as rimas e por fim se pensa no sentido figurado.",
+      dica: "🌙 Pista de detetive dos versos: primeiro sempre se ouve o poema (leitura em voz alta), e só por último se interpreta o sentido figurado.",
     },
   },
 
@@ -214,6 +231,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O poema livre não segue um esquema fixo de rimas.",
         feedbackErro: "Releia: 'não segue um esquema fixo de rimas'.",
         ondeEstaNoTexto: "não segue um esquema fixo de rimas",
+        dica: "🌙 Pista de detetive dos versos: volte ao texto e releia — “não segue um esquema fixo de rimas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um poema que não segue um esquema fixo de rimas”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que dá musicalidade a um poema, mesmo sem rima?",
@@ -227,8 +247,61 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Repetições de sons e palavras bem escolhidas criam musicalidade.",
         feedbackErro: "Releia: 'um jeito bonito de soar... com repetições de sons e palavras escolhidas com cuidado'.",
         ondeEstaNoTexto: "repetições de sons e palavras escolhidas com cuidado",
+        dica: "🌙 Pista de detetive dos versos: volte ao texto e releia — “repetições de sons e palavras escolhidas com cuidado”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A repetição de sons e a escolha cuidadosa das palavras”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Poeta por um Dia",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um pequeno poema com rima",
+        comando:
+          "Escolha um tema que você gosta (a lua, um animal, a chuva, um amigo). Escreva um poema com pelo menos DUAS estrofes de dois versos cada, tentando criar rimas no final dos versos.",
+        linhas: 4,
+        modelo: [
+          "A chuva cai sobre o telhado,",
+          "e o jardim fica encharcado.",
+          "Depois o sol aparece no céu,",
+          "e a terra ganha um novo véu.",
+        ],
+        checklist: [
+          "Meu poema tem pelo menos duas estrofes.",
+          "Cada estrofe tem pelo menos dois versos.",
+          "Procurei palavras que terminam com som parecido, criando rimas.",
+          "Li em voz alta para sentir o ritmo do poema.",
+          "Usei pelo menos uma imagem em sentido figurado (algo criativo, não literal).",
+          "Comecei cada verso com letra maiúscula.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Música das Palavras",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem recita um poema.",
+    texto: [
+      "Fecha os olhos e escuta: a poesia tem música mesmo sem melodia. Ela nasce do jeito como as palavras se encontram, do som que se repete no fim dos versos e do compasso que aparece quando lemos em voz alta, devagar, prestando atenção em cada vírgula.",
+      "Quando um poeta escolhe 'flor' para rimar com 'amor', ele não está brincando à toa: está construindo uma ponte de som entre duas ideias, para que o leitor sinta o poema antes mesmo de entender tudo o que ele quer dizer.",
+      "Por isso, ler poesia em voz alta é tão importante. A voz revela o ritmo escondido nas letras, marca as pausas das estrofes e transforma palavras soltas em uma canção só para quem lê. Treine essa leitura hoje, e amanhã ela sairá ainda mais bonita.",
+    ],
+    imagemUrl: livro,
+    metaSegundos: 61,
   },
 
   momento_minijogo: {
@@ -253,6 +326,7 @@ export const aula1: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Você encontrou os pares que rimam!",
         feedbackErro: "Pense no som final de cada palavra: 'flor' e 'amor' terminam parecido, assim como os outros pares.",
+        dica: "🌙 Pista de detetive dos versos: leia cada palavra em voz alta e preste atenção só no final dela.",
       },
     },
   },
@@ -269,6 +343,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 0,
       feedbackAcerto: "🎉 Isso! 'Jardim' e 'assim' terminam com som parecido.",
       feedbackErro: "Pense no final da palavra 'jardim': -im. Qual opção termina parecido?",
+      dica: "🌙 Pista de detetive dos versos: fale a palavra 'jardim' bem devagar e escute só o pedacinho final: -im.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Assim”. 'Jardim' e 'assim' terminam com o mesmo som -im. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -285,6 +362,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Verso é cada linha do poema.",
         feedbackErro: "Verso é cada linha escrita de um poema.",
+        dica: "🌙 Pista de detetive dos versos: lembre que um poema é formado por várias linhas, e cada linha tem esse nome.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Cada linha escrita de um poema”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é uma estrofe?",
@@ -297,6 +377,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Estrofe é um grupo de versos.",
         feedbackErro: "Estrofe é o conjunto de versos separado por um espaço em branco.",
+        dica: "🌙 Pista de detetive dos versos: pense no espaço em branco que separa os blocos de versos dentro do poema.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um grupo de versos separado por espaço”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é rima?",
@@ -309,6 +392,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Rima é o som final parecido entre versos.",
         feedbackErro: "Rima é a semelhança de som no final dos versos.",
+        dica: "🌙 Pista de detetive dos versos: escute o final das palavras 'flor' e 'amor' — é esse tipo de semelhança.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Quando o som final de dois versos se parece”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Um poema livre é aquele que...",
@@ -321,6 +407,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Poema livre não segue esquema fixo de rimas.",
         feedbackErro: "Poema livre não tem um esquema de rimas fixo, mas ainda tem ritmo.",
+        dica: "🌙 Pista de detetive dos versos: lembre do poema do arco-íris — ele não rimava, mas ainda tinha ritmo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Não segue um esquema fixo de rimas”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — O que significa 'sentido figurado'?",
@@ -333,6 +422,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Noite dos Versos conquistada! Sentido figurado é a linguagem criativa da poesia.",
         feedbackErro: "Sentido figurado é quando a frase deve ser entendida de forma criativa, não literal.",
+        dica: "🌙 Pista de detetive dos versos: lembre do exemplo 'meu coração é um jardim' — não é para entender ao pé da letra.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um sentido criativo, que não deve ser lido ao pé da letra”. Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

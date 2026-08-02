@@ -129,6 +129,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O lide é o parágrafo inicial que resume o quê, quem, quando, onde, como e por quê.",
         feedbackErro: "Releia: 'ela... começa pelo LIDE, o parágrafo que responde às perguntas essenciais'.",
         ondeEstaNoTexto: "começa pelo LIDE, o parágrafo que responde às perguntas essenciais: o quê, quem, quando, onde, como e por quê aconteceu",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “começa pelo LIDE, o parágrafo que responde às perguntas essenciais”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O parágrafo inicial que responde às perguntas essenciais do fato”. O lide sempre abre a notícia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que diferencia a reportagem de uma notícia simples?",
@@ -142,6 +145,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! A reportagem aprofunda o fato com investigação e entrevistas.",
         feedbackErro: "Releia: 'a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas'.",
         ondeEstaNoTexto: "a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas e mostra diferentes pontos de vista",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “a reportagem aprofunda um fato: além de informar, ela investiga, entrevista pessoas envolvidas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A reportagem investiga a fundo, com entrevistas e vários pontos de vista”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Por que os repórteres costumam usar frases entre aspas de pessoas entrevistadas?",
@@ -155,6 +161,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! As aspas separam a fala de quem foi entrevistado da opinião do repórter.",
         feedbackErro: "Releia: 'costumam usar frases de pessoas entrevistadas, entre aspas, para mostrar diferentes visões... sem misturar a opinião do jornalista com o fato relatado'.",
         ondeEstaNoTexto: "costumam usar frases de pessoas entrevistadas, entre aspas, para mostrar diferentes visões sobre o acontecimento sem misturar a opinião do jornalista com o fato relatado",
+        dica: "📰 Pista de repórter: volte ao mural e releia — “para mostrar diferentes visões... sem misturar a opinião do jornalista com o fato relatado”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para mostrar diferentes visões sem misturar com a opinião do jornalista”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -168,6 +177,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! A notícia é sobre a Escola Municipal Girassol.",
         feedbackErro: "Releia a manchete do exemplo: 'Escola Municipal Girassol inaugura horta comunitária'.",
+        dica: "📰 Pista de repórter: volte à manchete — “Escola Municipal Girassol inaugura horta comunitária”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Escola Municipal Girassol”. É o nome que aparece na manchete do exemplo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "De onde nasceu a ideia da horta comunitária, segundo o lide?",
@@ -180,6 +192,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Correto! A iniciativa nasceu de um projeto de educação alimentar.",
         feedbackErro: "Releia: 'a iniciativa nasceu de um projeto de educação alimentar'.",
+        dica: "📰 Pista de repórter: volte ao lide e releia — “a iniciativa nasceu de um projeto de educação alimentar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “De um projeto de educação alimentar”. É o que o lide explica sobre a origem da ideia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -224,6 +239,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Mais de uma fonte ajuda a confirmar o fato e evitar erros.",
         feedbackErro: "Releia: 'Isso evita erros e espalhar informações falsas.'",
         ondeEstaNoTexto: "Isso evita erros e espalhar informações falsas.",
+        dica: "📰 Pista de repórter: volte ao texto e releia — “Isso evita erros e espalhar informações falsas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para evitar erros e espalhar informações falsas”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual das frases abaixo é um FATO, e não uma opinião?",
@@ -237,8 +255,60 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! 'Choveu 40 milímetros' é algo que pode ser comprovado, por isso é fato.",
         feedbackErro: "Releia: 'Fato é algo que pode ser comprovado, como choveu 40 milímetros na cidade ontem'.",
         ondeEstaNoTexto: "Fato é algo que pode ser comprovado, como 'choveu 40 milímetros na cidade ontem'",
+        dica: "📰 Pista de repórter: lembre que FATO pode ser comprovado; OPINIÃO é um ponto de vista pessoal.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Choveu 40 milímetros na cidade ontem”. É algo que pode ser comprovado — por isso é fato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Redação do Bairro das Notícias",
+    instrucao:
+      "Repórter de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva uma notícia curta com manchete e lide",
+        comando:
+          "Escolha um fato (real ou inventado, mas que pareça verdadeiro) que aconteceu na sua escola ou bairro. Escreva uma MANCHETE curta e, depois, um LIDE de até 3 frases respondendo o quê, quem, quando, onde, como e por quê.",
+        linhas: 5,
+        modelo: [
+          "MANCHETE: Turma do 5º ano organiza feira de trocas de livros.",
+          "LIDE: Os alunos do 5º ano da Escola Municipal Estrela realizaram, nesta sexta-feira, uma feira de trocas de livros no pátio da escola.",
+          "A iniciativa nasceu de um projeto de incentivo à leitura proposto pela professora de Português.",
+          "Segundo os organizadores, mais de 100 livros trocaram de mãos durante o evento.",
+        ],
+        checklist: [
+          "Minha manchete resume o assunto em poucas palavras.",
+          "Meu lide responde pelo menos quatro das seis perguntas essenciais (quê, quem, quando, onde, como, por quê).",
+          "Não misturei minha opinião pessoal com o fato relatado.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Li em voz alta e consertei o que ficou estranho.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Repórter Cuidadoso",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO de quem apresenta um telejornal — respeitando vírgula, ponto e travessão.",
+    texto: [
+      "Um bom repórter nunca escreve com pressa. Antes de publicar qualquer notícia, ele confere os fatos, procura mais de uma fonte de informação e evita misturar sua opinião pessoal ao que está relatando.",
+      "Quando o fato é complicado, o repórter pode transformar a notícia em uma reportagem: entrevista pessoas envolvidas, visita o local e conta a história com mais detalhes, mostrando diferentes pontos de vista sobre o mesmo assunto.",
+      "No fim das contas, o compromisso do jornalismo é sempre o mesmo: informar a verdade com clareza, sem inventar nada e sem enganar quem está lendo, ouvindo ou assistindo à notícia.",
+    ],
+    metaSegundos: 68,
   },
 
   momento_minijogo: {
@@ -279,6 +349,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 2,
       feedbackAcerto: "🎉 Isso! O lide responde o quê, quem, quando, onde, como e por quê.",
       feedbackErro: "Releia a explicação: o lide responde às perguntas essenciais sobre o fato.",
+      dica: "📰 Pista de repórter: o lide é sempre o primeiro parágrafo e responde às perguntas essenciais do fato.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “As perguntas essenciais sobre o fato”. O lide resume o quê, quem, quando, onde, como e por quê. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -290,6 +363,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! A notícia informa fatos reais e recentes.",
         feedbackErro: "Lembre: notícia é sobre fatos reais, não opiniões nem invenções.",
+        dica: "📰 Pista de repórter: notícia sempre conta um fato real e verificado, nunca uma opinião ou invenção.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um fato recente e verificado”. Notícia informa fatos reais, não opiniões. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O lide de uma notícia geralmente fica...",
@@ -297,6 +373,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Correto! O lide é o primeiro parágrafo da notícia.",
         feedbackErro: "O lide fica logo no início da notícia.",
+        dica: "📰 Pista de repórter: o lide abre a notícia, sempre no primeiro parágrafo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No primeiro parágrafo”. O lide sempre abre a notícia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que torna uma reportagem diferente de uma notícia curta?",
@@ -304,6 +383,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Isso! A reportagem investiga mais fundo, com entrevistas e vários pontos de vista.",
         feedbackErro: "Reportagem é a versão mais investigada e detalhada de um fato.",
+        dica: "📰 Pista de repórter: a reportagem se destaca pela investigação profunda, com entrevistas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A investigação mais profunda com entrevistas”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — Qual frase é um FATO, não uma opinião?",
@@ -316,6 +398,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Essa frase pode ser comprovada, por isso é um fato.",
         feedbackErro: "Fato é algo comprovável; opinião é um ponto de vista pessoal.",
+        dica: "📰 Pista de repórter: fato pode ser comprovado; opinião expressa um sentimento ou julgamento pessoal.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A prefeitura inaugurou a praça na terça-feira”. Isso pode ser comprovado — é um fato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Por que os jornalistas usam mais de uma fonte de informação?",
@@ -328,6 +413,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Território conquistado! Mais de uma fonte ajuda a garantir que o fato é verdadeiro.",
         feedbackErro: "Mais de uma fonte confirma a informação e evita erros na notícia.",
+        dica: "📰 Pista de repórter: quanto mais fontes confirmam um fato, menor o risco de erro na notícia.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para confirmar o fato e evitar erros”. Território conquistado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },

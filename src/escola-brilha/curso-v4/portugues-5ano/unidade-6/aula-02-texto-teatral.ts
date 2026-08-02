@@ -49,6 +49,7 @@ export const aula2: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos descobrir como é escrito um texto para ser encenado.",
       feedbackErro: "Pense no grupo pronto para encenar: essa aula é sobre a estrutura do texto de teatro.",
+      dica: "🎭 Pista de ator: repare no grupo de crianças prontas para encenar — a aula é sobre como se escreve para o teatro.",
     },
   },
 
@@ -129,6 +130,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O texto teatral é escrito para ser encenado.",
         feedbackErro: "Releia: 'escrito para ser encenado, ou seja, representado por atores diante de uma plateia'.",
         ondeEstaNoTexto: "escrito para ser encenado, ou seja, representado por atores diante de uma plateia",
+        dica: "🎭 Pista de ator: volte ao caderno e releia o trecho — “escrito para ser encenado, ou seja, representado por atores diante de uma plateia”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para ser encenado, representado por atores diante de uma plateia”. O texto teatral é feito para virar espetáculo, não apenas para ser lido em silêncio. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "Como a fala de um personagem é marcada no texto teatral?",
@@ -142,6 +146,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! A fala é marcada com o nome em maiúsculas e dois-pontos.",
         feedbackErro: "Releia: 'a fala é sempre marcada com o nome do personagem em letras maiúsculas, seguido de dois-pontos'.",
         ondeEstaNoTexto: "a fala é sempre marcada com o nome do personagem em letras maiúsculas, seguido de dois-pontos",
+        dica: "🎭 Pista de ator: volte ao caderno e releia — “o nome do personagem em letras maiúsculas, seguido de dois-pontos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com o nome do personagem em maiúsculas, seguido de dois-pontos”. É assim que sabemos quem está falando na peça. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "O que é uma rubrica?",
@@ -155,6 +162,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Rubrica é a indicação cênica entre parênteses.",
         feedbackErro: "Releia: 'indicações cênicas escritas entre parênteses... elas não são ditas em voz alta pelo ator'.",
         ondeEstaNoTexto: "indicações cênicas escritas entre parênteses",
+        dica: "🎭 Pista de ator: volte ao caderno e releia — “indicações cênicas escritas entre parênteses”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma indicação cênica entre parênteses, que não é dita em voz alta”. A rubrica orienta o ator, mas fica fora da fala falada. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -168,6 +178,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! A Cena 1 acontece na floresta.",
         feedbackErro: "Releia: 'Cena 1 — A floresta'.",
+        dica: "🎭 Pista de ator: volte ao caderno e releia o cabeçalho — “Cena 1 — A floresta”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Na floresta”. O texto começa com “Cena 1 — A floresta”. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "O que a rubrica '(sorrindo escondido)' revela sobre o lobo?",
@@ -180,6 +193,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! A rubrica mostra que o lobo esconde uma intenção da Chapeuzinho.",
         feedbackErro: "Releia a cena: o lobo sorri escondido enquanto finge ser gentil, indicando uma intenção que só a plateia percebe.",
+        dica: "🎭 Pista de ator: pense em quem enxerga essa rubrica — só a plateia, não Chapeuzinho.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Que ele tem más intenções escondidas de Chapeuzinho”. A rubrica revela algo que só a plateia percebe, não a personagem. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -197,6 +213,7 @@ export const aula2: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para escrever uma cena de teatro.",
       feedbackErro: "Pense: primeiro se define o lugar, depois os personagens, depois as falas e por fim as rubricas.",
+      dica: "🎭 Pista de ator: primeiro se decide ONDE e QUANDO, depois QUEM participa, depois o QUE cada um fala, e por último COMO agem (rubricas).",
     },
   },
 
@@ -224,6 +241,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Figurino são as roupas e adereços dos atores.",
         feedbackErro: "Releia: 'o FIGURINO, que são as roupas e adereços dos atores'.",
         ondeEstaNoTexto: "o FIGURINO, que são as roupas e adereços dos atores",
+        dica: "🎭 Pista de ator: volte ao caderno e releia — “o FIGURINO, que são as roupas e adereços dos atores”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As roupas e adereços usados pelos atores”. É isso que o figurino significa no teatro. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "Para que serve o cenário em uma peça de teatro?",
@@ -237,6 +257,9 @@ export const aula2: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O cenário representa o lugar da cena.",
         feedbackErro: "Releia: 'o CENÁRIO, que é a decoração do palco que representa o lugar da cena'.",
         ondeEstaNoTexto: "a decoração do palco que representa o lugar da cena",
+        dica: "🎭 Pista de ator: volte ao caderno e releia — “a decoração do palco que representa o lugar da cena”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa fala em decorar o palco para representar o lugar da cena. O cenário ajuda a plateia a imaginar onde a história acontece. Agora releia a pergunta com essa ideia na cabeça.",
       },
     ],
   },
@@ -258,8 +281,58 @@ export const aula2: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Você identificou as rubricas, escritas entre parênteses!",
         feedbackErro: "Pense: a rubrica está entre parênteses e não tem o nome do personagem seguido de dois-pontos.",
+        dica: "🎭 Pista de ator: a rubrica sempre vem entre parênteses e não tem nome de personagem seguido de dois-pontos.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Roteirista do Palco Encantado",
+    instrucao:
+      "Todo roteirista escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva uma pequena cena de teatro",
+        comando:
+          "Escolha dois personagens e um lugar. Escreva o nome da cena (ex.: 'Cena 1 — A cozinha'), pelo menos duas falas (nome do personagem em maiúsculas + dois-pontos) e pelo menos uma rubrica entre parênteses.",
+        linhas: 6,
+        modelo: [
+          "Cena 1 — O quintal",
+          "(Duas crianças brincam perto de uma árvore.)",
+          "ANA: Você viu aquele passarinho azul?",
+          "PEDRO: (apontando para o galho mais alto) Vi sim! Ele está fazendo um ninho.",
+        ],
+        checklist: [
+          "Minha cena tem um nome do lugar, como 'Cena 1 — ...'.",
+          "Cada fala começa com o nome do personagem em maiúsculas, seguido de dois-pontos.",
+          "Escrevi pelo menos uma rubrica entre parênteses.",
+          "As rubricas explicam ação ou tom de voz, e não são falas.",
+          "Li em voz alta como se estivesse encenando, e consertei o que ficou estranho.",
+          "Usei letra maiúscula no início das falas e ponto final quando necessário.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Nos bastidores do teatro",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — como se estivesse contando aos amigos como funciona uma peça.",
+    texto: [
+      "Você já imaginou como os atores sabem exatamente o que dizer e como se mover no palco? Tudo começa no texto teatral, escrito especialmente para ser encenado diante de uma plateia. Nele, cada cena mostra a ação acontecendo em um lugar e em um tempo determinados.",
+      "As falas de cada personagem vêm marcadas com o nome em letras maiúsculas, seguido de dois-pontos, para que o ator saiba exatamente quando é a sua vez de falar. Já as rubricas, escritas entre parênteses, indicam como o personagem deve se mover, sentir ou falar, mas nunca são ditas em voz alta.",
+      "Por trás das falas, o figurino e o cenário completam a magia: as roupas dos atores e a decoração do palco ajudam a plateia a mergulhar na história, mesmo sem ouvir uma só palavra explicativa. É assim que um texto ganha vida em cima do palco.",
+    ],
+    metaSegundos: 71,
   },
 
   momento09_revisao: {
@@ -279,6 +352,9 @@ export const aula2: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! A rubrica está entre parênteses e orienta a ação.",
       feedbackErro: "Releia a explicação: a rubrica é a indicação cênica entre parênteses.",
+      dica: "🎭 Pista de ator: procure o trecho escrito entre parênteses — essa é a marca da rubrica.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “(O lobo se esconde atrás da árvore.)”. A rubrica sempre aparece entre parênteses e orienta a ação, sem ser dita em voz alta. Agora releia a pergunta com essa ideia na cabeça.",
     },
   },
 
@@ -295,6 +371,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Texto teatral é feito para ser encenado.",
         feedbackErro: "O texto teatral é escrito para ser representado por atores.",
+        dica: "🎭 Pista de ator: pense em quem apresenta a história no palco.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um texto escrito para ser encenado por atores”. Ele é feito para virar espetáculo diante de uma plateia. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "2/5 — O que é uma cena?",
@@ -307,6 +386,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Cena é a parte da peça com lugar e tempo definidos.",
         feedbackErro: "Cena é cada parte da peça em que a ação acontece em um lugar e tempo.",
+        dica: "🎭 Pista de ator: lembre que quando o lugar ou o tempo muda, começa uma nova cena.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Parte da peça em que a ação acontece em um mesmo lugar e tempo”. Toda vez que muda o lugar ou o momento, começa uma nova cena. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "3/5 — Como se identifica a fala de um personagem?",
@@ -319,6 +401,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O nome do personagem em maiúsculas e dois-pontos indica a fala.",
         feedbackErro: "A fala é marcada com o nome do personagem em maiúsculas, seguido de dois-pontos.",
+        dica: "🎭 Pista de ator: procure o nome em letras grandes seguido de dois-pontos antes da fala.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com o nome do personagem em maiúsculas seguido de dois-pontos”. É assim que o leitor sabe quem está falando. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "4/5 — O que é uma rubrica?",
@@ -331,6 +416,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Rubrica é a indicação cênica entre parênteses.",
         feedbackErro: "Rubrica é a indicação cênica escrita entre parênteses.",
+        dica: "🎭 Pista de ator: lembre que a rubrica não é dita em voz alta, apenas orienta a atuação.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma indicação cênica entre parênteses”. Ela orienta como o ator age, mas não é falada. Agora releia a pergunta com essa ideia na cabeça.",
       },
       {
         pergunta: "5/5 — O figurino e o cenário servem para...",
@@ -343,6 +431,9 @@ export const aula2: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Palco conquistado! Figurino e cenário ajudam a mostrar a história.",
         feedbackErro: "Figurino e cenário ajudam a plateia a entender a história visualmente.",
+        dica: "🎭 Pista de ator: pense em como as roupas e a decoração 'mostram' a história sem precisar de palavras.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ajudar a plateia a entender o lugar e os personagens da história”. Figurino e cenário mostram visualmente o que o texto descreve. Palco conquistado! 🌟",
       },
     ],
   },
@@ -359,7 +450,8 @@ export const aula2: AulaPortuguesV4 = {
   },
 
   recompensa: {
-    xp: 130,
-    moedas: 75,
+    xp: 140,
+    moedas: 80,
+    medalha: "Máscara de Bronze",
   },
 };
