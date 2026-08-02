@@ -177,6 +177,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! A notícia é sobre a Escola Municipal Girassol.",
         feedbackErro: "Releia a manchete do exemplo: 'Escola Municipal Girassol inaugura horta comunitária'.",
+        dica: "📰 Pista de repórter: volte à manchete — “Escola Municipal Girassol inaugura horta comunitária”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Escola Municipal Girassol”. É o nome que aparece na manchete do exemplo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "De onde nasceu a ideia da horta comunitária, segundo o lide?",
@@ -189,6 +192,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 2,
         feedbackAcerto: "🎉 Correto! A iniciativa nasceu de um projeto de educação alimentar.",
         feedbackErro: "Releia: 'a iniciativa nasceu de um projeto de educação alimentar'.",
+        dica: "📰 Pista de repórter: volte ao lide e releia — “a iniciativa nasceu de um projeto de educação alimentar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “De um projeto de educação alimentar”. É o que o lide explica sobre a origem da ideia. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -233,6 +239,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Mais de uma fonte ajuda a confirmar o fato e evitar erros.",
         feedbackErro: "Releia: 'Isso evita erros e espalhar informações falsas.'",
         ondeEstaNoTexto: "Isso evita erros e espalhar informações falsas.",
+        dica: "📰 Pista de repórter: volte ao texto e releia — “Isso evita erros e espalhar informações falsas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para evitar erros e espalhar informações falsas”. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual das frases abaixo é um FATO, e não uma opinião?",
@@ -246,6 +255,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! 'Choveu 40 milímetros' é algo que pode ser comprovado, por isso é fato.",
         feedbackErro: "Releia: 'Fato é algo que pode ser comprovado, como choveu 40 milímetros na cidade ontem'.",
         ondeEstaNoTexto: "Fato é algo que pode ser comprovado, como 'choveu 40 milímetros na cidade ontem'",
+        dica: "📰 Pista de repórter: lembre que FATO pode ser comprovado; OPINIÃO é um ponto de vista pessoal.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Choveu 40 milímetros na cidade ontem”. É algo que pode ser comprovado — por isso é fato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
