@@ -270,6 +270,55 @@ export const aula1: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Meu Mapa de Escritor",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Planeje e escreva um pequeno parágrafo",
+        comando:
+          "Escolha um assunto simples (seu animal favorito, um passeio, um jogo). Antes de escrever, pense: quem vai ler (público) e para que serve (objetivo). Depois escreva um parágrafo seguindo essa ordem: 1) apresente o assunto; 2) dê um detalhe interessante; 3) feche com uma frase final.",
+        linhas: 5,
+        modelo: [
+          "Meu animal favorito é o golfinho, porque ele é muito inteligente.",
+          "Os golfinhos vivem em grupos e se comunicam usando sons especiais.",
+          "Por isso, acho os golfinhos um dos animais mais fascinantes do mar.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Pensei em quem vai ler (público) antes de escolher as palavras.",
+          "Segui a ordem que planejei: assunto, detalhe e frase final.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: O Escritor Organizado",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem explica algo importante.",
+    texto: [
+      "Você já reparou que, antes de fazer uma viagem, sempre olhamos um mapa ou um roteiro? Escrever um bom texto funciona do mesmo jeito. Um escritor experiente nunca começa direto pela primeira frase: ele para, pensa e organiza suas ideias antes de qualquer coisa.",
+      "Primeiro, ele pensa em quem vai ler aquele texto, porque isso muda até as palavras escolhidas. Depois, ele define para que serve o texto: contar uma história, explicar algo ou convencer alguém de uma ideia. Só então ele monta um roteiro, decidindo o que vem primeiro, no meio e no final.",
+      "Com esse planejamento pronto, escrever se torna muito mais fácil, porque o escritor já sabe exatamente para onde está indo. É como seguir um mapa: cada passo leva ao próximo, até chegar ao destino final do texto.",
+    ],
+    metaSegundos: 74,
+  },
+
   momento09_revisao: {
     pontos: [
       "PÚBLICO é para quem você escreve; OBJETIVO é para que serve o texto.",
