@@ -55,6 +55,7 @@ export const aula4: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos criar um texto e apresentá-lo, celebrando tudo o que aprendemos.",
       feedbackErro: "Pense na turma reunida para celebrar: essa aula ensina a criar e apresentar um texto autoral no sarau final.",
+      dica: "🌟 Pista: lembre da estrela e da turma reunida — essa aula é sobre celebrar tudo o que você já aprendeu criando e apresentando um texto.",
     },
   },
 
@@ -135,6 +136,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Sarau é uma festa em que as pessoas apresentam poemas, cenas ou falas.",
         feedbackErro: "Releia: 'um encontro festivo em que as pessoas se reúnem para apresentar poemas, músicas, cenas de teatro ou falas'.",
         ondeEstaNoTexto: "criar um texto autoral e apresentá-lo num SARAU, que é uma festa de apresentações",
+        dica: "🌟 Pista: volte ao texto e releia este trecho — “um encontro festivo em que as pessoas se reúnem para apresentar poemas, músicas, cenas de teatro ou falas”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma festa de apresentações de poemas, cenas ou falas”. É isso que significa a palavra sarau. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Quais são os três gêneros que o aluno pode escolher para a missão final?",
@@ -148,6 +152,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O aluno pode escolher poema, cena teatral ou fala.",
         feedbackErro: "Releia: 'Pode ser um POEMA... também é possível escolher uma CENA TEATRAL curta'.",
         ondeEstaNoTexto: "escolher o gênero que você quer criar. Pode ser um POEMA",
+        dica: "🌟 Pista: volte ao texto e releia este trecho — “Pode ser um POEMA... também é possível escolher uma CENA TEATRAL curta”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Poema, cena teatral e fala expositiva”. Esses são os três gêneros que o texto apresenta. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual é a ordem correta do processo de escrita apresentado no texto?",
@@ -161,6 +168,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Primeiro o rascunho, depois a revisão, e por fim a versão final.",
         feedbackErro: "Releia: 'primeiro o RASCUNHO... depois a REVISÃO... e por fim a VERSÃO FINAL'.",
         ondeEstaNoTexto: "primeiro o RASCUNHO, onde as ideias saem sem medo de errar; depois a REVISÃO",
+        dica: "🌟 Pista: volte ao texto e releia este trecho — “primeiro o RASCUNHO... depois a REVISÃO... e por fim a VERSÃO FINAL”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Rascunho, revisão, versão final”. É essa a ordem certa do processo de escrita. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -174,6 +184,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! A missão final acontece no Sarau da Conquista.",
         feedbackErro: "Releia a motivação: 'Hoje é o SARAU DA CONQUISTA'.",
+        dica: "🌟 Pista: volte ao início da aula e releia este trecho — “Hoje é o SARAU DA CONQUISTA”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “No Sarau da Conquista”. É lá que acontece a apresentação final. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No exemplo de poema do texto, com o que a voz é comparada?",
@@ -181,6 +194,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! A voz é comparada a um rio: 'Minha voz é um rio'.",
         feedbackErro: "Releia o poema: 'Minha voz é um rio, corre livre, sem parar'.",
+        dica: "🌟 Pista: volte ao poema e releia este trecho — “Minha voz é um rio, corre livre, sem parar”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com um rio”. É essa a comparação usada no poema-exemplo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -198,6 +214,7 @@ export const aula4: AulaPortuguesV4 = {
       ordemCerta: ["p1", "p2", "p3", "p4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o caminho certo para preparar a missão final.",
       feedbackErro: "Pense: primeiro se escolhe o gênero, depois se escreve o rascunho, depois se revisa, e por fim se apresenta.",
+      dica: "🌟 Pista: lembre que todo processo de escrita segue esta ordem: escolher o gênero, escrever o rascunho, revisar e só depois apresentar a versão final.",
     },
   },
 
@@ -225,6 +242,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Capricho é cuidar de cada detalhe do texto.",
         feedbackErro: "Releia: 'o autor cuidou de cada detalhe: escolheu bem as palavras, revisou a ortografia'.",
         ondeEstaNoTexto: "isso significa que o autor cuidou de cada detalhe",
+        dica: "🌟 Pista: volte ao texto e releia este trecho — “o autor cuidou de cada detalhe: escolheu bem as palavras, revisou a ortografia”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Cuidar de cada detalhe, escolhendo bem as palavras e revisando”. É isso que significa capricho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que os aplausos representam no sarau, segundo o texto?",
@@ -238,6 +258,9 @@ export const aula4: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Os aplausos reconhecem o esforço de quem apresentou.",
         feedbackErro: "Releia: 'Os aplausos são uma forma de reconhecer o esforço de quem apresentou'.",
         ondeEstaNoTexto: "Os aplausos são uma forma de reconhecer o esforço de quem apresentou",
+        dica: "🌟 Pista: volte ao texto e releia este trecho — “Os aplausos são uma forma de reconhecer o esforço de quem apresentou”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Um reconhecimento do esforço de quem apresentou”. É isso que os aplausos representam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -259,8 +282,57 @@ export const aula4: AulaPortuguesV4 = {
         ],
         feedbackAcerto: "🎉 Muito bem! Você reconheceu os passos certos da missão final.",
         feedbackErro: "Pense: rascunho, revisão e treino fazem parte da preparação; jogar o rascunho fora sem reler, não.",
+        dica: "🌟 Pista: lembre que preparar um texto envolve rascunho, revisão e treino — nunca jogar fora sem reler.",
       },
     },
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Minha obra para o Sarau da Conquista",
+    instrucao:
+      "Chegou a sua vez de criar! Escolha um gênero — poema, cena teatral ou fala — e escreva sua obra em três etapas: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL, pronta para o sarau.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva sua obra para o Sarau da Conquista",
+        comando:
+          "Escolha um gênero (poema, cena teatral curta ou fala expositiva) e um assunto que você goste. Escreva sua produção com começo, meio e fim, usando tudo o que aprendeu nesta jornada: boa ortografia, concordância correta e ideias organizadas.",
+        linhas: 6,
+        modelo: [
+          "Minha voz é um vento,/ que sopra sem parar,/ carrega sonhos e ideias/ que ninguém pode calar.",
+          "NARRADOR: Era uma vez uma turma cheia de coragem.",
+          "ANA (sorrindo): Hoje eu vou mostrar tudo o que aprendi!",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Revisei a ortografia e a concordância entre as palavras.",
+          "Escolhi bem as palavras, sem repetir a mesma várias vezes.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "Meu texto está caprichado e pronto para ser apresentado no sarau.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Jornada Chega ao Fim",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO, como se estivesse apresentando no sarau — respeitando vírgula, ponto e travessão.",
+    texto: [
+      "Ao longo desta jornada, você aprendeu a ler com atenção, encontrando o tema e a ideia central de cada texto. Aprendeu também a escrever com ortografia correta, a usar bem a concordância entre as palavras e a reconhecer diferentes gêneros, como notícias, poemas, cartas e cenas de teatro.",
+      "Mais do que isso, você descobriu que escrever é um processo: primeiro vêm as ideias soltas no rascunho, depois a revisão cuidadosa, e por fim a versão caprichada, pronta para ser lida em voz alta com confiança.",
+      "Agora chegou o momento de celebrar tudo isso no Sarau da Conquista. Suba ao palco, respire fundo e mostre, com sua própria voz, tudo o que você é capaz de criar.",
+    ],
+    metaSegundos: 75,
   },
 
   momento09_revisao: {
@@ -280,6 +352,9 @@ export const aula4: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! O rascunho é a primeira etapa, onde as ideias saem sem medo de errar.",
       feedbackErro: "Releia a explicação: primeiro vem o rascunho, depois a revisão e a versão final.",
+      dica: "🌟 Pista: lembre que o processo de escrita sempre começa soltando as ideias, sem se preocupar com erros.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “O rascunho”. É a primeira etapa do processo de escrita. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -296,6 +371,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Sarau é uma festa de apresentações.",
         feedbackErro: "Sarau é um encontro festivo para apresentar poemas, cenas ou falas.",
+        dica: "🌟 Pista: lembre que o sarau é um encontro para apresentar poemas, cenas ou falas diante de uma plateia.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma festa de apresentações de textos”. É isso que significa a palavra sarau. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — Quais gêneros o aluno pode escolher para a missão final?",
@@ -308,6 +386,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! O aluno escolhe entre poema, cena teatral ou fala expositiva.",
         feedbackErro: "Os gêneros da missão final são poema, cena teatral e fala expositiva.",
+        dica: "🌟 Pista: lembre dos três gêneros apresentados no caderno do sarau: poema, cena teatral e fala.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Poema, cena teatral e fala expositiva”. Esses são os gêneros da missão final. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — Qual é a ordem certa do processo de escrita?",
@@ -320,6 +401,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Primeiro o rascunho, depois a revisão, e por fim a versão final.",
         feedbackErro: "A ordem certa é: rascunho, revisão e versão final.",
+        dica: "🌟 Pista: lembre que todo processo de escrita segue esta ordem: rascunho, depois revisão, e por fim a versão final.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Rascunho, revisão, versão final”. É essa a ordem certa. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — O que significa revisar um texto?",
@@ -332,6 +416,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Revisar é reler com atenção para corrigir e melhorar o texto.",
         feedbackErro: "Revisar é reler o texto com calma, corrigindo ortografia e concordância.",
+        dica: "🌟 Pista: lembre que revisar é reler o texto com calma, corrigindo o que precisa ser melhorado.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Reler com atenção, corrigindo ortografia e concordância”. É isso que significa revisar. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — O que ajuda numa boa apresentação no sarau?",
@@ -344,6 +431,9 @@ export const aula4: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Sarau da Conquista celebrado! Boa entonação, volume e postura fazem uma apresentação de sucesso.",
         feedbackErro: "Uma boa apresentação usa entonação, volume de voz e postura adequados.",
+        dica: "🌟 Pista: lembre da Roda da Fala — uma boa apresentação usa entonação, volume de voz e postura.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Boa entonação, volume de voz e postura”. É isso que ajuda numa apresentação de sucesso. Caso encerrado! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -365,5 +455,6 @@ export const aula4: AulaPortuguesV4 = {
   recompensa: {
     xp: 200,
     moedas: 120,
+    medalha: "Estrela da Conquista",
   },
 };

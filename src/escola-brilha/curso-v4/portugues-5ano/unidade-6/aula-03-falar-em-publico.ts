@@ -128,6 +128,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Exposição oral é apresentar um assunto organizado para ouvintes.",
         feedbackErro: "Releia: 'apresenta um assunto de forma organizada para um grupo de ouvintes'.",
         ondeEstaNoTexto: "acontece quando alguém apresenta um assunto de forma organizada para um grupo de ouvintes",
+        dica: "🎤 Pista: volte ao texto e releia — “apresenta um assunto de forma organizada para um grupo de ouvintes”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma apresentação organizada de um assunto para um grupo de ouvintes”. É exatamente essa a definição de exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que é entonação, segundo o texto?",
@@ -141,6 +144,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! Entonação é variar o tom da voz.",
         feedbackErro: "Releia: 'variar o tom da voz para dar emoção e destacar o que é mais importante'.",
         ondeEstaNoTexto: "variar o tom da voz ao falar, para dar emoção e destacar as partes mais importantes",
+        dica: "🎤 Pista: volte ao texto e releia — “variar o tom da voz ao falar, para dar emoção e destacar as partes mais importantes”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Variar o tom da voz para dar emoção e destacar o que é importante”. Essa é a definição de entonação no texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Na fala de Sofia, o que ela destacou usando uma voz mais forte?",
@@ -154,6 +160,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Ela destacou o número '400 anos' com voz mais forte.",
         feedbackErro: "Releia: '(voz mais forte, destacando o número) Por isso, separar o lixo...'",
         ondeEstaNoTexto: "voz mais forte, destacando o número",
+        dica: "🎤 Pista: volte ao texto e releia — “(voz mais forte, destacando o número) Por isso, separar o lixo em casa...”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O número de anos que a garrafa leva para se decompor”. Sofia usou voz mais forte para destacar esse dado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -167,6 +176,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Estamos na Roda da Fala.",
         feedbackErro: "Releia a motivação: 'Chegamos à Roda da Fala!'",
+        dica: "🎤 Pista: releia a fala inicial do Brilha — “Chegamos à Roda da Fala!”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Na Roda da Fala”. É lá que Brilha e a turma estão treinando a fala em público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Sobre qual assunto Sofia fez sua exposição oral?",
@@ -174,6 +186,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Sofia falou sobre a importância de reciclar o lixo.",
         feedbackErro: "Releia: 'eu vou falar sobre a importância de reciclar o lixo'.",
+        dica: "🎤 Pista: volte ao texto e releia — “eu vou falar sobre a importância de reciclar o lixo”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Reciclagem do lixo”. Foi esse o assunto escolhido por Sofia na exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -218,6 +233,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! É normal sentir nervosismo antes de falar em público.",
         feedbackErro: "Releia: 'É normal sentir NERVOSISMO antes de falar em público'.",
         ondeEstaNoTexto: "É normal sentir NERVOSISMO antes de falar em público",
+        dica: "🎤 Pista: volte ao texto e releia — “É normal sentir NERVOSISMO antes de falar em público”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Nervosismo”. É normal sentir isso antes de falar em público, até para adultos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Qual dica o texto dá para controlar o nervosismo?",
@@ -231,6 +249,9 @@ export const aula3: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! Respirar fundo ajuda a acalmar antes de falar.",
         feedbackErro: "Releia: 'respirar fundo três vezes antes de começar ajuda a acalmar o coração'.",
         ondeEstaNoTexto: "respirar fundo três vezes antes de começar ajuda a acalmar o coração e organizar os pensamentos",
+        dica: "🎤 Pista: volte ao texto e releia — “respirar fundo três vezes antes de começar ajuda a acalmar o coração e organizar os pensamentos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Respirar fundo três vezes antes de começar”. Essa é a dica que o texto dá para controlar o nervosismo. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -271,6 +292,9 @@ export const aula3: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Respirar fundo ajuda a controlar o nervosismo.",
       feedbackErro: "Releia a explicação: respirar fundo acalma o coração antes de falar.",
+      dica: "🎤 Pista: lembre que respirar fundo antes de começar ajuda a acalmar o coração e organizar os pensamentos.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Respirar fundo antes de começar”. Isso acalma o coração e ajuda a organizar as ideias antes da fala. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
