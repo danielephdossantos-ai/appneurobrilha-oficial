@@ -311,6 +311,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Isso! Exposição oral é uma apresentação organizada.",
         feedbackErro: "Exposição oral é apresentar um assunto de forma organizada para ouvintes.",
+        dica: "🎤 Pista: lembre que a exposição oral é sempre organizada — tem começo, meio e fim, e é para um grupo de ouvintes.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma apresentação organizada de um assunto para ouvintes”. Essa é a definição de exposição oral. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é entonação?",
@@ -323,6 +326,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! Entonação é variar o tom da voz.",
         feedbackErro: "Entonação é a variação do tom de voz para dar emoção e destaque.",
+        dica: "🎤 Pista: entonação tem a ver com o TOM da voz — mais alto, mais baixo, mais forte ou mais suave.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Variar o tom da voz para dar emoção e destaque”. Isso é a entonação. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é o volume de voz correto ao falar em público?",
@@ -335,6 +341,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O volume deve permitir que todos ouçam, sem gritar.",
         feedbackErro: "O volume de voz correto é alto o suficiente para todos ouvirem, sem exagerar.",
+        dica: "🎤 Pista: pense no tamanho da sala — o volume precisa alcançar todo mundo, sem ser exagerado.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Falar alto o suficiente para todos ouvirem, sem gritar”. Esse é o volume de voz ideal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — O que é uma boa postura ao falar em público?",
@@ -347,6 +356,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Exato! Boa postura é ficar de frente, olhando para a plateia.",
         feedbackErro: "Boa postura é ficar de frente para a plateia, com o olhar levantado.",
+        dica: "🎤 Pista: pense em como um bom apresentador fica de pé, de frente para quem o escuta, olhando para as pessoas.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Ficar de frente para a plateia, com o olhar levantado”. Essa é a boa postura ao falar em público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — O que ajuda a controlar o nervosismo antes de falar?",
@@ -359,6 +371,9 @@ export const aula3: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Roda da Fala conquistada! Respirar fundo ajuda a controlar o nervosismo.",
         feedbackErro: "Respirar fundo antes de começar ajuda a acalmar o coração.",
+        dica: "🎤 Pista: lembre da dica principal do texto: respirar fundo antes de começar acalma o coração e organiza os pensamentos.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Respirar fundo antes de começar”. Isso é o que ajuda a controlar o nervosismo. Roda da Fala conquistada! Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
