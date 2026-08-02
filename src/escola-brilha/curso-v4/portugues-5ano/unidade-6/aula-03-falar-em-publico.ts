@@ -275,6 +275,55 @@ export const aula3: AulaPortuguesV4 = {
     },
   },
 
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Meu Roteiro de Fala",
+    instrucao:
+      "Todo bom orador escreve um roteiro antes de falar. Primeiro faça o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva o roteiro de uma exposição oral curta",
+        comando:
+          "Escolha um assunto que você conhece bem (um animal, um esporte, um livro). Escreva um pequeno roteiro com uma frase de saudação, uma frase que apresenta o tema e uma frase final de conclusão.",
+        linhas: 5,
+        modelo: [
+          "Bom dia, turma! Hoje eu vou falar sobre os golfinhos.",
+          "Os golfinhos são animais muito inteligentes e vivem em grupos.",
+          "Eles usam sons para se comunicar entre si, quase como uma linguagem.",
+          "Por isso, cuidar dos oceanos é importante para proteger esses animais.",
+        ],
+        checklist: [
+          "Meu roteiro tem começo, meio e fim.",
+          "Comecei com uma saudação para a plateia.",
+          "Apresentei claramente o assunto (tema) da minha fala.",
+          "Usei uma frase de conclusão no final.",
+          "Li em voz alta e cuidei da entonação e do volume.",
+          "Pensei em como será minha postura ao apresentar.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (~130 ppm · 5º ano)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: Falando com Confiança",
+    instrucao:
+      "Leia o mesmo texto três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. Pratique como se estivesse falando para uma plateia.",
+    texto: [
+      "Falar em público fica mais fácil com prática. Antes de começar, respire fundo três vezes e organize suas ideias em começo, meio e fim. Isso ajuda a controlar o nervosismo e a lembrar do que você quer dizer.",
+      "Durante a fala, cuide de três coisas: a entonação, variando o tom da voz nas partes importantes; o volume, falando alto o suficiente para todos ouvirem; e a postura, ficando de frente para a plateia, com o olhar levantado.",
+      "Se você esquecer uma palavra, não se preocupe — respire, faça uma pausa e continue. A plateia está ali para aprender com você, e cada apresentação é uma chance de ficar mais confiante.",
+    ],
+    metaSegundos: 65,
+  },
+
   momento09_revisao: {
     pontos: [
       "A EXPOSIÇÃO ORAL é uma apresentação organizada de um assunto para ouvintes.",
