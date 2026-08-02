@@ -50,6 +50,7 @@ export const aula1: AulaPortuguesV4 = {
       respostaCerta: 1,
       feedbackAcerto: "🎉 Isso mesmo! Vamos aprender a planejar as ideias antes de começar a escrever.",
       feedbackErro: "Pense na bússola: ela ajuda a escolher o caminho antes de andar. É sobre planejar o texto antes de escrever.",
+      dica: "🗺️ Pista do mapa: repare que a bússola e o lápis aparecem juntos — isso mostra que a aula é sobre se organizar ANTES de escrever, e não sobre desenho ou decoração.",
     },
   },
 
@@ -125,6 +126,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! O público são as pessoas que vão ler o texto.",
         feedbackErro: "Releia: 'quem vai ler este texto? Essa é a pergunta sobre o PÚBLICO.'",
         ondeEstaNoTexto: "quem vai ler este texto? Essa é a pergunta sobre o PÚBLICO",
+        dica: "🗺️ Pista do mapa: volte ao texto e releia este trecho — “quem vai ler este texto? Essa é a pergunta sobre o PÚBLICO”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “As pessoas que vão ler o texto”. O público é sempre quem vai ler o que você escreveu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "O que é o roteiro (ou esquema) de um texto?",
@@ -138,6 +142,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O roteiro organiza a ordem das ideias antes da escrita.",
         feedbackErro: "Releia: 'o escritor organiza suas ideias em um ROTEIRO... É como fazer uma listinha.'",
         ondeEstaNoTexto: "o escritor organiza suas ideias em um ROTEIRO, também chamado de ESQUEMA",
+        dica: "🗺️ Pista do mapa: volte ao texto e releia este trecho — “o escritor organiza suas ideias em um ROTEIRO, também chamado de ESQUEMA”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma lista com a ordem das ideias, feita antes de escrever”. O roteiro é como uma listinha da ordem das ideias. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "No exemplo de planejamento do texto, qual era o objetivo do escritor?",
@@ -151,6 +158,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Exato! O objetivo era convencer os colegas a participar da campanha.",
         feedbackErro: "Releia: 'Objetivo: convencê-los a participar da campanha de arrecadação de livros.'",
         ondeEstaNoTexto: "Objetivo: convencê-los a participar da campanha de arrecadação de livros",
+        dica: "🗺️ Pista do mapa: volte ao texto e releia este trecho — “Objetivo: convencê-los a participar da campanha de arrecadação de livros”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Convencer os colegas a participar da campanha de livros”. No exemplo do texto, esse era o objetivo declarado. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -164,6 +174,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! O roteiro começava com a chegada.",
         feedbackErro: "Releia: '1) como foi a chegada; 2) o que de mais legal aconteceu; 3) como foi a despedida.'",
+        dica: "🗺️ Pista do mapa: releia a ordem do roteiro — ela começa sempre pelo primeiro momento da viagem, a chegada.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Como foi a chegada”. O roteiro do exemplo começava por esse ponto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Para quem era destinado o texto sobre a campanha de arrecadação de livros?",
@@ -171,6 +184,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Correto! O público eram os colegas de turma.",
         feedbackErro: "Releia: 'Público: meus colegas de turma.'",
+        dica: "🗺️ Pista do mapa: releia o planejamento do exemplo — o campo 'Público' diz claramente quem vai ler o texto.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para os colegas de turma”. O planejamento do exemplo diz isso no campo Público. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -215,6 +231,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Isso! Primeiro anotamos as ideias, depois organizamos.",
         feedbackErro: "Releia: 'o escritor lê tudo o que anotou e decide o que é mais importante e em que ordem cada ideia vai aparecer'.",
         ondeEstaNoTexto: "o escritor lê tudo o que anotou e decide o que é mais importante e em que ordem cada ideia vai aparecer no texto",
+        dica: "🗺️ Pista do mapa: volte ao texto e releia este trecho — “o escritor lê tudo o que anotou e decide o que é mais importante e em que ordem cada ideia vai aparecer”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Anotá-las e depois organizar a ordem mais importante”. Primeiro soltamos as ideias, depois organizamos. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "Com o que o texto compara o processo de planejar um texto?",
@@ -223,6 +242,9 @@ export const aula1: AulaPortuguesV4 = {
         feedbackAcerto: "🎉 Correto! O texto compara com montar um quebra-cabeça.",
         feedbackErro: "Releia: 'É como montar um quebra-cabeça: primeiro espalhamos todas as peças...'",
         ondeEstaNoTexto: "É como montar um quebra-cabeça: primeiro espalhamos todas as peças na mesa",
+        dica: "🗺️ Pista do mapa: volte ao texto e releia este trecho — “É como montar um quebra-cabeça: primeiro espalhamos todas as peças na mesa”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Com um quebra-cabeça”. O texto usa essa comparação para explicar o planejamento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
@@ -265,6 +287,9 @@ export const aula1: AulaPortuguesV4 = {
       correta: 1,
       feedbackAcerto: "🎉 Isso! Pensar no público e no objetivo é o primeiro passo do planejamento.",
       feedbackErro: "Releia a explicação: antes de escrever, pensamos em quem vai ler e para que serve o texto.",
+      dica: "🗺️ Pista do mapa: lembre que, antes de escolher palavras ou papel, todo escritor pensa primeiro em QUEM vai ler e PARA QUE serve o texto.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “No público (o prefeito) e no objetivo (pedir a praça)”. Esses são sempre os dois primeiros passos do planejamento. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
     },
   },
 
@@ -276,6 +301,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Público é quem vai ler o texto.",
         feedbackErro: "Público são as pessoas que vão ler o texto.",
+        dica: "🗺️ Pista do mapa: pense em quem vai LER o texto quando ele estiver pronto — essa é a definição de público.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Pensar em quem vai ler o texto”. O público são as pessoas que vão ler o que você escreveu. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "2/5 — O que é o objetivo de um texto?",
@@ -283,6 +311,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Correto! Objetivo é o motivo de escrever: narrar, explicar, convencer, divertir.",
         feedbackErro: "Objetivo é para que serve o texto: contar, explicar, convencer ou divertir.",
+        dica: "🗺️ Pista do mapa: pense no PORQUÊ de escrever o texto — contar, explicar, convencer ou divertir. Isso é o objetivo.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O motivo pelo qual se escreve”. O objetivo é sempre para que serve o texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "3/5 — O que é um roteiro ou esquema de texto?",
@@ -295,6 +326,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 0,
         feedbackAcerto: "🎉 Exato! O roteiro organiza as ideias antes de escrever.",
         feedbackErro: "Roteiro é a ordem planejada das ideias do texto.",
+        dica: "🗺️ Pista do mapa: o roteiro é feito ANTES de escrever, como uma listinha da ordem das ideias.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Uma lista de ideias na ordem em que vão aparecer no texto”. O roteiro organiza as ideias antes da escrita. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "4/5 — O que é um rascunho?",
@@ -302,6 +336,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Rascunho é a primeira tentativa de escrita.",
         feedbackErro: "Rascunho é a primeira versão, que ainda vai passar por revisão.",
+        dica: "🗺️ Pista do mapa: lembre que o rascunho é apenas a PRIMEIRA tentativa, ainda cheia de coisas para melhorar.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A primeira versão do texto, que ainda será revisada”. O rascunho nunca é a versão final. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
       {
         pergunta: "5/5 — Qual é a ordem correta do planejamento de um texto?",
@@ -314,6 +351,9 @@ export const aula1: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Muito bem! Primeiro pensamos no público, depois no objetivo, depois no roteiro, e só então escrevemos o rascunho.",
         feedbackErro: "A ordem certa é: público, objetivo, roteiro e por último o rascunho.",
+        dica: "🗺️ Pista do mapa: siga a ordem do mapa do escritor — primeiro quem vai ler, depois para quê, depois a ordem das ideias, e só então a escrita.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Público, objetivo, roteiro, rascunho”. Essa é a ordem certa do planejamento. Você concluiu a missão do mapa do escritor! 🌟 Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
       },
     ],
   },
