@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import type { AulaV4, Interacao } from "../types";
-import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking, normalizeLiteracyTextForSpeech } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
@@ -152,11 +152,13 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
     if (!sec) return;
     const clone = sec.cloneNode(true) as HTMLElement;
     clone.querySelectorAll('button, [role="button"], [data-no-tts], input, select, textarea').forEach((n) => n.remove());
-    const txt = (clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim();
+    const txt = normalizeLiteracyTextForSpeech((clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim());
     if (!txt) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(txt);
-    u.lang = "pt-BR"; u.rate = 0.98; u.pitch = 1;
+    u.lang = "pt-BR"; 
+    u.rate = 0.88; 
+    u.pitch = 1;
     u.onend = () => setFalando(false);
     u.onerror = () => setFalando(false);
     setFalando(true);

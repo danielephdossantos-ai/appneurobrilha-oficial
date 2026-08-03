@@ -313,14 +313,15 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       const chunk = chunks[i++];
       const u = new SpeechSynthesisUtterance(chunk);
       u.lang = "pt-BR";
-      u.rate = opts.rate ?? 0.72;
+      // Motor de Leitura Brilha: 0.72 para alfabetização, 0.88 para fluência natural
+      u.rate = opts.rate ?? 0.88;
       u.pitch = opts.pitch ?? 1;
       u.volume = opts.volume ?? 1;
       if (voice) u.voice = voice;
       // Pausa natural entre frases: mais tempo se terminou em ponto/interrogação/exclamação,
       // menos se terminou em vírgula/ponto-e-vírgula. Assim o TTS "respeita" a pontuação.
       const last = chunk.slice(-1);
-      const pausaMs = /[.!?]/.test(last) ? 750 : /[,;:]/.test(last) ? 420 : 260;
+      const pausaMs = /[.!?]/.test(last) ? 650 : /[,;:]/.test(last) ? 380 : 220;
       let advanced = false;
       const timeout = window.setTimeout(
         () => {
