@@ -303,8 +303,12 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
       </div>
 
       {explicacao && (
-        <div className={`mt-6 border-t border-white/10 pt-3 ${skin.teen ? "text-sm text-cyan-200/90 leading-relaxed" : "text-xs text-white/80 italic"}`}>
-          {explicacao}
+        <div className={`mt-6 border-t border-white/10 pt-3 ${skin.teen ? "text-base sm:text-lg text-cyan-200/90 leading-relaxed font-medium" : "text-xs text-white/80 italic"}`}>
+          {explicacao.split('\n').map((linha, idx) => (
+            <div key={idx} className={linha.trim().startsWith('>') ? "mt-2 text-rose-400 italic text-sm sm:text-base bg-rose-500/5 p-2 rounded-lg border border-rose-500/10" : ""}>
+              {linha.trim().startsWith('>') ? linha.replace('>', '').trim() : linha}
+            </div>
+          ))}
         </div>
       )}
 
