@@ -298,7 +298,7 @@ function AtlasFinalCard({
     <section className="pt-6">
       <div className="text-center mb-4">
         <div className="text-xs uppercase text-amber-300 tracking-widest">
-          Grande Projeto Final
+          Missão Final
         </div>
         <h2 className="text-2xl font-black">🎓 Grande Projeto Final</h2>
       </div>
