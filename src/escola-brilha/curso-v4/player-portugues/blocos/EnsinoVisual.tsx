@@ -132,6 +132,7 @@ function MaiusculaMinuscula({
 }: {
   bloco: Extract<EnsinoVisualBloco, { tipo: "maiusculaMinuscula" }>;
 }) {
+  const skin = useContext(KidsCtx);
   const [ativo, setAtivo] = useState<number | null>(null);
 
   const falarPar = (idx: number, maiuscula: string, minuscula: string, exemplo?: string) => {
