@@ -225,6 +225,7 @@ function FraseComPonto({
 }: {
   bloco: Extract<EnsinoVisualBloco, { tipo: "fraseComPonto" }>;
 }) {
+  const skin = useContext(KidsCtx);
   return (
     <div className="space-y-3">
       <div className={`rounded-xl border p-4 text-center leading-relaxed ${skin.teen ? "bg-cyan-500/10 border-cyan-400/30 text-cyan-50 text-lg sm:text-xl font-bold" : "bg-amber-500/10 border-amber-300/30 text-amber-100 text-sm"}`}>
