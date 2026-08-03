@@ -30,7 +30,7 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
     </TeenBlackboard>
   );
 
-  if (bloco.tipo === "lousaProfessor") return <LousaProfessor {...bloco} />;
+  if (bloco.tipo === "lousaProfessor") return <LousaProfessor titulo={bloco.titulo} conteudo={bloco.conteudo} explicacaoVoz={bloco.explicacaoVoz} />;
   if (bloco.tipo === "maiusculaMinuscula") return container(<MaiusculaMinuscula bloco={bloco} />);
   if (bloco.tipo === "fraseComPonto") return container(<FraseComPonto bloco={bloco} />);
   if (bloco.tipo === "alfabetoCompleto") return container(<AlfabetoCompleto bloco={bloco} />);
