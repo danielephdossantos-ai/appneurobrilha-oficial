@@ -1,5 +1,7 @@
 import type { CursoPortugues, UnidadePortugues } from "../types";
 import { unidade1 as unidade1Fase1 } from "./unidade-1";
+import { unidade2 as unidade2Fase2 } from "./unidade-2";
+import { unidade3 as unidade3Fase3 } from "./unidade-3";
 
 /**
  * Módulo de Aulas Extras (Língua Portuguesa)
@@ -16,25 +18,12 @@ export const unidade1: UnidadePortugues = {
   aulas: unidade1Fase1.aulas,
 };
 
-
 export const unidade2: UnidadePortugues = {
-  slug: "unidade-2-fase-2-detetive",
-  numero: 2,
-  titulo: "Fase 2: Linguagem Detetive (4º-5º Ano)",
-  subtitulo: "Resolução de Enigmas Linguísticos",
-  descricao: "Investigue padrões, lógica e organização da escrita.",
-  corTema: "#eab308", // Amarelo Neon (Fase 2)
-  aulas: []
+  ...unidade2Fase2
 };
 
 export const unidade3: UnidadePortugues = {
-  slug: "unidade-3-fase-3-analitica",
-  numero: 3,
-  titulo: "Fase 3: Linguagem Analítica (6º-9º Ano)",
-  subtitulo: "Alta Performance e Retórica",
-  descricao: "Domine a argumentação e a estrutura sintática complexa.",
-  corTema: "#3b82f6", // Azul Neon (Fase 3)
-  aulas: []
+  ...unidade3Fase3
 };
 
 const curso: CursoPortugues = {

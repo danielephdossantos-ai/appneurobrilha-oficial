@@ -15,7 +15,7 @@ export type BlocoLousa = {
   falaProfessor: string;
 };
 
-export type AulaExtraLousa = AulaPortuguesV4 & {
+export type AulaExtraLousa = Partial<AulaPortuguesV4> & {
   isAulaExtra: true;
   fase: "fase1" | "fase2" | "fase3";
   cenasLousa: Array<{
