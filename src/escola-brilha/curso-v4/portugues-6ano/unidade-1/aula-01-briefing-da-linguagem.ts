@@ -17,7 +17,7 @@ export const aula01: AulaPortuguesV4 = {
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Conexão Estabelecida: O Protocodificador",
-    historia: "Analista, recebi o sinal. O Labirinto da Linguagem está ativo. Nossa missão aqui é analisar a estrutura da comunicação humana como um sistema de dados. Esqueça o 'falar por falar' — você vai aprender a decodificar o que está escondido sob a superfície de cada mensagem. Como um arquiteto de sistemas, você verá que cada texto é uma construção com propósito, técnica e modelos precisos.",
+    historia: "Analista, o Labirinto da Linguagem está ativo. Esqueça o 'falar por falar'. Aqui, a língua é um sistema de alta precisão. Se você não entende as peças, você não domina a mensagem. Hoje, vamos aprender que cada texto tem uma ARQUITETURA. Você não vai apenas ler; você vai entender como cada peça foi encaixada para que a informação chegue ao destino sem erros. Preparado para o primeiro briefing?",
     imagemUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400",
   },
   momento02_previsao: {
@@ -64,8 +64,8 @@ export const aula01: AulaPortuguesV4 = {
   momento03_vocabulario: {
     instrucao: "Dicionário de Ativos: Termos técnicos da sua operação de analista.",
     cards: [
-      { palavra: "Sistema", explicacao: "Conjunto de partes que funcionam juntas de forma lógica. Na língua, as palavras são as peças e a gramática é o motor.", exemplo: "A língua é um sistema de signos que organiza o pensamento.", imagemUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=200" },
-      { palavra: "Código", explicacao: "Conjunto de regras para converter informação. Sem código, a mensagem vira ruído.", exemplo: "O português é nosso código de operação padrão.", imagemUrl: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&q=80&w=200" },
+      { palavra: "Sistema", explicacao: "É um conjunto de peças que trabalham juntas. Na língua, as palavras são as peças e as regras são o manual de montagem.", exemplo: "A língua é um sistema que organiza o pensamento para que o outro entenda.", imagemUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=200" },
+      { palavra: "Código", explicacao: "É o conjunto de sinais que usamos. Se eu falo 'Oi' e você entende, estamos usando o mesmo código: o Português.", exemplo: "O português é o código que usamos para decifrar este labirinto.", imagemUrl: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&q=80&w=200" },
     ],
   },
   momento04_leituraGuiada: {
@@ -109,15 +109,15 @@ export const aula01: AulaPortuguesV4 = {
         frases: [
           {
             texto: "O Labirinto está ativo.",
-            explicacao: "💡 MODELO A (PONTO FINAL): Usado para afirmar algo ou encerrar um dado. Ex: 'O sistema carregou.' e 'Ninguém entrou.'"
+            explicacao: "💡 MODELO A (PONTO FINAL): Usado para afirmar algo ou encerrar um dado. Ele avisa ao leitor: 'A informação acabou aqui'.\n> Ex: 'O sistema carregou.' e 'Ninguém entrou.'"
           },
           {
             texto: "Quem é o Analista?",
-            explicacao: "💡 MODELO B (INTERROGAÇÃO): Usado para buscar dados ou fazer perguntas. Ex: 'Qual o código?' e 'Onde você está?'"
+            explicacao: "💡 MODELO B (INTERROGAÇÃO): Usado para buscar dados ou fazer perguntas. Ele sinaliza uma dúvida que precisa de resposta.\n> Ex: 'Qual o código?' e 'Onde você está?'"
           },
           {
             texto: "Acesso negado!",
-            explicacao: "💡 MODELO C (EXCLAMAÇÃO): Usado para alertas críticos, ordens ou emoção. Ex: 'Pare agora!' e 'Incrível!'"
+            explicacao: "💡 MODELO C (EXCLAMAÇÃO): Usado para alertas críticos, ordens ou emoção. Ele aumenta o 'volume' da mensagem.\n> Ex: 'Pare agora!' e 'Incrível!'"
           }
         ]
       }
