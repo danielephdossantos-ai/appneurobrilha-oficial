@@ -304,7 +304,7 @@ export function QuizTexto({
             let estado = "";
             if (!travado) {
               estado = skin.teen
-                ? `bg-slate-800 border-2 border-cyan-900/50 text-cyan-100 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105 active:scale-95`
+                ? `bg-slate-800 border-2 border-slate-700 text-slate-300 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105 active:scale-95`
                 : `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
             } else if (marcada && certa) {
               estado = skin.teen
