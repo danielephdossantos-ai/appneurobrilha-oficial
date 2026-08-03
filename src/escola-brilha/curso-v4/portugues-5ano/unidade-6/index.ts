@@ -1,8 +1,8 @@
 import type { UnidadePortugues } from "../../types";
-import { aula01 } from "./aula-01-poesia-ritmo-e-rima";
-import { aula02 } from "./aula-02-texto-teatral";
-import { aula03 } from "./aula-03-falar-em-publico";
-import { aula04 } from "./aula-04-missao-final-sarau-da-conquista";
+import { aula1 as aula01 } from "./aula-01-poesia-ritmo-e-rima";
+import { aula2 as aula02 } from "./aula-02-texto-teatral";
+import { aula3 as aula03 } from "./aula-03-falar-em-publico";
+import { aula4 as aula04 } from "./aula-04-missao-final-sarau-da-conquista";
 
 export const unidade6: UnidadePortugues = {
   numero: 6,
