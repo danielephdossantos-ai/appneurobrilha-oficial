@@ -123,17 +123,17 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
-/** Paleta "teen" (6º ano+): Ciano neon sobre Slate escuro. */
+/** Paleta "teen" (6º ano+): Neon Colorido sobre Slate escuro. */
 const CORES_TEEN: Record<string, string> = {
-  m1: "#06b6d4",
-  m2: "#0891b2",
-  m3: "#0e7490",
+  m1: "#f43f5e", // Rose neon (8º ano)
+  m2: "#fbbf24", // Amber (8º ano)
+  m3: "#10b981", // Emerald (8º ano)
   mev: "#a78bfa",
-  m4: "#22d3ee",
-  m5: "#f43f5e",
-  m6: "#e879f9",
-  m7: "#06b6d4",
-  m8: "#0891b2",
+  m4: "#06b6d4", // Ciano (6º/7º ano)
+  m5: "#ef4444",
+  m6: "#8b5cf6",
+  m7: "#f97316",
+  m8: "#06b6d4",
   mesc: "#f472b6",
   mflu: "#34d399",
   mmini: "#fb7185",
@@ -157,7 +157,7 @@ export function PlayerPortuguesV4(props: Props) {
 function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
 
-  const teen = cursoSlug === "portugues-6ano" || cursoSlug === "portugues-7ano";
+  const teen = cursoSlug === "portugues-6ano" || cursoSlug === "portugues-7ano" || cursoSlug === "portugues-8ano" || cursoSlug === "portugues-9ano";
   const tween =
     cursoSlug === "portugues-3ano" ||
     cursoSlug === "portugues-4ano" ||
@@ -274,7 +274,7 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
           aria-hidden
           style={{
             backgroundImage: teen
-              ? "linear-gradient(rgba(6,182,212,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,.25) 1px, transparent 1px)"
+              ? `linear-gradient(${aula.recompensa.moedas > 50 ? 'rgba(244,63,94,.25)' : 'rgba(6,182,212,.25)'} 1px, transparent 1px), linear-gradient(90deg, ${aula.recompensa.moedas > 50 ? 'rgba(244,63,94,.25)' : 'rgba(6,182,212,.25)'} 1px, transparent 1px)`
               : "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
             backgroundSize: teen ? "24px 24px" : "42px 42px",
           }}
