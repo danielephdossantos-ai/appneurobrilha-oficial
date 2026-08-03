@@ -1,1 +1,7 @@
-export const unidade9 = { numero: 9, titulo: "Projeto Final: O Manifesto", aulas: [] };
+import { aula19 } from "./aula-19-o-manifesto-vozes";
+
+export const unidade9 = {
+  numero: 9,
+  titulo: "Vozes do Futuro",
+  aulas: [aula19],
+};
