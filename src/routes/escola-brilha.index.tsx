@@ -226,6 +226,25 @@ function EscolaBrilhaCatalogo() {
         {/* Revisões automáticas recomendadas */}
         <RevisoesRecomendadas childId={activeChild?.id} />
 
+        {/* Aulas Extras° — Lousa Virtual */}
+        <Link
+          to="/escola-brilha/curso/$slug"
+          params={{ slug: "portugues-aulas-extras" }}
+          className="mb-2 mt-2 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+          style={{ background: "linear-gradient(135deg, #1a1033, #f59e0b)" }}
+        >
+          <div>
+            <div className="text-[10px] uppercase tracking-widest opacity-90">
+              🧑‍🏫 Aulões de Lousa · 1º ao 9º Ano
+            </div>
+            <div className="text-lg leading-tight mt-0.5">Aulas Extras°</div>
+            <div className="text-[11px] font-bold opacity-85 mt-0.5">
+              Prova amanhã? Descomplicações rápidas na lousa.
+            </div>
+          </div>
+          <span className="text-xs font-bold opacity-90">Abrir →</span>
+        </Link>
+
         {/* Atalho para escolher os professores */}
         <Link
           to="/escola-brilha/professores"
@@ -236,6 +255,7 @@ function EscolaBrilhaCatalogo() {
           </span>
           <span className="text-xs font-bold opacity-80">Escolher / Desbloquear →</span>
         </Link>
+
 
         {/* Ler com Aurora, Contar com Pip e Biblioteca Encantada foram movidos para Neuro Treino */}
 
