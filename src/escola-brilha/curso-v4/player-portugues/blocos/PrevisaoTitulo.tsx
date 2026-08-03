@@ -215,11 +215,13 @@ function RecadoPapel({
             key={i}
             className={
               ehCartaz
-                ? "text-[#1a0d3d] font-black text-2xl leading-tight uppercase tracking-wide mb-1"
+                ? `font-black leading-tight uppercase tracking-wide mb-1 ${
+                    linha.trim().startsWith(">") ? "text-lg text-rose-600/80 italic font-medium lowercase" : "text-[#1a0d3d] text-2xl"
+                  }`
                 : "text-[#1a0d3d] font-medium text-base leading-7"
             }
           >
-            {linha || "\u00A0"}
+            {linha.trim().startsWith(">") ? linha.replace(">", "").trim() : (linha || "\u00A0")}
           </div>
         ))}
       </div>
