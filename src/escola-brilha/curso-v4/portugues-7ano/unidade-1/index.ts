@@ -4,8 +4,9 @@ import { aula03 } from "../../portugues-6ano/unidade-1/aula-03-generos-digitais-
 import { aula04 } from "../../portugues-6ano/unidade-1/aula-04-hipertexto-e-links";
 import { aula05 } from "../../portugues-6ano/unidade-1/aula-05-comentario-de-post";
 
-export const unidade1 = {
+export const unidade1: any = {
   id: "unidade-1",
+  numero: 1,
   titulo: "O Observatório da Linguagem",
   aulas: [aula01, aula02, aula03, aula04, aula05],
 };
