@@ -85,13 +85,13 @@ export const aulaSvsZ: AulaExtraLousa = {
     }
   ],
 
-  // Momentos padrão (mínimo para compatibilidade com Player V4 se necessário)
+  // Momentos padrão obrigatórios para AulaPortuguesV4
   momento01_motivacao: {
     titulo: "Missão Espião",
     historia: "Prepare sua lupa! Vamos descobrir como o S muda de voz.",
   },
   momento02_previsao: {
-    instrucao: "Toque na lousa para ver o S mudar.",
+    instrucao: "Pistas na lousa.",
     bloco: {
       titulo: "Previsão",
       pergunta: "O S vai mudar?",
@@ -102,7 +102,7 @@ export const aulaSvsZ: AulaExtraLousa = {
     }
   },
   momento03_vocabulario: {
-    instrucao: "Duas palavras da Coruja Ouvidão.",
+    instrucao: "Dicionário do Espião.",
     cards: [
       {
         palavra: "Espião",
@@ -129,6 +129,16 @@ export const aulaSvsZ: AulaExtraLousa = {
         feedbackErro: "Sim!",
       },
     ],
+  },
+  momento06_personagensCenario: {
+    instrucao: "Personagens",
+    perguntas: [{
+      pergunta: "Quem é o espião?",
+      opcoes: ["O S", "O A"],
+      correta: 0,
+      feedbackAcerto: "Isso!",
+      feedbackErro: "Não."
+    }]
   },
   momento07_sequencia: {
     instrucao: "Ordem",
@@ -158,17 +168,6 @@ export const aulaSvsZ: AulaExtraLousa = {
   },
   momento09_revisao: {
     pontos: ["S entre vogais = Z", "SS entre vogais = S"],
-  },
-  momento10_avaliacao: {
-    perguntas: [
-      {
-        pergunta: "Qual o som do S em 'ROSA'?",
-        opcoes: ["S", "Z"],
-        correta: 1,
-        feedbackAcerto: "Z!",
-        feedbackErro: "Z!"
-      }
-    ]
   },
   momento10_avaliacao: {
     perguntas: [

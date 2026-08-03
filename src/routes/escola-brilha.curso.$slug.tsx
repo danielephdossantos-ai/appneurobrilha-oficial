@@ -171,8 +171,7 @@ function TrilhaCurso() {
                           const isExtra = slug === "portugues-aulas-extras";
                           if (isExtra) {
                             navigate({
-                              to: "/escola-brilha/aula-extra-pt/$curso/$aula" as any,
-                              params: { curso: slug, aula: a.slug },
+                              to: ("/escola-brilha/aula-extra-pt/" + slug + "/" + a.slug) as any,
                             });
                           } else {
                             navigate({
