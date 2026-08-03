@@ -88,20 +88,40 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "Analise a diferença de estrutura entre um modelo informal e um modelo técnico.",
     blocos: [
       {
-        tipo: "frases",
-        titulo: "Modelo A: Bilhete Pessoal (Informal)",
+        tipo: "fraseComPonto",
         frases: [
-          "Oi, Analista! Deixei o sinal aberto na mesa. Passa lá depois? Bjs.",
-          "Estrutura: Saudação → Mensagem Curta → Despedida Afetiva."
+          {
+            texto: "Oi, Analista! Deixei o sinal aberto na mesa. Passa lá depois? Bjs.",
+            explicacao: "Modelo A (Informal): Saudação → Mensagem Curta → Despedida Afetiva."
+          },
+          {
+            texto: "PROTOCOLO 404: ACESSO PERMITIDO. AGENTE IDENTIFICADO. AGUARDANDO COMANDO.",
+            explicacao: "Modelo B (Técnico): Identificador → Status → Ação → Expectativa."
+          }
         ]
-      },
+      }
+    ]
+  },
+  momento_escrita: {
+    titulo: "Terminal de Produção",
+    instrucao: "Produza uma comunicação técnica estruturada seguindo o modelo.",
+    blocos: [
       {
-        tipo: "frases",
-        titulo: "Modelo B: Log de Sistema (Formal/Técnico)",
-        frases: [
-          "PROTOCOLO 404: ACESSO PERMITIDO. AGENTE IDENTIFICADO. AGUARDANDO COMANDO.",
-          "Estrutura: Identificador → Status → Ação → Expectativa."
-        ]
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Relatório de Incidente",
+        comando: "Escreva um log técnico informando que o sistema de segurança do labirinto foi decodificado por você.",
+        modelo: [
+          "LOG ID: 999",
+          "STATUS: SUCESSO",
+          "MENSAGEM: O labirinto foi aberto."
+        ],
+        checklist: [
+          "Usei letra maiúscula no início?",
+          "Usei um identificador (LOG ID)?",
+          "A mensagem está clara e direta?"
+        ],
+        cicloRevisao: true
       }
     ]
   },
