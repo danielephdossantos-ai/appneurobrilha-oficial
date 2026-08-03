@@ -19,10 +19,10 @@ export const aula01: AulaPortuguesV4 = {
     imagemUrl: "/assets/portugues/lab-logo.png"
   },
   momento02_previsao: {
-    instrucao: "Briefing: A Lógica da Persuasão.",
+    instrucao: "Analise o briefing",
     bloco: {
-      titulo: "Interceptação de Discurso",
-      pergunta: "Qual é o objetivo principal de um argumento no sistema de comunicação?",
+      titulo: "O que é Argumentar?",
+      pergunta: "Argumentar não é 'brigar'. É usar a lógica para provar um ponto de vista. Baseado nisso, qual o objetivo de um argumento?",
       hipoteses: [
         { texto: "Convencer ou influenciar o receptor" },
         { texto: "Apenas ocupar espaço no banco de dados" },
@@ -30,7 +30,7 @@ export const aula01: AulaPortuguesV4 = {
       ],
       respostaCerta: 0,
       feedbackAcerto: "Radar calibrado. Você entendeu que argumentar é uma ação estratégica.",
-      feedbackErro: "Pense no que alguém ganha ao provar um ponto."
+      feedbackErro: "Analise o que alguém ganha ao provar um ponto."
     }
   },
   momento03_vocabulario: {

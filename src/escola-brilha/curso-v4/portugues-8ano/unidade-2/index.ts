@@ -7,5 +7,5 @@ export const unidade2: UnidadePortugues = {
   subtitulo: "Análise de Opinião",
   descricao: "Explore como diferentes veículos de comunicação expressam seus pontos de vista.",
   corTema: "#fbbf24",
-  aulas: [], // Populadas via migração/reuso pedagógico
+  aulas: [], 
 };
