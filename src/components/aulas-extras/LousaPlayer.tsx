@@ -1,6 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BotaoOuvirEnunciado } from "../../escola-brilha/curso-v4/player-portugues/blocos/BotaoOuvirEnunciado";
+import { useFalaAutomatica } from "../../escola-brilha/curso-v4/player-portugues/audio-prefs";
+import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { ChevronRight, ChevronLeft, Download, Zap, Info, Play, CheckCircle2, XCircle } from "lucide-react";
 import type { AulaExtraLousa, BlocoLousa } from "../../escola-brilha/curso-v4/portugues-aulas-extras/types-extras";
@@ -11,30 +13,32 @@ import type { AulaExtraLousa, BlocoLousa } from "../../escola-brilha/curso-v4/po
  */
 export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConcluir?: () => void }) {
   const [cenaIdx, setCenaIdx] = useState(0);
-  const [passoIdx, setPassoIdx] = useState(-1); // -1 para estado inicial (só título)
   const cena = aula.cenasLousa[cenaIdx];
   const [mostrarMacete, setMostrarMacete] = useState(false);
   const [notaPai, setNotaPai] = useState<string | null>(null);
   const [quizRespondido, setQuizRespondido] = useState<number | null>(null);
 
+  // Sistema de Narrativa Sequencial Automática
+  const [blocoFalandoIdx, setBlocoFalandoIdx] = useState(-1);
+  const falaCompletaCena = useMemo(() => {
+    return cena.blocos.map(b => b.falaProfessor).filter(Boolean).join(". ");
+  }, [cena]);
+
   const prox = () => {
-    if (passoIdx < cena.blocos.length - 1) {
-      setPassoIdx(passoIdx + 1);
-    } else if (cenaIdx < aula.cenasLousa.length - 1) {
+    if (cenaIdx < aula.cenasLousa.length - 1) {
       setCenaIdx(cenaIdx + 1);
-      setPassoIdx(-1);
       setQuizRespondido(null);
+      setBlocoFalandoIdx(-1);
     } else {
       onConcluir?.();
     }
   };
 
   const voltar = () => {
-    if (passoIdx >= 0) {
-      setPassoIdx(passoIdx - 1);
-    } else if (cenaIdx > 0) {
+    if (cenaIdx > 0) {
       setCenaIdx(cenaIdx - 1);
-      setPassoIdx(aula.cenasLousa[cenaIdx - 1].blocos.length - 1);
+      setQuizRespondido(null);
+      setBlocoFalandoIdx(-1);
     }
   };
 
@@ -73,16 +77,22 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
             <p className="text-[10px] text-slate-400 font-bold uppercase">{cena.tituloLousa}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        
+        <div className="flex items-center gap-4">
           {cena.modoSocorro && (
             <button 
               onClick={() => setMostrarMacete(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/50 text-rose-400 text-[10px] font-black uppercase tracking-tighter hover:bg-rose-500/20 transition"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/50 text-rose-400 text-[10px] font-black uppercase tracking-tighter hover:bg-rose-500/20 transition"
             >
               <Zap size={14} fill="currentColor" />
               Socorro, Prova Amanhã!
             </button>
           )}
+
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/50 border border-slate-700">
+            <BotaoFalaAlternar />
+          </div>
+
           <button className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300">
             <Download size={18} />
           </button>
@@ -102,66 +112,66 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/black-chalkboard.png')]" />
           
           <div className="relative z-10 p-6 md:p-10 space-y-6">
-            <motion.h2 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-2xl md:text-4xl font-black text-white/90 border-b-2 border-white/20 pb-4 inline-block italic"
-              style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
-            >
-              {cena.tituloLousa}
-            </motion.h2>
+            <div className="flex items-center justify-between border-b-2 border-white/20 pb-4 mb-4">
+              <motion.h2 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={`title-${cenaIdx}`}
+                className="text-2xl md:text-4xl font-black text-white/90 italic"
+                style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
+              >
+                {cena.tituloLousa}
+              </motion.h2>
+
+              <BotaoOuvirEnunciado 
+                texto={falaCompletaCena}
+                rotulo="Ouvir Tudo"
+                auto={true}
+                className="bg-white/10 border-white/20 text-white"
+              />
+            </div>
 
             <div className="space-y-4">
-              {cena.blocos.map((bloco: BlocoLousa, idx: number) => (
+              {cena.blocos.map((bloco: BlocoLousa) => (
                 <AnimatePresence key={bloco.id}>
-                  {idx <= passoIdx && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className={cn(
-                        "relative group p-4 rounded-xl border-l-4 shadow-lg transition-all",
-                        corParaFundo(bloco.cor)
-                      )}
-                    >
-                      <div className="flex justify-between items-start gap-4">
-                        <div className="space-y-1">
-                          {bloco.tipo === "formula" && (
-                            <div className="text-[10px] font-black uppercase opacity-60 mb-1">Regra / Fórmula</div>
-                          )}
-                          <p className={cn(
-                            "text-lg md:text-xl font-bold leading-tight",
-                            bloco.tipo === "formula" ? "font-mono" : ""
-                          )}>
-                            {bloco.conteudo}
-                          </p>
-                        </div>
-                        
-                        {bloco.tipo === "nota-pais" && (
-                          <button 
-                            onClick={() => setNotaPai(bloco.conteudo)}
-                            className="shrink-0 w-8 h-8 rounded-full bg-blue-500/20 border border-blue-400/50 flex items-center justify-center text-blue-400 hover:bg-blue-500/40 transition"
-                            title="Nota para os Pais"
-                          >
-                            <Info size={16} />
-                          </button>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={cn(
+                      "relative group p-4 rounded-xl border-l-4 shadow-lg transition-all",
+                      corParaFundo(bloco.cor)
+                    )}
+                  >
+                    <div className="flex justify-between items-start gap-4">
+                      <div className="space-y-1">
+                        {bloco.tipo === "formula" && (
+                          <div className="text-[10px] font-black uppercase opacity-60 mb-1">Regra / Fórmula</div>
                         )}
-                        
-                        <div className="shrink-0 opacity-0 group-hover:opacity-100 transition">
-                          <BotaoOuvirEnunciado 
-                            texto={bloco.falaProfessor} 
-                            rotulo="Ouvir"
-                            className="bg-white/10 border-white/20 text-white"
-                          />
-                        </div>
+                        <p className={cn(
+                          "text-lg md:text-xl font-bold leading-tight",
+                          bloco.tipo === "formula" ? "font-mono" : ""
+                        )}>
+                          {bloco.conteudo}
+                        </p>
                       </div>
-                    </motion.div>
-                  )}
+                      
+                      {bloco.tipo === "nota-pais" && (
+                        <button 
+                          onClick={() => setNotaPai(bloco.conteudo)}
+                          className="shrink-0 w-8 h-8 rounded-full bg-blue-500/20 border border-blue-400/50 flex items-center justify-center text-blue-400 hover:bg-blue-500/40 transition"
+                          title="Nota para os Pais"
+                        >
+                          <Info size={16} />
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
                 </AnimatePresence>
               ))}
             </div>
 
             {/* Desafio Relâmpago no final da cena */}
-            {passoIdx === cena.blocos.length - 1 && cena.desafioRelampago && (
+            {cena.desafioRelampago && (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -211,7 +221,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
       <div className="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between">
         <button 
           onClick={voltar}
-          disabled={cenaIdx === 0 && passoIdx === -1}
+          disabled={cenaIdx === 0}
           className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none transition"
         >
           <ChevronLeft size={20} />
@@ -234,7 +244,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           onClick={prox}
           className="flex items-center gap-2 px-8 py-3 rounded-2xl bg-cyan-500 text-slate-900 font-black hover:bg-cyan-400 transition shadow-[0_0_20px_rgba(6,182,212,0.4)] active:scale-95"
         >
-          {passoIdx === cena.blocos.length - 1 && cenaIdx === aula.cenasLousa.length - 1 ? "Concluir" : "Próximo"}
+          {cenaIdx === aula.cenasLousa.length - 1 ? "Concluir" : "Próximo"}
           <ChevronRight size={20} />
         </button>
       </div>
@@ -328,5 +338,21 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+function BotaoFalaAlternar() {
+  const [ativa, setAtiva] = useFalaAutomatica();
+  return (
+    <button
+      onClick={() => setAtiva(!ativa)}
+      className={cn(
+        "flex items-center gap-2 text-[10px] font-black uppercase transition-all",
+        ativa ? "text-cyan-400" : "text-slate-500"
+      )}
+    >
+      {ativa ? <Volume2 size={16} /> : <VolumeX size={16} />}
+      <span className="hidden sm:inline">{ativa ? "Fala Ativa" : "Fala Muda"}</span>
+    </button>
   );
 }
