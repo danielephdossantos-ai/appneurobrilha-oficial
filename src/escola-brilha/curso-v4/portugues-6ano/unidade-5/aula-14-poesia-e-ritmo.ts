@@ -36,7 +36,7 @@ export const aula14: AulaPortuguesV4 = {
           "  DICA: A rima é o som igual",
           "  no final dos versos.     "
         ],
-        style: "cartaz",
+        estilo: "cartaz",
       },
       pergunta: "O que caracteriza a rima em uma poesia?",
       hipoteses: [
