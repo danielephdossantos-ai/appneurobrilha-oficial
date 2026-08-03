@@ -52,7 +52,7 @@ export function PlayerPortuguesTeen({
       setNarrando(null);
     } else if (texto) {
       setNarrando(n);
-      speakChunked(texto, 0.9, () => setNarrando(null));
+      speakChunked(texto, 0.9, undefined, () => setNarrando(null));
     }
   };
 
@@ -161,20 +161,24 @@ export function PlayerPortuguesTeen({
            </div>
            {aula.momento_escrita?.blocos.map((bloco, idx) => (
              <div key={idx} className="space-y-4">
-                <div className="text-slate-200 text-base">{bloco.comando}</div>
-                <div className="grid gap-2">
-                   {bloco.checklist?.map((item, i) => (
-                     <div key={i} className="flex items-center gap-2 text-xs text-slate-400">
-                        <Check className="h-3 w-3 text-emerald-500" />
-                        {item}
-                     </div>
-                   ))}
-                </div>
+                {bloco.tipo === "escritaReal" && (
+                  <>
+                    <div className="text-slate-200 text-base">{bloco.comando}</div>
+                    <div className="grid gap-2">
+                      {bloco.checklist?.map((item: string, i: number) => (
+                        <div key={i} className="flex items-center gap-2 text-xs text-slate-400">
+                           <Check className="h-3 w-3 text-emerald-500" />
+                           {item}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
              </div>
            ))}
         </div>
       ),
-      narracao: aula.momento_escrita?.blocos.map(b => b.comando).join(" "),
+      narracao: aula.momento_escrita?.blocos.map(b => b.tipo === "escritaReal" ? b.comando : "").join(" "),
     },
     {
       n: 6,
@@ -183,16 +187,18 @@ export function PlayerPortuguesTeen({
       titulo: "Avaliação de Competências",
       corpo: (
         <div className="space-y-6">
-           <div className="p-4 bg-slate-900/80 rounded-lg border border-slate-700">
-              <p className="text-slate-200 mb-4">{aula.momento10_avaliacao.perguntas[0].pergunta}</p>
-              <div className="grid gap-2">
-                 {aula.momento10_avaliacao.perguntas[0].opcoes.map((opt, i) => (
-                   <button key={i} className="text-left p-3 rounded border border-slate-700 hover:border-cyan-500 hover:bg-cyan-500/10 transition text-sm text-slate-300">
-                     {opt}
-                   </button>
-                 ))}
-              </div>
-           </div>
+           {aula.momento10_avaliacao.perguntas.map((pergunta, pIdx) => (
+             <div key={pIdx} className="p-4 bg-slate-900/80 rounded-lg border border-slate-700">
+                <p className="text-slate-200 mb-4">{pergunta.pergunta}</p>
+                <div className="grid gap-2">
+                   {pergunta.opcoes.map((opt, i) => (
+                     <button key={i} className="text-left p-3 rounded border border-slate-700 hover:border-cyan-500 hover:bg-cyan-500/10 transition text-sm text-slate-300">
+                       {opt}
+                     </button>
+                   ))}
+                </div>
+             </div>
+           ))}
         </div>
       ),
       narracao: aula.momento10_avaliacao.perguntas[0].pergunta,
