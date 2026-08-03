@@ -147,19 +147,19 @@ export const aula01: AulaPortuguesV4 = {
     ]
   },
   momento07_sequencia: {
-    instrucao: "Algoritmo de Construção: Ordem lógica dos dados.",
+    instrucao: "Laboratório de Estruturação: A Arquitetura do Sentido",
     bloco: {
-      instrucao: "Reordene os blocos para formar uma comunicação funcional.",
+      instrucao: "Organize as etapas para construir uma mensagem que realmente funcione, do pensamento à recepção.",
       itens: [
-        { id: "1", texto: "Definir o Objetivo (O que quero dizer?)", imagemUrl: "" },
-        { id: "2", texto: "Escolher o Código (Português, Visual?)", imagemUrl: "" },
-        { id: "3", texto: "Selecionar o Modelo (Bilhete, Jornal, Log?)", imagemUrl: "" },
-        { id: "4", texto: "Transmitir a Mensagem", imagemUrl: "" }
+        { id: "1", texto: "🧠 INTENÇÃO: O que eu quero que o outro sinta ou faça? (Objetivo)", imagemUrl: "" },
+        { id: "2", texto: "📚 ESCOLHA DO CÓDIGO: Vou usar palavras, gestos ou imagens? (Língua)", imagemUrl: "" },
+        { id: "3", texto: "📑 DEFINIÇÃO DO MODELO: Qual o melhor formato? (Gênero: Notícia, Bilhete, Log?)", imagemUrl: "" },
+        { id: "4", texto: "📡 TRANSMISSÃO: Enviar a mensagem para o alvo certo. (Comunicação)", imagemUrl: "" }
       ],
       ordemCerta: ["1", "2", "3", "4"],
-      feedbackAcerto: "Algoritmo otimizado. Você entende como o ensino da língua se transforma em ferramenta.",
-      feedbackErro: "Falha na sequência lógica. Reveja as etapas de construção.",
-      dica: "Primeiro planejamos, depois escolhemos o modelo, depois executamos.",
+      feedbackAcerto: "Arquitetura aprovada! Você entende que falar é planejar uma estrutura para ser compreendido.",
+      feedbackErro: "A estrutura falhou. Lembre-se: primeiro a intenção, depois as ferramentas, por fim o envio.",
+      dica: "Sem um objetivo claro (Intenção), o código e o modelo não fazem sentido.",
     },
   },
   momento08_leituraIndependente: {
