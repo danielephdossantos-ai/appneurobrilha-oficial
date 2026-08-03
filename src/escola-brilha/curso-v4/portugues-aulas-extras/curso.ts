@@ -1,11 +1,11 @@
 import type { CursoPortugues, UnidadePortugues } from "../types";
+import { unidade1 as unidade1Fase1 } from "./unidade-1";
 
 /**
  * Módulo de Aulas Extras (Língua Portuguesa)
  * Arquitetura de Aulões Interativos para o Fundamental I e II.
  */
 
-// Placeholder para unidades e aulas que serão populadas
 export const unidade1: UnidadePortugues = {
   slug: "unidade-1-fase-1-ludica",
   numero: 1,
@@ -13,8 +13,9 @@ export const unidade1: UnidadePortugues = {
   subtitulo: "Aventuras no Reino das Letras",
   descricao: "Aprenda regras de escrita através de histórias e metáforas.",
   corTema: "#ef4444", // Vermelho Neon (Fase 1)
-  aulas: []
+  aulas: unidade1Fase1.aulas,
 };
+
 
 export const unidade2: UnidadePortugues = {
   slug: "unidade-2-fase-2-detetive",
