@@ -733,6 +733,12 @@ export type MomentoLaboratorio = {
  */
 export type EnsinoVisualBloco =
   | {
+      tipo: "lousaProfessor";
+      titulo: string;
+      conteudo: string;
+      explicacaoVoz?: string;
+    }
+  | {
       tipo: "maiusculaMinuscula";
       /** Pares como {maiuscula:"A", minuscula:"a", exemplo:"ANA / amor"}. */
       pares: Array<{ maiuscula: string; minuscula: string; exemplo?: string }>;

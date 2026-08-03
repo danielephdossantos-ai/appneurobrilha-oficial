@@ -71,6 +71,12 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "O verbo é como uma bússola que aponta para o tempo certo.",
     blocos: [
       {
+        tipo: "lousaProfessor",
+        titulo: "Verbo SER: Quem eu sou?",
+        conteudo: "O verbo SER é um dos mais importantes!\n\nEle diz quem nós somos ou como algo é:\n\n- EU SOU um aluno brilhante.\n- VOCÊ É muito inteligente.\n- NÓS SOMOS uma equipe!\n\nNa lousa, o professor sempre destaca:\nO verbo muda para combinar com a pessoa!",
+        explicacaoVoz: "O verbo SER é um dos mais importantes da nossa língua. Ele define nossa identidade e estado. Eu sou, você é, nós somos. Percebeu como a palavra muda para combinar com quem está falando? Isso se chama conjugação!",
+      },
+      {
         tipo: "fraseComPonto",
         frases: [
           {

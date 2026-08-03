@@ -30,6 +30,7 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
     </TeenBlackboard>
   );
 
+  if (bloco.tipo === "lousaProfessor") return <LousaProfessor {...bloco} />;
   if (bloco.tipo === "maiusculaMinuscula") return container(<MaiusculaMinuscula bloco={bloco} />);
   if (bloco.tipo === "fraseComPonto") return container(<FraseComPonto bloco={bloco} />);
   if (bloco.tipo === "alfabetoCompleto") return container(<AlfabetoCompleto bloco={bloco} />);
@@ -37,7 +38,6 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "silabaTonica") return container(<SilabaTonica bloco={bloco} />);
   if (bloco.tipo === "rimas") return container(<Rimas bloco={bloco} />);
   if (bloco.tipo === "regraOrtografica") return container(<RegraOrtografica bloco={bloco} />);
-  if (bloco.tipo === "lousaProfessor") return <LousaProfessor {...bloco} />;
   return container(<ConscienciaFonemica bloco={bloco} />);
 }
 
