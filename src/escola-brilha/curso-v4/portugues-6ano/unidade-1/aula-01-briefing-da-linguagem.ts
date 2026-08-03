@@ -101,23 +101,23 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [],
   },
   momento_ensinoVisual: {
-    titulo: "Aulão: Decodificando a Arquitetura",
-    instrucao: "Analise o que é cada componente do sistema com exemplos reais.",
+    titulo: "Laboratório de Pontuação: Modelos de Fluxo",
+    instrucao: "Analise como a pontuação altera o modelo da mensagem e veja os exemplos práticos abaixo.",
     blocos: [
       {
         tipo: "fraseComPonto",
         frases: [
           {
-            texto: "🔑 O CÓDIGO (A Língua): É o conjunto de sinais que usamos.",
-            explicacao: "Pense no Código como as 'peças de LEGO'. O Português é o nosso código principal, mas existem outros como Libras ou sinais de trânsito."
+            texto: "O Labirinto está ativo.",
+            explicacao: "💡 MODELO A (PONTO FINAL): Usado para afirmar algo ou encerrar um dado. Ex: 'O sistema carregou.' e 'Ninguém entrou.'"
           },
           {
-            texto: "📐 O MODELO (O Gênero): É como montamos as peças.",
-            explicacao: "Se você monta as peças para informar um fato, o modelo é NOTÍCIA. Se monta para um recado rápido, o modelo é BILHETE."
+            texto: "Quem é o Analista?",
+            explicacao: "💡 MODELO B (INTERROGAÇÃO): Usado para buscar dados ou fazer perguntas. Ex: 'Qual o código?' e 'Onde você está?'"
           },
           {
-            texto: "📡 A TRANSMISSÃO: É o envio do pacote de dados.",
-            explicacao: "Pode ser via papel (jornal), ondas sonoras (fala) ou digital (WhatsApp)."
+            texto: "Acesso negado!",
+            explicacao: "💡 MODELO C (EXCLAMAÇÃO): Usado para alertas críticos, ordens ou emoção. Ex: 'Pare agora!' e 'Incrível!'"
           }
         ]
       }
