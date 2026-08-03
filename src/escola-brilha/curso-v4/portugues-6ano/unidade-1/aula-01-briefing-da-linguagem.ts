@@ -26,8 +26,8 @@ export const aula01: AulaPortuguesV4 = {
       titulo: "Interceptação e Análise",
       capaImagemUrl: "",
       pistas: [
-        "Todo sistema de comunicação possui um objetivo central.",
-        "A linguagem organiza informações para que elas não sejam apenas ruído."
+        { nome: "Todo sistema de comunicação possui um objetivo central.", imagemUrl: "" },
+        { nome: "A linguagem organiza informações para que elas não sejam apenas ruído.", imagemUrl: "" }
       ],
       recado: {
         rotulo: "Análise de Sistema",
