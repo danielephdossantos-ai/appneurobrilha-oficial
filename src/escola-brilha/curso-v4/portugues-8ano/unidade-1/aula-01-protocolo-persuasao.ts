@@ -1,49 +1,121 @@
-import type { AulaPortugues } from "../../types";
+import type { AulaPortuguesV4 } from "../../types";
 
-export const aula01: AulaPortugues = {
-  id: "lp8-u1-a1",
-  numero: 1,
+export const aula01: AulaPortuguesV4 = {
+  slug: "lp8-u1-a1",
   titulo: "Protocolo de Persuasão: O Texto Argumentativo",
-  cenas: [
-    {
-      tipo: "explicacao",
-      titulo: "Iniciando Scan de Lógica",
-      texto: "Bem-vindo ao Laboratório de Argumentação. \n\n🔊 \n\nNo 8º ano, a linguagem deixa de ser apenas informação e passa a ser **PODER**. Vamos aprender a transformar ideias em argumentos sólidos que ninguém pode derrubar.",
-      emoji: "🧠",
-    },
-    {
-      tipo: "explicacao",
+  iconeTrilha: "🧠",
+  bncc: ["EF08LP01", "EF08LP02"],
+  duracaoMin: 20,
+  momento01_motivacao: {
+    titulo: "Iniciando Scan de Lógica",
+    historia: "Bem-vindo ao Laboratório de Argumentação. No 8º ano, a linguagem deixa de ser apenas informação e passa a ser PODER. Vamos aprender a transformar ideias em argumentos sólidos que ninguém pode derrubar.",
+    imagemUrl: "/assets/portugues/lab-logo.png"
+  },
+  momento02_previsao: {
+    instrucao: "Analise o briefing",
+    bloco: {
       titulo: "O que é Argumentar?",
-      texto: "Argumentar não é 'brigar' ou 'gritar'. É usar a lógica para provar um ponto de vista. \n\n🔊 \n\n> **MODELO DE ESTRUTURA:** \n> 1. **Tese:** Sua ideia central (O que você defende). \n> 2. **Argumentos:** As provas (Por que você está certo). \n> 3. **Conclusão:** O fechamento (O que deve ser feito).",
-      emoji: "🏗️",
-    },
-    {
-      tipo: "pratica",
-      titulo: "Identificação de Tese",
-      texto: "Analise esta frase de um debate sobre tecnologia: \n\n🔊 \n\n'O uso excessivo de redes sociais prejudica o sono dos adolescentes.' \n\n🤔 Esta frase representa:",
-      opcoes: ["A tese principal", "Um argumento secundário", "Uma dúvida passageira"],
-      respostaCorreta: 0,
-      feedback: "Exato! A tese é a afirmação central que o autor vai tentar provar durante o texto.",
-      emoji: "👁️",
-    },
-    {
-      tipo: "explicacao",
-      titulo: "Fatos vs. Argumentos",
-      texto: "Um fato é uma verdade comprovada. Um argumento é a sua interpretação sobre esse fato. \n\n> **EXEMPLO:** \n> * **Fato:** Choveu hoje. \n> * **Argumento:** Como choveu, o trânsito ficará lento, então devemos sair mais cedo.",
-      emoji: "⚖️",
-    },
-    {
-      tipo: "desafio",
-      titulo: "Construindo Lógica",
-      texto: "Se a tese é: 'A escola deve ter mais aulas de robótica'. \n\n🔊 \n\nQual destes seria o melhor argumento para defendê-la?",
-      opcoes: [
-        "Porque robôs são legais e brilham.",
-        "Porque a tecnologia é a base do mercado de trabalho futuro.",
-        "Porque os alunos gostam de brincar.",
+      pergunta: "Argumentar não é 'brigar'. É usar a lógica para provar um ponto de vista. Baseado nisso, qual o objetivo de um argumento?",
+      hipoteses: [
+        { texto: "Vencer uma discussão no grito" },
+        { texto: "Provar um ponto com lógica" },
+        { texto: "Apenas falar sua opinião" }
       ],
-      respostaCorreta: 1,
-      feedback: "Perfeito! Um argumento forte precisa de uma justificativa lógica e relevante para a sociedade ou para o futuro.",
-      emoji: "🚀",
+      respostaCerta: 1,
+      feedbackAcerto: "Perfeito! A lógica é a base de um bom argumento.",
+      feedbackErro: "Tente novamente. O argumento busca convencer através da razão."
+    }
+  },
+  momento03_vocabulario: {
+    instrucao: "Termos do Laboratório",
+    cards: [
+      { palavra: "Tese", explicacao: "A ideia principal que você defende.", exemplo: "Minha tese é que o lazer melhora o estudo." },
+      { palavra: "Persuasão", explicacao: "A arte de convencer alguém.", exemplo: "Ele usou a persuasão para mudar o voto do grupo." }
+    ]
+  },
+  momento04_leituraGuiada: {
+    instrucao: "Escaneando o Artigo",
+    leitura: {
+      titulo: "O Futuro das Cidades",
+      paragrafos: [
+        "A tecnologia deve servir à humanidade, não o contrário. Nas smart cities, a conexão rápida permite que as pessoas passem menos tempo no trânsito.",
+        "Portanto, investir em infraestrutura digital é, na verdade, investir em qualidade de vida para todos os cidadãos."
+      ],
+      destacar: ["smart cities", "infraestrutura digital"]
+    }
+  },
+  momento05_compreensao: {
+    instrucao: "Check de Dados",
+    perguntas: [
+      {
+        pergunta: "Qual é a tese defendida no texto?",
+        opcoes: ["Tecnologia é ruim", "Smart cities dão mais qualidade de vida", "Trânsito é bom"],
+        correta: 1,
+        feedbackAcerto: "Isso mesmo! O autor defende o investimento em cidades inteligentes.",
+        feedbackErro: "Volte ao texto. O foco é como a tecnologia ajuda a ganhar tempo."
+      }
+    ]
+  },
+  momento06_personagensCenario: {
+    instrucao: "Vozes do Texto",
+    perguntas: [
+      {
+        pergunta: "Quem é o público-alvo deste artigo?",
+        opcoes: ["Crianças pequenas", "Cidadãos e governantes", "Cientistas da NASA"],
+        correta: 1,
+        feedbackAcerto: "Correto! O texto fala sobre a vida na cidade.",
+        feedbackErro: "Pense em quem vive nas cidades e toma decisões sobre elas."
+      }
+    ]
+  },
+  momento07_sequencia: {
+    instrucao: "Ordem Lógica",
+    bloco: {
+      instrucao: "Ordene os elementos do argumento",
+      itens: [
+        { id: "1", texto: "Conclusão (Fechamento)" },
+        { id: "2", texto: "Tese (Ideia Central)" },
+        { id: "3", texto: "Argumentos (Provas)" }
+      ],
+      ordemCerta: ["2", "3", "1"],
+      feedbackAcerto: "Engrenagens alinhadas!",
+      feedbackErro: "Primeiro a tese, depois as provas, e por fim o fechamento."
+    }
+  },
+  momento08_leituraIndependente: {
+    instrucao: "Análise Solo",
+    leitura: {
+      paragrafos: ["Um bom debatedor ouve o outro lado para encontrar pontos fracos e fortalecer sua própria posição."],
     },
-  ],
+    perguntas: [
+      {
+        pergunta: "O que fortalece uma posição no debate?",
+        opcoes: ["Ignorar o outro", "Ouvir o outro lado", "Falar mais alto"],
+        correta: 1,
+        feedbackAcerto: "Sim! Entender o oponente é fundamental.",
+        feedbackErro: "Lembre-se do que o texto disse sobre 'ouvir o outro'."
+      }
+    ]
+  },
+  momento09_revisao: {
+    pontos: ["Tese é a ideia central", "Argumento é a prova lógica", "Persuasão é convencer com ética"]
+  },
+  momento10_avaliacao: {
+    perguntas: [
+      {
+        pergunta: "Se a tese é 'Esporte é saúde', qual argumento combina?",
+        opcoes: ["Gosto de futebol", "Atividade física previne doenças", "A bola é redonda"],
+        correta: 1,
+        feedbackAcerto: "Lógica perfeita!",
+        feedbackErro: "Um argumento deve provar por que esporte é saúde."
+      }
+    ]
+  },
+  momento11_missaoFamilia: {
+    titulo: "O Grande Debate em Casa",
+    materiais: ["Papel", "Caneta"],
+    passos: ["Escolha um tema (ex: hora de dormir)", "Escreva sua tese e 2 argumentos", "Apresente para sua família"],
+    registro: "Foto do seu roteiro de argumentos"
+  },
+  recompensa: { xp: 100, moedas: 50 }
 };
