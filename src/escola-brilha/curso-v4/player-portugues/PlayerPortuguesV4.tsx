@@ -157,7 +157,7 @@ export function PlayerPortuguesV4(props: Props) {
 function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
 
-  const teen = cursoSlug === "portugues-6ano" || cursoSlug === "portugues-7ano" || cursoSlug === "portugues-8ano" || cursoSlug === "portugues-9ano";
+  const teen = cursoSlug === "portugues-6ano" || cursoSlug === "portugues-7ano" || cursoSlug === "portugues-8ano" || cursoSlug === "portugues-9ano" || cursoSlug === "portugues-especial";
   const tween =
     cursoSlug === "portugues-3ano" ||
     cursoSlug === "portugues-4ano" ||

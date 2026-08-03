@@ -6,6 +6,7 @@ import { PalavraRelampago } from "./PalavraRelampago";
 import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
 import { KidsCtx } from "../PlayerPortuguesV4";
 import { TeenBlackboard } from "./TeenBlackboard";
+import { LousaProfessor } from "./LousaProfessor";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -36,6 +37,7 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "silabaTonica") return container(<SilabaTonica bloco={bloco} />);
   if (bloco.tipo === "rimas") return container(<Rimas bloco={bloco} />);
   if (bloco.tipo === "regraOrtografica") return container(<RegraOrtografica bloco={bloco} />);
+  if (bloco.tipo === "lousaProfessor") return <LousaProfessor {...bloco} />;
   return container(<ConscienciaFonemica bloco={bloco} />);
 }
 
