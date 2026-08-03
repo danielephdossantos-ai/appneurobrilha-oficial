@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { falaAutomaticaAtiva } from "../audio-prefs";
+import { KidsCtx } from "../PlayerPortuguesV4";
 
 /**
  * Botão inline "Ouvir / Repetir" o enunciado de um bloco.
@@ -29,6 +30,7 @@ export function BotaoOuvirEnunciado({
   /** Toca sozinho quando o bloco aparece na tela (uma vez só). */
   auto?: boolean;
 }) {
+  const skin = useContext(KidsCtx);
   const [falando, setFalando] = useState(false);
   const ativoRef = useRef(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -105,7 +107,9 @@ export function BotaoOuvirEnunciado({
       className={`shrink-0 h-8 px-3 rounded-full flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest border-2 transition active:scale-95 ${
         falando
           ? "bg-rose-500 text-white border-rose-300 animate-pulse"
-          : "bg-white/90 text-[#1a0d3d] border-white hover:scale-105"
+          : skin.teen
+            ? "bg-slate-800 text-cyan-400 border-cyan-500/30 hover:bg-slate-700"
+            : "bg-white/90 text-[#1a0d3d] border-white hover:scale-105"
       } ${className}`}
     >
       {falando ? "⏸ Parar" : `🔊 ${rotulo}`}

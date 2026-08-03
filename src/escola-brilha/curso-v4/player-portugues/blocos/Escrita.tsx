@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useContext } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EscritaBloco } from "../../types";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { TeenBlackboard } from "./TeenBlackboard";
 
 /**
  * BLOCO DE ESCRITA — Fase 3 do contrato de Português do 1º ano.
@@ -13,10 +15,19 @@ import type { EscritaBloco } from "../../types";
  *                    guardada no aparelho pra virar portfólio.
  */
 export function Escrita({ bloco, aulaSlug }: { bloco: EscritaBloco; aulaSlug: string }) {
-  if (bloco.tipo === "tracadoLetra") return <TracadoLetra bloco={bloco} />;
-  if (bloco.tipo === "ditadoSilabas") return <DitadoSilabas bloco={bloco} />;
-  if (bloco.tipo === "ditadoFrase") return <DitadoFrase bloco={bloco} />;
-  return <EscritaReal bloco={bloco} aulaSlug={aulaSlug} />;
+  const skin = useContext(KidsCtx);
+  const container = (content: React.ReactNode, titulo: string) => (
+    <TeenBlackboard titulo={titulo}>
+      <div className={`rounded-3xl p-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-lg border-2 border-white/60"}`}>
+        {content}
+      </div>
+    </TeenBlackboard>
+  );
+
+  if (bloco.tipo === "tracadoLetra") return container(<TracadoLetra bloco={bloco} />, "Protocolo de Escrita Manual");
+  if (bloco.tipo === "ditadoSilabas") return container(<DitadoSilabas bloco={bloco} />, "Laboratório de Construção Lexical");
+  if (bloco.tipo === "ditadoFrase") return container(<DitadoFrase bloco={bloco} />, "Sintaxe e Estrutura de Frases");
+  return container(<EscritaReal bloco={bloco} aulaSlug={aulaSlug} />, "Terminal de Produção Textual");
 }
 
 // =====================================================================

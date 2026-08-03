@@ -1,6 +1,8 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useContext } from "react";
 import type { MontarPalavraData } from "../../types";
 import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { TeenBlackboard } from "./TeenBlackboard";
 
 /**
  * Bloco "Montar Palavra" — a criança recebe SÍLABAS embaralhadas e
@@ -12,24 +14,26 @@ import { BotaoOuvirEnunciado } from "./BotaoOuvirEnunciado";
  *  - tocar num slot preenchido → devolve a sílaba pra bandeja
  */
 export function MontarPalavra({ data }: { data: MontarPalavraData }) {
+  const skin = useContext(KidsCtx);
   const [idx, setIdx] = useState(0);
   const total = data.palavras.length;
   const atual = data.palavras[idx];
 
   return (
-    <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
-      <div className="flex items-center justify-between gap-2">
-        <div className="text-sm font-bold text-white">🔤 {data.instrucao}</div>
-        <div className="flex items-center gap-2">
+    <TeenBlackboard titulo="Protocolo de Construção de Dados">
+      <div className={`rounded-2xl p-4 space-y-3 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white/5 border border-white/10"}`}>
+        <div className="flex items-center justify-between gap-2">
+          <div className={`text-sm font-bold ${skin.teen ? "text-cyan-100" : "text-white"}`}>🔤 {data.instrucao}</div>
+          <div className="flex items-center gap-2">
           <BotaoOuvirEnunciado
             texto={[data.instrucao, atual?.frase]}
             rotulo="Repetir"
             auto
           />
 
-          <div className="text-[11px] text-white/60">
-            {idx + 1}/{total}
-          </div>
+            <div className={`text-[11px] ${skin.teen ? "text-cyan-400/60" : "text-white/60"}`}>
+              {idx + 1}/{total}
+            </div>
         </div>
       </div>
 
@@ -42,10 +46,11 @@ export function MontarPalavra({ data }: { data: MontarPalavraData }) {
         feedbackAcerto={data.feedbackAcerto}
         feedbackErro={data.feedbackErro}
         dica={data.dica}
-        temProxima={idx < total - 1}
-        onProxima={() => setIdx((i) => Math.min(i + 1, total - 1))}
-      />
-    </div>
+          temProxima={idx < total - 1}
+          onProxima={() => setIdx((i) => Math.min(i + 1, total - 1))}
+        />
+      </div>
+    </TeenBlackboard>
   );
 }
 
@@ -122,10 +127,10 @@ function MontarUma({
         {slots.map((tid, i) => {
           const t = tid ? tiles.find((x) => x.id === tid) : null;
           const cor = !conferiu
-            ? "bg-white/10 border-white/20 text-white"
+            ? skin.teen ? "bg-slate-900 border-cyan-900/40 text-cyan-900" : "bg-white/10 border-white/20 text-white"
             : acertou
-              ? "bg-emerald-500/60 border-emerald-300 text-white"
-              : "bg-rose-500/40 border-rose-300 text-white";
+              ? skin.teen ? "bg-cyan-600/60 border-cyan-400 text-white" : "bg-emerald-500/60 border-emerald-300 text-white"
+              : skin.teen ? "bg-rose-600/40 border-rose-400 text-white" : "bg-rose-500/40 border-rose-300 text-white";
           return (
             <button
               key={i}
@@ -140,8 +145,8 @@ function MontarUma({
       </div>
 
       {/* Bandeja de sílabas disponíveis */}
-      <div className="min-h-[56px] rounded-xl bg-white/5 border border-white/10 p-2">
-        <div className="text-[10px] uppercase tracking-widest text-white/50 text-center mb-1">
+      <div className={`min-h-[56px] rounded-xl p-2 ${skin.teen ? "bg-slate-900/40 border border-cyan-900/40" : "bg-white/5 border border-white/10"}`}>
+        <div className={`text-[10px] uppercase tracking-widest text-center mb-1 ${skin.teen ? "text-cyan-400/60" : "text-white/50"}`}>
           Toque numa sílaba pra encaixar
         </div>
         <div className="flex flex-wrap justify-center gap-2">
@@ -154,7 +159,7 @@ function MontarUma({
               <button
                 key={t.id}
                 onClick={() => preenche(t.id)}
-                className="min-w-[64px] h-12 px-3 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg tracking-wider hover:bg-amber-300 shadow"
+                className={`min-w-[64px] h-12 px-3 rounded-xl font-black text-lg tracking-wider shadow transition ${skin.teen ? "bg-cyan-600 text-white hover:bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]" : "bg-amber-400 text-[#1a0d3d] hover:bg-amber-300"}`}
               >
                 {t.silaba}
               </button>
@@ -174,7 +179,7 @@ function MontarUma({
         <button
           onClick={() => setConferiu(true)}
           disabled={!preenchida}
-          className="px-5 py-2 rounded-full bg-amber-400 text-[#1a0d3d] font-bold text-sm hover:bg-amber-300 disabled:opacity-40"
+          className={`px-5 py-2 rounded-full font-bold text-sm transition disabled:opacity-40 ${skin.teen ? "bg-cyan-600 text-white hover:bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.4)]" : "bg-amber-400 text-[#1a0d3d] hover:bg-amber-300"}`}
         >
           ✓ Conferir palavra
         </button>
@@ -183,10 +188,10 @@ function MontarUma({
       {/* Feedback */}
       {conferiu && (
         <div
-          className={`text-sm p-3 rounded-xl space-y-2 ${
+          className={`text-sm p-3 rounded-xl space-y-2 border ${
             acertou
-              ? "bg-emerald-500/20 text-emerald-100"
-              : "bg-amber-500/20 text-amber-100"
+              ? skin.teen ? "bg-cyan-900/30 border-cyan-500/40 text-cyan-200" : "bg-emerald-500/20 text-emerald-100"
+              : skin.teen ? "bg-rose-900/30 border-rose-500/40 text-rose-200" : "bg-amber-500/20 text-amber-100"
           }`}
         >
           {acertou ? (
@@ -211,7 +216,11 @@ function MontarUma({
                 <div className="flex justify-center pt-1">
                   <button
                     onClick={onProxima}
-                    className="px-4 py-2 rounded-full bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-400"
+                    className={`px-4 py-2 rounded-full font-bold text-sm transition ${
+                      skin.teen 
+                        ? "bg-cyan-600 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]" 
+                        : "bg-emerald-500 text-white"
+                    }`}
                   >
                     Próxima palavra →
                   </button>

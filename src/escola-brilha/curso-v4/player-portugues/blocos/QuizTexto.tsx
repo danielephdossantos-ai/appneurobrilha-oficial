@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { QuizTextoData } from "../../types";
 import { useAdaptativo } from "../adaptativo";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { useContext } from "react";
+import { TeenBlackboard } from "./TeenBlackboard";
 
 
 /**
@@ -100,12 +103,14 @@ export function QuizTexto({
   quiz,
   momento,
   qid,
+  tituloBlackboard,
 }: {
   quiz: QuizTextoData;
   /** Momento da aula (m5, m8, m10...) — habilita o motor adaptativo. */
   momento?: string;
   /** Identificador estável da questão dentro da aula. */
   qid?: string;
+  tituloBlackboard?: string;
 }) {
   const adaptativo = useAdaptativo();
   // Apoio definido pela SONDAGEM INICIAL e recalibrado pelo desempenho.
@@ -189,8 +194,11 @@ export function QuizTexto({
   const silabada = quiz.pergunta.match(/\b([A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4}(?:-[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4})+)\b/);
   const silabas = silabada ? silabada[1].split("-") : null;
 
+  const skin = useContext(KidsCtx);
+
   return (
-    <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
+    <TeenBlackboard titulo={tituloBlackboard}>
+      <div className={`rounded-3xl p-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-lg border-2 border-white/60"}`}>
       {/* Pergunta com botão de ouvir */}
       <div className="flex items-start gap-3 mb-4">
         <button
@@ -295,15 +303,23 @@ export function QuizTexto({
 
             let estado = "";
             if (!travado) {
-              estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+              estado = skin.teen
+                ? `bg-slate-800 border-2 border-cyan-900/50 text-cyan-100 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105 active:scale-95`
+                : `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
             } else if (marcada && certa) {
-              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
+              estado = skin.teen
+                ? "bg-cyan-950 border-2 border-cyan-400 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)] scale-105"
+                : "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
             } else if (marcada && !certa) {
-              estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
+              estado = skin.teen
+                ? "bg-rose-950 border-2 border-rose-500 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.4)] animate-pulse"
+                : "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
             } else if (revelou && certa) {
-              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
+              estado = skin.teen
+                ? "bg-cyan-950 border-2 border-cyan-400 text-cyan-400"
+                : "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
             } else {
-              estado = "bg-slate-200 text-slate-400";
+              estado = skin.teen ? "bg-slate-900/50 border border-slate-800 text-slate-600 opacity-40" : "bg-slate-200 text-slate-400";
             }
 
             // No CELULAR: sempre pílula larga (uma resposta por linha, texto
@@ -371,8 +387,8 @@ export function QuizTexto({
         <div
           className={`mt-4 p-4 rounded-2xl text-base font-bold leading-snug ${
             acertou
-              ? "bg-emerald-100 text-emerald-900 border-2 border-emerald-300"
-              : "bg-amber-100 text-amber-900 border-2 border-amber-300"
+              ? skin.teen ? "bg-cyan-900/30 text-cyan-200 border-2 border-cyan-500/50" : "bg-emerald-100 text-emerald-900 border-2 border-emerald-300"
+              : skin.teen ? "bg-rose-900/30 text-rose-200 border-2 border-rose-500/50" : "bg-amber-100 text-amber-900 border-2 border-amber-300"
           }`}
         >
           <div className="flex items-start gap-2">
@@ -384,7 +400,7 @@ export function QuizTexto({
                   : (escolha !== null && quiz.feedbackOpcoes?.[escolha]) || quiz.feedbackErro}
               </div>
               {quiz.ondeEstaNoTexto && (
-                <div className="mt-2 text-xs italic text-[#0d1f55]/70">
+                <div className={`mt-2 text-xs italic ${skin.teen ? "text-cyan-400/70" : "text-[#0d1f55]/70"}`}>
                   📖 No texto: "{quiz.ondeEstaNoTexto}"
                 </div>
               )}
@@ -392,8 +408,8 @@ export function QuizTexto({
           </div>
 
           {acertou && apoio?.reensinoSempre && (
-            <div className="mt-3 rounded-2xl bg-white/70 border-2 border-emerald-300 p-3 text-[#0d1f55]">
-              <div className="text-sm uppercase tracking-wide text-emerald-700">
+            <div className={`mt-3 rounded-2xl border-2 p-3 ${skin.teen ? "bg-slate-900/50 border-cyan-500/30 text-cyan-100" : "bg-white/70 border-emerald-300 text-[#0d1f55]"}`}>
+              <div className={`text-sm uppercase tracking-wide ${skin.teen ? "text-cyan-400" : "text-emerald-700"}`}>
                 👩‍🏫 Por que essa é a certa
               </div>
               <div className="mt-1">{reensino}</div>
@@ -401,16 +417,16 @@ export function QuizTexto({
           )}
 
           {!acertou && (
-            <div className="mt-3 rounded-2xl bg-white/70 border-2 border-amber-300 p-3">
-              <div className="text-sm uppercase tracking-wide text-amber-700">
+            <div className={`mt-3 rounded-2xl border-2 p-3 ${skin.teen ? "bg-slate-900/50 border-rose-500/30 text-cyan-100" : "bg-white/70 border-amber-300"}`}>
+              <div className={`text-sm uppercase tracking-wide ${skin.teen ? "text-rose-400" : "text-amber-700"}`}>
                 👩‍🏫 Vamos aprender junto
               </div>
-              <div className="mt-1 text-[#0d1f55]">
+              <div className={`mt-1 ${skin.teen ? "text-cyan-100" : "text-[#0d1f55]"}`}>
                 A resposta certa é <strong>{quiz.opcoes[quiz.correta]}</strong>. {reensino}
               </div>
               <a
                 href="#m4"
-                className="mt-3 inline-flex items-center justify-center w-full h-11 rounded-2xl bg-[#0d1f55] text-white font-black text-sm active:scale-95"
+                className={`mt-3 inline-flex items-center justify-center w-full h-11 rounded-2xl font-black text-sm active:scale-95 ${skin.teen ? "bg-cyan-600 text-white" : "bg-[#0d1f55] text-white"}`}
               >
                 📖 Reler a explicação
               </a>
@@ -418,7 +434,8 @@ export function QuizTexto({
           )}
         </div>
       )}
-    </div>
+      </div>
+    </TeenBlackboard>
   );
 }
 

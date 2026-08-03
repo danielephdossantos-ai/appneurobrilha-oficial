@@ -6,15 +6,17 @@ import { createContext, useContext, useEffect, useState } from "react";
  *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
  *            cartões mais retos, tipografia mais firme, menos fofura)
  */
-type SkinPT = {
+export type SkinPT = {
   kids: boolean;
   tween: boolean;
+  /** Skin "teen" (visual do 6º ano em diante) — visual dark/sci-fi. */
+  teen?: boolean;
   /** Skin "expedição" (visual da Geografia) — só muda a moldura da aula. */
   geo?: boolean;
   /** Numeração das cenas, usada pelo cabeçalho de seção do skin geo. */
   ordem?: Record<string, number>;
 };
-const KidsCtx = createContext<SkinPT>({ kids: false, tween: false });
+export const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, teen: false });
 import { Link } from "@tanstack/react-router";
 import type { AulaPortuguesV4 } from "../types";
 import { stopSpeaking } from "@/lib/native-tts";
@@ -121,6 +123,26 @@ const CORES_TWEEN: Record<string, string> = {
   m11: "#fb923c",
 };
 
+/** Paleta "teen" (6º ano+): Ciano neon sobre Slate escuro. */
+const CORES_TEEN: Record<string, string> = {
+  m1: "#06b6d4",
+  m2: "#0891b2",
+  m3: "#0e7490",
+  mev: "#a78bfa",
+  m4: "#22d3ee",
+  m5: "#f43f5e",
+  m6: "#e879f9",
+  m7: "#06b6d4",
+  m8: "#0891b2",
+  mesc: "#f472b6",
+  mflu: "#34d399",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#8b5cf6",
+  m10: "#22c55e",
+  m11: "#fb923c",
+};
+
 export function PlayerPortuguesV4(props: Props) {
   return (
     <AdaptativoProvider
@@ -135,16 +157,16 @@ export function PlayerPortuguesV4(props: Props) {
 function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
 
-  // Skin infantil: Português do 1º e 2º ano.
-  // Skin tween ("entre kids e teen"): Português do 3º ano em diante.
+  const teen = cursoSlug === "portugues-6ano";
   const tween =
     cursoSlug === "portugues-3ano" ||
     cursoSlug === "portugues-4ano" ||
     cursoSlug === "portugues-5ano";
-  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano" || tween;
-  const CORES = tween ? CORES_TWEEN : CORES_KIDS;
+  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
+
+  const CORES = teen ? CORES_TEEN : tween ? CORES_TWEEN : CORES_KIDS;
+
   // Skin "expedição" (mesma moldura visual da Geografia) — 3º ano.
-  // Só muda a aparência: fundo, cabeçalho, coluna única e cenas numeradas.
   const geo = cursoSlug === "portugues-3ano";
 
 
@@ -231,11 +253,13 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
   const ordemMomentos = Object.fromEntries(MOMENTOS.map((m, i) => [m.id, i + 1]));
 
   return (
-    <KidsCtx.Provider value={{ kids, tween, geo, ordem: ordemMomentos }}>
+    <KidsCtx.Provider value={{ kids, tween, teen, geo, ordem: ordemMomentos }}>
     <div
-      data-skin={geo ? "pt-expedicao" : undefined}
+      data-skin={teen ? "pt-teen" : geo ? "pt-expedicao" : undefined}
       className={
-        geo
+        teen
+          ? "min-h-screen relative overflow-x-hidden bg-slate-950 text-cyan-50"
+          : geo
           ? "min-h-screen relative overflow-x-hidden bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55] text-white"
           : tween
           ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
@@ -244,14 +268,15 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
           : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
       }
     >
-      {tween && !geo && (
+      {(tween || teen) && !geo && (
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
           aria-hidden
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
-            backgroundSize: "42px 42px",
+            backgroundImage: teen
+              ? "linear-gradient(rgba(6,182,212,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,.25) 1px, transparent 1px)"
+              : "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
+            backgroundSize: teen ? "24px 24px" : "42px 42px",
           }}
         />
       )}
@@ -818,8 +843,9 @@ function Secao({
   label: string;
   children: React.ReactNode;
 }) {
-  const { kids, tween, geo, ordem } = useContext(KidsCtx);
-  const cor = (tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (tween ? "#22d3ee" : "#fbbf24");
+  const { kids, tween, geo, ordem, teen } = useContext(KidsCtx);
+  const isTeen = teen;
+  const cor = (isTeen ? CORES_TEEN[id] : tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (isTeen ? "#06b6d4" : tween ? "#22d3ee" : "#fbbf24");
   const emoji = label.trim().split(" ")[0];
   const texto = label.trim().split(" ").slice(1).join(" ");
 
@@ -843,6 +869,39 @@ function Secao({
     );
   }
 
+
+  if (isTeen) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-2xl overflow-hidden border border-cyan-900/40 bg-slate-900/40 backdrop-blur-md relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent pointer-events-none" />
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-cyan-900/40 bg-slate-900/60">
+          <span
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-base shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+            style={{ background: `${cor}22`, border: `1px solid ${cor}44` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-xs font-black uppercase tracking-[0.2em]"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <div className="ml-auto flex items-center gap-1">
+            <div className="h-1 w-1 rounded-full bg-cyan-500 shadow-[0_0_5px_#06b6d4]" />
+            <div className="h-4 w-[1px] bg-cyan-900/40 mx-1" />
+            <span className="text-[9px] font-mono text-cyan-700">LVL.{ordem?.[id] ?? "0"}</span>
+          </div>
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[0.95rem] leading-relaxed relative z-10">
+          {children}
+        </div>
+      </section>
+    );
+  }
 
   if (!kids) {
     return (
@@ -910,7 +969,17 @@ function Secao({
 }
 
 function Instrucao({ children }: { children: React.ReactNode }) {
-  const { kids, tween } = useContext(KidsCtx);
+  const { kids, tween, teen } = useContext(KidsCtx);
+  if (teen) {
+    return (
+      <div className="flex items-start gap-3 rounded-lg border-l-2 border-cyan-500 bg-cyan-950/20 px-4 py-3 group">
+        <span className="text-cyan-500 font-mono text-[10px] leading-6 animate-pulse">_</span>
+        <p className="min-w-0 text-sm font-medium text-cyan-100/90 tracking-wide uppercase">
+          {children}
+        </p>
+      </div>
+    );
+  }
   if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
   if (tween) {
     return (

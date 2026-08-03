@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { PrevisaoTituloData } from "../../types";
+import { useContext } from "react";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { TeenBlackboard } from "./TeenBlackboard";
 
 /**
  * Bloco de Previsão — mostra título/recado + capa + pistas e pede pra criança
@@ -17,6 +20,7 @@ const CORES = [
 ];
 
 export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
+  const skin = useContext(KidsCtx);
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === data.respostaCerta;
 
@@ -77,7 +81,8 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
       )}
 
       {/* Pergunta + hipóteses VISUAIS */}
-      <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
+      <TeenBlackboard titulo="Previsão de Dados">
+        <div className={`rounded-3xl p-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-lg border-2 border-white/60"}`}>
         <div className="flex items-start gap-3 mb-4">
           <button
             onClick={ouvirPergunta}
@@ -168,6 +173,7 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
           </div>
         )}
       </div>
+      </TeenBlackboard>
     </div>
   );
 }
