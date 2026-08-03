@@ -227,12 +227,12 @@ function FraseComPonto({
 }) {
   return (
     <div className="space-y-3">
-      <div className="rounded-xl bg-amber-500/10 border border-amber-300/30 p-3 text-sm text-amber-100">
+      <div className={`rounded-xl border p-4 text-center leading-relaxed ${skin.teen ? "bg-cyan-500/10 border-cyan-400/30 text-cyan-50 text-lg sm:text-xl font-bold" : "bg-amber-500/10 border-amber-300/30 text-amber-100 text-sm"}`}>
         👀 Toda frase tem <span className="text-emerald-300 font-black">🟢 letra MAIÚSCULA no começo</span> e{" "}
         <span className="text-red-300 font-black">🔴 pontuação no fim</span> (
-        <span className="font-mono">.</span> ponto ·{" "}
-        <span className="font-mono">?</span> pergunta ·{" "}
-        <span className="font-mono">!</span> emoção).
+        <span className="font-mono bg-white/10 px-1.5 rounded text-fuchsia-300 border border-white/20">.</span> ponto ·{" "}
+        <span className="font-mono bg-white/10 px-1.5 rounded text-fuchsia-300 border border-white/20">?</span> pergunta ·{" "}
+        <span className="font-mono bg-white/10 px-1.5 rounded text-fuchsia-300 border border-white/20">!</span> emoção).
       </div>
 
       <div className="space-y-3">
