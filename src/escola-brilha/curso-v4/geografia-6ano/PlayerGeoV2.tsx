@@ -296,6 +296,7 @@ export function PlayerGeoV2({
                         op.correta
                           ? `Resposta correta. ${unidade.desafio_critico.explicacao_professor}`
                           : `Resposta incorreta. ${unidade.desafio_critico.explicacao_professor}`,
+                        { rate: 0.88 }
                       );
                     }
                   }}
