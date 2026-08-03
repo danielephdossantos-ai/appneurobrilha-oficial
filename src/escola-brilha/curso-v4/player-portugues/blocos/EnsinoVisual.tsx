@@ -6,7 +6,6 @@ import { PalavraRelampago } from "./PalavraRelampago";
 import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
 import { KidsCtx } from "../PlayerPortuguesV4";
 import { TeenBlackboard } from "./TeenBlackboard";
-import { LousaProfessor } from "./LousaProfessor";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -30,7 +29,6 @@ export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
     </TeenBlackboard>
   );
 
-  if (bloco.tipo === "lousaProfessor") return <LousaProfessor titulo={bloco.titulo} conteudo={bloco.conteudo} explicacaoVoz={bloco.explicacaoVoz} />;
   if (bloco.tipo === "maiusculaMinuscula") return container(<MaiusculaMinuscula bloco={bloco} />);
   if (bloco.tipo === "fraseComPonto") return container(<FraseComPonto bloco={bloco} />);
   if (bloco.tipo === "alfabetoCompleto") return container(<AlfabetoCompleto bloco={bloco} />);
@@ -134,7 +132,6 @@ function MaiusculaMinuscula({
 }: {
   bloco: Extract<EnsinoVisualBloco, { tipo: "maiusculaMinuscula" }>;
 }) {
-  const skin = useContext(KidsCtx);
   const [ativo, setAtivo] = useState<number | null>(null);
 
   const falarPar = (idx: number, maiuscula: string, minuscula: string, exemplo?: string) => {
@@ -183,16 +180,16 @@ function MaiusculaMinuscula({
                 <span className="text-5xl font-black text-emerald-300">
                   {par.maiuscula}
                 </span>
-                <span className={skin.teen ? "text-cyan-50/40" : "text-white/60"}>·</span>
+                <span className="text-sm text-white/60">·</span>
                 <span className="text-5xl font-black text-sky-300">
                   {par.minuscula.toLowerCase()}
                 </span>
               </div>
-              <div className={`mt-2 text-[10px] uppercase tracking-widest ${skin.teen ? "text-cyan-300/70" : "text-white/60"}`}>
+              <div className="mt-2 text-[10px] uppercase tracking-widest text-white/60">
                 Maiúscula · minúscula
               </div>
               {par.exemplo && (
-                <div className={`mt-1 text-xs ${skin.teen ? "text-cyan-50/90" : "text-white/85"}`}>
+                <div className="mt-1 text-xs text-white/85">
                   Ex: <span className="font-bold text-amber-200">{par.exemplo}</span>
                 </div>
               )}
@@ -283,7 +280,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
       }`}
     >
       <div className="text-2xl md:text-3xl font-black leading-relaxed break-words">
-        <span className={skin.teen ? "text-cyan-50/50" : "text-white/50"}>{antes}</span>
+        <span className="text-white/50">{antes}</span>
         {primeira && (
           <span className="relative inline-block">
             <span className="text-emerald-300 underline decoration-emerald-400/60 decoration-4 underline-offset-4">
@@ -294,7 +291,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
             </span>
           </span>
         )}
-        <span className={skin.teen ? "text-cyan-50" : "text-white"}>{meio}</span>
+        <span className="text-white">{meio}</span>
         {pontuacao && (
           <span className="relative inline-block ml-1">
             <span className="text-red-400">{pontuacao}</span>
@@ -306,7 +303,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
       </div>
 
       {explicacao && (
-        <div className={`mt-6 border-t border-white/10 pt-3 ${skin.teen ? "text-base sm:text-lg text-cyan-200 leading-relaxed font-medium" : "text-xs text-white/80 italic"}`}>
+        <div className={`mt-6 border-t border-white/10 pt-3 ${skin.teen ? "text-base sm:text-lg text-cyan-200/90 leading-relaxed font-medium" : "text-xs text-white/80 italic"}`}>
           {explicacao.split('\n').map((linha, idx) => (
             <div key={idx} className={linha.trim().startsWith('>') ? "mt-2 text-rose-400 italic text-sm sm:text-base bg-rose-500/5 p-2 rounded-lg border border-rose-500/10" : ""}>
               {linha.trim().startsWith('>') ? linha.replace('>', '').trim() : linha}
