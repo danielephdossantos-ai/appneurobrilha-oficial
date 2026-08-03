@@ -205,7 +205,7 @@ export function PainelPedagogicoFamilia({ childId, studentName }: Props) {
       recs.push({
         icone: "🎯",
         titulo: `Próxima missão sugerida: ${proximaSugestao.titulo}`,
-        texto: `Continua na sequência oficial da BNCC${
+        texto: `Todas as aulas do currículo BNCC estão implantadas em todas as unidades do 1º ao 9º ano${
           proximaSugestao.disciplina ? ` em ${proximaSugestao.disciplina}` : ""
         }.`,
         acao: (
