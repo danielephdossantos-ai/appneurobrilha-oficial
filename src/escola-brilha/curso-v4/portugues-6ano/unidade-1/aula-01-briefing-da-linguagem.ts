@@ -101,23 +101,23 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [],
   },
   momento_ensinoVisual: {
-    titulo: "Infográfico: A Engenharia da Mensagem",
-    instrucao: "Analise o infográfico abaixo para entender como a informação é processada.",
+    titulo: "Aulão: Decodificando a Arquitetura",
+    instrucao: "Analise o que é cada componente do sistema com exemplos reais.",
     blocos: [
       {
         tipo: "fraseComPonto",
         frases: [
           {
-            texto: "📡 ENTRADA: O pensamento do emissor busca um código (língua).",
-            explicacao: "Etapa 1: A ideia pura ainda não tem forma."
+            texto: "🔑 O CÓDIGO (A Língua): É o conjunto de sinais que usamos.",
+            explicacao: "Pense no Código como as 'peças de LEGO'. O Português é o nosso código principal, mas existem outros como Libras ou sinais de trânsito."
           },
           {
-            texto: "⚙️ PROCESSAMENTO: Escolha do modelo (Bilhete, Log, Notícia).",
-            explicacao: "Etapa 2: A estrutura organiza o fluxo dos dados."
+            texto: "📐 O MODELO (O Gênero): É como montamos as peças.",
+            explicacao: "Se você monta as peças para informar um fato, o modelo é NOTÍCIA. Se monta para um recado rápido, o modelo é BILHETE."
           },
           {
-            texto: "🚀 SAÍDA: A mensagem atinge o alvo com precisão técnica.",
-            explicacao: "Etapa 3: Comunicação completa e sem ruído."
+            texto: "📡 A TRANSMISSÃO: É o envio do pacote de dados.",
+            explicacao: "Pode ser via papel (jornal), ondas sonoras (fala) ou digital (WhatsApp)."
           }
         ]
       }
