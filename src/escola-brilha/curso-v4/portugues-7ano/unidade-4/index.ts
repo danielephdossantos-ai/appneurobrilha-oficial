@@ -3,6 +3,7 @@ import { aula12 } from "../../portugues-6ano/unidade-4/aula-12-divulgacao-cienti
 
 export const unidade4 = {
   numero: 4,
+  id: "unidade-4",
   titulo: "Mídias e Verdades",
   aulas: [aula11, aula12],
 };

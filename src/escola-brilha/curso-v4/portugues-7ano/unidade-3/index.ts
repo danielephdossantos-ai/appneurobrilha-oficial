@@ -4,6 +4,7 @@ import { aula10 } from "../../portugues-6ano/unidade-3/aula-10-substantivos-e-ad
 
 export const unidade3 = {
   numero: 3,
+  id: "unidade-3",
   titulo: "Sintaxe do Poder",
   aulas: [aula08, aula09, aula10],
 };

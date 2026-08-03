@@ -6,6 +6,7 @@ import { aula05 } from "../../portugues-6ano/unidade-1/aula-05-comentario-de-pos
 
 export const unidade1 = {
   numero: 1,
+  id: "unidade-1",
   titulo: "O Observatório da Linguagem",
   aulas: [aula01, aula02, aula03, aula04, aula05],
 };

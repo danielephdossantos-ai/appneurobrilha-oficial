@@ -3,6 +3,7 @@ import { aula07 } from "../../portugues-6ano/unidade-2/aula-07-entrevista-protoc
 
 export const unidade2 = {
   numero: 2,
+  id: "unidade-2",
   titulo: "Discursos em Rede",
   aulas: [aula06, aula07],
 };
