@@ -305,7 +305,7 @@ export function QuizTexto({
             if (!travado) {
               estado = skin.teen
                 ? `bg-slate-800 border-2 border-slate-700 text-slate-300 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105 active:scale-95`
-                : `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+                : `bg-slate-200 border-2 border-slate-300 text-slate-600 hover:scale-105 active:scale-95`;
             } else if (marcada && certa) {
               estado = skin.teen
                 ? "bg-cyan-950 border-2 border-cyan-400 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)] scale-105"
