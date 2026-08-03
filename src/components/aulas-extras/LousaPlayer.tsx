@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BotaoOuvirEnunciado } from "../../escola-brilha/curso-v4/player-portugues/blocos/BotaoOuvirEnunciado";
 import { cn } from "@/utils/utils";
@@ -16,10 +16,17 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
   const [notaPai, setNotaPai] = useState<string | null>(null);
   const [quizRespondido, setQuizRespondido] = useState<number | null>(null);
 
+  // Sistema de Narrativa Sequencial Automática
+  const [blocoFalandoIdx, setBlocoFalandoIdx] = useState(-1);
+  const falaCompletaCena = useMemo(() => {
+    return cena.blocos.map(b => b.falaProfessor).filter(Boolean).join(". ");
+  }, [cena]);
+
   const prox = () => {
     if (cenaIdx < aula.cenasLousa.length - 1) {
       setCenaIdx(cenaIdx + 1);
       setQuizRespondido(null);
+      setBlocoFalandoIdx(-1);
     } else {
       onConcluir?.();
     }
@@ -29,6 +36,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
     if (cenaIdx > 0) {
       setCenaIdx(cenaIdx - 1);
       setQuizRespondido(null);
+      setBlocoFalandoIdx(-1);
     }
   };
 
@@ -96,14 +104,24 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/black-chalkboard.png')]" />
           
           <div className="relative z-10 p-6 md:p-10 space-y-6">
-            <motion.h2 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-2xl md:text-4xl font-black text-white/90 border-b-2 border-white/20 pb-4 inline-block italic"
-              style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
-            >
-              {cena.tituloLousa}
-            </motion.h2>
+            <div className="flex items-center justify-between border-b-2 border-white/20 pb-4 mb-4">
+              <motion.h2 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={`title-${cenaIdx}`}
+                className="text-2xl md:text-4xl font-black text-white/90 italic"
+                style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
+              >
+                {cena.tituloLousa}
+              </motion.h2>
+
+              <BotaoOuvirEnunciado 
+                texto={falaCompletaCena}
+                rotulo="Ouvir Tudo"
+                auto={true}
+                className="bg-white/10 border-white/20 text-white"
+              />
+            </div>
 
             <div className="space-y-4">
               {cena.blocos.map((bloco: BlocoLousa) => (
@@ -138,15 +156,6 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                           <Info size={16} />
                         </button>
                       )}
-                      
-                      <div className="shrink-0">
-                        <BotaoOuvirEnunciado 
-                          texto={bloco.falaProfessor} 
-                          rotulo="Ouvir"
-                          auto={true}
-                          className="bg-white/10 border-white/20 text-white"
-                        />
-                      </div>
                     </div>
                   </motion.div>
                 </AnimatePresence>
