@@ -233,12 +233,10 @@ export const aula01: AulaPortuguesV4 = {
 
   momento11_missaoFamilia: {
     titulo: "Entrevista de Ações",
-  momento11_missaoFamilia: {
-    titulo: "Entrevista de Ações",
     materiais: ["Um caderno", "Lápis"],
     passos: [
       "Pergunte para alguém da sua família: 'O que você fará no próximo final de semana?'",
-      "Anote os verbos que a pessoa usou (ex: viarei, descansarei, jogarei).",
+      "Anote os verbos que a pessoa usou (ex: viajarei, descansarei, jogarei).",
       "Explique para a pessoa que esses verbos estão no FUTURO!"
     ],
     registro: "Anote no seu caderno os verbos de futuro encontrados."
