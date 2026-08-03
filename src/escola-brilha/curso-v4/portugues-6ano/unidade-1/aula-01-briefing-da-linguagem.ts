@@ -142,17 +142,35 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
   momento08_leituraIndependente: {
-    instrucao: "Leitura autônoma de log.",
+    instrucao: "Leitura autônoma: O Modelo da Notícia.",
     leitura: {
-      titulo: "Novo Log",
-      imagemUrl: "",
-      destacar: [],
-      paragrafos: ["Análise concluída."],
+      titulo: "Notícia: Novas Tecnologias na Educação",
+      imagemUrl: "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=400",
+      destacar: ["liderança", "estudantes", "plataforma"],
+      paragrafos: [
+        "A nova plataforma educacional Brilha foi lançada nesta segunda-feira. O sistema promete revolucionar como adolescentes aprendem linguagens.",
+        "Segundo a liderança do projeto, o foco é o ensino real através de modelos visuais e práticos, simulando situações do cotidiano como notícias e logs técnicos.",
+        "Estudantes de todo o país já começaram a decodificar os primeiros módulos com sucesso."
+      ],
     },
-    perguntas: [],
+    perguntas: [
+      {
+        pergunta: "Este texto segue o modelo de qual gênero textual?",
+        opcoes: ["Notícia", "Bilhete", "Poema"],
+        correta: 0,
+        feedbackAcerto: "Exato. A notícia tem um modelo específico: manchete, fatos e declarações.",
+        feedbackErro: "Observe o tom informativo e a estrutura de relato de fatos.",
+        dica: "Textos informativos com datas e locais geralmente são notícias.",
+        reensino: "Compare a estrutura da notícia com o bilhete que vimos no laboratório."
+      }
+    ],
   },
   momento09_revisao: {
-    pontos: ["Conceitos básicos do sistema de linguagem processados."],
+    pontos: [
+      "Linguagem como sistema estruturado e não apenas ruído.",
+      "Adaptação da linguagem a diferentes mídias e suportes.",
+      "A importância de seguir modelos (jornal, bilhete, log) para garantir a eficácia do código."
+    ],
   },
   momento10_avaliacao: {
     perguntas: [
@@ -169,10 +187,14 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "Missão em Família",
-    materiais: ["Papel", "Caneta"],
-    passos: ["Explique o conceito de sistema de linguagem."],
-    registro: "Tire uma foto da explicação.",
+    titulo: "Codificando a Realidade",
+    materiais: ["Papel", "Caneta", "Smartphone (opcional)"],
+    passos: [
+      "Encontre um exemplo de linguagem formal (ex: rótulo de remédio, notícia) e um informal (ex: mensagem de WhatsApp).",
+      "Mostre para sua família como a estrutura muda entre eles.",
+      "Crie seu próprio 'Log de Missão' descrevendo o dia de hoje usando o modelo técnico que aprendemos."
+    ],
+    registro: "Tire uma foto do seu Log de Missão estruturado.",
   },
   recompensa: {
     xp: 100,
