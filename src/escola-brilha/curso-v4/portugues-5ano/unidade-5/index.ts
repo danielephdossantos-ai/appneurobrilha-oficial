@@ -1,8 +1,8 @@
 import type { UnidadePortugues } from "../../types";
-import { aula01 } from "./aula-01-planejar-o-texto";
-import { aula02 } from "./aula-02-paragrafo-e-topico-frasal";
-import { aula03 } from "./aula-03-conectivos-e-coesao";
-import { aula04 } from "./aula-04-revisar-e-publicar";
+import { aula1 as aula01 } from "./aula-01-planejar-o-texto";
+import { aula2 as aula02 } from "./aula-02-paragrafo-e-topico-frasal";
+import { aula3 as aula03 } from "./aula-03-conectivos-e-coesao";
+import { aula4 as aula04 } from "./aula-04-revisar-e-publicar";
 
 export const unidade5: UnidadePortugues = {
   numero: 5,

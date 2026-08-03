@@ -25,7 +25,7 @@ export const aula1: AulaPortuguesV4 = {
   },
   momento_ensinoVisual: {
     titulo: "O Mapa da Notícia",
-    descricao: "Veja como os elementos se organizam em um jornal digital.",
+    texto: "Veja como os elementos se organizam em um jornal digital.",
     tipo: "esquema",
     dados: {
       elementos: ["Manchete", "Lide", "Corpo", "Foto/Legenda"]
@@ -43,11 +43,11 @@ export const aula1: AulaPortuguesV4 = {
     opcoes: ["No último domingo, em Brasília", "500 estudantes", "Festival de robótica"],
     correta: 0,
     dica: "Procure por informações de tempo e lugar.",
-    reensino: "O 'Onde' indica o local (Brasília) e o 'Quando' indica o tempo (último domingo)."
+    reensino: "O 'Onde' indica o local (Brasília) e o 'Quando' indica o tempo (ultimo domingo)."
   },
   momento_escrita: {
     titulo: "Sua Primeira Manchete",
-    proposta: "Crie uma manchete impactante para uma notícia sobre a descoberta de água em Marte.",
+    textoProposta: "Crie uma manchete impactante para uma notícia sobre a descoberta de água em Marte.",
     ajuda: "Lembre-se: manchetes usam verbos no presente para dar sensação de atualidade.",
     ciclo_revisao: [
       "O verbo está no presente?",
@@ -56,7 +56,7 @@ export const aula1: AulaPortuguesV4 = {
     ]
   },
   momento_fluencia: {
-    texto: "O jornalismo exige clareza e objetividade. Ao ler uma notícia, o profissional busca informar sem rodeios.",
+    texto: ["O jornalismo exige clareza e objetividade. Ao ler uma notícia, o profissional busca informar sem rodeios."],
     meta_wpm: 140
   },
   momento11_conclusao: {
