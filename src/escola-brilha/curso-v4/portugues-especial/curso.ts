@@ -1,4 +1,4 @@
-import type { CursoPortugues, UnidadePortugues } from "../../curso-v4/types";
+import type { CursoPortugues, UnidadePortugues } from "../types";
 
 const mods = import.meta.glob<Record<string, UnidadePortugues>>("./unidade-*/index.ts", {
   eager: true,
