@@ -125,7 +125,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
 
               <BotaoOuvirEnunciado 
                 texto={falaCompletaCena}
-                rotulo="Ouvir Tudo"
+                rotulo="SINCRONIZAR ÁUDIO COM TEXTO"
                 auto={true}
                 className="bg-white/10 border-white/20 text-white"
               />
