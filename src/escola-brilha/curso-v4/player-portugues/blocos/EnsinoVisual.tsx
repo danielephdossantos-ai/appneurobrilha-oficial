@@ -180,16 +180,16 @@ function MaiusculaMinuscula({
                 <span className="text-5xl font-black text-emerald-300">
                   {par.maiuscula}
                 </span>
-                <span className="text-sm text-white/60">·</span>
+                <span className={skin.teen ? "text-cyan-50/40" : "text-white/60"}>·</span>
                 <span className="text-5xl font-black text-sky-300">
                   {par.minuscula.toLowerCase()}
                 </span>
               </div>
-              <div className="mt-2 text-[10px] uppercase tracking-widest text-white/60">
+              <div className={`mt-2 text-[10px] uppercase tracking-widest ${skin.teen ? "text-cyan-300/70" : "text-white/60"}`}>
                 Maiúscula · minúscula
               </div>
               {par.exemplo && (
-                <div className="mt-1 text-xs text-white/85">
+                <div className={`mt-1 text-xs ${skin.teen ? "text-cyan-50/90" : "text-white/85"}`}>
                   Ex: <span className="font-bold text-amber-200">{par.exemplo}</span>
                 </div>
               )}
