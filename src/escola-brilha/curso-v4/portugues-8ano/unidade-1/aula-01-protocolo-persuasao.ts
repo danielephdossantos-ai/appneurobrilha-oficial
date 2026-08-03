@@ -1,8 +1,8 @@
 import type { AulaPortuguesV4 } from "../../types";
 
 export const aula01: AulaPortuguesV4 = {
-  slug: "lp8-u1-a1",
-  titulo: "Protocolo de Persuasão: O Texto Argumentativo",
+  slug: "aula-01-protocolo-persuasao",
+  titulo: "Protocolo de Persuasão",
   iconeTrilha: "🧠",
   bncc: ["EF08LP01", "EF08LP02"],
   duracaoMin: 20,
