@@ -1,5 +1,8 @@
-import type { UnidadePortugues } from "../../types";
+import { UnidadePortugues } from "../../types";
 import { aula1 } from "./aula-01-forca-da-noticia";
+
+// Gerar as próximas aulas seguindo o padrão BNCC 6º Ano Unidade 1
+// EF06LP01, EF06LP02: Notícia, Reportagem, Lide, Pirâmide Invertida.
 
 export const unidade1: UnidadePortugues = {
   numero: 1,
