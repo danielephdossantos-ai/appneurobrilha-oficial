@@ -7,6 +7,9 @@ import { aula04 } from "./aula-04-prefixos-e-sufixos";
 export const unidade2: UnidadePortugues = {
   numero: 2,
   titulo: "A Oficina da Escrita Certa",
+  subtitulo: "Dominar a norma",
+  descricao: "Regras de acentuação, ortografia de uso frequente e a construção de palavras com prefixos e sufixos.",
+  corTema: "#06b6d4",
   slug: "unidade-2-escrita-certa",
   aulas: [aula01, aula02, aula03, aula04],
 };

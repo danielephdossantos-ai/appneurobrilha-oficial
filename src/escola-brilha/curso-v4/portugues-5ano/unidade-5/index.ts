@@ -7,6 +7,9 @@ import { aula04 } from "./aula-04-revisar-e-publicar";
 export const unidade5: UnidadePortugues = {
   numero: 5,
   titulo: "A Fábrica de Textos",
+  subtitulo: "Escrever com autoria",
+  descricao: "Do planejamento à revisão: como construir parágrafos e conectar ideias com clareza.",
+  corTema: "#155e75",
   slug: "unidade-5-fabrica-textos",
   aulas: [aula01, aula02, aula03, aula04],
 };
