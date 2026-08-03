@@ -233,7 +233,14 @@ export const aula01: AulaPortuguesV4 = {
 
   momento11_missaoFamilia: {
     titulo: "Entrevista de Ações",
-    instrucao: "Pergunte para alguém da sua família: 'O que você fará no próximo final de semana?'. Tente identificar os verbos no FUTURO que essa pessoa usar!",
-    objetivo: "Praticar a escuta ativa de verbos no futuro em conversas reais.",
+  momento11_missaoFamilia: {
+    titulo: "Entrevista de Ações",
+    materiais: ["Um caderno", "Lápis"],
+    passos: [
+      "Pergunte para alguém da sua família: 'O que você fará no próximo final de semana?'",
+      "Anote os verbos que a pessoa usou (ex: viarei, descansarei, jogarei).",
+      "Explique para a pessoa que esses verbos estão no FUTURO!"
+    ],
+    registro: "Anote no seu caderno os verbos de futuro encontrados."
   },
 };
