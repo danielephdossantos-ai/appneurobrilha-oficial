@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BotaoOuvirEnunciado } from "../../escola-brilha/curso-v4/player-portugues/blocos/BotaoOuvirEnunciado";
+import { useFalaAutomatica } from "../../escola-brilha/curso-v4/player-portugues/audio-prefs";
+import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { ChevronRight, ChevronLeft, Download, Zap, Info, Play, CheckCircle2, XCircle } from "lucide-react";
 import type { AulaExtraLousa, BlocoLousa } from "../../escola-brilha/curso-v4/portugues-aulas-extras/types-extras";
@@ -75,16 +77,22 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
             <p className="text-[10px] text-slate-400 font-bold uppercase">{cena.tituloLousa}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        
+        <div className="flex items-center gap-4">
           {cena.modoSocorro && (
             <button 
               onClick={() => setMostrarMacete(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/50 text-rose-400 text-[10px] font-black uppercase tracking-tighter hover:bg-rose-500/20 transition"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/50 text-rose-400 text-[10px] font-black uppercase tracking-tighter hover:bg-rose-500/20 transition"
             >
               <Zap size={14} fill="currentColor" />
               Socorro, Prova Amanhã!
             </button>
           )}
+
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/50 border border-slate-700">
+            <BotaoFalaAlternar />
+          </div>
+
           <button className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300">
             <Download size={18} />
           </button>
@@ -330,5 +338,21 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+function BotaoFalaAlternar() {
+  const [ativa, setAtiva] = useFalaAutomatica();
+  return (
+    <button
+      onClick={() => setAtiva(!ativa)}
+      className={cn(
+        "flex items-center gap-2 text-[10px] font-black uppercase transition-all",
+        ativa ? "text-cyan-400" : "text-slate-500"
+      )}
+    >
+      {ativa ? <Volume2 size={16} /> : <VolumeX size={16} />}
+      <span className="hidden sm:inline">{ativa ? "Fala Ativa" : "Fala Muda"}</span>
+    </button>
   );
 }
