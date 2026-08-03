@@ -26,7 +26,7 @@ export const aula01: AulaPortuguesV4 = {
       recado: {
         rotulo: "Missão Especial",
         icone: "🚀",
-        estilo: "digital",
+        estilo: "papel",
         linhas: [
           "O jogador CHUTOU a bola.",
           "A bailarina DANÇA no palco.",
@@ -233,7 +233,7 @@ export const aula01: AulaPortuguesV4 = {
 
   momento11_missaoFamilia: {
     titulo: "Entrevista de Ações",
-    comando: "Pergunte para alguém da sua família: 'O que você fará no próximo final de semana?'. Tente identificar os verbos no FUTURO que essa pessoa usar!",
+    instrucao: "Pergunte para alguém da sua família: 'O que você fará no próximo final de semana?'. Tente identificar os verbos no FUTURO que essa pessoa usar!",
     objetivo: "Praticar a escuta ativa de verbos no futuro em conversas reais.",
   },
 };
