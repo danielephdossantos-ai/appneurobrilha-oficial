@@ -1,5 +1,12 @@
 import type { AulaPortuguesV4 } from "../../types";
 
+/**
+ * Aula 1 — Protocolo de Persuasão: O Texto Argumentativo
+ * -------------------------------------------------------------
+ * Introdução ao 8º ano. Foco em tese e estrutura lógica.
+ *
+ * BNCC: EF08LP01, EF08LP02
+ */
 export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-protocolo-persuasao",
   titulo: "Protocolo de Persuasão",
@@ -12,18 +19,18 @@ export const aula01: AulaPortuguesV4 = {
     imagemUrl: "/assets/portugues/lab-logo.png"
   },
   momento02_previsao: {
-    instrucao: "Analise o briefing",
+    instrucao: "Briefing: A Lógica da Persuasão.",
     bloco: {
-      titulo: "O que é Argumentar?",
-      pergunta: "Argumentar não é 'brigar'. É usar a lógica para provar um ponto de vista. Baseado nisso, qual o objetivo de um argumento?",
+      titulo: "Interceptação de Discurso",
+      pergunta: "Qual é o objetivo principal de um argumento no sistema de comunicação?",
       hipoteses: [
-        { texto: "Vencer uma discussão no grito" },
-        { texto: "Provar um ponto com lógica" },
-        { texto: "Apenas falar sua opinião" }
+        { texto: "Convencer ou influenciar o receptor" },
+        { texto: "Apenas ocupar espaço no banco de dados" },
+        { texto: "Esconder a verdade do analista" }
       ],
-      respostaCerta: 1,
-      feedbackAcerto: "Perfeito! A lógica é a base de um bom argumento.",
-      feedbackErro: "Tente novamente. O argumento busca convencer através da razão."
+      respostaCerta: 0,
+      feedbackAcerto: "Radar calibrado. Você entendeu que argumentar é uma ação estratégica.",
+      feedbackErro: "Pense no que alguém ganha ao provar um ponto."
     }
   },
   momento03_vocabulario: {
