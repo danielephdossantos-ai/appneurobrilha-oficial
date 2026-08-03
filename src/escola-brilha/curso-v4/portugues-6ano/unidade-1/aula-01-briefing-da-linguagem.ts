@@ -21,27 +21,34 @@ export const aula01: AulaPortuguesV4 = {
     imagemUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400",
   },
   momento02_previsao: {
-    instrucao: "Analise o padrão de dados. O que este conjunto de mensagens tenta codificar?",
+    instrucao: "Briefing Inicial: Como o sistema se organiza?",
     bloco: {
-      titulo: "Interceptação de Dados",
+      titulo: "Interceptação e Análise",
       capaImagemUrl: "",
-      pistas: [],
+      pistas: [
+        { nome: "Todo sistema de comunicação possui um objetivo central.", imagemUrl: "" },
+        { nome: "A linguagem organiza informações para que elas não sejam apenas ruído.", imagemUrl: "" }
+      ],
       recado: {
-        rotulo: "Log de entrada",
-        icone: "💾",
-        linhas: ["STATUS: DESORDEM", "PROJETO: DECIFRAR"],
+        rotulo: "Análise de Sistema",
+        icone: "📡",
+        linhas: [
+          "DADO: Linguagem = Código",
+          "OBJETIVO: Transmissão de Mensagem",
+          "ESTRUTURA: Organização de Dados"
+        ],
         estilo: "cartaz",
       },
-      pergunta: "Qual é o objetivo deste sistema de comunicação?",
+      pergunta: "Baseado no briefing acima, qual é a função principal deste sistema?",
       hipoteses: [
-        { texto: "Transmissão de informações de forma organizada" },
-        { texto: "Apenas ruído aleatório" },
-        { texto: "Erro de sistema" },
+        { texto: "Organizar e transmitir informações" },
+        { texto: "Gerar códigos aleatórios" },
+        { texto: "Apenas decorar a tela" },
       ],
       respostaCerta: 0,
-      feedbackAcerto: "Dados processados. A linguagem humana é, antes de tudo, um código de transmissão.",
-      feedbackErro: "Analise o padrão. Há intenção nos dados.",
-      dica: "Pense na linguagem como uma ferramenta de organização do caos.",
+      feedbackAcerto: "Excelente, Analista. Você captou a lógica: sem organização, não há comunicação.",
+      feedbackErro: "Analise o 'OBJETIVO' no briefing acima.",
+      dica: "Um sistema serve para colocar ordem no caos.",
     },
   },
   momento03_vocabulario: {
