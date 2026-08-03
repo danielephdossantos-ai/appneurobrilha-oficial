@@ -37,17 +37,18 @@ export function MontarPalavra({ data }: { data: MontarPalavraData }) {
         </div>
       </div>
 
-      <MontarUma
-        key={atual.id}
-        palavraCerta={atual.palavraCerta}
-        silabas={atual.silabas}
-        imagemUrl={atual.imagemUrl}
-        frase={atual.frase}
-        feedbackAcerto={data.feedbackAcerto}
-        feedbackErro={data.feedbackErro}
-        dica={data.dica}
+        <MontarUma
+          key={atual.id}
+          palavraCerta={atual.palavraCerta}
+          silabas={atual.silabas}
+          imagemUrl={atual.imagemUrl}
+          frase={atual.frase}
+          feedbackAcerto={data.feedbackAcerto}
+          feedbackErro={data.feedbackErro}
+          dica={data.dica}
           temProxima={idx < total - 1}
           onProxima={() => setIdx((i) => Math.min(i + 1, total - 1))}
+          skin={skin}
         />
       </div>
     </TeenBlackboard>
@@ -64,6 +65,7 @@ function MontarUma({
   dica,
   temProxima,
   onProxima,
+  skin,
 }: {
   palavraCerta: string;
   silabas: string[];
@@ -74,6 +76,7 @@ function MontarUma({
   dica?: string;
   temProxima: boolean;
   onProxima: () => void;
+  skin: any;
 }) {
   // Cada tile tem uma id única (indice) pra permitir sílabas repetidas.
   const tiles = useMemo(() => {
