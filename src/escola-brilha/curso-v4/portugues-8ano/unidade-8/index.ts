@@ -1,7 +1,8 @@
 import type { UnidadePortugues } from "../../types";
 import { aula18 } from "./aula-18-engrenagem-coesao";
 
-export const unidade8: UnidadePortugues = {
+export const unidade8: any = {
+  id: "unidade-8",
   slug: "lp8-u8",
   numero: 8,
   titulo: "Figuras de Linguagem e Estilo",

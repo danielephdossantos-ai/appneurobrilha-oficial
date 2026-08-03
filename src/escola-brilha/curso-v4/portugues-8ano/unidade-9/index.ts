@@ -1,7 +1,8 @@
 import type { UnidadePortugues } from "../../types";
 import { aula19 } from "./aula-19-grande-debate-logica";
 
-export const unidade9: UnidadePortugues = {
+export const unidade9: any = {
+  id: "unidade-9",
   slug: "lp8-u9",
   numero: 9,
   titulo: "Projeto Final: O Grande Debate",
