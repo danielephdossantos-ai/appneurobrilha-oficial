@@ -291,7 +291,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
             </span>
           </span>
         )}
-        <span className="text-white">{meio}</span>
+        <span className={skin.teen ? "text-cyan-50" : "text-white"}>{meio}</span>
         {pontuacao && (
           <span className="relative inline-block ml-1">
             <span className="text-red-400">{pontuacao}</span>
