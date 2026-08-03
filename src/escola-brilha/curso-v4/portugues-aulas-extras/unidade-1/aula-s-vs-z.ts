@@ -1,190 +1,117 @@
 import type { AulaExtraLousa } from "../types-extras";
 
 /**
- * Aula Extra: S vs Z / SS vs S
- * 🎯 Fase 1: Linguagem Lúdica & Concreta (1º ao 3º Ano)
+ * Aulão de Lousa Mágica 360° — O Agente Secreto S
+ * Fase: fase1 · BNCC: EF01LP07, EF02LP04
  */
-export const aulaSvsZ: AulaExtraLousa = {
+export const aulaAulaExtraSVsZ: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
   slug: "aula-extra-s-vs-z",
-  titulo: "O S Agente Secreto",
+  titulo: "O Agente Secreto S",
   iconeTrilha: "🕵️",
-  bncc: ["EF01LP01", "EF02LP01"],
+  bncc: ["EF01LP07", "EF02LP04"],
   duracaoMin: 10,
-  
-  // Lousa Interativa
   cenasLousa: [
     {
-      tituloLousa: "O S Agente Secreto",
+      tituloLousa: "O S sozinho vira Z",
       blocos: [
         {
           id: "b1",
           tipo: "texto",
           cor: "branco",
-          conteudo: "O S é um espião. Quando ele está sozinho no meio de duas vogais amigas...",
-          falaProfessor: "Olha só essa história! O S é como um agente secreto. Ele adora se disfarçar."
+          conteudo: "O S tem duas vozes: a voz forte (sss, de sapo) e a voz disfarçada (zzz, de zebra).",
+          falaProfessor: "O S tem duas vozes. A voz forte, sss, igual o sapo. E a voz disfarçada, zzz, igual a zebra."
         },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
-          conteudo: "VOGAL + S + VOGAL = Som de Z!",
-          falaProfessor: "Quando o S fica sozinho entre duas vogais, ele perde a força e começa a fazer som de ZZZZZZ, como uma abelhinha ou um rádio estragado."
+          conteudo: "VOGAL + S + VOGAL = som de Z",
+          falaProfessor: "Quando o S fica sozinho entre duas vogais, ele fica fraquinho e vira som de Z."
         },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
-          conteudo: "CA + S + A = CASA (som de Z)",
-          falaProfessor: "Veja o exemplo da palavra CASA. O S está entre o A e o outro A. Por isso ele faz som de Z!"
+          conteudo: "CA-S-A → casa · RO-S-A → rosa · ME-S-A → mesa",
+          falaProfessor: "Casa, rosa, mesa. Escreve com um S só, mas a boca fala zzz."
         },
         {
           id: "b4",
           tipo: "nota-pais",
           cor: "branco",
-          conteudo: "Dica para os pais: Use a brincadeira do 'S disfarçado'. Peça para a criança identificar palavras onde o S 'mudou de voz' para o som de Z.",
-          falaProfessor: "Pais, essa metáfora do espião ajuda a criança a entender que a posição da letra muda o som dela."
+          conteudo: "Em casa: peça a criança para falar a palavra devagar e sentir se a garganta vibra (zzz vibra, sss não).",
+          falaProfessor: "Pais, coloquem a mão no pescoço da criança: no som de Z a garganta treme, no som de S não treme."
         }
       ],
       modoSocorro: {
-        titulo: "Macete do S Solitário",
-        macete: "S sozinho entre vogais? Faz Z de zebra!"
-      }
+        titulo: "Macete do S solitário",
+        macete: "S sozinho entre vogais? Fala Z de zebra — mas escreve S!"
+      },
     },
     {
-      tituloLousa: "O Plano do Gêmeo SS",
+      tituloLousa: "O gêmeo SS segura o som forte",
       blocos: [
         {
-          id: "b5",
+          id: "b1",
           tipo: "texto",
           cor: "verde",
-          conteudo: "Para manter o som de SSSS forte no meio das vogais, o S chama seu irmão gêmeo!",
-          falaProfessor: "Mas e se a gente quiser o som de SSSS forte? Aí o S não pode ficar sozinho. Ele chama o irmão gêmeo dele: o SS!"
+          conteudo: "Para manter o som forte sss entre vogais, o S chama o irmão gêmeo.",
+          falaProfessor: "Se a gente quer o som forte no meio da palavra, um S sozinho não aguenta. Ele chama o gêmeo!"
         },
         {
-          id: "b6",
+          id: "b2",
           tipo: "formula",
           cor: "verde",
-          conteudo: "VOGAL + SS + VOGAL = Som de S!",
-          falaProfessor: "Dois S juntos são muito fortes! Eles não deixam as vogais mudarem o som deles."
+          conteudo: "VOGAL + SS + VOGAL = som de S forte",
+          falaProfessor: "Dois esses juntos são fortes: eles não deixam a palavra virar Z."
         },
         {
-          id: "b7",
+          id: "b3",
           tipo: "exemplo",
           cor: "azul",
-          conteudo: "MA + SS + A = MASSA",
-          falaProfessor: "Olha a diferença: na palavra MASSA, temos dois S. O som continua sendo SSSS, bem forte!"
+          conteudo: "MA-SS-A → massa · PÁ-SS-A-RO → pássaro · O-SS-O → osso",
+          falaProfessor: "Massa, pássaro, osso. Ouviu o sss forte? Então tem dois S."
         }
       ],
       desafioRelampago: {
-        pergunta: "Como escrevemos a palavra onde sentamos para descansar?",
-        opcoes: ["SOFA", "SSOFA", "ZOFA"],
-        correta: 0
-      }
+        pergunta: "Como se escreve a comida de macarrão?",
+        opcoes: ["masa", "massa", "maza"],
+        correta: 1
+      },
     }
   ],
-
-  // Momentos padrão obrigatórios para AulaPortuguesV4
   momento01_motivacao: {
     titulo: "Missão Espião",
-    historia: "Prepare sua lupa! Vamos descobrir como o S muda de voz.",
-  },
-  momento02_previsao: {
-    instrucao: "Pistas na lousa.",
-    bloco: {
-      titulo: "Previsão",
-      pergunta: "O S vai mudar?",
-      hipoteses: [{texto: "Sim"}, {texto: "Não"}],
-      respostaCerta: 0,
-      feedbackAcerto: "Sim!",
-      feedbackErro: "Sim!"
-    }
-  },
-  momento03_vocabulario: {
-    instrucao: "Dicionário do Espião.",
-    cards: [
-      {
-        palavra: "Espião",
-        explicacao: "Alguém que se disfarça. O S faz isso!",
-        exemplo: "O S é um espião.",
-      },
-    ],
-  },
-  momento04_leituraGuiada: {
-    instrucao: "Leia sobre o espião.",
-    leitura: {
-      titulo: "O Espião S",
-      paragrafos: ["O S gosta de mudar de voz quando fica sozinho."],
-    },
-  },
-  momento05_compreensao: {
-    instrucao: "Entendeu?",
-    perguntas: [
-      {
-        pergunta: "O S muda de voz?",
-        opcoes: ["Sim", "Não"],
-        correta: 0,
-        feedbackAcerto: "Sim!",
-        feedbackErro: "Sim!",
-      },
-    ],
-  },
-  momento06_personagensCenario: {
-    instrucao: "Personagens",
-    perguntas: [{
-      pergunta: "Quem é o espião?",
-      opcoes: ["O S", "O A"],
-      correta: 0,
-      feedbackAcerto: "Isso!",
-      feedbackErro: "Não."
-    }]
-  },
-  momento07_sequencia: {
-    instrucao: "Ordem",
-    bloco: {
-      instrucao: "Ordem",
-      itens: [{ id: "1", texto: "S sozinho" }],
-      ordemCerta: ["1"],
-      feedbackAcerto: "Sim!",
-      feedbackErro: "Sim!",
-    },
-  },
-  momento08_leituraIndependente: {
-    instrucao: "Leia de novo.",
-    leitura: {
-      titulo: "O Espião S",
-      paragrafos: ["O S gosta de mudar de voz quando fica sozinho."],
-    },
-    perguntas: [
-      {
-        pergunta: "O S muda de voz?",
-        opcoes: ["Sim", "Não"],
-        correta: 0,
-        feedbackAcerto: "Sim!",
-        feedbackErro: "Sim!",
-      },
-    ],
+    historia: "Pegue a lupa! O S é um espião: às vezes ele fala com a voz dele, às vezes ele imita o Z.",
   },
   momento09_revisao: {
-    pontos: ["S entre vogais = Z", "SS entre vogais = S"],
+    pontos: ["S entre vogais = som de Z (casa, rosa)", "SS entre vogais = som de S forte (massa, osso)", "Depois de consoante, um S só já é forte (pulso, bolsa)"],
   },
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "Qual o som do S em 'ROSA'?",
-        opcoes: ["S", "Z"],
+        pergunta: "Qual é o som do S na palavra ROSA?",
+        opcoes: ["Som de S (sapo)", "Som de Z (zebra)"],
         correta: 1,
-        feedbackAcerto: "Z!",
-        feedbackErro: "Z!"
+        feedbackAcerto: "Isso! S sozinho entre vogais fala Z.",
+        feedbackErro: "Repita devagar: ro-zzza. É som de Z."
+      },
+      {
+        pergunta: "Como escrevemos a palavra 'osso'?",
+        opcoes: ["oso", "osso"],
+        correta: 1,
+        feedbackAcerto: "Muito bem! Som forte pede SS.",
+        feedbackErro: "Som forte entre vogais precisa dos dois S: osso."
       }
     ]
   },
   momento11_missaoFamilia: {
-    titulo: "Caça ao S",
-    materiais: ["Papel"],
-    passos: ["Ache palavras com S"],
-    registro: "Foto"
+    titulo: "Caça ao S disfarçado",
+    materiais: ["Livro ou revista", "Lápis"],
+    passos: ["Encontre 5 palavras com S entre vogais", "Leia em voz alta e diga se o S virou Z"],
+    registro: "Foto da lista"
   },
   recompensa: { xp: 100, moedas: 50 }
 };
