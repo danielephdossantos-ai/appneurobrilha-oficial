@@ -1,7 +1,6 @@
 import { AulaPortuguesV4 } from "../../types";
 
 export const aula1: AulaPortuguesV4 = {
-  id: "lp6-u1-a1",
   slug: "a-forca-da-noticia",
   titulo: "A Força da Notícia",
   iconeTrilha: "📰",
