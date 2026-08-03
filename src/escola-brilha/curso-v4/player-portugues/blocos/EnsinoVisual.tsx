@@ -246,6 +246,7 @@ function FraseComPonto({
 }
 
 function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }) {
+  const skin = useContext(KidsCtx);
   const [tocando, setTocando] = useState(false);
 
   const falar = () => {
@@ -302,7 +303,9 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
       </div>
 
       {explicacao && (
-        <div className="mt-6 text-xs text-white/80 italic">{explicacao}</div>
+        <div className={`mt-6 border-t border-white/10 pt-3 ${skin.teen ? "text-sm text-cyan-200/90 leading-relaxed" : "text-xs text-white/80 italic"}`}>
+          {explicacao}
+        </div>
       )}
 
       <div className="mt-4 flex justify-end">
