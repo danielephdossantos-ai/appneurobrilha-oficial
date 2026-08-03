@@ -1,7 +1,8 @@
 import type { UnidadePortugues } from "../../types";
 import { aula17 } from "./aula-17-protocolo-debate-artigo";
 
-export const unidade7: UnidadePortugues = {
+export const unidade7: any = {
+  id: "unidade-7",
   slug: "lp8-u7",
   numero: 7,
   titulo: "Sintaxe do Período Composto",
