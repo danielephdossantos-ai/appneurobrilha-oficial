@@ -1,4 +1,4 @@
-import type { AulaPortuguesV4 } from "../../types";
+import type { AulaPortuguesV4 } from "../../../curso-v4/types";
 import { url as relogioMagico } from "@/assets/neuro-treino/objetos/relogio-magico.png.asset.json";
 import { url as relogio } from "@/assets/neuro-treino/objetos/relogio.png.asset.json";
 import { url as binoculo } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
