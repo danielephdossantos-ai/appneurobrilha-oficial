@@ -1,6 +1,4 @@
-import type { UnidadePortugues } from "../types";
-
-export const unidade3: UnidadePortugues = {
+export const unidade3: any = {
   slug: "unidade-3-fase-3-analitica",
   numero: 3,
   titulo: "Fase 3: Linguagem Analítica (6º-9º Ano)",
