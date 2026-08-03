@@ -129,6 +129,43 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
+  momento06_personagensCenario: {
+    instrucao: "Identifique quem realiza as ações no nosso laboratório.",
+    perguntas: [
+      {
+        pergunta: "Quem 'planejou' a máquina no relato?",
+        opcoes: ["A cientista Brilha", "O professor", "A máquina"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! Brilha é quem realiza a ação.",
+        feedbackErro: "Releia: 'A cientista Brilha planejou uma máquina incrível'.",
+      }
+    ]
+  },
+
+  momento08_leituraIndependente: {
+    instrucao: "Leia este pequeno bilhete sozinho e encontre os verbos.",
+    leitura: {
+      titulo: "Bilhete do Amigo",
+      paragrafos: ["Eu COMPREI um presente.", "Eu te ENTREGO na escola.", "Você GOSTARÁ muito!"],
+      destacar: ["COMPREI", "ENTREGO", "GOSTARÁ"]
+    },
+    perguntas: [
+      {
+        pergunta: "Qual verbo indica algo que o amigo já fez?",
+        opcoes: ["COMPREI", "ENTREGO", "GOSTARÁ"],
+        correta: 0,
+        feedbackAcerto: "🎉 'Comprei' já aconteceu!",
+        feedbackErro: "Passado é o que já foi: COMPREI.",
+      }
+    ]
+  },
+
+  recompensa: {
+    xp: 200,
+    moedas: 50,
+    medalha: "Mestre dos Verbos"
+  },
+
   momento07_sequencia: {
     instrucao: "Coloque as ações da cientista na ordem correta do tempo.",
     bloco: {
