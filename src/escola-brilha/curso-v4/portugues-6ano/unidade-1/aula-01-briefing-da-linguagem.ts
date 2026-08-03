@@ -33,9 +33,17 @@ export const aula01: AulaPortuguesV4 = {
         rotulo: "Análise de Sistema",
         icone: "📡",
         linhas: [
+          "-------------------------",
+          "| 📡 INFOGRÁFICO SISTEMA |",
+          "-------------------------",
           "DADO: Linguagem = Código",
-          "OBJETIVO: Transmissão de Mensagem",
-          "ESTRUTURA: Organização de Dados"
+          "OBJETIVO: Transmissão",
+          "ESTRUTURA: Organização",
+          "-------------------------",
+          "| PROCESSO:              |",
+          "| ENTRADA -> CODIFICAÇÃO |",
+          "| -> TRANSMISSÃO -> ALVO |",
+          "-------------------------"
         ],
         estilo: "cartaz",
       },
@@ -91,19 +99,23 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [],
   },
   momento_ensinoVisual: {
-    titulo: "Laboratório de Modelagem: O Bilhete vs. O Log",
-    instrucao: "Analise a diferença de estrutura entre um modelo informal e um modelo técnico.",
+    titulo: "Infográfico: A Engenharia da Mensagem",
+    instrucao: "Analise o infográfico abaixo para entender como a informação é processada.",
     blocos: [
       {
         tipo: "fraseComPonto",
         frases: [
           {
-            texto: "Oi, Analista! Deixei o sinal aberto na mesa. Passa lá depois? Bjs.",
-            explicacao: "Modelo A (Informal): Saudação → Mensagem Curta → Despedida Afetiva."
+            texto: "📡 ENTRADA: O pensamento do emissor busca um código (língua).",
+            explicacao: "Etapa 1: A ideia pura ainda não tem forma."
           },
           {
-            texto: "PROTOCOLO 404: ACESSO PERMITIDO. AGENTE IDENTIFICADO. AGUARDANDO COMANDO.",
-            explicacao: "Modelo B (Técnico): Identificador → Status → Ação → Expectativa."
+            texto: "⚙️ PROCESSAMENTO: Escolha do modelo (Bilhete, Log, Notícia).",
+            explicacao: "Etapa 2: A estrutura organiza o fluxo dos dados."
+          },
+          {
+            texto: "🚀 SAÍDA: A mensagem atinge o alvo com precisão técnica.",
+            explicacao: "Etapa 3: Comunicação completa e sem ruído."
           }
         ]
       }
