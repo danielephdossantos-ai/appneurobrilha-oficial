@@ -33,9 +33,17 @@ export const aula01: AulaPortuguesV4 = {
         rotulo: "Análise de Sistema",
         icone: "📡",
         linhas: [
+          "-------------------------",
+          "| 📡 INFOGRÁFICO SISTEMA |",
+          "-------------------------",
           "DADO: Linguagem = Código",
-          "OBJETIVO: Transmissão de Mensagem",
-          "ESTRUTURA: Organização de Dados"
+          "OBJETIVO: Transmissão",
+          "ESTRUTURA: Organização",
+          "-------------------------",
+          "| PROCESSO:              |",
+          "| ENTRADA -> CODIFICAÇÃO |",
+          "| -> TRANSMISSÃO -> ALVO |",
+          "-------------------------"
         ],
         estilo: "cartaz",
       },
