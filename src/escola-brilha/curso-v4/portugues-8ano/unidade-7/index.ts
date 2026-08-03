@@ -1,4 +1,5 @@
 import type { UnidadePortugues } from "../../types";
+import { aula17 } from "./aula-17-protocolo-debate-artigo";
 
 export const unidade7: UnidadePortugues = {
   slug: "lp8-u7",
@@ -7,5 +8,5 @@ export const unidade7: UnidadePortugues = {
   subtitulo: "Estruturas Complexas",
   descricao: "Mergulhe na arquitetura das frases e entenda as relações entre as orações.",
   corTema: "#f97316",
-  aulas: [],
+  aulas: [aula17],
 };

@@ -1,4 +1,5 @@
 import type { UnidadePortugues } from "../../types";
+import { aula19 } from "./aula-19-grande-debate-logica";
 
 export const unidade9: UnidadePortugues = {
   slug: "lp8-u9",
@@ -7,5 +8,5 @@ export const unidade9: UnidadePortugues = {
   subtitulo: "Desafio Final",
   descricao: "Aplique tudo o que aprendeu em uma simulação real de debate e retórica.",
   corTema: "#ef4444",
-  aulas: [],
+  aulas: [aula19],
 };

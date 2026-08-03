@@ -1,4 +1,5 @@
 import type { UnidadePortugues } from "../../types";
+import { aula18 } from "./aula-18-engrenagem-coesao";
 
 export const unidade8: UnidadePortugues = {
   slug: "lp8-u8",
@@ -7,5 +8,5 @@ export const unidade8: UnidadePortugues = {
   subtitulo: "O Tempero do Texto",
   descricao: "Aprenda a usar recursos expressivos para tornar sua linguagem mais impactante.",
   corTema: "#06b6d4",
-  aulas: [],
+  aulas: [aula18],
 };
