@@ -280,7 +280,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
       }`}
     >
       <div className="text-2xl md:text-3xl font-black leading-relaxed break-words">
-        <span className="text-white/50">{antes}</span>
+        <span className={skin.teen ? "text-cyan-50/50" : "text-white/50"}>{antes}</span>
         {primeira && (
           <span className="relative inline-block">
             <span className="text-emerald-300 underline decoration-emerald-400/60 decoration-4 underline-offset-4">
