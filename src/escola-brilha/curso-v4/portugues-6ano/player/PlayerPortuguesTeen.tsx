@@ -52,7 +52,7 @@ export function PlayerPortuguesTeen({
       setNarrando(null);
     } else if (texto) {
       setNarrando(n);
-      speakChunked(texto, 0.9, () => setNarrando(null));
+      speakChunked(texto, { rate: 0.9, onEnd: () => setNarrando(null) });
     }
   };
 
