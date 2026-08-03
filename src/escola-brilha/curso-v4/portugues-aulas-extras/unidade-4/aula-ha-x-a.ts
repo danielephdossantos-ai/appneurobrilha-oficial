@@ -22,7 +22,7 @@ export const aulaAulaExtraHaXA: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "HÁ = tempo que já passou ou existência (= faz / existe)",
           falaProfessor: "Há três anos = faz três anos. Já passou."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraHaXA: AulaExtraLousa = {
           cor: "verde",
           conteudo: "A = tempo futuro ou distância no espaço",
           falaProfessor: "Daqui a 2 dias (futuro). A 2 km daqui (distância)."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Daqui a 2 dias viajo. · A escola fica a 500 metros.",
           falaProfessor: "Futuro e distância usam A sem acento."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

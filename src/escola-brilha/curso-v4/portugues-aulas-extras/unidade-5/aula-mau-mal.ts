@@ -22,7 +22,7 @@ export const aulaAulaExtraMauMal: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "MAU (com U) = adjetivo, contrário de BOM",
           falaProfessor: "Se cabe 'bom', use mau com U."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraMauMal: AulaExtraLousa = {
           cor: "verde",
           conteudo: "MAL (com L) = advérbio, contrário de BEM",
           falaProfessor: "Se cabe 'bem', use mal com L."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Ele dormiu mal. (dormiu bem) · Falou mal do amigo.",
           falaProfessor: "Dormiu mal, dormiu bem. Encaixou? Mal com L."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

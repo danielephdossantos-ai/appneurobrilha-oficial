@@ -22,14 +22,14 @@ export const aulaAulaExtraPluralRapido: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Singular + S = Plural",
           falaProfessor: "Terminou em vogal? Só acrescente S no final."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "o garoto → os garotos · a casa → as casas · o gato → os gatos",
           falaProfessor: "O garoto, os garotos. A casa, as casas."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",
@@ -52,14 +52,14 @@ export const aulaAulaExtraPluralRapido: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Terminou em R, S ou Z → acrescente ES",
           falaProfessor: "Flor → flores. Mês → meses. Luz → luzes."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "flor → flores · mês → meses · luz → luzes · mar → mares",
           falaProfessor: "Flores, meses, luzes, mares."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

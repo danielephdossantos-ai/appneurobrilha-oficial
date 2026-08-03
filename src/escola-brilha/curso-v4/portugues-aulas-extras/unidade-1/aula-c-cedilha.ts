@@ -22,14 +22,14 @@ export const aulaAulaExtraCCedilha: AulaExtraLousa = {
           cor: "branco",
           conteudo: "O C forte fala /k/ e o C fraco fala /s/. Quem manda é a vogal.",
           falaProfessor: "O C é igual o G: a vogal que vem depois manda no som."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
           conteudo: "C + A, O, U = som de K (casa, copo, cuca)\nC + E, I = som de S (cebola, circo)",
           falaProfessor: "Com A, O, U ele fala 'câ'. Com E e I ele fala 'sê'."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
@@ -52,14 +52,14 @@ export const aulaAulaExtraCCedilha: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Ç só aparece antes de A, O, U para forçar o som de S",
           falaProfessor: "Palhaço, caçula, moça: aqui o C precisava do rabinho para não falar 'câ'."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "palhaÇO · moÇA · aÇÚcar · calÇA",
           falaProfessor: "Palhaço, moça, açúcar, calça."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

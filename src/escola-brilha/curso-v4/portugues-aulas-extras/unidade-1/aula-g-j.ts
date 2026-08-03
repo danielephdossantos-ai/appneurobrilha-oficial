@@ -22,21 +22,21 @@ export const aulaAulaExtraGJ: AulaExtraLousa = {
           cor: "branco",
           conteudo: "O G muda de voz dependendo da vogal que vem depois dele.",
           falaProfessor: "Preste atenção: o G é como um cantor que muda o tom conforme a plateia."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
           conteudo: "G + A, O, U = som forte (gato, gota, gude)\nG + E, I = som de J (gelo, girafa)",
           falaProfessor: "Com A, O e U o G fala 'guê'. Com E e I ele fala 'jê'."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "GAto · GOla · GUloso ↔ GElo · GIrafa",
           falaProfessor: "Gato, gola, guloso. Agora: gelo, girafa. Ouviu a diferença?"
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,14 +59,14 @@ export const aulaAulaExtraGJ: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Palavras de origem indígena/africana e terminadas em -JA, -JO, -JE geralmente usam J",
           falaProfessor: "Jiló, jabuti, canja, laranja: essas são do time do J."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "JIló · JAbuti · caNJA · larANJA · JEito",
           falaProfessor: "Jiló, jabuti, canja, laranja, jeito."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",

@@ -22,7 +22,7 @@ export const aulaAulaExtraMaiuscula: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Maiúscula: início de frase, nomes próprios, cidades, países, meses em títulos",
           falaProfessor: "Começou a frase? Maiúscula. É nome de alguém ou de lugar? Maiúscula."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraMaiuscula: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Nomes comuns (menino, cidade, cachorro) ficam minúsculos. Dias da semana e meses também.",
           falaProfessor: "Cachorro é comum: minúsculo. Bob é o nome dele: maiúsculo."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "O menino Pedro tem um cachorro chamado Rex.",
           falaProfessor: "Menino e cachorro em minúsculo; Pedro e Rex em maiúsculo."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

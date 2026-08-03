@@ -22,21 +22,21 @@ export const aulaAulaExtraTil: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Ã / Õ = som pelo nariz",
           falaProfessor: "Tape o nariz e tente falar 'mão'. Não sai! Porque o som passa pelo nariz."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "mÃO · pÃO · irmÃO · limÕES · coraÇÃO",
           falaProfessor: "Mão, pão, irmão, limões, coração."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",
           cor: "branco",
           conteudo: "O til aparece principalmente em ÃO, ÃE e ÕE.",
           falaProfessor: "Três famílias do til: ão, ãe, õe. Pão, mãe, limões."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,7 +59,7 @@ export const aulaAulaExtraTil: AulaExtraLousa = {
           cor: "verde",
           conteudo: "O til indica som nasal; a força da voz pode estar em outra sílaba.",
           falaProfessor: "Em 'órgão' há til no ão, mas a força está no ór. Til é som, não força."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",

@@ -22,14 +22,14 @@ export const aulaAulaExtraPluralAo: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "-ÕES: a maioria (balão → balões, coração → corações)",
           falaProfessor: "O caminho mais comum é -ões. Na dúvida, comece por ele."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "verde",
           conteudo: "-ÃES: poucas palavras (pão → pães, cão → cães, alemão → alemães, capitão → capitães)",
           falaProfessor: "São poucas: pão, cão, alemão, capitão, escrivão."
-        }
+        },
         {
           id: "b3",
           tipo: "formula",
@@ -52,7 +52,7 @@ export const aulaAulaExtraPluralAo: AulaExtraLousa = {
           cor: "azul",
           conteudo: "limão → limões · pão → pães · mão → mãos",
           falaProfessor: "Três palavras parecidas, três plurais diferentes."
-        }
+        },
         {
           id: "b2",
           tipo: "nota-pais",

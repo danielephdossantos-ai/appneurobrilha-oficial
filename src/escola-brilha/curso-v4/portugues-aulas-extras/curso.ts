@@ -2,7 +2,7 @@ import type { CursoPortugues, UnidadePortugues } from "../types";
 
 /**
  * Módulo de Aulas Extras (Lousa Mágica 360°)
- * Auto-registro: cada pasta unidade-*/index.ts exporta uma unidade.
+ * Auto-registro por pasta de unidade.
  */
 const mods = import.meta.glob<Record<string, UnidadePortugues>>("./unidade-*/index.ts", {
   eager: true,

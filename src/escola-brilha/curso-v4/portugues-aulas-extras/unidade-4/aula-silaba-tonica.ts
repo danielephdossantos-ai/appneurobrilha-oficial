@@ -22,21 +22,21 @@ export const aulaAulaExtraSilabaTonica: AulaExtraLousa = {
           cor: "branco",
           conteudo: "Fale a palavra como se estivesse chamando alguém de longe. A sílaba que sai mais forte é a tônica.",
           falaProfessor: "Grite: CA-VA-LOOO. Qual saiu mais forte? VA. Essa é a tônica."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
           conteudo: "Oxítona = força na ÚLTIMA sílaba (café, urubu, papel)",
           falaProfessor: "Última sílaba forte: oxítona."
-        }
+        },
         {
           id: "b3",
           tipo: "formula",
           cor: "verde",
           conteudo: "Paroxítona = força na PENÚLTIMA (casa, cavalo, fácil)",
           falaProfessor: "Penúltima: paroxítona. É a maioria das palavras do português."
-        }
+        },
         {
           id: "b4",
           tipo: "formula",
@@ -59,7 +59,7 @@ export const aulaAulaExtraSilabaTonica: AulaExtraLousa = {
           cor: "azul",
           conteudo: "ca-FÉ → oxítona · CA-sa → paroxítona · MÉ-di-co → proparoxítona",
           falaProfessor: "Café, casa, médico. Sinta a força mudando de lugar."
-        }
+        },
         {
           id: "b2",
           tipo: "nota-pais",

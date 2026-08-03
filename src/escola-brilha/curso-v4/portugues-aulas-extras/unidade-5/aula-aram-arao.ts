@@ -22,7 +22,7 @@ export const aulaAulaExtraAramArao: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "-ARAM = pretérito perfeito (ONTEM). Força no A: falARAM.",
           falaProfessor: "Eles falaram ontem. A força está no A e termina com M."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraAramArao: AulaExtraLousa = {
           cor: "verde",
           conteudo: "-ARÃO = futuro do presente (AMANHÃ). Força no ÃO, som nasal.",
           falaProfessor: "Eles falarão amanhã. A voz vai forte para o fim: falaRÃO."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Eles estudARÃO amanhã. · Os alunos chegARÃO cedo na segunda.",
           falaProfessor: "Estudarão, chegarão: ainda vai acontecer."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

@@ -22,21 +22,21 @@ export const aulaAulaExtraParagrafos: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "INÍCIO: apresenta o assunto (1 a 2 frases)",
           falaProfessor: "O primeiro parágrafo responde: sobre o que eu vou falar?"
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "verde",
           conteudo: "MEIO: explica, dá exemplos e argumentos (o maior)",
           falaProfessor: "No meio você explica e prova o que disse. É a parte mais longa."
-        }
+        },
         {
           id: "b3",
           tipo: "formula",
           cor: "azul",
           conteudo: "FIM: conclui, dá a opinião ou a solução",
           falaProfessor: "No fim você fecha a ideia. Nunca abra assunto novo no final."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,7 +59,7 @@ export const aulaAulaExtraParagrafos: AulaExtraLousa = {
           cor: "azul",
           conteudo: "Frase-chave: 'Brincar ao ar livre faz bem.'\nExplicação: 'Ao correr, a criança gasta energia e dorme melhor.'\nExemplo: 'Meu irmão dorme mais cedo quando joga bola.'",
           falaProfessor: "Veja: uma ideia, uma explicação e um exemplo. Parágrafo pronto."
-        }
+        },
         {
           id: "b2",
           tipo: "texto",

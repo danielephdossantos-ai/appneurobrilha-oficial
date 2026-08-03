@@ -22,21 +22,21 @@ export const aulaAulaExtraSVsZ: AulaExtraLousa = {
           cor: "branco",
           conteudo: "O S tem duas vozes: a voz forte (sss, de sapo) e a voz disfarçada (zzz, de zebra).",
           falaProfessor: "O S tem duas vozes. A voz forte, sss, igual o sapo. E a voz disfarçada, zzz, igual a zebra."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
           conteudo: "VOGAL + S + VOGAL = som de Z",
           falaProfessor: "Quando o S fica sozinho entre duas vogais, ele fica fraquinho e vira som de Z."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "CA-S-A → casa · RO-S-A → rosa · ME-S-A → mesa",
           falaProfessor: "Casa, rosa, mesa. Escreve com um S só, mas a boca fala zzz."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,14 +59,14 @@ export const aulaAulaExtraSVsZ: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Para manter o som forte sss entre vogais, o S chama o irmão gêmeo.",
           falaProfessor: "Se a gente quer o som forte no meio da palavra, um S sozinho não aguenta. Ele chama o gêmeo!"
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "verde",
           conteudo: "VOGAL + SS + VOGAL = som de S forte",
           falaProfessor: "Dois esses juntos são fortes: eles não deixam a palavra virar Z."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",

@@ -22,7 +22,7 @@ export const aulaAulaExtraDitongoHiato: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Ditongo = 2 vogais na MESMA sílaba",
           falaProfessor: "PAI: pa-i? Não. É PAI, tudo numa palma só."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraDitongoHiato: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Hiato = 2 vogais em sílabas DIFERENTES",
           falaProfessor: "SAÍDA: sa-í-da. O A e o I se separaram."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "sa-Í-da · ju-Í-zo · sa-Ú-de · po-E-ta · ca-Ir",
           falaProfessor: "Saída, juízo, saúde, poeta, cair."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

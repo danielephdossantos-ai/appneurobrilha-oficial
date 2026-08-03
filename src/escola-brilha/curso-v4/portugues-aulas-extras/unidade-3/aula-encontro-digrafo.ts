@@ -22,7 +22,7 @@ export const aulaAulaExtraEncontroDigrafo: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Encontro consonantal = 2 consoantes, 2 sons (BR, CL, PR, TR, FL)",
           falaProfessor: "Em BRAÇO você ouve o B e o R. As duas trabalham!"
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraEncontroDigrafo: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Dígrafo = 2 letras, 1 som (CH, LH, NH, RR, SS, QU, GU)",
           falaProfessor: "Em CHAVE são duas letras, mas só um som: /ch/."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "CHave · fiLHo · baNHo · caRRo · paSSo · QUeijo",
           falaProfessor: "Chave, filho, banho, carro, passo, queijo."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

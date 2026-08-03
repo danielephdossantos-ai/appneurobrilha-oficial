@@ -22,21 +22,21 @@ export const aulaAulaExtraMAntesPB: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Antes de P e B → escreve M",
           falaProfessor: "Antes de P e de B sempre M. Sempre, sempre!"
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "caMPo · teMPo · boMBa · taMBém · caMPeão",
           falaProfessor: "Campo, tempo, bomba, também, campeão."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",
           cor: "branco",
           conteudo: "Nas outras letras, quem fecha o som é o N.",
           falaProfessor: "Canto, onda, tinta, mundo: aqui é N."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,7 +59,7 @@ export const aulaAulaExtraMAntesPB: AulaExtraLousa = {
           cor: "verde",
           conteudo: "boM-Ba ✅ · boN-ba ❌ · caN-to ✅ · caM-to ❌",
           falaProfessor: "Bomba com M porque vem B. Canto com N porque vem T."
-        }
+        },
         {
           id: "b2",
           tipo: "texto",

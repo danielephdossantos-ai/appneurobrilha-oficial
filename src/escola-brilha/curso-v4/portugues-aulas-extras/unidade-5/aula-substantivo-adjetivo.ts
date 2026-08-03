@@ -22,7 +22,7 @@ export const aulaAulaExtraSubstantivoAdjetivo: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Substantivo = nome de seres, coisas, lugares, sentimentos",
           falaProfessor: "Cachorro, escola, alegria: todos são nomes. Aceitam o/a na frente."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraSubstantivoAdjetivo: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Adjetivo = característica do substantivo",
           falaProfessor: "Cachorro bravo. Escola nova. Menina alegre."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "cachorro BRAVO · escola NOVA · dia FELIZ",
           falaProfessor: "Bravo, nova, feliz: todos dizem COMO a coisa é."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

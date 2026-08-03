@@ -22,7 +22,7 @@ export const aulaAulaExtraMasMais: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "MAS (sem I) = PORÉM, ideia contrária",
           falaProfessor: "Se você pode trocar por 'porém', é MAS sem I."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraMasMais: AulaExtraLousa = {
           cor: "verde",
           conteudo: "MAIS (com I) = soma, quantidade, o contrário de MENOS",
           falaProfessor: "Quero MAIS bolo: é quantidade. O contrário é menos."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Quero MAIS suco. · 2 MAIS 2 são 4. · Ele é o MAIS alto.",
           falaProfessor: "Mais suco, dois mais dois, o mais alto."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

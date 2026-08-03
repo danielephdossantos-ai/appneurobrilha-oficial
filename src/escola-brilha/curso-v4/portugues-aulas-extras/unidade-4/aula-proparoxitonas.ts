@@ -22,14 +22,14 @@ export const aulaAulaExtraProparoxitonas: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "TODA proparoxítona é acentuada. 100%. Sem exceção.",
           falaProfessor: "Se a força está na antepenúltima sílaba, põe acento. Não tem discussão."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "MÉ-di-co · LÂM-pa-da · SÁ-ba-do · Á-gua? não! · MÚ-si-ca · TÍ-mi-do",
           falaProfessor: "Médico, lâmpada, sábado, música, tímido: todas acentuadas."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",
@@ -52,14 +52,14 @@ export const aulaAulaExtraProparoxitonas: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Passo 1: separe as sílabas. Passo 2: conte 3 do fim para o começo. Passo 3: se a força está lá, acentue.",
           falaProfessor: "Três passos, sempre os mesmos. Sepa-rar, contar, acentuar."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "ES-TÔ-MA-GO → es-TÔ-ma-go → 3ª do fim → acento!",
           falaProfessor: "Estômago: força no TÔ, terceira do fim. Acento garantido."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

@@ -22,7 +22,7 @@ export const aulaAulaExtraOndeAonde: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "ONDE = permanência (verbos estar, morar, ficar)",
           falaProfessor: "Onde você mora? Você está parado ali, morando."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraOndeAonde: AulaExtraLousa = {
           cor: "verde",
           conteudo: "AONDE = destino (verbos ir, chegar, levar)",
           falaProfessor: "Aonde você vai? Quem vai, vai A algum lugar. Por isso o A gruda."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Aonde você vai? · Aonde ele chegou com essa história?",
           falaProfessor: "Ir e chegar pedem o A: aonde."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

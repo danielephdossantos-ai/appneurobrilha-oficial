@@ -22,14 +22,14 @@ export const aulaAulaExtraPontuacao: AulaExtraLousa = {
           cor: "laranja",
           conteudo: ". = PARE (fim da ideia)\n? = PERGUNTA\n! = SURPRESA / EMOÇÃO",
           falaProfessor: "Ponto final manda parar. Interrogação pergunta. Exclamação se espanta!"
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Vamos brincar. / Vamos brincar? / Vamos brincar!",
           falaProfessor: "A mesma frase com três sentidos diferentes. Ouviu a voz mudar?"
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",
@@ -52,7 +52,7 @@ export const aulaAulaExtraPontuacao: AulaExtraLousa = {
           cor: "verde",
           conteudo: "A vírgula é uma paradinha curta, para respirar e separar coisas da lista.",
           falaProfessor: "A vírgula é um cochilo rápido, o ponto é dormir de verdade."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",

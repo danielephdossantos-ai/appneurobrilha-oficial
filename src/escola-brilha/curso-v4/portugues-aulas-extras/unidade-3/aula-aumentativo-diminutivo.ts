@@ -22,7 +22,7 @@ export const aulaAulaExtraAumentativoDiminutivo: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Diminutivo = coisa pequena ou carinho (-inho, -zinha)",
           falaProfessor: "Gatinho é gato pequeno... ou gato muito amado!"
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
@@ -45,14 +45,14 @@ export const aulaAulaExtraAumentativoDiminutivo: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Aumentativo = coisa grande (-ão, -zão)",
           falaProfessor: "Gatão é um gato enorme. Casarão é uma casa gigante!"
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "gato → gatão · casa → casarão · nariz → narigão · rapaz → rapazão",
           falaProfessor: "Gatão, casarão, narigão, rapazão."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",

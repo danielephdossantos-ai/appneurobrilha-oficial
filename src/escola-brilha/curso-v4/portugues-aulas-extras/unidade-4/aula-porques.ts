@@ -22,21 +22,21 @@ export const aulaAulaExtraPorques: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "POR QUE (separado, sem acento) = PERGUNTA (início ou meio)",
           falaProfessor: "Se você está perguntando, os dois ficam separados: por que."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Por que você faltou? · Não sei por que ele saiu.",
           falaProfessor: "Pergunta direta e pergunta indireta: as duas usam 'por que' separado."
-        }
+        },
         {
           id: "b3",
           tipo: "formula",
           cor: "verde",
           conteudo: "PORQUE (junto, sem acento) = RESPOSTA / CAUSA (= pois)",
           falaProfessor: "Ao responder, eles se unem: porque."
-        }
+        },
         {
           id: "b4",
           tipo: "exemplo",
@@ -59,21 +59,21 @@ export const aulaAulaExtraPorques: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "POR QUÊ (separado, com acento) = FIM de frase ou antes de ponto",
           falaProfessor: "Quando ele fica no fim, ganha chapéu: Você saiu por quê?"
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "verde",
           conteudo: "O PORQUÊ (junto, com acento) = SUBSTANTIVO (= o motivo)",
           falaProfessor: "Se vier 'o', 'um', 'este' na frente, é substantivo: o porquê."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "Você fez isso por quê? · Não entendi o porquê da briga.",
           falaProfessor: "Fim de frase: por quê. Com artigo: o porquê."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",

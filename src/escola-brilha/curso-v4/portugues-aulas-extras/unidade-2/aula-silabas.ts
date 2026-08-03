@@ -22,14 +22,14 @@ export const aulaAulaExtraSilabas: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "1 palma = 1 sílaba (cada sílaba tem uma vogal que soa)",
           falaProfessor: "Bata palma junto: BO-LA, duas palmas. CA-VA-LO, três palmas."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "BO-LA (2) · CA-SA (2) · CA-VA-LO (3) · BOR-BO-LE-TA (4)",
           falaProfessor: "Bola, casa, cavalo, borboleta."
-        }
+        },
         {
           id: "b3",
           tipo: "nota-pais",
@@ -52,14 +52,14 @@ export const aulaAulaExtraSilabas: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Dígrafos CH, LH, NH, QU, GU nunca se separam.",
           falaProfessor: "Bo-lhu? Não! É bo-LHA. O LH anda sempre juntinho."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "bo-LHA · ba-NHO · CHU-va · QUEI-jo",
           falaProfessor: "Bolha, banho, chuva, queijo."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",

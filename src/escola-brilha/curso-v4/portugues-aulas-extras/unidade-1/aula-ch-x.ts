@@ -22,21 +22,21 @@ export const aulaAulaExtraChX: AulaExtraLousa = {
           cor: "branco",
           conteudo: "CH e X podem ter o mesmo som: chá e xarope começam igual.",
           falaProfessor: "Diga comigo: chá... xarope. A boca faz o mesmo movimento, mas a letra muda."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "laranja",
           conteudo: "Som /ch/ = pode ser CH ou X",
           falaProfessor: "Não existe regra mágica para tudo: a gente aprende olhando e lendo muito."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "CH: chave, chuva, chinelo, chocolate · X: xícara, xarope, peixe, caixa",
           falaProfessor: "Chave, chuva, chinelo. Xícara, xarope, peixe, caixa."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,14 +59,14 @@ export const aulaAulaExtraChX: AulaExtraLousa = {
           cor: "verde",
           conteudo: "Depois de ditongo (ai, ei, ou) escreve-se X",
           falaProfessor: "Caixa, peixe, frouxo: veio duas vogais juntas antes? É X."
-        }
+        },
         {
           id: "b2",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "cAIxa · pEIxe · trOUxa",
           falaProfessor: "Ca-i-xa, pe-i-xe, tro-u-xa. Todas com X."
-        }
+        },
         {
           id: "b3",
           tipo: "texto",

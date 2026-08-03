@@ -22,21 +22,21 @@ export const aulaAulaExtraAcentosVovo: AulaExtraLousa = {
           cor: "laranja",
           conteudo: "Acento agudo ´ = boca ABERTA (vovó, café, avó)",
           falaProfessor: "O acento agudo é o risquinho em pé. A boca abre bem: vovóóó."
-        }
+        },
         {
           id: "b2",
           tipo: "formula",
           cor: "verde",
           conteudo: "Acento circunflexo ^ = boca FECHADA (vovô, avô, você)",
           falaProfessor: "O circunflexo é o chapeuzinho. A boca fecha: vovôôô."
-        }
+        },
         {
           id: "b3",
           tipo: "exemplo",
           cor: "azul",
           conteudo: "cafÉ (aberto) · vocÊ (fechado) · avÓ (aberto) · avÔ (fechado)",
           falaProfessor: "Café e você. Avó e avô. Sinta a boca mudando."
-        }
+        },
         {
           id: "b4",
           tipo: "nota-pais",
@@ -59,7 +59,7 @@ export const aulaAulaExtraAcentosVovo: AulaExtraLousa = {
           cor: "azul",
           conteudo: "sabia (pássaro? não!) · sabiá (o pássaro) · sábia (a mulher inteligente)",
           falaProfessor: "Três palavras iguais, três significados: o acento muda tudo."
-        }
+        },
         {
           id: "b2",
           tipo: "texto",
