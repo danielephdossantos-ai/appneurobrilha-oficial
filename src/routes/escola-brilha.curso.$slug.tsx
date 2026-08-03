@@ -300,7 +300,7 @@ function AtlasFinalCard({
         <div className="text-xs uppercase text-amber-300 tracking-widest">
           Grande Projeto Final
         </div>
-        <h2 className="text-2xl font-black">🌍 Meu Atlas do Município</h2>
+        <h2 className="text-2xl font-black">🎓 Grande Projeto Final</h2>
       </div>
       <Link
         to="/escola-brilha/atlas-final/$curso"
