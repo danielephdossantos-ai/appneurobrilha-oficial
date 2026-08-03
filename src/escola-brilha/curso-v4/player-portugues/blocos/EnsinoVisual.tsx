@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
 import { ConscienciaFonemica, somDoFonema } from "./ConscienciaFonemica";
 import { PalavraRelampago } from "./PalavraRelampago";
 import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { TeenBlackboard } from "./TeenBlackboard";
 
 /**
  * Bloco de ENSINO VISUAL de Português — o equivalente ao "eu faço"
@@ -18,14 +20,23 @@ import { RegraOrtografica, Rimas, SilabaTonica } from "./FonologiaAvancada";
  *   - palavraRelampago   → palavras teimosas (reconhecimento lexical)
  */
 export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
-  if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
-  if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
-  if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
-  if (bloco.tipo === "palavraRelampago") return <PalavraRelampago bloco={bloco} />;
-  if (bloco.tipo === "silabaTonica") return <SilabaTonica bloco={bloco} />;
-  if (bloco.tipo === "rimas") return <Rimas bloco={bloco} />;
-  if (bloco.tipo === "regraOrtografica") return <RegraOrtografica bloco={bloco} />;
-  return <ConscienciaFonemica bloco={bloco} />;
+  const skin = useContext(KidsCtx);
+  const container = (content: React.ReactNode) => (
+    <TeenBlackboard titulo="Terminal de Aprendizado">
+      <div className={`rounded-3xl p-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-lg border-2 border-white/60"}`}>
+        {content}
+      </div>
+    </TeenBlackboard>
+  );
+
+  if (bloco.tipo === "maiusculaMinuscula") return container(<MaiusculaMinuscula bloco={bloco} />);
+  if (bloco.tipo === "fraseComPonto") return container(<FraseComPonto bloco={bloco} />);
+  if (bloco.tipo === "alfabetoCompleto") return container(<AlfabetoCompleto bloco={bloco} />);
+  if (bloco.tipo === "palavraRelampago") return container(<PalavraRelampago bloco={bloco} />);
+  if (bloco.tipo === "silabaTonica") return container(<SilabaTonica bloco={bloco} />);
+  if (bloco.tipo === "rimas") return container(<Rimas bloco={bloco} />);
+  if (bloco.tipo === "regraOrtografica") return container(<RegraOrtografica bloco={bloco} />);
+  return container(<ConscienciaFonemica bloco={bloco} />);
 }
 
 
