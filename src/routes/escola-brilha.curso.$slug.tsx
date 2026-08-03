@@ -168,10 +168,18 @@ function TrilhaCurso() {
                             params: { curso: slug, aula: a.slug },
                           });
                         } else if (ehPortugues) {
-                          navigate({
-                            to: "/escola-brilha/aula-pt-v4/$curso/$aula",
-                            params: { curso: slug, aula: a.slug },
-                          });
+                          const isExtra = slug === "portugues-aulas-extras";
+                          if (isExtra) {
+                            navigate({
+                              to: "/escola-brilha/aula-extra-pt/$curso/$aula" as any,
+                              params: { curso: slug, aula: a.slug },
+                            });
+                          } else {
+                            navigate({
+                              to: "/escola-brilha/aula-pt-v4/$curso/$aula",
+                              params: { curso: slug, aula: a.slug },
+                            });
+                          }
                         } else {
                           navigate({
                             to: "/escola-brilha/aula-v4/$curso/$aula",
