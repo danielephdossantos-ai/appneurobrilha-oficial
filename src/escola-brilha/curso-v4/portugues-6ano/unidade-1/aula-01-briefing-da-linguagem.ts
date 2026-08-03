@@ -16,9 +16,9 @@ export const aula01: AulaPortuguesV4 = {
   bncc: ["EF67LP01", "EF67LP02"],
   duracaoMin: 25,
   momento01_motivacao: {
-    titulo: "Conexão Estabelecida",
-    historia: "Analista, recebi o sinal. O Labirinto da Linguagem está ativo. Nossa missão aqui é analisar a estrutura da comunicação humana como um sistema de dados. Esqueça o 'falar por falar' — você vai aprender a decodificar o que está escondido sob a superfície de cada mensagem.",
-    imagemUrl: "",
+    titulo: "Conexão Estabelecida: O Protocodificador",
+    historia: "Analista, recebi o sinal. O Labirinto da Linguagem está ativo. Nossa missão aqui é analisar a estrutura da comunicação humana como um sistema de dados. Esqueça o 'falar por falar' — você vai aprender a decodificar o que está escondido sob a superfície de cada mensagem. Como um arquiteto de sistemas, você verá que cada texto é uma construção com propósito, técnica e modelos precisos.",
+    imagemUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400",
   },
   momento02_previsao: {
     instrucao: "Analise o padrão de dados. O que este conjunto de mensagens tenta codificar?",
@@ -45,19 +45,23 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
   momento03_vocabulario: {
-    instrucao: "Termos técnicos da sua operação de analista.",
+    instrucao: "Dicionário de Ativos: Termos técnicos da sua operação de analista.",
     cards: [
-      { palavra: "Sistema", explicacao: "Conjunto de partes que funcionam juntas.", exemplo: "A língua é um sistema de signos.", imagemUrl: "" },
-      { palavra: "Código", explicacao: "Conjunto de regras para converter informação.", exemplo: "O português é nosso código de operação.", imagemUrl: "" },
+      { palavra: "Sistema", explicacao: "Conjunto de partes que funcionam juntas de forma lógica. Na língua, as palavras são as peças e a gramática é o motor.", exemplo: "A língua é um sistema de signos que organiza o pensamento.", imagemUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=200" },
+      { palavra: "Código", explicacao: "Conjunto de regras para converter informação. Sem código, a mensagem vira ruído.", exemplo: "O português é nosso código de operação padrão.", imagemUrl: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&q=80&w=200" },
     ],
   },
   momento04_leituraGuiada: {
     instrucao: "Análise de arquivo.",
     leitura: {
       titulo: "O Sistema em Expansão",
-      imagemUrl: "",
-      destacar: ["sistema", "código"],
-      paragrafos: ["A linguagem é um sistema vivo.", "Ela se adapta às novas mídias.", "Decodificar é a nossa função."],
+      imagemUrl: "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&q=80&w=400",
+      destacar: ["sistema", "código", "decodificar", "mídias"],
+      paragrafos: [
+        "A linguagem é um sistema vivo e dinâmico. Ela não é apenas uma lista de palavras, mas uma estrutura que permite que dois humanos compartilhem mundos inteiros usando um código comum.",
+        "Ela se adapta às novas mídias: do jornal impresso ao post de rede social, do bilhete manual ao e-mail corporativo. Cada meio exige um modelo de construção específico.",
+        "Decodificar esses modelos é a nossa função primordial. Entender como um texto é 'montado' nos permite não apenas ler, mas dominar a comunicação."
+      ],
     },
   },
   momento05_compreensao: {
@@ -79,18 +83,42 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "Nenhum agente detectado nesta cena.",
     perguntas: [],
   },
+  momento_ensinoVisual: {
+    titulo: "Laboratório de Modelagem: O Bilhete vs. O Log",
+    instrucao: "Analise a diferença de estrutura entre um modelo informal e um modelo técnico.",
+    blocos: [
+      {
+        tipo: "frases",
+        titulo: "Modelo A: Bilhete Pessoal (Informal)",
+        frases: [
+          "Oi, Analista! Deixei o sinal aberto na mesa. Passa lá depois? Bjs.",
+          "Estrutura: Saudação → Mensagem Curta → Despedida Afetiva."
+        ]
+      },
+      {
+        tipo: "frases",
+        titulo: "Modelo B: Log de Sistema (Formal/Técnico)",
+        frases: [
+          "PROTOCOLO 404: ACESSO PERMITIDO. AGENTE IDENTIFICADO. AGUARDANDO COMANDO.",
+          "Estrutura: Identificador → Status → Ação → Expectativa."
+        ]
+      }
+    ]
+  },
   momento07_sequencia: {
-    instrucao: "Ordem lógica dos dados.",
+    instrucao: "Algoritmo de Construção: Ordem lógica dos dados.",
     bloco: {
-      instrucao: "Reordene os blocos de dados.",
+      instrucao: "Reordene os blocos para formar uma comunicação funcional.",
       itens: [
-        { id: "1", texto: "Entrada de dados", imagemUrl: "" },
-        { id: "2", texto: "Processamento", imagemUrl: "" }
+        { id: "1", texto: "Definir o Objetivo (O que quero dizer?)", imagemUrl: "" },
+        { id: "2", texto: "Escolher o Código (Português, Visual?)", imagemUrl: "" },
+        { id: "3", texto: "Selecionar o Modelo (Bilhete, Jornal, Log?)", imagemUrl: "" },
+        { id: "4", texto: "Transmitir a Mensagem", imagemUrl: "" }
       ],
-      ordemCerta: ["1", "2"],
-      feedbackAcerto: "Ordem confirmada.",
-      feedbackErro: "Dados fora de sequência.",
-      dica: "Siga a lógica do sistema.",
+      ordemCerta: ["1", "2", "3", "4"],
+      feedbackAcerto: "Algoritmo otimizado. Você entende como o ensino da língua se transforma em ferramenta.",
+      feedbackErro: "Falha na sequência lógica. Reveja as etapas de construção.",
+      dica: "Primeiro planejamos, depois escolhemos o modelo, depois executamos.",
     },
   },
   momento08_leituraIndependente: {
