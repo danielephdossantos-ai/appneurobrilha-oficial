@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect, useMemo, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
+import { Volume2, VolumeX } from "lucide-react";
+import { cn } from "@/utils/utils";
 import type { AulaV4, Interacao } from "../types";
-import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking, normalizeLiteracyTextForSpeech } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
@@ -152,20 +154,29 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
     if (!sec) return;
     const clone = sec.cloneNode(true) as HTMLElement;
     clone.querySelectorAll('button, [role="button"], [data-no-tts], input, select, textarea').forEach((n) => n.remove());
-    const txt = (clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim();
+    const txt = normalizeLiteracyTextForSpeech((clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim());
     if (!txt) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(txt);
-    u.lang = "pt-BR"; u.rate = 0.98; u.pitch = 1;
-    u.onend = () => setFalando(false);
-    u.onerror = () => setFalando(false);
+    speakChunked(txt, {
+      rate: 0.88,
+      pitch: 1,
+      onEnd: () => setFalando(false)
+    });
     setFalando(true);
-    window.speechSynthesis.speak(u);
   };
   return (
-    <section id={id} className="scroll-mt-24">
-      <div className="mb-2">
+    <section id={id} className="scroll-mt-24 group relative">
+      <div className="mb-2 flex items-center justify-between">
         <div className="text-xs uppercase tracking-wider text-amber-300">{label}</div>
+        <button 
+          onClick={ouvir}
+          className={cn(
+            "p-1.5 rounded-full transition-all",
+            falando ? "bg-rose-500 text-white animate-pulse" : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+          )}
+          title="Ouvir seção"
+        >
+          {falando ? <Volume2 size={14} /> : <Volume2 size={14} className="opacity-50" />}
+        </button>
       </div>
       {children}
     </section>

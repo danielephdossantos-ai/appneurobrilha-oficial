@@ -18,7 +18,7 @@ import { KidsCtx } from "../PlayerPortuguesV4";
  */
 export function BotaoOuvirEnunciado({
   texto,
-  rate = 0.78,
+  rate = 0.88,
   rotulo = "Ouvir",
   className = "",
   auto = false,
@@ -64,7 +64,7 @@ export function BotaoOuvirEnunciado({
         setFalando(true);
         speakChunked(conteudo, {
           rate,
-          pitch: 1.05,
+          pitch: 1.0,
           onEnd: () => {
             if (ativoRef.current) setFalando(false);
           },
@@ -90,7 +90,7 @@ export function BotaoOuvirEnunciado({
     setFalando(true);
     speakChunked(conteudo, {
       rate,
-      pitch: 1.05,
+      pitch: 1.0,
       onEnd: () => {
         if (ativoRef.current) setFalando(false);
       },
