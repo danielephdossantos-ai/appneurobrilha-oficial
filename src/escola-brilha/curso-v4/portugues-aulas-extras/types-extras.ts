@@ -12,7 +12,7 @@ export type BlocoLousa = {
   conteudo: string;
   cor: CorLousa;
   posicao?: { x: number; y: number }; // Porcentagem 0-100
-  falaProfessor: string;
+  falaProfessor?: string;
 };
 
 export type AulaExtraLousa = Partial<AulaPortuguesV4> & {

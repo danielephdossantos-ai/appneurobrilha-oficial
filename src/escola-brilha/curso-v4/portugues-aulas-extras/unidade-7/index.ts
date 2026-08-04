@@ -1,10 +1,22 @@
-import { aulaOracoes, aulaCoesao, aulaRedacao, aulaPontuacaoAvancada, aulaVocabularioAcademico } from "./aulas";
+import { 
+  aulaClasseVsFuncao, 
+  aulaCacaSujeito, 
+  aulaTransitividade, 
+  aulaObjetoDiretoIndireto, 
+  aulaComplementoAdjunto 
+} from "./aulas";
 
 export const unidade7: any = {
-  slug: "unidade-7-escrita-avancada",
+  slug: "unidade-7-analise-sintatica",
   numero: 7,
-  titulo: "Unidade 7 · Escrita de Alta Performance",
+  titulo: "Unidade 7 · Análise Sintática na Prática",
   subtitulo: "Fase 3 · Linguagem Analítica (6º-9º Ano)",
   fase: "fase3",
-  aulas: [aulaOracoes, aulaCoesao, aulaRedacao, aulaPontuacaoAvancada, aulaVocabularioAcademico]
+  aulas: [
+    aulaClasseVsFuncao, 
+    aulaCacaSujeito, 
+    aulaTransitividade, 
+    aulaObjetoDiretoIndireto, 
+    aulaComplementoAdjunto
+  ]
 };

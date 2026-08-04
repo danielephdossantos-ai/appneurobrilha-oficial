@@ -4,7 +4,7 @@ export const aulaCrase: AulaExtraLousa = {
   slug: "crase-sem-medo",
   isAulaExtra: true,
   fase: "fase3",
-    difficulty: "desafio",
+  difficulty: "medio",
   titulo: "Crase sem Medo",
   iconeTrilha: "💎",
   cenasLousa: [
@@ -21,10 +21,16 @@ export const aulaCrase: AulaExtraLousa = {
         {
           id: "c1-b2",
           tipo: "formula",
-          conteudo: "A (preposição) + A (artigo) = À",
+          conteudo: "A (Preposição) + A (Artigo) = À",
           cor: "laranja",
           falaProfessor: "A fórmula é simples: Preposição mais Artigo resulta no A com acento grave.",
         },
+        {
+          id: "c1-b3",
+          tipo: "nota-pais",
+          conteudo: "Peça para seu filho trocar a palavra feminina da frase pela palavra 'CLUBE'. Se virar 'AO CLUBE', coloque o crase!",
+          cor: "azul"
+        }
       ],
       desafioRelampago: {
         pergunta: "Em qual caso ocorre crase?",
@@ -33,127 +39,143 @@ export const aulaCrase: AulaExtraLousa = {
       },
     },
     {
-      tituloLousa: "O Teste Infalível",
+      tituloLousa: "Método 'Troca pelo Macho'",
       blocos: [
         {
           id: "c2-b1",
           tipo: "formula",
-          conteudo: "Vou A, Volto DA -> Crase há! \nVou A, Volto DE -> Crase pra quê?",
+          conteudo: "Troque a palavra feminina por uma masculina. Deu 'AO'? Tem crase no 'À'!",
           cor: "verde",
-          falaProfessor: "Grave esse macete: se você volta DA, a crase está lá. Se volta DE, não tem crase nem por decreto!",
+          falaProfessor: "Grave esse macete: se ao trocar por uma palavra masculina aparecer o AO, a crase está confirmada!",
         },
         {
           id: "c2-b2",
           tipo: "exemplo",
-          conteudo: "Fui à França (Volto DA França) ✅\nFui a Paris (Volto DE Paris) ❌",
+          conteudo: "'Vou à praia' -> 'Vou ao clube' (Tem crase!) \n'Falo a ela' -> 'Falo ao ele?' Não! (Sem crase)",
           cor: "azul",
-          falaProfessor: "Veja o exemplo: França pede crase porque voltamos DA França. Paris não, pois voltamos DE Paris.",
+          falaProfessor: "Veja o exemplo: Praia virou clube com AO, então tem crase. Ela não vira AO ELE, então fica sem!",
         },
       ],
       modoSocorro: {
         titulo: "Dica de Ouro",
-        macete: "Substitua a palavra feminina por uma masculina (como 'o mercado'). Se virar 'AO', tem crase!",
+        macete: "Substitua a palavra feminina por uma masculina. Se virar 'AO', tem crase!",
       },
     },
   ],
 };
 
-export const aulaVerbos: AulaExtraLousa = {
-  slug: "verbos-acao",
+export const aulaCraseProibida: AulaExtraLousa = {
+  slug: "radar-crase-proibida",
   isAulaExtra: true,
   fase: "fase3",
-    difficulty: "desafio",
-  titulo: "Verbos: O Motor da Frase",
-  iconeTrilha: "⚙️",
+  difficulty: "desafio",
+  titulo: "Radar de Crase Proibida",
+  iconeTrilha: "🚫",
   cenasLousa: [
     {
-      tituloLousa: "As Três Famílias",
+      tituloLousa: "Zonas Proibidas",
       blocos: [
         {
-          id: "v1-b1",
-          tipo: "texto",
-          conteudo: "Verbos terminam em -AR (1ª), -ER (2ª) ou -IR (3ª).",
-          cor: "branco",
-          falaProfessor: "Os verbos são as ações! Eles se dividem em três grandes famílias chamadas de conjugações.",
-        },
-        {
-          id: "v1-b2",
-          tipo: "exemplo",
-          conteudo: "1ª: Cantar, Estudar\n2ª: Beber, Correr\n3ª: Sorrir, Partir",
-          cor: "azul",
-          falaProfessor: "Olha só: Cantar é de primeira, Beber é de segunda e Sorrir é de terceira. Fácil, né?",
-        },
-      ],
-    },
-  ],
-};
-
-export const aulaSintaxe: AulaExtraLousa = {
-  slug: "sintaxe-basica",
-  isAulaExtra: true,
-  fase: "fase3",
-    difficulty: "desafio",
-  titulo: "Sintaxe: Quem faz o quê?",
-  iconeTrilha: "🔍",
-  cenasLousa: [
-    {
-      tituloLousa: "O Trio Dinâmico",
-      blocos: [
-        {
-          id: "s1-b1",
+          id: "cp1-b1",
           tipo: "formula",
-          conteudo: "SUJEITO + VERBO + COMPLEMENTO",
+          conteudo: "NUNCA use crase antes de:\n1. Verbos (a andar)\n2. Palavras Masculinas (a pé)\n3. Pronomes (a ela/a você)\n4. Plural com 'A' no singular (a todas)",
           cor: "laranja",
-          falaProfessor: "Na sintaxe, o segredo é encontrar quem manda na frase. O Sujeito faz a ação do Verbo.",
+          falaProfessor: "Existem lugares onde a crase nunca pisa. Antes de verbo ou palavra masculina é proibido!",
         },
+        {
+          id: "cp1-b2",
+          tipo: "nota-pais",
+          conteudo: "Mostre que verbo não tem sexo (não é masculino nem feminino), por isso nunca aceita artigo 'A' nem crase.",
+          cor: "azul"
+        }
       ],
     },
   ],
 };
 
-export const aulaConcordancia: AulaExtraLousa = {
-  slug: "concordancia-nominal",
+export const aulaConjugacaoVerbal: AulaExtraLousa = {
+  slug: "conjugacao-verbal-descomplicada",
   isAulaExtra: true,
   fase: "fase3",
-    difficulty: "desafio",
-  titulo: "Concordância: Tudo em Harmonia",
-  iconeTrilha: "🤝",
+  difficulty: "medio",
+  titulo: "Conjugação Verbal Descomplicada",
+  iconeTrilha: "⏳",
   cenasLousa: [
     {
-      tituloLousa: "O Acordo Geral",
+      tituloLousa: "Linha do Tempo dos Pretéritos",
       blocos: [
         {
-          id: "con1-b1",
-          tipo: "texto",
-          conteudo: "O adjetivo e o artigo devem seguir o substantivo em gênero e número.",
-          cor: "branco",
-          falaProfessor: "Concordância é como uma dança. Se o substantivo está no plural, todo mundo ao redor também fica!",
+          id: "cv1-b1",
+          tipo: "formula",
+          conteudo: "• Perfeito: Aconteceu e acabou (Estudei)\n• Imperfeito: Costumava acontecer (Estudava)\n• Mais-que-perfeito: Antes de outro passado (Estudara)",
+          cor: "laranja",
+          falaProfessor: "O passado tem nuances! O perfeito é o que acabou, o imperfeito é o que se repetia.",
         },
+        {
+          id: "cv1-b2",
+          tipo: "nota-pais",
+          conteudo: "Ensine que o Pretérito Imperfeito sempre lembra algo repetitivo no passado ('Antigamente eu jogava...').",
+          cor: "azul"
+        }
       ],
     },
   ],
 };
 
-export const aulaRegencia: AulaExtraLousa = {
-  slug: "regencia-verbal",
+export const aulaModoSubjuntivo: AulaExtraLousa = {
+  slug: "modo-subjuntivo-duvida",
   isAulaExtra: true,
   fase: "fase3",
-    difficulty: "desafio",
-  titulo: "Regência: O Comando do Verbo",
-  iconeTrilha: "🎮",
+  difficulty: "desafio",
+  titulo: "O Modo Subjuntivo (Reino da Dúvida)",
+  iconeTrilha: "❓",
   cenasLousa: [
     {
-      tituloLousa: "Quem manda em quem?",
+      tituloLousa: "Os 3 Gatilhos do Subjuntivo",
       blocos: [
         {
-          id: "r1-b1",
+          id: "ms1-b1",
+          tipo: "formula",
+          conteudo: "1. Presente = QUE eu fale\n2. Pretérito = SE eu falasse\n3. Futuro = QUANDO eu falar",
+          cor: "laranja",
+          falaProfessor: "O subjuntivo é o modo do desejo e da dúvida. Use esses gatilhos para não errar a forma do verbo.",
+        },
+        {
+          id: "ms1-b2",
+          tipo: "nota-pais",
+          conteudo: "Peça para o aluno colocar a palavra 'Se' ou 'Quando' antes do verbo para achar a conjugação correta sem memorizar tabelas.",
+          cor: "azul"
+        }
+      ],
+    },
+  ],
+};
+
+export const aulaVozesVerbais: AulaExtraLousa = {
+  slug: "vozes-verbais-passiva",
+  isAulaExtra: true,
+  fase: "fase3",
+  difficulty: "desafio",
+  titulo: "Agente da Passiva e Vozes Verbais",
+  iconeTrilha: "🗣️",
+  cenasLousa: [
+    {
+      tituloLousa: "Voz Ativa vs. Voz Passiva",
+      blocos: [
+        {
+          id: "vv1-b1",
           tipo: "exemplo",
-          conteudo: "Assistir O filme (errado) ❌\nAssistir AO filme (correto) ✅",
+          conteudo: "• Voz Ativa: O gato comeu o peixe.\n• Voz Passiva: O peixe foi comido pelo gato.",
           cor: "laranja",
-          falaProfessor: "Cuidado! O verbo assistir, no sentido de ver, exige a preposição A. Por isso dizemos assistir AO filme.",
+          falaProfessor: "Na voz ativa, o sujeito age. Na voz passiva, o sujeito sofre a ação. O peixe virou o astro da frase!",
         },
+        {
+          id: "vv1-b2",
+          tipo: "nota-pais",
+          conteudo: "Na voz passiva, o sujeito 'sofre' a ação em vez de praticar. Ajude a identificar quem está recebendo a ação.",
+          cor: "azul"
+        }
       ],
     },
   ],
 };
-
