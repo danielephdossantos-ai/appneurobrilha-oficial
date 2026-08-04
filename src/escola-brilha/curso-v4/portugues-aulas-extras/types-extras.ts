@@ -18,6 +18,7 @@ export type BlocoLousa = {
 export type AulaExtraLousa = Partial<AulaPortuguesV4> & {
   isAulaExtra: true;
   fase: "fase1" | "fase2" | "fase3";
+  difficulty: "facil" | "medio" | "desafio";
   cenasLousa: Array<{
     tituloLousa: string;
     blocos: BlocoLousa[];
