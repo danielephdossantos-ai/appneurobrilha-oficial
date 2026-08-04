@@ -368,6 +368,107 @@ function PraticasCurricularesCards({
   );
 }
 
+  );
+}
+
+function RelatorioAlunoModal({ aberto, onFechar, aulas, concluidas }: { 
+  aberto: boolean; 
+  onFechar: () => void;
+  aulas: any[];
+  concluidas: Set<string>;
+}) {
+  const stats = useMemo(() => {
+    const res = {
+      fase1: { facil: 0, medio: 0, desafio: 0, concluidas: 0 },
+      fase2: { facil: 0, medio: 0, desafio: 0, concluidas: 0 },
+      fase3: { facil: 0, medio: 0, desafio: 0, concluidas: 0 },
+    };
+
+    aulas.forEach(a => {
+      const fase = a.fase || "fase1";
+      const diff = a.difficulty || "facil";
+      const foiConcluida = concluidas.has(a.slug);
+      
+      const faseKey = fase as keyof typeof res;
+      if (res[faseKey]) {
+        if (foiConcluida) {
+          res[faseKey].concluidas++;
+          if (diff === "facil") res[faseKey].facil++;
+          if (diff === "medio") res[faseKey].medio++;
+          if (diff === "desafio") res[faseKey].desafio++;
+        }
+      }
+    });
+
+    return res;
+  }, [aulas, concluidas]);
+
+  if (!aberto) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <motion.div 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        onClick={onFechar}
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+      />
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="relative bg-slate-900 border border-white/10 rounded-[2rem] p-8 w-full max-w-xl shadow-2xl overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400" />
+        
+        <h2 className="text-2xl font-black mb-6">📊 Relatório do Aluno</h2>
+        
+        <div className="space-y-6">
+          <FaseCard titulo="🔴 Fase 1: Lúdica" stats={stats.fase1} />
+          <FaseCard titulo="🟡 Fase 2: Detetive" stats={stats.fase2} />
+          <FaseCard titulo="🔵 Fase 3: Analítica" stats={stats.fase3} />
+        </div>
+
+        <button 
+          onClick={onFechar}
+          className="w-full mt-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 font-bold transition"
+        >
+          Fechar Relatório
+        </button>
+      </motion.div>
+    </div>
+  );
+}
+
+function FaseCard({ titulo, stats }: { titulo: string, stats: any }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+      <h3 className="font-bold mb-3">{titulo}</h3>
+      <div className="grid grid-cols-3 gap-2">
+        <StatBadge label="Fácil" count={stats.facil} cor="emerald" />
+        <StatBadge label="Médio" count={stats.medio} cor="amber" />
+        <StatBadge label="Desafio" count={stats.desafio} cor="rose" />
+      </div>
+      <div className="mt-3 text-[10px] text-white/40 uppercase font-black">
+        Total Concluídas: {stats.concluidas}
+      </div>
+    </div>
+  );
+}
+
+function StatBadge({ label, count, cor }: { label: string, count: number, cor: string }) {
+  const cores: Record<string, string> = {
+    emerald: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    amber: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+    rose: "bg-rose-500/20 text-rose-400 border-rose-500/30",
+  };
+  return (
+    <div className={cn("px-2 py-1 rounded-lg border text-center", cores[cor])}>
+      <div className="text-[10px] uppercase font-black leading-tight">{label}</div>
+      <div className="text-lg font-black">{count}</div>
+    </div>
+  );
+}
+
 function AtlasFinalCard({
   cursoSlug,
   totalAulas,
