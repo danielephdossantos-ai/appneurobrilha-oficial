@@ -19,7 +19,7 @@ const curso: CursoPortugues = {
   ano: "1º ao 9º Ano",
   titulo: "Aulas Extras°",
   descricao:
-    "Aulões de Lousa interativos com metodologia ativa para descomplicações rápidas e neurociência adaptada.",
+    "FAZ UMA ANALIZE NO AULÃO DE LOUSA E DESCOBRE ESTÁ PRONTO SE TODAS AS AULAS CORRESPONDEM COM O SISTEMA SE ESTÁ PRONTO PRA AJUDAR AS CRIANÇAS NO SEU APRENDIZADO",
   corPrimaria: "#f59e0b",
   corSecundaria: "#1a1033",
   tipoAula: "portugues",
