@@ -40,15 +40,15 @@ function TrilhaCurso() {
   const ehPortugues = curso?.tipoAula === "portugues";
   const ehGeoV1 = curso?.tipoAula === "geo-v1";
   const ehArteV1 = curso?.tipoAula === "arte-v1";
+  const isExtra = slug === "portugues-aulas-extras";
+
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
-  // Admin/testador: TODAS as aulas ficam destravadas por padrão.
-  // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
   const [modoLivre, setModoLivre] = useState(true);
+  const [termoBusca, setTermoBusca] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    // aluno=1 força fluxo travado; caso contrário admin fica sempre livre
     setModoLivre(!params.has("aluno"));
     try {
       const raw = localStorage.getItem(CHAVE_PROGRESSO(slug));
@@ -68,6 +68,14 @@ function TrilhaCurso() {
 
   const proximoIdx = aulas.findIndex((a) => !concluidas.has(a.slug));
 
+  const unidadesFiltradas = curso.unidades.map(u => ({
+    ...u,
+    aulas: u.aulas.filter(a => 
+      a.titulo.toLowerCase().includes(termoBusca.toLowerCase()) ||
+      (a as any).descricao?.toLowerCase().includes(termoBusca.toLowerCase())
+    )
+  })).filter(u => u.aulas.length > 0 || termoBusca === "");
+
   return (
     <div
       className="min-h-screen text-white"
@@ -75,42 +83,48 @@ function TrilhaCurso() {
         background: `linear-gradient(180deg, ${curso.corSecundaria}, #0a1642)`,
       }}
     >
-      <header className="sticky top-0 z-10 backdrop-blur bg-black/30 border-b border-white/10">
+      <header className="sticky top-0 z-20 backdrop-blur-xl bg-black/40 border-b border-white/10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/escola-brilha" className="text-sm text-white/70 hover:text-white">
             ← Escola Brilha
           </Link>
           <div className="text-xs text-white/60">
-            {concluidas.size} / {aulas.length} aulas
+            {concluidas.size} / {aulas.length} aulas completas
           </div>
         </div>
         <div className="max-w-2xl mx-auto px-4 pb-4">
-          <div className="text-xs uppercase tracking-wider text-amber-300">
-            {curso.disciplina} · {curso.ano}
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="text-xs uppercase tracking-wider text-amber-300">
+                {curso.disciplina} · {curso.ano}
+              </div>
+              <h1 className="text-3xl font-black">{curso.titulo}</h1>
+            </div>
+            {isExtra && (
+              <div className="relative group">
+                <input 
+                  type="text"
+                  placeholder="Buscar dúvida..."
+                  value={termoBusca}
+                  onChange={(e) => setTermoBusca(e.target.value)}
+                  className="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 ring-amber-400 w-40 md:w-64 transition-all"
+                />
+              </div>
+            )}
           </div>
-          <h1 className="text-3xl font-black">{curso.titulo}</h1>
+          
           <p className="text-sm text-white/70 mt-1">{curso.descricao}</p>
+          
           {perfilPedagogico && (
             <div className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-4 text-sm text-white/90">
               <div className="text-[10px] uppercase tracking-[0.35em] text-amber-300">Padrão pedagógico</div>
               <div className="font-bold text-base mt-1">{perfilPedagogico.titulo}</div>
               <p className="text-white/70 mt-1">{perfilPedagogico.descricao}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {perfilPedagogico.pilares.map((p) => (
-                  <span key={p.titulo} className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
-                    {p.icone} {p.titulo}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-          {modoLivre && (
-            <div className="mt-3 inline-block bg-amber-400 text-[#0d1f55] text-xs font-bold px-3 py-1 rounded-full">
-              🔓 Modo admin — todas as aulas destravadas (use ?aluno=1 pra simular aluno)
             </div>
           )}
         </div>
       </header>
+
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-10">
         {(slug === "portugues-1ano" || slug === "portugues-2ano") && (
@@ -128,16 +142,24 @@ function TrilhaCurso() {
             }}
           />
         )}
-        {curso.unidades.map((u) => (
+        {unidadesFiltradas.map((u) => {
+          const aulasConcluidasNaUnidade = u.aulas.filter(a => concluidas.has(a.slug)).length;
+          return (
           <section key={u.slug}>
 
             <div className="text-center mb-6">
-              <div className="text-xs uppercase text-white/50">Unidade {u.numero}</div>
+              <div className="text-xs uppercase text-white/50 flex items-center justify-center gap-2">
+                Unidade {u.numero} 
+                <span className="bg-white/10 px-2 py-0.5 rounded-full text-[10px]">
+                  {aulasConcluidasNaUnidade} / {u.aulas.length} Aulas Concluídas
+                </span>
+              </div>
               <h2 className="text-2xl font-bold" style={{ color: u.corTema }}>
                 {u.titulo}
               </h2>
               <div className="text-sm text-white/60">{u.subtitulo}</div>
             </div>
+
 
             {u.aulas.length === 0 && (
               <div className="text-center text-white/50 py-8 border border-dashed border-white/20 rounded-xl">
@@ -215,7 +237,8 @@ function TrilhaCurso() {
               })}
             </div>
           </section>
-        ))}
+        ); })}
+
         {ehPortugues && curso.praticasCurriculares && curso.praticasCurriculares.length > 0 && (
           <PraticasCurricularesCards praticas={curso.praticasCurriculares} corPrimaria={curso.corPrimaria} cursoSlug={slug} />
         )}

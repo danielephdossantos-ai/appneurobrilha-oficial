@@ -93,9 +93,46 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
             <BotaoFalaAlternar />
           </div>
 
-          <button className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300">
+          <button 
+            onClick={() => {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+              if (!ctx) return;
+              canvas.width = 1200;
+              canvas.height = 1600;
+              ctx.fillStyle = "#0d1a15";
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.fillStyle = "#ffffff";
+              ctx.font = "bold 40px sans-serif";
+              ctx.fillText("RESUMO: " + (aula.titulo || ""), 50, 80);
+              let y = 180;
+              aula.cenasLousa?.forEach((cena, i) => {
+                ctx.fillStyle = "#f59e0b";
+                ctx.font = "bold 30px sans-serif";
+                ctx.fillText(`${i + 1}. ${cena.tituloLousa}`, 50, y);
+                y += 50;
+                cena.blocos.forEach(bloco => {
+                  ctx.fillStyle = "#ffffff";
+                  ctx.font = "24px sans-serif";
+                  const lines = bloco.conteudo.split("\n");
+                  lines.forEach(l => {
+                    ctx.fillText(l, 70, y);
+                    y += 35;
+                  });
+                });
+                y += 40;
+              });
+              const link = document.createElement("a");
+              link.download = `resumo-${aula.slug}.png`;
+              link.href = canvas.toDataURL();
+              link.click();
+            }}
+            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300"
+            title="Baixar Resumo em PDF (Imagem)"
+          >
             <Download size={18} />
           </button>
+
         </div>
       </div>
 
