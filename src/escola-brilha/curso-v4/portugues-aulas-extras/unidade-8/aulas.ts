@@ -6,7 +6,6 @@ export const aulaFiguras: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Figuras: A Arte de Falar",
   iconeTrilha: "🎨",
-  descricao: "Metáforas, ironias e hipérboles: o tempero da comunicação.",
   cenasLousa: [
     {
       tituloLousa: "Metáfora vs Comparação",

@@ -6,7 +6,6 @@ export const aulaCrase: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Crase sem Medo",
   iconeTrilha: "💎",
-  descricao: "O segredo do A + A revelado com o teste do 'Vou a, Volto da'.",
   cenasLousa: [
     {
       tituloLousa: "O Nascimento da Crase",
@@ -64,7 +63,6 @@ export const aulaVerbos: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Verbos: O Motor da Frase",
   iconeTrilha: "⚙️",
-  descricao: "Aprenda a conjugar sem sofrer, focando no que realmente importa.",
   cenasLousa: [
     {
       tituloLousa: "As Três Famílias",
@@ -94,7 +92,6 @@ export const aulaSintaxe: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Sintaxe: Quem faz o quê?",
   iconeTrilha: "🔍",
-  descricao: "Desvende a estrutura da oração: Sujeito, Verbo e Complemento.",
   cenasLousa: [
     {
       tituloLousa: "O Trio Dinâmico",
@@ -117,7 +114,6 @@ export const aulaConcordancia: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Concordância: Tudo em Harmonia",
   iconeTrilha: "🤝",
-  descricao: "Aprenda a fazer as palavras 'conversarem' entre si corretamente.",
   cenasLousa: [
     {
       tituloLousa: "O Acordo Geral",
@@ -140,7 +136,6 @@ export const aulaRegencia: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Regência: O Comando do Verbo",
   iconeTrilha: "🎮",
-  descricao: "Descubra quais verbos exigem preposição e quais não.",
   cenasLousa: [
     {
       tituloLousa: "Quem manda em quem?",

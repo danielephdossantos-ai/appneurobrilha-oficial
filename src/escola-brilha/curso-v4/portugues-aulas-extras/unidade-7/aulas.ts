@@ -6,7 +6,6 @@ export const aulaOracoes: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Orações: O Encaixe Perfect",
   iconeTrilha: "🧩",
-  descricao: "Entenda como as frases se ligam para formar ideias complexas.",
   cenasLousa: [
     {
       tituloLousa: "Coordenadas vs Subordinadas",
@@ -29,7 +28,6 @@ export const aulaCoesao: AulaExtraLousa = {
   fase: "fase3",
   titulo: "Coesão: A Cola do Texto",
   iconeTrilha: "🧴",
-  descricao: "Conectivos e pronomes que fazem seu texto fluir como um rio.",
   cenasLousa: [
     {
       tituloLousa: "Onde está o erro?",
