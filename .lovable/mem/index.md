@@ -20,7 +20,7 @@ História 2º Ano: cada tema/palavra central precisa aparecer com imagem concret
 ## Memories
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
 - [Postura de professor excelente](mem://preferences/postura-professor-excelente) — Mapa idade × série.
-- [Padrão EF01MA02 travado](mem://features/padrao-ef01ma02) — Gabarito obrigatório.
+- [Auditoria Conformidade](mem://features/auditoria-conformidade-pronto) — Registro de auditoria final validando o currículo anual e cobertura BNCC.
 - [Atividades formato jogo](mem://features/atividades-formato-jogo) — EI/1º/2º vira jogo.
 - [Contagem tocando](mem://features/tap-count-group) — TapCountGroup.
 - [Contas +/− animadas](mem://features/operacao-visual) — OperacaoVisual.
