@@ -1,11 +1,10 @@
 import type { AulaExtraLousa } from "../types-extras";
 
 export const aulaCrase: AulaExtraLousa = {
-  id: "crase-sem-medo",
+  slug: "crase-sem-medo",
   isAulaExtra: true,
   fase: "fase3",
   titulo: "Crase sem Medo",
-  slug: "crase-sem-medo",
   iconeTrilha: "💎",
   descricao: "O segredo do A + A revelado com o teste do 'Vou a, Volto da'.",
   cenasLousa: [
@@ -60,11 +59,10 @@ export const aulaCrase: AulaExtraLousa = {
 };
 
 export const aulaVerbos: AulaExtraLousa = {
-  id: "verbos-acao",
+  slug: "verbos-acao",
   isAulaExtra: true,
   fase: "fase3",
   titulo: "Verbos: O Motor da Frase",
-  slug: "verbos-acao",
   iconeTrilha: "⚙️",
   descricao: "Aprenda a conjugar sem sofrer, focando no que realmente importa.",
   cenasLousa: [
@@ -91,11 +89,10 @@ export const aulaVerbos: AulaExtraLousa = {
 };
 
 export const aulaSintaxe: AulaExtraLousa = {
-  id: "sintaxe-basica",
+  slug: "sintaxe-basica",
   isAulaExtra: true,
   fase: "fase3",
   titulo: "Sintaxe: Quem faz o quê?",
-  slug: "sintaxe-basica",
   iconeTrilha: "🔍",
   descricao: "Desvende a estrutura da oração: Sujeito, Verbo e Complemento.",
   cenasLousa: [
@@ -115,11 +112,10 @@ export const aulaSintaxe: AulaExtraLousa = {
 };
 
 export const aulaConcordancia: AulaExtraLousa = {
-  id: "concordancia-nominal",
+  slug: "concordancia-nominal",
   isAulaExtra: true,
   fase: "fase3",
   titulo: "Concordância: Tudo em Harmonia",
-  slug: "concordancia-nominal",
   iconeTrilha: "🤝",
   descricao: "Aprenda a fazer as palavras 'conversarem' entre si corretamente.",
   cenasLousa: [
@@ -139,11 +135,10 @@ export const aulaConcordancia: AulaExtraLousa = {
 };
 
 export const aulaRegencia: AulaExtraLousa = {
-  id: "regencia-verbal",
+  slug: "regencia-verbal",
   isAulaExtra: true,
   fase: "fase3",
   titulo: "Regência: O Comando do Verbo",
-  slug: "regencia-verbal",
   iconeTrilha: "🎮",
   descricao: "Descubra quais verbos exigem preposição e quais não.",
   cenasLousa: [
@@ -161,3 +156,4 @@ export const aulaRegencia: AulaExtraLousa = {
     },
   ],
 };
+
