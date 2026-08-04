@@ -73,7 +73,19 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
             {aula.iconeTrilha}
           </div>
           <div>
-            <h1 className="text-sm font-black uppercase tracking-widest">{aula.titulo}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-sm font-black uppercase tracking-widest">{aula.titulo}</h1>
+              {aula.difficulty && (
+                <span className={cn(
+                  "text-[8px] font-black uppercase px-2 py-0.5 rounded-full border",
+                  aula.difficulty === "facil" ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400" :
+                  aula.difficulty === "medio" ? "bg-amber-500/20 border-amber-500/50 text-amber-400" :
+                  "bg-rose-500/20 border-rose-500/50 text-rose-400"
+                )}>
+                  {aula.difficulty === "facil" ? "🟢 Fácil" : aula.difficulty === "medio" ? "🟡 Médio" : "🔴 Desafio"}
+                </span>
+              )}
+            </div>
             <p className="text-[10px] text-slate-400 font-bold uppercase">{cena.tituloLousa}</p>
           </div>
         </div>

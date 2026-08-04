@@ -1,8 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
 import { getPerfilPedagogico } from "@/escola-brilha/curso-v4/pedagogia";
 import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/utils/utils";
 
 
 /**
