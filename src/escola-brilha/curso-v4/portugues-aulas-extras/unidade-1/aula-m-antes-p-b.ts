@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraMAntesPB: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-m-antes-p-b",
   titulo: "A Mamãe M antes de P e B",
   iconeTrilha: "👩‍👦",

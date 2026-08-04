@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraSilabas: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-silabas",
   titulo: "Separação Silábica: Bata Palmas",
   iconeTrilha: "👏",

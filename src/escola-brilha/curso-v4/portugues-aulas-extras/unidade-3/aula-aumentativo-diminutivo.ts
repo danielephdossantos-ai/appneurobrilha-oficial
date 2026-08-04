@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraAumentativoDiminutivo: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "medio",
   slug: "aula-extra-aumentativo-diminutivo",
   titulo: "Aumentativo e Diminutivo",
   iconeTrilha: "🔍",

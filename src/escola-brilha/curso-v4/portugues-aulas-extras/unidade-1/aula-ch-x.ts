@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraChX: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-ch-x",
   titulo: "Os Irmãos Laranjas CH e X",
   iconeTrilha: "🍊",

@@ -4,6 +4,7 @@ export const aulaOracoes: AulaExtraLousa = {
   slug: "oracoes-coordenadas",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Orações: O Encaixe Perfeito",
   iconeTrilha: "🧩",
   cenasLousa: [
@@ -26,6 +27,7 @@ export const aulaCoesao: AulaExtraLousa = {
   slug: "coesao-textual",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Coesão: A Cola do Texto",
   iconeTrilha: "🧴",
   cenasLousa: [
@@ -48,6 +50,7 @@ export const aulaRedacao: AulaExtraLousa = {
   slug: "estrutura-redacao",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Redação: A Estrutura Nota 1000",
   iconeTrilha: "📝",
   cenasLousa: [
@@ -70,6 +73,7 @@ export const aulaPontuacaoAvancada: AulaExtraLousa = {
   slug: "pontuacao-estilo",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Pontuação: Além da Vírgula",
   iconeTrilha: "‽",
   cenasLousa: [
@@ -92,6 +96,7 @@ export const aulaVocabularioAcademico: AulaExtraLousa = {
   slug: "vocabulario-formal",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Vocabulário: Fale como um Mestre",
   iconeTrilha: "🎓",
   cenasLousa: [

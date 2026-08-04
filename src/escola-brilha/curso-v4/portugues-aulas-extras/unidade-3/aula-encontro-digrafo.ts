@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraEncontroDigrafo: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "medio",
   slug: "aula-extra-encontro-digrafo",
   titulo: "Amigos Grudados e Separados",
   iconeTrilha: "🤝",

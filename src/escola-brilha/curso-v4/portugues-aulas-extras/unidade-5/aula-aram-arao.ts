@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraAramArao: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "facil",
   slug: "aula-extra-aram-arao",
   titulo: "ARAM x ARÃO: Ontem e Amanhã",
   iconeTrilha: "⏰",

@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraSVsZ: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-s-vs-z",
   titulo: "O Agente Secreto S",
   iconeTrilha: "🕵️",

@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraAcentosVovo: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "medio",
   slug: "aula-extra-acentos-vovo",
   titulo: "Vovó e Vovô dos Acentos",
   iconeTrilha: "👵",

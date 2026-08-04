@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraSubstantivoAdjetivo: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "medio",
   slug: "aula-extra-substantivo-adjetivo",
   titulo: "Substantivo x Adjetivo na Prática",
   iconeTrilha: "🏷️",
