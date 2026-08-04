@@ -5,6 +5,8 @@ import { getPerfilPedagogico } from "@/escola-brilha/curso-v4/pedagogia";
 import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/utils";
+import { ModalAuditoria } from "@/components/aulas-extras/ModalAuditoria";
+import { ClipboardCheck } from "lucide-react";
 
 
 /**
