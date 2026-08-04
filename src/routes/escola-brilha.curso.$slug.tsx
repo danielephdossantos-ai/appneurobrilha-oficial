@@ -45,6 +45,8 @@ function TrilhaCurso() {
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   const [modoLivre, setModoLivre] = useState(true);
   const [termoBusca, setTermoBusca] = useState("");
+  const [filtroDificuldade, setFiltroDificuldade] = useState<string>("todos");
+  const [mostrarRelatorio, setMostrarRelatorio] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,12 +70,35 @@ function TrilhaCurso() {
 
   const proximoIdx = aulas.findIndex((a) => !concluidas.has(a.slug));
 
+  const sinonimosBusca: Record<string, string[]> = {
+    "porquês": ["porque", "por que", "porquê", "por quê"],
+    "crase": ["acentuação", "acento", "grave"],
+    "z": ["som de z", "s com som de z"],
+    "acentuação": ["acento", "agudo", "circunflexo", "til"],
+    "verbos": ["passado", "futuro", "aram", "arao"]
+  };
+
   const unidadesFiltradas = curso.unidades.map(u => ({
     ...u,
-    aulas: u.aulas.filter(a => 
-      a.titulo.toLowerCase().includes(termoBusca.toLowerCase()) ||
-      (a as any).descricao?.toLowerCase().includes(termoBusca.toLowerCase())
-    )
+    aulas: u.aulas.filter(a => {
+      const termo = termoBusca.toLowerCase();
+      const matchDificuldade = filtroDificuldade === "todos" || (a as any).difficulty === filtroDificuldade;
+      if (!matchDificuldade) return false;
+
+      const titulo = a.titulo.toLowerCase();
+      const descricao = (a as any).descricao?.toLowerCase() || "";
+      const matchesBase = titulo.includes(termo) || descricao.includes(termo);
+      
+      if (matchesBase) return true;
+
+      // Busca por sinônimos
+      for (const [chave, lista] of Object.entries(sinonimosBusca)) {
+        if (chave.includes(termo) || termo.includes(chave)) {
+          if (lista.some(s => titulo.includes(s) || descricao.includes(s))) return true;
+        }
+      }
+      return false;
+    })
   })).filter(u => u.aulas.length > 0 || termoBusca === "");
 
   return (
@@ -101,14 +126,34 @@ function TrilhaCurso() {
               <h1 className="text-3xl font-black">{curso.titulo}</h1>
             </div>
             {isExtra && (
-              <div className="relative group">
-                <input 
-                  type="text"
-                  placeholder="Buscar dúvida..."
-                  value={termoBusca}
-                  onChange={(e) => setTermoBusca(e.target.value)}
-                  className="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 ring-amber-400 w-40 md:w-64 transition-all"
-                />
+              <div className="flex flex-col gap-2">
+                <div className="relative group">
+                  <input 
+                    type="text"
+                    placeholder="Digite a dúvida (ex: porquês, crase)..."
+                    value={termoBusca}
+                    onChange={(e) => setTermoBusca(e.target.value)}
+                    className="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 ring-amber-400 w-full md:w-80 transition-all"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <select 
+                    value={filtroDificuldade}
+                    onChange={(e) => setFiltroDificuldade(e.target.value)}
+                    className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-[10px] font-bold uppercase outline-none focus:ring-1 ring-amber-400"
+                  >
+                    <option value="todos" className="bg-slate-900">Todos Níveis</option>
+                    <option value="facil" className="bg-slate-900">🟢 Fácil</option>
+                    <option value="medio" className="bg-slate-900">🟡 Médio</option>
+                    <option value="desafio" className="bg-slate-900">🔴 Desafio</option>
+                  </select>
+                  <button 
+                    onClick={() => setMostrarRelatorio(true)}
+                    className="bg-amber-500/20 border border-amber-500/50 text-amber-300 rounded-lg px-2 py-1 text-[10px] font-bold uppercase hover:bg-amber-500/30 transition"
+                  >
+                    📊 Relatório do Aluno
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -216,7 +261,17 @@ function TrilhaCurso() {
                       } ${eProxima ? "ring-4 ring-amber-300 animate-pulse" : ""}`}
                     >
                       <div className="text-center px-3">
-                        <div className="text-4xl">{a.iconeTrilha}</div>
+                        {(a as any).difficulty && (
+                          <div className={cn(
+                            "absolute top-4 left-1/2 -translate-x-1/2 text-[8px] font-bold uppercase px-2 py-0.5 rounded-full border",
+                            (a as any).difficulty === "facil" ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300" :
+                            (a as any).difficulty === "medio" ? "bg-amber-500/20 border-amber-500/50 text-amber-300" :
+                            "bg-rose-500/20 border-rose-500/50 text-rose-300"
+                          )}>
+                            {(a as any).difficulty === "facil" ? "🟢 Fácil" : (a as any).difficulty === "medio" ? "🟡 Médio" : "🔴 Desafio"}
+                          </div>
+                        )}
+                        <div className="text-4xl mt-2">{a.iconeTrilha}</div>
                         <div className="text-xs font-bold mt-1 leading-tight">
                           {a.titulo}
                         </div>
