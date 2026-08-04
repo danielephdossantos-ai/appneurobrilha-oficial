@@ -368,10 +368,8 @@ function PraticasCurricularesCards({
   );
 }
 
-  );
-}
-
 function RelatorioAlunoModal({ aberto, onFechar, aulas, concluidas }: { 
+
   aberto: boolean; 
   onFechar: () => void;
   aulas: any[];
