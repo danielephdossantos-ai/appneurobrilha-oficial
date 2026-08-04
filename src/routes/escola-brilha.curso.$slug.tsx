@@ -51,6 +51,7 @@ function TrilhaCurso() {
   const [termoBusca, setTermoBusca] = useState("");
   const [filtroDificuldade, setFiltroDificuldade] = useState<string>("todos");
   const [mostrarRelatorio, setMostrarRelatorio] = useState(false);
+  const [mostrarAuditoria, setMostrarAuditoria] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -156,6 +157,13 @@ function TrilhaCurso() {
                     className="bg-amber-500/20 border border-amber-500/50 text-amber-300 rounded-lg px-2 py-1 text-[10px] font-bold uppercase hover:bg-amber-500/30 transition"
                   >
                     📊 Relatório do Aluno
+                  </button>
+                  <button 
+                    onClick={() => setMostrarAuditoria(true)}
+                    className="bg-blue-500/20 border border-blue-500/50 text-blue-300 rounded-lg px-2 py-1 text-[10px] font-bold uppercase hover:bg-blue-500/30 transition flex items-center gap-1"
+                  >
+                    <ClipboardCheck size={12} />
+                    📊 Auditoria
                   </button>
                 </div>
               </div>
@@ -309,6 +317,7 @@ function TrilhaCurso() {
           concluidas={concluidas.size}
           modoLivre={modoLivre}
         />
+        <ModalAuditoria aberto={mostrarAuditoria} onFechar={() => setMostrarAuditoria(false)} />
       </main>
     </div>
   );
