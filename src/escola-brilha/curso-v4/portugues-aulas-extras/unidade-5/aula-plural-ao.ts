@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraPluralAo: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "medio",
   slug: "aula-extra-plural-ao",
   titulo: "Plural Complexo: palavras em -ÃO",
   iconeTrilha: "🎈",

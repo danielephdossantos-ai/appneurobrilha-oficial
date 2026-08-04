@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraPorques: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "medio",
   slug: "aula-extra-porques",
   titulo: "O Enigma dos 4 Porquês",
   iconeTrilha: "🔍",

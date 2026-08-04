@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraCCedilha: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-c-cedilha",
   titulo: "C e Ç: o Circo do Palhaço",
   iconeTrilha: "🎪",

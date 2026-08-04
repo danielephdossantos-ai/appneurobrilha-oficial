@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraSilabaTonica: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "desafio",
   slug: "aula-extra-silaba-tonica",
   titulo: "Sílaba Tônica: a Dança do Som Forte",
   iconeTrilha: "🎵",

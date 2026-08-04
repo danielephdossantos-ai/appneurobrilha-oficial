@@ -4,6 +4,7 @@ export const aulaCrase: AulaExtraLousa = {
   slug: "crase-sem-medo",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Crase sem Medo",
   iconeTrilha: "💎",
   cenasLousa: [
@@ -61,6 +62,7 @@ export const aulaVerbos: AulaExtraLousa = {
   slug: "verbos-acao",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Verbos: O Motor da Frase",
   iconeTrilha: "⚙️",
   cenasLousa: [
@@ -90,6 +92,7 @@ export const aulaSintaxe: AulaExtraLousa = {
   slug: "sintaxe-basica",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Sintaxe: Quem faz o quê?",
   iconeTrilha: "🔍",
   cenasLousa: [
@@ -112,6 +115,7 @@ export const aulaConcordancia: AulaExtraLousa = {
   slug: "concordancia-nominal",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Concordância: Tudo em Harmonia",
   iconeTrilha: "🤝",
   cenasLousa: [
@@ -134,6 +138,7 @@ export const aulaRegencia: AulaExtraLousa = {
   slug: "regencia-verbal",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Regência: O Comando do Verbo",
   iconeTrilha: "🎮",
   cenasLousa: [

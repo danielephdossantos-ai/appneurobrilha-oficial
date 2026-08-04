@@ -73,7 +73,19 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
             {aula.iconeTrilha}
           </div>
           <div>
-            <h1 className="text-sm font-black uppercase tracking-widest">{aula.titulo}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-sm font-black uppercase tracking-widest">{aula.titulo}</h1>
+              {aula.difficulty && (
+                <span className={cn(
+                  "text-[8px] font-black uppercase px-2 py-0.5 rounded-full border",
+                  aula.difficulty === "facil" ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400" :
+                  aula.difficulty === "medio" ? "bg-amber-500/20 border-amber-500/50 text-amber-400" :
+                  "bg-rose-500/20 border-rose-500/50 text-rose-400"
+                )}>
+                  {aula.difficulty === "facil" ? "🟢 Fácil" : aula.difficulty === "medio" ? "🟡 Médio" : "🔴 Desafio"}
+                </span>
+              )}
+            </div>
             <p className="text-[10px] text-slate-400 font-bold uppercase">{cena.tituloLousa}</p>
           </div>
         </div>
@@ -94,41 +106,54 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           </div>
 
           <button 
-            onClick={() => {
-              const canvas = document.createElement("canvas");
-              const ctx = canvas.getContext("2d");
-              if (!ctx) return;
-              canvas.width = 1200;
-              canvas.height = 1600;
-              ctx.fillStyle = "#0d1a15";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "bold 40px sans-serif";
-              ctx.fillText("RESUMO: " + (aula.titulo || ""), 50, 80);
-              let y = 180;
+            onClick={async () => {
+              const { default: jsPDF } = await import("jspdf");
+              const doc = new jsPDF();
+              
+              // Estilo do PDF
+              doc.setFillColor(13, 26, 21); // Verde Escuro Lousa
+              doc.rect(0, 0, 210, 297, "F");
+              
+              doc.setTextColor(245, 158, 11); // Amarelo/Âmbar
+              doc.setFontSize(22);
+              doc.text("RESUMO: " + (aula.titulo || ""), 20, 30);
+              
+              doc.setDrawColor(255, 255, 255, 0.2);
+              doc.line(20, 35, 190, 35);
+              
+              let y = 50;
               aula.cenasLousa?.forEach((cena, i) => {
-                ctx.fillStyle = "#f59e0b";
-                ctx.font = "bold 30px sans-serif";
-                ctx.fillText(`${i + 1}. ${cena.tituloLousa}`, 50, y);
-                y += 50;
+                if (y > 250) { doc.addPage(); doc.setFillColor(13, 26, 21); doc.rect(0, 0, 210, 297, "F"); y = 30; }
+                
+                doc.setTextColor(245, 158, 11);
+                doc.setFontSize(16);
+                doc.text(`${i + 1}. ${cena.tituloLousa}`, 20, y);
+                y += 10;
+                
                 cena.blocos.forEach(bloco => {
-                  ctx.fillStyle = "#ffffff";
-                  ctx.font = "24px sans-serif";
-                  const lines = bloco.conteudo.split("\n");
-                  lines.forEach(l => {
-                    ctx.fillText(l, 70, y);
-                    y += 35;
-                  });
+                  if (y > 270) { doc.addPage(); doc.setFillColor(13, 26, 21); doc.rect(0, 0, 210, 297, "F"); y = 30; }
+                  
+                  if (bloco.tipo === "nota-pais") {
+                    doc.setFillColor(59, 130, 246, 0.1);
+                    doc.rect(20, y - 5, 170, 15, "F");
+                    doc.setTextColor(147, 197, 253);
+                    doc.setFontSize(10);
+                    doc.text("Dica para os Pais: " + bloco.conteudo, 25, y + 2, { maxWidth: 160 });
+                    y += 20;
+                  } else {
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(12);
+                    doc.text(bloco.conteudo, 25, y, { maxWidth: 160 });
+                    y += 10 + (bloco.conteudo.split('\n').length * 5);
+                  }
                 });
-                y += 40;
+                y += 10;
               });
-              const link = document.createElement("a");
-              link.download = `resumo-${aula.slug}.png`;
-              link.href = canvas.toDataURL();
-              link.click();
+              
+              doc.save(`Resumo-Lousa-\${aula.slug}.pdf`);
             }}
-            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300"
-            title="Baixar Resumo em PDF (Imagem)"
+            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            title="Baixar Resumo em PDF"
           >
             <Download size={18} />
           </button>

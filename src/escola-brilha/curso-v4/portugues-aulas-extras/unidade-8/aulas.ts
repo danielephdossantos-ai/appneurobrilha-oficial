@@ -4,6 +4,7 @@ export const aulaFiguras: AulaExtraLousa = {
   slug: "figuras-de-linguagem",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Figuras: A Arte de Falar",
   iconeTrilha: "🎨",
   cenasLousa: [
@@ -26,6 +27,7 @@ export const aulaIronia: AulaExtraLousa = {
   slug: "ironia-e-sarcasmo",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Ironia: O Que Não Foi Dito",
   iconeTrilha: "😏",
   cenasLousa: [
@@ -48,6 +50,7 @@ export const aulaIntertextualidade: AulaExtraLousa = {
   slug: "intertextualidade",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Intertextualidade: Diálogo entre Textos",
   iconeTrilha: "🔗",
   cenasLousa: [
@@ -70,6 +73,7 @@ export const aulaAmbguidade: AulaExtraLousa = {
   slug: "ambiguidade-vicios",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Ambiguidade: Cuidado com o Duplo Sentido",
   iconeTrilha: "🌀",
   cenasLousa: [
@@ -92,6 +96,7 @@ export const aulaRetorica: AulaExtraLousa = {
   slug: "retorica-persuasao",
   isAulaExtra: true,
   fase: "fase3",
+    difficulty: "desafio",
   titulo: "Retórica: O Poder de Convencer",
   iconeTrilha: "🗣️",
   cenasLousa: [

@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraProparoxitonas: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase2",
+  difficulty: "desafio",
   slug: "aula-extra-proparoxitonas",
   titulo: "A Regra de Ouro das Proparoxítonas",
   iconeTrilha: "🏆",

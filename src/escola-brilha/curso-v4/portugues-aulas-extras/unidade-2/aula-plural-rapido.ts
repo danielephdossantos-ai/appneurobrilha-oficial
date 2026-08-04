@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraPluralRapido: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-plural-rapido",
   titulo: "Plural Rápido: O Garoto / Os Garotos",
   iconeTrilha: "👥",

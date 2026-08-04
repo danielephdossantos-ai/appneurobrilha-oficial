@@ -7,6 +7,7 @@ import type { AulaExtraLousa } from "../types-extras";
 export const aulaAulaExtraMaiuscula: AulaExtraLousa = {
   isAulaExtra: true,
   fase: "fase1",
+  difficulty: "facil",
   slug: "aula-extra-maiuscula",
   titulo: "Letra Maiúscula: o Chapéu do Nome",
   iconeTrilha: "🔠",
