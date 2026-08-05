@@ -25,12 +25,12 @@ export const aula01_dizimas: AulaV4 = {
         tipo: "trinomioPassoAPasso",
         trinomio: "1 ÷ 3",
         passos: [
-          { expr: "1   l 3", explica: "Armando a conta", status: "neutro", professor: "Como o 1 é menor que o 3, não conseguimos dividir. O que fazemos? Colocamos o zero e uma vírgula no quociente e 'emprestamos' um zero para o 1 virar 10." },
-          { expr: "1,0 l 3 \n    0,", explica: "Compensação decimal", status: "ok", professor: "Veja: o 1 agora é 10 décimos. Agora podemos dividir por 3." },
-          { expr: "1,0 l 3 \n- 0,9   0,3", explica: "10 ÷ 3 = 3 (sobra 1)", status: "ok", professor: "10 dividido por 3 dá 3, porque 3 x 3 é 9. Colocamos o -9 embaixo do 10 e o 3 no resultado." },
-          { expr: "  0,1 l 3 \n        0,3", explica: "Sobra 1 décimo", status: "ok", professor: "10 menos 9 sobra 1. Para continuar, ganhamos outro zero de graça: vira 10 de novo!" },
-          { expr: "  1,0 l 3 \n- 0,9   0,33", explica: "Repetindo o processo", status: "ok", professor: "De novo: 10 dividido por 3 dá 3. 3 x 3 é 9. Colocamos o -9 e sobra 1 novamente." },
-          { expr: "  0,1 ...", explica: "Padrão infinito", status: "ok", professor: "Percebeu? O resto 1 sempre volta e o 3 sempre repete. Isso é uma dízima periódica: 0,333..." },
+          { expr: "  1 | 3\n     ---", explica: "Armando a conta", status: "neutro", professor: "Como o 1 é menor que o 3, não conseguimos dividir. O que fazemos? Colocamos o zero e uma vírgula no quociente e 'emprestamos' um zero para o 1 virar 10." },
+          { expr: " 1,0 | 3\n     ---\n      0,", explica: "Compensação decimal", status: "ok", professor: "Veja: o 1 agora é 10 décimos. Agora podemos dividir por 3." },
+          { expr: " 1,0 | 3\n-  9  ---\n ---  0,3\n  1", explica: "10 ÷ 3 = 3 (sobra 1)", status: "ok", professor: "10 dividido por 3 dá 3, porque 3 x 3 é 9. Colocamos o -9 embaixo do 10 e o 3 no resultado." },
+          { expr: " 1,00 | 3\n-  9   ---\n ---   0,33\n   10\n -  9\n  ---", explica: "Sobra 1 décimo", status: "ok", professor: "10 menos 9 sobra 1. Para continuar, ganhamos outro zero de graça: vira 10 de novo!" },
+          { expr: "  1,000 | 3\n -  9    ---\n  ---    0,333\n    10\n  -  9\n   ---\n     1", explica: "Repetindo o processo", status: "ok", professor: "De novo: 10 dividido por 3 dá 3. 3 x 3 é 9. Colocamos o -9 e sobra 1 novamente." },
+          { expr: "0,333...", explica: "Padrão infinito", status: "ok", professor: "Percebeu? O resto 1 sempre volta e o 3 sempre repete. Isso é uma dízima periódica: 0,333..." },
         ],
         fatorada: "0,333…",
         legenda: "Divisão na chave montada",
@@ -114,35 +114,35 @@ export const aula01_dizimas: AulaV4 = {
             trinomio: "0,777…  →  fração?",
             passos: [
               {
-                expr: "x = 0,777…",
+                expr: "x = 0,777...",
                 explica: "Chamo o número de x.",
                 status: "neutro",
                 professor:
                   "Dou um nome ao desconhecido: x = 0,777…. Isso permite fazer contas com ele como se fosse uma incógnita comum.",
               },
               {
-                expr: "10 · x = 7,777…",
+                expr: "10 · x = 7,777...",
                 explica: "Multiplico por 10.",
                 status: "ok",
                 professor:
                   "Multiplico os dois lados por 10 porque o período tem 1 dígito. Assim, a parte que se repete ‘alinha’: 10x = 7,777….",
               },
               {
-                expr: "10x − x = 7,777… − 0,777…",
+                expr: "  10x = 7,777...\n-  x = 0,777...\n--------------",
                 explica: "Subtraio as equações.",
                 status: "ok",
                 professor:
                   "Aqui está o pulo do gato: subtraio uma equação da outra. Como as caudas 0,777… são IGUAIS, elas se cancelam!",
               },
               {
-                expr: "9x = 7",
+                expr: "   9x = 7",
                 explica: "Cauda cancelada.",
                 status: "ok",
                 professor:
                   "Do lado esquerdo, 10x − x = 9x. Do lado direito, sobrou apenas o 7. Veja a montagem da conta: 9x = 7.",
               },
               {
-                expr: "x = 7 ÷ 9",
+                expr: "x = 7 / 9",
                 explica: "Isolando o x.",
                 status: "ok",
                 professor: "Para isolar o x, o 9 que está multiplicando passa para o outro lado dividindo o 7.",
