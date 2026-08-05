@@ -30,7 +30,7 @@ export const aula01_dizimas: AulaV4 = {
           { expr: " 1,0 | 3\n-  9  ---\n ---  0,3\n  1", explica: "10 ÷ 3 = 3 (sobra 1)", status: "ok", professor: "10 dividido por 3 dá 3, porque 3 x 3 é 9. Colocamos o -9 embaixo do 10 e o 3 no resultado." },
           { expr: " 1,00 | 3\n-  9   ---\n ---   0,33\n   10\n -  9\n  ---", explica: "Sobra 1 décimo", status: "ok", professor: "10 menos 9 sobra 1. Para continuar, ganhamos outro zero de graça: vira 10 de novo!" },
           { expr: "  1,000 | 3\n -  9    ---\n  ---    0,333\n    10\n  -  9\n   ---\n     1", explica: "Repetindo o processo", status: "ok", professor: "De novo: 10 dividido por 3 dá 3. 3 x 3 é 9. Colocamos o -9 e sobra 1 novamente." },
-          { expr: "0,333...", explica: "Padrão infinito", status: "ok", professor: "Percebeu? O resto 1 sempre volta e o 3 sempre repete. Isso é uma dízima periódica: 0,333..." },
+          { expr: "0,333...", explica: "Padrão infinito", status: "ok", professor: "Isso é uma dízima periódica: o 3 se repete para sempre." },
         ],
         fatorada: "0,333…",
         legenda: "Divisão na chave montada",
