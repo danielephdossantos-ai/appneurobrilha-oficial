@@ -164,7 +164,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
       {/* Lousa Virtual */}
       <div className="flex-1 relative p-4 md:p-8 overflow-y-auto">
         <div 
-          className="min-h-full rounded-[40px] border-[6px] md:border-[12px] border-slate-800 shadow-2xl relative overflow-hidden"
+          className="min-h-full rounded-[30px] border-[4px] md:border-[8px] border-slate-800 shadow-2xl relative overflow-hidden max-w-4xl mx-auto"
           style={{ 
             background: "radial-gradient(circle at center, #1a2e26 0%, #0d1a15 100%)",
             boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)"
