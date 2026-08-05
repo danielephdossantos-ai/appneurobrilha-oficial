@@ -187,7 +187,7 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 space-y-4">
       {children}
     </div>
   );
@@ -1966,7 +1966,7 @@ function ExemploReal(props: NonNullable<
 >) {
   const { titulo = "🔎 Na prática", contexto, casasValor, contaPassoAPasso, visualMat, destaque } = props;
   return (
-    <div className="mt-4 rounded-2xl bg-amber-50 text-[#0d1f55] border-2 border-amber-300 p-4">
+    <div className="mt-4 rounded-2xl bg-amber-50 text-[#0d1f55] border-2 border-amber-300 p-2 sm:p-4">
       <div className="text-[10px] uppercase tracking-widest font-black text-amber-700 mb-2">
         {titulo}
       </div>

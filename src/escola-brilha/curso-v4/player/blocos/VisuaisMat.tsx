@@ -1350,45 +1350,47 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [v, iniciou]);
 
   return (
-    <div className="my-4 w-full max-w-3xl mx-auto px-2 md:px-4">
+    <div className="my-4 w-full max-w-3xl mx-auto px-0 sm:px-2 md:px-4">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      <div className="rounded-[30px] border-[4px] md:border-[8px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-8 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_10px_30px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[250px]">
+      <div className="rounded-2xl md:rounded-[30px] border-2 md:border-[6px] border-[#8b5e3c] bg-[#fff9f0] p-2 sm:p-4 md:p-8 shadow-[inset_0_2px_15px_rgba(0,0,0,0.08),0_8px_20px_rgba(0,0,0,0.08)] relative overflow-hidden min-h-[200px]">
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
-          <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
-            <div className="text-xl sm:text-2xl md:text-5xl font-black text-[#5d4037]" style={{ fontFamily: "'Nunito', sans-serif" }}>
+          <div className="flex items-center justify-between gap-2 border-b border-amber-200/60 pb-2 mb-3">
+            <div className="min-w-0 flex-1 break-words text-base sm:text-xl md:text-3xl font-black text-[#5d4037]" style={{ fontFamily: "'Nunito', sans-serif" }}>
               {trinomio}
             </div>
+
             
             <button
               onClick={() => setAudioAtivo(!audioAtivo)}
-              className="p-2 rounded-full hover:bg-[#8b5e3c]/10 transition-colors text-[#8b5e3c]/60 hover:text-[#8b5e3c]"
+              className="shrink-0 p-2 rounded-full hover:bg-[#8b5e3c]/10 transition-colors text-[#8b5e3c]/60 hover:text-[#8b5e3c]"
               title={audioAtivo ? "Desativar explicação por voz" : "Ativar explicação por voz"}
             >
-              {audioAtivo ? <Volume2 className="h-6 w-6" /> : <VolumeX className="h-6 w-6" />}
+              {audioAtivo ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
             </button>
           </div>
 
           {!iniciou ? (
-            <div className="flex flex-col items-center justify-center py-10 gap-4">
+            <div className="flex flex-col items-center justify-center py-8 gap-3">
               <button
                 onClick={() => setIniciou(true)}
-                className="group relative px-10 py-5 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-2xl shadow-[0_6px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-xl"
+                className="group relative w-full max-w-xs px-5 py-4 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-2xl shadow-[0_5px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg text-center leading-tight"
               >
                 Começar explicação passo a passo ▶
               </button>
-              <p className="text-[#8b5e3c]/60 text-xs uppercase font-bold tracking-widest animate-pulse">
+              <p className="text-[#8b5e3c]/60 text-[10px] sm:text-xs uppercase font-bold tracking-widest animate-pulse text-center">
                 Clique para ver o passo a passo
               </p>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4 md:gap-6">
+
             {passos.slice(0, revelados).map((p, idx) => {
               const caracAtuais = caracteresVisiveis[idx] || 0;
               const textoExibido = p.expr.slice(0, caracAtuais);
@@ -1406,12 +1408,12 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
-                    <div className={`mb-6 w-full max-w-[99%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-2 md:gap-4 bg-amber-50/50 border-l-[4px] border-[#8b5e3c] p-4 md:p-6 rounded-r-2xl shadow-sm ring-1 ring-[#8b5e3c]/5">
+                    <div className={`mb-4 md:mb-6 w-full transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                      <div className="flex items-start gap-2 md:gap-4 bg-amber-50/50 border-l-[4px] border-[#8b5e3c] p-2 sm:p-3 md:p-6 rounded-r-2xl shadow-sm ring-1 ring-[#8b5e3c]/5">
                         <span className="flex-shrink-0 w-6 h-6 md:w-10 md:h-10 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-xs md:text-lg shadow-[0_2px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-sm sm:text-base md:text-xl text-[#5d4037] font-semibold leading-relaxed">
+                        <div className="min-w-0 break-words text-[13px] sm:text-base md:text-lg text-[#5d4037] font-semibold leading-relaxed">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
                             <div className="text-[10px] md:text-xs font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
@@ -1426,33 +1428,45 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                   )}
 
                   {/* Conta Matemática Montada na Lousa (REAL MAT) */}
-                  <div
-                    className={`font-black text-xl sm:text-2xl md:text-5xl tracking-tight ${cor} flex items-center justify-center gap-2 py-6 mb-3 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
-                    style={{
-                      fontFamily: "'Nunito', sans-serif",
-                      filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
-                    }}
-                  >
-                    <div className="flex flex-col items-center">
-                      {p.expr.split("\n").map((linha, lIdx) => (
-                        <div key={lIdx} className="whitespace-pre text-center">
-                          {(() => {
-                            // Calculamos o deslocamento acumulado para saber quanto desse texto mostrar
-                            let charCountBefore = p.expr.split("\n").slice(0, lIdx).join("\n").length;
-                            if (lIdx > 0) charCountBefore += 1; // conta o \n
+                  <div className="w-full overflow-x-auto">
+                    <div
+                      className={`font-black text-base sm:text-2xl md:text-4xl tracking-tight ${cor} flex items-center justify-center gap-2 py-3 md:py-5 mb-2 transition-opacity duration-500 ${isUltimo ? "opacity-100" : "opacity-60"}`}
+                      style={{
+                        fontFamily: "'Nunito', ui-monospace, monospace",
+                        fontVariantNumeric: "tabular-nums",
+                        filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.08))",
+                      }}
+                    >
+                      <div className={`flex flex-col mx-auto ${p.expr.includes("\n") ? "items-start" : "items-center w-full"}`}>
+                        {p.expr.split("\n").map((linha, lIdx) => (
+                          <div
+                            key={lIdx}
+                            className={
+                              p.expr.includes("\n")
+                                ? "whitespace-pre text-left"
+                                : "whitespace-pre-wrap break-words text-center leading-snug"
+                            }
+                          >
+                            {(() => {
+                              // Calculamos o deslocamento acumulado para saber quanto desse texto mostrar
+                              let charCountBefore = p.expr.split("\n").slice(0, lIdx).join("\n").length;
+                              if (lIdx > 0) charCountBefore += 1; // conta o \n
 
-                            const charInThisLine = linha.length;
-                            const visivelNessaLinha = Math.max(0, Math.min(charInThisLine, caracAtuais - charCountBefore));
-                            
-                            return linha.slice(0, visivelNessaLinha);
-                          })()}
-                        </div>
-                      ))}
+                              const charInThisLine = linha.length;
+                              const visivelNessaLinha = Math.max(0, Math.min(charInThisLine, caracAtuais - charCountBefore));
+
+                              return linha.slice(0, visivelNessaLinha);
+                            })()}
+                          </div>
+                        ))}
+                      </div>
+
+                      {isUltimo && estahEscrevendo && !jaTerminouLinha && (
+                        <span className="inline-block w-2 md:w-3 h-7 md:h-10 bg-[#8b5e3c] animate-pulse rounded-sm" />
+                      )}
                     </div>
-                    {isUltimo && estahEscrevendo && !jaTerminouLinha && (
-                      <span className="inline-block w-4 h-12 bg-[#8b5e3c] animate-pulse rounded-sm" />
-                    )}
                   </div>
+
 
                   {/* Legenda curta */}
                   {jaTerminouLinha && p.explica && !p.professor && (
