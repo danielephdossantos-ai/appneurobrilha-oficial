@@ -1407,11 +1407,11 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
                     <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 bg-emerald-950/60 border-l-4 border-amber-400 p-3 rounded-r-xl shadow-lg ring-1 ring-white/5">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-400 text-[#0f2b22] flex items-center justify-center font-black text-xs shadow-[0_2px_0_0_#b45309]">
+                      <div className="flex items-start gap-3 bg-amber-50 border-l-4 border-[#8b5e3c] p-4 rounded-r-xl shadow-md ring-1 ring-[#8b5e3c]/10">
+                        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm shadow-[0_2px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-xs md:text-sm text-amber-100 font-medium leading-relaxed italic">
+                        <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
                             <div className="text-[10px] font-black uppercase text-amber-400/70 mb-1 flex items-center gap-1">
