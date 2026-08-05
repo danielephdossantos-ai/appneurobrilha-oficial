@@ -1357,7 +1357,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         </div>
       )}
 
-      <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-10 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_15px_40px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[300px]">
+      <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-12 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_15px_40px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[300px]">
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
@@ -1406,15 +1406,15 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
-                    <div className={`mb-6 w-full max-w-[98%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 md:gap-5 bg-amber-50/50 border-l-[6px] border-[#8b5e3c] p-5 md:p-6 rounded-r-3xl shadow-sm ring-1 ring-[#8b5e3c]/5">
-                        <span className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm md:text-lg shadow-[0_3px_0_0_#5d4037]">
+                    <div className={`mb-6 w-full max-w-[99%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                      <div className="flex items-start gap-3 md:gap-5 bg-amber-50/50 border-l-[6px] border-[#8b5e3c] p-5 md:p-8 rounded-r-3xl shadow-sm ring-1 ring-[#8b5e3c]/5">
+                        <span className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm md:text-xl shadow-[0_3px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-sm md:text-xl text-[#5d4037] font-semibold leading-relaxed">
+                        <div className="text-base sm:text-lg md:text-2xl text-[#5d4037] font-semibold leading-relaxed">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
+                            <div className="text-[10px] md:text-xs font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
                               <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
                               O Professor explica...
                             </div>
