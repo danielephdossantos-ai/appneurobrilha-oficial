@@ -162,9 +162,9 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
       </div>
 
       {/* Lousa Virtual */}
-      <div className="flex-1 relative p-4 md:p-8 overflow-y-auto">
+      <div className="flex-1 relative p-2 sm:p-4 md:p-8 overflow-y-auto">
         <div 
-          className="min-h-full rounded-[30px] border-[4px] md:border-[8px] border-slate-800 shadow-2xl relative overflow-hidden max-w-4xl mx-auto"
+          className="min-h-full rounded-2xl md:rounded-[30px] border-2 md:border-[6px] border-slate-800 shadow-2xl relative overflow-hidden max-w-4xl mx-auto"
           style={{ 
             background: "radial-gradient(circle at center, #1a2e26 0%, #0d1a15 100%)",
             boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)"
@@ -173,7 +173,8 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           {/* Textura de giz/lousa */}
           <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/black-chalkboard.png')]" />
           
-          <div className="relative z-10 p-6 md:p-14 space-y-8">
+          <div className="relative z-10 p-3 sm:p-6 md:p-14 space-y-5 md:space-y-8">
+
             <div className="flex items-center justify-between border-b-2 border-white/20 pb-4 mb-4">
               <motion.h2 
                 initial={{ opacity: 0, y: -20 }}

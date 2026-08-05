@@ -63,7 +63,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   }, [resposta]);
 
   return (
-    <div className="rounded-[30px] border-[4px] md:border-[8px] border-[#4a2e15] bg-[#0f2b22] p-4 md:p-8 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_10px_30px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[250px] max-w-3xl mx-auto">
+    <div className="rounded-2xl md:rounded-[30px] border-2 md:border-[6px] border-[#4a2e15] bg-[#0f2b22] p-3 md:p-8 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_8px_20px_rgba(0,0,0,0.35)] relative overflow-hidden min-h-[200px] max-w-3xl mx-auto">
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
       
       <div className="relative z-10">
@@ -85,7 +85,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-5 md:space-y-8">
           {resposta.passos.slice(0, visiveis).map((p, i) => {
             const caracteresAtuais = caracteresVisiveis[i] || 0;
             const textoExibido = p.linha.slice(0, caracteresAtuais);
@@ -97,15 +97,16 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
                 key={i}
                 initial={{ opacity: 0, x: -5 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="relative pl-10"
+                className="relative pl-8 md:pl-10"
               >
-                <div className="absolute left-0 top-1.5 flex h-7 w-7 items-center justify-center rounded border-2 border-emerald-500/20 text-xs font-black text-emerald-500/40">
+                <div className="absolute left-0 top-1 flex h-6 w-6 md:h-7 md:w-7 items-center justify-center rounded border-2 border-emerald-500/20 text-[10px] md:text-xs font-black text-emerald-500/40">
                   {i + 1}
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <div
-                    className="break-words text-xl sm:text-2xl md:text-5xl font-bold text-white/95 tracking-wider leading-relaxed"
+                    className="break-words text-lg sm:text-2xl md:text-4xl font-bold text-white/95 tracking-wide leading-relaxed"
+
                     style={{ 
                       fontFamily: "'Nunito', sans-serif",
                       filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
