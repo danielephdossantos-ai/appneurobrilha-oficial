@@ -1293,23 +1293,42 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
   const [estahEscrevendo, setEstahEscrevendo] = useState(false);
   const [iniciou, setIniciou] = useState(false);
+  const [audioAtivo, setAudioAtivo] = useState(true);
+  const audioAtivoRef = useRef(true);
   const total = passos.length;
   const terminou = revelados >= total && !estahEscrevendo;
 
   useEffect(() => {
-    if (!iniciou) return;
+    audioAtivoRef.current = audioAtivo;
+    if (!audioAtivo) stopSpeaking();
+  }, [audioAtivo]);
+
+  useEffect(() => {
     let montado = true;
+    if (!iniciou) return;
+
     setRevelados(0);
     setCaracteresVisiveis({});
     setEstahEscrevendo(true);
 
     async function escreverTudo() {
+      // Pequena pausa inicial
       await new Promise((resolve) => setTimeout(resolve, 800));
 
       for (let i = 0; i < total; i++) {
         if (!montado) return;
+        
+        const passo = passos[i];
+        
+        // Se tem áudio e narrativa de professor, fala ANTES de começar a escrever
+        if (audioAtivoRef.current && passo.professor) {
+          await speakChunked(passo.professor, { rate: 0.88 });
+          // Pausa curta após a fala antes de começar a escrever
+          await new Promise((resolve) => setTimeout(resolve, 600));
+        }
+
         setRevelados(i + 1);
-        const texto = passos[i].expr;
+        const texto = passo.expr;
 
         for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
           if (!montado) return;
@@ -1317,6 +1336,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           await new Promise((resolve) => setTimeout(resolve, 150));
         }
 
+        // Pausa após terminar de escrever a linha (respiro cognitivo)
         await new Promise((resolve) => setTimeout(resolve, 2500));
       }
       if (montado) setEstahEscrevendo(false);
@@ -1325,6 +1345,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     escreverTudo();
     return () => {
       montado = false;
+      stopSpeaking();
     };
   }, [v, iniciou]);
 
