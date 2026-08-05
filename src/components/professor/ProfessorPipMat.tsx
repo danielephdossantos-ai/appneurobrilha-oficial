@@ -63,7 +63,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   }, [resposta]);
 
   return (
-    <div className="rounded-3xl border-[10px] border-[#4a2e15] bg-[#0f2b22] p-6 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[300px]">
+    <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#4a2e15] bg-[#0f2b22] p-4 md:p-10 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[300px]">
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
       
       <div className="relative z-10">
