@@ -1287,118 +1287,127 @@ function ChecklistTQP({ v }: { v: ChecklistTQPV }) {
 // ------------------ Trinômio passo-a-passo (interativo) --------------
 function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const { trinomio, passos, fatorada, falha, legenda } = v;
-  const [revelados, setRevelados] = useState(1);
+  const [revelados, setRevelados] = useState(0);
+  const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
+  const [estahEscrevendo, setEstahEscrevendo] = useState(false);
   const total = passos.length;
-  const terminou = revelados >= total;
-  const passoAtual = passos[Math.min(revelados, total) - 1];
+  const terminou = revelados >= total && !estahEscrevendo;
+
+  useEffect(() => {
+    let montado = true;
+    setRevelados(0);
+    setCaracteresVisiveis({});
+    setEstahEscrevendo(true);
+
+    async function escreverTudo() {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      for (let i = 0; i < total; i++) {
+        if (!montado) return;
+        setRevelados(i + 1);
+        const texto = passos[i].expr;
+
+        for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
+          if (!montado) return;
+          setCaracteresVisiveis((prev) => ({ ...prev, [i]: charIndex }));
+          await new Promise((resolve) => setTimeout(resolve, 150));
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 2500));
+      }
+      if (montado) setEstahEscrevendo(false);
+    }
+
+    escreverTudo();
+    return () => {
+      montado = false;
+    };
+  }, [v]);
 
   return (
-    <div className="my-4 w-full max-w-md mx-auto overflow-x-auto">
+    <div className="my-4 w-full max-w-md mx-auto">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-300 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      {/* ===== CONTA ARMADA — só matemática, sem texto ===== */}
-      <div className="rounded-2xl bg-white text-[#0d1f55] p-5 border-2 border-amber-300/70 shadow-lg">
-        {/* Trinômio original no topo */}
-        <div className="text-center text-2xl md:text-3xl font-black font-mono border-b-2 border-slate-300 pb-3 mb-3">
-          {trinomio}
-        </div>
+      <div className="rounded-3xl border-[8px] border-[#4a2e15] bg-[#0f2b22] p-5 shadow-[inset_0_4px_20px_rgba(0,0,0,0.6),0_10px_30px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[200px]">
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
 
-        {/* Linhas de conta empilhadas — só expressão, sem texto */}
-        <div className="flex flex-col items-center gap-2">
-          {passos.slice(0, revelados).map((p, idx) => {
-            const cor =
-              p.status === "ok"
-                ? "text-emerald-700"
-                : p.status === "x"
-                ? "text-red-600"
-                : "text-sky-700";
-            const marcador = p.status === "ok" ? "✓" : p.status === "x" ? "✗" : "▸";
-            const destaque = idx === revelados - 1;
-            return (
+        <div className="relative z-10">
+          <div className="text-center text-xl md:text-2xl font-black border-b border-emerald-900/40 pb-3 mb-4 text-emerald-100/90" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            {trinomio}
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            {passos.slice(0, revelados).map((p, idx) => {
+              const caracAtuais = caracteresVisiveis[idx] || 0;
+              const textoExibido = p.expr.slice(0, caracAtuais);
+              const isUltimo = idx === revelados - 1;
+              const jaTerminouLinha = caracAtuais >= p.expr.length;
+
+              const cor =
+                p.status === "ok"
+                  ? "text-emerald-400"
+                  : p.status === "x"
+                  ? "text-rose-400"
+                  : "text-sky-300";
+
+              return (
+                <div key={idx} className="w-full flex flex-col items-center">
+                  <div
+                    className={`font-black text-xl md:text-2xl tracking-wider ${cor} flex items-center gap-2`}
+                    style={{
+                      fontFamily: "'Permanent Marker', cursive",
+                      filter: "drop-shadow(2px 2px 3px rgba(0,0,0,0.4))",
+                    }}
+                  >
+                    <span>{textoExibido}</span>
+                    {isUltimo && estahEscrevendo && !jaTerminouLinha && (
+                      <span className="inline-block w-1.5 h-6 bg-emerald-400/60 animate-pulse" />
+                    )}
+                  </div>
+
+                  {jaTerminouLinha && (
+                    <div className="mt-1 text-xs md:text-sm text-emerald-200/70 italic text-center animate-in fade-in duration-500">
+                      {p.explica}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {terminou && fatorada && (
+            <div className="mt-6 pt-4 border-t border-emerald-900/50 text-center animate-in fade-in zoom-in duration-700">
               <div
-                key={idx}
-                className={`flex items-baseline gap-3 font-mono font-black text-xl md:text-2xl ${cor} ${
-                  destaque ? "animate-in fade-in slide-in-from-top-2 duration-300" : ""
-                }`}
+                className="text-lg md:text-xl font-black text-amber-300"
+                style={{ fontFamily: "'Permanent Marker', cursive" }}
               >
-                <span className="text-sm w-4 text-right opacity-70">{marcador}</span>
-                <span>{p.expr}</span>
+                {trinomio} = {fatorada}
               </div>
-            );
-          })}
-        </div>
-
-        {/* Resultado final dentro da conta */}
-        {terminou && fatorada && (
-          <div className="mt-4 pt-3 border-t-2 border-emerald-400 text-center animate-in fade-in zoom-in duration-500">
-            <div className="text-xl md:text-2xl font-black font-mono text-emerald-800">
-              {trinomio} = <span className="text-violet-700">{fatorada}</span>
             </div>
-          </div>
-        )}
-        {terminou && !fatorada && falha && (
-          <div className="mt-4 pt-3 border-t-2 border-red-400 text-center text-red-700 font-mono font-black text-lg animate-in fade-in duration-500">
-            {falha}
-          </div>
-        )}
+          )}
+
+          {terminou && !fatorada && falha && (
+            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+              {falha}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* ===== EXPLICAÇÃO — FORA da conta ===== */}
-      {passoAtual?.explica && (
-        <div
-          key={revelados}
-          className="mt-3 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg px-3 py-2 text-sm md:text-base text-[#0d1f55] leading-snug shadow-sm animate-in fade-in slide-in-from-left-2 duration-300"
+      <div className="mt-2 flex justify-end">
+        <button
+          onClick={() => {
+            setRevelados(0);
+            setCaracteresVisiveis({});
+          }}
+          className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full"
         >
-          <span className="text-amber-700 font-black mr-1">Passo {Math.min(revelados, total)}:</span>
-          {passoAtual.explica}
-        </div>
-      )}
-
-      {/* ===== PROFESSOR EXPLICA — texto longo expansível ===== */}
-      {passoAtual?.professor && (
-        <details
-          key={`prof-${revelados}`}
-          className="mt-2 group bg-white/95 text-[#0d1f55] rounded-xl border-2 border-amber-200 shadow-sm"
-        >
-          <summary className="cursor-pointer select-none list-none px-3 py-2 flex items-center justify-between text-sm font-black">
-            <span className="flex items-center gap-2">
-              <span className="rounded-md bg-amber-100 px-2 py-0.5 text-[11px] text-amber-700 border border-amber-200">PROF.</span>
-              <span>Professor explica</span>
-            </span>
-            <span className="text-xs text-amber-600 group-open:hidden">tocar para ver ▾</span>
-            <span className="text-xs text-amber-600 hidden group-open:inline">recolher ▴</span>
-          </summary>
-          <div className="px-4 pb-3 pt-1 text-[13px] md:text-sm leading-relaxed whitespace-pre-line border-t border-amber-100">
-            {passoAtual.professor}
-          </div>
-        </details>
-      )}
-
-
-      {/* ===== Controles ===== */}
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <div className="text-[11px] text-white/70 font-bold">
-          {Math.min(revelados, total)}/{total}
-        </div>
-        {!terminou ? (
-          <button
-            onClick={() => setRevelados((r) => Math.min(total, r + 1))}
-            className="px-5 py-2 rounded-lg bg-amber-400 hover:bg-amber-500 text-[#0d1f55] font-black text-sm shadow-md active:scale-95 transition"
-          >
-            Continuar ▶
-          </button>
-        ) : (
-          <button
-            onClick={() => setRevelados(1)}
-            className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white font-bold text-xs"
-          >
-            ↻ Recomeçar
-          </button>
-        )}
+          ↻ Reiniciar Lousa
+        </button>
       </div>
     </div>
   );
