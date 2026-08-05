@@ -22,7 +22,7 @@ export const aula01_dizimas: AulaV4 = {
     instrucao: "Divida 1 por 3 na chave e observe o RESTO. Ele volta.",
     cenas: [
       {
-        tipo: "visualMat",
+        tipo: "trinomioPassoAPasso",
         titulo: "Divisão com resto periódico",
         visualMat: {
           tipo: "trinomioPassoAPasso",
