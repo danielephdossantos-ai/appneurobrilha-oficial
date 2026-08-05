@@ -24,24 +24,49 @@ export const aula01_somaComReagrupamento: AulaV4 = {
     revelacao: "Some 8 + 5 = 13 → escreve 3, vai 1 pra dezena.",
   },
   momento04_explicacao: {
-    titulo: "Uma soma completa passo a passo",
+    titulo: "Uma soma completa na lousa",
     etapas: [
       {
         texto: "Vamos somar 27.586 + 14.879 devagar.",
         exemploReal: {
+          titulo: "🔎 Montagem Passo a Passo",
           contexto: "Confira cada 'vai 1' aparecer no topo:",
-          destaque: "27.586 + 14.879 = 42.465.",
-          contaPassoAPasso: {
-            operacao: "soma",
-            operandos: [27586, 14879],
-            resultado: 42465,
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "27.586 + 14.879",
             passos: [
-              { coluna: "U", fala: "6 + 9 = 15. Escrevo 5, vai 1.", digito: 5, vaiUm: 1 },
-              { coluna: "D", fala: "8 + 7 + 1 = 16. Escrevo 6, vai 1.", digito: 6, vaiUm: 1 },
-              { coluna: "C", fala: "5 + 8 + 1 = 14. Escrevo 4, vai 1.", digito: 4, vaiUm: 1 },
-              { coluna: "UM", fala: "7 + 4 + 1 = 12. Escrevo 2, vai 1.", digito: 2, vaiUm: 1 },
-              { coluna: "DM", fala: "2 + 1 + 1 = 4.", digito: 4 },
+              {
+                expr: "   27.586\n+  14.879\n---------",
+                explica: "Alinhamos os números.",
+                status: "neutro",
+                professor: "Sempre começamos pelas unidades! 6 + 9 = 15."
+              },
+              {
+                expr: "  ¹\n   27.586\n+  14.879\n--------- \n       5",
+                explica: "U: 6+9=15 (5, vai 1)",
+                status: "ok",
+                professor: "Escrevemos o 5 e o 'vai 1' sobe para a casa das dezenas."
+              },
+              {
+                expr: " ¹¹\n   27.586\n+  14.879\n--------- \n      65",
+                explica: "D: 8+7+1=16 (6, vai 1)",
+                status: "ok",
+                professor: "Na dezena: 8+7=15, mais o 1 que subiu, temos 16. Escrevo 6 e vai 1."
+              },
+              {
+                expr: "¹¹¹\n   27.586\n+  14.879\n--------- \n     465",
+                explica: "C: 5+8+1=14 (4, vai 1)",
+                status: "ok",
+                professor: "Centena: 5+8=13, mais o 1, temos 14. Escrevo 4 e vai 1."
+              },
+              {
+                expr: "¹¹¹¹\n   27.586\n+  14.879\n--------- \n   42.465",
+                explica: "Fim: 27+14+1=42",
+                status: "ok",
+                professor: "Somando os milhares e o que sobrou, chegamos em 42.465!"
+              }
             ],
+            fatorada: "42.465",
           },
         },
       },
