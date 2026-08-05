@@ -1361,17 +1361,17 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
-          <div className="flex items-center justify-between border-b border-emerald-900/40 pb-3 mb-4">
-            <div className="text-xl md:text-2xl font-black text-emerald-100/90" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+          <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
+            <div className="text-xl md:text-3xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               {trinomio}
             </div>
             
             <button
               onClick={() => setAudioAtivo(!audioAtivo)}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors text-emerald-400/60 hover:text-emerald-400"
+              className="p-2 rounded-full hover:bg-[#8b5e3c]/10 transition-colors text-[#8b5e3c]/60 hover:text-[#8b5e3c]"
               title={audioAtivo ? "Desativar explicação por voz" : "Ativar explicação por voz"}
             >
-              {audioAtivo ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+              {audioAtivo ? <Volume2 className="h-6 w-6" /> : <VolumeX className="h-6 w-6" />}
             </button>
           </div>
 
