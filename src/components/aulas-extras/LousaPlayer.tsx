@@ -173,7 +173,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           {/* Textura de giz/lousa */}
           <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/black-chalkboard.png')]" />
           
-          <div className="relative z-10 p-6 md:p-10 space-y-6">
+          <div className="relative z-10 p-6 md:p-14 space-y-8">
             <div className="flex items-center justify-between border-b-2 border-white/20 pb-4 mb-4">
               <motion.h2 
                 initial={{ opacity: 0, y: -20 }}
