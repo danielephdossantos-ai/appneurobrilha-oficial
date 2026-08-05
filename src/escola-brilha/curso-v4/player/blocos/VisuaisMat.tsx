@@ -1452,9 +1452,9 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           )}
 
           {terminou && fatorada && (
-            <div className="mt-6 pt-4 border-t border-emerald-900/50 text-center animate-in fade-in zoom-in duration-700">
+            <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
               <div
-                className="text-lg md:text-xl font-black text-amber-300"
+                className="text-xl md:text-2xl font-black text-[#8b5e3c]"
                 style={{ fontFamily: "'Permanent Marker', cursive" }}
               >
                 {trinomio} = {fatorada}
