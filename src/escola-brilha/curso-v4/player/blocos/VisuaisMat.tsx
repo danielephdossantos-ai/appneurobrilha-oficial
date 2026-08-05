@@ -1350,14 +1350,14 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [v, iniciou]);
 
   return (
-    <div className="my-4 w-full max-w-5xl mx-auto px-2 md:px-4">
+    <div className="my-4 w-full max-w-3xl mx-auto px-2 md:px-4">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-12 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_15px_40px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[300px]">
+      <div className="rounded-[30px] border-[4px] md:border-[8px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-8 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_10px_30px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[250px]">
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
