@@ -309,9 +309,12 @@ function Index() {
             </motion.div>
 
             <div className="mt-2">
-              <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
+              <button 
+                onClick={gerarRelatorioPDF}
+                className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em] hover:text-[#FFC93C] transition-colors text-left"
+              >
                 GERE UM RELATORIO EM PDF DO QUE O APP NEUROBRILHA KIDS É COMPLETO COM TUDO QUE O APP TEM E PODE AJUDAR AS CRIANÇAS
-              </div>
+              </button>
               <h1 className="text-white text-lg font-black leading-tight">
                 Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
               </h1>
@@ -475,9 +478,12 @@ function Index() {
                 ⭐
               </motion.span>
               <div>
-                <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">
+                <button 
+                  onClick={gerarRelatorioPDF}
+                  className="text-white/55 text-xs font-black uppercase tracking-[0.3em] hover:text-[#FFC93C] transition-colors text-left block"
+                >
                   GERE UM RELATORIO EM PDF DO QUE O APP NEUROBRILHA KIDS É COMPLETO COM TUDO QUE O APP TEM E PODE AJUDAR AS CRIANÇAS
-                </div>
+                </button>
                 <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
                   Cidade do <span className="text-[#FFC93C]">Pip</span>
                 </h1>
