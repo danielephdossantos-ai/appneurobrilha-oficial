@@ -63,7 +63,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   }, [resposta]);
 
   return (
-    <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#4a2e15] bg-[#0f2b22] p-4 md:p-10 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[300px]">
+    <div className="rounded-[30px] border-[4px] md:border-[8px] border-[#4a2e15] bg-[#0f2b22] p-4 md:p-8 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_10px_30px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[250px] max-w-3xl mx-auto">
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
       
       <div className="relative z-10">
@@ -105,7 +105,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
 
                 <div className="min-w-0 flex-1">
                   <div
-                    className="break-words text-2xl sm:text-4xl md:text-6xl font-bold text-white/95 tracking-wider leading-relaxed"
+                    className="break-words text-xl sm:text-2xl md:text-5xl font-bold text-white/95 tracking-wider leading-relaxed"
                     style={{ 
                       fontFamily: "'Nunito', sans-serif",
                       filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"

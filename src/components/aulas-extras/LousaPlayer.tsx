@@ -164,7 +164,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
       {/* Lousa Virtual */}
       <div className="flex-1 relative p-4 md:p-8 overflow-y-auto">
         <div 
-          className="min-h-full rounded-[40px] border-[6px] md:border-[12px] border-slate-800 shadow-2xl relative overflow-hidden"
+          className="min-h-full rounded-[30px] border-[4px] md:border-[8px] border-slate-800 shadow-2xl relative overflow-hidden max-w-4xl mx-auto"
           style={{ 
             background: "radial-gradient(circle at center, #1a2e26 0%, #0d1a15 100%)",
             boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)"
@@ -179,7 +179,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 key={`title-${cenaIdx}`}
-                className="text-2xl sm:text-3xl md:text-5xl font-black text-white/90 italic"
+                className="text-xl sm:text-2xl md:text-4xl font-black text-white/90 italic"
                 style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
               >
                 {cena.tituloLousa}
@@ -210,7 +210,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                           <div className="text-[10px] font-black uppercase opacity-60 mb-1">Regra / Fórmula</div>
                         )}
                         <p className={cn(
-                          "text-lg sm:text-xl md:text-3xl font-bold leading-tight",
+                          "text-base sm:text-lg md:text-2xl font-bold leading-tight",
                           bloco.tipo === "formula" ? "font-mono" : ""
                         )}>
                           {bloco.conteudo}
