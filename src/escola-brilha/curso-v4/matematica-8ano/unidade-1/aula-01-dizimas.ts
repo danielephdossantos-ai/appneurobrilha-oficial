@@ -65,11 +65,36 @@ export const aula01_dizimas: AulaV4 = {
       tipo: "trinomioPassoAPasso",
       trinomio: "0,333…  →  fração?",
       passos: [
-        { expr: "x = 0,333…", explica: "Nomeio o número.", status: "neutro", professor: "Dou um nome ao desconhecido: x = 0,333…" },
-        { expr: "10·x = 3,333…", explica: "Multiplico por 10 (1 dígito no período).", status: "ok", professor: "Multiplico os dois lados por 10 para alinhar a cauda periódica." },
-        { expr: "10x − x = 3,333… − 0,333…", explica: "Subtraio uma equação da outra.", status: "ok", professor: "As caudas 0,333… são IDÊNTICAS e se cancelam na subtração." },
-        { expr: "9x = 3", explica: "Cauda cancelou.", status: "ok", professor: "Do lado esquerdo, 10x − x = 9x. Do direito, sobrou 3." },
-        { expr: "x = 3/9 = 1/3", explica: "Isolo x e simplifico.", status: "ok", professor: "Divido por 9 e simplifico por 3: x = 1/3." },
+        {
+          expr: "x = 0,333…",
+          explica: "Nomeio o número.",
+          status: "neutro",
+          professor: "Dou um nome ao desconhecido: x = 0,333…"
+        },
+        {
+          expr: "10·x = 3,333…",
+          explica: "Multiplico por 10.",
+          status: "ok",
+          professor: "Multiplico os dois lados por dez para alinhar a cauda periódica."
+        },
+        {
+          expr: "10x − x = 3,333… − 0,333…",
+          explica: "Subtraio as equações.",
+          status: "ok",
+          professor: "As caudas 0,333… são idênticas e se cancelam na subtração."
+        },
+        {
+          expr: "9x = 3",
+          explica: "Cauda cancelou.",
+          status: "ok",
+          professor: "Do lado esquerdo, 10x − x = 9x. Do direito, sobrou três."
+        },
+        {
+          expr: "x = 3/9 = 1/3",
+          explica: "Isolo x e simplifico.",
+          status: "ok",
+          professor: "Divido por nove e simplifico por três: x = 1/3."
+        },
       ],
       fatorada: "0,333… = 1/3",
       legenda: "Descoberta guiada",
