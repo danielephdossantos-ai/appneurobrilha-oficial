@@ -210,7 +210,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                           <div className="text-[10px] font-black uppercase opacity-60 mb-1">Regra / Fórmula</div>
                         )}
                         <p className={cn(
-                          "text-lg sm:text-xl md:text-3xl font-bold leading-tight",
+                          "text-base sm:text-lg md:text-2xl font-bold leading-tight",
                           bloco.tipo === "formula" ? "font-mono" : ""
                         )}>
                           {bloco.conteudo}
