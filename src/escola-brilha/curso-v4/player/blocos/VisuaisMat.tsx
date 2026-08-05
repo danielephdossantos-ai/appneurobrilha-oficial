@@ -1414,8 +1414,8 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                         <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] font-black uppercase text-amber-400/70 mb-1 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" />
+                            <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
                               O Professor explica...
                             </div>
                           )}
