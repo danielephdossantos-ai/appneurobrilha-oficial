@@ -1379,11 +1379,11 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             <div className="flex flex-col items-center justify-center py-10 gap-4">
               <button
                 onClick={() => setIniciou(true)}
-                className="group relative px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-[0_6px_0_0_#064e3b] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-lg"
+                className="group relative px-10 py-5 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-2xl shadow-[0_6px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-xl"
               >
                 Começar explicação passo a passo ▶
               </button>
-              <p className="text-emerald-500/60 text-[10px] uppercase font-bold tracking-widest animate-pulse">
+              <p className="text-[#8b5e3c]/60 text-xs uppercase font-bold tracking-widest animate-pulse">
                 Clique para ver o passo a passo
               </p>
             </div>
