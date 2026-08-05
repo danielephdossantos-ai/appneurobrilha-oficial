@@ -90,24 +90,58 @@ export const aula01_contagemAteMilhao: AulaV4 = {
   momento07_praticaIndependente: {
     enunciado: "Sua vez: 315.240 + 234.135.",
     interacao: {
-      tipo: "contaPassoAPasso",
-      operacao: "soma",
-      operandos: [315240, 234135],
-      resultado: 549375,
-      modo: "pratica",
-      perguntaFinal: "Total?",
-      opcoes: [549375, 549275, 559375],
-      feedbackAcerto: "🎯 549.375!",
-      feedbackErro: "Coluna por coluna: 549.375.",
-      passos: [
-        { coluna: "U", fala: "0 + 5 = 5.", digito: 5 },
-        { coluna: "D", fala: "4 + 3 = 7.", digito: 7 },
-        { coluna: "C", fala: "2 + 1 = 3.", digito: 3 },
-        { coluna: "UM", fala: "5 + 4 = 9.", digito: 9 },
-        { coluna: "DM", fala: "1 + 3 = 4.", digito: 4 },
-        { coluna: "CM", fala: "3 + 2 = 5.", digito: 5 },
-      ],
-    },
+        tipo: "visualMat",
+        pergunta: "Resolva na lousa:",
+        visualMat: {
+          tipo: "trinomioPassoAPasso",
+          trinomio: "315.240 + 234.135",
+          passos: [
+            {
+              expr: "  315.240\n+ 234.135\n---------",
+              explica: "Alinhando CM, DM, UM, C, D e U.",
+              status: "neutro",
+              professor: "Vamos somar coluna por coluna, começando sempre pela direita (Unidades)."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n        5",
+              explica: "U: 0 + 5 = 5",
+              status: "ok",
+              professor: "0 + 5 é igual a 5."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n       75",
+              explica: "D: 4 + 3 = 7",
+              status: "ok",
+              professor: "4 + 3 é igual a 7."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n      375",
+              explica: "C: 2 + 1 = 3",
+              status: "ok",
+              professor: "2 + 1 é igual a 3."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n    9.375",
+              explica: "UM: 5 + 4 = 9",
+              status: "ok",
+              professor: "5 + 4 é igual a 9."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n   49.375",
+              explica: "DM: 1 + 3 = 4",
+              status: "ok",
+              professor: "1 + 3 é igual a 4."
+            },
+            {
+              expr: "  315.240\n+ 234.135\n---------\n  549.375",
+              explica: "CM: 3 + 2 = 5",
+              status: "ok",
+              professor: "E por fim, 3 + 2 é igual a 5. Quinhentos e quarenta e nove mil, trezentos e setenta e cinco!"
+            }
+          ],
+          fatorada: "549.375"
+        }
+    }
   },
   momento08_aplicacao: {
     contexto: "O escriba imperial precisa escrever 'quatrocentos mil e sete' num pergaminho.",
