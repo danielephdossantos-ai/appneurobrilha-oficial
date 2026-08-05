@@ -335,7 +335,7 @@ export function ProfessorPipMat({ crianca }: Props) {
   ];
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
       <div className="flex items-center gap-3 rounded-3xl bg-gradient-to-r from-[#1b1035] via-[#3b1a5c] to-[#7c2d8f] p-4 text-white shadow-lg">
         <img
           src={pipRoqueiro.url}
