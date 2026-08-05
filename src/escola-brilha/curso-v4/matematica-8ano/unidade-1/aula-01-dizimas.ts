@@ -23,14 +23,14 @@ export const aula01_dizimas: AulaV4 = {
     cenas: [
       {
         tipo: "trinomioPassoAPasso",
-        trinomio: "1 ÷ 3 = ?",
+        trinomio: "1 ÷ 3",
         passos: [
-          { expr: "1 ÷ 3 = 0,333…", explica: "Dividindo 1 por 3", status: "neutro", professor: "Como 1 é menor que 3, colocamos 0, e acrescentamos um zero ao 1, tornando-o 10." },
-          { expr: "1,000 | 3", explica: "Iniciando a divisão", status: "ok", professor: "Agora dividimos 10 por 3. O maior múltiplo de 3 menor que 10 é 9 (3 × 3)." },
-          { expr: "− 9", explica: "Subtraindo o múltiplo", status: "ok", professor: "10 menos 9 sobra 1. Colocamos o 3 no quociente." },
-          { expr: "0,1 | 3", explica: "Continuando a divisão", status: "ok", professor: "Sobrou 1. Colocamos outro zero: vira 10 de novo. 10 dividido por 3 dá 3 novamente." },
-          { expr: "− 9", explica: "Subtraindo novamente", status: "ok", professor: "10 menos 9 sobra 1 de novo! Percebeu o padrão?" },
-          { expr: "0,1 | 3", explica: "Resto se repete", status: "ok", professor: "O resto 1 nunca vai sumir. Ele vai se repetir para sempre, e o 3 no resultado também!" },
+          { expr: "1   l 3", explica: "Armando a conta", status: "neutro", professor: "Como o 1 é menor que o 3, não conseguimos dividir. O que fazemos? Colocamos o zero e uma vírgula no quociente e 'emprestamos' um zero para o 1 virar 10." },
+          { expr: "1,0 l 3 \n    0,", explica: "Compensação decimal", status: "ok", professor: "Veja: o 1 agora é 10 décimos. Agora podemos dividir por 3." },
+          { expr: "1,0 l 3 \n- 0,9   0,3", explica: "10 ÷ 3 = 3 (sobra 1)", status: "ok", professor: "10 dividido por 3 dá 3, porque 3 x 3 é 9. Colocamos o -9 embaixo do 10 e o 3 no resultado." },
+          { expr: "  0,1 l 3 \n        0,3", explica: "Sobra 1 décimo", status: "ok", professor: "10 menos 9 sobra 1. Para continuar, ganhamos outro zero de graça: vira 10 de novo!" },
+          { expr: "  1,0 l 3 \n- 0,9   0,33", explica: "Repetindo o processo", status: "ok", professor: "De novo: 10 dividido por 3 dá 3. 3 x 3 é 9. Colocamos o -9 e sobra 1 novamente." },
+          { expr: "  0,1 ...", explica: "Padrão infinito", status: "ok", professor: "Percebeu? O resto 1 sempre volta e o 3 sempre repete. Isso é uma dízima periódica: 0,333..." },
         ],
         fatorada: "0,333…",
         legenda: "Divisão na chave montada",
