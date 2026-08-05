@@ -1441,7 +1441,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
                   {/* Legenda curta */}
                   {jaTerminouLinha && p.explica && !p.professor && (
-                    <div className="mt-1 text-xs md:text-sm text-emerald-200/70 italic text-center">
+                    <div className="mt-1 text-sm md:text-base text-[#5d4037]/70 italic text-center">
                       {p.explica}
                     </div>
                   )}
