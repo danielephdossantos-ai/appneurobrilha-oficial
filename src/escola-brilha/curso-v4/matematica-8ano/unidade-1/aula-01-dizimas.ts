@@ -23,10 +23,8 @@ export const aula01_dizimas: AulaV4 = {
     cenas: [
       {
         tipo: "trinomioPassoAPasso",
-        titulo: "Divisão com resto periódico",
-        visualMat: {
-          tipo: "trinomioPassoAPasso",
-          trinomio: "1 ÷ 3 = ?",
+        legenda: "Divisão com resto periódico",
+        trinomio: "1 ÷ 3 = ?",
           passos: [
             { expr: "1 ÷ 3 = 0,333…", explica: "Dividindo 1 por 3", status: "neutro", professor: "Como 1 é menor que 3, colocamos 0, e acrescentamos um zero ao 1, tornando-o 10." },
             { expr: "1,000 | 3", explica: "Iniciando a divisão", status: "ok", professor: "Agora dividimos 10 por 3. O maior múltiplo de 3 menor que 10 é 9 (3 × 3)." },
