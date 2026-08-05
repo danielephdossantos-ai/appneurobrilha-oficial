@@ -64,9 +64,66 @@ export const aula01_contagemAteMilhao: AulaV4 = {
     ],
   },
   momento05_modelagem: {
-    enunciado: "Some as populações: capital 240.000 + interior 135.470.",
+    enunciado: "🧠 Brilha resolve\n\n🧠 Brilha explica na lousa:\n\nSome as populações: capital 240.000 + interior 135.470.",
     resposta: "375.470",
-    passos: ["U: 0+0=0.", "D: 0+7=7.", "C: 0+4=4.", "UM: 0+5=5.", "DM: 4+3=7.", "CM: 2+1=3."],
+    passos: [
+      "U: 0+0=0.",
+      "D: 0+7=7.",
+      "C: 0+4=4.",
+      "UM: 0+5=5.",
+      "DM: 4+3=7.",
+      "CM: 2+1=3.",
+      "Resposta: 375.470",
+    ],
+    visualMat: {
+      tipo: "trinomioPassoAPasso",
+      trinomio: "240.000 + 135.470",
+      passos: [
+        {
+          expr: "  240.000\n+ 135.470\n---------",
+          explica: "Alinhando ordens.",
+          status: "neutro",
+          professor: "Vamos somar a capital e o interior. Começamos sempre pela direita.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n        0",
+          explica: "U: 0+0=0",
+          status: "ok",
+          professor: "Nas unidades, 0 + 0 é 0.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n       70",
+          explica: "D: 0+7=7",
+          status: "ok",
+          professor: "Nas dezenas, 0 + 7 é 7.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n      470",
+          explica: "C: 0+4=4",
+          status: "ok",
+          professor: "Nas centenas, 0 + 4 é 4.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n    5.470",
+          explica: "UM: 0+5=5",
+          status: "ok",
+          professor: "Nas Unidades de Milhar, 0 + 5 é 5.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n   75.470",
+          explica: "DM: 4+3=7",
+          status: "ok",
+          professor: "Nas Dezenas de Milhar, 4 + 3 é 7.",
+        },
+        {
+          expr: "  240.000\n+ 135.470\n---------\n  375.470",
+          explica: "CM: 2+1=3",
+          status: "ok",
+          professor: "Nas Centenas de Milhar, 2 + 1 é 3. Total: 375.470!",
+        },
+      ],
+      fatorada: "375.470",
+    },
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 214.320 + 132.415.",
