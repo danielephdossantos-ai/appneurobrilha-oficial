@@ -1399,15 +1399,19 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
       </div>
 
       <div className="mt-2 flex justify-end">
-        <button
-          onClick={() => {
-            setRevelados(0);
-            setCaracteresVisiveis({});
-          }}
-          className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full"
-        >
-          ↻ Reiniciar Lousa
-        </button>
+        {(iniciou || terminou) && (
+          <button
+            onClick={() => {
+              setIniciou(false);
+              setRevelados(0);
+              setCaracteresVisiveis({});
+              setEstahEscrevendo(false);
+            }}
+            className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full flex items-center gap-1"
+          >
+            ↻ Reiniciar / Ver outra vez
+          </button>
+        )}
       </div>
     </div>
   );
