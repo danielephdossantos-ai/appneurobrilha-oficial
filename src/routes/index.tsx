@@ -225,7 +225,7 @@ function Index() {
 
             <div className="mt-2">
               <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
-                Bem-vindo à
+                UMA PERGUNTA . GEOGRAFIA , HISTORIA, CIÊNCIAS , INGLES , ARTES, FILOSOFIA E ENSINO RELIGIOSO SEGUEM CURRICULUM DO ALUNO. TEM METODOLOGIA , PEDAGOGIA ENTRE OUTRAS SÃO AUALS REALMENTE ADAPTADAS PRA CRIANÇAS COM DEFHTES
               </div>
               <h1 className="text-white text-lg font-black leading-tight">
                 Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
@@ -391,7 +391,7 @@ function Index() {
               </motion.span>
               <div>
                 <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">
-                  Bem-vindo à
+                  UMA PERGUNTA . GEOGRAFIA , HISTORIA, CIÊNCIAS , INGLES , ARTES, FILOSOFIA E ENSINO RELIGIOSO SEGUEM CURRICULUM DO ALUNO. TEM METODOLOGIA , PEDAGOGIA ENTRE OUTRAS SÃO AUALS REALMENTE ADAPTADAS PRA CRIANÇAS COM DEFHTES
                 </div>
                 <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
                   Cidade do <span className="text-[#FFC93C]">Pip</span>
