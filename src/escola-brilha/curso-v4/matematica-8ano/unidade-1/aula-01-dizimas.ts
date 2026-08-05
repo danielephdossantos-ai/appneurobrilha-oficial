@@ -118,35 +118,41 @@ export const aula01_dizimas: AulaV4 = {
                 explica: "Chamo o número de x.",
                 status: "neutro",
                 professor:
-                  "Truque padrão para dízima periódica: dou um nome ao número desconhecido. Aqui, chamo x = 0,777… . Isso permite fazer contas com ele como se fosse uma incógnita comum.",
+                  "Dou um nome ao desconhecido: x = 0,777…. Isso permite fazer contas com ele como se fosse uma incógnita comum.",
               },
               {
-                expr: "10·x = 7,777…",
-                explica: "Multiplico por 10 (1 dígito no período).",
+                expr: "10 · x = 7,777…",
+                explica: "Multiplico por 10.",
                 status: "ok",
                 professor:
-                  "Multiplico os dois lados por 10 porque o período tem 1 dígito. Assim, a parte que se repete ‘alinha’: 10x = 7,777… . Se o período tivesse 2 dígitos, multiplicaria por 100.",
+                  "Multiplico os dois lados por 10 porque o período tem 1 dígito. Assim, a parte que se repete ‘alinha’: 10x = 7,777….",
               },
               {
                 expr: "10x − x = 7,777… − 0,777…",
-                explica: "Subtraio uma equação da outra.",
+                explica: "Subtraio as equações.",
                 status: "ok",
                 professor:
-                  "Aqui está o pulo do gato: subtraio 10x − x. Do lado direito, 7,777… menos 0,777… . Como as caudas 0,777… são IGUAIS, elas se cancelam. Sobra só a parte inteira: 7.",
+                  "Aqui está o pulo do gato: subtraio uma equação da outra. Como as caudas 0,777… são IGUAIS, elas se cancelam!",
               },
               {
                 expr: "9x = 7",
-                explica: "Cauda repetida cancela.",
+                explica: "Cauda cancelada.",
                 status: "ok",
                 professor:
-                  "Do lado esquerdo, 10x − x = 9x. Do lado direito, sobrou 7. Portanto, 9x = 7.",
+                  "Do lado esquerdo, 10x − x = 9x. Do lado direito, sobrou apenas o 7. Veja a montagem da conta: 9x = 7.",
+              },
+              {
+                expr: "x = 7 ÷ 9",
+                explica: "Isolando o x.",
+                status: "ok",
+                professor: "Para isolar o x, o 9 que está multiplicando passa para o outro lado dividindo o 7.",
               },
               {
                 expr: "x = 7/9",
-                explica: "Divido os dois lados por 9.",
+                explica: "Resultado final.",
                 status: "ok",
                 professor:
-                  "Isolando x: x = 7 ÷ 9 = 7/9. Fim. A fração geratriz de 0,777… é 7/9. Repare no atalho: numerador = período, denominador = tantos 9 quanto os dígitos do período.",
+                  "Fim! A fração geratriz de 0,777… é 7/9. Atalho: numerador é o período (7) e o denominador é um 9.",
               },
             ],
             fatorada: "0,777… = 7/9",

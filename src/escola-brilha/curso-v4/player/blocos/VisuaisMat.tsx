@@ -1404,35 +1404,42 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
               return (
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
-                  {/* Explicação do Professor em destaque (Passo a Passo) */}
-                  {jaTerminouLinha && p.professor && (
-                    <div className="mb-3 w-full max-w-[95%]">
-                      <div className="flex items-start gap-3 bg-emerald-950/60 border-l-4 border-amber-400 p-3 rounded-r-xl shadow-lg">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-400 text-[#0f2b22] flex items-center justify-center font-black text-xs">
+                  {/* Explicação do Professor (O "Pulo do Gato") */}
+                  {p.professor && (
+                    <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                      <div className="flex items-start gap-3 bg-emerald-950/60 border-l-4 border-amber-400 p-3 rounded-r-xl shadow-lg ring-1 ring-white/5">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-400 text-[#0f2b22] flex items-center justify-center font-black text-xs shadow-[0_2px_0_0_#b45309]">
                           {idx + 1}
                         </span>
                         <div className="text-xs md:text-sm text-amber-100 font-medium leading-relaxed italic">
+                          {/* Se está escrevendo, a explicação brilha */}
+                          {isUltimo && !jaTerminouLinha && (
+                            <div className="text-[10px] font-black uppercase text-amber-400/70 mb-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" />
+                              O Professor explica...
+                            </div>
+                          )}
                           {p.professor}
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {/* Conta Matemática Montada na Lousa */}
+                  {/* Conta Matemática Montada na Lousa (REAL MAT) */}
                   <div
-                    className={`font-black text-2xl md:text-3xl tracking-wider ${cor} flex items-center gap-2`}
+                    className={`font-black text-3xl md:text-5xl tracking-wider ${cor} flex items-center gap-2 py-4 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
                     style={{
                       fontFamily: "'Permanent Marker', cursive",
-                      filter: "drop-shadow(3px 3px 4px rgba(0,0,0,0.5))",
+                      filter: "drop-shadow(3px 3px 6px rgba(0,0,0,0.8))",
                     }}
                   >
                     <span>{textoExibido}</span>
                     {isUltimo && estahEscrevendo && !jaTerminouLinha && (
-                      <span className="inline-block w-2 h-8 bg-emerald-400/60 animate-pulse" />
+                      <span className="inline-block w-3 h-10 bg-emerald-400 animate-pulse rounded-sm" />
                     )}
                   </div>
 
-                  {/* Legenda curta se não houver explicação do professor */}
+                  {/* Legenda curta */}
                   {jaTerminouLinha && p.explica && !p.professor && (
                     <div className="mt-1 text-xs md:text-sm text-emerald-200/70 italic text-center">
                       {p.explica}
