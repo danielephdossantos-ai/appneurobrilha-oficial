@@ -255,21 +255,21 @@ function Descoberta({ m }: { m: AulaV4["momento03_descoberta"] }) {
   return (
     <Card>
       <div className="text-xl font-bold">{m.perguntaGuia}</div>
-      <div className="text-white/70">💡 Pista: {m.pista}</div>
+      <div className="text-white/70 mb-4 italic">💡 Pista: {m.pista}</div>
       {m.visualMat && (
-        <div className="rounded-xl bg-white/5 p-3">
+        <div className="mb-4">
           <RenderVisualMat v={m.visualMat} />
         </div>
       )}
       {!revelou ? (
         <button
           onClick={() => setRevelou(true)}
-          className="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20"
+          className="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 font-bold text-amber-300"
         >
           Ver a descoberta ✨
         </button>
       ) : (
-        <div className="bg-amber-400/20 border border-amber-400 rounded-lg p-4 text-lg">
+        <div className="bg-amber-400/20 border-2 border-amber-400 rounded-2xl p-4 text-lg font-bold text-center animate-in zoom-in duration-500">
           🎉 {m.revelacao}
         </div>
       )}
@@ -357,13 +357,10 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
-  const textoConta = `${m.enunciado} ${m.passos.join(" ")}`;
-  const contaMD = detectarMultDivNoTexto(textoConta);
-  const contaAditiva = detectarContaNoTexto(textoConta);
   return (
     <Card>
-      <div className="text-sm text-amber-300">🧠 Brilha pensa em voz alta:</div>
-      <div className="text-lg font-medium">{m.enunciado}</div>
+      <div className="text-sm text-amber-300 mb-2">🧠 Brilha explica na lousa:</div>
+      <div className="text-lg font-bold mb-4">{m.enunciado}</div>
 
 
       {m.colecaoVisual && (
@@ -429,22 +426,6 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         />
       ) : m.visualMat ? (
         <RenderVisualMat v={m.visualMat} />
-      ) : contaMD?.operacao === "mult" ? (
-        <MultiplicacaoArmada a={contaMD.a} b={contaMD.b} />
-      ) : contaMD?.operacao === "div" ? (
-        <InteracaoView
-          i={{
-            tipo: "contaPassoAPasso",
-            operacao: "div",
-            operandos: [contaMD.a, contaMD.b],
-            resultado: Math.floor(contaMD.a / contaMD.b),
-            passos: [],
-          }}
-        />
-      ) : contaAditiva ? (
-        <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
-      ) : detectarComparacaoNoTexto(textoConta) ? (
-        <ComparacaoCasas numeros={detectarComparacaoNoTexto(textoConta)!} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
