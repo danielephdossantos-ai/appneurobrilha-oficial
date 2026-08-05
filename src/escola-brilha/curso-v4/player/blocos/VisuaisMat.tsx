@@ -1433,7 +1433,22 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                       filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
                     }}
                   >
-                    <span className="whitespace-pre text-center">{textoExibido}</span>
+                    <div className="flex flex-col items-center">
+                      {p.expr.split("\n").map((linha, lIdx) => (
+                        <div key={lIdx} className="whitespace-pre text-center">
+                          {(() => {
+                            // Calculamos o deslocamento acumulado para saber quanto desse texto mostrar
+                            let charCountBefore = p.expr.split("\n").slice(0, lIdx).join("\n").length;
+                            if (lIdx > 0) charCountBefore += 1; // conta o \n
+
+                            const charInThisLine = linha.length;
+                            const visivelNessaLinha = Math.max(0, Math.min(charInThisLine, caracAtuais - charCountBefore));
+                            
+                            return linha.slice(0, visivelNessaLinha);
+                          })()}
+                        </div>
+                      ))}
+                    </div>
                     {isUltimo && estahEscrevendo && !jaTerminouLinha && (
                       <span className="inline-block w-4 h-12 bg-[#8b5e3c] animate-pulse rounded-sm" />
                     )}
