@@ -107,7 +107,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
                   <div
                     className="break-words text-2xl sm:text-4xl md:text-6xl font-bold text-white/95 tracking-wider leading-relaxed"
                     style={{ 
-                      fontFamily: "'Permanent Marker', cursive",
+                      fontFamily: "'Nunito', sans-serif",
                       filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
                     }}
                   >
@@ -152,7 +152,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
                 </div>
                 <div
                   className="text-4xl font-black text-[#1a1100]"
-                  style={{ fontFamily: "'Permanent Marker', cursive" }}
+                  style={{ fontFamily: "'Nunito', sans-serif" }}
                 >
                   {resposta.resultado}
                 </div>
