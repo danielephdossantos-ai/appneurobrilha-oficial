@@ -1404,6 +1404,13 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
               return (
                 <div key={idx} className="w-full flex flex-col items-center">
+                  {/* Se tem professor e terminou de escrever a linha anterior, mostra a explicação do professor em cima da conta */}
+                  {jaTerminouLinha && p.professor && (
+                    <div className="mb-2 px-4 py-2 bg-emerald-950/40 border border-emerald-900/30 rounded-xl text-xs md:text-sm text-amber-200/90 italic text-center animate-in fade-in slide-in-from-top-1 duration-700 w-full max-w-[90%]">
+                      {p.professor}
+                    </div>
+                  )}
+
                   <div
                     className={`font-black text-xl md:text-2xl tracking-wider ${cor} flex items-center gap-2`}
                     style={{
@@ -1417,7 +1424,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                     )}
                   </div>
 
-                  {jaTerminouLinha && (
+                  {jaTerminouLinha && p.explica && !p.professor && (
                     <div className="mt-1 text-xs md:text-sm text-emerald-200/70 italic text-center animate-in fade-in duration-500">
                       {p.explica}
                     </div>
