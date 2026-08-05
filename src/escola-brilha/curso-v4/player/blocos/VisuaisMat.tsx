@@ -1397,10 +1397,10 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
               const cor =
                 p.status === "ok"
-                  ? "text-emerald-400"
+                  ? "text-emerald-700"
                   : p.status === "x"
-                  ? "text-rose-400"
-                  : "text-sky-300";
+                  ? "text-rose-700"
+                  : "text-[#5d4037]";
 
               return (
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
