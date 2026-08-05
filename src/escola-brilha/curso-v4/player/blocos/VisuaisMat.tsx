@@ -1480,7 +1480,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               setCaracteresVisiveis({});
               setEstahEscrevendo(false);
             }}
-            className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full flex items-center gap-1"
+            className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/60 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full flex items-center gap-1"
           >
             ↻ Reiniciar / Ver outra vez
           </button>
