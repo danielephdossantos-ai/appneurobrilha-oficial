@@ -20,7 +20,25 @@ interface Props {
 function Lousa({ resposta }: { resposta: PipMatResposta }) {
   const total = resposta.passos.length;
   const [visiveis, setVisiveis] = useState(1);
+  const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
   const completo = visiveis >= total;
+
+  useEffect(() => {
+    // Ao avançar para um novo passo, inicia a animação de digitação
+    const passoAtual = visiveis - 1;
+    const texto = resposta.passos[passoAtual].linha;
+    let index = 0;
+    
+    setCaracteresVisiveis(prev => ({ ...prev, [passoAtual]: 0 }));
+
+    const timer = setInterval(() => {
+      index++;
+      setCaracteresVisiveis(prev => ({ ...prev, [passoAtual]: index }));
+      if (index >= texto.length) clearInterval(timer);
+    }, 40); // Velocidade da "escrita" na lousa
+
+    return () => clearInterval(timer);
+  }, [visiveis, resposta.passos]);
 
   return (
     <div className="rounded-3xl border-[6px] border-[#7c4a20] bg-[#0f2b22] p-4 shadow-xl">
@@ -34,55 +52,78 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
       </div>
 
       <div className="space-y-3">
-        {resposta.passos.slice(0, visiveis).map((p, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl bg-white/5 px-3 py-2"
-          >
-            <div className="flex items-start gap-2">
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-xs font-black text-[#0f2b22]">
-                {i + 1}
-              </span>
-              <div className="min-w-0 flex-1">
-                <div
-                  className="break-words text-lg font-bold text-white sm:text-xl"
-                  style={{ fontFamily: "ui-monospace, 'Courier New', monospace" }}
-                >
-                  {p.linha}
+        {resposta.passos.slice(0, visiveis).map((p, i) => {
+          const isUltimo = i === visiveis - 1;
+          const textoExibido = isUltimo 
+            ? p.linha.slice(0, caracteresVisiveis[i] || 0) 
+            : p.linha;
+
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="rounded-xl bg-white/5 px-3 py-2 border-l-4 border-emerald-500/30"
+            >
+              <div className="flex items-start gap-2">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-xs font-black text-[#0f2b22]">
+                  {i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div
+                    className="break-words text-xl font-bold text-white sm:text-2xl"
+                    style={{ 
+                      fontFamily: "ui-monospace, 'Courier New', monospace",
+                      textShadow: "0 0 10px rgba(52, 211, 153, 0.3)"
+                    }}
+                  >
+                    {textoExibido}
+                    {isUltimo && (caracteresVisiveis[i] || 0) < p.linha.length && (
+                      <span className="animate-pulse inline-block w-2 h-6 bg-emerald-400 ml-1" />
+                    )}
+                  </div>
+                  {p.explica && (
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: (isUltimo && (caracteresVisiveis[i] || 0) < p.linha.length) ? 0 : 1 }}
+                      className="mt-1 text-sm text-emerald-200/90 font-medium"
+                    >
+                      {p.explica}
+                    </motion.div>
+                  )}
                 </div>
-                {p.explica && (
-                  <div className="mt-1 text-sm text-emerald-200/90">{p.explica}</div>
-                )}
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
 
       {!completo ? (
         <button
           type="button"
           onClick={() => setVisiveis((v) => v + 1)}
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-emerald-400 px-4 py-2.5 text-sm font-black text-[#0f2b22] transition hover:brightness-110 active:scale-95"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-emerald-400 px-4 py-3 text-sm font-black text-[#0f2b22] shadow-[0_4px_0_0_#059669] transition hover:brightness-110 active:translate-y-1 active:shadow-none"
         >
-          Continuar <ChevronRight className="h-4 w-4" />
+          Continuar <ChevronRight className="h-5 w-5" />
         </button>
       ) : (
         <div className="mt-4 space-y-3">
           {resposta.resultado && (
-            <div className="rounded-2xl bg-amber-300 px-4 py-3 text-center">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="rounded-2xl bg-amber-300 px-4 py-3 text-center shadow-lg border-2 border-amber-400"
+            >
               <div className="text-[11px] font-black uppercase tracking-widest text-amber-800">
                 Resultado
               </div>
               <div
-                className="text-xl font-black text-[#3b2400]"
+                className="text-2xl font-black text-[#3b2400]"
                 style={{ fontFamily: "ui-monospace, 'Courier New', monospace" }}
               >
                 {resposta.resultado}
               </div>
-            </div>
+            </motion.div>
           )}
           {resposta.pergunta_final && (
             <div className="rounded-2xl border border-emerald-400/40 bg-emerald-900/40 px-4 py-3 text-sm text-emerald-100">
@@ -92,7 +133,10 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
           )}
           <button
             type="button"
-            onClick={() => setVisiveis(1)}
+            onClick={() => {
+              setVisiveis(1);
+              setCaracteresVisiveis({});
+            }}
             className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 hover:text-emerald-200"
           >
             <RotateCcw className="h-3.5 w-3.5" /> Ver de novo passo a passo
