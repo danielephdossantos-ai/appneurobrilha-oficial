@@ -1349,144 +1349,161 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     };
   }, [v, iniciou]);
 
+  const passoAtual = passos[revelados - 1];
+  const jaTerminouLinha = passoAtual ? (caracteresVisiveis[revelados - 1] || 0) >= passoAtual.expr.length : false;
+
   return (
-    <div className="my-4 w-full max-w-lg mx-auto px-2">
+    <div className="my-6 w-full max-w-xl mx-auto px-4">
       {legenda && (
-        <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
+        <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-4">
           {legenda}
         </div>
       )}
 
-      <div className="rounded-3xl border-[8px] border-[#8b5e3c] bg-[#fff9f0] p-6 shadow-[inset_0_2px_10px_rgba(0,0,0,0.1),0_10px_30px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[250px]">
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
-
-        <div className="relative z-10">
-          <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
-            <div className="text-xl md:text-3xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
-              {trinomio}
+      {/* Professor Narrator - OUTSIDE the chalkboard */}
+      {iniciou && passoAtual?.professor && (
+        <div className="mb-8 p-6 bg-amber-50 rounded-[2rem] border-2 border-amber-200 shadow-sm relative animate-in fade-in slide-in-from-top duration-700">
+          <div className="flex items-start gap-4">
+            <div className="bg-amber-100 p-3 rounded-full mt-1 flex-shrink-0 shadow-sm border border-amber-200">
+              <span className="text-2xl">👨‍🏫</span>
             </div>
-            
-            <button
-              onClick={() => setAudioAtivo(!audioAtivo)}
-              className="p-2 rounded-full hover:bg-[#8b5e3c]/10 transition-colors text-[#8b5e3c]/60 hover:text-[#8b5e3c]"
-              title={audioAtivo ? "Desativar explicação por voz" : "Ativar explicação por voz"}
-            >
-              {audioAtivo ? <Volume2 className="h-6 w-6" /> : <VolumeX className="h-6 w-6" />}
-            </button>
-          </div>
-
-          {!iniciou ? (
-            <div className="flex flex-col items-center justify-center py-10 gap-4">
-              <button
-                onClick={() => setIniciou(true)}
-                className="group relative px-10 py-5 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-2xl shadow-[0_6px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-xl"
-              >
-                Começar explicação passo a passo ▶
-              </button>
-              <p className="text-[#8b5e3c]/60 text-xs uppercase font-bold tracking-widest animate-pulse">
-                Clique para ver o passo a passo
+            <div className="flex-1">
+              <div className="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-2 flex justify-between items-center opacity-70">
+                <span>Professor Brilha explica</span>
+                <span className="bg-amber-200/50 px-2 py-0.5 rounded-full">Passo {revelados} de {total}</span>
+              </div>
+              <p className="text-[#5d4037] text-lg md:text-xl font-bold leading-relaxed">
+                {passoAtual.professor}
               </p>
             </div>
-          ) : (
-            <div className="flex flex-col items-center gap-6">
-            {passos.slice(0, revelados).map((p, idx) => {
-              const caracAtuais = caracteresVisiveis[idx] || 0;
-              const textoExibido = p.expr.slice(0, caracAtuais);
-              const isUltimo = idx === revelados - 1;
-              const jaTerminouLinha = caracAtuais >= p.expr.length;
+          </div>
+          
+          {/* Audio status indicator */}
+          <div className="absolute -top-3 -right-3">
+            <button
+              onClick={() => setAudioAtivo(!audioAtivo)}
+              className={`p-2 rounded-full border-2 transition-all shadow-md ${audioAtivo ? 'bg-amber-500 border-amber-600 text-white' : 'bg-white border-amber-200 text-amber-300'}`}
+            >
+              {audioAtivo ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            </button>
+          </div>
+        </div>
+      )}
 
-              const cor =
-                p.status === "ok"
-                  ? "text-emerald-700"
-                  : p.status === "x"
-                  ? "text-rose-700"
-                  : "text-[#5d4037]";
+      {/* Lousa Mágica (Chalkboard) - ONLY accounts and calculations */}
+      <div className="relative group perspective-1000">
+        <div className="bg-[#fff9f0] rounded-[40px] border-[14px] border-[#8b5e3c] p-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.3),inset_0_2px_10px_rgba(0,0,0,0.1)] min-h-[350px] flex flex-col items-center justify-center transition-all duration-500 overflow-hidden relative">
+          
+          {/* Background Texture */}
+          <div className="absolute inset-0 opacity-[0.1] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
-              return (
-                <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
-                  {/* Explicação do Professor (O "Pulo do Gato") */}
-                  {p.professor && (
-                    <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 bg-amber-50 border-l-4 border-[#8b5e3c] p-4 rounded-r-xl shadow-md ring-1 ring-[#8b5e3c]/10">
-                        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm shadow-[0_2px_0_0_#5d4037]">
-                          {idx + 1}
-                        </span>
-                        <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
-                          {/* Se está escrevendo, a explicação brilha */}
-                          {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
-                              O Professor explica...
-                            </div>
-                          )}
-                          {p.professor}
+          {/* Writing Area */}
+          <div className="relative w-full z-10">
+            {!iniciou ? (
+              <div className="flex flex-col items-center justify-center py-12 gap-8">
+                <div className="text-5xl md:text-7xl font-black text-[#5d4037] tracking-tight text-center drop-shadow-sm" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+                  {trinomio}
+                </div>
+                <div className="space-y-4 text-center">
+                  <button
+                    onClick={() => setIniciou(true)}
+                    className="group relative px-12 py-6 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-[2rem] shadow-[0_8px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center gap-3 text-2xl"
+                  >
+                    Começar explicação passo a passo ▶
+                  </button>
+                  <p className="text-[#8b5e3c]/50 text-xs font-black uppercase tracking-[0.2em] animate-pulse">
+                    O professor vai te mostrar como se faz
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center space-y-10 w-full">
+                {passos.slice(0, revelados).map((p, idx) => {
+                  const caracAtuais = caracteresVisiveis[idx] || 0;
+                  const textoExibido = p.expr.slice(0, caracAtuais);
+                  const isUltimo = idx === revelados - 1;
+                  
+                  const cor =
+                    p.status === "ok"
+                      ? "text-emerald-700"
+                      : p.status === "x"
+                      ? "text-rose-700"
+                      : "text-[#5d4037]";
+
+                  return (
+                    <div 
+                      key={idx} 
+                      className={`w-full flex items-center justify-center gap-6 transition-all duration-700 ${isUltimo ? 'scale-110 translate-y-0 opacity-100' : 'scale-90 -translate-y-2 opacity-40'}`}
+                    >
+                      {/* Step Number Badge */}
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center text-amber-700 font-black text-xl shadow-inner">
+                        {idx + 1}
+                      </div>
+
+                      {/* Math Line */}
+                      <div className="flex-1 text-center">
+                        <div 
+                          className={`font-black text-3xl md:text-6xl tracking-wider leading-relaxed ${cor}`}
+                          style={{
+                            fontFamily: "'Permanent Marker', cursive",
+                            filter: "drop-shadow(1px 1px 1px rgba(0,0,0,0.05))",
+                          }}
+                        >
+                          <pre className="whitespace-pre-wrap inline-block">
+                            {textoExibido}
+                            {isUltimo && estahEscrevendo && caracAtuais < p.expr.length && (
+                              <span className="inline-block w-4 h-12 md:h-16 bg-[#8b5e3c] animate-pulse ml-1 rounded-sm align-middle" />
+                            )}
+                          </pre>
+                        </div>
+                      </div>
+
+                      {/* Status Checkmark */}
+                      <div className={`w-12 h-12 flex items-center justify-center transition-all duration-500 ${p.status === 'ok' && (idx < revelados - 1 || jaTerminouLinha) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
+                        <div className="bg-emerald-100 p-2 rounded-full text-emerald-600 shadow-sm border border-emerald-200">
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={5} d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
                       </div>
                     </div>
-                  )}
+                  );
+                })}
 
-                  {/* Conta Matemática Montada na Lousa (REAL MAT) */}
-                  <div
-                    className={`font-black text-2xl md:text-5xl tracking-tight ${cor} flex items-center justify-center gap-2 py-6 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
-                    style={{
-                      fontFamily: "'Permanent Marker', cursive",
-                      filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
-                    }}
-                  >
-                    <span className="whitespace-pre text-center">{textoExibido}</span>
-                    {isUltimo && estahEscrevendo && !jaTerminouLinha && (
-                      <span className="inline-block w-4 h-12 bg-[#8b5e3c] animate-pulse rounded-sm" />
-                    )}
-                  </div>
-
-                  {/* Legenda curta */}
-                  {jaTerminouLinha && p.explica && !p.professor && (
-                    <div className="mt-1 text-sm md:text-base text-[#5d4037]/70 italic text-center">
-                      {p.explica}
+                {terminou && (
+                  <div className="mt-12 pt-10 border-t-4 border-dashed border-amber-200 w-full text-center animate-in zoom-in slide-in-from-bottom-12 duration-1000">
+                    <div className="text-[10px] font-black text-amber-500 uppercase mb-3 tracking-[0.3em]">Conclusão do Professor</div>
+                    <div 
+                      className="text-6xl md:text-8xl font-black text-emerald-600 drop-shadow-sm inline-block px-10 py-4 bg-emerald-50 rounded-[2.5rem] border-4 border-emerald-200"
+                      style={{ fontFamily: "'Permanent Marker', cursive" }}
+                    >
+                      {fatorada || (trinomio + " = ...")}
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          )}
-
-          {terminou && fatorada && (
-            <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
-              <div
-                className="text-xl md:text-2xl font-black text-[#8b5e3c]"
-                style={{ fontFamily: "'Permanent Marker', cursive" }}
-              >
-                {trinomio} = {fatorada}
+                    
+                    <div className="mt-12">
+                      <button
+                        onClick={() => {
+                          stopSpeaking();
+                          setIniciou(false);
+                          setRevelados(0);
+                          setCaracteresVisiveis({});
+                          setEstahEscrevendo(false);
+                        }}
+                        className="group flex items-center gap-3 mx-auto px-6 py-3 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-800 font-black text-sm uppercase tracking-widest transition-all hover:scale-105 active:scale-95 border-2 border-amber-300/30"
+                      >
+                        <span className="group-hover:rotate-180 transition-transform duration-700">↻</span> 
+                        Ver explicação novamente
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
-
-          {terminou && !fatorada && falha && (
-            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Permanent Marker', cursive" }}>
-              {falha}
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-
-      <div className="mt-2 flex justify-end">
-        {(iniciou || terminou) && (
-          <button
-            onClick={() => {
-              stopSpeaking();
-              setIniciou(false);
-              setRevelados(0);
-              setCaracteresVisiveis({});
-              setEstahEscrevendo(false);
-            }}
-            className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/60 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full flex items-center gap-1"
-          >
-            ↻ Reiniciar / Ver outra vez
-          </button>
-        )}
       </div>
     </div>
   );
 }
+
 
