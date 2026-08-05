@@ -9,7 +9,7 @@ import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Geografia 5º Ano — "Explorador Eco-Cidadão"
- * 7 unidades (1 aula cada) fechando o Ensino Fundamental 1 de Geografia.
+ * GEOGRAFIA TEM 7 UNIDADES COM 1 AULA , ELA REALMENTE COBRE O CURRICULUM ESTUDANTIL BNCC COM 7 AULAS.
  */
 const curso: CursoGeoV1 = {
   slug: "geografia-5ano",

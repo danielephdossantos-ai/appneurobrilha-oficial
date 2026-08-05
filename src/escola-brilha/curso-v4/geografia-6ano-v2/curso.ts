@@ -9,7 +9,7 @@ import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Geografia 6º Ano (v2 — formato do 5º Ano)
- * 7 unidades, 11 cenas visuais interativas cada, linguagem adolescente.
+ * GEOGRAFIA TEM 7 UNIDADES COM 1 AULA , ELA REALMENTE COBRE O CURRICULUM ESTUDANTIL BNCC COM 7 AULAS.
  */
 const curso: CursoGeoV1 = {
   slug: "geografia-6ano-v2",

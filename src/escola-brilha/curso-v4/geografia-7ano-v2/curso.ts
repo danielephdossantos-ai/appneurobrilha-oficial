@@ -10,7 +10,7 @@ import { unidade7 } from "./unidade-7";
 /**
  * Curso: Geografia 7º Ano — "Explorador do Brasil"
  * Padrão idêntico ao 6º Ano v2 (PlayerGeoV1 + estilo teen).
- * 7 unidades cobrindo BNCC EF07GE01–EF07GE12.
+ * GEOGRAFIA TEM 7 UNIDADES COM 1 AULA , ELA REALMENTE COBRE O CURRICULUM ESTUDANTIL BNCC COM 7 AULAS.
  */
 const curso: CursoGeoV1 = {
   slug: "geografia-7ano-v2",

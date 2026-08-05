@@ -10,7 +10,7 @@ import { unidade7 } from "./unidade-7";
 /**
  * Curso: Geografia 4º Ano — "Explorador Nacional"
  *
- * 7 unidades completas:
+ * GEOGRAFIA TEM 7 UNIDADES COM 1 AULA , ELA REALMENTE COBRE O CURRICULUM ESTUDANTIL BNCC COM 7 AULAS.
  *  U1 — Mapa do Brasil e Regiões (4 aulas)
  *  U2 — População e Migrações
  *  U3 — Relevo e Rios
