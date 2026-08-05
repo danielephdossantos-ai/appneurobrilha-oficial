@@ -1350,28 +1350,28 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [v, iniciou]);
 
   return (
-    <div className="my-4 w-full max-w-md mx-auto">
+    <div className="my-4 w-full max-w-lg mx-auto px-2">
       {legenda && (
-        <div className="text-xs font-black uppercase tracking-widest text-amber-300 text-center mb-2">
+        <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      <div className="rounded-3xl border-[8px] border-[#4a2e15] bg-[#0f2b22] p-5 shadow-[inset_0_4px_20px_rgba(0,0,0,0.6),0_10px_30px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[200px]">
-        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
+      <div className="rounded-3xl border-[8px] border-[#8b5e3c] bg-[#fff9f0] p-6 shadow-[inset_0_2px_10px_rgba(0,0,0,0.1),0_10px_30px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[250px]">
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
-          <div className="flex items-center justify-between border-b border-emerald-900/40 pb-3 mb-4">
-            <div className="text-xl md:text-2xl font-black text-emerald-100/90" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+          <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
+            <div className="text-xl md:text-3xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               {trinomio}
             </div>
             
             <button
               onClick={() => setAudioAtivo(!audioAtivo)}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors text-emerald-400/60 hover:text-emerald-400"
+              className="p-2 rounded-full hover:bg-[#8b5e3c]/10 transition-colors text-[#8b5e3c]/60 hover:text-[#8b5e3c]"
               title={audioAtivo ? "Desativar explicação por voz" : "Ativar explicação por voz"}
             >
-              {audioAtivo ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+              {audioAtivo ? <Volume2 className="h-6 w-6" /> : <VolumeX className="h-6 w-6" />}
             </button>
           </div>
 
@@ -1379,11 +1379,11 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             <div className="flex flex-col items-center justify-center py-10 gap-4">
               <button
                 onClick={() => setIniciou(true)}
-                className="group relative px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-[0_6px_0_0_#064e3b] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-lg"
+                className="group relative px-10 py-5 bg-[#8b5e3c] hover:bg-[#a0714c] text-white font-black rounded-2xl shadow-[0_6px_0_0_#5d4037] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-xl"
               >
                 Começar explicação passo a passo ▶
               </button>
-              <p className="text-emerald-500/60 text-[10px] uppercase font-bold tracking-widest animate-pulse">
+              <p className="text-[#8b5e3c]/60 text-xs uppercase font-bold tracking-widest animate-pulse">
                 Clique para ver o passo a passo
               </p>
             </div>
@@ -1397,25 +1397,25 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
               const cor =
                 p.status === "ok"
-                  ? "text-emerald-400"
+                  ? "text-emerald-700"
                   : p.status === "x"
-                  ? "text-rose-400"
-                  : "text-sky-300";
+                  ? "text-rose-700"
+                  : "text-[#5d4037]";
 
               return (
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
                     <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 bg-emerald-950/60 border-l-4 border-amber-400 p-3 rounded-r-xl shadow-lg ring-1 ring-white/5">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-400 text-[#0f2b22] flex items-center justify-center font-black text-xs shadow-[0_2px_0_0_#b45309]">
+                      <div className="flex items-start gap-3 bg-amber-50 border-l-4 border-[#8b5e3c] p-4 rounded-r-xl shadow-md ring-1 ring-[#8b5e3c]/10">
+                        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm shadow-[0_2px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-xs md:text-sm text-amber-100 font-medium leading-relaxed italic">
+                        <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] font-black uppercase text-amber-400/70 mb-1 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" />
+                            <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
                               O Professor explica...
                             </div>
                           )}
@@ -1427,21 +1427,21 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
                   {/* Conta Matemática Montada na Lousa (REAL MAT) */}
                   <div
-                    className={`font-black text-3xl md:text-5xl tracking-wider ${cor} flex items-center gap-2 py-4 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
+                    className={`font-black text-4xl md:text-6xl tracking-wider ${cor} flex items-center gap-2 py-6 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
                     style={{
                       fontFamily: "'Permanent Marker', cursive",
-                      filter: "drop-shadow(3px 3px 6px rgba(0,0,0,0.8))",
+                      filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
                     }}
                   >
                     <span>{textoExibido}</span>
                     {isUltimo && estahEscrevendo && !jaTerminouLinha && (
-                      <span className="inline-block w-3 h-10 bg-emerald-400 animate-pulse rounded-sm" />
+                      <span className="inline-block w-4 h-12 bg-[#8b5e3c] animate-pulse rounded-sm" />
                     )}
                   </div>
 
                   {/* Legenda curta */}
                   {jaTerminouLinha && p.explica && !p.professor && (
-                    <div className="mt-1 text-xs md:text-sm text-emerald-200/70 italic text-center">
+                    <div className="mt-1 text-sm md:text-base text-[#5d4037]/70 italic text-center">
                       {p.explica}
                     </div>
                   )}
@@ -1452,9 +1452,9 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           )}
 
           {terminou && fatorada && (
-            <div className="mt-6 pt-4 border-t border-emerald-900/50 text-center animate-in fade-in zoom-in duration-700">
+            <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
               <div
-                className="text-lg md:text-xl font-black text-amber-300"
+                className="text-xl md:text-2xl font-black text-[#8b5e3c]"
                 style={{ fontFamily: "'Permanent Marker', cursive" }}
               >
                 {trinomio} = {fatorada}
@@ -1480,7 +1480,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               setCaracteresVisiveis({});
               setEstahEscrevendo(false);
             }}
-            className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full flex items-center gap-1"
+            className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/60 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full flex items-center gap-1"
           >
             ↻ Reiniciar / Ver outra vez
           </button>
