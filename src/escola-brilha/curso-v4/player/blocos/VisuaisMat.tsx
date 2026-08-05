@@ -1393,6 +1393,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               );
             })}
           </div>
+          )}
 
           {terminou && fatorada && (
             <div className="mt-6 pt-4 border-t border-emerald-900/50 text-center animate-in fade-in zoom-in duration-700">
