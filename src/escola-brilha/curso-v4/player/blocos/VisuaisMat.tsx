@@ -1362,7 +1362,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
         <div className="relative z-10">
           <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
-            <div className="text-xl sm:text-2xl md:text-5xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <div className="text-xl sm:text-2xl md:text-5xl font-black text-[#5d4037]" style={{ fontFamily: "'Nunito', sans-serif" }}>
               {trinomio}
             </div>
             
@@ -1429,7 +1429,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                   <div
                     className={`font-black text-2xl sm:text-3xl md:text-7xl tracking-tight ${cor} flex items-center justify-center gap-2 py-8 mb-4 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
                     style={{
-                      fontFamily: "'Permanent Marker', cursive",
+                      fontFamily: "'Nunito', sans-serif",
                       filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
                     }}
                   >
