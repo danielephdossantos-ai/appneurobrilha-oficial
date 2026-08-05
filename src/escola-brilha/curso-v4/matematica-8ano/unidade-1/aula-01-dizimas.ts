@@ -22,10 +22,22 @@ export const aula01_dizimas: AulaV4 = {
     instrucao: "Divida 1 por 3 na chave e observe o RESTO. Ele volta.",
     cenas: [
       {
-        tipo: "texto",
-        texto:
-          "Divisão de 1 por 3 na chave:\n\n   1,000 | 3\n  −  9    ────\n     ───   0,333…\n     10\n    − 9\n     ───\n      10\n     − 9\n      ───\n       1  ← o resto NUNCA zera. Sempre volta 1.\n\nComo o resto se repete, o quociente também: 0,333333… — é uma dízima periódica.",
-        destaque: true,
+        tipo: "visualMat",
+        titulo: "Divisão com resto periódico",
+        visualMat: {
+          tipo: "trinomioPassoAPasso",
+          trinomio: "1 ÷ 3 = ?",
+          passos: [
+            { expr: "1 ÷ 3 = 0,333…", explica: "Dividindo 1 por 3", status: "neutro", professor: "Como 1 é menor que 3, colocamos 0, e acrescentamos um zero ao 1, tornando-o 10." },
+            { expr: "1,000 | 3", explica: "Iniciando a divisão", status: "ok", professor: "Agora dividimos 10 por 3. O maior múltiplo de 3 menor que 10 é 9 (3 × 3)." },
+            { expr: "− 9", explica: "Subtraindo o múltiplo", status: "ok", professor: "10 menos 9 sobra 1. Colocamos o 3 no quociente." },
+            { expr: "0,1 | 3", explica: "Continuando a divisão", status: "ok", professor: "Sobrou 1. Colocamos outro zero: vira 10 de novo. 10 dividido por 3 dá 3 novamente." },
+            { expr: "− 9", explica: "Subtraindo novamente", status: "ok", professor: "10 menos 9 sobra 1 de novo! Percebeu o padrão?" },
+            { expr: "0,1 | 3", explica: "Resto se repete", status: "ok", professor: "O resto 1 nunca vai sumir. Ele vai se repetir para sempre, e o 3 no resultado também!" },
+          ],
+          fatorada: "0,333…",
+          legenda: "Divisão na chave montada",
+        },
       },
       {
         tipo: "tabela",
