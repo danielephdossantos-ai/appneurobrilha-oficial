@@ -25,92 +25,98 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   const completo = visiveis >= total && !estahEscrevendo;
 
   useEffect(() => {
-    // Inicia o processo de "escrita" automática de todos os passos
-    let passoAtual = 0;
-    setVisiveis(1);
+    let montado = true;
+    setVisiveis(0);
+    setCaracteresVisiveis({});
     setEstahEscrevendo(true);
 
     async function escreverTudo() {
-      for (let i = 0; i < total; i++) {
-        passoAtual = i;
-        setVisiveis(i + 1);
-        
-        const texto = resposta.passos[i].linha;
-        setCaracteresVisiveis(prev => ({ ...prev, [i]: 0 }));
+      // Pequeno delay inicial para o aluno se preparar
+      await new Promise(resolve => setTimeout(resolve, 800));
 
-        // Escreve caractere por caractere
+      for (let i = 0; i < total; i++) {
+        if (!montado) return;
+        
+        setVisiveis(i + 1);
+        const texto = resposta.passos[i].linha;
+        
+        // Escreve caractere por caractere (mais lento: 150ms por caractere)
         for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
-          await new Promise(resolve => setTimeout(resolve, 80)); // Escrita mais lenta (humana)
+          if (!montado) return;
           setCaracteresVisiveis(prev => ({ ...prev, [i]: charIndex }));
+          await new Promise(resolve => setTimeout(resolve, 150)); 
         }
 
-        // Pequena pausa entre a conta e a explicação
-        await new Promise(resolve => setTimeout(resolve, 400));
+        // Pausa após terminar a conta para mostrar a explicação (800ms)
+        await new Promise(resolve => setTimeout(resolve, 800));
         
-        // Pausa maior entre passos para o aluno ler
+        // Pausa maior entre um passo e outro (2.5 segundos para o aluno processar)
         if (i < total - 1) {
-          await new Promise(resolve => setTimeout(resolve, 1200));
+          await new Promise(resolve => setTimeout(resolve, 2500));
         }
       }
-      setEstahEscrevendo(false);
+      if (montado) setEstahEscrevendo(false);
     }
 
     escreverTudo();
+    return () => { montado = false; };
   }, [resposta]);
 
   return (
-    <div className="rounded-3xl border-[8px] border-[#5d3a1a] bg-[#0f2b22] p-5 shadow-[inset_0_4px_20px_rgba(0,0,0,0.5),0_10px_30px_rgba(0,0,0,0.3)] relative overflow-hidden">
-      {/* Textura de Lousa */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
+    <div className="rounded-3xl border-[10px] border-[#4a2e15] bg-[#0f2b22] p-6 shadow-[inset_0_4px_30px_rgba(0,0,0,0.6),0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden min-h-[300px]">
+      <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
       
       <div className="relative z-10">
-        <div className="mb-4 flex items-center justify-between gap-2 border-b border-emerald-900/50 pb-2">
-          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400/70">
-            {resposta.titulo}
+        <div className="mb-6 flex items-center justify-between border-b border-emerald-900/40 pb-3">
+          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500/50">
+            {resposta.titulo || "RESOLUÇÃO NA LOUSA"}
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {estahEscrevendo && (
-              <span className="flex h-2 w-2 animate-ping rounded-full bg-emerald-400" />
+              <div className="flex gap-1">
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-emerald-400 [animation-delay:-0.3s]" />
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-emerald-400 [animation-delay:-0.15s]" />
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-emerald-400" />
+              </div>
             )}
-            <span className="shrink-0 rounded-md bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400/80">
-              {Math.min(visiveis, total)}/{total}
+            <span className="shrink-0 rounded bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400/60">
+              {Math.min(visiveis, total)} / {total}
             </span>
           </div>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-8">
           {resposta.passos.slice(0, visiveis).map((p, i) => {
-            const isEscrevendoAgora = i === visiveis - 1 && estahEscrevendo;
             const caracteresAtuais = caracteresVisiveis[i] || 0;
             const textoExibido = p.linha.slice(0, caracteresAtuais);
             const jaTerminouLinha = caracteresAtuais >= p.linha.length;
+            const isUltimo = i === visiveis - 1;
 
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="relative pl-8"
+                initial={{ opacity: 0, x: -5 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="relative pl-10"
               >
-                {/* Número do Passo estilo Giz */}
-                <div className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-sm border border-emerald-400/30 text-[10px] font-black text-emerald-400/50">
+                <div className="absolute left-0 top-1.5 flex h-7 w-7 items-center justify-center rounded border-2 border-emerald-500/20 text-xs font-black text-emerald-500/40">
                   {i + 1}
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <div
-                    className="break-words text-2xl font-bold text-white/90 sm:text-3xl tracking-wide"
+                    className="break-words text-3xl font-bold text-white/95 sm:text-4xl tracking-wider leading-relaxed"
                     style={{ 
-                      fontFamily: "'Permanent Marker', cursive, ui-monospace",
-                      filter: "drop-shadow(0 0 2px rgba(255,255,255,0.2))"
+                      fontFamily: "'Permanent Marker', cursive",
+                      filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
                     }}
                   >
                     {textoExibido}
-                    {isEscrevendoAgora && !jaTerminouLinha && (
+                    {isUltimo && estahEscrevendo && !jaTerminouLinha && (
                       <motion.span 
                         animate={{ opacity: [1, 0] }}
-                        transition={{ repeat: Infinity, duration: 0.4 }}
-                        className="inline-block w-1.5 h-7 bg-emerald-200/80 ml-1 translate-y-1"
+                        transition={{ repeat: Infinity, duration: 0.5 }}
+                        className="inline-block w-2 h-9 bg-emerald-300/60 ml-2 translate-y-1"
                       />
                     )}
                   </div>
@@ -118,9 +124,9 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
                   <AnimatePresence>
                     {jaTerminouLinha && (
                       <motion.div 
-                        initial={{ opacity: 0, y: -5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mt-1 text-sm text-emerald-300/80 font-medium italic"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mt-2 text-base text-emerald-300/90 font-medium italic bg-emerald-900/20 py-1 px-3 rounded-lg inline-block"
                       >
                         {p.explica}
                       </motion.div>
@@ -134,17 +140,18 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
 
         {completo && (
           <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-6 pt-4 border-t border-emerald-900/50 space-y-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", damping: 12 }}
+            className="mt-10 pt-6 border-t border-emerald-900/50 space-y-6"
           >
             {resposta.resultado && (
-              <div className="rounded-2xl bg-amber-300/90 p-4 text-center shadow-lg border-b-4 border-amber-500 transform -rotate-1">
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-900/60 mb-1">
-                  Resultado Final
+              <div className="rounded-3xl bg-amber-300 p-6 text-center shadow-[0_10px_0_0_#b45309] border-2 border-amber-400 transform -rotate-2">
+                <div className="text-[10px] font-black uppercase tracking-[0.5em] text-amber-900/50 mb-2">
+                  RESPOSTA FINAL
                 </div>
                 <div
-                  className="text-3xl font-black text-[#2a1a00]"
+                  className="text-4xl font-black text-[#1a1100]"
                   style={{ fontFamily: "'Permanent Marker', cursive" }}
                 >
                   {resposta.resultado}
@@ -153,8 +160,8 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
             )}
             
             {resposta.pergunta_final && (
-              <div className="rounded-xl border-2 border-dashed border-emerald-400/20 bg-emerald-950/30 p-4 text-sm text-emerald-100/90 leading-relaxed">
-                <span className="font-black text-emerald-400">⚡ Desafio: </span>
+              <div className="rounded-2xl border-4 border-dotted border-emerald-400/20 bg-emerald-950/40 p-5 text-lg text-emerald-50/90 text-center font-medium">
+                <div className="text-xs font-black text-emerald-400 uppercase tracking-widest mb-2">🔥 SEU DESAFIO:</div>
                 {resposta.pergunta_final}
               </div>
             )}
@@ -162,13 +169,15 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
             <button
               type="button"
               onClick={() => {
+                // Forçamos o re-render do efeito mudando a resposta ou usando um key
+                const currentRes = { ...resposta };
+                // Pequeno hack para reiniciar: limpamos estados e deixamos o useEffect agir
                 setVisiveis(0);
                 setCaracteresVisiveis({});
-                // O useEffect será disparado novamente pela mudança de estado ou podemos forçar um reset
               }}
-              className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-500/60 hover:text-emerald-400 transition ml-auto"
+              className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-emerald-500/40 hover:text-emerald-300 transition mx-auto bg-emerald-900/20 px-4 py-2 rounded-full"
             >
-              <RotateCcw className="h-3 w-3" /> Reiniciar Explicação
+              <RotateCcw className="h-4 w-4" /> REVER EXPLICAÇÃO LENTA
             </button>
           </motion.div>
         )}
