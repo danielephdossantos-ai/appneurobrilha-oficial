@@ -1427,7 +1427,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
                   {/* Conta Matemática Montada na Lousa (REAL MAT) */}
                   <div
-                    className={`font-black text-2xl md:text-5xl tracking-tight ${cor} flex items-center justify-center gap-2 py-6 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
+                    className={`font-black text-3xl md:text-7xl tracking-tight ${cor} flex items-center justify-center gap-2 py-8 mb-4 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
                     style={{
                       fontFamily: "'Permanent Marker', cursive",
                       filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
