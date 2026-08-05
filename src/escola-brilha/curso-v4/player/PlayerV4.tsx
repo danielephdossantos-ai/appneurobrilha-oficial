@@ -426,22 +426,6 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         />
       ) : m.visualMat ? (
         <RenderVisualMat v={m.visualMat} />
-      ) : contaMD?.operacao === "mult" ? (
-        <MultiplicacaoArmada a={contaMD.a} b={contaMD.b} />
-      ) : contaMD?.operacao === "div" ? (
-        <InteracaoView
-          i={{
-            tipo: "contaPassoAPasso",
-            operacao: "div",
-            operandos: [contaMD.a, contaMD.b],
-            resultado: Math.floor(contaMD.a / contaMD.b),
-            passos: [],
-          }}
-        />
-      ) : contaAditiva ? (
-        <ContaMontadaEstatica a={contaAditiva.a} b={contaAditiva.b} operacao={contaAditiva.operacao} />
-      ) : detectarComparacaoNoTexto(textoConta) ? (
-        <ComparacaoCasas numeros={detectarComparacaoNoTexto(textoConta)!} />
       ) : (
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
