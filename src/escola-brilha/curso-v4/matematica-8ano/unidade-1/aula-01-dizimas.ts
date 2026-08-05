@@ -114,35 +114,35 @@ export const aula01_dizimas: AulaV4 = {
             trinomio: "0,777…  →  fração?",
             passos: [
               {
-                expr: "x = 0,777…",
+                expr: "x = 0,777...",
                 explica: "Chamo o número de x.",
                 status: "neutro",
                 professor:
                   "Dou um nome ao desconhecido: x = 0,777…. Isso permite fazer contas com ele como se fosse uma incógnita comum.",
               },
               {
-                expr: "10 · x = 7,777…",
+                expr: "10 · x = 7,777...",
                 explica: "Multiplico por 10.",
                 status: "ok",
                 professor:
                   "Multiplico os dois lados por 10 porque o período tem 1 dígito. Assim, a parte que se repete ‘alinha’: 10x = 7,777….",
               },
               {
-                expr: "10x − x = 7,777… − 0,777…",
+                expr: "  10x = 7,777...\n-  x = 0,777...\n--------------",
                 explica: "Subtraio as equações.",
                 status: "ok",
                 professor:
                   "Aqui está o pulo do gato: subtraio uma equação da outra. Como as caudas 0,777… são IGUAIS, elas se cancelam!",
               },
               {
-                expr: "9x = 7",
+                expr: "   9x = 7",
                 explica: "Cauda cancelada.",
                 status: "ok",
                 professor:
                   "Do lado esquerdo, 10x − x = 9x. Do lado direito, sobrou apenas o 7. Veja a montagem da conta: 9x = 7.",
               },
               {
-                expr: "x = 7 ÷ 9",
+                expr: "x = 7 / 9",
                 explica: "Isolando o x.",
                 status: "ok",
                 professor: "Para isolar o x, o 9 que está multiplicando passa para o outro lado dividindo o 7.",
