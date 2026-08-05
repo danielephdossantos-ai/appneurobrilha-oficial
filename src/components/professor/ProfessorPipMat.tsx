@@ -21,128 +21,158 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
   const total = resposta.passos.length;
   const [visiveis, setVisiveis] = useState(1);
   const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
-  const completo = visiveis >= total;
+  const [estahEscrevendo, setEstahEscrevendo] = useState(false);
+  const completo = visiveis >= total && !estahEscrevendo;
 
   useEffect(() => {
-    // Ao avançar para um novo passo, inicia a animação de digitação
-    const passoAtual = visiveis - 1;
-    const texto = resposta.passos[passoAtual].linha;
-    let index = 0;
-    
-    setCaracteresVisiveis(prev => ({ ...prev, [passoAtual]: 0 }));
+    // Inicia o processo de "escrita" automática de todos os passos
+    let passoAtual = 0;
+    setVisiveis(1);
+    setEstahEscrevendo(true);
 
-    const timer = setInterval(() => {
-      index++;
-      setCaracteresVisiveis(prev => ({ ...prev, [passoAtual]: index }));
-      if (index >= texto.length) clearInterval(timer);
-    }, 40); // Velocidade da "escrita" na lousa
+    async function escreverTudo() {
+      for (let i = 0; i < total; i++) {
+        passoAtual = i;
+        setVisiveis(i + 1);
+        
+        const texto = resposta.passos[i].linha;
+        setCaracteresVisiveis(prev => ({ ...prev, [i]: 0 }));
 
-    return () => clearInterval(timer);
-  }, [visiveis, resposta.passos]);
+        // Escreve caractere por caractere
+        for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
+          await new Promise(resolve => setTimeout(resolve, 80)); // Escrita mais lenta (humana)
+          setCaracteresVisiveis(prev => ({ ...prev, [i]: charIndex }));
+        }
+
+        // Pequena pausa entre a conta e a explicação
+        await new Promise(resolve => setTimeout(resolve, 400));
+        
+        // Pausa maior entre passos para o aluno ler
+        if (i < total - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1200));
+        }
+      }
+      setEstahEscrevendo(false);
+    }
+
+    escreverTudo();
+  }, [resposta]);
 
   return (
-    <div className="rounded-3xl border-[6px] border-[#7c4a20] bg-[#0f2b22] p-4 shadow-xl">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h3 className="text-sm font-black uppercase tracking-wider text-emerald-200">
-          {resposta.titulo}
-        </h3>
-        <span className="shrink-0 rounded-full bg-emerald-900/70 px-2 py-0.5 text-[11px] font-bold text-emerald-200">
-          {Math.min(visiveis, total)}/{total}
-        </span>
-      </div>
+    <div className="rounded-3xl border-[8px] border-[#5d3a1a] bg-[#0f2b22] p-5 shadow-[inset_0_4px_20px_rgba(0,0,0,0.5),0_10px_30px_rgba(0,0,0,0.3)] relative overflow-hidden">
+      {/* Textura de Lousa */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/chalkboard.png')]" />
+      
+      <div className="relative z-10">
+        <div className="mb-4 flex items-center justify-between gap-2 border-b border-emerald-900/50 pb-2">
+          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400/70">
+            {resposta.titulo}
+          </h3>
+          <div className="flex items-center gap-2">
+            {estahEscrevendo && (
+              <span className="flex h-2 w-2 animate-ping rounded-full bg-emerald-400" />
+            )}
+            <span className="shrink-0 rounded-md bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400/80">
+              {Math.min(visiveis, total)}/{total}
+            </span>
+          </div>
+        </div>
 
-      <div className="space-y-3">
-        {resposta.passos.slice(0, visiveis).map((p, i) => {
-          const isUltimo = i === visiveis - 1;
-          const textoExibido = isUltimo 
-            ? p.linha.slice(0, caracteresVisiveis[i] || 0) 
-            : p.linha;
+        <div className="space-y-5">
+          {resposta.passos.slice(0, visiveis).map((p, i) => {
+            const isEscrevendoAgora = i === visiveis - 1 && estahEscrevendo;
+            const caracteresAtuais = caracteresVisiveis[i] || 0;
+            const textoExibido = p.linha.slice(0, caracteresAtuais);
+            const jaTerminouLinha = caracteresAtuais >= p.linha.length;
 
-          return (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="rounded-xl bg-white/5 px-3 py-2 border-l-4 border-emerald-500/30"
-            >
-              <div className="flex items-start gap-2">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-xs font-black text-[#0f2b22]">
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="relative pl-8"
+              >
+                {/* Número do Passo estilo Giz */}
+                <div className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-sm border border-emerald-400/30 text-[10px] font-black text-emerald-400/50">
                   {i + 1}
-                </span>
+                </div>
+
                 <div className="min-w-0 flex-1">
                   <div
-                    className="break-words text-xl font-bold text-white sm:text-2xl"
+                    className="break-words text-2xl font-bold text-white/90 sm:text-3xl tracking-wide"
                     style={{ 
-                      fontFamily: "ui-monospace, 'Courier New', monospace",
-                      textShadow: "0 0 10px rgba(52, 211, 153, 0.3)"
+                      fontFamily: "'Permanent Marker', cursive, ui-monospace",
+                      filter: "drop-shadow(0 0 2px rgba(255,255,255,0.2))"
                     }}
                   >
                     {textoExibido}
-                    {isUltimo && (caracteresVisiveis[i] || 0) < p.linha.length && (
-                      <span className="animate-pulse inline-block w-2 h-6 bg-emerald-400 ml-1" />
+                    {isEscrevendoAgora && !jaTerminouLinha && (
+                      <motion.span 
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ repeat: Infinity, duration: 0.4 }}
+                        className="inline-block w-1.5 h-7 bg-emerald-200/80 ml-1 translate-y-1"
+                      />
                     )}
                   </div>
-                  {p.explica && (
-                    <motion.div 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: (isUltimo && (caracteresVisiveis[i] || 0) < p.linha.length) ? 0 : 1 }}
-                      className="mt-1 text-sm text-emerald-200/90 font-medium"
-                    >
-                      {p.explica}
-                    </motion.div>
-                  )}
+                  
+                  <AnimatePresence>
+                    {jaTerminouLinha && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-1 text-sm text-emerald-300/80 font-medium italic"
+                      >
+                        {p.explica}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {completo && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-6 pt-4 border-t border-emerald-900/50 space-y-4"
+          >
+            {resposta.resultado && (
+              <div className="rounded-2xl bg-amber-300/90 p-4 text-center shadow-lg border-b-4 border-amber-500 transform -rotate-1">
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-900/60 mb-1">
+                  Resultado Final
+                </div>
+                <div
+                  className="text-3xl font-black text-[#2a1a00]"
+                  style={{ fontFamily: "'Permanent Marker', cursive" }}
+                >
+                  {resposta.resultado}
                 </div>
               </div>
-            </motion.div>
-          );
-        })}
-      </div>
+            )}
+            
+            {resposta.pergunta_final && (
+              <div className="rounded-xl border-2 border-dashed border-emerald-400/20 bg-emerald-950/30 p-4 text-sm text-emerald-100/90 leading-relaxed">
+                <span className="font-black text-emerald-400">⚡ Desafio: </span>
+                {resposta.pergunta_final}
+              </div>
+            )}
 
-      {!completo ? (
-        <button
-          type="button"
-          onClick={() => setVisiveis((v) => v + 1)}
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-emerald-400 px-4 py-3 text-sm font-black text-[#0f2b22] shadow-[0_4px_0_0_#059669] transition hover:brightness-110 active:translate-y-1 active:shadow-none"
-        >
-          Continuar <ChevronRight className="h-5 w-5" />
-        </button>
-      ) : (
-        <div className="mt-4 space-y-3">
-          {resposta.resultado && (
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="rounded-2xl bg-amber-300 px-4 py-3 text-center shadow-lg border-2 border-amber-400"
+            <button
+              type="button"
+              onClick={() => {
+                setVisiveis(0);
+                setCaracteresVisiveis({});
+                // O useEffect será disparado novamente pela mudança de estado ou podemos forçar um reset
+              }}
+              className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-500/60 hover:text-emerald-400 transition ml-auto"
             >
-              <div className="text-[11px] font-black uppercase tracking-widest text-amber-800">
-                Resultado
-              </div>
-              <div
-                className="text-2xl font-black text-[#3b2400]"
-                style={{ fontFamily: "ui-monospace, 'Courier New', monospace" }}
-              >
-                {resposta.resultado}
-              </div>
-            </motion.div>
-          )}
-          {resposta.pergunta_final && (
-            <div className="rounded-2xl border border-emerald-400/40 bg-emerald-900/40 px-4 py-3 text-sm text-emerald-100">
-              <span className="font-black">Agora você: </span>
-              {resposta.pergunta_final}
-            </div>
-          )}
-          <button
-            type="button"
-            onClick={() => {
-              setVisiveis(1);
-              setCaracteresVisiveis({});
-            }}
-            className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 hover:text-emerald-200"
-          >
-            <RotateCcw className="h-3.5 w-3.5" /> Ver de novo passo a passo
-          </button>
-        </div>
-      )}
+              <RotateCcw className="h-3 w-3" /> Reiniciar Explicação
+            </button>
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 }
