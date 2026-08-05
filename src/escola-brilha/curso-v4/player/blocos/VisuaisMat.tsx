@@ -1350,7 +1350,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [v, iniciou]);
 
   return (
-    <div className="my-4 w-full max-w-4xl mx-auto px-2 md:px-4">
+    <div className="my-4 w-full max-w-5xl mx-auto px-2 md:px-4">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
