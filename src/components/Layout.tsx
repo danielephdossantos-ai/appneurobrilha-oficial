@@ -1,6 +1,7 @@
 import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
+import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 import {
   Home,
   GraduationCap,
@@ -147,19 +148,28 @@ export function Shell({ children }: { children?: ReactNode }) {
   const nextPath =
     currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
 
-  // Apply neuro-adaptive CSS variables
   const adaptiveStyles = engine?.adaptive
-    ? ({
-        "--visual-scale": engine.adaptive.visualScale,
-        "--animation-speed-multiplier": 1 / engine.adaptive.animationSpeed,
-        "--stimuli-opacity":
-          engine.adaptive.stimuliLevel === "low"
-            ? "0.3"
-            : engine.adaptive.stimuliLevel === "high"
-              ? "1"
-              : "0.7",
-        fontSize: `${16 * (engine.adaptive.visualScale ?? 1)}px`,
-      } as React.CSSProperties)
+    ? (() => {
+        const uiState = buildAdaptiveUIState(
+          {
+            visualComplexity: engine.adaptive.visualComplexity,
+            stimuliReduction: engine.adaptive.stimuliLevel === "low",
+            interfaceSimplification: engine.adaptive.stimuliLevel === "low",
+            difficultyScale: engine.adaptive.difficulty,
+            audioAdaptation: { pacing: engine.adaptive.animationIntensity === "none" ? "slow" : "normal" },
+            animationIntensity: engine.adaptive.animationIntensity,
+            maxInformationDensity: engine.adaptive.maxItemsPerScreen,
+          },
+          engine.profile?.base ?? "Tipico",
+        );
+
+        return {
+          "--visual-scale": engine.adaptive.visualScale,
+          "--animation-speed-multiplier": uiState.animationSpeedMultiplier,
+          "--stimuli-opacity": uiState.stimuliOpacity,
+          fontSize: `${uiState.fontSize}px`,
+        } as React.CSSProperties;
+      })()
     : {};
 
   return (

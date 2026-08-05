@@ -44,6 +44,7 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 import { useAbaPrompting } from "@/hooks/useAbaPrompting";
 import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
+import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
@@ -97,6 +98,22 @@ function NeuroAtividade() {
 
   const meta = CATEGORIAS[slug];
   const rawVars = VARIATIONS[slug];
+  const adaptiveUI = useMemo(
+    () =>
+      buildAdaptiveUIState(
+        {
+          visualComplexity: adjustment.visualComplexity,
+          stimuliReduction: adjustment.stimuliReduction,
+          interfaceSimplification: adjustment.interfaceSimplification,
+          difficultyScale: adjustment.difficultyScale,
+          audioAdaptation: adjustment.audioAdaptation,
+          animationIntensity: adjustment.animationIntensity,
+          maxInformationDensity: adjustment.maxInformationDensity,
+        },
+        activeChild?.diagnostico ? String(activeChild.diagnostico) : "Tipico",
+      ),
+    [adjustment, activeChild?.diagnostico],
+  );
   // Filtragem por dificuldade adaptativa
   const vars = useMemo(
     () => (rawVars ? filterByDifficulty(rawVars, adjustment.difficultyScale) : rawVars),
