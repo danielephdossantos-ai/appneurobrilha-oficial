@@ -1350,19 +1350,19 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [v, iniciou]);
 
   return (
-    <div className="my-4 w-full max-w-lg mx-auto px-2">
+    <div className="my-4 w-full max-w-5xl mx-auto px-2 md:px-4">
       {legenda && (
         <div className="text-xs font-black uppercase tracking-widest text-amber-600 text-center mb-2">
           {legenda}
         </div>
       )}
 
-      <div className="rounded-3xl border-[8px] border-[#8b5e3c] bg-[#fff9f0] p-6 shadow-[inset_0_2px_10px_rgba(0,0,0,0.1),0_10px_30px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[250px]">
+      <div className="rounded-[40px] border-[6px] md:border-[12px] border-[#8b5e3c] bg-[#fff9f0] p-4 md:p-12 shadow-[inset_0_2px_15px_rgba(0,0,0,0.1),0_15px_40px_rgba(0,0,0,0.1)] relative overflow-hidden min-h-[300px]">
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <div className="relative z-10">
           <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
-            <div className="text-xl md:text-3xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <div className="text-xl sm:text-2xl md:text-5xl font-black text-[#5d4037]" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               {trinomio}
             </div>
             
@@ -1406,15 +1406,15 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
-                    <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 bg-amber-50 border-l-4 border-[#8b5e3c] p-4 rounded-r-xl shadow-md ring-1 ring-[#8b5e3c]/10">
-                        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm shadow-[0_2px_0_0_#5d4037]">
+                    <div className={`mb-6 w-full max-w-[99%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                      <div className="flex items-start gap-3 md:gap-5 bg-amber-50/50 border-l-[6px] border-[#8b5e3c] p-5 md:p-8 rounded-r-3xl shadow-sm ring-1 ring-[#8b5e3c]/5">
+                        <span className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm md:text-xl shadow-[0_3px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
+                        <div className="text-base sm:text-lg md:text-2xl text-[#5d4037] font-semibold leading-relaxed">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
+                            <div className="text-[10px] md:text-xs font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
                               <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
                               O Professor explica...
                             </div>
@@ -1427,7 +1427,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
 
                   {/* Conta Matemática Montada na Lousa (REAL MAT) */}
                   <div
-                    className={`font-black text-2xl md:text-5xl tracking-tight ${cor} flex items-center justify-center gap-2 py-6 mb-2 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
+                    className={`font-black text-2xl sm:text-3xl md:text-7xl tracking-tight ${cor} flex items-center justify-center gap-2 py-8 mb-4 transition-transform duration-500 ${isUltimo ? "scale-105" : "scale-100 opacity-60"}`}
                     style={{
                       fontFamily: "'Permanent Marker', cursive",
                       filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",

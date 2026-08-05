@@ -164,7 +164,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
       {/* Lousa Virtual */}
       <div className="flex-1 relative p-4 md:p-8 overflow-y-auto">
         <div 
-          className="min-h-full rounded-3xl border-8 border-slate-800 shadow-2xl relative overflow-hidden"
+          className="min-h-full rounded-[40px] border-[6px] md:border-[12px] border-slate-800 shadow-2xl relative overflow-hidden"
           style={{ 
             background: "radial-gradient(circle at center, #1a2e26 0%, #0d1a15 100%)",
             boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)"
@@ -173,13 +173,13 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
           {/* Textura de giz/lousa */}
           <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/black-chalkboard.png')]" />
           
-          <div className="relative z-10 p-6 md:p-10 space-y-6">
+          <div className="relative z-10 p-6 md:p-14 space-y-8">
             <div className="flex items-center justify-between border-b-2 border-white/20 pb-4 mb-4">
               <motion.h2 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 key={`title-${cenaIdx}`}
-                className="text-2xl md:text-4xl font-black text-white/90 italic"
+                className="text-2xl sm:text-3xl md:text-5xl font-black text-white/90 italic"
                 style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
               >
                 {cena.tituloLousa}
@@ -210,7 +210,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                           <div className="text-[10px] font-black uppercase opacity-60 mb-1">Regra / Fórmula</div>
                         )}
                         <p className={cn(
-                          "text-lg md:text-xl font-bold leading-tight",
+                          "text-lg sm:text-xl md:text-3xl font-bold leading-tight",
                           bloco.tipo === "formula" ? "font-mono" : ""
                         )}>
                           {bloco.conteudo}
