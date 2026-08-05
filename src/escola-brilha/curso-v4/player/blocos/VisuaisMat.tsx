@@ -1433,7 +1433,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                       filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.1))",
                     }}
                   >
-                    <span>{textoExibido}</span>
+                    <span className="whitespace-pre text-center">{textoExibido}</span>
                     {isUltimo && estahEscrevendo && !jaTerminouLinha && (
                       <span className="inline-block w-4 h-12 bg-[#8b5e3c] animate-pulse rounded-sm" />
                     )}
