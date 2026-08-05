@@ -62,42 +62,82 @@ export const aula05_dizimas: AulaV4 = {
   },
 
   momento04_explicacao: {
-    titulo: "Regra prática das geratrizes",
+    titulo: "Regra prática na Lousa",
     etapas: [
       {
-        texto: "DÍZIMA SIMPLES (período começa logo após a vírgula): numerador = período; denominador = tantos noves quantos forem os dígitos do período.",
+        texto: "DÍZIMA SIMPLES: Numerador é o período; Denominador são noves.",
         exemploReal: {
-          titulo: "🔎 Passo a passo",
-          contexto: "0,777… e 0,459459…",
+          titulo: "🔎 Montagem na Lousa",
+          contexto: "0,777…",
           visualMat: {
             tipo: "trinomioPassoAPasso",
-            trinomio: "Regra dos noves",
+            trinomio: "0,777… → ?",
             passos: [
-              { expr: "0,777… → período 7 (1 dígito)", explica: "Um nove.", status: "neutro" },
-              { expr: "= 7/9", explica: "Já irredutível.", status: "ok" },
-              { expr: "0,459459… → período 459 (3 dígitos)", explica: "Três noves.", status: "ok" },
-              { expr: "= 459/999 = 17/37", explica: "Simplifico por 27.", status: "ok", professor: "459 = 27·17 e 999 = 27·37. Sempre confira se dá para simplificar." },
+              {
+                expr: "x = 0,777…",
+                explica: "Nomeio o número.",
+                status: "neutro",
+                professor: "Vamos transformar 0,777... em fração usando a técnica da lousa."
+              },
+              {
+                expr: "10x = 7,777…",
+                explica: "Multiplico por 10.",
+                status: "ok",
+                professor: "Multiplico por 10 porque o período (7) tem apenas 1 dígito."
+              },
+              {
+                expr: "9x = 7",
+                explica: "Subtraio as partes.",
+                status: "ok",
+                professor: "Subtraindo 10x - x temos 9x. A parte decimal some, sobrando 7."
+              },
+              {
+                expr: "x = 7/9",
+                explica: "Resultado final.",
+                status: "ok",
+                professor: "Divido por 9 e pronto! 7/9 é a nossa fração geratriz."
+              }
             ],
             fatorada: "0,777… = 7/9",
           },
-          destaque: "Um dígito no período → um 9; dois → 99; três → 999.",
         },
       },
       {
-        texto: "DÍZIMA COMPOSTA (existe uma parte que não repete): use noves para o período e zeros para a parte que não repete.",
+        texto: "DÍZIMA COMPOSTA: Noves para o período e zeros para a parte fixa.",
         exemploReal: {
-          titulo: "🔎 Passo a passo",
+          titulo: "🔎 Caso Composto",
           contexto: "0,1666…",
           visualMat: {
-            tipo: "dizimaGeratriz",
-            dizima: "0,1666...",
-            periodo: "6",
-            parteNaoPeriodica: "1",
-            resultado: "1/6",
-            resultadoBruto: "15/90",
-            legenda: "Dízima composta: 1 não repete, 6 repete",
+            tipo: "trinomioPassoAPasso",
+            trinomio: "0,1666… → ?",
+            passos: [
+              {
+                expr: "x = 0,1666…",
+                explica: "Identifico o intruso.",
+                status: "neutro",
+                professor: "Aqui o '1' não se repete. Ele é a parte não-periódica."
+              },
+              {
+                expr: "100x = 16,666…\n 10x = 1,666…",
+                explica: "Isolo o período.",
+                status: "ok",
+                professor: "Multiplicamos para deixar apenas o período repetindo após a vírgula."
+              },
+              {
+                expr: "90x = 15",
+                explica: "Subtração final.",
+                status: "ok",
+                professor: "Subtraindo as equações: 100x - 10x = 90x e 16 - 1 = 15."
+              },
+              {
+                expr: "x = 15/90 = 1/6",
+                explica: "Simplificação.",
+                status: "ok",
+                professor: "Dividimos por 15 em cima e embaixo para chegar em 1/6."
+              }
+            ],
+            fatorada: "0,166… = 1/6",
           },
-          destaque: "Numerador: (número todo) − (parte que não repete) = 16 − 1 = 15. Denominador: 90.",
         },
       },
       {

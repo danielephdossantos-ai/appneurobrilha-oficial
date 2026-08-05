@@ -27,26 +27,37 @@ export const aula01_contagemAteMilhao: AulaV4 = {
     revelacao: "O algarismo mais à esquerda vale mais. Em 452.318 tem 5 na DEZENA DE MILHAR (50.000); em 425.318 tem 2 (20.000).",
   },
   momento04_explicacao: {
-    titulo: "Ler um número de 6 algarismos com a CONTA junto",
+    titulo: "Ler um número de 6 algarismos — passo a passo",
     etapas: [
       {
         texto: "Vamos ver 325.478 e confirmar somando as partes.",
         exemploReal: {
+          titulo: "🔎 Montagem na Lousa",
           contexto: "O Império registrou 325.478 pessoas no censo:",
-          casasValor: { numero: 325478, mostrarDecomposicao: true, extenso: "trezentos e vinte e cinco mil, quatrocentos e setenta e oito" },
-          destaque: "300.000 + 25.000 + 400 + 78 = 325.478.",
-          contaPassoAPasso: {
-            operacao: "soma",
-            operandos: [300000, 25000, 478],
-            resultado: 325478,
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "325.478",
             passos: [
-              { coluna: "U", fala: "0 + 0 + 8 = 8.", digito: 8 },
-              { coluna: "D", fala: "0 + 0 + 7 = 7.", digito: 7 },
-              { coluna: "C", fala: "0 + 0 + 4 = 4.", digito: 4 },
-              { coluna: "UM", fala: "0 + 5 + 0 = 5.", digito: 5 },
-              { coluna: "DM", fala: "0 + 2 + 0 = 2.", digito: 2 },
-              { coluna: "CM", fala: "3 + 0 + 0 = 3.", digito: 3 },
+              {
+                expr: "325.478 = 300.000 + 20.000 + 5.000 + 400 + 70 + 8",
+                explica: "Decomposição por ordens.",
+                status: "neutro",
+                professor: "Cada algarismo ocupa uma casa e tem seu valor. Vamos somar do maior para o menor."
+              },
+              {
+                expr: "  300.000\n+  25.000\n+     478\n---------",
+                explica: "Armando a conta.",
+                status: "ok",
+                professor: "Alinhamos os números pela direita para somar unidade com unidade, dezena com dezena..."
+              },
+              {
+                expr: "325.478",
+                explica: "Resultado final.",
+                status: "ok",
+                professor: "Trezentos e vinte e cinco mil, quatrocentos e setenta e oito pessoas."
+              }
             ],
+            fatorada: "325.478",
           },
         },
       },
