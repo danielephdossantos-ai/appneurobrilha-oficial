@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { jsPDF } from "jspdf";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { Plus, Sparkles } from "lucide-react";
@@ -159,6 +160,90 @@ function Index() {
   const navigate = useNavigate();
   const [showEggHatch, setShowEggHatch] = useState(false);
 
+  const gerarRelatorioPDF = () => {
+    const doc = new jsPDF();
+    
+    // Configurações de cores e fontes
+    const primaryColor = [13, 31, 85]; // #0d1f55
+    const accentColor = [255, 201, 60]; // #FFC93C
+    
+    // Página 1: Capa
+    doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.rect(0, 0, 210, 297, "F");
+    
+    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+    doc.setFontSize(32);
+    doc.text("NeuroBrilha Kids", 105, 80, { align: "center" });
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.text("Relatório de Conformidade e Metodologia", 105, 95, { align: "center" });
+    
+    doc.setFontSize(12);
+    doc.text("Um ecossistema completo de ensino real para crianças", 105, 110, { align: "center" });
+    
+    doc.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
+    doc.setLineWidth(1);
+    doc.line(40, 115, 170, 115);
+
+    // Página 2: O que o App tem
+    doc.addPage();
+    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.setFontSize(22);
+    doc.text("O que o NeuroBrilha Kids oferece?", 20, 30);
+    
+    doc.setFontSize(12);
+    doc.setTextColor(60, 60, 60);
+    const topicos = [
+      { t: "Cobertura BNCC 100%:", d: "Todas as habilidades de Português, Matemática, Geografia, História e Ciências do Ensino Fundamental I e II mapeadas e transformadas em trilhas interativas." },
+      { t: "Metodologia 'Pilot Standard':", d: "Ciclo de Analogia -> Visual Concreto -> Passo a Passo -> Erro Comum -> Checagem. Ensino que foca no 'porquê' e não apenas na decoreba." },
+      { t: "Matemática Real e Visual:", d: "Contas armadas com demonstração visual de processos complexos como 'empréstimo' e 'vai um'." },
+      { t: "Lousa Mágica 360°:", d: "Módulo de Aulas Extras focado em gramática, redação e ortografia com visual de alta concentração." },
+      { t: "Inclusão e Neuropsicopedagogia:", d: "Suporte especializado para Dislexia, TDAH e autismo (ABA), com Neuro Treino e motor de voz (TTS) de alta precisão a 0.88x." },
+      { t: "Sincronização com Pais:", d: "Acompanhamento de progresso em tempo real via banco de dados seguro, com relatórios de desempenho por fase." }
+    ];
+    
+    let y = 45;
+    topicos.forEach(item => {
+      doc.setFont("helvetica", "bold");
+      doc.text(item.t, 20, y);
+      y += 6;
+      doc.setFont("helvetica", "normal");
+      const lines = doc.splitTextToSize(item.d, 170);
+      doc.text(lines, 20, y);
+      y += (lines.length * 6) + 4;
+    });
+
+    // Página 3: Como ajuda as crianças
+    doc.addPage();
+    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.setFontSize(22);
+    doc.text("Como ajudamos seu filho(a)?", 20, 30);
+    
+    doc.setFontSize(12);
+    doc.setTextColor(60, 60, 60);
+    const ajudas = [
+      "Calibração de Linguagem: O app adapta o visual e o tom de voz para a idade da criança (Kids vs Teen).",
+      "Redução de Ansiedade: Feedbacks positivos e o personagem Pip acompanham cada conquista.",
+      "Aprendizado Autônomo: A criança consegue progredir sozinha com as explicações em áudio e visual.",
+      "Preparação para a Vida: Missões que conectam o conteúdo escolar com o cotidiano real."
+    ];
+    
+    y = 45;
+    ajudas.forEach(texto => {
+      doc.text("• " + texto, 20, y, { maxWidth: 170 });
+      y += 12;
+    });
+
+    doc.setFillColor(accentColor[0], accentColor[1], accentColor[2]);
+    doc.rect(20, 240, 170, 30, "F");
+    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.setFont("helvetica", "bold");
+    doc.text("Veredito Pedagógico: PRONTO PARA O ENSINO REAL", 105, 258, { align: "center" });
+
+    doc.save("Relatorio-NeuroBrilha-Kids.pdf");
+  };
+
   useEffect(() => {
     if (!isLoading && session && allChildren.length === 0) {
       navigate({ to: "/anamnese/$childId", params: { childId: "nova" }, replace: true });
@@ -224,9 +309,12 @@ function Index() {
             </motion.div>
 
             <div className="mt-2">
-              <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
-                UMA PERGUNTA . GEOGRAFIA , HISTORIA, CIÊNCIAS , INGLES , ARTES, FILOSOFIA E ENSINO RELIGIOSO SEGUEM CURRICULUM DO ALUNO. TEM METODOLOGIA , PEDAGOGIA ENTRE OUTRAS SÃO AUALS REALMENTE ADAPTADAS PRA CRIANÇAS COM DEFHTES
-              </div>
+              <button 
+                onClick={gerarRelatorioPDF}
+                className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em] hover:text-[#FFC93C] transition-colors text-left"
+              >
+                GERE UM RELATORIO EM PDF DO QUE O APP NEUROBRILHA KIDS É COMPLETO COM TUDO QUE O APP TEM E PODE AJUDAR AS CRIANÇAS
+              </button>
               <h1 className="text-white text-lg font-black leading-tight">
                 Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
               </h1>
@@ -390,9 +478,12 @@ function Index() {
                 ⭐
               </motion.span>
               <div>
-                <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">
-                  UMA PERGUNTA . GEOGRAFIA , HISTORIA, CIÊNCIAS , INGLES , ARTES, FILOSOFIA E ENSINO RELIGIOSO SEGUEM CURRICULUM DO ALUNO. TEM METODOLOGIA , PEDAGOGIA ENTRE OUTRAS SÃO AUALS REALMENTE ADAPTADAS PRA CRIANÇAS COM DEFHTES
-                </div>
+                <button 
+                  onClick={gerarRelatorioPDF}
+                  className="text-white/55 text-xs font-black uppercase tracking-[0.3em] hover:text-[#FFC93C] transition-colors text-left block"
+                >
+                  GERE UM RELATORIO EM PDF DO QUE O APP NEUROBRILHA KIDS É COMPLETO COM TUDO QUE O APP TEM E PODE AJUDAR AS CRIANÇAS
+                </button>
                 <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
                   Cidade do <span className="text-[#FFC93C]">Pip</span>
                 </h1>
