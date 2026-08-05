@@ -179,7 +179,7 @@ export function LousaPlayer({ aula, onConcluir }: { aula: AulaExtraLousa; onConc
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 key={`title-${cenaIdx}`}
-                className="text-2xl sm:text-3xl md:text-5xl font-black text-white/90 italic"
+                className="text-xl sm:text-2xl md:text-4xl font-black text-white/90 italic"
                 style={{ fontFamily: "'Permanent Marker', cursive, sans-serif" }}
               >
                 {cena.tituloLousa}
