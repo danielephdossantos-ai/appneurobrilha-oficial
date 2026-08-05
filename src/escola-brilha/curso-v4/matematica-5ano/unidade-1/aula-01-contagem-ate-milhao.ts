@@ -64,7 +64,7 @@ export const aula01_contagemAteMilhao: AulaV4 = {
     ],
   },
   momento05_modelagem: {
-    enunciado: "🧠 Brilha resolve\n\n🧠 Brilha explica na lousa:\n\nSome as populações: capital 240.000 + interior 135.470.",
+    enunciado: "🧠 Brilha resolve\n\n🧠 Brilha explica na lousa:\n\nSome as populações: capital 240.000 + interior 135.470.\n\n→U: 0+0=0.\n\n→D: 0+7=7.\n\n→C: 0+4=4.\n\n→UM: 0+5=5.\n\n→DM: 4+3=7.\n\n→CM: 2+1=3.\n\nResposta: 375.470",
     resposta: "375.470",
     passos: [
       "U: 0+0=0.",
