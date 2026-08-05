@@ -22,19 +22,6 @@ export const aula01_dizimas: AulaV4 = {
     instrucao: "Divida 1 por 3 na chave e observe o RESTO. Ele volta.",
     cenas: [
       {
-        tipo: "trinomioPassoAPasso",
-        trinomio: "1 ÷ 3",
-        passos: [
-          { expr: "  1,0 | 3\n     ---\n      0,", explica: "Compensação decimal", status: "ok", professor: "Como o 1 é menor que o 3, colocamos 0, no resultado e transformamos 1 em 10 décimos." },
-          { expr: " 1,0 | 3\n-  9  ---\n ---  0,3\n  1", explica: "10 ÷ 3 = 3 (sobra 1)", status: "ok", professor: "10 dividido por 3 dá 3, porque 3 x 3 é 9. Sobra 1." },
-          { expr: " 1,00 | 3\n-  9   ---\n ---   0,33\n   10\n -  9\n  ---", explica: "Sobra 1 décimo", status: "ok", professor: "O resto 1 vira 10 novamente para continuarmos a divisão nos centésimos." },
-          { expr: "  1,000 | 3\n -  9    ---\n  ---    0,333\n    10\n  -  9\n   ---\n     1", explica: "Repetindo o processo", status: "ok", professor: "O processo se repete infinitamente. Sempre sobrará 1 e teremos mais um 3 no resultado." },
-          { expr: "0,333...", explica: "Padrão infinito", status: "ok", professor: "Isso é uma dízima periódica: o 3 se repete para sempre." },
-        ],
-        fatorada: "0,333…",
-        legenda: "Divisão na chave montada",
-      },
-      {
         tipo: "tabela",
         titulo: "Decimal exato × dízima — quem é quem?",
         cabecalhos: ["Fração", "Decimal", "Denom. só tem 2 e/ou 5?", "Tipo"],
