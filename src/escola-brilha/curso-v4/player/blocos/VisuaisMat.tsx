@@ -1290,10 +1290,12 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const [revelados, setRevelados] = useState(0);
   const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
   const [estahEscrevendo, setEstahEscrevendo] = useState(false);
+  const [iniciou, setIniciou] = useState(false);
   const total = passos.length;
   const terminou = revelados >= total && !estahEscrevendo;
 
   useEffect(() => {
+    if (!iniciou) return;
     let montado = true;
     setRevelados(0);
     setCaracteresVisiveis({});
@@ -1322,7 +1324,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     return () => {
       montado = false;
     };
-  }, [v]);
+  }, [v, iniciou]);
 
   return (
     <div className="my-4 w-full max-w-md mx-auto">
@@ -1340,7 +1342,20 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             {trinomio}
           </div>
 
-          <div className="flex flex-col items-center gap-4">
+          {!iniciou ? (
+            <div className="flex flex-col items-center justify-center py-10 gap-4">
+              <button
+                onClick={() => setIniciou(true)}
+                className="group relative px-8 py-4 bg-amber-400 hover:bg-amber-300 text-[#0d1f55] font-black rounded-2xl shadow-[0_6px_0_0_#b45309] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-lg"
+              >
+                Começar explicação ▶
+              </button>
+              <p className="text-emerald-500/60 text-[10px] uppercase font-bold tracking-widest animate-pulse">
+                Clique para ver o passo a passo
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4">
             {passos.slice(0, revelados).map((p, idx) => {
               const caracAtuais = caracteresVisiveis[idx] || 0;
               const textoExibido = p.expr.slice(0, caracAtuais);
@@ -1378,6 +1393,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               );
             })}
           </div>
+          )}
 
           {terminou && fatorada && (
             <div className="mt-6 pt-4 border-t border-emerald-900/50 text-center animate-in fade-in zoom-in duration-700">
@@ -1399,15 +1415,19 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
       </div>
 
       <div className="mt-2 flex justify-end">
-        <button
-          onClick={() => {
-            setRevelados(0);
-            setCaracteresVisiveis({});
-          }}
-          className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full"
-        >
-          ↻ Reiniciar Lousa
-        </button>
+        {(iniciou || terminou) && (
+          <button
+            onClick={() => {
+              setIniciou(false);
+              setRevelados(0);
+              setCaracteresVisiveis({});
+              setEstahEscrevendo(false);
+            }}
+            className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition bg-white/5 px-3 py-1 rounded-full flex items-center gap-1"
+          >
+            ↻ Reiniciar / Ver outra vez
+          </button>
+        )}
       </div>
     </div>
   );
