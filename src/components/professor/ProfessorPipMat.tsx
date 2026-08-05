@@ -105,7 +105,7 @@ function Lousa({ resposta }: { resposta: PipMatResposta }) {
 
                 <div className="min-w-0 flex-1">
                   <div
-                    className="break-words text-3xl font-bold text-white/95 sm:text-4xl tracking-wider leading-relaxed"
+                    className="break-words text-2xl sm:text-4xl md:text-6xl font-bold text-white/95 tracking-wider leading-relaxed"
                     style={{ 
                       fontFamily: "'Permanent Marker', cursive",
                       filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
