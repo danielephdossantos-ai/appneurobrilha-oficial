@@ -1406,12 +1406,12 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                 <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
                   {/* Explicação do Professor (O "Pulo do Gato") */}
                   {p.professor && (
-                    <div className={`mb-3 w-full max-w-[95%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-3 bg-amber-50 border-l-4 border-[#8b5e3c] p-4 rounded-r-xl shadow-md ring-1 ring-[#8b5e3c]/10">
-                        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm shadow-[0_2px_0_0_#5d4037]">
+                    <div className={`mb-6 w-full max-w-[98%] transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                      <div className="flex items-start gap-3 md:gap-5 bg-amber-50/50 border-l-[6px] border-[#8b5e3c] p-5 md:p-6 rounded-r-3xl shadow-sm ring-1 ring-[#8b5e3c]/5">
+                        <span className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-sm md:text-lg shadow-[0_3px_0_0_#5d4037]">
                           {idx + 1}
                         </span>
-                        <div className="text-sm md:text-base text-[#5d4037] font-medium leading-relaxed italic">
+                        <div className="text-sm md:text-xl text-[#5d4037] font-semibold leading-relaxed">
                           {/* Se está escrevendo, a explicação brilha */}
                           {isUltimo && !jaTerminouLinha && (
                             <div className="text-[10px] font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
