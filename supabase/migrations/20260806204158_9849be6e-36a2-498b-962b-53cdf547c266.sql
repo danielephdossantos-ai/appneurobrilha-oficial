@@ -1,1 +1,0 @@
-DELETE FROM public.study_agenda WHERE category = 'professor_matematica';
