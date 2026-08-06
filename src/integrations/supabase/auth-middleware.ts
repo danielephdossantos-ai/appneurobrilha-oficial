@@ -32,9 +32,10 @@ export const requireSupabaseAuth = createMiddleware({ type: "function" }).server
     }
 
     // Ensure context always has the same shape for TypeScript consistency
+    const userId = user?.id ?? replitUserId!;
     return next({
       context: {
-        userId: user?.id ?? replitUserId!,
+        userId,
         claims: user ?? ({ sub: replitUserId } as any),
         supabase: supabase || createClient(supabaseUrl, supabaseKey),
       },
