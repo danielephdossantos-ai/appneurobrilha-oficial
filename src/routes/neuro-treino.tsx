@@ -326,6 +326,32 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
+          {/* ── MY FIRST ENGLISH · Ed. Infantil ─────────────────── */}
+          <Link
+            to="/escola-brilha/ingles-ei"
+            className="group block rounded-3xl overflow-hidden border-2 border-purple-200 dark:border-purple-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899)" }}>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🇺🇸
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  🇺🇸 Inglês · Educação Infantil
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  My First English
+                </div>
+                <div className="text-xs text-white/85">
+                  Maternal · Pré I · Pré II — só oralidade e imagens
+                </div>
+              </div>
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
           {/* ── MATEMÁTICA KAWAII · Contar e comparar ─────────────────── */}
           <Link
             to="/escola-brilha/matematica-ei"
