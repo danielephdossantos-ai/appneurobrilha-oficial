@@ -367,7 +367,7 @@ function ReforcoBrilha() {
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
-          <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20" style={{ padding: adaptiveUI.maxItemsPerScreen <= 2 ? "1rem" : undefined }}>
+          <Card className={`bg-gradient-to-br from-primary/10 to-transparent border-primary/20 ${adaptiveUI.maxItemsPerScreen <= 2 ? "p-4" : ""}`}>
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
               O que a criança está precisando aprender?

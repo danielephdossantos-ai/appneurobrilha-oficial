@@ -1,0 +1,1 @@
+DELETE FROM public.study_agenda WHERE category = 'aulas_apoio';

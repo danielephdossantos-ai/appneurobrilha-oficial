@@ -17,6 +17,7 @@ export function buildAdaptiveUIState(
     audioAdaptation?: { volume?: number; pacing?: string };
     animationIntensity?: string;
     maxInformationDensity?: number;
+    [key: string]: unknown;
   },
   profile: string,
 ): AdaptiveUIState {
@@ -68,6 +69,7 @@ export function getAdaptiveSummary(
     audioAdaptation?: { volume?: number; pacing?: string };
     animationIntensity?: string;
     maxInformationDensity?: number;
+    [key: string]: unknown;
   },
   profile: string,
 ) {
