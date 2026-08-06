@@ -383,13 +383,13 @@ function EscolaBrilhaCatalogo() {
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
-                        const usaTrilhaDuo = serie === "Educação Infantil" || serie === "1º Ano";
+                        const usaTrilhaDuo = (serie as string) === "Educação Infantil" || (serie as string) === "1º Ano";
                         const serieSlug =
-                          serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
+                          (serie as string) === "Educação Infantil" ? "educacao-infantil" : "1ano";
                         const cursoV4Aqui = cursoPorSerieDisc[serie]?.[disc];
                         if (usaTrilhaDuo && !cursoV4Aqui) {
                           const masc = mascoteDaDisciplina(disc);
-                          const serieLabel = serie === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
+                          const serieLabel = (serie as string) === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
                           return (
                             <Link
                               key={disc}
