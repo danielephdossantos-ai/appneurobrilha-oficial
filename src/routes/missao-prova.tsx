@@ -218,7 +218,7 @@ function MissaoProva() {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-3 space-y-6">
-                <Card className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none p-8 relative overflow-hidden" style={{ padding: adaptiveUI.maxItemsPerScreen <= 2 ? "1rem" : undefined }}>
+                <Card className={`bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none relative overflow-hidden ${adaptiveUI.maxItemsPerScreen <= 2 ? "p-4" : "p-8"}`}>
                   {/* Pip Commander Overlay */}
                   <div className="absolute top-0 right-0 p-4 opacity-20 pointer-events-none">
                     <KidLiveMascot size="lg" emotion="excited" showBadge={false} />

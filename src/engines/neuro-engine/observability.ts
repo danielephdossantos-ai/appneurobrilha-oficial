@@ -8,7 +8,7 @@ export interface AdaptiveObservation {
 export function summarizeAdaptiveEvent(input: {
   profile: string;
   trigger: string;
-  adjustment: Record<string, unknown>;
+  adjustment: Record<string, unknown> | object;
   state: Record<string, unknown>;
 }): AdaptiveObservation {
   const profile = input.profile ?? "Tipico";
@@ -31,6 +31,7 @@ export function summarizeAdaptiveEvent(input: {
   };
 }
 
-function adjustmentHasStrongSimplification(adjustment: Record<string, unknown>): boolean {
-  return Boolean(adjustment.stimuliReduction || adjustment.interfaceSimplification);
+function adjustmentHasStrongSimplification(adjustment: Record<string, unknown> | object): boolean {
+  const a = adjustment as Record<string, unknown>;
+  return Boolean(a.stimuliReduction || a.interfaceSimplification);
 }
