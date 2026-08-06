@@ -459,28 +459,34 @@ function BrilhaVida() {
                 <button
                   key={atv}
                   onClick={() => startLevel(atv)}
-                  className={`group relative overflow-hidden text-left p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap`}
+                  className={`group relative overflow-hidden text-center p-6 rounded-[2.5rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap flex flex-col items-center gap-4`}
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    {ATIVIDADE_IMG[atv] && (
-                      <img
-                        src={ATIVIDADE_IMG[atv]}
-                        alt={atv}
-                        loading="lazy"
-                        width={72}
-                        height={72}
-                        className="w-18 h-18 object-contain drop-shadow-sm shrink-0"
-                        style={{ width: 72, height: 72 }}
-                      />
-                    )}
-                    <div className="font-extrabold text-slate-800 text-lg leading-tight">{atv}</div>
+                  {/* Topo: Imagem centralizada */}
+                  {ATIVIDADE_IMG[atv] && (
+                    <img
+                      src={ATIVIDADE_IMG[atv]}
+                      alt={atv}
+                      loading="lazy"
+                      className="w-20 h-20 object-contain drop-shadow-sm mx-auto"
+                    />
+                  )}
+                  
+                  {/* Meio: Título centralizado com altura fixa e quebra correta */}
+                  <div className="flex flex-col items-center justify-center min-h-[3.5rem] w-full px-2">
+                    <div className="font-extrabold text-slate-800 text-lg leading-tight break-words hyphens-auto text-center">
+                      {atv}
+                    </div>
                   </div>
-                  <div className="text-[10px] font-bold text-primary/60 uppercase tracking-widest flex items-center gap-1">
-                    Atividade Brilha Vida <Zap className="h-3 w-3 fill-primary" />
+
+                  {/* Abaixo do título: Badge centralizada */}
+                  <div className="text-[10px] font-black text-primary/60 uppercase tracking-widest flex items-center justify-center gap-1 bg-white/40 px-3 py-1 rounded-full border border-primary/10">
+                    ATIVIDADE BRILHA VIDA <Zap className="h-3 w-3 fill-primary" />
                   </div>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-500 italic">Começar agora</span>
-                    <Smile className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  {/* Base: Botão centralizado */}
+                  <div className="mt-auto pt-2 flex flex-col items-center gap-1">
+                    <span className="text-xs font-black text-primary uppercase tracking-tight">Começar agora</span>
+                    <Smile className="h-5 w-5 text-primary opacity-20 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </button>
               ))}
