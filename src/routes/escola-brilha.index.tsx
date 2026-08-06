@@ -195,22 +195,6 @@ function EscolaBrilhaCatalogo() {
           </div>
         </div>
 
-        {/* Info */}
-        <div className="rounded-2xl bg-gradient-to-br from-[#4C9EFF]/15 to-[#9B6CFF]/15 border-2 border-[#4C9EFF]/25 p-4 mb-4">
-          <div className="flex items-center gap-2 text-[#4C9EFF] mb-1">
-            <Compass className="h-4 w-4" />
-            <span className="text-[10px] font-black uppercase tracking-widest">
-              {aulasEscritas.length}{" "}
-              {aulasEscritas.length === 1
-                ? "missão disponível"
-                : "missões disponíveis"}{" "}
-              · {habilidades.length} aventuras no total
-            </span>
-          </div>
-          <p className="text-sm text-[#0d1f55] leading-relaxed">
-            Toque numa série para ver os temas de aventura, e num tema para escolher a próxima missão.
-          </p>
-        </div>
 
         {/* Cursos v4 agora aparecem DENTRO da sua série, no mesmo padrão visual do 1º Ano */}
 
