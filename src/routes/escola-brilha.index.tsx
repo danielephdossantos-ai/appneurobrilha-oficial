@@ -277,7 +277,7 @@ function EscolaBrilhaCatalogo() {
           <div className="text-[#0d1f55]/60 text-sm text-center py-10">Carregando…</div>
         ) : (
           <div className="space-y-2">
-            {SERIES_ORDEM.map((serie) => {
+            {SERIES_ORDEM.filter(s => s !== "Educação Infantil").map((serie) => {
               const discsArvore = Object.keys(arvore[serie]);
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
               const discsExtra: string[] = [];
@@ -371,23 +371,7 @@ function EscolaBrilhaCatalogo() {
 
                         {/* Ler com Aurora movido para Neuro Treino */}
 
-                        {serie === "Educação Infantil" && (
-                          <Link
-                            to="/escola-brilha/matematica-ei"
-                            className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                            style={{ background: "linear-gradient(135deg, #10b981, #0ea5e9)" }}
-                          >
-                            <div className="text-[10px] uppercase tracking-widest opacity-90">
-                              🔢 Matemática EI · Maternal + Pré I + Pré II
-                            </div>
-                            <div className="text-lg leading-tight mt-0.5">
-                              Matemática Kawaii — Trilha
-                            </div>
-                            <div className="text-[11px] font-bold opacity-90 mt-1">
-                              Contagem, formas e quantidades · abrir trilha →
-                            </div>
-                          </Link>
-                        )}
+                        {/* Matemática EI movido para Neuro Treino */}
 
                         {disciplinas.length === 0 && (
                         <div className="text-[#0d1f55]/50 text-xs text-center py-6">
@@ -399,13 +383,13 @@ function EscolaBrilhaCatalogo() {
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
-                        const usaTrilhaDuo = serie === "Educação Infantil" || serie === "1º Ano";
+                        const usaTrilhaDuo = (serie as string) === "Educação Infantil" || (serie as string) === "1º Ano";
                         const serieSlug =
-                          serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
+                          (serie as string) === "Educação Infantil" ? "educacao-infantil" : "1ano";
                         const cursoV4Aqui = cursoPorSerieDisc[serie]?.[disc];
                         if (usaTrilhaDuo && !cursoV4Aqui) {
                           const masc = mascoteDaDisciplina(disc);
-                          const serieLabel = serie === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
+                          const serieLabel = (serie as string) === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
                           return (
                             <Link
                               key={disc}
