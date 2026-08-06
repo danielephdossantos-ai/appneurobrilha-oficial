@@ -43,7 +43,6 @@ const DESTINOS_KIDS: Destino[] = [
     emoji: "🧠",
     shine: "rgba(255,255,255,0.12)",
   },
-
   {
     to: "/escola-brilha",
     title: "Escola Brilha",
@@ -54,16 +53,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.15)",
   },
   {
-    to: "/escola-brilha/matematica-ei",
-    title: "Matemática Kawaii",
-    subtitle: "Contar e comparar",
-    gradient: "from-[#10B981] via-[#0EA5E9] to-[#2563EB]",
-    glow: "rgba(14,165,233,0.7)",
-    emoji: "🔢",
-    shine: "rgba(255,255,255,0.16)",
-  },
-  {
-
     to: "/reforco-brilha",
     title: "Reforço Brilha",
     subtitle: "Professor Particular",
