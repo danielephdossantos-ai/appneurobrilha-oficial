@@ -60,6 +60,26 @@ import { url as atvElogioImg } from "@/assets/brilha-vida/elogio-magico.png.asse
 import { url as atvBolhaImg } from "@/assets/brilha-vida/bolha-bemestar.png.asset.json";
 import { url as atvRodaImg } from "@/assets/brilha-vida/roda-do-dia.png.asset.json";
 
+import { url as atvGroundingImg } from "@/assets/brilha-vida/grounding-54321.png.asset.json";
+import { url as atvBorboletaImg } from "@/assets/brilha-vida/abraco-borboleta.png.asset.json";
+import { url as atvEspagueteImg } from "@/assets/brilha-vida/espaguete-estatua.png.asset.json";
+import { url as atvEscutaCorpoImg } from "@/assets/brilha-vida/escuta-corpo.png.asset.json";
+import { url as atvZonasImg } from "@/assets/brilha-vida/zonas-regulacao.png.asset.json";
+import { url as atvMedidorImg } from "@/assets/brilha-vida/medidor-emocoes.png.asset.json";
+import { url as atvPrimeiroDepoisImg } from "@/assets/brilha-vida/primeiro-depois.png.asset.json";
+import { url as atvCronogramaImg } from "@/assets/brilha-vida/cronograma-visual.png.asset.json";
+import { url as atvTimerImg } from "@/assets/brilha-vida/relogio-vermelho.png.asset.json";
+import { url as atvEscolhaImg } from "@/assets/brilha-vida/cartao-escolha.png.asset.json";
+import { url as atvKitCuidadorImg } from "@/assets/brilha-vida/kit-cuidador.png.asset.json";
+import { url as atvDiarioAbcImg } from "@/assets/brilha-vida/diario-abc.png.asset.json";
+import { url as atvGuiaCriseImg } from "@/assets/brilha-vida/guia-crise.png.asset.json";
+import { url as atvBateriaImg } from "@/assets/brilha-vida/bateria-cuidador.png.asset.json";
+
+import { url as catSosImg } from "@/assets/brilha-vida/cat-sos.png.asset.json";
+import { url as catModelosImg } from "@/assets/brilha-vida/cat-modelos.png.asset.json";
+import { url as catTeaTdahImg } from "@/assets/brilha-vida/cat-tea-tdah.png.asset.json";
+import { url as catCuidadorImg } from "@/assets/brilha-vida/cat-cuidador.png.asset.json";
+
 const ATIVIDADE_IMG: Record<string, string> = {
   "Termômetro das Emoções": atvTermometroImg,
   "Como estou agora?": atvComoEstouImg,
@@ -77,6 +97,20 @@ const ATIVIDADE_IMG: Record<string, string> = {
   "Elogio Mágico": atvElogioImg,
   "Bolha de Bem-Estar": atvBolhaImg,
   "Roda do Dia": atvRodaImg,
+  "5-4-3-2-1 Sentidos": atvGroundingImg,
+  "Abraço da Borboleta": atvBorboletaImg,
+  "Espaguete e Estátua": atvEspagueteImg,
+  "Escuta do Corpo": atvEscutaCorpoImg,
+  "Zonas de Regulação": atvZonasImg,
+  "Medidor de Emoções": atvMedidorImg,
+  "Primeiro… Depois": atvPrimeiroDepoisImg,
+  "Meu Dia em Cartões": atvCronogramaImg,
+  "Relógio Vermelho": atvTimerImg,
+  "Você Escolhe": atvEscolhaImg,
+  "Kit do Cuidador": atvKitCuidadorImg,
+  "Diário ABC": atvDiarioAbcImg,
+  "Guia de Crise": atvGuiaCriseImg,
+  "Bateria do Cuidador": atvBateriaImg,
 };
 
 export const Route = createFileRoute("/brilha-vida")({
@@ -119,7 +153,7 @@ const categorias = [
   {
     id: "regulacao-aguda",
     nome: "Regulação Aguda (SOS calma)",
-    img: catAutocontroleImg,
+    img: catSosImg,
     cor: "from-rose-300/30 to-rose-100/5",
     descricao: "Kit clínico para crise, susto ou pico de ansiedade",
     atividades: ["5-4-3-2-1 Sentidos", "Abraço da Borboleta", "Espaguete e Estátua", "Escuta do Corpo"],
@@ -127,7 +161,7 @@ const categorias = [
   {
     id: "modelos-clinicos",
     nome: "Modelos Clínicos de Emoção",
-    img: catEmocoesImg,
+    img: catModelosImg,
     cor: "from-indigo-300/30 to-indigo-100/5",
     descricao: "Zones of Regulation + Mood Meter (RULER/Yale) para vocabulário emocional expandido",
     atividades: ["Zonas de Regulação", "Medidor de Emoções"],
@@ -135,7 +169,7 @@ const categorias = [
   {
     id: "tea-tdah",
     nome: "Ferramentas TEA e TDAH",
-    img: catRotinaImg,
+    img: catTeaTdahImg,
     cor: "from-teal-300/30 to-teal-100/5",
     descricao: "Suportes visuais clínicos: Primeiro-Depois, Cronograma, Time Timer e Cartão de Escolha",
     atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
@@ -143,7 +177,7 @@ const categorias = [
   {
     id: "cuidador",
     nome: "Apoio ao Cuidador",
-    img: catAmizadeImg,
+    img: catCuidadorImg,
     cor: "from-amber-300/30 to-amber-100/5",
     descricao: "Ferramentas clínicas pra você que cuida: só um adulto regulado corregula uma criança",
     atividades: ["Kit do Cuidador", "Diário ABC", "Guia de Crise", "Bateria do Cuidador"],
