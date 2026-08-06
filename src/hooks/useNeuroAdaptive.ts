@@ -179,21 +179,34 @@ export function useNeuroAdaptive() {
         const newAccuracy = isCorrect
           ? prev.performance.accuracyRate * 0.9 + 0.1
           : prev.performance.accuracyRate * 0.9;
+        const newResponseTime = (prev.performance.averageResponseTime + responseTime) / 2;
+        const newErrorFrequency = isCorrect
+          ? prev.performance.errorFrequency
+          : prev.performance.errorFrequency + 1;
+        const nextCognitiveLoad = Math.min(
+          1,
+          prev.fatigue.cognitiveLoad + (isCorrect ? 0 : 0.05) + (responseTime > 20 ? 0.03 : 0),
+        );
+        const nextFocusScore = Math.max(0.2, Math.min(1, newAccuracy - (responseTime > 20 ? 0.1 : 0)));
+
         return {
           ...prev,
           performance: {
             ...prev.performance,
             accuracyRate: newAccuracy,
-            averageResponseTime: (prev.performance.averageResponseTime + responseTime) / 2,
-            errorFrequency: isCorrect
-              ? prev.performance.errorFrequency
-              : prev.performance.errorFrequency + 1,
+            averageResponseTime: newResponseTime,
+            errorFrequency: newErrorFrequency,
           },
           fatigue: {
             ...prev.fatigue,
-            cognitiveLoad: isCorrect
-              ? prev.fatigue.cognitiveLoad
-              : Math.min(1.0, prev.fatigue.cognitiveLoad + 0.05),
+            cognitiveLoad: nextCognitiveLoad,
+            fatigueLevel: Math.min(1, prev.fatigue.fatigueLevel + (isCorrect ? 0.01 : 0.03)),
+            needForBreak: nextCognitiveLoad > 0.8 || newErrorFrequency > 3,
+          },
+          attention: {
+            ...prev.attention,
+            focusScore: nextFocusScore,
+            averageAttentionSpan: Math.max(15, prev.attention.averageAttentionSpan - (isCorrect ? 0 : 5)),
           },
         };
       });

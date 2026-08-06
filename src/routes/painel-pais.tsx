@@ -12,7 +12,6 @@ import { AdaptivePlan } from "@/components/responsible/AdaptivePlan";
 import { FocusChart } from "@/components/responsible/FocusChart";
 import { AgendaEstudos } from "@/components/responsible/AgendaEstudos";
 import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
-import { mockResponsibleData } from "@/data/responsible/mock-data";
 import { ResponsibleIntelligence } from "@/modules/parental/intelligence";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -119,7 +118,16 @@ function PainelPremium() {
     );
   }
 
-  const analysis = ResponsibleIntelligence.analyzePerformance(mockResponsibleData);
+  const analysis = ResponsibleIntelligence.analyzePerformance({
+    studentName: activeChild.nome,
+    grade: activeChild.serie,
+    skills: [],
+    emotionalHistory: [],
+    focusSessions: [],
+    alerts: [],
+    dailyRoutine: [],
+    cognitiveStats: [],
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -312,15 +320,15 @@ function PainelPremium() {
           <div className="lg:col-span-2 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div variants={itemVariants}>
-                <CognitiveRadar data={mockResponsibleData.cognitiveStats} />
+                <CognitiveRadar data={[]} />
               </motion.div>
               <motion.div variants={itemVariants}>
-                <FocusChart sessions={mockResponsibleData.focusSessions} />
+                <FocusChart sessions={[]} />
               </motion.div>
             </div>
 
             <motion.div variants={itemVariants}>
-              <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
+              <EmotionalTimeline history={[]} />
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -336,10 +344,10 @@ function PainelPremium() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div variants={itemVariants}>
-                <SkillProgress skills={mockResponsibleData.skills} />
+                <SkillProgress skills={[]} />
               </motion.div>
               <motion.div variants={itemVariants}>
-                <RoutineManager routine={mockResponsibleData.dailyRoutine} />
+                <RoutineManager routine={[]} />
               </motion.div>
             </div>
           </div>
@@ -359,7 +367,7 @@ function PainelPremium() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <PedagogicalAlerts alerts={mockResponsibleData.alerts} childId={activeChild.id} />
+              <PedagogicalAlerts alerts={[]} childId={activeChild.id} />
             </motion.div>
 
             <motion.div

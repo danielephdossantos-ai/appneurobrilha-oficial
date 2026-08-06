@@ -3,7 +3,7 @@ import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { KidCard } from "@/components/ui/KidCard";
 
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
-import { useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import {
   Target,
@@ -42,6 +42,7 @@ import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
+import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -58,6 +59,23 @@ function MissaoProva() {
   const [tutorAberto, setTutorAberto] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
   const [recursosVistos, setRecursosVistos] = useState(0);
+
+  const adaptiveUI = useMemo(
+    () =>
+      buildAdaptiveUIState(
+        {
+          visualComplexity: engine?.adaptive?.visualComplexity,
+          stimuliReduction: engine?.adaptive?.stimuliLevel === "low",
+          interfaceSimplification: engine?.adaptive?.stimuliLevel === "low",
+          difficultyScale: engine?.adaptive?.difficulty,
+          audioAdaptation: { pacing: engine?.adaptive?.animationIntensity === "none" ? "slow" : "normal" },
+          animationIntensity: engine?.adaptive?.animationIntensity,
+          maxInformationDensity: engine?.adaptive?.maxItemsPerScreen,
+        },
+        engine?.profile?.base ?? "Tipico",
+      ),
+    [engine],
+  );
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
@@ -176,7 +194,13 @@ function MissaoProva() {
   if (isStudying) {
     return (
       <Shell>
-        <div className="animate-in slide-in-from-bottom-4 duration-500">
+        <div
+          className="animate-in slide-in-from-bottom-4 duration-500"
+          style={{
+            fontSize: `${adaptiveUI.fontSize}px`,
+            opacity: adaptiveUI.simplifiedUI ? 0.97 : 1,
+          }}
+        >
           <button
             onClick={() => setIsStudying(false)}
             className="mb-4 text-sm font-bold text-primary flex items-center gap-1 hover:underline"
@@ -194,7 +218,7 @@ function MissaoProva() {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-3 space-y-6">
-                <Card className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none p-8 relative overflow-hidden">
+                <Card className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none p-8 relative overflow-hidden" style={{ padding: adaptiveUI.maxItemsPerScreen <= 2 ? "1rem" : undefined }}>
                   {/* Pip Commander Overlay */}
                   <div className="absolute top-0 right-0 p-4 opacity-20 pointer-events-none">
                     <KidLiveMascot size="lg" emotion="excited" showBadge={false} />

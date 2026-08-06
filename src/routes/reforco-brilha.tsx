@@ -42,6 +42,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
+import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
@@ -154,6 +155,19 @@ function ReforcoBrilha() {
   const [aulasExtras, setAulasExtras] = useState<import("@/lib/reforco-brilha-search").RBAula[]>([]);
   const [carregandoMaisAulas, setCarregandoMaisAulas] = useState(false);
   const [semMaisAulas, setSemMaisAulas] = useState(false);
+
+  const adaptiveUI = buildAdaptiveUIState(
+    {
+      visualComplexity: engine?.adaptive?.visualComplexity,
+      stimuliReduction: engine?.adaptive?.stimuliLevel === "low",
+      interfaceSimplification: engine?.adaptive?.stimuliLevel === "low",
+      difficultyScale: engine?.adaptive?.difficulty,
+      audioAdaptation: { pacing: engine?.adaptive?.animationIntensity === "none" ? "slow" : "normal" },
+      animationIntensity: engine?.adaptive?.animationIntensity,
+      maxInformationDensity: engine?.adaptive?.maxItemsPerScreen,
+    },
+    engine?.profile?.base ?? "Tipico",
+  );
 
   useEffect(() => {
     setAulasExtras([]);
@@ -322,17 +336,38 @@ function ReforcoBrilha() {
 
   return (
     <Shell>
+      <div
+        className="space-y-8"
+        style={{
+          fontSize: `${adaptiveUI.fontSize}px`,
+          opacity: adaptiveUI.simplifiedUI ? 0.97 : 1,
+        }}
+      >
       <PageHeader
         icon={Sparkles}
         title="REFORÇO BRILHA"
         subtitle="Biblioteca pedagógica para pais, responsáveis e professores"
       />
 
-
+      <Card className="border-primary/20 bg-primary/5">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">Modo adaptativo</p>
+            <p className="text-sm font-semibold text-foreground">
+              {adaptiveUI.simplifiedUI
+                ? "Interface simplificada com menos estímulos para apoiar foco e segurança."
+                : "Interface mais aberta, com ritmo e estímulos ajustados para autonomia."}
+            </p>
+          </div>
+          <div className="rounded-full border border-primary/20 bg-background px-3 py-1 text-xs font-bold text-primary">
+            {engine?.profile?.base ?? "Tipico"}
+          </div>
+        </div>
+      </Card>
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
-          <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
+          <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20" style={{ padding: adaptiveUI.maxItemsPerScreen <= 2 ? "1rem" : undefined }}>
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
               O que a criança está precisando aprender?
@@ -1024,6 +1059,7 @@ function ReforcoBrilha() {
           onClose={() => setAulaAberta(null)}
         />
       )}
+      </div>
     </Shell>
   );
 }

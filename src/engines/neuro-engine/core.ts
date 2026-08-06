@@ -5,6 +5,7 @@ import { AttentionEngine } from "./attention-engine";
 import { SensoryRegulationEngine } from "./sensory-regulation-engine";
 import { RewardRegulationEngine } from "./reward-regulation-engine";
 import { v4 as uuidv4 } from "uuid";
+import { summarizeAdaptiveEvent } from "./observability";
 
 export class NeuroAdaptiveCore {
   private static logs: NeuroLog[] = [];
@@ -23,6 +24,14 @@ export class NeuroAdaptiveCore {
     adjustment = RewardRegulationEngine.calculateAdjustment(validatedState.performance, adjustment);
 
     // 4. Gerar Log
+    const trigger = this.determineTrigger(validatedState);
+    const observation = summarizeAdaptiveEvent({
+      profile: validatedState.profile,
+      trigger,
+      adjustment,
+      state: validatedState,
+    });
+
     const log: NeuroLog = {
       id: uuidv4(),
       childId: "session-child", // Deve ser passado via contexto em prod
@@ -30,7 +39,7 @@ export class NeuroAdaptiveCore {
       previousState: validatedState, // Simplificação para o exemplo
       newState: validatedState,
       adjustmentApplied: adjustment,
-      trigger: this.determineTrigger(validatedState),
+      trigger,
     };
 
     this.logs.push(log);
@@ -42,6 +51,7 @@ export class NeuroAdaptiveCore {
       profile: validatedState.profile,
       adjustment,
       trigger: log.trigger,
+      observation,
     });
 
     return { adjustment, log };
