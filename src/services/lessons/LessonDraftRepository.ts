@@ -99,7 +99,7 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
           ? ((data as { observacoes?: string }).observacoes ?? "").trim()
           : "";
       const notes =
-        `v${version} | autor=${context.userId} | ${new Date().toISOString()}` +
+        `v${version} | autor=${context?.userId} | ${new Date().toISOString()}` +
         (observacoes ? ` | obs: ${observacoes}` : "");
 
       // 4.4 Persistir metadados de versão no próprio payload (._meta) — não
@@ -111,7 +111,7 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
             ? ((row.payload as unknown as Record<string, unknown>)._meta ?? {})
             : {}),
           version,
-          author: context.userId,
+          author: context?.userId,
           imported_at: new Date().toISOString(),
           observacoes: observacoes || null,
         },
@@ -128,7 +128,7 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
           row.disciplina ?? null,
           row.titulo ?? null,
           JSON.stringify(payloadWithMeta),
-          context.userId,
+          context?.userId,
           notes,
         ],
       );
