@@ -612,6 +612,8 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
 }
 
 function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
+  const lousaAtiva = useLousaAtiva();
+
   const [respostas, setRespostas] = useState<(number | null)[]>(
     m.perguntas.map(() => null),
   );
