@@ -37,7 +37,6 @@ import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pedagogica'
 import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
 import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
-import { Route as AuthLousaTestRouteImport } from './routes/auth-lousa-test'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
@@ -229,11 +228,6 @@ const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
 const BancoMidiasRoute = BancoMidiasRouteImport.update({
   id: '/banco-midias',
   path: '/banco-midias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthLousaTestRoute = AuthLousaTestRouteImport.update({
-  id: '/auth-lousa-test',
-  path: '/auth-lousa-test',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -540,7 +534,6 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
-  '/auth-lousa-test': typeof AuthLousaTestRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -622,7 +615,6 @@ export interface FileRoutesByTo {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
-  '/auth-lousa-test': typeof AuthLousaTestRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -706,7 +698,6 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
-  '/auth-lousa-test': typeof AuthLousaTestRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -791,7 +782,6 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
-    | '/auth-lousa-test'
     | '/banco-midias'
     | '/biblioteca-alfa'
     | '/biblioteca-pedagogica'
@@ -873,7 +863,6 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
-    | '/auth-lousa-test'
     | '/banco-midias'
     | '/biblioteca-alfa'
     | '/biblioteca-pedagogica'
@@ -956,7 +945,6 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
-    | '/auth-lousa-test'
     | '/banco-midias'
     | '/biblioteca-alfa'
     | '/biblioteca-pedagogica'
@@ -1040,7 +1028,6 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
-  AuthLousaTestRoute: typeof AuthLousaTestRoute
   BancoMidiasRoute: typeof BancoMidiasRoute
   BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
   BibliotecaPedagogicaRoute: typeof BibliotecaPedagogicaRoute
@@ -1303,13 +1290,6 @@ declare module '@tanstack/react-router' {
       path: '/banco-midias'
       fullPath: '/banco-midias'
       preLoaderRoute: typeof BancoMidiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth-lousa-test': {
-      id: '/auth-lousa-test'
-      path: '/auth-lousa-test'
-      fullPath: '/auth-lousa-test'
-      preLoaderRoute: typeof AuthLousaTestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -1734,7 +1714,6 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
-  AuthLousaTestRoute: AuthLousaTestRoute,
   BancoMidiasRoute: BancoMidiasRoute,
   BibliotecaAlfaRoute: BibliotecaAlfaRoute,
   BibliotecaPedagogicaRoute: BibliotecaPedagogicaRoute,

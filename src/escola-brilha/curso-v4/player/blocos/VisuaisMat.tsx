@@ -1570,7 +1570,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
               <div
                 className="text-xl md:text-2xl font-black text-[#8b5e3c]"
-                style={{ fontFamily: "'Permanent Marker', cursive" }}
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               >
                 {trinomio} = {fatorada}
               </div>
@@ -1578,7 +1578,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           )}
 
           {terminou && !fatorada && falha && (
-            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Nunito', sans-serif" }}>
               {falha}
             </div>
           )}
