@@ -468,18 +468,23 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
 
+      {lousaAuto && <RenderVisualMat v={lousaAuto} />}
+
       {!m.colecaoVisual && !m.casasValor && !m.contaPassoAPasso && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
       )}
 
-      <div className="space-y-2 bg-white/5 rounded-lg p-4">
-        {m.passos.map((p, i) => (
-          <div key={i} className="flex gap-2">
-            <span className="text-amber-300">→</span>
-            <span>{p}</span>
-          </div>
-        ))}
-      </div>
+      {!lousaAuto && (
+        <div className="space-y-2 bg-white/5 rounded-lg p-4">
+          {m.passos.map((p, i) => (
+            <div key={i} className="flex gap-2">
+              <span className="text-amber-300">→</span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="text-xl font-bold text-amber-300">
         Resposta: {m.resposta}
       </div>
