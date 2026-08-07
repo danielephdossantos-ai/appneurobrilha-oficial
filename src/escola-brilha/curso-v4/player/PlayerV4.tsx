@@ -384,6 +384,17 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
+  const lousaAtiva = useLousaAtiva();
+  // 5º ao 9º: se a cena não trouxe visual próprio, montamos a lousa interativa
+  // a partir da conta do enunciado (ou dos passos escritos da aula).
+  const lousaAuto = useMemo(() => {
+    if (!lousaAtiva || m.visualMat || m.contaPassoAPasso || m.colecaoVisual) return undefined;
+    return (
+      lousaDeTexto(m.enunciado) ??
+      lousaDePassos({ titulo: m.enunciado, passos: m.passos, resposta: m.resposta })
+    );
+  }, [lousaAtiva, m]);
+
   return (
     <Card>
       <div className="text-sm text-amber-300 mb-2">🧠 Brilha explica na lousa:</div>
