@@ -369,6 +369,10 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
               )}
               {e.contaArmada && <ContaArmada {...e.contaArmada} />}
               {e.casasValor && <CasasValor {...e.casasValor} />}
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && (
+                <LousaConta texto={`${e.texto} ${e.exemplo ?? ""}`} />
+              )}
+
               {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && e.imagemUrl && (
                 <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
               )}
