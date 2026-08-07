@@ -101,7 +101,9 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   useEffect(() => () => stopSpeaking(), []);
 
   return (
+    <LousaAtivaCtx.Provider value={cursoUsaLousa(cursoSlug)}>
     <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#1e3a8a] text-white">
+
       <header className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link to="/escola-brilha/curso/$slug" params={{ slug: cursoSlug }} className="text-sm text-white/70 hover:text-white">
