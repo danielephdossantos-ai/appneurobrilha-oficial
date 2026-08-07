@@ -1463,10 +1463,17 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               >
                 Começar explicação passo a passo ▶
               </button>
-              <p className="text-[#8b5e3c]/60 text-[10px] sm:text-xs uppercase font-bold tracking-widest animate-pulse text-center">
+              <button
+                onClick={mostrarTudo}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] bg-[#8b5e3c]/5 px-4 py-2 rounded-full transition"
+              >
+                Ver a conta completa
+              </button>
+              <p className="text-[#8b5e3c]/60 text-[10px] sm:text-xs uppercase font-bold tracking-widest text-center">
                 Clique para ver o passo a passo
               </p>
             </div>
+
           ) : (
             <div className="flex flex-col items-center gap-4 md:gap-6">
 
