@@ -82,7 +82,7 @@ export const aula19: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual o tom predominante no Manifesto lido?",
-        opcoes: ["Firme, otimista e coletivo (Nós)", "Triste, isolado e confuso", "Apenas informativo e técnico"],
+        opcoes: ["Firme, otimista e coletivo (Nós)", "Triste, isolado e confuso", "Apenas informativo e técnico", "Agressivo e ofensivo"],
         correta: 0,
         feedbackAcerto: "Sintonia coletiva. O 'Nós' é a base do manifesto.",
         feedbackErro: "O texto usa 'Eu' ou 'Nós'?",

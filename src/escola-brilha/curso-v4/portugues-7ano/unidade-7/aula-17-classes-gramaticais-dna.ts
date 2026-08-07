@@ -168,7 +168,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual palavra no texto é uma Conjunção de conclusão?",
-        opcoes: ["Portanto", "Enquanto", "Sem"],
+        opcoes: ["Portanto", "Enquanto", "Sem", "Muito"],
         correta: 0,
         feedbackAcerto: "Excelente. Você captou a 'cola' lógica.",
         feedbackErro: "Busque a palavra que encerra o raciocínio.",

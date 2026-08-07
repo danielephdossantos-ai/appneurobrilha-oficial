@@ -80,7 +80,7 @@ export const aula18: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Por que a concordância é comparada a uma 'regra de ouro'?",
-        opcoes: ["Porque garante a conexão lógica e clara entre as palavras", "Porque é feita de metal precioso", "Porque só pessoas ricas usam"],
+        opcoes: ["Porque garante a conexão lógica e clara entre as palavras", "Porque é feita de metal precioso", "Porque só pessoas ricas usam", "Porque deixa a frase mais comprida"],
         correta: 0,
         feedbackAcerto: "Harmonia detectada. Você entende o valor da conexão.",
         feedbackErro: "Pense no que aconteceria se as palavras não se 'entendessem'.",
