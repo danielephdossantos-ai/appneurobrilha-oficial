@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-arte-sonora",
   titulo: "Instalações Sonoras, Paisagem Acústica e Arte Conceitual",
   iconeTrilha: "🔊",
-  bncc: ["EF69AR22", "EF69AR24", "EF69AR31"],
+  bncc: ["EF69AR20", "EF69AR21", "EF69AR22", "EF69AR23"],
   duracaoMin: 34,
 
   cena01_motivacao: {

@@ -37,7 +37,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-codice-decifrado",
   titulo: "O Retorno ao Núcleo: O Códice Decifrado",
   iconeTrilha: "🧩",
-  bncc: ["EF69AR01", "EF69AR05", "EF69AR32", "EF69AR35"],
+  bncc: ["EF69AR32", "EF69AR34", "EF69AR35"],
   duracaoMin: 34,
 
   cena01_motivacao: {

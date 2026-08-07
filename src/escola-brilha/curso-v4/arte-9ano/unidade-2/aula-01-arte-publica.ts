@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-arte-publica",
   titulo: "Arte Pública, Ativismo de Escala e Intervenções Urbanas Globais",
   iconeTrilha: "🏛️",
-  bncc: ["EF69AR31", "EF69AR32", "EF69AR33"],
+  bncc: ["EF69AR31", "EF69AR33", "EF69AR34"],
   duracaoMin: 36,
 
   cena01_motivacao: {

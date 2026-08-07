@@ -30,7 +30,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-instalacoes-imersivas",
   titulo: "Instalações Imersivas — A Realidade Virtual Artística",
   iconeTrilha: "🎭",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR05", "EF69AR26", "EF69AR32", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {

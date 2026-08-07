@@ -28,7 +28,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-bioarte",
   titulo: "Bioarte e Eco-Ativismo Digital — A Natureza Programada",
   iconeTrilha: "🌿",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR06", "EF69AR07", "EF69AR31", "EF69AR32"],
   duracaoMin: 36,
 
   cena01_motivacao: {

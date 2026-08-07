@@ -39,7 +39,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-cenografia",
   titulo: "A Cidade Encantada — Cenografia, Espaço Lúdico e Parques Temáticos",
   iconeTrilha: "🎡",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR26", "EF69AR27", "EF69AR32"],
   duracaoMin: 34,
 
   cena01_motivacao: {

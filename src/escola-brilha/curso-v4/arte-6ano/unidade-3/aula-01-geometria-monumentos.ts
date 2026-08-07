@@ -35,7 +35,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-geometria-monumentos",
   titulo: "A Geometria dos Monumentos",
   iconeTrilha: "🗿",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR04", "EF69AR05", "EF69AR31", "EF69AR34"],
   duracaoMin: 34,
 
   cena01_motivacao: {

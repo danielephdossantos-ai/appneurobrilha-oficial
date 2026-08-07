@@ -39,7 +39,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-muralismo",
   titulo: "A Cidade como Tela — Muralismo, Grafite e Intervenção Social",
   iconeTrilha: "🎨",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR01", "EF69AR31", "EF69AR33"],
   duracaoMin: 34,
 
   cena01_motivacao: {

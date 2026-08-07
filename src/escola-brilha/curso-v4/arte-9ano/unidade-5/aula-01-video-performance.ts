@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-video-performance",
   titulo: "Vídeo-Performances, Memórias Digitais e Ativismo em Tela",
   iconeTrilha: "🎥",
-  bncc: ["EF69AR30", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR03", "EF69AR29", "EF69AR30", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {

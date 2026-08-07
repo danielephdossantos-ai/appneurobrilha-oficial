@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-curadoria-final",
   titulo: "Curadoria Contemporânea, o Grande Mosaico Global e o Encerramento do Códice",
   iconeTrilha: "👑",
-  bncc: ["EF69AR31", "EF69AR34", "EF69AR35"],
+  bncc: ["EF69AR08", "EF69AR32", "EF69AR34", "EF69AR35"],
   duracaoMin: 40,
 
   cena01_motivacao: {

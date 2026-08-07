@@ -29,7 +29,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-arquitetura-organica",
   titulo: "Arquitetura Orgânica e Cidades Sustentáveis",
   iconeTrilha: "🌿",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR06", "EF69AR07", "EF69AR31"],
   duracaoMin: 34,
 
   cena01_motivacao: {

@@ -27,7 +27,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-ia-algoritmos",
   titulo: "IA, Algoritmos e o Futuro da Criação",
   iconeTrilha: "🤖",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR30", "EF69AR33"],
+  bncc: ["EF69AR07", "EF69AR08", "EF69AR33", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {

@@ -26,7 +26,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-cultura-maker",
   titulo: "A Forja Faça-Você-Mesmo — Cultura Maker e Escultura 3D",
   iconeTrilha: "🔧",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR05", "EF69AR06", "EF69AR08", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {

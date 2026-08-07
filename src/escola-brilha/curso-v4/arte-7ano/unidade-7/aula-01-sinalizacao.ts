@@ -43,7 +43,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-sinalizacao",
   titulo: "A Cidade Inteligente — Sinalização, Identidade Visual e o Futuro das Metrópoles",
   iconeTrilha: "🚦",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR03", "EF69AR07", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {
