@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-coletivos",
   titulo: "Coletivos de Arte, Espaços Independentes e Redes de Colaboração",
   iconeTrilha: "🧩",
-  bncc: ["EF69AR31", "EF69AR33", "EF69AR35"],
+  bncc: ["EF69AR08", "EF69AR28", "EF69AR31"],
   duracaoMin: 36,
 
   cena01_motivacao: {

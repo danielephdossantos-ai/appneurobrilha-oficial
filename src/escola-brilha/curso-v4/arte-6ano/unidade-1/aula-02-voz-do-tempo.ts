@@ -40,7 +40,7 @@ export const aula02: AulaArteV1 = {
   slug: "aula-02-voz-do-tempo",
   titulo: "A Voz do Tempo",
   iconeTrilha: "🎙️",
-  bncc: ["EF69AR01", "EF69AR31", "EF69AR32", "EF69AR33"],
+  bncc: ["EF69AR16", "EF69AR18", "EF69AR21", "EF69AR34"],
   duracaoMin: 34,
 
   cena01_motivacao: {

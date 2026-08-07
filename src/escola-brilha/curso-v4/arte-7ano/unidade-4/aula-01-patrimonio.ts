@@ -39,7 +39,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-patrimonio",
   titulo: "O Patrimônio Histórico na Cidade do Futuro — Preservação e Restauro",
   iconeTrilha: "🏛️",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR02", "EF69AR31", "EF69AR34"],
   duracaoMin: 34,
 
   cena01_motivacao: {

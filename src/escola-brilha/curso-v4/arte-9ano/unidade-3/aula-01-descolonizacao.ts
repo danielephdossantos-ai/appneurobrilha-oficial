@@ -10,7 +10,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-descolonizacao-imagens",
   titulo: "Corpo, Identidade e a Descolonização das Imagens",
   iconeTrilha: "👤",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR05"],
+  bncc: ["EF69AR01", "EF69AR04", "EF69AR33"],
   duracaoMin: 36,
 
   cena01_motivacao: {

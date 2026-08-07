@@ -24,7 +24,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-hibridismo-cultural",
   titulo: "Hibridismo Cultural e a Desconstrução de Fronteiras",
   iconeTrilha: "🌐",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR01", "EF69AR02", "EF69AR32", "EF69AR33"],
   duracaoMin: 38,
 
   cena01_motivacao: {

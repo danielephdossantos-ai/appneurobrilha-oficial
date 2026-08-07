@@ -25,7 +25,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-estrutura-sagrado",
   titulo: "A Estrutura do Sagrado",
   iconeTrilha: "𓂀",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR31"],
+  bncc: ["EF69AR02", "EF69AR04", "EF69AR07", "EF69AR33"],
   duracaoMin: 34,
 
   cena01_motivacao: {

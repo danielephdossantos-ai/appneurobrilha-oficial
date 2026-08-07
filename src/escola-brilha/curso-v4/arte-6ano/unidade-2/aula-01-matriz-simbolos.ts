@@ -43,7 +43,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-matriz-simbolos",
   titulo: "A Matriz dos Símbolos: O Nascimento da Escrita",
   iconeTrilha: "𒀭",
-  bncc: ["EF69AR01", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR02", "EF69AR03", "EF69AR07", "EF69AR34"],
   duracaoMin: 34,
 
   cena01_motivacao: {

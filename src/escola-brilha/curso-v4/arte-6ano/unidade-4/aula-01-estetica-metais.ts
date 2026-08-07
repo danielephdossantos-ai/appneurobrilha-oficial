@@ -31,7 +31,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-estetica-metais",
   titulo: "A Estética dos Metais: Fundição, Tecnologia e Identidade Visual",
   iconeTrilha: "⚒️",
-  bncc: ["EF69AR04", "EF69AR05", "EF69AR31"],
+  bncc: ["EF69AR05", "EF69AR06", "EF69AR08", "EF69AR34"],
   duracaoMin: 34,
 
   cena01_motivacao: {

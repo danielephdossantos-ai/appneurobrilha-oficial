@@ -21,7 +21,7 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-net-art",
   titulo: "Net Art e Cultura de Rede — A Estética do Compartilhamento",
   iconeTrilha: "🌐",
-  bncc: ["EF69AR01", "EF69AR04", "EF69AR31", "EF69AR32"],
+  bncc: ["EF69AR03", "EF69AR17", "EF69AR31", "EF69AR35"],
   duracaoMin: 36,
 
   cena01_motivacao: {
