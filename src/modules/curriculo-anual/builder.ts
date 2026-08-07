@@ -135,54 +135,56 @@ export function gerarCurriculoAnual(input: GerarInput): CurriculoGerado {
   }
 
   const totalDias = semanasPorSemestre * 2 * diasPorSemana;
-  const aulasPorDia = Math.max(1, Math.min(3, Math.ceil(totalAulas / totalDias)));
 
-  let fila = 0;
+  // 1) Intercala as aulas por disciplina (rotação), prioridades primeiro.
+  const sequencia: Array<{ fila: (typeof filas)[number]; slug: string; titulo: string }> = [];
   let restantes = totalAulas;
+  let fila = 0;
+  while (restantes > 0) {
+    let tentativas = 0;
+    while (tentativas < filas.length && filas[fila].cursor >= filas[fila].aulas.length) {
+      fila = (fila + 1) % filas.length;
+      tentativas++;
+    }
+    const f = filas[fila];
+    if (f.cursor >= f.aulas.length) break;
+    const aula = f.aulas[f.cursor];
+    sequencia.push({ fila: f, slug: aula.slug, titulo: aula.titulo });
+    f.cursor++;
+    restantes--;
+    fila = (fila + 1) % filas.length;
+  }
 
-  for (let d = 0; d < totalDias && restantes > 0; d++) {
+  // 2) Espalha a sequência pelo ano inteiro (os 2 semestres).
+  const porDiaMax = Math.max(1, Math.min(3, Math.ceil(sequencia.length / totalDias)));
+  const minutos = Math.max(10, Math.round(minutosPorDia / porDiaMax));
+  const ocupacao = new Map<number, number>();
+
+  sequencia.forEach((s, i) => {
+    let d = Math.floor((i * totalDias) / sequencia.length);
+    if (d >= totalDias) d = totalDias - 1;
+    const ordem = (ocupacao.get(d) ?? 0) + 1;
+    ocupacao.set(d, ordem);
+
     const semanaGlobal = Math.floor(d / diasPorSemana) + 1;
     const semestre: 1 | 2 = semanaGlobal <= semanasPorSemestre ? 1 : 2;
     const semana = semestre === 1 ? semanaGlobal : semanaGlobal - semanasPorSemestre;
-    const dia = (d % diasPorSemana) + 1;
 
-    let minutosUsados = 0;
-    let ordem = 1;
-    for (let k = 0; k < aulasPorDia && restantes > 0; k++) {
-      // procura a próxima fila que ainda tem aula
-      let tentativas = 0;
-      while (tentativas < filas.length && filas[fila].cursor >= filas[fila].aulas.length) {
-        fila = (fila + 1) % filas.length;
-        tentativas++;
-      }
-      const f = filas[fila];
-      if (f.cursor >= f.aulas.length) break;
+    itens.push({
+      semestre,
+      semana,
+      dia_semana: (d % diasPorSemana) + 1,
+      ordem,
+      disciplina: s.fila.disciplina,
+      curso_slug: s.fila.curso.slug,
+      aula_slug: s.slug,
+      titulo: s.titulo,
+      rota: rotaDaAula(s.fila.curso, s.slug),
+      minutos,
+      prioridade: s.fila.prioridade,
+    });
+  });
 
-      const aula = f.aulas[f.cursor];
-      const minutos = Math.max(10, Math.round(minutosPorDia / aulasPorDia));
-      if (minutosUsados + minutos > minutosPorDia + 10 && ordem > 1) break;
-
-      itens.push({
-        semestre,
-        semana,
-        dia_semana: dia,
-        ordem,
-        disciplina: f.disciplina,
-        curso_slug: f.curso.slug,
-        aula_slug: aula.slug,
-        titulo: aula.titulo,
-        rota: rotaDaAula(f.curso, aula.slug),
-        minutos,
-        prioridade: f.prioridade,
-      });
-
-      f.cursor++;
-      restantes--;
-      minutosUsados += minutos;
-      ordem++;
-      fila = (fila + 1) % filas.length;
-    }
-  }
 
   return {
     serie: String(input.serie),
