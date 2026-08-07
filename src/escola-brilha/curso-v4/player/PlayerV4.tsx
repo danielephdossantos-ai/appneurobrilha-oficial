@@ -508,10 +508,11 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
   const conta = detectarContaNoTexto(texto);
   const md = detectarMultDivNoTexto(texto);
   // 5º ao 9º ano: toda conta vira LOUSA INTERATIVA (padrão Pip Teen Roqueiro).
-  if (lousaAtiva) {
-    const lousa = lousaDeTexto(texto);
-    if (lousa) return <RenderVisualMat v={lousa} />;
-  }
+  // useMemo é obrigatório: sem ele o objeto é recriado a cada render e a
+  // animação da lousa reinicia sozinha (bug da explicação "pulando").
+  const lousa = useMemo(() => (lousaAtiva ? lousaDeTexto(texto) : undefined), [lousaAtiva, texto]);
+  if (lousa) return <RenderVisualMat v={lousa} />;
+
   if (md?.operacao === "div") {
 
     const q = Math.floor(md.a / md.b);
@@ -582,7 +583,10 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
     ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
     : "";
   const lousaAtiva = useLousaAtiva();
-  const lousaMini = lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined;
+  const lousaMini = useMemo(
+    () => (lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined),
+    [lousaAtiva, textoMini],
+  );
   const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
   const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
@@ -617,6 +621,11 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
 
 function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
   const lousaAtiva = useLousaAtiva();
+  // Memoizado: sem isso a lousa é remontada a cada clique e a animação pula.
+  const lousasQ = useMemo(
+    () => m.perguntas.map((q) => (lousaAtiva ? lousaDeTexto(q.pergunta) : undefined)),
+    [lousaAtiva, m.perguntas],
+  );
 
   const [respostas, setRespostas] = useState<(number | null)[]>(
     m.perguntas.map(() => null),
@@ -634,7 +643,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
         const md = detectarMultDivNoTexto(q.pergunta);
-        const lousaQ = lousaAtiva ? lousaDeTexto(q.pergunta) : undefined;
+        const lousaQ = lousasQ[qi];
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">

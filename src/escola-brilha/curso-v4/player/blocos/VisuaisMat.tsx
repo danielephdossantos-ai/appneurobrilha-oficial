@@ -5,7 +5,7 @@
  * de casas de valor quando o conteúdo é geometria, estatística, medidas
  * ou probabilidade.
  */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { Volume2, VolumeX } from "lucide-react";
@@ -1293,10 +1293,23 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
   const [estahEscrevendo, setEstahEscrevendo] = useState(false);
   const [iniciou, setIniciou] = useState(false);
+  const [completo, setCompleto] = useState(false);
   const [audioAtivo, setAudioAtivo] = useState(true);
+  const [pausado, setPausado] = useState(false);
   const audioAtivoRef = useRef(true);
+  const pausadoRef = useRef(false);
+  const passosRef = useRef(passos);
+  passosRef.current = passos;
   const total = passos.length;
-  const terminou = revelados >= total && !estahEscrevendo;
+  const terminou = completo || (revelados >= total && !estahEscrevendo);
+
+
+  /** Assinatura estável do conteúdo: evita reiniciar a animação
+   *  quando o pai recria o objeto `v` a cada render (bug do "pulando"). */
+  const assinatura = useMemo(
+    () => passos.map((p) => `${p.expr}|${p.professor ?? ""}`).join("¶"),
+    [passos],
+  );
 
   useEffect(() => {
     audioAtivoRef.current = audioAtivo;
@@ -1304,40 +1317,79 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [audioAtivo]);
 
   useEffect(() => {
+    pausadoRef.current = pausado;
+    if (pausado) stopSpeaking();
+  }, [pausado]);
+
+  // Se o conteúdo muda de verdade, volta para a tela de "Começar".
+  useEffect(() => {
+    setIniciou(false);
+    setCompleto(false);
+    setPausado(false);
+    setRevelados(0);
+    setCaracteresVisiveis({});
+    setEstahEscrevendo(false);
+  }, [assinatura]);
+
+  useEffect(() => {
+    if (!iniciou || completo) return;
     let montado = true;
-    if (!iniciou) return;
+    const limpadores: (() => void)[] = [];
 
     setRevelados(0);
     setCaracteresVisiveis({});
     setEstahEscrevendo(true);
 
-    async function escreverTudo() {
-      // Pequena pausa inicial
-      await new Promise((resolve) => setTimeout(resolve, 800));
+    const dormir = (ms: number) =>
+      new Promise<void>((resolve) => {
+        const t = window.setTimeout(resolve, ms);
+        limpadores.push(() => {
+          window.clearTimeout(t);
+          resolve();
+        });
+      });
 
-      for (let i = 0; i < total; i++) {
+    /** Segura o fluxo enquanto estiver pausado. */
+    const esperarRetomar = async () => {
+      while (montado && pausadoRef.current) await dormir(200);
+    };
+
+    async function escreverTudo() {
+      const lista = passosRef.current;
+      await dormir(700);
+
+      for (let i = 0; i < lista.length; i++) {
         if (!montado) return;
-        
-        const passo = passos[i];
-        
-        // Se tem áudio e narrativa de professor, fala ANTES de começar a escrever
+        await esperarRetomar();
+        if (!montado) return;
+
+        const passo = lista[i];
+
+        // O professor fala a explicação ANTES de escrever a linha.
         if (audioAtivoRef.current && passo.professor) {
           await speakChunked(passo.professor, { rate: 0.88 });
-          // Pausa curta após a fala antes de começar a escrever
-          await new Promise((resolve) => setTimeout(resolve, 600));
+          if (!montado) return;
+          await dormir(500);
         }
 
         setRevelados(i + 1);
         const texto = passo.expr;
+        // Velocidade adaptativa: contas longas não podem levar minutos.
+        const porChar = texto.length > 120 ? 24 : texto.length > 60 ? 45 : 80;
 
         for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
           if (!montado) return;
+          await esperarRetomar();
+          if (!montado) return;
           setCaracteresVisiveis((prev) => ({ ...prev, [i]: charIndex }));
-          await new Promise((resolve) => setTimeout(resolve, 150));
+          await dormir(porChar);
         }
+        // Garante a linha completa mesmo se algum tick foi perdido.
+        if (!montado) return;
+        setCaracteresVisiveis((prev) => ({ ...prev, [i]: texto.length }));
 
-        // Pausa após terminar de escrever a linha (respiro cognitivo)
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+        // Respiro cognitivo antes do próximo passo.
+        await dormir(1600);
       }
       if (montado) setEstahEscrevendo(false);
     }
@@ -1345,9 +1397,36 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     escreverTudo();
     return () => {
       montado = false;
+      limpadores.forEach((f) => f());
       stopSpeaking();
     };
-  }, [v, iniciou]);
+  }, [assinatura, iniciou, completo]);
+
+  const mostrarTudo = () => {
+    stopSpeaking();
+    setPausado(false);
+    setCompleto(true);
+    setIniciou(true);
+    setEstahEscrevendo(false);
+    setRevelados(total);
+    const cheio: { [key: number]: number } = {};
+    passos.forEach((p, i) => {
+      cheio[i] = p.expr.length;
+    });
+    setCaracteresVisiveis(cheio);
+  };
+
+  const reiniciar = () => {
+    stopSpeaking();
+    setCompleto(false);
+    setPausado(false);
+    setIniciou(false);
+    setRevelados(0);
+    setCaracteresVisiveis({});
+    setEstahEscrevendo(false);
+  };
+
+
 
   return (
     <div className="my-4 w-full max-w-3xl mx-auto px-0 sm:px-2 md:px-4">
@@ -1384,10 +1463,17 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
               >
                 Começar explicação passo a passo ▶
               </button>
-              <p className="text-[#8b5e3c]/60 text-[10px] sm:text-xs uppercase font-bold tracking-widest animate-pulse text-center">
+              <button
+                onClick={mostrarTudo}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] bg-[#8b5e3c]/5 px-4 py-2 rounded-full transition"
+              >
+                Ver a conta completa
+              </button>
+              <p className="text-[#8b5e3c]/60 text-[10px] sm:text-xs uppercase font-bold tracking-widest text-center">
                 Clique para ver o passo a passo
               </p>
             </div>
+
           ) : (
             <div className="flex flex-col items-center gap-4 md:gap-6">
 
@@ -1484,7 +1570,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
               <div
                 className="text-xl md:text-2xl font-black text-[#8b5e3c]"
-                style={{ fontFamily: "'Permanent Marker', cursive" }}
+                style={{ fontFamily: "'Nunito', sans-serif" }}
               >
                 {trinomio} = {fatorada}
               </div>
@@ -1492,29 +1578,40 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           )}
 
           {terminou && !fatorada && falha && (
-            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Nunito', sans-serif" }}>
               {falha}
             </div>
           )}
         </div>
       </div>
 
-      <div className="mt-2 flex justify-end">
-        {(iniciou || terminou) && (
+      {iniciou && (
+        <div className="mt-2 flex flex-wrap justify-end gap-2">
+          {!terminou && (
+            <>
+              <button
+                onClick={() => setPausado((p) => !p)}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full"
+              >
+                {pausado ? "▶ Continuar" : "⏸ Pausar"}
+              </button>
+              <button
+                onClick={mostrarTudo}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full"
+              >
+                ⏭ Ver tudo
+              </button>
+            </>
+          )}
           <button
-            onClick={() => {
-              stopSpeaking();
-              setIniciou(false);
-              setRevelados(0);
-              setCaracteresVisiveis({});
-              setEstahEscrevendo(false);
-            }}
+            onClick={reiniciar}
             className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/60 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full flex items-center gap-1"
           >
-            ↻ Reiniciar / Ver outra vez
+            ↻ Rever a explicação
           </button>
-        )}
-      </div>
+        </div>
+      )}
+
     </div>
   );
 }
