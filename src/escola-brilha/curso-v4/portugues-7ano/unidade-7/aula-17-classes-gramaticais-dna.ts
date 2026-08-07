@@ -78,7 +78,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que o estudo da morfologia analisa?",
-        opcoes: ["As classes e formas das palavras", "Apenas o som das letras", "O preço dos livros"],
+        opcoes: ["As classes e formas das palavras", "Apenas o som das letras", "O preço dos livros", "A quantidade de páginas do texto"],
         correta: 0,
         feedbackAcerto: "Análise molecular concluída. Você entende a forma.",
         feedbackErro: "Morfologia vem de 'morfos' (forma).",
