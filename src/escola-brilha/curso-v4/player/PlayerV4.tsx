@@ -621,6 +621,11 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
 
 function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
   const lousaAtiva = useLousaAtiva();
+  // Memoizado: sem isso a lousa é remontada a cada clique e a animação pula.
+  const lousasQ = useMemo(
+    () => m.perguntas.map((q) => (lousaAtiva ? lousaDeTexto(q.pergunta) : undefined)),
+    [lousaAtiva, m.perguntas],
+  );
 
   const [respostas, setRespostas] = useState<(number | null)[]>(
     m.perguntas.map(() => null),
