@@ -577,6 +577,8 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
   const textoMini = m.miniDesafio
     ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
     : "";
+  const lousaAtiva = useLousaAtiva();
+  const lousaMini = lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined;
   const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
   const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
@@ -587,8 +589,9 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
-      {mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
-      {mdMini && mdMini.operacao === "div" && (
+      {lousaMini && <RenderVisualMat v={lousaMini} />}
+      {!lousaMini && mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
+      {!lousaMini && mdMini && mdMini.operacao === "div" && (
         <InteracaoView
           i={{
             tipo: "contaPassoAPasso",
@@ -599,9 +602,10 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           }}
         />
       )}
-      {contaMini && (
+      {!lousaMini && contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
+
       {m.miniDesafio && <InteracaoView i={m.miniDesafio} />}
     </Card>
   );
