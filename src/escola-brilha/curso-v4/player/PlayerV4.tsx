@@ -163,9 +163,11 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           </div>
         </main>
       </div>
-      
+
     </div>
+    </LousaAtivaCtx.Provider>
   );
+
 }
 
 // ---------- Wrapper de seção ----------------------------------------
