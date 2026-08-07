@@ -1,0 +1,288 @@
+import type { AulaGeoV1 } from "../../types";
+import { url as lab } from "@/assets/ciencias-5ano/u4-a1/laboratorio.jpg.asset.json";
+import { url as aguaOleo } from "@/assets/ciencias-5ano/u4-a1/agua-oleo.jpg.asset.json";
+import { url as filtro } from "@/assets/ciencias-5ano/u4-a1/filtracao.jpg.asset.json";
+import { url as vapor } from "@/assets/ciencias-5ano/u4-a1/evaporacao.jpg.asset.json";
+import { url as gelo } from "@/assets/ciencias-5ano/u4-a1/gelo-agua.jpg.asset.json";
+
+export const aula02: AulaGeoV1 = {
+  slug: "aula-02-consumo-consciente",
+  titulo: "Consumo Consciente e Reciclagem",
+  iconeTrilha: "♻️",
+  bncc: ["EF05CI05"],
+  duracaoMin: 30,
+
+  cena01_motivacao: {
+    tipo: "mesaCartografo",
+    instrucao: "Passe a lupa pela bancada. Ache os materiais que podem ser reduzidos, reutilizados ou reciclados.",
+    mapaUrl: lab,
+    imagemDestaqueUrl: filtro,
+    aurora: "Todo objeto que você usa vem de algum recurso da natureza e, um dia, vira LIXO. A boa notícia: dá pra reduzir esse impacto com 3 atitudes — reduzir, reutilizar e reciclar.",
+    falaFinal: "Consumo consciente começa antes de comprar — e continua depois de descartar.",
+  },
+
+  cena02_previsao: {
+    tipo: "votoExplorador",
+    aurora: "Uma garrafa PET, se jogada no meio ambiente, leva cerca de 400 anos pra se decompor. O que fazer com ela antes de jogar fora?",
+    pergunta: "Qual o melhor destino pra uma garrafa PET usada?",
+    fotoUrl: aguaOleo,
+    opcoes: [
+      { id: "reciclar", titulo: "RECICLAR", subtitulo: "separar e encaminhar à coleta seletiva", emoji: "♻️", cor: "from-emerald-400 to-green-700" },
+      { id: "lixo", titulo: "LIXO COMUM", subtitulo: "misturar com o resto", emoji: "🗑️", cor: "from-slate-400 to-slate-700" },
+    ],
+    respostaCerta: "reciclar",
+    feedbackAcerto: "Certo. Separada corretamente, a garrafa PET pode virar fibra de tecido, outra garrafa ou até tapete.",
+    feedbackErro: "Misturada ao lixo comum, ela vai pro aterro e leva séculos pra se decompor. O certo é RECICLAR.",
+    falaFinal: "Separar o lixo é o primeiro passo pra fechar o ciclo dos materiais.",
+  },
+
+  cena03_vocabulario: {
+    tipo: "cadernosCampo",
+    aurora: "Cinco palavras que organizam o consumo consciente.",
+    instrucao: "Vocabulário do consumo consciente",
+    cadernos: [
+      { id: "reduzir", capa: "REDUZIR", emoji: "⬇️", cor: "from-cyan-500 to-sky-700",
+        conteudo: "Consumir menos: comprar só o necessário e evitar desperdício de água, energia e materiais.",
+        exemplo: "Ex.: levar sacola reutilizável ao mercado em vez de pegar sacola plástica nova.", fotoUrl: lab },
+      { id: "reutilizar", capa: "REUTILIZAR", emoji: "🔁", cor: "from-teal-500 to-emerald-700",
+        conteudo: "Usar de novo um objeto, com a mesma função ou uma nova, antes de descartar.",
+        exemplo: "Ex.: usar potes de vidro de conserva pra guardar temperos.", fotoUrl: aguaOleo },
+      { id: "reciclar", capa: "RECICLAR", emoji: "♻️", cor: "from-emerald-500 to-green-700",
+        conteudo: "Transformar um material usado (papel, vidro, plástico, metal) em matéria-prima pra fabricar algo novo.",
+        exemplo: "Ex.: latas de aluminio recicladas voltam ao mercado em cerca de 60 dias.", fotoUrl: filtro },
+      { id: "coletaseletiva", capa: "COLETA SELETIVA", emoji: "🗑️", cor: "from-amber-500 to-orange-700",
+        conteudo: "Separação do lixo por tipo de material (papel, plástico, vidro, metal, orgânico) antes da coleta.",
+        exemplo: "Ex.: lixeiras azul (papel), vermelha (plástico), verde (vidro), amarela (metal).", fotoUrl: lab },
+      { id: "aterro", capa: "ATERRO SANITÁRIO", emoji: "⛰️", cor: "from-slate-500 to-slate-700",
+        conteudo: "Local planejado para depositar o lixo que não pode ser reciclado, com controle para não contaminar solo e água.",
+        exemplo: "Ex.: lixões a céu aberto (sem controle) contaminam rios; aterros sanitários são controlados.", fotoUrl: vapor },
+    ],
+    falaFinal: "Reduzir, reutilizar, reciclar, coleta seletiva, aterro. Cinco peças do ciclo do lixo.",
+  },
+
+  cena04_leituraGuiada: {
+    tipo: "narrarMapa",
+    aurora: "A bancada dos 3 Rs. Toca em cada ponto pra entender a ordem de prioridade.",
+    instrucao: "Toque em cada ponto",
+    mapaUrl: lab,
+    pontos: [
+      { id: "reduzir", x: 20, y: 40, emoji: "⬇️", cor: "from-cyan-500 to-sky-700",
+        titulo: "1º Reduzir", texto: "É a atitude mais importante: evitar consumir e gerar lixo desde o início.",
+        fotoUrl: lab },
+      { id: "reutilizar", x: 50, y: 55, emoji: "🔁", cor: "from-teal-500 to-emerald-700",
+        titulo: "2º Reutilizar", texto: "Antes de descartar, pense se o objeto pode servir de novo, mesmo com outra função.",
+        fotoUrl: aguaOleo },
+      { id: "reciclar", x: 80, y: 40, emoji: "♻️", cor: "from-emerald-500 to-green-700",
+        titulo: "3º Reciclar", texto: "Se não pode ser reutilizado, separe corretamente para virar matéria-prima nova.",
+        fotoUrl: filtro },
+    ],
+    falaFinal: "A ordem importa: primeiro reduzir, depois reutilizar, só então reciclar.",
+  },
+
+  cena05_compreensao: {
+    tipo: "quizRadar",
+    aurora: "3 perguntas de consumo consciente.",
+    instrucao: "Toque no card certo",
+    perguntas: [
+      { id: "q1", pergunta: "Qual é a atitude MAIS importante entre os 3 Rs?",
+        fotoUrl: lab,
+        cards: [
+          { id: "a", emoji: "⬇️", titulo: "Reduzir (consumir menos)", cor: "from-cyan-500 to-sky-700" },
+          { id: "b", emoji: "♻️", titulo: "Reciclar (transformar depois)", cor: "from-emerald-500 to-green-700" },
+          { id: "c", emoji: "🛍️", titulo: "Comprar mais", cor: "from-red-500 to-rose-700" },
+        ], correta: "a",
+        feedbackAcerto: "Isso. Reduzir evita o problema antes de existir — é a prioridade número 1.",
+        feedbackErro: "Reciclar ajuda, mas o melhor é nem gerar o lixo. Prioridade é REDUZIR." },
+      { id: "q2", pergunta: "Quanto tempo uma garrafa PET pode levar para se decompor na natureza?",
+        fotoUrl: aguaOleo,
+        cards: [
+          { id: "a", emoji: "⏳", titulo: "Cerca de 400 anos", cor: "from-emerald-500 to-green-700" },
+          { id: "b", emoji: "🍌", titulo: "Poucas semanas", cor: "from-red-500 to-rose-700" },
+          { id: "c", emoji: "📅", titulo: "1 ano", cor: "from-slate-500 to-slate-700" },
+        ], correta: "a",
+        feedbackAcerto: "Correto. Plástico é um material de decomposição muito lenta.",
+        feedbackErro: "Plástico demora MUITO — cerca de 400 anos. Por isso reciclar é tão importante." },
+      { id: "q3", pergunta: "O que é coleta seletiva?",
+        fotoUrl: filtro,
+        cards: [
+          { id: "a", emoji: "🗑️", titulo: "Separar o lixo por tipo de material", cor: "from-amber-500 to-orange-700" },
+          { id: "b", emoji: "🔥", titulo: "Queimar todo o lixo junto", cor: "from-red-500 to-rose-700" },
+          { id: "c", emoji: "🚫", titulo: "Não descartar nada", cor: "from-slate-500 to-slate-700" },
+        ], correta: "a",
+        feedbackAcerto: "Sim. Separar por material facilita muito a reciclagem.",
+        feedbackErro: "Coleta seletiva é SEPARAR o lixo por tipo — papel, plástico, vidro, metal." },
+    ],
+    falaFinal: "Você já entende os fundamentos do consumo consciente.",
+  },
+
+  cena06_personagensLugar: {
+    tipo: "mapaCamadas",
+    aurora: "A bancada divide-se em duas zonas: MATERIAIS RECICLÁVEIS e DESTINO FINAL (aterro). Liga cada uma.",
+    instrucao: "Toque nos interruptores",
+    mapaUrl: lab,
+    camadas: [
+      { id: "reciclaveis", rotulo: "Recicláveis", emoji: "♻️", cor: "from-emerald-500 to-green-700",
+        rect: { x: 2, y: 30, w: 48, h: 65 },
+        descricao: "Papel, plástico, vidro e metal separados corretamente podem voltar a ser matéria-prima.",
+        fotoUrl: filtro },
+      { id: "aterro", rotulo: "Aterro Sanitário", emoji: "⛰️", cor: "from-slate-500 to-slate-700",
+        rect: { x: 50, y: 30, w: 48, h: 65 },
+        descricao: "O que não pode ser reciclado (lixo orgânico não compostado, alguns rejeitos) vai para um aterro controlado.",
+        fotoUrl: vapor },
+    ],
+    falaFinal: "Separar bem reduz o que sobra pro aterro — e o aterro dura mais tempo.",
+  },
+
+  cena07_sequencia: {
+    tipo: "linhaEstrada",
+    aurora: "Monte a jornada de uma garrafa PET reciclada, do descarte até virar produto novo.",
+    instrucao: "Toque nas paradas na ORDEM correta",
+    pergunta: "Qual o caminho da reciclagem?",
+    paradas: [
+      { id: "descarte", emoji: "🚮", rotulo: "1. Descarte correto", descricao: "A garrafa é lavada e colocada na lixeira de plástico.", fotoUrl: lab },
+      { id: "coleta", emoji: "🚛", rotulo: "2. Coleta seletiva", descricao: "Caminhão recolhe os materiais já separados por tipo.", fotoUrl: filtro },
+      { id: "triagem", emoji: "🔍", rotulo: "3. Triagem", descricao: "Numa cooperativa, trabalhadores separam por tipo de plástico.", fotoUrl: aguaOleo },
+      { id: "processamento", emoji: "🏭", rotulo: "4. Processamento", descricao: "O material é triturado, lavado e transformado em flocos ou fios.", fotoUrl: vapor },
+      { id: "produtonovo", emoji: "🧵", rotulo: "5. Produto novo", descricao: "Os flocos viram tecido, nova garrafa ou outro objeto.", fotoUrl: gelo },
+    ],
+    ordemCerta: ["descarte", "coleta", "triagem", "processamento", "produtonovo"],
+    feedbackAcerto: "Rota completa. Cada etapa depende da anterior ter sido feita corretamente.",
+    feedbackErro: "Repense: primeiro descartamos, depois é coletado, triado, processado e só então volta como produto novo.",
+    falaFinal: "Reciclar é uma cadeia de etapas — todas dependem de você separar bem em casa.",
+  },
+
+  cena08_voceLe: {
+    tipo: "voceLeSozinho",
+    aurora: "Sua leitura. Estuda o diário do educador ambiental.",
+    tituloLivro: "📓 Diário do Educador Ambiental",
+    subtitulo: "Consumo consciente na prática",
+    paragrafos: [
+      { id: "p1", texto:
+          "Todo objeto que compramos usa RECURSOS NATURAIS — água, energia, madeira, minérios. Quanto mais consumimos sem necessidade, mais recursos gastamos e mais LIXO geramos. Por isso, REDUZIR o consumo é a primeira e mais eficaz atitude.",
+        chaves: ["recursos naturais", "reduzir"],
+        definicoes: {
+          "recursos naturais": "Materiais que a natureza oferece e que usamos para fabricar produtos.",
+          reduzir: "Consumir menos e evitar desperdício.",
+        }, fotoUrl: lab },
+      { id: "p2", texto:
+          "Antes de jogar algo fora, pergunte: posso REUTILIZAR? Um pote de vidro pode guardar temperos; uma camiseta velha pode virar pano de limpeza. Reutilizar dá uma segunda vida ao objeto sem gastar novos recursos.",
+        chaves: ["reutilizar"],
+        definicoes: {
+          reutilizar: "Usar de novo um objeto, com a mesma função ou outra.",
+        }, fotoUrl: aguaOleo },
+      { id: "p3", texto:
+          "Quando não há mais como reutilizar, resta RECICLAR: separar o material por tipo (papel, plástico, vidro, metal) na COLETA SELETIVA. Isso permite transformar o lixo em matéria-prima nova, e reduz a quantidade que vai pro ATERRO SANITÁRIO.",
+        chaves: ["reciclar", "coleta seletiva", "aterro sanitário"],
+        definicoes: {
+          reciclar: "Transformar material usado em matéria-prima para um produto novo.",
+          "coleta seletiva": "Separação do lixo por tipo de material antes da coleta.",
+          "aterro sanitário": "Local controlado para depositar o que não pode ser reciclado.",
+        }, fotoUrl: filtro },
+    ],
+    falaFinal: "Você agora sabe transformar o próprio consumo — desde a compra até o descarte.",
+  },
+
+  cena09_minijogo: {
+    tipo: "construtorMarcos",
+    aurora: "Simulador. Cada rodada mostra uma situação — escolha a atitude certa dos 3 Rs.",
+    instrucao: "⏱️ Leia e escolha a atitude correta",
+    duracaoSegundos: 20,
+    pecas: [
+      { id: "reduzir", emoji: "⬇️", rotulo: "Reduzir" },
+      { id: "reutilizar", emoji: "🔁", rotulo: "Reutilizar" },
+      { id: "reciclar", emoji: "♻️", rotulo: "Reciclar" },
+    ],
+    rodadas: [
+      { id: "r1", municipioA: { nome: "Levar sacola de tecido ao mercado", emoji: "🛍️", cor: "from-cyan-500 to-sky-700" },
+        municipioB: { nome: "Evitar sacola plástica nova", emoji: "🚫", cor: "from-cyan-500 to-sky-700" },
+        contexto: "Você evita gerar lixo desde o início, sem nem precisar da sacola plástica.",
+        pecaCertaId: "reduzir", fotoUrl: lab,
+        feedbackAcerto: "Sim. Evitar consumo desde o início = REDUZIR.",
+        feedbackErro: "Evitar gerar lixo é a atitude de REDUZIR." },
+      { id: "r2", municipioA: { nome: "Pote de vidro vira porta-lápis", emoji: "🖊️", cor: "from-teal-500 to-emerald-700" },
+        municipioB: { nome: "Novo uso, sem descartar", emoji: "🔁", cor: "from-teal-500 to-emerald-700" },
+        contexto: "Um objeto que seria jogado fora ganha uma nova função em casa.",
+        pecaCertaId: "reutilizar", fotoUrl: aguaOleo,
+        feedbackAcerto: "Perfeito. Dar novo uso ao objeto = REUTILIZAR.",
+        feedbackErro: "Usar de novo com outra função é REUTILIZAR." },
+      { id: "r3", municipioA: { nome: "Latas de aluminio separadas", emoji: "🥫", cor: "from-emerald-500 to-green-700" },
+        municipioB: { nome: "Virarão matéria-prima nova", emoji: "🏭", cor: "from-emerald-500 to-green-700" },
+        contexto: "As latas são separadas e enviadas pra indústria que as transforma em novo alumínio.",
+        pecaCertaId: "reciclar", fotoUrl: filtro,
+        feedbackAcerto: "Isso. Transformar material usado em matéria-prima = RECICLAR.",
+        feedbackErro: "Virar matéria-prima nova é o processo de RECICLAR." },
+      { id: "r4", municipioA: { nome: "Comprar só o necessário", emoji: "🛒", cor: "from-cyan-500 to-sky-700" },
+        municipioB: { nome: "Evitar desperdício", emoji: "⬇️", cor: "from-cyan-500 to-sky-700" },
+        contexto: "Antes de comprar, você pensa se realmente precisa daquele item.",
+        pecaCertaId: "reduzir", fotoUrl: lab,
+        feedbackAcerto: "Sim. Comprar só o necessário = REDUZIR.",
+        feedbackErro: "Evitar consumo desnecessário é REDUZIR." },
+      { id: "r5", municipioA: { nome: "Caixa de papelão vira caixa de brinquedos", emoji: "📦", cor: "from-teal-500 to-emerald-700" },
+        municipioB: { nome: "Nova função no dia a dia", emoji: "🧸", cor: "from-teal-500 to-emerald-700" },
+        contexto: "Uma embalagem que seria descartada ganha função de organizador.",
+        pecaCertaId: "reutilizar", fotoUrl: vapor,
+        feedbackAcerto: "Perfeito. Dar uma nova função ao objeto = REUTILIZAR.",
+        feedbackErro: "Reaproveitar com nova função é REUTILIZAR." },
+    ],
+    falaFinal: "Você distingue os 3 Rs em situações reais do dia a dia.",
+  },
+
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "O consumo consciente em duas fatias: REDUZIR (a atitude mais forte) e REUTILIZAR/RECICLAR (o que fazer com o que já existe).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: lab,
+    fatias: [
+      { id: "reduzir", rotulo: "Reduzir", emoji: "⬇️", percentual: 45, cor: "#0891b2",
+        descricao: "A atitude mais eficaz: evitar consumir e gerar lixo desde o início.",
+        exemplos: ["Sacola reutilizável", "Comprar só o necessário", "Evitar desperdício de água"], fotoUrl: lab },
+      { id: "reutilizar", rotulo: "Reutilizar e reciclar", emoji: "♻️", percentual: 55, cor: "#059669",
+        descricao: "Dar novo uso ao objeto antes de descartar e, quando não der mais, transformar o material em matéria-prima para produtos novos.",
+        exemplos: ["Pote de vidro reaproveitado", "Camiseta velha em pano", "Coleta seletiva"], fotoUrl: aguaOleo },
+    ],
+    falaFinal: "Reduzir pesa mais, mas os três Rs trabalham juntos pra diminuir o impacto ambiental.",
+  },
+
+
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "3 perguntas — carteira de Agente Ambiental Júnior te espera.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: lab,
+    perguntas: [
+      { id: "q1", pergunta: "Qual dos 3 Rs deve ser priorizado primeiro?",
+        fotoUrl: lab,
+        opcoes: [
+          { id: "a", texto: "Reduzir o consumo", correta: true },
+          { id: "b", texto: "Reciclar tudo depois de usar" },
+        ],
+        feedbackAcerto: "Sim. Reduzir evita o problema antes de existir.",
+        feedbackErro: "Reciclar ajuda, mas REDUZIR é sempre a prioridade número 1." },
+      { id: "q2", pergunta: "O que é coleta seletiva?",
+        fotoUrl: filtro,
+        opcoes: [
+          { id: "a", texto: "Separar o lixo por tipo de material", correta: true },
+          { id: "b", texto: "Misturar tudo num único saco" },
+        ],
+        feedbackAcerto: "Correto. Separar facilita muito a reciclagem.",
+        feedbackErro: "Coleta seletiva é SEPARAR por tipo de material." },
+      { id: "q3", pergunta: "Para onde vai o material que não pode ser reciclado?",
+        fotoUrl: vapor,
+        opcoes: [
+          { id: "a", texto: "Aterro sanitário controlado", correta: true },
+          { id: "b", texto: "Rio ou mar" },
+        ],
+        feedbackAcerto: "Sim. Aterro sanitário é planejado para não contaminar o ambiente.",
+        feedbackErro: "Jogar em rios contamina a água. O correto é o ATERRO SANITÁRIO controlado." },
+    ],
+    selo: {
+      nome: "Agente Ambiental Júnior",
+      subtitulo: "Missão Planeta Vivo · Laboratório 4 concluído",
+      emoji: "♻️",
+      cor: "from-emerald-400 via-green-500 to-teal-700",
+    },
+    falaFinal: "Agente ambiental júnior aprovado. Cada gesto pequeno reduz o impacto no planeta.",
+  },
+
+  recompensa: { xp: 150, moedas: 30, medalha: "Agente Ambiental Júnior" },
+};

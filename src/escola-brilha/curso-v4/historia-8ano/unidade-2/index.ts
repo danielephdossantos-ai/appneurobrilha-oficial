@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-revolucao-industrial";
+import { aula02 } from "./aula-02-circulacao-industrial";
 
 export const unidade2: UnidadeGeoV1 = {
   slug: "unidade-2",
@@ -9,5 +10,5 @@ export const unidade2: UnidadeGeoV1 = {
   descricao:
     "Vapor, tear, fábrica. A Inglaterra industrial cria o proletariado, a burguesia industrial e o capitalismo moderno.",
   corTema: "#0891b2",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };
