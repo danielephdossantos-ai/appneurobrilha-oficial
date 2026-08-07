@@ -53,6 +53,16 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.15)",
   },
   {
+    to: "/plano-neuro",
+    title: "Plano Neuro",
+    subtitle: "Rotina do Neuro Treino",
+    gradient: "from-[#F472B6] via-[#EC4899] to-[#9D174D]",
+    glow: "rgba(244,114,182,0.7)",
+    emoji: "🧠",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+
     to: "/escola-brilha",
     title: "Escola Brilha",
     subtitle: "Aulas de verdade",
