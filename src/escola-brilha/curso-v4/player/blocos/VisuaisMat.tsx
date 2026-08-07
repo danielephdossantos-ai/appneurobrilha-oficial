@@ -1585,22 +1585,33 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         </div>
       </div>
 
-      <div className="mt-2 flex justify-end">
-        {(iniciou || terminou) && (
+      {iniciou && (
+        <div className="mt-2 flex flex-wrap justify-end gap-2">
+          {!terminou && (
+            <>
+              <button
+                onClick={() => setPausado((p) => !p)}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full"
+              >
+                {pausado ? "▶ Continuar" : "⏸ Pausar"}
+              </button>
+              <button
+                onClick={mostrarTudo}
+                className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/70 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full"
+              >
+                ⏭ Ver tudo
+              </button>
+            </>
+          )}
           <button
-            onClick={() => {
-              stopSpeaking();
-              setIniciou(false);
-              setRevelados(0);
-              setCaracteresVisiveis({});
-              setEstahEscrevendo(false);
-            }}
+            onClick={reiniciar}
             className="text-[11px] font-black uppercase tracking-widest text-[#8b5e3c]/60 hover:text-[#8b5e3c] transition bg-[#8b5e3c]/5 px-4 py-2 rounded-full flex items-center gap-1"
           >
-            ↻ Reiniciar / Ver outra vez
+            ↻ Rever a explicação
           </button>
-        )}
-      </div>
+        </div>
+      )}
+
     </div>
   );
 }
