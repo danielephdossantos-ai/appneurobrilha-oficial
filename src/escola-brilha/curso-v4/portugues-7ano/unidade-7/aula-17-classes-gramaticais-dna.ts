@@ -188,7 +188,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual a classe da palavra 'Lentamente'?",
-        opcoes: ["Advérbio", "Substantivo", "Verbo"],
+        opcoes: ["Advérbio", "Substantivo", "Verbo", "Preposição"],
         correta: 0,
         feedbackAcerto: "Identificação correta. Modo de ação.",
         feedbackErro: "Lentamente indica uma ação ou como ela é feita?",

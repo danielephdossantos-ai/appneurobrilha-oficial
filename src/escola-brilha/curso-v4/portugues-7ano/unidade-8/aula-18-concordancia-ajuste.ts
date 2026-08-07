@@ -169,7 +169,7 @@ export const aula18: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Por que dizemos 'O grupo chegou' e não 'O grupo chegaram'?",
-        opcoes: ["Porque o núcleo (Grupo) está no singular", "Porque o grupo tem poucas pessoas", "Porque o verbo decide sozinho"],
+        opcoes: ["Porque o núcleo (Grupo) está no singular", "Porque o grupo tem poucas pessoas", "Porque o verbo decide sozinho", "Porque a frase é curta"],
         correta: 0,
         feedbackAcerto: "Análise avançada. Você não caiu na armadilha do plural próximo.",
         feedbackErro: "Quem é o líder da frase: 'Grupo' ou 'Analistas'?",
@@ -189,7 +189,7 @@ export const aula18: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual frase está com a concordância CORRETA?",
-        opcoes: ["Os arquivos foram salvos", "As arquivo foi salvo", "Os arquivo foram salvo"],
+        opcoes: ["Os arquivos foram salvos", "As arquivo foi salvo", "Os arquivo foram salvo", "O arquivos foi salvos"],
         correta: 0,
         feedbackAcerto: "Sincronia perfeita.",
         feedbackErro: "Verifique se plural combina com plural em todas as palavras.",

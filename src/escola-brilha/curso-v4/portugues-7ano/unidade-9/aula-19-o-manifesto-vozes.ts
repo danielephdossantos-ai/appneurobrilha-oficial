@@ -173,7 +173,7 @@ export const aula19: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual a lição final sobre o domínio da linguagem?",
-        opcoes: ["Usar o poder com ética e responsabilidade", "Apenas ganhar moedas digitais", "Falar o mais difícil possível"],
+        opcoes: ["Usar o poder com ética e responsabilidade", "Apenas ganhar moedas digitais", "Falar o mais difícil possível", "Escrever sem pensar no leitor"],
         correta: 0,
         feedbackAcerto: "Mestre Analista! A ética é o firewall do caráter.",
         feedbackErro: "O poder sem ética é apenas ruído perigoso.",
@@ -193,7 +193,7 @@ export const aula19: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual pronome é a marca registrada de um Manifesto?",
-        opcoes: ["Nós", "Eu", "Eles"],
+        opcoes: ["Nós", "Eu", "Eles", "Você"],
         correta: 0,
         feedbackAcerto: "Perfeito. É a voz da união.",
         feedbackErro: "O manifesto quer unir ou separar?",
