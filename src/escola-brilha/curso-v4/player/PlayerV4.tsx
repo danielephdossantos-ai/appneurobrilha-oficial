@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, Fragment } from "react";
+import { useState, useRef, useEffect, useMemo, useContext, createContext, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
@@ -8,6 +8,8 @@ import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
+import { cursoUsaLousa, lousaDeTexto, lousaDePassos } from "./blocos/lousa-auto";
+
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 
@@ -28,6 +30,27 @@ function aplicarNome(texto: string, nome?: string): string {
     .replace(/^\s*[,\-–—]\s*/, "")
     .replace(/^./, (c) => c.toUpperCase());
 }
+
+/**
+ * Lousa interativa automática (padrão Pip Teen Roqueiro).
+ * Ativa em todo curso de matemática do 5º ao 9º ano: qualquer conta que
+ * apareça numa cena vira lousa escrita passo a passo, com a fala do
+ * professor em cada linha.
+ */
+const LousaAtivaCtx = createContext(false);
+
+export function useLousaAtiva() {
+  return useContext(LousaAtivaCtx);
+}
+
+/** Renderiza a lousa interativa se houver conta no texto. Senão, null. */
+function LousaConta({ texto }: { texto: string }) {
+  const ativa = useLousaAtiva();
+  const lousa = useMemo(() => (ativa ? lousaDeTexto(texto) : undefined), [ativa, texto]);
+  if (!lousa) return null;
+  return <RenderVisualMat v={lousa} />;
+}
+
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
@@ -78,7 +101,9 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   useEffect(() => () => stopSpeaking(), []);
 
   return (
+    <LousaAtivaCtx.Provider value={cursoUsaLousa(cursoSlug)}>
     <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#1e3a8a] text-white">
+
       <header className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link to="/escola-brilha/curso/$slug" params={{ slug: cursoSlug }} className="text-sm text-white/70 hover:text-white">
@@ -138,9 +163,11 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
           </div>
         </main>
       </div>
-      
+
     </div>
+    </LousaAtivaCtx.Provider>
   );
+
 }
 
 // ---------- Wrapper de seção ----------------------------------------
@@ -342,6 +369,10 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
               )}
               {e.contaArmada && <ContaArmada {...e.contaArmada} />}
               {e.casasValor && <CasasValor {...e.casasValor} />}
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && (
+                <LousaConta texto={`${e.texto} ${e.exemplo ?? ""}`} />
+              )}
+
               {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && e.imagemUrl && (
                 <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
               )}
@@ -357,6 +388,17 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
   const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
+  const lousaAtiva = useLousaAtiva();
+  // 5º ao 9º: se a cena não trouxe visual próprio, montamos a lousa interativa
+  // a partir da conta do enunciado (ou dos passos escritos da aula).
+  const lousaAuto = useMemo(() => {
+    if (!lousaAtiva || m.visualMat || m.contaPassoAPasso || m.colecaoVisual) return undefined;
+    return (
+      lousaDeTexto(m.enunciado) ??
+      lousaDePassos({ titulo: m.enunciado, passos: m.passos, resposta: m.resposta })
+    );
+  }, [lousaAtiva, m]);
+
   return (
     <Card>
       <div className="text-sm text-amber-300 mb-2">🧠 Brilha explica na lousa:</div>
@@ -430,18 +472,23 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
         m.casasValor && <CasasValor {...m.casasValor} />
       )}
 
+      {lousaAuto && <RenderVisualMat v={lousaAuto} />}
+
       {!m.colecaoVisual && !m.casasValor && !m.contaPassoAPasso && m.visualUrl && (
         <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
       )}
 
-      <div className="space-y-2 bg-white/5 rounded-lg p-4">
-        {m.passos.map((p, i) => (
-          <div key={i} className="flex gap-2">
-            <span className="text-amber-300">→</span>
-            <span>{p}</span>
-          </div>
-        ))}
-      </div>
+      {!lousaAuto && (
+        <div className="space-y-2 bg-white/5 rounded-lg p-4">
+          {m.passos.map((p, i) => (
+            <div key={i} className="flex gap-2">
+              <span className="text-amber-300">→</span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="text-xl font-bold text-amber-300">
         Resposta: {m.resposta}
       </div>
@@ -457,9 +504,16 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
  * inteiro em Nós fazemos / Você faz / Na vida real, igual em Brilha resolve.
  */
 function ExplicacaoContaAuto({ texto }: { texto: string }) {
+  const lousaAtiva = useLousaAtiva();
   const conta = detectarContaNoTexto(texto);
   const md = detectarMultDivNoTexto(texto);
+  // 5º ao 9º ano: toda conta vira LOUSA INTERATIVA (padrão Pip Teen Roqueiro).
+  if (lousaAtiva) {
+    const lousa = lousaDeTexto(texto);
+    if (lousa) return <RenderVisualMat v={lousa} />;
+  }
   if (md?.operacao === "div") {
+
     const q = Math.floor(md.a / md.b);
     return (
       <InteracaoView
@@ -527,6 +581,8 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
   const textoMini = m.miniDesafio
     ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
     : "";
+  const lousaAtiva = useLousaAtiva();
+  const lousaMini = lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined;
   const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
   const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
@@ -537,8 +593,9 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           <li key={i}>• {p}</li>
         ))}
       </ul>
-      {mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
-      {mdMini && mdMini.operacao === "div" && (
+      {lousaMini && <RenderVisualMat v={lousaMini} />}
+      {!lousaMini && mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
+      {!lousaMini && mdMini && mdMini.operacao === "div" && (
         <InteracaoView
           i={{
             tipo: "contaPassoAPasso",
@@ -549,15 +606,18 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
           }}
         />
       )}
-      {contaMini && (
+      {!lousaMini && contaMini && (
         <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
       )}
+
       {m.miniDesafio && <InteracaoView i={m.miniDesafio} />}
     </Card>
   );
 }
 
 function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
+  const lousaAtiva = useLousaAtiva();
+
   const [respostas, setRespostas] = useState<(number | null)[]>(
     m.perguntas.map(() => null),
   );
@@ -574,6 +634,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
         const md = detectarMultDivNoTexto(q.pergunta);
+        const lousaQ = lousaAtiva ? lousaDeTexto(q.pergunta) : undefined;
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
@@ -583,8 +644,9 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
             </span>
             <div className="font-medium">{q.pergunta}</div>
           </div>
-          {md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
-          {md && md.operacao === "div" && (
+          {lousaQ && <RenderVisualMat v={lousaQ} />}
+          {!lousaQ && md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
+          {!lousaQ && md && md.operacao === "div" && (
             <InteracaoView
               i={{
                 tipo: "contaPassoAPasso",
@@ -595,9 +657,10 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
               }}
             />
           )}
-          {conta && (
+          {!lousaQ && conta && (
             <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
           )}
+
           {ehSubtracaoInterativa ? (
             <div className="mb-3 flex flex-col items-center gap-3">
               <div className="rounded-2xl bg-white/5 border border-white/15 p-3 w-full max-w-md">
