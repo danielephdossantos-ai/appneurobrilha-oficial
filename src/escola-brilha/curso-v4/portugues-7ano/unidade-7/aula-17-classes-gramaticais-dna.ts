@@ -78,7 +78,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que o estudo da morfologia analisa?",
-        opcoes: ["As classes e formas das palavras", "Apenas o som das letras", "O preço dos livros"],
+        opcoes: ["As classes e formas das palavras", "Apenas o som das letras", "O preço dos livros", "A quantidade de páginas do texto"],
         correta: 0,
         feedbackAcerto: "Análise molecular concluída. Você entende a forma.",
         feedbackErro: "Morfologia vem de 'morfos' (forma).",
@@ -168,7 +168,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual palavra no texto é uma Conjunção de conclusão?",
-        opcoes: ["Portanto", "Enquanto", "Sem"],
+        opcoes: ["Portanto", "Enquanto", "Sem", "Muito"],
         correta: 0,
         feedbackAcerto: "Excelente. Você captou a 'cola' lógica.",
         feedbackErro: "Busque a palavra que encerra o raciocínio.",
@@ -188,7 +188,7 @@ export const aula17: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual a classe da palavra 'Lentamente'?",
-        opcoes: ["Advérbio", "Substantivo", "Verbo"],
+        opcoes: ["Advérbio", "Substantivo", "Verbo", "Preposição"],
         correta: 0,
         feedbackAcerto: "Identificação correta. Modo de ação.",
         feedbackErro: "Lentamente indica uma ação ou como ela é feita?",

@@ -84,7 +84,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que o texto sugere como firewall contra a manipulação?",
-        opcoes: ["Desenvolver um olhar crítico", "Desligar o sistema", "Acreditar em tudo"],
+        opcoes: ["Desenvolver um olhar crítico", "Ler apenas as manchetes", "Confiar em quem tem mais seguidores", "Repetir a opinião da maioria"],
         correta: 0,
         feedbackAcerto: "Proteção ativada. O pensamento crítico é sua melhor defesa.",
         feedbackErro: "Verifique o último parágrafo do arquivo.",
@@ -175,7 +175,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual conector indica o fechamento da tese no editorial?",
-        opcoes: ["Portanto", "Mas", "Porém"],
+        opcoes: ["Portanto", "Mas", "Porém", "Entretanto"],
         correta: 0,
         feedbackAcerto: "Excelente. 'Portanto' sinaliza a conclusão lógica do autor.",
         feedbackErro: "Procure a palavra que inicia o último parágrafo.",
@@ -195,7 +195,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que é uma 'Tese' em um texto?",
-        opcoes: ["A ideia central defendida", "Um erro de sistema", "Uma palavra aleatória"],
+        opcoes: ["A ideia central defendida", "Um erro de sistema", "Uma palavra aleatória", "O número de linhas do texto"],
         correta: 0,
         feedbackAcerto: "Identificação correta.",
         feedbackErro: "Tese é o núcleo do argumento.",

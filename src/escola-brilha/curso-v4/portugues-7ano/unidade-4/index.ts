@@ -1,8 +1,12 @@
-import { aula11 } from "../../portugues-6ano/unidade-4/aula-11-propaganda-persuasao";
-import { aula12 } from "../../portugues-6ano/unidade-4/aula-12-divulgacao-cientifica";
+import { aula16 } from "./aula-16-modalizacao";
+import { aula17 } from "./aula-17-texto-publicitario";
+import { aula18 } from "./aula-18-pesquisa-com-fontes";
+import { aula19 } from "./aula-19-resumo-e-parafrase";
+import { aula20 } from "./aula-20-divulgacao-cientifica";
 
 export const unidade4 = {
   id: "unidade-4",
+  numero: 4,
   titulo: "Mídias e Verdades",
-  aulas: [aula11, aula12],
+  aulas: [aula16, aula17, aula18, aula19, aula20],
 };
