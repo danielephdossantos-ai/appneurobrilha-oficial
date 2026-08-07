@@ -175,7 +175,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual conector indica o fechamento da tese no editorial?",
-        opcoes: ["Portanto", "Mas", "Porém"],
+        opcoes: ["Portanto", "Mas", "Porém", "Entretanto"],
         correta: 0,
         feedbackAcerto: "Excelente. 'Portanto' sinaliza a conclusão lógica do autor.",
         feedbackErro: "Procure a palavra que inicia o último parágrafo.",
