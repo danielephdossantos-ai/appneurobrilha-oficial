@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, Fragment } from "react";
+import { useState, useRef, useEffect, useMemo, useContext, createContext, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
@@ -8,6 +8,8 @@ import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
 import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
+import { cursoUsaLousa, lousaDeTexto, lousaDePassos } from "./blocos/lousa-auto";
+
 import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
 import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
 
