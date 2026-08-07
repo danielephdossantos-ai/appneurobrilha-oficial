@@ -1,8 +1,8 @@
 import { aula01 } from "./aula-01-scan-de-argumentos";
-import { aula02 } from "../../portugues-6ano/unidade-1/aula-02-fato-vs-opiniao";
-import { aula03 } from "../../portugues-6ano/unidade-1/aula-03-generos-digitais-email";
-import { aula04 } from "../../portugues-6ano/unidade-1/aula-04-hipertexto-e-links";
-import { aula05 } from "../../portugues-6ano/unidade-1/aula-05-comentario-de-post";
+import { aula02 } from "./aula-02-sujeito-e-predicado";
+import { aula03 } from "./aula-03-noticia-vs-reportagem";
+import { aula04 } from "./aula-04-propostas-editoriais";
+import { aula05 } from "./aula-05-comentario-critico-do-leitor";
 
 export const unidade1: any = {
   id: "unidade-1",
