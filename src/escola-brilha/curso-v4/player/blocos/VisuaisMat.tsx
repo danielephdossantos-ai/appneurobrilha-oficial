@@ -5,7 +5,7 @@
  * de casas de valor quando o conteúdo é geometria, estatística, medidas
  * ou probabilidade.
  */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { Volume2, VolumeX } from "lucide-react";
