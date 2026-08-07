@@ -484,9 +484,16 @@ function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
  * inteiro em Nós fazemos / Você faz / Na vida real, igual em Brilha resolve.
  */
 function ExplicacaoContaAuto({ texto }: { texto: string }) {
+  const lousaAtiva = useLousaAtiva();
   const conta = detectarContaNoTexto(texto);
   const md = detectarMultDivNoTexto(texto);
+  // 5º ao 9º ano: toda conta vira LOUSA INTERATIVA (padrão Pip Teen Roqueiro).
+  if (lousaAtiva) {
+    const lousa = lousaDeTexto(texto);
+    if (lousa) return <RenderVisualMat v={lousa} />;
+  }
   if (md?.operacao === "div") {
+
     const q = Math.floor(md.a / md.b);
     return (
       <InteracaoView
