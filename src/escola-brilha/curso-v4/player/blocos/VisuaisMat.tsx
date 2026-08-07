@@ -1294,9 +1294,18 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const [estahEscrevendo, setEstahEscrevendo] = useState(false);
   const [iniciou, setIniciou] = useState(false);
   const [audioAtivo, setAudioAtivo] = useState(true);
+  const [pausado, setPausado] = useState(false);
   const audioAtivoRef = useRef(true);
+  const pausadoRef = useRef(false);
   const total = passos.length;
   const terminou = revelados >= total && !estahEscrevendo;
+
+  /** Assinatura estável do conteúdo: evita reiniciar a animação
+   *  quando o pai recria o objeto `v` a cada render (bug do "pulando"). */
+  const assinatura = useMemo(
+    () => passos.map((p) => `${p.expr}|${p.professor ?? ""}`).join("¶"),
+    [passos],
+  );
 
   useEffect(() => {
     audioAtivoRef.current = audioAtivo;
@@ -1304,40 +1313,77 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [audioAtivo]);
 
   useEffect(() => {
-    let montado = true;
+    pausadoRef.current = pausado;
+    if (pausado) stopSpeaking();
+  }, [pausado]);
+
+  // Se o conteúdo muda de verdade, volta para a tela de "Começar".
+  useEffect(() => {
+    setIniciou(false);
+    setPausado(false);
+    setRevelados(0);
+    setCaracteresVisiveis({});
+    setEstahEscrevendo(false);
+  }, [assinatura]);
+
+  useEffect(() => {
     if (!iniciou) return;
+    let montado = true;
 
     setRevelados(0);
     setCaracteresVisiveis({});
     setEstahEscrevendo(true);
 
+    const dormir = (ms: number) =>
+      new Promise<void>((resolve) => {
+        const t = window.setTimeout(resolve, ms);
+        limpadores.push(() => {
+          window.clearTimeout(t);
+          resolve();
+        });
+      });
+    const limpadores: (() => void)[] = [];
+
+    /** Segura o fluxo enquanto estiver pausado. */
+    const esperarRetomar = async () => {
+      while (montado && pausadoRef.current) await dormir(200);
+    };
+
     async function escreverTudo() {
-      // Pequena pausa inicial
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await dormir(700);
 
       for (let i = 0; i < total; i++) {
         if (!montado) return;
-        
+        await esperarRetomar();
+        if (!montado) return;
+
         const passo = passos[i];
-        
-        // Se tem áudio e narrativa de professor, fala ANTES de começar a escrever
+
+        // O professor fala a explicação ANTES de escrever a linha.
         if (audioAtivoRef.current && passo.professor) {
           await speakChunked(passo.professor, { rate: 0.88 });
-          // Pausa curta após a fala antes de começar a escrever
-          await new Promise((resolve) => setTimeout(resolve, 600));
+          if (!montado) return;
+          await dormir(500);
         }
 
         setRevelados(i + 1);
         const texto = passo.expr;
+        // Velocidade adaptativa: contas longas não podem levar minutos.
+        const porChar = texto.length > 120 ? 24 : texto.length > 60 ? 45 : 80;
 
         for (let charIndex = 1; charIndex <= texto.length; charIndex++) {
           if (!montado) return;
+          await esperarRetomar();
+          if (!montado) return;
           setCaracteresVisiveis((prev) => ({ ...prev, [i]: charIndex }));
-          await new Promise((resolve) => setTimeout(resolve, 150));
+          await dormir(porChar);
         }
+        // Garante a linha completa mesmo se algum tick foi perdido.
+        if (!montado) return;
+        setCaracteresVisiveis((prev) => ({ ...prev, [i]: texto.length }));
 
-        // Pausa após terminar de escrever a linha (respiro cognitivo)
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+        // Respiro cognitivo antes do próximo passo.
+        await dormir(1600);
       }
       if (montado) setEstahEscrevendo(false);
     }
@@ -1345,9 +1391,24 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     escreverTudo();
     return () => {
       montado = false;
+      limpadores.forEach((f) => f());
       stopSpeaking();
     };
-  }, [v, iniciou]);
+  }, [assinatura, iniciou, passos, total]);
+
+  const mostrarTudo = () => {
+    stopSpeaking();
+    setPausado(false);
+    setIniciou(true);
+    setEstahEscrevendo(false);
+    setRevelados(total);
+    const cheio: { [key: number]: number } = {};
+    passos.forEach((p, i) => {
+      cheio[i] = p.expr.length;
+    });
+    setCaracteresVisiveis(cheio);
+  };
+
 
   return (
     <div className="my-4 w-full max-w-3xl mx-auto px-0 sm:px-2 md:px-4">
