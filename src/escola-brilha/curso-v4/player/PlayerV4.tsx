@@ -643,7 +643,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
         const md = detectarMultDivNoTexto(q.pergunta);
-        const lousaQ = lousaAtiva ? lousaDeTexto(q.pergunta) : undefined;
+        const lousaQ = lousasQ[qi];
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
