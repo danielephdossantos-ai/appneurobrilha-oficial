@@ -195,7 +195,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que é uma 'Tese' em um texto?",
-        opcoes: ["A ideia central defendida", "Um erro de sistema", "Uma palavra aleatória"],
+        opcoes: ["A ideia central defendida", "Um erro de sistema", "Uma palavra aleatória", "O número de linhas do texto"],
         correta: 0,
         feedbackAcerto: "Identificação correta.",
         feedbackErro: "Tese é o núcleo do argumento.",
