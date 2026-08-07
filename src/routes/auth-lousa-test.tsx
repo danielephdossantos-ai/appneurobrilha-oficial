@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { RenderVisualMat } from "@/escola-brilha/curso-v4/player/blocos/VisuaisMat";
 import { lousaDeTexto } from "@/escola-brilha/curso-v4/player/blocos/lousa-auto";
 
-export const Route = createFileRoute("/auth/lousa-test")({
+export const Route = createFileRoute("/auth-lousa-test")({
   head: () => ({
     meta: [
       { title: "Teste da lousa interativa" },
