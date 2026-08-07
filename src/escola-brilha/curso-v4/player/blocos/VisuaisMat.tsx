@@ -1311,6 +1311,14 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     [passos],
   );
 
+  /** Conta armada (multi-linha): a lousa mostra UMA conta que cresce em cima,
+   *  e as explicações vão se acumulando embaixo. */
+  const modoConta = useMemo(
+    () => passos.length > 0 && passos.every((p) => p.expr.includes("\n")),
+    [passos],
+  );
+
+
   useEffect(() => {
     audioAtivoRef.current = audioAtivo;
     if (!audioAtivo) stopSpeaking();
@@ -1389,7 +1397,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
         setCaracteresVisiveis((prev) => ({ ...prev, [i]: texto.length }));
 
         // Respiro cognitivo antes do próximo passo.
-        await dormir(1600);
+        await dormir(modoConta ? 800 : 1400);
       }
       if (montado) setEstahEscrevendo(false);
     }
@@ -1400,7 +1408,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
       limpadores.forEach((f) => f());
       stopSpeaking();
     };
-  }, [assinatura, iniciou, completo]);
+  }, [assinatura, iniciou, completo, modoConta]);
 
   const mostrarTudo = () => {
     stopSpeaking();
@@ -1475,96 +1483,117 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
             </div>
 
           ) : (
-            <div className="flex flex-col items-center gap-4 md:gap-6">
+            <div className="flex flex-col gap-3 md:gap-5">
+              {/* ---------- 1) A CONTA na lousa (uma só, crescendo) ---------- */}
+              {(() => {
+                const visiveis = passos
+                  .map((p, i) => ({ p, i }))
+                  .slice(0, revelados)
+                  .filter(({ i }) => (modoConta ? i === revelados - 1 : true));
 
-            {passos.slice(0, revelados).map((p, idx) => {
-              const caracAtuais = caracteresVisiveis[idx] || 0;
-              const textoExibido = p.expr.slice(0, caracAtuais);
-              const isUltimo = idx === revelados - 1;
-              const jaTerminouLinha = caracAtuais >= p.expr.length;
-
-              const cor =
-                p.status === "ok"
-                  ? "text-emerald-700"
-                  : p.status === "x"
-                  ? "text-rose-700"
-                  : "text-[#5d4037]";
-
-              return (
-                <div key={idx} className="w-full flex flex-col items-center animate-in fade-in duration-700">
-                  {/* Explicação do Professor (O "Pulo do Gato") */}
-                  {p.professor && (
-                    <div className={`mb-4 md:mb-6 w-full transition-all duration-700 ${idx < revelados ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                      <div className="flex items-start gap-2 md:gap-4 bg-amber-50/50 border-l-[4px] border-[#8b5e3c] p-2 sm:p-3 md:p-6 rounded-r-2xl shadow-sm ring-1 ring-[#8b5e3c]/5">
-                        <span className="flex-shrink-0 w-6 h-6 md:w-10 md:h-10 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-xs md:text-lg shadow-[0_2px_0_0_#5d4037]">
-                          {idx + 1}
-                        </span>
-                        <div className="min-w-0 break-words text-[13px] sm:text-base md:text-lg text-[#5d4037] font-semibold leading-relaxed">
-                          {/* Se está escrevendo, a explicação brilha */}
-                          {isUltimo && !jaTerminouLinha && (
-                            <div className="text-[10px] md:text-xs font-black uppercase text-[#8b5e3c]/70 mb-1 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
-                              O Professor explica...
-                            </div>
-                          )}
-                          {p.professor}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Conta Matemática Montada na Lousa (REAL MAT) */}
+                return (
                   <div className="w-full overflow-x-auto">
-                    <div
-                      className={`font-black text-base sm:text-2xl md:text-4xl tracking-tight ${cor} flex items-center justify-center gap-2 py-3 md:py-5 mb-2 transition-opacity duration-500 ${isUltimo ? "opacity-100" : "opacity-60"}`}
-                      style={{
-                        fontFamily: "'Nunito', ui-monospace, monospace",
-                        fontVariantNumeric: "tabular-nums",
-                        filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.08))",
-                      }}
-                    >
-                      <div className={`flex flex-col mx-auto ${p.expr.includes("\n") ? "items-start" : "items-center w-full"}`}>
-                        {p.expr.split("\n").map((linha, lIdx) => (
+                    <div className="flex flex-col items-center gap-1 md:gap-2 py-2 md:py-4">
+                      {visiveis.map(({ p, i: idx }) => {
+                        const caracAtuais = caracteresVisiveis[idx] || 0;
+                        const isUltimo = idx === revelados - 1;
+                        const jaTerminouLinha = caracAtuais >= p.expr.length;
+                        const cor =
+                          p.status === "ok"
+                            ? "text-emerald-700"
+                            : p.status === "x"
+                            ? "text-rose-700"
+                            : "text-[#5d4037]";
+
+                        return (
                           <div
-                            key={lIdx}
-                            className={
-                              p.expr.includes("\n")
-                                ? "whitespace-pre text-left"
-                                : "whitespace-pre-wrap break-words text-center leading-snug"
-                            }
+                            key={idx}
+                            className={`font-black text-lg sm:text-2xl md:text-4xl tracking-tight ${cor} flex items-end justify-center gap-2 transition-opacity duration-300 ${
+                              isUltimo ? "opacity-100" : "opacity-60"
+                            }`}
+                            style={{
+                              fontFamily: "'Nunito', ui-monospace, monospace",
+                              fontVariantNumeric: "tabular-nums",
+                              filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.08))",
+                            }}
                           >
-                            {(() => {
-                              // Calculamos o deslocamento acumulado para saber quanto desse texto mostrar
-                              let charCountBefore = p.expr.split("\n").slice(0, lIdx).join("\n").length;
-                              if (lIdx > 0) charCountBefore += 1; // conta o \n
+                            <div
+                              className={`flex flex-col mx-auto ${
+                                p.expr.includes("\n") ? "items-start" : "items-center w-full"
+                              }`}
+                            >
+                              {p.expr.split("\n").map((linha, lIdx) => {
+                                let charCountBefore = p.expr
+                                  .split("\n")
+                                  .slice(0, lIdx)
+                                  .join("\n").length;
+                                if (lIdx > 0) charCountBefore += 1;
+                                const visivelNessaLinha = Math.max(
+                                  0,
+                                  Math.min(linha.length, caracAtuais - charCountBefore),
+                                );
+                                return (
+                                  <div
+                                    key={lIdx}
+                                    className={
+                                      p.expr.includes("\n")
+                                        ? "whitespace-pre text-left leading-tight"
+                                        : "whitespace-pre-wrap break-words text-center leading-snug"
+                                    }
+                                  >
+                                    {linha.slice(0, visivelNessaLinha)}
+                                  </div>
+                                );
+                              })}
+                            </div>
 
-                              const charInThisLine = linha.length;
-                              const visivelNessaLinha = Math.max(0, Math.min(charInThisLine, caracAtuais - charCountBefore));
-
-                              return linha.slice(0, visivelNessaLinha);
-                            })()}
+                            {isUltimo && estahEscrevendo && !jaTerminouLinha && (
+                              <span className="inline-block w-2 md:w-3 h-6 md:h-9 bg-[#8b5e3c] animate-pulse rounded-sm" />
+                            )}
                           </div>
-                        ))}
-                      </div>
-
-                      {isUltimo && estahEscrevendo && !jaTerminouLinha && (
-                        <span className="inline-block w-2 md:w-3 h-7 md:h-10 bg-[#8b5e3c] animate-pulse rounded-sm" />
-                      )}
+                        );
+                      })}
                     </div>
                   </div>
+                );
+              })()}
 
-
-                  {/* Legenda curta */}
-                  {jaTerminouLinha && p.explica && !p.professor && (
-                    <div className="mt-1 text-sm md:text-base text-[#5d4037]/70 italic text-center">
-                      {p.explica}
+              {/* ---------- 2) As EXPLICAÇÕES, acumulando embaixo ---------- */}
+              <div className="w-full flex flex-col gap-2 border-t border-amber-200/60 pt-3">
+                {passos.slice(0, revelados).map((p, idx) => {
+                  const caracAtuais = caracteresVisiveis[idx] || 0;
+                  const isUltimo = idx === revelados - 1;
+                  const escrevendoAgora = isUltimo && caracAtuais < p.expr.length;
+                  const texto = p.professor || p.explica;
+                  if (!texto) return null;
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex items-start gap-2 md:gap-3 rounded-xl px-2 py-2 md:px-3 md:py-3 animate-in fade-in duration-500 ${
+                        isUltimo
+                          ? "bg-amber-50 ring-1 ring-[#8b5e3c]/20"
+                          : "bg-transparent opacity-70"
+                      }`}
+                    >
+                      <span className="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#8b5e3c] text-white flex items-center justify-center font-black text-[11px] md:text-sm shadow-[0_2px_0_0_#5d4037]">
+                        {idx + 1}
+                      </span>
+                      <div className="min-w-0 break-words text-[13px] sm:text-[15px] md:text-lg text-[#5d4037] font-semibold leading-relaxed">
+                        {escrevendoAgora && (
+                          <span className="mr-2 inline-flex items-center gap-1 text-[10px] md:text-xs font-black uppercase text-[#8b5e3c]/70">
+                            <span className="w-1.5 h-1.5 bg-[#8b5e3c] rounded-full animate-ping" />
+                            escrevendo…
+                          </span>
+                        )}
+                        {texto}
+                      </div>
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </div>
           )}
+
 
           {terminou && fatorada && (
             <div className="mt-8 pt-6 border-t border-amber-200/50 text-center animate-in fade-in zoom-in duration-700">
@@ -1572,10 +1601,16 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
                 className="text-xl md:text-2xl font-black text-[#8b5e3c]"
                 style={{ fontFamily: "'Nunito', sans-serif" }}
               >
-                {trinomio} = {fatorada}
+                {(() => {
+                  const r = fatorada.trim().replace(/^=+\s*/, "");
+                  // Se a resposta já veio como igualdade completa, não repete o título.
+                  if (/[=]/.test(r) && r.includes(trinomio.trim())) return r;
+                  return `${trinomio} = ${r}`;
+                })()}
               </div>
             </div>
           )}
+
 
           {terminou && !fatorada && falha && (
             <div className="mt-4 text-center text-rose-400 font-bold text-sm" style={{ fontFamily: "'Nunito', sans-serif" }}>
