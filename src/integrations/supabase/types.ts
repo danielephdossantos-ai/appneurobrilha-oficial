@@ -4695,6 +4695,160 @@ export type Database = {
         }
         Relationships: []
       }
+      neuro_horarios: {
+        Row: {
+          child_id: string
+          dia_semana: number
+          hora: string
+          lembrete: boolean
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          dia_semana: number
+          hora?: string
+          lembrete?: boolean
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          dia_semana?: number
+          hora?: string
+          lembrete?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "neuro_horarios_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      neuro_plano: {
+        Row: {
+          base_anamnese: Json | null
+          child_id: string
+          created_at: string
+          dias_por_semana: number
+          gerado_em: string
+          id: string
+          semanas: number
+          sessoes_por_dia: number
+          updated_at: string
+        }
+        Insert: {
+          base_anamnese?: Json | null
+          child_id: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          semanas?: number
+          sessoes_por_dia?: number
+          updated_at?: string
+        }
+        Update: {
+          base_anamnese?: Json | null
+          child_id?: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          semanas?: number
+          sessoes_por_dia?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "neuro_plano_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      neuro_plano_itens: {
+        Row: {
+          child_id: string
+          concluido: boolean
+          concluido_em: string | null
+          created_at: string
+          dia_semana: number
+          emoji: string
+          grupo: string
+          id: string
+          minutos: number
+          nome: string
+          objetivo: string | null
+          ordem: number
+          plano_id: string
+          por_que: string | null
+          prioridade: number
+          rota: string
+          semana: number
+          slug: string
+        }
+        Insert: {
+          child_id: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          dia_semana: number
+          emoji?: string
+          grupo?: string
+          id?: string
+          minutos?: number
+          nome: string
+          objetivo?: string | null
+          ordem?: number
+          plano_id: string
+          por_que?: string | null
+          prioridade?: number
+          rota: string
+          semana: number
+          slug: string
+        }
+        Update: {
+          child_id?: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          dia_semana?: number
+          emoji?: string
+          grupo?: string
+          id?: string
+          minutos?: number
+          nome?: string
+          objetivo?: string | null
+          ordem?: number
+          plano_id?: string
+          por_que?: string | null
+          prioridade?: number
+          rota?: string
+          semana?: number
+          slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "neuro_plano_itens_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "neuro_plano_itens_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "neuro_plano"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       neuro_profiles: {
         Row: {
           child_id: string
