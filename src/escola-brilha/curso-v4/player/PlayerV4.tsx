@@ -630,6 +630,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
         const jaTirou = tirados[qi];
         const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
         const md = detectarMultDivNoTexto(q.pergunta);
+        const lousaQ = lousaAtiva ? lousaDeTexto(q.pergunta) : undefined;
         const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
         return (
         <div key={qi} className="border-t border-white/10 pt-4">
@@ -639,8 +640,9 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
             </span>
             <div className="font-medium">{q.pergunta}</div>
           </div>
-          {md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
-          {md && md.operacao === "div" && (
+          {lousaQ && <RenderVisualMat v={lousaQ} />}
+          {!lousaQ && md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
+          {!lousaQ && md && md.operacao === "div" && (
             <InteracaoView
               i={{
                 tipo: "contaPassoAPasso",
@@ -651,9 +653,10 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
               }}
             />
           )}
-          {conta && (
+          {!lousaQ && conta && (
             <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
           )}
+
           {ehSubtracaoInterativa ? (
             <div className="mb-3 flex flex-col items-center gap-3">
               <div className="rounded-2xl bg-white/5 border border-white/15 p-3 w-full max-w-md">
