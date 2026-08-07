@@ -508,10 +508,11 @@ function ExplicacaoContaAuto({ texto }: { texto: string }) {
   const conta = detectarContaNoTexto(texto);
   const md = detectarMultDivNoTexto(texto);
   // 5º ao 9º ano: toda conta vira LOUSA INTERATIVA (padrão Pip Teen Roqueiro).
-  if (lousaAtiva) {
-    const lousa = lousaDeTexto(texto);
-    if (lousa) return <RenderVisualMat v={lousa} />;
-  }
+  // useMemo é obrigatório: sem ele o objeto é recriado a cada render e a
+  // animação da lousa reinicia sozinha (bug da explicação "pulando").
+  const lousa = useMemo(() => (lousaAtiva ? lousaDeTexto(texto) : undefined), [lousaAtiva, texto]);
+  if (lousa) return <RenderVisualMat v={lousa} />;
+
   if (md?.operacao === "div") {
 
     const q = Math.floor(md.a / md.b);
