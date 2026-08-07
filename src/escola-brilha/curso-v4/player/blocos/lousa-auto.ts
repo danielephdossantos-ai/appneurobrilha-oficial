@@ -29,8 +29,14 @@ function casa(i: number) {
   return CASAS[i] ?? `casa ${i + 1}`;
 }
 
+/** Comprimento "visível" (ignora marcas combinantes, ex. o risco do empréstimo). */
+function larguraVisivel(s: string) {
+  return s.replace(/[\u0300-\u036f]/g, "").length;
+}
+
 function pad(s: string, w: number) {
-  return s.padStart(w, " ");
+  const falta = Math.max(0, w - larguraVisivel(s));
+  return " ".repeat(falta) + s;
 }
 
 function moldura(w: number) {
@@ -56,6 +62,7 @@ function bloco(opts: {
   linhas.push("  " + resultado.join(""));
   return linhas.join("\n");
 }
+
 
 // ============================== SOMA =================================
 
@@ -116,6 +123,9 @@ function lousaSubtracao(a: number, b: number): TrinomioPassoAPassoV {
   const aux = Array(w).fill(" ");
   const passos: Passo[] = [];
   const digitos = topo.map((c) => (c === " " ? 0 : Number(c)));
+  // Linha de cima com o algarismo RISCADO quando há empréstimo.
+  const topoVisual = [...topo];
+  const RISCO = "\u0336";
 
   for (let i = 0; i < w; i++) {
     const col = w - 1 - i;
@@ -131,9 +141,11 @@ function lousaSubtracao(a: number, b: number): TrinomioPassoAPassoV {
         const antes = digitos[k];
         digitos[k] = antes - 1;
         aux[k] = String(digitos[k]);
+        topoVisual[k] = String(antes) + RISCO;
         for (let j = k + 1; j < col; j++) {
           digitos[j] = 9;
           aux[j] = "9";
+          topoVisual[j] = topo[j] + RISCO;
         }
         x = digitos[col] + 10;
         digitos[col] = x;
@@ -144,12 +156,20 @@ function lousaSubtracao(a: number, b: number): TrinomioPassoAPassoV {
     digitos[col] = escreve;
     res[col] = String(escreve);
     passos.push({
-      expr: bloco({ auxiliar: aux, topo: String(maior), sinal: "−", base: String(menor), resultado: res, w }),
+      expr: bloco({
+        auxiliar: aux,
+        topo: topoVisual.join("").trimStart(),
+        sinal: "−",
+        base: String(menor),
+        resultado: res,
+        w,
+      }),
       explica: `${casa(i)}: ${x} − ${y} = ${escreve}`,
       professor: `Casa das ${casa(i)}: ${fala}${x} menos ${y} é igual a ${escreve}. Escrevo o ${escreve} embaixo da linha.`,
       status: "neutro",
     });
   }
+
 
   return {
     tipo: "trinomioPassoAPasso",

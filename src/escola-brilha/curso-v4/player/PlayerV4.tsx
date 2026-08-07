@@ -1894,28 +1894,39 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
         </div>
       </div>
 
-      {/* Narração do passo atual */}
-      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+      {/* Explicações do professor — vão se ACUMULANDO embaixo da conta */}
+      <div className="mt-5 rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3 flex flex-col gap-2">
         {passoAtual < 0 && (
           <div className="text-sm md:text-base">
             <span className="font-black text-amber-700">🧠 Brilha:</span>{" "}
-            Vamos armar a conta. Alinhamos unidade com unidade, dezena com dezena. Toque em "Próximo passo" quando quiser começar.
+            Vamos armar a conta. Alinhamos unidade com unidade, dezena com dezena. Toque em "Começar" para ver a conta nascer passo a passo.
           </div>
         )}
-        {passoAtual >= 0 && (
-          <div className="text-sm md:text-base">
-            <span className="font-black text-amber-700">
-              Passo {passoAtual + 1}/{totalPassos}:
-            </span>{" "}
-            {i.passos[passoAtual].fala}
-            {i.passos[passoAtual].porque && (
-              <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
-                Por quê? {i.passos[passoAtual].porque}
+        {i.passos.slice(0, passoAtual + 1).map((p, idx) => {
+          const ultimo = idx === passoAtual;
+          return (
+            <div
+              key={idx}
+              className={`flex items-start gap-2 rounded-lg px-2 py-1.5 transition-colors ${
+                ultimo ? "bg-white/80 ring-1 ring-amber-300" : "opacity-70"
+              }`}
+            >
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-black text-[11px]">
+                {idx + 1}
+              </span>
+              <div className="min-w-0 break-words text-sm md:text-base">
+                {p.fala}
+                {p.porque && (
+                  <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
+                    Por quê? {p.porque}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          );
+        })}
       </div>
+
 
       {/* Botão avançar */}
       <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
@@ -1928,10 +1939,12 @@ function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPas
           </button>
         )}
         {terminou && modo === "explicacao" && (
-          <div className="text-lg font-black text-emerald-700">
-            ✅ Resultado: {i.resultado}
+          <div className="text-lg font-black text-emerald-700 text-center w-full">
+            ✅ {i.operandos.map((n) => n.toLocaleString("pt-BR")).join(` ${opSimbolo} `)} ={" "}
+            {i.resultado.toLocaleString("pt-BR")}
           </div>
         )}
+
         {terminou && !confirmado && (
           <button
             onClick={reset}
