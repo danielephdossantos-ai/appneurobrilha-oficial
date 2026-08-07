@@ -1,0 +1,284 @@
+import type { AulaGeoV1 } from "../../types";
+import { url as corpo } from "@/assets/ciencias-5ano/u3-a1/corpo-humano.jpg.asset.json";
+import { url as coracao } from "@/assets/ciencias-5ano/u3-a1/coracao.jpg.asset.json";
+import { url as pulmoes } from "@/assets/ciencias-5ano/u3-a1/pulmoes.jpg.asset.json";
+import { url as digestivo } from "@/assets/ciencias-5ano/u3-a1/digestivo.jpg.asset.json";
+import { url as alimentacao } from "@/assets/ciencias-5ano/u3-a1/alimentacao.jpg.asset.json";
+
+export const aula04: AulaGeoV1 = {
+  slug: "aula-04-disturbios-nutricionais",
+  titulo: "Distúrbios Nutricionais e Hábitos de Vida",
+  iconeTrilha: "⚖️",
+  bncc: ["EF05CI09"],
+  duracaoMin: 30,
+
+  cena01_motivacao: {
+    tipo: "mesaCartografo",
+    instrucao: "Passe a lupa pelo corpo. Ache sinais de que a alimentação e os hábitos de vida afetam a saúde.",
+    mapaUrl: corpo,
+    imagemDestaqueUrl: alimentacao,
+    aurora: "Quando a alimentação sai muito do equilíbrio — pra menos ou pra mais — o corpo sente. Faltar nutrientes causa subnutrição; excesso constante de calorias pode levar à obesidade. Os dois são desequilíbrios, só em direções opostas.",
+    falaFinal: "Saúde não é sobre comer pouco ou muito — é sobre equilíbrio entre alimentação e atividade física.",
+  },
+
+  cena02_previsao: {
+    tipo: "votoExplorador",
+    aurora: "Duas crianças comem quantidades bem diferentes de calorias por dia, muito acima ou muito abaixo do que o corpo precisa. Isso pode trazer problemas de saúde pras duas?",
+    pergunta: "Comer muito menos OU muito mais do que o corpo precisa pode causar distúrbios?",
+    fotoUrl: corpo,
+    opcoes: [
+      { id: "sim", titulo: "SIM", subtitulo: "os dois extremos afetam a saúde", emoji: "⚖️", cor: "from-amber-400 to-orange-700" },
+      { id: "so-menos", titulo: "SÓ COMER MENOS", subtitulo: "comer mais nunca é problema", emoji: "🍔", cor: "from-red-400 to-rose-700" },
+    ],
+    respostaCerta: "sim",
+    feedbackAcerto: "Certo. Falta de nutrientes causa SUBNUTRIÇÃO; excesso constante de calorias pode causar OBESIDADE. Ambos são desequilíbrios.",
+    feedbackErro: "Comer demais também traz problemas — não é só comer pouco. Os dois EXTREMOS afetam a saúde.",
+    falaFinal: "O corpo funciona melhor no equilíbrio, não nos extremos.",
+  },
+
+  cena03_vocabulario: {
+    tipo: "cadernosCampo",
+    aurora: "Cinco palavras sobre distúrbios nutricionais.",
+    instrucao: "Vocabulário dos distúrbios nutricionais",
+    cadernos: [
+      { id: "subnutricao", capa: "SUBNUTRIÇÃO", emoji: "📉", cor: "from-slate-500 to-slate-700",
+        conteudo: "Falta de nutrientes e energia suficientes na alimentação, o que atrapalha o crescimento e as defesas do corpo.",
+        exemplo: "Ex.: pode causar cansaço, baixa imunidade e atraso no crescimento.", fotoUrl: corpo },
+      { id: "obesidade", capa: "OBESIDADE", emoji: "📈", cor: "from-amber-500 to-orange-700",
+        conteudo: "Acúmulo excessivo de gordura no corpo, causado geralmente por comer mais calorias do que se gasta por muito tempo.",
+        exemplo: "Ex.: pode aumentar o risco de problemas no coração e diabetes.", fotoUrl: coracao },
+      { id: "habitossaudaveis", capa: "HÁBITOS SAUDÁVEIS", emoji: "🥗", cor: "from-emerald-500 to-green-700",
+        conteudo: "Conjunto de escolhas do dia a dia — alimentação equilibrada, sono, higiene — que mantêm o corpo funcionando bem.",
+        exemplo: "Ex.: comer variado, beber água, dormir bem.", fotoUrl: alimentacao },
+      { id: "atividadefisica", capa: "ATIVIDADE FÍSICA", emoji: "🏃", cor: "from-cyan-500 to-sky-700",
+        conteudo: "Movimento do corpo que gasta energia, fortalece músculos e o coração, e ajuda a manter o peso equilibrado.",
+        exemplo: "Ex.: caminhar, brincar, praticar esportes.", fotoUrl: pulmoes },
+      { id: "gastoenergetico", capa: "GASTO ENERGÉTICO", emoji: "🔥", cor: "from-red-500 to-rose-700",
+        conteudo: "Quantidade de energia (calorias) que o corpo usa por dia, nas atividades e até em repouso.",
+        exemplo: "Ex.: uma pessoa mais ativa tem gasto energético maior.", fotoUrl: digestivo },
+    ],
+    falaFinal: "Subnutrição, obesidade, hábitos saudáveis, atividade física, gasto energético. Cinco chaves para entender o equilíbrio do corpo.",
+  },
+
+  cena04_leituraGuiada: {
+    tipo: "narrarMapa",
+    aurora: "O corpo e seus sinais de desequilíbrio. Toca em cada ponto.",
+    instrucao: "Toque em cada ponto",
+    mapaUrl: corpo,
+    pontos: [
+      { id: "subnutricao", x: 25, y: 45, emoji: "📉", cor: "from-slate-500 to-slate-700",
+        titulo: "Subnutrição", texto: "Falta de nutrientes atrapalha crescimento, energia e defesas do corpo contra doenças.",
+        fotoUrl: corpo },
+      { id: "obesidade", x: 55, y: 60, emoji: "📈", cor: "from-amber-500 to-orange-700",
+        titulo: "Obesidade", texto: "Excesso de gordura acumulada pode sobrecarregar coração e articulações.",
+        fotoUrl: coracao },
+      { id: "equilibrio", x: 78, y: 45, emoji: "⚖️", cor: "from-emerald-500 to-green-700",
+        titulo: "Equilíbrio", texto: "Comer o suficiente, variado, e se movimentar mantém o corpo saudável.",
+        fotoUrl: pulmoes },
+    ],
+    falaFinal: "Entre os dois extremos, o caminho saudável é o equilíbrio.",
+  },
+
+  cena05_compreensao: {
+    tipo: "quizRadar",
+    aurora: "3 perguntas sobre distúrbios nutricionais.",
+    instrucao: "Toque no card certo",
+    perguntas: [
+      { id: "q1", pergunta: "O que é subnutrição?",
+        fotoUrl: corpo,
+        cards: [
+          { id: "a", emoji: "📉", titulo: "Falta de nutrientes e energia suficientes", cor: "from-slate-500 to-slate-700" },
+          { id: "b", emoji: "📈", titulo: "Excesso de gordura acumulada", cor: "from-amber-500 to-orange-700" },
+          { id: "c", emoji: "🏃", titulo: "Praticar exercício demais", cor: "from-cyan-500 to-sky-700" },
+        ], correta: "a",
+        feedbackAcerto: "Sim. SUBNUTRIÇÃO é a falta de nutrientes e energia na alimentação.",
+        feedbackErro: "Excesso de gordura é obesidade. Falta de nutrientes é SUBNUTRIÇÃO." },
+      { id: "q2", pergunta: "O que costuma causar a obesidade?",
+        fotoUrl: coracao,
+        cards: [
+          { id: "a", emoji: "📈", titulo: "Comer mais calorias do que se gasta, por muito tempo", cor: "from-amber-500 to-orange-700" },
+          { id: "b", emoji: "🏃", titulo: "Praticar muita atividade física", cor: "from-cyan-500 to-sky-700" },
+          { id: "c", emoji: "💧", titulo: "Beber muita água", cor: "from-cyan-500 to-sky-700" },
+        ], correta: "a",
+        feedbackAcerto: "Correto. Consumir mais energia do que se gasta, continuamente, leva ao acúmulo de gordura.",
+        feedbackErro: "Atividade física e água ajudam a saúde. O que causa obesidade é o EXCESSO de calorias no tempo." },
+      { id: "q3", pergunta: "Qual atitude ajuda a manter o equilíbrio entre alimentação e gasto energético?",
+        fotoUrl: alimentacao,
+        cards: [
+          { id: "a", emoji: "🏃", titulo: "Praticar atividade física regularmente", cor: "from-cyan-500 to-sky-700" },
+          { id: "b", emoji: "🍟", titulo: "Comer só alimentos calóricos", cor: "from-red-500 to-rose-700" },
+          { id: "c", emoji: "🛋️", titulo: "Ficar sempre parado", cor: "from-slate-500 to-slate-700" },
+        ], correta: "a",
+        feedbackAcerto: "Sim. Atividade física ajuda a gastar a energia consumida e mantém o corpo em equilíbrio.",
+        feedbackErro: "Comer só calórico e ficar parado desequilibra. ATIVIDADE FÍSICA ajuda o equilíbrio." },
+    ],
+    falaFinal: "Você já entende os dois extremos e o caminho do equilíbrio.",
+  },
+
+  cena06_personagensLugar: {
+    tipo: "mapaCamadas",
+    aurora: "O corpo divide-se em duas zonas de risco opostas: FALTA (subnutrição) e EXCESSO (obesidade).",
+    instrucao: "Toque nos interruptores",
+    mapaUrl: corpo,
+    camadas: [
+      { id: "falta", rotulo: "Zona de Falta", emoji: "📉", cor: "from-slate-500 to-slate-700",
+        rect: { x: 5, y: 20, w: 45, h: 60 },
+        descricao: "Poucos nutrientes e energia causam cansaço, baixa imunidade e atraso no crescimento.",
+        fotoUrl: corpo },
+      { id: "excesso", rotulo: "Zona de Excesso", emoji: "📈", cor: "from-amber-500 to-orange-700",
+        rect: { x: 50, y: 20, w: 45, h: 60 },
+        descricao: "Excesso de calorias acumuladas em gordura pode sobrecarregar coração e articulações.",
+        fotoUrl: coracao },
+    ],
+    falaFinal: "Falta e excesso são dois lados do mesmo problema: o desequilíbrio.",
+  },
+
+  cena07_sequencia: {
+    tipo: "linhaEstrada",
+    aurora: "Monte os passos para prevenir distúrbios nutricionais no dia a dia.",
+    instrucao: "Toque nas paradas na ORDEM correta",
+    pergunta: "Qual a rotina para manter o equilíbrio nutricional?",
+    paradas: [
+      { id: "cardapio", emoji: "🥗", rotulo: "1. Cardápio variado", descricao: "Comer alimentos de todos os grupos, nas quantidades certas.", fotoUrl: alimentacao },
+      { id: "agua", emoji: "💧", rotulo: "2. Beber água", descricao: "Manter o corpo hidratado ao longo do dia.", fotoUrl: pulmoes },
+      { id: "atividade", emoji: "🏃", rotulo: "3. Atividade física", descricao: "Se movimentar regularmente para gastar energia e fortalecer o corpo.", fotoUrl: coracao },
+      { id: "sono", emoji: "😴", rotulo: "4. Sono adequado", descricao: "Dormir bem ajuda o corpo a se recuperar e regular o apetite.", fotoUrl: corpo },
+    ],
+    ordemCerta: ["cardapio", "agua", "atividade", "sono"],
+    feedbackAcerto: "Rotina completa. Alimentação, hidratação, movimento e sono trabalham juntos pra manter o equilíbrio.",
+    feedbackErro: "Repense: cardápio variado, hidratação, atividade física e sono adequado formam a base do equilíbrio.",
+    falaFinal: "Prevenir distúrbios nutricionais é uma rotina, não uma regra isolada.",
+  },
+
+  cena08_voceLe: {
+    tipo: "voceLeSozinho",
+    aurora: "Sua leitura. Estuda o diário do médico da família.",
+    tituloLivro: "📓 Diário do Médico da Família",
+    subtitulo: "Distúrbios nutricionais e prevenção",
+    paragrafos: [
+      { id: "p1", texto:
+          "A SUBNUTRIÇÃO acontece quando o corpo não recebe nutrientes e energia suficientes por muito tempo. Isso pode atrasar o crescimento, causar cansaço e deixar o corpo mais vulnerável a doenças.",
+        chaves: ["subnutrição"],
+        definicoes: {
+          subnutrição: "Falta de nutrientes e energia suficientes na alimentação.",
+        }, fotoUrl: corpo },
+      { id: "p2", texto:
+          "Já a OBESIDADE surge quando uma pessoa consome, por muito tempo, mais calorias do que o corpo gasta. O excesso de energia é armazenado como gordura, o que pode sobrecarregar o coração e as articulações.",
+        chaves: ["obesidade"],
+        definicoes: {
+          obesidade: "Acúmulo excessivo de gordura no corpo por desequilíbrio entre o que se come e o que se gasta.",
+        }, fotoUrl: coracao },
+      { id: "p3", texto:
+          "A melhor prevenção pros dois extremos é manter HÁBITOS SAUDÁVEIS: comer variado nas quantidades certas e praticar ATIVIDADE FÍSICA regularmente, o que ajuda a equilibrar o GASTO ENERGÉTICO do corpo com o que se consome.",
+        chaves: ["hábitos saudáveis", "atividade física"],
+        definicoes: {
+          "hábitos saudáveis": "Escolhas diárias que mantêm o corpo funcionando bem.",
+          "atividade física": "Movimento do corpo que gasta energia e fortalece músculos e coração.",
+        }, fotoUrl: alimentacao },
+    ],
+    falaFinal: "Você entende como prevenir os dois extremos: falta e excesso de nutrição.",
+  },
+
+  cena09_minijogo: {
+    tipo: "construtorMarcos",
+    aurora: "Simulador. Identifique se a situação é de RISCO DE SUBNUTRIÇÃO, RISCO DE OBESIDADE ou HÁBITO SAUDÁVEL.",
+    instrucao: "⏱️ Leia e escolha a classificação correta",
+    duracaoSegundos: 20,
+    pecas: [
+      { id: "subnutricao", emoji: "📉", rotulo: "Risco de subnutrição" },
+      { id: "obesidade", emoji: "📈", rotulo: "Risco de obesidade" },
+      { id: "habito", emoji: "✅", rotulo: "Hábito saudável" },
+    ],
+    rodadas: [
+      { id: "r1", municipioA: { nome: "Criança come muito pouco por dias", emoji: "📉", cor: "from-slate-500 to-slate-700" },
+        municipioB: { nome: "Sem energia e nutrientes suficientes", emoji: "😔", cor: "from-slate-500 to-slate-700" },
+        contexto: "A criança está recebendo muito menos nutrientes e energia do que precisa.",
+        pecaCertaId: "subnutricao", fotoUrl: corpo,
+        feedbackAcerto: "Sim. Comer muito pouco por muito tempo é RISCO DE SUBNUTRIÇÃO.",
+        feedbackErro: "Falta contínua de nutrientes é RISCO DE SUBNUTRIÇÃO." },
+      { id: "r2", municipioA: { nome: "Comer fast-food todos os dias", emoji: "🍔", cor: "from-amber-500 to-orange-700" },
+        municipioB: { nome: "Sem praticar exercício", emoji: "🛋️", cor: "from-amber-500 to-orange-700" },
+        contexto: "Excesso de calorias somado à falta de movimento, ao longo do tempo.",
+        pecaCertaId: "obesidade", fotoUrl: coracao,
+        feedbackAcerto: "Perfeito. Excesso de calorias sem gasto correspondente é RISCO DE OBESIDADE.",
+        feedbackErro: "Comer muito calórico sem se movimentar é RISCO DE OBESIDADE." },
+      { id: "r3", municipioA: { nome: "Prato variado e colorido", emoji: "🥗", cor: "from-emerald-500 to-green-700" },
+        municipioB: { nome: "Brincar ao ar livre todo dia", emoji: "🏃", cor: "from-emerald-500 to-green-700" },
+        contexto: "Alimentação equilibrada combinada com atividade física regular.",
+        pecaCertaId: "habito", fotoUrl: alimentacao,
+        feedbackAcerto: "Isso. Alimentação variada e movimento diário é HÁBITO SAUDÁVEL.",
+        feedbackErro: "Comer variado e se movimentar é HÁBITO SAUDÁVEL." },
+      { id: "r4", municipioA: { nome: "Pular refeições por muito tempo", emoji: "⏳", cor: "from-slate-500 to-slate-700" },
+        municipioB: { nome: "Cansaço constante", emoji: "😴", cor: "from-slate-500 to-slate-700" },
+        contexto: "A falta de refeições regulares reduz os nutrientes disponíveis para o corpo.",
+        pecaCertaId: "subnutricao", fotoUrl: digestivo,
+        feedbackAcerto: "Sim. Pular refeições regularmente é RISCO DE SUBNUTRIÇÃO.",
+        feedbackErro: "Falta de refeições reduz nutrientes — RISCO DE SUBNUTRIÇÃO." },
+      { id: "r5", municipioA: { nome: "Beber água e dormir bem", emoji: "💧", cor: "from-emerald-500 to-green-700" },
+        municipioB: { nome: "Rotina equilibrada", emoji: "⚖️", cor: "from-emerald-500 to-green-700" },
+        contexto: "Boa hidratação e sono ajudam o corpo a regular apetite e energia.",
+        pecaCertaId: "habito", fotoUrl: pulmoes,
+        feedbackAcerto: "Correto. Hidratação e sono fazem parte de um HÁBITO SAUDÁVEL.",
+        feedbackErro: "Beber água e dormir bem são partes de um HÁBITO SAUDÁVEL." },
+    ],
+    falaFinal: "Você já reconhece riscos e hábitos saudáveis em situações reais.",
+  },
+
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "O tema em duas partes: DESEQUILÍBRIOS (subnutrição e obesidade) e PREVENÇÃO (hábitos saudáveis e atividade física).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: corpo,
+    fatias: [
+      { id: "desequilibrios", rotulo: "Desequilíbrios", emoji: "⚖️", percentual: 50, cor: "#d97706",
+        descricao: "Subnutrição (falta de nutrientes) e obesidade (excesso de calorias) são desequilíbrios opostos.",
+        exemplos: ["Subnutrição", "Obesidade"], fotoUrl: coracao },
+      { id: "prevencao", rotulo: "Prevenção", emoji: "🏃", percentual: 50, cor: "#059669",
+        descricao: "Hábitos saudáveis e atividade física regular equilibram o que se consome com o que se gasta.",
+        exemplos: ["Cardápio variado", "Atividade física", "Sono adequado"], fotoUrl: alimentacao },
+    ],
+    falaFinal: "Conhecer os desequilíbrios ajuda a valorizar os hábitos que os previnem.",
+  },
+
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "3 perguntas — carteira de Educador em Saúde Júnior te espera.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: corpo,
+    perguntas: [
+      { id: "q1", pergunta: "O que causa a subnutrição?",
+        fotoUrl: corpo,
+        opcoes: [
+          { id: "a", texto: "Falta de nutrientes e energia suficientes", correta: true },
+          { id: "b", texto: "Excesso de gordura acumulada" },
+        ],
+        feedbackAcerto: "Sim. SUBNUTRIÇÃO é a falta de nutrientes e energia.",
+        feedbackErro: "Excesso de gordura é obesidade. Falta é SUBNUTRIÇÃO." },
+      { id: "q2", pergunta: "O que costuma causar a obesidade?",
+        fotoUrl: coracao,
+        opcoes: [
+          { id: "a", texto: "Consumir mais calorias do que se gasta por muito tempo", correta: true },
+          { id: "b", texto: "Praticar atividade física regularmente" },
+        ],
+        feedbackAcerto: "Correto. Excesso contínuo de calorias leva ao acúmulo de gordura.",
+        feedbackErro: "Atividade física ajuda a prevenir obesidade, não a causar." },
+      { id: "q3", pergunta: "Qual dupla de hábitos ajuda a prevenir os dois distúrbios?",
+        fotoUrl: alimentacao,
+        opcoes: [
+          { id: "a", texto: "Alimentação variada e atividade física regular", correta: true },
+          { id: "b", texto: "Comer sempre a mesma coisa e ficar parado" },
+        ],
+        feedbackAcerto: "Sim. Variedade na alimentação e movimento regular equilibram o corpo.",
+        feedbackErro: "Repetição e sedentarismo não previnem distúrbios. O certo é VARIAR e SE MOVIMENTAR." },
+    ],
+    selo: {
+      nome: "Educador em Saúde Júnior",
+      subtitulo: "Missão Planeta Vivo · Laboratório 6 concluído",
+      emoji: "⚖️",
+      cor: "from-orange-400 via-amber-500 to-emerald-700",
+    },
+    falaFinal: "Educador em saúde júnior aprovado. Você já sabe cuidar do próprio equilíbrio nutricional.",
+  },
+
+  recompensa: { xp: 150, moedas: 30, medalha: "Educador em Saúde Júnior" },
+};

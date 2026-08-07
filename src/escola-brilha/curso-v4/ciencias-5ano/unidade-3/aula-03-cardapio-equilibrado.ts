@@ -1,0 +1,285 @@
+import type { AulaGeoV1 } from "../../types";
+import { url as corpo } from "@/assets/ciencias-5ano/u3-a1/corpo-humano.jpg.asset.json";
+import { url as coracao } from "@/assets/ciencias-5ano/u3-a1/coracao.jpg.asset.json";
+import { url as pulmoes } from "@/assets/ciencias-5ano/u3-a1/pulmoes.jpg.asset.json";
+import { url as digestivo } from "@/assets/ciencias-5ano/u3-a1/digestivo.jpg.asset.json";
+import { url as alimentacao } from "@/assets/ciencias-5ano/u3-a1/alimentacao.jpg.asset.json";
+
+export const aula03: AulaGeoV1 = {
+  slug: "aula-03-cardapio-equilibrado",
+  titulo: "Cardápio Equilibrado e Nutrientes",
+  iconeTrilha: "🥗",
+  bncc: ["EF05CI08"],
+  duracaoMin: 30,
+
+  cena01_motivacao: {
+    tipo: "mesaCartografo",
+    instrucao: "Passe a lupa pelo prato. Ache os diferentes grupos alimentares que compõem uma refeição equilibrada.",
+    mapaUrl: alimentacao,
+    imagemDestaqueUrl: digestivo,
+    aurora: "Um prato equilibrado não é sobre comer pouco ou muito — é sobre variar os grupos alimentares. Cada grupo entrega um tipo de nutriente que seu corpo usa de um jeito diferente.",
+    falaFinal: "Montar um cardápio equilibrado é como montar uma equipe: cada nutriente tem sua função.",
+  },
+
+  cena02_previsao: {
+    tipo: "votoExplorador",
+    aurora: "Duas pessoas comeram a mesma quantidade de calorias no almoço. Uma comeu arroz, feijão, carne e salada. A outra só comeu batata frita. As duas tiveram o mesmo benefício nutricional?",
+    pergunta: "Comer as mesmas calorias garante os mesmos nutrientes?",
+    fotoUrl: alimentacao,
+    opcoes: [
+      { id: "nao", titulo: "NÃO", subtitulo: "variedade de nutrientes importa, não só calorias", emoji: "🥗", cor: "from-emerald-400 to-green-700" },
+      { id: "sim", titulo: "SIM", subtitulo: "calorias são tudo que importa", emoji: "🍟", cor: "from-amber-400 to-orange-700" },
+    ],
+    respostaCerta: "nao",
+    feedbackAcerto: "Certo. Calorias dão energia, mas o corpo também precisa de proteínas, vitaminas e minerais que vêm de alimentos variados.",
+    feedbackErro: "Só contar calorias não garante nutrição completa. O corpo precisa de VARIEDADE de nutrientes, não só energia.",
+    falaFinal: "Calorias medem energia; nutrientes variados é que constroem e mantêm o corpo funcionando.",
+  },
+
+  cena03_vocabulario: {
+    tipo: "cadernosCampo",
+    aurora: "Cinco palavras da nutrição.",
+    instrucao: "Vocabulário do cardápio equilibrado",
+    cadernos: [
+      { id: "carboidratos", capa: "CARBOIDRATOS", emoji: "🍚", cor: "from-amber-500 to-orange-700",
+        conteudo: "Nutrientes energéticos: dão a energia mais rápida para o corpo funcionar e se movimentar.",
+        exemplo: "Ex.: arroz, pão, batata, macarrão.", fotoUrl: alimentacao },
+      { id: "proteinas", capa: "PROTEÍNAS", emoji: "🍗", cor: "from-red-500 to-rose-700",
+        conteudo: "Nutrientes construtores: formam e reparam músculos, pele e órgãos.",
+        exemplo: "Ex.: carne, ovo, feijão, leite.", fotoUrl: digestivo },
+      { id: "vitaminas", capa: "VITAMINAS E MINERAIS", emoji: "🍊", cor: "from-emerald-500 to-green-700",
+        conteudo: "Nutrientes reguladores: ajudam o corpo a funcionar bem e a se defender de doenças.",
+        exemplo: "Ex.: frutas e verduras fornecem vitamina C, ferro, cálcio.", fotoUrl: alimentacao },
+      { id: "calorias", capa: "CALORIAS", emoji: "🔥", cor: "from-orange-500 to-red-700",
+        conteudo: "Unidade que mede a quantidade de energia que um alimento fornece ao corpo.",
+        exemplo: "Ex.: uma banana tem cerca de 90 calorias.", fotoUrl: coracao },
+      { id: "gruposalimentares", capa: "GRUPOS ALIMENTARES", emoji: "🍽️", cor: "from-teal-500 to-emerald-700",
+        conteudo: "Categorias que organizam os alimentos por função no corpo: energéticos, construtores e reguladores.",
+        exemplo: "Ex.: um prato equilibrado tem alimento de cada grupo.", fotoUrl: pulmoes },
+    ],
+    falaFinal: "Carboidratos, proteínas, vitaminas e minerais, calorias, grupos alimentares. As bases da nutrição.",
+  },
+
+  cena04_leituraGuiada: {
+    tipo: "narrarMapa",
+    aurora: "O prato equilibrado. Toca em cada ponto pra entender a função de cada grupo.",
+    instrucao: "Toque em cada ponto",
+    mapaUrl: alimentacao,
+    pontos: [
+      { id: "energeticos", x: 25, y: 40, emoji: "🍚", cor: "from-amber-500 to-orange-700",
+        titulo: "Energéticos", texto: "Carboidratos e gorpuras boas dão energia rápida para as atividades do dia.",
+        fotoUrl: alimentacao },
+      { id: "construtores", x: 55, y: 55, emoji: "🍗", cor: "from-red-500 to-rose-700",
+        titulo: "Construtores", texto: "Proteínas formam músculos, pele, cabelo e reparam tecidos do corpo.",
+        fotoUrl: digestivo },
+      { id: "reguladores", x: 80, y: 40, emoji: "🍊", cor: "from-emerald-500 to-green-700",
+        titulo: "Reguladores", texto: "Vitaminas e minerais de frutas e verduras regulam o funcionamento do corpo e defesas.",
+        fotoUrl: alimentacao },
+    ],
+    falaFinal: "Um prato completo tem sempre os três grupos representados.",
+  },
+
+  cena05_compreensao: {
+    tipo: "quizRadar",
+    aurora: "3 perguntas de nutrição.",
+    instrucao: "Toque no card certo",
+    perguntas: [
+      { id: "q1", pergunta: "Qual nutriente é o principal responsável por construir e reparar músculos?",
+        fotoUrl: digestivo,
+        cards: [
+          { id: "a", emoji: "🍗", titulo: "Proteínas", cor: "from-red-500 to-rose-700" },
+          { id: "b", emoji: "🍚", titulo: "Carboidratos", cor: "from-amber-500 to-orange-700" },
+          { id: "c", emoji: "🍊", titulo: "Vitaminas", cor: "from-emerald-500 to-green-700" },
+        ], correta: "a",
+        feedbackAcerto: "Sim. PROTEÍNAS são os nutrientes construtores, base dos músculos e tecidos.",
+        feedbackErro: "Carboidratos dão energia. Quem CONSTRÓI músculo é a PROTEÍNA." },
+      { id: "q2", pergunta: "O que são calorias?",
+        fotoUrl: coracao,
+        cards: [
+          { id: "a", emoji: "🔥", titulo: "Unidade que mede a energia do alimento", cor: "from-orange-500 to-red-700" },
+          { id: "b", emoji: "🍊", titulo: "Um tipo de vitamina", cor: "from-emerald-500 to-green-700" },
+          { id: "c", emoji: "🍗", titulo: "Um tipo de proteína", cor: "from-red-500 to-rose-700" },
+        ], correta: "a",
+        feedbackAcerto: "Correto. Caloria mede quanta ENERGIA um alimento fornece ao corpo.",
+        feedbackErro: "Caloria não é vitamina nem proteína — é a UNIDADE que mede energia do alimento." },
+      { id: "q3", pergunta: "Por que um cardápio equilibrado precisa variar os grupos alimentares?",
+        fotoUrl: alimentacao,
+        cards: [
+          { id: "a", emoji: "🍽️", titulo: "Cada grupo entrega um nutriente diferente e necessário", cor: "from-teal-500 to-emerald-700" },
+          { id: "b", emoji: "🍟", titulo: "Só pra comida ficar mais gostosa", cor: "from-amber-500 to-orange-700" },
+          { id: "c", emoji: "⏱️", titulo: "Não faz diferença nenhuma", cor: "from-slate-500 to-slate-700" },
+        ], correta: "a",
+        feedbackAcerto: "Sim. Variar garante energéticos, construtores e reguladores ao mesmo tempo.",
+        feedbackErro: "Variar não é só sabor: cada grupo fornece um nutriente que o corpo precisa." },
+    ],
+    falaFinal: "Você já entende como montar um cardápio realmente equilibrado.",
+  },
+
+  cena06_personagensLugar: {
+    tipo: "mapaCamadas",
+    aurora: "O prato divide-se em duas zonas: ENERGIA (carboidratos) e CONSTRUÇÃO E REGULAÇÃO (proteínas, vitaminas e minerais).",
+    instrucao: "Toque nos interruptores",
+    mapaUrl: alimentacao,
+    camadas: [
+      { id: "energia", rotulo: "Zona de Energia", emoji: "🍚", cor: "from-amber-500 to-orange-700",
+        rect: { x: 5, y: 20, w: 45, h: 60 },
+        descricao: "Carboidratos fornecem a energia rápida usada nas atividades do dia a dia.",
+        fotoUrl: alimentacao },
+      { id: "construcao", rotulo: "Construção e Regulação", emoji: "🍗", cor: "from-red-500 to-rose-700",
+        rect: { x: 50, y: 20, w: 45, h: 60 },
+        descricao: "Proteínas constroem tecidos; vitaminas e minerais regulam o funcionamento do corpo.",
+        fotoUrl: digestivo },
+    ],
+    falaFinal: "Energia de um lado, construção e regulação de outro — juntas formam um cardápio completo.",
+  },
+
+  cena07_sequencia: {
+    tipo: "linhaEstrada",
+    aurora: "Monte a montagem de um prato equilibrado, na ordem em que pensamos nos grupos.",
+    instrucao: "Toque nas paradas na ORDEM correta",
+    pergunta: "Como montar um prato equilibrado?",
+    paradas: [
+      { id: "base", emoji: "🍚", rotulo: "1. Base energética", descricao: "Arroz, macarrão ou batata para dar energia.", fotoUrl: alimentacao },
+      { id: "proteina", emoji: "🍗", rotulo: "2. Fonte de proteína", descricao: "Carne, ovo, feijão ou peixe para construir tecidos.", fotoUrl: digestivo },
+      { id: "verduras", emoji: "🥦", rotulo: "3. Verduras e legumes", descricao: "Fornecem vitaminas e minerais reguladores.", fotoUrl: alimentacao },
+      { id: "fruta", emoji: "🍊", rotulo: "4. Fruta na sobremesa", descricao: "Mais vitaminas, minerais e fibras para completar a refeição.", fotoUrl: coracao },
+    ],
+    ordemCerta: ["base", "proteina", "verduras", "fruta"],
+    feedbackAcerto: "Prato montado. Combinando os grupos, você garante energia, construção e regulação numa refeição.",
+    feedbackErro: "Repense: comece pela base energética, some a proteína, as verduras e finalize com a fruta.",
+    falaFinal: "Um prato colorido e variado é quase sempre um prato equilibrado.",
+  },
+
+  cena08_voceLe: {
+    tipo: "voceLeSozinho",
+    aurora: "Sua leitura. Estuda o diário do nutricionista.",
+    tituloLivro: "📓 Diário do Nutricionista",
+    subtitulo: "Grupos alimentares e energia",
+    paragrafos: [
+      { id: "p1", texto:
+          "Os alimentos se organizam em GRUPOS ALIMENTARES conforme a função no corpo. Os CARBOIDRATOS, como arroz e pão, fornecem energia rápida para as atividades diárias.",
+        chaves: ["grupos alimentares", "carboidratos"],
+        definicoes: {
+          "grupos alimentares": "Categorias de alimentos organizadas pela função no corpo.",
+          carboidratos: "Nutrientes energéticos, encontrados em arroz, pão e massas.",
+        }, fotoUrl: alimentacao },
+      { id: "p2", texto:
+          "As PROTEÍNAS, presentes em carnes, ovos e feijão, são os nutrientes construtores: formam músculos, pele e órgãos, além de reparar tecidos danificados.",
+        chaves: ["proteínas"],
+        definicoes: {
+          proteínas: "Nutrientes construtores e reparadores de tecidos do corpo.",
+        }, fotoUrl: digestivo },
+      { id: "p3", texto:
+          "Frutas e verduras trazem VITAMINAS E MINERAIS, que regulam o funcionamento do corpo. A quantidade de energia que cada alimento entrega é medida em CALORIAS — mas comer bem é mais que só contar calorias: é combinar todos os grupos.",
+        chaves: ["vitaminas e minerais", "calorias"],
+        definicoes: {
+          "vitaminas e minerais": "Nutrientes reguladores que ajudam o corpo a funcionar bem.",
+          calorias: "Unidade que mede a energia fornecida por um alimento.",
+        }, fotoUrl: coracao },
+    ],
+    falaFinal: "Você entende agora como montar refeições verdadeiramente equilibradas.",
+  },
+
+  cena09_minijogo: {
+    tipo: "construtorMarcos",
+    aurora: "Simulador. Identifique o grupo alimentar de cada situação.",
+    instrucao: "⏱️ Leia e escolha o grupo correto",
+    duracaoSegundos: 20,
+    pecas: [
+      { id: "energetico", emoji: "🍚", rotulo: "Energético" },
+      { id: "construtor", emoji: "🍗", rotulo: "Construtor" },
+      { id: "regulador", emoji: "🍊", rotulo: "Regulador" },
+    ],
+    rodadas: [
+      { id: "r1", municipioA: { nome: "Prato de arroz e batata", emoji: "🍚", cor: "from-amber-500 to-orange-700" },
+        municipioB: { nome: "Energia para o dia", emoji: "⚡", cor: "from-amber-500 to-orange-700" },
+        contexto: "Alimentos ricos em carboidratos dão energia rápida para o corpo se movimentar.",
+        pecaCertaId: "energetico", fotoUrl: alimentacao,
+        feedbackAcerto: "Sim. Arroz e batata são ENERGÉTICOS.",
+        feedbackErro: "Carboidratos que dão energia rápida são do grupo ENERGÉTICO." },
+      { id: "r2", municipioA: { nome: "Feijão com carne", emoji: "🍗", cor: "from-red-500 to-rose-700" },
+        municipioB: { nome: "Forma músculos", emoji: "💪", cor: "from-red-500 to-rose-700" },
+        contexto: "Feijão e carne são ricos em proteína, que constrói e repara tecidos.",
+        pecaCertaId: "construtor", fotoUrl: digestivo,
+        feedbackAcerto: "Perfeito. Alimentos ricos em proteína são CONSTRUTORES.",
+        feedbackErro: "Formar e reparar músculos é papel do grupo CONSTRUTOR (proteínas)." },
+      { id: "r3", municipioA: { nome: "Salada de folhas e laranja", emoji: "🍊", cor: "from-emerald-500 to-green-700" },
+        municipioB: { nome: "Vitaminas e defesa do corpo", emoji: "🛡️", cor: "from-emerald-500 to-green-700" },
+        contexto: "Frutas e verduras fornecem vitaminas e minerais que ajudam o corpo a se defender.",
+        pecaCertaId: "regulador", fotoUrl: alimentacao,
+        feedbackAcerto: "Isso. Vitaminas e minerais são REGULADORES.",
+        feedbackErro: "Fontes de vitaminas e minerais pertencem ao grupo REGULADOR." },
+      { id: "r4", municipioA: { nome: "Pão no café da manhã", emoji: "🍞", cor: "from-amber-500 to-orange-700" },
+        municipioB: { nome: "Energia rápida", emoji: "⚡", cor: "from-amber-500 to-orange-700" },
+        contexto: "O pão fornece carboidratos que dão energia para começar o dia.",
+        pecaCertaId: "energetico", fotoUrl: coracao,
+        feedbackAcerto: "Sim. Pão é fonte ENERGÉTICA.",
+        feedbackErro: "Pão é rico em carboidratos, grupo ENERGÉTICO." },
+      { id: "r5", municipioA: { nome: "Ovo cozido", emoji: "🥚", cor: "from-red-500 to-rose-700" },
+        municipioB: { nome: "Reparo dos tecidos", emoji: "🔧", cor: "from-red-500 to-rose-700" },
+        contexto: "O ovo é uma das principais fontes de proteína da alimentação.",
+        pecaCertaId: "construtor", fotoUrl: digestivo,
+        feedbackAcerto: "Correto. Ovo é rico em proteína, grupo CONSTRUTOR.",
+        feedbackErro: "Ovo fornece proteína, que é do grupo CONSTRUTOR." },
+    ],
+    falaFinal: "Você já reconhece os grupos alimentares em situações do dia a dia.",
+  },
+
+  cena10_revisao: {
+    tipo: "pizzaMunicipio",
+    aurora: "O cardápio equilibrado em duas partes: ENERGIA (carboidratos) e CONSTRUÇÃO/REGULAÇÃO (proteínas, vitaminas e minerais).",
+    instrucao: "🍕 Toque nas fatias",
+    fotoUrl: alimentacao,
+    fatias: [
+      { id: "energia", rotulo: "Energia", emoji: "🍚", percentual: 45, cor: "#ea580c",
+        descricao: "Carboidratos fornecem a energia usada nas atividades diárias.",
+        exemplos: ["Arroz", "Pão", "Batata"], fotoUrl: alimentacao },
+      { id: "construcao", rotulo: "Construção e Regulação", emoji: "🍗", percentual: 55, cor: "#059669",
+        descricao: "Proteínas constroem e reparam tecidos; vitaminas e minerais regulam o funcionamento do corpo.",
+        exemplos: ["Carne", "Feijão", "Frutas", "Verduras"], fotoUrl: digestivo },
+    ],
+    falaFinal: "Energia para agir, construção e regulação para manter o corpo forte e saudável.",
+  },
+
+  cena11_avaliacao: {
+    tipo: "seloAtlas",
+    aurora: "3 perguntas — carteira de Nutricionista Júnior te espera.",
+    instrucao: "Responda 3 perguntas para receber o selo",
+    fotoUrl: alimentacao,
+    perguntas: [
+      { id: "q1", pergunta: "Qual grupo de nutrientes constrói e repara músculos?",
+        fotoUrl: digestivo,
+        opcoes: [
+          { id: "a", texto: "Proteínas", correta: true },
+          { id: "b", texto: "Carboidratos" },
+        ],
+        feedbackAcerto: "Sim. PROTEÍNAS constroem e reparam tecidos.",
+        feedbackErro: "Carboidratos dão energia. Quem constrói é a PROTEÍNA." },
+      { id: "q2", pergunta: "O que mede a quantidade de energia de um alimento?",
+        fotoUrl: coracao,
+        opcoes: [
+          { id: "a", texto: "Calorias", correta: true },
+          { id: "b", texto: "Vitaminas" },
+        ],
+        feedbackAcerto: "Correto. CALORIAS medem a energia fornecida pelo alimento.",
+        feedbackErro: "Vitaminas regulam funções. Quem mede energia é a CALORIA." },
+      { id: "q3", pergunta: "Por que variar grupos alimentares é importante?",
+        fotoUrl: alimentacao,
+        opcoes: [
+          { id: "a", texto: "Cada grupo fornece um nutriente diferente e necessário", correta: true },
+          { id: "b", texto: "Só para o prato ficar mais bonito" },
+        ],
+        feedbackAcerto: "Sim. Variar garante energia, construção e regulação juntas.",
+        feedbackErro: "Não é sobre estética: cada grupo entrega um nutriente essencial." },
+    ],
+    selo: {
+      nome: "Nutricionista Júnior",
+      subtitulo: "Missão Planeta Vivo · Laboratório 5 concluído",
+      emoji: "🥗",
+      cor: "from-emerald-400 via-green-500 to-teal-700",
+    },
+    falaFinal: "Nutricionista júnior aprovado. Agora, vamos entender o que acontece quando o equilíbrio falta.",
+  },
+
+  recompensa: { xp: 150, moedas: 30, medalha: "Nutricionista Júnior" },
+};
