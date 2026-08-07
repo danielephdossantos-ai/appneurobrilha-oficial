@@ -1324,6 +1324,7 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   // Se o conteúdo muda de verdade, volta para a tela de "Começar".
   useEffect(() => {
     setIniciou(false);
+    setCompleto(false);
     setPausado(false);
     setRevelados(0);
     setCaracteresVisiveis({});
@@ -1331,8 +1332,9 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   }, [assinatura]);
 
   useEffect(() => {
-    if (!iniciou) return;
+    if (!iniciou || completo) return;
     let montado = true;
+    const limpadores: (() => void)[] = [];
 
     setRevelados(0);
     setCaracteresVisiveis({});
@@ -1346,7 +1348,6 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
           resolve();
         });
       });
-    const limpadores: (() => void)[] = [];
 
     /** Segura o fluxo enquanto estiver pausado. */
     const esperarRetomar = async () => {
@@ -1354,14 +1355,15 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     };
 
     async function escreverTudo() {
+      const lista = passosRef.current;
       await dormir(700);
 
-      for (let i = 0; i < total; i++) {
+      for (let i = 0; i < lista.length; i++) {
         if (!montado) return;
         await esperarRetomar();
         if (!montado) return;
 
-        const passo = passos[i];
+        const passo = lista[i];
 
         // O professor fala a explicação ANTES de escrever a linha.
         if (audioAtivoRef.current && passo.professor) {
@@ -1398,11 +1400,12 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
       limpadores.forEach((f) => f());
       stopSpeaking();
     };
-  }, [assinatura, iniciou, passos, total]);
+  }, [assinatura, iniciou, completo]);
 
   const mostrarTudo = () => {
     stopSpeaking();
     setPausado(false);
+    setCompleto(true);
     setIniciou(true);
     setEstahEscrevendo(false);
     setRevelados(total);
@@ -1412,6 +1415,17 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
     });
     setCaracteresVisiveis(cheio);
   };
+
+  const reiniciar = () => {
+    stopSpeaking();
+    setCompleto(false);
+    setPausado(false);
+    setIniciou(false);
+    setRevelados(0);
+    setCaracteresVisiveis({});
+    setEstahEscrevendo(false);
+  };
+
 
 
   return (
