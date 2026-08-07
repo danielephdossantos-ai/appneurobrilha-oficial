@@ -84,7 +84,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que o texto sugere como firewall contra a manipulação?",
-        opcoes: ["Desenvolver um olhar crítico", "Desligar o sistema", "Acreditar em tudo"],
+        opcoes: ["Desenvolver um olhar crítico", "Ler apenas as manchetes", "Confiar em quem tem mais seguidores", "Repetir a opinião da maioria"],
         correta: 0,
         feedbackAcerto: "Proteção ativada. O pensamento crítico é sua melhor defesa.",
         feedbackErro: "Verifique o último parágrafo do arquivo.",
