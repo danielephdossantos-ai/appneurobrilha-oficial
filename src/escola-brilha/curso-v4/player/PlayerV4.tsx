@@ -583,7 +583,10 @@ function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
     ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
     : "";
   const lousaAtiva = useLousaAtiva();
-  const lousaMini = lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined;
+  const lousaMini = useMemo(
+    () => (lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined),
+    [lousaAtiva, textoMini],
+  );
   const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
   const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
   return (
