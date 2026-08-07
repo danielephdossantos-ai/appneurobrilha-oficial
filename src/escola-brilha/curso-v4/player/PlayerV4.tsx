@@ -32,6 +32,27 @@ function aplicarNome(texto: string, nome?: string): string {
 }
 
 /**
+ * Lousa interativa automática (padrão Pip Teen Roqueiro).
+ * Ativa em todo curso de matemática do 5º ao 9º ano: qualquer conta que
+ * apareça numa cena vira lousa escrita passo a passo, com a fala do
+ * professor em cada linha.
+ */
+const LousaAtivaCtx = createContext(false);
+
+export function useLousaAtiva() {
+  return useContext(LousaAtivaCtx);
+}
+
+/** Renderiza a lousa interativa se houver conta no texto. Senão, null. */
+function LousaConta({ texto }: { texto: string }) {
+  const ativa = useLousaAtiva();
+  const lousa = useMemo(() => (ativa ? lousaDeTexto(texto) : undefined), [ativa, texto]);
+  if (!lousa) return null;
+  return <RenderVisualMat v={lousa} />;
+}
+
+
+/**
  * Player v4.1 — Escola Brilha (tela única com scroll)
  * ---------------------------------------------------
  * Todos os 11 momentos são renderizados em sequência numa única página
