@@ -1792,6 +1792,169 @@ export type Database = {
         }
         Relationships: []
       }
+      curriculo_anual: {
+        Row: {
+          ano_letivo: number
+          base_anamnese: Json | null
+          child_id: string
+          created_at: string
+          dias_por_semana: number
+          gerado_em: string
+          id: string
+          minutos_por_dia: number
+          semanas_por_semestre: number
+          serie: string
+          updated_at: string
+        }
+        Insert: {
+          ano_letivo?: number
+          base_anamnese?: Json | null
+          child_id: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          minutos_por_dia?: number
+          semanas_por_semestre?: number
+          serie: string
+          updated_at?: string
+        }
+        Update: {
+          ano_letivo?: number
+          base_anamnese?: Json | null
+          child_id?: string
+          created_at?: string
+          dias_por_semana?: number
+          gerado_em?: string
+          id?: string
+          minutos_por_dia?: number
+          semanas_por_semestre?: number
+          serie?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculo_anual_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      curriculo_anual_itens: {
+        Row: {
+          aula_slug: string
+          child_id: string
+          concluido: boolean
+          concluido_em: string | null
+          created_at: string
+          curriculo_id: string
+          curso_slug: string
+          dia_semana: number
+          disciplina: string
+          id: string
+          minutos: number
+          ordem: number
+          prioridade: number
+          rota: string
+          semana: number
+          semestre: number
+          titulo: string
+        }
+        Insert: {
+          aula_slug: string
+          child_id: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          curriculo_id: string
+          curso_slug: string
+          dia_semana: number
+          disciplina: string
+          id?: string
+          minutos?: number
+          ordem?: number
+          prioridade?: number
+          rota: string
+          semana: number
+          semestre?: number
+          titulo: string
+        }
+        Update: {
+          aula_slug?: string
+          child_id?: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          curriculo_id?: string
+          curso_slug?: string
+          dia_semana?: number
+          disciplina?: string
+          id?: string
+          minutos?: number
+          ordem?: number
+          prioridade?: number
+          rota?: string
+          semana?: number
+          semestre?: number
+          titulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculo_anual_itens_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "curriculo_anual_itens_curriculo_id_fkey"
+            columns: ["curriculo_id"]
+            isOneToOne: false
+            referencedRelation: "curriculo_anual"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      curriculo_horarios: {
+        Row: {
+          child_id: string
+          created_at: string
+          dia_semana: number
+          hora: string
+          id: string
+          lembrete: boolean
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          dia_semana: number
+          hora?: string
+          id?: string
+          lembrete?: boolean
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          dia_semana?: number
+          hora?: string
+          id?: string
+          lembrete?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculo_horarios_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_routines: {
         Row: {
           category: string | null

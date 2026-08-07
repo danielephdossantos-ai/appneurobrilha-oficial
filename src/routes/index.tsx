@@ -44,6 +44,15 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.12)",
   },
   {
+    to: "/curriculo-anual",
+    title: "Currículo Anual",
+    subtitle: "Ano Letivo Completo",
+    gradient: "from-[#38BDF8] via-[#0EA5E9] to-[#0369A1]",
+    glow: "rgba(56,189,248,0.7)",
+    emoji: "🎓",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
     to: "/escola-brilha",
     title: "Escola Brilha",
     subtitle: "Aulas de verdade",

@@ -31,6 +31,7 @@ import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
+import { Route as CurriculoAnualRouteImport } from './routes/curriculo-anual'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
@@ -198,6 +199,11 @@ const LojaMascotesRoute = LojaMascotesRouteImport.update({
 const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
   id: '/gerador-procedural',
   path: '/gerador-procedural',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculoAnualRoute = CurriculoAnualRouteImport.update({
+  id: '/curriculo-anual',
+  path: '/curriculo-anual',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
@@ -540,6 +546,7 @@ export interface FileRoutesByFullPath {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
+  '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -621,6 +628,7 @@ export interface FileRoutesByTo {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
+  '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -704,6 +712,7 @@ export interface FileRoutesById {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
+  '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -788,6 +797,7 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
+    | '/curriculo-anual'
     | '/gerador-procedural'
     | '/loja-mascotes'
     | '/mascotes'
@@ -869,6 +879,7 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
+    | '/curriculo-anual'
     | '/gerador-procedural'
     | '/loja-mascotes'
     | '/mascotes'
@@ -951,6 +962,7 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
+    | '/curriculo-anual'
     | '/gerador-procedural'
     | '/loja-mascotes'
     | '/mascotes'
@@ -1034,6 +1046,7 @@ export interface RootRouteChildren {
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
+  CurriculoAnualRoute: typeof CurriculoAnualRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
@@ -1248,6 +1261,13 @@ declare module '@tanstack/react-router' {
       path: '/gerador-procedural'
       fullPath: '/gerador-procedural'
       preLoaderRoute: typeof GeradorProceduralRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculo-anual': {
+      id: '/curriculo-anual'
+      path: '/curriculo-anual'
+      fullPath: '/curriculo-anual'
+      preLoaderRoute: typeof CurriculoAnualRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/curadoria-aulas': {
@@ -1720,6 +1740,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   CuradoriaAulasRoute: CuradoriaAulasRoute,
+  CurriculoAnualRoute: CurriculoAnualRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
