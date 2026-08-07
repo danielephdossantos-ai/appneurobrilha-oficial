@@ -1293,12 +1293,16 @@ function TrinomioPassoAPasso({ v }: { v: TrinomioPassoAPassoV }) {
   const [caracteresVisiveis, setCaracteresVisiveis] = useState<{ [key: number]: number }>({});
   const [estahEscrevendo, setEstahEscrevendo] = useState(false);
   const [iniciou, setIniciou] = useState(false);
+  const [completo, setCompleto] = useState(false);
   const [audioAtivo, setAudioAtivo] = useState(true);
   const [pausado, setPausado] = useState(false);
   const audioAtivoRef = useRef(true);
   const pausadoRef = useRef(false);
+  const passosRef = useRef(passos);
+  passosRef.current = passos;
   const total = passos.length;
-  const terminou = revelados >= total && !estahEscrevendo;
+  const terminou = completo || (revelados >= total && !estahEscrevendo);
+
 
   /** Assinatura estável do conteúdo: evita reiniciar a animação
    *  quando o pai recria o objeto `v` a cada render (bug do "pulando"). */
