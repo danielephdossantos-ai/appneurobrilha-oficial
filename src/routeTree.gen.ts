@@ -51,6 +51,7 @@ import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
+import { Route as AuthLousaTestRouteImport } from './routes/auth.lousa-test'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -300,6 +301,11 @@ const BnccCodigoRoute = BnccCodigoRouteImport.update({
   path: '/bncc/$codigo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthLousaTestRoute = AuthLousaTestRouteImport.update({
+  id: '/lousa-test',
+  path: '/lousa-test',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
   id: '/anamnese/$childId',
   path: '/anamnese/$childId',
@@ -533,7 +539,7 @@ export interface FileRoutesByFullPath {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -566,6 +572,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/auth/lousa-test': typeof AuthLousaTestRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
@@ -614,7 +621,7 @@ export interface FileRoutesByTo {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -647,6 +654,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/auth/lousa-test': typeof AuthLousaTestRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
@@ -697,7 +705,7 @@ export interface FileRoutesById {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
@@ -730,6 +738,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/auth/lousa-test': typeof AuthLousaTestRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
@@ -814,6 +823,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/auth/lousa-test'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
@@ -895,6 +905,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/auth/lousa-test'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
@@ -977,6 +988,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/auth/lousa-test'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
@@ -1027,7 +1039,7 @@ export interface RootRouteChildren {
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
   BancoMidiasRoute: typeof BancoMidiasRoute
   BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
   BibliotecaPedagogicaRoute: typeof BibliotecaPedagogicaRoute
@@ -1390,6 +1402,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BnccCodigoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/lousa-test': {
+      id: '/auth/lousa-test'
+      path: '/lousa-test'
+      fullPath: '/auth/lousa-test'
+      preLoaderRoute: typeof AuthLousaTestRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/anamnese/$childId': {
       id: '/anamnese/$childId'
       path: '/anamnese/$childId'
@@ -1669,6 +1688,16 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface AuthRouteChildren {
+  AuthLousaTestRoute: typeof AuthLousaTestRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLousaTestRoute: AuthLousaTestRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
@@ -1713,7 +1742,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
   BancoMidiasRoute: BancoMidiasRoute,
   BibliotecaAlfaRoute: BibliotecaAlfaRoute,
   BibliotecaPedagogicaRoute: BibliotecaPedagogicaRoute,
