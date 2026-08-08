@@ -30,7 +30,7 @@ function MascotStorePage() {
     }
 
     try {
-      await buyFn({ mascotId, price, childId: activeChild.id });
+      await buyFn({ data: { mascotId, price, childId: activeChild.id } });
       toast.success("Novo mascote desbloqueado! 🎉");
       window.location.reload(); // Recarrega para atualizar contexto
     } catch (e) {
@@ -40,7 +40,7 @@ function MascotStorePage() {
 
   const handleSelect = async (mascotId: string) => {
     try {
-      await toggleFn({ mascotId });
+      await toggleFn({ data: { mascotId } });
       toast.success("Mascote trocado com sucesso!");
       window.location.reload();
     } catch (e) {
