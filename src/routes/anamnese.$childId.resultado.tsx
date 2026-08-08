@@ -252,17 +252,19 @@ function ResultadoRoute() {
           <p className="text-xs text-muted-foreground mb-3">
             Trilhas ativadas para <b>{curso.faixa}</b> — comece por qualquer uma:
           </p>
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {curso.trilhas.map((t) => (
               <a
                 key={t.rota}
                 href={t.rota}
-                className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
+                className="flex items-start gap-4 p-4 rounded-2xl border-2 border-primary/10 hover:border-emerald-500/30 bg-white hover:bg-emerald-50 transition-all group"
               >
-                <span className="text-2xl">{t.emoji}</span>
+                <div className="h-12 w-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                  {t.emoji}
+                </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-sm">{t.titulo}</p>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
+                  <p className="font-black text-[#0d1f55] tracking-tight mb-1">{t.titulo}</p>
+                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">
                     {t.descricao}
                   </p>
                 </div>
