@@ -309,9 +309,9 @@ function ResultadoRoute() {
                 40 semanas, 5× por semana, 20min por dia
               </div>
               <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-emerald-500 w-[54%]" />
+                <div className="h-full bg-emerald-500 w-[100%]" />
               </div>
-              <div className="text-[10px] font-black text-emerald-600">Adaptativo 54%</div>
+              <div className="text-[10px] font-black text-emerald-600">Adaptativo 100%</div>
             </div>
             <div className="grid grid-cols-3 gap-2 text-center mb-3">
               <div className="p-2 rounded-lg bg-background border">
