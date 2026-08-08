@@ -345,6 +345,8 @@ function Index() {
         </div>
       </div>
 
+      <div className="hidden md:block">
+
         {/* Grade 4×3 desktop — todas as 12 */}
         <div className="relative z-10 px-8 pb-10">
           <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
