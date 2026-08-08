@@ -4555,6 +4555,7 @@ export type Database = {
           id: string
           image_url: string | null
           name: string
+          price: number | null
           skins: Json | null
         }
         Insert: {
@@ -4565,6 +4566,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           name: string
+          price?: number | null
           skins?: Json | null
         }
         Update: {
@@ -4575,6 +4577,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           name?: string
+          price?: number | null
           skins?: Json | null
         }
         Relationships: []
@@ -7786,6 +7789,7 @@ export type Database = {
           metadata: Json | null
           room_metadata: Json | null
           stats: Json | null
+          unlocked: boolean | null
           user_id: string
         }
         Insert: {
@@ -7802,6 +7806,7 @@ export type Database = {
           metadata?: Json | null
           room_metadata?: Json | null
           stats?: Json | null
+          unlocked?: boolean | null
           user_id: string
         }
         Update: {
@@ -7818,6 +7823,7 @@ export type Database = {
           metadata?: Json | null
           room_metadata?: Json | null
           stats?: Json | null
+          unlocked?: boolean | null
           user_id?: string
         }
         Relationships: [
