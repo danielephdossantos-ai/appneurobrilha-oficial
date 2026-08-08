@@ -65,24 +65,37 @@ const LiveMascot = ({
   const { activeChild } = useAppState();
   const stage = useMascotStage(activeChild?.id);
 
-  // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // A criança pode alternar entre Ovo → Nascendo → Bebê → Guardião (criança)
-  // dentre as fases já liberadas.
-  let activeMascotName: string | undefined;
+  // REGRA OFICIAL NEUROBRILHA: A criança pode alternar entre seus mascotes desbloqueados.
+  // A Cidade do Pip suporta Pip, Pipa e novos amigos da loja.
+  let activeMascot: any;
   try {
-    activeMascotName = useMascot().activeMascot?.mascot?.name;
+    activeMascot = useMascot().activeMascot;
   } catch {
-    activeMascotName = undefined;
+    activeMascot = null;
   }
+  
+  const activeMascotName = activeMascot?.mascot?.name?.toLowerCase();
   
   // Se não tiver um mascote ativo no BD (ex: logo após anamnese), usa a escolha salva no localStorage
   const starterChoice = getStarterMascot(activeChild?.id);
-  const isPipa = activeMascotName?.toLowerCase() === "pipa" || starterChoice === "pipa";
+  const isPipa = activeMascotName === "pipa" || (!activeMascotName && starterChoice === "pipa");
+  const isDino = activeMascotName === "dino";
+  const isRobo = activeMascotName === "robo";
+  const isUnicornio = activeMascotName === "unicórnio" || activeMascotName === "unicornio";
 
+  // Mapeamento de imagens por mascote e estágio
   const stageImages: Record<string, string> = isPipa
     ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
+    : isDino
+    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-dino.png" } // Fallback para URLs se não houver asset local
+    : isRobo
+    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-robo.png" }
+    : isUnicornio
+    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-unicorn.png" }
     : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
-  const mascotImage = stageImages[stage] ?? stageImages.crianca;
+  
+  const mascotImage = stageImages[stage] || stageImages.crianca;
+
 
 
   const sizes = {

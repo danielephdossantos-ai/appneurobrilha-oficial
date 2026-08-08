@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useMascot } from "@/contexts/MascotContext";
 import { useAppState } from "@/core/store";
@@ -14,8 +14,10 @@ export const Route = createFileRoute("/loja-mascotes")({
 });
 
 function MascotStorePage() {
-  const { allCatalogMascots, userMascots, setActiveMascot, isLoading } = useMascot();
-  const { activeChild, addCoins } = useAppState();
+  const { allCatalogMascots, userMascots, isLoading } = useMascot();
+  const { activeChild } = useAppState();
+  const navigate = useNavigate();
+
   
   const buyFn = useServerFn(buyMascot);
   const toggleFn = useServerFn(toggleMascotActive);

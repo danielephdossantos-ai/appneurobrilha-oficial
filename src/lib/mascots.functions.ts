@@ -4,8 +4,8 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const buyMascot = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .input(z.object({ mascotId: z.string(), price: z.number(), childId: z.string() }))
-  .handler(async ({ input, context }) => {
+  .inputValidator((data) => z.object({ mascotId: z.string(), price: z.number(), childId: z.string() }).parse(data))
+  .handler(async ({ data: input, context }) => {
     const { supabase, userId } = context;
 
     // 1. Verificar saldo de moedas do filho
@@ -43,8 +43,8 @@ export const buyMascot = createServerFn({ method: "POST" })
 
 export const toggleMascotActive = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .input(z.object({ mascotId: z.string() }))
-  .handler(async ({ input, context }) => {
+  .inputValidator((data) => z.object({ mascotId: z.string() }).parse(data))
+  .handler(async ({ data: input, context }) => {
     const { supabase, userId } = context;
 
     // 1. Desativar todos
