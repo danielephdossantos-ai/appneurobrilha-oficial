@@ -165,6 +165,7 @@ function Index() {
 
   return (
     <Shell>
+      <Stars />
       <AnimatePresence>
         {showEggHatch && activeChild?.id && (
           <EggHatchCinematic
@@ -174,6 +175,7 @@ function Index() {
           />
         )}
       </AnimatePresence>
+
 
       {/* ═══════════════ MOBILE ═══════════════ */}
       <div className="md:hidden flex flex-col gap-3 -mt-2">
