@@ -210,7 +210,7 @@ function PlanoNeuroPage() {
                   Plano de {plano.semanas} semanas · {plano.sessoes_por_dia} sessões/dia
                 </div>
                 <div className="text-lg font-black">
-                  {progresso.concluidas} de {progresso.total} sessões feitas
+                  {progresso.concluidas} de {progresso.total} sessões feitas (Ano Completo)
                 </div>
               </div>
               <button
