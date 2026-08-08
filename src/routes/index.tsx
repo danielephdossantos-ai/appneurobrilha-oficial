@@ -385,7 +385,6 @@ function Index() {
             ))}
           </div>
         </div>
-      </div>
 
         {/* Seletor desktop */}
         <div className="mt-8">
