@@ -101,7 +101,7 @@ function candidatosEscola(idade: number): Candidato[] {
   }
   
   // 3º ao 9º Ano e Ensino Médio
-  const serie = idadeParaSerie(idade);
+  // 3º ao 9º Ano e Ensino Médio — serie já foi declarada acima.
   let serieSlug = "1ano";
   if (serie === "2º Ano") serieSlug = "2ano";
   else if (serie === "3º Ano") serieSlug = "3ano";
