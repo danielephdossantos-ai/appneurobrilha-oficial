@@ -1,8 +1,12 @@
 import { createMiddleware } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 
+/**
+ * Middleware para anexar o token de autenticação do Supabase a todas as chamadas de Server Functions.
+ * Isso permite que o backend identifique o usuário e aplique as políticas de RLS corretamente.
+ */
 export const attachSupabaseAuth = createMiddleware().client(
-  async ({ next }) => {
+  async ({ next }: { next: (args?: { headers?: Record<string, string> }) => Promise<any> }) => {
     const { data: { session } } = await supabase.auth.getSession();
     const token = session?.access_token;
     
