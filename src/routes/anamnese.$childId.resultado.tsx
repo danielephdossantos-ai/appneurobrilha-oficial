@@ -327,8 +327,8 @@ function ResultadoRoute() {
                 <p className="text-[10px] text-muted-foreground">por dia</p>
               </div>
             </div>
-            <Button asChild className="w-full">
-              <Link to="/plano-anual">Ver plano completo</Link>
+            <Button asChild className="w-full bg-[#0d1f55] hover:bg-[#1a3a8c] text-white rounded-2xl h-12 font-black shadow-lg">
+              <Link to="/plano-anual">Abrir Plano Anual</Link>
             </Button>
           </Card>
         )}
