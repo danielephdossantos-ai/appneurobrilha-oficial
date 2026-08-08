@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { GraduationCap } from "lucide-react";
 
 function NotFoundComponent() {
   const location = useLocation();
