@@ -50,11 +50,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+        <h1 className="text-4xl font-black tracking-tight text-[#0d1f55] mb-4">
+          Ops! Algo deu errado 🚀
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+        <p className="mt-2 text-lg font-bold text-[#0d1f55]/70">
+          Parece que o Pip tropeçou em um fio! Tente recarregar a página ou volte para o início.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -62,15 +62,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-2xl bg-[#4C9EFF] px-8 py-3 text-sm font-black text-white transition-all hover:scale-105 active:scale-95 shadow-lg border-b-4 border-blue-700"
           >
-            Try again
+            Tentar novamente
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-2xl border-2 border-[#0d1f55]/10 bg-white px-8 py-3 text-sm font-black text-[#0d1f55] transition-all hover:bg-[#0d1f55]/5 active:scale-95"
           >
-            Go home
+            Ir para o início
           </a>
         </div>
       </div>
