@@ -26,6 +26,7 @@ import { url as pipCarros } from "@/assets/pip-carros.png.asset.json";
 import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
 import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
 import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
+import { getStarterMascot } from "@/components/pip/EggHatchCinematic";
 
 
 export const PIP_SKINS: Record<string, string> = {
@@ -73,7 +74,10 @@ const LiveMascot = ({
   } catch {
     activeMascotName = undefined;
   }
-  const isPipa = activeMascotName?.toLowerCase() === "pipa";
+  
+  // Se não tiver um mascote ativo no BD (ex: logo após anamnese), usa a escolha salva no localStorage
+  const starterChoice = getStarterMascot(activeChild?.id);
+  const isPipa = activeMascotName?.toLowerCase() === "pipa" || starterChoice === "pipa";
 
   const stageImages: Record<string, string> = isPipa
     ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
@@ -99,7 +103,7 @@ const LiveMascot = ({
 
         <img
           src={mascotImage}
-          alt="Pip - O Guardião dos Desafios"
+          alt={isPipa ? "Pipa - A Guardiã dos Desafios" : "Pip - O Guardião dos Desafios"}
           className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
           draggable={false}
         />
