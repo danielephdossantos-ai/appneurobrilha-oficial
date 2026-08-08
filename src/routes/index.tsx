@@ -195,12 +195,16 @@ function Index() {
           )}
 
           <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center text-center px-4 z-10">
-            <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-2xl border-2 border-[#FFC93C] shadow-lg mb-2">
-              <p className="text-[#0d1f55] font-black text-xs leading-tight">
-                {activeChild
-                  ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
-                  : "Escolha um aventureiro! ✨"}
-              </p>
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-3xl border-2 border-[#FFC93C] shadow-lg mb-2 flex flex-col items-center gap-2">
+              <KidLiveMascot size="sm" showBadge={false} className="mb-1" />
+              <div>
+                <p className="text-[#0d1f55] font-black text-sm leading-tight">
+                  NeuroBrilha
+                </p>
+                <p className="text-[#0d1f55]/60 font-bold text-[9px] uppercase tracking-wider">
+                  Aprendizagem Adaptativa
+                </p>
+              </div>
             </div>
           </div>
         </div>
