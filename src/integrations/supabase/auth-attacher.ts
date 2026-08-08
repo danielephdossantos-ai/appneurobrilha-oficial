@@ -6,14 +6,19 @@ import { supabase } from "@/integrations/supabase/client";
  * Isso permite que o backend identifique o usuário e aplique as políticas de RLS corretamente.
  */
 export const attachSupabaseAuth = createMiddleware({ type: "function" }).client(
-  async ({ next }: any) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    const token = session?.access_token;
-    
-    return next({
-      headers: {
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-    });
+  async ({ next }) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      
+      return next({
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+    } catch (err) {
+      console.error("Auth attacher error:", err);
+      return next();
+    }
   }
 );

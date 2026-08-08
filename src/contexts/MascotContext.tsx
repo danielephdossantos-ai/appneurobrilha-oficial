@@ -9,6 +9,7 @@ export interface Mascot {
   description: string;
   image_url: string;
   category: string;
+  price?: number;
   base_stats: any;
   skins?: Record<string, string>;
 }
@@ -17,6 +18,7 @@ export interface UserMascot {
   id: string;
   mascot_id: string;
   is_active: boolean;
+  unlocked: boolean;
   level: number;
   affinity: number;
   experience: number;
@@ -26,8 +28,10 @@ export interface UserMascot {
 interface MascotContextType {
   activeMascot: UserMascot | null;
   userMascots: UserMascot[];
+  allCatalogMascots: Mascot[];
   isLoading: boolean;
   setActiveMascot: (mascotId: string) => Promise<void>;
+  buyMascot: (mascot: Mascot) => Promise<void>;
   gainExperience: (amount: number) => Promise<void>;
   gainAffinity: (amount: number) => Promise<void>;
 }
@@ -38,6 +42,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const { user } = useAuth();
   const [activeMascot, setActiveMascotState] = useState<UserMascot | null>(null);
   const [userMascots, setUserMascots] = useState<UserMascot[]>([]);
+  const [allCatalogMascots, setAllCatalogMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchMascots = async () => {
@@ -45,14 +50,21 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       setIsLoading(true);
+      
+      // Carregar catálogo completo
+      const { data: catalog, error: catalogError } = await (supabase as any)
+        .from("mascots")
+        .select("*");
+      
+      if (catalogError) throw catalogError;
+      setAllCatalogMascots(catalog || []);
+
       const { data, error } = await (supabase as any)
         .from("user_mascots")
-        .select(
-          `
+        .select(`
           *,
           mascot:mascots (*)
-        `,
-        )
+        `)
         .eq("user_id", user.id);
 
       if (error) throw error;
@@ -71,8 +83,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     fetchMascots();
   }, [user]);
 
-  // Toast de desbloqueio: quando o mascote ativo sobe de nível,
-  // checa itens do catálogo liberados nesse novo nível.
   useEffect(() => {
     if (!activeMascot || !user) return;
     const level = activeMascot.level;
@@ -106,7 +116,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!user) return;
 
     try {
-      // First, set all mascots to inactive for this user
       const { error: resetError } = await (supabase as any)
         .from("user_mascots")
         .update({ is_active: false })
@@ -114,7 +123,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
       if (resetError) throw resetError;
 
-      // Then set the selected mascot as active
       const { error: setActiveError } = await (supabase as any)
         .from("user_mascots")
         .update({ is_active: true })
@@ -185,13 +193,19 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
+  const buyMascotAction = async (mascot: Mascot) => {
+    await fetchMascots();
+  };
+
   return (
     <MascotContext.Provider
       value={{
         activeMascot,
         userMascots,
+        allCatalogMascots,
         isLoading,
         setActiveMascot,
+        buyMascot: buyMascotAction,
         gainExperience,
         gainAffinity,
       }}
