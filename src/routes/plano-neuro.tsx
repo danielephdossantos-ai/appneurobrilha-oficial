@@ -185,7 +185,7 @@ function PlanoNeuroPage() {
           <h2 className="text-xl font-black">Montar o Plano Neuro de {activeChild?.nome}</h2>
           <p className="text-sm text-muted-foreground">
             Vamos usar o resultado da anamnese para escolher as atividades do Neuro Treino e
-            distribuí-las em 12 semanas, 5 dias por semana, com horário e lembrete.
+            distribuí-las em 40 semanas, 5 dias por semana, com horário e lembrete.
           </p>
           <button
             onClick={gerar}
