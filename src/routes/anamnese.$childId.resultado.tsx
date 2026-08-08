@@ -211,25 +211,28 @@ function ResultadoRoute() {
             <p className="text-xs text-muted-foreground mb-3">
               Do módulo Neuro Treino — priorizadas pelo perfil da criança.
             </p>
-            <div className="grid gap-2">
+            <div className="grid gap-3">
               {atividadesTerapeuticas.slice(0, 6).map((a) => (
                 <Link
                   key={a.slug}
-                  to="/neuro-treino"
-                  className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
+                  to={a.rota}
+                  className="flex items-start gap-4 p-4 rounded-2xl border-2 border-primary/10 hover:border-primary/30 bg-white hover:bg-primary/5 transition-all group"
                 >
-                  <span className="text-2xl">{a.emoji}</span>
+                  <div className="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                    {a.emoji}
+                  </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-sm">{a.nome}</span>
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <span className="font-black text-[#0d1f55] tracking-tight">{a.nome}</span>
                       {a.prioridade === 1 && (
-                        <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-red-100 text-red-700">
+                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-red-500 text-white">
                           Prioridade
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground">{a.objetivo}</p>
-                    <p className="text-xs text-primary mt-0.5">{a.porQue}</p>
+                    <p className="text-[11px] font-black text-primary uppercase tracking-wider mb-1 opacity-70">{a.grupo}</p>
+                    <p className="text-xs text-muted-foreground font-medium mb-1">{a.objetivo}</p>
+                    <p className="text-[11px] text-primary/80 font-bold italic leading-tight">{a.porQue}</p>
                   </div>
                 </Link>
               ))}
