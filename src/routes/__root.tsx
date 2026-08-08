@@ -120,7 +120,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="Load the security issues from the scan results and fix the selected issues.">
         {children}
         <Scripts />
       </body>
