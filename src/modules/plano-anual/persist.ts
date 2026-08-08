@@ -110,7 +110,7 @@ export interface SalvarPlanoInput {
 export async function salvarPlanoParaCrianca(
   input: SalvarPlanoInput,
 ): Promise<PlanoAnualGerado> {
-  const idade = Math.max(3, Math.min(7, input.idade));
+  const idade = Math.max(3, Math.min(17, input.idade));
   const serie = input.serie || idadeParaSerie(idade);
   const hash = perfilHash(idade, serie, input.risk);
 
