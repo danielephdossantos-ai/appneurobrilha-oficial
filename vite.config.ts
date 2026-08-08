@@ -10,36 +10,36 @@ export default defineConfig({
     plugins: [
       mcpPlugin(),
       VitePWA({
-        registerType: "prompt",
-        includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
-        manifest: {
-          name: "NeuroBrilha Kids",
-          short_name: "NeuroBrilha",
-          description: "Sistema neuroeducacional para crianças",
-          theme_color: "#ffffff",
-          icons: [
-            { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
-            { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
-          ],
-        },
-        workbox: {
-          globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
-          maximumFileSizeToCacheInBytes: 25 * 1024 * 1024,
-          runtimeCaching: [
-            {
-              urlPattern: /^\/api\//,
-              handler: "NetworkFirst",
-              options: {
-                cacheName: "api-cache",
-                expiration: {
-                  maxEntries: 50,
-                  maxAgeSeconds: 60 * 5,
-                },
-                cacheableResponse: { statuses: [0, 200] },
+      registerType: "prompt",
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      manifest: {
+        name: "NeuroBrilha Kids",
+        short_name: "NeuroBrilha",
+        description: "Sistema neuroeducacional para crianças",
+        theme_color: "#ffffff",
+        icons: [
+          { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
+          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
+        ],
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: /^\/api\//,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "api-cache",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 5,
               },
+              cacheableResponse: { statuses: [0, 200] },
             },
-          ],
-        },
+          },
+        ],
+      },
       }),
     ],
     server: {
