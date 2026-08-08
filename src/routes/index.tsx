@@ -344,9 +344,9 @@ function Index() {
           )}
         </div>
 
-          {/* Grade 4×3 desktop — todas as 12 */}
-          <div className="relative z-10 px-8 pb-10">
-            <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
+        {/* Grade 4×3 desktop — todas as 12 */}
+        <div className="relative z-10 px-8 pb-10">
+          <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
               {DESTINOS_KIDS.map((d, i) => (
                 <Link key={d.to} to={d.to} className="group">
                   <motion.div
