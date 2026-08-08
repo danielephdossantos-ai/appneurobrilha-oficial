@@ -343,6 +343,7 @@ function Index() {
             </div>
           )}
         </div>
+      </div>
 
         {/* Grade 4×3 desktop — todas as 12 */}
         <div className="relative z-10 px-8 pb-10">
