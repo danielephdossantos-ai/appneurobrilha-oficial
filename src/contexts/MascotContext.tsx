@@ -36,7 +36,6 @@ interface MascotContextType {
   gainAffinity: (amount: number) => Promise<void>;
 }
 
-
 const MascotContext = createContext<MascotContextType | undefined>(undefined);
 
 export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -53,25 +52,19 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setIsLoading(true);
       
       // Carregar catálogo completo
-      const { data: catalog } = await (supabase as any)
+      const { data: catalog, error: catalogError } = await (supabase as any)
         .from("mascots")
         .select("*");
+      
+      if (catalogError) throw catalogError;
       setAllCatalogMascots(catalog || []);
 
       const { data, error } = await (supabase as any)
-
-    if (!user) return;
-
-    try {
-      setIsLoading(true);
-      const { data, error } = await (supabase as any)
         .from("user_mascots")
-        .select(
-          `
+        .select(`
           *,
           mascot:mascots (*)
-        `,
-        )
+        `)
         .eq("user_id", user.id);
 
       if (error) throw error;
@@ -90,8 +83,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     fetchMascots();
   }, [user]);
 
-  // Toast de desbloqueio: quando o mascote ativo sobe de nível,
-  // checa itens do catálogo liberados nesse novo nível.
   useEffect(() => {
     if (!activeMascot || !user) return;
     const level = activeMascot.level;
@@ -125,7 +116,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!user) return;
 
     try {
-      // First, set all mascots to inactive for this user
       const { error: resetError } = await (supabase as any)
         .from("user_mascots")
         .update({ is_active: false })
@@ -133,7 +123,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
       if (resetError) throw resetError;
 
-      // Then set the selected mascot as active
       const { error: setActiveError } = await (supabase as any)
         .from("user_mascots")
         .update({ is_active: true })
@@ -205,8 +194,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   const buyMascotAction = async (mascot: Mascot) => {
-    // Implementação será via server function no componente ou aqui
-    // Por simplicidade aqui vamos apenas expor a necessidade de recarregar após a compra
     await fetchMascots();
   };
 
@@ -226,7 +213,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       {children}
     </MascotContext.Provider>
   );
-
 };
 
 export const useMascot = () => {
