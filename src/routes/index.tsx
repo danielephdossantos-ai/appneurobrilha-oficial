@@ -347,45 +347,45 @@ function Index() {
         {/* Grade 4×3 desktop — todas as 12 */}
         <div className="relative z-10 px-8 pb-10">
           <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
-              {DESTINOS_KIDS.map((d, i) => (
-                <Link key={d.to} to={d.to} className="group">
-                  <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.06 * i, type: "spring", stiffness: 120 }}
-                    whileHover={{ y: -6, scale: 1.04 }}
-                    whileTap={{ scale: 0.97 }}
-                    className={cn(
-                      "relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br",
-                      d.gradient,
-                    )}
-                    style={{ boxShadow: `0 8px 0 rgba(0,0,0,0.22), 0 0 28px ${d.glow}` }}
-                  >
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
-                      }}
-                    />
-                    <div className="flex flex-col items-center px-3 pt-5 pb-1">
-                      <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
-                        {d.emoji}
-                      </span>
+            {DESTINOS_KIDS.map((d, i) => (
+              <Link key={d.to} to={d.to} className="group">
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 * i, type: "spring", stiffness: 120 }}
+                  whileHover={{ y: -6, scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={cn(
+                    "relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br",
+                    d.gradient,
+                  )}
+                  style={{ boxShadow: `0 8px 0 rgba(0,0,0,0.22), 0 0 28px ${d.glow}` }}
+                >
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
+                    }}
+                  />
+                  <div className="flex flex-col items-center px-3 pt-5 pb-1">
+                    <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
+                      {d.emoji}
+                    </span>
+                  </div>
+                  <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
+                    <div className="text-sm font-black text-[#0d1f55] leading-tight">
+                      {d.title}
                     </div>
-                    <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
-                      <div className="text-sm font-black text-[#0d1f55] leading-tight">
-                        {d.title}
-                      </div>
-                      <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">
-                        {d.subtitle}
-                      </div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">
+                      {d.subtitle}
                     </div>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
           </div>
         </div>
+      </div>
 
         {/* Seletor desktop */}
         <div className="mt-8">
