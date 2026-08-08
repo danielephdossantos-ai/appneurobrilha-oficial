@@ -120,7 +120,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="antialiased">
+        <AuthMessage />
         {children}
         <Scripts />
       </body>
@@ -208,3 +209,43 @@ import { ParentPinGate } from "@/components/auth/ParentPinGate";
 import { HiperfocoProvider } from "@/context/HiperfocoContext";
 import { AuthGuard } from "@/modules/auth/components/AuthGuard";
 import { ProfessorBrilhoMount } from "@/components/professor/ProfessorBrilhoMount";
+
+function AuthMessage() {
+  const [msg, setMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    const search = window.location.search;
+    if (search.includes("error=access_denied")) {
+      setMsg("O LOGIN COM O GOOGLE NÃO ESTÁ FUNCIONANDO, ESTÁ BUGADO");
+    }
+  }, []);
+
+  if (!msg) return null;
+
+  return (
+    <div className="fixed top-0 left-0 w-full z-[9999] bg-destructive text-destructive-foreground px-4 py-3 text-center font-black animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="flex items-center justify-center gap-3">
+        <span className="text-xl">⚠️</span>
+        {msg}
+        <button
+          onClick={() => setMsg(null)}
+          className="ml-4 rounded-full bg-white/20 hover:bg-white/30 p-1 transition-colors"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
