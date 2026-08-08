@@ -195,12 +195,16 @@ function Index() {
           )}
 
           <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center text-center px-4 z-10">
-            <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-2xl border-2 border-[#FFC93C] shadow-lg mb-2">
-              <p className="text-[#0d1f55] font-black text-xs leading-tight">
-                {activeChild
-                  ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
-                  : "Escolha um aventureiro! ✨"}
-              </p>
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-3xl border-2 border-[#FFC93C] shadow-lg mb-2 flex flex-col items-center gap-2">
+              <KidLiveMascot size="sm" showBadge={false} className="mb-1" />
+              <div>
+                <p className="text-[#0d1f55] font-black text-sm leading-tight">
+                  NeuroBrilha
+                </p>
+                <p className="text-[#0d1f55]/60 font-bold text-[9px] uppercase tracking-wider">
+                  Aprendizagem Adaptativa
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -322,12 +326,16 @@ function Index() {
           
           {/* Info Desktop sobre a imagem */}
           <div className="absolute bottom-10 left-10 z-20 flex flex-col items-start gap-4">
-             <div className="bg-white/95 backdrop-blur-md px-6 py-3 rounded-2xl shadow-2xl border-2 border-[#FFC93C] max-w-md">
-                <p className="text-[#0d1f55] font-black text-xl leading-tight">
-                  {activeChild
-                    ? `Oi ${activeChild.nome}! Vamos começar? 🚀`
-                    : "Escolha um aventureiro pra começar! ✨"}
-                </p>
+             <div className="bg-white/95 backdrop-blur-md px-8 py-6 rounded-[2.5rem] shadow-2xl border-2 border-[#FFC93C] flex items-center gap-6">
+                <KidLiveMascot size="md" showBadge={false} />
+                <div className="flex flex-col">
+                  <h1 className="text-[#0d1f55] font-black text-4xl leading-tight">
+                    NeuroBrilha
+                  </h1>
+                  <p className="text-[#0d1f55]/60 font-black text-sm uppercase tracking-[0.2em]">
+                    Aprendizagem Adaptativa
+                  </p>
+                </div>
              </div>
           </div>
 
