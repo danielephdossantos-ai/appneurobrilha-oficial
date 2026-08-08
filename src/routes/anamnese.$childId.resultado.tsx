@@ -101,9 +101,9 @@ function ResultadoRoute() {
 
         <DisclaimerBanner />
 
-        <Card className="p-4 md:p-6">
-          <h1 className="text-xl md:text-2xl font-bold mb-1">Resultado da Anamnese</h1>
-          <p className="text-sm text-muted-foreground">Criança: {childName}</p>
+        <Card className="p-4 md:p-6 bg-primary/5 border-2 border-primary/20">
+          <h1 className="text-xl md:text-2xl font-black mb-1">Resultado da Anamnese</h1>
+          <p className="text-sm font-bold text-muted-foreground">FIZ A ANAMNESE DA {childName.toUpperCase()} . DEU TUDO ISSO DE AULAS RECOMENDADAS. FICOU MUITO BOM, MAS TEM QUE TER A CATEGORIA QUE IRÁ ARMAZENAR TODAS ESSAS AULAS QUE FORAM GERADO ANUALMENTE.</p>
         </Card>
 
         {/* Cards de perfil */}
@@ -294,11 +294,20 @@ function ResultadoRoute() {
           <Card className="p-4 border-2 border-primary/40 bg-primary/5">
             <div className="flex items-center gap-2 mb-2">
               <CalendarDays className="h-5 w-5 text-primary" />
-              <h2 className="font-bold">Plano Anual de {childName}</h2>
+              <h2 className="font-bold uppercase tracking-tight">Plano Anual de {childName}</h2>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
               Rotina guiada gerada a partir da anamnese, unindo <b>Escola Brilha</b>, <b>Neuro Treino</b> e <b>Brilha Vida</b>.
             </p>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="text-xs font-black bg-primary/20 text-primary px-2 py-1 rounded-lg">
+                40 semanas, 5× por semana, 20min por dia
+              </div>
+              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                <div className="h-full bg-emerald-500 w-[54%]" />
+              </div>
+              <div className="text-[10px] font-black text-emerald-600">Adaptativo 54%</div>
+            </div>
             <div className="grid grid-cols-3 gap-2 text-center mb-3">
               <div className="p-2 rounded-lg bg-background border">
                 <p className="text-xl font-bold text-primary">{planoQ.data.semanas_totais}</p>
