@@ -21,8 +21,8 @@ export function renderErrorPage(): string {
       <h1>ESTA COM BUG</h1>
       <p>Algo deu errado do nosso lado. Você pode tentar atualizar ou voltar para o início.</p>
       <div class="actions">
-        <button class="primary" onclick="location.reload()">Try again</button>
-        <a class="secondary" href="/">Go home</a>
+        <button class="primary" onclick="location.reload()">Tentar novamente</button>
+        <a class="secondary" href="/">Ir para o início</a>
       </div>
     </div>
   </body>
