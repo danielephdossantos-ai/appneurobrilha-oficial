@@ -180,15 +180,15 @@ function ResultadoRoute() {
             <p className="text-xs text-muted-foreground mb-3">
               Com base nas respostas, o app já ativou os seguintes eixos de trabalho:
             </p>
-            <div className="space-y-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               {gruposApoio.map((g) => (
-                <div key={g.grupo}>
-                  <p className="text-sm font-bold text-primary mb-1">{g.grupo}</p>
+                <div key={g.grupo} className="p-3 rounded-xl bg-muted/40 border-2 border-primary/5">
+                  <p className="text-sm font-black text-primary mb-2 uppercase tracking-tight">{g.grupo}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {g.itens.map((it) => (
                       <span
                         key={it.slug}
-                        className="text-xs px-2 py-1 rounded-full bg-muted border"
+                        className="text-[10px] font-bold px-2.5 py-1.5 rounded-lg bg-white border-2 border-primary/10 shadow-sm"
                         title={it.objetivo}
                       >
                         {it.emoji} {it.nome}
