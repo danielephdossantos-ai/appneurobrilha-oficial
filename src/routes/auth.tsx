@@ -4,8 +4,6 @@ import { Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable";
-import KidLiveMascot from "@/components/ui/KidLiveMascot";
-
 
 export const Route = createFileRoute("/auth")({
   component: Auth,
@@ -98,8 +96,8 @@ function Auth() {
   return (
     <div className="min-h-screen bg-sidebar grid place-items-center p-4">
       <div className="w-full max-w-sm flex flex-col items-center gap-5">
-        <div className="relative h-28 w-28 flex items-center justify-center">
-          <KidLiveMascot size="lg" showBadge={false} />
+        <div className="h-20 w-20 rounded-[2rem] bg-gradient-to-br from-primary to-success grid place-items-center text-5xl shadow-glow transform -rotate-6">
+          🌱
         </div>
         <div className="text-center">
           <h1 className="text-3xl font-black tracking-tight text-foreground">NeuroBrilha</h1>
@@ -163,7 +161,7 @@ function Auth() {
             onClick={async () => {
               setLoading(true);
               const res = await lovable.auth.signInWithOAuth("google", {
-                redirect_uri: `${window.location.origin}/auth`,
+                redirect_uri: window.location.origin,
               });
               if (res.error) {
                 toast.error(res.error.message ?? "Erro no login Google");

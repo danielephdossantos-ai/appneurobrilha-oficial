@@ -26,7 +26,6 @@ import { url as pipCarros } from "@/assets/pip-carros.png.asset.json";
 import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
 import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
 import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
-import { getStarterMascot } from "@/components/pip/EggHatchCinematic";
 
 
 export const PIP_SKINS: Record<string, string> = {
@@ -65,37 +64,21 @@ const LiveMascot = ({
   const { activeChild } = useAppState();
   const stage = useMascotStage(activeChild?.id);
 
-  // REGRA OFICIAL NEUROBRILHA: A criança pode alternar entre seus mascotes desbloqueados.
-  // A Cidade do Pip suporta Pip, Pipa e novos amigos da loja.
-  let activeMascot: any;
+  // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
+  // A criança pode alternar entre Ovo → Nascendo → Bebê → Guardião (criança)
+  // dentre as fases já liberadas.
+  let activeMascotName: string | undefined;
   try {
-    activeMascot = useMascot().activeMascot;
+    activeMascotName = useMascot().activeMascot?.mascot?.name;
   } catch {
-    activeMascot = null;
+    activeMascotName = undefined;
   }
-  
-  const activeMascotName = activeMascot?.mascot?.name?.toLowerCase();
-  
-  // Se não tiver um mascote ativo no BD (ex: logo após anamnese), usa a escolha salva no localStorage
-  const starterChoice = getStarterMascot(activeChild?.id);
-  const isPipa = activeMascotName === "pipa" || (!activeMascotName && starterChoice === "pipa");
-  const isDino = activeMascotName === "dino";
-  const isRobo = activeMascotName === "robo";
-  const isUnicornio = activeMascotName === "unicórnio" || activeMascotName === "unicornio";
+  const isPipa = activeMascotName?.toLowerCase() === "pipa";
 
-  // Mapeamento de imagens por mascote e estágio
   const stageImages: Record<string, string> = isPipa
     ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
-    : isDino
-    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-dino.png" } // Fallback para URLs se não houver asset local
-    : isRobo
-    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-robo.png" }
-    : isUnicornio
-    ? { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: "https://vjhzsqpzhxqyvxz.supabase.co/storage/v1/object/public/assets/mascot-unicorn.png" }
     : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
-  
-  const mascotImage = stageImages[stage] || stageImages.crianca;
-
+  const mascotImage = stageImages[stage] ?? stageImages.crianca;
 
 
   const sizes = {
@@ -116,7 +99,7 @@ const LiveMascot = ({
 
         <img
           src={mascotImage}
-          alt={isPipa ? "Pipa - A Guardiã dos Desafios" : "Pip - O Guardião dos Desafios"}
+          alt="Pip - O Guardião dos Desafios"
           className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
           draggable={false}
         />

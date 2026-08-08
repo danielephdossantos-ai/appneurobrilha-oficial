@@ -74,7 +74,7 @@ export interface GerarNeuroInput {
  * priorizando as de prioridade 1 (áreas em risco) no início da semana.
  */
 export function gerarPlanoNeuro(input: GerarNeuroInput): PlanoNeuroGerado {
-  const semanas = input.semanas ?? 40;
+  const semanas = input.semanas ?? 12;
   const diasPorSemana = Math.min(7, Math.max(1, input.diasPorSemana ?? 5));
   const sessoesPorDia = Math.min(4, Math.max(1, input.sessoesPorDia ?? 2));
 

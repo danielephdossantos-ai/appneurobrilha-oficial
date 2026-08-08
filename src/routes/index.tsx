@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
 import { cn } from "@/utils/utils";
 import { LembretesDiarios } from "@/components/reforco-brilha/LembretesDiarios";
-import capaAsset from "@/assets/capa-neuro-brilha.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,15 +34,7 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-    to: "/plano-anual",
-    title: "Plano Anual",
-    subtitle: "Aulas Recomendadas",
-    gradient: "from-[#F59E0B] via-[#D97706] to-[#92400E]",
-    glow: "rgba(245,158,11,0.7)",
-    emoji: "📅",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
+
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -173,7 +164,6 @@ function Index() {
 
   return (
     <Shell>
-      <Stars />
       <AnimatePresence>
         {showEggHatch && activeChild?.id && (
           <EggHatchCinematic
@@ -184,35 +174,61 @@ function Index() {
         )}
       </AnimatePresence>
 
-
       {/* ═══════════════ MOBILE ═══════════════ */}
       <div className="md:hidden flex flex-col gap-3 -mt-2">
-        {/* Capa Principal Mobile */}
-        <div className="relative w-full aspect-[3/4] rounded-[2.5rem] overflow-hidden border-[4px] border-white shadow-xl mb-2">
-          <img 
-            src={capaAsset.url} 
-            alt="Capa NeuroBrilha Kids" 
-            className="w-full h-full object-cover"
+        {/* Hero compacto */}
+        <div
+          className="relative rounded-[2rem] overflow-hidden border-[3px] border-white/80 px-4 pt-3 pb-3"
+          style={{
+            background:
+              "radial-gradient(ellipse at 30% 80%, #1a3a8c 0%, #0d1f55 55%, #050a2c 100%)",
+          }}
+        >
+          <Stars />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 15% 20%, rgba(155,108,255,0.3) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(76,158,255,0.3) 0%, transparent 55%)",
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-          
-          {activeChild && (
-            <div className="absolute top-4 right-4 h-12 w-12 rounded-2xl bg-white/90 backdrop-blur-sm border-2 border-[#FFC93C] grid place-items-center text-3xl shadow-lg z-20">
-              {activeChild.avatar}
-            </div>
-          )}
-
-          <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center text-center px-4 z-10">
-            <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-3xl border-2 border-[#FFC93C] shadow-lg mb-2 flex flex-col items-center gap-2">
-              <KidLiveMascot size="sm" showBadge={false} className="mb-1" />
-              <div>
-                <p className="text-[#0d1f55] font-black text-sm leading-tight">
-                  NeuroBrilha
-                </p>
-                <p className="text-[#0d1f55]/60 font-bold text-[9px] uppercase tracking-wider">
-                  Aprendizagem Adaptativa
-                </p>
+          <div className="relative z-10 flex flex-col items-center text-center">
+            {activeChild && (
+              <div className="absolute top-0 right-0 h-11 w-11 rounded-2xl bg-white/15 border-2 border-white/35 grid place-items-center text-2xl shadow-inner">
+                {activeChild.avatar}
               </div>
+            )}
+
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+            >
+              <div
+                className="absolute inset-0 -m-4 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,201,60,0.55), transparent 70%)",
+                  filter: "blur(10px)",
+                }}
+              />
+              <KidLiveMascot size="sm" emotion="happy" className="relative" />
+            </motion.div>
+
+            <div className="mt-2">
+              <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
+                Bem-vindo à
+              </div>
+              <h1 className="text-white text-lg font-black leading-tight">
+                Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
+              </h1>
+            </div>
+
+            <div className="mt-2.5 inline-flex bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-[#FFC93C]/70 shadow-sm max-w-[90%]">
+              <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
+                {activeChild
+                  ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
+                  : "Escolha um aventureiro! ✨"}
+              </p>
             </div>
           </div>
         </div>
@@ -324,86 +340,140 @@ function Index() {
 
       {/* ═══════════════ DESKTOP ═══════════════ */}
       <div className="hidden md:block">
-        <div className="relative w-full aspect-[21/9] min-h-[500px] -mt-6 rounded-[3rem] overflow-hidden border-4 border-white shadow-2xl mb-8">
-          <img 
-            src={capaAsset.url} 
-            alt="NeuroBrilha Kids" 
-            className="w-full h-full object-cover"
+        <div
+          className="relative w-full min-h-[80vh] -mt-6 rounded-[3rem] overflow-hidden border-4 border-white shadow-glow"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 110%, #1a3a8c 0%, #0d1f55 45%, #050a2c 100%)",
+          }}
+        >
+          <Stars />
+          <div
+            className="absolute inset-0 pointer-events-none opacity-60"
+            style={{
+              background:
+                "radial-gradient(ellipse at 20% 10%, rgba(155,108,255,0.35), transparent 50%), radial-gradient(ellipse at 80% 15%, rgba(76,158,255,0.35), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(255,201,60,0.25), transparent 60%)",
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-          
-          {/* Info Desktop sobre a imagem */}
-          <div className="absolute bottom-10 left-10 z-20 flex flex-col items-start gap-4">
-             <div className="bg-white/95 backdrop-blur-md px-8 py-6 rounded-[2.5rem] shadow-2xl border-2 border-[#FFC93C] flex items-center gap-6">
-                <KidLiveMascot size="md" showBadge={false} />
-                <div className="flex flex-col">
-                  <h1 className="text-[#0d1f55] font-black text-4xl leading-tight">
-                    NeuroBrilha
-                  </h1>
-                  <p className="text-[#0d1f55]/60 font-black text-sm uppercase tracking-[0.2em]">
-                    Aprendizagem Adaptativa
-                  </p>
-                </div>
-             </div>
-          </div>
+          <svg
+            viewBox="0 0 1200 200"
+            className="absolute bottom-0 left-0 w-full h-[18%] pointer-events-none"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,200 L0,120 L150,60 L280,110 L420,50 L560,100 L700,40 L860,90 L1000,55 L1200,100 L1200,200 Z"
+              fill="#0a1740"
+            />
+            <path
+              d="M0,200 L0,150 L120,110 L260,145 L420,100 L580,140 L740,95 L900,135 L1060,105 L1200,140 L1200,200 Z"
+              fill="#06102e"
+            />
+          </svg>
 
-          {activeChild && (
-            <div className="absolute top-8 right-10 z-20 flex items-center gap-4 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl border-2 border-[#FFC93C] shadow-xl">
-              <div className="h-12 w-12 rounded-full bg-white/20 grid place-items-center text-3xl">
-                {activeChild.avatar}
-              </div>
+          {/* Header desktop */}
+          <div className="relative z-10 flex items-center justify-between p-8 pb-0">
+            <div className="flex items-center gap-3">
+              <motion.span
+                animate={{ rotate: [0, 8, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="text-3xl"
+              >
+                ⭐
+              </motion.span>
               <div>
-                <div className="text-[#0d1f55] font-black text-lg">{activeChild.nome}</div>
-                <div className="text-[#0d1f55]/60 text-xs font-bold uppercase tracking-widest">
-                  {activeChild.serie}
+                <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">
+                  Bem-vindo à
                 </div>
+                <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
+                  Cidade do <span className="text-[#FFC93C]">Pip</span>
+                </h1>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-
-      <div className="hidden md:block">
-
-        {/* Grade 4×3 desktop — todas as 12 */}
-        <div className="relative z-10 px-8 pb-10">
-          <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {DESTINOS_KIDS.map((d, i) => (
-              <Link key={d.to} to={d.to} className="group">
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.06 * i, type: "spring", stiffness: 120 }}
-                  whileHover={{ y: -6, scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={cn(
-                    "relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br",
-                    d.gradient,
-                  )}
-                  style={{ boxShadow: `0 8px 0 rgba(0,0,0,0.22), 0 0 28px ${d.glow}` }}
-                >
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
-                    }}
-                  />
-                  <div className="flex flex-col items-center px-3 pt-5 pb-1">
-                    <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
-                      {d.emoji}
-                    </span>
+            {activeChild && (
+              <div className="flex items-center gap-3 bg-white/12 backdrop-blur-md px-5 py-3 rounded-full border-2 border-white/20">
+                <div className="h-10 w-10 rounded-full bg-white/20 grid place-items-center text-2xl">
+                  {activeChild.avatar}
+                </div>
+                <div>
+                  <div className="text-white font-black text-sm">{activeChild.nome}</div>
+                  <div className="text-white/55 text-[10px] font-bold uppercase tracking-widest">
+                    {activeChild.serie}
                   </div>
-                  <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
-                    <div className="text-sm font-black text-[#0d1f55] leading-tight">
-                      {d.title}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Pip desktop */}
+          <div className="relative z-20 flex flex-col items-center mt-2 mb-6">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+            >
+              <div
+                className="absolute inset-0 -m-10 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,201,60,0.4), transparent 65%)",
+                  filter: "blur(18px)",
+                }}
+              />
+              <KidLiveMascot size="xl" emotion="happy" className="relative" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-2 bg-white/95 backdrop-blur px-5 py-2.5 rounded-2xl shadow-xl border-2 border-[#FFC93C] max-w-md text-center"
+            >
+              <p className="text-[#0d1f55] font-black text-lg leading-tight">
+                {activeChild
+                  ? `Oi ${activeChild.nome}! Pra onde vamos hoje? 🚀`
+                  : "Escolha um aventureiro pra começar! ✨"}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Grade 4×3 desktop — todas as 12 */}
+          <div className="relative z-10 px-8 pb-10">
+            <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {DESTINOS_KIDS.map((d, i) => (
+                <Link key={d.to} to={d.to} className="group">
+                  <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.06 * i, type: "spring", stiffness: 120 }}
+                    whileHover={{ y: -6, scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    className={cn(
+                      "relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br",
+                      d.gradient,
+                    )}
+                    style={{ boxShadow: `0 8px 0 rgba(0,0,0,0.22), 0 0 28px ${d.glow}` }}
+                  >
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
+                      }}
+                    />
+                    <div className="flex flex-col items-center px-3 pt-5 pb-1">
+                      <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
+                        {d.emoji}
+                      </span>
                     </div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">
-                      {d.subtitle}
+                    <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
+                      <div className="text-sm font-black text-[#0d1f55] leading-tight">
+                        {d.title}
+                      </div>
+                      <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">
+                        {d.subtitle}
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -101,9 +101,9 @@ function ResultadoRoute() {
 
         <DisclaimerBanner />
 
-        <Card className="p-4 md:p-6 bg-primary/5 border-2 border-primary/20">
-          <h1 className="text-xl md:text-2xl font-black mb-1">Resultado da Anamnese</h1>
-          <p className="text-sm font-bold text-muted-foreground">FIZ A ANAMNESE DA {childName.toUpperCase()} . DEU TUDO ISSO DE AULAS RECOMENDADAS. FICOU MUITO BOM, MAS TEM QUE TER A CATEGORIA QUE IRÁ ARMAZENAR TODAS ESSAS AULAS QUE FORAM GERADO ANUALMENTE.</p>
+        <Card className="p-4 md:p-6">
+          <h1 className="text-xl md:text-2xl font-bold mb-1">Resultado da Anamnese</h1>
+          <p className="text-sm text-muted-foreground">Criança: {childName}</p>
         </Card>
 
         {/* Cards de perfil */}
@@ -180,15 +180,15 @@ function ResultadoRoute() {
             <p className="text-xs text-muted-foreground mb-3">
               Com base nas respostas, o app já ativou os seguintes eixos de trabalho:
             </p>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-3">
               {gruposApoio.map((g) => (
-                <div key={g.grupo} className="p-3 rounded-xl bg-muted/40 border-2 border-primary/5">
-                  <p className="text-sm font-black text-primary mb-2 uppercase tracking-tight">{g.grupo}</p>
+                <div key={g.grupo}>
+                  <p className="text-sm font-bold text-primary mb-1">{g.grupo}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {g.itens.map((it) => (
                       <span
                         key={it.slug}
-                        className="text-[10px] font-bold px-2.5 py-1.5 rounded-lg bg-white border-2 border-primary/10 shadow-sm"
+                        className="text-xs px-2 py-1 rounded-full bg-muted border"
                         title={it.objetivo}
                       >
                         {it.emoji} {it.nome}
@@ -211,28 +211,25 @@ function ResultadoRoute() {
             <p className="text-xs text-muted-foreground mb-3">
               Do módulo Neuro Treino — priorizadas pelo perfil da criança.
             </p>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               {atividadesTerapeuticas.slice(0, 6).map((a) => (
                 <Link
                   key={a.slug}
-                  to={a.rota}
-                  className="flex items-start gap-4 p-4 rounded-2xl border-2 border-primary/10 hover:border-primary/30 bg-white hover:bg-primary/5 transition-all group"
+                  to="/neuro-treino"
+                  className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
                 >
-                  <div className="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
-                    {a.emoji}
-                  </div>
+                  <span className="text-2xl">{a.emoji}</span>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="font-black text-[#0d1f55] tracking-tight">{a.nome}</span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-bold text-sm">{a.nome}</span>
                       {a.prioridade === 1 && (
-                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-red-500 text-white">
+                        <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-red-100 text-red-700">
                           Prioridade
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] font-black text-primary uppercase tracking-wider mb-1 opacity-70">{a.grupo}</p>
-                    <p className="text-xs text-muted-foreground font-medium mb-1">{a.objetivo}</p>
-                    <p className="text-[11px] text-primary/80 font-bold italic leading-tight">{a.porQue}</p>
+                    <p className="text-xs text-muted-foreground">{a.objetivo}</p>
+                    <p className="text-xs text-primary mt-0.5">{a.porQue}</p>
                   </div>
                 </Link>
               ))}
@@ -252,19 +249,17 @@ function ResultadoRoute() {
           <p className="text-xs text-muted-foreground mb-3">
             Trilhas ativadas para <b>{curso.faixa}</b> — comece por qualquer uma:
           </p>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-2">
             {curso.trilhas.map((t) => (
               <a
                 key={t.rota}
                 href={t.rota}
-                className="flex items-start gap-4 p-4 rounded-2xl border-2 border-primary/10 hover:border-emerald-500/30 bg-white hover:bg-emerald-50 transition-all group"
+                className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition"
               >
-                <div className="h-12 w-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
-                  {t.emoji}
-                </div>
+                <span className="text-2xl">{t.emoji}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="font-black text-[#0d1f55] tracking-tight mb-1">{t.titulo}</p>
-                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                  <p className="font-bold text-sm">{t.titulo}</p>
+                  <p className="text-xs text-muted-foreground line-clamp-2">
                     {t.descricao}
                   </p>
                 </div>
@@ -299,20 +294,11 @@ function ResultadoRoute() {
           <Card className="p-4 border-2 border-primary/40 bg-primary/5">
             <div className="flex items-center gap-2 mb-2">
               <CalendarDays className="h-5 w-5 text-primary" />
-              <h2 className="font-bold uppercase tracking-tight">Plano Anual de {childName}</h2>
+              <h2 className="font-bold">Plano Anual de {childName}</h2>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
               Rotina guiada gerada a partir da anamnese, unindo <b>Escola Brilha</b>, <b>Neuro Treino</b> e <b>Brilha Vida</b>.
             </p>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="text-xs font-black bg-primary/20 text-primary px-2 py-1 rounded-lg">
-                40 semanas, 5× por semana, 20min por dia
-              </div>
-              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-emerald-500 w-[100%]" />
-              </div>
-              <div className="text-[10px] font-black text-emerald-600">Adaptativo 100%</div>
-            </div>
             <div className="grid grid-cols-3 gap-2 text-center mb-3">
               <div className="p-2 rounded-lg bg-background border">
                 <p className="text-xl font-bold text-primary">{planoQ.data.semanas_totais}</p>
@@ -327,8 +313,8 @@ function ResultadoRoute() {
                 <p className="text-[10px] text-muted-foreground">por dia</p>
               </div>
             </div>
-            <Button asChild className="w-full bg-[#0d1f55] hover:bg-[#1a3a8c] text-white rounded-2xl h-12 font-black shadow-lg">
-              <Link to="/plano-anual">Abrir Plano Anual</Link>
+            <Button asChild className="w-full">
+              <Link to="/plano-anual">Ver plano completo</Link>
             </Button>
           </Card>
         )}

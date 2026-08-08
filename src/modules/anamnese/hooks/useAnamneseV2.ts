@@ -128,7 +128,7 @@ export function useAnamneseV2(childId: string) {
       try {
         const step1: any = (localResponses as any).step1 ?? {};
         const idadeRaw = Number(step1.idade);
-        const idade = Number.isFinite(idadeRaw) ? Math.max(3, Math.min(17, idadeRaw)) : 5;
+        const idade = Number.isFinite(idadeRaw) ? Math.max(3, Math.min(7, idadeRaw)) : 5;
         const serie = typeof step1.serie === "string" ? step1.serie : undefined;
         await salvarPlanoParaCrianca({
           childId,

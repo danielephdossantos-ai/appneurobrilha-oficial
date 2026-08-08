@@ -39,16 +39,7 @@ export function idadeParaSerie(idade: number): string {
   if (idade === 4) return "Pré I";
   if (idade === 5) return "Pré II";
   if (idade === 6) return "1º Ano";
-  if (idade === 7) return "2º Ano";
-  if (idade === 8) return "3º Ano";
-  if (idade === 9) return "4º Ano";
-  if (idade === 10) return "5º Ano";
-  if (idade === 11) return "6º Ano";
-  if (idade === 12) return "7º Ano";
-  if (idade === 13) return "8º Ano";
-  if (idade === 14) return "9º Ano";
-  if (idade <= 17) return "Ensino Médio";
-  return "Escola Brilha";
+  return "2º Ano";
 }
 
 interface Candidato {
@@ -99,20 +90,8 @@ function candidatosEscola(idade: number): Candidato[] {
       },
     ];
   }
-  
-  // 3º ao 9º Ano e Ensino Médio
-  // 3º ao 9º Ano e Ensino Médio — serie já foi declarada acima.
-  let serieSlug = "1ano";
-  if (serie === "2º Ano") serieSlug = "2ano";
-  else if (serie === "3º Ano") serieSlug = "3ano";
-  else if (serie === "4º Ano") serieSlug = "4ano";
-  else if (serie === "5º Ano") serieSlug = "5ano";
-  else if (serie === "6º Ano") serieSlug = "6ano";
-  else if (serie === "7º Ano") serieSlug = "7ano";
-  else if (serie === "8º Ano") serieSlug = "8ano";
-  else if (serie === "9º Ano") serieSlug = "9ano";
-  else if (serie === "Ensino Médio") serieSlug = "em";
-
+  // 1º e 2º ano
+  const serieSlug = serie === "1º Ano" ? "1ano" : "2ano";
   return [
     {
       fonte: "escola_brilha",
@@ -349,7 +328,7 @@ export interface GerarPlanoInput {
 }
 
 export function gerarPlanoAnual(input: GerarPlanoInput): PlanoAnualGerado {
-  const idade = Math.max(3, Math.min(17, input.idade));
+  const idade = Math.max(3, Math.min(7, input.idade));
   const serie = input.serie || idadeParaSerie(idade);
   const risk = input.risk;
   const temAnamnese = !!risk;
