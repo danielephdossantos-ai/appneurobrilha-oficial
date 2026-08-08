@@ -122,6 +122,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body className="antialiased">
         <AuthMessage />
+        <LiteracyCapabilityBanner />
         {children}
         <Scripts />
       </body>
@@ -248,4 +249,38 @@ function AuthMessage() {
     </div>
   );
 }
+
+function LiteracyCapabilityBanner() {
+  const { activeChild } = useAppState();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // Maria é o exemplo do usuário. Se o nome contiver Maria ou se for uma criança pequena/nova anamnese, mostramos.
+    if (activeChild?.nome?.toLowerCase().includes("maria") || (activeChild && !activeChild.anamnese_completa)) {
+      setVisible(true);
+    }
+  }, [activeChild]);
+
+  if (!visible || !activeChild) return null;
+
+  return (
+    <div className="bg-[#4C9EFF] text-white px-4 py-2 text-center text-[11px] font-black uppercase tracking-wider shadow-md">
+      <div className="flex items-center justify-center gap-2 max-w-4xl mx-auto">
+        <GraduationCap className="h-4 w-4" />
+        <span>
+          A {activeChild.nome} não sabe ler? O app tem capacidade de ensinar ela a aprender com as aulas de alfabetização.
+        </span>
+        <button 
+          onClick={() => setVisible(false)}
+          className="ml-auto opacity-70 hover:opacity-100"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+import { useAppState } from "@/core/store";
+
 
