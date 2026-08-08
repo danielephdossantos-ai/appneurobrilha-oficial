@@ -9,6 +9,7 @@ export interface Mascot {
   description: string;
   image_url: string;
   category: string;
+  price?: number;
   base_stats: any;
   skins?: Record<string, string>;
 }
@@ -17,6 +18,7 @@ export interface UserMascot {
   id: string;
   mascot_id: string;
   is_active: boolean;
+  unlocked: boolean;
   level: number;
   affinity: number;
   experience: number;
@@ -26,11 +28,14 @@ export interface UserMascot {
 interface MascotContextType {
   activeMascot: UserMascot | null;
   userMascots: UserMascot[];
+  allCatalogMascots: Mascot[];
   isLoading: boolean;
   setActiveMascot: (mascotId: string) => Promise<void>;
+  buyMascot: (mascot: Mascot) => Promise<void>;
   gainExperience: (amount: number) => Promise<void>;
   gainAffinity: (amount: number) => Promise<void>;
 }
+
 
 const MascotContext = createContext<MascotContextType | undefined>(undefined);
 
@@ -38,9 +43,23 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const { user } = useAuth();
   const [activeMascot, setActiveMascotState] = useState<UserMascot | null>(null);
   const [userMascots, setUserMascots] = useState<UserMascot[]>([]);
+  const [allCatalogMascots, setAllCatalogMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchMascots = async () => {
+    if (!user) return;
+
+    try {
+      setIsLoading(true);
+      
+      // Carregar catálogo completo
+      const { data: catalog } = await (supabase as any)
+        .from("mascots")
+        .select("*");
+      setAllCatalogMascots(catalog || []);
+
+      const { data, error } = await (supabase as any)
+
     if (!user) return;
 
     try {
@@ -185,13 +204,21 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
+  const buyMascotAction = async (mascot: Mascot) => {
+    // Implementação será via server function no componente ou aqui
+    // Por simplicidade aqui vamos apenas expor a necessidade de recarregar após a compra
+    await fetchMascots();
+  };
+
   return (
     <MascotContext.Provider
       value={{
         activeMascot,
         userMascots,
+        allCatalogMascots,
         isLoading,
         setActiveMascot,
+        buyMascot: buyMascotAction,
         gainExperience,
         gainAffinity,
       }}
@@ -199,6 +226,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       {children}
     </MascotContext.Provider>
   );
+
 };
 
 export const useMascot = () => {
