@@ -9,262 +9,93 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrilhasRouteImport } from './routes/trilhas'
-import { Route as TermosRouteImport } from './routes/termos'
-import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
-import { Route as RotinaEscritaRouteImport } from './routes/rotina-escrita'
-import { Route as RotinaRouteImport } from './routes/rotina'
-import { Route as RelatorioRouteImport } from './routes/relatorio'
-import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
-import { Route as ProgressaoRouteImport } from './routes/progressao'
-import { Route as ProfessorMatematicaRouteImport } from './routes/professor-matematica'
-import { Route as PrivacidadeRouteImport } from './routes/privacidade'
-import { Route as PlanoNeuroRouteImport } from './routes/plano-neuro'
-import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
-import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
-import { Route as PainelPaisRouteImport } from './routes/painel-pais'
-import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
-import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
-import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
-import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
-import { Route as McpRouteImport } from './routes/mcp'
-import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
-import { Route as MascotesRouteImport } from './routes/mascotes'
-import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
-import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
-import { Route as CurriculoAnualRouteImport } from './routes/curriculo-anual'
-import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
-import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
-import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
-import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pedagogica'
-import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
-import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
-import { Route as AnalyticsRouteImport } from './routes/analytics'
-import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
-import { Route as AgendaRouteImport } from './routes/agenda'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
-import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
-import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
-import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
-import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
-import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
-import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AgendaRouteImport } from './routes/agenda'
+import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
+import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
+import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pedagogica'
+import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
+import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
+import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
+import { Route as CurriculoAnualRouteImport } from './routes/curriculo-anual'
+import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
+import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
+import { Route as MascotesRouteImport } from './routes/mascotes'
+import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
+import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
+import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
+import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
+import { Route as PainelPaisRouteImport } from './routes/painel-pais'
+import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
+import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
+import { Route as PlanoNeuroRouteImport } from './routes/plano-neuro'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as ProfessorMatematicaRouteImport } from './routes/professor-matematica'
+import { Route as ProgressaoRouteImport } from './routes/progressao'
+import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
+import { Route as RelatorioRouteImport } from './routes/relatorio'
+import { Route as RotinaRouteImport } from './routes/rotina'
+import { Route as RotinaEscritaRouteImport } from './routes/rotina-escrita'
+import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
+import { Route as TermosRouteImport } from './routes/termos'
+import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro-treino.ler-com-aurora.index'
-import { Route as EscolaBrilhaPortuguesEiIndexRouteImport } from './routes/escola-brilha.portugues-ei.index'
-import { Route as EscolaBrilhaMatematicaEiIndexRouteImport } from './routes/escola-brilha.matematica-ei.index'
-import { Route as EscolaBrilhaInglesEiIndexRouteImport } from './routes/escola-brilha.ingles-ei.index'
-import { Route as EscolaBrilhaDislexiaIndexRouteImport } from './routes/escola-brilha.dislexia.index'
-import { Route as EscolaBrilhaContarComPipIndexRouteImport } from './routes/escola-brilha.contar-com-pip.index'
-import { Route as EscolaBrilhaBibliotecaEncantadaIndexRouteImport } from './routes/escola-brilha.biblioteca-encantada.index'
-import { Route as NeuroTreinoLerComAuroraPainelRouteImport } from './routes/neuro-treino.ler-com-aurora.painel'
-import { Route as NeuroTreinoLerComAuroraDiagnosticoRouteImport } from './routes/neuro-treino.ler-com-aurora.diagnostico'
-import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
-import { Route as EscolaBrilhaTrilhaInglesSerieRouteImport } from './routes/escola-brilha.trilha-ingles.$serie'
-import { Route as EscolaBrilhaGeo9anoUnidadeRouteImport } from './routes/escola-brilha.geo-9ano.$unidade'
-import { Route as EscolaBrilhaGeo8anoUnidadeRouteImport } from './routes/escola-brilha.geo-8ano.$unidade'
-import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-brilha.geo-7ano.$unidade'
-import { Route as EscolaBrilhaGeo6anoUnidadeRouteImport } from './routes/escola-brilha.geo-6ano.$unidade'
-import { Route as EscolaBrilhaDislexiaAulaRouteImport } from './routes/escola-brilha.dislexia.$aula'
-import { Route as EscolaBrilhaCursoSlugRouteImport } from './routes/escola-brilha.curso.$slug'
-import { Route as EscolaBrilhaContarComPipAulaRouteImport } from './routes/escola-brilha.contar-com-pip.$aula'
-import { Route as EscolaBrilhaBibliotecaEncantadaAulaRouteImport } from './routes/escola-brilha.biblioteca-encantada.$aula'
-import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
-import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
-import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
+import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
+import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
+import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
+import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
+import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
+import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
+import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
-import { Route as EscolaBrilhaTrilhaSerieDiscRouteImport } from './routes/escola-brilha.trilha.$serie.$disc'
-import { Route as EscolaBrilhaTrilhaFund2SerieDiscRouteImport } from './routes/escola-brilha.trilha-fund2.$serie.$disc'
-import { Route as EscolaBrilhaPortuguesEiSerieAulaRouteImport } from './routes/escola-brilha.portugues-ei.$serie.$aula'
-import { Route as EscolaBrilhaMatematicaEiSerieAulaRouteImport } from './routes/escola-brilha.matematica-ei.$serie.$aula'
-import { Route as EscolaBrilhaInglesV1CursoAulaRouteImport } from './routes/escola-brilha.ingles-v1.$curso.$aula'
-import { Route as EscolaBrilhaInglesEiSerieAulaRouteImport } from './routes/escola-brilha.ingles-ei.$serie.$aula'
-import { Route as EscolaBrilhaAulaV4CursoAulaRouteImport } from './routes/escola-brilha.aula-v4.$curso.$aula'
-import { Route as EscolaBrilhaAulaPtV4CursoAulaRouteImport } from './routes/escola-brilha.aula-pt-v4.$curso.$aula'
-import { Route as EscolaBrilhaAulaGeoV1CursoAulaRouteImport } from './routes/escola-brilha.aula-geo-v1.$curso.$aula'
-import { Route as EscolaBrilhaAulaExtraPtCursoAulaRouteImport } from './routes/escola-brilha.aula-extra-pt.$curso.$aula'
+import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
+import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
+import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
+import { Route as EscolaBrilhaBibliotecaEncantadaIndexRouteImport } from './routes/escola-brilha.biblioteca-encantada.index'
+import { Route as EscolaBrilhaBibliotecaEncantadaAulaRouteImport } from './routes/escola-brilha.biblioteca-encantada.$aula'
+import { Route as EscolaBrilhaContarComPipIndexRouteImport } from './routes/escola-brilha.contar-com-pip.index'
+import { Route as EscolaBrilhaContarComPipAulaRouteImport } from './routes/escola-brilha.contar-com-pip.$aula'
+import { Route as EscolaBrilhaCursoSlugRouteImport } from './routes/escola-brilha.curso.$slug'
+import { Route as EscolaBrilhaDislexiaIndexRouteImport } from './routes/escola-brilha.dislexia.index'
+import { Route as EscolaBrilhaDislexiaAulaRouteImport } from './routes/escola-brilha.dislexia.$aula'
+import { Route as EscolaBrilhaGeo6anoUnidadeRouteImport } from './routes/escola-brilha.geo-6ano.$unidade'
+import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-brilha.geo-7ano.$unidade'
+import { Route as EscolaBrilhaGeo8anoUnidadeRouteImport } from './routes/escola-brilha.geo-8ano.$unidade'
+import { Route as EscolaBrilhaGeo9anoUnidadeRouteImport } from './routes/escola-brilha.geo-9ano.$unidade'
+import { Route as EscolaBrilhaInglesEiIndexRouteImport } from './routes/escola-brilha.ingles-ei.index'
+import { Route as EscolaBrilhaMatematicaEiIndexRouteImport } from './routes/escola-brilha.matematica-ei.index'
+import { Route as EscolaBrilhaPortuguesEiIndexRouteImport } from './routes/escola-brilha.portugues-ei.index'
+import { Route as EscolaBrilhaTrilhaInglesSerieRouteImport } from './routes/escola-brilha.trilha-ingles.$serie'
+import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro-treino.ler-com-aurora.index'
+import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
+import { Route as NeuroTreinoLerComAuroraDiagnosticoRouteImport } from './routes/neuro-treino.ler-com-aurora.diagnostico'
+import { Route as NeuroTreinoLerComAuroraPainelRouteImport } from './routes/neuro-treino.ler-com-aurora.painel'
 import { Route as EscolaBrilhaAulaArteV1CursoAulaRouteImport } from './routes/escola-brilha.aula-arte-v1.$curso.$aula'
+import { Route as EscolaBrilhaAulaExtraPtCursoAulaRouteImport } from './routes/escola-brilha.aula-extra-pt.$curso.$aula'
+import { Route as EscolaBrilhaAulaGeoV1CursoAulaRouteImport } from './routes/escola-brilha.aula-geo-v1.$curso.$aula'
+import { Route as EscolaBrilhaAulaPtV4CursoAulaRouteImport } from './routes/escola-brilha.aula-pt-v4.$curso.$aula'
+import { Route as EscolaBrilhaAulaV4CursoAulaRouteImport } from './routes/escola-brilha.aula-v4.$curso.$aula'
+import { Route as EscolaBrilhaInglesEiSerieAulaRouteImport } from './routes/escola-brilha.ingles-ei.$serie.$aula'
+import { Route as EscolaBrilhaInglesV1CursoAulaRouteImport } from './routes/escola-brilha.ingles-v1.$curso.$aula'
+import { Route as EscolaBrilhaMatematicaEiSerieAulaRouteImport } from './routes/escola-brilha.matematica-ei.$serie.$aula'
+import { Route as EscolaBrilhaPortuguesEiSerieAulaRouteImport } from './routes/escola-brilha.portugues-ei.$serie.$aula'
+import { Route as EscolaBrilhaTrilhaFund2SerieDiscRouteImport } from './routes/escola-brilha.trilha-fund2.$serie.$disc'
+import { Route as EscolaBrilhaTrilhaSerieDiscRouteImport } from './routes/escola-brilha.trilha.$serie.$disc'
 
-const TrilhasRoute = TrilhasRouteImport.update({
-  id: '/trilhas',
-  path: '/trilhas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermosRoute = TermosRouteImport.update({
-  id: '/termos',
-  path: '/termos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
-  id: '/terapeuta-brilha',
-  path: '/terapeuta-brilha',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RotinaEscritaRoute = RotinaEscritaRouteImport.update({
-  id: '/rotina-escrita',
-  path: '/rotina-escrita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RotinaRoute = RotinaRouteImport.update({
-  id: '/rotina',
-  path: '/rotina',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RelatorioRoute = RelatorioRouteImport.update({
-  id: '/relatorio',
-  path: '/relatorio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
-  id: '/reforco-brilha',
-  path: '/reforco-brilha',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProgressaoRoute = ProgressaoRouteImport.update({
-  id: '/progressao',
-  path: '/progressao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfessorMatematicaRoute = ProfessorMatematicaRouteImport.update({
-  id: '/professor-matematica',
-  path: '/professor-matematica',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacidadeRoute = PrivacidadeRouteImport.update({
-  id: '/privacidade',
-  path: '/privacidade',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanoNeuroRoute = PlanoNeuroRouteImport.update({
-  id: '/plano-neuro',
-  path: '/plano-neuro',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanoAnualRoute = PlanoAnualRouteImport.update({
-  id: '/plano-anual',
-  path: '/plano-anual',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PerfilAlunoRoute = PerfilAlunoRouteImport.update({
-  id: '/perfil-aluno',
-  path: '/perfil-aluno',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PainelPaisRoute = PainelPaisRouteImport.update({
-  id: '/painel-pais',
-  path: '/painel-pais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
-  id: '/neuro-treino',
-  path: '/neuro-treino',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
-  id: '/missao-trabalho',
-  path: '/missao-trabalho',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
-  id: '/missao-tarefa',
-  path: '/missao-tarefa',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MissaoProvaRoute = MissaoProvaRouteImport.update({
-  id: '/missao-prova',
-  path: '/missao-prova',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MatrizPedagogicaRoute = MatrizPedagogicaRouteImport.update({
-  id: '/matriz-pedagogica',
-  path: '/matriz-pedagogica',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MascotesRoute = MascotesRouteImport.update({
-  id: '/mascotes',
-  path: '/mascotes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LojaMascotesRoute = LojaMascotesRouteImport.update({
-  id: '/loja-mascotes',
-  path: '/loja-mascotes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
-  id: '/gerador-procedural',
-  path: '/gerador-procedural',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurriculoAnualRoute = CurriculoAnualRouteImport.update({
-  id: '/curriculo-anual',
-  path: '/curriculo-anual',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
-  id: '/curadoria-aulas',
-  path: '/curadoria-aulas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ColecaoPipRoute = ColecaoPipRouteImport.update({
-  id: '/colecao-pip',
-  path: '/colecao-pip',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
-  id: '/brilha-vida',
-  path: '/brilha-vida',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BibliotecaPedagogicaRoute = BibliotecaPedagogicaRouteImport.update({
-  id: '/biblioteca-pedagogica',
-  path: '/biblioteca-pedagogica',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
-  id: '/biblioteca-alfa',
-  path: '/biblioteca-alfa',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BancoMidiasRoute = BancoMidiasRouteImport.update({
-  id: '/banco-midias',
-  path: '/banco-midias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
-  id: '/auditoria-pedagogica',
-  path: '/auditoria-pedagogica',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AnalyticsRoute = AnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
-  id: '/alfabetizacao',
-  path: '/alfabetizacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AgendaRoute = AgendaRouteImport.update({
-  id: '/agenda',
-  path: '/agenda',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -272,55 +103,185 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AgendaRoute = AgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
-  id: '/escola-brilha/',
-  path: '/escola-brilha/',
+const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
+  id: '/alfabetizacao',
+  path: '/alfabetizacao',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
-  id: '/configurar',
-  path: '/configurar',
-  getParentRoute: () => NeuroTreinoRoute,
-} as any)
-const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => NeuroTreinoRoute,
-} as any)
-const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
-  id: '/escola-brilha/professores',
-  path: '/escola-brilha/professores',
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
-  id: '/escola-brilha/$codigo',
-  path: '/escola-brilha/$codigo',
+const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
+  id: '/auditoria-pedagogica',
+  path: '/auditoria-pedagogica',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BnccCodigoRoute = BnccCodigoRouteImport.update({
-  id: '/bncc/$codigo',
-  path: '/bncc/$codigo',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
-  id: '/anamnese/$childId',
-  path: '/anamnese/$childId',
+const BancoMidiasRoute = BancoMidiasRouteImport.update({
+  id: '/banco-midias',
+  path: '/banco-midias',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AjusteDificuldadesChildIdRoute =
-  AjusteDificuldadesChildIdRouteImport.update({
-    id: '/ajuste-dificuldades/$childId',
-    path: '/ajuste-dificuldades/$childId',
+const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
+  id: '/biblioteca-alfa',
+  path: '/biblioteca-alfa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaPedagogicaRoute = BibliotecaPedagogicaRouteImport.update({
+  id: '/biblioteca-pedagogica',
+  path: '/biblioteca-pedagogica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
+  id: '/brilha-vida',
+  path: '/brilha-vida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColecaoPipRoute = ColecaoPipRouteImport.update({
+  id: '/colecao-pip',
+  path: '/colecao-pip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
+  id: '/curadoria-aulas',
+  path: '/curadoria-aulas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculoAnualRoute = CurriculoAnualRouteImport.update({
+  id: '/curriculo-anual',
+  path: '/curriculo-anual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
+  id: '/gerador-procedural',
+  path: '/gerador-procedural',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojaMascotesRoute = LojaMascotesRouteImport.update({
+  id: '/loja-mascotes',
+  path: '/loja-mascotes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MascotesRoute = MascotesRouteImport.update({
+  id: '/mascotes',
+  path: '/mascotes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatrizPedagogicaRoute = MatrizPedagogicaRouteImport.update({
+  id: '/matriz-pedagogica',
+  path: '/matriz-pedagogica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoProvaRoute = MissaoProvaRouteImport.update({
+  id: '/missao-prova',
+  path: '/missao-prova',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
+  id: '/missao-tarefa',
+  path: '/missao-tarefa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
+  id: '/missao-trabalho',
+  path: '/missao-trabalho',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
+  id: '/neuro-treino',
+  path: '/neuro-treino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelPaisRoute = PainelPaisRouteImport.update({
+  id: '/painel-pais',
+  path: '/painel-pais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilAlunoRoute = PerfilAlunoRouteImport.update({
+  id: '/perfil-aluno',
+  path: '/perfil-aluno',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanoAnualRoute = PlanoAnualRouteImport.update({
+  id: '/plano-anual',
+  path: '/plano-anual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanoNeuroRoute = PlanoNeuroRouteImport.update({
+  id: '/plano-neuro',
+  path: '/plano-neuro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfessorMatematicaRoute = ProfessorMatematicaRouteImport.update({
+  id: '/professor-matematica',
+  path: '/professor-matematica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressaoRoute = ProgressaoRouteImport.update({
+  id: '/progressao',
+  path: '/progressao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
+  id: '/reforco-brilha',
+  path: '/reforco-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatorioRoute = RelatorioRouteImport.update({
+  id: '/relatorio',
+  path: '/relatorio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RotinaRoute = RotinaRouteImport.update({
+  id: '/rotina',
+  path: '/rotina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RotinaEscritaRoute = RotinaEscritaRouteImport.update({
+  id: '/rotina-escrita',
+  path: '/rotina-escrita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
+  id: '/terapeuta-brilha',
+  path: '/terapeuta-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhasRoute = TrilhasRouteImport.update({
+  id: '/trilhas',
+  path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
@@ -329,46 +290,78 @@ const Char91DotwellKnownChar93OauthProtectedResourceRoute =
     path: '/.well-known/oauth-protected-resource',
     getParentRoute: () => rootRouteImport,
   } as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AjusteDificuldadesChildIdRoute =
+  AjusteDificuldadesChildIdRouteImport.update({
+    id: '/ajuste-dificuldades/$childId',
+    path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const NeuroTreinoLerComAuroraIndexRoute =
-  NeuroTreinoLerComAuroraIndexRouteImport.update({
-    id: '/ler-com-aurora/',
-    path: '/ler-com-aurora/',
-    getParentRoute: () => NeuroTreinoRoute,
-  } as any)
-const EscolaBrilhaPortuguesEiIndexRoute =
-  EscolaBrilhaPortuguesEiIndexRouteImport.update({
-    id: '/escola-brilha/portugues-ei/',
-    path: '/escola-brilha/portugues-ei/',
+const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
+  id: '/anamnese/$childId',
+  path: '/anamnese/$childId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BnccCodigoRoute = BnccCodigoRouteImport.update({
+  id: '/bncc/$codigo',
+  path: '/bncc/$codigo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
+  id: '/escola-brilha/',
+  path: '/escola-brilha/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
+  id: '/escola-brilha/$codigo',
+  path: '/escola-brilha/$codigo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
+  id: '/escola-brilha/professores',
+  path: '/escola-brilha/professores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
+const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
+  id: '/configurar',
+  path: '/configurar',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaMatematicaEiIndexRoute =
-  EscolaBrilhaMatematicaEiIndexRouteImport.update({
-    id: '/escola-brilha/matematica-ei/',
-    path: '/escola-brilha/matematica-ei/',
-    getParentRoute: () => rootRouteImport,
+const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
+  id: '/escalas',
+  path: '/escalas',
+  getParentRoute: () => AnamneseChildIdRoute,
+} as any)
+const AnamneseChildIdResultadoRoute =
+  AnamneseChildIdResultadoRouteImport.update({
+    id: '/resultado',
+    path: '/resultado',
+    getParentRoute: () => AnamneseChildIdRoute,
   } as any)
-const EscolaBrilhaInglesEiIndexRoute =
-  EscolaBrilhaInglesEiIndexRouteImport.update({
-    id: '/escola-brilha/ingles-ei/',
-    path: '/escola-brilha/ingles-ei/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaDislexiaIndexRoute =
-  EscolaBrilhaDislexiaIndexRouteImport.update({
-    id: '/escola-brilha/dislexia/',
-    path: '/escola-brilha/dislexia/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaContarComPipIndexRoute =
-  EscolaBrilhaContarComPipIndexRouteImport.update({
-    id: '/escola-brilha/contar-com-pip/',
-    path: '/escola-brilha/contar-com-pip/',
+const EscolaBrilhaAtlasFinalCursoRoute =
+  EscolaBrilhaAtlasFinalCursoRouteImport.update({
+    id: '/escola-brilha/atlas-final/$curso',
+    path: '/escola-brilha/atlas-final/$curso',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EscolaBrilhaBibliotecaEncantadaIndexRoute =
@@ -377,52 +370,33 @@ const EscolaBrilhaBibliotecaEncantadaIndexRoute =
     path: '/escola-brilha/biblioteca-encantada/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const NeuroTreinoLerComAuroraPainelRoute =
-  NeuroTreinoLerComAuroraPainelRouteImport.update({
-    id: '/ler-com-aurora/painel',
-    path: '/ler-com-aurora/painel',
-    getParentRoute: () => NeuroTreinoRoute,
-  } as any)
-const NeuroTreinoLerComAuroraDiagnosticoRoute =
-  NeuroTreinoLerComAuroraDiagnosticoRouteImport.update({
-    id: '/ler-com-aurora/diagnostico',
-    path: '/ler-com-aurora/diagnostico',
-    getParentRoute: () => NeuroTreinoRoute,
-  } as any)
-const NeuroTreinoLerComAuroraAulaRoute =
-  NeuroTreinoLerComAuroraAulaRouteImport.update({
-    id: '/ler-com-aurora/$aula',
-    path: '/ler-com-aurora/$aula',
-    getParentRoute: () => NeuroTreinoRoute,
-  } as any)
-const EscolaBrilhaTrilhaInglesSerieRoute =
-  EscolaBrilhaTrilhaInglesSerieRouteImport.update({
-    id: '/escola-brilha/trilha-ingles/$serie',
-    path: '/escola-brilha/trilha-ingles/$serie',
+const EscolaBrilhaBibliotecaEncantadaAulaRoute =
+  EscolaBrilhaBibliotecaEncantadaAulaRouteImport.update({
+    id: '/escola-brilha/biblioteca-encantada/$aula',
+    path: '/escola-brilha/biblioteca-encantada/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaGeo9anoUnidadeRoute =
-  EscolaBrilhaGeo9anoUnidadeRouteImport.update({
-    id: '/escola-brilha/geo-9ano/$unidade',
-    path: '/escola-brilha/geo-9ano/$unidade',
+const EscolaBrilhaContarComPipIndexRoute =
+  EscolaBrilhaContarComPipIndexRouteImport.update({
+    id: '/escola-brilha/contar-com-pip/',
+    path: '/escola-brilha/contar-com-pip/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaGeo8anoUnidadeRoute =
-  EscolaBrilhaGeo8anoUnidadeRouteImport.update({
-    id: '/escola-brilha/geo-8ano/$unidade',
-    path: '/escola-brilha/geo-8ano/$unidade',
+const EscolaBrilhaContarComPipAulaRoute =
+  EscolaBrilhaContarComPipAulaRouteImport.update({
+    id: '/escola-brilha/contar-com-pip/$aula',
+    path: '/escola-brilha/contar-com-pip/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaGeo7anoUnidadeRoute =
-  EscolaBrilhaGeo7anoUnidadeRouteImport.update({
-    id: '/escola-brilha/geo-7ano/$unidade',
-    path: '/escola-brilha/geo-7ano/$unidade',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaGeo6anoUnidadeRoute =
-  EscolaBrilhaGeo6anoUnidadeRouteImport.update({
-    id: '/escola-brilha/geo-6ano/$unidade',
-    path: '/escola-brilha/geo-6ano/$unidade',
+const EscolaBrilhaCursoSlugRoute = EscolaBrilhaCursoSlugRouteImport.update({
+  id: '/escola-brilha/curso/$slug',
+  path: '/escola-brilha/curso/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscolaBrilhaDislexiaIndexRoute =
+  EscolaBrilhaDislexiaIndexRouteImport.update({
+    id: '/escola-brilha/dislexia/',
+    path: '/escola-brilha/dislexia/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EscolaBrilhaDislexiaAulaRoute =
@@ -431,98 +405,82 @@ const EscolaBrilhaDislexiaAulaRoute =
     path: '/escola-brilha/dislexia/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaCursoSlugRoute = EscolaBrilhaCursoSlugRouteImport.update({
-  id: '/escola-brilha/curso/$slug',
-  path: '/escola-brilha/curso/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EscolaBrilhaContarComPipAulaRoute =
-  EscolaBrilhaContarComPipAulaRouteImport.update({
-    id: '/escola-brilha/contar-com-pip/$aula',
-    path: '/escola-brilha/contar-com-pip/$aula',
+const EscolaBrilhaGeo6anoUnidadeRoute =
+  EscolaBrilhaGeo6anoUnidadeRouteImport.update({
+    id: '/escola-brilha/geo-6ano/$unidade',
+    path: '/escola-brilha/geo-6ano/$unidade',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaBibliotecaEncantadaAulaRoute =
-  EscolaBrilhaBibliotecaEncantadaAulaRouteImport.update({
-    id: '/escola-brilha/biblioteca-encantada/$aula',
-    path: '/escola-brilha/biblioteca-encantada/$aula',
+const EscolaBrilhaGeo7anoUnidadeRoute =
+  EscolaBrilhaGeo7anoUnidadeRouteImport.update({
+    id: '/escola-brilha/geo-7ano/$unidade',
+    path: '/escola-brilha/geo-7ano/$unidade',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaAtlasFinalCursoRoute =
-  EscolaBrilhaAtlasFinalCursoRouteImport.update({
-    id: '/escola-brilha/atlas-final/$curso',
-    path: '/escola-brilha/atlas-final/$curso',
+const EscolaBrilhaGeo8anoUnidadeRoute =
+  EscolaBrilhaGeo8anoUnidadeRouteImport.update({
+    id: '/escola-brilha/geo-8ano/$unidade',
+    path: '/escola-brilha/geo-8ano/$unidade',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AnamneseChildIdResultadoRoute =
-  AnamneseChildIdResultadoRouteImport.update({
-    id: '/resultado',
-    path: '/resultado',
-    getParentRoute: () => AnamneseChildIdRoute,
-  } as any)
-const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
-  id: '/escalas',
-  path: '/escalas',
-  getParentRoute: () => AnamneseChildIdRoute,
-} as any)
-const Char91DotmcpChar93InvokeToolToolRoute =
-  Char91DotmcpChar93InvokeToolToolRouteImport.update({
-    id: '/.mcp/invoke-tool/$tool',
-    path: '/.mcp/invoke-tool/$tool',
+const EscolaBrilhaGeo9anoUnidadeRoute =
+  EscolaBrilhaGeo9anoUnidadeRouteImport.update({
+    id: '/escola-brilha/geo-9ano/$unidade',
+    path: '/escola-brilha/geo-9ano/$unidade',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaTrilhaSerieDiscRoute =
-  EscolaBrilhaTrilhaSerieDiscRouteImport.update({
-    id: '/escola-brilha/trilha/$serie/$disc',
-    path: '/escola-brilha/trilha/$serie/$disc',
+const EscolaBrilhaInglesEiIndexRoute =
+  EscolaBrilhaInglesEiIndexRouteImport.update({
+    id: '/escola-brilha/ingles-ei/',
+    path: '/escola-brilha/ingles-ei/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaTrilhaFund2SerieDiscRoute =
-  EscolaBrilhaTrilhaFund2SerieDiscRouteImport.update({
-    id: '/escola-brilha/trilha-fund2/$serie/$disc',
-    path: '/escola-brilha/trilha-fund2/$serie/$disc',
+const EscolaBrilhaMatematicaEiIndexRoute =
+  EscolaBrilhaMatematicaEiIndexRouteImport.update({
+    id: '/escola-brilha/matematica-ei/',
+    path: '/escola-brilha/matematica-ei/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaPortuguesEiSerieAulaRoute =
-  EscolaBrilhaPortuguesEiSerieAulaRouteImport.update({
-    id: '/escola-brilha/portugues-ei/$serie/$aula',
-    path: '/escola-brilha/portugues-ei/$serie/$aula',
+const EscolaBrilhaPortuguesEiIndexRoute =
+  EscolaBrilhaPortuguesEiIndexRouteImport.update({
+    id: '/escola-brilha/portugues-ei/',
+    path: '/escola-brilha/portugues-ei/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaMatematicaEiSerieAulaRoute =
-  EscolaBrilhaMatematicaEiSerieAulaRouteImport.update({
-    id: '/escola-brilha/matematica-ei/$serie/$aula',
-    path: '/escola-brilha/matematica-ei/$serie/$aula',
+const EscolaBrilhaTrilhaInglesSerieRoute =
+  EscolaBrilhaTrilhaInglesSerieRouteImport.update({
+    id: '/escola-brilha/trilha-ingles/$serie',
+    path: '/escola-brilha/trilha-ingles/$serie',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaInglesV1CursoAulaRoute =
-  EscolaBrilhaInglesV1CursoAulaRouteImport.update({
-    id: '/escola-brilha/ingles-v1/$curso/$aula',
-    path: '/escola-brilha/ingles-v1/$curso/$aula',
-    getParentRoute: () => rootRouteImport,
+const NeuroTreinoLerComAuroraIndexRoute =
+  NeuroTreinoLerComAuroraIndexRouteImport.update({
+    id: '/ler-com-aurora/',
+    path: '/ler-com-aurora/',
+    getParentRoute: () => NeuroTreinoRoute,
   } as any)
-const EscolaBrilhaInglesEiSerieAulaRoute =
-  EscolaBrilhaInglesEiSerieAulaRouteImport.update({
-    id: '/escola-brilha/ingles-ei/$serie/$aula',
-    path: '/escola-brilha/ingles-ei/$serie/$aula',
-    getParentRoute: () => rootRouteImport,
+const NeuroTreinoLerComAuroraAulaRoute =
+  NeuroTreinoLerComAuroraAulaRouteImport.update({
+    id: '/ler-com-aurora/$aula',
+    path: '/ler-com-aurora/$aula',
+    getParentRoute: () => NeuroTreinoRoute,
   } as any)
-const EscolaBrilhaAulaV4CursoAulaRoute =
-  EscolaBrilhaAulaV4CursoAulaRouteImport.update({
-    id: '/escola-brilha/aula-v4/$curso/$aula',
-    path: '/escola-brilha/aula-v4/$curso/$aula',
-    getParentRoute: () => rootRouteImport,
+const NeuroTreinoLerComAuroraDiagnosticoRoute =
+  NeuroTreinoLerComAuroraDiagnosticoRouteImport.update({
+    id: '/ler-com-aurora/diagnostico',
+    path: '/ler-com-aurora/diagnostico',
+    getParentRoute: () => NeuroTreinoRoute,
   } as any)
-const EscolaBrilhaAulaPtV4CursoAulaRoute =
-  EscolaBrilhaAulaPtV4CursoAulaRouteImport.update({
-    id: '/escola-brilha/aula-pt-v4/$curso/$aula',
-    path: '/escola-brilha/aula-pt-v4/$curso/$aula',
-    getParentRoute: () => rootRouteImport,
+const NeuroTreinoLerComAuroraPainelRoute =
+  NeuroTreinoLerComAuroraPainelRouteImport.update({
+    id: '/ler-com-aurora/painel',
+    path: '/ler-com-aurora/painel',
+    getParentRoute: () => NeuroTreinoRoute,
   } as any)
-const EscolaBrilhaAulaGeoV1CursoAulaRoute =
-  EscolaBrilhaAulaGeoV1CursoAulaRouteImport.update({
-    id: '/escola-brilha/aula-geo-v1/$curso/$aula',
-    path: '/escola-brilha/aula-geo-v1/$curso/$aula',
+const EscolaBrilhaAulaArteV1CursoAulaRoute =
+  EscolaBrilhaAulaArteV1CursoAulaRouteImport.update({
+    id: '/escola-brilha/aula-arte-v1/$curso/$aula',
+    path: '/escola-brilha/aula-arte-v1/$curso/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EscolaBrilhaAulaExtraPtCursoAulaRoute =
@@ -531,10 +489,58 @@ const EscolaBrilhaAulaExtraPtCursoAulaRoute =
     path: '/escola-brilha/aula-extra-pt/$curso/$aula',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaAulaArteV1CursoAulaRoute =
-  EscolaBrilhaAulaArteV1CursoAulaRouteImport.update({
-    id: '/escola-brilha/aula-arte-v1/$curso/$aula',
-    path: '/escola-brilha/aula-arte-v1/$curso/$aula',
+const EscolaBrilhaAulaGeoV1CursoAulaRoute =
+  EscolaBrilhaAulaGeoV1CursoAulaRouteImport.update({
+    id: '/escola-brilha/aula-geo-v1/$curso/$aula',
+    path: '/escola-brilha/aula-geo-v1/$curso/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaAulaPtV4CursoAulaRoute =
+  EscolaBrilhaAulaPtV4CursoAulaRouteImport.update({
+    id: '/escola-brilha/aula-pt-v4/$curso/$aula',
+    path: '/escola-brilha/aula-pt-v4/$curso/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaAulaV4CursoAulaRoute =
+  EscolaBrilhaAulaV4CursoAulaRouteImport.update({
+    id: '/escola-brilha/aula-v4/$curso/$aula',
+    path: '/escola-brilha/aula-v4/$curso/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaInglesEiSerieAulaRoute =
+  EscolaBrilhaInglesEiSerieAulaRouteImport.update({
+    id: '/escola-brilha/ingles-ei/$serie/$aula',
+    path: '/escola-brilha/ingles-ei/$serie/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaInglesV1CursoAulaRoute =
+  EscolaBrilhaInglesV1CursoAulaRouteImport.update({
+    id: '/escola-brilha/ingles-v1/$curso/$aula',
+    path: '/escola-brilha/ingles-v1/$curso/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaMatematicaEiSerieAulaRoute =
+  EscolaBrilhaMatematicaEiSerieAulaRouteImport.update({
+    id: '/escola-brilha/matematica-ei/$serie/$aula',
+    path: '/escola-brilha/matematica-ei/$serie/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaPortuguesEiSerieAulaRoute =
+  EscolaBrilhaPortuguesEiSerieAulaRouteImport.update({
+    id: '/escola-brilha/portugues-ei/$serie/$aula',
+    path: '/escola-brilha/portugues-ei/$serie/$aula',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaTrilhaFund2SerieDiscRoute =
+  EscolaBrilhaTrilhaFund2SerieDiscRouteImport.update({
+    id: '/escola-brilha/trilha-fund2/$serie/$disc',
+    path: '/escola-brilha/trilha-fund2/$serie/$disc',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EscolaBrilhaTrilhaSerieDiscRoute =
+  EscolaBrilhaTrilhaSerieDiscRouteImport.update({
+    id: '/escola-brilha/trilha/$serie/$disc',
+    path: '/escola-brilha/trilha/$serie/$disc',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -587,6 +593,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -670,6 +677,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -755,6 +763,7 @@ export interface FileRoutesById {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -841,6 +850,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin/'
     | '/escola-brilha/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -924,6 +934,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin'
     | '/escola-brilha'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -1008,6 +1019,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin/'
     | '/escola-brilha/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -1090,6 +1102,7 @@ export interface RootRouteChildren {
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
   EscolaBrilhaBibliotecaEncantadaAulaRoute: typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -1122,249 +1135,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trilhas': {
-      id: '/trilhas'
-      path: '/trilhas'
-      fullPath: '/trilhas'
-      preLoaderRoute: typeof TrilhasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/termos': {
-      id: '/termos'
-      path: '/termos'
-      fullPath: '/termos'
-      preLoaderRoute: typeof TermosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terapeuta-brilha': {
-      id: '/terapeuta-brilha'
-      path: '/terapeuta-brilha'
-      fullPath: '/terapeuta-brilha'
-      preLoaderRoute: typeof TerapeutaBrilhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rotina-escrita': {
-      id: '/rotina-escrita'
-      path: '/rotina-escrita'
-      fullPath: '/rotina-escrita'
-      preLoaderRoute: typeof RotinaEscritaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rotina': {
-      id: '/rotina'
-      path: '/rotina'
-      fullPath: '/rotina'
-      preLoaderRoute: typeof RotinaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/relatorio': {
-      id: '/relatorio'
-      path: '/relatorio'
-      fullPath: '/relatorio'
-      preLoaderRoute: typeof RelatorioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reforco-brilha': {
-      id: '/reforco-brilha'
-      path: '/reforco-brilha'
-      fullPath: '/reforco-brilha'
-      preLoaderRoute: typeof ReforcoBrilhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/progressao': {
-      id: '/progressao'
-      path: '/progressao'
-      fullPath: '/progressao'
-      preLoaderRoute: typeof ProgressaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/professor-matematica': {
-      id: '/professor-matematica'
-      path: '/professor-matematica'
-      fullPath: '/professor-matematica'
-      preLoaderRoute: typeof ProfessorMatematicaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacidade': {
-      id: '/privacidade'
-      path: '/privacidade'
-      fullPath: '/privacidade'
-      preLoaderRoute: typeof PrivacidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/plano-neuro': {
-      id: '/plano-neuro'
-      path: '/plano-neuro'
-      fullPath: '/plano-neuro'
-      preLoaderRoute: typeof PlanoNeuroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/plano-anual': {
-      id: '/plano-anual'
-      path: '/plano-anual'
-      fullPath: '/plano-anual'
-      preLoaderRoute: typeof PlanoAnualRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/perfil-aluno': {
-      id: '/perfil-aluno'
-      path: '/perfil-aluno'
-      fullPath: '/perfil-aluno'
-      preLoaderRoute: typeof PerfilAlunoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/painel-pais': {
-      id: '/painel-pais'
-      path: '/painel-pais'
-      fullPath: '/painel-pais'
-      preLoaderRoute: typeof PainelPaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/neuro-treino': {
-      id: '/neuro-treino'
-      path: '/neuro-treino'
-      fullPath: '/neuro-treino'
-      preLoaderRoute: typeof NeuroTreinoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/missao-trabalho': {
-      id: '/missao-trabalho'
-      path: '/missao-trabalho'
-      fullPath: '/missao-trabalho'
-      preLoaderRoute: typeof MissaoTrabalhoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/missao-tarefa': {
-      id: '/missao-tarefa'
-      path: '/missao-tarefa'
-      fullPath: '/missao-tarefa'
-      preLoaderRoute: typeof MissaoTarefaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/missao-prova': {
-      id: '/missao-prova'
-      path: '/missao-prova'
-      fullPath: '/missao-prova'
-      preLoaderRoute: typeof MissaoProvaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/matriz-pedagogica': {
-      id: '/matriz-pedagogica'
-      path: '/matriz-pedagogica'
-      fullPath: '/matriz-pedagogica'
-      preLoaderRoute: typeof MatrizPedagogicaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mascotes': {
-      id: '/mascotes'
-      path: '/mascotes'
-      fullPath: '/mascotes'
-      preLoaderRoute: typeof MascotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/loja-mascotes': {
-      id: '/loja-mascotes'
-      path: '/loja-mascotes'
-      fullPath: '/loja-mascotes'
-      preLoaderRoute: typeof LojaMascotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gerador-procedural': {
-      id: '/gerador-procedural'
-      path: '/gerador-procedural'
-      fullPath: '/gerador-procedural'
-      preLoaderRoute: typeof GeradorProceduralRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curriculo-anual': {
-      id: '/curriculo-anual'
-      path: '/curriculo-anual'
-      fullPath: '/curriculo-anual'
-      preLoaderRoute: typeof CurriculoAnualRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curadoria-aulas': {
-      id: '/curadoria-aulas'
-      path: '/curadoria-aulas'
-      fullPath: '/curadoria-aulas'
-      preLoaderRoute: typeof CuradoriaAulasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/colecao-pip': {
-      id: '/colecao-pip'
-      path: '/colecao-pip'
-      fullPath: '/colecao-pip'
-      preLoaderRoute: typeof ColecaoPipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brilha-vida': {
-      id: '/brilha-vida'
-      path: '/brilha-vida'
-      fullPath: '/brilha-vida'
-      preLoaderRoute: typeof BrilhaVidaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/biblioteca-pedagogica': {
-      id: '/biblioteca-pedagogica'
-      path: '/biblioteca-pedagogica'
-      fullPath: '/biblioteca-pedagogica'
-      preLoaderRoute: typeof BibliotecaPedagogicaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/biblioteca-alfa': {
-      id: '/biblioteca-alfa'
-      path: '/biblioteca-alfa'
-      fullPath: '/biblioteca-alfa'
-      preLoaderRoute: typeof BibliotecaAlfaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/banco-midias': {
-      id: '/banco-midias'
-      path: '/banco-midias'
-      fullPath: '/banco-midias'
-      preLoaderRoute: typeof BancoMidiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auditoria-pedagogica': {
-      id: '/auditoria-pedagogica'
-      path: '/auditoria-pedagogica'
-      fullPath: '/auditoria-pedagogica'
-      preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/analytics': {
-      id: '/analytics'
-      path: '/analytics'
-      fullPath: '/analytics'
-      preLoaderRoute: typeof AnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alfabetizacao': {
-      id: '/alfabetizacao'
-      path: '/alfabetizacao'
-      fullPath: '/alfabetizacao'
-      preLoaderRoute: typeof AlfabetizacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/agenda': {
-      id: '/agenda'
-      path: '/agenda'
-      fullPath: '/agenda'
-      preLoaderRoute: typeof AgendaRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -1374,81 +1149,249 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/agenda': {
+      id: '/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AgendaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/': {
-      id: '/escola-brilha/'
-      path: '/escola-brilha'
-      fullPath: '/escola-brilha/'
-      preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
+    '/alfabetizacao': {
+      id: '/alfabetizacao'
+      path: '/alfabetizacao'
+      fullPath: '/alfabetizacao'
+      preLoaderRoute: typeof AlfabetizacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/neuro-treino/configurar': {
-      id: '/neuro-treino/configurar'
-      path: '/configurar'
-      fullPath: '/neuro-treino/configurar'
-      preLoaderRoute: typeof NeuroTreinoConfigurarRouteImport
-      parentRoute: typeof NeuroTreinoRoute
-    }
-    '/neuro-treino/$slug': {
-      id: '/neuro-treino/$slug'
-      path: '/$slug'
-      fullPath: '/neuro-treino/$slug'
-      preLoaderRoute: typeof NeuroTreinoSlugRouteImport
-      parentRoute: typeof NeuroTreinoRoute
-    }
-    '/escola-brilha/professores': {
-      id: '/escola-brilha/professores'
-      path: '/escola-brilha/professores'
-      fullPath: '/escola-brilha/professores'
-      preLoaderRoute: typeof EscolaBrilhaProfessoresRouteImport
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/$codigo': {
-      id: '/escola-brilha/$codigo'
-      path: '/escola-brilha/$codigo'
-      fullPath: '/escola-brilha/$codigo'
-      preLoaderRoute: typeof EscolaBrilhaCodigoRouteImport
+    '/auditoria-pedagogica': {
+      id: '/auditoria-pedagogica'
+      path: '/auditoria-pedagogica'
+      fullPath: '/auditoria-pedagogica'
+      preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/bncc/$codigo': {
-      id: '/bncc/$codigo'
-      path: '/bncc/$codigo'
-      fullPath: '/bncc/$codigo'
-      preLoaderRoute: typeof BnccCodigoRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/anamnese/$childId': {
-      id: '/anamnese/$childId'
-      path: '/anamnese/$childId'
-      fullPath: '/anamnese/$childId'
-      preLoaderRoute: typeof AnamneseChildIdRouteImport
+    '/banco-midias': {
+      id: '/banco-midias'
+      path: '/banco-midias'
+      fullPath: '/banco-midias'
+      preLoaderRoute: typeof BancoMidiasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ajuste-dificuldades/$childId': {
-      id: '/ajuste-dificuldades/$childId'
-      path: '/ajuste-dificuldades/$childId'
-      fullPath: '/ajuste-dificuldades/$childId'
-      preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
+    '/biblioteca-alfa': {
+      id: '/biblioteca-alfa'
+      path: '/biblioteca-alfa'
+      fullPath: '/biblioteca-alfa'
+      preLoaderRoute: typeof BibliotecaAlfaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+    '/biblioteca-pedagogica': {
+      id: '/biblioteca-pedagogica'
+      path: '/biblioteca-pedagogica'
+      fullPath: '/biblioteca-pedagogica'
+      preLoaderRoute: typeof BibliotecaPedagogicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brilha-vida': {
+      id: '/brilha-vida'
+      path: '/brilha-vida'
+      fullPath: '/brilha-vida'
+      preLoaderRoute: typeof BrilhaVidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colecao-pip': {
+      id: '/colecao-pip'
+      path: '/colecao-pip'
+      fullPath: '/colecao-pip'
+      preLoaderRoute: typeof ColecaoPipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curadoria-aulas': {
+      id: '/curadoria-aulas'
+      path: '/curadoria-aulas'
+      fullPath: '/curadoria-aulas'
+      preLoaderRoute: typeof CuradoriaAulasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculo-anual': {
+      id: '/curriculo-anual'
+      path: '/curriculo-anual'
+      fullPath: '/curriculo-anual'
+      preLoaderRoute: typeof CurriculoAnualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gerador-procedural': {
+      id: '/gerador-procedural'
+      path: '/gerador-procedural'
+      fullPath: '/gerador-procedural'
+      preLoaderRoute: typeof GeradorProceduralRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loja-mascotes': {
+      id: '/loja-mascotes'
+      path: '/loja-mascotes'
+      fullPath: '/loja-mascotes'
+      preLoaderRoute: typeof LojaMascotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mascotes': {
+      id: '/mascotes'
+      path: '/mascotes'
+      fullPath: '/mascotes'
+      preLoaderRoute: typeof MascotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matriz-pedagogica': {
+      id: '/matriz-pedagogica'
+      path: '/matriz-pedagogica'
+      fullPath: '/matriz-pedagogica'
+      preLoaderRoute: typeof MatrizPedagogicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-prova': {
+      id: '/missao-prova'
+      path: '/missao-prova'
+      fullPath: '/missao-prova'
+      preLoaderRoute: typeof MissaoProvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-tarefa': {
+      id: '/missao-tarefa'
+      path: '/missao-tarefa'
+      fullPath: '/missao-tarefa'
+      preLoaderRoute: typeof MissaoTarefaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-trabalho': {
+      id: '/missao-trabalho'
+      path: '/missao-trabalho'
+      fullPath: '/missao-trabalho'
+      preLoaderRoute: typeof MissaoTrabalhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neuro-treino': {
+      id: '/neuro-treino'
+      path: '/neuro-treino'
+      fullPath: '/neuro-treino'
+      preLoaderRoute: typeof NeuroTreinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel-pais': {
+      id: '/painel-pais'
+      path: '/painel-pais'
+      fullPath: '/painel-pais'
+      preLoaderRoute: typeof PainelPaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil-aluno': {
+      id: '/perfil-aluno'
+      path: '/perfil-aluno'
+      fullPath: '/perfil-aluno'
+      preLoaderRoute: typeof PerfilAlunoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plano-anual': {
+      id: '/plano-anual'
+      path: '/plano-anual'
+      fullPath: '/plano-anual'
+      preLoaderRoute: typeof PlanoAnualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plano-neuro': {
+      id: '/plano-neuro'
+      path: '/plano-neuro'
+      fullPath: '/plano-neuro'
+      preLoaderRoute: typeof PlanoNeuroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/professor-matematica': {
+      id: '/professor-matematica'
+      path: '/professor-matematica'
+      fullPath: '/professor-matematica'
+      preLoaderRoute: typeof ProfessorMatematicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progressao': {
+      id: '/progressao'
+      path: '/progressao'
+      fullPath: '/progressao'
+      preLoaderRoute: typeof ProgressaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reforco-brilha': {
+      id: '/reforco-brilha'
+      path: '/reforco-brilha'
+      fullPath: '/reforco-brilha'
+      preLoaderRoute: typeof ReforcoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorio': {
+      id: '/relatorio'
+      path: '/relatorio'
+      fullPath: '/relatorio'
+      preLoaderRoute: typeof RelatorioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rotina': {
+      id: '/rotina'
+      path: '/rotina'
+      fullPath: '/rotina'
+      preLoaderRoute: typeof RotinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rotina-escrita': {
+      id: '/rotina-escrita'
+      path: '/rotina-escrita'
+      fullPath: '/rotina-escrita'
+      preLoaderRoute: typeof RotinaEscritaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terapeuta-brilha': {
+      id: '/terapeuta-brilha'
+      path: '/terapeuta-brilha'
+      fullPath: '/terapeuta-brilha'
+      preLoaderRoute: typeof TerapeutaBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilhas': {
+      id: '/trilhas'
+      path: '/trilhas'
+      fullPath: '/trilhas'
+      preLoaderRoute: typeof TrilhasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -1458,46 +1401,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/neuro-treino/ler-com-aurora/': {
-      id: '/neuro-treino/ler-com-aurora/'
-      path: '/ler-com-aurora'
-      fullPath: '/neuro-treino/ler-com-aurora/'
-      preLoaderRoute: typeof NeuroTreinoLerComAuroraIndexRouteImport
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/ajuste-dificuldades/$childId': {
+      id: '/ajuste-dificuldades/$childId'
+      path: '/ajuste-dificuldades/$childId'
+      fullPath: '/ajuste-dificuldades/$childId'
+      preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anamnese/$childId': {
+      id: '/anamnese/$childId'
+      path: '/anamnese/$childId'
+      fullPath: '/anamnese/$childId'
+      preLoaderRoute: typeof AnamneseChildIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bncc/$codigo': {
+      id: '/bncc/$codigo'
+      path: '/bncc/$codigo'
+      fullPath: '/bncc/$codigo'
+      preLoaderRoute: typeof BnccCodigoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/': {
+      id: '/escola-brilha/'
+      path: '/escola-brilha'
+      fullPath: '/escola-brilha/'
+      preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/$codigo': {
+      id: '/escola-brilha/$codigo'
+      path: '/escola-brilha/$codigo'
+      fullPath: '/escola-brilha/$codigo'
+      preLoaderRoute: typeof EscolaBrilhaCodigoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/professores': {
+      id: '/escola-brilha/professores'
+      path: '/escola-brilha/professores'
+      fullPath: '/escola-brilha/professores'
+      preLoaderRoute: typeof EscolaBrilhaProfessoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neuro-treino/$slug': {
+      id: '/neuro-treino/$slug'
+      path: '/$slug'
+      fullPath: '/neuro-treino/$slug'
+      preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
-    '/escola-brilha/portugues-ei/': {
-      id: '/escola-brilha/portugues-ei/'
-      path: '/escola-brilha/portugues-ei'
-      fullPath: '/escola-brilha/portugues-ei/'
-      preLoaderRoute: typeof EscolaBrilhaPortuguesEiIndexRouteImport
+    '/neuro-treino/configurar': {
+      id: '/neuro-treino/configurar'
+      path: '/configurar'
+      fullPath: '/neuro-treino/configurar'
+      preLoaderRoute: typeof NeuroTreinoConfigurarRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/matematica-ei/': {
-      id: '/escola-brilha/matematica-ei/'
-      path: '/escola-brilha/matematica-ei'
-      fullPath: '/escola-brilha/matematica-ei/'
-      preLoaderRoute: typeof EscolaBrilhaMatematicaEiIndexRouteImport
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/ingles-ei/': {
-      id: '/escola-brilha/ingles-ei/'
-      path: '/escola-brilha/ingles-ei'
-      fullPath: '/escola-brilha/ingles-ei/'
-      preLoaderRoute: typeof EscolaBrilhaInglesEiIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/anamnese/$childId/escalas': {
+      id: '/anamnese/$childId/escalas'
+      path: '/escalas'
+      fullPath: '/anamnese/$childId/escalas'
+      preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
+      parentRoute: typeof AnamneseChildIdRoute
     }
-    '/escola-brilha/dislexia/': {
-      id: '/escola-brilha/dislexia/'
-      path: '/escola-brilha/dislexia'
-      fullPath: '/escola-brilha/dislexia/'
-      preLoaderRoute: typeof EscolaBrilhaDislexiaIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/anamnese/$childId/resultado': {
+      id: '/anamnese/$childId/resultado'
+      path: '/resultado'
+      fullPath: '/anamnese/$childId/resultado'
+      preLoaderRoute: typeof AnamneseChildIdResultadoRouteImport
+      parentRoute: typeof AnamneseChildIdRoute
     }
-    '/escola-brilha/contar-com-pip/': {
-      id: '/escola-brilha/contar-com-pip/'
-      path: '/escola-brilha/contar-com-pip'
-      fullPath: '/escola-brilha/contar-com-pip/'
-      preLoaderRoute: typeof EscolaBrilhaContarComPipIndexRouteImport
+    '/escola-brilha/atlas-final/$curso': {
+      id: '/escola-brilha/atlas-final/$curso'
+      path: '/escola-brilha/atlas-final/$curso'
+      fullPath: '/escola-brilha/atlas-final/$curso'
+      preLoaderRoute: typeof EscolaBrilhaAtlasFinalCursoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/biblioteca-encantada/': {
@@ -1507,74 +1513,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaBibliotecaEncantadaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/neuro-treino/ler-com-aurora/painel': {
-      id: '/neuro-treino/ler-com-aurora/painel'
-      path: '/ler-com-aurora/painel'
-      fullPath: '/neuro-treino/ler-com-aurora/painel'
-      preLoaderRoute: typeof NeuroTreinoLerComAuroraPainelRouteImport
-      parentRoute: typeof NeuroTreinoRoute
-    }
-    '/neuro-treino/ler-com-aurora/diagnostico': {
-      id: '/neuro-treino/ler-com-aurora/diagnostico'
-      path: '/ler-com-aurora/diagnostico'
-      fullPath: '/neuro-treino/ler-com-aurora/diagnostico'
-      preLoaderRoute: typeof NeuroTreinoLerComAuroraDiagnosticoRouteImport
-      parentRoute: typeof NeuroTreinoRoute
-    }
-    '/neuro-treino/ler-com-aurora/$aula': {
-      id: '/neuro-treino/ler-com-aurora/$aula'
-      path: '/ler-com-aurora/$aula'
-      fullPath: '/neuro-treino/ler-com-aurora/$aula'
-      preLoaderRoute: typeof NeuroTreinoLerComAuroraAulaRouteImport
-      parentRoute: typeof NeuroTreinoRoute
-    }
-    '/escola-brilha/trilha-ingles/$serie': {
-      id: '/escola-brilha/trilha-ingles/$serie'
-      path: '/escola-brilha/trilha-ingles/$serie'
-      fullPath: '/escola-brilha/trilha-ingles/$serie'
-      preLoaderRoute: typeof EscolaBrilhaTrilhaInglesSerieRouteImport
+    '/escola-brilha/biblioteca-encantada/$aula': {
+      id: '/escola-brilha/biblioteca-encantada/$aula'
+      path: '/escola-brilha/biblioteca-encantada/$aula'
+      fullPath: '/escola-brilha/biblioteca-encantada/$aula'
+      preLoaderRoute: typeof EscolaBrilhaBibliotecaEncantadaAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/geo-9ano/$unidade': {
-      id: '/escola-brilha/geo-9ano/$unidade'
-      path: '/escola-brilha/geo-9ano/$unidade'
-      fullPath: '/escola-brilha/geo-9ano/$unidade'
-      preLoaderRoute: typeof EscolaBrilhaGeo9anoUnidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/geo-8ano/$unidade': {
-      id: '/escola-brilha/geo-8ano/$unidade'
-      path: '/escola-brilha/geo-8ano/$unidade'
-      fullPath: '/escola-brilha/geo-8ano/$unidade'
-      preLoaderRoute: typeof EscolaBrilhaGeo8anoUnidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/geo-7ano/$unidade': {
-      id: '/escola-brilha/geo-7ano/$unidade'
-      path: '/escola-brilha/geo-7ano/$unidade'
-      fullPath: '/escola-brilha/geo-7ano/$unidade'
-      preLoaderRoute: typeof EscolaBrilhaGeo7anoUnidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/geo-6ano/$unidade': {
-      id: '/escola-brilha/geo-6ano/$unidade'
-      path: '/escola-brilha/geo-6ano/$unidade'
-      fullPath: '/escola-brilha/geo-6ano/$unidade'
-      preLoaderRoute: typeof EscolaBrilhaGeo6anoUnidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/dislexia/$aula': {
-      id: '/escola-brilha/dislexia/$aula'
-      path: '/escola-brilha/dislexia/$aula'
-      fullPath: '/escola-brilha/dislexia/$aula'
-      preLoaderRoute: typeof EscolaBrilhaDislexiaAulaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/curso/$slug': {
-      id: '/escola-brilha/curso/$slug'
-      path: '/escola-brilha/curso/$slug'
-      fullPath: '/escola-brilha/curso/$slug'
-      preLoaderRoute: typeof EscolaBrilhaCursoSlugRouteImport
+    '/escola-brilha/contar-com-pip/': {
+      id: '/escola-brilha/contar-com-pip/'
+      path: '/escola-brilha/contar-com-pip'
+      fullPath: '/escola-brilha/contar-com-pip/'
+      preLoaderRoute: typeof EscolaBrilhaContarComPipIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/contar-com-pip/$aula': {
@@ -1584,102 +1534,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaContarComPipAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/biblioteca-encantada/$aula': {
-      id: '/escola-brilha/biblioteca-encantada/$aula'
-      path: '/escola-brilha/biblioteca-encantada/$aula'
-      fullPath: '/escola-brilha/biblioteca-encantada/$aula'
-      preLoaderRoute: typeof EscolaBrilhaBibliotecaEncantadaAulaRouteImport
+    '/escola-brilha/curso/$slug': {
+      id: '/escola-brilha/curso/$slug'
+      path: '/escola-brilha/curso/$slug'
+      fullPath: '/escola-brilha/curso/$slug'
+      preLoaderRoute: typeof EscolaBrilhaCursoSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/atlas-final/$curso': {
-      id: '/escola-brilha/atlas-final/$curso'
-      path: '/escola-brilha/atlas-final/$curso'
-      fullPath: '/escola-brilha/atlas-final/$curso'
-      preLoaderRoute: typeof EscolaBrilhaAtlasFinalCursoRouteImport
+    '/escola-brilha/dislexia/': {
+      id: '/escola-brilha/dislexia/'
+      path: '/escola-brilha/dislexia'
+      fullPath: '/escola-brilha/dislexia/'
+      preLoaderRoute: typeof EscolaBrilhaDislexiaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/anamnese/$childId/resultado': {
-      id: '/anamnese/$childId/resultado'
-      path: '/resultado'
-      fullPath: '/anamnese/$childId/resultado'
-      preLoaderRoute: typeof AnamneseChildIdResultadoRouteImport
-      parentRoute: typeof AnamneseChildIdRoute
-    }
-    '/anamnese/$childId/escalas': {
-      id: '/anamnese/$childId/escalas'
-      path: '/escalas'
-      fullPath: '/anamnese/$childId/escalas'
-      preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
-      parentRoute: typeof AnamneseChildIdRoute
-    }
-    '/.mcp/invoke-tool/$tool': {
-      id: '/.mcp/invoke-tool/$tool'
-      path: '/.mcp/invoke-tool/$tool'
-      fullPath: '/.mcp/invoke-tool/$tool'
-      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+    '/escola-brilha/dislexia/$aula': {
+      id: '/escola-brilha/dislexia/$aula'
+      path: '/escola-brilha/dislexia/$aula'
+      fullPath: '/escola-brilha/dislexia/$aula'
+      preLoaderRoute: typeof EscolaBrilhaDislexiaAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/trilha/$serie/$disc': {
-      id: '/escola-brilha/trilha/$serie/$disc'
-      path: '/escola-brilha/trilha/$serie/$disc'
-      fullPath: '/escola-brilha/trilha/$serie/$disc'
-      preLoaderRoute: typeof EscolaBrilhaTrilhaSerieDiscRouteImport
+    '/escola-brilha/geo-6ano/$unidade': {
+      id: '/escola-brilha/geo-6ano/$unidade'
+      path: '/escola-brilha/geo-6ano/$unidade'
+      fullPath: '/escola-brilha/geo-6ano/$unidade'
+      preLoaderRoute: typeof EscolaBrilhaGeo6anoUnidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/trilha-fund2/$serie/$disc': {
-      id: '/escola-brilha/trilha-fund2/$serie/$disc'
-      path: '/escola-brilha/trilha-fund2/$serie/$disc'
-      fullPath: '/escola-brilha/trilha-fund2/$serie/$disc'
-      preLoaderRoute: typeof EscolaBrilhaTrilhaFund2SerieDiscRouteImport
+    '/escola-brilha/geo-7ano/$unidade': {
+      id: '/escola-brilha/geo-7ano/$unidade'
+      path: '/escola-brilha/geo-7ano/$unidade'
+      fullPath: '/escola-brilha/geo-7ano/$unidade'
+      preLoaderRoute: typeof EscolaBrilhaGeo7anoUnidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/portugues-ei/$serie/$aula': {
-      id: '/escola-brilha/portugues-ei/$serie/$aula'
-      path: '/escola-brilha/portugues-ei/$serie/$aula'
-      fullPath: '/escola-brilha/portugues-ei/$serie/$aula'
-      preLoaderRoute: typeof EscolaBrilhaPortuguesEiSerieAulaRouteImport
+    '/escola-brilha/geo-8ano/$unidade': {
+      id: '/escola-brilha/geo-8ano/$unidade'
+      path: '/escola-brilha/geo-8ano/$unidade'
+      fullPath: '/escola-brilha/geo-8ano/$unidade'
+      preLoaderRoute: typeof EscolaBrilhaGeo8anoUnidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/matematica-ei/$serie/$aula': {
-      id: '/escola-brilha/matematica-ei/$serie/$aula'
-      path: '/escola-brilha/matematica-ei/$serie/$aula'
-      fullPath: '/escola-brilha/matematica-ei/$serie/$aula'
-      preLoaderRoute: typeof EscolaBrilhaMatematicaEiSerieAulaRouteImport
+    '/escola-brilha/geo-9ano/$unidade': {
+      id: '/escola-brilha/geo-9ano/$unidade'
+      path: '/escola-brilha/geo-9ano/$unidade'
+      fullPath: '/escola-brilha/geo-9ano/$unidade'
+      preLoaderRoute: typeof EscolaBrilhaGeo9anoUnidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/ingles-v1/$curso/$aula': {
-      id: '/escola-brilha/ingles-v1/$curso/$aula'
-      path: '/escola-brilha/ingles-v1/$curso/$aula'
-      fullPath: '/escola-brilha/ingles-v1/$curso/$aula'
-      preLoaderRoute: typeof EscolaBrilhaInglesV1CursoAulaRouteImport
+    '/escola-brilha/ingles-ei/': {
+      id: '/escola-brilha/ingles-ei/'
+      path: '/escola-brilha/ingles-ei'
+      fullPath: '/escola-brilha/ingles-ei/'
+      preLoaderRoute: typeof EscolaBrilhaInglesEiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/ingles-ei/$serie/$aula': {
-      id: '/escola-brilha/ingles-ei/$serie/$aula'
-      path: '/escola-brilha/ingles-ei/$serie/$aula'
-      fullPath: '/escola-brilha/ingles-ei/$serie/$aula'
-      preLoaderRoute: typeof EscolaBrilhaInglesEiSerieAulaRouteImport
+    '/escola-brilha/matematica-ei/': {
+      id: '/escola-brilha/matematica-ei/'
+      path: '/escola-brilha/matematica-ei'
+      fullPath: '/escola-brilha/matematica-ei/'
+      preLoaderRoute: typeof EscolaBrilhaMatematicaEiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/aula-v4/$curso/$aula': {
-      id: '/escola-brilha/aula-v4/$curso/$aula'
-      path: '/escola-brilha/aula-v4/$curso/$aula'
-      fullPath: '/escola-brilha/aula-v4/$curso/$aula'
-      preLoaderRoute: typeof EscolaBrilhaAulaV4CursoAulaRouteImport
+    '/escola-brilha/portugues-ei/': {
+      id: '/escola-brilha/portugues-ei/'
+      path: '/escola-brilha/portugues-ei'
+      fullPath: '/escola-brilha/portugues-ei/'
+      preLoaderRoute: typeof EscolaBrilhaPortuguesEiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/aula-pt-v4/$curso/$aula': {
-      id: '/escola-brilha/aula-pt-v4/$curso/$aula'
-      path: '/escola-brilha/aula-pt-v4/$curso/$aula'
-      fullPath: '/escola-brilha/aula-pt-v4/$curso/$aula'
-      preLoaderRoute: typeof EscolaBrilhaAulaPtV4CursoAulaRouteImport
+    '/escola-brilha/trilha-ingles/$serie': {
+      id: '/escola-brilha/trilha-ingles/$serie'
+      path: '/escola-brilha/trilha-ingles/$serie'
+      fullPath: '/escola-brilha/trilha-ingles/$serie'
+      preLoaderRoute: typeof EscolaBrilhaTrilhaInglesSerieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/aula-geo-v1/$curso/$aula': {
-      id: '/escola-brilha/aula-geo-v1/$curso/$aula'
-      path: '/escola-brilha/aula-geo-v1/$curso/$aula'
-      fullPath: '/escola-brilha/aula-geo-v1/$curso/$aula'
-      preLoaderRoute: typeof EscolaBrilhaAulaGeoV1CursoAulaRouteImport
+    '/neuro-treino/ler-com-aurora/': {
+      id: '/neuro-treino/ler-com-aurora/'
+      path: '/ler-com-aurora'
+      fullPath: '/neuro-treino/ler-com-aurora/'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraIndexRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/ler-com-aurora/$aula': {
+      id: '/neuro-treino/ler-com-aurora/$aula'
+      path: '/ler-com-aurora/$aula'
+      fullPath: '/neuro-treino/ler-com-aurora/$aula'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraAulaRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/ler-com-aurora/diagnostico': {
+      id: '/neuro-treino/ler-com-aurora/diagnostico'
+      path: '/ler-com-aurora/diagnostico'
+      fullPath: '/neuro-treino/ler-com-aurora/diagnostico'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraDiagnosticoRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/ler-com-aurora/painel': {
+      id: '/neuro-treino/ler-com-aurora/painel'
+      path: '/ler-com-aurora/painel'
+      fullPath: '/neuro-treino/ler-com-aurora/painel'
+      preLoaderRoute: typeof NeuroTreinoLerComAuroraPainelRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/escola-brilha/aula-arte-v1/$curso/$aula': {
+      id: '/escola-brilha/aula-arte-v1/$curso/$aula'
+      path: '/escola-brilha/aula-arte-v1/$curso/$aula'
+      fullPath: '/escola-brilha/aula-arte-v1/$curso/$aula'
+      preLoaderRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/aula-extra-pt/$curso/$aula': {
@@ -1689,11 +1653,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaAulaExtraPtCursoAulaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/aula-arte-v1/$curso/$aula': {
-      id: '/escola-brilha/aula-arte-v1/$curso/$aula'
-      path: '/escola-brilha/aula-arte-v1/$curso/$aula'
-      fullPath: '/escola-brilha/aula-arte-v1/$curso/$aula'
-      preLoaderRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRouteImport
+    '/escola-brilha/aula-geo-v1/$curso/$aula': {
+      id: '/escola-brilha/aula-geo-v1/$curso/$aula'
+      path: '/escola-brilha/aula-geo-v1/$curso/$aula'
+      fullPath: '/escola-brilha/aula-geo-v1/$curso/$aula'
+      preLoaderRoute: typeof EscolaBrilhaAulaGeoV1CursoAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/aula-pt-v4/$curso/$aula': {
+      id: '/escola-brilha/aula-pt-v4/$curso/$aula'
+      path: '/escola-brilha/aula-pt-v4/$curso/$aula'
+      fullPath: '/escola-brilha/aula-pt-v4/$curso/$aula'
+      preLoaderRoute: typeof EscolaBrilhaAulaPtV4CursoAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/aula-v4/$curso/$aula': {
+      id: '/escola-brilha/aula-v4/$curso/$aula'
+      path: '/escola-brilha/aula-v4/$curso/$aula'
+      fullPath: '/escola-brilha/aula-v4/$curso/$aula'
+      preLoaderRoute: typeof EscolaBrilhaAulaV4CursoAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/ingles-ei/$serie/$aula': {
+      id: '/escola-brilha/ingles-ei/$serie/$aula'
+      path: '/escola-brilha/ingles-ei/$serie/$aula'
+      fullPath: '/escola-brilha/ingles-ei/$serie/$aula'
+      preLoaderRoute: typeof EscolaBrilhaInglesEiSerieAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/ingles-v1/$curso/$aula': {
+      id: '/escola-brilha/ingles-v1/$curso/$aula'
+      path: '/escola-brilha/ingles-v1/$curso/$aula'
+      fullPath: '/escola-brilha/ingles-v1/$curso/$aula'
+      preLoaderRoute: typeof EscolaBrilhaInglesV1CursoAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/matematica-ei/$serie/$aula': {
+      id: '/escola-brilha/matematica-ei/$serie/$aula'
+      path: '/escola-brilha/matematica-ei/$serie/$aula'
+      fullPath: '/escola-brilha/matematica-ei/$serie/$aula'
+      preLoaderRoute: typeof EscolaBrilhaMatematicaEiSerieAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/portugues-ei/$serie/$aula': {
+      id: '/escola-brilha/portugues-ei/$serie/$aula'
+      path: '/escola-brilha/portugues-ei/$serie/$aula'
+      fullPath: '/escola-brilha/portugues-ei/$serie/$aula'
+      preLoaderRoute: typeof EscolaBrilhaPortuguesEiSerieAulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/trilha-fund2/$serie/$disc': {
+      id: '/escola-brilha/trilha-fund2/$serie/$disc'
+      path: '/escola-brilha/trilha-fund2/$serie/$disc'
+      fullPath: '/escola-brilha/trilha-fund2/$serie/$disc'
+      preLoaderRoute: typeof EscolaBrilhaTrilhaFund2SerieDiscRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha/trilha/$serie/$disc': {
+      id: '/escola-brilha/trilha/$serie/$disc'
+      path: '/escola-brilha/trilha/$serie/$disc'
+      fullPath: '/escola-brilha/trilha/$serie/$disc'
+      preLoaderRoute: typeof EscolaBrilhaTrilhaSerieDiscRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -1793,6 +1813,7 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
   EscolaBrilhaBibliotecaEncantadaAulaRoute:
