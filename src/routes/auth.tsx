@@ -5,12 +5,27 @@ import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable";
 
+function safeNext(value: unknown): string {
+  if (typeof value !== "string") return "";
+  // Só caminhos relativos do próprio app (evita redirect aberto).
+  if (!value.startsWith("/") || value.startsWith("//")) return "";
+  return value;
+}
+
 export const Route = createFileRoute("/auth")({
+  validateSearch: (search: Record<string, unknown>): { next?: string } => {
+    const next = safeNext(search.next);
+    return next ? { next } : {};
+  },
   component: Auth,
 });
 
+
+
 function Auth() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
+  const dest = next || "/";
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +40,7 @@ function Auth() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
-        navigate({ to: "/", replace: true });
+        navigate({ href: dest, replace: true });
       } else {
         setChecking(false);
       }
@@ -48,7 +63,7 @@ function Auth() {
             const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
             if (!loginError) {
               toast.success("Conta encontrada. Você já entrou neste aparelho.");
-              navigate({ to: "/", replace: true });
+              navigate({ href: dest, replace: true });
               return;
             }
 
@@ -62,7 +77,7 @@ function Auth() {
         const { data } = await supabase.auth.getSession();
         if (data.session) {
           toast.success("Conta criada!");
-          navigate({ to: "/", replace: true });
+          navigate({ href: dest, replace: true });
         } else {
           toast.success("Conta criada! Verifique seu email para confirmar.");
           setMode("login");
@@ -71,7 +86,7 @@ function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Bem-vindo!");
-        navigate({ to: "/", replace: true });
+        navigate({ href: dest, replace: true });
       }
     } catch (err: any) {
       if (isAlreadyRegisteredError(err?.message)) {
@@ -161,7 +176,7 @@ function Auth() {
             onClick={async () => {
               setLoading(true);
               const res = await lovable.auth.signInWithOAuth("google", {
-                redirect_uri: window.location.origin,
+                redirect_uri: `${window.location.origin}/auth?next=${encodeURIComponent(dest)}`,
               });
               if (res.error) {
                 toast.error(res.error.message ?? "Erro no login Google");
@@ -169,7 +184,7 @@ function Auth() {
                 return;
               }
               if (!res.redirected) {
-                navigate({ to: "/", replace: true });
+                navigate({ href: dest, replace: true });
               }
             }}
             className="rounded-xl border-2 border-input bg-background text-foreground font-bold py-3 text-sm hover:bg-accent transition disabled:opacity-60 flex items-center justify-center gap-2"
