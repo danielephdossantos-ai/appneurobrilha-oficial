@@ -7,25 +7,7 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 }
 
 /**
- * Prepara e limpa o texto garantindo que caracteres especiais e acentos
- * sejam interpretados corretamente pela Web Speech API.
- */
-export function normalizeTextForTTS(text: string): string {
-  if (!text) return '';
-  // 1. Remove caracteres invisíveis ou formatações ocultas que quebram o leitor
-  // 2. Aplica normalização NFC conforme requisito de síntese rígida
-  let cleanText = text.trim().normalize('NFC');
-  
-  // 3. Verifica se a palavra está no dicionário de correções fonéticas
-  if (PHONETIC_FIXES[cleanText]) {
-    return PHONETIC_FIXES[cleanText];
-  }
-  return cleanText;
-}
-
-/**
  * Dicionário de exceções e palavras com acentuação sensível
-
  * Adicione aqui qualquer palavra que o motor de voz do navegador tenda a soletrar ou ler errado.
  */
 const PHONETIC_FIXES: Record<string, string> = {
@@ -44,13 +26,17 @@ const PHONETIC_FIXES: Record<string, string> = {
 export function normalizeTextForTTS(text: string): string {
   if (!text) return '';
   // 1. Remove caracteres invisíveis ou formatações ocultas que quebram o leitor
+  // 2. Aplica normalização NFC conforme requisito de síntese rígida
   let cleanText = text.trim().normalize('NFC');
-  // 2. Verifica se a palavra está no dicionário de correções fonéticas
+  
+  // 3. Verifica se a palavra está no dicionário de correções fonéticas
   if (PHONETIC_FIXES[cleanText]) {
     return PHONETIC_FIXES[cleanText];
   }
   return cleanText;
 }
+
+
 
 /**
  * Função de Leitura de Alta Precisão para o Neurotreino.
