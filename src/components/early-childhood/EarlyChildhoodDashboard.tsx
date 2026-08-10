@@ -27,7 +27,7 @@ export const EarlyChildhoodDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] p-6 md:p-12 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#F0F7FF] p-6 md:p-12 font-sans overflow-x-hidden w-full max-w-[100vw]">
       <header className="max-w-7xl mx-auto flex justify-between items-center mb-12">
         <motion.div
           initial={{ x: -50, opacity: 0 }}
