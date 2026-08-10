@@ -24,7 +24,10 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        // Chunks muito grandes (registries de conteúdo) são carregados sob demanda
+        // e não devem entrar no precache do service worker.
+        globIgnores: ["**/registry-*.js", "**/node_modules/**/*"],
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         runtimeCaching: [
           {
             urlPattern: /^\/api\//,
