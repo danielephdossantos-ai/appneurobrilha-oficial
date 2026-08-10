@@ -1,5 +1,12 @@
 // Módulo de Correção de Leitura e Síntese Rígida para Neurotreino
 
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
+
+
 /**
  * Dicionário de exceções e palavras com acentuação sensível
  * Adicione aqui qualquer palavra que o motor de voz do navegador tenda a soletrar ou ler errado.
