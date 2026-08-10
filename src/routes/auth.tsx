@@ -188,8 +188,11 @@ function Auth() {
             disabled={loading}
             onClick={async () => {
               setLoading(true);
+              try {
+                sessionStorage.setItem("nb:auth-next", dest);
+              } catch {}
               const res = await lovable.auth.signInWithOAuth("google", {
-                redirect_uri: `${window.location.origin}/auth?next=${encodeURIComponent(dest)}`,
+                redirect_uri: window.location.origin,
               });
               if (res.error) {
                 toast.error(res.error.message ?? "Erro no login Google");
@@ -197,6 +200,9 @@ function Auth() {
                 return;
               }
               if (!res.redirected) {
+                try {
+                  sessionStorage.removeItem("nb:auth-next");
+                } catch {}
                 navigate({ href: dest, replace: true });
               }
             }}
