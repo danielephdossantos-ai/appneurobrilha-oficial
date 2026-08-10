@@ -28,7 +28,7 @@ export const ActivityContainer: React.FC<Props> = ({ activity, onComplete, emoti
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto p-6 bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-indigo-100">
+    <div className="relative w-full max-w-[400px] mx-auto flex flex-col items-center justify-center overflow-x-hidden min-h-screen px-4 py-6 bg-white rounded-3xl shadow-xl border-4 border-indigo-100 box-border">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

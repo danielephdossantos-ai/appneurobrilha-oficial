@@ -168,6 +168,14 @@
     color: var(--color-foreground);
     font-weight: 500;
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
   h1,
   h2,
