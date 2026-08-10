@@ -227,7 +227,7 @@ function Index() {
               <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
                 {activeChild
                   ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
-                  : "Escolha um aventureiro! ✨"}
+                  : "os mascotes sumiram está só umquebra cabeça nas imagem . 🧩\n\nDino, Robo, Pipa e unicórnio\n\nCompanheiro de Jornada"}
               </p>
             </div>
           </div>
@@ -429,7 +429,7 @@ function Index() {
               <p className="text-[#0d1f55] font-black text-lg leading-tight">
                 {activeChild
                   ? `Oi ${activeChild.nome}! Pra onde vamos hoje? 🚀`
-                  : "Escolha um aventureiro pra começar! ✨"}
+                  : "os mascotes sumiram está só umquebra cabeça nas imagem . 🧩\n\nDino, Robo, Pipa e unicórnio\n\nCompanheiro de Jornada"}
               </p>
             </motion.div>
           </div>
