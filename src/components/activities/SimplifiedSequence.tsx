@@ -22,8 +22,8 @@ export const SimplifiedSequence = ({
   };
 
   return (
-    <div className="flex flex-col items-center gap-12 p-12 bg-white/50 rounded-[3rem] border-4 border-dashed border-indigo-200">
-      <Reorder.Group axis="x" values={order} onReorder={setOrder} className="flex gap-6">
+    <div className="w-full max-w-full flex flex-col items-center justify-center gap-12 p-6 md:p-12 bg-white/50 rounded-[3rem] border-4 border-dashed border-indigo-200 box-border overflow-x-hidden">
+      <Reorder.Group axis="x" values={order} onReorder={setOrder} className="flex flex-wrap justify-center gap-6">
         {order.map((item) => (
           <Reorder.Item
             key={item.id}
