@@ -120,7 +120,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="Load the security issues from the scan results and fix the selected issues.">
+      <body className="os mascotes sumiram está só umquebra cabeça nas  imagem . 🧩\n\n\n\nDino   ,Robo , Pipa e unicornio\n\nCompanheiro de Jornada">
         {children}
         <Scripts />
       </body>
