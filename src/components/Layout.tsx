@@ -295,26 +295,44 @@ export function Shell({ children }: { children?: ReactNode }) {
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-20 backdrop-blur-xl bg-background/70 border-b-4 border-sidebar-border px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="font-extrabold flex items-center gap-2 md:hidden">
-              <Sprout className="h-6 w-6 text-primary" /> NeuroBrilha
+        <header className="w-full max-w-full overflow-hidden flex items-center justify-between p-4 gap-2 sticky top-0 z-20 backdrop-blur-xl bg-background/70 border-b-4 border-sidebar-border">
+          {/* Logo / Título */}
+          <div className="flex items-center gap-2 flex-shrink">
+            <Link to="/" className="flex items-center gap-2">
+              <Sprout className="h-6 w-6 text-primary md:hidden" />
+              <span className="font-bold text-base text-slate-800 truncate">
+                NeuroBrilha
+              </span>
             </Link>
-            {activeChild && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-muted/50">
-                <span className="text-xl">{activeChild.avatar}</span>
-                <span className="text-sm font-bold">{activeChild.nome}</span>
-              </div>
-            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <CoinDisplay className="md:hidden" />
+          {/* Coins / Stats */}
+          <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 flex-shrink-0">
+            <span className="text-xs font-bold text-emerald-600">BRILHOCOINS 520</span>
+          </div>
+
+          {/* Ações e Perfil do Usuário */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             <NotificationBell />
-            {activeChild && (
-              <div className="md:hidden text-sm flex items-center gap-1">
-                <span className="text-xl">{activeChild.avatar}</span>
-                <span className="font-bold">{activeChild.nome}</span>
+            
+            {/* Bloco do Usuário sem estourar a tela */}
+            {activeChild ? (
+              <div className="flex items-center gap-1.5 max-w-[130px] sm:max-w-none">
+                <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner">
+                  {activeChild.avatar || "👦"}
+                </div>
+                <div className="flex flex-col text-left leading-tight truncate">
+                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
+                    {activeChild.nome.split(' ')[0] || "VITOR"}
+                  </span>
+                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
+                    {activeChild.nome.split(' ')[1] || "RAFAEL"}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
+                👤
               </div>
             )}
           </div>
