@@ -65,14 +65,14 @@ export const LiteracyLayout: React.FC<LiteracyLayoutProps> = ({
         </div>
       </header>
 
-      <main className="w-full max-w-[400px] mx-auto flex flex-col items-center justify-center px-4 py-6 overflow-x-hidden min-h-screen">
+      <main className="w-full max-w-[380px] mx-auto flex flex-col items-center justify-center px-4 py-6 overflow-x-hidden min-h-screen">
         <AnimatePresence mode="wait">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: isTEA ? 0.8 : 0.4 }}
-            className={`w-full max-w-full bg-white rounded-3xl shadow-xl p-4 border-4 border-indigo-50 flex flex-col items-center box-border
+            className={`w-full max-w-full bg-slate-50 rounded-3xl shadow-xl p-5 border-4 border-emerald-500 flex flex-col items-center box-border
                        ${isTEA ? "border-blue-100" : ""}
                        ${isTDAH ? "border-green-100" : ""}`}
           >
