@@ -124,6 +124,13 @@ export function useAnamneseV2(childId: string) {
         .eq("id", childId);
       if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
 
+      // Garante que esta criança seja o perfil ativo — é o que dispara o
+      // nascimento do Pip na home.
+      try {
+        localStorage.setItem("neurobrilha:activeChildId", childId);
+      } catch {}
+
+
       // Gera e salva o plano anual automaticamente após a anamnese.
       try {
         const step1: any = (localResponses as any).step1 ?? {};
