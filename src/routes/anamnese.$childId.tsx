@@ -33,9 +33,23 @@ function AnamneseRoute() {
         }
         const { data: existing, error: listErr } = await supabase
           .from("children")
-          .select("id")
-          .eq("user_id", userId);
+          .select("id, anamnese_completa, created_at")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: true });
         if (listErr) throw listErr;
+
+        // Reaproveita um cadastro iniciado e não concluído (evita crianças
+        // "fantasmas" que ocupam o limite e ficam com anamnese pendente).
+        const pendente = (existing ?? []).find((c: any) => !c.anamnese_completa);
+        if (pendente?.id) {
+          navigate({
+            to: "/anamnese/$childId",
+            params: { childId: pendente.id },
+            replace: true,
+          });
+          return;
+        }
+
         if ((existing?.length ?? 0) >= 2) {
           toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
           navigate({ to: "/painel-pais", replace: true });
