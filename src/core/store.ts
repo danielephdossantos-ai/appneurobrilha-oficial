@@ -314,7 +314,14 @@ export function useAppState() {
     },
   });
 
-  const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
+  // Preferimos a criança escolhida; se não houver, priorizamos uma com anamnese
+  // concluída (evita que um cadastro incompleto "fantasma" vire o perfil ativo
+  // e bloqueie o nascimento do Pip).
+  const activeChild =
+    children.find((c) => c.id === activeChildId) ||
+    children.find((c) => c.anamnese_completa) ||
+    children[0] ||
+    null;
 
   const { data: sessionData } = useQuery({
     queryKey: ["auth-session"],
