@@ -347,6 +347,9 @@ function Treino() {
                   Maternal · Pré I · Pré II — só oralidade e imagens
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "ingles-ei", titulo: "My First English", grupo: "Inglês · Ed. Infantil", emoji: "🇺🇸", href: "/escola-brilha/ingles-ei" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -373,6 +376,9 @@ function Treino() {
                   Contar e comparar · Subitizing
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "matematica-ei", titulo: "Matemática Kawaii", grupo: "Ed. Infantil", emoji: "🔢", href: "/escola-brilha/matematica-ei" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -399,6 +405,9 @@ function Treino() {
                   20 missões diárias · Consciência fonológica
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "ler-com-aurora", titulo: "Ler com Aurora", grupo: "Pré II + 1º Ano", emoji: "🔤", href: "/neuro-treino/ler-com-aurora" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -425,6 +434,9 @@ function Treino() {
                   Do reconhecimento de palavras à fluência
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-alfa", titulo: "Biblioteca Alfa", grupo: "Leitura graduada", emoji: "📚", href: "/biblioteca-alfa" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -451,6 +463,9 @@ function Treino() {
                   Do apontar ao contar histórias · rotina visual + trocas
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-encantada", titulo: "Biblioteca Encantada", grupo: "Comunicação funcional", emoji: "🗣️", href: "/escola-brilha/biblioteca-encantada" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -477,6 +492,9 @@ function Treino() {
                   Sons, sílabas, palavras — travada até dominar cada etapa
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "alfabetizacao", titulo: "Alfabetização Brilha", grupo: "Consciência fonológica", emoji: "🅰️", href: "/alfabetizacao" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -504,6 +522,9 @@ function Treino() {
                   Multissensorial · 8 fases · começa pelo ouvido
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "dislexia", titulo: "Trilha da Leitura", grupo: "Dislexia · Orton-Gillingham", emoji: "🎧", href: "/escola-brilha/dislexia" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -530,6 +551,9 @@ function Treino() {
                   Subitizing · Numicon · reta numérica · 8 fases
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "contar-com-pip", titulo: "Contar com Pip", grupo: "Discalculia", emoji: "🔢", href: "/escola-brilha/contar-com-pip" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
