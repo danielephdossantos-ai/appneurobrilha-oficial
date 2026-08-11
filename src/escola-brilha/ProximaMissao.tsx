@@ -126,12 +126,17 @@ export function ProximaMissao({
 
   if (meta === undefined) {
     return (
-      <div className="rounded-3xl bg-white/70 border-2 border-white h-40 mb-4 animate-pulse" />
+      <>
+        <RotinaFavoritos />
+        <div className="rounded-3xl bg-white/70 border-2 border-white h-40 mb-4 animate-pulse" />
+      </>
     );
   }
 
   if (meta === null) {
     return (
+      <>
+      <RotinaFavoritos />
       <div className="rounded-3xl bg-gradient-to-br from-[#22C55E] to-[#0d1f55] text-white p-5 mb-4 shadow-lg">
         <div className="flex items-center gap-2 mb-2">
           <Trophy className="h-5 w-5 text-[#FFC93C]" />
@@ -147,6 +152,7 @@ export function ProximaMissao({
           missões conquistadas.
         </p>
       </div>
+      </>
     );
   }
 
@@ -155,6 +161,8 @@ export function ProximaMissao({
   const tema = temaDaDisciplina(aula.disciplina);
 
   return (
+    <>
+    <RotinaFavoritos />
     <div className="rounded-3xl bg-gradient-to-br from-[#0d1f55] via-[#1a2f7a] to-[#4C9EFF] text-white p-5 mb-4 shadow-lg relative overflow-hidden">
       <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-[#FFC93C]/20 blur-2xl" />
       <div className="relative">
@@ -200,5 +208,6 @@ export function ProximaMissao({
         </Link>
       </div>
     </div>
+    </>
   );
 }
