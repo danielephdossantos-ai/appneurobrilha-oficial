@@ -19,6 +19,7 @@ import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro
 
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
+import { BotaoFavorito } from "@/components/neuro-treino/BotaoFavorito";
 
 // Ícones por categoria (v2 - ilustrações premium 2D)
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
@@ -346,6 +347,9 @@ function Treino() {
                   Maternal · Pré I · Pré II — só oralidade e imagens
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "ingles-ei", titulo: "My First English", grupo: "Inglês · Ed. Infantil", emoji: "🇺🇸", href: "/escola-brilha/ingles-ei" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -372,6 +376,9 @@ function Treino() {
                   Contar e comparar · Subitizing
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "matematica-ei", titulo: "Matemática Kawaii", grupo: "Ed. Infantil", emoji: "🔢", href: "/escola-brilha/matematica-ei" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -398,6 +405,9 @@ function Treino() {
                   20 missões diárias · Consciência fonológica
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "ler-com-aurora", titulo: "Ler com Aurora", grupo: "Pré II + 1º Ano", emoji: "🔤", href: "/neuro-treino/ler-com-aurora" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -424,6 +434,9 @@ function Treino() {
                   Do reconhecimento de palavras à fluência
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-alfa", titulo: "Biblioteca Alfa", grupo: "Leitura graduada", emoji: "📚", href: "/biblioteca-alfa" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -450,6 +463,9 @@ function Treino() {
                   Do apontar ao contar histórias · rotina visual + trocas
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-encantada", titulo: "Biblioteca Encantada", grupo: "Comunicação funcional", emoji: "🗣️", href: "/escola-brilha/biblioteca-encantada" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -476,6 +492,9 @@ function Treino() {
                   Sons, sílabas, palavras — travada até dominar cada etapa
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "alfabetizacao", titulo: "Alfabetização Brilha", grupo: "Consciência fonológica", emoji: "🅰️", href: "/alfabetizacao" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -503,6 +522,9 @@ function Treino() {
                   Multissensorial · 8 fases · começa pelo ouvido
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "dislexia", titulo: "Trilha da Leitura", grupo: "Dislexia · Orton-Gillingham", emoji: "🎧", href: "/escola-brilha/dislexia" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -529,6 +551,9 @@ function Treino() {
                   Subitizing · Numicon · reta numérica · 8 fases
                 </div>
               </div>
+              <BotaoFavorito
+                atividade={{ id: "contar-com-pip", titulo: "Contar com Pip", grupo: "Discalculia", emoji: "🔢", href: "/escola-brilha/contar-com-pip" }}
+              />
               <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
                 →
               </div>
@@ -581,6 +606,19 @@ function Treino() {
                         params={{ slug }}
                         className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
                       >
+                        {/* Favoritar */}
+                        <div className="absolute top-1.5 left-1.5 z-10">
+                          <BotaoFavorito
+                            atividade={{
+                              id: slug,
+                              titulo: c?.nome ?? slug,
+                              grupo: g.nome,
+                              icone: iconSrc,
+                              href: `/neuro-treino/${slug}`,
+                            }}
+                          />
+                        </div>
+
                         {/* Indicador de variações */}
                         {varCount > 0 && (
                           <div className="absolute top-1.5 right-1.5">
