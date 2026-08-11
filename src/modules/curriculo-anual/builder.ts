@@ -155,16 +155,15 @@ export function gerarCurriculoAnual(input: GerarInput): CurriculoGerado {
     fila = (fila + 1) % filas.length;
   }
 
-  // 2) Espalha a sequência pelo ano inteiro (os 2 semestres).
-  const porDiaMax = Math.max(1, Math.min(3, Math.ceil(sequencia.length / totalDias)));
+  // 2) Preenche os dias letivos em sequência (Seg→Sex, semana a semana),
+  //    para que TODOS os dias da semana tenham aula — sem semanas vazias.
+  const porDiaMax = Math.max(1, Math.min(4, Math.ceil(sequencia.length / totalDias)));
   const minutos = Math.max(10, Math.round(minutosPorDia / porDiaMax));
-  const ocupacao = new Map<number, number>();
 
   sequencia.forEach((s, i) => {
-    let d = Math.floor((i * totalDias) / sequencia.length);
-    if (d >= totalDias) d = totalDias - 1;
-    const ordem = (ocupacao.get(d) ?? 0) + 1;
-    ocupacao.set(d, ordem);
+    const d = Math.min(totalDias - 1, Math.floor(i / porDiaMax));
+    const ordem = (i % porDiaMax) + 1;
+
 
     const semanaGlobal = Math.floor(d / diasPorSemana) + 1;
     const semestre: 1 | 2 = semanaGlobal <= semanasPorSemestre ? 1 : 2;
