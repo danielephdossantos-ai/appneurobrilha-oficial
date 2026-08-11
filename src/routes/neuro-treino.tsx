@@ -19,6 +19,7 @@ import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro
 
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
+import { BotaoFavorito } from "@/components/neuro-treino/BotaoFavorito";
 
 // Ícones por categoria (v2 - ilustrações premium 2D)
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
@@ -581,6 +582,19 @@ function Treino() {
                         params={{ slug }}
                         className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
                       >
+                        {/* Favoritar */}
+                        <div className="absolute top-1.5 left-1.5 z-10">
+                          <BotaoFavorito
+                            atividade={{
+                              id: slug,
+                              titulo: c?.nome ?? slug,
+                              grupo: g.nome,
+                              icone: iconSrc,
+                              href: `/neuro-treino/${slug}`,
+                            }}
+                          />
+                        </div>
+
                         {/* Indicador de variações */}
                         {varCount > 0 && (
                           <div className="absolute top-1.5 right-1.5">
