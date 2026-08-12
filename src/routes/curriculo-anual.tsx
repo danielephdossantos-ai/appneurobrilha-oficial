@@ -218,6 +218,22 @@ function CurriculoAnualPage() {
         subtitle="O ano letivo completo da criança, em 2 semestres"
       />
 
+      {temAlfabetizacao && (
+        <Link to="/primeiros-anos" className="block mb-4">
+          <Card className="bg-emerald-500/10 border-emerald-500/40">
+            <div className="text-[11px] font-black uppercase tracking-wider text-emerald-600">
+              🌱 Primeiros Anos · na rotina
+            </div>
+            <p className="text-sm font-bold">
+              A criança ainda está aprendendo a ler — o plano de alfabetização entrou na rotina
+              dela. Toque para ver.
+            </p>
+          </Card>
+        </Link>
+      )}
+
+
+
       {!childId ? (
         <Card className="text-center">
           <p className="font-bold">Escolha uma criança primeiro.</p>
