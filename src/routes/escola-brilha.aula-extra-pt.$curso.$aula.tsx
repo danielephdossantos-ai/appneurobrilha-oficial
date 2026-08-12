@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaPortuguesFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { LousaPlayer } from "@/components/aulas-extras/LousaPlayer";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 import type { AulaExtraLousa } from "@/escola-brilha/curso-v4/portugues-aulas-extras/types-extras";
 
 export const Route = createFileRoute("/escola-brilha/aula-extra-pt/$curso/$aula")({
@@ -24,14 +25,25 @@ function AulaExtraRoute() {
   }
 
   return (
-    <LousaPlayer
-      aula={found.aula as AulaExtraLousa}
-      onConcluir={() => {
-        navigate({
-          to: "/escola-brilha/curso/$slug",
-          params: { slug: cursoSlug },
-        });
-      }}
-    />
+    <>
+      <LousaPlayer
+        aula={found.aula as AulaExtraLousa}
+        onConcluir={() => {
+          navigate({
+            to: "/escola-brilha/curso/$slug",
+            params: { slug: cursoSlug },
+          });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug,
+          aulaSlug,
+          aulaTitulo: (found.aula as any)?.titulo,
+          disciplina: "Língua Portuguesa",
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }

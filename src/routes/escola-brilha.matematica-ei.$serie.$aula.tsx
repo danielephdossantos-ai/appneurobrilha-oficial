@@ -4,6 +4,7 @@ import {
   getAulaMatEI,
 } from "@/escola-brilha/curso-matematica-ei/registry";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 
 /**
  * Rota da aula de Matemática — Educação Infantil.
@@ -50,22 +51,35 @@ function AulaMatEIRoute() {
   }
 
   return (
-    <PlayerPortuguesEI
-      curso={found.curso}
-      aula={found.aula}
-      voltarPara="/escola-brilha/matematica-ei"
-      onConcluir={() => {
-        try {
-          const key = `eb.ei.mat.concluidas.${curso.slug}`;
-          const raw = localStorage.getItem(key);
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(key, JSON.stringify(list));
-        } catch {
-          /* ignore */
-        }
-        navigate({ to: "/escola-brilha/matematica-ei" });
-      }}
-    />
+    <>
+      <PlayerPortuguesEI
+        curso={found.curso}
+        aula={found.aula}
+        voltarPara="/escola-brilha/matematica-ei"
+        onConcluir={() => {
+          try {
+            const key = `eb.ei.mat.concluidas.${curso.slug}`;
+            const raw = localStorage.getItem(key);
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(key, JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+          navigate({ to: "/escola-brilha/matematica-ei" });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug: curso.slug,
+          aulaSlug,
+          cursoTitulo: (curso as any)?.titulo,
+          aulaTitulo: (found.aula as any)?.titulo,
+          serie: serie,
+          disciplina: "Matemática (Educação Infantil)",
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }

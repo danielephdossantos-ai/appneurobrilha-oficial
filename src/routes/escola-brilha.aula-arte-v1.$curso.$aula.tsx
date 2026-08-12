@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PlayerArteV1 } from "@/escola-brilha/curso-v4/arte-2ano/player/PlayerArteV1";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 import {
   getAulaArteV1FromCurso,
   getProximaAulaArteV1,
@@ -98,13 +99,26 @@ function AulaArteV1Page() {
   }
 
   return (
-    <PlayerArteV1
-      key={aula}
-      aula={dados.aula}
-      cursoSlug={curso}
-      aulaSlug={aula}
-      onSair={sair}
-      onConcluir={concluir}
-    />
+    <>
+      <PlayerArteV1
+        key={aula}
+        aula={dados.aula}
+        cursoSlug={curso}
+        aulaSlug={aula}
+        onSair={sair}
+        onConcluir={concluir}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug: curso,
+          aulaSlug: aula,
+          cursoTitulo: (dados as any).curso?.titulo,
+          aulaTitulo: (dados.aula as any)?.titulo,
+          serie: "2º ano",
+          disciplina: "Arte",
+          bncc: (dados.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }

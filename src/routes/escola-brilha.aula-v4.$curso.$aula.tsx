@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
@@ -35,25 +36,38 @@ function AulaV4Route() {
   }
 
   return (
-    <PlayerV4
-      aula={found.aula}
-      cursoSlug={cursoSlug}
-      voltarPara={`/escola-brilha/curso/${cursoSlug}`}
-      onConcluir={() => {
-        try {
-          const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-        } catch {
-          /* ignore */
-        }
-        navigate({
-          to: "/escola-brilha/curso/$slug",
-          params: { slug: cursoSlug },
-        });
-      }}
-    />
+    <>
+      <PlayerV4
+        aula={found.aula}
+        cursoSlug={cursoSlug}
+        voltarPara={`/escola-brilha/curso/${cursoSlug}`}
+        onConcluir={() => {
+          try {
+            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+          navigate({
+            to: "/escola-brilha/curso/$slug",
+            params: { slug: cursoSlug },
+          });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug,
+          aulaSlug,
+          cursoTitulo: (found as any).curso?.titulo,
+          aulaTitulo: (found.aula as any)?.titulo,
+          serie: (found as any).curso?.ano,
+          disciplina: (found as any).curso?.disciplina,
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }
 
