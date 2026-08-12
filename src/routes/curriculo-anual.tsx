@@ -101,7 +101,20 @@ function CurriculoAnualPage() {
     }
     (async () => {
       setLoading(true);
-      const p = await carregarCurriculo(childId);
+      let p = await carregarCurriculo(childId);
+      // Geração automática: se a criança ainda não tem plano, monta o ano
+      // letivo completo da série dela na primeira visita.
+      if (!p && serieNum) {
+        try {
+          setGerando(true);
+          await gerarESalvar({ childId, serie: serieNum });
+          p = await carregarCurriculo(childId);
+        } catch {
+          /* mostra o botão manual se falhar */
+        } finally {
+          setGerando(false);
+        }
+      }
       setPlano(p);
       if (p) {
         const atual = semanaAtual(p.gerado_em, p.semanas_por_semestre);
@@ -111,7 +124,7 @@ function CurriculoAnualPage() {
       }
       setLoading(false);
     })();
-  }, [childId, recarregar]);
+  }, [childId, serieNum, recarregar]);
 
   async function gerar() {
     if (!childId || !serieNum) return;
@@ -130,6 +143,7 @@ function CurriculoAnualPage() {
       setGerando(false);
     }
   }
+
 
   async function trocarSemana(sem: 1 | 2, wk: number) {
     setSemestre(sem);
