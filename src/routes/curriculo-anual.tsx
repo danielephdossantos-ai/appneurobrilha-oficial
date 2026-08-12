@@ -122,9 +122,18 @@ function CurriculoAnualPage() {
         setSemana(atual.semana);
         await recarregar(atual.semestre, atual.semana);
       }
+      // 7+ que ainda não lê (pela anamnese) entra automaticamente na
+      // rotina de alfabetização dos Primeiros Anos.
+      try {
+        const alfa = await garantirPlanoSeNecessario(childId, activeChild?.idade ?? 7);
+        setTemAlfabetizacao(!!alfa);
+      } catch {
+        /* noop */
+      }
       setLoading(false);
     })();
-  }, [childId, serieNum, recarregar]);
+  }, [childId, serieNum, recarregar, activeChild?.idade]);
+
 
   async function gerar() {
     if (!childId || !serieNum) return;
