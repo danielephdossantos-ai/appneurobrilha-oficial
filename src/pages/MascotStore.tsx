@@ -646,7 +646,11 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map((um) => um.mascot_id);
 
   // Combine DB mascots with additional characters
-  const allDisplayMascots = [...dbMascots];
+  // Oculta mascotes legados da vitrine sem remover do banco/inventário
+  const visibleDbMascots = dbMascots.filter(
+    (m) => !HIDDEN_FROM_STORE.has(m.name.trim().toLowerCase()),
+  );
+  const allDisplayMascots = [...visibleDbMascots];
 
   // Add additional characters if they're not already in the DB mascots (by name/id)
   ADDITIONAL_CHARACTERS.forEach((char) => {
