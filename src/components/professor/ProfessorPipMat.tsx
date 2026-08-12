@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Loader2, ChevronRight, Guitar, RotateCcw, Mic, Square } from "lucide-react";
@@ -6,6 +6,9 @@ import {
   professorPipMatChat,
   type PipMatResposta,
 } from "@/lib/professor-pip-mat.functions";
+import { useAppState } from "@/core/store";
+import { getMentorIA } from "@/escola-brilha/mascote-assign";
+import { mascoteDaAula } from "@/escola-brilha/mascotes-disciplina";
 import pipRoqueiro from "@/assets/pip-teen-roqueiro.png.asset.json";
 
 type Item =
@@ -198,8 +201,16 @@ function getRecognitionCtor(): SpeechRecognitionCtor | null {
 }
 
 export function ProfessorPipMat({ crianca }: Props) {
+  const { activeChild } = useAppState();
   const perguntar = useServerFn(professorPipMatChat);
   const [itens, setItens] = useState<Item[]>([]);
+
+  const mentor = useMemo(() => {
+    const slug = getMentorIA(activeChild?.id);
+    const defaultMascote = mascoteDaAula({ disciplina: "Matemática", codigo: "" });
+    if (slug === "default") return defaultMascote;
+    return mascoteDaAula({ disciplina: "Matemática", codigo: "" }, slug);
+  }, [activeChild?.id]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const fimRef = useRef<HTMLDivElement>(null);
@@ -339,13 +350,13 @@ export function ProfessorPipMat({ crianca }: Props) {
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
       <div className="flex items-center gap-3 rounded-3xl bg-gradient-to-r from-[#1b1035] via-[#3b1a5c] to-[#7c2d8f] p-4 text-white shadow-lg">
         <img
-          src={pipRoqueiro.url}
-          alt="Pip Teen Roqueiro, professor de matemática"
+          src={mentor.imagem}
+          alt={`${mentor.nome}, professor de matemática`}
           className="h-20 w-20 shrink-0 rounded-2xl object-contain"
         />
         <div className="min-w-0">
           <h1 className="flex items-center gap-2 text-lg font-black leading-tight">
-            <Guitar className="h-5 w-5 text-fuchsia-300" /> Pip Teen Roqueiro
+            <Guitar className="h-5 w-5 text-fuchsia-300" /> {mentor.nome}
           </h1>
           <p className="text-sm text-fuchsia-100">
             Professor de Matemática. Manda a dúvida que eu resolvo na lousa, passo a passo.

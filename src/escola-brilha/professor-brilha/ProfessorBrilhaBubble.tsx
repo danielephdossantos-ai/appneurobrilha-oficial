@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -7,6 +7,9 @@ import {
 } from "@/lib/professor-brilha.functions";
 import { transcreverAudio } from "@/lib/stt.functions";
 import { url as professoraImg } from "@/assets/pip-girl-professora.png.asset.json";
+import { useAppState } from "@/core/store";
+import { getMentorIA } from "@/escola-brilha/mascote-assign";
+import { mascoteDaAula } from "@/escola-brilha/mascotes-disciplina";
 
 export interface ProfessorBrilhaContexto {
   cursoSlug: string;
@@ -31,6 +34,7 @@ interface Props {
 }
 
 export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
+  const { activeChild } = useAppState();
   const [aberto, setAberto] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const [mensagens, setMensagens] = useState<Msg[]>([]);
@@ -46,6 +50,18 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
   const enviar = useServerFn(professorBrilhaChat);
   const carregar = useServerFn(carregarConversaProfessorBrilha);
   const transcrever = useServerFn(transcreverAudio);
+
+  const mentor = useMemo(() => {
+    const slug = getMentorIA(activeChild?.id);
+    // Se o slug for o padrão "default" ou estiver vazio, tentamos usar o mascote da disciplina
+    // para não quebrar a identidade visual da aula se a criança não escolheu um mentor global.
+    const defaultMascote = mascoteDaAula({ disciplina: contexto.disciplina, codigo: "" });
+    if (slug === "default") return defaultMascote;
+    
+    // Se escolheu um mentor, usamos ele. 
+    // Usamos mascoteDaAula(aula, override) que já faz o lookup no mapa MASCOTES
+    return mascoteDaAula({ disciplina: contexto.disciplina, codigo: "" }, slug);
+  }, [activeChild?.id, contexto.disciplina]);
 
 
   // Carregar histórico ao abrir pela primeira vez
@@ -214,13 +230,13 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 18 }}
           onClick={() => setAberto(true)}
-          className={`fixed bottom-5 right-5 z-[9998] rounded-full w-16 h-16 grid place-items-center transition ${botaoCor}`}
-          aria-label="Professor Brilha — tirar dúvida"
+          className={`fixed bottom-5 right-5 z-[9998] rounded-full w-16 h-16 grid place-items-center transition ${botaoCor} border-2 border-white/50`}
+          aria-label={`${mentor.nome} — tirar dúvida`}
         >
           <div className="relative">
             <img
-              src={professoraImg}
-              alt="Professora Brilha"
+              src={mentor.imagem}
+              alt={mentor.nome}
               className="w-14 h-14 object-contain drop-shadow"
             />
             <motion.div
@@ -268,8 +284,8 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                   }`}
                 >
                   <img
-                    src={professoraImg}
-                    alt="Professora Brilha"
+                    src={mentor.imagem}
+                    alt={mentor.nome}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
@@ -279,7 +295,7 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                       teen ? "text-cyan-100" : "text-[#3d2500]"
                     }`}
                   >
-                    Professora Brilha
+                    {mentor.nome}
                   </div>
                   <div
                     className={`text-[11px] leading-tight truncate ${
@@ -318,12 +334,12 @@ export function ProfessorBrilhaBubble({ contexto, teen = false }: Props) {
                     }`}
                   >
                     <img
-                      src={professoraImg}
-                      alt="Professora Brilha"
+                      src={mentor.imagem}
+                      alt={mentor.nome}
                       className="w-16 h-16 object-contain mx-auto mb-2"
                     />
                     <div className="font-bold text-sm mb-1">
-                      Oi! Sou sua Professora Brilha.
+                      Oi! Sou seu {mentor.nome}.
                     </div>
                     <div className="text-xs leading-relaxed">
                       Ficou com dúvida na aula? Me pergunta! Eu tô aqui pra te ajudar
