@@ -34,25 +34,41 @@ function AulaPtV4Route() {
     );
   }
 
+  const serieNum = cursoSlug.match(/(\d+)\s*ano/)?.[1];
+
   return (
-    <PlayerPortuguesV4
-      aula={found.aula}
-      cursoSlug={cursoSlug}
-      voltarPara={`/escola-brilha/curso/${cursoSlug}`}
-      onConcluir={() => {
-        try {
-          const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-        } catch {
-          /* ignore */
-        }
-        navigate({
-          to: "/escola-brilha/curso/$slug",
-          params: { slug: cursoSlug },
-        });
-      }}
-    />
+    <>
+      <PlayerPortuguesV4
+        aula={found.aula}
+        cursoSlug={cursoSlug}
+        voltarPara={`/escola-brilha/curso/${cursoSlug}`}
+        onConcluir={() => {
+          try {
+            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+          navigate({
+            to: "/escola-brilha/curso/$slug",
+            params: { slug: cursoSlug },
+          });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        teen={!!serieNum && Number(serieNum) >= 6}
+        contexto={{
+          cursoSlug,
+          aulaSlug,
+          cursoTitulo: (found as any).curso?.titulo,
+          aulaTitulo: (found.aula as any)?.titulo,
+          serie: serieNum ? `${serieNum}º ano` : undefined,
+          disciplina: "Língua Portuguesa",
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }
