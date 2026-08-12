@@ -5717,6 +5717,137 @@ export type Database = {
         }
         Relationships: []
       }
+      primeiros_anos_itens: {
+        Row: {
+          aula_slug: string
+          child_id: string
+          concluido: boolean
+          concluido_em: string | null
+          created_at: string
+          dia_semana: number
+          fase: string | null
+          id: string
+          minutos: number
+          ordem: number
+          plano_id: string
+          prioridade: number
+          rota: string
+          semana: number
+          titulo: string
+          trilha: string
+          trilha_label: string
+          updated_at: string
+        }
+        Insert: {
+          aula_slug: string
+          child_id: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          dia_semana: number
+          fase?: string | null
+          id?: string
+          minutos?: number
+          ordem?: number
+          plano_id: string
+          prioridade?: number
+          rota: string
+          semana: number
+          titulo: string
+          trilha: string
+          trilha_label: string
+          updated_at?: string
+        }
+        Update: {
+          aula_slug?: string
+          child_id?: string
+          concluido?: boolean
+          concluido_em?: string | null
+          created_at?: string
+          dia_semana?: number
+          fase?: string | null
+          id?: string
+          minutos?: number
+          ordem?: number
+          plano_id?: string
+          prioridade?: number
+          rota?: string
+          semana?: number
+          titulo?: string
+          trilha?: string
+          trilha_label?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "primeiros_anos_itens_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "primeiros_anos_itens_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "primeiros_anos_plano"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      primeiros_anos_plano: {
+        Row: {
+          base_anamnese: Json | null
+          child_id: string
+          created_at: string
+          dias_por_semana: number
+          etapa: string
+          gerado_em: string
+          id: string
+          idade: number
+          minutos_por_dia: number
+          motivo: string | null
+          semanas_totais: number
+          updated_at: string
+        }
+        Insert: {
+          base_anamnese?: Json | null
+          child_id: string
+          created_at?: string
+          dias_por_semana?: number
+          etapa: string
+          gerado_em?: string
+          id?: string
+          idade: number
+          minutos_por_dia?: number
+          motivo?: string | null
+          semanas_totais?: number
+          updated_at?: string
+        }
+        Update: {
+          base_anamnese?: Json | null
+          child_id?: string
+          created_at?: string
+          dias_por_semana?: number
+          etapa?: string
+          gerado_em?: string
+          id?: string
+          idade?: number
+          minutos_por_dia?: number
+          motivo?: string | null
+          semanas_totais?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "primeiros_anos_plano_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       professor_brilha_conversas: {
         Row: {
           aula_slug: string
