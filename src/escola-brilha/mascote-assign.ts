@@ -11,11 +11,13 @@
  * Chaves:
  *   eb:mascotes-unlocked:<childId>  = string[]  (slugs desbloqueados, sem "default")
  *   eb:mascote-assign:<childId>     = Record<disciplina, mascoteSlug>
+ *   eb:mentor-assign:<childId>      = string (slug do mentor IA escolhido)
  */
 import { DISCIPLINAS_OFICIAIS, PRECOS_MASCOTES } from "./mascotes-disciplina";
 
 const KEY_UNLOCK = (childId: string) => `eb:mascotes-unlocked:${childId}`;
 const KEY_ASSIGN = (childId: string) => `eb:mascote-assign:${childId}`;
+const KEY_MENTOR = (childId: string) => `eb:mentor-assign:${childId}`;
 
 function readJSON<T>(k: string, fallback: T): T {
   try {
@@ -86,6 +88,21 @@ export function setAssignment(
   atual[disciplina] = mascoteSlug;
   writeJSON(KEY_ASSIGN(childId), atual);
   return atual;
+}
+
+/** Define o mentor IA preferido da criança. */
+export function setMentorIA(childId: string, slug: string) {
+  writeJSON(KEY_MENTOR(childId), slug);
+}
+
+/** Obtém o mentor IA preferido da criança. */
+export function getMentorIA(childId?: string | null): string {
+  if (!childId) return "default";
+  const slug = typeof window !== "undefined" ? window.localStorage.getItem(KEY_MENTOR(childId)) : null;
+  // Limpa as aspas se for um JSON stringificado ou retorna o valor puro
+  const final = slug ? slug.replace(/"/g, "") : "default";
+  const un = new Set(getUnlockedMascotes(childId));
+  return un.has(final) ? final : "default";
 }
 
 /** Mascote efetivo para uma disciplina (override → padrão). */

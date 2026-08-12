@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { ProfessorPipMat } from "./ProfessorPipMat";
+import { useAppState } from "@/core/store";
+import { getMentorIA } from "@/escola-brilha/mascote-assign";
+import { mascoteDaAula } from "@/escola-brilha/mascotes-disciplina";
 import pipRoqueiro from "@/assets/pip-teen-roqueiro.png.asset.json";
 
 interface Props {
@@ -10,7 +13,15 @@ interface Props {
 
 /** Botão fixo do Pip Teen Roqueiro (professor de matemática) nas aulas. */
 export function PipMatBubble({ crianca }: Props) {
+  const { activeChild } = useAppState();
   const [aberto, setAberto] = useState(false);
+
+  const mentor = useMemo(() => {
+    const slug = getMentorIA(activeChild?.id);
+    const defaultMascote = mascoteDaAula({ disciplina: "Matemática", codigo: "" });
+    if (slug === "default") return defaultMascote;
+    return mascoteDaAula({ disciplina: "Matemática", codigo: "" }, slug);
+  }, [activeChild?.id]);
 
   return (
     <>
@@ -18,11 +29,11 @@ export function PipMatBubble({ crianca }: Props) {
         <button
           type="button"
           onClick={() => setAberto(true)}
-          aria-label="Falar com o Pip Teen Roqueiro, professor de matemática"
+          aria-label={`Falar com ${mentor.nome}, professor de matemática`}
           className="fixed bottom-5 right-5 z-[9998] grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-fuchsia-600 to-violet-700 shadow-[0_8px_30px_-6px_rgba(192,38,211,0.8)] ring-2 ring-fuchsia-300/60 transition hover:brightness-110 active:scale-95"
         >
           <img
-            src={pipRoqueiro.url}
+            src={mentor.imagem}
             alt=""
             className="h-14 w-14 object-contain drop-shadow"
           />

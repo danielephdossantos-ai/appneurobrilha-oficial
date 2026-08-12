@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -8,6 +8,9 @@ import {
 import { transcreverAudio } from "@/lib/stt.functions";
 import { speakEnglish, stopSpeakingEn } from "@/lib/native-tts-en";
 import { url as professoraImg } from "@/assets/pip-girl-professora.png.asset.json";
+import { useAppState } from "@/core/store";
+import { getMentorIA } from "@/escola-brilha/mascote-assign";
+import { mascoteDaAula } from "@/escola-brilha/mascotes-disciplina";
 
 export interface ProfessorInglesContexto {
   cursoSlug: string;
@@ -35,9 +38,17 @@ interface Props {
  * Toque no balão do professor pra ouvir de novo, ou no globo pra ver tradução.
  */
 export function ProfessorInglesBubble({ contexto }: Props) {
+  const { activeChild } = useAppState();
   const [aberto, setAberto] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const [mensagens, setMensagens] = useState<Msg[]>([]);
+
+  const mentor = useMemo(() => {
+    const slug = getMentorIA(activeChild?.id);
+    const defaultMascote = mascoteDaAula({ disciplina: "Inglês", codigo: "" });
+    if (slug === "default") return defaultMascote;
+    return mascoteDaAula({ disciplina: "Inglês", codigo: "" }, slug);
+  }, [activeChild?.id]);
   const [input, setInput] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [gravando, setGravando] = useState(false);
@@ -214,12 +225,12 @@ export function ProfessorInglesBubble({ contexto }: Props) {
           transition={{ type: "spring", stiffness: 260, damping: 18 }}
           onClick={() => setAberto(true)}
           className="fixed bottom-5 right-5 z-[9998] rounded-full w-16 h-16 grid place-items-center bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 shadow-[0_8px_24px_-6px_rgba(59,130,246,0.7)] hover:scale-105 transition border-2 border-white"
-          aria-label="Teacher Brilha — talk in English"
+          aria-label={`${mentor.nome} — talk in English`}
         >
           <div className="relative">
             <img
-              src={professoraImg}
-              alt="Teacher Brilha"
+              src={mentor.imagem}
+              alt={mentor.nome}
               className="w-14 h-14 object-contain drop-shadow"
             />
             <div className="absolute -bottom-1 -right-1 bg-white text-[9px] font-black text-blue-700 rounded-full px-1.5 py-0.5 border border-blue-300">
@@ -252,13 +263,13 @@ export function ProfessorInglesBubble({ contexto }: Props) {
               <div className="px-4 py-3 flex items-center gap-3 bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-600 text-white">
                 <div className="w-11 h-11 rounded-full grid place-items-center overflow-hidden bg-white/25">
                   <img
-                    src={professoraImg}
-                    alt="Teacher Brilha"
+                    src={mentor.imagem}
+                    alt={mentor.nome}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-black text-base leading-tight">Teacher Brilha</div>
+                  <div className="font-black text-base leading-tight">Teacher {mentor.nome}</div>
                   <div className="text-[11px] leading-tight truncate opacity-90">
                     {contexto.unitLabel ?? contexto.aulaTitulo ?? contexto.aulaSlug} · Let's speak English!
                   </div>
@@ -282,12 +293,12 @@ export function ProfessorInglesBubble({ contexto }: Props) {
                 {mensagens.length === 0 && !carregando && (
                   <div className="text-center px-4 py-6 rounded-2xl bg-white border border-sky-200 text-slate-700">
                     <img
-                      src={professoraImg}
-                      alt="Teacher Brilha"
+                      src={mentor.imagem}
+                      alt={mentor.nome}
                       className="w-16 h-16 object-contain mx-auto mb-2"
                     />
                     <div className="font-bold text-sm mb-1 text-blue-700">
-                      Hi! I'm Teacher Brilha 👋
+                      Hi! I'm {mentor.nome} 👋
                     </div>
                     <div className="text-xs leading-relaxed">
                       Fale ou escreva comigo em inglês (ou português).

@@ -47,6 +47,15 @@ function ProfessoresPage() {
   const allUnlocked = useMemo(() => todosDesbloqueados(childId), [childId, tick]);
   const catalogo = useMemo(() => todosMascotes(), []);
 
+  const mentorEscolhidoSlug = useMemo(() => {
+    try {
+      const { getMentorIA } = require("@/escola-brilha/mascote-assign");
+      return getMentorIA(childId);
+    } catch {
+      return "default";
+    }
+  }, [childId, tick]);
+
   if (!activeChild) {
     return (
       <Shell>
@@ -75,6 +84,14 @@ function ProfessoresPage() {
     if (!unlocked.has(mascoteSlug)) return;
     setAssignment(activeChild.id, disciplinaSlug, mascoteSlug);
     toast.success("Professor atualizado!");
+    setTick((t) => t + 1);
+  };
+
+  const handleSetMentor = (mascoteSlug: string) => {
+    if (!unlocked.has(mascoteSlug)) return;
+    const { setMentorIA } = require("@/escola-brilha/mascote-assign");
+    setMentorIA(activeChild.id, mascoteSlug);
+    toast.success("Mentor IA atualizado!");
     setTick((t) => t + 1);
   };
 
@@ -152,6 +169,40 @@ function ProfessoresPage() {
                   </div>
                 );
               })}
+            </div>
+          </section>
+
+          {/* Mentores IA */}
+          <section className="mt-8">
+            <h2 className="text-lg font-black mb-2 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-cyan-300" /> Seu Mentor IA
+            </h2>
+            <p className="text-sm text-white/70 mb-4">
+              Escolha qual mascote vai te ajudar com as dúvidas de IA nas aulas.
+            </p>
+            <div className="rounded-2xl bg-white/10 p-4 border-2 border-cyan-500/30">
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {catalogo.filter(m => unlocked.has(m.slug)).map((m) => {
+                  const ativo = mentorEscolhidoSlug === m.slug;
+                  return (
+                    <button
+                      key={"mentor-" + m.slug}
+                      onClick={() => handleSetMentor(m.slug)}
+                      className="shrink-0 flex flex-col items-center gap-2 group"
+                    >
+                      <div 
+                        className="h-16 w-16 rounded-2xl grid place-items-center bg-white/10 border-2 transition-all active:scale-95 group-hover:bg-white/20"
+                        style={{ borderColor: ativo ? "#22d3ee" : "transparent" }}
+                      >
+                        <img src={m.imagem} alt={m.nome} className="h-12 w-12 rounded-xl object-cover" />
+                      </div>
+                      <span className={`text-[10px] font-black uppercase tracking-widest ${ativo ? "text-cyan-300" : "text-white/60"}`}>
+                        {m.nome}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </section>
 

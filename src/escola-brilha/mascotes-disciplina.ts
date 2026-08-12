@@ -20,6 +20,8 @@ import { url as pipTeenBola } from "@/assets/pip-teen-bola.png.asset.json";
 import { url as pipTeenCyber } from "@/assets/pip-teen-cyber.png.asset.json";
 import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
 import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
+import { url as pipRoqueiro } from "@/assets/pip-teen-roqueiro.png.asset.json";
+import { url as pipaGirlMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 import { disciplinaDoCodigo } from "./missoes-tema";
 
 export type MascoteDisciplina = {
@@ -149,6 +151,26 @@ const MASCOTES: Record<string, MascoteDisciplina> = {
     corPrimaria: "#FFC93C",
     corSecundaria: "#0d1f55",
     personalidade: "acolhedor, sempre ao lado da criança",
+  },
+  roqueiro: {
+    slug: "roqueiro",
+    nome: "Pip Roqueiro",
+    papel: "Mestre do Ritmo",
+    emoji: "🎸",
+    imagem: pipRoqueiro,
+    corPrimaria: "#7C2D8F",
+    corSecundaria: "#1b1035",
+    personalidade: "energético, ama matemática e solos de guitarra",
+  },
+  pipa: {
+    slug: "pipa",
+    nome: "Pipa",
+    papel: "Guardiã Brilhante",
+    emoji: "🎀",
+    imagem: pipaGirlMascot,
+    corPrimaria: "#FF8AB0",
+    corSecundaria: "#7A1F55",
+    personalidade: "carinhosa e inteligente, sempre pronta pra ajudar",
   },
 };
 
