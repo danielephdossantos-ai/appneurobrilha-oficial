@@ -33,7 +33,6 @@ type HabRow = { codigo: string; titulo: string; ano: string; componente: string 
 
 // Ordem oficial das séries no catálogo.
 const SERIES_ORDEM = [
-  "Educação Infantil",
   "1º Ano",
   "2º Ano",
   "3º Ano",
@@ -52,7 +51,7 @@ function expandirAno(ano: string): Serie[] {
   if (!a) return [];
   const direto = SERIES_ORDEM.find((s) => s === a);
   if (direto) return [direto];
-  if (a === "Educação Infantil") return ["Educação Infantil"];
+  
   // padrões "1º ao 5º Ano", "6º ao 9º Ano", etc.
   const m = a.match(/(\d)[ºo]?\s*ao\s*(\d)[ºo]?\s*Ano/i);
   if (m) {
@@ -384,13 +383,12 @@ function EscolaBrilhaCatalogo() {
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
-                        const usaTrilhaDuo = (serie as string) === "Educação Infantil" || (serie as string) === "1º Ano";
-                        const serieSlug =
-                          (serie as string) === "Educação Infantil" ? "educacao-infantil" : "1ano";
+                        const usaTrilhaDuo = (serie as string) === "1º Ano";
+                        const serieSlug = "1ano";
                         const cursoV4Aqui = cursoPorSerieDisc[serie]?.[disc];
                         if (usaTrilhaDuo && !cursoV4Aqui) {
                           const masc = mascoteDaDisciplina(disc);
-                          const serieLabel = (serie as string) === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
+                          const serieLabel = "1º Ano";
                           return (
                             <Link
                               key={disc}
