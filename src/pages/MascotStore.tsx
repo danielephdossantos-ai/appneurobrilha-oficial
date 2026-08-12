@@ -560,6 +560,9 @@ const ADDITIONAL_CHARACTERS = [
 // Só o Guardião (Fase 4) e as fantasias exigem moedas.
 const STAGE_THRESHOLDS = { ovo: 0, nascendo: 0, bebe: 0, guardiao: 500 } as const;
 
+// Mascotes legados removidos da vitrine da loja (ainda aparecem no inventário se já adquiridos)
+const HIDDEN_FROM_STORE = new Set(["dino", "robô", "robo", "unicórnio", "unicornio"]);
+
 // Preço (Moedas Brilha) por tipo de mascote. A criança joga, ganha moedas e
 // desbloqueia. Quanto mais raro/fantasioso, mais alto.
 function getRequiredCoins(mascotId: string, mascotName: string): number {
@@ -643,7 +646,11 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map((um) => um.mascot_id);
 
   // Combine DB mascots with additional characters
-  const allDisplayMascots = [...dbMascots];
+  // Oculta mascotes legados da vitrine sem remover do banco/inventário
+  const visibleDbMascots = dbMascots.filter(
+    (m) => !HIDDEN_FROM_STORE.has(m.name.trim().toLowerCase()),
+  );
+  const allDisplayMascots = [...visibleDbMascots];
 
   // Add additional characters if they're not already in the DB mascots (by name/id)
   ADDITIONAL_CHARACTERS.forEach((char) => {
