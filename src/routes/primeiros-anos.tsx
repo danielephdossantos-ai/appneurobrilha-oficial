@@ -23,6 +23,7 @@ import {
   type ItemSalvo,
   type PlanoSalvo,
 } from "@/modules/primeiros-anos/persist";
+import { RotinaDiaria } from "@/components/literacy/RotinaDiaria";
 
 export const Route = createFileRoute("/primeiros-anos")({
   head: () => ({
@@ -208,6 +209,12 @@ function PrimeirosAnosPage() {
               <p className="text-xs text-muted-foreground mt-2">{plano.motivo}</p>
             )}
           </Card>
+
+          <RotinaDiaria
+            childId={childId}
+            itensHoje={itens.filter((i) => i.dia_semana === hoje)}
+            onToggle={alternar}
+          />
 
           <div className="flex gap-2 overflow-x-auto pb-1">
             {Array.from({ length: plano.semanas_totais }, (_, i) => i + 1).map((wk) => (
