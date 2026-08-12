@@ -33,7 +33,6 @@ type HabRow = { codigo: string; titulo: string; ano: string; componente: string 
 
 // Ordem oficial das séries no catálogo.
 const SERIES_ORDEM = [
-  "Educação Infantil",
   "1º Ano",
   "2º Ano",
   "3º Ano",
@@ -52,7 +51,7 @@ function expandirAno(ano: string): Serie[] {
   if (!a) return [];
   const direto = SERIES_ORDEM.find((s) => s === a);
   if (direto) return [direto];
-  if (a === "Educação Infantil") return ["Educação Infantil"];
+  
   // padrões "1º ao 5º Ano", "6º ao 9º Ano", etc.
   const m = a.match(/(\d)[ºo]?\s*ao\s*(\d)[ºo]?\s*Ano/i);
   if (m) {
