@@ -182,19 +182,29 @@ function ProfessoresPage() {
             </p>
             <div className="rounded-2xl bg-white/10 p-4 border-2 border-cyan-500/30">
               <div className="flex gap-3 overflow-x-auto pb-2">
-                {catalogo.filter(m => unlocked.has(m.slug)).map((m) => {
+                {catalogo.map((m) => {
+                  const isUnlocked = unlocked.has(m.slug);
                   const ativo = mentorEscolhidoSlug === m.slug;
                   return (
                     <button
                       key={"mentor-" + m.slug}
-                      onClick={() => handleSetMentor(m.slug)}
-                      className="shrink-0 flex flex-col items-center gap-2 group"
+                      onClick={() => {
+                        if (isUnlocked) {
+                          handleSetMentor(m.slug);
+                        } else {
+                          toast.error("Professor Bloqueado", {
+                            description: `Desbloqueie o ${m.nome} na loja acima primeiro!`
+                          });
+                        }
+                      }}
+                      className="shrink-0 flex flex-col items-center gap-2 group relative"
                     >
                       <div 
-                        className="h-16 w-16 rounded-2xl grid place-items-center bg-white/10 border-2 transition-all active:scale-95 group-hover:bg-white/20"
+                        className={`h-16 w-16 rounded-2xl grid place-items-center bg-white/10 border-2 transition-all active:scale-95 group-hover:bg-white/20 ${!isUnlocked ? "opacity-40 grayscale" : ""}`}
                         style={{ borderColor: ativo ? "#22d3ee" : "transparent" }}
                       >
                         <img src={m.imagem} alt={m.nome} className="h-12 w-12 rounded-xl object-cover" />
+                        {!isUnlocked && <Lock className="absolute top-1 right-1 h-3.5 w-3.5 text-white/80" />}
                       </div>
                       <span className={`text-[10px] font-black uppercase tracking-widest ${ativo ? "text-cyan-300" : "text-white/60"}`}>
                         {m.nome}
