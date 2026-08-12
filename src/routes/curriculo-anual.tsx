@@ -74,6 +74,8 @@ function CurriculoAnualPage() {
   const [progresso, setProgresso] = useState({ total: 0, concluidas: 0 });
   const [semestre, setSemestre] = useState<1 | 2>(1);
   const [semana, setSemana] = useState(1);
+  const [temAlfabetizacao, setTemAlfabetizacao] = useState(false);
+
 
   const cursos = useMemo(() => (serieNum ? cursosDaSerie(serieNum) : []), [serieNum]);
   const hoje = diaSemanaHoje();
