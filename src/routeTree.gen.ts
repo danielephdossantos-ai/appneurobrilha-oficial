@@ -36,6 +36,7 @@ import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
 import { Route as PlanoNeuroRouteImport } from './routes/plano-neuro'
+import { Route as PrimeirosAnosRouteImport } from './routes/primeiros-anos'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ProfessorMatematicaRouteImport } from './routes/professor-matematica'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
@@ -226,6 +227,11 @@ const PlanoAnualRoute = PlanoAnualRouteImport.update({
 const PlanoNeuroRoute = PlanoNeuroRouteImport.update({
   id: '/plano-neuro',
   path: '/plano-neuro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrimeirosAnosRoute = PrimeirosAnosRouteImport.update({
+  id: '/primeiros-anos',
+  path: '/primeiros-anos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -572,6 +578,7 @@ export interface FileRoutesByFullPath {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -656,6 +663,7 @@ export interface FileRoutesByTo {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -742,6 +750,7 @@ export interface FileRoutesById {
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
   '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -829,6 +838,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -913,6 +923,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -998,6 +1009,7 @@ export interface FileRouteTypes {
     | '/perfil-aluno'
     | '/plano-anual'
     | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -1084,6 +1096,7 @@ export interface RootRouteChildren {
   PerfilAlunoRoute: typeof PerfilAlunoRoute
   PlanoAnualRoute: typeof PlanoAnualRoute
   PlanoNeuroRoute: typeof PlanoNeuroRoute
+  PrimeirosAnosRoute: typeof PrimeirosAnosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ProfessorMatematicaRoute: typeof ProfessorMatematicaRoute
   ProgressaoRoute: typeof ProgressaoRoute
@@ -1322,6 +1335,13 @@ declare module '@tanstack/react-router' {
       path: '/plano-neuro'
       fullPath: '/plano-neuro'
       preLoaderRoute: typeof PlanoNeuroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/primeiros-anos': {
+      id: '/primeiros-anos'
+      path: '/primeiros-anos'
+      fullPath: '/primeiros-anos'
+      preLoaderRoute: typeof PrimeirosAnosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidade': {
@@ -1794,6 +1814,7 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilAlunoRoute: PerfilAlunoRoute,
   PlanoAnualRoute: PlanoAnualRoute,
   PlanoNeuroRoute: PlanoNeuroRoute,
+  PrimeirosAnosRoute: PrimeirosAnosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ProfessorMatematicaRoute: ProfessorMatematicaRoute,
   ProgressaoRoute: ProgressaoRoute,
