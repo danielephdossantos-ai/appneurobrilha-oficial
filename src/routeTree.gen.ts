@@ -74,9 +74,6 @@ import { Route as EscolaBrilhaGeo6anoUnidadeRouteImport } from './routes/escola-
 import { Route as EscolaBrilhaGeo7anoUnidadeRouteImport } from './routes/escola-brilha.geo-7ano.$unidade'
 import { Route as EscolaBrilhaGeo8anoUnidadeRouteImport } from './routes/escola-brilha.geo-8ano.$unidade'
 import { Route as EscolaBrilhaGeo9anoUnidadeRouteImport } from './routes/escola-brilha.geo-9ano.$unidade'
-import { Route as EscolaBrilhaInglesEiIndexRouteImport } from './routes/escola-brilha.ingles-ei.index'
-import { Route as EscolaBrilhaMatematicaEiIndexRouteImport } from './routes/escola-brilha.matematica-ei.index'
-import { Route as EscolaBrilhaPortuguesEiIndexRouteImport } from './routes/escola-brilha.portugues-ei.index'
 import { Route as EscolaBrilhaTrilhaInglesSerieRouteImport } from './routes/escola-brilha.trilha-ingles.$serie'
 import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro-treino.ler-com-aurora.index'
 import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
@@ -435,24 +432,6 @@ const EscolaBrilhaGeo9anoUnidadeRoute =
     path: '/escola-brilha/geo-9ano/$unidade',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EscolaBrilhaInglesEiIndexRoute =
-  EscolaBrilhaInglesEiIndexRouteImport.update({
-    id: '/escola-brilha/ingles-ei/',
-    path: '/escola-brilha/ingles-ei/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaMatematicaEiIndexRoute =
-  EscolaBrilhaMatematicaEiIndexRouteImport.update({
-    id: '/escola-brilha/matematica-ei/',
-    path: '/escola-brilha/matematica-ei/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EscolaBrilhaPortuguesEiIndexRoute =
-  EscolaBrilhaPortuguesEiIndexRouteImport.update({
-    id: '/escola-brilha/portugues-ei/',
-    path: '/escola-brilha/portugues-ei/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const EscolaBrilhaTrilhaInglesSerieRoute =
   EscolaBrilhaTrilhaInglesSerieRouteImport.update({
     id: '/escola-brilha/trilha-ingles/$serie',
@@ -620,9 +599,6 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/biblioteca-encantada/': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip/': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia/': typeof EscolaBrilhaDislexiaIndexRoute
-  '/escola-brilha/ingles-ei/': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
-  '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
@@ -705,9 +681,6 @@ export interface FileRoutesByTo {
   '/escola-brilha/biblioteca-encantada': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia': typeof EscolaBrilhaDislexiaIndexRoute
-  '/escola-brilha/ingles-ei': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/matematica-ei': typeof EscolaBrilhaMatematicaEiIndexRoute
-  '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
@@ -792,9 +765,6 @@ export interface FileRoutesById {
   '/escola-brilha/biblioteca-encantada/': typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   '/escola-brilha/contar-com-pip/': typeof EscolaBrilhaContarComPipIndexRoute
   '/escola-brilha/dislexia/': typeof EscolaBrilhaDislexiaIndexRoute
-  '/escola-brilha/ingles-ei/': typeof EscolaBrilhaInglesEiIndexRoute
-  '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
-  '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
@@ -880,9 +850,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/biblioteca-encantada/'
     | '/escola-brilha/contar-com-pip/'
     | '/escola-brilha/dislexia/'
-    | '/escola-brilha/ingles-ei/'
-    | '/escola-brilha/matematica-ei/'
-    | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
@@ -965,9 +932,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/biblioteca-encantada'
     | '/escola-brilha/contar-com-pip'
     | '/escola-brilha/dislexia'
-    | '/escola-brilha/ingles-ei'
-    | '/escola-brilha/matematica-ei'
-    | '/escola-brilha/portugues-ei'
     | '/neuro-treino/ler-com-aurora'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
@@ -1051,9 +1015,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/biblioteca-encantada/'
     | '/escola-brilha/contar-com-pip/'
     | '/escola-brilha/dislexia/'
-    | '/escola-brilha/ingles-ei/'
-    | '/escola-brilha/matematica-ei/'
-    | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
@@ -1130,9 +1091,6 @@ export interface RootRouteChildren {
   EscolaBrilhaBibliotecaEncantadaIndexRoute: typeof EscolaBrilhaBibliotecaEncantadaIndexRoute
   EscolaBrilhaContarComPipIndexRoute: typeof EscolaBrilhaContarComPipIndexRoute
   EscolaBrilhaDislexiaIndexRoute: typeof EscolaBrilhaDislexiaIndexRoute
-  EscolaBrilhaInglesEiIndexRoute: typeof EscolaBrilhaInglesEiIndexRoute
-  EscolaBrilhaMatematicaEiIndexRoute: typeof EscolaBrilhaMatematicaEiIndexRoute
-  EscolaBrilhaPortuguesEiIndexRoute: typeof EscolaBrilhaPortuguesEiIndexRoute
   EscolaBrilhaAulaArteV1CursoAulaRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   EscolaBrilhaAulaExtraPtCursoAulaRoute: typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   EscolaBrilhaAulaGeoV1CursoAulaRoute: typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -1603,27 +1561,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaGeo9anoUnidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/ingles-ei/': {
-      id: '/escola-brilha/ingles-ei/'
-      path: '/escola-brilha/ingles-ei'
-      fullPath: '/escola-brilha/ingles-ei/'
-      preLoaderRoute: typeof EscolaBrilhaInglesEiIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/matematica-ei/': {
-      id: '/escola-brilha/matematica-ei/'
-      path: '/escola-brilha/matematica-ei'
-      fullPath: '/escola-brilha/matematica-ei/'
-      preLoaderRoute: typeof EscolaBrilhaMatematicaEiIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha/portugues-ei/': {
-      id: '/escola-brilha/portugues-ei/'
-      path: '/escola-brilha/portugues-ei'
-      fullPath: '/escola-brilha/portugues-ei/'
-      preLoaderRoute: typeof EscolaBrilhaPortuguesEiIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/escola-brilha/trilha-ingles/$serie': {
       id: '/escola-brilha/trilha-ingles/$serie'
       path: '/escola-brilha/trilha-ingles/$serie'
@@ -1851,9 +1788,6 @@ const rootRouteChildren: RootRouteChildren = {
     EscolaBrilhaBibliotecaEncantadaIndexRoute,
   EscolaBrilhaContarComPipIndexRoute: EscolaBrilhaContarComPipIndexRoute,
   EscolaBrilhaDislexiaIndexRoute: EscolaBrilhaDislexiaIndexRoute,
-  EscolaBrilhaInglesEiIndexRoute: EscolaBrilhaInglesEiIndexRoute,
-  EscolaBrilhaMatematicaEiIndexRoute: EscolaBrilhaMatematicaEiIndexRoute,
-  EscolaBrilhaPortuguesEiIndexRoute: EscolaBrilhaPortuguesEiIndexRoute,
   EscolaBrilhaAulaArteV1CursoAulaRoute: EscolaBrilhaAulaArteV1CursoAulaRoute,
   EscolaBrilhaAulaExtraPtCursoAulaRoute: EscolaBrilhaAulaExtraPtCursoAulaRoute,
   EscolaBrilhaAulaGeoV1CursoAulaRoute: EscolaBrilhaAulaGeoV1CursoAulaRoute,
