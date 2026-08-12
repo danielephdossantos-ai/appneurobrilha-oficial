@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
