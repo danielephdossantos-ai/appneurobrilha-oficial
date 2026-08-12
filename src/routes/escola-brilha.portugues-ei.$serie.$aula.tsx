@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { getCursoEIBySerie, getAulaEI } from "@/escola-brilha/curso-portugues-ei/registry";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 
 /**
  * Rota da aula de Português Educação Infantil.
@@ -47,22 +48,35 @@ function AulaEIRoute() {
   }
 
   return (
-    <PlayerPortuguesEI
-      curso={found.curso}
-      aula={found.aula}
-      voltarPara="/escola-brilha/portugues-ei"
-      onConcluir={() => {
-        try {
-          const key = `eb.ei.pt.concluidas.${curso.slug}`;
-          const raw = localStorage.getItem(key);
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(key, JSON.stringify(list));
-        } catch {
-          /* ignore */
-        }
-        navigate({ to: "/escola-brilha/portugues-ei" });
-      }}
-    />
+    <>
+      <PlayerPortuguesEI
+        curso={found.curso}
+        aula={found.aula}
+        voltarPara="/escola-brilha/portugues-ei"
+        onConcluir={() => {
+          try {
+            const key = `eb.ei.pt.concluidas.${curso.slug}`;
+            const raw = localStorage.getItem(key);
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(key, JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+          navigate({ to: "/escola-brilha/portugues-ei" });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug: curso.slug,
+          aulaSlug,
+          cursoTitulo: (curso as any)?.titulo,
+          aulaTitulo: (found.aula as any)?.titulo,
+          serie: serie,
+          disciplina: "Língua Portuguesa (Educação Infantil)",
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }

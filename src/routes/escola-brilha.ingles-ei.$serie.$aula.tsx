@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { getCursoInglesEIBySerie, getAulaInglesEI } from "@/escola-brilha/curso-ingles-ei/registry";
 import { PlayerInglesEI } from "@/escola-brilha/curso-ingles-ei/PlayerInglesEI";
+import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 
 /**
  * Aula de Inglês Educação Infantil.
@@ -49,22 +50,35 @@ function AulaInglesEIRoute() {
   }
 
   return (
-    <PlayerInglesEI
-      curso={found.curso}
-      aula={found.aula}
-      onSair={() => navigate({ to: "/escola-brilha/ingles-ei" })}
-      onConcluir={() => {
-        try {
-          const key = `eb.ei.en.concluidas.${found.curso.slug}`;
-          const raw = localStorage.getItem(key);
-          const list: string[] = raw ? JSON.parse(raw) : [];
-          if (!list.includes(aulaSlug)) list.push(aulaSlug);
-          localStorage.setItem(key, JSON.stringify(list));
-        } catch {
-          /* ignore */
-        }
-        navigate({ to: "/escola-brilha/ingles-ei" });
-      }}
-    />
+    <>
+      <PlayerInglesEI
+        curso={found.curso}
+        aula={found.aula}
+        onSair={() => navigate({ to: "/escola-brilha/ingles-ei" })}
+        onConcluir={() => {
+          try {
+            const key = `eb.ei.en.concluidas.${found.curso.slug}`;
+            const raw = localStorage.getItem(key);
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(key, JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+          navigate({ to: "/escola-brilha/ingles-ei" });
+        }}
+      />
+      <ProfessorBrilhaBubble
+        contexto={{
+          cursoSlug: found.curso.slug,
+          aulaSlug,
+          cursoTitulo: (found.curso as any)?.titulo,
+          aulaTitulo: (found.aula as any)?.titulo,
+          serie: serie,
+          disciplina: "Inglês (Educação Infantil)",
+          bncc: (found.aula as any)?.bncc,
+        }}
+      />
+    </>
   );
 }
