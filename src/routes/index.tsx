@@ -305,7 +305,7 @@ function Index() {
             </span>
           </div>
           <div className="grid grid-cols-3 gap-2">
-            {DESTINOS_KIDS.filter(d => d.to !== "/escola-brilha").map((d, i) => (
+            {DESTINOS_KIDS.map((d, i) => (
               <Link key={d.to} to={d.to}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.85 }}
@@ -448,7 +448,7 @@ function Index() {
           {/* Grade 4×3 desktop — todas as 12 */}
           <div className="relative z-10 px-8 pb-10">
             <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
-              {DESTINOS_KIDS.filter(d => d.to !== "/escola-brilha").map((d, i) => (
+              {DESTINOS_KIDS.map((d, i) => (
                 <Link key={d.to} to={d.to} className="group">
                   <motion.div
                     initial={{ opacity: 0, y: 24 }}
