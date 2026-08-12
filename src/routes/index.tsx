@@ -267,10 +267,11 @@ function Index() {
             <Link
               to="/anamnese/$childId"
               params={{ childId: "nova" }}
-              className="flex items-center gap-1 rounded-full px-2.5 py-1 border-2 border-dashed border-[#4C9EFF]/50 bg-white/60 active:scale-95 transition-all text-xs font-black text-[#4C9EFF]"
+              aria-label="Adicionar nova criança"
+              className="ml-auto flex items-center justify-center h-8 w-8 rounded-full border-2 border-dashed border-[#4C9EFF]/60 bg-white/70 active:scale-95 transition-all text-[#4C9EFF]"
+              title="Adicionar nova criança"
             >
-              <Plus className="h-3 w-3" strokeWidth={3} />
-              Nova
+              <Plus className="h-4 w-4" strokeWidth={3} />
             </Link>
           </div>
         )}
