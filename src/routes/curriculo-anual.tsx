@@ -213,7 +213,10 @@ function CurriculoAnualPage() {
           </Link>
         </Card>
       ) : loading ? (
-        <Card className="text-center font-bold">Carregando o ano letivo…</Card>
+        <Card className="text-center font-bold">
+          {gerando ? "Montando o ano letivo completo da série…" : "Carregando o ano letivo…"}
+        </Card>
+
       ) : !plano ? (
         <Card className="text-center space-y-3">
           <Sparkles className="h-10 w-10 mx-auto text-primary" />
