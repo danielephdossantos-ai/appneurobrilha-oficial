@@ -271,7 +271,7 @@ function EscolaBrilhaCatalogo() {
           <div className="text-[#0d1f55]/60 text-sm text-center py-10">Carregando…</div>
         ) : (
           <div className="space-y-2">
-            {SERIES_ORDEM.filter(s => s !== "Educação Infantil").map((serie) => {
+            {SERIES_ORDEM.map((serie) => {
               const discsArvore = Object.keys(arvore[serie]);
               const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
               const discsExtra: string[] = [];
