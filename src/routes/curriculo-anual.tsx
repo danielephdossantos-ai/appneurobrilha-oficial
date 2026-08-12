@@ -35,7 +35,9 @@ import {
   type HorarioSalvo,
   type ItemSalvo,
 } from "@/modules/curriculo-anual/persist";
+import { garantirPlanoSeNecessario } from "@/modules/primeiros-anos/persist";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+
 
 export const Route = createFileRoute("/curriculo-anual")({
   head: () => ({
