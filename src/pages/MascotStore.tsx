@@ -58,6 +58,7 @@ import { url as pipTeenBola } from "@/assets/pip-teen-bola.png.asset.json";
 import { url as pipaTeenBola } from "@/assets/pipa-teen-bola.png.asset.json";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { PipEvolution } from "@/components/pip/PipEvolution";
+import { getMascoteImagem } from "@/lib/mascote-imagens";
 import { cn } from "@/utils/utils";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { toast } from "sonner";
@@ -846,9 +847,9 @@ const MascotStoreCard = ({
                 emotion="happy"
                 className="animate-bounce-gentle"
               />
-            ) : mascot.image_url ? (
+            ) : getMascoteImagem(mascot.name, mascot.image_url) ? (
               <img
-                src={mascot.image_url}
+                src={getMascoteImagem(mascot.name, mascot.image_url)}
                 alt={mascot.name}
                 className="w-full h-full object-contain drop-shadow-xl"
               />
