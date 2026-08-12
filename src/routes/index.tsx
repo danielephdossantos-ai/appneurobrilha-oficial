@@ -267,10 +267,11 @@ function Index() {
             <Link
               to="/anamnese/$childId"
               params={{ childId: "nova" }}
-              className="flex items-center gap-1 rounded-full px-2.5 py-1 border-2 border-dashed border-[#4C9EFF]/50 bg-white/60 active:scale-95 transition-all text-xs font-black text-[#4C9EFF]"
+              aria-label="Adicionar nova criança"
+              className="ml-auto flex items-center justify-center h-8 w-8 rounded-full border-2 border-dashed border-[#4C9EFF]/60 bg-white/70 active:scale-95 transition-all text-[#4C9EFF]"
+              title="Adicionar nova criança"
             >
-              <Plus className="h-3 w-3" strokeWidth={3} />
-              Nova
+              <Plus className="h-4 w-4" strokeWidth={3} />
             </Link>
           </div>
         )}
@@ -492,7 +493,7 @@ function Index() {
           <h2 className="text-lg font-black mb-3 uppercase tracking-[0.25em] text-[#0d1f55]/60 flex items-center gap-2">
             <Sparkles className="text-[#FFC93C] h-5 w-5" /> Quem vai brilhar hoje?
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             {allChildren.map((c: any) => (
               <button
                 key={c.id}
@@ -528,13 +529,15 @@ function Index() {
             <Link
               to="/anamnese/$childId"
               params={{ childId: "nova" }}
-              className="flex items-center gap-2 rounded-2xl px-4 py-3 border-4 border-dashed border-[#4C9EFF]/40 bg-white/60 hover:bg-white hover:border-[#4C9EFF] transition-all"
+              aria-label="Adicionar nova criança"
+              title="Adicionar nova criança"
+              className="group flex flex-col items-center justify-center gap-1"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#4C9EFF] text-white grid place-items-center">
-                <Plus strokeWidth={3} className="h-5 w-5" />
+              <div className="h-12 w-12 rounded-2xl border-2 border-dashed border-[#4C9EFF]/50 bg-white/70 text-[#4C9EFF] grid place-items-center transition-all group-hover:bg-white group-hover:border-[#4C9EFF]">
+                <Plus strokeWidth={3} className="h-6 w-6" />
               </div>
-              <span className="font-black text-[#0d1f55] uppercase tracking-wider text-xs">
-                Nova Criança
+              <span className="text-[10px] font-black uppercase tracking-wider text-[#0d1f55]/50 group-hover:text-[#4C9EFF]">
+                Adicionar
               </span>
             </Link>
           </div>
