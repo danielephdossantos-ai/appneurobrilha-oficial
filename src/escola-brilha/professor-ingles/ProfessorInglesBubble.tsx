@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -8,6 +8,9 @@ import {
 import { transcreverAudio } from "@/lib/stt.functions";
 import { speakEnglish, stopSpeakingEn } from "@/lib/native-tts-en";
 import { url as professoraImg } from "@/assets/pip-girl-professora.png.asset.json";
+import { useAppState } from "@/core/store";
+import { getMentorIA } from "@/escola-brilha/mascote-assign";
+import { mascoteDaAula } from "@/escola-brilha/mascotes-disciplina";
 
 export interface ProfessorInglesContexto {
   cursoSlug: string;
@@ -35,6 +38,7 @@ interface Props {
  * Toque no balão do professor pra ouvir de novo, ou no globo pra ver tradução.
  */
 export function ProfessorInglesBubble({ contexto }: Props) {
+  const { activeChild } = useAppState();
   const [aberto, setAberto] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const [mensagens, setMensagens] = useState<Msg[]>([]);
