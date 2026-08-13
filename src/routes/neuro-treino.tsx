@@ -560,6 +560,55 @@ function Treino() {
             </div>
           </Link>
 
+          {/* ── EDUCAÇÃO INFANTIL · 2 temas de aventura · 27 missões ── */}
+          <div className="rounded-3xl border-2 border-violet-200 dark:border-violet-900/60 overflow-hidden shadow">
+            <div className="bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 px-4 py-3">
+              <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                Educação Infantil · 3 a 6 anos
+              </div>
+              <div className="font-black text-white text-base leading-tight">
+                2 temas de aventura · 27 missões
+              </div>
+              <div className="text-xs text-white/85">
+                Trilha estilo Duolingo · entra na rotina do plano Primeiros Anos
+              </div>
+            </div>
+            <div className="p-3 space-y-2 bg-card">
+              <Link
+                to="/escola-brilha/trilha/$serie/$disc"
+                params={{ serie: "educacao-infantil", disc: "portugues" }}
+                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow"
+                style={{ background: "linear-gradient(135deg, #059669, #06b6d4)" }}
+              >
+                <div className="text-[10px] uppercase tracking-widest opacity-85">
+                  📚 A Biblioteca Encantada
+                </div>
+                <div className="text-lg leading-tight mt-0.5">Português · Educação Infantil</div>
+                <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
+              </Link>
+              <Link
+                to="/escola-brilha/trilha/$serie/$disc"
+                params={{ serie: "educacao-infantil", disc: "default" }}
+                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow"
+                style={{ background: "linear-gradient(135deg, #7c3aed, #f472b6)" }}
+              >
+                <div className="text-[10px] uppercase tracking-widest opacity-85">
+                  ✨ Aventura de Aprender com Pip
+                </div>
+                <div className="text-lg leading-tight mt-0.5">
+                  Campos de Experiência · Educação Infantil
+                </div>
+                <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
+              </Link>
+              <Link
+                to="/primeiros-anos"
+                className="block text-center text-xs font-black text-primary underline py-1"
+              >
+                Ver no plano anual (Primeiros Anos) →
+              </Link>
+            </div>
+          </div>
+
 
 
 
