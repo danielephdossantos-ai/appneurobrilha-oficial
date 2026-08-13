@@ -167,7 +167,7 @@ const MascotStore = () => {
                         
                         <KidButton 
                           className="w-full text-xs font-black h-10 rounded-xl" 
-                          variant={selected ? "primary" : "outline"}
+                          variant={selected ? "primary" : "sky"}
                         >
                           {selected ? "MUNDO ATIVO" : "USAR ESTE MUNDO"}
                         </KidButton>
