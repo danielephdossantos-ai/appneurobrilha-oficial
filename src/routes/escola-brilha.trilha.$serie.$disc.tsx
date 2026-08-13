@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,6 +56,7 @@ export const Route = createFileRoute("/escola-brilha/trilha/$serie/$disc")({
 type HabRow = { codigo: string; titulo: string; ano: string };
 
 function TrilhaSerieDisc() {
+  const fundoMundo = useMundoFundo("");
   const { serie, disc } = Route.useParams();
   const navigate = useNavigate();
 
@@ -132,8 +134,13 @@ function TrilhaSerieDisc() {
   return (
     <div
       className="min-h-screen text-white"
-      style={{ background: `linear-gradient(180deg, ${mascote.corSecundaria}, #0a1642)` }}
+      style={
+        fundoMundo.style ?? {
+          background: `linear-gradient(180deg, ${mascote.corSecundaria}, #0a1642)`,
+        }
+      }
     >
+      <MundoBar />
       <header className="sticky top-0 z-10 backdrop-blur bg-black/30 border-b border-white/10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/escola-brilha" className="text-sm text-white/70 hover:text-white">

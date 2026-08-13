@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -149,8 +150,10 @@ function TrilhaEIPortugues() {
 /* ---------------- Layout ---------------- */
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const fundoMundo = useMundoFundo("bg-gradient-to-b from-purple-900 via-fuchsia-900 to-pink-900");
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-fuchsia-900 to-pink-900 text-white">
+    <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
+      <MundoBar />
       <div className="max-w-3xl mx-auto px-4 py-6">
         <Link to="/" className="text-white/80 text-sm">◂ Voltar</Link>
         <header className="text-center mt-3 mb-6">
