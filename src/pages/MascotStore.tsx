@@ -11,6 +11,7 @@ import { cn } from "@/utils/utils";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { toast } from "sonner";
 import { MUNDOS, MundoOption } from "@/components/worlds/mundos";
+import { HiperfocoId } from "@/data/hiperfocos";
 
 const MascotStore = () => {
   const { activeChild, addCoins } = useAppState();
