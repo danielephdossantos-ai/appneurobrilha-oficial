@@ -280,6 +280,41 @@ export const MUNDOS: MundoOption[] = [
     description: "Onde todos se unem como peças perfeitas.",
     image: worldAmigosPuzzle,
   },
+  {
+    id: "w-dino-puzzle-v2",
+    label: "Parque do Dino",
+    emoji: "🦖",
+    description: "Um parque de diversões pré-histórico montável.",
+    image: worldDinoQuebraCabeca,
+  },
+  {
+    id: "w-escola-puzzle-v2",
+    label: "Sala de Aula Brilha",
+    emoji: "🍎",
+    description: "Aprender é mágico neste mundo de peças coloridas.",
+    image: worldEscolaQuebraCabeca2,
+  },
+  {
+    id: "w-palco-puzzle-v2",
+    label: "Show da Pipa",
+    emoji: "🎤",
+    description: "Luzes e música no palco de quebra-cabeça.",
+    image: worldPalcoQuebraCabeca2,
+  },
+  {
+    id: "w-show-puzzle-v2",
+    label: "Festival Musical",
+    emoji: "🎧",
+    description: "Onde o som e a diversão se encaixam perfeitamente.",
+    image: worldShowQuebraCabeca2,
+  },
+  {
+    id: "w-brilha-kids-puzzle-v2",
+    label: "Escola NeuroBrilha",
+    emoji: "🏠",
+    description: "O portal de entrada para o mundo do conhecimento.",
+    image: worldBrilhaKidsQuebraCabeca,
+  },
 ];
 
 const norm = (s: string) =>
