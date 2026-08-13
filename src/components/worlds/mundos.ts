@@ -36,6 +36,13 @@ import { url as worldPistaPuzzle } from "@/assets/mundos/mundo-pista-quebra-cabe
 import { url as worldArtistaPuzzle } from "@/assets/mundos/mundo-artista-quebra-cabeca.jpg.asset.json";
 import { url as worldAmigosPuzzle } from "@/assets/mundos/mundo-amigos-quebra-cabeca.jpg.asset.json";
 
+// Novos mundos Agosto 13
+import { url as worldDinoQuebraCabeca } from "@/assets/mundos/mundo-dino-quebra-cabeca.jpg.asset.json";
+import { url as worldEscolaQuebraCabeca2 } from "@/assets/mundos/mundo-escola-quebra-cabeca-2.jpg.asset.json";
+import { url as worldPalcoQuebraCabeca2 } from "@/assets/mundos/mundo-palco-quebra-cabeca-2.jpg.asset.json";
+import { url as worldShowQuebraCabeca2 } from "@/assets/mundos/mundo-show-quebra-cabeca-2.jpg.asset.json";
+import { url as worldBrilhaKidsQuebraCabeca } from "@/assets/mundos/mundo-brilha-kids-quebra-cabeca.jpg.asset.json";
+
 export type MundoOption = {
   id: string;
   label: string;
@@ -272,6 +279,41 @@ export const MUNDOS: MundoOption[] = [
     emoji: "🤝",
     description: "Onde todos se unem como peças perfeitas.",
     image: worldAmigosPuzzle,
+  },
+  {
+    id: "w-dino-puzzle-v2",
+    label: "Parque do Dino",
+    emoji: "🦖",
+    description: "Um parque de diversões pré-histórico montável.",
+    image: worldDinoQuebraCabeca,
+  },
+  {
+    id: "w-escola-puzzle-v2",
+    label: "Sala de Aula Brilha",
+    emoji: "🍎",
+    description: "Aprender é mágico neste mundo de peças coloridas.",
+    image: worldEscolaQuebraCabeca2,
+  },
+  {
+    id: "w-palco-puzzle-v2",
+    label: "Show da Pipa",
+    emoji: "🎤",
+    description: "Luzes e música no palco de quebra-cabeça.",
+    image: worldPalcoQuebraCabeca2,
+  },
+  {
+    id: "w-show-puzzle-v2",
+    label: "Festival Musical",
+    emoji: "🎧",
+    description: "Onde o som e a diversão se encaixam perfeitamente.",
+    image: worldShowQuebraCabeca2,
+  },
+  {
+    id: "w-brilha-kids-puzzle-v2",
+    label: "Escola NeuroBrilha",
+    emoji: "🏠",
+    description: "O portal de entrada para o mundo do conhecimento.",
+    image: worldBrilhaKidsQuebraCabeca,
   },
 ];
 
