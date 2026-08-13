@@ -1654,7 +1654,7 @@ export function PlayerPortuguesEI({
   );
 
   return (
-    <div className="min-h-screen" style={{ background: bg }}>
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden" style={{ background: bg }}>
       {/* Barra topo */}
       <div className="sticky top-0 z-20 backdrop-blur bg-black/20 border-b border-white/10">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
