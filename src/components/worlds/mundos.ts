@@ -36,6 +36,13 @@ import { url as worldPistaPuzzle } from "@/assets/mundos/mundo-pista-quebra-cabe
 import { url as worldArtistaPuzzle } from "@/assets/mundos/mundo-artista-quebra-cabeca.jpg.asset.json";
 import { url as worldAmigosPuzzle } from "@/assets/mundos/mundo-amigos-quebra-cabeca.jpg.asset.json";
 
+// Novos mundos Agosto 13
+import { url as worldDinoQuebraCabeca } from "@/assets/mundos/mundo-dino-quebra-cabeca.jpg.asset.json";
+import { url as worldEscolaQuebraCabeca2 } from "@/assets/mundos/mundo-escola-quebra-cabeca-2.jpg.asset.json";
+import { url as worldPalcoQuebraCabeca2 } from "@/assets/mundos/mundo-palco-quebra-cabeca-2.jpg.asset.json";
+import { url as worldShowQuebraCabeca2 } from "@/assets/mundos/mundo-show-quebra-cabeca-2.jpg.asset.json";
+import { url as worldBrilhaKidsQuebraCabeca } from "@/assets/mundos/mundo-brilha-kids-quebra-cabeca.jpg.asset.json";
+
 export type MundoOption = {
   id: string;
   label: string;
