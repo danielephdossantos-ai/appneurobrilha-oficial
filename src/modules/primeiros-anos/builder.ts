@@ -1,6 +1,8 @@
 // Primeiros Anos — Plano Anual de Alfabetização (3 a 6 anos, e 7+ que ainda não lê).
 // Monta o ano letivo com AULAS REAIS já existentes no app, sem repetir nenhuma.
 import { cursosEI } from "@/escola-brilha/curso-portugues-ei/registry";
+import { listAulas } from "@/escola-brilha/registry";
+import { slugDisc, temaDaDisciplina } from "@/escola-brilha/missoes-tema";
 import { cursosMatematicaEI } from "@/escola-brilha/curso-matematica-ei/registry";
 import { cursosInglesEI } from "@/escola-brilha/curso-ingles-ei/registry";
 import { trilhaBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/registry";
@@ -168,6 +170,34 @@ function fonteEI(
   };
 }
 
+/**
+ * Missões da Educação Infantil do Escola Brilha (27 aulas · 2 temas).
+ * A categoria saiu do catálogo do Escola Brilha e agora vive no Neuro Treino,
+ * mas as aulas entram no plano anual de Primeiros Anos.
+ */
+function fontesMissoesEI(): Fonte[] {
+  const porDisc = new Map<string, Array<{ slug: string; titulo: string; rota: string }>>();
+  for (const a of listAulas()) {
+    if ((a.ano ?? "").trim() !== "Educação Infantil") continue;
+    const disc = slugDisc(a.disciplina ?? "");
+    const arr = porDisc.get(disc) ?? [];
+    arr.push({
+      slug: a.codigo,
+      titulo: a.titulo ?? a.codigo,
+      rota: `/escola-brilha/${a.codigo}`,
+    });
+    porDisc.set(disc, arr);
+  }
+  return Array.from(porDisc.entries()).map(([disc, aulas]) => ({
+    trilha: `missoes-ei-${disc}`,
+    label: `Educação Infantil · ${temaDaDisciplina(disc).nome}`,
+    fase: null,
+    prioridade: disc === "portugues" ? 1 : 2,
+    aulas: aulas.sort((x, y) => x.slug.localeCompare(y.slug)),
+  }));
+}
+
+
 function fonteBiblioteca(): Fonte {
   return {
     trilha: "biblioteca-encantada",
@@ -226,7 +256,9 @@ function fontesDaEtapa(etapa: EtapaPrimeirosAnos): Fonte[] {
       fonteBiblioteca(),
       fonteEI(porSerie(cursosInglesEI, serieEI), "ingles-ei", "ingles-ei", "My First English", 3),
     );
+    fontes.push(...fontesMissoesEI());
   }
+
 
   if (etapa === "pre2") {
     fontes.push(fonteAurora(AURORA[0], 1, 1), fonteAurora(AURORA[1], 2, 1));
@@ -240,7 +272,9 @@ function fontesDaEtapa(etapa: EtapaPrimeirosAnos): Fonte[] {
     fontes.push(
       fonteEI(porSerie(cursosInglesEI, "pre2"), "ingles-ei", "ingles-ei", "My First English", 3),
     );
+    fontes.push(...fontesMissoesEI());
   }
+
 
   if (etapa === "recuperacao") {
     AURORA.forEach((c, i) => fontes.push(fonteAurora(c, i + 1, 1)));
