@@ -272,7 +272,9 @@ function fontesDaEtapa(etapa: EtapaPrimeirosAnos): Fonte[] {
     fontes.push(
       fonteEI(porSerie(cursosInglesEI, "pre2"), "ingles-ei", "ingles-ei", "My First English", 3),
     );
+    fontes.push(...fontesMissoesEI());
   }
+
 
   if (etapa === "recuperacao") {
     AURORA.forEach((c, i) => fontes.push(fonteAurora(c, i + 1, 1)));
