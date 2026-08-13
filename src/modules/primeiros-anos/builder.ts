@@ -170,6 +170,34 @@ function fonteEI(
   };
 }
 
+/**
+ * Missões da Educação Infantil do Escola Brilha (27 aulas · 2 temas).
+ * A categoria saiu do catálogo do Escola Brilha e agora vive no Neuro Treino,
+ * mas as aulas entram no plano anual de Primeiros Anos.
+ */
+function fontesMissoesEI(): Fonte[] {
+  const porDisc = new Map<string, Array<{ slug: string; titulo: string; rota: string }>>();
+  for (const a of listAulas()) {
+    if ((a.ano ?? "").trim() !== "Educação Infantil") continue;
+    const disc = slugDisc(a.disciplina ?? "");
+    const arr = porDisc.get(disc) ?? [];
+    arr.push({
+      slug: a.codigo,
+      titulo: a.titulo ?? a.codigo,
+      rota: `/escola-brilha/${a.codigo}`,
+    });
+    porDisc.set(disc, arr);
+  }
+  return Array.from(porDisc.entries()).map(([disc, aulas]) => ({
+    trilha: `missoes-ei-${disc}`,
+    label: `Educação Infantil · ${temaDaDisciplina(disc).nome}`,
+    fase: null,
+    prioridade: disc === "portugues" ? 1 : 2,
+    aulas: aulas.sort((x, y) => x.slug.localeCompare(y.slug)),
+  }));
+}
+
+
 function fonteBiblioteca(): Fonte {
   return {
     trilha: "biblioteca-encantada",
