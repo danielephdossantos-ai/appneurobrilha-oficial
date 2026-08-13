@@ -1,0 +1,180 @@
+// ============================================================
+// Catálogo único de Mundos (usado na Loja de Mascotes e nas trilhas)
+// ============================================================
+import { url as worldAnimais } from "@/assets/neuro-treino/worlds/animais.jpg.asset.json";
+import { url as worldArte } from "@/assets/neuro-treino/worlds/arte.jpg.asset.json";
+import { url as worldCarros } from "@/assets/neuro-treino/worlds/carros.jpg.asset.json";
+import { url as worldDinossauros } from "@/assets/neuro-treino/worlds/dinossauros.jpg.asset.json";
+import { url as worldEspaco } from "@/assets/neuro-treino/worlds/espaco.jpg.asset.json";
+import { url as worldFazendinha } from "@/assets/neuro-treino/worlds/fazendinha.jpg.asset.json";
+import { url as worldHerois } from "@/assets/neuro-treino/worlds/herois.jpg.asset.json";
+import { url as worldMinecraft } from "@/assets/neuro-treino/worlds/minecraft.jpg.asset.json";
+import { url as worldMusica } from "@/assets/neuro-treino/worlds/musica.jpg.asset.json";
+import { url as worldPrincesas } from "@/assets/neuro-treino/worlds/princesas.jpg.asset.json";
+import { url as worldRobos } from "@/assets/neuro-treino/worlds/robos.jpg.asset.json";
+import { url as worldTrens } from "@/assets/neuro-treino/worlds/trens.jpg.asset.json";
+import { url as worldVeiculos } from "@/assets/neuro-treino/worlds/veiculos.jpg.asset.json";
+import { url as worldOceano } from "@/assets/neuro-treino/worlds/oceano.jpg.asset.json";
+import { url as worldFloresta } from "@/assets/neuro-treino/worlds/floresta.jpg.asset.json";
+import { url as worldCastelo } from "@/assets/neuro-treino/worlds/castelo.jpg.asset.json";
+
+export type MundoOption = {
+  id: string;
+  label: string;
+  emoji: string;
+  description: string;
+  image: string;
+  hiperfocoId?: "minecraft" | "dinossauros" | "herois" | "animais" | "carros";
+  customLabel?: string;
+};
+
+export const MUNDOS: MundoOption[] = [
+  {
+    id: "w-dino",
+    label: "Dinossauros",
+    emoji: "🦖",
+    description: "Era jurássica cheia de rugidos e fósseis.",
+    image: worldDinossauros,
+    hiperfocoId: "dinossauros",
+  },
+  {
+    id: "w-minecraft",
+    label: "Minecraft",
+    emoji: "🟩",
+    description: "Construa aventuras bloco a bloco.",
+    image: worldMinecraft,
+    hiperfocoId: "minecraft",
+  },
+  {
+    id: "w-espaco",
+    label: "Espaço",
+    emoji: "🚀",
+    description: "Foguetes, planetas e estrelas brilhando.",
+    image: worldEspaco,
+    customLabel: "Espaço",
+  },
+  {
+    id: "w-herois",
+    label: "Super-Heróis",
+    emoji: "🦸",
+    description: "Poderes incríveis para salvar o dia!",
+    image: worldHerois,
+    hiperfocoId: "herois",
+  },
+  {
+    id: "w-animais",
+    label: "Animais",
+    emoji: "🐾",
+    description: "Floresta cheia de amigos peludos.",
+    image: worldAnimais,
+    hiperfocoId: "animais",
+  },
+  {
+    id: "w-carros",
+    label: "Carros",
+    emoji: "🚗",
+    description: "Acelere na pista de corrida!",
+    image: worldCarros,
+    hiperfocoId: "carros",
+  },
+  {
+    id: "w-fazendinha",
+    label: "Fazendinha",
+    emoji: "🚜",
+    description: "Bichinhos, plantação e muito sol.",
+    image: worldFazendinha,
+    customLabel: "Fazendinha",
+  },
+  {
+    id: "w-arte",
+    label: "Arte",
+    emoji: "🎨",
+    description: "Cores, pincéis e muita imaginação.",
+    image: worldArte,
+    customLabel: "Arte",
+  },
+  {
+    id: "w-musica",
+    label: "Música",
+    emoji: "🎵",
+    description: "Instrumentos mágicos e ritmo no ar.",
+    image: worldMusica,
+    customLabel: "Música",
+  },
+  {
+    id: "w-princesas",
+    label: "Princesas",
+    emoji: "👑",
+    description: "Castelos encantados e reinos mágicos.",
+    image: worldPrincesas,
+    customLabel: "Princesas",
+  },
+  {
+    id: "w-robos",
+    label: "Robôs",
+    emoji: "🤖",
+    description: "Tecnologia, engrenagens e futuro.",
+    image: worldRobos,
+    customLabel: "Robôs",
+  },
+  {
+    id: "w-trens",
+    label: "Trens",
+    emoji: "🚂",
+    description: "Estações, trilhos e grandes viagens.",
+    image: worldTrens,
+    customLabel: "Trens",
+  },
+  {
+    id: "w-veiculos",
+    label: "Veículos",
+    emoji: "🚙",
+    description: "Caminhões, motos e muita ação.",
+    image: worldVeiculos,
+    customLabel: "Veículos",
+  },
+  {
+    id: "w-oceano",
+    label: "Oceano",
+    emoji: "🐠",
+    description: "Mergulhe no fundo do mar cheio de vida.",
+    image: worldOceano,
+    customLabel: "Oceano",
+  },
+  {
+    id: "w-floresta",
+    label: "Floresta Encantada",
+    emoji: "🍄",
+    description: "Trilhas mágicas, fadas e cogumelos brilhantes.",
+    image: worldFloresta,
+    customLabel: "Floresta",
+  },
+  {
+    id: "w-castelo",
+    label: "Castelo Mágico",
+    emoji: "🏰",
+    description: "Torres nas nuvens com dragões amigos.",
+    image: worldCastelo,
+    customLabel: "Castelo",
+  },
+];
+
+const norm = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+/** Encontra o mundo correspondente ao hiperfoco ativo (id ou label custom). */
+export function mundoDoHiperfoco(hiperfoco: {
+  id: string;
+  label?: string;
+} | null): MundoOption | null {
+  if (!hiperfoco) return null;
+  if (hiperfoco.id !== "custom") {
+    return MUNDOS.find((m) => m.hiperfocoId === hiperfoco.id) ?? null;
+  }
+  const l = norm(hiperfoco.label ?? "");
+  return MUNDOS.find((m) => norm(m.customLabel ?? m.label) === l) ?? null;
+}
