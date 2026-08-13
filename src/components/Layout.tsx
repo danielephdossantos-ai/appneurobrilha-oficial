@@ -332,7 +332,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
+        <main className="flex-1 min-w-0 overflow-x-hidden px-3 sm:px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
           <div className="max-w-5xl w-full mx-auto">{children ?? <Outlet />}</div>
           <MobileNav path={path} />
 
