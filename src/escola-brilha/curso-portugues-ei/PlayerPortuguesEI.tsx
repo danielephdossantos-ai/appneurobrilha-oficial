@@ -116,7 +116,7 @@ function prepararParlendaParaAudio(versos: string[]) {
 function CardScreen({ children, cor }: { children: React.ReactNode; cor: string }) {
   return (
     <div
-      className="rounded-[36px] p-6 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-4"
+      className="w-full max-w-full min-w-0 overflow-hidden box-border rounded-[28px] sm:rounded-[36px] p-4 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-4"
       style={{ background: "rgba(255,255,255,0.95)", borderColor: cor }}
     >
       {children}
