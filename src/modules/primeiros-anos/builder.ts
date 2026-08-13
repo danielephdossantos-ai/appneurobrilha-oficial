@@ -1,6 +1,8 @@
 // Primeiros Anos — Plano Anual de Alfabetização (3 a 6 anos, e 7+ que ainda não lê).
 // Monta o ano letivo com AULAS REAIS já existentes no app, sem repetir nenhuma.
 import { cursosEI } from "@/escola-brilha/curso-portugues-ei/registry";
+import { listAulas } from "@/escola-brilha/registry";
+import { slugDisc, temaDaDisciplina } from "@/escola-brilha/missoes-tema";
 import { cursosMatematicaEI } from "@/escola-brilha/curso-matematica-ei/registry";
 import { cursosInglesEI } from "@/escola-brilha/curso-ingles-ei/registry";
 import { trilhaBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/registry";
