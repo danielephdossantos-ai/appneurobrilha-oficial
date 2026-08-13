@@ -81,6 +81,13 @@ import { url as worldOceano } from "@/assets/neuro-treino/worlds/oceano.jpg.asse
 import { url as worldFloresta } from "@/assets/neuro-treino/worlds/floresta.jpg.asset.json";
 import { url as worldCastelo } from "@/assets/neuro-treino/worlds/castelo.jpg.asset.json";
 
+// Novos mundos de quebra-cabeça
+import { url as worldJardimPuzzle } from "@/assets/mundos/mundo-jardim-quebra-cabeca.jpg.asset.json";
+import { url as worldMusicaPuzzle } from "@/assets/mundos/mundo-musica-quebra-cabeca.jpg.asset.json";
+import { url as worldCasteloPuzzle } from "@/assets/mundos/mundo-castelo-quebra-cabeca.jpg.asset.json";
+import { url as worldCidadePuzzle } from "@/assets/mundos/mundo-cidade-quebra-cabeca.jpg.asset.json";
+import { url as worldEspacoPuzzle } from "@/assets/mundos/mundo-espacial-quebra-cabeca.jpg.asset.json";
+
 type WorldOption = {
   id: string;
   label: string;
@@ -219,6 +226,41 @@ const WORLDS: WorldOption[] = [
     description: "Torres nas nuvens com dragões amigos.",
     image: worldCastelo,
     customLabel: "Castelo",
+  },
+  {
+    id: "w-jardim-puzzle",
+    label: "Jardim Mágico",
+    emoji: "🧩",
+    description: "Um jardim encantado feito de peças coloridas.",
+    image: worldJardimPuzzle,
+  },
+  {
+    id: "w-musica-puzzle",
+    label: "Palco Melodia",
+    emoji: "🎹",
+    description: "Um show de luzes e notas musicais vibrantes.",
+    image: worldMusicaPuzzle,
+  },
+  {
+    id: "w-castelo-puzzle",
+    label: "Reino Brilhante",
+    emoji: "✨",
+    description: "O castelo dos sonhos com carruagens e fontes.",
+    image: worldCasteloPuzzle,
+  },
+  {
+    id: "w-cidade-puzzle",
+    label: "Cidade Futuro",
+    emoji: "🏙️",
+    description: "Metrópole de quebra-cabeça com luzes de neon.",
+    image: worldCidadePuzzle,
+  },
+  {
+    id: "w-espaco-puzzle",
+    label: "Portal Galáctico",
+    emoji: "🌀",
+    description: "Viaje pelo cosmos em uma estação espacial.",
+    image: worldEspacoPuzzle,
   },
 ];
 
