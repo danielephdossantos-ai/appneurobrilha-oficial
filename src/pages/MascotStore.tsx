@@ -14,30 +14,17 @@ import { MUNDOS, MundoOption } from "@/components/worlds/mundos";
 import { HiperfocoId } from "@/data/hiperfocos";
 
 const MascotStore = () => {
-  const { activeChild, addCoins } = useAppState();
+  const { activeChild } = useAppState();
   const { activeMascot, setActiveMascot, userMascots, isLoading } = useMascot();
-  const { hiperfoco, setHiperfoco } = useHiperfoco();
+  const { hiperfoco, setHiperfocoById, setHiperfocoCustom } = useHiperfoco();
   const [activeTab, setActiveTab] = useState<'mascots' | 'worlds'>('mascots');
-  const [purchasedWorlds, setPurchasedWorlds] = useState<string[]>([]);
   
-  // Efeito para carregar mundos comprados do localStorage ou DB futuramente
-  useEffect(() => {
-    const saved = localStorage.getItem(`purchased_worlds_${activeChild?.id}`);
-    if (saved) {
-      try {
-        setPurchasedWorlds(JSON.parse(saved));
-      } catch (e) {
-        setPurchasedWorlds([]);
-      }
-    }
-  }, [activeChild?.id]);
-
   const handleSelectWorld = (world: MundoOption) => {
     // Para mundos com hiperfocoId, sincronizamos com o contexto de hiperfoco
     if (world.hiperfocoId) {
-      setHiperfoco({ id: world.hiperfocoId, label: world.label });
+      setHiperfocoById(world.hiperfocoId as Exclude<HiperfocoId, "custom">);
     } else {
-      setHiperfoco({ id: "custom", label: world.customLabel || world.label });
+      setHiperfocoCustom(world.customLabel || world.label);
     }
     
     toast.success(`Mundo ${world.label} selecionado!`, {
