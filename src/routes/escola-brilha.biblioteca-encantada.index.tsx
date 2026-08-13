@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { trilhaBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/registry";
 import { BookOpen, Play, Lock, ArrowLeft } from "lucide-react";
@@ -25,10 +26,12 @@ export const Route = createFileRoute("/escola-brilha/biblioteca-encantada/")({
 });
 
 function BibliotecaEncantadaIndex() {
+  const fundoMundo = useMundoFundo("bg-gradient-to-b from-[#2A1A4A] via-[#3B1F6B] to-[#1B1233]");
   const trilha = trilhaBibliotecaEncantada;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#2A1A4A] via-[#3B1F6B] to-[#1B1233] text-white">
+    <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
+      <MundoBar />
       <header className="max-w-3xl mx-auto p-4 flex items-center gap-3">
         <Link
           to="/escola-brilha"

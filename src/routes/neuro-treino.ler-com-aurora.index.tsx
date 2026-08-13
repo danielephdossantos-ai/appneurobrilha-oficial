@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
@@ -173,6 +174,7 @@ function FaseBloco({
 }
 
 function TrilhaLerComAurora() {
+  const fundoMundo = useMundoFundo("bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800");
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
 
@@ -233,7 +235,8 @@ function TrilhaLerComAurora() {
   const totalGeral = FASES.reduce((s, f) => s + f.curso.unidades.flatMap((u) => u.aulas).length, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-500 via-orange-600 to-purple-800 text-white">
+    <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
+      <MundoBar />
       <div className="max-w-3xl mx-auto px-4 py-6">
         <Link to="/" className="text-white/80 text-sm">
           ◂ Voltar

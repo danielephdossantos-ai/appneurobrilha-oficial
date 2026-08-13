@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { Lock, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
@@ -241,6 +242,7 @@ function FaseBloco({
 }
 
 function TrilhaContarComPip() {
+  const fundoMundo = useMundoFundo("bg-gradient-to-b from-emerald-600 via-teal-700 to-indigo-900");
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
   const { concluidas } = usePipConcluidas(childId);
@@ -278,7 +280,8 @@ function TrilhaContarComPip() {
   }, [concluidas, adminOn]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-600 via-teal-700 to-indigo-900 text-white">
+    <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
+      <MundoBar />
       <div className="max-w-3xl mx-auto px-4 py-6">
         <Link to="/escola-brilha" className="text-white/80 text-sm">
           ◂ Voltar

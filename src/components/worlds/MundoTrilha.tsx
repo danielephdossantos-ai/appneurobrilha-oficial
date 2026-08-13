@@ -119,3 +119,32 @@ export function MundoTrilha({
     </div>
   );
 }
+
+/**
+ * Hook leve para telas de trilha já existentes: devolve className + style
+ * com o mundo escolhido como fundo (ou mantém o gradiente original).
+ */
+export function useMundoFundo(fallbackClass: string) {
+  const { hiperfoco } = useHiperfoco();
+  const mundo = mundoDoHiperfoco(hiperfoco);
+  if (!mundo) return { className: fallbackClass, style: undefined, mundo: null };
+  return {
+    mundo,
+    className: "bg-[#0a1024]",
+    style: {
+      backgroundImage: `linear-gradient(rgba(6,10,25,0.62), rgba(6,10,25,0.78)), url(${mundo.image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+    } as React.CSSProperties,
+  };
+}
+
+/** Barra com o botão de trocar mundo, para colocar no topo das trilhas. */
+export function MundoBar({ className = "" }: { className?: string }) {
+  return (
+    <div className={`max-w-3xl mx-auto px-4 pt-3 flex justify-end ${className}`}>
+      <TrocarMundoButton />
+    </div>
+  );
+}
