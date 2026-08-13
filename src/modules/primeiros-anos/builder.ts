@@ -256,7 +256,9 @@ function fontesDaEtapa(etapa: EtapaPrimeirosAnos): Fonte[] {
       fonteBiblioteca(),
       fonteEI(porSerie(cursosInglesEI, serieEI), "ingles-ei", "ingles-ei", "My First English", 3),
     );
+    fontes.push(...fontesMissoesEI());
   }
+
 
   if (etapa === "pre2") {
     fontes.push(fonteAurora(AURORA[0], 1, 1), fonteAurora(AURORA[1], 2, 1));
