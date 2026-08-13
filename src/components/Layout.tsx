@@ -307,8 +307,8 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
 
           {/* Coins / Stats */}
-          <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 flex-shrink-0">
-            <span className="text-xs font-bold text-emerald-600">BRILHOCOINS 520</span>
+          <div className="flex-shrink-0">
+            <CoinDisplay className="px-2 py-1 border-yellow-400/20 shadow-none scale-90" />
           </div>
 
           {/* Ações e Perfil do Usuário */}

@@ -25,6 +25,17 @@ import { url as worldCasteloPuzzle } from "@/assets/mundos/mundo-castelo-quebra-
 import { url as worldCidadePuzzle } from "@/assets/mundos/mundo-cidade-quebra-cabeca.jpg.asset.json";
 import { url as worldEspacoPuzzle } from "@/assets/mundos/mundo-espacial-quebra-cabeca.jpg.asset.json";
 
+// Novos mundos (agosto 2026)
+import { url as worldEngrenagensPuzzle } from "@/assets/mundos/mundo-engrenagens-quebra-cabeca.jpg.asset.json";
+import { url as worldClinicaPuzzle } from "@/assets/mundos/mundo-clinica-quebra-cabeca.jpg.asset.json";
+import { url as worldEscolaPuzzle } from "@/assets/mundos/mundo-escola-quebra-cabeca.jpg.asset.json";
+import { url as worldDoutoraPuzzle } from "@/assets/mundos/mundo-doutora-quebra-cabeca.jpg.asset.json";
+import { url as worldDocesPuzzle } from "@/assets/mundos/mundo-doces-quebra-cabeca.jpg.asset.json";
+import { url as worldTremPuzzle } from "@/assets/mundos/mundo-trem-quebra-cabeca.jpg.asset.json";
+import { url as worldPistaPuzzle } from "@/assets/mundos/mundo-pista-quebra-cabeca.jpg.asset.json";
+import { url as worldArtistaPuzzle } from "@/assets/mundos/mundo-artista-quebra-cabeca.jpg.asset.json";
+import { url as worldAmigosPuzzle } from "@/assets/mundos/mundo-amigos-quebra-cabeca.jpg.asset.json";
+
 export type MundoOption = {
   id: string;
   label: string;
@@ -198,6 +209,69 @@ export const MUNDOS: MundoOption[] = [
     emoji: "🌀",
     description: "Viaje pelo cosmos em uma estação espacial.",
     image: worldEspacoPuzzle,
+  },
+  {
+    id: "w-engrenagens-puzzle",
+    label: "Fábrica de Ideias",
+    emoji: "⚙️",
+    description: "Engrenagens e invenções em um mundo de peças.",
+    image: worldEngrenagensPuzzle,
+  },
+  {
+    id: "w-clinica-puzzle",
+    label: "Clínica Divertida",
+    emoji: "🏥",
+    description: "Um lugar de cuidado e carinho todo colorido.",
+    image: worldClinicaPuzzle,
+  },
+  {
+    id: "w-escola-puzzle",
+    label: "Escola Mágica",
+    emoji: "🏫",
+    description: "Aprender é uma grande aventura de montar.",
+    image: worldEscolaPuzzle,
+  },
+  {
+    id: "w-doutora-puzzle",
+    label: "Consultório da Pip",
+    emoji: "👩‍⚕️",
+    description: "Brincando de médica em um mundo de quebra-cabeça.",
+    image: worldDoutoraPuzzle,
+  },
+  {
+    id: "w-doces-puzzle",
+    label: "Mundo dos Doces",
+    emoji: "🍭",
+    description: "Doces, cores e muitas peças açucaradas.",
+    image: worldDocesPuzzle,
+  },
+  {
+    id: "w-trem-puzzle",
+    label: "Estação Alegria",
+    emoji: "🚂",
+    description: "Viaje nos trilhos de um mundo montável.",
+    image: worldTremPuzzle,
+  },
+  {
+    id: "w-pista-puzzle",
+    label: "Pista Radical",
+    emoji: "🏎️",
+    description: "Acelere fundo nas curvas de quebra-cabeça.",
+    image: worldPistaPuzzle,
+  },
+  {
+    id: "w-artista-puzzle",
+    label: "Ateliê Colorido",
+    emoji: "🎨",
+    description: "Pinte e monte o seu próprio cenário.",
+    image: worldArtistaPuzzle,
+  },
+  {
+    id: "w-amigos-puzzle",
+    label: "Vale dos Amigos",
+    emoji: "🤝",
+    description: "Onde todos se unem como peças perfeitas.",
+    image: worldAmigosPuzzle,
   },
 ];
 
