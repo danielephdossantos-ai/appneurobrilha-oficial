@@ -317,18 +317,12 @@ export function Shell({ children }: { children?: ReactNode }) {
             
             {/* Bloco do Usuário sem estourar a tela */}
             {activeChild ? (
-              <div className="flex items-center gap-1.5 max-w-[130px] sm:max-w-none">
-                <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner">
-                  {activeChild.avatar || "👦"}
-                </div>
-                <div className="flex flex-col text-left leading-tight truncate">
-                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
-                    {activeChild.nome.split(' ')[0] || "VITOR"}
-                  </span>
-                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
-                    {activeChild.nome.split(' ')[1] || "RAFAEL"}
-                  </span>
-                </div>
+              <div
+                className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner"
+                title={activeChild.nome}
+                aria-label={activeChild.nome}
+              >
+                {activeChild.avatar || "👦"}
               </div>
             ) : (
               <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
