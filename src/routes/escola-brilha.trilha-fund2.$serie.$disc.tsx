@@ -1,3 +1,4 @@
+import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useAppState } from "@/core/store";
@@ -94,6 +95,7 @@ export const Route = createFileRoute("/escola-brilha/trilha-fund2/$serie/$disc")
 });
 
 function TrilhaFund2() {
+  const fundoMundo = useMundoFundo("");
   const { serie, disc } = Route.useParams();
   const navigate = useNavigate();
   const { activeChild } = useAppState();
@@ -124,11 +126,14 @@ function TrilhaFund2() {
   return (
     <div
       className="min-h-screen text-slate-100"
-      style={{
-        background:
-          "radial-gradient(ellipse at top, #0e2a4a 0%, #050b1a 55%, #020617 100%)",
-      }}
+      style={
+        fundoMundo.style ?? {
+          background:
+            "radial-gradient(ellipse at top, #0e2a4a 0%, #050b1a 55%, #020617 100%)",
+        }
+      }
     >
+      <MundoBar />
       <header className="sticky top-0 z-10 backdrop-blur bg-slate-950/70 border-b border-cyan-500/20">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/escola-brilha" className="text-xs text-cyan-300/80 hover:text-cyan-200 font-mono uppercase tracking-widest">
