@@ -1678,7 +1678,10 @@ export function PlayerPortuguesEI({
         </div>
       </div>
 
-      <div ref={containerRef} className="max-w-3xl mx-auto px-4 py-6 grid gap-6">
+      <div
+        ref={containerRef}
+        className="w-full max-w-3xl mx-auto px-3 sm:px-4 py-6 grid gap-6 min-w-0"
+      >
         {aula.momentos.map((m, i) => (
           <MomentoRender key={i} m={m} idx={i} cor={cor} onOk={() => marcar(i)} />
         ))}
