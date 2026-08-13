@@ -317,18 +317,12 @@ export function Shell({ children }: { children?: ReactNode }) {
             
             {/* Bloco do Usuário sem estourar a tela */}
             {activeChild ? (
-              <div className="flex items-center gap-1.5 max-w-[130px] sm:max-w-none">
-                <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner">
-                  {activeChild.avatar || "👦"}
-                </div>
-                <div className="flex flex-col text-left leading-tight truncate">
-                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
-                    {activeChild.nome.split(' ')[0] || "VITOR"}
-                  </span>
-                  <span className="text-xs font-bold text-slate-800 truncate uppercase">
-                    {activeChild.nome.split(' ')[1] || "RAFAEL"}
-                  </span>
-                </div>
+              <div
+                className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner"
+                title={activeChild.nome}
+                aria-label={activeChild.nome}
+              >
+                {activeChild.avatar || "👦"}
               </div>
             ) : (
               <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
@@ -338,7 +332,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
+        <main className="flex-1 min-w-0 overflow-x-hidden px-3 sm:px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
           <div className="max-w-5xl w-full mx-auto">{children ?? <Outlet />}</div>
           <MobileNav path={path} />
 

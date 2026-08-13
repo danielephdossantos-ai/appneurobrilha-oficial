@@ -116,7 +116,7 @@ function prepararParlendaParaAudio(versos: string[]) {
 function CardScreen({ children, cor }: { children: React.ReactNode; cor: string }) {
   return (
     <div
-      className="rounded-[36px] p-6 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-4"
+      className="w-full max-w-full min-w-0 overflow-hidden box-border rounded-[28px] sm:rounded-[36px] p-4 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-4"
       style={{ background: "rgba(255,255,255,0.95)", borderColor: cor }}
     >
       {children}
@@ -137,11 +137,12 @@ function BigListenButton({ onClick, label = "Ouvir" }: { onClick: () => void; la
 
 function ImageFrame({ src, alt, size = "xl" }: { src: string; alt: string; size?: "md" | "xl" | "hero" }) {
   const px = size === "hero" ? 340 : size === "xl" ? 220 : 140;
-  // md = responsivo (ocupa a coluna do grid, quadrado, com teto de 140px)
-  const style: React.CSSProperties =
-    size === "md"
-      ? { width: "100%", aspectRatio: "1 / 1", maxWidth: px }
-      : { width: px, height: px };
+  // Sempre responsivo: nunca ultrapassa a largura disponível no celular
+  const style: React.CSSProperties = {
+    width: "100%",
+    aspectRatio: "1 / 1",
+    maxWidth: px,
+  };
   return (
     <div
       className="mx-auto rounded-[32px] bg-gradient-to-br from-yellow-100 to-pink-100 border-4 border-white shadow-inner grid place-items-center overflow-hidden"
@@ -1654,7 +1655,7 @@ export function PlayerPortuguesEI({
   );
 
   return (
-    <div className="min-h-screen" style={{ background: bg }}>
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden" style={{ background: bg }}>
       {/* Barra topo */}
       <div className="sticky top-0 z-20 backdrop-blur bg-black/20 border-b border-white/10">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
@@ -1678,7 +1679,10 @@ export function PlayerPortuguesEI({
         </div>
       </div>
 
-      <div ref={containerRef} className="max-w-3xl mx-auto px-4 py-6 grid gap-6">
+      <div
+        ref={containerRef}
+        className="w-full max-w-3xl mx-auto px-3 sm:px-4 py-6 grid gap-6 min-w-0"
+      >
         {aula.momentos.map((m, i) => (
           <MomentoRender key={i} m={m} idx={i} cor={cor} onOk={() => marcar(i)} />
         ))}
