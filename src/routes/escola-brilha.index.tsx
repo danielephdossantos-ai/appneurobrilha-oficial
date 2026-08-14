@@ -307,8 +307,10 @@ function EscolaBrilhaCatalogo() {
               
 
               const total = contarSerie(serie);
+              const totalAulasIngles = contarAulasIngles(serie);
               const aberta = serieAberta === serie;
               return (
+
                 <div key={serie} className="rounded-2xl bg-white border-2 border-white shadow-sm overflow-hidden">
                   <button
                     onClick={() => {
