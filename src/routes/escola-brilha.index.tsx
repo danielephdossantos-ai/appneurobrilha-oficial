@@ -5,6 +5,8 @@ import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
+import { getLessonsBySerie } from "@/escola-brilha/ingles-lessons-index";
+
 import { listCursos } from "@/escola-brilha/curso-v4/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
