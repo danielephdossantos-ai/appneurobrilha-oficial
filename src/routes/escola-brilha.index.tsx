@@ -70,7 +70,22 @@ function expandirAno(ano: string): Serie[] {
   return []; // Ensino Médio e outros ficam de fora conforme escopo
 }
 
+function contarAulasIngles(serie: Serie): number {
+  const slug =
+    serie === "1º Ano" ? "1ano"
+    : serie === "2º Ano" ? "2ano"
+    : serie === "3º Ano" ? "3ano"
+    : serie === "4º Ano" ? "4ano"
+    : serie === "5º Ano" ? "5ano"
+    : serie === "6º Ano" ? "6ano"
+    : serie === "7º Ano" ? "7ano"
+    : serie === "8º Ano" ? "8ano"
+    : "9ano";
+  return getLessonsBySerie(slug).length;
+}
+
 function EscolaBrilhaCatalogo() {
+
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
