@@ -384,8 +384,9 @@ function EscolaBrilhaCatalogo() {
                                             : "English for Life — Final Level 🎓"}
                           </div>
                           <div className="text-[11px] font-bold opacity-90 mt-1">
-                            Trilha estilo Duolingo — abrir mapa de aulas →
+                            {totalAulasIngles} AULA{totalAulasIngles === 1 ? "" : "S"} DISPONÍVEIS →
                           </div>
+
                         </Link>
                       )}
 
