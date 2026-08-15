@@ -104,10 +104,6 @@ function ReforcoBrilha() {
     engine?.profile?.base ?? "Tipico",
   );
 
-  useEffect(() => {
-    setAulasExtras([]);
-    setSemMaisAulas(false);
-  }, [searchResult?.main?.id]);
 
 
   const startLesson = (customTopic?: string) => {
