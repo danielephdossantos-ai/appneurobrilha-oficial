@@ -212,7 +212,6 @@ function ReforcoBrilha() {
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
           <IAProfessorMentor
-            initialQuery={searchQuery}
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
           />
 
