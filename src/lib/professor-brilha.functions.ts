@@ -153,6 +153,27 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
     ];
 
     // 3) Chamar IA — Lovable AI (primária) → Groq (reserva) via helper
+    // Módulo Reforço (se detectado pelo contexto da aula): Usa Gemini
+    const isReforco = contexto.cursoSlug?.includes("reforco") || contexto.disciplina?.toLowerCase().includes("reforço");
+    
+    if (isReforco) {
+      try {
+        const { callGemini } = await import("./gemini.server");
+        const reply = await callGemini({
+          model: "gemini-1.5-flash",
+          messages: messages.map(m => ({ 
+            role: m.role as any, 
+            content: m.content 
+          })),
+          max_tokens: 800,
+          temperature: 0.7
+        });
+        return { ok: true, resposta: reply };
+      } catch (e) {
+        console.error("[Professor Reforço Gemini Error]", e);
+      }
+    }
+
     const { chatCompletionFallback } = await import("./ai-chat-fallback");
     const result = await chatCompletionFallback({
       messages,

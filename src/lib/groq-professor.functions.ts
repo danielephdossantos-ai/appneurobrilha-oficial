@@ -64,12 +64,36 @@ export const askProfessorBrilho = createServerFn({ method: "POST" })
       { role: "system", content: buildSystemPrompt(data) },
       ...data.messages,
     ];
+
+    // Módulo Reforço: Usa exclusivamente Gemini 1.5 Flash
+    if (data.modulo === "reforco-brilha") {
+      try {
+        const { callGemini } = await import("./gemini.server");
+        const reply = await callGemini({
+          model: "gemini-1.5-flash",
+          messages: messages.map(m => ({ 
+            role: m.role as any, 
+            content: typeof m.content === 'string' ? m.content : JSON.stringify(m.content) 
+          })),
+          max_tokens: 800,
+          temperature: 0.7
+        });
+        return { ok: true as const, reply, error: null };
+      } catch (e) {
+        console.error("[Reforço Gemini Error]", e);
+        // Fallback apenas se Gemini falhar criticamente, para não deixar o usuário na mão
+        // mas a instrução é "exclusivamente", então logamos o erro.
+      }
+    }
+
+    // Demais Categorias: Mantém Groq (via fallback helper que prioriza Groq)
     const r = await chatCompletionFallback({
       messages,
       max_tokens: 600,
       temperature: 0.6,
       label: `professor:${data.modulo}`,
     });
+    
     if (!r.ok) {
       return { ok: false as const, error: r.motivo, reply: null as string | null };
     }

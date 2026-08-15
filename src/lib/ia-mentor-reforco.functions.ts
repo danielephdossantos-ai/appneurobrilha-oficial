@@ -2,15 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 /**
- * IA Mentor Reforço - Sistema de Geração de Aulas Contínuo
- * 
- * Este módulo centraliza a lógica onde a IA (ou lógica pedagógica avançada)
- * identifica a necessidade da criança e gera uma trilha de atividades.
- * 
- * Lógica:
- * 1. A mãe escreve a dificuldade.
- * 2. A IA gera a trilha.
- * 3. O sistema salva e compartilha entre crianças com a mesma dificuldade.
+ * IA Mentor Reforço - Sistema de Geração de Aulas Contínuo via Gemini
  */
 
 export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
@@ -21,14 +13,11 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
   }).parse(data))
   .handler(async ({ data }) => {
     const diffNorm = data.dificuldade.toLowerCase().trim();
-    
-    // Import dinâmico do Supabase para evitar erros de tipos em tempo de compilação
-    // se a tabela ainda não estiver no schema gerado
     const { supabase } = await import("@/integrations/supabase/client");
+    const { callGemini } = await import("./gemini.server");
 
     try {
-      // 2. Tentar encontrar uma aula já gerada
-      // Nota: Estamos usando casting 'any' para contornar a falta da tabela no schema TS gerado
+      // 1. Tentar encontrar uma aula já gerada no banco (Reutilização)
       const { data: existente } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .select("*")
@@ -44,26 +33,60 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
         };
       }
     } catch (e) {
-      console.warn("Tabela rb_aulas_geradas_ia não encontrada ou erro na busca:", e);
+      console.warn("Busca no cache falhou:", e);
     }
 
-    // 3. IA Mentor gera uma nova trilha
-    const novaAula = {
-      titulo: `Reforço: ${data.dificuldade.substring(0, 40)}${data.dificuldade.length > 40 ? '...' : ''}`,
-      objetivo: `Superar a dificuldade de "${data.dificuldade}" através de atividades lúdicas e estruturadas.`,
-      passos: [
-        { tipo: "explicação", texto: `Oi! Percebi que você quer aprender sobre "${data.dificuldade}". Vamos nessa?` },
-        { tipo: "exemplo", texto: `Imagine que isso é como um quebra-cabeça que vamos montar juntos.` },
-        { tipo: "prática", texto: `Para começar, que tal tentarmos identificar o primeiro passo?` },
-        { tipo: "desafio", texto: `Agora o grande desafio: como você explicaria isso para o Dino?` },
-        { tipo: "revisão", texto: `Incrível! Você dominou o básico de "${data.dificuldade}".` }
-      ]
-    };
+    // 2. Prompt do Sistema focado em ensinar para mães
+    const systemPrompt = `Você é um Especialista em Pedagogia e Neuroeducação.
+Sua missão é gerar um plano de aula completo e explicativo para uma MÃE ajudar seu filho com uma dificuldade específica.
+Use uma linguagem didática, acolhedora e prática.
 
+A resposta DEVE ser um JSON no seguinte formato:
+{
+  "titulo": "Título da Aula",
+  "objetivo": "O que a criança vai aprender",
+  "passos": [
+    { 
+      "tipo": "explicação", 
+      "texto": "Explicação clara do conceito para a mãe ler ou explicar." 
+    },
+    { 
+      "tipo": "exemplo", 
+      "texto": "Um exemplo prático do dia a dia." 
+    },
+    { 
+      "tipo": "prática", 
+      "texto": "Uma atividade guiada passo a passo." 
+    },
+    { 
+      "tipo": "desafio", 
+      "texto": "Um pequeno desafio para fixação." 
+    },
+    { 
+      "tipo": "revisão", 
+      "texto": "Dicas para a mãe revisar o conteúdo depois." 
+    }
+  ]
+}
+
+FOCO: Dificuldade: "${data.dificuldade}".
+Considere o perfil neurodivergente se informado: "${data.perfilNeuro ?? 'Não informado'}".`;
+
+    // 3. Chamada exclusiva ao Gemini 1.5 Flash
+    const responseText = await callGemini({
+      model: "gemini-1.5-flash",
+      json: true,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Gere um plano de reforço para: ${data.dificuldade}` }
+      ]
+    });
+
+    const novaAula = JSON.parse(responseText);
     let salvaId = "temp-" + Date.now();
 
     try {
-      // 4. Salvar para reutilização
+      // 4. Salvar no Supabase para reutilização global
       const { data: salva, error } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .insert({
@@ -77,9 +100,8 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
       if (!error && salva) {
         salvaId = salva.id;
         
-        // 5. AUTO-GERAR PÁGINAS PARA A APOSTILA (AulaViewer)
-        // Isso resolve o erro "Esta aula ainda não tem páginas cadastradas"
-        const paginas = novaAula.passos.map((passo, index) => ({
+        // 5. AUTO-GERAR PÁGINAS PARA A APOSTILA
+        const paginas = novaAula.passos.map((passo: any, index: number) => ({
           aula_id: salvaId,
           ordem: index + 1,
           tipo: passo.tipo === "explicação" ? "explicacao" : 
@@ -93,12 +115,12 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
         await (supabase as any).from("rb_paginas_aula").insert(paginas);
       }
     } catch (e) {
-      console.warn("Erro ao salvar nova aula ou páginas:", e);
+      console.error("Erro ao persistir aula do Gemini:", e);
     }
 
     return { 
       aula: novaAula, 
-      origem: "gerada_agora",
+      origem: "gerada_gemini",
       id: salvaId 
     };
   });
