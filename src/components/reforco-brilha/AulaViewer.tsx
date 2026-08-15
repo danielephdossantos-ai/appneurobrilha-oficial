@@ -24,6 +24,7 @@ export interface AulaViewerProps {
   aulaId: string;
   titulo: string;
   onClose: () => void;
+  onComplete?: (dados: { tempoSegundos: number }) => void;
 }
 
 interface Pagina {
@@ -202,10 +203,11 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   );
 }
 
-export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
+export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerProps) {
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [startTime] = useState(() => Date.now());
 
   const gerar = useServerFn(gerarAulaReforcoIA);
   const { activeChild } = useAppState();
@@ -269,11 +271,17 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") setIdx((i) => Math.min(total - 1, i + 1));
       if (e.key === "ArrowLeft") setIdx((i) => Math.max(0, i - 1));
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleFinish();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [total, onClose]);
+
+  const handleFinish = () => {
+    const duration = Math.floor((Date.now() - startTime) / 1000);
+    onComplete?.({ tempoSegundos: duration });
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 animate-in fade-in">
@@ -302,7 +310,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
               </div>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleFinish}
               className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center shrink-0"
               aria-label="Fechar aula"
             >
@@ -416,7 +424,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
             </button>
           ) : (
             <button
-              onClick={onClose}
+              onClick={handleFinish}
               className="flex items-center gap-2 px-5 sm:px-6 py-3 rounded-2xl font-black text-sm bg-success text-white shadow-lg hover:opacity-90 hover:scale-105 transition-all"
             >
               Concluir <CheckCircle2 className="h-5 w-5" />

@@ -153,7 +153,7 @@ function ReforcoBrilha() {
   const [searchQuery, setSearchQuery] = useState(() => localStorage.getItem("rb_last_search") || "");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
-  const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string } | null>(null);
+  const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string; dificuldade?: string } | null>(null);
   const [aulasExtras, setAulasExtras] = useState<import("@/lib/reforco-brilha-search").RBAula[]>([]);
   const [carregandoMaisAulas, setCarregandoMaisAulas] = useState(false);
   const [semMaisAulas, setSemMaisAulas] = useState(false);
@@ -207,7 +207,7 @@ function ReforcoBrilha() {
       setSearchResult(res);
       if (!res.main) {
         // IA OBRIGATÓRIA: Se não houver no catálogo, gera agora.
-        setAulaAberta({ id: "ia-new", titulo: text });
+        setAulaAberta({ id: "ia-new", titulo: text, dificuldade: text });
       }
     } catch (e: any) {
       console.error("Busca Reforço Brilha:", e);
@@ -404,7 +404,7 @@ function ReforcoBrilha() {
 
 
           <IAProfessorMentor
-            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo, dificuldade: titulo })}
           />
 
 
@@ -1094,13 +1094,31 @@ function ReforcoBrilha() {
         }
         changeLabel="Trocar tópico"
       />
-      {aulaAberta && (
-        <AulaViewer
-          aulaId={aulaAberta.id}
-          titulo={aulaAberta.titulo}
-          onClose={() => setAulaAberta(null)}
-        />
-      )}
+          {aulaAberta && (
+            <AulaViewer
+              aulaId={aulaAberta.id}
+              titulo={aulaAberta.titulo}
+              onClose={() => setAulaAberta(null)}
+              onComplete={async ({ tempoSegundos }) => {
+                if (!activeChild) return;
+                
+                // Registrar progresso compatível com relatórios
+                const cod = `REFORCO_${aulaAberta.dificuldade || topic || "IA"}`;
+                await supabase.from("escola_progresso").upsert({
+                  child_id: activeChild.id,
+                  codigo_bncc: cod,
+                  concluida: true,
+                  nota: 10,
+                  estrelas: 3,
+                  percentual: 100,
+                  tempo_estudado_segundos: tempoSegundos,
+                  ultima_visita_em: new Date().toISOString()
+                }, { onConflict: 'child_id,codigo_bncc' });
+
+                toast.success("Progresso do reforço registrado!");
+              }}
+            />
+          )}
       </div>
     </Shell>
   );

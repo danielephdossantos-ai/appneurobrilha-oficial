@@ -226,9 +226,27 @@ A resposta DEVE ser um JSON no seguinte formato:
         ];
 
         await (supabase as any).from("rb_paginas_aula").insert(paginas);
+
+        // 6. Atualizar Agenda de Estudos (Rotina)
+        // Remove reforço anterior e coloca o novo
+        await (supabase as any)
+          .from("study_agenda")
+          .delete()
+          .eq("child_id", data.criancaId)
+          .eq("type", "reforco_ia");
+
+        await (supabase as any)
+          .from("study_agenda")
+          .insert({
+            child_id: data.criancaId,
+            topic: novaAula.titulo,
+            type: "reforco_ia",
+            exam_date: new Date().toISOString(),
+            completed: false
+          });
       }
     } catch (e) {
-      console.error("Erro ao persistir aula do Gemini:", e);
+      console.error("Erro ao persistir aula ou agenda do Gemini:", e);
     }
 
     return { 

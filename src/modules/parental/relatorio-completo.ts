@@ -99,6 +99,8 @@ export async function coletarDadosRelatorio(
   const agenda: any[] = agendaRes.data ?? [];
 
   const concluidas = progresso.filter((p) => p.concluida);
+  const aulasReforco = progresso.filter(p => p.codigo_bncc?.startsWith("REFORCO_"));
+  
   const tempoTotalSeg = progresso.reduce((s, p) => s + (p.tempo_estudado_segundos || 0), 0);
   const notas = progresso.filter((p) => Number(p.nota) > 0).map((p) => Number(p.nota));
   const tempoNeuroMs = neuro.reduce((s, n) => s + (n.duration_ms || 0), 0);
@@ -126,6 +128,7 @@ export async function coletarDadosRelatorio(
       : 0,
     atividadesNeuro: neuro.length,
     tempoNeuroMin: Math.round(tempoNeuroMs / 60000),
+    aulasReforcoConcluidas: aulasReforco.length,
     registrosFamilia: (familiaRes.data ?? []).length,
   };
 
@@ -266,6 +269,7 @@ export function gerarPDFRelatorio(dados: DadosRelatorio): jsPDF {
       ["Acertos / Erros", `${r.acertos} / ${r.erros}`],
       ["Estrelas conquistadas", String(r.estrelas)],
       ["Tempo de estudo (Escola Brilha)", `${r.tempoTotalMin} min`],
+      ["Aulas de Reforço IA", String((r as any).aulasReforcoConcluidas || 0)],
       ["Atividades do Neuro Treino", `${r.atividadesNeuro} (${r.tempoNeuroMin} min)`],
       ["Registros da Missão em Família", String(r.registrosFamilia)],
     ],
