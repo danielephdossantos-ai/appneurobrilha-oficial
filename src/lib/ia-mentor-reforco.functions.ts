@@ -119,7 +119,13 @@ Estrutura da Aula:
       json: true,
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere um plano de reforço para a dificuldade: "${data.dificuldade}". Lembre-se de usar o hiperfoco: "${hiperfoco}" em tudo.` }
+        { role: "user", content: `Gere um guia completo e detalhado de aula de reforço para a dificuldade: "${data.dificuldade}". 
+        
+IMPORTANTE: 
+1. Não resuma. Crie explicações longas e didáticas.
+2. O hiperfoco "${hiperfoco}" deve ser o protagonista de cada exemplo e exercício.
+3. Se a criança tiver déficit de atenção mencionado em "${deficits}", use frases curtas e comandos claros.
+4. Garanta que a seção "passos" tenha no mínimo 5 etapas detalhadas (Explicação, Exemplo prático, Prática guiada, Desafio criativo e Revisão final).` }
       ]
     });
 
