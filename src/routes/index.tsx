@@ -136,15 +136,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.18)",
   },
   {
-    to: "/colecao-pip",
-    title: "Conquistas",
-    subtitle: "Galeria de Troféus",
-    gradient: "from-[#3BD68B] via-[#22C55E] to-[#0E9D5B]",
-    glow: "rgba(59,214,139,0.7)",
-    emoji: "🏆",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
     to: "/painel-pais",
     title: "Área dos Pais",
     subtitle: "Acompanhamento",
