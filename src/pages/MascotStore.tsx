@@ -17,7 +17,7 @@ const MascotStore = () => {
   const { activeChild } = useAppState();
   const { activeMascot, setActiveMascot, userMascots, isLoading } = useMascot();
   const { hiperfoco, setHiperfocoById, setHiperfocoCustom } = useHiperfoco();
-  const [activeTab, setActiveTab] = useState<'mascots' | 'worlds'>('mascots');
+  const [activeTab, setActiveTab] = useState<'mascots' | 'worlds' | 'achievements'>('mascots');
   
   const handleSelectWorld = (world: MundoOption) => {
     // Para mundos com hiperfocoId, sincronizamos com o contexto de hiperfoco
