@@ -51,6 +51,8 @@ import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
+import { IAProfessorMentor } from "@/components/reforco-brilha/IAProfessorMentor";
+
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -368,9 +370,9 @@ function ReforcoBrilha() {
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
           <Card className={`bg-gradient-to-br from-primary/10 to-transparent border-primary/20 ${adaptiveUI.maxItemsPerScreen <= 2 ? "p-4" : ""}`}>
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />
-              O que a criança está precisando aprender?
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-primary">
+              <Search className="h-5 w-5" />
+              Busca Pedagógica (BNCC e Banco de Aulas)
             </h3>
             <div className="relative">
               <input
@@ -378,7 +380,7 @@ function ReforcoBrilha() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
-                placeholder='Ex: "não consegue juntar sílabas", "tabuada do 7", "atenção"...'
+                placeholder='Pesquise por habilidade ou código BNCC...'
                 className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
@@ -395,18 +397,13 @@ function ReforcoBrilha() {
                 )}
               </button>
             </div>
-            <p className="text-xs text-muted-foreground mt-3 italic">
-              Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
-            </p>
           </Card>
 
-          <AssistenteGuiado
+
+          <IAProfessorMentor
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
-            onBuscar={(q) => {
-              setSearchQuery(q);
-              runSearch(q);
-            }}
           />
+
 
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">

@@ -6217,6 +6217,30 @@ export type Database = {
           },
         ]
       }
+      rb_aulas_geradas_ia: {
+        Row: {
+          conteudo: Json
+          created_at: string | null
+          dificuldade_original: string
+          id: string
+          tags: string[] | null
+        }
+        Insert: {
+          conteudo: Json
+          created_at?: string | null
+          dificuldade_original: string
+          id?: string
+          tags?: string[] | null
+        }
+        Update: {
+          conteudo?: Json
+          created_at?: string | null
+          dificuldade_original?: string
+          id?: string
+          tags?: string[] | null
+        }
+        Relationships: []
+      }
       rb_aulas_ia: {
         Row: {
           area: string
