@@ -206,7 +206,7 @@ function EscolaBrilhaCatalogo() {
           </button>
           <div>
             <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55">
-              CIÊNCIAS , GEOGRAFIA, HISTORIA, CIÊNCIAS, ARTES E INGLÊS COBREM TODO O SISTEMA CURRICULAR ANO LETIVO DO ESTUDANTE
+              Missões por série e disciplina
             </div>
             <h1 className="text-2xl font-black text-[#0d1f55]">Escola Brilha</h1>
           </div>
