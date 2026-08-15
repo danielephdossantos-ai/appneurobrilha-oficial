@@ -228,10 +228,3 @@ A resposta DEVE ser um JSON no seguinte formato:
       id: salvaId 
     };
   });
-
-    return { 
-      aula: novaAula, 
-      origem: "gerada_gemini",
-      id: salvaId 
-    };
-  });
