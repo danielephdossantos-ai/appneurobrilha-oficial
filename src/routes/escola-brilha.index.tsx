@@ -5,6 +5,8 @@ import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
+import { getLessonsBySerie } from "@/escola-brilha/ingles-lessons-index";
+
 import { listCursos } from "@/escola-brilha/curso-v4/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
@@ -68,7 +70,22 @@ function expandirAno(ano: string): Serie[] {
   return []; // Ensino Médio e outros ficam de fora conforme escopo
 }
 
+function contarAulasIngles(serie: Serie): number {
+  const slug =
+    serie === "1º Ano" ? "1ano"
+    : serie === "2º Ano" ? "2ano"
+    : serie === "3º Ano" ? "3ano"
+    : serie === "4º Ano" ? "4ano"
+    : serie === "5º Ano" ? "5ano"
+    : serie === "6º Ano" ? "6ano"
+    : serie === "7º Ano" ? "7ano"
+    : serie === "8º Ano" ? "8ano"
+    : "9ano";
+  return getLessonsBySerie(slug).length;
+}
+
 function EscolaBrilhaCatalogo() {
+
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
@@ -290,8 +307,10 @@ function EscolaBrilhaCatalogo() {
               
 
               const total = contarSerie(serie);
+              const totalAulasIngles = contarAulasIngles(serie);
               const aberta = serieAberta === serie;
               return (
+
                 <div key={serie} className="rounded-2xl bg-white border-2 border-white shadow-sm overflow-hidden">
                   <button
                     onClick={() => {
@@ -365,8 +384,9 @@ function EscolaBrilhaCatalogo() {
                                             : "English for Life — Final Level 🎓"}
                           </div>
                           <div className="text-[11px] font-bold opacity-90 mt-1">
-                            Trilha estilo Duolingo — abrir mapa de aulas →
+                            {totalAulasIngles} AULA{totalAulasIngles === 1 ? "" : "S"} DISPONÍVEIS →
                           </div>
+
                         </Link>
                       )}
 
