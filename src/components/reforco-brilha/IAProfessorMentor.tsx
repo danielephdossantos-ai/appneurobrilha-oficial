@@ -14,14 +14,10 @@ interface Props {
 
 export function IAProfessorMentor({ onAbrirAula }: { onAbrirAula?: (id: string, titulo: string) => void }) {
   const { activeChild } = useAppState();
-  const [dificuldade, setDificuldade] = useState(initialQuery);
+  const [dificuldade, setDificuldade] = useState("");
   const [loading, setLoading] = useState(false);
   const [resultado, setResultado] = useState<any>(null);
   const gerar = useServerFn(gerarAulaReforcoIA);
-
-  useEffect(() => {
-    if (initialQuery) setDificuldade(initialQuery);
-  }, [initialQuery]);
 
   const handleGerar = async () => {
     const query = dificuldade.trim();
