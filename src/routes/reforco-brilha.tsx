@@ -36,13 +36,6 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
-import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
-import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
-import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
-import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
-import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
-import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
-import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
 import { IAProfessorMentor } from "@/components/reforco-brilha/IAProfessorMentor";
 
 
