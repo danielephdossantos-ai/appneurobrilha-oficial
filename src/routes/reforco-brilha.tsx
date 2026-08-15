@@ -4,29 +4,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
-  Search,
   Sparkles,
   BookOpen,
   Calculator,
-  Pencil,
-  MessageSquare,
-  ArrowRight,
   PlayCircle,
   Star,
   Zap,
-  Info,
   ChevronRight,
   Trophy,
-  CheckCircle2,
-  RefreshCw,
-  TrendingUp,
-  Calendar,
   AlertCircle,
-  Palette,
-  Target,
-  PenTool,
   Brain,
-  
+  ArrowRight,
+  PenTool
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
