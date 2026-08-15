@@ -3,9 +3,10 @@ import { useMascot } from "@/contexts/MascotContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
-import { ShoppingBag, Star, Sparkles, Globe2, Check, Lock, Coins } from "lucide-react";
+import { ShoppingBag, Star, Sparkles, Globe2, Check, Lock, Coins, Trophy } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { useAppState } from "@/core/store";
+import { Link } from "@tanstack/react-router";
 import { PipEvolution } from "@/components/pip/PipEvolution";
 import { cn } from "@/utils/utils";
 import { useHiperfoco } from "@/context/HiperfocoContext";
@@ -79,7 +80,7 @@ const MascotStore = () => {
             )}
           >
             <Star className={cn("w-4 h-4", activeTab === 'mascots' ? "fill-sun text-sun" : "")} />
-            MEUS PROFESSORES
+            PROFESSORES
           </button>
           <button 
             onClick={() => setActiveTab('worlds')}
@@ -91,7 +92,19 @@ const MascotStore = () => {
             )}
           >
             <Globe2 className={cn("w-4 h-4", activeTab === 'worlds' ? "text-sky-500" : "")} />
-            MUNDOS MÁGICOS
+            MUNDOS
+          </button>
+          <button 
+            onClick={() => setActiveTab('achievements')}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-black transition-all",
+              activeTab === 'achievements' 
+                ? "bg-white text-primary shadow-sm" 
+                : "text-muted-foreground hover:text-primary"
+            )}
+          >
+            <Trophy className={cn("w-4 h-4", activeTab === 'achievements' ? "text-amber-500" : "")} />
+            CONQUISTAS
           </button>
         </div>
 
