@@ -20,17 +20,19 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     let deficits = "Não informado";
     let hiperfoco = "Não informado";
     let nivelSuporte = "Geral";
+    let idadeCrianca = 7; // Default 7 anos se não encontrado
 
     try {
       const { data: crianca } = await supabase
         .from("children")
-        .select("diagnostico, hiperfoco, niveis")
+        .select("diagnostico, hiperfoco, niveis, idade")
         .eq("id", data.criancaId)
         .maybeSingle();
 
       if (crianca) {
         deficits = crianca.diagnostico || deficits;
         hiperfoco = crianca.hiperfoco || hiperfoco;
+        idadeCrianca = crianca.idade || idadeCrianca;
         if (crianca.niveis && typeof crianca.niveis === "object") {
           nivelSuporte = JSON.stringify(crianca.niveis);
         }
@@ -44,7 +46,6 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
         .maybeSingle();
       
       if (anamnese?.responses) {
-        // Se houver respostas, anexamos ao contexto de déficits/perfil
         deficits += ` (Detalhes Anamnese: ${JSON.stringify(anamnese.responses)})`;
       }
     } catch (e) {
@@ -75,50 +76,43 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     const systemPrompt = `Você é um especialista em neuroeducação, psicopedagogia e terapeuta multidisciplinar. Seu objetivo é criar um guia de aula prático, didático e acolhedor para a mãe ensinar seu filho em casa.
 
 Perfil da Criança:
+Idade: ${idadeCrianca} anos
 Déficits/Diagnóstico: ${deficits}
 Hiperfoco/Interesses: ${hiperfoco}
 Nível de suporte/preferências: ${nivelSuporte}
 
-Instruções de Personalização:
-Adapte a linguagem, o ritmo da explicação e a abordagem aos déficits identificados (ex: frases mais curtas e apoio visual para TDAH/Autismo; foco fonético e auditivo para Dislexia/DPA).
+REGRAS DE RECOMENDAÇÕES POR IDADE:
+Ao sugerir vídeos ou links de apoio, verifique rigorosamente a idade da criança: ${idadeCrianca}.
+- Se for entre 3 e 9 anos: Retorne APENAS sugestões de vídeos infantis/lúdicos do YouTube (canais educativos, canções pedagógicas, historinhas animadas). NENHUMA sugestão de Wikipedia, artigos longos ou enciclopédias é permitida.
+- Se for entre 10 e 15 anos: Retorne videoaulas de nivelamento (canais de professores, resumos visuais) e pesquisas em sites como Wikipedia, Brasil Escola e portais educativos adequados.
 
-USO OBRIGATÓRIO DO HIPERFOCO: Crie todos os exemplos, historinhas e atividades utilizando o hiperfoco da criança como tema central para manter o engajamento.
+Instruções de Personalização:
+Adapte a linguagem, o ritmo da explicação e a abordagem aos déficits identificados.
+USO OBRIGATÓRIO DO HIPERFOCO: Crie todos os exemplos, historinhas e atividades utilizando o hiperfoco da criança como tema central.
 
 A resposta DEVE ser um JSON no seguinte formato:
 {
   "titulo": "Título da Aula",
   "objetivo": "O que a criança vai aprender",
   "visao_terapeuta": "Breve orientação para a mãe sobre como conduzir o momento com base nas necessidades neurodivergentes do filho.",
-  "dica_de_ouro": "O que fazer se a criança perder o foco ou se frustrar durante a atividade.",
+  "dica_de_ouro": "O que fazer se a criança perder o foco ou se frustrar.",
+  "recursos_apoio": [
+    { "titulo": "Nome do Vídeo/Link", "url": "URL sugerida (YouTube/Wikipedia conforme regras)", "tipo": "video|texto" }
+  ],
   "passos": [
-    { 
-      "tipo": "explicação", 
-      "texto": "Como apresentar o conceito usando o tema do hiperfoco." 
-    },
-    { 
-      "tipo": "exemplo", 
-      "texto": "Um exemplo prático usando o hiperfoco." 
-    },
-    { 
-      "tipo": "prática", 
-      "texto": "Exercícios e jogos divertidos temáticos para fixação." 
-    },
-    { 
-      "tipo": "desafio", 
-      "texto": "Um pequeno desafio temático." 
-    },
-    { 
-      "tipo": "revisão", 
-      "texto": "Dicas para a mãe revisar o conteúdo depois." 
-    }
+    { "tipo": "explicação", "texto": "..." },
+    { "tipo": "exemplo", "texto": "..." },
+    { "tipo": "prática", "texto": "..." },
+    { "tipo": "desafio", "texto": "..." },
+    { "tipo": "revisão", "texto": "..." }
   ]
 }
 
-Estrutura da Aula a ser gerada:
-Visão Terapeuta/Professor: Orientação pedagógica.
-Passo a Passo da Explicação: Usando hiperfoco.
-Atividades Práticas: Fixação temática.
-Dica de Ouro: Manejo de comportamento/frustração.`;
+Estrutura da Aula:
+1. Visão Terapeuta: Orientação pedagógica.
+2. Passo a Passo: Usando hiperfoco.
+3. Recursos de Apoio: Conforme REGRAS DE IDADE acima.
+4. Dica de Ouro: Manejo de comportamento.`;
 
     // 3. Chamada ao Gemini
     const responseText = await callGemini({
@@ -161,14 +155,22 @@ Dica de Ouro: Manejo de comportamento/frustração.`;
               dica_ouro: novaAula.dica_de_ouro 
             }
           },
+          // Página de recursos de apoio (se houver)
+          ...(novaAula.recursos_apoio?.length ? [{
+            aula_id: salvaId,
+            ordem: 1,
+            tipo: "video_apoio",
+            titulo: "MATERIAIS COMPLEMENTARES",
+            conteudo: { links: novaAula.recursos_apoio }
+          }] : []),
           ...novaAula.passos.map((passo: any, index: number) => ({
             aula_id: salvaId,
-            ordem: index + 1,
+            ordem: index + (novaAula.recursos_apoio?.length ? 2 : 1),
             tipo: passo.tipo === "explicação" ? "explicacao" : 
                   passo.tipo === "exemplo" ? "exemplo" :
                   passo.tipo === "prática" ? "pratica_guiada" :
                   passo.tipo === "desafio" ? "avaliacao" : "proximos_passos",
-            titulo: passo.tipo.toUpperCase(),
+            titulo: (passo.tipo || "ATIVIDADE").toUpperCase(),
             conteudo: { texto: passo.texto }
           }))
         ];
