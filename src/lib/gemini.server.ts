@@ -25,7 +25,7 @@ export async function callGemini(opts: GeminiOptions) {
     throw new Error("GEMINI_API_KEY is not configured in environment variables.");
   }
 
-  const model = opts.model ?? "gemini-2.5-flash";
+  const model = opts.model ?? "gemini-3.7-flash";
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
   const body = {
@@ -40,24 +40,36 @@ export async function callGemini(opts: GeminiOptions) {
     }
   };
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  });
+  let lastError: Error | null = null;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
 
-  if (!res.ok) {
-    const errorText = await res.text();
-    console.error("[Gemini API Error]", res.status, errorText);
-    throw new Error(`Gemini API error: ${res.status}`);
+      if (res.ok) {
+        const data = await res.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) throw new Error("Empty response from Gemini");
+        return text;
+      }
+
+      const errorText = await res.text();
+      console.warn(`[Gemini API Attempt ${i + 1}]`, res.status, errorText);
+      
+      if (res.status !== 503 && res.status !== 429) {
+        throw new Error(`Gemini API error: ${res.status}`);
+      }
+      
+      // Wait before retry
+      await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+    } catch (e: any) {
+      lastError = e;
+      if (e.message.includes("Gemini API error") && !e.message.includes("503")) throw e;
+    }
   }
 
-  const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  
-  if (!text) {
-    throw new Error("Empty response from Gemini");
-  }
-
-  return text;
+  throw lastError || new Error("Failed to call Gemini after retries");
 }
