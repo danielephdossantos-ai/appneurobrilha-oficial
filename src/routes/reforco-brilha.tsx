@@ -395,9 +395,9 @@ function ReforcoBrilha() {
                   <BookOpen className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">Base Pedagógica Completa</h4>
+                  <h4 className="font-bold text-sm">IA Professor Mentor</h4>
                   <p className="text-[11px] text-muted-foreground">
-                    Tabuada, Verbos, Interpretação, Ortografia e mais.
+                    Geração automática de trilhas personalizadas para cada dificuldade.
                   </p>
                 </div>
               </div>
@@ -408,13 +408,14 @@ function ReforcoBrilha() {
                   <Brain className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">Neuro-Adaptação Ativa</h4>
+                  <h4 className="font-bold text-sm">Sistema Contínuo</h4>
                   <p className="text-[11px] text-muted-foreground">
-                    Um reforço extra em casa para apoiar o trabalho dos professores.
+                    As aulas geradas ficam salvas e evoluem com a comunidade.
                   </p>
                 </div>
               </div>
             </Card>
+
           </div>
 
 
