@@ -115,7 +115,7 @@ Estrutura da Aula:
 
     // 3. Chamada ao Gemini
     const responseText = await callGemini({
-      model: "gemini-1.5-flash",
+      model: "gemini-3.7-flash",
       json: true,
       messages: [
         { role: "system", content: systemPrompt },
