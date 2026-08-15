@@ -146,7 +146,7 @@ function ReforcoBrilha() {
         setLessonContent(lesson);
         setCurrentLevel("basic");
         if (lesson.category) {
-          loadTopicStats(lesson.category);
+          // Stats loading logic simplified
         }
 
         // Notificar a mãe que a criança começou a estudar
