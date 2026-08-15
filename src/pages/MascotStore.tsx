@@ -3,9 +3,10 @@ import { useMascot } from "@/contexts/MascotContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
-import { ShoppingBag, Star, Sparkles, Globe2, Check, Lock, Coins } from "lucide-react";
+import { ShoppingBag, Star, Sparkles, Globe2, Check, Lock, Coins, Trophy } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { useAppState } from "@/core/store";
+import { Link } from "@tanstack/react-router";
 import { PipEvolution } from "@/components/pip/PipEvolution";
 import { cn } from "@/utils/utils";
 import { useHiperfoco } from "@/context/HiperfocoContext";
@@ -17,7 +18,7 @@ const MascotStore = () => {
   const { activeChild } = useAppState();
   const { activeMascot, setActiveMascot, userMascots, isLoading } = useMascot();
   const { hiperfoco, setHiperfocoById, setHiperfocoCustom } = useHiperfoco();
-  const [activeTab, setActiveTab] = useState<'mascots' | 'worlds'>('mascots');
+  const [activeTab, setActiveTab] = useState<'mascots' | 'worlds' | 'achievements'>('mascots');
   
   const handleSelectWorld = (world: MundoOption) => {
     // Para mundos com hiperfocoId, sincronizamos com o contexto de hiperfoco
@@ -79,7 +80,7 @@ const MascotStore = () => {
             )}
           >
             <Star className={cn("w-4 h-4", activeTab === 'mascots' ? "fill-sun text-sun" : "")} />
-            MEUS PROFESSORES
+            PROFESSORES
           </button>
           <button 
             onClick={() => setActiveTab('worlds')}
@@ -91,7 +92,19 @@ const MascotStore = () => {
             )}
           >
             <Globe2 className={cn("w-4 h-4", activeTab === 'worlds' ? "text-sky-500" : "")} />
-            MUNDOS MÁGICOS
+            MUNDOS
+          </button>
+          <button 
+            onClick={() => setActiveTab('achievements')}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-black transition-all",
+              activeTab === 'achievements' 
+                ? "bg-white text-primary shadow-sm" 
+                : "text-muted-foreground hover:text-primary"
+            )}
+          >
+            <Trophy className={cn("w-4 h-4", activeTab === 'achievements' ? "text-amber-500" : "")} />
+            CONQUISTAS
           </button>
         </div>
 
@@ -116,7 +129,7 @@ const MascotStore = () => {
                  {/* Aqui entrarão os outros mascotes mentor IA se existirem no futuro */}
               </div>
             </motion.div>
-          ) : (
+          ) : activeTab === 'worlds' ? (
             <motion.div 
               key="worlds"
               initial={{ opacity: 0, y: 10 }}
@@ -176,6 +189,27 @@ const MascotStore = () => {
                   </motion.div>
                 );
               })}
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="achievements"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="space-y-8"
+            >
+              <div className="bg-white rounded-[2rem] p-8 border-4 border-primary/10 shadow-xl text-center">
+                <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Trophy className="w-10 h-10 text-amber-500" />
+                </div>
+                <h2 className="text-2xl font-black text-primary uppercase mb-2">Galeria de Troféus</h2>
+                <p className="text-muted-foreground font-medium mb-6">Suas conquistas aparecem aqui conforme você evolui!</p>
+                <Link to="/colecao-pip">
+                  <KidButton variant="primary" className="px-8 py-3 rounded-2xl font-black">
+                    VER TODA COLEÇÃO
+                  </KidButton>
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
