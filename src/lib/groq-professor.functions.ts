@@ -306,7 +306,7 @@ Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
       temperature: 0.4,
       json: true,
       // Gemini 3 Flash já é multimodal; no Groq usa scout p/ visão.
-      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile",
+      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-specdec",
       label: "plano-estudos",
     });
     if (!r.ok) return { ok: false as const, error: r.motivo, plano: null };
@@ -443,7 +443,7 @@ Gere o JSON com as 3 dicas progressivas (NUNCA a resposta) usando o hiperfoco da
       max_tokens: 1100,
       temperature: 0.5,
       json: true,
-      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile",
+      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-specdec",
       label: "missao-tarefa",
     });
     if (!r.ok) return { ok: false as const, error: r.motivo, resultado: null };
