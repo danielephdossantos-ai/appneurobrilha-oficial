@@ -15,7 +15,10 @@ import {
   AlertCircle,
   Brain,
   ArrowRight,
-  PenTool
+  PenTool,
+  CheckCircle2,
+  Info,
+  TrendingUp,
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
