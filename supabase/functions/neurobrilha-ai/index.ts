@@ -247,7 +247,7 @@ serve(async (req) => {
     const groqModel =
       mode === "professor-foto"
         ? "meta-llama/llama-4-scout-17b-16e-instruct"
-        : "llama-3.3-70b-versatile";
+        : "llama-3.3-70b-specdec";
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
