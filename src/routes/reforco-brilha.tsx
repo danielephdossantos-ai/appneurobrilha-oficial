@@ -89,17 +89,7 @@ function ReforcoBrilha() {
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
   const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
-  const [stats, setStats] = useState<ProgressionStats | null>(null);
-  const [skills, setSkills] = useState<SkillMastery[]>([]);
-  const [pendingReviews, setPendingReviews] = useState<any[]>([]);
-  const [isLoadingStats, setIsLoadingStats] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(() => localStorage.getItem("rb_last_search") || "");
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
   const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string } | null>(null);
-  const [aulasExtras, setAulasExtras] = useState<import("@/lib/reforco-brilha-search").RBAula[]>([]);
-  const [carregandoMaisAulas, setCarregandoMaisAulas] = useState(false);
-  const [semMaisAulas, setSemMaisAulas] = useState(false);
 
   const adaptiveUI = buildAdaptiveUIState(
     {
