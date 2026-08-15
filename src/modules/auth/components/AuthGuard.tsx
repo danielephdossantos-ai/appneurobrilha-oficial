@@ -23,16 +23,17 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
         // Timeout the session check if it hangs
         const sessionPromise = supabase.auth.getSession();
         const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error("Supabase hang")), 5000)
+          setTimeout(() => reject(new Error("Supabase hang")), 3000)
         );
         
-        const { data, error } = await (Promise.race([sessionPromise, timeoutPromise]) as any);
+        const res = await Promise.race([sessionPromise, timeoutPromise]);
+        const { data, error } = res as any;
         
         if (error) throw error;
         
-        console.log("AuthGuard: Session result:", !!data.session);
+        console.log("AuthGuard: Session result:", !!data?.session);
         if (mounted) {
-          setAuthed(!!data.session);
+          setAuthed(!!data?.session);
           setReady(true);
         }
       } catch (err) {
