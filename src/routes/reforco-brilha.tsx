@@ -214,8 +214,6 @@ function ReforcoBrilha() {
           <IAProfessorMentor
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
           />
-
-          {/* A IAProfessorMentor agora é o motor central. O conteúdo anterior foi simplificado para evitar confusão. */}
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
