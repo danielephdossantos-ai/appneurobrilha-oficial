@@ -6,6 +6,12 @@ import { Bell, Settings, Download, Share2, Brain, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNotifications } from "@/hooks/useNotifications";
 import { toast } from "sonner";
+import {
+  coletarDadosRelatorio,
+  gerarPDFRelatorio,
+  nomeArquivoRelatorio,
+  salvarRelatorio,
+} from "@/modules/parental/relatorio-completo";
 
 interface DashboardHeaderProps {
   studentName: string;
@@ -19,6 +25,33 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   childId,
 }) => {
   const { sendNotification } = useNotifications();
+  const [gerandoPdf, setGerandoPdf] = React.useState(false);
+
+  const gerarRelatorio = async (compartilhar: boolean) => {
+    if (!childId) return;
+    setGerandoPdf(true);
+    try {
+      const dados = await coletarDadosRelatorio(childId, 30);
+      await salvarRelatorio(dados);
+      const doc = gerarPDFRelatorio(dados);
+      const nome = nomeArquivoRelatorio(dados);
+      const nav: any = navigator;
+      if (compartilhar) {
+        const file = new File([doc.output("blob")], nome, { type: "application/pdf" });
+        if (nav.canShare?.({ files: [file] })) {
+          await nav.share({ files: [file], title: `Relatório de ${studentName}` });
+          toast.success("Relatório salvo e enviado!");
+          return;
+        }
+      }
+      doc.save(nome);
+      toast.success("Relatório salvo no app e baixado em PDF!");
+    } catch (e: any) {
+      toast.error(e?.message ?? "Não foi possível gerar o relatório");
+    } finally {
+      setGerandoPdf(false);
+    }
+  };
 
   const handleStudyReminder = () => {
     if (!childId) return;
@@ -78,12 +111,19 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           variant="outline"
           size="sm"
           className="gap-2 hidden sm:flex"
-          onClick={() => window.print()}
+          disabled={gerandoPdf}
+          onClick={() => gerarRelatorio(false)}
         >
-          <Download className="h-4 w-4" /> Exportar Relatório
+          <Download className="h-4 w-4" /> {gerandoPdf ? "Gerando…" : "Exportar Relatório"}
         </Button>
 
-        <Button variant="outline" size="sm" className="gap-2 hidden sm:flex">
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2 hidden sm:flex"
+          disabled={gerandoPdf}
+          onClick={() => gerarRelatorio(true)}
+        >
           <Share2 className="h-4 w-4" /> Compartilhar com Terapeuta
         </Button>
         {/* O botão 'Configurações' foi removido conforme solicitação por não ter utilidade nesta área */}
