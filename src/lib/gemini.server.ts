@@ -25,7 +25,7 @@ export async function callGemini(opts: GeminiOptions) {
     throw new Error("GEMINI_API_KEY is not configured in environment variables.");
   }
 
-  const model = opts.model ?? "gemini-1.5-flash";
+  const model = opts.model ?? "gemini-2.5-flash";
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
   const body = {

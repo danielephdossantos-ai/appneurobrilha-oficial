@@ -160,7 +160,7 @@ export const professorBrilhaChat = createServerFn({ method: "POST" })
       try {
         const { callGemini } = await import("./gemini.server");
         const reply = await callGemini({
-          model: "gemini-1.5-flash",
+          model: "gemini-2.5-flash",
           messages: messages.map(m => ({ 
             role: m.role as any, 
             content: m.content 

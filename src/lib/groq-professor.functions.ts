@@ -70,7 +70,7 @@ export const askProfessorBrilho = createServerFn({ method: "POST" })
       try {
         const { callGemini } = await import("./gemini.server");
         const reply = await callGemini({
-          model: "gemini-1.5-flash",
+          model: "gemini-2.5-flash",
           messages: messages.map(m => ({ 
             role: m.role as any, 
             content: typeof m.content === 'string' ? m.content : JSON.stringify(m.content) 
