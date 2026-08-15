@@ -19,12 +19,12 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     
     const checkSession = async () => {
       try {
-        console.log("AuthGuard: Initial session check...");
+        console.log("AuthGuard: Initial session check starting...");
         
-        // Timeout the session check if it hangs
+        // Timeout the session check if it hangs - reduced to 2 seconds for faster recovery
         const sessionPromise = supabase.auth.getSession();
         const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error("Supabase hang")), 3000)
+          setTimeout(() => reject(new Error("Supabase hang")), 2000)
         );
         
         const res = await Promise.race([sessionPromise, timeoutPromise]);
@@ -32,7 +32,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
         
         if (error) throw error;
         
-        console.log("AuthGuard: Session result:", !!data?.session);
+        console.log("AuthGuard: Session check finished. Session exists:", !!data?.session);
         if (mounted) {
           setAuthed(!!data?.session);
           setReady(true);
@@ -48,13 +48,13 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     checkSession();
     
-    // Safety fallback: if nothing happened in 5 seconds, just show the app
+    // Safety fallback: if nothing happened in 3 seconds, just show the app (likely unauthenticated)
     fallbackTimer = setTimeout(() => {
       if (mounted && !ready) {
-        console.warn("AuthGuard: Safety fallback triggered");
+        console.warn("AuthGuard: Safety fallback triggered (3s)");
         setReady(true);
       }
-    }, 5000);
+    }, 3000);
 
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       console.log("AuthGuard: Auth state change:", _e, !!session);
@@ -84,9 +84,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   if (!ready) {
     return (
       <div className="min-h-screen grid place-items-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm text-muted-foreground animate-pulse">Iniciando ambiente seguro...</p>
+        <div className="flex flex-col items-center gap-4 p-6 text-center">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <div className="space-y-2">
+            <p className="text-lg font-medium text-foreground">Iniciando ambiente seguro...</p>
+            <p className="text-sm text-muted-foreground animate-pulse">
+              Preparando a Cidade Mágica...
+            </p>
+          </div>
         </div>
       </div>
     );
