@@ -12,7 +12,7 @@ interface Props {
   initialQuery?: string;
 }
 
-export function IAProfessorMentor({ onAbrirAula, initialQuery = "" }: Props) {
+export function IAProfessorMentor({ onAbrirAula }: { onAbrirAula?: (id: string, titulo: string) => void }) {
   const { activeChild } = useAppState();
   const [dificuldade, setDificuldade] = useState(initialQuery);
   const [loading, setLoading] = useState(false);
