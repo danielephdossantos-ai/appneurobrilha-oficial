@@ -110,7 +110,10 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
     if (typeof window === "undefined") return;
     const mp3Url = "/sounds/pop.mp3";
     try {
-      // Try the simple HTMLAudioElement first (works if file is present and allowed by browser)
+      // Verify the file exists before asking the browser to decode it, avoiding 404 console noise.
+      const head = await fetch(mp3Url, { method: "HEAD", cache: "no-store" });
+      if (!head.ok) throw new Error("mp3-missing");
+
       const a = new Audio(mp3Url);
       a.volume = 0.9;
       await a.play().catch(() => {
