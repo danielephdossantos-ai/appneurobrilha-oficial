@@ -637,86 +637,13 @@ function ReforcoBrilha() {
 
 
 
-          {agenda.length > 0 && (
-            <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
-
-              <h3 className="text-sm font-bold flex items-center gap-2 px-1 text-indigo-600">
-                <Calendar className="h-4 w-4" />
-                PLANO DE ESTUDOS DA SEMANA (DEFINIDO PELA MÃE)
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {agenda.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => startLesson(item.topic)}
-                    className="p-5 rounded-[2rem] bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-100/50 transition-all text-left flex items-start gap-4 group"
-                  >
-                    <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      {item.type === "prova" ? (
-                        <Target className="h-6 w-6 text-red-500" />
-                      ) : item.type === "trabalho" ? (
-                        <PenTool className="h-6 w-6 text-blue-500" />
-                      ) : (
-                        <BookOpen className="h-6 w-6 text-green-500" />
-                      )}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">
-                          {item.type}
-                        </span>
-                        {item.exam_date && (
-                          <span className="text-[10px] text-indigo-400 font-bold">
-                            {format(new Date(item.exam_date + "T12:00:00"), "dd/MM", {
-                              locale: ptBR,
-                            })}
-                          </span>
-                        )}
-                      </div>
-                      <div className="font-extrabold text-slate-800 text-lg">{item.topic}</div>
-                      <div className="mt-2 flex items-center gap-1.5 text-indigo-600 font-bold text-xs">
-                        ESTUDAR AGORA <ArrowRight className="h-3 w-3" />
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
+          {aulaAberta && (
+            <AulaViewer
+              aulaId={aulaAberta.id}
+              titulo={aulaAberta.titulo}
+              onClose={() => setAulaAberta(null)}
+            />
           )}
-
-          {pendingReviews.length > 0 && (
-            <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
-              <h3 className="text-sm font-bold flex items-center gap-2 px-1 text-primary">
-                <RefreshCw className="h-4 w-4 animate-spin-slow" />
-                REVISÕES AGENDADAS (Repetição Espaçada)
-              </h3>
-              <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                {pendingReviews.map((review) => (
-                  <button
-                    key={review.id}
-                    onClick={() => startLesson(review.activity?.titulo || review.skill_code)}
-                    className="flex-shrink-0 w-48 p-4 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-left group"
-                  >
-                    <div className="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">
-                      Revisão Sugerida
-                    </div>
-                    <div className="font-bold text-sm line-clamp-1">
-                      {review.activity?.titulo || review.skill_code}
-                    </div>
-                    <div className="mt-3 flex items-center justify-between">
-                      <div className="h-1.5 flex-1 bg-primary/10 rounded-full overflow-hidden mr-2">
-                        <div className="h-full bg-primary" style={{ width: "100%" }}></div>
-                      </div>
-                      <PlayCircle className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-
-
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="bg-success/5 border-success/20">
@@ -747,38 +674,6 @@ function ReforcoBrilha() {
             </Card>
           </div>
 
-          {/* Catálogo de Dificuldades */}
-          <div className="mt-6">
-            <div className="flex items-center gap-2 mb-3">
-              <AlertCircle className="h-5 w-5 text-amber-500" />
-              <h3 className="font-extrabold text-base">Catálogo de Dificuldades</h3>
-              <span className="text-xs text-muted-foreground">
-                Toque em uma dificuldade para abrir um plano de reforço com habilidades da matriz pedagógica.
-              </span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {CATALOGO_DIFICULDADES.map((d) => (
-                <button
-                  key={d.id}
-                  onClick={() => {
-                    setSearchQuery(d.busca);
-                    runSearch(d.busca);
-                  }}
-                  className="text-left p-3 rounded-2xl border-2 border-border bg-card hover:border-primary hover:bg-primary/5 transition-all"
-                >
-                  <div className="flex items-start gap-2">
-                    <span className="text-xl shrink-0">{d.emoji}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold text-sm">{d.titulo}</div>
-                      <div className="text-[11px] text-muted-foreground mt-0.5">
-                        {d.habilidades.join(" · ")}
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Relatório da criança — sempre no final da página */}
           <div className="pt-4 border-t-2 border-dashed border-indigo-200">
