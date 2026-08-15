@@ -74,7 +74,7 @@ Considere o perfil neurodivergente se informado: "${data.perfilNeuro ?? 'Não in
 
     // 3. Chamada exclusiva ao Gemini 1.5 Flash
     const responseText = await callGemini({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.7-flash",
       json: true,
       messages: [
         { role: "system", content: systemPrompt },
