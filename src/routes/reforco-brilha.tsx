@@ -186,7 +186,6 @@ function ReforcoBrilha() {
       toast.success("Parabéns! Sua evolução foi registrada.");
       setIsTeaching(false);
       setLessonContent(null);
-      loadGeneralStats();
     } catch (error) {
       console.error("Erro ao completar aula:", error);
       toast.error("Erro ao salvar progresso.");
