@@ -288,8 +288,10 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         .limit(20);
 
       if (cached && cached.length > 0) {
-        const cachedClean = (cached as RecursoExterno[]).filter(
-          (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
+        const cachedClean = dedupe(
+          (cached as RecursoExterno[]).filter(
+            (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
+          ),
         );
         return { resultados: cachedClean, fonte: "cache" as const, avisos: [] as AvisoFonteExterna[] };
       }
@@ -324,8 +326,9 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       if (arch[i]) resultados.push(arch[i]);
     }
 
-    // 3) salvar no cache
-    const cacheaveis = resultados;
+    // 3) salvar no cache (sem repetições)
+    const unicos = dedupe(resultados);
+    const cacheaveis = unicos;
 
 
 
@@ -343,5 +346,5 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       await supabase.from("rb_recursos_externos").insert(rows);
     }
 
-    return { resultados, fonte: "api" as const, avisos };
+    return { resultados: unicos, fonte: "api" as const, avisos };
   });
