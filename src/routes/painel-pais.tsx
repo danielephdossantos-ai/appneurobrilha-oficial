@@ -350,9 +350,15 @@ function PainelPremium() {
 
           {/* Right Column - Intelligence and Alerts */}
           <div className="space-y-6">
+            <motion.div variants={itemVariants} id="relatorios-pais">
+              <RelatoriosPais childId={activeChild.id} />
+            </motion.div>
+
             <motion.div variants={itemVariants}>
               <MissaoProvaManager childId={activeChild.id} />
             </motion.div>
+
+
 
             <motion.div variants={itemVariants}>
               <AgendaEstudos childId={activeChild.id} />
