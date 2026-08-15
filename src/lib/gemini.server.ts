@@ -35,7 +35,7 @@ export async function callGemini(opts: GeminiOptions) {
     })),
     generationConfig: {
       temperature: opts.temperature ?? 0.7,
-      maxOutputTokens: opts.max_tokens ?? 2048,
+      maxOutputTokens: opts.max_tokens ?? 4096,
       responseMimeType: opts.json ? "application/json" : "text/plain"
     }
   };
