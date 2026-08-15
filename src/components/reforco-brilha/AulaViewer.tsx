@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { useServerFn } from "@tanstack/react-start";
+import { gerarAulaReforcoIA } from "@/lib/ia-mentor-reforco.functions";
+import { useAppState } from "@/core/store";
+import { toast } from "sonner";
 import {
   X,
   ChevronLeft,
@@ -203,10 +207,42 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const gerar = useServerFn(gerarAulaReforcoIA);
+  const { activeChild } = useAppState();
+
   useEffect(() => {
     let alive = true;
     (async () => {
       setLoading(true);
+      
+      // Se for uma aula nova via IA
+      if (aulaId === "ia-new" && activeChild) {
+        try {
+          const res = await gerar({
+            data: {
+              dificuldade: titulo,
+              criancaId: activeChild.id
+            }
+          });
+          
+          if (!alive) return;
+          
+          const { data: pags } = await supabase
+            .from("rb_paginas_aula")
+            .select("id,ordem,tipo,titulo,conteudo")
+            .eq("aula_id", res.id)
+            .order("ordem", { ascending: true });
+            
+          setPaginas((pags || []) as Pagina[]);
+        } catch (e) {
+          console.error("Erro ao gerar aula sob demanda:", e);
+          toast.error("Falha ao gerar aula com IA");
+        } finally {
+          if (alive) setLoading(false);
+        }
+        return;
+      }
+
       const { data } = await supabase
         .from("rb_paginas_aula")
         .select("id,ordem,tipo,titulo,conteudo")
@@ -220,7 +256,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
     return () => {
       alive = false;
     };
-  }, [aulaId]);
+  }, [aulaId, activeChild, titulo, gerar]);
 
   const total = paginas.length;
   const atual = paginas[idx];

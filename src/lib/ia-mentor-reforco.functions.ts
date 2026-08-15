@@ -20,7 +20,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     let deficits = "Não informado";
     let hiperfoco = "Não informado";
     let nivelSuporte = "Geral";
-    let idadeCrianca = 7; // Default 7 anos se não encontrado
+    let idadeCrianca = 7;
 
     try {
       const { data: crianca } = await supabase
@@ -38,7 +38,6 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
         }
       }
       
-      // Tentar buscar anamnese detalhada se disponível
       const { data: anamnese } = await supabase
         .from("anamnese_v2")
         .select("responses")
@@ -52,12 +51,12 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
       console.warn("Falha ao carregar perfil da criança para IA:", e);
     }
 
+    // 1. Tentar encontrar no banco para acesso instantâneo
     try {
-      // 1. Tentar encontrar uma aula já gerada no banco (Reutilização)
       const { data: existente } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .select("*")
-        .filter("dificuldade_original", "eq", diffNorm)
+        .eq("dificuldade_original", diffNorm)
         .limit(1)
         .maybeSingle();
 
@@ -116,7 +115,7 @@ Estrutura da Aula:
 
     // 3. Chamada ao Gemini
     const responseText = await callGemini({
-      model: "gemini-3.7-flash",
+      model: "gemini-1.5-flash",
       json: true,
       messages: [
         { role: "system", content: systemPrompt },

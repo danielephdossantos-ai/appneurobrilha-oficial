@@ -204,7 +204,8 @@ function ReforcoBrilha() {
       const res = await searchReforcoBrilha(text);
       setSearchResult(res);
       if (!res.main) {
-        // Sem match no catálogo interno: o AulaInfinita assume e monta a aula com bibliotecas públicas.
+        // IA OBRIGATÓRIA: Se não houver no catálogo, gera agora.
+        setAulaAberta({ id: "ia-new", titulo: text });
       }
     } catch (e: any) {
       console.error("Busca Reforço Brilha:", e);
