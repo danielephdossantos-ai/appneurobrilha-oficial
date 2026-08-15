@@ -15,6 +15,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   useEffect(() => {
     let mounted = true;
+    let fallbackTimer: ReturnType<typeof setTimeout>;
     
     const checkSession = async () => {
       try {
@@ -38,7 +39,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
         }
       } catch (err) {
         console.error("AuthGuard: Session check failed or timed out:", err);
-        // If we timeout or fail, we assume unauthenticated to at least show the auth page
         if (mounted) {
           setAuthed(false);
           setReady(true);
@@ -48,6 +48,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     checkSession();
     
+    // Safety fallback: if nothing happened in 5 seconds, just show the app
+    fallbackTimer = setTimeout(() => {
+      if (mounted && !ready) {
+        console.warn("AuthGuard: Safety fallback triggered");
+        setReady(true);
+      }
+    }, 5000);
+
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       console.log("AuthGuard: Auth state change:", _e, !!session);
       if (mounted) {
@@ -57,6 +65,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     return () => {
       mounted = false;
+      clearTimeout(fallbackTimer);
       sub.subscription.unsubscribe();
     };
   }, []);
