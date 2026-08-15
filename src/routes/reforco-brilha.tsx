@@ -380,7 +380,6 @@ function ReforcoBrilha() {
           {/* A IAProfessorMentor agora é o motor central. O conteúdo anterior foi simplificado para evitar confusão. */}
         </div>
       ) : (
-      ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
           <button
             onClick={() => {
