@@ -376,25 +376,6 @@ function ReforcoBrilha() {
             initialQuery={searchQuery}
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
           />
-        </div>
-      ) : (
-                  <div className="h-16 w-16 rounded-2xl bg-primary text-white grid place-items-center shrink-0 shadow-glow">
-                    <Sparkles className="h-8 w-8 animate-pulse" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-black text-foreground">Gerar Trilha Exclusiva</h4>
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                      Não encontramos esta aula no catálogo. Toque aqui para a <b>IA Mentor</b> criar agora mesmo um guia passo a passo usando o <b>hiperfoco</b> do seu filho.
-                    </p>
-                    <div className="mt-4 flex items-center gap-2 text-primary font-black text-xs uppercase tracking-widest">
-                      <span>Começar Geração</span>
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
