@@ -51,21 +51,30 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
       console.warn("Falha ao carregar perfil da criança para IA:", e);
     }
 
-    // 1. Tentar encontrar no banco para acesso instantâneo
+    // 1. Tentar encontrar no banco para acesso instantâneo (PERSISTÊNCIA)
     try {
       const { data: existente } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .select("*")
         .eq("dificuldade_original", diffNorm)
+        .order("created_at", { ascending: false }) // Pega a mais recente
         .limit(1)
         .maybeSingle();
 
       if (existente) {
-        return { 
-          aula: existente.conteudo, 
-          origem: "reutilizada",
-          id: existente.id 
-        };
+        // Garantir que as páginas também existem
+        const { data: pagsExistentes } = await (supabase as any)
+          .from("rb_paginas_aula")
+          .select("id")
+          .eq("aula_id", existente.id);
+
+        if (pagsExistentes && pagsExistentes.length > 0) {
+          return { 
+            aula: existente.conteudo, 
+            origem: "reutilizada",
+            id: existente.id 
+          };
+        }
       }
     } catch (e) {
       console.warn("Busca no cache falhou:", e);
