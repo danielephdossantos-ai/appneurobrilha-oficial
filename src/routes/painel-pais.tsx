@@ -160,12 +160,7 @@ function PainelPremium() {
           >
             <Home className="h-4 w-4" /> Início
           </Link>
-          <button
-            onClick={() => window.history.forward()}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border-2 border-slate-200 hover:border-primary font-bold text-sm shadow-sm"
-          >
-            Avançar <ArrowRight className="h-4 w-4" />
-          </button>
+          {/* O botão 'Avançar' foi removido conforme solicitação por não ter utilidade nesta área */}
         </div>
 
         <DashboardHeader
