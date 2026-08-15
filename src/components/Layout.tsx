@@ -386,11 +386,6 @@ export function Shell({ children }: { children?: ReactNode }) {
             </div>
           </div>
 
-          <footer className="w-full py-2 text-center pointer-events-none mt-8">
-            <p className="text-[11px] font-medium text-slate-400 tracking-wider uppercase opacity-80">
-              by Daniele SA Santos
-            </p>
-          </footer>
         </main>
       </div>
     </div>
