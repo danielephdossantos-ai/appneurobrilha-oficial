@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Send, Brain, Loader2, PlayCircle, ReplayCcw, Database } from "lucide-react";
+import { Sparkles, Send, Brain, Loader2, PlayCircle, RotateCcw, Database } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { useServerFn } from "@tanstack/react-start";
 import { gerarAulaReforcoIA } from "@/lib/ia-mentor-reforco.functions";
@@ -105,7 +105,7 @@ export function IAProfessorMentor({ onAbrirAula }: Props) {
                 {resultado.origem === "reutilizada" ? "Sistema Contínuo (Reutilizado)" : "Trilha Inédita Gerada"}
               </span>
               {resultado.origem === "reutilizada" && (
-                <Database className="h-4 w-4 text-emerald-500" title="Recuperado do Supabase" />
+                <Database className="h-4 w-4 text-emerald-500" />
               )}
             </div>
             
@@ -144,7 +144,7 @@ export function IAProfessorMentor({ onAbrirAula }: Props) {
             }}
             className="w-full flex items-center justify-center gap-2 text-xs font-bold text-muted-foreground hover:text-primary transition-colors"
           >
-            <ReplayCcw className="h-3 w-3" />
+            <RotateCcw className="h-3 w-3" />
             DESCREVER OUTRA DIFICULDADE
           </button>
         </div>

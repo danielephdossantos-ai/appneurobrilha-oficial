@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * IA Mentor Reforço - Sistema de Geração de Aulas Contínuo
@@ -24,7 +24,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     
     // 2. Tentar encontrar uma aula já gerada no Supabase para essa dificuldade
     // Usamos o supabaseAdmin para busca global entre usuários (conforme pedido)
-    const { data: existente } = await supabaseAdmin
+    const { data: existente } = await supabase
       .from("rb_aulas_geradas_ia")
       .select("*")
       .textSearch("dificuldade_original", diffNorm)
@@ -56,7 +56,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     };
 
     // 4. Salvar no Supabase para reutilização futura
-    const { data: salva, error } = await supabaseAdmin
+    const { data: salva, error } = await supabase
       .from("rb_aulas_geradas_ia")
       .insert({
         dificuldade_original: diffNorm,
