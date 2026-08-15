@@ -129,7 +129,7 @@ const MascotStore = () => {
                  {/* Aqui entrarão os outros mascotes mentor IA se existirem no futuro */}
               </div>
             </motion.div>
-          ) : (
+          ) : activeTab === 'worlds' ? (
             <motion.div 
               key="worlds"
               initial={{ opacity: 0, y: 10 }}
@@ -189,6 +189,27 @@ const MascotStore = () => {
                   </motion.div>
                 );
               })}
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="achievements"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="space-y-8"
+            >
+              <div className="bg-white rounded-[2rem] p-8 border-4 border-primary/10 shadow-xl text-center">
+                <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Trophy className="w-10 h-10 text-amber-500" />
+                </div>
+                <h2 className="text-2xl font-black text-primary uppercase mb-2">Galeria de Troféus</h2>
+                <p className="text-muted-foreground font-medium mb-6">Suas conquistas aparecem aqui conforme você evolui!</p>
+                <Link to="/colecao-pip">
+                  <KidButton variant="primary" className="px-8 py-3 rounded-2xl font-black">
+                    VER TODA COLEÇÃO
+                  </KidButton>
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
