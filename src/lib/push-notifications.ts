@@ -56,13 +56,25 @@ async function saveSubscription(subscription: PushSubscription) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
 
-  // We store the subscription in a dedicated table
-  // The table 'push_subscriptions' must exist in Supabase
+  const subscriptionJSON = subscription.toJSON();
+  const endpoint = subscription.endpoint;
+  const auth = subscriptionJSON.keys?.auth || '';
+  const p256dh = subscriptionJSON.keys?.p256dh || '';
+
+  if (!endpoint || !auth || !p256dh) {
+    console.error('Invalid subscription object');
+    return;
+  }
+
+  // A tabela 'push_subscriptions' segue o esquema do Database["public"]["Tables"]
   const { error } = await supabase
     .from('push_subscriptions')
     .upsert({
       user_id: user.id,
-      subscription_json: JSON.stringify(subscription),
+      endpoint: endpoint,
+      auth: auth,
+      p256dh: p256dh,
+      user_agent: navigator.userAgent,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id' });
 
