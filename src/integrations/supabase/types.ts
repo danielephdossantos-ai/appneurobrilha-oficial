@@ -7183,30 +7183,39 @@ export type Database = {
       }
       reports: {
         Row: {
-          child_id: string | null
+          child_id: string
+          created_by: string | null
           data: Json | null
           generated_at: string | null
           id: string
           period_end: string | null
           period_start: string | null
+          summary: string | null
+          title: string | null
           type: string | null
         }
         Insert: {
-          child_id?: string | null
+          child_id: string
+          created_by?: string | null
           data?: Json | null
           generated_at?: string | null
           id?: string
           period_end?: string | null
           period_start?: string | null
+          summary?: string | null
+          title?: string | null
           type?: string | null
         }
         Update: {
-          child_id?: string | null
+          child_id?: string
+          created_by?: string | null
           data?: Json | null
           generated_at?: string | null
           id?: string
           period_end?: string | null
           period_start?: string | null
+          summary?: string | null
+          title?: string | null
           type?: string | null
         }
         Relationships: [
@@ -7214,7 +7223,7 @@ export type Database = {
             foreignKeyName: "reports_child_id_fkey"
             columns: ["child_id"]
             isOneToOne: false
-            referencedRelation: "children_profiles"
+            referencedRelation: "children"
             referencedColumns: ["id"]
           },
         ]
