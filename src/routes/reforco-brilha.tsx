@@ -150,7 +150,7 @@ function ReforcoBrilha() {
   const [skills, setSkills] = useState<SkillMastery[]>([]);
   const [pendingReviews, setPendingReviews] = useState<any[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(() => localStorage.getItem("rb_last_search") || "");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
   const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string } | null>(null);
@@ -196,8 +196,10 @@ function ReforcoBrilha() {
     const text = q.trim();
     if (!text) {
       setSearchResult(null);
+      localStorage.removeItem("rb_last_search");
       return;
     }
+    localStorage.setItem("rb_last_search", text);
     setIsSearching(true);
     try {
       const { searchReforcoBrilha } = await import("@/lib/reforco-brilha-search");
