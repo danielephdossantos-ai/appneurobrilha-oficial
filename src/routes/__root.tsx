@@ -132,6 +132,12 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useStopSpeechOnScroll();
+  
+  useEffect(() => {
+    import("@/lib/push-notifications").then(({ registerPushNotifications }) => {
+      registerPushNotifications();
+    });
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

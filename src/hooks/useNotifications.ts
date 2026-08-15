@@ -40,6 +40,7 @@ export function useNotifications() {
       const { data: auth } = await supabase.auth.getUser();
       const userId = auth?.user?.id;
       if (!userId) throw new Error("Faça login para enviar notificações.");
+      
       const { error } = await supabase.from("notifications").insert([
         {
           ...notif,
@@ -49,6 +50,31 @@ export function useNotifications() {
         },
       ]);
       if (error) throw error;
+
+      // Trigger Push Notification via API
+      try {
+        const { data: subs } = await supabase
+          .from('push_subscriptions')
+          .select('*')
+          .eq('user_id', userId);
+
+        if (subs && subs.length > 0) {
+          for (const sub of subs) {
+            await fetch('/api/public/send-push', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                subscription: sub,
+                title: notif.title,
+                message: notif.message,
+                url: '/notificacoes'
+              })
+            });
+          }
+        }
+      } catch (pushErr) {
+        console.error('Failed to trigger push:', pushErr);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
