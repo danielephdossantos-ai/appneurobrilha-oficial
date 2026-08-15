@@ -86,9 +86,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <Button variant="outline" size="sm" className="gap-2 hidden sm:flex">
           <Share2 className="h-4 w-4" /> Compartilhar com Terapeuta
         </Button>
-        <Button variant="default" size="sm" className="gap-2">
-          <Settings className="h-4 w-4" /> Configurações
-        </Button>
+        {/* O botão 'Configurações' foi removido conforme solicitação por não ter utilidade nesta área */}
       </div>
     </div>
   );
