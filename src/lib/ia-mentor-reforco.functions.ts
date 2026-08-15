@@ -76,9 +76,24 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
 
       if (!error && salva) {
         salvaId = salva.id;
+        
+        // 5. AUTO-GERAR PÁGINAS PARA A APOSTILA (AulaViewer)
+        // Isso resolve o erro "Esta aula ainda não tem páginas cadastradas"
+        const paginas = novaAula.passos.map((passo, index) => ({
+          aula_id: salvaId,
+          ordem: index + 1,
+          tipo: passo.tipo === "explicação" ? "explicacao" : 
+                passo.tipo === "exemplo" ? "exemplo" :
+                passo.tipo === "prática" ? "pratica_guiada" :
+                passo.tipo === "desafio" ? "avaliacao" : "proximos_passos",
+          titulo: passo.tipo.toUpperCase(),
+          conteudo: { texto: passo.texto }
+        }));
+
+        await (supabase as any).from("rb_paginas_aula").insert(paginas);
       }
     } catch (e) {
-      console.warn("Erro ao salvar nova aula na rb_aulas_geradas_ia:", e);
+      console.warn("Erro ao salvar nova aula ou páginas:", e);
     }
 
     return { 
