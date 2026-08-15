@@ -20,7 +20,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     let deficits = "Não informado";
     let hiperfoco = "Não informado";
     let nivelSuporte = "Geral";
-    let idadeCrianca = 7; // Default 7 anos se não encontrado
+    let idadeCrianca = 7;
 
     try {
       const { data: crianca } = await supabase
@@ -38,7 +38,6 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
         }
       }
       
-      // Tentar buscar anamnese detalhada se disponível
       const { data: anamnese } = await supabase
         .from("anamnese_v2")
         .select("responses")
@@ -52,12 +51,12 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
       console.warn("Falha ao carregar perfil da criança para IA:", e);
     }
 
+    // 1. Tentar encontrar no banco para acesso instantâneo
     try {
-      // 1. Tentar encontrar uma aula já gerada no banco (Reutilização)
       const { data: existente } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .select("*")
-        .filter("dificuldade_original", "eq", diffNorm)
+        .eq("dificuldade_original", diffNorm)
         .limit(1)
         .maybeSingle();
 
@@ -120,7 +119,13 @@ Estrutura da Aula:
       json: true,
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere um plano de reforço para a dificuldade: "${data.dificuldade}". Lembre-se de usar o hiperfoco: "${hiperfoco}" em tudo.` }
+        { role: "user", content: `Gere um guia completo e detalhado de aula de reforço para a dificuldade: "${data.dificuldade}". 
+        
+IMPORTANTE: 
+1. Não resuma. Crie explicações longas e didáticas.
+2. O hiperfoco "${hiperfoco}" deve ser o protagonista de cada exemplo e exercício.
+3. Se a criança tiver déficit de atenção mencionado em "${deficits}", use frases curtas e comandos claros.
+4. Garanta que a seção "passos" tenha no mínimo 5 etapas detalhadas (Explicação, Exemplo prático, Prática guiada, Desafio criativo e Revisão final).` }
       ]
     });
 
