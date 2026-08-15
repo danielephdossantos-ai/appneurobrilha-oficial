@@ -118,6 +118,35 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
       { role: "user" as const, content: data.mensagem },
     ];
 
+    // Módulo Reforço: Usa exclusivamente Gemini 1.5 Flash
+    if (data.modo === "plano-diario") { // Plano diário/Reforço no Tutor
+      try {
+        const { callGemini } = await import("./gemini.server");
+        const reply = await callGemini({
+          model: "gemini-1.5-flash",
+          messages: messages.map(m => ({ 
+            role: m.role as any, 
+            content: m.content 
+          })),
+          max_tokens: 1000,
+          temperature: 0.7,
+          json: true
+        });
+        
+        let resposta = reply;
+        let encerrarHoje = false;
+        try {
+          const parsed = JSON.parse(reply);
+          if (typeof parsed?.resposta === "string") resposta = parsed.resposta;
+          if (typeof parsed?.encerrar_hoje === "boolean") encerrarHoje = parsed.encerrar_hoje;
+        } catch {}
+        
+        return { ok: true, resposta, encerrarHoje };
+      } catch (e) {
+        console.error("[Tutor Gemini Error]", e);
+      }
+    }
+
     const { chatCompletionFallback } = await import("./ai-chat-fallback");
     const result = await chatCompletionFallback({
       messages,
