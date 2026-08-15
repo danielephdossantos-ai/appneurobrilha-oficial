@@ -59,13 +59,35 @@ export async function proximaMissao(
   if (todas.length === 0) return null;
 
   let concluidas = new Set<string>();
+  let ultimoAcessoCodigo: string | null = null;
+
   if (childId) {
-    const { data } = await supabase
+    const { data: progressoRows } = await supabase
       .from("escola_progresso")
-      .select("codigo_bncc, concluida")
-      .eq("child_id", childId)
-      .eq("concluida", true);
-    concluidas = new Set((data ?? []).map((r) => r.codigo_bncc));
+      .select("codigo_bncc, concluida, ultima_visita_em")
+      .eq("child_id", childId);
+    
+    const rows = (progressoRows ?? []) as Array<{ codigo_bncc: string; concluida: boolean | null; ultima_visita_em: string | null }>;
+    
+    rows.forEach(r => {
+      if (r.concluida) concluidas.add(r.codigo_bncc);
+    });
+
+    // Encontra a aula acessada por último (independente de estar concluída ou não, 
+    // mas priorizamos retomar o que não terminou ou o último progresso real)
+    const comVisita = rows
+      .filter(r => r.ultima_visita_em)
+      .sort((a, b) => new Date(b.ultima_visita_em!).getTime() - new Date(a.ultima_visita_em!).getTime());
+    
+    if (comVisita.length > 0) {
+      ultimoAcessoCodigo = comVisita[0].codigo_bncc;
+    }
+  }
+
+  // Prioridade 1: O que o aluno acessou por último (se existir no registro)
+  if (ultimoAcessoCodigo) {
+    const aulaUltima = getAula(ultimoAcessoCodigo);
+    if (aulaUltima) return metaDaAula(aulaUltima);
   }
 
   const serie = normalizarSerie(serieCrianca);
