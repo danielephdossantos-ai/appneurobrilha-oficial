@@ -15,14 +15,45 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   useEffect(() => {
     let mounted = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (!mounted) return;
-      setAuthed(!!data.session);
-      setReady(true);
-    });
+    
+    const checkSession = async () => {
+      try {
+        console.log("AuthGuard: Initial session check...");
+        
+        // Timeout the session check if it hangs
+        const sessionPromise = supabase.auth.getSession();
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error("Supabase hang")), 5000)
+        );
+        
+        const { data, error } = await (Promise.race([sessionPromise, timeoutPromise]) as any);
+        
+        if (error) throw error;
+        
+        console.log("AuthGuard: Session result:", !!data.session);
+        if (mounted) {
+          setAuthed(!!data.session);
+          setReady(true);
+        }
+      } catch (err) {
+        console.error("AuthGuard: Session check failed or timed out:", err);
+        // If we timeout or fail, we assume unauthenticated to at least show the auth page
+        if (mounted) {
+          setAuthed(false);
+          setReady(true);
+        }
+      }
+    };
+
+    checkSession();
+    
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      setAuthed(!!session);
+      console.log("AuthGuard: Auth state change:", _e, !!session);
+      if (mounted) {
+        setAuthed(!!session);
+      }
     });
+
     return () => {
       mounted = false;
       sub.subscription.unsubscribe();
@@ -32,7 +63,10 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   useEffect(() => {
     if (!ready) return;
     const isAuthRoute = location.pathname.startsWith("/auth");
-    if (!authed && !isAuthRoute) {
+    const isCallbackRoute = location.pathname.startsWith("/auth/callback");
+    
+    if (!authed && !isAuthRoute && !isCallbackRoute) {
+      console.log("AuthGuard: Redirecting to /auth");
       navigate({ to: "/auth", replace: true });
     }
   }, [ready, authed, location.pathname, navigate]);
@@ -40,7 +74,10 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   if (!ready) {
     return (
       <div className="min-h-screen grid place-items-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-sm text-muted-foreground animate-pulse">Iniciando ambiente seguro...</p>
+        </div>
       </div>
     );
   }
