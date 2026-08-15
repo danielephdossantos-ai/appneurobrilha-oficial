@@ -9,8 +9,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     dificuldade: z.string(),
     criancaId: z.string(),
-    perfilNeuro: z.string().optional(),
-    bnccContext: z.string().optional()
+    perfilNeuro: z.string().optional()
   }).parse(data))
   .handler(async ({ data }) => {
     const diffNorm = data.dificuldade.toLowerCase().trim();
@@ -91,9 +90,6 @@ Idade: ${idadeCrianca} anos
 Déficits/Diagnóstico: ${deficits}
 Hiperfoco/Interesses: ${hiperfoco}
 Nível de suporte/preferências: ${nivelSuporte}
-
-CONTEÚDO DA BNCC (Se disponível):
-${data.bnccContext || "Pesquisa livre de tema pedagógico"}
 
 DIRETRIZES DE CONTEÚDO (OBRIGATÓRIO):
 1. PERSISTÊNCIA: A aula deve ser estruturada para ser salva e consultada múltiplas vezes.

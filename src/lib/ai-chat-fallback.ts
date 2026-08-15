@@ -1,5 +1,5 @@
 // Helper compartilhado: chat completion com FALLBACK
-// Primário: Groq (llama-3.3-70b-specdec) — mais confiável no dia a dia
+// Primário: Groq (llama-3.3-70b-versatile) — mais confiável no dia a dia
 // Reserva: Lovable AI Gateway (Gemini 3 Flash) — só quando Groq falha
 // Quando o primário estoura limite (429), créditos (402) ou dá erro,
 // cai automaticamente pro reserva. Só é chamado do servidor.
@@ -13,7 +13,7 @@ export type ChatCallOptions = {
   messages: ChatMsg[];
   // Model overrides opcionais
   lovableModel?: string; // default google/gemini-3-flash-preview
-  groqModel?: string; // default llama-3.3-70b-specdec
+  groqModel?: string; // default llama-3.3-70b-versatile
   temperature?: number;
   max_tokens?: number;
   json?: boolean; // response_format json_object
@@ -67,7 +67,7 @@ async function callGroq(opts: ChatCallOptions): Promise<
   if (!key) return { ok: false, motivo: "erro", detalhe: "GROQ_API_KEY ausente" };
   try {
     const body: Record<string, unknown> = {
-      model: opts.groqModel ?? "llama-3.3-70b-specdec",
+      model: opts.groqModel ?? "llama-3.3-70b-versatile",
       messages: opts.messages,
       max_tokens: opts.max_tokens ?? 600,
       temperature: opts.temperature ?? 0.7,
