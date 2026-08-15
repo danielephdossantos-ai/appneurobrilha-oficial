@@ -443,7 +443,7 @@ Gere o JSON com as 3 dicas progressivas (NUNCA a resposta) usando o hiperfoco da
       max_tokens: 1100,
       temperature: 0.5,
       json: true,
-      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile",
+      groqModel: hasImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-specdec",
       label: "missao-tarefa",
     });
     if (!r.ok) return { ok: false as const, error: r.motivo, resultado: null };
