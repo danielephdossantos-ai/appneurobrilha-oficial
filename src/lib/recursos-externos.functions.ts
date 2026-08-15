@@ -252,6 +252,23 @@ async function buscarArchive(query: string): Promise<RecursoExterno[]> {
 
 // Khan Academy e YouTube EDU removidos: bloqueiam iframe / são apenas links de busca.
 
+// remove recursos repetidos (mesma URL ou mesmo título na mesma fonte)
+function dedupe(lista: RecursoExterno[]): RecursoExterno[] {
+  const vistos = new Set<string>();
+  const out: RecursoExterno[] = [];
+  for (const r of lista) {
+    if (!r?.url) continue;
+    const urlKey = (r.url || "").trim().toLowerCase().replace(/[?#].*$/, "").replace(/\/$/, "");
+    const tituloKey = `${r.fonte}::${normalize(r.titulo || "")}`;
+    if (vistos.has(urlKey) || vistos.has(tituloKey)) continue;
+    vistos.add(urlKey);
+    vistos.add(tituloKey);
+    out.push(r);
+  }
+  return out;
+}
+
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
@@ -271,8 +288,10 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         .limit(20);
 
       if (cached && cached.length > 0) {
-        const cachedClean = (cached as RecursoExterno[]).filter(
-          (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
+        const cachedClean = dedupe(
+          (cached as RecursoExterno[]).filter(
+            (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
+          ),
         );
         return { resultados: cachedClean, fonte: "cache" as const, avisos: [] as AvisoFonteExterna[] };
       }
@@ -307,8 +326,9 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       if (arch[i]) resultados.push(arch[i]);
     }
 
-    // 3) salvar no cache
-    const cacheaveis = resultados;
+    // 3) salvar no cache (sem repetições)
+    const unicos = dedupe(resultados);
+    const cacheaveis = unicos;
 
 
 
@@ -326,5 +346,5 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       await supabase.from("rb_recursos_externos").insert(rows);
     }
 
-    return { resultados, fonte: "api" as const, avisos };
+    return { resultados: unicos, fonte: "api" as const, avisos };
   });

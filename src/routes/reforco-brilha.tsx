@@ -51,7 +51,6 @@ import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
-import { IAProfessorMentor } from "@/components/reforco-brilha/IAProfessorMentor";
 
 
 class ReforcoErrorBoundary extends Component<
@@ -205,8 +204,8 @@ function ReforcoBrilha() {
       const { searchReforcoBrilha } = await import("@/lib/reforco-brilha-search");
       const res = await searchReforcoBrilha(text);
       setSearchResult(res);
-      if (!res.main) {
-        // IA OBRIGATÓRIA: Se não houver no catálogo, gera agora.
+      // IA OBRIGATÓRIA: sem habilidade no catálogo OU sem aulas cadastradas → gera agora.
+      if (!res.main || res.aulas.length === 0) {
         setAulaAberta({ id: "ia-new", titulo: text, dificuldade: text });
       }
     } catch (e: any) {
@@ -375,7 +374,7 @@ function ReforcoBrilha() {
           <Card className={`bg-gradient-to-br from-primary/10 to-transparent border-primary/20 ${adaptiveUI.maxItemsPerScreen <= 2 ? "p-4" : ""}`}>
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-primary">
               <Search className="h-5 w-5" />
-              Busca Pedagógica (BNCC e Banco de Aulas)
+              Professor Mentor · O que seu filho precisa aprender hoje?
             </h3>
             <div className="relative">
               <input
@@ -383,7 +382,7 @@ function ReforcoBrilha() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
-                placeholder='Pesquise por habilidade ou código BNCC...'
+                placeholder='Escreva a dificuldade, a habilidade ou o código BNCC. Ex: meu filho não reconhece números'
                 className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
@@ -400,12 +399,11 @@ function ReforcoBrilha() {
                 )}
               </button>
             </div>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Escreva com suas palavras. Se não houver aula pronta no banco, o <b>Professor Mentor (IA)</b> gera a aula
+              automaticamente com o hiperfoco e o perfil da criança.
+            </p>
           </Card>
-
-
-          <IAProfessorMentor
-            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo, dificuldade: titulo })}
-          />
 
 
 
@@ -508,6 +506,7 @@ function ReforcoBrilha() {
                 </div>
               </Card>
 
+              {searchResult.aulas.length > 0 && (
               <PlanoIntervencao
                 habilidade={{
                   id: searchResult.main.id,
@@ -530,6 +529,7 @@ function ReforcoBrilha() {
                 }))}
                 onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
               />
+              )}
 
               <OrientacoesFamilia
                 habilidadeId={searchResult.main.id}
