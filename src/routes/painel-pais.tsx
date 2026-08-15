@@ -11,6 +11,7 @@ import { RoutineManager } from "@/components/responsible/RoutineManager";
 import { AdaptivePlan } from "@/components/responsible/AdaptivePlan";
 import { FocusChart } from "@/components/responsible/FocusChart";
 import { AgendaEstudos } from "@/components/responsible/AgendaEstudos";
+import { RelatoriosPais } from "@/components/responsible/RelatoriosPais";
 import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
 import { ResponsibleIntelligence } from "@/modules/parental/intelligence";
 import { motion } from "framer-motion";
@@ -349,9 +350,15 @@ function PainelPremium() {
 
           {/* Right Column - Intelligence and Alerts */}
           <div className="space-y-6">
+            <motion.div variants={itemVariants} id="relatorios-pais">
+              <RelatoriosPais childId={activeChild.id} />
+            </motion.div>
+
             <motion.div variants={itemVariants}>
               <MissaoProvaManager childId={activeChild.id} />
             </motion.div>
+
+
 
             <motion.div variants={itemVariants}>
               <AgendaEstudos childId={activeChild.id} />
