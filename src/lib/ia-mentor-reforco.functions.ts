@@ -51,28 +51,39 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
       console.warn("Falha ao carregar perfil da criança para IA:", e);
     }
 
-    // 1. Tentar encontrar no banco para acesso instantâneo
+    // 1. Tentar encontrar no banco para acesso instantâneo (PERSISTÊNCIA)
     try {
       const { data: existente } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .select("*")
         .eq("dificuldade_original", diffNorm)
+        .order("created_at", { ascending: false }) // Pega a mais recente
         .limit(1)
         .maybeSingle();
 
       if (existente) {
-        return { 
-          aula: existente.conteudo, 
-          origem: "reutilizada",
-          id: existente.id 
-        };
+        // Garantir que as páginas também existem
+        const { data: pagsExistentes } = await (supabase as any)
+          .from("rb_paginas_aula")
+          .select("id")
+          .eq("aula_id", existente.id);
+
+        if (pagsExistentes && pagsExistentes.length > 0) {
+          return { 
+            aula: existente.conteudo, 
+            origem: "reutilizada",
+            id: existente.id 
+          };
+        }
       }
     } catch (e) {
       console.warn("Busca no cache falhou:", e);
     }
 
-    // 2. Prompt do Sistema conforme solicitação do usuário
-    const systemPrompt = `Você é um especialista em neuroeducação, psicopedagogia e terapeuta multidisciplinar. Seu objetivo é criar um guia de aula prático, didático e acolhedor para a mãe ensinar seu filho em casa.
+    // 2. Prompt do Sistema Profissional (Psicopedagogia e Neuroeducação)
+    const systemPrompt = `Você é um Especialista em Psicopedagogia e Neuroeducação de alto nível.
+Seu objetivo é criar um guia de aula denso, didático e prático para a mãe ensinar seu filho em casa.
+A aula deve ser um guia completo e profundo, não um resumo.
 
 Perfil da Criança:
 Idade: ${idadeCrianca} anos
@@ -80,52 +91,62 @@ Déficits/Diagnóstico: ${deficits}
 Hiperfoco/Interesses: ${hiperfoco}
 Nível de suporte/preferências: ${nivelSuporte}
 
-REGRAS DE RECOMENDAÇÕES POR IDADE:
-Ao sugerir vídeos ou links de apoio, verifique rigorosamente a idade da criança: ${idadeCrianca}.
-- Se for entre 3 e 9 anos: Retorne APENAS sugestões de vídeos infantis/lúdicos do YouTube (canais educativos, canções pedagógicas, historinhas animadas). NENHUMA sugestão de Wikipedia, artigos longos ou enciclopédias é permitida.
-- Se for entre 10 e 15 anos: Retorne videoaulas de nivelamento (canais de professores, resumos visuais) e pesquisas em sites como Wikipedia, Brasil Escola e portais educativos adequados.
+DIRETRIZES DE CONTEÚDO (OBRIGATÓRIO):
+1. PERSISTÊNCIA: A aula deve ser estruturada para ser salva e consultada múltiplas vezes.
+2. DIDÁTICA: Use uma linguagem que a mãe entenda, mas com base científica sólida.
+3. ADAPTAÇÃO AO DIAGNÓSTICO: Se a criança tem TDAH, use tarefas curtas e multissensoriais. Se for Autismo, foque em previsibilidade e apoio visual. Se for Dislexia, foque em instrução fônica e jogos auditivos.
+4. OBRIGATORIEDADE DO HIPERFOCO: O tema central de TODA a aula (exemplos, estorinhas, analogias) DEVE ser o hiperfoco da criança: "${hiperfoco}".
 
-Instruções de Personalização:
-Adapte a linguagem, o ritmo da explicação e a abordagem aos déficits identificados.
-USO OBRIGATÓRIO DO HIPERFOCO: Crie todos os exemplos, historinhas e atividades utilizando o hiperfoco da criança como tema central.
+REGRAS DE RECURSOS POR IDADE:
+- 3 a 9 anos: Recomendar exclusivamente vídeos infantis educativos do YouTube. PROIBIDO Wikipedia ou textos acadêmicos.
+- 10 a 15 anos: Recomendar videoaulas didáticas do YouTube e sites de pesquisa educativos (Wikipedia, Brasil Escola, etc).
 
 A resposta DEVE ser um JSON no seguinte formato:
 {
-  "titulo": "Título da Aula",
-  "objetivo": "O que a criança vai aprender",
-  "visao_terapeuta": "Breve orientação para a mãe sobre como conduzir o momento com base nas necessidades neurodivergentes do filho.",
-  "dica_de_ouro": "O que fazer se a criança perder o foco ou se frustrar.",
-  "recursos_apoio": [
-    { "titulo": "Nome do Vídeo/Link", "url": "URL sugerida (YouTube/Wikipedia conforme regras)", "tipo": "video|texto" }
-  ],
-  "passos": [
-    { "tipo": "explicação", "texto": "..." },
-    { "tipo": "exemplo", "texto": "..." },
-    { "tipo": "prática", "texto": "..." },
-    { "tipo": "desafio", "texto": "..." },
-    { "tipo": "revisão", "texto": "..." }
-  ]
-}
+  "titulo": "Título Criativo usando o Hiperfoco",
+  "objetivo": "Objetivo pedagógico claro",
+  "capitulo1": {
+    "titulo": "Capítulo 1 · Orientação para a Mãe (Como Ensinar)",
+    "conteudo": "Explicação da metodologia pedagógica em linguagem simples, orientando exatamente o que falar, o tom de voz e como conduzir a atividade."
+  },
+  "capitulo2": {
+    "titulo": "Capítulo 2 · Adaptação com o Hiperfoco",
+    "conteudo": "Integração profunda do hiperfoco em toda a explicação e analogias da aula."
+  },
+  "capitulo3": {
+    "titulo": "Capítulo 3 · Adaptação ao Diagnóstico/Déficit",
+    "conteudo": "Como adaptar a didática especificamente para as necessidades neurodivergentes desta criança."
+  },
+  "capitulo4": {
+    "titulo": "Capítulo 4 · Atividades Práticas e Brincadeiras",
+    "atividades": [
+      { "nome": "Atividade 1", "passo_a_passo": "Detalhes lúdicos usando objetos do dia a dia ou o hiperfoco." },
+      { "nome": "Atividade 2", "passo_a_passo": "..." },
+      { "nome": "Atividade 3", "passo_a_passo": "..." }
+    ]
+  },
+  "capitulo5": {
+    "titulo": "Capítulo 5 · Avaliação e Fixação",
+    "perguntas": [
+      { "pergunta": "...", "resposta_explicada": "Gabarito com orientação sobre o que fazer se a criança errar." }
+    ]
+  },
+  "capitulo6": {
+    "titulo": "Capítulo 6 · Materiais e Vídeos",
+    "recursos": [
+      { "titulo": "...", "url": "...", "tipo": "video|texto" }
+    ]
+  }
+}`;
 
-Estrutura da Aula:
-1. Visão Terapeuta: Orientação pedagógica.
-2. Passo a Passo: Usando hiperfoco.
-3. Recursos de Apoio: Conforme REGRAS DE IDADE acima.
-4. Dica de Ouro: Manejo de comportamento.`;
-
-    // 3. Chamada ao Gemini
+    // 3. Chamada ao Gemini 3.7 Flash
     const responseText = await callGemini({
       model: "gemini-3.7-flash",
       json: true,
+      max_tokens: 4096, // Aumento de tokens para aulas densas
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere um guia completo e detalhado de aula de reforço para a dificuldade: "${data.dificuldade}". 
-        
-IMPORTANTE: 
-1. Não resuma. Crie explicações longas e didáticas.
-2. O hiperfoco "${hiperfoco}" deve ser o protagonista de cada exemplo e exercício.
-3. Se a criança tiver déficit de atenção mencionado em "${deficits}", use frases curtas e comandos claros.
-4. Garanta que a seção "passos" tenha no mínimo 5 etapas detalhadas (Explicação, Exemplo prático, Prática guiada, Desafio criativo e Revisão final).` }
+        { role: "user", content: `Gere uma aula de reforço completa, profunda e profissional para a dificuldade: "${data.dificuldade}". Lembre-se: texto longo e explicativo, sem resumos superficiais.` }
       ]
     });
 
@@ -133,7 +154,7 @@ IMPORTANTE:
     let salvaId = "temp-" + Date.now();
 
     try {
-      // 4. Salvar no Supabase para reutilização global
+      // 4. Salvar no Supabase (Persistência garantida)
       const { data: salva, error } = await (supabase as any)
         .from("rb_aulas_geradas_ia")
         .insert({
@@ -147,37 +168,61 @@ IMPORTANTE:
       if (!error && salva) {
         salvaId = salva.id;
         
-        // 5. AUTO-GERAR PÁGINAS PARA A APOSTILA
+        // 5. Mapear Capítulos para rb_paginas_aula
         const paginas = [
-          // Página inicial de orientações
           {
             aula_id: salvaId,
-            ordem: 0,
+            ordem: 1,
             tipo: "explicacao",
-            titulo: "ORIENTAÇÕES TERAPÊUTICAS",
+            titulo: novaAula.capitulo1.titulo,
+            conteudo: { texto: novaAula.capitulo1.conteudo }
+          },
+          {
+            aula_id: salvaId,
+            ordem: 2,
+            tipo: "exemplo",
+            titulo: novaAula.capitulo2.titulo,
+            conteudo: { texto: novaAula.capitulo2.conteudo }
+          },
+          {
+            aula_id: salvaId,
+            ordem: 3,
+            tipo: "dicas_familia",
+            titulo: novaAula.capitulo3.titulo,
+            conteudo: { texto: novaAula.capitulo3.conteudo }
+          },
+          {
+            aula_id: salvaId,
+            ordem: 4,
+            tipo: "pratica_guiada",
+            titulo: novaAula.capitulo4.titulo,
             conteudo: { 
-              texto: novaAula.visao_terapeuta,
-              dica_ouro: novaAula.dica_de_ouro 
+              texto: "Siga o passo a passo das atividades abaixo:",
+              passos: novaAula.capitulo4.atividades.map((a: any) => `${a.nome}: ${a.passo_a_passo}`)
             }
           },
-          // Página de recursos de apoio (se houver)
-          ...(novaAula.recursos_apoio?.length ? [{
+          {
             aula_id: salvaId,
-            ordem: 1,
-            tipo: "video_apoio",
-            titulo: "MATERIAIS COMPLEMENTARES",
-            conteudo: { links: novaAula.recursos_apoio }
-          }] : []),
-          ...novaAula.passos.map((passo: any, index: number) => ({
+            ordem: 5,
+            tipo: "avaliacao",
+            titulo: novaAula.capitulo5.titulo,
+            conteudo: { 
+              perguntas: novaAula.capitulo5.perguntas.map((p: any) => ({
+                pergunta: p.pergunta,
+                resposta: p.resposta_explicada
+              }))
+            }
+          },
+          {
             aula_id: salvaId,
-            ordem: index + (novaAula.recursos_apoio?.length ? 2 : 1),
-            tipo: passo.tipo === "explicação" ? "explicacao" : 
-                  passo.tipo === "exemplo" ? "exemplo" :
-                  passo.tipo === "prática" ? "pratica_guiada" :
-                  passo.tipo === "desafio" ? "avaliacao" : "proximos_passos",
-            titulo: (passo.tipo || "ATIVIDADE").toUpperCase(),
-            conteudo: { texto: passo.texto }
-          }))
+            ordem: 6,
+            tipo: "video",
+            titulo: novaAula.capitulo6.titulo,
+            conteudo: { 
+              texto: "Materiais recomendados para esta aula:",
+              bullets: novaAula.capitulo6.recursos.map((r: any) => `${r.titulo}: ${r.url}`)
+            }
+          }
         ];
 
         await (supabase as any).from("rb_paginas_aula").insert(paginas);
