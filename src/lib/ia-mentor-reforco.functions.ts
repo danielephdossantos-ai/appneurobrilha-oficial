@@ -189,7 +189,7 @@ A resposta DEVE ser um JSON no seguinte formato:
             titulo: novaAula.capitulo4.titulo,
             conteudo: { 
               texto: "Siga o passo a passo das atividades abaixo:",
-              passos: novaAula.capitulo4.atividades.map(a => `${a.nome}: ${a.passo_a_passo}`)
+              passos: novaAula.capitulo4.atividades.map((a: any) => `${a.nome}: ${a.passo_a_passo}`)
             }
           },
           {
@@ -198,7 +198,7 @@ A resposta DEVE ser um JSON no seguinte formato:
             tipo: "avaliacao",
             titulo: novaAula.capitulo5.titulo,
             conteudo: { 
-              perguntas: novaAula.capitulo5.perguntas.map(p => ({
+              perguntas: novaAula.capitulo5.perguntas.map((p: any) => ({
                 pergunta: p.pergunta,
                 resposta: p.resposta_explicada
               }))
@@ -211,7 +211,7 @@ A resposta DEVE ser um JSON no seguinte formato:
             titulo: novaAula.capitulo6.titulo,
             conteudo: { 
               texto: "Materiais recomendados para esta aula:",
-              bullets: novaAula.capitulo6.recursos.map(r => `${r.titulo}: ${r.url}`)
+              bullets: novaAula.capitulo6.recursos.map((r: any) => `${r.titulo}: ${r.url}`)
             }
           }
         ];
@@ -221,6 +221,13 @@ A resposta DEVE ser um JSON no seguinte formato:
     } catch (e) {
       console.error("Erro ao persistir aula do Gemini:", e);
     }
+
+    return { 
+      aula: novaAula, 
+      origem: "gerada_gemini",
+      id: salvaId 
+    };
+  });
 
     return { 
       aula: novaAula, 
