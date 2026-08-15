@@ -7,10 +7,6 @@ import { toast } from "sonner";
 import { useAppState } from "@/core/store";
 import { searchReforcoBrilha } from "@/lib/reforco-brilha-search";
 
-interface Props {
-  onAbrirAula?: (id: string, titulo: string) => void;
-  initialQuery?: string;
-}
 
 export function IAProfessorMentor({ onAbrirAula }: { onAbrirAula?: (id: string, titulo: string) => void }) {
   const { activeChild } = useAppState();
