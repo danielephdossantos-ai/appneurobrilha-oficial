@@ -402,8 +402,9 @@ function MobileNav({ path }: { path: string }) {
   const navigate = useNavigate();
   const items = [
     { to: "/", icon: Home, label: "Início" },
-    { to: "/neuro-treino", icon: Brain, label: "Treino" },
-    { to: "/brilha-vida", icon: Heart, label: "Brilha Vida" },
+    { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
+    { to: "/neuro-treino", icon: Brain, label: "Neuro" },
+    { to: "/brilha-vida", icon: Heart, label: "Vida" },
   ];
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
