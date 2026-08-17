@@ -166,12 +166,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     instrucao: "Toque em todos os objetos pedidos que passarem voando!",
   },
 
-    emoji: "👐",
-    grupo: "Fala e Som",
-    cor: "from-coral/25 to-sun/5",
-    objetivo: "Contagem, sílaba inicial, sílaba final e formação silábica",
-    instrucao: "Leia a tarefa e toque na figura certa.",
-  },
   "compreensao-leitora": {
     slug: "compreensao-leitora",
     nome: "Compreensão Leitora",
@@ -209,6 +203,7 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Memória associativa direta",
     instrucao: "Vire duas cartas para encontrar os pares iguais.",
   },
+
 
   "mosaico-de-formas": {
     slug: "mosaico-de-formas",
