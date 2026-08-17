@@ -87,6 +87,7 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
 
     const payload = {
       child_id: data.childId,
+      parent_id: user.id,
       title: data.title,
       description: data.description,
       type: data.type,
