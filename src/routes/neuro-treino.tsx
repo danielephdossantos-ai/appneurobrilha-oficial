@@ -244,6 +244,50 @@ function Treino() {
   return (
     <Shell>
       <div className="pb-8">
+        {/* My First English */}
+        <section className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-pink-500 p-2 rounded-xl text-white">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">My First English</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <Link 
+              to="/escola-brilha/ingles-ei"
+              className="bg-white border-2 border-slate-100 rounded-3xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all active:scale-95"
+            >
+              <div className="w-20 h-20 mb-2">
+                <img src="/assets/hiperfocos/ingles.png" alt="Inglês" className="w-full h-full object-contain" />
+              </div>
+              <span className="text-xs font-bold text-slate-600">Começar Aula</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* Matemática Kawaii */}
+        <section className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-blue-500 p-2 rounded-xl text-white">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Matemática Kawaii</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <Link 
+              to="/escola-brilha/matematica-ei"
+              className="bg-white border-2 border-slate-100 rounded-3xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all active:scale-95"
+            >
+              <div className="w-20 h-20 mb-2">
+                <img src="/assets/hiperfocos/matematica.png" alt="Matemática" className="w-full h-full object-contain" />
+              </div>
+              <span className="text-xs font-bold text-slate-600">Começar Aula</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* Repetir para os outros conforme solicitado... */}
+
         {/* ── CABEÇALHO CONSULTÓRIO ──────────────────────────────── */}
         <div className="relative rounded-3xl overflow-hidden mb-6 bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-950 dark:to-slate-900 p-5 shadow-xl">
           <div
