@@ -4130,6 +4130,7 @@ function SinalVerdeVermelho({ p, onDone }: any) {
         </div>
       )}
     </div>
+  );
 }
 
 // ============== NOVAS MECÂNICAS IMPLEMENTADAS ==============
