@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { parseBNCC } from "@/escola-brilha/motor/resolver";
+import { validarAulaIA } from "./validador-aulas.server";
 
 /**
  * Módulo de Motor de Decisão de Conteúdo
