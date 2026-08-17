@@ -1,4 +1,5 @@
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
+import { useNavigationStore } from "@/lib/navigation-context";
 import { Shell } from "@/components/Layout";
 import { Component, ReactNode, useEffect } from "react";
 import {
@@ -653,6 +654,13 @@ function Treino() {
                         key={slug}
                         to="/neuro-treino/$slug"
                         params={{ slug }}
+                        onClick={() => {
+                          useNavigationStore.getState().setContext({
+                            originRoute: "/neuro-treino",
+                            originModule: "neuro-treino",
+                            timestamp: Date.now(),
+                          });
+                        }}
                         className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
                       >
                         {/* Favoritar */}
