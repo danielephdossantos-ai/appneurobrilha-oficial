@@ -2198,6 +2198,8 @@ export const GRUPOS = [
       "copiar-figura",
       "alvo-movel",
       "tracado-letras",
+      
+      
     ] as CategoriaSlug[],
   },
   {
