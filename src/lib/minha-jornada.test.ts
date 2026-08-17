@@ -3,21 +3,15 @@ import { adicionarItemJornada } from "./minha-jornada-orquestrador";
 import { supabase } from "@/integrations/supabase/client";
 
 vi.mock("@/integrations/supabase/client", () => {
-  const mockSingle = vi.fn();
-  const mockUpsert = vi.fn().mockReturnThis();
-  const mockSelect = vi.fn().mockReturnThis();
-  const mockEq = vi.fn().mockReturnThis();
-  const mockFrom = vi.fn().mockReturnThis();
-  
-  return {
-    supabase: {
-      from: mockFrom,
-      select: mockSelect,
-      eq: mockEq,
-      upsert: mockUpsert,
-      single: mockSingle,
-    },
+  const m = {
+    from: vi.fn().mockReturnThis(),
+    select: vi.fn().mockReturnThis(),
+    eq: vi.fn().mockReturnThis(),
+    upsert: vi.fn().mockReturnThis(),
+    single: vi.fn(),
+    order: vi.fn().mockReturnThis(),
   };
+  return { supabase: m };
 });
 
 describe("Minha Jornada Orquestrador - Fundação", () => {
