@@ -41,7 +41,7 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       .eq("codigo_bncc", data.codigoBNCC)
       .eq("serie", data.serie || bncc.ano)
       .eq("nivel", data.nivelAtual)
-      .eq("status", "approved")
+      .eq("status", "approved" as any)
       .maybeSingle();
 
     if (existente) {
@@ -72,7 +72,7 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       .eq("codigo_bncc", data.codigoBNCC)
       .eq("serie", data.serie || bncc.ano)
       .eq("nivel", data.nivelAtual + 1)
-      .eq("status", "approved")
+      .eq("status", "approved" as any)
       .maybeSingle();
       
     if (nivelSeguinte) {
@@ -112,6 +112,10 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       status: "necessita_geracao", 
       codigoBNCC: data.codigoBNCC,
       nivel: data.nivelAtual,
+      childId: data.childId,
+      serie: data.serie || bncc.ano,
+      disciplina: bncc.disciplina,
+      idade: data.idade,
       motivo: "Nenhum conteúdo adequado encontrado na biblioteca permanente."
     };
   });
@@ -121,9 +125,115 @@ async function registrarLogDecisao(childId: string, log: any) {
   await supabase.from("motor_decisao_logs").insert({
     child_id: childId,
     ...log
-  });
+  } as any);
 }
 
+/**
+ * Módulo de Geração Pedagógica Gemini
+ * Exclusivo para geração de novas aulas BNCC
+ */
+export const gerarAulaGemini = createServerFn({ method: "POST" })
+  .inputValidator((data) => z.object({
+    childId: z.string(),
+    codigoBNCC: z.string(),
+    nivel: z.number(),
+    idade: z.number(),
+    serie: z.string(),
+    disciplina: z.string(),
+    objetivo: z.string().optional()
+  }).parse(data))
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { callGemini } = await import("./gemini.server");
+    
+    // 1. Buscar perfil neuro da criança para personalização
+    const { data: profile } = await supabase
+      .from("children_profiles" as any)
+      .select("*, anamnese_v2:anamnese_v2(*)")
+      .eq("id", data.childId)
+      .maybeSingle();
+
+    // 2. Preparar Prompt Estruturado (Instrução 5/8)
+    const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
+Gere uma AULA COMPLETA em JSON estruturado para uma criança.
+
+DADOS DO ALUNO:
+- Idade: ${data.idade} anos
+- Série: ${data.serie}
+- Nível: ${data.nivel} (1: Iniciante, 2: Prática, 3: Consolidação, 4: Maestria)
+- Perfil Neuro: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
+
+OBJETIVO PEDAGÓGICO:
+- Disciplina: ${data.disciplina}
+- Código BNCC: ${data.codigoBNCC}
+- Objetivo Específico: ${data.objetivo || "Desenvolver a habilidade proposta pela BNCC"}
+
+REGRAS OBRIGATÓRIAS:
+1. NÃO invente códigos BNCC. Use rigorosamente ${data.codigoBNCC}.
+2. NÃO altere idade ou série.
+3. PROIBIDO o uso de EMOJIS (distração visual para neurodivergentes).
+4. Use linguagem infantil adequada para ${data.idade} anos.
+5. Se idade <= 6 anos: Foco em imagens (descreva-as como objetos JSON).
+
+ESTRUTURA DO JSON (DEVE SER VÁLIDO):
+{
+  "titulo": "Título lúdico",
+  "objetivo": "...",
+  "capitulos": [
+    { "ordem": 1, "tipo": "introducao", "conteudo": "..." },
+    { "ordem": 2, "tipo": "explicacao", "conteudo": "..." },
+    { "ordem": 3, "tipo": "exemplo", "conteudo": "..." },
+    { "ordem": 4, "tipo": "atividade_guiada", "conteudo": "...", "atividade": { "pergunta": "...", "opcoes": [], "correta": 0 } },
+    { "ordem": 5, "tipo": "atividade_independente", "conteudo": "..." },
+    { "ordem": 6, "tipo": "desafio", "conteudo": "..." },
+    { "ordem": 7, "tipo": "revisao", "conteudo": "..." },
+    { "ordem": 8, "tipo": "avaliacao", "conteudo": "...", "questoes": [] },
+    { "ordem": 9, "tipo": "feedback", "conteudo": "..." }
+  ],
+  "gabarito": { ... },
+  "criterios_conclusao": "..."
+}
+
+Retorne APENAS o JSON.`;
+
+    // 3. Chamar Gemini através do helper centralizado
+    const text = await callGemini({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Gere a aula para o código ${data.codigoBNCC} nível ${data.nivel}` }
+      ],
+      model: "gemini-1.5-flash",
+      temperature: 0.2,
+      json: true
+    });
+
+    let aulaGerada;
+    try {
+      aulaGerada = JSON.parse(text);
+    } catch (e) {
+      console.error("Gemini gerou JSON inválido:", text);
+      throw new Error("Falha na estruturação da aula (JSON inválido)");
+    }
+
+    // 4. Persistência Automática (Implementação 2/8)
+    const { data: salva, error: saveError } = await supabase
+      .from("aulas_geradas")
+      .insert({
+        titulo: aulaGerada.titulo,
+        serie: data.serie,
+        disciplina: data.disciplina,
+        codigo_bncc: data.codigoBNCC,
+        conteudo: aulaGerada,
+        modelo_ia: "gemini-1.5-flash",
+        nivel: data.nivel,
+        status: 'approved' as any
+      } as any)
+      .select()
+      .single();
+
+    if (saveError) throw saveError;
+    return { status: "sucesso", aula: salva };
+  });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
@@ -147,7 +257,7 @@ export const salvarAulaGerada = createServerFn({ method: "POST" })
       .eq("disciplina", data.disciplina)
       .eq("codigo_bncc", data.codigoBNCC)
       .eq("nivel", data.nivel || 1)
-      .eq("status", "approved")
+      .eq("status", "approved" as any)
       .maybeSingle();
 
     if (duplicada) {
@@ -165,8 +275,8 @@ export const salvarAulaGerada = createServerFn({ method: "POST" })
         modelo_ia: data.modeloIA,
         objetivo_pedagogico: data.objetivo,
         nivel: data.nivel || 1,
-        status: 'draft' // Inicialmente como rascunho para validação
-      })
+        status: 'draft' as any // Inicialmente como rascunho para validação
+      } as any)
       .select()
       .single();
 
