@@ -4787,6 +4787,51 @@ export type Database = {
         }
         Relationships: []
       }
+      motor_decisao_logs: {
+        Row: {
+          aula_encontrada_id: string | null
+          aula_encontrada_tipo: string | null
+          aula_procurada: string | null
+          child_id: string
+          codigo_bncc: string
+          created_at: string | null
+          disciplina: string
+          id: string
+          motivo_geracao: string | null
+          nivel: number
+          resultado: string
+          serie: string
+        }
+        Insert: {
+          aula_encontrada_id?: string | null
+          aula_encontrada_tipo?: string | null
+          aula_procurada?: string | null
+          child_id: string
+          codigo_bncc: string
+          created_at?: string | null
+          disciplina: string
+          id?: string
+          motivo_geracao?: string | null
+          nivel: number
+          resultado: string
+          serie: string
+        }
+        Update: {
+          aula_encontrada_id?: string | null
+          aula_encontrada_tipo?: string | null
+          aula_procurada?: string | null
+          child_id?: string
+          codigo_bncc?: string
+          created_at?: string | null
+          disciplina?: string
+          id?: string
+          motivo_geracao?: string | null
+          nivel?: number
+          resultado?: string
+          serie?: string
+        }
+        Relationships: []
+      }
       neuro_horarios: {
         Row: {
           child_id: string
