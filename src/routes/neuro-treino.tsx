@@ -386,7 +386,38 @@ function Treino() {
             </div>
           </Link>
 
+          {/* ── ROTINA DE ESCRITA DIÁRIA · 1º ao 4º ano ─────────────────── */}
+          <Link
+            to="/rotina-escrita"
+            search={{ serie: "1" }}
+            className="group block rounded-3xl overflow-hidden border-2 border-indigo-200 dark:border-indigo-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #4f46e5, #0ea5e9)" }}>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                ✏️
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Escrita Diária · 1º ao 4º ano
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  QUERO QUE VC ENVIE O ROTINA ESCRITA PRA AREA DO NEURO-TREINO
+                </div>
+                <div className="text-xs text-white/85">
+                  Caderno, lousa e ditado — 15 min por dia
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "rotina-escrita", titulo: "Rotina de Escrita", grupo: "Escrita Diária", emoji: "✏️", href: "/rotina-escrita" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
           {/* ── LER COM AURORA · Pré II + 1º Ano ─────────────────── */}
+
           <Link
             to="/neuro-treino/ler-com-aurora"
             className="group block rounded-3xl overflow-hidden border-2 border-amber-200 dark:border-amber-900/60 shadow hover:shadow-lg transition"
