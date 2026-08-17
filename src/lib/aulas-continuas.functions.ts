@@ -15,12 +15,12 @@ export const buscarOuAgendarGeracaoAula = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
     
-    // 1. Verificar se já existe aula gerada aprovada para este código BNCC
-    // Reutilizando a tabela bncc_conteudo para armazenar as aulas geradas globalmente
+    // 1. Verificar na biblioteca de aulas geradas aprovadas (Cache Global)
     const { data: existente } = await supabase
-      .from("bncc_conteudo")
-      .select("id, titulo, aula_ilustrada")
-      .eq("codigo", data.codigoBNCC)
+      .from("aulas_geradas")
+      .select("*")
+      .eq("codigo_bncc", data.codigoBNCC)
+      .eq("status", "approved")
       .maybeSingle();
 
     if (existente) {
@@ -28,15 +28,64 @@ export const buscarOuAgendarGeracaoAula = createServerFn({ method: "POST" })
         status: "pronta", 
         aulaId: existente.id, 
         titulo: existente.titulo,
-        origem: "ia_cache"
+        origem: "biblioteca_ia",
+        conteudo: existente
       };
     }
 
     // 2. Se não existe, retornar que precisa de geração
-    // (A implementação do Gemini será feita na próxima etapa)
     return { 
       status: "necessita_geracao", 
       codigoBNCC: data.codigoBNCC,
-      motivo: "Acervo oficial concluído e sem cache de IA disponível."
+      motivo: "Nenhum conteúdo aprovado encontrado na biblioteca permanente."
     };
+  });
+
+export const salvarAulaGerada = createServerFn({ method: "POST" })
+  .inputValidator((data) => z.object({
+    titulo: z.string(),
+    serie: z.string(),
+    disciplina: z.string(),
+    codigoBNCC: z.string(),
+    conteudo: z.any(),
+    modeloIA: z.string(),
+    objetivo: z.string().optional(),
+    nivel: z.number().optional()
+  }).parse(data))
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    
+    // Verificação de duplicidade antes de salvar
+    const { data: duplicada } = await supabase
+      .from("aulas_geradas")
+      .select("id")
+      .eq("serie", data.serie)
+      .eq("disciplina", data.disciplina)
+      .eq("codigo_bncc", data.codigoBNCC)
+      .eq("nivel", data.nivel || 1)
+      .eq("status", "approved")
+      .maybeSingle();
+
+    if (duplicada) {
+      return { status: "duplicada", id: duplicada.id };
+    }
+
+    const { data: novaAula, error } = await supabase
+      .from("aulas_geradas")
+      .insert({
+        titulo: data.titulo,
+        serie: data.serie,
+        disciplina: data.disciplina,
+        codigo_bncc: data.codigoBNCC,
+        conteudo: data.conteudo,
+        modelo_ia: data.modeloIA,
+        objetivo_pedagogico: data.objetivo,
+        nivel: data.nivel || 1,
+        status: 'draft' // Inicialmente como rascunho para validação
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { status: "salva", aula: novaAula };
   });
