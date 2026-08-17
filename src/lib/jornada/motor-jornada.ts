@@ -28,7 +28,6 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
     
     // 2. Definir as missões para o dia unificado
     // Regra: Neuro (Cognitivo) -> Alfabetização (Principal) -> Escola Brilha (Geral)
-    
     const missoes = [];
 
     // Missão 1: Neuro (Se idade < 8)
@@ -63,8 +62,7 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
       icon: "Calculator"
     });
 
-    // 3. Verificar estado de conclusão
-    // Buscamos se as habilidades BNCC foram concluídas no escola_progresso
+    // 3. Verificar estado de conclusão no escola_progresso
     const { data: progresso } = await supabase
       .from("escola_progresso")
       .select("codigo_bncc, concluida")
