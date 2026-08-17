@@ -118,7 +118,7 @@ export function TrilhaAlfa({ childId, childName }: Props) {
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-bold uppercase tracking-wider opacity-80">
-                          FASE {etapa.ordem}
+                          Etapa {etapa.ordem}
                         </span>
                         {concluida && (
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/30 text-[10px] font-bold">
