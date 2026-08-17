@@ -95,14 +95,15 @@ function RotinaEscrita() {
   const fetchStatus = useServerFn(getEscritaStatus);
   const { data: status, isLoading: loadingStatus } = useQuery({
     queryKey: ["escrita-status", activeChild?.id],
-    queryFn: () => fetchStatus({ childId: activeChild?.id || "" }),
+    queryFn: () => fetchStatus({ data: { childId: activeChild?.id || "" } }),
     enabled: !!activeChild?.id
   });
 
   const updateProgressoFn = useServerFn(updateEscritaProgresso);
   const mutation = useMutation({
     mutationFn: (vars: { acerto: boolean, tipoLetra: "imprensa" | "cursiva" }) => 
-      updateProgressoFn({ childId: activeChild?.id || "", ...vars }),
+      updateProgressoFn({ data: { childId: activeChild?.id || "", ...vars } }),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild?.id] });
     }
