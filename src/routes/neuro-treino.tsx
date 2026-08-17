@@ -213,6 +213,7 @@ function Treino() {
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
 
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const STALE_KEYS = [
@@ -226,10 +227,6 @@ function Treino() {
       "neuro-treino:redirect",
       "currentWorld",
       "lastJourneyRoute",
-      // Chaves de cache das aulas
-      "plano-neuro:aulas",
-      "proxima-missao:cache",
-      "neuro-treino:cache"
     ];
     try {
       STALE_KEYS.forEach((k) => {
@@ -331,46 +328,295 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-          {/* ── SEÇÃO: PRIMEIROS ANOS (3 a 6 anos) ─────────────────── */}
-          <section className="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-200 dark:border-emerald-900 shadow-sm overflow-hidden">
-            <div className="bg-emerald-500 p-4">
-              <h2 className="text-white font-black text-lg">Primeiros Anos (3 a 6 anos)</h2>
-              <p className="text-emerald-50 text-xs font-bold uppercase tracking-wide">Plano inicial de aprendizagem</p>
+          {/* ── MY FIRST ENGLISH · Ed. Infantil ─────────────────── */}
+          <Link
+            to="/escola-brilha/ingles-ei"
+            className="group block rounded-3xl overflow-hidden border-2 border-purple-200 dark:border-purple-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899)" }}>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🇺🇸
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  🇺🇸 Inglês · Educação Infantil
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  My First English
+                </div>
+                <div className="text-xs text-white/85">
+                  Maternal · Pré I · Pré II — só oralidade e imagens
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "ingles-ei", titulo: "My First English", grupo: "Inglês · Ed. Infantil", emoji: "🇺🇸", href: "/escola-brilha/ingles-ei" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
             </div>
-            <div className="p-3 space-y-3">
-              <Link to="/escola-brilha/ingles-ei" className="block group rounded-2xl p-3 bg-purple-50 hover:bg-purple-100 border border-purple-100 transition">
-                <div className="font-black text-purple-900">My First English</div>
+          </Link>
+
+          {/* ── MATEMÁTICA KAWAII · Contar e comparar ─────────────────── */}
+          <Link
+            to="/escola-brilha/matematica-ei"
+            className="group block rounded-3xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #10B981, #2563EB)" }}>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🔢
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Categoria especial · Ed. Infantil
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Matemática Kawaii
+                </div>
+                <div className="text-xs text-white/85">
+                  Contar e comparar · Subitizing
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "matematica-ei", titulo: "Matemática Kawaii", grupo: "Ed. Infantil", emoji: "🔢", href: "/escola-brilha/matematica-ei" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── LER COM AURORA · Pré II + 1º Ano ─────────────────── */}
+          <Link
+            to="/neuro-treino/ler-com-aurora"
+            className="group block rounded-3xl overflow-hidden border-2 border-amber-200 dark:border-amber-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🔤
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Categoria especial · Pré II + 1º Ano
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Ler com Aurora
+                </div>
+                <div className="text-xs text-white/85">
+                  20 missões diárias · Consciência fonológica
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "ler-com-aurora", titulo: "Ler com Aurora", grupo: "Pré II + 1º Ano", emoji: "🔤", href: "/neuro-treino/ler-com-aurora" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── BIBLIOTECA · leitura graduada por nível ─────────── */}
+          <Link
+            to="/biblioteca-alfa"
+            className="group block rounded-3xl overflow-hidden border-2 border-rose-200 dark:border-rose-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                📚
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Biblioteca · Leitura graduada
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Histórias por nível leitor
+                </div>
+                <div className="text-xs text-white/85">
+                  Do reconhecimento de palavras à fluência
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-alfa", titulo: "Biblioteca Alfa", grupo: "Leitura graduada", emoji: "📚", href: "/biblioteca-alfa" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── COMUNICAÇÃO FUNCIONAL · Biblioteca Encantada ─────── */}
+          <Link
+            to="/escola-brilha/biblioteca-encantada"
+            className="group block rounded-3xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🗣️
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Comunicação Funcional · PECS / TEACCH / Denver
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Biblioteca Encantada · 60 aulas
+                </div>
+                <div className="text-xs text-white/85">
+                  Do apontar ao contar histórias · rotina visual + trocas
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "biblioteca-encantada", titulo: "Biblioteca Encantada", grupo: "Comunicação funcional", emoji: "🗣️", href: "/escola-brilha/biblioteca-encantada" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── ALFABETIZAÇÃO BRILHA · consciência fonológica ─────── */}
+          <Link
+            to="/alfabetizacao"
+            className="group block rounded-3xl overflow-hidden border-2 border-pink-200 dark:border-pink-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-indigo-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🅰️
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Alfabetização Brilha · Consciência fonológica
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Progressão por etapas · só imagens e voz
+                </div>
+                <div className="text-xs text-white/85">
+                  Sons, sílabas, palavras — travada até dominar cada etapa
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "alfabetizacao", titulo: "Alfabetização Brilha", grupo: "Consciência fonológica", emoji: "🅰️", href: "/alfabetizacao" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+
+          {/* ── TRILHA DA LEITURA · programa clínico dislexia ───── */}
+          <Link
+            to="/escola-brilha/dislexia"
+            className="group block rounded-3xl overflow-hidden border-2 border-orange-200 dark:border-orange-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-purple-600 via-fuchsia-500 to-orange-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🎧
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Programa Clínico · Dislexia
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Trilha da Leitura · Orton-Gillingham
+                </div>
+                <div className="text-xs text-white/85">
+                  Multissensorial · 8 fases · começa pelo ouvido
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "dislexia", titulo: "Trilha da Leitura", grupo: "Dislexia · Orton-Gillingham", emoji: "🎧", href: "/escola-brilha/dislexia" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── MATEMÁTICA TERAPÊUTICA · Discalculia ───────────────── */}
+          <Link
+            to="/escola-brilha/contar-com-pip"
+            className="group block rounded-3xl overflow-hidden border-2 border-sky-200 dark:border-sky-900/60 shadow hover:shadow-lg transition"
+          >
+            <div className="bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
+                🔢
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                  Matemática Terapêutica · Discalculia
+                </div>
+                <div className="font-black text-white text-base leading-tight">
+                  Contar com Pip · Senso Numérico
+                </div>
+                <div className="text-xs text-white/85">
+                  Subitizing · Numicon · reta numérica · 8 fases
+                </div>
+              </div>
+              <BotaoFavorito
+                atividade={{ id: "contar-com-pip", titulo: "Contar com Pip", grupo: "Discalculia", emoji: "🔢", href: "/escola-brilha/contar-com-pip" }}
+              />
+              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
+                →
+              </div>
+            </div>
+          </Link>
+
+          {/* ── EDUCAÇÃO INFANTIL · 2 temas de aventura · 27 missões ── */}
+          <div className="rounded-3xl border-2 border-violet-200 dark:border-violet-900/60 overflow-hidden shadow">
+            <div className="bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 px-4 py-3">
+              <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
+                Educação Infantil · 3 a 6 anos
+              </div>
+              <div className="font-black text-white text-base leading-tight">
+                2 temas de aventura · 27 missões
+              </div>
+              <div className="text-xs text-white/85">
+                Trilha estilo Duolingo · entra na rotina do plano Primeiros Anos
+              </div>
+            </div>
+            <div className="p-3 space-y-2 bg-card">
+              <Link
+                to="/escola-brilha/trilha/$serie/$disc"
+                params={{ serie: "educacao-infantil", disc: "portugues" }}
+                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow"
+                style={{ background: "linear-gradient(135deg, #059669, #06b6d4)" }}
+              >
+                <div className="text-[10px] uppercase tracking-widest opacity-85">
+                  📚 A Biblioteca Encantada
+                </div>
+                <div className="text-lg leading-tight mt-0.5">Português · Educação Infantil</div>
+                <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
               </Link>
-              <Link to="/escola-brilha/matematica-ei" className="block group rounded-2xl p-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 transition">
-                <div className="font-black text-emerald-900">Matemática Kawaii</div>
+              <Link
+                to="/escola-brilha/trilha/$serie/$disc"
+                params={{ serie: "educacao-infantil", disc: "default" }}
+                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow"
+                style={{ background: "linear-gradient(135deg, #7c3aed, #f472b6)" }}
+              >
+                <div className="text-[10px] uppercase tracking-widest opacity-85">
+                  ✨ Aventura de Aprender com Pip
+                </div>
+                <div className="text-lg leading-tight mt-0.5">
+                  Campos de Experiência · Educação Infantil
+                </div>
+                <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
               </Link>
-              <Link to="/neuro-treino/ler-com-aurora" className="block group rounded-2xl p-3 bg-amber-50 hover:bg-amber-100 border border-amber-100 transition">
-                <div className="font-black text-amber-900">Ler com Aurora</div>
-              </Link>
-              <Link to="/biblioteca-alfa" className="block group rounded-2xl p-3 bg-rose-50 hover:bg-rose-100 border border-rose-100 transition">
-                <div className="font-black text-rose-900">Histórias por nível leitor</div>
-              </Link>
-              <Link to="/escola-brilha/biblioteca-encantada" className="block group rounded-2xl p-3 bg-teal-50 hover:bg-teal-100 border border-teal-100 transition">
-                <div className="font-black text-teal-900">Biblioteca Encantada (Comunicação Funcional)</div>
-              </Link>
-              <Link to="/alfabetizacao" className="block group rounded-2xl p-3 bg-pink-50 hover:bg-pink-100 border border-pink-100 transition">
-                <div className="font-black text-pink-900">Progressão por etapas (Alfabetização Brilha)</div>
-              </Link>
-              <Link to="/escola-brilha/dislexia" className="block group rounded-2xl p-3 bg-orange-50 hover:bg-orange-100 border border-orange-100 transition">
-                <div className="font-black text-orange-900">Trilha da Leitura (Dislexia)</div>
-              </Link>
-              <Link to="/escola-brilha/contar-com-pip" className="block group rounded-2xl p-3 bg-sky-50 hover:bg-sky-100 border border-sky-100 transition">
-                <div className="font-black text-sky-900">Contar com Pip (Matemática Terapêutica)</div>
-              </Link>
-              <Link to="/escola-brilha/trilha/$serie/$disc" params={{ serie: "educacao-infantil", disc: "portugues" }} className="block group rounded-2xl p-3 bg-green-50 hover:bg-green-100 border border-green-100 transition">
-                <div className="font-black text-green-900">Português - Educação Infantil</div>
-              </Link>
-              <Link to="/escola-brilha/trilha/$serie/$disc" params={{ serie: "educacao-infantil", disc: "default" }} className="block group rounded-2xl p-3 bg-violet-50 hover:bg-violet-100 border border-violet-100 transition">
-                <div className="font-black text-violet-900">Campos de Experiência - Educação Infantil</div>
+              <Link
+                to="/primeiros-anos"
+                className="block text-center text-xs font-black text-primary underline py-1"
+              >
+                Ver no plano anual (Primeiros Anos) →
               </Link>
             </div>
-          </section>
+          </div>
+
+
+
+
+
+
           {GRUPOS.map((g) => {
+
             const cfg = GROUP_CONFIG[g.nome];
             return (
               <section
@@ -469,4 +715,3 @@ function Treino() {
     </Shell>
   );
 }
-
