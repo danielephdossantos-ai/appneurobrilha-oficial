@@ -324,12 +324,16 @@ function NeuroAtividade() {
   return (
     <Shell>
       <div className="flex items-center justify-between gap-3 mb-2">
-        <Link
-          to="/neuro-treino"
+        <button
+          onClick={() => {
+            if (!handleBack(navigate)) {
+              navigate({ to: "/neuro-treino" });
+            }
+          }}
           className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft size={16} /> Voltar
-        </Link>
+        </button>
         <div className="flex items-center gap-2">
           <button
             onClick={toggleVoice}
