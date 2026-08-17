@@ -133,6 +133,41 @@ async function registrarLogDecisao(childId: string, log: any) {
 }
 
 /**
+ * Registra o uso de uma aula da biblioteca IA e atualiza estatísticas
+ */
+async function registrarUsoBibliotecaIA(aulaId: string, childId: string) {
+  const { supabase } = await import("@/integrations/supabase/client");
+  
+  // 1. Incrementar total de usos e atualizar data da última utilização
+  // Usamos um RPC ou uma atualização simples (embora concorrência possa ser tema, aqui é pedagógico)
+  const { data: aula } = await supabase
+    .from("aulas_geradas")
+    .select("total_usos, total_criancas, ultima_utilizacao")
+    .eq("id", aulaId)
+    .single();
+
+  if (aula) {
+    // Verificar se é uma nova criança usando esta aula
+    const { count } = await supabase
+      .from("motor_decisao_logs")
+      .select("*", { count: 'exact', head: true })
+      .eq("aula_encontrada_id", aulaId)
+      .eq("child_id", childId);
+    
+    const isNovaCrianca = (count || 0) === 0;
+
+    await supabase
+      .from("aulas_geradas")
+      .update({
+        total_usos: (aula.total_usos || 0) + 1,
+        total_criancas: isNovaCrianca ? (aula.total_criancas || 0) + 1 : aula.total_criancas,
+        ultima_utilizacao: new Date().toISOString()
+      } as any)
+      .eq("id", aulaId);
+  }
+}
+
+/**
  * Módulo de Geração Pedagógica Gemini
  * Exclusivo para geração de novas aulas BNCC
  */
