@@ -389,6 +389,7 @@ function Treino() {
           {/* ── ROTINA DE ESCRITA DIÁRIA · 1º ao 4º ano ─────────────────── */}
           <Link
             to="/rotina-escrita"
+            search={{ serie: "1" }}
             className="group block rounded-3xl overflow-hidden border-2 border-indigo-200 dark:border-indigo-900/60 shadow hover:shadow-lg transition"
           >
             <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #4f46e5, #0ea5e9)" }}>
