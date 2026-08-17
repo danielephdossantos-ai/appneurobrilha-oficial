@@ -9,13 +9,13 @@ import { validarAulaIA } from "./validador-aulas.server";
  */
 
 export const decidirConteudoAula = createServerFn({ method: "POST" })
-  .validator((data: unknown) => z.object({
+  .validator((d: unknown) => z.object({
     codigoBNCC: z.string(),
     childId: z.string(),
     idade: z.number().optional(),
     serie: z.string().optional(),
     nivelAtual: z.number().default(1)
-  }).parse(data))
+  }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
     const bncc = parseBNCC(data.codigoBNCC);
@@ -172,7 +172,7 @@ async function registrarUsoBibliotecaIA(aulaId: string, childId: string) {
  * Exclusivo para geração de novas aulas BNCC
  */
 export const gerarAulaGemini = createServerFn({ method: "POST" })
-  .validator((data: unknown) => z.object({
+  .validator((d: unknown) => z.object({
     childId: z.string(),
     codigoBNCC: z.string(),
     nivel: z.number(),
@@ -180,7 +180,7 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
     serie: z.string(),
     disciplina: z.string(),
     objetivo: z.string().optional()
-  }).parse(data))
+  }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
     const { callGemini } = await import("./gemini.server");
@@ -296,7 +296,7 @@ Retorne APENAS o JSON.`;
   });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
-  .validator((data: unknown) => z.object({
+  .validator((d: unknown) => z.object({
     titulo: z.string(),
     serie: z.string(),
     disciplina: z.string(),
@@ -305,7 +305,7 @@ export const salvarAulaGerada = createServerFn({ method: "POST" })
     modeloIA: z.string(),
     objetivo: z.string().optional(),
     nivel: z.number().optional()
-  }).parse(data))
+  }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
     
