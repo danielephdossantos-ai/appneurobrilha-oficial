@@ -43,7 +43,8 @@ import {
   School,
   PenTool,
 } from "lucide-react";
-import { ReactNode, ComponentType } from "react";
+import { ReactNode, ComponentType, useEffect } from "react";
+import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
 import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
 import { KidCard } from "./ui/KidCard";
@@ -135,8 +136,6 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
     </Link>
   );
 }
-
-import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
 
 export function Shell({ children }: { children?: ReactNode }) {
   const { activeChild, children: allChildren, setActiveChild, logout } = useAppState();
