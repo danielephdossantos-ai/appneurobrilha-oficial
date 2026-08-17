@@ -1,3 +1,4 @@
+import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
 // Helpers para TTS nativo (Web Speech API) com chunking.
 // O Chrome desktop trunca utterances longas (~200 chars / 15s).
 // Quebrar em frases curtas e enfileirar resolve.
@@ -153,7 +154,7 @@ export function normalizeLiteracyTextForSpeech(text: string): string {
 
 export function sanitizeForSpeech(text: string): string {
   if (!text) return "";
-  let out = normalizeLiteracyTextForSpeech(text);
+  let out = normalizeLiteracyTextForSpeech(sanitizarFalaMascote(text));
   // Notação fonêmica /x/ — algumas vozes leem "barra". Remove as barras
   // e mantém só o som/letra (ex.: "/s/" -> "s", "/ssss/" -> "ssss").
   out = out.replace(/\/([A-Za-zÀ-ÿ]{1,6})\//g, "$1");
