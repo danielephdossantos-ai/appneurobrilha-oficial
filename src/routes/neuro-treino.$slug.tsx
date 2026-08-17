@@ -75,6 +75,7 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const { speak, stop, isSpeaking } = usePipVoice();
