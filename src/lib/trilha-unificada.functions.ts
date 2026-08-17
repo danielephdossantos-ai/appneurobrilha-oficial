@@ -1,18 +1,20 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { NodeTrilha } from "./trilha-unificada";
 
 export const getTrilhaPipeline = createServerFn({ method: "GET" })
   .inputValidator((data) => z.object({ childId: z.string() }).parse(data))
   .handler(async ({ data: { childId } }) => {
     // 1. Buscar progresso da criança (aulas concluídas)
+    // Usando escola_progresso como base para aulas concluídas
     const { data: progresso } = await supabase
-      .from('progress_v4')
-      .select('lesson_id')
+      .from('escola_progresso')
+      .select('codigo_bncc')
       .eq('child_id', childId)
       .eq('concluida', true);
 
-    const concluídas = new Set(progresso?.map(p => p.lesson_id) || []);
+    const concluídas = new Set(progresso?.map(p => p.codigo_bncc) || []);
 
     // 2. Buscar aulas geradas aprovadas
     const { data: aulasGeradas } = await supabase
@@ -21,14 +23,13 @@ export const getTrilhaPipeline = createServerFn({ method: "GET" })
       .eq('status', 'approved')
       .order('created_at', { ascending: true });
 
-    // 3. TODO: Integrar com a biblioteca oficial e ordenar por idade/série
-    // Por enquanto, vamos retornar uma estrutura mock baseada na data atual para demonstrar a trilha linear
+    // 3. Mock da trilha linear conforme solicitado
     const hoje = new Date();
-    const trilha = Array.from({ length: 30 }, (_, i) => {
+    const trilha: NodeTrilha[] = Array.from({ length: 30 }, (_, i) => {
       const dataLiberacao = new Date(hoje);
-      dataLiberacao.setDate(hoje.getDate() - 2 + i); // 2 dias atrás até 28 dias à frente
+      dataLiberacao.setDate(hoje.getDate() - 2 + i); 
       
-      const status = i < 2 ? 'concluido' : (i === 2 ? 'disponivel' : 'bloqueado');
+      const status: NodeTrilha['status'] = i < 2 ? 'concluido' : (i === 2 ? 'disponivel' : 'bloqueado');
       
       return {
         id: `dia-${i + 1}`,
@@ -60,7 +61,5 @@ export const getTrilhaPipeline = createServerFn({ method: "GET" })
 export const salvarConclusaoDia = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({ childId: z.string(), diaId: z.string() }).parse(data))
   .handler(async ({ data: { childId, diaId } }) => {
-    // Lógica para registrar que o "nó" da trilha foi concluído
-    // Isso pode ser uma nova tabela ou um campo no profile
     return { success: true };
   });

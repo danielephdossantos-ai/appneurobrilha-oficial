@@ -34,7 +34,7 @@ export function calcularStatusNode(
   const isPassado = dataNode < hoje && dataNode.toDateString() !== hoje.toDateString();
   const isHoje = dataNode.toDateString() === hoje.toDateString();
 
-  if (node.status === 'concluido') return 'concluido';
+  if ((node.status as string) === 'concluido') return 'concluido';
   
   if (!noAnteriorConcluido && node.diaNumero > 1) {
     return 'bloqueado';
