@@ -28,6 +28,7 @@ import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MinhaJornadaRouteImport } from './routes/minha-jornada'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
 import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
@@ -188,6 +189,11 @@ const MatrizPedagogicaRoute = MatrizPedagogicaRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MinhaJornadaRoute = MinhaJornadaRouteImport.update({
+  id: '/minha-jornada',
+  path: '/minha-jornada',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
@@ -576,6 +582,7 @@ export interface FileRoutesByFullPath {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
+  '/minha-jornada': typeof MinhaJornadaRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -662,6 +669,7 @@ export interface FileRoutesByTo {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
+  '/minha-jornada': typeof MinhaJornadaRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -750,6 +758,7 @@ export interface FileRoutesById {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
+  '/minha-jornada': typeof MinhaJornadaRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -839,6 +848,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/mcp'
+    | '/minha-jornada'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -925,6 +935,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/mcp'
+    | '/minha-jornada'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -1012,6 +1023,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/mcp'
+    | '/minha-jornada'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -1100,6 +1112,7 @@ export interface RootRouteChildren {
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
   McpRoute: typeof McpRoute
+  MinhaJornadaRoute: typeof MinhaJornadaRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
   MissaoTarefaRoute: typeof MissaoTarefaRoute
   MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
@@ -1292,6 +1305,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/minha-jornada': {
+      id: '/minha-jornada'
+      path: '/minha-jornada'
+      fullPath: '/minha-jornada'
+      preLoaderRoute: typeof MinhaJornadaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missao-prova': {
@@ -1826,6 +1846,7 @@ const rootRouteChildren: RootRouteChildren = {
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
   McpRoute: McpRoute,
+  MinhaJornadaRoute: MinhaJornadaRoute,
   MissaoProvaRoute: MissaoProvaRoute,
   MissaoTarefaRoute: MissaoTarefaRoute,
   MissaoTrabalhoRoute: MissaoTrabalhoRoute,

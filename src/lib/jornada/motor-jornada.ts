@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { parseBNCC } from "@/escola-brilha/motor/resolver";
 
 /**
  * Motor de Unificação da Jornada
@@ -38,23 +37,23 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
         ordem: 1,
         tipo: "neuro",
         categoria: "Despertar Cognitivo",
-        codigo: "NT_COORD_01", // Exemplo, depois buscar dinâmico
+        codigo: "NT_COORD_01",
         titulo: "Despertar do Cérebro",
         icon: "Brain"
       });
     }
 
-    // Missão 2: Alfabetização
+    // Missão 2: Alfabetização (1º Ano)
     missoes.push({
       ordem: 2,
       tipo: "alfabetizacao",
       categoria: "Leitura e Escrita",
-      codigo: "EF01LP01", // 1º Ano/Alfabetização
+      codigo: "EF01LP01",
       titulo: "Mundo das Letras",
       icon: "BookOpen"
     });
 
-    // Missão 3: Escola Brilha (Geral)
+    // Missão 3: Escola Brilha (1º Ano Geral)
     missoes.push({
       ordem: 3,
       tipo: "escola-brilha",
@@ -64,12 +63,12 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
       icon: "Calculator"
     });
 
-    // 3. Verificar estado de conclusão para cada missão
+    // 3. Verificar estado de conclusão
     const { data: progresso } = await supabase
       .from("jornada_unificada")
       .select("*")
       .eq("child_id", data.childId)
-      .eq("week", Math.ceil(data.dia / 7)) // Exemplo de mapeamento
+      .eq("week", Math.ceil(data.dia / 7))
       .maybeSingle();
 
     return {
@@ -78,8 +77,7 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
       status: progresso?.status || "pendente",
       missoes: missoes.map(m => ({
         ...m,
-        concluida: progresso?.status === "completed" || false // Ajustar lógica conforme real necessidade
+        concluida: false
       }))
     };
   });
-
