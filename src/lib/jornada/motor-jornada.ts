@@ -64,20 +64,26 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
     });
 
     // 3. Verificar estado de conclusão
+    // Buscamos se as habilidades BNCC foram concluídas no escola_progresso
     const { data: progresso } = await supabase
-      .from("jornada_unificada")
-      .select("*")
+      .from("escola_progresso")
+      .select("codigo_bncc, concluida")
       .eq("child_id", data.childId)
-      .eq("week", Math.ceil(data.dia / 7))
-      .maybeSingle();
+      .in("codigo_bncc", missoes.map(m => m.codigo));
+
+    const concluidas = new Set(
+      (progresso || [])
+        .filter(p => p.concluida)
+        .map(p => p.codigo_bncc)
+    );
 
     return {
       dia: data.dia,
       childId: data.childId,
-      status: progresso?.status || "pendente",
+      status: concluidas.size === missoes.length ? "concluido" : "pendente",
       missoes: missoes.map(m => ({
         ...m,
-        concluida: false
+        concluida: concluidas.has(m.codigo)
       }))
     };
   });
