@@ -3,7 +3,7 @@ import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getRoutineItems, toggleRoutineItemStatus, RoutineItem } from "@/lib/routine.functions";
-import { format, addDays, subDays, isToday, isPast, isFuture, parseISO } from "date-fns";
+import { format, addDays, subDays, isToday, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
   Sun,
@@ -61,7 +61,6 @@ const categoryCores: Record<string, string> = {
 function Rotina() {
   const { activeChild } = useAppState();
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const dateStr = format(selectedDate, "yyyy-MM-dd");
 
@@ -97,11 +96,10 @@ function Rotina() {
   const handleNextDay = () => setSelectedDate(addDays(selectedDate, 1));
   const handleToday = () => setSelectedDate(new Date());
 
-  const getStatusIcon = (item: RoutineItem) => {
+  const getStatusIcon = (item: any) => {
     if (item.status === "concluido") return <CheckCircle2 className="h-6 w-6 text-green-500" />;
     if (item.status === "atrasado") return <AlertCircle className="h-6 w-6 text-red-500" />;
     
-    // Check if it's the next one
     const now = new Date();
     const [h, m] = item.startTime.split(":").map(Number);
     const itemTime = new Date(selectedDate);
@@ -110,7 +108,6 @@ function Rotina() {
     if (isToday(selectedDate) && item.status === "pendente") {
       const isPastItem = itemTime < now;
       if (isPastItem) return <Clock className="h-6 w-6 text-warning" />;
-      // Simplistic "next" check: first pendente item in the future
       return <Circle className="h-6 w-6 text-muted-foreground" />;
     }
     
@@ -125,12 +122,11 @@ function Rotina() {
           title="Minha Rotina" 
           subtitle={isToday(selectedDate) ? "O que temos para hoje?" : format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
         />
-        <Link to="/configuracoes/rotina" className="p-2 rounded-full hover:bg-muted transition-colors">
+        <Link to="/painel-pais" className="p-2 rounded-full hover:bg-muted transition-colors">
           <Settings className="h-6 w-6 text-muted-foreground" />
         </Link>
       </div>
 
-      {/* Date Navigation */}
       <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
         <button onClick={handlePrevDay} className="p-2 rounded-xl bg-muted"><ChevronLeft className="h-5 w-5"/></button>
         <button 
@@ -154,15 +150,14 @@ function Rotina() {
           <div className="text-4xl mb-4">🌈</div>
           <h3 className="font-bold text-lg mb-2">Nenhuma atividade planejada</h3>
           <p className="text-muted-foreground mb-6">Que tal adicionar algo especial à rotina?</p>
-          <Link to="/configuracoes/rotina" className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2">
+          <Link to="/painel-pais" className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2">
              Configurar Rotina
           </Link>
         </Card>
       ) : (
         <div className="space-y-3">
-          {routine.map((item) => {
+          {routine.map((item: any) => {
             const Icon = iconMap[item.type] || Flower;
-            const isNext = false; // logic for "Next" indicator can be added here
             
             return (
               <div
@@ -192,7 +187,6 @@ function Rotina() {
                   {item.source !== 'manual' && item.status !== 'concluido' && (
                     <button 
                       onClick={() => {
-                        // Logic to open the correct activity based on source/sourceId
                         toast.info(`Iniciando ${item.title}...`);
                       }}
                       className="p-2 rounded-full bg-primary text-primary-foreground shadow-lg active:scale-90"
@@ -216,7 +210,6 @@ function Rotina() {
         </div>
       )}
 
-      {/* Sugestão Inteligente Real */}
       <Card className="mt-8 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-sun/5">
         <div className="flex items-center gap-3 mb-3">
           <div className="bg-primary/20 p-2 rounded-xl">
