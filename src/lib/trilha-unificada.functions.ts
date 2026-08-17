@@ -1,54 +1,57 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { NodeTrilha } from "./trilha-unificada";
+import { NodeTrilha, Aula } from "./trilha-unificada";
 
 export const getTrilhaPipeline = createServerFn({ method: "GET" })
   .inputValidator((data) => z.object({ childId: z.string() }).parse(data))
   .handler(async ({ data: { childId } }) => {
-    // 1. Buscar progresso da criança (aulas concluídas)
-    // Usando escola_progresso como base para aulas concluídas
+    // 1. Buscar progresso da criança
     const { data: progresso } = await supabase
       .from('escola_progresso')
-      .select('codigo_bncc')
+      .select('codigo_bncc, concluida')
       .eq('child_id', childId)
       .eq('concluida', true);
 
-    const concluídas = new Set(progresso?.map(p => p.codigo_bncc) || []);
+    const concluidasBNCC = new Set(progresso?.map(p => p.codigo_bncc) || []);
 
-    // 2. Buscar aulas geradas aprovadas
-    const { data: aulasGeradas } = await supabase
-      .from('aulas_geradas')
-      .select('*')
-      .eq('status', 'approved')
-      .order('created_at', { ascending: true });
-
-    // 3. Mock da trilha linear conforme solicitado
+    // 2. Mock da trilha linear para 30 dias
     const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
     const trilha: NodeTrilha[] = Array.from({ length: 30 }, (_, i) => {
       const dataLiberacao = new Date(hoje);
+      // Dia 1 foi anteontem, Dia 2 ontem, Dia 3 hoje
       dataLiberacao.setDate(hoje.getDate() - 2 + i); 
       
-      const status: NodeTrilha['status'] = i < 2 ? 'concluido' : (i === 2 ? 'disponivel' : 'bloqueado');
+      const diaId = `dia-${i + 1}`;
       
+      // Lógica de status simplificada para o MVP da trilha
+      // i < 2: concluído (simulado)
+      // i === 2: disponível (hoje)
+      // i > 2: bloqueado
+      let status: NodeTrilha['status'] = 'bloqueado';
+      if (i < 2) status = 'concluido';
+      else if (i === 2) status = 'disponivel';
+
       return {
-        id: `dia-${i + 1}`,
+        id: diaId,
         diaNumero: i + 1,
         dataLiberacao: dataLiberacao.toISOString(),
         status,
         aulasDoDia: [
           {
-            id: `aula-neuro-${i}`,
-            titulo: "Desafio de Memória",
+            id: `aula-nt-${i}`,
+            titulo: i === 2 ? "Desafio de Foco" : "Treino Cerebral",
             tipo: "neuro-treino",
             path: "/neuro-treino/memoria-visual",
             concluida: i < 2
           },
           {
-            id: `aula-alfabetizacao-${i}`,
-            titulo: "Aprendendo a letra A",
+            id: `aula-eb-${i}`,
+            titulo: i === 2 ? "Aventura das Letras" : "Lição do Dia",
             tipo: "alfabetizacao",
-            path: "/primeiros-anos",
+            path: "/escola-brilha",
             concluida: i < 2
           }
         ]
@@ -61,5 +64,6 @@ export const getTrilhaPipeline = createServerFn({ method: "GET" })
 export const salvarConclusaoDia = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({ childId: z.string(), diaId: z.string() }).parse(data))
   .handler(async ({ data: { childId, diaId } }) => {
+    // Implementar log de conclusão se necessário futuramente
     return { success: true };
   });

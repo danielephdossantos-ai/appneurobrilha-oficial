@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, CheckCircle2, Clock, Sparkles } from 'lucide-react';
 import { NodeTrilha, Aula } from '@/lib/trilha-unificada';
 import { Link } from '@tanstack/react-router';
-import { cn } from '@/utils/utils';
+import { cn } from '@/lib/utils';
+import { useNavigationStore } from '@/lib/navigation-context';
 
 interface HubDiarioProps {
   node: NodeTrilha;
@@ -51,8 +52,15 @@ export const HubDiario: React.FC<HubDiarioProps> = ({ node, onClose, onAulaClick
           {node.aulasDoDia.map((aula, idx) => (
             <Link
               key={aula.id}
-              to={aula.path}
-              onClick={() => onAulaClick(aula)}
+              to={aula.path as any}
+              onClick={() => {
+                useNavigationStore.getState().setContext({
+                  originRoute: "/trilha",
+                  originModule: "trilha",
+                  timestamp: Date.now(),
+                });
+                onAulaClick(aula);
+              }}
               className={cn(
                 "flex items-center gap-4 p-4 rounded-3xl border-2 transition-all active:scale-[0.98]",
                 aula.concluida 
