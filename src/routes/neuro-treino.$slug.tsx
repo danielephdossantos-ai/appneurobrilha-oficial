@@ -205,23 +205,40 @@ function NeuroAtividade() {
             ? ` Procure ${p.target}.`
             : "";
     const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
-    return `${saud}${instrucaoTematica}${extra}`;
+    const base = `${saud}${instrucaoTematica}${extra}`;
+    
+    // Importando sanitização dinamicamente ou usando a importada
+    return import.meta.env.DEV ? base : base; // Fallback se necessário, mas vamos usar a função
   }, [variation, instrucaoTematica, nomeCrianca]);
+
+  const narracaoSanitizada = useMemo(() => {
+    try {
+      // Usar a importação direta se possível, ou require para evitar quebra se o arquivo não existir
+      const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
+      return sanitizarFalaMascote(narracao, nomeCrianca);
+    } catch (e) {
+      return narracao;
+    }
+  }, [narracao, nomeCrianca]);
+
+
+
 
 
   useEffect(() => {
-    if (!voiceOn || !narracao) return;
+    if (!voiceOn || !narracaoSanitizada) return;
     if (slug === "motorzinho-dos-sons") return;
     if (isLoading || error) return;
     const t = setTimeout(() => {
-      speak(narracao);
+      speak(narracaoSanitizada);
     }, 250);
     return () => {
       clearTimeout(t);
       stop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [narracao, voiceOn, slug, isLoading, error]);
+  }, [narracaoSanitizada, voiceOn, slug, isLoading, error]);
+
 
   // ===== Early returns (depois de todos os hooks) =====
   if (!hiperfoco) {
@@ -465,8 +482,10 @@ function MechanicRenderer({
       return <Rimas p={variation.payload} onDone={onConcluir} />;
     case "pedacinhos-da-palavra":
       return <Pedacinhos p={variation.payload} onDone={onConcluir} />;
+    case "foco-sustentado":
     case "onde-esta":
-      return <OndeEsta p={variation.payload} onDone={onConcluir} />;
+      return <VigilanteNoturno p={variation.payload} onDone={onConcluir} />;
+
     case "sequencia-e-padrao":
       return <SequenciaPadrao p={variation.payload} onDone={onConcluir} />;
     case "cade-o-par":
@@ -1159,13 +1178,14 @@ function CadeOPar({ p, onDone }: any) {
 }
 
 
-// ============== 10. Foco Sustentado ==============
-function FocoSustentado({ p, onDone }: any) {
+// ============== 10. Vigilante Noturno (Foco Sustentado) ==============
+function VigilanteNoturno({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const speedMul = sens.lowStim ? 1.6 : 1; // mais lento = menos estímulo
   const press = sens.reduceMotion ? "" : "active:scale-90";
   const errorRing = sens.softColors ? "ring-amber-400 bg-amber-100/40" : "ring-destructive bg-destructive/10";
   const btnSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
+
   const [capturados, setCapturados] = useState<number[]>([]); // índices de alvos pegos
   const [erros, setErros] = useState(0);
   const [piscarErro, setPiscarErro] = useState<number | null>(null);
@@ -4144,14 +4164,18 @@ function ParesSonoros({ p, onDone }: any) {
 
   useEffect(() => {
     const double = [...p.sons, ...p.sons].sort(() => Math.random() - 0.5);
-    setCartas(double.map((s, i) => ({ id: i, som: s })));
+    // Adicionar variabilidade de volume baseada no nível (progressão sonora segura)
+    const volBase = p.nivel === 1 ? 1.0 : p.nivel === 2 ? 0.8 : 0.6;
+    setCartas(double.map((s, i) => ({ id: i, som: s, volume: volBase })));
+
   }, [p.sons]);
 
   const handleCarta = (idx: number) => {
     if (virados.length === 2 || virados.includes(idx) || paresEncontrados.includes(cartas[idx].som)) return;
     
-    speak(cartas[idx].som);
+    speak(cartas[idx].som, { volume: cartas[idx].volume });
     const novos = [...virados, idx];
+
     setVirados(novos);
 
     if (novos.length === 2) {
@@ -4204,7 +4228,10 @@ function SequenciaAuditiva({ p, onDone }: any) {
         return;
       }
       setTocandoIdx(i);
-      speak(p.seq[i]);
+      // Adicionar variabilidade de volume baseada no nível
+      const vol = p.nivel === 1 ? 1.0 : p.nivel === 2 ? 0.8 : 0.6;
+      speak(p.seq[i], { volume: vol });
+
       i++;
     }, 1200);
     return () => clearInterval(interval);

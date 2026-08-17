@@ -10,12 +10,17 @@ export function usePipVoice() {
     setIsSpeaking(false);
   }, []);
 
-  const speak = useCallback(async (text: string) => {
+  const speak = useCallback(async (text: string, options?: { volume?: number; rate?: number; pitch?: number }) => {
     if (!text?.trim()) return;
     setIsSpeaking(true);
-    await speakChunked(text, { rate: 0.95, pitch: 1.05 });
+    await speakChunked(text, { 
+      rate: options?.rate ?? 0.95, 
+      pitch: options?.pitch ?? 1.05,
+      volume: options?.volume ?? 1.0
+    });
     setIsSpeaking(false);
   }, []);
+
 
   useEffect(() => () => stopSpeaking(), []);
 
