@@ -105,9 +105,15 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "palavra-imagem": icPalavraImagem,
   "formando-palavras": icFormandoPalavras,
   "leitura-palavras": icLeituraPalavras,
-  "completar-letra": icCompletarLetra,
+  "completar-letra": icCompletarLetter,
   "ordem-inversa": icOrdemInversa,
   "sinal-verde-vermelho": icSinalVerdeVermelho,
+  "pares-sonoros": icDiscriminacaoAuditiva,
+  "sequencia-auditiva": icRitmoBatidas,
+  "banquete-dos-dinos": icOndeEsta,
+  "trem-numerico": icSeqPadrao,
+  "troca-troca-regras": icSeqCores,
+  "ponte-de-blocos": icMosaico,
 };
 
 // Ícone do grupo clínico
