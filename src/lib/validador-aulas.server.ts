@@ -1,5 +1,22 @@
 import { z } from "zod";
-import { parseBNCC } from "@/escola-brilha/motor/resolver";
+
+// Utility to parse BNCC (isolated from main resolver to avoid Vite specific helpers in tests)
+function parseBNCCLocal(codigo: string) {
+  const c = (codigo || "").toUpperCase().trim();
+  const etapaSigla = c.slice(0, 2);
+  const anoSigla = c.slice(2, 4);
+  const disciplinaSigla = c.slice(4, 6);
+  const DISCIPLINAS: Record<string, string> = {
+    MA: "Matemática", LP: "Língua Portuguesa", CI: "Ciências", HI: "História", GE: "Geografia",
+    AR: "Arte", EF: "Educação Física", EN: "Língua Inglesa", ER: "Ensino Religioso", EO: "Campos de Experiência"
+  };
+  return {
+    codigo: c,
+    etapaSigla,
+    anoSigla,
+    disciplina: DISCIPLINAS[disciplinaSigla] ?? disciplinaSigla
+  };
+}
 
 /**
  * Validador de Aulas Geradas por IA
