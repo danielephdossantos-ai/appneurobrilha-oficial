@@ -136,12 +136,18 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
   );
 }
 
+import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
+
 export function Shell({ children }: { children?: ReactNode }) {
   const { activeChild, children: allChildren, setActiveChild, logout } = useAppState();
   const engine = usePedagogicalEngine();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const { unlocked: parentUnlocked, requestUnlock, lock: lockParent } = useParentMode();
+
+  useEffect(() => {
+    definirNomeCriancaFala(activeChild?.nome);
+  }, [activeChild?.nome]);
 
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
