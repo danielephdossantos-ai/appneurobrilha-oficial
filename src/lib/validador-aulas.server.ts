@@ -71,7 +71,7 @@ export async function validarAulaIA(
   }
 
   const aula = parsed.data;
-  const bnccData = parseBNCC(context.codigoBNCC);
+  const bnccData = parseBNCCLocal(context.codigoBNCC);
 
   // 2. Validação Pedagógica de Identidade
   if (context.serie !== 'EI' && !context.codigoBNCC.includes(context.serie)) {
