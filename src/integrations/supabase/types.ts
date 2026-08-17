@@ -608,6 +608,7 @@ export type Database = {
           aula_origem_id: string | null
           avaliacao: Json | null
           codigo_bncc: string
+          compatibilidade_hiperfoco: boolean | null
           conteudo: Json
           created_at: string | null
           desempenho_medio: number | null
@@ -616,6 +617,7 @@ export type Database = {
           faixa_etaria: string | null
           gerada_por_ia: boolean | null
           habilidade_bncc: string | null
+          hiperfoco: string | null
           id: string
           modelo_ia: string | null
           nivel: number | null
@@ -640,6 +642,7 @@ export type Database = {
           aula_origem_id?: string | null
           avaliacao?: Json | null
           codigo_bncc: string
+          compatibilidade_hiperfoco?: boolean | null
           conteudo?: Json
           created_at?: string | null
           desempenho_medio?: number | null
@@ -648,6 +651,7 @@ export type Database = {
           faixa_etaria?: string | null
           gerada_por_ia?: boolean | null
           habilidade_bncc?: string | null
+          hiperfoco?: string | null
           id?: string
           modelo_ia?: string | null
           nivel?: number | null
@@ -672,6 +676,7 @@ export type Database = {
           aula_origem_id?: string | null
           avaliacao?: Json | null
           codigo_bncc?: string
+          compatibilidade_hiperfoco?: boolean | null
           conteudo?: Json
           created_at?: string | null
           desempenho_medio?: number | null
@@ -680,6 +685,7 @@ export type Database = {
           faixa_etaria?: string | null
           gerada_por_ia?: boolean | null
           habilidade_bncc?: string | null
+          hiperfoco?: string | null
           id?: string
           modelo_ia?: string | null
           nivel?: number | null
@@ -2876,6 +2882,42 @@ export type Database = {
           xp?: number
         }
         Relationships: []
+      }
+      historico_uso_aulas: {
+        Row: {
+          aula_id: string
+          child_id: string
+          created_at: string | null
+          id: string
+        }
+        Insert: {
+          aula_id: string
+          child_id: string
+          created_at?: string | null
+          id?: string
+        }
+        Update: {
+          aula_id?: string
+          child_id?: string
+          created_at?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historico_uso_aulas_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "aulas_geradas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "historico_uso_aulas_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       homework_tasks: {
         Row: {
