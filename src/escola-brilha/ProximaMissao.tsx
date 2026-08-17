@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore } from "@/lib/navigation-context";
 import { Clock, Target, Sparkles, Rocket, ArrowRight, Trophy, Heart } from "lucide-react";
 import { proximaMissao, type MissaoMeta, type Dificuldade } from "./proxima-missao";
 import { temaDaDisciplina } from "./missoes-tema";
@@ -84,7 +85,14 @@ function RotinaFavoritos() {
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={() => navigate({ to: atual.href } as never)}
+          onClick={() => {
+            useNavigationStore.getState().setContext({
+              originRoute: "/",
+              originModule: "neuro-treino",
+              timestamp: Date.now(),
+            });
+            navigate({ to: atual.href } as never);
+          }}
           className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-2xl bg-white text-[#8a1030] font-black active:scale-[0.98]"
         >
           Começar missão <ArrowRight className="h-5 w-5" />
@@ -202,6 +210,13 @@ export function ProximaMissao({
         <Link
           to="/escola-brilha/$codigo"
           params={{ codigo: aula.codigo }}
+          onClick={() => {
+            useNavigationStore.getState().setContext({
+              originRoute: "/",
+              originModule: "escola-brilha",
+              timestamp: Date.now(),
+            });
+          }}
           className="w-full inline-flex items-center justify-center gap-2 h-12 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black active:scale-[0.98]"
         >
           Começar missão <ArrowRight className="h-5 w-5" />
