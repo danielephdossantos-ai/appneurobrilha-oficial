@@ -401,7 +401,7 @@ function Treino() {
                   Escrita Diária · 1º ao 4º ano
                 </div>
                 <div className="font-black text-white text-base leading-tight">
-                  Rotina de Escrita
+                  QUERO QUE VC ENVIE O ROTINA ESCRITA PRA AREA DO NEURO-TREINO
                 </div>
                 <div className="text-xs text-white/85">
                   Caderno, lousa e ditado — 15 min por dia
