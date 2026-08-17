@@ -213,7 +213,6 @@ function Treino() {
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
 
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     const STALE_KEYS = [
@@ -227,6 +226,10 @@ function Treino() {
       "neuro-treino:redirect",
       "currentWorld",
       "lastJourneyRoute",
+      // Chaves de cache das aulas
+      "plano-neuro:aulas",
+      "proxima-missao:cache",
+      "neuro-treino:cache"
     ];
     try {
       STALE_KEYS.forEach((k) => {
