@@ -159,7 +159,18 @@ export async function resolverMissao(
       .maybeSingle();
       
     if (ia) {
+      // Registrar utilização da aula da biblioteca global de forma assíncrona
+      if (perfil.childId) {
+        void supabase.from("aulas_geradas")
+          .update({
+            total_usos: ((ia as any).total_usos || 0) + 1,
+            ultima_utilizacao: new Date().toISOString()
+          } as any)
+          .eq("id", ia.id);
+      }
+
       aulaIA = {
+        id: ia.id,
         codigo: ia.codigo_bncc,
         titulo: ia.titulo || bncc.codigo,
         ano: bncc.ano,

@@ -610,6 +610,7 @@ export type Database = {
           codigo_bncc: string
           conteudo: Json
           created_at: string | null
+          desempenho_medio: number | null
           disciplina: string
           exemplos: Json | null
           faixa_etaria: string | null
@@ -619,12 +620,17 @@ export type Database = {
           modelo_ia: string | null
           nivel: number | null
           objetivo_pedagogico: string | null
+          primeira_utilizacao: string | null
           relacao_anterior: string | null
           respostas_corretas: Json | null
           serie: string
           status: Database["public"]["Enums"]["aula_status"] | null
           tipo_aula: string | null
           titulo: string
+          total_conclusoes: number | null
+          total_criancas: number | null
+          total_usos: number | null
+          ultima_utilizacao: string | null
           unidade: string | null
           updated_at: string | null
           versao: string | null
@@ -636,6 +642,7 @@ export type Database = {
           codigo_bncc: string
           conteudo?: Json
           created_at?: string | null
+          desempenho_medio?: number | null
           disciplina: string
           exemplos?: Json | null
           faixa_etaria?: string | null
@@ -645,12 +652,17 @@ export type Database = {
           modelo_ia?: string | null
           nivel?: number | null
           objetivo_pedagogico?: string | null
+          primeira_utilizacao?: string | null
           relacao_anterior?: string | null
           respostas_corretas?: Json | null
           serie: string
           status?: Database["public"]["Enums"]["aula_status"] | null
           tipo_aula?: string | null
           titulo: string
+          total_conclusoes?: number | null
+          total_criancas?: number | null
+          total_usos?: number | null
+          ultima_utilizacao?: string | null
           unidade?: string | null
           updated_at?: string | null
           versao?: string | null
@@ -662,6 +674,7 @@ export type Database = {
           codigo_bncc?: string
           conteudo?: Json
           created_at?: string | null
+          desempenho_medio?: number | null
           disciplina?: string
           exemplos?: Json | null
           faixa_etaria?: string | null
@@ -671,12 +684,17 @@ export type Database = {
           modelo_ia?: string | null
           nivel?: number | null
           objetivo_pedagogico?: string | null
+          primeira_utilizacao?: string | null
           relacao_anterior?: string | null
           respostas_corretas?: Json | null
           serie?: string
           status?: Database["public"]["Enums"]["aula_status"] | null
           tipo_aula?: string | null
           titulo?: string
+          total_conclusoes?: number | null
+          total_criancas?: number | null
+          total_usos?: number | null
+          ultima_utilizacao?: string | null
           unidade?: string | null
           updated_at?: string | null
           versao?: string | null
