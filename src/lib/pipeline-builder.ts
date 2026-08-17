@@ -10,20 +10,19 @@ export type PipelineNode = {
 };
 
 export async function obterPipelineHibrido(childId: string): Promise<PipelineNode[]> {
-  // 1. Obter perfil da criança na tabela 'children' que é a correta
+  // 1. Obter perfil da criança na tabela 'children'
   const { data: child } = await supabase
     .from("children")
-    .select("birth_date, current_grade")
+    .select("idade, serie")
     .eq("id", childId)
     .single();
 
   if (!child) return [];
 
-  // Calcular idade
-  const age = child.birth_date ? 
-    new Date().getFullYear() - new Date(child.birth_date).getFullYear() : 0;
+  // Usar idade direta da tabela 'children'
+  const age = child.idade || 0;
+  const grade = child.serie || "";
   
-  const grade = child.current_grade || "";
   const isEnsinoFundamental = grade && 
     !grade.toLowerCase().includes("infantil") &&
     !grade.toLowerCase().includes("maternal") &&
