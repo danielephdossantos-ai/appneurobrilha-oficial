@@ -3,7 +3,10 @@ import { useAppState, Child, Diagnostico } from "@/core/store";
 import { NeuroAdaptiveCore } from "@/engines/neuro-engine/core";
 import { NeuroState, NeuroAdjustment, NeuroProfile } from "@/engines/neuro-engine/types";
 import { supabase } from "@/database/supabase/client";
-import { recordSkillAttempt } from "@/services/neuro-treino/neuroMetrics";
+import { recordSkillAttempt, loadSkillState } from "@/services/neuro-treino/neuroMetrics";
+import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
+import { useParams } from "@tanstack/react-router";
+
 
 export interface NeuroSkillInfo {
   skillCode: string;
@@ -119,11 +122,44 @@ export function useNeuroAdaptive() {
     };
     try {
       const { adjustment: newAdjustment } = NeuroAdaptiveCore.processState(currentState);
+      
+      // Se tivermos uma dificuldade persistente carregada, ela deve influenciar a escala
+      if (metrics.performance.accuracyRate === 1.0 && metrics.performance.errorFrequency === 0) {
+        // Estado inicial ou sessão perfeita: respeitar o que veio do banco se for mais baixo (ou alto)
+        // No NeuroAdaptiveCore, o baseline do perfil pode ser 0.8, mas a criança pode estar em 0.5 por dificuldade real.
+      }
+
       setAdjustment(newAdjustment);
     } catch (error) {
       console.error("[useNeuroAdaptive] Error processing state:", error);
     }
   }, [profile, metrics]);
+
+  // CARREGAR DIFICULDADE PERSISTENTE POR HABILIDADE
+  const { slug } = useParams({ strict: false }) as { slug?: string };
+  useEffect(() => {
+    if (!activeChild || !slug) return;
+    const skill = getNeuroSkillInfo(slug as any);
+    
+    (async () => {
+      const state = await loadSkillState(activeChild.id, skill.skillCode);
+      if (state) {
+        // Se a taxa de sucesso for muito baixa historicamente, injetar na escala inicial
+        const historyAccuracy = state.hits_count / Math.max(1, state.total_attempts);
+        if (historyAccuracy < 0.6) {
+           setMetrics(prev => ({
+             ...prev,
+             performance: {
+               ...prev.performance,
+               accuracyRate: historyAccuracy,
+               errorFrequency: state.errors_count % 20 // Semente de erro para o motor reagir
+             }
+           }));
+        }
+      }
+    })();
+  }, [activeChild, slug]);
+
 
   // Simular fadiga ao longo do tempo
   useEffect(() => {

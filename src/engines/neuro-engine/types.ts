@@ -65,6 +65,7 @@ export interface NeuroAdjustment {
   stimuliReduction: boolean;
   interfaceSimplification: boolean;
   difficultyScale: number; // 0.1 to 1.0
+  persistentDifficultyScale?: number; // Persiste entre sessões para a habilidade específica
   positiveReinforcementFrequency: number; // 0.0 to 1.0
   suggestBreak: boolean;
   audioAdaptation: {

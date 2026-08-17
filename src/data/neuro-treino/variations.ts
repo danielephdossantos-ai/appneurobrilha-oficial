@@ -1003,12 +1003,15 @@ const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10); // 0,1,2
   const nivel = faixa + 1;
   const alvosQtd = [2, 4, 6][faixa];          // quantos alvos achar
-  const distratores = [3, 4, 5][faixa];        // distratores caminhando junto
+  const distratores = [2, 4, 7][faixa];        // distratores caminhando junto (aumentado no difícil)
   const totalFiguras = alvosQtd + distratores;
-  const flutuarMs = [20000, 12000, 8000][faixa]; // ida+volta: 20s fácil, 12s médio, 8s difícil
+  const flutuarMs = [20000, 14000, 7000][faixa]; // ida+volta: mais rápido no difícil para exigir foco rápido
   const alvo = FOCO_BANCO[(i * 5) % FOCO_BANCO.length];
   const distList = _focoPick(FOCO_BANCO, distratores, i * 31 + 7, alvo);
-  // itens: várias cópias do mesmo alvo + distratores variados
+  
+  // No nível 3, garantir que os distratores sejam visualmente parecidos com o alvo se possível
+  // ou simplesmente aumentar a densidade.
+  
   const itens = _focoPick(
     [...Array(alvosQtd).fill(alvo), ...distList],
     totalFiguras,
@@ -1019,6 +1022,7 @@ const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
     payload: { alvo, itens, alvosQtd, nivel, totalFiguras, flutuarMs },
   };
 });
+
 
 
 // 12. MOSAICO DE FORMAS — montar figuras com peças geométricas reais (Tangram)
