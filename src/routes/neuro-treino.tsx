@@ -328,12 +328,6 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-
-
-
-
-
-
           {GRUPOS.map((g) => {
 
             const cfg = GROUP_CONFIG[g.nome];
