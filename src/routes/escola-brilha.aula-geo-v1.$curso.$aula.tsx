@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlayerGeoV1 } from "@/escola-brilha/curso-v4/geografia-3ano/player/PlayerGeoV1";
@@ -38,6 +39,7 @@ function marcarConcluida(cursoSlug: string, aulaSlug: string) {
 function AulaGeoV1Page() {
   const { curso, aula } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const dados = getAulaGeoV1FromCurso(curso, aula);
   const [mostrarFinal, setMostrarFinal] = useState(false);
   const [proximaPendente, setProximaPendente] = useState<string | null>(null);
@@ -81,7 +83,11 @@ function AulaGeoV1Page() {
           <div className="text-4xl mb-3">🧭</div>
           Aula de Geografia não encontrada.
           <button
-            onClick={() => navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } })}
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+              }
+            }}
             className="block mx-auto mt-4 px-4 py-2 rounded-xl bg-white/10 border border-white/20 text-sm"
           >
             ← Voltar à trilha
@@ -91,8 +97,11 @@ function AulaGeoV1Page() {
     );
   }
 
-  const sair = () =>
-    navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+  const sair = () => {
+    if (!handleBack(navigate)) {
+      navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+    }
+  };
 
   const concluir = () => {
     marcarConcluida(curso, aula);
