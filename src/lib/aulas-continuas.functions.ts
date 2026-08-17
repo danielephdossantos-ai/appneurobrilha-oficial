@@ -192,6 +192,8 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
       .select("*, anamnese_v2:anamnese_v2(*)")
       .eq("id", data.childId)
       .maybeSingle();
+    
+    const hiperfoco = extrairHiperfoco(profile);
 
     // 2. Preparar Prompt Estruturado (Instrução 5/8)
     const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
@@ -202,6 +204,7 @@ DADOS DO ALUNO:
 - Série: ${data.serie}
 - Nível: ${data.nivel} (1: Iniciante, 2: Prática, 3: Consolidação, 4: Maestria)
 - Perfil Neuro: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
+- HIPERFOCO/INTERESSE PRINCIPAL: ${hiperfoco || "Não especificado (use temas lúdicos universais como animais, espaço ou super-heróis)"}
 
 OBJETIVO PEDAGÓGICO:
 - Disciplina: ${data.disciplina}
@@ -214,6 +217,9 @@ REGRAS OBRIGATÓRIAS:
 3. PROIBIDO o uso de EMOJIS (distração visual para neurodivergentes).
 4. Use linguagem infantil adequada para ${data.idade} anos.
 5. Se idade <= 6 anos: Foco em imagens (descreva-as como objetos JSON).
+6. PERSONALIZAÇÃO: Use o HIPERFOCO da criança como pano de fundo pedagógico para toda a aula. Se for "Dinossauros", os exemplos e problemas devem envolver dinossauros.
+7. NEUROEDUCAÇÃO: Feedbacks devem explicar o porquê do acerto ou erro.
+
 
 ESTRUTURA DO JSON (DEVE SER VÁLIDO):
 {
