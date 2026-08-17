@@ -22,10 +22,10 @@ Adaptaremos o componente `MundoTrilha` para exibir uma linha única de progress�
 - Cada nó na trilha representará um tipo de missão (Ícones diferentes para Neuro, Letras e Escola).
 - **Bloqueio:** Apenas o nó atual e os concluídos ficam coloridos; os futuros ficam em cinza com cadeado.
 
-### 3. Regras de Conteúdo por Idade
-- **3 a 6 anos:** A trilha alterna entre **Neuro** e **Primeiros Anos**.
-- **7 anos (1º/2º ano):** A trilha alterna entre **Neuro**, **Primeiros Anos** e **BNCC**.
-- **8 anos ou mais:** A trilha foca 100% no **BNCC** (Neuro-Treino é removido conforme regra existente).
+### 3. Regras de Conteúdo por Currículo
+- **Educação Infantil:** A trilha alterna entre **Neuro** e **Alfabetização** (Primeiros Anos).
+- **Ensino Fundamental (1º e 2º Ano):** A trilha alterna entre **Neuro**, **Alfabetização** e **BNCC**.
+- **Ensino Fundamental (3º Ano em diante):** A trilha foca 100% no **BNCC** (Neuro-Treino removido conforme regra 8+ anos).
 
 ## Etapas de Implementação
 
