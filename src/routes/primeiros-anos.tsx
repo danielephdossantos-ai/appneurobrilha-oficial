@@ -147,7 +147,7 @@ function PrimeirosAnosPage() {
     <Shell>
       <PageHeader
         emoji="🌱"
-        title="Brilha Kids"
+        title="Kids (Educação Infantil)"
         subtitle="3 a 6 anos · Plano Anual de Alfabetização"
       />
 
