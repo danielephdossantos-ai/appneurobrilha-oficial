@@ -231,8 +231,20 @@ export async function resolverMissao(
     };
   }
 
+  // 5. Registrar uso para evitar repetição (Implementação Motor de Hiperfoco)
+  if (childId && (aulaFinal as any).id) {
+    const { supabase: sb } = await import("@/integrations/supabase/client");
+    await sb
+      .from("historico_uso_aulas")
+      .upsert({ 
+        child_id: childId, 
+        aula_id: (aulaFinal as any).id 
+      }, { onConflict: 'child_id,aula_id' });
+  }
+
   // Adaptações — imports diretos evitam ciclo em tempo de execução.
   const { MotorPedagogico } = await import("./index");
+
 
   const resultIdade = MotorPedagogico.adaptacaoIdade.calcular({
     childId: perfil.childId ?? "",
