@@ -153,7 +153,7 @@ export async function resolverMissao(
       .select("*")
       .eq("codigo_bncc", bncc.codigo)
       .eq("serie", perfil.serie || bncc.ano)
-      .eq("status", "approved")
+      .eq("status", "approved") // Apenas aulas validadas e aprovadas podem ser acessadas
       .order('nivel', { ascending: true })
       .limit(1)
       .maybeSingle();
