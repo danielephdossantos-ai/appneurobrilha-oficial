@@ -458,7 +458,3 @@ function PrimeirosAnosPage() {
     </Shell>
   );
 }
-      )}
-    </Shell>
-  );
-}
