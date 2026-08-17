@@ -142,30 +142,44 @@ export async function resolverMissao(
 
   let aulaIA = null;
   
-  // Se não tem aula fixa, busca no banco de aulas geradas por IA
+  // Motor de Decisão Integrado: decide entre local, global ou IA
+  // (Nota: em produção, decidirConteudoAula seria chamado aqui via useServerFn ou similar)
+  // Para manter compatibilidade com o resolver síncrono/local:
+  
   if (!oficial && !base) {
+    // Busca na biblioteca global/IA
     const { data: ia } = await supabase
-      .from("bncc_conteudo")
+      .from("aulas_geradas")
       .select("*")
-      .eq("codigo", bncc.codigo)
+      .eq("codigo_bncc", bncc.codigo)
+      .eq("serie", perfil.serie || bncc.ano)
+      .eq("status", "approved")
+      .order('nivel', { ascending: true })
+      .limit(1)
       .maybeSingle();
       
     if (ia) {
-      // Converte o formato do banco para o tipo Aula
-      // O campo aula_ilustrada armazena o JSON compatível com o tipo Aula
       aulaIA = {
-        codigo: ia.codigo,
+        codigo: ia.codigo_bncc,
         titulo: ia.titulo || bncc.codigo,
         ano: bncc.ano,
         disciplina: bncc.disciplina,
-        ...(ia.aula_ilustrada as any)
+        ...(ia.conteudo as any)
       } as Aula;
     }
   }
 
   if (!oficial && !base && !aulaIA) {
-    // Missão não existe em nenhum lugar — registra e devolve estado de "em construção"
-    // (O Player poderá então disparar a geração contínua)
+    // Regra Definitiva Neuro-Treino: 8+ anos bloqueado
+    const idade = perfil.idade || 0;
+    if (bncc.codigo.startsWith("NT") && idade >= 8) {
+      return {
+        existe: false,
+        bncc,
+        mensagem: "Neuro-Treino disponível apenas até 7 anos. Explore o conteúdo pedagógico!",
+      };
+    }
+
     void registrarAusencia(bncc.codigo, perfil.childId);
     return {
       existe: false,
@@ -173,6 +187,7 @@ export async function resolverMissao(
       mensagem: MENSAGEM_MISSAO_EM_CONSTRUCAO,
     };
   }
+
 
   // Se temos uma aula (fixa ou IA), prosseguimos
   const aulaFinal = oficial || base || aulaIA;

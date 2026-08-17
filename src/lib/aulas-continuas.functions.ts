@@ -1,45 +1,129 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { parseBNCC } from "@/escola-brilha/motor/resolver";
 
 /**
- * Módulo de Orquestração de Conteúdo Contínuo
- * Responsável por decidir se uma aula deve ser buscada no cache ou gerada.
+ * Módulo de Motor de Decisão de Conteúdo
+ * Responsável por decidir qual aula utilizar e se é necessária geração via IA.
  */
 
-export const buscarOuAgendarGeracaoAula = createServerFn({ method: "POST" })
+export const decidirConteudoAula = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     codigoBNCC: z.string(),
     childId: z.string(),
-    perfilNeuro: z.string().optional()
+    idade: z.number().optional(),
+    serie: z.string().optional(),
+    nivelAtual: z.number().default(1)
   }).parse(data))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
+    const bncc = parseBNCC(data.codigoBNCC);
     
-    // 1. Verificar na biblioteca de aulas geradas aprovadas (Cache Global)
+    // Regra Definitiva Neuro-Treino: somente até 7 anos.
+    const isNeuroTreino = data.codigoBNCC.startsWith("NT");
+    const idade = data.idade || 0;
+    
+    if (isNeuroTreino && idade >= 8) {
+      return {
+        status: "bloqueado",
+        motivo: "Neuro-Treino disponível apenas para crianças até 7 anos.",
+        sugestao: "Migrar para conteúdo pedagógico curricular."
+      };
+    }
+
+    // 1. Tentar encontrar aula adequada (Série, Disciplina, BNCC, Nível)
+    // Busca em: Biblioteca Oficial (estática), Banco de Aulas IA (bncc_conteudo / aulas_geradas)
+    
+    // 1.1. Verificar na biblioteca global de aulas geradas aprovadas
     const { data: existente } = await supabase
       .from("aulas_geradas")
       .select("*")
       .eq("codigo_bncc", data.codigoBNCC)
+      .eq("serie", data.serie || bncc.ano)
+      .eq("nivel", data.nivelAtual)
       .eq("status", "approved")
       .maybeSingle();
 
     if (existente) {
+      await registrarLogDecisao(data.childId, {
+        serie: data.serie || bncc.ano,
+        disciplina: bncc.disciplina,
+        codigo_bncc: data.codigoBNCC,
+        nivel: data.nivelAtual,
+        aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
+        aula_encontrada_id: existente.id,
+        aula_encontrada_tipo: "ia",
+        resultado: "encontrada"
+      });
+
       return { 
         status: "pronta", 
         aulaId: existente.id, 
         titulo: existente.titulo,
         origem: "biblioteca_ia",
-        conteudo: existente
+        conteudo: existente.conteudo
       };
     }
 
-    // 2. Se não existe, retornar que precisa de geração
+    // 1.2. Verificar se existe aula de nível seguinte para sugerir/utilizar
+    const { data: nivelSeguinte } = await supabase
+      .from("aulas_geradas")
+      .select("*")
+      .eq("codigo_bncc", data.codigoBNCC)
+      .eq("serie", data.serie || bncc.ano)
+      .eq("nivel", data.nivelAtual + 1)
+      .eq("status", "approved")
+      .maybeSingle();
+      
+    if (nivelSeguinte) {
+       await registrarLogDecisao(data.childId, {
+        serie: data.serie || bncc.ano,
+        disciplina: bncc.disciplina,
+        codigo_bncc: data.codigoBNCC,
+        nivel: data.nivelAtual,
+        aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
+        aula_encontrada_id: nivelSeguinte.id,
+        aula_encontrada_tipo: "ia_proximo_nivel",
+        resultado: "encontrada"
+      });
+
+      return { 
+        status: "pronta", 
+        aulaId: nivelSeguinte.id, 
+        titulo: nivelSeguinte.titulo,
+        origem: "biblioteca_ia",
+        conteudo: nivelSeguinte.conteudo,
+        nota: "Utilizando aula do próximo nível disponível."
+      };
+    }
+
+    // 2. Se não encontrou nada adequado, sinalizar necessidade de geração
+    await registrarLogDecisao(data.childId, {
+      serie: data.serie || bncc.ano,
+      disciplina: bncc.disciplina,
+      codigo_bncc: data.codigoBNCC,
+      nivel: data.nivelAtual,
+      aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
+      resultado: "geracao_necessaria",
+      motivo_geracao: "Nenhum conteúdo adequado encontrado na biblioteca global ou aulas prévias."
+    });
+
     return { 
       status: "necessita_geracao", 
       codigoBNCC: data.codigoBNCC,
-      motivo: "Nenhum conteúdo aprovado encontrado na biblioteca permanente."
+      nivel: data.nivelAtual,
+      motivo: "Nenhum conteúdo adequado encontrado na biblioteca permanente."
     };
   });
+
+async function registrarLogDecisao(childId: string, log: any) {
+  const { supabase } = await import("@/integrations/supabase/client");
+  await supabase.from("motor_decisao_logs").insert({
+    child_id: childId,
+    ...log
+  });
+}
+
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
