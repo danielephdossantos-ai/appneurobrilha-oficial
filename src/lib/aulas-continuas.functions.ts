@@ -8,6 +8,8 @@ import { validarAulaIA } from "./validador-aulas.server";
  * Responsável por decidir qual aula utilizar e se é necessária geração via IA.
  */
 
+import { extrairHiperfoco } from "./hiperfoco-utils";
+
 export const decidirConteudoAula = createServerFn({ method: "POST" })
   .validator((d: unknown) => z.object({
     codigoBNCC: z.string(),
@@ -32,86 +34,85 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       };
     }
 
-    // 1. Tentar encontrar aula adequada (Série, Disciplina, BNCC, Nível)
-    // Busca em: Biblioteca Oficial (estática), Banco de Aulas IA (bncc_conteudo / aulas_geradas)
+    // 0. Buscar perfil e hiperfoco
+    const { data: profile } = await supabase
+      .from("children_profiles")
+      .select("*, anamnese_v2(*)")
+      .eq("id", data.childId)
+      .maybeSingle();
+      
+    const hiperfoco = extrairHiperfoco(profile);
+
+    // 1. Tentar encontrar aula adequada (Série, Disciplina, BNCC, Nível, Hiperfoco)
     
-    // 1.1. Verificar na biblioteca global de aulas geradas aprovadas
-    const { data: existente } = await supabase
+    // 1.1. Verificar se a criança já usou alguma aula (evitar repetição imediata)
+    const { data: aulasJaUsadas } = await supabase
+      .from("historico_uso_aulas")
+      .select("aula_id")
+      .eq("child_id", data.childId);
+    
+    const idsUsados = aulasJaUsadas?.map(u => u.aula_id) || [];
+
+    // 1.2. Buscar na biblioteca global (Priorizando Hiperfoco)
+    let query = supabase
       .from("aulas_geradas")
       .select("*")
       .eq("codigo_bncc", data.codigoBNCC)
       .eq("serie", data.serie || bncc.ano)
       .eq("nivel", data.nivelAtual)
-      .eq("status", "approved" as any)
-      .maybeSingle();
+      .eq("status", "approved" as any);
 
-    if (existente) {
-      // Registrar utilização e atualizar estatísticas da aula
-      await registrarUsoBibliotecaIA(existente.id, data.childId);
+    if (hiperfoco) {
+      query = query.eq("hiperfoco", hiperfoco);
+    }
 
-      await registrarLogDecisao(data.childId, {
-        serie: data.serie || bncc.ano,
-        disciplina: bncc.disciplina,
-        codigo_bncc: data.codigoBNCC,
-        nivel: data.nivelAtual,
-        aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
-        aula_encontrada_id: existente.id,
-        aula_encontrada_tipo: "ia",
-        resultado: "encontrada"
-      });
+    const { data: aprovadas } = await query;
+    
+    // Filtrar as que a criança ainda não usou
+    const disponiveis = aprovadas?.filter(a => !idsUsados.includes(a.id)) || [];
+
+    if (disponiveis.length > 0) {
+      // Variedade: selecionar uma aleatória das disponíveis
+      const selecionada = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+      
+      await registrarUsoBibliotecaIA(selecionada.id, data.childId);
 
       return { 
         status: "pronta", 
-        aulaId: existente.id, 
-        titulo: existente.titulo,
+        aulaId: selecionada.id, 
+        titulo: selecionada.titulo,
         origem: "biblioteca_ia",
-        conteudo: existente.conteudo
+        conteudo: selecionada.conteudo
       };
     }
 
-    // 1.2. Verificar se existe aula de nível seguinte para sugerir/utilizar
-    const { data: nivelSeguinte } = await supabase
-      .from("aulas_geradas")
-      .select("*")
-      .eq("codigo_bncc", data.codigoBNCC)
-      .eq("serie", data.serie || bncc.ano)
-      .eq("nivel", data.nivelAtual + 1)
-      .eq("status", "approved" as any)
-      .maybeSingle();
+    // 1.3. Fallback: se não tiver com hiperfoco, buscar sem hiperfoco (Reuso Pedagógico)
+    if (hiperfoco) {
+      const { data: semHiperfoco } = await supabase
+        .from("aulas_geradas")
+        .select("*")
+        .eq("codigo_bncc", data.codigoBNCC)
+        .eq("serie", data.serie || bncc.ano)
+        .eq("nivel", data.nivelAtual)
+        .eq("status", "approved" as any)
+        .is("hiperfoco", null);
       
-    if (nivelSeguinte) {
-       await registrarLogDecisao(data.childId, {
-        serie: data.serie || bncc.ano,
-        disciplina: bncc.disciplina,
-        codigo_bncc: data.codigoBNCC,
-        nivel: data.nivelAtual,
-        aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
-        aula_encontrada_id: nivelSeguinte.id,
-        aula_encontrada_tipo: "ia_proximo_nivel",
-        resultado: "encontrada"
-      });
-
-      return { 
-        status: "pronta", 
-        aulaId: nivelSeguinte.id, 
-        titulo: nivelSeguinte.titulo,
-        origem: "biblioteca_ia",
-        conteudo: nivelSeguinte.conteudo,
-        nota: "Utilizando aula do próximo nível disponível."
-      };
+      const disponiveisSemHip = semHiperfoco?.filter(a => !idsUsados.includes(a.id)) || [];
+      
+      if (disponiveisSemHip.length > 0) {
+        const selecionada = disponiveisSemHip[0];
+        await registrarUsoBibliotecaIA(selecionada.id, data.childId);
+        return { 
+          status: "pronta", 
+          aulaId: selecionada.id, 
+          titulo: selecionada.titulo,
+          origem: "biblioteca_ia_sem_hiperfoco",
+          conteudo: selecionada.conteudo
+        };
+      }
     }
 
     // 2. Se não encontrou nada adequado, sinalizar necessidade de geração
-    await registrarLogDecisao(data.childId, {
-      serie: data.serie || bncc.ano,
-      disciplina: bncc.disciplina,
-      codigo_bncc: data.codigoBNCC,
-      nivel: data.nivelAtual,
-      aula_procurada: `BNCC:${data.codigoBNCC} Nível:${data.nivelAtual}`,
-      resultado: "geracao_necessaria",
-      motivo_geracao: "Nenhum conteúdo adequado encontrado na biblioteca global ou aulas prévias."
-    });
-
     return { 
       status: "necessita_geracao", 
       codigoBNCC: data.codigoBNCC,
@@ -120,7 +121,7 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       serie: data.serie || bncc.ano,
       disciplina: bncc.disciplina,
       idade: data.idade,
-      motivo: "Nenhum conteúdo adequado encontrado na biblioteca permanente."
+      hiperfoco
     };
   });
 
