@@ -1,5 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { JornadaItem, JornadaSource } from "../modules/minha-jornada/types";
+import { gerarPlanoNeuro } from "../modules/neuro-plano/builder";
+import { adaptarPlanoNeuroParaJornada } from "../modules/minha-jornada/plano-neuro-adapter";
 
 /**
  * Orquestrador central da Jornada Unificada.
@@ -8,7 +10,7 @@ import { JornadaItem, JornadaSource } from "../modules/minha-jornada/types";
 
 /**
  * Ponto de entrada para gerar/atualizar a jornada da criança.
- * Nesta Fase 2A, apenas a estrutura está presente.
+ * Fase 2B.3: Conecta o motor do Plano Neuro.
  */
 export async function gerarMinhaJornada(childId: string) {
   console.log(`[Orquestrador] Iniciando orquestração para child: ${childId}`);
@@ -22,10 +24,37 @@ export async function gerarMinhaJornada(childId: string) {
 
   if (!child) return { success: false, error: "Criança não encontrada" };
 
-  return { 
-    success: true, 
-    message: "Infraestrutura pronta. Motores não conectados conforme Fase 2A." 
-  };
+  // 2. Coletar recomendações do Plano Neuro (Baseado na Anamnese)
+  try {
+    const { data: anamnese } = await supabase
+      .from("anamnese" as any)
+      .select("scores, risk_map")
+      .eq("child_id", childId)
+      .single();
+    
+    // Gera o plano usando a lógica interna do motor
+    const planoNeuro = gerarPlanoNeuro({
+      scores: (anamnese as any)?.scores,
+      risk: (anamnese as any)?.risk_map,
+      semanas: 4, 
+    });
+
+    // Adapta para o formato universal
+    const itensJornada = adaptarPlanoNeuroParaJornada(childId, planoNeuro);
+
+    // Persiste na jornada unificada
+    for (const item of itensJornada) {
+      await adicionarItemJornada(item);
+    }
+
+    return { 
+      success: true, 
+      message: `Jornada atualizada com ${itensJornada.length} itens do Plano Neuro.` 
+    };
+  } catch (error) {
+    console.error("[Orquestrador] Erro ao integrar Plano Neuro:", error);
+    return { success: false, error };
+  }
 }
 
 /**

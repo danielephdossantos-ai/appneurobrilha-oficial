@@ -2,6 +2,7 @@ export type JornadaSource =
   | "curriculo_anual" 
   | "primeiros_anos" 
   | "neuro_treino" 
+  | "plano_neuro"
   | "reforco" 
   | "aulas_continuas"
   | "brilha_vida";
