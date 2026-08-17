@@ -2271,6 +2271,12 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "completar-letra": COMPLETAR_LETRA_VARS,
   "ordem-inversa": ORDEM_INVERSA_VARS,
   "sinal-verde-vermelho": SINAL_VERDE_VERMELHO_VARS,
+  "pares-sonoros": PARES_SONOROS_VARS,
+  "sequencia-auditiva": SEQUENCIA_AUDITIVA_VARS,
+  "banquete-dos-dinos": BANQUETE_DINOS_VARS,
+  "trem-numerico": TREM_NUMERICO_VARS,
+  "troca-troca-regras": TROCA_REGRAS_VARS,
+  "ponte-de-blocos": PONTE_BLOCOS_VARS,
 };
 
 export const GRUPOS = [
@@ -2285,7 +2291,15 @@ export const GRUPOS = [
       "articulacao-sons",
       "vocabulario-semantico",
       "nomeacao-rapida",
+      "pares-sonoros",
+      "sequencia-auditiva",
     ] as CategoriaSlug[],
+  },
+  {
+    nome: "Jogos Clínicos Cognitivos 🦖",
+    emoji: "🦖",
+    cor: "from-amber/25 to-amber/5",
+    slugs: ["banquete-dos-dinos", "trem-numerico"] as CategoriaSlug[],
   },
   {
     nome: "Coordenação Motora 🤲",
@@ -2354,6 +2368,8 @@ export const GRUPOS = [
       "triagem-categorias",
       "expressao-emocao",
       "sinal-verde-vermelho",
+      "troca-troca-regras",
+      "ponte-de-blocos",
     ] as CategoriaSlug[],
   },
   {
