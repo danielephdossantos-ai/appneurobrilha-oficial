@@ -488,14 +488,22 @@ function RotinaEscrita() {
         ) : atividadeIA ? (
           <div className="space-y-4 relative z-10">
             <div className="bg-white/80 backdrop-blur-sm rounded-[32px] p-5 border-2 border-primary/10 shadow-sm">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="h-8 w-8 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
-                  <Target className="h-4 w-4 text-orange-600" />
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
+                    <Target className="h-4 w-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black text-orange-600 uppercase tracking-wider mb-0.5">Foco Pedagógico</div>
+                    <div className="text-sm font-black text-slate-800">{atividadeIA.habilidade_foco}</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-[10px] font-black text-orange-600 uppercase tracking-wider mb-0.5">Foco Pedagógico</div>
-                  <div className="text-sm font-black text-slate-800">{atividadeIA.habilidade_foco}</div>
-                </div>
+                {atividadeIA.from_library && (
+                  <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-green-100 border border-green-200" title="Atividade validada da Biblioteca Pedagógica">
+                    <Sparkles className="h-3 w-3 text-green-600" />
+                    <span className="text-[9px] font-black text-green-700 uppercase tracking-tighter">Biblioteca Viva</span>
+                  </div>
+                )}
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-4 mb-4 border border-slate-200">
