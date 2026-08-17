@@ -34,7 +34,6 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -44,9 +43,81 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.12)",
   },
   {
+    to: "/escola-brilha/ingles-ei",
+    title: "My First English",
+    subtitle: "Inglês · Ed. Infantil",
+    gradient: "from-[#a855f7] via-[#ec4899] to-[#d946ef]",
+    glow: "rgba(168,85,247,0.7)",
+    emoji: "🇺🇸",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/escola-brilha/matematica-ei",
+    title: "Matemática Kawaii",
+    subtitle: "Contar e comparar",
+    gradient: "from-[#10B981] via-[#2563EB] to-[#1d4ed8]",
+    glow: "rgba(16,185,129,0.7)",
+    emoji: "🔢",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/neuro-treino/ler-com-aurora",
+    title: "Ler com Aurora",
+    subtitle: "Pré II + 1º Ano",
+    gradient: "from-[#f59e0b] via-[#7c3aed] to-[#6d28d9]",
+    glow: "rgba(245,158,11,0.7)",
+    emoji: "🔤",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/biblioteca-alfa",
+    title: "Biblioteca Alfa",
+    subtitle: "Leitura graduada",
+    gradient: "from-rose-500 via-orange-500 to-amber-500",
+    glow: "rgba(244,63,94,0.7)",
+    emoji: "📚",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/escola-brilha/biblioteca-encantada",
+    title: "Biblioteca Encantada",
+    subtitle: "Comunicação Funcional",
+    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+    glow: "rgba(16,185,129,0.7)",
+    emoji: "🗣️",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/alfabetizacao",
+    title: "Alfabetização Brilha",
+    subtitle: "Consciência fonológica",
+    gradient: "from-pink-500 via-fuchsia-500 to-indigo-500",
+    glow: "rgba(236,72,153,0.7)",
+    emoji: "🅰️",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/escola-brilha/dislexia",
+    title: "Trilha da Leitura",
+    subtitle: "Dislexia · O-G",
+    gradient: "from-purple-600 via-fuchsia-500 to-orange-500",
+    glow: "rgba(147,51,234,0.7)",
+    emoji: "🎧",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+    to: "/escola-brilha/contar-com-pip",
+    title: "Contar com Pip",
+    subtitle: "Discalculia",
+    gradient: "from-sky-500 via-blue-500 to-indigo-500",
+    glow: "rgba(14,165,233,0.7)",
+    emoji: "🔢",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
     to: "/primeiros-anos",
     title: "Primeiros Anos",
-    subtitle: "Plano de Alfabetização · 3 a 6 anos",
+    subtitle: "Plano 3 a 6 anos",
     gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
     glow: "rgba(52,211,153,0.7)",
     emoji: "🌱",
@@ -61,7 +132,6 @@ const DESTINOS_KIDS: Destino[] = [
     emoji: "🎓",
     shine: "rgba(255,255,255,0.15)",
   },
-
   {
     to: "/plano-neuro",
     title: "Plano Neuro",
@@ -72,7 +142,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.15)",
   },
   {
-
     to: "/escola-brilha",
     title: "Escola Brilha",
     subtitle: "Aulas de verdade",
@@ -102,7 +171,7 @@ const DESTINOS_KIDS: Destino[] = [
   {
     to: "/missao-trabalho",
     title: "Missão Trabalho",
-    subtitle: "Trabalho Escolar Brilha",
+    subtitle: "Trabalho Escolar",
     gradient: "from-[#F59E0B] via-[#D97706] to-[#92400E]",
     glow: "rgba(245,158,11,0.7)",
     emoji: "📝",
