@@ -20,6 +20,12 @@ import {
   COMPLETAR_LETRA_VARS,
   ORDEM_INVERSA_VARS,
   SINAL_VERDE_VERMELHO_VARS,
+  PARES_SONOROS_VARS,
+  SEQUENCIA_AUDITIVA_VARS,
+  BANQUETE_DINOS_VARS,
+  TREM_NUMERICO_VARS,
+  TROCA_REGRAS_VARS,
+  PONTE_BLOCOS_VARS,
 } from "./variations-extended";
 
 export type CategoriaSlug =
@@ -71,7 +77,17 @@ export type CategoriaSlug =
   | "completar-letra"
   // FASE 3A
   | "ordem-inversa"
-  | "sinal-verde-vermelho";
+  | "sinal-verde-vermelho"
+  // FASE 3B - Auditivo
+  | "pares-sonoros"
+  | "sequencia-auditiva"
+  // FASE 3C - Matemática
+  | "banquete-dos-dinos"
+  | "trem-numerico"
+  // FASE 3D - Flexibilidade
+  | "troca-troca-regras"
+  // FASE 3F - Funções Executivas
+  | "ponte-de-blocos";
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
@@ -427,6 +443,64 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-primary/20 to-primary/5",
     objetivo: "Controle inibitório (Go/No-Go)",
     instrucao: "Toque quando ver o sinal verde, mas PARE no sinal vermelho!",
+  },
+  // FASE 3B
+  "pares-sonoros": {
+    slug: "pares-sonoros",
+    nome: "Pares Sonoros",
+    emoji: "🔔",
+    grupo: "Fono Clínico",
+    cor: "from-rose/25 to-coral/5",
+    objetivo: "Discriminação auditiva e memória de sons",
+    instrucao: "Toque nos sinos para ouvir e encontrar os sons iguais.",
+  },
+  "sequencia-auditiva": {
+    slug: "sequencia-auditiva",
+    nome: "Sequência Auditiva",
+    emoji: "🎶",
+    grupo: "Fono Clínico",
+    cor: "from-rose/25 to-coral/5",
+    objetivo: "Memória sequencial auditiva",
+    instrucao: "Ouça a sequência de sons e repita na mesma ordem.",
+  },
+  // FASE 3C
+  "banquete-dos-dinos": {
+    slug: "banquete-dos-dinos",
+    nome: "Banquete dos Dinos",
+    emoji: "🦖",
+    grupo: "Jogos Clínicos Cognitivos",
+    cor: "from-amber/25 to-amber/5",
+    objetivo: "Subitização e senso numérico",
+    instrucao: "Quantos lanchinhos o dinossauro tem? Escolha sem contar!",
+  },
+  "trem-numerico": {
+    slug: "trem-numerico",
+    nome: "Trem Numérico",
+    emoji: "🚂",
+    grupo: "Jogos Clínicos Cognitivos",
+    cor: "from-emerald/25 to-success/5",
+    objetivo: "Ordenação e sucessão numérica",
+    instrucao: "Coloque os números nos vagões na ordem certa.",
+  },
+  // FASE 3D
+  "troca-troca-regras": {
+    slug: "troca-troca-regras",
+    nome: "Troca-Troca de Regras",
+    emoji: "🔄",
+    grupo: "Funções Executivas",
+    cor: "from-primary/20 to-primary/5",
+    objetivo: "Flexibilidade cognitiva (shifting)",
+    instrucao: "Atenção! A regra pode mudar a qualquer momento.",
+  },
+  // FASE 3F
+  "ponte-de-blocos": {
+    slug: "ponte-de-blocos",
+    nome: "Ponte de Blocos",
+    emoji: "🌉",
+    grupo: "Funções Executivas",
+    cor: "from-primary/20 to-primary/5",
+    objetivo: "Planejamento e resolução de problemas",
+    instrucao: "Escolha o bloco certo para completar a ponte.",
   },
 };
 
