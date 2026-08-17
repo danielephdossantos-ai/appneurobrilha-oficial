@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo, useContext, createContext, Fragment } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
 import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
 import type { AulaV4, Interacao } from "../types";
@@ -83,6 +84,8 @@ const MOMENTOS: Array<{ id: string; label: string; key: keyof AulaV4 }> = [
 
 export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState("m1");
+  const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
 
   useEffect(() => {
     const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
@@ -106,9 +109,16 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
 
       <header className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Link to="/escola-brilha/curso/$slug" params={{ slug: cursoSlug }} className="text-sm text-white/70 hover:text-white">
+          <button
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/escola-brilha/curso/$slug", params: { slug: cursoSlug } });
+              }
+            }}
+            className="text-sm text-white/70 hover:text-white"
+          >
             ← Trilha
-          </Link>
+          </button>
           <div className="flex-1 min-w-0">
             <div className="text-sm font-bold truncate">{aula.titulo}</div>
             <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
@@ -157,9 +167,16 @@ export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
             >
               🎉 Concluir aula
             </button>
-            <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
+            <button
+              onClick={() => {
+                if (!handleBack(navigate)) {
+                  navigate({ to: voltarPara });
+                }
+              }}
+              className="text-xs text-white/50 hover:text-white/80"
+            >
               Sair para a trilha
-            </Link>
+            </button>
           </div>
         </main>
       </div>

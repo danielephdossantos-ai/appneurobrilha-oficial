@@ -1,6 +1,7 @@
 // ============= Full file contents =============
 
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
@@ -139,6 +140,8 @@ const CATALOGO_DIFICULDADES: Dificuldade[] = [
 
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
+  const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const engine = usePedagogicalEngine();
   const { sendNotification } = useNotifications();
   const [topic, setTopic] = useState("");
@@ -1098,7 +1101,11 @@ function ReforcoBrilha() {
             <AulaViewer
               aulaId={aulaAberta.id}
               titulo={aulaAberta.titulo}
-              onClose={() => setAulaAberta(null)}
+              onClose={() => {
+                if (!handleBack(navigate)) {
+                  setAulaAberta(null);
+                }
+              }}
               onComplete={async ({ tempoSegundos }) => {
                 if (!activeChild) return;
                 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
@@ -75,6 +76,7 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const { speak, stop, isSpeaking } = usePipVoice();
@@ -324,12 +326,16 @@ function NeuroAtividade() {
   return (
     <Shell>
       <div className="flex items-center justify-between gap-3 mb-2">
-        <Link
-          to="/neuro-treino"
+        <button
+          onClick={() => {
+            if (!handleBack(navigate)) {
+              navigate({ to: "/neuro-treino" });
+            }
+          }}
           className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft size={16} /> Voltar
-        </Link>
+        </button>
         <div className="flex items-center gap-2">
           <button
             onClick={toggleVoice}

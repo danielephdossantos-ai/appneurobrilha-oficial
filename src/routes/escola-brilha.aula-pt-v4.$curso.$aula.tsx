@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { getAulaPortuguesFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerPortuguesV4 } from "@/escola-brilha/curso-v4/player-portugues/PlayerPortuguesV4";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
@@ -24,6 +25,7 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function AulaPtV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const found = getAulaPortuguesFromCurso(cursoSlug, aulaSlug);
 
   if (!found) {
@@ -43,18 +45,20 @@ function AulaPtV4Route() {
         cursoSlug={cursoSlug}
         voltarPara={`/escola-brilha/curso/${cursoSlug}`}
         onConcluir={() => {
-          try {
-            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-            const list: string[] = raw ? JSON.parse(raw) : [];
-            if (!list.includes(aulaSlug)) list.push(aulaSlug);
-            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-          } catch {
-            /* ignore */
+          if (!handleBack(navigate)) {
+            try {
+              const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+              const list: string[] = raw ? JSON.parse(raw) : [];
+              if (!list.includes(aulaSlug)) list.push(aulaSlug);
+              localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+            } catch {
+              /* ignore */
+            }
+            navigate({
+              to: "/escola-brilha/curso/$slug",
+              params: { slug: cursoSlug },
+            });
           }
-          navigate({
-            to: "/escola-brilha/curso/$slug",
-            params: { slug: cursoSlug },
-          });
         }}
       />
       <ProfessorBrilhaBubble

@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
@@ -25,6 +26,7 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
 
   if (!found) {
@@ -50,10 +52,12 @@ function AulaV4Route() {
           } catch {
             /* ignore */
           }
-          navigate({
-            to: "/escola-brilha/curso/$slug",
-            params: { slug: cursoSlug },
-          });
+          if (!handleBack(navigate)) {
+            navigate({
+              to: "/escola-brilha/curso/$slug",
+              params: { slug: cursoSlug },
+            });
+          }
         }}
       />
       <ProfessorBrilhaBubble

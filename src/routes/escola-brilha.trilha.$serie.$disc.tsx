@@ -2,6 +2,7 @@ import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigationStore } from "@/lib/navigation-context";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
@@ -183,9 +184,15 @@ function TrilhaSerieDisc() {
                 <div key={h.codigo} className={`flex ${align}`}>
                   <button
                     disabled={!desbloqueada}
-                    onClick={() =>
-                      navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } })
-                    }
+                    onClick={() => {
+                      useNavigationStore.getState().setContext({
+                        originRoute: window.location.pathname,
+                        originModule: "escola-brilha",
+                        originParams: { serie, disc },
+                        timestamp: Date.now(),
+                      });
+                      navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } });
+                    }}
                     className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
                       desbloqueada
                         ? "text-[#0d1f55] shadow-xl hover:scale-105"

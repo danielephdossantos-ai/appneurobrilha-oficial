@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
@@ -186,6 +187,8 @@ const categorias = [
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
+  const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const [activeActivity, setActiveActivity] = useState<any>(null);
   const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha" | "kitcuidador" | "diarioabc" | "guiacrise" | "bateriacuidador">(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -349,36 +352,36 @@ function BrilhaVida() {
   };
 
   const CUSTOM_MAP: Record<string, { node: ReactNode; contexto: string }> = {
-    respirar: { node: <PausaRespirar onClose={() => setCustomActivity(null)} />, contexto: "Pausa para Respirar" },
-    termometro: { node: <TermometroEmocoes onClose={() => setCustomActivity(null)} />, contexto: "Termômetro das Emoções" },
-    semaforo: { node: <SemaforoSentir onClose={() => setCustomActivity(null)} />, contexto: "Semáforo do Sentir" },
-    cantinho: { node: <CantinhoCalma onClose={() => setCustomActivity(null)} />, contexto: "Cantinho da Calma" },
-    comoestou: { node: <ComoEstouAgora onClose={() => setCustomActivity(null)} />, contexto: "Como estou agora?" },
-    emojimagico: { node: <EmojiMagico onClose={() => setCustomActivity(null)} />, contexto: "Emoji Mágico" },
-    historias: { node: <HistoriasSociais onClose={() => setCustomActivity(null)} />, contexto: "Histórias Sociais" },
-    dividindo: { node: <DividindoBrinquedo onClose={() => setCustomActivity(null)} />, contexto: "Dividindo o Brinquedo" },
-    cuidando: { node: <CuidandoAmigo onClose={() => setCustomActivity(null)} />, contexto: "Cuidando do Amigo" },
-    minhavez: { node: <MinhaVezSuaVez onClose={() => setCustomActivity(null)} />, contexto: "Minha vez, sua vez" },
-    regras: { node: <RegrasCasa onClose={() => setCustomActivity(null)} />, contexto: "Regras da Casa" },
-    conflitos: { node: <ResolucaoConflitos onClose={() => setCustomActivity(null)} />, contexto: "Resolução de Conflitos" },
-    diario: { node: <DiarioSentir onClose={() => setCustomActivity(null)} />, contexto: "Diário do Sentir" },
-    elogio: { node: <ElogioMagico onClose={() => setCustomActivity(null)} />, contexto: "Elogio Mágico" },
-    bolha: { node: <BolhaBemEstar onClose={() => setCustomActivity(null)} />, contexto: "Bolha de Bem-Estar" },
-    roda: { node: <RodaDoDia onClose={() => setCustomActivity(null)} />, contexto: "Roda do Dia" },
-    grounding: { node: <Grounding54321 onClose={() => setCustomActivity(null)} />, contexto: "5-4-3-2-1 Sentidos" },
-    borboleta: { node: <ButterflyHug onClose={() => setCustomActivity(null)} />, contexto: "Abraço da Borboleta" },
-    espaguete: { node: <EspagueteEstatua onClose={() => setCustomActivity(null)} />, contexto: "Espaguete e Estátua" },
-    escutacorpo: { node: <InteroceptionScan onClose={() => setCustomActivity(null)} />, contexto: "Escuta do Corpo" },
-    zones: { node: <ZonesRegulation onClose={() => setCustomActivity(null)} />, contexto: "Zonas de Regulação" },
-    moodmeter: { node: <MoodMeterRuler onClose={() => setCustomActivity(null)} />, contexto: "Medidor de Emoções" },
-    firstthen: { node: <FirstThenBoard onClose={() => setCustomActivity(null)} />, contexto: "Primeiro… Depois" },
-    cronograma: { node: <CronogramaVisual onClose={() => setCustomActivity(null)} />, contexto: "Meu Dia em Cartões" },
-    timer: { node: <TimerVisual onClose={() => setCustomActivity(null)} />, contexto: "Relógio Vermelho" },
-    escolha: { node: <CartaoEscolha onClose={() => setCustomActivity(null)} />, contexto: "Você Escolhe" },
-    kitcuidador: { node: <KitCuidador onClose={() => setCustomActivity(null)} />, contexto: "Kit do Cuidador" },
-    diarioabc: { node: <DiarioABC onClose={() => setCustomActivity(null)} />, contexto: "Diário ABC" },
-    guiacrise: { node: <GuiaCrise onClose={() => setCustomActivity(null)} />, contexto: "Guia de Crise" },
-    bateriacuidador: { node: <BateriaCuidador onClose={() => setCustomActivity(null)} />, contexto: "Bateria do Cuidador" },
+    respirar: { node: <PausaRespirar onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Pausa para Respirar" },
+    termometro: { node: <TermometroEmocoes onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Termômetro das Emoções" },
+    semaforo: { node: <SemaforoSentir onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Semáforo do Sentir" },
+    cantinho: { node: <CantinhoCalma onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Cantinho da Calma" },
+    comoestou: { node: <ComoEstouAgora onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Como estou agora?" },
+    emojimagico: { node: <EmojiMagico onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Emoji Mágico" },
+    historias: { node: <HistoriasSociais onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Histórias Sociais" },
+    dividindo: { node: <DividindoBrinquedo onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Dividindo o Brinquedo" },
+    cuidando: { node: <CuidandoAmigo onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Cuidando do Amigo" },
+    minhavez: { node: <MinhaVezSuaVez onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Minha vez, sua vez" },
+    regras: { node: <RegrasCasa onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Regras da Casa" },
+    conflitos: { node: <ResolucaoConflitos onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Resolução de Conflitos" },
+    diario: { node: <DiarioSentir onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Diário do Sentir" },
+    elogio: { node: <ElogioMagico onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Elogio Mágico" },
+    bolha: { node: <BolhaBemEstar onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Bolha de Bem-Estar" },
+    roda: { node: <RodaDoDia onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Roda do Dia" },
+    grounding: { node: <Grounding54321 onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "5-4-3-2-1 Sentidos" },
+    borboleta: { node: <ButterflyHug onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Abraço da Borboleta" },
+    espaguete: { node: <EspagueteEstatua onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Espaguete e Estátua" },
+    escutacorpo: { node: <InteroceptionScan onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Escuta do Corpo" },
+    zones: { node: <ZonesRegulation onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Zonas de Regulação" },
+    moodmeter: { node: <MoodMeterRuler onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Medidor de Emoções" },
+    firstthen: { node: <FirstThenBoard onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Primeiro… Depois" },
+    cronograma: { node: <CronogramaVisual onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Meu Dia em Cartões" },
+    timer: { node: <TimerVisual onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Relógio Vermelho" },
+    escolha: { node: <CartaoEscolha onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Você Escolhe" },
+    kitcuidador: { node: <KitCuidador onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Kit do Cuidador" },
+    diarioabc: { node: <DiarioABC onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Diário ABC" },
+    guiacrise: { node: <GuiaCrise onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Guia de Crise" },
+    bateriacuidador: { node: <BateriaCuidador onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Bateria do Cuidador" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
@@ -396,7 +399,7 @@ function BrilhaVida() {
       <Shell>
         <div className="relative">
           <button
-            onClick={() => setActiveActivity(null)}
+            onClick={() => { if (!handleBack(navigate)) setActiveActivity(null); }}
             className="absolute -top-12 right-0 p-2 bg-white rounded-full shadow-lg border-2 border-slate-100 text-slate-400 hover:text-destructive transition-colors z-50"
           >
             <X size={24} />
@@ -413,7 +416,7 @@ function BrilhaVida() {
               title: activeActivity.content.title,
             }}
             onComplete={() => {
-              setTimeout(() => setActiveActivity(null), 2000);
+              setTimeout(() => { if (!handleBack(navigate)) setActiveActivity(null); }, 2000);
             }}
             emotion={{ current: "happy" }}
           />
@@ -492,7 +495,14 @@ function BrilhaVida() {
               {cat.atividades.map((atv) => (
                 <button
                   key={atv}
-                  onClick={() => startLevel(atv)}
+                  onClick={() => {
+                    useNavigationStore.getState().setContext({
+                      originRoute: "/brilha-vida",
+                      originModule: "brilha-vida",
+                      timestamp: Date.now(),
+                    });
+                    startLevel(atv);
+                  }}
                   className={`group relative overflow-hidden text-center p-4 sm:p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap flex flex-col items-center gap-3 h-full min-h-[14rem] sm:min-h-[16rem]`}
                 >
                   {/* Topo: Imagem centralizada e maior */}
