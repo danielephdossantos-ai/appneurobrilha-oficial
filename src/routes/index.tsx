@@ -34,7 +34,15 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-
+    to: "/minha-jornada",
+    title: "Minha Jornada",
+    subtitle: "Missão do Dia Unificada",
+    gradient: "from-[#6366F1] via-[#8B5CF6] to-[#D946EF]",
+    glow: "rgba(139,92,246,0.7)",
+    emoji: "🚀",
+    shine: "rgba(255,255,255,0.2)",
+  },
+  {
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -43,6 +51,7 @@ const DESTINOS_KIDS: Destino[] = [
     emoji: "🧠",
     shine: "rgba(255,255,255,0.12)",
   },
+
   {
     to: "/primeiros-anos",
     title: "Primeiros Anos",
