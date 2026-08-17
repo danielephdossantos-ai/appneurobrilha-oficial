@@ -2,7 +2,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { JornadaItem, JornadaSource } from "../modules/minha-jornada/types";
 import { gerarPlanoNeuro } from "../modules/neuro-plano/builder";
 import { adaptarPlanoNeuroParaJornada } from "../modules/minha-jornada/plano-neuro-adapter";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 /**
  * Orquestrador central da Jornada Unificada.
@@ -27,8 +26,7 @@ export async function gerarMinhaJornada(childId: string) {
 
   // 2. Coletar recomendações do Plano Neuro (Baseado na Anamnese)
   try {
-    // Busca a anamnese diretamente via supabaseAdmin para garantir acesso ao risk_map/scores
-    const { data: anamnese } = await (await import('@/integrations/supabase/client.server')).supabaseAdmin
+    const { data: anamnese } = await supabase
       .from("anamnese" as any)
       .select("scores, risk_map")
       .eq("child_id", childId)

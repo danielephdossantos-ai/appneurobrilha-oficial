@@ -24,6 +24,7 @@ describe("Minha Jornada Orquestrador - Fase 2B.3 (Plano Neuro)", () => {
     (supabase.select as any).mockReturnThis();
     (supabase.eq as any).mockReturnThis();
     (supabase.upsert as any).mockReturnThis();
+    (supabase.single as any).mockReturnValue({ data: null, error: null });
   });
 
   describe("Adaptador Plano Neuro", () => {
