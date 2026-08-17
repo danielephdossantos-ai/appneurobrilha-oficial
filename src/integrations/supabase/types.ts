@@ -602,6 +602,95 @@ export type Database = {
         }
         Relationships: []
       }
+      aulas_geradas: {
+        Row: {
+          atividades: Json | null
+          aula_origem_id: string | null
+          avaliacao: Json | null
+          codigo_bncc: string
+          conteudo: Json
+          created_at: string | null
+          disciplina: string
+          exemplos: Json | null
+          faixa_etaria: string | null
+          gerada_por_ia: boolean | null
+          habilidade_bncc: string | null
+          id: string
+          modelo_ia: string | null
+          nivel: number | null
+          objetivo_pedagogico: string | null
+          relacao_anterior: string | null
+          respostas_corretas: Json | null
+          serie: string
+          status: Database["public"]["Enums"]["aula_status"] | null
+          tipo_aula: string | null
+          titulo: string
+          unidade: string | null
+          updated_at: string | null
+          versao: string | null
+        }
+        Insert: {
+          atividades?: Json | null
+          aula_origem_id?: string | null
+          avaliacao?: Json | null
+          codigo_bncc: string
+          conteudo?: Json
+          created_at?: string | null
+          disciplina: string
+          exemplos?: Json | null
+          faixa_etaria?: string | null
+          gerada_por_ia?: boolean | null
+          habilidade_bncc?: string | null
+          id?: string
+          modelo_ia?: string | null
+          nivel?: number | null
+          objetivo_pedagogico?: string | null
+          relacao_anterior?: string | null
+          respostas_corretas?: Json | null
+          serie: string
+          status?: Database["public"]["Enums"]["aula_status"] | null
+          tipo_aula?: string | null
+          titulo: string
+          unidade?: string | null
+          updated_at?: string | null
+          versao?: string | null
+        }
+        Update: {
+          atividades?: Json | null
+          aula_origem_id?: string | null
+          avaliacao?: Json | null
+          codigo_bncc?: string
+          conteudo?: Json
+          created_at?: string | null
+          disciplina?: string
+          exemplos?: Json | null
+          faixa_etaria?: string | null
+          gerada_por_ia?: boolean | null
+          habilidade_bncc?: string | null
+          id?: string
+          modelo_ia?: string | null
+          nivel?: number | null
+          objetivo_pedagogico?: string | null
+          relacao_anterior?: string | null
+          respostas_corretas?: Json | null
+          serie?: string
+          status?: Database["public"]["Enums"]["aula_status"] | null
+          tipo_aula?: string | null
+          titulo?: string
+          unidade?: string | null
+          updated_at?: string | null
+          versao?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aulas_geradas_aula_origem_id_fkey"
+            columns: ["aula_origem_id"]
+            isOneToOne: false
+            referencedRelation: "aulas_geradas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       aulas_geradas_ia: {
         Row: {
           ano: string
@@ -8295,6 +8384,7 @@ export type Database = {
         | "final"
         | "simulado"
         | "recuperacao"
+      aula_status: "draft" | "validating" | "approved" | "rejected" | "archived"
       bncc_relation_kind:
         | "similar"
         | "anterior"
@@ -8494,6 +8584,7 @@ export const Constants = {
         "simulado",
         "recuperacao",
       ],
+      aula_status: ["draft", "validating", "approved", "rejected", "archived"],
       bncc_relation_kind: [
         "similar",
         "anterior",
