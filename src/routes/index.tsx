@@ -34,6 +34,7 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
+
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -44,8 +45,8 @@ const DESTINOS_KIDS: Destino[] = [
   },
   {
     to: "/primeiros-anos",
-    title: "Brilha Kids",
-    subtitle: "3 a 6 anos · Alfabetização",
+    title: "Primeiros Anos",
+    subtitle: "Plano de Alfabetização · 3 a 6 anos",
     gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
     glow: "rgba(52,211,153,0.7)",
     emoji: "🌱",
