@@ -43,7 +43,6 @@ export const getRoutineItems = createServerFn({ method: "GET" })
 
     const dayOfWeek = new Date(`${data.date}T12:00:00`).getDay();
 
-    // 1. Get manual routine items (recurring + specific to this date)
     const { data: manualItems, error } = await supabase
       .from("routine_items")
       .select("*")
@@ -53,7 +52,6 @@ export const getRoutineItems = createServerFn({ method: "GET" })
 
     if (error) throw error;
 
-    // Filter manual items by recurrence if it's a template (date is null)
     const filteredManual = manualItems?.filter(item => {
       if (item.date === data.date) return true;
       if (!item.date && item.recurrence_days) {
@@ -62,7 +60,6 @@ export const getRoutineItems = createServerFn({ method: "GET" })
       return false;
     }) || [];
 
-    // 2. Map to local schema
     return filteredManual.map(item => ({
       id: item.id,
       childId: item.child_id,
@@ -90,7 +87,6 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
 
     const payload = {
       child_id: data.childId,
-      parent_id: user.id,
       title: data.title,
       description: data.description,
       type: data.type,
@@ -103,7 +99,6 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
       status: data.status,
       source: data.source,
       source_id: data.sourceId,
-      updated_at: new Date().toISOString(),
     };
 
     if (data.id) {
@@ -130,6 +125,9 @@ export const deleteRoutineItem = createServerFn({ method: "POST" })
   .validator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
     const { error } = await supabase
       .from("routine_items")
       .delete()
@@ -139,15 +137,18 @@ export const deleteRoutineItem = createServerFn({ method: "POST" })
   });
 
 export const toggleRoutineItemStatus = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ 
+  .validator((d: unknown) => z.object({
     id: z.string().uuid(),
     status: z.enum(['pendente', 'concluido', 'atrasado', 'cancelado'])
   }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
     const { error } = await supabase
       .from("routine_items")
-      .update({ status: data.status, updated_at: new Date().toISOString() })
+      .update({ status: data.status })
       .eq("id", data.id);
     if (error) throw error;
     return { success: true };
