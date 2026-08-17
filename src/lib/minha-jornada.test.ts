@@ -2,14 +2,13 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { adicionarItemJornada } from "./minha-jornada-orquestrador";
 import { supabase } from "@/integrations/supabase/client";
 
-// Global mocks for common Supabase methods
-const mockSingle = vi.fn();
-const mockUpsert = vi.fn().mockReturnThis();
-const mockSelect = vi.fn().mockReturnThis();
-const mockEq = vi.fn().mockReturnThis();
-const mockFrom = vi.fn().mockReturnThis();
-
 vi.mock("@/integrations/supabase/client", () => {
+  const mockSingle = vi.fn();
+  const mockUpsert = vi.fn().mockReturnThis();
+  const mockSelect = vi.fn().mockReturnThis();
+  const mockEq = vi.fn().mockReturnThis();
+  const mockFrom = vi.fn().mockReturnThis();
+  
   return {
     supabase: {
       from: mockFrom,
@@ -26,15 +25,14 @@ describe("Minha Jornada Orquestrador - Fundação", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockFrom.mockReturnThis();
-    mockSelect.mockReturnThis();
-    mockEq.mockReturnThis();
-    mockUpsert.mockReturnThis();
+    (supabase.from as any).mockReturnThis();
+    (supabase.select as any).mockReturnThis();
+    (supabase.eq as any).mockReturnThis();
+    (supabase.upsert as any).mockReturnThis();
   });
 
   it("deve respeitar o bloqueio de Neuro-Treino para idade >= 8", async () => {
-    // Mock child data age 8
-    mockSingle.mockResolvedValueOnce({ data: { idade: 8 }, error: null });
+    (supabase.single as any).mockResolvedValueOnce({ data: { idade: 8 }, error: null });
 
     const item: any = {
       child_id: mockChildId,
@@ -51,9 +49,7 @@ describe("Minha Jornada Orquestrador - Fundação", () => {
   });
 
   it("deve permitir Neuro-Treino para idade < 8", async () => {
-    // 1st call: validarRegraIdade -> age 7
-    // 2nd call: adicionarItemJornada -> upsert result
-    mockSingle
+    (supabase.single as any)
       .mockResolvedValueOnce({ data: { idade: 7 }, error: null })
       .mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
 
@@ -71,8 +67,7 @@ describe("Minha Jornada Orquestrador - Fundação", () => {
   });
 
   it("deve preservar source e source_id originais no upsert", async () => {
-    // Mock for curriculo_anual (skips age check)
-    mockSingle.mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
+    (supabase.single as any).mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
 
     const item: any = {
       child_id: mockChildId,
@@ -85,7 +80,7 @@ describe("Minha Jornada Orquestrador - Fundação", () => {
 
     await adicionarItemJornada(item);
 
-    const upsertArgs = mockUpsert.mock.calls[0][0];
+    const upsertArgs = (supabase.upsert as any).mock.calls[0][0];
     expect(upsertArgs.source).toBe("curriculo_anual");
     expect(upsertArgs.source_id).toBe("EF02MA01-OF-01");
   });
