@@ -172,11 +172,13 @@ export async function resolverMissao(
 
   if (!aulaFinal && childId) {
     const decisao = await decidirConteudoAula({
-      codigoBNCC: bncc.codigo,
-      childId,
-      idade,
-      serie,
-      nivelAtual
+      data: {
+        codigoBNCC: bncc.codigo,
+        childId,
+        idade,
+        serie,
+        nivelAtual
+      }
     });
 
     if (decisao.status === "pronta" && decisao.conteudo) {
@@ -191,12 +193,14 @@ export async function resolverMissao(
     } else if (decisao.status === "necessita_geracao") {
       // 4. Solicitar Gemini se não existir aula adequada
       const gerada = await gerarAulaGemini({
-        childId,
-        codigoBNCC: bncc.codigo,
-        nivel: nivelAtual,
-        idade,
-        serie,
-        disciplina: bncc.disciplina
+        data: {
+          childId,
+          codigoBNCC: bncc.codigo,
+          nivel: nivelAtual,
+          idade,
+          serie,
+          disciplina: bncc.disciplina
+        }
       });
 
       if (gerada.status === "sucesso" && gerada.aula) {
