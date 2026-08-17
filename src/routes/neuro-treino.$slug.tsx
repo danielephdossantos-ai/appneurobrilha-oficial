@@ -30,6 +30,7 @@ import {
   type MotorzinhoTag,
   type ShapeType,
   type MosaicoPiece,
+  range,
 } from "@/data/neuro-treino/variations";
 import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
@@ -524,6 +525,10 @@ function MechanicRenderer({
       return <LeituraPalavras p={variation.payload} onDone={onConcluir} />;
     case "completar-letra":
       return <CompletarLetra p={variation.payload} onDone={onConcluir} />;
+    case "ordem-inversa":
+      return <OrdemInversa p={variation.payload} onDone={onConcluir} />;
+    case "sinal-verde-vermelho":
+      return <SinalVerdeVermelho p={variation.payload} onDone={onConcluir} />;
   }
 }
 
@@ -3876,6 +3881,238 @@ function CompletarLetra({ p, onDone }: any) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+// ============== FASE 3A - NOVAS MECÂNICAS ==============
+
+// 41. ORDEM INVERSA — Memorizar e clicar de trás pra frente
+function OrdemInversa({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const { hiperfoco } = useHiperfoco();
+  const [fase, setFase] = useState<"mostrar" | "reproduzir">("mostrar");
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [itensFinal, setItensFinal] = useState<string[]>([]);
+  const [ordemFinal, setOrdemFinal] = useState<string[]>([]);
+  const [countdown, setCountdown] = useState(0);
+
+  // Inicializar itens com hiperfoco se disponível
+  useEffect(() => {
+    let baseItens = p.itens;
+    if (hiperfoco && hiperfoco.elementos && hiperfoco.elementos.length > 0) {
+      // Usar elementos do hiperfoco para substituir os itens se houver o suficiente
+      const hElems = [...hiperfoco.elementos].sort(() => Math.random() - 0.5);
+      if (hElems.length >= p.itens.length) {
+        baseItens = hElems.slice(0, p.itens.length);
+      }
+    }
+    setItensFinal(baseItens);
+    setOrdemFinal([...baseItens].reverse());
+    setCountdown(Math.round(p.flashMs / 1000) + 1);
+  }, [p.itens, hiperfoco]);
+
+  useEffect(() => {
+    if (fase !== "mostrar") return;
+    const t = setTimeout(() => setFase("reproduzir"), p.flashMs);
+    const iv = setInterval(() => setCountdown((c) => Math.max(0, c - 1)), 1000);
+    return () => {
+      clearTimeout(t);
+      clearInterval(iv);
+    };
+  }, [fase, p.flashMs]);
+
+  const handleItem = (item: string) => {
+    if (fase !== "reproduzir") return;
+    const novos = [...selecionados, item];
+    setSelecionados(novos);
+    
+    if (novos.length === itensFinal.length) {
+      const correto = novos.every((val, idx) => val === ordemFinal[idx]);
+      setTimeout(() => onDone(correto), 600);
+    }
+  };
+
+  const btnSize = sens.largerTargets ? "w-24 h-24 text-5xl" : "w-16 h-16 text-4xl";
+
+  if (itensFinal.length === 0) return null;
+
+  return (
+    <div className="space-y-6 text-center py-4">
+      {fase === "mostrar" ? (
+        <div className="space-y-4 animate-in fade-in zoom-in duration-300">
+          <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
+            Memorize os itens!
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            {itensFinal.map((it: string, i: number) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <span className="text-[10px] font-black text-primary/50">{i + 1}º</span>
+                <div className={`${btnSize} bg-white rounded-3xl shadow-lg border-2 border-primary/20 flex items-center justify-center`}>
+                  <RenderEmoji e={it} />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-xs font-bold text-primary animate-pulse">
+            Sua vez em {countdown}...
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          <div className="text-sm font-black text-primary uppercase tracking-widest">
+            Agora toque de TRÁS PARA FRENTE!
+          </div>
+          
+          {/* Slots de resposta */}
+          <div className="flex justify-center gap-3">
+            {itensFinal.map((_: any, i: number) => (
+              <div
+                key={i}
+                className={`${sens.largerTargets ? "w-14 h-14" : "w-12 h-12"} rounded-2xl border-2 border-dashed ${
+                  selecionados[i] ? "border-success bg-success/10" : "border-muted-foreground bg-muted/5"
+                } flex items-center justify-center`}
+              >
+                {selecionados[i] && <RenderEmoji e={selecionados[i]} className="w-8 h-8" />}
+              </div>
+            ))}
+          </div>
+
+          {/* Teclado de opções (embaralhado) */}
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
+            {[...itensFinal].sort().map((it: string, i: number) => {
+              const jaUsado = selecionados.includes(it);
+              return (
+                <button
+                  key={i}
+                  disabled={jaUsado}
+                  onClick={() => handleItem(it)}
+                  className={`${btnSize} bg-card rounded-3xl shadow-md border-2 border-border flex items-center justify-center transition-all ${
+                    jaUsado ? "opacity-30 grayscale" : "hover:scale-105 active:scale-95"
+                  }`}
+                >
+                  <RenderEmoji e={it} />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 42. SINAL VERDE VERMELHO — Go/No-Go rápido
+function SinalVerdeVermelho({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const [index, setIndex] = useState(-1); // -1 = standby
+  const [fase, setFase] = useState<"ready" | "show" | "wait">("ready");
+  const [feedback, setFeedback] = useState<"hit" | "miss" | "wrong" | null>(null);
+  const [acertos, setAcertos] = useState(0);
+  const timerRef = useRef<any>(null);
+  const clickedRef = useRef(false);
+
+  const total = p.seq.length;
+
+  const proximo = (idx: number) => {
+    if (idx >= total) {
+      // Fim do jogo: calcular se passou no critério
+      // No Go/No-Go clínico, a criança precisa de alta precisão (geralmente >80%)
+      const score = (acertos / total);
+      onDone(score >= 0.8);
+      return;
+    }
+
+    setIndex(idx);
+    setFase("show");
+    setFeedback(null);
+    clickedRef.current = false;
+
+    const current = p.seq[idx];
+
+    // Tempo de exibição do sinal
+    timerRef.current = setTimeout(() => {
+      // Se era verde e não clicou = miss
+      if (current.tipo === "verde" && !clickedRef.current) {
+        setFeedback("miss");
+      }
+      // Se era vermelho e não clicou = hit (acerto por inibição)
+      if (current.tipo === "vermelho" && !clickedRef.current) {
+        setAcertos(a => a + 1);
+        setFeedback("hit");
+      }
+      
+      setFase("wait");
+      
+      // Intervalo entre estímulos
+      timerRef.current = setTimeout(() => proximo(idx + 1), p.intervaloMs);
+    }, current.displayMs);
+  };
+
+  const handleAction = () => {
+    if (fase !== "show" || clickedRef.current) return;
+    clickedRef.current = true;
+    clearTimeout(timerRef.current);
+
+    const current = p.seq[index];
+    if (current.tipo === "verde") {
+      setAcertos(a => a + 1);
+      setFeedback("hit");
+    } else {
+      setFeedback("wrong"); // Clicou no vermelho = erro de comissão
+    }
+
+    setFase("wait");
+    timerRef.current = setTimeout(() => proximo(index + 1), p.intervaloMs);
+  };
+
+  const btnSize = sens.largerTargets ? "w-64 h-64" : "w-48 h-48";
+
+  return (
+    <div className="space-y-8 text-center py-6 min-h-[300px] flex flex-col items-center justify-center">
+      {fase === "ready" ? (
+        <div className="space-y-4">
+          <div className="text-xl font-black text-primary">Pronto?</div>
+          <button
+            onClick={() => proximo(0)}
+            className="px-10 py-4 bg-primary text-white rounded-full font-black shadow-xl hover:scale-110 active:scale-95 transition-all"
+          >
+            VAMOS COMEÇAR!
+          </button>
+        </div>
+      ) : (
+        <div className="relative">
+          {/* Indicador de progresso */}
+          <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-1">
+             {range(total).map((i: number) => (
+               <div key={i} className={`w-2 h-2 rounded-full ${i <= index ? 'bg-primary' : 'bg-muted'}`} />
+             ))}
+          </div>
+
+          <button
+            onPointerDown={handleAction}
+            className={`
+              ${btnSize} rounded-full flex items-center justify-center text-8xl shadow-2xl transition-all duration-100
+              ${fase === "show" ? 'scale-105 active:scale-90' : 'scale-90 opacity-20'}
+              ${fase === "show" && p.seq[index].tipo === "verde" ? 'bg-emerald-500 ring-8 ring-emerald-300' : ''}
+              ${fase === "show" && p.seq[index].tipo === "vermelho" ? 'bg-rose-500 ring-8 ring-rose-300' : ''}
+              ${fase === "wait" && feedback === "hit" ? 'bg-success/50 ring-4 ring-success' : ''}
+              ${fase === "wait" && feedback === "wrong" ? 'bg-destructive/50 ring-4 ring-destructive' : ''}
+              ${fase === "wait" && feedback === "miss" ? 'bg-amber-500/50 ring-4 ring-amber-300' : 'bg-slate-200'}
+            `}
+          >
+            {fase === "show" ? (
+              <RenderEmoji e={p.seq[index].emoji} />
+            ) : (
+              feedback === "hit" ? "✅" : feedback === "wrong" ? "❌" : feedback === "miss" ? "❓" : "⚪"
+            )}
+          </button>
+          
+          <div className="mt-6 text-sm font-bold text-muted-foreground uppercase tracking-widest">
+            {fase === "show" ? "TOQUE RÁPIDO!" : "ESPERE..."}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

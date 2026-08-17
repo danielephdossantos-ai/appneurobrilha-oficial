@@ -18,6 +18,8 @@ import {
   FORMANDO_PALAVRAS_VARS,
   LEITURA_PALAVRAS_VARS,
   COMPLETAR_LETRA_VARS,
+  ORDEM_INVERSA_VARS,
+  SINAL_VERDE_VERMELHO_VARS,
 } from "./variations-extended";
 
 export type CategoriaSlug =
@@ -66,7 +68,10 @@ export type CategoriaSlug =
   | "palavra-imagem"
   | "formando-palavras"
   | "leitura-palavras"
-  | "completar-letra";
+  | "completar-letra"
+  // FASE 3A
+  | "ordem-inversa"
+  | "sinal-verde-vermelho";
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
@@ -405,6 +410,24 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Análise fonêmica e escrita de palavras",
     instrucao: "Toque na letra que falta para completar a palavra.",
   },
+  "ordem-inversa": {
+    slug: "ordem-inversa",
+    nome: "Ordem Inversa",
+    emoji: "🔄",
+    grupo: "Atenção & Concentração",
+    cor: "from-violet/25 to-primary/5",
+    objetivo: "Memória de trabalho (manipulação mental)",
+    instrucao: "Memorize os itens e toque neles na ordem de trás para frente!",
+  },
+  "sinal-verde-vermelho": {
+    slug: "sinal-verde-vermelho",
+    nome: "Verde e Vermelho",
+    emoji: "🚦",
+    grupo: "Funções Executivas",
+    cor: "from-primary/20 to-primary/5",
+    objetivo: "Controle inibitório (Go/No-Go)",
+    instrucao: "Toque quando ver o sinal verde, mas PARE no sinal vermelho!",
+  },
 };
 
 // ===================== Variações (30 por categoria) =====================
@@ -412,7 +435,7 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
 export type Variation = { id: string; payload: any };
 
 // Helpers
-const range = (n: number) => Array.from({ length: n }, (_, i) => i);
+export const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 const pick = <T>(arr: T[], i: number) => arr[i % arr.length];
 
 // 1. SONS INICIAIS
@@ -2172,6 +2195,8 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "formando-palavras": FORMANDO_PALAVRAS_VARS,
   "leitura-palavras": LEITURA_PALAVRAS_VARS,
   "completar-letra": COMPLETAR_LETRA_VARS,
+  "ordem-inversa": ORDEM_INVERSA_VARS,
+  "sinal-verde-vermelho": SINAL_VERDE_VERMELHO_VARS,
 };
 
 export const GRUPOS = [
@@ -2211,6 +2236,7 @@ export const GRUPOS = [
       "memoria-visual",
       "reacao-rapida",
       "seguir-instrucao",
+      "ordem-inversa",
     ] as CategoriaSlug[],
   },
   {
@@ -2253,6 +2279,7 @@ export const GRUPOS = [
       "cade-o-par",
       "triagem-categorias",
       "expressao-emocao",
+      "sinal-verde-vermelho",
     ] as CategoriaSlug[],
   },
   {
