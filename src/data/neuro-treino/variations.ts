@@ -2250,7 +2250,9 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "consciencia-fonologica": CONSCIENCIA_VARS,
   "consciencia-silabica": CONSCIENCIA_SILABICA_VARS,
   "compreensao-leitora": COMPREENSAO_LEITORA_VARS,
+  "foco-sustentado": FOCOSUS_VARS,
   "onde-esta": ONDE_VARS,
+
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
   
