@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore } from "@/lib/navigation-context";
-import { Clock, Target, Sparkles, Rocket, ArrowRight, Trophy, Heart } from "lucide-react";
+import { Clock, Target, Sparkles, Rocket, ArrowRight, Trophy, Heart, Play } from "lucide-react";
 import { proximaMissao, type MissaoMeta, type Dificuldade } from "./proxima-missao";
 import { temaDaDisciplina } from "./missoes-tema";
 import { useFavoritos, removerFavorito } from "@/lib/favoritos-neurotreino";
@@ -88,10 +88,10 @@ function RotinaFavoritos() {
           onClick={() => {
             useNavigationStore.getState().setContext({
               originRoute: "/",
-              originModule: "neuro-treino",
+              originModule: "home",
               timestamp: Date.now(),
             });
-            navigate({ to: atual.href } as never);
+            navigate({ to: "/trilha-unificada" } as never);
           }}
           className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-2xl bg-white text-[#8a1030] font-black active:scale-[0.98]"
         >
@@ -120,6 +120,7 @@ export function ProximaMissao({
   nomeCrianca?: string;
 }) {
   const [meta, setMeta] = useState<MissaoMeta | null | undefined>(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let vivo = true;
@@ -131,6 +132,14 @@ export function ProximaMissao({
     };
   }, [childId, serieCrianca]);
 
+  const handleStartMission = () => {
+    useNavigationStore.getState().setContext({
+      originRoute: "/",
+      originModule: "home",
+      timestamp: Date.now(),
+    });
+    navigate({ to: "/trilha-unificada" });
+  };
 
   if (meta === undefined) {
     return (
@@ -207,20 +216,12 @@ export function ProximaMissao({
           <p className="text-sm font-bold leading-snug">{objetivo}</p>
         </div>
 
-        <Link
-          to="/escola-brilha/$codigo"
-          params={{ codigo: aula.codigo }}
-          onClick={() => {
-            useNavigationStore.getState().setContext({
-              originRoute: "/",
-              originModule: "escola-brilha",
-              timestamp: Date.now(),
-            });
-          }}
+        <button
+          onClick={handleStartMission}
           className="w-full inline-flex items-center justify-center gap-2 h-12 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black active:scale-[0.98]"
         >
-          Começar missão <ArrowRight className="h-5 w-5" />
-        </Link>
+          Minha Jornada <Play className="h-5 w-5 fill-current" />
+        </button>
       </div>
     </div>
     </>
