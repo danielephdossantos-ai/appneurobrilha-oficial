@@ -140,8 +140,32 @@ export async function resolverMissao(
   const oficial = hasMissaoOficial(bncc.codigo) ? getMissaoOficial(bncc.codigo) ?? null : null;
   const base = hasAula(bncc.codigo) ? getAula(bncc.codigo) ?? null : null;
 
+  let aulaIA = null;
+  
+  // Se não tem aula fixa, busca no banco de aulas geradas por IA
   if (!oficial && !base) {
-    // Missão não existe — registra e devolve estado de "em construção".
+    const { data: ia } = await supabase
+      .from("bncc_conteudo")
+      .select("*")
+      .eq("codigo", bncc.codigo)
+      .maybeSingle();
+      
+    if (ia) {
+      // Converte o formato do banco para o tipo Aula
+      // O campo aula_ilustrada armazena o JSON compatível com o tipo Aula
+      aulaIA = {
+        codigo: ia.codigo,
+        titulo: ia.titulo || bncc.codigo,
+        ano: bncc.ano,
+        disciplina: bncc.disciplina,
+        ...(ia.aula_ilustrada as any)
+      } as Aula;
+    }
+  }
+
+  if (!oficial && !base && !aulaIA) {
+    // Missão não existe em nenhum lugar — registra e devolve estado de "em construção"
+    // (O Player poderá então disparar a geração contínua)
     void registrarAusencia(bncc.codigo, perfil.childId);
     return {
       existe: false,
@@ -149,6 +173,9 @@ export async function resolverMissao(
       mensagem: MENSAGEM_MISSAO_EM_CONSTRUCAO,
     };
   }
+
+  // Se temos uma aula (fixa ou IA), prosseguimos
+  const aulaFinal = oficial || base || aulaIA;
 
   // Adaptações — imports diretos evitam ciclo em tempo de execução.
   const { MotorPedagogico } = await import("./index");
