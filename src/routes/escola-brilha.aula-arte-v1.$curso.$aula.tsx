@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { useEffect, useState } from "react";
 import { PlayerArteV1 } from "@/escola-brilha/curso-v4/arte-2ano/player/PlayerArteV1";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
@@ -35,6 +36,7 @@ function marcarConcluida(cursoSlug: string, aulaSlug: string) {
 function AulaArteV1Page() {
   const { curso, aula } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
   const dados = getAulaArteV1FromCurso(curso, aula);
   const [mostrarFinal, setMostrarFinal] = useState(false);
 
@@ -50,9 +52,11 @@ function AulaArteV1Page() {
           <div className="text-4xl mb-3">🎨</div>
           Aula de Arte não encontrada.
           <button
-            onClick={() =>
-              navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } })
-            }
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+              }
+            }}
             className="block mx-auto mt-4 px-4 py-2 rounded-xl bg-white/10 border border-white/20 text-sm"
           >
             ← Voltar
@@ -62,8 +66,11 @@ function AulaArteV1Page() {
     );
   }
 
-  const sair = () =>
-    navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+  const sair = () => {
+    if (!handleBack(navigate)) {
+      navigate({ to: "/escola-brilha/curso/$slug", params: { slug: curso } });
+    }
+  };
 
   const concluir = () => {
     marcarConcluida(curso, aula);
