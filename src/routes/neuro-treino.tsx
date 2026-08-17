@@ -601,12 +601,6 @@ function Treino() {
                 </div>
                 <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
               </Link>
-              <Link
-                to="/primeiros-anos"
-                className="block text-center text-xs font-black text-primary underline py-1"
-              >
-                Ver no plano anual (Primeiros Anos) →
-              </Link>
             </div>
           </div>
 

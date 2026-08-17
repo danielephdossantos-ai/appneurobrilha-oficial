@@ -46,6 +46,7 @@ import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RotinaEscritaRouteImport } from './routes/rotina-escrita'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as TrilhaRouteImport } from './routes/trilha'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -278,6 +279,11 @@ const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
   path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhaRoute = TrilhaRouteImport.update({
+  id: '/trilha',
+  path: '/trilha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrilhasRoute = TrilhasRouteImport.update({
@@ -594,6 +600,7 @@ export interface FileRoutesByFullPath {
   '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilha': typeof TrilhaRoute
   '/trilhas': typeof TrilhasRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -680,6 +687,7 @@ export interface FileRoutesByTo {
   '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilha': typeof TrilhaRoute
   '/trilhas': typeof TrilhasRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -768,6 +776,7 @@ export interface FileRoutesById {
   '/rotina-escrita': typeof RotinaEscritaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilha': typeof TrilhaRoute
   '/trilhas': typeof TrilhasRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -857,6 +866,7 @@ export interface FileRouteTypes {
     | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilha'
     | '/trilhas'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -943,6 +953,7 @@ export interface FileRouteTypes {
     | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilha'
     | '/trilhas'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1030,6 +1041,7 @@ export interface FileRouteTypes {
     | '/rotina-escrita'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilha'
     | '/trilhas'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1118,6 +1130,7 @@ export interface RootRouteChildren {
   RotinaEscritaRoute: typeof RotinaEscritaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
+  TrilhaRoute: typeof TrilhaRoute
   TrilhasRoute: typeof TrilhasRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -1418,6 +1431,13 @@ declare module '@tanstack/react-router' {
       path: '/termos'
       fullPath: '/termos'
       preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilha': {
+      id: '/trilha'
+      path: '/trilha'
+      fullPath: '/trilha'
+      preLoaderRoute: typeof TrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trilhas': {
@@ -1844,6 +1864,7 @@ const rootRouteChildren: RootRouteChildren = {
   RotinaEscritaRoute: RotinaEscritaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
+  TrilhaRoute: TrilhaRoute,
   TrilhasRoute: TrilhasRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:

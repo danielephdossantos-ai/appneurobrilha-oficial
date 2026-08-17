@@ -10,7 +10,7 @@ export interface NavigationContext {
   originRoute: string;
   originParams?: Record<string, string>;
   originSearch?: Record<string, any>;
-  originModule: string; // "neuro-treino" | "escola-brilha" | "reforco-brilha" | "brilha-vida" | "alfabetizacao"
+  originModule: string; // "neuro-treino" | "escola-brilha" | "reforco-brilha" | "brilha-vida" | "alfabetizacao" | "trilha"
   originCategory?: string;
   activityId?: string;
   timestamp: number;
