@@ -34,9 +34,9 @@ export async function gerarMinhaJornada(childId: string) {
     
     // Gera o plano usando a lógica interna do motor
     const planoNeuro = gerarPlanoNeuro({
-      scores: anamnese?.scores,
-      risk: anamnese?.risk_map,
-      semanas: 4, // Gera apenas as primeiras 4 semanas para a jornada
+      scores: (anamnese as any)?.scores,
+      risk: (anamnese as any)?.risk_map,
+      semanas: 4, 
     });
 
     // Adapta para o formato universal
