@@ -277,8 +277,28 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
     return () => window.removeEventListener("keydown", onKey);
   }, [total, onClose]);
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     const duration = Math.floor((Date.now() - startTime) / 1000);
+    
+    // Registrar conclusão na biblioteca global se for uma aula IA
+    if (aulaId && aulaId !== "ia-new") {
+      try {
+        const { data: aula } = await supabase
+          .from("aulas_geradas")
+          .select("total_conclusoes")
+          .eq("id", aulaId)
+          .maybeSingle();
+          
+        if (aula) {
+          await supabase.from("aulas_geradas").update({
+            total_conclusoes: (aula.total_conclusoes || 0) + 1
+          } as any).eq("id", aulaId);
+        }
+      } catch (e) {
+        console.warn("Não foi possível registrar conclusão da aula na biblioteca IA");
+      }
+    }
+
     onComplete?.({ tempoSegundos: duration });
     onClose();
   };
