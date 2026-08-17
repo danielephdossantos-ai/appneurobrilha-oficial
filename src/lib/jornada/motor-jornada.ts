@@ -1,0 +1,84 @@
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
+import { parseBNCC } from "@/escola-brilha/motor/resolver";
+
+/**
+ * Motor de Unificação da Jornada
+ * Responsável por intercalar Alfabetização, Escola Brilha e Plano Neuro.
+ */
+
+export const getJornadaDoDia = createServerFn({ method: "GET" })
+  .validator((d: unknown) => z.object({
+    childId: z.string(),
+    dia: z.number().default(1)
+  }).parse(d))
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    
+    // 1. Buscar perfil da criança
+    const { data: profile } = await supabase
+      .from("children_profiles")
+      .select("*, anamnese_v2:anamnese_v2(*)")
+      .eq("id", data.childId)
+      .maybeSingle();
+
+    if (!profile) throw new Error("Perfil não encontrado");
+
+    const idade = profile.birth_date ? 
+      new Date().getFullYear() - new Date(profile.birth_date).getFullYear() : 7;
+    
+    // 2. Definir as missões para o dia unificado
+    // Regra: Neuro (Cognitivo) -> Alfabetização (Principal) -> Escola Brilha (Geral)
+    
+    const missoes = [];
+
+    // Missão 1: Neuro (Se idade < 8)
+    if (idade < 8) {
+      missoes.push({
+        ordem: 1,
+        tipo: "neuro",
+        categoria: "Despertar Cognitivo",
+        codigo: "NT_COORD_01", // Exemplo, depois buscar dinâmico
+        titulo: "Despertar do Cérebro",
+        icon: "Brain"
+      });
+    }
+
+    // Missão 2: Alfabetização
+    missoes.push({
+      ordem: 2,
+      tipo: "alfabetizacao",
+      categoria: "Leitura e Escrita",
+      codigo: "EF01LP01", // 1º Ano/Alfabetização
+      titulo: "Mundo das Letras",
+      icon: "BookOpen"
+    });
+
+    // Missão 3: Escola Brilha (Geral)
+    missoes.push({
+      ordem: 3,
+      tipo: "escola-brilha",
+      categoria: "Matemática",
+      codigo: "EF01MA01",
+      titulo: "Contando Estrelas",
+      icon: "Calculator"
+    });
+
+    // 3. Verificar estado de conclusão para cada missão
+    const { data: progresso } = await supabase
+      .from("jornada_diaria" as any)
+      .select("*")
+      .eq("child_id", data.childId)
+      .eq("dia", data.dia)
+      .maybeSingle();
+
+    return {
+      dia: data.dia,
+      childId: data.childId,
+      status: progresso?.status || "pendente",
+      missoes: missoes.map(m => ({
+        ...m,
+        concluida: progresso?.missoes_concluidas?.includes(m.codigo) || false
+      }))
+    };
+  });
