@@ -66,7 +66,7 @@ describe("Minha Jornada Orquestrador - Fase 2B.3 (Plano Neuro)", () => {
 
   describe("Regras e Validações", () => {
     it("deve respeitar o bloqueio de Neuro-Treino para idade >= 8", async () => {
-      (supabase.single as any).mockResolvedValueOnce({ data: { idade: 8 }, error: null });
+      (supabase as any).single.mockResolvedValueOnce({ data: { idade: 8 }, error: null });
 
       const item: any = {
         child_id: mockChildId,
@@ -83,7 +83,7 @@ describe("Minha Jornada Orquestrador - Fase 2B.3 (Plano Neuro)", () => {
     });
 
     it("NÃO deve bloquear Plano Neuro para idade >= 8", async () => {
-      (supabase.single as any)
+      (supabase as any).single
         .mockResolvedValueOnce({ data: { idade: 8 }, error: null })
         .mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
 
@@ -101,7 +101,7 @@ describe("Minha Jornada Orquestrador - Fase 2B.3 (Plano Neuro)", () => {
     });
 
     it("deve preservar source e source_id originais no upsert", async () => {
-      (supabase.single as any).mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
+      (supabase as any).single.mockResolvedValueOnce({ data: { id: "item-1" }, error: null });
 
       const item: any = {
         child_id: mockChildId,
@@ -114,7 +114,7 @@ describe("Minha Jornada Orquestrador - Fase 2B.3 (Plano Neuro)", () => {
 
       await adicionarItemJornada(item);
 
-      const upsertArgs = (supabase.upsert as any).mock.calls[0][0];
+      const upsertArgs = (supabase as any).upsert.mock.calls[0][0];
       expect(upsertArgs.source).toBe("plano_neuro");
       expect(upsertArgs.source_id).toBe("EF02MA01-OF-01");
     });
