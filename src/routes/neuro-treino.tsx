@@ -331,70 +331,46 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-          {/* ── MY FIRST ENGLISH · Ed. Infantil ─────────────────── */}
-          <Link
-            to="/escola-brilha/ingles-ei"
-            className="group block rounded-3xl overflow-hidden border-2 border-purple-200 dark:border-purple-900/60 shadow hover:shadow-lg transition"
-          >
-            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899)" }}>
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
-                🇺🇸
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
-                  🇺🇸 Inglês · Educação Infantil
-                </div>
-                <div className="font-black text-white text-base leading-tight">
-                  My First English
-                </div>
-                <div className="text-xs text-white/85">
-                  Maternal · Pré I · Pré II — só oralidade e imagens
-                </div>
-              </div>
-              <BotaoFavorito
-                atividade={{ id: "ingles-ei", titulo: "My First English", grupo: "Inglês · Ed. Infantil", emoji: "🇺🇸", href: "/escola-brilha/ingles-ei" }}
-              />
-              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
-                →
-              </div>
+          {/* ── SEÇÃO: PRIMEIROS ANOS (3 a 6 anos) ─────────────────── */}
+          <section className="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-200 dark:border-emerald-900 shadow-sm overflow-hidden">
+            <div className="bg-emerald-500 p-4">
+              <h2 className="text-white font-black text-lg">Primeiros Anos (3 a 6 anos)</h2>
+              <p className="text-emerald-50 text-xs font-bold uppercase tracking-wide">Plano inicial de aprendizagem</p>
             </div>
-          </Link>
-
-          {/* ── MATEMÁTICA KAWAII · Contar e comparar ─────────────────── */}
-          <Link
-            to="/escola-brilha/matematica-ei"
-            className="group block rounded-3xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-900/60 shadow hover:shadow-lg transition"
-          >
-            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #10B981, #2563EB)" }}>
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
-                🔢
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[10px] font-black text-white/80 uppercase tracking-widest">
-                  Categoria especial · Ed. Infantil
-                </div>
-                <div className="font-black text-white text-base leading-tight">
-                  Matemática Kawaii
-                </div>
-                <div className="text-xs text-white/85">
-                  Contar e comparar · Subitizing
-                </div>
-              </div>
-              <BotaoFavorito
-                atividade={{ id: "matematica-ei", titulo: "Matemática Kawaii", grupo: "Ed. Infantil", emoji: "🔢", href: "/escola-brilha/matematica-ei" }}
-              />
-              <div className="text-white/90 group-hover:translate-x-1 transition text-xl">
-                →
-              </div>
+            <div className="p-3 space-y-3">
+              <Link to="/escola-brilha/ingles-ei" className="block group rounded-2xl p-3 bg-purple-50 hover:bg-purple-100 border border-purple-100 transition">
+                <div className="font-black text-purple-900">My First English</div>
+              </Link>
+              <Link to="/escola-brilha/matematica-ei" className="block group rounded-2xl p-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 transition">
+                <div className="font-black text-emerald-900">Matemática Kawaii</div>
+              </Link>
+              <Link to="/neuro-treino/ler-com-aurora" className="block group rounded-2xl p-3 bg-amber-50 hover:bg-amber-100 border border-amber-100 transition">
+                <div className="font-black text-amber-900">Ler com Aurora</div>
+              </Link>
+              <Link to="/biblioteca-alfa" className="block group rounded-2xl p-3 bg-rose-50 hover:bg-rose-100 border border-rose-100 transition">
+                <div className="font-black text-rose-900">Histórias por nível leitor</div>
+              </Link>
+              <Link to="/escola-brilha/biblioteca-encantada" className="block group rounded-2xl p-3 bg-teal-50 hover:bg-teal-100 border border-teal-100 transition">
+                <div className="font-black text-teal-900">Biblioteca Encantada (Comunicação Funcional)</div>
+              </Link>
+              <Link to="/alfabetizacao" className="block group rounded-2xl p-3 bg-pink-50 hover:bg-pink-100 border border-pink-100 transition">
+                <div className="font-black text-pink-900">Progressão por etapas (Alfabetização Brilha)</div>
+              </Link>
+              <Link to="/escola-brilha/dislexia" className="block group rounded-2xl p-3 bg-orange-50 hover:bg-orange-100 border border-orange-100 transition">
+                <div className="font-black text-orange-900">Trilha da Leitura (Dislexia)</div>
+              </Link>
+              <Link to="/escola-brilha/contar-com-pip" className="block group rounded-2xl p-3 bg-sky-50 hover:bg-sky-100 border border-sky-100 transition">
+                <div className="font-black text-sky-900">Contar com Pip (Matemática Terapêutica)</div>
+              </Link>
+              <Link to="/escola-brilha/trilha/$serie/$disc" params={{ serie: "educacao-infantil", disc: "portugues" }} className="block group rounded-2xl p-3 bg-green-50 hover:bg-green-100 border border-green-100 transition">
+                <div className="font-black text-green-900">Português - Educação Infantil</div>
+              </Link>
+              <Link to="/escola-brilha/trilha/$serie/$disc" params={{ serie: "educacao-infantil", disc: "default" }} className="block group rounded-2xl p-3 bg-violet-50 hover:bg-violet-100 border border-violet-100 transition">
+                <div className="font-black text-violet-900">Campos de Experiência - Educação Infantil</div>
+              </Link>
             </div>
-          </Link>
+          </section>
 
-          {/* ── LER COM AURORA · Pré II + 1º Ano ─────────────────── */}
-          <Link
-            to="/neuro-treino/ler-com-aurora"
-            className="group block rounded-3xl overflow-hidden border-2 border-amber-200 dark:border-amber-900/60 shadow hover:shadow-lg transition"
-          >
-            <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}>
               <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-2xl">
                 🔤
               </div>
