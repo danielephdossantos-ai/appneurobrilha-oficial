@@ -46,6 +46,9 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       .maybeSingle();
 
     if (existente) {
+      // Registrar utilização e atualizar estatísticas da aula
+      await registrarUsoBibliotecaIA(existente.id, data.childId);
+
       await registrarLogDecisao(data.childId, {
         serie: data.serie || bncc.ano,
         disciplina: bncc.disciplina,
