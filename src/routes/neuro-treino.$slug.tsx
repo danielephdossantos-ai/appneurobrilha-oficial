@@ -212,9 +212,15 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
-    return sanitizarFalaMascote(narracao, nomeCrianca);
+    try {
+      // Usar a importação direta se possível, ou require para evitar quebra se o arquivo não existir
+      const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
+      return sanitizarFalaMascote(narracao, nomeCrianca);
+    } catch (e) {
+      return narracao;
+    }
   }, [narracao, nomeCrianca]);
+
 
 
 
@@ -4222,7 +4228,10 @@ function SequenciaAuditiva({ p, onDone }: any) {
         return;
       }
       setTocandoIdx(i);
-      speak(p.seq[i]);
+      // Adicionar variabilidade de volume baseada no nível
+      const vol = p.nivel === 1 ? 1.0 : p.nivel === 2 ? 0.8 : 0.6;
+      speak(p.seq[i], { volume: vol });
+
       i++;
     }, 1200);
     return () => clearInterval(interval);
