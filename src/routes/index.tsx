@@ -304,7 +304,7 @@ function Index() {
               Explorar Cidade
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
             {DESTINOS_KIDS.map((d, i) => (
               <Link key={d.to} to={d.to}>
                 <motion.div
