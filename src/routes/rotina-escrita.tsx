@@ -34,8 +34,18 @@ import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
 import { SEMANAS_ESCRITA_2ANO } from "@/lib/rotina-escrita-2ano";
 import { SEMANAS_ESCRITA_3ANO } from "@/lib/rotina-escrita-3ano";
 import { SEMANAS_ESCRITA_4ANO } from "@/lib/rotina-escrita-4ano";
+import { 
+  getEscritaStatus, 
+  updateEscritaProgresso, 
+  type EscritaStatus,
+  type TipoLetra 
+} from "@/lib/motor-escrita.functions";
+import { MOTOR_PEDAGOGICO } from "@/lib/motor-pedagogico-data";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/rotina-escrita")({
+
   head: () => ({
     meta: [
       { title: "Rotina de Escrita Diária — Neuro Brilha Kids" },
@@ -79,6 +89,26 @@ function hojeISO() {
 
 function RotinaEscrita() {
   const { serie } = Route.useSearch();
+  const queryClient = useQueryClient();
+  const { activeChild } = useAppState();
+  
+  const fetchStatus = useServerFn(getEscritaStatus);
+  const { data: status, isLoading: loadingStatus } = useQuery({
+    queryKey: ["escrita-status", activeChild?.id],
+    queryFn: () => fetchStatus({ data: { childId: activeChild?.id || "" } }),
+    enabled: !!activeChild?.id
+  });
+
+  const updateProgressoFn = useServerFn(updateEscritaProgresso);
+  const mutation = useMutation({
+    mutationFn: (vars: { acerto: boolean, tipoLetra: "imprensa" | "cursiva" }) => 
+      updateProgressoFn({ data: { childId: activeChild?.id || "", ...vars } }),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild?.id] });
+    }
+  });
+
   const semanas =
     serie === "4"
       ? SEMANAS_ESCRITA_4ANO
@@ -87,7 +117,7 @@ function RotinaEscrita() {
         : serie === "2"
           ? SEMANAS_ESCRITA_2ANO
           : SEMANAS_ESCRITA;
-  const { activeChild } = useAppState();
+
   const push = usePushNotifications(activeChild?.id ?? null);
   const [rotina, setRotina] = useState<Rotina>({
     weekdays: ROTINA_DEFAULT_WEEKDAYS,
@@ -98,6 +128,7 @@ function RotinaEscrita() {
   const [loading, setLoading] = useState(true);
   const [semanaManual, setSemanaManual] = useState<number | null>(null);
   const [feitos, setFeitos] = useState<Record<string, boolean>>({});
+
 
   useEffect(() => {
     if (!activeChild?.id) return;
@@ -219,6 +250,56 @@ function RotinaEscrita() {
         subtitle={`${activeChild.nome} · Semana ${nSemana} de ${semanas.length} · ${sem.foco}`}
       />
 
+      {/* Seletor de Etapa Pedagógica (Motor) */}
+      {status && (
+        <div className="mb-6 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-3">
+            {MOTOR_PEDAGOGICO.map((etapa) => {
+              const isCurrent = status.nivel_atual === etapa.nivel;
+              const isPast = status.nivel_atual > etapa.nivel;
+              return (
+                <div 
+                  key={etapa.nivel}
+                  className={`flex-shrink-0 w-64 p-4 rounded-3xl border-2 transition-all ${
+                    isCurrent ? "border-primary bg-primary/5 shadow-md scale-[1.02]" : 
+                    isPast ? "border-green-500/30 bg-green-50/50" : "border-muted bg-muted/20 opacity-50"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
+                      isCurrent ? "bg-primary text-primary-foreground" : 
+                      isPast ? "bg-green-500 text-white" : "bg-muted-foreground text-white"
+                    }`}>
+                      ETAPA {etapa.nivel}
+                    </span>
+                    {isPast ? (
+                      <Check className="h-4 w-4 text-green-500" />
+                    ) : isCurrent ? (
+                      <div className="text-[10px] font-bold text-primary animate-pulse">EM PROGRESSO</div>
+                    ) : null}
+                  </div>
+                  <div className="text-sm font-black uppercase leading-tight mb-2">
+                    {etapa.titulo}
+                  </div>
+                  <div className="space-y-1">
+                    {etapa.objetivos.slice(0, 3).map((obj, i) => (
+                      <div key={i} className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                        <div className={`h-1 w-1 rounded-full ${isCurrent ? 'bg-primary' : 'bg-muted-foreground'}`} />
+                        {obj}
+                      </div>
+                    ))}
+                    {etapa.objetivos.length > 3 && (
+                      <div className="text-[9px] text-muted-foreground/70 italic">+ {etapa.objetivos.length - 3} itens</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+
       <div className="flex gap-2 mb-4">
         {(["1", "2", "3", "4"] as const).map((s2) => (
           <Link
@@ -233,6 +314,7 @@ function RotinaEscrita() {
           </Link>
         ))}
       </div>
+
 
       {/* Horário + notificação */}
       <div className="rounded-3xl bg-gradient-to-br from-[#0d1f55] to-[#1a3a8c] text-white p-5 shadow-xl mb-6">
@@ -428,7 +510,7 @@ function RotinaEscrita() {
         <Ditado itens={sem.ditado} />
       </BlocoCard>
 
-      {/* 4. Rascunho */}
+      {/* 4. Rascunho — inventar e passar a limpo */}
       <BlocoCard
         icone={<Pencil className="h-5 w-5" />}
         titulo="4. Rascunho — inventar e passar a limpo"
@@ -436,11 +518,63 @@ function RotinaEscrita() {
         feito={!!feitos.rascunho}
         onMarcar={() => marcar("rascunho")}
       >
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground mb-4">
           A criança rabisca a ideia numa folha (pode ter erro!), lê em voz alta para um adulto e só
           depois passa a limpo no caderno. Isso ensina que escrever é reescrever.
         </p>
+        
+        <div className="flex gap-2">
+          <button 
+            onClick={() => mutation.mutate({ acerto: true, tipoLetra: status?.pref_letra === "cursiva" ? "cursiva" : "imprensa" })}
+            disabled={mutation.isPending}
+            className="flex-1 btn-tap rounded-xl bg-green-500 text-white font-black py-2 text-sm flex items-center justify-center gap-2"
+          >
+            <Check className="h-4 w-4" /> Concluí com sucesso
+          </button>
+          <button 
+            onClick={() => mutation.mutate({ acerto: false, tipoLetra: status?.pref_letra === "cursiva" ? "cursiva" : "imprensa" })}
+            disabled={mutation.isPending}
+            className="flex-1 btn-tap rounded-xl bg-orange-500 text-white font-black py-2 text-sm flex items-center justify-center gap-2"
+          >
+            Ainda com dificuldade
+          </button>
+        </div>
       </BlocoCard>
+
+      {/* Preferências de Escrita (Pais) */}
+      <div className="rounded-3xl bg-white border-2 border-primary/20 p-5 shadow-sm mb-6">
+        <div className="text-sm font-black uppercase tracking-wider text-primary mb-3">
+          Preferência de Escrita
+        </div>
+        <div className="flex gap-2">
+          {(["imprensa", "cursiva", "ambas"] as TipoLetra[]).map((t) => (
+            <button
+              key={t}
+              onClick={async () => {
+                if (!activeChild?.id) return;
+                await (supabase as any).from("child_escrita_status").upsert({
+                  child_id: activeChild.id,
+                  pref_letra: t
+                });
+                queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild.id] });
+                toast.success(`Preferência alterada para: ${t}`);
+              }}
+              className={`flex-1 btn-tap rounded-xl py-2 px-3 text-xs font-black capitalize transition-all ${
+                status?.pref_letra === t 
+                  ? "bg-primary text-white shadow-md" 
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              {t === "ambas" ? "Ambas" : `Letra ${t}`}
+            </button>
+          ))}
+        </div>
+        <p className="text-[10px] text-muted-foreground mt-3 leading-tight italic">
+          * A escrita cursiva será introduzida progressivamente a partir da Etapa 7. 
+          A criança não deve ser obrigada a usar cursiva se não estiver pronta.
+        </p>
+      </div>
+
 
       {/* 5. Conversa e oralidade */}
       <BlocoCard
