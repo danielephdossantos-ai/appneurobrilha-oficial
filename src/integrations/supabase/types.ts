@@ -7541,6 +7541,74 @@ export type Database = {
         }
         Relationships: []
       }
+      routine_items: {
+        Row: {
+          child_id: string
+          created_at: string | null
+          date: string | null
+          description: string | null
+          duration_minutes: number | null
+          id: string
+          parent_id: string
+          recurrence_days: number[] | null
+          reminder_enabled: boolean | null
+          reminder_minutes_before: number | null
+          source: string | null
+          source_id: string | null
+          start_time: string
+          status: Database["public"]["Enums"]["routine_item_status"] | null
+          title: string
+          type: Database["public"]["Enums"]["routine_item_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string | null
+          date?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          parent_id: string
+          recurrence_days?: number[] | null
+          reminder_enabled?: boolean | null
+          reminder_minutes_before?: number | null
+          source?: string | null
+          source_id?: string | null
+          start_time: string
+          status?: Database["public"]["Enums"]["routine_item_status"] | null
+          title: string
+          type?: Database["public"]["Enums"]["routine_item_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string | null
+          date?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          parent_id?: string
+          recurrence_days?: number[] | null
+          reminder_enabled?: boolean | null
+          reminder_minutes_before?: number | null
+          source?: string | null
+          source_id?: string | null
+          start_time?: string
+          status?: Database["public"]["Enums"]["routine_item_status"] | null
+          title?: string
+          type?: Database["public"]["Enums"]["routine_item_type"]
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routine_items_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sensory_profiles: {
         Row: {
           auditory_sensitivity: number | null
@@ -8612,6 +8680,18 @@ export type Database = {
         | "medio"
         | "dificil"
         | "avancado"
+      routine_item_status: "pendente" | "concluido" | "atrasado" | "cancelado"
+      routine_item_type:
+        | "estudo"
+        | "atividade_neurobrilha"
+        | "terapia"
+        | "escola"
+        | "alimentacao"
+        | "higiene"
+        | "sono"
+        | "lazer"
+        | "compromisso"
+        | "outro"
       teaching_strategy_kind:
         | "visual"
         | "concreta"
@@ -8818,6 +8898,19 @@ export const Constants = {
         "medio",
         "dificil",
         "avancado",
+      ],
+      routine_item_status: ["pendente", "concluido", "atrasado", "cancelado"],
+      routine_item_type: [
+        "estudo",
+        "atividade_neurobrilha",
+        "terapia",
+        "escola",
+        "alimentacao",
+        "higiene",
+        "sono",
+        "lazer",
+        "compromisso",
+        "outro",
       ],
       teaching_strategy_kind: [
         "visual",
