@@ -840,3 +840,65 @@ export const COMPLETAR_LETRA_VARS: Variation[] = range(30).map((i) => {
   const opts = [b.letra, ...b.outras].sort(() => (i % 2 ? -1 : 1));
   return { id: `cl-${i + 1}`, payload: { ...b, opts } };
 });
+
+// FASE 3A - NOVAS VARIATIONS
+
+// ORDEM INVERSA — Memória de Trabalho
+const ORDEM_INVERSA_BANK = [
+  { itens: ["🍎", "🚗"], ordem: ["🚗", "🍎"] },
+  { itens: ["🐱", "🐶"], ordem: ["🐶", "🐱"] },
+  { itens: ["☀️", "🌙", "⭐"], ordem: ["⭐", "🌙", "☀️"] },
+  { itens: ["⚽", "🏀", "🎾"], ordem: ["🎾", "🏀", "⚽"] },
+  { itens: ["🟥", "🟦", "🟩", "🟨"], ordem: ["🟨", "🟩", "🟦", "🟥"] },
+  { itens: ["1️⃣", "2️⃣", "3️⃣", "4️⃣"], ordem: ["4️⃣", "3️⃣", "2️⃣", "1️⃣"] },
+];
+
+export const ORDEM_INVERSA_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10); // 0 facil (2 itens), 1 medio (3), 2 dificil (4-5)
+  const qtd = 2 + faixa + (i % 2 === 0 && faixa > 1 ? 1 : 0);
+  
+  // Pegar itens aleatórios do banco estendido ou criar dinâmico
+  const pool = ["🍎", "🚗", "🐱", "🐶", "☀️", "🌙", "⭐", "⚽", "🏀", "🎾", "🟥", "🟦", "🟩", "🟨", "🦁", "🐵", "🦄", "🐘", "🦖", "🚂"];
+  const selecionados: string[] = [];
+  const tempPool = [...pool];
+  for(let j=0; j<qtd; j++) {
+    const idx = (i * 7 + j * 3) % tempPool.length;
+    selecionados.push(tempPool.splice(idx, 1)[0]);
+  }
+
+  return {
+    id: `oi-${i + 1}`,
+    payload: {
+      itens: selecionados,
+      ordem: [...selecionados].reverse(),
+      nivel: faixa + 1,
+      flashMs: Math.max(800, 2500 - i * 50)
+    }
+  };
+});
+
+// SINAL VERDE VERMELHO — Controle Inibitório (Go/No-Go)
+export const SINAL_VERDE_VERMELHO_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const rounds = 6 + faixa * 2;
+  const speed = 1.0 + faixa * 0.3;
+  
+  const seq = range(rounds).map((k) => {
+    // 30% chance de ser sinal vermelho (No-Go) em níveis altos, 20% no baixo
+    const isNoGo = (i * 13 + k * 7) % 10 < (faixa === 0 ? 2 : 3);
+    return {
+      tipo: isNoGo ? "vermelho" : "verde",
+      emoji: isNoGo ? "🛑" : "🟢",
+      displayMs: Math.max(600, 1500 - (faixa * 200) - (i % 10 * 20))
+    };
+  });
+
+  return {
+    id: `svv-${i + 1}`,
+    payload: {
+      seq,
+      intervaloMs: Math.max(400, 1000 - i * 10),
+      nivel: faixa + 1
+    }
+  };
+});

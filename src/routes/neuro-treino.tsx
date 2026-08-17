@@ -63,6 +63,8 @@ import { url as icPalavraImagem } from "@/assets/neuro-treino/icons/v2/palavra-i
 import { url as icFormandoPalavras } from "@/assets/neuro-treino/icons/v2/formando-palavras.png.asset.json";
 import { url as icLeituraPalavras } from "@/assets/neuro-treino/icons/v2/leitura-palavras.png.asset.json";
 import { url as icCompletarLetra } from "@/assets/neuro-treino/icons/v2/completar-letra.png.asset.json";
+import { url as icOrdemInversa } from "@/assets/neuro-treino/icons/v2/memoria-visual.png.asset.json";
+import { url as icSinalVerdeVermelho } from "@/assets/neuro-treino/icons/v2/reacao-rapida.png.asset.json";
 
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,
@@ -104,6 +106,8 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "formando-palavras": icFormandoPalavras,
   "leitura-palavras": icLeituraPalavras,
   "completar-letra": icCompletarLetra,
+  "ordem-inversa": icOrdemInversa,
+  "sinal-verde-vermelho": icSinalVerdeVermelho,
 };
 
 // Ícone do grupo clínico
