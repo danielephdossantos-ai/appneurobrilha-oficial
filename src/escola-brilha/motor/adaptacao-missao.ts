@@ -41,7 +41,7 @@ export type SinaisAluno = {
   /** tempo médio de resposta por questão, em segundos */
   tempoMedioSegundos?: number;
   /** nível de domínio já registrado no banco */
-  nivelDominio?: "nao_iniciada" | "em_aprendizagem" | "parcialmente_dominada" | "dominada";
+  nivelDominio?: "nao_iniciada" | "em_aprendizagem" | "parcialmente_dominada" | "dominada" | "nivel_1_introducao" | "nivel_2_pratica" | "nivel_3_consolidacao";
   /** delta de evolução vs sessão anterior */
   evolucaoDelta?: number;
   /** nº de revisões já feitas nesta habilidade */
@@ -160,14 +160,19 @@ export function planejarAdaptacao(sinais: SinaisAluno): PlanoAdaptacao {
     }
   }
 
-  // Ajustes por nível de domínio
-  if (sinais.nivelDominio === "dominada") {
+  // Ajustes por nível de domínio (Progressão Pedagógica)
+  if (sinais.nivelDominio === "dominada" || sinais.nivelDominio === "nivel_3_consolidacao") {
     quantidadeExemplos = Math.max(1, quantidadeExemplos - 1);
     nivelApoio = "baixo";
-    motivos.push("dominio:dominada");
-  } else if (sinais.nivelDominio === "em_aprendizagem" || sinais.nivelDominio === "nao_iniciada") {
-    nivelApoio = "alto";
+    ritmo = "acelerado";
     motivos.push(`dominio:${sinais.nivelDominio}`);
+  } else if (sinais.nivelDominio === "nivel_2_pratica") {
+    nivelApoio = "medio";
+    motivos.push("dominio:nivel_2_pratica");
+  } else if (sinais.nivelDominio === "nivel_1_introducao" || sinais.nivelDominio === "nao_iniciada") {
+    nivelApoio = "alto";
+    ritmo = "lento";
+    motivos.push(`dominio:${sinais.nivelDominio ?? "inicial"}`);
   }
 
   // Evolução — se piorou, reforça apoio

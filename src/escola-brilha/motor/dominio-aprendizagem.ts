@@ -38,11 +38,17 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type NivelDominioAprendizagem =
   | "nao_iniciada"
-  | "em_desenvolvimento"
-  | "quase_dominada"
+  | "nivel_1_introducao"
+  | "nivel_2_pratica"
+  | "nivel_3_consolidacao"
   | "dominada";
 
-export type RotuloNivel = "Não iniciada" | "Em desenvolvimento" | "Quase dominada" | "Dominada";
+export type RotuloNivel = 
+  | "Não iniciada" 
+  | "Nível 1: Introdução" 
+  | "Nível 2: Prática" 
+  | "Nível 3: Consolidação" 
+  | "Dominada";
 
 export type OrigemInteracao =
   | "missao"
@@ -107,15 +113,17 @@ const PESOS = {
 } as const;
 
 const LIMIARES = {
-  emDesenvolvimento: 30, // >= 30
-  quaseDominada: 60,     // >= 60
-  dominada: 85,          // >= 85 + evidência em avaliação posterior
+  nivel1: 20,    // >= 20 (Introdução iniciada)
+  nivel2: 50,    // >= 50 (Domínio básico -> Prática)
+  nivel3: 75,    // >= 75 (Domínio avançado -> Consolidação)
+  dominada: 90,  // >= 90 + retenção em avaliações posteriores
 } as const;
 
 const ROTULOS: Record<NivelDominioAprendizagem, RotuloNivel> = {
   nao_iniciada: "Não iniciada",
-  em_desenvolvimento: "Em desenvolvimento",
-  quase_dominada: "Quase dominada",
+  nivel_1_introducao: "Nível 1: Introdução",
+  nivel_2_pratica: "Nível 2: Prática",
+  nivel_3_consolidacao: "Nível 3: Consolidação",
   dominada: "Dominada",
 };
 
@@ -195,12 +203,14 @@ export function calcularDominio(sinais: SinaisDominio): DetalheDominio {
     nivel = "nao_iniciada";
   } else if (score >= LIMIARES.dominada && temEvidenciaPosterior) {
     nivel = "dominada";
-  } else if (score >= LIMIARES.quaseDominada) {
-    nivel = "quase_dominada";
-  } else if (score >= LIMIARES.emDesenvolvimento) {
-    nivel = "em_desenvolvimento";
+  } else if (score >= LIMIARES.nivel3) {
+    nivel = "nivel_3_consolidacao";
+  } else if (score >= LIMIARES.nivel2) {
+    nivel = "nivel_2_pratica";
+  } else if (score >= LIMIARES.nivel1) {
+    nivel = "nivel_1_introducao";
   } else {
-    nivel = "em_desenvolvimento";
+    nivel = "nivel_1_introducao";
     if (sinais.totalRespostas <= 2) nivel = "nao_iniciada";
   }
 
@@ -219,11 +229,13 @@ export function calcularDominio(sinais: SinaisDominio): DetalheDominio {
   const proximoPasso =
     nivel === "dominada"
       ? "Manter revisões espaçadas para consolidar a memória de longo prazo."
-      : nivel === "quase_dominada"
-        ? "Fazer uma avaliação posterior e mais 1 desafio para confirmar o domínio."
-        : nivel === "em_desenvolvimento"
-          ? "Praticar mais atividades guiadas e revisar exemplos antes de novos desafios."
-          : "Iniciar a missão para começar a coletar evidências.";
+      : nivel === "nivel_3_consolidacao"
+        ? "Aplicar a habilidade em problemas complexos e desafios contextuais."
+        : nivel === "nivel_2_pratica"
+          ? "Praticar a aplicação da habilidade em diferentes situações."
+          : nivel === "nivel_1_introducao"
+            ? "Concluir a introdução e fundamentos da habilidade."
+            : "Iniciar a missão para começar a coletar evidências.";
 
   return { nivel, rotulo: ROTULOS[nivel], score: Math.round(score), componentes: c, evidencias, proximoPasso };
 }
@@ -307,8 +319,9 @@ async function persistirNivel(
 ): Promise<void> {
   // Mapeia para o enum atual do banco (compatibilidade retroativa).
   const nivelBanco =
-    nivel === "quase_dominada" ? "parcialmente_dominada" :
-    nivel === "em_desenvolvimento" ? "em_aprendizagem" :
+    nivel === "nivel_3_consolidacao" ? "parcialmente_dominada" : // Mapeamento para legado
+    nivel === "nivel_2_pratica" ? "em_aprendizagem" :
+    nivel === "nivel_1_introducao" ? "em_aprendizagem" :
     nivel; // "nao_iniciada" | "dominada"
 
   const { error } = await supabase
