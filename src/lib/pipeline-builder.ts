@@ -59,8 +59,9 @@ export async function obterPipelineHibrido(childId: string): Promise<PipelineNod
 
   // 3. Lógica de Categorias por Currículo
   // Neuro-Treino (sempre até 7 anos)
+  // MAPEAMENTO: NT_COORD_01 -> toque-sequencia, NT_MEMO_01 -> memoria-visual
   if (age < 8) {
-    addNode("neuro", "NT_COORD_01", "Coordenação Motora I");
+    addNode("neuro", "toque-sequencia", "Coordenação Motora I");
   }
 
   // Alfabetização (Primeiros Anos - currículo infantil ou até 7 anos)
@@ -74,7 +75,7 @@ export async function obterPipelineHibrido(childId: string): Promise<PipelineNod
   }
 
   // Repetir ciclo para visualização da trilha
-  if (age < 8) addNode("neuro", "NT_MEMO_01", "Memória Visual");
+  if (age < 8) addNode("neuro", "memoria-visual", "Memória Visual");
   if (age <= 7 || !isEnsinoFundamental) addNode("alfabetizacao", "PA_LETRAS_02", "Brincando com a Letra A");
   if (isEnsinoFundamental) addNode("bncc", "EF01LP01", "Escrita Espontânea");
 
