@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, CheckCircle2, Clock, Sparkles } from 'lucide-react';
 import { NodeTrilha, Aula } from '@/lib/trilha-unificada';
 import { Link } from '@tanstack/react-router';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/utils';
 import { useNavigationStore } from '@/lib/navigation-context';
 
 interface HubDiarioProps {

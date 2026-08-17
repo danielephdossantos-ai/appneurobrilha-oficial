@@ -16,7 +16,7 @@ export const NodeTrilhaSchema = z.object({
   id: z.string(),
   diaNumero: z.number(),
   dataLiberacao: z.string(), // ISO Date
-  status: z.enum(['bloqueado', 'disponivel', 'concluido', 'nao_realizado']),
+  status: z.enum(['bloqueado', 'disponivel', 'concluido', 'falta']),
   aulasDoDia: z.array(AulaSchema),
 });
 
@@ -27,26 +27,29 @@ export type NodeTrilha = z.infer<typeof NodeTrilhaSchema>;
  */
 export function calcularStatusNode(
   node: NodeTrilha, 
-  hoje: Date, 
-  noAnteriorConcluido: boolean
+  index: number, 
+  totalNodes: NodeTrilha[]
 ): NodeTrilha['status'] {
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
   const dataNode = new Date(node.dataLiberacao);
-  const isPassado = dataNode < hoje && dataNode.toDateString() !== hoje.toDateString();
-  const isHoje = dataNode.toDateString() === hoje.toDateString();
+  dataNode.setHours(0, 0, 0, 0);
 
-  if ((node.status as string) === 'concluido') return 'concluido';
-  
-  if (!noAnteriorConcluido && node.diaNumero > 1) {
-    return 'bloqueado';
-  }
+  // Se já está marcado como concluído, mantém
+  if (String(node.status) === 'concluido') return 'concluido';
 
-  if (isPassado && node.status !== 'concluido') {
-    return 'nao_realizado';
-  }
+  // Se é uma data futura, está bloqueado
+  if (dataNode > hoje) return 'bloqueado';
 
-  if (isHoje || (isPassado && noAnteriorConcluido)) {
+  // Se é o primeiro dia ou o anterior está concluído
+  const anteriorConcluido = index === 0 || String(totalNodes[index - 1].status) === 'concluido';
+
+  if (anteriorConcluido) {
     return 'disponivel';
   }
+
+  // Se passou da data e o anterior não foi feito, é falta
+  if (dataNode < hoje) return 'falta';
 
   return 'bloqueado';
 }
