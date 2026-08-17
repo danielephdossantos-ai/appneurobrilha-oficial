@@ -902,3 +902,54 @@ export const SINAL_VERDE_VERMELHO_VARS: Variation[] = range(30).map((i) => {
     }
   };
 });
+
+// FASE 3B - AUDITIVO
+export const PARES_SONOROS_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const numPares = 2 + faixa;
+  const sons = ["🔔", "🎹", "🥁", "🎻", "🎷", "🎺", "🎸", "🪕"].slice(0, numPares);
+  return { id: `ps-${i + 1}`, payload: { sons, numPares, nivel: faixa + 1 } };
+});
+
+export const SEQUENCIA_AUDITIVA_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const qtd = 2 + faixa + (i % 2);
+  const sons = ["🐶", "🐱", "🐮", "🐷", "🦆", "🐔", "🐸", "🦁"];
+  const seq = range(qtd).map(k => sons[(i + k) % sons.length]);
+  return { id: `sa-${i + 1}`, payload: { seq, nivel: faixa + 1, flashMs: 1000 + qtd * 500 } };
+});
+
+// FASE 3C - MATEMÁTICA
+export const BANQUETE_DINOS_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const qtd = 1 + faixa * 2 + (i % 3);
+  const dino = ["🦖", "🦕", "🐉"][faixa % 3];
+  const comida = ["🍎", "🥩", "🌿", "🦴"][i % 4];
+  const opts = range(4).map(k => qtd - 2 + k).filter(k => k > 0).slice(0, 3);
+  if (!opts.includes(qtd)) opts[0] = qtd;
+  return { id: `bd-${i + 1}`, payload: { dino, comida, qtd, opts: opts.sort(), nivel: faixa + 1 } };
+});
+
+export const TREM_NUMERICO_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const inicio = i * 2;
+  const qtd = 3 + faixa;
+  const seq = range(qtd).map(k => inicio + k);
+  const buracos = [1 + (i % (qtd - 2))];
+  return { id: `tn-${i + 1}`, payload: { seq, buracos, nivel: faixa + 1 } };
+});
+
+// FASE 3D - FLEXIBILIDADE
+export const TROCA_REGRAS_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const regras = ["cor", "forma"];
+  return { id: `tr-${i + 1}`, payload: { regras, rounds: 5 + faixa * 2, nivel: faixa + 1 } };
+});
+
+// FASE 3F - PLANEJAMENTO
+export const PONTE_BLOCOS_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10);
+  const shapes = ["🟥", "🟦", "🟩", "🟨", "🟧"];
+  const target = shapes[i % shapes.length];
+  return { id: `pb-${i + 1}`, payload: { target, opts: shapes.slice(0, 3 + faixa), nivel: faixa + 1 } };
+});
