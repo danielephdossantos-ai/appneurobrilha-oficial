@@ -178,7 +178,7 @@ function PrimeirosAnosPage() {
           </button>
         </Card>
       ) : (
-        <div className="space-y-5">
+        <div className="space-y-6">
           <Card className="bg-primary/10 border-primary/30">
             <div className="flex items-center justify-between gap-3 mb-2">
               <div className="min-w-0">
@@ -210,83 +210,248 @@ function PrimeirosAnosPage() {
             )}
           </Card>
 
-          <RotinaDiaria
-            childId={childId}
-            itensHoje={itens.filter((i) => i.dia_semana === hoje)}
-            onToggle={alternar}
-          />
-
-          <div className="flex gap-2 overflow-x-auto pb-1">
-            {Array.from({ length: plano.semanas_totais }, (_, i) => i + 1).map((wk) => (
-              <button
-                key={wk}
-                onClick={() => {
-                  setSemana(wk);
-                  void recarregar(wk);
-                }}
-                className={`btn-tap shrink-0 rounded-lg w-10 h-10 font-bold border-2 ${
-                  semana === wk
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background border-border"
-                }`}
+          {/* Atividades Diretas (Migradas do Neuro-Treino) */}
+          <section className="space-y-4">
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground">
+              Atividades de Apoio
+            </h2>
+            <div className="grid gap-3">
+              {/* My First English */}
+              <Link
+                to="/escola-brilha/ingles-ei"
+                className="group block rounded-2xl overflow-hidden border-2 border-purple-200 dark:border-purple-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
               >
-                {wk}
-              </button>
-            ))}
-          </div>
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🇺🇸</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Inglês · Ed. Infantil</div>
+                    <div className="font-black text-white text-base leading-tight">My First English</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
 
-          <div className="space-y-4">
-            {Array.from({ length: dias }, (_, i) => i + 1).map((dia) => {
-              const lista = porDia.get(dia) ?? [];
-              const ehHoje = dia === hoje;
-              return (
-                <section key={dia}>
-                  <h2 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-2">
-                    {DIAS_LABEL[dia]}
-                    {ehHoje && " · hoje"}
-                  </h2>
-                  {lista.length === 0 ? (
-                    <Card className="text-sm text-muted-foreground">Dia livre 🌿</Card>
-                  ) : (
-                    <div className="space-y-2">
-                      {lista.map((item) => (
-                        <Card
-                          key={item.id}
-                          className={`flex items-center gap-3 ${ehHoje ? "border-primary/40" : ""} ${
-                            item.concluido ? "opacity-60" : ""
-                          }`}
-                        >
-                          <button
-                            onClick={() => alternar(item)}
-                            aria-label={item.concluido ? "Desmarcar aula" : "Marcar como feita"}
-                            className="btn-tap shrink-0"
+              {/* Matemática Kawaii */}
+              <Link
+                to="/escola-brilha/matematica-ei"
+                className="group block rounded-2xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #10B981, #2563EB)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🔢</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Matemática · Ed. Infantil</div>
+                    <div className="font-black text-white text-base leading-tight">Matemática Kawaii</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Ler com Aurora */}
+              <Link
+                to="/neuro-treino/ler-com-aurora"
+                className="group block rounded-2xl overflow-hidden border-2 border-amber-200 dark:border-amber-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #f59e0b, #7c3aed)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🔤</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Especial · Pré II + 1º Ano</div>
+                    <div className="font-black text-white text-base leading-tight">Ler com Aurora</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Histórias por nível leitor */}
+              <Link
+                to="/biblioteca-alfa"
+                className="group block rounded-2xl overflow-hidden border-2 border-rose-200 dark:border-rose-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #f43f5e, #f59e0b)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">📚</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Leitura Graduada</div>
+                    <div className="font-black text-white text-base leading-tight">Histórias por nível leitor</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Biblioteca Encantada */}
+              <Link
+                to="/escola-brilha/biblioteca-encantada"
+                className="group block rounded-2xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #10b981, #06b6d4)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🗣️</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Comunicação Funcional</div>
+                    <div className="font-black text-white text-base leading-tight">Biblioteca Encantada</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Alfabetização Brilha */}
+              <Link
+                to="/alfabetizacao"
+                className="group block rounded-2xl overflow-hidden border-2 border-pink-200 dark:border-pink-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #ec4899, #8b5cf6)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🅰️</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Consciência Fonológica</div>
+                    <div className="font-black text-white text-base leading-tight">Alfabetização Brilha</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Trilha da Leitura (Dislexia) */}
+              <Link
+                to="/escola-brilha/dislexia"
+                className="group block rounded-2xl overflow-hidden border-2 border-orange-200 dark:border-orange-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #7c3aed, #f97316)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🎧</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Programa Clínico · Dislexia</div>
+                    <div className="font-black text-white text-base leading-tight">Trilha da Leitura</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Contar com Pip (Matemática Terapêutica) */}
+              <Link
+                to="/escola-brilha/contar-com-pip"
+                className="group block rounded-2xl overflow-hidden border-2 border-sky-200 dark:border-sky-900/60 shadow-sm hover:shadow transition-all active:scale-[0.99]"
+              >
+                <div className="p-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur grid place-items-center shrink-0 text-xl">🔢</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none mb-1">Discalculia · Senso Numérico</div>
+                    <div className="font-black text-white text-base leading-tight">Contar com Pip</div>
+                  </div>
+                  <div className="text-white/90 group-hover:translate-x-1 transition">→</div>
+                </div>
+              </Link>
+
+              {/* Trilhas EI (Português e Campos) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Link
+                  to="/escola-brilha/trilha/$serie/$disc"
+                  params={{ serie: "educacao-infantil", disc: "portugues" }}
+                  className="group block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-sm border-2 border-emerald-100/20"
+                  style={{ background: "linear-gradient(135deg, #059669, #06b6d4)" }}
+                >
+                  <div className="text-[10px] uppercase tracking-widest opacity-85 leading-none mb-1">Trilha Duolingo</div>
+                  <div className="text-base leading-tight">Português EI</div>
+                </Link>
+                <Link
+                  to="/escola-brilha/trilha/$serie/$disc"
+                  params={{ serie: "educacao-infantil", disc: "default" }}
+                  className="group block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-sm border-2 border-violet-100/20"
+                  style={{ background: "linear-gradient(135deg, #7c3aed, #f472b6)" }}
+                >
+                  <div className="text-[10px] uppercase tracking-widest opacity-85 leading-none mb-1">Campos de Experiência</div>
+                  <div className="text-base leading-tight">Educação Infantil</div>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border border-t-2" />
+
+          <section className="space-y-4">
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground">
+              Agenda do Dia (Plano Sequencial)
+            </h2>
+            <RotinaDiaria
+              childId={childId}
+              itensHoje={itens.filter((i) => i.dia_semana === hoje)}
+              onToggle={alternar}
+            />
+          </section>
+
+          <section className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground">
+                Calendário Semanal
+              </h2>
+              <div className="flex gap-1.5 overflow-x-auto no-scrollbar max-w-[60%]">
+                {Array.from({ length: plano.semanas_totais }, (_, i) => i + 1).map((wk) => (
+                  <button
+                    key={wk}
+                    onClick={() => {
+                      setSemana(wk);
+                      void recarregar(wk);
+                    }}
+                    className={`btn-tap shrink-0 rounded-lg w-8 h-8 text-xs font-black border-2 transition-all ${
+                      semana === wk
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background border-border hover:border-primary/50"
+                    }`}
+                  >
+                    {wk}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              {Array.from({ length: dias }, (_, i) => i + 1).map((dia) => {
+                const lista = porDia.get(dia) ?? [];
+                const ehHoje = dia === hoje;
+                return (
+                  <section key={dia}>
+                    <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-2">
+                      <div className={`h-2 w-2 rounded-full ${ehHoje ? "bg-primary animate-pulse" : "bg-muted-foreground/30"}`} />
+                      {DIAS_LABEL[dia]}
+                      {ehHoje && " · Hoje"}
+                    </h3>
+                    {lista.length === 0 ? (
+                      <Card className="text-sm text-muted-foreground italic py-3 bg-muted/20 border-dashed">Dia livre 🌿</Card>
+                    ) : (
+                      <div className="space-y-2">
+                        {lista.map((item) => (
+                          <Card
+                            key={item.id}
+                            className={`flex items-center gap-3 p-3 border-2 transition-all ${ehHoje ? "border-primary/20 shadow-sm" : "border-border"} ${
+                              item.concluido ? "opacity-50 grayscale-[0.5]" : ""
+                            }`}
                           >
-                            {item.concluido ? (
-                              <CheckCircle2 className="h-6 w-6 text-primary" />
-                            ) : (
-                              <Circle className="h-6 w-6 text-muted-foreground" />
-                            )}
-                          </button>
-                          <Link to={item.rota} className="flex-1 min-w-0">
-                            <div className="text-[11px] font-black uppercase tracking-wider text-primary flex items-center gap-1">
-                              <BookOpenCheck className="h-3.5 w-3.5" />
-                              {item.trilha_label}
-                              {item.fase ? ` · ${item.fase}` : ""}
-                            </div>
-                            <div className="font-bold break-words">{item.titulo}</div>
-                          </Link>
-                          <Pill>{item.minutos} min</Pill>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              );
-            })}
-          </div>
+                            <button
+                              onClick={() => alternar(item)}
+                              aria-label={item.concluido ? "Desmarcar aula" : "Marcar como feita"}
+                              className="btn-tap shrink-0"
+                            >
+                              {item.concluido ? (
+                                <CheckCircle2 className="h-6 w-6 text-primary" />
+                              ) : (
+                                <Circle className="h-6 w-6 text-muted-foreground/40" />
+                              )}
+                            </button>
+                            <Link to={item.rota} className="flex-1 min-w-0">
+                              <div className="text-[10px] font-black uppercase tracking-widest text-primary leading-none mb-1 flex items-center gap-1.5">
+                                <BookOpenCheck className="h-3 w-3" />
+                                {item.trilha_label}
+                                {item.fase ? ` · ${item.fase}` : ""}
+                              </div>
+                              <div className="font-bold text-sm truncate">{item.titulo}</div>
+                            </Link>
+                            <Pill className="text-[10px] px-2 py-0.5">{item.minutos}m</Pill>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          </section>
 
-          <p className="text-xs text-muted-foreground text-center">
-            As aulas de hoje também aparecem na agenda de estudo da criança.
+          <p className="text-[10px] font-bold text-muted-foreground/60 text-center uppercase tracking-widest pt-4">
+            Plano de Alfabetização Baseado em Evidências · NeuroBrilha 2026
           </p>
         </div>
       )}
