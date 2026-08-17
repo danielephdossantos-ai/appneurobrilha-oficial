@@ -46,82 +46,94 @@ export async function validarAulaIA(
   const motivos: string[] = [];
   const now = new Date().toISOString();
   
-  // 1. JSON válido e Campos obrigatórios (via Zod)
+  // 1. JSON válido e Campos obrigatórios (Validação estrutural)
   const parsed = AULA_SCHEMA.safeParse(aulaContent);
   if (!parsed.success) {
-    motivos.push("Estrutura JSON inválida ou campos obrigatórios ausentes: " + parsed.error.message);
-    return { status: 'rejected', motivos, data: now, versao: "1.0", modelo: context.modelo };
+    motivos.push("JSON inválido ou campos obrigatórios ausentes: " + parsed.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', '));
+    return { status: 'rejected', motivos, data: now, versao: "1.1", modelo: context.modelo };
   }
 
   const aula = parsed.data;
-
-  // 2. Série e Idade compatível
   const bnccData = parseBNCC(context.codigoBNCC);
-  if (bnccData.anoSigla !== context.serie && bnccData.etapaSigla !== 'EI') {
-    // Para fundamental, a série do código deve bater com a série solicitada
-    // Se for EI, a validação é mais flexível por faixa etária
-  }
-  
-  // 3. Disciplina correta
-  if (bnccData.disciplina !== context.disciplina && context.disciplina !== 'Neuro-Treino') {
-    motivos.push(`Disciplina divergente: Esperado ${bnccData.disciplina}, recebido ${context.disciplina}`);
+
+  // 2. Validação Pedagógica de Identidade
+  if (context.serie !== 'EI' && !context.codigoBNCC.includes(context.serie)) {
+     // Apenas log de aviso, pois códigos BNCC às vezes não contém a série explicitamente na string de busca
   }
 
-  // 4. Código BNCC existente e correspondente
-  // (Aqui assumimos que o código enviado é o que deve estar na aula)
-  if (!aula.objetivo.toLowerCase().includes(context.codigoBNCC.toLowerCase()) && 
-      !aula.titulo.toLowerCase().includes(context.codigoBNCC.toLowerCase())) {
-    // Muitas vezes a IA não coloca o código no texto, mas deve respeitar o objetivo
+  // 3. Disciplina
+  if (bnccData.disciplina !== context.disciplina && context.disciplina !== 'Neuro-Treino' && context.disciplina !== 'Apoio') {
+    motivos.push(`Divergência de Disciplina: Esperado ${bnccData.disciplina}, recebido ${context.disciplina}`);
   }
 
-  // 5. Nível correto
-  // Validar se a complexidade dos capítulos condiz com o nível (simplificado por agora)
-  
-  // 6. Ausência de conteúdo duplicado (Capítulos com conteúdos idênticos)
-  const conteudos = aula.capitulos.map(c => c.conteudo);
+  // 4. Coerência de Objetivo
+  if (!aula.objetivo.toLowerCase().includes(bnccData.disciplina.toLowerCase()) && 
+      !aula.titulo.toLowerCase().includes(bnccData.disciplina.toLowerCase()) &&
+      !aula.objetivo.toLowerCase().includes(context.codigoBNCC.toLowerCase())) {
+     motivos.push("Objetivo da aula parece não estar alinhado ao código BNCC ou Disciplina fornecidos.");
+  }
+
+  // 5. Duplicidade de Conteúdo Interno
+  const conteudos = aula.capitulos.map(c => c.conteudo.substring(0, 100));
   const uniqueConteudos = new Set(conteudos);
   if (uniqueConteudos.size < conteudos.length) {
-    motivos.push("Conteúdo duplicado detectado entre capítulos.");
+    motivos.push("Conteúdo repetitivo detectado entre capítulos da aula.");
   }
 
-  // 7. Existência de gabarito e critérios de conclusão
-  if (!aula.gabarito) motivos.push("Gabarito ausente.");
-  if (!aula.criterios_conclusao) motivos.push("Critérios de conclusão ausentes.");
+  // 6. Verificação de Atividades
+  const temAtividade = aula.capitulos.some(c => c.atividade || (c.questoes && c.questoes.length > 0));
+  if (!temAtividade) {
+    motivos.push("Aula sem atividades práticas (Atividade Guiada/Independente/Avaliação).");
+  }
 
-  // 8. Linguagem apropriada e Ausência de conteúdo inadequado
-  // Palavras proibidas (filtro básico)
-  const proibidas = ['merda', 'caralho', 'porra', 'violência', 'sexo']; // Exemplo simplificado
+  // 7. Filtro de Linguagem e Segurança (Neuroeducação)
   const textoCompleto = JSON.stringify(aula).toLowerCase();
-  for (const p of proibidas) {
-    if (textoCompleto.includes(p)) {
-      motivos.push(`Conteúdo inadequado detectado: termo impróprio.`);
-      return { status: 'rejected', motivos, data: now, versao: "1.0", modelo: context.modelo };
+  
+  // Emojis (Proibido conforme Regra de Ouro)
+  const emojiRegex = /[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+  if (emojiRegex.test(textoCompleto)) {
+    motivos.push("A aula contém emojis, o que viola o padrão visual para neurodivergentes (distração).");
+  }
+
+  // Termos Inadequados
+  const termosProibidos = ['burro', 'estúpido', 'idiota', 'matar', 'sangue', 'violência', 'sexo'];
+  for (const termo of termosProibidos) {
+    if (textoCompleto.includes(termo)) {
+      motivos.push(`Conteúdo inadequado: presença do termo '${termo}'.`);
+      return { status: 'rejected', motivos, data: now, versao: "1.1", modelo: context.modelo };
     }
   }
 
-  // 9. Coerência entre pergunta e resposta
-  aula.capitulos.forEach(cap => {
-    if (cap.atividade) {
+  // 8. Validação de Gabarito
+  if (typeof aula.gabarito !== 'object' && typeof aula.gabarito !== 'string') {
+    motivos.push("Gabarito em formato inválido ou inexistente.");
+  }
+
+  // 9. Coerência Pergunta x Resposta
+  aula.capitulos.forEach((cap, idx) => {
+    if (cap.atividade && cap.atividade.opcoes) {
       if (cap.atividade.correta < 0 || cap.atividade.correta >= cap.atividade.opcoes.length) {
-        motivos.push(`Incoerência na atividade: índice da resposta correta fora do limite.`);
+        motivos.push(`Erro na Atividade ${idx + 1}: índice da resposta correta inválido.`);
       }
     }
   });
 
-  // 10. Emojis (Regra Neuroeducação: PROIBIDO)
-  const emojiRegex = /[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
-  if (emojiRegex.test(textoCompleto)) {
-    motivos.push("Presença de emojis detectada (Proibido para evitar distração).");
-    return { status: 'correction_required', motivos, data: now, versao: "1.0", modelo: context.modelo };
+  // Determinação do Status Final
+  let status: ValidationResult['status'] = 'approved';
+  if (motivos.length > 0) {
+    // Se tiver erros críticos (Emoji ou Estrutura) vai para rejeição ou correção
+    const temEmoji = motivos.some(m => m.includes("emojis"));
+    const temErroGrave = motivos.some(m => m.includes("JSON inválido") || m.includes("inadequado"));
+    
+    if (temErroGrave) status = 'rejected';
+    else status = 'correction_required';
   }
 
-  const finalStatus = motivos.length === 0 ? 'approved' : 'correction_required';
-  
   return {
-    status: finalStatus,
+    status,
     motivos,
     data: now,
-    versao: "1.0",
+    versao: "1.1",
     modelo: context.modelo
   };
 }
