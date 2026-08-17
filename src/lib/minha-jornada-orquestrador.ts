@@ -104,5 +104,5 @@ export async function obterFilaJornada(childId: string) {
     .order("sequence_order", { ascending: true });
 
   if (error) return [];
-  return data as JornadaItem[];
+  return (data as unknown) as JornadaItem[];
 }
