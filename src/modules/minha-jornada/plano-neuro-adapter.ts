@@ -1,4 +1,4 @@
-import { ItemNeuro, PlanoNeuroGerado } from "../modules/neuro-plano/builder";
+import { ItemNeuro, PlanoNeuroGerado } from "@/modules/neuro-plano/builder";
 import { JornadaItem } from "./types";
 
 /**
@@ -10,7 +10,7 @@ export function adaptarPlanoNeuroParaJornada(
 ): JornadaItem[] {
   if (!plano || !plano.itens) return [];
 
-  return plano.itens.map((item) => {
+  return plano.itens.map((item: ItemNeuro) => {
     return {
       child_id: childId,
       source: "plano_neuro",
