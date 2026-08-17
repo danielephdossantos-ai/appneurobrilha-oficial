@@ -136,61 +136,89 @@ export async function resolverMissao(
   perfil: PerfilResolver = {},
 ): Promise<ResolverResult> {
   const bncc = parseBNCC(codigo);
+  const childId = perfil.childId;
+  const idade = perfil.idade || 0;
+  const serie = perfil.serie || bncc.ano;
 
+  // 1. Regra Definitiva Neuro-Treino: 8+ anos bloqueado
+  if (bncc.codigo.startsWith("NT") && idade >= 8) {
+    return {
+      existe: false,
+      bncc,
+      mensagem: "Neuro-Treino disponível apenas até 7 anos. Explore o conteúdo pedagógico!",
+    };
+  }
+
+  // 2. Integração com o Motor de Decisão de Conteúdo (Implementação 4/8 + 8/8)
+  const { decidirConteudoAula, gerarAulaGemini } = await import("@/lib/aulas-continuas.functions");
+  
+  // Nível atual baseado no domínio da aprendizagem (Implementação 3/8)
+  let nivelAtual = 1;
+  if (childId) {
+    const { DominioAprendizagem } = await import("./dominio-aprendizagem");
+    const dominio = await DominioAprendizagem.avaliar(childId, bncc.codigo);
+    // Mapeamos o nível de domínio para a progressão numérica (1 a 4)
+    if (dominio.nivel === "nivel_1_introducao") nivelAtual = 1;
+    else if (dominio.nivel === "nivel_2_pratica") nivelAtual = 2;
+    else if (dominio.nivel === "nivel_3_consolidacao") nivelAtual = 3;
+    else if (dominio.nivel === "dominada") nivelAtual = 4;
+  }
+
+  // 3. Busca de Aula (Local -> Biblioteca IA -> Geração)
   const oficial = hasMissaoOficial(bncc.codigo) ? getMissaoOficial(bncc.codigo) ?? null : null;
   const base = hasAula(bncc.codigo) ? getAula(bncc.codigo) ?? null : null;
 
-  let aulaIA = null;
-  
-  // Motor de Decisão Integrado: decide entre local, global ou IA
-  // (Nota: em produção, decidirConteudoAula seria chamado aqui via useServerFn ou similar)
-  // Para manter compatibilidade com o resolver síncrono/local:
-  
-  if (!oficial && !base) {
-    // Busca na biblioteca global/IA
-    const { data: ia } = await supabase
-      .from("aulas_geradas")
-      .select("*")
-      .eq("codigo_bncc", bncc.codigo)
-      .eq("serie", perfil.serie || bncc.ano)
-      .eq("status", "approved") // Apenas aulas validadas e aprovadas podem ser acessadas
-      .order('nivel', { ascending: true })
-      .limit(1)
-      .maybeSingle();
-      
-    if (ia) {
-      // Registrar utilização da aula da biblioteca global de forma assíncrona
-      if (perfil.childId) {
-        void supabase.from("aulas_geradas")
-          .update({
-            total_usos: ((ia as any).total_usos || 0) + 1,
-            ultima_utilizacao: new Date().toISOString()
-          } as any)
-          .eq("id", ia.id);
-      }
+  let aulaFinal: Aula | null = oficial || base;
 
-      aulaIA = {
-        id: ia.id,
-        codigo: ia.codigo_bncc,
-        titulo: ia.titulo || bncc.codigo,
+  if (!aulaFinal && childId) {
+    const decisao = await decidirConteudoAula({
+      codigoBNCC: bncc.codigo,
+      childId,
+      idade,
+      serie,
+      nivelAtual
+    });
+
+    if (decisao.status === "pronta" && decisao.conteudo) {
+      aulaFinal = {
+        id: decisao.aulaId,
+        codigo: bncc.codigo,
+        titulo: decisao.titulo || bncc.codigo,
         ano: bncc.ano,
         disciplina: bncc.disciplina,
-        ...(ia.conteudo as any)
+        ...(decisao.conteudo as any)
       } as Aula;
+    } else if (decisao.status === "necessita_geracao") {
+      // 4. Solicitar Gemini se não existir aula adequada
+      const gerada = await gerarAulaGemini({
+        childId,
+        codigoBNCC: bncc.codigo,
+        nivel: nivelAtual,
+        idade,
+        serie,
+        disciplina: bncc.disciplina
+      });
+
+      if (gerada.status === "sucesso" && gerada.aula) {
+        aulaFinal = {
+          id: gerada.aula.id,
+          codigo: bncc.codigo,
+          titulo: gerada.aula.titulo || bncc.codigo,
+          ano: bncc.ano,
+          disciplina: bncc.disciplina,
+          ...(gerada.aula.conteudo as any)
+        } as Aula;
+      } else if (gerada.status === "validacao_falhou") {
+        return {
+          existe: false,
+          bncc,
+          mensagem: "Estamos ajustando esta aula para garantir a melhor qualidade pedagógica. Tente novamente em alguns instantes!",
+        };
+      }
     }
   }
 
-  if (!oficial && !base && !aulaIA) {
-    // Regra Definitiva Neuro-Treino: 8+ anos bloqueado
-    const idade = perfil.idade || 0;
-    if (bncc.codigo.startsWith("NT") && idade >= 8) {
-      return {
-        existe: false,
-        bncc,
-        mensagem: "Neuro-Treino disponível apenas até 7 anos. Explore o conteúdo pedagógico!",
-      };
-    }
-
+  if (!aulaFinal) {
     void registrarAusencia(bncc.codigo, perfil.childId);
     return {
       existe: false,
@@ -198,10 +226,6 @@ export async function resolverMissao(
       mensagem: MENSAGEM_MISSAO_EM_CONSTRUCAO,
     };
   }
-
-
-  // Se temos uma aula (fixa ou IA), prosseguimos
-  const aulaFinal = oficial || base || aulaIA;
 
   // Adaptações — imports diretos evitam ciclo em tempo de execução.
   const { MotorPedagogico } = await import("./index");
