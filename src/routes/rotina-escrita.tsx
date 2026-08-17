@@ -116,6 +116,18 @@ function RotinaEscrita() {
     }
   });
 
+  const gerarIAFn = useServerFn(gerarAtividadeEscritaIA);
+  const { 
+    data: atividadeIA, 
+    refetch: refetchIA, 
+    isFetching: gerandoIA 
+  } = useQuery({
+    queryKey: ["atividade-escrita-ia", activeChild?.id],
+    queryFn: () => gerarIAFn({ data: { childId: activeChild?.id || "" } }),
+    enabled: !!activeChild?.id,
+    staleTime: 1000 * 60 * 60, // 1 hora de cache
+  });
+
   const semanas =
     serie === "4"
       ? SEMANAS_ESCRITA_4ANO
@@ -124,16 +136,7 @@ function RotinaEscrita() {
         : serie === "2"
           ? SEMANAS_ESCRITA_2ANO
           : SEMANAS_ESCRITA;
-
-  const push = usePushNotifications(activeChild?.id ?? null);
-  const [rotina, setRotina] = useState<Rotina>({
-    weekdays: ROTINA_DEFAULT_WEEKDAYS,
-    time: ROTINA_DEFAULT_TIME,
-    inicio: hojeISO(),
-  });
-  const [editing, setEditing] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [semanaManual, setSemanaManual] = useState<number | null>(null);
+...
   const [feitos, setFeitos] = useState<Record<string, boolean>>({});
 
 
