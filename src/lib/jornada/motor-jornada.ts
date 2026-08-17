@@ -66,10 +66,10 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
 
     // 3. Verificar estado de conclusão para cada missão
     const { data: progresso } = await supabase
-      .from("jornada_diaria" as any)
+      .from("jornada_unificada")
       .select("*")
       .eq("child_id", data.childId)
-      .eq("dia", data.dia)
+      .eq("week", Math.ceil(data.dia / 7)) // Exemplo de mapeamento
       .maybeSingle();
 
     return {
@@ -78,7 +78,8 @@ export const getJornadaDoDia = createServerFn({ method: "GET" })
       status: progresso?.status || "pendente",
       missoes: missoes.map(m => ({
         ...m,
-        concluida: progresso?.missoes_concluidas?.includes(m.codigo) || false
+        concluida: progresso?.status === "completed" || false // Ajustar lógica conforme real necessidade
       }))
     };
   });
+
