@@ -188,7 +188,7 @@ function TrilhaSerieDisc() {
                       useNavigationStore.getState().setContext({
                         originRoute: window.location.pathname,
                         originModule: "escola-brilha",
-                        params: { serie, disc },
+                        originParams: { serie, disc },
                         timestamp: Date.now(),
                       });
                       navigate({ to: "/escola-brilha/$codigo", params: { codigo: h.codigo } });
