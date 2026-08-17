@@ -112,6 +112,10 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       status: "necessita_geracao", 
       codigoBNCC: data.codigoBNCC,
       nivel: data.nivelAtual,
+      childId: data.childId,
+      serie: data.serie || bncc.ano,
+      disciplina: bncc.disciplina,
+      idade: data.idade,
       motivo: "Nenhum conteúdo adequado encontrado na biblioteca permanente."
     };
   });
@@ -124,6 +128,99 @@ async function registrarLogDecisao(childId: string, log: any) {
   });
 }
 
+/**
+ * Módulo de Geração Pedagógica Gemini
+ * Exclusivo para geração de novas aulas BNCC
+ */
+export const gerarAulaGemini = createServerFn({ method: "POST" })
+  .inputValidator((data) => z.object({
+    childId: z.string(),
+    codigoBNCC: z.string(),
+    nivel: z.number(),
+    idade: z.number(),
+    serie: z.string(),
+    disciplina: z.string(),
+    objetivo: z.string().optional()
+  }).parse(data))
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    
+    // 1. Obter chave da API com segurança (no servidor)
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    if (!GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY não configurada no ambiente.");
+    }
+
+    // 2. Buscar perfil neuro da criança para personalização
+    const { data: profile } = await supabase
+      .from("child_profiles")
+      .select("*, anamnese:anamnese(*)")
+      .eq("id", data.childId)
+      .maybeSingle();
+
+    // 3. Preparar Prompt Estruturado (Instrução 5/8)
+    const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
+Gere uma AULA COMPLETA em JSON estruturado.
+
+DADOS DO ALUNO:
+- Idade: ${data.idade} anos
+- Série: ${data.serie}
+- Nível: ${data.nivel}
+- Perfil: ${JSON.stringify(profile?.anamnese || "Padrão")}
+
+OBJETIVO:
+- Disciplina: ${data.disciplina}
+- Código BNCC: ${data.codigoBNCC}
+
+REGRAS:
+1. NÃO invente códigos BNCC. Use ${data.codigoBNCC}.
+2. NÃO altere idade/série.
+3. Sem emojis.
+4. Estrutura JSON: titulo, objetivo, capitulos[], gabarito, criterios_conclusao.
+5. Capítulos obrigatórios: introducao, explicacao, exemplo, atividade_guiada, atividade_independente, desafio, revisao, avaliacao, feedback.`;
+
+    const model = "gemini-1.5-flash";
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: systemPrompt }] }],
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 4096,
+          responseMimeType: "application/json"
+        }
+      })
+    });
+
+    if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
+    const resData = await res.json();
+    const text = resData.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error("Resposta vazia do Gemini");
+
+    const aulaGerada = JSON.parse(text);
+
+    // 4. Persistência Automática
+    const { data: salva, error: saveError } = await supabase
+      .from("aulas_geradas")
+      .insert({
+        titulo: aulaGerada.titulo,
+        serie: data.serie,
+        disciplina: data.disciplina,
+        codigo_bncc: data.codigoBNCC,
+        conteudo: aulaGerada,
+        modelo_ia: model,
+        nivel: data.nivel,
+        status: 'approved'
+      })
+      .select()
+      .single();
+
+    if (saveError) throw saveError;
+    return { status: "sucesso", aula: salva };
+  });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
