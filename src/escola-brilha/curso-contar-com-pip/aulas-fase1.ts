@@ -43,7 +43,7 @@ const dia01: AulaEI = {
       tipo: "boasVindas",
       mascoteUrl: mascote,
       falaMascote:
-        "Oi, eu sou o Pip! Hoje vamos treinar o olho de matemático: bater o olho e já saber se é UM ou se são DOIS. Bora?",
+        "Oi! Hoje vamos treinar o olho de matemático: bater o olho e já saber se é UM ou se são DOIS. Bora?",
     },
     {
       tipo: "subitizingFlash",

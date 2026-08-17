@@ -1,3 +1,4 @@
+import { sanitizarFalaMascote } from '@/lib/sanitizar-fala-mascote';
 // Módulo de Correção de Leitura e Síntese Rígida para Neurotreino
 
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -27,7 +28,7 @@ export function normalizeTextForTTS(text: string): string {
   if (!text) return '';
   // 1. Remove caracteres invisíveis ou formatações ocultas que quebram o leitor
   // 2. Aplica normalização NFC conforme requisito de síntese rígida
-  let cleanText = text.trim().normalize('NFC');
+  let cleanText = sanitizarFalaMascote(text).trim().normalize('NFC');
   
   // 3. Verifica se a palavra está no dicionário de correções fonéticas
   if (PHONETIC_FIXES[cleanText]) {

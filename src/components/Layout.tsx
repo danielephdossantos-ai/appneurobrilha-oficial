@@ -43,7 +43,8 @@ import {
   School,
   PenTool,
 } from "lucide-react";
-import { ReactNode, ComponentType } from "react";
+import { ReactNode, ComponentType, useEffect } from "react";
+import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
 import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
 import { KidCard } from "./ui/KidCard";
@@ -142,6 +143,10 @@ export function Shell({ children }: { children?: ReactNode }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const { unlocked: parentUnlocked, requestUnlock, lock: lockParent } = useParentMode();
+
+  useEffect(() => {
+    definirNomeCriancaFala(activeChild?.nome);
+  }, [activeChild?.nome]);
 
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;

@@ -172,7 +172,7 @@ function construirFala(args: {
   base = base.replaceAll("{missao}", aula.missao);
   base = base.replaceAll("{dica}", aula.revisao?.dica ?? "capriche na atenção!");
   base = base.replaceAll("{acertos}", String(acertos));
-  base = base.replaceAll("{mascote}", mascoteNome ?? "Pip");
+  base = base.replaceAll("{mascote}", mascoteNome ?? "seu professor");
 
   // Feedback dinâmico na conclusão
   if (blocoId === "conclusao") {
