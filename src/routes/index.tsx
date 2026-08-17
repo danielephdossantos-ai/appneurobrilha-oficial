@@ -143,6 +143,7 @@ const DESTINOS_KIDS: Destino[] = [
     glow: "rgba(255,111,168,0.7)",
     emoji: "👨‍👩‍👧",
     shine: "rgba(255,255,255,0.12)",
+  },
   {
     to: "/trilha-unificada",
     title: "Minha Jornada",
