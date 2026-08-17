@@ -5,7 +5,7 @@ import { useAppState } from "@/core/store";
 import { obterPipelineHibrido, type PipelineNode } from "@/lib/pipeline-builder";
 import { useNavigationStore } from "@/lib/navigation-context";
 import { motion } from "framer-motion";
-import { Lock, Check, Play } from "lucide-react";
+import { Lock, Check, Play, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/trilha-unificada")({
   head: () => ({
@@ -57,7 +57,16 @@ function TrilhaUnificada() {
       className="min-h-screen text-white overflow-x-hidden"
       style={fundoMundo.style}
     >
-      <MundoBar />
+      <div className="max-w-3xl mx-auto px-4 pt-3 flex justify-between items-center">
+        <button
+          onClick={() => navigate({ to: "/" })}
+          className="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur px-3 py-1.5 text-[11px] font-black text-white border border-white/25 shadow transition-all hover:bg-black/60"
+        >
+          <ArrowLeft size={14} />
+          Início
+        </button>
+        <MundoBar className="pt-0 px-0" />
+      </div>
       
       <header className="pt-8 pb-4 px-6 text-center">
         <h1 className="text-3xl font-black drop-shadow-lg">Minha Jornada</h1>
