@@ -494,7 +494,7 @@ function RotinaEscrita() {
         <Ditado itens={sem.ditado} />
       </BlocoCard>
 
-      {/* 4. Rascunho */}
+      {/* 4. Rascunho — inventar e passar a limpo */}
       <BlocoCard
         icone={<Pencil className="h-5 w-5" />}
         titulo="4. Rascunho — inventar e passar a limpo"
@@ -502,11 +502,63 @@ function RotinaEscrita() {
         feito={!!feitos.rascunho}
         onMarcar={() => marcar("rascunho")}
       >
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground mb-4">
           A criança rabisca a ideia numa folha (pode ter erro!), lê em voz alta para um adulto e só
           depois passa a limpo no caderno. Isso ensina que escrever é reescrever.
         </p>
+        
+        <div className="flex gap-2">
+          <button 
+            onClick={() => mutation.mutate({ acerto: true, tipoLetra: status?.pref_letra === "cursiva" ? "cursiva" : "imprensa" })}
+            disabled={mutation.isPending}
+            className="flex-1 btn-tap rounded-xl bg-green-500 text-white font-black py-2 text-sm flex items-center justify-center gap-2"
+          >
+            <Check className="h-4 w-4" /> Concluí com sucesso
+          </button>
+          <button 
+            onClick={() => mutation.mutate({ acerto: false, tipoLetra: status?.pref_letra === "cursiva" ? "cursiva" : "imprensa" })}
+            disabled={mutation.isPending}
+            className="flex-1 btn-tap rounded-xl bg-orange-500 text-white font-black py-2 text-sm flex items-center justify-center gap-2"
+          >
+            Ainda com dificuldade
+          </button>
+        </div>
       </BlocoCard>
+
+      {/* Preferências de Escrita (Pais) */}
+      <div className="rounded-3xl bg-white border-2 border-primary/20 p-5 shadow-sm mb-6">
+        <div className="text-sm font-black uppercase tracking-wider text-primary mb-3">
+          Preferência de Escrita
+        </div>
+        <div className="flex gap-2">
+          {(["imprensa", "cursiva", "ambas"] as TipoLetra[]).map((t) => (
+            <button
+              key={t}
+              onClick={async () => {
+                if (!activeChild?.id) return;
+                await (supabase as any).from("child_escrita_status").upsert({
+                  child_id: activeChild.id,
+                  pref_letra: t
+                });
+                queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild.id] });
+                toast.success(`Preferência alterada para: ${t}`);
+              }}
+              className={`flex-1 btn-tap rounded-xl py-2 px-3 text-xs font-black capitalize transition-all ${
+                status?.pref_letra === t 
+                  ? "bg-primary text-white shadow-md" 
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              {t === "ambas" ? "Ambas" : `Letra ${t}`}
+            </button>
+          ))}
+        </div>
+        <p className="text-[10px] text-muted-foreground mt-3 leading-tight italic">
+          * A escrita cursiva será introduzida progressivamente a partir da Etapa 7. 
+          A criança não deve ser obrigada a usar cursiva se não estiver pronta.
+        </p>
+      </div>
+
 
       {/* 5. Conversa e oralidade */}
       <BlocoCard
