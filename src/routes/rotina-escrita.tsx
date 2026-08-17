@@ -18,6 +18,12 @@ import {
   Mic,
   MessageCircle,
   Check,
+  Sparkles,
+  RefreshCw,
+  Target,
+  ChevronRight,
+  ThumbsUp,
+  ThumbsDown,
 } from "lucide-react";
 import {
   ROTINA_ESCRITA_CATEGORY,
@@ -41,6 +47,7 @@ import {
   type TipoLetra 
 } from "@/lib/motor-escrita.functions";
 import { MOTOR_PEDAGOGICO } from "@/lib/motor-pedagogico-data";
+import { gerarAtividadeEscritaIA } from "@/lib/professor-mentor-escrita.functions";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 
@@ -107,6 +114,18 @@ function RotinaEscrita() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild?.id] });
     }
+  });
+
+  const gerarIAFn = useServerFn(gerarAtividadeEscritaIA);
+  const { 
+    data: atividadeIA, 
+    refetch: refetchIA, 
+    isFetching: gerandoIA 
+  } = useQuery({
+    queryKey: ["atividade-escrita-ia", activeChild?.id],
+    queryFn: () => gerarIAFn({ data: { childId: activeChild?.id || "" } }),
+    enabled: !!activeChild?.id,
+    staleTime: 1000 * 60 * 60, // 1 hora de cache
   });
 
   const semanas =
@@ -435,6 +454,145 @@ function RotinaEscrita() {
         </div>
       </div>
 
+      {/* Professor Mentor IA */}
+      <section className="mb-8 p-6 rounded-[40px] bg-gradient-to-br from-[#EEF2FF] to-[#E0E7FF] border-4 border-white shadow-xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-4 opacity-10">
+          <Sparkles className="h-20 w-20 text-primary" />
+        </div>
+
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-16 w-16 rounded-full bg-primary flex items-center justify-center shadow-lg border-4 border-white">
+            <Sparkles className="h-8 w-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-xl font-black text-[#1E293B] leading-tight flex items-center gap-2">
+              Professor Mentor IA
+              <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full uppercase tracking-widest font-black">Beta</span>
+            </h2>
+            <p className="text-sm font-bold text-slate-500">Missão Personalizada de Hoje</p>
+          </div>
+        </div>
+
+        {gerandoIA ? (
+          <div className="flex flex-col items-center justify-center py-10 text-center">
+            <div className="relative">
+              <RefreshCw className="h-12 w-12 text-primary animate-spin" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-2 w-2 bg-primary rounded-full animate-ping" />
+              </div>
+            </div>
+            <p className="mt-4 font-black text-slate-600 animate-pulse">
+              Consultando plano pedagógico...
+            </p>
+          </div>
+        ) : atividadeIA ? (
+          <div className="space-y-4 relative z-10">
+            <div className="bg-white/80 backdrop-blur-sm rounded-[32px] p-5 border-2 border-primary/10 shadow-sm">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="h-8 w-8 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
+                  <Target className="h-4 w-4 text-orange-600" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-orange-600 uppercase tracking-wider mb-0.5">Foco Pedagógico</div>
+                  <div className="text-sm font-black text-slate-800">{atividadeIA.habilidade_foco}</div>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 rounded-2xl p-4 mb-4 border border-slate-200">
+                <div className="flex items-center gap-2 mb-2">
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                  <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Missão</span>
+                </div>
+                <div className="text-lg font-black text-slate-800 leading-snug">
+                  {atividadeIA.comando}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    stopSpeaking();
+                    speakChunked(atividadeIA.audio_instrucao, { rate: 0.72 });
+                  }}
+                  className="w-full py-4 rounded-2xl bg-primary text-white font-black text-lg flex items-center justify-center gap-3 shadow-lg shadow-primary/25 btn-tap transition-all hover:scale-[1.02]"
+                >
+                  <Volume2 className="h-6 w-6" />
+                  Ouvir Instrução
+                </button>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      stopSpeaking();
+                      speakChunked(atividadeIA.conteudo, { rate: 0.65 });
+                    }}
+                    className="flex-1 py-3 rounded-2xl bg-white border-2 border-primary text-primary font-black text-sm flex items-center justify-center gap-2 btn-tap"
+                  >
+                    <Mic className="h-4 w-4" />
+                    Ouvir Conteúdo
+                  </button>
+                  
+                  <button
+                    onClick={() => refetchIA()}
+                    className="px-4 py-3 rounded-2xl bg-slate-100 text-slate-500 font-black text-sm flex items-center justify-center btn-tap"
+                    title="Pedir outra atividade"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              {atividadeIA.conteudo && (
+                <div className="mt-6 pt-6 border-t border-slate-100">
+                  <div className="text-center mb-4">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Registro do Mentor</span>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-primary/5 rounded-[32px] border-2 border-dashed border-primary/20 mb-4">
+                    <span className="text-3xl font-black text-primary tracking-wider select-none">
+                      {atividadeIA.conteudo}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <div className="text-[10px] font-black text-slate-500 text-center mb-1">COMO FOI O DESEMPENHO?</div>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => mutation.mutate({ acerto: true, tipoLetra: status?.pref_letra === 'cursiva' ? 'cursiva' : 'imprensa' })}
+                        className="flex-1 py-3 rounded-2xl bg-green-500 text-white font-black flex items-center justify-center gap-2 btn-tap shadow-lg shadow-green-500/20"
+                      >
+                        <ThumbsUp className="h-4 w-4" />
+                        Sucesso
+                      </button>
+                      <button
+                        onClick={() => mutation.mutate({ acerto: false, tipoLetra: status?.pref_letra === 'cursiva' ? 'cursiva' : 'imprensa' })}
+                        className="flex-1 py-3 rounded-2xl bg-orange-500 text-white font-black flex items-center justify-center gap-2 btn-tap shadow-lg shadow-orange-500/20"
+                      >
+                        <ThumbsDown className="h-4 w-4" />
+                        Dificuldade
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-start gap-3 px-2">
+              <div className="h-6 w-6 rounded-full bg-slate-200 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-[10px]">💡</span>
+              </div>
+              <div className="text-[11px] font-bold text-slate-500 leading-relaxed italic">
+                Dica para pais: {atividadeIA.dica_pedagogica}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-6">
+            <p className="text-sm font-bold text-slate-500 mb-4">Selecione uma criança para começar o Mentor IA.</p>
+          </div>
+        )}
+      </section>
+
       {/* Navegação de semana */}
       <div className="flex items-center justify-between gap-2 mb-4">
         <button
@@ -453,6 +611,7 @@ function RotinaEscrita() {
           Semana {Math.min(semanas.length, nSemana + 1)} →
         </button>
       </div>
+
 
       {/* 1. Caderno */}
       <BlocoCard

@@ -57,12 +57,26 @@ export const updateEscritaProgresso = createServerFn({ method: "POST" })
       .eq("child_id", data.childId)
       .maybeSingle();
 
+    const currentPoints = current?.pontos_dominio || 0;
+    const currentNivel = current?.nivel_atual || 1;
+    
     const pontosGanhos = data.acerto ? 5 : -2;
-    const newPoints = Math.max(0, (current?.pontos_dominio || 0) + pontosGanhos);
+    let newPoints = Math.max(0, currentPoints + pontosGanhos);
+    let newNivel = currentNivel;
+
+    // Lógica de avanço/retrocesso de nível (Motor Pedagógico)
+    if (newPoints >= 100 && currentNivel < 8) {
+      newNivel = currentNivel + 1;
+      newPoints = 0; // Reseta pontos ao subir de nível
+    } else if (newPoints === 0 && currentNivel > 1 && !data.acerto) {
+      // Opcional: retroceder se errar muito no zero? 
+      // Por enquanto vamos apenas travar no zero.
+    }
     
     const payload = {
       child_id: data.childId,
       pontos_dominio: newPoints,
+      nivel_atual: newNivel,
       updated_at: new Date().toISOString()
     };
 
@@ -71,5 +85,5 @@ export const updateEscritaProgresso = createServerFn({ method: "POST" })
       .upsert(payload);
 
     if (error) throw error;
-    return { success: true, newPoints };
+    return { success: true, newPoints, newNivel };
   });
