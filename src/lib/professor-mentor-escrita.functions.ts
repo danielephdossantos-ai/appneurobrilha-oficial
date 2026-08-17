@@ -9,22 +9,21 @@ import { supabase } from "@/integrations/supabase/client";
 export const gerarAtividadeEscritaIA = createServerFn({ method: "POST" })
   .inputValidator((d) => z.object({ childId: z.string() }).parse(d))
   .handler(async ({ data: { childId } }) => {
-    // 1. Coletar Dados do Aluno (Contexto)
-    const { data: profile } = await supabase
-      .from("profiles")
+    // 1. Coletar Dados da Criança (Contexto)
+    const { data: child } = await supabase
+      .from("children")
       .select("*, anamnese_v2(*)")
       .eq("id", childId)
       .single();
 
-    if (!profile) throw new Error("Perfil não encontrado");
+    if (!child) throw new Error("Criança não encontrada");
 
     const status: EscritaStatus = await getEscritaStatus({ data: { childId } });
-    const hiperfoco = extrairHiperfoco(profile);
+    const hiperfoco = extrairHiperfoco(child);
     
-    // Calcular idade
-    const nascimento = profile.data_nascimento ? new Date(profile.data_nascimento) : new Date();
-    const idade = new Date().getFullYear() - nascimento.getFullYear();
-    const serie = profile.serie || "Não informada";
+    // Idade e Série
+    const idade = child.idade || 0;
+    const serie = child.serie || "Não informada";
 
     const etapaAtual = MOTOR_PEDAGOGICO.find(e => e.nivel === status.nivel_atual);
 
@@ -39,7 +38,7 @@ REGRAS DE OURO:
 4. Mantenha revisão de habilidades anteriores.
 
 CONTEXTO DO ALUNO:
-- Nome: ${profile.nome}
+- Nome: ${child.nome}
 - Idade: ${idade} anos
 - Série: ${serie}
 - Etapa de Alfabetização: ETAPA ${status.nivel_atual} - ${etapaAtual?.titulo}
@@ -62,7 +61,7 @@ Se a criança estiver na ETAPA 1 ou 2, foque em traçados, letras isoladas e son
 Se estiver na ETAPA 3 ou 4, foque em sílabas e palavras simples.
 Use o hiperfoco (ex: ${hiperfoco}) para tornar o conteúdo interessante, mas sem fugir do nível (ex: se o nível é 'Letras', não peça para escrever 'Tiranossauro Rex', peça para identificar a letra 'D' de Dinossauro).`;
 
-    const userPrompt = `Gere a próxima atividade ideal para ${profile.nome}. 
+    const userPrompt = `Gere a próxima atividade ideal para ${child.nome}. 
 Considere que ele(a) está com ${status.pontos_dominio} pontos de domínio no nível ${status.nivel_atual}. 
 Gere em JSON conforme a estrutura solicitada.`;
 
@@ -82,3 +81,4 @@ Gere em JSON conforme a estrutura solicitada.`;
       throw new Error("Erro na geração da atividade");
     }
   });
+
