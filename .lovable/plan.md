@@ -1,30 +1,25 @@
-# Plano Detalhado: Minha Jornada (Unificação 1º Ano + Alfabetização + Plano Neuro)
+# Plano: Unificação da "Minha Jornada" (Alfabetização + 1º Ano + Neurotreino)
 
-Este plano descreve a criação da nova categoria **"Minha Jornada"**, integrando o Currículo Anual, Plano de Alfabetização e Plano Neuro em uma trilha única com travas temporais.
+Este plano unifica o **1º Ano**, o **Plano Anual de Alfabetização** e o **Plano Neuro** em uma única jornada diária estilo trilha estilo Duolingo, garantindo progressão pedagógica coesa.
 
-## 1. Arquitetura de Dados
-- **Motor de Unificação (`src/lib/motor-jornada.ts`):** Criar um resolvedor que mescla as tabelas `bncc_habilidades` (1º Ano), `curriculo_anual` (Alfabetização) e `neuro_atividades` (Plano Neuro).
-- **Tabela `jornada_diaria`:** Registrar qual "Dia" a criança está e o estado de conclusão de cada missão do dia.
+## Mudanças
 
-## 2. Interface (UI/UX)
-- **Nova Rota `/minha-jornada`:** Uma trilha vertical estilo Duolingo usando o componente `MundoTrilha`.
-- **Intercalação Pedagógica:**
-    - Missão 1: Neuro (Despertar Cognitivo)
-    - Missão 2: Alfabetização (Foco principal)
-    - Missão 3: Escola Brilha (Conhecimento Geral)
-- **Sistema de Travas:**
-    - Visual de "Caminho Trancado" para dias futuros.
-    - Animação de liberação ao concluir o dia atual.
+### Infraestrutura e Lógica de Negócio
+- Criar `src/lib/jornada/motor-jornada.ts` para gerenciar a seleção de missões diárias.
+- Implementar regra de idade (Neurotreino apenas para menores de 8 anos).
+- Integrar com `escola_progresso` para rastrear conclusões de missões BNCC.
 
-## 3. Lógica Pedagógica
-- **Trava por Dia:** Apenas um bloco de atividades por dia.
-- **Nivelamento Dinâmico:** Se a criança tiver facilidade, o Gemini pode ser acionado para subir o nível da próxima missão na trilha unificada.
-- **Regra de Idade:** Manter a restrição de 8+ anos para o conteúdo Neuro.
+### Interface do Usuário (UI)
+- Adicionar "Minha Jornada" à Cidade Mágica (Home).
+- Criar rota `/minha-jornada` com trilha visual vertical dinâmica.
+- Usar `MundoTrilha` para permitir que a criança troque o fundo da jornada.
+- Implementar travas visuais (missão seguinte bloqueada até concluir a anterior).
 
-## 4. Etapas de Implementação
-1. **Infraestrutura:** Criar a função de servidor para buscar a "Missão do Dia Unificada".
-2. **Trilha:** Implementar a nova página de navegação.
-3. **Persistência:** Garantir que concluir uma aula na Jornada também marque como concluída na Escola Brilha e no Plano Neuro.
+### Persistência
+- Utilizar tabelas existentes (`escola_progresso`, `children_profiles`) para evitar redundância.
+- (Opcional) Criar `jornada_unificada` para sequenciamento customizado por data.
 
----
-**Deseja que eu inicie a implementação da Fase 1 (Arquitetura e Motor de Busca)?**
+## Detalhes Técnicos
+- O motor prioriza a ordem: **Neuro (Cognitivo) -> Alfabetização (Leitura/Escrita) -> Escola Brilha (Geral/Matemática)**.
+- Navegação integrada: ao clicar em uma missão, o contexto de origem é salvo para retorno automático à jornada após a atividade.
+- Suporte total a dispositivos móveis com empilhamento vertical e botões grandes.
