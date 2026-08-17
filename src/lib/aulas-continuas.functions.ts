@@ -9,7 +9,7 @@ import { validarAulaIA } from "./validador-aulas.server";
  */
 
 export const decidirConteudoAula = createServerFn({ method: "POST" })
-  .inputValidator((data) => z.object({
+  .validator((data: unknown) => z.object({
     codigoBNCC: z.string(),
     childId: z.string(),
     idade: z.number().optional(),
@@ -172,7 +172,7 @@ async function registrarUsoBibliotecaIA(aulaId: string, childId: string) {
  * Exclusivo para geração de novas aulas BNCC
  */
 export const gerarAulaGemini = createServerFn({ method: "POST" })
-  .inputValidator((data) => z.object({
+  .validator((data: unknown) => z.object({
     childId: z.string(),
     codigoBNCC: z.string(),
     nivel: z.number(),
@@ -296,7 +296,7 @@ Retorne APENAS o JSON.`;
   });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
-  .inputValidator((data) => z.object({
+  .validator((data: unknown) => z.object({
     titulo: z.string(),
     serie: z.string(),
     disciplina: z.string(),

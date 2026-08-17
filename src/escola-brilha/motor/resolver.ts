@@ -168,7 +168,7 @@ export async function resolverMissao(
   const oficial = hasMissaoOficial(bncc.codigo) ? getMissaoOficial(bncc.codigo) ?? null : null;
   const base = hasAula(bncc.codigo) ? getAula(bncc.codigo) ?? null : null;
 
-  let aulaFinal: Aula | null = oficial || base;
+  let aulaFinal: Aula | null = oficial ? (oficial as unknown as Aula) : base;
 
   if (!aulaFinal && childId) {
     const decisao = await decidirConteudoAula({
@@ -230,7 +230,7 @@ export async function resolverMissao(
   // Adaptações — imports diretos evitam ciclo em tempo de execução.
   const { MotorPedagogico } = await import("./index");
 
-  const idade = MotorPedagogico.adaptacaoIdade.calcular({
+  const adaptacaoIdade = MotorPedagogico.adaptacaoIdade.calcular({
     childId: perfil.childId ?? "",
     idade: perfil.idade,
     serie: perfil.serie ?? bncc.ano,
@@ -293,6 +293,6 @@ export async function resolverMissao(
     missaoOficial: oficial,
     aulaBase: base,
     progresso,
-    adaptacoes: { idade, desempenho, missao },
+    adaptacoes: { idade: adaptacaoIdade, desempenho, missao },
   };
 }
