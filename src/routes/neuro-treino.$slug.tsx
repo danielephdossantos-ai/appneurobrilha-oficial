@@ -529,6 +529,22 @@ function MechanicRenderer({
       return <OrdemInversa p={variation.payload} onDone={onConcluir} />;
     case "sinal-verde-vermelho":
       return <SinalVerdeVermelho p={variation.payload} onDone={onConcluir} />;
+    // FASE 3B
+    case "pares-sonoros":
+      return <ParesSonoros p={variation.payload} onDone={onConcluir} />;
+    case "sequencia-auditiva":
+      return <SequenciaAuditiva p={variation.payload} onDone={onConcluir} />;
+    // FASE 3C
+    case "banquete-dos-dinos":
+      return <BanqueteDinos p={variation.payload} onDone={onConcluir} />;
+    case "trem-numerico":
+      return <TremNumerico p={variation.payload} onDone={onConcluir} />;
+    // FASE 3D
+    case "troca-troca-regras":
+      return <TrocaRegras p={variation.payload} onDone={onConcluir} />;
+    // FASE 3F
+    case "ponte-de-blocos":
+      return <PonteBlocos p={variation.payload} onDone={onConcluir} />;
   }
 }
 
