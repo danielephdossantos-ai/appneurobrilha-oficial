@@ -211,11 +211,11 @@ function NeuroAtividade() {
     return import.meta.env.DEV ? base : base; // Fallback se necessário, mas vamos usar a função
   }, [variation, instrucaoTematica, nomeCrianca]);
 
-  const { speak, stop, isSpeaking } = usePipVoice();
   const narracaoSanitizada = useMemo(() => {
     const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
     return sanitizarFalaMascote(narracao, nomeCrianca);
   }, [narracao, nomeCrianca]);
+
 
 
 

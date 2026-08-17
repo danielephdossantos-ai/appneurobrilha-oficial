@@ -36,9 +36,11 @@ export type CategoriaSlug =
   | "consciencia-fonologica"
   | "consciencia-silabica"
   | "compreensao-leitora"
+  | "foco-sustentado"
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
+
   
   
   
@@ -148,6 +150,22 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
   "consciencia-silabica": {
     slug: "consciencia-silabica",
     nome: "Consciência Silábica",
+    emoji: "🧩",
+    grupo: "Fala e Som",
+    cor: "from-coral/25 to-sun/5",
+    objetivo: "Manipulação silábica",
+    instrucao: "Toque na sílaba correta para completar a palavra.",
+  },
+  "foco-sustentado": {
+    slug: "foco-sustentado",
+    nome: "Vigilante Noturno",
+    emoji: "🔦",
+    grupo: "Atenção & Concentração",
+    cor: "from-violet/25 to-primary/5",
+    objetivo: "Atenção sustentada e rastreamento visual",
+    instrucao: "Toque em todos os objetos pedidos que passarem voando!",
+  },
+
     emoji: "👐",
     grupo: "Fala e Som",
     cor: "from-coral/25 to-sun/5",
