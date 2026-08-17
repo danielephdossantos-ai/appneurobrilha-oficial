@@ -22,7 +22,7 @@ export const aula01Olha: AulaBE = {
     {
       tipo: "abertura",
       fala:
-        "Oi! Eu sou a Pip. Hoje a gente vai olhar juntos. Quando eu falar OLHA, você olha comigo, tá?",
+        "Oi! Vamos começar uma aventura. Hoje a gente vai olhar juntos. Quando eu falar OLHA, você olha comigo, tá?",
       imagem: pipVet,
     },
     {

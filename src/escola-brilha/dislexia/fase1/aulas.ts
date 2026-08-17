@@ -41,7 +41,7 @@ export const dlx01: AulaDlx = {
     {
       tipo: "abertura",
       fala:
-        "Oi! Eu sou a Pip. Hoje a gente vai brincar de RIMA. Rima é quando o final das palavras é igual, tipo VACA e FACA. Escuta.",
+        "Oi! Vamos começar uma aventura. Hoje a gente vai brincar de RIMA. Rima é quando o final das palavras é igual, tipo VACA e FACA. Escuta.",
       imagem: pipVet,
     },
     {

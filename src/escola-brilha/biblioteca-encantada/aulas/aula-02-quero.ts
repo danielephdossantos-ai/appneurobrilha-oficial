@@ -20,7 +20,7 @@ export const aula02Quero: AulaBE = {
     {
       tipo: "abertura",
       fala:
-        "Oi de novo! Sou a Pip. Hoje a gente vai pedir. Quando você QUER, você toca na figura, tá?",
+        "Oi de novo! Hoje a gente vai pedir. Quando você QUER, você toca na figura, tá?",
       imagem: pipVet,
     },
     {
