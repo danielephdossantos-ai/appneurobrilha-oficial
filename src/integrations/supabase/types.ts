@@ -1441,6 +1441,53 @@ export type Database = {
           },
         ]
       }
+      child_escrita_status: {
+        Row: {
+          child_id: string
+          created_at: string | null
+          etapa_atual: number
+          id: string
+          nivel_atual: number
+          pontos_dominio: number
+          pref_letra: Database["public"]["Enums"]["tipo_letra_escrita"]
+          progresso_cursiva: number
+          progresso_imprensa: number
+          updated_at: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string | null
+          etapa_atual?: number
+          id?: string
+          nivel_atual?: number
+          pontos_dominio?: number
+          pref_letra?: Database["public"]["Enums"]["tipo_letra_escrita"]
+          progresso_cursiva?: number
+          progresso_imprensa?: number
+          updated_at?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string | null
+          etapa_atual?: number
+          id?: string
+          nivel_atual?: number
+          pontos_dominio?: number
+          pref_letra?: Database["public"]["Enums"]["tipo_letra_escrita"]
+          progresso_cursiva?: number
+          progresso_imprensa?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_escrita_status_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_journey: {
         Row: {
           child_id: string
@@ -8703,6 +8750,7 @@ export type Database = {
         | "projetos"
         | "resolucao_problemas"
         | "narrativa"
+      tipo_letra_escrita: "imprensa" | "cursiva" | "ambas"
       tipo_player: "early" | "b" | "c" | "legacy"
     }
     CompositeTypes: {
@@ -8924,6 +8972,7 @@ export const Constants = {
         "resolucao_problemas",
         "narrativa",
       ],
+      tipo_letra_escrita: ["imprensa", "cursiva", "ambas"],
       tipo_player: ["early", "b", "c", "legacy"],
     },
   },

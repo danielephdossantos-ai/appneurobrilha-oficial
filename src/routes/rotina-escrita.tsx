@@ -34,8 +34,18 @@ import { oralidadeDaSemana } from "@/lib/rotina-oralidade";
 import { SEMANAS_ESCRITA_2ANO } from "@/lib/rotina-escrita-2ano";
 import { SEMANAS_ESCRITA_3ANO } from "@/lib/rotina-escrita-3ano";
 import { SEMANAS_ESCRITA_4ANO } from "@/lib/rotina-escrita-4ano";
+import { 
+  getEscritaStatus, 
+  updateEscritaProgresso, 
+  type EscritaStatus,
+  type TipoLetra 
+} from "@/lib/motor-escrita.functions";
+import { MOTOR_PEDAGOGICO } from "@/lib/motor-pedagogico-data";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/rotina-escrita")({
+
   head: () => ({
     meta: [
       { title: "Rotina de Escrita Diária — Neuro Brilha Kids" },
@@ -79,6 +89,25 @@ function hojeISO() {
 
 function RotinaEscrita() {
   const { serie } = Route.useSearch();
+  const queryClient = useQueryClient();
+  const { activeChild } = useAppState();
+  
+  const fetchStatus = useServerFn(getEscritaStatus);
+  const { data: status, isLoading: loadingStatus } = useQuery({
+    queryKey: ["escrita-status", activeChild?.id],
+    queryFn: () => fetchStatus({ childId: activeChild?.id || "" }),
+    enabled: !!activeChild?.id
+  });
+
+  const updateProgressoFn = useServerFn(updateEscritaProgresso);
+  const mutation = useMutation({
+    mutationFn: (vars: { acerto: boolean, tipoLetra: "imprensa" | "cursiva" }) => 
+      updateProgressoFn({ childId: activeChild?.id || "", ...vars }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["escrita-status", activeChild?.id] });
+    }
+  });
+
   const semanas =
     serie === "4"
       ? SEMANAS_ESCRITA_4ANO
@@ -87,7 +116,7 @@ function RotinaEscrita() {
         : serie === "2"
           ? SEMANAS_ESCRITA_2ANO
           : SEMANAS_ESCRITA;
-  const { activeChild } = useAppState();
+
   const push = usePushNotifications(activeChild?.id ?? null);
   const [rotina, setRotina] = useState<Rotina>({
     weekdays: ROTINA_DEFAULT_WEEKDAYS,
@@ -98,6 +127,7 @@ function RotinaEscrita() {
   const [loading, setLoading] = useState(true);
   const [semanaManual, setSemanaManual] = useState<number | null>(null);
   const [feitos, setFeitos] = useState<Record<string, boolean>>({});
+
 
   useEffect(() => {
     if (!activeChild?.id) return;
@@ -219,6 +249,40 @@ function RotinaEscrita() {
         subtitle={`${activeChild.nome} · Semana ${nSemana} de ${semanas.length} · ${sem.foco}`}
       />
 
+      {/* Seletor de Etapa Pedagógica (Motor) */}
+      {status && (
+        <div className="mb-6 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-3">
+            {MOTOR_PEDAGOGICO.map((etapa) => {
+              const isCurrent = status.nivel_atual === etapa.nivel;
+              const isPast = status.nivel_atual > etapa.nivel;
+              return (
+                <div 
+                  key={etapa.nivel}
+                  className={`flex-shrink-0 w-48 p-3 rounded-2xl border-2 transition-all ${
+                    isCurrent ? "border-primary bg-primary/5 shadow-md" : 
+                    isPast ? "border-green-500/30 bg-green-50/50" : "border-muted bg-muted/20 opacity-50"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${
+                      isCurrent ? "bg-primary text-primary-foreground" : 
+                      isPast ? "bg-green-500 text-white" : "bg-muted-foreground text-white"
+                    }`}>
+                      ETAPA {etapa.nivel}
+                    </span>
+                    {isPast && <Check className="h-3 w-3 text-green-500" />}
+                  </div>
+                  <div className="text-xs font-black uppercase leading-tight truncate">
+                    {etapa.titulo}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="flex gap-2 mb-4">
         {(["1", "2", "3", "4"] as const).map((s2) => (
           <Link
@@ -233,6 +297,7 @@ function RotinaEscrita() {
           </Link>
         ))}
       </div>
+
 
       {/* Horário + notificação */}
       <div className="rounded-3xl bg-gradient-to-br from-[#0d1f55] to-[#1a3a8c] text-white p-5 shadow-xl mb-6">
