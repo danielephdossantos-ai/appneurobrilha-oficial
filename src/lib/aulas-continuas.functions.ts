@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { parseBNCC } from "@/escola-brilha/motor/resolver";
+import { validarAulaIA } from "./validador-aulas.server";
 
 /**
  * Módulo de Motor de Decisão de Conteúdo
@@ -215,7 +216,17 @@ Retorne APENAS o JSON.`;
       throw new Error("Falha na estruturação da aula (JSON inválido)");
     }
 
-    // 4. Persistência Automática (Implementação 2/8)
+    // 4. Validação da Aula (Implementação 6/8)
+    const validacao = await validarAulaIA(aulaGerada, {
+      codigoBNCC: data.codigoBNCC,
+      idade: data.idade,
+      serie: data.serie,
+      disciplina: data.disciplina,
+      nivel: data.nivel,
+      modelo: "gemini-1.5-flash"
+    });
+
+    // 5. Persistência e Registro (Só aprova se passar na validação)
     const { data: salva, error: saveError } = await supabase
       .from("aulas_geradas")
       .insert({
@@ -226,12 +237,23 @@ Retorne APENAS o JSON.`;
         conteudo: aulaGerada,
         modelo_ia: "gemini-1.5-flash",
         nivel: data.nivel,
-        status: 'approved' as any
+        status: validacao.status,
+        metadata_validacao: validacao // Salvando log completo da validação
       } as any)
       .select()
       .single();
 
     if (saveError) throw saveError;
+
+    if (validacao.status !== 'approved') {
+      return { 
+        status: "validacao_falhou", 
+        resultado: validacao.status,
+        motivos: validacao.motivos,
+        aula: salva 
+      };
+    }
+
     return { status: "sucesso", aula: salva };
   });
 
