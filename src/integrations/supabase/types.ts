@@ -916,6 +916,84 @@ export type Database = {
         }
         Relationships: []
       }
+      biblioteca_escrita: {
+        Row: {
+          audio_instrucao: string | null
+          bncc_codes: string[] | null
+          comando: string
+          conteudo: string
+          created_at: string | null
+          dica_pedagogica: string | null
+          etapa_titulo: string
+          habilidade_foco: string
+          hash_conteudo: string | null
+          hiperfoco_compativel: string[] | null
+          id: string
+          idade_max: number | null
+          idade_min: number | null
+          metodologia: string | null
+          nivel: number
+          objetivo: string | null
+          serie: string | null
+          status_validacao: string | null
+          tipo: string
+          tipo_letra: string | null
+          titulo: string
+          uso_contagem: number | null
+          versao: number | null
+        }
+        Insert: {
+          audio_instrucao?: string | null
+          bncc_codes?: string[] | null
+          comando: string
+          conteudo: string
+          created_at?: string | null
+          dica_pedagogica?: string | null
+          etapa_titulo: string
+          habilidade_foco: string
+          hash_conteudo?: string | null
+          hiperfoco_compativel?: string[] | null
+          id?: string
+          idade_max?: number | null
+          idade_min?: number | null
+          metodologia?: string | null
+          nivel: number
+          objetivo?: string | null
+          serie?: string | null
+          status_validacao?: string | null
+          tipo: string
+          tipo_letra?: string | null
+          titulo: string
+          uso_contagem?: number | null
+          versao?: number | null
+        }
+        Update: {
+          audio_instrucao?: string | null
+          bncc_codes?: string[] | null
+          comando?: string
+          conteudo?: string
+          created_at?: string | null
+          dica_pedagogica?: string | null
+          etapa_titulo?: string
+          habilidade_foco?: string
+          hash_conteudo?: string | null
+          hiperfoco_compativel?: string[] | null
+          id?: string
+          idade_max?: number | null
+          idade_min?: number | null
+          metodologia?: string | null
+          nivel?: number
+          objetivo?: string | null
+          serie?: string | null
+          status_validacao?: string | null
+          tipo?: string
+          tipo_letra?: string | null
+          titulo?: string
+          uso_contagem?: number | null
+          versao?: number | null
+        }
+        Relationships: []
+      }
       bncc_anos: {
         Row: {
           codigo: string
