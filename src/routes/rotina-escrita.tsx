@@ -18,6 +18,12 @@ import {
   Mic,
   MessageCircle,
   Check,
+  Sparkles,
+  RefreshCw,
+  Target,
+  ChevronRight,
+  ThumbsUp,
+  ThumbsDown,
 } from "lucide-react";
 import {
   ROTINA_ESCRITA_CATEGORY,
@@ -41,6 +47,7 @@ import {
   type TipoLetra 
 } from "@/lib/motor-escrita.functions";
 import { MOTOR_PEDAGOGICO } from "@/lib/motor-pedagogico-data";
+import { gerarAtividadeEscritaIA } from "@/lib/professor-mentor-escrita.functions";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 
