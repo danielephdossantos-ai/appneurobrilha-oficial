@@ -20,7 +20,7 @@ const AUTO_APRESENTACAO = new RegExp(
 // "Oi de novo! Sou a Pip." → sobra saudação solta; normalizamos espaços depois.
 export function sanitizarFalaMascote(texto: string, nomeCrianca?: string): string {
   if (!texto) return texto;
-  const nome = (nomeCrianca ?? "").trim();
+  const nome = (nomeCrianca ?? nomeAtivo ?? "").trim();
   const saudacao = nome ? `Oi, ${nome}, vamos começar uma aventura!` : "Oi, vamos começar uma aventura!";
 
   let out = texto;
@@ -35,4 +35,13 @@ export function sanitizarFalaMascote(texto: string, nomeCrianca?: string): strin
   }
 
   return out.replace(/[ \t]{2,}/g, " ").replace(/\s+([.,!?])/g, "$1").trim();
+}
+
+let nomeAtivo = "";
+/** Guarda o primeiro nome da criança ativa para as saudações neutras. */
+export function definirNomeCriancaFala(nome?: string) {
+  nomeAtivo = (nome ?? "").trim().split(/\s+/)[0] ?? "";
+}
+export function nomeCriancaFala() {
+  return nomeAtivo;
 }
