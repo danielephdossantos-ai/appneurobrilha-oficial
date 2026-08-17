@@ -399,7 +399,7 @@ function BrilhaVida() {
       <Shell>
         <div className="relative">
           <button
-            onClick={() => setActiveActivity(null)}
+            onClick={() => { if (!handleBack(navigate)) setActiveActivity(null); }}
             className="absolute -top-12 right-0 p-2 bg-white rounded-full shadow-lg border-2 border-slate-100 text-slate-400 hover:text-destructive transition-colors z-50"
           >
             <X size={24} />
@@ -416,7 +416,7 @@ function BrilhaVida() {
               title: activeActivity.content.title,
             }}
             onComplete={() => {
-              setTimeout(() => setActiveActivity(null), 2000);
+              setTimeout(() => { if (!handleBack(navigate)) setActiveActivity(null); }, 2000);
             }}
             emotion={{ current: "happy" }}
           />
@@ -495,7 +495,14 @@ function BrilhaVida() {
               {cat.atividades.map((atv) => (
                 <button
                   key={atv}
-                  onClick={() => startLevel(atv)}
+                  onClick={() => {
+                    useNavigationStore.getState().setContext({
+                      originRoute: "/brilha-vida",
+                      originModule: "brilha-vida",
+                      timestamp: Date.now(),
+                    });
+                    startLevel(atv);
+                  }}
                   className={`group relative overflow-hidden text-center p-4 sm:p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap flex flex-col items-center gap-3 h-full min-h-[14rem] sm:min-h-[16rem]`}
                 >
                   {/* Topo: Imagem centralizada e maior */}
