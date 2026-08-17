@@ -34,6 +34,15 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
+    to: "/primeiros-anos",
+    title: "Kids (Educação Infantil)",
+    subtitle: "3 a 6 anos · Alfabetização",
+    gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
+    glow: "rgba(52,211,153,0.7)",
+    emoji: "🌱",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -41,15 +50,6 @@ const DESTINOS_KIDS: Destino[] = [
     glow: "rgba(155,108,255,0.7)",
     emoji: "🧠",
     shine: "rgba(255,255,255,0.12)",
-  },
-  {
-    to: "/primeiros-anos",
-    title: "Brilha Kids",
-    subtitle: "3 a 6 anos · Alfabetização",
-    gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
-    glow: "rgba(52,211,153,0.7)",
-    emoji: "🌱",
-    shine: "rgba(255,255,255,0.15)",
   },
   {
     to: "/curriculo-anual",
