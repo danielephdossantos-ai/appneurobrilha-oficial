@@ -260,22 +260,37 @@ function RotinaEscrita() {
               return (
                 <div 
                   key={etapa.nivel}
-                  className={`flex-shrink-0 w-48 p-3 rounded-2xl border-2 transition-all ${
-                    isCurrent ? "border-primary bg-primary/5 shadow-md" : 
+                  className={`flex-shrink-0 w-64 p-4 rounded-3xl border-2 transition-all ${
+                    isCurrent ? "border-primary bg-primary/5 shadow-md scale-[1.02]" : 
                     isPast ? "border-green-500/30 bg-green-50/50" : "border-muted bg-muted/20 opacity-50"
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
                       isCurrent ? "bg-primary text-primary-foreground" : 
                       isPast ? "bg-green-500 text-white" : "bg-muted-foreground text-white"
                     }`}>
                       ETAPA {etapa.nivel}
                     </span>
-                    {isPast && <Check className="h-3 w-3 text-green-500" />}
+                    {isPast ? (
+                      <Check className="h-4 w-4 text-green-500" />
+                    ) : isCurrent ? (
+                      <div className="text-[10px] font-bold text-primary animate-pulse">EM PROGRESSO</div>
+                    ) : null}
                   </div>
-                  <div className="text-xs font-black uppercase leading-tight truncate">
+                  <div className="text-sm font-black uppercase leading-tight mb-2">
                     {etapa.titulo}
+                  </div>
+                  <div className="space-y-1">
+                    {etapa.objetivos.slice(0, 3).map((obj, i) => (
+                      <div key={i} className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                        <div className={`h-1 w-1 rounded-full ${isCurrent ? 'bg-primary' : 'bg-muted-foreground'}`} />
+                        {obj}
+                      </div>
+                    ))}
+                    {etapa.objetivos.length > 3 && (
+                      <div className="text-[9px] text-muted-foreground/70 italic">+ {etapa.objetivos.length - 3} itens</div>
+                    )}
                   </div>
                 </div>
               );
@@ -283,6 +298,7 @@ function RotinaEscrita() {
           </div>
         </div>
       )}
+
 
       <div className="flex gap-2 mb-4">
         {(["1", "2", "3", "4"] as const).map((s2) => (
