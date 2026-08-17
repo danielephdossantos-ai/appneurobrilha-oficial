@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
