@@ -42,13 +42,13 @@ export const TrilhaVisual: React.FC<TrilhaVisualProps> = ({ nodes, onNodeClick }
                   status === 'bloqueado' && "bg-slate-300 border-slate-400 cursor-not-allowed opacity-70",
                   status === 'disponivel' && "bg-blue-500 border-white",
                   status === 'concluido' && "bg-emerald-500 border-white",
-                  status === 'nao_realizado' && "bg-rose-500 border-white"
+                  status === 'falta' && "bg-rose-500 border-white"
                 )}
               >
                 {status === 'bloqueado' && <Lock className="w-8 h-8 text-slate-500" />}
                 {status === 'disponivel' && <Play className="w-8 h-8 text-white fill-current" />}
                 {status === 'concluido' && <Check className="w-10 h-10 text-white" strokeWidth={4} />}
-                {status === 'nao_realizado' && <AlertCircle className="w-8 h-8 text-white" />}
+                {status === 'falta' && <AlertCircle className="w-8 h-8 text-white" />}
                 
                 {/* Badge do Dia */}
                 <div className={cn(
@@ -66,7 +66,7 @@ export const TrilhaVisual: React.FC<TrilhaVisualProps> = ({ nodes, onNodeClick }
                 status === 'bloqueado' ? "text-slate-400" : "text-slate-700"
               )}>
                 {status === 'concluido' ? "Concluído!" : `Dia ${node.diaNumero}`}
-                {status === 'nao_realizado' && <div className="text-[10px] text-rose-500">Pendente</div>}
+                {status === 'falta' && <div className="text-[10px] text-rose-500">Pendente</div>}
               </div>
             </div>
           );
