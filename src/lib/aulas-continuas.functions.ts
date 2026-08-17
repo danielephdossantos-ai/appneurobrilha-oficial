@@ -16,11 +16,11 @@ export const buscarOuAgendarGeracaoAula = createServerFn({ method: "POST" })
     const { supabase } = await import("@/integrations/supabase/client");
     
     // 1. Verificar se já existe aula gerada aprovada para este código BNCC
+    // Reutilizando a tabela bncc_conteudo para armazenar as aulas geradas globalmente
     const { data: existente } = await supabase
-      .from("rb_aulas_ia")
-      .select("id, titulo, screens")
-      .eq("codigo_bncc", data.codigoBNCC)
-      .eq("aprovada", true)
+      .from("bncc_conteudo")
+      .select("id, titulo, aula_ilustrada")
+      .eq("codigo", data.codigoBNCC)
       .maybeSingle();
 
     if (existente) {

@@ -145,20 +145,20 @@ export async function resolverMissao(
   // Se não tem aula fixa, busca no banco de aulas geradas por IA
   if (!oficial && !base) {
     const { data: ia } = await supabase
-      .from("rb_aulas_ia")
+      .from("bncc_conteudo")
       .select("*")
-      .eq("codigo_bncc", bncc.codigo)
-      .eq("aprovada", true)
+      .eq("codigo", bncc.codigo)
       .maybeSingle();
       
     if (ia) {
       // Converte o formato do banco para o tipo Aula
+      // O campo aula_ilustrada armazena o JSON compatível com o tipo Aula
       aulaIA = {
-        codigo: ia.codigo_bncc,
-        titulo: ia.titulo,
-        ano: ia.ano,
-        disciplina: ia.disciplina || bncc.disciplina,
-        ...ia.screens
+        codigo: ia.codigo,
+        titulo: ia.titulo || bncc.codigo,
+        ano: bncc.ano,
+        disciplina: bncc.disciplina,
+        ...(ia.aula_ilustrada as any)
       } as Aula;
     }
   }
