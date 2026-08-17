@@ -105,7 +105,7 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "palavra-imagem": icPalavraImagem,
   "formando-palavras": icFormandoPalavras,
   "leitura-palavras": icLeituraPalavras,
-  "completar-letra": icCompletarLetter,
+  "completar-letra": icCompletarLetra,
   "ordem-inversa": icOrdemInversa,
   "sinal-verde-vermelho": icSinalVerdeVermelho,
   "pares-sonoros": icDiscriminacaoAuditiva,
