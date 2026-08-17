@@ -144,66 +144,78 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
   }).parse(data))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
+    const { callGemini } = await import("./gemini.server");
     
-    // 1. Obter chave da API com segurança (no servidor)
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-    if (!GEMINI_API_KEY) {
-      throw new Error("GEMINI_API_KEY não configurada no ambiente.");
-    }
-
-    // 2. Buscar perfil neuro da criança para personalização
-    // Usando children_profiles conforme verificado nos tipos
+    // 1. Buscar perfil neuro da criança para personalização
     const { data: profile } = await supabase
       .from("children_profiles" as any)
       .select("*, anamnese_v2:anamnese_v2(*)")
       .eq("id", data.childId)
       .maybeSingle();
 
-    // 3. Preparar Prompt Estruturado (Instrução 5/8)
+    // 2. Preparar Prompt Estruturado (Instrução 5/8)
     const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
-Gere uma AULA COMPLETA em JSON estruturado.
+Gere uma AULA COMPLETA em JSON estruturado para uma criança.
 
 DADOS DO ALUNO:
 - Idade: ${data.idade} anos
 - Série: ${data.serie}
-- Nível: ${data.nivel}
-- Perfil: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
+- Nível: ${data.nivel} (1: Iniciante, 2: Prática, 3: Consolidação, 4: Maestria)
+- Perfil Neuro: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
 
-OBJETIVO:
+OBJETIVO PEDAGÓGICO:
 - Disciplina: ${data.disciplina}
 - Código BNCC: ${data.codigoBNCC}
+- Objetivo Específico: ${data.objetivo || "Desenvolver a habilidade proposta pela BNCC"}
 
-REGRAS:
-1. NÃO invente códigos BNCC. Use ${data.codigoBNCC}.
-2. NÃO altere idade/série.
-3. Sem emojis.
-4. Estrutura JSON: titulo, objetivo, capitulos[], gabarito, criterios_conclusao.
-5. Capítulos obrigatórios: introducao, explicacao, exemplo, atividade_guiada, atividade_independente, desafio, revisao, avaliacao, feedback.`;
+REGRAS OBRIGATÓRIAS:
+1. NÃO invente códigos BNCC. Use rigorosamente ${data.codigoBNCC}.
+2. NÃO altere idade ou série.
+3. PROIBIDO o uso de EMOJIS (distração visual para neurodivergentes).
+4. Use linguagem infantil adequada para ${data.idade} anos.
+5. Se idade <= 6 anos: Foco em imagens (descreva-as como objetos JSON).
 
-    const model = "gemini-1.5-flash";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+ESTRUTURA DO JSON (DEVE SER VÁLIDO):
+{
+  "titulo": "Título lúdico",
+  "objetivo": "...",
+  "capitulos": [
+    { "ordem": 1, "tipo": "introducao", "conteudo": "..." },
+    { "ordem": 2, "tipo": "explicacao", "conteudo": "..." },
+    { "ordem": 3, "tipo": "exemplo", "conteudo": "..." },
+    { "ordem": 4, "tipo": "atividade_guiada", "conteudo": "...", "atividade": { "pergunta": "...", "opcoes": [], "correta": 0 } },
+    { "ordem": 5, "tipo": "atividade_independente", "conteudo": "..." },
+    { "ordem": 6, "tipo": "desafio", "conteudo": "..." },
+    { "ordem": 7, "tipo": "revisao", "conteudo": "..." },
+    { "ordem": 8, "tipo": "avaliacao", "conteudo": "...", "questoes": [] },
+    { "ordem": 9, "tipo": "feedback", "conteudo": "..." }
+  ],
+  "gabarito": { ... },
+  "criterios_conclusao": "..."
+}
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: systemPrompt }] }],
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: 4096,
-          responseMimeType: "application/json"
-        }
-      })
+Retorne APENAS o JSON.`;
+
+    // 3. Chamar Gemini através do helper centralizado
+    const text = await callGemini({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Gere a aula para o código ${data.codigoBNCC} nível ${data.nivel}` }
+      ],
+      model: "gemini-1.5-flash",
+      temperature: 0.2,
+      json: true
     });
 
-    if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
-    const resData = await res.json();
-    const text = resData.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) throw new Error("Resposta vazia do Gemini");
+    let aulaGerada;
+    try {
+      aulaGerada = JSON.parse(text);
+    } catch (e) {
+      console.error("Gemini gerou JSON inválido:", text);
+      throw new Error("Falha na estruturação da aula (JSON inválido)");
+    }
 
-    const aulaGerada = JSON.parse(text);
-
-    // 4. Persistência Automática
+    // 4. Persistência Automática (Implementação 2/8)
     const { data: salva, error: saveError } = await supabase
       .from("aulas_geradas")
       .insert({
@@ -212,7 +224,7 @@ REGRAS:
         disciplina: data.disciplina,
         codigo_bncc: data.codigoBNCC,
         conteudo: aulaGerada,
-        modelo_ia: model,
+        modelo_ia: "gemini-1.5-flash",
         nivel: data.nivel,
         status: 'approved' as any
       } as any)
