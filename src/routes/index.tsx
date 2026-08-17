@@ -34,15 +34,7 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-    to: "/escola-brilha",
-    title: "Escola Brilha",
-    subtitle: "Aulas de verdade",
-    gradient: "from-[#4C9EFF] via-[#3B82F6] to-[#1D4ED8]",
-    glow: "rgba(76,158,255,0.7)",
-    emoji: "📚",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
+
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -53,8 +45,8 @@ const DESTINOS_KIDS: Destino[] = [
   },
   {
     to: "/primeiros-anos",
-    title: "Primeiros Anos (3 a 6 anos)",
-    subtitle: "Plano de Alfabetização",
+    title: "Primeiros Anos",
+    subtitle: "Plano de Alfabetização · 3 a 6 anos",
     gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
     glow: "rgba(52,211,153,0.7)",
     emoji: "🌱",
@@ -69,6 +61,7 @@ const DESTINOS_KIDS: Destino[] = [
     emoji: "🎓",
     shine: "rgba(255,255,255,0.15)",
   },
+
   {
     to: "/plano-neuro",
     title: "Plano Neuro",
@@ -76,6 +69,16 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#F472B6] via-[#EC4899] to-[#9D174D]",
     glow: "rgba(244,114,182,0.7)",
     emoji: "🧠",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
+
+    to: "/escola-brilha",
+    title: "Escola Brilha",
+    subtitle: "Aulas de verdade",
+    gradient: "from-[#4C9EFF] via-[#3B82F6] to-[#1D4ED8]",
+    glow: "rgba(76,158,255,0.7)",
+    emoji: "📚",
     shine: "rgba(255,255,255,0.15)",
   },
   {
