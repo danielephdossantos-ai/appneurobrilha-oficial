@@ -265,7 +265,6 @@ function PainelPremium() {
         </div>
 
         {/* Alfabetização Brilha foi movido para Neuro Treino */}
-        {/* Primeiros Anos e Currículo Anual foram unificados na Trilha Sequencial */}
 
         {/* Painel Pedagógico para a Família — visão simples e objetiva */}
         <div className="mb-6">
