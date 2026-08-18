@@ -110,7 +110,7 @@ export function normalizarFala(texto: string, contexto: "geral" | "matematica" |
   out = out.replace(/(\d+)\s*%\s*/g, "$1 por cento");
 
   // 4. Normalização de números cardinais isolados (0-100)
-  out = out.replace(/\b(\d+)\b/g, (match, num) => {
+  out = out.replace(/(?<!\d)(\d+)(?!\d)/g, (match, num) => {
     if (NUMEROS_PT[num]) return NUMEROS_PT[num];
     const n = parseInt(num);
     if (n > 20 && n < 100) {
