@@ -352,7 +352,7 @@ function Treino() {
                 Sistema 1
               </div>
               <div className="text-sm font-black leading-tight text-slate-900 dark:text-white">
-                Plano de Alfabetização
+                Plano de Alfabetização (3-6a)
               </div>
             </div>
             <div className="absolute -bottom-2 -right-2 h-16 w-16 opacity-5">
@@ -372,7 +372,7 @@ function Treino() {
                 Sistema 2
               </div>
               <div className="text-sm font-black leading-tight text-slate-900 dark:text-white">
-                Plano Neuro-Treino
+                Plano Neuro-Treino (3-6a)
               </div>
             </div>
             <div className="absolute -bottom-2 -right-2 h-16 w-16 opacity-5">

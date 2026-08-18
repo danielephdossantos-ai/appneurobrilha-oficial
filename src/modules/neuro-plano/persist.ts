@@ -97,7 +97,16 @@ export async function marcarItemNeuro(itemId: string, concluido: boolean): Promi
 /** Gera (ou regenera) e salva o plano neuro da criança a partir da anamnese. */
 export async function gerarESalvarNeuro(childId: string): Promise<PlanoNeuroGerado> {
   const { scores, risk } = await buscarAnamnese(childId);
-  const plano = gerarPlanoNeuro({ scores, risk });
+  
+  // Obter idade da criança
+  const { data: child } = await supabase
+    .from("profiles" as any)
+    .select("age")
+    .eq("id", childId)
+    .single();
+    
+  const age = (child as any)?.age ?? 5;
+  const plano = gerarPlanoNeuro({ scores, risk, age });
 
   const antigo = await carregarPlanoNeuro(childId);
   if (antigo?.id) {
