@@ -2,6 +2,7 @@ import { supabase } from "@/database/supabase/client";
 import { CATEGORIAS, type CategoriaSlug } from "@/data/neuro-treino/variations";
 import { buscarAnamnese } from "./persist";
 import type { PerfilScores, RiskMap } from "@/modules/anamnese/v2/types";
+import { sanitizarLinguagem } from "@/lib/sanitizar-linguagem-clinica";
 
 export interface NeuroMetrics {
   masteryScore: number;
@@ -24,7 +25,7 @@ export interface RecommendedSession {
  * NUNCA exibe termos clínicos para o usuário.
  */
 export async function orquestrarSessaoDiaria(childId: string): Promise<RecommendedSession[]> {
-  const { scores, risk } = await buscarAnamnese(childId);
+  const { risk } = await buscarAnamnese(childId);
   
   // 1. Obter domínio e histórico recente
   const { data: mastery } = await supabase
@@ -37,7 +38,7 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
     masteryMap.set(m.skill_slug, {
       masteryScore: m.mastery_score,
       lastTrained: m.last_activity_at,
-      fatigueIndex: 0 // TODO: Calcular baseado em erros recentes
+      fatigueIndex: 0 
     });
   });
 
@@ -47,15 +48,14 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
     let motivo = "Treino de desenvolvimento geral.";
 
     // Fator Anamnese (Prioridade Máxima)
-    // RiskMap usa: "verde" | "amarelo" | "laranja" | "vermelho"
     const riskLevel = risk ? (risk[meta.grupo as keyof RiskMap] as string) : null;
     
     if (riskLevel === "vermelho" || riskLevel === "laranja") {
       score += 100;
-      motivo = "Área prioritária identificada para desenvolvimento.";
+      motivo = `Prioridade em ${meta.nome}: área de maior necessidade atual.`;
     } else if (riskLevel === "amarelo") {
       score += 50;
-      motivo = "Área importante para fortalecimento.";
+      motivo = `Fortalecimento em ${meta.nome}: desenvolvimento importante.`;
     }
 
     // Fator Domínio (Mastery)
@@ -63,7 +63,6 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
     if (metrics) {
       if (metrics.masteryScore < 50) score += 30; // Focar no que ainda não dominou
       
-      // Fator Novidade / Espaçamento
       if (metrics.lastTrained) {
         const dias = (Date.now() - new Date(metrics.lastTrained).getTime()) / 86400000;
         if (dias > 3) score += 20; // Reintroduzir se passou muito tempo
@@ -76,7 +75,7 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
       slug: slug as CategoriaSlug, 
       meta, 
       score, 
-      motivo 
+      motivo: sanitizarLinguagem(motivo)
     };
   });
 
@@ -88,8 +87,9 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
       slug: c.slug,
       nome: c.meta.nome,
       emoji: c.meta.emoji,
-      objetivo: c.meta.objetivo,
+      objetivo: sanitizarLinguagem(c.meta.objetivo),
       prioridade: c.score > 80 ? 1 : 2,
       motivo: c.motivo
     }));
 }
+
