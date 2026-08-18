@@ -220,13 +220,6 @@ function EscolaBrilhaCatalogo() {
 
 
 
-        {/* Recomendação inteligente — Próxima Missão */}
-        <ProximaMissao 
-          childId={activeChild?.id} 
-          serieCrianca={activeChild?.serie}
-          nomeCrianca={activeChild?.nome}
-        />
-
         {/* Revisões automáticas recomendadas */}
         <RevisoesRecomendadas childId={activeChild?.id} />
 
