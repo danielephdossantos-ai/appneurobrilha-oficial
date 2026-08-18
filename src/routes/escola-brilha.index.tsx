@@ -233,7 +233,17 @@ function EscolaBrilhaCatalogo() {
         <Link
           to="/escola-brilha/curso/$slug"
           params={{ slug: "portugues-aulas-extras" }}
-          className="mb-2 mt-2 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+          onClick={(e) => {
+            const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+            if (!isAdmin) {
+              e.preventDefault();
+              toast.error("Acesso restrito");
+            }
+          }}
+          className={cn(
+            "mb-2 mt-2 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg",
+            (session?.user?.user_metadata?.role !== "admin" && (session?.user as any)?.role !== "admin") && "opacity-50 cursor-not-allowed"
+          )}
           style={{ background: "linear-gradient(135deg, #1a1033, #f59e0b)" }}
         >
           <div>
@@ -442,6 +452,12 @@ function EscolaBrilhaCatalogo() {
                               key={disc}
                               to="/escola-brilha/trilha/$serie/$disc"
                               params={{ serie: serieSlug, disc }}
+                              onClick={(e) => {
+                                if (locked) {
+                                  e.preventDefault();
+                                  toast.error("Este conteúdo pertence a outra etapa de aprendizagem.");
+                                }
+                              }}
                               className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
                               style={{
                                 background: `linear-gradient(135deg, ${masc.corPrimaria}, ${masc.corSecundaria})`,
