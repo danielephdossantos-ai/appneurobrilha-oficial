@@ -122,6 +122,81 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
     }
   });
 
+export const saveRoutineItemWithNotifications = createServerFn({ method: "POST" })
+  .validator((d: unknown) => routineItemSchema.parse(d))
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
+    const payload = {
+      child_id: data.childId,
+      parent_id: user.id,
+      title: data.title,
+      description: data.description,
+      type: data.type,
+      start_time: data.startTime,
+      duration_minutes: data.durationMinutes,
+      date: data.date,
+      recurrence_days: data.recurrenceDays,
+      reminder_enabled: data.reminderEnabled,
+      reminder_minutes_before: data.reminderMinutesBefore,
+      status: data.status,
+      source: data.source,
+      source_id: data.sourceId,
+    };
+
+    let result;
+    if (data.id) {
+      const { data: updated, error } = await supabase
+        .from("routine_items")
+        .update(payload)
+        .eq("id", data.id)
+        .select()
+        .single();
+      if (error) throw error;
+      result = updated;
+
+      // Cancelar notificações antigas
+      await supabase
+        .from("scheduled_notifications" as any)
+        .delete()
+        .eq("routine_item_id", data.id)
+        .is("sent_at", null);
+    } else {
+      const { data: inserted, error } = await supabase
+        .from("routine_items")
+        .insert(payload)
+        .select()
+        .single();
+      if (error) throw error;
+      result = inserted;
+    }
+
+    // Agendar nova notificação se habilitado
+    if (data.reminderEnabled && result.id) {
+      const itemDate = data.date || new Date().toISOString().split('T')[0];
+      const scheduledTime = new Date(`${itemDate}T${data.startTime}:00`);
+      scheduledTime.setMinutes(scheduledTime.getMinutes() - (data.reminderMinutesBefore || 0));
+
+      // Só agendar se for no futuro
+      if (scheduledTime > new Date()) {
+        await supabase
+          .from("scheduled_notifications" as any)
+          .insert({
+            user_id: user.id,
+            child_id: data.childId,
+            routine_item_id: result.id,
+            title: `🔔 Hora da atividade: ${data.title}`,
+            body: `Vamos começar? Agora é hora de ${data.title}!`,
+            scheduled_for: scheduledTime.toISOString(),
+          });
+      }
+    }
+
+    return result;
+  });
+
 export const deleteRoutineItem = createServerFn({ method: "POST" })
   .validator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data }) => {

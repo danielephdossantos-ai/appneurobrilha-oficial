@@ -7775,6 +7775,63 @@ export type Database = {
           },
         ]
       }
+      scheduled_notifications: {
+        Row: {
+          body: string
+          child_id: string | null
+          created_at: string | null
+          error_message: string | null
+          id: string
+          routine_item_id: string | null
+          scheduled_for: string
+          sent_at: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          body: string
+          child_id?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          routine_item_id?: string | null
+          scheduled_for: string
+          sent_at?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          body?: string
+          child_id?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          routine_item_id?: string | null
+          scheduled_for?: string
+          sent_at?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduled_notifications_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scheduled_notifications_routine_item_id_fkey"
+            columns: ["routine_item_id"]
+            isOneToOne: false
+            referencedRelation: "routine_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sensory_profiles: {
         Row: {
           auditory_sensitivity: number | null
