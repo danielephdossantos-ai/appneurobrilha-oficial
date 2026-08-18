@@ -58,7 +58,7 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
       POST: async ({ request }) => {
         try {
           const body = await request.json()
-          const { missaoId, sessionId, topico, materia, criancaId, tipo } = body
+          const { missaoId, sessionId, topico, materia, criancaId, tipo, forceNew } = body
 
           const supabase = getSupabaseAdmin();
           
