@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Lock, Star, ChevronRight } from "lucide-react";
 import { DIAS_LABEL, diaSemanaHoje } from "@/modules/primeiros-anos/builder";
 import { toast } from "sonner";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useLocation } from "@tanstack/react-router";
 import { useMundoFundo, MundoBar } from "@/components/worlds/MundoTrilha";
+import { useNavigationStore } from "@/lib/navigation-context";
 
 interface TrilhaItem {
   id: string;
@@ -26,6 +27,8 @@ export function TrilhaPlanoVisual({ itens, onToggle, tipo }: Props) {
   const hoje = diaSemanaHoje();
   const navigate = useNavigate();
   const fundoMundo = useMundoFundo("");
+  const location = useLocation();
+  const setNavContext = useNavigationStore((s) => s.setContext);
 
   // Agrupar itens por dia
   const diasDisponiveis = Array.from(new Set(itens.map((i) => i.dia_semana))).sort((a, b) => a - b);
@@ -35,6 +38,17 @@ export function TrilhaPlanoVisual({ itens, onToggle, tipo }: Props) {
       toast.info(`Esta aula abrirá na ${DIAS_LABEL[item.dia_semana]}! 🔒`);
       return;
     }
+
+    // Salva o contexto de que viemos de um Plano (Requisito 9)
+    setNavContext({
+      originRoute: location.pathname,
+      originModule: tipo === "alfa" ? "alfabetizacao" : "neuro-treino",
+      returnPath: location.pathname,
+      isPlanFlow: true,
+      timestamp: Date.now(),
+      lessonId: item.id
+    });
+
     navigate({ to: item.rota });
   };
 
