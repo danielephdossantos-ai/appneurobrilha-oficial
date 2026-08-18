@@ -56,11 +56,14 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
 
       if (res.ok) {
         const j: any = await res.json();
-        const text = String(j?.choices?.[0]?.message?.content ?? "").trim();
-        if (text) return { ok: true, text, fonte: "groq" };
+        const rawText = String(j?.choices?.[0]?.message?.content ?? "").trim();
+        const text = opts.json ? extrairJSON(rawText) : rawText;
+        
+        console.log(`[ADMIN_IA_AUDIT] Provedor: Groq | Modelo: ${body.model} | Tamanho: ${rawText.length}`);
+        return { ok: true, text, fonte: "groq" };
       } else {
         const errorData = await res.json().catch(() => ({}));
-        console.warn(`[AIOrchestrator] Groq falhou (HTTP ${res.status}):`, errorData);
+        console.error(`[ADMIN_IA_AUDIT] Groq Falhou | Status: ${res.status} | Erro:`, JSON.stringify(errorData));
       }
     } catch (error: any) {
       console.warn(`[AIOrchestrator] Groq falhou: ${error.message}`);
@@ -88,8 +91,14 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
 
       if (res.ok) {
         const j: any = await res.json();
-        const text = String(j?.choices?.[0]?.message?.content ?? "").trim();
-        if (text) return { ok: true, text, fonte: "lovable" };
+        const rawText = String(j?.choices?.[0]?.message?.content ?? "").trim();
+        const text = opts.json ? extrairJSON(rawText) : rawText;
+        
+        console.log(`[ADMIN_IA_AUDIT] Provedor: Lovable Gateway | Modelo: ${body.model} | Tamanho: ${rawText.length}`);
+        return { ok: true, text, fonte: "lovable" };
+      } else {
+        const errorText = await res.text().catch(() => "unknown error");
+        console.error(`[ADMIN_IA_AUDIT] Lovable Gateway Falhou | Status: ${res.status} | Resposta: ${errorText.slice(0, 200)}`);
       }
     } catch (error: any) {
       console.error(`[AIOrchestrator] Falha total em todos os provedores:`, error.message);
