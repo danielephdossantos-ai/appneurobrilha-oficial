@@ -312,8 +312,8 @@ function EscolaBrilhaCatalogo() {
               const aberta = serieAberta === serie;
               
               const childSerie = activeChild?.serie || "";
-              const isMyGrade = childSerie === serie || 
-                               (serie === "Educação Infantil" && (childSerie.includes("Infantil") || childSerie.includes("Pré")));
+              const isMyGrade = (childSerie === (serie as string)) || 
+                               ((serie as string) === "Educação Infantil" && (childSerie.includes("Infantil") || childSerie.includes("Pré")));
               
               const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
               const locked = !isAdmin && !isMyGrade;
