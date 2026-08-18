@@ -71,6 +71,8 @@ ESTRUTURA DA RESPOSTA (JSON OBRIGATÓRIO):
 A aula deve ter de 6 a 12 páginas (momentos pedagógicos) com a seguinte progressão:
 Nível 1 (Compreender) -> Nível 2 (Praticar com ajuda) -> Nível 3 (Praticar com menos ajuda) -> Nível 4 (Aplicar sozinho).
 
+IMPORTANTE: O JSON deve ser plano e sem comentários. Cada página deve ter um conteúdo rico.
+
 {
   "titulo": "Título motivador usando o hiperfoco",
   "objetivo": "Objetivo pedagógico claro",
@@ -109,6 +111,8 @@ Para Matemática ou Ciências, use SEMPRE lousaPassos. Garanta clareza absoluta 
 Foque em ENSINAR PRIMEIRO, GERAR EXERCÍCIOS DEPOIS. 
 A aula deve ser salva na biblioteca e estar pronta para ser aberta na lousa interativa.`;
 
+  console.log(`[ProfessorMentor] Chamando IA para ${modulo} - ${tema}`);
+
   const aiResult = await aiOrchestrator({
     label: `professor-mentor-${modulo.toLowerCase()}`,
     json: true,
@@ -116,7 +120,7 @@ A aula deve ser salva na biblioteca e estar pronta para ser aberta na lousa inte
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt }
     ],
-    temperature: 0.3,
+    temperature: 0.2, // Reduzi a temperatura para mais estabilidade no JSON
     max_tokens: 4096
   });
 
@@ -137,9 +141,10 @@ A aula deve ser salva na biblioteca e estar pronta para ser aberta na lousa inte
     parsed.paginas = parsed.paginas.map((p, idx) => ({
       ...p,
       ordem: p.ordem || idx + 1,
-      tipo: p.tipo || "explicacao"
+      tipo: (p.tipo || "explicacao").toLowerCase()
     }));
 
+    console.log(`[ProfessorMentor] Aula gerada com sucesso: ${parsed.titulo} (${parsed.paginas.length} páginas)`);
     return parsed;
   } catch (e: any) {
     console.error("[ProfessorMentor] Falha ao processar resposta IA:", e.message);
@@ -147,5 +152,3 @@ A aula deve ser salva na biblioteca e estar pronta para ser aberta na lousa inte
     throw new Error(`Falha na formatação pedagógica: ${e.message}`);
   }
 }
-
-
