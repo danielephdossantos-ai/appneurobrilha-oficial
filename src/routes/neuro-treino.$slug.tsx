@@ -23,7 +23,7 @@ import {
   Play,
   Pause,
 } from "lucide-react";
-import { Shell, PageHeader, Card, Modal } from "@/components/Layout";
+import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import {
   CATEGORIAS,
@@ -80,7 +80,8 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
-  const { handleBack, context, setContext } = useBackNavigation();
+  const { handleBack, context } = useBackNavigation();
+  const setNavContext = useNavigationStore(s => s.setContext);
   const [showSessionModal, setShowSessionModal] = useState(false);
   const isSessionMode = context?.originCategory === "meu-plano" && !!context.sessionActivities;
   const { hiperfoco } = useHiperfoco();
@@ -465,35 +466,46 @@ function NeuroAtividade() {
         </button>
       </div>
 
-      <Modal
+      <SessionModal
         isOpen={showSessionModal}
         onClose={() => setShowSessionModal(false)}
-        title="Missão Cumprida! ⭐"
-      >
+        context={context}
+        setNavContext={setNavContext}
+        navigate={navigate}
+      />
+    </Shell>
+  );
+}
+
+function SessionModal({ isOpen, onClose, context, setNavContext, navigate }: any) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <div className="bg-card border-2 border-primary/20 w-full max-w-md rounded-[2.5rem] p-8 shadow-2xl animate-in zoom-in-95 duration-200">
         <div className="text-center py-4">
           <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-success/30">
             <CheckCircle2 size={48} className="text-success" />
           </div>
-          <p className="text-muted-foreground mb-6">
+          <h2 className="text-2xl font-black mb-2">Missão Cumprida! ⭐</h2>
+          <p className="text-muted-foreground mb-8">
             Você brilhou nesta atividade! Vamos para a próxima?
           </p>
           
           <div className="space-y-3">
             <button
               onClick={() => {
-                const nextIdx = (context.sessionIndex || 0) + 1;
-                const nextSlug = context.sessionActivities?.[nextIdx];
+                const nextIdx = (context?.sessionIndex || 0) + 1;
+                const nextSlug = context?.sessionActivities?.[nextIdx];
                 
                 if (nextSlug) {
-                  setContext({
+                  setNavContext({
                     ...context,
                     sessionIndex: nextIdx
                   });
-                  setShowSessionModal(false);
+                  onClose();
                   navigate({ to: `/neuro-treino/${nextSlug}` });
                 } else {
-                  // Fim da sessão
-                  setShowSessionModal(false);
+                  onClose();
                   toast.success("Rotina de hoje concluída! Parabéns! 🌟");
                   navigate({ to: "/neuro-treino" });
                 }
@@ -505,7 +517,7 @@ function NeuroAtividade() {
             
             <button
               onClick={() => {
-                setShowSessionModal(false);
+                onClose();
                 navigate({ to: "/neuro-treino" });
               }}
               className="w-full bg-muted text-muted-foreground py-3 rounded-2xl font-bold flex items-center justify-center gap-2"
@@ -514,8 +526,8 @@ function NeuroAtividade() {
             </button>
           </div>
         </div>
-      </Modal>
-    </Shell>
+      </div>
+    </div>
   );
 }
 

@@ -14,6 +14,9 @@ import {
   Bell,
   RefreshCw,
   Brain,
+  Play,
+  History,
+  Info,
 } from "lucide-react";
 import { DIAS_LABEL, diaSemanaHoje, semanaAtualNeuro } from "@/modules/neuro-plano/builder";
 import {
@@ -30,6 +33,8 @@ import {
   type PlanoNeuroSalvo,
 } from "@/modules/neuro-plano/persist";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useNavigationStore } from "@/lib/navigation-context";
+import { useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/plano-neuro")({
   head: () => ({
@@ -56,6 +61,8 @@ function PlanoNeuroPage() {
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
   const { permission, request } = usePushNotifications(childId);
+  const navigate = useNavigate();
+  const setNavContext = useNavigationStore((s) => s.setContext);
 
   const [loading, setLoading] = useState(true);
   const [gerando, setGerando] = useState(false);
@@ -128,6 +135,30 @@ function PlanoNeuroPage() {
     setItens((prev) => prev.map((i) => (i.id === item.id ? { ...i, concluido: !i.concluido } : i)));
     setProgresso((p) => ({ ...p, concluidas: p.concluidas + (item.concluido ? -1 : 1) }));
   }
+
+  const handleStartSession = () => {
+    if (!itens || itens.length === 0) return;
+
+    const itensHoje = itens.filter((i) => i.dia_semana === hoje && !i.concluido);
+
+    if (itensHoje.length === 0) {
+      toast.info("Você já concluiu todas as missões de hoje! ✨");
+      return;
+    }
+
+    const slugs = itensHoje.map((i) => i.slug);
+
+    setNavContext({
+      originRoute: "/plano-neuro",
+      originModule: "neuro-treino",
+      originCategory: "meu-plano",
+      sessionActivities: slugs,
+      sessionIndex: 0,
+      timestamp: Date.now(),
+    });
+
+    navigate({ to: `/neuro-treino/${slugs[0]}` });
+  };
 
   async function mudarHora(dia: number, hora: string) {
     if (!childId) return;
@@ -230,6 +261,13 @@ function PlanoNeuroPage() {
               />
             </div>
           </Card>
+
+          <button
+            onClick={handleStartSession}
+            className="w-full bg-sun text-sun-foreground py-4 rounded-3xl font-black text-xl flex items-center justify-center gap-3 shadow-lg hover:scale-[1.02] transition-transform"
+          >
+            <Play size={28} fill="currentColor" /> COMEÇAR MISSÃO DE HOJE
+          </button>
 
           <div className="flex gap-2 overflow-x-auto pb-1">
             {Array.from({ length: plano.semanas }, (_, i) => i + 1).map((wk) => (
