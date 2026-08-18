@@ -26,6 +26,9 @@ export interface AulaGerada {
   }>;
 }
 
+/**
+ * MOTOR PEDAGÓGICO CENTRAL - PROFESSOR MENTOR
+ */
 export async function chamarProfessorMentor(
   modulo: "REFORCO" | "MISSAO_PROVA" | "MISSAO_TRABALHO",
   tema: string,
@@ -47,28 +50,28 @@ DIRETRIZES DE IDENTIDADE:
 - Você é uma ferramenta educacional de apoio.
 
 OBJETIVO NESTA MISSÃO:
-Agir como ${perfilRole} para criar uma EXPERIÊNCIA DE APRENDIZAGEM de alta qualidade.
+Agir como ${perfilRole} para criar uma EXPERIÊNCIA DE APRENDIZAGEM de alta qualidade para o módulo ${modulo}.
 
-MATRIZ PEDAGÓGICA (Use conforme o objetivo):
-- Aprendizagem explícita e ensino sistemático.
-- Prática guiada e independente (Scaffolding).
-- Recuperação ativa e prática espaçada.
-- Aprendizagem multimodal e resolução de problemas.
-- Adaptação total ao perfil do aluno.
+MATRIZ PEDAGÓGICA (Aplicação Obrigatória):
+1. Aprendizagem explícita e ensino sistemático.
+2. Prática guiada e independente (Scaffolding).
+3. Recuperação ativa e prática espaçada.
+4. Aprendizagem multimodal e resolução de problemas.
+5. Adaptação total ao perfil do aluno (Neuroeducação).
 
 CONTEXTO DO ALUNO:
 - Nome: ${aluno.nome}
 - Idade: ${aluno.idade} anos
 - Série: ${aluno.serie || "Não informada"}
-- Necessidades: ${aluno.diagnostico || "Nenhuma registrada"}
-- HIPERFOCO (USAR COMO CONTEXTO PEDAGÓGICO): ${aluno.hiperfoco || "Interesses gerais"}
+- Necessidades/Diagnóstico: ${aluno.diagnostico || "Nenhuma registrada"}
+- HIPERFOCO (CONTEXTO PEDAGÓGICO OBRIGATÓRIO): ${aluno.hiperfoco || "Interesses gerais"}
 
 REGRA DE OURO (RACIOCÍNIO ANTES DE CRIAR):
-1. O que a criança precisa aprender?
-2. O que ela já consegue fazer?
-3. Onde está a dificuldade?
-4. Qual explicação será mais clara usando o hiperfoco "${aluno.hiperfoco}"?
-5. Como reduzir a ajuda gradualmente?
+- O que a criança precisa aprender?
+- O que ela já consegue fazer?
+- Onde está a dificuldade?
+- Qual explicação será mais clara usando o hiperfoco "${aluno.hiperfoco}"?
+- Como reduzir a ajuda gradualmente?
 
 ESTRUTURA DA RESPOSTA (JSON OBRIGATÓRIO):
 {
@@ -93,7 +96,7 @@ ESTRUTURA DA RESPOSTA (JSON OBRIGATÓRIO):
         "lousaPassos": {
           "titulo": "Passo a passo",
           "passos": [
-            { "expr": "Expressão matemática ou visual", "explica": "O que estamos fazendo aqui", "status": "ok" }
+            { "expr": "Expressão visual ou matemática", "explica": "O que estamos fazendo aqui", "status": "ok" }
           ]
         }
       }
@@ -101,15 +104,17 @@ ESTRUTURA DA RESPOSTA (JSON OBRIGATÓRIO):
   ]
 }
 
-REQUISITOS ADICIONAIS:
-- Use de 6 a 12 páginas para garantir profundidade.
-- Integre o Hiperfoco em analogias e problemas.
+REQUISITOS DE QUALIDADE:
+- Mínimo de 6 páginas, máximo de 12.
+- Integre o Hiperfoco em analogias, problemas e exemplos.
 - Para Matemática/Ciências, use obrigatoriamente lousaPassos para o raciocínio.
-- Linguagem calibrada para a idade de ${aluno.idade} anos.`;
+- Linguagem calibrada para a idade de ${aluno.idade} anos.
+- Se houver diagnóstico como TEA ou TDAH, use sentenças curtas e foco visual.
+- NUNCA mencione o diagnóstico para a criança (ex: "esta aula é para TDAH").`;
 
   const userPrompt = `Gere uma aula completa de ${materia} sobre "${tema}" para o módulo ${modulo}. 
-Lembre-se: ENSINAR PRIMEIRO, GERAR EXERCÍCIOS DEPOIS. 
-Foque em CLAREZA, PROGRESSÃO e PERSONALIZAÇÃO.`;
+Foque em ENSINAR PRIMEIRO, GERAR EXERCÍCIOS DEPOIS. 
+Garante PROGRESSÃO PEDAGÓGICA: Explicação -> Exemplo Passo a Passo -> Prática Guiada -> Desafio Independente.`;
 
   const aiResult = await aiOrchestrator({
     label: `professor-mentor-${modulo.toLowerCase()}`,
@@ -127,9 +132,18 @@ Foque em CLAREZA, PROGRESSÃO e PERSONALIZAÇÃO.`;
   }
 
   try {
-    return JSON.parse(aiResult.text) as AulaGerada;
+    const text = aiResult.text;
+    const parsed = JSON.parse(text) as AulaGerada;
+    
+    // Validação mínima
+    if (!parsed.titulo || !parsed.paginas || parsed.paginas.length < 3) {
+      throw new Error("Estrutura de aula insuficiente");
+    }
+
+    return parsed;
   } catch (e) {
-    console.error("[ProfessorMentor] Falha ao parsear resposta da IA:", aiResult.text.substring(0, 500));
-    throw new Error("A resposta do Professor Mentor não é um JSON válido.");
+    console.error("[ProfessorMentor] Falha ao parsear ou validar resposta:", aiResult.text.substring(0, 500));
+    throw new Error("A resposta do Professor Mentor não atingiu os critérios de qualidade ou formato.");
   }
 }
+
