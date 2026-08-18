@@ -14,7 +14,7 @@ export const Route = createFileRoute('/api/public/cron/process-notifications')({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        const { supabase } = await import("@/integrations/supabase/client");
+        const { supabaseAdmin: supabase } = await import("@/integrations/supabase/client.server");
         
         const { data: notifications, error } = await supabase
           .from("scheduled_notifications")
