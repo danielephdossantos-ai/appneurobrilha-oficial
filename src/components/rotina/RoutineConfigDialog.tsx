@@ -64,7 +64,7 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
       reminderMinutesBefore: 0,
       status: "pendente" as const,
       source: "manual",
-      date: selectedDate,
+      date: selectedDate || new Date().toISOString().split('T')[0],
     },
   });
 
