@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { aiOrchestrator } from '@/lib/ai-orchestrator.server'
+import { chamarProfessorMentor } from '@/lib/professor-mentor-engine.server'
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/integrations/supabase/types'
 
@@ -96,35 +97,25 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
             });
           }
 
-          // 3. Prompt
-          const systemPrompt = `Você é o PROFESSOR MENTOR do NeuroBrilha Kids, especialista em neuroeducação.
-Gere uma AULA COMPLETA para uma ${tipo === "prova" ? "revisão de prova" : "preparação de trabalho"}.
-Nome: ${child?.nome || "Criança"}, Idade: ${idade}, Diagnóstico: ${diagnostico}, Hiperfoco: ${hiperfoco}.
-Obrigatório usar hiperfoco nos exemplos. Retorne JSON com titulo, objetivo e paginas (ordem, tipo, titulo, conteudo).`;
-
-          const aiResult = await aiOrchestrator({
-            label: `api-missao-${tipo}:${topico}`,
-            json: true,
-            messages: [
-              { role: "system", content: systemPrompt },
-              { role: "user", content: `Gere aula de ${tipo} sobre "${topico}" de ${materia}.` }
-            ],
-            temperature: 0.4
-          });
-
-          if (!aiResult.ok) {
-            return new Response(JSON.stringify({ aulaId: '', recemGerada: false, erro: aiResult.motivo }), {
-              headers: { 'Content-Type': 'application/json' }
-            });
-          }
-
+          // 3. Chamada ao NÚCLEO PEDAGÓGICO CENTRAL (Professor Mentor)
           let aulaIA;
-          const jsonLimpo = extrairJSON(aiResult.text);
           try {
-            aulaIA = JSON.parse(jsonLimpo);
+            aulaIA = await chamarProfessorMentor(
+              tipo === "prova" ? "MISSAO_PROVA" : "MISSAO_TRABALHO",
+              topico,
+              materia,
+              {
+                nome: child?.nome || "Criança",
+                idade: idade,
+                serie: child?.serie || undefined,
+                diagnostico: child?.diagnostico || undefined,
+                hiperfoco: child?.hiperfoco || undefined
+              }
+            );
           } catch (e: any) {
-            await logAuditIA(aiResult.fonte || "desconhecida", "json-fail", "fail", e.message);
-            return new Response(JSON.stringify({ aulaId: '', recemGerada: false, erro: `ERRO_JSON_IA:${aiResult.fonte}` }), {
+            console.error("[API_MISSÃO_AULA] Falha no Professor Mentor:", e);
+            await logAuditIA("professor-mentor", "logic-fail", "fail", e.message);
+            return new Response(JSON.stringify({ aulaId: '', recemGerada: false, erro: e.message || "Erro no Professor Mentor" }), {
               headers: { 'Content-Type': 'application/json' }
             });
           }
