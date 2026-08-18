@@ -53,7 +53,7 @@ export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
 
     if (aulaExistente) {
       console.log(`[Reuso] Aula encontrada! Reutilizando ID: ${aulaExistente.id}`);
-      // Incrementar contador de uso (opcional, mas bom para estatística)
+      // Incrementar contador de uso
       await supabase
         .from("rb_aulas")
         .update({ usage_count: (aulaExistente.usage_count || 0) + 1 } as any)
@@ -110,8 +110,7 @@ A resposta DEVE ser um JSON válido:
       "tipo": "explicacao",
       "titulo": "Início da Missão",
       "conteudo": { "texto": "..." }
-    },
-    ...
+    }
   ]
 }`;
 
@@ -133,7 +132,6 @@ A resposta DEVE ser um JSON válido:
 
     let aulaIA;
     try {
-      // Remover qualquer lixo que tenha sobrado
       const jsonLimpo = aiResult.text.trim();
       aulaIA = JSON.parse(jsonLimpo);
       
@@ -143,19 +141,10 @@ A resposta DEVE ser um JSON válido:
     } catch (e: any) {
       const fonte = aiResult.fonte || "desconhecida";
       await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
-      // Lançar um erro simples que possa ser serializado com segurança
       throw new Error(`ERRO_JSON_IA:${fonte}`);
-    }
-        throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
-      }
-    } catch (e: any) {
-      const fonte = aiResult.fonte || "desconhecida";
-      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
-      throw new Error(`A resposta da IA (${fonte}) não é um JSON válido. Tente novamente.`);
     }
 
     // 5. VALIDAR E PERSISTIR
-    // Buscar categoria "Pedagógico"
     let { data: cat } = await supabase.from("rb_categorias").select("id").eq("nome", "Pedagógico").maybeSingle();
     if (!cat) {
        const { data: newCat } = await supabase.from("rb_categorias").insert({ nome: "Pedagógico", ordem: 99 }).select().single();
