@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore } from "@/lib/navigation-context";
 import { Shell } from "@/components/Layout";
 import { Component, ReactNode, useEffect } from "react";
@@ -220,7 +220,18 @@ function NeuroTreinoShell() {
 }
 
 function Treino() {
-  useAppState();
+  const { activeChild, session } = useAppState();
+  const navigate = useNavigate();
+  
+  // Bloqueio do Neuro-Treino para crianças com 8 anos ou mais
+  useEffect(() => {
+    if (activeChild && activeChild.idade >= 8) {
+      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!isAdmin) {
+        navigate({ to: "/escola-brilha" });
+      }
+    }
+  }, [activeChild, session, navigate]);
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
 
