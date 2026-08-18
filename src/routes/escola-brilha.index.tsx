@@ -341,6 +341,8 @@ function EscolaBrilhaCatalogo() {
                     </div>
                   </button>
 
+                  {aberta && (
+                    <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
                       {/* Bloqueio por série: só abre se a criança estiver na série ou superior */}
                       {(() => {
                         const childSerieNum = activeChild?.serie ? parseInt(activeChild.serie, 10) || 0 : 0;
@@ -687,22 +689,11 @@ function EscolaBrilhaCatalogo() {
                                     </Link>
                                   ) : (
                                     <div key={h.codigo}>{Card}</div>
-                                  );
-                                })}
-                              </div>
-                            )}
-                          </div>
                         );
-                      })}
-
+                      })()}
                     </div>
                   )}
                 </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
     </Shell>
   );
 }
