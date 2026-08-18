@@ -12,6 +12,7 @@ import {
   BookOpen,
   Sparkles,
   Zap,
+  GraduationCap,
 } from "lucide-react";
 
 import { useAppState } from "@/core/store";
