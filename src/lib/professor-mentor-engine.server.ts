@@ -125,14 +125,26 @@ A aula deve ser salva na biblioteca e estar pronta para ser aberta na lousa inte
   }
 
   try {
-    const parsed = JSON.parse(aiResult.text) as AulaGerada;
-    if (!parsed.titulo || !parsed.paginas || parsed.paginas.length < 5) {
-      throw new Error("Aula gerada com qualidade insuficiente.");
+    const jsonText = aiResult.text;
+    const parsed = JSON.parse(jsonText) as AulaGerada;
+    
+    if (!parsed.titulo || !parsed.paginas || !Array.isArray(parsed.paginas) || parsed.paginas.length < 3) {
+      console.error("[ProfessorMentor] Estrutura inválida:", JSON.stringify(parsed).substring(0, 300));
+      throw new Error("Aula gerada com estrutura incompleta.");
     }
+    
+    // Normalização básica de tipos para garantir compatibilidade com Player/Viewer
+    parsed.paginas = parsed.paginas.map((p, idx) => ({
+      ...p,
+      ordem: p.ordem || idx + 1,
+      tipo: p.tipo || "explicacao"
+    }));
+
     return parsed;
-  } catch (e) {
-    console.error("[ProfessorMentor] Falha ao processar resposta:", aiResult.text.substring(0, 500));
-    throw new Error("A resposta da IA não é um JSON válido ou não atingiu os critérios de qualidade.");
+  } catch (e: any) {
+    console.error("[ProfessorMentor] Falha ao processar resposta IA:", e.message);
+    console.error("Conteúdo problemático:", aiResult.text.substring(0, 1000));
+    throw new Error(`Falha na formatação pedagógica: ${e.message}`);
   }
 }
 
