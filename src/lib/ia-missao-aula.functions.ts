@@ -1,8 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-
 import { z } from "zod";
 import { supabase } from "@/database/supabase/client";
-import { aiOrchestrator } from "./ai-orchestrator.server";
+import { chamarProfessorMentor } from "./professor-mentor-engine.server";
 
 // Função utilitária para registrar log técnico de IA no Supabase
 async function logAuditIA(provedor: string, modelo: string, tokens: number, status: string, erro?: string) {
@@ -79,80 +78,24 @@ export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
       return { aulaId: aulaExistente.id, recemGerada: false };
     }
 
-    // 3. Prompt para o Professor Mentor
-    const systemPrompt = `Você é o PROFESSOR MENTOR do NeuroBrilha Kids, especialista em neuroeducação.
-Sua missão é gerar uma AULA COMPLETA para uma ${tipo === "prova" ? "revisão de prova" : "preparação de trabalho"}.
-
-CONTEXTO DO ALUNO:
-- Nome: ${child?.nome || "Criança"}
-- Idade: ${idade} anos
-- Diagnóstico: ${diagnostico}
-- HIPERFOCO (OBRIGATÓRIO USAR NOS EXEMPLOS): ${hiperfoco}
-
-ESTRUTURA DA AULA (JSON):
-A aula deve seguir um fluxo de 6 a 12 capítulos (momentos pedagógicos).
-Para Matemática ou Ciências, use SEMPRE o formato "lousaPassos" para explicações passo a passo.
-
-FLUXO PEDAGÓGICO OBRIGATÓRIO:
-1. Apresentação (usando hiperfoco)
-2. Explicação simples
-3. Exemplo na Lousa (lousaPassos)
-4. Resolução passo a passo
-5. Prática guiada
-6. Verificação final
-
-FORMATO DOS BLOCOS DE CONTEÚDO:
-- { "texto": "..." }
-- { "destaque": "..." }
-- { "bullets": ["...", "..."] }
-- { "passos": ["...", "..."] }
-- { "lousaPassos": { "titulo": "...", "passos": [{ "expr": "...", "explica": "...", "status": "ok" }] } }
-- { "perguntas": [{ "pergunta": "...", "resposta": "..." }] }
-
-A resposta DEVE ser um JSON válido:
-{
-  "titulo": "Título da Missão usando o Hiperfoco",
-  "objetivo": "O que vamos aprender hoje",
-  "paginas": [
-    {
-      "ordem": 1,
-      "tipo": "explicacao",
-      "titulo": "Início da Missão",
-      "conteudo": { "texto": "..." }
-    }
-  ]
-}`;
-
-    // 4. CHAMAR ORQUESTRADOR DE IA
-    const aiResult = await aiOrchestrator({
-      label: `missao-${tipo}:${topico}`,
-      json: true,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere uma aula completa de ${tipo} sobre "${topico}" de ${materia}. Use o hiperfoco "${hiperfoco}".` }
-      ],
-      temperature: 0.4 // Reduzido para maior precisão no JSON
-    });
-
-    if (!aiResult.ok) {
-      console.error(`[ADMIN_IA_AUDIT] Erro crítico no Orquestrador: ${aiResult.motivo} | Detalhe: ${aiResult.detalhe}`);
-      return { aulaId: "", recemGerada: false, erro: aiResult.motivo || "Falha na geração da IA" };
-    }
-
+    // 3. Chamada ao NÚCLEO PEDAGÓGICO CENTRAL (Professor Mentor)
     let aulaIA;
-    const jsonLimpo = aiResult.text.trim();
     try {
-      aulaIA = JSON.parse(jsonLimpo);
-      
-      if (!aulaIA.paginas || !Array.isArray(aulaIA.paginas)) {
-        throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
-      }
+      aulaIA = await chamarProfessorMentor(
+        tipo === "prova" ? "MISSAO_PROVA" : "MISSAO_TRABALHO",
+        topico,
+        materia,
+        {
+          nome: child?.nome || "Criança",
+          idade: idade,
+          serie: child?.serie || undefined,
+          diagnostico: diagnostico,
+          hiperfoco: hiperfoco
+        }
+      );
     } catch (e: any) {
-      const fonte = aiResult.fonte || "desconhecida";
-      console.error(`[ADMIN_IA_AUDIT] Erro JSON.parse no handler: ${e.message} | Texto: ${jsonLimpo.substring(0, 200)}...`);
-      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message}`);
-      
-      return { aulaId: "", recemGerada: false, erro: `ERRO_JSON_IA:${fonte}` };
+      console.error(`[ADMIN_IA_AUDIT] Erro no Professor Mentor: ${e.message}`);
+      return { aulaId: "", recemGerada: false, erro: e.message || "Falha na geração do Professor Mentor" };
     }
 
     // 5. VALIDAR E PERSISTIR
@@ -209,5 +152,5 @@ A resposta DEVE ser um JSON válido:
       }
     }
     
-    return { aulaId: aula.id, recemGerada: true, fonte: aiResult.fonte };
+    return { aulaId: aula.id, recemGerada: true };
   });
