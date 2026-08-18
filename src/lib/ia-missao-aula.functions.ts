@@ -130,10 +130,6 @@ A resposta DEVE ser um JSON válido:
       console.error(`[ADMIN_IA_AUDIT] Erro crítico no Orquestrador: ${aiResult.motivo} | Detalhe: ${aiResult.detalhe}`);
       throw new Error(aiResult.motivo || "Falha na geração da IA");
     }
-    
-    if (!aiResult.text) {
-      throw new Error("Falha na geração da IA (resposta vazia)");
-    }
 
     let aulaIA;
     try {
@@ -142,6 +138,14 @@ A resposta DEVE ser um JSON válido:
       aulaIA = JSON.parse(jsonLimpo);
       
       if (!aulaIA.paginas || !Array.isArray(aulaIA.paginas)) {
+        throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
+      }
+    } catch (e: any) {
+      const fonte = aiResult.fonte || "desconhecida";
+      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
+      // Lançar um erro simples que possa ser serializado com segurança
+      throw new Error(`ERRO_JSON_IA:${fonte}`);
+    }
         throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
       }
     } catch (e: any) {

@@ -194,8 +194,16 @@ function MissaoProva() {
     } catch (error: any) {
       console.error("Erro ao gerar aula:", error);
       setIsStudying(false);
+      
+      let mensagemErro = error.message || "erro";
+      // Tratar o erro de serialização que detectamos
+      if (mensagemErro.includes("ERRO_JSON_IA")) {
+        const fonte = mensagemErro.split(":")[1] || "IA";
+        mensagemErro = `A resposta da ${fonte} não é um JSON válido. Por favor, tente novamente.`;
+      }
+      
       const { notificarErroIA } = await import("@/lib/notify-ai-error");
-      notificarErroIA(error.message || "erro", "Missão Prova");
+      notificarErroIA(mensagemErro, "Missão Prova");
     }
   };
 
