@@ -216,7 +216,12 @@ function Rotina() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-black text-lg truncate leading-tight">{item.title}</h4>
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-black text-lg truncate leading-tight">{item.title}</h4>
+                    {item.reminderEnabled && (
+                      <Clock className="h-3 w-3 text-primary animate-pulse" />
+                    )}
+                  </div>
                   {item.description && <p className="text-xs opacity-70 truncate">{item.description}</p>}
                   {item.source !== 'manual' && (
                     <span className="inline-block mt-1 px-2 py-0.5 bg-black/5 rounded text-[9px] font-black uppercase tracking-wider">
@@ -226,16 +231,28 @@ function Rotina() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {item.source !== 'manual' && item.status !== 'concluido' && (
+                  <button 
+                    onClick={() => {
+                      setEditingItem(item);
+                      setIsConfigOpen(true);
+                    }}
+                    className="p-2 rounded-xl bg-white/50 hover:bg-white text-muted-foreground transition-all"
+                  >
+                    <Settings className="h-5 w-5" />
+                  </button>
+                  
+                  {item.status !== 'concluido' && (
                     <button 
                       onClick={() => {
                         toast.info(`Iniciando ${item.title}...`);
+                        // No futuro: vincular à rota real baseada no type/metadata
                       }}
-                      className="p-2 rounded-full bg-primary text-primary-foreground shadow-lg active:scale-90"
+                      className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg active:scale-90"
                     >
-                      <Play className="h-5 w-5 fill-current" />
+                      <Play className="h-6 w-6 fill-current" />
                     </button>
                   )}
+                  
                   <button 
                     onClick={() => toggleStatus.mutate({ 
                       id: item.id!, 
@@ -245,14 +262,16 @@ function Rotina() {
                   >
                     {getStatusIcon(item)}
                   </button>
+
                   <button 
                     onClick={() => {
-                      setEditingItem(item);
-                      setIsConfigOpen(true);
+                      if (confirm("Deseja remover esta atividade?")) {
+                        deleteMutation.mutate(item.id);
+                      }
                     }}
-                    className="p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="p-2 rounded-xl bg-red-500/10 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <Settings className="h-4 w-4 text-muted-foreground" />
+                    <AlertCircle className="h-5 w-5" />
                   </button>
                 </div>
               </div>

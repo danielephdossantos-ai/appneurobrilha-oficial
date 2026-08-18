@@ -84,6 +84,7 @@ import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro
 import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
 import { Route as NeuroTreinoLerComAuroraDiagnosticoRouteImport } from './routes/neuro-treino.ler-com-aurora.diagnostico'
 import { Route as NeuroTreinoLerComAuroraPainelRouteImport } from './routes/neuro-treino.ler-com-aurora.painel'
+import { Route as ApiPublicCronProcessNotificationsRouteImport } from './routes/api/public/cron/process-notifications'
 import { Route as EscolaBrilhaAulaArteV1CursoAulaRouteImport } from './routes/escola-brilha.aula-arte-v1.$curso.$aula'
 import { Route as EscolaBrilhaAulaExtraPtCursoAulaRouteImport } from './routes/escola-brilha.aula-extra-pt.$curso.$aula'
 import { Route as EscolaBrilhaAulaGeoV1CursoAulaRouteImport } from './routes/escola-brilha.aula-geo-v1.$curso.$aula'
@@ -495,6 +496,12 @@ const NeuroTreinoLerComAuroraPainelRoute =
     path: '/ler-com-aurora/painel',
     getParentRoute: () => NeuroTreinoRoute,
   } as any)
+const ApiPublicCronProcessNotificationsRoute =
+  ApiPublicCronProcessNotificationsRouteImport.update({
+    id: '/api/public/cron/process-notifications',
+    path: '/api/public/cron/process-notifications',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EscolaBrilhaAulaArteV1CursoAulaRoute =
   EscolaBrilhaAulaArteV1CursoAulaRouteImport.update({
     id: '/escola-brilha/aula-arte-v1/$curso/$aula',
@@ -638,6 +645,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
+  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -725,6 +733,7 @@ export interface FileRoutesByTo {
   '/escola-brilha/matematica-ei': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora': typeof NeuroTreinoLerComAuroraIndexRoute
+  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -814,6 +823,7 @@ export interface FileRoutesById {
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
+  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -904,6 +914,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
+    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -991,6 +1002,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei'
     | '/escola-brilha/portugues-ei'
     | '/neuro-treino/ler-com-aurora'
+    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -1079,6 +1091,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
+    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -1158,6 +1171,7 @@ export interface RootRouteChildren {
   EscolaBrilhaInglesEiIndexRoute: typeof EscolaBrilhaInglesEiIndexRoute
   EscolaBrilhaMatematicaEiIndexRoute: typeof EscolaBrilhaMatematicaEiIndexRoute
   EscolaBrilhaPortuguesEiIndexRoute: typeof EscolaBrilhaPortuguesEiIndexRoute
+  ApiPublicCronProcessNotificationsRoute: typeof ApiPublicCronProcessNotificationsRoute
   EscolaBrilhaAulaArteV1CursoAulaRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   EscolaBrilhaAulaExtraPtCursoAulaRoute: typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   EscolaBrilhaAulaGeoV1CursoAulaRoute: typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -1698,6 +1712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoLerComAuroraPainelRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
+    '/api/public/cron/process-notifications': {
+      id: '/api/public/cron/process-notifications'
+      path: '/api/public/cron/process-notifications'
+      fullPath: '/api/public/cron/process-notifications'
+      preLoaderRoute: typeof ApiPublicCronProcessNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escola-brilha/aula-arte-v1/$curso/$aula': {
       id: '/escola-brilha/aula-arte-v1/$curso/$aula'
       path: '/escola-brilha/aula-arte-v1/$curso/$aula'
@@ -1906,6 +1927,8 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaInglesEiIndexRoute: EscolaBrilhaInglesEiIndexRoute,
   EscolaBrilhaMatematicaEiIndexRoute: EscolaBrilhaMatematicaEiIndexRoute,
   EscolaBrilhaPortuguesEiIndexRoute: EscolaBrilhaPortuguesEiIndexRoute,
+  ApiPublicCronProcessNotificationsRoute:
+    ApiPublicCronProcessNotificationsRoute,
   EscolaBrilhaAulaArteV1CursoAulaRoute: EscolaBrilhaAulaArteV1CursoAulaRoute,
   EscolaBrilhaAulaExtraPtCursoAulaRoute: EscolaBrilhaAulaExtraPtCursoAulaRoute,
   EscolaBrilhaAulaGeoV1CursoAulaRoute: EscolaBrilhaAulaGeoV1CursoAulaRoute,
