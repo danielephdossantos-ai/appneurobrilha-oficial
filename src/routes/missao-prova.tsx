@@ -164,6 +164,7 @@ function MissaoProva() {
     setActiveAulaId(null);
 
     try {
+      // 1. Verificar se esta sessão já tem uma aula vinculada (opcional, já feito no serverFn por título)
       const res = await gerarAulaFn({
         data: {
           missaoId: mission.id,
@@ -173,16 +174,20 @@ function MissaoProva() {
           tipo: "prova",
         },
       });
+      
       if (res.aulaId) {
         setActiveAulaId(res.aulaId);
+        if (res.recemGerada) {
+          toast.success(`✨ Aula preparada com sucesso! (${res.fonte || 'IA'})`);
+        }
       } else {
         throw new Error("Não foi possível gerar a aula");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao gerar aula:", error);
-      const { notificarErroIA } = await import("@/lib/notify-ai-error");
-      notificarErroIA("erro", "Missão Prova");
       setIsStudying(false);
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA(error.message || "erro", "Missão Prova");
     }
   };
 
