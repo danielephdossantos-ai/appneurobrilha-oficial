@@ -95,7 +95,7 @@ function AnamneseRoute() {
   return (
     <TermoCienciaGate childId={childId}>
       <div className="min-h-screen bg-background">
-        {pathname === \`/anamnese/\${childId}\` ? <AnamneseWizard childId={childId} /> : <Outlet />}
+        {pathname === `/anamnese/${childId}` ? <AnamneseWizard childId={childId} /> : <Outlet />}
       </div>
     </TermoCienciaGate>
   );
