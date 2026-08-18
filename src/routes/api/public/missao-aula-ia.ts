@@ -4,6 +4,8 @@ import { aiOrchestrator } from '@/lib/ai-orchestrator.server'
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/integrations/supabase/types'
 
+// O TanStack Start injeta as variáveis de ambiente no processo do servidor.
+// Usamos a SERVICE_ROLE_KEY para ignorar RLS durante a geração automática pela IA.
 const supabase = createClient<Database>(
   process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
