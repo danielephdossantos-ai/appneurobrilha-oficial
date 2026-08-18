@@ -14,7 +14,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const diffNorm = data.dificuldade.toLowerCase().trim();
     const { supabase } = await import("@/integrations/supabase/client");
-    const { callGemini } = await import("./gemini.server");
+    const { chamarProfessorMentor } = await import("./professor-mentor-engine.server");
 
     // 0. Buscar dados da anamnese e perfil da criança
     let deficits = "Não informado";
@@ -139,18 +139,59 @@ A resposta DEVE ser um JSON no seguinte formato:
   }
 }`;
 
-    // 3. Chamada ao Gemini 3.7 Flash
-    const responseText = await callGemini({
-      model: "gemini-3.7-flash",
-      json: true,
-      max_tokens: 4096, // Aumento de tokens para aulas densas
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere uma aula de reforço completa, profunda e profissional para a dificuldade: "${data.dificuldade}". Lembre-se: texto longo e explicativo, sem resumos superficiais.` }
-      ]
-    });
-
-    const novaAula = JSON.parse(responseText);
+    // 3. Chamada ao NÚCLEO PEDAGÓGICO CENTRAL (Professor Mentor)
+    let novaAula;
+    try {
+      const aulaBase = await chamarProfessorMentor(
+        "REFORCO",
+        data.dificuldade,
+        "Reforço Escolar",
+        {
+          nome: "Criança",
+          idade: idadeCrianca,
+          diagnostico: deficits,
+          hiperfoco: hiperfoco
+        }
+      );
+      
+      // Adaptar para o formato esperado pelo Reforço (capítulos)
+      novaAula = {
+        titulo: aulaBase.titulo,
+        objetivo: aulaBase.objetivo,
+        capitulo1: { 
+          titulo: "Capítulo 1 · Orientação para a Mãe", 
+          conteudo: aulaBase.paginas.find(p => p.tipo === "explicacao")?.conteudo.texto || "Ensine com paciência e use o hiperfoco." 
+        },
+        capitulo2: { 
+          titulo: "Capítulo 2 · Adaptação com o Hiperfoco", 
+          conteudo: `Vamos usar ${hiperfoco} para aprender ${data.dificuldade}.` 
+        },
+        capitulo3: { 
+          titulo: "Capítulo 3 · Adaptação ao Diagnóstico", 
+          conteudo: `Estratégias para: ${deficits}` 
+        },
+        capitulo4: {
+          titulo: "Capítulo 4 · Atividades Práticas",
+          atividades: aulaBase.paginas.filter(p => p.tipo === "pratica_guiada" || p.tipo === "exemplo").map(p => ({
+            nome: p.titulo,
+            passo_a_passo: p.conteudo.texto || JSON.stringify(p.conteudo)
+          }))
+        },
+        capitulo5: {
+          titulo: "Capítulo 5 · Avaliação",
+          perguntas: aulaBase.paginas.find(p => p.tipo === "desafio" || p.tipo === "revisao")?.conteudo.perguntas || [
+            { pergunta: "O que aprendemos hoje?", resposta_explicada: "Aprendemos sobre " + data.dificuldade }
+          ]
+        },
+        capitulo6: {
+          titulo: "Capítulo 6 · Materiais",
+          recursos: [{ titulo: "Vídeo Educativo", url: "https://youtube.com/results?search_query=" + encodeURIComponent(data.dificuldade), tipo: "video" }]
+        }
+      };
+    } catch (e: any) {
+      console.error("Falha no Professor Mentor (Reforço):", e);
+      throw new Error("O Professor Mentor está ocupado preparando outras aulas. Tente em instantes.");
+    }
     let salvaId = "temp-" + Date.now();
 
     try {
