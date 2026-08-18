@@ -123,9 +123,9 @@ export function normalizarFala(texto: string, contexto: "geral" | "matematica" |
   });
 
   // 5. Normalização de letras isoladas
-  out = out.replace(/(^|[\s,.;:!])([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])(?=$|[\s,.;:!])/g, (match, prefix, letra) => {
+  out = out.replace(/(?<![A-Za-zÀ-ÿ])([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])(?![A-Za-zÀ-ÿ])/g, (match, letra) => {
     const L = letra.toUpperCase();
-    return prefix + (LETRAS_PT[L] || L.toLowerCase());
+    return LETRAS_PT[L] || L.toLowerCase();
   });
 
   // 6. Símbolos avulsos e pontuação visual
