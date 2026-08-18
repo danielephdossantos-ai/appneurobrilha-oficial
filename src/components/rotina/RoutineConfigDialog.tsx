@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { routineItemSchema, RoutineItem, saveRoutineItemWithNotifications } from "@/lib/routine.functions";
 import {
@@ -51,7 +50,7 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
   const { request: requestPush, permission } = usePushNotifications(childId);
 
   const form = useForm<RoutineItem>({
-    resolver: zodResolver(routineItemSchema),
+    resolver: zodResolver(routineItemSchema) as any,
     defaultValues: item ? {
       ...item,
       durationMinutes: item.durationMinutes || 30,
@@ -81,7 +80,7 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
     }
   });
 
-  const onSubmit = async (data: RoutineItem) => {
+  const onSubmit: SubmitHandler<RoutineItem> = async (data) => {
     if (data.reminderEnabled && permission !== "granted") {
       const granted = await requestPush();
       if (!granted) {
