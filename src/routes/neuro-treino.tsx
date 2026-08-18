@@ -341,7 +341,7 @@ function Treino() {
         {/* ── PLANEJAMENTO E PLANOS (UNIFICADO) ────────────────────── */}
         <div className="mb-6 grid grid-cols-2 gap-4">
           <Link
-            to="/plano-anual"
+            to="/primeiros-anos"
             className="group relative overflow-hidden rounded-3xl border-2 border-primary/20 bg-white p-4 shadow-sm transition hover:shadow-md dark:bg-slate-900"
           >
             <div className="relative z-10 flex flex-col items-center text-center">
