@@ -257,14 +257,25 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
         return;
       }
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("rb_paginas_aula")
         .select("id,ordem,tipo,titulo,conteudo")
         .eq("aula_id", aulaId)
         .order("ordem", { ascending: true });
+      
+      if (error) {
+        console.error("[AulaViewer] Erro ao buscar páginas:", error);
+      }
+      
       if (!alive) return;
-      setPaginas((data || []) as Pagina[]);
-      setIdx(0);
+      
+      if (data && data.length > 0) {
+        setPaginas(data as Pagina[]);
+        setIdx(0);
+      } else {
+        console.warn("[AulaViewer] Nenhuma página encontrada para aula_id:", aulaId);
+        setPaginas([]);
+      }
       setLoading(false);
     })();
     return () => {
