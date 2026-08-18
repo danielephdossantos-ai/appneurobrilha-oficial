@@ -135,9 +135,10 @@ export async function persistirAulaMentor({
   const paginas = aula.paginas.map((p, idx) => ({
     aula_id: aulaDb.id,
     ordem: idx + 1,
-    tipo: ["explicacao", "exemplo", "exercicio", "dica", "video", "imagem", "passo_a_passo"].includes(p.tipo)
+    tipo: ["explicacao", "exemplo", "pratica_guiada", "desafio", "revisao", "passo_a_passo", "video", "imagem"].includes(p.tipo)
       ? p.tipo
       : "explicacao",
+
     titulo: p.titulo,
     conteudo: p.conteudo,
   }));
