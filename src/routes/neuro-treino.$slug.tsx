@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import {
   CATEGORIAS,
   VARIATIONS,
