@@ -157,7 +157,11 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
             conteudo: p.conteudo || {}
           }));
 
-          await supabase.from("rb_paginas_aula").insert(paginas);
+          const { error: errorPaginas } = await supabase.from("rb_paginas_aula").insert(paginas);
+          if (errorPaginas) {
+            console.error("[API_MISSÃO_AULA] Erro ao inserir páginas:", errorPaginas);
+            throw new Error(`Erro DB Páginas: ${errorPaginas.message}`);
+          }
           if (sessionId && sessionId !== 'new') {
             await supabase.from("exam_study_plans").update({ aula_id: aula.id } as any).eq("id", sessionId);
           } else if (tipo === 'trabalho' && missaoId && missaoId !== 'new') {
