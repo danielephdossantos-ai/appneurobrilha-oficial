@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { aiOrchestrator } from '@/lib/ai-orchestrator.server'
-import { supabaseAdmin as supabase } from '@/integrations/supabase/client.server'
+import { supabase } from '@/integrations/supabase/client'
 
 // Função utilitária para registrar log técnico de IA no Supabase
 async function logAuditIA(provedor: string, modelo: string, status: string, erro?: string) {
