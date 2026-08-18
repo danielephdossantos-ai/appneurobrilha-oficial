@@ -105,6 +105,14 @@ function CurriculoAnualPage() {
     }
     (async () => {
       setLoading(true);
+
+      // Regra importante: se a criança não está no 1º ao 9º ano, não gera currículo anual.
+      if (serieNum === null || serieNum < 1) {
+        setPlano(null);
+        setLoading(false);
+        return;
+      }
+
       let p = await carregarCurriculo(childId);
       // Geração automática: se a criança ainda não tem plano, monta o ano
       // letivo completo da série dela na primeira visita.
@@ -246,6 +254,18 @@ function CurriculoAnualPage() {
           {gerando ? "Montando o ano letivo completo da série…" : "Carregando o ano letivo…"}
         </Card>
 
+      ) : serieNum === null || serieNum < 1 ? (
+        <Card className="text-center space-y-4 py-10">
+          <div className="text-5xl mb-4">🛑</div>
+          <h2 className="text-xl font-black text-[#0d1f55]">Acesso Restrito</h2>
+          <p className="text-sm text-muted-foreground max-w-xs mx-auto font-bold">
+            O Currículo Anual está disponível apenas para crianças a partir do 1º Ano.
+            {activeChild?.nome} ainda não está no 1º ano.
+          </p>
+          <Link to="/" className="inline-block btn-tap rounded-2xl bg-primary text-primary-foreground px-6 py-3 font-black">
+            Voltar ao Início
+          </Link>
+        </Card>
       ) : !plano ? (
         <Card className="text-center space-y-3">
           <Sparkles className="h-10 w-10 mx-auto text-primary" />
