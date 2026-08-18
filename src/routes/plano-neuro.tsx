@@ -291,7 +291,7 @@ function PlanoNeuroPage() {
             ))}
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[40px] border-2 border-slate-200/50 dark:border-slate-800/50 overflow-hidden">
+          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[40px] border-2 border-slate-200/50 dark:border-slate-800/50 overflow-hidden shadow-inner">
             <TrilhaPlanoVisual 
               itens={itens.map(i => ({
                 ...i,
