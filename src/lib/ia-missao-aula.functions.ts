@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { aiOrchestrator } from "./ai-orchestrator.server";
 
 /**
