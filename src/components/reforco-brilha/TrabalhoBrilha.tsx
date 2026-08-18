@@ -26,7 +26,7 @@ import {
   Rocket,
 } from "lucide-react";
 import { AulaViewer } from "./AulaViewer";
-import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
+// import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
@@ -259,7 +259,33 @@ function EditorTrabalho({
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
   const [activeAulaId, setActiveAulaId] = useState<string | null>(null);
   const [gerandoAula, setGerandoAula] = useState(false);
-  const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
+  // const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
+  const startAulaMission = async () => {
+    if (!childId) return;
+    setGerandoAula(true);
+    try {
+      const response = await fetch("/api/public/missao-aula-ia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          missaoId: "trabalho-manual",
+          topico: tema || "Meu Trabalho",
+          materia: materia || "Estudos",
+          criancaId: childId,
+          tipo: "trabalho",
+        }),
+      });
+      if (!response.ok) throw new Error("Erro na API");
+      const res = await response.json();
+      if (res.aulaId) {
+        setActiveAulaId(res.aulaId);
+      }
+    } catch (e) {
+      toast.error("Falha ao preparar aula de orientação");
+    } finally {
+      setGerandoAula(false);
+    }
+  };
 
 
   // Debounced auto-save
