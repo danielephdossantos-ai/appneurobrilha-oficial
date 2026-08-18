@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, lazy } from "react";
+import { useEffect, useMemo, useState, lazy, useCallback } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { useServerFn } from "@tanstack/react-start";
