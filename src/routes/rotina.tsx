@@ -4,6 +4,7 @@ import { useAppState } from "@/core/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getRoutineItems, toggleRoutineItemStatus, RoutineItem, deleteRoutineItem } from "@/lib/routine.functions";
 import { RoutineConfigDialog } from "@/components/rotina/RoutineConfigDialog";
+import { CalendarioAnual } from "@/components/rotina/CalendarioAnual";
 import { format, addDays, subDays, isToday, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -25,6 +26,7 @@ import {
   AlertCircle,
   Play,
   Settings,
+  Plus,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -163,18 +165,33 @@ function Rotina() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
-        <button onClick={handlePrevDay} className="p-2 rounded-xl bg-muted"><ChevronLeft className="h-5 w-5"/></button>
-        <button 
-          onClick={handleToday}
-          className={`px-4 py-2 rounded-xl font-bold whitespace-nowrap ${isToday(selectedDate) ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
-        >
-          Hoje
-        </button>
-        <div className="flex-1 text-center font-bold min-w-[120px]">
-          {format(selectedDate, "dd/MM/yyyy")}
+      <div className="flex flex-col gap-4 mb-6">
+        <CalendarioAnual selectedDate={selectedDate} onSelect={setSelectedDate} />
+        
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <button onClick={handlePrevDay} className="p-2 rounded-xl bg-muted active:scale-90 transition-transform"><ChevronLeft className="h-5 w-5"/></button>
+          <button 
+            onClick={handleToday}
+            className={`px-4 py-2 rounded-xl font-bold whitespace-nowrap active:scale-95 transition-all ${isToday(selectedDate) ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+          >
+            Hoje
+          </button>
+          <div className="flex-1 text-center font-black text-primary">
+            {isToday(selectedDate) ? "HOJE" : format(selectedDate, "dd/MM/yyyy")}
+          </div>
+          <button onClick={handleNextDay} className="p-2 rounded-xl bg-muted active:scale-90 transition-transform"><ChevronRight className="h-5 w-5"/></button>
+          
+          <button 
+            onClick={() => {
+              setEditingItem(null);
+              setIsConfigOpen(true);
+            }}
+            className="ml-2 p-2 rounded-xl bg-primary text-primary-foreground shadow-lg active:scale-90 transition-transform"
+            title="Agendar nova rotina"
+          >
+            <Plus className="h-6 w-6" />
+          </button>
         </div>
-        <button onClick={handleNextDay} className="p-2 rounded-xl bg-muted"><ChevronRight className="h-5 w-5"/></button>
       </div>
 
       {isLoading ? (
