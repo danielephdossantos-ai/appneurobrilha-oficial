@@ -108,15 +108,17 @@ A resposta DEVE ser um JSON válido:
     });
 
     if (!aiResult.ok) {
+      console.error(`[ADMIN_IA_AUDIT] Erro crítico no Orquestrador: ${aiResult.motivo} | Detalhe: ${aiResult.detalhe}`);
       throw new Error(aiResult.motivo || "Falha na geração da IA");
     }
 
     let aulaIA;
     try {
       aulaIA = JSON.parse(aiResult.text);
-    } catch (e) {
-      console.error("JSON inválido da IA:", aiResult.text);
-      throw new Error("A resposta da IA não é um JSON válido");
+    } catch (e: any) {
+      console.error("[ADMIN_IA_AUDIT] Falha no JSON.parse() final:", e.message);
+      console.error("[ADMIN_IA_AUDIT] Texto que falhou:", aiResult.text);
+      throw new Error(`A resposta da IA não é um JSON válido. (Fonte: ${aiResult.fonte})`);
     }
 
     // 5. VALIDAR E PERSISTIR
