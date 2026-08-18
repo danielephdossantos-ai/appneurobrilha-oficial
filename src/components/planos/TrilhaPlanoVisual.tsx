@@ -3,6 +3,7 @@ import { CheckCircle2, Lock, Star, ChevronRight } from "lucide-react";
 import { DIAS_LABEL, diaSemanaHoje } from "@/modules/primeiros-anos/builder";
 import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
+import { useMundoFundo, MundoBar } from "@/components/worlds/MundoTrilha";
 
 interface TrilhaItem {
   id: string;
@@ -24,6 +25,7 @@ interface Props {
 export function TrilhaPlanoVisual({ itens, onToggle, tipo }: Props) {
   const hoje = diaSemanaHoje();
   const navigate = useNavigate();
+  const fundoMundo = useMundoFundo("");
 
   // Agrupar itens por dia
   const diasDisponiveis = Array.from(new Set(itens.map((i) => i.dia_semana))).sort((a, b) => a - b);
@@ -37,9 +39,14 @@ export function TrilhaPlanoVisual({ itens, onToggle, tipo }: Props) {
   };
 
   return (
-    <div className="relative py-10 flex flex-col items-center">
+    <div
+      className={`relative py-10 flex flex-col items-center min-h-[600px] transition-all duration-700 ${fundoMundo.className}`}
+      style={fundoMundo.style}
+    >
+      <MundoBar className="mb-4" />
+      
       {/* Linha conectora central */}
-      <div className="absolute top-0 bottom-0 w-2 bg-slate-200 dark:bg-slate-800 rounded-full left-1/2 -translate-x-1/2 z-0" />
+      <div className="absolute top-20 bottom-0 w-2 bg-slate-200/30 dark:bg-slate-800/30 rounded-full left-1/2 -translate-x-1/2 z-0" />
 
       <div className="relative z-10 w-full max-w-sm space-y-16">
         {diasDisponiveis.map((dia, idx) => {
