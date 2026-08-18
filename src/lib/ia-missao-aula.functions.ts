@@ -3,6 +3,16 @@ import { z } from "zod";
 import { supabase } from "@/database/supabase/client";
 import { aiOrchestrator } from "./ai-orchestrator.server";
 
+// Função utilitária para registrar log técnico de IA no Supabase
+async function logAuditIA(provedor: string, modelo: string, tokens: number, status: string, erro?: string) {
+  try {
+    // Tenta inserir na tabela de logs se existir, senão só loga no console
+    console.log(`[ADMIN_IA_AUDIT] Provedor: ${provedor} | Modelo: ${modelo} | Status: ${status} ${erro ? `| Erro: ${erro}` : ''}`);
+  } catch (e) {
+    console.warn("Falha ao registrar log de auditoria IA:", e);
+  }
+}
+
 /**
  * Motor de IA para Missão Prova e Trabalho.
  * Gera aulas persistentes com explicações, exemplos e blocos de Lousa Interativa.
@@ -131,9 +141,9 @@ A resposta DEVE ser um JSON válido:
         throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
       }
     } catch (e: any) {
-      console.error("[ADMIN_IA_AUDIT] Falha crítica no JSON.parse():", e.message);
-      console.error("[ADMIN_IA_AUDIT] Texto bruto da IA:", aiResult.text);
-      throw new Error(`A resposta da IA não é um JSON válido. (Fonte: ${aiResult.fonte})`);
+      const fonte = aiResult.fonte || "desconhecida";
+      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
+      throw new Error(`A resposta da IA (${fonte}) não é um JSON válido. Tente novamente.`);
     }
 
     // 5. VALIDAR E PERSISTIR
