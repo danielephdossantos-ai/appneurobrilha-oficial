@@ -520,6 +520,32 @@ function EditorTrabalho({
     setFontes((f) => f.filter((x) => x.url !== url));
   }
 
+  async function iniciarMissaoIA() {
+    if (!childId || !tema.trim()) {
+      toast.error("Defina o tema do trabalho primeiro");
+      return;
+    }
+    setGerandoAula(true);
+    try {
+      const res = await gerarAulaFn({
+        data: {
+          missaoId: idAtual || "new",
+          topico: tema,
+          materia: materia || "Trabalho Escolar",
+          criancaId: childId,
+          tipo: "trabalho"
+        }
+      });
+      if (res.aulaId) {
+        setActiveAulaId(res.aulaId);
+      }
+    } catch (e) {
+      toast.error("Não consegui preparar a aula com IA");
+    } finally {
+      setGerandoAula(false);
+    }
+  }
+
   async function salvar() {
     if (!childId) {
       toast.error("Selecione uma criança");
