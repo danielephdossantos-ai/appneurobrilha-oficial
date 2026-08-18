@@ -2620,6 +2620,7 @@ export type Database = {
       }
       exam_study_plans: {
         Row: {
+          aula_id: string | null
           completed: boolean
           created_at: string
           description: string | null
@@ -2629,6 +2630,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          aula_id?: string | null
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -2638,6 +2640,7 @@ export type Database = {
           title: string
         }
         Update: {
+          aula_id?: string | null
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -2647,6 +2650,20 @@ export type Database = {
           title?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "exam_study_plans_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_study_plans_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
+          },
           {
             foreignKeyName: "exam_study_plans_mission_id_fkey"
             columns: ["mission_id"]
