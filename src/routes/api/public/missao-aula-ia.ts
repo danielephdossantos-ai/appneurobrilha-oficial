@@ -81,7 +81,7 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
             .eq("faixa_etaria", `${idade} anos`)
             .maybeSingle();
 
-          if (aulaExistente) {
+          if (aulaExistente && !forceNew) {
             await supabase
               .from("rb_aulas")
               .update({ usage_count: (aulaExistente.usage_count || 0) + 1 } as any)
