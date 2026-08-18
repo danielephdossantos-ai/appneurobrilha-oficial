@@ -36,8 +36,8 @@ export function notificarErroIA(motivo: MotivoErroIA | string, contexto?: string
 
   // Erros técnicos reais
   const description = typeof motivo === "string" && motivo !== "erro" 
-    ? `Erro técnico: ${motivo}. Tente novamente em alguns minutos.`
-    : "Não foi possível gerar a aula agora. Tente novamente em alguns minutos.";
+    ? motivo
+    : "Missão Prova: Não consegui falar com a IA agora\n\nVerifique a internet e tente de novo em instantes.";
 
   toast.error(`${prefixo}Opa! Tivemos um probleminha técnico`, {
     id: "ia-erro",

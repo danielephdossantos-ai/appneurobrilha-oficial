@@ -210,10 +210,14 @@ A resposta DEVE ser um JSON no seguinte formato:
         .select()
         .single();
 
+      if (error) {
+        console.error("[ReforçoIA] Erro ao salvar aula na rb_aulas_geradas_ia:", error);
+      }
+
       if (!error && salva) {
         salvaId = salva.id;
         
-        // 5. Mapear Capítulos para rb_paginas_aula
+        // 5. Mapear Capítulos para rb_paginas_aula (PARA O PLAYER)
         const paginas = [
           {
             aula_id: salvaId,
@@ -254,7 +258,7 @@ A resposta DEVE ser um JSON no seguinte formato:
             conteudo: { 
               perguntas: novaAula.capitulo5.perguntas.map((p: any) => ({
                 pergunta: p.pergunta,
-                resposta: p.resposta_explicada
+                resposta: p.resposta_explicada || p.resposta
               }))
             }
           },
@@ -270,17 +274,19 @@ A resposta DEVE ser um JSON no seguinte formato:
           }
         ];
 
-        await (supabase as any).from("rb_paginas_aula").insert(paginas);
+        const { error: errorPaginas } = await (supabase as any).from("rb_paginas_aula").insert(paginas);
+        if (errorPaginas) {
+          console.error("[ReforçoIA] Erro ao inserir páginas na rb_paginas_aula:", errorPaginas);
+        }
 
         // 6. Atualizar Agenda de Estudos (Rotina)
-        // Remove reforço anterior e coloca o novo
         await (supabase as any)
           .from("study_agenda")
           .delete()
           .eq("child_id", data.criancaId)
           .eq("type", "reforco_ia");
 
-        await (supabase as any)
+        const { error: errorAgenda } = await (supabase as any)
           .from("study_agenda")
           .insert({
             child_id: data.criancaId,
@@ -289,9 +295,13 @@ A resposta DEVE ser um JSON no seguinte formato:
             exam_date: new Date().toISOString(),
             completed: false
           });
+          
+        if (errorAgenda) {
+          console.error("[ReforçoIA] Erro ao atualizar agenda:", errorAgenda);
+        }
       }
     } catch (e) {
-      console.error("Erro ao persistir aula ou agenda do Gemini:", e);
+      console.error("Erro fatal ao persistir aula ou agenda do Gemini:", e);
     }
 
     return { 
