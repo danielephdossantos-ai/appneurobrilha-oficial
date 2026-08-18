@@ -24,6 +24,8 @@ import {
   type PlanoSalvo,
 } from "@/modules/primeiros-anos/persist";
 import { RotinaDiaria } from "@/components/literacy/RotinaDiaria";
+import { TrilhaPlanoVisual } from "@/components/planos/TrilhaPlanoVisual";
+
 
 export const Route = createFileRoute("/primeiros-anos")({
   head: () => ({
