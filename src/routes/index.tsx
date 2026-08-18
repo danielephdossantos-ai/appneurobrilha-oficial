@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { TermoCienciaGate } from "@/components/legal/TermoCienciaGate";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { Plus, Sparkles } from "lucide-react";
@@ -164,7 +165,8 @@ function Index() {
   }, [activeChild?.id, activeChild?.anamnese_completa]);
 
   return (
-    <Shell>
+    <TermoCienciaGate childId={activeChild?.id}>
+      <Shell>
       <AnimatePresence>
         {showEggHatch && activeChild?.id && (
           <EggHatchCinematic
