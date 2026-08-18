@@ -260,28 +260,42 @@ function EditorTrabalho({
   const [activeAulaId, setActiveAulaId] = useState<string | null>(null);
   const [gerandoAula, setGerandoAula] = useState(false);
   // const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
-  const startAulaMission = async () => {
-    if (!childId) return;
+  const iniciarMissaoIA = async () => {
+    if (!childId || !tema.trim()) {
+      toast.error("Defina o tema do trabalho primeiro");
+      return;
+    }
     setGerandoAula(true);
+    setActiveAulaId(null);
     try {
       const response = await fetch("/api/public/missao-aula-ia", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          missaoId: "trabalho-manual",
-          topico: tema || "Meu Trabalho",
-          materia: materia || "Estudos",
+          missaoId: idAtual || "new",
+          topico: tema,
+          materia: materia || "Trabalho Escolar",
           criancaId: childId,
-          tipo: "trabalho",
-        }),
+          tipo: "trabalho"
+        })
       });
-      if (!response.ok) throw new Error("Erro na API");
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.erro || `Erro HTTP ${response.status}`);
+      }
+
       const res = await response.json();
       if (res.aulaId) {
         setActiveAulaId(res.aulaId);
+        toast.success(`✨ Professor Brilha criou um guia de estudo!`);
+      } else {
+        throw new Error("Falha ao criar missão");
       }
-    } catch (e) {
-      toast.error("Falha ao preparar aula de orientação");
+    } catch (e: any) {
+      console.error("Gerar Missão IA Trabalho:", e);
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA(e.message || "erro", "Missão Trabalho");
     } finally {
       setGerandoAula(false);
     }
