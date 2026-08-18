@@ -155,37 +155,41 @@ A resposta DEVE ser um JSON no seguinte formato:
       );
       
       // Adaptar para o formato esperado pelo Reforço (capítulos)
+      // O Reforço Brilha usa uma visualização baseada em capítulos, mas agora 
+      // também aproveita o motor de páginas da ProfessorMentorEngine.
+      const paginas = aulaBase.paginas;
+      
       novaAula = {
         titulo: aulaBase.titulo,
         objetivo: aulaBase.objetivo,
         capitulo1: { 
           titulo: "Capítulo 1 · Orientação para a Mãe", 
-          conteudo: aulaBase.paginas.find(p => p.tipo === "explicacao")?.conteudo.texto || "Ensine com paciência e use o hiperfoco." 
+          conteudo: paginas.find(p => p.tipo === "explicacao")?.conteudo?.texto || "Inicie explicando o conceito de forma lúdica." 
         },
         capitulo2: { 
           titulo: "Capítulo 2 · Adaptação com o Hiperfoco", 
-          conteudo: `Vamos usar ${hiperfoco} para aprender ${data.dificuldade}.` 
+          conteudo: paginas.find(p => p.tipo === "exemplo")?.conteudo?.texto || `Vamos usar o interesse em ${hiperfoco} para aprender.` 
         },
         capitulo3: { 
           titulo: "Capítulo 3 · Adaptação ao Diagnóstico", 
-          conteudo: `Estratégias para: ${deficits}` 
+          conteudo: `Estratégia Pedagógica: ${deficits.substring(0, 200)}...` 
         },
         capitulo4: {
           titulo: "Capítulo 4 · Atividades Práticas",
-          atividades: aulaBase.paginas.filter(p => p.tipo === "pratica_guiada" || p.tipo === "exemplo").map(p => ({
+          atividades: paginas.filter(p => p.tipo === "pratica_guiada" || p.tipo === "exemplo").map(p => ({
             nome: p.titulo,
-            passo_a_passo: p.conteudo.texto || JSON.stringify(p.conteudo)
+            passo_a_passo: p.conteudo?.texto || (p.conteudo?.lousaPassos ? "Siga o passo a passo na lousa." : "Atividade lúdica guiada.")
           }))
         },
         capitulo5: {
           titulo: "Capítulo 5 · Avaliação",
-          perguntas: aulaBase.paginas.find(p => p.tipo === "desafio" || p.tipo === "revisao")?.conteudo.perguntas || [
-            { pergunta: "O que aprendemos hoje?", resposta_explicada: "Aprendemos sobre " + data.dificuldade }
+          perguntas: paginas.find(p => p.tipo === "desafio" || p.tipo === "revisao")?.conteudo?.perguntas || [
+            { pergunta: "O que mais gostou de aprender hoje?", resposta_explicada: "Reforce o ponto positivo do aprendizado." }
           ]
         },
         capitulo6: {
           titulo: "Capítulo 6 · Materiais",
-          recursos: [{ titulo: "Vídeo Educativo", url: "https://youtube.com/results?search_query=" + encodeURIComponent(data.dificuldade), tipo: "video" }]
+          recursos: [{ titulo: "Explorar mais no YouTube", url: "https://youtube.com/results?search_query=" + encodeURIComponent(data.dificuldade), tipo: "video" }]
         }
       };
     } catch (e: any) {

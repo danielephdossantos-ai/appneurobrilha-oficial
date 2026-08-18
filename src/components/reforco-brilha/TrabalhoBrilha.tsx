@@ -787,7 +787,7 @@ function EditorTrabalho({
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
           <button
-            onClick={iniciarMissaoIA}
+            onClick={() => iniciarMissaoIA()}
             disabled={gerandoAula}
             className="text-xs font-black bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
             title="A IA prepara uma aula completa sobre seu tema"
