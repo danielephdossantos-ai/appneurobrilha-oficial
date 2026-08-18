@@ -159,7 +159,7 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
             await supabase.from("exam_study_plans").update({ aula_id: aula.id } as any).eq("id", sessionId);
           }
 
-          return new Response(JSON.stringify({ aulaId: aula.id, recemGerada: true, fonte: aiResult.fonte }), {
+          return new Response(JSON.stringify({ aulaId: aula.id, recemGerada: true }), {
             headers: { 'Content-Type': 'application/json' }
           });
         } catch (error: any) {
