@@ -552,7 +552,8 @@ function Index() {
           )}
         </div>
       </div>
-    </Shell>
+      </Shell>
+    </TermoCienciaGate>
   );
 }
 
