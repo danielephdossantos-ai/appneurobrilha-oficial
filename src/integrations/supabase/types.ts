@@ -5502,6 +5502,47 @@ export type Database = {
           },
         ]
       }
+      parental_science_accepts: {
+        Row: {
+          accepted_at: string | null
+          child_id: string
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          status: string
+          user_id: string
+          version: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          child_id: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string
+          user_id: string
+          version: string
+        }
+        Update: {
+          accepted_at?: string | null
+          child_id?: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string
+          user_id?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parental_science_accepts_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pedagogical_activities: {
         Row: {
           assessment: Json

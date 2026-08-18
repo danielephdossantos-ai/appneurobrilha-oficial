@@ -2,6 +2,7 @@ import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { AnamneseWizard } from "@/modules/anamnese/components/AnamneseWizard";
+import { TermoCienciaGate } from "@/components/legal/TermoCienciaGate";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 
@@ -92,8 +93,10 @@ function AnamneseRoute() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {pathname === `/anamnese/${childId}` ? <AnamneseWizard childId={childId} /> : <Outlet />}
-    </div>
+    <TermoCienciaGate childId={childId}>
+      <div className="min-h-screen bg-background">
+        {pathname === `/anamnese/${childId}` ? <AnamneseWizard childId={childId} /> : <Outlet />}
+      </div>
+    </TermoCienciaGate>
   );
 }

@@ -25,7 +25,7 @@ import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogi
 import { NrpPillarsCard } from "@/components/responsible/NrpPillarsCard";
 import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
 import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
-import { BookOpen } from "lucide-react";
+import { BookOpen, FileText } from "lucide-react";
 
 export const Route = createFileRoute("/painel-pais")({
   component: () => (
@@ -384,6 +384,18 @@ function PainelPremium() {
               <button className="w-full py-3 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl text-sm font-bold transition-all">
                 Ver Plano de Aula Completo
               </button>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <Link 
+                to="/painel-pais/documentos"
+                className="block w-full p-4 rounded-3xl border-2 border-dashed border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors text-center"
+              >
+                <div className="font-black text-primary text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Documentos e Termos
+                </div>
+              </Link>
             </motion.div>
 
             <motion.div variants={itemVariants}>
