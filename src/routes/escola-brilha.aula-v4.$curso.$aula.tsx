@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
+import { useAppState } from "@/core/store";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
@@ -27,7 +29,23 @@ function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
   const { handleBack } = useBackNavigation();
+  const { activeChild, session } = useAppState();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
+
+  // Bloqueio de série para Player v4
+  useEffect(() => {
+    if (activeChild && found && (found as any).curso) {
+      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!isAdmin) {
+        const cursoAno = (found as any).curso.ano;
+        if (cursoAno && cursoAno !== activeChild.serie) {
+           const isEI = activeChild.serie.includes("Infantil") || activeChild.serie.includes("Pré");
+           if (isEI && cursoAno === "Educação Infantil") return;
+           navigate({ to: "/escola-brilha" });
+        }
+      }
+    }
+  }, [activeChild, session, navigate, found]);
 
   if (!found) {
     return (

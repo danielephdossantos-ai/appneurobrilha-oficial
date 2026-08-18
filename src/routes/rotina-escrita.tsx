@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Shell, PageHeader } from "@/components/Layout";
 import { useAppState } from "@/core/store";
@@ -97,7 +97,21 @@ function hojeISO() {
 function RotinaEscrita() {
   const { serie } = Route.useSearch();
   const queryClient = useQueryClient();
-  const { activeChild } = useAppState();
+  const { activeChild, session } = useAppState();
+  const navigate = useNavigate();
+
+  // Bloqueio de série para Rotina de Escrita
+  useEffect(() => {
+    if (activeChild) {
+      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!isAdmin) {
+        const childGrade = activeChild.serie?.match(/\d/)?.[0] || "1";
+        if (serie !== childGrade) {
+          navigate({ to: "/rotina-escrita", search: { serie: childGrade as any }, replace: true });
+        }
+      }
+    }
+  }, [activeChild, session, navigate, serie]);
   
   const fetchStatus = useServerFn(getEscritaStatus);
   const { data: status, isLoading: loadingStatus } = useQuery({
