@@ -4,12 +4,21 @@ import { aiOrchestrator } from '@/lib/ai-orchestrator.server'
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/integrations/supabase/types'
 
-// O TanStack Start injeta as variáveis de ambiente no processo do servidor.
-// Usamos a SERVICE_ROLE_KEY para ignorar RLS durante a geração automática pela IA.
-const supabase = createClient<Database>(
-  process.env.VITE_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Usamos uma função auxiliar para obter o cliente admin para evitar problemas de escopo/injeção
+const getSupabaseAdmin = () => {
+  const url = process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+     console.error("[API_MISSÃO_AULA] Credenciais Supabase ausentes no ambiente!");
+     throw new Error("Erro de configuração do servidor");
+  }
+  return createClient<Database>(url, key, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false
+    }
+  });
+};
 
 // Função utilitária para registrar log técnico de IA no Supabase
 async function logAuditIA(provedor: string, modelo: string, status: string, erro?: string) {
@@ -50,6 +59,8 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
           const body = await request.json()
           const { missaoId, sessionId, topico, materia, criancaId, tipo } = body
 
+          const supabase = getSupabaseAdmin();
+          
           // 1. Buscar contexto da criança
           const { data: child } = await supabase
             .from("children")
