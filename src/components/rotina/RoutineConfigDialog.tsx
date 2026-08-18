@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { routineItemSchema, RoutineItem, saveRoutineItemWithNotifications } from "@/lib/routine.functions";
@@ -64,9 +65,16 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
       reminderMinutesBefore: 0,
       status: "pendente" as const,
       source: "manual",
-      date: selectedDate,
+      date: selectedDate || new Date().toISOString().split('T')[0],
     },
   });
+
+  // Sincronizar data se mudar fora (calendário)
+  useEffect(() => {
+    if (!item && selectedDate) {
+      form.setValue("date", selectedDate);
+    }
+  }, [selectedDate, item, form]);
 
   const saveMutation = useMutation({
     mutationFn: (data: RoutineItem) => saveRoutineItemWithNotifications({ data }),

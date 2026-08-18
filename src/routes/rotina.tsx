@@ -149,7 +149,7 @@ function Rotina() {
         <PageHeader 
           icon={Calendar} 
           title="Minha Rotina" 
-          subtitle={isToday(selectedDate) ? "O que temos para hoje?" : format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
+          subtitle={format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
         />
         <div className="flex items-center gap-2">
           <button 
