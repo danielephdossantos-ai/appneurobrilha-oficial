@@ -215,8 +215,9 @@ function PlanoNeuroPage() {
           <Sparkles className="h-10 w-10 mx-auto text-primary" />
           <h2 className="text-xl font-black">Montar o Plano Neuro de {activeChild?.nome}</h2>
           <p className="text-sm text-muted-foreground">
-            Vamos usar o resultado da anamnese para escolher as atividades do Neuro Treino e
-            distribuí-las em 12 semanas, 5 dias por semana, com horário e lembrete.
+            Vamos usar o resultado da anamnese para organizar as atividades REAIS do Neuro-Treino 
+            em uma rotina semanal prática (3 a 6 anos). 
+            A partir de 7 anos, o foco é o Currículo Escolar.
           </p>
           <button
             onClick={gerar}

@@ -67,25 +67,53 @@ export interface GerarNeuroInput {
   semanas?: number;
   diasPorSemana?: number;
   sessoesPorDia?: number;
+  age?: number;
 }
 
 /**
- * Monta o plano: atividades recomendadas pela anamnese em rotação diária,
- * priorizando as de prioridade 1 (áreas em risco) no início da semana.
+ * Monta o plano: atividades recomendadas pela anamnese em rotação diária.
+ * RESTRIÇÃO: Apenas para crianças de 3 a 6 anos.
+ * UTILIZAÇÃO: Apenas categorias do Neuro-Treino (sem Escola Brilha).
  */
 export function gerarPlanoNeuro(input: GerarNeuroInput): PlanoNeuroGerado {
   const semanas = input.semanas ?? 12;
   const diasPorSemana = Math.min(7, Math.max(1, input.diasPorSemana ?? 5));
   const sessoesPorDia = Math.min(4, Math.max(1, input.sessoesPorDia ?? 2));
+  const age = input.age ?? 5;
 
-  const atividades =
-    input.scores && input.risk
-      ? recomendarAtividadesTerapeuticas(input.scores, input.risk)
-      : kitPadrao();
+  // Bloqueio para 7 anos ou mais
+  if (age >= 7) {
+    return { 
+      semanas, 
+      dias_por_semana: 0, 
+      sessoes_por_dia: 0, 
+      itens: [], 
+      atividades: [] 
+    };
+  }
 
-  const lista = (atividades.length > 0 ? atividades : kitPadrao())
-    .slice()
-    .sort((a, b) => a.prioridade - b.prioridade);
+  // Pegamos TODAS as categorias do Neuro-Treino disponíveis no variations.ts
+  // O sistema utiliza a anamnese para priorizar, mas inclui todas em rotação.
+  const todasCategorias = Object.keys(CATEGORIAS) as CategoriaSlug[];
+  
+  const atividades: AtividadeTerapeutica[] = todasCategorias.map(slug => {
+    const meta = CATEGORIAS[slug];
+    const riskLevel = input.risk ? (input.risk[meta.grupo as keyof RiskMap] as string) : null;
+    const prioridade = (riskLevel === "vermelho" || riskLevel === "laranja") ? 1 : 2;
+
+    return {
+      slug,
+      nome: meta.nome,
+      emoji: meta.emoji,
+      grupo: meta.grupo,
+      objetivo: meta.objetivo,
+      porQue: prioridade === 1 ? "Prioridade identificada na anamnese." : "Fortalecimento do desenvolvimento.",
+      prioridade,
+      rota: `/neuro-treino/${slug}`,
+    };
+  });
+
+  const lista = atividades.sort((a, b) => a.prioridade - b.prioridade);
 
   const itens: ItemNeuro[] = [];
   let cursor = 0;
