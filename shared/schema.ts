@@ -731,9 +731,6 @@ export const tecnicasPedagogicas = pgTable("tecnicas_pedagogicas", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
 export const routineItems = pgTable("routine_items", {
   id: uuid("id").primaryKey().defaultRandom(),
   childId: uuid("child_id").references(() => children.id, { onDelete: "cascade" }),
