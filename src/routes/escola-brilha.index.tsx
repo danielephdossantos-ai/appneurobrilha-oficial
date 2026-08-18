@@ -323,7 +323,17 @@ function EscolaBrilhaCatalogo() {
                       {aberta ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-base font-black text-[#0d1f55]">{serie}</div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-base font-black text-[#0d1f55]">{serie}</div>
+                        {activeChild?.serie && (() => {
+                          const childSerieNum = parseInt(activeChild.serie, 10) || 0;
+                          const targetSerieNum = parseInt(serie, 10) || 0;
+                          if (childSerieNum < targetSerieNum) {
+                            return <Lock className="h-3.5 w-3.5 text-rose-500" />;
+                          }
+                          return null;
+                        })()}
+                      </div>
                       <div className="text-[11px] text-[#0d1f55]/60">
                         {disciplinas.length} tema{disciplinas.length === 1 ? "" : "s"} de aventura ·{" "}
                         {total} missão{total === 1 ? "" : "es"}
@@ -331,9 +341,27 @@ function EscolaBrilhaCatalogo() {
                     </div>
                   </button>
 
-                  {aberta && (
-                    <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
-                      {/* Inglês EI movido para Neuro Treino */}
+                      {/* Bloqueio por série: só abre se a criança estiver na série ou superior */}
+                      {(() => {
+                        const childSerieNum = activeChild?.serie ? parseInt(activeChild.serie, 10) || 0 : 0;
+                        const targetSerieNum = parseInt(serie, 10) || 0;
+                        
+                        if (childSerieNum < targetSerieNum && childSerieNum > 0) {
+                          return (
+                            <div className="p-6 text-center bg-white/50 rounded-xl border-2 border-dashed border-rose-200">
+                              <Lock className="h-8 w-8 mx-auto text-rose-400 mb-2" />
+                              <p className="text-xs font-black text-rose-600 uppercase tracking-wider">Acesso Bloqueado</p>
+                              <p className="text-[10px] text-[#0d1f55]/70 mt-1">
+                                {activeChild?.nome} ainda não está no {serie}. <br/>
+                                Estude as missões do {childSerieNum}º Ano primeiro!
+                              </p>
+                            </div>
+                          );
+                        }
+                        
+                        return (
+                          <div className="space-y-2">
+                            {/* Inglês EI movido para Neuro Treino */}
 
                       {(serie === "1º Ano" || serie === "2º Ano" || serie === "3º Ano" || serie === "4º Ano" || serie === "5º Ano" || serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") && (
                         <Link
