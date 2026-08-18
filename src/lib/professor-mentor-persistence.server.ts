@@ -104,8 +104,9 @@ export async function persistirAulaMentor({
   let { data: habilidade } = await supabase
     .from("rb_habilidades")
     .select("id")
-    .eq("nome", "Aulas do Professor Mentor")
+    .eq("nome", "Missões de Estudo IA")
     .maybeSingle();
+
   if (!habilidade) {
     const r = await supabase.from("rb_habilidades").insert({
       categoria_id: categoria.id,
