@@ -65,6 +65,13 @@ function Rotina() {
   const dateStr = format(selectedDate, "yyyy-MM-dd");
 
   const { data: routine = [], isLoading } = useQuery({
+    onSuccess: async () => {
+      if (activeChild?.id && dateStr && routine.length === 0) {
+        const { syncPlansToRoutine } = await import("@/modules/neuro-plano/sync.functions");
+        await syncPlansToRoutine({ data: { childId: activeChild.id, date: dateStr } });
+        queryClient.invalidateQueries({ queryKey: ["routine"] });
+      }
+    },
     queryKey: ["routine", activeChild?.id, dateStr],
     queryFn: () => getRoutineItems({ data: { childId: activeChild!.id, date: dateStr } }),
     enabled: !!activeChild?.id,
