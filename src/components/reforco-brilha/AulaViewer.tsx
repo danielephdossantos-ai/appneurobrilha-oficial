@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, lazy } from "react";
+import { useEffect, useMemo, useState, lazy, useCallback } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { useServerFn } from "@tanstack/react-start";
@@ -223,17 +223,52 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
   const [startTime] = useState(() => Date.now());
+  const [retryCount, setRetryCount] = useState(0);
 
   const gerar = useServerFn(gerarAulaReforcoIA);
   const { activeChild } = useAppState();
 
+  const fetchPaginas = useCallback(async (targetId: string, isRetry = false) => {
+    if (!isRetry) setLoading(true);
+    
+    const { data, error } = await supabase
+      .from("rb_paginas_aula")
+      .select("id,ordem,tipo,titulo,conteudo")
+      .eq("aula_id", targetId)
+      .order("ordem", { ascending: true });
+    
+    if (error) {
+      console.error("[AulaViewer] Erro ao buscar páginas:", error);
+      toast.error("Erro ao carregar conteúdo da aula.");
+      setLoading(false);
+      return;
+    }
+
+    if (data && data.length > 0) {
+      setPaginas(data as Pagina[]);
+      setIdx(0);
+      setLoading(false);
+    } else {
+      // Se não encontrou páginas, mas a aula acabou de ser gerada, tenta retry
+      if (retryCount < 3) {
+        console.warn(`[AulaViewer] Nenhuma página encontrada para ${targetId}. Retry ${retryCount + 1}...`);
+        setTimeout(() => {
+          setRetryCount(prev => prev + 1);
+        }, 2000);
+      } else {
+        console.error("[AulaViewer] Falha definitiva ao carregar páginas para:", targetId);
+        setPaginas([]);
+        setLoading(false);
+      }
+    }
+  }, [retryCount]);
+
   useEffect(() => {
     let alive = true;
     (async () => {
-      setLoading(true);
-      
       // Se for uma aula nova via IA
       if (aulaId === "ia-new" && activeChild) {
+        setLoading(true);
         try {
           const res = await gerar({
             data: {
@@ -249,55 +284,23 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
           }
 
           console.log("[AulaViewer] Aula gerada/recuperada com ID:", res.id);
-
-          const { data: pags, error: errorPags } = await supabase
-            .from("rb_paginas_aula")
-            .select("id,ordem,tipo,titulo,conteudo")
-            .eq("aula_id", res.id)
-            .order("ordem", { ascending: true });
-            
-          if (errorPags) throw errorPags;
-
-          if (pags && pags.length > 0) {
-            setPaginas(pags as Pagina[]);
-          } else {
-            console.error("[AulaViewer] Aula gerada mas sem páginas no banco. ID:", res.id);
-            toast.error("Aula gerada sem conteúdo. Tente novamente.");
-          }
+          fetchPaginas(res.id);
         } catch (e) {
           console.error("Erro ao gerar aula sob demanda:", e);
           toast.error("Falha ao gerar aula com IA");
-        } finally {
-          if (alive) setLoading(false);
+          setLoading(false);
         }
         return;
       }
 
-      const { data, error } = await supabase
-        .from("rb_paginas_aula")
-        .select("id,ordem,tipo,titulo,conteudo")
-        .eq("aula_id", aulaId)
-        .order("ordem", { ascending: true });
-      
-      if (error) {
-        console.error("[AulaViewer] Erro ao buscar páginas:", error);
+      if (aulaId) {
+        fetchPaginas(aulaId);
       }
-      
-      if (!alive) return;
-      
-      if (data && data.length > 0) {
-        setPaginas(data as Pagina[]);
-        setIdx(0);
-      } else {
-        console.warn("[AulaViewer] Nenhuma página encontrada para aula_id:", aulaId);
-        setPaginas([]);
-      }
-      setLoading(false);
     })();
     return () => {
       alive = false;
     };
-  }, [aulaId, activeChild, titulo, gerar]);
+  }, [aulaId, activeChild, titulo, gerar, fetchPaginas]);
 
   const total = paginas.length;
   const atual = paginas[idx];
