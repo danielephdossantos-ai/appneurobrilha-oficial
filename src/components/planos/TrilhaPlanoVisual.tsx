@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Lock, Star, ChevronRight } from "lucide-react";
+import { CheckCircle2, Lock, Star, ChevronRight, Play } from "lucide-react";
 import { DIAS_LABEL, diaSemanaHoje } from "@/modules/primeiros-anos/builder";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "@tanstack/react-router";
@@ -58,6 +58,51 @@ export function TrilhaPlanoVisual({ itens, onToggle, tipo }: Props) {
       style={fundoMundo.style}
     >
       <MundoBar className="mb-4" />
+
+      {/* Botão de Destaque para o Item de Hoje (Requisito 1) */}
+      {(() => {
+        const itensHoje = itens.filter(i => i.dia_semana === hoje && !i.concluido);
+        if (itensHoje.length > 0) {
+           const prox = itensHoje.sort((a,b) => (a as any).ordem - (b as any).ordem)[0];
+           return (
+             <motion.button
+               initial={{ scale: 0.9, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               onClick={() => handleItemClick(prox)}
+               className="mb-10 btn-tap relative overflow-hidden rounded-[32px] bg-sun text-sun-foreground px-8 py-5 shadow-2xl flex items-center gap-4 border-4 border-white ring-8 ring-sun/20 z-20"
+             >
+               <div className="bg-white/20 p-2 rounded-2xl">
+                 <Play className="w-8 h-8 fill-current" />
+               </div>
+               <div className="text-left">
+                 <div className="text-[10px] font-black uppercase tracking-widest opacity-70">Sua missão de hoje</div>
+                 <div className="text-xl font-black">{prox.titulo}</div>
+               </div>
+               <ChevronRight className="w-6 h-6 ml-2" />
+             </motion.button>
+           );
+        }
+        
+        const tudoConcluido = itens.filter(i => i.dia_semana === hoje).length > 0 && itens.filter(i => i.dia_semana === hoje).every(i => i.concluido);
+        if (tudoConcluido) {
+          return (
+            <motion.div
+               initial={{ y: 20, opacity: 0 }}
+               animate={{ y: 0, opacity: 1 }}
+               className="mb-10 rounded-[32px] bg-emerald-500 text-white px-8 py-5 shadow-xl flex items-center gap-4 border-4 border-white z-20"
+            >
+               <div className="bg-white/20 p-2 rounded-2xl">
+                 <CheckCircle2 className="w-8 h-8" />
+               </div>
+               <div className="text-left">
+                 <div className="text-[10px] font-black uppercase tracking-widest opacity-80">Parabéns!</div>
+                 <div className="text-xl font-black">Você concluiu tudo hoje! 🎉</div>
+               </div>
+            </motion.div>
+          );
+        }
+        return null;
+      })()}
       
       {/* Linha conectora central */}
       <div className="absolute top-20 bottom-0 w-2 bg-slate-200/30 dark:bg-slate-800/30 rounded-full left-1/2 -translate-x-1/2 z-0" />

@@ -265,12 +265,8 @@ function PlanoNeuroPage() {
             </div>
           </Card>
 
-          <button
-            onClick={handleStartSession}
-            className="w-full bg-sun text-sun-foreground py-4 rounded-3xl font-black text-xl flex items-center justify-center gap-3 shadow-lg hover:scale-[1.02] transition-transform"
-          >
-            <Play size={28} fill="currentColor" /> COMEÇAR MISSÃO DE HOJE
-          </button>
+          {/* Removido o botão duplicado de COMEÇAR MISSÃO, pois agora ele está integrado na TrilhaPlanoVisual */}
+
 
           <div className="flex gap-2 overflow-x-auto pb-1">
             {Array.from({ length: plano.semanas }, (_, i) => i + 1).map((wk) => (
