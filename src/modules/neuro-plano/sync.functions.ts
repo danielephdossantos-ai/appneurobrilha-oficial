@@ -25,13 +25,11 @@ export const syncPlansToRoutine = createServerFn({ method: "POST" })
       .eq("date", date)
       .in("source", ["plano_neuro", "plano_alfa"]);
 
-    // 2. Buscar planos ativos
-    const [{ data: neuroPlano }, { data: anamnese }] = await Promise.all([
-      supabase.from("neuro_plano" as any).select("*").eq("child_id", childId).maybeSingle(),
-      supabase.from("anamnese_v2" as any).select("risk_levels, scores").eq("child_id", childId).maybeSingle()
-    ]);
+    const routineItems: any[] = [];
 
-    const routineItems = [];
+    // 2. Buscar planos ativos
+    const neuroPlanoPromise = supabase.from("neuro_plano" as any).select("*").eq("child_id", childId).maybeSingle();
+    const { data: neuroPlano } = await neuroPlanoPromise;
 
     // 3. Integrar Neuro-Treino (Sistema 2)
     if (neuroPlano) {
