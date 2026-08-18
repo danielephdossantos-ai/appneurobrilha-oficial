@@ -6670,27 +6670,66 @@ export type Database = {
       }
       rb_aulas_geradas_ia: {
         Row: {
+          aula_id: string | null
+          cache_key: string | null
           conteudo: Json
           created_at: string | null
           dificuldade_original: string
           id: string
+          idade: number | null
+          materia: string | null
+          modulo: string | null
+          serie: string | null
           tags: string[] | null
+          tema: string | null
+          usage_count: number
         }
         Insert: {
+          aula_id?: string | null
+          cache_key?: string | null
           conteudo: Json
           created_at?: string | null
           dificuldade_original: string
           id?: string
+          idade?: number | null
+          materia?: string | null
+          modulo?: string | null
+          serie?: string | null
           tags?: string[] | null
+          tema?: string | null
+          usage_count?: number
         }
         Update: {
+          aula_id?: string | null
+          cache_key?: string | null
           conteudo?: Json
           created_at?: string | null
           dificuldade_original?: string
           id?: string
+          idade?: number | null
+          materia?: string | null
+          modulo?: string | null
+          serie?: string | null
           tags?: string[] | null
+          tema?: string | null
+          usage_count?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "rb_aulas_geradas_ia_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_aulas_geradas_ia_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
+          },
+        ]
       }
       rb_aulas_ia: {
         Row: {
