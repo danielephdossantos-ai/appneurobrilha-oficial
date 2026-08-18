@@ -123,10 +123,16 @@ A resposta DEVE ser um JSON válido:
 
     let aulaIA;
     try {
-      aulaIA = JSON.parse(aiResult.text);
+      // Remover qualquer lixo que tenha sobrado
+      const jsonLimpo = aiResult.text.trim();
+      aulaIA = JSON.parse(jsonLimpo);
+      
+      if (!aulaIA.paginas || !Array.isArray(aulaIA.paginas)) {
+        throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
+      }
     } catch (e: any) {
-      console.error("[ADMIN_IA_AUDIT] Falha no JSON.parse() final:", e.message);
-      console.error("[ADMIN_IA_AUDIT] Texto que falhou:", aiResult.text);
+      console.error("[ADMIN_IA_AUDIT] Falha crítica no JSON.parse():", e.message);
+      console.error("[ADMIN_IA_AUDIT] Texto bruto da IA:", aiResult.text);
       throw new Error(`A resposta da IA não é um JSON válido. (Fonte: ${aiResult.fonte})`);
     }
 

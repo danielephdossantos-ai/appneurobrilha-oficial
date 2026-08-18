@@ -35,7 +35,7 @@ function extrairJSON(text: string): string {
 
 export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallResult> {
   const label = opts.label || "orchestrator";
-  console.log(`[AIOrchestrator] Iniciando pedido: ${label}`);
+  console.log(`[AIOrchestrator] Iniciando pedido: ${label} | JSON: ${opts.json}`);
 
   // 1. Tentar GEMINI (Primário)
   try {
