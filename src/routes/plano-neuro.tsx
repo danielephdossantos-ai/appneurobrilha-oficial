@@ -35,6 +35,8 @@ import {
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useNavigationStore } from "@/lib/navigation-context";
 import { useNavigate } from "@tanstack/react-router";
+import { TrilhaPlanoVisual } from "@/components/planos/TrilhaPlanoVisual";
+
 
 export const Route = createFileRoute("/plano-neuro")({
   head: () => ({
@@ -289,68 +291,18 @@ function PlanoNeuroPage() {
             ))}
           </div>
 
-          <div className="space-y-4">
-            {Array.from({ length: dias }, (_, i) => i + 1).map((dia) => {
-              const lista = porDia.get(dia) ?? [];
-              const hora = horarios.find((h) => h.dia_semana === dia)?.hora ?? "16:00";
-              const ehHoje = dia === hoje;
-              return (
-                <section key={dia}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h2 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground">
-                      {DIAS_LABEL[dia]}
-                      {ehHoje && " · hoje"}
-                    </h2>
-                    <span className="flex items-center gap-1 text-xs font-bold text-muted-foreground">
-                      <Clock className="h-3.5 w-3.5" /> {hora}
-                    </span>
-                  </div>
-                  {lista.length === 0 ? (
-                    <Card className="text-sm text-muted-foreground">Dia livre 🌿</Card>
-                  ) : (
-                    <div className="space-y-2">
-                      {lista.map((item) => (
-                        <Card
-                          key={item.id}
-                          className={`flex items-center gap-3 ${ehHoje ? "border-primary/40" : ""} ${
-                            item.concluido ? "opacity-60" : ""
-                          }`}
-                        >
-                          <button
-                            onClick={() => alternar(item)}
-                            aria-label={item.concluido ? "Desmarcar sessão" : "Marcar como feita"}
-                            className="btn-tap shrink-0"
-                          >
-                            {item.concluido ? (
-                              <CheckCircle2 className="h-6 w-6 text-primary" />
-                            ) : (
-                              <Circle className="h-6 w-6 text-muted-foreground" />
-                            )}
-                          </button>
-                          <Link to={item.rota} className="flex-1 min-w-0">
-                            <div className="text-[11px] font-black uppercase tracking-wider text-primary flex items-center gap-1">
-                              <Brain className="h-3.5 w-3.5" />
-                              {item.grupo}
-                              {item.prioridade === 1 && " · prioridade"}
-                            </div>
-                            <div className="font-bold break-words">
-                              {item.emoji} {item.nome}
-                            </div>
-                            {item.objetivo && (
-                              <div className="text-xs text-muted-foreground break-words">
-                                {item.objetivo}
-                              </div>
-                            )}
-                          </Link>
-                          <Pill>{item.minutos} min</Pill>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              );
-            })}
+          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[40px] border-2 border-slate-200/50 dark:border-slate-800/50 overflow-hidden">
+            <TrilhaPlanoVisual 
+              itens={itens.map(i => ({
+                ...i,
+                trilha_label: i.grupo,
+                titulo: `${i.emoji} ${i.nome}`
+              }))} 
+              onToggle={alternar} 
+              tipo="neuro" 
+            />
           </div>
+
 
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
