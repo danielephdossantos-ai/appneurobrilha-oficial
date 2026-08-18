@@ -69,7 +69,7 @@ import { SubitizingFlash } from "@/escola-brilha/player/blocos/SubitizingFlash";
 
 function speak(text: string) {
   stopSpeaking();
-  speakChunked(sanitizeForSpeech(text), { rate: 0.95, pitch: 1.15 });
+  speakChunked(text, { rate: 0.88, pitch: 1.15 });
 }
 
 /**
