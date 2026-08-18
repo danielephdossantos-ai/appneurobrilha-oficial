@@ -28,7 +28,7 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context: navContext } = useBackNavigation();
   const { activeChild, session } = useAppState();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
 
