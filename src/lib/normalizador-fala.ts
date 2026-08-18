@@ -1,4 +1,4 @@
-import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
+import { sanitizarFalaMascote, nomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
 
 /**
  * Normalizador Central de Fala PT-BR para NeuroBrilha Kids.
@@ -72,7 +72,7 @@ export function normalizarFala(texto: string, contexto: "geral" | "matematica" |
   if (!texto) return "";
 
   // 1. Sanitização inicial (regras de mascote e limpeza de alfabetização)
-  let out = normalizeLiteracyTextForSpeech(sanitizarFalaMascote(texto));
+  let out = normalizeLiteracyTextForSpeech(sanitizarFalaMascote(texto, nomeCriancaFala()));
 
   // Notação fonêmica /x/ -> "x"
   out = out.replace(/\/([A-Za-zÀ-ÿ]{1,6})\//g, "$1");
