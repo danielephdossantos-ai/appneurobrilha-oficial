@@ -177,28 +177,9 @@ function TrilhaSerieDisc() {
             {habilidades.map((h, i) => {
               const cod = h.codigo.toUpperCase();
               const concluida = concluidas.has(cod);
-              
-              // Nova regra: se a criança está numa série superior à da trilha, libera tudo.
-              // Se a criança está na mesma série, segue a trava sequencial.
-              // Se a criança está numa série inferior, a trilha estaria bloqueada na origem (catálogo),
-              // mas por segurança aqui validamos se a série da trilha é maior que a da criança.
-              const childSerieNum = activeChild?.serie ? parseInt(activeChild.serie, 10) || 0 : 0;
-              const trilhaSerieNum = serie === "educacao-infantil" ? 0 : parseInt(serie, 10) || 0;
-              
-              const isSuperior = childSerieNum > trilhaSerieNum && trilhaSerieNum > 0;
-              const isMesmaSerie = childSerieNum === trilhaSerieNum;
-              const trancadoPorSerie = childSerieNum < trilhaSerieNum && childSerieNum > 0;
-
-              const desbloqueada = modoLivre || isSuperior || (isMesmaSerie && (i === proximoIdx || concluida));
-              const eProxima = i === proximoIdx && !concluida && !isSuperior && !trancadoPorSerie;
-              
+              const desbloqueada = modoLivre || i === proximoIdx || concluida;
+              const eProxima = i === proximoIdx && !concluida;
               const align = i % 2 === 0 ? "justify-start" : "justify-end";
-              
-              if (trancadoPorSerie && !modoLivre) {
-                // Se por algum motivo entrar numa trilha de série superior
-                return null;
-              }
-
               return (
                 <div key={h.codigo} className={`flex ${align}`}>
                   <button
