@@ -698,10 +698,11 @@ function EscolaBrilhaCatalogo() {
                       })()}
                     </div>
                   )}
-                      })()}
-                    </div>
-                  )}
                 </div>
-    </Shell>
-  );
-}
+              );
+            })}
+          </div>
+        </div>
+      </Shell>
+    );
+  }
