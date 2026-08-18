@@ -12,13 +12,14 @@ import { aiOrchestrator } from "./ai-orchestrator.server";
 export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     missaoId: z.string(),
+    sessionId: z.string().optional(), // ID do tópico no plano de estudo
     topico: z.string(),
     materia: z.string(),
     criancaId: z.string(),
     tipo: z.enum(["prova", "trabalho"])
   }).parse(data))
   .handler(async ({ data }) => {
-    const { missaoId, topico, materia, criancaId, tipo } = data;
+    const { missaoId, sessionId, topico, materia, criancaId, tipo } = data;
     
     // 1. Buscar contexto da criança
     const { data: child } = await supabase
@@ -47,6 +48,14 @@ export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
         .from("rb_aulas")
         .update({ usage_count: (aulaExistente.usage_count || 0) + 1 } as any)
         .eq("id", aulaExistente.id);
+        
+      // Vincular se houver sessionId
+      if (sessionId) {
+        await supabase
+          .from("exam_study_plans")
+          .update({ aula_id: aulaExistente.id } as any)
+          .eq("id", sessionId);
+      }
         
       return { aulaId: aulaExistente.id, recemGerada: false };
     }
@@ -162,9 +171,19 @@ A resposta DEVE ser um JSON válido:
     }));
 
     await supabase.from("rb_paginas_aula").insert(paginas);
-
-    // VINCULAR À MISSÃO (Se for prova, salvamos no plano de estudos ou metadados)
-    // Por agora, o retorno do aulaId já permite a navegação.
+    
+    // VINCULAR À MISSÃO/SESSÃO
+    if (sessionId) {
+      console.log(`[Persistência] Vinculando aula ${aula.id} à sessão ${sessionId}`);
+      const { error: linkError } = await supabase
+        .from("exam_study_plans")
+        .update({ aula_id: aula.id } as any)
+        .eq("id", sessionId);
+        
+      if (linkError) {
+        console.error("Erro ao vincular aula ao plano de estudo:", linkError);
+      }
+    }
     
     return { aulaId: aula.id, recemGerada: true, fonte: aiResult.fonte };
   });
