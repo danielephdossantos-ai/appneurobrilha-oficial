@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, lazy } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { useServerFn } from "@tanstack/react-start";
@@ -19,6 +19,7 @@ import {
   ArrowRight,
   Volume2,
 } from "lucide-react";
+import { RenderVisualMat } from "@/escola-brilha/curso-v4/player/blocos/VisuaisMat";
 
 export interface AulaViewerProps {
   aulaId: string;
@@ -82,6 +83,11 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
 
   return (
     <div className="space-y-5">
+      {c.lousaPassos && (
+        <div className="bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border-4 border-slate-800">
+          <RenderVisualMat v={{ tipo: "trinomioPassoAPasso", ...c.lousaPassos }} />
+        </div>
+      )}
       {c.imagem && (
         <div className="rounded-3xl overflow-hidden border border-border bg-secondary/30">
           <img src={c.imagem} alt="" className="w-full max-h-96 object-contain" />
