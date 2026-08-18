@@ -25,7 +25,7 @@ import {
   Play,
   Settings,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/rotina")({
@@ -69,6 +69,21 @@ function Rotina() {
     queryFn: () => getRoutineItems({ data: { childId: activeChild!.id, date: dateStr } }),
     enabled: !!activeChild?.id,
   });
+
+  useEffect(() => {
+    if (activeChild?.id && dateStr && routine.length === 0 && !isLoading) {
+      const sync = async () => {
+        try {
+          const { syncPlansToRoutine } = await import("@/modules/neuro-plano/sync.functions");
+          await syncPlansToRoutine({ data: { childId: activeChild.id, date: dateStr } });
+          queryClient.invalidateQueries({ queryKey: ["routine"] });
+        } catch (err) {
+          console.error("Erro ao sincronizar rotina:", err);
+        }
+      };
+      sync();
+    }
+  }, [activeChild?.id, dateStr, routine.length, isLoading]);
 
   const toggleStatus = useMutation({
     mutationFn: (vars: { id: string; status: RoutineItem["status"] }) =>

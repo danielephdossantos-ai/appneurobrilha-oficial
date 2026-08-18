@@ -1,155 +1,96 @@
-import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, Sparkles, X } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { HIPERFOCO_LIST, type HiperfocoId } from "@/data/hiperfocos";
-import { getElementoImg } from "@/data/hiperfocos-img";
-import { useHiperfoco } from "@/context/HiperfocoContext";
-
-interface ConfigSearch {
-  next?: string;
-}
+import { useAppState } from "@/core/store";
+import { Brain, GraduationCap, Settings, Bell, Calendar } from "lucide-react";
 
 export const Route = createFileRoute("/neuro-treino/configurar")({
-  validateSearch: (s: Record<string, unknown>): ConfigSearch => ({
-    next: typeof s.next === "string" ? s.next : undefined,
+  head: () => ({
+    meta: [{ title: "Configurar Planos — Neuro Brilha Kids" }],
   }),
-  component: ConfigurarHiperfoco,
+  component: ConfigurarPlanos,
 });
 
-function ConfigurarHiperfoco() {
-  const navigate = useNavigate();
-  const { next } = useSearch({ from: "/neuro-treino/configurar" });
-  const { hiperfoco, setHiperfocoById, setHiperfocoCustom, limpar } = useHiperfoco();
-  const [custom, setCustom] = useState("");
+function ConfigurarPlanos() {
+  const { activeChild } = useAppState();
 
-  const continuar = () => {
-    if (next) navigate({ to: "/neuro-treino/$slug", params: { slug: next } });
-    else navigate({ to: "/neuro-treino" });
-  };
+  if (!activeChild) {
+    return (
+      <Shell>
+        <PageHeader icon={Settings} title="Configuração" subtitle="Escolha uma criança" />
+      </Shell>
+    );
+  }
 
   return (
     <Shell>
-      <div className="flex items-center gap-3 mb-2">
-        <Link
-          to="/neuro-treino"
-          className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft size={16} /> Voltar
-        </Link>
-      </div>
-      <PageHeader
-        title="Qual é o hiperfoco de hoje?"
-        subtitle="Escolha um tema para personalizar as atividades — o PIP vai usar essa paixão para guiar a criança."
+      <PageHeader 
+        icon={Settings} 
+        title="Meu Plano" 
+        subtitle={`Organize a jornada de ${activeChild.nome}`} 
       />
 
-      <Card>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {HIPERFOCO_LIST.map((h) => {
-            const ativo = hiperfoco?.id === h.id;
-            // Se for custom e tivermos um hiperfoco custom ativo, mostramos o custom ativo em vez do template
-            if (h.id === "custom") return null;
-
-            return (
-              <button
-                key={h.id}
-                onClick={() =>
-                  h.id !== "custom" && setHiperfocoById(h.id as Exclude<HiperfocoId, "custom">)
-                }
-                className={`rounded-2xl p-4 border-2 text-left transition-all hover:scale-105 flex flex-col items-center text-center ${
-                  ativo
-                    ? "border-primary bg-primary/10 shadow-glow"
-                    : "border-border bg-card hover:border-primary/50"
-                }`}
-              >
-                <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                  {getElementoImg(h.elementos[0]) ? (
-                    <img
-                      src={getElementoImg(h.elementos[0])}
-                      alt={h.label}
-                      className="w-full h-full object-contain drop-shadow-sm"
-                    />
-                  ) : null}
-                </div>
-                <div className="font-extrabold text-sm">{h.label}</div>
-                <div className="text-[10px] text-muted-foreground mt-1 line-clamp-1">
-                  {h.elementos.slice(0, 2).join(", ")}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-6 border-t border-border pt-6">
-          <label className="block text-sm font-bold mb-3 flex items-center gap-2">
-            Ou escreva um novo hiperfoco:
-          </label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={custom}
-              onChange={(e) => setCustom(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && custom.trim()) {
-                  setHiperfocoCustom(custom);
-                  setCustom("");
-                }
-              }}
-              placeholder="Ex: Trens, Patrulha Canina, Espaço…"
-              className="flex-1 rounded-xl border-2 border-border bg-background px-4 py-3 focus:border-primary outline-none font-medium"
-            />
-            <button
-              onClick={() => {
-                if (custom.trim()) {
-                  setHiperfocoCustom(custom);
-                  setCustom("");
-                }
-              }}
-              className="rounded-xl bg-primary text-primary-foreground px-6 py-3 font-bold disabled:opacity-50 hover:scale-105 transition-all shadow-md"
-              disabled={!custom.trim()}
+      <div className="space-y-6">
+        {/* Sistema 1: Alfabetização */}
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <GraduationCap className="h-5 w-5 text-primary" />
+            </div>
+            <h2 className="text-xl font-black">Plano de Alfabetização</h2>
+          </div>
+          <Card className="p-6">
+            <p className="text-sm text-muted-foreground mb-4">
+              Jornada pedagógica de 40 semanas para crianças de 3 a 6 anos. 
+              Foca em prontidão, consciência fonológica e escrita.
+            </p>
+            <Link 
+              to="/plano-anual"
+              className="btn-tap w-full bg-primary text-primary-foreground py-3 rounded-2xl font-black flex items-center justify-center gap-2"
             >
-              Criar
-            </button>
-          </div>
-        </div>
+              <Calendar className="h-5 w-5" /> Ver Cronograma Anual
+            </Link>
+          </Card>
+        </section>
 
-        {hiperfoco && (
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-3xl bg-primary/5 border-2 border-primary/20 p-6 animate-fade-in shadow-lg">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shadow-inner border border-primary/10 overflow-hidden">
-                {getElementoImg(hiperfoco.elementos?.[0]) && (
-                  <img
-                    src={getElementoImg(hiperfoco.elementos[0])}
-                    alt={hiperfoco.label}
-                    className="w-12 h-12 object-contain"
-                  />
-                )}
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-black uppercase tracking-wider text-primary/60">
-                  Hiperfoco Ativo
-                </span>
-                <span className="text-xl font-black text-foreground">{hiperfoco.label}</span>
-              </div>
+        {/* Sistema 2: Neuro-Treino */}
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="p-2 bg-sun/20 rounded-lg">
+              <Brain className="h-5 w-5 text-sun-foreground" />
             </div>
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <button
-                onClick={limpar}
-                title="Limpar hiperfoco"
-                className="p-3 rounded-xl border-2 border-border bg-card text-muted-foreground hover:text-destructive hover:border-destructive/30 transition-all shadow-sm"
-              >
-                <X size={20} />
-              </button>
-              <button
-                onClick={continuar}
-                className="flex-1 sm:flex-none rounded-2xl bg-primary text-primary-foreground px-8 py-4 font-black text-lg hover:scale-105 transition-all shadow-xl hover:shadow-primary/20 flex items-center justify-center gap-2"
-              >
-                Começar Treino <Sparkles size={20} />
-              </button>
-            </div>
+            <h2 className="text-xl font-black">Plano Neuro-Treino</h2>
           </div>
-        )}
-      </Card>
+          <Card className="p-6">
+            <p className="text-sm text-muted-foreground mb-4">
+              Treino cognitivo personalizado baseado na anamnese. 
+              Atividades diárias para memória, atenção e controle.
+            </p>
+            <Link 
+              to="/plano-neuro"
+              className="btn-tap w-full bg-sun text-sun-foreground py-3 rounded-2xl font-black flex items-center justify-center gap-2"
+            >
+              <Settings className="h-5 w-5" /> Ajustar Sessões e Horários
+            </Link>
+          </Card>
+        </section>
+
+        {/* Notificações */}
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="p-2 bg-petal/20 rounded-lg">
+              <Bell className="h-5 w-5 text-petal-foreground" />
+            </div>
+            <h2 className="text-xl font-black">Lembretes</h2>
+          </div>
+          <Card className="p-6">
+            <p className="text-sm text-muted-foreground">
+              Configure notificações no celular para não perder nenhuma missão do dia. 
+              Os horários podem ser ajustados dentro de cada plano.
+            </p>
+          </Card>
+        </section>
+      </div>
     </Shell>
   );
 }
