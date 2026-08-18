@@ -145,7 +145,8 @@ function RootComponent() {
         <MascotProvider>
           <ParentModeProvider>
             <HiperfocoProvider>
-              <div className="relative min-h-screen">
+              <GradeGuard>
+                <div className="relative min-h-screen">
                 <Outlet />
                 <LGPDConsent />
                 <ConnectivityStatus />
@@ -153,7 +154,8 @@ function RootComponent() {
                 <ParentPinGate />
                 <ProfessorBrilhoMount />
               </div>
-            </HiperfocoProvider>
+            </GradeGuard>
+          </HiperfocoProvider>
           </ParentModeProvider>
         </MascotProvider>
       </AuthGuard>
@@ -213,4 +215,5 @@ import { ParentModeProvider } from "@/contexts/ParentModeContext";
 import { ParentPinGate } from "@/components/auth/ParentPinGate";
 import { HiperfocoProvider } from "@/context/HiperfocoContext";
 import { AuthGuard } from "@/modules/auth/components/AuthGuard";
+import { GradeGuard } from "@/modules/auth/components/GradeGuard";
 import { ProfessorBrilhoMount } from "@/components/professor/ProfessorBrilhoMount";

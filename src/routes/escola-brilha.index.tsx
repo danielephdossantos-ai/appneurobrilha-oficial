@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Compass, CheckCircle2, ChevronDown, ChevronRight, Lock, Sparkles } from "lucide-react";
+import { cn } from "@/utils/utils";
 import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
@@ -87,7 +88,7 @@ function contarAulasIngles(serie: Serie): number {
 function EscolaBrilhaCatalogo() {
 
   const navigate = useNavigate();
-  const { activeChild } = useAppState();
+  const { activeChild, session } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
   const [dominio, setDominio] = useState<Record<string, NivelDominio>>({});
@@ -309,21 +310,45 @@ function EscolaBrilhaCatalogo() {
               const total = contarSerie(serie);
               const totalAulasIngles = contarAulasIngles(serie);
               const aberta = serieAberta === serie;
-              return (
+              
+              const childSerie = activeChild?.serie || "";
+              const isMyGrade = childSerie === serie || 
+                               (serie === "Educação Infantil" && (childSerie.includes("Infantil") || childSerie.includes("Pré")));
+              
+              const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+              const locked = !isAdmin && !isMyGrade;
 
-                <div key={serie} className="rounded-2xl bg-white border-2 border-white shadow-sm overflow-hidden">
+              return (
+                <div key={serie} className={cn(
+                  "rounded-2xl bg-white border-2 shadow-sm overflow-hidden transition-all",
+                  locked ? "border-slate-100 opacity-75" : "border-white"
+                )}>
                   <button
                     onClick={() => {
+                      if (locked) return;
                       setSerieAberta(aberta ? null : serie);
                       setDiscAberta(null);
                     }}
-                    className="w-full flex items-center gap-3 p-4 active:scale-[0.995]"
+                    className={cn(
+                      "w-full flex items-center gap-3 p-4 active:scale-[0.995]",
+                      locked ? "cursor-not-allowed" : "cursor-pointer"
+                    )}
                   >
-                    <div className="h-11 w-11 rounded-xl bg-[#4C9EFF]/15 text-[#4C9EFF] grid place-items-center shrink-0">
-                      {aberta ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+                    <div className={cn(
+                      "h-11 w-11 rounded-xl grid place-items-center shrink-0",
+                      locked ? "bg-slate-100 text-slate-400" : "bg-[#4C9EFF]/15 text-[#4C9EFF]"
+                    )}>
+                      {locked ? <Lock className="h-5 w-5" /> : (aberta ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />)}
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-base font-black text-[#0d1f55]">{serie}</div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-base font-black text-[#0d1f55]">{serie}</div>
+                        {isMyGrade && (
+                          <span className="bg-emerald-100 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                            Minha Série
+                          </span>
+                        )}
+                      </div>
                       <div className="text-[11px] text-[#0d1f55]/60">
                         {disciplinas.length} tema{disciplinas.length === 1 ? "" : "s"} de aventura ·{" "}
                         {total} missão{total === 1 ? "" : "es"}
