@@ -2,7 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getRoutineItems, toggleRoutineItemStatus, RoutineItem } from "@/lib/routine.functions";
+import { getRoutineItems, toggleRoutineItemStatus, RoutineItem, deleteRoutineItem } from "@/lib/routine.functions";
+import { RoutineConfigDialog } from "@/components/rotina/RoutineConfigDialog";
 import { format, addDays, subDays, isToday, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
