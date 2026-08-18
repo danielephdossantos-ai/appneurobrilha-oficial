@@ -2,6 +2,28 @@ import { GeminiOptions, callGemini } from "./gemini.server";
 import { ChatMsg, ChatCallOptions, ChatCallResult } from "./ai-chat-fallback";
 
 /**
+ * Utilitário para extrair JSON de respostas que podem conter Markdown ou texto extra
+ */
+function extrairJSON(text: string): string {
+  const clean = text.trim();
+  // Se já for um JSON começando com { e terminando com }, retorna direto
+  if (clean.startsWith('{') && clean.endsWith('}')) return clean;
+  
+  // Tentar encontrar bloco de código markdown ```json ... ```
+  const match = clean.match(/```json\s*([\s\S]*?)\s*```/);
+  if (match?.[1]) return match[1].trim();
+
+  // Tentar encontrar o primeiro { e o último }
+  const firstBrace = clean.indexOf('{');
+  const lastBrace = clean.lastIndexOf('}');
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    return clean.slice(firstBrace, lastBrace + 1).trim();
+  }
+
+  return clean;
+}
+
+/**
  * AI ORCHESTRATOR PARA NEUROBRILHA
  * Implementa fallback sequencial: Gemini -> Groq -> Lovable AI Gateway
  */
@@ -12,36 +34,43 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
 
   // 1. Tentar GEMINI (Primário)
   try {
-    console.log(`[AIOrchestrator] Tentando Gemini...`);
+    const model = opts.lovableModel?.includes("gemini") ? opts.lovableModel : "gemini-3.7-flash";
+    console.log(`[AIOrchestrator] Tentando Gemini (${model})...`);
+    
     // Adaptar formato de mensagens
     const geminiMsgs = opts.messages.map(m => ({
       role: m.role as "system" | "user" | "assistant",
       content: typeof m.content === "string" ? m.content : JSON.stringify(m.content)
     }));
 
-    const text = await callGemini({
+    const rawText = await callGemini({
       messages: geminiMsgs,
-      model: opts.lovableModel?.includes("gemini") ? opts.lovableModel : "gemini-3.7-flash",
+      model,
       temperature: opts.temperature,
       max_tokens: opts.max_tokens,
       json: opts.json
     });
 
-    if (text) {
-      return { ok: true, text, fonte: "lovable" }; // Mapeamos Gemini como 'lovable' ou poderíamos expandir o tipo fonte
+    if (rawText) {
+      const text = opts.json ? extrairJSON(rawText) : rawText;
+      console.log(`[ADMIN_IA_AUDIT] Provedor: Gemini | Modelo: ${model} | Tamanho: ${rawText.length}`);
+      if (opts.json && rawText !== text) {
+        console.log(`[ADMIN_IA_AUDIT] JSON extraído (original tinha markdown ou texto extra)`);
+      }
+      return { ok: true, text, fonte: "lovable" };
     }
   } catch (error: any) {
     console.warn(`[AIOrchestrator] Gemini falhou: ${error.message}`);
-    // Se for erro de quota/limite, continuamos. Se for erro de autenticação ou crítico, logamos mas tentamos o próximo.
   }
 
   // 2. Tentar GROQ (Secundário)
   const groqKey = process.env.GROQ_API_KEY;
   if (groqKey) {
     try {
-      console.log(`[AIOrchestrator] Tentando Groq...`);
+      const model = opts.groqModel ?? "llama-3.3-70b-specdec";
+      console.log(`[AIOrchestrator] Tentando Groq (${model})...`);
       const body: Record<string, unknown> = {
-        model: opts.groqModel ?? "llama-3.3-70b-specdec",
+        model,
         messages: opts.messages,
         max_tokens: opts.max_tokens ?? 1000,
         temperature: opts.temperature ?? 0.7,
@@ -59,7 +88,7 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
         const rawText = String(j?.choices?.[0]?.message?.content ?? "").trim();
         const text = opts.json ? extrairJSON(rawText) : rawText;
         
-        console.log(`[ADMIN_IA_AUDIT] Provedor: Groq | Modelo: ${body.model} | Tamanho: ${rawText.length}`);
+        console.log(`[ADMIN_IA_AUDIT] Provedor: Groq | Modelo: ${model} | Tamanho: ${rawText.length}`);
         return { ok: true, text, fonte: "groq" };
       } else {
         const errorData = await res.json().catch(() => ({}));
