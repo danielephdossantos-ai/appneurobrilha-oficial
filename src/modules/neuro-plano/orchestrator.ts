@@ -47,10 +47,13 @@ export async function orquestrarSessaoDiaria(childId: string): Promise<Recommend
     let motivo = "Treino de desenvolvimento geral.";
 
     // Fator Anamnese (Prioridade Máxima)
-    if (risk && risk[meta.grupo as keyof RiskMap] === "high") {
+    // RiskMap usa: "verde" | "amarelo" | "laranja" | "vermelho"
+    const riskLevel = risk ? (risk[meta.grupo as keyof RiskMap] as string) : null;
+    
+    if (riskLevel === "vermelho" || riskLevel === "laranja") {
       score += 100;
       motivo = "Área prioritária identificada para desenvolvimento.";
-    } else if (risk && risk[meta.grupo as keyof RiskMap] === "medium") {
+    } else if (riskLevel === "amarelo") {
       score += 50;
       motivo = "Área importante para fortalecimento.";
     }
