@@ -19,8 +19,11 @@ import {
   VolumeX,
   X,
   Zap,
+  CheckCircle2,
+  Play,
+  Pause,
 } from "lucide-react";
-import { Shell, PageHeader, Card } from "@/components/Layout";
+import { Shell, PageHeader, Card, Modal } from "@/components/Layout";
 import { toast } from "sonner";
 import {
   CATEGORIAS,
@@ -77,7 +80,9 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context, setContext } = useBackNavigation();
+  const [showSessionModal, setShowSessionModal] = useState(false);
+  const isSessionMode = context?.originCategory === "meu-plano" && !!context.sessionActivities;
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const { speak, stop, isSpeaking } = usePipVoice();
@@ -330,7 +335,17 @@ function NeuroAtividade() {
       toast(frase);
       if (voiceOn) speak(frase);
     }
-    setTimeout(() => setIndex((i) => i + 1), 900);
+    
+    // Se completou a série de variações desta atividade (index atinge vars.length - 1 ou similar)
+    // No Neuro-Treino, as sessões costumam ter um fim definido. 
+    // Vamos disparar o modal de próxima atividade quando index for múltiplo de 5 ou chegar no fim das variações
+    const isActivityFinished = (index + 1) >= Math.min(vars.length, 5);
+    
+    if (isActivityFinished && isSessionMode) {
+      setTimeout(() => setShowSessionModal(true), 1200);
+    } else {
+      setTimeout(() => setIndex((i) => i + 1), 900);
+    }
   };
 
   // Marca "pulei" como pedido de ajuda (registra no log e sinaliza dificuldade)
@@ -449,6 +464,57 @@ function NeuroAtividade() {
           Pular <ChevronRight size={16} />
         </button>
       </div>
+
+      <Modal
+        isOpen={showSessionModal}
+        onClose={() => setShowSessionModal(false)}
+        title="Missão Cumprida! ⭐"
+      >
+        <div className="text-center py-4">
+          <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-success/30">
+            <CheckCircle2 size={48} className="text-success" />
+          </div>
+          <p className="text-muted-foreground mb-6">
+            Você brilhou nesta atividade! Vamos para a próxima?
+          </p>
+          
+          <div className="space-y-3">
+            <button
+              onClick={() => {
+                const nextIdx = (context.sessionIndex || 0) + 1;
+                const nextSlug = context.sessionActivities?.[nextIdx];
+                
+                if (nextSlug) {
+                  setContext({
+                    ...context,
+                    sessionIndex: nextIdx
+                  });
+                  setShowSessionModal(false);
+                  navigate({ to: `/neuro-treino/${nextSlug}` });
+                } else {
+                  // Fim da sessão
+                  setShowSessionModal(false);
+                  toast.success("Rotina de hoje concluída! Parabéns! 🌟");
+                  navigate({ to: "/neuro-treino" });
+                }
+              }}
+              className="w-full bg-primary text-primary-foreground py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform shadow-lg"
+            >
+              <Play size={24} fill="currentColor" /> CONTINUAR
+            </button>
+            
+            <button
+              onClick={() => {
+                setShowSessionModal(false);
+                navigate({ to: "/neuro-treino" });
+              }}
+              className="w-full bg-muted text-muted-foreground py-3 rounded-2xl font-bold flex items-center justify-center gap-2"
+            >
+              <Pause size={18} /> Pausar Sessão
+            </button>
+          </div>
+        </div>
+      </Modal>
     </Shell>
   );
 }
