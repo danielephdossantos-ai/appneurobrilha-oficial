@@ -23,7 +23,10 @@ import {
   Sparkles,
   BookOpen,
   Scissors,
+  Rocket,
 } from "lucide-react";
+import { AulaViewer } from "./AulaViewer";
+import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
@@ -254,6 +257,9 @@ function EditorTrabalho({
 
   // Preview inline
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
+  const [activeAulaId, setActiveAulaId] = useState<string | null>(null);
+  const [gerandoAula, setGerandoAula] = useState(false);
+  const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
 
 
   // Debounced auto-save
