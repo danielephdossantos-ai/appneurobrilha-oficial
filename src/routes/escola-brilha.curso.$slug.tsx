@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, useMemo } from "react";
+import { useAppState } from "@/core/store";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
 import { getPerfilPedagogico } from "@/escola-brilha/curso-v4/pedagogia";
 import { CartaoSondagem } from "@/escola-brilha/curso-v4/player-portugues/CartaoSondagem";

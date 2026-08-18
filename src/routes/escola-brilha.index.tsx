@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { ArrowLeft, Compass, CheckCircle2, ChevronDown, ChevronRight, Lock, Sparkles } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { Shell } from "@/components/Layout";
