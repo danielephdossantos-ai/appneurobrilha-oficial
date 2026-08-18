@@ -16,8 +16,13 @@ function extrairJSON(text: string): string {
   // Tentar encontrar o primeiro { e o último }
   const firstBrace = clean.indexOf('{');
   const lastBrace = clean.lastIndexOf('}');
+  
   if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-    return clean.slice(firstBrace, lastBrace + 1).trim();
+    const result = clean.slice(firstBrace, lastBrace + 1).trim();
+    // Validar se o que extraímos é um JSON plausível antes de retornar
+    if (result.startsWith('{') && result.endsWith('}')) {
+      return result;
+    }
   }
 
   return clean;
