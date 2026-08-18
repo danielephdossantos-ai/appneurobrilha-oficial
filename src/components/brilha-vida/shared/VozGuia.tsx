@@ -10,7 +10,7 @@ import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 export function VozGuia({
   texto,
   autoPlay = true,
-  rate = 0.9,
+  rate = 0.88,
 }: {
   texto: string;
   autoPlay?: boolean;

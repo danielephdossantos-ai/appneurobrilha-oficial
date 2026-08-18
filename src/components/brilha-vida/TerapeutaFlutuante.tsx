@@ -54,7 +54,7 @@ export function TerapeutaFlutuante({ contexto }: Props) {
     stop();
 
     try {
-      const prefacio = `[VOCÊ ESTÁ FALANDO DIRETAMENTE COM A CRIANÇA — ${activeChild.nome ?? "criança"}, ${activeChild.idade ?? "?"} anos${contexto ? `, durante a atividade ${contexto}` : ""}. Use frases muito curtas, linguagem simples e acolhedora, como uma terapeuta infantil falando ao vivo. Máximo 2 frases por resposta. Sem listas. Sem markdown.]\n\nA criança disse: "${pergunta}"`;
+      const prefacio = `[VOCÊ ESTÁ FALANDO DIRETAMENTE COM A CRIANÇA — ${activeChild.nome ?? "criança"}, ${activeChild.idade ?? "?"} anos${contexto ? `, durante a atividade ${contexto}` : ""}. Use frases muito curtas, linguagem simples e acolhedora, como uma terapeuta infantil falando ao vivo. Quando usar números isolados como 3, escreva por extenso ("três") na resposta se for parte da instrução, para garantir a leitura correta. Máximo 2 frases por resposta. Sem listas. Sem markdown.]\n\nA criança disse: "${pergunta}"`;
 
       const resposta = await callNeuroBrilhaAI({
         data: {
