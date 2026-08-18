@@ -11,7 +11,6 @@ import { getLessonsBySerie } from "@/escola-brilha/ingles-lessons-index";
 
 import { listCursos } from "@/escola-brilha/curso-v4/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
-import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
