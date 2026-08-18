@@ -241,13 +241,26 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
           
           if (!alive) return;
           
-          const { data: pags } = await supabase
+          if (!res || !res.id) {
+             throw new Error("Resposta da IA inválida");
+          }
+
+          console.log("[AulaViewer] Aula gerada/recuperada com ID:", res.id);
+
+          const { data: pags, error: errorPags } = await supabase
             .from("rb_paginas_aula")
             .select("id,ordem,tipo,titulo,conteudo")
             .eq("aula_id", res.id)
             .order("ordem", { ascending: true });
             
-          setPaginas((pags || []) as Pagina[]);
+          if (errorPags) throw errorPags;
+
+          if (pags && pags.length > 0) {
+            setPaginas(pags as Pagina[]);
+          } else {
+            console.error("[AulaViewer] Aula gerada mas sem páginas no banco. ID:", res.id);
+            toast.error("Aula gerada sem conteúdo. Tente novamente.");
+          }
         } catch (e) {
           console.error("Erro ao gerar aula sob demanda:", e);
           toast.error("Falha ao gerar aula com IA");
