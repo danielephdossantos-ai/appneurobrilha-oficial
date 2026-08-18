@@ -11,6 +11,8 @@ import {
 } from "@/modules/plano-anual/generator";
 import { motion } from "framer-motion";
 import { Calendar, Sparkles, Brain, Heart, GraduationCap } from "lucide-react";
+import { TrilhaPlanoVisual } from "@/components/planos/TrilhaPlanoVisual";
+
 
 export const Route = createFileRoute("/plano-anual")({
   head: () => ({
@@ -173,54 +175,21 @@ function PlanoAnualPage() {
         })}
       </div>
 
-      {/* Grade da semana */}
-      <div className="space-y-4">
-        {DIAS.map((label, idx) => {
-          const dia = idx + 1;
-          const blocos = porDia[dia] ?? [];
-          return (
-            <motion.div
-              key={dia}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.04 }}
-              className="rounded-2xl bg-card border border-border p-4 shadow-sm"
-            >
-              <div className="flex items-baseline justify-between mb-3">
-                <div className="font-black text-lg">{label}</div>
-                <div className="text-xs text-muted-foreground">
-                  {blocos.reduce((s, b) => s + b.minutos, 0)} min
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {blocos.map((b, i) => {
-                  const meta = FONTE_META[b.fonte];
-                  const Icon = meta.icon;
-                  return (
-                    <Link
-                      key={i}
-                      to={b.rota}
-                      className={`rounded-xl border-2 ${meta.bg} p-3 flex items-start gap-2 active:scale-[0.98] transition-transform`}
-                    >
-                      <Icon className={`h-5 w-5 shrink-0 mt-0.5 ${meta.cor}`} />
-                      <div className="min-w-0 flex-1">
-                        <div className={`text-[10px] font-black uppercase tracking-wider ${meta.cor}`}>
-                          {meta.label} · {b.minutos} min
-                          {b.prioridade === 1 && " · ★"}
-                        </div>
-                        <div className="font-black text-sm leading-tight truncate">{b.titulo}</div>
-                        <div className="text-xs text-muted-foreground line-clamp-2">
-                          {b.descricao}
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </motion.div>
-          );
-        })}
+      <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[40px] border-2 border-slate-200/50 dark:border-slate-800/50 overflow-hidden">
+        <TrilhaPlanoVisual 
+          itens={plano.blocos.filter(b => b.semana === semana).map(b => ({
+            id: `${b.dia_semana}-${b.rota}`,
+            dia_semana: b.dia_semana,
+            titulo: b.titulo,
+            rota: b.rota,
+            concluido: false,
+            trilha_label: FONTE_META[b.fonte].label,
+            minutos: b.minutos
+          }))} 
+          tipo="alfa" 
+        />
       </div>
+
     </Shell>
   );
 }
