@@ -155,8 +155,10 @@ export const Route = createFileRoute('/api/public/missao-aula-ia')({
           }));
 
           await supabase.from("rb_paginas_aula").insert(paginas);
-          if (sessionId) {
+          if (sessionId && sessionId !== 'new') {
             await supabase.from("exam_study_plans").update({ aula_id: aula.id } as any).eq("id", sessionId);
+          } else if (tipo === 'trabalho' && missaoId && missaoId !== 'new') {
+            await supabase.from("rb_trabalhos").update({ last_aula_id: aula.id } as any).eq("id", missaoId);
           }
 
           return new Response(JSON.stringify({ aulaId: aula.id, recemGerada: true }), {
