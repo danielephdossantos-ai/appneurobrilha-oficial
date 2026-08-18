@@ -9,6 +9,7 @@ import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
 import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
 import { KidButton } from "@/components/ui/KidButton";
 import { supabase } from "@/database/supabase/client";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 const MASCOT_IDS: Record<"pip" | "pipa", string> = {
   pip: "00000000-0000-0000-0000-000000000001",
@@ -90,19 +91,8 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
 
   useEffect(() => {
     if (phase !== "reveal") return;
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-    const utterance = new SpeechSynthesisUtterance(greetingSpeech);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.1;
-    utterance.lang = "pt-BR";
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
-
-    return () => {
-      window.speechSynthesis.cancel();
-    };
+    speakChunked(greetingSpeech, { pitch: 1.1 });
+    return () => stopSpeaking();
   }, [phase, greetingSpeech]);
 
   // Play a provided MP3 file if available (public/sounds/pop.mp3), otherwise fallback to Web Audio.

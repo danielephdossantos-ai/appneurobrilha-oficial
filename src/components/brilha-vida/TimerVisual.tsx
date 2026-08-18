@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { X, Play, Pause, RotateCcw } from "lucide-react";
+import { speakChunked } from "@/lib/native-tts";
 import { VozGuia } from "./shared/VozGuia";
 
 /**
@@ -37,9 +38,7 @@ export function TimerVisual({ onClose }: { onClose: () => void }) {
     if (concluido && rodando) {
       setRodando(false);
       try {
-        const u = new SpeechSynthesisUtterance("Acabou o tempo. Muito bem!");
-        u.lang = "pt-BR";
-        window.speechSynthesis.speak(u);
+        speakChunked("Acabou o tempo. Muito bem!");
       } catch {}
     }
   }, [concluido, rodando]);
