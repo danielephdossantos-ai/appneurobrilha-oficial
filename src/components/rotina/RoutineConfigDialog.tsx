@@ -68,6 +68,13 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
     },
   });
 
+  // Sincronizar data se mudar fora (calendário)
+  React.useEffect(() => {
+    if (!item && selectedDate) {
+      form.setValue("date", selectedDate);
+    }
+  }, [selectedDate, item, form]);
+
   const saveMutation = useMutation({
     mutationFn: (data: RoutineItem) => saveRoutineItemWithNotifications({ data }),
     onSuccess: () => {
