@@ -28,7 +28,7 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context: navContext } = useBackNavigation();
   const { activeChild, session } = useAppState();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
 
@@ -60,7 +60,7 @@ function AulaV4Route() {
       <PlayerV4
         aula={found.aula}
         cursoSlug={cursoSlug}
-        voltarPara={`/escola-brilha/curso/${cursoSlug}`}
+        voltarPara={navContext?.isPlanFlow ? (navContext.returnPath || "/escola-brilha") : `/escola-brilha/curso/${cursoSlug}`}
         onConcluir={() => {
           try {
             const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
@@ -70,6 +70,12 @@ function AulaV4Route() {
           } catch {
             /* ignore */
           }
+          
+          if (navContext?.isPlanFlow) {
+             handleBack(navigate);
+             return;
+          }
+
           if (!handleBack(navigate)) {
             navigate({
               to: "/escola-brilha/curso/$slug",

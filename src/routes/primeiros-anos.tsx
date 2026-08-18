@@ -212,11 +212,8 @@ function PrimeirosAnosPage() {
             )}
           </Card>
 
-          <RotinaDiaria
-            childId={childId}
-            itensHoje={itens.filter((i) => i.dia_semana === hoje)}
-            onToggle={alternar}
-          />
+          {/* A RotinaDiaria agora está integrada na jornada visual da TrilhaPlanoVisual para uma experiência contínua */}
+
 
           <div className="flex gap-2 overflow-x-auto pb-1">
             {Array.from({ length: plano.semanas_totais }, (_, i) => i + 1).map((wk) => (

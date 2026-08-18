@@ -16,6 +16,15 @@ export interface NavigationContext {
   sessionActivities?: string[]; // Slugs da sessão atual
   sessionIndex?: number;
   timestamp: number;
+  
+  // Novos campos para controle de planos (Requisito 9)
+  planId?: string;
+  week?: number;
+  day?: number;
+  lessonId?: string;
+  position?: number;
+  returnPath?: string;
+  isPlanFlow?: boolean; 
 }
 
 interface NavigationStore {
@@ -56,6 +65,12 @@ export function useBackNavigation() {
   };
 
   const handleBack = (navigate: any) => {
+    if (context?.returnPath) {
+      navigate({ to: context.returnPath });
+      clearContext();
+      return true;
+    }
+
     if (context?.originRoute) {
       const { originRoute, originParams, originSearch } = context;
       // Navega para a rota de origem

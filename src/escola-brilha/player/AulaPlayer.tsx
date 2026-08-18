@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square, ChevronRight } from "lucide-react";
 import { PERSONAGENS } from "../mascotes-personagens";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 
 
 import { useNavigate } from "@tanstack/react-router";
@@ -93,6 +94,8 @@ export function AulaPlayer({
 
   const navigate = useNavigate();
   const { activeChild } = useAppState();
+  const { handleBack, context: navContext } = useBackNavigation();
+  const isPlanFlow = navContext?.isPlanFlow;
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
   const BLOCOS = useMemo(
     () =>
@@ -227,9 +230,31 @@ export function AulaPlayer({
         _desempenho: desempenho,
         _tipo: "aula",
       });
+      // Se vier de um plano, o onConcluir pode ajudar na navegação automática
       onConcluir?.({ codigo: aula.codigo, desempenho });
     }
   };
+
+  // Se a aula já estiver concluída, mostramos uma tela de sucesso customizada se vier do plano
+  if (progresso.concluida && !emDiagnostico && isPlanFlow) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-[#0d1f55] text-white">
+        <div className="w-24 h-24 rounded-full bg-emerald-500 flex items-center justify-center mb-6 shadow-lg">
+          <CheckCircle2 className="w-16 h-16 text-white" />
+        </div>
+        <h2 className="text-3xl font-black mb-2">Aula Concluída! ✓</h2>
+        <p className="text-white/70 mb-8 max-w-md">
+          Muito bem! Você terminou as atividades desta aula programada.
+        </p>
+        <button
+          onClick={() => handleBack(navigate)}
+          className="btn-tap px-8 py-4 rounded-3xl bg-[#FFC93C] text-[#0d1f55] font-black flex items-center gap-2"
+        >
+          Voltar para o Plano <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -253,11 +278,15 @@ export function AulaPlayer({
       >
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           <button
-            onClick={() => navigate({ to: "/escola-brilha" })}
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/escola-brilha" });
+              }
+            }}
             className={`h-10 w-10 rounded-xl grid place-items-center active:scale-95 ${
               isPipEi ? "bg-purple-100 text-purple-700" : "bg-white/15"
             }`}
-            aria-label="Voltar"
+            aria-label={isPlanFlow ? "Voltar para o plano" : "Voltar"}
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
@@ -274,6 +303,7 @@ export function AulaPlayer({
             )}
             <div className={`text-sm font-black truncate ${isPipEi ? "text-purple-800" : ""}`}>
               {aula.titulo}
+              {isPlanFlow && <span className="ml-2 text-[10px] opacity-60">(Modo Plano)</span>}
             </div>
           </div>
           <button
