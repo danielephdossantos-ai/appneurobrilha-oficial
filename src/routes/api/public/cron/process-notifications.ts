@@ -14,12 +14,10 @@ export const Route = createFileRoute('/api/public/cron/process-notifications')({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        // No futuro, verificar header de autorização para cron do Supabase
         const { supabase } = await import("@/integrations/supabase/client");
         
-        // 1. Buscar notificações agendadas pendentes que já passaram do horário
         const { data: notifications, error } = await supabase
-          .from("scheduled_notifications" as any)
+          .from("scheduled_notifications")
           .select(`
             *,
             push_subscriptions (*)
@@ -34,18 +32,20 @@ export const Route = createFileRoute('/api/public/cron/process-notifications')({
 
         const results = [];
 
-        for (const notif of (notifications || [])) {
+        for (const notif of (notifications as any[] || [])) {
           const subscriptions = notif.push_subscriptions;
-          if (!subscriptions || subscriptions.length === 0) {
+          if (!subscriptions || (Array.isArray(subscriptions) && subscriptions.length === 0)) {
              await supabase
-              .from("scheduled_notifications" as any)
-              .update({ sent_at: new Date().toISOString(), error_message: "No subscriptions found" })
+              .from("scheduled_notifications")
+              .update({ sent_at: new Date().toISOString(), error_message: "No subscriptions found" } as any)
               .eq("id", notif.id);
              continue;
           }
 
           let anySuccess = false;
-          for (const sub of (Array.isArray(subscriptions) ? subscriptions : [subscriptions])) {
+          const subsArray = Array.isArray(subscriptions) ? subscriptions : [subscriptions];
+          
+          for (const sub of subsArray) {
             try {
               const pushSubscription = {
                 endpoint: sub.endpoint,
@@ -68,13 +68,12 @@ export const Route = createFileRoute('/api/public/cron/process-notifications')({
             }
           }
 
-          // Marcar como enviado
           await supabase
-            .from("scheduled_notifications" as any)
+            .from("scheduled_notifications")
             .update({ 
               sent_at: new Date().toISOString(), 
               error_message: anySuccess ? null : "Failed to send to any subscription" 
-            })
+            } as any)
             .eq("id", notif.id);
           
           results.push({ id: notif.id, success: anySuccess });
