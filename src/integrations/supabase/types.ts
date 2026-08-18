@@ -6610,6 +6610,7 @@ export type Database = {
           ordem: number
           titulo: string
           updated_at: string
+          usage_count: number | null
           video_url: string | null
         }
         Insert: {
@@ -6623,6 +6624,7 @@ export type Database = {
           ordem?: number
           titulo: string
           updated_at?: string
+          usage_count?: number | null
           video_url?: string | null
         }
         Update: {
@@ -6636,6 +6638,7 @@ export type Database = {
           ordem?: number
           titulo?: string
           updated_at?: string
+          usage_count?: number | null
           video_url?: string | null
         }
         Relationships: [
