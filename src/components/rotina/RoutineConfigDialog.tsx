@@ -70,7 +70,7 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
   });
 
   // Sincronizar data se mudar fora (calendário)
-  React.useEffect(() => {
+  useEffect(() => {
     if (!item && selectedDate) {
       form.setValue("date", selectedDate);
     }
