@@ -52,7 +52,10 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
 
   const form = useForm<RoutineItem>({
     resolver: zodResolver(routineItemSchema),
-    defaultValues: item || {
+    defaultValues: item ? {
+      ...item,
+      durationMinutes: item.durationMinutes || 30,
+    } : {
       childId,
       title: "",
       type: "estudo",
@@ -60,7 +63,7 @@ export function RoutineConfigDialog({ isOpen, onClose, childId, item, selectedDa
       durationMinutes: 30,
       reminderEnabled: true,
       reminderMinutesBefore: 0,
-      status: "pendente",
+      status: "pendente" as const,
       source: "manual",
       date: selectedDate,
     },

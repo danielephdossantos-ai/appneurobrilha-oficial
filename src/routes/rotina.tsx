@@ -64,6 +64,9 @@ function Rotina() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const dateStr = format(selectedDate, "yyyy-MM-dd");
 
+  const [isConfigOpen, setIsConfigOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<RoutineItem | null>(null);
+
   const { data: routine = [], isLoading } = useQuery({
     queryKey: ["routine", activeChild?.id, dateStr],
     queryFn: () => getRoutineItems({ data: { childId: activeChild!.id, date: dateStr } }),
@@ -91,6 +94,14 @@ function Rotina() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["routine"] });
       toast.success("Status atualizado!");
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => deleteRoutineItem({ data: { id } }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["routine"] });
+      toast.success("Atividade removida!");
     },
   });
 
@@ -137,9 +148,18 @@ function Rotina() {
           title="Minha Rotina" 
           subtitle={isToday(selectedDate) ? "O que temos para hoje?" : format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
         />
-        <Link to="/painel-pais" className="p-2 rounded-full hover:bg-muted transition-colors">
-          <Settings className="h-6 w-6 text-muted-foreground" />
-        </Link>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => {
+              setEditingItem(null);
+              setIsConfigOpen(true);
+            }}
+            className="p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 transition-colors flex items-center gap-2 font-black text-sm"
+          >
+            <Settings className="h-5 w-5" />
+            CONFIGURAR
+          </button>
+        </div>
       </div>
 
       <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
@@ -165,9 +185,15 @@ function Rotina() {
           <div className="text-4xl mb-4">🌈</div>
           <h3 className="font-bold text-lg mb-2">Nenhuma atividade planejada</h3>
           <p className="text-muted-foreground mb-6">Que tal adicionar algo especial à rotina?</p>
-          <Link to="/painel-pais" className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2">
+          <button 
+            onClick={() => {
+              setEditingItem(null);
+              setIsConfigOpen(true);
+            }}
+            className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2"
+          >
              Configurar Rotina
-          </Link>
+          </button>
         </Card>
       ) : (
         <div className="space-y-3">
@@ -218,6 +244,15 @@ function Rotina() {
                   >
                     {getStatusIcon(item)}
                   </button>
+                  <button 
+                    onClick={() => {
+                      setEditingItem(item);
+                      setIsConfigOpen(true);
+                    }}
+                    className="p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Settings className="h-4 w-4 text-muted-foreground" />
+                  </button>
                 </div>
               </div>
             );
@@ -239,6 +274,14 @@ function Rotina() {
            ADICIONAR À ROTINA
         </button>
       </Card>
+
+      <RoutineConfigDialog
+        isOpen={isConfigOpen}
+        onClose={() => setIsConfigOpen(false)}
+        childId={activeChild.id}
+        item={editingItem}
+        selectedDate={dateStr}
+      />
     </Shell>
   );
 }
