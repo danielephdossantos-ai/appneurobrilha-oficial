@@ -526,6 +526,7 @@ function EditorTrabalho({
       return;
     }
     setGerandoAula(true);
+    setActiveAulaId(null);
     try {
       const res = await gerarAulaFn({
         data: {
@@ -538,9 +539,16 @@ function EditorTrabalho({
       });
       if (res.aulaId) {
         setActiveAulaId(res.aulaId);
+        if (res.recemGerada) {
+          toast.success(`✨ Professor Brilha criou um guia de estudo! (${res.fonte || 'IA'})`);
+        }
+      } else {
+        throw new Error("Falha ao criar missão");
       }
-    } catch (e) {
-      toast.error("Não consegui preparar a aula com IA");
+    } catch (e: any) {
+      console.error("Gerar Missão IA Trabalho:", e);
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA(e.message || "erro", "Missão Trabalho");
     } finally {
       setGerandoAula(false);
     }
