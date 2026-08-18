@@ -26,7 +26,7 @@ import {
   Rocket,
 } from "lucide-react";
 import { AulaViewer } from "./AulaViewer";
-import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
+// import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
@@ -259,7 +259,47 @@ function EditorTrabalho({
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
   const [activeAulaId, setActiveAulaId] = useState<string | null>(null);
   const [gerandoAula, setGerandoAula] = useState(false);
-  const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
+  // const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
+  const iniciarMissaoIA = async () => {
+    if (!childId || !tema.trim()) {
+      toast.error("Defina o tema do trabalho primeiro");
+      return;
+    }
+    setGerandoAula(true);
+    setActiveAulaId(null);
+    try {
+      const response = await fetch("/api/public/missao-aula-ia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          missaoId: idAtual || "new",
+          topico: tema,
+          materia: materia || "Trabalho Escolar",
+          criancaId: childId,
+          tipo: "trabalho"
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.erro || `Erro HTTP ${response.status}`);
+      }
+
+      const res = await response.json();
+      if (res.aulaId) {
+        setActiveAulaId(res.aulaId);
+        toast.success(`✨ Professor Brilha criou um guia de estudo!`);
+      } else {
+        throw new Error("Falha ao criar missão");
+      }
+    } catch (e: any) {
+      console.error("Gerar Missão IA Trabalho:", e);
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA(e.message || "erro", "Missão Trabalho");
+    } finally {
+      setGerandoAula(false);
+    }
+  };
 
 
   // Debounced auto-save
@@ -520,39 +560,7 @@ function EditorTrabalho({
     setFontes((f) => f.filter((x) => x.url !== url));
   }
 
-  async function iniciarMissaoIA() {
-    if (!childId || !tema.trim()) {
-      toast.error("Defina o tema do trabalho primeiro");
-      return;
-    }
-    setGerandoAula(true);
-    setActiveAulaId(null);
-    try {
-      const res = await gerarAulaFn({
-        data: {
-          missaoId: idAtual || "new",
-          topico: tema,
-          materia: materia || "Trabalho Escolar",
-          criancaId: childId,
-          tipo: "trabalho"
-        }
-      });
-      if (res.aulaId) {
-        setActiveAulaId(res.aulaId);
-        if (res.recemGerada) {
-          toast.success(`✨ Professor Brilha criou um guia de estudo! (${res.fonte || 'IA'})`);
-        }
-      } else {
-        throw new Error("Falha ao criar missão");
-      }
-    } catch (e: any) {
-      console.error("Gerar Missão IA Trabalho:", e);
-      const { notificarErroIA } = await import("@/lib/notify-ai-error");
-      notificarErroIA(e.message || "erro", "Missão Trabalho");
-    } finally {
-      setGerandoAula(false);
-    }
-  }
+  // iniciarMissaoIA movido para o topo para evitar ReferenceError de gerarAulaFn
 
   async function salvar() {
     if (!childId) {
@@ -779,7 +787,7 @@ function EditorTrabalho({
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
           <button
-            onClick={iniciarMissaoIA}
+            onClick={() => iniciarMissaoIA()}
             disabled={gerandoAula}
             className="text-xs font-black bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
             title="A IA prepara uma aula completa sobre seu tema"
