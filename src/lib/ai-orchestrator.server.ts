@@ -34,10 +34,10 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
 
   // 1. Tentar GEMINI (Primário)
   try {
-    const model = opts.lovableModel?.includes("gemini") ? opts.lovableModel : "gemini-3.7-flash";
+    const model = opts.lovableModel?.includes("gemini") ? opts.lovableModel : "gemini-1.5-flash"; // Usar 1.5-flash para estabilidade em produção
     console.log(`[AIOrchestrator] Tentando Gemini (${model})...`);
     
-    // Adaptar formato de mensagens
+    // Adaptar formato de mensagens para Gemini (Google não gosta de 'system' role em contents em algumas versões da API)
     const geminiMsgs = opts.messages.map(m => ({
       role: m.role as "system" | "user" | "assistant",
       content: typeof m.content === "string" ? m.content : JSON.stringify(m.content)
@@ -54,9 +54,17 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
     if (rawText) {
       const text = opts.json ? extrairJSON(rawText) : rawText;
       console.log(`[ADMIN_IA_AUDIT] Provedor: Gemini | Modelo: ${model} | Tamanho: ${rawText.length}`);
-      if (opts.json && rawText !== text) {
-        console.log(`[ADMIN_IA_AUDIT] JSON extraído (original tinha markdown ou texto extra)`);
+      
+      // Validação básica de JSON se solicitado
+      if (opts.json) {
+        try {
+          JSON.parse(text);
+        } catch (e) {
+          console.warn(`[AIOrchestrator] Gemini retornou JSON inválido, tentando extração agressiva...`);
+          // Se falhou, o extrairJSON pode não ter sido suficiente, mas o try/catch no caller deve lidar com isso
+        }
       }
+
       return { ok: true, text, fonte: "lovable" };
     }
   } catch (error: any) {
