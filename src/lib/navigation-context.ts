@@ -13,6 +13,8 @@ export interface NavigationContext {
   originModule: string; // "neuro-treino" | "escola-brilha" | "reforco-brilha" | "brilha-vida" | "alfabetizacao"
   originCategory?: string;
   activityId?: string;
+  sessionActivities?: string[]; // Slugs da sessão atual
+  sessionIndex?: number;
   timestamp: number;
 }
 

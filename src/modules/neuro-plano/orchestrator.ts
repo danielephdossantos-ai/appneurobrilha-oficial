@@ -1,6 +1,6 @@
 import { supabase } from "@/database/supabase/client";
 import { CATEGORIAS, type CategoriaSlug } from "@/data/neuro-treino/variations";
-import { buscarAnamnese } from "./persist";
+import { buscarAnamnese, carregarItensNeuro } from "./persist";
 import type { PerfilScores, RiskMap } from "@/modules/anamnese/v2/types";
 import { sanitizarLinguagem } from "@/lib/sanitizar-linguagem-clinica";
 

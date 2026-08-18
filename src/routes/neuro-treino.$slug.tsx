@@ -1,5 +1,4 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
-import { useBackNavigation } from "@/lib/navigation-context";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
@@ -19,9 +18,13 @@ import {
   VolumeX,
   X,
   Zap,
+  CheckCircle2,
+  Play,
+  Pause,
 } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
+import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import {
   CATEGORIAS,
   VARIATIONS,
@@ -77,7 +80,10 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context } = useBackNavigation();
+  const setNavContext = useNavigationStore(s => s.setContext);
+  const [showSessionModal, setShowSessionModal] = useState(false);
+  const isSessionMode = context?.originCategory === "meu-plano" && !!context.sessionActivities;
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const { speak, stop, isSpeaking } = usePipVoice();
@@ -330,7 +336,17 @@ function NeuroAtividade() {
       toast(frase);
       if (voiceOn) speak(frase);
     }
-    setTimeout(() => setIndex((i) => i + 1), 900);
+    
+    // Se completou a série de variações desta atividade (index atinge vars.length - 1 ou similar)
+    // No Neuro-Treino, as sessões costumam ter um fim definido. 
+    // Vamos disparar o modal de próxima atividade quando index for múltiplo de 5 ou chegar no fim das variações
+    const isActivityFinished = (index + 1) >= Math.min(vars.length, 5);
+    
+    if (isActivityFinished && isSessionMode) {
+      setTimeout(() => setShowSessionModal(true), 1200);
+    } else {
+      setTimeout(() => setIndex((i) => i + 1), 900);
+    }
   };
 
   // Marca "pulei" como pedido de ajuda (registra no log e sinaliza dificuldade)
@@ -449,7 +465,69 @@ function NeuroAtividade() {
           Pular <ChevronRight size={16} />
         </button>
       </div>
+
+      <SessionModal
+        isOpen={showSessionModal}
+        onClose={() => setShowSessionModal(false)}
+        context={context}
+        setNavContext={setNavContext}
+        navigate={navigate}
+      />
     </Shell>
+  );
+}
+
+function SessionModal({ isOpen, onClose, context, setNavContext, navigate }: any) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <div className="bg-card border-2 border-primary/20 w-full max-w-md rounded-[2.5rem] p-8 shadow-2xl animate-in zoom-in-95 duration-200">
+        <div className="text-center py-4">
+          <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-success/30">
+            <CheckCircle2 size={48} className="text-success" />
+          </div>
+          <h2 className="text-2xl font-black mb-2">Missão Cumprida! ⭐</h2>
+          <p className="text-muted-foreground mb-8">
+            Você brilhou nesta atividade! Vamos para a próxima?
+          </p>
+          
+          <div className="space-y-3">
+            <button
+              onClick={() => {
+                const nextIdx = (context?.sessionIndex || 0) + 1;
+                const nextSlug = context?.sessionActivities?.[nextIdx];
+                
+                if (nextSlug) {
+                  setNavContext({
+                    ...context,
+                    sessionIndex: nextIdx
+                  });
+                  onClose();
+                  navigate({ to: `/neuro-treino/${nextSlug}` });
+                } else {
+                  onClose();
+                  toast.success("Rotina de hoje concluída! Parabéns! 🌟");
+                  navigate({ to: "/neuro-treino" });
+                }
+              }}
+              className="w-full bg-primary text-primary-foreground py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform shadow-lg"
+            >
+              <Play size={24} fill="currentColor" /> CONTINUAR
+            </button>
+            
+            <button
+              onClick={() => {
+                onClose();
+                navigate({ to: "/neuro-treino" });
+              }}
+              className="w-full bg-muted text-muted-foreground py-3 rounded-2xl font-bold flex items-center justify-center gap-2"
+            >
+              <Pause size={18} /> Pausar Sessão
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
