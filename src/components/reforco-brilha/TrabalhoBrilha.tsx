@@ -1122,6 +1122,13 @@ function EditorTrabalho({
         }}
       />
     )}
+    {activeAulaId && (
+      <AulaViewer
+        aulaId={activeAulaId}
+        titulo={`Revisão: ${tema}`}
+        onClose={() => setActiveAulaId(null)}
+      />
+    )}
   </>
 
   );
