@@ -546,39 +546,7 @@ function EditorTrabalho({
     setFontes((f) => f.filter((x) => x.url !== url));
   }
 
-  async function iniciarMissaoIA() {
-    if (!childId || !tema.trim()) {
-      toast.error("Defina o tema do trabalho primeiro");
-      return;
-    }
-    setGerandoAula(true);
-    setActiveAulaId(null);
-    try {
-      const res = await gerarAulaFn({
-        data: {
-          missaoId: idAtual || "new",
-          topico: tema,
-          materia: materia || "Trabalho Escolar",
-          criancaId: childId,
-          tipo: "trabalho"
-        }
-      });
-      if (res.aulaId) {
-        setActiveAulaId(res.aulaId);
-        if (res.recemGerada) {
-          toast.success(`✨ Professor Brilha criou um guia de estudo! (${res.fonte || 'IA'})`);
-        }
-      } else {
-        throw new Error("Falha ao criar missão");
-      }
-    } catch (e: any) {
-      console.error("Gerar Missão IA Trabalho:", e);
-      const { notificarErroIA } = await import("@/lib/notify-ai-error");
-      notificarErroIA(e.message || "erro", "Missão Trabalho");
-    } finally {
-      setGerandoAula(false);
-    }
-  }
+  // iniciarMissaoIA movido para o topo para evitar ReferenceError de gerarAulaFn
 
   async function salvar() {
     if (!childId) {
