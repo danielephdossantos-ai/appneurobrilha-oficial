@@ -51,7 +51,10 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
   video: { label: "Vídeo", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   imagem: { label: "Imagem", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   passo_a_passo: { label: "Passo a passo", icon: Hand, cor: "from-sky-400 to-blue-500" },
+  desafio: { label: "Desafio", icon: Target, cor: "from-orange-400 to-red-500" },
+  revisao: { label: "Revisão", icon: CheckCircle2, cor: "from-emerald-400 to-teal-500" },
 };
+
 
 function speak(text: string) {
   stopSpeaking();
