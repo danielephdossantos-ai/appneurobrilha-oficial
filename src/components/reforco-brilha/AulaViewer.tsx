@@ -54,7 +54,7 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
 
 function speak(text: string) {
   stopSpeaking();
-  speakChunked(text, { rate: 0.95, pitch: 1 });
+  speakChunked(text, { rate: 0.88, pitch: 1 });
 }
 
 
