@@ -731,6 +731,56 @@ export const tecnicasPedagogicas = pgTable("tecnicas_pedagogicas", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const routineItems = pgTable("routine_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id").references(() => children.id, { onDelete: "cascade" }),
+  parentId: uuid("parent_id").notNull(),
+  title: text("title").notNull(),
+  description: text("description"),
+  type: text("type").notNull(),
+  startTime: time("start_time").notNull(),
+  durationMinutes: integer("duration_minutes").default(30),
+  date: date("date"),
+  recurrenceDays: integer("recurrence_days").array(),
+  reminderEnabled: boolean("reminder_enabled").default(false),
+  reminderMinutesBefore: integer("reminder_minutes_before").default(0),
+  status: text("status").default("pendente"),
+  source: text("source").default("manual"),
+  sourceId: text("source_id"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const scheduledNotifications = pgTable("scheduled_notifications", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull(),
+  childId: uuid("child_id").references(() => children.id, { onDelete: "cascade" }),
+  routineItemId: uuid("routine_item_id").references(() => routineItems.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  scheduledFor: timestamp("scheduled_for").notNull(),
+  sentAt: timestamp("sent_at"),
+  errorMessage: text("error_message"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const pushSubscriptions = pgTable("push_subscriptions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull(),
+  childId: uuid("child_id").references(() => children.id, { onDelete: "cascade" }),
+  endpoint: text("endpoint").notNull(),
+  p256dh: text("p256dh").notNull(),
+  auth: text("auth").notNull(),
+  userAgent: text("user_agent"),
+  lastSentAt: timestamp("last_sent_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const habilidadeTecnica = pgTable("habilidade_tecnica", {
   id: uuid("id").primaryKey().defaultRandom(),
   codigoBncc: text("codigo_bncc").notNull(),
