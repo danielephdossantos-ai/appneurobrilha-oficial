@@ -180,7 +180,8 @@ function MissaoProva() {
       }
     } catch (error) {
       console.error("Erro ao gerar aula:", error);
-      toast.error("Erro ao preparar sua missão de estudo.");
+      const { notificarErroIA } = await import("@/lib/notify-ai-error");
+      notificarErroIA("erro", "Missão Prova");
       setIsStudying(false);
     }
   };
