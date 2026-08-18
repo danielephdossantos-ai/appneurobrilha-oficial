@@ -29,7 +29,6 @@ import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
-import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
 import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
@@ -195,11 +194,6 @@ const McpRoute = McpRouteImport.update({
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
   id: '/missao-prova',
   path: '/missao-prova',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
-  id: '/missao-tarefa',
-  path: '/missao-tarefa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
@@ -590,7 +584,6 @@ export interface FileRoutesByFullPath {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -678,7 +671,6 @@ export interface FileRoutesByTo {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -768,7 +760,6 @@ export interface FileRoutesById {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -859,7 +850,6 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
-    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -947,7 +937,6 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
-    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -1036,7 +1025,6 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
-    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -1126,7 +1114,6 @@ export interface RootRouteChildren {
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
   McpRoute: typeof McpRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
-  MissaoTarefaRoute: typeof MissaoTarefaRoute
   MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRouteWithChildren
@@ -1325,13 +1312,6 @@ declare module '@tanstack/react-router' {
       path: '/missao-prova'
       fullPath: '/missao-prova'
       preLoaderRoute: typeof MissaoProvaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/missao-tarefa': {
-      id: '/missao-tarefa'
-      path: '/missao-tarefa'
-      fullPath: '/missao-tarefa'
-      preLoaderRoute: typeof MissaoTarefaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missao-trabalho': {
@@ -1879,7 +1859,6 @@ const rootRouteChildren: RootRouteChildren = {
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
   McpRoute: McpRoute,
   MissaoProvaRoute: MissaoProvaRoute,
-  MissaoTarefaRoute: MissaoTarefaRoute,
   MissaoTrabalhoRoute: MissaoTrabalhoRoute,
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRouteWithChildren,
