@@ -162,12 +162,20 @@ function MissaoProva() {
     setCurrentSession(session);
     setCurrentMission(mission);
     setActiveAulaId(null);
-
+    
+    // 0. Se já houver aula_id no plano de estudo, carregar direto
+    if (session.aula_id) {
+      console.log("[Persistência] Aula já vinculada encontrada:", session.aula_id);
+      setActiveAulaId(session.aula_id);
+      return;
+    }
+    
     try {
-      // 1. Verificar se esta sessão já tem uma aula vinculada (opcional, já feito no serverFn por título)
+      // 1. Chamar geração (o serverFn cuidará do reuso por título se não houver aula_id, ou gerará nova)
       const res = await gerarAulaFn({
         data: {
           missaoId: mission.id,
+          sessionId: session.id, // Enviar ID da sessão para o serverFn persistir o vínculo
           topico: session.title,
           materia: mission.subject,
           criancaId: activeChild.id,
