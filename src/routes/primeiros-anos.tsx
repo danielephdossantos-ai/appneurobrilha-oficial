@@ -24,6 +24,8 @@ import {
   type PlanoSalvo,
 } from "@/modules/primeiros-anos/persist";
 import { RotinaDiaria } from "@/components/literacy/RotinaDiaria";
+import { TrilhaPlanoVisual } from "@/components/planos/TrilhaPlanoVisual";
+
 
 export const Route = createFileRoute("/primeiros-anos")({
   head: () => ({
@@ -235,55 +237,14 @@ function PrimeirosAnosPage() {
             ))}
           </div>
 
-          <div className="space-y-4">
-            {Array.from({ length: dias }, (_, i) => i + 1).map((dia) => {
-              const lista = porDia.get(dia) ?? [];
-              const ehHoje = dia === hoje;
-              return (
-                <section key={dia}>
-                  <h2 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-2">
-                    {DIAS_LABEL[dia]}
-                    {ehHoje && " · hoje"}
-                  </h2>
-                  {lista.length === 0 ? (
-                    <Card className="text-sm text-muted-foreground">Dia livre 🌿</Card>
-                  ) : (
-                    <div className="space-y-2">
-                      {lista.map((item) => (
-                        <Card
-                          key={item.id}
-                          className={`flex items-center gap-3 ${ehHoje ? "border-primary/40" : ""} ${
-                            item.concluido ? "opacity-60" : ""
-                          }`}
-                        >
-                          <button
-                            onClick={() => alternar(item)}
-                            aria-label={item.concluido ? "Desmarcar aula" : "Marcar como feita"}
-                            className="btn-tap shrink-0"
-                          >
-                            {item.concluido ? (
-                              <CheckCircle2 className="h-6 w-6 text-primary" />
-                            ) : (
-                              <Circle className="h-6 w-6 text-muted-foreground" />
-                            )}
-                          </button>
-                          <Link to={item.rota} className="flex-1 min-w-0">
-                            <div className="text-[11px] font-black uppercase tracking-wider text-primary flex items-center gap-1">
-                              <BookOpenCheck className="h-3.5 w-3.5" />
-                              {item.trilha_label}
-                              {item.fase ? ` · ${item.fase}` : ""}
-                            </div>
-                            <div className="font-bold break-words">{item.titulo}</div>
-                          </Link>
-                          <Pill>{item.minutos} min</Pill>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              );
-            })}
+          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-[40px] border-2 border-slate-200/50 dark:border-slate-800/50 overflow-hidden">
+            <TrilhaPlanoVisual 
+              itens={itens} 
+              onToggle={alternar} 
+              tipo="alfa" 
+            />
           </div>
+
 
           <p className="text-xs text-muted-foreground text-center">
             As aulas de hoje também aparecem na agenda de estudo da criança.
