@@ -745,6 +745,15 @@ function EditorTrabalho({
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
           <button
+            onClick={iniciarMissaoIA}
+            disabled={gerandoAula}
+            className="text-xs font-black bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
+            title="A IA prepara uma aula completa sobre seu tema"
+          >
+            {gerandoAula ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Rocket className="h-3.5 w-3.5" />}
+            Missão IA
+          </button>
+          <button
             onClick={rodarAnalise}
             disabled={analisando}
             className="text-xs font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
@@ -798,6 +807,15 @@ function EditorTrabalho({
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-4">
         {/* Documento + edição */}
+        {activeAulaId && (
+          <div className="lg:col-span-2">
+            <AulaViewer
+              aulaId={activeAulaId}
+              titulo={`Missão: ${tema}`}
+              onClose={() => setActiveAulaId(null)}
+            />
+          </div>
+        )}
         <div className="space-y-3">
           <div className="grid sm:grid-cols-2 gap-2">
             <input
