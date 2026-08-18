@@ -689,7 +689,15 @@ function EscolaBrilhaCatalogo() {
                                     </Link>
                                   ) : (
                                     <div key={h.codigo}>{Card}</div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
                         );
+                      })()}
+                    </div>
+                  )}
                       })()}
                     </div>
                   )}
