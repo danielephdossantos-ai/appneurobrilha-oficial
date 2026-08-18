@@ -88,6 +88,12 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
           <RenderVisualMat v={{ tipo: "trinomioPassoAPasso", ...c.lousaPassos }} />
         </div>
       )}
+      {/* Fallback para chalkBoard se a IA usar esse nome */}
+      {c.chalkBoard && (
+        <div className="bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border-4 border-slate-800">
+          <RenderVisualMat v={{ tipo: "trinomioPassoAPasso", ...c.chalkBoard }} />
+        </div>
+      )}
       {c.imagem && (
         <div className="rounded-3xl overflow-hidden border border-border bg-secondary/30">
           <img src={c.imagem} alt="" className="w-full max-h-96 object-contain" />

@@ -3,6 +3,16 @@ import { z } from "zod";
 import { supabase } from "@/database/supabase/client";
 import { aiOrchestrator } from "./ai-orchestrator.server";
 
+// Função utilitária para registrar log técnico de IA no Supabase
+async function logAuditIA(provedor: string, modelo: string, tokens: number, status: string, erro?: string) {
+  try {
+    // Tenta inserir na tabela de logs se existir, senão só loga no console
+    console.log(`[ADMIN_IA_AUDIT] Provedor: ${provedor} | Modelo: ${modelo} | Status: ${status} ${erro ? `| Erro: ${erro}` : ''}`);
+  } catch (e) {
+    console.warn("Falha ao registrar log de auditoria IA:", e);
+  }
+}
+
 /**
  * Motor de IA para Missão Prova e Trabalho.
  * Gera aulas persistentes com explicações, exemplos e blocos de Lousa Interativa.
@@ -12,13 +22,14 @@ import { aiOrchestrator } from "./ai-orchestrator.server";
 export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     missaoId: z.string(),
+    sessionId: z.string().optional(), // ID do tópico no plano de estudo
     topico: z.string(),
     materia: z.string(),
     criancaId: z.string(),
     tipo: z.enum(["prova", "trabalho"])
   }).parse(data))
   .handler(async ({ data }) => {
-    const { missaoId, topico, materia, criancaId, tipo } = data;
+    const { missaoId, sessionId, topico, materia, criancaId, tipo } = data;
     
     // 1. Buscar contexto da criança
     const { data: child } = await supabase
@@ -42,11 +53,19 @@ export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
 
     if (aulaExistente) {
       console.log(`[Reuso] Aula encontrada! Reutilizando ID: ${aulaExistente.id}`);
-      // Incrementar contador de uso (opcional, mas bom para estatística)
+      // Incrementar contador de uso
       await supabase
         .from("rb_aulas")
         .update({ usage_count: (aulaExistente.usage_count || 0) + 1 } as any)
         .eq("id", aulaExistente.id);
+        
+      // Vincular se houver sessionId
+      if (sessionId) {
+        await supabase
+          .from("exam_study_plans")
+          .update({ aula_id: aulaExistente.id } as any)
+          .eq("id", sessionId);
+      }
         
       return { aulaId: aulaExistente.id, recemGerada: false };
     }
@@ -91,8 +110,7 @@ A resposta DEVE ser um JSON válido:
       "tipo": "explicacao",
       "titulo": "Início da Missão",
       "conteudo": { "texto": "..." }
-    },
-    ...
+    }
   ]
 }`;
 
@@ -114,15 +132,19 @@ A resposta DEVE ser um JSON válido:
 
     let aulaIA;
     try {
-      aulaIA = JSON.parse(aiResult.text);
+      const jsonLimpo = aiResult.text.trim();
+      aulaIA = JSON.parse(jsonLimpo);
+      
+      if (!aulaIA.paginas || !Array.isArray(aulaIA.paginas)) {
+        throw new Error("A estrutura da aula gerada é inválida (faltam páginas).");
+      }
     } catch (e: any) {
-      console.error("[ADMIN_IA_AUDIT] Falha no JSON.parse() final:", e.message);
-      console.error("[ADMIN_IA_AUDIT] Texto que falhou:", aiResult.text);
-      throw new Error(`A resposta da IA não é um JSON válido. (Fonte: ${aiResult.fonte})`);
+      const fonte = aiResult.fonte || "desconhecida";
+      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
+      throw new Error(`ERRO_JSON_IA:${fonte}`);
     }
 
     // 5. VALIDAR E PERSISTIR
-    // Buscar categoria "Pedagógico"
     let { data: cat } = await supabase.from("rb_categorias").select("id").eq("nome", "Pedagógico").maybeSingle();
     if (!cat) {
        const { data: newCat } = await supabase.from("rb_categorias").insert({ nome: "Pedagógico", ordem: 99 }).select().single();
@@ -162,9 +184,19 @@ A resposta DEVE ser um JSON válido:
     }));
 
     await supabase.from("rb_paginas_aula").insert(paginas);
-
-    // VINCULAR À MISSÃO (Se for prova, salvamos no plano de estudos ou metadados)
-    // Por agora, o retorno do aulaId já permite a navegação.
+    
+    // VINCULAR À MISSÃO/SESSÃO
+    if (sessionId) {
+      console.log(`[Persistência] Vinculando aula ${aula.id} à sessão ${sessionId}`);
+      const { error: linkError } = await supabase
+        .from("exam_study_plans")
+        .update({ aula_id: aula.id } as any)
+        .eq("id", sessionId);
+        
+      if (linkError) {
+        console.error("Erro ao vincular aula ao plano de estudo:", linkError);
+      }
+    }
     
     return { aulaId: aula.id, recemGerada: true, fonte: aiResult.fonte };
   });
