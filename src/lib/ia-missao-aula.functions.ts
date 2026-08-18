@@ -126,9 +126,9 @@ A resposta DEVE ser um JSON válido:
       temperature: 0.6
     });
 
-    if (!aiResult.ok) {
+    if (!aiResult.ok || !aiResult.text) {
       console.error(`[ADMIN_IA_AUDIT] Erro crítico no Orquestrador: ${aiResult.motivo} | Detalhe: ${aiResult.detalhe}`);
-      throw new Error(aiResult.motivo || "Falha na geração da IA");
+      throw new Error(aiResult.motivo || "Falha na geração da IA (sem resposta)");
     }
 
     let aulaIA;
