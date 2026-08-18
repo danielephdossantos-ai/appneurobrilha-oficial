@@ -62,6 +62,7 @@ import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
+import { Route as ApiPublicMissaoAulaIaRouteImport } from './routes/api/public/missao-aula-ia'
 import { Route as ApiPublicSendPushRouteImport } from './routes/api/public/send-push'
 import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
 import { Route as EscolaBrilhaBibliotecaEncantadaIndexRouteImport } from './routes/escola-brilha.biblioteca-encantada.index'
@@ -366,6 +367,11 @@ const AnamneseChildIdResultadoRoute =
     path: '/resultado',
     getParentRoute: () => AnamneseChildIdRoute,
   } as any)
+const ApiPublicMissaoAulaIaRoute = ApiPublicMissaoAulaIaRouteImport.update({
+  id: '/api/public/missao-aula-ia',
+  path: '/api/public/missao-aula-ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicSendPushRoute = ApiPublicSendPushRouteImport.update({
   id: '/api/public/send-push',
   path: '/api/public/send-push',
@@ -617,6 +623,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -704,6 +711,7 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -793,6 +801,7 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -883,6 +892,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -970,6 +980,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -1058,6 +1069,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -1141,6 +1153,7 @@ export interface RootRouteChildren {
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiPublicMissaoAulaIaRoute: typeof ApiPublicMissaoAulaIaRoute
   ApiPublicSendPushRoute: typeof ApiPublicSendPushRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
   EscolaBrilhaBibliotecaEncantadaAulaRoute: typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -1545,6 +1558,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdResultadoRouteImport
       parentRoute: typeof AnamneseChildIdRoute
     }
+    '/api/public/missao-aula-ia': {
+      id: '/api/public/missao-aula-ia'
+      path: '/api/public/missao-aula-ia'
+      fullPath: '/api/public/missao-aula-ia'
+      preLoaderRoute: typeof ApiPublicMissaoAulaIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/send-push': {
       id: '/api/public/send-push'
       path: '/api/public/send-push'
@@ -1887,6 +1907,7 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiPublicMissaoAulaIaRoute: ApiPublicMissaoAulaIaRoute,
   ApiPublicSendPushRoute: ApiPublicSendPushRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
   EscolaBrilhaBibliotecaEncantadaAulaRoute:

@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+
 import { z } from "zod";
 import { supabase } from "@/database/supabase/client";
 import { aiOrchestrator } from "./ai-orchestrator.server";
@@ -19,6 +20,14 @@ async function logAuditIA(provedor: string, modelo: string, tokens: number, stat
  * Agora com Orquestrador Único e Fallback.
  */
 
+// Tipo serializável para o retorno da função
+type GerarAulaResult = {
+  aulaId: string;
+  recemGerada: boolean;
+  fonte?: string;
+  erro?: string;
+};
+
 export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     missaoId: z.string(),
@@ -28,7 +37,7 @@ export const gerarAulaMissaoIA = createServerFn({ method: "POST" })
     criancaId: z.string(),
     tipo: z.enum(["prova", "trabalho"])
   }).parse(data))
-  .handler(async ({ data }) => {
+  .handler(async ({ data }): Promise<GerarAulaResult> => {
     const { missaoId, sessionId, topico, materia, criancaId, tipo } = data;
     
     // 1. Buscar contexto da criança
@@ -122,17 +131,17 @@ A resposta DEVE ser um JSON válido:
         { role: "system", content: systemPrompt },
         { role: "user", content: `Gere uma aula completa de ${tipo} sobre "${topico}" de ${materia}. Use o hiperfoco "${hiperfoco}".` }
       ],
-      temperature: 0.6
+      temperature: 0.4 // Reduzido para maior precisão no JSON
     });
 
     if (!aiResult.ok) {
       console.error(`[ADMIN_IA_AUDIT] Erro crítico no Orquestrador: ${aiResult.motivo} | Detalhe: ${aiResult.detalhe}`);
-      throw new Error(aiResult.motivo || "Falha na geração da IA");
+      return { aulaId: "", recemGerada: false, erro: aiResult.motivo || "Falha na geração da IA" };
     }
 
     let aulaIA;
+    const jsonLimpo = aiResult.text.trim();
     try {
-      const jsonLimpo = aiResult.text.trim();
       aulaIA = JSON.parse(jsonLimpo);
       
       if (!aulaIA.paginas || !Array.isArray(aulaIA.paginas)) {
@@ -140,8 +149,10 @@ A resposta DEVE ser um JSON válido:
       }
     } catch (e: any) {
       const fonte = aiResult.fonte || "desconhecida";
-      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message} | Texto: ${aiResult.text.substring(0, 100)}...`);
-      throw new Error(`ERRO_JSON_IA:${fonte}`);
+      console.error(`[ADMIN_IA_AUDIT] Erro JSON.parse no handler: ${e.message} | Texto: ${jsonLimpo.substring(0, 200)}...`);
+      await logAuditIA(fonte, "ia-json-fail", 0, "fail", `Erro JSON.parse: ${e.message}`);
+      
+      return { aulaId: "", recemGerada: false, erro: `ERRO_JSON_IA:${fonte}` };
     }
 
     // 5. VALIDAR E PERSISTIR
@@ -172,7 +183,7 @@ A resposta DEVE ser um JSON válido:
 
     if (aulaError || !aula) {
        console.error("Erro ao salvar rb_aulas:", aulaError);
-       throw new Error("Falha ao salvar cabeçalho da aula");
+       return { aulaId: "", recemGerada: false, erro: "Falha ao salvar cabeçalho da aula" };
     }
 
     const paginas = aulaIA.paginas.map((p: any, idx: number) => ({

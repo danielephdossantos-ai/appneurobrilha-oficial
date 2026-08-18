@@ -47,7 +47,7 @@ import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 import { useServerFn } from "@tanstack/react-start";
-import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
+// import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -154,8 +154,6 @@ function MissaoProva() {
     })();
   }, [missions, autoGenerating, queryClient, activeChild?.id]);
 
-  const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
-
   const startSession = async (session: any, mission: any) => {
     if (!activeChild) return;
     setIsStudying(true);
@@ -163,7 +161,6 @@ function MissaoProva() {
     setCurrentMission(mission);
     setActiveAulaId(null);
     
-    // 0. Se já houver aula_id no plano de estudo, carregar direto
     if (session.aula_id) {
       console.log("[Persistência] Aula já vinculada encontrada:", session.aula_id);
       setActiveAulaId(session.aula_id);
@@ -171,23 +168,33 @@ function MissaoProva() {
     }
     
     try {
-      // 1. Chamar geração (o serverFn cuidará do reuso por título se não houver aula_id, ou gerará nova)
-      const res = await gerarAulaFn({
-        data: {
+      const response = await fetch("/api/public/missao-aula-ia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           missaoId: mission.id,
-          sessionId: session.id, // Enviar ID da sessão para o serverFn persistir o vínculo
+          sessionId: session.id,
           topico: session.title,
           materia: mission.subject,
           criancaId: activeChild.id,
           tipo: "prova",
-        },
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.erro || `Erro HTTP ${response.status}`);
+      }
+
+      const res = await response.json();
       
       if (res.aulaId) {
         setActiveAulaId(res.aulaId);
         if (res.recemGerada) {
           toast.success(`✨ Aula preparada com sucesso! (${res.fonte || 'IA'})`);
         }
+      } else if (res.erro) {
+        throw new Error(res.erro);
       } else {
         throw new Error("Não foi possível gerar a aula");
       }
@@ -196,7 +203,6 @@ function MissaoProva() {
       setIsStudying(false);
       
       let mensagemErro = error.message || "erro";
-      // Tratar o erro de serialização que detectamos
       if (mensagemErro.includes("ERRO_JSON_IA")) {
         const fonte = mensagemErro.split(":")[1] || "IA";
         mensagemErro = `A resposta da ${fonte} não é um JSON válido. Por favor, tente novamente.`;

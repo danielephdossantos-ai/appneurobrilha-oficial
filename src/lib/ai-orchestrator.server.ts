@@ -6,13 +6,11 @@ import { ChatMsg, ChatCallOptions, ChatCallResult } from "./ai-chat-fallback";
  */
 function extrairJSON(text: string): string {
   const clean = text.trim();
-  // Se já for um JSON começando com { e terminando com }, retorna direto
-  if (clean.startsWith('{') && clean.endsWith('}')) return clean;
   
   // Tentar encontrar bloco de código markdown ```json ... ```
   const match = clean.match(/```json\s*([\s\S]*?)\s*```/);
   if (match?.[1]) return match[1].trim();
-
+  
   // Tentar encontrar o primeiro { e o último }
   const firstBrace = clean.indexOf('{');
   const lastBrace = clean.lastIndexOf('}');
@@ -20,8 +18,19 @@ function extrairJSON(text: string): string {
   if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
     const result = clean.slice(firstBrace, lastBrace + 1).trim();
     // Validar se o que extraímos é um JSON plausível antes de retornar
-    if (result.startsWith('{') && result.endsWith('}')) {
+    try {
+      JSON.parse(result);
       return result;
+    } catch (e) {
+      console.warn("[AIOrchestrator] Falha ao parsear bloco JSON extraído, tentando limpeza de caracteres invisíveis...");
+      // Limpeza de caracteres invisíveis comuns em saídas de LLM
+      const ultraClean = result.replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
+      try {
+        JSON.parse(ultraClean);
+        return ultraClean;
+      } catch (e2) {
+        // Se ainda falhar, retornamos o original para o caller lidar
+      }
     }
   }
 
@@ -118,7 +127,7 @@ export async function aiOrchestrator(opts: ChatCallOptions): Promise<ChatCallRes
   if (lovableKey) {
     try {
       const body: Record<string, unknown> = {
-        model: "google/gemini-3-flash-preview",
+        model: "google/gemini-1.5-flash", // Usar 1.5-flash no gateway por ser mais estável com JSON
         messages: opts.messages,
         max_tokens: opts.max_tokens ?? 800,
         temperature: opts.temperature ?? 0.7,
