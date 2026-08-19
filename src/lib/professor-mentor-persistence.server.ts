@@ -53,15 +53,17 @@ export async function persistirAulaMentor({
   serie,
   aula,
   forceNew = false,
+  codigoBNCC,
 }: {
   supabase: any;
-  modulo: "REFORCO" | "MISSAO_PROVA" | "MISSAO_TRABALHO";
+  modulo: "REFORCO" | "MISSAO_PROVA" | "MISSAO_TRABALHO" | "ESCOLA_BRILHA";
   tema: string;
   materia: string;
   idade: number;
   serie?: string;
   aula: AulaGerada;
   forceNew?: boolean;
+  codigoBNCC?: string;
 }) {
   const key = cacheKey({ modulo, tema, materia, idade, serie });
 
@@ -156,6 +158,7 @@ export async function persistirAulaMentor({
     aula_id: aulaDb.id,
     cache_key: key,
     modulo,
+    codigo_bncc: codigoBNCC || null,
     tema,
     materia,
     idade,
