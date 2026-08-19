@@ -1,0 +1,173 @@
+/**
+ * Adaptação automática da Missão — Motor Pedagógico
+ * --------------------------------------------------
+ * Combina TODOS os sinais do aluno em UM único plano de adaptação
+ * aplicado antes de renderizar a missão.
+ *
+ * Sinais considerados:
+ *   • idade
+ *   • ano escolar (série)
+ *   • tempo médio de resposta
+ *   • quantidade de erros
+ *   • número de tentativas
+ *   • desempenho anterior
+ *   • histórico do aluno (evolução, nível de domínio, revisões)
+ *
+ * A adaptação altera APENAS a superfície pedagógica:
+ *   • linguagem            → "infantil" | "simples" | "padrao" | "avancada"
+ *   • quantidadeExemplos   → nº de exemplos exibidos
+ *   • nivelApoio           → "alto" | "medio" | "baixo"
+ *   • quantidadeAtividades → nº de atividades no roteiro
+ *
+ * REGRA DE OURO: nunca altera o OBJETIVO PEDAGÓGICO da habilidade BNCC.
+ * O código, a competência e o objetivo permanecem intactos — só muda
+ * a forma de apresentar.
+ */
+function normalizaSerie(s) {
+    return (s ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+}
+function inferirLinguagem(idade, serie) {
+    const s = normalizaSerie(serie);
+    if ((idade ?? 0) > 0 && (idade ?? 0) <= 6)
+        return "infantil";
+    if (s.includes("infantil"))
+        return "infantil";
+    if (s.startsWith("1º") || s.startsWith("2º") || s.startsWith("3º"))
+        return "simples";
+    if (s.startsWith("4º") || s.startsWith("5º") || s.startsWith("6º") || s.startsWith("7º"))
+        return "padrao";
+    if (s.startsWith("8º") || s.startsWith("9º") || s.includes("médio") || s.includes("medio"))
+        return "avancada";
+    if ((idade ?? 0) >= 14)
+        return "avancada";
+    if ((idade ?? 0) >= 10)
+        return "padrao";
+    if ((idade ?? 0) >= 7)
+        return "simples";
+    return "padrao";
+}
+/**
+ * Calcula o plano de adaptação final combinando TODOS os sinais.
+ * Determinístico — mesma entrada, mesma saída.
+ */
+export function planejarAdaptacao(sinais) {
+    const motivos = [];
+    const linguagem = inferirLinguagem(sinais.idade, sinais.serie ?? "");
+    motivos.push(`linguagem:${linguagem}`);
+    // Bases por linguagem/idade
+    let quantidadeExemplos = 2;
+    let quantidadeAtividades = 3;
+    let nivelApoio = "medio";
+    let ritmo = "normal";
+    const usarImagens = linguagem === "infantil" || linguagem === "simples";
+    const leituraEmVozAlta = linguagem === "infantil" || linguagem === "simples";
+    const fonteMaior = linguagem === "infantil";
+    if (linguagem === "infantil") {
+        quantidadeExemplos = 3;
+        quantidadeAtividades = 3;
+        nivelApoio = "alto";
+        ritmo = "lento";
+    }
+    else if (linguagem === "simples") {
+        quantidadeExemplos = 2;
+        quantidadeAtividades = 4;
+        nivelApoio = "alto";
+    }
+    else if (linguagem === "padrao") {
+        quantidadeExemplos = 2;
+        quantidadeAtividades = 5;
+        nivelApoio = "medio";
+    }
+    else {
+        quantidadeExemplos = 1;
+        quantidadeAtividades = 6;
+        nivelApoio = "baixo";
+    }
+    // Ajustes por desempenho anterior
+    const desemp = sinais.desempenho ?? sinais.desempenhoMedio ?? 0;
+    if (desemp > 0 && desemp < 50) {
+        quantidadeExemplos += 2;
+        quantidadeAtividades = Math.max(2, quantidadeAtividades - 1);
+        nivelApoio = "alto";
+        ritmo = "lento";
+        motivos.push("desempenho_baixo(<50)");
+    }
+    else if (desemp >= 85) {
+        quantidadeExemplos = Math.max(1, quantidadeExemplos - 1);
+        quantidadeAtividades += 1;
+        nivelApoio = nivelApoio === "alto" ? "medio" : "baixo";
+        ritmo = "acelerado";
+        motivos.push("desempenho_alto(>=85)");
+    }
+    // Ajustes por erros / tentativas
+    const erros = sinais.erros ?? 0;
+    const tentativas = sinais.tentativas ?? 0;
+    if (erros >= 3 || tentativas >= 3) {
+        quantidadeExemplos += 1;
+        nivelApoio = "alto";
+        ritmo = "lento";
+        motivos.push(`retomada(erros=${erros},tentativas=${tentativas})`);
+    }
+    // Ajustes por tempo de resposta (comparado a alvo de 30s/questão)
+    const tempo = sinais.tempoMedioSegundos ?? 0;
+    if (tempo > 0) {
+        if (tempo >= 60) {
+            quantidadeExemplos += 1;
+            quantidadeAtividades = Math.max(2, quantidadeAtividades - 1);
+            nivelApoio = "alto";
+            ritmo = "lento";
+            motivos.push(`tempo_lento(${tempo}s)`);
+        }
+        else if (tempo <= 12 && desemp >= 70) {
+            quantidadeAtividades += 1;
+            ritmo = "acelerado";
+            motivos.push(`tempo_rapido(${tempo}s)`);
+        }
+    }
+    // Ajustes por nível de domínio (Progressão Pedagógica)
+    if (sinais.nivelDominio === "dominada" || sinais.nivelDominio === "nivel_3_consolidacao") {
+        quantidadeExemplos = Math.max(1, quantidadeExemplos - 1);
+        nivelApoio = "baixo";
+        ritmo = "acelerado";
+        motivos.push(`dominio:${sinais.nivelDominio}`);
+    }
+    else if (sinais.nivelDominio === "nivel_2_pratica") {
+        nivelApoio = "medio";
+        motivos.push("dominio:nivel_2_pratica");
+    }
+    else if (sinais.nivelDominio === "nivel_1_introducao" || sinais.nivelDominio === "nao_iniciada") {
+        nivelApoio = "alto";
+        ritmo = "lento";
+        motivos.push(`dominio:${sinais.nivelDominio ?? "inicial"}`);
+    }
+    // Evolução — se piorou, reforça apoio
+    if ((sinais.evolucaoDelta ?? 0) <= -15) {
+        nivelApoio = "alto";
+        quantidadeExemplos += 1;
+        motivos.push(`regressao(${sinais.evolucaoDelta})`);
+    }
+    // Já revisou várias vezes — mantém apoio alto e reduz volume
+    if ((sinais.revisoesRealizadas ?? 0) >= 3 && desemp < 70) {
+        quantidadeAtividades = Math.max(2, quantidadeAtividades - 1);
+        nivelApoio = "alto";
+        motivos.push("revisoes>=3_desempenho_baixo");
+    }
+    // Limites finais de segurança
+    quantidadeExemplos = Math.max(1, Math.min(6, quantidadeExemplos));
+    quantidadeAtividades = Math.max(2, Math.min(8, quantidadeAtividades));
+    return {
+        linguagem,
+        quantidadeExemplos,
+        nivelApoio,
+        quantidadeAtividades,
+        ritmo,
+        leituraEmVozAlta,
+        usarImagens,
+        fonteMaior,
+        motivos,
+        preservaObjetivoBNCC: true,
+    };
+}
+export const AdaptacaoMissao = {
+    planejar: planejarAdaptacao,
+};
