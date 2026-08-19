@@ -47,7 +47,7 @@ import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 import { useServerFn } from "@tanstack/react-start";
-
+// import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,

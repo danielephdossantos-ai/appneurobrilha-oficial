@@ -2,8 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { parseBNCC } from "@/escola-brilha/motor/resolver";
 import { validarAulaIA } from "./validador-aulas.server";
-import { chamarProfessorMentor } from "./professor-mentor-engine.server";
-import { persistirAulaMentor } from "./professor-mentor-persistence.server";
 
 /**
  * Módulo de Motor de Decisão de Conteúdo
@@ -186,45 +184,94 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
   }).parse(d))
   .handler(async ({ data }) => {
     const { supabase } = await import("@/integrations/supabase/client");
+    const { callGemini } = await import("./gemini.server");
     
-    // 1. Buscar perfil neuro da criança para personalização profunda
+    // 1. Buscar perfil neuro da criança para personalização
     const { data: profile } = await supabase
-      .from("children")
-      .select("nome, idade, serie, diagnostico, hiperfoco, anamnese_v2:anamnese_v2(responses)")
+      .from("children_profiles" as any)
+      .select("*, anamnese_v2:anamnese_v2(*)")
       .eq("id", data.childId)
       .maybeSingle();
     
-    if (!profile) throw new Error("Criança não encontrada");
+    const hiperfoco = extrairHiperfoco(profile);
 
-    // 2. Chamar o Motor Unificado Professor Mentor
-    const aulaGerada = await chamarProfessorMentor(
-      "REFORCO", // Usamos REFORCO como base pedagógica para Escola Brilha
-      data.objetivo || `Aula sobre ${data.codigoBNCC}`,
-      data.disciplina,
-      {
-        nome: profile.nome || "Criança",
-        idade: data.idade,
-        serie: data.serie,
-        diagnostico: profile.diagnostico || undefined,
-        hiperfoco: profile.hiperfoco || undefined,
-        necessidadesAcessibilidade: (profile as any)?.anamnese_v2?.responses ? JSON.stringify((profile as any).anamnese_v2.responses) : undefined,
-      }
-    );
+    // 2. Preparar Prompt Estruturado (Instrução 5/8)
+    const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
+Gere uma AULA COMPLETA em JSON estruturado para uma criança.
 
-    // 3. Persistência Canônica (rb_aulas + rb_paginas_aula)
-    const salvoCanonico = await persistirAulaMentor({
-      supabase,
-      modulo: "REFORCO",
-      tema: data.objetivo || data.codigoBNCC,
-      materia: data.disciplina,
-      idade: data.idade,
-      serie: data.serie,
-      aula: aulaGerada,
-      codigoBNCC: data.codigoBNCC
+DADOS DO ALUNO:
+- Idade: ${data.idade} anos
+- Série: ${data.serie}
+- Nível: ${data.nivel} (1: Iniciante, 2: Prática, 3: Consolidação, 4: Maestria)
+- Perfil Neuro: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
+- HIPERFOCO/INTERESSE PRINCIPAL: ${hiperfoco || "Não especificado (use temas lúdicos universais como animais, espaço ou super-heróis)"}
+
+OBJETIVO PEDAGÓGICO:
+- Disciplina: ${data.disciplina}
+- Código BNCC: ${data.codigoBNCC}
+- Objetivo Específico: ${data.objetivo || "Desenvolver a habilidade proposta pela BNCC"}
+
+REGRAS OBRIGATÓRIAS:
+1. NÃO invente códigos BNCC. Use rigorosamente ${data.codigoBNCC}.
+2. NÃO altere idade ou série.
+3. PROIBIDO o uso de EMOJIS (distração visual para neurodivergentes).
+4. Use linguagem infantil adequada para ${data.idade} anos.
+5. Se idade <= 6 anos: Foco em imagens (descreva-as como objetos JSON).
+6. PERSONALIZAÇÃO: Use o HIPERFOCO da criança como pano de fundo pedagógico para toda a aula. Se for "Dinossauros", os exemplos e problemas devem envolver dinossauros.
+7. NEUROEDUCAÇÃO: Feedbacks devem explicar o porquê do acerto ou erro.
+
+
+ESTRUTURA DO JSON (DEVE SER VÁLIDO):
+{
+  "titulo": "Título lúdico",
+  "objetivo": "...",
+  "capitulos": [
+    { "ordem": 1, "tipo": "introducao", "conteudo": "..." },
+    { "ordem": 2, "tipo": "explicacao", "conteudo": "..." },
+    { "ordem": 3, "tipo": "exemplo", "conteudo": "..." },
+    { "ordem": 4, "tipo": "atividade_guiada", "conteudo": "...", "atividade": { "pergunta": "...", "opcoes": [], "correta": 0 } },
+    { "ordem": 5, "tipo": "atividade_independente", "conteudo": "..." },
+    { "ordem": 6, "tipo": "desafio", "conteudo": "..." },
+    { "ordem": 7, "tipo": "revisao", "conteudo": "..." },
+    { "ordem": 8, "tipo": "avaliacao", "conteudo": "...", "questoes": [] },
+    { "ordem": 9, "tipo": "feedback", "conteudo": "..." }
+  ],
+  "gabarito": { ... },
+  "criterios_conclusao": "..."
+}
+
+Retorne APENAS o JSON.`;
+
+    // 3. Chamar Gemini através do helper centralizado
+    const text = await callGemini({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Gere a aula para o código ${data.codigoBNCC} nível ${data.nivel}` }
+      ],
+      model: "gemini-1.5-flash",
+      temperature: 0.2,
+      json: true
     });
 
-    // 4. Compatibilidade Legada (aulas_geradas)
-    // Mantemos este registro para que a Escola Brilha continue encontrando as aulas pelo fluxo atual
+    let aulaGerada;
+    try {
+      aulaGerada = JSON.parse(text);
+    } catch (e) {
+      console.error("Gemini gerou JSON inválido:", text);
+      throw new Error("Falha na estruturação da aula (JSON inválido)");
+    }
+
+    // 4. Validação da Aula (Implementação 6/8)
+    const validacao = await validarAulaIA(aulaGerada, {
+      codigoBNCC: data.codigoBNCC,
+      idade: data.idade,
+      serie: data.serie,
+      disciplina: data.disciplina,
+      nivel: data.nivel,
+      modelo: "gemini-1.5-flash"
+    });
+
+    // 5. Persistência e Registro (Só aprova se passar na validação)
     const { data: salva, error: saveError } = await supabase
       .from("aulas_geradas")
       .insert({
@@ -233,24 +280,29 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
         disciplina: data.disciplina,
         codigo_bncc: data.codigoBNCC,
         conteudo: aulaGerada,
-        modelo_ia: "professor-mentor-v1",
+        modelo_ia: "gemini-1.5-flash",
         nivel: data.nivel,
-        hiperfoco: profile.hiperfoco,
-        compatibilidade_hiperfoco: !!profile.hiperfoco,
-        status: 'approved',
-        aula_real_id: salvoCanonico.aulaId // Link para a nova estrutura
+        hiperfoco: hiperfoco,
+        compatibilidade_hiperfoco: !!hiperfoco,
+        status: validacao.status,
+        metadata_validacao: validacao // Salvando log completo da validação
       } as any)
+
       .select()
       .single();
 
-    if (saveError) {
-      console.error("[EscolaBrilha] Erro ao salvar cache legado:", saveError);
+    if (saveError) throw saveError;
+
+    if (validacao.status !== 'approved') {
+      return { 
+        status: "validacao_falhou", 
+        resultado: validacao.status,
+        motivos: validacao.motivos,
+        aula: salva 
+      };
     }
 
-    return { 
-      status: "sucesso", 
-      aula: salva || { id: salvoCanonico.aulaId, titulo: aulaGerada.titulo, conteudo: aulaGerada } 
-    } as { status: "sucesso" | "validacao_falhou"; aula: any };
+    return { status: "sucesso", aula: salva };
   });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
