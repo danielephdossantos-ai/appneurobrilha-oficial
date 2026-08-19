@@ -50,6 +50,7 @@ import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 import { useAbaPrompting } from "@/hooks/useAbaPrompting";
 import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
+import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
@@ -218,9 +219,8 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    // A sanitização agora deve ser feita sem importação dinâmica que quebra o build em hooks
-    return narracao;
-  }, [narracao]);
+    return sanitizarFalaMascote(narracao, nomeCrianca);
+  }, [narracao, nomeCrianca]);
 
 
 
