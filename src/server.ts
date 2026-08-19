@@ -18,6 +18,21 @@ async function getServerEntry(): Promise<ServerEntry> {
   return serverEntryPromise;
 }
 
+// Client disconnects (navigating away / reloading mid-request) surface as
+// "Error: aborted" with code ECONNRESET. Not an app bug — never render an error page.
+function isClientAbort(error: unknown): boolean {
+  const seen = new Set<unknown>();
+  let cur: any = error;
+  while (cur && typeof cur === "object" && !seen.has(cur)) {
+    seen.add(cur);
+    if (cur.code === "ECONNRESET" || cur.code === "ERR_STREAM_PREMATURE_CLOSE") return true;
+    if (cur.name === "AbortError") return true;
+    if (typeof cur.message === "string" && /\baborted\b/i.test(cur.message)) return true;
+    cur = cur.cause;
+  }
+  return false;
+}
+
 // h3 swallows in-handler throws into a normal 500 Response with body
 // {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
 async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
@@ -30,12 +45,18 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     return response;
   }
 
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
+  const captured = consumeLastCapturedError();
+  if (isClientAbort(captured) || /\baborted\b/i.test(body)) {
+    return new Response(null, { status: 499 });
+  }
+
+  console.error(captured ?? new Error(`h3 swallowed SSR error: ${body}`));
   return new Response(renderErrorPage(), {
     status: 500,
     headers: { "content-type": "text/html; charset=utf-8" },
   });
 }
+
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
@@ -50,7 +71,11 @@ export default {
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
     } catch (error) {
+      if (isClientAbort(error) || request.signal?.aborted) {
+        return new Response(null, { status: 499 });
+      }
       console.error(error);
+
       return new Response(renderErrorPage(), {
         status: 500,
         headers: { "content-type": "text/html; charset=utf-8" },
