@@ -78,7 +78,7 @@ const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
-  
+  { to: "/missao-tarefa", label: "Missão Tarefa", icon: ClipboardList },
   { to: "/missao-trabalho", label: "Missão Trabalho", icon: ClipboardList },
   { to: "/escola-brilha/matematica-ei", label: "Matemática Kawaii", icon: Ruler },
   
@@ -103,7 +103,7 @@ const navPais = [
 const navigationSequence = [
   "/",
   "/missao-prova",
-  
+  "/missao-tarefa",
   "/missao-trabalho",
   
   "/reforco-brilha",

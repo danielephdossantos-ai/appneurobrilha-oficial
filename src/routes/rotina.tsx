@@ -2,9 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getRoutineItems, toggleRoutineItemStatus, RoutineItem, deleteRoutineItem } from "@/lib/routine.functions";
-import { RoutineConfigDialog } from "@/components/rotina/RoutineConfigDialog";
-import { CalendarioAnual } from "@/components/rotina/CalendarioAnual";
+import { getRoutineItems, toggleRoutineItemStatus, RoutineItem } from "@/lib/routine.functions";
 import { format, addDays, subDays, isToday, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -26,7 +24,6 @@ import {
   AlertCircle,
   Play,
   Settings,
-  Plus,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -67,9 +64,6 @@ function Rotina() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const dateStr = format(selectedDate, "yyyy-MM-dd");
 
-  const [isConfigOpen, setIsConfigOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState<RoutineItem | null>(null);
-
   const { data: routine = [], isLoading } = useQuery({
     queryKey: ["routine", activeChild?.id, dateStr],
     queryFn: () => getRoutineItems({ data: { childId: activeChild!.id, date: dateStr } }),
@@ -97,14 +91,6 @@ function Rotina() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["routine"] });
       toast.success("Status atualizado!");
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: (id: string) => deleteRoutineItem({ data: { id } }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["routine"] });
-      toast.success("Atividade removida!");
     },
   });
 
@@ -149,49 +135,25 @@ function Rotina() {
         <PageHeader 
           icon={Calendar} 
           title="Minha Rotina" 
-          subtitle={format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
+          subtitle={isToday(selectedDate) ? "O que temos para hoje?" : format(selectedDate, "EEEE, d 'de' MMMM", { locale: ptBR })} 
         />
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={() => {
-              setEditingItem(null);
-              setIsConfigOpen(true);
-            }}
-            className="p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 transition-colors flex items-center gap-2 font-black text-sm"
-          >
-            <Settings className="h-5 w-5" />
-            CONFIGURAR
-          </button>
-        </div>
+        <Link to="/painel-pais" className="p-2 rounded-full hover:bg-muted transition-colors">
+          <Settings className="h-6 w-6 text-muted-foreground" />
+        </Link>
       </div>
 
-      <div className="flex flex-col gap-4 mb-6">
-        <CalendarioAnual selectedDate={selectedDate} onSelect={setSelectedDate} />
-        
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          <button onClick={handlePrevDay} className="p-2 rounded-xl bg-muted active:scale-90 transition-transform"><ChevronLeft className="h-5 w-5"/></button>
-          <button 
-            onClick={handleToday}
-            className={`px-4 py-2 rounded-xl font-bold whitespace-nowrap active:scale-95 transition-all ${isToday(selectedDate) ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
-          >
-            Hoje
-          </button>
-          <div className="flex-1 text-center font-black text-primary">
-            {isToday(selectedDate) ? "HOJE" : format(selectedDate, "dd/MM/yyyy")}
-          </div>
-          <button onClick={handleNextDay} className="p-2 rounded-xl bg-muted active:scale-90 transition-transform"><ChevronRight className="h-5 w-5"/></button>
-          
-          <button 
-            onClick={() => {
-              setEditingItem(null);
-              setIsConfigOpen(true);
-            }}
-            className="ml-2 p-2 rounded-xl bg-primary text-primary-foreground shadow-lg active:scale-90 transition-transform"
-            title="Agendar nova rotina"
-          >
-            <Plus className="h-6 w-6" />
-          </button>
+      <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+        <button onClick={handlePrevDay} className="p-2 rounded-xl bg-muted"><ChevronLeft className="h-5 w-5"/></button>
+        <button 
+          onClick={handleToday}
+          className={`px-4 py-2 rounded-xl font-bold whitespace-nowrap ${isToday(selectedDate) ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+        >
+          Hoje
+        </button>
+        <div className="flex-1 text-center font-bold min-w-[120px]">
+          {format(selectedDate, "dd/MM/yyyy")}
         </div>
+        <button onClick={handleNextDay} className="p-2 rounded-xl bg-muted"><ChevronRight className="h-5 w-5"/></button>
       </div>
 
       {isLoading ? (
@@ -203,15 +165,9 @@ function Rotina() {
           <div className="text-4xl mb-4">🌈</div>
           <h3 className="font-bold text-lg mb-2">Nenhuma atividade planejada</h3>
           <p className="text-muted-foreground mb-6">Que tal adicionar algo especial à rotina?</p>
-          <button 
-            onClick={() => {
-              setEditingItem(null);
-              setIsConfigOpen(true);
-            }}
-            className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2"
-          >
+          <Link to="/painel-pais" className="btn-tap bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold inline-flex items-center gap-2">
              Configurar Rotina
-          </button>
+          </Link>
         </Card>
       ) : (
         <div className="space-y-3">
@@ -233,12 +189,7 @@ function Rotina() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-black text-lg truncate leading-tight">{item.title}</h4>
-                    {item.reminderEnabled && (
-                      <Clock className="h-3 w-3 text-primary animate-pulse" />
-                    )}
-                  </div>
+                  <h4 className="font-black text-lg truncate leading-tight">{item.title}</h4>
                   {item.description && <p className="text-xs opacity-70 truncate">{item.description}</p>}
                   {item.source !== 'manual' && (
                     <span className="inline-block mt-1 px-2 py-0.5 bg-black/5 rounded text-[9px] font-black uppercase tracking-wider">
@@ -248,28 +199,16 @@ function Rotina() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => {
-                      setEditingItem(item);
-                      setIsConfigOpen(true);
-                    }}
-                    className="p-2 rounded-xl bg-white/50 hover:bg-white text-muted-foreground transition-all"
-                  >
-                    <Settings className="h-5 w-5" />
-                  </button>
-                  
-                  {item.status !== 'concluido' && (
+                  {item.source !== 'manual' && item.status !== 'concluido' && (
                     <button 
                       onClick={() => {
                         toast.info(`Iniciando ${item.title}...`);
-                        // No futuro: vincular à rota real baseada no type/metadata
                       }}
-                      className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg active:scale-90"
+                      className="p-2 rounded-full bg-primary text-primary-foreground shadow-lg active:scale-90"
                     >
-                      <Play className="h-6 w-6 fill-current" />
+                      <Play className="h-5 w-5 fill-current" />
                     </button>
                   )}
-                  
                   <button 
                     onClick={() => toggleStatus.mutate({ 
                       id: item.id!, 
@@ -278,17 +217,6 @@ function Rotina() {
                     className="p-1 group-hover:scale-110 transition-transform"
                   >
                     {getStatusIcon(item)}
-                  </button>
-
-                  <button 
-                    onClick={() => {
-                      if (confirm("Deseja remover esta atividade?")) {
-                        deleteMutation.mutate(item.id);
-                      }
-                    }}
-                    className="p-2 rounded-xl bg-red-500/10 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <AlertCircle className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -311,14 +239,6 @@ function Rotina() {
            ADICIONAR À ROTINA
         </button>
       </Card>
-
-      <RoutineConfigDialog
-        isOpen={isConfigOpen}
-        onClose={() => setIsConfigOpen(false)}
-        childId={activeChild.id}
-        item={editingItem}
-        selectedDate={dateStr}
-      />
     </Shell>
   );
 }

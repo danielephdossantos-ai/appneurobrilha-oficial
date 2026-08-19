@@ -2620,7 +2620,6 @@ export type Database = {
       }
       exam_study_plans: {
         Row: {
-          aula_id: string | null
           completed: boolean
           created_at: string
           description: string | null
@@ -2630,7 +2629,6 @@ export type Database = {
           title: string
         }
         Insert: {
-          aula_id?: string | null
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -2640,7 +2638,6 @@ export type Database = {
           title: string
         }
         Update: {
-          aula_id?: string | null
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -2650,20 +2647,6 @@ export type Database = {
           title?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "exam_study_plans_aula_id_fkey"
-            columns: ["aula_id"]
-            isOneToOne: false
-            referencedRelation: "rb_aulas"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "exam_study_plans_aula_id_fkey"
-            columns: ["aula_id"]
-            isOneToOne: false
-            referencedRelation: "rb_aulas_premium_status"
-            referencedColumns: ["aula_id"]
-          },
           {
             foreignKeyName: "exam_study_plans_mission_id_fkey"
             columns: ["mission_id"]
@@ -6627,7 +6610,6 @@ export type Database = {
           ordem: number
           titulo: string
           updated_at: string
-          usage_count: number | null
           video_url: string | null
         }
         Insert: {
@@ -6641,7 +6623,6 @@ export type Database = {
           ordem?: number
           titulo: string
           updated_at?: string
-          usage_count?: number | null
           video_url?: string | null
         }
         Update: {
@@ -6655,7 +6636,6 @@ export type Database = {
           ordem?: number
           titulo?: string
           updated_at?: string
-          usage_count?: number | null
           video_url?: string | null
         }
         Relationships: [
@@ -6670,66 +6650,27 @@ export type Database = {
       }
       rb_aulas_geradas_ia: {
         Row: {
-          aula_id: string | null
-          cache_key: string | null
           conteudo: Json
           created_at: string | null
           dificuldade_original: string
           id: string
-          idade: number | null
-          materia: string | null
-          modulo: string | null
-          serie: string | null
           tags: string[] | null
-          tema: string | null
-          usage_count: number
         }
         Insert: {
-          aula_id?: string | null
-          cache_key?: string | null
           conteudo: Json
           created_at?: string | null
           dificuldade_original: string
           id?: string
-          idade?: number | null
-          materia?: string | null
-          modulo?: string | null
-          serie?: string | null
           tags?: string[] | null
-          tema?: string | null
-          usage_count?: number
         }
         Update: {
-          aula_id?: string | null
-          cache_key?: string | null
           conteudo?: Json
           created_at?: string | null
           dificuldade_original?: string
           id?: string
-          idade?: number | null
-          materia?: string | null
-          modulo?: string | null
-          serie?: string | null
           tags?: string[] | null
-          tema?: string | null
-          usage_count?: number
         }
-        Relationships: [
-          {
-            foreignKeyName: "rb_aulas_geradas_ia_aula_id_fkey"
-            columns: ["aula_id"]
-            isOneToOne: false
-            referencedRelation: "rb_aulas"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "rb_aulas_geradas_ia_aula_id_fkey"
-            columns: ["aula_id"]
-            isOneToOne: false
-            referencedRelation: "rb_aulas_premium_status"
-            referencedColumns: ["aula_id"]
-          },
-        ]
+        Relationships: []
       }
       rb_aulas_ia: {
         Row: {
@@ -7830,63 +7771,6 @@ export type Database = {
             columns: ["child_id"]
             isOneToOne: false
             referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      scheduled_notifications: {
-        Row: {
-          body: string
-          child_id: string | null
-          created_at: string | null
-          error_message: string | null
-          id: string
-          routine_item_id: string | null
-          scheduled_for: string
-          sent_at: string | null
-          title: string
-          updated_at: string | null
-          user_id: string
-        }
-        Insert: {
-          body: string
-          child_id?: string | null
-          created_at?: string | null
-          error_message?: string | null
-          id?: string
-          routine_item_id?: string | null
-          scheduled_for: string
-          sent_at?: string | null
-          title: string
-          updated_at?: string | null
-          user_id: string
-        }
-        Update: {
-          body?: string
-          child_id?: string | null
-          created_at?: string | null
-          error_message?: string | null
-          id?: string
-          routine_item_id?: string | null
-          scheduled_for?: string
-          sent_at?: string | null
-          title?: string
-          updated_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "scheduled_notifications_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "scheduled_notifications_routine_item_id_fkey"
-            columns: ["routine_item_id"]
-            isOneToOne: false
-            referencedRelation: "routine_items"
             referencedColumns: ["id"]
           },
         ]

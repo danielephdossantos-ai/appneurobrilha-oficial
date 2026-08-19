@@ -23,10 +23,7 @@ import {
   Sparkles,
   BookOpen,
   Scissors,
-  Rocket,
 } from "lucide-react";
-import { AulaViewer } from "./AulaViewer";
-// import { gerarAulaMissaoIA } from "@/lib/ia-missao-aula.functions";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
@@ -257,49 +254,6 @@ function EditorTrabalho({
 
   // Preview inline
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
-  const [activeAulaId, setActiveAulaId] = useState<string | null>(null);
-  const [gerandoAula, setGerandoAula] = useState(false);
-  // const gerarAulaFn = useServerFn(gerarAulaMissaoIA);
-  const iniciarMissaoIA = async () => {
-    if (!childId || !tema.trim()) {
-      toast.error("Defina o tema do trabalho primeiro");
-      return;
-    }
-    setGerandoAula(true);
-    setActiveAulaId(null);
-    try {
-      const response = await fetch("/api/public/missao-aula-ia", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          missaoId: idAtual || "new",
-          topico: tema,
-          materia: materia || "Trabalho Escolar",
-          criancaId: childId,
-          tipo: "trabalho"
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.erro || `Erro HTTP ${response.status}`);
-      }
-
-      const res = await response.json();
-      if (res.aulaId) {
-        setActiveAulaId(res.aulaId);
-        toast.success(`✨ Professor Brilha criou um guia de estudo!`);
-      } else {
-        throw new Error("Falha ao criar missão");
-      }
-    } catch (e: any) {
-      console.error("Gerar Missão IA Trabalho:", e);
-      const { notificarErroIA } = await import("@/lib/notify-ai-error");
-      notificarErroIA(e.message || "erro", "Missão Trabalho");
-    } finally {
-      setGerandoAula(false);
-    }
-  };
 
 
   // Debounced auto-save
@@ -560,8 +514,6 @@ function EditorTrabalho({
     setFontes((f) => f.filter((x) => x.url !== url));
   }
 
-  // iniciarMissaoIA movido para o topo para evitar ReferenceError de gerarAulaFn
-
   async function salvar() {
     if (!childId) {
       toast.error("Selecione uma criança");
@@ -787,15 +739,6 @@ function EditorTrabalho({
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
           <button
-            onClick={() => iniciarMissaoIA()}
-            disabled={gerandoAula}
-            className="text-xs font-black bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
-            title="A IA prepara uma aula completa sobre seu tema"
-          >
-            {gerandoAula ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Rocket className="h-3.5 w-3.5" />}
-            Missão IA
-          </button>
-          <button
             onClick={rodarAnalise}
             disabled={analisando}
             className="text-xs font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
@@ -849,15 +792,6 @@ function EditorTrabalho({
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-4">
         {/* Documento + edição */}
-        {activeAulaId && (
-          <div className="lg:col-span-2">
-            <AulaViewer
-              aulaId={activeAulaId}
-              titulo={`Missão: ${tema}`}
-              onClose={() => setActiveAulaId(null)}
-            />
-          </div>
-        )}
         <div className="space-y-3">
           <div className="grid sm:grid-cols-2 gap-2">
             <input
@@ -1136,13 +1070,6 @@ function EditorTrabalho({
           addRecursoImagem(r);
           setPreview(null);
         }}
-      />
-    )}
-    {activeAulaId && (
-      <AulaViewer
-        aulaId={activeAulaId}
-        titulo={`Revisão: ${tema}`}
-        onClose={() => setActiveAulaId(null)}
       />
     )}
   </>

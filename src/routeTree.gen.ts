@@ -29,6 +29,7 @@ import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
+import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
 import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
@@ -62,7 +63,6 @@ import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
-import { Route as ApiPublicMissaoAulaIaRouteImport } from './routes/api/public/missao-aula-ia'
 import { Route as ApiPublicSendPushRouteImport } from './routes/api/public/send-push'
 import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
 import { Route as EscolaBrilhaBibliotecaEncantadaIndexRouteImport } from './routes/escola-brilha.biblioteca-encantada.index'
@@ -84,7 +84,6 @@ import { Route as NeuroTreinoLerComAuroraIndexRouteImport } from './routes/neuro
 import { Route as NeuroTreinoLerComAuroraAulaRouteImport } from './routes/neuro-treino.ler-com-aurora.$aula'
 import { Route as NeuroTreinoLerComAuroraDiagnosticoRouteImport } from './routes/neuro-treino.ler-com-aurora.diagnostico'
 import { Route as NeuroTreinoLerComAuroraPainelRouteImport } from './routes/neuro-treino.ler-com-aurora.painel'
-import { Route as ApiPublicCronProcessNotificationsRouteImport } from './routes/api/public/cron/process-notifications'
 import { Route as EscolaBrilhaAulaArteV1CursoAulaRouteImport } from './routes/escola-brilha.aula-arte-v1.$curso.$aula'
 import { Route as EscolaBrilhaAulaExtraPtCursoAulaRouteImport } from './routes/escola-brilha.aula-extra-pt.$curso.$aula'
 import { Route as EscolaBrilhaAulaGeoV1CursoAulaRouteImport } from './routes/escola-brilha.aula-geo-v1.$curso.$aula'
@@ -195,6 +194,11 @@ const McpRoute = McpRouteImport.update({
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
   id: '/missao-prova',
   path: '/missao-prova',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
+  id: '/missao-tarefa',
+  path: '/missao-tarefa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
@@ -367,11 +371,6 @@ const AnamneseChildIdResultadoRoute =
     path: '/resultado',
     getParentRoute: () => AnamneseChildIdRoute,
   } as any)
-const ApiPublicMissaoAulaIaRoute = ApiPublicMissaoAulaIaRouteImport.update({
-  id: '/api/public/missao-aula-ia',
-  path: '/api/public/missao-aula-ia',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicSendPushRoute = ApiPublicSendPushRouteImport.update({
   id: '/api/public/send-push',
   path: '/api/public/send-push',
@@ -496,12 +495,6 @@ const NeuroTreinoLerComAuroraPainelRoute =
     path: '/ler-com-aurora/painel',
     getParentRoute: () => NeuroTreinoRoute,
   } as any)
-const ApiPublicCronProcessNotificationsRoute =
-  ApiPublicCronProcessNotificationsRouteImport.update({
-    id: '/api/public/cron/process-notifications',
-    path: '/api/public/cron/process-notifications',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const EscolaBrilhaAulaArteV1CursoAulaRoute =
   EscolaBrilhaAulaArteV1CursoAulaRouteImport.update({
     id: '/escola-brilha/aula-arte-v1/$curso/$aula',
@@ -590,6 +583,7 @@ export interface FileRoutesByFullPath {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -623,7 +617,6 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -645,7 +638,6 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
-  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -678,6 +670,7 @@ export interface FileRoutesByTo {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -711,7 +704,6 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -733,7 +725,6 @@ export interface FileRoutesByTo {
   '/escola-brilha/matematica-ei': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora': typeof NeuroTreinoLerComAuroraIndexRoute
-  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -768,6 +759,7 @@ export interface FileRoutesById {
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRouteWithChildren
@@ -801,7 +793,6 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/api/public/missao-aula-ia': typeof ApiPublicMissaoAulaIaRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
   '/escola-brilha/biblioteca-encantada/$aula': typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -823,7 +814,6 @@ export interface FileRoutesById {
   '/escola-brilha/matematica-ei/': typeof EscolaBrilhaMatematicaEiIndexRoute
   '/escola-brilha/portugues-ei/': typeof EscolaBrilhaPortuguesEiIndexRoute
   '/neuro-treino/ler-com-aurora/': typeof NeuroTreinoLerComAuroraIndexRoute
-  '/api/public/cron/process-notifications': typeof ApiPublicCronProcessNotificationsRoute
   '/escola-brilha/aula-arte-v1/$curso/$aula': typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   '/escola-brilha/aula-extra-pt/$curso/$aula': typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   '/escola-brilha/aula-geo-v1/$curso/$aula': typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -859,6 +849,7 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -892,7 +883,6 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -914,7 +904,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
-    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -947,6 +936,7 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -980,7 +970,6 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -1002,7 +991,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei'
     | '/escola-brilha/portugues-ei'
     | '/neuro-treino/ler-com-aurora'
-    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -1036,6 +1024,7 @@ export interface FileRouteTypes {
     | '/matriz-pedagogica'
     | '/mcp'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -1069,7 +1058,6 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/api/public/missao-aula-ia'
     | '/api/public/send-push'
     | '/escola-brilha/atlas-final/$curso'
     | '/escola-brilha/biblioteca-encantada/$aula'
@@ -1091,7 +1079,6 @@ export interface FileRouteTypes {
     | '/escola-brilha/matematica-ei/'
     | '/escola-brilha/portugues-ei/'
     | '/neuro-treino/ler-com-aurora/'
-    | '/api/public/cron/process-notifications'
     | '/escola-brilha/aula-arte-v1/$curso/$aula'
     | '/escola-brilha/aula-extra-pt/$curso/$aula'
     | '/escola-brilha/aula-geo-v1/$curso/$aula'
@@ -1126,6 +1113,7 @@ export interface RootRouteChildren {
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
   McpRoute: typeof McpRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
+  MissaoTarefaRoute: typeof MissaoTarefaRoute
   MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRouteWithChildren
@@ -1153,7 +1141,6 @@ export interface RootRouteChildren {
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
-  ApiPublicMissaoAulaIaRoute: typeof ApiPublicMissaoAulaIaRoute
   ApiPublicSendPushRoute: typeof ApiPublicSendPushRoute
   EscolaBrilhaAtlasFinalCursoRoute: typeof EscolaBrilhaAtlasFinalCursoRoute
   EscolaBrilhaBibliotecaEncantadaAulaRoute: typeof EscolaBrilhaBibliotecaEncantadaAulaRoute
@@ -1171,7 +1158,6 @@ export interface RootRouteChildren {
   EscolaBrilhaInglesEiIndexRoute: typeof EscolaBrilhaInglesEiIndexRoute
   EscolaBrilhaMatematicaEiIndexRoute: typeof EscolaBrilhaMatematicaEiIndexRoute
   EscolaBrilhaPortuguesEiIndexRoute: typeof EscolaBrilhaPortuguesEiIndexRoute
-  ApiPublicCronProcessNotificationsRoute: typeof ApiPublicCronProcessNotificationsRoute
   EscolaBrilhaAulaArteV1CursoAulaRoute: typeof EscolaBrilhaAulaArteV1CursoAulaRoute
   EscolaBrilhaAulaExtraPtCursoAulaRoute: typeof EscolaBrilhaAulaExtraPtCursoAulaRoute
   EscolaBrilhaAulaGeoV1CursoAulaRoute: typeof EscolaBrilhaAulaGeoV1CursoAulaRoute
@@ -1325,6 +1311,13 @@ declare module '@tanstack/react-router' {
       path: '/missao-prova'
       fullPath: '/missao-prova'
       preLoaderRoute: typeof MissaoProvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-tarefa': {
+      id: '/missao-tarefa'
+      path: '/missao-tarefa'
+      fullPath: '/missao-tarefa'
+      preLoaderRoute: typeof MissaoTarefaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missao-trabalho': {
@@ -1558,13 +1551,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdResultadoRouteImport
       parentRoute: typeof AnamneseChildIdRoute
     }
-    '/api/public/missao-aula-ia': {
-      id: '/api/public/missao-aula-ia'
-      path: '/api/public/missao-aula-ia'
-      fullPath: '/api/public/missao-aula-ia'
-      preLoaderRoute: typeof ApiPublicMissaoAulaIaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/send-push': {
       id: '/api/public/send-push'
       path: '/api/public/send-push'
@@ -1711,13 +1697,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/neuro-treino/ler-com-aurora/painel'
       preLoaderRoute: typeof NeuroTreinoLerComAuroraPainelRouteImport
       parentRoute: typeof NeuroTreinoRoute
-    }
-    '/api/public/cron/process-notifications': {
-      id: '/api/public/cron/process-notifications'
-      path: '/api/public/cron/process-notifications'
-      fullPath: '/api/public/cron/process-notifications'
-      preLoaderRoute: typeof ApiPublicCronProcessNotificationsRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/aula-arte-v1/$curso/$aula': {
       id: '/escola-brilha/aula-arte-v1/$curso/$aula'
@@ -1879,6 +1858,7 @@ const rootRouteChildren: RootRouteChildren = {
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
   McpRoute: McpRoute,
   MissaoProvaRoute: MissaoProvaRoute,
+  MissaoTarefaRoute: MissaoTarefaRoute,
   MissaoTrabalhoRoute: MissaoTrabalhoRoute,
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRouteWithChildren,
@@ -1907,7 +1887,6 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
-  ApiPublicMissaoAulaIaRoute: ApiPublicMissaoAulaIaRoute,
   ApiPublicSendPushRoute: ApiPublicSendPushRoute,
   EscolaBrilhaAtlasFinalCursoRoute: EscolaBrilhaAtlasFinalCursoRoute,
   EscolaBrilhaBibliotecaEncantadaAulaRoute:
@@ -1927,8 +1906,6 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaInglesEiIndexRoute: EscolaBrilhaInglesEiIndexRoute,
   EscolaBrilhaMatematicaEiIndexRoute: EscolaBrilhaMatematicaEiIndexRoute,
   EscolaBrilhaPortuguesEiIndexRoute: EscolaBrilhaPortuguesEiIndexRoute,
-  ApiPublicCronProcessNotificationsRoute:
-    ApiPublicCronProcessNotificationsRoute,
   EscolaBrilhaAulaArteV1CursoAulaRoute: EscolaBrilhaAulaArteV1CursoAulaRoute,
   EscolaBrilhaAulaExtraPtCursoAulaRoute: EscolaBrilhaAulaExtraPtCursoAulaRoute,
   EscolaBrilhaAulaGeoV1CursoAulaRoute: EscolaBrilhaAulaGeoV1CursoAulaRoute,

@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 export const routineItemSchema = z.object({
@@ -33,14 +32,14 @@ export const routineItemSchema = z.object({
 export type RoutineItem = z.infer<typeof routineItemSchema>;
 
 export const getRoutineItems = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
   .validator((d: unknown) => z.object({
     childId: z.string().uuid(),
     date: z.string() // "yyyy-mm-dd"
   }).parse(d))
-  .handler(async ({ data, context }) => {
-    const { supabase } = context;
-    if (!supabase) throw new Error("Unauthorized");
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     const dayOfWeek = new Date(`${data.date}T12:00:00`).getDay();
 
@@ -80,15 +79,15 @@ export const getRoutineItems = createServerFn({ method: "GET" })
   });
 
 export const saveRoutineItem = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .validator((d: unknown) => routineItemSchema.parse(d))
-  .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
-    if (!supabase || !userId) throw new Error("Unauthorized");
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     const payload = {
       child_id: data.childId,
-      parent_id: userId,
+      parent_id: user.id,
       title: data.title,
       description: data.description,
       type: data.type,
@@ -123,87 +122,12 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
     }
   });
 
-export const saveRoutineItemWithNotifications = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .validator((d: unknown) => routineItemSchema.parse(d))
-  .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
-    if (!supabase || !userId) throw new Error("Unauthorized");
-
-    const payload = {
-      child_id: data.childId,
-      parent_id: userId,
-      title: data.title,
-      description: data.description,
-      type: data.type,
-      start_time: data.startTime,
-      duration_minutes: data.durationMinutes,
-      date: data.date,
-      recurrence_days: data.recurrenceDays,
-      reminder_enabled: data.reminderEnabled,
-      reminder_minutes_before: data.reminderMinutesBefore,
-      status: data.status,
-      source: data.source,
-      source_id: data.sourceId,
-    };
-
-    let result;
-    if (data.id) {
-      const { data: updated, error } = await supabase
-        .from("routine_items")
-        .update(payload)
-        .eq("id", data.id)
-        .select()
-        .single();
-      if (error) throw error;
-      result = updated;
-
-      // Cancelar notificações antigas
-      await supabase
-        .from("scheduled_notifications" as any)
-        .delete()
-        .eq("routine_item_id", data.id)
-        .is("sent_at", null);
-    } else {
-      const { data: inserted, error } = await supabase
-        .from("routine_items")
-        .insert(payload)
-        .select()
-        .single();
-      if (error) throw error;
-      result = inserted;
-    }
-
-    // Agendar nova notificação se habilitado
-    if (data.reminderEnabled && result.id) {
-      const itemDate = data.date || new Date().toISOString().split('T')[0];
-      const scheduledTime = new Date(`${itemDate}T${data.startTime}:00`);
-      scheduledTime.setMinutes(scheduledTime.getMinutes() - (data.reminderMinutesBefore || 0));
-
-      // Só agendar se for no futuro
-      if (scheduledTime > new Date()) {
-        await supabase
-          .from("scheduled_notifications" as any)
-          .insert({
-            user_id: userId,
-            child_id: data.childId,
-            routine_item_id: result.id,
-            title: `🔔 Hora da atividade: ${data.title}`,
-            body: `Vamos começar? Agora é hora de ${data.title}!`,
-            scheduled_for: scheduledTime.toISOString(),
-          });
-      }
-    }
-
-    return result;
-  });
-
 export const deleteRoutineItem = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .validator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
-  .handler(async ({ data, context }) => {
-    const { supabase } = context;
-    if (!supabase) throw new Error("Unauthorized");
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     const { error } = await supabase
       .from("routine_items")
@@ -214,14 +138,14 @@ export const deleteRoutineItem = createServerFn({ method: "POST" })
   });
 
 export const toggleRoutineItemStatus = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .validator((d: unknown) => z.object({
     id: z.string().uuid(),
     status: z.enum(['pendente', 'concluido', 'atrasado', 'cancelado'])
   }).parse(d))
-  .handler(async ({ data, context }) => {
-    const { supabase } = context;
-    if (!supabase) throw new Error("Unauthorized");
+  .handler(async ({ data }) => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     const { error } = await supabase
       .from("routine_items")

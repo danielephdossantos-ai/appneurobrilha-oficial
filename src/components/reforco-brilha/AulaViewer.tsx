@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, lazy } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { useServerFn } from "@tanstack/react-start";
@@ -19,7 +19,6 @@ import {
   ArrowRight,
   Volume2,
 } from "lucide-react";
-import { RenderVisualMat } from "@/escola-brilha/curso-v4/player/blocos/VisuaisMat";
 
 export interface AulaViewerProps {
   aulaId: string;
@@ -51,10 +50,7 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
   video: { label: "Vídeo", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   imagem: { label: "Imagem", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   passo_a_passo: { label: "Passo a passo", icon: Hand, cor: "from-sky-400 to-blue-500" },
-  desafio: { label: "Desafio", icon: Target, cor: "from-orange-400 to-red-500" },
-  revisao: { label: "Revisão", icon: CheckCircle2, cor: "from-emerald-400 to-teal-500" },
 };
-
 
 function speak(text: string) {
   stopSpeaking();
@@ -86,17 +82,6 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
 
   return (
     <div className="space-y-5">
-      {c.lousaPassos && (
-        <div className="bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border-4 border-slate-800">
-          <RenderVisualMat v={{ tipo: "trinomioPassoAPasso", ...c.lousaPassos }} />
-        </div>
-      )}
-      {/* Fallback para chalkBoard se a IA usar esse nome */}
-      {c.chalkBoard && (
-        <div className="bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border-4 border-slate-800">
-          <RenderVisualMat v={{ tipo: "trinomioPassoAPasso", ...c.chalkBoard }} />
-        </div>
-      )}
       {c.imagem && (
         <div className="rounded-3xl overflow-hidden border border-border bg-secondary/30">
           <img src={c.imagem} alt="" className="w-full max-h-96 object-contain" />
@@ -244,26 +229,13 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
           
           if (!alive) return;
           
-          if (!res || !res.id) {
-             throw new Error("Resposta da IA inválida");
-          }
-
-          console.log("[AulaViewer] Aula gerada/recuperada com ID:", res.id);
-
-          const { data: pags, error: errorPags } = await supabase
+          const { data: pags } = await supabase
             .from("rb_paginas_aula")
             .select("id,ordem,tipo,titulo,conteudo")
             .eq("aula_id", res.id)
             .order("ordem", { ascending: true });
             
-          if (errorPags) throw errorPags;
-
-          if (pags && pags.length > 0) {
-            setPaginas(pags as Pagina[]);
-          } else {
-            console.error("[AulaViewer] Aula gerada mas sem páginas no banco. ID:", res.id);
-            toast.error("Aula gerada sem conteúdo. Tente novamente.");
-          }
+          setPaginas((pags || []) as Pagina[]);
         } catch (e) {
           console.error("Erro ao gerar aula sob demanda:", e);
           toast.error("Falha ao gerar aula com IA");
@@ -273,25 +245,14 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
         return;
       }
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("rb_paginas_aula")
         .select("id,ordem,tipo,titulo,conteudo")
         .eq("aula_id", aulaId)
         .order("ordem", { ascending: true });
-      
-      if (error) {
-        console.error("[AulaViewer] Erro ao buscar páginas:", error);
-      }
-      
       if (!alive) return;
-      
-      if (data && data.length > 0) {
-        setPaginas(data as Pagina[]);
-        setIdx(0);
-      } else {
-        console.warn("[AulaViewer] Nenhuma página encontrada para aula_id:", aulaId);
-        setPaginas([]);
-      }
+      setPaginas((data || []) as Pagina[]);
+      setIdx(0);
       setLoading(false);
     })();
     return () => {

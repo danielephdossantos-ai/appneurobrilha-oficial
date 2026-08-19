@@ -12,9 +12,8 @@ export type MotivoErroIA = "creditos" | "limite" | "erro";
  *
  * Usa sonner toast com id fixo pra não empilhar várias notificações iguais.
  */
-export function notificarErroIA(motivo: MotivoErroIA | string, contexto?: string) {
+export function notificarErroIA(motivo: MotivoErroIA, contexto?: string) {
   const prefixo = contexto ? `${contexto}: ` : "";
-  
   if (motivo === "creditos") {
     toast.warning(`${prefixo}A ajuda da IA acabou por hoje 💤`, {
       id: "ia-limite-diario",
@@ -24,24 +23,17 @@ export function notificarErroIA(motivo: MotivoErroIA | string, contexto?: string
     });
     return;
   }
-  
   if (motivo === "limite") {
-    toast.warning(`${prefixo}Estamos com muita gente falando agora ⏳`, {
+    toast.warning(`${prefixo}A IA está com muita gente falando agora ⏳`, {
       id: "ia-rate-limit",
-      description: "Aguarde um instante. Estamos tentando outro sistema de inteligência artificial para você.",
+      description: "Espere alguns minutinhos e tente de novo — não é problema no seu app.",
       duration: 6000,
     });
     return;
   }
-
-  // Erros técnicos reais
-  const description = typeof motivo === "string" && motivo !== "erro" 
-    ? motivo
-    : "Missão Prova: Não consegui falar com a IA agora\n\nVerifique a internet e tente de novo em instantes.";
-
-  toast.error(`${prefixo}Opa! Tivemos um probleminha técnico`, {
+  toast.error(`${prefixo}Não consegui falar com a IA agora`, {
     id: "ia-erro",
-    description,
+    description: "Verifique a internet e tente de novo em instantes.",
     duration: 5000,
   });
 }
