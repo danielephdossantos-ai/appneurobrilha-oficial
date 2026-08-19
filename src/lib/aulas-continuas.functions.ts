@@ -250,7 +250,7 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
     return { 
       status: "sucesso", 
       aula: salva || { id: salvoCanonico.aulaId, titulo: aulaGerada.titulo, conteudo: aulaGerada } 
-    };
+    } as { status: "sucesso" | "validacao_falhou"; aula: any };
   });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })
