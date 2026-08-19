@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Lock, Star, ChevronRight, Play } from "lucide-react";
-const DIAS_LABEL = ["", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
-const diaSemanaHoje = () => new Date().getDay() || 7;
+import { DIAS_LABEL, diaSemanaHoje } from "@/modules/primeiros-anos/builder";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "@tanstack/react-router";
 import { useMundoFundo, MundoBar } from "@/components/worlds/MundoTrilha";

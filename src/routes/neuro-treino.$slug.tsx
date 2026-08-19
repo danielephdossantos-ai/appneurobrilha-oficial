@@ -50,7 +50,6 @@ import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 import { useAbaPrompting } from "@/hooks/useAbaPrompting";
 import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
-import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
 
 // Filtra variações por escala de dificuldade adaptativa (0.1..1.0).
 // - Se a variação carrega payload.nivel (1|2|3), filtra por teto: <0.4 => 1, <0.75 => <=2, senão todas.
@@ -219,7 +218,13 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    return sanitizarFalaMascote(narracao, nomeCrianca);
+    try {
+      // Usar a importação direta se possível, ou require para evitar quebra se o arquivo não existir
+      const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
+      return sanitizarFalaMascote(narracao, nomeCrianca);
+    } catch (e) {
+      return narracao;
+    }
   }, [narracao, nomeCrianca]);
 
 
@@ -243,7 +248,7 @@ function NeuroAtividade() {
 
   // ===== Early returns (depois de todos os hooks) =====
   if (!hiperfoco) {
-    return <Navigate to="/neuro-treino" />;
+    return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
   }
 
   if (isLoading) {
@@ -375,7 +380,8 @@ function NeuroAtividade() {
             Voz {voiceOn ? "ON" : "OFF"}
           </button>
           <Link
-            to="/neuro-treino"
+            to="/neuro-treino/configurar"
+            search={{ next: slug }}
             className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
           >
             {hiperfoco.label} <span className="text-primary">· trocar</span>

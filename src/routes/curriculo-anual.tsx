@@ -35,7 +35,7 @@ import {
   type HorarioSalvo,
   type ItemSalvo,
 } from "@/modules/curriculo-anual/persist";
-
+import { garantirPlanoSeNecessario } from "@/modules/primeiros-anos/persist";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 
 
@@ -74,7 +74,7 @@ function CurriculoAnualPage() {
   const [progresso, setProgresso] = useState({ total: 0, concluidas: 0 });
   const [semestre, setSemestre] = useState<1 | 2>(1);
   const [semana, setSemana] = useState(1);
-  
+  const [temAlfabetizacao, setTemAlfabetizacao] = useState(false);
 
 
   const cursos = useMemo(() => (serieNum ? cursosDaSerie(serieNum) : []), [serieNum]);
@@ -125,6 +125,14 @@ function CurriculoAnualPage() {
         setSemestre(atual.semestre);
         setSemana(atual.semana);
         await recarregar(atual.semestre, atual.semana);
+      }
+      // 7+ que ainda não lê (pela anamnese) entra automaticamente na
+      // rotina de alfabetização dos Primeiros Anos.
+      try {
+        const alfa = await garantirPlanoSeNecessario(childId, activeChild?.idade ?? 7);
+        setTemAlfabetizacao(!!alfa);
+      } catch {
+        /* noop */
       }
       setLoading(false);
     })();
@@ -210,6 +218,19 @@ function CurriculoAnualPage() {
         subtitle="O ano letivo completo da criança, em 2 semestres"
       />
 
+      {temAlfabetizacao && (
+        <Link to="/primeiros-anos" className="block mb-4">
+          <Card className="bg-emerald-500/10 border-emerald-500/40">
+            <div className="text-[11px] font-black uppercase tracking-wider text-emerald-600">
+              🌱 Primeiros Anos · na rotina
+            </div>
+            <p className="text-sm font-bold">
+              A criança ainda está aprendendo a ler — o plano de alfabetização entrou na rotina
+              dela. Toque para ver.
+            </p>
+          </Card>
+        </Link>
+      )}
 
 
 

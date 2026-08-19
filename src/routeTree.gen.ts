@@ -34,6 +34,8 @@ import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PlanoAnualRouteImport } from './routes/plano-anual'
+import { Route as PlanoNeuroRouteImport } from './routes/plano-neuro'
+import { Route as PrimeirosAnosRouteImport } from './routes/primeiros-anos'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ProfessorMatematicaRouteImport } from './routes/professor-matematica'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
@@ -54,6 +56,7 @@ import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.in
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
+import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as PainelPaisDocumentosRouteImport } from './routes/painel-pais/documentos'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -219,6 +222,16 @@ const PlanoAnualRoute = PlanoAnualRouteImport.update({
   path: '/plano-anual',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanoNeuroRoute = PlanoNeuroRouteImport.update({
+  id: '/plano-neuro',
+  path: '/plano-neuro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrimeirosAnosRoute = PrimeirosAnosRouteImport.update({
+  id: '/primeiros-anos',
+  path: '/primeiros-anos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
   id: '/privacidade',
   path: '/privacidade',
@@ -320,6 +333,11 @@ const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
 const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
+const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
+  id: '/configurar',
+  path: '/configurar',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
 const PainelPaisDocumentosRoute = PainelPaisDocumentosRouteImport.update({
@@ -577,6 +595,8 @@ export interface FileRoutesByFullPath {
   '/painel-pais': typeof PainelPaisRouteWithChildren
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
+  '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -595,6 +615,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -662,6 +683,8 @@ export interface FileRoutesByTo {
   '/painel-pais': typeof PainelPaisRouteWithChildren
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
+  '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -680,6 +703,7 @@ export interface FileRoutesByTo {
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin': typeof AdminIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
@@ -749,6 +773,8 @@ export interface FileRoutesById {
   '/painel-pais': typeof PainelPaisRouteWithChildren
   '/perfil-aluno': typeof PerfilAlunoRoute
   '/plano-anual': typeof PlanoAnualRoute
+  '/plano-neuro': typeof PlanoNeuroRoute
+  '/primeiros-anos': typeof PrimeirosAnosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/professor-matematica': typeof ProfessorMatematicaRoute
   '/progressao': typeof ProgressaoRoute
@@ -767,6 +793,7 @@ export interface FileRoutesById {
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -837,6 +864,8 @@ export interface FileRouteTypes {
     | '/painel-pais'
     | '/perfil-aluno'
     | '/plano-anual'
+    | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -855,6 +884,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
     | '/escola-brilha/'
@@ -922,6 +952,8 @@ export interface FileRouteTypes {
     | '/painel-pais'
     | '/perfil-aluno'
     | '/plano-anual'
+    | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -940,6 +972,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin'
     | '/escola-brilha'
@@ -1008,6 +1041,8 @@ export interface FileRouteTypes {
     | '/painel-pais'
     | '/perfil-aluno'
     | '/plano-anual'
+    | '/plano-neuro'
+    | '/primeiros-anos'
     | '/privacidade'
     | '/professor-matematica'
     | '/progressao'
@@ -1026,6 +1061,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
     | '/escola-brilha/'
@@ -1095,6 +1131,8 @@ export interface RootRouteChildren {
   PainelPaisRoute: typeof PainelPaisRouteWithChildren
   PerfilAlunoRoute: typeof PerfilAlunoRoute
   PlanoAnualRoute: typeof PlanoAnualRoute
+  PlanoNeuroRoute: typeof PlanoNeuroRoute
+  PrimeirosAnosRoute: typeof PrimeirosAnosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ProfessorMatematicaRoute: typeof ProfessorMatematicaRoute
   ProgressaoRoute: typeof ProgressaoRoute
@@ -1324,6 +1362,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanoAnualRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plano-neuro': {
+      id: '/plano-neuro'
+      path: '/plano-neuro'
+      fullPath: '/plano-neuro'
+      preLoaderRoute: typeof PlanoNeuroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/primeiros-anos': {
+      id: '/primeiros-anos'
+      path: '/primeiros-anos'
+      fullPath: '/primeiros-anos'
+      preLoaderRoute: typeof PrimeirosAnosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidade': {
       id: '/privacidade'
       path: '/privacidade'
@@ -1462,6 +1514,13 @@ declare module '@tanstack/react-router' {
       path: '/$slug'
       fullPath: '/neuro-treino/$slug'
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
+    '/neuro-treino/configurar': {
+      id: '/neuro-treino/configurar'
+      path: '/configurar'
+      fullPath: '/neuro-treino/configurar'
+      preLoaderRoute: typeof NeuroTreinoConfigurarRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
     '/painel-pais/documentos': {
@@ -1752,6 +1811,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
+  NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
   NeuroTreinoLerComAuroraAulaRoute: typeof NeuroTreinoLerComAuroraAulaRoute
   NeuroTreinoLerComAuroraDiagnosticoRoute: typeof NeuroTreinoLerComAuroraDiagnosticoRoute
   NeuroTreinoLerComAuroraPainelRoute: typeof NeuroTreinoLerComAuroraPainelRoute
@@ -1760,6 +1820,7 @@ interface NeuroTreinoRouteChildren {
 
 const NeuroTreinoRouteChildren: NeuroTreinoRouteChildren = {
   NeuroTreinoSlugRoute: NeuroTreinoSlugRoute,
+  NeuroTreinoConfigurarRoute: NeuroTreinoConfigurarRoute,
   NeuroTreinoLerComAuroraAulaRoute: NeuroTreinoLerComAuroraAulaRoute,
   NeuroTreinoLerComAuroraDiagnosticoRoute:
     NeuroTreinoLerComAuroraDiagnosticoRoute,
@@ -1823,6 +1884,8 @@ const rootRouteChildren: RootRouteChildren = {
   PainelPaisRoute: PainelPaisRouteWithChildren,
   PerfilAlunoRoute: PerfilAlunoRoute,
   PlanoAnualRoute: PlanoAnualRoute,
+  PlanoNeuroRoute: PlanoNeuroRoute,
+  PrimeirosAnosRoute: PrimeirosAnosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ProfessorMatematicaRoute: ProfessorMatematicaRoute,
   ProgressaoRoute: ProgressaoRoute,

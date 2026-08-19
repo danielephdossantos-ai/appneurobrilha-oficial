@@ -3,14 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Circle, Flame, Timer, Trophy } from "lucide-react";
 import { Card, Pill } from "@/components/Layout";
-interface ItemSalvo {
-  id: string;
-  trilha_label: string;
-  titulo: string;
-  minutos: number;
-  concluido: boolean;
-  rota: string;
-}
+import type { ItemSalvo } from "@/modules/primeiros-anos/persist";
 
 const META_MIN = 15;
 const META_MAX = 20;

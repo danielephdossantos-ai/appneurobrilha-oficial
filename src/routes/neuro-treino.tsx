@@ -293,7 +293,7 @@ function Treino() {
                 )}
               </div>
               <Link
-                to="/neuro-treino"
+                to="/neuro-treino/configurar"
                 className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-3 py-2 transition-all border border-white/10"
               >
                 <Zap className="h-3.5 w-3.5 text-amber-400" />
@@ -350,6 +350,49 @@ function Treino() {
         <SensoryPanel />
 
         {/* ── PLANEJAMENTO E PLANOS (UNIFICADO) ────────────────────── */}
+        {activeChild && activeChild.idade < 7 && (
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <Link
+              to="/primeiros-anos"
+              className="group relative overflow-hidden rounded-3xl border-2 border-primary/20 bg-white p-4 shadow-sm transition hover:shadow-md dark:bg-slate-900"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                  <GraduationCap className="h-6 w-6 text-primary" />
+                </div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-primary/70">
+                  Sistema 1
+                </div>
+                <div className="text-sm font-black leading-tight text-slate-900 dark:text-white">
+                  Plano de Alfabetização (3-6a)
+                </div>
+              </div>
+              <div className="absolute -bottom-2 -right-2 h-16 w-16 opacity-5">
+                <GraduationCap className="h-full w-full" />
+              </div>
+            </Link>
+
+            <Link
+              to="/plano-neuro"
+              className="group relative overflow-hidden rounded-3xl border-2 border-sun/20 bg-white p-4 shadow-sm transition hover:shadow-md dark:bg-slate-900"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-sun/10">
+                  <Brain className="h-6 w-6 text-sun-foreground" />
+                </div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-sun-foreground/70">
+                  Sistema 2
+                </div>
+                <div className="text-sm font-black leading-tight text-slate-900 dark:text-white">
+                  Plano Neuro-Treino (3-6a)
+                </div>
+              </div>
+              <div className="absolute -bottom-2 -right-2 h-16 w-16 opacity-5">
+                <Brain className="h-full w-full" />
+              </div>
+            </Link>
+          </div>
+        )}
 
         <div className="space-y-5">
           {/* ── MY FIRST ENGLISH · Ed. Infantil ─────────────────── */}
@@ -655,6 +698,12 @@ function Treino() {
                   Campos de Experiência · Educação Infantil
                 </div>
                 <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
+              </Link>
+              <Link
+                to="/primeiros-anos"
+                className="block text-center text-xs font-black text-primary underline py-1"
+              >
+                Ver no plano anual (Primeiros Anos) →
               </Link>
             </div>
           </div>
