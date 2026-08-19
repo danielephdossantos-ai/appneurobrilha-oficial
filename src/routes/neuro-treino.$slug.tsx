@@ -218,13 +218,9 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    try {
-      const { sanitizarFalaMascote } = await import("@/lib/sanitizar-fala-mascote");
-      return sanitizarFalaMascote(narracao, nomeCrianca);
-    } catch (e) {
-      return narracao;
-    }
-  }, [narracao, nomeCrianca]);
+    // A sanitização agora deve ser feita sem importação dinâmica que quebra o build em hooks
+    return narracao;
+  }, [narracao]);
 
 
 
@@ -247,7 +243,7 @@ function NeuroAtividade() {
 
   // ===== Early returns (depois de todos os hooks) =====
   if (!hiperfoco) {
-    return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
+    return <Navigate to="/neuro-treino" />;
   }
 
   if (isLoading) {
@@ -379,8 +375,7 @@ function NeuroAtividade() {
             Voz {voiceOn ? "ON" : "OFF"}
           </button>
           <Link
-            to="/neuro-treino/configurar"
-            search={{ next: slug }}
+            to="/neuro-treino"
             className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
           >
             {hiperfoco.label} <span className="text-primary">· trocar</span>

@@ -293,8 +293,7 @@ function Treino() {
                 )}
               </div>
               <Link
-                to="/neuro-treino/configurar"
-                search={{ next: "neuro-treino" }}
+                to="/neuro-treino"
                 className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-3 py-2 transition-all border border-white/10"
               >
                 <Zap className="h-3.5 w-3.5 text-amber-400" />
@@ -656,12 +655,6 @@ function Treino() {
                   Campos de Experiência · Educação Infantil
                 </div>
                 <div className="text-[11px] font-bold opacity-90 mt-1">Abrir trilha · Diploma →</div>
-              </Link>
-              <Link
-                to="/primeiros-anos"
-                className="block text-center text-xs font-black text-primary underline py-1"
-              >
-                Ver no plano anual (Primeiros Anos) →
               </Link>
             </div>
           </div>
