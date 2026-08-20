@@ -137,6 +137,21 @@ function RootComponent() {
     import("@/lib/push-notifications").then(({ registerPushNotifications }) => {
       registerPushNotifications();
     });
+    
+    // Limpeza única de cache de navegação e estados antigos do Neuro-Treino
+    if (typeof window !== "undefined" && !window.sessionStorage.getItem("brilha:cache_cleared")) {
+      const STALE_KEYS = [
+        "neuroTreino:world", "neuroTreino:trilha", "neuroTreino:trail", 
+        "neuroTreino:lastRoute", "neuroTreino:redirect", "neuro-treino:world",
+        "neuro-treino:trilha", "neuro-treino:redirect", "currentWorld", "lastJourneyRoute"
+      ];
+      STALE_KEYS.forEach(k => {
+        window.localStorage.removeItem(k);
+        window.sessionStorage.removeItem(k);
+      });
+      window.sessionStorage.setItem("brilha:cache_cleared", "true");
+      console.log("🚀 Cache Brilha limpo com sucesso!");
+    }
   }, []);
 
   return (
