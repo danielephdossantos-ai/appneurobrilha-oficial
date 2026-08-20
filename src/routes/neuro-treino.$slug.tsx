@@ -1674,8 +1674,6 @@ function Mosaico({
   );
 }
 
-  );
-}
 
 // ============== 13. Sequência de Cores ==============
 function SequenciaCores({ p, onDone }: any) {
