@@ -2272,6 +2272,46 @@ const CL_BANK: ClItem[] = [
     ],
     correta: 2,
   },
+  {
+    nivel: 3,
+    tipo: "inferencial",
+    texto: "A raposa olhava para as uvas bem no alto da parreira. Tentou pular, mas não alcançava. Saiu dizendo que estavam verdes.",
+    pergunta: "Por que a raposa disse que as uvas estavam verdes?",
+    opcoes: ["Porque realmente estavam verdes", "Porque não conseguiu pegá-las", "Porque ela não gosta de uvas", "Porque eram venenosas"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "O sol brilha forte no verão.",
+    pergunta: "Em qual estação o sol brilha forte?",
+    opcoes: ["Inverno", "Verão", "Outono", "Primavera"],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "inferencial",
+    texto: "O bebê começou a chorar e apontou para a mamadeira vazia.",
+    pergunta: "O que o bebê provavelmente estava sentindo?",
+    opcoes: ["Sono", "Fome", "Frio", "Alegria"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "A vaca produz o leite que bebemos.",
+    pergunta: "Quem produz o leite?",
+    opcoes: ["O cavalo", "A vaca", "A galinha", "O pato"],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "interpretativa",
+    texto: "A tartaruga ganhou a corrida do coelho porque não parou para descansar, mantendo um passo firme até o fim.",
+    pergunta: "Por que a tartaruga venceu?",
+    opcoes: ["Porque era mais rápida", "Porque foi persistente", "Porque o coelho a ajudou", "Porque ela pegou um atalho"],
+    correta: 1,
+  },
 ];
 
 const COMPREENSAO_LEITORA_VARS: Variation[] = range(50).map((i) => {
