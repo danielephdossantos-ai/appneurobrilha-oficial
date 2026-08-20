@@ -116,7 +116,9 @@ export function RenderEmoji({ e, className = "w-16 h-16", label, hideText, style
         alt={label ?? semEmoji(raw)}
         loading="lazy"
         className={`${className} object-contain drop-shadow-sm`}
+        style={style}
       />
+
     );
   }
 
