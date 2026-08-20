@@ -4504,6 +4504,7 @@ function TremNumerico({ p, onDone }: any) {
 
 // 47. TROCA-TROCA DE REGRAS
 function TrocaRegras({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [regra, setRegra] = useState(p.regras[0]);
   const [round, setRound] = useState(0);
   const [acertosLocais, setAcertosLocais] = useState(0);
@@ -4515,12 +4516,18 @@ function TrocaRegras({ p, onDone }: any) {
     setRegra(r);
     const cores = ["🔴", "🔵", "🟢", "🟡"];
     const formas = ["🔺", "🟦", "🟢", "⭐"];
-    const items = range(4).map((i: number) => ({ cor: cores[i], forma: formas[(i+1)%4] }));
+    const items = range(4).map((i: number) => ({ 
+      cor: cores[i], 
+      forma: formas[(i + 1) % 4] 
+    }));
     setAlvo(items[Math.floor(Math.random() * items.length)]);
     setOpts([...items].sort(() => Math.random() - 0.5));
   };
 
-  useEffect(() => gerarRound(), []);
+  useEffect(() => {
+    gerarRound();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOpt = (o: any) => {
     const match = regra === "cor" ? o.cor === alvo.cor : o.forma === alvo.forma;
@@ -4536,6 +4543,7 @@ function TrocaRegras({ p, onDone }: any) {
   };
 
   if (!alvo) return null;
+
 
   return (
     <div className="py-6 text-center space-y-6">
