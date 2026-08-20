@@ -220,14 +220,9 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    try {
-      // Usar a importação direta se possível, ou require para evitar quebra se o arquivo não existir
-      const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
-      return sanitizarFalaMascote(narracao, nomeCrianca);
-    } catch (e) {
-      return narracao;
-    }
+    return sanitizarFalaMascote(narracao, nomeCrianca);
   }, [narracao, nomeCrianca]);
+
 
 
 
