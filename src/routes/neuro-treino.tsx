@@ -144,13 +144,6 @@ const GROUP_CONFIG: Record<
     border: "border-violet-200 dark:border-violet-800",
     accent: "bg-violet-500",
   },
-  Alfabetização: {
-    icon: <BookOpen className="h-5 w-5" />,
-    color: "text-amber-600",
-    bg: "from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20",
-    border: "border-amber-200 dark:border-amber-800",
-    accent: "bg-amber-500",
-  },
   "Fala e Som": {
     icon: <Sparkles className="h-5 w-5" />,
     color: "text-sky-600",

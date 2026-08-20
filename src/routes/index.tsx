@@ -238,7 +238,7 @@ function Index() {
               <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
                 {activeChild
                   ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
-                  : "os mascotes sumiram está só umquebra cabeça nas imagem . 🧩\n\nDino, Robo, Pipa e unicórnio\n\nCompanheiro de Jornada"}
+                  : "Oi! Escolha um Companheiro de Jornada para começar! 🚀"}
               </p>
             </div>
           </div>
