@@ -616,7 +616,14 @@ function MechanicRenderer({
       return <ConstrutorDeFormas p={variation.payload} onDone={onConcluir} />;
     case "estudio-arte-contorno":
       return <EstudioArteContorno p={variation.payload} onDone={onConcluir} />;
-
+    default:
+      return (
+        <div className="text-center p-8 bg-background/50 rounded-3xl border-2 border-dashed border-muted-foreground/30">
+          <AlertCircle className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+          <h3 className="text-lg font-bold text-muted-foreground">Mecânica não encontrada</h3>
+          <p className="text-sm text-muted-foreground/70">A categoria "{slug}" não pôde ser renderizada.</p>
+        </div>
+      );
   }
 }
 
