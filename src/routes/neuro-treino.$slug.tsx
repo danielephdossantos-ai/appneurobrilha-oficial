@@ -3859,24 +3859,6 @@ function PalavraImagem({ p, onDone }: any) {
   );
 }
 
-              : selecionado && certa
-                ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
-          return (
-            <button
-              key={i}
-              onClick={() => handleClick(opt)}
-              className={`rounded-2xl border-2 ${optPad} font-black tracking-wider transition-all ${bg}`}
-            >
-              {opt}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 
 // 38. FORMANDO PALAVRAS — tocar sílabas em ordem
 function FormandoPalavras({ p, onDone }: any) {
