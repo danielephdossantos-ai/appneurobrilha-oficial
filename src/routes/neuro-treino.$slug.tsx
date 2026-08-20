@@ -1617,7 +1617,7 @@ function Mosaico({
                     h={pc.h}
                     color="none"
                     stroke="rgba(255,255,255,0.3)"
-                    strokeWidth={0.8}
+
                   />
                 </g>
               ))}
