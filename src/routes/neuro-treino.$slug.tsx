@@ -48,6 +48,8 @@ import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 import { useAbaPrompting } from "@/hooks/useAbaPrompting";
+import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
+
 import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 
