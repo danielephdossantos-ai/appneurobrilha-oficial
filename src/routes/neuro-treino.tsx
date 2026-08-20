@@ -434,15 +434,21 @@ function Treino() {
 
                         {/* Ícone GRANDE — foco visual para a criança */}
                         <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
-                          <img
-                            src={iconSrc ?? ""}
-                            alt={c?.nome ?? slug}
-                            loading="lazy"
-                            width={128}
-                            height={128}
-                            className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-                            draggable={false}
-                          />
+                          {iconSrc ? (
+                            <img
+                              src={iconSrc}
+                              alt={c?.nome ?? slug}
+                              loading="lazy"
+                              width={128}
+                              height={128}
+                              className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
+                              draggable={false}
+                            />
+                          ) : (
+                            <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground/30 border-2 border-dashed border-muted-foreground/20">
+                              <Sparkles size={32} />
+                            </div>
+                          )}
                         </div>
 
                         <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
