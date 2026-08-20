@@ -1246,30 +1246,27 @@ function CadeOPar({ p, onDone }: any) {
 // ============== 10. Vigilante Noturno (Foco Sustentado) ==============
 function VigilanteNoturno({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
-  const speedMul = sens.lowStim ? 1.6 : 1; // mais lento = menos estímulo
-  const press = sens.reduceMotion ? "" : "active:scale-90";
-  const errorRing = sens.softColors ? "ring-amber-400 bg-amber-100/40" : "ring-destructive bg-destructive/10";
-  const btnSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
-
-  const [capturados, setCapturados] = useState<number[]>([]); // índices de alvos pegos
+  
+  // Aleatoriedade real e densidade adaptativa
+  const speedMul = sens.lowStim ? 1.6 : 1;
+  const press = sens.reduceMotion ? "" : "active:scale-90 active:brightness-90 transition-all";
+  
+  const [capturados, setCapturados] = useState<number[]>([]); 
   const [erros, setErros] = useState(0);
   const [piscarErro, setPiscarErro] = useState<number | null>(null);
 
-
-  // Layout fixo por atividade: faixa vertical + sentido + atraso para cada item.
+  // Layout aleatório real para cada item vindo do banco
   const layout = useMemo(() => {
     return p.itens.map((_: any, i: number) => {
-      const seed = i * 17 + 3;
-      const rnd = (n: number) => (Math.sin(seed * n) + 1) / 2;
       return {
-        topPct: 6 + rnd(1.3) * 78,        // faixa vertical
-        delay: rnd(2.7) * 2.5,             // atraso inicial
-        reverse: rnd(3.1) > 0.5,           // sentido (vai/volta invertido)
-        dur: p.flutuarMs / 1000 + rnd(4.3) * 1.2,
+        topPct: 15 + Math.random() * 70, // Evitar topo/fundo extremo
+        delay: Math.random() * 4,        // Atraso aleatório real
+        reverse: Math.random() > 0.5,    // Sentido aleatório real
+        dur: (p.flutuarMs / 1000) * (0.8 + Math.random() * 0.4) * speedMul, // Duração variável
       };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [p.itens, speedMul]);
 
   const alvoNome = p.alvo.nome;
   const alvosIdx = p.itens
@@ -1277,9 +1274,8 @@ function VigilanteNoturno({ p, onDone }: any) {
     .filter((x: number) => x >= 0);
   const faltam = alvosIdx.length - capturados.length;
 
-  // Conclui quando todos os alvos foram capturados.
   useEffect(() => {
-    if (faltam === 0) {
+    if (faltam === 0 && alvosIdx.length > 0) {
       const t = setTimeout(() => onDone(erros <= alvosIdx.length), 700);
       return () => clearTimeout(t);
     }
@@ -1294,9 +1290,10 @@ function VigilanteNoturno({ p, onDone }: any) {
     } else {
       setErros((e) => e + 1);
       setPiscarErro(i);
-      setTimeout(() => setPiscarErro(null), 350);
+      setTimeout(() => setPiscarErro(null), 400);
     }
   };
+
 
   return (
     <div className="space-y-4">
