@@ -4391,32 +4391,48 @@ function TremNumerico({ p, onDone }: any) {
     onDone(val === p.seq[p.buracos[0]]);
   };
 
+  const correct = p.seq[p.buracos[0]];
+  const options = useMemo(() => {
+    const wrong1 = correct + 1;
+    const wrong2 = correct - 1 > 0 ? correct - 1 : correct + 2;
+    return [correct, wrong1, wrong2].sort(() => Math.random() - 0.5);
+  }, [correct]);
+
   return (
-    <div className="py-10 flex flex-col items-center gap-8">
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 max-w-full">
-        <div className="text-6xl">🚂</div>
+    <div className="py-10 flex flex-col items-center gap-8 w-full">
+      <div className="flex items-center gap-3 overflow-x-auto pb-6 max-w-full px-4 scrollbar-hide">
+        <div className="text-7xl drop-shadow-lg flex-shrink-0">🚂</div>
         {p.seq.map((n: number, i: number) => {
           const isBuraco = p.buracos.includes(i);
           return (
-            <div key={i} className={`w-20 h-24 rounded-t-2xl border-x-4 border-t-4 flex items-center justify-center text-3xl font-black ${isBuraco ? 'bg-primary/5 border-dashed border-primary/30 text-transparent' : 'bg-white border-primary/20'}`}>
-              {!isBuraco ? n : "?"}
+            <div 
+              key={i} 
+              className={`w-24 h-28 rounded-2xl border-4 flex-shrink-0 flex items-center justify-center text-4xl font-black shadow-md transition-all
+                ${isBuraco 
+                  ? 'bg-primary/5 border-dashed border-primary/30 text-primary/20 animate-pulse' 
+                  : 'bg-white border-primary/20 text-primary'}`}
+            >
+              {isBuraco ? "?" : n}
             </div>
           );
         })}
       </div>
-      <div className="flex gap-4">
-        {p.buracos.map((bIdx: number) => (
-          <button key={bIdx} onClick={() => handleSlot(p.seq[bIdx])} className="w-20 h-20 bg-primary text-white rounded-3xl text-3xl font-black shadow-lg hover:scale-110 active:scale-95 transition-all">
-            {p.seq[bIdx]}
+      
+      <div className="flex gap-4 flex-wrap justify-center">
+        {options.map((val, idx) => (
+          <button 
+            key={idx} 
+            onClick={() => onDone(val === correct)} 
+            className="w-24 h-24 bg-white hover:bg-primary/5 text-primary rounded-[2rem] border-4 border-primary/10 text-4xl font-black shadow-xl hover:scale-105 active:scale-95 transition-all"
+          >
+            {val}
           </button>
         ))}
-        <button onClick={() => onDone(false)} className="w-20 h-20 bg-muted text-muted-foreground rounded-3xl text-3xl font-black opacity-50">
-          {p.seq[0] - 1}
-        </button>
       </div>
     </div>
   );
 }
+
 
 // 47. TROCA-TROCA DE REGRAS
 function TrocaRegras({ p, onDone }: any) {
