@@ -3316,8 +3316,6 @@ function CopiarFigura({ p, onDone }: any) {
   );
 }
 
-  );
-}
 
 // 31. ALVO MÓVEL — bichinho do banco se move pela tela, criança toca (tempo livre, sem voz)
 function AlvoMovel({ p, onDone }: any) {
