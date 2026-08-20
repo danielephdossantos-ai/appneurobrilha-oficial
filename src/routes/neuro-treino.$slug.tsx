@@ -359,103 +359,70 @@ function NeuroAtividade() {
 
   return (
     <Shell>
-      <div className="flex items-center justify-between gap-3 mb-2">
-        <button
-          onClick={() => {
-            if (!handleBack(navigate)) {
-              navigate({ to: "/neuro-treino" });
-            }
-          }}
-          className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft size={16} /> Voltar
-        </button>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleVoice}
-            title={voiceOn ? "Desligar voz da PIP" : "Ligar voz da PIP"}
-            className={`flex items-center gap-1 text-xs font-bold rounded-full border px-3 py-1 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
-          >
-            {voiceOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
-            Voz {voiceOn ? "ON" : "OFF"}
-          </button>
-          <Link
-            to="/neuro-treino/configurar"
-            search={{ next: slug }}
-            className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
-          >
-            {hiperfoco.label} <span className="text-primary">· trocar</span>
-          </Link>
-        </div>
-      </div>
-      <PageHeader title={meta.nome} subtitle={instrucaoTematica} />
-
-      {slug !== "motorzinho-dos-sons" && (
-        <div className="mb-3 flex items-center gap-2 justify-center">
+      {/* ── CABEÇALHO ENXUGADO ────────────────────────────────── */}
+      <div className="flex items-center justify-center gap-3 mb-4">
+        {slug !== "motorzinho-dos-sons" && (
           <button
             onClick={replay}
             disabled={!voiceOn || isSpeaking}
-            className="flex items-center gap-2 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20 disabled:opacity-50"
+            className="flex items-center gap-2 text-xs font-black rounded-full bg-primary/10 border border-primary/30 px-4 py-2 hover:bg-primary/20 disabled:opacity-50 transition-all shadow-sm active:scale-95"
           >
-            <Volume2 size={14} className={isSpeaking ? "animate-pulse" : ""} />
-            {isSpeaking ? "PIP falando..." : "Ouvir PIP de novo"}
+            <Volume2 size={16} className={isSpeaking ? "animate-pulse" : ""} />
+            {isSpeaking ? "OUVINDO..." : "OUVIR PIP"}
           </button>
-        </div>
-      )}
-
-      <div className="flex items-center justify-between mb-4 text-sm font-bold">
-        <span className="text-muted-foreground">
-          Exercício {(index % vars.length) + 1} de {vars.length}
-        </span>
-        <span className="text-success inline-flex items-center gap-1">
-          <Star size={14} className="fill-current" /> {acertos}
-        </span>
+        )}
       </div>
 
-      {/* Chip de nível de ajuda ABA (fading de prompting) */}
-      {activeChild && !aba.loading && (
-        <div className="mb-3 flex items-center justify-between rounded-2xl bg-card border-2 border-primary/20 px-3 py-2 text-xs">
-          <div className="flex items-center gap-2">
-            <Hand size={14} className="text-primary" />
-            <span className="font-black uppercase tracking-wider text-primary">
-              Ajuda: {aba.label}
-            </span>
-          </div>
-          <span className="text-muted-foreground truncate max-w-[60%] text-right">
-            {aba.hint}
+      {/* ÁREA CENTRALIZADA AUTOMATICAMENTE */}
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[65vh] w-full overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto px-2">
+          <Card className={`bg-gradient-to-br ${meta.cor} border-2 shadow-2xl rounded-[2.5rem] overflow-hidden`}>
+            <div className="p-4 md:p-8 flex items-center justify-center min-h-[400px]">
+              <MechanicRenderer
+                slug={slug}
+                variation={variation}
+                onConcluir={onConcluir}
+                promptLevel={aba.level}
+                key={variation.id}
+              />
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      {/* PROGRESSO E INFOS (RODAPÉ DISCRETO) */}
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+          <span>{meta.nome}</span>
+          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+          <span>Exercício {(index % vars.length) + 1} de {vars.length}</span>
+          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+          <span className="text-success inline-flex items-center gap-1">
+            <Star size={10} className="fill-current" /> {acertos}
           </span>
         </div>
-      )}
-      {aba.mastery.achieved && (
-        <div className="mb-3 rounded-2xl bg-success/10 border-2 border-success/40 px-3 py-2 text-xs font-bold text-success text-center">
-          🎓 Habilidade dominada — pronta para avançar!
+        
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/neuro-treino" });
+              }
+            }}
+            className="flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft size={14} /> Sair
+          </button>
+          
+          <button
+            onClick={toggleVoice}
+            className={`flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter rounded-full border px-2 py-0.5 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
+          >
+            Voz {voiceOn ? "ON" : "OFF"}
+          </button>
         </div>
-      )}
+      </div>
 
-      {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
-        <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
-          <img
-            src={getElementoImg(elemento)}
-            alt={elemento}
-            className="w-10 h-10 object-contain drop-shadow-sm"
-          />
-          <div>
-            <span className="font-bold text-primary">{elemento}</span>
-            <span className="text-muted-foreground"> está aqui treinando com você!</span>
-          </div>
-        </div>
-      )}
-
-
-      <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
-        <MechanicRenderer
-          slug={slug}
-          variation={variation}
-          onConcluir={onConcluir}
-          promptLevel={aba.level}
-          key={variation.id}
-        />
-      </Card>
 
       <div className="mt-4 flex justify-end">
         <button
