@@ -4527,23 +4527,41 @@ function TrocaRegras({ p, onDone }: any) {
 
 // 48. PONTE DE BLOCOS
 function PonteBlocos({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-90 hover:scale-105";
+
   return (
-    <div className="py-10 text-center space-y-10">
-      <div className="flex items-center justify-center gap-1">
-        <div className="h-16 w-32 bg-slate-400 rounded-l-2xl"></div>
-        <div className="h-16 w-32 border-4 border-dashed border-white/60 rounded-xl flex items-center justify-center text-4xl opacity-50">
-          {p.target}
+    <div className="py-10 text-center space-y-12 w-full max-w-xl mx-auto">
+      <div className="flex items-center justify-center gap-2">
+        {/* Pilar Esquerdo */}
+        <div className="h-24 w-12 bg-slate-300 rounded-t-2xl shadow-inner border-r-4 border-slate-400"></div>
+        
+        {/* Área da Ponte (Target) */}
+        <div className="flex-1 max-w-[200px] h-20 border-4 border-dashed border-white/80 rounded-[2rem] flex items-center justify-center bg-white/20 animate-pulse">
+           <div className="text-6xl opacity-20 grayscale">{p.target}</div>
         </div>
-        <div className="h-16 w-32 bg-slate-400 rounded-r-2xl"></div>
+        
+        {/* Pilar Direito */}
+        <div className="h-24 w-12 bg-slate-300 rounded-t-2xl shadow-inner border-l-4 border-slate-400"></div>
       </div>
-      <div className="flex justify-center gap-4">
+
+      <div className="flex flex-wrap justify-center gap-6">
         {p.opts.map((o: any, i: number) => (
-          <button key={i} onClick={() => onDone(o === p.target)} className="w-24 h-24 bg-white rounded-3xl shadow-lg hover:scale-110 active:scale-95 transition-all text-5xl flex items-center justify-center border-4 border-primary/10">
+          <button 
+            key={i} 
+            onClick={() => onDone(o === p.target)} 
+            className={`w-28 h-28 bg-white rounded-[2.5rem] shadow-xl transition-all text-6xl flex items-center justify-center border-4 border-white/50 ${press}`}
+          >
             {o}
           </button>
         ))}
       </div>
+      
+      <div className="text-sm font-black text-white/60 uppercase tracking-widest">
+        Escolha o bloco para completar a ponte!
+      </div>
     </div>
   );
 }
+
 
