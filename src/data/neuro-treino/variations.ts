@@ -2333,7 +2333,11 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "trem-numerico": TREM_NUMERICO_VARS,
   "troca-troca-regras": TROCA_REGRAS_VARS,
   "ponte-de-blocos": PONTE_BLOCOS_VARS,
+  "quebra-cabeca-magico": QUEBRA_CABECA_MAGICO_VARS,
+  "construtor-de-formas": CONSTRUTOR_DE_FORMAS_VARS,
+  "estudio-arte-contorno": ESTUDIO_ARTE_CONTORNO_VARS,
 };
+
 
 export const GRUPOS = [
 
