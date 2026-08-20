@@ -4619,4 +4619,209 @@ function PonteBlocos({ p, onDone }: any) {
   );
 }
 
+// 49. QUEBRA-CABEÇA MÁGICO
+function QuebraCabecaMagico({ p, onDone }: any) {
+  const [pecasColocadas, setPecasColocadas] = useState<number>(0);
+  const total = p.pecas;
+
+  const handleDragOver = (e: React.DragEvent) => e.preventDefault();
+  
+  const handleDrop = (idx: number) => {
+    // Simulação de encaixe (snap)
+    setPecasColocadas(prev => {
+      const next = prev + 1;
+      if (next === total) {
+        setTimeout(() => onDone(true), 1500);
+      }
+      return next;
+    });
+  };
+
+  return (
+    <div className="py-6 text-center space-y-10 w-full max-w-4xl mx-auto flex flex-col items-center">
+      <div className="relative w-80 h-80 bg-slate-100 rounded-[3rem] border-4 border-dashed border-slate-300 flex items-center justify-center overflow-hidden">
+        <RenderEmoji e={p.emoji} className={`w-64 h-64 opacity-10 grayscale scale-110`} />
+        {/* Camada de peças encaixadas */}
+        <div className="absolute inset-0 flex items-center justify-center">
+             {pecasColocadas > 0 && (
+               <RenderEmoji 
+                e={p.emoji} 
+                className="w-64 h-64 transition-all duration-700 animate-in zoom-in spin-in-3" 
+                style={{ clipPath: `inset(0 ${100 - (pecasColocadas/total)*100}% 0 0)` }}
+               />
+             )}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-4 bg-white/40 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white shadow-xl">
+        {Array.from({ length: total - pecasColocadas }).map((_, i) => (
+          <div
+            key={i}
+            draggable
+            onDragEnd={() => handleDrop(i)}
+            className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing hover:scale-110 transition-transform"
+          >
+            <div className="w-12 h-12 bg-primary/20 rounded-lg animate-pulse" />
+          </div>
+        ))}
+      </div>
+      
+      {pecasColocadas === total && (
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="animate-ping bg-yellow-400/20 w-96 h-96 rounded-full" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 50. CONSTRUTOR DE FORMAS
+function ConstrutorDeFormas({ p, onDone }: any) {
+  const [colocadas, setColocadas] = useState<string[]>([]);
+  const partes = p.partes || [];
+
+  const handlePart = (part: string) => {
+    if (colocadas.includes(part)) return;
+    setColocadas(prev => {
+      const next = [...prev, part];
+      if (next.length === partes.length) {
+        setTimeout(() => onDone(true), 1200);
+      }
+      return next;
+    });
+  };
+
+  return (
+    <div className="py-6 text-center space-y-12 w-full max-w-4xl mx-auto flex flex-col items-center">
+      <div className="relative w-80 h-80 bg-white/40 backdrop-blur-xl rounded-[4rem] border-4 border-white shadow-2xl flex items-center justify-center">
+         <div className="text-9xl opacity-10">{p.emoji}</div>
+         {/* Representação visual da construção */}
+         <div className="absolute inset-0 flex flex-wrap gap-2 p-10 items-center justify-center">
+            {colocadas.map((part, i) => (
+              <div key={i} className="bg-primary text-white px-4 py-2 rounded-full font-black text-sm animate-in zoom-in spin-in-12">
+                {part}
+              </div>
+            ))}
+         </div>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full">
+        {partes.map((part: string, i: number) => {
+          const isDone = colocadas.includes(part);
+          return (
+            <button
+              key={i}
+              disabled={isDone}
+              onClick={() => handlePart(part)}
+              className={`p-6 rounded-[2rem] border-4 transition-all shadow-xl font-black text-lg ${
+                isDone 
+                ? "bg-success/20 border-success/40 text-success opacity-40 scale-90" 
+                : "bg-white border-white hover:border-primary/20 hover:scale-105 active:scale-95 text-primary"
+              }`}
+            >
+              {part}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 51. ESTÚDIO DE ARTE E CONTORNO
+function EstudioArteContorno({ p, onDone }: any) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.strokeStyle = '#3B82F6';
+    ctx.lineWidth = 15;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    // Desenha o guia (pontilhado)
+    ctx.setLineDash([10, 10]);
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 100, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }, []);
+
+  const startDrawing = (e: any) => {
+    setIsDrawing(true);
+    draw(e);
+  };
+
+  const draw = (e: any) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+
+    // Simulação de progresso
+    setProgress(prev => {
+      const next = prev + 0.5;
+      if (next >= 100) {
+        setIsDrawing(false);
+        setTimeout(() => onDone(true), 1000);
+      }
+      return next;
+    });
+  };
+
+  return (
+    <div className="py-6 text-center space-y-8 w-full max-w-2xl mx-auto">
+      <div className="relative bg-white rounded-[4rem] border-8 border-white shadow-2xl overflow-hidden cursor-crosshair">
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={400}
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={() => setIsDrawing(false)}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={() => setIsDrawing(false)}
+          className="w-full h-auto touch-none"
+        />
+        
+        {p.mostrarGuia && progress < 10 && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-bounce">
+            <Hand className="text-primary w-12 h-12" />
+          </div>
+        )}
+
+        <div className="absolute bottom-6 right-6 bg-primary/10 px-4 py-2 rounded-full text-primary font-black text-sm">
+          CONTORNO: {Math.min(100, Math.round(progress))}%
+        </div>
+      </div>
+
+      <div className="flex justify-center gap-4">
+        {["🔴", "🔵", "🟢", "🟡"].map((color, i) => (
+          <button key={i} className="w-14 h-14 bg-white rounded-full shadow-lg border-4 border-white hover:scale-110 transition-transform text-2xl flex items-center justify-center">
+            {color}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 
