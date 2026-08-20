@@ -2274,10 +2274,13 @@ const CL_BANK: ClItem[] = [
   },
 ];
 
-const COMPREENSAO_LEITORA_VARS: Variation[] = CL_BANK.map((it, i) => ({
-  id: `cl-${i + 1}`,
-  payload: it,
-}));
+const COMPREENSAO_LEITORA_VARS: Variation[] = range(50).map((i) => {
+  const it = CL_BANK[i % CL_BANK.length];
+  return {
+    id: `cl-${i + 1}`,
+    payload: it,
+  };
+});
 
 export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sons-iniciais": SONS_INICIAIS_VARS,

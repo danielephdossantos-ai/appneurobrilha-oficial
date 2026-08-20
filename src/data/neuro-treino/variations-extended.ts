@@ -992,27 +992,25 @@ const CONSTRUTOR_BANK = [
   { item: "CASA", emoji: "🏠", partes: ["TELHADO", "JANELA", "PORTA", "CHAMINÉ"] },
 ];
 
-export const CONSTRUTOR_DE_FORMAS_VARS: Variation[] = range(30).map((i) => {
+export const CONSTRUTOR_DE_FORMAS_VARS: Variation[] = range(50).map((i) => {
   const b = CONSTRUTOR_BANK[i % CONSTRUTOR_BANK.length];
-  const faixa = Math.floor(i / 10);
   return {
     id: `cdf-${i + 1}`,
     payload: {
       ...b,
-      pecasExtras: faixa * 2, // distratores
-      nivel: faixa + 1
+      pecasExtras: (i % 3) * 2, // distratores
+      nivel: Math.floor(i / 10) + 1
     }
   };
 });
 
-export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(30).map((i) => {
+export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(50).map((i) => {
   const b = PUZZLE_BANK[i % PUZZLE_BANK.length];
-  const faixa = Math.floor(i / 10);
   return {
     id: `eac-${i + 1}`,
     payload: {
       ...b,
-      dificuldade: faixa + 1,
+      dificuldade: Math.floor(i / 10) + 1,
       mostrarGuia: i < 5,
       tintaBrilhante: true
     }
