@@ -1753,14 +1753,15 @@ function Onomatopeias({ p, onDone }: any) {
   const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
   const imgSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   return (
-    <div className="text-center">
-      <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
-        <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1">
-          <Volume2 size={12} /> Som
+    <div className="text-center w-full max-w-2xl mx-auto">
+      <div className="inline-block bg-white/80 backdrop-blur-md border-8 border-coral/20 rounded-[3rem] px-12 py-8 mb-10 shadow-2xl animate-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-coral/60 tracking-[0.2em] mb-3 flex items-center justify-center gap-2">
+          <Volume2 size={16} /> QUAL ELEMENTO FAZ O SOM?
         </div>
-        <div className="text-5xl font-black text-coral">{p.som}</div>
+        <div className="text-6xl font-black text-coral drop-shadow-sm">{p.som}</div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
         {p.options.map((o: any, i: number) => {
           const img = ilustracao(o.emoji, o.nome);
           return (
