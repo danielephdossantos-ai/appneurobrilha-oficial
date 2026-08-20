@@ -4,7 +4,8 @@
 // ============================================================
 
 export type Variation = { id: string; payload: any };
-const range = (n: number) => Array.from({ length: n }, (_, i) => i);
+export const range = (n: number) => Array.from({ length: n }, (_, i) => i);
+
 
 // ──────────────────────────────────────────────
 // GRUPO 1: FONO CLÍNICO (4 categorias)
