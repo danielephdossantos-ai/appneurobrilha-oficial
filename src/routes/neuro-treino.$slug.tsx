@@ -4042,60 +4042,81 @@ function OrdemInversa({ p, onDone }: any) {
   if (itensFinal.length === 0) return null;
 
   return (
-    <div className="space-y-6 text-center py-4">
+    <div className="w-full max-w-2xl mx-auto py-6">
       {fase === "mostrar" ? (
-        <div className="space-y-4 animate-in fade-in zoom-in duration-300">
-          <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-            Memorize os itens!
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {itensFinal.map((it: string, i: number) => (
-              <div key={i} className="flex flex-col items-center gap-2">
-                <span className="text-[10px] font-black text-primary/50">{i + 1}º</span>
-                <div className={`${btnSize} bg-white rounded-3xl shadow-lg border-2 border-primary/20 flex items-center justify-center`}>
-                  <RenderEmoji e={it} />
+        <div className="space-y-8 animate-in fade-in zoom-in duration-500 text-center">
+          <div className="bg-white/60 backdrop-blur-md rounded-[3rem] p-8 border-4 border-primary/10 shadow-xl">
+            <div className="text-[10px] font-black text-primary/40 uppercase tracking-[0.2em] mb-8">
+              MEMORIZE A ORDEM! 🧠
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              {itensFinal.map((it: string, i: number) => (
+                <div key={i} className="flex flex-col items-center gap-3 animate-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${i * 200}ms` }}>
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary border-2 border-white shadow-sm">
+                    {i + 1}
+                  </div>
+                  <div className={`${btnSize} bg-white rounded-[2rem] shadow-2xl border-4 border-primary/5 flex items-center justify-center`}>
+                    <RenderEmoji e={it} className="w-16 h-16" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className="text-xs font-bold text-primary animate-pulse">
-            Sua vez em {countdown}...
+          
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-48 h-2 bg-white/50 rounded-full overflow-hidden border border-white">
+              <div 
+                className="h-full bg-primary transition-all duration-1000 ease-linear"
+                style={{ width: `${(countdown / (p.flashMs / 1000)) * 100}%` }}
+              />
+            </div>
+            <div className="text-xs font-black text-primary uppercase tracking-widest">
+              Sua vez em {countdown}s...
+            </div>
           </div>
         </div>
       ) : (
-        <div className="space-y-6">
-          <div className="text-sm font-black text-primary uppercase tracking-widest">
-            Agora toque de TRÁS PARA FRENTE!
-          </div>
-          
-          {/* Slots de resposta */}
-          <div className="flex justify-center gap-3">
-            {itensFinal.map((_: any, i: number) => (
-              <div
-                key={i}
-                className={`${sens.largerTargets ? "w-14 h-14" : "w-12 h-12"} rounded-2xl border-2 border-dashed ${
-                  selecionados[i] ? "border-success bg-success/10" : "border-muted-foreground bg-muted/5"
-                } flex items-center justify-center`}
-              >
-                {selecionados[i] && <RenderEmoji e={selecionados[i]} className="w-8 h-8" />}
-              </div>
-            ))}
+        <div className="space-y-10 text-center animate-in fade-in duration-500">
+          <div className="bg-primary/5 rounded-[2rem] p-6 border-2 border-dashed border-primary/20">
+            <div className="text-sm font-black text-primary uppercase tracking-[0.15em] mb-6">
+              AGORA TOQUE DE TRÁS PARA FRENTE! 🔄
+            </div>
+            
+            {/* Slots de resposta */}
+            <div className="flex justify-center gap-4">
+              {itensFinal.map((_: any, i: number) => (
+                <div
+                  key={i}
+                  className={`${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-[1.5rem] border-4 border-dashed transition-all duration-300 ${
+                    selecionados[i] ? "border-success bg-success/10 scale-105" : "border-primary/20 bg-white/50"
+                  } flex items-center justify-center shadow-inner`}
+                >
+                  {selecionados[i] && (
+                    <div className="animate-in zoom-in duration-300">
+                      <RenderEmoji e={selecionados[i]} className="w-10 h-10" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Teclado de opções (embaralhado) */}
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
-            {[...itensFinal].sort().map((it: string, i: number) => {
+          {/* Teclado de opções (realmente aleatório no render) */}
+          <div className="flex flex-wrap justify-center gap-4">
+            {useMemo(() => [...itensFinal].sort(() => Math.random() - 0.5), [itensFinal]).map((it: string, i: number) => {
               const jaUsado = selecionados.includes(it);
               return (
                 <button
                   key={i}
                   disabled={jaUsado}
                   onClick={() => handleItem(it)}
-                  className={`${btnSize} bg-card rounded-3xl shadow-md border-2 border-border flex items-center justify-center transition-all ${
-                    jaUsado ? "opacity-30 grayscale" : "hover:scale-105 active:scale-95"
+                  className={`${btnSize} bg-white rounded-[2rem] shadow-xl border-4 border-white transition-all ${
+                    jaUsado 
+                      ? "opacity-20 grayscale scale-90 cursor-default" 
+                      : "hover:scale-110 active:scale-90 hover:border-primary/20 active:shadow-inner"
                   }`}
                 >
-                  <RenderEmoji e={it} />
+                  <RenderEmoji e={it} className="w-12 h-12" />
                 </button>
               );
             })}
@@ -4103,6 +4124,9 @@ function OrdemInversa({ p, onDone }: any) {
         </div>
       )}
     </div>
+  );
+}
+
   );
 }
 
