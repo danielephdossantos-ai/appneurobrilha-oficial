@@ -971,15 +971,14 @@ const PUZZLE_BANK = [
   { item: "BALÃO", emoji: "🎈", pecas: 4 },
 ];
 
-export const QUEBRA_CABECA_MAGICO_VARS: Variation[] = range(30).map((i) => {
+export const QUEBRA_CABECA_MAGICO_VARS: Variation[] = range(50).map((i) => {
   const b = PUZZLE_BANK[i % PUZZLE_BANK.length];
-  const faixa = Math.floor(i / 10);
   return {
     id: `qcm-${i + 1}`,
     payload: {
       ...b,
-      pecas: b.pecas + faixa * 3, // 4->7->10 pecas progressivamente
-      nivel: faixa + 1
+      pecas: 4 + (i % 3) * 2, // 4, 6, 8 peças
+      nivel: Math.floor(i / 10) + 1
     }
   };
 });
@@ -993,27 +992,25 @@ const CONSTRUTOR_BANK = [
   { item: "CASA", emoji: "🏠", partes: ["TELHADO", "JANELA", "PORTA", "CHAMINÉ"] },
 ];
 
-export const CONSTRUTOR_DE_FORMAS_VARS: Variation[] = range(30).map((i) => {
+export const CONSTRUTOR_DE_FORMAS_VARS: Variation[] = range(50).map((i) => {
   const b = CONSTRUTOR_BANK[i % CONSTRUTOR_BANK.length];
-  const faixa = Math.floor(i / 10);
   return {
     id: `cdf-${i + 1}`,
     payload: {
       ...b,
-      pecasExtras: faixa * 2, // distratores
-      nivel: faixa + 1
+      pecasExtras: (i % 3) * 2, // distratores
+      nivel: Math.floor(i / 10) + 1
     }
   };
 });
 
-export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(30).map((i) => {
+export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(50).map((i) => {
   const b = PUZZLE_BANK[i % PUZZLE_BANK.length];
-  const faixa = Math.floor(i / 10);
   return {
     id: `eac-${i + 1}`,
     payload: {
       ...b,
-      dificuldade: faixa + 1,
+      dificuldade: Math.floor(i / 10) + 1,
       mostrarGuia: i < 5,
       tintaBrilhante: true
     }

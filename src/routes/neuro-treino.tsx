@@ -382,7 +382,7 @@ function Treino() {
                       {g.nome}
                     </h2>
                     <div className="text-xs text-muted-foreground">
-                      {g.slugs.length} atividades · {g.slugs.length * 30} variações
+                      {g.slugs.length} atividades · {g.slugs.length * 50} variações
                     </div>
                   </div>
                 </div>

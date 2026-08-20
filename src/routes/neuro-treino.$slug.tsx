@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
@@ -179,9 +180,9 @@ function NeuroAtividade() {
   const safeIndex = hasData ? index % vars!.length : 0;
   const variation = hasData ? vars![safeIndex] : null;
   const seed = variation ? `${slug}:${variation.id}` : slug;
-  const elemento = hiperfoco ? pickElemento(hiperfoco, seed) : "";
+  const elemento = (hiperfoco && pickElemento) ? pickElemento(hiperfoco, seed) : "";
   const instrucaoTematica =
-    hiperfoco && meta ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : "";
+    (hiperfoco && meta && applyHiperfoco) ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : (meta?.instrucao || "");
   const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
 
   // Timestamp por questão para medir tempo de resposta
@@ -246,7 +247,7 @@ function NeuroAtividade() {
 
 
   // ===== Early returns (depois de todos os hooks) =====
-  if (!hiperfoco) {
+  if (!hiperfoco && !["quebra-cabeca-magico", "construtor-de-formas", "estudio-arte-contorno"].includes(slug)) {
     return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
   }
 
@@ -259,7 +260,7 @@ function NeuroAtividade() {
             Preparando treino personalizado...
           </h2>
           <p className="text-sm text-muted-foreground mt-2">
-            Aplicando hiperfoco: {hiperfoco.label}
+            Aplicando hiperfoco: {hiperfoco?.label || "Padrão"}
           </p>
         </div>
       </Shell>
@@ -327,11 +328,11 @@ function NeuroAtividade() {
 
     if (correto) {
       setAcertos((a) => a + 1);
-      const frase = pipFraseAcerto(hiperfoco);
+      const frase = hiperfoco ? pipFraseAcerto(hiperfoco) : "Muito bem! Você conseguiu! ⭐";
       toast.success(frase);
       if (voiceOn) speak(`${nomeCrianca ? nomeCrianca + ", " : ""}${frase}`);
     } else {
-      const frase = pipFraseIncentivo(hiperfoco);
+      const frase = hiperfoco ? pipFraseIncentivo(hiperfoco) : "Continue tentando! Você consegue! ✨";
       toast(frase);
       if (voiceOn) speak(frase);
     }
@@ -4636,59 +4637,133 @@ function PonteBlocos({ p, onDone }: any) {
   );
 }
 
-// 49. QUEBRA-CABEÇA MÁGICO
+// 49. QUEBRA-CABEÇA MÁGICO (Jigsaw Real)
 function QuebraCabecaMagico({ p, onDone }: any) {
-  const [pecasColocadas, setPecasColocadas] = useState<number>(0);
-  const total = p.pecas;
-
-  const handleDragOver = (e: React.DragEvent) => e.preventDefault();
+  const total = p.pecas || 4;
+  const cols = total > 4 ? 3 : 2;
+  const rows = Math.ceil(total / cols);
   
-  const handleDrop = (idx: number) => {
-    // Simulação de encaixe (snap)
-    setPecasColocadas(prev => {
-      const next = prev + 1;
-      if (next === total) {
-        setTimeout(() => onDone(true), 1500);
-      }
-      return next;
-    });
+  const [pecasEncaixadas, setPecasEncaixadas] = useState<number[]>([]);
+  
+  // Gerar peças embaralhadas iniciais (somente as que não foram encaixadas)
+  const [pecasDisponiveis, setPecasDisponiveis] = useState<number[]>(() => 
+    range(total).sort(() => Math.random() - 0.5)
+  );
+
+  const handleSnap = (idx: number) => {
+    if (pecasEncaixadas.includes(idx)) return;
+    
+    const novasEncaixadas = [...pecasEncaixadas, idx];
+    setPecasEncaixadas(novasEncaixadas);
+    setPecasDisponiveis(prev => prev.filter(pIdx => pIdx !== idx));
+    
+    if (novasEncaixadas.length === total) {
+      setTimeout(() => onDone(true), 1000);
+    }
   };
 
   return (
-    <div className="py-6 text-center space-y-10 w-full max-w-4xl mx-auto flex flex-col items-center">
-      <div className="relative w-80 h-80 bg-slate-100 rounded-[3rem] border-4 border-dashed border-slate-300 flex items-center justify-center overflow-hidden">
-        <RenderEmoji e={p.emoji} className="w-64 h-64 opacity-10 grayscale scale-110" />
-        {/* Camada de peças encaixadas */}
-        <div className="absolute inset-0 flex items-center justify-center">
-             {pecasColocadas > 0 && (
-               <RenderEmoji 
-                e={p.emoji} 
-                className="w-64 h-64 transition-all duration-700 animate-in zoom-in spin-in-3" 
-                style={{ clipPath: `inset(0 ${100 - (pecasColocadas/total)*100}% 0 0)` }}
-               />
-             )}
-        </div>
+    <div className="py-6 text-center space-y-12 w-full max-w-4xl mx-auto flex flex-col items-center">
+      {/* Moldura / Silhueta do Quebra-Cabeça */}
+      <div 
+        className="relative bg-slate-100 rounded-[2rem] border-8 border-white shadow-2xl overflow-hidden"
+        style={{ 
+          width: 320, 
+          height: 320,
+          display: 'grid',
+          gridTemplateColumns: `repeat(${cols}, 1fr)`,
+          gridTemplateRows: `repeat(${rows}, 1fr)`
+        }}
+      >
+        {range(total).map((idx) => {
+          const isEncaixada = pecasEncaixadas.includes(idx);
+          return (
+            <div 
+              key={idx}
+              className="relative border border-slate-200/50 flex items-center justify-center overflow-hidden"
+            >
+              {/* Silhueta (fantasma) */}
+              {!isEncaixada && (
+                <div className="opacity-10 grayscale scale-110 pointer-events-none">
+                  <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={320} />
+                </div>
+              )}
+              
+              {/* Peça encaixada com animação */}
+              <AnimatePresence>
+                {isEncaixada && (
+                  <motion.div 
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="absolute inset-0"
+                  >
+                    <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={320} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 bg-white/40 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white shadow-xl">
-        {Array.from({ length: total - pecasColocadas }).map((_, i) => (
-          <div
-            key={i}
-            draggable
-            onDragEnd={() => handleDrop(i)}
-            className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing hover:scale-110 transition-transform overflow-hidden"
+      {/* Banco de Peças Recortadas */}
+      <div className="flex flex-wrap justify-center gap-6 bg-white/40 backdrop-blur-md p-10 rounded-[3rem] border-4 border-white shadow-xl min-h-[140px] w-full max-w-2xl">
+        {pecasDisponiveis.map((idx) => (
+          <motion.div
+            key={idx}
+            drag
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            dragElastic={1}
+            onDragEnd={(_, info) => {
+              // Lógica de Snap simplificada: se soltar perto da área central
+              // Em um app real usaríamos ref da moldura e coordenadas, 
+              // aqui simulamos por intenção de arraste ou proximidade.
+              // Para UX de criança, qualquer drop bem sucedido snapamos a peça correta se houver tracking.
+              // Simplificando: como as peças são únicas, se o usuário arrastar o suficiente "para cima", snapamos.
+              if (info.offset.y < -100) {
+                handleSnap(idx);
+              }
+            }}
+            whileTap={{ scale: 1.1, zIndex: 50 }}
+            className="w-24 h-24 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing overflow-hidden"
           >
-            <RenderEmoji e={p.emoji} className="w-12 h-12 opacity-40" />
-          </div>
-
+             <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={96} isThumbnail />
+          </motion.div>
         ))}
       </div>
-      
-      {pecasColocadas === total && (
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <div className="animate-ping bg-yellow-400/20 w-96 h-96 rounded-full" />
-        </div>
-      )}
+
+      <div className="text-sm font-black text-white/60 uppercase tracking-widest animate-pulse">
+        Arraste as peças para o lugar correto!
+      </div>
+    </div>
+  );
+}
+
+function RenderPiece({ emoji, idx, total, cols, rows, size, isThumbnail }: any) {
+  const col = idx % cols;
+  const row = Math.floor(idx / cols);
+  const w = size / cols;
+  const h = size / rows;
+  
+  return (
+    <div 
+      className="relative overflow-hidden flex items-center justify-center"
+      style={{ width: isThumbnail ? size : '100%', height: isThumbnail ? size : '100%' }}
+    >
+      <div 
+        style={{ 
+          transform: isThumbnail 
+            ? `scale(${cols}) translate(${-(col * 100 / cols) + (cols-1)*12.5}%, ${-(row * 100 / rows) + (rows-1)*12.5}%)` 
+            : `scale(${cols}) translate(${-(col * 100 / cols) + (cols-1)*12.5}%, ${-(row * 100 / rows) + (rows-1)*12.5}%)`,
+          width: size,
+          height: size,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <RenderEmoji e={emoji} className={size > 100 ? "w-64 h-64" : "w-48 h-48"} />
+      </div>
     </div>
   );
 }
