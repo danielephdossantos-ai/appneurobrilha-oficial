@@ -259,7 +259,7 @@ function NeuroAtividade() {
             Preparando treino personalizado...
           </h2>
           <p className="text-sm text-muted-foreground mt-2">
-            Aplicando hiperfoco: {hiperfoco.label}
+            Aplicando hiperfoco: {hiperfoco?.label || "Padrão"}
           </p>
         </div>
       </Shell>
@@ -327,7 +327,7 @@ function NeuroAtividade() {
 
     if (correto) {
       setAcertos((a) => a + 1);
-      const frase = pipFraseAcerto(hiperfoco);
+      const frase = hiperfoco ? pipFraseAcerto(hiperfoco) : "Muito bem! Você conseguiu! ⭐";
       toast.success(frase);
       if (voiceOn) speak(`${nomeCrianca ? nomeCrianca + ", " : ""}${frase}`);
     } else {
