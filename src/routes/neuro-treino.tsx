@@ -399,6 +399,7 @@ function Treino() {
                         key={slug}
                         to="/neuro-treino/$slug"
                         params={{ slug }}
+                        params={{ slug }}
                         onClick={() => {
                           useNavigationStore.getState().setContext({
                             originRoute: "/neuro-treino",
