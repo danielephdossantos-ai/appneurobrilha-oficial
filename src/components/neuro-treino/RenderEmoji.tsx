@@ -95,13 +95,16 @@ export interface RenderEmojiProps {
   label?: string;
   /** força esconder fallback de texto */
   hideText?: boolean;
+  /** Estilo inline opcional */
+  style?: React.CSSProperties;
 }
 
 /**
  * Render universal seguro: imagem premium → forma colorida → ícone Lucide → texto limpo.
  * Nunca exibe emoji cru.
  */
-export function RenderEmoji({ e, className = "w-16 h-16", label, hideText }: RenderEmojiProps) {
+export function RenderEmoji({ e, className = "w-16 h-16", label, hideText, style }: RenderEmojiProps) {
+
   if (!e && !label) return null;
   const raw = (e ?? "").trim();
   const img = emojiImg(raw) ?? objetoImg(raw) ?? objetoImg(label);
