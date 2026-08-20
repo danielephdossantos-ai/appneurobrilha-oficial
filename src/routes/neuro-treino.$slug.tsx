@@ -3860,8 +3860,8 @@ function FormandoPalavras({ p, onDone }: any) {
           {sequencia.length === 0 ? "..." : sequencia.join("") || "..."}
         </div>
       </div>
-      <div className="flex gap-3 flex-wrap justify-center">
-        {p.embaralhadas.map((sil: string, i: number) => {
+      <div className="flex gap-4 flex-wrap justify-center py-4">
+        {useMemo(() => [...p.embaralhadas].sort(() => Math.random() - 0.5), [p.embaralhadas]).map((sil: string, i: number) => {
           const usada =
             sequencia.join("").includes(sil) &&
             sequencia.some((s) => s === sil && sequencia.indexOf(s) < sequencia.length);
@@ -3869,14 +3869,15 @@ function FormandoPalavras({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleSilaba(sil)}
-              className={`${btnPad} rounded-2xl border-2 font-black transition-all ${press}
-                ${usada ? "border-muted bg-muted/20 text-muted-foreground" : "border-amber/50 bg-amber/10 text-amber-800 hover:border-amber hover:bg-amber/20"}`}
+              className={`min-w-[80px] ${btnPad} rounded-[2rem] border-4 font-black transition-all shadow-lg ${press}
+                ${usada ? "border-muted bg-muted/20 text-muted-foreground scale-90 opacity-40" : "border-white bg-white hover:border-amber/40 hover:scale-110 active:scale-90 text-amber-900"}`}
             >
               {sil}
             </button>
           );
         })}
       </div>
+
       <div className="text-sm text-muted-foreground">
         {sequencia.length} / {p.silabas.length} sílabas
       </div>
