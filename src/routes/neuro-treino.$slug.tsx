@@ -607,6 +607,14 @@ function MechanicRenderer({
     // FASE 3F
     case "ponte-de-blocos":
       return <PonteBlocos p={variation.payload} onDone={onConcluir} />;
+    // FASE 4 - Oficina Criativa
+    case "quebra-cabeca-magico":
+      return <QuebraCabecaMagico p={variation.payload} onDone={onConcluir} />;
+    case "construtor-de-formas":
+      return <ConstrutorDeFormas p={variation.payload} onDone={onConcluir} />;
+    case "estudio-arte-contorno":
+      return <EstudioArteContorno p={variation.payload} onDone={onConcluir} />;
+
   }
 }
 
