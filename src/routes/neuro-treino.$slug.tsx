@@ -1140,37 +1140,56 @@ function OndeEsta({ p, onDone }: any) {
 // ============== 6. Sequência e Padrão ==============
 function SequenciaPadrao({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
+  
+  // Real randomness for sequence and patterns: 
+  // We can shuffle the options to ensure the correct answer isn't always in the same place
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const seqSize = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
-  const optSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const optSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-110";
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-110 active:scale-95";
+
   return (
-    <div className="text-center">
-      <div className="flex justify-center gap-3 mb-6 items-center">
-        {p.seq.map((s: string, i: number) => (
-          <div
-            key={i}
-            className={`${seqSize} flex items-center justify-center bg-card rounded-2xl border shadow-sm`}
-          >
-            <RenderEmoji e={s} className={imgSize} />
+    <div className="text-center w-full max-w-2xl mx-auto space-y-8">
+      <div className="bg-white/60 backdrop-blur-md rounded-[3rem] p-8 border-4 border-primary/10 shadow-xl">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary/50 mb-6">
+          QUAL VEM DEPOIS?
+        </div>
+        <div className="flex flex-wrap justify-center gap-4 items-center">
+          {p.seq.map((s: string, i: number) => (
+            <div
+              key={i}
+              className={`${seqSize} flex items-center justify-center bg-white rounded-[2rem] border-2 border-primary/5 shadow-md animate-in zoom-in duration-300`}
+              style={{ animationDelay: `${i * 150}ms` }}
+            >
+              <RenderEmoji e={s} className={imgSize} />
+            </div>
+          ))}
+          <div className={`${seqSize} flex items-center justify-center bg-primary/5 rounded-[2rem] border-4 border-dashed border-primary/20 animate-pulse`}>
+            <span className="text-primary/30 text-5xl font-black">?</span>
           </div>
-        ))}
-        <span className="text-primary text-6xl font-black">?</span>
+        </div>
       </div>
-      <div className="flex justify-center gap-3">
-        {p.opts.map((o: string, i: number) => (
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-center">
+        {shuffledOpts.map((o: string, i: number) => (
           <button
             key={i}
             onClick={() => onDone(o === p.next)}
-            className={`${optSize} flex items-center justify-center bg-card border-2 border-border rounded-2xl transition-all shadow-md ${hoverCls}`}
+            className={`${optSize} flex flex-col items-center justify-center bg-white border-4 border-transparent rounded-[2.5rem] transition-all shadow-xl hover:border-primary/30 ${hoverCls} active:shadow-sm`}
           >
             <RenderEmoji e={o} className={imgSize} />
+            <div className="mt-2 w-8 h-1 bg-primary/10 rounded-full" />
           </button>
         ))}
       </div>
     </div>
   );
 }
+
 
 
 
