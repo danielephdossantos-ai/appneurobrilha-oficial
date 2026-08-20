@@ -1250,6 +1250,9 @@ function VigilanteNoturno({ p, onDone }: any) {
   // Aleatoriedade real e densidade adaptativa
   const speedMul = sens.lowStim ? 1.6 : 1;
   const press = sens.reduceMotion ? "" : "active:scale-90 active:brightness-90 transition-all";
+  const errorRing = sens.softColors ? "ring-amber-400 bg-amber-100/40" : "ring-destructive bg-destructive/10";
+  const btnSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
+
   
   const [capturados, setCapturados] = useState<number[]>([]); 
   const [erros, setErros] = useState(0);
