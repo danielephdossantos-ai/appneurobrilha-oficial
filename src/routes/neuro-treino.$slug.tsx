@@ -4668,10 +4668,11 @@ function QuebraCabecaMagico({ p, onDone }: any) {
             key={i}
             draggable
             onDragEnd={() => handleDrop(i)}
-            className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing hover:scale-110 transition-transform"
+            className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing hover:scale-110 transition-transform overflow-hidden"
           >
-            <div className="w-12 h-12 bg-primary/20 rounded-lg animate-pulse" />
+            <RenderEmoji e={p.emoji} className="w-12 h-12 opacity-40" />
           </div>
+
         ))}
       </div>
       
