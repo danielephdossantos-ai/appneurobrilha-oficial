@@ -179,9 +179,9 @@ function NeuroAtividade() {
   const safeIndex = hasData ? index % vars!.length : 0;
   const variation = hasData ? vars![safeIndex] : null;
   const seed = variation ? `${slug}:${variation.id}` : slug;
-  const elemento = hiperfoco ? pickElemento(hiperfoco, seed) : "";
+  const elemento = (hiperfoco && pickElemento) ? pickElemento(hiperfoco, seed) : "";
   const instrucaoTematica =
-    hiperfoco && meta ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : "";
+    (hiperfoco && meta && applyHiperfoco) ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : (meta?.instrucao || "");
   const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
 
   // Timestamp por questão para medir tempo de resposta
