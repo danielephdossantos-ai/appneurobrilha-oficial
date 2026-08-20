@@ -1,40 +1,27 @@
-# Plano de Implementação: Categoria "BRILHA KIDS" e Unificação de Módulos
+# Plano de Unificação — Módulo BRILHA KIDS
 
-Este plano detalha a reestruturação dos módulos de Alfabetização e Educação Infantil, movendo-os do Neuro-Treino para uma categoria unificada na Home ("Início"), mantendo a integridade pedagógica e técnica do projeto.
+Este plano descreve a reestruturação dos módulos de Educação Infantil e Alfabetização para uma categoria unificada chamada **BRILHA KIDS** na tela inicial, removendo a redundância no Neuro-Treino.
 
-## Mudanças Propostas
+## Alterações
 
-### 1. Reestruturação do Neuro-Treino
-- Remover os seguintes módulos visuais da página `neuro-treino.tsx`:
-    - **Contar com Pip / Senso Numérico** (Fase 1-8).
-    - **Português • Educação Infantil / Biblioteca Encantada**.
-    - **Campos de Experiência • Educação Infantil** (Missões EI).
-- Manter esses módulos acessíveis apenas através da nova categoria na Home.
+### 1. Novo Hub Unificado (BRILHA KIDS)
+- Criar a rota `src/routes/brilha-kids.tsx`.
+- Interface interna com 3 módulos principais:
+  - **Alfabetização**: "Contar com Pip & Aurora" (acesso a `/primeiros-anos`).
+  - **Português EI & Biblioteca**: 60 aulas com foco em linguagem (acesso a `/escola-brilha/biblioteca-encantada`).
+  - **Campos de Experiência**: Base Nacional BNCC EI (acesso a `/escola-brilha/portugues-ei`).
+- Design Premium: Cartões com gradientes vibrantes, ícones Kawaii e feedback visual de hover.
 
-### 2. Nova Categoria na Home ("BRILHA KIDS")
-- Adicionar um novo card principal em `src/routes/index.tsx` chamado **BRILHA KIDS**.
-- Este card terá um visual premium e unificado, seguindo o padrão Pixar/Kawaii do app.
-- O clique neste card abrirá uma interface interna organizada.
+### 2. Ajuste na Home (Página Inicial)
+- Adicionar o card **BRILHA KIDS** ao array `DESTINOS_KIDS` em `src/routes/index.tsx`.
+- Posicionamento de destaque como primeira categoria da grade.
 
-### 3. Interface Interna "BRILHA KIDS"
-- Criar um componente de "Hub" ou "Mundo" para o Brilha Kids.
-- Dentro dele, listar os 3 módulos transferidos de forma organizada:
-    - **Trilha da Alfabetização** (Contar com Pip + Ler com Aurora).
-    - **Português EI & Biblioteca** (Biblioteca Encantada + Códice Português).
-    - **Campos de Experiência** (Missões BNCC EI).
-- Garantir que cada clique leve à trilha original, mantendo o contexto de navegação.
+### 3. Limpeza do Neuro-Treino
+- Remover os links diretos para "Alfabetização", "Plano Neuro", "My First English" e "Matemática Kawaii" da página `src/routes/neuro-treino.tsx`.
+- O Neuro-Treino passará a focar exclusivamente em funções executivas e reabilitação cognitiva pura.
 
 ## Detalhes Técnicos
-
-- **Navegação**: Usar `navigation-context.ts` para garantir que o botão "Voltar" dentro das aulas do Brilha Kids retorne corretamente para o Hub Brilha Kids, e deste para a Home.
-- **Componentes**: Criar `src/components/brilha-kids/BrilhaKidsHub.tsx` para a interface interna, evitando poluir o `index.tsx`.
-- **Estilos**: Utilizar os gradientes e sombras semânticas já definidos no `src/styles.css`.
-- **Banco de Dados**: Nenhuma alteração de esquema necessária. O reuso será via rotas e IDs existentes.
-
-## Checklist de Verificação
-- [ ] Card "BRILHA KIDS" aparece na Home (Mobile e Desktop).
-- [ ] Módulos foram removidos do Neuro-Treino.
-- [ ] Clique no item de Alfabetização abre a trilha correta.
-- [ ] Clique na Biblioteca Encantada funciona como antes.
-- [ ] O visual segue o padrão Kawaii/Pixar 2D.
-- [ ] A navegação de retorno funciona perfeitamente.
+- Uso de `framer-motion` para animações de entrada e interação.
+- Manutenção do `navigation-context` para garantir que o botão "Voltar" retorne ao Hub ou à Home corretamente.
+- Preservação total das regras pedagógicas e de banco de dados existentes.
+- Sem alterações em esquemas de banco ou RLS.
