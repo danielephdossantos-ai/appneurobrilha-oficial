@@ -2191,6 +2191,13 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   const acertouOrdem = completou && !erroOrdem;
   const progresso = Math.round((checkpointIdx / totalCheckpoints) * 100);
 
+  useEffect(() => {
+    if (completou) {
+      setTimeout(() => onDone(acertouOrdem), 1000);
+    }
+  }, [completou, acertouOrdem, onDone]);
+
+
   const { effective: sens } = useSensoryProfile();
   const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
   const selectedScale = sens.reduceMotion ? "" : "scale-110";
