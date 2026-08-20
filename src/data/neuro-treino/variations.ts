@@ -524,7 +524,35 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Planejamento e resolução de problemas",
     instrucao: "Escolha o bloco certo para completar a ponte.",
   },
+  "quebra-cabeca-magico": {
+    slug: "quebra-cabeca-magico",
+    nome: "Quebra-Cabeça Mágico",
+    emoji: "🧩",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Percepção espacial e controle visomotor",
+    instrucao: "Arraste as peças para os lugares certos.",
+  },
+  "construtor-de-formas": {
+    slug: "construtor-de-formas",
+    nome: "Construtor de Formas",
+    emoji: "🏗️",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Construção de elementos e arrasto fluido",
+    instrucao: "Monte a figura arrastando as partes coloridas.",
+  },
+  "estudio-arte-contorno": {
+    slug: "estudio-arte-contorno",
+    nome: "Estúdio de Arte",
+    emoji: "🎨",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Grafomotricidade e controle de traço",
+    instrucao: "Siga o pontilhado com o dedo para desenhar.",
+  },
 };
+
 
 // ===================== Variações (30 por categoria) =====================
 
