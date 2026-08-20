@@ -26,7 +26,11 @@ import {
   TREM_NUMERICO_VARS,
   TROCA_REGRAS_VARS,
   PONTE_BLOCOS_VARS,
+  QUEBRA_CABECA_MAGICO_VARS,
+  CONSTRUTOR_DE_FORMAS_VARS,
+  ESTUDIO_ARTE_CONTORNO_VARS,
 } from "./variations-extended";
+
 
 export type CategoriaSlug =
   | "sons-iniciais"
@@ -89,7 +93,12 @@ export type CategoriaSlug =
   // FASE 3D - Flexibilidade
   | "troca-troca-regras"
   // FASE 3F - Funções Executivas
-  | "ponte-de-blocos";
+  | "ponte-de-blocos"
+  // FASE 4 - Coordenação Motora Fina & Percepção Espacial
+  | "quebra-cabeca-magico"
+  | "construtor-de-formas"
+  | "estudio-arte-contorno";
+
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
@@ -515,7 +524,35 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Planejamento e resolução de problemas",
     instrucao: "Escolha o bloco certo para completar a ponte.",
   },
+  "quebra-cabeca-magico": {
+    slug: "quebra-cabeca-magico",
+    nome: "Quebra-Cabeça Mágico",
+    emoji: "🧩",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Percepção espacial e controle visomotor",
+    instrucao: "Arraste as peças para os lugares certos.",
+  },
+  "construtor-de-formas": {
+    slug: "construtor-de-formas",
+    nome: "Construtor de Formas",
+    emoji: "🏗️",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Construção de elementos e arrasto fluido",
+    instrucao: "Monte a figura arrastando as partes coloridas.",
+  },
+  "estudio-arte-contorno": {
+    slug: "estudio-arte-contorno",
+    nome: "Estúdio de Arte",
+    emoji: "🎨",
+    grupo: "Coordenação Motora Fina",
+    cor: "from-lilac/30 to-lilac/5",
+    objetivo: "Grafomotricidade e controle de traço",
+    instrucao: "Siga o pontilhado com o dedo para desenhar.",
+  },
 };
+
 
 // ===================== Variações (30 por categoria) =====================
 
@@ -2296,7 +2333,11 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "trem-numerico": TREM_NUMERICO_VARS,
   "troca-troca-regras": TROCA_REGRAS_VARS,
   "ponte-de-blocos": PONTE_BLOCOS_VARS,
+  "quebra-cabeca-magico": QUEBRA_CABECA_MAGICO_VARS,
+  "construtor-de-formas": CONSTRUTOR_DE_FORMAS_VARS,
+  "estudio-arte-contorno": ESTUDIO_ARTE_CONTORNO_VARS,
 };
+
 
 export const GRUPOS = [
 
@@ -2398,6 +2439,10 @@ export const GRUPOS = [
     slugs: [
       "mosaico-de-formas",
       "sequencia-de-cores",
+      "quebra-cabeca-magico",
+      "construtor-de-formas",
+      "estudio-arte-contorno",
     ] as CategoriaSlug[],
   },
+
 ];
