@@ -1,45 +1,30 @@
-# Plano de Reformulação do Neuro-Treino
+# Plano de Melhoria Crítica: Quebra-Cabeça Real, Roteamento e Alfabetização Dinâmica
 
-Este plano visa atender à solicitação de reformulação geral de layout, encaixe de tela e lógica de jogos em todas as modalidades do Neuro-Treino.
+Este plano aborda a correção de mecânicas de jogo (Quebra-Cabeça Jigsaw Real), a estabilização da navegação entre módulos e a eliminação de redundâncias de conteúdo na Alfabetização, garantindo 350 aulas únicas.
 
-## Alterações de Layout Global
+## 1. Quebra-Cabeça Mágico (Jigsaw Real)
+Implementar uma mecânica de recorte e encaixe real em substituição à seleção de imagens.
 
-- **Enxugamento de Cabeçalho**:
-  - Modificar `src/routes/neuro-treino.$slug.tsx` para remover elementos repetitivos e cards informativos no topo durante a execução das atividades.
-  - Manter apenas o botão do microfone ("Ouvir PIP") no topo.
-  - Centralizar a área útil do exercício usando Flexbox (`display: flex; align-items: center; justify-content: center; width: 100%; height: 100%`) para garantir que o jogo ocupe a tela sem rolagens.
+- **Mecânica:** Uma única imagem central dividida em grade (4 a 6 peças) com silhueta de encaixe.
+- **Interação:** Drag-and-drop com "snap" (peça fixa ao chegar no local correto).
+- **Dados:** Utilizar o banco `PUZZLE_BANK` com variações de dificuldade (peças).
+- **Tecnologia:** `framer-motion` para arrastar e detectar colisão/encaixe.
 
-## Lógica de Jogo e Dificuldade
+## 2. Roteamento Direto (Correção de Navegação)
+Corrigir o fluxo de cliques no Neuro-Treino para evitar telas intermediárias de configuração quando a atividade já está decidida.
 
-- **Aleatoriedade Real**:
-  - Implementar embaralhamento real das opções e sequências em:
-    - `SequenciaCores` (Sequência de Cores)
-    - `SequenciaPadrao` (Sequência e Padrão)
-    - `MemoriaVisual` (Memória Visual)
-  - Utilizar `Math.random` e garantir que sequências não se repitam.
-- **Progressão de Nível**:
-  - Ajustar o motor de dificuldade adaptativa para começar com sequências de 3 elementos.
-  - Aumentar gradualmente o tamanho, velocidade e quantidade de elementos conforme a criança acerta.
+- **Destino:** Garantir que `Construtor de Formas`, `Estúdio de Arte` e `Quebra-Cabeça Mágico` levem diretamente ao `Player` do jogo.
+- **Contexto:** Manter a persistência do hiperfoco para que o jogo carregue com os ativos corretos imediatamente.
 
-## Reformulação de Mecânicas Específicas
+## 3. Alfabetização Premium (350 Aulas Únicas)
+Eliminar repetições de conteúdo através de um motor de geração dinâmico.
 
-- **Mosaico (Montar e Pintar)**:
-  - **Etapa 1 (Montar)**: Peças começam desmontadas na parte inferior para serem arrastadas/tocadas para a posição correta.
-  - **Etapa 2 (Pintar)**: Liberar paleta de cores somente após a montagem completa da figura.
-  - Aumentar o tamanho da área de montagem para ocupar o centro da tela.
-- **Traçado de Letras**:
-  - Maximizar a área do Canvas para o traçado ocupar o máximo de espaço possível.
-  - Reposicionar as paletas de cores laterais para uma linha horizontal na parte inferior.
-- **Desenho (Modelo e Sua Vez)**:
-  - Reduzir o card "MODELO" e posicioná-lo no canto superior direito.
-  - Maximizar a área "SUA VEZ" para quase a tela inteira.
-  - Liberar ferramenta de colorir após a conclusão do contorno.
+- **Banco de Dados:** Expandir o banco de frases e histórias para Compreensão Leitora (50 variações por etapa).
+- **Gerador:** Refatorar o gerador de aulas para selecionar elementos de forma aleatória sem repetição dentro do mesmo nível/etapa.
+- **Diversidade:** Alternar fonemas, posições silábicas e contextos narrativos em cada uma das 7 etapas da Alfabetização.
 
 ## Detalhes Técnicos
-
-- **Centralização Flexbox**: Aplicar no container principal da atividade no `MechanicRenderer`.
-- **Estado do Mosaico**: Adicionar estado `phase` ('montar' | 'pintar') no componente `Mosaico`.
-- **Canvas de Desenho**: Ajustar dimensões e `viewBox` para responsividade máxima.
-- **Randomização**: Usar algoritmos de embaralhamento (ex: Fisher-Yates) para garantir aleatoriedade real em cada rodada.
-
-As mudanças serão focadas nos componentes internos de `src/routes/neuro-treino.$slug.tsx`.
+- **Componente:** Refatoração de `QuebraCabecaMagico` em `src/routes/neuro-treino.$slug.tsx`.
+- **Configuração:** Ajuste de links em `src/routes/neuro-treino.tsx` e `src/routes/brilha-kids.tsx`.
+- **Conteúdo:** Atualização de `src/modules/alfabetizacao/data/etapas.ts` e expansão de constantes em `src/data/neuro-treino/variations-extended.ts`.
+- **Navegação:** Ajuste no `useNavigationStore` para evitar loops de redirecionamento.
