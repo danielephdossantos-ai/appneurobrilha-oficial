@@ -341,9 +341,10 @@ function NeuroAtividade() {
     
     if (isActivityFinished && isSessionMode) {
       setTimeout(() => setShowSessionModal(true), 1200);
-    } else {
+    } else if (!isActivityFinished) {
       setTimeout(() => setIndex((i) => i + 1), 900);
     }
+
   };
 
   // Marca "pulei" como pedido de ajuda (registra no log e sinaliza dificuldade)
