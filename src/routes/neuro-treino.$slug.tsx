@@ -1768,8 +1768,9 @@ function Onomatopeias({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hover}`}
+              className={`bg-white border-4 border-transparent rounded-[2.5rem] p-6 transition-all flex flex-col items-center gap-3 shadow-xl hover:border-coral/30 hover:shadow-coral/10 ${hover} active:shadow-inner`}
             >
+
               {img ? (
                 <img
                   src={img}
