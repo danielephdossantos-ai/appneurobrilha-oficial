@@ -89,7 +89,12 @@ export type CategoriaSlug =
   // FASE 3D - Flexibilidade
   | "troca-troca-regras"
   // FASE 3F - Funções Executivas
-  | "ponte-de-blocos";
+  | "ponte-de-blocos"
+  // FASE 4 - Coordenação Motora Fina & Percepção Espacial
+  | "quebra-cabeca-magico"
+  | "construtor-de-formas"
+  | "estudio-arte-contorno";
+
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
