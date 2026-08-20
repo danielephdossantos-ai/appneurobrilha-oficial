@@ -4650,7 +4650,7 @@ function QuebraCabecaMagico({ p, onDone }: any) {
   return (
     <div className="py-6 text-center space-y-10 w-full max-w-4xl mx-auto flex flex-col items-center">
       <div className="relative w-80 h-80 bg-slate-100 rounded-[3rem] border-4 border-dashed border-slate-300 flex items-center justify-center overflow-hidden">
-        <RenderEmoji e={p.emoji} className={`w-64 h-64 opacity-10 grayscale scale-110`} />
+        <RenderEmoji e={p.emoji} className="w-64 h-64 opacity-10 grayscale scale-110" />
         {/* Camada de peças encaixadas */}
         <div className="absolute inset-0 flex items-center justify-center">
              {pecasColocadas > 0 && (
@@ -4662,6 +4662,7 @@ function QuebraCabecaMagico({ p, onDone }: any) {
              )}
         </div>
       </div>
+
 
       <div className="flex flex-wrap justify-center gap-4 bg-white/40 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white shadow-xl">
         {Array.from({ length: total - pecasColocadas }).map((_, i) => (
