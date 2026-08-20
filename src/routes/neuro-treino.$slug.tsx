@@ -1532,76 +1532,59 @@ function Mosaico({
   const progress = placed.size / p.pieces.length;
 
   return (
-    <div className="space-y-4">
-      {/* ── MODELO REFERÊNCIA ── */}
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-2">
-          Modelo — {p.emoji} {p.figura}
+    <div className="w-full flex flex-col items-center gap-6">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8">
+        {/* ── MODELO REFERÊNCIA ── */}
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-4 border-amber-200 rounded-[2.5rem] p-4 shadow-xl shrink-0">
+          <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-3">
+            MODELO — {p.emoji} {p.figura}
+          </div>
+          <div className="flex justify-center p-2 bg-white/40 rounded-3xl">
+            <svg
+              viewBox={`0 0 ${p.viewW} ${p.viewH}`}
+              style={{
+                width: 140,
+                height: 140 * (p.viewH / p.viewW),
+              }}
+              className="drop-shadow-sm"
+            >
+              {p.pieces.map((pc) => (
+                <ShapeEl
+                  key={pc.id}
+                  shape={pc.shape}
+                  x={pc.x}
+                  y={pc.y}
+                  w={pc.w}
+                  h={pc.h}
+                  color={pc.color}
+                />
+              ))}
+              {p.pieces.map((pc) => (
+                <ShapeEl
+                  key={`o${pc.id}`}
+                  shape={pc.shape}
+                  x={pc.x}
+                  y={pc.y}
+                  w={pc.w}
+                  h={pc.h}
+                  color="none"
+                  stroke="rgba(0,0,0,0.1)"
+                  strokeWidth={0.5}
+                />
+              ))}
+            </svg>
+          </div>
         </div>
-        <div className="flex justify-center">
+
+        {/* ── ÁREA DE MONTAGEM ── */}
+        <div className="relative w-full max-w-sm bg-white border-8 border-sky-100 rounded-[3rem] p-6 shadow-2xl overflow-hidden aspect-square flex items-center justify-center">
+          <div className="absolute top-4 left-0 right-0 text-[10px] font-black uppercase tracking-widest text-sky-400 text-center z-10">
+            MONTE AQUI!
+          </div>
+          
           <svg
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{
-              width: Math.min(180, p.viewW),
-              height: Math.min(180, p.viewW) * (p.viewH / p.viewW),
-            }}
-            className="drop-shadow"
-          >
-            {/* All pieces fully coloured */}
-            {p.pieces.map((pc) => (
-              <ShapeEl
-                key={pc.id}
-                shape={pc.shape}
-                x={pc.x}
-                y={pc.y}
-                w={pc.w}
-                h={pc.h}
-                color={pc.color}
-              />
-            ))}
-            {/* Subtle outlines */}
-            {p.pieces.map((pc) => (
-              <ShapeEl
-                key={`o${pc.id}`}
-                shape={pc.shape}
-                x={pc.x}
-                y={pc.y}
-                w={pc.w}
-                h={pc.h}
-                color="none"
-                stroke="rgba(0,0,0,0.15)"
-              />
-            ))}
-          </svg>
-        </div>
-      </div>
-
-      {/* ── BARRA DE PROGRESSO ── */}
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary rounded-full transition-all duration-500"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
-        <span className="text-xs font-bold text-muted-foreground tabular-nums">
-          {placed.size}/{p.pieces.length}
-        </span>
-      </div>
-
-      {/* ── ÁREA DE MONTAGEM ── */}
-      <div className="bg-card border-2 border-primary/20 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-primary text-center mb-2">
-          Monte aqui!
-        </div>
-        <div className="flex justify-center">
-          <svg
-            viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{
-              width: "100%",
-              maxWidth: Math.min(300, p.viewW * 1.5),
-              aspectRatio: `${p.viewW}/${p.viewH}`,
-            }}
+            className="w-full h-full drop-shadow-md"
           >
             {/* Ghost outlines for unplaced */}
             {p.pieces
@@ -1614,17 +1597,17 @@ function Mosaico({
                   y={pc.y}
                   w={pc.w}
                   h={pc.h}
-                  color="#e2e8f0"
-                  stroke="#94a3b8"
-                  strokeDash="8 5"
-                  opacity={0.7}
+                  color="#f1f5f9"
+                  stroke="#cbd5e1"
+                  strokeDash="4 2"
+                  opacity={0.8}
                 />
               ))}
             {/* Placed pieces */}
             {p.pieces
               .filter((pc) => placed.has(pc.id))
               .map((pc) => (
-                <g key={`placed-${pc.id}`}>
+                <g key={`placed-${pc.id}`} className="animate-in zoom-in duration-300">
                   <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
                   <ShapeEl
                     shape={pc.shape}
@@ -1633,45 +1616,43 @@ function Mosaico({
                     w={pc.w}
                     h={pc.h}
                     color="none"
-                    stroke="rgba(255,255,255,0.4)"
+                    stroke="rgba(255,255,255,0.3)"
+                    strokeWidth={0.8}
                   />
                 </g>
               ))}
             {/* Celebration sparkles when done */}
             {done && (
-              <>
-                <text
-                  x={p.viewW / 2}
-                  y={p.viewH / 2 - 10}
-                  textAnchor="middle"
-                  fontSize="32"
-                  opacity="0.9"
-                >
+              <g className="animate-bounce">
+                <text x={p.viewW / 2} y={p.viewH / 2} textAnchor="middle" fontSize="30" dominantBaseline="central">
                   ⭐
                 </text>
-                <text
-                  x={p.viewW / 2}
-                  y={p.viewH / 2 + 30}
-                  textAnchor="middle"
-                  fontSize="14"
-                  fill="#0d1f55"
-                  fontWeight="bold"
-                >
-                  Incrível!
-                </text>
-              </>
+              </g>
             )}
           </svg>
         </div>
       </div>
 
-      {/* ── BANCO DE PEÇAS (embaralhado) ── */}
+      {/* ── BARRA DE PROGRESSO ── */}
+      <div className="w-full max-w-md flex items-center gap-4 px-4">
+        <div className="flex-1 h-4 bg-white/50 backdrop-blur-sm rounded-full overflow-hidden border-2 border-white shadow-inner">
+          <div
+            className="h-full bg-primary rounded-full transition-all duration-700 shadow-glow-sm"
+            style={{ width: `${progress * 100}%` }}
+          />
+        </div>
+        <span className="text-xs font-black text-primary/70 tabular-nums">
+          {placed.size}/{p.pieces.length}
+        </span>
+      </div>
+
+      {/* ── BANCO DE PEÇAS ── */}
       {!done && (
-        <div>
-          <div className="text-[10px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
-            Toque na peça que pertence à figura!
+        <div className="w-full max-w-xl bg-white/40 backdrop-blur-sm rounded-[2.5rem] p-6 border-2 border-white/60">
+          <div className="text-[10px] font-black text-primary/50 text-center mb-4 uppercase tracking-widest">
+            ESCOLHA AS PEÇAS PARA COMPLETAR!
           </div>
-          <div className="grid grid-cols-4 gap-2 justify-items-center">
+          <div className="flex flex-wrap justify-center gap-3">
             {allBank.map((piece) => (
               <PieceCard
                 key={piece.id}
@@ -1685,11 +1666,14 @@ function Mosaico({
       )}
 
       {done && (
-        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30">
-          🎉 Figura montada! Arrasou!
+        <div className="w-full max-w-md py-6 rounded-[2rem] bg-success/20 text-success font-black text-2xl text-center border-4 border-success/40 animate-in zoom-in shadow-xl">
+          INCRIÍVEL! VOCÊ CONSEGUIU! 🎉
         </div>
       )}
     </div>
+  );
+}
+
   );
 }
 
