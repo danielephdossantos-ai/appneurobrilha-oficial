@@ -16,15 +16,26 @@ function pick<T>(arr: T[]): T {
 }
 
 // Dificuldade adaptativa + revisão espaçada (Fase F).
-function poolPorNivel(nivel: number): Palavra[] {
+function poolPorNivel(nivel: number, alvoTotal = 50, acertosAtuais = 0): Palavra[] {
+  // Escalonamento de dificuldade programático baseado no progresso da etapa
+  const progresso = acertosAtuais / alvoTotal;
+  
   let pool: Palavra[];
-  if (nivel <= 1) pool = PALAVRAS.filter((p) => p.silabas.length <= 2);
-  else if (nivel === 2) pool = PALAVRAS.filter((p) => p.silabas.length <= 3);
-  else pool = PALAVRAS;
+  if (progresso < 0.3) {
+    // Início: apenas palavras dissílabas simples
+    pool = PALAVRAS.filter((p) => p.silabas.length <= 2);
+  } else if (progresso < 0.7) {
+    // Meio: introduz trissílabas
+    pool = PALAVRAS.filter((p) => p.silabas.length <= 3);
+  } else {
+    // Final: todas as complexidades
+    pool = PALAVRAS;
+  }
+  
   return filtrarComSRS(pool);
 }
-function numDistratores(_nivel: number): number {
-  // Padrão fixo: sempre 3 distratores → 4 opções totais (1 correta + 3 distratores)
+
+function numDistratores(nivel: number): number {
   return 3;
 }
 
@@ -341,7 +352,7 @@ export function gerarTextoCompreensao(_nivel = 2): Rodada {
 
 // ============ ROTEADOR ============
 
-export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
+export function gerarPorTipo(tipo: string, nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   let r: Rodada;
   switch (tipo) {
     case "vogal-som": r = gerarVogalSom(nivel); break;

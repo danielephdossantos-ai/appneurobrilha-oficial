@@ -36,7 +36,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Ouvir e reconhecer A, E, I, O, U",
     emoji: "🅰️",
     cor: "from-pink-400 to-rose-500",
-    alvo: 5,
+    alvo: 50,
     atividades: ["vogal-som"],
   },
   {
@@ -46,7 +46,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Segmentar e juntar pedacinhos das palavras",
     emoji: "🧩",
     cor: "from-orange-400 to-amber-500",
-    alvo: 6,
+    alvo: 50,
     atividades: ["segmentacao", "fusao"],
   },
   {
@@ -56,7 +56,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Sons iniciais, rimas e aliteração",
     emoji: "🐾",
     cor: "from-emerald-400 to-teal-500",
-    alvo: 8,
+    alvo: 50,
     atividades: ["som-inicial", "rima", "aliteracao"],
   },
   {
@@ -66,7 +66,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Som do começo, do meio, do fim, contar e trocar sons",
     emoji: "🔊",
     cor: "from-cyan-400 to-sky-500",
-    alvo: 10,
+    alvo: 50,
     atividades: [
       "som-final",
       "som-meio",
@@ -82,7 +82,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Ouvir uma frase e achar a imagem",
     emoji: "💬",
     cor: "from-sky-400 to-blue-500",
-    alvo: 5,
+    alvo: 50,
     atividades: ["frase-imagem"],
   },
   {
@@ -92,7 +92,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Ouvir uma história e responder",
     emoji: "📖",
     cor: "from-violet-400 to-purple-500",
-    alvo: 4,
+    alvo: 50,
     atividades: ["texto-compreensao"],
   },
   {
@@ -102,7 +102,7 @@ export const ETAPAS: EtapaCurricular[] = [
     descricao: "Entender o que aconteceu na história",
     emoji: "🧠",
     cor: "from-fuchsia-400 to-pink-500",
-    alvo: 4,
+    alvo: 50,
     atividades: ["texto-compreensao"],
   },
 ];

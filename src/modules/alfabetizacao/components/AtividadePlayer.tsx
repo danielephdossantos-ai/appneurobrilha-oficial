@@ -202,6 +202,8 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
     gerarPorTipo(
       etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)] as TipoAtividade,
       nivel,
+      acertosAtuais,
+      etapa.alvo
     ),
   );
   const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
@@ -271,7 +273,7 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
   function proximaRodada(nivelAtual: number) {
     limparTimers();
     const tipo = etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)];
-    setRodada(gerarPorTipo(tipo, nivelAtual));
+    setRodada(gerarPorTipo(tipo, nivelAtual, acertosAtuais, etapa.alvo));
     setFeedback(null);
     setTravado(false);
     setErrosNaRodada(0);
