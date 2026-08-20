@@ -3836,8 +3836,9 @@ function FormandoPalavras({ p, onDone }: any) {
   const btnPad = sens.largerTargets ? "px-8 py-6 text-2xl" : "px-6 py-4 text-xl";
 
   const handleSilaba = (sil: string) => {
-    if (erro) return;
+    if (erro || sequencia.length >= p.silabas.length) return;
     const esperada = p.silabas[sequencia.length];
+    
     if (sil !== esperada) {
       setErro(true);
       setTimeout(() => {
@@ -3846,10 +3847,14 @@ function FormandoPalavras({ p, onDone }: any) {
       }, 800);
       return;
     }
+    
     const nova = [...sequencia, sil];
     setSequencia(nova);
-    if (nova.length === p.silabas.length) setTimeout(() => onDone(true), 500);
+    if (nova.length === p.silabas.length) {
+      setTimeout(() => onDone(true), 800);
+    }
   };
+
 
   return (
     <div className="space-y-5 text-center">
