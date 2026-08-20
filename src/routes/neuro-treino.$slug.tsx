@@ -246,7 +246,7 @@ function NeuroAtividade() {
 
 
   // ===== Early returns (depois de todos os hooks) =====
-  if (!hiperfoco) {
+  if (!hiperfoco && !["quebra-cabeca-magico", "construtor-de-formas", "estudio-arte-contorno"].includes(slug)) {
     return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
   }
 
