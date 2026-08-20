@@ -954,3 +954,69 @@ export const PONTE_BLOCOS_VARS: Variation[] = range(30).map((i) => {
   const target = shapes[i % shapes.length];
   return { id: `pb-${i + 1}`, payload: { target, opts: shapes.slice(0, 3 + faixa), nivel: faixa + 1 } };
 });
+
+// FASE 4 - COORDENAÇÃO FINA & ESPACIAL
+const PUZZLE_BANK = [
+  { item: "GATO", emoji: "🐱", pecas: 4 },
+  { item: "CACHORRO", emoji: "🐶", pecas: 4 },
+  { item: "CARRO", emoji: "🚗", pecas: 6 },
+  { item: "CASA", emoji: "🏠", pecas: 6 },
+  { item: "SOL", emoji: "☀️", pecas: 4 },
+  { item: "ÁRVORE", emoji: "🌳", pecas: 6 },
+  { item: "MAÇÃ", emoji: "🍎", pecas: 4 },
+  { item: "FLOR", emoji: "🌸", pecas: 4 },
+  { item: "LEÃO", emoji: "🦁", pecas: 9 },
+  { item: "ELEFANTE", emoji: "🐘", pecas: 9 },
+  { item: "FOGUETE", emoji: "🚀", pecas: 6 },
+  { item: "BALÃO", emoji: "🎈", pecas: 4 },
+];
+
+export const QUEBRA_CABECA_MAGICO_VARS: Variation[] = range(30).map((i) => {
+  const b = PUZZLE_BANK[i % PUZZLE_BANK.length];
+  const faixa = Math.floor(i / 10);
+  return {
+    id: `qcm-${i + 1}`,
+    payload: {
+      ...b,
+      pecas: b.pecas + faixa * 3, // 4->7->10 pecas progressivamente
+      nivel: faixa + 1
+    }
+  };
+});
+
+const CONSTRUTOR_BANK = [
+  { item: "PALHAÇO", emoji: "🤡", partes: ["CABELO", "NARIZ", "BOCA", "CHAPÉU"] },
+  { item: "ROBÔ", emoji: "🤖", partes: ["CABEÇA", "ANTENA", "BRAÇOS", "RODAS"] },
+  { item: "CARRO", emoji: "🚗", partes: ["RODA DIANTEIRA", "RODA TRASEIRA", "VIDRO", "PORTA"] },
+  { item: "TREM", emoji: "🚂", partes: ["FUMAÇA", "CABINE", "VAGÃO", "RODAS"] },
+  { item: "FLOR", emoji: "🌸", partes: ["PÉTALAS", "MIOLO", "CAULE", "FOLHA"] },
+  { item: "CASA", emoji: "🏠", partes: ["TELHADO", "JANELA", "PORTA", "CHAMINÉ"] },
+];
+
+export const CONSTRUTOR_DE_FORMAS_VARS: Variation[] = range(30).map((i) => {
+  const b = CONSTRUTOR_BANK[i % CONSTRUTOR_BANK.length];
+  const faixa = Math.floor(i / 10);
+  return {
+    id: `cdf-${i + 1}`,
+    payload: {
+      ...b,
+      pecasExtras: faixa * 2, // distratores
+      nivel: faixa + 1
+    }
+  };
+});
+
+export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(30).map((i) => {
+  const b = PUZZLE_BANK[i % PUZZLE_BANK.length];
+  const faixa = Math.floor(i / 10);
+  return {
+    id: `eac-${i + 1}`,
+    payload: {
+      ...b,
+      dificuldade: faixa + 1,
+      mostrarGuia: i < 5,
+      tintaBrilhante: true
+    }
+  };
+});
+
