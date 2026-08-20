@@ -182,7 +182,7 @@ export function Shell({ children }: { children?: ReactNode }) {
       className="min-h-screen flex flex-col md:flex-row neuro-adaptive-container"
       style={adaptiveStyles}
     >
-      <aside className="hidden md:flex w-80 shrink-0 flex-col bg-sidebar border-r-4 border-sidebar-border p-6 gap-4 overflow-y-auto">
+      <aside className="hidden lg:flex w-80 shrink-0 flex-col bg-sidebar border-r-4 border-sidebar-border p-6 gap-4 overflow-y-auto">
         <Link to="/" className="flex items-center gap-3 px-2 py-4 mb-2">
           <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-white shadow-glow transform -rotate-3">
             <Sprout className="h-7 w-7" />
@@ -299,12 +299,12 @@ export function Shell({ children }: { children?: ReactNode }) {
         </div>
       </aside>
 
-      <div className="flex-1 min-w-0 flex flex-col">
+      <div className="flex-1 min-w-0 flex flex-col w-full max-w-screen-md lg:max-w-none mx-auto">
         <header className="w-full max-w-full overflow-hidden flex items-center justify-between p-4 gap-2 sticky top-0 z-20 backdrop-blur-xl bg-background/70 border-b-4 border-sidebar-border">
           {/* Logo / Título */}
           <div className="flex items-center gap-2 flex-shrink">
             <Link to="/" className="flex items-center gap-2">
-              <Sprout className="h-6 w-6 text-primary md:hidden" />
+              <Sprout className="h-6 w-6 text-primary lg:hidden" />
               <span className="font-bold text-base text-slate-800 truncate">
                 NeuroBrilha
               </span>
@@ -317,31 +317,28 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
 
           {/* Ações e Perfil do Usuário */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-3 flex-shrink-0">
             <NotificationBell />
             
-            {/* Bloco do Usuário sem estourar a tela */}
-            {activeChild ? (
-              <div
-                className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner"
-                title={activeChild.nome}
-                aria-label={activeChild.nome}
-              >
-                {activeChild.avatar || "👦"}
-              </div>
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
-                👤
+            {activeChild && (
+              <div className="flex items-center gap-2 bg-amber-50 rounded-full pl-3 pr-1 py-1 border border-amber-200">
+                <span className="text-[10px] font-black text-amber-800 uppercase tracking-tighter hidden sm:inline">{activeChild.nome.split(' ')[0]}</span>
+                <div
+                  className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sm flex-shrink-0 shadow-sm border border-amber-200"
+                  title={activeChild.nome}
+                >
+                  {activeChild.avatar || "👦"}
+                </div>
               </div>
             )}
           </div>
         </header>
 
-        <main className="flex-1 min-w-0 overflow-x-hidden px-3 sm:px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
-          <div className="max-w-5xl w-full mx-auto">{children ?? <Outlet />}</div>
+        <main className="flex-1 min-w-0 overflow-x-hidden px-3 sm:px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 w-full mx-auto relative">
+          <div className="w-full mx-auto">{children ?? <Outlet />}</div>
           <MobileNav path={path} />
 
-          <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
+          <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 lg:hidden">
             <div className="pointer-events-auto">
               {prevPath && (
                 <button
@@ -366,7 +363,7 @@ export function Shell({ children }: { children?: ReactNode }) {
             </div>
           </div>
 
-          <div className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
+          <div className="hidden lg:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
             <div className="pointer-events-auto">
               {prevPath && (
                 <button
@@ -407,7 +404,7 @@ function MobileNav({ path }: { path: string }) {
     { to: "/brilha-vida", icon: Heart, label: "Vida" },
   ];
   return (
-    <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
+    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
       {items.map((i) => {
         const active = path === i.to;
         const Icon = i.icon;
