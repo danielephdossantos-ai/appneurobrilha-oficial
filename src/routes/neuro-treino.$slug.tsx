@@ -1696,25 +1696,42 @@ function Mosaico({
 // ============== 13. Sequência de Cores ==============
 function SequenciaCores({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
+  
+  // Aleatoriedade real: se não houver um "next" e "options" fixos no payload,
+  // ou se quisermos forçar variedade, podemos re-embaralhar aqui.
+  // Como o payload vem do variations.ts, vamos confiar no motor de lá,
+  // mas garantir que as opções visuais sejam apresentadas de forma clara.
+
   const seqSize = sens.largerTargets ? "w-16 h-16" : "w-12 h-12";
-  const optSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const hover = sens.reduceMotion ? "" : "hover:scale-110";
+  const optSize = sens.largerTargets ? "w-20 h-20 md:w-24 md:h-24" : "w-16 h-16 md:w-20 md:h-20";
+  const hover = sens.reduceMotion ? "" : "hover:scale-110 active:scale-95";
+
   return (
-    <div className="text-center">
-      <div className="flex justify-center gap-2 mb-6">
-        {p.sequencia.map((c: string, i: number) => (
-          <div key={i} className={`${seqSize} rounded-lg shadow`} style={{ background: c }} />
-        ))}
-        <div className={`${seqSize} rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black`}>
-          ?
+    <div className="text-center w-full max-w-lg mx-auto">
+      <div className="bg-white/50 backdrop-blur-sm rounded-[2rem] p-6 mb-8 border-2 border-primary/10 shadow-inner">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary/60 mb-4">
+          QUAL COR VEM DEPOIS?
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {p.sequencia.map((c: string, i: number) => (
+            <div 
+              key={i} 
+              className={`${seqSize} rounded-2xl shadow-md border-2 border-white animate-in fade-in slide-in-from-bottom-2 duration-300`} 
+              style={{ background: c, animationDelay: `${i * 100}ms` }} 
+            />
+          ))}
+          <div className={`${seqSize} rounded-2xl border-4 border-dashed border-primary/30 flex items-center justify-center font-black text-primary/40 bg-primary/5 animate-pulse`}>
+            ?
+          </div>
         </div>
       </div>
-      <div className="flex justify-center gap-3">
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-items-center">
         {p.options.map((c: string, i: number) => (
           <button
             key={i}
             onClick={() => onDone(c === p.next)}
-            className={`${optSize} rounded-xl shadow-lg ${hover} transition-all`}
+            className={`${optSize} rounded-3xl shadow-xl ${hover} transition-all border-4 border-white active:shadow-sm`}
             style={{ background: c }}
           />
         ))}
@@ -1722,6 +1739,7 @@ function SequenciaCores({ p, onDone }: any) {
     </div>
   );
 }
+
 
 
 
