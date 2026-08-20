@@ -3229,86 +3229,93 @@ function CopiarFigura({ p, onDone }: any) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="text-center">
-        <div className="text-sm font-bold text-muted-foreground">
-          Desenhe por cima com o dedinho 👆
+    <div className="w-full flex flex-col items-center gap-6">
+      {/* Modelo flutuante discreto */}
+      <div className="absolute top-4 right-4 z-20">
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-3 border-4 border-slate-200 shadow-xl flex flex-col items-center">
+          <div className="text-[9px] font-black text-slate-400 mb-1">MODELO</div>
+          {img ? (
+            <img src={img} alt={p.nome} className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-sm" />
+          ) : (
+            <div className="text-4xl">{p.emoji}</div>
+          )}
         </div>
-        <div className="text-2xl font-black mt-1" style={{ color: p.cor }}>
+      </div>
+
+      <div className="text-center">
+        <div className="text-2xl font-black" style={{ color: p.cor }}>
           {p.nome}
         </div>
+        <div className="text-xs font-bold text-muted-foreground">
+          Desenhe por cima com o dedo! 👆
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-4 border-4 border-slate-200 flex flex-col items-center justify-center">
-          <div className="text-xs font-black text-slate-500 mb-2">MODELO</div>
-          {img ? (
-            <img src={img} alt={p.nome} className="w-32 h-32 object-contain drop-shadow" />
-          ) : (
-            <div className="text-7xl">{p.emoji}</div>
-          )}
-        </div>
-
-        <div
-          className="relative bg-white rounded-3xl border-4 border-dashed p-2 touch-none select-none"
-          style={{ borderColor: p.cor + "80" }}
-        >
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 text-xs font-black text-slate-400 z-10">
-            SUA VEZ
-          </div>
-          {img ? (
-            <img
-              src={img}
-              alt=""
-              draggable={false}
-              className="absolute inset-0 w-full h-full object-contain p-4 opacity-20 pointer-events-none"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-7xl opacity-20 pointer-events-none">
-              {p.emoji}
-            </div>
-          )}
-          <canvas
-            ref={canvasRef}
-            width={300}
-            height={300}
-            onPointerDown={start}
-            onPointerMove={move}
-            onPointerUp={end}
-            onPointerLeave={end}
-            className="relative w-full aspect-square touch-none cursor-crosshair"
+      {/* Área de Desenho Maximale */}
+      <div
+        className="relative bg-white rounded-[3rem] border-8 border-dashed shadow-2xl p-2 touch-none select-none w-full max-w-lg aspect-square"
+        style={{ borderColor: p.cor + "40" }}
+      >
+        {/* Fantasma de fundo */}
+        {img ? (
+          <img
+            src={img}
+            alt=""
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-contain p-8 opacity-10 pointer-events-none"
           />
-        </div>
-      </div>
-
-      <div className="h-3 rounded-full bg-slate-200 overflow-hidden">
-        <div
-          className="h-full transition-all duration-200"
-          style={{ width: `${progresso}%`, background: p.cor }}
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-9xl opacity-10 pointer-events-none">
+            {p.emoji}
+          </div>
+        )}
+        
+        <canvas
+          ref={canvasRef}
+          width={400}
+          height={400}
+          onPointerDown={start}
+          onPointerMove={move}
+          onPointerUp={end}
+          onPointerLeave={end}
+          className="relative w-full h-full touch-none cursor-crosshair rounded-[2.5rem]"
         />
-      </div>
-
-      <div className="flex gap-2">
+        
         <button
           onClick={limpar}
           disabled={feito}
-          className="flex-1 py-3 rounded-2xl bg-slate-200 text-slate-700 font-black active:scale-95 disabled:opacity-50"
+          className="absolute bottom-4 left-4 bg-slate-100 hover:bg-slate-200 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-md active:scale-90 transition-all disabled:opacity-50"
+          aria-label="Limpar"
         >
-          🔄 Limpar
+          <RotateCcw size={24} className="text-slate-600" />
         </button>
+      </div>
+
+      {/* Progresso e Finalização */}
+      <div className="w-full max-w-md space-y-4 px-4">
+        <div className="h-4 rounded-full bg-slate-100 border-2 border-white overflow-hidden shadow-inner">
+          <div
+            className="h-full transition-all duration-300 rounded-full shadow-glow-sm"
+            style={{ width: `${progresso}%`, background: p.cor }}
+          />
+        </div>
+
         <button
           onClick={() => {
             setFeito(true);
             onDone(true);
           }}
           disabled={feito || progresso < 30}
-          className="flex-1 py-3 rounded-2xl text-white font-black active:scale-95 disabled:opacity-40"
+          className="w-full py-5 rounded-[2.5rem] text-white font-black text-xl shadow-2xl active:scale-95 disabled:opacity-40 transition-all"
           style={{ background: p.cor }}
         >
-          Terminei! ✨
+          TERMINEI! ✨
         </button>
       </div>
     </div>
+  );
+}
+
   );
 }
 
