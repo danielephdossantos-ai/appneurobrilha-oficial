@@ -1219,7 +1219,8 @@ function CadeOPar({ p, onDone }: any) {
     }
   };
   return (
-    <div className={`grid grid-cols-4 gap-3 ${maxW} mx-auto`}>
+    <div className={`grid grid-cols-3 sm:grid-cols-4 gap-4 ${maxW} mx-auto p-4 bg-white/40 backdrop-blur-sm rounded-[2.5rem] border-4 border-white shadow-xl`}>
+
 
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
