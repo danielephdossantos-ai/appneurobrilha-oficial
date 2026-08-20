@@ -48,6 +48,8 @@ import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { getNeuroSkillInfo } from "@/data/neuro-treino/skill-map";
 import { useAbaPrompting } from "@/hooks/useAbaPrompting";
+import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
+
 import { PROMPT_HINTS } from "@/services/neuro-treino/promptingEngine";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
 
@@ -218,14 +220,9 @@ function NeuroAtividade() {
   }, [variation, instrucaoTematica, nomeCrianca]);
 
   const narracaoSanitizada = useMemo(() => {
-    try {
-      // Usar a importação direta se possível, ou require para evitar quebra se o arquivo não existir
-      const { sanitizarFalaMascote } = require("@/lib/sanitizar-fala-mascote");
-      return sanitizarFalaMascote(narracao, nomeCrianca);
-    } catch (e) {
-      return narracao;
-    }
+    return sanitizarFalaMascote(narracao, nomeCrianca);
   }, [narracao, nomeCrianca]);
+
 
 
 
@@ -359,103 +356,70 @@ function NeuroAtividade() {
 
   return (
     <Shell>
-      <div className="flex items-center justify-between gap-3 mb-2">
-        <button
-          onClick={() => {
-            if (!handleBack(navigate)) {
-              navigate({ to: "/neuro-treino" });
-            }
-          }}
-          className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft size={16} /> Voltar
-        </button>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleVoice}
-            title={voiceOn ? "Desligar voz da PIP" : "Ligar voz da PIP"}
-            className={`flex items-center gap-1 text-xs font-bold rounded-full border px-3 py-1 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
-          >
-            {voiceOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
-            Voz {voiceOn ? "ON" : "OFF"}
-          </button>
-          <Link
-            to="/neuro-treino/configurar"
-            search={{ next: slug }}
-            className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
-          >
-            {hiperfoco.label} <span className="text-primary">· trocar</span>
-          </Link>
-        </div>
-      </div>
-      <PageHeader title={meta.nome} subtitle={instrucaoTematica} />
-
-      {slug !== "motorzinho-dos-sons" && (
-        <div className="mb-3 flex items-center gap-2 justify-center">
+      {/* ── CABEÇALHO ENXUGADO ────────────────────────────────── */}
+      <div className="flex items-center justify-center gap-3 mb-4">
+        {slug !== "motorzinho-dos-sons" && (
           <button
             onClick={replay}
             disabled={!voiceOn || isSpeaking}
-            className="flex items-center gap-2 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20 disabled:opacity-50"
+            className="flex items-center gap-2 text-xs font-black rounded-full bg-primary/10 border border-primary/30 px-4 py-2 hover:bg-primary/20 disabled:opacity-50 transition-all shadow-sm active:scale-95"
           >
-            <Volume2 size={14} className={isSpeaking ? "animate-pulse" : ""} />
-            {isSpeaking ? "PIP falando..." : "Ouvir PIP de novo"}
+            <Volume2 size={16} className={isSpeaking ? "animate-pulse" : ""} />
+            {isSpeaking ? "OUVINDO..." : "OUVIR PIP"}
           </button>
-        </div>
-      )}
-
-      <div className="flex items-center justify-between mb-4 text-sm font-bold">
-        <span className="text-muted-foreground">
-          Exercício {(index % vars.length) + 1} de {vars.length}
-        </span>
-        <span className="text-success inline-flex items-center gap-1">
-          <Star size={14} className="fill-current" /> {acertos}
-        </span>
+        )}
       </div>
 
-      {/* Chip de nível de ajuda ABA (fading de prompting) */}
-      {activeChild && !aba.loading && (
-        <div className="mb-3 flex items-center justify-between rounded-2xl bg-card border-2 border-primary/20 px-3 py-2 text-xs">
-          <div className="flex items-center gap-2">
-            <Hand size={14} className="text-primary" />
-            <span className="font-black uppercase tracking-wider text-primary">
-              Ajuda: {aba.label}
-            </span>
-          </div>
-          <span className="text-muted-foreground truncate max-w-[60%] text-right">
-            {aba.hint}
+      {/* ÁREA CENTRALIZADA AUTOMATICAMENTE */}
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[65vh] w-full overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto px-2">
+          <Card className={`bg-gradient-to-br ${meta.cor} border-2 shadow-2xl rounded-[2.5rem] overflow-hidden`}>
+            <div className="p-4 md:p-8 flex items-center justify-center min-h-[400px]">
+              <MechanicRenderer
+                slug={slug}
+                variation={variation}
+                onConcluir={onConcluir}
+                promptLevel={aba.level}
+                key={variation.id}
+              />
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      {/* PROGRESSO E INFOS (RODAPÉ DISCRETO) */}
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+          <span>{meta.nome}</span>
+          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+          <span>Exercício {(index % vars.length) + 1} de {vars.length}</span>
+          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+          <span className="text-success inline-flex items-center gap-1">
+            <Star size={10} className="fill-current" /> {acertos}
           </span>
         </div>
-      )}
-      {aba.mastery.achieved && (
-        <div className="mb-3 rounded-2xl bg-success/10 border-2 border-success/40 px-3 py-2 text-xs font-bold text-success text-center">
-          🎓 Habilidade dominada — pronta para avançar!
+        
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/neuro-treino" });
+              }
+            }}
+            className="flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft size={14} /> Sair
+          </button>
+          
+          <button
+            onClick={toggleVoice}
+            className={`flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter rounded-full border px-2 py-0.5 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
+          >
+            Voz {voiceOn ? "ON" : "OFF"}
+          </button>
         </div>
-      )}
+      </div>
 
-      {slug !== "motorzinho-dos-sons" && !adjustment.stimuliReduction && (
-        <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center flex items-center justify-center gap-3">
-          <img
-            src={getElementoImg(elemento)}
-            alt={elemento}
-            className="w-10 h-10 object-contain drop-shadow-sm"
-          />
-          <div>
-            <span className="font-bold text-primary">{elemento}</span>
-            <span className="text-muted-foreground"> está aqui treinando com você!</span>
-          </div>
-        </div>
-      )}
-
-
-      <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
-        <MechanicRenderer
-          slug={slug}
-          variation={variation}
-          onConcluir={onConcluir}
-          promptLevel={aba.level}
-          key={variation.id}
-        />
-      </Card>
 
       <div className="mt-4 flex justify-end">
         <button
@@ -1173,37 +1137,56 @@ function OndeEsta({ p, onDone }: any) {
 // ============== 6. Sequência e Padrão ==============
 function SequenciaPadrao({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
+  
+  // Real randomness for sequence and patterns: 
+  // We can shuffle the options to ensure the correct answer isn't always in the same place
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const seqSize = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
-  const optSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const optSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-110";
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-110 active:scale-95";
+
   return (
-    <div className="text-center">
-      <div className="flex justify-center gap-3 mb-6 items-center">
-        {p.seq.map((s: string, i: number) => (
-          <div
-            key={i}
-            className={`${seqSize} flex items-center justify-center bg-card rounded-2xl border shadow-sm`}
-          >
-            <RenderEmoji e={s} className={imgSize} />
+    <div className="text-center w-full max-w-2xl mx-auto space-y-8">
+      <div className="bg-white/60 backdrop-blur-md rounded-[3rem] p-8 border-4 border-primary/10 shadow-xl">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary/50 mb-6">
+          QUAL VEM DEPOIS?
+        </div>
+        <div className="flex flex-wrap justify-center gap-4 items-center">
+          {p.seq.map((s: string, i: number) => (
+            <div
+              key={i}
+              className={`${seqSize} flex items-center justify-center bg-white rounded-[2rem] border-2 border-primary/5 shadow-md animate-in zoom-in duration-300`}
+              style={{ animationDelay: `${i * 150}ms` }}
+            >
+              <RenderEmoji e={s} className={imgSize} />
+            </div>
+          ))}
+          <div className={`${seqSize} flex items-center justify-center bg-primary/5 rounded-[2rem] border-4 border-dashed border-primary/20 animate-pulse`}>
+            <span className="text-primary/30 text-5xl font-black">?</span>
           </div>
-        ))}
-        <span className="text-primary text-6xl font-black">?</span>
+        </div>
       </div>
-      <div className="flex justify-center gap-3">
-        {p.opts.map((o: string, i: number) => (
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-center">
+        {shuffledOpts.map((o: string, i: number) => (
           <button
             key={i}
             onClick={() => onDone(o === p.next)}
-            className={`${optSize} flex items-center justify-center bg-card border-2 border-border rounded-2xl transition-all shadow-md ${hoverCls}`}
+            className={`${optSize} flex flex-col items-center justify-center bg-white border-4 border-transparent rounded-[2.5rem] transition-all shadow-xl hover:border-primary/30 ${hoverCls} active:shadow-sm`}
           >
             <RenderEmoji e={o} className={imgSize} />
+            <div className="mt-2 w-8 h-1 bg-primary/10 rounded-full" />
           </button>
         ))}
       </div>
     </div>
   );
 }
+
 
 
 
@@ -1233,7 +1216,8 @@ function CadeOPar({ p, onDone }: any) {
     }
   };
   return (
-    <div className={`grid grid-cols-4 gap-3 ${maxW} mx-auto`}>
+    <div className={`grid grid-cols-3 sm:grid-cols-4 gap-4 ${maxW} mx-auto p-4 bg-white/40 backdrop-blur-sm rounded-[2.5rem] border-4 border-white shadow-xl`}>
+
 
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
@@ -1259,30 +1243,30 @@ function CadeOPar({ p, onDone }: any) {
 // ============== 10. Vigilante Noturno (Foco Sustentado) ==============
 function VigilanteNoturno({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
-  const speedMul = sens.lowStim ? 1.6 : 1; // mais lento = menos estímulo
-  const press = sens.reduceMotion ? "" : "active:scale-90";
+  
+  // Aleatoriedade real e densidade adaptativa
+  const speedMul = sens.lowStim ? 1.6 : 1;
+  const press = sens.reduceMotion ? "" : "active:scale-90 active:brightness-90 transition-all";
   const errorRing = sens.softColors ? "ring-amber-400 bg-amber-100/40" : "ring-destructive bg-destructive/10";
   const btnSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
 
-  const [capturados, setCapturados] = useState<number[]>([]); // índices de alvos pegos
+  
+  const [capturados, setCapturados] = useState<number[]>([]); 
   const [erros, setErros] = useState(0);
   const [piscarErro, setPiscarErro] = useState<number | null>(null);
 
-
-  // Layout fixo por atividade: faixa vertical + sentido + atraso para cada item.
+  // Layout aleatório real para cada item vindo do banco
   const layout = useMemo(() => {
     return p.itens.map((_: any, i: number) => {
-      const seed = i * 17 + 3;
-      const rnd = (n: number) => (Math.sin(seed * n) + 1) / 2;
       return {
-        topPct: 6 + rnd(1.3) * 78,        // faixa vertical
-        delay: rnd(2.7) * 2.5,             // atraso inicial
-        reverse: rnd(3.1) > 0.5,           // sentido (vai/volta invertido)
-        dur: p.flutuarMs / 1000 + rnd(4.3) * 1.2,
+        topPct: 15 + Math.random() * 70, // Evitar topo/fundo extremo
+        delay: Math.random() * 4,        // Atraso aleatório real
+        reverse: Math.random() > 0.5,    // Sentido aleatório real
+        dur: (p.flutuarMs / 1000) * (0.8 + Math.random() * 0.4) * speedMul, // Duração variável
       };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [p.itens, speedMul]);
 
   const alvoNome = p.alvo.nome;
   const alvosIdx = p.itens
@@ -1290,9 +1274,8 @@ function VigilanteNoturno({ p, onDone }: any) {
     .filter((x: number) => x >= 0);
   const faltam = alvosIdx.length - capturados.length;
 
-  // Conclui quando todos os alvos foram capturados.
   useEffect(() => {
-    if (faltam === 0) {
+    if (faltam === 0 && alvosIdx.length > 0) {
       const t = setTimeout(() => onDone(erros <= alvosIdx.length), 700);
       return () => clearTimeout(t);
     }
@@ -1307,9 +1290,10 @@ function VigilanteNoturno({ p, onDone }: any) {
     } else {
       setErros((e) => e + 1);
       setPiscarErro(i);
-      setTimeout(() => setPiscarErro(null), 350);
+      setTimeout(() => setPiscarErro(null), 400);
     }
   };
+
 
   return (
     <div className="space-y-4">
@@ -1376,7 +1360,7 @@ function VigilanteNoturno({ p, onDone }: any) {
                 top: `${L.topPct}%`,
                 left: 0,
                 width: "100%",
-                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur * speedMul}s ease-in-out ${L.delay}s infinite`,
+                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur}s ease-in-out ${L.delay}s infinite`,
               }}
             >
               <button
@@ -1565,76 +1549,59 @@ function Mosaico({
   const progress = placed.size / p.pieces.length;
 
   return (
-    <div className="space-y-4">
-      {/* ── MODELO REFERÊNCIA ── */}
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-2">
-          Modelo — {p.emoji} {p.figura}
+    <div className="w-full flex flex-col items-center gap-6">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8">
+        {/* ── MODELO REFERÊNCIA ── */}
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-4 border-amber-200 rounded-[2.5rem] p-4 shadow-xl shrink-0">
+          <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-3">
+            MODELO — {p.emoji} {p.figura}
+          </div>
+          <div className="flex justify-center p-2 bg-white/40 rounded-3xl">
+            <svg
+              viewBox={`0 0 ${p.viewW} ${p.viewH}`}
+              style={{
+                width: 140,
+                height: 140 * (p.viewH / p.viewW),
+              }}
+              className="drop-shadow-sm"
+            >
+              {p.pieces.map((pc) => (
+                <ShapeEl
+                  key={pc.id}
+                  shape={pc.shape}
+                  x={pc.x}
+                  y={pc.y}
+                  w={pc.w}
+                  h={pc.h}
+                  color={pc.color}
+                />
+              ))}
+              {p.pieces.map((pc) => (
+                <ShapeEl
+                  key={`o${pc.id}`}
+                  shape={pc.shape}
+                  x={pc.x}
+                  y={pc.y}
+                  w={pc.w}
+                  h={pc.h}
+                  color="none"
+                  stroke="rgba(0,0,0,0.1)"
+
+                />
+              ))}
+            </svg>
+          </div>
         </div>
-        <div className="flex justify-center">
+
+        {/* ── ÁREA DE MONTAGEM ── */}
+        <div className="relative w-full max-w-sm bg-white border-8 border-sky-100 rounded-[3rem] p-6 shadow-2xl overflow-hidden aspect-square flex items-center justify-center">
+          <div className="absolute top-4 left-0 right-0 text-[10px] font-black uppercase tracking-widest text-sky-400 text-center z-10">
+            MONTE AQUI!
+          </div>
+          
           <svg
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{
-              width: Math.min(180, p.viewW),
-              height: Math.min(180, p.viewW) * (p.viewH / p.viewW),
-            }}
-            className="drop-shadow"
-          >
-            {/* All pieces fully coloured */}
-            {p.pieces.map((pc) => (
-              <ShapeEl
-                key={pc.id}
-                shape={pc.shape}
-                x={pc.x}
-                y={pc.y}
-                w={pc.w}
-                h={pc.h}
-                color={pc.color}
-              />
-            ))}
-            {/* Subtle outlines */}
-            {p.pieces.map((pc) => (
-              <ShapeEl
-                key={`o${pc.id}`}
-                shape={pc.shape}
-                x={pc.x}
-                y={pc.y}
-                w={pc.w}
-                h={pc.h}
-                color="none"
-                stroke="rgba(0,0,0,0.15)"
-              />
-            ))}
-          </svg>
-        </div>
-      </div>
-
-      {/* ── BARRA DE PROGRESSO ── */}
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary rounded-full transition-all duration-500"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
-        <span className="text-xs font-bold text-muted-foreground tabular-nums">
-          {placed.size}/{p.pieces.length}
-        </span>
-      </div>
-
-      {/* ── ÁREA DE MONTAGEM ── */}
-      <div className="bg-card border-2 border-primary/20 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-primary text-center mb-2">
-          Monte aqui!
-        </div>
-        <div className="flex justify-center">
-          <svg
-            viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{
-              width: "100%",
-              maxWidth: Math.min(300, p.viewW * 1.5),
-              aspectRatio: `${p.viewW}/${p.viewH}`,
-            }}
+            className="w-full h-full drop-shadow-md"
           >
             {/* Ghost outlines for unplaced */}
             {p.pieces
@@ -1647,17 +1614,17 @@ function Mosaico({
                   y={pc.y}
                   w={pc.w}
                   h={pc.h}
-                  color="#e2e8f0"
-                  stroke="#94a3b8"
-                  strokeDash="8 5"
-                  opacity={0.7}
+                  color="#f1f5f9"
+                  stroke="#cbd5e1"
+                  strokeDash="4 2"
+                  opacity={0.8}
                 />
               ))}
             {/* Placed pieces */}
             {p.pieces
               .filter((pc) => placed.has(pc.id))
               .map((pc) => (
-                <g key={`placed-${pc.id}`}>
+                <g key={`placed-${pc.id}`} className="animate-in zoom-in duration-300">
                   <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
                   <ShapeEl
                     shape={pc.shape}
@@ -1666,45 +1633,43 @@ function Mosaico({
                     w={pc.w}
                     h={pc.h}
                     color="none"
-                    stroke="rgba(255,255,255,0.4)"
+                    stroke="rgba(255,255,255,0.3)"
+
                   />
                 </g>
               ))}
             {/* Celebration sparkles when done */}
             {done && (
-              <>
-                <text
-                  x={p.viewW / 2}
-                  y={p.viewH / 2 - 10}
-                  textAnchor="middle"
-                  fontSize="32"
-                  opacity="0.9"
-                >
+              <g className="animate-bounce">
+                <text x={p.viewW / 2} y={p.viewH / 2} textAnchor="middle" fontSize="30" dominantBaseline="central">
                   ⭐
                 </text>
-                <text
-                  x={p.viewW / 2}
-                  y={p.viewH / 2 + 30}
-                  textAnchor="middle"
-                  fontSize="14"
-                  fill="#0d1f55"
-                  fontWeight="bold"
-                >
-                  Incrível!
-                </text>
-              </>
+              </g>
             )}
           </svg>
         </div>
       </div>
 
-      {/* ── BANCO DE PEÇAS (embaralhado) ── */}
+      {/* ── BARRA DE PROGRESSO ── */}
+      <div className="w-full max-w-md flex items-center gap-4 px-4">
+        <div className="flex-1 h-4 bg-white/50 backdrop-blur-sm rounded-full overflow-hidden border-2 border-white shadow-inner">
+          <div
+            className="h-full bg-primary rounded-full transition-all duration-700 shadow-glow-sm"
+            style={{ width: `${progress * 100}%` }}
+          />
+        </div>
+        <span className="text-xs font-black text-primary/70 tabular-nums">
+          {placed.size}/{p.pieces.length}
+        </span>
+      </div>
+
+      {/* ── BANCO DE PEÇAS ── */}
       {!done && (
-        <div>
-          <div className="text-[10px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
-            Toque na peça que pertence à figura!
+        <div className="w-full max-w-xl bg-white/40 backdrop-blur-sm rounded-[2.5rem] p-6 border-2 border-white/60">
+          <div className="text-[10px] font-black text-primary/50 text-center mb-4 uppercase tracking-widest">
+            ESCOLHA AS PEÇAS PARA COMPLETAR!
           </div>
-          <div className="grid grid-cols-4 gap-2 justify-items-center">
+          <div className="flex flex-wrap justify-center gap-3">
             {allBank.map((piece) => (
               <PieceCard
                 key={piece.id}
@@ -1718,43 +1683,63 @@ function Mosaico({
       )}
 
       {done && (
-        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30">
-          🎉 Figura montada! Arrasou!
+        <div className="w-full max-w-md py-6 rounded-[2rem] bg-success/20 text-success font-black text-2xl text-center border-4 border-success/40 animate-in zoom-in shadow-xl">
+          INCRIÍVEL! VOCÊ CONSEGUIU! 🎉
         </div>
       )}
     </div>
   );
 }
 
+
 // ============== 13. Sequência de Cores ==============
 function SequenciaCores({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
+  
+  // Aleatoriedade real: se não houver um "next" e "options" fixos no payload,
+  // ou se quisermos forçar variedade, podemos re-embaralhar aqui.
+  // Como o payload vem do variations.ts, vamos confiar no motor de lá,
+  // mas garantir que as opções visuais sejam apresentadas de forma clara.
+
   const seqSize = sens.largerTargets ? "w-16 h-16" : "w-12 h-12";
-  const optSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const hover = sens.reduceMotion ? "" : "hover:scale-110";
+  const optSize = sens.largerTargets ? "w-20 h-20 md:w-24 md:h-24" : "w-16 h-16 md:w-20 md:h-20";
+  const hover = sens.reduceMotion ? "" : "hover:scale-110 active:scale-95";
+
   return (
-    <div className="text-center">
-      <div className="flex justify-center gap-2 mb-6">
-        {p.sequencia.map((c: string, i: number) => (
-          <div key={i} className={`${seqSize} rounded-lg shadow`} style={{ background: c }} />
-        ))}
-        <div className={`${seqSize} rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black`}>
-          ?
+    <div className="text-center w-full max-w-lg mx-auto">
+      <div className="bg-white/50 backdrop-blur-sm rounded-[2rem] p-6 mb-8 border-2 border-primary/10 shadow-inner">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary/60 mb-4">
+          QUAL COR VEM DEPOIS?
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {p.sequencia.map((c: string, i: number) => (
+            <div 
+              key={i} 
+              className={`${seqSize} rounded-2xl shadow-md border-2 border-white animate-in fade-in slide-in-from-bottom-2 duration-300`} 
+              style={{ background: c, animationDelay: `${i * 100}ms` }} 
+            />
+          ))}
+          <div className={`${seqSize} rounded-2xl border-4 border-dashed border-primary/30 flex items-center justify-center font-black text-primary/40 bg-primary/5 animate-pulse`}>
+            ?
+          </div>
         </div>
       </div>
-      <div className="flex justify-center gap-3">
-        {p.options.map((c: string, i: number) => (
+
+      <div className="flex flex-wrap justify-center gap-6">
+        {useMemo(() => [...p.options].sort(() => Math.random() - 0.5), [p.options]).map((c: string, i: number) => (
           <button
             key={i}
             onClick={() => onDone(c === p.next)}
-            className={`${optSize} rounded-xl shadow-lg ${hover} transition-all`}
+            className={`${optSize} rounded-[2rem] shadow-xl ${hover} transition-all border-4 border-white active:shadow-inner`}
             style={{ background: c }}
           />
         ))}
       </div>
+
     </div>
   );
 }
+
 
 
 
@@ -1766,22 +1751,24 @@ function Onomatopeias({ p, onDone }: any) {
   const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
   const imgSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   return (
-    <div className="text-center">
-      <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
-        <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1">
-          <Volume2 size={12} /> Som
+    <div className="text-center w-full max-w-2xl mx-auto">
+      <div className="inline-block bg-white/80 backdrop-blur-md border-8 border-coral/20 rounded-[3rem] px-12 py-8 mb-10 shadow-2xl animate-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-coral/60 tracking-[0.2em] mb-3 flex items-center justify-center gap-2">
+          <Volume2 size={16} /> QUAL ELEMENTO FAZ O SOM?
         </div>
-        <div className="text-5xl font-black text-coral">{p.som}</div>
+        <div className="text-6xl font-black text-coral drop-shadow-sm">{p.som}</div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
         {p.options.map((o: any, i: number) => {
           const img = ilustracao(o.emoji, o.nome);
           return (
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hover}`}
+              className={`bg-white border-4 border-transparent rounded-[2.5rem] p-6 transition-all flex flex-col items-center gap-3 shadow-xl hover:border-coral/30 hover:shadow-coral/10 ${hover} active:shadow-inner`}
             >
+
               {img ? (
                 <img
                   src={img}
@@ -2202,6 +2189,13 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   const acertouOrdem = completou && !erroOrdem;
   const progresso = Math.round((checkpointIdx / totalCheckpoints) * 100);
 
+  useEffect(() => {
+    if (completou) {
+      setTimeout(() => onDone(acertouOrdem), 1000);
+    }
+  }, [completou, acertouOrdem, onDone]);
+
+
   const { effective: sens } = useSensoryProfile();
   const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
   const selectedScale = sens.reduceMotion ? "" : "scale-110";
@@ -2223,24 +2217,17 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   const mostrarMaoGuia = promptLevel <= 1;
 
   return (
-    <div className="text-center space-y-3">
-      <div className="text-sm text-muted-foreground font-bold">
-        Contorne a letra <span className="text-coral">{p.letra}</span> seguindo a ordem correta
-      </div>
-
-      <div className="flex items-center justify-center gap-3 md:gap-5">
-        <div className="flex flex-col gap-2">
-          {CORES_ESQ.map((c) => <Bolinha key={c.hex} c={c} />)}
-        </div>
-
+    <div className="w-full flex flex-col items-center gap-6">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
+        {/* Letra e Desenho Central */}
         <div
-          className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md relative"
-          style={{ width: 320 }}
+          className="bg-white border-8 border-sky-100 rounded-[3rem] p-4 shadow-2xl relative overflow-hidden"
+          style={{ width: "100%", maxWidth: 420 }}
         >
           <svg
             ref={svgRef}
             viewBox="0 0 100 100"
-            className="w-full touch-none select-none"
+            className="w-full touch-none select-none drop-shadow-sm"
             style={{ cursor: "crosshair" }}
             onPointerDown={onDown}
             onPointerMove={onMove}
@@ -2263,7 +2250,7 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               </clipPath>
             </defs>
 
-            {/* Letra-guia */}
+            {/* Letra-guia de fundo */}
             <text
               x={50}
               y={54}
@@ -2272,22 +2259,22 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               fontSize={108}
               fontWeight={900}
               fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
-              fill="#f1f5f9"
-              stroke="#cbd5e1"
-              strokeWidth={1}
-              strokeDasharray="2 2"
+              fill="#f8fafc"
+              stroke="#e2e8f0"
+              strokeWidth={1.5}
+              strokeDasharray="3 3"
             >
               {p.letra}
             </text>
 
-            {/* Tinta */}
+            {/* Tinta (Traçado do usuário) */}
             <g clipPath={`url(#${clipId})`}>
               {strokes.map((s, i) => (
                 <path
                   key={i}
                   d={s.d}
                   stroke={s.cor}
-                  strokeWidth={18}
+                  strokeWidth={20}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   fill="none"
@@ -2295,121 +2282,127 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               ))}
             </g>
 
-            {/* Checkpoints numerados (dicas ABA) */}
+            {/* Checkpoints ABA */}
             {mostrarNumeros &&
               checkpoints.map((cp, i) => {
                 const feito = i < checkpointIdx;
                 const atual = i === checkpointIdx;
                 return (
-                  <g key={i}>
+                  <g key={i} className="transition-all duration-300">
                     <circle
                       cx={cp.x}
                       cy={cp.y}
-                      r={4}
-                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#e2e8f0"}
-                      stroke="#0f172a"
-                      strokeWidth={0.5}
+                      r={atual ? 6 : 4}
+                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#cbd5e1"}
+                      stroke="white"
+                      strokeWidth={1}
                     />
-                    <text
-                      x={cp.x}
-                      y={cp.y + 1}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fontSize={4}
-                      fontWeight={900}
-                      fill="#0f172a"
-                    >
-                      {i + 1}
-                    </text>
+                    {atual && (
+                      <circle
+                        cx={cp.x}
+                        cy={cp.y}
+                        r={8}
+                        fill="none"
+                        stroke="#f59e0b"
+                        strokeWidth={1}
+                        className="animate-ping"
+                      />
+                    )}
                   </g>
                 );
               })}
 
-            {/* Seta piscante no próximo ponto */}
+            {/* Seta/Dica ABA */}
             {mostrarSetaProxima && !completou && (
               <circle
                 cx={proximoCP.x}
                 cy={proximoCP.y}
-                r={9}
+                r={10}
                 fill="none"
                 stroke="#f59e0b"
-                strokeWidth={1.5}
-                strokeDasharray="2 1"
+                strokeWidth={2}
+                strokeDasharray="4 2"
               >
-                <animate attributeName="r" values="7;11;7" dur="1s" repeatCount="indefinite" />
+                <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite" />
               </circle>
             )}
 
-            {/* Guia física (mão) — nível 1 */}
+            {/* Guia física (mão) */}
             {mostrarMaoGuia && !completou && (
-              <text x={proximoCP.x + 6} y={proximoCP.y - 6} fontSize={8}>
+              <text x={proximoCP.x + 8} y={proximoCP.y - 8} fontSize={12} className="animate-bounce">
                 👆
               </text>
             )}
           </svg>
 
+          {/* Info embaixo da letra */}
+          <div className="flex items-center justify-between px-4 py-3 bg-sky-50/50 rounded-2xl mt-4">
+            <div className="font-black text-2xl tracking-tighter text-slate-800">
+              <span style={{ color: cor }}>{p.letra}</span>
+              <span>{p.palavra.slice(p.letra.length)}</span>
+            </div>
+            <div className="text-4xl drop-shadow-sm">{p.emoji}</div>
+          </div>
+          
           <button
             onClick={limpar}
-            className="absolute top-2 right-2 bg-slate-100 hover:bg-slate-200 rounded-full w-8 h-8 text-sm"
+            className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 rounded-full w-10 h-10 flex items-center justify-center text-xl shadow-sm active:scale-90 transition-all"
             aria-label="Limpar"
           >
-            🔄
+            <RotateCcw size={20} className="text-slate-600" />
           </button>
-
-          <div className="flex items-center justify-between px-2 pt-1">
-            <div className="font-black text-xl tracking-wide">
-              <span style={{ color: cor }}>{p.letra}</span>
-              <span className="text-slate-900">{p.palavra.slice(p.letra.length)}</span>
-            </div>
-            <div className="text-3xl leading-none">{p.emoji}</div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          {CORES_DIR.map((c) => <Bolinha key={c.hex} c={c} />)}
         </div>
       </div>
 
-      <div className="text-xs text-muted-foreground">
-        Cor: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span> ·
-        Progresso: <span className="font-bold text-emerald-600">{progresso}%</span> (
-        {checkpointIdx}/{totalCheckpoints})
+      {/* Paleta de Cores Horizontal (Embaixo) */}
+      <div className="w-full max-w-md flex flex-wrap justify-center gap-3 p-4 bg-white/40 backdrop-blur-sm rounded-[2rem] border-2 border-white/50">
+        {[...CORES_ESQ, ...CORES_DIR].map((c) => (
+          <button
+            key={c.hex}
+            onClick={() => escolher(c)}
+            className={`w-12 h-12 md:w-14 md:h-14 rounded-full border-4 transition-all shadow-md active:scale-90 ${
+              cor === c.hex ? "border-slate-800 scale-110 rotate-3" : "border-white hover:scale-105"
+            }`}
+            style={{ background: c.hex }}
+            title={c.nome}
+          />
+        ))}
       </div>
-      {foraDaLetra && (
-        <div className="text-xs font-bold text-amber-600">Volte pra dentro da letra ✋</div>
-      )}
-      {erroOrdem && (
-        <div className="text-xs font-bold text-rose-600">
-          Ordem errada — comece do ponto 1 e vá seguindo
-        </div>
-      )}
 
-      <div className="flex gap-2 justify-center">
-        <button
-          onClick={limpar}
-          className="mt-2 bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-full"
-        >
-          Recomeçar
-        </button>
+      {/* Botões de Ação */}
+      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md px-4">
         <button
           onClick={() => {
             if (acertouOrdem) {
               toast.success(`Letra ${p.letra} traçada na ordem certa! 🎨`);
               onDone(true);
             } else {
-              toast(`Ainda faltam ${totalCheckpoints - checkpointIdx} pontos ou a ordem está errada`);
+              toast(`Ainda faltam alguns pontos! Siga a ordem dos números.`);
               onDone(false);
             }
           }}
           disabled={!completou && checkpointIdx === 0}
-          className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
+          className="flex-1 py-4 bg-success text-white font-black text-xl rounded-[2rem] shadow-xl hover:shadow-success/20 hover:scale-105 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100"
         >
-          Terminei! ✨
+          TERMINEI! ✨
         </button>
       </div>
+
+      {/* Mensagens de Feedback */}
+      {foraDaLetra && (
+        <div className="px-4 py-2 bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-full text-xs font-black animate-bounce">
+          FIQUE DENTRO DA LETRA! ✋
+        </div>
+      )}
+      {erroOrdem && (
+        <div className="px-4 py-2 bg-rose-100 border-2 border-rose-300 text-rose-800 rounded-full text-xs font-black">
+          SIGA OS NÚMEROS NA ORDEM! 🔢
+        </div>
+      )}
     </div>
   );
 }
+
 
 
 
@@ -2718,43 +2711,55 @@ function ArticulacaoSons({ p, onDone, promptLevel }: any) {
 function VocabularioSemantico({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledItens = useMemo(() => {
+    return [...p.itens].sort(() => Math.random() - 0.5);
+  }, [p.itens]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
-    setTimeout(() => onDone(item === p.intruso), 700);
+    setTimeout(() => onDone(item === p.intruso), 800);
   };
+
   return (
-    <div className="space-y-5">
-      <div className="bg-gradient-to-br from-rose/15 to-rose/5 border-2 border-rose/25 rounded-2xl p-4 text-center">
-        <div className="text-sm uppercase text-muted-foreground mb-1">Grupo</div>
-        <div className="text-2xl font-black">{p.grupo}</div>
-        <div className="text-sm text-muted-foreground mt-1">Qual NÃO pertence aqui?</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-10 px-6 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-2">Grupo</div>
+        <div className="text-4xl font-black text-primary mb-2 tracking-tight">{p.grupo}</div>
+        <div className="text-sm font-bold text-muted-foreground/60">Qual NÃO pertence a este grupo?</div>
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {p.itens.map((item: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledItens.map((item: string, i: number) => {
           const emoji = item.trim().split(/\s+/)[0];
           const nome = item.replace(emoji, "").trim();
           const certo = item === p.intruso;
           const bg =
             selecionado === item
               ? certo
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
+              : selecionado && certo
                 ? "border-success bg-success/10"
-                : errorBg
-              : "border-border bg-card hover:border-rose/50";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
           return (
             <button
               key={i}
               onClick={() => handleClick(item)}
-              className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}
+              className={`rounded-[2.5rem] border-4 p-8 flex flex-col items-center gap-4 transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={emoji} label={nome} className={imgSize} />
-              <span className="font-bold text-sm">{nome}</span>
+              <span className="font-black text-lg tracking-tight text-slate-700">{nome}</span>
             </button>
           );
         })}
       </div>
+
     </div>
   );
 }
@@ -3245,88 +3250,93 @@ function CopiarFigura({ p, onDone }: any) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="text-center">
-        <div className="text-sm font-bold text-muted-foreground">
-          Desenhe por cima com o dedinho 👆
+    <div className="w-full flex flex-col items-center gap-6">
+      {/* Modelo flutuante discreto */}
+      <div className="absolute top-4 right-4 z-20">
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-3 border-4 border-slate-200 shadow-xl flex flex-col items-center">
+          <div className="text-[9px] font-black text-slate-400 mb-1">MODELO</div>
+          {img ? (
+            <img src={img} alt={p.nome} className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-sm" />
+          ) : (
+            <div className="text-4xl">{p.emoji}</div>
+          )}
         </div>
-        <div className="text-2xl font-black mt-1" style={{ color: p.cor }}>
+      </div>
+
+      <div className="text-center">
+        <div className="text-2xl font-black" style={{ color: p.cor }}>
           {p.nome}
         </div>
+        <div className="text-xs font-bold text-muted-foreground">
+          Desenhe por cima com o dedo! 👆
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-4 border-4 border-slate-200 flex flex-col items-center justify-center">
-          <div className="text-xs font-black text-slate-500 mb-2">MODELO</div>
-          {img ? (
-            <img src={img} alt={p.nome} className="w-32 h-32 object-contain drop-shadow" />
-          ) : (
-            <div className="text-7xl">{p.emoji}</div>
-          )}
-        </div>
-
-        <div
-          className="relative bg-white rounded-3xl border-4 border-dashed p-2 touch-none select-none"
-          style={{ borderColor: p.cor + "80" }}
-        >
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 text-xs font-black text-slate-400 z-10">
-            SUA VEZ
-          </div>
-          {img ? (
-            <img
-              src={img}
-              alt=""
-              draggable={false}
-              className="absolute inset-0 w-full h-full object-contain p-4 opacity-20 pointer-events-none"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-7xl opacity-20 pointer-events-none">
-              {p.emoji}
-            </div>
-          )}
-          <canvas
-            ref={canvasRef}
-            width={300}
-            height={300}
-            onPointerDown={start}
-            onPointerMove={move}
-            onPointerUp={end}
-            onPointerLeave={end}
-            className="relative w-full aspect-square touch-none cursor-crosshair"
+      {/* Área de Desenho Maximale */}
+      <div
+        className="relative bg-white rounded-[3rem] border-8 border-dashed shadow-2xl p-2 touch-none select-none w-full max-w-lg aspect-square"
+        style={{ borderColor: p.cor + "40" }}
+      >
+        {/* Fantasma de fundo */}
+        {img ? (
+          <img
+            src={img}
+            alt=""
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-contain p-8 opacity-10 pointer-events-none"
           />
-        </div>
-      </div>
-
-      <div className="h-3 rounded-full bg-slate-200 overflow-hidden">
-        <div
-          className="h-full transition-all duration-200"
-          style={{ width: `${progresso}%`, background: p.cor }}
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-9xl opacity-10 pointer-events-none">
+            {p.emoji}
+          </div>
+        )}
+        
+        <canvas
+          ref={canvasRef}
+          width={400}
+          height={400}
+          onPointerDown={start}
+          onPointerMove={move}
+          onPointerUp={end}
+          onPointerLeave={end}
+          className="relative w-full h-full touch-none cursor-crosshair rounded-[2.5rem]"
         />
-      </div>
-
-      <div className="flex gap-2">
+        
         <button
           onClick={limpar}
           disabled={feito}
-          className="flex-1 py-3 rounded-2xl bg-slate-200 text-slate-700 font-black active:scale-95 disabled:opacity-50"
+          className="absolute bottom-4 left-4 bg-slate-100 hover:bg-slate-200 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-md active:scale-90 transition-all disabled:opacity-50"
+          aria-label="Limpar"
         >
-          🔄 Limpar
+          <RotateCcw size={24} className="text-slate-600" />
         </button>
+      </div>
+
+      {/* Progresso e Finalização */}
+      <div className="w-full max-w-md space-y-4 px-4">
+        <div className="h-4 rounded-full bg-slate-100 border-2 border-white overflow-hidden shadow-inner">
+          <div
+            className="h-full transition-all duration-300 rounded-full shadow-glow-sm"
+            style={{ width: `${progresso}%`, background: p.cor }}
+          />
+        </div>
+
         <button
           onClick={() => {
             setFeito(true);
             onDone(true);
           }}
           disabled={feito || progresso < 30}
-          className="flex-1 py-3 rounded-2xl text-white font-black active:scale-95 disabled:opacity-40"
+          className="w-full py-5 rounded-[2.5rem] text-white font-black text-xl shadow-2xl active:scale-95 disabled:opacity-40 transition-all"
           style={{ background: p.cor }}
         >
-          Terminei! ✨
+          TERMINEI! ✨
         </button>
       </div>
     </div>
   );
 }
+
 
 // 31. ALVO MÓVEL — bichinho do banco se move pela tela, criança toca (tempo livre, sem voz)
 function AlvoMovel({ p, onDone }: any) {
@@ -3469,7 +3479,7 @@ function AcharDiferente({ p, onDone }: any) {
 function MemoriaVisual({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   // Em low-stim: +50% no tempo de memorização (alívio de fadiga cognitiva)
-  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * (sens.lowStim ? 3.75 : 2.5));
+  const tempoBase = Math.max(3000, (p.flashMs ?? 2000) * (sens.lowStim ? 1.5 : 1));
   const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<boolean | null>(null);
@@ -3747,38 +3757,46 @@ function SeguirInstrucao({ p, onDone }: any) {
 function LetraSom({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const shuffledImgs = useMemo(() => {
+    return [...p.imagens].sort(() => Math.random() - 0.5);
+  }, [p.imagens]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+
   const handleClick = (nome: string) => {
     if (selecionado) return;
     setSelecionado(nome);
-    setTimeout(() => onDone(nome === p.correta), 700);
+    setTimeout(() => onDone(nome === p.correta), 800);
   };
+
   return (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/30 rounded-3xl py-8 text-center">
-        <div className="text-xs uppercase text-muted-foreground mb-2">Começa com</div>
-        <div className="text-7xl font-black text-amber-700">{p.fonema}</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-10 px-6 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-4">Qual começa com...</div>
+        <div className="text-8xl font-black text-primary tracking-tighter drop-shadow-sm">{p.fonema}</div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        {p.imagens.map((img: { e: string; n: string }, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledImgs.map((img: { e: string; n: string }, i: number) => {
           const certa = img.n === p.correta;
           const bg =
             selecionado === img.n
               ? certa
-                ? "border-success bg-success/10"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
               : selecionado && certa
                 ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
           return (
             <button
               key={i}
               onClick={() => handleClick(img.n)}
-              className={`rounded-2xl border-2 p-5 flex flex-col items-center gap-2 transition-all font-bold ${bg}`}
+              className={`rounded-[2.5rem] border-4 p-8 flex flex-col items-center gap-4 transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={img.e} label={img.n} className={imgSize} />
-              <span className="text-sm">{img.n}</span>
+              <span className="font-black text-lg tracking-tight text-slate-700">{img.n}</span>
             </button>
           );
         })}
@@ -3788,39 +3806,49 @@ function LetraSom({ p, onDone }: any) {
 }
 
 
+
 // 37. PALAVRA-IMAGEM — ver imagem, escolher palavra correta
 function PalavraImagem({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
-  const optPad = sens.largerTargets ? "py-6 text-xl" : "py-4 text-lg";
+  const imgSize = sens.largerTargets ? "w-44 h-44" : "w-36 h-36";
+  const optPad = sens.largerTargets ? "py-8 text-2xl" : "py-6 text-xl";
+
   const handleClick = (opt: string) => {
     if (selecionado) return;
     setSelecionado(opt);
-    setTimeout(() => onDone(opt === p.correta), 700);
+    setTimeout(() => onDone(opt === p.correta), 800);
   };
+
   return (
-    <div className="space-y-5 text-center">
-      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8 flex items-center justify-center">
-        <RenderEmoji e={p.emoji} className={imgSize} />
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-12 flex items-center justify-center shadow-2xl animate-in fade-in zoom-in duration-500">
+        <RenderEmoji e={p.emoji} className={`${imgSize} drop-shadow-2xl`} />
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {p.opts.map((opt: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledOpts.map((opt: string, i: number) => {
           const certa = opt === p.correta;
           const bg =
             selecionado === opt
               ? certa
-                ? "border-success bg-success/10 text-success"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
               : selecionado && certa
                 ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
           return (
             <button
               key={i}
               onClick={() => handleClick(opt)}
-              className={`rounded-2xl border-2 ${optPad} font-black tracking-wider transition-all ${bg}`}
+              className={`rounded-[2.5rem] border-4 ${optPad} font-black tracking-tight transition-all shadow-xl ${bg}`}
             >
               {opt}
             </button>
@@ -3843,8 +3871,9 @@ function FormandoPalavras({ p, onDone }: any) {
   const btnPad = sens.largerTargets ? "px-8 py-6 text-2xl" : "px-6 py-4 text-xl";
 
   const handleSilaba = (sil: string) => {
-    if (erro) return;
+    if (erro || sequencia.length >= p.silabas.length) return;
     const esperada = p.silabas[sequencia.length];
+    
     if (sil !== esperada) {
       setErro(true);
       setTimeout(() => {
@@ -3853,10 +3882,14 @@ function FormandoPalavras({ p, onDone }: any) {
       }, 800);
       return;
     }
+    
     const nova = [...sequencia, sil];
     setSequencia(nova);
-    if (nova.length === p.silabas.length) setTimeout(() => onDone(true), 500);
+    if (nova.length === p.silabas.length) {
+      setTimeout(() => onDone(true), 800);
+    }
   };
+
 
   return (
     <div className="space-y-5 text-center">
@@ -3867,8 +3900,8 @@ function FormandoPalavras({ p, onDone }: any) {
           {sequencia.length === 0 ? "..." : sequencia.join("") || "..."}
         </div>
       </div>
-      <div className="flex gap-3 flex-wrap justify-center">
-        {p.embaralhadas.map((sil: string, i: number) => {
+      <div className="flex gap-4 flex-wrap justify-center py-4">
+        {useMemo(() => [...p.embaralhadas].sort(() => Math.random() - 0.5), [p.embaralhadas]).map((sil: string, i: number) => {
           const usada =
             sequencia.join("").includes(sil) &&
             sequencia.some((s) => s === sil && sequencia.indexOf(s) < sequencia.length);
@@ -3876,14 +3909,15 @@ function FormandoPalavras({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleSilaba(sil)}
-              className={`${btnPad} rounded-2xl border-2 font-black transition-all ${press}
-                ${usada ? "border-muted bg-muted/20 text-muted-foreground" : "border-amber/50 bg-amber/10 text-amber-800 hover:border-amber hover:bg-amber/20"}`}
+              className={`min-w-[80px] ${btnPad} rounded-[2rem] border-4 font-black transition-all shadow-lg ${press}
+                ${usada ? "border-muted bg-muted/20 text-muted-foreground scale-90 opacity-40" : "border-white bg-white hover:border-amber/40 hover:scale-110 active:scale-90 text-amber-900"}`}
             >
               {sil}
             </button>
           );
         })}
       </div>
+
       <div className="text-sm text-muted-foreground">
         {sequencia.length} / {p.silabas.length} sílabas
       </div>
@@ -3896,36 +3930,44 @@ function FormandoPalavras({ p, onDone }: any) {
 function LeituraPalavras({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const btnPad = sens.largerTargets ? "py-6" : "py-4";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const btnPad = sens.largerTargets ? "py-8" : "py-6";
+
   const handleClick = (e: string) => {
     if (selecionado) return;
     setSelecionado(e);
     setTimeout(() => onDone(e === p.emoji_certo), 700);
   };
+
   return (
-    <div className="space-y-5 text-center">
-      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/35 rounded-3xl py-8">
-        <div className="text-xs uppercase text-muted-foreground mb-2">Leia e encontre</div>
-        <div className="text-5xl font-black tracking-widest">{p.palavra}</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-12 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-4">Leia e encontre</div>
+        <div className="text-6xl font-black tracking-[0.15em] text-primary">{p.palavra}</div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        {p.opts.map((e: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledOpts.map((e: string, i: number) => {
           const certa = e === p.emoji_certo;
           const bg =
             selecionado === e
               ? certa
-                ? "border-success bg-success/10"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
               : selecionado && certa
                 ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
           return (
             <button
               key={i}
               onClick={() => handleClick(e)}
-              className={`rounded-2xl border-2 ${btnPad} flex items-center justify-center transition-all ${bg}`}
+              className={`rounded-[2.5rem] border-4 ${btnPad} flex items-center justify-center transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={e} className={imgSize} />
             </button>
@@ -3935,6 +3977,7 @@ function LeituraPalavras({ p, onDone }: any) {
     </div>
   );
 }
+
 
 
 // 40. COMPLETAR LETRA — palavra com lacuna, escolher letra certa
@@ -4052,60 +4095,81 @@ function OrdemInversa({ p, onDone }: any) {
   if (itensFinal.length === 0) return null;
 
   return (
-    <div className="space-y-6 text-center py-4">
+    <div className="w-full max-w-2xl mx-auto py-6">
       {fase === "mostrar" ? (
-        <div className="space-y-4 animate-in fade-in zoom-in duration-300">
-          <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-            Memorize os itens!
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {itensFinal.map((it: string, i: number) => (
-              <div key={i} className="flex flex-col items-center gap-2">
-                <span className="text-[10px] font-black text-primary/50">{i + 1}º</span>
-                <div className={`${btnSize} bg-white rounded-3xl shadow-lg border-2 border-primary/20 flex items-center justify-center`}>
-                  <RenderEmoji e={it} />
+        <div className="space-y-8 animate-in fade-in zoom-in duration-500 text-center">
+          <div className="bg-white/60 backdrop-blur-md rounded-[3rem] p-8 border-4 border-primary/10 shadow-xl">
+            <div className="text-[10px] font-black text-primary/40 uppercase tracking-[0.2em] mb-8">
+              MEMORIZE A ORDEM! 🧠
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              {itensFinal.map((it: string, i: number) => (
+                <div key={i} className="flex flex-col items-center gap-3 animate-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${i * 200}ms` }}>
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary border-2 border-white shadow-sm">
+                    {i + 1}
+                  </div>
+                  <div className={`${btnSize} bg-white rounded-[2rem] shadow-2xl border-4 border-primary/5 flex items-center justify-center`}>
+                    <RenderEmoji e={it} className="w-16 h-16" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className="text-xs font-bold text-primary animate-pulse">
-            Sua vez em {countdown}...
+          
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-48 h-2 bg-white/50 rounded-full overflow-hidden border border-white">
+              <div 
+                className="h-full bg-primary transition-all duration-1000 ease-linear"
+                style={{ width: `${(countdown / (p.flashMs / 1000)) * 100}%` }}
+              />
+            </div>
+            <div className="text-xs font-black text-primary uppercase tracking-widest">
+              Sua vez em {countdown}s...
+            </div>
           </div>
         </div>
       ) : (
-        <div className="space-y-6">
-          <div className="text-sm font-black text-primary uppercase tracking-widest">
-            Agora toque de TRÁS PARA FRENTE!
-          </div>
-          
-          {/* Slots de resposta */}
-          <div className="flex justify-center gap-3">
-            {itensFinal.map((_: any, i: number) => (
-              <div
-                key={i}
-                className={`${sens.largerTargets ? "w-14 h-14" : "w-12 h-12"} rounded-2xl border-2 border-dashed ${
-                  selecionados[i] ? "border-success bg-success/10" : "border-muted-foreground bg-muted/5"
-                } flex items-center justify-center`}
-              >
-                {selecionados[i] && <RenderEmoji e={selecionados[i]} className="w-8 h-8" />}
-              </div>
-            ))}
+        <div className="space-y-10 text-center animate-in fade-in duration-500">
+          <div className="bg-primary/5 rounded-[2rem] p-6 border-2 border-dashed border-primary/20">
+            <div className="text-sm font-black text-primary uppercase tracking-[0.15em] mb-6">
+              AGORA TOQUE DE TRÁS PARA FRENTE! 🔄
+            </div>
+            
+            {/* Slots de resposta */}
+            <div className="flex justify-center gap-4">
+              {itensFinal.map((_: any, i: number) => (
+                <div
+                  key={i}
+                  className={`${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-[1.5rem] border-4 border-dashed transition-all duration-300 ${
+                    selecionados[i] ? "border-success bg-success/10 scale-105" : "border-primary/20 bg-white/50"
+                  } flex items-center justify-center shadow-inner`}
+                >
+                  {selecionados[i] && (
+                    <div className="animate-in zoom-in duration-300">
+                      <RenderEmoji e={selecionados[i]} className="w-10 h-10" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Teclado de opções (embaralhado) */}
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
-            {[...itensFinal].sort().map((it: string, i: number) => {
+          {/* Teclado de opções (realmente aleatório no render) */}
+          <div className="flex flex-wrap justify-center gap-4">
+            {useMemo(() => [...itensFinal].sort(() => Math.random() - 0.5), [itensFinal]).map((it: string, i: number) => {
               const jaUsado = selecionados.includes(it);
               return (
                 <button
                   key={i}
                   disabled={jaUsado}
                   onClick={() => handleItem(it)}
-                  className={`${btnSize} bg-card rounded-3xl shadow-md border-2 border-border flex items-center justify-center transition-all ${
-                    jaUsado ? "opacity-30 grayscale" : "hover:scale-105 active:scale-95"
+                  className={`${btnSize} bg-white rounded-[2rem] shadow-xl border-4 border-white transition-all ${
+                    jaUsado 
+                      ? "opacity-20 grayscale scale-90 cursor-default" 
+                      : "hover:scale-110 active:scale-90 hover:border-primary/20 active:shadow-inner"
                   }`}
                 >
-                  <RenderEmoji e={it} />
+                  <RenderEmoji e={it} className="w-12 h-12" />
                 </button>
               );
             })}
@@ -4115,6 +4179,7 @@ function OrdemInversa({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 42. SINAL VERDE VERMELHO — Go/No-Go rápido
 function SinalVerdeVermelho({ p, onDone }: any) {
@@ -4351,17 +4416,36 @@ function SequenciaAuditiva({ p, onDone }: any) {
 
 // 45. BANQUETE DOS DINOS
 function BanqueteDinos({ p, onDone }: any) {
+  const options = useMemo(() => {
+    // p.opts já vem do builder, mas vamos garantir 3 opções reais
+    const base = p.opts || [];
+    if (!base.includes(p.qtd)) base.push(p.qtd);
+    return [...new Set(base)].sort((a: any, b: any) => a - b);
+  }, [p.opts, p.qtd]);
+
   return (
-    <div className="py-8 text-center space-y-8">
-      <div className="flex justify-center items-end gap-2">
-        <div className="text-9xl mb-4">{p.dino}</div>
-        <div className="bg-white/40 p-6 rounded-t-[50px] border-x-4 border-t-4 border-white/60 flex flex-wrap justify-center gap-2 max-w-[200px]">
-          {range(p.qtd).map((i: number) => <RenderEmoji key={i} e={p.comida} className="w-10 h-10" />)}
+    <div className="py-8 text-center space-y-10 w-full">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+        <div className="text-[10rem] md:text-[12rem] animate-bounce-slow drop-shadow-2xl">
+          {p.dino}
+        </div>
+        
+        <div className="bg-white/60 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white/80 shadow-2xl flex flex-wrap justify-center gap-3 max-w-[320px] min-h-[150px] items-center">
+          {range(p.qtd).map((i: number) => (
+            <div key={i} className="animate-in zoom-in duration-300" style={{ animationDelay: `${i * 50}ms` }}>
+              <RenderEmoji e={p.comida} className="w-12 h-12" />
+            </div>
+          ))}
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto">
-        {p.opts.map((opt: number, i: number) => (
-          <button key={i} onClick={() => onDone(opt === p.qtd)} className="py-6 bg-white rounded-3xl border-4 border-primary/20 text-4xl font-black text-primary hover:bg-primary/10 transition-all">
+
+      <div className="flex flex-wrap justify-center gap-6">
+        {options.map((opt: any, i: number) => (
+          <button 
+            key={i} 
+            onClick={() => onDone(opt === p.qtd)} 
+            className="w-24 h-24 bg-white rounded-[2rem] border-4 border-primary/10 text-5xl font-black text-primary hover:bg-primary/5 hover:scale-110 active:scale-95 transition-all shadow-xl"
+          >
             {opt}
           </button>
         ))}
@@ -4370,41 +4454,57 @@ function BanqueteDinos({ p, onDone }: any) {
   );
 }
 
+
 // 46. TREM NUMÉRICO
 function TremNumerico({ p, onDone }: any) {
-  const handleSlot = (val: number) => {
-    onDone(val === p.seq[p.buracos[0]]);
-  };
+
+
+  const correct = p.seq[p.buracos[0]];
+  const options = useMemo(() => {
+    const wrong1 = correct + 1;
+    const wrong2 = correct - 1 > 0 ? correct - 1 : correct + 2;
+    return [correct, wrong1, wrong2].sort(() => Math.random() - 0.5);
+  }, [correct]);
 
   return (
-    <div className="py-10 flex flex-col items-center gap-8">
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 max-w-full">
-        <div className="text-6xl">🚂</div>
+    <div className="py-10 flex flex-col items-center gap-8 w-full">
+      <div className="flex items-center gap-3 overflow-x-auto pb-6 max-w-full px-4 scrollbar-hide">
+        <div className="text-7xl drop-shadow-lg flex-shrink-0">🚂</div>
         {p.seq.map((n: number, i: number) => {
           const isBuraco = p.buracos.includes(i);
           return (
-            <div key={i} className={`w-20 h-24 rounded-t-2xl border-x-4 border-t-4 flex items-center justify-center text-3xl font-black ${isBuraco ? 'bg-primary/5 border-dashed border-primary/30 text-transparent' : 'bg-white border-primary/20'}`}>
-              {!isBuraco ? n : "?"}
+            <div 
+              key={i} 
+              className={`w-24 h-28 rounded-2xl border-4 flex-shrink-0 flex items-center justify-center text-4xl font-black shadow-md transition-all
+                ${isBuraco 
+                  ? 'bg-primary/5 border-dashed border-primary/30 text-primary/20 animate-pulse' 
+                  : 'bg-white border-primary/20 text-primary'}`}
+            >
+              {isBuraco ? "?" : n}
             </div>
           );
         })}
       </div>
-      <div className="flex gap-4">
-        {p.buracos.map((bIdx: number) => (
-          <button key={bIdx} onClick={() => handleSlot(p.seq[bIdx])} className="w-20 h-20 bg-primary text-white rounded-3xl text-3xl font-black shadow-lg hover:scale-110 active:scale-95 transition-all">
-            {p.seq[bIdx]}
+      
+      <div className="flex gap-4 flex-wrap justify-center">
+        {options.map((val, idx) => (
+          <button 
+            key={idx} 
+            onClick={() => onDone(val === correct)} 
+            className="w-24 h-24 bg-white hover:bg-primary/5 text-primary rounded-[2rem] border-4 border-primary/10 text-4xl font-black shadow-xl hover:scale-105 active:scale-95 transition-all"
+          >
+            {val}
           </button>
         ))}
-        <button onClick={() => onDone(false)} className="w-20 h-20 bg-muted text-muted-foreground rounded-3xl text-3xl font-black opacity-50">
-          {p.seq[0] - 1}
-        </button>
       </div>
     </div>
   );
 }
 
+
 // 47. TROCA-TROCA DE REGRAS
 function TrocaRegras({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [regra, setRegra] = useState(p.regras[0]);
   const [round, setRound] = useState(0);
   const [acertosLocais, setAcertosLocais] = useState(0);
@@ -4416,12 +4516,18 @@ function TrocaRegras({ p, onDone }: any) {
     setRegra(r);
     const cores = ["🔴", "🔵", "🟢", "🟡"];
     const formas = ["🔺", "🟦", "🟢", "⭐"];
-    const items = range(4).map((i: number) => ({ cor: cores[i], forma: formas[(i+1)%4] }));
+    const items = range(4).map((i: number) => ({ 
+      cor: cores[i], 
+      forma: formas[(i + 1) % 4] 
+    }));
     setAlvo(items[Math.floor(Math.random() * items.length)]);
     setOpts([...items].sort(() => Math.random() - 0.5));
   };
 
-  useEffect(() => gerarRound(), []);
+  useEffect(() => {
+    gerarRound();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOpt = (o: any) => {
     const match = regra === "cor" ? o.cor === alvo.cor : o.forma === alvo.forma;
@@ -4438,48 +4544,78 @@ function TrocaRegras({ p, onDone }: any) {
 
   if (!alvo) return null;
 
+
   return (
-    <div className="py-6 text-center space-y-6">
-      <div className="inline-block px-6 py-2 rounded-full bg-primary text-white font-black text-xl animate-bounce">
-        REGRA: {regra.toUpperCase()}
+    <div className="py-6 text-center space-y-10 w-full max-w-lg mx-auto">
+      <div className="inline-block px-10 py-4 rounded-[2rem] bg-primary text-white font-black text-2xl animate-in zoom-in duration-300 shadow-xl border-4 border-white">
+        REGRA: {regra === "cor" ? "COR 🎨" : "FORMA 📐"}
       </div>
-      <div className="bg-white/50 p-8 rounded-full inline-block border-4 border-white">
-        <div className="text-6xl flex gap-2">
+
+      <div className="bg-white/60 backdrop-blur-md p-10 rounded-[4rem] inline-block border-4 border-white shadow-2xl animate-pulse">
+        <div className="text-8xl flex gap-6">
           <span>{alvo.cor}</span>
           <span>{alvo.forma}</span>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+
+      <div className="grid grid-cols-2 gap-6 max-w-sm mx-auto">
         {opts.map((o, i) => (
-          <button key={i} onClick={() => handleOpt(o)} className="p-6 bg-white rounded-3xl border-4 border-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2 justify-center text-4xl">
+          <button 
+            key={i} 
+            onClick={() => handleOpt(o)} 
+            className="p-8 bg-white rounded-[2.5rem] border-4 border-white shadow-xl hover:scale-110 active:scale-90 transition-all flex gap-4 justify-center text-6xl hover:border-primary/20"
+          >
             <span>{o.cor}</span>
             <span>{o.forma}</span>
           </button>
         ))}
       </div>
+      
+      <div className="text-xs font-black text-white/50 uppercase tracking-widest">
+        Rodada {round + 1} de {p.rounds}
+      </div>
     </div>
   );
 }
 
+
 // 48. PONTE DE BLOCOS
 function PonteBlocos({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-90 hover:scale-105";
+
   return (
-    <div className="py-10 text-center space-y-10">
-      <div className="flex items-center justify-center gap-1">
-        <div className="h-16 w-32 bg-slate-400 rounded-l-2xl"></div>
-        <div className="h-16 w-32 border-4 border-dashed border-white/60 rounded-xl flex items-center justify-center text-4xl opacity-50">
-          {p.target}
+    <div className="py-10 text-center space-y-12 w-full max-w-xl mx-auto">
+      <div className="flex items-center justify-center gap-2">
+        {/* Pilar Esquerdo */}
+        <div className="h-24 w-12 bg-slate-300 rounded-t-2xl shadow-inner border-r-4 border-slate-400"></div>
+        
+        {/* Área da Ponte (Target) */}
+        <div className="flex-1 max-w-[200px] h-20 border-4 border-dashed border-white/80 rounded-[2rem] flex items-center justify-center bg-white/20 animate-pulse">
+           <div className="text-6xl opacity-20 grayscale">{p.target}</div>
         </div>
-        <div className="h-16 w-32 bg-slate-400 rounded-r-2xl"></div>
+        
+        {/* Pilar Direito */}
+        <div className="h-24 w-12 bg-slate-300 rounded-t-2xl shadow-inner border-l-4 border-slate-400"></div>
       </div>
-      <div className="flex justify-center gap-4">
+
+      <div className="flex flex-wrap justify-center gap-6">
         {p.opts.map((o: any, i: number) => (
-          <button key={i} onClick={() => onDone(o === p.target)} className="w-24 h-24 bg-white rounded-3xl shadow-lg hover:scale-110 active:scale-95 transition-all text-5xl flex items-center justify-center border-4 border-primary/10">
+          <button 
+            key={i} 
+            onClick={() => onDone(o === p.target)} 
+            className={`w-28 h-28 bg-white rounded-[2.5rem] shadow-xl transition-all text-6xl flex items-center justify-center border-4 border-white/50 ${press}`}
+          >
             {o}
           </button>
         ))}
       </div>
+      
+      <div className="text-sm font-black text-white/60 uppercase tracking-widest">
+        Escolha o bloco para completar a ponte!
+      </div>
     </div>
   );
 }
+
 
