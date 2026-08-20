@@ -375,9 +375,9 @@ function NeuroAtividade() {
 
       {/* ÁREA CENTRALIZADA AUTOMATICAMENTE */}
       <div className="flex-1 flex flex-col items-center justify-center min-h-[65vh] w-full overflow-hidden">
-        <div className="w-full max-w-4xl mx-auto px-2">
+        <div className="w-full max-w-screen-md mx-auto px-2">
           <Card className={`bg-gradient-to-br ${meta.cor} border-2 shadow-2xl rounded-[2.5rem] overflow-hidden`}>
-            <div className="p-4 md:p-8 flex items-center justify-center min-h-[400px]">
+            <div className="p-4 md:p-8 flex items-center justify-center min-h-[300px] md:min-h-[400px]">
               <MechanicRenderer
                 slug={slug}
                 variation={variation}
