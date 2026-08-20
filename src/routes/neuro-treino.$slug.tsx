@@ -4546,27 +4546,38 @@ function TrocaRegras({ p, onDone }: any) {
 
 
   return (
-    <div className="py-6 text-center space-y-6">
-      <div className="inline-block px-6 py-2 rounded-full bg-primary text-white font-black text-xl animate-bounce">
-        REGRA: {regra.toUpperCase()}
+    <div className="py-6 text-center space-y-10 w-full max-w-lg mx-auto">
+      <div className="inline-block px-10 py-4 rounded-[2rem] bg-primary text-white font-black text-2xl animate-in zoom-in duration-300 shadow-xl border-4 border-white">
+        REGRA: {regra === "cor" ? "COR 🎨" : "FORMA 📐"}
       </div>
-      <div className="bg-white/50 p-8 rounded-full inline-block border-4 border-white">
-        <div className="text-6xl flex gap-2">
+
+      <div className="bg-white/60 backdrop-blur-md p-10 rounded-[4rem] inline-block border-4 border-white shadow-2xl animate-pulse">
+        <div className="text-8xl flex gap-6">
           <span>{alvo.cor}</span>
           <span>{alvo.forma}</span>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+
+      <div className="grid grid-cols-2 gap-6 max-w-sm mx-auto">
         {opts.map((o, i) => (
-          <button key={i} onClick={() => handleOpt(o)} className="p-6 bg-white rounded-3xl border-4 border-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2 justify-center text-4xl">
+          <button 
+            key={i} 
+            onClick={() => handleOpt(o)} 
+            className="p-8 bg-white rounded-[2.5rem] border-4 border-white shadow-xl hover:scale-110 active:scale-90 transition-all flex gap-4 justify-center text-6xl hover:border-primary/20"
+          >
             <span>{o.cor}</span>
             <span>{o.forma}</span>
           </button>
         ))}
       </div>
+      
+      <div className="text-xs font-black text-white/50 uppercase tracking-widest">
+        Rodada {round + 1} de {p.rounds}
+      </div>
     </div>
   );
 }
+
 
 // 48. PONTE DE BLOCOS
 function PonteBlocos({ p, onDone }: any) {
