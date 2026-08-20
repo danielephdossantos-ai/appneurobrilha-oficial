@@ -67,6 +67,11 @@ import { url as icCompletarLetra } from "@/assets/neuro-treino/icons/v2/completa
 import { url as icOrdemInversa } from "@/assets/neuro-treino/icons/v2/memoria-visual.png.asset.json";
 import { url as icSinalVerdeVermelho } from "@/assets/neuro-treino/icons/v2/reacao-rapida.png.asset.json";
 
+// Importações dos novos ícones de Oficina Criativa
+import { url as icQuebraCabeca } from "@/assets/hiperfocos/princesas/castelo.png.asset.json";
+import { url as icConstrutor } from "@/assets/hiperfocos/robos/robo.png.asset.json";
+import { url as icEstudioArte } from "@/assets/hiperfocos/arte/paleta.png.asset.json";
+
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,
   "motorzinho-dos-sons": icMotorzinho,
@@ -115,6 +120,9 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "trem-numerico": icSeqPadrao,
   "troca-troca-regras": icSeqCores,
   "ponte-de-blocos": icMosaico,
+  "quebra-cabeca-magico": icQuebraCabeca,
+  "construtor-de-formas": icConstrutor,
+  "estudio-arte-contorno": icEstudioArte,
 };
 
 // Ícone do grupo clínico
