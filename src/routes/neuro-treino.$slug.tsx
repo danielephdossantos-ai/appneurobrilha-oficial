@@ -1363,7 +1363,7 @@ function VigilanteNoturno({ p, onDone }: any) {
                 top: `${L.topPct}%`,
                 left: 0,
                 width: "100%",
-                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur * speedMul}s ease-in-out ${L.delay}s infinite`,
+                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur}s ease-in-out ${L.delay}s infinite`,
               }}
             >
               <button
