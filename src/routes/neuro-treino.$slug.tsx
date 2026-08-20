@@ -331,7 +331,7 @@ function NeuroAtividade() {
       toast.success(frase);
       if (voiceOn) speak(`${nomeCrianca ? nomeCrianca + ", " : ""}${frase}`);
     } else {
-      const frase = pipFraseIncentivo(hiperfoco);
+      const frase = hiperfoco ? pipFraseIncentivo(hiperfoco) : "Continue tentando! Você consegue! ✨";
       toast(frase);
       if (voiceOn) speak(frase);
     }
