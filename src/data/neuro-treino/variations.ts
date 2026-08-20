@@ -26,7 +26,11 @@ import {
   TREM_NUMERICO_VARS,
   TROCA_REGRAS_VARS,
   PONTE_BLOCOS_VARS,
+  QUEBRA_CABECA_MAGICO_VARS,
+  CONSTRUTOR_DE_FORMAS_VARS,
+  ESTUDIO_ARTE_CONTORNO_VARS,
 } from "./variations-extended";
+
 
 export type CategoriaSlug =
   | "sons-iniciais"
