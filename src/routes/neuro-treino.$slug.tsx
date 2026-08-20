@@ -2394,8 +2394,6 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   );
 }
 
-  );
-}
 
 
 
