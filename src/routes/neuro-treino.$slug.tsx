@@ -4826,10 +4826,11 @@ function EstudioArteContorno({ p, onDone }: any) {
 
       <div className="flex justify-center gap-4">
         {["🔴", "🔵", "🟢", "🟡"].map((color, i) => (
-          <button key={i} className="w-14 h-14 bg-white rounded-full shadow-lg border-4 border-white hover:scale-110 transition-transform text-2xl flex items-center justify-center">
-            {color}
+          <button key={i} className="w-14 h-14 bg-white rounded-full shadow-lg border-4 border-white hover:scale-110 transition-transform text-2xl flex items-center justify-center overflow-hidden">
+            <RenderEmoji e={color} className="w-10 h-10" />
           </button>
         ))}
+
       </div>
     </div>
   );
