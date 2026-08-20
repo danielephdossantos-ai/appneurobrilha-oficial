@@ -1728,16 +1728,17 @@ function SequenciaCores({ p, onDone }: any) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-items-center">
-        {p.options.map((c: string, i: number) => (
+      <div className="flex flex-wrap justify-center gap-6">
+        {useMemo(() => [...p.options].sort(() => Math.random() - 0.5), [p.options]).map((c: string, i: number) => (
           <button
             key={i}
             onClick={() => onDone(c === p.next)}
-            className={`${optSize} rounded-3xl shadow-xl ${hover} transition-all border-4 border-white active:shadow-sm`}
+            className={`${optSize} rounded-[2rem] shadow-xl ${hover} transition-all border-4 border-white active:shadow-inner`}
             style={{ background: c }}
           />
         ))}
       </div>
+
     </div>
   );
 }
