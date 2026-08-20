@@ -3462,7 +3462,7 @@ function AcharDiferente({ p, onDone }: any) {
 function MemoriaVisual({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   // Em low-stim: +50% no tempo de memorização (alívio de fadiga cognitiva)
-  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * (sens.lowStim ? 3.75 : 2.5));
+  const tempoBase = Math.max(2000, (p.flashMs ?? 2000) * (sens.lowStim ? 1.5 : 1));
   const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<boolean | null>(null);
