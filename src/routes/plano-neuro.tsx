@@ -219,7 +219,6 @@ function PlanoNeuroPage() {
           <p className="text-sm text-muted-foreground">
             Vamos usar o resultado da anamnese para organizar as atividades REAIS do Neuro-Treino 
             em uma rotina semanal prática (3 a 6 anos). 
-            A partir de 7 anos, o foco é o Currículo Escolar.
           </p>
           <button
             onClick={gerar}
@@ -228,12 +227,6 @@ function PlanoNeuroPage() {
           >
             {gerando ? "Montando…" : "Criar plano neuro"}
           </button>
-          <p className="text-xs text-muted-foreground">
-            Sem anamnese ainda? Criamos um kit inicial e você refaz depois.{" "}
-            <Link to="/anamnese/$childId" params={{ childId }} className="text-primary underline font-bold">
-              Fazer anamnese
-            </Link>
-          </p>
         </Card>
       ) : (
         <div className="space-y-5">

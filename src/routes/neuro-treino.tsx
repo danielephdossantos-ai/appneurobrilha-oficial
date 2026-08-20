@@ -67,6 +67,11 @@ import { url as icCompletarLetra } from "@/assets/neuro-treino/icons/v2/completa
 import { url as icOrdemInversa } from "@/assets/neuro-treino/icons/v2/memoria-visual.png.asset.json";
 import { url as icSinalVerdeVermelho } from "@/assets/neuro-treino/icons/v2/reacao-rapida.png.asset.json";
 
+// Importações dos novos ícones de Oficina Criativa
+import { url as icQuebraCabeca } from "@/assets/hiperfocos/princesas/castelo.png.asset.json";
+import { url as icConstrutor } from "@/assets/hiperfocos/robos/robo.png.asset.json";
+import { url as icEstudioArte } from "@/assets/hiperfocos/arte/paleta.png.asset.json";
+
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,
   "motorzinho-dos-sons": icMotorzinho,
@@ -115,6 +120,9 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "trem-numerico": icSeqPadrao,
   "troca-troca-regras": icSeqCores,
   "ponte-de-blocos": icMosaico,
+  "quebra-cabeca-magico": icQuebraCabeca,
+  "construtor-de-formas": icConstrutor,
+  "estudio-arte-contorno": icEstudioArte,
 };
 
 // Ícone do grupo clínico
@@ -426,15 +434,21 @@ function Treino() {
 
                         {/* Ícone GRANDE — foco visual para a criança */}
                         <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
-                          <img
-                            src={iconSrc ?? ""}
-                            alt={c?.nome ?? slug}
-                            loading="lazy"
-                            width={128}
-                            height={128}
-                            className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-                            draggable={false}
-                          />
+                          {iconSrc ? (
+                            <img
+                              src={iconSrc}
+                              alt={c?.nome ?? slug}
+                              loading="lazy"
+                              width={128}
+                              height={128}
+                              className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
+                              draggable={false}
+                            />
+                          ) : (
+                            <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground/30 border-2 border-dashed border-muted-foreground/20">
+                              <Sparkles size={32} />
+                            </div>
+                          )}
                         </div>
 
                         <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
