@@ -4127,8 +4127,6 @@ function OrdemInversa({ p, onDone }: any) {
   );
 }
 
-  );
-}
 
 // 42. SINAL VERDE VERMELHO — Go/No-Go rápido
 function SinalVerdeVermelho({ p, onDone }: any) {
