@@ -3811,27 +3811,54 @@ function LetraSom({ p, onDone }: any) {
 function PalavraImagem({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
-  const optPad = sens.largerTargets ? "py-6 text-xl" : "py-4 text-lg";
+  const imgSize = sens.largerTargets ? "w-44 h-44" : "w-36 h-36";
+  const optPad = sens.largerTargets ? "py-8 text-2xl" : "py-6 text-xl";
+
   const handleClick = (opt: string) => {
     if (selecionado) return;
     setSelecionado(opt);
-    setTimeout(() => onDone(opt === p.correta), 700);
+    setTimeout(() => onDone(opt === p.correta), 800);
   };
+
   return (
-    <div className="space-y-5 text-center">
-      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8 flex items-center justify-center">
-        <RenderEmoji e={p.emoji} className={imgSize} />
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-12 flex items-center justify-center shadow-2xl animate-in fade-in zoom-in duration-500">
+        <RenderEmoji e={p.emoji} className={`${imgSize} drop-shadow-2xl`} />
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {p.opts.map((opt: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledOpts.map((opt: string, i: number) => {
           const certa = opt === p.correta;
           const bg =
             selecionado === opt
               ? certa
-                ? "border-success bg-success/10 text-success"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
+              : selecionado && certa
+                ? "border-success bg-success/10"
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
+          return (
+            <button
+              key={i}
+              onClick={() => handleClick(opt)}
+              className={`rounded-[2.5rem] border-4 ${optPad} font-black tracking-tight transition-all shadow-xl ${bg}`}
+            >
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-amber/60";
