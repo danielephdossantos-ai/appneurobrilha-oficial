@@ -35,6 +35,8 @@ import {
   type MosaicoPiece,
   range,
 } from "@/data/neuro-treino/variations";
+import { QUEBRA_CABECA_MAGICO_VARS, CONSTRUTOR_DE_FORMAS_VARS, ESTUDIO_ARTE_CONTORNO_VARS } from "@/data/neuro-treino/variations-extended";
+
 import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { getElementoImg } from "@/data/hiperfocos-img";
