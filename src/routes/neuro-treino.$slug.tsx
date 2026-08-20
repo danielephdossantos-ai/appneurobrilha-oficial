@@ -3757,38 +3757,46 @@ function SeguirInstrucao({ p, onDone }: any) {
 function LetraSom({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const shuffledImgs = useMemo(() => {
+    return [...p.imagens].sort(() => Math.random() - 0.5);
+  }, [p.imagens]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+
   const handleClick = (nome: string) => {
     if (selecionado) return;
     setSelecionado(nome);
-    setTimeout(() => onDone(nome === p.correta), 700);
+    setTimeout(() => onDone(nome === p.correta), 800);
   };
+
   return (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/30 rounded-3xl py-8 text-center">
-        <div className="text-xs uppercase text-muted-foreground mb-2">Começa com</div>
-        <div className="text-7xl font-black text-amber-700">{p.fonema}</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-10 px-6 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-4">Qual começa com...</div>
+        <div className="text-8xl font-black text-primary tracking-tighter drop-shadow-sm">{p.fonema}</div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        {p.imagens.map((img: { e: string; n: string }, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledImgs.map((img: { e: string; n: string }, i: number) => {
           const certa = img.n === p.correta;
           const bg =
             selecionado === img.n
               ? certa
-                ? "border-success bg-success/10"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
               : selecionado && certa
                 ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
           return (
             <button
               key={i}
               onClick={() => handleClick(img.n)}
-              className={`rounded-2xl border-2 p-5 flex flex-col items-center gap-2 transition-all font-bold ${bg}`}
+              className={`rounded-[2.5rem] border-4 p-8 flex flex-col items-center gap-4 transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={img.e} label={img.n} className={imgSize} />
-              <span className="text-sm">{img.n}</span>
+              <span className="font-black text-lg tracking-tight text-slate-700">{img.n}</span>
             </button>
           );
         })}
@@ -3796,6 +3804,7 @@ function LetraSom({ p, onDone }: any) {
     </div>
   );
 }
+
 
 
 // 37. PALAVRA-IMAGEM — ver imagem, escolher palavra correta
