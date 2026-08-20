@@ -1569,7 +1569,7 @@ function Mosaico({
                   h={pc.h}
                   color="none"
                   stroke="rgba(0,0,0,0.1)"
-                  strokeWidth={0.5}
+
                 />
               ))}
             </svg>
