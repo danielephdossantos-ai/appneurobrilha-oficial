@@ -4664,7 +4664,6 @@ function QuebraCabecaMagico({ p, onDone }: any) {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 bg-white/40 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white shadow-xl">
-
         {Array.from({ length: total - pecasColocadas }).map((_, i) => (
           <div
             key={i}
