@@ -2711,43 +2711,55 @@ function ArticulacaoSons({ p, onDone, promptLevel }: any) {
 function VocabularioSemantico({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledItens = useMemo(() => {
+    return [...p.itens].sort(() => Math.random() - 0.5);
+  }, [p.itens]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
-    setTimeout(() => onDone(item === p.intruso), 700);
+    setTimeout(() => onDone(item === p.intruso), 800);
   };
+
   return (
-    <div className="space-y-5">
-      <div className="bg-gradient-to-br from-rose/15 to-rose/5 border-2 border-rose/25 rounded-2xl p-4 text-center">
-        <div className="text-sm uppercase text-muted-foreground mb-1">Grupo</div>
-        <div className="text-2xl font-black">{p.grupo}</div>
-        <div className="text-sm text-muted-foreground mt-1">Qual NÃO pertence aqui?</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-10 px-6 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-2">Grupo</div>
+        <div className="text-4xl font-black text-primary mb-2 tracking-tight">{p.grupo}</div>
+        <div className="text-sm font-bold text-muted-foreground/60">Qual NÃO pertence a este grupo?</div>
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {p.itens.map((item: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledItens.map((item: string, i: number) => {
           const emoji = item.trim().split(/\s+/)[0];
           const nome = item.replace(emoji, "").trim();
           const certo = item === p.intruso;
           const bg =
             selecionado === item
               ? certo
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
+              : selecionado && certo
                 ? "border-success bg-success/10"
-                : errorBg
-              : "border-border bg-card hover:border-rose/50";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
+          
           return (
             <button
               key={i}
               onClick={() => handleClick(item)}
-              className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}
+              className={`rounded-[2.5rem] border-4 p-8 flex flex-col items-center gap-4 transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={emoji} label={nome} className={imgSize} />
-              <span className="font-bold text-sm">{nome}</span>
+              <span className="font-black text-lg tracking-tight text-slate-700">{nome}</span>
             </button>
           );
         })}
       </div>
+
     </div>
   );
 }
