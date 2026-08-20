@@ -4366,17 +4366,36 @@ function SequenciaAuditiva({ p, onDone }: any) {
 
 // 45. BANQUETE DOS DINOS
 function BanqueteDinos({ p, onDone }: any) {
+  const options = useMemo(() => {
+    // p.opts já vem do builder, mas vamos garantir 3 opções reais
+    const base = p.opts || [];
+    if (!base.includes(p.qtd)) base.push(p.qtd);
+    return [...new Set(base)].sort((a: any, b: any) => a - b);
+  }, [p.opts, p.qtd]);
+
   return (
-    <div className="py-8 text-center space-y-8">
-      <div className="flex justify-center items-end gap-2">
-        <div className="text-9xl mb-4">{p.dino}</div>
-        <div className="bg-white/40 p-6 rounded-t-[50px] border-x-4 border-t-4 border-white/60 flex flex-wrap justify-center gap-2 max-w-[200px]">
-          {range(p.qtd).map((i: number) => <RenderEmoji key={i} e={p.comida} className="w-10 h-10" />)}
+    <div className="py-8 text-center space-y-10 w-full">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+        <div className="text-[10rem] md:text-[12rem] animate-bounce-slow drop-shadow-2xl">
+          {p.dino}
+        </div>
+        
+        <div className="bg-white/60 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white/80 shadow-2xl flex flex-wrap justify-center gap-3 max-w-[320px] min-h-[150px] items-center">
+          {range(p.qtd).map((i: number) => (
+            <div key={i} className="animate-in zoom-in duration-300" style={{ animationDelay: `${i * 50}ms` }}>
+              <RenderEmoji e={p.comida} className="w-12 h-12" />
+            </div>
+          ))}
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto">
-        {p.opts.map((opt: number, i: number) => (
-          <button key={i} onClick={() => onDone(opt === p.qtd)} className="py-6 bg-white rounded-3xl border-4 border-primary/20 text-4xl font-black text-primary hover:bg-primary/10 transition-all">
+
+      <div className="flex flex-wrap justify-center gap-6">
+        {options.map((opt: any, i: number) => (
+          <button 
+            key={i} 
+            onClick={() => onDone(opt === p.qtd)} 
+            className="w-24 h-24 bg-white rounded-[2rem] border-4 border-primary/10 text-5xl font-black text-primary hover:bg-primary/5 hover:scale-110 active:scale-95 transition-all shadow-xl"
+          >
             {opt}
           </button>
         ))}
@@ -4384,6 +4403,7 @@ function BanqueteDinos({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 46. TREM NUMÉRICO
 function TremNumerico({ p, onDone }: any) {
