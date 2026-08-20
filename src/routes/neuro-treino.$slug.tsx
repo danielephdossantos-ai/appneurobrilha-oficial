@@ -3889,36 +3889,44 @@ function FormandoPalavras({ p, onDone }: any) {
 function LeituraPalavras({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  const shuffledOpts = useMemo(() => {
+    return [...p.opts].sort(() => Math.random() - 0.5);
+  }, [p.opts]);
+
   const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
-  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
-  const btnPad = sens.largerTargets ? "py-6" : "py-4";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const btnPad = sens.largerTargets ? "py-8" : "py-6";
+
   const handleClick = (e: string) => {
     if (selecionado) return;
     setSelecionado(e);
     setTimeout(() => onDone(e === p.emoji_certo), 700);
   };
+
   return (
-    <div className="space-y-5 text-center">
-      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/35 rounded-3xl py-8">
-        <div className="text-xs uppercase text-muted-foreground mb-2">Leia e encontre</div>
-        <div className="text-5xl font-black tracking-widest">{p.palavra}</div>
+    <div className="space-y-10 text-center w-full max-w-2xl mx-auto">
+      <div className="bg-white/60 backdrop-blur-md border-4 border-white/80 rounded-[3rem] py-12 shadow-2xl animate-in fade-in zoom-in duration-500">
+        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-[0.2em] mb-4">Leia e encontre</div>
+        <div className="text-6xl font-black tracking-[0.15em] text-primary">{p.palavra}</div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        {p.opts.map((e: string, i: number) => {
+
+      <div className="grid grid-cols-2 gap-6">
+        {shuffledOpts.map((e: string, i: number) => {
           const certa = e === p.emoji_certo;
           const bg =
             selecionado === e
               ? certa
-                ? "border-success bg-success/10"
-                : errorBg
+                ? "border-success bg-success/10 scale-105"
+                : `${errorBg} scale-95 opacity-50`
               : selecionado && certa
                 ? "border-success bg-success/10"
-                : "border-border bg-card hover:border-amber/60";
+                : "border-white bg-white/80 hover:border-primary/20 hover:scale-105 active:scale-95";
           return (
             <button
               key={i}
               onClick={() => handleClick(e)}
-              className={`rounded-2xl border-2 ${btnPad} flex items-center justify-center transition-all ${bg}`}
+              className={`rounded-[2.5rem] border-4 ${btnPad} flex items-center justify-center transition-all shadow-xl ${bg}`}
             >
               <RenderEmoji e={e} className={imgSize} />
             </button>
@@ -3928,6 +3936,7 @@ function LeituraPalavras({ p, onDone }: any) {
     </div>
   );
 }
+
 
 
 // 40. COMPLETAR LETRA — palavra com lacuna, escolher letra certa
