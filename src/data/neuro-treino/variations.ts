@@ -2439,6 +2439,10 @@ export const GRUPOS = [
     slugs: [
       "mosaico-de-formas",
       "sequencia-de-cores",
+      "quebra-cabeca-magico",
+      "construtor-de-formas",
+      "estudio-arte-contorno",
     ] as CategoriaSlug[],
   },
+
 ];
