@@ -317,21 +317,18 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
 
           {/* Ações e Perfil do Usuário */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-3 flex-shrink-0">
             <NotificationBell />
             
-            {/* Bloco do Usuário sem estourar a tela */}
-            {activeChild ? (
-              <div
-                className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0 shadow-inner"
-                title={activeChild.nome}
-                aria-label={activeChild.nome}
-              >
-                {activeChild.avatar || "👦"}
-              </div>
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
-                👤
+            {activeChild && (
+              <div className="flex items-center gap-2 bg-amber-50 rounded-full pl-3 pr-1 py-1 border border-amber-200">
+                <span className="text-[10px] font-black text-amber-800 uppercase tracking-tighter hidden sm:inline">{activeChild.nome.split(' ')[0]}</span>
+                <div
+                  className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sm flex-shrink-0 shadow-sm border border-amber-200"
+                  title={activeChild.nome}
+                >
+                  {activeChild.avatar || "👦"}
+                </div>
               </div>
             )}
           </div>
