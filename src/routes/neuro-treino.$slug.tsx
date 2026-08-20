@@ -4703,7 +4703,10 @@ function ConstrutorDeFormas({ p, onDone }: any) {
   return (
     <div className="py-6 text-center space-y-12 w-full max-w-4xl mx-auto flex flex-col items-center">
       <div className="relative w-80 h-80 bg-white/40 backdrop-blur-xl rounded-[4rem] border-4 border-white shadow-2xl flex items-center justify-center">
-         <div className="text-9xl opacity-10">{p.emoji}</div>
+         <div className="text-9xl opacity-10">
+           <RenderEmoji e={p.emoji} className="w-64 h-64" />
+         </div>
+
          {/* Representação visual da construção */}
          <div className="absolute inset-0 flex flex-wrap gap-2 p-10 items-center justify-center">
             {colocadas.map((part, i) => (
