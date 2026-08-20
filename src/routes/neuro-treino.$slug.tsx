@@ -4422,9 +4422,7 @@ function BanqueteDinos({ p, onDone }: any) {
 
 // 46. TREM NUMÉRICO
 function TremNumerico({ p, onDone }: any) {
-  const handleSlot = (val: number) => {
-    onDone(val === p.seq[p.buracos[0]]);
-  };
+
 
   const correct = p.seq[p.buracos[0]];
   const options = useMemo(() => {
