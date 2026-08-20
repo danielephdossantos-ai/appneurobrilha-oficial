@@ -16,15 +16,26 @@ function pick<T>(arr: T[]): T {
 }
 
 // Dificuldade adaptativa + revisão espaçada (Fase F).
-function poolPorNivel(nivel: number): Palavra[] {
+function poolPorNivel(nivel: number, alvoTotal = 50, acertosAtuais = 0): Palavra[] {
+  // Escalonamento de dificuldade programático baseado no progresso da etapa
+  const progresso = acertosAtuais / alvoTotal;
+  
   let pool: Palavra[];
-  if (nivel <= 1) pool = PALAVRAS.filter((p) => p.silabas.length <= 2);
-  else if (nivel === 2) pool = PALAVRAS.filter((p) => p.silabas.length <= 3);
-  else pool = PALAVRAS;
+  if (progresso < 0.3) {
+    // Início: apenas palavras dissílabas simples
+    pool = PALAVRAS.filter((p) => p.silabas.length <= 2);
+  } else if (progresso < 0.7) {
+    // Meio: introduz trissílabas
+    pool = PALAVRAS.filter((p) => p.silabas.length <= 3);
+  } else {
+    // Final: todas as complexidades
+    pool = PALAVRAS;
+  }
+  
   return filtrarComSRS(pool);
 }
-function numDistratores(_nivel: number): number {
-  // Padrão fixo: sempre 3 distratores → 4 opções totais (1 correta + 3 distratores)
+
+function numDistratores(nivel: number): number {
   return 3;
 }
 
@@ -57,8 +68,8 @@ export interface Rodada {
 
 // ============ CONSCIÊNCIA FONOLÓGICA (já existente) ============
 
-export function gerarRima(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel);
+export function gerarRima(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const grupos = new Map<string, Palavra[]>();
   pool.forEach((p) => {
     if (!grupos.has(p.rima)) grupos.set(p.rima, []);
@@ -83,8 +94,8 @@ export function gerarRima(nivel = 2): Rodada {
   };
 }
 
-export function gerarAliteracao(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel);
+export function gerarAliteracao(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const grupos = new Map<string, Palavra[]>();
   pool.forEach((p) => {
     if (!grupos.has(p.inicial)) grupos.set(p.inicial, []);
@@ -110,8 +121,8 @@ export function gerarAliteracao(nivel = 2): Rodada {
   };
 }
 
-export function gerarSomInicial(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel);
+export function gerarSomInicial(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const alvo = pick(pool);
   const distratores = shuffle(pool.filter((p) => p.inicial !== alvo.inicial)).slice(
     0,
@@ -129,7 +140,7 @@ export function gerarSomInicial(nivel = 2): Rodada {
   };
 }
 
-export function gerarSegmentacao(nivel = 2): Rodada {
+export function gerarSegmentacao(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   const maxSil = nivel <= 1 ? 2 : nivel === 2 ? 3 : 4;
   const alvo = pick(PALAVRAS.filter((p) => p.silabas.length <= maxSil));
   const correto = alvo.silabas.length;
@@ -148,8 +159,8 @@ export function gerarSegmentacao(nivel = 2): Rodada {
   };
 }
 
-export function gerarFusao(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel).filter((p) => p.silabas.length >= 2);
+export function gerarFusao(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais).filter((p) => p.silabas.length >= 2);
   const alvo = pick(pool);
   const distratores = shuffle(pool.filter((p) => p.palavra !== alvo.palavra)).slice(
     0,
@@ -168,8 +179,8 @@ export function gerarFusao(nivel = 2): Rodada {
   };
 }
 
-export function gerarVogalSom(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel);
+export function gerarVogalSom(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const candidatos = pool.filter((p) => VOGAIS.includes(p.inicial as (typeof VOGAIS)[number]));
   const candidatosSeguros = candidatos.length > 0
     ? candidatos
@@ -194,8 +205,8 @@ export function gerarVogalSom(nivel = 2): Rodada {
 
 // ============ NOVAS MECÂNICAS FONÊMICAS (Fase A) ============
 
-export function gerarSomFinal(nivel = 2): Rodada {
-  const pool = poolPorNivel(nivel);
+export function gerarSomFinal(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const grupos = new Map<string, Palavra[]>();
   pool.forEach((p) => {
     if (!grupos.has(p.final)) grupos.set(p.final, []);
@@ -221,9 +232,9 @@ export function gerarSomFinal(nivel = 2): Rodada {
   };
 }
 
-export function gerarSomMeio(nivel = 2): Rodada {
+export function gerarSomMeio(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   // Só palavras curtas com exatamente 3 sons (C-V-C ou V-C-V) para ficar claro.
-  const pool = poolPorNivel(nivel).filter((p) => p.sons.length === 3);
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais).filter((p) => p.sons.length === 3);
   if (pool.length < 2) return gerarSomInicial(nivel);
   const alvo = pick(pool);
   const somMeio = alvo.sons[1];
@@ -241,7 +252,7 @@ export function gerarSomMeio(nivel = 2): Rodada {
   };
 }
 
-export function gerarContagemFonemas(nivel = 2): Rodada {
+export function gerarContagemFonemas(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   const maxSons = nivel <= 1 ? 4 : nivel === 2 ? 5 : 6;
   const pool = PALAVRAS.filter((p) => p.sons.length >= 3 && p.sons.length <= maxSons);
   const alvo = pick(pool);
@@ -261,10 +272,10 @@ export function gerarContagemFonemas(nivel = 2): Rodada {
   };
 }
 
-export function gerarSubstituicaoFonema(nivel = 2): Rodada {
+export function gerarSubstituicaoFonema(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   // Usa grupos de rima para achar dois vizinhos que só diferem no som inicial.
   // Ex: GATO vs PATO → troca /g/ por /p/.
-  const pool = poolPorNivel(nivel);
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const grupos = new Map<string, Palavra[]>();
   pool.forEach((p) => {
     if (!grupos.has(p.rima)) grupos.set(p.rima, []);
@@ -288,9 +299,9 @@ export function gerarSubstituicaoFonema(nivel = 2): Rodada {
   };
 }
 
-export function gerarCategorizacaoSom(nivel = 2): Rodada {
+export function gerarCategorizacaoSom(nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   // 3 palavras com o mesmo som inicial + 1 diferente. A diferente é a resposta.
-  const pool = poolPorNivel(nivel);
+  const pool = poolPorNivel(nivel, alvoTotal, acertosAtuais);
   const grupos = new Map<string, Palavra[]>();
   pool.forEach((p) => {
     if (!grupos.has(p.inicial)) grupos.set(p.inicial, []);
@@ -315,7 +326,7 @@ export function gerarCategorizacaoSom(nivel = 2): Rodada {
 
 // ============ FRASES / TEXTOS ============
 
-export function gerarFraseImagem(_nivel = 2): Rodada {
+export function gerarFraseImagem(nivel = 2, acertosAtuais = 0): Rodada {
   const f = pick(FRASES);
   const opcoes = shuffle([f.respostaCorreta, ...f.distratores]);
   return {
@@ -327,7 +338,7 @@ export function gerarFraseImagem(_nivel = 2): Rodada {
   };
 }
 
-export function gerarTextoCompreensao(_nivel = 2): Rodada {
+export function gerarTextoCompreensao(nivel = 2, acertosAtuais = 0): Rodada {
   const h = pick(HISTORIAS);
   const opcoes = shuffle([h.respostaCorreta, ...h.distratores]);
   return {
@@ -341,23 +352,23 @@ export function gerarTextoCompreensao(_nivel = 2): Rodada {
 
 // ============ ROTEADOR ============
 
-export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
+export function gerarPorTipo(tipo: string, nivel = 2, acertosAtuais = 0, alvoTotal = 50): Rodada {
   let r: Rodada;
   switch (tipo) {
-    case "vogal-som": r = gerarVogalSom(nivel); break;
-    case "rima": r = gerarRima(nivel); break;
-    case "aliteracao": r = gerarAliteracao(nivel); break;
-    case "som-inicial": r = gerarSomInicial(nivel); break;
-    case "som-final": r = gerarSomFinal(nivel); break;
-    case "som-meio": r = gerarSomMeio(nivel); break;
-    case "contagem-fonemas": r = gerarContagemFonemas(nivel); break;
-    case "substituicao-fonema": r = gerarSubstituicaoFonema(nivel); break;
-    case "categorizacao-som": r = gerarCategorizacaoSom(nivel); break;
-    case "segmentacao": r = gerarSegmentacao(nivel); break;
-    case "fusao": r = gerarFusao(nivel); break;
-    case "frase-imagem": r = gerarFraseImagem(nivel); break;
-    case "texto-compreensao": r = gerarTextoCompreensao(nivel); break;
-    default: r = gerarSomInicial(nivel);
+    case "vogal-som": r = gerarVogalSom(nivel, acertosAtuais, alvoTotal); break;
+    case "rima": r = gerarRima(nivel, acertosAtuais, alvoTotal); break;
+    case "aliteracao": r = gerarAliteracao(nivel, acertosAtuais, alvoTotal); break;
+    case "som-inicial": r = gerarSomInicial(nivel, acertosAtuais, alvoTotal); break;
+    case "som-final": r = gerarSomFinal(nivel, acertosAtuais, alvoTotal); break;
+    case "som-meio": r = gerarSomMeio(nivel, acertosAtuais, alvoTotal); break;
+    case "contagem-fonemas": r = gerarContagemFonemas(nivel, acertosAtuais, alvoTotal); break;
+    case "substituicao-fonema": r = gerarSubstituicaoFonema(nivel, acertosAtuais, alvoTotal); break;
+    case "categorizacao-som": r = gerarCategorizacaoSom(nivel, acertosAtuais, alvoTotal); break;
+    case "segmentacao": r = gerarSegmentacao(nivel, acertosAtuais, alvoTotal); break;
+    case "fusao": r = gerarFusao(nivel, acertosAtuais, alvoTotal); break;
+    case "frase-imagem": r = gerarFraseImagem(nivel, acertosAtuais); break;
+    case "texto-compreensao": r = gerarTextoCompreensao(nivel, acertosAtuais); break;
+    default: r = gerarSomInicial(nivel, acertosAtuais, alvoTotal);
   }
   // Marca a resposta correta como usada (SRS anti-repetição).
   if (r.correta && !r.numero) marcarUsada(r.correta);
