@@ -2208,24 +2208,17 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
   const mostrarMaoGuia = promptLevel <= 1;
 
   return (
-    <div className="text-center space-y-3">
-      <div className="text-sm text-muted-foreground font-bold">
-        Contorne a letra <span className="text-coral">{p.letra}</span> seguindo a ordem correta
-      </div>
-
-      <div className="flex items-center justify-center gap-3 md:gap-5">
-        <div className="flex flex-col gap-2">
-          {CORES_ESQ.map((c) => <Bolinha key={c.hex} c={c} />)}
-        </div>
-
+    <div className="w-full flex flex-col items-center gap-6">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
+        {/* Letra e Desenho Central */}
         <div
-          className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md relative"
-          style={{ width: 320 }}
+          className="bg-white border-8 border-sky-100 rounded-[3rem] p-4 shadow-2xl relative overflow-hidden"
+          style={{ width: "100%", maxWidth: 420 }}
         >
           <svg
             ref={svgRef}
             viewBox="0 0 100 100"
-            className="w-full touch-none select-none"
+            className="w-full touch-none select-none drop-shadow-sm"
             style={{ cursor: "crosshair" }}
             onPointerDown={onDown}
             onPointerMove={onMove}
@@ -2248,7 +2241,7 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               </clipPath>
             </defs>
 
-            {/* Letra-guia */}
+            {/* Letra-guia de fundo */}
             <text
               x={50}
               y={54}
@@ -2257,22 +2250,22 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               fontSize={108}
               fontWeight={900}
               fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
-              fill="#f1f5f9"
-              stroke="#cbd5e1"
-              strokeWidth={1}
-              strokeDasharray="2 2"
+              fill="#f8fafc"
+              stroke="#e2e8f0"
+              strokeWidth={1.5}
+              strokeDasharray="3 3"
             >
               {p.letra}
             </text>
 
-            {/* Tinta */}
+            {/* Tinta (Traçado do usuário) */}
             <g clipPath={`url(#${clipId})`}>
               {strokes.map((s, i) => (
                 <path
                   key={i}
                   d={s.d}
                   stroke={s.cor}
-                  strokeWidth={18}
+                  strokeWidth={20}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   fill="none"
@@ -2280,119 +2273,127 @@ function TracadoLetras({ p, onDone, promptLevel }: any) {
               ))}
             </g>
 
-            {/* Checkpoints numerados (dicas ABA) */}
+            {/* Checkpoints ABA */}
             {mostrarNumeros &&
               checkpoints.map((cp, i) => {
                 const feito = i < checkpointIdx;
                 const atual = i === checkpointIdx;
                 return (
-                  <g key={i}>
+                  <g key={i} className="transition-all duration-300">
                     <circle
                       cx={cp.x}
                       cy={cp.y}
-                      r={4}
-                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#e2e8f0"}
-                      stroke="#0f172a"
-                      strokeWidth={0.5}
+                      r={atual ? 6 : 4}
+                      fill={feito ? "#10b981" : atual ? "#f59e0b" : "#cbd5e1"}
+                      stroke="white"
+                      strokeWidth={1}
                     />
-                    <text
-                      x={cp.x}
-                      y={cp.y + 1}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fontSize={4}
-                      fontWeight={900}
-                      fill="#0f172a"
-                    >
-                      {i + 1}
-                    </text>
+                    {atual && (
+                      <circle
+                        cx={cp.x}
+                        cy={cp.y}
+                        r={8}
+                        fill="none"
+                        stroke="#f59e0b"
+                        strokeWidth={1}
+                        className="animate-ping"
+                      />
+                    )}
                   </g>
                 );
               })}
 
-            {/* Seta piscante no próximo ponto */}
+            {/* Seta/Dica ABA */}
             {mostrarSetaProxima && !completou && (
               <circle
                 cx={proximoCP.x}
                 cy={proximoCP.y}
-                r={9}
+                r={10}
                 fill="none"
                 stroke="#f59e0b"
-                strokeWidth={1.5}
-                strokeDasharray="2 1"
+                strokeWidth={2}
+                strokeDasharray="4 2"
               >
-                <animate attributeName="r" values="7;11;7" dur="1s" repeatCount="indefinite" />
+                <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite" />
               </circle>
             )}
 
-            {/* Guia física (mão) — nível 1 */}
+            {/* Guia física (mão) */}
             {mostrarMaoGuia && !completou && (
-              <text x={proximoCP.x + 6} y={proximoCP.y - 6} fontSize={8}>
+              <text x={proximoCP.x + 8} y={proximoCP.y - 8} fontSize={12} className="animate-bounce">
                 👆
               </text>
             )}
           </svg>
 
+          {/* Info embaixo da letra */}
+          <div className="flex items-center justify-between px-4 py-3 bg-sky-50/50 rounded-2xl mt-4">
+            <div className="font-black text-2xl tracking-tighter text-slate-800">
+              <span style={{ color: cor }}>{p.letra}</span>
+              <span>{p.palavra.slice(p.letra.length)}</span>
+            </div>
+            <div className="text-4xl drop-shadow-sm">{p.emoji}</div>
+          </div>
+          
           <button
             onClick={limpar}
-            className="absolute top-2 right-2 bg-slate-100 hover:bg-slate-200 rounded-full w-8 h-8 text-sm"
+            className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 rounded-full w-10 h-10 flex items-center justify-center text-xl shadow-sm active:scale-90 transition-all"
             aria-label="Limpar"
           >
-            🔄
+            <RotateCcw size={20} className="text-slate-600" />
           </button>
-
-          <div className="flex items-center justify-between px-2 pt-1">
-            <div className="font-black text-xl tracking-wide">
-              <span style={{ color: cor }}>{p.letra}</span>
-              <span className="text-slate-900">{p.palavra.slice(p.letra.length)}</span>
-            </div>
-            <div className="text-3xl leading-none">{p.emoji}</div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          {CORES_DIR.map((c) => <Bolinha key={c.hex} c={c} />)}
         </div>
       </div>
 
-      <div className="text-xs text-muted-foreground">
-        Cor: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span> ·
-        Progresso: <span className="font-bold text-emerald-600">{progresso}%</span> (
-        {checkpointIdx}/{totalCheckpoints})
+      {/* Paleta de Cores Horizontal (Embaixo) */}
+      <div className="w-full max-w-md flex flex-wrap justify-center gap-3 p-4 bg-white/40 backdrop-blur-sm rounded-[2rem] border-2 border-white/50">
+        {[...CORES_ESQ, ...CORES_DIR].map((c) => (
+          <button
+            key={c.hex}
+            onClick={() => escolher(c)}
+            className={`w-12 h-12 md:w-14 md:h-14 rounded-full border-4 transition-all shadow-md active:scale-90 ${
+              cor === c.hex ? "border-slate-800 scale-110 rotate-3" : "border-white hover:scale-105"
+            }`}
+            style={{ background: c.hex }}
+            title={c.nome}
+          />
+        ))}
       </div>
-      {foraDaLetra && (
-        <div className="text-xs font-bold text-amber-600">Volte pra dentro da letra ✋</div>
-      )}
-      {erroOrdem && (
-        <div className="text-xs font-bold text-rose-600">
-          Ordem errada — comece do ponto 1 e vá seguindo
-        </div>
-      )}
 
-      <div className="flex gap-2 justify-center">
-        <button
-          onClick={limpar}
-          className="mt-2 bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-full"
-        >
-          Recomeçar
-        </button>
+      {/* Botões de Ação */}
+      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md px-4">
         <button
           onClick={() => {
             if (acertouOrdem) {
               toast.success(`Letra ${p.letra} traçada na ordem certa! 🎨`);
               onDone(true);
             } else {
-              toast(`Ainda faltam ${totalCheckpoints - checkpointIdx} pontos ou a ordem está errada`);
+              toast(`Ainda faltam alguns pontos! Siga a ordem dos números.`);
               onDone(false);
             }
           }}
           disabled={!completou && checkpointIdx === 0}
-          className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
+          className="flex-1 py-4 bg-success text-white font-black text-xl rounded-[2rem] shadow-xl hover:shadow-success/20 hover:scale-105 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100"
         >
-          Terminei! ✨
+          TERMINEI! ✨
         </button>
       </div>
+
+      {/* Mensagens de Feedback */}
+      {foraDaLetra && (
+        <div className="px-4 py-2 bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-full text-xs font-black animate-bounce">
+          FIQUE DENTRO DA LETRA! ✋
+        </div>
+      )}
+      {erroOrdem && (
+        <div className="px-4 py-2 bg-rose-100 border-2 border-rose-300 text-rose-800 rounded-full text-xs font-black">
+          SIGA OS NÚMEROS NA ORDEM! 🔢
+        </div>
+      )}
     </div>
+  );
+}
+
   );
 }
 
