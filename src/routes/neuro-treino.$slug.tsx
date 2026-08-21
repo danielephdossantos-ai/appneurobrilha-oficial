@@ -35,13 +35,16 @@ import {
   type ShapeType,
   type MosaicoPiece,
   range,
+  MUNDOS,
 } from "@/data/neuro-treino/variations";
 import { QUEBRA_CABECA_MAGICO_VARS, CONSTRUTOR_DE_FORMAS_VARS, ESTUDIO_ARTE_CONTORNO_VARS } from "@/data/neuro-treino/variations-extended";
 
-import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
+import { objetoImg, emojiImg, ilustracao, semEmoji, OBJETO_IMG } from "@/data/neuro-treino/objetos";
+import { MASCOTES } from "@/escola-brilha/mascotes";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
+
 import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
