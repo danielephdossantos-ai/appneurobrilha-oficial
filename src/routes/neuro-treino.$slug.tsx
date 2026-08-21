@@ -4768,54 +4768,166 @@ function RenderPiece({ emoji, idx, total, cols, rows, size, isThumbnail }: any) 
   );
 }
 
-// 50. CONSTRUTOR DE FORMAS
-function ConstrutorDeFormas({ p, onDone }: any) {
-  const [colocadas, setColocadas] = useState<string[]>([]);
-  const partes = p.partes || [];
+// 50. CONSTRUTOR DE FORMAS — montagem real com formas geométricas
+type FormaPeca = {
+  tipo: "quadrado" | "retangulo" | "circulo" | "triangulo";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  cor: string;
+  nome: string;
+};
 
-  const handlePart = (part: string) => {
-    if (colocadas.includes(part)) return;
-    setColocadas(prev => {
-      const next = [...prev, part];
-      if (next.length === partes.length) {
-        setTimeout(() => onDone(true), 1200);
-      }
-      return next;
+const BLUEPRINTS: Record<string, FormaPeca[]> = {
+  CASA: [
+    { tipo: "triangulo", x: 10, y: 8, w: 80, h: 32, cor: "#EF4444", nome: "TELHADO" },
+    { tipo: "quadrado", x: 20, y: 40, w: 60, h: 50, cor: "#FBBF24", nome: "PAREDE" },
+    { tipo: "retangulo", x: 42, y: 62, w: 16, h: 28, cor: "#92400E", nome: "PORTA" },
+    { tipo: "circulo", x: 25, y: 46, w: 14, h: 14, cor: "#38BDF8", nome: "JANELA" },
+  ],
+  ROBÔ: [
+    { tipo: "circulo", x: 46, y: 4, w: 8, h: 8, cor: "#F472B6", nome: "ANTENA" },
+    { tipo: "quadrado", x: 32, y: 14, w: 36, h: 30, cor: "#38BDF8", nome: "CABEÇA" },
+    { tipo: "retangulo", x: 28, y: 46, w: 44, h: 34, cor: "#6366F1", nome: "CORPO" },
+    { tipo: "retangulo", x: 12, y: 48, w: 12, h: 26, cor: "#94A3B8", nome: "BRAÇO" },
+    { tipo: "circulo", x: 34, y: 82, w: 12, h: 12, cor: "#334155", nome: "RODA" },
+  ],
+  CARRO: [
+    { tipo: "retangulo", x: 12, y: 44, w: 76, h: 24, cor: "#EF4444", nome: "LATARIA" },
+    { tipo: "quadrado", x: 30, y: 24, w: 34, h: 22, cor: "#38BDF8", nome: "VIDRO" },
+    { tipo: "circulo", x: 22, y: 66, w: 18, h: 18, cor: "#334155", nome: "RODA" },
+    { tipo: "circulo", x: 60, y: 66, w: 18, h: 18, cor: "#334155", nome: "RODA" },
+  ],
+  TREM: [
+    { tipo: "circulo", x: 20, y: 6, w: 16, h: 16, cor: "#CBD5E1", nome: "FUMAÇA" },
+    { tipo: "quadrado", x: 14, y: 30, w: 32, h: 32, cor: "#22C55E", nome: "CABINE" },
+    { tipo: "retangulo", x: 48, y: 40, w: 40, h: 22, cor: "#F97316", nome: "VAGÃO" },
+    { tipo: "circulo", x: 20, y: 64, w: 16, h: 16, cor: "#334155", nome: "RODA" },
+    { tipo: "circulo", x: 60, y: 64, w: 16, h: 16, cor: "#334155", nome: "RODA" },
+  ],
+  FLOR: [
+    { tipo: "circulo", x: 40, y: 10, w: 20, h: 20, cor: "#F472B6", nome: "PÉTALA" },
+    { tipo: "circulo", x: 20, y: 26, w: 20, h: 20, cor: "#F472B6", nome: "PÉTALA" },
+    { tipo: "circulo", x: 60, y: 26, w: 20, h: 20, cor: "#F472B6", nome: "PÉTALA" },
+    { tipo: "circulo", x: 40, y: 26, w: 20, h: 20, cor: "#FBBF24", nome: "MIOLO" },
+    { tipo: "retangulo", x: 46, y: 46, w: 8, h: 44, cor: "#22C55E", nome: "CAULE" },
+  ],
+  PALHAÇO: [
+    { tipo: "triangulo", x: 30, y: 4, w: 40, h: 20, cor: "#6366F1", nome: "CHAPÉU" },
+    { tipo: "circulo", x: 26, y: 24, w: 48, h: 48, cor: "#FDE68A", nome: "ROSTO" },
+    { tipo: "circulo", x: 44, y: 42, w: 12, h: 12, cor: "#EF4444", nome: "NARIZ" },
+    { tipo: "retangulo", x: 38, y: 60, w: 24, h: 8, cor: "#DB2777", nome: "BOCA" },
+  ],
+};
+
+function FormaSVG({ f, opacity = 1, dashed = false }: { f: FormaPeca; opacity?: number; dashed?: boolean }) {
+  const stroke = dashed ? "#94A3B8" : "rgba(0,0,0,0.15)";
+  const common = {
+    fill: dashed ? "none" : f.cor,
+    stroke,
+    strokeWidth: dashed ? 1.5 : 1,
+    strokeDasharray: dashed ? "4 3" : undefined,
+    opacity,
+  } as any;
+  if (f.tipo === "circulo") {
+    return <ellipse cx={f.x + f.w / 2} cy={f.y + f.h / 2} rx={f.w / 2} ry={f.h / 2} {...common} />;
+  }
+  if (f.tipo === "triangulo") {
+    return <polygon points={`${f.x + f.w / 2},${f.y} ${f.x + f.w},${f.y + f.h} ${f.x},${f.y + f.h}`} {...common} />;
+  }
+  return <rect x={f.x} y={f.y} width={f.w} height={f.h} rx={2} {...common} />;
+}
+
+function MiniForma({ f, size = 56 }: { f: FormaPeca; size?: number }) {
+  const norm: FormaPeca = { ...f, x: 6, y: 6, w: 88, h: 88 };
+  return (
+    <svg viewBox="0 0 100 100" width={size} height={size}>
+      <FormaSVG f={norm} />
+    </svg>
+  );
+}
+
+function ConstrutorDeFormas({ p, onDone }: any) {
+  const blueprint: FormaPeca[] = BLUEPRINTS[p?.item as string] || BLUEPRINTS.CASA;
+  const extras = Math.min(4, p?.pecasExtras ?? 0);
+
+  const [colocadas, setColocadas] = useState<number[]>([]);
+  const [erro, setErro] = useState<number | null>(null);
+  const [bandeja] = useState(() => {
+    const reais = blueprint.map((f, i) => ({ key: `r${i}`, slot: i, f }));
+    const distratores = Array.from({ length: extras }).map((_, i) => {
+      const base = blueprint[i % blueprint.length];
+      const tipos: FormaPeca["tipo"][] = ["quadrado", "circulo", "triangulo", "retangulo"];
+      const tipo = tipos[(i + 2) % tipos.length];
+      return {
+        key: `d${i}`,
+        slot: -1,
+        f: { ...base, tipo, cor: "#A1A1AA", nome: "?" } as FormaPeca,
+      };
     });
+    return [...reais, ...distratores].sort(() => Math.random() - 0.5);
+  });
+
+  const proximoSlot = colocadas.length;
+
+  const tentar = (item: { key: string; slot: number }) => {
+    if (item.slot === proximoSlot) {
+      const next = [...colocadas, item.slot];
+      setColocadas(next);
+      if (next.length === blueprint.length) setTimeout(() => onDone(true), 1400);
+    } else {
+      setErro(item.key as any);
+      setTimeout(() => setErro(null), 500);
+    }
   };
 
-  return (
-    <div className="py-6 text-center space-y-12 w-full max-w-4xl mx-auto flex flex-col items-center">
-      <div className="relative w-80 h-80 bg-white/40 backdrop-blur-xl rounded-[4rem] border-4 border-white shadow-2xl flex items-center justify-center">
-         <div className="text-9xl opacity-10">
-           <RenderEmoji e={p.emoji} className="w-64 h-64" />
-         </div>
+  const alvo = blueprint[proximoSlot];
 
-         {/* Representação visual da construção */}
-         <div className="absolute inset-0 flex flex-wrap gap-2 p-10 items-center justify-center">
-            {colocadas.map((part, i) => (
-              <div key={i} className="bg-primary text-white px-4 py-2 rounded-full font-black text-sm animate-in zoom-in spin-in-12">
-                {part}
-              </div>
-            ))}
-         </div>
+  return (
+    <div className="py-4 w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
+      <div className="text-center">
+        <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Construa</div>
+        <div className="text-2xl font-black text-primary">{p?.item || "CASA"}</div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full">
-        {partes.map((part: string, i: number) => {
-          const isDone = colocadas.includes(part);
+      {/* Mesa de montagem */}
+      <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] bg-white/70 backdrop-blur-xl rounded-[3rem] border-4 border-white shadow-2xl overflow-hidden">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          {blueprint.map((f, i) =>
+            colocadas.includes(i) ? null : <FormaSVG key={`g${i}`} f={f} dashed opacity={i === proximoSlot ? 1 : 0.35} />
+          )}
+          {colocadas.map((i) => (
+            <g key={`c${i}`} className="animate-in zoom-in duration-300">
+              <FormaSVG f={blueprint[i]} />
+            </g>
+          ))}
+        </svg>
+        {alvo && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-xs font-black uppercase whitespace-nowrap">
+            Falta: {alvo.nome}
+          </div>
+        )}
+      </div>
+
+      {/* Bandeja de peças */}
+      <div className="flex flex-wrap justify-center gap-4 bg-white/40 backdrop-blur-md p-6 rounded-[2.5rem] border-4 border-white shadow-xl w-full">
+        {bandeja.map((item) => {
+          const usada = colocadas.includes(item.slot) && item.slot >= 0;
           return (
             <button
-              key={i}
-              disabled={isDone}
-              onClick={() => handlePart(part)}
-              className={`p-6 rounded-[2rem] border-4 transition-all shadow-xl font-black text-lg ${
-                isDone 
-                ? "bg-success/20 border-success/40 text-success opacity-40 scale-90" 
-                : "bg-white border-white hover:border-primary/20 hover:scale-105 active:scale-95 text-primary"
+              key={item.key}
+              disabled={usada}
+              onClick={() => tentar(item)}
+              className={`w-20 h-20 rounded-3xl bg-white shadow-lg border-4 flex items-center justify-center transition-all ${
+                usada
+                  ? "opacity-25 scale-90 border-success/40"
+                  : erro === (item.key as any)
+                    ? "border-destructive animate-shake"
+                    : "border-white hover:scale-105 active:scale-95"
               }`}
             >
-              {part}
+              <MiniForma f={item.f} size={52} />
             </button>
           );
         })}
@@ -4824,97 +4936,171 @@ function ConstrutorDeFormas({ p, onDone }: any) {
   );
 }
 
-// 51. ESTÚDIO DE ARTE E CONTORNO
-function EstudioArteContorno({ p, onDone }: any) {
+// 51. ESTÚDIO DE ARTE — desenho livre
+const PALETA_LIVRE = [
+  "#000000", "#6B7280", "#FFFFFF", "#EF4444", "#F97316", "#F59E0B",
+  "#FACC15", "#A3E635", "#22C55E", "#10B981", "#14B8A6", "#06B6D4",
+  "#0EA5E9", "#3B82F6", "#6366F1", "#8B5CF6", "#A855F7", "#D946EF",
+  "#EC4899", "#F43F5E", "#F87171", "#FDA4AF", "#92400E", "#78350F",
+];
+
+const PINCEIS = [
+  { id: "lapis", nome: "Lápis", icone: "✏️", largura: 3 },
+  { id: "caneta", nome: "Caneta", icone: "🖊️", largura: 8 },
+  { id: "pincel", nome: "Pincel", icone: "🖌️", largura: 18 },
+  { id: "marcador", nome: "Marcador", icone: "🖍️", largura: 32 },
+];
+
+function EstudioArteContorno({ onDone }: any) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [cor, setCor] = useState("#3B82F6");
+  const [pincel, setPincel] = useState(PINCEIS[1]);
+  const [borracha, setBorracha] = useState(false);
+  const desenhando = useRef(false);
+  const [temTraco, setTemTraco] = useState(false);
+
+  const ctxOf = () => canvasRef.current?.getContext("2d") || null;
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    ctx.strokeStyle = '#3B82F6';
-    ctx.lineWidth = 15;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    
-    // Desenha o guia (pontilhado)
-    ctx.setLineDash([10, 10]);
-    ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height/2, 100, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    const ctx = ctxOf();
+    if (!ctx || !canvasRef.current) return;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   }, []);
 
-  const startDrawing = (e: any) => {
-    setIsDrawing(true);
-    draw(e);
+  const pos = (e: any) => {
+    const canvas = canvasRef.current!;
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.touches?.[0]?.clientX ?? e.clientX;
+    const cy = e.touches?.[0]?.clientY ?? e.clientY;
+    return {
+      x: ((cx - rect.left) / rect.width) * canvas.width,
+      y: ((cy - rect.top) / rect.height) * canvas.height,
+    };
   };
 
-  const draw = (e: any) => {
-    if (!isDrawing) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+  const start = (e: any) => {
+    const ctx = ctxOf();
     if (!ctx) return;
+    desenhando.current = true;
+    const { x, y } = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    move(e);
+  };
 
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX || e.touches[0].clientX) - rect.left;
-    const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
+  const move = (e: any) => {
+    if (!desenhando.current) return;
+    const ctx = ctxOf();
+    if (!ctx) return;
+    const { x, y } = pos(e);
+    ctx.strokeStyle = borracha ? "#FFFFFF" : cor;
+    ctx.lineWidth = borracha ? 36 : pincel.largura;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(x, y);
+    if (!temTraco) setTemTraco(true);
+  };
 
-    // Simulação de progresso
-    setProgress(prev => {
-      const next = prev + 0.5;
-      if (next >= 100) {
-        setIsDrawing(false);
-        setTimeout(() => onDone(true), 1000);
-      }
-      return next;
-    });
+  const stop = () => {
+    desenhando.current = false;
+  };
+
+  const limpar = () => {
+    const ctx = ctxOf();
+    if (!ctx || !canvasRef.current) return;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    setTemTraco(false);
   };
 
   return (
-    <div className="py-6 text-center space-y-8 w-full max-w-2xl mx-auto">
-      <div className="relative bg-white rounded-[4rem] border-8 border-white shadow-2xl overflow-hidden cursor-crosshair">
-        <canvas
-          ref={canvasRef}
-          width={500}
-          height={400}
-          onMouseDown={startDrawing}
-          onMouseMove={draw}
-          onMouseUp={() => setIsDrawing(false)}
-          onTouchStart={startDrawing}
-          onTouchMove={draw}
-          onTouchEnd={() => setIsDrawing(false)}
-          className="w-full h-auto touch-none"
-        />
-        
-        {p.mostrarGuia && progress < 10 && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-bounce">
-            <Hand className="text-primary w-12 h-12" />
-          </div>
-        )}
-
-        <div className="absolute bottom-6 right-6 bg-primary/10 px-4 py-2 rounded-full text-primary font-black text-sm">
-          CONTORNO: {Math.min(100, Math.round(progress))}%
-        </div>
+    <div className="py-4 w-full max-w-2xl mx-auto space-y-6">
+      <div className="text-center">
+        <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Estúdio de Arte</div>
+        <div className="text-xl font-black text-primary">Desenhe o que você quiser!</div>
       </div>
 
-      <div className="flex justify-center gap-4">
-        {["🔴", "🔵", "🟢", "🟡"].map((color, i) => (
-          <button key={i} className="w-14 h-14 bg-white rounded-full shadow-lg border-4 border-white hover:scale-110 transition-transform text-2xl flex items-center justify-center overflow-hidden">
-            <RenderEmoji e={color} className="w-10 h-10" />
+      <div className="bg-white rounded-[2.5rem] border-8 border-white shadow-2xl overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          width={700}
+          height={520}
+          onMouseDown={start}
+          onMouseMove={move}
+          onMouseUp={stop}
+          onMouseLeave={stop}
+          onTouchStart={start}
+          onTouchMove={move}
+          onTouchEnd={stop}
+          className="w-full h-auto touch-none cursor-crosshair block"
+        />
+      </div>
+
+      {/* Ferramentas */}
+      <div className="flex flex-wrap justify-center gap-3">
+        {PINCEIS.map((b) => (
+          <button
+            key={b.id}
+            onClick={() => {
+              setPincel(b);
+              setBorracha(false);
+            }}
+            className={`px-4 py-2 rounded-2xl font-black text-sm shadow-md border-4 transition-all flex items-center gap-2 ${
+              !borracha && pincel.id === b.id
+                ? "bg-primary text-primary-foreground border-primary"
+                : "bg-white text-primary border-white hover:scale-105"
+            }`}
+          >
+            <span className="text-lg">{b.icone}</span>
+            {b.nome}
           </button>
         ))}
+        <button
+          onClick={() => setBorracha(true)}
+          className={`px-4 py-2 rounded-2xl font-black text-sm shadow-md border-4 transition-all ${
+            borracha ? "bg-primary text-primary-foreground border-primary" : "bg-white text-primary border-white hover:scale-105"
+          }`}
+        >
+          🧽 Borracha
+        </button>
+        <button
+          onClick={limpar}
+          className="px-4 py-2 rounded-2xl font-black text-sm shadow-md border-4 bg-white text-destructive border-white hover:scale-105"
+        >
+          🗑️ Limpar
+        </button>
+      </div>
 
+      {/* 24 cores */}
+      <div className="grid grid-cols-8 sm:grid-cols-12 gap-2 bg-white/50 backdrop-blur-md p-4 rounded-[2rem] border-4 border-white shadow-xl">
+        {PALETA_LIVRE.map((c) => (
+          <button
+            key={c}
+            onClick={() => {
+              setCor(c);
+              setBorracha(false);
+            }}
+            aria-label={`Cor ${c}`}
+            style={{ background: c }}
+            className={`aspect-square rounded-full shadow-md border-4 transition-transform ${
+              cor === c && !borracha ? "border-primary scale-110" : "border-white hover:scale-105"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={() => onDone(true)}
+          disabled={!temTraco}
+          className="px-8 py-4 rounded-[2rem] bg-success text-success-foreground font-black text-lg shadow-xl disabled:opacity-40 hover:scale-105 transition-transform"
+        >
+          ✅ Terminei meu desenho
+        </button>
       </div>
     </div>
   );
