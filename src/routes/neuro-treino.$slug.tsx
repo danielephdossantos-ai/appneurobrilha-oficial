@@ -4923,7 +4923,7 @@ function ConstrutorDeFormas({ p, onDone }: any) {
                 usada
                   ? "opacity-25 scale-90 border-success/40"
                   : erro === (item.key as any)
-                    ? "border-destructive animate-shake"
+                    ? "border-destructive scale-90"
                     : "border-white hover:scale-105 active:scale-95"
               }`}
             >
