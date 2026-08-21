@@ -4780,9 +4780,11 @@ function QuebraCabecaMagico({ p, onDone }: any) {
                 // Snap magnético: se soltar sobre o tabuleiro
                 // O tabuleiro está centralizado, mas para facilitar para a criança, 
                 // se a distância do drop for pequena em relação à origem, ou se o offset indicar movimento pro tabuleiro
-                if (Math.abs(info.offset.y) > 50 || Math.abs(info.offset.x) > 50) {
+                // Snap magnético: se soltar sobre o tabuleiro (estimativa de offset)
+                if (Math.abs(info.offset.y) > 100 || Math.abs(info.offset.x) > 100) {
                    handleSnap(idx);
                 }
+
               }}
               whileTap={{ scale: 1.2, zIndex: 50 }}
               className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing overflow-hidden shrink-0"
