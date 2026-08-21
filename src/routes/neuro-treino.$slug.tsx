@@ -4883,8 +4883,9 @@ function MediaCarousel({ category, onSelect, selected }: any) {
       ];
     }
     if (category === 'mundos') {
-      return MUNDOS.slice(0, 12).map(m => ({ id: m.id, img: m.image, label: m.label }));
+      return MUNDOS.slice(0, 12).map((m: any) => ({ id: m.id, img: m.image, label: m.label }));
     }
+
     // Hiperfocos (Objetos premium)
     return Object.entries(OBJETO_IMG).slice(0, 20).map(([name, img]) => ({
       id: name,
