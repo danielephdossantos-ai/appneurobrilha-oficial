@@ -4896,7 +4896,8 @@ function MediaCarousel({ category, onSelect, selected }: any) {
 
   return (
     <>
-      {items.map(item => (
+      {items.map((item: any) => (
+
         <button
           key={item.id}
           onClick={() => onSelect(item.img)}
