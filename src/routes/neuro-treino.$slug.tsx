@@ -35,8 +35,9 @@ import {
   type ShapeType,
   type MosaicoPiece,
   range,
-  MUNDOS,
 } from "@/data/neuro-treino/variations";
+import { MUNDOS } from "@/components/worlds/mundos";
+
 import { QUEBRA_CABECA_MAGICO_VARS, CONSTRUTOR_DE_FORMAS_VARS, ESTUDIO_ARTE_CONTORNO_VARS } from "@/data/neuro-treino/variations-extended";
 
 import { objetoImg, emojiImg, ilustracao, semEmoji, OBJETO_IMG } from "@/data/neuro-treino/objetos";
