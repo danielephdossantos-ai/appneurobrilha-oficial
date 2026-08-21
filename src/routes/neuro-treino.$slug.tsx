@@ -4638,17 +4638,27 @@ function PonteBlocos({ p, onDone }: any) {
 }
 
 // 49. QUEBRA-CABEÇA MÁGICO (Jigsaw Real)
+import confetti from 'canvas-confetti';
+
 function QuebraCabecaMagico({ p, onDone }: any) {
-  const total = p.pecas || 4;
-  const cols = total > 4 ? 3 : 2;
-  const rows = Math.ceil(total / cols);
+  const [dificuldade, setDificuldade] = useState(p.pecas || 4);
+  const [selectedImage, setSelectedImage] = useState(p.emoji || "🦖");
+  const [category, setCategory] = useState<'mundos' | 'mascotes' | 'hiperfocos'>('hiperfocos');
+  
+  const cols = dificuldade > 16 ? 6 : dificuldade > 9 ? 4 : dificuldade > 4 ? 3 : 2;
+  const rows = Math.ceil(dificuldade / cols);
+  const total = dificuldade;
   
   const [pecasEncaixadas, setPecasEncaixadas] = useState<number[]>([]);
-  
-  // Gerar peças embaralhadas iniciais (somente as que não foram encaixadas)
-  const [pecasDisponiveis, setPecasDisponiveis] = useState<number[]>(() => 
-    range(total).sort(() => Math.random() - 0.5)
-  );
+  const [pecasDisponiveis, setPecasDisponiveis] = useState<number[]>([]);
+  const [gameKey, setGameKey] = useState(0);
+
+  // Reiniciar jogo ao trocar imagem ou dificuldade
+  useEffect(() => {
+    setPecasEncaixadas([]);
+    setPecasDisponiveis(range(total).sort(() => Math.random() - 0.5));
+    setGameKey(prev => prev + 1);
+  }, [selectedImage, dificuldade, total]);
 
   const handleSnap = (idx: number) => {
     if (pecasEncaixadas.includes(idx)) return;
@@ -4657,93 +4667,186 @@ function QuebraCabecaMagico({ p, onDone }: any) {
     setPecasEncaixadas(novasEncaixadas);
     setPecasDisponiveis(prev => prev.filter(pIdx => pIdx !== idx));
     
+    // Som de encaixe (feedback)
+    const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+    audio.volume = 0.3;
+    audio.play().catch(() => {});
+
     if (novasEncaixadas.length === total) {
-      setTimeout(() => onDone(true), 1000);
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#FFD700', '#FF69B4', '#00CED1', '#ADFF2F']
+      });
+      
+      setTimeout(() => {
+        if (dificuldade < 32) {
+          toast.success("Incrível! Que tal um desafio maior?", {
+            description: `Você completou ${dificuldade} peças!`,
+            action: {
+              label: "Aumentar Nível",
+              onClick: () => {
+                const niveis = [4, 6, 9, 12, 16, 24, 32];
+                const next = niveis.find(n => n > dificuldade);
+                if (next) setDificuldade(next);
+              }
+            }
+          });
+        }
+        onDone(true);
+      }, 1500);
     }
   };
 
   return (
-    <div className="py-6 text-center space-y-12 w-full max-w-4xl mx-auto flex flex-col items-center">
-      {/* Moldura / Silhueta do Quebra-Cabeça */}
-      <div 
-        className="relative bg-slate-100 rounded-[2rem] border-8 border-white shadow-2xl overflow-hidden"
-        style={{ 
-          width: 320, 
-          height: 320,
-          display: 'grid',
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gridTemplateRows: `repeat(${rows}, 1fr)`
-        }}
-      >
-        {range(total).map((idx) => {
-          const isEncaixada = pecasEncaixadas.includes(idx);
-          return (
-            <div 
-              key={idx}
-              className="relative border border-slate-200/50 flex items-center justify-center overflow-hidden"
-            >
-              {/* Silhueta (fantasma) */}
-              {!isEncaixada && (
-                <div className="opacity-10 grayscale scale-110 pointer-events-none">
-                  <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={320} />
-                </div>
-              )}
-              
-              {/* Peça encaixada com animação */}
-              <AnimatePresence>
-                {isEncaixada && (
-                  <motion.div 
-                    initial={{ scale: 1.2, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="absolute inset-0"
-                  >
-                    <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={320} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Banco de Peças Recortadas */}
-      <div className="flex flex-wrap justify-center gap-6 bg-white/40 backdrop-blur-md p-10 rounded-[3rem] border-4 border-white shadow-xl min-h-[140px] w-full max-w-2xl">
-        {pecasDisponiveis.map((idx) => (
-          <motion.div
-            key={idx}
-            drag
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            dragElastic={1}
-            onDragEnd={(_, info) => {
-              // Lógica de Snap simplificada: se soltar perto da área central
-              // Em um app real usaríamos ref da moldura e coordenadas, 
-              // aqui simulamos por intenção de arraste ou proximidade.
-              // Para UX de criança, qualquer drop bem sucedido snapamos a peça correta se houver tracking.
-              // Simplificando: como as peças são únicas, se o usuário arrastar o suficiente "para cima", snapamos.
-              if (info.offset.y < -100) {
-                handleSnap(idx);
-              }
-            }}
-            whileTap={{ scale: 1.1, zIndex: 50 }}
-            className="w-24 h-24 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing overflow-hidden"
+    <div className="py-2 text-center w-full max-w-5xl mx-auto flex flex-col items-center gap-6">
+      {/* Controles Superiores */}
+      <div className="flex flex-wrap justify-center gap-2 mb-2">
+        {[4, 6, 9, 12, 16, 24, 32].map(n => (
+          <button
+            key={n}
+            onClick={() => setDificuldade(n)}
+            className={`px-3 py-1.5 rounded-xl font-black text-xs transition-all border-2 ${
+              dificuldade === n 
+                ? "bg-primary text-white border-primary shadow-lg scale-110" 
+                : "bg-white text-primary border-primary/20 hover:border-primary/50"
+            }`}
           >
-             <RenderPiece emoji={p.emoji} idx={idx} total={total} cols={cols} rows={rows} size={96} isThumbnail />
-          </motion.div>
+            {n} PEÇAS
+          </button>
         ))}
       </div>
 
-      <div className="text-sm font-black text-white/60 uppercase tracking-widest animate-pulse">
-        Arraste as peças para o lugar correto!
+      <div className="flex flex-col lg:flex-row gap-8 items-center justify-center w-full">
+        {/* Tabuleiro */}
+        <div 
+          className="relative bg-slate-200/50 rounded-[2.5rem] border-[12px] border-white shadow-2xl overflow-hidden touch-none"
+          style={{ 
+            width: 340, 
+            height: 340,
+            display: 'grid',
+            gridTemplateColumns: `repeat(${cols}, 1fr)`,
+            gridTemplateRows: `repeat(${rows}, 1fr)`
+          }}
+        >
+          {/* Sombra de fundo (Guia) */}
+          <div className="absolute inset-0 opacity-15 pointer-events-none grayscale">
+            <RenderPieceContent image={selectedImage} size={340} isFull />
+          </div>
+
+          {range(total).map((idx) => {
+            const isEncaixada = pecasEncaixadas.includes(idx);
+            return (
+              <div 
+                key={`${gameKey}-${idx}`}
+                className="relative border border-white/30 flex items-center justify-center overflow-hidden"
+              >
+                <AnimatePresence>
+                  {isEncaixada && (
+                    <motion.div 
+                      initial={{ scale: 1.5, opacity: 0, rotate: -10 }}
+                      animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                      className="absolute inset-0"
+                    >
+                      <RenderPiece 
+                        image={selectedImage} 
+                        idx={idx} 
+                        cols={cols} 
+                        rows={rows} 
+                        size={340} 
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bandeja de Peças */}
+        <div className="flex flex-wrap lg:flex-col justify-center gap-4 bg-white/40 backdrop-blur-md p-6 rounded-[3rem] border-4 border-white shadow-xl min-h-[120px] max-w-sm lg:max-h-[400px] overflow-y-auto">
+          {pecasDisponiveis.map((idx) => (
+            <motion.div
+              key={`${gameKey}-avail-${idx}`}
+              drag
+              dragConstraints={{ left: -1000, right: 1000, top: -1000, bottom: 1000 }}
+              dragElastic={0.1}
+              onDragEnd={(_, info) => {
+                // Snap magnético: se soltar sobre o tabuleiro
+                // O tabuleiro está centralizado, mas para facilitar para a criança, 
+                // se a distância do drop for pequena em relação à origem, ou se o offset indicar movimento pro tabuleiro
+                if (Math.abs(info.offset.y) > 50 || Math.abs(info.offset.x) > 50) {
+                   handleSnap(idx);
+                }
+              }}
+              whileTap={{ scale: 1.2, zIndex: 50 }}
+              className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing overflow-hidden shrink-0"
+            >
+               <RenderPiece 
+                  image={selectedImage} 
+                  idx={idx} 
+                  cols={cols} 
+                  rows={rows} 
+                  size={80} 
+                  isThumbnail 
+               />
+            </motion.div>
+          ))}
+          {pecasDisponiveis.length === 0 && (
+            <div className="text-primary font-black animate-bounce py-4">
+              PARABÉNS! 🎉
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Seleção de Categorias e Mídias */}
+      <div className="w-full mt-4 space-y-4">
+        <div className="flex justify-center gap-4">
+          {(['hiperfocos', 'mascotes', 'mundos'] as const).map(cat => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+              className={`text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full transition-all ${
+                category === cat ? "bg-primary text-white" : "bg-white/50 text-primary hover:bg-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex overflow-x-auto gap-3 pb-4 no-scrollbar justify-start sm:justify-center px-4">
+           <MediaCarousel 
+              category={category} 
+              onSelect={setSelectedImage} 
+              selected={selectedImage}
+           />
+        </div>
       </div>
     </div>
   );
 }
 
-function RenderPiece({ emoji, idx, total, cols, rows, size, isThumbnail }: any) {
+function RenderPieceContent({ image, size, isFull }: { image: string, size: number, isFull?: boolean }) {
+  // Se for emoji
+  if (image.length <= 2 && !image.startsWith('http') && !image.includes('/')) {
+    return <RenderEmoji e={image} className={isFull ? "w-full h-full p-8" : "w-48 h-48"} />;
+  }
+  // Se for URL/Asset
+  return (
+    <img 
+      src={image} 
+      alt="" 
+      className={`object-contain ${isFull ? "w-full h-full opacity-60" : "w-full h-full"}`} 
+    />
+  );
+}
+
+function RenderPiece({ image, idx, cols, rows, size, isThumbnail }: any) {
   const col = idx % cols;
   const row = Math.floor(idx / cols);
-  const w = size / cols;
-  const h = size / rows;
   
   return (
     <div 
@@ -4752,9 +4855,7 @@ function RenderPiece({ emoji, idx, total, cols, rows, size, isThumbnail }: any) 
     >
       <div 
         style={{ 
-          transform: isThumbnail 
-            ? `scale(${cols}) translate(${-(col * 100 / cols) + (cols-1)*12.5}%, ${-(row * 100 / rows) + (rows-1)*12.5}%)` 
-            : `scale(${cols}) translate(${-(col * 100 / cols) + (cols-1)*12.5}%, ${-(row * 100 / rows) + (rows-1)*12.5}%)`,
+          transform: `scale(${cols}, ${rows}) translate(${-(col * 100 / cols) + (cols-1)*(50/cols)}%, ${-(row * 100 / rows) + (rows-1)*(50/rows)}%)`,
           width: size,
           height: size,
           display: 'flex',
@@ -4762,11 +4863,49 @@ function RenderPiece({ emoji, idx, total, cols, rows, size, isThumbnail }: any) 
           justifyContent: 'center'
         }}
       >
-        <RenderEmoji e={emoji} className={size > 100 ? "w-64 h-64" : "w-48 h-48"} />
+        <RenderPieceContent image={image} size={size} />
       </div>
     </div>
   );
 }
+
+function MediaCarousel({ category, onSelect, selected }: any) {
+  const items = useMemo(() => {
+    if (category === 'mascotes') {
+      return [
+        { id: 'brilha', img: MASCOTES.brilha, label: 'Brilha' },
+        { id: 'pip', img: "https://img.icons8.com/color/512/frog.png", label: 'Pip' },
+        { id: 'pipa', img: "https://img.icons8.com/color/512/butterfly.png", label: 'Pipa' }
+      ];
+    }
+    if (category === 'mundos') {
+      return MUNDOS.slice(0, 12).map(m => ({ id: m.id, img: m.image, label: m.label }));
+    }
+    // Hiperfocos (Objetos premium)
+    return Object.entries(OBJETO_IMG).slice(0, 20).map(([name, img]) => ({
+      id: name,
+      img: img,
+      label: name
+    }));
+  }, [category]);
+
+  return (
+    <>
+      {items.map(item => (
+        <button
+          key={item.id}
+          onClick={() => onSelect(item.img)}
+          className={`shrink-0 w-20 h-20 rounded-2xl border-4 bg-white overflow-hidden transition-all hover:scale-105 active:scale-95 ${
+            selected === item.img ? "border-primary shadow-lg" : "border-white"
+          }`}
+        >
+          <img src={item.img} alt={item.label} className="w-full h-full object-contain p-1" />
+        </button>
+      ))}
+    </>
+  );
+}
+
 
 // 50. CONSTRUTOR DE FORMAS — montagem real com formas geométricas
 type FormaPeca = {
