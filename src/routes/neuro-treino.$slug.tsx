@@ -4861,13 +4861,14 @@ function RenderPiece({ image, idx, cols, rows, size, isThumbnail }: any) {
     >
       <div 
         style={{ 
-          transform: `scale(${cols}, ${rows}) translate(${-(col * 100 / cols) + (cols-1)*(50/cols)}%, ${-(row * 100 / rows) + (rows-1)*(50/rows)}%)`,
+          transform: `scale(${cols}, ${rows}) translate(${-((col / cols) * 100) + (50 - 50/cols)}%, ${-((row / rows) * 100) + (50 - 50/rows)}%)`,
           width: size,
           height: size,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
         }}
+
       >
         <RenderPieceContent image={image} size={size} />
       </div>
