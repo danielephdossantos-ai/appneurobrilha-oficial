@@ -117,6 +117,17 @@ const MODULOS = [
     glow: "rgba(124,58,237,0.5)",
     emoji: "✨",
     icon: Compass,
+  },
+  {
+    id: "ingles-ei",
+    to: "/escola-brilha/ingles-ei",
+    title: "My First English",
+    subtitle: "Educação Infantil · Maternal ao Pré II",
+    description: "Inglês oral, música e imagens · Sem leitura",
+    gradient: "from-[#8B5CF6] via-[#A855F7] to-[#EC4899]",
+    glow: "rgba(139,92,246,0.5)",
+    emoji: "🇺🇸",
+    icon: Headphones,
   }
 ];
 
