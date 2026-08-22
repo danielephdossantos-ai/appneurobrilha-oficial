@@ -9,6 +9,10 @@ import { useEffect, useState } from "react";
 import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
 import { cn } from "@/utils/utils";
 import { LembretesDiarios } from "@/components/reforco-brilha/LembretesDiarios";
+import { useMascot } from "@/contexts/MascotContext";
+import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
+import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
+import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,7 +20,7 @@ export const Route = createFileRoute("/")({
       { title: "NeuroBrilha Kids — Cidade Mágica" },
       {
         name: "description",
-        content: "Entre na cidade mágica do Pip e comece sua aventura de aprendizagem.",
+        content: "Entre na Cidade NeuroBrilha e comece sua aventura de aprendizagem.",
       },
     ],
   }),
@@ -31,6 +35,7 @@ type Destino = {
   glow: string;
   emoji: string;
   shine: string;
+  characterImage?: string;
 };
 
 const DESTINOS_KIDS: Destino[] = [
@@ -41,6 +46,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#FF3D77] via-[#FF6FA8] to-[#D61F69]",
     glow: "rgba(255,61,119,0.7)",
     emoji: "✨",
+    characterImage: pipaProfessora,
     shine: "rgba(255,255,255,0.2)",
   },
   {
@@ -50,6 +56,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#A855F7] via-[#9B6CFF] to-[#5A2DC9]",
     glow: "rgba(155,108,255,0.7)",
     emoji: "🧠",
+    characterImage: pipaDoutora,
     shine: "rgba(255,255,255,0.12)",
   },
   {
@@ -68,6 +75,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#38BDF8] via-[#0EA5E9] to-[#0369A1]",
     glow: "rgba(56,189,248,0.7)",
     emoji: "🎓",
+    characterImage: pipaAstronauta,
     shine: "rgba(255,255,255,0.15)",
   },
 
@@ -91,31 +99,13 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.15)",
   },
   {
-    to: "/reforco-brilha",
-    title: "Reforço Brilha",
-    subtitle: "Professor Particular",
-    gradient: "from-[#FF8C4B] via-[#FF6B2B] to-[#D44A0A]",
-    glow: "rgba(255,107,43,0.7)",
-    emoji: "✨",
-    shine: "rgba(255,255,255,0.12)",
-  },
-  {
-    to: "/missao-prova",
-    title: "Missão Prova",
-    subtitle: "Desafios Épicos",
-    gradient: "from-[#F43F5E] via-[#E11D48] to-[#9F1239]",
-    glow: "rgba(244,63,94,0.7)",
-    emoji: "🎯",
-    shine: "rgba(255,255,255,0.12)",
-  },
-  {
-    to: "/missao-trabalho",
-    title: "Missão Trabalho",
-    subtitle: "Trabalho Escolar Brilha",
-    gradient: "from-[#F59E0B] via-[#D97706] to-[#92400E]",
-    glow: "rgba(245,158,11,0.7)",
-    emoji: "📝",
-    shine: "rgba(255,255,255,0.12)",
+    to: "/apoio-escolar",
+    title: "Apoio Escolar",
+    subtitle: "Prova · Tarefa · Trabalho",
+    gradient: "from-[#FF8C4B] via-[#7C3AED] to-[#2563EB]",
+    glow: "rgba(124,58,237,0.55)",
+    emoji: "🎓",
+    shine: "rgba(255,255,255,0.14)",
   },
   {
     to: "/brilha-vida",
@@ -157,6 +147,8 @@ const DESTINOS_KIDS: Destino[] = [
 
 function Index() {
   const { children: allChildren, activeChild, setActiveChild, isLoading, session } = useAppState();
+  const { childMascotProfile } = useMascot();
+  const companionName = childMascotProfile?.active_mascot === "pipa" ? "Pipa" : "Pip";
   const navigate = useNavigate();
   const [showEggHatch, setShowEggHatch] = useState(false);
 
@@ -230,7 +222,7 @@ function Index() {
                 Bem-vindo à
               </div>
               <h1 className="text-white text-lg font-black leading-tight">
-                Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
+                Cidade <span className="text-[#FFC93C]">NeuroBrilha</span> ✨
               </h1>
             </div>
 
@@ -327,11 +319,13 @@ function Index() {
                     }}
                   />
 
-                  {/* Emoji grande */}
-                  <div className="flex items-center justify-center pt-3 pb-1">
-                    <span className="text-4xl drop-shadow-lg select-none" role="img">
-                      {d.emoji}
-                    </span>
+                  {/* Personagem/ícone da categoria */}
+                  <div className="flex items-center justify-center pt-2 pb-1">
+                    {d.characterImage ? (
+                      <img src={d.characterImage} alt="Personagem da categoria" className="h-14 w-14 object-contain drop-shadow-lg select-none" />
+                    ) : (
+                      <span className="text-4xl drop-shadow-lg select-none" role="img">{d.emoji}</span>
+                    )}
                   </div>
 
                   {/* Label */}
@@ -397,7 +391,7 @@ function Index() {
                   Bem-vindo à
                 </div>
                 <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
-                  Cidade do <span className="text-[#FFC93C]">Pip</span>
+                  Cidade <span className="text-[#FFC93C]">NeuroBrilha</span>
                 </h1>
               </div>
             </div>
@@ -440,7 +434,7 @@ function Index() {
             >
               <p className="text-[#0d1f55] font-black text-lg leading-tight">
                 {activeChild
-                  ? `Oi ${activeChild.nome}! Pra onde vamos hoje? 🚀`
+                  ? `Oi ${activeChild.nome}! ${companionName} está com você. Pra onde vamos hoje? 🚀`
                   : "os mascotes sumiram está só umquebra cabeça nas imagem . 🧩\n\nDino, Robo, Pipa e unicórnio\n\nCompanheiro de Jornada"}
               </p>
             </motion.div>
@@ -469,10 +463,12 @@ function Index() {
                         background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
                       }}
                     />
-                    <div className="flex flex-col items-center px-3 pt-5 pb-1">
-                      <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
-                        {d.emoji}
-                      </span>
+                    <div className="flex flex-col items-center px-3 pt-4 pb-1">
+                      {d.characterImage ? (
+                        <img src={d.characterImage} alt="Personagem da categoria" className="h-20 w-20 object-contain drop-shadow-xl select-none" />
+                      ) : (
+                        <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">{d.emoji}</span>
+                      )}
                     </div>
                     <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
                       <div className="text-sm font-black text-[#0d1f55] leading-tight">

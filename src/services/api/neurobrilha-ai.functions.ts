@@ -42,6 +42,13 @@ export const callNeuroBrilhaAI = createServerFn({ method: "POST" })
         chatHistory: z.array(chatMessageSchema).optional(),
       }),
       z.object({
+        mode: z.literal("apoio"),
+        child: childSchema,
+        mascot: mascotSchema,
+        message: z.string(),
+        chatHistory: z.array(chatMessageSchema).optional(),
+      }),
+      z.object({
         mode: z.literal("professor-foto"),
         child: childSchema,
         mascot: mascotSchema,
@@ -88,14 +95,18 @@ Responda APENAS o texto da mensagem, sem formatação extra.`;
       return json.choices[0].message.content as string;
     }
 
-    if (mode === "terapeuta") {
+    if (mode === "terapeuta" || mode === "apoio") {
       const { child, mascot, message, chatHistory = [] } = data;
-      const systemPrompt = `Você é ${mascot?.name ?? "Pip"}, um terapeuta virtual especializado em neurodesenvolvimento infantil.
+      const systemPrompt = mode === "apoio"
+        ? `Você é ${mascot?.name ?? "Pip"}, um guia educativo de apoio do NeuroBrilha Kids.
+${mascot?.description ? `Sobre você: ${mascot.description}` : ""}
+Você conversa com ${child?.nome ?? "uma criança"} (${child?.idade ?? "?"} anos).
+Use linguagem simples, acolhedora e curta. Ajude a nomear emoções, organizar uma pausa, respirar ou escolher um próximo passo seguro.
+NÃO diagnostique, NÃO faça terapia, NÃO prescreva tratamento, NÃO atribua comportamentos a TEA/TDAH ou outro diagnóstico. Se houver situação de risco, peça para chamar um adulto responsável. Responda em português brasileiro.`
+        : `Você é ${mascot?.name ?? "Pip"}, um assistente virtual de apoio para responsáveis.
 ${mascot?.description ? `Sobre você: ${mascot.description}` : ""}
 Você está ajudando a família de ${child?.nome ?? "uma criança"} (${child?.idade ?? "?"} anos).
-Perfil neurológico: ${child?.perfil_neuro ?? "não especificado"}.
-Forneça orientações práticas, baseadas em evidências, sobre comportamento e regulação emocional.
-Lembre sempre que não substitui um profissional de saúde. Responda em português brasileiro.`;
+Forneça orientações educativas gerais sobre rotina e autorregulação. Não diagnostique nem prescreva tratamento e lembre que o app não substitui acompanhamento profissional. Responda em português brasileiro.`;
 
       const messages = [
         { role: "system", content: systemPrompt },

@@ -1,6 +1,7 @@
 // Persistência do Currículo Anual (Lovable Cloud).
 import { supabase } from "@/database/supabase/client";
 import { gerarCurriculoAnual, type CurriculoGerado, type ItemCurriculo } from "./builder";
+import { mirrorLegacyPlan, syncPremiumCompletion } from "@/modules/learning-plans/mirror";
 
 const T_PLANO = "curriculo_anual" as any;
 const T_ITENS = "curriculo_anual_itens" as any;
@@ -78,6 +79,7 @@ export async function marcarItem(itemId: string, concluido: boolean): Promise<vo
     .from(T_ITENS)
     .update({ concluido, concluido_em: concluido ? new Date().toISOString() : null } as any)
     .eq("id", itemId);
+  await syncPremiumCompletion("curriculo_anual_itens", itemId, concluido);
 }
 
 export interface GerarParaCriancaInput {
@@ -138,6 +140,44 @@ export async function gerarESalvar(input: GerarParaCriancaInput): Promise<Curric
     const { error: e } = await supabase.from(T_ITENS).insert(rows.slice(i, i + 500) as any);
     if (e) throw e;
   }
+
+  // Espelha o currículo no contrato Premium sem quebrar as telas legadas.
+  const { data: savedItems } = await supabase
+    .from(T_ITENS)
+    .select("*")
+    .eq("curriculo_id", (novo as any).id)
+    .order("semestre")
+    .order("semana")
+    .order("dia_semana")
+    .order("ordem");
+  await mirrorLegacyPlan({
+    childId: input.childId,
+    planType: "school",
+    legacyPlanId: (novo as any).id,
+    legacySource: "curriculo_anual_itens",
+    weeksTotal: plano.semanas_por_semestre * 2,
+    minutesPerDay: plano.minutos_por_dia,
+    daysPerWeek: plano.dias_por_semana,
+    grade: String(plano.serie),
+    stage: "Ensino Fundamental",
+    profileSnapshot: risk,
+    items: ((savedItems as any[]) ?? []).map((i) => ({
+      legacyItemId: i.id,
+      week: (Number(i.semestre) - 1) * plano.semanas_por_semestre + Number(i.semana),
+      day: Number(i.dia_semana),
+      sequenceOrder: Number(i.ordem),
+      itemRole: Number(i.prioridade) === 1 ? "reinforcement" : "teach",
+      source: "escola_brilha",
+      sourceId: `${i.curso_slug}/${i.aula_slug}`,
+      title: i.titulo,
+      route: i.rota,
+      subject: i.disciplina,
+      estimatedMinutes: Number(i.minutos ?? 10),
+      status: i.concluido ? "completed" : "available",
+      selectionReason: Number(i.prioridade) === 1 ? "Prioridade pedagógica definida pelo perfil e currículo" : "Sequência curricular da série",
+      metadata: { curso_slug: i.curso_slug, aula_slug: i.aula_slug, prioridade: i.prioridade },
+    })),
+  });
 
   // horário padrão (17:00 de Seg a Sex) se ainda não existir
   await garantirHorariosPadrao(input.childId, plano.dias_por_semana);

@@ -3,8 +3,20 @@ import React from "react";
 import { cn } from "@/utils/utils";
 import { useMascot } from "@/contexts/MascotContext";
 import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
+import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
+import { url as pipaArte } from "@/assets/pip-girl-arte.png.asset.json";
+import { url as pipaBailarina } from "@/assets/pip-girl-bailarina.png.asset.json";
+import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
+import { url as pipaSereia } from "@/assets/pip-girl-sereia.png.asset.json";
+import { url as pipaConfeiteira } from "@/assets/pip-girl-confeiteira.png.asset.json";
+import { url as pipaVeterinaria } from "@/assets/pip-girl-veterinaria.png.asset.json";
+import { url as pipaMusica } from "@/assets/pip-girl-musica.png.asset.json";
+import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json";
+import { url as pipaUnicornio } from "@/assets/pip-girl-unicornio.png.asset.json";
+import { url as pipaSuperHeroina } from "@/assets/pip-girl-super-heroina.png.asset.json";
 import { useAppState } from "@/core/store";
-import { useMascotStage } from "@/lib/mascot-stage";
 
 import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
 import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
@@ -62,23 +74,35 @@ const LiveMascot = ({
   showBadge = true,
 }: LiveMascotProps) => {
   const { activeChild } = useAppState();
-  const stage = useMascotStage(activeChild?.id);
-
-  // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // A criança pode alternar entre Ovo → Nascendo → Bebê → Guardião (criança)
-  // dentre as fases já liberadas.
-  let activeMascotName: string | undefined;
-  try {
-    activeMascotName = useMascot().activeMascot?.mascot?.name;
-  } catch {
-    activeMascotName = undefined;
-  }
-  const isPipa = activeMascotName?.toLowerCase() === "pipa";
+  const mascotCtx = useMascot();
+  const profile = mascotCtx.childMascotProfile;
+  const stage = profile?.stage ?? "ovo";
+  const activeMascotName = mascotCtx.activeMascot?.mascot?.name;
+  const isPipa = (profile?.active_mascot ?? activeMascotName?.toLowerCase()) === "pipa";
 
   const stageImages: Record<string, string> = isPipa
     ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
     : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
-  const mascotImage = stageImages[stage] ?? stageImages.crianca;
+  const equipped = profile?.equipped_skin ?? (isPipa ? "pipa-original" : "original");
+  const equippedImages: Record<string,string> = {
+    ...PIP_SKINS,
+    original: pipMascot,
+    "pipa-original": pipaMascot,
+    "pipa-doutora": pipaDoutora,
+    "pipa-astronauta": pipaAstronauta,
+    "pipa-professora": pipaProfessora,
+    "pipa-arte": pipaArte,
+    "pipa-bailarina": pipaBailarina,
+    "pipa-fada": pipaFada,
+    "pipa-sereia": pipaSereia,
+    "pipa-confeiteira": pipaConfeiteira,
+    "pipa-veterinaria": pipaVeterinaria,
+    "pipa-musica": pipaMusica,
+    "pipa-princesa": pipaPrincesa,
+    "pipa-unicornio": pipaUnicornio,
+    "pipa-super-heroina": pipaSuperHeroina,
+  };
+  const mascotImage = stage === "crianca" ? (equippedImages[equipped] ?? stageImages.crianca) : (stageImages[stage] ?? stageImages.bebe);
 
 
   const sizes = {
@@ -99,7 +123,7 @@ const LiveMascot = ({
 
         <img
           src={mascotImage}
-          alt="Pip - O Guardião dos Desafios"
+          alt={isPipa ? "Pipa, companheira da jornada" : "Pip, companheiro da jornada"}
           className="max-w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
           draggable={false}
         />

@@ -18,7 +18,10 @@ export const Route = createFileRoute("/escola-brilha/aula-arte-v1/$curso/$aula")
   component: AulaArteV1Page,
 });
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (slug: string) => {
+  const childId = typeof window !== "undefined" ? localStorage.getItem("neurobrilha:activeChildId") : null;
+  return `eb.v4.progresso.${childId || "sem-crianca"}.${slug}`;
+};
 
 function marcarConcluida(cursoSlug: string, aulaSlug: string) {
   try {

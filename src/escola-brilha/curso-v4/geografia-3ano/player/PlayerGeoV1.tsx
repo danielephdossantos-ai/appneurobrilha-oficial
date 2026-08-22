@@ -4,6 +4,7 @@ import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 import { url as lupaImg } from "@/assets/geografia-3ano/lupa.png.asset.json";
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
+import { normalizarFala } from "@/lib/normalizador-fala";
 
 /** Modo TEEN (6º ano+) — desliga mascote infantil e cores kawaii. */
 const TeenContext = createContext(false);
@@ -906,7 +907,7 @@ function NarrarMapa({
     try {
       if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
       window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(texto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(texto));
       u.lang = "pt-BR";
       u.rate = 0.95;
       u.pitch = 1.05;
@@ -1350,7 +1351,7 @@ function QuizRadar({
     try {
       if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
       window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(texto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(texto));
       u.lang = "pt-BR";
       u.rate = 0.95;
       u.pitch = 1.05;
@@ -2829,7 +2830,7 @@ function ConstrutorMarcos({
     if (fim) return;
     try {
       window.speechSynthesis?.cancel();
-      const u = new SpeechSynthesisUtterance(rodada.contexto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(rodada.contexto));
       u.lang = "pt-BR";
       u.rate = 0.95;
       window.speechSynthesis?.speak(u);
@@ -3269,7 +3270,7 @@ function PizzaMunicipio({
   const falar = (texto: string) => {
     try {
       window.speechSynthesis?.cancel();
-      const u = new SpeechSynthesisUtterance(texto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(texto));
       u.lang = "pt-BR";
       u.rate = 0.95;
       window.speechSynthesis?.speak(u);
@@ -3664,7 +3665,7 @@ function SeloAtlas({
     try {
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(texto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(texto));
       u.lang = 'pt-BR';
       u.rate = 0.95;
       u.pitch = 1.05;
@@ -4113,7 +4114,7 @@ function MapaBrasilInterativo({
     try {
       if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
       window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(texto);
+      const u = new SpeechSynthesisUtterance(normalizarFala(texto));
       u.lang = "pt-BR";
       u.rate = 0.95;
       u.pitch = 1.05;

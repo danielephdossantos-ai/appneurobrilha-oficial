@@ -72,7 +72,7 @@ export interface GerarNeuroInput {
 
 /**
  * Monta o plano: atividades recomendadas pela anamnese em rotação diária.
- * RESTRIÇÃO: Apenas para crianças de 3 a 6 anos.
+ * REGRA CANÔNICA: Neuro-Treino pode compor o plano até 7 anos (bloqueio a partir de 8).
  * UTILIZAÇÃO: Apenas categorias do Neuro-Treino (sem Escola Brilha).
  */
 export function gerarPlanoNeuro(input: GerarNeuroInput): PlanoNeuroGerado {
@@ -81,8 +81,8 @@ export function gerarPlanoNeuro(input: GerarNeuroInput): PlanoNeuroGerado {
   const sessoesPorDia = Math.min(4, Math.max(1, input.sessoesPorDia ?? 2));
   const age = input.age ?? 5;
 
-  // Bloqueio para 7 anos ou mais
-  if (age >= 7) {
+  // Regra canônica do projeto: bloqueio a partir de 8 anos.
+  if (age >= 8) {
     return { 
       semanas, 
       dias_por_semana: 0, 
@@ -92,28 +92,17 @@ export function gerarPlanoNeuro(input: GerarNeuroInput): PlanoNeuroGerado {
     };
   }
 
-  // Pegamos TODAS as categorias do Neuro-Treino disponíveis no variations.ts
-  // O sistema utiliza a anamnese para priorizar, mas inclui todas em rotação.
-  const todasCategorias = Object.keys(CATEGORIAS) as CategoriaSlug[];
-  
-  const atividades: AtividadeTerapeutica[] = todasCategorias.map(slug => {
-    const meta = CATEGORIAS[slug];
-    const riskLevel = input.risk ? (input.risk[meta.grupo as keyof RiskMap] as string) : null;
-    const prioridade = (riskLevel === "vermelho" || riskLevel === "laranja") ? 1 : 2;
-
-    return {
-      slug,
-      nome: meta.nome,
-      emoji: meta.emoji,
-      grupo: meta.grupo,
-      objetivo: meta.objetivo,
-      porQue: prioridade === 1 ? "Prioridade identificada na anamnese." : "Fortalecimento do desenvolvimento.",
-      prioridade,
-      rota: `/neuro-treino/${slug}`,
-    };
-  });
+  // A seleção precisa respeitar o mapa real área da anamnese -> categorias.
+  // Não usamos meta.grupo como chave de RiskMap, pois os vocabulários são diferentes.
+  const temDados = Boolean(input.scores && input.risk);
+  const atividades = temDados
+    ? recomendarAtividadesTerapeuticas(input.scores!, input.risk!)
+    : kitPadrao();
 
   const lista = atividades.sort((a, b) => a.prioridade - b.prioridade);
+  if (lista.length === 0) {
+    return { semanas, dias_por_semana: 0, sessoes_por_dia: 0, itens: [], atividades: [] };
+  }
 
   const itens: ItemNeuro[] = [];
   let cursor = 0;

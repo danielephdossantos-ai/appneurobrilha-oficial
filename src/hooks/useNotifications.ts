@@ -56,18 +56,20 @@ export function useNotifications() {
         const { data: subs } = await supabase
           .from('push_subscriptions')
           .select('*')
-          .eq('user_id', userId);
+          .eq('user_id', userId)
+          .eq('enabled', true)
+          .eq('child_id', notif.child_id ?? '00000000-0000-0000-0000-000000000000');
 
         if (subs && subs.length > 0) {
           for (const sub of subs) {
             await fetch('/api/public/send-push', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${auth.data.user ? (await supabase.auth.getSession()).data.session?.access_token ?? '' : ''}` },
               body: JSON.stringify({
                 subscription: sub,
                 title: notif.title,
                 message: notif.message,
-                url: '/notificacoes'
+                url: '/rotina'
               })
             });
           }

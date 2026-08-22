@@ -218,7 +218,7 @@ function PlanoNeuroPage() {
           <h2 className="text-xl font-black">Montar o Plano Neuro de {activeChild?.nome}</h2>
           <p className="text-sm text-muted-foreground">
             Vamos usar o resultado da anamnese para organizar as atividades REAIS do Neuro-Treino 
-            em uma rotina semanal prática (3 a 6 anos). 
+            em uma rotina semanal prática (até 7 anos, conforme a regra atual do Neuro-Treino). 
           </p>
           <button
             onClick={gerar}
@@ -257,6 +257,14 @@ function PlanoNeuroPage() {
               />
             </div>
           </Card>
+
+          {pct === 100 && progresso.total > 0 && (
+            <Card className="border-2 border-emerald-500/40 bg-emerald-500/10 text-center">
+              <div className="text-3xl mb-2">🏁</div>
+              <h2 className="text-xl font-black">Ciclo de apoio concluído</h2>
+              <p className="text-sm text-muted-foreground">As sessões planejadas foram concluídas. Revise o progresso antes de gerar um novo ciclo.</p>
+            </Card>
+          )}
 
           {/* Removido o botão duplicado de COMEÇAR MISSÃO, pois agora ele está integrado na TrilhaPlanoVisual */}
 

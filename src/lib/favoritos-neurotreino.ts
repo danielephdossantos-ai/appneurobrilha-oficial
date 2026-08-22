@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAppState } from "@/core/store";
 
 export const FAVORITOS_KEY = "favoritos_crianca";
+const activeChildId = () => typeof window !== "undefined" ? window.localStorage.getItem("neurobrilha:activeChildId") : null;
+const favoritosKey = () => `${FAVORITOS_KEY}:${activeChildId() || "sem-crianca"}`;
 
 export type FavoritoAtividade = {
   /** identificador único (slug da categoria ou rota especial) */
@@ -26,7 +29,7 @@ function emit() {
 export function lerFavoritos(): FavoritoAtividade[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = window.localStorage.getItem(FAVORITOS_KEY);
+    const raw = window.localStorage.getItem(favoritosKey());
     const parsed = raw ? JSON.parse(raw) : [];
     return Array.isArray(parsed) ? (parsed as FavoritoAtividade[]) : [];
   } catch {
@@ -36,7 +39,7 @@ export function lerFavoritos(): FavoritoAtividade[] {
 
 function gravar(favs: FavoritoAtividade[]) {
   try {
-    window.localStorage.setItem(FAVORITOS_KEY, JSON.stringify(favs));
+    window.localStorage.setItem(favoritosKey(), JSON.stringify(favs));
   } catch {
     /* storage cheio / indisponível */
   }
@@ -61,6 +64,7 @@ export function removerFavorito(id: string) {
 
 /** Lista reativa de favoritos, sincronizada entre componentes e abas. */
 export function useFavoritos(): FavoritoAtividade[] {
+  const { activeChild } = useAppState();
   const [favs, setFavs] = useState<FavoritoAtividade[]>([]);
 
   useEffect(() => {
@@ -72,7 +76,7 @@ export function useFavoritos(): FavoritoAtividade[] {
       listeners.delete(sync);
       window.removeEventListener("storage", sync);
     };
-  }, []);
+  }, [activeChild?.id]);
 
   return favs;
 }

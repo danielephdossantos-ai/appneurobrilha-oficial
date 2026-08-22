@@ -407,9 +407,11 @@ export function Step5({
 export function Step6({
   value,
   onChange,
+  idade,
 }: {
   value: Partial<Step06_Escolar>;
   onChange: Updater<"step6">;
+  idade?: number;
 }) {
   const lk = (k: keyof Step06_Escolar, label: string) => (
     <LikertScale
@@ -420,26 +422,24 @@ export function Step6({
   );
   return (
     <div className="space-y-1">
-      <p className="text-sm font-bold text-primary mb-2">Leitura</p>
+      <p className="text-sm font-bold text-primary mb-2">Leitura e linguagem</p>
       {lk("reconhece_letras", "Reconhece letras")}
-      {lk("reconhece_silabas", "Reconhece sílabas")}
-      {lk("le_palavras", "Lê palavras")}
-      {lk("le_frases", "Lê frases")}
-      {lk("le_textos", "Lê pequenos textos")}
+      {(idade ?? 6) >= 5 && lk("reconhece_silabas", "Reconhece sílabas")}
+      {(idade ?? 6) >= 5 && lk("le_palavras", "Lê palavras")}
+      {(idade ?? 6) >= 6 && lk("le_frases", "Lê frases")}
+      {(idade ?? 6) >= 6 && lk("le_textos", "Lê pequenos textos")}
       <p className="text-sm font-bold text-primary mt-3 mb-2">Escrita</p>
-      {lk("copia_palavras", "Copia palavras")}
-      {lk("escreve_espontaneamente", "Escreve espontaneamente")}
-      {lk("troca_letras", "Troca letras ao escrever")}
-      {lk("organiza_frases", "Organiza frases")}
-      <p className="text-sm font-bold text-primary mt-3 mb-2">Compreensão de texto</p>
-      {lk("compreende_textos", "Compreende textos lidos")}
-      
+      {(idade ?? 6) >= 5 && lk("copia_palavras", "Copia palavras")}
+      {(idade ?? 6) >= 5 && lk("escreve_espontaneamente", "Escreve espontaneamente")}
+      {(idade ?? 6) >= 6 && lk("troca_letras", "Troca letras ao escrever")}
+      {(idade ?? 6) >= 6 && lk("organiza_frases", "Organiza frases")}
+      {(idade ?? 6) >= 6 && <><p className="text-sm font-bold text-primary mt-3 mb-2">Compreensão de texto</p>{lk("compreende_textos", "Compreende textos lidos")}</>}
       <p className="text-sm font-bold text-primary mt-3 mb-2">Matemática</p>
       {lk("reconhece_numeros", "Reconhece números")}
       {lk("conta_objetos", "Conta objetos")}
-      {lk("adicao", "Realiza adição")}
-      {lk("subtracao", "Realiza subtração")}
-      {lk("problemas_simples", "Resolve problemas simples")}
+      {(idade ?? 6) >= 6 && lk("adicao", "Realiza adição")}
+      {(idade ?? 6) >= 6 && lk("subtracao", "Realiza subtração")}
+      {(idade ?? 6) >= 6 && lk("problemas_simples", "Resolve problemas simples")}
     </div>
   );
 }

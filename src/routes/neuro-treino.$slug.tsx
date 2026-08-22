@@ -26,6 +26,8 @@ import {
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
+import { normalizarFala } from "@/lib/normalizador-fala";
 import {
   CATEGORIAS,
   VARIATIONS,
@@ -92,7 +94,7 @@ function NeuroAtividade() {
   const { handleBack, context } = useBackNavigation();
   const setNavContext = useNavigationStore(s => s.setContext);
   const [showSessionModal, setShowSessionModal] = useState(false);
-  const isSessionMode = context?.originCategory === "meu-plano" && !!context.sessionActivities;
+  const isSessionMode = Boolean(context?.isPlanFlow && context?.sessionActivities?.length);
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const { speak, stop, isSpeaking } = usePipVoice();
@@ -347,7 +349,19 @@ function NeuroAtividade() {
     const isActivityFinished = (index + 1) >= Math.min(vars.length, 5);
     
     if (isActivityFinished && isSessionMode) {
-      setTimeout(() => setShowSessionModal(true), 1200);
+      void completePlanItem(context).finally(() => {
+        setTimeout(() => setShowSessionModal(true), 900);
+      });
+    } else if (isActivityFinished && context?.isPlanFlow) {
+      // Atividade aberta pela Rotina/Plano Premium. Se houver outra missão na
+      // fila diária, continua direto nela; caso contrário volta à origem.
+      void completePlanItem(context).finally(() => {
+        setTimeout(() => {
+          toast.success("Atividade concluída! ⭐");
+          const nextRoute = advancePlanFlow(context);
+          navigate({ to: nextRoute || context?.returnPath || context?.originRoute || "/rotina" });
+        }, 900);
+      });
     } else if (!isActivityFinished) {
       setTimeout(() => setIndex((i) => i + 1), 900);
     }
@@ -472,14 +486,15 @@ function SessionModal({ isOpen, onClose, context, setNavContext, navigate }: any
                 if (nextSlug) {
                   setNavContext({
                     ...context,
-                    sessionIndex: nextIdx
+                    sessionIndex: nextIdx,
+                    lessonId: context?.sessionPlanItemIds?.[nextIdx] ?? context?.lessonId
                   });
                   onClose();
                   navigate({ to: `/neuro-treino/${nextSlug}` });
                 } else {
                   onClose();
                   toast.success("Rotina de hoje concluída! Parabéns! 🌟");
-                  navigate({ to: "/neuro-treino" });
+                  navigate({ to: context?.returnPath || context?.originRoute || "/plano-neuro" });
                 }
               }}
               className="w-full bg-primary text-primary-foreground py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform shadow-lg"
@@ -490,7 +505,7 @@ function SessionModal({ isOpen, onClose, context, setNavContext, navigate }: any
             <button
               onClick={() => {
                 onClose();
-                navigate({ to: "/neuro-treino" });
+                navigate({ to: context?.returnPath || context?.originRoute || "/plano-neuro" });
               }}
               className="w-full bg-muted text-muted-foreground py-3 rounded-2xl font-bold flex items-center justify-center gap-2"
             >
@@ -3207,7 +3222,7 @@ function CopiarFigura({ p, onDone }: any) {
       try {
         window.speechSynthesis?.cancel();
         const u = new SpeechSynthesisUtterance(
-          `Desenhe a ${p.nome.toLowerCase()} com o dedo!`,
+          normalizarFala(`Desenhe a ${p.nome.toLowerCase()} com o dedo!`),
         );
         u.lang = "pt-BR";
         u.rate = 0.95;
@@ -3253,7 +3268,7 @@ function CopiarFigura({ p, onDone }: any) {
     if (pct >= 100 && !feito) {
       setFeito(true);
       try {
-        const u = new SpeechSynthesisUtterance("Que linda figura! Mandou bem!");
+        const u = new SpeechSynthesisUtterance(normalizarFala("Que linda figura! Mandou bem!"));
         u.lang = "pt-BR";
         window.speechSynthesis?.speak(u);
       } catch {}

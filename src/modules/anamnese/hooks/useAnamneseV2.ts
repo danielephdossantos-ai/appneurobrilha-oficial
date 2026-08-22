@@ -5,7 +5,6 @@ import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { ACTIVE_STEPS } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
 import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
-import { salvarPlanoParaCrianca } from "@/modules/plano-anual/persist";
 
 interface Row {
   id: string;
@@ -131,24 +130,19 @@ export function useAnamneseV2(childId: string) {
       } catch {}
 
 
-      // Gera e salva o plano anual automaticamente após a anamnese.
+      // Um único bootstrap decide quais planejamentos se aplicam à criança.
+      // A anamnese não chama mais geradores isolados em regras diferentes.
       try {
-        const step1: any = (localResponses as any).step1 ?? {};
-        const idadeRaw = Number(step1.idade);
-        const idade = Number.isFinite(idadeRaw) ? Math.max(3, Math.min(7, idadeRaw)) : 5;
-        const serie = typeof step1.serie === "string" ? step1.serie : undefined;
-        await salvarPlanoParaCrianca({
-          childId,
-          idade,
-          serie,
-          responses: localResponses,
-          risk: res.risk_levels,
-        });
+        const { bootstrapLearningPlans } = await import("@/modules/learning-plans/bootstrap");
+        await bootstrapLearningPlans(childId);
       } catch (e) {
-        console.warn("[anamnese] falha ao gerar plano anual", e);
+        console.warn("[anamnese] falha ao inicializar planos Premium", e);
       }
       qc.invalidateQueries({ queryKey: ["children"] });
-      qc.invalidateQueries({ queryKey: ["plano_anual"] });
+      qc.invalidateQueries({ queryKey: ["primeiros_anos_plano"] });
+      qc.invalidateQueries({ queryKey: ["neuro_plano"] });
+      qc.invalidateQueries({ queryKey: ["curriculo_anual"] });
+      qc.invalidateQueries({ queryKey: ["learning_plans"] });
     }
     return res;
   };

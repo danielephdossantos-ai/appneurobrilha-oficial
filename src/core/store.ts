@@ -296,17 +296,13 @@ export function useAppState() {
 
   const addCoinsMutation = useMutation({
     mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
-      const { error } = await supabase.rpc("add_brilhocoins", {
-        child_id: childId,
-        amount: amount,
+      const { error } = await supabase.rpc("reward_child_journey" as any, {
+        p_child_id: childId,
+        p_coins: amount,
+        p_mascot_xp: Math.max(0, amount),
+        p_affinity: amount > 0 ? 1 : 0,
       });
       if (error) throw error;
-      // Também dá XP ao mascote ativo (Pip/Pipa) — desbloqueia evolução.
-      try {
-        await supabase.rpc("gain_active_mascot_xp" as any, { p_amount: amount });
-      } catch (e) {
-        console.error("Falha ao dar XP ao mascote", e);
-      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
@@ -363,9 +359,6 @@ export function useAppState() {
 
       if (existing) {
         const count = existing.edit_count ?? 0;
-        if (count >= 3) {
-          throw new Error("Limite de 3 edições atingido para esta anamnese.");
-        }
         const { error } = await supabase
           .from("child_anamnesis")
           .update({

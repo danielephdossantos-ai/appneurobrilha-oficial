@@ -5,6 +5,7 @@ import { getAulaFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerV4 } from "@/escola-brilha/curso-v4/player/PlayerV4";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
 import { useAppState } from "@/core/store";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 
 /**
  * Rota da AULA v4.1 dentro do curso.
@@ -23,7 +24,10 @@ export const Route = createFileRoute("/escola-brilha/aula-v4/$curso/$aula")({
   ),
 });
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (slug: string) => {
+  const childId = typeof window !== "undefined" ? localStorage.getItem("neurobrilha:activeChildId") : null;
+  return `eb.v4.progresso.${childId || "sem-crianca"}.${slug}`;
+};
 
 function AulaV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
@@ -61,7 +65,7 @@ function AulaV4Route() {
         aula={found.aula}
         cursoSlug={cursoSlug}
         voltarPara={navContext?.isPlanFlow ? (navContext.returnPath || "/escola-brilha") : `/escola-brilha/curso/${cursoSlug}`}
-        onConcluir={() => {
+        onConcluir={async () => {
           try {
             const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
             const list: string[] = raw ? JSON.parse(raw) : [];
@@ -72,6 +76,9 @@ function AulaV4Route() {
           }
           
           if (navContext?.isPlanFlow) {
+             await completePlanItem(navContext);
+             const nextRoute = advancePlanFlow(navContext);
+             if (nextRoute) { navigate({ to: nextRoute }); return; }
              handleBack(navigate);
              return;
           }

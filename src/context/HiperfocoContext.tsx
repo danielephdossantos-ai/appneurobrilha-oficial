@@ -1,7 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { HIPERFOCOS, type Hiperfoco, type HiperfocoId } from "@/data/hiperfocos";
+import { useAppState } from "@/core/store";
+import { supabase } from "@/database/supabase/client";
 
-const STORAGE_KEY = "currentHiperfoco";
+const LEGACY_STORAGE_KEY = "currentHiperfoco";
+const storageKey = (childId?: string | null) => childId ? `currentHiperfoco:${childId}` : LEGACY_STORAGE_KEY;
 
 type StoredHiperfoco =
   | { id: Exclude<HiperfocoId, "custom"> }
@@ -39,28 +42,31 @@ function hidratar(raw: string | null): Hiperfoco | null {
 }
 
 export function HiperfocoProvider({ children }: { children: ReactNode }) {
-  const [hiperfoco, setHiperfoco] = useState<Hiperfoco | null>(() => {
-    if (typeof window === "undefined") return null;
-    return hidratar(window.localStorage.getItem(STORAGE_KEY));
-  });
+  const { activeChild } = useAppState();
+  const [hiperfoco, setHiperfoco] = useState<Hiperfoco | null>(null);
 
+  // Cada aparelho guarda a preferência da criança ativa separadamente.
+  // Em outro aparelho, a coluna children.hiperfoco funciona como fonte de nuvem.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!hiperfoco) {
-      window.localStorage.removeItem(STORAGE_KEY);
-      return;
-    }
-    const stored: StoredHiperfoco =
-      hiperfoco.id === "custom"
-        ? {
-            id: "custom",
-            label: hiperfoco.label,
-            emoji: hiperfoco.emoji,
-            elementos: hiperfoco.elementos,
-          }
-        : { id: hiperfoco.id };
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-  }, [hiperfoco]);
+    if (!activeChild?.id) { setHiperfoco(null); return; }
+    const local = hidratar(window.localStorage.getItem(storageKey(activeChild.id)));
+    if (local) { setHiperfoco(local); return; }
+    const cloudId = activeChild.hiperfoco as Exclude<HiperfocoId, "custom">;
+    setHiperfoco(HIPERFOCOS[cloudId] ?? null);
+  }, [activeChild?.id, activeChild?.hiperfoco]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !activeChild?.id) return;
+    const key = storageKey(activeChild.id);
+    if (!hiperfoco) { window.localStorage.removeItem(key); return; }
+    const stored: StoredHiperfoco = hiperfoco.id === "custom"
+      ? { id: "custom", label: hiperfoco.label, emoji: hiperfoco.emoji, elementos: hiperfoco.elementos }
+      : { id: hiperfoco.id };
+    window.localStorage.setItem(key, JSON.stringify(stored));
+    const cloudValue = hiperfoco.id === "custom" ? "outros" : hiperfoco.id;
+    void (supabase as any).from("children").update({ hiperfoco: cloudValue, has_hyperfocus: true }).eq("id", activeChild.id);
+  }, [hiperfoco, activeChild?.id]);
 
   const value = useMemo<HiperfocoContextValue>(
     () => ({

@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { getAulaBE } from "@/escola-brilha/biblioteca-encantada/registry";
 import { PlayerBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/PlayerBibliotecaEncantada";
 
@@ -20,6 +22,7 @@ export const Route = createFileRoute(
 function AulaBERoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack, context: navContext } = useBackNavigation();
   const aula = getAulaBE(aulaSlug);
 
   if (!aula) {
@@ -44,7 +47,7 @@ function AulaBERoute() {
       onSair={() =>
         navigate({ to: "/escola-brilha/biblioteca-encantada" })
       }
-      onConcluir={() => {
+      onConcluir={async () => {
         try {
           const key = "eb.biblioteca-encantada.concluidas";
           const raw = localStorage.getItem(key);
@@ -54,7 +57,10 @@ function AulaBERoute() {
         } catch {
           /* ignore */
         }
-        navigate({ to: "/escola-brilha/biblioteca-encantada" });
+        await completePlanItem(navContext);
+        const nextRoute = advancePlanFlow(navContext);
+        if (nextRoute) { navigate({ to: nextRoute }); return; }
+        if (!handleBack(navigate)) navigate({ to: "/escola-brilha/biblioteca-encantada" });
       }}
     />
   );

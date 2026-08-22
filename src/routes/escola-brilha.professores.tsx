@@ -1,23 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Check, Lock, Sparkles, Coins } from "lucide-react";
 import { toast } from "sonner";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
+import { useQueryClient } from "@tanstack/react-query";
+import { getChildMascotAssignments, listChildUnlocks, purchaseMascotItem, saveChildMascotAssignment } from "@/lib/child-mascot";
 import {
   DISCIPLINAS_OFICIAIS,
   mascoteDaDisciplina,
   todosMascotes,
 } from "@/escola-brilha/mascotes-disciplina";
-import {
-  getAssignments,
-  getUnlockedMascotes,
-  marcarDesbloqueado,
-  precoDoMascote,
-  setAssignment,
-  todosDesbloqueados,
-} from "@/escola-brilha/mascote-assign";
+import { precoDoMascote } from "@/escola-brilha/mascote-assign";
 
 export const Route = createFileRoute("/escola-brilha/professores")({
   head: () => ({
@@ -34,27 +29,23 @@ export const Route = createFileRoute("/escola-brilha/professores")({
 });
 
 function ProfessoresPage() {
-  const { activeChild, addCoins } = useAppState();
-  const [tick, setTick] = useState(0); // força re-render após mudanças locais
+  const { activeChild } = useAppState();
+  const queryClient = useQueryClient();
   const childId = activeChild?.id ?? null;
   const coins = activeChild?.coins ?? 0;
-
-  const unlocked = useMemo(
-    () => new Set(getUnlockedMascotes(childId)),
-    [childId, tick],
-  );
-  const assignments = useMemo(() => getAssignments(childId), [childId, tick]);
-  const allUnlocked = useMemo(() => todosDesbloqueados(childId), [childId, tick]);
+  const [unlockedList,setUnlockedList] = useState<string[]>(["default"]);
+  const [assignments,setAssignments] = useState<Record<string,string>>({});
+  const [mentorEscolhidoSlug,setMentorEscolhidoSlug] = useState("default");
   const catalogo = useMemo(() => todosMascotes(), []);
+  const unlocked = useMemo(() => new Set(["default",...unlockedList]), [unlockedList]);
+  const allUnlocked = DISCIPLINAS_OFICIAIS.every((d)=>unlocked.has(d.slug));
 
-  const mentorEscolhidoSlug = useMemo(() => {
-    try {
-      const { getMentorIA } = require("@/escola-brilha/mascote-assign");
-      return getMentorIA(childId);
-    } catch {
-      return "default";
-    }
-  }, [childId, tick]);
+  const loadCloud = async () => {
+    if (!childId) return;
+    const [u,a] = await Promise.all([listChildUnlocks(childId,"teacher"),getChildMascotAssignments(childId)]);
+    setUnlockedList(u); setAssignments(a.subjects); setMentorEscolhidoSlug(a.mentor);
+  };
+  useEffect(()=>{ loadCloud().catch(console.error); },[childId]);
 
   if (!activeChild) {
     return (
@@ -66,33 +57,36 @@ function ProfessoresPage() {
     );
   }
 
-  const handleUnlock = (slug: string) => {
+  const handleUnlock = async (slug: string) => {
+    if (!activeChild) return;
     const preco = precoDoMascote(slug);
     if (coins < preco) {
-      toast.error("BrilhoCoins insuficientes", {
-        description: `Você tem ${coins}, precisa de ${preco}.`,
-      });
+      toast.error("BrilhoCoins insuficientes", { description: `Você tem ${coins}, precisa de ${preco}.` });
       return;
     }
-    addCoins(-preco);
-    marcarDesbloqueado(activeChild.id, slug);
-    toast.success("Novo professor desbloqueado! 🎉");
-    setTick((t) => t + 1);
+    try {
+      const result:any = await purchaseMascotItem(activeChild.id,"teacher",slug,preco);
+      if (!result?.ok) { toast.error("BrilhoCoins insuficientes"); return; }
+      await queryClient.invalidateQueries({queryKey:["children"]});
+      await loadCloud();
+      toast.success("Novo professor desbloqueado! 🎉");
+    } catch (e) { console.error(e); toast.error("Não foi possível concluir a compra."); }
   };
 
-  const handleAssign = (disciplinaSlug: string, mascoteSlug: string) => {
-    if (!unlocked.has(mascoteSlug)) return;
-    setAssignment(activeChild.id, disciplinaSlug, mascoteSlug);
-    toast.success("Professor atualizado!");
-    setTick((t) => t + 1);
+  const handleAssign = async (disciplinaSlug: string, mascoteSlug: string) => {
+    if (!activeChild || !unlocked.has(mascoteSlug)) return;
+    try {
+      await saveChildMascotAssignment(activeChild.id,"subject",disciplinaSlug,mascoteSlug);
+      await loadCloud(); toast.success("Professor atualizado e salvo na sua conta!");
+    } catch (e) { console.error(e); toast.error("Não foi possível salvar o professor."); }
   };
 
-  const handleSetMentor = (mascoteSlug: string) => {
-    if (!unlocked.has(mascoteSlug)) return;
-    const { setMentorIA } = require("@/escola-brilha/mascote-assign");
-    setMentorIA(activeChild.id, mascoteSlug);
-    toast.success("Mentor IA atualizado!");
-    setTick((t) => t + 1);
+  const handleSetMentor = async (mascoteSlug: string) => {
+    if (!activeChild || !unlocked.has(mascoteSlug)) return;
+    try {
+      await saveChildMascotAssignment(activeChild.id,"mentor","mentor",mascoteSlug);
+      setMentorEscolhidoSlug(mascoteSlug); toast.success("Mentor IA atualizado!");
+    } catch (e) { console.error(e); toast.error("Não foi possível salvar o mentor."); }
   };
 
   return (

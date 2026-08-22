@@ -8,13 +8,10 @@ import { url as pipaEgg } from "@/assets/pipa-egg.png.asset.json";
 import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
 import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
 import { KidButton } from "@/components/ui/KidButton";
-import { supabase } from "@/database/supabase/client";
+import { chooseStarterMascot } from "@/lib/child-mascot";
+import { setMascotStage } from "@/lib/mascot-stage";
+import { useMascot } from "@/contexts/MascotContext";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
-
-const MASCOT_IDS: Record<"pip" | "pipa", string> = {
-  pip: "00000000-0000-0000-0000-000000000001",
-  pipa: "00000000-0000-0000-0000-000000000002",
-};
 
 type MascotChoice = "pip" | "pipa";
 
@@ -34,6 +31,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
   const [speechSupported, setSpeechSupported] = useState(false);
   const [poppedTaps, setPoppedTaps] = useState(0);
   const [bubbleBurst, setBubbleBurst] = useState(false);
+  const { refreshMascot } = useMascot();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -74,11 +72,12 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
       localStorage.setItem(`neurobrilha:starterMascot:${childId}`, mascot);
     } catch {}
     try {
-      await supabase.rpc("activate_user_mascot" as any, {
-        p_mascot_id: MASCOT_IDS[mascot],
-      });
+      await chooseStarterMascot(childId, mascot);
+      setMascotStage(childId, "bebe");
+      await refreshMascot();
     } catch (e) {
-      console.error("Falha ao ativar mascote", e);
+      console.error("Falha ao salvar mascote da criança", e);
+      return;
     }
     onClose();
   };

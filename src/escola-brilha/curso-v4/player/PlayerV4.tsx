@@ -4,7 +4,7 @@ import { useBackNavigation } from "@/lib/navigation-context";
 import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/utils/utils";
 import type { AulaV4, Interacao } from "../types";
-import { speakChunked, stopSpeaking, normalizeLiteracyTextForSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
 import { MinijogoColheita } from "./blocos/MinijogoColheita";
@@ -198,7 +198,7 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
     if (!sec) return;
     const clone = sec.cloneNode(true) as HTMLElement;
     clone.querySelectorAll('button, [role="button"], [data-no-tts], input, select, textarea').forEach((n) => n.remove());
-    const txt = normalizeLiteracyTextForSpeech((clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim());
+    const txt = (clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim();
     if (!txt) return;
     speakChunked(txt, {
       rate: 0.88,
@@ -1194,10 +1194,7 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
     const falarIntro = () => {
       try {
         if (!i.legenda) return 0;
-        const u = new SpeechSynthesisUtterance(i.legenda);
-        u.lang = "pt-BR";
-        u.rate = VELOCIDADE_VOZ;
-        window.speechSynthesis.speak(u);
+        void speakChunked(i.legenda, { rate: VELOCIDADE_VOZ });
         // Mais lento para a criança acompanhar a fala e ver cada fruta apagando.
         return Math.min(11000, Math.max(2600, i.legenda.length * TEMPO_POR_CARACTERE_MS));
       } catch { return 2600; }
@@ -1219,12 +1216,10 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
     if (passo >= totalPassos) {
       const t = setTimeout(() => {
         try {
-          const u = new SpeechSynthesisUtterance(
-            ehSoma ? `Total: ${total} ${i.itemPlural}!` : `Ficaram ${total} ${i.itemPlural}!`
+          void speakChunked(
+            ehSoma ? `Total: ${total} ${i.itemPlural}!` : `Ficaram ${total} ${i.itemPlural}!`,
+            { rate: VELOCIDADE_VOZ },
           );
-          u.lang = "pt-BR";
-          u.rate = VELOCIDADE_VOZ;
-          window.speechSynthesis.speak(u);
         } catch {}
         setTerminou(true);
         setContando(false);
@@ -1234,12 +1229,10 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
     const t = setTimeout(() => {
       const n = passo + 1;
       try {
-        const u = new SpeechSynthesisUtterance(
-          ehSoma ? String(n) : `Tirou ${n}. Ficaram ${Math.max(0, i.a - n)}.`
+        void speakChunked(
+          ehSoma ? String(n) : `Tirou ${n}. Ficaram ${Math.max(0, i.a - n)}.`,
+          { rate: VELOCIDADE_VOZ },
         );
-        u.lang = "pt-BR";
-        u.rate = VELOCIDADE_VOZ;
-        window.speechSynthesis.speak(u);
       } catch {}
       setPasso(n);
     }, PAUSA_ENTRE_PASSOS_MS);

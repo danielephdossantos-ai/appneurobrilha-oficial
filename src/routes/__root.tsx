@@ -134,10 +134,6 @@ function RootComponent() {
   useStopSpeechOnScroll();
   
   useEffect(() => {
-    import("@/lib/push-notifications").then(({ registerPushNotifications }) => {
-      registerPushNotifications();
-    });
-    
     // Limpeza única de cache de navegação e estados antigos do Neuro-Treino
     if (typeof window !== "undefined" && !window.sessionStorage.getItem("brilha:cache_cleared")) {
       const STALE_KEYS = [

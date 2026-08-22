@@ -20,7 +20,10 @@ export const Route = createFileRoute("/escola-brilha/aula-pt-v4/$curso/$aula")({
   ),
 });
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (slug: string) => {
+  const childId = typeof window !== "undefined" ? localStorage.getItem("neurobrilha:activeChildId") : null;
+  return `eb.v4.progresso.${childId || "sem-crianca"}.${slug}`;
+};
 
 function AulaPtV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();

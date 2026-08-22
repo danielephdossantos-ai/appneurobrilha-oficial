@@ -45,10 +45,10 @@ function ConfigurarPlanos() {
               Foca em prontidão, consciência fonológica e escrita.
             </p>
             <Link 
-              to="/plano-anual"
+              to="/primeiros-anos"
               className="btn-tap w-full bg-primary text-primary-foreground py-3 rounded-2xl font-black flex items-center justify-center gap-2"
             >
-              <Calendar className="h-5 w-5" /> Ver Cronograma Anual
+              <Calendar className="h-5 w-5" /> Ver Plano de Alfabetização
             </Link>
           </Card>
         </section>
