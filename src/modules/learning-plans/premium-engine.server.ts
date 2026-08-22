@@ -146,8 +146,8 @@ export async function buildDailyPremiumQueue(supabase: any, childId: string, dat
         day: Number(item.day ?? todayDay),
         sequenceOrder: Number(item.sequence_order ?? 1),
       }))
-      .filter((item) => !(age >= 8 && item.source === "neuro_treino"))
-      .sort((a, b) => {
+      .filter((item: any) => !(age >= 8 && item.source === "neuro_treino"))
+      .sort((a: any, b: any) => {
         const overdueA = dayKey(a.week, a.day) < currentKey ? 0 : 1;
         const overdueB = dayKey(b.week, b.day) < currentKey ? 0 : 1;
         return overdueA - overdueB

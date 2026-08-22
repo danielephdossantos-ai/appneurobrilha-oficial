@@ -1,8 +1,8 @@
 import { supabase } from "@/database/supabase/client";
 import type { LearningPlanType } from "./types";
 
-const PLANS = "learning_plans" as any;
-const ITEMS = "learning_plan_items" as any;
+const PLANS = "learning_plans";
+const ITEMS = "learning_plan_items";
 
 type MirrorBase = {
   childId: string;
@@ -47,14 +47,14 @@ export async function mirrorLegacyPlan(input: MirrorBase): Promise<string> {
     .in("status", ["draft", "active", "paused", "needs_review"])
     .maybeSingle();
 
-  if (existing?.id) {
+  if (existing) {
     // Preserva histórico do ciclo anterior. O plano aberto deixa de competir
     // com o novo, mas seus itens/conclusões continuam disponíveis para relatório.
     await supabase.from(PLANS).update({
       status: "cancelled",
       updated_at: new Date().toISOString(),
       generation_reason: `Substituído por nova geração a partir de ${input.legacySource}`,
-    } as any).eq("id", existing.id);
+    }).eq("id", (existing as any).id);
   }
 
   const now = new Date();
@@ -79,13 +79,14 @@ export async function mirrorLegacyPlan(input: MirrorBase): Promise<string> {
       profile_snapshot: (input.profileSnapshot ?? null) as any,
       rules_version: "premium-v1",
       content_map_version: "premium-v1",
-    } as any)
+    })
     .select("id")
     .single();
-  if (error || !plan?.id) throw error ?? new Error("Falha ao criar espelho Premium do plano.");
+    
+  if (error || !plan) throw error ?? new Error("Falha ao criar espelho Premium do plano.");
 
   const rows = input.items.map((item) => ({
-    plan_id: plan.id,
+    plan_id: (plan as any).id,
     child_id: input.childId,
     week: item.week,
     day: item.day,
@@ -106,20 +107,20 @@ export async function mirrorLegacyPlan(input: MirrorBase): Promise<string> {
   }));
 
   for (let i = 0; i < rows.length; i += 500) {
-    const { error: itemError } = await supabase.from(ITEMS).insert(rows.slice(i, i + 500) as any);
+    const { error: itemError } = await supabase.from(ITEMS).insert(rows.slice(i, i + 500));
     if (itemError) {
-      await supabase.from(PLANS).delete().eq("id", plan.id);
+      await supabase.from(PLANS).delete().eq("id", (plan as any).id);
       throw itemError;
     }
   }
-  return plan.id;
+  return (plan as any).id;
 }
 
 export async function syncPremiumCompletion(legacySource: string, legacyItemId: string, completed: boolean) {
   const completedAt = completed ? new Date().toISOString() : null;
   const { data, error } = await supabase
     .from(ITEMS)
-    .update({ status: completed ? "completed" : "available", completed_at: completedAt } as any)
+    .update({ status: completed ? "completed" : "available", completed_at: completedAt })
     .eq("legacy_source", legacySource)
     .eq("legacy_item_id", legacyItemId)
     .select("plan_id");
@@ -137,7 +138,7 @@ export async function finalizePremiumPlanIfDone(planId: string) {
   if ((remaining ?? 0) > 0) return false;
   await supabase
     .from(PLANS)
-    .update({ status: "completed", completed_at: new Date().toISOString(), updated_at: new Date().toISOString() } as any)
+    .update({ status: "completed", completed_at: new Date().toISOString(), updated_at: new Date().toISOString() })
     .eq("id", planId);
   return true;
 }
