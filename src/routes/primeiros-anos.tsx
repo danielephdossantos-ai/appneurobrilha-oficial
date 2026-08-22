@@ -212,6 +212,14 @@ function PrimeirosAnosPage() {
             )}
           </Card>
 
+          {pct === 100 && progresso.total > 0 && (
+            <Card className="border-2 border-emerald-500/40 bg-emerald-500/10 text-center">
+              <div className="text-3xl mb-2">🏁</div>
+              <h2 className="text-xl font-black">Ciclo de alfabetização concluído</h2>
+              <p className="text-sm text-muted-foreground">Todas as aulas planejadas deste ciclo foram concluídas. O próximo passo é revisar o progresso antes de iniciar um novo ciclo.</p>
+            </Card>
+          )}
+
           {/* A RotinaDiaria agora está integrada na jornada visual da TrilhaPlanoVisual para uma experiência contínua */}
 
 

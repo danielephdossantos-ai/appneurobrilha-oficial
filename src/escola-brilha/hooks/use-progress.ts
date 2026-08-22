@@ -1,54 +1,67 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useAppState } from '@/core/store';
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (childId: string, slug: string) => `eb.v4.progresso.${childId}.${slug}`;
 
+/**
+ * Progresso local/online sempre escopado por criança.
+ * O localStorage é apenas cache de interface; a separação por child_id evita
+ * que irmãos no mesmo dispositivo herdem aulas concluídas entre si.
+ */
 export function useProgressSync(cursoSlug: string) {
+  const { activeChild } = useAppState();
+  const childId = activeChild?.id ?? null;
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     async function loadProgress() {
-      const local = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-      if (local) {
-        setConcluidas(new Set(JSON.parse(local)));
+      setLoading(true);
+      if (!childId) {
+        setConcluidas(new Set());
+        setLoading(false);
+        return;
       }
+      const local = localStorage.getItem(CHAVE_PROGRESSO(childId, cursoSlug));
+      const localIds = local ? new Set<string>(JSON.parse(local)) : new Set<string>();
 
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        const { data, error } = await supabase
-          .from('activity_results')
-          .select('activity_id')
-          .eq('completion_data->>curso_slug', cursoSlug);
+      const { data, error } = await supabase
+        .from('activity_results')
+        .select('activity_id')
+        .eq('child_id', childId)
+        .eq('completion_data->>curso_slug', cursoSlug);
 
-        if (data && !error) {
-          const ids = new Set(data.map(d => d.activity_id).filter(Boolean) as string[]);
-          setConcluidas(prev => new Set([...Array.from(prev), ...Array.from(ids)]));
-        }
+      if (cancelled) return;
+      if (!error && data) {
+        const remoteIds = data.map(d => d.activity_id).filter(Boolean) as string[];
+        setConcluidas(new Set([...Array.from(localIds), ...remoteIds]));
+      } else {
+        setConcluidas(localIds);
       }
       setLoading(false);
     }
-    loadProgress();
-  }, [cursoSlug]);
+    void loadProgress();
+    return () => { cancelled = true; };
+  }, [cursoSlug, childId]);
 
   const marcarConcluida = async (aulaSlug: string) => {
+    if (!childId) throw new Error('Selecione a criança antes de registrar o progresso.');
     const novas = new Set(concluidas);
     novas.add(aulaSlug);
     setConcluidas(novas);
-
-    localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(Array.from(novas)));
+    localStorage.setItem(CHAVE_PROGRESSO(childId, cursoSlug), JSON.stringify(Array.from(novas)));
 
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
-      // Nota: activity_results usa child_id e activity_id. 
-      // Em uma implementação real, precisaríamos do child_id. 
-      // Por enquanto, marcamos como um log genérico se houver sessão.
-      await supabase.from('activity_results').upsert({
+      await supabase.from('activity_results').insert({
+        child_id: childId,
         activity_id: aulaSlug,
         completion_data: { curso_slug: cursoSlug, completed: true },
         score: 100,
-        time_spent_seconds: 0
-      });
+        time_spent_seconds: 0,
+      } as any);
     }
   };
 

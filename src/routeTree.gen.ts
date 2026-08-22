@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as ApoioEscolarRouteImport } from './routes/apoio-escolar'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
@@ -120,6 +121,11 @@ const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApoioEscolarRoute = ApoioEscolarRouteImport.update({
+  id: '/apoio-escolar',
+  path: '/apoio-escolar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
@@ -574,6 +580,7 @@ export interface FileRoutesByFullPath {
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
+  '/apoio-escolar': typeof ApoioEscolarRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
@@ -662,6 +669,7 @@ export interface FileRoutesByTo {
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
+  '/apoio-escolar': typeof ApoioEscolarRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
@@ -752,6 +760,7 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
+  '/apoio-escolar': typeof ApoioEscolarRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
@@ -843,6 +852,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
+    | '/apoio-escolar'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
@@ -931,6 +941,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
+    | '/apoio-escolar'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
@@ -1020,6 +1031,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
+    | '/apoio-escolar'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
@@ -1110,6 +1122,7 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  ApoioEscolarRoute: typeof ApoioEscolarRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BancoMidiasRoute: typeof BancoMidiasRoute
@@ -1219,6 +1232,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics'
       preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apoio-escolar': {
+      id: '/apoio-escolar'
+      path: '/apoio-escolar'
+      fullPath: '/apoio-escolar'
+      preLoaderRoute: typeof ApoioEscolarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auditoria-pedagogica': {
@@ -1863,6 +1883,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
+  ApoioEscolarRoute: ApoioEscolarRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BancoMidiasRoute: BancoMidiasRoute,

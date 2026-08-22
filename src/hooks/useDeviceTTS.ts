@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { normalizarFala } from "@/lib/normalizador-fala";
 
 /**
  * Hook para usar o TTS nativo do dispositivo (Android/iOS/Desktop) via Web Speech API.
@@ -38,7 +39,9 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
       runRef.current = runId;
       synth.cancel();
       // Chunking: Chrome trunca utterances > ~200 chars / 15s. Quebrar em frases.
-      const clean = text.replace(/\s+/g, " ").trim();
+      const isPt = (opts?.lang || defaultLang).toLowerCase().startsWith("pt");
+      const prepared = isPt ? normalizarFala(text) : text;
+      const clean = prepared.replace(/\s+/g, " ").trim();
       const max = 160;
       const chunks: string[] = [];
       if (clean.length <= max) {

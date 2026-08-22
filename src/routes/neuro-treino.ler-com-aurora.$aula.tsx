@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
 import { marcarMissaoConcluida } from "@/escola-brilha/curso-ler-com-aurora/progresso";
 import { useAppState } from "@/core/store";
@@ -47,6 +49,7 @@ export const Route = createFileRoute("/neuro-treino/ler-com-aurora/$aula")({
 function AulaLerComAuroraRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack, context: navContext } = useBackNavigation();
 
   const aulaF8 = getAulaLerComAuroraFase8(aulaSlug);
   const aulaF7 = aulaF8 ? undefined : getAulaLerComAuroraFase7(aulaSlug);
@@ -96,13 +99,16 @@ function AulaLerComAuroraRoute() {
       curso={curso}
       aula={aula}
       voltarPara="/neuro-treino/ler-com-aurora"
-      onConcluir={() => {
+      onConcluir={async () => {
         void marcarMissaoConcluida({
           childId: activeChild?.id ?? null,
           slug: aulaSlug,
           fase,
         });
-        navigate({ to: "/neuro-treino/ler-com-aurora" });
+        await completePlanItem(navContext);
+        const nextRoute = advancePlanFlow(navContext);
+        if (nextRoute) { navigate({ to: nextRoute }); return; }
+        if (!handleBack(navigate)) navigate({ to: "/neuro-treino/ler-com-aurora" });
       }}
     />
   );

@@ -6,12 +6,12 @@ const KEY = (childId: string) => `neurobrilha:mascotStage:${childId}`;
 const EVT = "neurobrilha:mascotStage";
 
 export function getMascotStage(childId: string | null | undefined): MascotStage {
-  if (!childId || typeof window === "undefined") return "crianca";
+  if (!childId || typeof window === "undefined") return "ovo";
   try {
     const v = localStorage.getItem(KEY(childId));
     if (v === "ovo" || v === "nascendo" || v === "bebe" || v === "crianca") return v;
   } catch {}
-  return "crianca";
+  return "ovo";
 }
 
 export function setMascotStage(childId: string, stage: MascotStage) {
@@ -33,6 +33,6 @@ export function useMascotStage(childId: string | null | undefined): MascotStage 
       };
     },
     () => getMascotStage(childId),
-    () => "crianca" as MascotStage,
+    () => "ovo" as MascotStage,
   );
 }

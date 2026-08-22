@@ -62,21 +62,17 @@ function ResultadoRoute() {
   const gruposApoio = mostrarNeuro ? agruparPorGrupo(atividadesTerapeuticas) : [];
   const curso = gerarCursoRecomendado(responses);
 
-  // Plano Anual salvo pra essa criança (gerado ao finalizar a anamnese).
+  // Planos Premium aplicáveis a esta criança.
   const planoQ = useQuery({
-    queryKey: ["plano_anual", childId],
+    queryKey: ["learning_plans", childId],
     queryFn: async () => {
-      const { data: plano } = await supabase
-        .from("plano_anual")
-        .select("id, minutos_por_dia, dias_por_semana, semanas_totais, serie")
+      const { data, error } = await supabase
+        .from("learning_plans" as any)
+        .select("id,plan_type,status,weeks_total,minutes_per_day,days_per_week")
         .eq("child_id", childId)
-        .maybeSingle();
-      if (!plano) return null;
-      const { count } = await supabase
-        .from("plano_anual_itens")
-        .select("id", { count: "exact", head: true })
-        .eq("plano_id", plano.id);
-      return { ...plano, total_blocos: count ?? 0 };
+        .in("status", ["active", "needs_review", "completed"]);
+      if (error) throw error;
+      return (data as any[]) ?? [];
     },
     enabled: !!childId,
   });
@@ -201,12 +197,12 @@ function ResultadoRoute() {
           </Card>
         )}
 
-        {/* Atividades terapêuticas prioritárias (Neuro Treino) */}
+        {/* Atividades de apoio prioritárias (Neuro Treino) */}
         {atividadesTerapeuticas.length > 0 && (
           <Card className="p-4">
             <div className="flex items-center gap-2 mb-3">
               <Brain className="h-5 w-5 text-purple-600" />
-              <h2 className="font-bold">Atividades terapêuticas recomendadas</h2>
+              <h2 className="font-bold">Atividades de apoio recomendadas</h2>
             </div>
             <p className="text-xs text-muted-foreground mb-3">
               Do módulo Neuro Treino — priorizadas pelo perfil da criança.
@@ -288,34 +284,13 @@ function ResultadoRoute() {
             ))}
           </div>
         </Card>
-
-        {/* Plano Anual gerado */}
-        {planoQ.data && (
-          <Card className="p-4 border-2 border-primary/40 bg-primary/5">
-            <div className="flex items-center gap-2 mb-2">
-              <CalendarDays className="h-5 w-5 text-primary" />
-              <h2 className="font-bold">Plano Anual de {childName}</h2>
-            </div>
-            <p className="text-sm text-muted-foreground mb-3">
-              Rotina guiada gerada a partir da anamnese, unindo <b>Escola Brilha</b>, <b>Neuro Treino</b> e <b>Brilha Vida</b>.
-            </p>
-            <div className="grid grid-cols-3 gap-2 text-center mb-3">
-              <div className="p-2 rounded-lg bg-background border">
-                <p className="text-xl font-bold text-primary">{planoQ.data.semanas_totais}</p>
-                <p className="text-[10px] text-muted-foreground">semanas</p>
-              </div>
-              <div className="p-2 rounded-lg bg-background border">
-                <p className="text-xl font-bold text-primary">{planoQ.data.dias_por_semana}×</p>
-                <p className="text-[10px] text-muted-foreground">por semana</p>
-              </div>
-              <div className="p-2 rounded-lg bg-background border">
-                <p className="text-xl font-bold text-primary">{planoQ.data.minutos_por_dia}min</p>
-                <p className="text-[10px] text-muted-foreground">por dia</p>
-              </div>
-            </div>
-            <Button asChild className="w-full">
-              <Link to="/plano-anual">Ver plano completo</Link>
-            </Button>
+        {/* Planos Premium organizados pelo sistema */}
+        {!!planoQ.data?.length && (
+          <Card className="p-4 border-2 border-primary/30 bg-primary/5">
+            <div className="flex items-center gap-2 mb-2"><CalendarDays className="h-5 w-5 text-primary"/><h2 className="font-bold">Planos de aprendizagem de {childName}</h2></div>
+            <p className="text-sm text-muted-foreground mb-3">O NeuroBrilha organizou os planos aplicáveis ao perfil, à idade e à série. A Rotina mostra somente o que deve ser feito agora.</p>
+            <div className="flex flex-wrap gap-2 mb-3">{planoQ.data.map((p:any)=><span key={p.id} className="rounded-full border bg-background px-3 py-1 text-xs font-bold">{p.plan_type === "literacy" ? "Alfabetização" : p.plan_type === "school" ? "Escolar" : "Apoio"} · {p.status === "completed" ? "concluído" : "ativo"}</span>)}</div>
+            <Button asChild className="w-full"><Link to="/rotina">Ver atividades de hoje</Link></Button>
           </Card>
         )}
 

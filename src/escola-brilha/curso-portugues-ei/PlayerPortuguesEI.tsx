@@ -2565,7 +2565,7 @@ function LeituraEcoBloco({
       });
       if (runToken !== karaokeRunRef.current) return;
       await new Promise<void>((resolve) => {
-        const u = new SpeechSynthesisUtterance(linhaAtual);
+        const u = new SpeechSynthesisUtterance(sanitizeForSpeech(linhaAtual));
         u.lang = "pt-BR";
         u.rate = 0.9;
         u.pitch = term === "?" ? 1.25 : term === "!" ? 1.15 : 1.0;

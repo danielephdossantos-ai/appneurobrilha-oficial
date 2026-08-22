@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { PlayerPortuguesEI } from "@/escola-brilha/curso-portugues-ei/PlayerPortuguesEI";
 import {
   cursoContarComPipFase1,
@@ -43,6 +45,7 @@ export const Route = createFileRoute("/escola-brilha/contar-com-pip/$aula")({
 function AulaContarComPipRoute() {
   const { aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack, context: navContext } = useBackNavigation();
   const { activeChild } = useAppState();
 
   const aulaF1 = getAulaContarComPipFase1(aulaSlug);
@@ -91,12 +94,15 @@ function AulaContarComPipRoute() {
       curso={curso}
       aula={aula}
       voltarPara="/escola-brilha/contar-com-pip"
-      onConcluir={() => {
+      onConcluir={async () => {
         marcarMissaoPipConcluida({
           childId: activeChild?.id ?? null,
           slug: aulaSlug,
         });
-        navigate({ to: "/escola-brilha/contar-com-pip" });
+        await completePlanItem(navContext);
+        const nextRoute = advancePlanFlow(navContext);
+        if (nextRoute) { navigate({ to: nextRoute }); return; }
+        if (!handleBack(navigate)) navigate({ to: "/escola-brilha/contar-com-pip" });
       }}
     />
   );

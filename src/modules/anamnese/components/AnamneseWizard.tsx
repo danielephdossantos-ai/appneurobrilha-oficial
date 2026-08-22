@@ -23,12 +23,18 @@ import {
   Step15,
   Step16,
 } from "../steps";
-import { ACTIVE_STEPS, STEP_TITLES, nextActiveStep, prevActiveStep } from "../v2/types";
+import { ACTIVE_STEPS, STEP_TITLES } from "../v2/types";
 import { toast } from "sonner";
 
 export function AnamneseWizard({ childId }: { childId: string }) {
   const nav = useNavigate();
   const a = useAnamneseV2(childId);
+
+  const idade = Number((a.responses.step1 as any)?.idade);
+  const steps = Number.isFinite(idade) && idade >= 9
+    ? ACTIVE_STEPS.filter((n) => ![2, 3, 14].includes(n))
+    : ACTIVE_STEPS;
+  const stepIndex = Math.max(0, steps.indexOf(a.currentStep));
 
   if (a.isLoading) {
     return (
@@ -54,7 +60,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
       case 5:
         return <Step5 value={r.step5 ?? {}} onChange={(p) => a.updateStep("step5", p)} />;
       case 6:
-        return <Step6 value={r.step6 ?? {}} onChange={(p) => a.updateStep("step6", p)} />;
+        return <Step6 value={r.step6 ?? {}} idade={idade} onChange={(p) => a.updateStep("step6", p)} />;
       case 7:
         return <Step7 value={r.step7 ?? {}} onChange={(p) => a.updateStep("step7", p)} />;
       case 8:
@@ -80,20 +86,20 @@ export function AnamneseWizard({ childId }: { childId: string }) {
     }
   };
 
-  const isLast = step === ACTIVE_STEPS[ACTIVE_STEPS.length - 1];
-  const isFirst = step === ACTIVE_STEPS[0];
+  const isLast = step === steps[steps.length - 1];
+  const isFirst = step === steps[0];
 
   const handleNext = async () => {
     if (isLast) {
       try {
         await a.finish();
-        toast.success("Anamnese concluída! Relatório gerado.");
+        toast.success("Perfil de aprendizagem atualizado!");
         nav({ to: "/anamnese/$childId/resultado", params: { childId } });
       } catch (e: any) {
         toast.error(e?.message ?? "Erro ao salvar");
       }
     } else {
-      const next = nextActiveStep(step) ?? step;
+      const next = steps[Math.min(stepIndex + 1, steps.length - 1)] ?? step;
       a.goTo(next);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -101,7 +107,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
 
   const handleBack = () => {
     if (!isFirst) {
-      const prev = prevActiveStep(step) ?? step;
+      const prev = steps[Math.max(0, stepIndex - 1)] ?? step;
       a.goTo(prev);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -110,7 +116,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
   return (
     <div className="max-w-2xl mx-auto p-3 md:p-6 space-y-4">
       <DisclaimerBanner />
-      <StepIndicator current={step} />
+      <StepIndicator current={step} steps={steps} />
 
       <Card className="p-4 md:p-6">
         <h2 className="text-lg md:text-xl font-bold mb-4">{STEP_TITLES[step]}</h2>
@@ -121,7 +127,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
         <Button variant="outline" size="sm" onClick={handleBack} disabled={isFirst}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Voltar
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => nav({ to: "/" })}>
+        <Button variant="ghost" size="sm" onClick={() => nav({ to: "/painel-pais" })}>
           <Save className="h-4 w-4 mr-1" /> Continuar depois
         </Button>
         <Button size="sm" onClick={handleNext}>

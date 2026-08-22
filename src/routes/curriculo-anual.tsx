@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
@@ -38,6 +38,8 @@ import {
 import { garantirPlanoSeNecessario } from "@/modules/primeiros-anos/persist";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 
+import { useNavigationStore } from "@/lib/navigation-context";
+
 
 export const Route = createFileRoute("/curriculo-anual")({
   head: () => ({
@@ -61,6 +63,8 @@ export const Route = createFileRoute("/curriculo-anual")({
 });
 
 function CurriculoAnualPage() {
+  const navigate = useNavigate();
+  const setNavContext = useNavigationStore((st) => st.setContext);
   const { activeChild } = useAppState();
   const childId = activeChild?.id ?? null;
   const serieNum = serieParaNumero(activeChild?.serie);
@@ -306,6 +310,14 @@ function CurriculoAnualPage() {
             </div>
           </Card>
 
+          {pct === 100 && progresso.total > 0 && (
+            <Card className="border-2 border-emerald-500/40 bg-emerald-500/10 text-center">
+              <div className="text-3xl mb-2">🏁</div>
+              <h2 className="text-xl font-black">Plano escolar concluído</h2>
+              <p className="text-sm text-muted-foreground">Todas as aulas planejadas deste ciclo foram concluídas. O histórico permanece disponível para os responsáveis.</p>
+            </Card>
+          )}
+
           {/* Semestres + semanas */}
           <div className="flex gap-2">
             {([1, 2] as const).map((s) => (
@@ -378,14 +390,32 @@ function CurriculoAnualPage() {
                               <Circle className="h-6 w-6 text-muted-foreground" />
                             )}
                           </button>
-                          <Link to={item.rota} className="flex-1 min-w-0">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setNavContext({
+                                originRoute: "/curriculo-anual",
+                                originModule: "escola-brilha",
+                                returnPath: "/curriculo-anual",
+                                isPlanFlow: true,
+                                planType: "school",
+                                lessonId: item.id,
+                                week: semana,
+                                day: dia,
+                                position: item.ordem,
+                                timestamp: Date.now(),
+                              });
+                              navigate({ to: item.rota });
+                            }}
+                            className="flex-1 min-w-0 text-left"
+                          >
                             <div className="text-[11px] font-black uppercase tracking-wider text-primary flex items-center gap-1">
                               <GraduationCap className="h-3.5 w-3.5" />
                               {item.disciplina}
                               {item.prioridade === 1 && " · reforço"}
                             </div>
                             <div className="font-bold break-words">{item.titulo}</div>
-                          </Link>
+                          </button>
                           <Pill>{item.minutos} min</Pill>
                         </Card>
                       ))}

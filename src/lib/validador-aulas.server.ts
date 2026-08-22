@@ -67,7 +67,7 @@ export async function validarAulaIA(
   const parsed = AULA_SCHEMA.safeParse(aulaContent);
   if (!parsed.success) {
     motivos.push("JSON inválido ou campos obrigatórios ausentes: " + parsed.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', '));
-    return { status: 'rejected', motivos, data: now, versao: "1.1", modelo: context.modelo };
+    return { status: 'rejected', motivos, data: now, versao: "1.2", modelo: context.modelo };
   }
 
   const aula = parsed.data;
@@ -103,6 +103,36 @@ export async function validarAulaIA(
     motivos.push("Aula sem atividades práticas (Atividade Guiada/Independente/Avaliação).");
   }
 
+  // 6.1 Ensino deve vir ANTES da cobrança. Uma aula educacional não pode ser só quiz.
+  const tiposEnsino = /explica|ensino|introdu|model|exemplo|descoberta|conceito/i;
+  const indiceEnsino = aula.capitulos.findIndex(c => tiposEnsino.test(c.tipo) && c.conteudo.trim().length >= 30);
+  const indicePrimeiraAtividade = aula.capitulos.findIndex(c => !!c.atividade || !!(c.questoes && c.questoes.length));
+  if (indiceEnsino < 0) {
+    motivos.push("Aula sem etapa explícita de ensino/explicação antes da prática.");
+  } else if (indicePrimeiraAtividade >= 0 && indiceEnsino > indicePrimeiraAtividade) {
+    motivos.push("Aula cobra atividade antes de apresentar ensino/explicação.");
+  }
+
+  // 6.2 Verificação determinística de contas literais simples.
+  // Para evitar falso positivo em expressões compostas, só valida uma linha/capítulo
+  // quando o conteúdo inteiro é uma igualdade aritmética simples.
+  const linhasMat = aula.capitulos.flatMap(c => c.conteudo.split(/\n+/).map(l => l.trim()).filter(Boolean));
+  const contaInteiraRe = /^(-?\d+(?:[.,]\d+)?)\s*([+×*÷])\s*(-?\d+(?:[.,]\d+)?)\s*=\s*(-?\d+(?:[.,]\d+)?)\s*[.!]?$/;
+  for (const linha of linhasMat) {
+    const m = linha.match(contaInteiraRe);
+    if (!m) continue;
+    const a = Number(m[1].replace(",", "."));
+    const b = Number(m[3].replace(",", "."));
+    const informado = Number(m[4].replace(",", "."));
+    let esperado: number | null = null;
+    if (m[2] === "+") esperado = a + b;
+    else if (["×", "*"].includes(m[2])) esperado = a * b;
+    else if (m[2] === "÷" && b !== 0) esperado = a / b;
+    if (esperado !== null && Math.abs(esperado - informado) > 1e-9) {
+      motivos.push(`Erro matemático objetivo detectado: ${linha} (resultado esperado: ${esperado}).`);
+    }
+  }
+
   // 7. Filtro de Linguagem e Segurança (Neuroeducação)
   const textoCompleto = JSON.stringify(aula).toLowerCase();
   
@@ -117,7 +147,7 @@ export async function validarAulaIA(
   for (const termo of termosProibidos) {
     if (textoCompleto.includes(termo)) {
       motivos.push(`Conteúdo inadequado: presença do termo '${termo}'.`);
-      return { status: 'rejected', motivos, data: now, versao: "1.1", modelo: context.modelo };
+      return { status: 'rejected', motivos, data: now, versao: "1.2", modelo: context.modelo };
     }
   }
 
@@ -140,7 +170,7 @@ export async function validarAulaIA(
   if (motivos.length > 0) {
     // Se tiver erros críticos (Emoji ou Estrutura) vai para rejeição ou correção
     const temEmoji = motivos.some(m => m.includes("emojis"));
-    const temErroGrave = motivos.some(m => m.includes("JSON inválido") || m.includes("inadequado"));
+    const temErroGrave = motivos.some(m => m.includes("JSON inválido") || m.includes("inadequado") || m.includes("Erro matemático objetivo"));
     
     if (temErroGrave) status = 'rejected';
     else status = 'correction_required';
@@ -150,7 +180,7 @@ export async function validarAulaIA(
     status,
     motivos,
     data: now,
-    versao: "1.1",
+    versao: "1.2",
     modelo: context.modelo
   };
 }

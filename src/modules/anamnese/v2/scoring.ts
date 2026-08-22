@@ -88,7 +88,6 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
   // COMPORTAMENTAL: hiperatividade + repetitivos
   const h = r.step8 ?? {};
   const rep = r.step10 ?? {};
-  const fam = r.step5 ?? {};
   const comportamentalMean = avg([
     L(h.levanta_constantemente),
     L(h.corre_excessivamente),
@@ -100,8 +99,6 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     L(rep.interesses_restritos),
     L(rep.resistencia_mudancas),
     L(rep.rotinas_rigidas),
-    yesRisk(fam.tdah),
-    yesRisk(fam.tea),
   ]);
 
   // SOCIOEMOCIONAL: comunicação social (invertida) + emocional
@@ -202,10 +199,10 @@ export function computeRiskMap(scores: PerfilScores): RiskMap {
 }
 
 export const RISK_LABEL: Record<RiskLevel, string> = {
-  verde: "Desenvolvimento dentro do esperado",
-  amarelo: "Sinais leves — recomenda-se monitoramento",
-  laranja: "Indicadores que sugerem avaliação especializada",
-  vermelho: "Indicadores significativos — encaminhamento prioritário",
+  verde: "Sem necessidade adicional indicada nas respostas",
+  amarelo: "Pode se beneficiar de acompanhamento e revisão",
+  laranja: "Pode precisar de apoio mais frequente",
+  vermelho: "Há vários sinais que merecem atenção e acompanhamento",
 };
 
 export const RISK_COLOR: Record<RiskLevel, string> = {

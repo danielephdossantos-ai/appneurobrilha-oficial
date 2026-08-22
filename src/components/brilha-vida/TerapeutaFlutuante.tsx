@@ -12,8 +12,8 @@ interface Props {
 }
 
 /**
- * Terapeuta IA flutuante — disponível em todas as telas do Brilha Vida.
- * Conversa direta com a criança + voz auxiliar.
+ * Guia de apoio flutuante — disponível nas telas do Brilha Vida.
+ * Oferece escuta breve e estratégias educativas de autorregulação; não realiza terapia.
  */
 export function TerapeutaFlutuante({ contexto }: Props) {
   const { activeChild } = useAppState();
@@ -30,7 +30,7 @@ export function TerapeutaFlutuante({ contexto }: Props) {
     if (open && msgs.length === 0) {
       const nome = activeChild?.nome ? `, ${activeChild.nome}` : "";
       const ctx = contexto ? ` Vi que você está em ${contexto}.` : "";
-      const oi = `Oi${nome}! Eu sou sua terapeuta amiga.${ctx} Conta pra mim como você está se sentindo agora?`;
+      const oi = `Oi${nome}! Eu sou seu guia de apoio.${ctx} Conta pra mim como você está se sentindo agora?`;
       setMsgs([{ role: "ai", t: oi }]);
       if (voiceOn) speak(oi);
     }
@@ -54,11 +54,11 @@ export function TerapeutaFlutuante({ contexto }: Props) {
     stop();
 
     try {
-      const prefacio = `[VOCÊ ESTÁ FALANDO DIRETAMENTE COM A CRIANÇA — ${activeChild.nome ?? "criança"}, ${activeChild.idade ?? "?"} anos${contexto ? `, durante a atividade ${contexto}` : ""}. Use frases muito curtas, linguagem simples e acolhedora, como uma terapeuta infantil falando ao vivo. Quando usar números isolados como 3, escreva por extenso ("três") na resposta se for parte da instrução, para garantir a leitura correta. Máximo 2 frases por resposta. Sem listas. Sem markdown.]\n\nA criança disse: "${pergunta}"`;
+      const prefacio = `[VOCÊ ESTÁ FALANDO DIRETAMENTE COM A CRIANÇA — ${activeChild.nome ?? "criança"}, ${activeChild.idade ?? "?"} anos${contexto ? `, durante a atividade ${contexto}` : ""}. Use frases muito curtas, linguagem simples e acolhedora, como um guia educativo acolhedor falando com a criança. Não diagnostique, não faça terapia e não use rótulos clínicos. Quando usar números isolados como 3, escreva por extenso ("três") na resposta se for parte da instrução, para garantir a leitura correta. Máximo 2 frases por resposta. Sem listas. Sem markdown.]\n\nA criança disse: "${pergunta}"`;
 
       const resposta = await callNeuroBrilhaAI({
         data: {
-          mode: "terapeuta",
+          mode: "apoio",
           child: activeChild as any,
           mascot: null,
           message: prefacio,
@@ -73,7 +73,7 @@ export function TerapeutaFlutuante({ contexto }: Props) {
       setMsgs([...novos, { role: "ai", t: texto }]);
       if (voiceOn) speak(texto);
     } catch (e) {
-      console.error("[Terapeuta] erro:", e);
+      console.error("[GuiaApoio] erro:", e);
       const fallback = "Estou aqui com você. Respira fundo: inspira pelo nariz… e solta devagar pela boca.";
       setMsgs([...novos, { role: "ai", t: fallback }]);
       if (voiceOn) speak(fallback);
@@ -98,7 +98,7 @@ export function TerapeutaFlutuante({ contexto }: Props) {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.94 }}
         onClick={() => setOpen(true)}
-        aria-label="Falar com a terapeuta"
+        aria-label="Falar com o guia de apoio"
         className="fixed bottom-6 right-6 z-[90] flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 text-white shadow-2xl font-black border-4 border-white"
       >
         <motion.span
@@ -134,7 +134,7 @@ export function TerapeutaFlutuante({ contexto }: Props) {
                     💗
                   </div>
                   <div>
-                    <h3 className="font-black leading-tight">Terapeuta Amiga</h3>
+                    <h3 className="font-black leading-tight">Guia de Apoio</h3>
                     <p className="text-xs opacity-90">Estou aqui pra te ouvir</p>
                   </div>
                 </div>

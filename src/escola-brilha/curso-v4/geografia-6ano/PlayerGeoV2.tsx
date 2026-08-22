@@ -35,7 +35,7 @@ import type { UnidadeFund2, EtapaTeorica } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
 import { QuizRelampago } from "./QuizRelampago";
 import { MiniJogoCategorizar } from "./MiniJogoCategorizar";
-import { speakChunked, stopSpeaking, normalizeLiteracyTextForSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 
 type Momento = {
@@ -413,7 +413,7 @@ export function PlayerGeoV2({
         clone
           .querySelectorAll('button, [role="button"], input, select, textarea')
           .forEach((el) => el.remove());
-        fala = normalizeLiteracyTextForSpeech((clone.textContent || "").replace(/\s+/g, " ").trim());
+        fala = (clone.textContent || "").replace(/\s+/g, " ").trim();
       }
     }
     if (!fala) return;

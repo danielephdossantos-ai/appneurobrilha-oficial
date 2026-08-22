@@ -6,6 +6,7 @@ import {
   type AulaPlano,
   type PlanoPrimeirosAnos,
 } from "./builder";
+import { mirrorLegacyPlan, syncPremiumCompletion } from "@/modules/learning-plans/mirror";
 
 const T_PLANO = "primeiros_anos_plano" as any;
 const T_ITENS = "primeiros_anos_itens" as any;
@@ -76,6 +77,7 @@ export async function marcarItem(itemId: string, concluido: boolean): Promise<vo
     .from(T_ITENS)
     .update({ concluido, concluido_em: concluido ? new Date().toISOString() : null } as any)
     .eq("id", itemId);
+  await syncPremiumCompletion("primeiros_anos_itens", itemId, concluido);
 }
 
 export interface GerarInput {
@@ -136,6 +138,41 @@ export async function gerarESalvar(input: GerarInput): Promise<PlanoPrimeirosAno
     const { error: e } = await supabase.from(T_ITENS).insert(rows.slice(i, i + 500) as any);
     if (e) throw e;
   }
+
+  const { data: savedItems } = await supabase
+    .from(T_ITENS)
+    .select("*")
+    .eq("plano_id", (novo as any).id)
+    .order("semana")
+    .order("dia_semana")
+    .order("ordem");
+  await mirrorLegacyPlan({
+    childId: input.childId,
+    planType: "literacy",
+    legacyPlanId: (novo as any).id,
+    legacySource: "primeiros_anos_itens",
+    weeksTotal: plano.semanas_totais,
+    minutesPerDay: plano.minutos_por_dia,
+    daysPerWeek: plano.dias_por_semana,
+    stage: plano.etapa,
+    profileSnapshot: step6,
+    items: ((savedItems as any[]) ?? []).map((i) => ({
+      legacyItemId: i.id,
+      week: Number(i.semana),
+      day: Number(i.dia_semana),
+      sequenceOrder: Number(i.ordem),
+      itemRole: "teach",
+      source: String(i.trilha || "brilha_kids"),
+      sourceId: `${i.trilha}:${i.aula_slug}`,
+      title: i.titulo,
+      route: i.rota,
+      subject: "Alfabetização",
+      estimatedMinutes: Number(i.minutos ?? 10),
+      status: i.concluido ? "completed" : "available",
+      selectionReason: "Progressão de alfabetização por etapa e pré-requisitos",
+      metadata: { trilha: i.trilha, trilha_label: i.trilha_label, fase: i.fase, prioridade: i.prioridade },
+    })),
+  });
   return plano;
 }
 

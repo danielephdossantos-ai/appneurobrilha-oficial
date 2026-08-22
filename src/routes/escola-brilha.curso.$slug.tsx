@@ -33,7 +33,10 @@ export const Route = createFileRoute("/escola-brilha/curso/$slug")({
   ),
 });
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (slug: string) => {
+  const childId = typeof window !== "undefined" ? localStorage.getItem("neurobrilha:activeChildId") : null;
+  return `eb.v4.progresso.${childId || "sem-crianca"}.${slug}`;
+};
 
 function TrilhaCurso() {
   const { slug } = Route.useParams();

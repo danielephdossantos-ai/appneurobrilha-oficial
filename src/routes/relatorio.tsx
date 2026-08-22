@@ -35,6 +35,7 @@ import {
   Target,
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
+import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/relatorio")({
@@ -53,7 +54,7 @@ function RelatorioPremium() {
       if (!activeChild?.id) return;
 
       const [anamnesisRes, statsRes, masteryRes] = await Promise.all([
-        supabase.from("child_anamnesis").select("*").eq("child_id", activeChild.id).maybeSingle(),
+        supabase.from("anamnese_v2" as any).select("responses,scores").eq("child_id", activeChild.id).maybeSingle(),
         supabase.from("activity_logs").select("*").eq("child_id", activeChild.id).limit(20),
         supabase.from("child_skill_mastery").select("*").eq("child_id", activeChild.id),
       ]);
@@ -68,7 +69,8 @@ function RelatorioPremium() {
 
   const report = useMemo(() => {
     if (!activeChild || !anamnesis) return null;
-    return ReportGenerator.generate(anamnesis.internal_profile, activeChild.nome, dynamicStats);
+    const internal = AnamnesisProcessor.processV2(anamnesis.responses ?? {}, anamnesis.scores ?? {});
+    return ReportGenerator.generate(internal, activeChild.nome, dynamicStats);
   }, [activeChild, anamnesis, dynamicStats]);
 
   if (loading)

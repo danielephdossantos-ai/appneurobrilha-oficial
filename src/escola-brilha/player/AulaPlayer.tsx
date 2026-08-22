@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square, ChevronRight } from "lucide-react";
 import { PERSONAGENS } from "../mascotes-personagens";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 
 
 import { useNavigate } from "@tanstack/react-router";
@@ -222,7 +223,15 @@ export function AulaPlayer({
       estrelas,
     });
     if (activeChild?.id) {
-      await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
+      const reward = (aula as any).recompensa ?? {};
+      const moedas = Number(reward.moedas ?? 20);
+      const xpMascote = Number(reward.xp ?? Math.max(10, moedas));
+      await supabase.rpc("reward_child_journey" as any, {
+        p_child_id: activeChild.id,
+        p_coins: moedas,
+        p_mascot_xp: xpMascote,
+        p_affinity: 2,
+      });
       const desempenho = Math.round((acertos / total) * 100);
       await supabase.rpc("registrar_conclusao_aula", {
         _child_id: activeChild.id,
@@ -230,7 +239,8 @@ export function AulaPlayer({
         _desempenho: desempenho,
         _tipo: "aula",
       });
-      // Se vier de um plano, o onConcluir pode ajudar na navegação automática
+      // Sincroniza também o item que abriu esta aula no plano.
+      if (navContext?.isPlanFlow) await completePlanItem(navContext);
       onConcluir?.({ codigo: aula.codigo, desempenho });
     }
   };
@@ -247,7 +257,11 @@ export function AulaPlayer({
           Muito bem! Você terminou as atividades desta aula programada.
         </p>
         <button
-          onClick={() => handleBack(navigate)}
+          onClick={() => {
+            const nextRoute = advancePlanFlow(navContext);
+            if (nextRoute) navigate({ to: nextRoute });
+            else handleBack(navigate);
+          }}
           className="btn-tap px-8 py-4 rounded-3xl bg-[#FFC93C] text-[#0d1f55] font-black flex items-center gap-2"
         >
           Voltar para o Plano <ChevronRight className="w-5 h-5" />

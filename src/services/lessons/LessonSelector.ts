@@ -69,12 +69,12 @@ export const LessonSelector = {
   async forReforco(childId: string): Promise<ReforcoSelecao[]> {
     if (!childId) return [];
 
-    const [dificuldades, anamnese, provas, reforco] = await Promise.all([
+    const [dificuldades, provas, reforco] = await Promise.all([
       rowsToBnccList("child_skill_mastery", childId),
-      rowsToBnccList("child_anamnesis", childId),
       rowsToBnccList("exam_mission_contents", childId),
       rowsToBnccList("spaced_repetition_schedule", childId),
     ]);
+    const anamnese: string[] = []; // anamnese_v2 influencia prioridade via perfil/planos, não inventa códigos BNCC.
 
     const score = new Map<string, ReforcoSelecao>();
     const bump = (code: string, motivo: ReforcoMotivo, peso: number) => {

@@ -14,11 +14,17 @@ export interface NavigationContext {
   originCategory?: string;
   activityId?: string;
   sessionActivities?: string[]; // Slugs da sessão atual
+  sessionPlanItemIds?: string[]; // IDs legados dos itens do plano correspondentes à sessão
+  sessionPremiumItemIds?: string[]; // IDs canônicos do Plano Premium
+  sessionPlanTypes?: Array<"literacy" | "school" | "support">; // Tipo de cada item da fila
+  sessionRoutes?: string[]; // Rotas executáveis da fila diária Premium
   sessionIndex?: number;
   timestamp: number;
   
   // Novos campos para controle de planos (Requisito 9)
   planId?: string;
+  premiumItemId?: string;
+  planType?: "literacy" | "school" | "support";
   week?: number;
   day?: number;
   lessonId?: string;
@@ -57,7 +63,7 @@ export function useBackNavigation() {
     switch (module) {
       case "neuro-treino": return "/neuro-treino";
       case "escola-brilha": return "/escola-brilha";
-      case "reforco-brilha": return "/reforco-brilha";
+      case "reforco-brilha": return "/apoio-escolar";
       case "brilha-vida": return "/brilha-vida";
       case "alfabetizacao": return "/alfabetizacao";
       default: return "/";
@@ -65,6 +71,12 @@ export function useBackNavigation() {
   };
 
   const handleBack = (navigate: any) => {
+    // Contextos antigos não podem sequestrar uma navegação nova.
+    const expired = !!context?.timestamp && Date.now() - context.timestamp > 6 * 60 * 60 * 1000;
+    if (expired) {
+      clearContext();
+      return false;
+    }
     if (context?.returnPath) {
       navigate({ to: context.returnPath });
       clearContext();

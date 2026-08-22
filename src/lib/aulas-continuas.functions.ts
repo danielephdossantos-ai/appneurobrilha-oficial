@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { parseBNCC } from "@/escola-brilha/motor/resolver";
 import { validarAulaIA } from "./validador-aulas.server";
+import { chamarProfessorMentorIA } from "./ai-orchestrator.server";
+import { extrairJSON } from "./ai-json.server";
 
 /**
  * Módulo de Motor de Decisão de Conteúdo
@@ -34,13 +36,19 @@ export const decidirConteudoAula = createServerFn({ method: "POST" })
       };
     }
 
-    // 0. Buscar perfil e hiperfoco
-    const { data: profile } = await supabase
-      .from("children_profiles")
-      .select("*, anamnese_v2(*)")
+    // 0. Buscar a criança no cadastro canônico atual. A antiga children_profiles
+    // pertence à arquitetura legada e não usa os mesmos IDs do app atual.
+    const { data: child } = await supabase
+      .from("children")
+      .select("id,idade,serie,hiperfoco,niveis")
       .eq("id", data.childId)
       .maybeSingle();
-      
+    const { data: anam } = await supabase
+      .from("anamnese_v2" as any)
+      .select("scores,risk_levels")
+      .eq("child_id", data.childId)
+      .maybeSingle();
+    const profile = { ...(child as any), anamnese_v2: anam };
     const hiperfoco = extrairHiperfoco(profile);
 
     // 1. Tentar encontrar aula adequada (Série, Disciplina, BNCC, Nível, Hiperfoco)
@@ -165,6 +173,18 @@ async function registrarUsoBibliotecaIA(aulaId: string, childId: string) {
         ultima_utilizacao: new Date().toISOString()
       } as any)
       .eq("id", aulaId);
+
+    await supabase
+      .from("historico_uso_aulas" as any)
+      .upsert({ child_id: childId, aula_id: aulaId, usado_em: new Date().toISOString() } as any, {
+        onConflict: "child_id,aula_id",
+      });
+
+    await registrarLogDecisao(childId, {
+      aula_encontrada_id: aulaId,
+      decisao: "biblioteca_ia",
+      motivo: "Aula reutilizada da Biblioteca Pedagógica Viva",
+    }).catch(() => undefined);
   }
 }
 
@@ -183,16 +203,25 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
     objetivo: z.string().optional()
   }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase } = await import("@/integrations/supabase/client");
-    const { callGemini } = await import("./gemini.server");
-    
-    // 1. Buscar perfil neuro da criança para personalização
-    const { data: profile } = await supabase
-      .from("children_profiles" as any)
-      .select("*, anamnese_v2:anamnese_v2(*)")
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+
+    // 1. Buscar somente sinais pedagógicos necessários; diagnóstico não vira receita de aula.
+    const { data: child } = await supabase
+      .from("children")
+      .select("idade,serie,hiperfoco,niveis,tempo_atencao_min")
       .eq("id", data.childId)
       .maybeSingle();
-    
+    const { data: anam } = await supabase
+      .from("anamnese_v2")
+      .select("scores,risk_levels")
+      .eq("child_id", data.childId)
+      .maybeSingle();
+    const profile = { ...child, anamnese_v2: anam };
     const hiperfoco = extrairHiperfoco(profile);
 
     // 2. Preparar Prompt Estruturado (Instrução 5/8)
@@ -203,7 +232,7 @@ DADOS DO ALUNO:
 - Idade: ${data.idade} anos
 - Série: ${data.serie}
 - Nível: ${data.nivel} (1: Iniciante, 2: Prática, 3: Consolidação, 4: Maestria)
-- Perfil Neuro: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
+- Sinais pedagógicos agregados: ${JSON.stringify((profile as any)?.anamnese_v2 || "Padrão")}
 - HIPERFOCO/INTERESSE PRINCIPAL: ${hiperfoco || "Não especificado (use temas lúdicos universais como animais, espaço ou super-heróis)"}
 
 OBJETIVO PEDAGÓGICO:
@@ -242,24 +271,18 @@ ESTRUTURA DO JSON (DEVE SER VÁLIDO):
 
 Retorne APENAS o JSON.`;
 
-    // 3. Chamar Gemini através do helper centralizado
-    const text = await callGemini({
+    // 3. Motor canônico: Gemini -> Groq -> Lovable.
+    const ai = await chamarProfessorMentorIA({
+      label: "aulas-continuas",
+      json: true,
+      temperature: 0.2,
+      max_tokens: 4096,
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Gere a aula para o código ${data.codigoBNCC} nível ${data.nivel}` }
+        { role: "user", content: `Gere a aula para o código ${data.codigoBNCC} nível ${data.nivel}` },
       ],
-      model: "gemini-1.5-flash",
-      temperature: 0.2,
-      json: true
     });
-
-    let aulaGerada;
-    try {
-      aulaGerada = JSON.parse(text);
-    } catch (e) {
-      console.error("Gemini gerou JSON inválido:", text);
-      throw new Error("Falha na estruturação da aula (JSON inválido)");
-    }
+    const aulaGerada = extrairJSON(ai.text) as any;
 
     // 4. Validação da Aula (Implementação 6/8)
     const validacao = await validarAulaIA(aulaGerada, {
@@ -268,7 +291,7 @@ Retorne APENAS o JSON.`;
       serie: data.serie,
       disciplina: data.disciplina,
       nivel: data.nivel,
-      modelo: "gemini-1.5-flash"
+      modelo: ai.provider
     });
 
     // 5. Persistência e Registro (Só aprova se passar na validação)
@@ -280,7 +303,7 @@ Retorne APENAS o JSON.`;
         disciplina: data.disciplina,
         codigo_bncc: data.codigoBNCC,
         conteudo: aulaGerada,
-        modelo_ia: "gemini-1.5-flash",
+        modelo_ia: ai.provider,
         nivel: data.nivel,
         hiperfoco: hiperfoco,
         compatibilidade_hiperfoco: !!hiperfoco,
@@ -302,7 +325,10 @@ Retorne APENAS o JSON.`;
       };
     }
 
-    return { status: "sucesso", aula: salva };
+    await supabase.from("historico_uso_aulas").upsert({
+      child_id: data.childId, aula_id: salva.id, usado_em: new Date().toISOString()
+    }, { onConflict: "child_id,aula_id" });
+    return { status: "sucesso", aula: salva, provider: ai.provider };
   });
 
 export const salvarAulaGerada = createServerFn({ method: "POST" })

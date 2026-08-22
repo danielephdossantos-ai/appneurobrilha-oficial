@@ -1,4 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { Shell } from "@/components/Layout";
 import { KidCard } from "@/components/ui/KidCard";
@@ -22,6 +25,8 @@ import { url as pipaSuperHeroina } from "@/assets/pip-girl-super-heroina.png.ass
 import { useAppState } from "@/core/store";
 import { cn } from "@/utils/utils";
 import { PipEvolution } from "@/components/pip/PipEvolution";
+import { equipChildSkin, listChildUnlocks, purchaseMascotItem } from "@/lib/child-mascot";
+import { useMascot } from "@/contexts/MascotContext";
 
 export const Route = createFileRoute("/colecao-pip")({
   component: ColecaoPipPage,
@@ -238,9 +243,34 @@ const PIPA_HIGHLIGHTS = [
 
 function ColecaoPipPage() {
   const { activeChild } = useAppState();
+  const { childMascotProfile, refreshMascot } = useMascot();
+  const queryClient = useQueryClient();
+  const [cloudUnlocks,setCloudUnlocks] = useState<string[]>([]);
+  const activeType = childMascotProfile?.active_mascot ?? "pip";
+  const starterKey = activeType === "pipa" ? "pipa-original" : "original";
+  const unlocked = useMemo(()=>new Set([starterKey,...cloudUnlocks]),[starterKey,cloudUnlocks]);
+  const visibleSkins = useMemo(()=>SKINS.filter((x)=>activeType === "pipa" ? x.key.startsWith("pipa-") : !x.key.startsWith("pipa-")),[activeType]);
+  const skinCost = (key:string) => key === starterKey ? 0 : 120 + (Math.abs(key.split("").reduce((a,c)=>a+c.charCodeAt(0),0)) % 5)*40;
 
-  // Forçar desbloqueio de todos para o usuário ver que as imagens existem
-  const unlocked = new Set<string>(SKINS.map((s) => s.key));
+  const loadUnlocks = async () => { if (!activeChild?.id) return; setCloudUnlocks(await listChildUnlocks(activeChild.id,"skin")); };
+  useEffect(()=>{ loadUnlocks().catch(console.error); },[activeChild?.id]);
+
+  const handleSkin = async (key:string) => {
+    if (!activeChild) return;
+    if (!unlocked.has(key)) {
+      const cost=skinCost(key);
+      try {
+        const result:any=await purchaseMascotItem(activeChild.id,"skin",key,cost);
+        if (!result?.ok) { toast.error("BrilhoCoins insuficientes"); return; }
+        await queryClient.invalidateQueries({queryKey:["children"]});
+        await loadUnlocks();
+        toast.success("Nova fantasia desbloqueada! ✨");
+      } catch(e) { console.error(e); toast.error("Não foi possível desbloquear agora."); return; }
+    }
+    await equipChildSkin(activeChild.id,key);
+    await refreshMascot();
+    toast.success("Visual equipado! Seu companheiro vai usar essa fantasia na jornada.");
+  };
 
   return (
     <Shell>
@@ -262,8 +292,7 @@ function ColecaoPipPage() {
             Nossos Amiguinhos
           </motion.h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Conheça todos os personagens da nossa turma! Do Pip e suas fantasias aos novos
-            companheiros de aventura.
+            Acompanhe seu companheiro desde o nascimento, desbloqueie fantasias e leve o visual escolhido para toda a jornada.
           </p>
         </header>
 
@@ -300,7 +329,7 @@ function ColecaoPipPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {SKINS.map((skin, i) => (
+          {visibleSkins.map((skin, i) => (
             <motion.div
               key={skin.key}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -315,9 +344,15 @@ function ColecaoPipPage() {
                     alt={skin.name}
                     className="w-full h-full object-contain drop-shadow-2xl transition-transform group-hover:scale-110"
                   />
-                  <div className="absolute -top-2 -right-2 bg-sun text-white p-2 rounded-full shadow-lg">
-                    <Check size={16} strokeWidth={4} />
-                  </div>
+                  {childMascotProfile?.equipped_skin === skin.key ? (
+                    <div className="absolute -top-2 -right-2 bg-emerald-500 text-white p-2 rounded-full shadow-lg" title="Em uso">
+                      <Check size={16} strokeWidth={4} />
+                    </div>
+                  ) : !unlocked.has(skin.key) ? (
+                    <div className="absolute -top-2 -right-2 bg-slate-700 text-white p-2 rounded-full shadow-lg">
+                      <Lock size={16} strokeWidth={4} />
+                    </div>
+                  ) : null}
                 </div>
 
                 <span className="text-[10px] font-black text-primary/40 uppercase tracking-[0.2em] mb-1">
@@ -325,6 +360,13 @@ function ColecaoPipPage() {
                 </span>
                 <h3 className="text-xl font-black text-primary mb-2">{skin.name}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{skin.description}</p>
+                <button
+                  onClick={() => handleSkin(skin.key)}
+                  className="mt-4 w-full rounded-2xl bg-primary px-4 py-2 text-sm font-black text-white disabled:opacity-50"
+                  disabled={childMascotProfile?.equipped_skin === skin.key}
+                >
+                  {childMascotProfile?.equipped_skin === skin.key ? "Em uso" : unlocked.has(skin.key) ? "Usar fantasia" : `Desbloquear · ${skinCost(skin.key)} ✨`}
+                </button>
               </div>
             </motion.div>
           ))}

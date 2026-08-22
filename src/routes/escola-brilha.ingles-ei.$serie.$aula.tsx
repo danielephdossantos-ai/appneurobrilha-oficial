@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { getCursoInglesEIBySerie, getAulaInglesEI } from "@/escola-brilha/curso-ingles-ei/registry";
 import { PlayerInglesEI } from "@/escola-brilha/curso-ingles-ei/PlayerInglesEI";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
@@ -20,6 +22,7 @@ export const Route = createFileRoute("/escola-brilha/ingles-ei/$serie/$aula")({
 function AulaInglesEIRoute() {
   const { serie, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
+  const { handleBack, context: navContext } = useBackNavigation();
 
   const curso = getCursoInglesEIBySerie(serie);
   if (!curso) {
@@ -54,8 +57,8 @@ function AulaInglesEIRoute() {
       <PlayerInglesEI
         curso={found.curso}
         aula={found.aula}
-        onSair={() => navigate({ to: "/escola-brilha/ingles-ei" })}
-        onConcluir={() => {
+        onSair={() => { if (!handleBack(navigate)) navigate({ to: "/escola-brilha/ingles-ei" }); }}
+        onConcluir={async () => {
           try {
             const key = `eb.ei.en.concluidas.${found.curso.slug}`;
             const raw = localStorage.getItem(key);
@@ -65,7 +68,10 @@ function AulaInglesEIRoute() {
           } catch {
             /* ignore */
           }
-          navigate({ to: "/escola-brilha/ingles-ei" });
+          await completePlanItem(navContext);
+        const nextRoute = advancePlanFlow(navContext);
+        if (nextRoute) { navigate({ to: nextRoute }); return; }
+        if (!handleBack(navigate)) navigate({ to: "/escola-brilha/ingles-ei" });
         }}
       />
       <ProfessorBrilhaBubble

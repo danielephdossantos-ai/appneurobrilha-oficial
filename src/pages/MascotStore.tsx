@@ -16,7 +16,8 @@ import { HiperfocoId } from "@/data/hiperfocos";
 
 const MascotStore = () => {
   const { activeChild } = useAppState();
-  const { activeMascot, setActiveMascot, userMascots, isLoading } = useMascot();
+  const { activeMascot, childMascotProfile, setActiveMascot, userMascots, isLoading } = useMascot();
+  const companionName = childMascotProfile?.active_mascot === "pipa" ? "Pipa" : "Pip";
   const { hiperfoco, setHiperfocoById, setHiperfocoCustom } = useHiperfoco();
   const [activeTab, setActiveTab] = useState<'mascots' | 'worlds' | 'achievements'>('mascots');
   
@@ -50,7 +51,7 @@ const MascotStore = () => {
               <ShoppingBag className="text-white w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-black text-primary leading-tight">Loja do Pip</h1>
+              <h1 className="text-2xl font-black text-primary leading-tight">{`Loja de ${companionName}`}</h1>
               <div className="flex items-center gap-1 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 <Sparkles className="w-3 h-3 text-sun" />
                 Coleções Mágicas
@@ -119,7 +120,7 @@ const MascotStore = () => {
             >
               <div className="bg-white rounded-[2rem] p-6 border-4 border-primary/10 shadow-xl">
                 <div className="text-center mb-6">
-                  <h2 className="text-xl font-black text-primary uppercase">Evolução do Pip</h2>
+                  <h2 className="text-xl font-black text-primary uppercase">{`Evolução de ${companionName}`}</h2>
                   <p className="text-sm font-medium text-muted-foreground">Complete missões para desbloquear novas formas!</p>
                 </div>
                 <PipEvolution />

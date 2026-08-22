@@ -1,8 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
+import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { z } from "zod";
 import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
@@ -115,6 +117,7 @@ const ATIVIDADE_IMG: Record<string, string> = {
 };
 
 export const Route = createFileRoute("/brilha-vida")({
+  validateSearch: z.object({ atividade: z.string().optional() }),
   component: BrilhaVida,
 });
 
@@ -153,26 +156,26 @@ const categorias = [
   },
   {
     id: "regulacao-aguda",
-    nome: "Regulação Aguda (SOS calma)",
+    nome: "Estratégias de Regulação",
     img: catSosImg,
     cor: "from-rose-300/30 to-rose-100/5",
-    descricao: "Kit clínico para crise, susto ou pico de ansiedade",
+    descricao: "Recursos simples para pausar, perceber o corpo e recuperar a calma",
     atividades: ["5-4-3-2-1 Sentidos", "Abraço da Borboleta", "Espaguete e Estátua", "Escuta do Corpo"],
   },
   {
     id: "modelos-clinicos",
-    nome: "Modelos Clínicos de Emoção",
+    nome: "Vocabulário e Mapas de Emoção",
     img: catModelosImg,
     cor: "from-indigo-300/30 to-indigo-100/5",
-    descricao: "Zones of Regulation + Mood Meter (RULER/Yale) para vocabulário emocional expandido",
+    descricao: "Recursos visuais para ampliar o vocabulário emocional e reconhecer estados",
     atividades: ["Zonas de Regulação", "Medidor de Emoções"],
   },
   {
     id: "tea-tdah",
-    nome: "Ferramentas TEA e TDAH",
+    nome: "Rotina, Transição e Apoio Visual",
     img: catTeaTdahImg,
     cor: "from-teal-300/30 to-teal-100/5",
-    descricao: "Suportes visuais clínicos: Primeiro-Depois, Cronograma, Time Timer e Cartão de Escolha",
+    descricao: "Suportes visuais para organizar a rotina, antecipar transições e fazer escolhas",
     atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
   },
   {
@@ -180,18 +183,28 @@ const categorias = [
     nome: "Apoio ao Cuidador",
     img: catCuidadorImg,
     cor: "from-amber-300/30 to-amber-100/5",
-    descricao: "Ferramentas clínicas pra você que cuida: só um adulto regulado corregula uma criança",
+    descricao: "Recursos de observação, organização e apoio para quem acompanha a criança",
     atividades: ["Kit do Cuidador", "Diário ABC", "Guia de Crise", "Bateria do Cuidador"],
   },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
+  const { atividade } = Route.useSearch();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context } = useBackNavigation();
   const [activeActivity, setActiveActivity] = useState<any>(null);
   const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha" | "kitcuidador" | "diarioabc" | "guiacrise" | "bateriacuidador">(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const permitidas = new Set([
+      "respirar","termometro","semaforo","cantinho","comoestou","emojimagico","historias","dividindo","cuidando",
+      "minhavez","regras","conflitos","diario","elogio","bolha","roda","grounding","borboleta","espaguete","escutacorpo",
+      "zones","moodmeter","firstthen","cronograma","timer","escolha","kitcuidador","diarioabc","guiacrise","bateriacuidador",
+    ]);
+    if (atividade && permitidas.has(atividade)) setCustomActivity(atividade as any);
+  }, [atividade]);
 
   const startLevel = async (tipo: string) => {
     if (!activeChild) return;
@@ -351,37 +364,49 @@ function BrilhaVida() {
     }, 800);
   };
 
+  const finishAndBack = async () => {
+    if (context?.isPlanFlow) {
+      await completePlanItem(context).catch(() => false);
+      const nextRoute = advancePlanFlow(context);
+      if (nextRoute) { navigate({ to: nextRoute }); return; }
+    }
+    if (!handleBack(navigate)) {
+      setCustomActivity(null);
+      setActiveActivity(null);
+    }
+  };
+
   const CUSTOM_MAP: Record<string, { node: ReactNode; contexto: string }> = {
-    respirar: { node: <PausaRespirar onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Pausa para Respirar" },
-    termometro: { node: <TermometroEmocoes onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Termômetro das Emoções" },
-    semaforo: { node: <SemaforoSentir onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Semáforo do Sentir" },
-    cantinho: { node: <CantinhoCalma onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Cantinho da Calma" },
-    comoestou: { node: <ComoEstouAgora onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Como estou agora?" },
-    emojimagico: { node: <EmojiMagico onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Emoji Mágico" },
-    historias: { node: <HistoriasSociais onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Histórias Sociais" },
-    dividindo: { node: <DividindoBrinquedo onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Dividindo o Brinquedo" },
-    cuidando: { node: <CuidandoAmigo onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Cuidando do Amigo" },
-    minhavez: { node: <MinhaVezSuaVez onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Minha vez, sua vez" },
-    regras: { node: <RegrasCasa onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Regras da Casa" },
-    conflitos: { node: <ResolucaoConflitos onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Resolução de Conflitos" },
-    diario: { node: <DiarioSentir onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Diário do Sentir" },
-    elogio: { node: <ElogioMagico onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Elogio Mágico" },
-    bolha: { node: <BolhaBemEstar onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Bolha de Bem-Estar" },
-    roda: { node: <RodaDoDia onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Roda do Dia" },
-    grounding: { node: <Grounding54321 onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "5-4-3-2-1 Sentidos" },
-    borboleta: { node: <ButterflyHug onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Abraço da Borboleta" },
-    espaguete: { node: <EspagueteEstatua onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Espaguete e Estátua" },
-    escutacorpo: { node: <InteroceptionScan onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Escuta do Corpo" },
-    zones: { node: <ZonesRegulation onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Zonas de Regulação" },
-    moodmeter: { node: <MoodMeterRuler onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Medidor de Emoções" },
-    firstthen: { node: <FirstThenBoard onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Primeiro… Depois" },
-    cronograma: { node: <CronogramaVisual onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Meu Dia em Cartões" },
-    timer: { node: <TimerVisual onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Relógio Vermelho" },
-    escolha: { node: <CartaoEscolha onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Você Escolhe" },
-    kitcuidador: { node: <KitCuidador onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Kit do Cuidador" },
-    diarioabc: { node: <DiarioABC onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Diário ABC" },
-    guiacrise: { node: <GuiaCrise onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Guia de Crise" },
-    bateriacuidador: { node: <BateriaCuidador onClose={() => { if (!handleBack(navigate)) setCustomActivity(null); }} />, contexto: "Bateria do Cuidador" },
+    respirar: { node: <PausaRespirar onClose={() => { void finishAndBack(); }} />, contexto: "Pausa para Respirar" },
+    termometro: { node: <TermometroEmocoes onClose={() => { void finishAndBack(); }} />, contexto: "Termômetro das Emoções" },
+    semaforo: { node: <SemaforoSentir onClose={() => { void finishAndBack(); }} />, contexto: "Semáforo do Sentir" },
+    cantinho: { node: <CantinhoCalma onClose={() => { void finishAndBack(); }} />, contexto: "Cantinho da Calma" },
+    comoestou: { node: <ComoEstouAgora onClose={() => { void finishAndBack(); }} />, contexto: "Como estou agora?" },
+    emojimagico: { node: <EmojiMagico onClose={() => { void finishAndBack(); }} />, contexto: "Emoji Mágico" },
+    historias: { node: <HistoriasSociais onClose={() => { void finishAndBack(); }} />, contexto: "Histórias Sociais" },
+    dividindo: { node: <DividindoBrinquedo onClose={() => { void finishAndBack(); }} />, contexto: "Dividindo o Brinquedo" },
+    cuidando: { node: <CuidandoAmigo onClose={() => { void finishAndBack(); }} />, contexto: "Cuidando do Amigo" },
+    minhavez: { node: <MinhaVezSuaVez onClose={() => { void finishAndBack(); }} />, contexto: "Minha vez, sua vez" },
+    regras: { node: <RegrasCasa onClose={() => { void finishAndBack(); }} />, contexto: "Regras da Casa" },
+    conflitos: { node: <ResolucaoConflitos onClose={() => { void finishAndBack(); }} />, contexto: "Resolução de Conflitos" },
+    diario: { node: <DiarioSentir onClose={() => { void finishAndBack(); }} />, contexto: "Diário do Sentir" },
+    elogio: { node: <ElogioMagico onClose={() => { void finishAndBack(); }} />, contexto: "Elogio Mágico" },
+    bolha: { node: <BolhaBemEstar onClose={() => { void finishAndBack(); }} />, contexto: "Bolha de Bem-Estar" },
+    roda: { node: <RodaDoDia onClose={() => { void finishAndBack(); }} />, contexto: "Roda do Dia" },
+    grounding: { node: <Grounding54321 onClose={() => { void finishAndBack(); }} />, contexto: "5-4-3-2-1 Sentidos" },
+    borboleta: { node: <ButterflyHug onClose={() => { void finishAndBack(); }} />, contexto: "Abraço da Borboleta" },
+    espaguete: { node: <EspagueteEstatua onClose={() => { void finishAndBack(); }} />, contexto: "Espaguete e Estátua" },
+    escutacorpo: { node: <InteroceptionScan onClose={() => { void finishAndBack(); }} />, contexto: "Escuta do Corpo" },
+    zones: { node: <ZonesRegulation onClose={() => { void finishAndBack(); }} />, contexto: "Zonas de Regulação" },
+    moodmeter: { node: <MoodMeterRuler onClose={() => { void finishAndBack(); }} />, contexto: "Medidor de Emoções" },
+    firstthen: { node: <FirstThenBoard onClose={() => { void finishAndBack(); }} />, contexto: "Primeiro… Depois" },
+    cronograma: { node: <CronogramaVisual onClose={() => { void finishAndBack(); }} />, contexto: "Meu Dia em Cartões" },
+    timer: { node: <TimerVisual onClose={() => { void finishAndBack(); }} />, contexto: "Relógio Vermelho" },
+    escolha: { node: <CartaoEscolha onClose={() => { void finishAndBack(); }} />, contexto: "Você Escolhe" },
+    kitcuidador: { node: <KitCuidador onClose={() => { void finishAndBack(); }} />, contexto: "Kit do Cuidador" },
+    diarioabc: { node: <DiarioABC onClose={() => { void finishAndBack(); }} />, contexto: "Diário ABC" },
+    guiacrise: { node: <GuiaCrise onClose={() => { void finishAndBack(); }} />, contexto: "Guia de Crise" },
+    bateriacuidador: { node: <BateriaCuidador onClose={() => { void finishAndBack(); }} />, contexto: "Bateria do Cuidador" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
@@ -416,7 +441,7 @@ function BrilhaVida() {
               title: activeActivity.content.title,
             }}
             onComplete={() => {
-              setTimeout(() => { if (!handleBack(navigate)) setActiveActivity(null); }, 2000);
+              setTimeout(() => { void finishAndBack(); }, 1200);
             }}
             emotion={{ current: "happy" }}
           />
@@ -470,7 +495,7 @@ function BrilhaVida() {
           <div>
             <h3 className="font-bold text-lg">Segurança e Regulação</h3>
             <p className="text-sm text-muted-foreground">
-              Ferramentas de autocontrole fundamentais para crianças neurodivergentes.
+              Recursos simples para praticar pausa, autocontrole e organização emocional.
             </p>
           </div>
         </Card>
@@ -550,8 +575,7 @@ function BrilhaVida() {
             <Smile className="h-6 w-6 text-sun" /> Momento Calma
           </h3>
           <p className="text-slate-400 max-w-md">
-            Precisa de uma pausa? Nossa terapeuta amiga está aqui pra te ouvir e te ajudar com
-            respiração e regulação. É só tocar no coraçãozinho.
+            Precisa de uma pausa? Nosso guia de apoio está aqui para ouvir você e ajudar com uma pausa, respiração e organização do momento. É só tocar no coraçãozinho.
           </p>
         </div>
       </Card>

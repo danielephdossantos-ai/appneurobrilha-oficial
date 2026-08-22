@@ -59,11 +59,11 @@ function Page() {
       ehFinal={ehFinal}
       onConcluir={() => {
         try {
-          const raw = localStorage.getItem("eb.geo8ano.progresso");
+          const raw = localStorage.getItem(`eb.geo8ano.progresso.${localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca"}`);
           const arr: string[] = raw ? JSON.parse(raw) : [];
           if (!arr.includes(unidade)) {
             arr.push(unidade);
-            localStorage.setItem("eb.geo8ano.progresso", JSON.stringify(arr));
+            localStorage.setItem(`eb.geo8ano.progresso.${localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca"}`, JSON.stringify(arr));
           }
         } catch {
           /* ignore */

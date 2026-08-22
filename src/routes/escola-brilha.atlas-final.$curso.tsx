@@ -7,6 +7,7 @@ import { useAppState } from "@/core/store";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import { PERSONAGENS } from "@/escola-brilha/mascotes-personagens";
 import { AlbumRecordacoes } from "@/components/AlbumRecordacoes";
+import { normalizarFala } from "@/lib/normalizador-fala";
 
 
 
@@ -34,7 +35,10 @@ export const Route = createFileRoute("/escola-brilha/atlas-final/$curso")({
   ),
 });
 
-const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
+const CHAVE_PROGRESSO = (slug: string) => {
+  const childId = typeof window !== "undefined" ? localStorage.getItem("neurobrilha:activeChildId") : null;
+  return `eb.v4.progresso.${childId || "sem-crianca"}.${slug}`;
+};
 
 type Pagina = {
   id: string;
@@ -131,7 +135,7 @@ function falar(texto: string) {
   if (typeof window === "undefined") return;
   try {
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(texto);
+    const u = new SpeechSynthesisUtterance(normalizarFala(texto));
     u.lang = "pt-BR";
     u.rate = 0.95;
     u.pitch = 1.1;

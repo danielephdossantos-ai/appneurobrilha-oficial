@@ -77,13 +77,8 @@ function SidebarMascot() {
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
-  { to: "/missao-prova", label: "Missão Prova", icon: Target },
-  { to: "/missao-tarefa", label: "Missão Tarefa", icon: ClipboardList },
-  { to: "/missao-trabalho", label: "Missão Trabalho", icon: ClipboardList },
+  { to: "/apoio-escolar", label: "Apoio Escolar", icon: GraduationCap },
   { to: "/escola-brilha/matematica-ei", label: "Matemática Kawaii", icon: Ruler },
-  
-
-  { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
@@ -102,11 +97,7 @@ const navPais = [
 
 const navigationSequence = [
   "/",
-  "/missao-prova",
-  "/missao-tarefa",
-  "/missao-trabalho",
-  
-  "/reforco-brilha",
+  "/apoio-escolar",
   "/neuro-treino",
   "/brilha-vida",
   "/rotina",

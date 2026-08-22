@@ -6,9 +6,8 @@ type Perm = "default" | "granted" | "denied" | "unsupported";
 const SW_PATH = "/sw-push.js";
 const LAST_NOTIF_KEY = "rb_last_daily_notif";
 
-// Chave VAPID pública (segura para expor no client)
-const VAPID_PUBLIC_KEY =
-  "BDLiIHW7hCepBTwONPUDsBikTyKV4U-FTAMhAfsA4NqZAqMA0W_ef7qyYELVHVj6nNK-6KAqlZeqp27Pv6XMl4I";
+// Chave pública configurada no ambiente. O par antigo deve ser rotacionado antes de produção.
+const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY || "";
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -22,6 +21,7 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
 async function saveSubscriptionToSupabase(
   sub: PushSubscription,
   childId?: string | null,
+  deviceRole: "parent" | "child" = childId ? "child" : "parent",
 ) {
   try {
     const { data: { user } } = await supabase.auth.getUser();
@@ -36,6 +36,10 @@ async function saveSubscriptionToSupabase(
         p256dh: json.keys.p256dh,
         auth: json.keys.auth,
         user_agent: navigator.userAgent,
+        device_role: deviceRole,
+        device_name: deviceRole === "parent" ? "Dispositivo do responsável" : "Dispositivo da criança",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Sao_Paulo",
+        enabled: true,
       },
       { onConflict: "endpoint" },
     );
@@ -44,7 +48,7 @@ async function saveSubscriptionToSupabase(
   }
 }
 
-export function usePushNotifications(childId?: string | null) {
+export function usePushNotifications(childId?: string | null, deviceRole: "parent" | "child" = childId ? "child" : "parent") {
   const [permission, setPermission] = useState<Perm>("default");
   const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
@@ -63,6 +67,7 @@ export function usePushNotifications(childId?: string | null) {
   const ensureSubscription = useCallback(
     async (reg: ServiceWorkerRegistration) => {
       try {
+        if (!VAPID_PUBLIC_KEY) { console.warn("[push] VITE_VAPID_PUBLIC_KEY ausente"); return; }
         let sub = await reg.pushManager.getSubscription();
         if (!sub) {
           sub = await reg.pushManager.subscribe({
@@ -70,12 +75,12 @@ export function usePushNotifications(childId?: string | null) {
             applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY).buffer as ArrayBuffer,
           });
         }
-        await saveSubscriptionToSupabase(sub, childId);
+        await saveSubscriptionToSupabase(sub, deviceRole === "child" ? childId : null, deviceRole);
       } catch (e) {
         console.warn("[push] subscribe error", e);
       }
     },
-    [childId],
+    [childId, deviceRole],
   );
 
   const request = useCallback(async () => {

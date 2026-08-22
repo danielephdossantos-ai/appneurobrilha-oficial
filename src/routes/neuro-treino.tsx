@@ -22,6 +22,7 @@ import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 import { BotaoFavorito } from "@/components/neuro-treino/BotaoFavorito";
+import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
 
 // Ícones por categoria (v2 - ilustrações premium 2D)
 import { url as icSonsIniciais } from "@/assets/neuro-treino/icons/v2/sons-iniciais.png.asset.json";
@@ -282,7 +283,7 @@ function Treino() {
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">
-                    Consultório Digital
+                    Laboratório de Desafios
                   </span>
                 </div>
                 <h1 className="text-2xl font-black text-white">Neuro-Treino</h1>
@@ -293,13 +294,16 @@ function Treino() {
                   </div>
                 )}
               </div>
-              <Link
-                to="/neuro-treino/configurar"
-                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-3 py-2 transition-all border border-white/10"
-              >
-                <Zap className="h-3.5 w-3.5 text-amber-400" />
-                {hiperfoco ? "Hiperfoco" : "Configurar"}
-              </Link>
+              <div className="flex items-center gap-2">
+                <img src={pipaDoutora} alt="Pipa cientista" className="hidden sm:block h-20 w-20 object-contain drop-shadow-xl" />
+                <Link
+                  to="/neuro-treino/configurar"
+                  className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-3 py-2 transition-all border border-white/10"
+                >
+                  <Zap className="h-3.5 w-3.5 text-amber-400" />
+                  {hiperfoco ? "Hiperfoco" : "Configurar"}
+                </Link>
+              </div>
             </div>
 
             {/* Métricas */}

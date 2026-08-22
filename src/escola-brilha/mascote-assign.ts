@@ -14,6 +14,7 @@
  *   eb:mentor-assign:<childId>      = string (slug do mentor IA escolhido)
  */
 import { DISCIPLINAS_OFICIAIS, PRECOS_MASCOTES } from "./mascotes-disciplina";
+import { supabase } from "@/database/supabase/client";
 
 const KEY_UNLOCK = (childId: string) => `eb:mascotes-unlocked:${childId}`;
 const KEY_ASSIGN = (childId: string) => `eb:mascote-assign:${childId}`;
@@ -48,8 +49,8 @@ export function isMascoteUnlocked(childId: string, slug: string): boolean {
 export function marcarDesbloqueado(childId: string, slug: string) {
   if (slug === "default") return;
   const cur = getUnlockedMascotes(childId).filter((s) => s !== "default");
-  if (cur.includes(slug)) return;
-  writeJSON(KEY_UNLOCK(childId), [...cur, slug]);
+  if (!cur.includes(slug)) writeJSON(KEY_UNLOCK(childId), [...cur, slug]);
+  void (supabase as any).from("child_mascot_unlocks").upsert({ child_id: childId, item_type: "teacher", item_key: slug }, { onConflict: "child_id,item_type,item_key" });
 }
 
 /** true se a criança tem TODOS os 10 mascotes (Pip + 9 disciplinas). */
@@ -87,12 +88,17 @@ export function setAssignment(
   }
   atual[disciplina] = mascoteSlug;
   writeJSON(KEY_ASSIGN(childId), atual);
+  void (async () => {
+    await (supabase as any).from("child_mascot_assignments").delete().eq("child_id", childId).eq("assignment_type", "subject").eq("mascot_slug", mascoteSlug).neq("assignment_key", disciplina);
+    await (supabase as any).from("child_mascot_assignments").upsert({ child_id: childId, assignment_type: "subject", assignment_key: disciplina, mascot_slug: mascoteSlug }, { onConflict: "child_id,assignment_type,assignment_key" });
+  })();
   return atual;
 }
 
 /** Define o mentor IA preferido da criança. */
 export function setMentorIA(childId: string, slug: string) {
   writeJSON(KEY_MENTOR(childId), slug);
+  void (supabase as any).from("child_mascot_assignments").upsert({ child_id: childId, assignment_type: "mentor", assignment_key: "mentor", mascot_slug: slug }, { onConflict: "child_id,assignment_type,assignment_key" });
 }
 
 /** Obtém o mentor IA preferido da criança. */
@@ -117,4 +123,21 @@ export function mascoteAtribuido(
 /** Preço de um mascote pelo slug (0 se não estiver no catálogo). */
 export function precoDoMascote(slug: string): number {
   return PRECOS_MASCOTES[slug] ?? 0;
+}
+
+
+/** Carrega da nuvem a coleção/escalação da criança para o cache offline local. */
+export async function syncMascoteAssignmentsFromCloud(childId: string) {
+  const [{ data: unlocks }, { data: assigns }] = await Promise.all([
+    (supabase as any).from("child_mascot_unlocks").select("item_key").eq("child_id", childId).eq("item_type", "teacher"),
+    (supabase as any).from("child_mascot_assignments").select("assignment_type,assignment_key,mascot_slug").eq("child_id", childId),
+  ]);
+  writeJSON(KEY_UNLOCK(childId), (unlocks ?? []).map((x:any)=>x.item_key));
+  const subjects: Record<string,string> = {}; let mentor = "default";
+  for (const row of assigns ?? []) {
+    if (row.assignment_type === "mentor") mentor = row.mascot_slug; else subjects[row.assignment_key] = row.mascot_slug;
+  }
+  writeJSON(KEY_ASSIGN(childId), subjects);
+  try { window.localStorage.setItem(KEY_MENTOR(childId), mentor); } catch {}
+  return { subjects, mentor };
 }
