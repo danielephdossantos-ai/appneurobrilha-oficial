@@ -107,7 +107,7 @@ export async function mirrorLegacyPlan(input: MirrorBase): Promise<string> {
   }));
 
   for (let i = 0; i < rows.length; i += 500) {
-    const { error: itemError } = await supabase.from(ITEMS).insert(rows.slice(i, i + 500));
+    const { error: itemError } = await supabase.from(ITEMS).insert(rows.slice(i, i + 500) as any);
     if (itemError) {
       await supabase.from(PLANS).delete().eq("id", (plan as any).id);
       throw itemError;
