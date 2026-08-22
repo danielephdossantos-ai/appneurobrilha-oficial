@@ -108,7 +108,7 @@ export async function completePlanItem(ctx: NavigationContext | null | undefined
   let q = supabase.from("routine_items" as any).update({ status: "concluido", updated_at: completedAt } as any);
   if (premiumItemId) q = q.eq("premium_item_id", premiumItemId);
   else if (itemId) q = q.eq("source_id", itemId);
-  await q.then(() => undefined).catch(() => undefined);
+  await (q as any).then(() => undefined).catch(() => undefined);
 
   return true;
 }

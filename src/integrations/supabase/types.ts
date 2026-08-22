@@ -1601,6 +1601,123 @@ export type Database = {
           },
         ]
       }
+      child_mascot_assignments: {
+        Row: {
+          assignment_key: string
+          assignment_type: string
+          child_id: string
+          mascot_slug: string
+          updated_at: string
+        }
+        Insert: {
+          assignment_key: string
+          assignment_type: string
+          child_id: string
+          mascot_slug: string
+          updated_at?: string
+        }
+        Update: {
+          assignment_key?: string
+          assignment_type?: string
+          child_id?: string
+          mascot_slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_mascot_assignments_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      child_mascot_profiles: {
+        Row: {
+          active_mascot: string
+          affinity: number
+          born_at: string | null
+          child_id: string
+          created_at: string
+          equipped_skin: string
+          mascot_level: number
+          mascot_xp: number
+          stage: string
+          starter_mascot: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active_mascot?: string
+          affinity?: number
+          born_at?: string | null
+          child_id: string
+          created_at?: string
+          equipped_skin?: string
+          mascot_level?: number
+          mascot_xp?: number
+          stage?: string
+          starter_mascot?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active_mascot?: string
+          affinity?: number
+          born_at?: string | null
+          child_id?: string
+          created_at?: string
+          equipped_skin?: string
+          mascot_level?: number
+          mascot_xp?: number
+          stage?: string
+          starter_mascot?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_mascot_profiles_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      child_mascot_unlocks: {
+        Row: {
+          child_id: string
+          id: string
+          item_key: string
+          item_type: string
+          unlocked_at: string
+        }
+        Insert: {
+          child_id: string
+          id?: string
+          item_key: string
+          item_type: string
+          unlocked_at?: string
+        }
+        Update: {
+          child_id?: string
+          id?: string
+          item_key?: string
+          item_type?: string
+          unlocked_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_mascot_unlocks_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_progression_stats: {
         Row: {
           activities_completed: number
@@ -3029,6 +3146,45 @@ export type Database = {
         Row: {
           aula_id: string
           child_id: string
+          created_at: string
+          id: string
+          usado_em: string
+        }
+        Insert: {
+          aula_id: string
+          child_id: string
+          created_at?: string
+          id?: string
+          usado_em?: string
+        }
+        Update: {
+          aula_id?: string
+          child_id?: string
+          created_at?: string
+          id?: string
+          usado_em?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historico_uso_aulas_aula_id_fkey1"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "aulas_geradas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "historico_uso_aulas_child_id_fkey1"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      historico_uso_aulas_legacy: {
+        Row: {
+          aula_id: string
+          child_id: string
           created_at: string | null
           id: string
         }
@@ -3339,6 +3495,195 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      learning_plan_items: {
+        Row: {
+          bncc_code: string | null
+          child_id: string
+          completed_at: string | null
+          created_at: string
+          day: number | null
+          difficulty_level: number | null
+          estimated_minutes: number
+          id: string
+          item_role: Database["public"]["Enums"]["learning_plan_item_role"]
+          legacy_item_id: string | null
+          legacy_source: string | null
+          metadata: Json
+          plan_id: string
+          prerequisite_item_id: string | null
+          route: string
+          scheduled_for: string | null
+          selection_reason: string | null
+          sequence_order: number
+          skill_id: string | null
+          source: string
+          source_id: string
+          started_at: string | null
+          status: string
+          subject: string | null
+          title: string
+          updated_at: string
+          week: number | null
+        }
+        Insert: {
+          bncc_code?: string | null
+          child_id: string
+          completed_at?: string | null
+          created_at?: string
+          day?: number | null
+          difficulty_level?: number | null
+          estimated_minutes?: number
+          id?: string
+          item_role: Database["public"]["Enums"]["learning_plan_item_role"]
+          legacy_item_id?: string | null
+          legacy_source?: string | null
+          metadata?: Json
+          plan_id: string
+          prerequisite_item_id?: string | null
+          route: string
+          scheduled_for?: string | null
+          selection_reason?: string | null
+          sequence_order?: number
+          skill_id?: string | null
+          source: string
+          source_id: string
+          started_at?: string | null
+          status?: string
+          subject?: string | null
+          title: string
+          updated_at?: string
+          week?: number | null
+        }
+        Update: {
+          bncc_code?: string | null
+          child_id?: string
+          completed_at?: string | null
+          created_at?: string
+          day?: number | null
+          difficulty_level?: number | null
+          estimated_minutes?: number
+          id?: string
+          item_role?: Database["public"]["Enums"]["learning_plan_item_role"]
+          legacy_item_id?: string | null
+          legacy_source?: string | null
+          metadata?: Json
+          plan_id?: string
+          prerequisite_item_id?: string | null
+          route?: string
+          scheduled_for?: string | null
+          selection_reason?: string | null
+          sequence_order?: number
+          skill_id?: string | null
+          source?: string
+          source_id?: string
+          started_at?: string | null
+          status?: string
+          subject?: string | null
+          title?: string
+          updated_at?: string
+          week?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_plan_items_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "learning_plan_items_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "learning_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "learning_plan_items_prerequisite_item_id_fkey"
+            columns: ["prerequisite_item_id"]
+            isOneToOne: false
+            referencedRelation: "learning_plan_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      learning_plans: {
+        Row: {
+          academic_year: number | null
+          child_id: string
+          completed_at: string | null
+          content_map_version: string
+          created_at: string
+          days_per_week: number | null
+          ends_at: string | null
+          generated_at: string
+          generation_reason: string | null
+          grade: string | null
+          id: string
+          minutes_per_day: number | null
+          plan_type: Database["public"]["Enums"]["learning_plan_type"]
+          profile_snapshot: Json | null
+          rules_version: string
+          stage: string | null
+          starts_at: string
+          status: Database["public"]["Enums"]["learning_plan_status"]
+          updated_at: string
+          weeks_total: number | null
+        }
+        Insert: {
+          academic_year?: number | null
+          child_id: string
+          completed_at?: string | null
+          content_map_version?: string
+          created_at?: string
+          days_per_week?: number | null
+          ends_at?: string | null
+          generated_at?: string
+          generation_reason?: string | null
+          grade?: string | null
+          id?: string
+          minutes_per_day?: number | null
+          plan_type: Database["public"]["Enums"]["learning_plan_type"]
+          profile_snapshot?: Json | null
+          rules_version?: string
+          stage?: string | null
+          starts_at?: string
+          status?: Database["public"]["Enums"]["learning_plan_status"]
+          updated_at?: string
+          weeks_total?: number | null
+        }
+        Update: {
+          academic_year?: number | null
+          child_id?: string
+          completed_at?: string | null
+          content_map_version?: string
+          created_at?: string
+          days_per_week?: number | null
+          ends_at?: string | null
+          generated_at?: string
+          generation_reason?: string | null
+          grade?: string | null
+          id?: string
+          minutes_per_day?: number | null
+          plan_type?: Database["public"]["Enums"]["learning_plan_type"]
+          profile_snapshot?: Json | null
+          rules_version?: string
+          stage?: string | null
+          starts_at?: string
+          status?: Database["public"]["Enums"]["learning_plan_status"]
+          updated_at?: string
+          weeks_total?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_plans_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       learning_trails: {
         Row: {
@@ -6529,10 +6874,14 @@ export type Database = {
           auth: string
           child_id: string | null
           created_at: string
+          device_name: string | null
+          device_role: string
+          enabled: boolean
           endpoint: string
           id: string
           last_sent_at: string | null
           p256dh: string
+          timezone: string
           updated_at: string
           user_agent: string | null
           user_id: string
@@ -6541,10 +6890,14 @@ export type Database = {
           auth: string
           child_id?: string | null
           created_at?: string
+          device_name?: string | null
+          device_role?: string
+          enabled?: boolean
           endpoint: string
           id?: string
           last_sent_at?: string | null
           p256dh: string
+          timezone?: string
           updated_at?: string
           user_agent?: string | null
           user_id: string
@@ -6553,10 +6906,14 @@ export type Database = {
           auth?: string
           child_id?: string | null
           created_at?: string
+          device_name?: string | null
+          device_role?: string
+          enabled?: boolean
           endpoint?: string
           id?: string
           last_sent_at?: string | null
           p256dh?: string
+          timezone?: string
           updated_at?: string
           user_agent?: string | null
           user_id?: string
@@ -6617,11 +6974,15 @@ export type Database = {
       }
       rb_aulas: {
         Row: {
+          cache_key: string | null
+          conteudo_ia: Json | null
           created_at: string
           faixa_etaria: string | null
-          habilidade_id: string
+          habilidade_id: string | null
           id: string
           imagem_capa_url: string | null
+          modelo_ia: string | null
+          modulo: string | null
           nivel: string
           objetivo: string | null
           ordem: number
@@ -6631,11 +6992,15 @@ export type Database = {
           video_url: string | null
         }
         Insert: {
+          cache_key?: string | null
+          conteudo_ia?: Json | null
           created_at?: string
           faixa_etaria?: string | null
-          habilidade_id: string
+          habilidade_id?: string | null
           id?: string
           imagem_capa_url?: string | null
+          modelo_ia?: string | null
+          modulo?: string | null
           nivel?: string
           objetivo?: string | null
           ordem?: number
@@ -6645,11 +7010,15 @@ export type Database = {
           video_url?: string | null
         }
         Update: {
+          cache_key?: string | null
+          conteudo_ia?: Json | null
           created_at?: string
           faixa_etaria?: string | null
-          habilidade_id?: string
+          habilidade_id?: string | null
           id?: string
           imagem_capa_url?: string | null
+          modelo_ia?: string | null
+          modulo?: string | null
           nivel?: string
           objetivo?: string | null
           ordem?: number
@@ -6678,6 +7047,7 @@ export type Database = {
           id: string
           idade: number | null
           materia: string | null
+          modelo_ia: string | null
           modulo: string | null
           serie: string | null
           tags: string[] | null
@@ -6693,6 +7063,7 @@ export type Database = {
           id?: string
           idade?: number | null
           materia?: string | null
+          modelo_ia?: string | null
           modulo?: string | null
           serie?: string | null
           tags?: string[] | null
@@ -6708,6 +7079,7 @@ export type Database = {
           id?: string
           idade?: number | null
           materia?: string | null
+          modelo_ia?: string | null
           modulo?: string | null
           serie?: string | null
           tags?: string[] | null
@@ -7766,6 +8138,93 @@ export type Database = {
         }
         Relationships: []
       }
+      routine_completion_log: {
+        Row: {
+          child_id: string
+          created_at: string
+          id: string
+          occurrence_date: string
+          routine_item_id: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          id?: string
+          occurrence_date: string
+          routine_item_id: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          id?: string
+          occurrence_date?: string
+          routine_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routine_completion_log_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routine_completion_log_routine_item_id_fkey"
+            columns: ["routine_item_id"]
+            isOneToOne: false
+            referencedRelation: "routine_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      routine_item_occurrences: {
+        Row: {
+          child_id: string
+          completed_at: string | null
+          created_at: string
+          id: string
+          occurrence_date: string
+          routine_item_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          occurrence_date: string
+          routine_item_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          occurrence_date?: string
+          routine_item_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routine_item_occurrences_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routine_item_occurrences_routine_item_id_fkey"
+            columns: ["routine_item_id"]
+            isOneToOne: false
+            referencedRelation: "routine_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       routine_items: {
         Row: {
           child_id: string
@@ -7774,10 +8233,13 @@ export type Database = {
           description: string | null
           duration_minutes: number | null
           id: string
+          notify_parent_on_complete: boolean
           parent_id: string
+          premium_item_id: string | null
           recurrence_days: number[] | null
           reminder_enabled: boolean | null
           reminder_minutes_before: number | null
+          route: string | null
           source: string | null
           source_id: string | null
           start_time: string
@@ -7793,10 +8255,13 @@ export type Database = {
           description?: string | null
           duration_minutes?: number | null
           id?: string
+          notify_parent_on_complete?: boolean
           parent_id: string
+          premium_item_id?: string | null
           recurrence_days?: number[] | null
           reminder_enabled?: boolean | null
           reminder_minutes_before?: number | null
+          route?: string | null
           source?: string | null
           source_id?: string | null
           start_time: string
@@ -7812,10 +8277,13 @@ export type Database = {
           description?: string | null
           duration_minutes?: number | null
           id?: string
+          notify_parent_on_complete?: boolean
           parent_id?: string
+          premium_item_id?: string | null
           recurrence_days?: number[] | null
           reminder_enabled?: boolean | null
           reminder_minutes_before?: number | null
+          route?: string | null
           source?: string | null
           source_id?: string | null
           start_time?: string
@@ -7830,6 +8298,55 @@ export type Database = {
             columns: ["child_id"]
             isOneToOne: false
             referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routine_items_premium_item_id_fkey"
+            columns: ["premium_item_id"]
+            isOneToOne: false
+            referencedRelation: "learning_plan_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      routine_notification_log: {
+        Row: {
+          child_id: string
+          id: string
+          occurrence_date: string
+          routine_item_id: string
+          scheduled_time: string
+          sent_at: string
+        }
+        Insert: {
+          child_id: string
+          id?: string
+          occurrence_date: string
+          routine_item_id: string
+          scheduled_time: string
+          sent_at?: string
+        }
+        Update: {
+          child_id?: string
+          id?: string
+          occurrence_date?: string
+          routine_item_id?: string
+          scheduled_time?: string
+          sent_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routine_notification_log_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "routine_notification_log_routine_item_id_fkey"
+            columns: ["routine_item_id"]
+            isOneToOne: false
+            referencedRelation: "routine_items"
             referencedColumns: ["id"]
           },
         ]
@@ -8844,6 +9361,15 @@ export type Database = {
           version_id: string
         }[]
       }
+      purchase_child_mascot_item: {
+        Args: {
+          p_child_id: string
+          p_cost: number
+          p_item_key: string
+          p_item_type: string
+        }
+        Returns: Json
+      }
       rb_etapas_faltantes: { Args: { _aula_id: string }; Returns: string[] }
       recomendar_revisoes: {
         Args: { _child_id: string }
@@ -8898,6 +9424,15 @@ export type Database = {
         Args: { _change_reason?: string; _version_id: string }
         Returns: string
       }
+      reward_child_journey: {
+        Args: {
+          p_affinity?: number
+          p_child_id: string
+          p_coins?: number
+          p_mascot_xp?: number
+        }
+        Returns: Json
+      }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
     }
@@ -8935,6 +9470,23 @@ export type Database = {
         | "deficiencia_auditiva"
         | "deficiencia_visual"
         | "altas_habilidades"
+      learning_plan_item_role:
+        | "teach"
+        | "guided_practice"
+        | "practice"
+        | "review"
+        | "reinforcement"
+        | "assessment"
+        | "cognitive_training"
+        | "support"
+      learning_plan_status:
+        | "draft"
+        | "active"
+        | "paused"
+        | "completed"
+        | "cancelled"
+        | "needs_review"
+      learning_plan_type: "literacy" | "school" | "support"
       lesson_example_categoria:
         | "cotidiano"
         | "escola"
@@ -9151,6 +9703,25 @@ export const Constants = {
         "deficiencia_visual",
         "altas_habilidades",
       ],
+      learning_plan_item_role: [
+        "teach",
+        "guided_practice",
+        "practice",
+        "review",
+        "reinforcement",
+        "assessment",
+        "cognitive_training",
+        "support",
+      ],
+      learning_plan_status: [
+        "draft",
+        "active",
+        "paused",
+        "completed",
+        "cancelled",
+        "needs_review",
+      ],
+      learning_plan_type: ["literacy", "school", "support"],
       lesson_example_categoria: [
         "cotidiano",
         "escola",

@@ -64,7 +64,7 @@ export function useNotifications() {
           for (const sub of subs) {
             await fetch('/api/public/send-push', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${auth.data.user ? (await supabase.auth.getSession()).data.session?.access_token ?? '' : ''}` },
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${auth?.user ? (await supabase.auth.getSession()).data.session?.access_token ?? '' : ''}` },
               body: JSON.stringify({
                 subscription: sub,
                 title: notif.title,
