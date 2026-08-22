@@ -1,6 +1,6 @@
 import type { UnidadePortugues } from "../../types";
 import { aula1 } from "./aula-01-r-rr";
-import { aula2 } from "./aula-02-s-ss-c-#U00e7";
+import { aula2 } from "./aula-02-s-ss-c-ç";
 import { aula3 } from "./aula-03-m-antes-p-b";
 import { aula04 } from "./aula-04-sons-do-nariz";
 
