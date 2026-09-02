@@ -42,6 +42,7 @@ import {
   Gift,
   School,
   PenTool,
+  Bot,
 } from "lucide-react";
 import { ReactNode, ComponentType, useEffect } from "react";
 import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
