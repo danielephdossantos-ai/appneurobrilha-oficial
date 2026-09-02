@@ -23,6 +23,7 @@ import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pe
 import { Route as BrilhaKidsRouteImport } from './routes/brilha-kids'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
+import { Route as ConectarRouteImport } from './routes/conectar'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as CurriculoAnualRouteImport } from './routes/curriculo-anual'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
@@ -166,6 +167,11 @@ const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
 const ColecaoPipRoute = ColecaoPipRouteImport.update({
   id: '/colecao-pip',
   path: '/colecao-pip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConectarRoute = ConectarRouteImport.update({
+  id: '/conectar',
+  path: '/conectar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
@@ -589,6 +595,7 @@ export interface FileRoutesByFullPath {
   '/brilha-kids': typeof BrilhaKidsRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/conectar': typeof ConectarRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
@@ -678,6 +685,7 @@ export interface FileRoutesByTo {
   '/brilha-kids': typeof BrilhaKidsRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/conectar': typeof ConectarRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
@@ -769,6 +777,7 @@ export interface FileRoutesById {
   '/brilha-kids': typeof BrilhaKidsRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/conectar': typeof ConectarRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
@@ -861,6 +870,7 @@ export interface FileRouteTypes {
     | '/brilha-kids'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/conectar'
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
@@ -950,6 +960,7 @@ export interface FileRouteTypes {
     | '/brilha-kids'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/conectar'
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
@@ -1040,6 +1051,7 @@ export interface FileRouteTypes {
     | '/brilha-kids'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/conectar'
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
@@ -1131,6 +1143,7 @@ export interface RootRouteChildren {
   BrilhaKidsRoute: typeof BrilhaKidsRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
+  ConectarRoute: typeof ConectarRoute
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
   CurriculoAnualRoute: typeof CurriculoAnualRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
@@ -1295,6 +1308,13 @@ declare module '@tanstack/react-router' {
       path: '/colecao-pip'
       fullPath: '/colecao-pip'
       preLoaderRoute: typeof ColecaoPipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conectar': {
+      id: '/conectar'
+      path: '/conectar'
+      fullPath: '/conectar'
+      preLoaderRoute: typeof ConectarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/curadoria-aulas': {
@@ -1892,6 +1912,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrilhaKidsRoute: BrilhaKidsRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
+  ConectarRoute: ConectarRoute,
   CuradoriaAulasRoute: CuradoriaAulasRoute,
   CurriculoAnualRoute: CurriculoAnualRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
