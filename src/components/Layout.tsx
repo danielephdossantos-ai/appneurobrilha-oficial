@@ -94,6 +94,7 @@ const navPais = [
   { to: "/perfil-aluno", label: "Perfil do Aluno", icon: ClipboardList },
   { to: "/curadoria-aulas", label: "Curadoria de Aulas", icon: Sparkles },
   { to: "/auditoria-pedagogica", label: "Auditoria", icon: ClipboardCheck },
+  { to: "/conectar", label: "Conectar IA", icon: Bot },
 ] as const;
 
 const navigationSequence = [
